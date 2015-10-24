@@ -12,16 +12,13 @@ import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.service.ProductService;
-import org.tinygroup.sdpm.product.service.StoryService;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTeam;
 import org.tinygroup.sdpm.project.service.inter.*;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
-import org.tinygroup.sdpm.quality.service.inter.BugService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
-import org.tinygroup.sdpm.system.service.inter.ModuleService;
+
 import org.tinygroup.sdpm.util.CookieUtils;
-import org.tinygroup.sdpm.util.LogUtil;
 import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -239,8 +236,12 @@ public class BuildAction extends BaseController {
         return "";
     }
 
-
-
+    /**
+     * 关联需求
+     * @param ids
+     * @param buildId
+     * @return
+     */
     @ResponseBody
     @RequestMapping("/releateReq")
     public Map<String, String> releateReq(String ids,Integer buildId){
@@ -248,8 +249,6 @@ public class BuildAction extends BaseController {
         for(String storyId:ids.split(",")){
             buildService.releateReq(Integer.valueOf(storyId), buildId);
         }
-//        map.put("status", "y");
-//        map.put("info", "关联成功");
         return resultMap(true,"关联成功");
     }
 
@@ -260,9 +259,7 @@ public class BuildAction extends BaseController {
         for(String bugId:ids.split(",")){
             buildService.releateBug(Integer.valueOf(bugId), buildId);
         }
-        map.put("status", "y");
-        map.put("info", "关联成功");
-        return map;
+        return resultMap(true,"关联成功");
     }
 
     @RequestMapping("/search/reRelateStory")
@@ -287,9 +284,7 @@ public class BuildAction extends BaseController {
     public Map deletereleate(Integer storyId,Integer buildId){
         buildService.deletereleate(storyId, buildId);
         Map<String, String> map = new HashMap<String, String>();
-        map.put("status", "success");
-        map.put("info", "删除成功");
-        return map;
+        return resultMap(true,"解除关联成功");
 
     }
 
@@ -298,10 +293,7 @@ public class BuildAction extends BaseController {
     public Map deletereleateBug(Integer bugId,Integer buildId){
         buildService.deletereleateBug(bugId, buildId);
         Map<String, String> map = new HashMap<String, String>();
-        map.put("status", "success");
-        map.put("info", "删除成功");
-        return map;
-
+        return resultMap(true,"解除关联成功");
     }
 
     @ResponseBody

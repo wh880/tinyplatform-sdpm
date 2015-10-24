@@ -68,7 +68,7 @@
 
 #end
 
-    #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/quality/testCase/copySave" "post" {"class":""})
+    #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/quality/testCase/save" "post" {"class":""})
 	<div style="width:100%">
     	<div class="infoContent">
     		<p class="titleName">建用例</p>
@@ -187,7 +187,7 @@
             #@colLabel()用例标题：#end
             #@formControlDiv("col-8")
             #@div(divClass="col-5")
-                #tinyInput("text" "caseTitle" ""{"datatype":"*10-500","id":"版本","class":"input-text"})
+                #tinyInput("text" "caseTitle" testCase?.caseTitle {"datatype":"*10-500","id":"版本","class":"input-text"})
             #end
             #end
             #@validateDiv("col-2")#end
@@ -195,7 +195,7 @@
         #@elementItem()
             #@colLabel()前置条件：#end
             #@formControlDiv("col-8")
-                #@tinyTextarea("casePrecondition" {"placeholder":"说点什么...最少输入10个字符"})请输入内容#end          
+                #@tinyTextarea("casePrecondition" {"placeholder":"说点什么...最少输入10个字符"})${testCase?.casePrecondition}#end
             #end
             #@validateDiv("col-2")#end
         #end
@@ -211,7 +211,7 @@
             #@colLabel()关键词：#end
             #@formControlDiv("col-8")
             	#@div(divClass="col-5")
-                	#tinyInput("text" "caseKeywords" ""{"datatype":"","id":"关键词","class":"input-text"})
+                	#tinyInput("text" "caseKeywords" testCase?.caseKeywords {"datatype":"","id":"关键词","class":"input-text"})
             	#end
             #end
             #@validateDiv("col-2")#end

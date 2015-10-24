@@ -9,7 +9,7 @@ public class QualityBugSta implements Serializable{
     /**
      * Bug创建用户Id
      */
-    private String UserId;
+    private String userId;
     /**
      * 重复bug状态数
      */
@@ -39,9 +39,13 @@ public class QualityBugSta implements Serializable{
      */
     private Integer notResolved;
     /**
+     * bug总数
+     */
+    private Integer bugNum;
+    /**
      * 转需求数
      */
-    private Integer toStroy;
+    private Integer toStory;
     /**
      * bug创建是时间
      */
@@ -55,9 +59,33 @@ public class QualityBugSta implements Serializable{
      */
     private Integer productId;
 
-    public String getUserId() {
-        return UserId;
+    public Integer getToStory() {
+        return toStory;
     }
+
+    public void setToStory(Integer toStory) {
+        this.toStory = toStory;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+
+
+    public Integer getBugNum() {
+        return bugNum;
+    }
+
+    public void setBugNum(Integer bugNum) {
+        this.bugNum = bugNum;
+    }
+
+
 
     public String getBugCreateDate() {
         return bugCreateDate;
@@ -81,10 +109,6 @@ public class QualityBugSta implements Serializable{
 
     public void setProductId(Integer productId) {
         this.productId = productId;
-    }
-
-    public void setUserId(String userId) {
-        UserId = userId;
     }
 
     public Integer getRepeatBug() {
@@ -143,11 +167,4 @@ public class QualityBugSta implements Serializable{
         this.notResolved = notResolved;
     }
 
-    public Integer getToStroyto() {
-        return toStroy;
-    }
-
-    public void setToStroy(Integer toStroy) {
-        this.toStroy = toStroy;
-    }
 }

@@ -8,26 +8,35 @@
     #@thead()
         #@tr("text-c")
             #@th()
-            产品
+            姓名
             #end
             #@th()
-            计划
+           总计Bug数
+            #end
+            #@th()
+              产品
+            #end
+            #@th()
+            产品 Bug数
             #end
         #end
         #@tbody()
+            #for(p:bugAss)
             #@tr("text-c")
-            <td>计划1</td>
-            <td>
-                #@div(divStyle="background-color:#fff; border:solid 1px #ddd;width: 180px;")10像素填充，来点背景效果更明显#end
-            </td>
+            <td rowspan=${p?.value.size()+1}>${p?.key?.userId?UserUtils.getUserById(p?.key?.userId)?.orgUserRealName:""}</td>
+            <td rowspan=${p?.value.size()+1}>${p?.key?.bugNum}</td>
+               #if(!p.value)
+                   <td></td>
+                   <td></td>
+                   #else
+                #for(pr:p?.value)
+                    #@tr("text-c")
+                   <td>${pr?.productName}</td>
+                   <td>${pr?.productBugNum}</td>
+                    #end
+                #end
+                #end
             #end
-            #@tr("text-c")
-            <td>计划2</td>
-            <td></td>
-            #end
-            #@tr("text-c")
-            <td>计划3</td>
-            <td></td>
             #end
         #end
     #end

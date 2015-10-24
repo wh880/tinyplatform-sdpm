@@ -38,7 +38,7 @@
 
 
 #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/quality/testCase/save" "post" {"class":"test","enctype":"multipart/form-data"})
-#hiddenInput(hiddenInputName="caseId" hiddenInputValue=testcase?.caseId)
+#hiddenInput(hiddenInputName="caseId" hiddenInputValue=testCase?.caseId)
 	<div style="width:70%;float:left" class="pageleftpart">
     	<div class="infoContent">
     		<p class="titleName">编辑</p>
@@ -75,7 +75,7 @@
                 <div class="col-2 text-r"><label>备注：&nbsp</label></div>
 
                 <div class="col-10">
-                    #@Teditor("content1" "content1" {"initialFrameHeight":"150"})#end</div>
+                    #@Teditor("content1" "comment" {"initialFrameHeight":"150"})#end</div>
             </div>
         #end
         #@elementItem()
@@ -101,11 +101,7 @@
         	</div>
 			#end
             <p style="clear:both"></p>
-            #@div(divClass="infoContent")
-                <p class="titleName">历史记录</p>
-            ##加入后，js代码会导致页面排版混乱
-                #include("/testManagement/page/historyRecord.page")
-            #end
+            #history(adminPath+"/system/action/ajax/history?actionObjectType=case&actionObjectId="+testCase?.caseId)
             </div>
              <div style="width:30%;float:right">
         #TypeInfo("qualityCaseEdition" caseId)

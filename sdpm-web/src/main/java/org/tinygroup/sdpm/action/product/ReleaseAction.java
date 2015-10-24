@@ -8,9 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductRelease;
+import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.product.service.ReleaseService;
 import org.tinygroup.sdpm.system.dao.pojo.ProfileType;
@@ -20,6 +22,7 @@ import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -200,4 +203,56 @@ public class ReleaseAction extends BaseController{
 		model.addAttribute("product", product);
 		return "/product/page/tabledemo/product-addrelease.page";
 	}
+	
+	@ResponseBody
+	@RequestMapping("/ajaxDelAlWork")
+	public Map deleteRel(Integer releaseId,String storyId) {
+		
+		ProductRelease release = releaseService.findRelease(releaseId);
+		if(release!=null&&!StringUtil.isBlank(release.getReleaseStories())){
+			String releaseStories = release.getReleaseStories();
+			releaseStories = storyIdUtils(releaseStories,storyId!=null?"":storyId.trim());
+			release.setReleaseStories(releaseStories);
+			releaseService.updateRelease(release);
+		}
+		
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("status", "success");
+		map.put("info", "成功");
+
+		return map;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/ajaxRelateStory")
+	public boolean RelateStory(ProductStory[] stories){
+		if(stories.length>0&&stories!=null){
+			ProductRelease release = releaseService.findRelease(stories[0].getReleaseId());
+			String releaseStories = release.getReleaseStories();
+			for (ProductStory story : stories) {
+				if(release!=null&&!(StringUtil.isBlank(release.getReleaseStories()))){
+					releaseStories = releaseStories + "," + story.getReleaseId();
+				}
+			}
+			release.setReleaseStories(releaseStories);
+			releaseService.updateRelease(release);
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+	public static String storyIdUtils(String soure,String inde){
+		soure = soure.replaceAll(inde, "").replaceAll(",,", ",");
+		if(soure.startsWith(",")){
+			soure = soure.substring(1);
+		}
+		if(soure.endsWith(",")){
+			soure = soure.substring(0, soure.length());
+		}
+		return soure;
+	}
+	
+	
 }

@@ -32,12 +32,14 @@ import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
 import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
+import org.tinygroup.sdpm.product.dao.pojo.ProductRelease;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec;
 import org.tinygroup.sdpm.product.dao.pojo.StoryCollection;
 import org.tinygroup.sdpm.product.dao.pojo.StoryCount;
 import org.tinygroup.sdpm.product.service.PlanService;
 import org.tinygroup.sdpm.product.service.ProductService;
+import org.tinygroup.sdpm.product.service.ReleaseService;
 import org.tinygroup.sdpm.product.service.StoryService;
 import org.tinygroup.sdpm.product.service.StorySpecService;
 import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
@@ -87,6 +89,8 @@ public class StoryAction extends BaseController {
 	private TestCaseService testCaseService;
 	@Autowired
 	private TaskService taskService;
+	@Autowired
+	private ReleaseService releaseService;
 
 	/**
 	 * @param story
@@ -566,6 +570,7 @@ public class StoryAction extends BaseController {
 			int page,
 			int pagesize,
 			String type,
+			Integer releaseId,
 			ProductStory story,
 			String choose,
 			String groupOperate,
@@ -599,6 +604,22 @@ public class StoryAction extends BaseController {
 					+ story.getPlanId();
 			story.setPlanId(null);
 		}
+		
+		if(releaseId!=null&&releaseId>0){
+			ProductRelease release = releaseService.findRelease(releaseId);
+			if(release!=null){
+				String releaseStories = release.getReleaseStories();
+				if(!StringUtil.isBlank(releaseStories)){
+					if("alWork".equals(type)){
+						condition = (StringUtil.isBlank(condition.trim()) ? " " : (condition + " and ")) + "product_story.story_id in ("+releaseStories+") ";
+					}
+					if("noWork".equals(type)){
+						condition = (StringUtil.isBlank(condition.trim()) ? " " : (condition + " and ")) + "product_story.story_id not in ("+releaseStories+") ";
+					}
+				}
+			}
+		}
+		
 
 		Pager<ProductStory> p = storyService.findPager(pagesize * (page - 1),
 				pagesize, story, condition, order,

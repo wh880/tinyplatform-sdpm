@@ -58,65 +58,61 @@
     #@thead()
         #@tr("text-c")
             #@th()
-            产品名称
+            有谁创建
             #end
             #@th()
-            产品负责人
+            未解决
             #end
             #@th()
-            产品计划
+            设计如此
             #end
             #@th()
-            开始日期
+            重复Bug
             #end
             #@th()
-            结束日期
+            外部原因
             #end
             #@th()
-            草稿
+            已解决
             #end
             #@th()
-            激活
+            无法重现
             #end
             #@th()
-            已变更
+            延期处理
             #end
             #@th()
-            已关闭
+            不予解决
+            #end
+            #@th()
+            转为需求
+            #end
+            #@th()
+            有效率
+            #end
+            #@th()
+            总计
             #end
         #end
         #@tbody()
+            #for(b:bugStas)
+            #set(notSolved=(b?.bugNum-
+        (b?.designEd+b?.repeatBug+b?.externalCause+b?.solved+b?.notReproduce+b?.delayResolved+b?.notResolved+b?.toStory)))
             #@tr("text-c")
-            <td rowspan="2">测试产品</td>
-            <td rowspan="2">admin</td>
-            <td>计划</td>
-            <td>2015-08-25</td>
-            <td>2015-08-25</td>
-            <td>2</td>
-            <td>4</td>
-            <td>1</td>
-            <td>1</td>
+            <td >${b?.userId?UserUtils.getUserById(b?.userId)?.orgUserRealName:""}</td>
+            <td>${notSolved}</td>
+            <td >${b?.designEd}</td>
+            <td>${b?.repeatBug}</td>
+            <td>${b?.externalCause}</td>
+            <td>${b?.solved}</td>
+            <td>${b?.notReproduce}</td>
+            <td>${b?.delayResolved}</td>
+            <td>${b?.notResolved}</td>
+            <td>${b?.toStory}</td>
+            <td>${((b?.solved)/(b?.bugNum-notSolved))*100}%</td>
+            <td>${b?.bugNum}</td>
             #end
-            #@tr("text-c")
-            <td>计划2</td>
-            <td>2015-09-25</td>
-            <td>2015-09-25</td>
-            <td>2</td>
-            <td>4</td>
-            <td>1</td>
-            <td>1</td>
-            #end
-            #@tr("text-c")
-            <td rowspan="1">测试产品3</td>
-            <td rowspan="1">admin</td>
-            <td>计划</td>
-            <td>2015-08-25</td>
-            <td>2015-08-25</td>
-            <td>2</td>
-            <td>4</td>
-            <td>1</td>
-            <td>1</td>
-            #end
+        #end
         #end
     #end
 #end

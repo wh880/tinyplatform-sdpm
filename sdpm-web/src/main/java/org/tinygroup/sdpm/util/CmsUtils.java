@@ -1,5 +1,8 @@
 package org.tinygroup.sdpm.util;
 
+import org.tinygroup.sdpm.document.dao.pojo.DocumentDoclib;
+import org.tinygroup.sdpm.document.service.impl.DocServiceImpl;
+import org.tinygroup.sdpm.document.service.inter.DocService;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.product.service.impl.ProductServiceImpl;
@@ -26,6 +29,7 @@ public class CmsUtils {
     private static ProjectService projectService = SpringContextHolder.getBean(ProjectServiceImpl.class);
     private static ProductService productService = SpringContextHolder.getBean(ProductServiceImpl.class);
     private static ProductLineService productLineService = SpringContextHolder.getBean(ProductLineServiceImpl.class);
+    private static DocService docService = SpringContextHolder.getBean(DocServiceImpl.class);
 
     /**
      * 获得项目列表
@@ -141,6 +145,42 @@ public class CmsUtils {
             }
         }
         return new Product();
+    }
+
+    /**
+     * 获得文档库
+     */
+    public static DocumentDoclib getDocLib(String libId){
+    	List<DocumentDoclib> libList = getLibList();
+        if (libId == null && libList != null && !libList.isEmpty()) {
+            return libList.get(0);
+        }
+        for (DocumentDoclib doclib : libList) {
+            if (doclib.getDocLibId().toString().equals(libId)) {
+                return doclib;
+            }
+        }
+        return new DocumentDoclib();
+    }
+
+    /**
+     * 获得文档库
+     */
+
+    public static List<DocumentDoclib> getLibList(){
+    	 List<DocumentDoclib> libList = (List<DocumentDoclib>) CacheUtils.get(CMS_CACHE, CMS_CACHE_DOCLIB_LIST);
+         if (libList == null) {
+        	 libList = docService.findDoclibList(new DocumentDoclib());
+             CacheUtils.put(CMS_CACHE, CMS_CACHE_DOCLIB_LIST, libList);
+         }
+         return libList;
+    }
+
+    /**
+     * 清除文档库列表
+     */
+    public static void removeLibList(){
+    	CacheUtils.remove(CMS_CACHE, CMS_CACHE_DOCLIB_LIST);
     }
 
 }

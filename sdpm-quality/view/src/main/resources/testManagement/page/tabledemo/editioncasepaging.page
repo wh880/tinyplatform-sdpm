@@ -59,22 +59,19 @@
 					#@td()
 					
 					 #@Tselect2F()
+                            <script>
+                                 $("#${sid}").on("change", function () {
+                                    var pId = $("#${sid}  option:selected").val();
+                                    ajaxRead("${sid}", "moduleId", "moduleId", "moduleName", "/quality/bug/ajax/module?moduleRoot=" + pId,${testCase?.moduleId?:0});
+                                });
+                            </script>
 	                   		 #@Tselect2Body("productId" testCase?.productId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                       
+	                   		    <option value="0" >/</option>
+	                            #for(product : CmsUtils.getProductList())
+	                            <option value="${product?.productId}" >${product?.productName}</option>
+	                            #end
 	                    	#end 
-	                    	<script>
-							
-		                        ajaxRead("${sid}", "productId", "productId", "productName", "/product/productList",${testCase?.productId?:0});
-								
-								 $("#${sid}").on("change", function () {
-		                            var pId = $("#${sid}  option:selected").val();
-		                            
-		                            ajaxRead("${sid}", "moduleId", "moduleId", "moduleName", "/quality/bug/ajax/module?moduleRoot=" + pId,${testCase?.moduleId?:0});
-		                            ajaxRead("${sid}", "storyId", "storyId", "storyTitle", "/product/story/storyList?productId=" + pId,${testCase?.storyId?:0});
-		
-		                        });
-		                    </script>
-		                    	                 
+
 	                    	#@Tselect2Fix()
 	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/product/page/tabledemo/addProduct.page" class="r ">增加</a>
 	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/product/page/tabledemo/product-listall.page">全部</a>#end
@@ -87,9 +84,17 @@
 					#@th()所属模块#end
 					#@td()
 						  #@Tselect2F()
+						  <script>
+                                $("#${sid}").on("change", function () {
+                                   var pId = $("select[name=productId]  option:selected").val();
+                                   var mId = $("select[name=moduleId]").val();
+                                   console.log(mId);
+                                   ajaxRead("${sid}", "storyId", "storyId", "storyTitle", "/product/story/storyList?productId=" + pId+"&moduleId="+mId,${testCase?.storyId?:0});
+                               });
+                           </script>
 	                   		 #@Tselect2Body("moduleId" testCase?.moduleId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 	                        
-	                    	#end                
+	                    	#end
                 	  #end
 					#end
 
@@ -179,15 +184,12 @@
 			#@tbody()
 				#@tr()
 					#@th()由谁创建#end
-					#@td()${testCase?.caseOpenedBy} 于 ${testCase?.caseOpenedDate?formatDate(testCase?.caseOpenedDate,'yyyy年MM月dd日'):""}#end
+					#@td()${testCase?.caseOpenedBy?UserUtils.getUserById(testCase?.caseOpenedBy)?.orgUserRealName:""} ${testCase?.caseOpenedDate?" 于 "+formatDate(testCase?.caseOpenedDate,'yyyy-MM-dd hh:mm:ss'):""}#end
 				#end
 				#@tr()
 					#@th()最后编辑#end
-					#@td()${testCase?.caseLastEditedBy} 于  ${testCase?.caseLastEditedDate?formatDate(testCase?.caseLastEditedDate,'yyyy年MM月dd日'):""}  #end
+					#@td()${testCase?.caseLastEditedBy?UserUtils.getUserById(testCase?.caseLastEditedBy)?.orgUserRealName:""} ${testCase?.caseLastEditedDate?" 于 "+formatDate(testCase?.caseLastEditedDate,'yyyy-MM-dd hh:mm:ss'):""}  #end
 				#end
 			#end
 		#end
 	#end
-<script>
-	$('select.select2').select2()
-</script>
