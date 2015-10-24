@@ -76,7 +76,7 @@
                 <property key="type" value="note"/>
             </map>
         </menu>
-        <menu id="demand_copy" name="复制" href="/product/page/tabledemo/product-demand-add.page" icon="icon-copy"
+        <menu id="demand_copy" name="复制" href="/product/story/findcopy?storyId=${storyId}" icon="icon-copy"
               sort="38" isShow="1" scope="pro_demand_log">
             <map>
                 <property key="type" value="icon"/>
