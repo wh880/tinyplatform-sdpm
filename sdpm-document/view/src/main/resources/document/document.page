@@ -6,9 +6,8 @@
 
 #include("common.page")
 #include("doc-tab.page")
-        ##operationbar start
-            #@div(divClass="operationbar")
-            	#include("mulsearch.page") 
-            #end    
+#@div(divClass="operationbar")
+    #include("mulsearch.page")
+#end
 #include("treeNew.page")
 	

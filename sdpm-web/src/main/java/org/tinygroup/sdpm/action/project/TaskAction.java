@@ -11,6 +11,7 @@ import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.action.project.util.TaskStatusUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.org.service.inter.UserService;
+import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.service.StoryService;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
@@ -60,38 +61,16 @@ public class TaskAction extends BaseController {
 
     @RequiresPermissions(value = {"task", "project"}, logical = Logical.OR)
     @RequestMapping("index")
-    public String index(@CookieValue(required = false, value = COOKIE_PROJECT_ID) Integer currentProjectId,
-                        String moduleId, String choose, Model model) {
-//        List<Project> list = projectService.findList();
-//        Project selProject = new Project();
-//        if (list == null || list.isEmpty()) {
-//            return "redirect:" + adminPath + "/project/add";
-//        } else {
-//            if (currentProjectId == null) {
-//                selProject = list.get(0);
-//                //maxAge=-1意为永久
-//                CookieUtils.setCookie(response, TaskAction.COOKIE_PROJECT_ID, selProject.getProjectId().toString(), -1);
-//            } else {
-//                boolean flag = false;
-//                for (Project p : list) {
-//                    if (p.getProjectId() == currentProjectId) {
-//                        selProject = p;
-//                        CookieUtils.setCookie(response, TaskAction.COOKIE_PROJECT_ID, currentProjectId.toString(), -1);
-//                        flag = true;
-//                        break;
-//                    }
-//                }
-//                //若数据库中无cookies中projectId对应的项目，则返回选中第一条
-//                if (!flag) {
-//                    selProject = list.get(0);
-//                    CookieUtils.setCookie(response, TaskAction.COOKIE_PROJECT_ID, selProject.getProjectId().toString(), -1);
-//                }
-//            }
-//        }
-//        //model.addAttribute("selProject", selProject);
-//        //model.addAttribute("projectList", list);
-//        request.getSession().setAttribute("selProject", selProject);
-//        request.getSession().setAttribute("projectList", list);
+    public String index(@CookieValue(required = false, value = COOKIE_PROJECT_ID) String currentProjectId,
+                        HttpServletResponse response, String moduleId, String choose, Model model) {
+        if (StringUtil.isBlank(currentProjectId)) {
+            Product product = CmsUtils.getProduct(null);
+            if (null != product) {
+                currentProjectId = product.getProductId().toString();
+                CookieUtils.setCookie(response, COOKIE_PROJECT_ID, currentProjectId);
+                model.addAttribute(COOKIE_PROJECT_ID, currentProjectId);
+            }
+        }
         if (moduleId != null) {
             model.addAttribute("moduleId", moduleId);
         }
