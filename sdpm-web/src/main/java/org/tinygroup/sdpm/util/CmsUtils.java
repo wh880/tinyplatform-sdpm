@@ -25,6 +25,7 @@ public class CmsUtils {
     private static final String CMS_CACHE_PRODUCT_LIST = "productList";
     private static final String CMS_CACHE_PRODUCT_LIST_LINE_ID_ = "productList_lineId_";
     private static final String CMS_CACHE_PRODUCT_LINE_LIST = "projectLineList";
+    private static final String CMS_CACHE_DOCLIB_LIST = "docLibList";
 
     private static ProjectService projectService = SpringContextHolder.getBean(ProjectServiceImpl.class);
     private static ProductService productService = SpringContextHolder.getBean(ProductServiceImpl.class);
