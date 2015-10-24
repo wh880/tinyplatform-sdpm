@@ -65,23 +65,15 @@
                             "productId" sessionProductId {"class":"input-text select2"})
                             <option value="0">/</option>
                         #end
-
                         <script>
-
                             ajaxRead("${sid}", "productId", "productId", "productName", "/product/productList", ${story?.productId?:0});
-
                         </script>
-
-
                         <script>
-
-
                             $("#${sid}").on("change", function () {
                                 var pId = $("#${sid}  option:selected").val();
                                 ajaxRead("${sid}", "moduleId", "moduleId", "moduleName", "/quality/bug/ajax/module?moduleRoot=" + pId,"${story?.moduleId?:0}");
                                 ajaxRead("${sid}", "planId", "planId", "planName", "/product/plan/planList?productId=" + pId,"${story?.planId?:0}");
                             })
-
                         </script>
 
                         #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH +adminPath}/product/addproduct/addition "
@@ -135,8 +127,6 @@
                             #end
 
                         #end
-
-
                     #end
                 </div>
 
@@ -227,7 +217,6 @@
             #end
 
         #end
-
         #@elementItem()
             #@colLabel()抄送给：#end
             #@formControlDiv("col-4")
@@ -246,8 +235,6 @@
             #end
             #@validateDiv("col-2")#end
         #end
-
-
         #@elementItem()
             #@colLabel()关键词：#end
             #@formControlDiv("col-4")
@@ -256,8 +243,6 @@
             #end
             #@validateDiv("col-2")#end
         #end
-
-
         #@elementItem()
             #@colLabel()附件：#end
             #@formControlDiv("col-10")
@@ -282,9 +267,6 @@
     #end
 </div>
 #end
-
-
-
     <script type="text/javascript">
         $(function () {
             $("form[name=thisform").Validform({
