@@ -12,7 +12,7 @@
 			<input type="button" value="全选"  class="btn btn-default btn-primary "  onclick="selectAllNullorReserve('bugId','全选');" />
             <input type="button" value="反选"   class="btn btn-default btn-primary"  onclick="selectAllNullorReserve('bugId','反选');" />
 
-				#@mulOperation("muldelete" TINY_CONTEXT_PATH +adminPath+"/quality/bug/batchDelete")
+				#@mulOperation("muldelete" TINY_CONTEXT_PATH +adminPath+"/quality/bug/batchDelBugStory")
             					<a class="btn radius btn-danger btn-sm "><i class="icon-trash"></i> 批量删除</a>
             			  #end			#end
 			#@tinyTableContent(TINY_CONTEXT_PATH +adminPath + "/product/story/bugSearch/reRelateBug?planId="+planId+"&deleted=0") ##取数据地址 总数据

@@ -16,6 +16,7 @@
         <validator.version>5.1.1.Final</validator.version>
         <shiro.version>1.2.3</shiro.version>
         <ehcache.version>2.6.9</ehcache.version>
+        <jackson.version>2.2.3</jackson.version>
     </properties>
     <dependencies>
         <!--session存储-->
@@ -24,7 +25,27 @@
             <artifactId>org.tinygroup.sessionstore</artifactId>
             <version>${tiny_version}</version>
         </dependency>
-
+        <!-- jackson json -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.module</groupId>
+            <artifactId>jackson-module-jaxb-annotations</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
         <!--缓存-->
         <dependency>
             <groupId>org.tinygroup</groupId>

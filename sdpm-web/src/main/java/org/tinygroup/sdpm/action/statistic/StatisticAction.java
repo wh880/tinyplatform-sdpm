@@ -16,7 +16,9 @@ import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
 import org.tinygroup.sdpm.project.service.inter.ProjectProductService;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
+import org.tinygroup.sdpm.statistic.dao.pojo.Assigned;
 import org.tinygroup.sdpm.statistic.dao.pojo.ProjectTaskSta;
+import org.tinygroup.sdpm.statistic.dao.pojo.QualityBugCall;
 import org.tinygroup.sdpm.statistic.dao.pojo.QualityBugSta;
 import org.tinygroup.sdpm.statistic.service.inter.StatisticService;
 
@@ -97,6 +99,21 @@ public class StatisticAction extends BaseController {
         model.addAttribute("order","1");
         List<QualityBugSta> bugStas = statisticService.findBugCreate(new QualityBugSta());
         model.addAttribute("bugStas",bugStas);
+        return "/statistic/page/test.page";
+    }
+    @RequestMapping("quality/bugAssigned")
+    public String qualityBugAssigned(Model model){
+        model.addAttribute("order","2");
+        List<Assigned> assigneds = statisticService.findAssigned(new Assigned());
+        Map<Assigned,List<QualityBugCall>> map = new HashMap<Assigned, List<QualityBugCall>>();
+        for (int i=0,n=assigneds.size();i<n;i++){
+            QualityBugCall qualityBugCall = new QualityBugCall();
+            String a= assigneds.get(i).getUserId();
+            qualityBugCall.setUserId(a);
+            List<QualityBugCall> qualityBugCalls = statisticService.findBugCall(qualityBugCall);
+            map.put(assigneds.get(i),qualityBugCalls);
+        }
+        model.addAttribute("bugAss",map);
         return "/statistic/page/test.page";
     }
 }

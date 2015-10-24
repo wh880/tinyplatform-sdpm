@@ -19,7 +19,8 @@
 	</type-info>
 	
 	<type-info name="demandhref"  >
-	    <info name="demandInfo" title="需求信息" infoParameter="storyId" url="/product/story/productDemandDetail/findPager" resource="demandhref"/>
+		<info name="demandInfo" title="需求信息" infoParameter="storyId" url="/product/story//findPager"
+			  resource="demandhref"/>
 	</type-info>
 	
 </type-infos>

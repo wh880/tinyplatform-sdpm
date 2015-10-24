@@ -50,6 +50,8 @@
             <!-- Hulk's Path -->
             <class-path path="E:\workcode\sdpm\sdpm-project\view\src\main\resources"/>
             <class-path path="E:\workcode\sdpm\sdpm-common\view\src\main\resources"/>
+            <class-path path="E:\workcode\sdpm\sdpm-project\view\src\main\resources"/>
+
             <!-- 徐丹洋-->
             <class-path path="D:\sdpm\sdpm-service\view\src\main\resources"/>
             <!-- 杰森斯坦森-->

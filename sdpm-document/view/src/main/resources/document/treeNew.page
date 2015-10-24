@@ -9,10 +9,25 @@
 			#if(documentLibId)
 				#for(lib : libList)
 					#if(lib?.docLibId == documentLibId)
-						${lib?.docLibName}
+						#if(lib?.docLibId==1||lib?.docLibId==2)
+							${lib?.docLibName}
+						#else
+							自建文档库：${lib?.docLibName}
+						#end
 					#end
 				#end
-			#else产品文档库 #end 
+			#else
+				#if(CmsUtils.getLibList()?.size()>0)
+					<script type="text/javascript">
+					    $(function(){
+					        $.cookie('documentLibId',"${CmsUtils.getLibList()?.get(0)?.docLibId}");
+					    })
+					</script>
+					${CmsUtils.getLibList().get(0).docLibName}
+				#else
+					文档库
+				#end
+		#end 
 		#end
 		#set(dataUrl = "/system/module/tree?moduleType=doc&moduleRoot="+documentLibId)
 		#set(saveUrl = "/system/module/ajax/save?moduleType=doc&moduleRoot="+documentLibId)

@@ -8,10 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec;
+import org.tinygroup.sdpm.product.service.StoryService;
 import org.tinygroup.sdpm.product.service.StorySpecService;
-import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;
-import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.sdpm.system.service.inter.ProfileService;
 
 import java.util.List;
@@ -24,6 +23,8 @@ public class StorySpecAction extends BaseController{
 	private StorySpecService specService;
 	@Autowired
 	private ProfileService profileService;
+	@Autowired
+	private StoryService storyService;
 	
 	@RequestMapping("/find")
 	public String find(Integer storyId,Model model){
@@ -37,7 +38,9 @@ public class StorySpecAction extends BaseController{
 	public String find(@PathVariable(value="forward")String forward,ProductStory story,Model model,SystemProfile systemProfile){
 		
 		ProductStorySpec storySpec = specService.findStorySpec(story.getStoryId());
+		ProductStory productStory = storyService.findStory(story.getStoryId());
 		model.addAttribute("storySpec", storySpec);
+		model.addAttribute("story", productStory);
 		systemProfile.setFileObjectType("story");
 		systemProfile.setFileDeleted("0");
 		systemProfile.setFileObjectId(story.getStoryId());

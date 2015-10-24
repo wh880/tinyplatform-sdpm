@@ -18,18 +18,14 @@ import javax.servlet.ServletResponse;
 
 /**
  * 表单验证（包含验证码）过滤类
- *
- * @author ThinkGem
- * @version 2014-5-19
+ * @author Hulk
  */
 @Service
 public class FormAuthenticationFilter extends org.apache.shiro.web.filter.authc.FormAuthenticationFilter {
-    protected static final Logger logger = LoggerFactory.getLogger(FormAuthenticationFilter.class);
-
     public static final String DEFAULT_CAPTCHA_PARAM = "validateCode";
     public static final String DEFAULT_MOBILE_PARAM = "mobileLogin";
     public static final String DEFAULT_MESSAGE_PARAM = "message";
-
+    protected static final Logger logger = LoggerFactory.getLogger(FormAuthenticationFilter.class);
     private String captchaParam = DEFAULT_CAPTCHA_PARAM;
     private String mobileLoginParam = DEFAULT_MOBILE_PARAM;
     private String messageParam = DEFAULT_MESSAGE_PARAM;

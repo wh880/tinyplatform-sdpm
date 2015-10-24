@@ -3,6 +3,7 @@ package org.tinygroup.sdpm.action.project;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.sdpm.common.util.DateUtils;
@@ -11,18 +12,19 @@ import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBurn;
 import org.tinygroup.sdpm.project.service.inter.BurnService;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
-import org.tinygroup.sdpm.project.service.inter.TaskService;
-import org.tinygroup.sdpm.util.CookieUtils;
+import org.tinygroup.sdpm.util.CmsUtils;
+import org.tinygroup.sdpm.util.JsonMapper;
 
-import javax.servlet.http.HttpServletRequest;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 /**
- * Created by wangying14938 on 2015-09-22.燃尽图
+ * 燃尽图
+ * Created by wangying14938 on 2015-09-22.
  */
 @Controller
 @RequestMapping("/a/project/burn")
@@ -30,96 +32,69 @@ public class BurnAction extends BaseController {
     @Autowired
     private BurnService burnService;
     @Autowired
-    private TaskService taskService;
-    @Autowired
     private ProjectService projectService;
 
+    /**
+     * 1.获取项目的起始、结束日期
+     * 2.获取项目起始的预计剩余时间
+     * 3.获取项目间隔时间，默认为X天
+     * 4.根据间隔计算平均剩余时间
+     * 5.根据间隔计算时间戳（用于显示燃尽图下放的时间标记）
+     * 6.根据间隔计算任务标记点，按小取整
+     * 7.可能需要在新建项目的时候 添加燃尽图
+     */
+
+    /**
+     * 燃尽图数据初始化
+     *
+     * @param choose   激活标签
+     * @param interval 选择间隔时间
+     * @param model
+     * @return
+     */
     @RequestMapping("/init")
-    public String initBurn(HttpServletRequest request, Model model, Integer choose, Integer interval, String ajax) {
-        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
+    public String initBurn(@CookieValue(value = TaskAction.COOKIE_PROJECT_ID, required = false) Integer projectId,
+                           Integer choose, Integer interval, Model model) {
         if (interval == null) {
             interval = 3;
         }
-        /**
-         * 1.获取项目的起始、结束日期
-         * 2.获取项目起始的预计剩余时间
-         * 3.获取项目间隔时间，默认为X天
-         * 4.根据间隔计算平均剩余时间
-         * 5.根据间隔计算时间戳（用于显示燃尽图下放的时间标记）
-         * 6.根据间隔计算任务标记点，按小取整
-         * 7.可能需要在新建项目的时候 添加燃尽图
-         */
-        DateFormat format = new SimpleDateFormat("yyyy-M-d");
-        DateFormat format2 = new SimpleDateFormat("\"M\\/d\"");
-        Project project = projectService.findById(projectId);
+        DateFormat format = new SimpleDateFormat("M/d");//日期格式"M/d"
+        Project project = CmsUtils.getProject(projectId.toString());
         Date startData = project.getProjectBegin();
         Date endData = project.getProjectEnd();
+        //项目周期
+        float period = (float) DateUtils.getDistanceOfTwoDate(startData, endData);
 
-        //拼出燃尽图底下的日期
-        StringBuffer days = new StringBuffer();
-        //计算均值
-        StringBuffer average = new StringBuffer();
-        //设定具体数值点
-        StringBuffer left = new StringBuffer();
-        //设定的开始与结束日期间隔
-        double disDays = DateUtils.getDistanceOfTwoDate(startData, endData);
-        List<ProjectBurn> list = burnService.findBurnByProjectId(projectId);
+        List<ProjectBurn> projectBurnList = burnService.findBurnByProjectId(projectId);
         //均线起始值
-        double topLeft = 0;
-        if (list != null || !list.isEmpty()) {
-            for (ProjectBurn burn : list) {
-                if (topLeft < burn.getBurnLeft()) {
-                    topLeft = burn.getBurnLeft();
-                }
-            }
-        }
-
+        float topLeft = getMaxLeftTime(projectBurnList);
         //均线斜率
-        double rake = topLeft / disDays;
+        Float rake = topLeft / period;
 
         Date nextDay = startData;
-        Date nextPoint = startData;
-        double tLeft = 0;
-        int i = 0;
-        while (nextDay.before(endData)) {
-            nextDay = DateUtils.addDays(startData, i);
-            for (ProjectBurn burn : list) {
-                if (burn.getBurnDate().getTime() == nextDay.getTime()) {
-                    tLeft = burn.getBurnLeft();
-                }
-            }
+        Float tLeft = null;
 
+        List<Float> leftList = new ArrayList<Float>();
+        List<Float> averageList = new ArrayList<Float>();
+        List<String> dateList = new ArrayList<String>();
+        for (int i = 0; i < period; i++, nextDay = DateUtils.addDays(startData, i)) {
+            ProjectBurn projectBurn = getProjectBurnByDate(projectBurnList, nextDay);
+            if (projectBurn != null) {
+                tLeft = projectBurn.getBurnLeft();
+            }
             if (0 == i % interval) {
-                //拼日期
-                if (days.length() == 0) {
-                    days.append(format2.format(nextDay));
-                } else {
-                    days.append("," + format2.format(nextDay));
-                }
-
-                if (average.length() == 0) {
-                    average.append((topLeft - (rake * i)));
-                } else {
-                    average.append("," + (topLeft - (rake * i)));
-                }
-
-                if (!nextDay.after(new Date())) {
-                    if (left.length() == 0) {
-                        left.append(tLeft);
-                    } else {
-                        left.append("," + tLeft);
-                    }
-                }
+                averageList.add(topLeft - rake * i);
+                dateList.add(format.format(nextDay));
+                leftList.add(tLeft);
             }
-            i++;
         }
+        JsonMapper mapper = JsonMapper.getInstance();
+        model.addAttribute("average", mapper.toJson(averageList));
+        model.addAttribute("days", mapper.toJson(dateList));
+        model.addAttribute("left", mapper.toJson(leftList));
 
-        model.addAttribute("average", average);
-        model.addAttribute("days", days);
-        model.addAttribute("left", left);
-        model.addAttribute("interval", interval);
         model.addAttribute("choose", choose);
-        return "project/task/projectBurn.page" + (ajax == null ? "" : "let");
+        return "project/task/projectBurn.page";
     }
 
     @ResponseBody
@@ -128,4 +103,41 @@ public class BurnAction extends BaseController {
         burnService.updateDate(null);
         return resultMap(true, "更新成功");
     }
+
+    /**
+     * 获取列表中最大剩余工作时长
+     *
+     * @param list
+     * @return
+     */
+    protected Float getMaxLeftTime(List<ProjectBurn> list) {
+        //均线起始值
+        float topLeft = 0f;
+        if (list != null && !list.isEmpty()) {
+            for (ProjectBurn burn : list) {
+                if (topLeft < burn.getBurnLeft()) {
+                    topLeft = burn.getBurnLeft();
+                }
+            }
+        }
+        return topLeft;
+    }
+
+    /**
+     * 获取列表中最大剩余工作时长
+     *
+     * @param projectBurnList
+     * @param date
+     * @return
+     */
+    protected ProjectBurn getProjectBurnByDate(List<ProjectBurn> projectBurnList, Date date) {
+        for (ProjectBurn burn : projectBurnList) {
+            if (burn.getBurnDate().getTime() == date.getTime()) {
+                return burn;
+            }
+        }
+        return null;
+    }
+
+
 }

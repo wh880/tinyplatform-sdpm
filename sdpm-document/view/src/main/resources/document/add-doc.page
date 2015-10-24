@@ -7,7 +7,7 @@
 #end
 #macro labelRadio1(rId rName rValue rClass radioOther labelText)
 	#@radioBox()
-		<label>#radio1(rId=rId rName=rName rValue=rValue rClass=rClass radioOthe=radioOther)${labelText}</label>
+		#@label() #radio1(rId=rId rName=rName rValue=rValue rClass=rClass radioOthe=radioOther)${labelText}#end
 	#end
 #end
 #include("doc-tab.page")
