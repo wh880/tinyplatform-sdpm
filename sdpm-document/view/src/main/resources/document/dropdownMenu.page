@@ -9,6 +9,7 @@
 			<script type="text/javascript">
 			    $(function(){
 			        $.cookie('documentLibId',"${CmsUtils.getLibList()?.get(0)?.docLibId}");
+			        window.location.reload();
 			    })
 			</script>
 			${CmsUtils.getLibList().get(0).docLibName}

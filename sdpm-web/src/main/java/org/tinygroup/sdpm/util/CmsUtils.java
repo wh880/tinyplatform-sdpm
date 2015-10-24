@@ -151,13 +151,13 @@ public class CmsUtils {
     /**
      * 获得文档库
      */
-    public static DocumentDoclib getDocLib(String libId){
+    public static DocumentDoclib getDocLib(Integer libId){
     	List<DocumentDoclib> libList = getLibList();
         if (libId == null && libList != null && !libList.isEmpty()) {
             return libList.get(0);
         }
         for (DocumentDoclib doclib : libList) {
-            if (doclib.getDocLibId().toString().equals(libId)) {
+            if (doclib.getDocLibId()==libId) {
                 return doclib;
             }
         }

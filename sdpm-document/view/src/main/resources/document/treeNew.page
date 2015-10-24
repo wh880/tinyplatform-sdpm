@@ -17,7 +17,7 @@
 					#end
 				#end
 			#else
-				#if(CmsUtils.getLibList()?.size()>0)
+#*				#if(CmsUtils.getLibList()?.size()>0)
 					<script type="text/javascript">
 					    $(function(){
 					        $.cookie('documentLibId',"${CmsUtils.getLibList()?.get(0)?.docLibId}");
@@ -26,7 +26,7 @@
 					${CmsUtils.getLibList().get(0).docLibName}
 				#else
 					文档库
-				#end
+				#end*#
 		#end 
 		#end
 		#set(dataUrl = "/system/module/tree?moduleType=doc&moduleRoot="+documentLibId)
