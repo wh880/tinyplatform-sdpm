@@ -16,6 +16,7 @@ import org.tinygroup.sdpm.product.dao.pojo.ProductRelease;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.product.service.ReleaseService;
+import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.sdpm.system.dao.pojo.ProfileType;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.util.LogUtil;
@@ -226,6 +227,26 @@ public class ReleaseAction extends BaseController{
 	}
 	
 	@ResponseBody
+	@RequestMapping("/ajaxDelBug")
+	public Map deleteRelBug(Integer releaseId,String bugId) {
+		
+		ProductRelease release = releaseService.findRelease(releaseId);
+		if(release!=null&&!StringUtil.isBlank(release.getReleaseBugs())){
+			String releaseBugs = release.getReleaseBugs();
+			releaseBugs = storyIdUtils(releaseBugs,bugId==null?"":bugId.trim());
+			release.setReleaseBugs(releaseBugs);;
+			releaseService.updateRelease(release);
+		}
+		
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("status", "success");
+		map.put("info", "成功");
+
+		return map;
+	}
+	
+	@ResponseBody
 	@RequestMapping("/ajaxBatchDelAlWork")
 	public Map deleteBatchStory(Integer releaseId,String ids) {
 		
@@ -248,17 +269,68 @@ public class ReleaseAction extends BaseController{
 	}
 	
 	@ResponseBody
+	@RequestMapping("/ajaxBatchDelBug")
+	public Map deleteBatchBug(Integer releaseId,String ids) {
+		
+		ProductRelease release = releaseService.findRelease(releaseId);
+		if(release!=null&&!StringUtil.isBlank(release.getReleaseBugs())){
+			String releaseBugs = release.getReleaseBugs();
+			for (String id : ids.split(",")) {
+				releaseBugs = storyIdUtils(releaseBugs,id==null?"":id.trim());
+			}
+			release.setReleaseBugs(releaseBugs);
+			releaseService.updateRelease(release);
+		}
+		
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("status", "success");
+		map.put("info", "成功");
+
+		return map;
+	}
+	
+	@ResponseBody
 	@RequestMapping("/ajaxRelateStory")
 	public boolean RelateStory(@RequestBody ProductStory[] stories){
 		if(stories.length>0&&stories!=null){
 			ProductRelease release = releaseService.findRelease(stories[0].getReleaseId());
-			String releaseStories = release.getReleaseStories();
+			String releaseStories = release==null?"":release.getReleaseStories();
 			for (ProductStory story : stories) {
-				if(release!=null&&!(StringUtil.isBlank(release.getReleaseStories()))){
-					releaseStories = releaseStories + "," + story.getStoryId();
+				if(release!=null&&releaseStories!=null){
+					if("".equals(releaseStories)){
+						releaseStories = releaseStories + story.getStoryId();
+					}else{
+						releaseStories = releaseStories + "," + story.getStoryId();
+					}
+					
 				}
 			}
 			release.setReleaseStories(releaseStories);
+			releaseService.updateRelease(release);
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping("/ajaxRelateBug")
+	public boolean RelateBug(@RequestBody QualityBug[] bugs){
+		if(bugs.length>0&&bugs!=null){
+			ProductRelease release = releaseService.findRelease(bugs[0].getReleaseId());
+			String releaseBugs = release==null?"":release.getReleaseBugs();
+			for (QualityBug bug : bugs) {
+				if(release!=null&&releaseBugs!=null){
+					if("".equals(releaseBugs)){
+						releaseBugs = releaseBugs + bug.getBugId();
+					}else{
+						releaseBugs = releaseBugs + "," + bug.getBugId();
+					}
+					
+				}
+			}
+			release.setReleaseBugs(releaseBugs);
 			releaseService.updateRelease(release);
 			return true;
 		}else{

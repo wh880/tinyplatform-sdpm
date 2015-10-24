@@ -223,7 +223,7 @@
         <menu id="product-release-badel" name="批量删除" href="" icon="" sort="1" isShow="1"
               scope="release-badel"/>
    <menu id="aboutstory" name="删除" href="/product/release/ajaxDelAlWork?storyId=${story.storyId}&amp;releaseId=${releaseId}" icon="icon-remove" sort="1" isShow="1" scope="release-linkdemand"/>
- 		<menu id="aboutbug" name="删除" href="/quality/bug/delete?bugId=${bug.bugId}" icon="icon-remove" sort="1" isShow="1" scope="release-linkbug"/>
+ 		<menu id="aboutbug" name="删除" href="/product/release/ajaxDelBug?bugId=${bug.bugId}&amp;releaseId=${releaseId}" icon="icon-remove" sort="1" isShow="1" scope="release-linkbug"/>
     </menu>
 
     <menu id="product-roadmap" parent-id="myproduct" name="路线图" href="/product/common/roadMap"
