@@ -10,9 +10,9 @@ ${casepager?.totalCount+1}
 #for(c:casepager?.records)
 #@tr()
     #@td()<input type="checkbox" value="${c?.caseId}" name="idCheck">#end
-    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/caseInfo.page">${c?.caseId}</a>#end
+    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/testCase/case/viewInfo?id=${c?.caseId}">${c?.caseId}</a>#end
     #@td()${getDict("casePriority",c?.priority)}#end
-    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/caseInfo.page">${c?.caseTitle}</a>#end
+    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/testCase/case/viewInfo?id=${c?.caseId}">${c?.caseTitle}</a>#end
     #@td()${getDict("caseType",c?.caseType)}#end
     #@td()${c?.caseOpenedBy?UserUtils.getUserById(c?.caseOpenedBy)?.orgUserRealName:""}#end
     #@td()${c?.caseLastRunner?UserUtils.getUserById(c?.caseLastRunner)?.orgUserRealName:""}#end

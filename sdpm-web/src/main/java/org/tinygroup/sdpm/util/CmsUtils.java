@@ -81,7 +81,7 @@ public class CmsUtils {
     }
 
     /**
-     * 获得产品线列表
+     * 获得产品列表
      */
     public static List<Product> getProductList() {
         List<Product> projectList = (List<Product>) CacheUtils.get(CMS_CACHE, CMS_CACHE_PRODUCCT_LIST);
@@ -101,7 +101,7 @@ public class CmsUtils {
 
 
     /**
-     * 获得产品线列表
+     * 获得产品列表
      */
     public static List<Product> getProductListByLine(Integer productLineId) {
         if (productLineId == null) {

@@ -17,8 +17,8 @@
             			<!--<info name="demandInfo" title="需求信息" resource="productRelease" infoParameter="" url="/product/page/tabledemo/relation-release/releasebaseinfo.pagelet"/> -->
             	</type-info>
       <type-info name="qualityCaseInfo" >
-            	    <info name="caseEditionInfo" title="基本信息" resource="qualityCaseInfo" infoParameter="" url="/testManagement/page/tabledemo/caseEditInfo.pagelet"/>
-            	    <info name="demandInfo" title="需求信息" resource="productRelease" infoParameter="" url="/product/page/tabledemo/relation-release/releasebaseinfo.pagelet"/>
+            	    <info name="caseEditionInfo" title="基本信息" resource="qualityCaseInfo" infoParameter="caseId" url="/quality/testCase/case/rightInfo"/>
+            	    <!--<info name="demandInfo" title="需求信息" resource="productRelease" infoParameter="" url="/product/page/tabledemo/relation-release/releasebaseinfo.pagelet"/>-->
             	</type-info>
      <type-info name="qualityVersionInfo" >
             	    <info name="versionEditionInfo" title="基本信息" resource="qualityVersionInfo" infoParameter="testversionId" url="/quality/version/versionRightInfo"/>

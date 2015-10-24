@@ -98,12 +98,17 @@
 
 #@toggleBox({"class":"open"})
 	#@toggleLeft({"class":"aclass"})
-		#@settoggleLeftTitle()${qualityProduct?.productName}#end
+		#@settoggleLeftTitle()#for(product : CmsUtils.getProductList())
+                              #if(product?.productId == qualityProductId)
+                              ${product?.productName}
+                              #break
+                              #end
+                              #end#end
 			#@settoggleLeftBody("treeLeftbox")
-                #@zTreeList(call("link",adminPath+"/system/module/bugTree?moduleType=bug&moduleRoot="+qualityProduct?.productId))
+                #@zTreeList(call("link",adminPath+"/system/module/bugTree?moduleType=bug&moduleRoot="+qualityProductId))
                     #setzTreeValMap({"id":"moduleId","name":"moduleName","pid":"moduleParent"}) ##key值为固定
                     #zTreeSetLinkUrl(TINY_CONTEXT_PATH+adminPath+"/quality/version/taskToCase?status="+status+"&currentPageId=5&testversionId="+testversionId)
-                    #zTreeSetAddUrl(TINY_CONTEXT_PATH+adminPath+"/system/module/ajax/save?moduleType=bug&moduleRoot="+qualityProduct?.productId)
+                    #zTreeSetAddUrl(TINY_CONTEXT_PATH+adminPath+"/system/module/ajax/save?moduleType=bug&moduleRoot="+qualityProductId)
                     #zTreeSetEditUrl(TINY_CONTEXT_PATH+adminPath+"/system/module/ajax/save")
                     #zTreeSetDelUrl(TINY_CONTEXT_PATH+adminPath+"/system/module/ajax/delete")
                 #end
@@ -133,10 +138,7 @@
         	#end   	 
         	</div>
         <div class="col-0">&nbsp&nbsp</div>
-        <div class="col-2">
-			<a href="#">
-				<input type="button" value="执行" class="btn btn-default btn-primary" />	</a>	
-		</div>			
+
 	</div>
 	<span class=" form-inline">
 #setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置

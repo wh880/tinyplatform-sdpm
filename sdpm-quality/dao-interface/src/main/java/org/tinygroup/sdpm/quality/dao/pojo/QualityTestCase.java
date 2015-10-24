@@ -103,8 +103,7 @@ public class QualityTestCase implements Serializable {
 	 * 
 	 */
 	private String caseType;
-
-	/** 
+	/**
 	 * 适用阶段
 	 * 
 	 */

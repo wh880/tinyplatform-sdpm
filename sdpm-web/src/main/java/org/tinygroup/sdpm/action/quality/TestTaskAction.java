@@ -288,6 +288,7 @@ public class TestTaskAction extends BaseController {
 			conditions = mergeCondition(conditions,StringUtil.isBlank(moduleCondition)?"":(" module_id "+moduleCondition));
 		}
 		Pager<QualityTestRun> runsPager = testRunService.findTestRunPager(start,limit,run,conditions,order,"asc".equals(ordertype)?true:false);
+		//增加case删除位判断
 		model.addAttribute("runsPager",runsPager);
 		return "/testManagement/data/verCaseData.pagelet";
 	}
