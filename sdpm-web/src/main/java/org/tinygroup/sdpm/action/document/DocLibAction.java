@@ -14,6 +14,7 @@ import org.tinygroup.sdpm.document.service.inter.DocService;
 import org.tinygroup.sdpm.util.CmsUtils;
 import org.tinygroup.sdpm.util.CookieUtils;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.List;
@@ -37,7 +38,7 @@ public class DocLibAction extends BaseController {
      * @return
      */
     @RequiresPermissions(value = {"doclib-add"})
-    @RequestMapping(value = "/doclib/toAdd")
+    @RequestMapping(value = "/toAdd")
     public String addDocLib() {
         return "/document/add-doclib.pagelet";
     }
@@ -87,10 +88,14 @@ public class DocLibAction extends BaseController {
     @RequiresPermissions(value = {"doclib-delete"})
     @ResponseBody
     @RequestMapping(value = "/delete")
-    public Map delDocLib(Integer id) {
+    public Map delDocLib(@CookieValue(required = false, value = COOKIE_DOCLIB_ID) String documentLibId, Integer id,
+    					HttpServletRequest request, HttpServletResponse response) {
         List<DocumentDoclib> list = docservice.findDoclibList(null);
         if (id != list.get(0).getDocLibId() && id != list.get(1).getDocLibId()) {
             docservice.deleteDoclibById(id);
+            CmsUtils.removeDocLibList();
+            documentLibId = "1";
+            CookieUtils.setCookie(response, COOKIE_DOCLIB_ID, documentLibId.toString(), -1);
             Map<String, String> map = new HashMap<String, String>();
             map.put("status", "success");
             map.put("info", "删除成功");

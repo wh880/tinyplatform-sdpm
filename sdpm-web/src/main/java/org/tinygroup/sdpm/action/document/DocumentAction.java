@@ -74,7 +74,7 @@ public class DocumentAction extends BaseController {
                 }
             }
         }
-        model.addAttribute("documentLibId", documentLibId);
+        model.addAttribute(COOKIE_DOCLIB_ID, documentLibId);
 
         List<OrgUser> userList = userService.findUserList(null);
 

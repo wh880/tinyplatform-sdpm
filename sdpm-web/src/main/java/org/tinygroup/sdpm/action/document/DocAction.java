@@ -89,11 +89,12 @@ public class DocAction extends BaseController {
         if ("desc".equals(ordertype)) {
             asc = false;
         }
-        Integer libId = Integer.parseInt(CookieUtils.getCookie(request, DocAction.COOKIE_DOCLIB_ID));
+        Integer libId = Integer.valueOf(CookieUtils.getCookie(request, DocAction.COOKIE_DOCLIB_ID));
+        doc.setDocLibId(libId);
         String condition = null;
         if (!StringUtil.isBlank(moduleId)) {
             if (moduleId.contains("p") && libId == 1) {
-                doc.setDocProduct(Integer.parseInt(moduleId.substring(1)));
+                doc.setDocProduct(Integer.parseInt(moduleId.substring(1)));             
                 Pager<DocumentDoc> docpager = docservice.findDocRetPager(limit * (page - 1), limit, doc, condition, searchInfos, groupOperate, order, asc);
                 model.addAttribute("docpager", docpager);
             } else if (moduleId.contains("p") && libId == 2) {
@@ -118,7 +119,7 @@ public class DocAction extends BaseController {
                 model.addAttribute("docpager", docpager);
             }
         } else {
-            doc.setDocLibId(libId);
+            //doc.setDocLibId(libId);
             Pager<DocumentDoc> docpager = docservice.findDocRetPager(limit * (page - 1), limit, doc, null, searchInfos, groupOperate, order, asc);
             model.addAttribute("docpager", docpager);
         }
