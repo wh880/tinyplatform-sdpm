@@ -21,11 +21,16 @@
     #end
 #end
 <script type="text/javascript">
-    $(function () {
+		$(function(){
+				$("#lib-id-select").on("change",function(){		
+					window.location.href='${TINY_CONTEXT_PATH+adminPath}/document?docLibId='+$(this).find("option:selected").val();
+				});
+			});
+#*    $(function () {
         $("#lib-id-select").on("change", function () {
             var dataValue = $(this).val();
             $.cookie('documentLibId', dataValue);
             window.location.reload();
         });
-    });
+    });*#
 </script>
