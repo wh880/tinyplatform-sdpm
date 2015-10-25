@@ -54,7 +54,7 @@ public class BurnAction extends BaseController {
      */
     @RequestMapping("/init")
     public String initBurn(@CookieValue(value = TaskAction.COOKIE_PROJECT_ID, required = false) Integer projectId,
-                           Integer choose, Integer interval, Model model) {
+                           Integer choose, Integer interval, Model model, String ajax) {
         if (interval == null) {
             interval = 3;
         }
@@ -92,9 +92,9 @@ public class BurnAction extends BaseController {
         model.addAttribute("average", mapper.toJson(averageList));
         model.addAttribute("days", mapper.toJson(dateList));
         model.addAttribute("left", mapper.toJson(leftList));
-
+        model.addAttribute("interval", interval);
         model.addAttribute("choose", choose);
-        return "project/task/projectBurn.page";
+        return "project/task/projectBurn.page" + (ajax == null ? "" : "let");
     }
 
     @ResponseBody
