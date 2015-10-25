@@ -173,14 +173,9 @@
             #@colLabel()分组白名单#end
             #@skinMinimal()
                 #@Tcheckboxes("productWhiteList" product?.productWhiteList)
-                    #@Tcheckbox("admin")管理员#end
-                    #@Tcheckbox("develop")研发#end
-                    #@Tcheckbox("test")测试#end
-                    #@Tcheckbox("projectManager")项目经理#end
-                    #@Tcheckbox("productManager")产品经理#end
-                    #@Tcheckbox("developSupervisor")研发主管#end
-                    #@Tcheckbox("productSupervisor")产品主管#end
-                    #@Tcheckbox("testSupervisor")测试主管#end
+                    #foreach(source:getDict("productwhiteList"))
+                        #@Tcheckbox(source?.value)${source?.text}#end
+                    #end
                 #end
 
 

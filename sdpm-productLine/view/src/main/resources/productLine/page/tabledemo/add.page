@@ -141,7 +141,7 @@
         #@colLabel()访问控制：#end
         #@skinMinimal("col-8")
 
-            #@Tradioes("acl" "0" {"onclick":"setWhite(this.value)"})
+            #@Tradioes("acl" productLine?.acl {"onclick":"setWhite(this.value)"})
                 #foreach(source:getDict("lineAccessControl"))
                 <div>#@Tradio(source?.value)${source?.text}#end</div>
                 #end
@@ -150,10 +150,10 @@
         #@validateDiv("col-2")#end
     #end
 
-    #@elementItem(elementId="whitelistBox" eleItemClass="hidden hidden_namesty")
+    #@elementItem("whitelistBox" productLine?.acl!=1?'hidden':'')
         #@colLabel()分组白名单#end
         #@skinMinimal("col-8")
-            #@Tcheckboxes("productLineWhiteList" "")
+            #@Tcheckboxes("productLineWhiteList" productLine?.productLineWhiteList)
                 #foreach(source:getDict("whiteList"))
                     #@Tcheckbox(source?.value)${source?.text}#end
                 #end

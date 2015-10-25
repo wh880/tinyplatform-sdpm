@@ -117,7 +117,7 @@ public class ProductAction extends BaseController {
                 null,
                 systemAction.getActionComment());
 
-        return "redirect:" + "/product/page/tabledemo/product-listall.page";
+        return "redirect:" + adminPath + "/product/allproduct/addition";
 
     }
 
