@@ -156,7 +156,7 @@
 
     <menu id="test" parent-id="project" name="测试" href="/project/manage/test/index" icon="" sort="1" isShow="1">
         <menu id="test-menu" name="任务菜单" href="/project/version/index.page" icon="" sort="1" isShow="1">
-            <menu id="pro-test-report" name="提交测试" href="/testManagement/page/proposeversion.page" icon="icon-plus" sort="8" isShow="1"
+            <menu id="pro-test-report" name="提交测试" href="/quality/version/add" icon="icon-plus" sort="8" isShow="1"
                   scope="pro-testmenu-op"/>
         </menu>
     </menu>

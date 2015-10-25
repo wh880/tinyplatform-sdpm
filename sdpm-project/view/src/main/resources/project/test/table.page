@@ -1,27 +1,36 @@
 #!set(activeTitle="项目测试",activeMenuId=currentPageId)
 #@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
     #@div(divBaseClass="tinyheaderTools form-inline")
-        #setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置
-        #@mulOperation("muldelete" "http://127.0.0.1:8080/sdpm-service/service/client/test.pagelet")             <a
-                href="javascript:;" class="btn radius btn-danger btn-sm "><i class="icon-trash"></i> 批量删除</a>#end
-    #*<a href="#" class="btn btn-default btn-sm">产品</a>
-    <a href="#" class="btn btn-success btn-sm">Bug</a>
-    <a href="#" class="btn btn-primary btn-sm">工程</a>
-    <a href="#" class="btn btn-info btn-sm">历史</a>
-    <a href="#" class="btn btn-warning btn-sm">相关</a>*#
+    <div class="f col-3">
+        <input type="button" value="全选" class="btn btn-default btn-primary col-2"
+               onclick="selectAllNullorReserve('idCheck','全选');"/>
+
+        <div class="col-0">&nbsp&nbsp</div>
+        <input type="button" value="反选" class="btn btn-default btn-primary col-2"
+               onclick="selectAllNullorReserve('idCheck','反选');"/>
+
+        <div class="col-0">&nbsp&nbsp</div>
+
+        <div class="col-2">
+            #@mulOperation("batchDelete" TINY_CONTEXT_PATH+adminPath+"/quality/version/ajax/batchDelete")
+                <a href="javascript:;" class="btn radius btn-danger "><i class="icon-trash"></i>批量删除</a>#end
+        </div>
+    </div>
+        #setTinyTablePageSize([10,20,50,100,200,35])
     #end
-    #@tinyTableContent("tableData.pagelet") ##取数据地址 总数据
+    #@tinyTableContent(TINY_CONTEXT_PATH+adminPath+"/quality/version/project/findPager") ##取数据地址 总数据
         #@thead()
             #@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
-                #@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
-                #@tinyTh({"class":"","rel":"sortname"})ID#end
-                #@tinyTh({"class":"","rel":"sortname"})任务名称#end
-                #@tinyTh({"class":"","rel":"sortname"})版本#end
-                #@tinyTh({"class":"","rel":"sortname"})负责人#end
-                #@tinyTh({"class":"","rel":"sortname"})开始日期#end
-                #@tinyTh({"class":"","rel":"sortname"})结束日期#end
-                #@tinyTh({"class":"","rel":"sortname"})状态#end
-                #@tinyTh({"class":"","rel":"sortname"})操作#end
+                #@tinyTh({"width":"6"})<input type="checkbox" name="" value="">#end
+                #@tinyTh({"class":"sorting","rel":"testversion_id"})ID#end
+                #@tinyTh({"class":"sorting","rel":"testtask_title"})任务名称#end
+                #@tinyTh({"class":"sorting","rel":"project_id"})所属项目#end
+                #@tinyTh({"class":"sorting","rel":"build_name"})版本#end
+                #@tinyTh({"class":"sorting","rel":"testtask_owner","style":"color:#333"})负责人#end
+                #@tinyTh({"class":"sorting","rel":"testtask_begin"})开始日期#end
+                #@tinyTh({"class":"sorting","rel":"testtask_end"})结束日期#end
+                #@tinyTh({"class":"sorting","rel":"testtask_status"})状态#end
+                #@tinyTh({"class":"","rel":""})操作#end
             #end
         #end
     #end

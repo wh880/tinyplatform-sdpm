@@ -630,6 +630,13 @@ public class TaskAction extends BaseController {
         return map;
     }
 
+    @RequestMapping("reportform")
+    public String reportform() {
+        return "project/task/reportform.page";
+    }
+
+
+
     private Map<String, String> getMap(Integer res, String successMsg, String falseMsg) {
         Map<String, String> map = new HashMap<String, String>();
         if (res > 0) {
