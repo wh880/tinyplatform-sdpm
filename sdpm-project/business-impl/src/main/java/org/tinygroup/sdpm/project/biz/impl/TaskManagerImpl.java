@@ -104,4 +104,8 @@ public class TaskManagerImpl implements TaskManager {
 
         return taskDao.edit(task);
     }
+
+    public List<ProjectTask> findAll() {
+        return taskDao.findAll();
+    }
 }

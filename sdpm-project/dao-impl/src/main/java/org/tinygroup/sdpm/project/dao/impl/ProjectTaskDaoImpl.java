@@ -52,6 +52,11 @@ import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 @Repository
 public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTaskDao {
 
+    public List<ProjectTask> findAll() {
+        Select select = selectFrom(PROJECT_TASKTABLE);
+        return getDslSession().fetchList(select, ProjectTask.class);
+    }
+
     public Integer batchSoftDel(String condition) {
         Update update = update(PROJECT_TASKTABLE).set(PROJECT_TASKTABLE.TASK_DELETED.value(1))
                 .where(
@@ -362,39 +367,39 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
                         .from(PROJECT_TASKTABLE)
                         .join(Join.leftJoin(PROJECTTABLE, PROJECT_TASKTABLE.TASK_PROJECT.eq(PROJECTTABLE.PROJECT_ID)))
                         .where(
-                        and(
-                                fragmentCondition(condition),
-                                PROJECT_TASKTABLE.TASK_PROJECT.eq(t.getTaskProject()),
-                                PROJECT_TASKTABLE.TASK_STORY.eq(t.getTaskStory()),
-                                PROJECT_TASKTABLE.TASK_STORY_VERSION.eq(t.getTaskStoryVersion()),
-                                PROJECT_TASKTABLE.TASK_MOMODULE.eq(t.getTaskModule()),
-                                PROJECT_TASKTABLE.TASK_FROM_BUG.eq(t.getTaskFromBug()),
-                                PROJECT_TASKTABLE.TASK_NAME.eq(t.getTaskName()),
-                                PROJECT_TASKTABLE.TASK_TYPE.eq(t.getTaskType()),
-                                PROJECT_TASKTABLE.TASK_PRI.eq(t.getTaskPri()),
-                                PROJECT_TASKTABLE.TASK_ESTIMATE.eq(t.getTaskEstimate()),
-                                PROJECT_TASKTABLE.TASK_CONSUMED.eq(t.getTaskConsumed()),
-                                PROJECT_TASKTABLE.TASK_LEFT.eq(t.getTaskLeft()),
-                                PROJECT_TASKTABLE.TASK_DEAD_LINE.eq(t.getTaskDeadLine()),
-                                PROJECT_TASKTABLE.TASK_STATUS.eq(t.getTaskStatus()),
-                                PROJECT_TASKTABLE.TASK_MAILTO.eq(t.getTaskMailto()),
-                                PROJECT_TASKTABLE.TASK_DESC.eq(t.getTaskDesc()),
-                                PROJECT_TASKTABLE.TASK_OPEN_BY.eq(t.getTaskOpenBy()),
-                                PROJECT_TASKTABLE.TASK_OPENED_DATE.eq(t.getTaskOpenedDate()),
-                                PROJECT_TASKTABLE.TASK_ASSIGNED_TO.eq(t.getTaskAssignedTo()),
-                                PROJECT_TASKTABLE.TASK_ASSIGNED_DATE.eq(t.getTaskAssignedDate()),
-                                PROJECT_TASKTABLE.TASK_EST_STARED.eq(t.getTaskEstStared()),
-                                PROJECT_TASKTABLE.TASK_REAL_STARTED.eq(t.getTaskRealStarted()),
-                                PROJECT_TASKTABLE.TASK_FINISHED_BY.eq(t.getTaskFinishedBy()),
-                                PROJECT_TASKTABLE.TASK_FINISHED_DATE.eq(t.getTaskFinishedDate()),
-                                PROJECT_TASKTABLE.TASK_CANCELED_BY.eq(t.getTaskCanceledBy()),
-                                PROJECT_TASKTABLE.TASK_CANCELED_DATE.eq(t.getTaskCanceledDate()),
-                                PROJECT_TASKTABLE.TASK_CLOSED_BY.eq(t.getTaskClosedBy()),
-                                PROJECT_TASKTABLE.TASK_CLOSE_DATE.eq(t.getTaskCloseDate()),
-                                PROJECT_TASKTABLE.TASK_CLOSED_REASON.eq(t.getTaskClosedReason()),
-                                PROJECT_TASKTABLE.TASK_LAST_EDITED_BY.eq(t.getTaskLastEditedBy()),
-                                PROJECT_TASKTABLE.TASK_LAST_EDITED_DATE.eq(t.getTaskLastEditedDate()),
-                                PROJECT_TASKTABLE.TASK_DELETED.eq(t.getTaskDeleted())));
+                                and(
+                                        fragmentCondition(condition),
+                                        PROJECT_TASKTABLE.TASK_PROJECT.eq(t.getTaskProject()),
+                                        PROJECT_TASKTABLE.TASK_STORY.eq(t.getTaskStory()),
+                                        PROJECT_TASKTABLE.TASK_STORY_VERSION.eq(t.getTaskStoryVersion()),
+                                        PROJECT_TASKTABLE.TASK_MOMODULE.eq(t.getTaskModule()),
+                                        PROJECT_TASKTABLE.TASK_FROM_BUG.eq(t.getTaskFromBug()),
+                                        PROJECT_TASKTABLE.TASK_NAME.eq(t.getTaskName()),
+                                        PROJECT_TASKTABLE.TASK_TYPE.eq(t.getTaskType()),
+                                        PROJECT_TASKTABLE.TASK_PRI.eq(t.getTaskPri()),
+                                        PROJECT_TASKTABLE.TASK_ESTIMATE.eq(t.getTaskEstimate()),
+                                        PROJECT_TASKTABLE.TASK_CONSUMED.eq(t.getTaskConsumed()),
+                                        PROJECT_TASKTABLE.TASK_LEFT.eq(t.getTaskLeft()),
+                                        PROJECT_TASKTABLE.TASK_DEAD_LINE.eq(t.getTaskDeadLine()),
+                                        PROJECT_TASKTABLE.TASK_STATUS.eq(t.getTaskStatus()),
+                                        PROJECT_TASKTABLE.TASK_MAILTO.eq(t.getTaskMailto()),
+                                        PROJECT_TASKTABLE.TASK_DESC.eq(t.getTaskDesc()),
+                                        PROJECT_TASKTABLE.TASK_OPEN_BY.eq(t.getTaskOpenBy()),
+                                        PROJECT_TASKTABLE.TASK_OPENED_DATE.eq(t.getTaskOpenedDate()),
+                                        PROJECT_TASKTABLE.TASK_ASSIGNED_TO.eq(t.getTaskAssignedTo()),
+                                        PROJECT_TASKTABLE.TASK_ASSIGNED_DATE.eq(t.getTaskAssignedDate()),
+                                        PROJECT_TASKTABLE.TASK_EST_STARED.eq(t.getTaskEstStared()),
+                                        PROJECT_TASKTABLE.TASK_REAL_STARTED.eq(t.getTaskRealStarted()),
+                                        PROJECT_TASKTABLE.TASK_FINISHED_BY.eq(t.getTaskFinishedBy()),
+                                        PROJECT_TASKTABLE.TASK_FINISHED_DATE.eq(t.getTaskFinishedDate()),
+                                        PROJECT_TASKTABLE.TASK_CANCELED_BY.eq(t.getTaskCanceledBy()),
+                                        PROJECT_TASKTABLE.TASK_CANCELED_DATE.eq(t.getTaskCanceledDate()),
+                                        PROJECT_TASKTABLE.TASK_CLOSED_BY.eq(t.getTaskClosedBy()),
+                                        PROJECT_TASKTABLE.TASK_CLOSE_DATE.eq(t.getTaskCloseDate()),
+                                        PROJECT_TASKTABLE.TASK_CLOSED_REASON.eq(t.getTaskClosedReason()),
+                                        PROJECT_TASKTABLE.TASK_LAST_EDITED_BY.eq(t.getTaskLastEditedBy()),
+                                        PROJECT_TASKTABLE.TASK_LAST_EDITED_DATE.eq(t.getTaskLastEditedDate()),
+                                        PROJECT_TASKTABLE.TASK_DELETED.eq(t.getTaskDeleted())));
                 return addOrderByElements(select, orderBies);
             }
         });
@@ -411,38 +416,38 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
                         .from(PROJECT_TASKTABLE)
                         .join(Join.leftJoin(PROJECTTABLE, PROJECT_TASKTABLE.TASK_PROJECT.eq(PROJECTTABLE.PROJECT_ID)))
                         .where(
-                        and(
-                                PROJECT_TASKTABLE.TASK_PROJECT.eq(t.getTaskProject()),
-                                PROJECT_TASKTABLE.TASK_STORY.eq(t.getTaskStory()),
-                                PROJECT_TASKTABLE.TASK_STORY_VERSION.eq(t.getTaskStoryVersion()),
-                                PROJECT_TASKTABLE.TASK_MOMODULE.eq(t.getTaskModule()),
-                                PROJECT_TASKTABLE.TASK_FROM_BUG.eq(t.getTaskFromBug()),
-                                PROJECT_TASKTABLE.TASK_NAME.eq(t.getTaskName()),
-                                PROJECT_TASKTABLE.TASK_TYPE.eq(t.getTaskType()),
-                                PROJECT_TASKTABLE.TASK_PRI.eq(t.getTaskPri()),
-                                PROJECT_TASKTABLE.TASK_ESTIMATE.eq(t.getTaskEstimate()),
-                                PROJECT_TASKTABLE.TASK_CONSUMED.eq(t.getTaskConsumed()),
-                                PROJECT_TASKTABLE.TASK_LEFT.eq(t.getTaskLeft()),
-                                PROJECT_TASKTABLE.TASK_DEAD_LINE.eq(t.getTaskDeadLine()),
-                                PROJECT_TASKTABLE.TASK_STATUS.eq(t.getTaskStatus()),
-                                PROJECT_TASKTABLE.TASK_MAILTO.eq(t.getTaskMailto()),
-                                PROJECT_TASKTABLE.TASK_DESC.eq(t.getTaskDesc()),
-                                PROJECT_TASKTABLE.TASK_OPEN_BY.eq(t.getTaskOpenBy()),
-                                PROJECT_TASKTABLE.TASK_OPENED_DATE.eq(t.getTaskOpenedDate()),
-                                PROJECT_TASKTABLE.TASK_ASSIGNED_TO.eq(t.getTaskAssignedTo()),
-                                PROJECT_TASKTABLE.TASK_ASSIGNED_DATE.eq(t.getTaskAssignedDate()),
-                                PROJECT_TASKTABLE.TASK_EST_STARED.eq(t.getTaskEstStared()),
-                                PROJECT_TASKTABLE.TASK_REAL_STARTED.eq(t.getTaskRealStarted()),
-                                PROJECT_TASKTABLE.TASK_FINISHED_BY.eq(t.getTaskFinishedBy()),
-                                PROJECT_TASKTABLE.TASK_FINISHED_DATE.eq(t.getTaskFinishedDate()),
-                                PROJECT_TASKTABLE.TASK_CANCELED_BY.eq(t.getTaskCanceledBy()),
-                                PROJECT_TASKTABLE.TASK_CANCELED_DATE.eq(t.getTaskCanceledDate()),
-                                PROJECT_TASKTABLE.TASK_CLOSED_BY.eq(t.getTaskClosedBy()),
-                                PROJECT_TASKTABLE.TASK_CLOSE_DATE.eq(t.getTaskCloseDate()),
-                                PROJECT_TASKTABLE.TASK_CLOSED_REASON.eq(t.getTaskClosedReason()),
-                                PROJECT_TASKTABLE.TASK_LAST_EDITED_BY.eq(t.getTaskLastEditedBy()),
-                                PROJECT_TASKTABLE.TASK_LAST_EDITED_DATE.eq(t.getTaskLastEditedDate()),
-                                PROJECT_TASKTABLE.TASK_DELETED.eq(t.getTaskDeleted())));
+                                and(
+                                        PROJECT_TASKTABLE.TASK_PROJECT.eq(t.getTaskProject()),
+                                        PROJECT_TASKTABLE.TASK_STORY.eq(t.getTaskStory()),
+                                        PROJECT_TASKTABLE.TASK_STORY_VERSION.eq(t.getTaskStoryVersion()),
+                                        PROJECT_TASKTABLE.TASK_MOMODULE.eq(t.getTaskModule()),
+                                        PROJECT_TASKTABLE.TASK_FROM_BUG.eq(t.getTaskFromBug()),
+                                        PROJECT_TASKTABLE.TASK_NAME.eq(t.getTaskName()),
+                                        PROJECT_TASKTABLE.TASK_TYPE.eq(t.getTaskType()),
+                                        PROJECT_TASKTABLE.TASK_PRI.eq(t.getTaskPri()),
+                                        PROJECT_TASKTABLE.TASK_ESTIMATE.eq(t.getTaskEstimate()),
+                                        PROJECT_TASKTABLE.TASK_CONSUMED.eq(t.getTaskConsumed()),
+                                        PROJECT_TASKTABLE.TASK_LEFT.eq(t.getTaskLeft()),
+                                        PROJECT_TASKTABLE.TASK_DEAD_LINE.eq(t.getTaskDeadLine()),
+                                        PROJECT_TASKTABLE.TASK_STATUS.eq(t.getTaskStatus()),
+                                        PROJECT_TASKTABLE.TASK_MAILTO.eq(t.getTaskMailto()),
+                                        PROJECT_TASKTABLE.TASK_DESC.eq(t.getTaskDesc()),
+                                        PROJECT_TASKTABLE.TASK_OPEN_BY.eq(t.getTaskOpenBy()),
+                                        PROJECT_TASKTABLE.TASK_OPENED_DATE.eq(t.getTaskOpenedDate()),
+                                        PROJECT_TASKTABLE.TASK_ASSIGNED_TO.eq(t.getTaskAssignedTo()),
+                                        PROJECT_TASKTABLE.TASK_ASSIGNED_DATE.eq(t.getTaskAssignedDate()),
+                                        PROJECT_TASKTABLE.TASK_EST_STARED.eq(t.getTaskEstStared()),
+                                        PROJECT_TASKTABLE.TASK_REAL_STARTED.eq(t.getTaskRealStarted()),
+                                        PROJECT_TASKTABLE.TASK_FINISHED_BY.eq(t.getTaskFinishedBy()),
+                                        PROJECT_TASKTABLE.TASK_FINISHED_DATE.eq(t.getTaskFinishedDate()),
+                                        PROJECT_TASKTABLE.TASK_CANCELED_BY.eq(t.getTaskCanceledBy()),
+                                        PROJECT_TASKTABLE.TASK_CANCELED_DATE.eq(t.getTaskCanceledDate()),
+                                        PROJECT_TASKTABLE.TASK_CLOSED_BY.eq(t.getTaskClosedBy()),
+                                        PROJECT_TASKTABLE.TASK_CLOSE_DATE.eq(t.getTaskCloseDate()),
+                                        PROJECT_TASKTABLE.TASK_CLOSED_REASON.eq(t.getTaskClosedReason()),
+                                        PROJECT_TASKTABLE.TASK_LAST_EDITED_BY.eq(t.getTaskLastEditedBy()),
+                                        PROJECT_TASKTABLE.TASK_LAST_EDITED_DATE.eq(t.getTaskLastEditedDate()),
+                                        PROJECT_TASKTABLE.TASK_DELETED.eq(t.getTaskDeleted())));
                 return addOrderByElements(select, orderBies);
             }
         });

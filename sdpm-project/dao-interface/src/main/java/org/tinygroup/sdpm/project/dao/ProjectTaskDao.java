@@ -21,6 +21,8 @@ import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
 import org.tinygroup.tinysqldsl.Pager;
 
+import java.util.List;
+
 public interface ProjectTaskDao extends BaseDao<ProjectTask, Integer> {
 
     public Integer batchSoftDel(String condition);
@@ -48,5 +50,12 @@ public interface ProjectTaskDao extends BaseDao<ProjectTask, Integer> {
     ProjectTask findTaskStory(Integer taskId);
 
     public Integer updateColum(ProjectTask projectTask);
+
+    /**
+     * 查询所有task，用于分类
+     *
+     * @return
+     */
+    public List<ProjectTask> findAll();
 
 }

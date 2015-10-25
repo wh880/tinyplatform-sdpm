@@ -10,6 +10,13 @@ import java.util.List;
  */
 public interface TaskManager {
 
+    /**
+     * 查询所有任务
+     *
+     * @return
+     */
+    public List<ProjectTask> findAll();
+
     public Integer batchSoftDel(String condition);
 
     public int[] batchAdd(List<ProjectTask> taskList);
@@ -52,6 +59,7 @@ public interface TaskManager {
 
     /**
      * 加入状态
+     *
      * @param start
      * @param limit
      * @param task
@@ -85,6 +93,7 @@ public interface TaskManager {
      * @return
      */
     Integer updateTask(ProjectTask task);
+
     /**
      * 更新用户
      *
@@ -92,6 +101,7 @@ public interface TaskManager {
      * @return
      */
     Integer updateEditTask(ProjectTask task);
+
     /**
      * 更新用户
      *
@@ -99,6 +109,7 @@ public interface TaskManager {
      * @return
      */
     Integer updateCallTask(ProjectTask task);
+
     /**
      * 更新用户
      *
@@ -106,6 +117,7 @@ public interface TaskManager {
      * @return
      */
     Integer updateFinishTask(ProjectTask task);
+
     /**
      * 更新用户
      *

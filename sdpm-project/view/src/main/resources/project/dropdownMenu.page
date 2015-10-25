@@ -5,23 +5,22 @@
     #end
     #@navSelect2Body()
         #@navSelect2Data()
-        <option value="">/</option>
         <optgroup label="请选择项目">
             #foreach(p:CmsUtils.getProjectList())
                 <option value="${p.projectId}">${p.projectName}</option>
+            #end
+        </optgroup>
         #end
-    </optgroup>
-    #end
-    #@navSelect2Fix()
-    <a href="${TINY_CONTEXT_PATH+adminPath}/project/preadd">#buttonIcon(iconClass="icon-plus-sign")添加项目</a>
-    #end
-    #@dialog("myModal")
-        #@dialogHeader()对话框标题#end
-        #@dialogBody()<p>对话框内容…</p>#end
-        #@dialogFooter()
+        #@navSelect2Fix()
+        <a href="${TINY_CONTEXT_PATH+adminPath}/project/preadd">#buttonIcon(iconClass="icon-plus-sign")添加项目</a>
+        #end
+        #@dialog("myModal")
+            #@dialogHeader()对话框标题#end
+            #@dialogBody()<p>对话框内容…</p>#end
+            #@dialogFooter()
+            #end
         #end
     #end
-#end
 #end
 <script type="text/javascript">
     $(function () {

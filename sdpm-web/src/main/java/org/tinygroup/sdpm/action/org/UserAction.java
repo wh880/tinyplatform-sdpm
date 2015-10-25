@@ -362,7 +362,7 @@ public class UserAction extends BaseController {
         } else {
             task1.setTaskAssignedTo(id);
         }
-        Pager<ProjectTask> taskPager = taskService.findPagerTask(start, limit, task1, order, false, null, null);
+        Pager<ProjectTask> taskPager = taskService.findPagerTask(start, limit, task1, order, false, null);
         List<Integer> projectIdList = new ArrayList<Integer>();
         for (ProjectTask project : taskPager.getRecords()) {
             projectIdList.add(project.getTaskProject());

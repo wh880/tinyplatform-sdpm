@@ -63,16 +63,19 @@
             <span class="caret"></span>
         </a>
         <ul class="dropdown-menu" aria-labelledby="dLabel">
-            <li><a href="${TINY_CONTEXT_PATH+adminPath}/project/task/index.page">需求分组</a></li>
-            <li><a href="${TINY_CONTEXT_PATH+adminPath}/project/task/index.page">状态分组</a></li>
-            <li><a href="${TINY_CONTEXT_PATH+adminPath}/project/task/index.page">优先分组</a></li>
-            <li><a href="${TINY_CONTEXT_liATH}/liroject/task/index.liage">创建者分组</a></li>
-            <li><a href="${TINY_CONTEXT_liATH}/liroject/task/index.liage">指派给分组</a></li>
-            <li><a href="${TINY_CONTEXT_liATH}/liroject/task/index.liage">完成者分组</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="${TINY_CONTEXT_liATH}/liroject/task/index.liage">关闭者组</a></li>
-            <li><a href="${TINY_CONTEXT_liATH}/liroject/task/index.liage">预计分组</a></li>
-            <li><a href="${TINY_CONTEXT_liATH}/liroject/task/index.liage">已消耗分组</a></li>
+            #foreach(m:menuManager.getScopeMenus("task-group-menu"))
+                <li><a href="${TINY_CONTEXT_PATH+adminPath+m?.href}">${m?.name}</a></li>
+            #end
+        ##            <li><a href="${TINY_CONTEXT_PATH+adminPath}/project/task/index.page">需求分组</a></li>
+        ##            <li><a href="${TINY_CONTEXT_PATH+adminPath}/project/task/index.page">状态分组</a></li>
+        ##            <li><a href="${TINY_CONTEXT_PATH+adminPath}/project/task/index.page">优先分组</a></li>
+        ##            <li><a href="${TINY_CONTEXT_liATH}/liroject/task/index.liage">创建者分组</a></li>
+        ##            <li><a href="${TINY_CONTEXT_liATH}/liroject/task/index.liage">指派给分组</a></li>
+        ##            <li><a href="${TINY_CONTEXT_liATH}/liroject/task/index.liage">完成者分组</a></li>
+        ##            <li role="separator" class="divider"></li>
+        ##            <li><a href="${TINY_CONTEXT_liATH}/liroject/task/index.liage">关闭者组</a></li>
+        ##            <li><a href="${TINY_CONTEXT_liATH}/liroject/task/index.liage">预计分组</a></li>
+        ##            <li><a href="${TINY_CONTEXT_liATH}/liroject/task/index.liage">已消耗分组</a></li>
         </ul>
     </div>
     <a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>

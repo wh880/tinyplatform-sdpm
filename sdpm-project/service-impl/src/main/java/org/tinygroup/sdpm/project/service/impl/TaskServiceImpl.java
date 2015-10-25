@@ -3,14 +3,14 @@ package org.tinygroup.sdpm.project.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.tinygroup.commons.tools.StringUtil;
+import org.tinygroup.sdpm.product.biz.inter.StoryManager;
 import org.tinygroup.sdpm.project.biz.inter.TaskManager;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
 import org.tinygroup.sdpm.project.service.inter.TaskService;
 import org.tinygroup.tinysqldsl.Pager;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.lang.reflect.Method;
+import java.util.*;
 
 /**
  * Created by shenly13343 on 2015-09-20.
@@ -19,6 +19,23 @@ import java.util.Map;
 public class TaskServiceImpl implements TaskService {
     @Autowired
     private TaskManager taskManager;
+    @Autowired
+    private StoryManager storyManager;
+
+    private static Object getFieldValueByName(String fieldName, Object o) {
+        try {
+            String firstLetter = fieldName.substring(0, 1).toUpperCase();
+            String getter = "get" + firstLetter + fieldName.substring(1);
+            Method method = o.getClass().getMethod(getter, new Class[]{});
+            Object value = method.invoke(o, new Object[]{});
+            if (value == null) {
+                value = "";
+            }
+            return value;
+        } catch (Exception e) {
+            return null;
+        }
+    }
 
     public Integer updateDoingTask(ProjectTask task) {
         task.setTaskStatus(task.DOING);
@@ -52,8 +69,7 @@ public class TaskServiceImpl implements TaskService {
         return taskManager.findList(task);
     }
 
-
-    public Pager<ProjectTask> findPagerTask(Integer start, Integer limit, ProjectTask task, String sortName, boolean asc, String condititon, String group) {
+    public Pager<ProjectTask> findPagerTask(Integer start, Integer limit, ProjectTask task, String sortName, boolean asc, String condititon) {
         if (!StringUtil.isBlank(condititon)) {
             return taskManager.findPagerByStatu(start, limit, task, sortName, asc, condititon);
         }
@@ -64,14 +80,15 @@ public class TaskServiceImpl implements TaskService {
         return taskManager.find(taskId);
     }
 
-
     public Integer updateTask(ProjectTask task) {
         return taskManager.update(task);
     }
+
     public Integer updateEditTask(ProjectTask task) {
         task.setTaskLastEditedDate(new Date());
         return taskManager.updateEditTask(task);
     }
+
     public Integer updateCallTask(ProjectTask task) {
         return taskManager.updateColum(task);
     }
@@ -82,12 +99,14 @@ public class TaskServiceImpl implements TaskService {
         task.setTaskLeft(0f);
         return taskManager.updateColum(task);
     }
+
     public Integer updateStartTask(ProjectTask task) {
         task.setTaskRealStarted(new Date());
         task.setTaskStatus("2");
         task.setTaskLastEditedDate(new Date());
         return taskManager.updateColum(task);
     }
+
     public Integer updateCloseTask(ProjectTask task) {
         task.setTaskCloseDate(new Date());
         task.setTaskStatus("6");
@@ -104,6 +123,25 @@ public class TaskServiceImpl implements TaskService {
 
     public Pager<ProjectTask> findComplexTask() {
         return null;
+    }
+
+    public Map<String, List<ProjectTask>> findGroup(String type) {
+        List<ProjectTask> taskList = taskManager.findAll();
+        Map<String, List<ProjectTask>> resMap = new HashMap<String, List<ProjectTask>>();
+        for (ProjectTask task : taskList) {
+            String value = getFieldValueByName(type, task).toString();
+            if (resMap.keySet().contains(value)) {
+                resMap.get(value).add(task);
+            } else {
+                List<ProjectTask> tList = new ArrayList<ProjectTask>();
+                tList.add(task);
+                resMap.put(value, tList);
+            }
+        }
+
+        //转化为前台显示格式
+
+        return resMap;
     }
 
     public Map<String, List<ProjectTask>> findTaskByGroup(int projectId, String colum) {

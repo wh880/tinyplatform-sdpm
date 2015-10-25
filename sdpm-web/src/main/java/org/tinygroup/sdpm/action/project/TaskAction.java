@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.action.project.util.TaskStatusUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
+import org.tinygroup.sdpm.dict.util.DictUtil;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
@@ -87,7 +88,6 @@ public class TaskAction extends BaseController {
         if (taskId != null) {
             ProjectTask task = taskService.findTask(taskId);
             model.addAttribute("task", task);
-            //还需要查询其他相关任务剩余时间的信息
             return "project/task/edit.page";
         }
         return "error";
@@ -238,13 +238,15 @@ public class TaskAction extends BaseController {
     }
 
     @RequestMapping("/findPager")
-    public String findPager(Integer start, Integer limit, String order, String ordertype, String statu, String choose, String group, Integer projectId, Model model, HttpServletRequest request, String moduleId) {
+    public String findPager(@CookieValue(required = false, value = COOKIE_PROJECT_ID) String projectId,
+                            Integer start, Integer limit, String order, String ordertype, String statu,
+                            String choose, Model model, HttpServletRequest request, String moduleId) {
         boolean asc = true;
         if ("desc".equals(ordertype)) {
             asc = false;
         }
         ProjectTask task = new ProjectTask();
-        task.setTaskProject(projectId);
+        task.setTaskProject(Integer.parseInt(projectId));
         String moduleIds = "";
         if (!StringUtil.isBlank(moduleId)) {
             if (moduleId.contains("p")) {
@@ -257,12 +259,12 @@ public class TaskAction extends BaseController {
         if (statu == null && choose == null) {
             statu = "0";
         }
-        String condition = TaskStatusUtil.getCondition(statu, choose, request, moduleIds);
-        Pager<ProjectTask> taskPager = taskService.findPagerTask(start, limit, task, order, asc, condition, group);
+
+        String condition = TaskStatusUtil.getCondition(statu, choose, UserUtils.getUserId(), moduleIds);
+        Pager<ProjectTask> taskPager = taskService.findPagerTask(start, limit, task, order, asc, condition);
         model.addAttribute("taskPager", taskPager);
         model.addAttribute("statu", statu);
         model.addAttribute("choose", choose);
-        model.addAttribute("group", group);
         return "project/task/datalist.pagelet";
     }
 
@@ -563,7 +565,30 @@ public class TaskAction extends BaseController {
     }
 
     @RequestMapping("/grouping")
-    public String grouping(String groupKey, Model model) {
+    public String grouping(String type, Model model) {
+        Map<String, List<ProjectTask>> map = taskService.findGroup(DictUtil.getValue("groupType", type));
+        //转换为前台显示，存在同名问题
+//        Map<String, List<ProjectTask>> resMap = new HashMap<String, List<ProjectTask>>();
+//        if ("1".equals(type)) {
+//            for (String key : map.keySet()) {
+//                resMap.put(productStoryService.findStory(Integer.parseInt(key)).getStoryTitle(), map.get(key));
+//            }
+//        } else if ("2".equals(type)) {
+//            for (String key : map.keySet()) {
+//                resMap.put(DictUtil.getValue("taskStatus", key), map.get(key));
+//            }
+//        } else if ("4".equals(type) || "5".equals(type) || "6".equals(type) || "7".equals(type)) {
+//            for (String key : map.keySet()) {
+//                resMap.put(UserUtils.getUserById(key).getOrgUserRealName(), map.get(key));
+//            }
+//        } else {
+//            for (String key : map.keySet()) {
+//                resMap.put(key, map.get(key));
+//            }
+//        }
+
+        model.addAttribute("map", map);
+        model.addAttribute("type", type);
         return "project/task/grouping.page";
     }
 

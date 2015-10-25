@@ -49,6 +49,7 @@ public class BurnAction extends BaseController {
      *
      * @param choose   激活标签
      * @param interval 选择间隔时间
+     * @param ajax  判断是否为ajax请求的标识位
      * @param model
      * @return
      */

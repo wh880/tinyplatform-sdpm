@@ -60,7 +60,7 @@ public interface TaskService {
      * @param sortName
      * @return
      */
-    public Pager<ProjectTask> findPagerTask(Integer start, Integer limit, ProjectTask task, String sortName, boolean asc, String condition, String group);
+    public Pager<ProjectTask> findPagerTask(Integer start, Integer limit, ProjectTask task, String sortName, boolean asc, String condition);
 
     /**
      * 根据taskId主键查询
@@ -125,4 +125,7 @@ public interface TaskService {
      * @return
      */
     public Pager<ProjectTask> findComplexTask();
+
+
+    Map<String, List<ProjectTask>> findGroup(String type);
 }
