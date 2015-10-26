@@ -19,7 +19,7 @@
     #@td()${productLine?.ownerName}#end
     #@td()${productLine?.qualityManagerName}#end
     #@td()${productLine?.deliveryManagerName}#end
-    #@td()${productLine?.productLineStatus}#end
+    #@td()${getDict("productLineStatus",productLine?.productLineStatus)}#end
     #@td()
         #foreach(m:menuManager.getScopeMenus("productLine-all"))
             #set(url=eval(m.href))
