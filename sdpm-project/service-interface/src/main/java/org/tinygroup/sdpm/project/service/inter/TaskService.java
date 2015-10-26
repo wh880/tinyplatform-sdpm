@@ -1,6 +1,7 @@
 package org.tinygroup.sdpm.project.service.inter;
 
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
+import org.tinygroup.sdpm.project.dao.pojo.TaskChartBean;
 import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.List;
@@ -13,6 +14,7 @@ public interface TaskService {
 
     /**
      * 激活项目
+     *
      * @return
      */
     public Integer updateDoingTask(ProjectTask task);
@@ -54,6 +56,7 @@ public interface TaskService {
 
     /**
      * 分页查询
+     *
      * @param start
      * @param limit
      * @param task
@@ -64,6 +67,7 @@ public interface TaskService {
 
     /**
      * 根据taskId主键查询
+     *
      * @param taskId
      * @return
      */
@@ -77,6 +81,7 @@ public interface TaskService {
      * @return
      */
     public Integer updateTask(ProjectTask projectTask);
+
     /**
      * 跟新任务，包括指派，开始，完成，关闭，编辑
      * 注意：1.状态不可逆转 2.有前置条件判断
@@ -85,6 +90,7 @@ public interface TaskService {
      * @return
      */
     public Integer updateEditTask(ProjectTask projectTask);
+
     /**
      * 跟新任务，包括指派，开始，完成，关闭，编辑
      * 注意：1.状态不可逆转 2.有前置条件判断
@@ -93,6 +99,7 @@ public interface TaskService {
      * @return
      */
     public Integer updateCallTask(ProjectTask projectTask);
+
     /**
      * 跟新任务，包括指派，开始，完成，关闭，编辑
      * 注意：1.状态不可逆转 2.有前置条件判断
@@ -101,6 +108,7 @@ public interface TaskService {
      * @return
      */
     public Integer updateCloseTask(ProjectTask projectTask);
+
     /**
      * 跟新任务，包括指派，开始，完成，关闭，编辑
      * 注意：1.状态不可逆转 2.有前置条件判断
@@ -109,6 +117,7 @@ public interface TaskService {
      * @return
      */
     public Integer updateStartTask(ProjectTask projectTask);
+
     /**
      * 跟新任务，包括指派，开始，完成，关闭，编辑
      * 注意：1.状态不可逆转 2.有前置条件判断
@@ -119,6 +128,7 @@ public interface TaskService {
     public Integer updateFinishTask(ProjectTask projectTask);
 
     public Integer updateCancelTask(ProjectTask task);
+
     /**
      * 复杂查询
      *
@@ -126,6 +136,19 @@ public interface TaskService {
      */
     public Pager<ProjectTask> findComplexTask();
 
+    /**
+     * 分组查看
+     *
+     * @param type
+     * @return
+     */
+    Map<String, List<ProjectTask>> findGroup(String type, Integer projectId);
 
-    Map<String, List<ProjectTask>> findGroup(String type);
+    /**
+     * 根据不同类型生成图表所需list
+     *
+     * @param id
+     * @return
+     */
+    public List<TaskChartBean> buildChart(String id);
 }

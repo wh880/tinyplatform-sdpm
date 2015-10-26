@@ -65,4 +65,21 @@
         <dictItem key="6" value="taskFinishedBy" sort="6"/>
         <dictItem key="7" value="taskClosedBy" sort="7"/>
     </dictNodeEntry>
+    <dictNodeEntry name="chartType" title="报表类型">
+        <dictItem key="1" value="项目任务统计" sort="1"/>
+        <dictItem key="2" value="模块任务数统计" sort="2"/>
+        <dictItem key="3" value="任务类型统计" sort="3"/>
+        <dictItem key="4" value="优先级统计" sort="4"/>
+        <dictItem key="5" value="任务状态统计" sort="5"/>
+        <dictItem key="6" value="截止日期统计" sort="6"/>
+        <dictItem key="7" value="预计剩余时间统计" sort="7"/>
+        <dictItem key="8" value="剩余时间统计" sort="8"/>
+        <dictItem key="9" value="消耗时间统计" sort="9"/>
+        <dictItem key="10" value="由谁完成统计" sort="10"/>
+        <dictItem key="11" value="每天完成统计" sort="11"/>
+        <!--<dictItem key="7" value="Bug状态统计" sort="12"/>-->
+        <!--<dictItem key="4" value="Bug激活次数统计" sort="13"/>-->
+        <!--<dictItem key="5" value="Bug类型统计" sort="14"/>-->
+        <!--<dictItem key="6" value="指派给统计" sort="15"/>-->
+    </dictNodeEntry>
 </dictNodeEntries>

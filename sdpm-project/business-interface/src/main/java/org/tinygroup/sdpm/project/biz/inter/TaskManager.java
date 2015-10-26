@@ -1,6 +1,7 @@
 package org.tinygroup.sdpm.project.biz.inter;
 
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
+import org.tinygroup.sdpm.project.dao.pojo.TaskChartBean;
 import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.List;
@@ -143,4 +144,7 @@ public interface TaskManager {
     Integer delete(int id);
 
     Integer updateCloseTask(ProjectTask task);
+
+
+    List<TaskChartBean> findByGroup();
 }

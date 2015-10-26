@@ -56,112 +56,63 @@
     #@toggleLeft({"class":"aclass","style":"width:250px;height:450px;overflow:auto"})
         #@settoggleLeftTitle()请选择报表类型#end
         #@settoggleLeftBody()
+        ##            #@Tcheckboxes("array" "")
             #@skinMinimal()
-                #labelCheckbox(ckId="checkbox-1" labelText="项目Bug数量")
-                #labelCheckbox(ckId="checkbox-3" labelText="版本Bug数量")
-                #labelCheckbox(ckId="checkbox-4" labelText="模块Bug数量")
-                #labelCheckbox(ckId="checkbox-5" labelText="每天新增Bug数")
-                #labelCheckbox(ckId="checkbox-6" labelText="每天解决Bug数")
-                #labelCheckbox(ckId="checkbox-7" labelText="每天关闭的Bug数")
-                #labelCheckbox(ckId="checkbox-8" labelText="每人提交的Bug数")
-                #labelCheckbox(ckId="checkbox-9" labelText="每人解决的Bug数")
-                #labelCheckbox(ckId="checkbox-10"labelText="每人关闭的Bug数")
-                #labelCheckbox(ckId="checkbox-11"labelText="Bug严重程度统计")
-                #labelCheckbox(ckId="checkbox-12"labelText="Bug解决方案统计")
-                #labelCheckbox(ckId="checkbox-13"labelText="Bug状态统计")
-                #labelCheckbox(ckId="checkbox-14"labelText="Bug激活次数统计")
-                #labelCheckbox(ckId="checkbox-14"labelText="Bug类型统计")
-                #labelCheckbox(ckId="checkbox-14"labelText="指派给统计")
+                #foreach(t:getDict("chartType"))
+                ##@tinyCheckBox(t?.value)${t?.text}#end
+                    #labelCheckbox(ckName="array" ckId="cid"+t.value labelText=t.text)
+                #end
+            <script>
+                $(function () {
+                    $("#buildChart").click(function (e) {
+                        console.log("gg");
+                        var list = [];
+                        $(".togglebox input:checkbox").each(function (i) {
+                            if (this.checked) {
+                                list.push($(this).attr("id").substring(3));
+                            }
+                        });
+                        console.log(list);
+                    ##                        $.ajax({
+                    ##                            url: "${TINY_CONTEXT_PATH+adminPath}/project/task/buildChart",
+                    ##                            dataType: "html",
+                    ##                            data: {ids : list.join(",")},
+                    ##                            success: function(data){
+                    ##                                $("#chart").html(data);
+                    ##                                //刷新数据
+                    ##                            },
+                    ##                            error :　function(data){
+                    ##                                layer.msg(data.info, 2, 9);
+                    ##                            }
+                    ##                        });
+                    });
+                });
+            </script>
+            ##                #labelCheckbox(ckId="checkbox-1" labelText="项目任务统计")
+            ##                #labelCheckbox(ckId="checkbox-3" labelText="版本Bug数量")
+            ##                #labelCheckbox(ckId="checkbox-4" labelText="模块Bug数量")
+            ##                #labelCheckbox(ckId="checkbox-5" labelText="每天新增Bug数")
+            ##                #labelCheckbox(ckId="checkbox-6" labelText="每天解决Bug数")
+            ##                #labelCheckbox(ckId="checkbox-7" labelText="每天关闭的Bug数")
+            ##                #labelCheckbox(ckId="checkbox-8" labelText="每人提交的Bug数")
+            ##                #labelCheckbox(ckId="checkbox-9" labelText="每人解决的Bug数")
+            ##                #labelCheckbox(ckId="checkbox-10"labelText="每人关闭的Bug数")
+            ##                #labelCheckbox(ckId="checkbox-11"labelText="Bug严重程度统计")
+            ##                #labelCheckbox(ckId="checkbox-12"labelText="Bug解决方案统计")
+            ##                #labelCheckbox(ckId="checkbox-13"labelText="Bug状态统计")
+            ##                #labelCheckbox(ckId="checkbox-14"labelText="Bug激活次数统计")
+            ##                #labelCheckbox(ckId="checkbox-14"labelText="Bug类型统计")
+            ##                #labelCheckbox(ckId="checkbox-14"labelText="指派给统计")
             #end
             #buttonRadiusDefault(btId="but1" btClass="but1" caption="全选")
             #buttonRadiusDefault(btId="but2" btClass="but2" caption="反选")
-            #buttonRadiusDanger(caption="生成报表")
-
+            #buttonRadiusDanger("buildChart" "buildChart" caption="生成报表")
         #end
     #end
     #@toggleRight("tableBoxessty")
         #@settoggleLeftTitle()报表#end
-    <table class="table table-border table-bordered" cellspacing="0">
-        #@centerAlignTr()
-            #@th("text-r" "vertical-align:middle;width:20%")
-                #@pieChart(pieChartStyle="width:600px;margin:0 auto;")
-                    <!---myTable5 start---->
-                    <table id='myTable5'>
-                        <caption>会员地区分布</caption>
-                        <thead>
-                        <tr>
-                            <th></th>
-                            <th>河北</th>
-                            <th>河南</th>
-                            <th>湖北</th>
-                            <th>湖南</th>
-                            <th>山东</th>
-                            <th>山西</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <th>1200</th>
-                            <td>540</td>
-                            <td>300</td>
-                            <td>150</td>
-                            <td>180</td>
-                            <td>120</td>
-                            <td>180</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                #end
-                #pieChartInit("#myTable5" "PieChart" "No of players" "Month",600,350)
-            #end
-            #@td()
-                <table class="table table-border table-bordered" cellspacing="0">
-                    #!set(num=2000)
-                    #@theadCenterMenu()   #@th()会员地区#end        #@th()需求数#end  #@th()百分比#end #end
-                    #@centerAlignTr()
-
-                        #@td()河北#end
-                        #@td()1200#end
-                        #@td()
-                            ${sum}
-                        #end
-                    #end
-                    #@centerAlignTr()
-                        #@td()河南#end
-                        #@td()1200#end
-                        #@td()
-                            ${540/200}
-                        #end
-                    #end
-                    #@centerAlignTr()
-                        #@td()湖北#end
-                        #@td()1200#end
-                        #@td()
-
-                        #end
-                    #end
-                    #@centerAlignTr()
-                        #@td()湖南#end
-                        #@td()1200#end
-                        #@td()
-                        #end
-                    #end
-                    #@centerAlignTr()
-                        #@td()山东#end
-                        #@td()1200#end
-                        #@td()
-                        #end
-                    #end
-                    #@centerAlignTr()
-                        #@td()山西#end
-                        #@td()1200#end
-                        #@td()
-                        #end
-                    #end
-                </table>
-            #end
-        #end
-    </table>
+    <div id="chart"></div>
+    ##        #include("project/task/reportFormDate.page")
     #end
 #end
 

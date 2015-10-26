@@ -8,6 +8,7 @@ import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.project.biz.inter.TaskManager;
 import org.tinygroup.sdpm.project.dao.ProjectTaskDao;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
+import org.tinygroup.sdpm.project.dao.pojo.TaskChartBean;
 import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.List;
@@ -91,6 +92,10 @@ public class TaskManagerImpl implements TaskManager {
 
     public Integer updateCloseTask(ProjectTask task) {
         return taskDao.updateColum(task);
+    }
+
+    public List<TaskChartBean> findByGroup() {
+        return taskDao.queryChart();
     }
 
     public Integer updateColum(ProjectTask task) {

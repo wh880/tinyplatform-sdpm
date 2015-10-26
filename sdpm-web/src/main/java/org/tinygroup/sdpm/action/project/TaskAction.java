@@ -565,8 +565,9 @@ public class TaskAction extends BaseController {
     }
 
     @RequestMapping("/grouping")
-    public String grouping(String type, Model model) {
-        Map<String, List<ProjectTask>> map = taskService.findGroup(DictUtil.getValue("groupType", type));
+    public String grouping(@CookieValue(value = TaskAction.COOKIE_PROJECT_ID, required = false) String projectId,
+                           String type, Model model) {
+        Map<String, List<ProjectTask>> map = taskService.findGroup(DictUtil.getValue("groupType", type), Integer.parseInt(projectId));
         //转换为前台显示，存在同名问题
 //        Map<String, List<ProjectTask>> resMap = new HashMap<String, List<ProjectTask>>();
 //        if ("1".equals(type)) {
@@ -630,11 +631,23 @@ public class TaskAction extends BaseController {
         return map;
     }
 
-    @RequestMapping("reportform")
+    @RequestMapping("/reportform")
     public String reportform() {
         return "project/task/reportform.page";
     }
 
+    @RequestMapping("/buildChart")
+    public String buildChart(String[] ids, Model model) {
+        Map<String, List> map = new HashMap<String, List>();
+        if (ids.length > 0) {
+            for (String id : ids) {
+                List list = taskService.buildChart(id);
+                map.put(DictUtil.getValue("chartType", id), list);
+            }
+        }
+        model.addAttribute("map", map);
+        return "project/task/reportFormDate.pagelet";
+    }
 
 
     private Map<String, String> getMap(Integer res, String successMsg, String falseMsg) {

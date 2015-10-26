@@ -19,6 +19,7 @@ package org.tinygroup.sdpm.project.dao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
+import org.tinygroup.sdpm.project.dao.pojo.TaskChartBean;
 import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.List;
@@ -58,4 +59,5 @@ public interface ProjectTaskDao extends BaseDao<ProjectTask, Integer> {
      */
     public List<ProjectTask> findAll();
 
+    List<TaskChartBean> queryChart();
 }

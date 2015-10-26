@@ -6,6 +6,7 @@ import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.product.biz.inter.StoryManager;
 import org.tinygroup.sdpm.project.biz.inter.TaskManager;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
+import org.tinygroup.sdpm.project.dao.pojo.TaskChartBean;
 import org.tinygroup.sdpm.project.service.inter.TaskService;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -125,8 +126,10 @@ public class TaskServiceImpl implements TaskService {
         return null;
     }
 
-    public Map<String, List<ProjectTask>> findGroup(String type) {
-        List<ProjectTask> taskList = taskManager.findAll();
+    public Map<String, List<ProjectTask>> findGroup(String type, Integer projectId) {
+        ProjectTask projectTask = new ProjectTask();
+        projectTask.setTaskProject(projectId);
+        List<ProjectTask> taskList = taskManager.findList(projectTask);
         Map<String, List<ProjectTask>> resMap = new HashMap<String, List<ProjectTask>>();
         for (ProjectTask task : taskList) {
             String value = getFieldValueByName(type, task).toString();
@@ -144,8 +147,16 @@ public class TaskServiceImpl implements TaskService {
         return resMap;
     }
 
+    public List<TaskChartBean> buildChart(String id) {
+        if ("3".equals(id)) {
+            List<TaskChartBean> list = taskManager.findByGroup();
+            return list;
+        } else {
+            return null;
+        }
+    }
+
     public Map<String, List<ProjectTask>> findTaskByGroup(int projectId, String colum) {
-        // TODO Auto-generated method stub
         return null;
     }
 

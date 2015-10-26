@@ -7,7 +7,8 @@
         #@navSelect2Data()
         <optgroup label="请选择项目">
             #foreach(p:CmsUtils.getProjectList())
-                <option value="${p.projectId}">${p.projectName}</option>
+                <option value="${p.projectId}"${currentProjectId
+                ==p.projectId?" selected":""}>${p.projectName}</option>
             #end
         </optgroup>
         #end
@@ -26,7 +27,7 @@
     $(function () {
         $("#sleProject-select").on("change", function (e) {
             window.location.href = "${TINY_CONTEXT_PATH+adminPath}/project/manage/select?projectId="
-                    + $(this).find("option:selected").val()
+                    + $(this).val()
                     + "&oldUrl=${tinyRequestRequestURI.substring(9)}";
         });
     });

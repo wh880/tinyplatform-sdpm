@@ -25,11 +25,13 @@ import org.tinygroup.sdpm.common.log.annotation.LogMethod;
 import org.tinygroup.sdpm.common.util.update.UpdateUtil;
 import org.tinygroup.sdpm.project.dao.ProjectTaskDao;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
+import org.tinygroup.sdpm.project.dao.pojo.TaskChartBean;
 import org.tinygroup.tinysqldsl.*;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 import org.tinygroup.tinysqldsl.select.Join;
 import org.tinygroup.tinysqldsl.select.OrderByElement;
+import org.tinygroup.tinysqldsl.selectitem.FragmentSelectItemSql;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -55,6 +57,14 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
     public List<ProjectTask> findAll() {
         Select select = selectFrom(PROJECT_TASKTABLE);
         return getDslSession().fetchList(select, ProjectTask.class);
+    }
+
+    public List<TaskChartBean> queryChart() {
+        Select select = select(FragmentSelectItemSql.fragmentSelect("count(*) as taskCount, project_task.task_assigned_to"))
+                .from(PROJECT_TASKTABLE)
+                .groupBy(PROJECT_TASKTABLE.TASK_ASSIGNED_TO);
+
+        return getDslSession().fetchList(select, TaskChartBean.class);
     }
 
     public Integer batchSoftDel(String condition) {

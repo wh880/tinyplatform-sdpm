@@ -78,7 +78,7 @@
         ##            <li><a href="${TINY_CONTEXT_liATH}/liroject/task/index.liage">已消耗分组</a></li>
         </ul>
     </div>
-    <a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
+##    <a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
 </span>
 
 ##右侧按钮
