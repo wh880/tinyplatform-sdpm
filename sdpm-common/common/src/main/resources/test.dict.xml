@@ -19,7 +19,8 @@
           <dictItem key="11" value="其他" sort="11"/>
           <dictItem key="12" value="同上" sort="12"/>
           </dictNodeEntry>
-          <dictNodeEntry name="bugResolution" title="解决方案">
+
+        <dictNodeEntry name="bugResolution" title="解决方案">
           <dictItem key="1" value="重复Bug" sort="1"/>
           <dictItem key="2" value="设计如此" sort="2"/>
           <dictItem key="3" value="外部原因" sort="3"/>
@@ -49,7 +50,6 @@
               <dictItem key="11" value="OSX" sort="11"/>
               <dictItem key="12" value="Unix" sort="12"/>
               <dictItem key="13" value="其他" sort="13"/>
-          
           </dictNodeEntry>
           
           <dictNodeEntry name="bugBrowser" title="浏览器">
@@ -72,9 +72,9 @@
               <dictItem key="17" value="遨游" sort="17"/>
               <dictItem key="18" value="UC" sort="18"/>
               <dictItem key="19" value="其他" sort="19"/>
-          
           </dictNodeEntry>
-          <dictNodeEntry name="bugPriority" title="优先级">
+
+        <dictNodeEntry name="bugPriority" title="优先级">
             <dictItem key="1" value="1" sort="1"/>
             <dictItem key="2" value="2" sort="2"/>
             <dictItem key="3" value="3" sort="3"/>
