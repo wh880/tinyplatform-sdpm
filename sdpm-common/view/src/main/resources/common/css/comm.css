@@ -70,8 +70,7 @@
     }
 
     #bodyrap.theme-clean .btn-primary, #bodyrap.theme-clean .btn-primary:focus,.theme-clean .btn-primary, .theme-clean .btn-primary:focus {
-        border: #369 1px solid !important
-		border-color:#369;
+        border: 1px solid #369 !important;
     }
 
     #bodyrap.theme-clean .btn-primary:hover {
@@ -196,7 +195,7 @@
 }
 
 .infoContent {
-    margin: 15px 0px 10px 0px;
+    margin: 15px 0 10px 0;
     padding: 16px 6px;
     border: #eee 1px solid;
     position: relative;
@@ -281,7 +280,7 @@
     color: #fff;
 }
 
-a.btn.btn-sm.backBtn, backBtn {
+a.btn.btn-sm.backBtn, .backBtn {
     text-shadow: 0 1px 0 #fff;
     background-color: #f5f5f5;
     border: 1px solid #ccc;
@@ -426,7 +425,9 @@ a.btn.btn-sm.backBtn, backBtn {
 .dropdown .dropdown-submenu .dropdown-menu{overflow-y: auto;overflow-x: hidden;max-height: 280px;}
 .dropdown .dropdown-submenu .dropdown-show{overflow:visible}
 
-#main-wrapper #main-menu #main-menu-inner {padding-top: 0px;}
+#main-wrapper #main-menu #main-menu-inner {
+    padding-top: 0;
+}
 #main-wrapper #main-menu .navigation>li:first-child{ border-top:0}
 
 .togglenavpart .navtitle{height:43px;}

@@ -12,7 +12,6 @@ import org.tinygroup.sdpm.action.project.util.TaskStatusUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.dict.util.DictUtil;
 import org.tinygroup.sdpm.org.service.inter.UserService;
-import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.service.StoryService;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
@@ -65,9 +64,9 @@ public class TaskAction extends BaseController {
     public String index(@CookieValue(required = false, value = COOKIE_PROJECT_ID) String currentProjectId,
                         HttpServletResponse response, String moduleId, String choose, Model model) {
         if (StringUtil.isBlank(currentProjectId)) {
-            Product product = CmsUtils.getProduct(null);
-            if (null != product) {
-                currentProjectId = product.getProductId().toString();
+            Project project = CmsUtils.getProject(null);
+            if (null != project) {
+                currentProjectId = project.getProjectId().toString();
                 CookieUtils.setCookie(response, COOKIE_PROJECT_ID, currentProjectId);
                 model.addAttribute(COOKIE_PROJECT_ID, currentProjectId);
             }
