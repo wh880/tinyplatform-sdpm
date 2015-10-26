@@ -108,13 +108,13 @@
     #end
     #@elementItem()
         #@sdpmItem("描述")
-            #@tinyueditor("content" "buildDesc" "overflow:auto")说点什么...最少输入10个字符#end
+            #@tinyueditor("content" "buildDesc" "width:15%;overflow:auto")说点什么...最少输入10个字符#end
         #end
 
     #end
     #@elementItem()
         <div class="col-12">
-            <div class="col-3">
+            <div class="col-4">
             </div>
             <div class="col-1">
                 <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
