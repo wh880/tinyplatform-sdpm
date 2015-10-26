@@ -37,11 +37,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.tinygroup.sdpm.org.dao.constant.OrgUserTable.ORG_USERTABLE;
 import static org.tinygroup.sdpm.product.dao.constant.ProductStorySpecTable.PRODUCT_STORY_SPECTABLE;
 import static org.tinygroup.sdpm.product.dao.constant.ProductStoryTable.PRODUCT_STORYTABLE;
 import static org.tinygroup.sdpm.project.dao.constant.ProjectStoryTable.PROJECT_STORYTABLE;
 import static org.tinygroup.sdpm.project.dao.constant.ProjectTable.PROJECTTABLE;
 import static org.tinygroup.sdpm.project.dao.constant.ProjectTaskTable.PROJECT_TASKTABLE;
+import static org.tinygroup.sdpm.system.dao.constant.SystemModuleTable.SYSTEM_MODULETABLE;
 import static org.tinygroup.tinysqldsl.Delete.delete;
 import static org.tinygroup.tinysqldsl.Insert.insertInto;
 import static org.tinygroup.tinysqldsl.Select.select;
@@ -59,11 +61,60 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
         return getDslSession().fetchList(select, ProjectTask.class);
     }
 
-    public List<TaskChartBean> queryChart() {
-        Select select = select(FragmentSelectItemSql.fragmentSelect("count(*) as taskCount, project_task.task_assigned_to"))
+    public List<TaskChartBean> queryChartAssigned() {
+        Select select = select(FragmentSelectItemSql.fragmentSelect("count(*) as taskCount, org_user.ORG_USER_REAL_NAME as title"))
                 .from(PROJECT_TASKTABLE)
+                .join(Join.leftJoin(ORG_USERTABLE, ORG_USERTABLE.ORG_USER_ID.eq(PROJECT_TASKTABLE.TASK_ASSIGNED_TO)))
                 .groupBy(PROJECT_TASKTABLE.TASK_ASSIGNED_TO);
 
+        return getDslSession().fetchList(select, TaskChartBean.class);
+    }
+
+    public List<TaskChartBean> queryChartStatus() {
+        Select select = select(FragmentSelectItemSql.fragmentSelect("count(*) as taskCount, project_task.task_status as title"))
+                .from(PROJECT_TASKTABLE)
+                .groupBy(PROJECT_TASKTABLE.TASK_STATUS);
+        return getDslSession().fetchList(select, TaskChartBean.class);
+    }
+
+    public List<TaskChartBean> queryChartPri() {
+        Select select = select(FragmentSelectItemSql.fragmentSelect("count(*) as taskCount, project_task.task_pri as title"))
+                .from(PROJECT_TASKTABLE)
+                .groupBy(PROJECT_TASKTABLE.TASK_PRI);
+
+        return getDslSession().fetchList(select, TaskChartBean.class);
+    }
+
+    public List<TaskChartBean> queryChartDeadLine() {
+        Select select = select(FragmentSelectItemSql.fragmentSelect("count(*) as taskCount, project_task.task_dead_line as title"))
+                .from(PROJECT_TASKTABLE)
+                .groupBy(PROJECT_TASKTABLE.TASK_DEAD_LINE);
+
+        return getDslSession().fetchList(select, TaskChartBean.class);
+    }
+
+    public List<TaskChartBean> queryChartModule() {
+        Select select = select(FragmentSelectItemSql.fragmentSelect("count(*) as taskCount, system_module.module_name as title"))
+                .from(PROJECT_TASKTABLE)
+                .join(Join.leftJoin(SYSTEM_MODULETABLE, SYSTEM_MODULETABLE.MODULE_ID.eq(PROJECT_TASKTABLE.TASK_MOMODULE)))
+                .groupBy(PROJECT_TASKTABLE.TASK_MOMODULE);
+
+        return getDslSession().fetchList(select, TaskChartBean.class);
+    }
+
+    public List<TaskChartBean> queryChartType() {
+        Select select = select(FragmentSelectItemSql.fragmentSelect("count(*) as taskCount, project_task.task_type as title"))
+                .from(PROJECT_TASKTABLE)
+                .groupBy(PROJECT_TASKTABLE.TASK_TYPE);
+
+        return getDslSession().fetchList(select, TaskChartBean.class);
+    }
+
+    public List<TaskChartBean> queryChartFinishedBy() {
+        Select select = select(FragmentSelectItemSql.fragmentSelect("count(*) as taskCount, org_user.ORG_USER_REAL_NAME as title"))
+                .from(PROJECT_TASKTABLE)
+                .join(Join.leftJoin(ORG_USERTABLE, ORG_USERTABLE.ORG_USER_ID.eq(PROJECT_TASKTABLE.TASK_FINISHED_BY)))
+                .groupBy(PROJECT_TASKTABLE.TASK_FINISHED_BY);
         return getDslSession().fetchList(select, TaskChartBean.class);
     }
 

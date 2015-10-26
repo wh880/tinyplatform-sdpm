@@ -59,5 +59,52 @@ public interface ProjectTaskDao extends BaseDao<ProjectTask, Integer> {
      */
     public List<ProjectTask> findAll();
 
-    List<TaskChartBean> queryChart();
+    /**
+     * 根据指派进行分类
+     *
+     * @return
+     */
+    public List<TaskChartBean> queryChartAssigned();
+
+    /**
+     * 根据任务状态进行分类
+     *
+     * @return
+     */
+    public List<TaskChartBean> queryChartStatus();
+
+    /**
+     * 根据优先级进行分类
+     *
+     * @return
+     */
+    public List<TaskChartBean> queryChartPri();
+
+    /**
+     * 根据截至日期进行分类
+     *
+     * @return
+     */
+    public List<TaskChartBean> queryChartDeadLine();
+
+    /**
+     * 根据模块进行分类
+     *
+     * @return
+     */
+    public List<TaskChartBean> queryChartModule();
+
+    /**
+     * 根据任务类型进行分类
+     *
+     * @return
+     */
+    public List<TaskChartBean> queryChartType();
+
+    /**
+     * 根据完成者分类
+     *
+     * @return
+     */
+    public List<TaskChartBean> queryChartFinishedBy();
 }

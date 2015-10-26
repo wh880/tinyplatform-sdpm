@@ -14,10 +14,7 @@ import org.tinygroup.sdpm.dict.util.DictUtil;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.service.StoryService;
-import org.tinygroup.sdpm.project.dao.pojo.Project;
-import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
-import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
-import org.tinygroup.sdpm.project.dao.pojo.ProjectTeam;
+import org.tinygroup.sdpm.project.dao.pojo.*;
 import org.tinygroup.sdpm.project.service.inter.*;
 import org.tinygroup.sdpm.system.dao.pojo.ProfileType;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
@@ -636,11 +633,22 @@ public class TaskAction extends BaseController {
     }
 
     @RequestMapping("/buildChart")
-    public String buildChart(String[] ids, Model model) {
+    public String buildChart(String ids, Model model) {
         Map<String, List> map = new HashMap<String, List>();
-        if (ids.length > 0) {
-            for (String id : ids) {
-                List list = taskService.buildChart(id);
+        String[] idArray = ids.split(",");
+        if (idArray.length > 0) {
+            for (String id : idArray) {
+                List<TaskChartBean> list = taskService.buildChart(id);
+                //部分内容需要格式化内容
+                if ("3".equals(id)) {
+                    for (TaskChartBean bean : list) {
+                        bean.setTitle(DictUtil.getValue("taskType", bean.getTitle()));
+                    }
+                } else if ("5".equals(id)) {
+                    for (TaskChartBean bean : list) {
+                        bean.setTitle(DictUtil.getValue("taskStatus", bean.getTitle()));
+                    }
+                }
                 map.put(DictUtil.getValue("chartType", id), list);
             }
         }

@@ -94,8 +94,26 @@ public class TaskManagerImpl implements TaskManager {
         return taskDao.updateColum(task);
     }
 
-    public List<TaskChartBean> findByGroup() {
-        return taskDao.queryChart();
+    public List<TaskChartBean> findByGroup(String id) {
+        if ("1".equals(id)) {
+            return null;
+        } else if ("2".equals(id)) {
+            return taskDao.queryChartModule();
+        } else if ("3".equals(id)) {
+            return taskDao.queryChartType();
+        } else if ("4".equals(id)) {
+            return taskDao.queryChartPri();
+        } else if ("5".equals(id)) {
+            return taskDao.queryChartStatus();
+        } else if ("6".equals(id)) {
+            return taskDao.queryChartDeadLine();
+        } else if ("10".equals(id)) {
+            return taskDao.queryChartFinishedBy();
+        } else if ("15".equals(id)) {
+            return taskDao.queryChartAssigned();
+        } else {
+            return null;
+        }
     }
 
     public Integer updateColum(ProjectTask task) {

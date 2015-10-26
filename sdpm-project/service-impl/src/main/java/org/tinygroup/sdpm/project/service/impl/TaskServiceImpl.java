@@ -148,12 +148,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     public List<TaskChartBean> buildChart(String id) {
-        if ("3".equals(id)) {
-            List<TaskChartBean> list = taskManager.findByGroup();
-            return list;
-        } else {
-            return null;
-        }
+        return taskManager.findByGroup(id);
     }
 
     public Map<String, List<ProjectTask>> findTaskByGroup(int projectId, String colum) {
