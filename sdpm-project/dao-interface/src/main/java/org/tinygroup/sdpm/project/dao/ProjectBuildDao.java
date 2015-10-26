@@ -37,7 +37,7 @@ public interface ProjectBuildDao extends BaseDao<ProjectBuild, Integer> {
 
     public Pager<ProductStory> findBuildStorys(int start, int limit, Integer buildId, OrderBy... orderArgs);
 
-    public Pager<ProductStory> findnoBuildStorys(int start, int limit, Integer buildId, OrderBy... orderArgs);
+    public Pager<ProductStory> findnoBuildStorys(int start, int limit,final String condition, Integer buildId, final OrderBy... orderBies);
 
     public Integer deletereleate(Integer storyId,Integer buildId);
 
@@ -45,7 +45,7 @@ public interface ProjectBuildDao extends BaseDao<ProjectBuild, Integer> {
 
     public Pager<QualityBug> findBuildBugs(int start, int limit, Integer buildId, final OrderBy... orderBies);
 
-    public Pager<QualityBug> findnoBuildBugs(int start, int limit, Integer buildId, final OrderBy... orderBies);
+    public Pager<QualityBug> findnoBuildBugs(int start, int limit,final String condition,Integer buildId, final OrderBy... orderBies);
 
     public Integer deletereleateBug(Integer bugId,Integer buildId);
 
