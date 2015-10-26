@@ -360,6 +360,6 @@ public class ProductLineDaoImpl extends TinyDslDaoSupport implements ProductLine
         });
 
     }
-	
+
 	
 }

@@ -48,7 +48,7 @@
         <p class="titleName">分支结构</p>
         <ul class="treeList">
             #@settoggleLeftBody("treeLeftbox")
-                #@zTreeList(call("link",adminPath+"/productLine/overviewTree"))
+                #@zTreeList(call("link",adminPath+"/productLine/overviewTree?productLineId="+productLineId))
                 #setzTreeValMap({"id":"treeId","name":"pName","pid":"pId"})
             #end
             #end

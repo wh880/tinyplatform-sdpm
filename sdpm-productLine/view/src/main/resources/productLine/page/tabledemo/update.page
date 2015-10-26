@@ -14,7 +14,7 @@
         #hiddenInput("","productLineId","",productLine?.productLineId)
 
         #@elementItem()
-            #@colLabel()产品线名称：#end
+            #@colLabel()<span class="c-red">*</span>产品线名称：#end
             #@formControlDiv("col-4")
                 #tinyInput(
                     "text" "productLineName" productLine?.productLineName  {"placeholder":"","nullmsg":"请输入产品名称！","id":
@@ -23,7 +23,7 @@
             #@validateDiv("col-2")#end
         #end
         #@elementItem()
-            #@colLabel()产品编号：#end
+            #@colLabel()<span class="c-red">*</span>产品编号：#end
             #@formControlDiv("col-4")
                 #tinyInput(
                     "text" "productLineCode" productLine?.productLineCode {"placeholder":"","nullmsg":"代号不能为空！","id":
@@ -137,26 +137,21 @@
             #@skinMinimal("col-8")
 
                 #@Tradioes("acl" productLine?.acl {"onclick":"setWhite(this.value)"})
-                    <div>#@Tradio("0") 默认设置(有项目视图权限，即可访问)#end</div>
-                    <div>#@Tradio("2") 私有项目(只有项目团队成员才能访问)#end</div>
-                    <div>#@Tradio("1") 自定义白名单(团队成员和白名单的成员可以访问)#end</div>
+                    #foreach(source:getDict("lineAccessControl"))
+                        <div>#@Tradio(source?.value)${source?.text}#end</div>
+                    #end
                 #end
 
             #end
             #@validateDiv("col-2")#end
         #end
-        #@elementItem("whitelistBox" productLine?.acl!=1?'hidden':'')
+        #@elementItem("whitelistBox" productLine?.acl!=2?'hidden':'')
             #@colLabel()分组白名单#end
-            #@skinMinimal()
-                #@Tcheckboxes("productLineWhiteList" product?.productLineWhiteList)
-                    #@Tcheckbox("admin")管理员#end
-                    #@Tcheckbox("develop")研发#end
-                    #@Tcheckbox("test")测试#end
-                    #@Tcheckbox("projectManager")项目经理#end
-                    #@Tcheckbox("productManager")产品经理#end
-                    #@Tcheckbox("developSupervisor")研发主管#end
-                    #@Tcheckbox("productSupervisor")产品主管#end
-                    #@Tcheckbox("testSupervisor")测试主管#end
+            #@skinMinimal("col-8")
+                #@Tcheckboxes("productLineWhiteList" productLine?.productLineWhiteList)
+                    #foreach(source:getDict("whiteList"))
+                        #@Tcheckbox(source?.value)${source?.text}#end
+                    #end
                 #end
             #end
             #@validateDiv("col-2")#end
@@ -183,10 +178,20 @@
 
 
 <script type="text/javascript">
-
-
     function setWhite(acl) {
-        acl == '1' ? $('#whitelistBox').removeClass('hidden') : $('#whitelistBox').addClass('hidden');
+        acl == 'custom' ? $('#whitelistBox').removeClass('hidden') : $('#whitelistBox').addClass('hidden');
+    }
+</script>
+<script type="text/javascript">
+    $(function () {
+        $("form[name=thisform").Validform({
+            tiptype: 2
+        });
+    });
+</script>
+<script type="text/javascript">
+    function setWhite(acl) {
+        acl == '2' ? $('#whitelistBox').removeClass('hidden') : $('#whitelistBox').addClass('hidden');
     }
 </script>
 

@@ -57,7 +57,7 @@ public class ProductLineAction extends BaseController {
 
     @RequestMapping("/save")
     public String save(ProductLine productLine, SystemAction systemAction,HttpServletRequest request) {
-        productLine.setProductLineCreatedBy(UserUtils.getUser().getOrgUserAccount());
+        productLine.setProductLineCreatedBy(UserUtils.getUserId());
         productLine.setProductLineCreatedDate(new Date());
         productLine.setProductLineStatus("0");
         ProductLine productLine1 = productLineService.addProductLine(productLine);
@@ -236,7 +236,7 @@ public class ProductLineAction extends BaseController {
             }
         }
         String query = request.getQueryString();
-        if(query.contains("status")){
+        if(StringUtil.isBlank(query)||!query.contains("status")){
             model.addAttribute("status",1);
         }
         return "/productLine/page/project/productLine.page";
@@ -331,24 +331,29 @@ public class ProductLineAction extends BaseController {
 
     @ResponseBody
     @RequestMapping("/overviewTree")
-    public List overview(String check) {
+    public List overview(Integer productLineId) {
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
-        List<ProductAndLine> productLists = productService.getProductAndLine(new Product());
-        List<ProductLine> productLines = productLineService.findList(new ProductLine());
-
-        for (ProductLine d : productLines) {
+        ProductLine productLine = null;
+        if(productLineId!=null&&productLineId>0){
+            productLine = productLineService.findProductLine(productLineId);
+        }
+        List<Product> productList = null;
+        if(productLine!=null){
             Map<String, Object> map = new HashMap<String, Object>();
-            map.put("id", "p" + d.getProductLineId());
+            map.put("id", "p" + productLine.getProductLineId());
             map.put("pId", 0);
-            map.put("name", d.getProductLineName());
+            map.put("name", productLine.getProductLineName());
             map.put("open", true);
             map.put("clickAble", false);
             list.add(map);
+            Product product = new Product();
+            product.setProductLineId(productLine.getProductLineId());
+            productList = productService.findProductList(product);
         }
-        for (ProductAndLine d : productLists) {
+        for (Product d : productList) {
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("id", "v" + d.getProductId());
-            map.put("pId", "p" + d.getProductLineId());
+            map.put("pId", "p" + productLine.getProductLineId());
             map.put("name", d.getProductName());
             map.put("open", true);
             map.put("clickAble", false);

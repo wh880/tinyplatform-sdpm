@@ -232,7 +232,7 @@
 					 #@Tselect2F()
 	                   		 #@Tselect2Body("bugMailto" bug?.bugMailto {"class":"input-text select2","multiple":"multiple"}) ##,"multiple":"multiple"加上为多选项
 								#foreach(user : userList)
-								<option value="${user?.orgUserId}">${user?.orgUserAccount}</option>
+								<option value="${user?.orgUserId}">${user?.orgUserRealName}</option>
 								#end
 	                    	#end
                 	  #end

@@ -5,7 +5,6 @@
 #setTinyItemCount(productLine?.totalCount)
 #for(productLine:productLine?.records)
 #@tr()
-    #@td()<input type="checkbox" value="1" name="productLine">#end
     #@td()${productLine?.productLineId}#end
     #@td()
     <a href="${TINY_CONTEXT_PATH +adminPath}/productLine/find/overview?productLineId=${productLine?.productLineId}">${productLine
@@ -14,11 +13,9 @@
     #@td()${productLine?.productLineCode}#end
     #@td()${productLine?.companyId}#end
     #@td()${productLine?.deptId}#end
-    #@td()${productLine?.productLineRoot}#end
-    #@td()${productLine?.productLineParent}#end
-    #@td()${productLine?.ownerName}#end
-    #@td()${productLine?.qualityManagerName}#end
-    #@td()${productLine?.deliveryManagerName}#end
+    #@td()${productLine?.productLineOwner?UserUtils.getUserById(productLine?.productLineOwner)?.orgUserRealName:""}#end
+    #@td()${productLine?.productLineQualityManager?UserUtils.getUserById(productLine?.productLineQualityManager)?.orgUserRealName:""}#end
+    #@td()${productLine?.productLineDeliveryManager?UserUtils.getUserById(productLine?.productLineDeliveryManager)?.orgUserRealName:""}#end
     #@td()
         #foreach(m:menuManager.getScopeMenus("productLine-all"))
             #set(url=eval(m.href))
