@@ -7,6 +7,7 @@
                         <caption>${key}</caption>
                         <thead>
                         <tr>
+                            <th></th>
                             #foreach(list : map.get(key))
                                 <th>${list?.title}</th>
                             #end
@@ -14,8 +15,9 @@
                         </thead>
                         <tbody>
                         <tr>
+                            <th></th>
                             #foreach(list : map.get(key))
-                                <th>${list?.taskCount}</th>
+                                <td>${list?.taskCount}</td>
                             #end
                         </tr>
                         </tbody>
