@@ -18,6 +18,7 @@ package org.tinygroup.sdpm.project.dao.impl;
 
 import org.springframework.stereotype.Repository;
 import org.tinygroup.commons.tools.CollectionUtil;
+import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.jdbctemplatedslsession.callback.*;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
@@ -32,8 +33,10 @@ import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
 import org.tinygroup.sdpm.quality.dao.constant.QualityBugTable;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.tinysqldsl.*;
+import org.tinygroup.tinysqldsl.base.FragmentSql;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
+import org.tinygroup.tinysqldsl.formitem.FragmentFromItemSql;
 import org.tinygroup.tinysqldsl.select.OrderByElement;
 
 import java.io.Serializable;
@@ -378,7 +381,7 @@ public class ProjectBuildDaoImpl extends TinyDslDaoSupport implements ProjectBui
 
 
 
-	public Pager<ProductStory> findnoBuildStorys(int start, int limit, Integer buildId, final OrderBy... orderBies){
+	public Pager<ProductStory> findnoBuildStorys(int start, int limit,final String condition, Integer buildId, final OrderBy... orderBies){
 		Select select =select(PROJECT_BUILDTABLE.BUILD_STORIES).from(PROJECT_BUILDTABLE)
 				.where(PROJECT_BUILDTABLE.BUILD_ID.eq(buildId));
 		ProjectBuild test= getDslSession().fetchOneResult(select,ProjectBuild.class);
@@ -389,13 +392,15 @@ public class ProjectBuildDaoImpl extends TinyDslDaoSupport implements ProjectBui
 
 			public Select generate(ProductStory t) {
 				Select select = MysqlSelect.selectFrom(PRODUCT_STORYTABLE).where(
-						PRODUCT_STORYTABLE.STORY_ID.notIn(storys));
+						and(
+						PRODUCT_STORYTABLE.STORY_ID.notIn(storys),
+				StringUtil.isBlank(condition)?PRODUCT_STORYTABLE.STORY_ID.isNotNull():FragmentSql.fragmentCondition(condition)));
 				return addOrderByElements(select, orderBies);
 			}
 		});
 	}
 
-	public Pager<QualityBug> findnoBuildBugs(int start, int limit, Integer buildId, final OrderBy... orderBies){
+	public Pager<QualityBug> findnoBuildBugs(int start, int limit,final String condition,Integer buildId, final OrderBy... orderBies){
 		Select select =select(PROJECT_BUILDTABLE.BUILD_BUGS).from(PROJECT_BUILDTABLE)
 				.where(PROJECT_BUILDTABLE.BUILD_ID.eq(buildId));
 		ProjectBuild test= getDslSession().fetchOneResult(select,ProjectBuild.class);
@@ -406,7 +411,10 @@ public class ProjectBuildDaoImpl extends TinyDslDaoSupport implements ProjectBui
 
 			public Select generate(QualityBug t) {
 				Select select = MysqlSelect.selectFrom(QUALITY_BUGTABLE).where(
-						QUALITY_BUGTABLE.BUG_ID.notIn(bugs));
+						and(
+
+								QUALITY_BUGTABLE.BUG_ID.notIn(bugs),
+								StringUtil.isBlank(condition)?QUALITY_BUGTABLE.BUG_ID.isNotNull():FragmentSql.fragmentCondition(condition)));
 				return addOrderByElements(select, orderBies);
 			}
 		});

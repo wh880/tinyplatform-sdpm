@@ -65,12 +65,34 @@
         		#foreach(m:menuManager.getScopeMenus("version-case"))
     				#if(m.id=="tversee")
     					#@buttonGroup()
-		                    #@buttonDropdown("more" buttonClass="btnDropDown")分组查看 
+		                    #@buttonDropdown("more" buttonClass="btnDropDown")<span>分组查看</span>
 		                     	#@spanCaret()#end
 		                    #end
 		                    #@ulDropdownMenu("downMenuSty")                       
 		                         <p>
-		                             <a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/cases.page">需求分组</a>
+		                             <a id="group" href="javascript:void(0)">需求分组</a>
+		                             <script>
+                                        $(function(){
+                                           $("#group").on("click",function(){
+                                                  $.ajax({
+                                                     type: "get",
+                                                     url: "${TINY_CONTEXT_PATH+adminPath}/quality/testCase/group?productId=${qualityProductId}",
+                                                     dataType:"html",
+                                                     success: function(data){
+                                                         $("#caseGroup").html(data);
+                                                     },
+                                                     error: function(res){
+                                                         alert("失败");
+                                                     }
+                                                 });
+                                                 $(".operationbar a").removeClass("active_btn");
+                                                 $(this).closest(".btn-group").find("button:first span:first").addClass("active_btn").html($(this).html());
+
+
+                                           });
+                                        })
+
+                                     </script>
 		                         </p>	
 		                        #@liDivider()#end
 		                    #end
@@ -95,7 +117,7 @@
     ##operationbar end
     #end
 ##tabbody end
-
+    <div id="caseGroup">
 #@toggleBox({"class":"open"})
 	#@toggleLeft({"class":"aclass"})
 		#@settoggleLeftTitle()#for(product : CmsUtils.getProductList())
@@ -125,7 +147,7 @@
 		<input type="button" value="反选" class="btn btn-default btn-primary col-1.5"
 		 	onclick="selectAllNullorReserve('idCheck','反选');" />
 		<div class="col-2 text-r">
-		#@assignOperation("assign" TINY_CONTEXT_PATH+adminPath+"/quality/version/ajax/assign")<div><input type="button" value="指派" class="btn radius grayBtn" /></div>#end</a>
+		#@assignOperation("assign" TINY_CONTEXT_PATH+adminPath+"/quality/version/ajax/assign")<div><input type="button" value="指派" class="btn radius grayBtn" /></div>#end
 				</div>		
 		<div class="col-4">		
 			#@Tselect2F()
@@ -184,6 +206,7 @@ user_del(this,'1');
 #end
 ##togglebox end
 #end
+</div>
 ##tab end
 #end
 <script type="text/javascript">

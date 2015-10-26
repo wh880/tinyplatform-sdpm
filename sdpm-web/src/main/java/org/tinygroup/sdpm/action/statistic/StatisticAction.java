@@ -13,13 +13,9 @@ import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
 import org.tinygroup.sdpm.product.service.PlanService;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
-import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
 import org.tinygroup.sdpm.project.service.inter.ProjectProductService;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
-import org.tinygroup.sdpm.statistic.dao.pojo.Assigned;
-import org.tinygroup.sdpm.statistic.dao.pojo.ProjectTaskSta;
-import org.tinygroup.sdpm.statistic.dao.pojo.QualityBugCall;
-import org.tinygroup.sdpm.statistic.dao.pojo.QualityBugSta;
+import org.tinygroup.sdpm.statistic.dao.pojo.*;
 import org.tinygroup.sdpm.statistic.service.inter.StatisticService;
 
 import java.util.HashMap;
@@ -83,14 +79,16 @@ public class StatisticAction extends BaseController {
     }
     @RequestMapping("product/invest")
     public String productInvest(Model model){
-        List<Product> products = productService.findProductList(new Product());
-        Map<Product,List<ProjectProduct>> map = new HashMap<Product, List<ProjectProduct>>();
-
-        for(int i=0,n=products.size();i<n;i++){
-            List<ProjectProduct> projectProducts=projectProductService.findProjects(products.get(i).getProductId());
-            map.put(products.get(i),projectProducts);
-        }
-        model.addAttribute("productmap",map);
+//        List<Product> products = productService.findProductList(new Product());
+//        Map<Product,List<ProjectProduct>> map = new HashMap<Product, List<ProjectProduct>>();
+//
+//        for(int i=0,n=products.size();i<n;i++){
+//            List<ProjectProduct> projectProducts=projectProductService.findProjects(products.get(i).getProductId());
+//            map.put(products.get(i),projectProducts);
+//        }
+//        model.addAttribute("productmap",map);
+        List<ProductProject> productProjects = statisticService.productProjects(new ProductProject());
+        model.addAttribute("proPros",productProjects);
         model.addAttribute("order","2");
         return  "/statistic/page/product.page";
     }

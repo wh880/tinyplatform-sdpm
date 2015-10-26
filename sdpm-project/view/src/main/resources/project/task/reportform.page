@@ -65,26 +65,26 @@
             <script>
                 $(function () {
                     $("#buildChart").click(function (e) {
-                        console.log("gg");
+                        //console.log("gg");
                         var list = [];
                         $(".togglebox input:checkbox").each(function (i) {
                             if (this.checked) {
                                 list.push($(this).attr("id").substring(3));
                             }
                         });
-                        console.log(list);
-                    ##                        $.ajax({
-                    ##                            url: "${TINY_CONTEXT_PATH+adminPath}/project/task/buildChart",
-                    ##                            dataType: "html",
-                    ##                            data: {ids : list.join(",")},
-                    ##                            success: function(data){
-                    ##                                $("#chart").html(data);
-                    ##                                //刷新数据
-                    ##                            },
-                    ##                            error :　function(data){
-                    ##                                layer.msg(data.info, 2, 9);
-                    ##                            }
-                    ##                        });
+
+                        $.ajax({
+                            url: "${TINY_CONTEXT_PATH+adminPath}/project/task/buildChart",
+                            dataType: "html",
+                            data: {ids: list.join(",")},
+                            success: function (data) {
+                                $("#chart").html(data);
+                                //刷新数据
+                            },
+                            error: function (data) {
+                                layer.msg(data.info, 2, 9);
+                            }
+                        });
                     });
                 });
             </script>

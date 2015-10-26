@@ -5,8 +5,6 @@
     .select_boxes{margin-top:0}
 </style>
 <script type="text/javascript">
-
-
 	function ajaxRead(id,toName,opKey,opvalue,url,value,isBuild){
     		var selectCheck = "select[name="+toName+"]";
     		$(selectCheck).each(function(){
@@ -77,6 +75,9 @@
 					 #@Tselect2F()
 					 <script type="text/javascript">
 					 $(function(){
+
+					    ajaxRead("${sid}","projectId","projectId","projectName","/quality/bug/ajax/project?productId=${qualityProductId}","${testTask?.projectId?:0}");
+
 					    $("#${sid}").on("change",function(){
                              var pId = $("#${sid}  option:selected").val();
                              ajaxRead("${sid}","buildName","buildId","buildName","/quality/version/ajax/build?buildProject="+pId+"&buildProduct=${qualityProductId?:0}",${testTask?.buildName?:0},"build");
@@ -84,11 +85,8 @@
                          });
 					 })
                      </script>
-	                   		 #@Tselect2Body("projectId" testTask?.projectId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                   		 <option value="0">/</option>
-                                #foreach(project : projectList)
-                                    <option value="${project?.projectId}">${project?.projectName}</option>
-                                #end
+	                   		#@Tselect2Body("projectId" testTask?.projectId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+
 	                    	#end
 	                    	#@Tselect2Fix()
 	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/addProject.page" class="r ">增加</a>

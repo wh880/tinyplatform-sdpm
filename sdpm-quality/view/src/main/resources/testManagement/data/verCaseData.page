@@ -17,9 +17,21 @@
                          		#if(m.id=="tverremove")
             						<a class="deleteRun" href="javascript:void(0)" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
             					#elseif(m.id=="tvertobug")
-            					    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?caseId=${run?.caseId}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+                                    #if("2".equals(run?.testRunLastRunResult))
+                                        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?caseId=${run?.caseId}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+                                    #else
+                                         <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>
+                                    #end
             					#else
-            						#iconOperations("#myModal" m.icon m.name "865" "400" adminPath+m.href+"?caseId="+run?.caseId+"&from=task&runId="+run?.testRunId "ml-1")
+            					    #if(m.id=="tvergo")
+            					        #if(run?.testRunAssignedTo == UserUtils.getUserId())
+            					            #iconOperations("#myModal" m.icon m.name "865" "400" adminPath+m.href+"?caseId="+run?.caseId+"&from=task&runId="+run?.testRunId+"&caseVersion="+run?.caseVersion "ml-1")
+            					        #else
+            					            <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>
+            					        #end
+            					    #else
+            					        #iconOperations("#myModal" m.icon m.name "865" "400" adminPath+m.href+"?caseId="+run?.caseId+"&from=task&runId="+run?.testRunId+"&caseVersion="+run?.caseVersion "ml-1")
+            					    #end
 								#end
                          	#end
 

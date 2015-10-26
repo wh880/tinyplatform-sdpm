@@ -35,4 +35,8 @@ public class StatisticManagerImpl implements StatisticManager{
 		return statisticDao.findBugCall(qualityBugCall);
 	}
 
+	public List<ProductProject> productProjects(ProductProject productProject) {
+		return statisticDao.productProjects(productProject);
+	}
+
 }

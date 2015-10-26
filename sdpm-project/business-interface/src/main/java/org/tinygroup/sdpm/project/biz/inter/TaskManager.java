@@ -146,5 +146,5 @@ public interface TaskManager {
     Integer updateCloseTask(ProjectTask task);
 
 
-    List<TaskChartBean> findByGroup();
+    List<TaskChartBean> findByGroup(String id);
 }

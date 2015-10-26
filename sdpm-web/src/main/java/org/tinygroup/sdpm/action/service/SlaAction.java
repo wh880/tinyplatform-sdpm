@@ -104,13 +104,13 @@ public class SlaAction extends BaseController {
     @RequestMapping(value = "/list/data")
     public String listData(Integer limit, Integer start, ServiceSla sla, Integer treeId,
                            String groupOperate, SearchInfos searchInfos,
-                           @RequestParam(required = false, defaultValue = "slaId") String order,
-                           @RequestParam(required = false, defaultValue = "asc") String orderType,
+                           @RequestParam(required = false, defaultValue = "serviceSla.slaId") String order,
+                           @RequestParam(required = false, defaultValue = "asc") String ordertype,
                            Model model) {
         /**
          * sla表格里面的productId与左侧树里面的product表里面的productId即treeId匹配，在findSlaPager方法匹配
          */
-        Pager<ServiceSla> pager = slaService.findSlaPager(start, limit, sla, treeId, groupOperate, searchInfos, order, orderType);
+        Pager<ServiceSla> pager = slaService.findSlaPager(start, limit, sla, treeId, groupOperate, searchInfos, order, ordertype);
         model.addAttribute("pager", pager);
         return "service/sla/slaTableData.pagelet";
     }

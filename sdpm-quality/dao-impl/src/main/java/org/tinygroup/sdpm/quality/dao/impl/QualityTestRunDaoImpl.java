@@ -129,7 +129,10 @@ public class QualityTestRunDaoImpl extends TinyDslDaoSupport implements QualityT
 
 			@SuppressWarnings("rawtypes")
 			public Select generate(QualityTestRun t) {
-				Select select = selectFrom(QUALITY_TEST_RUNTABLE).where(
+				Select select = selectFrom(QUALITY_TEST_RUNTABLE).join(
+						Join.leftJoin(
+								QUALITY_TEST_CASETABLE,
+								QUALITY_TEST_CASETABLE.CASE_ID.eq(QUALITY_TEST_RUNTABLE.CASE_ID))).where(
 				and(
 					QUALITY_TEST_RUNTABLE.TASK_ID.eq(t.getTaskId()),
 					QUALITY_TEST_RUNTABLE.CASE_ID.eq(t.getCaseId()),
@@ -138,7 +141,8 @@ public class QualityTestRunDaoImpl extends TinyDslDaoSupport implements QualityT
 					QUALITY_TEST_RUNTABLE.TEST_RUN_LAST_RUNNER.eq(t.getTestRunLastRunner()),
 					QUALITY_TEST_RUNTABLE.TEST_RUN_LAST_RUN_DATE.eq(t.getTestRunLastRunDate()),
 					QUALITY_TEST_RUNTABLE.TEST_RUN_LAST_RUN_RESULT.eq(t.getTestRunLastRunResult()),
-					QUALITY_TEST_RUNTABLE.TEST_RUN_STATUS.eq(t.getTestRunStatus())));
+					QUALITY_TEST_RUNTABLE.TEST_RUN_STATUS.eq(t.getTestRunStatus()),
+					QUALITY_TEST_CASETABLE.DELETED.eq(0)));
 			return addOrderByElements(select, orderArgs);
 			}
 		});
@@ -253,13 +257,12 @@ public class QualityTestRunDaoImpl extends TinyDslDaoSupport implements QualityT
 		Select select = MysqlSelect.select(QUALITY_TEST_RUNTABLE.ALL,
 				QUALITY_TEST_CASETABLE.CASE_TITLE.as("caseTitle"),
 				QUALITY_TEST_CASETABLE.CASE_TYPE.as("caseType"),
-				QUALITY_TEST_CASETABLE.PRIORITY.as("proority")).from(QUALITY_TEST_RUNTABLE).join(
+				QUALITY_TEST_CASETABLE.PRIORITY.as("priority")).from(QUALITY_TEST_RUNTABLE).join(
 				Join.leftJoin(
 						QUALITY_TEST_CASETABLE,
 						QUALITY_TEST_CASETABLE.CASE_ID.eq(QUALITY_TEST_RUNTABLE.CASE_ID))).where(
 				and(
 						condition,
-						QUALITY_TEST_CASETABLE.CASE_VERSION.eq(QUALITY_TEST_RUNTABLE.CASE_VERSION),
 						QUALITY_TEST_RUNTABLE.TASK_ID.eq(testRun.getTaskId()),
 						QUALITY_TEST_RUNTABLE.CASE_ID.eq(testRun.getCaseId()),
 						QUALITY_TEST_RUNTABLE.CASE_VERSION.eq(testRun.getCaseVersion()),

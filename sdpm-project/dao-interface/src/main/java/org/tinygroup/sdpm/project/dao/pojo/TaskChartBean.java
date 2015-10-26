@@ -5,8 +5,24 @@ package org.tinygroup.sdpm.project.dao.pojo;
  */
 public class TaskChartBean {
     private Integer taskCount;
-    private String moduleName;
-    private String assignedTo;
+    private String title;
+    private float percent;
+
+    public float getPercent() {
+        return percent;
+    }
+
+    public void setPercent(float percent) {
+        this.percent = percent;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
     public Integer getTaskCount() {
         return taskCount;
@@ -16,19 +32,4 @@ public class TaskChartBean {
         this.taskCount = taskCount;
     }
 
-    public String getModuleName() {
-        return moduleName;
-    }
-
-    public void setModuleName(String moduleName) {
-        this.moduleName = moduleName;
-    }
-
-    public String getAssignedTo() {
-        return assignedTo;
-    }
-
-    public void setAssignedTo(String assignedTo) {
-        this.assignedTo = assignedTo;
-    }
 }

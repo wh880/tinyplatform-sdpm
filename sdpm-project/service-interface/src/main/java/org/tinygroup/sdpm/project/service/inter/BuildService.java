@@ -133,7 +133,7 @@ public interface BuildService {
      * @param groupOperate
      * @return
      */
-    public Pager<QualityBug> findnoBugPager(int start, int limit, int id, SearchInfos conditions, String groupOperate);
+    public Pager<QualityBug> findnoBugPager(int start, int limit, int id,String condition, SearchInfos conditions, String groupOperate);
     /**
      * 未关联bug分页
      * @param id

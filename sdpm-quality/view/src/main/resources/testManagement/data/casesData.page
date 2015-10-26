@@ -27,7 +27,7 @@ ${casepager?.totalCount+1}
                title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
             #else
                 #if(m.id=="texecution"||m.id=="tresult")
-                    #iconOperations("#myModal" m.icon m.name "865" "400" adminPath + m.href+"?caseId="+c?.caseId "ml-1")
+                    #iconOperations("#myModal" m.icon m.name "865" "400" adminPath + m.href+"?caseId="+c?.caseId+"&caseVersion="+c?.caseVersion "ml-1")
                 #else
                     #@tinyTableItemRemove(TINY_CONTEXT_PATH +adminPath+m.href  c?.caseId)<i class="${m.icon}"></i>
                     #end
