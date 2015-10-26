@@ -108,7 +108,7 @@
     #end
     #@elementItem()
         #@sdpmItem("描述")
-            #@tinyueditor("content" "buildDesc" "height:100px;overflow:auto")说点什么...最少输入10个字符#end
+            #@tinyueditor("content" "buildDesc" "overflow:auto")说点什么...最少输入10个字符#end
         #end
 
     #end
