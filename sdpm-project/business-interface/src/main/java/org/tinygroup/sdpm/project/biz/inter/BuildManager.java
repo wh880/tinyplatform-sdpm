@@ -91,7 +91,7 @@ public interface BuildManager {
      List<ProjectBuild> findStoryList(ProjectBuild projectBuild);
 
     public Pager<ProductStory> findBuildStory(int start, int limit, Integer buildId);
-    public Pager<ProductStory> findnoBuildStory(int start, int limit, Integer buildId);
+    public Pager<ProductStory> findnoBuildStory(int start, int limit,String condition, Integer buildId) ;
     /**
      * 删除关联
      * @param storyId，buildId
@@ -104,7 +104,7 @@ public interface BuildManager {
      * @return
      */
     public Integer releateReq(Integer storyId,Integer buildId);
-    public Pager<QualityBug> findnoBuildBug(int start, int limit, Integer buildId);
+    public Pager<QualityBug> findnoBuildBug(int start, int limit,String condition, Integer buildId);
     public Pager<QualityBug> findBuildBug(int start, int limit, Integer buildId);
     /**
      * 删除关联

@@ -88,12 +88,12 @@ public class BuildManagerImpl implements BuildManager {
         return projectBuildDao.findBuildLegacyBugs(start,limit,buildId);
     }
 
-    public Pager<ProductStory> findnoBuildStory(int start, int limit, Integer buildId) {
-        return projectBuildDao.findnoBuildStorys(start,limit,buildId);
+    public Pager<ProductStory> findnoBuildStory(int start, int limit,String condition, Integer buildId) {
+        return projectBuildDao.findnoBuildStorys(start,limit,condition,buildId);
     }
 
-    public Pager<QualityBug> findnoBuildBug(int start, int limit, Integer buildId) {
-        return projectBuildDao.findnoBuildBugs(start,limit,buildId);
+    public Pager<QualityBug> findnoBuildBug(int start, int limit,String condition, Integer buildId) {
+        return projectBuildDao.findnoBuildBugs(start,limit,condition,buildId);
     }
 
     public Integer deletereleate(Integer storyId,Integer buildId){
