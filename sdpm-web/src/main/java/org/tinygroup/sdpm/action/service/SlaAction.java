@@ -97,7 +97,10 @@ public class SlaAction extends BaseController {
      * @return
      */
     @RequestMapping(value = "/list")
-    public String list() {
+    public String list(Model model) {
+        ServiceClient client = new ServiceClient();
+        List<ServiceClient> list = clientService.getClientList(client);
+        model.addAttribute("list", list);
         return "/service/sla/sla.page";
     }
 

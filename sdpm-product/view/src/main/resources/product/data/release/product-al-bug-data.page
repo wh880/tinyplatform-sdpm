@@ -1,29 +1,28 @@
 #set(records=bugList?.totalCount,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
 #if (pagesize>records-pagesize*(page-1))
-#set(pagesize=records-(page-1)*pagesize)
+    #set(pagesize=records-(page-1)*pagesize)
 #end
 #setTinyItemCount(bugList?.totalCount)
 #for(bug:bugList.getRecords())
 #@tr()
-	#@td()<input type="checkbox" value="${bug?.bugId}" name="bugId">#end
-	#@td()${bug?.bugId}#end
-	#@td()
-    <a href="${TINY_CONTEXT_PATH +adminPath}/testManagement/page/bugInfo.page"> ${bug?.bugTitle} </a>
-	#end
-	#@td()${bug?.bugStatus} #end
-	#@td()${bug?.bugOpenedBy} #end
-	#@td()${bug?.bugOpenedDate?formatDate(bug?.bugOpenedDate,'yyyy-MM-dd'):""}#end
-	#@td()${bug?.bugResolvedBy} #end
-	#@td()${bug?.bugResolvedDate?formatDate(bug?.bugResolvedDate,'yyyy-MM-dd'):""}#end
-	#@td()
-		
-			#foreach(m:menuManager?.getScopeMenus("release-linkbug"))
-	     		#set(url=eval(m.href))
-	     			#if("aboutbug"==m.id)
-						#@tinyTableItemRemove(TINY_CONTEXT_PATH +adminPath+url)<i class="${m.icon}"></i>#end
-	     			#end
-			#end
-	#end
-	
+    #@td()<input type="checkbox" value="${bug?.bugId}" name="bugId">#end
+    #@td()${bug?.bugId}#end
+    #@td()
+    <a href="${TINY_CONTEXT_PATH +adminPath}/quality/bug/bugInfo?bugId=${bug?.bugId}"> ${bug?.bugTitle} </a>
+    #end
+    #@td()${getDict("bugStatus",bug?.bugStatus)}#end
+    #@td()${bug?.bugOpenedBy?UserUtils.getUserById(bug?.bugOpenedBy)?.orgUserRealName:""}#end
+    #@td()${bug?.bugOpenedDate?formatDate(bug?.bugOpenedDate,'yyyy-MM-dd'):""}#end
+    #@td()${bug?.bugResolvedBy?UserUtils.getUserById(bug?.bugResolvedBy)?.orgUserRealName:""} #end
+    #@td()${bug?.bugResolvedDate?formatDate(bug?.bugResolvedDate,'yyyy-MM-dd'):""}#end
+    #@td()
+        #foreach(m:menuManager?.getScopeMenus("release-linkbug"))
+            #set(url=eval(m.href))
+            #if("aboutbug"==m.id)
+                #@tinyTableItemRemove(TINY_CONTEXT_PATH +adminPath+url)<i class="${m.icon}"></i>#end
+            #end
+        #end
+    #end
+
 #end
 #end
