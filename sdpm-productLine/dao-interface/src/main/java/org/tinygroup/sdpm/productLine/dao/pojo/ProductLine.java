@@ -81,7 +81,7 @@ public class ProductLine implements Serializable{
 	 * 产品线编号
 	 * 
 	 */
-	private Integer productLineCode;
+	private String productLineCode;
 
 	/** 
 	 * 产品线序号
@@ -199,11 +199,11 @@ public class ProductLine implements Serializable{
 		return productLineName;
 	}
 
-	public void setProductLineCode(Integer productLineCode){
+	public void setProductLineCode(String productLineCode){
 		this. productLineCode = productLineCode;
 	}
 
-	public Integer getProductLineCode(){
+	public String getProductLineCode(){
 		return productLineCode;
 	}
 
