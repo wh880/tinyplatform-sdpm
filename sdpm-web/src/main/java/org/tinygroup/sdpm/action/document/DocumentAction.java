@@ -233,6 +233,8 @@ public class DocumentAction extends BaseController {
     public String productList(DocumentDoc doc, HttpServletRequest request, Integer page, Integer limit, String order,
                               String ordertype, String groupOperate, SearchInfos searchInfos, Model model) {
         doc.setDocProduct((Integer) request.getSession().getAttribute("sessionProductId"));
+        doc.setDocLibId(1);
+        doc.setDocDeleted("0");
         boolean asc = true;
         if ("desc".equals(ordertype)) {
             asc = false;
