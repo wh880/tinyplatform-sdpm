@@ -72,7 +72,9 @@
                                         #foreach(m:menuManager.getScopeMenus("clientSla"))
                                             #if(m.id != "clientSla_delete")
                                                 #@aExtendButton(
-                                                    "btn-primary btn-sm" TINY_CONTEXT_PATH+adminPath+m.href+"?id="+var.slaId ""
+                                                    "btn-primary btn-sm" TINY_CONTEXT_PATH+adminPath+m.href+
+                                                    "?id="+var.slaId+"&clientId="+var.clientId+
+                                                    "&clientName="+client.clientName ""
                                                     "")编辑#end
                                             #else
                                                 #@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m.href var?.slaId "" {

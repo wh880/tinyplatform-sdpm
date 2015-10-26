@@ -13,7 +13,7 @@
         #@td()
             #foreach(m:menuManager.getScopeMenus("service-request"))
                 #if(m)
-                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?id=${var.clientRequestId}"
+                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?id=${var.clientRequestId}&treeId=${treeId}&status=${status}"
                    title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
                 #end
             #end
@@ -21,8 +21,8 @@
             #set(m1=menuManager.getMenu("request-close"))
             #if(m1)
                 #@aModal(
-                    "#myModal" aModalTitle="关闭" "500" "200" m1.icon adminPath+m1.href+
-                    "?id="+var?.clientRequestId titleName="关闭")
+                    "#myModal" aModalTitle="关闭" "500" "200" m1.icon adminPath+m1.href+"?id="+var?.clientRequestId+
+                    "&treeId="+treeId+"&status="+status+"&operation="+operation titleName="关闭")
                 #end
             #end
 
