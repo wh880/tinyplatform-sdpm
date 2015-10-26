@@ -64,16 +64,16 @@
         background:#fff !important
     }
 	.menu-on-top #main-menu .navigation > li.active > a i{background:#fff !important}
-    #bodyrap.theme-clean .btn-primary, #bodyrap.theme-clean .btn-primary:focus, .theme-clean .pagination > li.active > a, .theme-clean .pagination > li.active > a:focus, .theme-clean .pagination > li.active > a:hover, .theme-clean .pagination > li.active > span {
+    #bodyrap.theme-clean.menu-on-top .btn-primary, #bodyrap.theme-clean.menu-on-top .btn-primary:focus, .theme-clean.menu-on-top .pagination > li.active > a, .theme-clean.menu-on-top .pagination > li.active > a:focus, .theme-clean.menu-on-top .pagination > li.active > a:hover, .theme-clean.menu-on-top .pagination > li.active > span {
         background: #369;
         border: #369 1px solid !important
     }
 
-    #bodyrap.theme-clean .btn-primary, #bodyrap.theme-clean .btn-primary:focus,.theme-clean .btn-primary, .theme-clean .btn-primary:focus {
+    #bodyrap.theme-clean.menu-on-top .btn-primary, #bodyrap.theme-clean.menu-on-top .btn-primary:focus,.theme-clean.menu-on-top .btn-primary, .theme-clean.menu-on-top .btn-primary:focus {
         border: 1px solid #369 !important;
     }
 
-    #bodyrap.theme-clean .btn-primary:hover {
+    #bodyrap.theme-clean.menu-on-top .btn-primary:hover {
         background: #2a4f85 !important;
     }
 
