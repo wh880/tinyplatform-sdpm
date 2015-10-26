@@ -50,7 +50,7 @@
     #@elementItem()
         #@sdpmItem("名称编号")
             #tinyInput(
-                "text" "buildName" build?.buildName{"style":"width:43%","placeholder":"","datatype":"*4-16","nullmsg":
+                "text" "buildName" build?.buildName{"placeholder":"","datatype":"*4-16","nullmsg":
                 "名称编号不能为空！","id":"username","class":"input-text"})
         #end
     #end
@@ -87,7 +87,7 @@
     #@elementItem()
         #@sdpmItem("源代码地址")
             #tinyInput(
-                "text" "buildScmPath" build?.buildScmPath{"style":"width:43%","placeholder":"","id":"username","class":
+                "text" "buildScmPath" build?.buildScmPath{"placeholder":"","id":"username","class":
                 "input-text"})
         #end
     #end
@@ -95,14 +95,14 @@
     #@elementItem()
         #@sdpmItem("下载地址")
             #tinyInput(
-                "text" "buildFilePath" build?.buildFilePath{"style":"width:300px","placeholder":"","id":"username",
+                "text" "buildFilePath" build?.buildFilePath{"placeholder":"","id":"username",
                 "class":"input-text"})
         #end
     #end
     #@elementItem()
         #@sdpmItem("附件")
             #@formControlDiv("col-8")
-                #tinyUploadInput("inputName" build?.inputName {"style":"width:43%","placeholder":"可直接输入地址，也可点击下图标进行上传"})
+                #tinyUploadInput("inputName" build?.inputName {"style":"width:100%","placeholder":"可直接输入地址，也可点击下图标进行上传"})
             #end
         #end
     #end
