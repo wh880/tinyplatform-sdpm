@@ -2,7 +2,6 @@
 #foreach(var:pager?.records)
     #@tr()
         #@td()<input type="checkbox" value="${var.clientRequestId}" name="idCheck">#end
-    ##        #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/service/serviceReq/add.page">${var.clientRequestId}</a>#end
         #@td()<a
                 href="${TINY_CONTEXT_PATH+adminPath}/service/client/clientSla?id=${var.clientId}">${var.clientName}</a>#end
         #@td()${var.requestTitle}#end

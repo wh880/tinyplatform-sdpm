@@ -51,11 +51,10 @@
         #end
     #end
     #@tinyTableContent(TINY_CONTEXT_PATH+adminPath+"/service/request/list/data?status="+status+
-        "&operation="+operation+"&treeId="+treeId) ##取数据地址 总数据
+        "&operation="+operation+"&treeId="+treeId)
         #@thead()
-            #@tr()###th  class 为sorting 表票可排序 为sorting_desc 为当前倒序
+            #@tr()
                 #@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
-            ##                #@tinyTh({"class":"sorting sorting_desc","rel":"sortname"})请求ID#end
                 #@tinyTh({"class":"sorting","rel":"clientName"})客户名称#end
                 #@tinyTh({"class":"sorting","rel":"requestTitle"})请求标题#end
                 #@tinyTh({"class":"sorting","rel":"requestPre"})请求优先级#end
@@ -69,8 +68,7 @@
     #end
     #initBatchAction()
 #end
-#@simpleModal("myModal" "用户编辑")#end
-#@simpleModal("myModal2" "用户删除")#end
+#@simpleModal("myModal" "")#end
 
 ##JS代码全选和反选
 <script type="text/javascript">

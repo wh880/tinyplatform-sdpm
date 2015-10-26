@@ -445,6 +445,11 @@ a.btn.btn-sm.backBtn, .backBtn {
 .contentInfolist{display:inline-block;}
 /*客服模块*/
 .slaEmptyInfo{font-size:20px;color: #666;padding: 12px 6px;margin-top: 6px;}
-.slaEmptyInfo {margin-right: 6px;color: #FA3;font-size:24px;}
+
+.slaEmptyInfo {
+    margin-right: 6px;
+    color: #FA3;
+    font-size: 24px;
+}
 /*搜索select*/
 #task-search .active-disabled .form-control{padding:2px 0px;margin-bottom:3px}
