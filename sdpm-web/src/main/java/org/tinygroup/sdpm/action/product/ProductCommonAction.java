@@ -11,6 +11,7 @@ import org.tinygroup.sdpm.product.service.PlanService;
 import org.tinygroup.sdpm.product.service.ReleaseService;
 
 import javax.servlet.http.HttpServletRequest;
+
 import java.util.*;
 
 @Controller
@@ -22,27 +23,19 @@ public class ProductCommonAction   extends BaseController{
 	@Autowired
 	private ReleaseService releaseService;
 
-	public static void main(String[] args) {
-		List<Date> list = new ArrayList<Date>();
-		list.add(new Date(2015, 12, 2));
-		list.add(new Date(2014, 3, 3));
-		Collections.sort(list, new Comparator<Date>() {
-
-			public int compare(Date o1, Date o2) {
-				// TODO Auto-generated method stub
-				int i = o1.compareTo(o2);
-				System.out.println(i);
-				return i;
-			}
-		});
-		System.out.println(list.get(0));
-	}
 
 	@RequestMapping("/roadMap")
 	public String roadMap(HttpServletRequest request,Model model){
 
 		ProductPlan plan = new ProductPlan();
 		ProductRelease release = new ProductRelease();
+		Integer productId = 0;
+		if(request.getSession().getAttribute("sessionProductId")!=null){
+			productId = (Integer) request.getSession().getAttribute("sessionProductId");
+		}
+		plan.setProductId(productId);
+		release.setProductId(productId);
+		
 		if(request.getSession().getAttribute("sessionProductId")!=null){
 			plan.setProductId((Integer)request.getSession().getAttribute("sessionProductId"));
 			release.setProductId((Integer)request.getSession().getAttribute("sessionProductId"));

@@ -604,7 +604,7 @@ public class StoryAction extends BaseController {
                         if ("".equals(releaseStories)) {
                             condition = (StringUtil.isBlank(condition.trim()) ? " " : (condition + " and ")) + "product_story.story_id is null ";
                         } else {
-                            condition = (StringUtil.isBlank(condition.trim()) ? " " : (condition + " and ")) + "product_story.story_id in (" + releaseStories + ") ";
+                            condition = (StringUtil.isBlank(condition.trim()) ? " " : (condition + " and ")) + "product_story.story_id in (" + releaseStories + ") and product_story.story_status=7";
                         }
 
                     }
@@ -695,7 +695,7 @@ public class StoryAction extends BaseController {
                         if ("".endsWith(releaseBugs)) {
                             condition = (StringUtil.isBlank(condition.trim()) ? " " : (condition + " and ")) + "quality_bug.bug_id is null";
                         } else {
-                            condition = (StringUtil.isBlank(condition.trim()) ? " " : (condition + " and ")) + "quality_bug.bug_id in (" + releaseBugs + ") ";
+                            condition = (StringUtil.isBlank(condition.trim()) ? " " : (condition + " and ")) + "quality_bug.bug_id in (" + releaseBugs + ")  and quality_bug.bug_status=2";
                         }
 
                     }
@@ -703,7 +703,7 @@ public class StoryAction extends BaseController {
                         condition = (StringUtil.isBlank(condition.trim()) ? " " : (condition + " and ")) + "quality_bug.bug_id not in (" + releaseBugs + ") ";
                     }
                     if ("leRelateBugRelease".equals(relate) && !StringUtil.isBlank(releaseBugs)) {
-                        //condition = (StringUtil.isBlank(condition.trim()) ? " " : (condition + " and ")) + "product_story.story_id not in ("+releaseBugs+") ";
+                        condition = (StringUtil.isBlank(condition.trim()) ? " " : (condition + " and ")) + "quality_bug.bug_id in (" + releaseBugs + ")  and quality_bug.bug_status=1";
                     }
                 }
             }
