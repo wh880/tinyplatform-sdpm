@@ -843,7 +843,6 @@ public class StoryAction extends BaseController {
                     , null);
         }
 
-
         map.put("status", "success");
         map.put("info", "删除成功");
         return map;

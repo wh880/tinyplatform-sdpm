@@ -73,6 +73,9 @@ public class ActionEnum {
         nameMap.put("holiday","holiday_name");
         nameMap.put("productLine","product_line_name");
         nameMap.put("sla","sla_title");
+
+        urlMap.put("user","");
+        urlMap.put("story","");
     }
 
     public static String getTable(String type){
@@ -88,12 +91,4 @@ public class ActionEnum {
         return urlMap.get(type);
     }
 
-//    public  static  void main(String[] args){
-//        SystemAction systemAction = new SystemAction();
-//        systemAction.setActionId(1);
-//        systemAction.setActionObjectType("doc");
-//        System.out.println(select(FragmentSql.fragmentSelect("a.*, "+ActionEnum.getName(systemAction.getActionObjectType())+" objectName"))
-//                .from(FragmentSql.fragmentFrom("system_action a JOIN "+ActionEnum.getTable(systemAction.getActionObjectType())+" b ON a.action_object_id = b."+ActionEnum.getPrimary(systemAction.getActionObjectType())))
-//                .where(FragmentSql.fragmentCondition("a.action_id="+systemAction.getActionId())));
-//    }
 }

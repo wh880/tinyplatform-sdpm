@@ -10,7 +10,7 @@
             <input type="button" value="反选"   class="btn btn-default btn-primary"  onclick="selectAllNullorReserve('productLine','反选');" />
 
 			#end
-			#@tinyTableContent(TINY_CONTEXT_PATH +adminPath+"/productLine/list?deleted=0") ##取数据地址 总数据
+			#@tinyTableContent(TINY_CONTEXT_PATH +adminPath+"/productLine/list?deleted=0"+(tinyRequestQueryString?"&"+tinyRequestQueryString:"")) ##取数据地址 总数据
 				#@thead()
 					#@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
 						#@tinyTh({"width":"8"})<input type="checkbox"  value="">#end
@@ -24,7 +24,6 @@
 						#@tinyTh({"class":"sorting","rel":"productLineOwner"})经理#end
 						#@tinyTh({"class":"sorting","rel":"productLineQualityManager"})质量经理#end
 						#@tinyTh({"class":"sorting","rel":"productLineDeliveryManager"})交付经理#end
-						#@tinyTh({"class":"sorting","rel":"productLineStatus"})状态#end
 						#@tinyTh({"class":"sorting","rel":"sortname"})操作#end
 					#end
 				#end

@@ -22,12 +22,13 @@ import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.tinysqldsl.Pager;
+import org.tinygroup.tinysqldsl.base.Condition;
 
 public interface ProductLineDao extends BaseDao<ProductLine,Integer> {
 	
 	Integer softDelete(Integer id);
 	
-	Pager<ProductLine> findList(int start,int limit ,ProductLine productLine ,final OrderBy... orderArgs);
+	Pager<ProductLine> findList(int start, int limit, Condition condition, ProductLine productLine , final OrderBy... orderArgs);
 	
 	
 

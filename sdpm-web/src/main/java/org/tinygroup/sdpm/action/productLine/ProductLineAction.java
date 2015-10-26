@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.action.product.SessionUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
@@ -73,7 +74,7 @@ public class ProductLineAction extends BaseController {
                 ,null
                 , systemAction.getActionComment());
 
-        return "redirect:" + "/productLine/page/tabledemo/list.page";
+        return "redirect:" + "/a/productLine/content/all";
     }
 
     @RequestMapping("/update")
@@ -89,7 +90,7 @@ public class ProductLineAction extends BaseController {
                 productLineOld,
                 productLine,
                 productLine.getProductLineSpec());
-        return "redirect:" + "/productLine/page/tabledemo/list.page";
+        return "redirect:" + "/a/productLine/to";
     }
 
 
@@ -147,19 +148,12 @@ public class ProductLineAction extends BaseController {
     }
 
     @RequestMapping("/list")
-    public String list(ProductLine productLine,
-                       @RequestParam(required = false, defaultValue = "1") int page,
-                       @RequestParam(required = false, defaultValue = "10") int pagesize,
+    public String list(ProductLine productLine, Integer start, Integer pagesize,
                        @RequestParam(required = false, defaultValue = "productLineId") String order,
-                       @RequestParam(required = false, defaultValue = "asc") String ordertype, Model model) {
-        if("user".equals(productLine.getProductLineCreatedBy())){
-        	productLine.setProductLineCreatedBy(UserUtils.getUser().getOrgUserAccount());
-        }
-        if("all".equals(productLine.getProductLineStatus())){
-        	productLine.setProductLineStatus(null);
-        }
+                       @RequestParam(required = false, defaultValue = "asc") String ordertype,Integer status, Model model) {
+        String condition = getStatusCondition(status);
         
-        Pager<ProductLine> pagerProductLine = productLineService.findProductLinePager(page, pagesize, productLine, order, ordertype);
+        Pager<ProductLine> pagerProductLine = productLineService.findProductLinePager(start, pagesize,condition, productLine, order, ordertype);
 
         model.addAttribute("productLine", pagerProductLine);
         return "/productLine/data/productLinedata.pagelet";
@@ -231,7 +225,7 @@ public class ProductLineAction extends BaseController {
     }
 
     @RequestMapping("/to")
-    public String to(HttpServletRequest request) {
+    public String to(HttpServletRequest request,Model model) {
         List<ProductLine> list = (List<ProductLine>) request.getSession().getAttribute("productLineList");
         if (list == null || list.size() == 0) {
             list = productLineService.findProductLineList(new ProductLine(), "productLineId", "desc");
@@ -241,7 +235,10 @@ public class ProductLineAction extends BaseController {
                 request.getSession().setAttribute("sessionProductLineId", list.size() > 0 ? list.get(0).getProductLineId() : null);
             }
         }
-
+        String query = request.getQueryString();
+        if(query.contains("status")){
+            model.addAttribute("status",1);
+        }
         return "/productLine/page/project/productLine.page";
     }
 
@@ -361,6 +358,16 @@ public class ProductLineAction extends BaseController {
         return list;
     }
 
+    private String getStatusCondition(Integer status){
+        if(status==null||status<1)return "";
+        switch (status){
+            case 1:return "";
+            case 2:return " product_line_owner = '"+UserUtils.getUserId()+"' ";
+            case 3:return " product_line_quality_manager = '"+UserUtils.getUserId()+"' ";
+            case 4:return " product_line_delivery_manager = '"+UserUtils.getUserId()+"' ";
+        }
+        return "";
+    }
 
 }
 
