@@ -94,15 +94,15 @@ public class RequestAction extends BaseController {
     public String listData(Integer limit, Integer start, ServiceRequest clientRequest, Integer status, Integer operation, Integer treeId, Model model,
                            String groupOperate, SearchInfos searchInfos,
                            @RequestParam(required = false, defaultValue = "clientRequestId") String order,
-                           @RequestParam(required = false, defaultValue = "desc") String orderType) {
+                           @RequestParam(required = false, defaultValue = "desc") String ordertype) {
 
         if (operation != null) {
             OrgUser user = UserUtils.getUser();
-            Pager<ServiceRequest> pager = requestService.findOperationByMe(start, limit, user, clientRequest, treeId, operation, order, orderType);
+            Pager<ServiceRequest> pager = requestService.findOperationByMe(start, limit, user, clientRequest, treeId, operation, order, ordertype);
             model.addAttribute("pager", pager);
             return "service/serviceReq/requestTableData.pagelet";
         }
-        Pager<ServiceRequest> pager = requestService.findRequestPager(start, limit, status, clientRequest, treeId, groupOperate, searchInfos, order, orderType);
+        Pager<ServiceRequest> pager = requestService.findRequestPager(start, limit, status, clientRequest, treeId, groupOperate, searchInfos, order, ordertype);
         model.addAttribute("pager", pager);
         return "service/serviceReq/requestTableData.pagelet";
     }

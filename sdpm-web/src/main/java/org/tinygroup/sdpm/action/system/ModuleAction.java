@@ -156,7 +156,7 @@ public class ModuleAction extends BaseController {
     //    @RequestMapping("dcit/delete")
 //    public String dictdeleteModule(Integer moduleId) {
 //        if (moduleId != null) {
-//            moduleService.deleteAndedit(moduleId);
+//            moduleService.deleteAndEdit(moduleId);
 //        }
 //        return "redirect: "+"list?moduleType=dict";
 //    }
@@ -210,7 +210,7 @@ public class ModuleAction extends BaseController {
             moduleService.add(systemModule);
         } else {
 
-            moduleService.eidtNameAndTiele(systemModule);
+            moduleService.editNameAndTitle(systemModule);
         }
         return "redirect: list?moduleType=dict";
     }
@@ -232,7 +232,7 @@ public class ModuleAction extends BaseController {
             if (systemModule.getModuleParent() != systemModule1.getModuleParent()) {
                 systemModule.setModulePath(moduleService.findById(systemModule.getModuleParent()).getModulePath() + systemModule.getModuleParent() + ",");
             }
-            moduleService.eidtNameAndTiele(systemModule);
+            moduleService.editNameAndTitle(systemModule);
         }
         Map<String, String> map = new HashMap<String, String>();
         map.put("status", "success");

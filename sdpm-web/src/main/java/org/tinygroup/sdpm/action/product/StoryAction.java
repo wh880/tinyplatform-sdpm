@@ -38,6 +38,7 @@ import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 import java.util.*;
 
@@ -604,7 +605,7 @@ public class StoryAction extends BaseController {
                         if ("".equals(releaseStories)) {
                             condition = (StringUtil.isBlank(condition.trim()) ? " " : (condition + " and ")) + "product_story.story_id is null ";
                         } else {
-                            condition = (StringUtil.isBlank(condition.trim()) ? " " : (condition + " and ")) + "product_story.story_id in (" + releaseStories + ") ";
+                            condition = (StringUtil.isBlank(condition.trim()) ? " " : (condition + " and ")) + "product_story.story_id in (" + releaseStories + ") and product_story.story_status=7";
                         }
 
                     }
@@ -695,7 +696,7 @@ public class StoryAction extends BaseController {
                         if ("".endsWith(releaseBugs)) {
                             condition = (StringUtil.isBlank(condition.trim()) ? " " : (condition + " and ")) + "quality_bug.bug_id is null";
                         } else {
-                            condition = (StringUtil.isBlank(condition.trim()) ? " " : (condition + " and ")) + "quality_bug.bug_id in (" + releaseBugs + ") ";
+                            condition = (StringUtil.isBlank(condition.trim()) ? " " : (condition + " and ")) + "quality_bug.bug_id in (" + releaseBugs + ")  and quality_bug.bug_status=2";
                         }
 
                     }
@@ -703,7 +704,7 @@ public class StoryAction extends BaseController {
                         condition = (StringUtil.isBlank(condition.trim()) ? " " : (condition + " and ")) + "quality_bug.bug_id not in (" + releaseBugs + ") ";
                     }
                     if ("leRelateBugRelease".equals(relate) && !StringUtil.isBlank(releaseBugs)) {
-                        //condition = (StringUtil.isBlank(condition.trim()) ? " " : (condition + " and ")) + "product_story.story_id not in ("+releaseBugs+") ";
+                        condition = (StringUtil.isBlank(condition.trim()) ? " " : (condition + " and ")) + "quality_bug.bug_id in (" + releaseBugs + ")  and quality_bug.bug_status=1";
                     }
                 }
             }
@@ -784,7 +785,7 @@ public class StoryAction extends BaseController {
      * @return
      */
     @RequestMapping("/report")
-    public String report(ProductStory story, String chexkitem, Model model) {
+    public String report(ProductStory story, String chexkitem, Model model,HttpServletRequest request) {
 
 		/*
 		 * List<StoryCount> productStoryCount =
@@ -796,8 +797,12 @@ public class StoryAction extends BaseController {
 		 * model.addAttribute("modelStoryCount", modelStoryCount);
 		 * model.addAttribute("planStoryCount", planStoryCount);
 		 */
-        Map<String, List<StoryCount>> map = storyService.report(chexkitem,
-                story);
+    	Integer productId=0;
+    	if(request.getSession().getAttribute("sessionProductId")!=null){
+    		productId = (Integer) request.getSession().getAttribute("sessionProductId");
+    	}
+    	story.setProductId(productId);
+        Map<String, List<StoryCount>> map = storyService.report(chexkitem,story);
         model.addAttribute("map", map);
         model.addAttribute("fields", chexkitem);
         return "/product/page/tabledemo/product-report.page";

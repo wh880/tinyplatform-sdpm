@@ -154,7 +154,7 @@ public class CmsUtils {
      * 获得文档库
      */
     public static DocumentDoclib getDocLib(String libId) {
-        List<DocumentDoclib> libList = getLibList();
+        List<DocumentDoclib> libList = getDocLibList();
         if (libId == null && libList != null && !libList.isEmpty()) {
             return libList.get(0);
         }
@@ -167,12 +167,12 @@ public class CmsUtils {
     }
 
     /**
-     * 获得文档库
+     * 获得文档库列表
      */
-    public static List<DocumentDoclib> getLibList() {
+    public static List<DocumentDoclib> getDocLibList() {
         List<DocumentDoclib> libList = (List<DocumentDoclib>) CacheUtils.get(CMS_CACHE, CMS_CACHE_DOCLIB_LIST);
         if (libList == null) {
-            libList = docService.findDoclibList(new DocumentDoclib());
+            libList = docService.findDoclibList(null);
             CacheUtils.put(CMS_CACHE, CMS_CACHE_DOCLIB_LIST, libList);
         }
         return libList;
@@ -181,7 +181,7 @@ public class CmsUtils {
     /**
      * 清除文档库列表
      */
-    public static void removeLibList() {
+    public static void removeDocLibList() {
         CacheUtils.remove(CMS_CACHE, CMS_CACHE_DOCLIB_LIST);
     }
 

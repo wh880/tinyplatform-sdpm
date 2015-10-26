@@ -2,9 +2,10 @@
 #for(p:projectList)
 #set(t=teamList.get(pFor.index-1))
 #@tr()
-    #@td()${p?.projectId}#end
+    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/project/task/index?projectId=${p?.projectId}">${p?.projectId}</a>#end
     #@td()${p?.projectCode}#end
-    #@td()${p?.projectName}#end
+    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/project/task/index?projectId=${p?.projectId}">${p
+        ?.projectName}</a>#end
     #@td()${formatDate(p?.projectBegin,"yyyy年MM月dd日")}#end
     #@td()${formatDate(p?.projectEnd,"yyyy年MM月dd日")}#end
     #@td()${getDict("projectStatus",p?.projectStatus)}#end

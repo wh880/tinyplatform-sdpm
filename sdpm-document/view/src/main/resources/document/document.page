@@ -4,11 +4,9 @@
 #set(docTableId = "docTableId" )
 #!set(activeTitle="产品文档",activeMenuId=currentPageId)
 
-#include("common.page")
-#include("doc-tab.page")
-        ##operationbar start
-            #@div(divClass="operationbar")
-            	#include("mulsearch.page") 
-            #end    
-#include("treeNew.page")
-	
+#include("/document/doc-tab.page")
+#@div(divClass="operationbar")
+    #include("/document/mulsearch.page")
+#end
+#include("/document/treeNew.page")
+#include("/document/common.page")

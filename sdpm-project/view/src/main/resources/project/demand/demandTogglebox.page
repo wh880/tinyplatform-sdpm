@@ -1,9 +1,7 @@
-##import("/org/tinygroup/table/components/togglebox.component") 宏文件所在位置
 #!set(activeMenuId=currentPageId)
-
 #@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
 	#@toggleLeft({"class":"aclass"})
-		#@settoggleLeftTitle()${CmsUtils.getProject(currentProjectId).projectName}#end
+		#@settoggleLeftTitle()${currentProjectId?CmsUtils.getProject(currentProjectId).projectName:"请选择项目"}#end
 		#@settoggleLeftBody("treeLeftbox")
 			#include("/project/demand/moduleTree.page")
 		#end

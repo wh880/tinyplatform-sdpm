@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
+import org.tinygroup.sdpm.common.util.ComplexSearch.SqlUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
@@ -223,8 +225,17 @@ public class BuildAction extends BaseController {
             model.addAttribute("bugList",p);
             return "/project/task/relation-release/product-al-bug-data.pagelet";
         }else if ("noRelateBug".equals(relate)) {
+            String condition = "";
+            if (searchInfos != null) {
+                if (searchInfos.getInfos().size() > 0 || searchInfos.getInfos() != null) {
+                    String sql = SqlUtil.toSql(searchInfos.getInfos(), groupOperate);
+                    if (!StringUtil.isBlank(sql)) {
+                        condition += sql;
+                    }
+                }
+            }
             bug.setProjectId(null);
-            Pager<QualityBug> p = buildService.findnoBugPager(pagesize*(page - 1),pagesize,id,searchInfos,groupOperate);
+            Pager<QualityBug> p = buildService.findnoBugPager(pagesize*(page - 1),pagesize,id,condition,searchInfos,groupOperate);
             model.addAttribute("bugList",p);
             return "/project/task/relation-release/product-al-no-bug-data.pagelet";
         } else if ("leRelateBugRelease".equals(relate)) {
@@ -273,7 +284,16 @@ public class BuildAction extends BaseController {
     @RequestMapping("/search/noRelateStory")
     public String storynoListAction( int page, int pagesize,int id,String groupOperate, SearchInfos searchInfos,
                                    Model model){
-        Pager<ProductStory> p = projectStoryService.findnoStoryPager(pagesize*(page - 1),pagesize,id,searchInfos,groupOperate);
+        String condition = "";
+        if (searchInfos != null) {
+            if (searchInfos.getInfos().size() > 0 || searchInfos.getInfos() != null) {
+                String sql = SqlUtil.toSql(searchInfos.getInfos(), groupOperate);
+                if (!StringUtil.isBlank(sql)) {
+                    condition += sql;
+                }
+            }
+        }
+        Pager<ProductStory> p = projectStoryService.findnoStoryPager(pagesize*(page - 1),pagesize,id,condition,searchInfos,groupOperate);
         model.addAttribute("storys",p);
 
         return "/project/task/relation-release/product-al-no-req-data.pagelet";

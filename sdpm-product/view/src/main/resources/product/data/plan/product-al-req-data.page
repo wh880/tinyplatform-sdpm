@@ -9,15 +9,15 @@
     #@td()<a
             href="${TINY_CONTEXT_PATH +adminPath}/product/storySpec/find/productDemandDetail?storyId=${story.storyId}">${story
         ?.storyId}</a>#end
-    #@td()@#end
+    #@td()${getDict("storyPri",story?.storyPri)}#end
     #@td()<a
             href="${TINY_CONTEXT_PATH +adminPath}/product/storySpec/find/productDemandDetail?storyId=${story.storyId}">${story
         ?.storyTitle}</a>#end
-    #@td()${story?.storyOpenedName}#end
-    #@td()${story?.storyAssignedName}#end
+    #@td()${story?.storyOpenedBy?UserUtils.getUserById(story?.storyOpenedBy)?.orgUserRealName:""}#end
+    #@td()${story?.storyAssignedTo?UserUtils.getUserById(story?.storyAssignedTo)?.orgUserRealName:""}#end
     #@td()${story?.storyEstimate}#end
-    #@td()${story?.storyStatus}#end
-    #@td()${story?.storyStage}#end
+    #@td()${getDict("storyStatus",story?.storyStatus)}#end
+    #@td()${getDict("storyStage",story?.storyStage)}#end
     #@td()
      		#foreach(m:menuManager?.getScopeMenus("plan-linkdemand"))
      		#set(url=eval(m.href))
@@ -26,6 +26,5 @@
      		#end
 			#end
     #end
-
 #end
 #end

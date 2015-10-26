@@ -1,6 +1,7 @@
 package org.tinygroup.sdpm.project.biz.inter;
 
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
+import org.tinygroup.sdpm.project.dao.pojo.TaskChartBean;
 import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.List;
@@ -9,6 +10,13 @@ import java.util.List;
  * Created by shenly13343 on 2015-09-18.
  */
 public interface TaskManager {
+
+    /**
+     * 查询所有任务
+     *
+     * @return
+     */
+    public List<ProjectTask> findAll();
 
     public Integer batchSoftDel(String condition);
 
@@ -52,6 +60,7 @@ public interface TaskManager {
 
     /**
      * 加入状态
+     *
      * @param start
      * @param limit
      * @param task
@@ -85,6 +94,7 @@ public interface TaskManager {
      * @return
      */
     Integer updateTask(ProjectTask task);
+
     /**
      * 更新用户
      *
@@ -92,6 +102,7 @@ public interface TaskManager {
      * @return
      */
     Integer updateEditTask(ProjectTask task);
+
     /**
      * 更新用户
      *
@@ -99,6 +110,7 @@ public interface TaskManager {
      * @return
      */
     Integer updateCallTask(ProjectTask task);
+
     /**
      * 更新用户
      *
@@ -106,6 +118,7 @@ public interface TaskManager {
      * @return
      */
     Integer updateFinishTask(ProjectTask task);
+
     /**
      * 更新用户
      *
@@ -131,4 +144,7 @@ public interface TaskManager {
     Integer delete(int id);
 
     Integer updateCloseTask(ProjectTask task);
+
+
+    List<TaskChartBean> findByGroup(String id);
 }

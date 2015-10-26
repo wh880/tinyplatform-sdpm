@@ -1,4 +1,3 @@
-
 <form method="get" action="${TINY_CONTEXT_PATH+adminPath}/document" id="${docTableId}form" class="form-condensed searchform">
 	<div class="hide">
 		<select id="operatortemp">

@@ -3,7 +3,6 @@ package org.tinygroup.sdpm.action.project.util;
 
 import org.tinygroup.commons.tools.StringUtil;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,7 +27,7 @@ public class TaskStatusUtil {
         status.put("0", "task_status !=6");
     }
 
-    public static String getCondition(String statu, String choose, HttpServletRequest request, String moduleIds) {
+    public static String getCondition(String statu, String choose, String userId, String moduleIds) {
         String condition = "";
         if (statu != null && choose == null) {
             condition = status.get(statu);
@@ -44,7 +43,7 @@ public class TaskStatusUtil {
             } else if ("2".equals(choose)) {
                 condition = "";
             } else if ("7".equals(choose)) {
-                //condition = "task_assigned_to = '"+request.getSession().getAttribute("userId")+"'";
+                condition = "task_assigned_to = '" + userId + "'";
             } else condition = "";
         } else condition = "";
 

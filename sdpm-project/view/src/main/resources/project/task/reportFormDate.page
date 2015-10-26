@@ -1,0 +1,74 @@
+<table class="table table-border table-bordered" cellspacing="0">
+    #foreach(key:map?.keySet())
+        #@centerAlignTr()
+            #@th("text-r" "vertical-align:middle;width:20%")
+                #@pieChart(pieChartStyle="width:600px;margin:0 auto;")
+                    <table id="myTable${keyFor?.index}">
+                        <caption>${key}</caption>
+                        <thead>
+                        <tr>
+                            #foreach(list : map.get(key))
+                                <th>${list?.title}</th>
+                            #end
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            #foreach(list : map.get(key))
+                                <th>${list?.taskCount}</th>
+                            #end
+                        </tr>
+                        </tbody>
+                    </table>
+                #end
+                #pieChartInit("#myTable"+keyFor.index "PieChart" "No of players" "Month",600,350)
+            #end
+            #@td()
+                <table class="table table-border table-bordered" cellspacing="0">
+                    #!set(num=2000)
+                    #@theadCenterMenu()   #@th()会员地区#end        #@th()需求数#end  #@th()百分比#end #end
+                    #@centerAlignTr()
+
+                        #@td()河北#end
+                        #@td()1200#end
+                        #@td()
+                            ${sum}
+                        #end
+                    #end
+                    #@centerAlignTr()
+                        #@td()河南#end
+                        #@td()1200#end
+                        #@td()
+                            ${540/200}
+                        #end
+                    #end
+                    #@centerAlignTr()
+                        #@td()湖北#end
+                        #@td()1200#end
+                        #@td()
+
+                        #end
+                    #end
+                    #@centerAlignTr()
+                        #@td()湖南#end
+                        #@td()1200#end
+                        #@td()
+                        #end
+                    #end
+                    #@centerAlignTr()
+                        #@td()山东#end
+                        #@td()1200#end
+                        #@td()
+                        #end
+                    #end
+                    #@centerAlignTr()
+                        #@td()山西#end
+                        #@td()1200#end
+                        #@td()
+                        #end
+                    #end
+                </table>
+            #end
+        #end
+    #end
+</table>

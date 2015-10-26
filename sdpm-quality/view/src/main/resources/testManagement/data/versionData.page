@@ -1,50 +1,54 @@
-
 #setTinyItemCount(verPager?.totalCount)
 
 #for(v:verPager?.records)
-					#@tr()
-						#@td()<input type="checkbox" value="${v?.testversionId}" name="idCheck">#end
-						#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/version/taskToCase?testversionId=${v?.testversionId}&currentPageId=5&status=tverallcase">${v?.testversionId}</a>#end
-						#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/version/taskToCase?testversionId=${v?.testversionId}&currentPageId=5&status=tverallcase">${v?.testtaskTitle}</a>#end
-						#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/project/demand/index.page">${v?.projectId}</a>#end
-						#@td()${v?.buildName}#end
-						#@td()${v?.testtaskOwner?UserUtils.getUserById(v?.testtaskOwner)?.orgUserRealName:""}#end
-						#@td()${v?.testtaskBegin}#end
-						#@td()${v?.testtaskEnd}#end
-						#@td()${getDict("versionStatus",v?.testtaskStatus)}#end
-						 #@td()
-						 	#foreach(m:menuManager.getScopeMenus("testversion-op"))
-						 		#if(m.id != "tversiondelete")
-						 			<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?testversionId=${v?.testversionId}&currentPageId=5" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
-						 		#else
-									<a class="versionDelete" href="javascript:void(0)"><i class="${m.icon}" title="删除"></i></a>
-								    <script type="text/javascript">
-                                                $(function(){
-                                                    var check = $(".versionDelete");
-                                                    check.on("click",function(){
-                                                        layer.confirm("是否确认删除?",function() {
-                                                        $.ajax({
-                                                             type: "get",
-                                                             url: "${TINY_CONTEXT_PATH+adminPath+m?.href+"?testversionId="+v?.testversionId}",
-                                                             dataType: "json",
-                                                             success: function(data){
-                                                                    if(data.status == "y"){
-                                                                    window.location.reload();
-                                                                    }
-                                                                }
-                                                                 });
-                                                                 return false;
-                                                    });
-                                                    });
-                                                })
+#@tr()
+    #@td()<input type="checkbox" value="${v?.testversionId}" name="idCheck">#end
+    #@td()<a
+            href="${TINY_CONTEXT_PATH+adminPath}/quality/version/taskToCase?testversionId=${v?.testversionId}&currentPageId=5&status=tverallcase">${v
+        ?.testversionId}</a>#end
+    #@td()<a
+            href="${TINY_CONTEXT_PATH+adminPath}/quality/version/taskToCase?testversionId=${v?.testversionId}&currentPageId=5&status=tverallcase">${v
+        ?.testtaskTitle}</a>#end
+    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/project/demand/index.page">${v?.projectId}</a>#end
+    #@td()${v?.buildName}#end
+    #@td()${v?.testtaskOwner?UserUtils.getUserById(v?.testtaskOwner)?.orgUserRealName:""}#end
+    #@td()${v?.testtaskBegin}#end
+    #@td()${v?.testtaskEnd}#end
+    #@td()${getDict("versionStatus",v?.testtaskStatus)}#end
+    #@td()
+        #foreach(m:menuManager.getScopeMenus("testversion-op"))
+            #if(m.id != "tversiondelete")
+            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?testversionId=${v?.testversionId}&currentPageId=5"
+               title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+            #else
+            <a class="versionDelete" href="javascript:void(0)"><i class="${m.icon}" title="删除"></i></a>
+            <script type="text/javascript">
+                $(function () {
+                    var check = $(".versionDelete");
+                    check.on("click", function () {
+                        layer.confirm("是否确认删除?", function () {
+                            $.ajax({
+                                type: "get",
+                                url: "${TINY_CONTEXT_PATH+adminPath+m?.href+" ? testversionId = "+v?.testversionId}",
+                                dataType: "json",
+                                success: function (data) {
+                                    if (data.status == "y") {
+                                        window.location.reload();
+                                    }
+                                }
+                            });
+                            return false;
+                        });
+                    });
+                })
 
-                                            </script>
-						 		#end
-						 	#end
+            </script>
+            #end
+        #end
 
-							###iconOperations("#myModal" "icon-remove" "删除版本" "250" "60" "/testManagement/page/tabledemo/delete.pagelet" "ml-5")
+    ###iconOperations("#myModal" "icon-remove" "删除版本" "250" "60" "/testManagement/page/tabledemo/delete.pagelet" "ml-5")
 
 
-						#end
-					#end
-				#end
+    #end
+#end
+#end

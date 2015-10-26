@@ -10,13 +10,11 @@ import org.springframework.web.multipart.MultipartFile;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.action.project.util.TaskStatusUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
+import org.tinygroup.sdpm.dict.util.DictUtil;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.service.StoryService;
-import org.tinygroup.sdpm.project.dao.pojo.Project;
-import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
-import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
-import org.tinygroup.sdpm.project.dao.pojo.ProjectTeam;
+import org.tinygroup.sdpm.project.dao.pojo.*;
 import org.tinygroup.sdpm.project.service.inter.*;
 import org.tinygroup.sdpm.system.dao.pojo.ProfileType;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
@@ -60,38 +58,16 @@ public class TaskAction extends BaseController {
 
     @RequiresPermissions(value = {"task", "project"}, logical = Logical.OR)
     @RequestMapping("index")
-    public String index(@CookieValue(required = false, value = COOKIE_PROJECT_ID) Integer currentProjectId,
-                        String moduleId, String choose, Model model) {
-//        List<Project> list = projectService.findList();
-//        Project selProject = new Project();
-//        if (list == null || list.isEmpty()) {
-//            return "redirect:" + adminPath + "/project/add";
-//        } else {
-//            if (currentProjectId == null) {
-//                selProject = list.get(0);
-//                //maxAge=-1意为永久
-//                CookieUtils.setCookie(response, TaskAction.COOKIE_PROJECT_ID, selProject.getProjectId().toString(), -1);
-//            } else {
-//                boolean flag = false;
-//                for (Project p : list) {
-//                    if (p.getProjectId() == currentProjectId) {
-//                        selProject = p;
-//                        CookieUtils.setCookie(response, TaskAction.COOKIE_PROJECT_ID, currentProjectId.toString(), -1);
-//                        flag = true;
-//                        break;
-//                    }
-//                }
-//                //若数据库中无cookies中projectId对应的项目，则返回选中第一条
-//                if (!flag) {
-//                    selProject = list.get(0);
-//                    CookieUtils.setCookie(response, TaskAction.COOKIE_PROJECT_ID, selProject.getProjectId().toString(), -1);
-//                }
-//            }
-//        }
-//        //model.addAttribute("selProject", selProject);
-//        //model.addAttribute("projectList", list);
-//        request.getSession().setAttribute("selProject", selProject);
-//        request.getSession().setAttribute("projectList", list);
+    public String index(@CookieValue(required = false, value = COOKIE_PROJECT_ID) String currentProjectId,
+                        HttpServletResponse response, String moduleId, String choose, Model model) {
+        if (StringUtil.isBlank(currentProjectId)) {
+            Project project = CmsUtils.getProject(null);
+            if (null != project) {
+                currentProjectId = project.getProjectId().toString();
+                CookieUtils.setCookie(response, COOKIE_PROJECT_ID, currentProjectId);
+                model.addAttribute(COOKIE_PROJECT_ID, currentProjectId);
+            }
+        }
         if (moduleId != null) {
             model.addAttribute("moduleId", moduleId);
         }
@@ -108,7 +84,6 @@ public class TaskAction extends BaseController {
         if (taskId != null) {
             ProjectTask task = taskService.findTask(taskId);
             model.addAttribute("task", task);
-            //还需要查询其他相关任务剩余时间的信息
             return "project/task/edit.page";
         }
         return "error";
@@ -259,13 +234,15 @@ public class TaskAction extends BaseController {
     }
 
     @RequestMapping("/findPager")
-    public String findPager(Integer start, Integer limit, String order, String ordertype, String statu, String choose, String group, Integer projectId, Model model, HttpServletRequest request, String moduleId) {
+    public String findPager(@CookieValue(required = false, value = COOKIE_PROJECT_ID) String projectId,
+                            Integer start, Integer limit, String order, String ordertype, String statu,
+                            String choose, Model model, HttpServletRequest request, String moduleId) {
         boolean asc = true;
         if ("desc".equals(ordertype)) {
             asc = false;
         }
         ProjectTask task = new ProjectTask();
-        task.setTaskProject(projectId);
+        task.setTaskProject(Integer.parseInt(projectId));
         String moduleIds = "";
         if (!StringUtil.isBlank(moduleId)) {
             if (moduleId.contains("p")) {
@@ -278,12 +255,12 @@ public class TaskAction extends BaseController {
         if (statu == null && choose == null) {
             statu = "0";
         }
-        String condition = TaskStatusUtil.getCondition(statu, choose, request, moduleIds);
-        Pager<ProjectTask> taskPager = taskService.findPagerTask(start, limit, task, order, asc, condition, group);
+
+        String condition = TaskStatusUtil.getCondition(statu, choose, UserUtils.getUserId(), moduleIds);
+        Pager<ProjectTask> taskPager = taskService.findPagerTask(start, limit, task, order, asc, condition);
         model.addAttribute("taskPager", taskPager);
         model.addAttribute("statu", statu);
         model.addAttribute("choose", choose);
-        model.addAttribute("group", group);
         return "project/task/datalist.pagelet";
     }
 
@@ -584,7 +561,31 @@ public class TaskAction extends BaseController {
     }
 
     @RequestMapping("/grouping")
-    public String grouping(String groupKey, Model model) {
+    public String grouping(@CookieValue(value = TaskAction.COOKIE_PROJECT_ID, required = false) String projectId,
+                           String type, Model model) {
+        Map<String, List<ProjectTask>> map = taskService.findGroup(DictUtil.getValue("groupType", type), Integer.parseInt(projectId));
+        //转换为前台显示，存在同名问题
+//        Map<String, List<ProjectTask>> resMap = new HashMap<String, List<ProjectTask>>();
+//        if ("1".equals(type)) {
+//            for (String key : map.keySet()) {
+//                resMap.put(productStoryService.findStory(Integer.parseInt(key)).getStoryTitle(), map.get(key));
+//            }
+//        } else if ("2".equals(type)) {
+//            for (String key : map.keySet()) {
+//                resMap.put(DictUtil.getValue("taskStatus", key), map.get(key));
+//            }
+//        } else if ("4".equals(type) || "5".equals(type) || "6".equals(type) || "7".equals(type)) {
+//            for (String key : map.keySet()) {
+//                resMap.put(UserUtils.getUserById(key).getOrgUserRealName(), map.get(key));
+//            }
+//        } else {
+//            for (String key : map.keySet()) {
+//                resMap.put(key, map.get(key));
+//            }
+//        }
+
+        model.addAttribute("map", map);
+        model.addAttribute("type", type);
         return "project/task/grouping.page";
     }
 
@@ -625,6 +626,36 @@ public class TaskAction extends BaseController {
                 taskService.findTask(task.getTaskId()), task, content);
         return map;
     }
+
+    @RequestMapping("/reportform")
+    public String reportform() {
+        return "project/task/reportform.page";
+    }
+
+    @RequestMapping("/buildChart")
+    public String buildChart(String ids, Model model) {
+        Map<String, List> map = new HashMap<String, List>();
+        String[] idArray = ids.split(",");
+        if (idArray.length > 0) {
+            for (String id : idArray) {
+                List<TaskChartBean> list = taskService.buildChart(id);
+                //部分内容需要格式化内容
+                if ("3".equals(id)) {
+                    for (TaskChartBean bean : list) {
+                        bean.setTitle(DictUtil.getValue("taskType", bean.getTitle()));
+                    }
+                } else if ("5".equals(id)) {
+                    for (TaskChartBean bean : list) {
+                        bean.setTitle(DictUtil.getValue("taskStatus", bean.getTitle()));
+                    }
+                }
+                map.put(DictUtil.getValue("chartType", id), list);
+            }
+        }
+        model.addAttribute("map", map);
+        return "project/task/reportFormDate.pagelet";
+    }
+
 
     private Map<String, String> getMap(Integer res, String successMsg, String falseMsg) {
         Map<String, String> map = new HashMap<String, String>();

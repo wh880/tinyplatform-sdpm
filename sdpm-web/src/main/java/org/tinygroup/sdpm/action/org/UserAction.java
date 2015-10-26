@@ -152,7 +152,7 @@ public class UserAction extends BaseController {
                 return resultMap(true, "用户名可用");
             }
         } else { //修改用户信息
-            if (userList.size() <= 1) {
+            if (userList.size() < 1 || account.equals(userService.findUser(orgUserId).getOrgUserAccount())) {
                 return resultMap(true, "用户名可用");
             }
         }
@@ -362,7 +362,7 @@ public class UserAction extends BaseController {
         } else {
             task1.setTaskAssignedTo(id);
         }
-        Pager<ProjectTask> taskPager = taskService.findPagerTask(start, limit, task1, order, false, null, null);
+        Pager<ProjectTask> taskPager = taskService.findPagerTask(start, limit, task1, order, false, null);
         List<Integer> projectIdList = new ArrayList<Integer>();
         for (ProjectTask project : taskPager.getRecords()) {
             projectIdList.add(project.getTaskProject());

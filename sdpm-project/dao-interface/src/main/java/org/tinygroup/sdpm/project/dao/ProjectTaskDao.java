@@ -19,7 +19,10 @@ package org.tinygroup.sdpm.project.dao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
+import org.tinygroup.sdpm.project.dao.pojo.TaskChartBean;
 import org.tinygroup.tinysqldsl.Pager;
+
+import java.util.List;
 
 public interface ProjectTaskDao extends BaseDao<ProjectTask, Integer> {
 
@@ -49,4 +52,59 @@ public interface ProjectTaskDao extends BaseDao<ProjectTask, Integer> {
 
     public Integer updateColum(ProjectTask projectTask);
 
+    /**
+     * 查询所有task，用于分类
+     *
+     * @return
+     */
+    public List<ProjectTask> findAll();
+
+    /**
+     * 根据指派进行分类
+     *
+     * @return
+     */
+    public List<TaskChartBean> queryChartAssigned();
+
+    /**
+     * 根据任务状态进行分类
+     *
+     * @return
+     */
+    public List<TaskChartBean> queryChartStatus();
+
+    /**
+     * 根据优先级进行分类
+     *
+     * @return
+     */
+    public List<TaskChartBean> queryChartPri();
+
+    /**
+     * 根据截至日期进行分类
+     *
+     * @return
+     */
+    public List<TaskChartBean> queryChartDeadLine();
+
+    /**
+     * 根据模块进行分类
+     *
+     * @return
+     */
+    public List<TaskChartBean> queryChartModule();
+
+    /**
+     * 根据任务类型进行分类
+     *
+     * @return
+     */
+    public List<TaskChartBean> queryChartType();
+
+    /**
+     * 根据完成者分类
+     *
+     * @return
+     */
+    public List<TaskChartBean> queryChartFinishedBy();
 }

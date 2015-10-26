@@ -10,14 +10,11 @@
 				<span class="active_btn">文档列表</span>
 			</span>
     <span class="r">
-
-
         #foreach(m:menuManager.getScopeMenus("archive-add"))
             #if(m.id=="product-archive-add")
                 <a href="${TINY_CONTEXT_PATH +adminPath}/product/addDoc" title="创建文档">#buttonIcon(iconClass="icon-plus")创建文档</a>
             #end
         #end
-
 			</span>
         #div(divClass="clearfix")
     #end
@@ -38,7 +35,7 @@
                         #end
                     #end
                 #end
-                #@tinyTableContent(TINY_CONTEXT_PATH +adminPath+"/document/product/doc/list?docDeleted=0") ##取数据地址 总数据
+                #@tinyTableContent(TINY_CONTEXT_PATH +adminPath+"/document/product/doc/list") ##取数据地址 总数据
                     #@thead()
                         #@tr()###th  class 为sorting 表票可排序 为sorting_desc 为当前倒序
                             #@tinyTh({"width":"6"})<input type="checkbox" name="idCheck" value="">#end
@@ -52,9 +49,6 @@
                     #end
                 #end
             #end
-        
-  
-
 #end
 
 #include("/product/page/event/mytree.page")
