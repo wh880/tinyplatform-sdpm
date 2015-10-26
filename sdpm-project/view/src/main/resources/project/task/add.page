@@ -108,7 +108,7 @@
                 ##                        "text" "taskDesc" "任务描述"{"placeholder":"任务描述","datatype":"*4-16","id":
                 ##                        "username",
                 ##                        "class":"input-text"})
-                    #@Teditor("taskDesc" "taskDesc" {"initialFrameHeight":"150","initialFrameWidth":"700"})${copyTask
+                    #@Teditor("taskDesc" "taskDesc" {"initialFrameHeight":"150","initialFrameWidth":"702"})${copyTask
                         ?.taskDesc}#end
                 #end
             #end
@@ -178,7 +178,7 @@
                 <div class="col-2 text-r"><label>备注：</label></div>
 
                 <div class="col-9">
-                    #@Teditor("comment" "comment" {"initialFrameHeight":"150","initialFrameWidth":"700"})#end
+                    #@Teditor("comment" "comment" {"initialFrameHeight":"150","initialFrameWidth":"702"})#end
                 </div>
             </div>
         #end
