@@ -152,7 +152,7 @@ public class UserAction extends BaseController {
                 return resultMap(true, "用户名可用");
             }
         } else { //修改用户信息
-            if (userList.size() <= 1) {
+            if (userList.size() < 1 || account.equals(userService.findUser(orgUserId).getOrgUserAccount())) {
                 return resultMap(true, "用户名可用");
             }
         }
