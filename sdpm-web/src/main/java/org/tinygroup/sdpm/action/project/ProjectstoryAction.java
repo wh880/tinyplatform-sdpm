@@ -3,6 +3,7 @@ package org.tinygroup.sdpm.action.project;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.commons.tools.StringUtil;
@@ -38,34 +39,16 @@ public class ProjectstoryAction extends BaseController {
     private StoryService storyService;
 
     @RequestMapping("/find")
-    public String find(Model model, HttpServletRequest request, Integer start, Integer limit, String order, String ordertype) {
-        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
-        Pager<ProductStory> story = projectStoryService.findStoryByProject(projectId, start, limit, order, ordertype);
+    public String find(@CookieValue(required = false, value = TaskAction.COOKIE_PROJECT_ID) String projectId,
+                       Model model, Integer start, Integer limit, String order, String ordertype, String moduleId) {
+        moduleId = moduleId.substring(1);
+        Pager<ProductStory> story = projectStoryService.findStoryByProject(Integer.parseInt(projectId), start, limit, order, ordertype, moduleId);
 
         model.addAttribute("storys", story);
         //story.getTotalCount()
         return "project/demand/demandTableData.pagelet";
 
     }
-//    @RequestMapping("/add")
-//    public String form(Integer taskId, Model model) {
-//        if (taskId != null) {
-//            ProjectTask task = taskService.findTask(taskId);
-//            model.addAttribute("task", task);
-//            return "project/task/add.page";
-//        }
-//        return null;
-//    }
-//
-//    @RequestMapping("/batchadd")
-//    public String call(Integer taskId, Model model) {
-//        if (taskId != null) {
-//            ProjectTask task = taskService.findTask(taskId);
-//            model.addAttribute("task", task);
-//            return "project/task/batchAdd.page";
-//        }
-//        return null;
-//    }
 
     @ResponseBody
     @RequestMapping("/delete")
@@ -159,8 +142,6 @@ public class ProjectstoryAction extends BaseController {
                 }
             }
             condition = condition + ")";
-
-
             Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
             condition = condition + " and ";
             condition = condition + "project_id=" + projectId;
@@ -176,27 +157,6 @@ public class ProjectstoryAction extends BaseController {
             map.put("status", "n");
             map.put("info", "未选择");
         }
-
         return map;
     }
-
-
-//    @RequestMapping("/search/{relate}")
-//    public String storyListAction(@PathVariable(value="relate")String relate, Integer start, Integer limit, @RequestParam(required = false, defaultValue = "storyId") String order, @RequestParam(required = false, defaultValue = "asc")String ordertype, Model model, HttpServletRequest request){
-//        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
-//        Pager<ProductStory> story = projectStoryService.findStoryByProject(projectId, start, limit, order, ordertype);
-//        model.addAttribute("story", story);
-//
-//        if("reRelateStory".equals(relate)){
-//            return "/project/task/relation-release/product-al-req.pagelet";
-//        }else if ("noRelateStory".equals(relate)) {
-//            return "/project/task/relation-release/product-al-no-req-data.pagelet";
-//        }else if ("reRelateStoryRelease".equals(relate)) {
-//            return "/project/task/relation-release/product-al-req-data.pagelet";
-//        }else if ("noRelateStoryRelease".equals(relate)) {
-//            return "/project/task/relation-release/product-al-no-req-data.pagelet";
-//        }
-//
-//        return "";
-//    }
 }

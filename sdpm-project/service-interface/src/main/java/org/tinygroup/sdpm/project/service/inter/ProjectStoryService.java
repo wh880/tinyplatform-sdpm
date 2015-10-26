@@ -62,7 +62,7 @@ public interface ProjectStoryService {
      * @param ordertype
      * @return
      */
-    public Pager<ProductStory> findStoryByProject(Integer projectId, Integer start, Integer limit, String order, String ordertype);
+    public Pager<ProductStory> findStoryByProject(Integer projectId, Integer start, Integer limit, String order, String ordertype, String moduleId);
 
     /**
      * 删除

@@ -235,11 +235,13 @@ public class TaskAction extends BaseController {
 
     @RequestMapping("/findPager")
     public String findPager(@CookieValue(required = false, value = COOKIE_PROJECT_ID) String projectId,
-                            Integer start, Integer limit, String order, String ordertype, String statu,
-                            String choose, Model model, HttpServletRequest request, String moduleId) {
-        boolean asc = true;
+                            Integer start, Integer limit, String statu, String choose, Model model,
+                            HttpServletRequest request, String moduleId,
+                            @RequestParam(required = false, defaultValue = "task_id") String order,
+                            String ordertype) {
+        boolean asc = false;
         if ("desc".equals(ordertype)) {
-            asc = false;
+            asc = true;
         }
         ProjectTask task = new ProjectTask();
         task.setTaskProject(Integer.parseInt(projectId));
