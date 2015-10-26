@@ -23,8 +23,10 @@ import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.product.service.StoryService;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
+import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
 import org.tinygroup.sdpm.project.service.inter.BuildService;
+import org.tinygroup.sdpm.project.service.inter.ProjectProductService;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.sdpm.project.service.inter.TaskService;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
@@ -76,6 +78,8 @@ public class BugAction extends BaseController {
 	private ProfileService profileService;
 	@Autowired
 	private ProductService productService;
+	@Autowired
+	private ProjectProductService projectProductService;
 		
 	@RequestMapping("")
 	public String form(String get,QualityBug bug, Model model, HttpServletRequest request){
@@ -481,10 +485,25 @@ public class BugAction extends BaseController {
 	}
 
 	@ResponseBody
+	@RequestMapping("/ajax/project")
+	public List<Project> getProject(ProjectProduct projectProduct){
+		if(projectProduct.getProductId()<1){
+			return new ArrayList<Project>();
+		}
+		List<ProjectProduct> projectProducts = projectProductService.findProjects(projectProduct.getProductId());
+		List<Integer> ids = new ArrayList<Integer>();
+		for(ProjectProduct projectProduct1 : projectProducts){
+			ids.add(projectProduct1.getProjectId());
+		}
+		List<Project> projects = projectService.findByProjectList(ids);
+		return projects==null?new ArrayList<Project>():projects;
+	}
+
+	@ResponseBody
 	@RequestMapping("/ajax/plan")
-	public List<ProductPlan> getplan(ProductPlan productPlan){
+	public List<ProductPlan> getPlan(ProductPlan productPlan){
 		if(productPlan.getProductId()<1){
-			return null;
+			return new ArrayList<ProductPlan>();
 		}
 		List<ProductPlan> moduleList = planService.findPlanList(productPlan);
 		return moduleList;
@@ -494,7 +513,7 @@ public class BugAction extends BaseController {
 	@RequestMapping("/ajax/module")
 	public List<SystemModule> getModule(SystemModule systemModule){
 		if(systemModule.getModuleRoot()<1){
-			return null;
+			return new ArrayList<SystemModule>();
 		}
 		systemModule.setModuleType("story");
 		List<SystemModule> moduleList = moduleService.findModules(systemModule);
@@ -508,7 +527,7 @@ public class BugAction extends BaseController {
 	@RequestMapping("/ajax/story")
 	public List<ProductStory> getStory(ProductStory productStory){
 		if(productStory.getProductId()<1){
-			return null;
+			return new ArrayList<ProductStory>();
 		}
 		if(productStory.getModuleId()==0){
 			productStory.setModuleId(null);
@@ -520,7 +539,7 @@ public class BugAction extends BaseController {
 	@RequestMapping("/ajax/task")
 	public List<ProjectTask> getStory(ProjectTask projectTask){
 		if(projectTask.getTaskProject()<1){
-			return null;
+			return new ArrayList<ProjectTask>();
 		}
 		return taskService.findListTask(projectTask);
 	}
@@ -529,7 +548,7 @@ public class BugAction extends BaseController {
 	@RequestMapping("/ajax/build")
 	public List<ProjectBuild> getBuild(ProjectBuild projectBuild){
 		if(projectBuild.getBuildProduct()<1||projectBuild.getBuildProduct()==null){
-			return null;
+			return new ArrayList<ProjectBuild>();
 		}
 		return buildService.findListBuild(projectBuild);
 	}

@@ -28,10 +28,7 @@ import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.product.service.StoryService;
 import org.tinygroup.sdpm.quality.dao.pojo.*;
-import org.tinygroup.sdpm.quality.service.inter.CaseStepService;
-import org.tinygroup.sdpm.quality.service.inter.TestCaseService;
-import org.tinygroup.sdpm.quality.service.inter.TestResultService;
-import org.tinygroup.sdpm.quality.service.inter.TestRunService;
+import org.tinygroup.sdpm.quality.service.inter.*;
 import org.tinygroup.sdpm.system.dao.pojo.ProfileType;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
@@ -61,6 +58,8 @@ public class TestCaseAction extends BaseController {
 	private TestResultService testResultService;
 	@Autowired
 	private TestRunService testRunService;
+	@Autowired
+	private TestTaskService testTaskService;
 
 
 	@RequestMapping("")
@@ -173,11 +172,11 @@ public class TestCaseAction extends BaseController {
 	
 
 	@RequestMapping("/execution")
-	public String execution(Integer caseId, Model model) {
+	public String execution(Integer caseId,String caseVersion, Model model) {
 		QualityTestCase testcase = testCaseService.findById(caseId);
 		QualityCaseStep qualityCaseStep = new QualityCaseStep();
 		qualityCaseStep.setCaseId(caseId);
-		qualityCaseStep.setCaseVersion(testcase.getCaseVersion());
+		qualityCaseStep.setCaseVersion(StringUtil.isBlank(caseVersion)?testcase.getCaseVersion():Integer.parseInt(caseVersion));
 		List<QualityCaseStep> stepList = caseStepService.findCaseStepList(qualityCaseStep);
 		QualityTestResult qualityTestResult = new QualityTestResult();
 		qualityTestResult.setLinkCase(caseId);
@@ -223,14 +222,16 @@ public class TestCaseAction extends BaseController {
 					.getCaseStepResultList());
 			qualityTestResult.setCaseResult(result);
 			testCase.setCaseLastRunResult(result);
-			if(run!=null){
-				run.setTestRunLastRunDate(new Date());
-				run.setTestRunLastRunResult(result);
-			}
+			mergeRun(run,result);
 			if("3".equals(result)){
 				testCase.setCaseStatus("2");
 				if(run!=null){
-					run.setTestRunStatus(result);
+					run.setTestRunStatus("2");
+				}
+			}else{
+				testCase.setCaseStatus("1");
+				if(run!=null){
+					run.setTestRunStatus("1");
 				}
 			}
 		}
@@ -238,11 +239,7 @@ public class TestCaseAction extends BaseController {
 			String result = "pass".equals(resultType)?"1":"2";
 			qualityTestResult.setCaseResult(result);
 			testCase.setCaseLastRunResult(result);
-			testCase.setCaseStatus(result);
-			if(run!=null){
-				run.setTestRunLastRunDate(new Date());
-				run.setTestRunLastRunResult(result);
-			}
+			mergeRun(run,result);
 		}
 		testCase.setCaseLastRunDate(new Date());
 		if(run!=null){
@@ -274,7 +271,7 @@ public class TestCaseAction extends BaseController {
 
 	@RequestMapping("/result")
 	public String result(Integer caseId, Model model) {
-		execution(caseId, model);
+		execution(caseId,null,model);
 		return "/testManagement/page/tabledemo/result.pagelet";
 	}
 
@@ -487,6 +484,40 @@ public class TestCaseAction extends BaseController {
 			return false;
 		}
 		return true;
+	}
+
+	private void mergeRun(QualityTestRun run, String result){
+		if(run!=null){
+			boolean haveNull = false;
+			boolean isHaveBlock = false;
+			run.setTestRunLastRunDate(new Date());
+			run.setTestRunLastRunResult(result);
+			QualityTestRun testRun = new QualityTestRun();
+			testRun.setTaskId(run.getTaskId());
+			List<QualityTestRun> testRuns = testRunService.findTestRunList(testRun);
+			for(QualityTestRun run1 : testRuns){
+				if(!run1.getTestRunId().equals(run.getTestRunId())){
+					if(StringUtil.isBlank(run1.getTestRunLastRunResult())){
+						haveNull = true;
+					}else{
+						isHaveBlock = "3".equals(run1.getTestRunLastRunResult());
+					}
+
+				}
+			}
+			isHaveBlock = "3".equals(run.getTestRunLastRunResult());
+			QualityTestTask testTask = testTaskService.findById(run.getTaskId());
+			if(haveNull){
+				testTask.setTesttaskStatus("2");
+			}else{
+				if(isHaveBlock){
+					testTask.setTesttaskStatus("4");
+				}else{
+					testTask.setTesttaskStatus("3");
+				}
+			}
+			testTaskService.updateTestTask(testTask);
+		}
 	}
 
 }

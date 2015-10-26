@@ -43,6 +43,7 @@
 									var pId = $("#${sid}  option:selected").val();
 									ajaxRead("${sid}","moduleId","moduleId","moduleName","/quality/bug/ajax/module?moduleRoot="+pId,${bug?.moduleId?:0});
                                     ajaxRead("${sid}","bugOpenedBuild","buildId","buildName","/quality/bug/ajax/build?buildProduct="+pId,${bug?.buildId?:0},"build");
+                                    ajaxRead("${sid}","projectId","projectId","projectName","/quality/bug/ajax/project?productId="+pId,${bug?.projectId?:0});
 								})
 							</script>
 	                    	#@Tselect2Fix()
@@ -75,16 +76,16 @@
 					#@div(divClass="col-5")
 					 #@Tselect2F()
 	                   		 #@Tselect2Body("projectId" bug?.projectId?:(projectList.size()>0?projectList.get(0).projectId:0) {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-								#foreach(project : CmsUtils.getProjectList())
-									<option value="${project?.projectId}">${project?.projectName}</option>
-								#end
+
 							#end
 			<script type="text/javascript">
 				$("#${sid}").on("change",function(){
 					var pId = $("#${sid}  option:selected").val();
-
-					ajaxRead("${sid}","taskId","taskId","taskName","/quality/bug/ajax/task?taskProject="+pId,${bug?.taskId?:0});
-
+					console.log(pId);
+                    if(pId>=0){
+                        ajaxRead("${sid}","taskId","taskId","taskName","/quality/bug/ajax/task?taskProject="+pId,${bug?.taskId?:0});
+                        ajaxRead("${sid}","bugAssignedTo","orgUserId","orgUserRealName","/quality/version/ajax/user?projectId="+pId,"${bug?.bugAssignedTo?:0}");
+                    }
 				})
 			</script>
 	                    	#@Tselect2Fix()
@@ -117,10 +118,7 @@
 							#@div(divClass="col-5")
 							 #@Tselect2F()
 	                   		 #@Tselect2Body("bugAssignedTo" bug?.bugAssignedTo?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-								<option value="0">/</option>
-								#foreach(user : userList)
-								<option value="${user?.orgUserId}">${user?.orgUserAccount}</option>
-								#end
+
 	                    	#end
 	                       ###@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
                 	 		#end
