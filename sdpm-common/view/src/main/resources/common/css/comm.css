@@ -68,7 +68,8 @@
         background: #369;
         border: #369 1px solid !important
     }
-
+	.tinytableNav .pagination>li>a:focus, .tinytableNav .pagination>li>a:hover, .tinytableNav .pagination>li>span:focus, .tinytableNav .pagination>li>span:hover
+	{border:none}
     #bodyrap.theme-clean.menu-on-top .btn-primary, #bodyrap.theme-clean.menu-on-top .btn-primary:focus,.theme-clean.menu-on-top .btn-primary, .theme-clean.menu-on-top .btn-primary:focus {
         border: 1px solid #369 !important;
     }
@@ -81,7 +82,7 @@
         margin-right: 21px;
     }
 
-    #bodyrap.theme-clean #main-menu .mmc-dropdown-open-ul a:after, .theme-default #main-menu .navigation a:after {
+    #bodyrap.theme-clean.menu-on-top #main-menu .mmc-dropdown-open-ul a:after, .theme-default #main-menu .navigation a:after {
         background: none
     }
 
@@ -322,7 +323,7 @@ a.btn.btn-sm.backBtn, .backBtn {
 .tabInfocontents .HuiTab .tabBorder {
     border: #ddd 1px solid;
     padding: 12px 10px;
-    margin-top: -3px;
+    margin-top: -1px;
 }
 
 /*访问控制*/
