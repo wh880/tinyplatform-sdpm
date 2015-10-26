@@ -263,6 +263,29 @@ public class TestCaseAction extends BaseController {
 		return "redirect:" + adminPath+"/quality/testCase";
 	}
 
+	@RequestMapping("group")
+	public String group(QualityTestCase qualityTestCase,Model model){
+		Map<String, ProductStory> storyMap = new HashMap<String, ProductStory>();
+		Map<String, List<QualityTestCase>> casesMap = new HashMap<String, List<QualityTestCase>>();
+		List<QualityTestCase> cases = testCaseService.findTestCaseList(qualityTestCase);
+		for(QualityTestCase testCase : cases){
+			if(!storyMap.containsKey(testCase.getStoryId())){
+				ProductStory story = storyService.findStory(testCase.getStoryId());
+				storyMap.put(String.valueOf(story.getStoryId()),story);
+			}
+			if(!casesMap.containsKey(testCase.getStoryId())){
+				casesMap.put(String.valueOf(testCase.getStoryId()),new ArrayList<QualityTestCase>());
+				casesMap.get(String.valueOf(testCase.getStoryId())).add(testCase);
+			}else{
+				casesMap.get(String.valueOf(testCase.getStoryId())).add(testCase);
+			}
+		}
+
+		model.addAttribute("storyMap",storyMap);
+		model.addAttribute("casesMap",casesMap);
+		return "/testManagement/page/group.pagelet";
+	}
+
 	// 预留，需要新增一个页面
 	@RequestMapping("/batchExecution")
 	public String batchExecution() {

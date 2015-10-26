@@ -3,11 +3,7 @@
 
 #!set(activeTitle="测试管理",activeMenuId=currentPageId)
 #set(testCaseTableId="testCaseTableId")
-
-
 <script>
-
-
         function deleteBatch() {
 
             var testList = new Array();
@@ -21,7 +17,6 @@
                     }
 
                 });
-
                 if (testList.length > 0) {
                     $.ajax({
                         type: "POST",
@@ -37,10 +32,6 @@
                         }
                     });
                 }
-                
-
-            
-
         }
 
 
@@ -71,7 +62,27 @@
 		                    #end
 		                    #@ulDropdownMenu("downMenuSty")                       
 		                         <p>
-		                             <a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/cases.page">需求分组</a>
+		                             <a id="group" href="javascript:void(0)">需求分组</a>
+		                             <script>
+		                                $(function(){
+		                                   $("#group").on("click",function(){
+                                                 $.ajax({
+                                                    type: "get",
+                                                    url: "${TINY_CONTEXT_PATH+adminPath}/quality/testCase/group?productId=${qualityProductId}",
+                                                    dataType:"html",
+                                                    success: function(data){
+                                                        $("#caseGroup").html(data);
+                                                    },
+                                                    error: function(res){
+                                                        alert("失败");
+                                                    }
+                                                });
+		                                   });
+                                            $(".operationbar a").removeClass("active_btn");
+                                            $(this).closest(".btn-group").find("button:first span:first").addClass("active_btn").html($(this).html());
+		                                })
+
+		                             </script>
 		                         </p>	
 		                        #@liDivider()#end
 		                    #end
@@ -107,14 +118,13 @@
         #end
     ##operationbar end
     #end
-##tabbody end
-
-#if(type!="noCase")
+<div id="caseGroup">
+    #if(type!="noCase")
 		#include("/testManagement/page/testCase.page")
 	#else
 		#include("/testManagement/page/NoTestCaseStory.page")
 	#end
-##togglebox end
+</div>
 #end
 
 ##tab end
