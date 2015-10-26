@@ -65,7 +65,7 @@
             <script>
                 $(function () {
                     $("#buildChart").click(function (e) {
-                        console.log("gg");
+                        //console.log("gg");
                         var list = [];
                         $(".togglebox input:checkbox").each(function (i) {
                             if (this.checked) {
@@ -75,7 +75,7 @@
 
                         $.ajax({
                             url: "${TINY_CONTEXT_PATH+adminPath}/project/task/buildChart",
-                            dataType: "json",
+                            dataType: "html",
                             data: {ids: list.join(",")},
                             success: function (data) {
                                 $("#chart").html(data);

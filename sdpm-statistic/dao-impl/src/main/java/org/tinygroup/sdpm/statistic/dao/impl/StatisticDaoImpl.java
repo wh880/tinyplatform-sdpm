@@ -18,6 +18,7 @@ import static org.tinygroup.sdpm.project.dao.constant.ProjectTable.PROJECTTABLE;
 import static org.tinygroup.sdpm.project.dao.constant.ProjectTaskTable.PROJECT_TASKTABLE;
 import static org.tinygroup.sdpm.quality.dao.constant.QualityBugTable.QUALITY_BUGTABLE;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
+import static org.tinygroup.sdpm.project.dao.constant.ProjectProductTable.PROJECT_PRODUCTTABLE;
 @Repository
 public class StatisticDaoImpl extends TinyDslDaoSupport implements StatisticDao{
 
@@ -120,6 +121,25 @@ public class StatisticDaoImpl extends TinyDslDaoSupport implements StatisticDao{
 				ORG_USERTABLE.ORG_USER_ID.eq(assigned.getUserId())).groupBy(QUALITY_BUGTABLE.BUG_ASSIGNED_TO);
 		return getDslSession().fetchList(select,Assigned.class);
 	}
+
+	/**
+	 * 产品投入表
+	 * @param productProject
+	 * @return
+     */
+   public List<ProductProject> productProjects(ProductProject productProject){
+	  if(productProject==null){
+		  productProject = new ProductProject();
+	  }
+	  Select select = MysqlSelect.select(FragmentSelectItemSql.fragmentSelect(
+			  "count(distinct(project_product.project_id)) As projectNum," +
+			  "product.product_name As productName," +
+			  "sum(project_task.task_consumed) As consumedSum")).from(PRODUCTTABLE).join(
+			  Join.leftJoin(PROJECT_PRODUCTTABLE,PROJECT_PRODUCTTABLE.PRODUCT_ID.eq(PRODUCTTABLE.PRODUCT_ID)),
+			  Join.leftJoin(PROJECT_TASKTABLE,PROJECT_TASKTABLE.TASK_PROJECT.eq(PROJECT_PRODUCTTABLE.PROJECT_ID))).
+			  groupBy(PRODUCTTABLE.PRODUCT_ID);
+	  return getDslSession().fetchList(select,ProductProject.class);
+  }
 
 
 }

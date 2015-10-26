@@ -38,4 +38,10 @@ public interface StatisticManager {
 	 * @return
 	 */
 	List<QualityBugCall> findBugCall(QualityBugCall qualityBugCall);
+	/**
+	 * 产品投入表
+	 * @param productProject
+	 * @return
+	 */
+	List<ProductProject> productProjects(ProductProject productProject);
 }
