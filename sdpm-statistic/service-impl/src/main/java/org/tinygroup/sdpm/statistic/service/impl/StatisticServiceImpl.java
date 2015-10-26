@@ -32,4 +32,8 @@ public class StatisticServiceImpl implements StatisticService{
 		return statisticManager.findBugCall(qualityBugCall);
 	}
 
+	public List<ProductProject> productProjects(ProductProject productProject) {
+		return statisticManager.productProjects(productProject);
+	}
+
 }
