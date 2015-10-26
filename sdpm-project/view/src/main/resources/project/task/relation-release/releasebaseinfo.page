@@ -42,8 +42,7 @@
         #@elementItem()
 
             <p><b>构建者:</b>
-                ${build?.buildBuilder}
-##                ?UserUtils.getUserById(build?.buildBuilder)?.orgUserRealName:""}
+                ${build?.buildBuilder?UserUtils.getUserById(build?.buildBuilder)?.orgUserRealName:""}
             </p>
 
         #end
