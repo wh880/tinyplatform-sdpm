@@ -23,43 +23,43 @@
     #@td()
         #foreach(m:menuManager.getScopeMenus("testbug-op"))
             #if(m.sort=="6")
-                #if(var?.bugConfirmed==1)
+                #if(b?.bugConfirmed==1)
                     <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>
                 #else
-                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${var?.bugId}"
+                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${b?.bugId}"
                        title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
                 #end
             #end
             #if(m.sort=="5")
-                #if(var?.bugConfirmed==1)
-                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${var?.bugId}"
+                #if(b?.bugConfirmed==1)
+                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${b?.bugId}"
                        title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
                 #else
                     <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>
                 #end
             #end
             #if(m.sort=="4")
-                #if(var?.bugStatus=="1"&&var?.bugConfirmed==1)
-                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${var?.bugId}"
+                #if(b?.bugStatus=="1"&&b?.bugConfirmed==1)
+                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${b?.bugId}"
                        title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
                 #else
                     <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>
                 #end
             #end
             #if(m.sort=="3")
-                #if(var?.bugStatus=="2")
-                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${var?.bugId}"
+                #if(b?.bugStatus=="2")
+                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${b?.bugId}"
                        title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
                 #else
                     <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>
                 #end
             #end
             #if(m.sort=="2")
-                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${var?.bugId}"
+                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${b?.bugId}"
                    title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
             #end
             #if(m.sort=="1")
-                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${var?.bugId}"
+                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${b?.bugId}"
                    title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
             #end
         #end

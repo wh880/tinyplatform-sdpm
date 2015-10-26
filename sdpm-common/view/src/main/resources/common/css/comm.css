@@ -448,8 +448,10 @@ a.btn.btn-sm.backBtn, .backBtn {
 
 .slaEmptyInfo {
     margin-right: 6px;
-    color: #FA3;
+    color: #F33;
     font-size: 24px;
 }
 /*搜索select*/
 #task-search .active-disabled .form-control{padding:2px 0px;margin-bottom:3px}
+/*表格边框*/
+table.table.filelist-table{border:#ddd 1px solid;}

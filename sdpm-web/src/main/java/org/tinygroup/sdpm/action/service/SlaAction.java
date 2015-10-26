@@ -63,33 +63,30 @@ public class SlaAction extends BaseController {
 
     /**
      * 新增和修改
-     *
-     * @param id
+     * @param clientId
+     * @param clientName
      * @param sla
      * @param model
      * @return
      */
     @RequestMapping("/save")
-    public String save(Integer id, ServiceSla sla, Model model) {
+    public String save(Integer clientId, String clientName, ServiceSla sla, Model model) {
         if (sla.getSlaId() == null) {
             sla = slaService.addSla(sla);
-            /**
-             * 新增的历史记录
-             */
             LogUtil.logWithComment(LogUtil.LogOperateObject.SLA, LogUtil.LogAction.OPENED, String.valueOf(sla.getSlaId()), UserUtils.getUserId(),
                     null, null, null, sla, null);
 
         } else {
             ServiceSla qualitySla = slaService.findSla(sla.getSlaId());
             slaService.updateSla(sla);
-            /**
-             * 编辑历史记录
-             */
             LogUtil.logWithComment(LogUtil.LogOperateObject.SLA, LogUtil.LogAction.EDITED, String.valueOf(sla.getSlaId()), UserUtils.getUserId(),
                     null, null, qualitySla, sla, null);
         }
         model.addAttribute("sla", sla);
-        return "/service/sla/sla.page";
+        if (clientName.isEmpty()) {
+            return "redirect:" + adminPath + "/service/sla/list";
+        }
+        return "redirect:" + adminPath + "/service/client/clientSla?id=" + clientId;
     }
 
     /**

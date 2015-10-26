@@ -11,7 +11,9 @@
         #end
         #@div()
             #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/service/request/replySave" "post" {"class":""})
-
+            <input type="hidden" name="treeId" value="${treeId}"/>
+            <input type="hidden" name="status" value="${status}"/>
+            <input type="hidden" name="operation" value="${operation}"/>
             <div style="width:70%;margin-left: 200px" class="pageleftpart">
             <div class="infoContent">
                 <p class="titleName">回复</p>

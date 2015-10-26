@@ -425,18 +425,31 @@ public class TaskAction extends BaseController {
     }
 
     @RequestMapping("/preBatchAdd")
-    public String preBatchAdd(Model model, HttpServletRequest request) {
-        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
-        model.addAttribute("teamList", teamService.findTeamByProjectId(projectId));
+    public String preBatchAdd(@CookieValue(required = false, value = COOKIE_PROJECT_ID) String projectId,
+                              Model model, HttpServletRequest request) {
+        model.addAttribute("teamList", teamService.findTeamByProjectId(Integer.parseInt(projectId)));
 
-        List<ProductStory> storyList = storyService.findStoryByProject(projectId);
+        List<ProductStory> storyList = storyService.findStoryByProject(Integer.parseInt(projectId));
         model.addAttribute("storyList", storyList);
 
-        SystemModule systemModule = new SystemModule();
-        systemModule.setModuleRoot(projectId);
-        systemModule.setModuleType("project");
-        List<SystemModule> modulesList = moduleService.findModuleList(systemModule);
-        model.addAttribute("modulesList", modulesList);
+        SystemModule module = new SystemModule();
+        module.setModuleType("task");
+        module.setModuleRoot(Integer.parseInt(projectId));
+        List<SystemModule> moduleList = moduleService.findModuleList(module);
+        for (SystemModule m : moduleList) {
+            m.setModuleName(ModuleUtil.getPath(m.getModuleId(), "/", moduleService, "", false));
+        }
+        List<ProjectProduct> projectProductList = projectProductService.findProducts(Integer.parseInt(projectId));
+        for (ProjectProduct pp : projectProductList) {
+            module.setModuleType("story");
+            module.setModuleRoot(pp.getProductId());
+            List<SystemModule> tModuleList = moduleService.findModuleList(module);
+            for (SystemModule m : tModuleList) {
+                m.setModuleName(ModuleUtil.getPath(m.getModuleId(), "/", moduleService, "", false));
+            }
+            moduleList.addAll(tModuleList);
+        }
+        model.addAttribute("modulesList", moduleList);
 
         return "project/task/batchAdd.page";
     }

@@ -11,6 +11,9 @@
 
 
 #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/service/request/close/date" "post" {"class":"test"})
+<input type="hidden" name="treeId" value="${treeId}"/>
+<input type="hidden" name="status" value="${status}"/>
+<input type="hidden" name="operation" value="${operation}"/>
 <input type="hidden" name="clientRequestId" value="${clientRequestId}"/>
     #@noRespsGridSystem()
         #@gridSysRow()

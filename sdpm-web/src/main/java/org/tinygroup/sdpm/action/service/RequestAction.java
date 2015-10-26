@@ -94,15 +94,15 @@ public class RequestAction extends BaseController {
     public String listData(Integer limit, Integer start, ServiceRequest clientRequest, Integer status, Integer operation, Integer treeId, Model model,
                            String groupOperate, SearchInfos searchInfos,
                            @RequestParam(required = false, defaultValue = "clientRequestId") String order,
-                           @RequestParam(required = false, defaultValue = "desc") String ordertype) {
+                           @RequestParam(required = false, defaultValue = "desc", value = "ordertype") String orderType) {
 
         if (operation != null) {
             OrgUser user = UserUtils.getUser();
-            Pager<ServiceRequest> pager = requestService.findOperationByMe(start, limit, user, clientRequest, treeId, operation, order, ordertype);
+            Pager<ServiceRequest> pager = requestService.findOperationByMe(start, limit, user, clientRequest, treeId, operation, order, orderType);
             model.addAttribute("pager", pager);
             return "service/serviceReq/requestTableData.pagelet";
         }
-        Pager<ServiceRequest> pager = requestService.findRequestPager(start, limit, status, clientRequest, treeId, groupOperate, searchInfos, order, ordertype);
+        Pager<ServiceRequest> pager = requestService.findRequestPager(start, limit, status, clientRequest, treeId, groupOperate, searchInfos, order, orderType);
         model.addAttribute("pager", pager);
         return "service/serviceReq/requestTableData.pagelet";
     }
@@ -164,17 +164,18 @@ public class RequestAction extends BaseController {
     }
 
     /**
-     * 关闭请求
      *
      * @param clientRequest
-     * @param model
+     * @param status
+     * @param operation
+     * @param treeId
      * @return
      */
     @RequestMapping(value = "/close/date")
-    public String closed(ServiceRequest clientRequest, Model model) {
+    public String closed(ServiceRequest clientRequest, Integer status, Integer operation, Integer treeId) {
         if (clientRequest.getClientRequestId() != null)
             requestService.closeRequest(clientRequest);
-        return "redirect:" + adminPath + "/service/request/list";
+        return "redirect:" + adminPath + "/service/request/list?status=" + status + "&operation=" + operation + "&treeId=" + treeId;
     }
 
     /**
@@ -215,11 +216,11 @@ public class RequestAction extends BaseController {
      * @return
      */
     @RequestMapping(value = "/replySave")
-    public String replySave(ServiceRequest clientRequest) {
+    public String replySave(ServiceRequest clientRequest, Integer status, Integer operation, Integer treeId) {
         if (clientRequest != null) {
             requestService.saveReply(clientRequest);
         }
-        return "redirect:" + adminPath + "/service/request/list";
+        return "redirect:" + adminPath + "/service/request/list?status=" + status + "&operation=" + operation + "&treeId=" + treeId;
     }
 
     /**
@@ -246,21 +247,22 @@ public class RequestAction extends BaseController {
     }
 
     /**
-     * 回访保存
      *
      * @param review
-     * @param model
+     * @param status
+     * @param operation
+     * @param treeId
      * @return
      */
     @RequestMapping(value = "/reviewSave")
-    public String reviewSave(ServiceReview review, Model model) {
+    public String reviewSave(ServiceReview review, Integer status, Integer operation, Integer treeId) {
         if (review.getReviewId() == null) {
             reviewService.addReview(review);
         } else {
             reviewService.updateReview(review);
         }
         reviewService.changeStatus(review.getClientRequestId());
-        return "redirect:" + adminPath + "/service/request/list";
+        return "redirect:" + adminPath + "/service/request/list?status=" + status + "&operation=" + operation + "&treeId=" + treeId;
     }
 
     /**

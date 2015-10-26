@@ -78,8 +78,7 @@
                             dataType: "html",
                             data: {ids: list.join(",")},
                             success: function (data) {
-                                $("#chart").html(data);
-                                //刷新数据
+                                $("#chart").html(data);                                //刷新数据
                             },
                             error: function (data) {
                                 layer.msg(data.info, 2, 9);

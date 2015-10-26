@@ -15,6 +15,7 @@
         #end
     #end
     #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/service/sla/save" "post" {"class":""})
+    <input type="hidden" name="clientName" value="${clientName}"/>
     <input type="hidden" name="slaId" value="${sla?.slaId}"/>
     <div style="width:100%;float:left" class="pageleftpart">
         <div class="infoContent">

@@ -29,7 +29,7 @@
                   scope="task-group-menu"/>
             <menu id="task-group-pri" icon="" href="/project/task/grouping?type=3" sort="80" name="优先级分组"
                   scope="task-group-menu"/>
-            <menu id="task-group-openedBy" icon="" href="/project/grouping/group?type=4" sort="70" name="创建者分组"
+            <menu id="task-group-openedBy" icon="" href="/project/task/grouping?type=4" sort="70" name="创建者分组"
                   scope="task-group-menu"/>
             <menu id="task-group-assignedTo" icon="" href="/project/task/grouping?type=5" sort="60" name="指派人分组"
                   scope="task-group-menu"/>
