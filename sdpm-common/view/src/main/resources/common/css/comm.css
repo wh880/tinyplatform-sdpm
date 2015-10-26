@@ -64,16 +64,17 @@
         background:#fff !important
     }
 	.menu-on-top #main-menu .navigation > li.active > a i{background:#fff !important}
-    #bodyrap.theme-clean .btn-primary, #bodyrap.theme-clean .btn-primary:focus, .theme-clean .pagination > li.active > a, .theme-clean .pagination > li.active > a:focus, .theme-clean .pagination > li.active > a:hover, .theme-clean .pagination > li.active > span {
+    #bodyrap.theme-clean.menu-on-top .btn-primary, #bodyrap.theme-clean.menu-on-top .btn-primary:focus, .theme-clean.menu-on-top .pagination > li.active > a, .theme-clean.menu-on-top .pagination > li.active > a:focus, .theme-clean.menu-on-top .pagination > li.active > a:hover, .theme-clean.menu-on-top .pagination > li.active > span {
         background: #369;
         border: #369 1px solid !important
     }
-
-    #bodyrap.theme-clean .btn-primary, #bodyrap.theme-clean .btn-primary:focus,.theme-clean .btn-primary, .theme-clean .btn-primary:focus {
+	.tinytableNav .pagination>li>a:focus, .tinytableNav .pagination>li>a:hover, .tinytableNav .pagination>li>span:focus, .tinytableNav .pagination>li>span:hover
+	{border:none}
+    #bodyrap.theme-clean.menu-on-top .btn-primary, #bodyrap.theme-clean.menu-on-top .btn-primary:focus,.theme-clean.menu-on-top .btn-primary, .theme-clean.menu-on-top .btn-primary:focus {
         border: 1px solid #369 !important;
     }
 
-    #bodyrap.theme-clean .btn-primary:hover {
+    #bodyrap.theme-clean.menu-on-top .btn-primary:hover {
         background: #2a4f85 !important;
     }
 
@@ -81,7 +82,7 @@
         margin-right: 21px;
     }
 
-    #bodyrap.theme-clean #main-menu .mmc-dropdown-open-ul a:after, .theme-default #main-menu .navigation a:after {
+    #bodyrap.theme-clean.menu-on-top #main-menu .mmc-dropdown-open-ul a:after, .theme-default #main-menu .navigation a:after {
         background: none
     }
 
@@ -322,7 +323,7 @@ a.btn.btn-sm.backBtn, .backBtn {
 .tabInfocontents .HuiTab .tabBorder {
     border: #ddd 1px solid;
     padding: 12px 10px;
-    margin-top: -3px;
+    margin-top: -1px;
 }
 
 /*访问控制*/
@@ -453,3 +454,5 @@ a.btn.btn-sm.backBtn, .backBtn {
 }
 /*搜索select*/
 #task-search .active-disabled .form-control{padding:2px 0px;margin-bottom:3px}
+/*表格边框*/
+table.table.filelist-table{border:#ddd 1px solid;}

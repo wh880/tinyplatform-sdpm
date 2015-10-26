@@ -52,6 +52,7 @@ import org.tinygroup.tinysqldsl.Insert;
 import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.tinysqldsl.Select;
 import org.tinygroup.tinysqldsl.Update;
+import org.tinygroup.tinysqldsl.base.Condition;
 import org.tinygroup.tinysqldsl.base.FragmentSql;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
@@ -200,7 +201,7 @@ public class ProductLineDaoImpl extends TinyDslDaoSupport implements ProductLine
 		});
 	}
 	
-	public Pager<ProductLine> findList(int start,int limit ,ProductLine productLine ,final OrderBy... orderArgs) {
+	public Pager<ProductLine> findList(int start, int limit , final Condition condition, ProductLine productLine , final OrderBy... orderArgs) {
 		if(productLine==null){
 			productLine=new ProductLine();
 		}
@@ -211,7 +212,8 @@ public class ProductLineDaoImpl extends TinyDslDaoSupport implements ProductLine
 				Select select = MysqlSelect.select(FragmentSelectItemSql.fragmentSelect("product_line.*,u1.org_user_account as ownerName,u2.org_user_account as qualityManagerName,u3.org_user_account as qualityManagerName"))
 						.from(FragmentSelectItemSql.fragmentFrom("product_line left join org_user u1 on u1.org_user_id = product_line.product_line_owner left join  org_user u2 on u2.org_user_id = product_line.product_line_quality_manager left join  org_user u3 on u3.org_user_id = product_line.product_line_delivery_manager"))
 						.where(
-								and(	
+								and(
+										condition,
 										PRODUCT_LINETABLE.COMPANY_ID.eq(t.getCompanyId()),
 										PRODUCT_LINETABLE.DEPT_ID.eq(t.getDeptId()),
 										PRODUCT_LINETABLE.PRODUCT_LINE_ROOT.eq(t.getProductLineRoot()),
@@ -358,6 +360,6 @@ public class ProductLineDaoImpl extends TinyDslDaoSupport implements ProductLine
         });
 
     }
-	
+
 	
 }

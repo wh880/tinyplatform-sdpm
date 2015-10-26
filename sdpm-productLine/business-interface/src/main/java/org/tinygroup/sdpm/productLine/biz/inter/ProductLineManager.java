@@ -67,7 +67,7 @@ public interface ProductLineManager {
 	 * @param ordertype
 	 * @return
 	 */
-	Pager<ProductLine> findPager(int page,int pagesize,ProductLine productLine,String order,String ordertype);
+	Pager<ProductLine> findPager(int page,int pagesize,String condition,ProductLine productLine,String order,String ordertype);
 	
 	
 }

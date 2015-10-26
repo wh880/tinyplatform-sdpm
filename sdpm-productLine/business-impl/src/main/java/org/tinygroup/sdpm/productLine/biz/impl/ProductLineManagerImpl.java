@@ -13,6 +13,8 @@ import org.tinygroup.sdpm.productLine.dao.ProductLineDao;
 import org.tinygroup.sdpm.productLine.dao.impl.FieldUtil;
 import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.tinysqldsl.Pager;
+import org.tinygroup.tinysqldsl.base.Condition;
+import org.tinygroup.tinysqldsl.base.FragmentSql;
 
 
 @Service
@@ -47,15 +49,17 @@ public class ProductLineManagerImpl implements ProductLineManager{
 		return productLineDao.query(productLine,  new OrderBy(FieldUtil.stringFormat(order), !("desc".equals(ordertype))?true:false));
 	}
 
-	public Pager<ProductLine> findPager(int page, int pagesize, ProductLine productLine, String order,
+	public Pager<ProductLine> findPager(int start, int pagesize,String condition, ProductLine productLine, String order,
 			String ordertype) {
-		
-		OrderBy orderBy = null;
-		if(!StringUtil.isBlank(order)){
-			orderBy = new OrderBy("product_line."+NameUtil.resolveNameDesc(order),!("desc".equals(ordertype))?true:false);
+		Condition condition1 = null;
+		if(!StringUtil.isBlank(condition)){
+			condition1 = FragmentSql.fragmentCondition(condition);
 		}
-		
-		return productLineDao.findList((page-1)*pagesize, pagesize, productLine, orderBy);
+		if(!StringUtil.isBlank(order)) {
+			return productLineDao.findList(start, pagesize, condition1, productLine,
+					new OrderBy("product_line." + NameUtil.resolveNameDesc(order), !("desc".equals(ordertype)) ? true : false));
+		}
+		return productLineDao.findList(start, pagesize,condition1, productLine);
 	}
 
 	public int[] updateBatch(List<ProductLine> productLine) {
