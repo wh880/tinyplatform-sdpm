@@ -87,21 +87,6 @@
                     });
                 });
             </script>
-            ##                #labelCheckbox(ckId="checkbox-1" labelText="项目任务统计")
-            ##                #labelCheckbox(ckId="checkbox-3" labelText="版本Bug数量")
-            ##                #labelCheckbox(ckId="checkbox-4" labelText="模块Bug数量")
-            ##                #labelCheckbox(ckId="checkbox-5" labelText="每天新增Bug数")
-            ##                #labelCheckbox(ckId="checkbox-6" labelText="每天解决Bug数")
-            ##                #labelCheckbox(ckId="checkbox-7" labelText="每天关闭的Bug数")
-            ##                #labelCheckbox(ckId="checkbox-8" labelText="每人提交的Bug数")
-            ##                #labelCheckbox(ckId="checkbox-9" labelText="每人解决的Bug数")
-            ##                #labelCheckbox(ckId="checkbox-10"labelText="每人关闭的Bug数")
-            ##                #labelCheckbox(ckId="checkbox-11"labelText="Bug严重程度统计")
-            ##                #labelCheckbox(ckId="checkbox-12"labelText="Bug解决方案统计")
-            ##                #labelCheckbox(ckId="checkbox-13"labelText="Bug状态统计")
-            ##                #labelCheckbox(ckId="checkbox-14"labelText="Bug激活次数统计")
-            ##                #labelCheckbox(ckId="checkbox-14"labelText="Bug类型统计")
-            ##                #labelCheckbox(ckId="checkbox-14"labelText="指派给统计")
             #end
             #buttonRadiusDefault(btId="but1" btClass="but1" caption="全选")
             #buttonRadiusDefault(btId="but2" btClass="but2" caption="反选")
