@@ -40,8 +40,8 @@
                         #@tinyTh({"class":"sorting","rel":"task_id"})ID#end
                         #@tinyTh({"class":"sorting","rel":"task_pri"})P#end
                         #@tinyTh({"class":"sorting","rel":"task_name"})任务名称#end
-                        #@tinyTh({"class":"sorting","rel":"task_statu","style":"color:#f00"})状态#end
-                        #@tinyTh({"class":"sorting","rel":"task_endline"})截止#end
+                        #@tinyTh({"class":"sorting","rel":"task_status","style":"color:#f00"})状态#end
+                        #@tinyTh({"class":"sorting","rel":"task_dead_line"})截止#end
                         #@tinyTh({"class":"sorting","rel":"task_open_by"})创建#end
                         #@tinyTh({"class":"sorting","rel":"task_assigned_to"})指派给#end
                         #@tinyTh({"class":"sorting","rel":"task_finished_by"})完成者#end

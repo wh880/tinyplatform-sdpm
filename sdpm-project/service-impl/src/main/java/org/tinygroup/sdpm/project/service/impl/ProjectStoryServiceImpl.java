@@ -97,7 +97,7 @@ public class ProjectStoryServiceImpl implements ProjectStoryService {
         return buildManager.findnoBuildStory(start,limit,condition,id);
     }
 
-    public Pager<ProductStory> findStoryByProject(Integer projectId, Integer start, Integer limit, String order, String ordertype) {
+    public Pager<ProductStory> findStoryByProject(Integer projectId, Integer start, Integer limit, String order, String ordertype, String moduleId) {
 
         List<ProjectStory> storyList = projectStoryManager.findSrotys(projectId);
         String condition = "";
@@ -114,6 +114,9 @@ public class ProjectStoryServiceImpl implements ProjectStoryService {
                 }
             }
             condition = condition + storys + ")";
+        }
+        if (moduleId != null) {
+            condition = condition + "and module_id = " + moduleId;
         }
 
         boolean asc = "asc".equals(ordertype) ? true : false;

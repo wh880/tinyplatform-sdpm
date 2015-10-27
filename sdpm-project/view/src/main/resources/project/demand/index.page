@@ -1,5 +1,4 @@
 #!set(activeTitle="项目管理",activeMenuId=currentPageId)
-
 #set(name="demand")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
@@ -15,17 +14,6 @@
 					需求列表
 				</span>
             <span class="r">
-##				#set(m1=menuManager.getMenu("pro-demand-report"))
-##                #if(m1)
-##                    #@aModal(
-##                        "#myModal" CmsUtils.getProject(currentProjectId).projectName+">导出数据" "750" "100" "" "/project/task/outputData.pagelet")
-##                        #buttonIcon(iconClass="icon-upload-alt")导出数据#end
-##                    #@dialog("myModal")
-##                        #@dialogHeader()#end
-##                        #@dialogBody()<p></p>#end
-##
-##                    #end
-##                #end
                 #foreach(m:menuManager.getScopeMenus("pro-demandmenu-op"))
                     <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}"
                        title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
@@ -33,8 +21,6 @@
 				</span>
                 #div(divClass="clearfix")
             #end
-        ##operationbar end
-
             #include("/project/demand/demandTogglebox.page")
         #end
     #end

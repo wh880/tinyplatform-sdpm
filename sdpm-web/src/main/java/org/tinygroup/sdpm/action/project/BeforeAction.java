@@ -74,9 +74,14 @@ public class BeforeAction extends BaseController {
         return "redirect:" + oldUrl;
     }
 
-    @RequestMapping("/selModel")
-    public String selModel(String moduleId) {
+    @RequestMapping("/selModelTask")
+    public String selModelTask(String moduleId) {
         return "redirect:" + adminPath + "/project/task/index?moduleId=" + moduleId;
+    }
+
+    @RequestMapping("/selModelDemand")
+    public String selModelDemand(String moduleId) {
+        return "redirect:" + adminPath + "/project/manage/demand/index?moduleId=" + moduleId;
     }
 
 }
