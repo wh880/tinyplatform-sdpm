@@ -451,6 +451,6 @@ a.btn.btn-sm.backBtn, .backBtn {
     font-size: 24px;
 }
 /*搜索select*/
-#task-search .active-disabled .form-control{padding:2px 0px;margin-bottom:3px}
+#task-search .active-disabled .form-control{padding:4px 0px;margin-bottom:3px}
 /*表格边框*/
 table.table.filelist-table{border:#ddd 1px solid;}
