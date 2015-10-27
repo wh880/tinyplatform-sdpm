@@ -29,6 +29,8 @@ import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityTestCase;
 import org.tinygroup.sdpm.quality.service.inter.BugService;
 import org.tinygroup.sdpm.quality.service.inter.TestCaseService;
+import org.tinygroup.sdpm.service.dao.pojo.ServiceRequest;
+import org.tinygroup.sdpm.service.service.inter.RequestService;
 import org.tinygroup.sdpm.system.dao.pojo.ProfileType;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
@@ -74,6 +76,8 @@ public class StoryAction extends BaseController {
     private TaskService taskService;
     @Autowired
     private ReleaseService releaseService;
+    @Autowired
+    private RequestService requestService;
 
     /**
      * @param story
@@ -110,7 +114,9 @@ public class StoryAction extends BaseController {
     @RequestMapping("/addstory")
     public String addstory(@CookieValue(value = "cookieProductId") String cookieProductId,HttpServletRequest request, Model model) {
         Product product = productService.findProduct(Integer.parseInt(cookieProductId));
+        List<ServiceRequest> requests = requestService.getRequestList(null);
         model.addAttribute("product", product);
+        model.addAttribute("requestList",requests);
         return "/product/page/tabledemo/product-demand-add.page";
     }
 
@@ -137,11 +143,12 @@ public class StoryAction extends BaseController {
 
         productStory.setProductId(Integer.parseInt(cookieProductId));
         productStory.setStoryStatus("0");
-        productStory.setStoryVersion(0);
+        productStory.setStoryStage("1");
+        productStory.setStoryVersion(1);
         productStory.setStoryOpenedBy(UserUtils.getUserId());
         productStory.setStoryOpenedDate(new Date());
 
-        storySpec.setStoryVersion(0);
+        storySpec.setStoryVersion(1);
         ProductStory story = storyService.addStory(productStory, storySpec);
         uploads(file, story.getStoryId(), ProfileType.STORY, title);
 
@@ -432,8 +439,13 @@ public class StoryAction extends BaseController {
      * @throws IOException
      */
     @RequestMapping("/reviewed")
-    public String reviewed(SystemAction systemAction, ProductStory productStory)
+    public String reviewed(SystemAction systemAction,Integer reviewRequest, ProductStory productStory)
             throws IOException {
+        if(reviewRequest>0){
+            productStory.setStoryStatus(String.valueOf(reviewRequest));
+        }else{
+            productStory.setStoryStatus("5");
+        }
         ProductStory story = storyService.findStory(productStory.getStoryId());
         storyService.updateStory(productStory);
         LogUtil.logWithComment(LogUtil.LogOperateObject.STORY,
@@ -442,7 +454,7 @@ public class StoryAction extends BaseController {
                 UserUtils.getUserId(),
                 String.valueOf(productStory.getProductId()), null, story,
                 productStory, systemAction.getActionComment());
-        return "redirect:" + "/product/page/project/togglebox.page";
+        return "redirect:" + "/a/product/story";
     }
 
     /**

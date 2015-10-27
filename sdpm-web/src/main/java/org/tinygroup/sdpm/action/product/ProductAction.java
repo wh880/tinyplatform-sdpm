@@ -199,7 +199,7 @@ public class ProductAction extends BaseController {
                        @RequestParam(required = false, defaultValue = "10") int pagesize,
                        @RequestParam(required = false, defaultValue = "productId") String order,
                        @RequestParam(required = false, defaultValue = "asc") String ordertype, Model model) {
-
+        product.setDeleted(0);
         Pager<Product> pagerProduct = productService.findProductPager(page, pagesize, product, order, ordertype);
 
         model.addAttribute("pagerProduct", pagerProduct);

@@ -116,7 +116,7 @@
 
 
        
-        <menu id="allproduct-close" name="关闭" href="/product/find/close?productId=${productId}"
+        <menu id="allproduct-close" name="关闭" href="/product/find/close?productId=${product?.productId}"
               icon="icon-off" sort="21" isShow="1" scope="allproduct-op">
             <map>
                 <property key="type" value="close"/>

@@ -3,31 +3,9 @@
 
 
 <script>
-    ##relateElem = relateModelTwo  opKey = moduleType  moduleRoot
-    ##,"onchange":"relateChange('relateModelTwo','moduleRoot')"
-
-    #*		function relateChange(relateElem,opKey){
-                var em = "select[relateElem='"+relateElem+"']";alert(this.value);
-                var data = $(em).attr("data")+"&"+ opKey +"=" + $(this).val();
-
-                $(em).attr("data",data);
-                $(em).trigger("ajaxRead");
-            }*#
-
     $(document).ready(function () {
-
-
-    #*
-            ajaxRead("productPlan", "planId", "planName");
-            ajaxRead("orgUser", "orgUserId", "orgUserAccount");
-            ajaxRead("product", "productId", "productName");
-            ajaxRead("systemModel", "moduleId", "moduleName");*#
-
-
-        $("select[name='demand-sources']").bind('change', function () {
-
-
-            if ("request" == $(this).val()) {
+        $("select[name='storySource']").bind('change', function () {
+            if (0 == $(this).val()) {
                 $(".customer-request").show();
                 $("#demand-sources").addClass("col-5");
             } else {
@@ -76,8 +54,7 @@
             #@formControlDiv("col-4")
                 <div class="col-6">
                     #@Tselect2F()
-                        #@Tselect2Body(
-                            "productId" sessionProductId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        #@Tselect2Body("productId" cookieProductId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                             <option value="0">/</option>
                             #foreach(product : product)
                                 #if(product?.deleted==0)
@@ -105,8 +82,7 @@
                 </div>
                 <div class="col-6">
                     #@Tselect2F()
-                        #@Tselect2Body(
-                            "moduleId" "IN" {"class":"input-text select2","url":"/system/module/moduleList","ajaxType":
+                        #@Tselect2Body("moduleId" "" {"class":"input-text select2","url":"/system/module/moduleList","ajaxType":
                             "systemModel","data":"moduleType=product","relateElem":
                             "relateModelTwo"}) ##,"multiple":"multiple"加上为多选项
 
@@ -161,10 +137,10 @@
 	                <div class="col-5">
 
                         #@Tselect2F()
-                            #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                                <option value="CT">Admin</option>
-                                <option value="DE">Demo</option>
-                                <option value="FL">Me</option>
+                            #@Tselect2Body("clientRequestId" "" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                                #for(re : requestList)
+                                    <option value="re?.clientRequestId">${re?.clientName+"/"+re?.requestTitle}</option>
+                                #end
                             #end
 
                         #end

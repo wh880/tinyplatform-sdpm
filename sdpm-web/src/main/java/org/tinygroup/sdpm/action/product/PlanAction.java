@@ -3,10 +3,7 @@ package org.tinygroup.sdpm.action.product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
@@ -42,23 +39,20 @@ public class PlanAction  extends BaseController{
 
 
 	@RequestMapping("/content")
-	public String release(HttpServletRequest request, Model model) {
-		int productId = -1;
-		if (request.getSession().getAttribute("sessionProductId") != null) {
-			productId = (Integer) request.getSession().getAttribute("sessionProductId");
-		}
-		Product product = productService.findProduct(productId);
+	public String release(@CookieValue("cookieProductId") String cookieProductId,HttpServletRequest request, Model model) {
+
+		Product product = productService.findProduct(Integer.parseInt(cookieProductId));
 		model.addAttribute("product", product);
 		return "/product/page/project/product-plan.page";
 	}
 
 
 	@RequestMapping("/save")
-	public String save(ProductPlan productPlan, HttpServletRequest request, SystemAction systemAction) throws IOException {
+	public String save(@CookieValue("cookieProductId") String cookieProductId,ProductPlan productPlan, HttpServletRequest request, SystemAction systemAction) throws IOException {
 
-		if(request.getSession().getAttribute("sessionProductId")!=null){
-			productPlan.setProductId((Integer)(request.getSession().getAttribute("sessionProductId")));
-		}
+
+		productPlan.setProductId(Integer.parseInt(cookieProductId));
+
 		productPlan.setDeleted(FieldUtil.DELETE_NO);
 		ProductPlan productPlan1 = planService.addPlan(productPlan);
 
@@ -97,13 +91,10 @@ public class PlanAction  extends BaseController{
 	}
 
 	@RequestMapping("/addplan")
-	public 	String addplan(HttpServletRequest request,Model model){
+	public 	String addplan(@CookieValue("cookieProductId") String cookieProductId, HttpServletRequest request, Model model){
 
-			int productId = -1;
-			if (request.getSession().getAttribute("sessionProductId")!=null){
-				productId = (Integer)request.getSession().getAttribute("sessionProductId");
-			}
-			Product product = productService.findProduct(productId);
+
+			Product product = productService.findProduct(Integer.parseInt(cookieProductId));
 			model.addAttribute("product",product);
 		return "/product/page/tabledemo/product-addplan.page";
 
@@ -134,13 +125,9 @@ public class PlanAction  extends BaseController{
     }
 
 	@RequestMapping("/find")
-	public String find(HttpServletRequest request,Integer planId,Model model){
+	public String find(@CookieValue("cookieProductId") String cookieProductId,HttpServletRequest request,Integer planId,Model model){
 
-		int productId = -1;
-		if(request.getSession().getAttribute("sessionProductId")!=null){
-			productId = (Integer)request.getSession().getAttribute("sessionProductId");
-		}
-		Product product = productService.findProduct(productId)	;
+		Product product = productService.findProduct(Integer.parseInt(cookieProductId))	;
 		model.addAttribute("product",product);
 		ProductPlan plan = planService.findPlan(planId);
 
@@ -187,17 +174,17 @@ public class PlanAction  extends BaseController{
 
 	@RequestMapping("/list")
 	public String list(ProductPlan plan,
+			@CookieValue("cookieProductId") String cookieProductId,
 			@RequestParam(required = false,defaultValue = "1")int page,
 			@RequestParam(required = false,defaultValue = "10")int pagesize,
 			@RequestParam(required = false,defaultValue = "planId")String order,
 			@RequestParam(required = false,defaultValue = "asc")String ordertype,Model model,HttpServletRequest request){
 		
 		Pager<ProductPlan>  pagerProductPlan = null;
-		if(request.getSession().getAttribute("sessionProductId")!=null){
-			plan.setProductId((Integer)(request.getSession().getAttribute("sessionProductId")));
-			plan.setDeleted(FieldUtil.DELETE_NO);
-			pagerProductPlan = planService.findProductPlanPager(page, pagesize, plan, order, ordertype);
-		}
+		plan.setProductId(Integer.parseInt(cookieProductId));
+		plan.setDeleted(FieldUtil.DELETE_NO);
+		pagerProductPlan = planService.findProductPlanPager(page, pagesize, plan, order, ordertype);
+
 		
 
 		model.addAttribute("productPlan",pagerProductPlan);

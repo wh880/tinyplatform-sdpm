@@ -25,10 +25,10 @@
 		#foreach(m:menuManager.getScopeMenus("allproduct-op"))
 		#set(url=eval(m?.href))
 			#if(m.map.type=="close")
-				#iconOperations("#myModal" m?.icon m?.name "865" "500" url "ml-5")&nbsp;
-				#elseif(m.map.type=="editor")
-                <a href="${TINY_CONTEXT_PATH +adminPath}${url}"
-                   title="${m?.name}">#buttonIcon(iconClass=m?.icon)</a>&nbsp;
+				#iconOperations("#myModal" m?.icon m?.name "865" "500" adminPath+url "ml-5")&nbsp;
+			#elseif(m.map.type=="editor")
+			<a href="${TINY_CONTEXT_PATH +adminPath}${eval(url)}"
+			   title="${m?.name}">#buttonIcon(iconClass=m?.icon)</a>&nbsp;
 			#end
 		#end
 	#end

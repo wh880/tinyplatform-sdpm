@@ -4,11 +4,11 @@ import java.io.Serializable;
 
 public class ProductAndLine implements Serializable {
 	
-	private int productId;
+	private Integer productId;
 	
 	private String productName;
 	
-	private int productLineId;
+	private Integer productLineId;
 	
 	private String productLineName;
 
@@ -38,11 +38,11 @@ public class ProductAndLine implements Serializable {
 		this.buildName = buildName;
 	}
 
-	public int getProductId() {
+	public Integer getProductId() {
 		return productId;
 	}
 
-	public void setProductId(int productId) {
+	public void setProductId(Integer productId) {
 		this.productId = productId;
 	}
 
@@ -54,11 +54,11 @@ public class ProductAndLine implements Serializable {
 		this.productName = productName;
 	}
 
-	public int getProductLineId() {
+	public Integer getProductLineId() {
 		return productLineId;
 	}
 
-	public void setProductLineId(int productLineId) {
+	public void setProductLineId(Integer productLineId) {
 		this.productLineId = productLineId;
 	}
 

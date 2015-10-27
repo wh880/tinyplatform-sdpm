@@ -12,7 +12,7 @@
         #if(CmsUtils.getProductLineList()?.size()>0)
         <script type="text/javascript">
             $(function(){
-                $.cookie('cookieProductLineId',"${CmsUtils.getProductLineList()?.get(0)?.productLineId}");
+                $.cookie('cookieProductLineId',"${CmsUtils.getProductLineList()?.get(0)?.productLineId}",{path:"/"});
                 window.location.reload();
             })
         </script>
@@ -65,8 +65,8 @@
     $(function () {
         $("#productLine-select").on("change", function () {
             var dataValue = $(this).val();
-            $.cookie('cookieProductLineId',dataValue);
-            $.removeCookie("cookieProductId");
+            $.cookie('cookieProductLineId',dataValue,{path:"/"});
+            $.removeCookie("cookieProductId",{path:"/"});
             window.location.reload();
         });
     });

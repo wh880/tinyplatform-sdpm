@@ -63,7 +63,7 @@
             #@colLabel()评审结果：#end
             #@formControlDiv("col-4")
                 #@tinySelect(
-                    "storyStatus" story?.storyStatus {"placeholder":"","datatype":"*","nullmsg":"评审结果不能为空！","class":
+                    "reviewRequest" "" {"placeholder":"","datatype":"*","nullmsg":"评审结果不能为空！","class":
                     "input-text","rel":"22"})
 
                     #foreach(source:getDict("proReviewResult"))

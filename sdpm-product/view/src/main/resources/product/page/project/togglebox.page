@@ -160,12 +160,12 @@
         #@toggleLeft({"class":"aclass"})
             #@settoggleLeftTitle()产品需求#end
             #@settoggleLeftBody("treeLeftbox")
-                #@zTreeList(call("link",adminPath+"/system/module/data"))
+                #@zTreeList(call("link",adminPath+"/system/module/tree?moduleType=story&moduleRoot="+cookieProductId))
                     #setzTreeValMap({"id":"moduleId","name":"moduleName","pid":"moduleParent"}) ##key值为固定
                     #zTreeSetLinkUrl(TINY_CONTEXT_PATH +adminPath+"/product/story" )
-                    #zTreeSetAddUrl(TINY_CONTEXT_PATH +adminPath+"/system/module/story/add?moduleType=story")
-                    #zTreeSetEditUrl(TINY_CONTEXT_PATH +adminPath+"/system/module/story/edit")
-                    #zTreeSetDelUrl(TINY_CONTEXT_PATH +adminPath+"/system/module/story/deleteTree")
+                    #zTreeSetAddUrl(TINY_CONTEXT_PATH +adminPath+"/system/module/ajax/save?moduleType=story&moduleRoot="+cookieProductId)
+                    #zTreeSetEditUrl(TINY_CONTEXT_PATH +adminPath+"/system/module/ajax/save")
+                    #zTreeSetDelUrl(TINY_CONTEXT_PATH +adminPath+"/system/module/ajax/delete")
                 #end
             #end
         #end
