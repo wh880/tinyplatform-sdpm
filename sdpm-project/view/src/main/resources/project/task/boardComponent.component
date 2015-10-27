@@ -3,8 +3,6 @@
 <div class="board board-task board-task-wait" data-id="${task.taskId}" id="task-${task.taskId}">
     <div class="board-title">
         #@aModal("#myModal" task?.taskName 1200 600 "" editPage+"?taskId="+task?.taskId)${task?.taskName}#end
-    ##        <a href="${editPage}?taskId=${task.taskId}" data-target="#myModal" data-toggle="modal"
-    ##           title="${task.taskName} data-height="460">${task.taskName}</a>
         <div class="board-actions">
             <button type="button" class="btn btn-mini btn-link btn-info-toggle"><i class="icon-angle-down"></i></button>
             <div class="dropdown">
@@ -29,7 +27,7 @@
           #@aModal("#myModal" task?.taskName 1200 600 "" assignedPage+"?taskId="+task?.taskId)
               <i class="icon-hand-right"></i>
           #end
-          <small>${task.taskId}</small>
+          <small>${UserUtils.getUserById(task.taskAssignedTo).orgUserRealName}</small>
 	  </span>
 
         <div class="pull-right">
@@ -68,7 +66,7 @@
           #@aModal("#myModal" task?.taskName 1200 600 "" assignedPage+"?taskId="+task?.taskId)
               <i class="icon-hand-right"></i>
           #end
-          <small>${task.taskId}</small>
+          <small>${UserUtils.getUserById(task.taskAssignedTo).orgUserRealName}</small>
 	  </span>
 
         <div class="pull-right">
@@ -107,7 +105,7 @@
           #@aModal("#myModal" task?.taskName 1200 600 "edit" assignedPage+"?taskId="+task?.taskId)
               <i class="icon-hand-right"></i>
           #end
-          <small>${task.taskId}</small>
+          <small>${UserUtils.getUserById(task.taskAssignedTo).orgUserRealName}</small>
 	  </span>
 
         <div class="pull-right">
@@ -144,7 +142,7 @@
 		 #@aModal("#myModal" task?.taskName 1200 600 "" assignedPage+"?taskId="+task?.taskId)
              <i class="icon-hand-right"></i>
          #end
-		 <small>${task.taskId}</small>
+          <small>${UserUtils.getUserById(task.taskAssignedTo).orgUserRealName}</small>
 	  </span>
 
         <div class="pull-right">
@@ -180,7 +178,7 @@
 		 #@aModal("#myModal" task?.taskName 1200 600 "" assignedPage+"?taskId="+task?.taskId)
              <i class="icon-hand-right"></i>
          #end
-		 <small>${task.taskId}</small>
+          <small>${UserUtils.getUserById(task.taskAssignedTo).orgUserRealName}</small>
 	  </span>
 
         <div class="pull-right">

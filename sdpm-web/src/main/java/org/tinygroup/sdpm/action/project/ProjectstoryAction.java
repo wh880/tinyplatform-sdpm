@@ -41,7 +41,9 @@ public class ProjectstoryAction extends BaseController {
     @RequestMapping("/find")
     public String find(@CookieValue(required = false, value = TaskAction.COOKIE_PROJECT_ID) String projectId,
                        Model model, Integer start, Integer limit, String order, String ordertype, String moduleId) {
-        moduleId = moduleId.substring(1);
+        if (!moduleId.isEmpty()) {
+            moduleId = moduleId.substring(1);
+        }
         Pager<ProductStory> story = projectStoryService.findStoryByProject(Integer.parseInt(projectId), start, limit, order, ordertype, moduleId);
 
         model.addAttribute("storys", story);

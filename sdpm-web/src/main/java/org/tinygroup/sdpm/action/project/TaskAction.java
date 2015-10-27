@@ -111,7 +111,7 @@ public class TaskAction extends BaseController {
             taskService.updateCallTask(task);
 
             LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, LogUtil.LogAction.ASSIGNED, task.getTaskId().toString(), UserUtils.getUserId(),
-                    null, task.getTaskProject().toString(), oldTask, task, commnet);
+                    null, oldTask.getTaskProject().toString(), oldTask, task, commnet);
 
         }
         model.addAttribute("task", task);
@@ -579,26 +579,6 @@ public class TaskAction extends BaseController {
     public String grouping(@CookieValue(value = TaskAction.COOKIE_PROJECT_ID, required = false) String projectId,
                            String type, Model model) {
         Map<String, List<ProjectTask>> map = taskService.findGroup(DictUtil.getValue("groupType", type), Integer.parseInt(projectId));
-        //转换为前台显示，存在同名问题
-//        Map<String, List<ProjectTask>> resMap = new HashMap<String, List<ProjectTask>>();
-//        if ("1".equals(type)) {
-//            for (String key : map.keySet()) {
-//                resMap.put(productStoryService.findStory(Integer.parseInt(key)).getStoryTitle(), map.get(key));
-//            }
-//        } else if ("2".equals(type)) {
-//            for (String key : map.keySet()) {
-//                resMap.put(DictUtil.getValue("taskStatus", key), map.get(key));
-//            }
-//        } else if ("4".equals(type) || "5".equals(type) || "6".equals(type) || "7".equals(type)) {
-//            for (String key : map.keySet()) {
-//                resMap.put(UserUtils.getUserById(key).getOrgUserRealName(), map.get(key));
-//            }
-//        } else {
-//            for (String key : map.keySet()) {
-//                resMap.put(key, map.get(key));
-//            }
-//        }
-
         model.addAttribute("map", map);
         model.addAttribute("type", type);
         return "project/task/grouping.page";
@@ -609,7 +589,7 @@ public class TaskAction extends BaseController {
     public Map<String, String> ajaxChangeStatu(ProjectTask task, String content, String taskStatus) {
         Map<String, String> map;
         task.setTaskLastEditedBy(UserUtils.getUserId());
-        Integer res = 0;
+        Integer res;
         LogUtil.LogAction logAction = null;
         if ("doing".equals(taskStatus)) {
             res = taskService.updateDoingTask(task);

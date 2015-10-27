@@ -82,7 +82,7 @@
             <!--scope="pro-taskInfo2-op"/>-->
             <menu id="pro-Info2-copy" name="复制" href="/project/task/preadd" icon="icon-copy" sort="8" isShow="1"
                   scope="pro-taskInfo2-op"/>
-            <menu id="pro-Info2-return" name="返回" href="/project/task/index.page" icon="icon-reply" sort="4" isShow="1"
+            <menu id="pro-Info2-return" name="返回" href="/project/task/index" icon="icon-reply" sort="4" isShow="1"
                   scope="pro-taskInfo2-op"/>
         </menu>
         <menu id="gantt" name="甘特图" href="/project/task/gantt" icon="" sort="1" isShow="1">
