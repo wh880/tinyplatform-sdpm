@@ -10,7 +10,7 @@
             #@formControlDiv("col-8")
                 #@Tselect2F()
                     #@Tselect2Body("productId" product?.productId  {"class":"input-text select2"})
-                        #foreach(product : productList)
+                        #foreach(product : CmsUtils.getProductList())
                             #if(product?.deleted==0)
                                 <option value="${product?.productId}">${product?.productName}</option>
                             #end
@@ -52,9 +52,9 @@
         #@elementItem()
             #@colLabel()来源：#end
             #@formControlDiv("col-8")
-                #@tinySelect("storySource" stroy?.storySource {"class":"input-text ","rel":"22"})
+                #@tinySelect("storySource" story?.storySource {"class":"input-text ","rel":"22"})
                     #foreach(source:getDict("storySource"))
-                        <option value="${source?.value}"> ${source?.text}</option>
+                        <option value="${source?.value}" #if(story?.storySource==source?.value)selected#end> ${source?.text}</option>
                     #end
                 #end
             #end
@@ -91,7 +91,7 @@
             #@colLabel()预计工时：#end
             #@formControlDiv("col-8")
                 <div class="input-group">
-                    <input type="text" class="form-control" name="storyEstimate" placeholder=""
+                    <input type="text" value="${story?.storyEstimate}" class="form-control" name="storyEstimate" placeholder=""
                            aria-describedby="basic-addon2">
                     <span class="input-group-addon" id="basic-addon2">小时</span>
                 </div>

@@ -19,9 +19,9 @@ import java.util.UUID;
 @Component
 public class ServiceUtil {
     @Autowired
-    CEPCore cepcore;
+    private static CEPCore cepcore;
 
-    private Event getEvent(String serviceId, Context context) throws Exception{
+    private static Event getEvent(String serviceId, Context context) throws Exception{
         Event event = new Event();
         event.setEventId(UUID.randomUUID().toString());
         ServiceRequest serviceRequest = new ServiceRequest();
@@ -31,7 +31,7 @@ public class ServiceUtil {
         return event;
     }
 
-    public Object callService(String serviceId ,CallBackFunction callBackFunction) {
+    public static Object callService(String serviceId ,CallBackFunction callBackFunction) {
         try{
             return callServiceAndCallBack(serviceId,callBackFunction.getContext());
         }catch(Exception e){
@@ -39,7 +39,7 @@ public class ServiceUtil {
         }
     }
 
-    private <T> T callServiceAndCallBack(String serviceId,Context context) throws Exception{
+    private static <T> T callServiceAndCallBack(String serviceId,Context context) throws Exception{
         Event event = getEvent(serviceId,context);
         cepcore.process(event);
         ServiceInfo info = cepcore.getServiceInfo(serviceId);
@@ -50,4 +50,5 @@ public class ServiceUtil {
         return event.getServiceRequest().getContext()
                 .get(resultsParam.get(0).getName());
     }
+
 }

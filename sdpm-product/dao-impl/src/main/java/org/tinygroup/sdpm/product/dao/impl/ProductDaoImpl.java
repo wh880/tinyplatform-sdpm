@@ -57,6 +57,7 @@ import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.tinysqldsl.Select;
 import org.tinygroup.tinysqldsl.Update;
 import org.tinygroup.tinysqldsl.base.Condition;
+import org.tinygroup.tinysqldsl.base.FragmentSql;
 import org.tinygroup.tinysqldsl.base.Table;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
@@ -194,7 +195,20 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
 		return getDslTemplate().queryPager(start>0?start:0, limit, product, false, new SelectGenerateCallback<Product>() {
 
 			public Select generate(Product t) {
-				Select select = MysqlSelect.selectFrom(PRODUCTTABLE).where(
+				Select select = MysqlSelect.select(PRODUCTTABLE.ALL, FragmentSql.fragmentSelect(
+						"(SELECT COUNT(story_id)FROM product_story a JOIN product b ON a.`product_id`=b.`product_id` WHERE a.`story_status`=1 AND b.product_id = product.product_id) activeSum,\n" +
+						"(SELECT COUNT(story_id)FROM product_story a JOIN product b ON a.`product_id`=b.`product_id` WHERE a.`story_status`=3 AND b.product_id = product.product_id) changeSum,\n" +
+						"(SELECT COUNT(story_id)FROM product_story a JOIN product b ON a.`product_id`=b.`product_id` WHERE a.`story_status`=0 AND b.product_id = product.product_id) draftSum,\n" +
+						"(SELECT COUNT(story_id)FROM product_story a JOIN product b ON a.`product_id`=b.`product_id` WHERE a.`story_status`=2 AND b.product_id = product.product_id) closeSum,\n" +
+						"COUNT(DISTINCT(product_plan.plan_id)) planCount,\n" +
+						"COUNT(DISTINCT(product_release.release_id)) releaseCount,\n" +
+						"COUNT(DISTINCT(quality_bug.bug_id)) bugCount,\n" +
+						"(SELECT COUNT(bug_id)FROM quality_bug a JOIN product b ON a.`product_id`=b.`product_id` WHERE a.`bug_status`<2 AND b.product_id = product.product_id) resolveSum,\n" +
+						"(SELECT COUNT(bug_id)FROM quality_bug a JOIN product b ON a.`product_id`=b.`product_id` WHERE a.`bug_assigned_to` IS NULL AND b.product_id = product.product_id) assignSum")).
+						from(FragmentSql.fragmentFrom(" product \n" +
+						"LEFT JOIN product_plan ON product.`product_id` = product_plan.`product_id` \n" +
+						"LEFT JOIN product_release ON product.`product_id` = product_release.`product_id` \n" +
+						"LEFT JOIN quality_bug ON product.`product_id` = quality_bug.`product_id`")).where(
 				and(
 					PRODUCTTABLE.COMPANY_ID.eq(t.getCompanyId()),
 					PRODUCTTABLE.DEPT_ID.eq(t.getDeptId()),
@@ -212,7 +226,7 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
 					PRODUCTTABLE.PRODUCT_CREATED_BY.eq(t.getProductCreatedBy()),
 					PRODUCTTABLE.PRODUCT_CREATED_DATE.eq(t.getProductCreatedDate()),
 					PRODUCTTABLE.PRODUCT_CREATED_VERSION.eq(t.getProductCreatedVersion()),
-					PRODUCTTABLE.DELETED.eq(t.getDeleted())));
+					PRODUCTTABLE.DELETED.eq(t.getDeleted()))).groupBy(PRODUCTTABLE.PRODUCT_ID);
 			return addOrderByElements(select, orderArgs);
 			}
 		});

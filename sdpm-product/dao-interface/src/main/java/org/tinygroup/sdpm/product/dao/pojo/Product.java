@@ -132,6 +132,89 @@ public class Product implements Serializable{
 	 */
 	private Integer deleted;
 
+	private Integer activeSum;
+	private Integer changeSum;
+	private Integer draftSum;
+	private Integer closeSum;
+
+	private Integer planCount;
+	private Integer releaseCount;
+	private Integer bugCount;
+
+	private Integer resolveSum;
+	private Integer assignSum;
+
+	public Integer getActiveSum() {
+		return activeSum;
+	}
+
+	public void setActiveSum(Integer activeSum) {
+		this.activeSum = activeSum;
+	}
+
+	public Integer getChangeSum() {
+		return changeSum;
+	}
+
+	public void setChangeSum(Integer changeSum) {
+		this.changeSum = changeSum;
+	}
+
+	public Integer getDraftSum() {
+		return draftSum;
+	}
+
+	public void setDraftSum(Integer draftSum) {
+		this.draftSum = draftSum;
+	}
+
+	public Integer getCloseSum() {
+		return closeSum;
+	}
+
+	public void setCloseSum(Integer closeSum) {
+		this.closeSum = closeSum;
+	}
+
+	public Integer getPlanCount() {
+		return planCount;
+	}
+
+	public void setPlanCount(Integer planCount) {
+		this.planCount = planCount;
+	}
+
+	public Integer getReleaseCount() {
+		return releaseCount;
+	}
+
+	public void setReleaseCount(Integer releaseCount) {
+		this.releaseCount = releaseCount;
+	}
+
+	public Integer getBugCount() {
+		return bugCount;
+	}
+
+	public void setBugCount(Integer bugCount) {
+		this.bugCount = bugCount;
+	}
+
+	public Integer getResolveSum() {
+		return resolveSum;
+	}
+
+	public void setResolveSum(Integer resolveSum) {
+		this.resolveSum = resolveSum;
+	}
+
+	public Integer getAssignSum() {
+		return assignSum;
+	}
+
+	public void setAssignSum(Integer assignSum) {
+		this.assignSum = assignSum;
+	}
 
 	public void setProductId(Integer productId){
 		this. productId = productId;
