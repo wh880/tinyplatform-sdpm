@@ -579,6 +579,14 @@ public class TaskAction extends BaseController {
     public String grouping(@CookieValue(value = TaskAction.COOKIE_PROJECT_ID, required = false) String projectId,
                            String type, Model model) {
         Map<String, List<ProjectTask>> map = taskService.findGroup(DictUtil.getValue("groupType", type), Integer.parseInt(projectId));
+        Map<String, List<ProjectTask>> mapDocument = new HashMap<String, List<ProjectTask>>();
+        if (type.equals("1")) {
+            for (String key : map.keySet()) {
+                String t = productStoryService.findStory(Integer.parseInt(key)).getStoryTitle();
+                mapDocument.put(t, map.get(key));
+            }
+        }
+        model.addAttribute("mapDocument", mapDocument);
         model.addAttribute("map", map);
         model.addAttribute("type", type);
         return "project/task/grouping.page";

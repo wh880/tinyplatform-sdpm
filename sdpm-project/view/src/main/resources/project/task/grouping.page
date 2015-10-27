@@ -36,7 +36,7 @@
         #end
     #end
     #@tbody()
-        #foreach(key : map?.keySet())
+        #foreach(key : mapDocument?mapDocument.keySet():map?.keySet())
             <tr class="show-group" data-tr="data-g-${key}">
                 <td>
                     <span class="glyphicon glyphicon-chevron-right">
@@ -51,7 +51,7 @@
                 </td>
                 <td colspan="11"></td>
             </tr>
-            #foreach(task:map.get(key))
+            #foreach(task:mapDocument?mapDocument.get(key):map.get(key))
                 <tr class="data-g-${key} hide">
                     <td></td>
                     <td>${task?.taskName}</td>
