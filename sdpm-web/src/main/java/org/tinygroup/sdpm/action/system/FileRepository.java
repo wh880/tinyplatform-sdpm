@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.multipart.MultipartFile;
+import org.tinygroup.commons.tools.StringUtil;
 
 import javax.servlet.ServletContext;
 import java.io.File;
@@ -19,6 +20,11 @@ import java.io.IOException;
 public class FileRepository implements ServletContextAware {
     private Logger log = LoggerFactory.getLogger(FileRepository.class);
     private ServletContext ctx;
+
+    public String resolverFilePath(String filePath, String separator) {
+        String path = StringUtil.substringAfterLast(filePath, separator);
+        return StringUtil.replace(path, "\\", "/");
+    }
 
     public String storeByExt(String path, String ext, MultipartFile file)
             throws IOException {
