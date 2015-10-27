@@ -13,9 +13,7 @@
     #@elementItem()
         #@colLabel()历史记录：#end
         #@formControlDiv("col-8")
-            #@div(divClass="infoContent")
-            #include("/product/page/tabledemo/historyrecord.page")
-                #end
+            #history(adminPath+"/system/action/ajax/history?actionObjectType=product&actionObjectId="+productId)
         #end
         #@validateDiv("col-2")#end
     #end

@@ -3,10 +3,7 @@ package org.tinygroup.sdpm.action.product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.UserService;
@@ -18,6 +15,7 @@ import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.dao.pojo.SystemHistory;
 import org.tinygroup.sdpm.system.service.inter.ActionService;
 import org.tinygroup.sdpm.system.service.inter.HistoryService;
+import org.tinygroup.sdpm.util.CmsUtils;
 import org.tinygroup.sdpm.util.LogUtil;
 import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
@@ -54,12 +52,9 @@ public class ProductAction extends BaseController {
 
 
     @RequestMapping("/{forward}/content")
-    public String doc(@PathVariable(value = "forward") String forward, HttpServletRequest request, Model model) {
-        int productId = -1;
-        if (request.getSession().getAttribute("sessionProductId") != null) {
-            productId = (Integer) request.getSession().getAttribute("sessionProductId");
-        }
-        Product product = productService.findProduct(productId);
+    public String doc(@CookieValue(value = "cookieProductId") String cookieProductId,@PathVariable(value = "forward") String forward, HttpServletRequest request, Model model) {
+
+        Product product = productService.findProduct(Integer.parseInt(cookieProductId));
         model.addAttribute("product", product);
         if ("doc".equals(forward)) {
             return "/product/page/project/archive-list.page";
@@ -75,38 +70,21 @@ public class ProductAction extends BaseController {
 
     @RequestMapping("")
     public String productAction(HttpServletRequest request, WebContext webContext) {
-        List<Product> sessionList = (List<Product>) request.getSession().getAttribute("productList");
-        List<Product> list = SessionUtil.ProductRefresh(request, productService);
-        if(list.size()==0||list==null){
-        	request.getSession().removeAttribute("sessionProductId");
-        	request.getSession().removeAttribute("productList");
-        	return "forward:"+adminPath+"/product/addproduct/addition";
-        }
-        if (sessionList == null || sessionList.size() == 0) {
-
-            if (request.getSession().getAttribute("sessionProductId") == null) {
-                request.getSession().setAttribute("sessionProductId", list.size() > 0 ? list.get(0).getProductId() : null);
-            }
-        }
-
-        return "redirect:"+adminPath+"/product/story?" + (list.size() > 0 ? ("productId=" + list.get(0).getProductId()) : "") + "&choose=1" + (request.getQueryString() == null ? "" : ("&" + request.getQueryString()));
+        return "redirect:"+adminPath+"/product/story?choose=1" + (request.getQueryString() == null ? "" : ("&" + request.getQueryString()));
     }
 
 
     @RequestMapping("/save")
-    public String save(Product product,SystemAction systemAction, HttpServletRequest request) {
+    public String save(@CookieValue(value = "cookieProductLineId") String cookieProductLineId,Product product,SystemAction systemAction, HttpServletRequest request) {
 
-        if (request.getSession().getAttribute("sessionProductLineId") != null) {
-            product.setProductLineId((Integer) request.getSession().getAttribute("sessionProductLineId"));
-        }
-        product.setProductCreatedBy(UserUtils.getUser().getOrgUserAccount());
+        product.setProductLineId(Integer.parseInt(cookieProductLineId));
+        product.setProductCreatedBy(UserUtils.getUserId());
         product.setProductCreatedDate(new Date());
         product.setProductStatus("0");
         
         product = productService.addProduct(product);
-        SessionUtil.ProductRefresh(request, productService);
-        request.getSession().setAttribute("sessionProductId", product.getProductId());
-
+        CmsUtils.removeProductList();
+        CmsUtils.removeProductList(String.valueOf(product.getProductLineId()));
         LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCT,
                 LogUtil.LogAction.OPENED,
                 String.valueOf(product.getProductId()),
@@ -125,8 +103,8 @@ public class ProductAction extends BaseController {
     public String update(Product product, HttpServletRequest request, SystemAction systemAction) throws IOException {
         Product product1 = productService.findProduct(product.getProductId());
         productService.updateProduct(product);
-        SessionUtil.ProductRefresh(request, productService);
-
+        CmsUtils.removeProductList();
+        CmsUtils.removeProductList(String.valueOf(product.getProductLineId()));
         LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCT,
                 LogUtil.LogAction.EDITED,
                 String.valueOf(product.getProductId()),
@@ -144,7 +122,8 @@ public class ProductAction extends BaseController {
     public String edit(Product product, HttpServletRequest request) {
 
         productService.updateProduct(product);
-        SessionUtil.ProductRefresh(request, productService);
+        CmsUtils.removeProductList();
+        CmsUtils.removeProductList(String.valueOf(product.getProductLineId()));
         return "redirect:" + adminPath + "/product/find/overview?productId=" + product.getProductId();
     }
 
@@ -166,9 +145,8 @@ public class ProductAction extends BaseController {
         Product product1 = productService.findProduct(productId);
         productService.deleteProduct(productId);
         Product product = productService.findProduct(productId);
-        SessionUtil.ProductRefresh(request, productService);
-
-
+        CmsUtils.removeProductList();
+        CmsUtils.removeProductList(String.valueOf(product.getProductLineId()));
         LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCT,
                 LogUtil.LogAction.DELETED,
                 String.valueOf(productId),
@@ -192,18 +170,10 @@ public class ProductAction extends BaseController {
     }
 
     @RequestMapping("/find/{forward}")
-    public String find(@PathVariable(value = "forward") String forward, Integer productId, Model model, HttpServletRequest request) {
-
-        if (productId == null) {
-        	if(request.getSession().getAttribute("sessionProductId")==null){
-        		return "redirect:" +adminPath+"/product/addproduct/addition";
-        	}else{
-        		productId = (Integer) request.getSession().getAttribute("sessionProductId");
-        	}
-            
-        }
-        
-        Product product = productService.findProduct(productId);
+    public String find(@CookieValue(value = "cookieProductId") String cookieProductId,
+            @PathVariable(value = "forward") String forward, Integer productId, Model model, HttpServletRequest request) {
+        if("close".equals(forward))return "/product/page/tabledemo/overview-close.pagelet";
+        Product product = productService.findProduct(Integer.parseInt(cookieProductId));
         
         SystemHistory history = new SystemHistory();
         List<SystemHistory> histories = historyService.find(history);
@@ -261,17 +231,9 @@ public class ProductAction extends BaseController {
 
 
     @RequestMapping("/{forward}/addition")
-    public String addpro(@PathVariable(value = "forward") String forward,HttpServletRequest request, Model model) {
-        int productLineId = -1;
-        if (request.getSession().getAttribute("sessionProductLineId") != null) {
-
-            productLineId = (Integer) request.getSession().getAttribute("sessionProductLineId");
-        }else{
-            List<ProductLine> lines = productLineService.findList(new ProductLine());
-            ProductLine productLine = lines.size()>0?lines.get(0):null;
-        	request.getSession().setAttribute("sessionProductLineId", productLine!=null?productLine.getProductLineId():null);
-            model.addAttribute("productLine", productLine);
-        }
+    public String addpro(@CookieValue(value = "cookieProductLineId") String cookieProductLineId,
+            @PathVariable(value = "forward") String forward,HttpServletRequest request, Model model) {
+        Integer productLineId = Integer.parseInt(cookieProductLineId);
 		if ("addproduct".equals(forward)) {
 			return "/product/page/tabledemo/addProduct.page";
 		} else if ("allproduct".equals(forward)) {
@@ -281,12 +243,9 @@ public class ProductAction extends BaseController {
     }
 
     @RequestMapping("/addDoc")
-    public String addDoc(HttpServletRequest request, Model model) {
-        int productId = -1;
-        if (request.getSession().getAttribute("sessionProductId") != null) {
-            productId = (Integer) request.getSession().getAttribute("sessionProductId");
-        }
-        Product product = productService.findProduct(productId);
+    public String addDoc(@CookieValue(value = "cookieProductId") String cookieProductId,HttpServletRequest request, Model model) {
+
+        Product product = productService.findProduct(Integer.parseInt(cookieProductId));
         model.addAttribute("product", product);
        return  "/product/page/tabledemo/add-doc.page";
     }

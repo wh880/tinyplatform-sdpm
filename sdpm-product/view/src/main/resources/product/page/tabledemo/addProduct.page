@@ -51,11 +51,14 @@
             #@colLabel()产品线名称：#end
             #@formControlDiv("col-3")
                 #@Tselect2F()
-                    #@Tselect2Body("productLineId" "IN" {"class":"input-text select2"})
+                    #@Tselect2Body("productLineId" cookieProductLineId {"class":"input-text select2"})
+                        #for(productLine : CmsUtils.getProductLineList())
+                            <option value="productLine?.productLineId">${productLine?.productLineName}</option>
+                        #end
                     #end
-                    <script>
-                        ajaxRead("${sid}", "productLineId", "productLineId", "productLineName", "/productLine/productLineList",${sessionProductLineId?:0});
-                    </script>
+##                    <script>
+##                        ajaxRead("${sid}", "productLineId", "productLineId", "productLineName", "/productLine/productLineList",${sessionProductLineId?:0});
+##                    </script>
                     #@Tselect2Fix()
                         <a href="${TINY_CONTEXT_PATH}/a/productLine/add">增加</a>
                         <a href="${TINY_CONTEXT_PATH}/a/productLine/all" class="r">全部</a>
@@ -197,7 +200,7 @@
             #@colLabel()分组白名单：#end
             #@skinMinimal("col-8")
                 #@Tcheckboxes("productWhiteList" "")
-                    #foreach(source:getDict("productwhiteList"))
+                    #foreach(source:getDict("productWhiteList"))
                         #@Tcheckbox(source?.value)${source?.text}#end
                     #end
                 #end

@@ -2,22 +2,47 @@
 
 #@navSelect2("productLine" "productLine")
     #@navSelect2Nav()
-        #if(productLineList)
-            #for(productLine : productLineList)
-            #if(productLine?.productLineId == sessionProductLineId)
-                ${productLine?.productLineName}
+        #if(cookieProductLineId&&CmsUtils.getProductLineList()?.size()>0)
+            #for(productLine : CmsUtils.getProductLineList())
+                #if(productLine?.productLineId == cookieProductLineId)
+                    ${productLine?.productLineName}
+                #end
             #end
+        #else
+        #if(CmsUtils.getProductLineList()?.size()>0)
+        <script type="text/javascript">
+            $(function(){
+                $.cookie('cookieProductLineId',"${CmsUtils.getProductLineList()?.get(0)?.productLineId}");
+                window.location.reload();
+            })
+        </script>
+            ${CmsUtils.getProductList()?.get(0)?.productName}
+        #else
+        <script type="text/javascript">
+            $(function(){
+                layer.msg('目前没有产品线，现在将前往添加。<div style="text-align:center"><a href="${TINY_CONTEXT_PATH+adminPath}/productLine/content/add"><span id="showTime">5</span>秒后前往</a></div>',5,-1,function(){
+                    window.location.href = "${TINY_CONTEXT_PATH+adminPath}/productLine/content/add";
+                });
+                var timeVal=5;
+                function changeTimeVal(){
+                    $("#showTime").html(--timeVal);
+                    window.setTimeout(function(){
+                        changeTimeVal();
+                    },1000);
+                }
+                changeTimeVal();
+            })
+        </script>
+        无产品线
         #end
-    #else
-    产品线
-    #end
+        #end
 
 <span class="caret"></span>#end
 #@navSelect2Body()
     #@navSelect2Data()
     <option value=""></option>
     <optgroup label="产品线">
-        #for(productLine : productLineList)
+        #for(productLine : CmsUtils.getProductLineList())
         <option value="${productLine?.productLineId}">${productLine?.productLineName}</option>
     #end
 </optgroup>
@@ -39,21 +64,10 @@
 
     $(function () {
         $("#productLine-select").on("change", function () {
-            var dateValue = $(this).val();
-            $.post("${TINY_CONTEXT_PATH +adminPath}/productLine/sessionset", {productLineId: dateValue}, function (result) {
-                if (true == result) {
-                    window.location.reload();
-                } else {
-                    alert("产品线ID值为空");
-                }
-
-            });
-        ##				$("#productIdHidden").val($(this).val());
-        ##				$(".switchClass").each(function(){
-        ##					var hrefnew = this.href + "&productId=" + $("#productIdHidden").val();
-        ##					this.href = hrefnew;
-        ##				});
-        ##				window.location.href='${TINY_CONTEXT_PATH +adminPath}/product/story?currentPageId=3&productId='+$(this).find("option:selected").val();
+            var dataValue = $(this).val();
+            $.cookie('cookieProductLineId',dataValue);
+            $.removeCookie("cookieProductId");
+            window.location.reload();
         });
     });
 
