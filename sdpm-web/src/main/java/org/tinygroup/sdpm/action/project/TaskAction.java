@@ -62,8 +62,8 @@ public class TaskAction extends BaseController {
                         HttpServletResponse response, String moduleId, String choose, Model model) {
         if (StringUtil.isBlank(currentProjectId)) {
             Project project = CmsUtils.getProject(null);
-            if (null != project) {
-                currentProjectId = project.getProjectId().toString();
+            if (null != project&&project.getProjectId()!=null) {
+                currentProjectId = String.valueOf(project.getProjectId());
                 CookieUtils.setCookie(response, COOKIE_PROJECT_ID, currentProjectId);
                 model.addAttribute(COOKIE_PROJECT_ID, currentProjectId);
             }

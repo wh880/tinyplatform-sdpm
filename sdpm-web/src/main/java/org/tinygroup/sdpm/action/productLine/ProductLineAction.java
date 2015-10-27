@@ -101,10 +101,26 @@ public class ProductLineAction extends BaseController {
     @ResponseBody
     @RequestMapping("/delete")
     public Map delete(Integer productLineId, SystemAction systemAction) {
-        ProductLine productLine1 = productLineService.findProductLine(productLineId);
+        Product product = new Product();
+        product.setProductLineId(productLineId);
+        product.setDeleted(0);
+        List<Product> products = productService.findProductList(product);
+        for(Product product1 : products){
+            product1.setDeleted(1);
+            productService.updateProduct(product1);
+            LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCT,
+                    LogUtil.LogAction.DELETED,
+                    String.valueOf(product1.getProductId()),
+                    UserUtils.getUserId(),
+                    null,
+                    null,
+                    null,
+                    null,
+                    systemAction.getActionComment());
+        }
         productLineService.deleteProductLine(productLineId);
-        ProductLine productLine = productLineService.findProductLine(productLineId);
         CmsUtils.removeProductLineList();
+        CmsUtils.removeProductList(String.valueOf(productLineId));
         Map<String, String> map = new HashMap<String, String>();
         LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCTLINE,
                 LogUtil.LogAction.DELETED,
@@ -112,8 +128,8 @@ public class ProductLineAction extends BaseController {
                 UserUtils.getUserId(),
                 null,
                 null,
-                productLine1,
-                productLine,
+                null,
+                null,
                 systemAction.getActionComment());
         map.put("status", "success");
         map.put("info", "删除成功");
@@ -273,7 +289,20 @@ public class ProductLineAction extends BaseController {
         ProjectBuild projectBuild = new ProjectBuild();
         projectBuild.setBuildDeleted(FieldUtil.DELETE_NO_S);
         List<ProjectBuild> projectBuilds = buildService.findListBuild(projectBuild);
-
+        for(int i = 0; i<productLists.size();){
+            if(productLists.get(i).getProductLineId()!=null&&productLists.get(i).getProductLineId()>0&&!productLines.contains(productLists.get(i).getProductLineId())){
+                productLists.remove(productLists.get(i));
+                continue;
+            }
+            i++;
+        }
+        for(int i = 0; i<projectBuilds.size();){
+            if(!productLines.contains(projectBuilds.get(i).getBuildProduct())){
+                productLists.remove(projectBuilds.get(i));
+                continue;
+            }
+            i++;
+        }
         for (ProductLine d : productLines) {
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("id", "p" + d.getProductLineId());

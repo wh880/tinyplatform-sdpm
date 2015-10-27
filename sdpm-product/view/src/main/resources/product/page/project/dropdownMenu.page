@@ -4,16 +4,25 @@
 	#@navSelect2Nav()
 		#if(cookieProductLineId)
 			#if(cookieProductId&&CmsUtils.getProductListByLine(cookieProductLineId)?.size()>0)
+				#set(finded = 0)
 				#for(product : CmsUtils.getProductListByLine(cookieProductLineId))
 					#if(product?.productId == cookieProductId)
 						${product?.productName}
+						#set(finded=1)
 					#end
+				#end
+				#if(finded==0)
+                <script type="text/javascript">
+                    $.removeCookie('cookieProductId',{path:"/"})
+					//window.location.href='http://localhost:8989/sdpm-web/a/project/task/index';
+					window.location.reload();
+				</script>
 				#end
 			#else
 				#if(CmsUtils.getProductListByLine(cookieProductLineId)?.size()>0)
 				<script type="text/javascript">
 					$(function(){
-						$.cookie('cookieProductId',"${CmsUtils.getProductListByLine(cookieProductLineId)?.get(0)?.productId}");
+						$.cookie('cookieProductId',"${CmsUtils.getProductListByLine(cookieProductLineId)?.get(0)?.productId}",{path:"/"});
 						window.location.reload();
 					})
 				</script>
@@ -22,7 +31,7 @@
                 <script type="text/javascript">
                     $(function(){
 						var url = window.location.pathname;
-						if(url.indexOf("addProduct")<0){
+						if(url.indexOf("addproduct")<0){
 							layer.msg('目前没有产品，现在将前往添加。<div style="text-align:center"><a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition"><span id="showTime">5</span>秒后前往</a></div>',5,-1,function(){
 								window.location.href = "${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition";
 							});
@@ -43,7 +52,7 @@
 			#if(CmsUtils.getProductLineList()?.size()>0)
             <script type="text/javascript">
                 $(function(){
-                    $.cookie('cookieProductLineId',"${CmsUtils.getProductLineList()?.get(0)?.productLineId}");
+                    $.cookie('cookieProductLineId',"${CmsUtils.getProductLineList()?.get(0)?.productLineId}",{path:"/"});
                     window.location.reload();
                 })
             </script>
@@ -96,7 +105,7 @@
 		$(function(){
 			$("#product-select").on("change",function(){
                 var dataValue = $(this).val();
-                $.cookie('cookieProductId',dataValue);
+                $.cookie('cookieProductId',dataValue,{path:"/"});
                 window.location.reload();
 			});
 		});

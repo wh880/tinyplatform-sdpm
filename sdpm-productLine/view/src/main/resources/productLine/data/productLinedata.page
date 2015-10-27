@@ -22,8 +22,41 @@
             #if(m.id=="allproductline-edit")
             <a title="${m.name}" class="ml-5" href=${TINY_CONTEXT_PATH+adminPath}${url}><i class="${m.icon}"></i></a>
             #else
-            &nbsp;#@tinyTableItemRemove(TINY_CONTEXT_PATH +adminPath+url productLine.productLineId)<i
-                    class="${m.icon}"></i>#end
+            &nbsp;<a href="javascript:void(0);" id="productLineRemove"><i
+                    class="${m.icon}"></i></a>
+                <script>
+                    $(function(){
+                        $("#productLineRemove").on("click", function () {
+                            layer.confirm('确定要删除该记录？', function (index) {
+                                $.ajax({
+                                    url:"${TINY_CONTEXT_PATH+adminPath+eval(url)}",
+                                    dataType:"json",
+                                    success:function(data){
+                                        if(data.status=="success"||data.status=="y"){
+                                            #if(productLine?.productLineId==cookieProductLineId)
+                                            $.removeCookie("cookieProductLineId",{path:"/"});
+                                            #end
+                                            layer.msg(data.info, 2, 1);
+                                            setTimeout(function(){
+                                                layer.closeAll();
+                                                $("#productLinetable").trigger("initnav");
+                                            },300);
+                                        }else{
+                                            var msg=data.info?data.info:"系统出错";
+                                            layer.msg(msg);
+                                        }
+                                    },
+                                    error: function() {
+                                        layer.msg("系统出错");
+                                    }
+                                });
+
+                            });
+                        });
+
+                    })
+
+                </script>
             #end
         #end
     #end
