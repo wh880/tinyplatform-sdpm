@@ -29,19 +29,6 @@
                 #end
 
                 #set(m1=menuManager.getMenu("pro-Info-close"))
-                #if(m1)
-                    #@iconOperations(
-                        "#deleteModal" "icon-remove" "删除版本" "250" "60" "/testManagement/page/tabledemo/delete.pagelet"
-                        "ml-5")&nbsp#end
-                    #@dialog("deleteModal")
-                        #@dialogHeader()对话框标题#end
-                        #@dialogBody()<p>对话框内容…</p>#end
-                        #@dialogFooter()
-                            #@buttonEnsure()确定#end
-                            #@buttonCancel()关闭#end
-                        #end
-                    #end
-                #end
             </span>
                 #div(divClass="clearfix")
             #end
@@ -84,19 +71,6 @@
                title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
         #end
         #set(m1=menuManager.getMenu("pro-Info-close"))
-        #if(m1)
-            #@iconOperations(
-                "#deleteModal" "icon-remove" "删除版本" "250" "60" "/testManagement/page/tabledemo/delete.pagelet"
-                "ml-5")&nbsp#end
-            #@dialog("deleteModal")
-                #@dialogHeader()对话框标题#end
-                #@dialogBody()<p>对话框内容…</p>#end
-                #@dialogFooter()
-                    #@buttonEnsure()确定#end
-                    #@buttonCancel()关闭#end
-                #end
-            #end
-        #end
     </center>
 </div>
 <div style="width:30%;float:right">

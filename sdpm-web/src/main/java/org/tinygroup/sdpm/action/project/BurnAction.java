@@ -95,6 +95,8 @@ public class BurnAction extends BaseController {
         model.addAttribute("left", mapper.toJson(leftList));
         model.addAttribute("interval", interval);
         model.addAttribute("choose", choose);
+        model.addAttribute("projectId", projectId);
+
         return "project/task/projectBurn.page" + (ajax == null ? "" : "let");
     }
 

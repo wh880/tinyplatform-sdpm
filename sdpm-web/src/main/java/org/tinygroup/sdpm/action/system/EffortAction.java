@@ -3,7 +3,6 @@ package org.tinygroup.sdpm.action.system;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-
 import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,7 +23,6 @@ import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletResponse;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -126,10 +124,7 @@ public class EffortAction extends BaseController{
 			intIds[i] = Integer.valueOf(sids[i]);
 		} 
 		effortService.batchDelete(intIds);
-		Map<String, String> map = new HashedMap();
-		map.put("info", "success");
-	   	map.put("status","y" );
-   		return map;
+		return resultMap(true, "删除成功");
 	}
 	@RequestMapping("date")
 	public String findByDate(int start,int limit,String order ,String ordertype,@RequestParam(required = false, defaultValue = "0")int date,SystemEffort systemEffort,Model model) throws ParseException{

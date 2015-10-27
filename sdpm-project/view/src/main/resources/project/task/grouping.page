@@ -40,9 +40,12 @@
             <tr class="show-group" data-tr="data-g-${key}">
                 <td>
                     <span class="glyphicon glyphicon-chevron-right">
-                        #if(key)
-                            ${key}
+                        #if(key&&(type =="4"||type =="5"||type =="6"||type =="7"))
+                            ${UserUtils.getUserById(key).orgUserRealName}
+                        #elseif(key&&(type=="2"))
+                            ${getDict("taskStatus",key)}
                         #else
+                            ${key}
                         #end
                     </span>
                 </td>

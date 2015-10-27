@@ -115,7 +115,7 @@ public class ProjectStoryServiceImpl implements ProjectStoryService {
             }
             condition = condition + storys + ")";
         }
-        if (moduleId != null) {
+        if (!moduleId.isEmpty()) {
             condition = condition + "and module_id = " + moduleId;
         }
 
@@ -126,9 +126,4 @@ public class ProjectStoryServiceImpl implements ProjectStoryService {
         }
         return pager;
     }
-
-//    public Pager<ProjectStory> findStoryPager(int start, int limit, ProjectStory story, String statusCondition, SearchInfos conditions, String groupOperate, String columnName, boolean asc) {
-//
-//        return projectStoryManager.findPager(start, limit, story,statusCondition, conditions, groupOperate, columnName, asc);
-//    }
 }
