@@ -73,7 +73,9 @@ public class CmsUtils {
     public static List<ProductLine> getProductLineList() {
         List<ProductLine> productLineList = (List<ProductLine>) CacheUtils.get(CMS_CACHE, CMS_CACHE_PRODUCT_LINE_LIST);
         if (productLineList == null) {
-            productLineList = productLineService.findList(null);
+            ProductLine productLine = new ProductLine();
+            productLine.setDeleted(0);
+            productLineList = productLineService.findList(productLine);
             CacheUtils.put(CMS_CACHE, CMS_CACHE_PRODUCT_LINE_LIST, productLineList);
         }
         return productLineList;
@@ -92,7 +94,9 @@ public class CmsUtils {
     public static List<Product> getProductList() {
         List<Product> projectList = (List<Product>) CacheUtils.get(CMS_CACHE, CMS_CACHE_PRODUCT_LIST);
         if (projectList == null) {
-            projectList = productService.findProductList(null);
+            Product product = new Product();
+            product.setDeleted(0);
+            projectList = productService.findProductList(product);
             CacheUtils.put(CMS_CACHE, CMS_CACHE_PRODUCT_LIST, projectList);
         }
         return projectList;
@@ -116,6 +120,7 @@ public class CmsUtils {
         if (productList == null) {
             Product product = new Product();
             product.setProductLineId(Integer.valueOf(productLineId));
+            product.setDeleted(0);
             productList = productService.findProductList(product);
             CacheUtils.put(CMS_CACHE, CMS_CACHE_PRODUCT_LIST_LINE_ID_ + productLineId, productList);
         }

@@ -3,10 +3,7 @@ package org.tinygroup.sdpm.action.productLine;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.action.product.SessionUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
@@ -19,6 +16,7 @@ import org.tinygroup.sdpm.productLine.service.ProductLineService;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
 import org.tinygroup.sdpm.project.service.inter.BuildService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
+import org.tinygroup.sdpm.util.CmsUtils;
 import org.tinygroup.sdpm.util.LogUtil;
 import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
@@ -61,8 +59,7 @@ public class ProductLineAction extends BaseController {
         productLine.setProductLineCreatedDate(new Date());
         productLine.setProductLineStatus("0");
         ProductLine productLine1 = productLineService.addProductLine(productLine);
-        SessionUtil.ProductLineRefresh(request, productLineService);
-        request.getSession().setAttribute("sessionProductLineId",productLine1.getProductLineId());
+        CmsUtils.removeProductLineList();
         
         LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCTLINE
                 , LogUtil.LogAction.OPENED
@@ -107,6 +104,7 @@ public class ProductLineAction extends BaseController {
         ProductLine productLine1 = productLineService.findProductLine(productLineId);
         productLineService.deleteProductLine(productLineId);
         ProductLine productLine = productLineService.findProductLine(productLineId);
+        CmsUtils.removeProductLineList();
         Map<String, String> map = new HashMap<String, String>();
         LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCTLINE,
                 LogUtil.LogAction.DELETED,
@@ -135,6 +133,7 @@ public class ProductLineAction extends BaseController {
         ProductLine productLine1 = productLineService.findProductLine(productLine.getProductLineId());
         productLine.setDeleted(FieldUtil.DELETE_YES);
         productLineService.updateProductLine(productLine);
+        CmsUtils.removeProductLineList();
         LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCTLINE,
                 LogUtil.LogAction.CLOSED,
                 String.valueOf(productLine.getProductLineId()),
@@ -160,15 +159,11 @@ public class ProductLineAction extends BaseController {
     }
 
     @RequestMapping("/find/{forword}")
-    public String find(@PathVariable(value = "forword") String forword,Integer productId,Integer productLineId, Model model, HttpServletRequest request) {
-    	
+    public String find(@CookieValue("cookieProductLineId") String cookieProductLineId,
+            @PathVariable(  value = "forword") String forword,Integer productId,Integer productLineId, Model model, HttpServletRequest request) {
+
     	if (productLineId == null) {
-    		if(request.getSession().getAttribute("sessionProductLineId")!=null){
-    			 productLineId = (Integer) request.getSession().getAttribute("sessionProductLineId");
-    		}else if(productId!=null){
-    			productLineId = productService.findProduct(productId).getProductLineId();
-    		}
-           
+    		productLineId = Integer.parseInt(cookieProductLineId);
         }
     	
         ProductLine productLine = productLineService.findProductLine(productLineId);
@@ -208,33 +203,33 @@ public class ProductLineAction extends BaseController {
 
     @RequestMapping("/toProduct")
     public String productLineAction(HttpServletRequest request) {
-        List<ProductLine> list = (List<ProductLine>) request.getSession().getAttribute("productLineList");
-        if (list == null || list.size() == 0) {
-            list = productLineService.findProductLineList(new ProductLine(), "productLineId", "desc");
-            if(list.size()==0||list==null){
-            	return "redirect:" + adminPath + "/productLine/add";
-            }
-            request.getSession().setAttribute("productLineList", list);
-
-            if (request.getSession().getAttribute("sessionProductLineId") == null) {
-                request.getSession().setAttribute("sessionProductLineId", list.size() > 0 ? list.get(0).getProductLineId() : null);
-            }
-        }
+        List<ProductLine> list = CmsUtils.getProductLineList();
+//        if (list == null || list.size() == 0) {
+//            list = productLineService.findProductLineList(new ProductLine(), "productLineId", "desc");
+//            if(list.size()==0||list==null){
+//            	return "redirect:" + adminPath + "/productLine/add";
+//            }
+//            request.getSession().setAttribute("productLineList", list);
+//
+//            if (request.getSession().getAttribute("sessionProductLineId") == null) {
+//                request.getSession().setAttribute("sessionProductLineId", list.size() > 0 ? list.get(0).getProductLineId() : null);
+//            }
+//        }
 
         return "redirect:" + adminPath + "/product";
     }
 
     @RequestMapping("/to")
     public String to(HttpServletRequest request,Model model) {
-        List<ProductLine> list = (List<ProductLine>) request.getSession().getAttribute("productLineList");
-        if (list == null || list.size() == 0) {
-            list = productLineService.findProductLineList(new ProductLine(), "productLineId", "desc");
-            request.getSession().setAttribute("productLineList", list);
-
-            if (request.getSession().getAttribute("sessionProductLineId") == null) {
-                request.getSession().setAttribute("sessionProductLineId", list.size() > 0 ? list.get(0).getProductLineId() : null);
-            }
-        }
+        List<ProductLine> list = CmsUtils.getProductLineList();
+//        if (list == null || list.size() == 0) {
+//            list = productLineService.findProductLineList(new ProductLine(), "productLineId", "desc");
+//            request.getSession().setAttribute("productLineList", list);
+//
+//            if (request.getSession().getAttribute("sessionProductLineId") == null) {
+//                request.getSession().setAttribute("sessionProductLineId", list.size() > 0 ? list.get(0).getProductLineId() : null);
+//            }
+//        }
         String query = request.getQueryString();
         if(StringUtil.isBlank(query)||!query.contains("status")){
             model.addAttribute("status",1);

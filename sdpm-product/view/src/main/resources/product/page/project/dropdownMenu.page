@@ -2,24 +2,80 @@
 
 #@navSelect2("product" "product")
 	#@navSelect2Nav()
-		#if(productList&&!pltype)
-			#for(product : productList)
-				#if(product?.productId == sessionProductId)
-					${product?.productName}
+		#if(cookieProductLineId)
+			#if(cookieProductId&&CmsUtils.getProductListByLine(cookieProductLineId)?.size()>0)
+				#for(product : CmsUtils.getProductListByLine(cookieProductLineId))
+					#if(product?.productId == cookieProductId)
+						${product?.productName}
+					#end
+				#end
+			#else
+				#if(CmsUtils.getProductListByLine(cookieProductLineId)?.size()>0)
+				<script type="text/javascript">
+					$(function(){
+						$.cookie('cookieProductId',"${CmsUtils.getProductListByLine(cookieProductLineId)?.get(0)?.productId}");
+						window.location.reload();
+					})
+				</script>
+					${cookieProductLineId?:CmsUtils.getProductListByLine(cookieProductLineId)?.get(0)?.productName}
+				#else
+                <script type="text/javascript">
+                    $(function(){
+						var url = window.location.pathname;
+						if(url.indexOf("addProduct")<0){
+							layer.msg('目前没有产品，现在将前往添加。<div style="text-align:center"><a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition"><span id="showTime">5</span>秒后前往</a></div>',5,-1,function(){
+								window.location.href = "${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition";
+							});
+							var timeVal=5;
+							function changeTimeVal(){
+								$("#showTime").html(--timeVal);
+								window.setTimeout(function(){
+									changeTimeVal();
+								},1000);
+							}
+							changeTimeVal();
+						}
+                    })
+                </script>
 				#end
 			#end
 		#else
-			产品
+			#if(CmsUtils.getProductLineList()?.size()>0)
+            <script type="text/javascript">
+                $(function(){
+                    $.cookie('cookieProductLineId',"${CmsUtils.getProductLineList()?.get(0)?.productLineId}");
+                    window.location.reload();
+                })
+            </script>
+			#else
+##            <script type="text/javascript">
+##                $(function(){
+##                    layer.msg('目前没有产品线，现在将前往添加。<div style="text-align:center"><a href="${TINY_CONTEXT_PATH+adminPath}/productLine/content/add"><span id="showTime">5</span>秒后前往</a></div>',5,-1,function(){
+##                        window.location.href = "${TINY_CONTEXT_PATH+adminPath}/productLine/content/add";
+##                    });
+##                    var timeVal=5;
+##                    function changeTime(){
+##                        $("#showTime").html(--timeVal);
+##                        window.setTimeout(function(){
+##                            changeTime();
+##                        },1000);
+##                    }
+##                    changeTime();
+##                })
+##            </script>
+			#end
 		#end
-	
+
 	<span class="caret"></span>#end
 	#@navSelect2Body()
 		  #@navSelect2Data()
 		  <option value=""></option>
 		  <optgroup label="产品">
-			  #for(product : productList)
+			  #if(cookieProductLineId)
+			  #for(product : CmsUtils.getProductListByLine(cookieProductLineId))
 			  	<option value="${product?.productId}">${product?.productName}</option>
 			  #end
+		  #end
 		  </optgroup>
 
 		#end
@@ -28,32 +84,20 @@
         <a href="${TINY_CONTEXT_PATH +adminPath}/product/allproduct/addition" class="r">所有产品</a>&nbsp;
 			<!--新增产品-->
         <a href="${TINY_CONTEXT_PATH +adminPath}/product/addproduct/addition">添加产品</a>&nbsp;
-			
-		
+
+
 		#end
 	#end
 
 #hiddenInput("productIdHidden","productId","","")
 
 	<script type="text/javascript">
-		
+
 		$(function(){
 			$("#product-select").on("change",function(){
-				var dateValue = $("#product-select").val();
-                $.post("${TINY_CONTEXT_PATH +adminPath}/product/sessionset", {productId: dateValue}, function (result) {
-					if(true==result){
-						 window.location.reload();
-					}else{
-						alert("产品ID值为空");
-					}
-				
-				});
-	##				$("#productIdHidden").val($(this).val());
-	##				$(".switchClass").each(function(){
-	##					var hrefnew = this.href + "&productId=" + $("#productIdHidden").val();
-	##					this.href = hrefnew;
-	##				});
-			##				window.location.href='${TINY_CONTEXT_PATH +adminPath}/product/story?currentPageId=3&productId='+$(this).find("option:selected").val();
+                var dataValue = $(this).val();
+                $.cookie('cookieProductId',dataValue);
+                window.location.reload();
 			});
 		});
 	

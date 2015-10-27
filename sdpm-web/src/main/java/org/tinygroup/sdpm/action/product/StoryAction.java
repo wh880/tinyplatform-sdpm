@@ -19,7 +19,9 @@ import org.tinygroup.sdpm.product.dao.pojo.*;
 import org.tinygroup.sdpm.product.service.*;
 import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
+import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
+import org.tinygroup.sdpm.project.dao.pojo.ProjectTeam;
 import org.tinygroup.sdpm.project.service.inter.BuildService;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.sdpm.project.service.inter.TaskService;
@@ -93,19 +95,8 @@ public class StoryAction extends BaseController {
             return "redirect:" + adminPath + "/product/story?choose=1&"
                     + queryString;
         }
-        OrgUser user = new OrgUser();
-        ProductPlan plan = new ProductPlan();
-        if (request.getSession().getAttribute("sessionProductId") != null) {
-            plan.setProductId((Integer) request.getSession().getAttribute(
-                    "sessionProductId"));
-        }
 
-        List<OrgUser> userList = userService.findUserList(new OrgUser());
-        List<ProductPlan> planList = planService
-                .findPlanList(new ProductPlan());
 
-        model.addAttribute("userList", userList);
-        model.addAttribute("planList", planList);
         return "/product/page/project/togglebox.page";
     }
 
@@ -117,13 +108,8 @@ public class StoryAction extends BaseController {
      * @return
      */
     @RequestMapping("/addstory")
-    public String addstory(HttpServletRequest request, Model model) {
-        int productId = -1;
-        if (request.getSession().getAttribute("sessionProductId") != null) {
-            productId = (Integer) request.getSession().getAttribute(
-                    "sessionProductId");
-        }
-        Product product = productService.findProduct(productId);
+    public String addstory(@CookieValue(value = "cookieProductId") String cookieProductId,HttpServletRequest request, Model model) {
+        Product product = productService.findProduct(Integer.parseInt(cookieProductId));
         model.addAttribute("product", product);
         return "/product/page/tabledemo/product-demand-add.page";
     }
@@ -142,16 +128,14 @@ public class StoryAction extends BaseController {
      */
     @RequestMapping("/save")
     public String save(
+            @CookieValue(value = "cookieProductId") String cookieProductId,
             SystemAction systemAction, String type,
             ProductStory productStory,
             ProductStorySpec storySpec,
             @RequestParam(value = "file", required = false) MultipartFile[] file,
             String[] title, HttpServletRequest request) throws IOException {
 
-        if (request.getSession().getAttribute("sessionProductId") != null) {
-            productStory.setProductId((Integer) (request.getSession()
-                    .getAttribute("sessionProductId")));
-        }
+        productStory.setProductId(Integer.parseInt(cookieProductId));
         productStory.setStoryStatus("0");
         productStory.setStoryVersion(0);
         productStory.setStoryOpenedBy(UserUtils.getUserId());
@@ -181,6 +165,20 @@ public class StoryAction extends BaseController {
         }
     }
 
+    @ResponseBody
+    @RequestMapping("/ajax/user")
+    public List<OrgUser> getUser(OrgUser orgUser) {
+        List<OrgUser> orgUsers = userService.findUserList(orgUser);
+        return orgUsers;
+    }
+
+    @ResponseBody
+    @RequestMapping("/ajax/plan")
+    public List<ProductPlan> getPlan(ProductPlan productPlan) {
+        if(productPlan.getProductId()==null||productPlan.getProductId()<1)return new ArrayList<ProductPlan>();
+        List<ProductPlan> productPlans = planService.findPlanList(productPlan);
+        return productPlans;
+    }
 
     /**
      * 实现编辑的保存同时记录编辑历史
@@ -202,8 +200,6 @@ public class StoryAction extends BaseController {
         productStory.setStoryLastEditedBy(UserUtils.getUser().getOrgUserId());
         productStory.setStoryLastEditedDate(new Date());
         storyService.updateStory(productStory);
-        OrgUser user = (OrgUser) LogPrepareUtil.getSession().getAttribute(
-                "user");
 
         uploads(file, story.getStoryId(), ProfileType.STORY, title);
 
@@ -416,9 +412,6 @@ public class StoryAction extends BaseController {
                 .getStoryId());
         storySpec.setStoryVersion(version + 1);
         storySpecService.add(storySpec);
-        OrgUser user = (OrgUser) LogPrepareUtil.getSession().getAttribute(
-                "user");
-
         uploads(file, story.getStoryId(), ProfileType.STORY, title);
 
         LogUtil.logWithComment(LogUtil.LogOperateObject.STORY,
@@ -443,9 +436,6 @@ public class StoryAction extends BaseController {
             throws IOException {
         ProductStory story = storyService.findStory(productStory.getStoryId());
         storyService.updateStory(productStory);
-        OrgUser user = (OrgUser) LogPrepareUtil.getSession().getAttribute(
-                "user");
-
         LogUtil.logWithComment(LogUtil.LogOperateObject.STORY,
                 LogUtil.LogAction.REVIEWED,
                 String.valueOf(productStory.getStoryId()),
@@ -491,15 +481,13 @@ public class StoryAction extends BaseController {
      * @return
      */
     @RequestMapping("/search")
-    public String storySearchAction(int page, int pagesize, ProductStory story,
+    public String storySearchAction(@CookieValue String cookieProductId, int page, int pagesize, ProductStory story,
                                     String type, String choose, String groupOperate,
                                     SearchInfos searchInfos, String order, String ordertype,
                                     Model model, HttpServletRequest request) {
 
-        if (request.getSession().getAttribute("sessionProductId") != null) {
-            story.setProductId((Integer) (request.getSession()
-                    .getAttribute("sessionProductId")));
-        }
+        story.setProductId(Integer.parseInt(cookieProductId));
+
         /*
          * if (story.getModuleId()==-1) { story.setModuleId(null); }
 		 */
@@ -556,7 +544,7 @@ public class StoryAction extends BaseController {
      * @return
      */
     @RequestMapping("/search/{relate}")
-    public String storyListAction(
+    public String storyListAction(@CookieValue String cookieProductId,
             @PathVariable(value = "relate") String relate,
             int page,
             int pagesize,
@@ -570,10 +558,9 @@ public class StoryAction extends BaseController {
             @RequestParam(required = false, defaultValue = "asc") String ordertype,
             Model model, HttpServletRequest request) {
 
-        if (request.getSession().getAttribute("sessionProductId") != null) {
-            story.setProductId((Integer) (request.getSession()
-                    .getAttribute("sessionProductId")));
-        }
+
+        story.setProductId(Integer.parseInt(cookieProductId));
+
 
         // String condition = StoryUtil.getStatusCondition(choose, request);
 
@@ -648,7 +635,7 @@ public class StoryAction extends BaseController {
      * @return 返回数据集合
      */
     @RequestMapping("/bugSearch/{relate}")
-    public String bugListAction(@PathVariable(value = "relate") String relate,
+    public String bugListAction(@CookieValue("cookieProductId") String cookieProductId,@PathVariable(value = "relate") String relate,
                                 int page,
                                 int pagesize,
                                 Integer releaseId,
@@ -659,12 +646,8 @@ public class StoryAction extends BaseController {
                                 String type,
                                 @RequestParam(required = false, defaultValue = "asc") String ordertype,
                                 Model model, HttpServletRequest request) {
-        // bug.setProductId((Integer)(request.getSession().getAttribute("sessionProductId")));
 
-        if (request.getSession().getAttribute("sessionProductId") != null) {
-            bug.setProductId((Integer) (request.getSession()
-                    .getAttribute("sessionProductId")));
-        }
+        bug.setProductId(Integer.parseInt(cookieProductId));
 
         // String condition = StoryUtil.getStatusCondition(choose, request);
 
@@ -785,7 +768,9 @@ public class StoryAction extends BaseController {
      * @return
      */
     @RequestMapping("/report")
-    public String report(ProductStory story, String chexkitem, Model model,HttpServletRequest request) {
+    public String report(
+            @CookieValue("cookieProductId") String cookieProductId,
+            ProductStory story, String chexkitem, Model model,HttpServletRequest request) {
 
 		/*
 		 * List<StoryCount> productStoryCount =
@@ -797,11 +782,8 @@ public class StoryAction extends BaseController {
 		 * model.addAttribute("modelStoryCount", modelStoryCount);
 		 * model.addAttribute("planStoryCount", planStoryCount);
 		 */
-    	Integer productId=0;
-    	if(request.getSession().getAttribute("sessionProductId")!=null){
-    		productId = (Integer) request.getSession().getAttribute("sessionProductId");
-    	}
-    	story.setProductId(productId);
+
+    	story.setProductId(Integer.parseInt(cookieProductId));
         Map<String, List<StoryCount>> map = storyService.report(chexkitem,story);
         model.addAttribute("map", map);
         model.addAttribute("fields", chexkitem);

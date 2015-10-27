@@ -7,30 +7,30 @@
 <li>"+"需求"+"</li>")
 
 <script>
-	
+
 	$(document).ready(function(){
-	
+
 		$(".batchCloseFormsSubmit").on("click",function(){
 			$("form[name='batchCloseForm']").trigger("submit");
-		
+
 		});
-	
-		
+
+
 		$("#betchClose").on("mousedown",function(){
-			
-			
+
+
 			var href = $(this).attr("href");
 			if(href.indexOf('?')>0){
 				href = href.substring(0,href.indexOf('?'));
 			}
-			
+
 			var checklist=[];
 			$("input:checked").each(function(){
 				if("checkboxall"!=$(this).attr("id")){
 					checklist.push($(this).val());
 				}
-				
-			});	
+
+			});
 			if(checklist.length==0){
 				layer.msg("请选择数据")
 			}
@@ -44,12 +44,33 @@
 			}
 			$(this).attr("href",href+data);
 		});
-		
-		
-	});
-	
-</script>
 
+
+	});
+
+</script>
+<script type="text/javascript">
+    function ajaxUl(id,opKey,opvalue,url){
+        var $ul = $("#"+id) ;
+        $ul.each(function(){
+            $.ajax({
+                type: "POST",
+                url: "${TINY_CONTEXT_PATH+adminPath}"+url,
+                data: $(this).attr('data'),
+                dataType:"json",
+                success: function(data){
+                    for(var i=0,l=data.length;i<l;i++){
+                    var em = "<li><a class='secondMenu'' href='javascript:void(0);'' field='"+opKey+"' value='"+data[i][opKey]+"'>"+data[i][opvalue]+"</a></li>";
+                        $ul.append(em);
+                    }
+                },
+                error: function(res){
+                    alert("失败");
+                }
+            });
+        });
+    }
+</script>
 
 
 #macro liDropdownMenu(rName)
@@ -96,14 +117,14 @@
 
 
     <span class="r">
-        #foreach(m:menuManager.getScopeMenus("product-io"))
-            #if(m.id=="product-demand-input")
+        #foreach(m:menuManager?.getScopeMenus("product-io"))
+            #if(m?.id=="product-demand-input")
                 #@aModal("#myModal" "导入" "600" "65" "btn-class"
                     "/product/page/tabledemo/product-import.pagelet")#buttonIcon(iconClass="icon-download-alt")导入#end
 
             #else
 
-                #if(m.id=="product-demand-output")
+                #if(m?.id=="product-demand-output")
                     #@buttonGroup()
                         #@buttonDropdown("Dropdown") #buttonIcon(iconClass="icon-upload-alt")导出  #@spanCaret()#end#end
                         #@ulDropdownMenu("downMenuSty")
@@ -120,8 +141,8 @@
                         #end
                     #end
                 #else
-                    <a class="ml-5" href="${TINY_CONTEXT_PATH +adminPath}${m.href}"><i
-                            class="${m.icon}">&nbsp;${m.name}</i></a>
+                    <a class="ml-5" href="${TINY_CONTEXT_PATH +adminPath}${m?.href}"><i
+                            class="${m?.icon}">&nbsp;${m?.name}</i></a>
                 #end
             #end
         #end
@@ -160,8 +181,8 @@
                        onclick="selectAllNullorReserve('storyId','反选');"/>
 
 
-                    #foreach(m:menuManager.getScopeMenus("product-oper"))
-                        #if(m.id=="product-demand-operation")
+                    #foreach(m:menuManager?.getScopeMenus("product-oper"))
+                        #if(m?.id=="product-demand-operation")
                             #@buttonGroup()
 
                                 #@dropdownItempatent("dropdownSm" "btn-primary" "操作" "#")
@@ -169,43 +190,31 @@
                                     #@ulDropdownMenu(dropdownMenuClass="multi-level")
                                         #@dropdownsLi("dropdown-submenu")
                                             #@dropdownA("firstMenu"　"javascript:void(0);")指派给#end
-                                            #@dropdownsUl("dropdown-menu")
-                                            	#for(user:userList)
-                                            		#@dropdownItem("javascript:void(0);" "" "secondMenu" {"field":"storyAssignedTo","value":user?.orgUserId}) ${user?.orgUserRealName} #end
-                                            	#end
-                                            	
+                                            #@dropdownsUl("dropdown-menu" "assignUl")
+
                                             #end
+                                            <script>
+                                                ajaxUl("assignUl","orgUserId","orgUserRealName","/product/story/ajax/user");
+                                            </script>
                                         #end
 
                                         #@dropdownsLi("dropdown-submenu")
                                             #@dropdownA("firstMenu"　"javascript:void(0);")阶段#end
-                                            #@dropdownsUl("dropdown-menu")
+                                            #@dropdownsUl("dropdown-menu" )
                                             	#for(stage:getDict("storyStage"))
                                             		#@dropdownItem("javascript:void(0);" "" "secondMenu" {"field":"storyStage","value":stage?.value}) ${stage?.text}#end
                                             	#end
-                                            	
-#*                                            	
-                                                #@dropdownItem("javascript:void(0);" "storyStage" "secondMenu")未开始#end
-                                                #@dropdownItem("javascript:void(0);" "storyStage" "secondMenu")已计划#end
-                                                #@dropdownItem("javascript:void(0);" "storyStage" "secondMenu")已立项#end
-                                                #@dropdownItem("javascript:void(0);" "storyStage" "secondMenu")研发中#end
-                                                #@dropdownItem("javascript:void(0);" "storyStage" "secondMenu")完毕#end
-                                                #@dropdownItem("javascript:void(0);" "storyStage" "secondMenu")测试中#end
-                                                #@dropdownItem("javascript:void(0);" "storyStage" "secondMenu")测试完毕#end
-                                                #@dropdownItem("javascript:void(0);" "storyStage" "secondMenu")已验收#end
-                                                #@dropdownItem("javascript:void(0);" "storyStage" "secondMenu")已发布#end*#
                                             #end
                                         #end
 
                                         #@dropdownsLi("dropdown-submenu")
                                             #@dropdownA("firstMenu"　"javascript:void(0);")计划#end
-                                            #@dropdownsUl("dropdown-menu")
-                                            	#@dropdownItem("javascript:void(0);" "" "secondMenu" {"field":"planId","value":""})空#end
-                                            	#for(plan:planList)
-                                            		#@dropdownItem("javascript:void(0);" "" "secondMenu" {"field":"planId","value":plan?.planId}) ${plan?.planName} #end
-                                            	#end
-                                               
+                                            #@dropdownsUl("dropdown-menu" "planUl")
+
                                             #end
+                                        <script>
+                                            ajaxUl("planUl","planId","planName","/product/story/ajax/plan?productId=${cookieProductId}");
+                                        </script>
                                         #end
 
                                         #@dropdownsLi("dropdown-submenu")
@@ -213,20 +222,20 @@
                                             #@dropdownsUl("dropdown-menu dropdown-show")
                                             	#@dropdownItem("javascript:void(0);" "" "secondMenu" {"field":"storyStatus","value":getDict("storyStatus","")}) 确认通过 #end
                                             	#@dropdownItem("javascript:void(0);" "" "secondMenu" {"field":"storyStatus","value":"no"}) 有待明确 #end
-                                               
+
                                             #*		                		#@liDivider()<hr/>#end*#
                                                 #@dropdownsLi("dropdown-submenu")
                                                     #@dropdownA("secondMenu"　"javascript:void(0);")拒绝#end
                                                     #@dropdownsUl("dropdown-menu")
                                                     #for(refese:getDict("storyRefese"))
-                                                    	#@dropdownItem("javascript:void(0);" "" "secondMenu" {"field":"storyStatus","value":refese?.value}) ${refese.text} #end
+                                                    	#@dropdownItem("javascript:void(0);" "" "secondMenu" {"field":"storyStatus","value":refese?.value}) ${refese?.text} #end
                                                     #end
                                                     	#@dropdownItem("javascript:void(0);" "" "secondMenu" {"field":"storyStatus","value":"no-1"}) 已完成 #end
                                                     	#@dropdownItem("javascript:void(0);" "" "secondMenu" {"field":"storyStatus","value":"no-2"}) 延期 #end
                                                     	#@dropdownItem("javascript:void(0);" "" "secondMenu" {"field":"storyStatus","value":"no-3"}) 不做 #end
                                                     	#@dropdownItem("javascript:void(0);" "" "secondMenu" {"field":"storyStatus","value":"no-4"}) 已取消 #end
                                                     	#@dropdownItem("javascript:void(0);" "" "secondMenu" {"field":"storyStatus","value":"no-5"}) 计划如此 #end
-                                                        
+
                                                     #end
                                                 #end
                                             #end
@@ -286,6 +295,7 @@
     #end
 
 #end
+
 
 
 

@@ -68,8 +68,6 @@
         background: #369;
         border: #369 1px solid !important
     }
-	.tinytableNav .pagination>li>a:focus, .tinytableNav .pagination>li>a:hover, .tinytableNav .pagination>li>span:focus, .tinytableNav .pagination>li>span:hover
-	{border:none}
     #bodyrap.theme-clean.menu-on-top .btn-primary, #bodyrap.theme-clean.menu-on-top .btn-primary:focus,.theme-clean.menu-on-top .btn-primary, .theme-clean.menu-on-top .btn-primary:focus {
         border: 1px solid #369 !important;
     }
@@ -453,6 +451,6 @@ a.btn.btn-sm.backBtn, .backBtn {
     font-size: 24px;
 }
 /*搜索select*/
-#task-search .active-disabled .form-control{padding:2px 0px;margin-bottom:3px}
+#task-search .active-disabled .form-control{padding:4px 0px;margin-bottom:3px}
 /*表格边框*/
 table.table.filelist-table{border:#ddd 1px solid;}
