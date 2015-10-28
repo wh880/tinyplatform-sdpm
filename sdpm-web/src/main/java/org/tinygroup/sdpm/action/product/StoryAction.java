@@ -114,7 +114,7 @@ public class StoryAction extends BaseController {
      * @return
      */
     @RequestMapping("/addstory")
-    public String addstory(@CookieValue(value = "cookieProductId") String cookieProductId,HttpServletRequest request, Model model) {
+    public String addStory(@CookieValue(value = "cookieProductId") String cookieProductId, HttpServletRequest request, Model model) {
         Product product = productService.findProduct(Integer.parseInt(cookieProductId));
         List<ServiceRequest> requests = requestService.getRequestList(null);
         model.addAttribute("product", product);
