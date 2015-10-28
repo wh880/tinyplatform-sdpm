@@ -11,8 +11,8 @@
     });
 </script>
 
-#@tinyForm(
-    "thisform" TINY_CONTEXT_PATH +adminPath+"/product/release/save" "post" {"class":"","enctype":"multipart/form-data"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/product/release/save" "post" {"class":"","enctype":"multipart/form-data"})
+##    #hiddenInput("productId","productId","",cookieProductId)
     <div class="infoContent">
         <p class="titleName">创建新发布</p>
  
@@ -21,7 +21,7 @@
     </div>*#
 
      #@elementItem()
-        #@colLabel()发布名称:#end
+        #@colLabel()<span class="c-red">*</span>发布名称:#end
         #@formControlDiv("col-4")
             #tinyInput(
                 "text" "releaseName" ""{"datatype":"*","nullmsg":"用户名不能为空！","id":"username","class":"input-text"})
@@ -48,7 +48,7 @@
     #end
 
     #@elementItem()
-        #@colLabel()发布日期:#end
+        #@colLabel()<span class="c-red">*</span>发布日期:#end
         #@formControlDiv("col-4")
            #@tinyDateInput("releaseDate" "" "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空"})#end
         #end

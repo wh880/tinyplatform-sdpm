@@ -13,6 +13,7 @@
                         $("#${sid}").on("change", function () {
                             var pId = $("#${sid}  option:selected").val();
                             ajaxRead("${sid}", "moduleId", "moduleId", "moduleName", "/quality/bug/ajax/module?moduleRoot=" + pId,"${story?.moduleId?:0}");
+                            ajaxRead("${sid}", "planId", "planId", "planName", "/product/plan/planList?productId=" + pId);
                         })
                     </script>
                     #@Tselect2Body("productId" story?.productId  {"class":"input-text select2"})
@@ -44,7 +45,22 @@
             #@validateDiv("col-2")#end
         #end
     </li>
+    <li>
+        #@elementItem()
+            #@colLabel()所属计划：#end
+            #@formControlDiv("col-8")
+                #@Tselect2F()
+                    #@Tselect2Body("planId" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 
+                    #end
+
+                    #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH +adminPath}/product/plan/addplan"
+                                      class="r ">增加</a>#end
+                #end
+            #end
+            #@validateDiv("col-2")#end
+        #end
+    </li>
     <li>
         #@elementItem()
             #@colLabel()来源：#end
