@@ -37,7 +37,7 @@ public class DocLibAction extends BaseController {
      *
      * @return
      */
-    @RequiresPermissions(value = {"doclib-add"})
+    @RequiresPermissions("doclib-add")
     @RequestMapping(value = "/toAdd")
     public String addDocLib() {
         return "/document/add-doclib.pagelet";

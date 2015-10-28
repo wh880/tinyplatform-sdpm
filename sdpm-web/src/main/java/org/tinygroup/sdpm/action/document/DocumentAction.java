@@ -139,13 +139,14 @@ public class DocumentAction extends BaseController {
         if (projectId == 0) {
             return projectProductService.findLinkProduct();
         }
-        List<ProjectProduct> list = projectProductService.findProducts(projectId);
+        List<ProjectProduct> projectProductList = projectProductService.findProducts(projectId);
+
         List<Product> list2 = productService.findProductList(product);
-        Integer[] i = new Integer[list.size()];
+        Integer[] i = new Integer[projectProductList.size()];
         List<Integer> list1 = new ArrayList<Integer>();
-        for (int j = 0; j < list.size(); j++) {
+        for (int j = 0; j < projectProductList.size(); j++) {
             if (list2.get(j).getDeleted() == 0) {
-                list1.add(list.get(j).getProductId());
+                list1.add(projectProductList.get(j).getProductId());
             }
         }
         List<Product> productList = productService.findProductListByIds(list1.toArray(i));

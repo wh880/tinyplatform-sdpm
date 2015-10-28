@@ -259,7 +259,7 @@ public class TaskAction extends BaseController {
         }
 
         String condition = TaskStatusUtil.getCondition(statu, choose, UserUtils.getUserId(), moduleIds);
-        Pager<ProjectTask> taskPager = taskService.findPagerTask(start, limit, task, order, asc, condition);
+        Pager<ProjectTask> taskPager = taskService.findTaskPager(start, limit, task, order, asc, condition);
         model.addAttribute("taskPager", taskPager);
         model.addAttribute("statu", statu);
         model.addAttribute("choose", choose);

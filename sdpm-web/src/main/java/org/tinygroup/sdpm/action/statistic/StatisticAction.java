@@ -40,10 +40,11 @@ public class StatisticAction extends BaseController {
     private StatisticService statisticService;
     @Autowired
     private UserService userService;
+
     @RequestMapping("{type}/all")
-    public String productAll(Model model, @PathVariable(value="type")String type){
+    public String productAll(Model model, @PathVariable(value = "type") String type) {
         model.addAttribute("order", "1");
-        if("product".equals(type)) {
+        if ("product".equals(type)) {
             List<Product> products = productService.findProductList(new Product());
             Map<Product, List<ProductPlan>> map = new HashMap<Product, List<ProductPlan>>();
             for (int i = 0, n = products.size(); i < n; i++) {
@@ -56,29 +57,28 @@ public class StatisticAction extends BaseController {
             model.addAttribute("product", map);
             return "/statistic/page/product.page";
         }
-        if ("project".equals(type)){
-            List<Project> projects= projectService.findProjects(new Project());
-
-            model.addAttribute("projects",projects);
+        if ("project".equals(type)) {
+            List<Project> projects = projectService.findProjects(new Project());
+            model.addAttribute("projects", projects);
             return "/statistic/page/project.page";
         }
-        if("org".equals(type)){
+        if ("org".equals(type)) {
             List<OrgUser> orgUsers = userService.findUserList(new OrgUser());
-            Map<OrgUser,List<ProjectTaskSta>> map = new HashMap<OrgUser, List<ProjectTaskSta>>();
-            for(int i=0,n=orgUsers.size();i<n;i++){
-               ProjectTaskSta projectTaskSta = new ProjectTaskSta();
+            Map<OrgUser, List<ProjectTaskSta>> map = new HashMap<OrgUser, List<ProjectTaskSta>>();
+            for (int i = 0, n = orgUsers.size(); i < n; i++) {
+                ProjectTaskSta projectTaskSta = new ProjectTaskSta();
                 projectTaskSta.setAssignedTo(orgUsers.get(i).getOrgUserId());
-                List<ProjectTaskSta> projectTaskStas=statisticService.findProTasks(projectTaskSta);
-                map.put(orgUsers.get(i),projectTaskStas);
+                List<ProjectTaskSta> projectTaskStas = statisticService.findProTasks(projectTaskSta);
+                map.put(orgUsers.get(i), projectTaskStas);
             }
-
-        	model.addAttribute("orgsmap", map);
-        	return  "/statistic/page/org.page";
+            model.addAttribute("orgsmap", map);
+            return "/statistic/page/org.page";
         }
         return null;
     }
+
     @RequestMapping("product/invest")
-    public String productInvest(Model model){
+    public String productInvest(Model model) {
 //        List<Product> products = productService.findProductList(new Product());
 //        Map<Product,List<ProjectProduct>> map = new HashMap<Product, List<ProjectProduct>>();
 //
@@ -88,30 +88,32 @@ public class StatisticAction extends BaseController {
 //        }
 //        model.addAttribute("productmap",map);
         List<ProductProject> productProjects = statisticService.productProjects(new ProductProject());
-        model.addAttribute("proPros",productProjects);
-        model.addAttribute("order","2");
-        return  "/statistic/page/product.page";
+        model.addAttribute("proPros", productProjects);
+        model.addAttribute("order", "2");
+        return "/statistic/page/product.page";
     }
+
     @RequestMapping("quality/bugCreate")
-    public String qualityBugCreate(Model model){
-        model.addAttribute("order","1");
+    public String qualityBugCreate(Model model) {
+        model.addAttribute("order", "1");
         List<QualityBugSta> bugStas = statisticService.findBugCreate(new QualityBugSta());
-        model.addAttribute("bugStas",bugStas);
+        model.addAttribute("bugStas", bugStas);
         return "/statistic/page/test.page";
     }
+
     @RequestMapping("quality/bugAssigned")
-    public String qualityBugAssigned(Model model){
-        model.addAttribute("order","2");
+    public String qualityBugAssigned(Model model) {
+        model.addAttribute("order", "2");
         List<Assigned> assigneds = statisticService.findAssigned(new Assigned());
-        Map<Assigned,List<QualityBugCall>> map = new HashMap<Assigned, List<QualityBugCall>>();
-        for (int i=0,n=assigneds.size();i<n;i++){
+        Map<Assigned, List<QualityBugCall>> map = new HashMap<Assigned, List<QualityBugCall>>();
+        for (int i = 0, n = assigneds.size(); i < n; i++) {
             QualityBugCall qualityBugCall = new QualityBugCall();
-            String a= assigneds.get(i).getUserId();
+            String a = assigneds.get(i).getUserId();
             qualityBugCall.setUserId(a);
             List<QualityBugCall> qualityBugCalls = statisticService.findBugCall(qualityBugCall);
-            map.put(assigneds.get(i),qualityBugCalls);
+            map.put(assigneds.get(i), qualityBugCalls);
         }
-        model.addAttribute("bugAss",map);
+        model.addAttribute("bugAss", map);
         return "/statistic/page/test.page";
     }
 }

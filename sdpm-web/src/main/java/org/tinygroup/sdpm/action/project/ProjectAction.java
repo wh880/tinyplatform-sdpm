@@ -54,7 +54,7 @@ public class ProjectAction extends BaseController {
     private UserService userService;
 
     @RequestMapping("/find")
-    public String find(Integer projectId, Model model) {
+    public String find(Integer projectId) {
         if (projectId == null) {
             projectService.findById(projectId);
         }

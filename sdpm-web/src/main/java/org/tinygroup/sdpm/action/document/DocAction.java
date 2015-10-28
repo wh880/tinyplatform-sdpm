@@ -136,13 +136,13 @@ public class DocAction extends BaseController {
     @RequiresPermissions(value = {"add-doc"})
     @RequestMapping(value = "/add")
     public String createDoc(HttpServletRequest request, Model model) {
-        Integer libid = Integer.parseInt(CookieUtils.getCookie(request, DocAction.COOKIE_DOCLIB_ID));
-        if (libid == 1) {
+        Integer libId = Integer.parseInt(CookieUtils.getCookie(request, DocAction.COOKIE_DOCLIB_ID));
+        if (libId == 1) {
             Product product = new Product();
             List<Product> list = productService.findProductList(product);
             model.addAttribute("productList", list);
             return "/document/add-doc-product.page";
-        } else if (libid == 2) {
+        } else if (libId == 2) {
             List<Project> list = projectService.findList();
             Product product = new Product();
             List<Product> list1 = productService.findProductList(product);
@@ -152,7 +152,7 @@ public class DocAction extends BaseController {
         } else {
             SystemModule module = new SystemModule();
             module.setModuleType("doc");
-            module.setModuleRoot(libid);
+            module.setModuleRoot(libId);
             List<SystemModule> moduleList = moduleService.findModules(module);
             model.addAttribute("moduleList", moduleList);
             return "/document/add-doc.page";
