@@ -27,14 +27,20 @@ public class RoleUserManagerImpl implements RoleUserManager {
         return orgRoleUserDao.getByRoleId(id);
     }
 
+    public List<OrgRoleUser> findListByUserIds(String userId) {
+        OrgRoleUser orgRoleUser = new OrgRoleUser();
+        orgRoleUser.setOrgUserId(userId);
+        return orgRoleUserDao.query(orgRoleUser);
+    }
+
     public OrgRoleUser add(OrgRoleUser orgRoleUser) {
         return orgRoleUserDao.add(orgRoleUser);
     }
 
-    public void addRoleUser(String[] array, Integer roleId) {
+    public void addRoleUser(String[] userIds, Integer roleId) {
         orgRoleUserDao.deleteByRoleId(roleId);
         List<OrgRoleUser> list = new ArrayList<OrgRoleUser>();
-        for (String userId : array) {
+        for (String userId : userIds) {
             OrgRoleUser t = new OrgRoleUser();
             t.setOrgUserId(userId);
             t.setOrgRoleId(roleId);
