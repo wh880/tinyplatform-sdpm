@@ -73,6 +73,9 @@ public class ProjectStoryServiceImpl implements ProjectStoryService {
 
     public List<ProductStory> findStoryByProject(Integer projectId) {
         List<ProjectStory> projectStoryList = projectStoryManager.findSrotys(projectId);
+        if (projectStoryList == null || projectStoryList.isEmpty()) {
+            return new ArrayList<ProductStory>();
+        }
         List<Integer> storyList = new ArrayList<Integer>();
         for (ProjectStory projectStory : projectStoryList) {
             storyList.add(projectStory.getStoryId());
@@ -91,10 +94,11 @@ public class ProjectStoryServiceImpl implements ProjectStoryService {
     }
 
     public Pager<ProductStory> findStoryPager(int start, int limit, int id, SearchInfos conditions, String groupOperate) {
-        return buildManager.findBuildStory(start,limit,id);
+        return buildManager.findBuildStory(start, limit, id);
     }
-    public Pager<ProductStory> findnoStoryPager(int start, int limit, int id,String condition, SearchInfos conditions, String groupOperate) {
-        return buildManager.findnoBuildStory(start,limit,condition,id);
+
+    public Pager<ProductStory> findNoStoryPager(int start, int limit, int id, String condition, SearchInfos conditions, String groupOperate) {
+        return buildManager.findnoBuildStory(start, limit, condition, id);
     }
 
     public Pager<ProductStory> findStoryByProject(Integer projectId, Integer start, Integer limit, String order, String ordertype, String moduleId) {

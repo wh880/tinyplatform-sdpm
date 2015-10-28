@@ -95,7 +95,6 @@ public class StoryManagerImpl implements StoryManager {
     }
 
     public List<ProductStory> findList(Integer... storyId) {
-
         return productStoryDao.getByKeys(storyId);
     }
 

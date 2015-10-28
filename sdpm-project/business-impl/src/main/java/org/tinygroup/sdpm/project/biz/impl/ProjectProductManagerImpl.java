@@ -20,7 +20,9 @@ public class ProjectProductManagerImpl implements ProjectProductManager {
     private ProjectProductDao projectProductDao;
 
     public void addLink(Integer[] productArray, Integer projectId) {
-        projectProductDao.deleteByProjectId(projectId);
+        if (productArray.length < 1) {
+            return;
+        }
         List<ProjectProduct> list = new ArrayList<ProjectProduct>();
         for (Integer productId : productArray) {
             ProjectProduct t = new ProjectProduct();
@@ -28,9 +30,8 @@ public class ProjectProductManagerImpl implements ProjectProductManager {
             t.setProductId(productId);
             list.add(t);
         }
-        if (list != null || !list.isEmpty()) {
-            projectProductDao.batchInsert(list);
-        }
+        projectProductDao.deleteByProjectId(projectId);
+        projectProductDao.batchInsert(list);
     }
 
     public List<ProjectProduct> findList(ProjectProduct projectProduct) {

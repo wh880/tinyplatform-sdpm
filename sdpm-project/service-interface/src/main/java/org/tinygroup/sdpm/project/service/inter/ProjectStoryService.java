@@ -98,5 +98,5 @@ public interface ProjectStoryService {
     public Pager<ProductStory> findStoryPager(int start, int limit, int id, SearchInfos conditions, String groupOperate);
 
 
-    public Pager<ProductStory> findnoStoryPager(int start, int limit, int id,String condition, SearchInfos conditions, String groupOperate) ;
+    public Pager<ProductStory> findNoStoryPager(int start, int limit, int id, String condition, SearchInfos conditions, String groupOperate);
 }

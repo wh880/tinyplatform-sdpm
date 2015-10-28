@@ -163,7 +163,7 @@ public class DocumentAction extends BaseController {
      */
     @ResponseBody
     @RequestMapping("/ajax/moduleByDoclib")
-    public List<SystemModule> getModuleByDoclib(Integer libId) {
+    public List<SystemModule> getModuleByDocLib(Integer libId) {
         SystemModule module = new SystemModule();
         module.setModuleRoot(libId);
         module.setModuleType("doc");
