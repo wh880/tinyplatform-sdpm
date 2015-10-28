@@ -122,7 +122,7 @@
 
 
         #@elementItem()
-            #@colLabel()<span class="c-red">*</span>测试负责人：#end
+            #@colLabel()测试负责人：#end
             #@formControlDiv("col-3")
                 #@Tselect2F()
                     #@Tselect2Body(
@@ -149,7 +149,7 @@
             #@validateDiv("col-2")#end
         #end
         #@elementItem()
-            #@colLabel()<span class="c-red">*</span>发布负责人：#end
+            #@colLabel()发布负责人：#end
             #@formControlDiv("col-3")
                 #@Tselect2F()
                     #@Tselect2Body(
@@ -189,9 +189,9 @@
             #@skinMinimal("col-8")
 
                 #@Tradioes("acl" "0" {"onclick":"setWhite(this.value)"})
-                    <div>#@Tradio("0") 默认设置(有项目视图权限，即可访问)#end</div>
-                    <div>#@Tradio("2") 私有项目(只有项目团队成员才能访问)#end</div>
-                    <div>#@Tradio("1") 自定义白名单(团队成员和白名单的成员可以访问)#end</div>
+                    #foreach(source:getDict("accessControl"))
+                        <div>#@Tradio(source?.value)${source?.text}#end</div>
+                    #end
                 #end
             #end
             #@validateDiv("col-2")#end
@@ -200,8 +200,8 @@
             #@colLabel()<span class="c-red">*</span>分组白名单：#end
             #@skinMinimal("col-8")
                 #@Tcheckboxes("productWhiteList" "")
-                    #foreach(source:getDict("productWhiteList"))
-                        #@Tcheckbox(source?.value)${source?.text}#end
+                    #foreach(role : UserUtils.getAllRoleList())
+                        #@Tcheckbox(role?.orgRoleId)${role?.orgRoleName}#end
                     #end
                 #end
 
@@ -229,7 +229,7 @@
 
     <script type="text/javascript">
         function setWhite(acl) {
-            acl == '1' ? $('#whitelistBox').removeClass('hidden') : $('#whitelistBox').addClass('hidden');
+            acl == '2' ? $('#whitelistBox').removeClass('hidden') : $('#whitelistBox').addClass('hidden');
         }
     </script>
 

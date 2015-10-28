@@ -61,6 +61,7 @@
             <class-path path="D:\java\eclipseworkspace\sdpm\sdpm-project\view\src\main\resources"/>
             <class-path path="D:\java\eclipseworkspace\sdpm\sdpm-system\view\src\main\resources"/>
             <class-path path="D:\java\eclipseworkspace\sdpm\sdpm-document\view\src\main\resources"/>
+            <class-path path="D:\java\eclipseworkspace\sdpm\sdpm-productLine\view\src\main\resources"/>
         </class-paths>
         <include-patterns>
             <include-pattern pattern="org\.tinygroup\.(.)*\.jar"/>

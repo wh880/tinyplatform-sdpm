@@ -4,6 +4,7 @@ import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.document.dao.pojo.DocumentDoclib;
 import org.tinygroup.sdpm.document.service.impl.DocServiceImpl;
 import org.tinygroup.sdpm.document.service.inter.DocService;
+import org.tinygroup.sdpm.org.dao.pojo.OrgRole;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.impl.UserServiceImpl;
 import org.tinygroup.sdpm.org.service.inter.UserService;
@@ -272,5 +273,82 @@ public class CmsUtils {
      */
     public static void removeUserListByProductLine(){
         CacheUtils.remove(CMS_CACHE,CMS_CACHE_TEAM_LIST_BY_PRODUCT_LINE);
+    }
+
+    /**
+     * 获取当前用户可访问的产品线
+     */
+    public static List<ProductLine> getProductLineListByUser(){
+        List<ProductLine> productLines = getProductLineList();
+        List<ProductLine> result = new ArrayList<ProductLine>();
+        String loginId = UserUtils.getUserId();
+        for(ProductLine productLine : productLines){
+            if(productLine.getAcl()<1){
+                result = productLines;
+                break;
+            }else if(productLine.getAcl()==1){
+                if(loginId.equals(productLine.getProductLineOwner())){
+                    result.add(productLine);
+                    continue;
+                }else if(getUserListByProductLine(String.valueOf(productLine.getProductLineId())).contains(loginId)){
+                    result.add(productLine);
+                    continue;
+                }
+            }else{
+                if(loginId.equals(productLine.getProductLineOwner())){
+                    result.add(productLine);
+                    continue;
+                }else if(getUserListByProductLine(String.valueOf(productLine.getProductLineId())).contains(loginId)){
+                    result.add(productLine);
+                    continue;
+                }else{
+                    for(OrgRole role : UserUtils.getUserRoleList()){
+                        if(productLine.getProductLineWhiteList().contains(String.valueOf(role.getOrgRoleId()))){
+                            result.add(productLine);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        return result;
+    }
+    /**
+      * 获取当前产品线中用户可访问的产品
+      */
+    public static List<Product> getProductListByUser(String productLineId){
+        List<Product> products = getProductListByLine(productLineId);
+        List<Product> result = new ArrayList<Product>();
+        String loginId = UserUtils.getUserId();
+        for(Product product : products){
+            if(product.getAcl()<1){
+                result = products;
+                break;
+            }else if(product.getAcl()==1){
+                if(loginId.equals(product.getProductOwner())){
+                    result.add(product);
+                    continue;
+                }else if(getUserListByProduct(String.valueOf(product.getProductId())).contains(loginId)){
+                    result.add(product);
+                    continue;
+                }
+            }else{
+                if(loginId.equals(product.getProductOwner())){
+                    result.add(product);
+                    continue;
+                }else if(getUserListByProductLine(String.valueOf(product.getProductLineId())).contains(loginId)){
+                    result.add(product);
+                    continue;
+                }else{
+                    for(OrgRole role : UserUtils.getUserRoleList()){
+                        if(product.getProductWhiteList().contains(String.valueOf(role.getOrgRoleId()))){
+                            result.add(product);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        return result;
     }
 }

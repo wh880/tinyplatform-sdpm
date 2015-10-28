@@ -43,7 +43,7 @@
 
 
     #@elementItem()
-        #@colLabel()产品线经理：#end
+        #@colLabel()<span class="c-red">*</span>产品线经理：#end
         #@formControlDiv("col-4")
             #@Tselect2F()
                 #@Tselect2Body("productLineOwner" "" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
@@ -121,7 +121,7 @@
         #@colLabel()<span class="c-red">*</span>访问控制：#end
         #@skinMinimal("col-8")
 
-            #@Tradioes("acl" productLine?.acl {"onclick":"setWhite(this.value)"})
+            #@Tradioes("acl" productLine?.acl?:0 {"onclick":"setWhite(this.value)"})
                 #foreach(source:getDict("lineAccessControl"))
                 <div>#@Tradio(source?.value)${source?.text}#end</div>
                 #end
@@ -130,12 +130,12 @@
         #@validateDiv("col-2")#end
     #end
 
-    #@elementItem("whitelistBox" productLine?.acl!=1?'hidden':'')
+    #@elementItem("whitelistBox" (productLine?.acl?:0)<2?'hidden':'')
         #@colLabel()<span class="c-red">*</span>分组白名单#end
         #@skinMinimal("col-8")
             #@Tcheckboxes("productLineWhiteList" productLine?.productLineWhiteList)
-                #foreach(source:getDict("whiteList"))
-                    #@Tcheckbox(source?.value)${source?.text}#end
+                #foreach(role : UserUtils.getAllRoleList())
+                    #@Tcheckbox(role?.orgRoleId)${role?.orgRoleName}#end
                 #end
             #end
         #end
@@ -165,7 +165,7 @@
 
 <script type="text/javascript">
     function setWhite(acl) {
-        acl == 'custom' ? $('#whitelistBox').removeClass('hidden') : $('#whitelistBox').addClass('hidden');
+        acl == '2' ? $('#whitelistBox').removeClass('hidden') : $('#whitelistBox').addClass('hidden');
     }
 </script>
 <script type="text/javascript">

@@ -87,9 +87,9 @@
          </dictNodeEntry>
 
          <dictNodeEntry name="accessControl" title="访问控制">
-             <dictItem key="0" value="默认设置(有项目视图权限，即可访问)" sort="1"/>
-             <dictItem key="1" value="私有项目(只有项目团队成员才能访问)" sort="2"/>
-             <dictItem key="2" value="自定义白名单(团队成员和白名单的成员可以访问)" sort="3"/>
+             <dictItem key="0" value="默认设置(无访问限制)" sort="1"/>
+             <dictItem key="1" value="私有项目(只有产品项目团队成员及产品负责人才能访问)" sort="2"/>
+             <dictItem key="2" value="自定义白名单(产品团队成员及产品负责人和白名单的成员可以访问)" sort="3"/>
          </dictNodeEntry>
 
          <dictNodeEntry name="productWhiteList" title="白名单">

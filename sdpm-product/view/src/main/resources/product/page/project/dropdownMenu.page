@@ -81,9 +81,9 @@
 		  <option value=""></option>
 		  <optgroup label="产品">
 			  #if(cookieProductLineId)
-			  #for(product : CmsUtils.getProductListByLine(cookieProductLineId))
-			  	<option value="${product?.productId}">${product?.productName}</option>
-			  #end
+				  #for(product : CmsUtils.getProductListByLine(cookieProductLineId))
+					<option value="${product?.productId}">${product?.productName}</option>
+				  #end
 		  #end
 		  </optgroup>
 
