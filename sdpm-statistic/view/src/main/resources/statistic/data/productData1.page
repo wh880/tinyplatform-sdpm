@@ -5,69 +5,53 @@
 #end
 <div style="height: 10px;"></div>
 <style>
-    .multable tbody tr td{vertical-align: middle}
+    .multable tbody tr td {
+        vertical-align: middle
+    }
 </style>
 #@tableStriped("table-border multable ")
     #@thead()
         #@tr("text-c")
-            #@th()
-            产品名称
-            #end
-            #@th()
-            产品负责人
-            #end
-            #@th()
-            产品计划
-            #end
-            #@th()
-            开始日期
-            #end
-            #@th()
-            结束日期
-            #end
-            #@th()
-            草稿
-            #end
-            #@th()
-            激活
-            #end
-            #@th()
-            已变更
-            #end
-            #@th()
-            已关闭
-            #end
+            #@th()产品名称#end
+            #@th()产品负责人#end
+            #@th()产品计划#end
+            #@th()开始日期#end
+            #@th()结束日期#end
+            #@th()草稿#end
+            #@th()激活 #end
+            #@th()已变更#end
+            #@th()已关闭#end
         #end
         #@tbody()
-
-
             #for(p:product)
-                 #@tr("text-c")
-                 <td rowspan=${p?.value.size()+1}> ${p?.key?.productName} </td>
-                 <td rowspan=${p?.value.size()+1}>${p?.key?.productCreatedBy?UserUtils.getUserById(p?.key?.productCreatedBy)?.orgUserRealName:""}</td>
-                    #if(!p.value)
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                    #else
-                     #for(pl:p?.value)
-                        #@tr("text-c")
-                             <td>${pl?.planName}</td>
-                            <td>${formatDate(pl?.planBeginDate,"yyyy-MM-dd")}</td>
-                            <td>${formatDate(pl?.planEndDate,"yyyy-MM-dd")}</td>
-                             <td>${pl?.draft}</td>
-                             <td>${pl?.active}</td>
-                             <td>${pl?.change}</td>
-                             <td>${pl?.close}</td>
-                        #end
-                     #end
-                 #end
+            #@tr("text-c")
+            <td rowspan=${p?.value.size()+1}> ${p?.key?.productName}</td>
+            <td rowspan=${p?.value.size()+1}>${p
+                ?.key?.productCreatedBy?UserUtils.getUserById(p?.key?.productCreatedBy)?.orgUserRealName:""}
+            </td>
+                #if(!p.value)
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                #else
+                    #for(pl:p?.value)
+                    #@tr("text-c")
+                    <td>${pl?.planName}</td>
+                    <td>${formatDate(pl?.planBeginDate,"yyyy-MM-dd")}</td>
+                    <td>${formatDate(pl?.planEndDate,"yyyy-MM-dd")}</td>
+                    <td>${pl?.draft}</td>
+                    <td>${pl?.active}</td>
+                    <td>${pl?.change}</td>
+                    <td>${pl?.close}</td>
+                    #end
                 #end
             #end
         #end
     #end
+#end
+#end
 #end

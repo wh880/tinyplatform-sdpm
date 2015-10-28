@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * 项目任务
  * Created by shenly13343 on 2015-09-20.
  */
 public interface TaskService {
@@ -17,7 +18,7 @@ public interface TaskService {
      *
      * @return
      */
-    public Integer updateDoingTask(ProjectTask task);
+    Integer updateDoingTask(ProjectTask task);
 
     /**
      * 批量软删除
@@ -25,9 +26,9 @@ public interface TaskService {
      * @param condition
      * @return
      */
-    public Integer batchSoftDel(String condition);
+    Integer batchSoftDel(String condition);
 
-    public Integer batchAdd(List<ProjectTask> taskList, Integer projectId);
+    Integer batchAdd(List<ProjectTask> taskList, Integer projectId);
 
     /**
      * 新建任务
@@ -35,7 +36,7 @@ public interface TaskService {
      * @param Task
      * @return
      */
-    public ProjectTask addTask(ProjectTask Task);
+    ProjectTask addTask(ProjectTask Task);
 
     /**
      * 分组产看任务
@@ -44,7 +45,7 @@ public interface TaskService {
      * @param projectId
      * @return
      */
-    public Map<String, List<ProjectTask>> findTaskByGroup(int projectId, String colum);
+    Map<String, List<ProjectTask>> findTaskByGroup(int projectId, String colum);
 
     /**
      * 根据任务状态进行查询
@@ -52,7 +53,7 @@ public interface TaskService {
      * @param task
      * @return
      */
-    public List<ProjectTask> findListTask(ProjectTask task);
+    List<ProjectTask> findListTask(ProjectTask task);
 
     /**
      * 分页查询
@@ -63,7 +64,7 @@ public interface TaskService {
      * @param sortName
      * @return
      */
-    public Pager<ProjectTask> findPagerTask(Integer start, Integer limit, ProjectTask task, String sortName, boolean asc, String condition);
+    Pager<ProjectTask> findTaskPager(Integer start, Integer limit, ProjectTask task, String sortName, boolean asc, String condition);
 
     /**
      * 根据taskId主键查询
@@ -71,7 +72,7 @@ public interface TaskService {
      * @param taskId
      * @return
      */
-    public ProjectTask findTask(Integer taskId);
+    ProjectTask findTask(Integer taskId);
 
     /**
      * 跟新任务，包括指派，开始，完成，关闭，编辑
@@ -80,7 +81,7 @@ public interface TaskService {
      * @param projectTask
      * @return
      */
-    public Integer updateTask(ProjectTask projectTask);
+    Integer updateTask(ProjectTask projectTask);
 
     /**
      * 跟新任务，包括指派，开始，完成，关闭，编辑
@@ -89,7 +90,7 @@ public interface TaskService {
      * @param projectTask
      * @return
      */
-    public Integer updateEditTask(ProjectTask projectTask);
+    Integer updateEditTask(ProjectTask projectTask);
 
     /**
      * 跟新任务，包括指派，开始，完成，关闭，编辑
@@ -98,7 +99,7 @@ public interface TaskService {
      * @param projectTask
      * @return
      */
-    public Integer updateCallTask(ProjectTask projectTask);
+    Integer updateCallTask(ProjectTask projectTask);
 
     /**
      * 跟新任务，包括指派，开始，完成，关闭，编辑
@@ -107,7 +108,7 @@ public interface TaskService {
      * @param projectTask
      * @return
      */
-    public Integer updateCloseTask(ProjectTask projectTask);
+    Integer updateCloseTask(ProjectTask projectTask);
 
     /**
      * 跟新任务，包括指派，开始，完成，关闭，编辑
@@ -116,7 +117,7 @@ public interface TaskService {
      * @param projectTask
      * @return
      */
-    public Integer updateStartTask(ProjectTask projectTask);
+    Integer updateStartTask(ProjectTask projectTask);
 
     /**
      * 跟新任务，包括指派，开始，完成，关闭，编辑
@@ -125,16 +126,16 @@ public interface TaskService {
      * @param projectTask
      * @return
      */
-    public Integer updateFinishTask(ProjectTask projectTask);
+    Integer updateFinishTask(ProjectTask projectTask);
 
-    public Integer updateCancelTask(ProjectTask task);
+    Integer updateCancelTask(ProjectTask task);
 
     /**
      * 复杂查询
      *
      * @return
      */
-    public Pager<ProjectTask> findComplexTask();
+    Pager<ProjectTask> findComplexTask();
 
     /**
      * 分组查看
@@ -150,5 +151,5 @@ public interface TaskService {
      * @param id
      * @return
      */
-    public List<TaskChartBean> buildChart(String id);
+    List<TaskChartBean> buildChart(String id);
 }

@@ -39,7 +39,6 @@
     					#labelRadio1(rId="typefile" rName="docType" rChecked="checked" rValue="1" "setType(this.value);" labelText=getDict("docType","1") )
     					#labelRadio1(rId="typeurl" rName="docType" rValue="2" labelText=getDict("docType","2") "setType(this.value);")   								
     					#labelRadio1(rId="typetext" rName="docType" rValue="3" labelText=getDict("docType","3") "setType(this.value);")
-					
 					#end
         			#@validateDiv("col-2")#end
       		#end	
