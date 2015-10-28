@@ -3,6 +3,7 @@ package org.tinygroup.sdpm.action.product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.tinygroup.sdpm.common.web.BaseController;
@@ -14,15 +15,15 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("/a/product/project")
-public class ProductprojectAction extends BaseController{
+public class ProductProjectAction extends BaseController{
 	
 	@Autowired
 	private ProjectService projectService;
 	
 	@RequestMapping("/save")
-	public String save(Project project,Model model,HttpServletRequest request){
+	public String save(@CookieValue("cookieProductId") String cookieProductId, Project project, Model model, HttpServletRequest request){
 		
-		project.setProjectId((Integer)(request.getSession().getAttribute("sessionProjectId")));
+		project.setProjectId(Integer.parseInt(cookieProductId));
 		projectService.addProject(project);
 	
 		return "redirect:" + "/product/page/project/product-project-list.page";
@@ -32,11 +33,12 @@ public class ProductprojectAction extends BaseController{
 	
 	@RequestMapping("/list")
 	public String list(Project project,
+			@CookieValue("cookieProductId") String cookieProductId,
 			@RequestParam(required = false,defaultValue = "1")int page,
 			@RequestParam(required = false,defaultValue = "10")int pagesize,
 			@RequestParam(required = false,defaultValue = "projectId")String order,
 			@RequestParam(required = false,defaultValue = "asc")String ordertype,Model model,HttpServletRequest request){
-		project.setProjectId((Integer)(request.getSession().getAttribute("sessionProjectId")));
+		project.setProjectId(Integer.parseInt(cookieProductId));
 		Pager<Project> pagerProject = projectService.findProjectPager(page, pagesize, project, order, ordertype);
 		model.addAttribute("project",pagerProject);
 		return "/product/data/allproduct-project.pagelet";

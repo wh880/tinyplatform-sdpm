@@ -1,6 +1,5 @@
 #include("/product/page/event/common.page")
-#set(addArchivePagePath=
-    "/product/page/tabledemo/addArchive.pagelet",editpageModalId="myModal",editpageModal="#"+editpageModalId)
+#set(addArchivePagePath="/product/page/tabledemo/addArchive.pagelet",editpageModalId="myModal",editpageModal="#"+editpageModalId)
 #!set(linkName="product-archive",sonitem="
 <li>"+"文档"+"</li>")
 
@@ -35,7 +34,7 @@
                         #end
                     #end
                 #end
-                #@tinyTableContent(TINY_CONTEXT_PATH +adminPath+"/document/product/doc/list") ##取数据地址 总数据
+                #@tinyTableContent(TINY_CONTEXT_PATH +adminPath+"/document/product/doc/list?docProduct="+cookieProductId) ##取数据地址 总数据
                     #@thead()
                         #@tr()###th  class 为sorting 表票可排序 为sorting_desc 为当前倒序
                             #@tinyTh({"width":"6"})<input type="checkbox" name="idCheck" value="">#end

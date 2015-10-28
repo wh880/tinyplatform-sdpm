@@ -61,21 +61,23 @@
 #end
 
 
-#@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/document/product/save/updateDoc" "post" {"class":"test","enctype":
+#@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/document/product/save/updateDoc?docProduct="+cookieProductId+"&docLibId=1&docDeleted=0" "post" {"class":"test","enctype":
     "multipart/form-data"})
 
 <div style="width:100%">
 <div class="infoContent">
     <p class="titleName">创建文档</p>
     #@elementItem()
-        #@colLabel()所属产品#end
+        #@colLabel()<span class="c-red">*</span>所属产品#end
         #@formControlDiv("col-4")
             #@div(divClass="col-12")
                 #@Tselect2F()
-                    #@Tselect2Body("docProduct" product?.productId?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                    #@Tselect2Body("docProduct" product?.productId?:cookieProductId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         <option value="0">/</option>
-                        #foreach(product : productList)
-                            <option value="${product?.productId}">${product?.productName}</option>
+                        #if(cookieProductLineId)
+                            #foreach(product : CmsUtils.getProductListByLine(cookieProductLineId))
+                                <option value="${product?.productId}">${product?.productName}</option>
+                            #end
                         #end
                     #end
 
@@ -95,7 +97,7 @@
     #end
 
     #@elementItem()
-        #@colLabel()所属分类#end
+        #@colLabel()<span class="c-red">*</span>所属分类#end
         #@formControlDiv("col-4")
             #@div(divClass="col-12")
                 #@Tselect2F()
@@ -108,7 +110,7 @@
     #end
 
     #@elementItem()
-        #@colLabel()文档类型#end
+        #@colLabel()<span class="c-red">*</span>文档类型#end
         #@skinMinimal("mt-20")
             #labelRadio1(rId="typefile" rName="docType" rChecked="checked" rValue="1" "setType(this.value);" labelText=getDict("docType","1") )
             #labelRadio1(rId="typeurl" rName="docType" rValue="2" labelText=getDict("docType","2") "setType(this.value);")

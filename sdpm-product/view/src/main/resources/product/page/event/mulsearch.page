@@ -208,7 +208,7 @@
         });
         var itemlist = []
         itemlist.push({
-            "name": "story_parentId",
+            "name": "story_parent_id",
             "title": "父需求",
             "operator": "include",
             "value": "text"
@@ -238,7 +238,7 @@
             "value": "user"
         });
         itemlist.push({
-            "name": "story_fromBug",
+            "name": "story_from_bug",
             "title": "需求来源bug",
             "operator": "=",
             "value": "pri"
@@ -286,67 +286,67 @@
             "value": "text"
         });
         itemlist.push({
-            "name": "story_openedBy",
+            "name": "story_opened_by",
             "title": "创建人",
             "operator": "=",
             "value": "text"
         });
         itemlist.push({
-            "name": "story_openedDate",
+            "name": "story_opened_date",
             "title": "创建日期",
             "operator": "=",
             "value": "user"
         });
         itemlist.push({
-            "name": "story_assignedTo",
+            "name": "story_assigned_to",
             "title": "指派对象",
             "operator": "=",
             "value": "user"
         });
         itemlist.push({
-            "name": "story_assignedDate",
+            "name": "story_assigned_date",
             "title": "指派日期",
             "operator": "=",
             "value": "user"
         });
         itemlist.push({
-            "name": "story_lastEditedBy",
+            "name": "story_lastEdited_by",
             "title": "最后编辑人",
             "operator": "=",
             "value": "user"
         });
         itemlist.push({
-            "name": "story_lastEditedDate",
+            "name": "story_lastEdited_date",
             "title": "最后编辑日",
             "operator": "=",
             "value": "user"
         });
         itemlist.push({
-            "name": "story_reviewedBy",
+            "name": "story_reviewed_by",
             "title": "审核人",
             "operator": "=",
             "value": "user"
         });
         itemlist.push({
-            "name": "story_reviewedDate",
+            "name": "story_reviewed_date",
             "title": "审核日期",
             "operator": "=",
             "value": "date"
         });
         itemlist.push({
-            "name": "story_closedBy",
+            "name": "story_closed_by",
             "title": "关闭人",
             "operator": "=",
             "value": "date"
         });
         itemlist.push({
-            "name": "story_closedDate",
+            "name": "story_closed_date",
             "title": "关闭日期",
             "operator": "=",
             "value": "date"
         });
         itemlist.push({
-            "name": "story_closedReason",
+            "name": "story_closed_reason",
             "title": "关闭原因",
             "operator": "=",
             "value": "date"

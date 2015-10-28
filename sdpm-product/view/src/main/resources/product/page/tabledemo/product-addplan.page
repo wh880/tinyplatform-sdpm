@@ -154,7 +154,7 @@ return format;
         #@validateDiv("col-2")#end
       #end
     #@elementItem()
-        #@colLabel()名称:#end
+        #@colLabel()<span class="c-red">*</span>名称:#end
         #@formControlDiv("col-4")
           #tinyInput("text" "planName" ""{"datatype":"*","nullmsg":"用户名不能为空！","id":"planName","class":"input-text"})
         #end
@@ -162,14 +162,14 @@ return format;
     #end
 
     #@elementItem()
-        #@colLabel()开始日期:#end
+        #@colLabel()<span class="c-red">*</span>开始日期:#end
         #@formControlDiv("col-4")
            #@tinyDateInput("planBeginDate" "" "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空","id":"planBeginDate","readonly":"readonly"})#end
         #end
         #@validateDiv("col-2")#end
     #end
     #@elementItem()
-        #@colLabel()结束日期:#end
+        #@colLabel()<span class="c-red">*</span>结束日期:#end
         #@formControlDiv("col-4")
         	 #@tinyDateInput("planEndDate" "" "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空","readonly":"readonly"})#end
         #end

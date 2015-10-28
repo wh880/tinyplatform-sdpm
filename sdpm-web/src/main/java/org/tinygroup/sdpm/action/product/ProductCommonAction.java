@@ -3,6 +3,7 @@ package org.tinygroup.sdpm.action.product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
@@ -25,16 +26,12 @@ public class ProductCommonAction   extends BaseController{
 
 
 	@RequestMapping("/roadMap")
-	public String roadMap(HttpServletRequest request,Model model){
+	public String roadMap(@CookieValue("cookieProductId") String cookieProductId, HttpServletRequest request, Model model){
 
 		ProductPlan plan = new ProductPlan();
 		ProductRelease release = new ProductRelease();
-		Integer productId = 0;
-		if(request.getSession().getAttribute("sessionProductId")!=null){
-			productId = (Integer) request.getSession().getAttribute("sessionProductId");
-		}
-		plan.setProductId(productId);
-		release.setProductId(productId);
+		plan.setProductId(Integer.parseInt(cookieProductId));
+		release.setProductId(Integer.parseInt(cookieProductId));
 		
 		if(request.getSession().getAttribute("sessionProductId")!=null){
 			plan.setProductId((Integer)request.getSession().getAttribute("sessionProductId"));

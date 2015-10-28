@@ -314,6 +314,15 @@ public class DocAction extends BaseController {
     public String saveDoc(HttpServletRequest request, DocumentDoc doc, Model model) {
         if (doc.getDocId() == null || doc.getDocId() == 0) {
             doc = docservice.createNewDoc(doc);
+            LogUtil.logWithComment(LogUtil.LogOperateObject.DOC,
+                    LogUtil.LogAction.CREATED,
+                    String.valueOf(doc.getDocId()),
+                    UserUtils.getUserId(),
+                    String.valueOf(doc.getDocProduct()),
+                    String.valueOf(doc.getDocProject()),
+                    null,
+                    null,
+                    null);
         } else {
             docservice.editDoc(doc);
         }
