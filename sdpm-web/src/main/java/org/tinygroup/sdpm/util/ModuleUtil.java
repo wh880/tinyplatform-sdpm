@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class ModuleUtil {
 
-    private static void mergeModuleContidion(StringBuffer condition,int moduleId , ModuleService moduleService){
+    private static void mergeModuleContidion(StringBuffer condition,Integer moduleId , ModuleService moduleService){
         SystemModule systemModule = new SystemModule();
         systemModule.setModuleParent(moduleId);
         List<SystemModule> systemModules = moduleService.findModuleList(systemModule);
@@ -61,7 +61,8 @@ public class ModuleUtil {
     	return condition;
     }
 
-    public static String getCondition(int moduleId,ModuleService moduleService){
+    public static String getCondition(Integer moduleId,ModuleService moduleService){
+        if(moduleId==null||moduleId<1)return "";
         StringBuffer stringBuffer = new StringBuffer();
         stringBuffer.append("in (");
         mergeModuleContidion(stringBuffer,moduleId,moduleService);
@@ -69,7 +70,8 @@ public class ModuleUtil {
         return stringBuffer.toString();
     }
 
-    public static String getConditionByRoot(int rootId, ModuleService moduleService){
+    public static String getConditionByRoot(Integer rootId, ModuleService moduleService){
+        if(rootId==null||rootId<1)return "";
         StringBuffer stringBuffer = new StringBuffer();
         stringBuffer.append("in (");
         SystemModule systemModule = new SystemModule();
@@ -84,8 +86,8 @@ public class ModuleUtil {
         return stringBuffer.toString();
     }
 
-    public static String getPath(int moduleId, String division, ModuleService moduleService,String root, boolean openRoot){
-
+    public static String getPath(Integer moduleId, String division, ModuleService moduleService,String root, boolean openRoot){
+        if(moduleId==null||moduleId<1)return "";
         SystemModule module = moduleService.findById(moduleId);
         if (module == null) {
             return "/";

@@ -99,7 +99,9 @@ public class StoryAction extends BaseController {
             return "redirect:" + adminPath + "/product/story?choose=1&"
                     + queryString;
         }
-
+        if(queryString == null){
+            return "redirect:" + adminPath + "/product/story?choose=1";
+        }
 
         return "/product/page/project/togglebox.page";
     }
@@ -146,7 +148,11 @@ public class StoryAction extends BaseController {
             productStory.setStoryStage("1");
         }
         productStory.setProductId(Integer.parseInt(cookieProductId));
-        productStory.setStoryStatus("0");
+        if("0".equals(productStory.getStoryReviewedBy())){
+            productStory.setStoryStatus("1");
+        }else{
+            productStory.setStoryStatus("0");
+        }
         productStory.setStoryVersion(1);
         productStory.setStoryOpenedBy(UserUtils.getUserId());
         productStory.setStoryOpenedDate(new Date());
@@ -516,7 +522,7 @@ public class StoryAction extends BaseController {
         /*
          * if (story.getModuleId()==-1) { story.setModuleId(null); }
 		 */
-        String condition = StoryUtil.getStatusCondition(choose, request);
+        String condition = StoryUtil.getStatusCondition(choose);
         if (story.getModuleId() != null && story.getModuleId() > 0) {
             SystemModule module = new SystemModule();
             module.setModuleId(story.getModuleId());
@@ -747,7 +753,21 @@ public class StoryAction extends BaseController {
     @ResponseBody
     @RequestMapping("/storyList")
     public List<ProductStory> findStory(ProductStory story) {
+        if(story.getProductId()==null||story.getProductId()<1)return new ArrayList<ProductStory>();
+        Integer storyId= null;
+        if(story.getStoryId()!=null){
+            storyId = story.getStoryId();
+            story.setStoryId(null);
+        }
         List<ProductStory> list = storyService.findStoryList(story);
+        if(storyId!=null){
+            for(ProductStory productStory : list){
+                if(productStory.getStoryId()==storyId){
+                    list.remove(productStory);
+                    break;
+                }
+            }
+        }
         return list;
     }
 

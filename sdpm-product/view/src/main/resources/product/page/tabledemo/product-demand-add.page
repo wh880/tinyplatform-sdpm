@@ -119,7 +119,7 @@
             #@formControlDiv("col-4")
                 <div id="demand-sources">
                     #@Tselect2F()
-                        #@Tselect2Body("storySource" "IN" {"class":
+                        #@Tselect2Body("storySource" "0" {"class":
                             "input-text select2"}) ##,"multiple":"multiple"加上为多选项#for(stage:getDict("storySource"))
 
                             #foreach(source:getDict("storySource"))
@@ -182,7 +182,7 @@
             #@colLabel()优先级：#end
             #@formControlDiv("col-4")
                 #@Tselect2F()
-                    #@Tselect2Body("storyPri" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                    #@Tselect2Body("storyPri" "" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         #foreach(pri:getDict("storyPri"))
                             <option value="${pri?.value}"> ${pri?.text}</option>
                         #end
@@ -209,7 +209,7 @@
             #@sdpmItem("由谁评审")
                 #@Tselect2F()
                     #@Tselect2Body(
-                        "storyReviewedBy" "IN" {"class":"input-text select2","url":"/org/user/userList","ajaxType":
+                        "storyReviewedBy" "" {"class":"input-text select2","url":"/org/user/userList","ajaxType":
                         "orgUser","data":""})
 
                     #end
@@ -231,7 +231,7 @@
             #@checkboxBox()
 
                 #@label(labelFor="checkbox-6")
-                    #input(inputId="story_reviewed" inputName="storyReviewedBy1" inputType="checkbox" )
+                    #input(inputId="story_reviewed" inputName="storyReviewedBy" inputValue="0" inputType="checkbox" )
                     不需要评审
                 #end
             #end
@@ -242,7 +242,7 @@
             #@colLabel()抄送给：#end
             #@formControlDiv("col-4")
                 #@Tselect2F()
-                    #@Tselect2Body("storyMailto" "IN" {"class":"input-text select2","multiple":
+                    #@Tselect2Body("storyMailto" "0" {"class":"input-text select2","multiple":
                         "multiple"}) ##,"multiple":"multiple"加上为多选项
                     #end
                     <script>

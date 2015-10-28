@@ -9,22 +9,19 @@
             #@colLabel()产品：#end
             #@formControlDiv("col-8")
                 #@Tselect2F()
-                    #@Tselect2Body("productId" product?.productId  {"class":"input-text select2"})
-                        #foreach(product : CmsUtils.getProductList())
-                            #if(product?.deleted==0)
+                    <script>
+                        $("#${sid}").on("change", function () {
+                            var pId = $("#${sid}  option:selected").val();
+                            ajaxRead("${sid}", "moduleId", "moduleId", "moduleName", "/quality/bug/ajax/module?moduleRoot=" + pId,"${story?.moduleId?:0}");
+                        })
+                    </script>
+                    #@Tselect2Body("productId" story?.productId  {"class":"input-text select2"})
+                        #if(cookieProductLineId)
+                            #for(product : CmsUtils.getProductListByLine(cookieProductLineId))
                                 <option value="${product?.productId}">${product?.productName}</option>
                             #end
                         #end
                     #end
-
-                    <script>
-                        $("#${sid}").on("change", function () {
-                            var pId = $("#${sid}  option:selected").val();
-                            ajaxRead("${sid}", "moduleId", "moduleId", "moduleName", "/quality/bug/ajax/module?moduleRoot=" + pId);
-                        })
-                    </script>
-
-
                     #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH +adminPath}/product/addproduct/addition "
                                       class="r ">添加</a><a
                             href=" ${TINY_CONTEXT_PATH +adminPath}/product/allproduct/addition">全部</a>#end
@@ -117,14 +114,11 @@
             #@colLabel()抄送给：#end
             #@formControlDiv("col-8")
                 #@Tselect2F()
-                    #@Tselect2Body(
-                        "storyMailto" story?.storyMailto {"class":"input-text select2","multiple":
-                        "multiple"}) ##,"multiple":"multiple"加上为多选项
-                    #end
                     <script>
                         ajaxRead("${sid}", "storyMailto", "orgUserId", "orgUserRealName", "/org/user/userList");
                     </script>
-
+                    #@Tselect2Body("storyMailto" story?.storyMailto {"class":"input-text select2","multiple":"multiple"}) ##,"multiple":"multiple"加上为多选项
+                    #end
                     #@Tselect2Fix()
                         <a href="${TINY_CONTEXT_PATH}/a/org/user/form">增加</a>
                         <a href="${TINY_CONTEXT_PATH}/a/org/user/list" class="r">全部</a>
@@ -154,14 +148,12 @@
                 #@colLabel()指派给：#end
                 #@formControlDiv("col-8")
                     #@Tselect2F()
-                        #@Tselect2Body("storyAssignedTo" story?.storyAssignedTo {"class":
-                            "input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                        #end
-
                         <script>
                             ajaxRead("${sid}", "storyAssignedTo", "orgUserId", "orgUserRealName", "/org/user/userList");
                         </script>
-
+                        #@Tselect2Body("storyAssignedTo" story?.storyAssignedTo {"class":
+                            "input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        #end
                         #@Tselect2Fix()
                             <a href="${TINY_CONTEXT_PATH}/a/org/user/form">增加</a>
                             <a href="${TINY_CONTEXT_PATH}/a/org/user/list" class="r">全部</a>
