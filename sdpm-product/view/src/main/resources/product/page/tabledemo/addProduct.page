@@ -48,7 +48,7 @@
         <p class="titleName">添加产品</p>
 
         #@elementItem()
-            #@colLabel()产品线名称：#end
+            #@colLabel()<span class="c-red">*</span>产品线名称：#end
             #@formControlDiv("col-3")
                 #@Tselect2F()
                     #@Tselect2Body("productLineId" cookieProductLineId {"class":"input-text select2"})
@@ -74,7 +74,7 @@
 
 
         #@elementItem()
-            #@colLabel()产品名称：#end
+            #@colLabel()<span class="c-red">*</span>产品名称：#end
             #@formControlDiv("col-3")
                 #tinyInput(
                     "text" "productName" ""{"placeholder":"请输入产品名称","datatype":"*","nullmsg":"产品名称不能为空！","id":
@@ -85,7 +85,7 @@
 
 
         #@elementItem()
-            #@colLabel()产品代号：#end
+            #@colLabel()<span class="c-red">*</span>产品代号：#end
             #@formControlDiv("col-3")
                 #tinyInput(
                     "text" "productCode" ""{"placeholder":"请输入产品代号","datatype":"*","nullmsg":"代号不能为空！","id":
@@ -96,7 +96,7 @@
 
 
         #@elementItem()
-            #@colLabel()产品负责人：#end
+            #@colLabel()<span class="c-red">*</span>产品负责人：#end
             #@formControlDiv("col-3")
                 #@Tselect2F()
                     #@Tselect2Body("productOwner" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
@@ -122,7 +122,7 @@
 
 
         #@elementItem()
-            #@colLabel()测试负责人：#end
+            #@colLabel()<span class="c-red">*</span>测试负责人：#end
             #@formControlDiv("col-3")
                 #@Tselect2F()
                     #@Tselect2Body(
@@ -149,7 +149,7 @@
             #@validateDiv("col-2")#end
         #end
         #@elementItem()
-            #@colLabel()发布负责人：#end
+            #@colLabel()<span class="c-red">*</span>发布负责人：#end
             #@formControlDiv("col-3")
                 #@Tselect2F()
                     #@Tselect2Body(
@@ -185,7 +185,7 @@
         #end
 
         #@elementItem()
-            #@colLabel()访问控制：#end
+            #@colLabel()<span class="c-red">*</span>访问控制：#end
             #@skinMinimal("col-8")
 
                 #@Tradioes("acl" "0" {"onclick":"setWhite(this.value)"})
@@ -197,7 +197,7 @@
             #@validateDiv("col-2")#end
         #end
         #@elementItem(elementId="whitelistBox" eleItemClass="hidden")
-            #@colLabel()分组白名单：#end
+            #@colLabel()<span class="c-red">*</span>分组白名单：#end
             #@skinMinimal("col-8")
                 #@Tcheckboxes("productWhiteList" "")
                     #foreach(source:getDict("productWhiteList"))

@@ -28,7 +28,7 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/a/project/demand")
-public class ProjectstoryAction extends BaseController {
+public class ProjectStoryAction extends BaseController {
     @Autowired
     private ProjectStoryService projectStoryService;
     @Autowired

@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.util;
 
+import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.document.dao.pojo.DocumentDoclib;
 import org.tinygroup.sdpm.document.service.impl.DocServiceImpl;
 import org.tinygroup.sdpm.document.service.inter.DocService;
@@ -10,9 +11,16 @@ import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.sdpm.productLine.service.ProductLineService;
 import org.tinygroup.sdpm.productLine.service.impl.ProductLineServiceImpl;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
+import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
+import org.tinygroup.sdpm.project.dao.pojo.ProjectTeam;
+import org.tinygroup.sdpm.project.service.impl.ProjectProductServiceImpl;
 import org.tinygroup.sdpm.project.service.impl.ProjectServiceImpl;
+import org.tinygroup.sdpm.project.service.impl.TeamServiceImpl;
+import org.tinygroup.sdpm.project.service.inter.ProjectProductService;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
+import org.tinygroup.sdpm.project.service.inter.TeamService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,12 +34,15 @@ public class CmsUtils {
     private static final String CMS_CACHE_PRODUCT_LIST_LINE_ID_ = "productList_lineId_";
     private static final String CMS_CACHE_PRODUCT_LINE_LIST = "projectLineList";
     private static final String CMS_CACHE_DOCLIB_LIST = "docLibList";
+    private static final String CMS_CACHE_TEAM_LIST_BY_PRODUCT = "teamList_product";
+    private static final String CMS_CACHE_TEAM_LIST_BY_PRODUCT_LINE = "teamList_productLine";
 
     private static ProjectService projectService = SpringContextHolder.getBean(ProjectServiceImpl.class);
     private static ProductService productService = SpringContextHolder.getBean(ProductServiceImpl.class);
     private static ProductLineService productLineService = SpringContextHolder.getBean(ProductLineServiceImpl.class);
     private static DocService docService = SpringContextHolder.getBean(DocServiceImpl.class);
-
+    private static ProjectProductService projectProductService= SpringContextHolder.getBean(ProjectProductServiceImpl.class);
+    private static TeamService teamService= SpringContextHolder.getBean(TeamServiceImpl.class);
     /**
      * 获得项目列表
      */
@@ -190,4 +201,72 @@ public class CmsUtils {
         CacheUtils.remove(CMS_CACHE, CMS_CACHE_DOCLIB_LIST);
     }
 
+    /**
+     * 获取产品项目组员列表
+     */
+
+    public static String getUserListByProduct(String productId){
+        String result = (String) CacheUtils.get(CMS_CACHE, CMS_CACHE_TEAM_LIST_BY_PRODUCT);
+        if(StringUtil.isBlank(result)) {
+            List<ProjectProduct> projectProducts = projectProductService.findProjects(Integer.parseInt(productId));
+            List<List<ProjectTeam>> teamsList = new ArrayList<List<ProjectTeam>>();
+            for (ProjectProduct projectProduct : projectProducts) {
+                if (projectProduct.getProjectId() != null && projectProduct.getProjectId() > 0) {
+                    teamsList.add(teamService.findTeamByProjectId(projectProduct.getProjectId()));
+                }
+            }
+            StringBuffer resultBuffer = new StringBuffer("");
+            for (List<ProjectTeam> teams : teamsList) {
+                for (ProjectTeam team : teams) {
+                    if (!StringUtil.isBlank(team.getTeamUserId())) {
+                        if (!StringUtil.isBlank(result.toString())) {
+                            resultBuffer.append(",");
+                        }
+                        resultBuffer.append(team.getTeamUserId());
+                    }
+                }
+            }
+            result = resultBuffer.toString();
+            CacheUtils.put(CMS_CACHE,CMS_CACHE_TEAM_LIST_BY_PRODUCT,result);
+        }
+        return result;
+    }
+
+    /**
+     * 清除产品项目组员列表
+     */
+    public static void removeUserListByProduct(){
+        CacheUtils.remove(CMS_CACHE,CMS_CACHE_TEAM_LIST_BY_PRODUCT);
+    }
+
+    /**
+     * 获取产品线项目组员列表
+     */
+    public static String getUserListByProductLine(String productLineId){
+        String result = (String) CacheUtils.get(CMS_CACHE, CMS_CACHE_TEAM_LIST_BY_PRODUCT_LINE);
+        if(StringUtil.isBlank(result)) {
+            StringBuffer users = new StringBuffer("");
+            Product product = new Product();
+            product.setProductLineId(Integer.parseInt(productLineId));
+            List<Product> products = productService.findProductList(product);
+            for(Product p : products){
+                if(p.getProductId()!=null&&p.getProductId()>0){
+                    if(!StringUtil.isBlank(users.toString())){
+                        users.append(",");
+                    }
+                    users.append(getUserListByProduct(String.valueOf(p.getProductId())));
+                }
+            }
+            result = users.toString();
+            CacheUtils.put(CMS_CACHE,CMS_CACHE_TEAM_LIST_BY_PRODUCT_LINE,result);
+        }
+        return result;
+    }
+
+    /**
+     * 清除产品线项目组员列表
+     */
+    public static void removeUserListByProductLine(){
+        CacheUtils.remove(CMS_CACHE,CMS_CACHE_TEAM_LIST_BY_PRODUCT_LINE);
+    }
 }

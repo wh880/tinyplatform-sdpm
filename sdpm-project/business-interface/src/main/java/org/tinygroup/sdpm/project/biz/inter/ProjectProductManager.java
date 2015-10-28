@@ -10,7 +10,7 @@ import java.util.List;
 public interface ProjectProductManager {
 
 
-    public void addLink(Integer[] array, Integer projectId);
+    public void addLink(Integer[] productArray, Integer projectId);
 
     /**
      * 根据projectId查找关联产品

@@ -16,21 +16,22 @@ public interface ProjectService {
      * @param project
      * @return
      */
-     Project addProject(Project project);
+    Project addProject(Project project);
 
     /**
      * 查找所有项目
      *
      * @return
      */
-    public List<Project> findList();
+    List<Project> findList();
 
     /**
      * 查询项目，包括统计总消耗等数据
+     *
      * @param project
      * @return
      */
-    public List<Project> findProjects(Project project);
+    List<Project> findProjects(Project project);
 
     /**
      * 根据项目名称查找项目，项目名称要保证唯一
@@ -38,7 +39,7 @@ public interface ProjectService {
      * @param projectName
      * @return
      */
-    public Project findByName(String projectName);
+    Project findByName(String projectName);
 
     /**
      * 查询所有项目
@@ -49,7 +50,7 @@ public interface ProjectService {
      * @param order
      * @return
      */
-    public Pager<Project> findProjects(Integer start, Integer limit, String order, String ordertype);
+    Pager<Project> findProjects(Integer start, Integer limit, String order, String ordertype);
 
     /**
      * 根据项目id查找
@@ -57,7 +58,7 @@ public interface ProjectService {
      * @param projectId
      * @return
      */
-    public Project findById(int projectId);
+    Project findById(int projectId);
 
     /**
      * 产品id查询所有关联的项目id，放入list
@@ -66,28 +67,30 @@ public interface ProjectService {
      * @param list
      * @return
      */
-    public List<Project> findByProjectList(List<Integer> list);
-    
+    List<Project> findByProjectList(List<Integer> list);
+
     /**
      * 对象查询(排序)
+     *
      * @param project
      * @param order
      * @param ordertype
      * @return
      */
-	List<Project> findProjectList(Project project,String order,String ordertype);
-	
-	
-	/**
-	 * 分页查询(排序)
-	 * @param page
-	 * @param pagesize
+    List<Project> findProjectList(Project project, String order, String ordertype);
+
+
+    /**
+     * 分页查询(排序)
+     *
+     * @param page
+     * @param pagesize
      * @param project
      * @param order
-	 * @param ordertype
-	 * @return
-	 */
-	Pager<Project> findProjectPager(int page,int pagesize,Project project,String order,String ordertype);
+     * @param ordertype
+     * @return
+     */
+    Pager<Project> findProjectPager(int page, int pagesize, Project project, String order, String ordertype);
 
 
     /**
@@ -97,7 +100,7 @@ public interface ProjectService {
      * @param project
      * @return
      */
-    public Integer updateProject(Project project);
-    
+    Integer updateProject(Project project);
+
     List<Project> getProjectByStoryId(Integer storyId);
 }

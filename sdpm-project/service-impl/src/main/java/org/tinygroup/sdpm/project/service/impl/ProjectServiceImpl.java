@@ -51,14 +51,14 @@ public class ProjectServiceImpl implements ProjectService {
         return projectManager.add(project);
     }
 
-    public List<Project> findProjectList(Project project, String order, String ordertype) {
+    public List<Project> findProjectList(Project project, String order, String orderType) {
 
-        return projectManager.findList(project, order, ordertype);
+        return projectManager.findList(project, order, orderType);
     }
 
-    public Pager<Project> findProjectPager(int page, int pagesize, Project project, String order, String ordertype) {
+    public Pager<Project> findProjectPager(int page, int pageSize, Project project, String order, String orderType) {
 
-        return projectManager.findPager(page, pagesize, project, order, ordertype);
+        return projectManager.findPager(page, pageSize, project, order, orderType);
     }
 
     public Integer updateProject(Project project) {

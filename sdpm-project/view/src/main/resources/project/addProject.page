@@ -3,6 +3,17 @@
 #import("/org/tinygroup/button/components/button_common.component")
 #import("/org/tinygroup/button/components/button.component")
 #import("/org/tinygroup/fold/components/fold.component")
+#macro sdpmItem(title star)
+<div class="col-2 text-r">
+    <span class="c-red">${star}</span>
+    <label>${title}：&nbsp;</label>
+</div>
+<div class="col-6 form-item-body">
+    #bodyContent
+</div>
+    #@validateDiv("col-3 validmsg")#end
+#end
+
 #macro labelRadio1(rId rName rValue rClass radioOther labelText)
     #@radioBox()
         #radio1(rId=rId rName=rName rValue=rValue rClass=rClass radioOthe=radioOther)
@@ -15,8 +26,6 @@
                class="$!{rClass}"#end#if(rIsDisabled && rIsDisabled=="disabled") disabled#end type="radio"
                onclick="${radioOther}"/>
 #end
-
-
 #set(name="task")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
@@ -26,15 +35,11 @@
         #@tabHead()
             #include("/project/protab.page")
         #end
-    ##head end
     <br/>
-    ##body end
     #end
 #end
 
-
 #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/project/add" "" {"class":"test"})
-
 <div style="width:100%;float:left" class="pageleftpart">
     <div class="infoContent">
         <p class="titleName">添加</p>
@@ -51,20 +56,39 @@
             #end
         #end
         #@elementItem()
-            #@sdpmItem("起始日期" "*")
-                #@tinyDateInput(
-                    "projectBegin" "" "YYYY-MM-DD" {"style":"width:275px","datatype":"*","nullmsg":"开始日期不能为空",
-                    "placeholder":
-                    "选择日期"})#end
-            #end
-        #end
-        #@elementItem()
-            #@sdpmItem("结束日期" "*")
-                #@tinyDateInput(
-                    "projectEnd" "" "YYYY-MM-DD" {"style":"width:275px","datatype":"*","nullmsg":"结束日期不能为空",
-                    "placeholder":
-                    "选择日期"})#end
-            #end
+            <div class="col-2 text-r">
+                <span class="c-red">*</span>
+                <label>起始日期：&nbsp;</label>
+            </div>
+            <div class="col-10 form-item-body">
+                <div class="col-2">
+                    #@tinyDateInput(
+                    "projectBegin" "" "YYYY-MM-DD" {"datatype":"*","nullmsg":"开始日期不能为空","placeholder":"请选择开始日期"})#end
+                </div>
+                <div class="col-1" style="width:auto;padding:0 10px">至</div>
+                <div class="col-2">
+                    #@tinyDateInput(
+                    "projectEnd" "" "YYYY-MM-DD" {"class":"input-text","datatype":"*","nullmsg":"结束日期不能为空",
+                        "placeholder":"请选择结束日期"})#end
+                </div>
+                <label class='radio-inline'><input type='radio' name='delta' value='7'
+                                                   onclick='computeEndDate(this.value)' id='delta7'/> 一星期</label>
+                <label class='radio-inline'><input type='radio' name='delta' value='14'
+                                                   onclick='computeEndDate(this.value)' id='delta14'/> 两星期</label>
+                <label class='radio-inline'><input type='radio' name='delta' value='31'
+                                                   onclick='computeEndDate(this.value)' id='delta31'/> 一个月</label>
+                <label class='radio-inline'><input type='radio' name='delta' value='62'
+                                                   onclick='computeEndDate(this.value)' id='delta62'/> 两个月</label>
+                <label class='radio-inline'><input type='radio' name='delta' value='93'
+                                                   onclick='computeEndDate(this.value)' id='delta93'/> 三个月</label>
+                <label class='radio-inline'><input type='radio' name='delta' value='186'
+                                                   onclick='computeEndDate(this.value)' id='delta186'/> 半年</label>
+                <label class='radio-inline'><input type='radio' name='delta' value='365'
+                                                   onclick='computeEndDate(this.value)' id='delta365'/> 一年</label>
+            </div>
+            <div class="col-2"></div>
+            #@validateDiv("col-4 validmsg")#end
+
         #end
         #@elementItem()
             #@sdpmItem("可用工作日")
@@ -115,7 +139,7 @@
 
         #@elementItem()
             #@sdpmItem("项目描述")
-                #@Teditor("projectDesc" "content" {"initialFrameHeight":"200","initialFrameWidth":"702"})#end
+                #@TeditorMini("projectDesc" "content" {"initialFrameHeight":"200","initialFrameWidth":"702"})#end
             #end
         #end
         #@elementItem()
@@ -162,11 +186,29 @@
 <script type="text/javascript">
 
     $(function () {
-        $("form").Validform({});
+        $("form").Validform({
+            tiptype: function (msg, o, cssctl) {
+                //console.log(o.obj);
+                var objtip = $(o.obj).closest(".form-item-body").parent().find(".validmsg");
+                cssctl(objtip, o.type);
+                objtip.text(msg);
+            },
+
+        });
 
         $("input[name='projectAcl']").click(function (e) {
             $(this).attr("value") == "3" ? $("#whitelistBox").removeClass("hidden") : $("#whitelistBox").addClass("hidden");
         })
     });
+    function convertStringToDate(dateString) {
+        dateString = dateString.split('-');
+        return new Date(dateString[0], dateString[1] - 1, dateString[2]);
+    }
+    function computeEndDate(delta) {
+        var $bTime =
+        $("input[name=projectBegin]");
+        if (!$bTime.val()) return false;
+        $("input[name=projectEnd]").val(moment($bTime.val(), "YYYY-MM-DD").add('days', delta).format('YYYY-MM-DD'));
+    }
 
 </script>

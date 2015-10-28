@@ -29,6 +29,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * 基础控制器
  * Created by Hulk on 2015/9/20.
  */
 public abstract class BaseController {
@@ -206,9 +207,10 @@ public abstract class BaseController {
         String origName = uploadFile.getOriginalFilename();
         String ext = FilenameUtils.getExtension(origName);
         String fileUrl = fileRepository.storeByExt(UPLOAD_PATH, origName, uploadFile);
+        fileUrl = fileRepository.resolverFilePath(fileUrl, UPLOAD_PATH);
         long size = uploadFile.getSize();
         SystemProfile profile = new SystemProfile(fileUrl, title, ext, (int) size,
-                type.getType(), objectId, UserUtils.getUserAccount(), new Date(), null, null, "0");
+                type.getType(), objectId, UserUtils.getUserAccount(), new Date(), null, null);
         profileService.add(profile);
     }
 
@@ -222,10 +224,13 @@ public abstract class BaseController {
      * @throws IOException
      */
     public void uploads(MultipartFile[] uploadFiles, Integer objectId, ProfileType type, String[] title) throws IOException {
-        if(uploadFiles==null||uploadFiles.length<1)return;
+        if (uploadFiles == null || uploadFiles.length < 1) {
+            return;
+        }
         for (int i = 0, n = uploadFiles.length; i < n; i++) {
-            if (!uploadFiles[i].isEmpty() && uploadFiles[i].getSize() > 0)
+            if (!uploadFiles[i].isEmpty() && uploadFiles[i].getSize() > 0) {
                 upload(uploadFiles[i], objectId, type, title[i]);
+            }
         }
     }
 
@@ -237,14 +242,15 @@ public abstract class BaseController {
      * @param type
      * @throws IOException
      */
+
     public void uploadNoTitle(MultipartFile uploadFile, Integer objectId, ProfileType type) throws IOException {
         String origName = uploadFile.getOriginalFilename();
         String ext = FilenameUtils.getExtension(origName);
         String fileUrl = fileRepository.storeByExt(UPLOAD_PATH, origName, uploadFile);
+        fileUrl = fileRepository.resolverFilePath(fileUrl, UPLOAD_PATH);
         long size = uploadFile.getSize();
-
         SystemProfile profile = new SystemProfile(fileUrl, null, ext, (int) size,
-                type.getType(), objectId, UserUtils.getUserAccount(), new Date(), null, null, "0");
+                type.getType(), objectId, UserUtils.getUserId(), new Date(), null, null);
         profileService.add(profile);
     }
 
@@ -288,8 +294,8 @@ public abstract class BaseController {
      * action_date BETWEEN '2015-10-16 00:00:00' AND '2015-10-16 23:59:59'
      *
      * @param selectDate
-     * @param startDate
-     * @param endDate
+     * @param dateStart
+     * @param dateEnd
      */
     public void betweenDate(String selectDate, Date dateStart, Date dateEnd) {
         Date date = new Date();

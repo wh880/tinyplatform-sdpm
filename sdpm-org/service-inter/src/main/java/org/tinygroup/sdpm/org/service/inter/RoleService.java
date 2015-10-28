@@ -68,14 +68,6 @@ public interface RoleService {
 
 
     /**
-     * 根据主键id查找角色菜单
-     *
-     * @param id 主键
-     * @return
-     */
-    OrgRoleMenu findRoleMenu(Integer id);
-
-    /**
      * 找出用户的所有菜单Id
      * @param userId
      * @return
@@ -90,8 +82,6 @@ public interface RoleService {
      */
     List<OrgRoleMenu> findMenuByRoleId(Integer roleId);
 
-
-    OrgRoleMenu findRoleMenuId(String id);
 
     /**
      * 新增有一个角色菜单
@@ -134,12 +124,12 @@ public interface RoleService {
 
 
     /**
-     * 根据Id查找角色用户
+     * 根据用户Id查找角色
      *
-     * @param id
+     * @param userId
      * @return
      */
-    OrgRoleUser findRoleUser(Integer id);
+    List<OrgRole> findRoleByUserId(String userId);
 
     /**
      * 根据角色id查找用户列表
@@ -150,12 +140,11 @@ public interface RoleService {
     List<OrgRoleUser> findUserByRoleId(Integer roleId);
 
     /**
-     * 添加角色用户
-     *
-     * @param
-     * @return
+     * 批量添加角色成员
+     * @param userIds 用户Ids
+     * @param roleId 角色id
      */
-    void addRoleUser(String[] array, Integer roleId);
+    void addRoleUser(String[] userIds, Integer roleId);
 
     /**
      * 批量添加用色用户

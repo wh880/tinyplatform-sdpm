@@ -16,10 +16,11 @@ import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTeam;
-import org.tinygroup.sdpm.project.service.inter.*;
+import org.tinygroup.sdpm.project.service.inter.BuildService;
+import org.tinygroup.sdpm.project.service.inter.ProjectStoryService;
+import org.tinygroup.sdpm.project.service.inter.TeamService;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
-
 import org.tinygroup.sdpm.util.CookieUtils;
 import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
@@ -293,7 +294,7 @@ public class BuildAction extends BaseController {
                 }
             }
         }
-        Pager<ProductStory> p = projectStoryService.findnoStoryPager(pagesize*(page - 1),pagesize,id,condition,searchInfos,groupOperate);
+        Pager<ProductStory> p = projectStoryService.findNoStoryPager(pagesize * (page - 1), pagesize, id, condition, searchInfos, groupOperate);
         model.addAttribute("storys",p);
 
         return "/project/task/relation-release/product-al-no-req-data.pagelet";

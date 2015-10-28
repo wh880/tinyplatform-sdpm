@@ -154,8 +154,10 @@ public class PlanAction  extends BaseController{
 	
 	@RequestMapping("/forword/{forwordPager}")
 	public String forword(@PathVariable(value="forwordPager")String forwordPager,Integer planId,Model model){
-		
-		model.addAttribute("plan",planService.findPlan(planId));
+
+		if(planId!=null&&planId>0){
+			model.addAttribute("plan",planService.findPlan(planId));
+		}
 		
 		if ("reRelateStory".equals(forwordPager)) {
 			return "/product/page/tabledemo/relation-plan/product-al-req.page";

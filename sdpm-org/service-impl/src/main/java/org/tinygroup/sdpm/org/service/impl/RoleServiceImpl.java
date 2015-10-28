@@ -1,4 +1,3 @@
-
 package org.tinygroup.sdpm.org.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +11,7 @@ import org.tinygroup.sdpm.org.dao.pojo.OrgRoleUser;
 import org.tinygroup.sdpm.org.service.inter.RoleService;
 import org.tinygroup.tinysqldsl.Pager;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -51,10 +51,6 @@ public class RoleServiceImpl implements RoleService {
     }
 
     ////////////////////////////
-    public OrgRoleMenu findRoleMenu(Integer id) {
-        return roleMenuManager.find(id);
-    }
-
     public List<OrgRoleMenu> findRoleMenuListByUser(String userId) {
         return roleMenuManager.findMenuListByUser(userId);
     }
@@ -97,17 +93,24 @@ public class RoleServiceImpl implements RoleService {
         }
     }
 
-    /////////////////////////
-    public OrgRoleUser findRoleUser(Integer id) {
-        return roleUserManager.find(id);
+    public List<OrgRole> findRoleByUserId(String userId) {
+        List<OrgRoleUser> orgRoleUserList = roleUserManager.findListByUserIds(userId);
+        List<OrgRole> roleList = new ArrayList<OrgRole>();
+        for (OrgRoleUser orgRoleUser : orgRoleUserList) {
+            OrgRole role = findRole(orgRoleUser.getOrgRoleId());
+            roleList.add(role);
+        }
+        return roleList;
     }
+
+    /////////////////////////
 
     public List<OrgRoleUser> findUserByRoleId(Integer roleId) {
         return roleUserManager.findUserIds(roleId);
     }
 
-    public void addRoleUser(String[] array, Integer roleId) {
-        roleUserManager.addRoleUser(array, roleId);
+    public void addRoleUser(String[] userIds, Integer roleId) {
+        roleUserManager.addRoleUser(userIds, roleId);
     }
 
     public void batchAddRoleUser(List<OrgRoleUser> orgRoleUserList) {

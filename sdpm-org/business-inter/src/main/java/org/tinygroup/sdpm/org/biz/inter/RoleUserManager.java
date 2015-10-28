@@ -17,6 +17,13 @@ public interface RoleUserManager {
     OrgRoleUser find(Integer id);
 
     /**
+     * 根据用户id，查找先关角色
+     * @param userId
+     * @return
+     */
+    public List<OrgRoleUser> findListByUserIds(String userId);
+
+    /**
      * 根据角色Id查询用户list
      *
      * @param id

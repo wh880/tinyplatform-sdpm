@@ -86,7 +86,9 @@ public class StdUtil {
             try {
                 stdMap.put(NameUtil.resolveNameAsc(standardField.getName()), standardField.getTitle());
             }catch (Exception e){
+                e.printStackTrace();
                 throw new RuntimeException("标准字段" + standardField.getId() + "出错");
+
             }            if(tableField.getPrimary()){
                 tablePrimary.put(t.getName(),NameUtil.resolveNameAsc(standardField.getName()));
             }

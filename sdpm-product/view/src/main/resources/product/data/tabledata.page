@@ -72,8 +72,8 @@
             #@td()<a href="${TINY_CONTEXT_PATH +adminPath}/product/storySpec/find/productDemandDetail?storyId=${story.storyId}">${story.storyTitle}</a>#end
             #@td()${story?.planName}#end
             #@td()${getDict("storySource",story?.storySource)}#end
-            #@td()${story?.storyOpenedName}#end
-            #@td()${story?.storyAssignedName}#end
+            #@td()${story?.storyOpenedBy?UserUtils.getUserById(story?.storyOpenedBy).orgUserRealName:""}#end
+            #@td()${story?.storyAssignedTo?UserUtils.getUserById(story?.storyAssignedTo).orgUserRealName:""}#end
             #@td()${story?.storyEstimate}#end
             #@td()${getDict("storyStatus",story?.storyStatus)}#end
             #@td()${getDict("storyStage",story?.storyStage)}#end
@@ -81,10 +81,16 @@
                  #foreach(m:menuManager?.getScopeMenus("product-de"))
                      #set(url=eval(m?.href))
                      #if(m?.id=="product-demand-review")
-                         #if(Integer.parseInt(story?.storyStatus)>0&&Integer.parseInt(story?.storyStatus)!=4)
+                         #if(Integer.parseInt(story?.storyStatus)==0||Integer.parseInt(story?.storyStatus)==3)
                          <a title="${m?.name}" class="ml-5" href="${TINY_CONTEXT_PATH +adminPath}${url}"><i class="${m?.icon}"></i></a>
                          #else
-                         &nbsp;<span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>
+                         <span style="color:grey"><i class="${m?.icon}" /></span>
+                         #end
+                     #elseif(m?.id=="product-demand-close")
+                         #if(Integer.parseInt(story?.storyStatus)!=2)
+                         <a title="${m?.name}" class="ml-5" href="${TINY_CONTEXT_PATH +adminPath}${url}"><i class="${m?.icon}"></i></a>
+                         #else
+                         <span style="color:grey"><i class="${m?.icon}" /></span>
                          #end
                      #else
                      <a title="${m?.name}" class="ml-5" href="${TINY_CONTEXT_PATH +adminPath}${url}"><i class="${m?.icon}"></i></a>

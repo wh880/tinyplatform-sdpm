@@ -12,10 +12,10 @@ public interface ProjectProductService {
 
     /**
      * 添加关联
-     * @param array
+     * @param productArray
      * @param projectId
      */
-    public void addLink(Integer[] array, Integer projectId);
+    public void addLink(Integer[] productArray, Integer projectId);
 
     /**
      * 查询所有产品
@@ -29,7 +29,7 @@ public interface ProjectProductService {
      * @param porjectId
      * @return
      */
-    public List<ProjectProduct> findProducts(Integer porjectId);
+    public List<ProjectProduct> findProducts(Integer projectId);
 
     /**
      * 通过prodcutId获得projectId列表

@@ -25,71 +25,62 @@ import java.util.Date;
  */
 public class SystemProfile implements Serializable {
 
+    public static String DELETE_YES = "1";
+    public static String DELETE_NO = "0";
     /**
      * 附件ID
      */
     private Integer fileId;
-
     /**
      * 附件地址
      *
      */
     private String filePathname;
-
     /**
      * 附件名
      *
      */
     private String fileTitle;
-
     /**
      * 附件扩展名
      *
      */
     private String fileExtension;
-
     /**
      * 附件大小
      *
      */
     private Integer fileSize;
-
     /**
      * 附件文件类型
      *
      */
     private String fileObjectType;
-
     /**
      * 附件对象ID
      *
      */
     private Integer fileObjectId;
-
     /**
      * 由谁添加
      *
      */
     private String fileAddedBy;
-
     /**
      * 附件添加日期
      *
      */
     private Date fileAddedDate;
-
     /**
      * 下载次数
      *
      */
     private Integer fileDownloads;
-
     /**
      * file_extra 无用
      *
      */
     private String fileExtra;
-
     /**
      * 是否删除
      *
@@ -99,7 +90,9 @@ public class SystemProfile implements Serializable {
     public SystemProfile() {
     }
 
-    public SystemProfile(String filePathname, String fileTitle, String fileExtension, Integer fileSize, String fileObjectType, Integer fileObjectId, String fileAddedBy, Date fileAddedDate, Integer fileDownloads, String fileExtra, String fileDeleted) {
+    public SystemProfile(String filePathname, String fileTitle, String fileExtension,
+                         Integer fileSize, String fileObjectType, Integer fileObjectId,
+                         String fileAddedBy, Date fileAddedDate, Integer fileDownloads, String fileExtra) {
         this.filePathname = filePathname;
         this.fileTitle = fileTitle;
         this.fileExtension = fileExtension;
@@ -110,7 +103,7 @@ public class SystemProfile implements Serializable {
         this.fileAddedDate = fileAddedDate;
         this.fileDownloads = fileDownloads;
         this.fileExtra = fileExtra;
-        this.fileDeleted = fileDeleted;
+        this.fileDeleted = DELETE_NO;
     }
 
     public Integer getFileId() {

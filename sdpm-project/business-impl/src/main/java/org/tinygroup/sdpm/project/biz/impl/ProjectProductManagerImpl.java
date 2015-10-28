@@ -19,18 +19,19 @@ public class ProjectProductManagerImpl implements ProjectProductManager {
     @Autowired
     private ProjectProductDao projectProductDao;
 
-    public void addLink(Integer[] array, Integer projectId) {
-        projectProductDao.deleteByProjectId(projectId);
+    public void addLink(Integer[] productArray, Integer projectId) {
+        if (productArray.length < 1) {
+            return;
+        }
         List<ProjectProduct> list = new ArrayList<ProjectProduct>();
-        for (Integer productId : array) {
+        for (Integer productId : productArray) {
             ProjectProduct t = new ProjectProduct();
             t.setProjectId(projectId);
             t.setProductId(productId);
             list.add(t);
         }
-        if (list != null || !list.isEmpty()) {
-            projectProductDao.batchInsert(list);
-        }
+        projectProductDao.deleteByProjectId(projectId);
+        projectProductDao.batchInsert(list);
     }
 
     public List<ProjectProduct> findList(ProjectProduct projectProduct) {

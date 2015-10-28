@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.org.dao.pojo.OrgRoleMenu;
-import org.tinygroup.sdpm.org.service.inter.RoleMenuService;
+import org.tinygroup.sdpm.org.service.inter.RoleService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +19,7 @@ import java.util.Map;
 @RequestMapping("/a/org/roleMenu")
 public class RoleMenuAction extends BaseController {
     @Autowired
-    private RoleMenuService roleMenuService;
+    private RoleService roleService;
 
     /**
      * 权限管理保存
@@ -33,8 +33,8 @@ public class RoleMenuAction extends BaseController {
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public Map<String, String> save(Integer id, String[] ids) {
         List<OrgRoleMenu> list = new ArrayList<OrgRoleMenu>();
-        List<OrgRoleMenu> orgRoleMenus = roleMenuService.findMenuByRoleId(id);
-        roleMenuService.batchDeleteRoleMenu(orgRoleMenus);
+        List<OrgRoleMenu> orgRoleMenus = roleService.findMenuByRoleId(id);
+        roleService.batchDeleteRoleMenu(orgRoleMenus);
         for (String i : ids) {
                 OrgRoleMenu orgRoleMenu = new OrgRoleMenu();
                 orgRoleMenu.setOrgRoleId(id);
@@ -42,7 +42,7 @@ public class RoleMenuAction extends BaseController {
                 list.add(orgRoleMenu);
         }
         if (!list.isEmpty()) {
-            roleMenuService.batchAddRoleMenu(list);
+            roleService.batchAddRoleMenu(list);
         }
         return resultMap(true, "保存成功！");
     }
@@ -57,7 +57,7 @@ public class RoleMenuAction extends BaseController {
     @RequiresPermissions("org-privilege-maintain")
     @RequestMapping("/show")
     public String showMenuIds(Integer id, Model model) {
-        List<OrgRoleMenu> orgRoleMenus = roleMenuService.findMenuByRoleId(id);
+        List<OrgRoleMenu> orgRoleMenus = roleService.findMenuByRoleId(id);
         model.addAttribute("orgRoleMenus", initMenuIdList(orgRoleMenus));
         return "organization/privilege/privilegeMaintain.page";
     }

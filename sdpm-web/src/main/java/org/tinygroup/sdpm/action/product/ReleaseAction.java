@@ -52,22 +52,17 @@ public class ReleaseAction extends BaseController {
     }
 
     @RequestMapping("/content")
-    public String release(HttpServletRequest request, Model model) {
-        int productId = -1;
-        if (request.getSession().getAttribute("sessionProductId") != null) {
-            productId = (Integer) request.getSession().getAttribute("sessionProductId");
-        }
-        Product product = productService.findProduct(productId);
+    public String release(@CookieValue("cookieProductId") String cookieProductId, HttpServletRequest request, Model model) {
+
+        Product product = productService.findProduct(Integer.parseInt(cookieProductId));
         model.addAttribute("product", product);
         return "/product/page/project/product-release.page";
     }
 
     @RequestMapping("/save")
-    public String save(ProductRelease productRelease, HttpServletRequest request, SystemAction systemAction, @RequestParam(value = "file", required = false) MultipartFile[] file, String[] title) throws IOException {
+    public String save(@CookieValue("cookieProductId") String cookieProductId,ProductRelease productRelease, HttpServletRequest request, SystemAction systemAction, @RequestParam(value = "file", required = false) MultipartFile[] file, String[] title) throws IOException {
 
-        if (request.getSession().getAttribute("sessionProductId") != null) {
-            productRelease.setProductId((Integer) (request.getSession().getAttribute("sessionProductId")));
-        }
+        productRelease.setProductId(Integer.parseInt(cookieProductId));
 
 
         ProductRelease release = releaseService.addRelease(productRelease);
@@ -173,14 +168,13 @@ public class ReleaseAction extends BaseController {
 
     @RequestMapping("list")
     public String list(ProductRelease release,
+                       @CookieValue("cookieProductId") String cookieProductId,
                        @RequestParam(required = false, defaultValue = "1") int page,
                        @RequestParam(required = false, defaultValue = "10") int pagesize,
                        @RequestParam(required = false, defaultValue = "releaseId") String order,
                        @RequestParam(required = false, defaultValue = "asc") String ordertype, Model model, HttpServletRequest request) {
 
-        if (request.getSession().getAttribute("sessionProductId") != null) {
-            release.setProductId((Integer) (request.getSession().getAttribute("sessionProductId")));
-        }
+        release.setProductId(Integer.parseInt(cookieProductId));
         Pager<ProductRelease> pagerProductRelease = releaseService.findReleasePager(page, pagesize, release, order, ordertype);
 
         model.addAttribute("productRelease", pagerProductRelease);
@@ -195,12 +189,8 @@ public class ReleaseAction extends BaseController {
     }
 
     @RequestMapping("/addRelease")
-    public String addRelease(HttpServletRequest request, Model model) {
-        int productId = -1;
-        if (request.getSession().getAttribute("sessionProductId") != null) {
-            productId = (Integer) request.getSession().getAttribute("sessionProductId");
-        }
-        Product product = productService.findProduct(productId);
+    public String addRelease(@CookieValue("cookieProductId") String cookieProductId,HttpServletRequest request, Model model) {
+        Product product = productService.findProduct(Integer.parseInt(cookieProductId));
         model.addAttribute("product", product);
         return "/product/page/tabledemo/product-addrelease.page";
     }

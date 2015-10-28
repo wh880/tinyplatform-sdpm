@@ -304,7 +304,7 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
         });
     }
 
-    public List<ProjectTask> query(ProjectTask projectTask, final OrderBy... orderBies) {
+    public List<ProjectTask> query(ProjectTask projectTask, final OrderBy... orderArgs) {
         if (projectTask == null) {
             projectTask = new ProjectTask();
         }
@@ -345,12 +345,12 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
                                 PROJECT_TASKTABLE.TASK_LAST_EDITED_BY.eq(t.getTaskLastEditedBy()),
                                 PROJECT_TASKTABLE.TASK_LAST_EDITED_DATE.eq(t.getTaskLastEditedDate()),
                                 PROJECT_TASKTABLE.TASK_DELETED.eq(t.getTaskDeleted())));
-                return addOrderByElements(select, orderBies);
+                return addOrderByElements(select, orderArgs);
             }
         });
     }
 
-    public Pager<ProjectTask> queryPagerByStuta(int start, int limit, ProjectTask projectTask, final String condition, final OrderBy... orderBies) {
+    public Pager<ProjectTask> queryPagerByStatus(int start, int limit, ProjectTask projectTask, final String condition, final OrderBy... orderArgs) {
         if (projectTask == null) {
             projectTask = new ProjectTask();
         }
@@ -438,7 +438,7 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
                                         PROJECT_TASKTABLE.TASK_LAST_EDITED_BY.eq(t.getTaskLastEditedBy()),
                                         PROJECT_TASKTABLE.TASK_LAST_EDITED_DATE.eq(t.getTaskLastEditedDate()),
                                         PROJECT_TASKTABLE.TASK_DELETED.eq(t.getTaskDeleted())));
-                return addOrderByElements(select, orderBies);
+                return addOrderByElements(select, orderArgs);
             }
         });
     }
@@ -491,7 +491,7 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
         });
     }
 
-    public Pager<ProjectTask> queryPager(int start, int limit, ProjectTask projectTask, final OrderBy... orderBies) {
+    public Pager<ProjectTask> queryPager(int start, int limit, ProjectTask projectTask, final OrderBy... orderArgs) {
         if (projectTask == null) {
             projectTask = new ProjectTask();
         }
@@ -534,7 +534,7 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
                                         PROJECT_TASKTABLE.TASK_LAST_EDITED_BY.eq(t.getTaskLastEditedBy()),
                                         PROJECT_TASKTABLE.TASK_LAST_EDITED_DATE.eq(t.getTaskLastEditedDate()),
                                         PROJECT_TASKTABLE.TASK_DELETED.eq(t.getTaskDeleted())));
-                return addOrderByElements(select, orderBies);
+                return addOrderByElements(select, orderArgs);
             }
         });
     }
@@ -677,13 +677,13 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
     }
 
     @LogMethod("addOrderByElements")
-    private Select addOrderByElements(Select select, OrderBy... orderBies) {
-        if (orderBies == null) {
+    private Select addOrderByElements(Select select, OrderBy... orderArgs) {
+        if (orderArgs == null) {
             return select;
         }
         List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
-        for (int i = 0; orderBies != null && i < orderBies.length; i++) {
-            OrderByElement tempElement = orderBies[i].getOrderByElement();
+        for (int i = 0; orderArgs != null && i < orderArgs.length; i++) {
+            OrderByElement tempElement = orderArgs[i].getOrderByElement();
             if (tempElement != null) {
                 orderByElements.add(tempElement);
             }

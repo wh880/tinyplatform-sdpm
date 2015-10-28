@@ -26,7 +26,6 @@
         * *
         * 如果有任何问题，请联系luo_guo@live.cn *
         **********************************************
-
     </greetings>
 
     <application-processors>
@@ -36,66 +35,35 @@
         <application-processor bean="tinyListenerProcessor"></application-processor>
         <application-processor bean="fileMonitorProcessor"></application-processor>
         <application-processor bean="tinyTemplateConfigProcessor"></application-processor>
-        <!--<application-processor bean="databaseInstallerProcessor"></application-processor>-->
-        <!--<application-processor bean=""></application-processor>-->
+        <!--数据库安装-->
+        <application-processor bean="databaseInstallerProcessor"></application-processor>
         <application-processor bean="stdProcessor"></application-processor>
         <application-processor bean="dictLoadProcessor"></application-processor>
     </application-processors>
 
     <!-- 这里是文件搜索器相关配置，如果配置请参考file-resolver-configuration配置手册 -->
-    <file-resolver-configuration
-            resolve-classpath="true">
+    <file-resolver-configuration resolve-classpath="true">
         <class-paths>
+            <!-- 文件上传配置 -->
+            <class-path path="{userfiles.basedir}"/>
+
             <!-- 需要加的自己署名 -->
             <!-- Hulk's Path -->
             <class-path path="E:\workcode\sdpm\sdpm-project\view\src\main\resources"/>
             <class-path path="E:\workcode\sdpm\sdpm-common\view\src\main\resources"/>
             <class-path path="E:\workcode\sdpm\sdpm-project\view\src\main\resources"/>
             <class-path path="E:\workcode\sdpm\sdpm-document\view\src\main\resources\"/>
-
             <!-- 徐丹洋-->
             <class-path path="D:\sdpm\sdpm-service\view\src\main\resources"/>
-            <!-- 杰森斯坦森-->
-            <class-path path="E:\Tiny_Fork\sdpm\sdpm-product\view\src\main\resources"/>
-            <class-path path="E:\Tiny_Fork\sdpm\sdpm-productLine\view\src\main\resources"/>
-            <class-path path="E:\Tiny_Fork\sdpm\sdpm-service\view\src\main\resources"/>
-            <class-path path="E:\Tiny_Fork\sdpm\sdpm-quality\view\src\main\resources"/>
-            <!-- 明明-->
-            <class-path path="D:\webspaces\sdpm\sdpm-service\view\src\main\resources"/>
-            <!-- 高志超-->
-            <class-path path="E:\git\sdpm\sdpm-org\view\src\main\resources"/>
-            <!-- 沈立宇-->
-            <class-path path="E:\TinyWorkSpace\sdpm\sdpm-project\view\src\main\resources"/>
-            <!-- 王莹-->
-            <class-path path="F:\daochu\sdpm\sdpm-project\view\src\main\resources"/>
-            <!-- 蒙初开-->
-            <class-path path="E:\sdpm\sdpm-project\view\src\main\resources"/>
-            <class-path path="E:\sdpm\sdpm-system\view\src\main\resources"/>
-            <class-path path="E:\sdpm\sdpm-product\view\src\main\resources"/>
-            <class-path path="E:\sdpm\sdpm-productLine\view\src\main\resources"/>
-			 <class-path path="E:\sdpm\sdpm-statistic\view\src\main\resources"/>
-
-            <!-- 陈朋-->
-            <class-path path="D:\GitFile\sdpm\sdpm-quality\view\src\main\resources"/>
-            <class-path path="D:\GitFile\sdpm\sdpm-document\view\src\main\resources"/>
-            <class-path path="D:\GitFile\sdpm\sdpm-statistic\view\src\main\resources"/>
-            <!-- 许斌-->
-            <class-path path="E:\workspace\project\sdpm\sdpm-product\view\src\main\resources"/>
-            <class-path path="E:\TinyWork\sdpm\sdpm-product\view\src\main\resources"/>
-            <class-path path="E:\TinyWork\sdpm\sdpm-productLine\view\src\main\resources"/>
-            <class-path path="E:\TinyWork\sdpm\sdpm-quality\view\src\main\resources"/>
-           
             <!--wll -->
             <class-path path="D:\java\eclipseworkspace\sdpm\sdpm-product\view\src\main\resources"/>
             <class-path path="D:\java\eclipseworkspace\sdpm\sdpm-quality\view\src\main\resources"/>
             <class-path path="D:\java\eclipseworkspace\sdpm\sdpm-project\view\src\main\resources"/>
             <class-path path="D:\java\eclipseworkspace\sdpm\sdpm-system\view\src\main\resources"/>
             <class-path path="D:\java\eclipseworkspace\sdpm\sdpm-document\view\src\main\resources"/>
-            <class-path path="D:\java\eclipseworkspace\sdpm\sdpm-productLine\view\src\main\resources"/>
         </class-paths>
         <include-patterns>
             <include-pattern pattern="org\.tinygroup\.(.)*\.jar"/>
-            <!--<include-pattern pattern="sdpm*\.jar"/>-->
         </include-patterns>
         <exclude-full-content></exclude-full-content>
     </file-resolver-configuration>
@@ -110,8 +78,7 @@
     <plugin-management>
         <plugin-configs>
             <plugin-config plugin-id="service" plugin-version="1.0">
-                <aop-config position="before" bean="serviceParamValidate"
-                            enable="false"/>
+                <aop-config position="before" bean="serviceParamValidate" enable="false"/>
             </plugin-config>
         </plugin-configs>
     </plugin-management>
@@ -141,9 +108,9 @@
 
     <!--注解加载规则配置 -->
     <annotation-configuration>
-        <annotation-mapping id="service" value="(.)*Service"></annotation-mapping>
-        <annotation-mapping id="service" value="(.)*ServiceAdapter"></annotation-mapping>
-        <annotation-mapping id="validate" value="org\.tiny\..*"></annotation-mapping>
+        <!--<annotation-mapping id="service" value="(.)*Service"></annotation-mapping>-->
+        <!--<annotation-mapping id="service" value="(.)*ServiceAdapter"></annotation-mapping>-->
+        <!--<annotation-mapping id="validate" value="org\.tiny\..*"></annotation-mapping>-->
     </annotation-configuration>
 
     <!--tiny-processor实现 -->
@@ -152,27 +119,22 @@
             <servlet-mapping url-pattern=".*"></servlet-mapping>
         </tiny-processor>
 
-        <!--
-        <tiny-processor id="umUploadTinyProcessor" class="umUploadTinyProcessor">
-                <servlet-mapping url-pattern=".*\.umupload"></servlet-mapping>
-        </tiny-processor>
-        -->
         <tiny-processor id="uiEngineTinyProcessor" class="uiEngineTinyProcessor">
             <servlet-mapping url-pattern=".*/uiengine\.uijs"></servlet-mapping>
             <servlet-mapping url-pattern=".*/uiengine\.uicss"></servlet-mapping>
         </tiny-processor>
-        <tiny-processor id="serviceTinyProcessor" class="serviceTinyProcessor">
-            <servlet-mapping url-pattern=".*\.servicexml"></servlet-mapping>
-            <servlet-mapping url-pattern=".*\.servicejson"></servlet-mapping>
-            <servlet-mapping url-pattern=".*\.servicepage"></servlet-mapping>
-            <servlet-mapping url-pattern=".*\.servicepagelet"></servlet-mapping>
-        </tiny-processor>
-        <tiny-processor id="mvcTinyProcessor" class="mvcTinyProcessor">
-            <servlet-mapping url-pattern=".*\.do"></servlet-mapping>
-        </tiny-processor>
-        <tiny-processor id="pageFlowTinyProcessor" class="pageFlowTinyProcessor">
-            <servlet-mapping url-pattern=".*\.pageflow"></servlet-mapping>
-        </tiny-processor>
+        <!--<tiny-processor id="serviceTinyProcessor" class="serviceTinyProcessor">-->
+        <!--<servlet-mapping url-pattern=".*\.servicexml"></servlet-mapping>-->
+        <!--<servlet-mapping url-pattern=".*\.servicejson"></servlet-mapping>-->
+        <!--<servlet-mapping url-pattern=".*\.servicepage"></servlet-mapping>-->
+        <!--<servlet-mapping url-pattern=".*\.servicepagelet"></servlet-mapping>-->
+        <!--</tiny-processor>-->
+        <!--<tiny-processor id="mvcTinyProcessor" class="mvcTinyProcessor">-->
+        <!--<servlet-mapping url-pattern=".*\.do"></servlet-mapping>-->
+        <!--</tiny-processor>-->
+        <!--<tiny-processor id="pageFlowTinyProcessor" class="pageFlowTinyProcessor">-->
+        <!--<servlet-mapping url-pattern=".*\.pageflow"></servlet-mapping>-->
+        <!--</tiny-processor>-->
         <tiny-processor id="fullContextProcessor" class="fullContextProcessor">
             <servlet-mapping url-pattern=".*\.evy"></servlet-mapping>
             <servlet-mapping url-pattern=".*\.fif"></servlet-mapping>
@@ -368,10 +330,10 @@
             <servlet-mapping url-pattern=".*\.xaf"></servlet-mapping>
             <servlet-mapping url-pattern=".*\.xof"></servlet-mapping>
         </tiny-processor>
-        <tiny-processor id="tinyTemplateProcessor" class="tinyTemplateProcessor">
-            <servlet-mapping url-pattern=".*\.page"></servlet-mapping>
-            <servlet-mapping url-pattern=".*\.pagelet"></servlet-mapping>
-        </tiny-processor>
+        <!--<tiny-processor id="tinyTemplateProcessor" class="tinyTemplateProcessor">-->
+        <!--<servlet-mapping url-pattern=".*\.page"></servlet-mapping>-->
+        <!--<servlet-mapping url-pattern=".*\.pagelet"></servlet-mapping>-->
+        <!--</tiny-processor>-->
     </tiny-processors>
 
     <!--tiny-filters配置 -->
@@ -424,8 +386,9 @@
             <filter-mapping url-pattern=".*"></filter-mapping>
         </tiny-filter>
         <!--<tiny-wrapper-filter id="tinyFilterWrapper" class="tinyFilterWrapper">
-            value值可以是多个实现http filter接口的bean名称，多个以","分隔开 <init-param name="filter_beans"
-            value="encondingHttpFilter"></init-param> <filter-mapping url-pattern=".*"></filter-mapping>
+            value值可以是多个实现http filter接口的bean名称，多个以","分隔开
+            <init-param name="filter_beans" value="encondingHttpFilter"></init-param>
+            <filter-mapping url-pattern=".*"></filter-mapping>
             </tiny-wrapper-filter> -->
     </tiny-filters>
     <!--tiny listener 配置 -->

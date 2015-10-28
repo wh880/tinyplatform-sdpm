@@ -17,11 +17,13 @@
 package org.tinygroup.sdpm.product.dao.pojo;
 
 
-/** 
+import java.io.Serializable;
+
+/**
  * 需求表述表
  * 
  */
-public class ProductStorySpec {
+public class ProductStorySpec implements Serializable{
 
 	/** 
 	 * 需求描述ID

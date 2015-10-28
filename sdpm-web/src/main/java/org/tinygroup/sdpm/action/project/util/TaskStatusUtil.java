@@ -37,15 +37,18 @@ public class TaskStatusUtil {
              * choose = 2 所有
              * choose = 7 指派给我
              */
-
             if ("1".equals(choose)) {
                 condition = "task_status != 6";
             } else if ("2".equals(choose)) {
                 condition = "";
             } else if ("7".equals(choose)) {
                 condition = "task_assigned_to = '" + userId + "'";
-            } else condition = "";
-        } else condition = "";
+            } else {
+                condition = "";
+            }
+        } else {
+            condition = "";
+        }
 
         if (!StringUtil.isBlank(moduleIds)) {
             if (StringUtil.isBlank(condition)) {
@@ -54,7 +57,6 @@ public class TaskStatusUtil {
                 condition = condition + " and task_module " + moduleIds;
             }
         }
-//task_model
         return condition;
     }
 }

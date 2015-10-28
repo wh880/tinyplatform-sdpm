@@ -23,6 +23,8 @@ import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.sdpm.util.CmsUtils;
 import org.tinygroup.sdpm.util.CookieUtils;
+import org.tinygroup.sdpm.util.LogUtil;
+import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -139,13 +141,14 @@ public class DocumentAction extends BaseController {
         if (projectId == 0) {
             return projectProductService.findLinkProduct();
         }
-        List<ProjectProduct> list = projectProductService.findProducts(projectId);
+        List<ProjectProduct> projectProductList = projectProductService.findProducts(projectId);
+
         List<Product> list2 = productService.findProductList(product);
-        Integer[] i = new Integer[list.size()];
+        Integer[] i = new Integer[projectProductList.size()];
         List<Integer> list1 = new ArrayList<Integer>();
-        for (int j = 0; j < list.size(); j++) {
+        for (int j = 0; j < projectProductList.size(); j++) {
             if (list2.get(j).getDeleted() == 0) {
-                list1.add(list.get(j).getProductId());
+                list1.add(projectProductList.get(j).getProductId());
             }
         }
         List<Product> productList = productService.findProductListByIds(list1.toArray(i));
@@ -160,7 +163,7 @@ public class DocumentAction extends BaseController {
      */
     @ResponseBody
     @RequestMapping("/ajax/moduleByDoclib")
-    public List<SystemModule> getModuleByDoclib(Integer libId) {
+    public List<SystemModule> getModuleByDocLib(Integer libId) {
         SystemModule module = new SystemModule();
         module.setModuleRoot(libId);
         module.setModuleType("doc");
@@ -230,16 +233,15 @@ public class DocumentAction extends BaseController {
     }
 
     @RequestMapping("/product/doc/list")
-    public String productList(DocumentDoc doc, HttpServletRequest request, Integer page, Integer limit, String order,
+    public String productList(DocumentDoc doc, HttpServletRequest request, Integer start, Integer limit, String order,
                               String ordertype, String groupOperate, SearchInfos searchInfos, Model model) {
-        doc.setDocProduct((Integer) request.getSession().getAttribute("sessionProductId"));
         doc.setDocLibId(1);
         doc.setDocDeleted("0");
         boolean asc = true;
         if ("desc".equals(ordertype)) {
             asc = false;
         }
-        Pager<DocumentDoc> docpager = docservice.findDocRetPager(limit * (page - 1), limit, doc, null, searchInfos, groupOperate, NameUtil.resolveNameDesc(order), asc);
+        Pager<DocumentDoc> docpager = docservice.findDocRetPager(start, limit, doc, null, searchInfos, groupOperate, NameUtil.resolveNameDesc(order), asc);
         model.addAttribute("pager", docpager);
         return "/product/data/archivedata.pagelet";
     }
@@ -252,13 +254,33 @@ public class DocumentAction extends BaseController {
     }
 
     @RequestMapping("/product/{type}/updateDoc")
-    public String saveDocument(DocumentDoc doc, @PathVariable(value = "type") String type, @RequestParam(value = "file", required = false) MultipartFile[] file, String[] title) throws IOException {
+    public String saveDocument( DocumentDoc doc, @PathVariable(value = "type") String type, @RequestParam(value = "file", required = false) MultipartFile[] file, String[] title) throws IOException {
         if ("save".equals(type)) {
+            doc.setDocAddedBy(UserUtils.getUserId());
             DocumentDoc document = docservice.createNewDoc(doc);
             uploads(file, document.getDocId(), ProfileType.DOCUMENT, title);
-            return "redirect:" + "/product/page/project/archive-list.page";
+            LogUtil.logWithComment(LogUtil.LogOperateObject.DOC,
+                    LogUtil.LogAction.CREATED,
+                    String.valueOf(document.getDocId()),
+                    UserUtils.getUserId(),
+                    String.valueOf(document.getDocProduct()),
+                    String.valueOf(document.getDocProject()),
+                    null,
+                    null,
+                    null);
+            return "redirect:" + "/a/product/doc/content";
         } else {
+            DocumentDoc document = docservice.findDocById(doc.getDocId());
             docservice.editDoc(doc);
+            LogUtil.logWithComment(LogUtil.LogOperateObject.DOC,
+                    LogUtil.LogAction.EDITED,
+                    String.valueOf(document.getDocId()),
+                    UserUtils.getUserId(),
+                    String.valueOf(document.getDocProduct()),
+                    String.valueOf(document.getDocProject()),
+                    document,
+                    doc,
+                    null);
             return "redirect:" + adminPath + "/document/product/doc";
         }
     }

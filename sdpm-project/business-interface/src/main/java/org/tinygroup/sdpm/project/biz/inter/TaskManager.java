@@ -17,11 +17,11 @@ public interface TaskManager {
      *
      * @return
      */
-    public List<ProjectTask> findAll();
+    List<ProjectTask> findAll();
 
-    public Integer batchSoftDel(String condition);
+    Integer batchSoftDel(String condition);
 
-    public int[] batchAdd(List<ProjectTask> taskList);
+    int[] batchAdd(List<ProjectTask> taskList);
 
     /**
      * 根据主键id查找用户
@@ -45,7 +45,7 @@ public interface TaskManager {
      * @param storyId
      * @return
      */
-    public Integer getTaskSumByStory(Integer storyId);
+    Integer getTaskSumByStory(Integer storyId);
 
     /**
      * 无状态查询
@@ -67,10 +67,9 @@ public interface TaskManager {
      * @param task
      * @param sortName
      * @param asc
-     * @param conditon
+     * @param condition
      * @return
      */
-
     public Pager<ProjectTask> findPagerByStatu(Integer start, Integer limit, ProjectTask task, String sortName, boolean asc, String conditon);
 
     /**
@@ -158,7 +157,6 @@ public interface TaskManager {
     Integer delete(int id);
 
     Integer updateCloseTask(ProjectTask task);
-
 
     List<TaskChartBean> findByGroup(String id);
 }

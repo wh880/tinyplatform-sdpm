@@ -49,10 +49,10 @@
     <div class="infoContent">
         <p class="titleName">提需求</p>
         #@elementItem()
-            #@colLabel()所属产品：#end
+            #@colLabel()<span class="c-red">*</span>所属产品：#end
 
             #@formControlDiv("col-4")
-                <div class="col-6">
+                <div class="col-5">
                     #@Tselect2F()
                         #@Tselect2Body("productId" cookieProductId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                             <option value="0">/</option>
@@ -80,18 +80,16 @@
                                 href=" ${TINY_CONTEXT_PATH +adminPath}/product/allproduct/addition">全部</a>#end
                     #end
                 </div>
-                <div class="col-6">
-                    #@Tselect2F()
-                        #@Tselect2Body("moduleId" "" {"class":"input-text select2","url":"/system/module/moduleList","ajaxType":
-                            "systemModel","data":"moduleType=product","relateElem":
-                            "relateModelTwo"}) ##,"multiple":"multiple"加上为多选项
-
+                <div class="col-7">
+                    <div class="col-4 text-c">所属模块：</div>
+                    <div class="col-8">
+                        #@Tselect2F()
+                            #@Tselect2Body("moduleId" "" {"class":"input-text select2","url":"/system/module/moduleList","ajaxType":
+                                "systemModel","data":"moduleType=product","relateElem":
+                                "relateModelTwo"}) ##,"multiple":"multiple"加上为多选项
+                            #end
                         #end
-
-                        #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH +adminPath}/product/page/tabledemo/addProduct.page"
-                                          class="r ">增加</a><a
-                                href=" ${TINY_CONTEXT_PATH +adminPath}/product/page/tabledemo/product-listall.page">全部</a>#end
-                    #end
+                    </div>
                 </div>
             #end
 
@@ -108,18 +106,18 @@
                     #end
 
                     #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH +adminPath}/product/plan/addplan"
-                                      class="r ">增加</a><a href="#"></a>#end
+                                      class="r ">增加</a>#end
                 #end
             #end
             #@validateDiv("col-2")#end
         #end
 
         #@elementItem()
-            #@colLabel()来源：#end
+            #@colLabel()<span class="c-red">*</span>来源：#end
             #@formControlDiv("col-4")
                 <div id="demand-sources">
                     #@Tselect2F()
-                        #@Tselect2Body("storySource" "IN" {"class":
+                        #@Tselect2Body("storySource" "0" {"class":
                             "input-text select2"}) ##,"multiple":"multiple"加上为多选项#for(stage:getDict("storySource"))
 
                             #foreach(source:getDict("storySource"))
@@ -131,7 +129,7 @@
                     #end
                 </div>
         <span class="customer-request" style="display:none">
-	                <div class="col-2 text-c">&nbsp;请求：
+	                <div class="col-2 text-c">&nbsp;<span class="c-red">*</span>请求：
                     </div>
 
 	                <div class="col-5">
@@ -142,7 +140,8 @@
                                     <option value="re?.clientRequestId">${re?.clientName+"/"+re?.requestTitle}</option>
                                 #end
                             #end
-
+                            #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH +adminPath}/service/request/form"
+                                  class="r ">增加</a>#end
                         #end
                     </div>
                 </span>
@@ -152,7 +151,7 @@
 
 
         #@elementItem()
-            #@colLabel()需求名称：#end
+            #@colLabel()<span class="c-red">*</span>需求名称：#end
             #@formControlDiv("col-4")
                 #tinyInput(
                     "text" "storyTitle" ""{"placeholder":"请输入需求名称","datatype":"*","nullmsg":"需求名称不能为空！","id":"email",
@@ -179,10 +178,10 @@
         #end
 
         #@elementItem()
-            #@colLabel()优先级：#end
+            #@colLabel()<span class="c-red">*</span>优先级：#end
             #@formControlDiv("col-4")
                 #@Tselect2F()
-                    #@Tselect2Body("storyPri" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                    #@Tselect2Body("storyPri" "" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         #foreach(pri:getDict("storyPri"))
                             <option value="${pri?.value}"> ${pri?.text}</option>
                         #end
@@ -206,10 +205,10 @@
         #end
 
         #@elementItem()
-            #@sdpmItem("由谁评审")
+            #@sdpmItem("<span class='c-red'>*</span>由谁评审")
                 #@Tselect2F()
                     #@Tselect2Body(
-                        "storyReviewedBy" "IN" {"class":"input-text select2","url":"/org/user/userList","ajaxType":
+                        "storyReviewedBy" "" {"class":"input-text select2","url":"/org/user/userList","ajaxType":
                         "orgUser","data":""})
 
                     #end
@@ -231,7 +230,7 @@
             #@checkboxBox()
 
                 #@label(labelFor="checkbox-6")
-                    #input(inputId="story_reviewed" inputName="storyReviewedBy1" inputType="checkbox" )
+                    #input(inputId="story_reviewed" inputName="storyReviewedBy" inputValue="0" inputType="checkbox" )
                     不需要评审
                 #end
             #end
@@ -242,7 +241,7 @@
             #@colLabel()抄送给：#end
             #@formControlDiv("col-4")
                 #@Tselect2F()
-                    #@Tselect2Body("storyMailto" "IN" {"class":"input-text select2","multiple":
+                    #@Tselect2Body("storyMailto" "0" {"class":"input-text select2","multiple":
                         "multiple"}) ##,"multiple":"multiple"加上为多选项
                     #end
                     <script>

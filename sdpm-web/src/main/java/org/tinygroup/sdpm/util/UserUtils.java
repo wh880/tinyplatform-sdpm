@@ -12,6 +12,7 @@ import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.menu.Menu;
 import org.tinygroup.sdpm.common.menu.MenuManager;
 import org.tinygroup.sdpm.common.menu.impl.MenuManagerImpl;
+import org.tinygroup.sdpm.org.dao.pojo.OrgRole;
 import org.tinygroup.sdpm.org.dao.pojo.OrgRoleMenu;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.impl.RoleServiceImpl;
@@ -42,7 +43,8 @@ public class UserUtils {
 
     /**
      * 根据ID获取用户
-     *当id为空或者为null返回新对象
+     * 当id为空或者为null返回新对象
+     *
      * @param id
      * @return 取不到返回new OrgUser();
      */
@@ -147,27 +149,37 @@ public class UserUtils {
         return null;
     }
 
-//    /**
-//     * 获取当前用户角色列表
-//     *
-//     * @return
-//     */
-//    public static List<Role> getRoleList() {
-//        @SuppressWarnings("unchecked")
-//        List<Role> roleList = (List<Role>) getCache(CACHE_ROLE_LIST);
-//        if (roleList == null) {
-//            User user = getUser();
-//            if (user.isAdmin()) {
-//                roleList = roleDao.findAllList(new Role());
-//            } else {
-//                Role role = new Role();
-//                role.getSqlMap().put("dsf", BaseService.dataScopeFilter(user.getCurrentUser(), "o", "u"));
-//                roleList = roleDao.findList(role);
-//            }
-//            putCache(CACHE_ROLE_LIST, roleList);
-//        }
-//        return roleList;
-//    }
+    /**
+     * 获取所有角色列表
+     *
+     * @return
+     */
+    public static List<OrgRole> getAllRoleList() {
+        List<OrgRole> roleList = (List<OrgRole>) CacheUtils.get(USER_CACHE, CACHE_ROLE_LIST);
+        if (roleList == null) {
+            roleList = roleService.findRoleList(null);
+            CacheUtils.put(USER_CACHE, CACHE_ROLE_LIST, roleList);
+        }
+        return roleList;
+    }
+
+    /**
+     * 获取当前用户角色列表
+     *
+     * @return
+     */
+    public static List<OrgRole> getUserRoleList() {
+        List<OrgRole> roleList = (List<OrgRole>) getCache(CACHE_ROLE_LIST);
+        if (roleList == null) {
+            Principal principal = getPrincipal();
+            if (principal == null) {
+                return null;
+            }
+            roleList = roleService.findRoleByUserId(principal.getId());
+            putCache(CACHE_ROLE_LIST, roleList);
+        }
+        return roleList;
+    }
 
     /**
      * 获取当前用户授权菜单

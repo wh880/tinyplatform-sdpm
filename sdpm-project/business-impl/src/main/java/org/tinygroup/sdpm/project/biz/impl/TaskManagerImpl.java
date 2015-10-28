@@ -51,15 +51,12 @@ public class TaskManagerImpl implements TaskManager {
         return taskDao.queryPager(start, limit, task, orderBy);
     }
 
-    public Pager<ProjectTask> findPagerByStatu(Integer start, Integer limit, ProjectTask task, String sortName, boolean asc, String conditon) {
+    public Pager<ProjectTask> findPagerByStatus(Integer start, Integer limit, ProjectTask task, String sortName, boolean asc, String condition) {
         if (StringUtil.isBlank(sortName)) {
-            return taskDao.queryPagerByStuta(start, limit, task, conditon);
-            //return taskDao.queryPager(start, limit, task);
+            return taskDao.queryPagerByStatus(start, limit, task, condition);
         }
         OrderBy orderBy = new OrderBy(sortName, asc);
-        return taskDao.queryPagerByStuta(start, limit, task, conditon, orderBy);
-        //return taskDao.queryPager(start, limit, task, orderBy);
-
+        return taskDao.queryPagerByStatus(start, limit, task, condition, orderBy);
     }
 
     public Pager<ProjectTask> findPagerByMe(Integer start, Integer limit, ProjectTask task, String sortName, boolean asc, OrgUser user) {

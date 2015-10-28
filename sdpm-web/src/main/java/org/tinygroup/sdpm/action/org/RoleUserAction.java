@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.org.dao.pojo.OrgRoleUser;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
-import org.tinygroup.sdpm.org.service.inter.RoleUserService;
+import org.tinygroup.sdpm.org.service.inter.RoleService;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 
 import java.util.List;
@@ -21,11 +21,9 @@ import java.util.List;
 @RequestMapping("/a/org/roleUser")
 public class RoleUserAction extends BaseController {
     @Autowired
-    RoleUserService roleUserService;
+    RoleService roleService;
     @Autowired
     UserService userService;
-
-
     /**
      * 显示角色的用户
      * @param id
@@ -36,7 +34,7 @@ public class RoleUserAction extends BaseController {
     @RequestMapping("/show")
     public String showUser(Integer id, Model model) {
         List<OrgUser> userList = userService.findUserList(new OrgUser());
-        List<OrgRoleUser> linkList = roleUserService.findUserByRoleId(id);
+        List<OrgRoleUser> linkList = roleService.findUserByRoleId(id);
         String linked = "";
         for (OrgRoleUser p : linkList) {
             if (linked != "") {
@@ -60,7 +58,7 @@ public class RoleUserAction extends BaseController {
     @RequiresPermissions("org-privilege-user")
     @RequestMapping("/save")
     public String save(Integer id, String[] array) {
-        roleUserService.addRoleUser(array, id);
+        roleService.addRoleUser(array, id);
         return "redirect:" + adminPath + "/org/privilege/list";
     }
 }
