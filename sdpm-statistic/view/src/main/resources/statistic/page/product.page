@@ -6,7 +6,6 @@
         #@tabHead()
             #include("/statistic/page/tab.page")
         #end
-
         #@tabBodyCol("ptop-5")
         #end
     <div style="float: left;width: 15%;">
@@ -18,7 +17,6 @@
         #end
             #include("/statistic/data/productData"+order+".page")
     </div>
-
 
     #end
 ##tab end
