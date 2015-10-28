@@ -39,6 +39,8 @@ public class CmsUtils {
     private static final String CMS_CACHE_DOCLIB_LIST = "docLibList";
     private static final String CMS_CACHE_TEAM_LIST_BY_PRODUCT = "teamList_product";
     private static final String CMS_CACHE_TEAM_LIST_BY_PRODUCT_LINE = "teamList_productLine";
+    private static final String CMS_CACHE_PRODUCT_LIST_BY_LINE_USER = "productList_line_user";
+    private static final String CMS_CACHE_PRODUCT_LINE_LIST_BY_USER = "productLineList_user";
 
     private static ProjectService projectService = SpringContextHolder.getBean(ProjectServiceImpl.class);
     private static ProductService productService = SpringContextHolder.getBean(ProductServiceImpl.class);
@@ -246,7 +248,7 @@ public class CmsUtils {
      * 获取产品线项目组员列表
      */
     public static String getUserListByProductLine(String productLineId){
-        String result = (String) CacheUtils.get(CMS_CACHE, CMS_CACHE_TEAM_LIST_BY_PRODUCT_LINE);
+        String result = (String) UserUtils.getCache(CMS_CACHE_TEAM_LIST_BY_PRODUCT_LINE);
         if(StringUtil.isBlank(result)) {
             StringBuffer users = new StringBuffer("");
             Product product = new Product();
@@ -261,91 +263,93 @@ public class CmsUtils {
                 }
             }
             result = users.toString();
-            CacheUtils.put(CMS_CACHE,CMS_CACHE_TEAM_LIST_BY_PRODUCT_LINE,result);
+            UserUtils.putCache(CMS_CACHE_TEAM_LIST_BY_PRODUCT_LINE,result);
         }
         return result;
-    }
-
-    /**
-     * 清除产品线项目组员列表
-     */
-    public static void removeUserListByProductLine(){
-        CacheUtils.remove(CMS_CACHE,CMS_CACHE_TEAM_LIST_BY_PRODUCT_LINE);
     }
 
     /**
      * 获取当前用户可访问的产品线
      */
     public static List<ProductLine> getProductLineListByUser(){
-        List<ProductLine> productLines = getProductLineList();
-        List<ProductLine> result = new ArrayList<ProductLine>();
-        String loginId = UserUtils.getUserId();
-        for(ProductLine productLine : productLines){
-            if(productLine.getAcl()<1){
-                result = productLines;
-                break;
-            }else if(productLine.getAcl()==1){
-                if(loginId.equals(productLine.getProductLineOwner())){
-                    result.add(productLine);
-                    continue;
-                }else if(getUserListByProductLine(String.valueOf(productLine.getProductLineId())).contains(loginId)){
-                    result.add(productLine);
-                    continue;
-                }
-            }else{
-                if(loginId.equals(productLine.getProductLineOwner())){
-                    result.add(productLine);
-                    continue;
-                }else if(getUserListByProductLine(String.valueOf(productLine.getProductLineId())).contains(loginId)){
-                    result.add(productLine);
-                    continue;
-                }else{
-                    for(OrgRole role : UserUtils.getUserRoleList()){
-                        if(productLine.getProductLineWhiteList().contains(String.valueOf(role.getOrgRoleId()))){
-                            result.add(productLine);
-                            break;
+        List<ProductLine> result = (List<ProductLine>) UserUtils.getCache(CMS_CACHE_PRODUCT_LINE_LIST_BY_USER);
+        if(result==null) {
+            List<ProductLine> productLines = getProductLineList();
+            result = new ArrayList<ProductLine>();
+            String loginId = UserUtils.getUserId();
+            for (ProductLine productLine : productLines) {
+                if (productLine.getAcl() < 1) {
+                    result = productLines;
+                    break;
+                } else if (productLine.getAcl() == 1) {
+                    if (loginId.equals(productLine.getProductLineOwner())) {
+                        result.add(productLine);
+                        continue;
+                    } else if (getUserListByProductLine(String.valueOf(productLine.getProductLineId())).contains(loginId)) {
+                        result.add(productLine);
+                        continue;
+                    }
+                } else {
+                    if (loginId.equals(productLine.getProductLineOwner())) {
+                        result.add(productLine);
+                        continue;
+                    } else if (getUserListByProductLine(String.valueOf(productLine.getProductLineId())).contains(loginId)) {
+                        result.add(productLine);
+                        continue;
+                    } else {
+                        for (OrgRole role : UserUtils.getUserRoleList()) {
+                            if (productLine.getProductLineWhiteList().contains(String.valueOf(role.getOrgRoleId()))) {
+                                result.add(productLine);
+                                break;
+                            }
                         }
                     }
                 }
             }
+            UserUtils.putCache(CMS_CACHE_PRODUCT_LINE_LIST_BY_USER,result);
         }
         return result;
     }
+
     /**
       * 获取当前产品线中用户可访问的产品
       */
-    public static List<Product> getProductListByUser(String productLineId){
-        List<Product> products = getProductListByLine(productLineId);
-        List<Product> result = new ArrayList<Product>();
-        String loginId = UserUtils.getUserId();
-        for(Product product : products){
-            if(product.getAcl()<1){
-                result = products;
-                break;
-            }else if(product.getAcl()==1){
-                if(loginId.equals(product.getProductOwner())){
-                    result.add(product);
-                    continue;
-                }else if(getUserListByProduct(String.valueOf(product.getProductId())).contains(loginId)){
-                    result.add(product);
-                    continue;
-                }
-            }else{
-                if(loginId.equals(product.getProductOwner())){
-                    result.add(product);
-                    continue;
-                }else if(getUserListByProductLine(String.valueOf(product.getProductLineId())).contains(loginId)){
-                    result.add(product);
-                    continue;
-                }else{
-                    for(OrgRole role : UserUtils.getUserRoleList()){
-                        if(product.getProductWhiteList().contains(String.valueOf(role.getOrgRoleId()))){
-                            result.add(product);
-                            break;
+    public static List<Product> getProductListByProductLineUser(String productLineId){
+        List<Product> result = (List<Product>) UserUtils.getCache(CMS_CACHE_PRODUCT_LIST_BY_LINE_USER);
+        if(result==null) {
+            List<Product> products = getProductListByLine(productLineId);
+            result = new ArrayList<Product>();
+            String loginId = UserUtils.getUserId();
+            for (Product product : products) {
+                if (product.getAcl() < 1) {
+                    result = products;
+                    break;
+                } else if (product.getAcl() == 1) {
+                    if (loginId.equals(product.getProductOwner())) {
+                        result.add(product);
+                        continue;
+                    } else if (getUserListByProduct(String.valueOf(product.getProductId())).contains(loginId)) {
+                        result.add(product);
+                        continue;
+                    }
+                } else {
+                    if (loginId.equals(product.getProductOwner())) {
+                        result.add(product);
+                        continue;
+                    } else if (getUserListByProduct(String.valueOf(product.getProductId())).contains(loginId)) {
+                        result.add(product);
+                        continue;
+                    } else {
+                        for (OrgRole role : UserUtils.getUserRoleList()) {
+                            if (product.getProductWhiteList().contains(String.valueOf(role.getOrgRoleId()))) {
+                                result.add(product);
+                                break;
+                            }
                         }
                     }
                 }
             }
+            UserUtils.putCache(CMS_CACHE_PRODUCT_LIST_BY_LINE_USER,result);
         }
         return result;
     }

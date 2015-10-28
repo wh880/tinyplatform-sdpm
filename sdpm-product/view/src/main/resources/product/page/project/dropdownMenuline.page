@@ -2,21 +2,20 @@
 
 #@navSelect2("productLine" "productLine")
     #@navSelect2Nav()
-        #if(cookieProductLineId&&CmsUtils.getProductLineList()?.size()>0)
-            #for(productLine : CmsUtils.getProductLineList())
+        #if(cookieProductLineId&&CmsUtils.getProductLineListByUser()?.size()>0)
+            #for(productLine : CmsUtils.getProductLineListByUser())
                 #if(productLine?.productLineId == cookieProductLineId)
                     ${productLine?.productLineName}
                 #end
             #end
         #else
-        #if(CmsUtils.getProductLineList()?.size()>0)
+        #if(CmsUtils.getProductLineListByUser()?.size()>0)
         <script type="text/javascript">
             $(function(){
-                $.cookie('cookieProductLineId',"${CmsUtils.getProductLineList()?.get(0)?.productLineId}",{path:"/"});
+                $.cookie('cookieProductLineId',"${CmsUtils.getProductLineListByUser()?.get(0)?.productLineId}",{path:"/"});
                 window.location.reload();
             })
         </script>
-            ${CmsUtils.getProductList()?.get(0)?.productName}
         #else
         <script type="text/javascript">
             $(function(){
