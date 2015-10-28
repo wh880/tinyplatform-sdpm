@@ -28,7 +28,7 @@ public interface ProjectTaskDao extends BaseDao<ProjectTask, Integer> {
 
     public Integer batchSoftDel(String condition);
 
-    public Pager<ProjectTask> queryPagerByStuta(int start, int limit, ProjectTask projectTask, final String condition, final OrderBy... orderBies);
+    public Pager<ProjectTask> queryPagerByStatus(int start, int limit, ProjectTask projectTask, final String condition, final OrderBy... orderBies);
 
     /**
      * 根据storyid相关任务数量

@@ -52,10 +52,10 @@ public class TaskManagerImpl implements TaskManager {
 
     public Pager<ProjectTask> findPagerByStatus(Integer start, Integer limit, ProjectTask task, String sortName, boolean asc, String condition) {
         if (StringUtil.isBlank(sortName)) {
-            return taskDao.queryPagerByStuta(start, limit, task, condition);
+            return taskDao.queryPagerByStatus(start, limit, task, condition);
         }
         OrderBy orderBy = new OrderBy(sortName, asc);
-        return taskDao.queryPagerByStuta(start, limit, task, condition, orderBy);
+        return taskDao.queryPagerByStatus(start, limit, task, condition, orderBy);
     }
 
     public ProjectTask add(ProjectTask task) {
