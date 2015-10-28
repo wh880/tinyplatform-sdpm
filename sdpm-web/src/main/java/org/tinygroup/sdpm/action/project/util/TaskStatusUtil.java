@@ -15,12 +15,13 @@ public class TaskStatusUtil {
     private static Map<String, String> status = new HashMap<String, String>();
 
     static {
+        status.put("1", "completeByMe");
         status.put("2", "task_status = 1");
         status.put("3", "task_status = 2");
         status.put("4", "task_status != 3 ");
         status.put("5", "task_status = 3");
         status.put("6", "task_status = 6");
-        status.put("7", "");//已延期
+        status.put("7", "overTime");//已延期
         status.put("8", "");//需求变动
         status.put("9", "task_status = 5");
         status.put("0", "task_status !=6");

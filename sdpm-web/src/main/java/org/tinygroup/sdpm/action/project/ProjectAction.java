@@ -112,7 +112,7 @@ public class ProjectAction extends BaseController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String addPage(Model model, HttpServletResponse response,
+    public String addForm(Model model, HttpServletResponse response,
                           HttpServletRequest request, Project project,
                           Integer[] linkProduct, Integer[] whiteList) {
         String whiteListStr = "";
@@ -132,9 +132,6 @@ public class ProjectAction extends BaseController {
         projectProductService.addLink(linkProduct, tProject.getProjectId());
 
         CookieUtils.setCookie(response, TaskAction.COOKIE_PROJECT_ID, tProject.getProjectId().toString());
-//        request.getSession().setAttribute("selProject", tProject);
-//        List<Project> list = projectService.findList();
-//        request.getSession().setAttribute("projectList", list);
         CmsUtils.removeProjectList();
         return "project/allProject.page";
     }

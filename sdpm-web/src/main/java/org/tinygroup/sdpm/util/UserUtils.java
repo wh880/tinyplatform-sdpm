@@ -155,10 +155,10 @@ public class UserUtils {
      * @return
      */
     public static List<OrgRole> getAllRoleList() {
-        List<OrgRole> roleList = (List<OrgRole>) getCache(CACHE_ROLE_LIST);
+        List<OrgRole> roleList = (List<OrgRole>) CacheUtils.get(USER_CACHE, CACHE_ROLE_LIST);
         if (roleList == null) {
             roleList = roleService.findRoleList(null);
-            putCache(CACHE_ROLE_LIST, roleList);
+            CacheUtils.put(USER_CACHE, CACHE_ROLE_LIST, roleList);
         }
         return roleList;
     }

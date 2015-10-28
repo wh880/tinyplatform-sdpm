@@ -50,8 +50,6 @@
             $(".projectMore").click(function (e) {
                 $("#taskTable").attr("data-url", actionUrl + "&statu=" + $(this).attr("val"));
                 $("#taskTable").trigger("refresh");
-                //console.log(actionUrl);
-//            触发ajax请求
             });
         });
     </script>

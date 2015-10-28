@@ -11,6 +11,7 @@ import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.action.project.util.TaskStatusUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.dict.util.DictUtil;
+import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.service.StoryService;
@@ -259,7 +260,13 @@ public class TaskAction extends BaseController {
         }
 
         String condition = TaskStatusUtil.getCondition(statu, choose, UserUtils.getUserId(), moduleIds);
-        Pager<ProjectTask> taskPager = taskService.findTaskPager(start, limit, task, order, asc, condition);
+        Pager<ProjectTask> taskPager;
+        if (condition.equals("completeByMe")) {
+            OrgUser user = UserUtils.getUser();
+            taskPager = taskService.findPagerTaskByMe(start, limit, task, order, asc, user);
+        } else {
+            taskPager = taskService.findTaskPager(start, limit, task, order, asc, condition);
+        }
         model.addAttribute("taskPager", taskPager);
         model.addAttribute("statu", statu);
         model.addAttribute("choose", choose);

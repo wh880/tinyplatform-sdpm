@@ -8,9 +8,11 @@ import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
 import org.tinygroup.sdpm.project.service.inter.ProjectProductService;
+import org.tinygroup.sdpm.util.CmsUtils;
 import org.tinygroup.sdpm.util.CookieUtils;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,24 +26,20 @@ public class ProjectProductAction extends BaseController {
 
     @RequestMapping("/findLinkProduct")
     public String findLinkProduct(Model model, HttpServletRequest request) {
-        List<Product> productList = projectProductService.findLinkProduct();
+        List<Product> productList = CmsUtils.getProductList();
         Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
         List<ProjectProduct> linkList = projectProductService.findProducts(projectId);
-        String linked = "";
+        List<String> linkIdList = new ArrayList<String>();
         for (ProjectProduct p : linkList) {
-            if (linked != "") {
-                linked = linked + "," + p.getProductId();
-            } else {
-                linked = linked + p.getProductId();
-            }
+            linkIdList.add(p.getProductId().toString());
         }
-        model.addAttribute("linkString", linked);
+        model.addAttribute("linkIdList", linkIdList);
         model.addAttribute("productList", productList);
         return "project/product/index.page";
     }
 
     @RequestMapping("/save")
-    public String save(Integer[] array, Model model, HttpServletRequest request) {
+    public String save(Integer[] array, HttpServletRequest request) {
         Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
         projectProductService.addLink(array, projectId);
         return "redirect:" + adminPath + "/project/product/findLinkProduct";

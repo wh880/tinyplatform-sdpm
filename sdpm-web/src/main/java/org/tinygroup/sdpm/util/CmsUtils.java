@@ -7,8 +7,7 @@ import org.tinygroup.sdpm.document.service.inter.DocService;
 import org.tinygroup.sdpm.org.dao.pojo.OrgRole;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.impl.UserServiceImpl;
-import org.tinygroup.sdpm.org.service.inter.UserService;
-import org.tinygroup.sdpm.product.dao.pojo.Product;
+import org.tinygroup.sdpm.org.service.inter.UserService;import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.product.service.impl.ProductServiceImpl;
 import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
@@ -46,7 +45,6 @@ public class CmsUtils {
     private static ProductLineService productLineService = SpringContextHolder.getBean(ProductLineServiceImpl.class);
     private static DocService docService = SpringContextHolder.getBean(DocServiceImpl.class);
     private static ProjectProductService projectProductService= SpringContextHolder.getBean(ProjectProductServiceImpl.class);
-    private static UserService userService= SpringContextHolder.getBean(UserServiceImpl.class);
     private static TeamService teamService= SpringContextHolder.getBean(TeamServiceImpl.class);
     /**
      * 获得项目列表

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
+import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.project.biz.inter.TaskManager;
 import org.tinygroup.sdpm.project.dao.ProjectTaskDao;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
@@ -58,6 +59,12 @@ public class TaskManagerImpl implements TaskManager {
         return taskDao.queryPagerByStatus(start, limit, task, condition, orderBy);
     }
 
+    public Pager<ProjectTask> findPagerByMe(Integer start, Integer limit, ProjectTask task, String sortName, boolean asc, OrgUser user) {
+        OrderBy orderBy = new OrderBy(sortName, asc);
+        return taskDao.queryPagerByMe(start, limit, task, user, orderBy);
+    }
+
+
     public ProjectTask add(ProjectTask task) {
         return taskDao.add(task);
     }
@@ -92,7 +99,7 @@ public class TaskManagerImpl implements TaskManager {
 
     public List<TaskChartBean> findByGroup(String id) {
         if ("1".equals(id)) {
-            return null;
+            return taskDao.queryChartProject();
         } else if ("2".equals(id)) {
             return taskDao.queryChartModule();
         } else if ("3".equals(id)) {
