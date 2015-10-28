@@ -80,6 +80,10 @@ public class ProjectManagerImpl implements ProjectManager {
         return projectDao.edit(project);
     }
 
+    public Integer batchDelete(Integer[] projectIds) {
+        return projectDao.deleteByKeys(projectIds);
+    }
+
     public List<Project> findList(List<Integer> ids) {
         if (ids.isEmpty()) {
             return null;

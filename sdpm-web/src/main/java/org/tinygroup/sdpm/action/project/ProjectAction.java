@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.util.DateUtils;
@@ -59,6 +60,25 @@ public class ProjectAction extends BaseController {
             projectService.findById(projectId);
         }
         return "project/addProject.page";
+    }
+
+    @ResponseBody
+    @RequestMapping("/batchDelete")
+    public Map batchDelete(@RequestParam(value = "ids") String projectIds) {
+        if (StringUtil.isBlank(projectIds)) {
+            return resultMap(false, "请选择删除的项目");
+        }
+        String[] split = projectIds.split(",");
+        if (split == null || split.length == 0) {
+            return resultMap(false, "请选择删除的项目");
+        }
+        ArrayList<Integer> ids = new ArrayList<Integer>();
+        for (String id : split) {
+            ids.add(Integer.valueOf(id));
+        }
+        Integer[] integers = new Integer[ids.size()];
+        projectService.batchDeleteProject(ids.toArray(integers));
+        return resultMap(true, "删除项目成功");
     }
 
     @RequestMapping("/findProjects")

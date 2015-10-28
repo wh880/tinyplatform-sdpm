@@ -34,12 +34,11 @@ public interface ProjectService {
     List<Project> findProjects(Project project);
 
     /**
-     * 根据项目名称查找项目，项目名称要保证唯一
-     *
-     * @param projectName
+     * 批量删除项目
+     * @param projectIds
      * @return
      */
-    Project findByName(String projectName);
+    Integer batchDeleteProject(Integer... projectIds);
 
     /**
      * 查询所有项目

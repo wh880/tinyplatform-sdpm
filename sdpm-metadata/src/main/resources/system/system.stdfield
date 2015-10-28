@@ -15,7 +15,7 @@
   <standard-field id="048d96b083e74cc1a334e0f33f2c0020" name="search_edited_date" title="搜索编辑日期" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff"/>
   <standard-field id="db6bd96455a544c8b827b17b531f7cbc" name="dict_id" title="字典项ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" default=""/>
   <standard-field id="45e660e7d07b46aca87f8e2c74d5decd" name="dict_key" title="字典key值" business-type-id="095e594e1550424b9643c7e2279e85be"/>
-  <standard-field id="e8aa6f77988e4346bbafa0cfcb177836" name="dict_value" title="字典value值" business-type-id="095e594e1550424b9643c7e2279e85be"/>
+  <standard-field id="e8aa6f77988e4346bbafa0cfcb177836" name="dict_value" title="字典value值" business-type-id="a2c7afa4de724b0cb8f2f46fd8389a37"/>
   <standard-field id="f5c70ee6582347dea45bd6401b4f89b2" name="dict_sort" title="字典项序号" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
   <standard-field id="02058421c0be48dcab02f68cf7490361" name="effort_id" title="日志编号" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" default="">
     <description></description>
@@ -60,7 +60,7 @@
   <standard-field id="a5526dab212f42e6b680bafef91b87d5" name="module_order" title="模块次序" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" default="0"/>
   <standard-field id="5d794a1e323844e991dcfcb834dfd0aa" name="module_type" title="模块类型" business-type-id="095e594e1550424b9643c7e2279e85be" default=""/>
   <standard-field id="9164a45fb4cc4abc98dacebd2bfcde85" name="module_owner" title="模块归属" business-type-id="095e594e1550424b9643c7e2279e85be"/>
-  <standard-field id="1518400fe07c4cc3a78bd5c6023f9edb" name="module_path" title="模块地址" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
+  <standard-field id="1518400fe07c4cc3a78bd5c6023f9edb" name="module_path" title="模块地址" business-type-id="27ebfcdc558c477da425a46e566d4637" default=""/>
   <standard-field id="51b35d0098cc46e4ae14e922f78269f6" name="action_id" title="系统日志ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
   <standard-field id="19f5ad5730c0424fa5ebe12f141aba90" name="action_object_type" title="对象类型" business-type-id="095e594e1550424b9643c7e2279e85be"/>
   <standard-field id="d5e3e1f45ae34d569cf8ecd010ec4437" name="action_object_id" title="对象ID" business-type-id="27ebfcdc558c477da425a46e566d4637"/>

@@ -65,14 +65,22 @@ public interface ProjectManager {
      * @return
      */
     Integer update(Project project);
-    
+
     /**
      * 删除
      * @param projectId
      * @return
      */
     Integer delete(int projectId);
-    
+
+    /**
+     * 批量删除
+     *
+     * @param projectIds
+     * @return
+     */
+    Integer batchDelete(Integer[] projectIds);
+
     /**
      * 根据对象查找(排序)
      * @param project
