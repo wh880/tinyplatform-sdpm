@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.project.service.inter;
 
+import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
 import org.tinygroup.sdpm.project.dao.pojo.TaskChartBean;
 import org.tinygroup.tinysqldsl.Pager;
@@ -53,6 +54,19 @@ public interface TaskService {
      * @return
      */
     public List<ProjectTask> findListTask(ProjectTask task);
+
+    /**
+     * 由我完成分页查询
+     *
+     * @param start
+     * @param limit
+     * @param task
+     * @param sortName
+     * @param asc
+     * @param user
+     * @return
+     */
+    public Pager<ProjectTask> findPagerTaskByMe(Integer start, Integer limit, ProjectTask task, String sortName, boolean asc, OrgUser user);
 
     /**
      * 分页查询

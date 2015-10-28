@@ -307,14 +307,13 @@ public class ClientAction extends BaseController {
 
     /**
      * 新建客户时判断客户是否存在
-     * @param name
+     *
      * @param param
      * @return
      */
     @ResponseBody
     @RequestMapping(value = "/judgeClient")
-    public Map judgeClient(String name, String param) {
-        Map<String, String> map = new HashMap<String, String>();
+    public Map judgeClient(String param) {
         if (param != null) {
             String clientName = param;
             ServiceClient serviceClient = clientService.judgeClient(clientName);

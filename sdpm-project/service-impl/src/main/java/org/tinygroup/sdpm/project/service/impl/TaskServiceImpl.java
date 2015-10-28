@@ -3,6 +3,7 @@ package org.tinygroup.sdpm.project.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.tinygroup.commons.tools.StringUtil;
+import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.product.biz.inter.StoryManager;
 import org.tinygroup.sdpm.project.biz.inter.TaskManager;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
@@ -68,6 +69,10 @@ public class TaskServiceImpl implements TaskService {
 
     public List<ProjectTask> findListTask(ProjectTask task) {
         return taskManager.findList(task);
+    }
+
+    public Pager<ProjectTask> findPagerTaskByMe(Integer start, Integer limit, ProjectTask task, String sortName, boolean asc, OrgUser user) {
+        return taskManager.findPagerByMe(start, limit, task, sortName, asc, user);
     }
 
     public Pager<ProjectTask> findPagerTask(Integer start, Integer limit, ProjectTask task, String sortName, boolean asc, String condititon) {

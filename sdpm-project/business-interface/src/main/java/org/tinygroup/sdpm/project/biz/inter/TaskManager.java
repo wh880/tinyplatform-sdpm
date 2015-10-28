@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.project.biz.inter;
 
+import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
 import org.tinygroup.sdpm.project.dao.pojo.TaskChartBean;
 import org.tinygroup.tinysqldsl.Pager;
@@ -69,8 +70,21 @@ public interface TaskManager {
      * @param conditon
      * @return
      */
+
     public Pager<ProjectTask> findPagerByStatu(Integer start, Integer limit, ProjectTask task, String sortName, boolean asc, String conditon);
 
+    /**
+     * 由我完成
+     *
+     * @param start
+     * @param limit
+     * @param task
+     * @param sortName
+     * @param asc
+     * @param user
+     * @return
+     */
+    public Pager<ProjectTask> findPagerByMe(Integer start, Integer limit, ProjectTask task, String sortName, boolean asc, OrgUser user);
     /**
      * 新增有一个用户
      *

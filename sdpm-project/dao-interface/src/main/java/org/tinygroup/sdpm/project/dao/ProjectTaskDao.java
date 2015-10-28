@@ -18,6 +18,7 @@ package org.tinygroup.sdpm.project.dao;
 
 import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
+import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
 import org.tinygroup.sdpm.project.dao.pojo.TaskChartBean;
 import org.tinygroup.tinysqldsl.Pager;
@@ -30,6 +31,17 @@ public interface ProjectTaskDao extends BaseDao<ProjectTask, Integer> {
 
     public Pager<ProjectTask> queryPagerByStuta(int start, int limit, ProjectTask projectTask, final String condition, final OrderBy... orderBies);
 
+    /**
+     * 由我解决
+     *
+     * @param start
+     * @param limit
+     * @param projectTask
+     * @param condition
+     * @param orderBies
+     * @return
+     */
+    public Pager<ProjectTask> queryPagerByMe(int start, int limit, ProjectTask projectTask, final OrgUser user, final OrderBy... orderBies);
     /**
      * 根据storyid相关任务数量
      *
@@ -93,6 +105,13 @@ public interface ProjectTaskDao extends BaseDao<ProjectTask, Integer> {
      * @return
      */
     public List<TaskChartBean> queryChartModule();
+
+    /**
+     * 根据项目进行分类
+     *
+     * @return
+     */
+    public List<TaskChartBean> queryChartProject();
 
     /**
      * 根据任务类型进行分类
