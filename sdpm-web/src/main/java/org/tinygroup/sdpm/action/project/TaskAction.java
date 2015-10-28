@@ -265,7 +265,7 @@ public class TaskAction extends BaseController {
             OrgUser user = UserUtils.getUser();
             taskPager = taskService.findPagerTaskByMe(start, limit, task, order, asc, user);
         } else {
-            taskPager = taskService.findPagerTask(start, limit, task, order, asc, condition);
+            taskPager = taskService.findTaskPager(start, limit, task, order, asc, condition);
         }
         model.addAttribute("taskPager", taskPager);
         model.addAttribute("statu", statu);

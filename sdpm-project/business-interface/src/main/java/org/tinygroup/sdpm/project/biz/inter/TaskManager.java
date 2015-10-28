@@ -70,7 +70,7 @@ public interface TaskManager {
      * @param condition
      * @return
      */
-    public Pager<ProjectTask> findPagerByStatu(Integer start, Integer limit, ProjectTask task, String sortName, boolean asc, String conditon);
+    public Pager<ProjectTask> findPagerByStatus(Integer start, Integer limit, ProjectTask task, String sortName, boolean asc, String conditon);
 
     /**
      * 由我完成

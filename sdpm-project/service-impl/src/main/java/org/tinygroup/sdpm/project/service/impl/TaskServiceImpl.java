@@ -75,7 +75,7 @@ public class TaskServiceImpl implements TaskService {
         return taskManager.findPagerByMe(start, limit, task, sortName, asc, user);
     }
 
-    public Pager<ProjectTask> findPagerTask(Integer start, Integer limit, ProjectTask task, String sortName, boolean asc, String condititon) {
+    public Pager<ProjectTask> findTaskPager(Integer start, Integer limit, ProjectTask task, String sortName, boolean asc, String condititon) {
         if (!StringUtil.isBlank(condititon)) {
             return taskManager.findPagerByStatus(start, limit, task, sortName, asc, condititon);
         }
