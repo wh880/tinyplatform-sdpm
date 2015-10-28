@@ -11,14 +11,13 @@ import java.util.List;
  */
 public class ModuleUtil {
 
-    private static void mergeModuleContidion(StringBuffer condition,Integer moduleId , ModuleService moduleService){
+    private static void mergeModuleCondition(StringBuffer condition, int moduleId, ModuleService moduleService) {
         SystemModule systemModule = new SystemModule();
         systemModule.setModuleParent(moduleId);
         List<SystemModule> systemModules = moduleService.findModuleList(systemModule);
         if(systemModules.size()>0){
             for(SystemModule module : systemModules){
-
-                mergeModuleContidion(condition,module.getModuleId(),moduleService);
+                mergeModuleCondition(condition, module.getModuleId(), moduleService);
             }
         }
         if(condition.toString().endsWith("(")){
@@ -65,7 +64,7 @@ public class ModuleUtil {
         if(moduleId==null||moduleId<1)return "";
         StringBuffer stringBuffer = new StringBuffer();
         stringBuffer.append("in (");
-        mergeModuleContidion(stringBuffer,moduleId,moduleService);
+        mergeModuleCondition(stringBuffer, moduleId, moduleService);
         stringBuffer.append(")");
         return stringBuffer.toString();
     }
@@ -79,7 +78,7 @@ public class ModuleUtil {
         List<SystemModule> systemModules = moduleService.findModuleList(systemModule);
         if(systemModules.size()>0){
             for(SystemModule module : systemModules){
-                mergeModuleContidion(stringBuffer,module.getModuleId(),moduleService);
+                mergeModuleCondition(stringBuffer, module.getModuleId(), moduleService);
             }
         }
         stringBuffer.append(")");

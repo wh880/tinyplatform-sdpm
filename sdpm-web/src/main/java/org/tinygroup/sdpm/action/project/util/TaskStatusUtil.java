@@ -15,7 +15,6 @@ public class TaskStatusUtil {
     private static Map<String, String> status = new HashMap<String, String>();
 
     static {
-        //status.put("1","statu = 2");
         status.put("2", "task_status = 1");
         status.put("3", "task_status = 2");
         status.put("4", "task_status != 3 ");
@@ -37,15 +36,18 @@ public class TaskStatusUtil {
              * choose = 2 所有
              * choose = 7 指派给我
              */
-
             if ("1".equals(choose)) {
                 condition = "task_status != 6";
             } else if ("2".equals(choose)) {
                 condition = "";
             } else if ("7".equals(choose)) {
                 condition = "task_assigned_to = '" + userId + "'";
-            } else condition = "";
-        } else condition = "";
+            } else {
+                condition = "";
+            }
+        } else {
+            condition = "";
+        }
 
         if (!StringUtil.isBlank(moduleIds)) {
             if (StringUtil.isBlank(condition)) {
@@ -54,7 +56,6 @@ public class TaskStatusUtil {
                 condition = condition + " and task_module " + moduleIds;
             }
         }
-//task_model
         return condition;
     }
 }
