@@ -220,24 +220,19 @@
                                         #@dropdownsLi("dropdown-submenu")
                                             #@dropdownA("firstMenu"　"javascript:void(0);")评审#end
                                             #@dropdownsUl("dropdown-menu dropdown-show")
-                                            	#@dropdownItem("javascript:void(0);" "" "secondMenu" {"field":"storyStatus","value":getDict("storyStatus","")}) 确认通过 #end
-                                            	#@dropdownItem("javascript:void(0);" "" "secondMenu" {"field":"storyStatus","value":"no"}) 有待明确 #end
-
+                                            	#@dropdownItem("javascript:void(0);" "" "secondMenu" {"field":"storyStatus","value":"1"}) 确认通过 #end
+                                            	#@dropdownItem("javascript:void(0);" "" "secondMenu" {"field":"storyStatus","value":"0"}) 有待明确 #end
+                                                #@dropdownItem("javascript:void(0);" "" "secondMenu" {"field":"storyStatus","value":"4"}) 拒绝 #end
                                             #*		                		#@liDivider()<hr/>#end*#
-                                                #@dropdownsLi("dropdown-submenu")
-                                                    #@dropdownA("secondMenu"　"javascript:void(0);")拒绝#end
-                                                    #@dropdownsUl("dropdown-menu")
-                                                    #for(refese:getDict("storyRefese"))
-                                                    	#@dropdownItem("javascript:void(0);" "" "secondMenu" {"field":"storyStatus","value":refese?.value}) ${refese?.text} #end
-                                                    #end
-                                                    	#@dropdownItem("javascript:void(0);" "" "secondMenu" {"field":"storyStatus","value":"no-1"}) 已完成 #end
-                                                    	#@dropdownItem("javascript:void(0);" "" "secondMenu" {"field":"storyStatus","value":"no-2"}) 延期 #end
-                                                    	#@dropdownItem("javascript:void(0);" "" "secondMenu" {"field":"storyStatus","value":"no-3"}) 不做 #end
-                                                    	#@dropdownItem("javascript:void(0);" "" "secondMenu" {"field":"storyStatus","value":"no-4"}) 已取消 #end
-                                                    	#@dropdownItem("javascript:void(0);" "" "secondMenu" {"field":"storyStatus","value":"no-5"}) 计划如此 #end
-
-                                                    #end
-                                                #end
+##                                                #@dropdownsLi("dropdown-submenu")
+##                                                    #@dropdownA("secondMenu"　"javascript:void(0);")拒绝#end
+##                                                    #@dropdownsUl("dropdown-menu")
+##                                                    #for(refese:getDict("storyRefese"))
+##                                                    	#@dropdownItem("javascript:void(0);" "" "secondMenu" {"field":"storyStatus","value":refese?.value}) ${refese?.text} #end
+##                                                    #end
+##
+##                                                    #end
+##                                                #end
                                             #end
                                         #end
                                     #end
@@ -293,8 +288,8 @@
             #end
         #end
     #end
-
 #end
+
 
 
 

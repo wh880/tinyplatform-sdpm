@@ -12,15 +12,15 @@
         ?.productId}</a>#end
 	#@td()<a href="${TINY_CONTEXT_PATH +adminPath}/product/find/overview?productId=${product?.productId}">${product
         ?.productName}</a>#end
-	#@td()1#end
-	#@td()0#end
-	#@td()0#end
-	#@td()1#end
-	#@td()3#end
-	#@td()5#end
-	#@td()8#end
-	#@td()0#end
-	#@td()1#end
+	#@td()${product?.activeSum}#end
+	#@td()${product?.changeSum}#end
+	#@td()${product?.draftSum}#end
+	#@td()${product?.closeSum}#end
+	#@td()${product?.planCount}#end
+	#@td()${product?.releaseCount}#end
+	#@td()${product?.bugCount}#end
+	#@td()${product?.resolveSum}#end
+	#@td()${product?.assignSum}#end
 	#@td()
 		#foreach(m:menuManager.getScopeMenus("allproduct-op"))
 		#set(url=eval(m?.href))

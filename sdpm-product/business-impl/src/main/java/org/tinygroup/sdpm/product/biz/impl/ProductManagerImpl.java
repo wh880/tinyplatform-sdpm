@@ -65,12 +65,12 @@ public class ProductManagerImpl implements ProductManager{
 	public List<Product> findList(Product product, String order,String ordertype) {
 		
 		
-		return productDao.query(product,  (order==null||"".equals(order))?null:new OrderBy(NameUtil.resolveNameDesc(order), !("desc".equals(ordertype))?true:false));
+		return productDao.query(product,  (order==null||"".equals(order))?null:new OrderBy(NameUtil.resolveNameDesc("product."+order), !("desc".equals(ordertype))?true:false));
 	}
 
 	public Pager<Product> findPager(int page, int limit, Product product, String order,String ordertype) {
 		
-		return productDao.queryPager((page-1)*limit, limit, product, (order==null||"".equals(order))?null:new OrderBy(NameUtil.resolveNameDesc(order), !("desc".equals(ordertype))?true:false));
+		return productDao.queryPager((page-1)*limit, limit, product, (order==null||"".equals(order))?null:new OrderBy(NameUtil.resolveNameDesc("product."+order), !("desc".equals(ordertype))?true:false));
 	}
 
 	public List<Product> findList(Integer... productId) {

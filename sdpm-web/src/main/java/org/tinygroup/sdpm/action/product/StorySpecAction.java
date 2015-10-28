@@ -28,8 +28,12 @@ public class StorySpecAction extends BaseController{
 	
 	@RequestMapping("/find")
 	public String find(Integer storyId,Model model){
-		
-		ProductStorySpec storySpec = specService.findStorySpec(storyId);
+		ProductStory story = storyService.findStory(storyId);
+		ProductStorySpec storySpec = new ProductStorySpec();
+		storySpec.setStoryVersion(story.getStoryVersion());
+		storySpec.setStoryId(storyId);
+		List<ProductStorySpec> storySpecs = specService.findStorySpecList(storySpec,null,null);
+		storySpec = storySpecs!=null&&storySpecs.size()>0?storySpecs.get(0):new ProductStorySpec();
 		model.addAttribute("storySpec", storySpec);
 		return "/product/page/tabledemo/demand-edit.page";
 	}

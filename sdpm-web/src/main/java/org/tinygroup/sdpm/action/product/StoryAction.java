@@ -140,10 +140,13 @@ public class StoryAction extends BaseController {
             ProductStorySpec storySpec,
             @RequestParam(value = "file", required = false) MultipartFile[] file,
             String[] title, HttpServletRequest request) throws IOException {
-
+        if(productStory.getPlanId()!=null&&productStory.getPlanId()>0){
+            productStory.setStoryStage("2");
+        }else{
+            productStory.setStoryStage("1");
+        }
         productStory.setProductId(Integer.parseInt(cookieProductId));
         productStory.setStoryStatus("0");
-        productStory.setStoryStage("1");
         productStory.setStoryVersion(1);
         productStory.setStoryOpenedBy(UserUtils.getUserId());
         productStory.setStoryOpenedDate(new Date());
@@ -201,11 +204,17 @@ public class StoryAction extends BaseController {
     public String update(
             SystemAction systemAction,
             ProductStory productStory,
+            ProductStorySpec productStorySpec,
             @RequestParam(value = "file", required = false) MultipartFile[] file,
             String[] title) throws IOException {
         ProductStory story = storyService.findStory(productStory.getStoryId());
         productStory.setStoryLastEditedBy(UserUtils.getUser().getOrgUserId());
         productStory.setStoryLastEditedDate(new Date());
+        if(story.getStoryStatus()=="1"){
+            if(productStory.getPlanId()!=null&&productStory.getPlanId()>0){
+                productStory.setStoryStage("2");
+            }
+        }
         storyService.updateStory(productStory);
 
         uploads(file, story.getStoryId(), ProfileType.STORY, title);
@@ -215,7 +224,7 @@ public class StoryAction extends BaseController {
                 String.valueOf(productStory.getStoryId()),
                 UserUtils.getUserId(), String.valueOf(story.getProductId()),
                 null, story, productStory, systemAction.getActionComment());
-        return "redirect:" + "/product/page/project/togglebox.page";
+        return "redirect:" + "/a/product/story";
     }
 
     /**
@@ -350,9 +359,12 @@ public class StoryAction extends BaseController {
     public String find(Integer storyId,
                        @PathVariable(value = "forwordPager") String forwordPager,
                        Model model, SystemAction systemAction) {
-
         ProductStory productStory = storyService.findStory(storyId);
-        ProductStorySpec storySpec = storySpecService.findStorySpec(storyId);
+        ProductStorySpec storySpec = new ProductStorySpec();
+        storySpec.setStoryId(storyId);
+        storySpec.setStoryVersion(productStory.getStoryVersion());
+        List<ProductStorySpec> storySpecs = storySpecService.findStorySpecList(storySpec,null,null);
+        storySpec = storySpecs!=null&&storySpecs.size()>0?storySpecs.get(0):new ProductStorySpec();
         List<ProductStory> stories = storyService.findProductName(storyId);
 
         QualityTestCase testCase = new QualityTestCase();
@@ -414,10 +426,10 @@ public class StoryAction extends BaseController {
             @RequestParam(value = "file", required = false) MultipartFile[] file,
             String[] title) throws IOException {
         ProductStory story = storyService.findStory(productStory.getStoryId());
+        productStory.setStoryStatus("3");
+        productStory.setStoryVersion(story.getStoryVersion()+1);
         storyService.updateStory(productStory);
-        int version = storySpecService.getNewStoryVersion(productStory
-                .getStoryId());
-        storySpec.setStoryVersion(version + 1);
+        storySpec.setStoryVersion(story.getStoryVersion() + 1);
         storySpecService.add(storySpec);
         uploads(file, story.getStoryId(), ProfileType.STORY, title);
 
@@ -427,7 +439,7 @@ public class StoryAction extends BaseController {
                 UserUtils.getUserId(),
                 String.valueOf(productStory.getProductId()), null, story,
                 productStory, systemAction.getActionComment());
-        return "redirect:" + "/product/page/project/togglebox.page";
+        return "redirect:" + "/a/product/story";
     }
 
     /**
@@ -441,10 +453,10 @@ public class StoryAction extends BaseController {
     @RequestMapping("/reviewed")
     public String reviewed(SystemAction systemAction,Integer reviewRequest, ProductStory productStory)
             throws IOException {
-        if(reviewRequest>0){
-            productStory.setStoryStatus(String.valueOf(reviewRequest));
-        }else{
-            productStory.setStoryStatus("5");
+        if(reviewRequest==0){
+            productStory.setStoryStatus("1");
+        }else if(reviewRequest==2){
+            productStory.setStoryStatus("4");
         }
         ProductStory story = storyService.findStory(productStory.getStoryId());
         storyService.updateStory(productStory);
@@ -468,13 +480,14 @@ public class StoryAction extends BaseController {
     public String close(SystemAction systemAction, ProductStory productStory) {
         ProductStory story = storyService.findStory(productStory.getStoryId());
         productStory.setDeleted(FieldUtil.DELETE_YES);
+        productStory.setStoryStatus("2");
         storyService.updateStory(productStory);
         LogUtil.logWithComment(LogUtil.LogOperateObject.STORY,
                 LogUtil.LogAction.CLOSED,
                 String.valueOf(productStory.getStoryId()),
                 UserUtils.getUserId(), String.valueOf(story.getProductId()),
                 null, story, productStory, systemAction.getActionComment());
-        return "redirect:" + "/product/page/project/togglebox.page";
+        return "redirect:" + "/a/product/story";
     }
 
     /**
