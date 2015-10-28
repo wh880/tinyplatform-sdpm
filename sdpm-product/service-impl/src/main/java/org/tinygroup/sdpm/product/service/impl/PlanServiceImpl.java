@@ -46,7 +46,6 @@ public class PlanServiceImpl implements PlanService {
 
 	public Pager<ProductPlan> findProductPlanPager(int page, int limit, ProductPlan productPlan, String order,
 			String ordertype) {
-		
 		return planManager.findPager(page, limit, productPlan, order, ordertype);
 	}
 
@@ -68,6 +67,5 @@ public class PlanServiceImpl implements PlanService {
 		
 		return planManager.deleteBatch(ids);
 	}
-
 
 }
