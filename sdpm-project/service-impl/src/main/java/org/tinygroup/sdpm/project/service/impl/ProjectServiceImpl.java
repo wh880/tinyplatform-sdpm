@@ -24,10 +24,6 @@ public class ProjectServiceImpl implements ProjectService {
         return projectManager.findList();
     }
 
-    public Project findByName(String projectName) {
-        return null;
-    }
-
     public Project findById(int projectId) {
         return projectManager.find(projectId);
     }
@@ -38,6 +34,13 @@ public class ProjectServiceImpl implements ProjectService {
 
     public List<Project> findProjects(Project project) {
         return projectManager.findListProjects(project);
+    }
+
+    public Integer batchDeleteProject(Integer[] projectIds) {
+        if (projectIds == null || projectIds.length == 0) {
+            return 0;
+        }
+        return projectManager.batchDelete(projectIds);
     }
 
     public Pager<Project> findProjects(Integer start, Integer limit, String order, String ordertype) {
