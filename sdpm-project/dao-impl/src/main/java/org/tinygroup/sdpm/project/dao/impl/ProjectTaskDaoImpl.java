@@ -394,7 +394,7 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
                                             PROJECT_TASKTABLE.TASK_LAST_EDITED_BY.eq(t.getTaskLastEditedBy()),
                                             PROJECT_TASKTABLE.TASK_LAST_EDITED_DATE.eq(t.getTaskLastEditedDate()),
                                             PROJECT_TASKTABLE.TASK_DELETED.eq(t.getTaskDeleted())));
-                    return addOrderByElements(select, orderBies);
+                    return addOrderByElements(select, orderArgs);
                 }
             });
         }
