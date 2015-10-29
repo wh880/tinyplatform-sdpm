@@ -160,7 +160,7 @@
 					<span class="active_btn">文档列表</span>
 				</span>
 				<span class="r">
-					<a href="#">#buttonIcon(iconClass="icon-off")创建文档</a>
+					<a href="#">#buttonIcon(iconClass="icon-off")&nbsp;创建文档</a>
 				</span>
 				#div(divClass="clearfix")
 			#end
