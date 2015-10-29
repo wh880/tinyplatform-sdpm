@@ -454,3 +454,6 @@ a.btn.btn-sm.backBtn, .backBtn {
 #task-search .active-disabled .form-control{padding:4px 0px;margin-bottom:3px}
 /*表格边框*/
 table.table.filelist-table{border:#ddd 1px solid;}
+/*操作区 按钮重置*/
+.form-inline .btn-success{ background-image:none}
+.optionsBox .tabBar span{font-weight:normal}

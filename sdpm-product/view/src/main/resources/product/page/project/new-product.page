@@ -24,7 +24,7 @@
 			#@tabHeadCol()模块#end
 			#@tabHeadCol()概况#end
 		#end
-		<span class="r" style="position:relative;top:-28px;height:0">
+		<span class="r" style="position:relative;top:-30px;height:0;color:#337ab7;font-family:"Microsoft Yahei"">
 			<a href="${TINY_CONTEXT_PATH +adminPath}/product/page/tabledemo/product-listall.page">#buttonIcon(iconClass=
 				"icon-globe")所有产品</a>&nbsp;
 			<!--新增产品-->
