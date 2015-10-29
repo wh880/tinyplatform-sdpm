@@ -383,6 +383,16 @@ public class CmsUtils {
         }
     }
 
+    public static String getFirstProductLine(){
+        List<ProductLine> productLines = getProductLineListByUser();
+        for(ProductLine productLine : productLines){
+            if(getProductListByProductLineUser(String.valueOf(productLine.getProductLineId())).size()>0){
+                return productLine.getProductLineId().toString();
+            }
+        }
+        return null;
+    }
+
     private static Integer validateProductLine(String loginId, ProductLine productLine){
         if (productLine.getAcl() < 1) {
             return 2;

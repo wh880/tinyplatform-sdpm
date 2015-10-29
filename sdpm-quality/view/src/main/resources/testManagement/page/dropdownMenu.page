@@ -4,16 +4,17 @@
 		#if(qualityProductId&&CmsUtils.getAllProductListByUser()?.size()>0)
 			#set(finded = 0)
 			#for(product : CmsUtils.getAllProductListByUser())
-			#if(product?.productId == qualityProductId)
-				${product?.productName}
-				#set(finded=1)
-			#end
-			#if(finded==0)
-			<script type="text/javascript">
-				$.removeCookie('qualityProductId',{path:"/"})
-				//window.location.href='http://localhost:8989/sdpm-web/a/project/task/index';
-				window.location.reload();
-			</script>
+				#if(product?.productId == qualityProductId)
+					${product?.productName}
+					#set(finded=1)
+				#end
+				#if(finded==0)
+				<script type="text/javascript">
+					$.removeCookie('qualityProductId',{path:"/"})
+					//window.location.href='http://localhost:8989/sdpm-web/a/project/task/index';
+					window.location.reload();
+				</script>
+				#end
 			#end
 		#else
 			#if(CmsUtils.getAllProductListByUser()?.size()>0)
@@ -32,7 +33,7 @@
 				$(function(){
 					var url = window.location.pathname;
 					if(url.indexOf("addproduct")<0){
-						layer.msg('目前没有产品，现在将前往添加。<div style="text-align:center"><a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition"><span id="showTime">5</span>秒后前往</a></div>',5,-1,function(){
+						layer.msg('${msg}<div style="text-align:center"><a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition"><span id="showTime">5</span>秒后前往</a></div>',5,-1,function(){
 							window.location.href = "${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition";
 						});
 						var timeVal=5;
@@ -51,22 +52,22 @@
 
 <span class="caret"></span>#end
 #@navSelect2Body()
-#@navSelect2Data()
-<option value=""></option>
-<optgroup label="产品">
-	#for(product : CmsUtils.getAllProductListByUser())
-		#if(product?.deleted==0)
-		<option value="${product?.productId}">${product?.productName}</option>
+		#@navSelect2Data()
+			<option value=""></option>
+			<optgroup label="产品">
+				#for(product : CmsUtils.getAllProductListByUser())
+					#if(product?.deleted==0)
+					<option value="${product?.productId}">${product?.productName}</option>
+					#end
+				#end
+			</optgroup>
+
 		#end
-	#end
-</optgroup>
+		#@navSelect2Fix()
 
-#end
-#@navSelect2Fix()
-
-<a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition" class="r">增加</a>&nbsp
-<a href="${TINY_CONTEXT_PATH+adminPath}/product/allproduct/addition">全部</a>&nbsp#end
-#end
+		<a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition" class="r">增加</a>&nbsp
+		<a href="${TINY_CONTEXT_PATH+adminPath}/product/allproduct/addition">全部</a>&nbsp
+		#end
 
 #hiddenInput("productIdHidden","productId","","")
 

@@ -35,7 +35,7 @@
                     $(function(){
 						var url = window.location.pathname;
 						if(url.indexOf("addproduct")<0){
-							layer.msg('目前没有产品，现在将前往添加。<div style="text-align:center"><a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition"><span id="showTime">5</span>秒后前往</a></div>',5,-1,function(){
+							layer.msg('${msg}<div style="text-align:center"><a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition"><span id="showTime">5</span>秒后前往</a></div>',5,-1,function(){
 								window.location.href = "${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition";
 							});
 							var timeVal=5;
