@@ -2,7 +2,7 @@
 
 #@tinyForm("thisform" "url" "post" {"class":""})
 				#@elementItem()
-					#@colLabel("col-1")日期：#end
+					#@colLabel("l")日期：#end
 					#@formControlDiv("col-8")
 						#@div(divClass="col-3")
 							#@tinyDateInput("birthday" "" "YYYY-MM-DD" {})#end
