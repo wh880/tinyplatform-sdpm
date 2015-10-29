@@ -57,7 +57,7 @@
 #setTinyItemCount(records)
 #foreach(p:projectPager.records)
     #@tr()
-        #@td()<input type="checkbox" value="1" name="idCheck">#end
+        #@td()<input type="checkbox" value="${p?.projectId}" name="idCheck">#end
         #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/project/manage/survey/index?projectId=${p?.projectId}">${p
             ?.projectId}</a>#end
         #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/project/manage/survey/index?projectId=${p?.projectId}">${p

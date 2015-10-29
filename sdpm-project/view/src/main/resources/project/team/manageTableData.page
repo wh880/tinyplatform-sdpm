@@ -19,10 +19,10 @@
     </a>
     #end
     #@td()${t?.teamRole}#end
-    #@td()${t?.teamJoin}#end
+    #@td()${formatDate(t?.teamJoin,"yyyy-MM-dd")}#end
     #@td()${t?.teamDays}#end
     #@td()${t?.teamHours}#end
-    #@td()48#end
+    #@td()${t?.teamDays*t?.teamHours}#end
     #@td()
         #foreach(m:menuManager.getScopeMenus("pro-team-op"))
             #@tinyTableItemRemove(TINY_CONTEXT_PATH+adminPath+m.href t.id)<i class=${m.icon}></i>#end

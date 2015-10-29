@@ -35,7 +35,7 @@
     <table-field standard-field-id="6f1762dbb20842088ba9937040172363" primary="false" unique="false" not-null="false" id="file_size" auto-increase="false"/>
     <table-field standard-field-id="f9bbeaa3639e436e9c44f51a7ae07841" primary="false" unique="false" not-null="false" id="file_objectType" auto-increase="false"/>
     <table-field standard-field-id="1ff783ff38614285b46eee52e8db309d" primary="false" unique="false" not-null="false" id="file_objectID" auto-increase="false"/>
-    <table-field standard-field-id="188c4e45cb244c1188d491a80870f265" primary="false" unique="false" not-null="false" id="file_addedBy" auto-increase="false"/>
+    <table-field standard-field-id="188c4e45cb244c1188d491a80870f265" primary="false" unique="false" not-null="false" id="file_added_by" auto-increase="false"/>
     <table-field standard-field-id="54931073c3dd432b9d20c1fa3aa50b0d" primary="false" unique="false" not-null="false" id="file_addedDate" auto-increase="false"/>
     <table-field standard-field-id="94269caa7a0948339ef8bf1f42168870" primary="false" unique="false" not-null="false" id="file_downloads" auto-increase="false"/>
     <table-field standard-field-id="93eb49b6ef0a434d9b2b9f177b2bc2cb" primary="false" unique="false" not-null="false" id="file_extra" auto-increase="false"/>

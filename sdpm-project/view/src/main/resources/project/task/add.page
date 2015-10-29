@@ -22,6 +22,7 @@
     "multipart/form-data"})
 <div class="pageleftpart">
     <div class="infoContent">
+        <input type="hidden" name="taskOpenBy" value="${UserUtils.getUserId()}"/>
         <p class="titleName">建任务</p>
         #@elementItem()
             #@sdpmItem("所属项目")
