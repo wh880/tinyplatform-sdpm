@@ -12,7 +12,7 @@
         #if(CmsUtils.getProductLineListByUser()?.size()>0)
         <script type="text/javascript">
             $(function(){
-                $.cookie('cookieProductLineId',"${CmsUtils.getProductLineListByUser()?.get(0)?.productLineId}",{path:"/"});
+                $.cookie('cookieProductLineId',"${CmsUtils.getFirstProductLine()}",{path:"/"});
                 window.location.reload();
             })
         </script>
@@ -46,8 +46,8 @@
     <option value=""></option>
     <optgroup label="产品线">
         #for(productLine : CmsUtils.getProductLineListByUser())
-        <option value="${productLine?.productLineId}">${productLine?.productLineName}</option>
-    #end
+            <option value="${productLine?.productLineId}">${productLine?.productLineName}</option>
+        #end
 </optgroup>
 
 #end
