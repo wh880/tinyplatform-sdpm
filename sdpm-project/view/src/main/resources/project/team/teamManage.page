@@ -19,16 +19,19 @@
 #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/project/team/teamManageSave" "post" {"class":"test"})
     #@table()
     <tr>
-        <td>
+        <td width="20%">
             用户
         </td>
-        <td>
+        <td width="20%">
             角色
         </td>
-        <td>
+        <td width="20%">
+            加盟日
+        </td>
+        <td width="20%">
             可用工日
         </td>
-        <td>
+        <td width="20%">
             可用工时/天
         </td>
     </tr>
@@ -42,6 +45,9 @@
             #end
             <td>
                 #tinyInput("text" "teamList["+a+"].teamRole" t.teamRole {"datatype":"","class":"input-text"})
+            </td>
+            <td>
+                #@tinyDateInput("teamList["+a+"].teamJoin" formatDate(now(),"yyyy-MM-dd") "YYYY-MM-DD" )#end
             </td>
             <td>
                 #tinyInput("text" "teamList["+a+"].teamDays" t.teamDays {"datatype":"","class":"input-text"})
@@ -70,6 +76,9 @@
             </td>
             <td>
                 #tinyInput("text" "teamList["+a+"].teamRole" "" {"datatype":"","class":"input-text"})
+            </td>
+            <td>
+                #@tinyDateInput("teamList["+a+"].teamJoin" formatDate(now(),"yyyy-MM-dd") "YYYY-MM-DD" )#end
             </td>
             <td>
                 #tinyInput("text" "teamList["+a+"].teamDays" "" {"datatype":"","class":"input-text"})

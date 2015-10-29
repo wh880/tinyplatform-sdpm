@@ -19,7 +19,7 @@
     </a>
     #end
     #@td()${t?.teamRole}#end
-    #@td()${t?.teamJoin}#end
+    #@td()${formatDate(t?.teamJoin,"yyyy-MM-dd")}#end
     #@td()${t?.teamDays}#end
     #@td()${t?.teamHours}#end
     #@td()${t?.teamDays*t?.teamHours}#end
