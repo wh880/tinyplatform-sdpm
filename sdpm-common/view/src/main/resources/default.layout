@@ -77,7 +77,7 @@
                 #end
             #end
         <![endif]-->
-        <!--[if (gt IE 9)|!(IE)]><!-->
+        <!--[if (gte IE 9)|!(IE)]><!-->
         <link href="${TINY_CONTEXT_PATH}/uiengine.uicss" rel="stylesheet"/>
         <!--<![endif]-->
         <script src="${TINY_CONTEXT_PATH}/uiengine.uijs"></script>
