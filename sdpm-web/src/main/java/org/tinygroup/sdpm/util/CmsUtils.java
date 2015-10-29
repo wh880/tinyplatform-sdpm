@@ -225,7 +225,7 @@ public class CmsUtils {
             StringBuffer resultBuffer = new StringBuffer("");
             for (List<ProjectTeam> teams : teamsList) {
                 for (ProjectTeam team : teams) {
-                    if (!StringUtil.isBlank(team.getTeamUserId())) {
+                    if (!StringUtil.isBlank(team.getTeamUserId())&&!resultBuffer.toString().contains(team.getTeamUserId())) {
                         if (!StringUtil.isBlank(resultBuffer.toString())) {
                             resultBuffer.append(",");
                         }
@@ -233,10 +233,12 @@ public class CmsUtils {
                     }
                 }
             }
-            if (!StringUtil.isBlank(resultBuffer.toString())) {
-                resultBuffer.append(",");
+            if(!StringUtil.isBlank(product.getProductOwner())&&!resultBuffer.toString().contains(product.getProductOwner())) {
+                if (!StringUtil.isBlank(resultBuffer.toString())) {
+                    resultBuffer.append(",");
+                }
+                resultBuffer.append(product.getProductOwner());
             }
-            resultBuffer.append(product.getProductOwner());
             result = resultBuffer.toString();
             UserUtils.putCache(USER_CACHE_TEAM_LIST_BY_PRODUCT+productId,result);
         }
@@ -269,10 +271,12 @@ public class CmsUtils {
                     users.append(getUserListByProduct(String.valueOf(p.getProductId())));
                 }
             }
-            if (!StringUtil.isBlank(users.toString())) {
-                users.append(",");
+            if(!StringUtil.isBlank(productLine.getProductLineOwner())&&!users.toString().contains(productLine.getProductLineOwner())) {
+                if (!StringUtil.isBlank(users.toString())) {
+                    users.append(",");
+                }
+                users.append(productLine.getProductLineOwner());
             }
-            users.append(productLine.getProductLineOwner());
             result = users.toString();
             UserUtils.putCache(USER_CACHE_TEAM_LIST_BY_PRODUCT_LINE+productLineId,result);
         }
@@ -330,9 +334,8 @@ public class CmsUtils {
             List<Product> products = getProductListByLine(productLineId);
             result = new ArrayList<Product>();
             String loginId = UserUtils.getUserId();
-            ProductLine productLine = productLineService.findProductLine(Integer.parseInt(productLineId));
             for (Product product : products) {
-                int validate = validateProductWithProductLine(loginId,product,productLine);
+                int validate = validateProduct(loginId,product);
                 if(validate<3){
                     result.add(product);
                 }
@@ -360,8 +363,7 @@ public class CmsUtils {
             result = new ArrayList<Product>();
             String loginId = UserUtils.getUserId();
             for (Product product : products) {
-                ProductLine productLine = productLineService.findProductLine(product.getProductLineId());
-                if(validateProductWithProductLine(loginId,product,productLine)<3){
+                if(validateProduct(loginId,product)<3){
                     result.add(product);
                 }
             }
@@ -425,14 +427,4 @@ public class CmsUtils {
         return 3;
     }
 
-    private static Integer validateProductWithProductLine(String loginId, Product product,ProductLine productLine){
-        int lineValidate = validateProductLine(loginId,productLine);
-        if(lineValidate<3){
-            int validate = validateProduct(loginId,product);
-            if(validate<3){
-                return 2;
-            }
-        }
-        return 3;
-    }
 }

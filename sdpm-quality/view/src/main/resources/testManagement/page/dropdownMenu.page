@@ -1,33 +1,60 @@
 #import("/org/tinygroup/publicComponent/macro/navselect.component")
 #@navSelect2("product" "product")
 #@navSelect2Nav()
-#if(qualityProductId)
-#for(product : CmsUtils.getProductList())
-#if(product?.productId == qualityProductId)
-${product?.productName}
-#break
-#end
-#end
-#else
-#if(CmsUtils.getProductList()?.size()>0)
-<script type="text/javascript">
-    $(function(){
-        $.cookie('qualityProductId',"${CmsUtils.getProductList()?.get(0)?.productId}");
-        window.location.reload();
-    })
-</script>
-${CmsUtils.getProductList()?.get(0)?.productName}
-#else
-无产品
-#end
-#end
+		#if(qualityProductId&&CmsUtils.getAllProductListByUser()?.size()>0)
+			#set(finded = 0)
+			#for(product : CmsUtils.getAllProductListByUser())
+			#if(product?.productId == qualityProductId)
+				${product?.productName}
+				#set(finded=1)
+			#end
+			#if(finded==0)
+			<script type="text/javascript">
+				$.removeCookie('qualityProductId',{path:"/"})
+				//window.location.href='http://localhost:8989/sdpm-web/a/project/task/index';
+				window.location.reload();
+			</script>
+			#end
+		#else
+			#if(CmsUtils.getAllProductListByUser()?.size()>0)
+			<script type="text/javascript">
+				$(function(){
+					$.cookie('qualityProductId',"${CmsUtils.getAllProductListByUser()?.get(0)?.productId}",{path:"/"});
+					window.location.reload();
+				})
+			</script>
+			#else
+			<script type="text/javascript">
+					#set(msg="目前没有产品，现在将前往添加。")
+					#if(CmsUtils.getProductList().size()>0)
+						#set(msg="目前没有你可访问的产品，现在将前往添加。")
+					#end
+				$(function(){
+					var url = window.location.pathname;
+					if(url.indexOf("addproduct")<0){
+						layer.msg('目前没有产品，现在将前往添加。<div style="text-align:center"><a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition"><span id="showTime">5</span>秒后前往</a></div>',5,-1,function(){
+							window.location.href = "${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition";
+						});
+						var timeVal=5;
+						function changeTimeVal(){
+							$("#showTime").html(--timeVal);
+							window.setTimeout(function(){
+								changeTimeVal();
+							},1000);
+						}
+						changeTimeVal();
+					}
+				})
+			</script>
+			#end
+		#end
 
 <span class="caret"></span>#end
 #@navSelect2Body()
 #@navSelect2Data()
 <option value=""></option>
 <optgroup label="产品">
-	#for(product : CmsUtils.getProductList())
+	#for(product : CmsUtils.getAllProductListByUser())
 		#if(product?.deleted==0)
 		<option value="${product?.productId}">${product?.productName}</option>
 		#end
@@ -55,4 +82,4 @@ ${CmsUtils.getProductList()?.get(0)?.productName}
 
 </script>
 #end
-
+#end
