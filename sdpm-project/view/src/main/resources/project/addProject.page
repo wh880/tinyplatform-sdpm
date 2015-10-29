@@ -104,7 +104,6 @@
             #@sdpmItem("项目类型")
                 #@Tselect2F()
                     #@Tselect2Body("projectType" "" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                        <option value="">/</option>
                         #foreach(type : getDict("projectType"))
                             <option value=${type.value}>${type.text}</option>
                         #end
@@ -113,7 +112,6 @@
             #end
         #end
 
-    ##
         #@elementItem()
             #@sdpmItem("团队名称" "*")
                 #tinyInput("text" "projectTeam" "" {"placeholder":"请输入团队名称","datatype":"*","nullmsg":
@@ -124,7 +122,7 @@
             #@sdpmItem("关联产品")
                 #@Tselect2F()
                     #@Tselect2Body("linkProduct" "" {"class":"input-text select2"})
-                        <option value="">/</option>
+                        <option value=""></option>
                         #foreach(p : prodcutList)
                             <option value="${p?.productId}">${p.productName}</option>
                         #end

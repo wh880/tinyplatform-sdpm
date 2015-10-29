@@ -2,17 +2,17 @@
 
 #@navSelect2("productLine" "productLine")
     #@navSelect2Nav()
-        #if(cookieProductLineId&&CmsUtils.getProductLineListByUser()?.size()>0)
-            #for(productLine : CmsUtils.getProductLineListByUser())
+        #if(cookieProductLineId&&ProductUtils.getProductLineListByUser()?.size()>0)
+            #for(productLine : ProductUtils.getProductLineListByUser())
                 #if(productLine?.productLineId == cookieProductLineId)
                     ${productLine?.productLineName}
                 #end
             #end
         #else
-        #if(CmsUtils.getProductLineListByUser()?.size()>0)
+            #if(ProductUtils.getProductLineListByUser()?.size()>0)
         <script type="text/javascript">
             $(function(){
-                $.cookie('cookieProductLineId',"${CmsUtils.getProductLineListByUser()?.get(0)?.productLineId}",{path:"/"});
+                $.cookie('cookieProductLineId', "${ProductUtils.getProductLineListByUser()?.get(0)?.productLineId}", {path: "/"});
                 window.location.reload();
             })
         </script>
@@ -41,7 +41,7 @@
     #@navSelect2Data()
     <option value=""></option>
     <optgroup label="产品线">
-        #for(productLine : CmsUtils.getProductLineList())
+        #for(productLine : ProductUtils.getProductLineList())
         <option value="${productLine?.productLineId}">${productLine?.productLineName}</option>
     #end
 </optgroup>

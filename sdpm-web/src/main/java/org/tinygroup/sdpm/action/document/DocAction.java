@@ -16,7 +16,7 @@ import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.document.dao.pojo.DocumentDoc;
-import org.tinygroup.sdpm.document.dao.pojo.DocumentDoclib;
+import org.tinygroup.sdpm.document.dao.pojo.DocumentDocLib;
 import org.tinygroup.sdpm.document.service.inter.DocService;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
@@ -216,7 +216,7 @@ public class DocAction extends BaseController {
         List<Product> list1 = productService.findProductList(new Product());
         List<Project> list2 = projectService.findList();
         List<SystemModule> listModule = moduleService.findModuleList(module);
-        List<DocumentDoclib> libList = docservice.findDoclibList(null);
+        List<DocumentDocLib> libList = docservice.findDoclibList(null);
         model.addAttribute("doc", doc);
         model.addAttribute("productList", list1);
         model.addAttribute("projectList", list2);
@@ -267,7 +267,7 @@ public class DocAction extends BaseController {
     @RequestMapping("/view")
     public String docView(HttpServletRequest request, SystemAction systemAction, DocumentDoc doc, SystemProfile systemProfile, Model model, Integer docid) {
         doc = docservice.findDocById(docid);
-        DocumentDoclib docLib = docservice.findDoclibById(doc.getDocLibId());
+        DocumentDocLib docLib = docservice.findDoclibById(doc.getDocLibId());
         systemProfile.setFileObjectType("document");
         systemProfile.setFileObjectId(docid);
         systemProfile.setFileDeleted("0");
@@ -289,7 +289,7 @@ public class DocAction extends BaseController {
     @RequestMapping("/viewInfo")
     public String viewInfo(HttpServletRequest request, Integer docId, Model model) {
         DocumentDoc doc = docservice.findDocById(docId);
-        DocumentDoclib docLib = docservice.findDoclibById(doc.getDocLibId());
+        DocumentDocLib docLib = docservice.findDoclibById(doc.getDocLibId());
         System.out.println(doc.getDocModule() != 0 && doc.getDocModule() != null);
         if (doc.getDocModule() != 0 && doc.getDocModule() != null) {
             SystemModule module = moduleService.findById(doc.getDocModule());

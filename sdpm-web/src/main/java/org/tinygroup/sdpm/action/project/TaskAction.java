@@ -62,7 +62,7 @@ public class TaskAction extends BaseController {
     public String index(@CookieValue(required = false, value = COOKIE_PROJECT_ID) String currentProjectId,
                         HttpServletResponse response, String moduleId, String choose, Model model) {
         if (StringUtil.isBlank(currentProjectId)) {
-            Project project = CmsUtils.getProject(null);
+            Project project = ProjectUtils.getProject(null);
             if (null != project&&project.getProjectId()!=null) {
                 currentProjectId = String.valueOf(project.getProjectId());
                 CookieUtils.setCookie(response, COOKIE_PROJECT_ID, currentProjectId);
@@ -493,7 +493,7 @@ public class TaskAction extends BaseController {
                                                HttpServletResponse response) {
         List<Map<String, String>> resultList = new ArrayList<Map<String, String>>();
         if (StringUtil.isBlank(projectId)) {
-            Project project = CmsUtils.getProject(projectId);
+            Project project = ProjectUtils.getProject(projectId);
             if (project.getProjectId() != null) {
                 projectId = project.getProjectId().toString();
                 CookieUtils.setCookie(response, COOKIE_PROJECT_ID, projectId);

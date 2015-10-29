@@ -6,7 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.document.biz.inter.DocBiz;
 import org.tinygroup.sdpm.document.dao.pojo.DocumentDoc;
-import org.tinygroup.sdpm.document.dao.pojo.DocumentDoclib;
+import org.tinygroup.sdpm.document.dao.pojo.DocumentDocLib;
 import org.tinygroup.sdpm.document.service.inter.DocService;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -30,7 +30,7 @@ public class DocServiceImpl implements DocService{
 		return docbiz.addDoc(doc);
 	}
 
-	public DocumentDoclib createNewDocLib(DocumentDoclib doclib) {
+	public DocumentDocLib createNewDocLib(DocumentDocLib doclib) {
 		return docbiz.addDocLib(doclib);
 	}
 
@@ -38,7 +38,7 @@ public class DocServiceImpl implements DocService{
 		return docbiz.updtDoc(doc);
 	}
 
-	public int editDocLibName(DocumentDoclib doclib) {
+	public int editDocLibName(DocumentDocLib doclib) {
 		return docbiz.updtDocLib(doclib);
 	}
 
@@ -46,22 +46,23 @@ public class DocServiceImpl implements DocService{
 		return docbiz.getDocById(id);
 	}
 
-	public DocumentDoclib findDoclibById(Integer id) {
+	public DocumentDocLib findDoclibById(Integer id) {
 		return docbiz.getDocLibById(id);
 	}
 
 	public List<DocumentDoc> findDocList(DocumentDoc doc) {
 		return docbiz.getDocList(doc);
 	}
-	public List<DocumentDoclib> findDoclibList(DocumentDoclib doclib) {
+
+	public List<DocumentDocLib> findDoclibList(DocumentDocLib doclib) {
 		return docbiz.getDoclibList(doclib);
 	}
 
 	public Pager<DocumentDoc> findDocRetPager(Integer start,Integer limit,DocumentDoc doc, String statusCondition, SearchInfos conditions,String groupOperate, String sortName,boolean asc) {
 		return docbiz.queryItemWithPage(start, limit, doc, statusCondition,conditions, groupOperate, sortName, asc);
 	}
-	
-	public Pager<DocumentDoclib> findDoclibRetPager(Integer start, Integer limit,DocumentDoclib doclib,String sortName, boolean asc) {
+
+	public Pager<DocumentDocLib> findDoclibRetPager(Integer start, Integer limit, DocumentDocLib doclib, String sortName, boolean asc) {
 		return docbiz.queryItemWithPage(start, limit, doclib,sortName, asc);
 	}
 

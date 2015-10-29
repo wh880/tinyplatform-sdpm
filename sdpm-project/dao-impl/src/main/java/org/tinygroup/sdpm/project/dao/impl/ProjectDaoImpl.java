@@ -1,12 +1,12 @@
 /**
  * Copyright (c) 1997-2013, www.tinygroup.org (luo_guo@icloud.com).
- * <p/>
+ * <p>
  * Licensed under the GPL, Version 3.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p/>
+ * <p>
  * http://www.gnu.org/licenses/gpl.html
- * <p/>
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -22,7 +22,6 @@ import org.tinygroup.jdbctemplatedslsession.callback.*;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
 import org.tinygroup.sdpm.common.log.annotation.LogClass;
-import org.tinygroup.sdpm.common.log.annotation.LogMethod;
 import org.tinygroup.sdpm.common.util.update.UpdateUtil;
 import org.tinygroup.sdpm.project.dao.ProjectDao;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
@@ -40,29 +39,20 @@ import java.util.List;
 
 import static org.tinygroup.sdpm.project.dao.constant.ProjectTable.PROJECTTABLE;
 import static org.tinygroup.sdpm.project.dao.constant.ProjectTaskTable.PROJECT_TASKTABLE;
+import static org.tinygroup.sdpm.project.dao.constant.ProjectTeamTable.PROJECT_TEAMTABLE;
 import static org.tinygroup.tinysqldsl.Delete.delete;
 import static org.tinygroup.tinysqldsl.Insert.insertInto;
+import static org.tinygroup.tinysqldsl.Select.select;
 import static org.tinygroup.tinysqldsl.Select.selectFrom;
 import static org.tinygroup.tinysqldsl.Update.update;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
+import static org.tinygroup.tinysqldsl.formitem.SubSelect.subSelect;
 
 @LogClass("project")
 @Repository
 public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
-    public Project getTime(Project project) {
-        Select select = MysqlSelect.select(PROJECTTABLE.ALL,
-                FragmentSelectItemSql.fragmentSelect("SUM(project_task.task_consumed)/(SUM(project_task.task_consumed)+SUM(project_task.task_left)) as percent"))
-                .from(PROJECTTABLE)
-                .join(Join.leftJoin(PROJECT_TASKTABLE,
-                        PROJECT_TASKTABLE.TASK_PROJECT.equal(PROJECTTABLE.PROJECT_ID)))
-                .where(
-                        PROJECTTABLE.PROJECT_ID.eq(project.getProjectId())
-                );
-        return getDslSession().fetchOneResult(select, project.getClass());
-    }
 
-    public Pager<Project> tquerytAll(int start, int limit, Project project, final OrderBy...
-            orderBies) {
+    public Pager<Project> findPageWithStatistics(int start, int limit, Project project, final OrderBy... args) {
         if (project == null) {
             project = new Project();
         }
@@ -73,50 +63,30 @@ public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
                         FragmentSelectItemSql.fragmentSelect("SUM(project_task.task_estimate) as estimate"),
                         FragmentSelectItemSql.fragmentSelect("SUM(project_task.task_consumed) as consumed"),
                         FragmentSelectItemSql.fragmentSelect("SUM(project_task.task_consumed)/(SUM(project_task.task_consumed)+SUM(project_task.task_left)) as percent")
-                )
-                        .from(PROJECTTABLE).join(
-                                Join.leftJoin(PROJECT_TASKTABLE,
-                                        PROJECT_TASKTABLE.TASK_PROJECT.equal(PROJECTTABLE.PROJECT_ID)))
+                ).from(PROJECTTABLE).join(
+                        Join.leftJoin(PROJECT_TASKTABLE,
+                                PROJECT_TASKTABLE.TASK_PROJECT.equal(PROJECTTABLE.PROJECT_ID)))
                         .groupBy(PROJECTTABLE.PROJECT_ID);
 
-                return addOrderByElements(select, orderBies);
+                return addOrderByElements(select, args);
             }
         });
     }
 
-    public List<Project> tquerytAll(Project project) {
+    public List<Project> findListWithStatistics(Project project) {
         Select select = MysqlSelect.select(PROJECTTABLE.ALL,
                 FragmentSelectItemSql.fragmentSelect("SUM(project_task.task_estimate) as estimate"),
                 FragmentSelectItemSql.fragmentSelect("SUM(project_task.task_consumed) as consumed"),
                 FragmentSelectItemSql.fragmentSelect("SUM(project_task.task_left) as allLeft"),
                 FragmentSelectItemSql.fragmentSelect("SUM(project_task.task_consumed)/(SUM(project_task.task_consumed)+SUM(project_task.task_left)) as percent")
-        )
-                .from(PROJECTTABLE).join(
-                        Join.leftJoin(PROJECT_TASKTABLE,
-                                PROJECT_TASKTABLE.TASK_PROJECT.equal(PROJECTTABLE.PROJECT_ID)))
+        ).from(PROJECTTABLE).join(
+                Join.leftJoin(PROJECT_TASKTABLE,
+                        PROJECT_TASKTABLE.TASK_PROJECT.equal(PROJECTTABLE.PROJECT_ID)))
                 .where(PROJECTTABLE.PROJECT_ID.eq(project.getProjectId()))
                 .groupBy(PROJECTTABLE.PROJECT_ID);
         return getDslSession().fetchList(select, Project.class);
     }
 
-    public Pager<Project> querytAll(int start, int limit, final Project project, final OrderBy... orderBies) {
-        return getDslTemplate().queryPager(start, limit, project, false, new SelectGenerateCallback<Project>() {
-            public Select generate(Project t) {
-                Select select = MysqlSelect.select(PROJECTTABLE.ALL,
-                        FragmentSelectItemSql.fragmentSelect("SUM(project_task.task_consumed)/(SUM(project_task.task_consumed)+SUM(project_task.task_left)) as percent"))
-                        .from(PROJECTTABLE)
-                        .join(Join.leftJoin(PROJECT_TASKTABLE,
-                                PROJECT_TASKTABLE.TASK_PROJECT.equal(PROJECTTABLE.PROJECT_ID)))
-                        .where(and(
-                                PROJECTTABLE.PROJECT_ID.eq(t.getProjectId()))
-                        );
-
-                return addOrderByElements(select, orderBies);
-            }
-        });
-    }
-
-    @LogMethod("add")
     public Project add(Project project) {
         return getDslTemplate().insertAndReturnKey(project, new InsertGenerateCallback<Project>() {
             public Insert generate(Project t) {
@@ -155,7 +125,6 @@ public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
         });
     }
 
-    @LogMethod("edit")
     public int edit(Project project) {
 
         if (project == null || project.getProjectId() == null) {
@@ -165,7 +134,6 @@ public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
         return getDslSession().execute(update);
     }
 
-    @LogMethod("deleteByKey")
     public int deleteByKey(Integer pk) {
         if (pk == null) {
             return 0;
@@ -177,7 +145,6 @@ public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
         });
     }
 
-    @LogMethod("deleteByKeys")
     public int deleteByKeys(Integer... pks) {
         if (pks == null || pks.length == 0) {
             return 0;
@@ -327,7 +294,6 @@ public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
         return batchInsert(true, projects);
     }
 
-    @LogMethod("batchUpdate")
     public int[] batchUpdate(List<Project> projects) {
         if (CollectionUtil.isEmpty(projects)) {
             return new int[0];
@@ -369,7 +335,6 @@ public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
         });
     }
 
-    @LogMethod("batchDelete")
     public int[] batchDelete(List<Project> projects) {
         if (CollectionUtil.isEmpty(projects)) {
             return new int[0];
@@ -411,7 +376,6 @@ public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
         });
     }
 
-    @LogMethod("addOrderByElements")
     private Select addOrderByElements(Select select, OrderBy... orderBies) {
         List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
         for (int i = 0; orderBies != null && i < orderBies.length; i++) {
@@ -427,22 +391,26 @@ public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
     }
 
     public List<Project> getProjectByStoryId(Integer storyId) {
-
-        Select select = MysqlSelect.select(FragmentSelectItemSql.fragmentSelect("p.*")).from(FragmentSelectItemSql.fragmentFrom("project_story ps left join project p on p.project_id = ps.project_id"))
+        Select select = MysqlSelect.select(FragmentSelectItemSql.fragmentSelect("p.*")).from(
+                FragmentSelectItemSql.fragmentFrom("project_story ps left join project p on p.project_id = ps.project_id"))
                 .where(and(
                         FragmentSql.fragmentCondition("ps.story_id = " + storyId),
                         FragmentSql.fragmentCondition("ps.story_id is not null")
-
-
                 ));
-
         return getDslSession().fetchList(select, Project.class);
     }
 
     public List<Project> findByCondition(String condition) {
-        Select select = selectFrom(PROJECTTABLE).where(
-                FragmentSql.fragmentCondition(condition)
-        );
+        Select select = selectFrom(PROJECTTABLE).where(FragmentSql.fragmentCondition(condition));
+        return getDslSession().fetchList(select, Project.class);
+    }
+
+    public List<Project> findListByTeamUserId(String userId) {
+        Select select = selectFrom(PROJECTTABLE).where(PROJECTTABLE.PROJECT_ID.in(
+                subSelect(
+                        select(PROJECT_TEAMTABLE.PROJECT_ID).where(PROJECT_TEAMTABLE.TEAM_USER_ID.eq(userId))
+                )
+        ));
         return getDslSession().fetchList(select, Project.class);
     }
 }

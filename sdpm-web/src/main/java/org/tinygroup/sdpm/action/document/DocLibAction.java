@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.sdpm.common.web.BaseController;
-import org.tinygroup.sdpm.document.dao.pojo.DocumentDoclib;
+import org.tinygroup.sdpm.document.dao.pojo.DocumentDocLib;
 import org.tinygroup.sdpm.document.service.inter.DocService;
 import org.tinygroup.sdpm.util.CmsUtils;
 import org.tinygroup.sdpm.util.CookieUtils;
@@ -52,7 +52,7 @@ public class DocLibAction extends BaseController {
      */
     @RequiresPermissions("doclib-edit")
     @RequestMapping(value = "/edit")
-    public String editDocLib(@CookieValue(value = DocLibAction.COOKIE_DOCLIB_ID) Integer documentLibId, DocumentDoclib docLib, Model model) {
+    public String editDocLib(@CookieValue(value = DocLibAction.COOKIE_DOCLIB_ID) Integer documentLibId, DocumentDocLib docLib, Model model) {
         docLib = docservice.findDoclibById(documentLibId);
         model.addAttribute("doclib", docLib);
         if (documentLibId == 1 || documentLibId == 2) {
@@ -68,7 +68,7 @@ public class DocLibAction extends BaseController {
      * @return
      */
     @RequestMapping(value = "/save")
-    public String saveDocLib(DocumentDoclib docLib, HttpServletResponse response) {
+    public String saveDocLib(DocumentDocLib docLib, HttpServletResponse response) {
         if (docLib.getDocLibId() == null) {
             docLib = docservice.createNewDocLib(docLib);
         } else {
@@ -90,7 +90,7 @@ public class DocLibAction extends BaseController {
     @RequestMapping(value = "/delete")
     public Map delDocLib(@CookieValue(required = false, value = COOKIE_DOCLIB_ID) String documentLibId, Integer id,
     					HttpServletRequest request, HttpServletResponse response) {
-        List<DocumentDoclib> list = docservice.findDoclibList(null);
+        List<DocumentDocLib> list = docservice.findDoclibList(null);
         if (id != list.get(0).getDocLibId() && id != list.get(1).getDocLibId()) {
             docservice.deleteDoclibById(id);
             CmsUtils.removeDocLibList();

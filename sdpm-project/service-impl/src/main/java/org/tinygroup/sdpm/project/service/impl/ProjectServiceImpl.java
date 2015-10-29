@@ -48,6 +48,10 @@ public class ProjectServiceImpl implements ProjectService {
         return projectManager.findPagerProjects(start, limit, order, "asc".equals(ordertype) ? true : false);
     }
 
+    public List<Project> findListByTeamUserId(String userId) {
+        return projectManager.findListByTeamUserId(userId);
+    }
+
     public Project addProject(Project project) {
         project.setProjectStatus(project.WAIT);
         project.setProjectDeleted(project.DELETE_NO);

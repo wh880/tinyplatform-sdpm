@@ -17,7 +17,7 @@
         #@tabBodyCol("ptop-5")
             #@div(divClass="operationbar")
             <span class="f">
-                ${CmsUtils.getProject(currentProjectId).projectName}
+                ${ProjectUtils.getProject(currentProjectId).projectName}
             </span>
             <span class="r">
                 ##判断状态 进行中 3个按钮，挂起只是修改起止时间 3个按钮，挂起 则可以激活和结束，结束 可以激活
@@ -26,7 +26,7 @@
                         #if(project?.projectStatus=="1")
                             #if(m.id == "pro-survey-finish" || m.id == "pro-survey-hangUp" ||
                             m.id == "pro-survey-delay" || m.id == "pro-survey-doing")
-                                #@aModal("#myModal" CmsUtils.getProject(currentProjectId).projectName+">"+m.name
+                                #@aModal("#myModal" ProjectUtils.getProject(currentProjectId).projectName+">"+m.name
                                 1000 500 "" adminPath+m.href+"?projectId="+currentProjectId)
                                     #buttonIcon(iconClass=m.icon)${m.name}
                                 #end
@@ -34,21 +34,21 @@
                         #elseif (project?.projectStatus=="2")
                             #if(m.id == "pro-survey-finish" || m.id == "pro-survey-hangUp" ||
                             m.id == "pro-survey-delay")
-                                #@aModal("#myModal" CmsUtils.getProject(currentProjectId).projectName+">"+m.name
+                                #@aModal("#myModal" ProjectUtils.getProject(currentProjectId).projectName+">"+m.name
                                 1000 500 "" adminPath+m.href+"?projectId="+currentProjectId)
                                     #buttonIcon(iconClass=m.icon)${m.name}
                                 #end
                             #end
                         #elseif (project?.projectStatus=="3")
                             #if(m.id == "pro-survey-active" || m.sort == "pro-survey-finish")
-                                #@aModal("#myModal" CmsUtils.getProject(currentProjectId).projectName+">"+m.name
+                                #@aModal("#myModal" ProjectUtils.getProject(currentProjectId).projectName+">"+m.name
                                 1000 500 "" adminPath+m.href+"?projectId="+currentProjectId)
                                     #buttonIcon(iconClass=m.icon)${m.name}
                                 #end
                             #end
                         #elseif (project?.projectStatus=="4")
                             #if(m.sort == "pro-survey-active")
-                                #@aModal("#myModal" CmsUtils.getProject(currentProjectId).projectName+">"+m.name
+                                #@aModal("#myModal" ProjectUtils.getProject(currentProjectId).projectName+">"+m.name
                                 1000 500 "" adminPath+m.href+"?projectId="+currentProjectId)
                                     #buttonIcon(iconClass=m.icon)${m.name}
                                 #end
@@ -89,7 +89,7 @@
         </p>
 
         <div>
-            ${CmsUtils.getProject(currentProjectId)?.projectDesc}
+            ${ProjectUtils.getProject(currentProjectId)?.projectDesc}
         </div>
     #end
     #@div(divClass="infoContent")

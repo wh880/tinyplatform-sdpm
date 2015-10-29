@@ -24,7 +24,7 @@ import java.util.Date;
  * 
  * 文档相关的
  */
-public class DocumentDoclib implements Serializable {
+public class DocumentDocLib implements Serializable {
 
 	public static String DELETE_YES = "1";
 	public static String DELETE_NO = "0";
@@ -64,45 +64,44 @@ public class DocumentDoclib implements Serializable {
 	 */
 	private Date docLibEditedDate;
 
-
-	public void setDocLibId(Integer docLibId){
-		this. docLibId = docLibId;
-	}
-
 	public Integer getDocLibId(){
 		return docLibId;
 	}
 
-	public void setDocLibName(String docLibName){
-		this. docLibName = docLibName;
+	public void setDocLibId(Integer docLibId){
+		this. docLibId = docLibId;
 	}
 
 	public String getDocLibName(){
 		return docLibName;
 	}
 
-	public void setDocLibDeleted(String docLibDeleted){
-		this. docLibDeleted = docLibDeleted;
+	public void setDocLibName(String docLibName){
+		this. docLibName = docLibName;
 	}
 
 	public String getDocLibDeleted(){
 		return docLibDeleted;
 	}
 
-	public void setDocLibAddedDate(Date docLibAddedDate){
-		this. docLibAddedDate = docLibAddedDate;
+	public void setDocLibDeleted(String docLibDeleted){
+		this. docLibDeleted = docLibDeleted;
 	}
 
 	public Date getDocLibAddedDate(){
 		return docLibAddedDate;
 	}
 
-	public void setDocLibEditedDate(Date docLibEditedDate){
-		this. docLibEditedDate = docLibEditedDate;
+	public void setDocLibAddedDate(Date docLibAddedDate){
+		this. docLibAddedDate = docLibAddedDate;
 	}
 
 	public Date getDocLibEditedDate(){
 		return docLibEditedDate;
+	}
+
+	public void setDocLibEditedDate(Date docLibEditedDate){
+		this. docLibEditedDate = docLibEditedDate;
 	}
 
 }

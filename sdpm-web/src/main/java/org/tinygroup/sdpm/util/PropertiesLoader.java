@@ -1,8 +1,3 @@
-/**
- * Copyright (c) 2005-2011 springside.org.cn
- * <p>
- * $Id: PropertiesLoader.java 1690 2012-02-22 13:42:00Z calvinxiu $
- */
 package org.tinygroup.sdpm.util;
 
 import org.apache.commons.io.IOUtils;

@@ -8,8 +8,8 @@ import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
 import org.tinygroup.sdpm.project.service.inter.ProjectProductService;
-import org.tinygroup.sdpm.util.CmsUtils;
 import org.tinygroup.sdpm.util.CookieUtils;
+import org.tinygroup.sdpm.util.ProductUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -26,7 +26,7 @@ public class ProjectProductAction extends BaseController {
 
     @RequestMapping("/findLinkProduct")
     public String findLinkProduct(Model model, HttpServletRequest request) {
-        List<Product> productList = CmsUtils.getProductList();
+        List<Product> productList = ProductUtils.getProductList();
         Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
         List<ProjectProduct> linkList = projectProductService.findProducts(projectId);
         List<String> linkIdList = new ArrayList<String>();

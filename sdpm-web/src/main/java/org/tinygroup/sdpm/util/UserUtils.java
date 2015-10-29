@@ -1,6 +1,3 @@
-/**
- * Copyright &copy; 2012-2014 <a href="https://github.com/thinkgem/jeesite">JeeSite</a> All rights reserved.
- */
 package org.tinygroup.sdpm.util;
 
 import org.apache.shiro.SecurityUtils;
@@ -31,12 +28,8 @@ public class UserUtils {
     public static final String USER_CACHE = "userCache";
     public static final String USER_CACHE_ID_ = "id_";
     public static final String USER_CACHE_LOGIN_NAME_ = "ln";
-    public static final String USER_CACHE_LIST_BY_OFFICE_ID_ = "oid_";
     public static final String CACHE_ROLE_LIST = "roleList";
     public static final String CACHE_MENU_LIST = "menuList";
-    public static final String CACHE_AREA_LIST = "areaList";
-    public static final String CACHE_OFFICE_LIST = "officeList";
-    public static final String CACHE_OFFICE_ALL_LIST = "officeAllList";
     private static RoleService roleService = SpringContextHolder.getBean(RoleServiceImpl.class);
     private static UserService userService = SpringContextHolder.getBean(UserServiceImpl.class);
     private static MenuManager menuManager = SpringContextHolder.getBean(MenuManagerImpl.class);
@@ -89,9 +82,6 @@ public class UserUtils {
     public static void clearCache() {
         removeCache(CACHE_ROLE_LIST);
         removeCache(CACHE_MENU_LIST);
-        removeCache(CACHE_AREA_LIST);
-        removeCache(CACHE_OFFICE_LIST);
-        removeCache(CACHE_OFFICE_ALL_LIST);
         UserUtils.clearCache(getUser());
     }
 
@@ -103,9 +93,6 @@ public class UserUtils {
     public static void clearCache(OrgUser user) {
         CacheUtils.remove(USER_CACHE, USER_CACHE_ID_ + user.getOrgUserId());
         CacheUtils.remove(USER_CACHE, USER_CACHE_LOGIN_NAME_ + user.getOrgUserAccount());
-//		if (user.getOffice() != null && user.getOffice().getId() != null){
-//			CacheUtils.remove(USER_CACHE, USER_CACHE_LIST_BY_OFFICE_ID_ + user.getOffice().getId());
-//		}
     }
 
     /**

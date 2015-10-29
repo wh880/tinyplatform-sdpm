@@ -6,14 +6,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.tinygroup.convert.ConvertException;
+import org.tinygroup.convert.objectjson.jackson.ObjectToJson;
+import org.tinygroup.logger.LogLevel;
 import org.tinygroup.sdpm.common.util.DateUtils;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBurn;
 import org.tinygroup.sdpm.project.service.inter.BurnService;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
-import org.tinygroup.sdpm.util.CmsUtils;
-import org.tinygroup.sdpm.util.JsonMapper;
+import org.tinygroup.sdpm.util.ProjectUtils;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -49,7 +51,7 @@ public class BurnAction extends BaseController {
      *
      * @param choose   激活标签
      * @param interval 选择间隔时间
-     * @param ajax  判断是否为ajax请求的标识位
+     * @param ajax     判断是否为ajax请求的标识位
      * @param model
      * @return
      */
@@ -60,7 +62,7 @@ public class BurnAction extends BaseController {
             interval = 3;
         }
         DateFormat format = new SimpleDateFormat("M/d");//日期格式"M/d"
-        Project project = CmsUtils.getProject(projectId.toString());
+        Project project = ProjectUtils.getProject(projectId.toString());
         Date startData = project.getProjectBegin();
         Date endData = project.getProjectEnd();
         //项目周期
@@ -89,10 +91,14 @@ public class BurnAction extends BaseController {
                 leftList.add(tLeft);
             }
         }
-        JsonMapper mapper = JsonMapper.getInstance();
-        model.addAttribute("average", mapper.toJson(averageList));
-        model.addAttribute("days", mapper.toJson(dateList));
-        model.addAttribute("left", mapper.toJson(leftList));
+        ObjectToJson mapper = new ObjectToJson();
+        try {
+            model.addAttribute("average", mapper.convert(averageList));
+            model.addAttribute("days", mapper.convert(dateList));
+            model.addAttribute("left", mapper.convert(leftList));
+        } catch (ConvertException e) {
+            logger.logMessage(LogLevel.ERROR, "Json转换出错", e);
+        }
         model.addAttribute("interval", interval);
         model.addAttribute("choose", choose);
         model.addAttribute("projectId", projectId);

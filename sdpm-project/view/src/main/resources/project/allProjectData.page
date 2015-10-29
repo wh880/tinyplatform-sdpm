@@ -9,9 +9,7 @@
         var $lines =
         $(this);
         if (isIE && $.zui.browser.ie < 9 && $lines.length > 10) return;
-
-        $lines.each(function()
-    {
+        $lines.each(function(){
     var $e = $(this);
     var options = $.extend({values: $e.attr('values')}, $e.data(), setting),
     height = $e.height() - 4,
@@ -50,19 +48,15 @@
         $('.projectline').projectLine();
     });
 </script>
-#set(records=projectPager.totalCount,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
-#if (pagesize>records-pagesize*(page-1))
-    #set(pagesize=records-(page-1)*pagesize)
-#end
-#setTinyItemCount(records)
+#setTinyItemCount(projectPager.totalCount)
 #foreach(p:projectPager.records)
     #@tr()
-        #@td()<input type="checkbox" value="${p?.projectId}" name="idCheck">#end
-        #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/project/manage/survey/index?projectId=${p?.projectId}">${p
-            ?.projectId}</a>#end
-        #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/project/manage/survey/index?projectId=${p?.projectId}">${p
-            ?.projectName}</a>#end
-        #@td()${p?.projectCode}#end
+        #@td()<input type="checkbox" value="${p.projectId}" name="idCheck">#end
+        #@td()<a
+                href="${TINY_CONTEXT_PATH+adminPath}/project/manage/survey/index?projectId=${p.projectId}">${p.projectId}</a>#end
+        #@td()<a
+                href="${TINY_CONTEXT_PATH+adminPath}/project/manage/survey/index?projectId=${p.projectId}">${p.projectName}</a>#end
+        #@td()${p.projectCode}#end
         #@td()
             #if(p.projectEnd)
                 ${formatdate(p.projectEnd,"yyyy-MM-dd")}
@@ -75,7 +69,7 @@
         #@td()${format("%.2f",p.consume)}#end
         #@td()
         <div class="progress-bars text-l" style="width:110px">
-            format("%.2f",d)p?.percent
+            format("%.2f",d)p.percent
             <span class="sr-modern" style="width:${format(" %.2f%%",p.percent*100)}"></span>
         </div>
         <span style="left:115px; float:left;height: 0; position: relative;top: -14px">
@@ -85,15 +79,12 @@
         #@td()
         <p class='projectline text-left' values='${p.burnValue}' style="width:90px;height:30px;"></p>
         #end
-
     #end
 #end
 
-
-
 #@dialog("myModal")
-    #@dialogHeader()对话框标题#end
-    #@dialogBody()<p>对话框内容…</p>#end
+    #dialogHeader()
+    #dialogBody()
     #@dialogFooter()
         #@buttonEnsure()确定#end
         #@buttonCancel()关闭#end

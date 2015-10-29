@@ -52,7 +52,7 @@
             #@formControlDiv("col-3")
                 #@Tselect2F()
                     #@Tselect2Body("productLineId" cookieProductLineId {"class":"input-text select2"})
-                        #for(productLine : CmsUtils.getProductLineList())
+                        #for(productLine : ProductUtils.getProductLineList())
                             <option value="productLine?.productLineId">${productLine?.productLineName}</option>
                         #end
                     #end

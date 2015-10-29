@@ -32,8 +32,12 @@ public class ProjectManagerImpl implements ProjectManager {
         return projectDao.query(project);
     }
 
+    public List<Project> findListByTeamUserId(String userId) {
+        return projectDao.findListByTeamUserId(userId);
+    }
+
     public List<Project> findListProjects(Project project) {
-        return projectDao.tquerytAll(project);
+        return projectDao.findListWithStatistics(project);
     }
 
     public Pager<Project> findPagerProjects(Integer start, Integer limit, String sortName, boolean asc) {
@@ -51,7 +55,7 @@ public class ProjectManagerImpl implements ProjectManager {
 //        return projectPager;
 
         if (StringUtil.isBlank(sortName)) {
-            return projectDao.tquerytAll(start, limit, new Project());
+            return projectDao.findPageWithStatistics(start, limit, new Project());
         } else {
             OrderBy orderBy = null;
             if ("project_left".equals(sortName)) {
@@ -61,7 +65,7 @@ public class ProjectManagerImpl implements ProjectManager {
             } else {
                 orderBy = new OrderBy(sortName, asc);
             }
-            return projectDao.tquerytAll(start, limit, new Project(), orderBy);
+            return projectDao.findPageWithStatistics(start, limit, new Project(), orderBy);
         }
     }
 
