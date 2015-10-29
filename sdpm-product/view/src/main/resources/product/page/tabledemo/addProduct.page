@@ -53,7 +53,7 @@
                 #@Tselect2F()
                     #@Tselect2Body("productLineId" cookieProductLineId {"class":"input-text select2"})
                         #for(productLine : CmsUtils.getProductLineList())
-                            <option value="productLine?.productLineId">${productLine?.productLineName}</option>
+                            <option value="${productLine?.productLineId}">${productLine?.productLineName}</option>
                         #end
                     #end
 ##                    <script>
@@ -99,7 +99,7 @@
             #@colLabel()<span class="c-red">*</span>产品负责人：#end
             #@formControlDiv("col-3")
                 #@Tselect2F()
-                    #@Tselect2Body("productOwner" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                    #@Tselect2Body("productOwner" "" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                     #end
 
                     <script>
@@ -126,7 +126,7 @@
             #@formControlDiv("col-3")
                 #@Tselect2F()
                     #@Tselect2Body(
-                        "productQualityManager" "IN" {"class":"input-text select2","url":"/org/user/userList",
+                        "productQualityManager" "" {"class":"input-text select2","url":"/org/user/userList",
                         "ajaxType":"orguser","data":""}) ##,"multiple":"multiple"加上为多选项
 
                     #end
@@ -153,7 +153,7 @@
             #@formControlDiv("col-3")
                 #@Tselect2F()
                     #@Tselect2Body(
-                        "productDeliveryManager" "IN" {"class":"input-text select2 ","url":"/org/user/userList",
+                        "productDeliveryManager" "" {"class":"input-text select2 ","url":"/org/user/userList",
                         "ajaxType":"orguser","data":""}) ##,"multiple":"multiple"加上为多选项
 
                     #end

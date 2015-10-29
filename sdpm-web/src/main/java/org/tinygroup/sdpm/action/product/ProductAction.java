@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.UserService;
@@ -76,7 +77,12 @@ public class ProductAction extends BaseController {
 
     @RequestMapping("/save")
     public String save(@CookieValue(value = "cookieProductLineId") String cookieProductLineId,Product product,SystemAction systemAction, HttpServletRequest request) {
-
+        String productLine = cookieProductLineId;
+        if(product.getProductLineId()==null&&product.getProductLineId()<1) {
+            product.setProductLineId(Integer.parseInt(productLine));
+        }else{
+            productLine=String.valueOf(product.getProductLineId());
+        }
         product.setProductLineId(Integer.parseInt(cookieProductLineId));
         product.setProductCreatedBy(UserUtils.getUserId());
         product.setProductCreatedDate(new Date());
@@ -84,7 +90,9 @@ public class ProductAction extends BaseController {
         
         product = productService.addProduct(product);
         CmsUtils.removeProductList();
-        CmsUtils.removeProductList(String.valueOf(product.getProductLineId()));
+        CmsUtils.removeProductList(productLine);
+        CmsUtils.removeAllProductListByUser();
+        CmsUtils.removeProductListByProductLineUser(productLine);
         LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCT,
                 LogUtil.LogAction.OPENED,
                 String.valueOf(product.getProductId()),
@@ -104,7 +112,15 @@ public class ProductAction extends BaseController {
         Product product1 = productService.findProduct(product.getProductId());
         productService.updateProduct(product);
         CmsUtils.removeProductList();
-        CmsUtils.removeProductList(String.valueOf(product.getProductLineId()));
+        CmsUtils.removeProductList(String.valueOf(
+                product.getProductLineId().equals(product1.getProductId())?
+                product1.getProductLineId():product.getProductLineId()
+                ));
+        CmsUtils.removeAllProductListByUser();
+        CmsUtils.removeProductListByProductLineUser(String.valueOf(
+                product.getProductLineId().equals(product1.getProductId())?
+                product1.getProductLineId():product.getProductLineId()
+                ));
         LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCT,
                 LogUtil.LogAction.EDITED,
                 String.valueOf(product.getProductId()),
@@ -147,6 +163,8 @@ public class ProductAction extends BaseController {
         Product product = productService.findProduct(productId);
         CmsUtils.removeProductList();
         CmsUtils.removeProductList(String.valueOf(product.getProductLineId()));
+        CmsUtils.removeAllProductListByUser();
+        CmsUtils.removeProductListByProductLineUser(String.valueOf(product1.getProductLineId()));
         LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCT,
                 LogUtil.LogAction.DELETED,
                 String.valueOf(productId),
@@ -173,16 +191,12 @@ public class ProductAction extends BaseController {
     public String find(@CookieValue(value = "cookieProductId") String cookieProductId,
             @PathVariable(value = "forward") String forward, Integer productId, Model model, HttpServletRequest request) {
         if("close".equals(forward))return "/product/page/tabledemo/overview-close.pagelet";
+        if(productId!=null)cookieProductId=String.valueOf(productId);
         Product product = productService.findProduct(Integer.parseInt(cookieProductId));
         
         SystemHistory history = new SystemHistory();
-        List<SystemHistory> histories = historyService.find(history);
-        SystemAction action = new SystemAction();
-        action.setActionObjectType("story");
-       // List<SystemAction> actions = actionService.find(action);
-       // model.addAttribute("action", actions);
+
         model.addAttribute("product", product);
-        model.addAttribute("history", histories);
 
         if ("overview".equals(forward)) {
         	
@@ -195,10 +209,14 @@ public class ProductAction extends BaseController {
 
     @RequestMapping("/list")
     public String list(Product product,String treeId,
+                       @CookieValue("cookieProductLineId") String cookieProductLineId,
                        @RequestParam(required = false, defaultValue = "1") int page,
                        @RequestParam(required = false, defaultValue = "10") int pagesize,
                        @RequestParam(required = false, defaultValue = "productId") String order,
                        @RequestParam(required = false, defaultValue = "asc") String ordertype, Model model) {
+        if(!StringUtil.isBlank(cookieProductLineId)){
+            product.setProductLineId(Integer.parseInt(cookieProductLineId));
+        }
         product.setDeleted(0);
         Pager<Product> pagerProduct = productService.findProductPager(page, pagesize, product, order, ordertype);
 
@@ -209,14 +227,18 @@ public class ProductAction extends BaseController {
     @RequestMapping("/findManager")
     public String findManager(Integer productId, Model model) {
 
-        OrgUser productOwner = userService.findUser(productService.findProduct(productId).getProductOwner().toString());
-        OrgUser productQualityManager = userService.findUser(productService.findProduct(productId).getProductQualityManager().toString());
-        OrgUser productDeliveryManager = userService.findUser(productService.findProduct(productId).getProductDeliveryManager().toString());
-
-        model.addAttribute("productOwner", productOwner);
-        model.addAttribute("productQualityManager", productQualityManager);
-        model.addAttribute("productDeliveryManager", productDeliveryManager);
-
+        if(!StringUtil.isBlank(productService.findProduct(productId).getProductOwner())){
+            OrgUser productOwner = userService.findUser(productService.findProduct(productId).getProductOwner());
+            model.addAttribute("productOwner", productOwner);
+        }
+        if(!StringUtil.isBlank(productService.findProduct(productId).getProductQualityManager())){
+            OrgUser productQualityManager = userService.findUser(productService.findProduct(productId).getProductQualityManager());
+            model.addAttribute("productQualityManager", productQualityManager);
+        }
+        if(!StringUtil.isBlank(productService.findProduct(productId).getProductDeliveryManager())){
+            OrgUser productDeliveryManager = userService.findUser(productService.findProduct(productId).getProductDeliveryManager());
+            model.addAttribute("productDeliveryManager", productDeliveryManager);
+        }
         return "/organization/userbaseinfo.pagelet";
     }
 

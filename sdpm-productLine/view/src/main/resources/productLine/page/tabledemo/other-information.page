@@ -39,9 +39,18 @@
             #@tr()
                 #@td()分组白名单#end
                 #@td()
-	                #foreach(white:productLine?.productLineWhiteList.split(','))
-	                	${getDict("whiteList",white)}
-	                #end
+                    #if(productLine?.productLineWhiteList)
+                        #for(str : productLine?.productLineWhiteList?.split(","))
+                        #for(role : UserUtils.getAllRoleList())
+                        #if(strFor.index!=1)
+                        ,
+                        #end
+                        #if(role?.orgRoleId == str)
+                            ${role?.orgRoleName}
+                        #end
+                    #end
+                #end
+            #end
                 #end
                 #@td()#end
             #end

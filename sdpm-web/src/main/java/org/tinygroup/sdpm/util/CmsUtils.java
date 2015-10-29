@@ -212,9 +212,10 @@ public class CmsUtils {
      */
 
     public static String getUserListByProduct(String productId){
-        String result = (String) UserUtils.getCache(USER_CACHE_TEAM_LIST_BY_PRODUCT);
+        String result = (String) UserUtils.getCache(USER_CACHE_TEAM_LIST_BY_PRODUCT+productId);
         if(StringUtil.isBlank(result)) {
             List<ProjectProduct> projectProducts = projectProductService.findProjects(Integer.parseInt(productId));
+            Product product = getProduct(productId);
             List<List<ProjectTeam>> teamsList = new ArrayList<List<ProjectTeam>>();
             for (ProjectProduct projectProduct : projectProducts) {
                 if (projectProduct.getProjectId() != null && projectProduct.getProjectId() > 0) {
@@ -225,15 +226,19 @@ public class CmsUtils {
             for (List<ProjectTeam> teams : teamsList) {
                 for (ProjectTeam team : teams) {
                     if (!StringUtil.isBlank(team.getTeamUserId())) {
-                        if (!StringUtil.isBlank(result.toString())) {
+                        if (!StringUtil.isBlank(resultBuffer.toString())) {
                             resultBuffer.append(",");
                         }
                         resultBuffer.append(team.getTeamUserId());
                     }
                 }
             }
+            if (!StringUtil.isBlank(resultBuffer.toString())) {
+                resultBuffer.append(",");
+            }
+            resultBuffer.append(product.getProductOwner());
             result = resultBuffer.toString();
-            UserUtils.putCache(USER_CACHE_TEAM_LIST_BY_PRODUCT,result);
+            UserUtils.putCache(USER_CACHE_TEAM_LIST_BY_PRODUCT+productId,result);
         }
         return result;
     }
@@ -241,16 +246,17 @@ public class CmsUtils {
     /**
      * 清除产品项目组员列表
      */
-    public static void removeUserListByProduct(){
-        UserUtils.removeCache(USER_CACHE_TEAM_LIST_BY_PRODUCT);
+    public static void removeUserListByProduct(String productId){
+        UserUtils.removeCache(USER_CACHE_TEAM_LIST_BY_PRODUCT+productId);
     }
 
     /**
      * 获取产品线项目组员列表
      */
     public static String getUserListByProductLine(String productLineId){
-        String result = (String) UserUtils.getCache(USER_CACHE_TEAM_LIST_BY_PRODUCT_LINE);
+        String result = (String) UserUtils.getCache(USER_CACHE_TEAM_LIST_BY_PRODUCT_LINE+productLineId);
         if(StringUtil.isBlank(result)) {
+            ProductLine productLine = productLineService.findProductLine(Integer.parseInt(productLineId));
             StringBuffer users = new StringBuffer("");
             Product product = new Product();
             product.setProductLineId(Integer.parseInt(productLineId));
@@ -263,17 +269,25 @@ public class CmsUtils {
                     users.append(getUserListByProduct(String.valueOf(p.getProductId())));
                 }
             }
+            if (!StringUtil.isBlank(users.toString())) {
+                users.append(",");
+            }
+            users.append(productLine.getProductLineOwner());
             result = users.toString();
-            UserUtils.putCache(USER_CACHE_TEAM_LIST_BY_PRODUCT_LINE,result);
+            UserUtils.putCache(USER_CACHE_TEAM_LIST_BY_PRODUCT_LINE+productLineId,result);
         }
         return result;
     }
 
     /**
-     * 清除产品项目组员列表
+     * 清除产品线项目组员列表
      */
-    public static void removeUserListByProductLine(){
-        UserUtils.removeCache(USER_CACHE_TEAM_LIST_BY_PRODUCT_LINE);
+    public static void removeUserListByProductLine(String productLineId){
+        UserUtils.removeCache(USER_CACHE_TEAM_LIST_BY_PRODUCT_LINE+productLineId);
+        List<Product> products = getProductListByLine(productLineId);
+        for(Product product : products){
+            removeUserListByProduct(String.valueOf(product.getProductId()));
+        }
     }
 
     /**
@@ -287,9 +301,7 @@ public class CmsUtils {
             String loginId = UserUtils.getUserId();
             for (ProductLine productLine : productLines) {
                 int validate = validateProductLine(loginId,productLine);
-                if(validate==1){
-                    result = productLines;
-                }else if(validate==2){
+                if(validate<3){
                     result.add(productLine);
                 }
             }
@@ -303,35 +315,39 @@ public class CmsUtils {
      */
     public static void removeProductLineListByUser(){
         UserUtils.removeCache(USER_CACHE_PRODUCT_LINE_LIST_BY_USER);
+        List<ProductLine> productLines = getProductLineList();
+        for(ProductLine productLine : productLines){
+            removeProductListByProductLineUser(String.valueOf(productLine.getProductLineId()));
+        }
     }
 
     /**
       * 获取当前产品线中用户可访问的产品
       */
     public static List<Product> getProductListByProductLineUser(String productLineId){
-        List<Product> result = (List<Product>) UserUtils.getCache(USER_CACHE_PRODUCT_LIST_BY_LINE_USER);
+        List<Product> result = (List<Product>) UserUtils.getCache(USER_CACHE_PRODUCT_LIST_BY_LINE_USER+productLineId);
         if(result==null) {
             List<Product> products = getProductListByLine(productLineId);
             result = new ArrayList<Product>();
             String loginId = UserUtils.getUserId();
+            ProductLine productLine = productLineService.findProductLine(Integer.parseInt(productLineId));
             for (Product product : products) {
-                int validate = validateProduct(loginId,product);
-                if(validate==1){
-                    result = products;
-                }else if(validate==2){
+                int validate = validateProductWithProductLine(loginId,product,productLine);
+                if(validate<3){
                     result.add(product);
                 }
             }
-            UserUtils.putCache(USER_CACHE_PRODUCT_LIST_BY_LINE_USER,result);
+            UserUtils.putCache(USER_CACHE_PRODUCT_LIST_BY_LINE_USER+productLineId,result);
         }
         return result;
     }
 
     /**
-     * 清除当前用户可访问的产品线
+     * 清除当前产品线用户可访问的产品
      */
-    public static void removeProductListByProductLineUser(){
-        UserUtils.removeCache(USER_CACHE_PRODUCT_LIST_BY_LINE_USER);
+    public static void removeProductListByProductLineUser(String productLineId){
+        UserUtils.removeCache(USER_CACHE_PRODUCT_LIST_BY_LINE_USER+productLineId);
+        removeUserListByProductLine(productLineId);
     }
 
     /**
@@ -345,14 +361,8 @@ public class CmsUtils {
             String loginId = UserUtils.getUserId();
             for (Product product : products) {
                 ProductLine productLine = productLineService.findProductLine(product.getProductLineId());
-                int lineValidate = validateProductLine(loginId,productLine);
-                if(lineValidate<3){
-                    int validate = validateProduct(loginId,product);
-                    if(validate==1){
-                        result = products;
-                    }else if(validate==2){
-                        result.add(product);
-                    }
+                if(validateProductWithProductLine(loginId,product,productLine)<3){
+                    result.add(product);
                 }
             }
             UserUtils.putCache(USER_CACHE_ALL_PRODUCT_LIST_BY_USER,result);
@@ -361,25 +371,26 @@ public class CmsUtils {
     }
 
     /**
-     * 清除当前用户可访问的产品线
+     * 清除当前用户可访问的产品
      */
     public static void removeAllProductListByUser(){
         UserUtils.removeCache(USER_CACHE_ALL_PRODUCT_LIST_BY_USER);
+        List<Product> products = getProductList();
+        for(Product product : products){
+            removeUserListByProduct(String.valueOf(product.getProductId()));
+        }
     }
 
     private static Integer validateProductLine(String loginId, ProductLine productLine){
         if (productLine.getAcl() < 1) {
-            return 1;
+            return 2;
         } else if (productLine.getAcl() == 1) {
-            if (loginId.equals(productLine.getProductLineOwner())) {
-                return 2;
-            } else if (getUserListByProductLine(String.valueOf(productLine.getProductLineId())).contains(loginId)) {
+            if (getUserListByProductLine(String.valueOf(productLine.getProductLineId())).contains(loginId)) {
                 return 2;
             }
+            return 3;
         } else {
-            if (loginId.equals(productLine.getProductLineOwner())) {
-                return 2;
-            } else if (getUserListByProductLine(String.valueOf(productLine.getProductLineId())).contains(loginId)) {
+            if(getUserListByProductLine(String.valueOf(productLine.getProductLineId())).contains(loginId)) {
                 return 2;
             } else {
                 for (OrgRole role : UserUtils.getUserRoleList()) {
@@ -394,17 +405,14 @@ public class CmsUtils {
 
     private static Integer validateProduct(String loginId, Product product){
         if (product.getAcl() < 1) {
-            return 1;
+            return 2;
         } else if (product.getAcl() == 1) {
-            if (loginId.equals(product.getProductOwner())) {
-                return 2;
-            } else if (getUserListByProduct(String.valueOf(product.getProductId())).contains(loginId)) {
+            if (getUserListByProduct(String.valueOf(product.getProductId())).contains(loginId)) {
                 return 2;
             }
+            return 3;
         } else {
-            if (loginId.equals(product.getProductOwner())) {
-                return 2;
-            } else if (getUserListByProduct(String.valueOf(product.getProductId())).contains(loginId)) {
+            if(getUserListByProduct(String.valueOf(product.getProductId())).contains(loginId)) {
                 return 2;
             } else {
                 for (OrgRole role : UserUtils.getUserRoleList()) {
@@ -412,6 +420,17 @@ public class CmsUtils {
                         return 2;
                     }
                 }
+            }
+        }
+        return 3;
+    }
+
+    private static Integer validateProductWithProductLine(String loginId, Product product,ProductLine productLine){
+        int lineValidate = validateProductLine(loginId,productLine);
+        if(lineValidate<3){
+            int validate = validateProduct(loginId,product);
+            if(validate<3){
+                return 2;
             }
         }
         return 3;
