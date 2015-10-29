@@ -127,32 +127,6 @@ public class ProductUtils {
 
 
     /**
-     * 清除产品项目组员列表
-     */
-    public static void removeUserListByProduct() {
-        UserUtils.removeCache(USER_CACHE_TEAM_LIST_BY_PRODUCT);
-    }
-
-
-    /**
-     * 清除产品项目组员列表
-     */
-    public static void removeUserListByProductLine() {
-        UserUtils.removeCache(USER_CACHE_TEAM_LIST_BY_PRODUCT_LINE);
-    }
-
-
-    /**
-     * 清除当前用户可访问的产品线
-     */
-    public static void removeProductListByProductLineUser() {
-        UserUtils.removeCache(USER_CACHE_PRODUCT_LIST_BY_LINE_USER);
-    }
-
-
-    ////////
-
-    /**
      * 获取产品项目组员列表
      */
 
