@@ -406,8 +406,11 @@ public class CmsUtils {
                 return 2;
             } else {
                 for (OrgRole role : UserUtils.getUserRoleList()) {
-                    if (productLine.getProductLineWhiteList().contains(String.valueOf(role.getOrgRoleId()))) {
-                        return 2;
+                    String[] whites = productLine.getProductLineWhiteList().split(",");
+                    for (String white : whites){
+                        if (white.equals(role.getOrgRoleId().toString())){
+                            return 2;
+                        }
                     }
                 }
             }
@@ -428,8 +431,11 @@ public class CmsUtils {
                 return 2;
             } else {
                 for (OrgRole role : UserUtils.getUserRoleList()) {
-                    if (product.getProductWhiteList().contains(String.valueOf(role.getOrgRoleId()))) {
-                        return 2;
+                    String[] whites = product.getProductWhiteList().split(",");
+                    for (String white : whites){
+                        if (white.equals(role.getOrgRoleId().toString())){
+                            return 2;
+                        }
                     }
                 }
             }

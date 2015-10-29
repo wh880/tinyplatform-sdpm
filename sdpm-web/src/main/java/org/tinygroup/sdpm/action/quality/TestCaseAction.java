@@ -192,13 +192,14 @@ public class TestCaseAction extends BaseController {
 
 	@RequestMapping("/execute")
 	public String execute(Integer caseId, CaseStepResults caseStepResults,String resultType, String from,Integer runId,
-			HttpServletRequest request) {
+			HttpServletRequest request){
 		QualityTestRun run = null;
 		if(!StringUtil.isBlank(from)){
 			run = testRunService.findRunById(runId);
 		}
 		QualityTestCase old = testCaseService.findById(caseId);
 		QualityTestCase testCase = new QualityTestCase();
+		testCase.setCaseId(caseId);
 		QualityTestResult qualityTestResult = new QualityTestResult();
 		qualityTestResult.setLinkCase(caseId);
 		qualityTestResult.setTestResultDate(new Date());

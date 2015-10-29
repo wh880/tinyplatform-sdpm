@@ -54,7 +54,7 @@
         #end
         <center>
 	        <button type="button" id="back" class="btn">上一个</button>
-			#if(caseSteps?.size()<1)
+			#if(stepList?.size()<1)
 			<button type="button" id="pass" class="btn btn-success">通过</button>
 			<button type="button" id="fault" class="btn btn-danger">失败</button>
 			#hiddenInput(hiddenInputName="resultType")

@@ -8,18 +8,19 @@
 					${product?.productName}
 					#set(finded=1)
 				#end
-				#if(finded==0)
-				<script type="text/javascript">
-					$.removeCookie('qualityProductId',{path:"/"})
-					//window.location.href='http://localhost:8989/sdpm-web/a/project/task/index';
-					window.location.reload();
-				</script>
-				#end
+			#end
+			#if(finded==0)
+			<script type="text/javascript">
+				$.removeCookie('qualityProductId',{path:"/"})
+				//window.location.href='http://localhost:8989/sdpm-web/a/project/task/index';
+				window.location.reload();
+			</script>
 			#end
 		#else
 			#if(CmsUtils.getAllProductListByUser()?.size()>0)
 			<script type="text/javascript">
 				$(function(){
+					alert("${qualityProductId}2");
 					$.cookie('qualityProductId',"${CmsUtils.getAllProductListByUser()?.get(0)?.productId}",{path:"/"});
 					window.location.reload();
 				})
@@ -76,7 +77,7 @@
 	$(function(){
 		$("#product-select").on("change",function(){
 			var dataValue = $(this).val();
-			$.cookie('qualityProductId',dataValue);
+			$.cookie('qualityProductId',dataValue,{path:"/"});
 			window.location.reload();
 		});
 	});

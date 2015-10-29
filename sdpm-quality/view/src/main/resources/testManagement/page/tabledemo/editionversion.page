@@ -55,7 +55,7 @@
 					 #@Tselect2F()
 	                   		 #@Tselect2Body("projectId" testTask?.projectId?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 	                   		 <option value="0">/</option>
-	                   		 #for(project : projectList)
+	                   		 #for(project : getAllProductListByUser)
 	                        <option value="${project?.projectId}">${project?.projectName}</option>
 	                        #end
 	                    	#end
