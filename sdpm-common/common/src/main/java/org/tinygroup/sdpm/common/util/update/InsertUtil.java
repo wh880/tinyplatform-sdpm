@@ -23,10 +23,11 @@ public class InsertUtil {
 			for (Field field : fields) {
 				Method method = null;
 				Object value = null;
+
 				try {
 					method = object.getClass().getMethod(NameUtil.toMethod(field.getName()));
 				} catch (NoSuchMethodException e) {
-					break;
+					continue;
 				}
 
 				if (method != null) {

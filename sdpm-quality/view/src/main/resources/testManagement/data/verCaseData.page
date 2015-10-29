@@ -18,7 +18,7 @@
             						<a class="deleteRun" href="javascript:void(0)" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
             					#elseif(m.id=="tvertobug")
                                     #if("2".equals(run?.testRunLastRunResult))
-                                        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?caseId=${run?.caseId}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+										#iconOperations("#myModal" m.icon m.name "865" "400" adminPath+m.href+"?caseId="+run?.caseId "ml-1")
                                     #else
                                          <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>
                                     #end

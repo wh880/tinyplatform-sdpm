@@ -21,14 +21,32 @@
 			</span>
 			<span class="r">
 				<div style="text-align:center;margin:auto">
-				<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/versionEnd.page">
-					#buttonIcon(iconClass="icon-off")关闭</a>
-				<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/cases.page">#buttonIcon(iconClass="icon-dashboard")用例</a>
-				<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/versionLink.page">#buttonIcon(iconClass="icon-link	")关联用例</a>
-				<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/tabledemo/editionversion.page" title="编辑版本">#buttonIcon(iconClass="icon-pencil")</a>
-				#@delItemsdpm("/sdpm-web/testManagement/page/cases.page" 3 "/sdpm-web/testManagement/page/cases.page")#buttonIcon(iconClass="icon-remove")#end&nbsp 
+					#foreach(m:menuManager.getScopeMenus("testverinfo-tab"))
 
-				<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/version.page" title="返回">#buttonIcon(iconClass="icon-reply")</a>
+						#if(m.id=="tverclose")
+							#@aModal("#closeModal" m.name "800" "600" "" adminPath+m.href+"?testversionId="+testTask?.testversionId "ml-5")
+								#buttonIcon(iconClass=m.icon)${m.name}#end&nbsp;&nbsp;
+##							<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?testversionId=${testTask?.testversionId}">#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp;&nbsp;
+						#elseif(m.id=="tvercase")
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?testversionId=${testTask?.testversionId}&status=tverallcase&currentPageId=5">
+								#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp;&nbsp;
+						#elseif(m.id=="tversionLink")
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?testversionId=${testTask?.testversionId}&currentPageId=5">
+								#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp;&nbsp;
+						#else
+							#if(m.id=="tverback")
+								<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" title="${m.name}">
+									#buttonIcon(iconClass=m.icon)</a>&nbsp;&nbsp;
+							#elseif(m.id=="tversionedit")
+                                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?testversionId=${testTask?.testversionId}&currentPageId=5" title="${m.name}">
+									#buttonIcon(iconClass=m.icon)</a>&nbsp;&nbsp;
+							#elseif(m.id=="tverdelete")
+                                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?testversionId=${testTask?.testversionId}&currentPageId=5" title="${m.name}">
+									#buttonIcon(iconClass=m.icon)</a>&nbsp;&nbsp;
+							#end
+						#end
+
+					#end
 			</span>
 		#end
 		##operationbar end
@@ -65,7 +83,7 @@
 ##	#include("/testManagement/page/versionSituationpaging.page")
 	#TypeInfo("qualityVersionSituation",testTask?.testversionId)
 </div>
-				#@dialog("noteModal")
+				#@dialog("closeModal")
 					#@dialogHeader()对话框标题#end
 					#@dialogBody()<p>对话框内容…</p>#end
 					#@dialogFooter()						

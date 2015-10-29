@@ -17,9 +17,13 @@
             })
         </script>
         #else
+            #set(msg="目前没有产品线，现在将前往添加。")
+            #if(CmsUtils.getProductLineList().size()>0)
+                #set(msg="目前没有你可访问的产品线，现在将前往添加。")
+            #end
         <script type="text/javascript">
             $(function(){
-                layer.msg('目前没有产品线，现在将前往添加。<div style="text-align:center"><a href="${TINY_CONTEXT_PATH+adminPath}/productLine/content/add"><span id="showTime">5</span>秒后前往</a></div>',5,-1,function(){
+                layer.msg('${msg}<div style="text-align:center"><a href="${TINY_CONTEXT_PATH+adminPath}/productLine/content/add"><span id="showTime">5</span>秒后前往</a></div>',5,-1,function(){
                     window.location.href = "${TINY_CONTEXT_PATH+adminPath}/productLine/content/add";
                 });
                 var timeVal=5;

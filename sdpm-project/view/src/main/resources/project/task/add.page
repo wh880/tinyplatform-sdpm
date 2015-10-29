@@ -95,7 +95,7 @@
         #end
         #@elementItem()
             #@sdpmItem("任务名称" "*")
-                #@formControlDiv("col-8")
+                #@formControlDiv()
                     #tinyInput(
                         "text" "taskName" "" {"placeholder":"任务名称","datatype":"*","nullmsg":"任务名称不能为空！",
                         "class":"input-text"})
@@ -130,7 +130,7 @@
         #end
         #@elementItem()
             #@sdpmItem("最初预计")
-                #@formControlDiv("col-8")
+                #@formControlDiv()
                     <div class="input-group">
                         #tinyInput("text" "taskEstimate" copyTask?.taskEstimate {"placeholder":"最初预计","datatype":
                             "/^[0-9]+(.[0-9]{1,2})?$/",

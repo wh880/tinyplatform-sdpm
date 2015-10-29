@@ -28,10 +28,14 @@
 				</script>
 				#else
                 <script type="text/javascript">
+						#set(msg="目前没有产品，现在将前往添加。")
+						#if(CmsUtils.getProductListByLine(cookieProductLineId).size()>0)
+							#set(msg="目前没有你可访问的产品，现在将前往添加。")
+						#end
                     $(function(){
 						var url = window.location.pathname;
 						if(url.indexOf("addproduct")<0){
-							layer.msg('目前没有产品，现在将前往添加。<div style="text-align:center"><a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition"><span id="showTime">5</span>秒后前往</a></div>',5,-1,function(){
+							layer.msg('${msg}<div style="text-align:center"><a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition"><span id="showTime">5</span>秒后前往</a></div>',5,-1,function(){
 								window.location.href = "${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition";
 							});
 							var timeVal=5;
@@ -56,21 +60,7 @@
                 })
             </script>
 			#else
-##            <script type="text/javascript">
-##                $(function(){
-##                    layer.msg('目前没有产品线，现在将前往添加。<div style="text-align:center"><a href="${TINY_CONTEXT_PATH+adminPath}/productLine/content/add"><span id="showTime">5</span>秒后前往</a></div>',5,-1,function(){
-##                        window.location.href = "${TINY_CONTEXT_PATH+adminPath}/productLine/content/add";
-##                    });
-##                    var timeVal=5;
-##                    function changeTime(){
-##                        $("#showTime").html(--timeVal);
-##                        window.setTimeout(function(){
-##                            changeTime();
-##                        },1000);
-##                    }
-##                    changeTime();
-##                })
-##            </script>
+
 			#end
 		#end
 

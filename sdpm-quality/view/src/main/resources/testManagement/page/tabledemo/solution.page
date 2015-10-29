@@ -85,7 +85,7 @@
 	             #@Tselect2Body("bugAssignedTo" bug?.bugAssignedTo?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                     <option value="0">/</option>
                     #foreach(user : userList)
-                    <option value="${user?.orgUserId}">${user?.orgUserAccount}</option>
+                    <option value="${user?.orgUserId}">${user?.orgUserRealName}</option>
                     #end
 	               #end                
 	        ##       #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end

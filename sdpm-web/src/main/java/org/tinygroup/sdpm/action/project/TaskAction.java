@@ -589,8 +589,12 @@ public class TaskAction extends BaseController {
         Map<String, List<ProjectTask>> mapDocument = new HashMap<String, List<ProjectTask>>();
         if (type.equals("1")) {
             for (String key : map.keySet()) {
-                String t = productStoryService.findStory(Integer.parseInt(key)).getStoryTitle();
-                mapDocument.put(t, map.get(key));
+                if (key.isEmpty()) {
+                    mapDocument.put(key, map.get(key));
+                } else {
+                    String t = productStoryService.findStory(Integer.parseInt(key)).getStoryTitle();
+                    mapDocument.put(t, map.get(key));
+                }
             }
         }
         model.addAttribute("mapDocument", mapDocument);

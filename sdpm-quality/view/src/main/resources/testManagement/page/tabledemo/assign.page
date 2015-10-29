@@ -54,7 +54,7 @@
 	                    #@Tselect2Body("bugAssignedTo" bug?.bugAssignedTo?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 	                       <option value="I0">/</option>
 	                         #for(user : userList)
-	                        <option value="${user?.orgUserId}">${user?.orgUserAccount}</option>
+	                        <option value="${user?.orgUserId}">${user?.orgUserRealName}</option>
 	                    	#end
 	                    #end
               #end  

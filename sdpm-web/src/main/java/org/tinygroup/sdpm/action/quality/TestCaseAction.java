@@ -1,15 +1,6 @@
 package org.tinygroup.sdpm.action.quality;
 
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,22 +12,20 @@ import org.tinygroup.sdpm.action.quality.actionBean.CaseStepResults;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
-import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
-import org.tinygroup.sdpm.org.service.inter.UserService;
-import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
-import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.product.service.StoryService;
 import org.tinygroup.sdpm.quality.dao.pojo.*;
 import org.tinygroup.sdpm.quality.service.inter.*;
 import org.tinygroup.sdpm.system.dao.pojo.ProfileType;
-import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.sdpm.util.LogUtil;
 import org.tinygroup.sdpm.util.ModuleUtil;
 import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.*;
 
 /**
  * Created by chenpeng15668 on 2015-9-24
@@ -203,13 +192,14 @@ public class TestCaseAction extends BaseController {
 
 	@RequestMapping("/execute")
 	public String execute(Integer caseId, CaseStepResults caseStepResults,String resultType, String from,Integer runId,
-			HttpServletRequest request) {
+			HttpServletRequest request){
 		QualityTestRun run = null;
 		if(!StringUtil.isBlank(from)){
 			run = testRunService.findRunById(runId);
 		}
 		QualityTestCase old = testCaseService.findById(caseId);
 		QualityTestCase testCase = new QualityTestCase();
+		testCase.setCaseId(caseId);
 		QualityTestResult qualityTestResult = new QualityTestResult();
 		qualityTestResult.setLinkCase(caseId);
 		qualityTestResult.setTestResultDate(new Date());

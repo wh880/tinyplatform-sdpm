@@ -59,7 +59,7 @@ public class ProductLineAction extends BaseController {
         productLine.setProductLineStatus("0");
         ProductLine productLine1 = productLineService.addProductLine(productLine);
         ProductUtils.removeProductLineList();
-        
+        ProductUtils.removeProductLineListByUser();
         LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCTLINE
                 , LogUtil.LogAction.OPENED
                 ,String.valueOf(productLine1.getProductLineId())
@@ -77,6 +77,8 @@ public class ProductLineAction extends BaseController {
     public String update(ProductLine productLine) {
         ProductLine productLineOld = productLineService.findProductLine(productLine.getProductLineId());
         productLineService.updateProductLine(productLine);
+        ProductUtils.removeProductLineList();
+        ProductUtils.removeProductLineListByUser();
         LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCTLINE,
                 LogUtil.LogAction.EDITED,
                 String.valueOf(productLine.getProductLineId()),
@@ -120,6 +122,7 @@ public class ProductLineAction extends BaseController {
         productLineService.deleteProductLine(productLineId);
         ProductUtils.removeProductLineList();
         ProductUtils.removeProductList(String.valueOf(productLineId));
+        ProductUtils.removeProductLineListByUser();
         Map<String, String> map = new HashMap<String, String>();
         LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCTLINE,
                 LogUtil.LogAction.DELETED,
@@ -149,6 +152,7 @@ public class ProductLineAction extends BaseController {
         productLine.setDeleted(FieldUtil.DELETE_YES);
         productLineService.updateProductLine(productLine);
         ProductUtils.removeProductLineList();
+        ProductUtils.removeProductLineListByUser();
         LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCTLINE,
                 LogUtil.LogAction.CLOSED,
                 String.valueOf(productLine.getProductLineId()),

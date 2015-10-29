@@ -15,93 +15,91 @@ import java.util.Map;
 
 @Component
 public class StoryServiceImpl implements StoryService {
-	
-	@Autowired
-	private StoryManager storyManager;
-	
-	public ProductStory addStory(ProductStory story,ProductStorySpec storySpec) {
 
-		return storyManager.add(story, storySpec);
-	}
+    @Autowired
+    private StoryManager storyManager;
 
-	public Integer deleteStory(Integer storyId) {
+    public ProductStory addStory(ProductStory story, ProductStorySpec storySpec) {
 
-		return storyManager.delete(storyId);
-	}
+        return storyManager.add(story, storySpec);
+    }
 
-	public int updateStory(ProductStory story) {
+    public Integer deleteStory(Integer storyId) {
 
-		return storyManager.update(story);
-	}
+        return storyManager.delete(storyId);
+    }
 
-	public ProductStory findStory(Integer storyId) {
+    public int updateStory(ProductStory story) {
 
-		return storyManager.find(storyId);
-	}
+        return storyManager.update(story);
+    }
 
-	public int[] updateBatchStory(List<ProductStory> stories) {
-		
-		return storyManager.updateBatch(stories);
-	}
+    public ProductStory findStory(Integer storyId) {
+        return storyManager.find(storyId);
+    }
 
-	public List<ProductStory> findStoryList(ProductStory story, String order,String ordertype) {
-		
-		return storyManager.findList(story, order, ordertype);
-	}
+    public int[] updateBatchStory(List<ProductStory> stories) {
+        return storyManager.updateBatch(stories);
+    }
 
-	public Pager<ProductStory> findStoryPager(int start, int limit, ProductStory story, String statusCondition, SearchInfos conditions, String groupOperate, String columnName, boolean asc) {
-	
-		return storyManager.findPager(start, limit, story,statusCondition, conditions, groupOperate, columnName, asc);
-	}
+    public List<ProductStory> findStoryList(ProductStory story, String order, String ordertype) {
 
-	public List<ProductStory> findStoryList(Integer... storyId) {
+        return storyManager.findList(story, order, ordertype);
+    }
 
-		return storyManager.findList(storyId);
-	}
+    public Pager<ProductStory> findStoryPager(int start, int limit, ProductStory story, String statusCondition, SearchInfos conditions, String groupOperate, String columnName, boolean asc) {
 
-	public List<ProductStory> findStoryList(ProductStory story){
+        return storyManager.findPager(start, limit, story, statusCondition, conditions, groupOperate, columnName, asc);
+    }
 
-		return storyManager.findList(story);
-	}
+    public List<ProductStory> findStoryList(Integer... storyId) {
 
-	public List<StoryCount> productStoryCount(ProductStory story) {
+        return storyManager.findList(storyId);
+    }
 
-		return storyManager.productStoryCount(story);
-	}
+    public List<ProductStory> findStoryList(ProductStory story) {
 
-	public List<StoryCount> modelStoryCount(ProductStory story) {
+        return storyManager.findList(story);
+    }
 
-		return storyManager.modelStoryCount(story);
-	}
+    public List<StoryCount> productStoryCount(ProductStory story) {
 
-	public List<StoryCount> planStoryCount(ProductStory story) {
+        return storyManager.productStoryCount(story);
+    }
 
-		return storyManager.planStoryCount(story);
-	}
+    public List<StoryCount> modelStoryCount(ProductStory story) {
 
-	public Map<String, List<StoryCount>> report(String fields,
-			ProductStory story) {
+        return storyManager.modelStoryCount(story);
+    }
 
-		return storyManager.report(fields, story);
-	}
+    public List<StoryCount> planStoryCount(ProductStory story) {
 
-	public int countStatus(int productId, int status) {
-		return storyManager.countStatus(productId,status);
-	}
+        return storyManager.planStoryCount(story);
+    }
 
-	public int[] deleteBatchStory(List<ProductStory> ids) {
+    public Map<String, List<StoryCount>> report(String fields,
+                                                ProductStory story) {
 
-		return storyManager.deleteBatch(ids);
-	}
+        return storyManager.report(fields, story);
+    }
 
-	public List<ProductStory> findProductName(Integer storyId) {
-		return storyManager.findProductNameByStoryId(storyId);
-	}
+    public int countStatus(int productId, int status) {
+        return storyManager.countStatus(productId, status);
+    }
 
-	public Pager<ProductStory> findPager(int start, int limit,
-			ProductStory story, String condition, String columnName, boolean asc) {
+    public int[] deleteBatchStory(List<ProductStory> ids) {
 
-		return storyManager.findPager(start, limit, story, condition, columnName, asc);
-	}
+        return storyManager.deleteBatch(ids);
+    }
+
+    public List<ProductStory> findProductName(Integer storyId) {
+        return storyManager.findProductNameByStoryId(storyId);
+    }
+
+    public Pager<ProductStory> findPager(int start, int limit,
+                                         ProductStory story, String condition, String columnName, boolean asc) {
+
+        return storyManager.findPager(start, limit, story, condition, columnName, asc);
+    }
 
 }

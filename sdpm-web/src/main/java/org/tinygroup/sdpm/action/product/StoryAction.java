@@ -18,11 +18,9 @@ import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
 import org.tinygroup.sdpm.product.dao.pojo.*;
 import org.tinygroup.sdpm.product.service.*;
 import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
-import org.tinygroup.sdpm.project.dao.pojo.Project;
-import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
-import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
-import org.tinygroup.sdpm.project.dao.pojo.ProjectTeam;
+import org.tinygroup.sdpm.project.dao.pojo.*;
 import org.tinygroup.sdpm.project.service.inter.BuildService;
+import org.tinygroup.sdpm.project.service.inter.ProjectProductService;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.sdpm.project.service.inter.TaskService;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
@@ -78,6 +76,8 @@ public class StoryAction extends BaseController {
     private ReleaseService releaseService;
     @Autowired
     private RequestService requestService;
+    @Autowired
+    private ProjectProductService projectProductService;
 
     /**
      * @param story
@@ -114,10 +114,8 @@ public class StoryAction extends BaseController {
      * @return
      */
     @RequestMapping("/addstory")
-    public String addStory(@CookieValue(value = "cookieProductId") String cookieProductId, HttpServletRequest request, Model model) {
-        Product product = productService.findProduct(Integer.parseInt(cookieProductId));
+    public String addStory( HttpServletRequest request, Model model) {
         List<ServiceRequest> requests = requestService.getRequestList(null);
-        model.addAttribute("product", product);
         model.addAttribute("requestList",requests);
         return "/product/page/tabledemo/product-demand-add.page";
     }

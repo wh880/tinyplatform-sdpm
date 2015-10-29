@@ -334,6 +334,31 @@ public class TestTaskAction extends BaseController {
         return result;
     }
 
+    @RequestMapping("/toTaskEnd")
+    public String toTaskEnd() {
+        return "/testManagement/page/versionEnd.pagelet";
+    }
+    @ResponseBody
+    @RequestMapping("/taskEnd")
+    public Map taskEnd(QualityTestTask testTask,String actionComment) {
+        QualityTestTask qualityTestTask = testTaskService.findById(testTask.getTestversionId());
+        testTask.setTesttaskStatus("3");
+        testTaskService.updateTestTask(testTask);
+        LogUtil.logWithComment(LogUtil.LogOperateObject.TESTTASK,
+                LogUtil.LogAction.CLOSED,
+                String.valueOf(qualityTestTask.getTestversionId()),
+                UserUtils.getUserId(),
+                String.valueOf(qualityTestTask.getProductId()),
+                String.valueOf(qualityTestTask.getProjectId()),
+                qualityTestTask,
+                testTask,
+                actionComment
+        );
+        Map<String, String> result = new HashMap<String, String>();
+        result.put("status", "y");
+        return result;
+    }
+
     private String mergeCondition(List<QualityTestRun> runs, boolean in) {
         if (!(runs.size() > 0)) return "";
         StringBuffer sb = new StringBuffer();
