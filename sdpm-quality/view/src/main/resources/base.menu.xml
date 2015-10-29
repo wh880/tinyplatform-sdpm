@@ -115,7 +115,7 @@
               scope="pro-version-op"/>     
         <menu id="tversion" name="版本 " href="/testManagement/page/version.page" icon="icon-smile" sort="4"
               isShow="1" scope="pro-test-op"></menu>
-        <menu id="tversionedit" name="编辑版本 " href="/quality/version/edit" icon="icon-pencil" sort="2"
+        <menu id="tversionedit" name="编辑版本 " href="/quality/version/toEdit" icon="icon-pencil" sort="2"
               isShow="1" scope="pro-test-op,testverinfo-tab"></menu> 
         <menu id="tversionpro" name="提交测试 " href="/quality/version/add" icon="icon-plus" sort="1"
               isShow="1" scope="testversion-tab"></menu> 
@@ -123,9 +123,9 @@
               isShow="1" scope="testverinfo-tab"></menu>
        <menu id="tverbegin" name="开始" href="/testManagement/page/tabledemo/versionStart.page" icon="icon-play" sort="5"
               isShow="1" scope="testverinfo-tab"></menu>
-       <menu id="tverclose" name="关闭" href="/testManagement/page/versionEnd.page" icon="icon-off" sort="4"
+       <menu id="tverclose" name="关闭" href="/quality/version/toTaskEnd" icon="icon-off" sort="4"
               isShow="1" scope="testverinfo-tab"></menu>
-       <menu id="tvercase" name="用例" href="/testManagement/page/cases.page" icon="icon-smile" sort="4"
+       <menu id="tvercase" name="用例" href="/quality/version/taskToCase" icon="icon-smile" sort="4"
               isShow="1" scope="testverinfo-tab"></menu>  
        <menu id="tverdelete" name="删除" href="/quality/version/ajax/delete" icon="icon-remove" sort="2"
               isShow="1" scope="testverinfo-tab"></menu>
@@ -146,7 +146,7 @@
               isShow="1" scope="version-case"></menu>
        <menu id="tverInfo" name="概况"  href="/quality/version/versionInfo?currentPageId=5" icon="" sort="3"
               isShow="1" scope="version-case"></menu>  
-       <menu id="tverrelcase" name="关联用例"  href="#" icon="icon-link" sort="2"
+       <menu id="tverrelcase" name="关联用例"  href="/quality/version/linkCase" icon="icon-link" sort="2"
               isShow="1" scope="version-case-right"></menu>
        <menu id="tveroutdata" name="导出数据"  href="#" icon="icon-upload-alt" sort="1"
               isShow="1" scope="version-case-right"></menu>      

@@ -34,7 +34,7 @@
             #@div(divClass="col-5")
 					 #@Tselect2F()
                             #@Tselect2Body("productId" testCase?.productId?:(qualityProductId?:0) {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                                #for(product : CmsUtils.getProductList())
+                                #for(product : CmsUtils.getAllProductListByUser())
                                 <option value="${product?.productId}">${product?.productName}</option>
                                 #end
 	                    	#end                  

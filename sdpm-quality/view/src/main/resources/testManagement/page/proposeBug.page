@@ -32,7 +32,7 @@
 					 #@Tselect2F()
 	                   		 #@Tselect2Body("productId" bug?.productId?:qualityProductId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 								<option value="0">/</option>
-	                       	  #foreach(product : CmsUtils.getProductList())
+	                       	  #foreach(product : CmsUtils.getAllProductListByUser())
 								#if(product?.deleted==0)
 	                       		 <option value="${product?.productId}">${product?.productName}</option>
 								#end
