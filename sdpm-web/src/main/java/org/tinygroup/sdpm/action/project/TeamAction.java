@@ -87,10 +87,15 @@ public class TeamAction extends BaseController {
                 updateList.add(team);
             } else {
                 team.setProjectId(projectId);
+                if (team.getTeamDays() == null) {
+                    team.setTeamDays((float) 0.0);
+                }
+                if (team.getTeamHours() == null) {
+                    team.setTeamHours((float) 0.0);
+                }
                 addList.add(team);
             }
         }
-
         Integer addRes = teamService.batchAdd(addList);
         Integer updateRes = teamService.batchUpdate(updateList);
 
