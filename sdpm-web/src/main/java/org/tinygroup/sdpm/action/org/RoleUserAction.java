@@ -11,6 +11,7 @@ import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.RoleService;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,15 +36,11 @@ public class RoleUserAction extends BaseController {
     public String showUser(Integer id, Model model) {
         List<OrgUser> userList = userService.findUserList(new OrgUser());
         List<OrgRoleUser> linkList = roleService.findUserByRoleId(id);
-        String linked = "";
-        for (OrgRoleUser p : linkList) {
-            if (linked != "") {
-                linked = linked + "," + p.getOrgUserId();
-            } else {
-                linked = linked + p.getOrgUserId();
-            }
+        ArrayList<String> idList = new ArrayList<String>();
+        for (OrgRoleUser orgRoleUser : linkList) {
+            idList.add(orgRoleUser.getOrgUserId());
         }
-        model.addAttribute("linkString", linked);
+        model.addAttribute("userIdList", idList);
         model.addAttribute("userList", userList);
         return "organization/privilege/groupMaintain.page";
     }
