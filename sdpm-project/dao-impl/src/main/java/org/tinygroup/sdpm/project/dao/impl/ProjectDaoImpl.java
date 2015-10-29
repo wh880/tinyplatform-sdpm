@@ -406,7 +406,7 @@ public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
     }
 
     public List<Project> findListByTeamUserId(String userId) {
-        Select select = selectFrom(PROJECTTABLE).where(PROJECTTABLE.PROJECT_ID.in(
+        Select select = selectFrom(PROJECTTABLE).where(PROJECTTABLE.PROJECT_ID.inExpression(
                 subSelect(
                         select(PROJECT_TEAMTABLE.PROJECT_ID).where(PROJECT_TEAMTABLE.TEAM_USER_ID.eq(userId))
                 )
