@@ -27,78 +27,75 @@ public class ProjectBuild implements Serializable {
 
 	public static String DELETE_YES = "1";
 	public static String DELETE_NO = "0";
-	/** 
+	private String productName;
+	/**
 	 * 版本id
-	 * 
+	 *
 	 */
 	private Integer buildId;
-
-	/** 
+	/**
 	 * 产品
-	 * 
 	 */
 	private Integer buildProduct;
-
-	/** 
+	/**
 	 * 项目
-	 * 
+	 *
 	 */
 	private Integer buildProject;
-
-	/** 
+	/**
 	 * 名称编号
-	 * 
+	 *
 	 */
 	private String buildName;
-
-	/** 
+	/**
 	 * 源码地址
-	 * 
+	 *
 	 */
 	private String buildScmPath;
-
-	/** 
+	/**
 	 * 下载地址
-	 * 
+	 *
 	 */
 	private String buildFilePath;
-
-	/** 
+	/**
 	 * 打包日期
-	 * 
+	 *
 	 */
 	private Date buildDate;
-
-	/** 
+	/**
 	 * 已解决需求
-	 * 
+	 *
 	 */
 	private String buildStories;
-
-	/** 
+	/**
 	 * 已解决bug
-	 * 
+	 *
 	 */
 	private String buildBugs;
-
-	/** 
+	/**
 	 * 构建者
-	 * 
+	 *
 	 */
 	private String buildBuilder;
-
-	/** 
+	/**
 	 * 描述
-	 * 
+	 *
 	 */
 	private String buildDesc;
-
-	/** 
+	/**
 	 * 已删除
-	 * 
+	 *
 	 * 0-未删除，1-删除
 	 */
 	private String buildDeleted;
+
+	public String getProductName() {
+		return productName;
+	}
+
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
 
 	public Integer getBuildId() {
 		return buildId;

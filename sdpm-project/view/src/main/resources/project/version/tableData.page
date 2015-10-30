@@ -12,9 +12,7 @@
 #foreach(b : buildPager.getRecords())
     #@tr()
         #@td()<input type="checkbox" value="${b?.buildId}" name="idCheck">#end
-        #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/project/version/productalbug?buildId=${b?.buildId}">${b
-            ?.buildId}</a>#end
-        #@td()${b?.buildProduct}#end
+        #@td()${b?.productName}#end
         #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/project/version/productalbug?buildId=${b?.buildId}">${b
             ?.buildName}#end
         #@td()${b?.buildScmPath}</a>#end
