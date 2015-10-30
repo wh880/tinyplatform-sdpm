@@ -30,13 +30,11 @@ import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.sdpm.project.dao.ProjectBuildDao;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
-import org.tinygroup.sdpm.quality.dao.constant.QualityBugTable;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.tinysqldsl.*;
 import org.tinygroup.tinysqldsl.base.FragmentSql;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
-import org.tinygroup.tinysqldsl.formitem.FragmentFromItemSql;
 import org.tinygroup.tinysqldsl.select.OrderByElement;
 
 import java.io.Serializable;
@@ -44,25 +42,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.tinygroup.sdpm.product.dao.constant.ProductStoryTable.PRODUCT_STORYTABLE;
-import static org.tinygroup.sdpm.project.dao.constant.ProjectBuildTable.PROJECT_BUILDTABLE;
 import static org.tinygroup.sdpm.product.dao.constant.ProductTable.PRODUCTTABLE;
 import static org.tinygroup.sdpm.productLine.dao.constant.ProductLineTable.PRODUCT_LINETABLE;
+import static org.tinygroup.sdpm.project.dao.constant.ProjectBuildTable.PROJECT_BUILDTABLE;
 import static org.tinygroup.sdpm.quality.dao.constant.QualityBugTable.QUALITY_BUGTABLE;
-
 import static org.tinygroup.tinysqldsl.Delete.delete;
 import static org.tinygroup.tinysqldsl.Insert.insertInto;
 import static org.tinygroup.tinysqldsl.Select.select;
 import static org.tinygroup.tinysqldsl.Select.selectFrom;
 import static org.tinygroup.tinysqldsl.Update.update;
-import static org.tinygroup.tinysqldsl.select.Join.*;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
+import static org.tinygroup.tinysqldsl.select.Join.leftJoin;
 
 @LogClass("build")
 @Repository
 public class ProjectBuildDaoImpl extends TinyDslDaoSupport implements ProjectBuildDao {
 
 
-	@LogMethod("add")
 	public ProjectBuild add(ProjectBuild projectBuild) {
 		return getDslTemplate().insertAndReturnKey(projectBuild, new InsertGenerateCallback<ProjectBuild>() {
 			public Insert generate(ProjectBuild t) {
@@ -239,7 +235,6 @@ public class ProjectBuildDaoImpl extends TinyDslDaoSupport implements ProjectBui
 			}
 		});
 	}
-	@LogMethod("batchDelete")
 	public int[] batchDelete(List<ProjectBuild> projectBuilds) {
 		if (CollectionUtil.isEmpty(projectBuilds)) {
 			return new int[0];
@@ -263,7 +258,6 @@ public class ProjectBuildDaoImpl extends TinyDslDaoSupport implements ProjectBui
 			}
 		});
 	}
-	@LogMethod("addOrderByElements")
 	private Select addOrderByElements(Select select, OrderBy... orderBies) {
 		List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
 		for (int i = 0; orderBies != null && i < orderBies.length; i++) {

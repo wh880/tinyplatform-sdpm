@@ -140,7 +140,7 @@ public abstract class BaseController {
         for (String message : messages) {
             sb.append(message).append(messages.length > 1 ? "<br/>" : "");
         }
-        model.addAttribute("message", sb.toString());
+        model.addAttribute("globalMessage", sb.toString());
     }
 
     /**

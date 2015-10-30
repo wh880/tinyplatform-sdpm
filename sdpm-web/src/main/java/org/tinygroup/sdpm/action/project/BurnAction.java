@@ -75,7 +75,7 @@ public class BurnAction extends BaseController {
         Float rake = topLeft / period;
 
         Date nextDay = startData;
-        Float tLeft = null;
+        Float tLeft = 0f;
 
         List<Float> leftList = new ArrayList<Float>();
         List<Float> averageList = new ArrayList<Float>();
