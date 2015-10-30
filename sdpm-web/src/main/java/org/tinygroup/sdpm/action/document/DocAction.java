@@ -83,7 +83,9 @@ public class DocAction extends BaseController {
      * @return
      */
     @RequestMapping(value = "/list")
-    public String docList(String moduleId, HttpServletRequest request, Integer page, Integer limit, String order, String ordertype, DocumentDoc doc, Model model, String groupOperate, SearchInfos searchInfos) {
+    public String docList(String moduleId, HttpServletRequest request,
+                          Integer page, Integer limit, String order, String ordertype,
+                          DocumentDoc doc, Model model, String groupOperate, SearchInfos searchInfos) {
         doc.setDocDeleted("0");
         boolean asc = true;
         if ("desc".equals(ordertype)) {
@@ -92,37 +94,34 @@ public class DocAction extends BaseController {
         Integer libId = Integer.valueOf(CookieUtils.getCookie(request, DocAction.COOKIE_DOCLIB_ID));
         doc.setDocLibId(libId);
         String condition = null;
+        Pager<DocumentDoc> pager = null;
         if (!StringUtil.isBlank(moduleId)) {
             if (moduleId.contains("p") && libId == 1) {
-                doc.setDocProduct(Integer.parseInt(moduleId.substring(1)));             
-                Pager<DocumentDoc> docpager = docservice.findDocRetPager(limit * (page - 1), limit, doc, condition, searchInfos, groupOperate, order, asc);
-                model.addAttribute("docpager", docpager);
+                doc.setDocProduct(Integer.parseInt(moduleId.substring(1)));
+                pager = docservice.findDocRetPager(limit * (page - 1), limit, doc, condition, searchInfos, groupOperate, order, asc);
             } else if (moduleId.contains("p") && libId == 2) {
                 doc.setDocProject(Integer.parseInt(moduleId.substring(1)));
-                Pager<DocumentDoc> docpager = docservice.findDocRetPager(limit * (page - 1), limit, doc, condition, searchInfos, groupOperate, order, asc);
-                model.addAttribute("docpager", docpager);
+                pager = docservice.findDocRetPager(limit * (page - 1), limit, doc, condition, searchInfos, groupOperate, order, asc);
             } else if ("productDoc".equals(moduleService.findById(Integer.valueOf(moduleId)).getModuleType())) {
                 Integer root = moduleService.findById(Integer.valueOf(moduleId)).getModuleRoot();
                 doc.setDocProduct(Integer.valueOf(root));
                 condition = NameUtil.resolveNameDesc("docModule") + " " + ModuleUtil.getCondition(Integer.valueOf(moduleId), moduleService);
-                Pager<DocumentDoc> docpager = docservice.findDocRetPager(limit * (page - 1), limit, doc, condition, searchInfos, groupOperate, order, asc);
-                model.addAttribute("docpager", docpager);
+                pager = docservice.findDocRetPager(limit * (page - 1), limit, doc, condition, searchInfos, groupOperate, order, asc);
             } else if ("projectDoc".equals(moduleService.findById(Integer.valueOf(moduleId)).getModuleType())) {
                 Integer root = moduleService.findById(Integer.valueOf(moduleId)).getModuleRoot();
                 doc.setDocProject(Integer.valueOf(root));
                 condition = NameUtil.resolveNameDesc("docModule") + " " + ModuleUtil.getCondition(Integer.valueOf(moduleId), moduleService);
-                Pager<DocumentDoc> docpager = docservice.findDocRetPager(limit * (page - 1), limit, doc, condition, searchInfos, groupOperate, order, asc);
-                model.addAttribute("docpager", docpager);
+                pager = docservice.findDocRetPager(limit * (page - 1), limit, doc, condition, searchInfos, groupOperate, order, asc);
             } else if ("doc".equals(moduleService.findById(Integer.valueOf(moduleId)).getModuleType())) {
                 condition = NameUtil.resolveNameDesc("docModule") + " " + ModuleUtil.getCondition(Integer.valueOf(moduleId), moduleService);
-                Pager<DocumentDoc> docpager = docservice.findDocRetPager(limit * (page - 1), limit, doc, condition, searchInfos, groupOperate, order, asc);
-                model.addAttribute("docpager", docpager);
+                pager = docservice.findDocRetPager(limit * (page - 1), limit, doc, condition, searchInfos, groupOperate, order, asc);
             }
         } else {
             //doc.setDocLibId(libId);
-            Pager<DocumentDoc> docpager = docservice.findDocRetPager(limit * (page - 1), limit, doc, null, searchInfos, groupOperate, order, asc);
-            model.addAttribute("docpager", docpager);
+            pager = docservice.findDocRetPager(limit * (page - 1), limit, doc, null, searchInfos, groupOperate, order, asc);
+            model.addAttribute("pager", pager);
         }
+        model.addAttribute("pager", pager);
         return "/data/datalist.pagelet";
     }
 

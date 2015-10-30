@@ -78,6 +78,7 @@ public class ProjectAction extends BaseController {
         }
         Integer[] integers = new Integer[ids.size()];
         projectService.batchDeleteProject(ids.toArray(integers));
+        ProjectUtils.removeProjectList();
         return resultMap(true, "删除项目成功");
     }
 
@@ -163,7 +164,7 @@ public class ProjectAction extends BaseController {
 
         CookieUtils.setCookie(response, TaskAction.COOKIE_PROJECT_ID, tProject.getProjectId().toString());
         ProjectUtils.removeProjectList();
-        return "project/allProject.page";
+        return "redirect:" + adminPath + "project/allProject";
     }
 
     @RequestMapping("/allProject")

@@ -3,6 +3,7 @@ package org.tinygroup.sdpm.project.biz.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.tinygroup.commons.tools.ArrayUtil;
 import org.tinygroup.sdpm.project.biz.inter.ProjectProductManager;
 import org.tinygroup.sdpm.project.dao.ProjectProductDao;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
@@ -20,7 +21,7 @@ public class ProjectProductManagerImpl implements ProjectProductManager {
     private ProjectProductDao projectProductDao;
 
     public void addLink(Integer[] productArray, Integer projectId) {
-        if (productArray.length < 1) {
+        if (ArrayUtil.isEmptyArray(productArray)) {
             return;
         }
         List<ProjectProduct> list = new ArrayList<ProjectProduct>();

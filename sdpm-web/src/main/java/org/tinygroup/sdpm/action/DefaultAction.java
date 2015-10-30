@@ -44,7 +44,7 @@ public class DefaultAction extends BaseController {
         return "login/login.pagelet";
     }
 
-    @RequestMapping("a")
+    @RequestMapping(value = {"a", "a/home"})
     public String index() {
         return "main/index.page";
     }

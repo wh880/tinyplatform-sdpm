@@ -1,3 +1,6 @@
+#macro getMenuId()
+    #for(var:menuList)#if(tinyRequestRequestURI.startsWith(var?.url))#set(activeMenuId=var.id)#break#end#end
+#end
 #set(pagePostionTitle='<li><a href="'+TINY_CONTEXT_PATH+'">首页</a></li>',activeMenuId="0",topMenuId="0",c=call("getMenuId"),c=call("getTopMenuId"))
 <!DOCTYPE html>
 <!--[if IE 7 ]>		 <html class="no-js ie ie7 lte7 lte8 lte9" lang="zh-cmn-Hans-CN"> <![endif]-->
@@ -168,6 +171,13 @@
             var menuList=[];
             $(".navigation:first a.navitem").each(function(){
                 var href=$(this).attr("href");
+                var path=contextPath+"/a/";
+                href=href.replace(path,"");
+                var nextPart=href.indexOf("/");
+                if(nextPart>0){
+                    href=href.substring(0,nextPart+1);
+                }
+                href=path+href;
                 var treeid=$(this).attr("data-treeid");
                 menuList.push({id:treeid,url:href});
             });
@@ -176,11 +186,23 @@
                 type:"post",
                 data:{treeString:JSON.stringify(menuList)},
                 success:function(data){
-                    if(window.location.pathname!=contextPath+"/a")
+                    if(window.location.pathname!=contextPath+"/a/home")
                         window.location.reload();
                 }
             })
         #end
+        var globalMessage="${globalMessage}";
+
+        if(globalMessage){
+            var timeCount=setTimeout(function(){
+                layer.closeAll();
+            },5000);
+            layer.alert(globalMessage, -1, '提示', function() {
+                layer.closeAll();
+                clearTimeout(timeCount);
+            });
+        }
+
     })
 </script>
 </body>
