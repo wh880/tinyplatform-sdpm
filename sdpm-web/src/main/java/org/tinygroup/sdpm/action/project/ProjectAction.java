@@ -81,7 +81,17 @@ public class ProjectAction extends BaseController {
         return resultMap(true, "删除项目成功");
     }
 
-    @RequestMapping("/findProjects")
+    /**
+     * 数据表格List
+     *
+     * @param start
+     * @param limit
+     * @param order
+     * @param ordertype
+     * @param model
+     * @return
+     */
+    @RequestMapping("/list/data")
     public String findProjects(Integer start, Integer limit, String order, String ordertype, Model model) {
         Pager<Project> projectPager = projectService.findProjects(start, limit, order, ordertype);
         Integer interval = 2;

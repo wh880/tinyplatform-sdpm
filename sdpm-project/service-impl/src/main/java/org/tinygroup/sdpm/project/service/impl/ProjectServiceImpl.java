@@ -44,7 +44,6 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     public Pager<Project> findProjects(Integer start, Integer limit, String order, String ordertype) {
-
         return projectManager.findPagerProjects(start, limit, order, "asc".equals(ordertype) ? true : false);
     }
 
