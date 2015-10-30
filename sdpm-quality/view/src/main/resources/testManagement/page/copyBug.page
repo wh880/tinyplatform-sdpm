@@ -44,7 +44,7 @@
     	<div class="infoContent">
     		<p class="titleName">复制Bug</p>
 			#@elementItem()
-				#@colLabel()产品模块：#end
+				#@colLabel()产品/模块：#end
 				#@formControlDiv("col-8")
 					#@div(divClass="col-5")
 					 #@Tselect2F()

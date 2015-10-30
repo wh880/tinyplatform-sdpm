@@ -30,7 +30,9 @@ import org.tinygroup.sdpm.project.service.inter.ProjectProductService;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.sdpm.project.service.inter.TaskService;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
+import org.tinygroup.sdpm.quality.dao.pojo.QualityCaseStep;
 import org.tinygroup.sdpm.quality.service.inter.BugService;
+import org.tinygroup.sdpm.quality.service.inter.CaseStepService;
 import org.tinygroup.sdpm.system.dao.pojo.ProfileType;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
@@ -80,7 +82,9 @@ public class BugAction extends BaseController {
 	private ProductService productService;
 	@Autowired
 	private ProjectProductService projectProductService;
-		
+	@Autowired
+	private CaseStepService caseStepService;
+
 	@RequestMapping("")
 	public String form(String get,QualityBug bug, Model model, HttpServletRequest request){
 		String queryString = request.getQueryString();
@@ -732,5 +736,22 @@ public class BugAction extends BaseController {
 	    	return true;
 	    }
 
+	@RequestMapping("toBug")
+	public String toBug(Integer[] ids, Model model){
+		StringBuffer bugStep = new StringBuffer("");
+		for(Integer id : ids){
+			QualityCaseStep step = caseStepService.findById(id);
+			bugStep.append("[步骤]<br>");
+			bugStep.append(step.getCaseStepDesc()+"<br>");
+			bugStep.append("[期望]<br>");
+			bugStep.append(step.getCaseStepExpect()+"<br>");
+		}
+		List<Project> projects = projectService.findProjectList(null,null,null);
+		List<OrgUser> orgUsers = userService.findUserList(null);
+		model.addAttribute("bugStep",bugStep);
+		model.addAttribute("projectList",projects);
+		model.addAttribute("userList",orgUsers);
+		return "/testManagement/page/proposeBug.page";
+	}
 	
 }

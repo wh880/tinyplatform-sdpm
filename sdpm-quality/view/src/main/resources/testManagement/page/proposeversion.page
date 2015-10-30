@@ -75,17 +75,17 @@
 					 #@Tselect2F()
 					 <script type="text/javascript">
 					 $(function(){
-
 					    ajaxRead("${sid}","projectId","projectId","projectName","/quality/bug/ajax/project?productId=${qualityProductId}","${testTask?.projectId?:0}");
-
 					    $("#${sid}").on("change",function(){
                              var pId = $("#${sid}  option:selected").val();
-                             ajaxRead("${sid}","buildName","buildId","buildName","/quality/version/ajax/build?buildProject="+pId+"&buildProduct=${qualityProductId?:0}",${testTask?.buildName?:0},"build");
-                             ajaxRead("${sid}","testtaskOwner","orgUserId","orgUserRealName","/quality/version/ajax/user?projectId="+pId,"${testTask?.testtaskOwner?:0}");
-                         });
+                            if(pId&&pId>0){
+                                 ajaxRead("${sid}","buildName","buildId","buildName","/quality/version/ajax/build?buildProject="+pId+"&buildProduct=${qualityProductId?:0}",${testTask?.buildName?:0},"build");
+                                 ajaxRead("${sid}","testtaskOwner","orgUserId","orgUserRealName","/quality/version/ajax/user?projectId="+pId,"${testTask?.testtaskOwner?:0}");
+                                }
+                        });
 					 })
                      </script>
-	                   		#@Tselect2Body("projectId" testTask?.projectId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                   		#@Tselect2Body("projectId" testTask?.projectId?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 
 	                    	#end
 	                    	#@Tselect2Fix()

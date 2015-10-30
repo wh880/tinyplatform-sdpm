@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.action.project.TaskAction;
+import org.tinygroup.sdpm.action.quality.actionBean.CaseStepResult;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SqlUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
@@ -23,12 +24,8 @@ import org.tinygroup.sdpm.project.service.inter.BuildService;
 import org.tinygroup.sdpm.project.service.inter.ProjectProductService;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.sdpm.project.service.inter.TeamService;
-import org.tinygroup.sdpm.quality.dao.pojo.QualityTestCase;
-import org.tinygroup.sdpm.quality.dao.pojo.QualityTestRun;
-import org.tinygroup.sdpm.quality.dao.pojo.QualityTestTask;
-import org.tinygroup.sdpm.quality.service.inter.TestCaseService;
-import org.tinygroup.sdpm.quality.service.inter.TestRunService;
-import org.tinygroup.sdpm.quality.service.inter.TestTaskService;
+import org.tinygroup.sdpm.quality.dao.pojo.*;
+import org.tinygroup.sdpm.quality.service.inter.*;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.sdpm.util.LogUtil;
 import org.tinygroup.sdpm.util.ModuleUtil;
@@ -69,6 +66,7 @@ public class TestTaskAction extends BaseController {
     private TeamService teamService;
     @Autowired
     private ModuleService moduleService;
+
 
     @RequestMapping("")
     public String form(HttpServletRequest request, String get, Model model) {
@@ -378,9 +376,9 @@ public class TestTaskAction extends BaseController {
     private String getStatusCondition(String status) {
         if (StringUtil.isBlank(status)) return "";
         if ("tvertest".equals(status)) {
-            return " testtask_status = 'done' ";
+            return " testtask_status = '3' ";
         } else {
-            return " testtask_status <> 'done' ";
+            return " testtask_status <> '3' ";
         }
     }
 

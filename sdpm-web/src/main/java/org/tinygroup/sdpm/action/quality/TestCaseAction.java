@@ -245,6 +245,7 @@ public class TestCaseAction extends BaseController {
 		testCase.setCaseLastRunDate(new Date());
 		if(run!=null){
 			run.setTestRunLastRunner(UserUtils.getUserId());
+			qualityTestResult.setTestresultRun(run.getTestRunId());
 			testRunService.updateTestRun(run);
 		}
 		testCase.setCaseLastRunner(UserUtils.getUserId());
@@ -417,6 +418,33 @@ public class TestCaseAction extends BaseController {
 					.append(";real:" + caseStepResults.get(i).getReal() + "}");
 		}
 		return result.toString();
+	}
+
+	@RequestMapping("/chooseToBug")
+	public String chooseTobug(Integer runId,Integer caseId,Integer caseVersion, Model model) {
+		QualityTestCase testcase = testCaseService.findById(caseId);
+		QualityCaseStep qualityCaseStep = new QualityCaseStep();
+		qualityCaseStep.setCaseId(caseId);
+		qualityCaseStep.setCaseVersion(caseVersion);
+		List<QualityCaseStep> stepList = caseStepService.findCaseStepList(qualityCaseStep);
+		QualityTestResult qualityTestResult = new QualityTestResult();
+		qualityTestResult.setLinkCase(caseId);
+		qualityTestResult.setCaseVersion(caseVersion);
+		qualityTestResult.setTestresultRun(runId);
+		List<QualityTestResult> qualityTestResults = testResultService
+				.findTestResultList(qualityTestResult);
+		List<CaseStepResult> caseStepResults = new ArrayList<CaseStepResult>();
+		Map<String, List<QualityCaseStep>> caseSteps= new HashMap<String, List<QualityCaseStep>>();
+		//未做完  进行结果处理
+		if(qualityTestResults.size()>0) {
+			caseSteps.put(String.valueOf(qualityTestResults.get(0).getTestResultId()), stepList);
+			caseStepResults = resolveResult(qualityTestResults.get(0));
+		}
+
+		model.addAttribute("stepList", stepList);
+		model.addAttribute("caseSteps", caseSteps);
+		model.addAttribute("stepResults", caseStepResults);
+		return "/testManagement/page/caseToBug.pagelet";
 	}
 
 	private String testResult(List<CaseStepResult> caseStepResults) {

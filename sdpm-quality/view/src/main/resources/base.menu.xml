@@ -157,7 +157,7 @@
               isShow="1" scope="version-case-op"></menu>  
        <menu id="tverremove" name="移除"  href="#" icon="icon-trash" sort="2"
               isShow="1" scope="version-case-op"></menu>
-       <menu id="tvertobug" name="转Bug"  href="#" icon=" icon-bug" sort="1"
+       <menu id="tvertobug" name="转Bug"  href="/quality/testCase/chooseToBug" icon=" icon-bug" sort="1"
               isShow="1" scope="version-case-op"></menu>                                       
     </menu>      	               
 </menu>

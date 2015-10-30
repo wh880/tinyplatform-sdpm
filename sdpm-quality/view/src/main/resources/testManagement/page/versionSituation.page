@@ -26,7 +26,7 @@
 						#if(m.id=="tverclose")
 							#@aModal("#closeModal" m.name "800" "600" "" adminPath+m.href+"?testversionId="+testTask?.testversionId "ml-5")
 								#buttonIcon(iconClass=m.icon)${m.name}#end&nbsp;&nbsp;
-##							<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?testversionId=${testTask?.testversionId}">#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp;&nbsp;
+						##							<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?testversionId=${testTask?.testversionId}">#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp;&nbsp;
 						#elseif(m.id=="tvercase")
                             <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?testversionId=${testTask?.testversionId}&status=tverallcase&currentPageId=5">
 								#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp;&nbsp;
@@ -35,14 +35,42 @@
 								#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp;&nbsp;
 						#else
 							#if(m.id=="tverback")
-								<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" title="${m.name}">
+                                <a class="back" href="javascript:void(0);" title="${m.name}">
 									#buttonIcon(iconClass=m.icon)</a>&nbsp;&nbsp;
+                                <script type="text/javascript">
+                                    $(function(){
+                                        $(".back").on("click",function(){
+                                            window.location.href ="${TINY_CONTEXT_PATH+adminPath}/quality/version?status=tvernotest&currentPageId=5";
+                                        });
+                                    })
+                                </script>
 							#elseif(m.id=="tversionedit")
                                 <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?testversionId=${testTask?.testversionId}&currentPageId=5" title="${m.name}">
 									#buttonIcon(iconClass=m.icon)</a>&nbsp;&nbsp;
 							#elseif(m.id=="tverdelete")
-                                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?testversionId=${testTask?.testversionId}&currentPageId=5" title="${m.name}">
+                                <a class="versionDelete" href="javascript:void(0);" title="${m.name}">
 									#buttonIcon(iconClass=m.icon)</a>&nbsp;&nbsp;
+                                <script type="text/javascript">
+                                    $(function () {
+                                        var check = $(".versionDelete");
+                                        check.on("click", function () {
+                                            layer.confirm("是否确认删除?", function () {
+                                                $.ajax({
+                                                    type: "get",
+                                                    url: "${TINY_CONTEXT_PATH+adminPath+m?.href+'?testversionId ='+testTask?.testversionId}",
+                                                    dataType: "json",
+                                                    success: function (data) {
+                                                        if (data.status == "y") {
+                                                            window.location.href = "${TINY_CONTEXT_PATH+adminPath}/quality/version?status=tvernotest&currentPageId=5";
+                                                        }
+                                                    }
+                                                });
+                                                return false;
+                                            });
+                                        });
+                                    })
+
+                                </script>
 							#end
 						#end
 
@@ -68,14 +96,60 @@
 		#history(adminPath+"/system/action/ajax/history?actionObjectType=testtask&actionObjectId="+testTask?.testversionId)
 		<div style="text-align:center;margin:auto">
 
-				<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/versionEnd.page">
-					#buttonIcon(iconClass="icon-off")关闭</a>&nbsp&nbsp;
-				<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/cases.page">#buttonIcon(iconClass="icon-dashboard")用例</a>&nbsp&nbsp;
-				<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/versionLink.page">#buttonIcon(iconClass="icon-link	")关联用例</a>&nbsp&nbsp;			
-				<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/tabledemo/editionversion.page" class="margin-left" title="编辑版本">#buttonIcon(iconClass="icon-pencil")</a>&nbsp;&nbsp
-				#@delItemsdpm("/sdpm-web/testManagement/page/cases.page" 3 "/sdpm-web/testManagement/page/cases.page")#buttonIcon(iconClass="icon-remove")#end&nbsp &nbsp; 
+			#foreach(m:menuManager.getScopeMenus("testverinfo-tab"))
 
-				<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/version.page" class="margin-left" title="返回">#buttonIcon(iconClass="icon-reply")</a>
+				#if(m.id=="tverclose")
+					#@aModal("#closeModal" m.name "800" "600" "" adminPath+m.href+"?testversionId="+testTask?.testversionId "ml-5")
+						#buttonIcon(iconClass=m.icon)${m.name}#end&nbsp;&nbsp;
+				##							<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?testversionId=${testTask?.testversionId}">#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp;&nbsp;
+				#elseif(m.id=="tvercase")
+                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?testversionId=${testTask?.testversionId}&status=tverallcase&currentPageId=5">
+						#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp;&nbsp;
+				#elseif(m.id=="tversionLink")
+                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?testversionId=${testTask?.testversionId}&currentPageId=5">
+						#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp;&nbsp;
+				#else
+					#if(m.id=="tverback")
+                        <a class="back" href="javascript:void(0);" title="${m.name}">
+							#buttonIcon(iconClass=m.icon)</a>&nbsp;&nbsp;
+                        <script type="text/javascript">
+                            $(function(){
+                                $(".back").on("click",function(){
+                                    window.location.href ="${TINY_CONTEXT_PATH+adminPath}/quality/version?status=tvernotest&currentPageId=5";
+                                });
+                            })
+                        </script>
+					#elseif(m.id=="tversionedit")
+                        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?testversionId=${testTask?.testversionId}&currentPageId=5" title="${m.name}">
+							#buttonIcon(iconClass=m.icon)</a>&nbsp;&nbsp;
+					#elseif(m.id=="tverdelete")
+                        <a class="versionDelete" href="javascript:void(0);" title="${m.name}">
+							#buttonIcon(iconClass=m.icon)</a>&nbsp;&nbsp;
+                        <script type="text/javascript">
+                            $(function () {
+                                var check = $(".versionDelete");
+                                check.on("click", function () {
+                                    layer.confirm("是否确认删除?", function () {
+                                        $.ajax({
+                                            type: "get",
+                                            url: "${TINY_CONTEXT_PATH+adminPath+m?.href+'?testversionId ='+testTask?.testversionId}",
+                                            dataType: "json",
+                                            success: function (data) {
+                                                if (data.status == "y") {
+                                                    window.location.href = "${TINY_CONTEXT_PATH+adminPath}/quality/version?status=tvernotest&currentPageId=5";
+                                                }
+                                            }
+                                        });
+                                        return false;
+                                    });
+                                });
+                            })
+
+                        </script>
+					#end
+				#end
+
+			#end
 	</div>
 	</div>
 

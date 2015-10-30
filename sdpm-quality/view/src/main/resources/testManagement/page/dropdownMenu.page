@@ -20,7 +20,6 @@
 			#if(CmsUtils.getAllProductListByUser()?.size()>0)
 			<script type="text/javascript">
 				$(function(){
-					alert("${qualityProductId}2");
 					$.cookie('qualityProductId',"${CmsUtils.getAllProductListByUser()?.get(0)?.productId}",{path:"/"});
 					window.location.reload();
 				})
