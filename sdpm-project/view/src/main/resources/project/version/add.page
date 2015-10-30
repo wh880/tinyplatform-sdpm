@@ -78,8 +78,8 @@
         #@sdpmItem("打包日期")
             #@formHorizontal()
                 #@tinyDateInput(
-                    "buildDate" build?.buildDate "YYYY-MM-DD HH:mm:ss" {"style":"width:200px","datatype":"*","nullmsg":
-                    "日期不能为空","placeholder":"yMdHmswW分别代表年月日时分秒星期周,你可以任意组合这些元素来自定义你个性化的日期格式."})#end
+                    "buildDate" formatDate(build?build.buildDate:now(),"yyyy-MM-dd") "YYYY-MM-DD" {"style":"width:200px","datatype":"*","nullmsg":
+                "日期不能为空"})#end
             #end
         #end
     #end
@@ -107,10 +107,12 @@
         #end
     #end
     #@elementItem()
-        #@sdpmItem("描述")
-            #@tinyueditor("content" "buildDesc" "width:15%;overflow:auto")说点什么...最少输入10个字符#end
-        #end
-
+        <div class="col-2 text-r">
+            <label>描述：&nbsp;</label>
+        </div>
+        <div class="col-8 form-item-body">
+            #@tinyueditor("content" "buildDesc" "width:40%;overflow:auto")#end
+        </div>
     #end
     #@elementItem()
         <div class="col-12">
