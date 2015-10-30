@@ -5,7 +5,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.tinygroup.commons.tools.StringUtil;
-import org.tinygroup.sdpm.action.product.SessionUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
@@ -16,8 +15,8 @@ import org.tinygroup.sdpm.productLine.service.ProductLineService;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
 import org.tinygroup.sdpm.project.service.inter.BuildService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
-import org.tinygroup.sdpm.util.CmsUtils;
 import org.tinygroup.sdpm.util.LogUtil;
+import org.tinygroup.sdpm.util.ProductUtils;
 import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -59,8 +58,8 @@ public class ProductLineAction extends BaseController {
         productLine.setProductLineCreatedDate(new Date());
         productLine.setProductLineStatus("0");
         ProductLine productLine1 = productLineService.addProductLine(productLine);
-        CmsUtils.removeProductLineList();
-        CmsUtils.removeProductLineListByUser();
+        ProductUtils.removeProductLineList();
+        ProductUtils.removeProductLineListByUser();
         LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCTLINE
                 , LogUtil.LogAction.OPENED
                 ,String.valueOf(productLine1.getProductLineId())
@@ -78,8 +77,8 @@ public class ProductLineAction extends BaseController {
     public String update(ProductLine productLine) {
         ProductLine productLineOld = productLineService.findProductLine(productLine.getProductLineId());
         productLineService.updateProductLine(productLine);
-        CmsUtils.removeProductLineList();
-        CmsUtils.removeProductLineListByUser();
+        ProductUtils.removeProductLineList();
+        ProductUtils.removeProductLineListByUser();
         LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCTLINE,
                 LogUtil.LogAction.EDITED,
                 String.valueOf(productLine.getProductLineId()),
@@ -121,9 +120,9 @@ public class ProductLineAction extends BaseController {
                     systemAction.getActionComment());
         }
         productLineService.deleteProductLine(productLineId);
-        CmsUtils.removeProductLineList();
-        CmsUtils.removeProductList(String.valueOf(productLineId));
-        CmsUtils.removeProductLineListByUser();
+        ProductUtils.removeProductLineList();
+        ProductUtils.removeProductList(String.valueOf(productLineId));
+        ProductUtils.removeProductLineListByUser();
         Map<String, String> map = new HashMap<String, String>();
         LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCTLINE,
                 LogUtil.LogAction.DELETED,
@@ -152,8 +151,8 @@ public class ProductLineAction extends BaseController {
         ProductLine productLine1 = productLineService.findProductLine(productLine.getProductLineId());
         productLine.setDeleted(FieldUtil.DELETE_YES);
         productLineService.updateProductLine(productLine);
-        CmsUtils.removeProductLineList();
-        CmsUtils.removeProductLineListByUser();
+        ProductUtils.removeProductLineList();
+        ProductUtils.removeProductLineListByUser();
         LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCTLINE,
                 LogUtil.LogAction.CLOSED,
                 String.valueOf(productLine.getProductLineId()),
@@ -223,7 +222,7 @@ public class ProductLineAction extends BaseController {
 
     @RequestMapping("/toProduct")
     public String productLineAction(HttpServletRequest request) {
-        List<ProductLine> list = CmsUtils.getProductLineList();
+        List<ProductLine> list = ProductUtils.getProductLineList();
 //        if (list == null || list.size() == 0) {
 //            list = productLineService.findProductLineList(new ProductLine(), "productLineId", "desc");
 //            if(list.size()==0||list==null){
@@ -241,7 +240,7 @@ public class ProductLineAction extends BaseController {
 
     @RequestMapping("/to")
     public String to(HttpServletRequest request,Model model) {
-        List<ProductLine> list = CmsUtils.getProductLineList();
+        List<ProductLine> list = ProductUtils.getProductLineList();
 //        if (list == null || list.size() == 0) {
 //            list = productLineService.findProductLineList(new ProductLine(), "productLineId", "desc");
 //            request.getSession().setAttribute("productLineList", list);

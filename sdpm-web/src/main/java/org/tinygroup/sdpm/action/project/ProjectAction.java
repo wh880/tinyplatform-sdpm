@@ -22,9 +22,9 @@ import org.tinygroup.sdpm.project.service.inter.BurnService;
 import org.tinygroup.sdpm.project.service.inter.ProjectProductService;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.sdpm.project.service.inter.TeamService;
-import org.tinygroup.sdpm.util.CmsUtils;
 import org.tinygroup.sdpm.util.CookieUtils;
 import org.tinygroup.sdpm.util.LogUtil;
+import org.tinygroup.sdpm.util.ProjectUtils;
 import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -81,7 +81,17 @@ public class ProjectAction extends BaseController {
         return resultMap(true, "删除项目成功");
     }
 
-    @RequestMapping("/findProjects")
+    /**
+     * 数据表格List
+     *
+     * @param start
+     * @param limit
+     * @param order
+     * @param ordertype
+     * @param model
+     * @return
+     */
+    @RequestMapping("/list/data")
     public String findProjects(Integer start, Integer limit, String order, String ordertype, Model model) {
         Pager<Project> projectPager = projectService.findProjects(start, limit, order, ordertype);
         Integer interval = 2;
@@ -152,7 +162,7 @@ public class ProjectAction extends BaseController {
         projectProductService.addLink(linkProduct, tProject.getProjectId());
 
         CookieUtils.setCookie(response, TaskAction.COOKIE_PROJECT_ID, tProject.getProjectId().toString());
-        CmsUtils.removeProjectList();
+        ProjectUtils.removeProjectList();
         return "project/allProject.page";
     }
 

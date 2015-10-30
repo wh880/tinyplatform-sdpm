@@ -44,8 +44,11 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     public Pager<Project> findProjects(Integer start, Integer limit, String order, String ordertype) {
-
         return projectManager.findPagerProjects(start, limit, order, "asc".equals(ordertype) ? true : false);
+    }
+
+    public List<Project> findListByTeamUserId(String userId) {
+        return projectManager.findListByTeamUserId(userId);
     }
 
     public Project addProject(Project project) {

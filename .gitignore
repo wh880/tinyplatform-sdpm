@@ -15,7 +15,6 @@ target/*
 *.iml
 
 .idea/
-.idea/*
 bin/
 bin/*
 

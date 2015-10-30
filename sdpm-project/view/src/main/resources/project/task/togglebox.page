@@ -4,7 +4,7 @@
     #@toggleLeft({"class":"aclass"})
         #@settoggleLeftTitle()
             #if(currentProjectId)
-                ${CmsUtils.getProject(currentProjectId).projectName}
+                ${ProjectUtils.getProject(currentProjectId).projectName}
             #end
         #end
         #@settoggleLeftBody("treeLeftbox")

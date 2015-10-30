@@ -18,7 +18,7 @@
                     </script>
                     #@Tselect2Body("productId" story?.productId  {"class":"input-text select2"})
                         #if(cookieProductLineId)
-                            #for(product : CmsUtils.getProductListByLine(cookieProductLineId))
+                            #for(product : ProductUtils.getProductListByLine(cookieProductLineId))
                                 <option value="${product?.productId}">${product?.productName}</option>
                             #end
                         #end

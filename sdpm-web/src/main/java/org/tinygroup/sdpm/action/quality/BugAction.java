@@ -47,7 +47,6 @@ import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import java.io.IOException;
 import java.util.*;
 
@@ -86,7 +85,7 @@ public class BugAction extends BaseController {
 	private CaseStepService caseStepService;
 
 	@RequestMapping("")
-	public String form(String get,QualityBug bug, Model model, HttpServletRequest request){
+	public String form(QualityBug bug, Model model, HttpServletRequest request) {
 		String queryString = request.getQueryString();
 		List<OrgUser> users = userService.findUserList(null);
 		if(bug!=null&&bug.getModuleId()!=null){

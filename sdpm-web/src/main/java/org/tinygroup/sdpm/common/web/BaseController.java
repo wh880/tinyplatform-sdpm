@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.multipart.MultipartFile;
+import org.tinygroup.convert.objectjson.fastjson.ObjectToJson;
 import org.tinygroup.logger.Logger;
 import org.tinygroup.logger.LoggerFactory;
 import org.tinygroup.sdpm.action.system.FileRepository;
@@ -88,16 +89,17 @@ public abstract class BaseController {
     }
 
 
-//    /**
-//     * 客户端返回JSON字符串
-//     *
-//     * @param response
-//     * @param object
-//     * @return
-//     */
-//    protected String renderString(HttpServletResponse response, Object object) {
-//        return renderString(response, JsonMapper.toJsonString(object), "application/json");
-//    }
+    /**
+     * 客户端返回JSON字符串
+     *
+     * @param response
+     * @param object
+     * @return
+     */
+    protected String renderString(HttpServletResponse response, Object object) {
+        ObjectToJson objectToJson = new ObjectToJson();
+        return renderString(response, objectToJson.convert(object), "application/json");
+    }
 
     /**
      * 服务端参数有效性验证

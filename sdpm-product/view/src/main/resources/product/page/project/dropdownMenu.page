@@ -3,9 +3,9 @@
 #@navSelect2("product" "product")
 	#@navSelect2Nav()
 		#if(cookieProductLineId)
-			#if(cookieProductId&&CmsUtils.getProductListByProductLineUser(cookieProductLineId)?.size()>0)
+			#if(cookieProductId&&ProductUtils.getProductListByProductLineUser(cookieProductLineId)?.size()>0)
 				#set(finded = 0)
-				#for(product : CmsUtils.getProductListByProductLineUser(cookieProductLineId))
+				#for(product : ProductUtils.getProductListByProductLineUser(cookieProductLineId))
 					#if(product?.productId == cookieProductId)
 						${product?.productName}
 						#set(finded=1)
@@ -19,10 +19,10 @@
 				</script>
 				#end
 			#else
-				#if(CmsUtils.getProductListByProductLineUser(cookieProductLineId)?.size()>0)
+				#if(ProductUtils.getProductListByProductLineUser(cookieProductLineId)?.size()>0)
 				<script type="text/javascript">
 					$(function(){
-						$.cookie('cookieProductId',"${CmsUtils.getProductListByProductLineUser(cookieProductLineId)?.get(0)?.productId}",{path:"/"});
+                        $.cookie('cookieProductId', "${ProductUtils.getProductListByProductLineUser(cookieProductLineId)?.get(0)?.productId}", {path: "/"});
 						window.location.reload();
 					})
 				</script>
@@ -52,10 +52,10 @@
 				#end
 			#end
 		#else
-			#if(CmsUtils.getProductLineListByUser()?.size()>0)
+			#if(ProductUtils.getProductLineListByUser()?.size()>0)
             <script type="text/javascript">
                 $(function(){
-                    $.cookie('cookieProductLineId',"${CmsUtils.getProductLineListByUser()?.get(0)?.productLineId}",{path:"/"});
+                    $.cookie('cookieProductLineId', "${ProductUtils.getProductLineListByUser()?.get(0)?.productLineId}", {path: "/"});
                     window.location.reload();
                 })
             </script>
@@ -70,7 +70,7 @@
 		  <option value=""></option>
 		  <optgroup label="产品">
 			  #if(cookieProductLineId)
-				  #for(product : CmsUtils.getProductListByProductLineUser(cookieProductLineId))
+				  #for(product : ProductUtils.getProductListByProductLineUser(cookieProductLineId))
 					<option value="${product?.productId}">${product?.productName}</option>
 				  #end
 		  #end

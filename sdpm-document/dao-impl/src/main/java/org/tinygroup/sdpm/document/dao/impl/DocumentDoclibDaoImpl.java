@@ -16,52 +16,39 @@
 
 package org.tinygroup.sdpm.document.dao.impl;
 
-import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
-import static org.tinygroup.sdpm.document.dao.constant.DocumentDoclibTable.*;
-import static org.tinygroup.tinysqldsl.Select.*;
-import static org.tinygroup.tinysqldsl.Insert.*;
-import static org.tinygroup.tinysqldsl.Delete.*;
-import static org.tinygroup.tinysqldsl.Update.*;
-
-import java.io.Serializable;
-
-import java.util.ArrayList;
-
-import java.util.List;
-
-import org.tinygroup.tinysqldsl.Delete;
-import org.tinygroup.tinysqldsl.Insert;
-import org.tinygroup.tinysqldsl.Select;
-import org.tinygroup.tinysqldsl.Update;
-import org.tinygroup.tinysqldsl.Pager;
 import org.springframework.stereotype.Repository;
 import org.tinygroup.commons.tools.CollectionUtil;
-import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
-import org.tinygroup.tinysqldsl.extend.MysqlSelect;
-	import org.tinygroup.tinysqldsl.select.OrderByElement;
-import org.tinygroup.sdpm.document.dao.pojo.DocumentDoclib;
+import org.tinygroup.jdbctemplatedslsession.callback.*;
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
+import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
 import org.tinygroup.sdpm.common.log.annotation.LogClass;
 import org.tinygroup.sdpm.common.log.annotation.LogMethod;
 import org.tinygroup.sdpm.document.dao.DocumentDoclibDao;
-import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
-import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
+import org.tinygroup.sdpm.document.dao.pojo.DocumentDocLib;
+import org.tinygroup.tinysqldsl.*;
+import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
+import org.tinygroup.tinysqldsl.extend.MysqlSelect;
+import org.tinygroup.tinysqldsl.select.OrderByElement;
 
-import org.tinygroup.jdbctemplatedslsession.callback.DeleteGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.InsertGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.NoParamDeleteGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.NoParamInsertGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.tinygroup.sdpm.document.dao.constant.DocumentDoclibTable.DOCUMENT_DOCLIBTABLE;
+import static org.tinygroup.tinysqldsl.Delete.delete;
+import static org.tinygroup.tinysqldsl.Insert.insertInto;
+import static org.tinygroup.tinysqldsl.Select.selectFrom;
+import static org.tinygroup.tinysqldsl.Update.update;
+import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 
 @Repository
 @LogClass("doclib")
 public class DocumentDoclibDaoImpl extends TinyDslDaoSupport implements DocumentDoclibDao {
 	
 	@LogMethod("add")
-	public DocumentDoclib add(DocumentDoclib documentDoclib) {
-		return getDslTemplate().insertAndReturnKey(documentDoclib, new InsertGenerateCallback<DocumentDoclib>() {
-			public Insert generate(DocumentDoclib t) {
+	public DocumentDocLib add(DocumentDocLib documentDocLib) {
+		return getDslTemplate().insertAndReturnKey(documentDocLib, new InsertGenerateCallback<DocumentDocLib>() {
+			public Insert generate(DocumentDocLib t) {
 				Insert insert = insertInto(DOCUMENT_DOCLIBTABLE).values(
 					DOCUMENT_DOCLIBTABLE.DOC_LIB_ID.value(t.getDocLibId()),
 					DOCUMENT_DOCLIBTABLE.DOC_LIB_NAME.value(t.getDocLibName()),
@@ -74,12 +61,12 @@ public class DocumentDoclibDaoImpl extends TinyDslDaoSupport implements Document
 	}
 	
 	@LogMethod("edit")
-	public int edit(DocumentDoclib documentDoclib) {
-		if(documentDoclib == null || documentDoclib.getDocLibId() == null){
+	public int edit(DocumentDocLib documentDocLib) {
+		if (documentDocLib == null || documentDocLib.getDocLibId() == null) {
 			return 0;
 		}
-		return getDslTemplate().update(documentDoclib, new UpdateGenerateCallback<DocumentDoclib>() {
-			public Update generate(DocumentDoclib t) {
+		return getDslTemplate().update(documentDocLib, new UpdateGenerateCallback<DocumentDocLib>() {
+			public Update generate(DocumentDocLib t) {
 				Update update = update(DOCUMENT_DOCLIBTABLE).set(
 					DOCUMENT_DOCLIBTABLE.DOC_LIB_NAME.value(t.getDocLibName()),
 					DOCUMENT_DOCLIBTABLE.DOC_LIB_DELETED.value(t.getDocLibDeleted()),
@@ -115,8 +102,8 @@ public class DocumentDoclibDaoImpl extends TinyDslDaoSupport implements Document
 		},pks);
 	}
 
-	public DocumentDoclib getByKey(Integer pk) {
-		return getDslTemplate().getByKey(pk, DocumentDoclib.class, new SelectGenerateCallback<Serializable>() {
+	public DocumentDocLib getByKey(Integer pk) {
+		return getDslTemplate().getByKey(pk, DocumentDocLib.class, new SelectGenerateCallback<Serializable>() {
 		@SuppressWarnings("rawtypes")
 		public Select generate(Serializable t) {
 			return selectFrom(DOCUMENT_DOCLIBTABLE).where(DOCUMENT_DOCLIBTABLE.DOC_LIB_ID.eq(t));
@@ -124,14 +111,14 @@ public class DocumentDoclibDaoImpl extends TinyDslDaoSupport implements Document
 		});
 	}
 
-	public List<DocumentDoclib> query(DocumentDoclib documentDoclib ,final OrderBy... orderArgs) {
-		if(documentDoclib==null){
-			documentDoclib=new DocumentDoclib();
+	public List<DocumentDocLib> query(DocumentDocLib documentDocLib, final OrderBy... orderArgs) {
+		if (documentDocLib == null) {
+			documentDocLib = new DocumentDocLib();
 		}
-		return getDslTemplate().query(documentDoclib, new SelectGenerateCallback<DocumentDoclib>() {
+		return getDslTemplate().query(documentDocLib, new SelectGenerateCallback<DocumentDocLib>() {
 
 			@SuppressWarnings("rawtypes")
-			public Select generate(DocumentDoclib t) {
+			public Select generate(DocumentDocLib t) {
 				Select select = selectFrom(DOCUMENT_DOCLIBTABLE).where(
 				and(
 					DOCUMENT_DOCLIBTABLE.DOC_LIB_NAME.eq(t.getDocLibName()),
@@ -143,13 +130,13 @@ public class DocumentDoclibDaoImpl extends TinyDslDaoSupport implements Document
 		});
 	}
 
-	public Pager<DocumentDoclib> queryPager(int start,int limit ,DocumentDoclib documentDoclib ,final OrderBy... orderArgs) {
-		if(documentDoclib==null){
-			documentDoclib=new DocumentDoclib();
+	public Pager<DocumentDocLib> queryPager(int start, int limit, DocumentDocLib documentDocLib, final OrderBy... orderArgs) {
+		if (documentDocLib == null) {
+			documentDocLib = new DocumentDocLib();
 		}
-		return getDslTemplate().queryPager(start, limit, documentDoclib, false, new SelectGenerateCallback<DocumentDoclib>() {
+		return getDslTemplate().queryPager(start, limit, documentDocLib, false, new SelectGenerateCallback<DocumentDocLib>() {
 
-			public Select generate(DocumentDoclib t) {
+			public Select generate(DocumentDocLib t) {
 				Select select = MysqlSelect.selectFrom(DOCUMENT_DOCLIBTABLE).where(
 				and(
 					DOCUMENT_DOCLIBTABLE.DOC_LIB_NAME.eq(t.getDocLibName()),
@@ -161,11 +148,11 @@ public class DocumentDoclibDaoImpl extends TinyDslDaoSupport implements Document
 		});
 	}
 
-	public int[] batchInsert(boolean autoGeneratedKeys ,List<DocumentDoclib> documentDoclibs) {
-		if (CollectionUtil.isEmpty(documentDoclibs)) {
+	public int[] batchInsert(boolean autoGeneratedKeys, List<DocumentDocLib> documentDocLibs) {
+		if (CollectionUtil.isEmpty(documentDocLibs)) {
 			return new int[0];
 		}
-		return getDslTemplate().batchInsert(autoGeneratedKeys, documentDoclibs, new NoParamInsertGenerateCallback() {
+		return getDslTemplate().batchInsert(autoGeneratedKeys, documentDocLibs, new NoParamInsertGenerateCallback() {
 
 			public Insert generate() {
 				return insertInto(DOCUMENT_DOCLIBTABLE).values(
@@ -177,16 +164,16 @@ public class DocumentDoclibDaoImpl extends TinyDslDaoSupport implements Document
 		});
 	}
 
-	public int[] batchInsert(List<DocumentDoclib> documentDoclibs){
-			return batchInsert(true ,documentDoclibs);
+	public int[] batchInsert(List<DocumentDocLib> documentDocLibs) {
+		return batchInsert(true, documentDocLibs);
 	}
 	
 	@LogMethod("batchUpdate")
-	public int[] batchUpdate(List<DocumentDoclib> documentDoclibs) {
-		if (CollectionUtil.isEmpty(documentDoclibs)) {
+	public int[] batchUpdate(List<DocumentDocLib> documentDocLibs) {
+		if (CollectionUtil.isEmpty(documentDocLibs)) {
 			return new int[0];
 		}
-		return getDslTemplate().batchUpdate(documentDoclibs, new NoParamUpdateGenerateCallback() {
+		return getDslTemplate().batchUpdate(documentDocLibs, new NoParamUpdateGenerateCallback() {
 
 			public Update generate() {
 				return update(DOCUMENT_DOCLIBTABLE).set(
@@ -200,11 +187,11 @@ public class DocumentDoclibDaoImpl extends TinyDslDaoSupport implements Document
 	}
 
 	@LogMethod("batchDelete")
-	public int[] batchDelete(List<DocumentDoclib> documentDoclibs) {
-		if (CollectionUtil.isEmpty(documentDoclibs)) {
+	public int[] batchDelete(List<DocumentDocLib> documentDocLibs) {
+		if (CollectionUtil.isEmpty(documentDocLibs)) {
 			return new int[0];
 		}
-		return getDslTemplate().batchDelete(documentDoclibs, new NoParamDeleteGenerateCallback() {
+		return getDslTemplate().batchDelete(documentDocLibs, new NoParamDeleteGenerateCallback() {
 
 			public Delete generate() {
 				return delete(DOCUMENT_DOCLIBTABLE).where(and(

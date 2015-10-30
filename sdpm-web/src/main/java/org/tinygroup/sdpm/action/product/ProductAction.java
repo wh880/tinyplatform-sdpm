@@ -10,14 +10,13 @@ import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.service.ProductService;
-import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.sdpm.productLine.service.ProductLineService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.dao.pojo.SystemHistory;
 import org.tinygroup.sdpm.system.service.inter.ActionService;
 import org.tinygroup.sdpm.system.service.inter.HistoryService;
-import org.tinygroup.sdpm.util.CmsUtils;
 import org.tinygroup.sdpm.util.LogUtil;
+import org.tinygroup.sdpm.util.ProductUtils;
 import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.weblayer.WebContext;
@@ -89,10 +88,10 @@ public class ProductAction extends BaseController {
         product.setProductStatus("0");
         
         product = productService.addProduct(product);
-        CmsUtils.removeProductList();
-        CmsUtils.removeProductList(productLine);
-        CmsUtils.removeAllProductListByUser();
-        CmsUtils.removeProductListByProductLineUser(productLine);
+        ProductUtils.removeProductList();
+        ProductUtils.removeProductList(productLine);
+        ProductUtils.removeAllProductListByUser();
+        ProductUtils.removeProductListByProductLineUser(productLine);
         LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCT,
                 LogUtil.LogAction.OPENED,
                 String.valueOf(product.getProductId()),
@@ -111,13 +110,13 @@ public class ProductAction extends BaseController {
     public String update(Product product, HttpServletRequest request, SystemAction systemAction) throws IOException {
         Product product1 = productService.findProduct(product.getProductId());
         productService.updateProduct(product);
-        CmsUtils.removeProductList();
-        CmsUtils.removeProductList(String.valueOf(
+        ProductUtils.removeProductList();
+        ProductUtils.removeProductList(String.valueOf(
                 product.getProductLineId().equals(product1.getProductId())?
                 product1.getProductLineId():product.getProductLineId()
                 ));
-        CmsUtils.removeAllProductListByUser();
-        CmsUtils.removeProductListByProductLineUser(String.valueOf(
+        ProductUtils.removeAllProductListByUser();
+        ProductUtils.removeProductListByProductLineUser(String.valueOf(
                 product.getProductLineId().equals(product1.getProductId())?
                 product1.getProductLineId():product.getProductLineId()
                 ));
@@ -138,8 +137,8 @@ public class ProductAction extends BaseController {
     public String edit(Product product, HttpServletRequest request) {
 
         productService.updateProduct(product);
-        CmsUtils.removeProductList();
-        CmsUtils.removeProductList(String.valueOf(product.getProductLineId()));
+        ProductUtils.removeProductList();
+        ProductUtils.removeProductList(String.valueOf(product.getProductLineId()));
         return "redirect:" + adminPath + "/product/find/overview?productId=" + product.getProductId();
     }
 
@@ -161,10 +160,10 @@ public class ProductAction extends BaseController {
         Product product1 = productService.findProduct(productId);
         productService.deleteProduct(productId);
         Product product = productService.findProduct(productId);
-        CmsUtils.removeProductList();
-        CmsUtils.removeProductList(String.valueOf(product.getProductLineId()));
-        CmsUtils.removeAllProductListByUser();
-        CmsUtils.removeProductListByProductLineUser(String.valueOf(product1.getProductLineId()));
+        ProductUtils.removeProductList();
+        ProductUtils.removeProductList(String.valueOf(product.getProductLineId()));
+        ProductUtils.removeAllProductListByUser();
+        ProductUtils.removeProductListByProductLineUser(String.valueOf(product1.getProductLineId()));
         LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCT,
                 LogUtil.LogAction.DELETED,
                 String.valueOf(productId),

@@ -9,6 +9,13 @@ import java.util.List;
  * Created by shenly13343 on 2015-09-18.
  */
 public interface ProjectManager {
+    /**
+     * 查找用户所在团队所拥有的项目
+     *
+     * @param userId OrgUser.Id
+     * @return
+     */
+    List<Project> findListByTeamUserId(String userId);
 
     /**
      * 根据项目查，关联查询了总消耗等信息

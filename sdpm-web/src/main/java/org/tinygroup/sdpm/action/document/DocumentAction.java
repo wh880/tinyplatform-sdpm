@@ -10,7 +10,7 @@ import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.document.dao.pojo.DocumentDoc;
-import org.tinygroup.sdpm.document.dao.pojo.DocumentDoclib;
+import org.tinygroup.sdpm.document.dao.pojo.DocumentDocLib;
 import org.tinygroup.sdpm.document.service.inter.DocService;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.UserService;
@@ -21,10 +21,7 @@ import org.tinygroup.sdpm.project.service.inter.ProjectProductService;
 import org.tinygroup.sdpm.system.dao.pojo.ProfileType;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
-import org.tinygroup.sdpm.util.CmsUtils;
-import org.tinygroup.sdpm.util.CookieUtils;
-import org.tinygroup.sdpm.util.LogUtil;
-import org.tinygroup.sdpm.util.UserUtils;
+import org.tinygroup.sdpm.util.*;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -62,14 +59,14 @@ public class DocumentAction extends BaseController {
      */
     @RequestMapping("")
     public String docIndex(@CookieValue(required = false, value = COOKIE_DOCLIB_ID) String documentLibId,
-                           DocumentDoclib docLib, String moduleId,
+                           DocumentDocLib docLib, String moduleId,
                            HttpServletRequest request, HttpServletResponse response, Model model) {
         if (null != docLib.getDocLibId()) {
             documentLibId = docLib.getDocLibId().toString();
             CookieUtils.setCookie(response, COOKIE_DOCLIB_ID, documentLibId.toString());
         } else {
             if (null == documentLibId) {
-                List<DocumentDoclib> list = docservice.findDoclibList(null);
+                List<DocumentDocLib> list = docservice.findDoclibList(null);
                 if (list != null && !list.isEmpty()) {
                     documentLibId = list.get(0).getDocLibId().toString();
                     CookieUtils.setCookie(response, COOKIE_DOCLIB_ID, documentLibId.toString());
@@ -83,8 +80,8 @@ public class DocumentAction extends BaseController {
         List<SystemModule> moduleList = moduleService.findModuleList(new SystemModule());
 
         model.addAttribute("userList", userList);
-        model.addAttribute("productList", CmsUtils.getProductList());
-        model.addAttribute("projectList", CmsUtils.getProjectList());
+        model.addAttribute("productList", ProductUtils.getProductList());
+        model.addAttribute("projectList", ProjectUtils.getUserProjectList());
         model.addAttribute("moduleList", moduleList);
         model.addAttribute("libList", CmsUtils.getDocLibList());
         request.getSession().setAttribute("moduleId", moduleId);

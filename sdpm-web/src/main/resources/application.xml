@@ -469,6 +469,8 @@
         <static-class name="UserUtils" class="org.tinygroup.sdpm.util.UserUtils"></static-class>
         <!--数据信息获取工具-->
         <static-class name="CmsUtils" class="org.tinygroup.sdpm.util.CmsUtils"></static-class>
+        <static-class name="ProjectUtils" class="org.tinygroup.sdpm.util.ProjectUtils"></static-class>
+        <static-class name="ProductUtils" class="org.tinygroup.sdpm.util.ProductUtils"></static-class>
     </template-config>
 
     <dict-load-config bean_name="ehCache"></dict-load-config>

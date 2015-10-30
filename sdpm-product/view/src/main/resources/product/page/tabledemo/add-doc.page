@@ -75,7 +75,7 @@
                     #@Tselect2Body("docProduct" product?.productId?:cookieProductId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         <option value="0">/</option>
                         #if(cookieProductLineId)
-                            #foreach(product : CmsUtils.getProductListByLine(cookieProductLineId))
+                            #foreach(product : ProductUtils.getProductListByLine(cookieProductLineId))
                                 <option value="${product?.productId}">${product?.productName}</option>
                             #end
                         #end
