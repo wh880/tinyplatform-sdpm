@@ -16,7 +16,8 @@
     #@td()<a
             href="${TINY_CONTEXT_PATH+adminPath}/quality/version/taskToCase?testversionId=${v?.testversionId}&currentPageId=5&status=tverallcase">${v
         ?.testtaskTitle}</a>#end
-    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/project/demand/index.page">${v?.projectId}</a>#end
+##    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/project/demand/index.page">${v?.projectId}</a>#end
+    #@td()${v?.projectId}#end
     #@td()${v?.buildName}#end
     #@td()${v?.testtaskOwner?UserUtils.getUserById(v?.testtaskOwner)?.orgUserRealName:""}#end
     #@td()${formatDate(v?.testtaskBegin, "yyyy-MM-dd")}#end
