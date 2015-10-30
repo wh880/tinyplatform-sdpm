@@ -67,7 +67,7 @@
                             </script>
 	                   		 #@Tselect2Body("productId" testCase?.productId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 	                   		    <option value="0" >/</option>
-	                            #for(product : CmsUtils.getAllProductListByUser())
+								 #for(product : ProductUtils.getAllProductListByUser())
 	                            <option value="${product?.productId}" >${product?.productName}</option>
 	                            #end
 	                    	#end 

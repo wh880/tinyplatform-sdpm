@@ -27,10 +27,8 @@ import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.tinysqldsl.*;
 import org.tinygroup.tinysqldsl.base.Condition;
 import org.tinygroup.tinysqldsl.base.FragmentSql;
-import org.tinygroup.tinysqldsl.expression.FragmentExpressionSql;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
-import org.tinygroup.tinysqldsl.formitem.FragmentFromItemSql;
 import org.tinygroup.tinysqldsl.select.Join;
 import org.tinygroup.tinysqldsl.select.OrderByElement;
 
@@ -38,11 +36,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.tinygroup.sdpm.quality.dao.constant.QualityBugTable.QUALITY_BUGTABLE;
 import static org.tinygroup.sdpm.org.dao.constant.OrgUserTable.ORG_USERTABLE;
+import static org.tinygroup.sdpm.quality.dao.constant.QualityBugTable.QUALITY_BUGTABLE;
 import static org.tinygroup.tinysqldsl.Delete.delete;
 import static org.tinygroup.tinysqldsl.Insert.insertInto;
-import static org.tinygroup.tinysqldsl.Select.*;
+import static org.tinygroup.tinysqldsl.Select.select;
 import static org.tinygroup.tinysqldsl.Update.update;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 
@@ -300,7 +298,7 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
 				MysqlSelect select = MysqlSelect.select(QUALITY_BUGTABLE.ALL,FragmentSql.fragmentSelect("org_user_account assignedUser")).from(QUALITY_BUGTABLE)
 						.join(Join.leftJoin(ORG_USERTABLE,QUALITY_BUGTABLE.BUG_ASSIGNED_TO.eq(ORG_USERTABLE.ORG_USER_ID))).where(
 						and(
-								conditions,
+//								conditions,
 								QUALITY_BUGTABLE.PRODUCT_ID.eq(t.getProductId()),
 								QUALITY_BUGTABLE.MODULE_ID.eq(t.getModuleId()),
 								QUALITY_BUGTABLE.PROJECT_ID.eq(t.getProjectId()),

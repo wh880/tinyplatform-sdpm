@@ -32,7 +32,7 @@
 					 #@Tselect2F()
 	                   		 #@Tselect2Body("productId" bug?.productId?:qualityProductId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 								<option value="0">/</option>
-	                       	  #foreach(product : CmsUtils.getAllProductListByUser())
+								 #foreach(product : ProductUtils.getAllProductListByUser())
 								#if(product?.deleted==0)
 	                       		 <option value="${product?.productId}">${product?.productName}</option>
 								#end
@@ -117,7 +117,8 @@
 						#@formControlDiv("col-8")
 							#@div(divClass="col-5")
 							 #@Tselect2F()
-	                   		 #@Tselect2Body("bugAssignedTo" bug?.bugAssignedTo?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+								 #@Tselect2Body("bugAssignedTo" bug?.bugAssignedTo {"class":
+									 "input-text select2"}) ##,"multiple":"multiple"加上为多选项
 
 	                    	#end
 	                       ###@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end

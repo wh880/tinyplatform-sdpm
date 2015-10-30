@@ -120,7 +120,7 @@
     <div id="caseGroup">
 #@toggleBox({"class":"open"})
 	#@toggleLeft({"class":"aclass"})
-		#@settoggleLeftTitle()#for(product : CmsUtils.getProductList())
+		#@settoggleLeftTitle()#for(product : ProductUtils.getProductList())
                               #if(product?.productId == qualityProductId)
                               ${product?.productName}
                               #break
