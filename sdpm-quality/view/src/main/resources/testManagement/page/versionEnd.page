@@ -8,8 +8,29 @@
 #set(name="qualityBug")
 
 	
-#@tinyForm("thisform" "" "" {"class":"test"})
-    #hiddenInput("","testtaskId","",testtaskId)
+#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/quality/version/taskEnd" "" {"class":"test"})
+<script type="text/javascript">
+    $("#${fromId}").submit(function(){
+        var url = $(this).attr('action');
+        $.ajax({
+            type: "POST",
+            url:url,
+            data:$("#${fromId}").serialize(),// 你的formid
+            async: false,
+            error: function(request) {
+                alert("Connection error");
+            },
+            success: function(data) {
+                if(data.status == "y"){
+                    window.location.href = document.referrer;
+                };
+            }
+        });
+        return false;
+    });
+
+</script>
+    #hiddenInput("","testversionId","",testversionId)
 <div style="width:65%;float:left" class="pageleftpart">
     <div class="infoContent">
         <p class="titleName">关闭用例</p>

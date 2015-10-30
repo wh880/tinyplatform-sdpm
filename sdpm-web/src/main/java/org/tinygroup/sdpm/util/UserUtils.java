@@ -47,7 +47,10 @@ public class UserUtils {
         }
         OrgUser user = (OrgUser) CacheUtils.get(USER_CACHE, USER_CACHE_ID_ + id);
         if (user == null) {
-            user = userService.findUser(id);
+            try {
+                user = userService.findUser(id);
+            } catch (Exception e) {
+            }
             if (user == null) {
                 return new OrgUser();
             }

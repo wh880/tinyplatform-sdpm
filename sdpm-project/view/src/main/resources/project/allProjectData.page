@@ -63,7 +63,7 @@
             #end
         #end
         #@td()
-            ${getDict("projectStaut", p.projectStatus)}
+            ${getDict("projectStatus", p.projectStatus)}
         #end
         #@td()${format("%.2f",p.estimate)}#end
         #@td()${format("%.2f",p.consume)}#end

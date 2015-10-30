@@ -148,7 +148,7 @@
 			#@elementItem()
 				#@colLabel()重现步骤：#end
 				#@formControlDiv("col-8")
-					#@Teditor("bugSteps" "bugSteps" {"initialFrameHeight":"150"})${bug?.bugSteps}#end
+					#@Teditor("bugSteps" "bugSteps" {"initialFrameHeight":"150"})${bugStep?:bug?.bugSteps}#end
 				#end
 				#@validateDiv("col-2")#end
 			#end
