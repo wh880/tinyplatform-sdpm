@@ -15,7 +15,7 @@
             #@sdpmItem("总消耗")
                 <div class="input-group">
                     <input name="taskConsumed" type="text" class="form-control" placeholder=""
-                           aria-describedby="basic-addon2" datatype="/^[0-9]+(.[0-9]{1,2})?$/">
+                           aria-describedby="basic-addon2" datatype="/^[0-9]+(\.[0-9]{1,2})?$/">
                     <span class="input-group-addon" id="all-time">小时</span>
                 </div>
             #end
@@ -24,7 +24,7 @@
             #@sdpmItem("预计剩余") ##预计剩余需要判断，当为0时，标识为完成
                 <div class="input-group">
                     #tinyInput("text" "taskEstimate" copyTask?.taskEstimate {"placeholder":"最初预计","datatype":
-                        "/^[0-9]+(.[0-9]{1,2})?$/",
+                        "/^[0-9]+(\.[0-9]{1,2})?$/",
                         "class":"","nullmsg":"请输入最初预计",
                         "aria-describedby":"basic-addon2"})
                     <span class="input-group-addon" id="basic-addon2">小时</span>

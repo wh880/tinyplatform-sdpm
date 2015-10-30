@@ -1,4 +1,3 @@
-##<span id="showsearchmore">搜索</span>
 <form method="post" action="" id="searchform" class="form-condensed">
 <div class="hide">
 <select id="operatortemp">

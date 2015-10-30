@@ -122,7 +122,7 @@
                 <a href="javascript:void(0);" class="dropdown-toggle user-menu" data-toggle="dropdown">
                     <img src="${TINY_CONTEXT_PATH}/common/img/avatars/1.jpg"
                          alt="${UserUtils.getUser().orgUserRealName}">
-                    <span>${UserUtils.getUser().orgUserRealName}</span>
+                    <span>123${UserUtils.getUser().orgUserRealName}</span>
                 </a>
                 <ul class="dropdown-menu">
                     <li><a href="javascript:void(0);"><span class="label label-warning pull-right">新的</span>资料文件</a>
