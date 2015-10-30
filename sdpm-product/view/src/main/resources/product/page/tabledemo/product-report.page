@@ -44,14 +44,7 @@
 				
 			  $(".navbody input[type='checkbox']").each(function () {
 			  		this.checked=!this.checked;
-			  		
-			  		/*console.log(this.checked)
-			  		var ischecked = $(this).is(":checked");//("checked");
-			  		if(ischecked){
-			  			$(this).removeAttr("checked");
-			  		}else{
-                   	 	$(this).attr("checked","checked");
-                    }*/
+
                 });
 			
 			
@@ -72,10 +65,10 @@
 		<a href="#" class="active_btn">报表</a>
 	</span>
     <span class="r">
-    	#@aModal("#myModal" "导出HTML" "500" "130" "btn-class" "/product/page/tabledemo/product-export-demand.pagelet")#buttonIcon(iconClass="icon-download-alt")导出#end
+##    	#@aModal("#myModal" "导出HTML" "500" "130" "btn-class" "/product/page/tabledemo/product-export-demand.pagelet")#buttonIcon(iconClass="icon-download-alt")导出#end
 
-        <a href="${TINY_CONTEXT_PATH +adminPath}/product/page/project/togglebox.page">#buttonIcon(iconClass=
-			"icon-goback icon-level-up icon-large icon-rotate-270")返回</a>&nbsp;
+##        <a href="${TINY_CONTEXT_PATH +adminPath}/product/page/project/togglebox.page">#buttonIcon(iconClass=
+##			"icon-goback icon-level-up icon-large icon-rotate-270")返回</a>&nbsp;
 	</span>
         #div(divClass="clearfix")
     #end
@@ -87,30 +80,8 @@
             #@settoggleLeftBody()
 				#@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/product/story/report" "post" {"class":"test"})
                     #@skinMinimal("check-box")
-#*                    	#@Tcheckboxes("productWhiteList" product?.productWhiteList)
-							#@Tcheckbox("admin")产品需求数量#end<br/>
-							#@Tcheckbox("admin")模块需求数量#end<br/>
-							#@Tcheckbox("admin")需求来源统计#end<br/>
-							#@Tcheckbox("admin")计划进行统计#end<br/>
-							#@Tcheckbox("admin")状态进行统计#end<br/>
-							#@Tcheckbox("admin")所处阶段进行统计#end<br/>
-							#@Tcheckbox("admin")优先级进行统计#end<br/>
-							#@Tcheckbox("admin")预计工时进行统计#end<br/>
-							#@Tcheckbox("admin")由谁创建来进行统计#end<br/>
-							#@Tcheckbox("admin")由谁指派来进行统计#end<br/>
-							#@Tcheckbox("admin")当前指派来进行统计#end<br/>
-							#@Tcheckbox("admin")关闭原因来进行统计#end<br/>
-							#@Tcheckbox("admin")变更次数来进行统计#end<br/>
-							
-						#end*#
 						
 						#hiddenInput("hiddenFields","","",fields)
-#*						#@tinyCheckbox("chexkitem","A_productCount","")
-							oooo
-						#end<br/>
-						#@tinyCheckbox("chexkitem","A_productCount","")
-							sdfsd
-						#end*#
                         #labelCheckbox(ckId="check1" ckName="chexkitem" ckValue="A_productCount"  labelText="产品需求数量")
                         #labelCheckbox(ckId="chec2" ckName="chexkitem" ckValue="B_moduleCount" labelText="模块需求数量")
                         #labelCheckbox(ckId="check3" ckName="chexkitem" ckValue="D_storySource" labelText="需求来源统计")

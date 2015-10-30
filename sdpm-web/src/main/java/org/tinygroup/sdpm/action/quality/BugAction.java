@@ -18,6 +18,7 @@ import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
+import org.tinygroup.sdpm.product.dao.pojo.StoryCount;
 import org.tinygroup.sdpm.product.service.PlanService;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.product.service.StoryService;
@@ -29,6 +30,7 @@ import org.tinygroup.sdpm.project.service.inter.BuildService;
 import org.tinygroup.sdpm.project.service.inter.ProjectProductService;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.sdpm.project.service.inter.TaskService;
+import org.tinygroup.sdpm.quality.dao.pojo.BugCount;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityCaseStep;
 import org.tinygroup.sdpm.quality.service.inter.BugService;
@@ -562,6 +564,7 @@ public class BugAction extends BaseController {
 		bug.setBugStatus("1");
 		bug.setDeleted(0);
 		bug.setBugOpenedDate(new Date());
+		bug.setBugActivatedCount(0);
 		if(bug.getStoryId()!=null){
 			bug.setStoryVersion(storyService.findStory(bug.getStoryId()).getStoryVersion());
 		}
@@ -590,6 +593,7 @@ public class BugAction extends BaseController {
 		bug.setBugConfirmed(0);
 		bug.setDeleted(0);
 		bug.setBugOpenedDate(new Date());
+		bug.setBugActivatedCount(0);
 		bug.setBugOpenedBy(UserUtils.getUserId() != null?UserUtils.getUserId():"0");
 		QualityBug qbug=bugService.addBug(bug);
 
@@ -752,5 +756,16 @@ public class BugAction extends BaseController {
 		model.addAttribute("userList",orgUsers);
 		return "/testManagement/page/proposeBug.page";
 	}
-	
+
+
+	@RequestMapping("/getReport")
+	public String report(
+			@CookieValue("qualityProductId") String qualityProductId,
+			 String checkItem, Model model,HttpServletRequest request) {
+
+		Map<String, List<BugCount>> map = bugService.report(checkItem,Integer.parseInt(qualityProductId));
+		model.addAttribute("map", map);
+		model.addAttribute("fields", checkItem);
+		return "/testManagement/page/reportform.page";
+	}
 }

@@ -23,6 +23,7 @@ import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
 import org.tinygroup.sdpm.common.util.update.UpdateUtil;
 import org.tinygroup.sdpm.quality.dao.QualityBugDao;
+import org.tinygroup.sdpm.quality.dao.pojo.BugCount;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.tinysqldsl.*;
 import org.tinygroup.tinysqldsl.base.Condition;
@@ -43,6 +44,7 @@ import static org.tinygroup.tinysqldsl.Insert.insertInto;
 import static org.tinygroup.tinysqldsl.Select.select;
 import static org.tinygroup.tinysqldsl.Update.update;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
+import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.or;
 
 @Repository
 public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDao {
@@ -589,5 +591,29 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
 								QUALITY_BUGTABLE.BUG_ID.eq(new JdbcNamedParameter("bugId")));
 			}
 		});
+	}
+
+	public List<BugCount> getCount(String code, Integer productId) {
+		Select select = select(CountConditions.getSelectItem(code,productId)).
+				from(CountConditions.getFromItem(code)).
+				groupBy(CountConditions.getGroupByColumn(code)).
+				having(CountConditions.getHavingCondition(code));
+		return getDslSession().fetchList(select,BugCount.class);
+	}
+
+	public BugCount getBugsNotInType(String type,Integer productId) {
+		Select select = select(
+				QUALITY_BUGTABLE.BUG_ID.count().as("number"),
+				FragmentSql.fragmentSelect("COUNT(quality_bug.bug_id)/" +
+						"(SELECT COUNT(0) FROM product LEFT JOIN quality_bug ON product.`product_id` = quality_bug.`product_id` WHERE product.product_id="+productId+") AS percent")).
+				from(QUALITY_BUGTABLE);
+		if("project".equals(type)){
+			select.where(or(QUALITY_BUGTABLE.PROJECT_ID.isNull(),QUALITY_BUGTABLE.PROJECT_ID.eq(0)));
+		}else if("build".equals(type)){
+			select.where(or(QUALITY_BUGTABLE.BUG_OPENED_BUILD.isNull(),QUALITY_BUGTABLE.BUG_OPENED_BUILD.eq(0)));
+		}else if("module".equals(type)){
+			select.where(or(QUALITY_BUGTABLE.MODULE_ID.isNull(),QUALITY_BUGTABLE.MODULE_ID.eq(0)));
+		}
+		return getDslSession().fetchOneResult(select,BugCount.class);
 	}
 }

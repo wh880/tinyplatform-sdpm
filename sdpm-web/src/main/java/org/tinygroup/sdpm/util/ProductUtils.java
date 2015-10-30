@@ -84,8 +84,8 @@ public class ProductUtils {
      * 获得产品列表
      */
     public static List<Product> getProductListByLine(String productLineId) {
-        if (productLineId == null) {
-            return getProductList();
+        if (StringUtil.isBlank(productLineId)) {
+            return new ArrayList<Product>();
         }
         List<Product> productList = (List<Product>) CacheUtils.get(CMS_CACHE, CMS_CACHE_PRODUCT_LIST_LINE_ID_ + productLineId);
         if (productList == null) {
@@ -113,6 +113,9 @@ public class ProductUtils {
      * @param productId
      */
     public static Product getProduct(String productId) {
+        if(StringUtil.isBlank(productId)){
+            return new Product();
+        }
         List<Product> productList = getProductList();
         if (productId == null && productList != null && !productList.isEmpty()) {
             return productList.get(0);
@@ -145,10 +148,12 @@ public class ProductUtils {
             for (List<ProjectTeam> teams : teamsList) {
                 for (ProjectTeam team : teams) {
                     if (!StringUtil.isBlank(team.getTeamUserId()) && !resultBuffer.toString().contains(team.getTeamUserId())) {
-                        if (!StringUtil.isBlank(resultBuffer.toString())) {
-                            resultBuffer.append(",");
+                        if(!resultBuffer.toString().contains(team.getTeamUserId())) {
+                            if (!StringUtil.isBlank(resultBuffer.toString())) {
+                                resultBuffer.append(",");
+                            }
+                            resultBuffer.append(team.getTeamUserId());
                         }
-                        resultBuffer.append(team.getTeamUserId());
                     }
                 }
             }

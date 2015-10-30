@@ -50,7 +50,7 @@
 					 #@Tselect2F()
 	                   		 #@Tselect2Body("productId" bug?.productId?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 								<option value="0">/</option>
-								#foreach(product : qualityProductList)
+								#foreach(product : ProductUtils.getAllProductListByUser())
 									#if(product?.deleted==0)
 									<option value="${product?.productId}">${product?.productName}</option>
 									#end

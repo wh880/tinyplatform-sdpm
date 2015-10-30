@@ -1,7 +1,9 @@
 package org.tinygroup.sdpm.quality.biz.impl;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,6 +13,7 @@ import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.quality.biz.inter.BugManager;
 import org.tinygroup.sdpm.quality.dao.QualityBugDao;
+import org.tinygroup.sdpm.quality.dao.pojo.BugCount;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.tinysqldsl.expression.FragmentExpressionSql;
@@ -56,6 +59,39 @@ public class BugManagerImpl implements BugManager {
 	public Integer delete(Integer id) {
 		
 		return bugdao.softDelete(id);
+	}
+
+	public Map<String, List<BugCount>> report(String code, Integer productId) {
+		String[] codes = code.split(",");
+		if(codes!=null&&codes.length>0){
+			Map<String,List<BugCount>> bugCountMap = new HashMap<String, List<BugCount>>();
+			for(String countCode : codes){
+				String[] sqlCodes = countCode.split("_");
+				List<BugCount> result = bugdao.getCount(sqlCodes[0],productId);
+				bugCountMap.put(countCode,result);
+				if("A".equals(sqlCodes[0])){
+					BugCount count = bugdao.getBugsNotInType("project",productId);
+					if(count.getNumber()!=null&&count.getNumber()>0){
+						count.setName("未设定");
+						result.add(count);
+					}
+				}else if("B".equals(sqlCodes[0])){
+					BugCount count = bugdao.getBugsNotInType("build",productId);
+					if(count.getNumber()!=null&&count.getNumber()>0){
+						count.setName("未设定");
+						result.add(count);
+					}
+				}else if("C".equals(sqlCodes[0])){
+					BugCount count = bugdao.getBugsNotInType("module",productId);
+					if(count.getNumber()!=null&&count.getNumber()>0){
+						count.setName("未设定");
+						result.add(count);
+					}
+				}
+			}
+			return bugCountMap;
+		}
+		return new HashMap<String, List<BugCount>>();
 	}
 
 	public int[] batchDelete(List<QualityBug> bugIds) {

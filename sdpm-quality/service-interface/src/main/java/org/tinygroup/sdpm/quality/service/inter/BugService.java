@@ -1,6 +1,9 @@
 package org.tinygroup.sdpm.quality.service.inter;
 
 import java.util.List;
+import java.util.Map;
+
+import org.tinygroup.sdpm.quality.dao.pojo.BugCount;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -64,5 +67,7 @@ public interface BugService {
 	 * @return
 	 */
 	Integer deleteBug(Integer bugId);
+
+	Map<String,List<BugCount>> report(String code, Integer productId);
 	
 }

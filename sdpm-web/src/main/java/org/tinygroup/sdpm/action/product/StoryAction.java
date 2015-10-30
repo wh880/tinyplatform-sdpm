@@ -815,17 +815,6 @@ public class StoryAction extends BaseController {
             @CookieValue("cookieProductId") String cookieProductId,
             ProductStory story, String chexkitem, Model model,HttpServletRequest request) {
 
-		/*
-		 * List<StoryCount> productStoryCount =
-		 * storyService.productStoryCount(story); List<StoryCount>
-		 * modelStoryCount = storyService.modelStoryCount(story);
-		 * List<StoryCount> planStoryCount = storyService.planStoryCount(story);
-		 * 
-		 * model.addAttribute("productStoryCount", productStoryCount);
-		 * model.addAttribute("modelStoryCount", modelStoryCount);
-		 * model.addAttribute("planStoryCount", planStoryCount);
-		 */
-
     	story.setProductId(Integer.parseInt(cookieProductId));
         Map<String, List<StoryCount>> map = storyService.report(chexkitem,story);
         model.addAttribute("map", map);
