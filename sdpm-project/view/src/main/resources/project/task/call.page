@@ -47,7 +47,7 @@
             #@sdpmItem("预计剩余")
                 <div class="input-group">
                     #tinyInput("text" "taskEstimate" copyTask?.taskEstimate {"placeholder":"最初预计","datatype":
-                        "/^[0-9]+(.[0-9]{1,2})?$/",
+                        "/^[0-9]+(\.[0-9]{1,2})?$/",
                         "class":"","nullmsg":"请输入最初预计",
                         "aria-describedby":"basic-addon2"})
                     <span class="input-group-addon" id="basic-addon2">小时</span>

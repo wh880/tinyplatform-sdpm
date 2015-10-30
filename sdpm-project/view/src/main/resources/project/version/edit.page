@@ -13,9 +13,7 @@
         #@tabHead()
             #include("/project/protab.page")
         #end
-    ##head end
     <br/>
-    ##body end
     #end
 #end
 
@@ -100,10 +98,12 @@
         #end
     #end
     #@elementItem()
-        #@sdpmItem("描述")
-            #@tinyueditor("content" "buildDesc" "height:100px;overflow:auto")说点什么...最少输入10个字符#end
-        #end
-
+        <div class="col-2 text-r">
+            <label>描述：&nbsp;</label>
+        </div>
+        <div class="col-8 form-item-body">
+            #@tinyueditor("content" "buildDesc" "width:40%;overflow:auto")${build?.buildDesc}#end
+        </div>
     #end
     #@elementItem()
         <div class="col-12">

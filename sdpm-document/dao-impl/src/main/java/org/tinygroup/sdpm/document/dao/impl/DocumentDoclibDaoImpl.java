@@ -22,7 +22,6 @@ import org.tinygroup.jdbctemplatedslsession.callback.*;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
 import org.tinygroup.sdpm.common.log.annotation.LogClass;
-import org.tinygroup.sdpm.common.log.annotation.LogMethod;
 import org.tinygroup.sdpm.document.dao.DocumentDoclibDao;
 import org.tinygroup.sdpm.document.dao.pojo.DocumentDocLib;
 import org.tinygroup.tinysqldsl.*;
@@ -45,7 +44,6 @@ import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 @LogClass("doclib")
 public class DocumentDoclibDaoImpl extends TinyDslDaoSupport implements DocumentDoclibDao {
 	
-	@LogMethod("add")
 	public DocumentDocLib add(DocumentDocLib documentDocLib) {
 		return getDslTemplate().insertAndReturnKey(documentDocLib, new InsertGenerateCallback<DocumentDocLib>() {
 			public Insert generate(DocumentDocLib t) {
@@ -60,7 +58,6 @@ public class DocumentDoclibDaoImpl extends TinyDslDaoSupport implements Document
 		});
 	}
 	
-	@LogMethod("edit")
 	public int edit(DocumentDocLib documentDocLib) {
 		if (documentDocLib == null || documentDocLib.getDocLibId() == null) {
 			return 0;
@@ -78,7 +75,6 @@ public class DocumentDoclibDaoImpl extends TinyDslDaoSupport implements Document
 		});
 	}
 
-	@LogMethod("deleteByKey")
 	public int deleteByKey(Integer pk){
 		if(pk == null){
 			return 0;
@@ -90,7 +86,6 @@ public class DocumentDoclibDaoImpl extends TinyDslDaoSupport implements Document
 		});
 	}
 
-	@LogMethod("deleteByKeys")
 	public int deleteByKeys(Integer... pks) {
 		if(pks == null || pks.length == 0){
 			return 0;
@@ -168,7 +163,6 @@ public class DocumentDoclibDaoImpl extends TinyDslDaoSupport implements Document
 		return batchInsert(true, documentDocLibs);
 	}
 	
-	@LogMethod("batchUpdate")
 	public int[] batchUpdate(List<DocumentDocLib> documentDocLibs) {
 		if (CollectionUtil.isEmpty(documentDocLibs)) {
 			return new int[0];
@@ -186,7 +180,6 @@ public class DocumentDoclibDaoImpl extends TinyDslDaoSupport implements Document
 		});
 	}
 
-	@LogMethod("batchDelete")
 	public int[] batchDelete(List<DocumentDocLib> documentDocLibs) {
 		if (CollectionUtil.isEmpty(documentDocLibs)) {
 			return new int[0];

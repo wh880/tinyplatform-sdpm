@@ -300,7 +300,7 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
 				MysqlSelect select = MysqlSelect.select(QUALITY_BUGTABLE.ALL,FragmentSql.fragmentSelect("org_user_account assignedUser")).from(QUALITY_BUGTABLE)
 						.join(Join.leftJoin(ORG_USERTABLE,QUALITY_BUGTABLE.BUG_ASSIGNED_TO.eq(ORG_USERTABLE.ORG_USER_ID))).where(
 						and(
-//								conditions,
+								conditions,
 								QUALITY_BUGTABLE.PRODUCT_ID.eq(t.getProductId()),
 								QUALITY_BUGTABLE.MODULE_ID.eq(t.getModuleId()),
 								QUALITY_BUGTABLE.PROJECT_ID.eq(t.getProjectId()),

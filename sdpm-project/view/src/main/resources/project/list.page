@@ -1,3 +1,21 @@
+#set(name="task")
+#@div()
+    #@tabWithInit("tab_demo" "optionsBox")
+        #@div(divClass="dropdownBox")
+            #include("/project/dropdownMenu.page")
+        #end
+        #@tabHead()
+            #include("/project/protab.page")
+        #end
+    ##head end
+        #@tabBodyCol("ptop-5")
+        ##operationbar start
+            #include("/project/task/taskMenu.page")
+        ##operationbay end
+        #end
+    ##body end
+    #end
+#end
 #@tinyTable()
     #@div(divBaseClass="tinyheaderTools form-inline")
         #setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置

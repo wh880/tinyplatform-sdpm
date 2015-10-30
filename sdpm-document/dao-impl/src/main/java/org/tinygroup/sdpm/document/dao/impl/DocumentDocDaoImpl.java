@@ -16,53 +16,38 @@
 
 package org.tinygroup.sdpm.document.dao.impl;
 
-import static org.tinygroup.tinysqldsl.base.FragmentSql.fragmentCondition;
-import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
-import static org.tinygroup.sdpm.document.dao.constant.DocumentDocTable.*;
-import static org.tinygroup.tinysqldsl.Select.*;
-import static org.tinygroup.tinysqldsl.Insert.*;
-import static org.tinygroup.tinysqldsl.Delete.*;
-import static org.tinygroup.tinysqldsl.Update.*;
-
-import java.io.Serializable;
-
-import java.util.ArrayList;
-
-import java.util.List;
-
-import org.tinygroup.tinysqldsl.Delete;
-import org.tinygroup.tinysqldsl.Insert;
-import org.tinygroup.tinysqldsl.Select;
-import org.tinygroup.tinysqldsl.Update;
-import org.tinygroup.tinysqldsl.base.Condition;
-import org.tinygroup.tinysqldsl.Pager;
 import org.springframework.stereotype.Repository;
 import org.tinygroup.commons.tools.CollectionUtil;
-import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
-import org.tinygroup.tinysqldsl.extend.MysqlSelect;
-import org.tinygroup.tinysqldsl.select.OrderByElement;
-import org.tinygroup.tinysqldsl.selectitem.FragmentSelectItemSql;
-import org.tinygroup.sdpm.document.dao.pojo.DocumentDoc;
+import org.tinygroup.jdbctemplatedslsession.callback.*;
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
+import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
 import org.tinygroup.sdpm.common.log.annotation.LogClass;
 import org.tinygroup.sdpm.common.log.annotation.LogMethod;
 import org.tinygroup.sdpm.common.util.update.UpdateUtil;
 import org.tinygroup.sdpm.document.dao.DocumentDocDao;
-import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
-import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
+import org.tinygroup.sdpm.document.dao.pojo.DocumentDoc;
+import org.tinygroup.tinysqldsl.*;
+import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
+import org.tinygroup.tinysqldsl.extend.MysqlSelect;
+import org.tinygroup.tinysqldsl.select.OrderByElement;
+import org.tinygroup.tinysqldsl.selectitem.FragmentSelectItemSql;
 
-import org.tinygroup.jdbctemplatedslsession.callback.DeleteGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.InsertGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.NoParamDeleteGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.NoParamInsertGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.tinygroup.sdpm.document.dao.constant.DocumentDocTable.DOCUMENT_DOCTABLE;
+import static org.tinygroup.tinysqldsl.Delete.delete;
+import static org.tinygroup.tinysqldsl.Insert.insertInto;
+import static org.tinygroup.tinysqldsl.Select.selectFrom;
+import static org.tinygroup.tinysqldsl.Update.update;
+import static org.tinygroup.tinysqldsl.base.FragmentSql.fragmentCondition;
+import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 
 @Repository
 @LogClass("doc")
 public class DocumentDocDaoImpl extends TinyDslDaoSupport implements DocumentDocDao {
 	
-	@LogMethod("add")
 	public DocumentDoc add(DocumentDoc documentDoc) {
 		return getDslTemplate().insertAndReturnKey(documentDoc, new InsertGenerateCallback<DocumentDoc>() {
 			public Insert generate(DocumentDoc t) {
@@ -90,7 +75,6 @@ public class DocumentDocDaoImpl extends TinyDslDaoSupport implements DocumentDoc
 		});
 	}
 
-	@LogMethod("edit")
 	public int edit(DocumentDoc documentDoc) {
 		if(documentDoc == null || documentDoc.getDocId() == null){
 			return 0;
@@ -328,7 +312,6 @@ public class DocumentDocDaoImpl extends TinyDslDaoSupport implements DocumentDoc
 			return batchInsert(true ,documentDocs);
 	}
 	
-	@LogMethod("batchUpdate")
 	public int[] batchUpdate(List<DocumentDoc> documentDocs) {
 		if (CollectionUtil.isEmpty(documentDocs)) {
 			return new int[0];
@@ -359,7 +342,6 @@ public class DocumentDocDaoImpl extends TinyDslDaoSupport implements DocumentDoc
 		});
 	}
 
-	@LogMethod("batchDelete")
 	public int[] batchDelete(List<DocumentDoc> documentDocs) {
 		if (CollectionUtil.isEmpty(documentDocs)) {
 			return new int[0];
@@ -407,7 +389,6 @@ public class DocumentDocDaoImpl extends TinyDslDaoSupport implements DocumentDoc
 		return select;
 	}
 
-	@LogMethod("batchUpdateDel")
 	public int[] batchUpdateDel(List<DocumentDoc> documentDocs){
 		if (CollectionUtil.isEmpty(documentDocs)) {
 			return new int[0];

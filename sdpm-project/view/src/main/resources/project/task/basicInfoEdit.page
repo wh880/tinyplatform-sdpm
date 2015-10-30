@@ -195,7 +195,7 @@
                         #@formControlDiv("col-10")
                             #tinyInput(
                                 "text" "taskEstimate" task?.taskEstimate {"placeholder":"最初预计","datatype":
-                                "/^[0-9]+(.[0-9]{1,2})?$/",
+                                "/^[0-9]+(\.[0-9]{1,2})?$/",
                                 "class":"",
                                 "aria-describedby":"basic-addon2"})
                         #end

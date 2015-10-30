@@ -111,8 +111,8 @@
               isShow="1" scope="testversion-op"></menu>
         <menu id="tversiondelete" name="删除" href="/quality/version/ajax/delete" icon="icon-remove" sort="1"
               isShow="1" scope="testversion-op"></menu>
-      	<menu id="tproposeversion" name="完成" href="/testManagement/page/proposeversion.page" icon="icon-ok-sign" sort="12" isShow="1"
-              scope="pro-version-op"/>     
+        <menu id="tproposeversion" name="提交测试" href="/quality/version/add" icon="icon-ok-sign" sort="12" isShow="1"
+              scope=""/>
         <menu id="tversion" name="版本 " href="/testManagement/page/version.page" icon="icon-smile" sort="4"
               isShow="1" scope="pro-test-op"></menu>
         <menu id="tversionedit" name="编辑版本 " href="/quality/version/toEdit" icon="icon-pencil" sort="2"

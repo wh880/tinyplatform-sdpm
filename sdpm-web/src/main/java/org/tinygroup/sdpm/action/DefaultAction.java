@@ -16,11 +16,15 @@
 
 package org.tinygroup.sdpm.action;
 
+import com.alibaba.fastjson.JSON;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.util.UserUtils;
+
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class DefaultAction extends BaseController {
@@ -40,9 +44,15 @@ public class DefaultAction extends BaseController {
         return "login/login.pagelet";
     }
 
-    @RequestMapping("a")
+    @RequestMapping(value = {"a", "a/home"})
     public String index() {
         return "main/index.page";
+    }
+
+    @RequestMapping("saveTree")
+    @ResponseBody
+    public void saveTree(String treeString, HttpSession session) {
+        session.setAttribute("menuList",JSON.parse(treeString));
     }
 
 }

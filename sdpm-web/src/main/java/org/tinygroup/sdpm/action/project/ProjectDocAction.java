@@ -38,7 +38,6 @@ public class ProjectDocAction extends BaseController {
     @RequestMapping("/findList")
     public String findList(Model model, HttpServletRequest request, Integer start, Integer limit, String order, String ordertype) {
         Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
-
         DocumentDoc doc = new DocumentDoc();
         doc.setDocProject(projectId);
         Pager<DocumentDoc> docPager = docService.findDocRetPager(start, limit, doc, null, null, null, order, "asc".equals(ordertype) ? true : false);

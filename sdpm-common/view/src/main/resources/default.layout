@@ -1,4 +1,7 @@
-#set(pagePostionTitle='<li><a href="'+TINY_CONTEXT_PATH+'">首页</a></li>',activeMenuId=activeMenuId?:currentPageId)
+#macro getMenuId()
+    #for(var:menuList)#if(tinyRequestRequestURI.startsWith(var?.url))#set(activeMenuId=var.id)#break#end#end
+#end
+#set(pagePostionTitle='<li><a href="'+TINY_CONTEXT_PATH+'">首页</a></li>',activeMenuId="0",topMenuId="0",c=call("getMenuId"),c=call("getTopMenuId"))
 <!DOCTYPE html>
 <!--[if IE 7 ]>		 <html class="no-js ie ie7 lte7 lte8 lte9" lang="zh-cmn-Hans-CN"> <![endif]-->
 <!--[if IE 8 ]>		 <html class="no-js ie ie8 lte8 lte9" lang="zh-cmn-Hans-CN"> <![endif]-->
@@ -22,9 +25,6 @@
     <meta name="description" content="Tiny,TINY,Software Development Process Management">
     <script>
         var contextPath = "${TINY_CONTEXT_PATH}";
-        var CKEDITOR_BASEPATH = contextPath + '/';
-        var pathname = location.pathname;
-        var relativeurl = pathname.substring(CKEDITOR_BASEPATH.length);
         var pomlist = new Array()
     </script>
     <!--[if lt ie 9]>
@@ -165,17 +165,45 @@
         #end
     #end
 <script type="text/javascript">
-    function setPostiionNav() {
-        var currenttxt = $(".navigation ul>li.active>a:first>span:first").html();
-        $(document).attr("title", currenttxt + "--" + "TinyUiEnterprise展示");
-        if (currenttxt == undefined) {
-            $('.postion-nav .active').css("display", "inline")
-            return;
+
+    init.push(function () {
+        #if(!menuList)
+            var menuList=[];
+            $(".navigation:first a.navitem").each(function(){
+                var href=$(this).attr("href");
+                var path=contextPath+"/a/";
+                href=href.replace(path,"");
+                var nextPart=href.indexOf("/");
+                if(nextPart>0){
+                    href=href.substring(0,nextPart+1);
+                }
+                href=path+href;
+                var treeid=$(this).attr("data-treeid");
+                menuList.push({id:treeid,url:href});
+            });
+            $.ajax({
+                url:"#link("/saveTree")",
+                type:"post",
+                data:{treeString:JSON.stringify(menuList)},
+                success:function(data){
+                    if(window.location.pathname!=contextPath+"/a/home")
+                        window.location.reload();
+                }
+            })
+        #end
+        var globalMessage="${globalMessage}";
+
+        if(globalMessage){
+            var timeCount=setTimeout(function(){
+                layer.closeAll();
+            },5000);
+            layer.alert(globalMessage, -1, '提示', function() {
+                layer.closeAll();
+                clearTimeout(timeCount);
+            });
         }
-        var reg = /[0-9]|\./g;
-        currenttxt = currenttxt.replace(reg, "");
-        $('.postion-nav .active').css("display", "inline")
-    }
+
+    })
 </script>
 </body>
 </html>

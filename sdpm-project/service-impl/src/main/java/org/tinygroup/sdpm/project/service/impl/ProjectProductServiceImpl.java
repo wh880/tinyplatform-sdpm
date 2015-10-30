@@ -20,8 +20,8 @@ public class ProjectProductServiceImpl implements ProjectProductService {
     @Autowired
     private ProductManager productManager;
 
-    public void addLink(Integer[] productArray, Integer projectId) {
-        projectProductManager.addLink(productArray, projectId);
+    public void addLink(Integer[] productIdArray, Integer projectId) {
+        projectProductManager.addLink(productIdArray, projectId);
     }
 
     public List<Product> findLinkProduct() {

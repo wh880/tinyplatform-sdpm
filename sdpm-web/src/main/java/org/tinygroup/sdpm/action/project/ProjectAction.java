@@ -78,6 +78,7 @@ public class ProjectAction extends BaseController {
         }
         Integer[] integers = new Integer[ids.size()];
         projectService.batchDeleteProject(ids.toArray(integers));
+        ProjectUtils.removeProjectList();
         return resultMap(true, "删除项目成功");
     }
 
@@ -163,12 +164,12 @@ public class ProjectAction extends BaseController {
 
         CookieUtils.setCookie(response, TaskAction.COOKIE_PROJECT_ID, tProject.getProjectId().toString());
         ProjectUtils.removeProjectList();
-        return "project/allProject.page";
+        return "redirect:" + adminPath + "project/allProject";
     }
 
     @RequestMapping("/allProject")
     public String jumpAllProject() {
-        return "project/allProject.page";
+        return "project/list.page";
     }
 
     @RequestMapping("/edit")
@@ -191,8 +192,10 @@ public class ProjectAction extends BaseController {
             Project resProject = projectService.addProject(project);
             projectProductService.addLink(linkProduct, resProject.getProjectId());
         } else {
+
             projectService.updateProject(project);
         }
+        ProjectUtils.removeProjectList();
         model.addAttribute("project", project);
         return "project/survey/index.page";
     }
