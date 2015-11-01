@@ -740,7 +740,7 @@ public class BugAction extends BaseController {
 	    }
 
 	@RequestMapping("toBug")
-	public String toBug(Integer[] ids, Model model){
+	public String toBug(Integer[] ids,Integer caseId, Model model){
 		StringBuffer bugStep = new StringBuffer("");
 		for(Integer id : ids){
 			QualityCaseStep step = caseStepService.findById(id);
@@ -754,6 +754,7 @@ public class BugAction extends BaseController {
 		model.addAttribute("bugStep",bugStep);
 		model.addAttribute("projectList",projects);
 		model.addAttribute("userList",orgUsers);
+		model.addAttribute("fromCase",caseId);
 		return "/testManagement/page/proposeBug.page";
 	}
 
@@ -767,5 +768,27 @@ public class BugAction extends BaseController {
 		model.addAttribute("map", map);
 		model.addAttribute("fields", checkItem);
 		return "/testManagement/page/reportform.page";
+	}
+
+	@RequestMapping("/reactive")
+	public String reactive(Integer bugId){
+		QualityBug bug = bugService.findById(bugId);
+		if(bug.getBugActivatedCount()!=null){
+			bug.setBugActivatedCount(bug.getBugActivatedCount()+1);
+		}else{
+			bug.setBugActivatedCount(1);
+		}
+		bug.setBugStatus("1");
+		bugService.updateBug(bug);
+		LogUtil.logWithComment(LogUtil.LogOperateObject.BUG
+				, LogUtil.LogAction.ACTIVATED
+				,String.valueOf(bug.getBugId())
+				,UserUtils.getUserId()
+				,String.valueOf(bug.getProductId())
+				,String.valueOf(bug.getProjectId())
+				,null
+				,null
+				,null);
+		return "redirect:/a/quality/bug";
 	}
 }

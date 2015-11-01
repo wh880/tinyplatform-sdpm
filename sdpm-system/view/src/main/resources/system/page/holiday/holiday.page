@@ -42,7 +42,7 @@
 						#@tinyTh({"class":"sorting","rel":"holiday_date"})日期#end
 						#@tinyTh({"class":"sorting","rel":"holiday_account"})创建者#end
 						#@tinyTh({"class":"sorting","rel":"holiday_type"})类型#end
-						#@tinyTh({"class":"sorting","rel":"holiday_type"})描述#end
+						#@tinyTh({"class":"sorting","rel":"holiday_detail"})描述#end
 						#@tinyTh({"class":"","rel":""})操作#end
 					#end
 				#end

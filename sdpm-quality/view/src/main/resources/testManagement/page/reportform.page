@@ -4,6 +4,7 @@
 #import("/org/tinygroup/button/components/button.component")
 #import("/common/component/form.component")
 #!set(activeTitle="测试管理",activeMenuId=currentPageId)
+
 <style>
     .togglebox.open .tableBoxessty{margin-left:262px}
     .togglebox.open .togglenavico{left:218px}
@@ -96,7 +97,7 @@
                         #labelCheckbox(ckId="checkbox-5" ckName="checkItem" ckValue="D_bugIncreaseByDay" labelText="每天新增Bug数")
                         #labelCheckbox(ckId="checkbox-6" ckName="checkItem" ckValue="E_bugResolveByDay" labelText="每天解决Bug数")
                         #labelCheckbox(ckId="checkbox-7" ckName="checkItem" ckValue="F_bugCloseByDay" labelText="每天关闭的Bug数")
-                        #labelCheckbox(ckId="checkbox-8" ckName="checkItem" ckValue="G_bugCommitByDay" labelText="每人提交的Bug数")
+                        #labelCheckbox(ckId="checkbox-8" ckName="checkItem" ckValue="G_bugCommitByPerson" labelText="每人提交的Bug数")
                         #labelCheckbox(ckId="checkbox-9" ckName="checkItem" ckValue="H_bugResolveByPerson" labelText="每人解决的Bug数")
                         #labelCheckbox(ckId="checkbox-10" ckName="checkItem" ckValue="I_bugCloseByPerson" labelText="每人关闭的Bug数")
                         #labelCheckbox(ckId="checkbox-11" ckName="checkItem" ckValue="J_bugSeverity" labelText="Bug严重程度统计")
@@ -116,6 +117,30 @@
             #@settoggleLeftTitle()报表#end
                 <table class="table table-border table-bordered" cellspacing="0">
                     #foreach(roadMap:map)
+                        #if(roadMap?.key.contains("Day"))
+##                            #@centerAlignTr()
+##                                #@th("text-r" "vertical-align:middle;width:20%")
+                            <table id="${roadMap?.key}" class="table table-bordered ">
+                                <caption>${roadMap?.key}</caption>
+                                <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>解决BUG数</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                #for(road:roadMap?.value)
+                                <tr>
+                                    <th>${road?.name}</th>
+                                    <td>${road?.number}</td>
+                                </tr>
+                                #end
+                                </tbody>
+                            </table>
+##                            #end
+                            #setColumnHighChart("#"+roadMap?.key {"min-width":"700px","height":"400px"})
+##                            #end
+                        #else
                         #@centerAlignTr()
                             #@th("text-r" "vertical-align:middle;width:20%")
                                 #@pieChart(pieChartStyle="width:600px;margin:0 auto;")
@@ -142,14 +167,14 @@
 
                         #end
                         #pieChartInit("#"+roadMap?.key "PieChart" "No of players" "Month",600,350)
-
+                        #end
                     #end
 
 
                 <td  style="vertical-align:middle;">
                 #*            				产品需求数量分布*#
                 <table class="table table-border table-bordered" cellspacing="0">
-                    #@theadCenterMenu()   #@th() 分类#end        #@th()bug数#end  #@th()百分比#end #end
+                    #@theadCenterMenu()   #@th()${roadMap?.key} 分类#end        #@th()bug数#end  #@th()百分比#end #end
 
                     #for(road:roadMap?.value)
                     #@centerAlignTr()
