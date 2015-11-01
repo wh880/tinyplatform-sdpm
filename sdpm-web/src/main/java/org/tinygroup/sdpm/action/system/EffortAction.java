@@ -127,7 +127,7 @@ public class EffortAction extends BaseController{
 		return resultMap(true, "删除成功");
 	}
 	@RequestMapping("date")
-	public String findByDate(int start,int limit,String order ,String ordertype,@RequestParam(required = false, defaultValue = "0")int date,SystemEffort systemEffort,Model model) throws ParseException{
+	public String findByDate(@RequestParam String effortAccount, int start, int limit, String order, String ordertype, @RequestParam(required = false, defaultValue = "0") int date, SystemEffort systemEffort, Model model) throws ParseException {
 		Date startDate = new Date();
 		Date endDate = new Date();
 		SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
@@ -162,13 +162,14 @@ public class EffortAction extends BaseController{
 			
 		}
 		if(date==4){
-			startDate = DateUtils.getFirstDayOfWeek(DateUtils.getLastDayOfLastWeek(startDate));
-			endDate = DateUtils.getLastDayOfLastWeek(endDate);
+			startDate = DateUtils.addDays(DateUtils.getFirstDayOfWeek(startDate), -7);
+			endDate = DateUtils.addDays(DateUtils.getLastDayOfWeek(endDate), -7);
 			pager = effortService.findByDate(start, limit, systemEffort, startDate, endDate, order, asc);
 			
 		}
 		if(date==5){
 			startDate = DateUtils.getFirstDayOfMonth(startDate);
+			endDate = DateUtils.getLastDayOfMonth(endDate);
 			pager= effortService.findByDate(start, limit, systemEffort, startDate, endDate, order, asc);
 		}
 		if(date==6){

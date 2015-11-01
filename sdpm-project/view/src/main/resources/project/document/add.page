@@ -30,7 +30,7 @@
     #end
 #end
 <div class="infoContent">
-    <p class="titleName">新建版本</p>
+    <p class="titleName">新建文档</p>
     #@div()
         #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/project/doc/save" "" {"class":"test","enctype":
             "multipart/form-data"})
@@ -75,8 +75,6 @@
                     #@Tselect2F()
                         #@Tselect2Body(
                             "docModule" "" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                        ##                        #foreach()
-                        ##                        #end
                         #end
                     #end
                 #end
@@ -91,7 +89,6 @@
                             "setType(this.value);")
                         #labelRadio1(rId="typetext" rName="type" rValue="text" labelText="网页"
                             "setType(this.value);")
-
                     #end
                 #end
             #end

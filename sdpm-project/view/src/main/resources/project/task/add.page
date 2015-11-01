@@ -105,10 +105,6 @@
         #@elementItem()
             #@sdpmItem("任务描述")
                 #@formControlDiv("col-8")
-                ##                    #tinyInput(
-                ##                        "text" "taskDesc" "任务描述"{"placeholder":"任务描述","datatype":"*4-16","id":
-                ##                        "username",
-                ##                        "class":"input-text"})
                     #@Teditor("taskDesc" "taskDesc" {"initialFrameHeight":"150","initialFrameWidth":"702"})${copyTask
                         ?.taskDesc}#end
                 #end
@@ -119,12 +115,31 @@
                 #@Tselect2F()
                     #@Tselect2Body(
                         "taskPri" copyTask?.taskPri {"class":"input-text","minimumResultsForSearch":"Infinity"})
-                        <option value="">/</option>
                         #foreach(item : getDict("taskPri"))
                             <option value="${item?.value}">${item?.text}</option>
                         #end
                     #end
                 ##填写任意内容，侦听需重新填加 A侦听已内置
+                #end
+            #end
+        #end
+        #@elementItem()
+            #@sdpmItem("预计开始")
+                #@formControlDiv()
+                    <div class="input-group">
+                        #@tinyDateInput(
+                    "taskEstStared" formatDate(copyTask?.taskEstStared,"yyyy-MM-dd") "YYYY-MM-DD" )#end
+                    </div>
+                #end
+            #end
+        #end
+        #@elementItem()
+            #@sdpmItem("截止日期")
+                #@formControlDiv()
+                    <div class="input-group">
+                        #@tinyDateInput(
+                            "taskDeadLine" formatDate(copyTask?.taskDeadLine,"yyyy-MM-dd") "YYYY-MM-DD" )#end
+                    </div>
                 #end
             #end
         #end
@@ -163,19 +178,10 @@
                 #fileWithInput("file")
             #end
         #end
-    ##        #@elementItem()
-    ##            #@sdpmItem("添加之后")
-    ##                #@formControlDiv("skin-minimal col-9")
-    ##                    #@tinyRadio("sex" "man" "man" {"nullmsg":"请选择性别！","datatype":"*"})继续为需求添加任务#end
-    ##                    #@tinyRadio("sex" "women" "man")返回任务列表#end
-    ##                    #@tinyRadio("sex" "secret" "man")返回需求列表#end
-    ##                #end
-    ##            #end
-    ##        #end
+
         #@elementItem()
             <div class="col-12">
                 <div class="col-2 text-r"><label>备注：</label></div>
-
                 <div class="col-9">
                     #@Teditor("comment" "comment" {"initialFrameHeight":"150","initialFrameWidth":"702"})#end
                 </div>

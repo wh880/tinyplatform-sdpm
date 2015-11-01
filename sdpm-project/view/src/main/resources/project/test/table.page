@@ -24,7 +24,6 @@
                 #@tinyTh({"width":"6"})<input type="checkbox" name="" value="">#end
                 #@tinyTh({"class":"sorting","rel":"testversion_id"})ID#end
                 #@tinyTh({"class":"sorting","rel":"testtask_title"})任务名称#end
-                #@tinyTh({"class":"sorting","rel":"project_id"})所属项目#end
                 #@tinyTh({"class":"sorting","rel":"build_name"})版本#end
                 #@tinyTh({"class":"sorting","rel":"testtask_owner","style":"color:#333"})负责人#end
                 #@tinyTh({"class":"sorting","rel":"testtask_begin"})开始日期#end

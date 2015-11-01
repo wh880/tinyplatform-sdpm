@@ -29,6 +29,7 @@
     "multipart/form-data"})
     #hiddenInput(hiddenInputName="taskId" hiddenInputValue=task?.taskId)
     #hiddenInput(hiddenInputName="taskProject" hiddenInputValue=task?.taskProject)
+    #hiddenInput(hiddenInputName="taskLastEditedBy" hiddenInputValue=UserUtils.getUserId())
 <div class="infoPage-left">
     <div class="infoContent">
         <p class="titleName">${task?.taskName}>编辑</p>

@@ -87,7 +87,7 @@
             #@tbody()
                 #@tr()
                     #@thW("80")由谁创建#end
-                    #@td()${task?.taskOpenedBy==null?"":UserUtils.getUserById(task?.taskOpenedBy)?.orgUserRealName}在
+                    #@td()${task?.taskOpenBy==null?"":UserUtils.getUserById(task?.taskOpenBy)?.orgUserRealName}在
                         ${formatDate(task?.taskOpenedDate,"yyyy-MM-dd")}
                     #end
                 #end
@@ -107,7 +107,7 @@
                 #end
                 #@tr()
                     #@thW("100")由谁关闭#end
-                    #@td()${task?.taskCloseBy==null?"":UserUtils.getUserById(task?.taskCloseBy)?.orgUserRealName} 在
+                    #@td()${task?.taskCloseBy==null?"":UserUtils.getUserById(task?.taskClosedBy)?.orgUserRealName} 在
                         ${formatDate(task?.taskCloseDate,"yyyy-MM-dd")}
                     #end
                 #end

@@ -164,7 +164,7 @@ public class ProjectAction extends BaseController {
 
         CookieUtils.setCookie(response, TaskAction.COOKIE_PROJECT_ID, tProject.getProjectId().toString());
         ProjectUtils.removeProjectList();
-        return "redirect:" + adminPath + "project/allProject";
+        return "redirect:" + adminPath + "/project/allProject";
     }
 
     @RequestMapping("/allProject")

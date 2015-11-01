@@ -20,12 +20,6 @@
             #@aExtendButton("btn radius btn-primary btn-sm" TINY_CONTEXT_PATH+adminPath+
                 "/org/user/form")#buttonIcon(iconClass=m2.icon)添加#end
         #end
-    ##        #@aModal(editpageModal "添加" "865" "420" "btn radius btn-primary btn-sm" editpagePath)
-    ##            #@simpleI("icon-plus")添加#end
-    ##        #end
-    ##        #@aModal(userBatchAddpageModal "批量添加" "1200" "800" "btn radius btn-primary btn-sm" userBatchAddpagePath)
-    ##            #@simpleI("icon-plus")批量添加#end
-    ##        #end
     #end
     #@tinyTableContent(TINY_CONTEXT_PATH+adminPath+"/org/user/list/data?orgDeptId="+orgDeptId) ##取数据地址 总数据
         #@thead()

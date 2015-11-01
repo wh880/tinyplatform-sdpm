@@ -90,8 +90,9 @@
             #set(a = a + 1)
         #end
     #end
-    #@div(divClass="col-10 col-offset-2 form-inline")
+    #@div(divClass="col-7 col-offset-5 form-inline")
         #tinyInput("submit" "submitbtn" " 保存 " {"class":"btn btn-primary"})
+    <a href="javascript:history.go(-1)" class="btn radius btn-default">返回</a>
     #end
 
 #end
