@@ -382,7 +382,7 @@ public class TaskAction extends BaseController {
     @RequestMapping("/basicInfoEdit")
     public String basicInfoEdit(Integer taskId, Model model) {
         ProjectTask task = taskService.findTask(taskId);
-        String projectName = projectService.findById(task.getTaskProject()).getProjectName();
+        String projectName = projectService.findProjectById(task.getTaskProject()).getProjectName();
         List<ProjectTeam> teamList = teamService.findTeamByProjectId(task.getTaskProject());
         SystemModule module = new SystemModule();
         module.setModuleType("task");
@@ -414,7 +414,7 @@ public class TaskAction extends BaseController {
     @RequestMapping("/basicInformation")
     public String basicInformation(Integer taskId, Model model) {
         ProjectTask task = taskService.findTask(taskId);
-        Project project = projectService.findById(task.getTaskProject());
+        Project project = projectService.findProjectById(task.getTaskProject());
         model.addAttribute("task", task);
         model.addAttribute("project", project);
 

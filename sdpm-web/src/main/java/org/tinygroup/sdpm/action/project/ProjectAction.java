@@ -8,30 +8,26 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.commons.tools.StringUtil;
-import org.tinygroup.sdpm.common.util.DateUtils;
+import org.tinygroup.sdpm.common.util.Collections3;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
-import org.tinygroup.sdpm.project.dao.pojo.ProjectBurn;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTeam;
+import org.tinygroup.sdpm.project.service.dto.BurnDTO;
 import org.tinygroup.sdpm.project.service.inter.BurnService;
 import org.tinygroup.sdpm.project.service.inter.ProjectProductService;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.sdpm.project.service.inter.TeamService;
-import org.tinygroup.sdpm.util.CookieUtils;
-import org.tinygroup.sdpm.util.LogUtil;
-import org.tinygroup.sdpm.util.ProjectUtils;
-import org.tinygroup.sdpm.util.UserUtils;
+import org.tinygroup.sdpm.util.*;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -53,14 +49,6 @@ public class ProjectAction extends BaseController {
     private BurnService burnService;
     @Autowired
     private UserService userService;
-
-    @RequestMapping("/find")
-    public String find(Integer projectId) {
-        if (projectId == null) {
-            projectService.findById(projectId);
-        }
-        return "project/addProject.page";
-    }
 
     @ResponseBody
     @RequestMapping("/batchDelete")
@@ -93,47 +81,21 @@ public class ProjectAction extends BaseController {
      * @return
      */
     @RequestMapping("/list/data")
-    public String findProjects(Integer start, Integer limit, String order, String ordertype, Model model) {
-        Pager<Project> projectPager = projectService.findProjects(start, limit, order, ordertype);
+    public String listData(Integer start, Integer limit, String order, String ordertype, Model model) {
+        Integer[] userProjectIds = ProjectUtils.getUserProjectIdList();
+        Pager<Project> projectPager = projectService.findProjects(start, limit, order, ordertype, userProjectIds);
         Integer interval = 2;
-        if (projectPager != null) {
-            for (Project project : projectPager.getRecords()) {
-                List<ProjectBurn> burn = burnService.findBurnByProjectId(project.getProjectId());
-                String burnValue = "";
-                int i = 0;
-                Date startDate = project.getProjectBegin();
-                Date endDate = project.getProjectEnd();
-                Date nextDate = startDate;
-                float tLeft = 0f;
-                for (ProjectBurn projectBurn : burn) {
-                    if (projectBurn.getBurnDate().getTime() == startDate.getTime()) {
-                        tLeft = projectBurn.getBurnLeft();
-                    }
-                }
-                burnValue = tLeft + "";
-                while (nextDate.before(endDate)) {
-                    nextDate = DateUtils.addDays(nextDate, 1);
-                    for (ProjectBurn projectBurn : burn) {
-                        if (projectBurn.getBurnDate().getTime() == nextDate.getTime()) {
-                            tLeft = projectBurn.getBurnLeft();
-                        }
-                    }
-                    if (i % interval == 0) {
-                        burnValue = burnValue + "," + tLeft;
-                    }
-                    i++;
-                }
-                project.setBurnValue(burnValue);
-            }
+        if (projectPager != null) for (Project project : projectPager.getRecords()) {
+            BurnDTO burnDTO = burnService.initBurn(project.getProjectId(), interval);
+            project.setBurnValue(burnDTO.getLeftValues());
         }
         model.addAttribute("projectPager", projectPager);
         return "project/allProjectData.pagelet";
     }
 
     @RequestMapping("/preadd")
-    public String preadd(Model model) {
-        List<Product> list = productService.findProductList(new Product(), "productId", "desc");
-        model.addAttribute("prodcutList", list);
+    public String form(Model model) {
+        model.addAttribute("productList", ProductUtils.getAllProductListByUser());
         return "project/addProject.page";
     }
 
@@ -143,22 +105,9 @@ public class ProjectAction extends BaseController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String addForm(Model model, HttpServletResponse response,
-                          HttpServletRequest request, Project project,
-                          Integer[] linkProduct, Integer[] whiteList) {
-        String whiteListStr = "";
-        if (whiteList != null) {
-            if (whiteList.length > 0) {
-                for (Integer i : whiteList) {
-                    if (StringUtil.isBlank(whiteListStr)) {
-                        whiteListStr = whiteListStr + i;
-                    } else {
-                        whiteListStr = whiteListStr + "," + i;
-                    }
-                }
-            }
-        }
-        project.setProjectWhiteList(whiteListStr);
+    public String save(Model model, HttpServletResponse response, HttpServletRequest request, Project project,
+                       Integer[] linkProduct, Integer[] whiteList) {
+        project.setProjectWhiteList(StringUtil.join(whiteList, ","));
         Project tProject = projectService.addProject(project);
         projectProductService.addLink(linkProduct, tProject.getProjectId());
 
@@ -175,7 +124,7 @@ public class ProjectAction extends BaseController {
     @RequestMapping("/edit")
     public String form(Integer projectId, Model model) {
         if (projectId != null) {
-            Project project = projectService.findById(projectId);
+            Project project = projectService.findProjectById(projectId);
             List<ProjectTeam> teamList = teamService.findTeamByProjectId(project.getProjectId());
             model.addAttribute("teamList", teamList);
             model.addAttribute("project", project);
@@ -203,7 +152,7 @@ public class ProjectAction extends BaseController {
 
     @RequestMapping("/delay")
     public String delay(Integer projectId, Model model) {
-        Project project = projectService.findById(projectId);
+        Project project = projectService.findProjectById(projectId);
         model.addAttribute("project", project);
         return "/project/survey/delay.pagelet";
     }
@@ -211,16 +160,16 @@ public class ProjectAction extends BaseController {
     @ResponseBody
     @RequestMapping(value = "/delaysave", method = RequestMethod.POST)
     public Map<String, String> delaySave(Project project, String content) {
-        Project oldProject = projectService.findById(project.getProjectId());
+        Project oldProject = projectService.findProjectById(project.getProjectId());
         Integer res = projectService.updateProject(project);
         LogUtil.logWithComment(LogUtil.LogOperateObject.PROJECT, LogUtil.LogAction.DELAYED, oldProject.getProjectId().toString(),
                 UserUtils.getUserId(), null, oldProject.getProjectId().toString(), oldProject, project, content);
         return resultMap(res > 0 ? true : false, res > 0 ? "延期成功" : "延期失败");
     }
 
-    @RequestMapping("/hangUp")
+    @RequestMapping(value = "/hangUp", method = RequestMethod.GET)
     public String hangUp(Integer projectId, Model model) {
-        Project project = projectService.findById(projectId);
+        Project project = projectService.findProjectById(projectId);
         model.addAttribute("project", project);
         return "/project/survey/hangUp.pagelet";
     }
@@ -228,7 +177,7 @@ public class ProjectAction extends BaseController {
     @ResponseBody
     @RequestMapping(value = "hangUp", method = RequestMethod.POST)
     public Map<String, String> hangUpSave(Project project, String content) {
-        Project oldProject = projectService.findById(project.getProjectId());
+        Project oldProject = projectService.findProjectById(project.getProjectId());
         project.setProjectStatus(project.HANGUP);
         Integer res = projectService.updateProject(project);
         LogUtil.logWithComment(LogUtil.LogOperateObject.PROJECT, LogUtil.LogAction.SUSPENDED, oldProject.getProjectId().toString(),
@@ -236,9 +185,9 @@ public class ProjectAction extends BaseController {
         return resultMap(res > 0 ? true : false, res > 0 ? "挂起成功" : "挂起失败");
     }
 
-    @RequestMapping("/start")
+    @RequestMapping(value = "/start", method = RequestMethod.GET)
     public String start(Integer projectId, Model model) {
-        Project project = projectService.findById(projectId);
+        Project project = projectService.findProjectById(projectId);
         model.addAttribute("project", project);
         return "/project/survey/start.pagelet";
     }
@@ -246,7 +195,7 @@ public class ProjectAction extends BaseController {
     @ResponseBody
     @RequestMapping(value = "start", method = RequestMethod.POST)
     public Map<String, String> startSave(Project project, String content) {
-        Project oldProject = projectService.findById(project.getProjectId());
+        Project oldProject = projectService.findProjectById(project.getProjectId());
         project.setProjectStatus(project.DOING);
         Integer res = projectService.updateProject(project);
         LogUtil.logWithComment(LogUtil.LogOperateObject.PROJECT, LogUtil.LogAction.STARTED, oldProject.getProjectId().toString(),
@@ -254,9 +203,9 @@ public class ProjectAction extends BaseController {
         return resultMap(res > 0 ? true : false, res > 0 ? "开始成功" : "开始失败");
     }
 
-    @RequestMapping("/doing")
+    @RequestMapping(value = "/doing", method = RequestMethod.GET)
     public String doing(Integer projectId, Model model) {
-        Project project = projectService.findById(projectId);
+        Project project = projectService.findProjectById(projectId);
         model.addAttribute("project", project);
         return "/project/survey/doing.pagelet";
     }
@@ -264,7 +213,7 @@ public class ProjectAction extends BaseController {
     @ResponseBody
     @RequestMapping(value = "doing", method = RequestMethod.POST)
     public Map<String, String> doingSave(Project project, String content) {
-        Project oldProject = projectService.findById(project.getProjectId());
+        Project oldProject = projectService.findProjectById(project.getProjectId());
         project.setProjectStatus(project.DOING);
         Integer res = projectService.updateProject(project);
         LogUtil.logWithComment(LogUtil.LogOperateObject.PROJECT, LogUtil.LogAction.ACTIVATED, oldProject.getProjectId().toString(),
@@ -274,7 +223,7 @@ public class ProjectAction extends BaseController {
 
     @RequestMapping("/finish")
     public String finish(Integer projectId, Model model) {
-        Project project = projectService.findById(projectId);
+        Project project = projectService.findProjectById(projectId);
         model.addAttribute("project", project);
         return "/project/survey/doing.pagelet";
     }
@@ -282,7 +231,7 @@ public class ProjectAction extends BaseController {
     @ResponseBody
     @RequestMapping(value = "finish", method = RequestMethod.POST)
     public Map<String, String> finishSave(Project project, String content) {
-        Project oldProject = projectService.findById(project.getProjectId());
+        Project oldProject = projectService.findProjectById(project.getProjectId());
         project.setProjectStatus(project.FINISH);
         Integer res = projectService.updateProject(project);
         LogUtil.logWithComment(LogUtil.LogOperateObject.PROJECT, LogUtil.LogAction.FINISHED, oldProject.getProjectId().toString(),
@@ -291,24 +240,27 @@ public class ProjectAction extends BaseController {
     }
 
 
+    /**
+     * 项目基本信息
+     *
+     * @param projectID
+     * @param model
+     * @return
+     */
     @RequestMapping("/basicInformation")
     public String basicInformation(Integer projectID, Model model) {
-        Project project = projectService.findById(projectID);
-        List<ProjectProduct> list = projectProductService.findProducts(projectID);
-        Integer[] ids = new Integer[list.size()];
-        List<Integer> productIdList = new ArrayList<Integer>();
-        for (ProjectProduct t : list) {
-            productIdList.add(t.getProductId());
-        }
-        List<Product> productlist = productService.findProductListByIds(productIdList.toArray(ids));
+        Project project = projectService.findProjectById(projectID);
+        List<ProjectProduct> projectProduct = projectProductService.findProducts(projectID);
+        List productIds = Collections3.extractToList(projectProduct, "productId");
+        List<Product> productList = productService.findProductListByIds((Integer[]) productIds.toArray());
         model.addAttribute("project", project);
-        model.addAttribute("productlist", productlist);
+        model.addAttribute("productList", productList);
         return "project/survey/basicInformation.pagelet";
     }
 
     @RequestMapping("/findManager")
     public String findManager(String projectId, Model model) {
-        Project project = projectService.findById(Integer.parseInt(projectId));
+        Project project = projectService.findProjectById(Integer.parseInt(projectId));
         //项目负责人
         OrgUser projectPm = userService.findUser(project.getProjectPm());
         //测试负责人

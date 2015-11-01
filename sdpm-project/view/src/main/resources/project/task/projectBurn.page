@@ -99,19 +99,26 @@
     function initBurnChar() {
         var data =
         {
-            labels: ${days},
+            labels: [${burn?.dayValues
+        }
+    ],
             datasets: [
                 {
                     label: "基准线",
                     color: "#CCC",
                     fillColor: "rgba(0,0,0,0)",
                     showTooltips: false,
-                    data: ${average}
+                    data: [${burn?.averageValues
+                }]
                 },
                 {
                     label: "剩余",
                     color: "#0033CC",
-                    data: ${left}
+                        data
+                :
+                    [${burn?.leftValues
+                }
+    ]
                 }]
         };
         var burnChart = $("#burnChart").lineChart(data, {animation: !($.zui.browser && $.zui.browser.ie === 8)});
@@ -123,15 +130,13 @@
         initBurnChar();
         $('#burnTab').addClass('active');
         $('#interval').change(function () {
-            var projectID =${projectId};
-            var choose =${choose};
-            $("#tinypagecontent").load('${TINY_CONTEXT_PATH+adminPath}/project/burn/init', {
+            var projectID = ${projectId};
+            var choose = ${choose};
+            $("#tinypagecontent").load('${TINY_CONTEXT_PATH+adminPath}/project/burn/init.pagelet', {
                 projectID: projectID,
                 choose: choose,
                 interval: $(this).val(),
-                ajax: 1
             })
-
         });
     })
 

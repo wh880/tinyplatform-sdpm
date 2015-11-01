@@ -148,7 +148,7 @@ public class ProjectStoryAction extends BaseController {
             Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
             condition = condition + " and ";
             condition = condition + "project_id=" + projectId;
-            Integer res = projectStoryService.batchtDel(condition);
+            Integer res = projectStoryService.batchDel(condition);
             if (res > 0) {
                 map.put("status", "y");
                 map.put("info", "删除成功");

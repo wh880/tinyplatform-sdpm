@@ -1,8 +1,5 @@
 package org.tinygroup.sdpm.product.biz.impl;
 
-import java.util.Date;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,9 +10,9 @@ import org.tinygroup.sdpm.product.dao.ProductDao;
 import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
-import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
-import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.tinysqldsl.Pager;
+
+import java.util.List;
 
 @Service
 @Transactional
@@ -63,8 +60,7 @@ public class ProductManagerImpl implements ProductManager{
 	}
 	
 	public List<Product> findList(Product product, String order,String ordertype) {
-		
-		
+
 		return productDao.query(product,  (order==null||"".equals(order))?null:new OrderBy(NameUtil.resolveNameDesc("product."+order), !("desc".equals(ordertype))?true:false));
 	}
 

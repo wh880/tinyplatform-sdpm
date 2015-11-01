@@ -22,7 +22,6 @@ import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.jdbctemplatedslsession.callback.*;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
-import org.tinygroup.sdpm.common.log.annotation.LogClass;
 import org.tinygroup.sdpm.common.log.annotation.LogMethod;
 import org.tinygroup.sdpm.common.util.update.UpdateUtil;
 import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
@@ -55,10 +54,8 @@ import static org.tinygroup.tinysqldsl.Update.update;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 import static org.tinygroup.tinysqldsl.select.Join.leftJoin;
 
-@LogClass("build")
 @Repository
 public class ProjectBuildDaoImpl extends TinyDslDaoSupport implements ProjectBuildDao {
-
 
     @LogMethod("add")
     public ProjectBuild add(ProjectBuild projectBuild) {
@@ -83,18 +80,11 @@ public class ProjectBuildDaoImpl extends TinyDslDaoSupport implements ProjectBui
     }
 
     public int edit(ProjectBuild projectBuild) {
-        return 0;
-    }
-
-    @LogMethod("edits")
-    public Integer edits(ProjectBuild projectBuild) {
         if (projectBuild == null || projectBuild.getBuildId() == null) {
             return 0;
         }
         Update update = UpdateUtil.getUpdate(PROJECT_BUILDTABLE, projectBuild);
-        getDslSession().execute(update);
-
-        return 0;
+        return getDslSession().execute(update);
     }
 
     public Integer softDelete(ProjectBuild build) {
@@ -384,7 +374,7 @@ public class ProjectBuildDaoImpl extends TinyDslDaoSupport implements ProjectBui
     }
 
 
-    public Pager<ProductStory> findnoBuildStorys(int start, int limit, final String condition, Integer buildId, final OrderBy... orderBies) {
+    public Pager<ProductStory> findNoBuildStorys(int start, int limit, final String condition, Integer buildId, final OrderBy... orderBies) {
         Select select = select(PROJECT_BUILDTABLE.BUILD_STORIES).from(PROJECT_BUILDTABLE)
                 .where(PROJECT_BUILDTABLE.BUILD_ID.eq(buildId));
         ProjectBuild test = getDslSession().fetchOneResult(select, ProjectBuild.class);
