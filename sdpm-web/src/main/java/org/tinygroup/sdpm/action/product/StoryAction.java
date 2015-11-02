@@ -430,7 +430,12 @@ public class StoryAction extends BaseController {
             @RequestParam(value = "file", required = false) MultipartFile[] file,
             String[] title) throws IOException {
         ProductStory story = storyService.findStory(productStory.getStoryId());
-        productStory.setStoryStatus("3");
+        if(productStory.getStoryReviewedBy().equals("0")){
+            productStory.setStoryStatus("1");
+            productStory.setStoryReviewedBy(null);
+        }else {
+            productStory.setStoryStatus("3");
+        }
         productStory.setStoryVersion(story.getStoryVersion()+1);
         storyService.updateStory(productStory);
         storySpec.setStoryVersion(story.getStoryVersion() + 1);

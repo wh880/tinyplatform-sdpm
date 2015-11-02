@@ -61,7 +61,7 @@
             #@checkboxBox()
 
                 #@label(labelFor="checkbox-6")
-                    #input(inputId="story_reviewed" inputName="story_reviewed" inputType="checkbox")
+                    #input(inputId="story_reviewed" inputName="storyReviewedBy" inputType="checkbox" inputValue="0")
                     不需要评审
                 #end
             #end

@@ -16,7 +16,7 @@
 			<tr>
 					<td  width="100%">
 						${formatDate(a?.actionDate,"yyyy-MM-dd hh:mm:ss")},  ${UserUtils.getUserById(a?.actionActor).orgUserRealName}
-                        <em> ${getDict("actionOperate",a?.actionAction)} </em>       假期       ${a?.holidayName}
+                        <em> ${getDict("actionOperate",a?.actionAction)} </em>       ${a?.holidayType}       ${a?.holidayName}
 
 					</td> 
 					

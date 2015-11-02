@@ -81,4 +81,9 @@
         <!--<dictItem key="14" value="Bug类型统计" sort="14"/>-->
         <dictItem key="15" value="指派给统计" sort="15"/>
     </dictNodeEntry>
+    <dictNodeEntry name="documentType" title="文档类型">
+        <dictItem key="1" value="文件" sort="1"/>
+        <dictItem key="2" value="链接" sort="2"/>
+        <dictItem key="3" value="网页" sort="3"/>
+    </dictNodeEntry>
 </dictNodeEntries>

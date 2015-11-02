@@ -34,6 +34,7 @@
     #@div()
         #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/project/doc/save" "" {"class":"test","enctype":
             "multipart/form-data"})
+            <input type="hidden" name="docAddedBy" value="${UserUtils.getUserId()}"/>
             #@elementItem()
                 #@sdpmItem("所属项目")
                     #@Tselect2F()
@@ -73,8 +74,9 @@
             #@elementItem()
                 #@sdpmItem("所属分类")
                     #@Tselect2F()
-                        #@Tselect2Body(
-                            "docModule" "" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                    ##                        #@Tselect2Body(
+                    ##                            "docModule" "" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        #@Tselect2Body("docModule" doc?.docModule?:0 {"class":"input-text select2"})
                         #end
                     #end
                 #end
@@ -82,6 +84,12 @@
 
             #@elementItem()
                 #@sdpmItem("文档类型")
+                ##                    #@skinMinimal("mt-20")
+                ##                        #foreach(item : getDict("documentType"))
+                ##                            #labelRadio1(rId="typefile" rName="type" rValue=item.value labelText=item.text
+                ##                                "setType(this.value);")
+                ##                        #end
+                ##                    #end
                     #@skinMinimal("mt-20")
                         #labelRadio1(rId="typefile" rName="type" rValue="file" labelText="文件"
                             "setType(this.value);")
@@ -142,8 +150,8 @@
             #end
             #@elementItem(elementId="contentBox" eleItemClass="hidden")
                 #@sdpmItem("文档正文")
-                    #@formControlDiv("col-6")
-                        #@tinyueditor("content" "docContent")#end
+                    #@formControlDiv("col-8")
+                        #@Teditor("content" "docContent" {"initialFrameHeight":"200","initialFrameWidth":"800"})#end
                     #end
                 #end
             #end

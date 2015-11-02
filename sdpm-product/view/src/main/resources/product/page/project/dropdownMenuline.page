@@ -45,7 +45,7 @@
     #@navSelect2Data()
     <option value=""></option>
     <optgroup label="产品线">
-        #for(productLine : ProductUtils.getProductLineList())
+        #for(productLine : ProductUtils.getProductLineListByUser())
         <option value="${productLine?.productLineId}">${productLine?.productLineName}</option>
     #end
 </optgroup>
