@@ -69,7 +69,7 @@
                 <div class="col-2">
                     #@tinyDateInput(
                     "projectEnd" "" "YYYY-MM-DD" {"class":"input-text","datatype":"*","nullmsg":"结束日期不能为空",
-                        "placeholder":"请选择结束日期"})#end
+                        "placeholder":"请选择结束日期","id":"projectEnd"})#end
                 </div>
                 <label class='radio-inline'><input type='radio' name='delta' value='7'
                                                    onclick='computeEndDate(this.value)' id='delta7'/> 一星期</label>
@@ -95,7 +95,7 @@
                 <div class="input-group">
                     <input name="projectDays" type="text" class="form-control" placeholder=""
                            aria-describedby="basic-addon2" datatype="n">
-                    <span class="input-group-addon" id="basic-addon2">小时</span>
+                    <span class="input-group-addon" id="basic-addon2">天</span>
                 </div>
             #end
         #end
@@ -196,6 +196,19 @@
         $("input[name='projectAcl']").click(function (e) {
             $(this).attr("value") == "3" ? $("#whitelistBox").removeClass("hidden") : $("#whitelistBox").addClass("hidden");
         })
+        $("[name=projectEnd]").on("change",function(){
+            console.log("sfsdf");
+            var edate=$(this).val();
+            var bdate=$("[name=projectBegin]").val();
+           $("[name=projectDays]").val(getDateDiff(bdate,edate))
+        });
+        function getDateDiff(date1,date2){
+            var arr1=date1.split('-');
+            var arr2=date2.split('-');
+            var d1=new Date(arr1[0],arr1[1],arr1[2]);
+            var d2=new Date(arr2[0],arr2[1],arr2[2]);
+            return (d2.getTime()-d1.getTime())/(1000*3600);
+        }
     });
     function convertStringToDate(dateString) {
         dateString = dateString.split('-');

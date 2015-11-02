@@ -18,8 +18,7 @@
     #end
 #end
 #@tinyForm(
-    "addTaskForm" TINY_CONTEXT_PATH+adminPath+"/project/task/save" "post" {"class":"test","enctype":
-    "multipart/form-data"})
+    "addTaskForm" TINY_CONTEXT_PATH+adminPath+"/project/task/save" "post" {"class":"test","enctype":"multipart/form-data"})
 <div class="pageleftpart">
     <div class="infoContent">
         <input type="hidden" name="taskOpenBy" value="${UserUtils.getUserId()}"/>
@@ -46,11 +45,9 @@
         #@elementItem()
             #@sdpmItem("任务类型" "*")
                 #@Tselect2F()
-                    #@Tselect2Body(
-                        "taskType" copyTask?.taskType {"class":"input-text select2","placeholder":"任务类型","datatype":"*",
-                        "nullmsg":
-                        "任务类型不能为空！"})
-                        <option value="">/</option>
+                    #@Tselect2Body("taskType" copyTask?.taskType {"class":"input-text select2","placeholder":"任务类型","datatype":"*",
+                        "nullmsg":"任务类型不能为空！"})
+                        <option value=""></option>
                         #foreach(item : getDict("taskType"))
                             <option value="${item?.value}">${item?.text}</option>
                         #end
@@ -62,7 +59,6 @@
             #@sdpmItem("指派给")
                 #@Tselect2F()
                     #@Tselect2Body("taskAssignedTo" copyTask?.taskAssignedTo {"class":"input-text select2"})
-                        <option value="">/</option>
                         #foreach(t : team)
                             <option value="${t?.teamUserId}">
                                 ${t?.teamUserId==null?"":UserUtils.getUserById(t?.teamUserId)?.orgUserRealName}
@@ -78,17 +74,18 @@
         #end
         #@elementItem()
             #@sdpmItem("相关需求")
-                #@Tselect2F()
-                    #@Tselect2Body("taskStory" story?.storyId==null?"":story.storyId {"class":
-                        "input-text select2"})
-                        <option value="">/</option>
-                        #foreach(s : storyList)
-                            <option value=${s?.storyId}>${s?.storyTitle}</option>
+                #if(!storyList)
+                    #@Tselect2F()
+                        #@Tselect2Body("taskStory" story?.storyId==null?"":story.storyId {"class":
+                            "input-text select2"})
+                            #foreach(s:storyList)
+                                <option value="${s.storyId}">${s.storyTitle}</option>
+                            #end
                         #end
-                    #end
-                    #@Tselect2Fix()
-                        <a href="${TINY_CONTEXT_PATH+adminPath}/product/story/addstory">新增</a>
-                        <a href="${TINY_CONTEXT_PATH+adminPath}/product/story/search" class="r">全部</a>
+                        #@Tselect2Fix()
+                            <a href="${TINY_CONTEXT_PATH+adminPath}/product/story/addstory">新增</a>
+                            <a href="${TINY_CONTEXT_PATH+adminPath}/product/story/search" class="r">全部</a>
+                        #end
                     #end
                 #end
             #end
@@ -144,7 +141,7 @@
             #end
         #end
         #@elementItem()
-            #@sdpmItem("最初预计")
+            #@sdpmItem("最初预计" "*")
                 #@formControlDiv()
                     <div class="input-group">
                         #tinyInput("text" "taskEstimate" copyTask?.taskEstimate {"placeholder":"最初预计","datatype":

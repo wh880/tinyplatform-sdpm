@@ -143,14 +143,4 @@ public class UserServiceImpl implements UserService {
     public List<OrgUser> findUserListByIds(String... userId) {
         return userManager.findUserListByIds(userId);
     }
-
-    /**
-     * 根据id查找用户名
-     * @param id
-     * @return
-     */
-    public String getNameById(String id) {
-
-		return userManager.getNameById(id);
-	}
 }

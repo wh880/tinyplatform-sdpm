@@ -107,6 +107,7 @@ public class ProjectUtils {
      */
     public static void removeProjectList() {
         CacheUtils.remove(CMS_CACHE, CMS_CACHE_PROJECT_LIST);
+        UserUtils.removeCache(USER_CACHE_PROJECT_LIST);
     }
 
     /**
