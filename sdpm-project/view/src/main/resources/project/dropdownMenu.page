@@ -25,10 +25,17 @@
 <script type="text/javascript">
     $(function () {
         $("#sleProject-select").on("change", function (e) {
-            //$.cookie();
-            window.location.href = "${TINY_CONTEXT_PATH+adminPath}/project/manage/select?projectId="
-                    + $(this).val()
-                    + "&oldUrl=${tinyRequestRequestURI.substring(9)}";
+            var projectId = $.trim($(this).val());
+            console.log("test");
+            if (!projectId){
+                layer.msg("请选择项目");
+                return false;
+            }
+            $.cookie("projectId",projectId,{path:"/"});
+            window.location.reload();
+##            window.location.href = "${TINY_CONTEXT_PATH+adminPath}/project/manage/select?projectId="
+##                    + $(this).val()
+##                    + "&oldUrl=${tinyRequestRequestURI.substring(9)}";
         });
     });
 </script>
