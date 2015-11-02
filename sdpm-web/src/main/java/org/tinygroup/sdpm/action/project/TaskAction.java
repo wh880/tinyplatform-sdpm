@@ -670,7 +670,6 @@ public class TaskAction extends BaseController {
         return "project/task/reportFormDate.pagelet";
     }
 
-
     private Map<String, String> getMap(Integer res, String successMsg, String falseMsg) {
         Map<String, String> map = new HashMap<String, String>();
         if (res > 0) {

@@ -8,7 +8,7 @@
     #@td()<input type="checkbox" value="${bug?.bugId}" name="idCheck">#end
     #@td()${bug?.bugId}#end
     #@td()
-    <a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/bugInfo.page"> ${bug?.bugTitle}
+    <a href="${TINY_CONTEXT_PATH+adminPath}/quality/bug/bugInfo?bugId=${bug?bugId}"> ${bug?.bugTitle}
     #end
 
     #@td() ${getDict("bugStatus",bug?.bugStatus)}#end
