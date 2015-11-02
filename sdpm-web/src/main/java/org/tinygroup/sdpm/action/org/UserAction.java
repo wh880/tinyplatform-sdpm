@@ -524,7 +524,7 @@ public class UserAction extends BaseController {
         List<ProjectTeam> teamList = teamService.findTeamList(team);
         List<Project> projectList = new ArrayList<Project>();
         for (ProjectTeam team1 : teamList) {
-            projectList.add(projectService.findById(team1.getProjectId()));
+            projectList.add(projectService.findProjectById(team1.getProjectId()));
         }
         model.addAttribute("projectList", projectList);
         Integer size = projectList.size();

@@ -23,14 +23,15 @@ public interface ProjectManager {
      * @param project
      * @return
      */
-    public List<Project> findListProjects(Project project);
+    List<Project> findListProjects(Project project);
+
     /**
      * 根据ids查询项目
      *
      * @param ids
      * @return
      */
-    public List<Project> findList(List<Integer> ids);
+    List<Project> findListByIds(List<Integer> ids);
 
     /**
      * 根据主键id查找
@@ -49,13 +50,14 @@ public interface ProjectManager {
 
     /**
      * 查询所有的project
+     *
      * @param start
      * @param limit
      * @param sortName
      * @param asc
      * @return
      */
-    Pager<Project> findPagerProjects(Integer start, Integer limit, String sortName, boolean asc);
+    Pager<Project> findPagerProjects(Integer start, Integer limit, String sortName, boolean asc, Integer... ids);
 
     /**
      * 新增项目
@@ -75,6 +77,7 @@ public interface ProjectManager {
 
     /**
      * 删除
+     *
      * @param projectId
      * @return
      */
@@ -90,15 +93,17 @@ public interface ProjectManager {
 
     /**
      * 根据对象查找(排序)
+     *
      * @param project
      * @param order
      * @param ordertype
      * @return
      */
-    List<Project> findList(Project project,String order,String ordertype);
-    
+    List<Project> findList(Project project, String order, String ordertype);
+
     /**
      * 根据对象查找(分页、排序)
+     *
      * @param start
      * @param limit
      * @param project
@@ -106,7 +111,7 @@ public interface ProjectManager {
      * @param ordertype
      * @return
      */
-    Pager<Project> findPager(int start,int limit,Project project,String order,String ordertype);
-    
+    Pager<Project> findPager(int start, int limit, Project project, String order, String ordertype);
+
     List<Project> getProjectByStoryId(Integer storyId);
 }

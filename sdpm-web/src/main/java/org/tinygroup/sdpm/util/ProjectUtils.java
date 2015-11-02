@@ -1,5 +1,8 @@
 package org.tinygroup.sdpm.util;
 
+import org.tinygroup.commons.tools.ArrayUtil;
+import org.tinygroup.commons.tools.CollectionUtil;
+import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.util.Collections3;
 import org.tinygroup.sdpm.org.dao.pojo.OrgRole;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
@@ -16,6 +19,7 @@ import java.util.List;
 public class ProjectUtils {
     private static final String CMS_CACHE = "cmsCache";
     private static final String CMS_CACHE_PROJECT_LIST = "projectList";
+    private static final String CMS_CACHE_PROJECT_ID_ = "project_id_";
     private static final String USER_CACHE_PROJECT_LIST = "userProjectList";
     private static ProjectService projectService = SpringContextHolder.getBean(ProjectServiceImpl.class);
 
@@ -49,6 +53,21 @@ public class ProjectUtils {
     }
 
     /**
+     * 获得当前用户项目id列表
+     */
+    public static Integer[] getUserProjectIdList() {
+        List<Project> userProjectList = getUserProjectList();
+        if (CollectionUtil.isEmpty(userProjectList)) {
+            return null;
+        }
+        ArrayList<Integer> ids = new ArrayList<Integer>();
+        for (Project project : userProjectList) {
+            ids.add(project.getProjectId());
+        }
+        return ids.toArray(new Integer[0]);
+    }
+
+    /**
      * 判断当前用户是否属于项目白名单成员
      *
      * @param whiteList
@@ -56,11 +75,12 @@ public class ProjectUtils {
      */
     protected static Boolean hasProjectByRole(String whiteList) {
         String[] split = whiteList.split(",");
-        if (split == null || split.length == 0) {
+        if (ArrayUtil.isEmptyArray(split)) {
             return false;
         }
         List<OrgRole> userRoleList = UserUtils.getUserRoleList();
-        if (userRoleList == null || userRoleList.isEmpty()) {
+
+        if (CollectionUtil.isEmpty(userRoleList)) {
             return false;
         }
         List<String> orgRoleId = Collections3.extractToList(userRoleList, "orgRoleId");
@@ -93,16 +113,14 @@ public class ProjectUtils {
      * 获得项目列表
      */
     public static Project getProject(String projectId) {
-        List<Project> projectList = getProjectList();
-        if (projectId == null && projectList != null && !projectList.isEmpty()) {
-            return projectList.get(0);
+        if (StringUtil.isBlank(projectId)) {
+            return new Project();
         }
-        for (Project project : projectList) {
-            if (project.getProjectId().toString().equals(projectId)) {
-                return project;
-            }
+        Project project = (Project) CacheUtils.get(CMS_CACHE, CMS_CACHE_PROJECT_ID_ + projectId);
+        if (project == null) {
+            project = projectService.findProjectById(Integer.valueOf(projectId));
         }
-        return new Project();
+        return project;
     }
 
 }

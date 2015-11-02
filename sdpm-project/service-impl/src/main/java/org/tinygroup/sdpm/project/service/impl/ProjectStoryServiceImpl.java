@@ -55,21 +55,20 @@ public class ProjectStoryServiceImpl implements ProjectStoryService {
         for (ProjectStory t : projectStoryList) {
             ids.add(t.getStoryId());
         }
-        return projectManager.findList(ids);
+        return projectManager.findListByIds(ids);
     }
 
     public List<ProjectStory> findByProjectStory(ProjectStory projectStory) {
         return projectStoryManager.findList(projectStory);
     }
 
-    public Integer batchtDel(String condition) {
+    public Integer batchDel(String condition) {
         return projectStoryManager.batchtDel(condition);
     }
 
     public int[] addLink(List<ProjectStory> projectStoryList) {
         return projectStoryManager.linkStory(projectStoryList);
     }
-
 
     public List<ProductStory> findStoryByProject(Integer projectId) {
         List<ProjectStory> projectStoryList = projectStoryManager.findSrotys(projectId);

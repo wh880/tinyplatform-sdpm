@@ -69,7 +69,7 @@
             #@navSelect2Fix()
                 <a href="${TINY_CONTEXT_PATH +adminPath}/project/allProject" class="r">所有迭代</a>
                 &nbsp;
-                <a href="${TINY_CONTEXT_PATH +adminPath}/project/preadd">添加迭代</a>&nbsp;
+                <a href="${TINY_CONTEXT_PATH +adminPath}/project/form">添加迭代</a>&nbsp;
             #end
         #end
         #hiddenInput("projectIdHidden","projectId","","")

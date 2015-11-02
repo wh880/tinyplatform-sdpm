@@ -46,7 +46,7 @@
                             #end
                         #end
                         #@Tselect2Fix()
-                            <a href="${TINY_CONTEXT_PATH+adminPath}/project/preadd">增加</a>
+                            <a href="${TINY_CONTEXT_PATH+adminPath}/project/form">增加</a>
                             <a href="${TINY_CONTEXT_PATH+adminPath}/project/allProject" class="r">全部</a>
                         #end
                     #end

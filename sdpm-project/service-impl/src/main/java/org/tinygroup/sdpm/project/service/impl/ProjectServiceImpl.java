@@ -19,17 +19,19 @@ public class ProjectServiceImpl implements ProjectService {
     @Autowired
     private ProjectManager projectManager;
 
-
     public List<Project> findList() {
         return projectManager.findList();
     }
 
-    public Project findById(int projectId) {
+    public Project findProjectById(Integer projectId) {
+        if (projectId == null) {
+            return null;
+        }
         return projectManager.find(projectId);
     }
 
     public List<Project> findByProjectList(List<Integer> list) {
-        return projectManager.findList(list);
+        return projectManager.findListByIds(list);
     }
 
     public List<Project> findProjects(Project project) {
@@ -43,8 +45,8 @@ public class ProjectServiceImpl implements ProjectService {
         return projectManager.batchDelete(projectIds);
     }
 
-    public Pager<Project> findProjects(Integer start, Integer limit, String order, String ordertype) {
-        return projectManager.findPagerProjects(start, limit, order, "asc".equals(ordertype) ? true : false);
+    public Pager<Project> findProjects(Integer start, Integer limit, String order, String orderType, Integer... ids) {
+        return projectManager.findPagerProjects(start, limit, order, "asc".equals(orderType) ? true : false,ids);
     }
 
     public List<Project> findListByTeamUserId(String userId) {
@@ -58,12 +60,10 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     public List<Project> findProjectList(Project project, String order, String orderType) {
-
         return projectManager.findList(project, order, orderType);
     }
 
     public Pager<Project> findProjectPager(int page, int pageSize, Project project, String order, String orderType) {
-
         return projectManager.findPager(page, pageSize, project, order, orderType);
     }
 
@@ -72,9 +72,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     public List<Project> getProjectByStoryId(Integer storyId) {
-
         return projectManager.getProjectByStoryId(storyId);
     }
-
 
 }

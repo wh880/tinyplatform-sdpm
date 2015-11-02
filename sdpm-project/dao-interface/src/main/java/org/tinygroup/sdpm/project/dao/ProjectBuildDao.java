@@ -22,34 +22,34 @@ import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
-import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
+import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.List;
 
 public interface ProjectBuildDao extends BaseDao<ProjectBuild, Integer> {
-    Integer edits (ProjectBuild projectBuild);
 
-    public Integer softDelete(ProjectBuild build);
-    public int[] batchUpdateDel(List<ProjectBuild> builds);
+     Integer softDelete(ProjectBuild build);
+
+     int[] batchUpdateDel(List<ProjectBuild> builds);
     
 	List<ProductAndLine> getProductLineTree(ProductLine t);
 
-    public Pager<ProductStory> findBuildStorys(int start, int limit, Integer buildId, OrderBy... orderArgs);
+     Pager<ProductStory> findBuildStorys(int start, int limit, Integer buildId, OrderBy... orderArgs);
 
-    public Pager<ProductStory> findnoBuildStorys(int start, int limit,final String condition, Integer buildId, final OrderBy... orderBies);
+     Pager<ProductStory> findNoBuildStorys(int start, int limit, final String condition, Integer buildId, final OrderBy... orderBies);
 
-    public Integer deletereleate(Integer storyId,Integer buildId);
+     Integer deletereleate(Integer storyId, Integer buildId);
 
-    public Integer releateReq(Integer storyId,Integer buildId);
+     Integer releateReq(Integer storyId, Integer buildId);
 
-    public Pager<QualityBug> findBuildBugs(int start, int limit, Integer buildId, final OrderBy... orderBies);
+     Pager<QualityBug> findBuildBugs(int start, int limit, Integer buildId, final OrderBy... orderBies);
 
-    public Pager<QualityBug> findnoBuildBugs(int start, int limit,final String condition,Integer buildId, final OrderBy... orderBies);
+     Pager<QualityBug> findnoBuildBugs(int start, int limit, final String condition, Integer buildId, final OrderBy... orderBies);
 
-    public Integer deletereleateBug(Integer bugId,Integer buildId);
+     Integer deletereleateBug(Integer bugId, Integer buildId);
 
-    public Integer releateBug(Integer bugId,Integer buildId);
+     Integer releateBug(Integer bugId, Integer buildId);
 
-    public Pager<QualityBug> findBuildLegacyBugs(int start, int limit, Integer buildId, final OrderBy... orderBies);
+     Pager<QualityBug> findBuildLegacyBugs(int start, int limit, Integer buildId, final OrderBy... orderBies);
 }

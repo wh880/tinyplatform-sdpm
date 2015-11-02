@@ -44,7 +44,7 @@
     #end
 #end
 
-#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/project/editsave" "" {"class":"test"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/project/edit" "" {"class":"test"})
     #hiddenInput(hiddenInputName="projectId" hiddenInputValue=project?.projectId)
     #@elementItem()
         #@sdpmItem("项目名称" "*")
