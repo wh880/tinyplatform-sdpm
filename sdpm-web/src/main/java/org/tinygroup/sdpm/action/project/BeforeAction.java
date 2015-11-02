@@ -37,7 +37,7 @@ public class BeforeAction extends BaseController {
         Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
         Project project = projectService.findProjectById(projectId);
         model.addAttribute("project", project);
-        return "project/version/index.page";
+            return "project/version/index.page";
     }
 
     @RequestMapping("/test/index")
@@ -61,7 +61,7 @@ public class BeforeAction extends BaseController {
         if (StringUtil.isBlank(projectId)) {
             projectId = CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID);
         } else {
-            CookieUtils.setCookie(response, request, TaskAction.COOKIE_PROJECT_ID, projectId);
+            CookieUtils.setCookie(response, TaskAction.COOKIE_PROJECT_ID, projectId);
         }
         Project project = projectService.findProjectById(Integer.parseInt(projectId));
         model.addAttribute("project", project);
@@ -70,7 +70,7 @@ public class BeforeAction extends BaseController {
 
     @RequestMapping("/select")
     public String selectProject(Integer projectId, String oldUrl, HttpServletResponse response, HttpServletRequest request) {
-        CookieUtils.setCookie(response, request, TaskAction.COOKIE_PROJECT_ID, projectId.toString(), -1);
+        CookieUtils.setCookie(response, TaskAction.COOKIE_PROJECT_ID, projectId.toString(), -1);
         return "redirect:" + oldUrl;
     }
 

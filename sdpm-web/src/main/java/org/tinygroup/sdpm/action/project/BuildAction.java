@@ -22,6 +22,7 @@ import org.tinygroup.sdpm.project.service.inter.TeamService;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.util.CookieUtils;
+import org.tinygroup.sdpm.util.LogUtil;
 import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -84,11 +85,11 @@ public class BuildAction extends BaseController {
         List<ProjectTeam> teamList = teamService.findTeamByProjectId(projectId);
         model.addAttribute("teamList", teamList);
         model.addAttribute("prodcutList", list);
-        if (buildId != null&&buildId!=0) {
+        if (buildId != null && buildId != 0) {
             ProjectBuild build = buildService.findBuild(buildId);
             model.addAttribute("build", build);
 
-        }else{
+        } else {
             model.addAttribute("build", null);
         }
 
@@ -97,26 +98,52 @@ public class BuildAction extends BaseController {
     }
 
 
-
     @RequestMapping(value = "/addsave", method = RequestMethod.POST)
-    public String addSave(ProjectBuild build, Model model,String commnet) {
+    public String addSave(ProjectBuild build, Model model, String commnet) {
+        ProjectBuild temp;
         if (build.getBuildId() == null) {
             build.setBuildBuilder(UserUtils.getUserId());
-            buildService.add(build);
+            temp = buildService.add(build);
+            LogUtil.logWithComment(LogUtil.LogOperateObject.BUILD,
+                    LogUtil.LogAction.OPENED,
+                    String.valueOf(temp.getBuildId()),
+                    UserUtils.getUserId(),
+                    String.valueOf(temp.getBuildProduct()),
+                    String.valueOf(temp.getBuildProject()),
+                    null,
+                    null,
+                    null);
         } else {
             buildService.updateBuild(build);
+            LogUtil.logWithComment(LogUtil.LogOperateObject.BUILD,
+                    LogUtil.LogAction.EDITED,
+                    String.valueOf(build.getBuildId()),
+                    UserUtils.getUserId(),
+                    String.valueOf(build.getBuildProduct()),
+                    String.valueOf(build.getBuildProject()),
+                    null,
+                    null,
+                    null);
         }
         model.addAttribute("build", build);
         return "project/version/index.page";
     }
 
-
     @ResponseBody
     @RequestMapping(value = "/delete")
     public Map<String, String> delete(Integer id, Model model) {
-        Integer res = buildService.softDeleteBuild(id);
-        Map<String, String> map = new HashMap<String, String>();
-        return resultMap(true,"删除成功");
+        buildService.softDeleteBuild(id);
+        ProjectBuild temp = buildService.findBuild(id);
+        LogUtil.logWithComment(LogUtil.LogOperateObject.BUILD,
+                LogUtil.LogAction.OPENED,
+                String.valueOf(temp.getBuildId()),
+                UserUtils.getUserId(),
+                String.valueOf(temp.getBuildProduct()),
+                String.valueOf(temp.getBuildProject()),
+                null,
+                null,
+                null);
+        return resultMap(true, "删除成功");
     }
 
     @RequestMapping("/product-al-bug")
@@ -150,6 +177,18 @@ public class BuildAction extends BaseController {
             build.setBuildDeleted("1");
             list.add(build);
         }
+        for (int i = 0, n = list.size(); i < n; i++) {
+            LogUtil.logWithComment(LogUtil.LogOperateObject.BUILD,
+                    LogUtil.LogAction.DELETED,
+                    String.valueOf(list.get(i).getBuildId()),
+                    UserUtils.getUserId(),
+                    String.valueOf(list.get(i).getBuildProduct()),
+                    String.valueOf(list.get(i).getBuildProject()),
+                    null,
+                    null,
+                    null);
+        }
+
         buildService.deleteBuildByIds(list);
         map.put("status", "success");
         map.put("info", "删除成功");
@@ -157,7 +196,7 @@ public class BuildAction extends BaseController {
     }
 
     @RequestMapping("/add")
-    public String add(HttpServletRequest request, Integer buildId, Model model,String commnet) {
+    public String add(HttpServletRequest request, Integer buildId, Model model, String commnet) {
         Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
         SystemModule module = new SystemModule();
         module.setModuleType("project");
@@ -166,11 +205,11 @@ public class BuildAction extends BaseController {
         List<ProjectTeam> teamList = teamService.findTeamByProjectId(projectId);
         model.addAttribute("teamList", teamList);
         model.addAttribute("prodcutList", list);
-        if (buildId != null&&buildId!=0) {
+        if (buildId != null && buildId != 0) {
             ProjectBuild build = buildService.findBuild(buildId);
             model.addAttribute("build", build);
 
-        }else{
+        } else {
             model.addAttribute("build", null);
         }
         return "project/version/add.page";
@@ -218,16 +257,16 @@ public class BuildAction extends BaseController {
 
 
     @RequestMapping("/bugSearch/{relate}")
-    public String bugListAction(@PathVariable(value="relate")String relate, int page, int pagesize, QualityBug bug,int id,String groupOperate, SearchInfos searchInfos,
-                                Model model){
+    public String bugListAction(@PathVariable(value = "relate") String relate, int page, int pagesize, QualityBug bug, int id, String groupOperate, SearchInfos searchInfos,
+                                Model model) {
 
         if ("reRelateBug".equals(relate)) {
             bug.setDeleted(0);
             bug.setBugStatus("2");
-            Pager<QualityBug> p = buildService.findBugPager(pagesize*(page - 1),pagesize,id,searchInfos,groupOperate);
-            model.addAttribute("bugList",p);
+            Pager<QualityBug> p = buildService.findBugPager(pagesize * (page - 1), pagesize, id, searchInfos, groupOperate);
+            model.addAttribute("bugList", p);
             return "/project/task/relation-release/product-al-bug-data.pagelet";
-        }else if ("noRelateBug".equals(relate)) {
+        } else if ("noRelateBug".equals(relate)) {
             String condition = "";
             if (searchInfos != null) {
                 if (searchInfos.getInfos().size() > 0 || searchInfos.getInfos() != null) {
@@ -238,12 +277,12 @@ public class BuildAction extends BaseController {
                 }
             }
             bug.setProjectId(null);
-            Pager<QualityBug> p = buildService.findnoBugPager(pagesize*(page - 1),pagesize,id,condition,searchInfos,groupOperate);
-            model.addAttribute("bugList",p);
+            Pager<QualityBug> p = buildService.findnoBugPager(pagesize * (page - 1), pagesize, id, condition, searchInfos, groupOperate);
+            model.addAttribute("bugList", p);
             return "/project/task/relation-release/product-al-no-bug-data.pagelet";
         } else if ("leRelateBugRelease".equals(relate)) {
-            Pager<QualityBug> p = buildService.findBugLegacyPager(pagesize*(page - 1),pagesize,id,searchInfos,groupOperate);
-            model.addAttribute("bugList",p);
+            Pager<QualityBug> p = buildService.findBugLegacyPager(pagesize * (page - 1), pagesize, id, searchInfos, groupOperate);
+            model.addAttribute("bugList", p);
             return "/project/task/relation-release/product-al-le-bug-data.pagelet";
         }
 
@@ -252,41 +291,43 @@ public class BuildAction extends BaseController {
 
     /**
      * 关联需求
+     *
      * @param ids
      * @param buildId
      * @return
      */
     @ResponseBody
     @RequestMapping("/releateReq")
-    public Map<String, String> releateReq(String ids,Integer buildId){
+    public Map<String, String> releateReq(String ids, Integer buildId) {
         Map<String, String> map = new HashMap<String, String>();
-        for(String storyId:ids.split(",")){
+        for (String storyId : ids.split(",")) {
             buildService.releateReq(Integer.valueOf(storyId), buildId);
         }
-        return resultMap(true,"关联成功");
+        return resultMap(true, "关联成功");
     }
 
     @ResponseBody
     @RequestMapping("/releateBug")
-    public Map<String, String> releateBug(String ids,Integer buildId){
+    public Map<String, String> releateBug(String ids, Integer buildId) {
         Map<String, String> map = new HashMap<String, String>();
-        for(String bugId:ids.split(",")){
+        for (String bugId : ids.split(",")) {
             buildService.releateBug(Integer.valueOf(bugId), buildId);
         }
-        return resultMap(true,"关联成功");
+        return resultMap(true, "关联成功");
     }
 
     @RequestMapping("/search/reRelateStory")
-    public String storyListAction( int page, int pagesize,int id,String groupOperate, SearchInfos searchInfos,
-                                   Model model){
-        Pager<ProductStory> p = projectStoryService.findStoryPager(pagesize*(page - 1),pagesize,id,searchInfos,groupOperate);
-        model.addAttribute("storys",p);
+    public String storyListAction(int page, int pagesize, int id, String groupOperate, SearchInfos searchInfos,
+                                  Model model) {
+        Pager<ProductStory> p = projectStoryService.findStoryPager(pagesize * (page - 1), pagesize, id, searchInfos, groupOperate);
+        model.addAttribute("storys", p);
 
         return "/project/task/relation-release/product-al-req-data.pagelet";
     }
+
     @RequestMapping("/search/noRelateStory")
-    public String storynoListAction( int page, int pagesize,int id,String groupOperate, SearchInfos searchInfos,
-                                   Model model){
+    public String storynoListAction(int page, int pagesize, int id, String groupOperate, SearchInfos searchInfos,
+                                    Model model) {
         String condition = "";
         if (searchInfos != null) {
             if (searchInfos.getInfos().size() > 0 || searchInfos.getInfos() != null) {
@@ -297,31 +338,31 @@ public class BuildAction extends BaseController {
             }
         }
         Pager<ProductStory> p = projectStoryService.findNoStoryPager(pagesize * (page - 1), pagesize, id, condition, searchInfos, groupOperate);
-        model.addAttribute("storys",p);
+        model.addAttribute("storys", p);
 
         return "/project/task/relation-release/product-al-no-req-data.pagelet";
     }
 
     @ResponseBody
     @RequestMapping("/deletereleate")
-    public Map deletereleate(Integer storyId,Integer buildId){
+    public Map deletereleate(Integer storyId, Integer buildId) {
         buildService.deletereleate(storyId, buildId);
         Map<String, String> map = new HashMap<String, String>();
-        return resultMap(true,"解除关联成功");
+        return resultMap(true, "解除关联成功");
 
     }
 
     @ResponseBody
     @RequestMapping("/deletereleateBug")
-    public Map deletereleateBug(Integer bugId,Integer buildId){
+    public Map deletereleateBug(Integer bugId, Integer buildId) {
         buildService.deletereleateBug(bugId, buildId);
         Map<String, String> map = new HashMap<String, String>();
-        return resultMap(true,"解除关联成功");
+        return resultMap(true, "解除关联成功");
     }
 
     @ResponseBody
     @RequestMapping(value = "/batchDeleteReq")
-    public Map bctchDelReq(String ids,Integer buildId) {
+    public Map bctchDelReq(String ids, Integer buildId) {
         Map<String, String> map = new HashMap<String, String>();
         if (ids == null || ids == "") {
             map.put("status", "fail");
@@ -331,7 +372,7 @@ public class BuildAction extends BaseController {
 
         for (String s : ids.split(",")) {
             Integer S = Integer.valueOf(s);
-            buildService.deletereleate(S,buildId);
+            buildService.deletereleate(S, buildId);
         }
         map.put("status", "success");
         map.put("info", "删除成功");
@@ -340,7 +381,7 @@ public class BuildAction extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "/batchDeleteBug")
-    public Map bctchDelBug(String ids,Integer buildId) {
+    public Map bctchDelBug(String ids, Integer buildId) {
         Map<String, String> map = new HashMap<String, String>();
         if (ids == null || ids == "") {
             map.put("status", "fail");
@@ -350,7 +391,7 @@ public class BuildAction extends BaseController {
 
         for (String bug : ids.split(",")) {
             Integer Bug = Integer.valueOf(bug);
-            buildService.deletereleateBug(Bug,buildId);
+            buildService.deletereleateBug(Bug, buildId);
         }
         map.put("status", "success");
         map.put("info", "删除成功");

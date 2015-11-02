@@ -73,52 +73,29 @@
                     layer.msg(data.info, 2, 9);
                 }
             });
+            return false;
         });
 
-        $("#interval").on("change", function () {
-            $.ajax({
-                type: "get",
-                url: "${TINY_CONTEXT_PATH+adminPath}/project/burn/init",
-                dataType: "html",
-                data: {interval: $(this).val(), ajax: 1, choose:${choose}},
-                success: function (data) {
-                    // if(data.status == "y" || data.status == "success"){
-                    //    layer.msg(data.info, 2, 1);
-                    // }
-                    $("#tinypagecontent").html(data);
-                },
-                error: function (data) {
-                    // console.log(data);
-                    // layer.msg(data, 2);
-                }
-            });
-        });
+
     });
 </script>
 <script>
     function initBurnChar() {
         var data =
         {
-            labels: [${burn?.dayValues
-        }
-    ],
+            labels: [${burn?.dayValues}],
             datasets: [
                 {
                     label: "基准线",
                     color: "#CCC",
                     fillColor: "rgba(0,0,0,0)",
                     showTooltips: false,
-                    data: [${burn?.averageValues
-                }]
+                    data: [${burn?.averageValues}]
                 },
                 {
                     label: "剩余",
                     color: "#0033CC",
-                        data
-                :
-                    [${burn?.leftValues
-                }
-    ]
+                    data:[${burn?.leftValues}]
                 }]
         };
         var burnChart = $("#burnChart").lineChart(data, {animation: !($.zui.browser && $.zui.browser.ie === 8)});
@@ -131,10 +108,19 @@
         $('#burnTab').addClass('active');
         $('#interval').change(function () {
             var projectID = ${projectId};
-            var choose = ${choose};
+
+##            $.ajax({
+##                url:'${TINY_CONTEXT_PATH+adminPath}/project/burn/init.pagelet',
+##                type:"get",
+##                data:{ projectID: projectID, choose: 6,interval: $(this).val()},
+##                dataType:"html",
+##                success:function(data) {
+##                    $("#tinypagecontent").html(data);
+##                }
+##            })
             $("#tinypagecontent").load('${TINY_CONTEXT_PATH+adminPath}/project/burn/init.pagelet', {
                 projectID: projectID,
-                choose: choose,
+                choose: 6,
                 interval: $(this).val(),
             })
         });

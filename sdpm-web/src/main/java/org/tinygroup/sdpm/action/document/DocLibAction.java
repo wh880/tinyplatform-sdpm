@@ -68,13 +68,13 @@ public class DocLibAction extends BaseController {
      * @return
      */
     @RequestMapping(value = "/save")
-    public String saveDocLib(DocumentDocLib docLib, HttpServletResponse response,HttpServletRequest request) {
+    public String saveDocLib(DocumentDocLib docLib, HttpServletResponse response) {
         if (docLib.getDocLibId() == null) {
             docLib = docservice.createNewDocLib(docLib);
         } else {
             docservice.editDocLibName(docLib);
         }
-        CookieUtils.setCookie(response,request, DocLibAction.COOKIE_DOCLIB_ID, docLib.getDocLibId().toString());
+        CookieUtils.setCookie(response, DocLibAction.COOKIE_DOCLIB_ID, docLib.getDocLibId().toString());
         CmsUtils.removeDocLibList();
         return "redirect:" + adminPath + "/document?change=true";
     }
@@ -95,7 +95,7 @@ public class DocLibAction extends BaseController {
             docservice.deleteDoclibById(id);
             CmsUtils.removeDocLibList();
             documentLibId = "1";
-            CookieUtils.setCookie(response, request,COOKIE_DOCLIB_ID, documentLibId.toString(), -1);
+            CookieUtils.setCookie(response, COOKIE_DOCLIB_ID, documentLibId.toString(), -1);
             Map<String, String> map = new HashMap<String, String>();
             map.put("status", "success");
             map.put("info", "删除成功");

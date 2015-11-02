@@ -75,22 +75,16 @@
 				  #end
 		  #end
 		  </optgroup>
-
 		#end
 		#@navSelect2Fix()
-
         <a href="${TINY_CONTEXT_PATH +adminPath}/product/allproduct/addition" class="r">所有产品</a>&nbsp;
 			<!--新增产品-->
         <a href="${TINY_CONTEXT_PATH +adminPath}/product/addproduct/addition">添加产品</a>&nbsp;
-
-
 		#end
 	#end
 
 #hiddenInput("productIdHidden","productId","","")
-
 	<script type="text/javascript">
-
 		$(function(){
 			$("#product-select").on("change",function(){
                 var dataValue = $(this).val();
