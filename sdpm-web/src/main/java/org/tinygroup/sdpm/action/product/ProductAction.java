@@ -24,7 +24,9 @@ import org.tinygroup.weblayer.WebContext;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 产品控制器
@@ -154,9 +156,9 @@ public class ProductAction extends BaseController {
         }
 
     }
-
+    @ResponseBody
     @RequestMapping("/delete")
-    public String delete(Integer productId, HttpServletRequest request,SystemAction systemAction) {
+    public Map delete(Integer productId, HttpServletRequest request,SystemAction systemAction) {
         Product product1 = productService.findProduct(productId);
         productService.deleteProduct(productId);
         Product product = productService.findProduct(productId);
@@ -174,8 +176,9 @@ public class ProductAction extends BaseController {
                 product,
                 systemAction.getActionComment());
 
-
-        return "redirect:" + "/product/page/tabledemo/product-listall.page";
+        Map<String,String> result = new HashMap<String, String>();
+        result.put("status","y");
+        return result;
     }
 
     @RequestMapping("/find")
@@ -187,7 +190,7 @@ public class ProductAction extends BaseController {
     }
 
     @RequestMapping("/find/{forward}")
-    public String find(@CookieValue(value = "cookieProductId") String cookieProductId,
+    public String find(@CookieValue(value = "cookieProductId",defaultValue = "0") String cookieProductId,
             @PathVariable(value = "forward") String forward, Integer productId, Model model, HttpServletRequest request) {
         if("close".equals(forward))return "/product/page/tabledemo/overview-close.pagelet";
         if(productId!=null)cookieProductId=String.valueOf(productId);
@@ -207,15 +210,21 @@ public class ProductAction extends BaseController {
     }
 
     @RequestMapping("/list")
-    public String list(Product product,String treeId,
-                       @CookieValue("cookieProductLineId") String cookieProductLineId,
+    public String list(Product product,String treeId,Integer productLineId,
+                       @CookieValue(value = "cookieProductLineId",defaultValue = "0") String cookieProductLineId,
                        @RequestParam(required = false, defaultValue = "1") int page,
                        @RequestParam(required = false, defaultValue = "10") int pagesize,
                        @RequestParam(required = false, defaultValue = "productId") String order,
                        @RequestParam(required = false, defaultValue = "asc") String ordertype, Model model) {
-        if(!StringUtil.isBlank(cookieProductLineId)){
-            product.setProductLineId(Integer.parseInt(cookieProductLineId));
+
+        if(productLineId!=null&&productLineId>0){
+            product.setProductLineId(productLineId);
+        }else {
+            if(!StringUtil.isBlank(cookieProductLineId)) {
+                product.setProductLineId(Integer.parseInt(cookieProductLineId));
+            }
         }
+
         product.setDeleted(0);
         Pager<Product> pagerProduct = productService.findProductPager(page, pagesize, product, order, ordertype);
 

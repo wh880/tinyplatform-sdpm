@@ -97,8 +97,13 @@ public class LogServiceImpl implements LogService{
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
             Date date = (Date) object;
             return format.format(date);
-        }
+        }/*else if(){
+
+        }*/
         return object;
     }
 
+//    private boolean validateUserId(){
+//
+//    }
 }

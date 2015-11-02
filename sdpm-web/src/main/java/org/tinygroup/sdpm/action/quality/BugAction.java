@@ -614,11 +614,14 @@ public class BugAction extends BaseController {
 	}
 
 	@RequestMapping("/projectFindList")
-	public String projectFindList(Model model, Integer start, Integer limit,String order, String ordertype, HttpServletRequest request) {
-		Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
+	public String projectFindList(Model model,Integer projectId, Integer start, Integer limit,String order, String ordertype, HttpServletRequest request) {
+		if(projectId==null||projectId<1) {
+			projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
+		}
 		boolean asc = "asc".equals(ordertype) ? true : false;
 		QualityBug bug = new QualityBug();
 		bug.setProjectId(projectId);
+		bug.setDeleted(0);
 		Pager<QualityBug> bugPage = bugService.findBugListPager(start, limit,null, bug, order, asc);
 		model.addAttribute("bugPage", bugPage);
 		bugPage.getRecords();

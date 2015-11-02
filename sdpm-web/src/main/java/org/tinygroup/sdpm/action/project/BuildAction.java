@@ -73,8 +73,10 @@ public class BuildAction extends BaseController {
 
 
     @RequestMapping("/edit")
-    public String edit(HttpServletRequest request, Integer buildId, Model model) {
-        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
+    public String edit(HttpServletRequest request,Integer projectId, Integer buildId, Model model) {
+        if(projectId==null&&projectId<1){
+            projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
+        }
         SystemModule module = new SystemModule();
         module.setModuleType("project");
         module.setModuleRoot(projectId);

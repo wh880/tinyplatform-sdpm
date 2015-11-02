@@ -38,7 +38,7 @@
 
     				},
     				error: function(res){
-    					alert("失败");
+//    					alert("失败");
     				}
     			});
 
@@ -79,13 +79,9 @@
 					    $("#${sid}").on("change",function(){
                              var pId = $("#${sid}  option:selected").val();
                             if(pId&&pId>0){
-                                ajaxRead("${sid}", "buildName", "buildId", "buildName", "/quality/version/ajax/build?buildProject=" + pId + "&buildProduct=${qualityProductId?:0}", ${testTask?.buildName ? : (buildId ? : 0)
-                            }
-                            ,
-                            "build"
-                            );
+                                ajaxRead("${sid}", "buildName", "buildId", "buildName", "/quality/version/ajax/build?buildProject=" + pId + "&buildProduct=${qualityProductId?:0}", "${testTask?.buildName?:(buildId?:0)}","build");
                                  ajaxRead("${sid}","testtaskOwner","orgUserId","orgUserRealName","/quality/version/ajax/user?projectId="+pId,"${testTask?.testtaskOwner?:0}");
-                                }
+                            }
                         });
 					 })
                      </script>
@@ -106,7 +102,7 @@
             #@formControlDiv("col-8")
 					#@div(divClass="col-5")
 					 #@Tselect2F()
-                         #@Tselect2Body("buildName" testTask?.buildName?:buildId {"class":
+                         #@Tselect2Body("buildName" testTask?.buildName?:(buildId?:0) {"class":
                              "input-text select2"}) ##,"multiple":"multiple"加上为多选项
 
 	                    	#end                

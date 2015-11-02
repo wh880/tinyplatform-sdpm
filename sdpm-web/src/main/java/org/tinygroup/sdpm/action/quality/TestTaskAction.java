@@ -27,12 +27,14 @@ import org.tinygroup.sdpm.project.service.inter.TeamService;
 import org.tinygroup.sdpm.quality.dao.pojo.*;
 import org.tinygroup.sdpm.quality.service.inter.*;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
+import org.tinygroup.sdpm.util.CookieUtils;
 import org.tinygroup.sdpm.util.LogUtil;
 import org.tinygroup.sdpm.util.ModuleUtil;
 import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -147,10 +149,17 @@ public class TestTaskAction extends BaseController {
     }
 
     @RequestMapping("/add")
-    public String add(@CookieValue Integer qualityProductId, Model model, HttpServletRequest request) {
+    public String add(@CookieValue(value = "qualityProductId",defaultValue = "0") Integer qualityProductId,Integer buildId, Model model, HttpServletRequest request,HttpServletResponse response) {
         List<Project> projects = projectService.findProjectList(null, null, null);
         ProjectBuild build = new ProjectBuild();
-        build.setBuildProduct(qualityProductId);
+        if(buildId!=null&buildId>0){
+            int productId = buildService.findBuild(buildId).getBuildProduct();
+            build.setBuildProduct(productId);
+            CookieUtils.setCookie(response,request,"qualityProductId",String.valueOf(productId));
+        }else{
+            build.setBuildProduct(qualityProductId);
+        }
+
         List<ProjectBuild> builds = buildService.findListBuild(build);
         List<OrgUser> users = userService.findUserList(null);
         model.addAttribute("projectList", projects);

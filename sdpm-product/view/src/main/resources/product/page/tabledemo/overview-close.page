@@ -1,4 +1,23 @@
 #@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/product/delete" "" {"class":"test"})
+    <script>
+        $(function(){
+            $("#${fromId}").submit(function(){
+                var url = $(this).attr('action');
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: $(this).serialize(),
+                    dataType: "json",
+                    success:function(data){
+                        if(data.status=="y"){
+                            window.location.reload();
+                        }
+                    }
+                });
+                return false;
+            });
+        })
+    </script>
 	#tinyInput("text" "productId" productId {"class":"input-text hidden"})
     #@elementItem()
         #@colLabel()关闭原因：#end

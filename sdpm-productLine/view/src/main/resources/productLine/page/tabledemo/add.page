@@ -31,7 +31,7 @@
         #@validateDiv("col-2")#end
     #end
     #@elementItem()
-        #@colLabel()<span class="c-red">*</span>产品编号：#end
+        #@colLabel()<span class="c-red">*</span>产品线编号：#end
         #@formControlDiv("col-4")
             #tinyInput(
                 "text" "productLineCode" ""{"placeholder":"产品编号","nullmsg":"请输入产品编号！","datatype":"*","id":

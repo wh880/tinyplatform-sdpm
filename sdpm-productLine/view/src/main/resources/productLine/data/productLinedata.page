@@ -5,9 +5,9 @@
 #setTinyItemCount(productLine?.totalCount)
 #for(productLine:productLine?.records)
 #@tr()
-    #@td()${productLine?.productLineId}#end
+    #@td()<a class="infoJump" href="${TINY_CONTEXT_PATH +adminPath}/productLine/find/overview?productLineId=${productLine?.productLineId}">${productLine?.productLineId}</a>#end
     #@td()
-    <a href="${TINY_CONTEXT_PATH +adminPath}/productLine/find/overview?productLineId=${productLine?.productLineId}">${productLine
+    <a class="infoJump" href="${TINY_CONTEXT_PATH +adminPath}/productLine/find/overview?productLineId=${productLine?.productLineId}">${productLine
         ?.productLineName}</a>
     #end
     #@td()${productLine?.productLineCode}#end
@@ -23,42 +23,47 @@
             <a title="${m.name}" class="ml-5" href=${TINY_CONTEXT_PATH+adminPath}${url}><i class="${m.icon}"></i></a>
             #else
             &nbsp;<a href="javascript:void(0);" id="productLineRemove"><i
-                    class="${m.icon}"></i></a>
-                <script>
-                    $(function(){
-                        $("#productLineRemove").on("click", function () {
-                            layer.confirm('确定要删除该记录？', function (index) {
-                                $.ajax({
-                                    url:"${TINY_CONTEXT_PATH+adminPath+eval(url)}",
-                                    dataType:"json",
-                                    success:function(data){
-                                        if(data.status=="success"||data.status=="y"){
-                                            #if(productLine?.productLineId==cookieProductLineId)
-                                            $.removeCookie("cookieProductLineId",{path:"/"});
-                                            #end
-                                            layer.msg(data.info, 2, 1);
-                                            setTimeout(function(){
-                                                layer.closeAll();
-                                                $("#productLinetable").trigger("initnav");
-                                            },300);
-                                        }else{
-                                            var msg=data.info?data.info:"系统出错";
-                                            layer.msg(msg);
-                                        }
-                                    },
-                                    error: function() {
-                                        layer.msg("系统出错");
-                                    }
-                                });
-
-                            });
-                        });
-
-                    })
-
-                </script>
+                    class="${m.icon} productLineRemove"></i></a>
             #end
         #end
     #end
 #end
 #end
+<script>
+    $(function(){
+        $(".productLineRemove").on("click", function () {
+            var that=this;
+            layer.confirm('确定要删除该记录？', function (index) {
+                var id = $(that).closest("tr").find("td:first a:first").html();
+                //console.log($(that).closest("tr"),$(that).closest("tr").find("td:first a:first"),id);
+                //alert(id);
+                $.ajax({
+                    url:"${TINY_CONTEXT_PATH+adminPath}"+"/productLine/delete?productLineId="+id,
+                    dataType:"json",
+                    success:function(data){
+                        if(data.status=="success"||data.status=="y"){
+                            if(id=="${cookieProductLineId}")
+                            {
+                                $.removeCookie("cookieProductLineId", {path: "/"});
+                            }
+                            layer.msg(data.info, 2, 1);
+                            setTimeout(function(){
+                                layer.closeAll();
+                                $("#productLinetable").trigger("initnav");
+                            },300);
+                        }else{
+                            var msg=data.info?data.info:"系统出错";
+                            layer.msg(msg);
+                        }
+                    },
+                    error: function() {
+                        layer.msg("系统出错");
+                    }
+                });
+
+            });
+        });
+
+    })
+
+</script>
