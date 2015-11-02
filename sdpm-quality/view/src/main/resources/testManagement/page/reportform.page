@@ -4,6 +4,10 @@
 #import("/org/tinygroup/button/components/button.component")
 #import("/common/component/form.component")
 #!set(activeTitle="测试管理",activeMenuId=currentPageId)
+#set(titleLabel = {"A_projectBugCount":"项目Bug数量","B_buildBugCount":"版本Bug数量","C_moduleBugCount":"模块Bug数量","D_bugIncreaseByDay":"每天新增Bug数",
+                        "E_bugResolveByDay":"每天解决Bug数","F_bugCloseByDay":"每天关闭的Bug数","G_bugCommitByPerson":"每人提交的Bug数","H_bugResolveByPerson":"每人解决的Bug数",
+                        "I_bugCloseByPerson":"每人关闭的Bug数","J_bugSeverity":"Bug严重程度统计","K_bugSolution":"Bug解决方案统计","L_bugStatus":"Bug状态统计","M_bugReactive":"Bug激活次数统计",
+                            "N_bugType":"Bug类型统计","O_bugAssign":"指派给统计"})
 
 <style>
     .togglebox.open .tableBoxessty{margin-left:262px}
@@ -117,11 +121,13 @@
             #@settoggleLeftTitle()报表#end
                 <table class="table table-border table-bordered" cellspacing="0">
                     #foreach(roadMap:map)
+                    <tr><td style="width: 65%;text-align: center">
                         #if(roadMap?.key.contains("Day"))
 ##                            #@centerAlignTr()
 ##                                #@th("text-r" "vertical-align:middle;width:20%")
-                            <table id="${roadMap?.key}" class="table table-bordered ">
-                                <caption>${roadMap?.key}</caption>
+
+                            <table id="${roadMap?.key}" class="table table-bordered hide">
+                                <caption>${titleLabel.get(roadMap?.key)}</caption>
                                 <thead>
                                 <tr>
                                     <th></th>
@@ -138,14 +144,14 @@
                                 </tbody>
                             </table>
 ##                            #end
-                            #setColumnHighChart("#"+roadMap?.key {"min-width":"700px","height":"400px"})
-##                            #end
+                            #setColumnHighChart("#"+roadMap?.key {"min-width":"400px","height":"250px"})
+
                         #else
-                        #@centerAlignTr()
-                            #@th("text-r" "vertical-align:middle;width:20%")
-                                #@pieChart(pieChartStyle="width:600px;margin:0 auto;")
+
+##                            #@th("text-r" "vertical-align:middle;width:20%")
+##                                #@pieChart(pieChartStyle="width:600px;margin:0 auto;")
                                 <table id='${roadMap?.key}'>
-                                    <caption name="${roadMap?.key}"></caption>
+                                    <caption name="${roadMap?.key}">${titleLabel.get(roadMap?.key)}</caption>
                                 <thead>
                                 <tr>
                                     <th></th>
@@ -165,21 +171,21 @@
                         </tbody>
                         </table>
 
-                        #end
-                        #pieChartInit("#"+roadMap?.key "PieChart" "No of players" "Month",600,350)
-                        #end
+##                        #end
+                        #pieChartInit("#"+roadMap?.key "PieChart" "No of players" "Month","500","250")
+##                        #end
                     #end
+                </td>
 
-
-                <td  style="vertical-align:middle;">
+                <td  style="vertical-align:middle;width: 35%;text-align: center">
                 #*            				产品需求数量分布*#
                 <table class="table table-border table-bordered" cellspacing="0">
-                    #@theadCenterMenu()   #@th()${roadMap?.key} 分类#end        #@th()bug数#end  #@th()百分比#end #end
+                    #@theadCenterMenu()   #@th()分类#end        #@th()bug数#end  #@th()百分比#end #end
 
                     #for(road:roadMap?.value)
                     #@centerAlignTr()
 
-                        #@td()${road?.name}#end
+                        #@th()${road?.name}#end
                         #@td()${road?.number}#end
                         #@td()${road?.getPercentToString()}#end
                     #end
@@ -193,8 +199,8 @@
 
             </td>
 
-            #end
-
+##            #end
+            </tr>
             #end
 
             </table>

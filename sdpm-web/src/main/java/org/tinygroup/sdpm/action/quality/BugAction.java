@@ -575,6 +575,7 @@ public class BugAction extends BaseController {
 				, LogUtil.LogAction.OPENED
 				,String.valueOf(bug.getBugId())
 				,UserUtils.getUserId()
+
 				,String.valueOf(bug.getProductId())
 				,String.valueOf(bug.getProjectId())
 				,null
