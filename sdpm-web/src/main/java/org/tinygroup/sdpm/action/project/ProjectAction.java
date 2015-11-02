@@ -50,6 +50,11 @@ public class ProjectAction extends BaseController {
     @Autowired
     private UserService userService;
 
+    /**
+     * 批量删除
+     * @param projectIds
+     * @return
+     */
     @ResponseBody
     @RequestMapping("/batchDelete")
     public Map batchDelete(@RequestParam(value = "ids") String projectIds) {
@@ -93,15 +98,10 @@ public class ProjectAction extends BaseController {
         return "project/allProjectData.pagelet";
     }
 
-    @RequestMapping("/preadd")
+    @RequestMapping("/form")
     public String form(Model model) {
         model.addAttribute("productList", ProductUtils.getAllProductListByUser());
-        return "project/addProject.page";
-    }
-
-    @RequestMapping(value = "/add", method = RequestMethod.GET)
-    public String addPageGet() {
-        return "project/allProject.page";
+        return "project/form.page";
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
@@ -111,7 +111,7 @@ public class ProjectAction extends BaseController {
         Project tProject = projectService.addProject(project);
         projectProductService.addLink(linkProduct, tProject.getProjectId());
 
-        CookieUtils.setCookie(response, TaskAction.COOKIE_PROJECT_ID, tProject.getProjectId().toString());
+        CookieUtils.setCookie(response, request,TaskAction.COOKIE_PROJECT_ID, tProject.getProjectId().toString());
         ProjectUtils.removeProjectList();
         return "redirect:" + adminPath + "/project/allProject";
     }
@@ -135,20 +135,18 @@ public class ProjectAction extends BaseController {
         return "error";
     }
 
-    @RequestMapping(value = "/editsave", method = RequestMethod.POST)
-    public String editSave(Project project, Model model, Integer[] whiteList, Integer[] linkProduct) {
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    public String formPost(Project project, Model model, Integer[] whiteList, Integer[] linkProduct) {
         if (project.getProjectId() == null) {
             Project resProject = projectService.addProject(project);
             projectProductService.addLink(linkProduct, resProject.getProjectId());
         } else {
-
             projectService.updateProject(project);
         }
         ProjectUtils.removeProjectList();
         model.addAttribute("project", project);
         return "project/survey/index.page";
     }
-
 
     @RequestMapping("/delay")
     public String delay(Integer projectId, Model model) {
@@ -239,7 +237,6 @@ public class ProjectAction extends BaseController {
         return resultMap(res > 0 ? true : false, res > 0 ? "完成成功" : "完成失败");
     }
 
-
     /**
      * 项目基本信息
      *
@@ -251,8 +248,8 @@ public class ProjectAction extends BaseController {
     public String basicInformation(Integer projectID, Model model) {
         Project project = projectService.findProjectById(projectID);
         List<ProjectProduct> projectProduct = projectProductService.findProducts(projectID);
-        List productIds = Collections3.extractToList(projectProduct, "productId");
-        List<Product> productList = productService.findProductListByIds((Integer[]) productIds.toArray());
+        List<Integer> productIds = Collections3.extractToList(projectProduct, "productId");
+        List<Product> productList = productService.findProductListByIds(productIds.toArray(new Integer[0]));
         model.addAttribute("project", project);
         model.addAttribute("productList", productList);
         return "project/survey/basicInformation.pagelet";
@@ -274,5 +271,4 @@ public class ProjectAction extends BaseController {
 
         return "organization/others/projectUserBaseInfo.pagelet";
     }
-
 }

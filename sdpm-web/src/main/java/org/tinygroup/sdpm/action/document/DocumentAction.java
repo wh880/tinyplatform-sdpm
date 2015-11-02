@@ -63,13 +63,13 @@ public class DocumentAction extends BaseController {
                            HttpServletRequest request, HttpServletResponse response, Model model) {
         if (null != docLib.getDocLibId()) {
             documentLibId = docLib.getDocLibId().toString();
-            CookieUtils.setCookie(response, COOKIE_DOCLIB_ID, documentLibId.toString());
+            CookieUtils.setCookie(response,request, COOKIE_DOCLIB_ID, documentLibId.toString());
         } else {
             if (null == documentLibId) {
                 List<DocumentDocLib> list = docservice.findDoclibList(null);
                 if (list != null && !list.isEmpty()) {
                     documentLibId = list.get(0).getDocLibId().toString();
-                    CookieUtils.setCookie(response, COOKIE_DOCLIB_ID, documentLibId.toString());
+                    CookieUtils.setCookie(response,request,COOKIE_DOCLIB_ID, documentLibId.toString());
                 }
             }
         }

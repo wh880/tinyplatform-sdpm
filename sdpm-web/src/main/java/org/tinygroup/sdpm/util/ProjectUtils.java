@@ -64,7 +64,7 @@ public class ProjectUtils {
         for (Project project : userProjectList) {
             ids.add(project.getProjectId());
         }
-        return (Integer[]) ids.toArray();
+        return ids.toArray(new Integer[0]);
     }
 
     /**

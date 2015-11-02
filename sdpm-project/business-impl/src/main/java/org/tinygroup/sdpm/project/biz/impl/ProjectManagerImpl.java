@@ -76,7 +76,7 @@ public class ProjectManagerImpl implements ProjectManager {
         if (ids.isEmpty()) {
             return null;
         } else {
-            return projectDao.findByIds((Integer[]) ids.toArray());
+            return projectDao.findByIds(ids.toArray(new Integer[0]));
         }
     }
 
