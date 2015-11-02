@@ -60,12 +60,12 @@ public class TaskAction extends BaseController {
     @RequiresPermissions(value = {"task", "project"}, logical = Logical.OR)
     @RequestMapping("index")
     public String index(@CookieValue(required = false, value = COOKIE_PROJECT_ID) String currentProjectId,
-                        HttpServletResponse response, HttpServletRequest request, String moduleId, String choose, Model model) {
+                        HttpServletResponse response, String moduleId, String choose, Model model) {
         if (StringUtil.isBlank(currentProjectId)) {
             Project project = ProjectUtils.getProject(null);
-            if (null != project && project.getProjectId() != null) {
+            if (null != project&&project.getProjectId()!=null) {
                 currentProjectId = String.valueOf(project.getProjectId());
-                CookieUtils.setCookie(response, request, COOKIE_PROJECT_ID, currentProjectId);
+                CookieUtils.setCookie(response, COOKIE_PROJECT_ID, currentProjectId);
                 model.addAttribute(COOKIE_PROJECT_ID, currentProjectId);
             }
         }
@@ -490,13 +490,13 @@ public class TaskAction extends BaseController {
     @ResponseBody
     @RequestMapping("/gantt/init")
     public List<Map<String, String>> ganttInit(@CookieValue(value = TaskAction.COOKIE_PROJECT_ID, required = false) String projectId,
-                                               HttpServletRequest request, HttpServletResponse response) {
+                                               HttpServletResponse response) {
         List<Map<String, String>> resultList = new ArrayList<Map<String, String>>();
         if (StringUtil.isBlank(projectId)) {
             Project project = ProjectUtils.getProject(projectId);
             if (project.getProjectId() != null) {
                 projectId = project.getProjectId().toString();
-                CookieUtils.setCookie(response, request, COOKIE_PROJECT_ID, projectId);
+                CookieUtils.setCookie(response, COOKIE_PROJECT_ID, projectId);
             } else {
                 return null;
             }

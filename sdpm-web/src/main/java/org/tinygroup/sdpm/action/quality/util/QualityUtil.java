@@ -40,8 +40,8 @@ public class QualityUtil {
             case 7:return " bug_assigned_to is null";
             case 8:return " bug_status > 1";
             case 9:return " bug_status = 1";
-            case 10:return "";
-            case 11:return "";
+            case 10:return " bug_status = 1";
+            case 11:return " bugResolution = 6";
 
         }
         return "";

@@ -76,7 +76,7 @@ public class BurnServiceImpl implements BurnService {
         if (interval == null) {
             interval = 3;
         }
-        DateFormat format = new SimpleDateFormat("M/d");//日期格式"M/d"
+        DateFormat format = new SimpleDateFormat("\"M/d\"");//日期格式"M/d"
         Project project = projectManager.find(projectId);
         Date startData = project.getProjectBegin();
         Date endData = project.getProjectEnd();

@@ -22,6 +22,7 @@
 #end
 	#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/quality/bug/save?bugConfirmed=0" "post" {"class":"test","enctype":"multipart/form-data"})
 	#hiddenInput(hiddenInputName="bugId" hiddenInputValue=bug?.bugId)
+	#hiddenInput(hiddenInputName="bugFromCase" hiddenInputValue=fromCase)
 	<div style="width:100%">
     	<div class="infoContent">
     		<p class="titleName">提Bug</p>

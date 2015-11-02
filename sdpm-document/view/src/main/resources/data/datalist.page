@@ -1,5 +1,5 @@
-#setTinyItemCount(docpager.getTotalCount())
-#foreach(l:docpager.getRecords())
+#setTinyItemCount(pager.getTotalCount())
+#foreach(l:pager.getRecords())
 #@tr()
 	#@td()<input type="checkbox" value="${l?.docId}" name="idCheck">#end
 	#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/document/doc/view?docid=${l?.docId}">${l?.docId}</a>#end

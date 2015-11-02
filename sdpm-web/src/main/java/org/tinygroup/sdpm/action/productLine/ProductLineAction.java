@@ -13,6 +13,7 @@ import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.sdpm.productLine.service.ProductLineService;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
+import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
 import org.tinygroup.sdpm.project.service.inter.BuildService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.util.LogUtil;
@@ -178,7 +179,7 @@ public class ProductLineAction extends BaseController {
     }
 
     @RequestMapping("/find/{forword}")
-    public String find(@CookieValue("cookieProductLineId") String cookieProductLineId,
+    public String find(@CookieValue(value = "cookieProductLineId",defaultValue ="0") String cookieProductLineId,
             @PathVariable(  value = "forword") String forword,Integer productId,Integer productLineId, Model model, HttpServletRequest request) {
 
     	if (productLineId == null) {
@@ -241,14 +242,7 @@ public class ProductLineAction extends BaseController {
     @RequestMapping("/to")
     public String to(HttpServletRequest request,Model model) {
         List<ProductLine> list = ProductUtils.getProductLineList();
-//        if (list == null || list.size() == 0) {
-//            list = productLineService.findProductLineList(new ProductLine(), "productLineId", "desc");
-//            request.getSession().setAttribute("productLineList", list);
-//
-//            if (request.getSession().getAttribute("sessionProductLineId") == null) {
-//                request.getSession().setAttribute("sessionProductLineId", list.size() > 0 ? list.get(0).getProductLineId() : null);
-//            }
-//        }
+
         String query = request.getQueryString();
         if(StringUtil.isBlank(query)||!query.contains("status")){
             model.addAttribute("status",1);
@@ -283,26 +277,30 @@ public class ProductLineAction extends BaseController {
     @RequestMapping("/treeData")
     public List data(String check) {
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
-        Product product = new Product();
-        product.setDeleted(FieldUtil.DELETE_NO);
-        List<ProductAndLine> productLists = productService.getProductAndLine(product);
-        ProductLine productLine = new ProductLine();
-        productLine.setDeleted(FieldUtil.DELETE_NO);
-        List<ProductLine> productLines = productLineService.findList(productLine);
+
+        List<Product> productLists = new ArrayList<Product>();
+
+        List<ProductLine> productLines = ProductUtils.getProductLineListByUser();
         ProjectBuild projectBuild = new ProjectBuild();
         projectBuild.setBuildDeleted(FieldUtil.DELETE_NO_S);
         List<ProjectBuild> projectBuilds = buildService.findListBuild(projectBuild);
-        for(int i = 0; i<productLists.size();){
-            if(productLists.get(i).getProductLineId()!=null&&productLists.get(i).getProductLineId()>0&&!productLines.contains(productLists.get(i).getProductLineId())){
-                productLists.remove(productLists.get(i));
-                continue;
-            }
-            i++;
+
+        for(ProductLine line :productLines){
+            productLists.addAll(ProductUtils.getProductListByProductLineUser(String.valueOf(line.getProductLineId())));
         }
         for(int i = 0; i<projectBuilds.size();){
-            if(!productLines.contains(projectBuilds.get(i).getBuildProduct())){
-                productLists.remove(projectBuilds.get(i));
-                continue;
+            if(projectBuilds.get(i).getBuildProduct()!=null&&projectBuilds.get(i).getBuildProduct()>0){
+                boolean exist = false;
+                for(Product product1 : productLists) {
+                    if(projectBuilds.get(i).getBuildProduct().equals(product1.getProductId())){
+                        exist = true;
+                        break;
+                    }
+                }
+                if(!exist){
+                    projectBuilds.remove(projectBuilds.get(i));
+                    continue;
+                }
             }
             i++;
         }
@@ -314,7 +312,7 @@ public class ProductLineAction extends BaseController {
             map.put("open", true);
             list.add(map);
         }
-        for (ProductAndLine d : productLists) {
+        for (Product d : productLists) {
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("id", "v" + d.getProductId());
             map.put("pId", "p" + d.getProductLineId());
@@ -375,7 +373,7 @@ public class ProductLineAction extends BaseController {
             list.add(map);
             Product product = new Product();
             product.setProductLineId(productLine.getProductLineId());
-            productList = productService.findProductList(product);
+            productList = ProductUtils.getProductListByProductLineUser(String.valueOf(productLine.getProductLineId()));
         }
         for (Product d : productList) {
             Map<String, Object> map = new HashMap<String, Object>();

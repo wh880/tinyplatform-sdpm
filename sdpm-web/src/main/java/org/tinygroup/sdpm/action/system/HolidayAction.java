@@ -155,7 +155,7 @@ public class HolidayAction extends BaseController{
 	@RequestMapping("holiday/action")
 	public String holidayAction(SystemAction action,Model model){
 		  Holiday holiday = new Holiday();
-		    Pager<Holiday> historyPage = holidayService.findByPage(0,7,holiday,"holiday_date",false);
+		    Pager<Holiday> historyPage = holidayService.findByPage(0,7,holiday,"action_date",false);
 		    List<Holiday> histories = historyPage.getRecords();
 	 		model.addAttribute("action", histories);
 		return "/system/page/holiday/holiday-dynamic.pagelet";

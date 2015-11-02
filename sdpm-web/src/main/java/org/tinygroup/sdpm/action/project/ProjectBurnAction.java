@@ -34,7 +34,6 @@ public class ProjectBurnAction extends BaseController {
      * 6.根据间隔计算任务标记点，按小取整
      * 7.可能需要在新建项目的时候 添加燃尽图
      */
-
     /**
      * 燃尽图数据初始化
      *
@@ -48,15 +47,14 @@ public class ProjectBurnAction extends BaseController {
                            Integer choose, Integer interval, Model model) {
         if (projectId == null) {
             addMessage(model, "请选择项目来生成燃尽图！");
-            return "project/task/projectBurn.page";
+            return "project/task/projectBurn";
         }
         BurnDTO burnDTO = burnService.initBurn(projectId, interval);
         model.addAttribute("burn", burnDTO);
         model.addAttribute("interval", interval);
         model.addAttribute("choose", choose);
         model.addAttribute("projectId", projectId);
-
-        return "project/task/projectBurn.page";
+        return "project/task/projectBurn";
     }
 
     @ResponseBody

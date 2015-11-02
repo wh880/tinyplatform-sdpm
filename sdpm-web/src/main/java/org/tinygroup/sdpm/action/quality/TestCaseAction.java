@@ -424,12 +424,11 @@ public class TestCaseAction extends BaseController {
 				.findTestResultList(qualityTestResult);
 		List<CaseStepResult> caseStepResults = new ArrayList<CaseStepResult>();
 		Map<String, List<QualityCaseStep>> caseSteps= new HashMap<String, List<QualityCaseStep>>();
-		//未做完  进行结果处理
 		if(qualityTestResults.size()>0) {
 			caseSteps.put(String.valueOf(qualityTestResults.get(0).getTestResultId()), stepList);
 			caseStepResults = resolveResult(qualityTestResults.get(0));
 		}
-
+		model.addAttribute("caseId",caseId);
 		model.addAttribute("stepList", stepList);
 		model.addAttribute("caseSteps", caseSteps);
 		model.addAttribute("stepResults", caseStepResults);

@@ -24,6 +24,8 @@ import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
 import org.tinygroup.sdpm.system.dao.HolidayDao;
 import org.tinygroup.sdpm.system.dao.pojo.Holiday;
 import org.tinygroup.tinysqldsl.*;
+import org.tinygroup.tinysqldsl.base.Column;
+import org.tinygroup.tinysqldsl.base.Condition;
 import org.tinygroup.tinysqldsl.base.FragmentSql;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
@@ -154,13 +156,21 @@ public class HolidayDaoImpl extends TinyDslDaoSupport implements HolidayDao {
 		if(holiday==null){
 			holiday=new Holiday();
 		}
+		final Holiday finalHoliday = holiday;
 		return getDslTemplate().queryPager(start, limit, holiday, false, new SelectGenerateCallback<Holiday>() {
 			public Select generate(Holiday t) {
+				Column column = HOLIDAYTABLE.HOLIDAY_ID;
+				Condition condition = null;
+				if(orderArgs!=null&&orderArgs.length>0&&"action_date".equals(((Column)orderArgs[0].getOrderByElement().getExpression()).getColumnName())){
+					column= SYSTEM_ACTIONTABLE.ACTION_ID;
+					condition = SYSTEM_ACTIONTABLE.ACTION_OBJECT_TYPE.eq("holiday");
+				}
 				Select select = MysqlSelect.select(FragmentSql.fragmentSelect("holiday.*, system_action.action_action as actionAction ," +
 						"system_action.action_actor as actionActor," +
 						"system_action.action_date as actionDate")).from(HOLIDAYTABLE).join(leftJoin(
 						SYSTEM_ACTIONTABLE,SYSTEM_ACTIONTABLE.ACTION_OBJECT_ID.eq(HOLIDAYTABLE.HOLIDAY_ID))).where(
 				and(
+						condition,
 					HOLIDAYTABLE.HOLIDAY_NAME.eq(t.getHolidayName()),
 					HOLIDAYTABLE.HOLIDAY_ACCOUNT.eq(t.getHolidayAccount()),
 					HOLIDAYTABLE.HOLIDAY_DATE.eq(t.getHolidayDate()),
@@ -168,7 +178,7 @@ public class HolidayDaoImpl extends TinyDslDaoSupport implements HolidayDao {
 					HOLIDAYTABLE.HOLIDAY_DELETED.eq(t.getHolidayDeleted()),
 					HOLIDAYTABLE.COMPANY_ID.eq(t.getCompanyId()),
 					HOLIDAYTABLE.HOLIDAY_DETAIL.eq(t.getHolidayDetail()),
-					HOLIDAYTABLE.HOILIDAY_REMARK.eq(t.getHoilidayRemark())));
+					HOLIDAYTABLE.HOILIDAY_REMARK.eq(t.getHoilidayRemark()))).groupBy(column);
 			return addOrderByElements(select, orderArgs);
 			}
 		});

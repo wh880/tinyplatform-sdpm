@@ -9,4 +9,16 @@
     </parent>
     <artifactId>sdpm-quality-view</artifactId>
     <name>sdpm-quality-view</name>
+    <dependencies>
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>org.tinygroup.pieCharts</artifactId>
+            <version>${tiny_ui_version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>org.tinygroup.highCharts</artifactId>
+            <version>${tiny_ui_version}</version>
+        </dependency>
+    </dependencies>
 </project>
