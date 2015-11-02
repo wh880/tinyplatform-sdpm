@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.util.DateUtils;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
@@ -127,11 +128,13 @@ public class EffortAction extends BaseController{
 		return resultMap(true, "删除成功");
 	}
 	@RequestMapping("date")
-	public String findByDate(@RequestParam String effortAccount, int start, int limit, String order, String ordertype, @RequestParam(required = false, defaultValue = "0") int date, SystemEffort systemEffort, Model model) throws ParseException {
+	public String findByDate(int start, int limit, String order, String ordertype,
+							 @RequestParam(required = false, defaultValue = "0") Integer date,
+							 @RequestParam(value = "", required = false) String effortAccount,
+							 SystemEffort systemEffort, Model model) throws ParseException {
 		Date startDate = new Date();
 		Date endDate = new Date();
 		SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
-
 		Calendar c =Calendar.getInstance();
 		Pager<SystemEffort> pager = null ;
 		String dateStr=new SimpleDateFormat("yyyy-MM-dd").format(startDate);
@@ -155,32 +158,41 @@ public class EffortAction extends BaseController{
 			pager=effortService.findByPage(start, limit, systemEffort, order, asc);
 		}
 		if(date==3){
-
 			startDate = DateUtils.getFirstDayOfWeek(startDate);
 			endDate = DateUtils.getLastDayOfWeek(startDate);
+			startDate = DateUtils.getDateStart(startDate);
+			endDate = DateUtils.getDateEnd(endDate);
 			pager= effortService.findByDate(start, limit, systemEffort, startDate, endDate, order, asc);
-			
 		}
 		if(date==4){
 			startDate = DateUtils.addDays(DateUtils.getFirstDayOfWeek(startDate), -7);
 			endDate = DateUtils.addDays(DateUtils.getLastDayOfWeek(endDate), -7);
+			startDate = DateUtils.getDateStart(startDate);
+			endDate = DateUtils.getDateEnd(endDate);
 			pager = effortService.findByDate(start, limit, systemEffort, startDate, endDate, order, asc);
 			
 		}
 		if(date==5){
 			startDate = DateUtils.getFirstDayOfMonth(startDate);
 			endDate = DateUtils.getLastDayOfMonth(endDate);
+			startDate = DateUtils.getDateStart(startDate);
+			endDate = DateUtils.getDateEnd(endDate);
 			pager= effortService.findByDate(start, limit, systemEffort, startDate, endDate, order, asc);
 		}
 		if(date==6){
 			startDate = DateUtils.getFirstDayOfMonth(DateUtils.getLastDayOfLastMonth(startDate));
 			endDate = DateUtils.getLastDayOfLastMonth(endDate);
+			startDate = DateUtils.getDateStart(startDate);
+			endDate = DateUtils.getDateEnd(endDate);
 			pager = effortService.findByDate(start, limit, systemEffort, startDate, endDate, order, asc);
 		}
 		if(date==0){
 			pager=effortService.findByPage(start, limit, systemEffort, order, asc);//全部日志
 		}
-	    
+		if (!StringUtil.isBlank(effortAccount) && date == null) {
+			systemEffort.setEffortAccount(effortAccount);
+			pager = effortService.findByPage(start, limit, systemEffort, order, asc);
+		}
 		   model.addAttribute("effortPager", pager);
 	       return "project/note/tableData.pagelet"; 
 	}

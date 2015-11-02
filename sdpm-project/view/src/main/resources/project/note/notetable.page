@@ -59,7 +59,7 @@
             $("#noteTable").trigger("refresh");
         });
         $("select[name=orgUserAccount]").change(function (e) {
-            $("#noteTable").attr("data-url", actionUrl + "?effortAccount=" + $(this).attr("val"));
+            $("#noteTable").attr("data-url", actionUrl + "?effortAccount=" + $(this).val());
             $("#noteTable").trigger("refresh");
         });
     });
