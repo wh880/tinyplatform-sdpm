@@ -155,7 +155,7 @@ public class TestTaskAction extends BaseController {
         if(buildId!=null&buildId>0){
             int productId = buildService.findBuild(buildId).getBuildProduct();
             build.setBuildProduct(productId);
-            CookieUtils.setCookie(response,request,"qualityProductId",String.valueOf(productId));
+            CookieUtils.setCookie(response,"qualityProductId",String.valueOf(productId));
         }else{
             build.setBuildProduct(qualityProductId);
         }
