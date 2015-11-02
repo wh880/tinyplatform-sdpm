@@ -488,6 +488,8 @@ public class StoryAction extends BaseController {
     @RequestMapping("/close")
     public String close(SystemAction systemAction, ProductStory productStory) {
         ProductStory story = storyService.findStory(productStory.getStoryId());
+        productStory.setStoryClosedBy(UserUtils.getUserId());
+        productStory.setStoryClosedDate(new Date());
         productStory.setDeleted(FieldUtil.DELETE_YES);
         productStory.setStoryStatus("2");
         storyService.updateStory(productStory);

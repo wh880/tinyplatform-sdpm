@@ -56,7 +56,7 @@
 
 <div style="width:70%;float:left">
     #@div(divClass="infoContent")
-        <p class="titleName">产品描述</p>
+        <p class="titleName">需求描述</p>
 
         <div>
             ${storySpec?.storySpec}

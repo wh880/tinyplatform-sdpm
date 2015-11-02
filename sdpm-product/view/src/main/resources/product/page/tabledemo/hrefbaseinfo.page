@@ -68,16 +68,16 @@
         #@tbody()
             #@tr()
                 #@td()由谁创建#end
-                #@td()${UserUtils.getUserById(story?.storyOpenedBy)?.orgUserRealName}&nbsp;于&nbsp;${story?.storyOpenedDate?formatDate(story?.storyOpenedDate,'yyyy-MM-dd'):""}&nbsp;创建 #end
+                #@td()${story?.storyOpenedBy?UserUtils.getUserById(story?.storyOpenedBy)?.orgUserRealName:""}${story?.storyOpenedDate?"&nbsp;于&nbsp;"+formatDate(story?.storyOpenedDate,'yyyy-MM-dd'):""}&nbsp;创建 #end
             #end
 
             #@tr()
                 #@td()指派给#end
-                #@td()${UserUtils.getUserById(story?.storyAssignedTo)?.orgUserRealName}#end
+                #@td()${story?.storyAssignedTo?UserUtils.getUserById(story?.storyAssignedTo)?.orgUserRealName:""}#end
             #end
             #@tr()
                 #@td()由谁评审#end
-                #@td()${UserUtils.getUserById(story?.storyReviewedBy)?.orgUserRealName}#end
+                #@td()${story?.storyReviewedBy?UserUtils.getUserById(story?.storyReviewedBy)?.orgUserRealName:""}#end
             #end
             #@tr()
                 #@td()评审时间#end
@@ -85,7 +85,7 @@
             #end
             #@tr()
                 #@td()由谁关闭#end
-                #@td()${UserUtils.getUserById(story?.storyClosedBy)?.orgUserRealName}#end
+                #@td()${story?.storyClosedBy?UserUtils.getUserById(story?.storyClosedBy)?.orgUserRealName:""}#end
             #end
             #@tr()
                 #@td()关闭原因#end
@@ -93,7 +93,7 @@
             #end
             #@tr()
                 #@td()最后修改#end
-                #@td()${UserUtils.getUserById(story?.storyLastEditedBy)?.orgUserRealName}&nbsp;于&nbsp; ${story?.storyLastEditedDate?formatDate(story?.storyLastEditedDate,'yyyy-MM-dd'):""}&nbsp;修改#end
+                #@td()${story?.storyLastEditedBy?UserUtils.getUserById(story?.storyLastEditedBy)?.orgUserRealName:""} ${story?.storyLastEditedDate?"&nbsp;于&nbsp;"+formatDate(story?.storyLastEditedDate,'yyyy-MM-dd'):""}&nbsp;修改#end
             #end
         #end
     #end

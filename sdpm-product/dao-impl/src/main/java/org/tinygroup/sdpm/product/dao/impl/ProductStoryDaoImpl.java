@@ -267,7 +267,7 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 				@SuppressWarnings("rawtypes")
 				public Select generate(Serializable t) {
 				
-				return select(FragmentSql.fragmentSelect("product_story.*,p.product_name as productName,pl.plan_name as planName,m.module_title as moduleTitle"))
+				return select(FragmentSql.fragmentSelect("product_story.*,p.product_name as productName,pl.plan_name as planName,m.module_name as moduleTitle"))
 					.from(FragmentSql.fragmentFrom("product_story left join product p on p.product_id = product_story.product_id left join product_plan pl on pl.plan_id = product_story.plan_id left join system_module m on m.module_id = product_story.module_id"))
 					.where(PRODUCT_STORYTABLE.STORY_ID.eq(t));
 					}

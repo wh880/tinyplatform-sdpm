@@ -29,9 +29,16 @@
             if ($(this).val() == '1') {
                 repeat.hide();
                 subdivision.show();
+                $(function() {
+                    ajaxRead("${sid}", "storyChildStories", "storyId", "storyTitle", "/product/story/storyList?productId=${cookieProductId}&storyId=${story?.storyId}");
+                })
+
             } else if ($(this).val() == '2') {
                 subdivision.hide();
                 repeat.show();
+                $(function() {
+                    ajaxRead("${sid}", "storyDuplicateStory", "storyId", "storyTitle", "/product/story/storyList?productId=${cookieProductId}&storyId=${story?.storyId}");
+                })
             } else {
                 subdivision.hide();
                 repeat.hide();
@@ -64,11 +71,6 @@
             #@colLabel()<span class="c-red">*</span>细分需求：#end
             #@formControlDiv("col-3")
                 #@Tselect2F()
-                    <script type="text/javascript">
-                        $(function() {
-                            ajaxRead("${sid}", "storyChildStories", "storyId", "storyTitle", "/product/story/storyList?productId=${cookieProductId}&storyId=${story?.storyId}");
-                        })
-                    </script>
                     #@Tselect2Body("storyChildStories" "" {"class":"input-text select2","multiple":
                         "multiple"}) ##,"multiple":"multiple"加上为多选项
 
@@ -83,11 +85,6 @@
             #@colLabel()<span class="c-red">*</span>重复需求：#end
             #@formControlDiv("col-3")
                 #@Tselect2F()
-                    <script type="text/javascript">
-                        $(function() {
-                            ajaxRead("${sid}", "storyDuplicateStory", "storyId", "storyTitle", "/product/story/storyList?productId=${cookieProductId}&storyId=${story?.storyId}");
-                        })
-                    </script>
                     #@Tselect2Body("storyDuplicateStory" "" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 
                     #end

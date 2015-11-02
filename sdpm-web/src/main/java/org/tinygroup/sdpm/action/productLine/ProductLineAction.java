@@ -278,16 +278,12 @@ public class ProductLineAction extends BaseController {
     public List data(String check) {
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 
-        List<Product> productLists = new ArrayList<Product>();
-
+        List<Product> productLists = ProductUtils.getAllProductListByUser();
         List<ProductLine> productLines = ProductUtils.getProductLineListByUser();
         ProjectBuild projectBuild = new ProjectBuild();
         projectBuild.setBuildDeleted(FieldUtil.DELETE_NO_S);
         List<ProjectBuild> projectBuilds = buildService.findListBuild(projectBuild);
 
-        for(ProductLine line :productLines){
-            productLists.addAll(ProductUtils.getProductListByProductLineUser(String.valueOf(line.getProductLineId())));
-        }
         for(int i = 0; i<projectBuilds.size();){
             if(projectBuilds.get(i).getBuildProduct()!=null&&projectBuilds.get(i).getBuildProduct()>0){
                 boolean exist = false;
