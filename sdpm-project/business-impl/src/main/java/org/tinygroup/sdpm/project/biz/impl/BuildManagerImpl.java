@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
-import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
@@ -53,7 +52,7 @@ public class BuildManagerImpl implements BuildManager {
     }
 
     public int update(ProjectBuild build) {
-        return projectBuildDao.edits(build);
+        return projectBuildDao.edit(build);
     }
 
     public Integer delete(int id) {
@@ -63,7 +62,6 @@ public class BuildManagerImpl implements BuildManager {
         return projectBuildDao.edit(build);
     }
     public int[] batchDelBuildByIds(List<ProjectBuild> keys) {
-        //
         return projectBuildDao.batchUpdateDel(keys);
     }
 
@@ -89,7 +87,7 @@ public class BuildManagerImpl implements BuildManager {
     }
 
     public Pager<ProductStory> findnoBuildStory(int start, int limit,String condition, Integer buildId) {
-        return projectBuildDao.findnoBuildStorys(start,limit,condition,buildId);
+        return projectBuildDao.findNoBuildStorys(start, limit, condition, buildId);
     }
 
     public Pager<QualityBug> findnoBuildBug(int start, int limit,String condition, Integer buildId) {

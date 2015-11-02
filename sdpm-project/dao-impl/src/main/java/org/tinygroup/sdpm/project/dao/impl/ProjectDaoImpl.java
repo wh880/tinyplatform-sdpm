@@ -52,22 +52,23 @@ import static org.tinygroup.tinysqldsl.formitem.SubSelect.subSelect;
 @Repository
 public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
 
-    public Pager<Project> findPageWithStatistics(int start, int limit, Project project, final OrderBy... args) {
+    public Pager<Project> findPageWithStatistics(int start, int limit, Project project, final Integer[] projectIds,
+                                                 final OrderBy... args) {
         if (project == null) {
             project = new Project();
         }
-
         return getDslTemplate().queryPager(start, limit, project, false, new SelectGenerateCallback<Project>() {
             public Select generate(Project t) {
                 Select select = MysqlSelect.select(PROJECTTABLE.ALL,
-                        FragmentSelectItemSql.fragmentSelect("SUM(project_task.task_estimate) as estimate"),
-                        FragmentSelectItemSql.fragmentSelect("SUM(project_task.task_consumed) as consumed"),
+                        PROJECT_TASKTABLE.TASK_ESTIMATE.sum().as("estimate"),
+                        PROJECT_TASKTABLE.TASK_CONSUMED.sum().as("consumed"),
+//                        FragmentSelectItemSql.fragmentSelect("SUM(project_task.task_estimate) as estimate"),
+//                        FragmentSelectItemSql.fragmentSelect("SUM(project_task.task_consumed) as consumed"),
                         FragmentSelectItemSql.fragmentSelect("SUM(project_task.task_consumed)/(SUM(project_task.task_consumed)+SUM(project_task.task_left)) as percent")
-                ).from(PROJECTTABLE).join(
-                        Join.leftJoin(PROJECT_TASKTABLE,
-                                PROJECT_TASKTABLE.TASK_PROJECT.equal(PROJECTTABLE.PROJECT_ID)))
+                ).from(PROJECTTABLE)
+                        .join(Join.leftJoin(PROJECT_TASKTABLE, PROJECT_TASKTABLE.TASK_PROJECT.eq(PROJECTTABLE.PROJECT_ID)))
+                        .where(PROJECTTABLE.PROJECT_ID.in(projectIds))
                         .groupBy(PROJECTTABLE.PROJECT_ID);
-
                 return addOrderByElements(select, args);
             }
         });
@@ -126,7 +127,6 @@ public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
     }
 
     public int edit(Project project) {
-
         if (project == null || project.getProjectId() == null) {
             return 0;
         }
@@ -165,7 +165,7 @@ public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
         });
     }
 
-    public List<Project> query(Project project, final OrderBy... orderBies) {
+    public List<Project> query(Project project, final OrderBy... orderArgs) {
         if (project == null) {
             project = new Project();
         }
@@ -203,12 +203,12 @@ public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
                                 PROJECTTABLE.PROJECT_WHITE_LIST.eq(t.getProjectWhiteList()),
                                 PROJECTTABLE.PROJECT_ORDER.eq(t.getProjectOrder()),
                                 PROJECTTABLE.PROJECT_DELETED.eq(t.getProjectDeleted())));
-                return addOrderByElements(select, orderBies);
+                return addOrderByElements(select, orderArgs);
             }
         });
     }
 
-    public Pager<Project> queryPager(int start, int limit, Project project, final OrderBy... orderBies) {
+    public Pager<Project> queryPager(int start, int limit, Project project, final OrderBy... orderArgs) {
         if (project == null) {
             project = new Project();
         }
@@ -245,7 +245,50 @@ public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
                                 PROJECTTABLE.PROJECT_WHITE_LIST.eq(t.getProjectWhiteList()),
                                 PROJECTTABLE.PROJECT_ORDER.eq(t.getProjectOrder()),
                                 PROJECTTABLE.PROJECT_DELETED.eq(t.getProjectDeleted())));
-                return addOrderByElements(select, orderBies);
+                return addOrderByElements(select, orderArgs);
+            }
+        });
+    }
+
+
+    public Pager<Project> queryPagerByIds(int start, int limit, Project project, final OrderBy... orderArgs) {
+        if (project == null) {
+            project = new Project();
+        }
+        return getDslTemplate().queryPager(start, limit, project, false, new SelectGenerateCallback<Project>() {
+
+            public Select generate(Project t) {
+                Select select = MysqlSelect.selectFrom(PROJECTTABLE).where(
+                        and(
+                                PROJECTTABLE.PROJECT_IS_CAT.eq(t.getProjectIsCat()),
+                                PROJECTTABLE.PROJECT_CAT_ID.eq(t.getProjectCatId()),
+                                PROJECTTABLE.PROJECT_TYPE.eq(t.getProjectType()),
+                                PROJECTTABLE.PROJECT_NAME.eq(t.getProjectName()),
+                                PROJECTTABLE.PROJECT_CODE.eq(t.getProjectCode()),
+                                PROJECTTABLE.PROJECT_BEGIN.eq(t.getProjectBegin()),
+                                PROJECTTABLE.PROJECT_END.eq(t.getProjectEnd()),
+                                PROJECTTABLE.PROJECT_DAYS.eq(t.getProjectDays()),
+                                PROJECTTABLE.PROJECT_STATUS.eq(t.getProjectStatus()),
+                                PROJECTTABLE.PROJECT_STATGE.eq(t.getProjectStatge()),
+                                PROJECTTABLE.PROJECT_PRI.eq(t.getProjectPri()),
+                                PROJECTTABLE.PROJECT_DESC.eq(t.getProjectDesc()),
+                                PROJECTTABLE.PROJECT_OPENED_BY.eq(t.getProjectOpenedBy()),
+                                PROJECTTABLE.PROJECT_OPENED_DATE.eq(t.getProjectOpenedDate()),
+                                PROJECTTABLE.PROJECT_OPENED_VERSION.eq(t.getProjectOpenedVersion()),
+                                PROJECTTABLE.PROJECT_CLOSE_BY.eq(t.getProjectCloseBy()),
+                                PROJECTTABLE.PROJECT_CLOSE_DATE.eq(t.getProjectCloseDate()),
+                                PROJECTTABLE.PROJECT_CANCELED_BY.eq(t.getProjectCanceledBy()),
+                                PROJECTTABLE.PROJECT_CANCELED_DATE.eq(t.getProjectCanceledDate()),
+                                PROJECTTABLE.PROJECT_PO.eq(t.getProjectPo()),
+                                PROJECTTABLE.PROJECT_PM.eq(t.getProjectPm()),
+                                PROJECTTABLE.PROJECT_QD.eq(t.getProjectQd()),
+                                PROJECTTABLE.PROJECT_RD.eq(t.getProjectRd()),
+                                PROJECTTABLE.PROJECT_TEAM.eq(t.getProjectTeam()),
+                                PROJECTTABLE.PROJECT_ACL.eq(t.getProjectAcl()),
+                                PROJECTTABLE.PROJECT_WHITE_LIST.eq(t.getProjectWhiteList()),
+                                PROJECTTABLE.PROJECT_ORDER.eq(t.getProjectOrder()),
+                                PROJECTTABLE.PROJECT_DELETED.eq(t.getProjectDeleted())));
+                return addOrderByElements(select, orderArgs);
             }
         });
     }
@@ -376,10 +419,10 @@ public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
         });
     }
 
-    private Select addOrderByElements(Select select, OrderBy... orderBies) {
+    private Select addOrderByElements(Select select, OrderBy... orderArgs) {
         List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
-        for (int i = 0; orderBies != null && i < orderBies.length; i++) {
-            OrderByElement tempElement = orderBies[i].getOrderByElement();
+        for (int i = 0; orderArgs != null && i < orderArgs.length; i++) {
+            OrderByElement tempElement = orderArgs[i].getOrderByElement();
             if (tempElement != null) {
                 orderByElements.add(tempElement);
             }
@@ -400,8 +443,8 @@ public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
         return getDslSession().fetchList(select, Project.class);
     }
 
-    public List<Project> findByCondition(String condition) {
-        Select select = selectFrom(PROJECTTABLE).where(FragmentSql.fragmentCondition(condition));
+    public List<Project> findByIds(Integer... ids) {
+        Select select = selectFrom(PROJECTTABLE).where(PROJECTTABLE.PROJECT_ID.in(ids));
         return getDslSession().fetchList(select, Project.class);
     }
 

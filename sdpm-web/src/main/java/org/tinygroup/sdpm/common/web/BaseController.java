@@ -336,5 +336,4 @@ public abstract class BaseController {
             dateEnd.setTime(endDate.getTime());
         }
     }
-
 }

@@ -27,6 +27,7 @@ public interface ProjectDao extends BaseDao<Project, Integer> {
 
     /**
      * 获取项目列表，并附带统计信息
+     *
      * @param project
      * @return
      */
@@ -37,25 +38,27 @@ public interface ProjectDao extends BaseDao<Project, Integer> {
      * @param start
      * @param limit
      * @param project
+     * @param projectIds
      * @param args
      * @return
      */
-    Pager<Project> findPageWithStatistics(int start, int limit, final Project project, final OrderBy... args);
+    Pager<Project> findPageWithStatistics(int start, int limit, final Project project,
+                                          final Integer[] projectIds, final OrderBy... args);
 
     /**
      * 根据storyId查项目
+     *
      * @param storyId
      * @return
      */
     List<Project> getProjectByStoryId(Integer storyId);
 
     /**
-     * 根据自定义条件查询
-     *
-     * @param condition
+     * 根据多个主键查找
+     * @param ids
      * @return
      */
-    List<Project> findByCondition(String condition);
+    List<Project> findByIds(Integer... ids);
 
     /**
      * 查找用户所在团队所拥有的项目

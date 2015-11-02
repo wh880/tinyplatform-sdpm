@@ -22,10 +22,6 @@
 			#for(u:users)
 			 #@tinyOptionItem(u?.orgUserAccount)${u?.orgUserAccount}#end
 			#end
-			   
-##				#@tinyOptionItem("wll")wll#end
-##				#@tinyOptionItem("lal")lal#end
-##				#@tinyOptionItem("zch")zch#end
 			#end
 		#end
 		#@validateDiv("col-2")#end
@@ -37,16 +33,10 @@
 	                    #@Tselect2Body("effortObjectId" effort?.effortObjectId {"class":
 	                             "input-text select2"}) ##,"multiple":"multiple"加上为多选项
 ##	                                  <option value="0">/</option>
-	                                  #for(t:taskList) 
-	                                  
+                            #for(t:taskList)
+
 	                                  <option value="${t.taskId}">${t.taskName}</option>
 	                                  #end
-	                                   
-##	                                    <option value="1">1</option>
-##	                                    <option value="2">2</option>
-##	                                    <option value="3">3</option>
-##	                                    <option value="4">4</option>
-	                                    
 	                      #end
 	                   #@Tselect2Fix()
 	                     <a href="#" class="r">增加</a>
@@ -57,8 +47,8 @@
 		#@validateDiv("col-2")#end
 	#end
 	#if(!effort?.effortId)
-	
-	#@elementItem()
+
+        #@elementItem()
 		#@colLabel()日志日期：#end
 		#@formControlDiv("col-8")
 			 #@tinyDateInput(
@@ -93,16 +83,6 @@
 		#end
 		#@validateDiv("col-2")#end
 	#end
-
-
-##	#@elementItem()
-##		#@colLabel()备注：#end
-##		#@formControlDiv("col-8")
-##			#@Teditor("contentId" "contentName" {"initialFrameHeight":"702"})最后一个MAP参数为Ueditor的初始化参数 会自动带入 #end
-##		#end
-##		#@validateDiv("col-2")#end
-##	#end
-
 #end
 
 <script type="text/javascript">

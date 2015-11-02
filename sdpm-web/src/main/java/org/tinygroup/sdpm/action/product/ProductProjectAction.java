@@ -16,21 +16,21 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 @RequestMapping("/a/product/project")
 public class ProductProjectAction extends BaseController{
-	
+
 	@Autowired
 	private ProjectService projectService;
-	
+
 	@RequestMapping("/save")
-	public String save(@CookieValue("cookieProductId") String cookieProductId, Project project, Model model, HttpServletRequest request){
-		
-		project.setProjectId(Integer.parseInt(cookieProductId));
+	public String save(@CookieValue(value = "currentProjectId",defaultValue = "0") String currentProjectId, Project project, Model model, HttpServletRequest request){
+
+		project.setProjectId(Integer.parseInt(currentProjectId));
 		projectService.addProject(project);
-	
+
 		return "redirect:" + "/product/page/project/product-project-list.page";
-		
+
 		}
-	
-	
+
+
 	@RequestMapping("/list")
 	public String list(Project project,
 			@CookieValue("cookieProductId") String currentProjectId,
@@ -42,7 +42,7 @@ public class ProductProjectAction extends BaseController{
 		Pager<Project> pagerProject = projectService.findProjectPager(page, pagesize, project, order, ordertype);
 		model.addAttribute("project",pagerProject);
 		return "/product/data/allproduct-project.pagelet";
-		
+
 	}
-	
+
 }

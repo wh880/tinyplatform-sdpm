@@ -24,8 +24,8 @@ public class CookieUtils {
      * @param name  名称
      * @param value 值
      */
-    public static void setCookie(HttpServletResponse response, String name, String value) {
-        setCookie(response, name, value, -1);
+    public static void setCookie(HttpServletResponse response, HttpServletRequest request, String name, String value) {
+        setCookie(response, request, name, value, -1);
     }
 
     /**
@@ -35,9 +35,9 @@ public class CookieUtils {
      * @param value  值
      * @param maxAge 生存时间（单位秒）
      */
-    public static void setCookie(HttpServletResponse response, String name, String value, int maxAge) {
+    public static void setCookie(HttpServletResponse response, HttpServletRequest request, String name, String value, int maxAge) {
         Cookie cookie = new Cookie(name, null);
-        cookie.setPath("/");
+        cookie.setPath(request.getContextPath());
         cookie.setMaxAge(maxAge);
         try {
             cookie.setValue(URLEncoder.encode(value, "utf-8"));

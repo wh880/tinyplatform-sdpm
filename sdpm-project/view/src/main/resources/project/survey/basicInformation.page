@@ -60,7 +60,7 @@
                 #@tr()
                     #@td()相关产品#end
                     #@td()
-                        #foreach(p : productlist)
+                        #foreach(p : productList)
                             <a href="${TINY_CONTEXT_PATH+adminPath}/product/find/overview?productId=${p.productId}">${p.productName}
                                 、</a>
                         #end

@@ -109,7 +109,7 @@
                         #end
 
                         #@Tselect2Fix()
-                            <a href="${TINY_CONTEXT_PATH+adminPath}/project/preadd" class="r">增加</a>
+                            <a href="${TINY_CONTEXT_PATH+adminPath}/project/form" class="r">增加</a>
                             <a href="${TINY_CONTEXT_PATH+adminPath}/project/allProject">全部</a>#end
                         <script type="text/javascript">
 
@@ -170,6 +170,10 @@
                 <div class="col-2 text-r"><label>文档类型&nbsp</label></div>
                 <div class="col-4" id="doctype">
                     ${getDict("docType",doc?.docType)}
+                ##                                    #foreach(item : getDict("documentType"))
+                ##                    #labelRadio1(rId="typefile" rName="type" rValue=item.value labelText=item.text
+                ##                        "setType(this.value);")
+                ##                #end
                 </div>
             </div>
         #end

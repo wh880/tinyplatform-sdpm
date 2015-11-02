@@ -68,7 +68,7 @@
                         #end
                     #end
                     #@Tselect2Fix()
-                        <a href="${TINY_CONTEXT_PATH+adminPath}/project/preadd" class="r">增加</a>
+                        <a href="${TINY_CONTEXT_PATH+adminPath}/project/form" class="r">增加</a>
                         <a href="${TINY_CONTEXT_PATH+adminPath}/project/allProject">全部</a>#end
                     <script type="text/javascript">
                         $("#${sid}").on("change", function () {

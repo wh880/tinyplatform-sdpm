@@ -6,14 +6,13 @@
     #@navSelect2Body()
         #@navSelect2Data()
         <optgroup label="请选择项目">
-            #foreach(p:ProjectUtils.getProjectList())
-                <option value="${p.projectId}"${currentProjectId
-                ==p.projectId?" selected":""}>${p.projectName}</option>
+            #foreach(p:ProjectUtils.getUserProjectList())
+                <option value="${p.projectId}"${currentProjectId==p.projectId?" selected":""}>${p.projectName}</option>
             #end
         </optgroup>
         #end
         #@navSelect2Fix()
-        <a href="${TINY_CONTEXT_PATH+adminPath}/project/preadd">#buttonIcon(iconClass="icon-plus-sign")添加项目</a>
+        <a href="${TINY_CONTEXT_PATH+adminPath}/project/form">#buttonIcon(iconClass="icon-plus-sign")添加项目</a>
         #end
         #@dialog("myModal")
             #@dialogHeader()对话框标题#end
@@ -26,6 +25,7 @@
 <script type="text/javascript">
     $(function () {
         $("#sleProject-select").on("change", function (e) {
+            //$.cookie();
             window.location.href = "${TINY_CONTEXT_PATH+adminPath}/project/manage/select?projectId="
                     + $(this).val()
                     + "&oldUrl=${tinyRequestRequestURI.substring(9)}";

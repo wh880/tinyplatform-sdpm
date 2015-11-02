@@ -37,7 +37,7 @@ public interface ProjectStoryService {
      * @param condition
      * @return
      */
-    public Integer batchtDel(String condition);
+    public Integer batchDel(String condition);
 
     /**
      * 批量添加

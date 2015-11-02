@@ -12,40 +12,39 @@
         #@tabBodyCol("ptop-5")
             #@div(divClass="operationbar")
             <span class="f">
-				<table>
-                    <tr>
-                        <td style="width:360px">
-                            <a href="${TINY_CONTEXT_PATH+adminPath}/system/effort" class="active_btn">日历</a>
-                            <a val="1" class="selDate ${date==1?"active_btn":""}">今天</a>
-                            <a val="2" class="selDate ${date==2?"active_btn":""}">昨天</a>
-                            <a val="3" class="selDate ${date==3?"active_btn":""}">本周</a>
-                            <a val="4" class="selDate ${date==4?"active_btn":""}">上周</a>
-                            <a val="5" class="selDate ${date==5?"active_btn":""}">本月</a>
-                            <a val="6" class="selDate ${date==6?"active_btn":""}">上月</a>
-                            <a val="0" class="selDate ${date==0?"active_btn":""}">所有日志</a>
+            <table>
+                <tr>
+                    <td style="width:360px">
+                        <a href="${TINY_CONTEXT_PATH+adminPath}/system/effort" class="active_btn">日历</a>
+                        <a val="1" class="selDate ${date==1?" active_btn":""}">今天</a>
+                        <a val="2" class="selDate ${date==2?" active_btn":""}">昨天</a>
+                        <a val="3" class="selDate ${date==3?" active_btn":""}">本周</a>
+                        <a val="4" class="selDate ${date==4?" active_btn":""}">上周</a>
+                        <a val="5" class="selDate ${date==5?" active_btn":""}">本月</a>
+                        <a val="6" class="selDate ${date==6?" active_btn":""}">上月</a>
+                        <a val="0" class="selDate ${date==0?" active_btn":""}">所有日志</a>
 
-                        </td>
-                        <td style="float:left">
-                            <div style="width:150px">
-                                #@Tselect2F()
-                                    #@Tselect2Body(
-                                        "orgUserAccount" u?.orgUserAccount {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                                        #for(u:user)
+                    </td>
+                    <td style="float:left">
+                        <div style="width:150px">
+                            #@Tselect2F()
+                                #@Tselect2Body(
+                                    "orgUserAccount" u?.orgUserAccount {"class":
+                                    "input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                                    #foreach(u:user)
                                         <option value="${u?.orgUserAccount}">${u?.orgUserAccount}</option>
-                                        #end
-                                        
                                     #end
+
                                 #end
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-				</span>
+                            #end
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </span>
                 #div(divClass="clearfix")
             #end
-           #include("table.page")
-
-        
+            #include("table.page")
         #end
     #end
 #end
@@ -53,14 +52,14 @@
     $(".select2").select2();
 </script>
 <script>
-    $(function(){
+    $(function () {
         var actionUrl = $("#noteTable").attr("data-url");
-        $(".selDate").click(function(e){
+        $(".selDate").click(function (e) {
             $("#noteTable").attr("data-url", actionUrl + "?date=" + $(this).attr("val"));
             $("#noteTable").trigger("refresh");
         });
-        $("select[name=orgUserAccount]").change(function(e){
-            $("#noteTable").attr("data-url", actionUrl + "?effortAccount=" + $(this).attr("val"));
+        $("select[name=orgUserAccount]").change(function (e) {
+            $("#noteTable").attr("data-url", actionUrl + "?effortAccount=" + $(this).val());
             $("#noteTable").trigger("refresh");
         });
     });

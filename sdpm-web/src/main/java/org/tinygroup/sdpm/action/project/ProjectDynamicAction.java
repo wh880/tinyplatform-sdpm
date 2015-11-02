@@ -56,7 +56,12 @@ public class ProjectDynamicAction extends BaseController {
         Date startDate = new Date();
         Date endDate = new Date();
         if (!StringUtil.isBlank(selDate) && StringUtil.isBlank(teamUserId)) {
-            betweenDate(selDate, startDate, endDate);
+            if (selDate.equals("0")) {
+                startDate = null;
+                endDate = null;
+            } else {
+                betweenDate(selDate, startDate, endDate);
+            }
             if (startDate == null && endDate == null) {
                 Pager<SystemAction> actionPager = actionService.findSystemActionPager(start, limit, systemAction, order, ordertype);
                 model.addAttribute("actionPager", actionPager);

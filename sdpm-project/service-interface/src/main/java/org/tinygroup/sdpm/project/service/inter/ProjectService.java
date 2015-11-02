@@ -54,11 +54,11 @@ public interface ProjectService {
      *
      * @param start
      * @param limit
-     * @param ordertype
+     * @param orderType
      * @param order
      * @return
      */
-    Pager<Project> findProjects(Integer start, Integer limit, String order, String ordertype);
+    Pager<Project> findProjects(Integer start, Integer limit, String order, String orderType, Integer... ids);
 
     /**
      * 根据项目id查找
@@ -66,7 +66,7 @@ public interface ProjectService {
      * @param projectId
      * @return
      */
-    Project findById(int projectId);
+    Project findProjectById(Integer projectId);
 
     /**
      * 产品id查询所有关联的项目id，放入list
