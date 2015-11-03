@@ -42,7 +42,7 @@ public class ProjectDocAction extends BaseController {
 
     @RequestMapping("/findList")
     public String findList(Model model, HttpServletRequest request, HttpServletResponse response, Integer start, Integer limit, String order, String ordertype) {
-        Integer projectId = ProjectUtils.getCurrentProjectId(request,response);
+        Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
         if (projectId == null) {
             return redirectProjectForm();
         }

@@ -176,7 +176,7 @@
     <menu id="dynamic" parent-id="project" name="动态" href="/project/dynamic/index" icon="" sort="1" isShow="1">
     </menu>
 
-    <menu id="document" parent-id="project" name="文档" href="/project/manage/doc/index" icon="" sort="1" isShow="1">
+    <menu id="document" parent-id="project" name="文档" href="/project/doc/index" icon="" sort="1" isShow="1">
         <menu id="pro-document-delete" name="删除" href="/project/doc/del" icon="icon-remove" sort="10" isShow="1"
               scope="pro-document-op"/>
         <menu id="documentmenu" name="任务菜单" href="/project/document/index.page" icon="" sort="1" isShow="1">
