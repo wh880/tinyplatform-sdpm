@@ -8,10 +8,11 @@ import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
 import org.tinygroup.sdpm.project.service.inter.ProjectProductService;
-import org.tinygroup.sdpm.util.CookieUtils;
 import org.tinygroup.sdpm.util.ProductUtils;
+import org.tinygroup.sdpm.util.ProjectUtils;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,9 +26,12 @@ public class ProjectProductAction extends BaseController {
     private ProjectProductService projectProductService;
 
     @RequestMapping("/findLinkProduct")
-    public String findLinkProduct(Model model, HttpServletRequest request) {
+    public String findLinkProduct(Model model, HttpServletResponse response, HttpServletRequest request) {
         List<Product> productList = ProductUtils.getProductList();
-        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
+        Integer projectId = ProjectUtils.getCurrentProjectId(request,response);
+        if (projectId==null){
+            return redirectProjectForm();
+        }
         List<ProjectProduct> linkList = projectProductService.findProducts(projectId);
         List<String> linkIdList = new ArrayList<String>();
         for (ProjectProduct p : linkList) {
@@ -39,8 +43,11 @@ public class ProjectProductAction extends BaseController {
     }
 
     @RequestMapping("/save")
-    public String save(Integer[] array, HttpServletRequest request) {
-        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
+    public String save(Integer[] array, HttpServletResponse response,HttpServletRequest request) {
+        Integer projectId = ProjectUtils.getCurrentProjectId(request,response);
+        if (projectId==null){
+            return redirectProjectForm();
+        }
         projectProductService.addLink(array, projectId);
         return "redirect:" + adminPath + "/project/product/findLinkProduct";
     }

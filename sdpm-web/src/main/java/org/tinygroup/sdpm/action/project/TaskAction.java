@@ -37,7 +37,6 @@ import java.util.*;
 @RequestMapping("/a/project/task")
 public class TaskAction extends BaseController {
 
-    public static final String COOKIE_PROJECT_ID = "currentProjectId";
 
     @Autowired
     private TaskService taskService;
@@ -60,14 +59,16 @@ public class TaskAction extends BaseController {
 
     @RequiresPermissions(value = {"task", "project"}, logical = Logical.OR)
     @RequestMapping("index")
-    public String index(@CookieValue(required = false, value = COOKIE_PROJECT_ID) String currentProjectId,
+    public String index(@CookieValue(required = false, value = ProjectUtils.COOKIE_PROJECT_ID) String  currentProjectId,
                         HttpServletResponse response, String moduleId, String choose, Model model) {
         if (StringUtil.isBlank(currentProjectId)) {
-            Project project = ProjectUtils.getProject(null);
-            if (null != project && project.getProjectId() != null) {
+            Project project = ProjectUtils.getDefaultProject();
+            if (null != project) {
                 currentProjectId = String.valueOf(project.getProjectId());
-                CookieUtils.setCookie(response, COOKIE_PROJECT_ID, currentProjectId);
-                model.addAttribute(COOKIE_PROJECT_ID, currentProjectId);
+                CookieUtils.setCookie(response, ProjectUtils.COOKIE_PROJECT_ID, currentProjectId);
+                model.addAttribute(ProjectUtils.COOKIE_PROJECT_ID, currentProjectId);
+            } else {
+                return "redirect:" + adminPath + "/project/form";
             }
         }
         if (moduleId != null) {
@@ -89,19 +90,32 @@ public class TaskAction extends BaseController {
         return "error";
     }
 
+    /**
+     * 指派
+     *
+     * @param taskId
+     * @param model
+     * @param request
+     * @return
+     */
     @RequestMapping("/call")
     public String call(Integer taskId, Model model, HttpServletRequest request) {
-        if (taskId != null) {
-            Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
-            ProjectTask task = taskService.findTask(taskId);
-            List<ProjectTeam> team = teamService.findTeamByProjectId(projectId);
-            model.addAttribute("teamList", team);
-            model.addAttribute("task", task);
-            return "project/task/call.page";
-        }
-        return "error";
+        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, ProjectUtils.COOKIE_PROJECT_ID));
+        ProjectTask task = taskService.findTask(taskId);
+        List<OrgUser> team = userService.findTeamUserListByProjectId(projectId);
+        model.addAttribute("teamList", team);
+        model.addAttribute("task", task);
+        return "project/task/call";
     }
 
+    /**
+     * 保存指派
+     *
+     * @param task
+     * @param model
+     * @param commnet
+     * @return
+     */
     @RequestMapping(value = "/callsave", method = RequestMethod.POST)
     public String callSave(ProjectTask task, Model model, String commnet) {
         if (task.getTaskId() == null) {
@@ -121,7 +135,7 @@ public class TaskAction extends BaseController {
     @RequestMapping("/finish")
     public String finish(Integer taskId, Model model, HttpServletRequest request) {
         if (taskId != null) {
-            Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
+            Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, ProjectUtils.COOKIE_PROJECT_ID));
             List<ProjectTeam> teamList = teamService.findTeamByProjectId(projectId);
             ProjectTask task = taskService.findTask(taskId);
             model.addAttribute("task", task);
@@ -234,7 +248,7 @@ public class TaskAction extends BaseController {
     }
 
     @RequestMapping("/findPager")
-    public String findPager(@CookieValue(required = false, value = COOKIE_PROJECT_ID) String projectId,
+    public String findPager(@CookieValue(required = false, value = ProjectUtils.COOKIE_PROJECT_ID) String projectId,
                             Integer start, Integer limit, String statu, String choose, Model model,
                             HttpServletRequest request, String moduleId,
                             @RequestParam(required = false, defaultValue = "task_id") String order,
@@ -277,7 +291,7 @@ public class TaskAction extends BaseController {
     @RequestMapping("/save")
     public String save(ProjectTask task, @RequestParam(value = "file", required = false) MultipartFile file,
                        Model model, String[] taskMailtoArray, HttpServletRequest request, String comment) {
-        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
+        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, ProjectUtils.COOKIE_PROJECT_ID));
         task.setTaskProject(projectId);
         if (task.getTaskId() == null) {
             String taskMailTo = "";
@@ -330,10 +344,10 @@ public class TaskAction extends BaseController {
      */
     @RequestMapping("/preadd")
     public String preAdd(HttpServletRequest request, Model model, Integer storyId, String taskId) {
-        String cookie = CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID);
+        String cookie = CookieUtils.getCookie(request, ProjectUtils.COOKIE_PROJECT_ID);
         if (StringUtil.isBlank(cookie)) {
             addMessage(model, "请选择项目");
-            return "";
+
         }
         Integer projectId = Integer.valueOf(cookie);
         model.addAttribute("team", teamService.findTeamByProjectId(projectId));
@@ -446,7 +460,7 @@ public class TaskAction extends BaseController {
     }
 
     @RequestMapping("/preBatchAdd")
-    public String preBatchAdd(@CookieValue(required = false, value = COOKIE_PROJECT_ID) String projectId,
+    public String preBatchAdd(@CookieValue(required = false, value = ProjectUtils.COOKIE_PROJECT_ID) String projectId,
                               Model model, HttpServletRequest request) {
         model.addAttribute("teamList", teamService.findTeamByProjectId(Integer.parseInt(projectId)));
 
@@ -487,7 +501,7 @@ public class TaskAction extends BaseController {
         if (taskList.isEmpty()) {
             return "project/task/index.page";
         } else {
-            Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
+            Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, ProjectUtils.COOKIE_PROJECT_ID));
             taskService.batchAdd(taskList, projectId);
             return "project/task/index.page";
         }
@@ -501,14 +515,14 @@ public class TaskAction extends BaseController {
 
     @ResponseBody
     @RequestMapping("/gantt/init")
-    public List<Map<String, String>> ganttInit(@CookieValue(value = TaskAction.COOKIE_PROJECT_ID, required = false) String projectId,
+    public List<Map<String, String>> ganttInit(@CookieValue(value = ProjectUtils.COOKIE_PROJECT_ID, required = false) String projectId,
                                                HttpServletResponse response) {
         List<Map<String, String>> resultList = new ArrayList<Map<String, String>>();
         if (StringUtil.isBlank(projectId)) {
             Project project = ProjectUtils.getProject(projectId);
             if (project.getProjectId() != null) {
                 projectId = project.getProjectId().toString();
-                CookieUtils.setCookie(response, COOKIE_PROJECT_ID, projectId);
+                CookieUtils.setCookie(response, ProjectUtils.COOKIE_PROJECT_ID, projectId);
             } else {
                 return null;
             }
@@ -595,7 +609,7 @@ public class TaskAction extends BaseController {
     }
 
     @RequestMapping("/grouping")
-    public String grouping(@CookieValue(value = TaskAction.COOKIE_PROJECT_ID, required = false) String projectId,
+    public String grouping(@CookieValue(value = ProjectUtils.COOKIE_PROJECT_ID, required = false) String projectId,
                            String type, Model model) {
         Map<String, List<ProjectTask>> map = taskService.findGroup(DictUtil.getValue("groupType", type), Integer.parseInt(projectId));
         Map<String, List<ProjectTask>> mapDocument = new HashMap<String, List<ProjectTask>>();

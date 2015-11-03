@@ -62,8 +62,8 @@ public class ProjectStoryServiceImpl implements ProjectStoryService {
         return projectStoryManager.findList(projectStory);
     }
 
-    public Integer batchDel(String condition) {
-        return projectStoryManager.batchtDel(condition);
+    public Integer batchDel(Integer projectId, Integer[] storyIds) {
+        return projectStoryManager.batchDel(storyIds, projectId);
     }
 
     public int[] addLink(List<ProjectStory> projectStoryList) {

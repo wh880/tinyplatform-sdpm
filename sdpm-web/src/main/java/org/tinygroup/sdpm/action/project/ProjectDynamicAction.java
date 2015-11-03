@@ -13,11 +13,12 @@ import org.tinygroup.sdpm.project.dao.pojo.ProjectTeam;
 import org.tinygroup.sdpm.project.service.inter.TeamService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.service.inter.ActionService;
-import org.tinygroup.sdpm.util.CookieUtils;
 import org.tinygroup.sdpm.util.LogUtil;
+import org.tinygroup.sdpm.util.ProjectUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 import java.util.List;
 
@@ -35,16 +36,23 @@ public class ProjectDynamicAction extends BaseController {
     private UserService userService;
 
     @RequestMapping("/index")
-    public String index(HttpServletRequest request, Model model) {
-        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
+    public String index(HttpServletRequest request,HttpServletResponse response, Model model) {
+        Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
+        if (projectId == null) {
+            return redirectProjectForm();
+        }
         List<ProjectTeam> teamList = teamService.findTeamByProjectId(projectId);
         model.addAttribute("teamList", teamList);
         return "project/dynamic/index.page";
     }
 
     @RequestMapping("/find")
-    public String find(Integer start, Integer limit, String order, String ordertype, HttpServletRequest request, Model model, String selDate, String teamUserId) {
-        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
+    public String find(Integer start, Integer limit, String order, String ordertype,
+                       HttpServletRequest request, HttpServletResponse response, Model model, String selDate, String teamUserId) {
+        Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
+        if (projectId == null) {
+            return redirectProjectForm();
+        }
         SystemAction systemAction = new SystemAction();
         systemAction.setActionProject(projectId.toString());
         systemAction.setActionObjectType(LogUtil.LogOperateObject.PROJECT.toString());

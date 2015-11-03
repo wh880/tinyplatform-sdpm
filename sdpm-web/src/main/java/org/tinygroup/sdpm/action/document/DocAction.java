@@ -207,9 +207,9 @@ public class DocAction extends BaseController {
      */
     @RequiresPermissions(value = {"docedit"})
     @RequestMapping(value = "/edit")
-    public String editDoc(HttpServletRequest request, Model model, Integer docId) {
+    public String editDoc(Model model, Integer docId) {
         SystemModule module = new SystemModule();
-        DocumentDoc doc = new DocumentDoc();
+        DocumentDoc doc;
         module.setModuleType("doc");
         doc = docservice.findDocById(docId);
         List<Product> list1 = productService.findProductList(new Product());

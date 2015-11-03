@@ -28,10 +28,10 @@
                 #@Tselect2F()
                     #@Tselect2Body("taskAssignedTo" task?.taskAssignedTo {"class":
                         "input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                        <option value="">/</option>
+                        <option value=""></option>
                         #foreach(t : teamList)
                             <option value="${t?.teamUserId}">
-                                ${t?.teamUserId==null?"":UserUtils.getUserById(t?.teamUserId)?.orgUserRealName}
+                                ${t.orgUserRealName}
                             </option>
                         #end
                     #end
@@ -85,18 +85,15 @@
     #history(adminPath+"/system/action/ajax/history?actionObjectType=task&actionObjectId="+task?.taskId)
 </div>
 <script type="text/javascript">
-
     $(function () {
         var minTop = 96;
         var maxTop = 153;
         var currenttop = maxTop;
-
         function doscroll() {
             currenttop = maxTop - parseInt($(window).scrollTop());
             if (currenttop < minTop) currenttop = minTop;
             $(".rightpart").css("top", currenttop + "px");
         }
-
         var timer_scroll;
         $(window).scroll(function () {
             clearTimeout(timer_scroll);

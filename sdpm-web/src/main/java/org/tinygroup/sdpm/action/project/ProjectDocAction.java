@@ -12,10 +12,11 @@ import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
-import org.tinygroup.sdpm.util.CookieUtils;
+import org.tinygroup.sdpm.util.ProjectUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -34,10 +35,17 @@ public class ProjectDocAction extends BaseController {
     @Autowired
     private ProductService productService;
 
+    @RequestMapping("/index")
+    public String jumpDocIndex() {
+        return "project/document/index.page";
+    }
 
     @RequestMapping("/findList")
-    public String findList(Model model, HttpServletRequest request, Integer start, Integer limit, String order, String ordertype) {
-        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
+    public String findList(Model model, HttpServletRequest request, HttpServletResponse response, Integer start, Integer limit, String order, String ordertype) {
+        Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
+        if (projectId == null) {
+            return redirectProjectForm();
+        }
         DocumentDoc doc = new DocumentDoc();
         doc.setDocProject(projectId);
         Pager<DocumentDoc> docPager = docService.findDocRetPager(start, limit, doc, null, null, null, order, "asc".equals(ordertype) ? true : false);

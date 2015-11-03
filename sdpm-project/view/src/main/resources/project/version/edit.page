@@ -29,7 +29,7 @@
                 #@Tselect2Body(
                     "buildProduct" build?.buildProduct {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 
-                    #foreach(p : prodcutList)
+                    #foreach(p : productList)
                         <option value="${p.productId}">${p.productName}</option>
                     #end
                 #end

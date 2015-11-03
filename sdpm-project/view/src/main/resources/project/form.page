@@ -215,10 +215,19 @@
         return new Date(dateString[0], dateString[1] - 1, dateString[2]);
     }
     function computeEndDate(delta) {
-        var $bTime =
-        $("input[name=projectBegin]");
+        var $bTime =$("input[name=projectBegin]");
         if (!$bTime.val()) return false;
-        $("input[name=projectEnd]").val(moment($bTime.val(), "YYYY-MM-DD").add('days', delta).format('YYYY-MM-DD'));
+        $("input[name=projectEnd]").val(moment($bTime.val(), "YYYY-MM-DD").add('days', delta).format('YYYY-MM-DD')).trigger("blur");
+
     }
+    $("input[name=projectEnd]").on("blur",function(){
+        var bTime =$("input[name=projectBegin]").val();
+        var eTime =$("input[name=projectEnd]").val();
+        var $Days=$("input[name=projectDays]").
+        if (!bTime||!eTime){
+            $Days.val("");
+        }
+        $Days.val(getDateDiff(bTime,eTime)*24);
+    })
 
 </script>

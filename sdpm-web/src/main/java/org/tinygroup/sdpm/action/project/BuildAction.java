@@ -21,12 +21,13 @@ import org.tinygroup.sdpm.project.service.inter.ProjectStoryService;
 import org.tinygroup.sdpm.project.service.inter.TeamService;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
-import org.tinygroup.sdpm.util.CookieUtils;
 import org.tinygroup.sdpm.util.LogUtil;
+import org.tinygroup.sdpm.util.ProjectUtils;
 import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -59,8 +60,12 @@ public class BuildAction extends BaseController {
 
 
     @RequestMapping("/find")
-    public String find(Model model, Integer start, Integer limit, String order, String ordertype, HttpServletRequest request) {
-        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
+    public String find(Model model, Integer start, Integer limit, String order, String ordertype,
+                       HttpServletRequest request,HttpServletResponse response) {
+        Integer projectId = ProjectUtils.getCurrentProjectId(request,response);
+        if (projectId==null){
+            return redirectProjectForm();
+        }
         boolean asc = "asc".equals(ordertype) ? true : false;
         Pager<ProjectBuild> pager = buildService.findPager(projectId, start, limit, order, asc);
         model.addAttribute("buildPager", pager);
@@ -74,9 +79,11 @@ public class BuildAction extends BaseController {
 
 
     @RequestMapping("/edit")
-    public String edit(HttpServletRequest request,Integer projectId, Integer buildId, Model model) {
-        if(projectId==null&&projectId<1){
-            projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
+    public String edit(HttpServletRequest request, HttpServletResponse response,
+                       Integer projectId, Integer buildId, Model model) {
+        projectId = ProjectUtils.getCurrentProjectId(request, response);
+        if (projectId == null) {
+            return redirectProjectForm();
         }
         SystemModule module = new SystemModule();
         module.setModuleType("project");
@@ -84,17 +91,14 @@ public class BuildAction extends BaseController {
         List<Product> list = productService.findProductList(new Product(), "productId", "desc");
         List<ProjectTeam> teamList = teamService.findTeamByProjectId(projectId);
         model.addAttribute("teamList", teamList);
-        model.addAttribute("prodcutList", list);
+        model.addAttribute("productList", list);
         if (buildId != null && buildId != 0) {
             ProjectBuild build = buildService.findBuild(buildId);
             model.addAttribute("build", build);
-
         } else {
             model.addAttribute("build", null);
         }
-
-
-        return "project/version/edit.page";
+        return "project/version/edit";
     }
 
 
@@ -196,8 +200,12 @@ public class BuildAction extends BaseController {
     }
 
     @RequestMapping("/add")
-    public String add(HttpServletRequest request, Integer buildId, Model model, String commnet) {
-        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
+    public String add(HttpServletRequest request, HttpServletResponse response, Integer buildId, Model model, String commnet) {
+
+        Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
+        if (projectId == null) {
+            return redirectProjectForm();
+        }
         SystemModule module = new SystemModule();
         module.setModuleType("project");
         module.setModuleRoot(projectId);

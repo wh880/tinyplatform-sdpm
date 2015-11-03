@@ -112,4 +112,13 @@ public interface UserService {
      */
     List<OrgUser> findUserListByIds(String... userId);
 
+
+    /**
+     * 根据项目id查找团队成员list
+     *
+     * @param
+     * @return
+     */
+    List<OrgUser> findTeamUserListByProjectId(Integer projectId);
+
 }

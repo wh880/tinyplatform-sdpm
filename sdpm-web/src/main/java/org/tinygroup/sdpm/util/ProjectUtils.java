@@ -51,8 +51,7 @@ public class ProjectUtils {
                 // 私有项目，根据角色定义
                 userProjectList.addAll(listByTeamUserId);
             }
-            projectList = projectService.findList();
-            UserUtils.putCache(USER_CACHE_PROJECT_LIST, projectList);
+            UserUtils.putCache(USER_CACHE_PROJECT_LIST, userProjectList);
         }
         return userProjectList;
     }

@@ -13,7 +13,13 @@ import java.util.List;
  */
 public interface ProjectStoryManager {
 
-    public Integer batchtDel(String condition);
+    /**
+     * 批量硬删除
+     * @param storyIds
+     * @param projectId
+     * @return
+     */
+     Integer batchDel(Integer[] storyIds ,Integer projectId);
 
     /**
      * 批量关联

@@ -136,11 +136,14 @@ public class UserServiceImpl implements UserService {
 
     /**
      * 根据用户id数组查出用户list
-     *
-     * @param
+     * @param userId
      * @return
      */
     public List<OrgUser> findUserListByIds(String... userId) {
         return userManager.findUserListByIds(userId);
+    }
+
+    public List<OrgUser> findTeamUserListByProjectId(Integer projectId) {
+        return userManager.findTeamUserListByProjectId(projectId);
     }
 }
