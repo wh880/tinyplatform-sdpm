@@ -12,10 +12,11 @@ import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTeam;
 import org.tinygroup.sdpm.project.service.inter.TeamService;
-import org.tinygroup.sdpm.util.CookieUtils;
+import org.tinygroup.sdpm.util.ProjectUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -38,8 +39,12 @@ public class TeamAction extends BaseController {
     }
 
     @RequestMapping("find")
-    public String find(Model model, HttpServletRequest request, Integer start, Integer limit, String order, String ordertype) {
-        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
+    public String find(Model model, HttpServletRequest request, HttpServletResponse response,
+                       Integer start, Integer limit, String order, String ordertype) {
+        Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
+        if (projectId == null) {
+            return redirectProjectForm();
+        }
         ProjectTeam team = new ProjectTeam();
         team.setProjectId(projectId);
         Pager<ProjectTeam> pager = teamService.findPager(team, start, limit, order, ordertype);
@@ -48,8 +53,11 @@ public class TeamAction extends BaseController {
     }
 
     @RequestMapping("/preTeamManage")
-    public String preTeamManage(Model model, HttpServletRequest request) {
-        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
+    public String preTeamManage(Model model, HttpServletRequest request, HttpServletResponse response) {
+        Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
+        if (projectId == null) {
+            return redirectProjectForm();
+        }
         List<ProjectTeam> teamList = teamService.findTeamByProjectId(projectId);
         List<OrgUser> userList = userService.findUserList(new OrgUser());
         //删除用户列表中的团队成员
@@ -67,8 +75,11 @@ public class TeamAction extends BaseController {
     }
 
     @RequestMapping("/teamManageSave")
-    public String teamManageSave(Teams teams, HttpServletRequest request) {
-        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
+    public String teamManageSave(Teams teams, HttpServletRequest request, HttpServletResponse response) {
+        Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
+        if (projectId == null) {
+            return redirectProjectForm();
+        }
         List<ProjectTeam> updateList = new ArrayList<ProjectTeam>();
         List<ProjectTeam> addList = new ArrayList<ProjectTeam>();
 
