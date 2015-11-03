@@ -50,7 +50,6 @@ public class ProjectStoryAction extends BaseController {
         model.addAttribute("storys", story);
         //story.getTotalCount()
         return "project/demand/demandTableData.pagelet";
-
     }
 
     @ResponseBody

@@ -108,16 +108,6 @@
         $('#burnTab').addClass('active');
         $('#interval').change(function () {
             var projectID = ${projectId};
-
-##            $.ajax({
-##                url:'${TINY_CONTEXT_PATH+adminPath}/project/burn/init.pagelet',
-##                type:"get",
-##                data:{ projectID: projectID, choose: 6,interval: $(this).val()},
-##                dataType:"html",
-##                success:function(data) {
-##                    $("#tinypagecontent").html(data);
-##                }
-##            })
             $("#tinypagecontent").load('${TINY_CONTEXT_PATH+adminPath}/project/burn/init.pagelet', {
                 projectID: projectID,
                 choose: 6,

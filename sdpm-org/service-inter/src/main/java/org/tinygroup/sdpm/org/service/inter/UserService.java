@@ -112,11 +112,4 @@ public interface UserService {
      */
     List<OrgUser> findUserListByIds(String... userId);
 
-    /**
-     * 根据id查找用户名
-     * @param id
-     * @return
-     */
-    String getNameById(String id);
-
 }

@@ -9,6 +9,8 @@ import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.service.impl.ProjectServiceImpl;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +19,9 @@ import java.util.List;
  * Created by Hulk on 2015/10/29.
  */
 public class ProjectUtils {
+    public static final String COOKIE_PROJECT_ID = "currentProjectId";
+
+
     private static final String CMS_CACHE = "cmsCache";
     private static final String CMS_CACHE_PROJECT_LIST = "projectList";
     private static final String CMS_CACHE_PROJECT_ID_ = "project_id_";
@@ -74,6 +79,9 @@ public class ProjectUtils {
      * @return
      */
     protected static Boolean hasProjectByRole(String whiteList) {
+        if (StringUtil.isBlank(whiteList)){
+            return false;
+        }
         String[] split = whiteList.split(",");
         if (ArrayUtil.isEmptyArray(split)) {
             return false;
@@ -107,6 +115,7 @@ public class ProjectUtils {
      */
     public static void removeProjectList() {
         CacheUtils.remove(CMS_CACHE, CMS_CACHE_PROJECT_LIST);
+        UserUtils.removeCache(USER_CACHE_PROJECT_LIST);
     }
 
     /**
@@ -123,4 +132,41 @@ public class ProjectUtils {
         return project;
     }
 
+    /**
+     * 获得项目列表
+     */
+    public static Project getDefaultProject() {
+        List<Project> userProjectList = getUserProjectList();
+        if (CollectionUtil.isEmpty(userProjectList)) {
+            return null;
+        }
+        return userProjectList.get(0);
+    }
+
+    /**
+     * 获得项目ID 存在Cookies中
+     */
+    public static Integer getCurrentProjectId(HttpServletRequest request, HttpServletResponse response) {
+        Integer currentProjectId = null;
+        String cookie = CookieUtils.getCookie(request, COOKIE_PROJECT_ID);
+        if (!StringUtil.isBlank(cookie)) {
+            currentProjectId = Integer.valueOf(cookie);
+            return currentProjectId;
+        }
+        return initCurrentProjectId(currentProjectId, response);
+    }
+
+    /**
+     * 获得项目ID 存在Cookies中
+     */
+    public static Integer initCurrentProjectId(Integer currentProjectId, HttpServletResponse response) {
+        if (currentProjectId == null) {
+            Project defaultProject = getDefaultProject();
+            if (defaultProject != null) {
+                currentProjectId = defaultProject.getProjectId();
+                CookieUtils.setCookie(response, COOKIE_PROJECT_ID, currentProjectId.toString());
+            }
+        }
+        return currentProjectId;
+    }
 }

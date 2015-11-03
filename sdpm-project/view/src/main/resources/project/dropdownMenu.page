@@ -22,16 +22,16 @@
         #end
     #end
 #end
+
 <script type="text/javascript">
     $(function () {
         $("#sleProject-select").on("change", function (e) {
             var projectId = $.trim($(this).val());
-            console.log("test");
             if (!projectId){
                 layer.msg("请选择项目");
                 return false;
             }
-            $.cookie("projectId",projectId,{path:"/"});
+            $.cookie("currentProjectId",projectId,{path:"/"});
             window.location.reload();
 ##            window.location.href = "${TINY_CONTEXT_PATH+adminPath}/project/manage/select?projectId="
 ##                    + $(this).val()

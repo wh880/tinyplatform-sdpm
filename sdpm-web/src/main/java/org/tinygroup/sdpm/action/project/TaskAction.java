@@ -30,7 +30,8 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
- * Created by wangying14938 on 2015-09-22.任务
+ * 任务
+ * Created by wangying14938 on 2015-09-22.
  */
 @Controller
 @RequestMapping("/a/project/task")
@@ -63,7 +64,7 @@ public class TaskAction extends BaseController {
                         HttpServletResponse response, String moduleId, String choose, Model model) {
         if (StringUtil.isBlank(currentProjectId)) {
             Project project = ProjectUtils.getProject(null);
-            if (null != project&&project.getProjectId()!=null) {
+            if (null != project && project.getProjectId() != null) {
                 currentProjectId = String.valueOf(project.getProjectId());
                 CookieUtils.setCookie(response, COOKIE_PROJECT_ID, currentProjectId);
                 model.addAttribute(COOKIE_PROJECT_ID, currentProjectId);
@@ -76,8 +77,6 @@ public class TaskAction extends BaseController {
             model.addAttribute("choose", choose);
         }
         return "project/task/index.page";
-
-
     }
 
     @RequestMapping("/edit")
@@ -245,7 +244,9 @@ public class TaskAction extends BaseController {
             asc = true;
         }
         ProjectTask task = new ProjectTask();
-        task.setTaskProject(Integer.parseInt(projectId));
+        if (projectId != null) {
+            task.setTaskProject(Integer.parseInt(projectId));
+        }
         String moduleIds = "";
         if (!StringUtil.isBlank(moduleId)) {
             if (moduleId.contains("p")) {
@@ -318,11 +319,23 @@ public class TaskAction extends BaseController {
         return "project/task/index.page";
     }
 
-
+    /**
+     * 新增任务表单
+     *
+     * @param request
+     * @param model
+     * @param storyId
+     * @param taskId
+     * @return
+     */
     @RequestMapping("/preadd")
     public String preAdd(HttpServletRequest request, Model model, Integer storyId, String taskId) {
-        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
-
+        String cookie = CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID);
+        if (StringUtil.isBlank(cookie)) {
+            addMessage(model, "请选择项目");
+            return "";
+        }
+        Integer projectId = Integer.valueOf(cookie);
         model.addAttribute("team", teamService.findTeamByProjectId(projectId));
         SystemModule module = new SystemModule();
         module.setModuleType("task");
@@ -350,14 +363,13 @@ public class TaskAction extends BaseController {
         ProductStory story = new ProductStory();
         if (storyId != null) {
             story = productStoryService.findStory(storyId);
-
         }
         model.addAttribute("story", story);
 
         model.addAttribute("moduleList", moduleList);
         model.addAttribute("storyList", storyList);
 
-        return "project/task/add.page";
+        return "project/task/add";
     }
 
     @RequestMapping("/batchadd")
