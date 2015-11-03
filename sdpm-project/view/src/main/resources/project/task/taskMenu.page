@@ -1,5 +1,4 @@
 #import("/org/tinygroup/button/components/button_smart.component")
-
 #@div(divClass="operationbar")
 ##左侧按钮
 <span class="f">
@@ -9,7 +8,6 @@
     <a href="${TINY_CONTEXT_PATH+adminPath}/project/task/gantt?choose=4" "ml-5" class=${choose=="4"?"active_btn":""}>甘特图</a>
     <a href="${TINY_CONTEXT_PATH+adminPath}/project/burn/init?choose=6" "ml-5" class=${choose=="6"?"active_btn":""}>燃尽图</a>
     <a val="7" "ml-5" class="selChoose ${choose=="7"?"active_btn":""}">指派给我</a>
-
     <script>
         $(function () {
             var actionUrl = $("#taskTable").attr("data-url");
@@ -25,9 +23,7 @@
             });
         });
     </script>
-
 ##更多
-
     #include("/project/task/maplist.page")
 <div class="btn-group btnDropDown">
     <a id="dLabel" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -46,15 +42,11 @@
         $(function () {
             var actionUrl = $("#taskTable").attr("data-url");
             $(".projectMore").click(function (e) {
-//                if(actionUrl.indexOf("choose")>0){
-//                    actionUrl=actionUrl.substring(0,actionUrl.indexOf("choose")-1)+actionUrl.substring(actionUrl.indexOf("choose")+8);
-//                }
                 $("#taskTable").attr("data-url", actionUrl + "&statu=" + $(this).attr("val"));
                 $("#taskTable").trigger("refresh");
             });
         });
     </script>
-
 ##分组查看
     <div class="btn-group btnDropDown">
         <a id="dLabel" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -76,7 +68,6 @@
                  title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
           #end
 </span>
-
     #div(divClass="clearfix")
     #include("/project/mulsearch.page")
 #end

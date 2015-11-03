@@ -7,7 +7,7 @@
     #set(pagesize=records-(page-1)*pagesize)
 #end
 #setTinyItemCount(records)
-#for(t:taskPager?.records)
+#foreach(t:taskPager?.records)
 #@tr()
     #@td()<input type="checkbox" value="${t?.taskId}" name="idCheck">#end
     #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/project/task/findTask?taskId=${t?.taskId}">${t?.taskId}</a> #end
@@ -69,8 +69,7 @@
                        title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
                 #end
             #elseif(t.taskStatus == 6)
-                #if(m.id == "pro-task-call" || m.id == "pro-task-start" ||
-                m.id =="pro-task-finish" || m.id == "pro-task-close")
+                #if(m.id == "pro-task-call" || m.id == "pro-task-start" ||m.id =="pro-task-finish" || m.id == "pro-task-close")
                     <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>
                 #else
                     <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?taskId=${t?.taskId}"

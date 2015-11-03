@@ -58,7 +58,7 @@ public class ProjectAction extends BaseController {
     @RequestMapping("/form")
     public String form(Model model) {
         model.addAttribute("productList", ProductUtils.getAllProductListByUser());
-        return "project/form.page";
+        return "project/form";
     }
     /**
      * 批量删除
@@ -113,7 +113,7 @@ public class ProjectAction extends BaseController {
     public String save(Model model, HttpServletResponse response, HttpServletRequest request, Project project,
                        Integer[] linkProduct, Integer[] whiteList) {
         project.setProjectWhiteList(StringUtil.join(whiteList, ","));
-        Project tProject = projectService.addProject(project);
+        Project tProject =  projectService.addProject(project);
         projectProductService.addLink(linkProduct, tProject.getProjectId());
         CookieUtils.setCookie(response, ProjectUtils.COOKIE_PROJECT_ID, tProject.getProjectId().toString());
         ProjectUtils.removeProjectList();
@@ -121,13 +121,12 @@ public class ProjectAction extends BaseController {
     }
 
     @RequestMapping("/allProject")
-    public String jumpAllProject() {
-        return "project/list.page";
+    public String list() {
+        return "project/list";
     }
 
     @RequestMapping("/edit")
     public String form(Integer projectId, Model model) {
-        if (projectId != null) {
             Project project = projectService.findProjectById(projectId);
             List<ProjectTeam> teamList = teamService.findTeamByProjectId(project.getProjectId());
             model.addAttribute("teamList", teamList);
@@ -135,8 +134,6 @@ public class ProjectAction extends BaseController {
             List<Product> list = productService.findProductList(new Product(), "productId", "desc");
             model.addAttribute("prodcutList", list);
             return "project/survey/edit.page";
-        }
-        return "error";
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
