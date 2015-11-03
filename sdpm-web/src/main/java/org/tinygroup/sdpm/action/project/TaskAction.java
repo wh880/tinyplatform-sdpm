@@ -64,7 +64,7 @@ public class TaskAction extends BaseController {
                         HttpServletResponse response, String moduleId, String choose, Model model) {
         if (StringUtil.isBlank(currentProjectId)) {
             Project project = ProjectUtils.getProject(null);
-            if (null != project&&project.getProjectId()!=null) {
+            if (null != project && project.getProjectId() != null) {
                 currentProjectId = String.valueOf(project.getProjectId());
                 CookieUtils.setCookie(response, COOKIE_PROJECT_ID, currentProjectId);
                 model.addAttribute(COOKIE_PROJECT_ID, currentProjectId);
@@ -244,7 +244,9 @@ public class TaskAction extends BaseController {
             asc = true;
         }
         ProjectTask task = new ProjectTask();
-        task.setTaskProject(Integer.parseInt(projectId));
+        if (projectId != null) {
+            task.setTaskProject(Integer.parseInt(projectId));
+        }
         String moduleIds = "";
         if (!StringUtil.isBlank(moduleId)) {
             if (moduleId.contains("p")) {
@@ -319,6 +321,7 @@ public class TaskAction extends BaseController {
 
     /**
      * 新增任务表单
+     *
      * @param request
      * @param model
      * @param storyId
@@ -328,8 +331,8 @@ public class TaskAction extends BaseController {
     @RequestMapping("/preadd")
     public String preAdd(HttpServletRequest request, Model model, Integer storyId, String taskId) {
         String cookie = CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID);
-        if (StringUtil.isBlank(cookie)){
-            addMessage(model,"请选择项目");
+        if (StringUtil.isBlank(cookie)) {
+            addMessage(model, "请选择项目");
             return "";
         }
         Integer projectId = Integer.valueOf(cookie);

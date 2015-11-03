@@ -13,9 +13,14 @@
     <script>
         $(function () {
             var actionUrl = $("#taskTable").attr("data-url");
-            $(".selChoose").click(function (e) {
+
+            $(".selChoose").on("click",function () {
                 if ($("#taskTable").length > 0) {
+//                    if(actionUrl.indexOf("choose")>0){
+//                        actionUrl=actionUrl.substring(0,actionUrl.indexOf("choose")+7)+$(this).attr("val")+actionUrl.substring(actionUrl.indexOf("choose")+8);
+//                    }
                     $("#taskTable").attr("data-url", actionUrl + "&choose=" + $(this).attr("val"));
+//                    $("#taskTable").attr("data-url", actionUrl);
                     $(".selChoose").removeClass("active_btn");
                     $(this).addClass("active_btn");
                     $("#taskTable").trigger("refresh");
@@ -48,6 +53,9 @@
         $(function () {
             var actionUrl = $("#taskTable").attr("data-url");
             $(".projectMore").click(function (e) {
+//                if(actionUrl.indexOf("choose")>0){
+//                    actionUrl=actionUrl.substring(0,actionUrl.indexOf("choose")-1)+actionUrl.substring(actionUrl.indexOf("choose")+8);
+//                }
                 $("#taskTable").attr("data-url", actionUrl + "&statu=" + $(this).attr("val"));
                 $("#taskTable").trigger("refresh");
             });
