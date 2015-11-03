@@ -86,6 +86,15 @@ public class ProjectAction extends BaseController {
     }
 
     /**
+     * 所有项目列表
+     * @return
+     */
+    @RequestMapping("/list")
+    public String list() {
+        return "project/list";
+    }
+
+    /**
      * 数据表格List
      *
      * @param start
@@ -100,12 +109,12 @@ public class ProjectAction extends BaseController {
         Integer[] userProjectIds = ProjectUtils.getUserProjectIdList();
         Pager<Project> projectPager = projectService.findProjects(start, limit, order, ordertype, userProjectIds);
         Integer interval = 2;
-        if (projectPager != null) for (Project project : projectPager.getRecords()) {
+        if (projectPager != null){ for (Project project : projectPager.getRecords()) {
             BurnDTO burnDTO = burnService.initBurn(project.getProjectId(), interval);
             project.setBurnValue(burnDTO.getLeftValues());
-        }
+        }}
         model.addAttribute("projectPager", projectPager);
-        return "project/allProjectData.pagelet";
+        return "project/listData.pagelet";
     }
 
 
@@ -117,13 +126,9 @@ public class ProjectAction extends BaseController {
         projectProductService.addLink(linkProduct, tProject.getProjectId());
         CookieUtils.setCookie(response, ProjectUtils.COOKIE_PROJECT_ID, tProject.getProjectId().toString());
         ProjectUtils.removeProjectList();
-        return "redirect:" + adminPath + "/project/allProject";
+        return "redirect:" + adminPath + "/project/list";
     }
 
-    @RequestMapping("/allProject")
-    public String list() {
-        return "project/list";
-    }
 
     @RequestMapping("/edit")
     public String form(Integer projectId, Model model) {
@@ -157,7 +162,7 @@ public class ProjectAction extends BaseController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/delaysave", method = RequestMethod.POST)
+    @RequestMapping(value = "/delay", method = RequestMethod.POST)
     public Map<String, String> delaySave(Project project, String content) {
         Project oldProject = projectService.findProjectById(project.getProjectId());
         Integer res = projectService.updateProject(project);
@@ -265,11 +270,9 @@ public class ProjectAction extends BaseController {
         OrgUser productQd = userService.findUser(project.getProjectQd());
         //发布负责人
         OrgUser productRd = userService.findUser(project.getProjectRd());
-
         model.addAttribute("projectPm", projectPm);
         model.addAttribute("productQd", productQd);
         model.addAttribute("productRd", productRd);
-
         return "organization/others/projectUserBaseInfo.pagelet";
     }
 }

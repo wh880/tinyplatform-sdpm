@@ -63,7 +63,7 @@ public class ProjectUtils {
         if (CollectionUtil.isEmpty(userProjectList)) {
             return null;
         }
-        ArrayList<Integer> ids = new ArrayList<Integer>();
+        List<Integer> ids = Collections3.extractToList(userProjectList, "projectId");
         for (Project project : userProjectList) {
             ids.add(project.getProjectId());
         }
@@ -77,7 +77,7 @@ public class ProjectUtils {
      * @return
      */
     protected static Boolean hasProjectByRole(String whiteList) {
-        if (StringUtil.isBlank(whiteList)){
+        if (StringUtil.isBlank(whiteList)) {
             return false;
         }
         String[] split = whiteList.split(",");
@@ -85,7 +85,6 @@ public class ProjectUtils {
             return false;
         }
         List<OrgRole> userRoleList = UserUtils.getUserRoleList();
-
         if (CollectionUtil.isEmpty(userRoleList)) {
             return false;
         }
