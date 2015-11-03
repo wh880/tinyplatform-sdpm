@@ -133,12 +133,12 @@ public class ProjectAction extends BaseController {
     @RequestMapping("/edit")
     public String form(Integer projectId, Model model) {
             Project project = projectService.findProjectById(projectId);
-            List<ProjectTeam> teamList = teamService.findTeamByProjectId(project.getProjectId());
+            List<ProjectTeam> teamList = teamService.findTeamByProjectId(projectId);
             model.addAttribute("teamList", teamList);
             model.addAttribute("project", project);
             List<Product> list = productService.findProductList(new Product(), "productId", "desc");
             model.addAttribute("prodcutList", list);
-            return "project/survey/edit.page";
+            return "project/survey/edit";
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)

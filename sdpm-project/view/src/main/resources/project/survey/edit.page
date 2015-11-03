@@ -44,7 +44,7 @@
     #end
 #end
 
-#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/project/edit" "" {"class":"test"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/project/edit" "post" {"class":"test"})
     #hiddenInput(hiddenInputName="projectId" hiddenInputValue=project?.projectId)
     #@elementItem()
         #@sdpmItem("项目名称" "*")
@@ -81,9 +81,7 @@
     #@elementItem()
         #@sdpmItem("可用工作日")
         <div class="input-group">
-            <input name="projectDays" type="text" class="form-control" placeholder=""
-                   value=${project?.projectDays}
-                   aria-describedby="basic-addon2">
+            <input name="projectDays" type="text" class="form-control" placeholder="" value=${project?.projectDays} aria-describedby="basic-addon2">
             <span class="input-group-addon" id="basic-addon2">小时</span>
         </div>
         #end
@@ -91,10 +89,8 @@
     #@elementItem()
         #@sdpmItem("项目类型")
             #@Tselect2F()
-                #@Tselect2Body(
-                    "projectType" project?.projectType {"class":
-                    "input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                    #foreach(type:getDict("projectType"))
+                #@Tselect2Body("projectType" project?.projectType {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                    #foreach(type:getDict("projectStatus"))
                     <option value="${type?.value}">${type?.text}</option>
                     #end
                 #end
@@ -214,7 +210,7 @@
         #@sdpmItem("访问控制")
             #@formControlDiv("skin-minimal col-10")
                 #foreach(acl : getDict("projectAcl"))
-                    #@tinyRadio("projectAcl" acl.value "")${acl.text}#end
+                    #@tinyRadio("projectAcl" acl.value project?.projectAcl)${acl.text}#end
                 #end
             #end
         #end
