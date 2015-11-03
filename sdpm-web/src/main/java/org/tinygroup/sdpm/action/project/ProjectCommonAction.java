@@ -17,41 +17,19 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Controller
 @RequestMapping("/a/project/manage")
-public class BeforeAction extends BaseController {
+public class ProjectCommonAction extends BaseController {
     @Autowired
     private ProjectService projectService;
 
-    @RequestMapping("/demand/index")
-    public String jumpStoryIndex() {
-        return "project/demand/index.page";
-    }
-
     @RequestMapping("/bug/index")
     public String jumpBugIndex() {
-        return "project/bug/index.page";
-    }
-
-    @RequestMapping("/build/index")
-    public String jumpBuildIndex(Model model, HttpServletRequest request, HttpServletResponse response) {
-        Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
-        if (projectId == null) {
-            return redirectProjectForm();
-        }
-        Project project = projectService.findProjectById(projectId);
-        model.addAttribute("project", project);
-        return "project/version/index.page";
+        return "project/bug/index";
     }
 
     @RequestMapping("/test/index")
     public String jumpTestIndex() {
         return "project/test/index.page";
     }
-
-    @RequestMapping("/team/index")
-    public String jumpTeamIndex() {
-        return "project/team/index.page";
-    }
-
 
     @RequestMapping("/survey/index")
     public String jumpSurveyIndex(Model model, HttpServletRequest request, HttpServletResponse response,
