@@ -32,7 +32,7 @@
         #@colLabel()版本:#end
        #@formControlDiv("col-4")
 			#@Tselect2F()
-                #@Tselect2Body("buildId" "IN" {"class":"input-text select2","url":"/system/module/moduleList","ajaxType":"addrel","data":""}) ##,"multiple":"multiple"加上为多选项
+                #@Tselect2Body("buildId" "" {"class":"input-text select2","url":"/system/module/moduleList","ajaxType":"addrel","data":""}) ##,"multiple":"multiple"加上为多选项
                 #end
 
                 <script>

@@ -29,8 +29,6 @@
                 dataType: "json",
                 success: function (data) {
                     sele.empty();
-                    var em = "<option value='0' selected  >/</option>";
-                    sele.append(em);
                     for (var i = 0, l = data.length; i < l; i++) {
                         var em = "<option value='" + data[i][opKey] + "' >" + data[i][opvalue] + "</option>";
                         sele.append(em);

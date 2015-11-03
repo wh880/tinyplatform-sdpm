@@ -258,7 +258,9 @@ public class TaskAction extends BaseController {
             asc = true;
         }
         ProjectTask task = new ProjectTask();
-        task.setTaskProject(Integer.parseInt(projectId));
+        if (projectId != null) {
+            task.setTaskProject(Integer.parseInt(projectId));
+        }
         String moduleIds = "";
         if (!StringUtil.isBlank(moduleId)) {
             if (moduleId.contains("p")) {

@@ -13,17 +13,15 @@
     <script>
         $(function () {
             var actionUrl = $("#taskTable").attr("data-url");
-            $(".selChoose").click(function (e) {
-                if ($("#taskTable").length > 0) {
+            $(".selChoose").on("click",function () {
+                if (actionUrl) {
                     $("#taskTable").attr("data-url", actionUrl + "&choose=" + $(this).attr("val"));
                     $(".selChoose").removeClass("active_btn");
                     $(this).addClass("active_btn");
                     $("#taskTable").trigger("refresh");
                 } else {
-                    var url = "${TINY_CONTEXT_PATH+adminPath}/project/task/index?choose=" + $(this).attr("val");
-                    window.location.href = url;
+                    window.location.href = "../task/index?choose=" + $(this).attr("val");
                 }
-
             });
         });
     </script>
@@ -48,6 +46,9 @@
         $(function () {
             var actionUrl = $("#taskTable").attr("data-url");
             $(".projectMore").click(function (e) {
+//                if(actionUrl.indexOf("choose")>0){
+//                    actionUrl=actionUrl.substring(0,actionUrl.indexOf("choose")-1)+actionUrl.substring(actionUrl.indexOf("choose")+8);
+//                }
                 $("#taskTable").attr("data-url", actionUrl + "&statu=" + $(this).attr("val"));
                 $("#taskTable").trigger("refresh");
             });

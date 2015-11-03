@@ -43,7 +43,21 @@
              #if(m?.map?.type=="aModal")
                  #@aModal("#myModal" m.name "1000" "500" "btn-class" url)#buttonIcon(iconClass=m?.icon)${m?.name}#end
              #elseif(m?.map?.type=="icon-href")
-                 <a href="${TINY_CONTEXT_PATH +adminPath}${url}">#buttonIcon(iconClass=m.icon)${m?.name}</a>
+                 #if(m?.id=="demand-overview")
+                     #if(Integer.parseInt(story?.storyStatus)==0||Integer.parseInt(story?.storyStatus)==3)
+                         <a href="${TINY_CONTEXT_PATH +adminPath}${url}">#buttonIcon(iconClass=m.icon)${m?.name}</a>
+                     #else
+                         <span style="color:grey"><i class="${m?.icon}"></i>${m?.name}</span>
+                     #end
+                 #elseif(m?.id=="demand_close")
+                     #if(Integer.parseInt(story?.storyStatus)!=2)
+                         <a title="${m?.name}" class="ml-5" href="${TINY_CONTEXT_PATH +adminPath}${url}"><i class="${m?.icon}"></i>${m?.name}</a>
+                     #else
+                         <span style="color:grey"><i class="${m?.icon}"></i>${m?.name}</span>
+                     #end
+                 #else
+                     <a href="${TINY_CONTEXT_PATH +adminPath}${url}">#buttonIcon(iconClass=m.icon)${m?.name}</a>
+                 #end
              #elseif(m?.map?.type=="icon")
                  <a href="${TINY_CONTEXT_PATH +adminPath}${url}" title="${m?.name}">#buttonIcon(iconClass=m?.icon)</a>
              #elseif(m?.map?.type=="note")
@@ -77,7 +91,7 @@
 
         #foreach(f:file)
             #set(path=f?.filePathname)
-            <a href="${path}">${f?.fileTitle}.${f?.fileExtension}</a>&nbsp&nbsp&nbsp&nbsp
+            <a href="${TINY_CONTEXT_PATH+path}">${f?.fileTitle}.${f?.fileExtension}</a>&nbsp&nbsp&nbsp&nbsp
             #foreach(m:menuManager.getScopeMenus("product-file-op"))
                 #if(m.id == "story-file-edit")
                     #@aModal("#myModal" m.name "400" "120" "class-m" adminPath+m.href+"?fileId="+f?.fileId)
@@ -103,16 +117,29 @@
 
     <div style="text-align:center;margin:auto">
 <span>
-	   #foreach(m:menuManager?.getScopeMenus("pro_demand_log"))
-           &nbsp;&nbsp;
+	   #foreach(m:menuManager.getScopeMenus("pro_demand_log"))
            #set(url=eval(m?.href))
            #if(m?.map?.type=="aModal")
-               #@aModal("#myModal" m?.name "1000" "500" "btn-class" url)#buttonIcon(iconClass=m?.icon)${m?.name}#end
+               #@aModal("#myModal" m.name "1000" "500" "btn-class" url)#buttonIcon(iconClass=m?.icon)${m?.name}#end
            #elseif(m?.map?.type=="icon-href")
-               <a href="${TINY_CONTEXT_PATH +adminPath}${url}">#buttonIcon(iconClass=m?.icon)${m?.name}</a>
+               #if(m?.id=="demand-overview")
+                   #if(Integer.parseInt(story?.storyStatus)==0||Integer.parseInt(story?.storyStatus)==3)
+                       <a href="${TINY_CONTEXT_PATH +adminPath}${url}">#buttonIcon(iconClass=m.icon)${m?.name}</a>
+                   #else
+                       <span style="color:grey"><i class="${m?.icon}"></i>${m?.name}</span>
+                   #end
+               #elseif(m?.id=="demand_close")
+                   #if(Integer.parseInt(story?.storyStatus)!=2)
+                       <a title="${m?.name}" class="ml-5" href="${TINY_CONTEXT_PATH +adminPath}${url}"><i class="${m?.icon}"></i>${m?.name}</a>
+                   #else
+                       <span style="color:grey"><i class="${m?.icon}"></i>${m?.name}</span>
+                   #end
+               #else
+                   <a href="${TINY_CONTEXT_PATH +adminPath}${url}">#buttonIcon(iconClass=m.icon)${m?.name}</a>
+               #end
            #elseif(m?.map?.type=="icon")
                <a href="${TINY_CONTEXT_PATH +adminPath}${url}" title="${m?.name}">#buttonIcon(iconClass=m?.icon)</a>
-           #elseif(m.map.type=="note")
+           #elseif(m?.map?.type=="note")
            <a href="${url}" title="${m?.name}">#buttonIcon(iconClass=m?.icon)
            #end
        #end

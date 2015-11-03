@@ -390,7 +390,11 @@ public class TestCaseAction extends BaseController {
 	public List<SystemModule> getModule(SystemModule systemModule) {
 		if(!(systemModule.getModuleRoot()>0))return new ArrayList<SystemModule>();
 		systemModule.setModuleType("story");
-		return moduleService.findModules(systemModule);
+		List<SystemModule> result = moduleService.findModules(systemModule);
+		for(SystemModule module : result){
+			module.setModuleName(ModuleUtil.getPath(module.getModuleId(),"/",moduleService,null,false));
+		}
+		return result;
 	}
 
 	private String mergeResult(List<CaseStepResult> caseStepResults) {
