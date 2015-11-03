@@ -21,7 +21,6 @@ import java.util.List;
 public class ProjectUtils {
     public static final String COOKIE_PROJECT_ID = "currentProjectId";
 
-
     private static final String CMS_CACHE = "cmsCache";
     private static final String CMS_CACHE_PROJECT_LIST = "projectList";
     private static final String CMS_CACHE_PROJECT_ID_ = "project_id_";

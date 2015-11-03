@@ -27,15 +27,15 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/a/project/team")
-public class TeamAction extends BaseController {
+public class ProjectTeamAction extends BaseController {
     @Autowired
     private TeamService teamService;
     @Autowired
     private UserService userService;
 
-    @RequestMapping("manage")
-    public String manage(ProjectTeam team, Model model) {
-        return "";
+    @RequestMapping("/index")
+    public String jumpTeamIndex() {
+        return "project/team/index.page";
     }
 
     @RequestMapping("find")

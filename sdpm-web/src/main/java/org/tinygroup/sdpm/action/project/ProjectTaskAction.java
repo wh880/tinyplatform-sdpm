@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.tinygroup.commons.tools.StringUtil;
+import org.tinygroup.sdpm.action.project.dto.Tasks;
 import org.tinygroup.sdpm.action.project.util.TaskStatusUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.dict.util.DictUtil;
@@ -35,8 +36,7 @@ import java.util.*;
  */
 @Controller
 @RequestMapping("/a/project/task")
-public class TaskAction extends BaseController {
-
+public class ProjectTaskAction extends BaseController {
 
     @Autowired
     private TaskService taskService;
@@ -77,7 +77,7 @@ public class TaskAction extends BaseController {
         if (StringUtil.isBlank(choose)) {
             model.addAttribute("choose", choose);
         }
-        return "project/task/index.page";
+        return "project/task/index";
     }
 
     @RequestMapping("/edit")
