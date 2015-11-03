@@ -13,22 +13,15 @@
     <script>
         $(function () {
             var actionUrl = $("#taskTable").attr("data-url");
-
             $(".selChoose").on("click",function () {
-                if ($("#taskTable").length > 0) {
-//                    if(actionUrl.indexOf("choose")>0){
-//                        actionUrl=actionUrl.substring(0,actionUrl.indexOf("choose")+7)+$(this).attr("val")+actionUrl.substring(actionUrl.indexOf("choose")+8);
-//                    }
+                if (actionUrl) {
                     $("#taskTable").attr("data-url", actionUrl + "&choose=" + $(this).attr("val"));
-//                    $("#taskTable").attr("data-url", actionUrl);
                     $(".selChoose").removeClass("active_btn");
                     $(this).addClass("active_btn");
                     $("#taskTable").trigger("refresh");
                 } else {
-                    var url = "${TINY_CONTEXT_PATH+adminPath}/project/task/index?choose=" + $(this).attr("val");
-                    window.location.href = url;
+                    window.location.href = "../task/index?choose=" + $(this).attr("val");
                 }
-
             });
         });
     </script>
