@@ -81,8 +81,10 @@ public class ModuleUtil {
             for(SystemModule module : systemModules){
                 mergeModuleCondition(stringBuffer, module.getModuleId(), moduleService);
             }
+            stringBuffer.append(")");
+        }else{
+            return "";
         }
-        stringBuffer.append(")");
         return stringBuffer.toString();
     }
 
@@ -95,12 +97,10 @@ public class ModuleUtil {
         if(StringUtil.isBlank(module.getModulePath())||"0,".equals(module.getModulePath())){
             return module.getModuleName();
         }
-        String path = null;
+        String path = mergePath(division,module.getModulePath().substring(2),moduleService);
         if(openRoot){
-            path = mergePath(division,module.getModulePath().substring(2),moduleService);
             return root+division+("".equals(path)?"":path+division)+module.getModuleName();
         }
-        path = mergePath(division,module.getModulePath().substring(2),moduleService);
         return (StringUtil.isBlank(path)?"":path+division)+module.getModuleName();
     }
 

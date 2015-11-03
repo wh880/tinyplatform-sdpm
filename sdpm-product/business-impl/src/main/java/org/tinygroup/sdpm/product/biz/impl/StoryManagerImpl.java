@@ -28,7 +28,6 @@ public class StoryManagerImpl implements StoryManager {
 
     @Autowired(required = false)
     private ProductStoryDao productStoryDao;
-
     @Autowired
     private ProductStorySpecDao storySpecDao;
 
@@ -160,13 +159,18 @@ public class StoryManagerImpl implements StoryManager {
         return productStoryDao.findpNameBysId(storyId);
     }
 
-	public Pager<ProductStory> findPager(int start, int limit,ProductStory story, String condition, String columnName, boolean asc) {
-		
-		OrderBy orderBy = null;
+    public Pager<ProductStory> findProjectLinkedStory(int start, int limit, ProductStory story, String condition, String columnName, boolean asc) {
+        if(!StringUtil.isBlank(columnName)){
+            return productStoryDao.projectLinkedStory(start, limit, story, condition, new OrderBy(NameUtil.resolveNameDesc("productStory."+columnName), asc));
+        }
+        return productStoryDao.projectLinkedStory(start, limit, story, condition);
+    }
+
+    public Pager<ProductStory> findPager(int start, int limit,ProductStory story, String condition, String columnName, boolean asc) {
+
 		if(!StringUtil.isBlank(columnName)){
-			orderBy = new OrderBy(NameUtil.resolveNameDesc(columnName), asc);
+            return productStoryDao.complexQuery(start, limit, story, condition, new OrderBy(NameUtil.resolveNameDesc(columnName), asc));
 		}
-		
-		return productStoryDao.complexQuery(start, limit, story, condition, orderBy);
+		return productStoryDao.complexQuery(start, limit, story, condition);
 	}
 }

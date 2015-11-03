@@ -525,9 +525,6 @@ public class StoryAction extends BaseController {
 
         story.setProductId(Integer.parseInt(cookieProductId));
 
-        /*
-         * if (story.getModuleId()==-1) { story.setModuleId(null); }
-		 */
         String condition = StoryUtil.getStatusCondition(choose);
         if (story.getModuleId() != null && story.getModuleId() > 0) {
             SystemModule module = new SystemModule();
@@ -628,15 +625,15 @@ public class StoryAction extends BaseController {
                 if ("noWork".equals(type)) {
                     if(!StringUtil.isBlank(inCondition)){
                         condition = (StringUtil.isBlank(condition.trim()) ? " " : (condition + " and ")) + "product_story.story_id not in (" + inCondition + ") ";
-                        p = storyService.findPager(start,
-                                pagesize, story, condition, order,
-                                "asc".equals(ordertype) ? true : false);
                     }
+                    p = storyService.findProjectLinkedStory(start,
+                            pagesize, story, condition, order,
+                            "asc".equals(ordertype) ? true : false);
                 }else{
                     if(StringUtil.isBlank(inCondition)){
                         p = new Pager<ProductStory>(0,0,new ArrayList<ProductStory>());
                     }else {
-                        condition = (StringUtil.isBlank(condition.trim()) ? " " : (condition + " and ")) + "product_story.story_id in (" + inCondition + ") and product_story.story_stage=7";
+                        condition = (StringUtil.isBlank(condition.trim()) ? " " : (condition + " and ")) + "product_story.story_id in (" + inCondition + ")";
                         p = storyService.findPager(start,
                                 pagesize, story, condition, order,
                                 "asc".equals(ordertype) ? true : false);

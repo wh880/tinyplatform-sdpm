@@ -122,6 +122,6 @@ public interface StoryManager {
 	int countStatus(int productId,int status);
 
 	List<ProductStory> findProductNameByStoryId(Integer storyId);
-	
-	
+
+	Pager<ProductStory> findProjectLinkedStory(int start, int limit,ProductStory story, String condition, String columnName, boolean asc);
 }

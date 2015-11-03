@@ -12,6 +12,7 @@ import org.tinygroup.sdpm.product.dao.pojo.ProductRelease;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.product.service.ReleaseService;
+import org.tinygroup.sdpm.product.service.StoryService;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.sdpm.system.dao.pojo.ProfileType;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
@@ -43,6 +44,8 @@ public class ReleaseAction extends BaseController {
     private ProductService productService;
     @Autowired
     private ProfileService profileService;
+    @Autowired
+    private StoryService storyService;
 
     public static String storyIdUtils(String soure, String inde) {
         soure = soure.replaceAll(inde, "").replaceAll(",,", ",");
@@ -65,10 +68,7 @@ public class ReleaseAction extends BaseController {
 
     @RequestMapping("/save")
     public String save(@CookieValue(value = "cookieProductId",defaultValue = "0") String cookieProductId,ProductRelease productRelease, HttpServletRequest request, SystemAction systemAction, @RequestParam(value = "file", required = false) MultipartFile[] file, String[] title) throws IOException {
-
         productRelease.setProductId(Integer.parseInt(cookieProductId));
-
-
         ProductRelease release = releaseService.addRelease(productRelease);
         uploads(file, release.getReleaseId(), ProfileType.RELEASE, title);
         LogUtil.logWithComment(LogUtil.LogOperateObject.RELEASE
@@ -295,15 +295,18 @@ public class ReleaseAction extends BaseController {
         if (stories.length > 0 && stories != null) {
             ProductRelease release = releaseService.findRelease(stories[0].getReleaseId());
             String releaseStories = release == null ? "" : (release.getReleaseStories());
+            releaseStories = StringUtil.isBlank(releaseStories)?"":releaseStories;
             for (ProductStory story : stories) {
+                ProductStory productStory = storyService.findStory(story.getStoryId());
                 if (release != null && releaseStories != null) {
                     if ("".equals(releaseStories)) {
+                        productStory.setStoryStage("9");
                         releaseStories = releaseStories + story.getStoryId();
                     } else {
                         releaseStories = releaseStories + "," + story.getStoryId();
                     }
-
                 }
+                storyService.updateStory(productStory);
             }
             release.setReleaseStories(releaseStories);
             releaseService.updateRelease(release);
