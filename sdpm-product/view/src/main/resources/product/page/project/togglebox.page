@@ -189,7 +189,7 @@
 
                                     #@ulDropdownMenu(dropdownMenuClass="multi-level")
                                         #@dropdownsLi("dropdown-submenu")
-                                            #@dropdownA("firstMenu"　"javascript:void(0);")指派给#end
+                                            #@dropdownA("firstMenu" "javascript:void(0);")指派给#end
                                             #@dropdownsUl("dropdown-menu" "assignUl")
 
                                             #end
