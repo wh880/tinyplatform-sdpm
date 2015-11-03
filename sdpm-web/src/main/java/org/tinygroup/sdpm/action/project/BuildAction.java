@@ -401,8 +401,14 @@ public class BuildAction extends BaseController {
 
     @ResponseBody
     @RequestMapping("/buildList")
-    public List<ProjectBuild> findProjectBuild(ProjectBuild build) {
-
+    public List<ProjectBuild> findProjectBuild(ProjectBuild build,String from) {
+        if("product".equals(from)){
+            if(build.getBuildProduct()==null&&build.getBuildProduct()<1){
+                return new ArrayList<ProjectBuild>();
+            }else{
+                build.setBuildDeleted("0");
+            }
+        }
         List<ProjectBuild> list = buildService.findListBuild(build);
 
         return list;

@@ -3,7 +3,7 @@
     <application-properties>
         <file path="/sdpm.properties"></file>
         <property name="BASE_PACKAGE" value="org.tinygroup"/>
-        <property name="DEBUG_MODE" value="true"/>
+        <property name="DEBUG_MODE" value="false"/>
         <property name="TINY_THEME" value="default"/>
         <property name="wholeWidth" value="200pt"/>
         <property name="labelWidth" value="80pt"/>

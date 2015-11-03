@@ -15,6 +15,8 @@ import org.tinygroup.sdpm.product.service.ReleaseService;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.sdpm.system.dao.pojo.ProfileType;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
+import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;
+import org.tinygroup.sdpm.system.service.inter.ProfileService;
 import org.tinygroup.sdpm.util.LogUtil;
 import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
@@ -39,6 +41,8 @@ public class ReleaseAction extends BaseController {
     private ReleaseService releaseService;
     @Autowired
     private ProductService productService;
+    @Autowired
+    private ProfileService profileService;
 
     public static String storyIdUtils(String soure, String inde) {
         soure = soure.replaceAll(inde, "").replaceAll(",,", ",");
@@ -60,13 +64,13 @@ public class ReleaseAction extends BaseController {
     }
 
     @RequestMapping("/save")
-    public String save(@CookieValue("cookieProductId") String cookieProductId,ProductRelease productRelease, HttpServletRequest request, SystemAction systemAction, @RequestParam(value = "file", required = false) MultipartFile[] file, String[] title) throws IOException {
+    public String save(@CookieValue(value = "cookieProductId",defaultValue = "0") String cookieProductId,ProductRelease productRelease, HttpServletRequest request, SystemAction systemAction, @RequestParam(value = "file", required = false) MultipartFile[] file, String[] title) throws IOException {
 
         productRelease.setProductId(Integer.parseInt(cookieProductId));
 
 
         ProductRelease release = releaseService.addRelease(productRelease);
-        uploads(file, productRelease.getReleaseId(), ProfileType.RELEASE, title);
+        uploads(file, release.getReleaseId(), ProfileType.RELEASE, title);
         LogUtil.logWithComment(LogUtil.LogOperateObject.RELEASE
                 , LogUtil.LogAction.OPENED
                 , String.valueOf(release.getReleaseId())
@@ -77,7 +81,7 @@ public class ReleaseAction extends BaseController {
                 , null
                 , systemAction.getActionComment());
 
-        return "redirect:" + "/product/page/project/product-release.page";
+        return "redirect:" + "/a/product/release/content";
     }
 
     @RequestMapping("/update")
@@ -135,9 +139,14 @@ public class ReleaseAction extends BaseController {
 
     @RequestMapping("/find/{forwordPager}")
     public String find(@PathVariable(value = "forwordPager") String forwordPager, Integer releaseId, Model model) {
-
+        SystemProfile systemProfile = new SystemProfile();
+        systemProfile.setFileObjectType("release");
+        systemProfile.setFileDeleted("0");
+        systemProfile.setFileObjectId(releaseId);
+        List<SystemProfile> systemProfiles = profileService.find(systemProfile);
         ProductRelease release = releaseService.findRelease(releaseId);
         model.addAttribute("release", release);
+        model.addAttribute("file", systemProfiles);
         if ("relateStory".equals(forwordPager)) {
             return "/product/page/tabledemo/relation-release/releasebaseinfo.pagelet";
         }
@@ -285,7 +294,7 @@ public class ReleaseAction extends BaseController {
     public boolean RelateStory(@RequestBody ProductStory[] stories) {
         if (stories.length > 0 && stories != null) {
             ProductRelease release = releaseService.findRelease(stories[0].getReleaseId());
-            String releaseStories = release == null ? "" : release.getReleaseStories();
+            String releaseStories = release == null ? "" : (release.getReleaseStories());
             for (ProductStory story : stories) {
                 if (release != null && releaseStories != null) {
                     if ("".equals(releaseStories)) {

@@ -190,6 +190,7 @@ public class StoryAction extends BaseController {
     @RequestMapping("/ajax/plan")
     public List<ProductPlan> getPlan(ProductPlan productPlan) {
         if(productPlan.getProductId()==null||productPlan.getProductId()<1)return new ArrayList<ProductPlan>();
+        productPlan.setDeleted(0);
         List<ProductPlan> productPlans = planService.findPlanList(productPlan);
         return productPlans;
     }
@@ -567,7 +568,7 @@ public class StoryAction extends BaseController {
      * 计划、发布里的关联需求、未关联需求数据查找和搜索功能的实现
      *
      * @param relate
-     * @param page
+     * @param start
      * @param pagesize
      * @param story
      * @param choose
@@ -580,9 +581,9 @@ public class StoryAction extends BaseController {
      * @return
      */
     @RequestMapping("/search/{relate}")
-    public String storyListAction(@CookieValue String cookieProductId,
+    public String storyListAction(@CookieValue("cookieProductId") String cookieProductId,
             @PathVariable(value = "relate") String relate,
-            int page,
+            int start,
             int pagesize,
             String type,
             Integer releaseId,
@@ -596,9 +597,6 @@ public class StoryAction extends BaseController {
 
 
         story.setProductId(Integer.parseInt(cookieProductId));
-
-
-        // String condition = StoryUtil.getStatusCondition(choose, request);
 
         String condition = "";
         if (searchInfos != null) {
@@ -618,32 +616,36 @@ public class StoryAction extends BaseController {
                     + story.getPlanId();
             story.setPlanId(null);
         }
-
+        Pager<ProductStory> p = storyService.findPager(start,
+                pagesize, story, condition, order,
+                "asc".equals(ordertype) ? true : false);
+        model.addAttribute("storyList", p);
         if (releaseId != null && releaseId > 0) {
             ProductRelease release = releaseService.findRelease(releaseId);
             if (release != null) {
                 String releaseStories = release.getReleaseStories();
-                if (releaseStories != null) {
-                    if ("alWork".equals(type)) {
-                        if ("".equals(releaseStories)) {
-                            condition = (StringUtil.isBlank(condition.trim()) ? " " : (condition + " and ")) + "product_story.story_id is null ";
-                        } else {
-                            condition = (StringUtil.isBlank(condition.trim()) ? " " : (condition + " and ")) + "product_story.story_id in (" + releaseStories + ") and product_story.story_status=7";
-                        }
-
+                String inCondition = StringUtil.isBlank(releaseStories)?"":releaseStories;
+                if ("noWork".equals(type)) {
+                    if(!StringUtil.isBlank(inCondition)){
+                        condition = (StringUtil.isBlank(condition.trim()) ? " " : (condition + " and ")) + "product_story.story_id not in (" + inCondition + ") ";
+                        p = storyService.findPager(start,
+                                pagesize, story, condition, order,
+                                "asc".equals(ordertype) ? true : false);
                     }
-                    if ("noWork".equals(type) && !StringUtil.isBlank(releaseStories)) {
-                        condition = (StringUtil.isBlank(condition.trim()) ? " " : (condition + " and ")) + "product_story.story_id not in (" + releaseStories + ") ";
+                }else{
+                    if(StringUtil.isBlank(inCondition)){
+                        p = new Pager<ProductStory>(0,0,new ArrayList<ProductStory>());
+                    }else {
+                        condition = (StringUtil.isBlank(condition.trim()) ? " " : (condition + " and ")) + "product_story.story_id in (" + inCondition + ") and product_story.story_stage=7";
+                        p = storyService.findPager(start,
+                                pagesize, story, condition, order,
+                                "asc".equals(ordertype) ? true : false);
                     }
                 }
+                model.addAttribute("storyList", p);
             }
+
         }
-
-
-        Pager<ProductStory> p = storyService.findPager(pagesize * (page - 1),
-                pagesize, story, condition, order,
-                "asc".equals(ordertype) ? true : false);
-        model.addAttribute("storyList", p);
 
         if ("reRelateStory".equals(relate)) {
             return "/product/data/plan/product-al-req-data.pagelet";
@@ -764,6 +766,7 @@ public class StoryAction extends BaseController {
             storyId = story.getStoryId();
             story.setStoryId(null);
         }
+        story.setDeleted(0);
         List<ProductStory> list = storyService.findStoryList(story);
         if(storyId!=null){
             for(ProductStory productStory : list){
