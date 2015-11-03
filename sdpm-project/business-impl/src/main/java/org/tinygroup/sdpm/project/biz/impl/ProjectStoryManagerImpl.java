@@ -28,8 +28,8 @@ public class ProjectStoryManagerImpl implements ProjectStoryManager {
     @Autowired
     private ProjectProductDao projectProductDao;
 
-    public Integer batchtDel(String condition) {
-        return projectStoryDao.batchtDel(condition);
+    public Integer batchDel(Integer[] storyIds, Integer projectId) {
+        return projectStoryDao.batchDel(projectId, storyIds);
     }
 
     public int[] linkStory(List<ProjectStory> projectStoryList) {
@@ -78,7 +78,7 @@ public class ProjectStoryManagerImpl implements ProjectStoryManager {
     public Pager<ProjectStory> findPager(int start, int limit, ProjectStory story, String statusCondition, SearchInfos conditions,
                                          String groupOperate, String columnName, boolean asc) {
         String condition = conditions != null ? SqlUtil.toSql(conditions.getInfos(), groupOperate) : "";
-        condition = condition != null && !"".equals(condition) ? (statusCondition != null&& !"".equals(statusCondition) ? condition + " and "
+        condition = condition != null && !"".equals(condition) ? (statusCondition != null && !"".equals(statusCondition) ? condition + " and "
                 + statusCondition : condition)
                 : statusCondition;
         OrderBy orderBy = null;

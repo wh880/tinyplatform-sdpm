@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.commons.tools.StringUtil;
-import org.tinygroup.sdpm.action.project.TaskAction;
-import org.tinygroup.sdpm.action.quality.actionBean.CaseStepResult;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SqlUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
@@ -24,13 +22,14 @@ import org.tinygroup.sdpm.project.service.inter.BuildService;
 import org.tinygroup.sdpm.project.service.inter.ProjectProductService;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.sdpm.project.service.inter.TeamService;
-import org.tinygroup.sdpm.quality.dao.pojo.*;
-import org.tinygroup.sdpm.quality.service.inter.*;
+import org.tinygroup.sdpm.quality.dao.pojo.QualityTestCase;
+import org.tinygroup.sdpm.quality.dao.pojo.QualityTestRun;
+import org.tinygroup.sdpm.quality.dao.pojo.QualityTestTask;
+import org.tinygroup.sdpm.quality.service.inter.TestCaseService;
+import org.tinygroup.sdpm.quality.service.inter.TestRunService;
+import org.tinygroup.sdpm.quality.service.inter.TestTaskService;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
-import org.tinygroup.sdpm.util.CookieUtils;
-import org.tinygroup.sdpm.util.LogUtil;
-import org.tinygroup.sdpm.util.ModuleUtil;
-import org.tinygroup.sdpm.util.UserUtils;
+import org.tinygroup.sdpm.util.*;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -43,7 +42,6 @@ import java.util.Map;
 /**
  * Created by chenpeng15668 on 2015-9-24
  */
-
 @Controller
 @RequestMapping("/a/quality/version")
 public class TestTaskAction extends BaseController {
@@ -68,7 +66,6 @@ public class TestTaskAction extends BaseController {
     private TeamService teamService;
     @Autowired
     private ModuleService moduleService;
-
 
     @RequestMapping("")
     public String form(HttpServletRequest request, String get, Model model) {
@@ -98,11 +95,15 @@ public class TestTaskAction extends BaseController {
     }
 
     @RequestMapping("/project/findPager")
-    public String findPager(@CookieValue(required = false, value = TaskAction.COOKIE_PROJECT_ID) String projectId,
-                            Integer start, Integer limit, String order, String ordertype, String status, Model model) {
+    public String findPager(HttpServletResponse response, HttpServletRequest request,
+                            Integer start, Integer limit, String order, String ordertype, Model model) {
+        Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
+        if (projectId == null) {
+            return redirectProjectForm();
+        }
         QualityTestTask testTask = new QualityTestTask();
         testTask.setDeleted(0);
-        testTask.setProjectId(Integer.parseInt(projectId));
+        testTask.setProjectId(projectId);
         boolean asc = true;
         if ("desc".equals(ordertype)) {
             asc = false;
@@ -149,14 +150,14 @@ public class TestTaskAction extends BaseController {
     }
 
     @RequestMapping("/add")
-    public String add(@CookieValue(value = "qualityProductId",defaultValue = "0") Integer qualityProductId,Integer buildId, Model model, HttpServletRequest request,HttpServletResponse response) {
+    public String add(@CookieValue(value = "qualityProductId", defaultValue = "0") Integer qualityProductId, Integer buildId, Model model, HttpServletRequest request, HttpServletResponse response) {
         List<Project> projects = projectService.findProjectList(null, null, null);
         ProjectBuild build = new ProjectBuild();
-        if(buildId!=null&buildId>0){
+        if (buildId != null & buildId > 0) {
             int productId = buildService.findBuild(buildId).getBuildProduct();
             build.setBuildProduct(productId);
-            CookieUtils.setCookie(response,"qualityProductId",String.valueOf(productId));
-        }else{
+            CookieUtils.setCookie(response, "qualityProductId", String.valueOf(productId));
+        } else {
             build.setBuildProduct(qualityProductId);
         }
 
@@ -345,9 +346,10 @@ public class TestTaskAction extends BaseController {
     public String toTaskEnd() {
         return "/testManagement/page/versionEnd.pagelet";
     }
+
     @ResponseBody
     @RequestMapping("/taskEnd")
-    public Map taskEnd(QualityTestTask testTask,String actionComment) {
+    public Map taskEnd(QualityTestTask testTask, String actionComment) {
         QualityTestTask qualityTestTask = testTaskService.findById(testTask.getTestversionId());
         testTask.setTesttaskStatus("3");
         testTaskService.updateTestTask(testTask);

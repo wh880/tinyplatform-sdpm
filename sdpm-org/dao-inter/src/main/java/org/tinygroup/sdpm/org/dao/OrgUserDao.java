@@ -20,7 +20,6 @@ import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.tinysqldsl.Pager;
-import org.tinygroup.tinysqldsl.base.Condition;
 
 import java.util.List;
 
@@ -33,5 +32,11 @@ public interface OrgUserDao extends BaseDao<OrgUser,String> {
 
     List<OrgUser> getByKeys(String... pk);
 
-    Pager<OrgUser> queryPagerBy(int start, int limit, OrgUser orgUser, Condition condition1);
+    /**
+     * 根据项目id查找团队成员list
+     *
+     * @param
+     * @return
+     */
+    List<OrgUser> getTeamUserByProjectId(Integer projectId);
 }

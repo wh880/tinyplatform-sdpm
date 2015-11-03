@@ -115,5 +115,20 @@ public interface UserManager {
      */
     String getNameById(String id);
 
+    /**
+     * 根据用户id数组查出用户list
+     *
+     * @param
+     * @return
+     */
     List<OrgUser> findUserListByIds(String... userId);
+
+    /**
+     * 根据项目id查找团队成员list
+     *
+     * @param
+     * @return
+     */
+    List<OrgUser> findTeamUserListByProjectId(Integer projectId);
+
 }

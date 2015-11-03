@@ -51,6 +51,16 @@ public class ProjectAction extends BaseController {
     private UserService userService;
 
     /**
+     * 新增项目表单
+     * @param model
+     * @return
+     */
+    @RequestMapping("/form")
+    public String form(Model model) {
+        model.addAttribute("productList", ProductUtils.getAllProductListByUser());
+        return "project/form.page";
+    }
+    /**
      * 批量删除
      * @param projectIds
      * @return
@@ -98,11 +108,6 @@ public class ProjectAction extends BaseController {
         return "project/allProjectData.pagelet";
     }
 
-    @RequestMapping("/form")
-    public String form(Model model) {
-        model.addAttribute("productList", ProductUtils.getAllProductListByUser());
-        return "project/form.page";
-    }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String save(Model model, HttpServletResponse response, HttpServletRequest request, Project project,
@@ -110,8 +115,7 @@ public class ProjectAction extends BaseController {
         project.setProjectWhiteList(StringUtil.join(whiteList, ","));
         Project tProject = projectService.addProject(project);
         projectProductService.addLink(linkProduct, tProject.getProjectId());
-
-        CookieUtils.setCookie(response, TaskAction.COOKIE_PROJECT_ID, tProject.getProjectId().toString());
+        CookieUtils.setCookie(response, ProjectUtils.COOKIE_PROJECT_ID, tProject.getProjectId().toString());
         ProjectUtils.removeProjectList();
         return "redirect:" + adminPath + "/project/allProject";
     }

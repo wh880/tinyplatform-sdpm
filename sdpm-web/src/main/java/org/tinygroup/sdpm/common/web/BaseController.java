@@ -336,4 +336,8 @@ public abstract class BaseController {
             dateEnd.setTime(endDate.getTime());
         }
     }
+
+    public String redirectProjectForm() {
+        return "redirect:" + adminPath + "/project/form";
+    }
 }

@@ -32,9 +32,6 @@
             }
             $.cookie("currentProjectId",projectId,{path:"/"});
             window.location.reload();
-##            window.location.href = "${TINY_CONTEXT_PATH+adminPath}/project/manage/select?projectId="
-##                    + $(this).val()
-##                    + "&oldUrl=${tinyRequestRequestURI.substring(9)}";
         });
     });
 </script>

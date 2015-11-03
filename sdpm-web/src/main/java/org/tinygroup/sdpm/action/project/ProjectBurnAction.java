@@ -3,14 +3,16 @@ package org.tinygroup.sdpm.action.project;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.project.service.dto.BurnDTO;
 import org.tinygroup.sdpm.project.service.inter.BurnService;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
+import org.tinygroup.sdpm.util.ProjectUtils;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 
 /**
@@ -40,11 +42,17 @@ public class ProjectBurnAction extends BaseController {
      * @param choose   激活标签
      * @param interval 选择间隔时间
      * @param model
+     * @param request
+     * @param response
      * @return
      */
     @RequestMapping("/init")
-    public String initBurn(@CookieValue(value = TaskAction.COOKIE_PROJECT_ID, required = false) Integer projectId,
-                           Integer choose, Integer interval, Model model) {
+    public String initBurn(Integer choose, Integer interval, Model model,
+                           HttpServletRequest request, HttpServletResponse response) {
+        Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
+        if (projectId == null) {
+            return redirectProjectForm();
+        }
         if (projectId == null) {
             addMessage(model, "请选择项目来生成燃尽图！");
             return "project/task/projectBurn";

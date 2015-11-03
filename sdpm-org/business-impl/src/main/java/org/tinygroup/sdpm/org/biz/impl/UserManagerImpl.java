@@ -114,4 +114,8 @@ public class UserManagerImpl implements UserManager {
         return orgUserDao.getByKeys(userId);
     }
 
+    public List<OrgUser> findTeamUserListByProjectId(Integer projectId) {
+        return orgUserDao.getTeamUserByProjectId(projectId);
+    }
+
 }

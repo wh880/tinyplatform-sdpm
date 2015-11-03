@@ -3,10 +3,9 @@ package org.tinygroup.sdpm.action.project;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.tinygroup.commons.tools.StringUtil;
+import org.tinygroup.commons.tools.ArrayUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.service.StoryService;
@@ -14,10 +13,11 @@ import org.tinygroup.sdpm.project.dao.pojo.ProjectStory;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.sdpm.project.service.inter.ProjectStoryService;
 import org.tinygroup.sdpm.project.service.inter.TaskService;
-import org.tinygroup.sdpm.util.CookieUtils;
+import org.tinygroup.sdpm.util.ProjectUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -40,34 +40,34 @@ public class ProjectStoryAction extends BaseController {
     private StoryService storyService;
 
     @RequestMapping("/find")
-    public String find(@CookieValue(required = false, value = TaskAction.COOKIE_PROJECT_ID) String projectId,
+    public String find(HttpServletRequest request, HttpServletResponse response,
                        Model model, Integer start, Integer limit, String order, String ordertype, String moduleId) {
         if (!moduleId.isEmpty()) {
             moduleId = moduleId.substring(1);
         }
-        Pager<ProductStory> story = projectStoryService.findStoryByProject(Integer.parseInt(projectId), start, limit, order, ordertype, moduleId);
+        Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
+        if (projectId == null) {
+            return redirectProjectForm();
+        }
+        Pager<ProductStory> story = projectStoryService.findStoryByProject(projectId, start, limit, order, ordertype, moduleId);
 
         model.addAttribute("storys", story);
-        //story.getTotalCount()
         return "project/demand/demandTableData.pagelet";
-
     }
 
     @ResponseBody
     @RequestMapping("/delete")
-    public Map<String, String> delete(Integer id, HttpServletRequest request) {
-        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
-        //根据id进行软删
-        Map<String, String> map = new HashMap<String, String>();
+    public Map<String, String> delete(Integer id, HttpServletRequest request, HttpServletResponse response) {
+        Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
+        if (projectId == null) {
+            return resultMap(false, "删除失败");
+        }        //根据id进行软删
         Integer result = projectStoryService.deleteProjectStory(projectId, id);
         if (result > 0) {
-            map.put("status", "y");
-            map.put("info", "删除成功");
+            return resultMap(true, "删除成功");
         } else {
-            map.put("status", "n");
-            map.put("info", "删除失败");
+            return resultMap(false, "删除失败");
         }
-        return map;
     }
 
     @RequestMapping("/preLinkStory")
@@ -77,8 +77,12 @@ public class ProjectStoryAction extends BaseController {
     }
 
     @RequestMapping("/findStory")
-    public String findStory(Model model, Integer start, Integer limit, String order, String ordertype, HttpServletRequest request) {
-        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
+    public String findStory(Model model, Integer start, Integer limit, String order, String ordertype,
+                            HttpServletRequest request, HttpServletResponse response) {
+        Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
+        if (projectId == null) {
+            return redirectProjectForm();
+        }
         Pager<ProductStory> storyList = projectStoryService.findStoryToLink(projectId, start, limit, order, ordertype);
         model.addAttribute("storyList", storyList);
         return "project/demand/relateDemandTableData.pagelet";
@@ -87,11 +91,14 @@ public class ProjectStoryAction extends BaseController {
 
     @ResponseBody
     @RequestMapping("/linkStory")
-    public Map<String, String> linkStory(String ids, HttpServletRequest request) {
+    public Map<String, String> linkStory(String ids, HttpServletResponse response, HttpServletRequest request) {
         Map<String, String> map = new HashMap<String, String>();
         String[] id = ids.split(",");
         List<ProjectStory> projectStoryList = new ArrayList<ProjectStory>();
-        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
+        Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
+        if (projectId == null) {
+            return resultMap(false, "请选择项目");
+        }
         for (int i = 0; i < id.length; i++) {
             ProjectStory projectStory = new ProjectStory();
             projectStory.setProjectId(projectId);
@@ -117,8 +124,6 @@ public class ProjectStoryAction extends BaseController {
         }
         int[] insertResult = projectStoryService.addLink(insertList);
         int[] updateResult = projectStoryService.updateLink(updateList);
-
-        //int[] res = projectStoryService.addLink(projectStoryList);
         if ((insertResult.length + updateResult.length) > 0) {
             map.put("status", "y");
             map.put("info", "关联成功");
@@ -132,34 +137,21 @@ public class ProjectStoryAction extends BaseController {
 
     @ResponseBody
     @RequestMapping("/batchDel")
-    public Map<String, String> batchDel(String ids, HttpServletRequest request) {
-        Map<String, String> map = new HashMap<String, String>();
-        String[] id = ids.split(",");
-        if (id.length > 0) {
-            String condition = "";
-            for (int i = 0; i < id.length; i++) {
-                if (StringUtil.isBlank(condition)) {
-                    condition = condition + "story_id in (" + id[i];
-                } else {
-                    condition = condition + "," + id[i];
-                }
+    public Map<String, String> batchDel(Integer[] itemId, HttpServletRequest request, HttpServletResponse response) {
+        if (!ArrayUtil.isEmptyArray(itemId)) {
+            Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
+            if (projectId == null) {
+                return resultMap(false, "未选择项目");
             }
-            condition = condition + ")";
-            Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
-            condition = condition + " and ";
-            condition = condition + "project_id=" + projectId;
-            Integer res = projectStoryService.batchDel(condition);
-            if (res > 0) {
-                map.put("status", "y");
-                map.put("info", "删除成功");
+            Integer count = projectStoryService.batchDel(projectId, itemId);
+            if (count > 0) {
+                return resultMap(true, "删除成功");
             } else {
-                map.put("status", "n");
-                map.put("info", "删除失败");
+                return resultMap(false, "删除失败");
+
             }
         } else {
-            map.put("status", "n");
-            map.put("info", "未选择");
+            return resultMap(false, "未选择");
         }
-        return map;
     }
 }

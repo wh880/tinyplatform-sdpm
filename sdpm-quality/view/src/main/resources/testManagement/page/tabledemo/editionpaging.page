@@ -27,8 +27,6 @@
     					}else {
     						sele.val(data[0][opKey]).trigger("change");
     					}
-
-
     				},
     				error: function(res){
     					alert("失败");
@@ -246,7 +244,7 @@
                             </script>
                         #@Tselect2Body("projectId" bug?.projectId?:(projectList.size()>0?projectList.get(0).projectId:0) {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         <option value="0">/</option>
-                         #foreach(project : CmsUtils.getProjectList())
+                         #foreach(project : ProjectUtils.getUserProjectList())
                         <option value="${project?.projectId}">${project?.projectName}</option>
                         #end
                         #end

@@ -4,11 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
-import org.tinygroup.sdpm.util.CookieUtils;
+import org.tinygroup.sdpm.util.ProjectUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -33,11 +32,14 @@ public class BeforeAction extends BaseController {
     }
 
     @RequestMapping("/build/index")
-    public String jumpBuildIndex(Model model, HttpServletRequest request) {
-        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID));
+    public String jumpBuildIndex(Model model, HttpServletRequest request, HttpServletResponse response) {
+        Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
+        if (projectId == null) {
+            return redirectProjectForm();
+        }
         Project project = projectService.findProjectById(projectId);
         model.addAttribute("project", project);
-            return "project/version/index.page";
+        return "project/version/index.page";
     }
 
     @RequestMapping("/test/index")
@@ -50,29 +52,26 @@ public class BeforeAction extends BaseController {
         return "project/team/index.page";
     }
 
-    @RequestMapping("/doc/index")
-    public String jumpDocIndex() {
-        return "project/document/index.page";
-    }
 
     @RequestMapping("/survey/index")
     public String jumpSurveyIndex(Model model, HttpServletRequest request, HttpServletResponse response,
-                                  String projectId) {
-        if (StringUtil.isBlank(projectId)) {
-            projectId = CookieUtils.getCookie(request, TaskAction.COOKIE_PROJECT_ID);
-        } else {
-            CookieUtils.setCookie(response, TaskAction.COOKIE_PROJECT_ID, projectId);
+                                  Integer projectId) {
+        if (null == projectId) {
+            projectId = ProjectUtils.getCurrentProjectId(request, response);
+            if (projectId == null) {
+                return redirectProjectForm();
+            }
         }
-        Project project = projectService.findProjectById(Integer.parseInt(projectId));
+        Project project = projectService.findProjectById(projectId);
         model.addAttribute("project", project);
         return "/project/survey/index.page";
     }
 
-    @RequestMapping("/select")
-    public String selectProject(Integer projectId, String oldUrl, HttpServletResponse response, HttpServletRequest request) {
-        CookieUtils.setCookie(response, TaskAction.COOKIE_PROJECT_ID, projectId.toString(), -1);
-        return "redirect:" + oldUrl;
-    }
+//    @RequestMapping("/select")
+//    public String selectProject(Integer projectId, String oldUrl, HttpServletResponse response, HttpServletRequest request) {
+//        CookieUtils.setCookie(response, TaskAction.COOKIE_PROJECT_ID, projectId.toString(), -1);
+//        return "redirect:" + oldUrl;
+//    }
 
     @RequestMapping("/selModelTask")
     public String selModelTask(String moduleId) {

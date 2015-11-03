@@ -364,10 +364,7 @@ public class TestCaseAction extends BaseController {
 			testCase.setDeleted(1);
 			testCaseService.updateTestCase(testCase);
 		}
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("status", "success");
-		map.put("info", "删除成功");
-		return map;
+		return resultMap(true,"删除成功");
 	}
 	
 	@ResponseBody

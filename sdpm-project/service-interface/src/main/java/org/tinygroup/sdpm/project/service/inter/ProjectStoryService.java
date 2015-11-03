@@ -20,9 +20,9 @@ public interface ProjectStoryService {
      * @param projectStoryList
      * @return
      */
-    public int[] updateLink(List<ProjectStory> projectStoryList);
+    int[] updateLink(List<ProjectStory> projectStoryList);
 
-    public List<Project> findProjectsByStory(Integer storyId);
+    List<Project> findProjectsByStory(Integer storyId);
 
     /**
      * 通用查询
@@ -30,31 +30,36 @@ public interface ProjectStoryService {
      * @param projectStory
      * @return
      */
-    public List<ProjectStory> findByProjectStory(ProjectStory projectStory);
+    List<ProjectStory> findByProjectStory(ProjectStory projectStory);
 
     /**
      * 批量删除关联
-     * @param condition
+     *
+     * @param projectId
+     * @param storyIds
      * @return
      */
-    public Integer batchDel(String condition);
+    Integer batchDel(Integer projectId, Integer[] storyIds);
 
     /**
      * 批量添加
+     *
      * @param projectStoryList
      * @return
      */
-    public int[] addLink(List<ProjectStory> projectStoryList);
+    int[] addLink(List<ProjectStory> projectStoryList);
 
     /**
      * 根据projectId查询story
+     *
      * @param projectId
      * @return
      */
-    public List<ProductStory> findStoryByProject(Integer projectId);
+    List<ProductStory> findStoryByProject(Integer projectId);
 
     /**
      * 查询需求 分页
+     *
      * @param projectId
      * @param start
      * @param limit
@@ -62,18 +67,20 @@ public interface ProjectStoryService {
      * @param ordertype
      * @return
      */
-    public Pager<ProductStory> findStoryByProject(Integer projectId, Integer start, Integer limit, String order, String ordertype, String moduleId);
+    Pager<ProductStory> findStoryByProject(Integer projectId, Integer start, Integer limit, String order, String ordertype, String moduleId);
 
     /**
      * 删除
+     *
      * @param projectId
      * @param storyId
      * @return
      */
-    public Integer deleteProjectStory(Integer projectId, Integer storyId);
+    Integer deleteProjectStory(Integer projectId, Integer storyId);
 
     /**
      * 查找待关联需求
+     *
      * @param projectId
      * @param start
      * @param limit
@@ -81,10 +88,11 @@ public interface ProjectStoryService {
      * @param ordertype
      * @return
      */
-    public Pager<ProductStory> findStoryToLink(Integer projectId, Integer start, Integer limit, String order, String ordertype);
+    Pager<ProductStory> findStoryToLink(Integer projectId, Integer start, Integer limit, String order, String ordertype);
 
     /**
      * 查询所有需求
+     *
      * @param story
      * @param statusCondition
      * @param columnName
@@ -95,8 +103,8 @@ public interface ProjectStoryService {
      * @param groupOperate
      * @return
      */
-    public Pager<ProductStory> findStoryPager(int start, int limit, int id, SearchInfos conditions, String groupOperate);
+    Pager<ProductStory> findStoryPager(int start, int limit, int id, SearchInfos conditions, String groupOperate);
 
 
-    public Pager<ProductStory> findNoStoryPager(int start, int limit, int id, String condition, SearchInfos conditions, String groupOperate);
+    Pager<ProductStory> findNoStoryPager(int start, int limit, int id, String condition, SearchInfos conditions, String groupOperate);
 }
