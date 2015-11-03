@@ -935,6 +935,8 @@ public class StoryAction extends BaseController {
     public String findcopy(Integer storyId, Model model) {
         ProductStory productStory = storyService.findStory(storyId);
         ProductStorySpec storySpec = storySpecService.findStorySpec(storyId);
+        List<ServiceRequest> requests = requestService.getRequestList(null);
+        model.addAttribute("requestList",requests);
         model.addAttribute("story", productStory);
         model.addAttribute("storySpec", storySpec);
         return "/product/page/tabledemo/product-demand-copy.page";

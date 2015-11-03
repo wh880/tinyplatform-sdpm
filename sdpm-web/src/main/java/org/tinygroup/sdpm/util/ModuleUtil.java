@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.util;
 
+import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
 
@@ -91,7 +92,7 @@ public class ModuleUtil {
         if (module == null) {
             return "/";
         }
-        if(module.getModulePath()==null||"".equals(module.getModulePath())||"0,".equals(module.getModulePath())){
+        if(StringUtil.isBlank(module.getModulePath())||"0,".equals(module.getModulePath())){
             return module.getModuleName();
         }
         String path = null;
@@ -100,7 +101,7 @@ public class ModuleUtil {
             return root+division+("".equals(path)?"":path+division)+module.getModuleName();
         }
         path = mergePath(division,module.getModulePath().substring(2),moduleService);
-        return ("".equals(path)?"":path+division)+module.getModuleName();
+        return (StringUtil.isBlank(path)?"":path+division)+module.getModuleName();
     }
 
     private static String mergePath(String division, String paths, ModuleService moduleService){
@@ -109,7 +110,7 @@ public class ModuleUtil {
             return moduleService.findById(Integer.parseInt(path[0]))
                     .getModuleName()+division+ mergePath(division,paths.substring(path[0].length()+1),moduleService);
         }else if(path.length>0){
-            if("".equals(path[0])){
+            if(StringUtil.isBlank(path[0])){
                 return "";
             }
             return moduleService.findById(Integer.parseInt(path[0])).getModuleName();

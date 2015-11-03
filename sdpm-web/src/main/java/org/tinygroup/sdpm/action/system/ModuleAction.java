@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.service.ProductService;
@@ -222,7 +223,11 @@ public class ModuleAction extends BaseController {
         if (systemModule.getModuleId() == null) {
             systemModule.setModuleGrade(0);
             systemModule.setModuleOrder(0);
-            systemModule.setModulePath((systemModule.getModuleParent() != 0 ? moduleService.findById(systemModule.getModuleParent()).getModulePath() : "") + systemModule.getModuleParent() + ",");
+            String path = "";
+            if(systemModule.getModuleParent() != 0){
+                path = moduleService.findById(systemModule.getModuleParent()).getModulePath();
+            }
+            systemModule.setModulePath((StringUtil.isBlank(path)?"":path)+systemModule.getModuleParent() + ",");
             if (systemModule.getModuleParent() == null) {
                 systemModule.setModuleParent(0);
             }

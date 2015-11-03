@@ -34,12 +34,12 @@
         <menu id="product-demand-del" name="批量关闭" href="" icon="" sort="46" isShow="1" scope="product-del"/>
 
 
-        <menu id="demand_log" name="日志" href="/product/page/tabledemo/product-log.pagelet" icon="icon-time" sort="45"
-              isShow="1" scope="pro_demand_log">
-            <map>
-                <property key="type" value="aModal"/>
-            </map>
-        </menu>
+        <!--<menu id="demand_log" name="日志" href="/product/page/tabledemo/product-log.pagelet" icon="icon-time" sort="45"-->
+              <!--isShow="1" scope="pro_demand_log">-->
+            <!--<map>-->
+                <!--<property key="type" value="aModal"/>-->
+            <!--</map>-->
+        <!--</menu>-->
         <menu id="demand-alteration" name="变更" href="/product/story/productDemandChange/findPager?storyId=${storyId}"
               icon="icon-random" sort="44" isShow="1" scope="pro_demand_log">
             <map>
@@ -58,7 +58,7 @@
                 <property key="type" value="icon-href"/>
             </map>
         </menu>
-        <menu id="demand_set" name="建用例" href="/quality/testCase/add?currentPageId=5" icon="icon-sitemap" sort="41"
+        <menu id="demand_set" name="建用例" href="/quality/testCase/add" icon="icon-sitemap" sort="41"
               isShow="1" scope="pro_demand_log">
             <map>
                 <property key="type" value="icon-href"/>
@@ -82,7 +82,7 @@
                 <property key="type" value="icon"/>
             </map>
         </menu>
-        <menu id="demand-back" name="返回" href="/product/page/project/togglebox.page" icon="icon-reply" sort="36"
+        <menu id="demand-back" name="返回" href="/product/story" icon="icon-reply" sort="36"
               isShow="1" scope="pro_demand_log">
             <map>
                 <property key="type" value="icon"/>

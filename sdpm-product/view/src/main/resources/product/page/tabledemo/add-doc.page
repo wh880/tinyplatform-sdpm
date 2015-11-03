@@ -14,8 +14,6 @@
                 dataType:"json",
                 success: function(data){
                     sele.empty();
-                    var em = "<option value='0' selected  >/</option>";
-                    sele.append(em);
                     for(var i=0,l=data.length;i<l;i++){
                         var em = "<option value='"+data[i][opKey]+"' >"+ data[i][opvalue] +"</option>";
                         sele.append(em);
@@ -87,8 +85,9 @@
                     <script type="text/javascript">
                         $("#${sid}").on("change",function(){
                             var pId = $("#${sid}  option:selected").val();
-                            ajaxRead("${sid}","docModule","moduleId","moduleName","/document/ajax/module1?productId="+pId,${doc?.docModule?:0});
-
+                            if(pId>0){
+                            ajaxRead("${sid}","docModule","moduleId","moduleName","/document/ajax/module1?productId="+pId);
+                        }
                         })
                     </script>
                 #end
@@ -102,7 +101,6 @@
             #@div(divClass="col-12")
                 #@Tselect2F()
                     #@Tselect2Body("docModule" "" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                        <option value="0">/</option>
                     #end
                 #end
             #end

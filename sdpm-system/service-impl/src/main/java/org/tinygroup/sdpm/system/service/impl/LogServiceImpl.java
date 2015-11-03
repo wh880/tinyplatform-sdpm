@@ -3,6 +3,8 @@ package org.tinygroup.sdpm.system.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
+import org.tinygroup.sdpm.org.biz.impl.UserManagerImpl;
+import org.tinygroup.sdpm.org.biz.inter.UserManager;
 import org.tinygroup.sdpm.system.biz.inter.ActionManager;
 import org.tinygroup.sdpm.system.biz.inter.HistoryManager;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
@@ -23,6 +25,8 @@ public class LogServiceImpl implements LogService{
     private ActionManager actionManager;
     @Autowired
     private HistoryManager historyManager;
+    @Autowired
+    private UserManager userManager;
 
     public void log(Object oldObject, Object newObject, SystemAction systemAction){
         systemAction.setActionDate(new Date());
@@ -54,8 +58,8 @@ public class LogServiceImpl implements LogService{
                 SystemHistory systemHistory = new SystemHistory();
                 systemHistory.setHistoryAction(systemAction.getActionId());
                 systemHistory.setHistoryField(field.getName());
-                systemHistory.setHistoryOld(String.valueOf((oldObject == null?"":dateFormat(oldValue))));
-                systemHistory.setHistoryNew(String.valueOf((newObject == null?"":dateFormat(newValue))));
+                systemHistory.setHistoryOld(String.valueOf((oldObject == null?"":dataChange(oldValue))));
+                systemHistory.setHistoryNew(String.valueOf((newObject == null?"":dataChange(newValue))));
                 historyManager.add(systemHistory);
             }
 
@@ -63,8 +67,8 @@ public class LogServiceImpl implements LogService{
     }
 
     private boolean beforeAndCompare(Object oldOne, Object newOne) {
-        Object oldValue = dateFormat(oldOne);
-        Object newValue = dateFormat(newOne);
+        Object oldValue = dataChange(oldOne);
+        Object newValue = dataChange(newOne);
         return compare(oldValue, newValue);
     }
 
@@ -92,18 +96,24 @@ public class LogServiceImpl implements LogService{
         return value;
     }
 
-    private Object dateFormat(Object object){
+    private Object dataChange(Object object){
         if (object instanceof Date) {
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
             Date date = (Date) object;
             return format.format(date);
-        }/*else if(){
-
-        }*/
+        }else if(validateUserId(object)){
+            return userManager.find((String)object).getOrgUserRealName();
+        }
         return object;
     }
 
-//    private boolean validateUserId(){
-//
-//    }
+    private boolean validateUserId(Object value){
+        if(value instanceof String){
+            if(((String)value).matches("(([a-z])|(\\d)){32}")){
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

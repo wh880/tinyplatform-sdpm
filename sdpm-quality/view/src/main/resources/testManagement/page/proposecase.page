@@ -44,8 +44,9 @@
                     <script type="text/javascript">
                         $("#${sid}").on("change",function(){
                             var pId = $("#${sid}  option:selected").val();
-                            ajaxRead("${sid}","moduleId","moduleId","moduleName","/quality/testCase/ajax/module?moduleRoot="+pId,${case?.moduleId?:0});
-                            ajaxRead("${sid}","storyId","storyId","storyTitle","/quality/testCase/ajax/story?productId="+pId,${case?.storyId?:0});
+                            if(pId>0){
+                                ajaxRead("${sid}","moduleId","moduleId","moduleName","/quality/testCase/ajax/module?moduleRoot="+pId,${(testCase?.moduleId?:moduleId)?:0});
+                            }
                         })
                     </script>
                 	  #end
@@ -54,12 +55,15 @@
 					#@div(divClass="col-0")&nbsp;&nbsp#end
 					#@div(divClass="col-3")
 					 #@Tselect2F()
-                            #@Tselect2Body("moduleId" testCase?.moduleId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                            #@Tselect2Body("moduleId" testCase?.moduleId?:moduleId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 	                    	#end
                         <script type="text/javascript">
-                            $(document).ready(function(){
+                            $("#${sid}").on("change",function(){
                                 var pId = $("select[name=productId] option:selected").val();
-                                ajaxRead("${sid}","moduleId","moduleId","moduleName","/quality/testCase/ajax/module?moduleRoot="+pId,${case?.moduleId?:0});
+                                var mId = $("#${sid}  option:selected").val();
+                                if(pId>0&&mId>0){
+                                    ajaxRead("${sid}","storyId","storyId","storyTitle","/quality/testCase/ajax/story?productId="+pId+"&moduleId="+mId,${(testCase?.storyId?:storyId)?:0});
+                                }
                             });
                         </script>
                 	  #end
@@ -119,7 +123,7 @@
             #@formControlDiv("col-8")
 					#@div(divClass="col-5")
                         #@Tselect2F()
-	                   		 #@Tselect2Body("storyId" testCase?.storyId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                   		 #@Tselect2Body("storyId" testCase?.storyId?:storyId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 
                              #end
 	                      	#@Tselect2Fix()

@@ -68,7 +68,7 @@
                 <input type="checkbox" value="${story.storyId}" id="fieldid" name="storyId">
             #end
             #@td()<a href="${TINY_CONTEXT_PATH +adminPath}/product/storySpec/find/productDemandDetail?storyId=${story.storyId}">${story.storyId}</a>#end
-            #@td()${story?.storyPri}#end
+            #@td()${getDict("storyPri",story?.storyPri)}#end
             #@td()<a href="${TINY_CONTEXT_PATH +adminPath}/product/storySpec/find/productDemandDetail?storyId=${story.storyId}">${story.storyTitle}</a>#end
             #@td()${story?.planName}#end
             #@td()${getDict("storySource",story?.storySource)}#end
@@ -92,6 +92,8 @@
                          #else
                          <span style="color:grey"><i class="${m?.icon}" /></span>
                          #end
+                     #elseif(m?.id=="add-case")
+                     <a title="${m?.name}" class="caseAdd ml-5" href="${TINY_CONTEXT_PATH +adminPath}${url}?storyId=${story?.storyId}${story?.moduleId?'&moduleId='+story?.moduleId:''}"><i class="${m?.icon}"></i></a>
                      #else
                      <a title="${m?.name}" class="ml-5" href="${TINY_CONTEXT_PATH +adminPath}${url}"><i class="${m?.icon}"></i></a>
                      #end
@@ -100,4 +102,10 @@
         #end
     #end
 #end
-
+<script>
+    $(function(){
+        $(".caseAdd").on("click",function(){
+            $.cookie('qualityProductId', "${cookieProductId}", {path: "/"});
+        });
+    })
+</script>

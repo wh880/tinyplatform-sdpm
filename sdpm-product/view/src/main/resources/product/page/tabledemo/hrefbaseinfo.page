@@ -18,8 +18,7 @@
                 #end
                 #@tr()
                     #@td()所属模块#end
-                    #@td()<a href="${TINY_CONTEXT_PATH +adminPath}/product/story?currentPageId=3">${story
-                        ?.moduleTitle}</a>#end
+                    #@td()${story?.moduleTitle}#end
                 #end
                 #@tr()
                     #@td()所属计划#end
@@ -93,7 +92,7 @@
             #end
             #@tr()
                 #@td()最后修改#end
-                #@td()${story?.storyLastEditedBy?UserUtils.getUserById(story?.storyLastEditedBy)?.orgUserRealName:""} ${story?.storyLastEditedDate?"&nbsp;于&nbsp;"+formatDate(story?.storyLastEditedDate,'yyyy-MM-dd'):""}&nbsp;修改#end
+                #@td()${story?.storyLastEditedBy?UserUtils.getUserById(story?.storyLastEditedBy)?.orgUserRealName:""} ${story?.storyLastEditedDate?"&nbsp;于&nbsp;"+formatDate(story?.storyLastEditedDate,'yyyy-MM-dd')+"&nbsp;修改":""}#end
             #end
         #end
     #end
@@ -152,7 +151,7 @@
         #end
         #@tr()
             #@td()相关需求#end
-            #@td() ${story?.storyTitle} #end
+            #@td() ${story?.storyLinkStories} #end
         #end
     #end
 #end

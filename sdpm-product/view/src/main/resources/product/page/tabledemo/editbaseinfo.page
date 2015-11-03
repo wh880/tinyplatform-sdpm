@@ -12,8 +12,10 @@
                     <script>
                         $("#${sid}").on("change", function () {
                             var pId = $("#${sid}  option:selected").val();
-                            ajaxRead("${sid}", "moduleId", "moduleId", "moduleName", "/quality/bug/ajax/module?moduleRoot=" + pId,"${story?.moduleId?:0}");
+                            if(pId>0){
+                            ajaxRead("${sid}", "moduleId", "moduleId", "moduleName", "/quality/bug/ajax/module?moduleRoot=" + pId);
                             ajaxRead("${sid}", "planId", "planId", "planName", "/product/plan/planList?productId=" + pId);
+                            }
                         })
                     </script>
                     #@Tselect2Body("productId" story?.productId  {"class":"input-text select2"})
@@ -131,7 +133,7 @@
             #@formControlDiv("col-8")
                 #@Tselect2F()
                     <script>
-                        ajaxRead("${sid}", "storyMailto", "orgUserId", "orgUserRealName", "/org/user/userList");
+                        ajaxRead("${sid}", "storyMailto", "orgUserId", "orgUserRealName", "/org/user/userList","${story?.storyMailto}");
                     </script>
                     #@Tselect2Body("storyMailto" story?.storyMailto {"class":"input-text select2","multiple":"multiple"}) ##,"multiple":"multiple"加上为多选项
                     #end

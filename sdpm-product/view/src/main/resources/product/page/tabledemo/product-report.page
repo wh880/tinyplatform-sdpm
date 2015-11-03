@@ -4,6 +4,9 @@
 #import("/org/tinygroup/button/components/button_common.component")
 #import("/org/tinygroup/button/components/button.component")
 #!set(linkName="product-demand",sonitem="<li>"+"需求"+"</li>")
+#set(titleLabel = {"A_productCount":"产品需求数量","B_moduleCount":"模块需求数量","D_storySource":"需求来源统计","C_planCount":"计划进行统计",
+	"E_storyStatus":"状态进行统计","F_storyStage":"所处阶段进行统计","G_storyPri":"优先级进行统计","H_storyEstimate":"预计工时进行统计",
+	"I_storyOpenedBy":"由谁创建来进行统计","G_storyAssignedTo":"当前指派来进行统计","K_storyClosedReason":"关闭原因来进行统计","L_storyVersion":"变更次数来进行统计"})
 
 <style>
     .togglebox.open .tableBoxessty{margin-left:262px}
@@ -117,7 +120,7 @@
 	            		 #@th("text-r" "vertical-align:middle;width:20%")
 	            			#@pieChart(pieChartStyle="width:600px;margin:0 auto;")
 	            				 <table id='${roadMap?.key}'>
-									<caption name="${roadMap?.key}"></caption>
+									<caption name="${roadMap?.key}">${titleLabel.get(roadMap?.key)}</caption>
 									<thead>
 										<tr>
 											<th></th>

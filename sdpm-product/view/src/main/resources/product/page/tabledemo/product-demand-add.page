@@ -14,12 +14,6 @@
             }
         });
 
-    });
-
-</script>
-##不需要评审的JS代码
-<script>
-    $(document).ready(function () {
 
         $("#story_reviewed").on("click", function () {
 
@@ -55,9 +49,8 @@
                 <div class="col-5">
                     #@Tselect2F()
                         #@Tselect2Body("productId" cookieProductId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                            <option value="0">/</option>
                             #if(cookieProductLineId)
-                                #foreach(product : CmsUtils.getProductListByProductLineUser(cookieProductLineId))
+                                #foreach(product : ProductUtils.getProductListByProductLineUser(cookieProductLineId))
                                     #if(product?.deleted==0)
                                         <option value="${product?.productId}">${product?.productName}</option>
                                     #end
@@ -70,9 +63,10 @@
 
                             $("#${sid}").on("change", function () {
                                 var pId = $("#${sid}  option:selected").val();
-                                ajaxRead("${sid}", "moduleId", "moduleId", "moduleName", "/quality/bug/ajax/module?moduleRoot=" + pId);
-                                ajaxRead("${sid}", "planId", "planId", "planName", "/product/plan/planList?productId=" + pId);
-
+                                if (pId > 0) {
+                                    ajaxRead("${sid}", "moduleId", "moduleId", "moduleName", "/quality/bug/ajax/module?moduleRoot=" + pId);
+                                    ajaxRead("${sid}", "planId", "planId", "planName", "/product/plan/planList?productId=" + pId);
+                                }
                             })
 
                         </script>
@@ -139,7 +133,7 @@
                         #@Tselect2F()
                             #@Tselect2Body("clientRequestId" "" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                                 #for(re : requestList)
-                                    <option value="re?.clientRequestId">${re?.clientName+"/"+re?.requestTitle}</option>
+                                    <option value="${re?.clientRequestId}">${re?.clientName+"/"+re?.requestTitle}</option>
                                 #end
                             #end
                             #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH +adminPath}/service/request/form"
@@ -243,7 +237,7 @@
             #@colLabel()抄送给：#end
             #@formControlDiv("col-4")
                 #@Tselect2F()
-                    #@Tselect2Body("storyMailto" "0" {"class":"input-text select2","multiple":
+                    #@Tselect2Body("storyMailto" "" {"class":"input-text select2","multiple":
                         "multiple"}) ##,"multiple":"multiple"加上为多选项
                     #end
                     <script>

@@ -3,17 +3,9 @@
 
 
 <script>
-
-
     $(document).ready(function () {
-
-
-
-
-        $("select[name='demand-sources']").bind('change', function () {
-
-
-            if ("request" == $(this).val()) {
+        $("select[name='storySource']").bind('change', function () {
+            if (0 == $(this).val()) {
                 $(".customer-request").show();
                 $("#demand-sources").addClass("col-5");
             } else {
@@ -21,13 +13,6 @@
                 $("#demand-sources").removeClass("col-5");
             }
         });
-
-    });
-
-</script>
-##不需要评审的JS代码
-<script>
-    $(document).ready(function () {
 
         $("#story_reviewed").on("click", function () {
 
@@ -62,7 +47,7 @@
                 <div class="col-6">
                     #@Tselect2F()
                         #@Tselect2Body(
-                            "productId" sessionProductId {"class":"input-text select2"})
+                            "productId" cookieProductId {"class":"input-text select2"})
                             <option value="0">/</option>
                         #end
                         <script>
@@ -71,8 +56,10 @@
                         <script>
                             $("#${sid}").on("change", function () {
                                 var pId = $("#${sid}  option:selected").val();
+                                if(pId>0){
                                 ajaxRead("${sid}", "moduleId", "moduleId", "moduleName", "/quality/bug/ajax/module?moduleRoot=" + pId,"${story?.moduleId?:0}");
                                 ajaxRead("${sid}", "planId", "planId", "planName", "/product/plan/planList?productId=" + pId,"${story?.planId?:0}");
+                                }
                             })
                         </script>
 
@@ -84,7 +71,7 @@
                 <div class="col-6">
                     #@Tselect2F()
                         #@Tselect2Body(
-                            "moduleId" "IN" {"class":"input-text select2","data":"moduleType=product","relateElem":
+                            "moduleId" "" {"class":"input-text select2","data":"moduleType=product","relateElem":
                             "relateModelTwo"}) ##,"multiple":"multiple"加上为多选项
 
                         #end
@@ -104,7 +91,7 @@
             #@colLabel()所属计划：#end
             #@formControlDiv("col-4")
                 #@Tselect2F()
-                    #@Tselect2Body("planId" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                    #@Tselect2Body("planId" "" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 
                     #end
 
@@ -115,24 +102,42 @@
             #@validateDiv("col-2")#end
         #end
 
-        #@elementItem()
-            #@colLabel()来源：#end
-            #@formControlDiv("col-4")
-                <div id="demand-sources">
-                    #@Tselect2F()
-                        #@Tselect2Body("storySource" story?.storySource {"class":
-                            "input-text select2"})
-                            #foreach(source:getDict("storySource"))
-                                <option value="${source?.value}"> ${source?.text}</option>
-                            #end
+    #@elementItem()
+        #@colLabel()<span class="c-red">*</span>来源：#end
+        #@formControlDiv("col-4")
+            <div id="demand-sources">
+                #@Tselect2F()
+                    #@Tselect2Body("storySource" "0" {"class":
+                        "input-text select2"}) ##,"multiple":"multiple"加上为多选项#for(stage:getDict("storySource"))
 
+                        #foreach(source:getDict("storySource"))
+                            <option value="${source?.value}"> ${source?.text}</option>
                         #end
+
                     #end
-                </div>
 
+                #end
+            </div>
+        <span class="customer-request" style="display:none">
+            <div class="col-2 text-c">&nbsp;<span class="c-red">*</span>请求：
+            </div>
 
+        <div class="col-5">
+
+            #@Tselect2F()
+                #@Tselect2Body("clientRequestId" story?.clientRequestId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                    #for(re : requestList)
+                    <option value="${re?.clientRequestId}">${re?.clientName+"/"+re?.requestTitle}</option>
+                #end
             #end
+            #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH +adminPath}/service/request/form"
+                              class="r ">增加</a>#end
         #end
+    </div>
+    </span>
+
+    #end
+#end
 
 
         #@elementItem()
@@ -193,7 +198,7 @@
             #@sdpmItem("由谁评审")
                 #@Tselect2F()
                     #@Tselect2Body(
-                        "storyReviewedBy" "IN" {"class":"input-text select2"})
+                        "storyReviewedBy" "" {"class":"input-text select2"})
 
                     #end
                     <script>
@@ -221,7 +226,7 @@
             #@colLabel()抄送给：#end
             #@formControlDiv("col-4")
                 #@Tselect2F()
-                    #@Tselect2Body("storyMailto" "IN" {"class":"input-text select2","multiple":
+                    #@Tselect2Body("storyMailto" "" {"class":"input-text select2","multiple":
                         "multiple"})
                     #end
                     <script>
