@@ -33,7 +33,6 @@ public interface ProductStoryDao extends BaseDao<ProductStory,Integer> {
 	
 	Pager<ProductStory> complexQueryRel(int start, int limit, ProductStory productStory, final String condition, final OrderBy... orderBys);
 
-	
 	Integer softDelete(Integer id);
 	
 	List<ProductStory> getByKeys(Integer... id);
@@ -52,17 +51,12 @@ public interface ProductStoryDao extends BaseDao<ProductStory,Integer> {
 	
 	List<StoryCount> userStoryCount(ProductStory t,String field);
 
-	/**
-	 * 计算状态位
-	 * @param productId
-	 * @param status
-     * @return
-     */
 	Integer countStatus(int productId, int status);
 	
 	ProductStory getReleteStoryByKey(Integer pk);
 
-
 	List<ProductStory> findpNameBysId(Integer id);
+
+	Pager<ProductStory> projectLinkedStory(int start, int limit, ProductStory productStory, final String condition, final OrderBy... orderBys);
 
 }

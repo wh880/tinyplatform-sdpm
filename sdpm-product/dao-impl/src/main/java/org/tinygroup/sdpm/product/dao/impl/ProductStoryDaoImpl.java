@@ -50,6 +50,7 @@ import static org.tinygroup.sdpm.product.dao.constant.ProductPlanTable.PRODUCT_P
 import static org.tinygroup.sdpm.product.dao.constant.ProductStoryTable.PRODUCT_STORYTABLE;
 import static org.tinygroup.sdpm.product.dao.constant.ProductTable.PRODUCTTABLE;
 import static org.tinygroup.sdpm.system.dao.constant.SystemModuleTable.SYSTEM_MODULETABLE;
+import static org.tinygroup.sdpm.project.dao.constant.ProjectStoryTable.PROJECT_STORYTABLE;
 import static org.tinygroup.tinysqldsl.Delete.delete;
 import static org.tinygroup.tinysqldsl.Insert.insertInto;
 import static org.tinygroup.tinysqldsl.Select.select;
@@ -645,7 +646,50 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 		return getDslSession().fetchList(select, ProductStory.class);
 
 	}
-	
+
+	public Pager<ProductStory> projectLinkedStory(int start, int limit, ProductStory productStory, String condition, OrderBy... orderBys) {
+		Select select = MysqlSelect.select(PRODUCT_STORYTABLE.ALL).
+				from(PRODUCT_STORYTABLE).join(leftJoin(PROJECT_STORYTABLE,PRODUCT_STORYTABLE.STORY_ID.eq(PROJECT_STORYTABLE.STORY_ID)))
+				.where(and(
+						StringUtil.isBlank(condition)?null:fragmentCondition(condition),
+						PRODUCT_STORYTABLE.COMPANY_ID.eq(productStory.getCompanyId()),
+						PRODUCT_STORYTABLE.PRODUCT_ID.eq(productStory.getProductId()),
+						PRODUCT_STORYTABLE.STORY_PARENT_ID.eq(productStory.getStoryParentId()),
+						PRODUCT_STORYTABLE.MODULE_ID.eq(productStory.getModuleId()),
+						PRODUCT_STORYTABLE.PLAN_ID.eq(productStory.getPlanId()),
+						PRODUCT_STORYTABLE.STORY_STATUS.eq(productStory.getStoryStatus()),
+						PRODUCT_STORYTABLE.STORY_SOURCE.eq(productStory.getStorySource()),
+						PRODUCT_STORYTABLE.STORY_FROM_BUG.eq(productStory.getStoryFromBug()),
+						PRODUCT_STORYTABLE.STORY_TITLE.eq(productStory.getStoryTitle()),
+						PRODUCT_STORYTABLE.STORY_KEYWORDS.eq(productStory.getStoryKeywords()),
+						PRODUCT_STORYTABLE.STORY_TYPE.eq(productStory.getStoryType()),
+						PRODUCT_STORYTABLE.STORY_PRI.eq(productStory.getStoryPri()),
+						PRODUCT_STORYTABLE.STORY_ESTIMATE.eq(productStory.getStoryEstimate()),
+						PRODUCT_STORYTABLE.STORY_STAGE.eq(productStory.getStoryStage()),
+						PRODUCT_STORYTABLE.STORY_MAILTO.eq(productStory.getStoryMailto()),
+						PRODUCT_STORYTABLE.STORY_OPENED_BY.eq(productStory.getStoryOpenedBy()),
+						PRODUCT_STORYTABLE.STORY_OPENED_DATE.eq(productStory.getStoryOpenedDate()),
+						PRODUCT_STORYTABLE.STORY_ASSIGNED_TO.eq(productStory.getStoryAssignedTo()),
+						PRODUCT_STORYTABLE.STORY_ASSIGNED_DATE.eq(productStory.getStoryAssignedDate()),
+						PRODUCT_STORYTABLE.STORY_LAST_EDITED_BY.eq(productStory.getStoryLastEditedBy()),
+						PRODUCT_STORYTABLE.STORY_LAST_EDITED_DATE.eq(productStory.getStoryLastEditedDate()),
+						PRODUCT_STORYTABLE.STORY_REVIEWED_BY.eq(productStory.getStoryReviewedBy()),
+						PRODUCT_STORYTABLE.STORY_REVIEWED_DATE.eq(productStory.getStoryReviewedDate()),
+						PRODUCT_STORYTABLE.STORY_CLOSED_BY.eq(productStory.getStoryClosedBy()),
+						PRODUCT_STORYTABLE.STORY_CLOSED_DATE.eq(productStory.getStoryClosedDate()),
+						PRODUCT_STORYTABLE.STORY_CLOSED_REASON.eq(productStory.getStoryClosedReason()),
+						PRODUCT_STORYTABLE.TO_BUG.eq(productStory.getToBug()),
+						PRODUCT_STORYTABLE.STORY_LINK_STORIES.eq(productStory.getStoryLinkStories()),
+						PRODUCT_STORYTABLE.STORY_CHILD_STORIES.eq(productStory.getStoryChildStories()),
+						PRODUCT_STORYTABLE.STORY_DUPLICATE_STORY.eq(productStory.getStoryDuplicateStory()),
+						PRODUCT_STORYTABLE.STORY_VERSION.eq(productStory.getStoryVersion()),
+						PRODUCT_STORYTABLE.BUILD_ID.eq(productStory.getBuildId()),
+						PRODUCT_STORYTABLE.CLIENT_REQUEST_ID.eq(productStory.getClientRequestId()),
+						PRODUCT_STORYTABLE.DELETED.eq(productStory.getDeleted())
+				));
+		return getDslSession().fetchPage(addOrderByElements(select, orderBys),start,limit,false,ProductStory.class);
+	}
+
 	public Integer softDelete(Integer id) {
         return getDslTemplate().update(id, new UpdateGenerateCallback<Integer>() {
             public Update generate(Integer id) {

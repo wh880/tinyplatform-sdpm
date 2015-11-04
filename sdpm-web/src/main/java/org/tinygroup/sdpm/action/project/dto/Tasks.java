@@ -1,4 +1,4 @@
-package org.tinygroup.sdpm.action.project;
+package org.tinygroup.sdpm.action.project.dto;
 
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
 

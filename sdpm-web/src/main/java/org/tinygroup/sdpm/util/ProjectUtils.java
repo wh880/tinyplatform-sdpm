@@ -21,7 +21,6 @@ import java.util.List;
 public class ProjectUtils {
     public static final String COOKIE_PROJECT_ID = "currentProjectId";
 
-
     private static final String CMS_CACHE = "cmsCache";
     private static final String CMS_CACHE_PROJECT_LIST = "projectList";
     private static final String CMS_CACHE_PROJECT_ID_ = "project_id_";
@@ -64,7 +63,7 @@ public class ProjectUtils {
         if (CollectionUtil.isEmpty(userProjectList)) {
             return null;
         }
-        ArrayList<Integer> ids = new ArrayList<Integer>();
+        List<Integer> ids = Collections3.extractToList(userProjectList, "projectId");
         for (Project project : userProjectList) {
             ids.add(project.getProjectId());
         }
@@ -78,7 +77,7 @@ public class ProjectUtils {
      * @return
      */
     protected static Boolean hasProjectByRole(String whiteList) {
-        if (StringUtil.isBlank(whiteList)){
+        if (StringUtil.isBlank(whiteList)) {
             return false;
         }
         String[] split = whiteList.split(",");
@@ -86,7 +85,6 @@ public class ProjectUtils {
             return false;
         }
         List<OrgRole> userRoleList = UserUtils.getUserRoleList();
-
         if (CollectionUtil.isEmpty(userRoleList)) {
             return false;
         }

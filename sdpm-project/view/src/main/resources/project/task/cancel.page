@@ -17,7 +17,7 @@
     ##body end
     #end
 #end
-#@tinyForm("closeForm" TINY_CONTEXT_PATH+adminPath+"/project/task/cancelSave" "post" {"class":"test"})
+#@tinyForm("closeForm" TINY_CONTEXT_PATH+adminPath+"/project/task/cancel" "post" {"class":"test"})
     #hiddenInput(hiddenInputName="taskId" hiddenInputValue=task?.taskId)
     #hiddenInput(hiddenInputName="taskProject" hiddenInputValue=task?.taskProject)
 <div style="width:70%;float:left" class="pageleftpart">

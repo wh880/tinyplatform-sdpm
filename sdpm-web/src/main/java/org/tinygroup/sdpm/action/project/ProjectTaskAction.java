@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.tinygroup.commons.tools.StringUtil;
+import org.tinygroup.sdpm.action.project.dto.Tasks;
 import org.tinygroup.sdpm.action.project.util.TaskStatusUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.dict.util.DictUtil;
@@ -35,8 +36,7 @@ import java.util.*;
  */
 @Controller
 @RequestMapping("/a/project/task")
-public class TaskAction extends BaseController {
-
+public class ProjectTaskAction extends BaseController {
 
     @Autowired
     private TaskService taskService;
@@ -59,7 +59,7 @@ public class TaskAction extends BaseController {
 
     @RequiresPermissions(value = {"task", "project"}, logical = Logical.OR)
     @RequestMapping("index")
-    public String index(@CookieValue(required = false, value = ProjectUtils.COOKIE_PROJECT_ID) String  currentProjectId,
+    public String index(@CookieValue(required = false, value = ProjectUtils.COOKIE_PROJECT_ID) String currentProjectId,
                         HttpServletResponse response, String moduleId, String choose, Model model) {
         if (StringUtil.isBlank(currentProjectId)) {
             Project project = ProjectUtils.getDefaultProject();
@@ -77,17 +77,14 @@ public class TaskAction extends BaseController {
         if (StringUtil.isBlank(choose)) {
             model.addAttribute("choose", choose);
         }
-        return "project/task/index.page";
+        return "project/task/index";
     }
 
     @RequestMapping("/edit")
     public String form(Integer taskId, Model model) {
-        if (taskId != null) {
-            ProjectTask task = taskService.findTask(taskId);
-            model.addAttribute("task", task);
-            return "project/task/edit.page";
-        }
-        return "error";
+        ProjectTask task = taskService.findTask(taskId);
+        model.addAttribute("task", task);
+        return "project/task/edit.page";
     }
 
     /**
@@ -98,7 +95,7 @@ public class TaskAction extends BaseController {
      * @param request
      * @return
      */
-    @RequestMapping("/call")
+    @RequestMapping(value = "/call", method = RequestMethod.GET)
     public String call(Integer taskId, Model model, HttpServletRequest request) {
         Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, ProjectUtils.COOKIE_PROJECT_ID));
         ProjectTask task = taskService.findTask(taskId);
@@ -116,7 +113,7 @@ public class TaskAction extends BaseController {
      * @param commnet
      * @return
      */
-    @RequestMapping(value = "/callsave", method = RequestMethod.POST)
+    @RequestMapping(value = "/call", method = RequestMethod.POST)
     public String callSave(ProjectTask task, Model model, String commnet) {
         if (task.getTaskId() == null) {
             taskService.addTask(task);
@@ -132,21 +129,18 @@ public class TaskAction extends BaseController {
         return "project/task/index.page";
     }
 
-    @RequestMapping("/finish")
+    @RequestMapping(value = "/finish", method = RequestMethod.GET)
     public String finish(Integer taskId, Model model, HttpServletRequest request) {
-        if (taskId != null) {
-            Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, ProjectUtils.COOKIE_PROJECT_ID));
-            List<ProjectTeam> teamList = teamService.findTeamByProjectId(projectId);
-            ProjectTask task = taskService.findTask(taskId);
-            model.addAttribute("task", task);
-            model.addAttribute("teamList", teamList);
-            //还需要查询其他相关任务剩余时间的信息
-            return "project/task/finish.page";
-        }
-        return "error";
+        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, ProjectUtils.COOKIE_PROJECT_ID));
+        List<ProjectTeam> teamList = teamService.findTeamByProjectId(projectId);
+        ProjectTask task = taskService.findTask(taskId);
+        model.addAttribute("task", task);
+        model.addAttribute("teamList", teamList);
+        //还需要查询其他相关任务剩余时间的信息
+        return "project/task/finish";
     }
 
-    @RequestMapping(value = "/finishsave", method = RequestMethod.POST)
+    @RequestMapping(value = "/finish", method = RequestMethod.POST)
     public String finishSave(ProjectTask task, Model model, String commnet) {
         if (task.getTaskId() == null) {
             taskService.addTask(task);
@@ -163,23 +157,20 @@ public class TaskAction extends BaseController {
 
     @RequestMapping("/note")
     public String note(Integer taskId, Model model) {
-        if (taskId != null) {
-            ProjectTask task = taskService.findTask(taskId);
-            model.addAttribute("task", task);
-            //还需要查询其他相关任务剩余时间的信息
-            return "project/task/note.page";
-        }
-        return "error";
+        ProjectTask task = taskService.findTask(taskId);
+        model.addAttribute("task", task);
+        //还需要查询其他相关任务剩余时间的信息
+        return "project/task/note";
     }
 
-    @RequestMapping("/close")
+    @RequestMapping(value = "/close", method = RequestMethod.GET)
     public String close(Integer taskId, Model model) {
         ProjectTask task = taskService.findTask(taskId);
         model.addAttribute("task", task);
-        return "project/task/close.page";
+        return "project/task/close";
     }
 
-    @RequestMapping(value = "/closesave", method = RequestMethod.POST)
+    @RequestMapping(value = "/close", method = RequestMethod.POST)
     public String closeSave(ProjectTask task, String content) {
         taskService.updateCloseTask(task);
         LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, LogUtil.LogAction.CLOSED, task.getTaskId().toString(),
@@ -188,17 +179,14 @@ public class TaskAction extends BaseController {
         return "project/task/index.page";
     }
 
-    @RequestMapping("/start")
+    @RequestMapping(value = "/start", method = RequestMethod.GET)
     public String start(Integer taskId, Model model) {
-        if (taskId != null) {
-            ProjectTask task = taskService.findTask(taskId);
-            model.addAttribute("task", task);
-            return "project/task/start.page";
-        }
-        return "error";
+        ProjectTask task = taskService.findTask(taskId);
+        model.addAttribute("task", task);
+        return "project/task/start";
     }
 
-    @RequestMapping(value = "/startsave", method = RequestMethod.POST)
+    @RequestMapping(value = "/start", method = RequestMethod.POST)
     public String startSave(ProjectTask task, Model model, String content) {
         if (task.getTaskId() == null) {
             taskService.addTask(task);
@@ -210,20 +198,17 @@ public class TaskAction extends BaseController {
             burnService.updateDate(task.getTaskId());
         }
         model.addAttribute("task", task);
-        return "project/task/index.page";
+        return "redirect:" + adminPath + "project/task/index";
     }
 
     @RequestMapping("/cancel")
     public String cancel(Integer taskId, Model model) {
-        if (taskId != null) {
-            ProjectTask task = taskService.findTask(taskId);
-            model.addAttribute("task", task);
-            return "project/task/cancel.page";
-        }
-        return "error";
+        ProjectTask task = taskService.findTask(taskId);
+        model.addAttribute("task", task);
+        return "project/task/cancel";
     }
 
-    @RequestMapping("/cancelSave")
+    @RequestMapping("/cancel")
     public String cancelSave(ProjectTask task, String content) {
         if (task.getTaskId() == null) {
             taskService.addTask(task);
@@ -233,7 +218,7 @@ public class TaskAction extends BaseController {
                     UserUtils.getUserId(), null, taskService.findTask(task.getTaskId()).getTaskProject().toString(),
                     taskService.findTask(task.getTaskId()), task, content);
         }
-        return "project/task/index.page";
+        return "redirect:" + adminPath + "project/task/index";
     }
 
     @RequestMapping("/findList")
@@ -248,19 +233,21 @@ public class TaskAction extends BaseController {
     }
 
     @RequestMapping("/findPager")
-    public String findPager(@CookieValue(required = false, value = ProjectUtils.COOKIE_PROJECT_ID) String projectId,
-                            Integer start, Integer limit, String statu, String choose, Model model,
-                            HttpServletRequest request, String moduleId,
-                            @RequestParam(required = false, defaultValue = "task_id") String order,
-                            String ordertype) {
+    public String findPager(
+            Integer start, Integer limit, String statu, String choose, Model model,
+            HttpServletRequest request, HttpServletResponse response, String moduleId,
+            @RequestParam(required = false, defaultValue = "task_id") String order,
+            String ordertype) {
+        Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
+        if (projectId == null) {
+            return redirectProjectForm();
+        }
         boolean asc = false;
         if ("desc".equals(ordertype)) {
             asc = true;
         }
         ProjectTask task = new ProjectTask();
-        if (projectId != null) {
-            task.setTaskProject(Integer.parseInt(projectId));
-        }
+        task.setTaskProject(projectId);
         String moduleIds = "";
         if (!StringUtil.isBlank(moduleId)) {
             if (moduleId.contains("p")) {
@@ -319,7 +306,7 @@ public class TaskAction extends BaseController {
             taskService.updateTask(task);
         }
         model.addAttribute("task", task);
-        return "project/task/index.page";
+        return "redirect:" + adminPath + "project/task/index";
     }
 
 
@@ -330,7 +317,7 @@ public class TaskAction extends BaseController {
         LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, LogUtil.LogAction.EDITED, oldTask.getTaskId().toString(),
                 UserUtils.getUserId(), null, oldTask.getTaskProject().toString(), oldTask, task, contents);
         model.addAttribute("task", task);
-        return "project/task/index.page";
+        return "redirect:" + adminPath + "project/task/index";
     }
 
     /**
@@ -342,7 +329,7 @@ public class TaskAction extends BaseController {
      * @param taskId
      * @return
      */
-    @RequestMapping("/preadd")
+    @RequestMapping("/form")
     public String preAdd(HttpServletRequest request, Model model, Integer storyId, String taskId) {
         String cookie = CookieUtils.getCookie(request, ProjectUtils.COOKIE_PROJECT_ID);
         if (StringUtil.isBlank(cookie)) {

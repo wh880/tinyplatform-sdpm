@@ -18,6 +18,7 @@ package org.tinygroup.sdpm.org.biz.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.security.Digests;
 import org.tinygroup.sdpm.common.util.Encodes;
 import org.tinygroup.sdpm.org.biz.inter.UserManager;
@@ -37,6 +38,9 @@ public class UserManagerImpl implements UserManager {
     private OrgUserDao orgUserDao;
 
     public OrgUser find(String id) {
+        if (StringUtil.isBlank(id)){
+            return null;
+        }
         return orgUserDao.getByKey(id);
     }
 

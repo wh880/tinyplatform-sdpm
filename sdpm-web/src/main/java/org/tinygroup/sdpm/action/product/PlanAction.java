@@ -67,7 +67,7 @@ public class PlanAction  extends BaseController{
 				, systemAction.getActionComment());
 
 
-		return "redirect:" + "/product/page/project/product-plan.page";
+		return "redirect:" + "/a/product/plan/content";
 	}
 
 	@RequestMapping("/update")
@@ -197,10 +197,10 @@ public class PlanAction  extends BaseController{
 	@ResponseBody
     @RequestMapping("/planList")
     public List<ProductPlan> findPlan(ProductPlan plan){
-    	
-    	List<ProductPlan> list = planService.findPlanList(plan);
-    	
-    	return list;
+		if(plan.getProductId()==null||plan.getProductId()<1)return new ArrayList<ProductPlan>();
+		plan.setDeleted(0);
+		List<ProductPlan> productPlans = planService.findPlanList(plan);
+		return productPlans;
     }
 
 	

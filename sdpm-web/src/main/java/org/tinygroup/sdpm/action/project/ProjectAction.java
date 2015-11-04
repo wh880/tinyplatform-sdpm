@@ -58,7 +58,7 @@ public class ProjectAction extends BaseController {
     @RequestMapping("/form")
     public String form(Model model) {
         model.addAttribute("productList", ProductUtils.getAllProductListByUser());
-        return "project/form.page";
+        return "project/form";
     }
     /**
      * 批量删除
@@ -86,6 +86,15 @@ public class ProjectAction extends BaseController {
     }
 
     /**
+     * 所有项目列表
+     * @return
+     */
+    @RequestMapping("/list")
+    public String list() {
+        return "project/list";
+    }
+
+    /**
      * 数据表格List
      *
      * @param start
@@ -100,12 +109,12 @@ public class ProjectAction extends BaseController {
         Integer[] userProjectIds = ProjectUtils.getUserProjectIdList();
         Pager<Project> projectPager = projectService.findProjects(start, limit, order, ordertype, userProjectIds);
         Integer interval = 2;
-        if (projectPager != null) for (Project project : projectPager.getRecords()) {
+        if (projectPager != null){ for (Project project : projectPager.getRecords()) {
             BurnDTO burnDTO = burnService.initBurn(project.getProjectId(), interval);
             project.setBurnValue(burnDTO.getLeftValues());
-        }
+        }}
         model.addAttribute("projectPager", projectPager);
-        return "project/allProjectData.pagelet";
+        return "project/listData.pagelet";
     }
 
 
@@ -113,30 +122,23 @@ public class ProjectAction extends BaseController {
     public String save(Model model, HttpServletResponse response, HttpServletRequest request, Project project,
                        Integer[] linkProduct, Integer[] whiteList) {
         project.setProjectWhiteList(StringUtil.join(whiteList, ","));
-        Project tProject = projectService.addProject(project);
+        Project tProject =  projectService.addProject(project);
         projectProductService.addLink(linkProduct, tProject.getProjectId());
         CookieUtils.setCookie(response, ProjectUtils.COOKIE_PROJECT_ID, tProject.getProjectId().toString());
         ProjectUtils.removeProjectList();
-        return "redirect:" + adminPath + "/project/allProject";
+        return "redirect:" + adminPath + "/project/list";
     }
 
-    @RequestMapping("/allProject")
-    public String jumpAllProject() {
-        return "project/list.page";
-    }
 
     @RequestMapping("/edit")
     public String form(Integer projectId, Model model) {
-        if (projectId != null) {
             Project project = projectService.findProjectById(projectId);
-            List<ProjectTeam> teamList = teamService.findTeamByProjectId(project.getProjectId());
+            List<ProjectTeam> teamList = teamService.findTeamByProjectId(projectId);
             model.addAttribute("teamList", teamList);
             model.addAttribute("project", project);
             List<Product> list = productService.findProductList(new Product(), "productId", "desc");
             model.addAttribute("prodcutList", list);
-            return "project/survey/edit.page";
-        }
-        return "error";
+            return "project/survey/edit";
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
@@ -160,7 +162,7 @@ public class ProjectAction extends BaseController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/delaysave", method = RequestMethod.POST)
+    @RequestMapping(value = "/delay", method = RequestMethod.POST)
     public Map<String, String> delaySave(Project project, String content) {
         Project oldProject = projectService.findProjectById(project.getProjectId());
         Integer res = projectService.updateProject(project);
@@ -268,11 +270,9 @@ public class ProjectAction extends BaseController {
         OrgUser productQd = userService.findUser(project.getProjectQd());
         //发布负责人
         OrgUser productRd = userService.findUser(project.getProjectRd());
-
         model.addAttribute("projectPm", projectPm);
         model.addAttribute("productQd", productQd);
         model.addAttribute("productRd", productRd);
-
         return "organization/others/projectUserBaseInfo.pagelet";
     }
 }

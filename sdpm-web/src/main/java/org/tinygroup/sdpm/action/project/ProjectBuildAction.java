@@ -14,9 +14,11 @@ import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.service.ProductService;
+import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTeam;
 import org.tinygroup.sdpm.project.service.inter.BuildService;
+import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.sdpm.project.service.inter.ProjectStoryService;
 import org.tinygroup.sdpm.project.service.inter.TeamService;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
@@ -34,20 +36,33 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by wangying14938 on 2015-09-22.版本
+ * 版本
+ * Created by wangying14938 on 2015-09-22.
  */
 @Controller
 @RequestMapping("/a/project/version")
-public class BuildAction extends BaseController {
+public class ProjectBuildAction extends BaseController {
     @Autowired
     private BuildService buildService;
     @Autowired
     private TeamService teamService;
     @Autowired
+    private ProjectService projectService;
+    @Autowired
     private ProductService productService;
     @Autowired
     private ProjectStoryService projectStoryService;
 
+    @RequestMapping("/build/index")
+    public String jumpBuildIndex(Model model, HttpServletRequest request, HttpServletResponse response) {
+        Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
+        if (projectId == null) {
+            return redirectProjectForm();
+        }
+        Project project = projectService.findProjectById(projectId);
+        model.addAttribute("project", project);
+        return "project/version/index.page";
+    }
 
     @RequestMapping("/productBuildList")
     public String productBuildList(ProjectBuild build, Model model, Integer start, Integer limit, String order, String ordertype, HttpServletRequest request) {
@@ -409,8 +424,14 @@ public class BuildAction extends BaseController {
 
     @ResponseBody
     @RequestMapping("/buildList")
-    public List<ProjectBuild> findProjectBuild(ProjectBuild build) {
-
+    public List<ProjectBuild> findProjectBuild(ProjectBuild build,String from) {
+        if("product".equals(from)){
+            if(build.getBuildProduct()==null&&build.getBuildProduct()<1){
+                return new ArrayList<ProjectBuild>();
+            }else{
+                build.setBuildDeleted("0");
+            }
+        }
         List<ProjectBuild> list = buildService.findListBuild(build);
 
         return list;

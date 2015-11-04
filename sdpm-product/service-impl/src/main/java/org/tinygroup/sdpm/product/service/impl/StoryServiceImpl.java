@@ -102,4 +102,8 @@ public class StoryServiceImpl implements StoryService {
         return storyManager.findPager(start, limit, story, condition, columnName, asc);
     }
 
+    public Pager<ProductStory> findProjectLinkedStory(int start, int limit,ProductStory story, String condition, String columnName, boolean asc) {
+        return storyManager.findProjectLinkedStory(start,limit,story,condition,columnName,asc);
+    }
+
 }

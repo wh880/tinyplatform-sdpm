@@ -86,19 +86,13 @@
                     <script type="text/javascript">
                         $("#${sid}").on("change", function () {
                             var pId = $("#${sid}  option:selected").val();
-
                             if (pId == '1') {
-                                ajaxRead("${sid}", "docProduct", "productId", "productName", "/document/ajax/productByDocLib", ${doc?.docProduct ? doc.docProduct : 0
-                            }
-                            );
+                                ajaxRead("${sid}", "docProduct", "productId", "productName", "/document/ajax/productByDocLib", ${doc?.docProduct ? doc.docProduct : 0});
                         }
                         if (pId == '2') {
                             $("select[name=docProject]").val("${doc?.docProject}").trigger("change");
                         } else {
-                            ajaxRead("${sid}", "docModule", "moduleId", "moduleName", "/document/ajax/moduleByDoclib?libId=" + pId, ${doc?.docModule ? doc.docModule : 0
-                        }
-                        )
-                        ;
+                            ajaxRead("${sid}", "docModule", "moduleId", "moduleName", "/document/ajax/moduleByDoclib?libId=" + pId, ${doc?.docModule ? doc.docModule : 0});
                         }
                         })
                     </script>
@@ -122,7 +116,7 @@
 
                         #@Tselect2Fix()
                             <a href="${TINY_CONTEXT_PATH+adminPath}/project/form" class="r">增加</a>
-                            <a href="${TINY_CONTEXT_PATH+adminPath}/project/allProject">全部</a>#end
+                            <a href="${TINY_CONTEXT_PATH+adminPath}/project/list">全部</a>#end
                         <script type="text/javascript">
 
                             $("#${sid}").on("change", function () {

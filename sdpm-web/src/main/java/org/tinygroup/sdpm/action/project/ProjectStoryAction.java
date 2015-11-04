@@ -10,9 +10,7 @@ import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.service.StoryService;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectStory;
-import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.sdpm.project.service.inter.ProjectStoryService;
-import org.tinygroup.sdpm.project.service.inter.TaskService;
 import org.tinygroup.sdpm.util.ProjectUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -33,11 +31,12 @@ public class ProjectStoryAction extends BaseController {
     @Autowired
     private ProjectStoryService projectStoryService;
     @Autowired
-    private TaskService taskService;
-    @Autowired
-    private ProjectService projectService;
-    @Autowired
     private StoryService storyService;
+
+    @RequestMapping("/index")
+    public String jumpStoryIndex() {
+        return "project/demand/index";
+    }
 
     @RequestMapping("/find")
     public String find(HttpServletRequest request, HttpServletResponse response,
@@ -72,7 +71,6 @@ public class ProjectStoryAction extends BaseController {
 
     @RequestMapping("/preLinkStory")
     public String preLinkStory() {
-
         return "project/demand/relateDemand.page";
     }
 
@@ -137,7 +135,7 @@ public class ProjectStoryAction extends BaseController {
 
     @ResponseBody
     @RequestMapping("/batchDel")
-    public Map<String, String> batchDel(Integer[] itemId, HttpServletRequest request, HttpServletResponse response) {
+    public Map<String, String> batchDel(Integer itemId[], HttpServletRequest request, HttpServletResponse response) {
         if (!ArrayUtil.isEmptyArray(itemId)) {
             Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
             if (projectId == null) {
@@ -148,7 +146,6 @@ public class ProjectStoryAction extends BaseController {
                 return resultMap(true, "删除成功");
             } else {
                 return resultMap(false, "删除失败");
-
             }
         } else {
             return resultMap(false, "未选择");
