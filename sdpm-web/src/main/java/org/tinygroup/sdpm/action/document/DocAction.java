@@ -209,9 +209,8 @@ public class DocAction extends BaseController {
     @RequestMapping(value = "/edit")
     public String editDoc(Model model, Integer docId) {
         SystemModule module = new SystemModule();
-        DocumentDoc doc;
         module.setModuleType("doc");
-        doc = docservice.findDocById(docId);
+        DocumentDoc doc = docservice.findDocById(docId);
         List<Product> list1 = productService.findProductList(new Product());
         List<Project> list2 = projectService.findList();
         List<SystemModule> listModule = moduleService.findModuleList(module);

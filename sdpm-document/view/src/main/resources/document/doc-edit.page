@@ -46,7 +46,7 @@
         <p class="titleName">编辑</p>
         #@elementItem()
         <div class="col-12">
-            <div class="col-2 text-r"><label>所属文档库&nbsp</label></div>
+            <div class="col-2 text-r"><label>所属文档库：</label></div>
         <div class="col-4">
             #@Tselect2F()
                 #@Tselect2Body("docLibId" doc?.docLibId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
@@ -73,7 +73,7 @@
                     </script>
                     <script type="text/javascript">
                         $("#${sid}").on("change", function () {
-                            var pId = $("#${sid}  option:selected").val();
+                            var pId = $("#${sid} option:selected").val();
                             if (pId == '1') {
                                 ajaxRead("${sid}", "docProduct", "productId", "productName", "/document/ajax/productByDocLib", ${doc?.docProduct ? doc.docProduct : 0});
                         }
@@ -91,7 +91,7 @@
         #end
 
         #@elementItem(elementId="project" eleItemClass="hidden")
-            #@colLabel()所属项目#end
+            #@colLabel()所属项目：#end
             #@formControlDiv("col-8")
                 #@div(divClass="col-6")
                     #@Tselect2F()
@@ -125,7 +125,7 @@
         #end
 
         #@elementItem(elementId="product" eleItemClass="hidden")
-            #@colLabel()所属产品#end
+            #@colLabel()所属产品：#end
             #@formControlDiv("col-8")
                 #@div(divClass="col-6")
                     #@Tselect2F()
@@ -150,7 +150,7 @@
         #end
         #@elementItem()
             <div class="col-12">
-                <div class="col-2 text-r"><label>所属分类&nbsp</label></div>
+                <div class="col-2 text-r"><label>所属分类：</label></div>
                 <div class="col-4">
                     #@Tselect2F()
 			          #@Tselect2Body("docModule" doc?.docModule?:0 {"class":"input-text select2"})#end
@@ -160,7 +160,7 @@
         #end
         #@elementItem()
             <div class="col-12">
-                <div class="col-2 text-r"><label>文档类型&nbsp</label></div>
+                <div class="col-2 text-r"><label>文档类型：</label></div>
                 <div class="col-8">
                     #@Tradioes("docType" doc?.docType)
                         #foreach(item:getDict("docType"))
@@ -173,7 +173,7 @@
 
         #@elementItem()
             <div class="col-12">
-                <div class="col-2 text-r"><label><span class="c-red">*</span>文档标题&nbsp</label></div>
+                <div class="col-2 text-r"><label><span class="c-red">*</span>文档标题：</label></div>
                 <div class="col-4">
                     #tinyInput("text" "docTitle" doc?.docTitle {"placeholder":"1~16个字符，字母/中文/数字/下划线","datatype":"*1-16",
                         "nullmsg":"标题不能为空！","class":"input-text"})
@@ -186,24 +186,24 @@
                 #@formControlDiv("col-12")
                     #tinyInput(
                         "text" "docUrl" ""{"style":"width:300px","placeholder":"相应的链接地址","datatype":"*4-16",
-                        "id":"docurl","class":"input-text"})
+                        "id":"docurl","class":"input-text","ignore":"ignore"})
                 #end
             #end
         #end
 
         #@elementItem()
             <div class="col-12">
-                <div class="col-2 text-r"><label>关键字&nbsp</label></div>
+                <div class="col-2 text-r"><label>关键字：</label></div>
                 <div class="col-4">
                     #tinyInput(
-                        "text" "docKeywords" doc?.docKeywords {"datatype":"","id":"docKeywords","class":"input-text"})
+                        "text" "docKeywords" doc?.docKeywords {"id":"docKeywords","class":"input-text"})
                 </div>
             </div>
             #@validateDiv("col-2")#end
         #end
         #@elementItem()
             <div class="col-12">
-                <div class="col-2 text-r"><label>文档摘要&nbsp</label></div>
+                <div class="col-2 text-r"><label>文档摘要：</label></div>
                 <div class="col-6">
                     #@Teditor("docDigest" "docDigest" {"initialFrameHeight":"150"})${doc?.docDigest}#end</div>
             </div>
@@ -211,7 +211,7 @@
 
         #@elementItem()
             <div class="col-12">
-                <div class="col-2 text-r"><label>文档备注&nbsp</label></div>
+                <div class="col-2 text-r"><label>文档备注：</label></div>
                 <div class="col-6">
                     #@Teditor("actionComment" "actionComment" {"initialFrameHeight":"150"})#end</div>
             </div>
@@ -279,6 +279,6 @@
     $(function () {
         $("form[name=thisform]").Validform({
             tiptype: 2
-        });
+        })
     });
 </script>
