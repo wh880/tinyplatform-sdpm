@@ -71,7 +71,7 @@ public class ProjectTeamAction extends BaseController {
         }
         model.addAttribute("userList", userList);
         model.addAttribute("teamList", teamList);
-        return "project/team/teamManage.page";
+        return "project/team/teamManage";
     }
 
     @RequestMapping("/teamManageSave")

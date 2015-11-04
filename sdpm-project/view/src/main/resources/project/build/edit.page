@@ -54,7 +54,7 @@
                 #@Tselect2Body(
                     "buildBuilder" build?.buildBuilder {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                     #foreach(t : teamList)
-                        <option value="${t?.teamUserId}">${t?.teamUserId?UserUtils.getUserById(t?.teamUserId)?.orgUserRealName:""}</option>
+                        <option value="${t.orgUserId}">${t.orgUserRealName}</option>
                     #end
                 #end
             ##填写任意内容，侦听需重新填加 A侦听已内置

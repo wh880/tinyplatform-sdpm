@@ -16,12 +16,10 @@ import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
-import org.tinygroup.sdpm.project.dao.pojo.ProjectTeam;
 import org.tinygroup.sdpm.project.service.dto.BurnDTO;
 import org.tinygroup.sdpm.project.service.inter.BurnService;
 import org.tinygroup.sdpm.project.service.inter.ProjectProductService;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
-import org.tinygroup.sdpm.project.service.inter.TeamService;
 import org.tinygroup.sdpm.util.*;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -40,8 +38,6 @@ public class ProjectAction extends BaseController {
     @Autowired
     private ProjectService projectService;
     @Autowired
-    private TeamService teamService;
-    @Autowired
     private ProductService productService;
     @Autowired
     private ProjectProductService projectProductService;
@@ -49,6 +45,20 @@ public class ProjectAction extends BaseController {
     private BurnService burnService;
     @Autowired
     private UserService userService;
+
+    @RequestMapping("/view")
+    public String view(Model model, HttpServletRequest request, HttpServletResponse response,
+                     Integer projectId) {
+        if (null == projectId) {
+            projectId = ProjectUtils.getCurrentProjectId(request, response);
+            if (projectId == null) {
+                return redirectProjectForm();
+            }
+        }
+        Project project = projectService.findProjectById(projectId);
+        model.addAttribute("project", project);
+        return "/project/survey/index";
+    }
 
     /**
      * 新增项目表单
@@ -63,30 +73,26 @@ public class ProjectAction extends BaseController {
     }
 
     /**
-     * 批量删除
+     * 新增项目表单保存
      *
-     * @param projectIds
+     * @param response
+     * @param request
+     * @param project
+     * @param linkProduct
+     * @param whiteList
      * @return
      */
-    @ResponseBody
-    @RequestMapping("/batchDelete")
-    public Map batchDelete(@RequestParam(value = "ids") String projectIds) {
-        if (StringUtil.isBlank(projectIds)) {
-            return resultMap(false, "请选择删除的项目");
-        }
-        String[] split = projectIds.split(",");
-        if (split == null || split.length == 0) {
-            return resultMap(false, "请选择删除的项目");
-        }
-        ArrayList<Integer> ids = new ArrayList<Integer>();
-        for (String id : split) {
-            ids.add(Integer.valueOf(id));
-        }
-        Integer[] integers = new Integer[ids.size()];
-        projectService.batchDeleteProject(ids.toArray(integers));
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    public String save(HttpServletResponse response, HttpServletRequest request, Project project,
+                       Integer[] linkProduct, Integer[] whiteList) {
+        project.setProjectWhiteList(StringUtil.join(whiteList, ","));
+        project = projectService.addProject(project);
+        projectProductService.addProjectLinkToProduct(linkProduct, project.getProjectId());
+        CookieUtils.setCookie(response, ProjectUtils.COOKIE_PROJECT_ID, project.getProjectId().toString());
         ProjectUtils.removeProjectList();
-        return resultMap(true, "删除项目成功");
+        return "redirect:" + adminPath + "/project/list";
     }
+
 
     /**
      * 所有项目列表
@@ -151,9 +157,34 @@ public class ProjectAction extends BaseController {
         List<Product> list = productService.findProductList(new Product(), "productId", "desc");
         model.addAttribute("prodcutList", list);
         return "project/survey/edit";
+    public String editForm(Integer projectId, Model model) {
+        Project project = projectService.findProjectById(projectId);
+        model.addAttribute("project", project);
+
+        List<ProjectProduct> projectProductList = projectProductService.findProjects(projectId);
+        String productIds = Collections3.extractToString(projectProductList, "productId", ",");
+        model.addAttribute("productIds", productIds);
+
+        model.addAttribute("teamList", userService.findTeamUserListByProjectId(projectId));
+        model.addAttribute("productList", ProductUtils.getAllProductListByUser());
+        return "project/survey/edit";
     }
 
+    /**
+     * 编辑已有项目
+     *
+     * @param project
+     * @param model
+     * @param whiteList
+     * @param productIds
+     * @return
+     */
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    public String editPost(Project project, Model model, Integer[] whiteList, Integer[] productIds) {
+        project.setProjectWhiteList(StringUtil.join(whiteList, ","));
+        projectProductService.addProjectLinkToProduct(productIds, project.getProjectId());
+
+        projectService.updateProject(project);
     public String formPost(Project project, Model model, Integer[] whiteList, Integer[] linkProduct) {
         if (project.getProjectId() == null) {
             Project resProject = projectService.addProject(project);
@@ -164,7 +195,7 @@ public class ProjectAction extends BaseController {
         }
         ProjectUtils.removeProjectList();
         model.addAttribute("project", project);
-        return "project/survey/index.page";
+        return "redirect:" + adminPath + "/project/view?projectId=" + project.getProjectId();
     }
 
     @RequestMapping("/delay")
@@ -206,6 +237,7 @@ public class ProjectAction extends BaseController {
     public String start(Integer projectId, Model model) {
         Project project = projectService.findProjectById(projectId);
         model.addAttribute("project", project);
+
         return "/project/survey/start.pagelet";
     }
 
@@ -240,6 +272,8 @@ public class ProjectAction extends BaseController {
 
     @RequestMapping("/finish")
     public String finish(Integer projectId, Model model) {
+        model.addAttribute("teamList", userService.findTeamUserListByProjectId(projectId));
+
         Project project = projectService.findProjectById(projectId);
         model.addAttribute("project", project);
         return "/project/survey/doing.pagelet";
@@ -288,4 +322,32 @@ public class ProjectAction extends BaseController {
         model.addAttribute("productRd", productRd);
         return "organization/others/projectUserBaseInfo.pagelet";
     }
+
+    /**
+     * 批量删除项目
+     *
+     * @param projectIds
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/batchDelete")
+    public Map batchDelete(@RequestParam(value = "ids") String projectIds) {
+        if (StringUtil.isBlank(projectIds)) {
+            return resultMap(false, "请选择删除的项目");
+        }
+        String[] split = projectIds.split(",");
+        if (split == null || split.length == 0) {
+            return resultMap(false, "请选择删除的项目");
+        }
+        ArrayList<Integer> ids = new ArrayList<Integer>();
+        for (String id : split) {
+            ids.add(Integer.valueOf(id));
+        }
+        Integer[] integers = new Integer[ids.size()];
+        projectService.batchDeleteProject(ids.toArray(integers));
+        ProjectUtils.removeProjectList();
+        return resultMap(true, "删除项目成功");
+    }
+
+
 }

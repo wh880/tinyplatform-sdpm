@@ -8,6 +8,7 @@ import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.system.biz.inter.ActionManager;
 import org.tinygroup.sdpm.system.dao.SystemActionDao;
+import org.tinygroup.sdpm.system.dao.impl.ActionEnum;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.tinysqldsl.base.Condition;
@@ -49,8 +50,8 @@ public class ActionManagerImpl implements ActionManager {
             for (SystemAction s : actions) {
                 SystemAction action = systemActionDao.getActionAndObject(s);
                 action.setActorName(s.getActorName());
+                action.setUrl(ActionEnum.getUrl(s.getActionObjectType())+s.getActionObjectId());
                 systemActions.add(action);
-                //s.setUrl(ActionEnum.getUrl(s.getActionObjectType()));
             }
         }
         return systemActions;
@@ -97,10 +98,9 @@ public class ActionManagerImpl implements ActionManager {
                 SystemAction action = systemActionDao.getActionAndObject(s);
                 if(action!=null){
                 	action.setActorName(s.getActorName());
+                    action.setUrl(ActionEnum.getUrl(s.getActionObjectType())+s.getActionObjectId());
                     actions.add(action);
                 }
-                
-                //s.setUrl(ActionEnum.getUrl(s.getActionObjectType()));
             }
         }
         systemActionPager.setRecords(actions);

@@ -66,6 +66,7 @@
             <dictItem key="review" value="评论" sort="18"/>
             <dictItem key="holiday" value="节假日" sort="19"/>
             <dictItem key="request" value="请求" sort="20"/>
+            <dictItem key="doc" value="文档" sort="21"/>
         </dictNodeEntry>
     </dictNodeEntry>
 </dictNodeEntries>

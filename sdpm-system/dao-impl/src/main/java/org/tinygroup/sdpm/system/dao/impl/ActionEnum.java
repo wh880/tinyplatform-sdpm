@@ -81,16 +81,16 @@ public class ActionEnum {
         urlMap.put("release","/product/release/forword/reRelateStory?releaseId=");
         urlMap.put("project","/project/manage/survey/index?projectId=");
         urlMap.put("product","/product/find/overview?productId=");
-        urlMap.put("build","build_name");
-        urlMap.put("bug","bug_title");
-        urlMap.put("case","case_title");
-        urlMap.put("testtask","testtask_title");
+        urlMap.put("build","/project/build/productalbug?buildId=");
+        urlMap.put("bug","/quality/bug/bugInfo?bugId=");
+        urlMap.put("case","/quality/testCase/case/viewInfo?id=");
+        urlMap.put("testtask","/quality/version/taskToCase?currentPageId=5&status=tverallcase&testversionId=");
         urlMap.put("todo","todo_name");
-        urlMap.put("doclib","doc_lib_name");
-        urlMap.put("doc","doc_title");
-        urlMap.put("holiday","holiday_name");
-        urlMap.put("productLine","product_line_name");
-        urlMap.put("sla","sla_title");
+        urlMap.put("doclib","/document?docLibId=");
+        urlMap.put("doc","/document/doc/view?docid=");
+        urlMap.put("holiday","/system/holiday/view?holidayId=");
+        urlMap.put("productLine","/productLine/find/overview?productLineId=");
+        urlMap.put("sla","/service/sla/slaContent?id=");
     }
 
     public static String getTable(String type){

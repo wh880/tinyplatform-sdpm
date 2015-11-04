@@ -14,7 +14,7 @@
 	#@td()${getDict("actionObject",a?.actionObjectType)}#end
 ##	#@td()${a?.actionObjectId}#end
 	#@td()
-    <a href="${TINY_CONTEXT_PATH +adminPath}/product/page/project/demdtablehref.page">${a?.objectName}</a>
+    <a href="${TINY_CONTEXT_PATH +adminPath+a?.url}">${a?.objectName}</a>
 	#end
 #end
 #end

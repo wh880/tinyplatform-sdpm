@@ -11,12 +11,12 @@ import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SqlUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
+import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
-import org.tinygroup.sdpm.project.dao.pojo.ProjectTeam;
 import org.tinygroup.sdpm.project.service.inter.BuildService;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.sdpm.project.service.inter.ProjectStoryService;
@@ -42,6 +42,8 @@ import java.util.Map;
 @Controller
 @RequestMapping("/a/project/build")
 public class ProjectBuildAction extends BaseController {
+    @Autowired
+    UserService userService;
     @Autowired
     private BuildService buildService;
     @Autowired
@@ -105,8 +107,7 @@ public class ProjectBuildAction extends BaseController {
         module.setModuleType("project");
         module.setModuleRoot(projectId);
         List<Product> list = productService.findProductList(new Product(), "productId", "desc");
-        List<ProjectTeam> teamList = teamService.findTeamByProjectId(projectId);
-        model.addAttribute("teamList", teamList);
+        model.addAttribute("teamList", userService.findTeamUserListByProjectId(projectId));
         model.addAttribute("productList", list);
         if (buildId != null && buildId != 0) {
             ProjectBuild build = buildService.findBuild(buildId);
@@ -226,8 +227,7 @@ public class ProjectBuildAction extends BaseController {
         module.setModuleType("project");
         module.setModuleRoot(projectId);
         List<Product> list = productService.findProductList(new Product(), "productId", "desc");
-        List<ProjectTeam> teamList = teamService.findTeamByProjectId(projectId);
-        model.addAttribute("teamList", teamList);
+        model.addAttribute("teamList", userService.findTeamUserListByProjectId(projectId));
         model.addAttribute("prodcutList", list);
         if (buildId != null && buildId != 0) {
             ProjectBuild build = buildService.findBuild(buildId);

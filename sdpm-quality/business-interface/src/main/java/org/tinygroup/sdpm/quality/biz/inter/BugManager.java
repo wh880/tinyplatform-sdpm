@@ -63,4 +63,6 @@ public interface BugManager {
 	Integer delete(Integer id);
 	
 	Map<String,List<BugCount>> report(String code,Integer productId);
+
+	Pager<QualityBug> queryStoryChangedBugs(Integer start,Integer limit,String conditions,QualityBug bug,String sortName,boolean asc);
 }

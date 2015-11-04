@@ -1,0 +1,51 @@
+#import("/org/tinygroup/form/components/form.component")
+#import("/org/tinygroup/bootstrapDate/components/bootstrapDate.component")
+#import("/org/tinygroup/button/components/button_common.component")
+#import("/org/tinygroup/button/components/button.component")
+#import("/org/tinygroup/fold/components/fold.component")
+#!set(linkName="demand")
+#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/system/holiday/save" "post" {"class":"test"})
+<div style="width:60%;float:left" class="pageleftpart">
+    <div class="infoContent">
+        <p class="titleName">概况</p>
+##        <input type="hidden" name="holidayId" value="${holiday?.holidayId}"/>
+##        <input type="hidden" name="holidayDeleted" value="0"/>
+        #@elementItem()
+            #@colLabel()名称：#end
+            #@formControlDiv("col-8")
+                ${holiday?.holidayName}
+            #end
+            #@validateDiv("col-2")#end
+        #end
+
+        #@elementItem()
+            #@colLabel()类型：#end
+            #@formControlDiv("col-8")
+                ${holiday?.holidayType}
+            #end
+            #@validateDiv("col-2")#end
+        #end
+
+
+        #@elementItem()
+            #@colLabel()日期：#end
+            #@formControlDiv("col-8")
+                ${holiday?.holidayDate}
+            #end
+            #@validateDiv("col-2")#end
+        #end
+
+        #@elementItem()
+            #@colLabel()描述：#end
+            #@formControlDiv("col-8")
+                ${holiday?.holidayDetail}
+            #end
+            #@validateDiv("col-2")#end
+        #end
+
+    </div>
+
+    <br>
+</div>
+    <div style="width:40%;float:right" class="pageleftpart">#history(adminPath+"/system/action/ajax/history?actionObjectType=holiday&actionObjectId="+holiday?.holidayId)</div>
+#end

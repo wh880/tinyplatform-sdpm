@@ -22,6 +22,7 @@ import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.weblayer.WebContext;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
@@ -30,6 +31,7 @@ import java.util.Map;
 
 /**
  * 产品控制器
+ *
  *
  * @author Administrator
  */
@@ -54,10 +56,8 @@ public class ProductAction extends BaseController {
 
 
     @RequestMapping("/{forward}/content")
-    public String doc(@CookieValue(value = "cookieProductId") String cookieProductId,@PathVariable(value = "forward") String forward, HttpServletRequest request, Model model) {
+    public String doc(@PathVariable(value = "forward") String forward, HttpServletRequest request, Model model) {
 
-        Product product = productService.findProduct(Integer.parseInt(cookieProductId));
-        model.addAttribute("product", product);
         if ("doc".equals(forward)) {
             return "/product/page/project/archive-list.page";
         } else if ("project".equals(forward)) {
@@ -71,7 +71,8 @@ public class ProductAction extends BaseController {
 
 
     @RequestMapping("")
-    public String productAction(HttpServletRequest request, WebContext webContext) {
+    public String productAction(HttpServletResponse response,HttpServletRequest request) {
+        ProductUtils.prepareForFirst(response);
         return "redirect:"+adminPath+"/product/story?choose=1" + (request.getQueryString() == null ? "" : ("&" + request.getQueryString()));
     }
 
@@ -98,7 +99,7 @@ public class ProductAction extends BaseController {
                 LogUtil.LogAction.OPENED,
                 String.valueOf(product.getProductId()),
                 UserUtils.getUserId(),
-                null,
+                String.valueOf(product.getProductId()),
                 null,
                 null,
                 null,
@@ -126,7 +127,7 @@ public class ProductAction extends BaseController {
                 LogUtil.LogAction.EDITED,
                 String.valueOf(product.getProductId()),
                 UserUtils.getUserId(),
-                null,
+                String.valueOf(product1.getProductId()),
                 null,
                 product1,
                 product,
@@ -170,7 +171,7 @@ public class ProductAction extends BaseController {
                 LogUtil.LogAction.DELETED,
                 String.valueOf(productId),
                 UserUtils.getUserId(),
-                null,
+                String.valueOf(product1.getProductId()),
                 null,
                 product1,
                 product,

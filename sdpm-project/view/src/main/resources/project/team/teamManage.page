@@ -1,6 +1,4 @@
 #!set(activeTitle="团队管理",activeMenuId=currentPageId)
-
-#set(name="team")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
         #@div(divClass="dropdownBox")

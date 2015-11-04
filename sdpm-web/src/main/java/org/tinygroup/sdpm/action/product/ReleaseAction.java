@@ -57,10 +57,8 @@ public class ReleaseAction extends BaseController {
     }
 
     @RequestMapping("/content")
-    public String release(@CookieValue("cookieProductId") String cookieProductId, HttpServletRequest request, Model model) {
+    public String release( HttpServletRequest request, Model model) {
 
-        Product product = productService.findProduct(Integer.parseInt(cookieProductId));
-        model.addAttribute("product", product);
         return "/product/page/project/product-release.page";
     }
 
@@ -94,7 +92,7 @@ public class ReleaseAction extends BaseController {
                 , LogUtil.LogAction.EDITED
                 , String.valueOf(release.getReleaseId())
                 , UserUtils.getUserId()
-                , String.valueOf(release.getProductId())
+                , String.valueOf(release1.getProductId())
                 , null
                 , release1
                 , release
@@ -117,7 +115,7 @@ public class ReleaseAction extends BaseController {
                 , LogUtil.LogAction.DELETED
                 , String.valueOf(releaseId)
                 , UserUtils.getUserId()
-                , String.valueOf(release.getProductId())
+                , String.valueOf(release1.getProductId())
                 , null
                 , release1
                 , release

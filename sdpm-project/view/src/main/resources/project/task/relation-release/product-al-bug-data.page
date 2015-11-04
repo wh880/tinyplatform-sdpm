@@ -1,31 +1,24 @@
-#set(records=bugList?.totalCount,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
-#if (pagesize>records-pagesize*(page-1))
-    #set(pagesize=records-(page-1)*pagesize)
-#end
 #setTinyItemCount(bugList?.totalCount)
-#for(bug:bugList.getRecords())
-#@tr()
-    #@td()<input type="checkbox" value="${bug?.bugId}" name="idCheck">#end
-    #@td()${bug?.bugId}#end
-    #@td()
-    <a href="${TINY_CONTEXT_PATH+adminPath}/quality/bug/bugInfo?bugId=${bug?bugId}"> ${bug?.bugTitle}
-    #end
-
-    #@td() ${getDict("bugStatus",bug?.bugStatus)}#end
-    #@td()${bug?.bugOpenedBy?UserUtils.getUserById(bug?.bugOpenedBy)?.orgUserRealName:""}#end
-    #@td()${formatDate(bug?.bugOpenedDate,"yyyy-MM-dd hh-mm-ss")}#end
-    #@td()${bug?.bugResolvedBy?UserUtils.getUserById(bug?.bugResolvedBy)?.orgUserRealName:""}#end
-    #@td()${formatDate(bug?.bugResolvedDate,"yyyy-MM-dd hh-mm-ss")} #end
-    #@td()
-
-        #foreach(m:menuManager?.getScopeMenus("version-linkbug"))
-            #set(url=eval(m.href))
-            #if("versionbug"==m.id)
-                #@tinyTableItemRemove(TINY_CONTEXT_PATH+adminPath+m.href+"?bugId="+bug.bugId+"&buildId="+id)<i class="${m.icon}"
-                                                                                                                 title=${m.name}></i>#end
+#foreach(bug:bugList.getRecords())
+    #@tr()
+        #@td()<input type="checkbox" value="${bug.bugId}" name="idCheck">#end
+        #@td()${bug.bugId}#end
+        #@td()
+        <a href="${TINY_CONTEXT_PATH+adminPath}/quality/bug/bugInfo?bugId=${bug.bugId}"> ${bug.bugTitle}
+        #end
+        #@td() ${getDict("bugStatus",bug.bugStatus)}#end
+        #@td()${bug.bugOpenedBy?UserUtils.getUserById(bug.bugOpenedBy)?.orgUserRealName:""}#end
+        #@td()${formatDate(bug.bugOpenedDate,"yyyy-MM-dd hh-mm-ss")}#end
+        #@td()${bug.bugResolvedBy?UserUtils.getUserById(bug.bugResolvedBy)?.orgUserRealName:""}#end
+        #@td()${formatDate(bug.bugResolvedDate,"yyyy-MM-dd hh-mm-ss")} #end
+        #@td()
+            #foreach(m:menuManager?.getScopeMenus("version-linkbug"))
+                #if("versionbug"==m.id)
+                    #@tinyTableItemRemove(TINY_CONTEXT_PATH+adminPath+m.href+"?bugId="+bug.bugId+"&buildId="+id)
+                        <i class="${m.icon}"/>
+                    #end
+                #end
             #end
         #end
     #end
-
-#end
 #end

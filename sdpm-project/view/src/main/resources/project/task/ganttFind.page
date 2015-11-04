@@ -26,7 +26,7 @@
     #@div(divClass="infoContent")
         <p class="titleName">历史记录</p>
     ##加入后，js代码会导致页面排版混乱
-        #include("/project/recordlist.page")
+##        #include("/project/recordlist.page")
     #end
 ##    <center>
 ##        #foreach(m:menuManager.getScopeMenus("pro-taskInfo-op"))

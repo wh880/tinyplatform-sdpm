@@ -39,10 +39,8 @@ public class PlanAction  extends BaseController{
 
 
 	@RequestMapping("/content")
-	public String release(@CookieValue("cookieProductId") String cookieProductId,HttpServletRequest request, Model model) {
+	public String release(HttpServletRequest request, Model model) {
 
-		Product product = productService.findProduct(Integer.parseInt(cookieProductId));
-		model.addAttribute("product", product);
 		return "/product/page/project/product-plan.page";
 	}
 

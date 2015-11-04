@@ -34,11 +34,11 @@ public class ProjectStoryAction extends BaseController {
     private StoryService storyService;
 
     @RequestMapping("/index")
-    public String jumpStoryIndex() {
+    public String index() {
         return "project/demand/index";
     }
 
-    @RequestMapping("/find")
+    @RequestMapping("/list/data")
     public String find(HttpServletRequest request, HttpServletResponse response,
                        Model model, Integer start, Integer limit, String order, String ordertype, String moduleId) {
         if (!moduleId.isEmpty()) {

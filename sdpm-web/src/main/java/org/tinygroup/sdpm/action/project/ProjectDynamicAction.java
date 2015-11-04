@@ -9,7 +9,6 @@ import org.tinygroup.sdpm.common.util.DateUtils;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.UserService;
-import org.tinygroup.sdpm.project.dao.pojo.ProjectTeam;
 import org.tinygroup.sdpm.project.service.inter.TeamService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.service.inter.ActionService;
@@ -20,7 +19,6 @@ import org.tinygroup.tinysqldsl.Pager;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by shenly13343 on 2015-10-16.
@@ -41,8 +39,7 @@ public class ProjectDynamicAction extends BaseController {
         if (projectId == null) {
             return redirectProjectForm();
         }
-        List<ProjectTeam> teamList = teamService.findTeamByProjectId(projectId);
-        model.addAttribute("teamList", teamList);
+        model.addAttribute("teamList", userService.findTeamUserListByProjectId(projectId));
         return "project/dynamic/index.page";
     }
 

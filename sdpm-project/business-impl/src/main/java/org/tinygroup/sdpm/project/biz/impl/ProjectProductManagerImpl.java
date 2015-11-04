@@ -20,12 +20,12 @@ public class ProjectProductManagerImpl implements ProjectProductManager {
     @Autowired
     private ProjectProductDao projectProductDao;
 
-    public void addLink(Integer[] productArray, Integer projectId) {
-        if (ArrayUtil.isEmptyArray(productArray)) {
+    public void addLink(Integer[] productIds, Integer projectId) {
+        if (ArrayUtil.isEmptyArray(productIds)) {
             return;
         }
         List<ProjectProduct> list = new ArrayList<ProjectProduct>();
-        for (Integer productId : productArray) {
+        for (Integer productId : productIds) {
             ProjectProduct t = new ProjectProduct();
             t.setProjectId(projectId);
             t.setProductId(productId);
@@ -47,7 +47,4 @@ public class ProjectProductManagerImpl implements ProjectProductManager {
         return projectProductDao.edit(projectproduct);
     }
 
-    public Integer delete(int id) {
-        return projectProductDao.deleteByKey(id);
-    }
 }
