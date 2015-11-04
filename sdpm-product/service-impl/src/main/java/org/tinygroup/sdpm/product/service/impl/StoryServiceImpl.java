@@ -35,6 +35,9 @@ public class StoryServiceImpl implements StoryService {
     }
 
     public ProductStory findStory(Integer storyId) {
+        if(storyId == null){
+            return null;
+        }
         return storyManager.find(storyId);
     }
 

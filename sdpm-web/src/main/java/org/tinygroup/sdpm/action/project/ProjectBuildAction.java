@@ -54,7 +54,7 @@ public class ProjectBuildAction extends BaseController {
     private ProjectStoryService projectStoryService;
 
     @RequestMapping("/build/index")
-    public String jumpBuildIndex(Model model, HttpServletRequest request, HttpServletResponse response) {
+    public String index(Model model, HttpServletRequest request, HttpServletResponse response) {
         Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
         if (projectId == null) {
             return redirectProjectForm();
