@@ -68,6 +68,16 @@ public class HolidayAction extends BaseController{
 		model.addAttribute("holiday", day);
 		return "/system/page/holiday/edit.page";
 	}
+
+	@RequestMapping("holiday/view")
+	public String view(Holiday holiday,Model model){
+		List<OrgUser> orgUsers=userService.findUserList(new OrgUser());
+		Holiday day = holidayService.findById(holiday.getHolidayId());
+		model.addAttribute("users", orgUsers);
+		model.addAttribute("holiday", day);
+		return "/system/page/holiday/view.page";
+	}
+
 	@RequestMapping(value ="holiday/save",method = RequestMethod.POST)
 	public String saveHoliday(@RequestParam(required = false)String selectList,Holiday holiday,Model model){
 		SystemAction action = new SystemAction();
@@ -93,11 +103,11 @@ public class HolidayAction extends BaseController{
 					UserUtils.getUserId(), null, null, null, null, null);
 			}
 		}else{
-			
+			Holiday holiday1 = holidayService.findById(holiday.getHolidayId());
 			holidayService.update(holiday);
 			LogUtil.logWithComment(LogOperateObject.HOLIDAY, LogAction.EDITED, 
 					String.valueOf(holiday.getHolidayId()), 
-					UserUtils.getUserId(), null, null, null, null, null);
+					UserUtils.getUserId(), null, null, holiday1, holiday, null);
 		}
 		model.addAttribute("holiday", holiday);
 		return "/system/page/holiday/holiday.page";
@@ -160,6 +170,10 @@ public class HolidayAction extends BaseController{
 	 		model.addAttribute("action", histories);
 		return "/system/page/holiday/holiday-dynamic.pagelet";
 	}
+
+	@RequestMapping("holiday/history/more")
+	public String historyMore(){return "/system/page/holiday/holidayHistory.pagelet";}
+
 	@RequestMapping("holiday/history")
 	public String holidayHistory(Integer start,Integer limit,String order,String ordertype,Model model){
 		Holiday holiday = new Holiday();
@@ -167,7 +181,7 @@ public class HolidayAction extends BaseController{
 		if("desc".equals(ordertype)){
 			asc=false;
 		}
-		Pager<Holiday> History = holidayService.findByPage(start,limit,holiday,order,asc);
+		Pager<Holiday> History = holidayService.findByPage(start,limit,holiday,"action_date",false);
 
 		model.addAttribute("History",History);
 		return "/system/page/holiday/holidayHistoryTableData.pagelet";

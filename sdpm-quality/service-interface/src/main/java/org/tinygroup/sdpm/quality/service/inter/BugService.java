@@ -69,5 +69,6 @@ public interface BugService {
 	Integer deleteBug(Integer bugId);
 
 	Map<String,List<BugCount>> report(String code, Integer productId);
-	
+
+	Pager<QualityBug> findStoryChangedBugs(Integer start,Integer limit, String conditions, QualityBug bug,String sortName,boolean asc);
 }

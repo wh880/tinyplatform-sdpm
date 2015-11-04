@@ -3,6 +3,7 @@ package org.tinygroup.sdpm.action.system;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.tinygroup.sdpm.common.web.BaseController;
@@ -40,23 +41,18 @@ public class ActionAction extends BaseController{
 	
 	@RequestMapping("/list")
 	public String list(SystemAction action,String choice,
-			@RequestParam(required = false,defaultValue = "1")int page,
+					   @CookieValue(value = "cookieProductId",defaultValue = "0") String cookieProductId,
+			@RequestParam(required = false,defaultValue = "1")int start,
 			@RequestParam(required = false,defaultValue = "10")int pagesize,
 			@RequestParam(required = false,defaultValue = "actionDate")String order,
 			@RequestParam(required = false,defaultValue = "asc")String ordertype,Model model,HttpServletRequest request){
 		
-	/*	if(request.getSession().getAttribute("sessionProductId")!=null){
-			plan.setProductId((Integer)(request.getSession().getAttribute("sessionProductId")));
-		}
-		*/
-		/*action.setActionObjectType("product");*/
-		if(request.getSession().getAttribute("sessionProductId")!=null){
-			action.setActionProduct(String.valueOf((Integer) request.getSession().getAttribute("sessionProductId")));
-		}else{
-			action.setActionProduct(null);
+
+		if(Integer.parseInt(cookieProductId)>0){
+			action.setActionProduct(cookieProductId);
 		}
 		
-		Pager<SystemAction>  pagerSystemAction = actionService.queryPager(page, pagesize,ActionUtil.getActionDateCondition(choice), action, order, ordertype);
+		Pager<SystemAction>  pagerSystemAction = actionService.queryPager(start, pagesize,ActionUtil.getActionDateCondition(choice), action, order, ordertype);
 
 		model.addAttribute("systemAction",pagerSystemAction);
 		

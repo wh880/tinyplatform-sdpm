@@ -12,10 +12,7 @@
 					<a href="${TINY_CONTEXT_PATH}/system/page/holiday/holiday.page" >节假日&工作日</a>
 			</span>
 			<span class="r">
-#*				#@iconOperations("#myModal" "icon-off" "关闭" "800" "500" "" "ml-5")关闭#end*#
-#*					
-				<a href="${TINY_CONTEXT_PATH}/system/page/holiday/edit.page" title="编辑">#buttonIcon(iconClass="icon-pencil")</a>
-				<a href="#" title="删除">#buttonIcon(iconClass="icon-common-delete icon-remove")</a>*#
+
 				<a href="javascript :;" onClick="javascript :history.back(-1);" title="返回">#buttonIcon(iconClass="icon-reply")</a>
 			</span>
 		#end
@@ -27,9 +24,7 @@
 				#setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置
 				#@radiusBtn("btn-danger spmuldet" "icon-trash" "javascript:","delete") 批量删除#end
 				#@aModal("#myModal" "批量删除" "1200" "500" "hidenmuldel hide" adminPath+"/system/holiday/findIds")#end
-##                #@mulOperation("muldelete" call("link","/system/holiday/findIds"))            
-##				 	#@radiusBtn("btn-danger" "icon-trash" "javascript:") 批量删除#end
-##				 #end
+
 				#@aModal("#myModal" "添加" "500" "360" "btn radius btn-primary" adminPath+"/system/holiday/add")添加#end
 			
 			#end

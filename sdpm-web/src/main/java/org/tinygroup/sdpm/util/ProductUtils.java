@@ -15,6 +15,7 @@ import org.tinygroup.sdpm.project.service.impl.TeamServiceImpl;
 import org.tinygroup.sdpm.project.service.inter.ProjectProductService;
 import org.tinygroup.sdpm.project.service.inter.TeamService;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -315,6 +316,22 @@ public class ProductUtils {
             }
         }
         return null;
+    }
+
+    public static void prepareForFirst( HttpServletResponse response){
+        String firstProductLineId = getFirstProductLine();
+        if(!StringUtil.isBlank(firstProductLineId)){
+            CookieUtils.setCookie(response,"cookieProductLineId",firstProductLineId);
+            if(getProductListByProductLineUser(firstProductLineId).size()>0){
+                CookieUtils.setCookie(response,"cookieProductId",String.valueOf(getProductListByProductLineUser(firstProductLineId).get(0).getProductId()));
+            }
+        }else if(getProductLineListByUser().size()>0){
+            firstProductLineId = String.valueOf(getProductLineListByUser().get(0).getProductLineId());
+            CookieUtils.setCookie(response,"cookieProductLineId",firstProductLineId);
+            if(getProductListByProductLineUser(firstProductLineId).size()>0){
+                CookieUtils.setCookie(response,"cookieProductId",String.valueOf(getProductListByProductLineUser(firstProductLineId).get(0).getProductId()));
+            }
+        }
     }
 
     private static Integer validateProductLine(String loginId, ProductLine productLine) {

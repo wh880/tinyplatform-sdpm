@@ -14,7 +14,7 @@
 				#foreach(m:menuManager.getScopeMenus("product-addre"))
 					#if(m.id=="product-release-add")
 				<span class="r">
-					<a title="编辑发布" class="ml-5" href="${TINY_CONTEXT_PATH +adminPath}/product/release/addRelease"><i
+					<a title="创建发布" class="ml-5" href="${TINY_CONTEXT_PATH +adminPath}/product/release/addRelease"><i
                             class="icon-plus"></i>创建发布</a>
 				</span>
 						#end

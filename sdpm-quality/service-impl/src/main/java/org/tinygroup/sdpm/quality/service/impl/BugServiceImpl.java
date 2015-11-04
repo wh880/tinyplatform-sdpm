@@ -51,6 +51,10 @@ public class BugServiceImpl implements BugService {
 		return bugmanager.report(code,productId);
 	}
 
+	public Pager<QualityBug> findStoryChangedBugs(Integer start, Integer limit, String conditions, QualityBug bug, String sortName, boolean asc) {
+		return bugmanager.queryStoryChangedBugs(start,limit,conditions,bug,sortName,asc);
+	}
+
 	public int[] batchDeleteBug(List<QualityBug> bugIds) {
 		
 		return bugmanager.batchDelete(bugIds);
