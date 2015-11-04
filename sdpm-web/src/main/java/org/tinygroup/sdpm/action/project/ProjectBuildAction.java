@@ -40,7 +40,7 @@ import java.util.Map;
  * Created by wangying14938 on 2015-09-22.
  */
 @Controller
-@RequestMapping("/a/project/version")
+@RequestMapping("/a/project/build")
 public class ProjectBuildAction extends BaseController {
     @Autowired
     private BuildService buildService;
@@ -53,7 +53,7 @@ public class ProjectBuildAction extends BaseController {
     @Autowired
     private ProjectStoryService projectStoryService;
 
-    @RequestMapping("/build/index")
+    @RequestMapping("/index")
     public String index(Model model, HttpServletRequest request, HttpServletResponse response) {
         Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
         if (projectId == null) {
@@ -61,16 +61,17 @@ public class ProjectBuildAction extends BaseController {
         }
         Project project = projectService.findProjectById(projectId);
         model.addAttribute("project", project);
-        return "project/version/index.page";
+        return "project/build/index";
     }
 
     @RequestMapping("/productBuildList")
-    public String productBuildList(ProjectBuild build, Model model, Integer start, Integer limit, String order, String ordertype, HttpServletRequest request) {
-
+    public String productBuildList(ProjectBuild build, Model model,
+                                   Integer start, Integer limit, String order, String ordertype,
+                                   HttpServletRequest request) {
         boolean asc = "asc".equals(ordertype) ? true : false;
         Pager<ProjectBuild> pager = buildService.findPagerBuild(build, start, limit, order, asc);
         model.addAttribute("buildPager", pager);
-        return "project/version/tableData.pagelet";
+        return "project/build/tableData.pagelet";
     }
 
 
@@ -84,12 +85,12 @@ public class ProjectBuildAction extends BaseController {
         boolean asc = "asc".equals(ordertype) ? true : false;
         Pager<ProjectBuild> pager = buildService.findPager(projectId, start, limit, order, asc);
         model.addAttribute("buildPager", pager);
-        return "project/version/tableData.pagelet";
+        return "project/build/tableData.pagelet";
     }
 
     @RequestMapping("/look")
     public String look() {
-        return "project/bug/index.page";
+        return "project/bug/index";
     }
 
 
@@ -113,7 +114,7 @@ public class ProjectBuildAction extends BaseController {
         } else {
             model.addAttribute("build", null);
         }
-        return "project/version/edit";
+        return "project/build/edit";
     }
 
 
@@ -145,7 +146,7 @@ public class ProjectBuildAction extends BaseController {
                     null);
         }
         model.addAttribute("build", build);
-        return "project/version/index.page";
+        return "project/build/index.page";
     }
 
     @ResponseBody
@@ -235,18 +236,15 @@ public class ProjectBuildAction extends BaseController {
         } else {
             model.addAttribute("build", null);
         }
-        return "project/version/add.page";
+        return "project/build/add.page";
     }
 
     @RequestMapping("/productalbug")
     public String productalbug(Integer buildId, Model model) {
-        if (buildId != null) {
             ProjectBuild build = buildService.findBuild(buildId);
             model.addAttribute("build", build);
             //还需要查询其他相关任务剩余时间的信息
             return "/project/task/relation-release/product-al-bug.page";
-        }
-        return "error";
     }
 
     @RequestMapping("/releasebaseinfo")
@@ -349,7 +347,7 @@ public class ProjectBuildAction extends BaseController {
     }
 
     @RequestMapping("/search/noRelateStory")
-    public String storynoListAction(int page, int pagesize, int id, String groupOperate, SearchInfos searchInfos,
+    public String storyNoListAction(int page, int pagesize, int id, String groupOperate, SearchInfos searchInfos,
                                     Model model) {
         String condition = "";
         if (searchInfos != null) {
@@ -432,10 +430,7 @@ public class ProjectBuildAction extends BaseController {
                 build.setBuildDeleted("0");
             }
         }
-        List<ProjectBuild> list = buildService.findListBuild(build);
-
-        return list;
+        return buildService.findListBuild(build);
     }
-
 
 }

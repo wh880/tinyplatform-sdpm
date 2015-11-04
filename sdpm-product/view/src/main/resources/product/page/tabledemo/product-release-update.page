@@ -34,7 +34,7 @@
 
                 <script>
 
-                    ajaxRead("${sid}", "buildId", "buildId", "buildName", "/project/version/buildList");
+                    ajaxRead("${sid}", "buildId", "buildId", "buildName", "/project/build/buildList");
 
                 </script>
 

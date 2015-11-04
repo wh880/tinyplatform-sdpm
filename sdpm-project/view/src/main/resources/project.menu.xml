@@ -128,33 +128,33 @@
     </menu>
 
     <menu id="version" parent-id="project" name="版本" href="/project/build/index" icon="" sort="1" isShow="1">
-        <menu id="pro-version-look" name="查看bug" href="/project/version/look" icon="icon-eye-open" sort="20"
+        <menu id="pro-version-look" name="查看bug" href="/project/build/look" icon="icon-eye-open" sort="20"
               isShow="1"
               scope="pro-version-op"/>
-        <menu id="pro-version-edit" name="编辑版本" href="/project/version/edit" icon="icon-pencil" sort="15" isShow="1"
+        <menu id="pro-version-edit" name="编辑版本" href="/project/build/edit" icon="icon-pencil" sort="15" isShow="1"
               scope="pro-version-op"/>
-        <menu id="pro-version-delete" name="删除" href="/project/version/delete" icon="icon-remove" sort="10" isShow="1"
+        <menu id="pro-version-delete" name="删除" href="/project/build/delete" icon="icon-remove" sort="10" isShow="1"
               scope="pro-version-op"/>
 
         <menu id="version-menu" name="任务菜单" href="/project/build/index" icon="" sort="1" isShow="1">
-            <menu id="pro-version-report" name="新建版本" href="/project/version/add" icon="icon-plus" sort="8" isShow="1"
+            <menu id="pro-version-report" name="新建版本" href="/project/build/add" icon="icon-plus" sort="8" isShow="1"
                   scope="pro-versionmenu-op"/>
         </menu>
 
 
-        <menu id="version-bug" name="" href="/project/version/productalbug" icon="" sort="1" isShow="1">
-            <menu id="versionbug" name="" href="/project/version/deletereleateBug" icon="icon-remove" sort="8" isShow="1"
+        <menu id="version-bug" name="" href="/project/build/productalbug" icon="" sort="1" isShow="1">
+            <menu id="versionbug" name="" href="/project/build/deletereleateBug" icon="icon-remove" sort="8" isShow="1"
                   scope="version-linkbug"/>
         </menu>
-        <menu id="version-story" name="" href="/project/version/productalstory" icon="" sort="1" isShow="1">
-            <menu id="versionstory" name="" href="/project/version/deletereleate" icon="icon-remove" sort="8" isShow="1"
+        <menu id="version-story" name="" href="/project/build/productalstory" icon="" sort="1" isShow="1">
+            <menu id="versionstory" name="" href="/project/build/deletereleate" icon="icon-remove" sort="8" isShow="1"
                   scope="version-linkdemand"/>
         </menu>
 
     </menu>
 
     <menu id="test" parent-id="project" name="测试" href="/project/manage/test/index" icon="" sort="1" isShow="1">
-        <menu id="test-menu" name="任务菜单" href="/project/version/index.page" icon="" sort="1" isShow="1">
+        <menu id="test-menu" name="任务菜单" href="/project/build/index.page" icon="" sort="1" isShow="1">
             <menu id="pro-test-report" name="提交测试" href="/quality/version/add" icon="icon-plus" sort="8" isShow="1"
                   scope="pro-testmenu-op"/>
         </menu>

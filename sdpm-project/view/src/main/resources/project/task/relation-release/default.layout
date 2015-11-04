@@ -15,13 +15,13 @@
 
                     #@aModal("#Modal" "新增日志" "900" "250""" "/project/task/note.pagelet")#buttonIcon(iconClass=
                         "icon-time")日志#end
-    <a href="${TINY_CONTEXT_PATH+adminPath}/project/version/forword/alReq?buildId=${build.buildId}">#buttonIcon(iconClass=
+    <a href="${TINY_CONTEXT_PATH+adminPath}/project/build/forword/alReq?buildId=${build.buildId}">#buttonIcon(iconClass=
         "icon-link")关联需求</a>&nbsp;
-				<a href="${TINY_CONTEXT_PATH+adminPath}/project/version/forword/alBug?buildId=${build.buildId}">#buttonIcon(iconClass=
+				<a href="${TINY_CONTEXT_PATH+adminPath}/project/build/forword/alBug?buildId=${build.buildId}">#buttonIcon(iconClass=
                     "icon-bug")关联Bug</a>&nbsp;
-<a href="${TINY_CONTEXT_PATH+adminPath}/project/version/edit?buildId=${build.buildId}">#buttonIcon(iconClass=
+<a href="${TINY_CONTEXT_PATH+adminPath}/project/build/edit?buildId=${build.buildId}">#buttonIcon(iconClass=
     "icon-pencil")编辑发布</a>&nbsp;
-        <a href="${TINY_CONTEXT_PATH+adminPath}/project/version/delete?id=${build.buildId}"
+        <a href="${TINY_CONTEXT_PATH+adminPath}/project/build/delete?id=${build.buildId}"
            name="删除发布">#buttonIcon(iconClass=
             "icon-remove")</a>&nbsp;
     <a href="${TINY_CONTEXT_PATH+adminPath}/project/manage/build/index" title="返回">#buttonIcon(iconClass=
@@ -38,7 +38,7 @@
             #@tabHead()
                 #if("demand"==type)
                     #@aHeadCol(TINY_CONTEXT_PATH+adminPath+
-                        "/project/version/forword/alReq?buildId="+build.buildId cname==
+                        "/project/build/forword/alReq?buildId="+build.buildId cname==
                         "demand"?
                         "Current":"")
                         #@buttons("","icon-lightbulb")
@@ -46,7 +46,7 @@
                         #end
                     #end
                     #@aHeadCol(TINY_CONTEXT_PATH+adminPath+
-                        "/project/version/forword/alnoReq?buildId="+build.buildId cname==
+                        "/project/build/forword/alnoReq?buildId="+build.buildId cname==
                         "no-demand"?"Current":"")
                         #@buttons("","icon-unlink")
                             未关联需求
@@ -62,21 +62,21 @@
 
                 #if("bug"==type)
                     #@aHeadCol(TINY_CONTEXT_PATH+adminPath+
-                        "/project/version/forword/alBug?buildId="+build.buildId cname=="bug"?
+                        "/project/build/forword/alBug?buildId="+build.buildId cname=="bug"?
                         "Current":"")
                         #@buttons("","icon-bug green")
                             已解决Bug
                         #end
                     #end
                     #@aHeadCol(TINY_CONTEXT_PATH+adminPath+
-                        "/project/version/forword/alnoBug?buildId="+build.buildId cname==
+                        "/project/build/forword/alnoBug?buildId="+build.buildId cname==
                         "no-bug"?"Current":"")
                         #@buttons("","icon-unlink")
                             未关联Bug
                         #end
                     #end
                     #@aHeadCol(TINY_CONTEXT_PATH+adminPath+
-                        "/project/version/forword/alleBug?buildId="+build.buildId cname==
+                        "/project/build/forword/alleBug?buildId="+build.buildId cname==
                         "le-bug"?"Current":"")
                         #@buttons("","icon-bug green")
                             遗留Bug

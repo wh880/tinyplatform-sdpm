@@ -36,11 +36,11 @@
                 #end
 
                 <script>
-                    ajaxRead("${sid}", "buildId", "buildId", "buildName", "/project/version/buildList?buildProduct=${cookieProductId}&from=product");
+                    ajaxRead("${sid}", "buildId", "buildId", "buildName", "/project/build/buildList?buildProduct=${cookieProductId}&from=product");
                 </script>
 
 
-                #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH +adminPath}/project/version/add?buildId="
+                #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH +adminPath}/project/build/add?buildId="
                                   class="r ">增加</a><a href="${TINY_CONTEXT_PATH +adminPath}/project/manage/build/index">全部</a>#end
             #end
 		#end

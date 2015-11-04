@@ -23,7 +23,7 @@
                 #div(divClass="clearfix")
             #end
         ##operationbar end
-            #include("/project/version/togglebox.page")
+            #include("/project/build/togglebox.page")
         #end
     #end
 #end
