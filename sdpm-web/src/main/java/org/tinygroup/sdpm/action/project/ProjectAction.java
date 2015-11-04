@@ -3,7 +3,10 @@ package org.tinygroup.sdpm.action.project;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.util.Collections3;
 import org.tinygroup.sdpm.common.web.BaseController;
@@ -43,9 +46,9 @@ public class ProjectAction extends BaseController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping("/view/{projectId}")
+    @RequestMapping("/view")
     public String view(Model model, HttpServletRequest request, HttpServletResponse response,
-                       @PathVariable(value = "projectId") Integer projectId) {
+                     Integer projectId) {
         if (null == projectId) {
             projectId = ProjectUtils.getCurrentProjectId(request, response);
             if (projectId == null) {
