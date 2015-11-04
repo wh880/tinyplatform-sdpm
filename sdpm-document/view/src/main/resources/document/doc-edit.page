@@ -41,6 +41,7 @@
 #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/document/doc/editSave" "post" {"class":"edit","enctype":
     "multipart/form-data"})
 <input name="docId" type="hidden" value="${doc?.docId}"/>
+<input name="from" type="hidden" value="${from}"/>
 <div style="width:100%">
     <div class="infoContent">
         <p class="titleName">编辑</p>

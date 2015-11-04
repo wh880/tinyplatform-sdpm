@@ -79,6 +79,15 @@ public class ProductRelease implements Serializable{
 	 */
 	private Integer deleted;
 
+	private String buildName;
+
+	public String getBuildName() {
+		return buildName;
+	}
+
+	public void setBuildName(String buildName) {
+		this.buildName = buildName;
+	}
 
 	public void setReleaseId(Integer releaseId){
 		this. releaseId = releaseId;

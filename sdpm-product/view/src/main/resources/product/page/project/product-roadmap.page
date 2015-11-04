@@ -34,7 +34,7 @@
 			
 			            #if(road?.planEndDate)
 							#@dateBody("计划："+road?.planName) 
-								[${formatDate(road?.planBeginDate,"yyyy.MM.dd")}--${formatDate(road?.planBeginDate,"yyyy.MM.dd")}] <br/>
+								[${formatDate(road?.planBeginDate,"yyyy.MM.dd")}--${formatDate(road?.planEndDate,"yyyy.MM.dd")}] <br/>
 								${road?.planSpec} 
 							#end
 						#else

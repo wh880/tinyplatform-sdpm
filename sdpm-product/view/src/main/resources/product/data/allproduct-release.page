@@ -11,7 +11,7 @@
     #@td()<a
             href="${TINY_CONTEXT_PATH +adminPath}/product/release/forword/reRelateStory?releaseId=${release.releaseId}">${release
         ?.releaseName}</a>#end
-    #@td()${release?.buildId}#end
+    #@td()${release?.buildName}#end
     #@td()${release?.releaseDate?formatDate(release?.releaseDate,'yyyy年MM月dd日'):""}#end
     #@td()
 			#foreach(m:menuManager.getScopeMenus("product-re"))

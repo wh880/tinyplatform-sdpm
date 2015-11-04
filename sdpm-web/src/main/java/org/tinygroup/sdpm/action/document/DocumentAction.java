@@ -265,7 +265,6 @@ public class DocumentAction extends BaseController {
                     null,
                     null,
                     null);
-            return "redirect:" + "/a/product/doc/content";
         } else {
             DocumentDoc document = docservice.findDocById(doc.getDocId());
             docservice.editDoc(doc);
@@ -278,8 +277,8 @@ public class DocumentAction extends BaseController {
                     document,
                     doc,
                     null);
-            return "redirect:" + adminPath + "/document/product/doc";
         }
+        return "redirect:" + "/a/product/doc/content";
     }
 
     @ResponseBody

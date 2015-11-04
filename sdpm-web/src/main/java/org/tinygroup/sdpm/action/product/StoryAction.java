@@ -684,8 +684,6 @@ public class StoryAction extends BaseController {
 
         bug.setProductId(Integer.parseInt(cookieProductId));
 
-        // String condition = StoryUtil.getStatusCondition(choose, request);
-
         String condition = "";
         if (searchInfos != null) {
             if (searchInfos.getInfos().size() > 0
@@ -704,35 +702,43 @@ public class StoryAction extends BaseController {
                     + bug.getPlanId();
             bug.setPlanId(null);
         }
-
-        if (releaseId != null && releaseId > 0) {
-            ProductRelease release = releaseService.findRelease(releaseId);
-            if (release != null) {
-                String releaseBugs = release.getReleaseBugs();
-                if (releaseBugs != null) {
-                    if ("reRelateBugRelease".equals(relate)) {
-                        if ("".endsWith(releaseBugs)) {
-                            condition = (StringUtil.isBlank(condition.trim()) ? " " : (condition + " and ")) + "quality_bug.bug_id is null";
-                        } else {
-                            condition = (StringUtil.isBlank(condition.trim()) ? " " : (condition + " and ")) + "quality_bug.bug_id in (" + releaseBugs + ")  and quality_bug.bug_status=2";
-                        }
-
-                    }
-                    if ("noRelateBugRelease".equals(relate) && !StringUtil.isBlank(releaseBugs)) {
-                        condition = (StringUtil.isBlank(condition.trim()) ? " " : (condition + " and ")) + "quality_bug.bug_id not in (" + releaseBugs + ") ";
-                    }
-                    if ("leRelateBugRelease".equals(relate) && !StringUtil.isBlank(releaseBugs)) {
-                        condition = (StringUtil.isBlank(condition.trim()) ? " " : (condition + " and ")) + "quality_bug.bug_id in (" + releaseBugs + ")  and quality_bug.bug_status=1";
-                    }
-                }
-            }
-        }
-
-
         Pager<QualityBug> p = bugService.findBugListPager(
                 pagesize * (page - 1), pagesize, condition, bug, order,
                 "asc".equals(ordertype) ? true : false);
         model.addAttribute("bugList", p);
+        if (releaseId != null && releaseId > 0) {
+            ProductRelease release = releaseService.findRelease(releaseId);
+            if (release != null) {
+                bug.setBugOpenedBuild(String.valueOf(release.getBuildId()));
+                String releaseBugs = release.getReleaseBugs();
+                String inCondition = StringUtil.isBlank(releaseBugs)?"":releaseBugs;
+                if ("reRelateBugRelease".equals(relate)) {
+                    if(StringUtil.isBlank(inCondition)){
+                        p = new Pager<QualityBug>(0,0,new ArrayList<QualityBug>());
+                    }else{
+                        condition = (StringUtil.isBlank(condition.trim()) ? " " : (condition + " and ")) + "quality_bug.bug_id in (" + inCondition+ ")";
+                        p = bugService.findBugListPager(
+                                pagesize * (page - 1), pagesize, condition, bug, order,
+                                "asc".equals(ordertype) ? true : false);
+                    }
+                }else if("noRelateBugRelease".equals(relate)){
+                    bug.setBugStatus("2");
+                    if(!StringUtil.isBlank(inCondition)){
+                        condition = (StringUtil.isBlank(condition.trim()) ? " " : (condition + " and ")) + "quality_bug.bug_id not in (" + inCondition + ") ";
+                    }
+                    p = bugService.findBugListPager(
+                            pagesize * (page - 1), pagesize, condition, bug, order,
+                            "asc".equals(ordertype) ? true : false);
+                }else{
+                    bug.setBugStatus("1");
+                    p = bugService.findBugListPager(
+                            pagesize * (page - 1), pagesize, condition, bug, order,
+                            "asc".equals(ordertype) ? true : false);
+                }
+                model.addAttribute("bugList", p);
+            }
+
+        }
 
         if ("reRelateBug".equals(relate)) {
             return "/product/data/plan/product-al-bug-data.pagelet";

@@ -24,9 +24,7 @@ import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 /**
@@ -198,7 +196,7 @@ public class ReleaseAction extends BaseController {
     }
 
     @RequestMapping("/addRelease")
-    public String addRelease(@CookieValue("cookieProductId") String cookieProductId,HttpServletRequest request, Model model) {
+    public String addRelease(@CookieValue(value = "cookieProductId",defaultValue = "0") String cookieProductId,HttpServletRequest request, Model model) {
         Product product = productService.findProduct(Integer.parseInt(cookieProductId));
         model.addAttribute("product", product);
         return "/product/page/tabledemo/product-addrelease.page";
@@ -210,9 +208,9 @@ public class ReleaseAction extends BaseController {
 
         ProductRelease release = releaseService.findRelease(releaseId);
         if (release != null && !StringUtil.isBlank(release.getReleaseStories())) {
-            String releaseStories = release.getReleaseStories();
-            releaseStories = storyIdUtils(releaseStories, storyId == null ? "" : storyId.trim());
-            release.setReleaseStories(releaseStories);
+            List<String> origin = new ArrayList<String>(Arrays.asList(release.getReleaseStories().split(",")));
+            origin.remove(String.valueOf(storyId));
+            release.setReleaseStories(StringUtil.join(origin.toArray(),","));
             releaseService.updateRelease(release);
         }
 
@@ -230,13 +228,11 @@ public class ReleaseAction extends BaseController {
 
         ProductRelease release = releaseService.findRelease(releaseId);
         if (release != null && !StringUtil.isBlank(release.getReleaseBugs())) {
-            String releaseBugs = release.getReleaseBugs();
-            releaseBugs = storyIdUtils(releaseBugs, bugId == null ? "" : bugId.trim());
-            release.setReleaseBugs(releaseBugs);
-            ;
+            List<String> origin = new ArrayList<String>(Arrays.asList(release.getReleaseBugs().split(",")));
+            origin.remove(String.valueOf(bugId));
+            release.setReleaseBugs(StringUtil.join(origin.toArray(), ","));
             releaseService.updateRelease(release);
         }
-
 
         Map<String, String> map = new HashMap<String, String>();
         map.put("status", "success");
@@ -251,11 +247,10 @@ public class ReleaseAction extends BaseController {
 
         ProductRelease release = releaseService.findRelease(releaseId);
         if (release != null && !StringUtil.isBlank(release.getReleaseStories())) {
-            String releaseStories = release.getReleaseStories();
-            for (String id : ids.split(",")) {
-                releaseStories = storyIdUtils(releaseStories, id == null ? "" : id.trim());
-            }
-            release.setReleaseStories(releaseStories);
+            List<String> origin = new ArrayList<String>(Arrays.asList(release.getReleaseStories().split(",")));
+            List<String> remove = new ArrayList<String>(Arrays.asList(ids.split(",")));
+            origin.removeAll(remove);
+            release.setReleaseStories(StringUtil.join(origin.toArray(),","));
             releaseService.updateRelease(release);
         }
 
@@ -273,11 +268,10 @@ public class ReleaseAction extends BaseController {
 
         ProductRelease release = releaseService.findRelease(releaseId);
         if (release != null && !StringUtil.isBlank(release.getReleaseBugs())) {
-            String releaseBugs = release.getReleaseBugs();
-            for (String id : ids.split(",")) {
-                releaseBugs = storyIdUtils(releaseBugs, id == null ? "" : id.trim());
-            }
-            release.setReleaseBugs(releaseBugs);
+            List<String> origin = new ArrayList<String>(Arrays.asList(release.getReleaseBugs().split(",")));
+            List<String> remove = new ArrayList<String>(Arrays.asList(ids.split(",")));
+            origin.removeAll(remove);
+            release.setReleaseBugs(StringUtil.join(origin.toArray(), ","));
             releaseService.updateRelease(release);
         }
 
@@ -291,53 +285,61 @@ public class ReleaseAction extends BaseController {
 
     @ResponseBody
     @RequestMapping("/ajaxRelateStory")
-    public boolean RelateStory(@RequestBody ProductStory[] stories) {
+    public Map RelateStory(Integer releaseId,String ids) {
+        String[] stories = ids.split(",");
         if (stories.length > 0 && stories != null) {
-            ProductRelease release = releaseService.findRelease(stories[0].getReleaseId());
-            String releaseStories = release == null ? "" : (release.getReleaseStories());
-            releaseStories = StringUtil.isBlank(releaseStories)?"":releaseStories;
-            for (ProductStory story : stories) {
-                ProductStory productStory = storyService.findStory(story.getStoryId());
-                if (release != null && releaseStories != null) {
-                    if ("".equals(releaseStories)) {
-                        productStory.setStoryStage("9");
-                        releaseStories = releaseStories + story.getStoryId();
-                    } else {
-                        releaseStories = releaseStories + "," + story.getStoryId();
-                    }
+            ProductRelease release = releaseService.findRelease(releaseId);
+            String releaseStories = "";
+            if(release!=null&&!StringUtil.isBlank(release.getReleaseStories())){
+                releaseStories = release.getReleaseStories();
+            }
+            for (String id : stories) {
+                ProductStory productStory = storyService.findStory(Integer.parseInt(id));
+                productStory.setStoryStage("9");
+                if ("".equals(releaseStories)) {
+                    releaseStories = releaseStories + id;
+                }else{
+                    releaseStories = releaseStories + "," + id;
                 }
                 storyService.updateStory(productStory);
             }
             release.setReleaseStories(releaseStories);
             releaseService.updateRelease(release);
-            return true;
-        } else {
-            return false;
         }
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("status", "success");
+        map.put("info", "成功");
+
+        return map;
     }
 
     @ResponseBody
     @RequestMapping("/ajaxRelateBug")
-    public boolean RelateBug(@RequestBody QualityBug[] bugs) {
+    public Map RelateBug(Integer releaseId,String ids) {
+        String[] bugs = ids.split(",");
         if (bugs.length > 0 && bugs != null) {
-            ProductRelease release = releaseService.findRelease(bugs[0].getReleaseId());
-            String releaseBugs = release == null ? "" : release.getReleaseBugs();
-            for (QualityBug bug : bugs) {
+            ProductRelease release = releaseService.findRelease(releaseId);
+            String releaseBugs = "";
+            if(release!=null&&!StringUtil.isBlank(release.getReleaseBugs())){
+                releaseBugs = release.getReleaseBugs();
+            }
+            for (String bugId : bugs) {
                 if (release != null && releaseBugs != null) {
                     if ("".equals(releaseBugs)) {
-                        releaseBugs = releaseBugs + bug.getBugId();
+                        releaseBugs = releaseBugs +bugId;
                     } else {
-                        releaseBugs = releaseBugs + "," + bug.getBugId();
+                        releaseBugs = releaseBugs + "," + bugId;
                     }
 
                 }
             }
             release.setReleaseBugs(releaseBugs);
             releaseService.updateRelease(release);
-            return true;
-        } else {
-            return false;
         }
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("status", "success");
+        map.put("info", "成功");
+        return map;
     }
 
 

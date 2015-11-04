@@ -28,7 +28,7 @@
 	    <li>
 	    #@elementItem()
 	 
-		<p><b>&nbsp;&nbsp;&nbsp;版本：</b>${release?.buildId}</p>
+		<p><b>&nbsp;&nbsp;&nbsp;版本：</b>${release?.buildName}</p>
 	
 		#end
 	   </li>
