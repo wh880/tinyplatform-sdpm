@@ -34,14 +34,14 @@ public interface TeamService {
     /**
      * 移除项目下的成员,根据逻辑id
      */
-    public int delete(int id);
+     int delete(int id);
 
     /**
      * 查询项目下的所有成员
      * @param projectId
      * @return
      */
-    public List<ProjectTeam> findTeamByProjectId(Integer projectId);
+     List<ProjectTeam> findTeamByProjectId(Integer projectId);
 
     /**
      * 查询

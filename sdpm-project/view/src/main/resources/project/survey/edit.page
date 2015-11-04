@@ -124,7 +124,7 @@
         #@sdpmItem("项目状态")
             #@Tselect2F()
                 #@Tselect2Body(
-                    "projectType" project?.projectStatus {"class":"input-text","minimumResultsForSearch":
+                    "projectStatus" project?.projectStatus {"class":"input-text","minimumResultsForSearch":
                     "Infinity"}) ##,"multiple":"multiple"加上为多选项
                     #foreach(type : getDict("projectStatus"))
                     <option value=${type.value}>${type.text}</option>
@@ -203,7 +203,7 @@
     #end
     #@elementItem()
         #@sdpmItem("项目描述")
-            #@Teditor("projectDesc" "content" {"initialFrameHeight":"200","initialFrameWidth":
+            #@Teditor("projectDesc" "projectDesc" {"initialFrameHeight":"200","initialFrameWidth":
                 "702"})${project?.projectDesc}#end
         #end
     #end

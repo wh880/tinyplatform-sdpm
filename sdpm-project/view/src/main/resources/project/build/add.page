@@ -61,8 +61,8 @@
                     "buildBuilder" build?.buildBuilder {"class":"input-text select2","placeholder":"","nullmsg":
                     "名称编号不能为空！"}) ##,"multiple":"multiple"加上为多选项
                     #foreach(t : teamList)
-                        <option value="${t?.teamUserId}">${t
-                            ?.teamUserId?UserUtils.getUserById(t?.teamUserId)?.orgUserRealName:""}
+                        <option value="${t.orgUserId}">
+                            ${t.orgUserRealName}
                         </option>
                     #end
                 #end

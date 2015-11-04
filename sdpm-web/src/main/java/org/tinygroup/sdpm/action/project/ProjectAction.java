@@ -138,8 +138,7 @@ public class ProjectAction extends BaseController {
         String productIds = Collections3.extractToString(projectProductList, "productId", ",");
         model.addAttribute("productIds", productIds);
 
-        List<OrgUser> teamList = userService.findTeamUserListByProjectId(projectId);
-        model.addAttribute("teamList", teamList);
+        model.addAttribute("teamList", userService.findTeamUserListByProjectId(projectId));
         model.addAttribute("productList", ProductUtils.getAllProductListByUser());
         return "project/survey/edit";
     }
@@ -203,6 +202,7 @@ public class ProjectAction extends BaseController {
     public String start(Integer projectId, Model model) {
         Project project = projectService.findProjectById(projectId);
         model.addAttribute("project", project);
+
         return "/project/survey/start.pagelet";
     }
 
@@ -237,6 +237,8 @@ public class ProjectAction extends BaseController {
 
     @RequestMapping("/finish")
     public String finish(Integer projectId, Model model) {
+        model.addAttribute("teamList", userService.findTeamUserListByProjectId(projectId));
+
         Project project = projectService.findProjectById(projectId);
         model.addAttribute("project", project);
         return "/project/survey/doing.pagelet";

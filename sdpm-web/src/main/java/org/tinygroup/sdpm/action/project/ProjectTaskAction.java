@@ -16,7 +16,10 @@ import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.service.StoryService;
-import org.tinygroup.sdpm.project.dao.pojo.*;
+import org.tinygroup.sdpm.project.dao.pojo.Project;
+import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
+import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
+import org.tinygroup.sdpm.project.dao.pojo.TaskChartBean;
 import org.tinygroup.sdpm.project.service.inter.*;
 import org.tinygroup.sdpm.system.dao.pojo.ProfileType;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
@@ -99,8 +102,7 @@ public class ProjectTaskAction extends BaseController {
     public String call(Integer taskId, Model model, HttpServletRequest request) {
         Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, ProjectUtils.COOKIE_PROJECT_ID));
         ProjectTask task = taskService.findTask(taskId);
-        List<OrgUser> team = userService.findTeamUserListByProjectId(projectId);
-        model.addAttribute("teamList", team);
+        model.addAttribute("teamList", userService.findTeamUserListByProjectId(projectId));
         model.addAttribute("task", task);
         return "project/task/call";
     }
@@ -132,10 +134,9 @@ public class ProjectTaskAction extends BaseController {
     @RequestMapping(value = "/finish", method = RequestMethod.GET)
     public String finish(Integer taskId, Model model, HttpServletRequest request) {
         Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, ProjectUtils.COOKIE_PROJECT_ID));
-        List<ProjectTeam> teamList = teamService.findTeamByProjectId(projectId);
         ProjectTask task = taskService.findTask(taskId);
         model.addAttribute("task", task);
-        model.addAttribute("teamList", teamList);
+        model.addAttribute("teamList", userService.findTeamUserListByProjectId(projectId));
         //还需要查询其他相关任务剩余时间的信息
         return "project/task/finish";
     }
@@ -330,14 +331,14 @@ public class ProjectTaskAction extends BaseController {
      * @return
      */
     @RequestMapping("/form")
-    public String preAdd(HttpServletRequest request, Model model, Integer storyId, String taskId) {
+    public String form(HttpServletRequest request, Model model, Integer storyId, String taskId) {
         String cookie = CookieUtils.getCookie(request, ProjectUtils.COOKIE_PROJECT_ID);
         if (StringUtil.isBlank(cookie)) {
             addMessage(model, "请选择项目");
-
         }
         Integer projectId = Integer.valueOf(cookie);
-        model.addAttribute("team", teamService.findTeamByProjectId(projectId));
+        model.addAttribute("teamList", userService.findTeamUserListByProjectId(projectId));
+
         SystemModule module = new SystemModule();
         module.setModuleType("task");
         module.setModuleRoot(projectId);
@@ -396,7 +397,6 @@ public class ProjectTaskAction extends BaseController {
     public String basicInfoEdit(Integer taskId, Model model) {
         ProjectTask task = taskService.findTask(taskId);
         String projectName = projectService.findProjectById(task.getTaskProject()).getProjectName();
-        List<ProjectTeam> teamList = teamService.findTeamByProjectId(task.getTaskProject());
         SystemModule module = new SystemModule();
         module.setModuleType("task");
         module.setModuleRoot(task.getTaskProject());
@@ -418,7 +418,7 @@ public class ProjectTaskAction extends BaseController {
         List<ProductStory> storyList = storyService.findStoryByProject(task.getTaskProject());
         model.addAttribute("task", task);
         model.addAttribute("projectName", projectName);
-        model.addAttribute("teamList", teamList);
+        model.addAttribute("teamList", userService.findTeamUserListByProjectId(task.getTaskProject()));
         model.addAttribute("moduleList", moduleList);
         model.addAttribute("storyList", storyList);
         return "project/task/basicInfoEdit.pagelet";
@@ -447,21 +447,25 @@ public class ProjectTaskAction extends BaseController {
     }
 
     @RequestMapping("/preBatchAdd")
-    public String preBatchAdd(@CookieValue(required = false, value = ProjectUtils.COOKIE_PROJECT_ID) String projectId,
-                              Model model, HttpServletRequest request) {
-        model.addAttribute("teamList", teamService.findTeamByProjectId(Integer.parseInt(projectId)));
+    public String preBatchAdd(Model model, HttpServletRequest request, HttpServletResponse response) {
+        Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
+        if (projectId == null) {
+            return redirectProjectForm();
+        }
 
-        List<ProductStory> storyList = storyService.findStoryByProject(Integer.parseInt(projectId));
+        model.addAttribute("teamList", userService.findTeamUserListByProjectId(projectId));
+
+        List<ProductStory> storyList = storyService.findStoryByProject(projectId);
         model.addAttribute("storyList", storyList);
 
         SystemModule module = new SystemModule();
         module.setModuleType("task");
-        module.setModuleRoot(Integer.parseInt(projectId));
+        module.setModuleRoot(projectId);
         List<SystemModule> moduleList = moduleService.findModuleList(module);
         for (SystemModule m : moduleList) {
             m.setModuleName(ModuleUtil.getPath(m.getModuleId(), "/", moduleService, "", false));
         }
-        List<ProjectProduct> projectProductList = projectProductService.findProducts(Integer.parseInt(projectId));
+        List<ProjectProduct> projectProductList = projectProductService.findProducts(projectId);
         for (ProjectProduct pp : projectProductList) {
             module.setModuleType("story");
             module.setModuleRoot(pp.getProductId());
