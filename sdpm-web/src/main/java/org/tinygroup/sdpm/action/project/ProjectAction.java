@@ -129,34 +129,7 @@ public class ProjectAction extends BaseController {
         return "project/listData.pagelet";
     }
 
-
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String save(Model model, HttpServletResponse response, HttpServletRequest request, Project project,
-                       Integer[] linkProduct, Integer[] whiteList) {
-        project.setProjectWhiteList(StringUtil.join(whiteList, ","));
-        Project tProject = projectService.addProject(project);
-        projectProductService.addLink(linkProduct, tProject.getProjectId());
-        CookieUtils.setCookie(response, ProjectUtils.COOKIE_PROJECT_ID, tProject.getProjectId().toString());
-        ProjectUtils.removeProjectList();
-        return "redirect:" + adminPath + "/project/list";
-    }
-
-
     @RequestMapping("/edit")
-    public String form(Integer projectId, Model model) {
-        Project project = projectService.findProjectById(projectId);
-        List<ProjectTeam> teamList = teamService.findTeamByProjectId(projectId);
-        List<ProjectProduct> projectProducts = projectProductService.findProducts(projectId);
-        List<String> productIds = new ArrayList<String>();
-        for (ProjectProduct list : projectProducts) {
-            productIds.add(list.getProductId().toString());
-        }
-        model.addAttribute("productIds", productIds);
-        model.addAttribute("teamList", teamList);
-        model.addAttribute("project", project);
-        List<Product> list = productService.findProductList(new Product(), "productId", "desc");
-        model.addAttribute("prodcutList", list);
-        return "project/survey/edit";
     public String editForm(Integer projectId, Model model) {
         Project project = projectService.findProjectById(projectId);
         model.addAttribute("project", project);
@@ -185,14 +158,6 @@ public class ProjectAction extends BaseController {
         projectProductService.addProjectLinkToProduct(productIds, project.getProjectId());
 
         projectService.updateProject(project);
-    public String formPost(Project project, Model model, Integer[] whiteList, Integer[] linkProduct) {
-        if (project.getProjectId() == null) {
-            Project resProject = projectService.addProject(project);
-            projectProductService.addLink(linkProduct, resProject.getProjectId());
-        } else {
-            projectProductService.addLink(linkProduct, project.getProjectId());
-            projectService.updateProject(project);
-        }
         ProjectUtils.removeProjectList();
         model.addAttribute("project", project);
         return "redirect:" + adminPath + "/project/view?projectId=" + project.getProjectId();
