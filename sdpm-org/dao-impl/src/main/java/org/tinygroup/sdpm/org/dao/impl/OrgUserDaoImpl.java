@@ -153,11 +153,9 @@ public class OrgUserDaoImpl extends TinyDslDaoSupport implements OrgUserDao {
     }
 
     public List<OrgUser> getByKeys(String... pk) {
-
         SelectGenerateCallback<Serializable[]> callback = new SelectGenerateCallback<Serializable[]>() {
             @SuppressWarnings("rawtypes")
             public Select generate(Serializable[] t) {
-
                 return selectFrom(ORG_USERTABLE).where(ORG_USERTABLE.ORG_USER_ID.in(t));
             }
 

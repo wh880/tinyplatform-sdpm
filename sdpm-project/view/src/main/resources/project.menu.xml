@@ -47,14 +47,14 @@
             <menu id="pro-task-batchadd" name="批量增加" href="/project/task/preBatchAdd" icon="icon-plus-sign" sort="6"
                   isShow="1"
                   scope="pro-taskmenu2-op"/>
-            <menu id="pro-task-proposeversion" name="建任务" href="/project/task/preadd" icon="icon-plus" sort="4"
+            <menu id="pro-task-proposeversion" name="建任务" href="/project/task/form" icon="icon-plus" sort="4"
                   isShow="1"
                   scope="pro-taskmenu2-op"/>
         </menu>
 
         <menu id="protab"  name="项目" href="/project/task/index.page" icon="" sort="1" isShow="1">
 
-            <menu id="project-op-all" name="所有项目" href="/project/allProject" icon="icon-list" sort="1" isShow="1"
+            <menu id="project-op-all" name="所有项目" href="/project/list" icon="icon-list" sort="1" isShow="1"
                   scope="project-op"/>
             <menu id="project-op-add" name="添加项目" href="/project/form" icon="icon-plus" sort="1" isShow="1"
                   scope="project-op"/>
@@ -79,7 +79,7 @@
                   scope="pro-taskInfo2-op"/>
             <!--<menu id="pro-Info2-remark" name="备注" href="/project/task/IDLinkremark.page" icon="icon-book" sort="10" isShow="1"-->
             <!--scope="pro-taskInfo2-op"/>-->
-            <menu id="pro-Info2-copy" name="复制" href="/project/task/preadd" icon="icon-copy" sort="8" isShow="1"
+            <menu id="pro-Info2-copy" name="复制" href="/project/task/form" icon="icon-copy" sort="8" isShow="1"
                   scope="pro-taskInfo2-op"/>
             <menu id="pro-Info2-return" name="返回" href="/project/task/index" icon="icon-reply" sort="4" isShow="1"
                   scope="pro-taskInfo2-op"/>
@@ -99,7 +99,7 @@
     <menu id="demand" parent-id="project" name="需求" href="/project/demand/index" icon="" sort="1" isShow="1">
         <menu id="rm-demand" name="需求移出" href="/project/demand/delete" icon="icon-remove" sort="1" isShow="1"
               scope="demand-op"/>
-        <menu id="batch-distribute-task" name="分解任务" href="/project/task/preadd" icon="icon-smile" sort="100" isShow="1"
+        <menu id="batch-distribute-task" name="分解任务" href="/project/task/form" icon="icon-smile" sort="100" isShow="1"
               scope="demand-op"/>
         <menu id="distribute-task" name="批量分解" href="/project/task/batchadd" icon="icon-paste" sort="80" isShow="1"
               scope="demand-op"/>
@@ -128,33 +128,33 @@
     </menu>
 
     <menu id="version" parent-id="project" name="版本" href="/project/build/index" icon="" sort="1" isShow="1">
-        <menu id="pro-version-look" name="查看bug" href="/project/version/look" icon="icon-eye-open" sort="20"
+        <menu id="pro-version-look" name="查看bug" href="/project/build/look" icon="icon-eye-open" sort="20"
               isShow="1"
               scope="pro-version-op"/>
-        <menu id="pro-version-edit" name="编辑版本" href="/project/version/edit" icon="icon-pencil" sort="15" isShow="1"
+        <menu id="pro-version-edit" name="编辑版本" href="/project/build/edit" icon="icon-pencil" sort="15" isShow="1"
               scope="pro-version-op"/>
-        <menu id="pro-version-delete" name="删除" href="/project/version/delete" icon="icon-remove" sort="10" isShow="1"
+        <menu id="pro-version-delete" name="删除" href="/project/build/delete" icon="icon-remove" sort="10" isShow="1"
               scope="pro-version-op"/>
 
         <menu id="version-menu" name="任务菜单" href="/project/build/index" icon="" sort="1" isShow="1">
-            <menu id="pro-version-report" name="新建版本" href="/project/version/add" icon="icon-plus" sort="8" isShow="1"
+            <menu id="pro-version-report" name="新建版本" href="/project/build/add" icon="icon-plus" sort="8" isShow="1"
                   scope="pro-versionmenu-op"/>
         </menu>
 
 
-        <menu id="version-bug" name="" href="/project/version/productalbug" icon="" sort="1" isShow="1">
-            <menu id="versionbug" name="" href="/project/version/deletereleateBug" icon="icon-remove" sort="8" isShow="1"
+        <menu id="version-bug" name="" href="/project/build/productalbug" icon="" sort="1" isShow="1">
+            <menu id="versionbug" name="" href="/project/build/deletereleateBug" icon="icon-remove" sort="8" isShow="1"
                   scope="version-linkbug"/>
         </menu>
-        <menu id="version-story" name="" href="/project/version/productalstory" icon="" sort="1" isShow="1">
-            <menu id="versionstory" name="" href="/project/version/deletereleate" icon="icon-remove" sort="8" isShow="1"
+        <menu id="version-story" name="" href="/project/build/productalstory" icon="" sort="1" isShow="1">
+            <menu id="versionstory" name="" href="/project/build/deletereleate" icon="icon-remove" sort="8" isShow="1"
                   scope="version-linkdemand"/>
         </menu>
 
     </menu>
 
     <menu id="test" parent-id="project" name="测试" href="/project/manage/test/index" icon="" sort="1" isShow="1">
-        <menu id="test-menu" name="任务菜单" href="/project/version/index.page" icon="" sort="1" isShow="1">
+        <menu id="test-menu" name="任务菜单" href="/project/build/index.page" icon="" sort="1" isShow="1">
             <menu id="pro-test-report" name="提交测试" href="/quality/version/add" icon="icon-plus" sort="8" isShow="1"
                   scope="pro-testmenu-op"/>
         </menu>

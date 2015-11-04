@@ -46,7 +46,9 @@ public class StoryManagerImpl implements StoryManager {
     }
 
     public ProductStory find(Integer storyId) {
-
+        if (null == storyId) {
+            return null;
+        }
         return productStoryDao.getReleteStoryByKey(storyId);
     }
 
@@ -68,7 +70,7 @@ public class StoryManagerImpl implements StoryManager {
     public Pager<ProductStory> findPager(int start, int limit, ProductStory story, String statusCondition, SearchInfos conditions,
                                          String groupOperate, String columnName, boolean asc) {
         String condition = conditions != null ? SqlUtil.toSql(conditions.getInfos(), groupOperate) : "";
-        
+
         condition = !StringUtil.isBlank(condition) ? (!StringUtil.isBlank(statusCondition) ? condition + " and "
                 + statusCondition : " " + condition)
                 : statusCondition;
@@ -160,17 +162,17 @@ public class StoryManagerImpl implements StoryManager {
     }
 
     public Pager<ProductStory> findProjectLinkedStory(int start, int limit, ProductStory story, String condition, String columnName, boolean asc) {
-        if(!StringUtil.isBlank(columnName)){
-            return productStoryDao.projectLinkedStory(start, limit, story, condition, new OrderBy(NameUtil.resolveNameDesc("productStory."+columnName), asc));
+        if (!StringUtil.isBlank(columnName)) {
+            return productStoryDao.projectLinkedStory(start, limit, story, condition, new OrderBy(NameUtil.resolveNameDesc("productStory." + columnName), asc));
         }
         return productStoryDao.projectLinkedStory(start, limit, story, condition);
     }
 
-    public Pager<ProductStory> findPager(int start, int limit,ProductStory story, String condition, String columnName, boolean asc) {
+    public Pager<ProductStory> findPager(int start, int limit, ProductStory story, String condition, String columnName, boolean asc) {
 
-		if(!StringUtil.isBlank(columnName)){
+        if (!StringUtil.isBlank(columnName)) {
             return productStoryDao.complexQuery(start, limit, story, condition, new OrderBy(NameUtil.resolveNameDesc(columnName), asc));
-		}
-		return productStoryDao.complexQuery(start, limit, story, condition);
-	}
+        }
+        return productStoryDao.complexQuery(start, limit, story, condition);
+    }
 }

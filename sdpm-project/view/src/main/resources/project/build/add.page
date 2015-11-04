@@ -20,7 +20,7 @@
 #end
 
 #@tinyForm(
-    "thisform" TINY_CONTEXT_PATH+adminPath+"/project/version/addsave" "" {"class":"test","enctype":
+    "thisform" TINY_CONTEXT_PATH+adminPath+"/project/build/addsave" "" {"class":"test","enctype":
     "multipart/form-data"})
 <div class="infoContent">
     <p class="titleName">新建版本</p>

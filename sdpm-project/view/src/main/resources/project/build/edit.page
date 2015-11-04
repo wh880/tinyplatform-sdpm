@@ -17,7 +17,7 @@
     #end
 #end
 
-#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/project/version/addsave" post {"class":"test","enctype":
+#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/project/build/addsave" post {"class":"test","enctype":
     "multipart/form-data"})
     #hiddenInput(hiddenInputName="buildId" hiddenInputValue=build?.buildId)
 <div class="infoContent">

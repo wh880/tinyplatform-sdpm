@@ -20,7 +20,7 @@
               resource="project"/>
     </type-info>
     <type-info name="build">
-        <info name="projectdemandInfo" title="发布信息" infoParameter="buildId" url="/project/version/releasebaseinfo"
+        <info name="projectdemandInfo" title="发布信息" infoParameter="buildId" url="/project/build/releasebaseinfo"
               resource="build"/>
     </type-info>
 </type-infos>
