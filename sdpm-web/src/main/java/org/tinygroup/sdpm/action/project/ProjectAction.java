@@ -161,7 +161,7 @@ public class ProjectAction extends BaseController {
         projectService.updateProject(project);
         ProjectUtils.removeProjectList();
         model.addAttribute("project", project);
-        return "redirect:" + adminPath + "project/view/" + project.getProjectId();
+        return "redirect:" + adminPath + "/project/view?projectId=" + project.getProjectId();
     }
 
     @RequestMapping("/delay")

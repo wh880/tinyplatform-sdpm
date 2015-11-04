@@ -198,7 +198,7 @@ public class ProjectTaskAction extends BaseController {
             burnService.updateDate(task.getTaskId());
         }
         model.addAttribute("task", task);
-        return "redirect:" + adminPath + "project/task/index";
+        return "redirect:" + adminPath + "/project/task/index";
     }
 
     @RequestMapping("/cancel")
@@ -218,7 +218,7 @@ public class ProjectTaskAction extends BaseController {
                     UserUtils.getUserId(), null, taskService.findTask(task.getTaskId()).getTaskProject().toString(),
                     taskService.findTask(task.getTaskId()), task, content);
         }
-        return "redirect:" + adminPath + "project/task/index";
+        return "redirect:" + adminPath + "/project/task/index";
     }
 
     @RequestMapping("/findList")
@@ -306,7 +306,7 @@ public class ProjectTaskAction extends BaseController {
             taskService.updateTask(task);
         }
         model.addAttribute("task", task);
-        return "redirect:" + adminPath + "project/task/index";
+        return "redirect:" + adminPath + "/project/task/index";
     }
 
 
@@ -317,7 +317,7 @@ public class ProjectTaskAction extends BaseController {
         LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, LogUtil.LogAction.EDITED, oldTask.getTaskId().toString(),
                 UserUtils.getUserId(), null, oldTask.getTaskProject().toString(), oldTask, task, contents);
         model.addAttribute("task", task);
-        return "redirect:" + adminPath + "project/task/index";
+        return "redirect:" + adminPath + "/project/task/index";
     }
 
     /**
