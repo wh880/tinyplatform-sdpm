@@ -35,6 +35,7 @@ public class ProjectDocAction extends BaseController {
     @Autowired
     private ProductService productService;
 
+
     @RequestMapping("/index")
     public String jumpDocIndex() {
         return "project/document/index.page";
@@ -96,7 +97,6 @@ public class ProjectDocAction extends BaseController {
         List<Project> projectList = projectService.findList();
         List<Product> productList = productService.findProductList(new Product());
         //所属分类
-
         model.addAttribute("projectList", projectList);
         model.addAttribute("productList", productList);
         return "project/document/add.page";

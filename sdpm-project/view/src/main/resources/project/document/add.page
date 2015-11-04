@@ -79,23 +79,23 @@
                     #end
                 #end
             #end
-
             #@elementItem()
                 #@sdpmItem("文档类型")
-                ##                    #@skinMinimal("mt-20")
-                ##                        #foreach(item : getDict("documentType"))
-                ##                            #labelRadio1(rId="typefile" rName="type" rValue=item.value labelText=item.text
-                ##                                "setType(this.value);")
-                ##                        #end
-                ##                    #end
-                ##                    #@skinMinimal("mt-20")
-                    #labelRadio1(rId="typefile" rName="docType" rChecked="checked" rValue="1"
-                        "setType(this.value);" labelText=getDict("docType","1") )
-                    #labelRadio1(rId="typeurl" rName="docType" rValue="2" labelText=getDict("docType",
-                        "2") "setType(this.value);")
-                    #labelRadio1(rId="typetext" rName="docType" rValue="3" labelText=getDict("docType",
-                        "3") "setType(this.value);")
-                ##                    #end
+                    #@formControlDiv("skin-minimal col-8")
+                        #@Tradioes("docType" 1)
+                            #foreach(item:getDict("docType"))
+                                #@Tradio(item.value)${item.text}#end
+                            #end
+                        #end
+                    ##                    #@skinMinimal("mt-20")
+                    ##                        #labelRadio1(rId="typefile" rName="type" rValue="file" labelText="文件"
+                    ##                            "setType(this.value);")
+                    ##                        #labelRadio1(rId="typeurl" rName="type" rValue="url" labelText="链接"
+                    ##                            "setType(this.value);")
+                    ##                        #labelRadio1(rId="typetext" rName="type" rValue="text" labelText="网页"
+                    ##                            "setType(this.value);")
+                    ##                    #end
+                    #end
                 #end
             #end
 

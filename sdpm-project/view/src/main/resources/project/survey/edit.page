@@ -64,9 +64,11 @@
     #end
     #@elementItem()
         #@sdpmItem("起始日期" "*")
-            #@tinyDateInput("projectBegin"  formatDate(project?.projectBegin){"style":"width:275px",
-            "datatype":"*","nullmsg":"开始日期不能为空","placeholder":"选择日期"})
-            #end
+            #@tinyDateInput(
+                "projectBegin" formatDate(project?.projectBegin,
+                "yyyy-MM-dd") "yyyy-MM-dd" {"style":"width:275px","datatype":"*","nullmsg":"结束日期不能为空",
+            "placeholder":
+            "选择日期"})#end
         #end
     #end
     #@elementItem()
