@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
+import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.system.biz.inter.HolidayManager;
 import org.tinygroup.sdpm.system.dao.HolidayDao;
 import org.tinygroup.sdpm.system.dao.pojo.Holiday;
@@ -40,14 +41,10 @@ public class HolidayManagerImpl implements HolidayManager {
 
 	public Pager<Holiday> findByPage(int start, int limit, Holiday holiday,
 			String sortName, boolean asc) {
-		// TODO Auto-generated method stub
-		
-//		
-		OrderBy orderBy= new OrderBy(sortName, asc);
-		Pager<Holiday> pagerHoliday= holidayDao.queryPager(start,limit,holiday,orderBy);
-		
-
-		return pagerHoliday;
+		if(StringUtil.isBlank(sortName)){
+			return holidayDao.queryPager(start,limit,holiday);
+		}
+		return holidayDao.queryPager(start,limit,holiday,new OrderBy(NameUtil.resolveNameDesc("holiday."+sortName),asc));
 		
 	}
 

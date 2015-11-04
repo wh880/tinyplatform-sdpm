@@ -5,18 +5,11 @@
 #import("/org/tinygroup/fold/components/fold.component")
 #!set(linkName="demand")
 #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/system/holiday/save" "post" {"class":"test"})
-<div style="width:70%;float:left" class="pageleftpart">
+<div style="width:60%;float:left" class="pageleftpart">
     <div class="infoContent">
         <p class="titleName">编辑</p>
  
 
-##     #@div(divClass="infoContent")
-##	        <p class="titleName">描述</p>
-##	       	<div>
-##	       		${holiday?.holidayDetail}
-##	       	</div>
-##	       	
-##		#end
                 <input type="hidden" name="holidayId" value="${holiday?.holidayId}"/>
                 <input type="hidden" name="holidayDeleted" value="0"/>
 				 #@elementItem()
@@ -47,43 +40,17 @@
 			        #@validateDiv("col-2")#end
 			      #end
 			
-			
-##			
-##				 #@elementItem()
-##			        #@colLabel()创建者：#end
-##				        #@formControlDiv("col-8")
-##				        	 #@Tselect2F()
-##			                    #@Tselect2Body("holidayAccount" holiday?.holidayAccount {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-##			                         #for(u:users)
-##			                        <option value="${u?.orgUserAccount}">${u?.orgUserAccount}</option>
-##			                        #end 
-##			                    #end
-##			                
-##			                    #@Tselect2Fix()<a href="#" class="r ">增加</a><a href="#">全部</a>#end
-##			                #end
-##				        	 
-##				        	 
-##				        #end
-##			        #@validateDiv("col-2")#end
-##			      #end
+
 			 
         #@elementItem()
         #@colLabel()描述：#end
 	    #@formControlDiv("col-8")
-		#@tinyTextarea("holidayDetail" {"placeholder":"说点什么...最少输入10个字符","datatype":"*10-500","nullmsg":"备注不能为空！"})${holiday?.holidayDetail}#end
+		#@tinyTextarea("holidayDetail" {"placeholder":"描述","datatype":"*0-500","nullmsg":"备注不能为空！"})${holiday?.holidayDetail}#end
 	    #end
         #@validateDiv("col-2")#end
         #end
 
-		
-##		
-##			#@elementItem("" "edui-Box")
-##         				<b class="titleNames">备注</b>
-##					#@formControlDiv("col-12")
-##					#@Teditor("hoilidayRemark" "" {"initialFrameHeight":"300" ,"datatype":"*10-300"})${holiday?.hoilidayRemark}#end
-##					#end
-##       				#@validateDiv("col-4")#end
-##    		#end
+
  </div>
 
  
@@ -106,6 +73,7 @@
     #end
     <br>
 </div>
+<div style="width:40%;float:right" class="pageleftpart">#history(adminPath+"/system/action/ajax/history?actionObjectType=holiday&actionObjectId="+holiday?.holidayId)</div>
 #end
 ##<a href="${TINY_CONTEXT_PATH}/product/page/project/togglebox.page" >  </a>
 

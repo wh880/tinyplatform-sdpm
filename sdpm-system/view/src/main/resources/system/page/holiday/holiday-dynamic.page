@@ -5,7 +5,7 @@
 		<span class="panel-title"><i class="panel-title-icon fa fa-tasks"></i>最新动态</span>
 		<div class="panel-heading-controls">
 
-	       #@aModal("#myModal" "假期操作历史记录" "900" "620" "" "/system/page/holiday/holidayHistory.pagelet")更多#end
+	       #@aModal("#myModal" "假期操作历史记录" "900" "620" "" adminPath+"/system/holiday/history/more")更多#end
 
 		</div>
 	</div>

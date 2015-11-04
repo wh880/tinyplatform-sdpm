@@ -37,4 +37,6 @@ public interface QualityBugDao extends BaseDao<QualityBug,Integer> {
     List<BugCount> getCount(String code, Integer productId);
 
     BugCount getBugsNotInType(String type,Integer productId);
+
+    Pager<QualityBug> queryStoryChangedBugs(int start, int limit , String conditions, QualityBug qualityBug , final OrderBy... orderArgs);
 }

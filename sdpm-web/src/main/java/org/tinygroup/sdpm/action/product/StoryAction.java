@@ -445,9 +445,9 @@ public class StoryAction extends BaseController {
 
         LogUtil.logWithComment(LogUtil.LogOperateObject.STORY,
                 LogUtil.LogAction.CHANGED,
-                String.valueOf(productStory.getStoryId()),
+                String.valueOf(story.getStoryId()),
                 UserUtils.getUserId(),
-                String.valueOf(productStory.getProductId()), null, story,
+                String.valueOf(story.getProductId()), null, story,
                 productStory, systemAction.getActionComment());
         return "redirect:" + "/a/product/story";
     }
@@ -474,7 +474,7 @@ public class StoryAction extends BaseController {
                 LogUtil.LogAction.REVIEWED,
                 String.valueOf(productStory.getStoryId()),
                 UserUtils.getUserId(),
-                String.valueOf(productStory.getProductId()), null, story,
+                String.valueOf(story.getProductId()), null, story,
                 productStory, systemAction.getActionComment());
         return "redirect:" + "/a/product/story";
     }
@@ -670,7 +670,7 @@ public class StoryAction extends BaseController {
      * @return 返回数据集合
      */
     @RequestMapping("/bugSearch/{relate}")
-    public String bugListAction(@CookieValue("cookieProductId") String cookieProductId,@PathVariable(value = "relate") String relate,
+    public String bugListAction(@CookieValue(value = "cookieProductId",defaultValue = "0") String cookieProductId,@PathVariable(value = "relate") String relate,
                                 int page,
                                 int pagesize,
                                 Integer releaseId,
@@ -681,9 +681,9 @@ public class StoryAction extends BaseController {
                                 String type,
                                 @RequestParam(required = false, defaultValue = "asc") String ordertype,
                                 Model model, HttpServletRequest request) {
-
-        bug.setProductId(Integer.parseInt(cookieProductId));
-
+        if(Integer.parseInt(cookieProductId)>0) {
+            bug.setProductId(Integer.parseInt(cookieProductId));
+        }
         String condition = "";
         if (searchInfos != null) {
             if (searchInfos.getInfos().size() > 0

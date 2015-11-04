@@ -16,8 +16,10 @@
 
 package org.tinygroup.sdpm.quality.dao.impl;
 
+
 import org.springframework.stereotype.Repository;
 import org.tinygroup.commons.tools.CollectionUtil;
+import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.jdbctemplatedslsession.callback.*;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
@@ -32,6 +34,7 @@ import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 import org.tinygroup.tinysqldsl.select.Join;
 import org.tinygroup.tinysqldsl.select.OrderByElement;
+import sun.swing.StringUIClientPropertyKey;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -39,6 +42,7 @@ import java.util.List;
 
 import static org.tinygroup.sdpm.org.dao.constant.OrgUserTable.ORG_USERTABLE;
 import static org.tinygroup.sdpm.quality.dao.constant.QualityBugTable.QUALITY_BUGTABLE;
+import static org.tinygroup.sdpm.product.dao.constant.ProductStoryTable.PRODUCT_STORYTABLE;
 import static org.tinygroup.tinysqldsl.Delete.delete;
 import static org.tinygroup.tinysqldsl.Insert.insertInto;
 import static org.tinygroup.tinysqldsl.Select.select;
@@ -232,7 +236,7 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
 		return getDslTemplate().queryPager(start, limit, qualityBug, false, new SelectGenerateCallback<QualityBug>() {
 
 			public Select generate(QualityBug t) {
-				MysqlSelect select = MysqlSelect.select(QUALITY_BUGTABLE.ALL,FragmentSql.fragmentSelect("org_user_account assignedUser")).from(QUALITY_BUGTABLE)
+				MysqlSelect select = MysqlSelect.select(QUALITY_BUGTABLE.ALL,ORG_USERTABLE.ORG_USER_REAL_NAME.as("assignedUser")).from(QUALITY_BUGTABLE)
 						.join(Join.leftJoin(ORG_USERTABLE,QUALITY_BUGTABLE.BUG_ASSIGNED_TO.eq(ORG_USERTABLE.ORG_USER_ID))).where(
 				and(
 					QUALITY_BUGTABLE.PRODUCT_ID.eq(t.getProductId()),
@@ -297,7 +301,7 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
 		return getDslTemplate().queryPager(start>0?start:0, limit, qualityBug, false, new SelectGenerateCallback<QualityBug>() {
 
 			public Select generate(QualityBug t) {
-				MysqlSelect select = MysqlSelect.select(QUALITY_BUGTABLE.ALL,FragmentSql.fragmentSelect("org_user_account assignedUser")).from(QUALITY_BUGTABLE)
+				MysqlSelect select = MysqlSelect.select(QUALITY_BUGTABLE.ALL,ORG_USERTABLE.ORG_USER_REAL_NAME.as("assignedUser")).from(QUALITY_BUGTABLE)
 						.join(Join.leftJoin(ORG_USERTABLE,QUALITY_BUGTABLE.BUG_ASSIGNED_TO.eq(ORG_USERTABLE.ORG_USER_ID))).where(
 						and(
 								conditions,
@@ -615,5 +619,68 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
 			select.where(or(QUALITY_BUGTABLE.MODULE_ID.isNull(),QUALITY_BUGTABLE.MODULE_ID.eq(0)));
 		}
 		return getDslSession().fetchOneResult(select,BugCount.class);
+	}
+
+	public Pager<QualityBug> queryStoryChangedBugs(int start, int limit, String conditions, QualityBug qualityBug, OrderBy... orderArgs) {
+		MysqlSelect select = MysqlSelect.select(QUALITY_BUGTABLE.ALL,ORG_USERTABLE.ORG_USER_REAL_NAME.as("assignedUser")).from(QUALITY_BUGTABLE)
+				.join(Join.leftJoin(ORG_USERTABLE, QUALITY_BUGTABLE.BUG_ASSIGNED_TO.eq(ORG_USERTABLE.ORG_USER_ID)),
+						Join.newJoin(PRODUCT_STORYTABLE, QUALITY_BUGTABLE.STORY_ID.eq(PRODUCT_STORYTABLE.STORY_ID))).where(
+						and(
+								StringUtil.isBlank(conditions)?null:FragmentSql.fragmentCondition(conditions),
+								QUALITY_BUGTABLE.PRODUCT_ID.eq(qualityBug.getProductId()),
+								QUALITY_BUGTABLE.MODULE_ID.eq(qualityBug.getModuleId()),
+								QUALITY_BUGTABLE.PROJECT_ID.eq(qualityBug.getProjectId()),
+								QUALITY_BUGTABLE.PLAN_ID.eq(qualityBug.getPlanId()),
+								QUALITY_BUGTABLE.STORY_ID.eq(qualityBug.getStoryId()),
+								QUALITY_BUGTABLE.STORY_VERSION.eq(qualityBug.getStoryVersion()),
+								QUALITY_BUGTABLE.TASK_ID.eq(qualityBug.getTaskId()),
+								QUALITY_BUGTABLE.TO_TASK_ID.eq(qualityBug.getToTaskId()),
+								QUALITY_BUGTABLE.TO_STORY_ID.eq(qualityBug.getToStoryId()),
+								QUALITY_BUGTABLE.BUG_TITLE.eq(qualityBug.getBugTitle()),
+								QUALITY_BUGTABLE.BUG_KEYWORDS.eq(qualityBug.getBugKeywords()),
+								QUALITY_BUGTABLE.BUG_SEVERITY.eq(qualityBug.getBugSeverity()),
+								QUALITY_BUGTABLE.PRIORITY.eq(qualityBug.getPriority()),
+								QUALITY_BUGTABLE.BUG_TYPE.eq(qualityBug.getBugType()),
+								QUALITY_BUGTABLE.OPERATING_SYSTEM.eq(qualityBug.getOperatingSystem()),
+								QUALITY_BUGTABLE.BROWSER.eq(qualityBug.getBrowser()),
+								QUALITY_BUGTABLE.HARDWARE.eq(qualityBug.getHardware()),
+								QUALITY_BUGTABLE.BUG_FOUND.eq(qualityBug.getBugFound()),
+								QUALITY_BUGTABLE.BUG_STEPS.eq(qualityBug.getBugSteps()),
+								QUALITY_BUGTABLE.BUG_STATUS.eq(qualityBug.getBugStatus()),
+								QUALITY_BUGTABLE.BUG_CONFIRMED.eq(qualityBug.getBugConfirmed()),
+								QUALITY_BUGTABLE.BUG_ACTIVATED_COUNT.eq(qualityBug.getBugActivatedCount()),
+								QUALITY_BUGTABLE.BUG_MAILTO.eq(qualityBug.getBugMailto()),
+								QUALITY_BUGTABLE.BUG_OPENED_BY.eq(qualityBug.getBugOpenedBy()),
+								QUALITY_BUGTABLE.BUG_OPENED_DATE.eq(qualityBug.getBugOpenedDate()),
+								QUALITY_BUGTABLE.BUG_OPENED_BUILD.eq(qualityBug.getBugOpenedBuild()),
+								QUALITY_BUGTABLE.BUG_ASSIGNED_TO.eq(qualityBug.getBugAssignedTo()),
+								QUALITY_BUGTABLE.BUG_ASSIGNED_DATE.eq(qualityBug.getBugAssignedDate()),
+								QUALITY_BUGTABLE.BUG_RESOLVED_BY.eq(qualityBug.getBugResolvedBy()),
+								QUALITY_BUGTABLE.BUG_RESOLUTION.eq(qualityBug.getBugResolution()),
+								QUALITY_BUGTABLE.BUG_RESOLVED_BUILD.eq(qualityBug.getBugResolvedBuild()),
+								QUALITY_BUGTABLE.BUG_RESOLVED_DATE.eq(qualityBug.getBugResolvedDate()),
+								QUALITY_BUGTABLE.BUG_CLOSED_BY.eq(qualityBug.getBugClosedBy()),
+								QUALITY_BUGTABLE.BUG_CLOSED_DATE.eq(qualityBug.getBugClosedDate()),
+								QUALITY_BUGTABLE.BUG_DUPLICATE_BUG.eq(qualityBug.getBugDuplicateBug()),
+								QUALITY_BUGTABLE.LINK_BUG.eq(qualityBug.getLinkBug()),
+								QUALITY_BUGTABLE.LINK_CASE.eq(qualityBug.getLinkCase()),
+								QUALITY_BUGTABLE.CASE_VERSION.eq(qualityBug.getCaseVersion()),
+								QUALITY_BUGTABLE.BUG_RESULT.eq(qualityBug.getBugResult()),
+								QUALITY_BUGTABLE.BUG_REPO.eq(qualityBug.getBugRepo()),
+								QUALITY_BUGTABLE.BUG_ENTRY.eq(qualityBug.getBugEntry()),
+								QUALITY_BUGTABLE.BUG_FROM_CASE.eq(qualityBug.getBugFromCase()),
+								QUALITY_BUGTABLE.BUG_LINES.eq(qualityBug.getBugLines()),
+								QUALITY_BUGTABLE.BUG_V1.eq(qualityBug.getBugV1()),
+								QUALITY_BUGTABLE.BUG_V2.eq(qualityBug.getBugV2()),
+								QUALITY_BUGTABLE.BUG_REPO_TYPE.eq(qualityBug.getBugRepoType()),
+								QUALITY_BUGTABLE.TESTTASK.eq(qualityBug.getTesttask()),
+								QUALITY_BUGTABLE.BUG_LAST_EDITED_BY.eq(qualityBug.getBugLastEditedBy()),
+								QUALITY_BUGTABLE.BUG_LAST_EDITED_DATE.eq(qualityBug.getBugLastEditedDate()),
+								QUALITY_BUGTABLE.DELETED.eq(qualityBug.getDeleted()),
+								PRODUCT_STORYTABLE.STORY_STATUS.neq("0"),
+								PRODUCT_STORYTABLE.STORY_STATUS.neq("3"),
+								QUALITY_BUGTABLE.STORY_VERSION.neq(PRODUCT_STORYTABLE.STORY_VERSION)
+						));
+			return getDslSession().fetchPage(addOrderByElements(select, orderArgs),start,limit,false,QualityBug.class);
 	}
 }

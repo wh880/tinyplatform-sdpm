@@ -94,6 +94,13 @@ public class BugManagerImpl implements BugManager {
 		return new HashMap<String, List<BugCount>>();
 	}
 
+	public Pager<QualityBug> queryStoryChangedBugs(Integer start, Integer limit, String conditions, QualityBug bug, String sortName, boolean asc) {
+		if(StringUtil.isBlank(sortName)){
+			return bugdao.queryStoryChangedBugs(start,limit,conditions,bug);
+		}
+		return bugdao.queryStoryChangedBugs(start,limit,conditions,bug,new OrderBy(NameUtil.resolveNameDesc("qualityBug."+sortName),asc));
+	}
+
 	public int[] batchDelete(List<QualityBug> bugIds) {
 		
 		return bugdao.batchUpdateDel(bugIds);

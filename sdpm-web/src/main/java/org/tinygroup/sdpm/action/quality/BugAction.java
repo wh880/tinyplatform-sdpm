@@ -94,11 +94,10 @@ public class BugAction extends BaseController {
             request.getSession().removeAttribute("bugModuleId");
         }
         if (queryString != null && !queryString.contains("status")) {
-            if (!queryString.contains("currentPageId")) queryString = queryString + "&currentPageId=5";
             return "redirect:/a/quality/bug?status=tbugstatus&" + queryString;
         }
         if (StringUtil.isBlank(queryString)) {
-            return "redirect:/a/quality/bug?status=tbugstatus&currentPageId=5";
+            return "redirect:/a/quality/bug?status=tbugstatus";
         }
         model.addAttribute("userList", users);
         return "/testManagement/page/Bug.page";
@@ -158,7 +157,12 @@ public class BugAction extends BaseController {
             conditions = ("".equals(conditions) ? " module_id " : conditions + " and module_id ") + ModuleUtil.getCondition(bug.getModuleId(), moduleService);
             bug.setModuleId(null);
         }
-        Pager<QualityBug> bugpager = bugService.findBugListPager(start, limit, conditions, bug, order, asc);
+        Pager<QualityBug> bugpager = null;
+        if("tbugneedchange".equals(status)){
+            bugpager = bugService.findStoryChangedBugs(start, limit, conditions, bug, order, asc);
+        }else{
+            bugpager = bugService.findBugListPager(start, limit, conditions, bug, order, asc);
+        }
         model.addAttribute("bugpager", bugpager);
         return "/testManagement/data/BugData.pagelet";
     }
@@ -596,6 +600,9 @@ public class BugAction extends BaseController {
         bug.setBugOpenedDate(new Date());
         bug.setBugActivatedCount(0);
         bug.setBugOpenedBy(UserUtils.getUserId() != null ? UserUtils.getUserId() : "0");
+        if (bug.getStoryId() != null) {
+            bug.setStoryVersion(storyService.findStory(bug.getStoryId()).getStoryVersion());
+        }
         QualityBug qbug = bugService.addBug(bug);
 
         uploads(file, qbug.getBugId(), ProfileType.BUG, title);

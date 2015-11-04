@@ -76,7 +76,7 @@
 
 #*	#include("/product/page/tabledemo/baseinfo.page")*#
 <div style="width:30%;float:right">
-    #TypeInfo("product" product?.productId)
+    #TypeInfo("product" product?.productId?:0)
 </div>
 
 

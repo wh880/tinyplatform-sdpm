@@ -153,7 +153,7 @@ public class TestTaskAction extends BaseController {
     public String add(@CookieValue(value = "qualityProductId", defaultValue = "0") Integer qualityProductId, Integer buildId, Model model, HttpServletRequest request, HttpServletResponse response) {
         List<Project> projects = projectService.findProjectList(null, null, null);
         ProjectBuild build = new ProjectBuild();
-        if (buildId != null & buildId > 0) {
+        if (buildId != null && buildId > 0) {
             int productId = buildService.findBuild(buildId).getBuildProduct();
             build.setBuildProduct(productId);
             CookieUtils.setCookie(response, "qualityProductId", String.valueOf(productId));
