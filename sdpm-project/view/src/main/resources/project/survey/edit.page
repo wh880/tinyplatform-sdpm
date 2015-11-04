@@ -84,7 +84,7 @@
         #@sdpmItem("可用工作日")
         <div class="input-group">
             <input name="projectDays" type="text" class="form-control" placeholder="" value=${project?.projectDays} aria-describedby="basic-addon2">
-            <span class="input-group-addon" id="basic-addon2">小时</span>
+            <span class="input-group-addon" id="basic-addon2">天</span>
         </div>
         #end
     #end
@@ -92,8 +92,8 @@
         #@sdpmItem("项目类型")
             #@Tselect2F()
                 #@Tselect2Body("projectType" project?.projectType {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                    #foreach(type:getDict("projectStatus"))
-                    <option value="${type?.value}">${type?.text}</option>
+                    #foreach(item:getDict("projectType"))
+                    <option value="${item?.value}">${item?.text}</option>
                     #end
                 #end
             #end
@@ -108,7 +108,7 @@
     #@elementItem()
         #@sdpmItem("关联产品")
             #@Tselect2F()
-                #@Tselect2Body("linkProduct" "" {"class":"input-text select2","multiple":"multiple"})
+                #@Tselect2Body("linkProduct" productIds {"class":"input-text select2","multiple":"multiple"})
                     #foreach(p : prodcutList)
                     <option value="${p?.productId}">${p.productName}</option>
                     #end
@@ -124,11 +124,10 @@
         #@sdpmItem("项目状态")
             #@Tselect2F()
                 #@Tselect2Body(
-                    "projectType" project?.projectStatus {"class":"input-text select2","minimumResultsForSearch":
+                    "projectStatus" project?.projectStatus {"class":"input-text select2","minimumResultsForSearch":
                     "Infinity"}) ##,"multiple":"multiple"加上为多选项
-                <option value="">/</option>
-                    #foreach(type : getDict("projectType"))
-                    <option value=${type.value}>${type.text}</option>
+                    #foreach(item : getDict("projectStatus"))
+                    <option value=${item.value}>${item.text}</option>
                     #end
                 #end
             #end
@@ -137,8 +136,9 @@
     #@elementItem()
         #@sdpmItem("产品负责人")
             #@Tselect2F()
-                #@Tselect2Body("projectPo" project?.projectPO {"class":"input-text select2"})
-                    #foreach(t : team)
+                #@Tselect2Body("projectPo" project?.projectPo {"class":"input-text select2"})
+                <option></option>
+                    #foreach(t : teamList)
                     <option value="${t?.teamUserId}">
                         ${t?.teamUserId==null?"":UserUtils.getUserById(t?.teamUserId)?.orgUserRealName}
                     </option>
@@ -155,7 +155,8 @@
         #@sdpmItem("项目负责人")
             #@Tselect2F()
                 #@Tselect2Body("projectPm" project?.projectPm {"class":"input-text select2"})
-                    #foreach(t : team)
+                <option></option>
+                    #foreach(t : teamList)
                     <option value="${t?.teamUserId}">
                         ${t?.teamUserId==null?"":UserUtils.getUserById(t?.teamUserId)?.orgUserRealName}
                     </option>
@@ -172,7 +173,8 @@
         #@sdpmItem("测试负责人")
             #@Tselect2F()
                 #@Tselect2Body("projectQd" project?.projectQd {"class":"input-text select2"})
-                    #foreach(t : team)
+                <option></option>
+                    #foreach(t : teamList)
                     <option value="${t?.teamUserId}">
                         ${t?.teamUserId==null?"":UserUtils.getUserById(t?.teamUserId)?.orgUserRealName}
                     </option>
@@ -189,7 +191,8 @@
         #@sdpmItem("发布负责人")
             #@Tselect2F()
                 #@Tselect2Body("projectRd" project?.projectRd {"class":"input-text select2"})
-                    #foreach(t : team)
+                <option></option>
+                    #foreach(t : teamList)
                     <option value="${t?.teamUserId}">
                         ${t?.teamUserId==null?"":UserUtils.getUserById(t?.teamUserId)?.orgUserRealName}
                     </option>

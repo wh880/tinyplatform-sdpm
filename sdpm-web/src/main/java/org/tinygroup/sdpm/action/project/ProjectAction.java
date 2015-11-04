@@ -52,6 +52,7 @@ public class ProjectAction extends BaseController {
 
     /**
      * 新增项目表单
+     *
      * @param model
      * @return
      */
@@ -60,8 +61,10 @@ public class ProjectAction extends BaseController {
         model.addAttribute("productList", ProductUtils.getAllProductListByUser());
         return "project/form";
     }
+
     /**
      * 批量删除
+     *
      * @param projectIds
      * @return
      */
@@ -87,6 +90,7 @@ public class ProjectAction extends BaseController {
 
     /**
      * 所有项目列表
+     *
      * @return
      */
     @RequestMapping("/list")
@@ -109,10 +113,12 @@ public class ProjectAction extends BaseController {
         Integer[] userProjectIds = ProjectUtils.getUserProjectIdList();
         Pager<Project> projectPager = projectService.findProjects(start, limit, order, ordertype, userProjectIds);
         Integer interval = 2;
-        if (projectPager != null){ for (Project project : projectPager.getRecords()) {
-            BurnDTO burnDTO = burnService.initBurn(project.getProjectId(), interval);
-            project.setBurnValue(burnDTO.getLeftValues());
-        }}
+        if (projectPager != null) {
+            for (Project project : projectPager.getRecords()) {
+                BurnDTO burnDTO = burnService.initBurn(project.getProjectId(), interval);
+                project.setBurnValue(burnDTO.getLeftValues());
+            }
+        }
         model.addAttribute("projectPager", projectPager);
         return "project/listData.pagelet";
     }
@@ -122,7 +128,7 @@ public class ProjectAction extends BaseController {
     public String save(Model model, HttpServletResponse response, HttpServletRequest request, Project project,
                        Integer[] linkProduct, Integer[] whiteList) {
         project.setProjectWhiteList(StringUtil.join(whiteList, ","));
-        Project tProject =  projectService.addProject(project);
+        Project tProject = projectService.addProject(project);
         projectProductService.addLink(linkProduct, tProject.getProjectId());
         CookieUtils.setCookie(response, ProjectUtils.COOKIE_PROJECT_ID, tProject.getProjectId().toString());
         ProjectUtils.removeProjectList();
@@ -132,13 +138,19 @@ public class ProjectAction extends BaseController {
 
     @RequestMapping("/edit")
     public String form(Integer projectId, Model model) {
-            Project project = projectService.findProjectById(projectId);
-            List<ProjectTeam> teamList = teamService.findTeamByProjectId(projectId);
-            model.addAttribute("teamList", teamList);
-            model.addAttribute("project", project);
-            List<Product> list = productService.findProductList(new Product(), "productId", "desc");
-            model.addAttribute("prodcutList", list);
-            return "project/survey/edit";
+        Project project = projectService.findProjectById(projectId);
+        List<ProjectTeam> teamList = teamService.findTeamByProjectId(projectId);
+        List<ProjectProduct> projectProducts = projectProductService.findProducts(projectId);
+        List<String> productIds = new ArrayList<String>();
+        for (ProjectProduct list : projectProducts) {
+            productIds.add(list.getProductId().toString());
+        }
+        model.addAttribute("productIds", productIds);
+        model.addAttribute("teamList", teamList);
+        model.addAttribute("project", project);
+        List<Product> list = productService.findProductList(new Product(), "productId", "desc");
+        model.addAttribute("prodcutList", list);
+        return "project/survey/edit";
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
@@ -147,6 +159,7 @@ public class ProjectAction extends BaseController {
             Project resProject = projectService.addProject(project);
             projectProductService.addLink(linkProduct, resProject.getProjectId());
         } else {
+            projectProductService.addLink(linkProduct, project.getProjectId());
             projectService.updateProject(project);
         }
         ProjectUtils.removeProjectList();
