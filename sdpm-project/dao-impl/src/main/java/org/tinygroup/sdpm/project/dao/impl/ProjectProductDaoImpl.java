@@ -58,7 +58,6 @@ public class ProjectProductDaoImpl extends TinyDslDaoSupport implements ProjectP
     }
 
     public Pager<ProductStory> findStory(Integer projectId, Integer start, Integer limit, final OrderBy... orderBies) {
-
         SubSelect subSelect = SubSelect.subSelect(selectFrom(PROJECT_STORYTABLE).where(
                 and(
                         PROJECT_STORYTABLE.STORY_ID.eq(PRODUCT_STORYTABLE.STORY_ID),
@@ -76,7 +75,6 @@ public class ProjectProductDaoImpl extends TinyDslDaoSupport implements ProjectP
         return getDslSession().fetchPage(select, start, limit, false, ProductStory.class);
     }
 
-    @LogMethod("add")
     public ProjectProduct add(ProjectProduct projectProduct) {
         return getDslTemplate().insertAndReturnKey(projectProduct, new InsertGenerateCallback<ProjectProduct>() {
             public Insert generate(ProjectProduct t) {
@@ -89,7 +87,6 @@ public class ProjectProductDaoImpl extends TinyDslDaoSupport implements ProjectP
         });
     }
 
-    @LogMethod("edit")
     public int edit(ProjectProduct projectProduct) {
         if (projectProduct == null || projectProduct.getId() == null) {
             return 0;
@@ -105,7 +102,6 @@ public class ProjectProductDaoImpl extends TinyDslDaoSupport implements ProjectP
         });
     }
 
-    @LogMethod("deleteByKey")
     public int deleteByKey(Integer pk) {
         if (pk == null) {
             return 0;
@@ -117,7 +113,6 @@ public class ProjectProductDaoImpl extends TinyDslDaoSupport implements ProjectP
         });
     }
 
-    @LogMethod("deleteByKeys")
     public int deleteByKeys(Integer... pks) {
         if (pks == null || pks.length == 0) {
             return 0;

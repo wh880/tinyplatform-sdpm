@@ -45,7 +45,7 @@
 #end
 
 #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/project/edit" "post" {"class":"test"})
-    #hiddenInput(hiddenInputName="projectId" hiddenInputValue=project?.projectId)
+    #hiddenInput(hiddenInputName="projectId" hiddenInputValue=project.projectId)
     #@elementItem()
         #@sdpmItem("项目名称" "*")
             #tinyInput(
@@ -84,7 +84,7 @@
         #@sdpmItem("可用工作日")
         <div class="input-group">
             <input name="projectDays" type="text" class="form-control" placeholder="" value=${project?.projectDays} aria-describedby="basic-addon2">
-            <span class="input-group-addon" id="basic-addon2">小时</span>
+            <span class="input-group-addon" id="basic-addon2">天</span>
         </div>
         #end
     #end
@@ -92,7 +92,7 @@
         #@sdpmItem("项目类型")
             #@Tselect2F()
                 #@Tselect2Body("projectType" project?.projectType {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                    #foreach(type:getDict("projectStatus"))
+                    #foreach(type:getDict("projectType"))
                     <option value="${type?.value}">${type?.text}</option>
                     #end
                 #end
@@ -108,8 +108,8 @@
     #@elementItem()
         #@sdpmItem("关联产品")
             #@Tselect2F()
-                #@Tselect2Body("linkProduct" "" {"class":"input-text select2","multiple":"multiple"})
-                    #foreach(p : prodcutList)
+                #@Tselect2Body("productIds" productIds {"class":"input-text select2","multiple":"multiple"})
+                    #foreach(p : productList)
                     <option value="${p?.productId}">${p.productName}</option>
                     #end
                 #end
@@ -124,10 +124,9 @@
         #@sdpmItem("项目状态")
             #@Tselect2F()
                 #@Tselect2Body(
-                    "projectType" project?.projectStatus {"class":"input-text select2","minimumResultsForSearch":
+                    "projectType" project?.projectStatus {"class":"input-text","minimumResultsForSearch":
                     "Infinity"}) ##,"multiple":"multiple"加上为多选项
-                <option value="">/</option>
-                    #foreach(type : getDict("projectType"))
+                    #foreach(type : getDict("projectStatus"))
                     <option value=${type.value}>${type.text}</option>
                     #end
                 #end
@@ -138,9 +137,9 @@
         #@sdpmItem("产品负责人")
             #@Tselect2F()
                 #@Tselect2Body("projectPo" project?.projectPO {"class":"input-text select2"})
-                    #foreach(t : team)
-                    <option value="${t?.teamUserId}">
-                        ${t?.teamUserId==null?"":UserUtils.getUserById(t?.teamUserId)?.orgUserRealName}
+                    #foreach(u : team)
+                    <option value="${u.orgUserId}">
+                        ${u.orgUserRealName}
                     </option>
                     #end
                 #end
@@ -155,9 +154,9 @@
         #@sdpmItem("项目负责人")
             #@Tselect2F()
                 #@Tselect2Body("projectPm" project?.projectPm {"class":"input-text select2"})
-                    #foreach(t : team)
-                    <option value="${t?.teamUserId}">
-                        ${t?.teamUserId==null?"":UserUtils.getUserById(t?.teamUserId)?.orgUserRealName}
+                    #foreach(u : team)
+                    <option value="${u.orgUserId}">
+                        ${u.orgUserRealName}
                     </option>
                     #end
                 #end
@@ -172,9 +171,9 @@
         #@sdpmItem("测试负责人")
             #@Tselect2F()
                 #@Tselect2Body("projectQd" project?.projectQd {"class":"input-text select2"})
-                    #foreach(t : team)
-                    <option value="${t?.teamUserId}">
-                        ${t?.teamUserId==null?"":UserUtils.getUserById(t?.teamUserId)?.orgUserRealName}
+                    #foreach(u : team)
+                    <option value="${u.orgUserId}">
+                        ${u.orgUserRealName}
                     </option>
                     #end
                 #end
@@ -189,9 +188,9 @@
         #@sdpmItem("发布负责人")
             #@Tselect2F()
                 #@Tselect2Body("projectRd" project?.projectRd {"class":"input-text select2"})
-                    #foreach(t : team)
-                    <option value="${t?.teamUserId}">
-                        ${t?.teamUserId==null?"":UserUtils.getUserById(t?.teamUserId)?.orgUserRealName}
+                    #foreach(u : team)
+                    <option value="${u.orgUserId}">
+                        ${u.orgUserRealName}
                     </option>
                     #end
                 #end
@@ -232,7 +231,6 @@
     #@elementItem()
     <div class="col-12">
         <div class="col-5">
-
         </div>
         <div class="col-1">
             <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
@@ -245,16 +243,43 @@
     #end
 #end
 
-
-
 <script type="text/javascript">
-
     $(function () {
         $("form").Validform({});
-
         $("input[name='projectAcl']").click(function (e) {
             $(this).attr("value") == "3" ? $("#whitelistBox").removeClass("hidden") : $("#whitelistBox").addClass("hidden");
+        });
+        $("[name=projectEnd]").on("change",function(){
+            console.log("sfsdf");
+            var edate=$(this).val();
+            var bdate=$("[name=projectBegin]").val();
+            $("[name=projectDays]").val(getDateDiff(bdate,edate))
+        });
+        function getDateDiff(date1,date2){
+            var arr1=date1.split('-');
+            var arr2=date2.split('-');
+            var d1=new Date(arr1[0],arr1[1],arr1[2]);
+            var d2=new Date(arr2[0],arr2[1],arr2[2]);
+            return (d2.getTime()-d1.getTime())/(1000*3600*24);
+        }
+        $("input[name=projectEnd],input[name=projectBegin]").on("blur",function(){
+            var bTime =$("input[name=projectBegin]").val();
+            var eTime =$("input[name=projectEnd]").val();
+            var $Days=$("input[name=projectDays]");
+            if (!bTime||!eTime){
+                    $Days.val("");
+            }
+                $Days.val(getDateDiff(bTime,eTime));
         })
     });
+    function convertStringToDate(dateString) {
+        dateString = dateString.split('-');
+        return new Date(dateString[0], dateString[1] - 1, dateString[2]);
+    }
+    function computeEndDate(delta) {
+        var bTime =$("input[name=projectBegin]");
+        if (!bTime.val()) return false;
+        $("input[name=projectEnd]").val(moment(bTime.val(), "YYYY-MM-DD").add('days', delta).format('YYYY-MM-DD')).trigger("blur");
 
+    }
 </script>

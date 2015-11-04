@@ -48,7 +48,7 @@ public class ProjectProductAction extends BaseController {
         if (projectId==null){
             return redirectProjectForm();
         }
-        projectProductService.addLink(array, projectId);
+        projectProductService.addProjectLinkToProduct(array, projectId);
         return "redirect:" + adminPath + "/project/product/findLinkProduct";
     }
 }

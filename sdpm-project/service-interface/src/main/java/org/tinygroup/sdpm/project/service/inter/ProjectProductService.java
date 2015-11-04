@@ -11,45 +11,40 @@ import java.util.List;
 public interface ProjectProductService {
 
     /**
-     * 添加关联
-     * @param productArray
+     * 添加关联,并将原存在的关联删除
+     *
+     * @param productIds
      * @param projectId
      */
-    public void addLink(Integer[] productArray, Integer projectId);
+     void addProjectLinkToProduct(Integer[] productIds, Integer projectId);
 
     /**
      * 查询所有产品
      *
      * @return
      */
-    public List<Product> findLinkProduct();
+     List<Product> findLinkProduct();
 
     /**
      * 通过projectId获得productId列表
-     * @param porjectId
+     *
+     * @param projectId
      * @return
      */
-    public List<ProjectProduct> findProducts(Integer projectId);
+    List<ProjectProduct> findProducts(Integer projectId);
 
     /**
      * 通过prodcutId获得projectId列表
-     * @param productId
-     * @return
-     */
-    public List<ProjectProduct> findProjects(Integer productId);
-
-    /**
-     * 增加product和project映射
-     * @param projectId
-     * @param productId
-     * @return
-     */
-    public int add(int projectId, int productId);
-
-    /**
      *
-     * @param id
+     * @param productId
      * @return
      */
-    public int delete(int id);
+    List<ProjectProduct> findProjects(Integer productId);
+
+    /**
+     * 根据项目id删除所有关联的产品
+     * @param projectId
+     * @return
+     */
+     Integer deleteByProjectId(Integer projectId) ;
 }
