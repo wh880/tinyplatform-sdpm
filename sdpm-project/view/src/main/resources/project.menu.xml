@@ -91,10 +91,7 @@
             <menu id="gantt-op-rm" name="删除" href="" icon="icon-remove" sort="2" isShow="1"
                   scope="gantt-op"/>
         </menu>
-
-
     </menu>
-
 
     <menu id="demand" parent-id="project" name="需求" href="/project/demand/index" icon="" sort="1" isShow="1">
         <menu id="rm-demand" name="需求移出" href="/project/demand/delete" icon="icon-remove" sort="1" isShow="1"
@@ -140,7 +137,6 @@
             <menu id="pro-version-report" name="新建版本" href="/project/build/add" icon="icon-plus" sort="8" isShow="1"
                   scope="pro-versionmenu-op"/>
         </menu>
-
 
         <menu id="version-bug" name="" href="/project/build/productalbug" icon="" sort="1" isShow="1">
             <menu id="versionbug" name="" href="/project/build/deletereleateBug" icon="icon-remove" sort="8" isShow="1"
@@ -188,7 +184,7 @@
     <menu id="product" parent-id="project" name="产品" href="/project/product/findLinkProduct" icon="" sort="1"
           isShow="1">
     </menu>
-    <menu id="survey" parent-id="project" name="概况" href="/project/manage/survey/index" icon="" sort="1" isShow="1">
+    <menu id="survey" parent-id="project" name="概况" href="/project/view" icon="" sort="1" isShow="1">
         <menu id="survey-menu" name="任务菜单1" href="/project/task/index.page" icon="" sort="1" isShow="1">
             <menu id="pro-survey-delay" name="延期" href="/project/delay"
                   sort="40" isShow="1" scope="pro-surveymenu-op" icon="icon-calendar"/>
@@ -201,14 +197,13 @@
             <menu id="pro-survey-active" name="激活" href="/project/doing"
                   sort="20" isShow="1" scope="pro-surveymenu-op" icon="icon-play"/>
         </menu>
-        <menu id="survey-menu2" name="任务菜单2" href="/project/manage/survey/index" icon="" sort="1" isShow="1">
+        <menu id="survey-menu2" name="任务菜单2" href="/project/view" icon="" sort="1" isShow="1">
             <menu id="pro-survey-edit" name="编辑" href="/project/edit" icon="icon-pencil" sort="8" isShow="1"
                   scope="pro-surveymenu2-op"/>
-            <menu id="pro-survey-remove" name="" href="" icon="" sort="6" isShow="1"
+            <menu id="pro-survey-remove" name="删除" href="" icon="" sort="6" isShow="1"
                   scope="pro-surveymenu2-op"/>
-            <menu id="pro-survey-return" name="返回" href="/project/manage/survey/index" icon="icon-level-up" sort="4"
-                  isShow="1"
-                  scope="pro-surveymenu2-op"/>
+            <menu id="pro-survey-return" name="返回" href="/project/view" icon="icon-level-up" sort="4"
+                  isShow="1" scope="pro-surveymenu2-op"/>
         </menu>
     </menu>
 </menu>

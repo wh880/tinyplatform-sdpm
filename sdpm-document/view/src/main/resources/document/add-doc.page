@@ -3,99 +3,109 @@
 #import("/org/tinygroup/button/components/button_common.component")
 #import("/org/tinygroup/button/components/button.component")
 #macro radio1(rId rName rChecked rValue rClass rIsDisabled radioOther)
- <input#if(rId) id="$!{rId}"#{end}#if(rName) name="$!{rName}"#end#if(rChecked && rChecked=="checked") checked#{end}#if(rValue) value="$!{rValue}"#end#if(rClass) class="$!{rClass}"#end#if(rIsDisabled && rIsDisabled=="disabled") disabled#end type="radio" onclick="${radioOther}"/>
+<input#if(rId) id="$!{rId}"#{end}#if(rName) name="$!{rName}"#end#if(rChecked && rChecked=="checked")
+               checked#{end}#if(rValue) value="$!{rValue}"#end#if(rClass)
+               class="$!{rClass}"#end#if(rIsDisabled && rIsDisabled=="disabled") disabled#end type="radio"
+               onclick="${radioOther}"/>
 #end
 #macro labelRadio1(rId rName rValue rClass radioOther labelText)
-	#@radioBox()
-		#@label() #radio1(rId=rId rName=rName rValue=rValue rClass=rClass radioOthe=radioOther)${labelText}#end
-	#end
+    #@radioBox()
+        #@label() #radio1(rId=rId rName=rName rValue=rValue rClass=rClass radioOthe=radioOther)${labelText}#end
+    #end
 #end
 #include("doc-tab.page")
-#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/document/doc/addSave" "post" {"class":"add","enctype":"multipart/form-data"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/document/doc/addSave" "post" {"class":"add","enctype":
+    "multipart/form-data"})
 #*<input type="hidden" name="docLibId" value="${doc?.docLibId}"/>
 <input type="hidden" name="docId" value="${doc?.docId}"/>*#
-	<div style="width:100%">
-    	<div class="infoContent">
-    		<p class="titleName">创建文档</p>
-			#@elementItem()
-					#@colLabel()所属分类#end
-					#@formControlDiv("col-8")
-					#@div(divClass="col-5")
-					#@Tselect2F()
-	                   		 #@Tselect2Body("docModule" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="0">/</option>
-	                       	 #foreach(l : moduleList)
-	                       	 	<option value="${l?.moduleId}">${l?.moduleName}</option>
-	            			 #end
-	                    	#end                  	                    	
-                	  #end
-                	  #end
-                	   #end
-				#end	
+<div style="width:100%">
+<div class="infoContent">
+    <p class="titleName">创建文档</p>
+    #@elementItem()
+        #@colLabel()所属分类#end
+        #@formControlDiv("col-8")
+            #@div(divClass="col-5")
+                #@Tselect2F()
+                    #@Tselect2Body("docModule" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        <option value="0">/</option>
+                        #foreach(l : moduleList)
+                            <option value="${l?.moduleId}">${l?.moduleName}</option>
+                        #end
+                    #end
+                #end
+            #end
+        #end
+    #end
 
-			#@elementItem()
-        			#@colLabel()文档类型#end
-					#@skinMinimal("mt-20")
-    					#labelRadio1(rId="typefile" rName="docType" rChecked="checked" rValue="1" "setType(this.value);" labelText=getDict("docType","1") )
-    					#labelRadio1(rId="typeurl" rName="docType" rValue="2" labelText=getDict("docType","2") "setType(this.value);")   								
-    					#labelRadio1(rId="typetext" rName="docType" rValue="3" labelText=getDict("docType","3") "setType(this.value);")
-					#end
-        			#@validateDiv("col-2")#end
-      		#end	
-							
-			#@elementItem()
-					#@colLabel()<span class="c-red">*</span>文档标题#end
-					#@formControlDiv("col-4")
-					#@div(divClass="col-10")
-						#tinyInput("text" "docTitle" ""{"placeholder":"1~16个字符，字母/中文/数字/下划线","datatype":"*1-16","nullmsg":"标题不能为空！","class":"input-text"})
-					#end
-					#end
-					#@validateDiv("col-2")#end
-				#end
-				
-			#@elementItem(elementId="urlBox" eleItemClass="hidden")
-					#@colLabel()文档URL#end
-					#@formControlDiv("col-8")
-					#@div(divClass="col-5")
-					#tinyInput("text" "docUrl" ""{"placeholder":"相应的链接地址","class":"input-text"})
-					#end
-					#end
-					#@validateDiv("col-2")#end
-				#end
-											
-			#@elementItem()	
-					#@colLabel()关键字#end
-					#@formControlDiv("col-8")
-					#@div(divClass="col-5")
-					#tinyInput("text" "docKeywords" ""{"placeholder":"","datatype":"","id":"docKeywords","class":"input-text"})
-					#end
-					#end
-				#end
-				#@validateDiv("col-2")#end
-											
-			#@elementItem()
-					#@colLabel()文档摘要#end
-					#@formControlDiv("col-8")
-						#@Teditor("docDigest" "docDigest" {"initialFrameHeight":"200"})#end
-					#end
-					#@validateDiv("col-2")#end
-				#end	
-										
-			#@elementItem(elementId="fileBox")
-				#@colLabel()附件：#end
-				#@formControlDiv("col-8")					
-					#include("fileupload.page")
-#*					#tinyUploadInput("inputName" "" {"placeholder":"可直接输入地址，也可点击下图标进行上传"})*#				
-				#end
-				#@validateDiv("col-2")#end
-			#end
-			#@elementItem(elementId="contentBox" eleItemClass="hidden")
-					#@colLabel()文档正文#end
-					#@formControlDiv("col-8")
-						#@tinyueditor("docContent" "docContent")#end
-					#end					
-					#@validateDiv("col-2")#end
-			#end
+    #@elementItem()
+        #@colLabel()文档类型#end
+        #@skinMinimal("mt-20")
+            #labelRadio1(rId="typefile" rName="docType" rChecked="checked" rValue="1"
+                "setType(this.value);" labelText=getDict("docType","1") )
+            #labelRadio1(rId="typeurl" rName="docType" rValue="2" labelText=getDict("docType",
+                "2") "setType(this.value);")
+            #labelRadio1(rId="typetext" rName="docType" rValue="3" labelText=getDict("docType",
+                "3") "setType(this.value);")
+        #end
+        #@validateDiv("col-2")#end
+    #end
+
+    #@elementItem()
+        #@colLabel()<span class="c-red">*</span>文档标题#end
+        #@formControlDiv("col-4")
+            #@div(divClass="col-10")
+                #tinyInput(
+                    "text" "docTitle" ""{"placeholder":"1~16个字符，字母/中文/数字/下划线","datatype":"*1-16","nullmsg":"标题不能为空！",
+                    "class":"input-text"})
+            #end
+        #end
+        #@validateDiv("col-2")#end
+    #end
+
+    #@elementItem(elementId="urlBox" eleItemClass="hidden")
+        #@colLabel()文档URL#end
+        #@formControlDiv("col-8")
+            #@div(divClass="col-5")
+                #tinyInput("text" "docUrl" ""{"placeholder":"相应的链接地址","class":"input-text"})
+            #end
+        #end
+        #@validateDiv("col-2")#end
+    #end
+
+    #@elementItem()
+        #@colLabel()关键字#end
+        #@formControlDiv("col-8")
+            #@div(divClass="col-5")
+                #tinyInput(
+                    "text" "docKeywords" ""{"placeholder":"","datatype":"","id":"docKeywords","class":"input-text"})
+            #end
+        #end
+    #end
+    #@validateDiv("col-2")#end
+
+    #@elementItem()
+        #@colLabel()文档摘要#end
+        #@formControlDiv("col-8")
+            #@Teditor("docDigest" "docDigest" {"initialFrameHeight":"200"})#end
+        #end
+        #@validateDiv("col-2")#end
+    #end
+
+    #@elementItem(elementId="fileBox")
+        #@colLabel()附件：#end
+        #@formControlDiv("col-8")
+            #include("fileupload.page")
+        #*					#tinyUploadInput("inputName" "" {"placeholder":"可直接输入地址，也可点击下图标进行上传"})*#
+        #end
+        #@validateDiv("col-2")#end
+    #end
+    #@elementItem(elementId="contentBox" eleItemClass="hidden")
+        #@colLabel()文档正文#end
+        #@formControlDiv("col-8")
+            #@tinyueditor("docContent" "docContent")#end
+        #end
+        #@validateDiv("col-2")#end
+    #end
     #@elementItem()
         <div class="col-12">
             <div class="col-2">
@@ -105,7 +115,7 @@
                 <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
             </div>
             <div class="col-1">
-            	#@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end
+                #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end
             </div>
             <div class="col-5"></div>
         </div>
@@ -113,36 +123,32 @@
 #end
 
 
-<script type="text/javascript">
-/* Set doc type. */
-function setType(type)
-{
-	if(type == '2')
-	{
-		$('#urlBox').removeClass('hidden');
-		$('#fileBox').addClass('hidden');
-		$('#contentBox').addClass('hidden');
-	}
-	else if(type == '3')
-	{
-		$('#urlBox').addClass('hidden');
-		$('#fileBox').addClass('hidden');
-		$('#contentBox').removeClass('hidden');
-	}
-	else
-	{
-		$('#urlBox').addClass('hidden');
-		$('#fileBox').removeClass('hidden');
-		$('#contentBox').addClass('hidden');
-	}
-}
- 
-</script>
+    <script type="text/javascript">
+        /* Set doc type. */
+        function setType(type) {
+            if (type == '2') {
+                $('#urlBox').removeClass('hidden');
+                $('#fileBox').addClass('hidden');
+                $('#contentBox').addClass('hidden');
+            }
+            else if (type == '3') {
+                $('#urlBox').addClass('hidden');
+                $('#fileBox').addClass('hidden');
+                $('#contentBox').removeClass('hidden');
+            }
+            else {
+                $('#urlBox').addClass('hidden');
+                $('#fileBox').removeClass('hidden');
+                $('#contentBox').addClass('hidden');
+            }
+        }
 
-<script type="text/javascript">
-    $(function () {
-        $("form[name=thisform]").Validform({
-            tiptype: 2
+    </script>
+
+    <script type="text/javascript">
+        $(function () {
+            $("form[name=thisform]").Validform({
+                tiptype: 2
+            });
         });
-    });
-</script>
+    </script>

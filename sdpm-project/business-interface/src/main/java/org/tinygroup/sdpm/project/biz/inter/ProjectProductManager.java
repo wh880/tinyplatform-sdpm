@@ -18,7 +18,7 @@ public interface ProjectProductManager {
      * @param projectProduct 主键
      * @return
      */
-    public List<ProjectProduct> findList(ProjectProduct projectProduct);
+     List<ProjectProduct> findList(ProjectProduct projectProduct);
 
     /**
      * 新增关联
@@ -30,16 +30,9 @@ public interface ProjectProductManager {
     /**
      * 更新用户
      *
-     * @param projectproduct 需要更新的实体类
+     * @param projectProduct 需要更新的实体类
      * @return
      */
-    Integer update(ProjectProduct projectproduct);
+    Integer update(ProjectProduct projectProduct);
 
-    /**
-     * 根据id进行删除
-     *
-     * @param id 主键
-     * @return
-     */
-    Integer delete(int id);
 }

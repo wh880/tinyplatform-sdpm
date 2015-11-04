@@ -1,13 +1,10 @@
 package org.tinygroup.sdpm.product.biz.inter;
 
-import java.util.List;
-
-import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
-import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
-import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.tinysqldsl.Pager;
+
+import java.util.List;
 
 public interface ProductManager {
 	/**
@@ -67,15 +64,16 @@ public interface ProductManager {
 	 * @return
 	 */
 	List<Product> findList(Product product, String order,String ordertype);
-	
+
 	/**
 	 * 根据对象查找(分页、排序)
-	 * @param start
+	 * @param page
 	 * @param limit
 	 * @param product
-	 * @param orderBies
-	 * @return
-	 */
+	 * @param order
+	 * @param ordertype
+     * @return
+     */
 	Pager<Product> findPager (int page ,int limit ,Product product, String order,String ordertype);
 	
 	/**

@@ -7,11 +7,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.document.dao.pojo.DocumentDoc;
+import org.tinygroup.sdpm.document.dao.pojo.DocumentDocLib;
 import org.tinygroup.sdpm.document.service.inter.DocService;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
+import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
+import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.sdpm.util.ProjectUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -34,7 +37,8 @@ public class ProjectDocAction extends BaseController {
     private ProjectService projectService;
     @Autowired
     private ProductService productService;
-
+    @Autowired
+    private ModuleService moduleService;
 
     @RequestMapping("/index")
     public String jumpDocIndex() {
@@ -94,11 +98,15 @@ public class ProjectDocAction extends BaseController {
 
     @RequestMapping("/preAdd")
     public String preAdd(Model model) {
-        List<Project> projectList = projectService.findList();
-        List<Product> productList = productService.findProductList(new Product());
-        //所属分类
-        model.addAttribute("projectList", projectList);
-        model.addAttribute("productList", productList);
+        SystemModule module = new SystemModule();
+        List<Product> listProduct = productService.findProductList(new Product());
+        List<Project> listProject = projectService.findList();
+        List<SystemModule> listModule = moduleService.findModuleList(module);
+        List<DocumentDocLib> libList = docService.findDoclibList(null);
+        model.addAttribute("productList", listProduct);
+        model.addAttribute("projectList", listProject);
+        model.addAttribute("listModule", listModule);
+        model.addAttribute("libList", libList);
         return "project/document/add.page";
     }
 

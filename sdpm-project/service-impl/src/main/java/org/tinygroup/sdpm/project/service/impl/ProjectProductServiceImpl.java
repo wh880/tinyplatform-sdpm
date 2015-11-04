@@ -20,13 +20,12 @@ public class ProjectProductServiceImpl implements ProjectProductService {
     @Autowired
     private ProductManager productManager;
 
-    public void addLink(Integer[] productIdArray, Integer projectId) {
+    public void addProjectLinkToProduct(Integer[] productIdArray, Integer projectId) {
         projectProductManager.addLink(productIdArray, projectId);
     }
 
     public List<Product> findLinkProduct() {
-        List<Product> list = productManager.findList(new Product());
-        return list;
+        return  productManager.findList(new Product());
     }
 
     public List<ProjectProduct> findProducts(Integer projectId) {
@@ -41,11 +40,11 @@ public class ProjectProductServiceImpl implements ProjectProductService {
         return projectProductManager.findList(projectProduct);
     }
 
-    public int add(int projectId, int productId) {
+    public Integer add(Integer projectId, Integer productId) {
         return 0;
     }
 
-    public int delete(int id) {
+    public Integer deleteByProjectId(Integer projectId) {
         return 0;
     }
 }
