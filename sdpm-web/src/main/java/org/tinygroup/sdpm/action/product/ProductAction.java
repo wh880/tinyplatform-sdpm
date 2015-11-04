@@ -194,8 +194,10 @@ public class ProductAction extends BaseController {
             @PathVariable(value = "forward") String forward, Integer productId, Model model, HttpServletRequest request) {
         if("close".equals(forward))return "/product/page/tabledemo/overview-close.pagelet";
         if(productId!=null)cookieProductId=String.valueOf(productId);
-        Product product = productService.findProduct(Integer.parseInt(cookieProductId));
-        
+        Product product = new Product();
+        if(Integer.parseInt(cookieProductId)>0) {
+            product = productService.findProduct(Integer.parseInt(cookieProductId));
+        }
         SystemHistory history = new SystemHistory();
 
         model.addAttribute("product", product);

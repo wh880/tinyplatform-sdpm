@@ -37,7 +37,7 @@ public class ReleaseMangerImpl implements ReleaseManger{
 
 
 	public ProductRelease find(Integer releaseId) {
-
+		if(releaseId==null)return new ProductRelease();
 		return productReleaseDao.getByKey(releaseId);
 	}
 
@@ -53,7 +53,7 @@ public class ReleaseMangerImpl implements ReleaseManger{
 
 	public Pager<ProductRelease> findPager(int page, int limit, ProductRelease release, String order,String ordertype) {
 		
-		return productReleaseDao.queryPager((page-1)*limit, limit, release, (order==null||"".equals(order))?null:new OrderBy(NameUtil.resolveNameDesc(order), !("desc".equals(ordertype))?true:false));
+		return productReleaseDao.queryPager((page-1)*limit, limit, release, (order==null||"".equals(order))?null:new OrderBy(NameUtil.resolveNameDesc("productRelease."+order), !("desc".equals(ordertype))?true:false));
 	}
 
 	public List<ProductRelease> findList(ProductRelease productRelease) {

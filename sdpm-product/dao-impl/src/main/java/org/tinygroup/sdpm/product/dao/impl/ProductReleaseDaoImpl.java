@@ -20,6 +20,7 @@ import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 import static org.tinygroup.sdpm.product.dao.constant.ProductPlanTable.PRODUCT_PLANTABLE;
 import static org.tinygroup.sdpm.product.dao.constant.ProductReleaseTable.*;
 import static org.tinygroup.sdpm.product.dao.constant.ProductStorySpecTable.PRODUCT_STORY_SPECTABLE;
+import static org.tinygroup.sdpm.project.dao.constant.ProjectBuildTable.PROJECT_BUILDTABLE;
 import static org.tinygroup.tinysqldsl.Select.*;
 import static org.tinygroup.tinysqldsl.Insert.*;
 import static org.tinygroup.tinysqldsl.Delete.*;
@@ -40,6 +41,7 @@ import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.tinysqldsl.base.Condition;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
+import org.tinygroup.tinysqldsl.select.Join;
 import org.tinygroup.tinysqldsl.select.OrderByElement;
 import org.tinygroup.sdpm.common.util.update.InsertUtil;
 import org.tinygroup.sdpm.common.util.update.UpdateUtil;
@@ -135,7 +137,9 @@ public class ProductReleaseDaoImpl extends TinyDslDaoSupport implements
 			@SuppressWarnings("rawtypes")
 			public Select generate(Serializable[] t) {
 
-				return selectFrom(PRODUCT_RELEASETABLE).where(
+				return MysqlSelect.select(
+						PRODUCT_RELEASETABLE.ALL,PROJECT_BUILDTABLE.BUILD_NAME.as("buildName")).
+						from(PRODUCT_RELEASETABLE).join(Join.leftJoin(PROJECT_BUILDTABLE, PRODUCT_RELEASETABLE.BUILD_ID.eq(PROJECT_BUILDTABLE.BUILD_ID))).where(
 						PRODUCT_RELEASETABLE.RELEASE_ID.in(t));
 			}
 
@@ -150,7 +154,9 @@ public class ProductReleaseDaoImpl extends TinyDslDaoSupport implements
 					new SelectGenerateCallback<Serializable>() {
 						@SuppressWarnings("rawtypes")
 						public Select generate(Serializable t) {
-							return selectFrom(PRODUCT_RELEASETABLE).where(
+							return MysqlSelect.select(
+									PRODUCT_RELEASETABLE.ALL,PROJECT_BUILDTABLE.BUILD_NAME.as("buildName")).
+									from(PRODUCT_RELEASETABLE).join(Join.leftJoin(PROJECT_BUILDTABLE, PRODUCT_RELEASETABLE.BUILD_ID.eq(PROJECT_BUILDTABLE.BUILD_ID))).where(
 									PRODUCT_RELEASETABLE.RELEASE_ID.eq(t));
 						}
 					});
@@ -202,10 +208,11 @@ public class ProductReleaseDaoImpl extends TinyDslDaoSupport implements
 				new SelectGenerateCallback<ProductRelease>() {
 
 					public Select generate(ProductRelease t) {
-						Select select = MysqlSelect.selectFrom(
-								PRODUCT_RELEASETABLE).where(
+						Select select = MysqlSelect.select(
+								PRODUCT_RELEASETABLE.ALL,PROJECT_BUILDTABLE.BUILD_NAME.as("buildName")).
+						from(PRODUCT_RELEASETABLE).join(Join.leftJoin(PROJECT_BUILDTABLE,PRODUCT_RELEASETABLE.BUILD_ID.eq(PROJECT_BUILDTABLE.BUILD_ID))).where(
 								and(PRODUCT_RELEASETABLE.PRODUCT_ID.eq(t
-										.getProductId()),
+												.getProductId()),
 										PRODUCT_RELEASETABLE.BUILD_ID.eq(t
 												.getBuildId()),
 										PRODUCT_RELEASETABLE.RELEASE_NAME.eq(t

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
 import org.tinygroup.sdpm.product.dao.pojo.ProductRelease;
@@ -26,17 +27,17 @@ public class ProductCommonAction   extends BaseController{
 
 
 	@RequestMapping("/roadMap")
-	public String roadMap(@CookieValue("cookieProductId") String cookieProductId, HttpServletRequest request, Model model){
+	public String roadMap(@CookieValue(value = "cookieProductId",defaultValue ="0") String cookieProductId, HttpServletRequest request, Model model){
 
 		ProductPlan plan = new ProductPlan();
 		ProductRelease release = new ProductRelease();
-		plan.setProductId(Integer.parseInt(cookieProductId));
-		release.setProductId(Integer.parseInt(cookieProductId));
-		
-		if(request.getSession().getAttribute("sessionProductId")!=null){
-			plan.setProductId((Integer)request.getSession().getAttribute("sessionProductId"));
-			release.setProductId((Integer)request.getSession().getAttribute("sessionProductId"));
+
+		if(!StringUtil.isBlank(cookieProductId)&&Integer.parseInt(cookieProductId)>0){
+			plan.setProductId(Integer.parseInt(cookieProductId));
+			release.setProductId(Integer.parseInt(cookieProductId));
 		}
+		plan.setDeleted(0);
+		release.setDeleted(0);
 		List<ProductPlan> plans = planService.findPlanList(plan, "planEndDate", "desc");
 		List<ProductRelease> releases = releaseService.findReleaseList(release, "releaseDate", "desc");
 

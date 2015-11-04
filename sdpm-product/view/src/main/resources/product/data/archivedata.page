@@ -7,9 +7,9 @@
 #@tr()
 
 	#@td()<input type="checkbox" value="${l?.docId}" name="idCheck">#end
-	#@td()<a href="${TINY_CONTEXT_PATH +adminPath}/document/doc/view?docid=${l?.docId}&type=1">${l?.docId}</a>#end
-	#@td()<a href="${TINY_CONTEXT_PATH +adminPath}/document/doc/view?docid=${l?.docId}&type=1">${l?.moduleName}</a>#end
-	#@td()${l?.docTitle}#end
+	#@td()<a href="${TINY_CONTEXT_PATH +adminPath}/document/doc/view?docid=${l?.docId}&type=1">${l?.docId}#end
+	#@td()${l?.moduleName}</a>#end
+	#@td()<a href="${TINY_CONTEXT_PATH +adminPath}/document/doc/view?docid=${l?.docId}&type=1">${l?.docTitle}</a>#end
 	#@td()  ${l?.docAddedBy?UserUtils.getUserById(l?.docAddedBy).orgUserRealName:""}
 	#end
 	#@td()${l?.docAddedDate?formatDate(l?.docAddedDate,'yyyy年MM月dd日'):""}#end
@@ -19,7 +19,7 @@
 		#foreach(m:menuManager.getScopeMenus("archive-oper"))
 		 #set(url=eval(m.href))
 			#if(m.id=="product-archive-edit")
-            <a title="${m.name}" class="ml-5" href="${TINY_CONTEXT_PATH +adminPath}${url}"><i class="${m.icon}"></i></a>
+            <a title="${m.name}" class="ml-5" href="${TINY_CONTEXT_PATH +adminPath}${url}&from=${from}"><i class="${m.icon}"></i></a>
 			#else
             &nbsp;#@tinyTableItemRemove(TINY_CONTEXT_PATH +adminPath+url l.docId)<i class="${m.icon}"></i>#end
 			#end

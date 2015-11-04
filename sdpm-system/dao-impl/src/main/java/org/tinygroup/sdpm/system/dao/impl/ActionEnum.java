@@ -74,8 +74,23 @@ public class ActionEnum {
         nameMap.put("productLine","product_line_name");
         nameMap.put("sla","sla_title");
 
-        urlMap.put("user","");
-        urlMap.put("story","");
+        urlMap.put("user","/org/user/show/profile?choose=3&id=");
+        urlMap.put("story","/product/storySpec/find/productDemandDetail?storyId=");
+        urlMap.put("task","/project/task/findTask?taskId=");
+        urlMap.put("plan","/product/plan/forword/reRelateStory?planId=");
+        urlMap.put("release","/product/release/forword/reRelateStory?releaseId=");
+        urlMap.put("project","/project/manage/survey/index?projectId=");
+        urlMap.put("product","/product/find/overview?productId=");
+        urlMap.put("build","build_name");
+        urlMap.put("bug","bug_title");
+        urlMap.put("case","case_title");
+        urlMap.put("testtask","testtask_title");
+        urlMap.put("todo","todo_name");
+        urlMap.put("doclib","doc_lib_name");
+        urlMap.put("doc","doc_title");
+        urlMap.put("holiday","holiday_name");
+        urlMap.put("productLine","product_line_name");
+        urlMap.put("sla","sla_title");
     }
 
     public static String getTable(String type){

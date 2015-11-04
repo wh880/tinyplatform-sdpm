@@ -200,7 +200,7 @@ public class DocAction extends BaseController {
     /**
      * 编辑文档的跳转
      *
-     * @param request
+     * @param from
      * @param model
      * @param docId
      * @return
@@ -233,7 +233,12 @@ public class DocAction extends BaseController {
      * @return
      */
     @RequestMapping(value = "/editSave", method = RequestMethod.POST)
-    public String editSave(DocumentDoc doc, @RequestParam(value = "file", required = false) MultipartFile[] file, String[] title, SystemAction systemAction, Model model) throws IOException {
+    public String editSave(DocumentDoc doc,
+                           String from,
+                           @RequestParam(value = "file", required = false) MultipartFile[] file,
+                           String[] title,
+                           SystemAction systemAction,
+                           Model model) throws IOException {
         DocumentDoc documentDoc = docservice.findDocById(doc.getDocId());
         doc.setDocEditedBy(UserUtils.getUser().getOrgUserId());
         docservice.editDoc(doc);
@@ -249,6 +254,9 @@ public class DocAction extends BaseController {
                 documentDoc,
                 doc,
                 systemAction.getActionComment());
+        if("product".equals(from)){
+            return "redirect:/a/product/doc/content";
+        }
         return "redirect:" + adminPath + "/document?docChange=true";
     }
 

@@ -12,9 +12,9 @@
 	#@td()${UserUtils.getUserById(a?.actionActor).orgUserRealName} #end
 	#@td()${getDict("actionOperate",a?.actionAction)}#end
 	#@td()${getDict("actionObject",a?.actionObjectType)}#end
-	#@td()${a?.actionObjectId}#end
+##	#@td()${a?.actionObjectId}#end
 	#@td()
-    <a href="${TINY_CONTEXT_PATH +adminPath}/product/page/project/demdtablehref.page">请稍等CAD</a>
+    <a href="${TINY_CONTEXT_PATH +adminPath}/product/page/project/demdtablehref.page">${a?.objectName}</a>
 	#end
 #end
 #end
