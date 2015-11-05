@@ -101,7 +101,6 @@ public class ProjectStoryServiceImpl implements ProjectStoryService {
     }
 
     public Pager<ProductStory> findStoryByProject(Integer projectId, Integer start, Integer limit, String order, String ordertype, String moduleId) {
-
         List<ProjectStory> storyList = projectStoryManager.findSrotys(projectId);
         String condition = "";
         if (storyList == null || storyList.isEmpty()) {
