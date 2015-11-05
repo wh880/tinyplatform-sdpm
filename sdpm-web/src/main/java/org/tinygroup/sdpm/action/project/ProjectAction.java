@@ -139,11 +139,9 @@ public class ProjectAction extends BaseController {
     public String editForm(Integer projectId, Model model) {
         Project project = projectService.findProjectById(projectId);
         model.addAttribute("project", project);
-
         List<ProjectProduct> projectProductList = projectProductService.findProjects(projectId);
         String productIds = Collections3.extractToString(projectProductList, "productId", ",");
         model.addAttribute("productIds", productIds);
-
         model.addAttribute("teamList", userService.findTeamUserListByProjectId(projectId));
         model.addAttribute("productList", ProductUtils.getAllProductListByUser());
         return "project/survey/edit";
@@ -162,7 +160,6 @@ public class ProjectAction extends BaseController {
     public String editPost(Project project, Model model, Integer[] whiteList, Integer[] productIds) {
         project.setProjectWhiteList(StringUtil.join(whiteList, ","));
         projectProductService.addProjectLinkToProduct(productIds, project.getProjectId());
-
         projectService.updateProject(project);
         ProjectUtils.removeProjectList();
         model.addAttribute("project", project);
