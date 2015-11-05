@@ -310,9 +310,12 @@
                     #@th()影响版本#end
                     #@td()
                    #@Tselect2F()
-	                   		 #@Tselect2Body("bugOpenedBuild" bug?.bugOpenedBuild {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-
-	                    	#end                
+                       #@Tselect2Body("bugOpenedBuild" bug?.bugOpenedBuild {"class":"input-text select2","multiple":
+                           "multiple"}) ##,"multiple":"multiple"加上为多选项
+                           #foreach(list : bugBuilds)
+                           <option value="${list?.productId}">${p.productName}</option>
+                           #end
+                       #end
                 	  #end
                     #end
                 #end
