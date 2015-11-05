@@ -139,7 +139,7 @@ public class ProjectAction extends BaseController {
     public String editForm(Integer projectId, Model model) {
         Project project = projectService.findProjectById(projectId);
         model.addAttribute("project", project);
-        List<ProjectProduct> projectProductList = projectProductService.findProjects(projectId);
+        List<ProjectProduct> projectProductList = projectProductService.findProducts(projectId);
         String productIds = Collections3.extractToString(projectProductList, "productId", ",");
         model.addAttribute("productIds", productIds);
         model.addAttribute("teamList", userService.findTeamUserListByProjectId(projectId));

@@ -273,14 +273,19 @@ public class DocAction extends BaseController {
     @RequestMapping("/view")
     public String docView(HttpServletRequest request, SystemAction systemAction, DocumentDoc doc, SystemProfile systemProfile, Model model, Integer docid) {
         doc = docservice.findDocById(docid);
-        DocumentDocLib docLib = docservice.findDoclibById(doc.getDocLibId());
+        if (doc.getDocLibId() != null) {
+            DocumentDocLib docLib = docservice.findDoclibById(doc.getDocLibId());
+            model.addAttribute("docLib", docLib);
+        } else {
+            DocumentDocLib docLib = null;
+            model.addAttribute("docLib", docLib);
+        }
         systemProfile.setFileObjectType("document");
         systemProfile.setFileObjectId(docid);
         systemProfile.setFileDeleted("0");
         List<SystemProfile> list = profileService.find(systemProfile);
         model.addAttribute("file", list);
         model.addAttribute("doc", doc);
-        model.addAttribute("docLib", docLib);
         return "/document/doc-view.page";
     }
 

@@ -1,176 +1,3 @@
-###!set(activeTitle="项目管理",activeMenuId=currentPageId)
-###import("/org/tinygroup/form/components/form.component")
-###import("/org/tinygroup/icon/components/icon.component")
-###import("/org/tinygroup/button/components/button_common.component")
-###import("/org/tinygroup/button/components/button.component")
-##
-###set(name="document")
-###@div()
-##    #@tabWithInit("tab_demo" "optionsBox")
-##        #@div(divClass="dropdownBox")
-##            #include("/project/dropdownMenu.page")
-##        #end
-##        #@tabHead()
-##            #include("/project/protab.page")
-##        #end
-##        #@tabBodyCol("ptop-5")
-##
-##        #end
-##    #end
-###end
-##<div class="infoContent">
-##    <p class="titleName">新建文档</p>
-##    #@div()
-##        #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/project/doc/save" "" {"class":"test","enctype":
-##            "multipart/form-data"})
-##            <input type="hidden" name="docAddedBy" value="${UserUtils.getUserId()}"/>
-##            #@elementItem()
-##                #@sdpmItem("所属项目")
-##                    #@Tselect2F()
-##                        #@Tselect2Body(
-##                            "docProject" currentProjectId {"class":
-##                            "input-text select2"}) ##,"multiple":"multiple"加上为多选项
-##                            #foreach(project : projectList)
-##                                <option value="${project.projectId}">${project.projectName}</option>
-##                            #end
-##                        #end
-##                        #@Tselect2Fix()
-##                            <a href="${TINY_CONTEXT_PATH+adminPath}/project/form">增加</a>
-##                            <a href="${TINY_CONTEXT_PATH+adminPath}/project/list" class="r">全部</a>
-##                        #end
-##                    #end
-##                #end
-##            #end
-##
-##            #@elementItem()
-##                #@sdpmItem("所属产品")
-##                    #@Tselect2F()
-##                        #@Tselect2Body(
-##                            "docProduct" "" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-##                            #foreach(product : productList)
-##                                <option value="${product.productId}">${product.productName}</option>
-##                            #end
-##                        #end
-##                    ##填写任意内容，侦听需重新填加 A侦听已内置
-##                        #@Tselect2Fix()
-##                            <a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition">新增</a>
-##                            <a href="${TINY_CONTEXT_PATH+adminPath}/product/allproduct/addition" class="r">全部</a>
-##                        #end
-##                    #end
-##                #end
-##            #end
-##
-##            #@elementItem()
-##                #@sdpmItem("所属分类")
-##                    #@Tselect2F()
-##                        #@Tselect2Body("docModule" doc?.docModule?:0 {"class":"input-text select2"})
-##                        #end
-##                    #end
-##                #end
-##            #end
-##            #@elementItem()
-##                #@sdpmItem("文档类型")
-##                    #@formControlDiv("skin-minimal col-8")
-##                        #@Tradioes("docType" 1)
-##                            #foreach(item:getDict("docType"))
-##                                #@Tradio(item.value)${item.text}#end
-##                            #end
-##                        #end
-##                    #end
-##                #end
-##            #end
-##
-##            #@elementItem()
-##                #@sdpmItem("文档标题")
-##                    #@formControlDiv("col-12")
-##                        #tinyInput(
-##                            "text" "docTitle" ""{"style":"width:300px","placeholder":"","datatype":"*4-16",
-##                            "nullmsg":"标题不能为空！","id":"doctitle","class":"input-text"})
-##                    #end
-##                #end
-##            #end
-##
-##            #@elementItem(elementId="urlBox" eleItemClass="hide")
-##                #@sdpmItem("文档URL")
-##                    #@formControlDiv("col-12")
-##                        #tinyInput(
-##                            "text" "docUrl" ""{"style":"width:300px","placeholder":"相应的链接地址","datatype":"*4-16",
-##                            "id":"docurl","class":"input-text"})
-##                    #end
-##                #end
-##            #end
-##            #@validateDiv("col-2")#end
-##            #@elementItem()
-##                #@sdpmItem("关键字")
-##                    #@formControlDiv("col-8")
-##                        #tinyInput(
-##                            "text" "docKeywords" ""{"style":"width:300px","placeholder":"","datatype":"*4-16",
-##                            "id":
-##                            "keywords","class":"input-text"})
-##                    #end
-##                #end
-##            #end
-##            #@validateDiv("col-2")#end
-##
-##            #@elementItem()
-##                #@sdpmItem("文档摘要")
-##                    #@formControlDiv("col-8")
-##                        #@Teditor("content1" "docDigest" {"initialFrameHeight":"200","initialFrameWidth":"800"})#end
-##                    #end
-##                #end
-##            #end
-##
-##            #@elementItem(elementId="fileBox" eleItemClass="hide")
-##                #@sdpmItem("附件")
-##                    #@formControlDiv("col-8")
-##                        #fileWithInput("file-1")
-##                    #end
-##                #end
-##            #end
-##            #@elementItem(elementId="contentBox" eleItemClass="hide")
-##                #@sdpmItem("文档正文")
-##                    #@formControlDiv("col-8")
-##                        #@Teditor("content" "docContent" {"initialFrameHeight":"200","initialFrameWidth":"800"})#end
-##                    #end
-##                #end
-##            #end
-##            #@elementItem()
-##                <div class="text-c">
-##                    <input type="submit" class="radius btn-primary btn" value="保存">
-##                    <a href="javascript:history.go(-1)" class="radius btn-primary btn">返回</a>
-##                </div>
-##            #end
-##        #end
-##    #end
-##
-##</div>
-##
-##
-##<script type="text/javascript">
-##    $(function () {
-##        $("input[name=docType]").on("change", function () {
-##            var type = $(this).val();
-##            switch (type) {
-##                case "1":
-##                    $('#urlBox').hide();
-##                    $('#fileBox').show();
-##                    $('#contentBox').hide();
-##                    break;
-##                case "2":
-##                    $('#urlBox').show();
-##                    $('#fileBox').hide();
-##                    $('#contentBox').hide();
-##                    break;
-##                case "3":
-##                    $('#urlBox').hide();
-##                    $('#fileBox').hide();
-##                    $('#contentBox').show();
-##                    break;
-##            }
-##        });
-##    });
-##</script>
-
 <script type="text/javascript">
     function ajaxRead(id, toName, opKey, opvalue, url, value) {
         var selectCheck = "select[name=" + toName + "]";
@@ -268,6 +95,7 @@
             </div>
             #end
         #end
+
         #@elementItem(elementId="project" eleItemClass="hidden")
             #@colLabel()所属项目：#end
             #@formControlDiv("col-8")
@@ -305,7 +133,6 @@
                 #end
             #end
         #end
-
         #@elementItem(elementId="product" eleItemClass="hidden")
             #@colLabel()所属产品：#end
             #@formControlDiv("col-8")
@@ -342,6 +169,8 @@
                 </div>
             </div>
         #end
+
+
         #@elementItem()
             <div class="col-12">
                 <div class="col-2 text-r"><label>文档类型：</label></div>
@@ -354,7 +183,6 @@
                 </div>
             </div>
         #end
-
         #@elementItem()
             <div class="col-12">
                 <div class="col-2 text-r"><label><span class="c-red">*</span>文档标题：</label></div>
@@ -374,7 +202,6 @@
                 #end
             #end
         #end
-
         #@elementItem()
             <div class="col-12">
                 <div class="col-2 text-r"><label>关键字：</label></div>
@@ -392,7 +219,6 @@
                     #@Teditor("docDigest" "docDigest" {"initialFrameHeight":"150"})${doc?.docDigest}#end</div>
             </div>
         #end
-
         #@elementItem()
             <div class="col-12">
                 <div class="col-2 text-r"><label>文档备注：</label></div>
@@ -400,7 +226,6 @@
                     #@Teditor("actionComment" "actionComment" {"initialFrameHeight":"150"})#end</div>
             </div>
         #end
-
         #@elementItem(elementId="fileBox" eleItemClass="hide")
             #@sdpmItem("附件")
                 #@formControlDiv("col-8")
