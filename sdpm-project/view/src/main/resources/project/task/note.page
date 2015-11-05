@@ -2,7 +2,6 @@
 #import("/org/tinygroup/button/components/button.component")
 #!set(activeTitle="日志",activeMenuId=currentPageId)
 #set(name="task")
-
 #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/system/effort/save" "post" {"class":"test"})
     #hiddenInput(hiddenInputName="taskStatus" hiddenInputValue=task?.taskStatus)
     #hiddenInput(hiddenInputName="effortId" hiddenInputValue=effort?.effortId)
@@ -52,12 +51,10 @@
                 #end
             #end
         ##每次输出日志后 再新增3个新框框
-
                 #@tr()
-                    #@td()ID#end
+                    #@td()${lFor.index+1}#end
                     #@td()
-                        #@tinyDateInput(
-                            "effortDate" effort?.effortDate "YYYY-MM-DD" {"style":"width:100%","datatype":"*","nullmsg":
+                        #@tinyDateInput("effortDate" effort?.effortDate "YYYY-MM-DD" {"style":"width:100%","datatype":"*","nullmsg":
                             "日期不能为空"})#end
                     #end
                     #@td()#tinyInput("text" "effortConsumed" effort?.effortConsumed {"datatype":"","id":"关键词","class":"input-text"})#end
@@ -65,7 +62,6 @@
                     #@td()
                     #end
                 #end
-
         #end
     #end
 

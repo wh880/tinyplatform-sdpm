@@ -92,6 +92,19 @@ public class ProjectTaskAction extends BaseController {
     }
 
     /**
+     * 时间消耗
+     * @param taskId
+     * @param model
+     * @return
+     */
+    @RequestMapping("/consumeTime")
+    public String consumeTime(Integer taskId, Model model) {
+        ProjectTask task = taskService.findTask(taskId);
+        model.addAttribute("task", task);
+        return "project/task/consumeTime";
+    }
+
+    /**
      * 指派
      *
      * @param taskId
@@ -380,7 +393,6 @@ public class ProjectTaskAction extends BaseController {
 
         model.addAttribute("moduleList", moduleList);
         model.addAttribute("storyList", storyList);
-
         return "project/task/add";
     }
 
@@ -464,7 +476,6 @@ public class ProjectTaskAction extends BaseController {
         if (projectId == null) {
             return redirectProjectForm();
         }
-
         model.addAttribute("teamList", userService.findTeamUserListByProjectId(projectId));
 
         List<ProductStory> storyList = storyService.findStoryByProject(projectId);
@@ -573,35 +584,39 @@ public class ProjectTaskAction extends BaseController {
     }
 
     @RequestMapping("/board")
-    public String board(Model model, String ajax) {
-        ProjectTask task = new ProjectTask();
-        task.setTaskStatus(task.WAIT);
-        List<ProjectTask> resList = taskService.findListTask(task);
+    public String board(Model model, HttpServletRequest request,HttpServletResponse response) {
+        Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
+
+        ProjectTask projectTask = new ProjectTask();
+        projectTask.setTaskProject(projectId);
+
+        projectTask.setTaskStatus(projectTask.WAIT);
+        List<ProjectTask> resList = taskService.findListTask(projectTask);
         model.addAttribute("waitList", resList);
 
-        task.setTaskStatus(task.DOING);
-        resList = taskService.findListTask(task);
+        projectTask.setTaskStatus(projectTask.DOING);
+        resList = taskService.findListTask(projectTask);
         model.addAttribute("doingList", resList);
 
-        task.setTaskStatus(task.DONE);
-        resList = taskService.findListTask(task);
+        projectTask.setTaskStatus(projectTask.DONE);
+        resList = taskService.findListTask(projectTask);
         model.addAttribute("doneList", resList);
 
-        task.setTaskStatus(task.CANCEL);
-        resList = taskService.findListTask(task);
+        projectTask.setTaskStatus(projectTask.CANCEL);
+        resList = taskService.findListTask(projectTask);
         model.addAttribute("cancelList", resList);
 
-        task.setTaskStatus(task.CLOSE);
-        resList = taskService.findListTask(task);
+        projectTask.setTaskStatus(projectTask.CLOSE);
+        resList = taskService.findListTask(projectTask);
         model.addAttribute("closeList", resList);
 
-        return "project/task/board.page" + (ajax != null ? "let" : "");
+        return "project/task/board";
     }
 
     @RequestMapping("/modal/{forward}")
     public String doc(@PathVariable(value = "forward") String forward, Model model, String taskId) {
         ProjectTask task = taskService.findTask(Integer.parseInt(taskId));
-        model.addAttribute("teamList", teamService.findTeamByProjectId(task.getTaskProject()));
+        model.addAttribute("teamList", userService.findTeamUserListByProjectId(task.getTaskProject()));
         model.addAttribute("task", task);
         return "project/task/modal/" + forward + ".pagelet";
     }
@@ -630,11 +645,11 @@ public class ProjectTaskAction extends BaseController {
 
     @ResponseBody
     @RequestMapping("/ajaxChangeStatu")
-    public Map<String, String> ajaxChangeStatu(ProjectTask task, String content, String taskStatus) {
+    public Map<String, String> ajaxChangeStatus(ProjectTask task, String content, String taskStatus) {
         Map<String, String> map;
         task.setTaskLastEditedBy(UserUtils.getUserId());
         Integer res;
-        LogUtil.LogAction logAction = null;
+        LogUtil.LogAction logAction ;
         if ("doing".equals(taskStatus)) {
             res = taskService.updateDoingTask(task);
             logAction = LogUtil.LogAction.ACTIVATED;

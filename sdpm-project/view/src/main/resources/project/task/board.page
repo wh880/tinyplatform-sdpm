@@ -256,7 +256,7 @@
         }
 
         $("#myModal").on("hidden", function () {
-            $("#tinypagecontent").load("${TINY_CONTEXT_PATH+adminPath}/project/task/board?choose=${choose}&ajax=1");
+            $("#tinypagecontent").load("${TINY_CONTEXT_PATH+adminPath}/project/task/board.pagelet?choose=${choose}");
         })
     });
     //-->
