@@ -60,7 +60,8 @@ public class ProjectTaskAction extends BaseController {
     @Autowired
     private UserService userService;
 
-    @RequiresPermissions(value = {"task", "project"}, logical = Logical.OR)
+    @RequiresPermissions(value = {"project", "task"}, logical = Logical.OR)
+//    @RequiresPermissions(value = {"task", "project"}, logical = Logical.OR)
     @RequestMapping("index")
     public String index(@CookieValue(required = false, value = ProjectUtils.COOKIE_PROJECT_ID) String currentProjectId,
                         HttpServletResponse response, String moduleId, String choose, Model model) {
@@ -83,6 +84,7 @@ public class ProjectTaskAction extends BaseController {
         return "project/task/index";
     }
 
+    @RequiresPermissions(value = {"pro-task-edit", "pro-Info2-edit"}, logical = Logical.OR)
     @RequestMapping("/edit")
     public String form(Integer taskId, Model model) {
         ProjectTask task = taskService.findTask(taskId);
@@ -98,6 +100,7 @@ public class ProjectTaskAction extends BaseController {
      * @param request
      * @return
      */
+    @RequiresPermissions("pro-task-call")
     @RequestMapping(value = "/call", method = RequestMethod.GET)
     public String call(Integer taskId, Model model, HttpServletRequest request) {
         Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, ProjectUtils.COOKIE_PROJECT_ID));
@@ -131,6 +134,7 @@ public class ProjectTaskAction extends BaseController {
         return "project/task/index.page";
     }
 
+    @RequiresPermissions("pro-task-finish")
     @RequestMapping(value = "/finish", method = RequestMethod.GET)
     public String finish(Integer taskId, Model model, HttpServletRequest request) {
         Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, ProjectUtils.COOKIE_PROJECT_ID));
@@ -164,6 +168,7 @@ public class ProjectTaskAction extends BaseController {
         return "project/task/note";
     }
 
+    @RequiresPermissions("pro-task-close")
     @RequestMapping(value = "/close", method = RequestMethod.GET)
     public String close(Integer taskId, Model model) {
         ProjectTask task = taskService.findTask(taskId);
@@ -180,6 +185,7 @@ public class ProjectTaskAction extends BaseController {
         return "project/task/index.page";
     }
 
+    @RequiresPermissions("pro-task-start")
     @RequestMapping(value = "/start", method = RequestMethod.GET)
     public String start(Integer taskId, Model model) {
         ProjectTask task = taskService.findTask(taskId);
@@ -330,6 +336,7 @@ public class ProjectTaskAction extends BaseController {
      * @param taskId
      * @return
      */
+    @RequiresPermissions(value = {"pro-task-proposeversion", "pro-Info2-copy", "batch-distribute-task"}, logical = Logical.OR)
     @RequestMapping("/form")
     public String form(HttpServletRequest request, Model model, Integer storyId, String taskId) {
         String cookie = CookieUtils.getCookie(request, ProjectUtils.COOKIE_PROJECT_ID);
@@ -374,6 +381,7 @@ public class ProjectTaskAction extends BaseController {
         return "project/task/add";
     }
 
+    @RequiresPermissions("distribute-task")
     @RequestMapping("/batchadd")
     public String batchAdd(Integer taskId, Model model) {
         if (taskId != null) {
@@ -446,6 +454,7 @@ public class ProjectTaskAction extends BaseController {
         return "project/task/basicInformation.pagelet";
     }
 
+    @RequiresPermissions("pro-task-batchadd")
     @RequestMapping("/preBatchAdd")
     public String preBatchAdd(Model model, HttpServletRequest request, HttpServletResponse response) {
         Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
@@ -498,6 +507,7 @@ public class ProjectTaskAction extends BaseController {
         }
     }
 
+    @RequiresPermissions("gantt")
     @RequestMapping("/gantt")
     public String gantt(Model model, String choose) {
         model.addAttribute("choose", choose);
@@ -599,6 +609,7 @@ public class ProjectTaskAction extends BaseController {
         return "project/task/modal/" + forward + ".pagelet";
     }
 
+    @RequiresPermissions("task-group")
     @RequestMapping("/grouping")
     public String grouping(@CookieValue(value = ProjectUtils.COOKIE_PROJECT_ID, required = false) String projectId,
                            String type, Model model) {
@@ -658,6 +669,7 @@ public class ProjectTaskAction extends BaseController {
         return map;
     }
 
+    @RequiresPermissions("pro-task-report")
     @RequestMapping("/reportform")
     public String reportform() {
         return "project/task/reportform.page";

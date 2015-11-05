@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.action.project;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +26,7 @@ public class ProjectProductAction extends BaseController {
     @Autowired
     private ProjectProductService projectProductService;
 
+    @RequiresPermissions("product")
     @RequestMapping("/findLinkProduct")
     public String findLinkProduct(Model model, HttpServletResponse response, HttpServletRequest request) {
         List<Product> productList = ProductUtils.getProductList();

@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.action.project;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,6 +34,7 @@ public class ProjectStoryAction extends BaseController {
     @Autowired
     private StoryService storyService;
 
+    @RequiresPermissions("demand")
     @RequestMapping("/index")
     public String index() {
         return "project/demand/index";
@@ -53,6 +55,7 @@ public class ProjectStoryAction extends BaseController {
         return "project/demand/demandTableData.pagelet";
     }
 
+    @RequiresPermissions("rm-demand")
     @ResponseBody
     @RequestMapping("/delete")
     public Map<String, String> delete(Integer id, HttpServletRequest request, HttpServletResponse response) {
@@ -68,6 +71,7 @@ public class ProjectStoryAction extends BaseController {
         }
     }
 
+    @RequiresPermissions("pro-demand-relation")
     @RequestMapping("/preLinkStory")
     public String preLinkStory() {
         return "project/demand/relateDemand.page";
