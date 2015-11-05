@@ -103,7 +103,6 @@ public class ProjectStoryServiceImpl implements ProjectStoryService {
     }
 
     public Pager<ProductStory> findStoryByProject(Integer projectId, Integer start, Integer limit, String order, String ordertype, String moduleId) {
-
         boolean asc = "asc".equals(ordertype) ? true : false;
         List<ProjectStory> storyList = projectStoryManager.findSrotys(projectId);
         String[] ids = new String[storyList.size()];
@@ -111,11 +110,11 @@ public class ProjectStoryServiceImpl implements ProjectStoryService {
             ids[i] = String.valueOf(storyList.get(i).getStoryId());
         }
         ConditionCarrier carrier;
-       if(!StringUtil.isBlank(moduleId)){
-           carrier = ConditionUtils.mergeCarrier("productStory.moduleId",moduleId,"productStory.storyId",ids);
-       }else{
-           carrier = ConditionUtils.mergeCarrier("productStory.storyId",ids);
-       }
+        if(!StringUtil.isBlank(moduleId)){
+            carrier = ConditionUtils.mergeCarrier("productStory.moduleId",moduleId,"productStory.storyId",ids);
+        }else{
+            carrier = ConditionUtils.mergeCarrier("productStory.storyId",ids);
+        }
         ProductStory story = new ProductStory();
         story.setDeleted(0);
         Pager<ProductStory> pager = storyManager.findStoryByCondition(start,limit,story,carrier,order,"asc".equals(ordertype)?true:false);

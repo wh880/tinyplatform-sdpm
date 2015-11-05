@@ -36,8 +36,8 @@ public class ProjectTeamAction extends BaseController {
 
     @RequiresPermissions("team")
     @RequestMapping("/index")
-    public String jumpTeamIndex() {
-        return "project/team/index.page";
+    public String index() {
+        return "project/team/index";
     }
 
     @RequestMapping("find")
@@ -110,10 +110,7 @@ public class ProjectTeamAction extends BaseController {
                 addList.add(team);
             }
         }
-        Integer addRes = teamService.batchAdd(addList);
-        Integer updateRes = teamService.batchUpdate(updateList);
-
-        return "project/team/index.page";
+        return "redirect:"+adminPath+"/project/team/index";
     }
 
     @RequiresPermissions("pro-team-delete")

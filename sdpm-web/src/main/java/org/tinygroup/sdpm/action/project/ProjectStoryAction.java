@@ -41,7 +41,7 @@ public class ProjectStoryAction extends BaseController {
     }
 
     @RequestMapping("/list/data")
-    public String find(HttpServletRequest request, HttpServletResponse response,
+    public String listData(HttpServletRequest request, HttpServletResponse response,
                        Model model, Integer start, Integer limit, String order, String ordertype, String moduleId) {
 
         Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
@@ -49,7 +49,6 @@ public class ProjectStoryAction extends BaseController {
             return redirectProjectForm();
         }
         Pager<ProductStory> story = projectStoryService.findStoryByProject(projectId, start, limit, order, ordertype, moduleId);
-
         model.addAttribute("storys", story);
         return "project/demand/demandTableData.pagelet";
     }
@@ -127,7 +126,7 @@ public class ProjectStoryAction extends BaseController {
         if ((insertResult.length + updateResult.length) > 0) {
             map.put("status", "y");
             map.put("info", "关联成功");
-            map.put("url", "/a/project/manage/demand/index");
+            map.put("url", adminPath+"/project/demand/index");
         } else {
             map.put("status", "n");
             map.put("info", "关联失败");

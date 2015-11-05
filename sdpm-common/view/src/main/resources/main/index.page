@@ -1,5 +1,4 @@
 #import("/org/tinygroup/compose/components/compose_typography.component")
-
 <style>.panel, .panel-default{margin-bottom:10px;}.widget-profile .widget-profile-counters > div + div{border:none;border-top:#ddd 1px solid;}.dashboard-header .stat-cell{padding:18px 20px;}.dynamicBox{padding:10px 12px 0; border:#d0e6ee 1px solid;}.list-group .list-group-item,.widget-profile-counters a{color:#333}</style>
 #@div(divClass="row dashboard-header")
     #@div(divClass="col-sm-3")
@@ -23,7 +22,6 @@
 		#end
 		#end
 		#@div(divClass="col-sm-4")
-		
 			#@numberBox("bg-warning" "icon-flag")
 				#numList("col-xs-12" "161" "我的待办")
 				#numList("col-xs-12" "161" "我的任务")

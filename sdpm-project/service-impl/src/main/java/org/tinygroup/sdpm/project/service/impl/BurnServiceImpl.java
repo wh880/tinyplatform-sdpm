@@ -74,14 +74,14 @@ public class BurnServiceImpl implements BurnService {
 
     public BurnDTO initBurn(Integer projectId, Integer interval) {
         if (interval == null) {
-            interval = 3;
+            interval = 1;
         }
         DateFormat format = new SimpleDateFormat("\"M/d\"");//日期格式"M/d"
         Project project = projectManager.find(projectId);
         Date startData = project.getProjectBegin();
         Date endData = project.getProjectEnd();
         //项目周期
-        float period = (float) DateUtils.getDistanceOfTwoDate(startData, endData);
+        int period = (int) DateUtils.getDistanceOfTwoDate(startData, endData);
 
         ProjectBurn projectBurn = new ProjectBurn();
         projectBurn.setProjectId(projectId);
@@ -98,16 +98,19 @@ public class BurnServiceImpl implements BurnService {
         List<Float> leftList = new ArrayList<Float>();
         List<Float> averageList = new ArrayList<Float>();
         List<String> dateList = new ArrayList<String>();
-        for (int i = 0; i < period; i++, nextDay = DateUtils.addDays(startData, i)) {
+        int i = 0;
+        while (i <= period) {
             projectBurn = getProjectBurnByDate(projectBurnList, nextDay);
             if (projectBurn != null) {
                 tLeft = projectBurn.getBurnLeft();
             }
-            if (0 == i % interval) {
+            if (0 == i % interval || i == period) {
                 averageList.add(topLeft - rake * i);
                 dateList.add(format.format(nextDay));
                 leftList.add(tLeft);
             }
+            i++;
+            nextDay = DateUtils.addDays(startData, i);
         }
         BurnDTO burnDTO = new BurnDTO();
         burnDTO.setAverageValues(StringUtil.join(averageList, ","));
