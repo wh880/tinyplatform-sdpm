@@ -18,7 +18,9 @@ import org.tinygroup.sdpm.quality.dao.pojo.*;
 import org.tinygroup.sdpm.quality.service.inter.*;
 import org.tinygroup.sdpm.system.dao.pojo.ProfileType;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
+import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
+import org.tinygroup.sdpm.system.service.inter.ProfileService;
 import org.tinygroup.sdpm.util.LogUtil;
 import org.tinygroup.sdpm.util.ModuleUtil;
 import org.tinygroup.sdpm.util.UserUtils;
@@ -49,6 +51,8 @@ public class TestCaseAction extends BaseController {
 	private TestRunService testRunService;
 	@Autowired
 	private TestTaskService testTaskService;
+	@Autowired
+	private ProfileService profileService;
 
 
 	@RequestMapping("")
@@ -107,7 +111,7 @@ public class TestCaseAction extends BaseController {
 	public String save(QualityTestCase testcase,String comment, String[] step,String[] expect, @RequestParam(value = "file", required = false) MultipartFile[] file, String[] title, HttpServletRequest request) throws Exception {
 		if(testcase.getCaseId()==null||testcase.getCaseId()<1) {
 			testcase.setCaseOpenedBy(UserUtils.getUserId());
-			if (testcase.getStoryId() > 0) {
+			if (testcase.getStoryId()!=null&&testcase.getStoryId() > 0) {
 				testcase.setStoryVersion(storyService.findStory(testcase.getStoryId()).getStoryVersion());
 			}
 			testcase.setCaseStatus("1");
@@ -115,7 +119,6 @@ public class TestCaseAction extends BaseController {
 			testcase.setCaseVersion(1);
 			testcase = testCaseService.addTestCase(testcase);
 			insertStep(step, expect, testcase);
-			uploads(file, testcase.getCaseId(), ProfileType.TESTCASE, title);
 
 			LogUtil.logWithComment(LogUtil.LogOperateObject.CASE,
 					LogUtil.LogAction.OPENED,
@@ -136,6 +139,7 @@ public class TestCaseAction extends BaseController {
 				testcase.setCaseVersion(testCase.getCaseVersion()+1);
 				insertStep(step, expect, testcase);
 			}
+			testcase.setCaseLastEditedBy(UserUtils.getUserId());
 			testCaseService.updateTestCase(testcase);
 			LogUtil.logWithComment(LogUtil.LogOperateObject.CASE,
 					LogUtil.LogAction.EDITED,
@@ -148,6 +152,7 @@ public class TestCaseAction extends BaseController {
 					comment
 			);
 		}
+		uploads(file, testcase.getCaseId(), ProfileType.TESTCASE, title);
 		return "redirect:" + "/a/quality/testCase";
 	}
 
@@ -492,13 +497,22 @@ public class TestCaseAction extends BaseController {
 	
 	
 	@RequestMapping("/case/viewInfo")
-	public String viewInfo(Integer id,Model model){
+	public String viewInfo(Integer id,Integer version,Model model){
 		QualityTestCase testCase = testCaseService.findById(id);
 		QualityCaseStep step = new QualityCaseStep();
 		step.setCaseId(id);
-		step.setCaseVersion(testCase.getCaseVersion());
+		if(version!=null&&version>0){
+			step.setCaseVersion(version);
+		}else{
+			step.setCaseVersion(testCase.getCaseVersion());
+		}
 		List<QualityCaseStep> stepList = caseStepService.findCaseStepList(step);
-
+		SystemProfile systemProfile = new SystemProfile();
+		systemProfile.setFileObjectType(ProfileType.TESTCASE.toString());
+		systemProfile.setFileDeleted("0");
+		systemProfile.setFileObjectId(testCase.getCaseId());
+		List<SystemProfile> list = profileService.find(systemProfile);
+		model.addAttribute("file",list);
 		model.addAttribute("testCase", testCase);
 		model.addAttribute("stepList", stepList);
 		return "/testManagement/page/caseInfo.page";

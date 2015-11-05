@@ -23,7 +23,7 @@
 
 #end
 
-    #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/quality/testCase/save" "post" {"class":""})
+    #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/quality/testCase/save" "post" {"class":"","enctype":"multipart/form-data"})
     #hiddenInput(hiddenInputName="caseId" hiddenInputValue=testCase?.caseId)
 	<div style="width:100%">
     	<div class="infoContent">
@@ -33,7 +33,7 @@
             #@formControlDiv("col-8")
             #@div(divClass="col-5")
 					 #@Tselect2F()
-                            #@Tselect2Body("productId" testCase?.productId?:(qualityProductId?:0) {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                            #@Tselect2Body("productId" testCase?.productId?:qualityProductId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                                 #for(product : ProductUtils.getAllProductListByUser())
                                 <option value="${product?.productId}">${product?.productName}</option>
                                 #end
@@ -45,7 +45,7 @@
                         $("#${sid}").on("change",function(){
                             var pId = $("#${sid}  option:selected").val();
                             if(pId>0){
-                                ajaxRead("${sid}","moduleId","moduleId","moduleName","/quality/testCase/ajax/module?moduleRoot="+pId,${(testCase?.moduleId?:moduleId)?:0});
+                                ajaxRead("${sid}","moduleId","moduleId","moduleName","/quality/testCase/ajax/module?moduleRoot="+pId,${(testCase?.moduleId?:moduleId)?:0},"module");
                             }
                         })
                     </script>
@@ -71,12 +71,11 @@
 				#end
         #end
         #@elementItem()
-            #@colLabel()用例类型：#end
+            #@colLabel()<span class="c-red">*</span>用例类型：#end
             #@formControlDiv("col-8")
             	#@div(divClass="col-5")
                      #@Tselect2F()
 	                   		 #@Tselect2Body("caseType" testCase?.caseType {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                   		 <option value="0"></option>
 	                   		 #for(type : getDict("caseType"))
 	                   		    <option value="${type.value}">${type.text}</option>
 	                   		 #end
@@ -88,7 +87,7 @@
             #@validateDiv("col-2")#end
         #end
         #@elementItem()
-            #@colLabel()试用阶段：#end
+            #@colLabel()<span class="c-red">*</span>试用阶段：#end
             #@formControlDiv("col-8")
                #@div(divClass="col-5")
 					 #@Tselect2F()
@@ -105,7 +104,7 @@
         #end
 
         #@elementItem()
-            #@colLabel()优先级：#end
+            #@colLabel()<span class="c-red">*</span>优先级：#end
             #@formControlDiv("col-8")
                 #@div(divClass="col-5")
 					#@tinySelect("priority" testCase?.priority {"class":"select2"})
@@ -133,7 +132,9 @@
                             <script type="text/javascript">
                                 $(document).ready(function(){
                                     var pId = $("select[name=productId]  option:selected").val();
-                                    ajaxRead("${sid}","storyId","storyId","storyTitle","/quality/testCase/ajax/story?productId="+pId,${case?.storyId?:0});
+                                    if(pId>0){
+                                        ajaxRead("${sid}","storyId","storyId","storyTitle","/quality/testCase/ajax/story?productId="+pId,${case?.storyId?:0});
+                                    }
                                 });
                             </script>
                         #end
@@ -141,7 +142,7 @@
 			#end
         #end
         #@elementItem()
-            #@colLabel()用例标题：#end
+            #@colLabel()<span class="c-red">*</span>用例标题：#end
             #@formControlDiv("col-8")
             #@div(divClass="col-5")
                 #tinyInput("text" "caseTitle" testCase?.caseTitle {"datatype":"*10-500","id":"版本","class":"input-text"})
@@ -152,7 +153,7 @@
         #@elementItem()
             #@colLabel()前置条件：#end
             #@formControlDiv("col-8")
-                #@tinyTextarea("casePrecondition" {"placeholder":"说点什么...最少输入10个字符"})请输入内容#end
+                #@tinyTextarea("casePrecondition" {"placeholder":""})#end
             #end
             #@validateDiv("col-2")#end
         #end
@@ -213,10 +214,11 @@
     				dataType:"json",
     				success: function(data){
     					sele.empty();
+                        var em;
     					if("build"==(isBuild)){
-    					var em = "<option value='0' selected  >trunk</option>";
-    					}else{
-    					var em = "<option value='0' selected  >/</option>";
+    					 em = "<option value='0' selected  >trunk</option>";
+    					}else if("module"==isBuild){
+    					 em = "<option value='0' selected  >/</option>";
     					}
     					sele.append(em);
     					for(var i=0,l=data.length;i<l;i++){

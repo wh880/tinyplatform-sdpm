@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.product.service;
 
+import org.tinygroup.sdpm.common.condition.ConditionCarrier;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec;
@@ -115,9 +116,12 @@ public interface StoryService {
 	int countStatus(int productId,int status);
 
 
+
 	List<ProductStory> findProductName(Integer storyId);
 	
 	Pager<ProductStory> findPager(int start, int limit,ProductStory story, String condition, String columnName, boolean asc);
 
 	Pager<ProductStory> findProjectLinkedStory(int start, int limit,ProductStory story, String condition, String columnName, boolean asc);
+
+	Pager<ProductStory> findStoryByCondition(int start, int limit,ProductStory story, ConditionCarrier carrier, String columnName, boolean asc);
 }

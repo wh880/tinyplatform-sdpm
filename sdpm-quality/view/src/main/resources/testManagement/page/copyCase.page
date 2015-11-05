@@ -7,7 +7,7 @@
     .tableBoxes tbody tr td{padding:10px 7px;vertical-align:middle}
 </style>
 <script>
-    function ajaxRead(id, toName, opKey, opvalue, url, value) {
+    function ajaxRead(id, toName, opKey, opvalue, url, value,isBuild) {
         var selectCheck = "select[name=" + toName + "]";
         $(selectCheck).each(function () {
             var sele = $(this);
@@ -19,8 +19,12 @@
                 dataType: "json",
                 success: function (data) {
                     sele.empty();
-                    var em = "<option value='0' selected  >/</option>";
-                    sele.append(em);
+                    var em;
+                    if("build"==(isBuild)){
+                        em = "<option value='0' selected  >trunk</option>";
+                    }else if("module"==isBuild){
+                        em = "<option value='0' selected  >/</option>";
+                    }
                     for (var i = 0, l = data.length; i < l; i++) {
                         var em = "<option value='" + data[i][opKey] + "' >" + data[i][opvalue] + "</option>";
                         sele.append(em);
@@ -68,7 +72,7 @@
 
 #end
 
-    #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/quality/testCase/save" "post" {"class":""})
+    #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/quality/testCase/save" "post" {"class":"","enctype":"multipart/form-data"})
 	<div style="width:100%">
     	<div class="infoContent">
     		<p class="titleName">建用例</p>
@@ -86,9 +90,9 @@
 								
 								 $("#${sid}").on("change", function () {
 		                            var pId = $("#${sid}  option:selected").val();
-		                            
-		                            ajaxRead("${sid}", "moduleId", "moduleId", "moduleName", "/quality/bug/ajax/module?moduleRoot=" + pId,${testCase?.moduleId?:0});
-									ajaxRead("${sid}", "storyId", "storyId", "storyTitle", "/product/story/storyList?productId=" + pId,${testCase?.storyId?:0});
+		                            if(pId>0){
+                                        ajaxRead("${sid}", "moduleId", "moduleId", "moduleName", "/quality/bug/ajax/module?moduleRoot=" + pId,${testCase?.moduleId?:0},"module");
+                                    }
 		                        });
 		                    </script>              
 	                    	#@Tselect2Fix()
@@ -105,7 +109,16 @@
 					#@div(divClass="col-3")
 					 #@Tselect2F()
 	                   		 #@Tselect2Body("moduleId" testCase?.moduleId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                    	#end                
+	                    	#end
+                         <script type="text/javascript">
+                             $("#${sid}").on("change",function(){
+                                 var pId = $("select[name=productId] option:selected").val();
+                                 var mId = $("#${sid}  option:selected").val();
+                                 if(pId>0&&mId>0){
+                                     ajaxRead("${sid}","storyId","storyId","storyTitle","/quality/testCase/ajax/story?productId="+pId+"&moduleId="+mId,${(testCase?.storyId?:storyId)?:0});
+                                 }
+                             });
+                         </script>
                 	  #end
 #*					#@tinySelect("lang" "zh" {"class":"select2"})
 							#@tinyOptionItem("zh")/首页#end
@@ -118,7 +131,7 @@
 				#end
         #end
         #@elementItem()
-            #@colLabel()用例类型：#end
+            #@colLabel()<span class="c-red">*</span>用例类型：#end
             #@formControlDiv("col-8")
             	#@div(divClass="col-5")
                      #@Tselect2F()
@@ -135,7 +148,7 @@
             #@validateDiv("col-2")#end
         #end
         #@elementItem()
-            #@colLabel()试用阶段：#end
+            #@colLabel()<span class="c-red">*</span>试用阶段：#end
             #@formControlDiv("col-8")
                #@div(divClass="col-5")
 					#@Tselect2F()
@@ -151,7 +164,7 @@
         #end
 
         #@elementItem()
-            #@colLabel()优先级：#end
+            #@colLabel()<span class="c-red">*</span>优先级：#end
             #@formControlDiv("col-8")
                 #@div(divClass="col-5")
 					#@Tselect2F()
@@ -167,14 +180,11 @@
         #end
 
         #@elementItem()
-            #@colLabel()相关需求：#end
+            #@colLabel()<span class="c-red">*</span>相关需求：#end
             #@formControlDiv("col-8")
 					#@div(divClass="col-5")
 							 #@Tselect2F()
-	                   		 #@Tselect2Body("storyId" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="IN">需求1</option>
-	                        <option value="ME">需求2</option>
-	                        <option value="MD">需求3</option>
+	                   		 #@Tselect2Body("storyId" testCase?.storyId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 	                    	#end                
 	                      	#@Tselect2Fix()
 	                      	<a href="${TINY_CONTEXT_PATH+adminPath}/product/page/tabledemo/product-demand-add.page" class="r ">增加</a>

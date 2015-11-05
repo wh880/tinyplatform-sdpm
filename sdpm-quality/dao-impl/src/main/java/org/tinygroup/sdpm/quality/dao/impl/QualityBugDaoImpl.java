@@ -301,10 +301,18 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
 		return getDslTemplate().queryPager(start>0?start:0, limit, qualityBug, false, new SelectGenerateCallback<QualityBug>() {
 
 			public Select generate(QualityBug t) {
+				Condition condition =null;
+				if(t.getBugOpenedBuild()!=null){
+					condition = or(QUALITY_BUGTABLE.BUG_OPENED_BUILD.like("%," + t.getBugOpenedBuild()),
+							QUALITY_BUGTABLE.BUG_OPENED_BUILD.like("%," + t.getBugOpenedBuild()+",%"),
+							QUALITY_BUGTABLE.BUG_OPENED_BUILD.like(t.getBugOpenedBuild()+",%"),
+							QUALITY_BUGTABLE.BUG_OPENED_BUILD.eq(t.getBugOpenedBuild()));
+				}
 				MysqlSelect select = MysqlSelect.select(QUALITY_BUGTABLE.ALL,ORG_USERTABLE.ORG_USER_REAL_NAME.as("assignedUser")).from(QUALITY_BUGTABLE)
 						.join(Join.leftJoin(ORG_USERTABLE,QUALITY_BUGTABLE.BUG_ASSIGNED_TO.eq(ORG_USERTABLE.ORG_USER_ID))).where(
 						and(
 								conditions,
+								condition,
 								QUALITY_BUGTABLE.PRODUCT_ID.eq(t.getProductId()),
 								QUALITY_BUGTABLE.MODULE_ID.eq(t.getModuleId()),
 								QUALITY_BUGTABLE.PROJECT_ID.eq(t.getProjectId()),

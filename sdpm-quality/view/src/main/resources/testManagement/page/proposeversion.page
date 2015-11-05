@@ -17,11 +17,12 @@
     				dataType:"json",
     				success: function(data){
     					sele.empty();
-    					if("build"==(isBuild)){
-    					var em = "<option value='0' selected  >trunk</option>";
-    					}else{
-    					var em = "<option value='0' selected  >/</option>";
-    					}
+                        var em;
+                        if("build"==(isBuild)){
+                            em = "<option value='0' selected  >trunk</option>";
+                        }else if("module"==isBuild){
+                            em = "<option value='0' selected  >/</option>";
+                        }
     					sele.append(em);
     					for(var i=0,l=data.length;i<l;i++){
     						var em = "<option value='"+data[i][opKey]+"' >"+ data[i][opvalue] +"</option>";
@@ -102,7 +103,7 @@
             #@formControlDiv("col-8")
 					#@div(divClass="col-5")
 					 #@Tselect2F()
-                         #@Tselect2Body("buildName" testTask?.buildName?:(buildId?:0) {"class":
+                         #@Tselect2Body("buildName" testTask?.buildName?:buildId {"class":
                              "input-text select2"}) ##,"multiple":"multiple"加上为多选项
 
 	                    	#end                
@@ -308,7 +309,7 @@
             },
             callback:function(data){
                 if(data.status=="y"){
-                    window.location.href=document.referrer;
+                    window.location.href="${TINY_CONTEXT_PATH+adminPath}/quality/version?status=tvernotest";
                 }
                 //返回数据data是json对象，{"info":"demo info","status":"y"}
                 //info: 输出提示信息;

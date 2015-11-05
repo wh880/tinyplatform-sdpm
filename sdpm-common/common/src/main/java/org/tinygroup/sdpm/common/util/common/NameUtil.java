@@ -1,12 +1,14 @@
 package org.tinygroup.sdpm.common.util.common;
 
+import org.tinygroup.commons.tools.StringUtil;
+
 /**
  * Created by wangll13383 on 2015/9/30.
  */
 public class NameUtil {
     public static String resolveNameDesc(String name){
-        if(name == null){
-            return null;
+        if(StringUtil.isBlank(name)){
+            return "";
         }
         if(!name.contains("_")){
             char[] n = name.toCharArray();
@@ -31,8 +33,8 @@ public class NameUtil {
     }
 
     public static String resolveNameAsc(String name){
-        if(name == null){
-            return null;
+        if(StringUtil.isBlank(name)){
+            return "";
         }
         if(name.contains("_")){
             String[] names = name.split("_");

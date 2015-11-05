@@ -27,7 +27,7 @@ public class SqlUtil {
             }
         }
         if(isNull){
-            return null;
+            return "";
         }
         for(int i = 0;i<num;i++){
             int count = 0;

@@ -334,8 +334,8 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 		}
 		return getDslTemplate().queryPager(start>0?start:0, limit, productStory, false, new SelectGenerateCallback<ProductStory>() {
 			public Select generate(ProductStory t) {
-				Select select = MysqlSelect.select(FragmentSelectItemSql.fragmentSelect("product_story.*,p.product_name as productName,pa.plan_name as planName,o.org_user_account as storyOpenedName,o2.org_user_account as storyAssignedName")).
-						from(FragmentSelectItemSql.fragmentFrom("product_story left join product p on p.product_id = product_story.product_id left join product_plan pa on pa.plan_id = product_story.plan_id left join org_user o on o.org_user_id = product_story.story_opened_by left join org_user o2 on o2.org_user_id = product_story.story_assigned_to"))
+				Select select = MysqlSelect.select(PRODUCT_STORYTABLE.ALL,PRODUCT_PLANTABLE.PLAN_NAME.as("planName"),PRODUCTTABLE.PRODUCT_NAME.as("productName")).
+						from(PRODUCT_STORYTABLE).join(leftJoin(PRODUCTTABLE,PRODUCT_STORYTABLE.PRODUCT_ID.eq(PRODUCTTABLE.PRODUCT_ID)),leftJoin(PRODUCT_PLANTABLE,PRODUCT_STORYTABLE.PLAN_ID.eq(PRODUCT_PLANTABLE.PLAN_ID)))
 						.where(and(
 						PRODUCT_STORYTABLE.COMPANY_ID.eq(t.getCompanyId()),
 						PRODUCT_STORYTABLE.PRODUCT_ID.eq(t.getProductId()),
@@ -549,7 +549,7 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 
 			public Select generate(ProductStory t) {
 				Select select = MysqlSelect.select(PRODUCT_STORYTABLE.ALL,PRODUCT_PLANTABLE.PLAN_NAME.as("planName")).from(PRODUCT_STORYTABLE).join(leftJoin(PRODUCT_PLANTABLE, PRODUCT_PLANTABLE.PLAN_ID.eq(PRODUCT_STORYTABLE.PLAN_ID))).where(and(
-						StringUtil.isBlank(condition)?PRODUCT_STORYTABLE.STORY_ID.isNotNull():fragmentCondition(condition),
+						StringUtil.isBlank(condition)?null:fragmentCondition(condition),
 						PRODUCT_STORYTABLE.COMPANY_ID.eq(t.getCompanyId()),
 						PRODUCT_STORYTABLE.PRODUCT_ID.eq(t.getProductId()),
 						PRODUCT_STORYTABLE.STORY_PARENT_ID.eq(t.getStoryParentId()),
@@ -596,10 +596,10 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 		}
 		return getDslTemplate().queryPager(start>0?start:0, limit, productStory, false, new SelectGenerateCallback<ProductStory>() {
 			public Select generate(ProductStory t) {
-				Select select = MysqlSelect.select(FragmentSelectItemSql.fragmentSelect("product_story.*,p.product_name as productName,pa.plan_name as planName,o.org_user_account as storyOpenedName,o2.org_user_account as storyAssignedName")).
-						from(FragmentSelectItemSql.fragmentFrom("product_story left join product p on p.product_id = product_story.product_id left join product_plan pa on pa.plan_id = product_story.plan_id left join org_user o on o.org_user_id = product_story.story_opened_by left join org_user o2 on o2.org_user_id = product_story.story_assigned_to"))
+				Select select = MysqlSelect.select(PRODUCT_STORYTABLE.ALL,PRODUCT_PLANTABLE.PLAN_NAME.as("planName"),PRODUCTTABLE.PRODUCT_NAME.as("productName")).
+						from(PRODUCT_STORYTABLE).join(leftJoin(PRODUCTTABLE, PRODUCT_STORYTABLE.PRODUCT_ID.eq(PRODUCTTABLE.PRODUCT_ID)), leftJoin(PRODUCT_PLANTABLE, PRODUCT_STORYTABLE.PLAN_ID.eq(PRODUCT_PLANTABLE.PLAN_ID)))
 						.where(and(
-						fragmentCondition(condition),
+						StringUtil.isBlank(condition)?null:fragmentCondition(condition),
 						PRODUCT_STORYTABLE.COMPANY_ID.eq(t.getCompanyId()),
 						PRODUCT_STORYTABLE.PRODUCT_ID.eq(t.getProductId()),
 						PRODUCT_STORYTABLE.STORY_PARENT_ID.eq(t.getStoryParentId()),
