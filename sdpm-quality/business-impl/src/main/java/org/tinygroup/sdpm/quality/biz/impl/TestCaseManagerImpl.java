@@ -42,6 +42,7 @@ public class TestCaseManagerImpl implements TestCaseManager {
 	}
 	
 	public Integer update(QualityTestCase testcase){
+		testcase.setCaseLastEditedDate(new Date());
 		return testcasedao.edit(testcase);
 	}
 	

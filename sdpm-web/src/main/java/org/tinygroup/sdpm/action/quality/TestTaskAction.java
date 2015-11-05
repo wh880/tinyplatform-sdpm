@@ -206,12 +206,15 @@ public class TestTaskAction extends BaseController {
     }
 
     @RequestMapping("/link")
-    public String link(Integer testversionId, Integer start, Integer limit, SearchInfos infos, String groupOperate, String order, String ordertype, Model model) {
+    public String link(@CookieValue(value = "qualityProductId",defaultValue = "0") String cookieProductId,Integer testversionId, Integer start, Integer limit, SearchInfos infos, String groupOperate, String order, String ordertype, Model model) {
         QualityTestRun run = new QualityTestRun();
         run.setTaskId(testversionId);
         List<QualityTestRun> runs = testRunService.findTestRunList(run);
         String conditions = mergeCondition(mergeCondition(runs, false), SqlUtil.toSql(infos.getInfos(), groupOperate));
         QualityTestCase testCase = new QualityTestCase();
+        if(Integer.parseInt(cookieProductId)>0){
+            testCase.setProductId(Integer.parseInt(cookieProductId));
+        }
         testCase.setDeleted(0);
         Pager<QualityTestCase> casePager = testCaseService.findTestCasePager(start, limit, testCase, conditions, null, null, order, "asc".equals(ordertype) ? true : false);
         model.addAttribute("casePager", casePager);

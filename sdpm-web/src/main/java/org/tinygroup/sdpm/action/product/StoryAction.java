@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.action.product.util.StoryUtil;
-import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
+
+import org.tinygroup.sdpm.common.condition.ConditionCarrier;
+import org.tinygroup.sdpm.common.log.LogPrepareUtil;import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SqlUtil;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
@@ -18,6 +20,7 @@ import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
 import org.tinygroup.sdpm.product.dao.pojo.*;
 import org.tinygroup.sdpm.product.service.*;
 import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
+
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
 import org.tinygroup.sdpm.project.service.inter.BuildService;
@@ -506,7 +509,8 @@ public class StoryAction extends BaseController {
     /**
      * 实现了需求的搜索按钮功能
      *
-     * @param page         当前页
+
+     * @param start         当前页
      * @param pagesize     每页数量
      * @param story        需求对象
      * @param choose
@@ -519,25 +523,19 @@ public class StoryAction extends BaseController {
      * @return
      */
     @RequestMapping("/search")
-    public String storySearchAction(@CookieValue String cookieProductId, int page, int pagesize, ProductStory story,
+
+    public String storySearchAction(@CookieValue String cookieProductId, int start, int pagesize, ProductStory story,
                                     String type, String choose, String groupOperate,
                                     SearchInfos searchInfos, String order, String ordertype,
                                     Model model, HttpServletRequest request) {
 
         story.setProductId(Integer.parseInt(cookieProductId));
-
+        ConditionCarrier carrier = new ConditionCarrier();
         String condition = StoryUtil.getStatusCondition(choose);
+        carrier.putStatus("status",condition);
         if (story.getModuleId() != null && story.getModuleId() > 0) {
-            SystemModule module = new SystemModule();
-            module.setModuleId(story.getModuleId());
-            StringBuffer stringBuffer = new StringBuffer();
-            stringBuffer.append("in (");
-            ModuleUtil
-                    .getConditionByModule(stringBuffer, module, moduleService);
-            stringBuffer.append(")");
-            condition = condition + " and "
-                    + NameUtil.resolveNameDesc("moduleId") + " "
-                    + stringBuffer.toString();
+                   
+            carrier.putModuleIn("productStory.moduleId",String.valueOf(story.getModuleId()));
         }
         story.setModuleId(null);
 
@@ -545,18 +543,19 @@ public class StoryAction extends BaseController {
             QualityTestCase testCase = new QualityTestCase();
             testCase.setProductId(story.getProductId());
             List<Integer> list = testCaseService.getStoryIds(testCase);
-            if (list.size() > 0 || list != null) {
-                String ids = list.toString().substring(1,
-                        list.toString().length() - 1);
-                condition = (StringUtil.isBlank(condition) ? " " : condition
-                        + " and ")
-                        + "product_story.story_id not in (" + ids + ") ";
+            String[] ids = new String[list.size()];
+            for(int i=0; i<list.size(); i++) {
+                ids[i] = String.valueOf(list.get(i));
             }
-
+            carrier.putIdNotIn("productStory.storyId",ids);
         }
-        Pager<ProductStory> p = storyService.findStoryPager(pagesize
-                        * (page - 1), pagesize, story, condition, searchInfos,
-                groupOperate, order, "asc".equals(ordertype) ? true : false);
+        carrier.putSearch("search",searchInfos,groupOperate);
+
+
+
+
+
+        Pager<ProductStory> p = storyService.findStoryByCondition(start, pagesize, story, carrier,order, "asc".equals(ordertype) ? true : false);
         model.addAttribute("storyList", p);
 
         return "product/data/tabledata.pagelet";

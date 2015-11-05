@@ -71,8 +71,10 @@ public class ProductAction extends BaseController {
 
 
     @RequestMapping("")
-    public String productAction(HttpServletResponse response,HttpServletRequest request) {
-        ProductUtils.prepareForFirst(response);
+    public String productAction(@CookieValue(value = "cookieProductLineId",defaultValue = "0")String cookieProductLineId,HttpServletResponse response,HttpServletRequest request) {
+        if("0".equals(cookieProductLineId)) {
+            ProductUtils.prepareForFirst(response);
+        }
         return "redirect:"+adminPath+"/product/story?choose=1" + (request.getQueryString() == null ? "" : ("&" + request.getQueryString()));
     }
 

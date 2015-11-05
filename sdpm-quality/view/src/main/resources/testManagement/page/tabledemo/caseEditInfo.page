@@ -35,7 +35,7 @@
 	    		#end
 	    		#@tr()
 	    			#@th()优先级#end
-	    			#@td()${getDict("priority",testCase?.priority)}#end
+	    			#@td()${getDict("casePriority",testCase?.priority)}#end
 	    		#end
 	    		#@tr()
 	    			#@th()用例状态#end
@@ -70,7 +70,7 @@
 	    		#end
 	    		#@tr()
 	    			#@th()生成Bug#end
-	    			#@td()/#end
+	    			#@td()#end
 	    		#end
 	    	#end
 	    #end

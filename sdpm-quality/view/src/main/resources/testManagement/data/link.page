@@ -13,7 +13,7 @@
 #for(case:casePager?.records)
 					#@tr()
 						#@td()<input type="checkbox" value="${case?.caseId}" name="idCheck">#end
-						#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/caseInfo.page">${case?.caseId}</a>#end
+						#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/testCase/case/viewInfo?id=${case?.caseId}">${case?.caseId}</a>#end
 						#@td()
 						#@Tselect2F()
 	                   		 #@Tselect2Body("caseVersion" "" {"class":"input-text","minimumResultsForSearch":"Infinity"}) ##,"multiple":"multiple"加上为多选项
@@ -29,7 +29,7 @@
 						#@td()${case?.caseTitle}(
 						 #set(version = case?.caseVersion?:0)
                         #while(version>0)
-                         <a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/caseInfo.page">#${version}</a>
+                         <a href="${TINY_CONTEXT_PATH+adminPath}/quality/testCase/case/viewInfo?id=${case?.caseId}&version=${version}">#${version}</a>
                          #set(version=version-1)
                         #end
 

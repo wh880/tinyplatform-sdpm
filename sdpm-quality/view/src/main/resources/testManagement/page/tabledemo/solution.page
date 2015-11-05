@@ -24,7 +24,7 @@
 	#end
 #end
 			
-#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/quality/bug/solve" "post" {"class":"test"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/quality/bug/solve" "post" {"class":"test","enctype":"multipart/form-data"})
 #hiddenInput(hiddenInputName="bugId" hiddenInputValue=bug?.bugId)
 	<div style="width:70%;float:left" class="pageleftpart">
     	<div class="infoContent">
@@ -34,7 +34,7 @@
         	</div>
     #@elementItem()
         <div class="col-12">
-         	<div class="col-2 text-r"><label>解决方案：</label></div>
+         	<div class="col-2 text-r"><label><span class="c-red">*</span>解决方案：</label></div>
          		<div class="col-4">
             #@tinySelect("bugResolution" bug?.bugResolution {"class":"input-text","rel":"22","onclick":"setType(this.value)"})
                 #for(re : getDict("bugResolution"))
@@ -49,7 +49,12 @@
         <div class="col-12">
          	<div class="col-2 text-r"><label>重复ID：</label></div>
          		<div class="col-4">
-           			#tinyInput("text" "bugDuplicateBug" bug?.bugDuplicateBug {"datatype":"","id":"111","class":"input-text","placeholder":""})
+                    #@tinySelect("bugDuplicateBug" bug?.bugDuplicateBug {"class":"input-text","rel":"22","onclick":"setType(this.value)"})
+                        #for(re : bugList)
+                            #@tinyOptionItem(re.bugId)${re.bugTitle}#end
+                        #end
+                     #end
+
               </div>
        </div>
      #end
@@ -83,12 +88,11 @@
          		<div class="col-4">
             #@Tselect2F()
 	             #@Tselect2Body("bugAssignedTo" bug?.bugAssignedTo?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                    <option value="0">/</option>
                     #foreach(user : userList)
                     <option value="${user?.orgUserId}">${user?.orgUserRealName}</option>
                     #end
-	               #end                
-	        ##       #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+	               #end
+                #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH+adminPath}/org/user/form" class="r ">增加</a>#end
               #end
               </div>
        </div>
@@ -134,7 +138,7 @@
 	
 	/* 重复ID隐藏*/
 	function setType(type){
-		if(type == '2'){
+		if(type == '1'){
 			$('#idBox').removeClass('hidden');
 		}
 		else{

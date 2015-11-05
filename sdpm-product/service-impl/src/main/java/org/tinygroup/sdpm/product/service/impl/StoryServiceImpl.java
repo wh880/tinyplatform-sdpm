@@ -2,12 +2,17 @@ package org.tinygroup.sdpm.product.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.tinygroup.sdpm.common.condition.CallBackFunction;
+import org.tinygroup.sdpm.common.condition.ConditionCarrier;
+import org.tinygroup.sdpm.common.condition.ConditionUtils;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.product.biz.inter.StoryManager;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec;
 import org.tinygroup.sdpm.product.dao.pojo.StoryCount;
 import org.tinygroup.sdpm.product.service.StoryService;
+import org.tinygroup.sdpm.system.biz.impl.ModuleUtil;
+import org.tinygroup.sdpm.system.biz.inter.ModuleManager;
 import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.List;
@@ -18,6 +23,8 @@ public class StoryServiceImpl implements StoryService {
 
     @Autowired
     private StoryManager storyManager;
+    @Autowired
+    private ModuleManager moduleManager;
 
     public ProductStory addStory(ProductStory story, ProductStorySpec storySpec) {
 
@@ -107,6 +114,36 @@ public class StoryServiceImpl implements StoryService {
 
     public Pager<ProductStory> findProjectLinkedStory(int start, int limit,ProductStory story, String condition, String columnName, boolean asc) {
         return storyManager.findProjectLinkedStory(start,limit,story,condition,columnName,asc);
+    }
+
+    public Pager<ProductStory> findStoryByCondition(int start, int limit, ProductStory story, ConditionCarrier carrier, final String columnName, boolean asc) {
+        carrier.completeModuleFunction(new CallBackFunction() {
+            public boolean process(ConditionCarrier carrier, String field,String relation) {
+                String result = "";
+                if(ConditionUtils.CommonFieldType.MODULE.getOperate().equals(carrier.getFieldType(field))){
+                    String moduleId = (String)carrier.getValue(field)[0];
+                    if(moduleId.contains("p")){
+                        result = ModuleUtil.getConditionByRoot(Integer.parseInt(moduleId.substring(1)),moduleManager);
+                    }else{
+                        result = ModuleUtil.getCondition(Integer.parseInt(moduleId), moduleManager);
+                    }
+                    carrier.setCondition(field,result,carrier.DEFAULT_RELATION);
+                    return true;
+                }
+                return false;
+            }
+        });
+        carrier.completeCustomFunction(new CallBackFunction() {
+            public boolean process(ConditionCarrier carrier, String field, String relation) {
+                if(ConditionUtils.CommonFieldType.STATUS.getOperate().equals(carrier.getFieldType(field))){
+                    String statusCondition = (String)carrier.getValue(field)[0];
+                    carrier.setCondition(field,statusCondition,carrier.DEFAULT_RELATION);
+                    return true;
+                }
+                return false;
+            }
+        });
+        return storyManager.findPager(start,limit,story,carrier.resultCondition(),columnName,asc);
     }
 
 }
