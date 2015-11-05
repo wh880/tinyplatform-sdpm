@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.action.project;
 
+import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -59,7 +60,7 @@ public class ProjectTaskAction extends BaseController {
     @Autowired
     private UserService userService;
 
-    @RequiresPermissions("project")
+    @RequiresPermissions(value = {"project", "task"}, logical = Logical.OR)
 //    @RequiresPermissions(value = {"task", "project"}, logical = Logical.OR)
     @RequestMapping("index")
     public String index(@CookieValue(required = false, value = ProjectUtils.COOKIE_PROJECT_ID) String currentProjectId,
@@ -83,7 +84,7 @@ public class ProjectTaskAction extends BaseController {
         return "project/task/index";
     }
 
-    @RequiresPermissions("pro-task-edit")
+    @RequiresPermissions(value = {"pro-task-edit", "pro-Info2-edit"}, logical = Logical.OR)
     @RequestMapping("/edit")
     public String form(Integer taskId, Model model) {
         ProjectTask task = taskService.findTask(taskId);
@@ -335,7 +336,7 @@ public class ProjectTaskAction extends BaseController {
      * @param taskId
      * @return
      */
-    @RequiresPermissions("pro-task-proposeversion")
+    @RequiresPermissions(value = {"pro-task-proposeversion", "pro-Info2-copy", "batch-distribute-task"}, logical = Logical.OR)
     @RequestMapping("/form")
     public String form(HttpServletRequest request, Model model, Integer storyId, String taskId) {
         String cookie = CookieUtils.getCookie(request, ProjectUtils.COOKIE_PROJECT_ID);
@@ -380,7 +381,7 @@ public class ProjectTaskAction extends BaseController {
         return "project/task/add";
     }
 
-    @RequiresPermissions("pro-task-batchadd")
+    @RequiresPermissions("distribute-task")
     @RequestMapping("/batchadd")
     public String batchAdd(Integer taskId, Model model) {
         if (taskId != null) {
@@ -453,6 +454,7 @@ public class ProjectTaskAction extends BaseController {
         return "project/task/basicInformation.pagelet";
     }
 
+    @RequiresPermissions("pro-task-batchadd")
     @RequestMapping("/preBatchAdd")
     public String preBatchAdd(Model model, HttpServletRequest request, HttpServletResponse response) {
         Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
@@ -505,6 +507,7 @@ public class ProjectTaskAction extends BaseController {
         }
     }
 
+    @RequiresPermissions("gantt")
     @RequestMapping("/gantt")
     public String gantt(Model model, String choose) {
         model.addAttribute("choose", choose);

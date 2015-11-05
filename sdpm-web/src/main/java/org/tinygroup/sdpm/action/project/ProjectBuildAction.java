@@ -221,7 +221,7 @@ public class ProjectBuildAction extends BaseController {
         return map;
     }
 
-    //    @RequiresPermissions("projectBuild-add")
+    @RequiresPermissions("pro-version-report")
     @RequestMapping("/add")
     public String add(HttpServletRequest request, HttpServletResponse response, Integer buildId, Model model, String commnet) {
 

@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.action.project;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,6 +34,7 @@ public class ProjectDynamicAction extends BaseController {
     @Autowired
     private UserService userService;
 
+    @RequiresPermissions("dynamic")
     @RequestMapping("/index")
     public String index(HttpServletRequest request,HttpServletResponse response, Model model) {
         Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
