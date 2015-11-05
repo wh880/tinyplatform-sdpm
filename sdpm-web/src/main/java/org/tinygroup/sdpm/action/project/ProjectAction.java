@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.action.project;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -46,6 +47,7 @@ public class ProjectAction extends BaseController {
     @Autowired
     private UserService userService;
 
+    @RequiresPermissions("survey")
     @RequestMapping("/view")
     public String view(Model model, HttpServletRequest request, HttpServletResponse response,
                      Integer projectId) {
@@ -66,6 +68,7 @@ public class ProjectAction extends BaseController {
      * @param model
      * @return
      */
+    @RequiresPermissions("project-op-add")
     @RequestMapping("/form")
     public String form(Model model) {
         model.addAttribute("productList", ProductUtils.getAllProductListByUser());
@@ -99,6 +102,7 @@ public class ProjectAction extends BaseController {
      *
      * @return
      */
+    @RequiresPermissions("project-op-all")
     @RequestMapping("/list")
     public String list() {
         return "project/list";
@@ -129,6 +133,7 @@ public class ProjectAction extends BaseController {
         return "project/listData.pagelet";
     }
 
+    @RequiresPermissions("pro-survey-edit")
     @RequestMapping("/edit")
     public String editForm(Integer projectId, Model model) {
         Project project = projectService.findProjectById(projectId);
@@ -163,6 +168,7 @@ public class ProjectAction extends BaseController {
         return "redirect:" + adminPath + "/project/view?projectId=" + project.getProjectId();
     }
 
+    @RequiresPermissions("pro-survey-delay")
     @RequestMapping("/delay")
     public String delay(Integer projectId, Model model) {
         Project project = projectService.findProjectById(projectId);
@@ -180,6 +186,7 @@ public class ProjectAction extends BaseController {
         return resultMap(res > 0 ? true : false, res > 0 ? "延期成功" : "延期失败");
     }
 
+    @RequiresPermissions("pro-survey-hangUp")
     @RequestMapping(value = "/hangUp", method = RequestMethod.GET)
     public String hangUp(Integer projectId, Model model) {
         Project project = projectService.findProjectById(projectId);
@@ -198,6 +205,7 @@ public class ProjectAction extends BaseController {
         return resultMap(res > 0 ? true : false, res > 0 ? "挂起成功" : "挂起失败");
     }
 
+    @RequiresPermissions("pro-survey-doing")
     @RequestMapping(value = "/start", method = RequestMethod.GET)
     public String start(Integer projectId, Model model) {
         Project project = projectService.findProjectById(projectId);
@@ -217,6 +225,7 @@ public class ProjectAction extends BaseController {
         return resultMap(res > 0 ? true : false, res > 0 ? "开始成功" : "开始失败");
     }
 
+    @RequiresPermissions("pro-survey-active")
     @RequestMapping(value = "/doing", method = RequestMethod.GET)
     public String doing(Integer projectId, Model model) {
         Project project = projectService.findProjectById(projectId);
@@ -235,6 +244,7 @@ public class ProjectAction extends BaseController {
         return resultMap(res > 0 ? true : false, res > 0 ? "激活成功" : "激活失败");
     }
 
+    @RequiresPermissions("pro-survey-finish")
     @RequestMapping("/finish")
     public String finish(Integer projectId, Model model) {
         model.addAttribute("teamList", userService.findTeamUserListByProjectId(projectId));
@@ -262,6 +272,7 @@ public class ProjectAction extends BaseController {
      * @param model
      * @return
      */
+//    @RequiresPermissions("project-basicInfo")
     @RequestMapping("/basicInformation")
     public String basicInformation(Integer projectID, Model model) {
         Project project = projectService.findProjectById(projectID);
@@ -294,6 +305,7 @@ public class ProjectAction extends BaseController {
      * @param projectIds
      * @return
      */
+//    @RequiresPermissions("project-batchDel")
     @ResponseBody
     @RequestMapping("/batchDelete")
     public Map batchDelete(@RequestParam(value = "ids") String projectIds) {

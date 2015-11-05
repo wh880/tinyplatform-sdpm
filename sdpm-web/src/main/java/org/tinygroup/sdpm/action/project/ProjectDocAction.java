@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.action.project;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,6 +41,7 @@ public class ProjectDocAction extends BaseController {
     @Autowired
     private ModuleService moduleService;
 
+    @RequiresPermissions("document")
     @RequestMapping("/index")
     public String jumpDocIndex() {
         return "project/document/index.page";
@@ -81,6 +83,7 @@ public class ProjectDocAction extends BaseController {
         return map;
     }
 
+    @RequiresPermissions("pro-document-delete")
     @ResponseBody
     @RequestMapping("/del")
     public Map<String, String> del(Integer id) {
@@ -96,6 +99,7 @@ public class ProjectDocAction extends BaseController {
         return map;
     }
 
+    @RequiresPermissions("pro-document-report")
     @RequestMapping("/preAdd")
     public String preAdd(Model model) {
         SystemModule module = new SystemModule();
