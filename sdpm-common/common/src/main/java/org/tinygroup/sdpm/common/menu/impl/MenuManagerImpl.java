@@ -125,6 +125,10 @@ public class MenuManagerImpl implements MenuManager {
         return new ArrayList<Menu>(menuMap.values());
     }
 
+    public Boolean hasMenu(String menuId) {
+        return null;
+    }
+
     /**
      * 获取某一级的所有子菜单，并进行排序
      *

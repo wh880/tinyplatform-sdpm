@@ -1,6 +1,6 @@
 #set(tableId="toBugId")
-#@tinyForm("execution" TINY_CONTEXT_PATH+adminPath+"/quality/bug/toBug"+mark "" {"class":"test"})
-#hiddenInput(hiddenInputName="caseId" hiddenInputValue=caseId)
+#@tinyForm("execution" TINY_CONTEXT_PATH+adminPath+"/quality/bug/toBug?caseId="+caseId "" {"class":"test"})
+
 <script type="text/javascript">
                 $(function(){
                     $("#pass").on("click",function(){

@@ -46,7 +46,7 @@
 			       			#end
 			       			#@tr()
 								#@td()当前指派#end
-			       				#@td()${qualityBug?.bugAssignedTo?UserUtils.getUserById(qualityBug?.bugAssignedTo)?.orgUserRealName:""} 于 ${formatDate(qualityBug?.bugAssignedDate,"yyyy-MM-dd hh-mm-ss")}#end
+			       				#@td()${qualityBug?.bugAssignedTo?UserUtils.getUserById(qualityBug?.bugAssignedTo)?.orgUserRealName:""}#end
 			       			#end
 			       			#@tr()
 								#@td()操作系统#end
@@ -65,7 +65,7 @@
 			       				#@td()
 			       				#for(user : assignUsers)
 			       				    #if(userFor.index != 1),#end
-			       				    ${user?.orgUserAccount}
+			       				    ${user?.orgUserRealName}
 			       				#end
 			       				#end
 			       			#end

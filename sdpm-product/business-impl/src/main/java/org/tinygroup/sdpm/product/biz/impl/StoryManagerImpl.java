@@ -5,6 +5,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
+import org.tinygroup.sdpm.common.condition.CallBackFunction;
+import org.tinygroup.sdpm.common.condition.ConditionCarrier;
+import org.tinygroup.sdpm.common.condition.ConditionUtils;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SqlUtil;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
@@ -15,6 +18,9 @@ import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec;
 import org.tinygroup.sdpm.product.dao.pojo.StoryCount;
+import org.tinygroup.sdpm.system.dao.SystemModuleDao;
+import org.tinygroup.sdpm.system.dao.impl.ModuleUtil;
+import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.Comparator;
@@ -30,6 +36,8 @@ public class StoryManagerImpl implements StoryManager {
     private ProductStoryDao productStoryDao;
     @Autowired
     private ProductStorySpecDao storySpecDao;
+    @Autowired
+    private SystemModuleDao systemModuleDao;
 
     public ProductStory add(ProductStory story, ProductStorySpec storySpec) {
 
@@ -174,5 +182,35 @@ public class StoryManagerImpl implements StoryManager {
             return productStoryDao.complexQuery(start, limit, story, condition, new OrderBy(NameUtil.resolveNameDesc(columnName), asc));
         }
         return productStoryDao.complexQuery(start, limit, story, condition);
+    }
+
+    public Pager<ProductStory> findStoryByCondition(int start, int limit, ProductStory story, ConditionCarrier carrier, final String columnName, boolean asc) {
+        carrier.completeModuleFunction(new CallBackFunction() {
+            public boolean process(ConditionCarrier carrier, String field,String relation) {
+                String result = "";
+                if(ConditionUtils.CommonFieldType.MODULE.getOperate().equals(carrier.getFieldType(field))){
+                    String moduleId = (String)carrier.getValue(field)[0];
+                    if(moduleId.contains("p")){
+                        result = ModuleUtil.getConditionByRoot(Integer.parseInt(moduleId.substring(1)), systemModuleDao);
+                    }else{
+                        result = ModuleUtil.getCondition(Integer.parseInt(moduleId.substring(1)), systemModuleDao);
+                    }
+                    carrier.setCondition(field,result,carrier.DEFAULT_RELATION);
+                    return true;
+                }
+                return false;
+            }
+        });
+        carrier.completeCustomFunction(new CallBackFunction() {
+            public boolean process(ConditionCarrier carrier, String field, String relation) {
+                if(ConditionUtils.CommonFieldType.STATUS.getOperate().equals(carrier.getFieldType(field))){
+                    String statusCondition = (String)carrier.getValue(field)[0];
+                    carrier.setCondition(field,statusCondition,carrier.DEFAULT_RELATION);
+                    return true;
+                }
+                return false;
+            }
+        });
+        return findPager(start,limit,story,carrier.resultCondition(),columnName,asc);
     }
 }

@@ -1,5 +1,5 @@
 <script>
-    function ajaxRead(id, toName, opKey, opvalue, url, value) {
+    function ajaxRead(id, toName, opKey, opvalue, url, value,isBuild) {
         var selectCheck = "select[name=" + toName + "]";
         $(selectCheck).each(function () {
             var sele = $(this);
@@ -11,7 +11,12 @@
                 dataType: "json",
                 success: function (data) {
                     sele.empty();
-                    var em = "<option value='0' selected  >/</option>";
+                    var em;
+                    if("build"==(isBuild)){
+                        em = "<option value='0' selected  >trunk</option>";
+                    }else if("module"==isBuild){
+                        em = "<option value='0' selected  >/</option>";
+                    }
                     sele.append(em);
                     for (var i = 0, l = data.length; i < l; i++) {
                         var em = "<option value='" + data[i][opKey] + "' >" + data[i][opvalue] + "</option>";
@@ -62,11 +67,12 @@
                             <script>
                                  $("#${sid}").on("change", function () {
                                     var pId = $("#${sid}  option:selected").val();
-                                    ajaxRead("${sid}", "moduleId", "moduleId", "moduleName", "/quality/bug/ajax/module?moduleRoot=" + pId,${testCase?.moduleId?:0});
+									 if(pId>0){
+										ajaxRead("${sid}", "moduleId", "moduleId", "moduleName", "/quality/bug/ajax/module?moduleRoot=" + pId,${testCase?.moduleId},"module");
+									 }
                                 });
                             </script>
 	                   		 #@Tselect2Body("productId" testCase?.productId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                   		    <option value="0" >/</option>
 								 #for(product : ProductUtils.getAllProductListByUser())
 	                            <option value="${product?.productId}" >${product?.productName}</option>
 	                            #end
@@ -88,8 +94,9 @@
                                 $("#${sid}").on("change", function () {
                                    var pId = $("select[name=productId]  option:selected").val();
                                    var mId = $("select[name=moduleId]").val();
-                                   console.log(mId);
-                                   ajaxRead("${sid}", "storyId", "storyId", "storyTitle", "/product/story/storyList?productId=" + pId+"&moduleId="+mId,${testCase?.storyId?:0});
+                                   if(pId>0&&mId>=0){
+									   ajaxRead("${sid}", "storyId", "storyId", "storyTitle", "/product/story/storyList?productId=" + pId+"&moduleId="+mId,${testCase?.storyId?:0});
+									}
                                });
                            </script>
 	                   		 #@Tselect2Body("moduleId" testCase?.moduleId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
@@ -113,7 +120,7 @@
 				#end
 
 			#@tr()
-				#@th()用例类型#end
+				#@th()<span class="c-red">*</span>用例类型#end
 				#@td()
 				#@Tselect2F()
 	                   		 #@Tselect2Body("caseType" testCase?.caseType {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
@@ -126,7 +133,7 @@
                	#end
 			#end
 			#@tr()
-				#@th()试用阶段#end
+				#@th()<span class="c-red">*</span>试用阶段#end
 				#@td()
 					#@Tselect2F()
 	                   		 #@Tselect2Body("caseStage" testCase?.caseStage {"class":"input-text select2","multiple":"multiple"}) ##,"multiple":"multiple"加上为多选项
@@ -138,7 +145,7 @@
 				#end
 			#end
 			#@tr()
-				#@th()优先级#end
+				#@th()<span class="c-red">*</span>优先级#end
 				#@td() 
 					 #@Tselect2F()
 	                   		 #@Tselect2Body("priority" testCase?.priority {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项

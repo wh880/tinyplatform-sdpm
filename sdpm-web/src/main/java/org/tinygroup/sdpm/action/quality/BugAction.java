@@ -121,11 +121,12 @@ public class BugAction extends BaseController {
         }
         QualityBug bug = bugService.findById(bugId);
         SystemProfile systemProfile = new SystemProfile();
-        systemProfile.setFileObjectId(bugId);
-        systemProfile.setFileObjectType(LogUtil.LogOperateObject.BUG.toString());
-        List<SystemProfile> profilesList = profileService.find(systemProfile);
+        systemProfile.setFileObjectType("bug");
+        systemProfile.setFileDeleted("0");
+        systemProfile.setFileObjectId(bug.getBugId());
+        List<SystemProfile> list = profileService.find(systemProfile);
+        model.addAttribute("file",list);
         model.addAttribute("qualityBug", bug);
-        model.addAttribute("profilesList", profilesList);
         model.addAttribute("nextId", nextId);
         return "/testManagement/page/bugInfo.page";
     }
@@ -133,9 +134,11 @@ public class BugAction extends BaseController {
     @RequestMapping("/bugBasicInfo")
     public String bugBasicInfo(Integer bugId, Model model) {
         QualityBug bug = bugService.findById(bugId);
-        String[] userIds = bug.getBugAssignedTo().split(",");
-        List<OrgUser> assignUsers = userService.findUserListByIds(userIds);
-        model.addAttribute("assignUsers", assignUsers);
+        if(!StringUtil.isBlank(bug.getBugAssignedTo())) {
+            String[] userIds = bug.getBugAssignedTo().split(",");
+            List<OrgUser> assignUsers = userService.findUserListByIds(userIds);
+            model.addAttribute("assignUsers", assignUsers);
+        }
         model.addAttribute("qualityBug", bug);
         return "/testManagement/page/bugRightInfo.pagelet";
     }
@@ -356,21 +359,26 @@ public class BugAction extends BaseController {
     @RequiresPermissions("tsolution")
     @RequestMapping("/toSolve")
     public String solve(Integer bugId, Model model) {
-        QualityBug bug = new QualityBug();
-        bug = bugService.findById(bugId);
+        QualityBug bug = bugService.findById(bugId);
         bug.setBugResolvedDate(new Date());
         List<OrgUser> orgUsers = userService.findUserList(null);
         ProjectBuild build = new ProjectBuild();
         build.setBuildProduct(bug.getProductId());
         List<ProjectBuild> builds = buildService.findListBuild(build);
+        QualityBug qualityBug = new QualityBug();
+        qualityBug.setDeleted(0);
+        List<QualityBug> bugList = bugService.findBugList(qualityBug);
         model.addAttribute("buildList", builds);
         model.addAttribute("userList", orgUsers);
         model.addAttribute("bug", bug);
+        model.addAttribute("bugList", bugList);
         return "/testManagement/page/tabledemo/solution.page";
     }
 
     @RequestMapping("/solve")
-    public String solve(QualityBug bug, SystemAction systemAction, HttpServletRequest request) {
+    public String solve(QualityBug bug, SystemAction systemAction,
+                        HttpServletRequest request,@RequestParam(value = "file", required = false) MultipartFile[] file,
+                        String[] title) throws IOException {
         QualityBug qualityBug = bugService.findById(bug.getBugId());
         if (qualityBug.getBugAssignedTo() != bug.getBugAssignedTo()) {
             bug.setBugAssignedDate(new Date());
@@ -378,7 +386,7 @@ public class BugAction extends BaseController {
         bug.setBugResolvedBy(UserUtils.getUserId() != null ? UserUtils.getUserId() : "0");
         bug.setBugStatus("2");
         bugService.updateBug(bug);
-
+        uploads(file, bug.getBugId(), ProfileType.BUG, title);
 
         LogUtil.logWithComment(LogUtil.LogOperateObject.BUG
                 , LogUtil.LogAction.RESOLVED
@@ -433,14 +441,16 @@ public class BugAction extends BaseController {
     }
 
     @RequestMapping("/edit")
-    public String edit(QualityBug bug, SystemAction systemAction, HttpServletRequest request) {
+    public String edit(QualityBug bug, SystemAction systemAction, HttpServletRequest request,
+                       @RequestParam(value = "file", required = false) MultipartFile[] file,
+                       String[] title) throws IOException {
 
         QualityBug qualityBug = bugService.findById(bug.getBugId());
 
         bug.setBugLastEditedBy(UserUtils.getUserId() != null ? UserUtils.getUserId() : "0");
         bug.setBugLastEditedDate(new Date());
         bugService.updateBug(bug);
-
+        uploads(file, bug.getBugId(), ProfileType.BUG, title);
 
         LogUtil.logWithComment(LogUtil.LogOperateObject.BUG
                 , LogUtil.LogAction.EDITED
@@ -563,7 +573,8 @@ public class BugAction extends BaseController {
     }
 
     @RequestMapping(value = "/copy", method = RequestMethod.POST)
-    public String copySave(QualityBug bug, SystemAction systemAction, HttpServletRequest request) {
+    public String copySave(QualityBug bug, SystemAction systemAction, HttpServletRequest request, @RequestParam(value = "file", required = false) MultipartFile[] file,
+                           String[] title) throws IOException {
         bug.setBugConfirmed(0);
         bug.setBugStatus("1");
         bug.setDeleted(0);
@@ -574,7 +585,7 @@ public class BugAction extends BaseController {
         }
         bug.setBugOpenedBy(UserUtils.getUserId() != null ? UserUtils.getUserId() : "0");
         bug = bugService.addBug(bug);
-
+        uploads(file, bug.getBugId(), ProfileType.BUG, title);
         LogUtil.logWithComment(LogUtil.LogOperateObject.BUG
                 , LogUtil.LogAction.OPENED
                 , String.valueOf(bug.getBugId())

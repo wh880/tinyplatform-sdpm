@@ -53,7 +53,6 @@
             #@sdpmItem("指派给")
 	            #@Tselect2F()
 	                #@Tselect2Body("bugAssignedTo" bug?.bugAssignedTo {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-						<option value="0">/</option>
 						#foreach(user : userList)
 							<option value="${user?.orgUserId}">${user?.orgUserRealName}</option>
 						#end
@@ -65,9 +64,9 @@
     	#@sdpmItem("优先级")
                #@Tselect2F()
 					 #@Tselect2Body("priority" bug?.priority {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-					<option value="1">1</option>
-					<option value="2">2</option>
-					<option value="3">3</option>
+						 #for(pri : getDict("bugPriority"))
+						 #@tinyOptionItem(pri.value)${pri.text}#end
+					 #end
 					#end
                 #end
    		#end 
@@ -78,7 +77,7 @@
              #@Tselect2F()
 	               #@Tselect2Body("bugMailto" bug?.bugMailto {"class":"input-text select2","multiple":"multiple"}) ##,"multiple":"multiple"加上为多选项
 						#foreach(user : userList)
-						<option value="${user?.orgUserId}">${user?.orgUserAccount}</option>
+						<option value="${user?.orgUserId}">${user?.orgUserRealName}</option>
 						#end
 	          		#end                
         	 #end

@@ -51,24 +51,24 @@
     #@elementItem()
     	 #@sdpmItem("指派给")       	
              #@Tselect2F()
-	                    #@Tselect2Body("bugAssignedTo" bug?.bugAssignedTo?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                       <option value="I0">/</option>
-	                         #for(user : userList)
-	                        <option value="${user?.orgUserId}">${user?.orgUserRealName}</option>
-	                    	#end
-	                    #end
+					#@Tselect2Body("bugAssignedTo" bug?.bugAssignedTo?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+						 #for(user : userList)
+						<option value="${user?.orgUserId}">${user?.orgUserRealName}</option>
+						#end
+					#end
+			 #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH+adminPath}/org/user/form" class="r ">增加</a>#end
               #end  
          #end   
     #end
     #@elementItem()
         #@sdpmItem("抄送给") 
             #@Tselect2F()
-	                   		#@Tselect2Body("bugMailto" bug?.bugMailto {"class":"input-text select2","multiple":"multiple"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="I0">/</option>
-                                #for(user : userList)
-                                <option value="${user?.orgUserId}">${user?.orgUserAccount}</option>
-                                #end
-	                    	#end                
+					#@Tselect2Body("bugMailto" bug?.bugMailto {"class":"input-text select2","multiple":"multiple"}) ##,"multiple":"multiple"加上为多选项
+						#for(user : userList)
+						<option value="${user?.orgUserId}">${user?.orgUserAccount}</option>
+						#end
+					#end
+			#@Tselect2Fix()<a href="${TINY_CONTEXT_PATH+adminPath}/org/user/form" class="r ">增加</a>#end
               #end 
      	#end
     #end

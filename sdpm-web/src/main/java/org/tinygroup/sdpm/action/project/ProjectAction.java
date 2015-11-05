@@ -59,6 +59,7 @@ public class ProjectAction extends BaseController {
             }
         }
         Project project = projectService.findProjectById(projectId);
+        CookieUtils.setCookie(response, ProjectUtils.COOKIE_PROJECT_ID,projectId.toString());
         model.addAttribute("project", project);
         return "/project/survey/index";
     }
@@ -96,7 +97,6 @@ public class ProjectAction extends BaseController {
         ProjectUtils.removeProjectList();
         return "redirect:" + adminPath + "/project/list";
     }
-
 
     /**
      * 所有项目列表
@@ -208,7 +208,6 @@ public class ProjectAction extends BaseController {
     public String start(Integer projectId, Model model) {
         Project project = projectService.findProjectById(projectId);
         model.addAttribute("project", project);
-
         return "/project/survey/start.pagelet";
     }
 
@@ -249,7 +248,7 @@ public class ProjectAction extends BaseController {
 
         Project project = projectService.findProjectById(projectId);
         model.addAttribute("project", project);
-        return "/project/survey/doing.pagelet";
+        return "/project/survey/finish.pagelet";
     }
 
     @ResponseBody

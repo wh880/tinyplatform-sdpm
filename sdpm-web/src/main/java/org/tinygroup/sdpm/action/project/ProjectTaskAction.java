@@ -61,7 +61,6 @@ public class ProjectTaskAction extends BaseController {
     private UserService userService;
 
     @RequiresPermissions(value = {"project", "task"}, logical = Logical.OR)
-//    @RequiresPermissions(value = {"task", "project"}, logical = Logical.OR)
     @RequestMapping("index")
     public String index(@CookieValue(required = false, value = ProjectUtils.COOKIE_PROJECT_ID) String currentProjectId,
                         HttpServletResponse response, String moduleId, String choose, Model model) {
@@ -118,6 +117,7 @@ public class ProjectTaskAction extends BaseController {
      * @param commnet
      * @return
      */
+    @RequiresPermissions("pro-task-call")
     @RequestMapping(value = "/call", method = RequestMethod.POST)
     public String callSave(ProjectTask task, Model model, String commnet) {
         if (task.getTaskId() == null) {
@@ -145,6 +145,7 @@ public class ProjectTaskAction extends BaseController {
         return "project/task/finish";
     }
 
+    @RequiresPermissions("pro-task-finish")
     @RequestMapping(value = "/finish", method = RequestMethod.POST)
     public String finishSave(ProjectTask task, Model model, String commnet) {
         if (task.getTaskId() == null) {
@@ -176,6 +177,7 @@ public class ProjectTaskAction extends BaseController {
         return "project/task/close";
     }
 
+    @RequiresPermissions("pro-task-close")
     @RequestMapping(value = "/close", method = RequestMethod.POST)
     public String closeSave(ProjectTask task, String content) {
         taskService.updateCloseTask(task);
@@ -193,6 +195,7 @@ public class ProjectTaskAction extends BaseController {
         return "project/task/start";
     }
 
+    @RequiresPermissions("pro-task-start")
     @RequestMapping(value = "/start", method = RequestMethod.POST)
     public String startSave(ProjectTask task, Model model, String content) {
         if (task.getTaskId() == null) {
@@ -440,7 +443,7 @@ public class ProjectTaskAction extends BaseController {
         model.addAttribute("project", project);
 
         //查询所属模块string
-        String modulPath = "";
+        String modulPath;
         if (task.getTaskModule() == null) {
             modulPath = "/";
         } else {
@@ -516,25 +519,20 @@ public class ProjectTaskAction extends BaseController {
 
     @ResponseBody
     @RequestMapping("/gantt/init")
-    public List<Map<String, String>> ganttInit(@CookieValue(value = ProjectUtils.COOKIE_PROJECT_ID, required = false) String projectId,
+    public List<Map<String, Object>> ganttInit(HttpServletRequest request,
                                                HttpServletResponse response) {
-        List<Map<String, String>> resultList = new ArrayList<Map<String, String>>();
-        if (StringUtil.isBlank(projectId)) {
-            Project project = ProjectUtils.getProject(projectId);
-            if (project.getProjectId() != null) {
-                projectId = project.getProjectId().toString();
-                CookieUtils.setCookie(response, ProjectUtils.COOKIE_PROJECT_ID, projectId);
-            } else {
-                return null;
-            }
+        Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
+        if (projectId == null) {
+            return null;
         }
         ProjectTask task = new ProjectTask();
-        task.setTaskProject(Integer.valueOf(projectId));
+        task.setTaskProject(projectId);
         List<ProjectTask> taskList = taskService.findListTask(task);
+        List<Map<String, Object>> resultList = new ArrayList<Map<String, Object>>();
 
         for (ProjectTask t : taskList) {
             SimpleDateFormat format = new SimpleDateFormat("M/d/yyyy");
-            Map<String, String> map = new HashMap<String, String>();
+            Map<String, Object> map = new HashMap<String, Object>();
             map.put("pID", t.getTaskId().toString());
             map.put("pName", t.getTaskName());
             if (t.getTaskRealStarted() != null) {
@@ -547,17 +545,16 @@ public class ProjectTaskAction extends BaseController {
             } else {
                 map.put("pEnd", format.format(new Date()));
             }
-
             map.put("pColor", t.getTaskPri().toString());
-            map.put("pRes", userService.findUser(t.getTaskAssignedTo()).getOrgUserRealName());
+            map.put("pRes", UserUtils.getUserById(t.getTaskAssignedTo()).getOrgUserRealName());
             //进度
             float comp;
-            if ((t.getTaskConsumed() == null || t.getTaskConsumed() == 0) || (t.getTaskConsumed() + t.getTaskLeft() == 0)) {
+            if ((t.getTaskConsumed() == null || t.getTaskLeft() == null) || (t.getTaskConsumed() + t.getTaskLeft() == 0)) {
                 comp = 0f;
             } else {
                 comp = t.getTaskConsumed() / (t.getTaskConsumed() + t.getTaskLeft());
             }
-            map.put("pComp", String.valueOf(comp * 100));
+            map.put("pComp", comp * 100);
             map.put("pGroup", "0");
             map.put("pParent", "0");
             map.put("pOpen", "1");
