@@ -116,12 +116,11 @@
                             $("#${sid}").on("change", function () {
                                 var dId = $("select[name=docLibId]").val();
                                 var pId = $("#${sid}  option:selected").val();
-
                                 if (dId == '2') {
-                                    ajaxRead("${sid}", "docModule", "moduleId", "moduleName", "/document/ajax/moduleByProject?projectId=" + pId, ${doc?.docModule ? : 0
+                                    ajaxRead("${sid}", "docModule", "moduleId", "moduleName", "/document/ajax/moduleByProject?projectId=" + pId, ${doc? doc.docModule : 0
                                 }
                                 );
-                            ajaxRead("${sid}", "docProduct", "productId", "productName", "/document/ajax/product?projectId=" + pId, ${doc?.docProduct ? : 0
+                            ajaxRead("${sid}", "docProduct", "productId", "productName", "/document/ajax/product?projectId=" + pId, ${doc? doc.docProduct : 0
                             })
                             ;
                             }
@@ -149,11 +148,14 @@
                                 var dId = $("select[name=docLibId]").val();
                                 if (dId == '1') {
                                     var pId = $(this).val();
-                                    ajaxRead("${sid}", "docModule", "moduleId", "moduleName", "/document/ajax/moduleByProduct?productId=" + pId, ${doc?.docModule ? : 0
+                                    ajaxRead("${sid}", "docModule", "moduleId", "moduleName",
+                                            "/document/ajax/moduleByProduct?productId=" + pId, ${doc? doc.docModule : 0
                                 }
                                 );
                             }
                             })
+                            ;
+
                         </script>
                     #end
                 #end
