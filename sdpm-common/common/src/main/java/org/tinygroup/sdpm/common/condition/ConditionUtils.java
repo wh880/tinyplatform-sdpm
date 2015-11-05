@@ -133,38 +133,38 @@ public class ConditionUtils {
         return false;
     }
 
-    public ConditionCarrier mergeCarrier(String moduleField,String moduleId){
+    public static ConditionCarrier mergeCarrier(String moduleField,String moduleId){
         ConditionCarrier carrier = new ConditionCarrier();
         carrier.putModuleIn(moduleField,moduleId);
         return carrier;
     }
 
-    public ConditionCarrier mergeCarrier(SearchInfos searchInfos,String groupOperator){
+    public static ConditionCarrier mergeCarrier(SearchInfos searchInfos,String groupOperator){
         ConditionCarrier carrier = new ConditionCarrier();
         carrier.putSearch("search",searchInfos,groupOperator);
         return carrier;
     }
 
-    public ConditionCarrier mergeCarrier(String idField,String[] ids){
+    public static ConditionCarrier mergeCarrier(String idField,String[] ids){
         ConditionCarrier carrier = new ConditionCarrier();
         carrier.putIdIn(idField, ids);
         return carrier;
     }
 
-    public ConditionCarrier mergeCarrier(SearchInfos searchInfos,String groupOperator,String moduleField,String moduleId,String idField,String[] ids){
+    public static ConditionCarrier mergeCarrier(SearchInfos searchInfos,String groupOperator,String moduleField,String moduleId,String idField,String[] ids){
         ConditionCarrier carrier = mergeCarrier(moduleField,moduleId);
         carrier.putSearch("search", searchInfos, groupOperator);
         carrier.putIdIn(idField,ids);
         return carrier;
     }
 
-    public ConditionCarrier mergeCarrier(String moduleField,String moduleId,String idField,String[] ids){
+    public static ConditionCarrier mergeCarrier(String moduleField,String moduleId,String idField,String[] ids){
         ConditionCarrier carrier = mergeCarrier(moduleField,moduleId);
         carrier.putIdIn(idField,ids);
         return carrier;
     }
 
-    public ConditionCarrier mergeCarrier(SearchInfos searchInfos,String groupOperator,String moduleField,String moduleId){
+    public static ConditionCarrier mergeCarrier(SearchInfos searchInfos,String groupOperator,String moduleField,String moduleId){
         ConditionCarrier carrier = mergeCarrier(moduleField,moduleId);
         carrier.putSearch("search",searchInfos,groupOperator);
         return carrier;

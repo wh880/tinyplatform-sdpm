@@ -3,6 +3,8 @@ package org.tinygroup.sdpm.project.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.tinygroup.commons.tools.StringUtil;
+import org.tinygroup.sdpm.common.condition.ConditionCarrier;
+import org.tinygroup.sdpm.common.condition.ConditionUtils;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.product.biz.inter.StoryManager;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
@@ -101,28 +103,21 @@ public class ProjectStoryServiceImpl implements ProjectStoryService {
     }
 
     public Pager<ProductStory> findStoryByProject(Integer projectId, Integer start, Integer limit, String order, String ordertype, String moduleId) {
-        List<ProjectStory> storyList = projectStoryManager.findSrotys(projectId);
-        String condition = "";
-        if (storyList == null || storyList.isEmpty()) {
-            condition = null;
-        } else {
-            condition = " story_id in (";
-            String storys = "";
-            for (ProjectStory story : storyList) {
-                if (StringUtil.isBlank(storys)) {
-                    storys = storys + story.getStoryId().toString();
-                } else {
-                    storys = storys + "," + story.getStoryId().toString();
-                }
-            }
-            condition = condition + storys + ")";
-        }
-        if (!moduleId.isEmpty()) {
-            condition = condition + "and module_id = " + moduleId;
-        }
-
         boolean asc = "asc".equals(ordertype) ? true : false;
-        Pager<ProductStory> pager = storyManager.findPager(start, limit, null, condition, null, null, order, asc);
+        List<ProjectStory> storyList = projectStoryManager.findSrotys(projectId);
+        String[] ids = new String[storyList.size()];
+        for(int i=0;i<storyList.size();i++){
+            ids[i] = String.valueOf(storyList.get(i).getStoryId());
+        }
+        ConditionCarrier carrier;
+        if(!StringUtil.isBlank(moduleId)){
+            carrier = ConditionUtils.mergeCarrier("productStory.moduleId",moduleId,"productStory.storyId",ids);
+        }else{
+            carrier = ConditionUtils.mergeCarrier("productStory.storyId",ids);
+        }
+        ProductStory story = new ProductStory();
+        story.setDeleted(0);
+        Pager<ProductStory> pager = storyManager.findStoryByCondition(start,limit,story,carrier,order,"asc".equals(ordertype)?true:false);
         for (ProductStory s : pager.getRecords()) {
             s.setTaskNumber(taskManager.getTaskSumByStory(s.getStoryId()));
         }

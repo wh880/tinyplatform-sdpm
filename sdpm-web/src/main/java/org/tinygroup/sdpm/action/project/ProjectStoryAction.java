@@ -43,9 +43,7 @@ public class ProjectStoryAction extends BaseController {
     @RequestMapping("/list/data")
     public String listData(HttpServletRequest request, HttpServletResponse response,
                        Model model, Integer start, Integer limit, String order, String ordertype, String moduleId) {
-        if (!moduleId.isEmpty()) {
-            moduleId = moduleId.substring(1);
-        }
+
         Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
         if (projectId == null) {
             return redirectProjectForm();
