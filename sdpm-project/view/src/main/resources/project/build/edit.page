@@ -69,7 +69,8 @@
         #@sdpmItem("打包日期")
             #@formHorizontal()
                 #@tinyDateInput(
-                    "buildDate" "" "YYYY-MM-DD" {"datatype":"*","placeholder":"选择日期"})
+                    "buildDate" formatDate(build?.buildDate,
+                    "yyyy-MM-dd") "YYYY-MM-DD" {"datatype":"*","placeholder":"选择日期"})
                 #end
             #end
         #end
