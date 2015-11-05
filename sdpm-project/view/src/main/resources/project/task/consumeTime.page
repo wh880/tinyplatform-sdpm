@@ -5,56 +5,37 @@
     #@tableBorder()
         #@thead()
             #@tr()
-                #@thW("60")    ID    #end
-                #@thW("40")    日期    #end
-                #@thW("100")    耗时#end
-                #@thW("100")    剩余    #end
-                #@thW("300")    工作内容    #end
+                #@thW("60")ID#end
+                #@thW("40")日期#end
+                #@thW("100")耗时#end
+                #@thW("100")剩余#end
+                #@thW("300")工作内容#end
             #end
-
         #end
-
         #@tbody()
-
-            #for(i:[1..8])
+            #foreach(i:[1..8])
             #@tr()
-
                 #@th()    ${i}    #end
                 #@th()
-
                     #@tinyDateInput(
                         "taskOpenedDate" "2015-02-22" "YYYY-MM-DD" {"style":"width:150px","datatype":"*","placeholder":
                         "选择日期"})#end
-
                     #@validateDiv("col-2")#end
                 #end
                 #@th()
-
                     #tinyInput("text" "taskConsumed""1.1")
-
                 #end
-
                 #@th()
-
                     #tinyInput("text" "taskLeft""1.1")
                 #end
-
                 #@th()
-
                     #tinyInput("text" "username""")
-
                 #end
             #end
-
         #end
     #end
-
 #end
-<p>
-</p>
 #@td()
-    #@colLabel()#end
-<a href="#">#buttonRadiusPrimary(caption="保存")</a>
-
+    #@colLabel()#end<a href="#">#buttonRadiusPrimary(caption="保存")</a>
 #end
 #end

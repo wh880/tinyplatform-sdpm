@@ -72,7 +72,6 @@ public class EffortAction extends BaseController {
         model.addAttribute("taskId", taskId);
         model.addAttribute("list", effortList);
         return "project/task/note";
-
     }
 
     @RequestMapping("save")

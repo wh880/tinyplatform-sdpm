@@ -21,7 +21,7 @@
                         #@formControlDiv("col-10")
                             #@Tselect2F()
                                 #@Tselect2Body("taskModule" task.taskModule {"class":"input-text select2"})
-                                    <option value="">/</option>
+                                    <option value=""></option>
                                     #foreach(m : moduleList)
                                         <option value="${m.moduleId}">${m.moduleName}</option>
                                     #end
@@ -38,7 +38,7 @@
                         #@formControlDiv("col-10")
                             #@Tselect2F()
                                 #@Tselect2Body("taskStory" task?.taskStory {"class":"input-text select2"})
-                                    <option value="">/</option>
+                                    <option value=""></option>
                                     #foreach(s : storyList)
                                         <option value="${s.storyId}">${s.storyTitle}</option>
                                     #end
