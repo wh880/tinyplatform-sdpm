@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.action.project;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +21,7 @@ public class ProjectCommonAction extends BaseController {
         return "project/bug/index";
     }
 
+    @RequiresPermissions("test")
     @RequestMapping("/test/index")
     public String jumpTestIndex() {
         return "project/test/index.page";

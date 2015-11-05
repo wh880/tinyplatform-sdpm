@@ -241,9 +241,7 @@
                         "multiple"}) ##,"multiple":"multiple"加上为多选项
                     #end
                     <script>
-
                         ajaxRead("${sid}", "storyMailto", "orgUserId", "orgUserRealName", "/org/user/userList");
-
                     </script>
                     #@Tselect2Fix()
                         <a href="${TINY_CONTEXT_PATH}/a/org/user/form">增加</a>

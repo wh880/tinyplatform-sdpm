@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.action.project;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,12 +12,12 @@ import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SqlUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
+import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
-import org.tinygroup.sdpm.project.dao.pojo.ProjectTeam;
 import org.tinygroup.sdpm.project.service.inter.BuildService;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.sdpm.project.service.inter.ProjectStoryService;
@@ -43,6 +44,8 @@ import java.util.Map;
 @RequestMapping("/a/project/build")
 public class ProjectBuildAction extends BaseController {
     @Autowired
+    UserService userService;
+    @Autowired
     private BuildService buildService;
     @Autowired
     private TeamService teamService;
@@ -53,6 +56,7 @@ public class ProjectBuildAction extends BaseController {
     @Autowired
     private ProjectStoryService projectStoryService;
 
+    @RequiresPermissions("version-menu")
     @RequestMapping("/index")
     public String index(Model model, HttpServletRequest request, HttpServletResponse response) {
         Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
@@ -88,12 +92,13 @@ public class ProjectBuildAction extends BaseController {
         return "project/build/tableData.pagelet";
     }
 
+    @RequiresPermissions("pro-version-look")
     @RequestMapping("/look")
     public String look() {
         return "project/bug/index";
     }
 
-
+    @RequiresPermissions("pro-version-edit")
     @RequestMapping("/edit")
     public String edit(HttpServletRequest request, HttpServletResponse response,
                        Integer projectId, Integer buildId, Model model) {
@@ -105,8 +110,7 @@ public class ProjectBuildAction extends BaseController {
         module.setModuleType("project");
         module.setModuleRoot(projectId);
         List<Product> list = productService.findProductList(new Product(), "productId", "desc");
-        List<ProjectTeam> teamList = teamService.findTeamByProjectId(projectId);
-        model.addAttribute("teamList", teamList);
+        model.addAttribute("teamList", userService.findTeamUserListByProjectId(projectId));
         model.addAttribute("productList", list);
         if (buildId != null && buildId != 0) {
             ProjectBuild build = buildService.findBuild(buildId);
@@ -149,6 +153,7 @@ public class ProjectBuildAction extends BaseController {
         return "project/build/index.page";
     }
 
+    @RequiresPermissions("pro-version-delete")
     @ResponseBody
     @RequestMapping(value = "/delete")
     public Map<String, String> delete(Integer id, Model model) {
@@ -181,6 +186,7 @@ public class ProjectBuildAction extends BaseController {
         return "/project/task/relation-release/product-al-no-bug.page";
     }
 
+    //    @RequiresPermissions("projectBuild-batchDel")
     @ResponseBody
     @RequestMapping(value = "/batchDelete")
     public Map bctchDelDoc(String ids) {
@@ -215,6 +221,7 @@ public class ProjectBuildAction extends BaseController {
         return map;
     }
 
+    @RequiresPermissions("pro-version-report")
     @RequestMapping("/add")
     public String add(HttpServletRequest request, HttpServletResponse response, Integer buildId, Model model, String commnet) {
 
@@ -226,8 +233,7 @@ public class ProjectBuildAction extends BaseController {
         module.setModuleType("project");
         module.setModuleRoot(projectId);
         List<Product> list = productService.findProductList(new Product(), "productId", "desc");
-        List<ProjectTeam> teamList = teamService.findTeamByProjectId(projectId);
-        model.addAttribute("teamList", teamList);
+        model.addAttribute("teamList", userService.findTeamUserListByProjectId(projectId));
         model.addAttribute("prodcutList", list);
         if (buildId != null && buildId != 0) {
             ProjectBuild build = buildService.findBuild(buildId);
@@ -247,6 +253,7 @@ public class ProjectBuildAction extends BaseController {
             return "/project/task/relation-release/product-al-bug.page";
     }
 
+    //    @RequiresPermissions("projectBuild-releaseBaseInfo")
     @RequestMapping("/releasebaseinfo")
     public String releasebaseinfo(Integer buildId, Model model) {
         if (buildId != null) {
@@ -258,6 +265,7 @@ public class ProjectBuildAction extends BaseController {
         return "error";
     }
 
+    //    @RequiresPermissions("projectBuild-forword")
     @RequestMapping("/forword/{forwordPager}")
     public String forword(@PathVariable(value = "forwordPager") String forwordPager, Integer buildId, Model model) {
         ProjectBuild build = buildService.findBuild(buildId);

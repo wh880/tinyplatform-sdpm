@@ -107,13 +107,11 @@
 					#@div(divClass="col-5")
 					 #@Tselect2F()
 							#@Tselect2Body("bugOpenedBuild" bug?.bugOpenedBuild {"class":"input-text select2","multiple":"multiple"}) ##,"multiple":"multiple"加上为多选项
-
 	                    	#end
-						 #@Tselect2Fix()
+#@Tselect2Fix()
                              <a href="${TINY_CONTEXT_PATH+adminPath}/project/build/add" class="r ">增加</a>
                              <a href="${TINY_CONTEXT_PATH+adminPath}/project/build/index">全部</a>
-						 #end
-                	  #end
+						 #end                	  #end
                 	 #end
 				#end
 				#@validateDiv("col-2")#end
@@ -136,13 +134,16 @@
 				#@validateDiv("col-2")#end
 			#end
 			#@elementItem()
+
 				#@colLabel()<span class="c-red">*</span>Bug标题/<span class="c-red">*</span>优先级：#end
 				#@formControlDiv("col-8")
 				#@div(divClass="col-5")
+
 					#tinyInput("text" "bugTitle" bug?.bugTitle {"placeholder":"请输入bug名称","datatype":"*","nullmsg":"bug名称不能为空！","id":"版本","class":"input-text"})
 				#end
 				#@div(divClass="col-0")&nbsp&nbsp#end
                 	 #@div(divClass="col-3")
+
 					#@tinySelect("priority" bug?.priority {"placeholder":"请选择优先级","datatype":"*","nullmsg":"优先级不能为空！","class":"select2"})
 					#for(pri : getDict("bugPriority"))
 							#@tinyOptionItem(pri.value)${pri.text}#end
@@ -168,6 +169,7 @@
 
 	                    	#end
 	                      	#@Tselect2Fix()
+
 	                      	<a href="${TINY_CONTEXT_PATH+adminPath}/product/story/addstory" class="r ">增加</a>
 	                      	<a href="${TINY_CONTEXT_PATH+adminPath}/product/story?choose=1">全部</a>#end
                 			#end
@@ -183,6 +185,7 @@
 
 	                    	#end
 	                    	#@Tselect2Fix()
+
 	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/task/form" class="r ">增加</a>
 	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/task/index">全部</a>#end
                 	  #end
@@ -191,6 +194,7 @@
 				#@validateDiv("col-2")#end
 			#end
 			#@elementItem()
+
 				#@colLabel()类型/<span class="c-red">*</span>严重程度：#end
 				#@formControlDiv("col-8")
 					#@div(divClass="col-5")
@@ -307,6 +311,7 @@
     					sele.empty();
                         var em
     					if("build"==(isBuild)){
+
     					 em = "<option value='0' selected  >trunk</option>";
     					}else if("module"==isBuild){
     					 em = "<option value='0' selected  >/</option>";

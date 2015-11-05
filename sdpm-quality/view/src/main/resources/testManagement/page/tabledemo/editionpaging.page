@@ -323,14 +323,13 @@
                     #@th()<span class="c-red">*</span>影响版本#end
                     #@td()
                    #@Tselect2F()
-	                   		 #@Tselect2Body("bugOpenedBuild" bug?.bugOpenedBuild {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+						#@Tselect2Body("bugOpenedBuild" bug?.bugOpenedBuild {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 
 	                    	#end
                        #@Tselect2Fix()
                        <a href="${TINY_CONTEXT_PATH+adminPath}/project/build/add" class="r ">增加</a>
                        <a href="${TINY_CONTEXT_PATH+adminPath}/project/build/index">全部</a>
-                       #end
-                	  #end
+                       #end                	  #end
                     #end
                 #end
                 #@tr()
@@ -340,9 +339,11 @@
                             #@Tselect2Body("bugResolvedBy" bug?.bugResolvedBy?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                             <option value="0">/</option>
                             #foreach(user : userList)
+
                             <option value="${user?.orgUserId}">${user?.orgUserRealName}</option>
                             #end
                             #end
+
                                 #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH+adminPath}/org/user/form" class="r ">增加</a>#end
                             #end
                         #@validateDiv("col-2")#end
@@ -351,7 +352,7 @@
                 #@tr()
                     #@th()解决日期#end
                     #@td()
-                        #@tinyDateInput("bugResolvedDate" formatDate(bug?.bugResolvedDate,"yyyy-MM-dd") "yyyy-MM-dd" )#end
+
                     #end
                 #end
                 #@tr()
@@ -359,6 +360,7 @@
                     #@td()
                         #@Tselect2F()
 	                   		 #@Tselect2Body("bugResolvedBuild" bug?.bugResolvedBuild?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+
 
 	                    	#end
                             #@Tselect2Fix()
@@ -386,10 +388,13 @@
                     #@td()
                             #@Tselect2F()
                             #@Tselect2Body("bugClosedBy" bug?.bugClosedBy?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+
                             #foreach(user : userList)
+
                             <option value="${user?.orgUserId}">${user?.orgUserRealName}</option>
                             #end
                             #end
+
                                 #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH+adminPath}/org/user/form" class="r ">增加</a>#end
                             #end
                         #@validateDiv("col-2")#end
@@ -404,7 +409,7 @@
                 #@tr()
                     #@th()关闭日期#end
                     #@td()
-                        #@tinyDateInput("bugClosedDate" formatDate(bug?.bugClosedDate,"yyyy-MM-dd") "yyyy-MM-dd" )#end
+
                     #end
                 #end               
             #end

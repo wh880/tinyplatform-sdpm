@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.action.product;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,9 +8,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.action.product.util.StoryUtil;
+
 import org.tinygroup.sdpm.common.condition.ConditionCarrier;
-import org.tinygroup.sdpm.common.log.LogPrepareUtil;
-import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
+import org.tinygroup.sdpm.common.log.LogPrepareUtil;import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SqlUtil;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
@@ -19,7 +20,9 @@ import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
 import org.tinygroup.sdpm.product.dao.pojo.*;
 import org.tinygroup.sdpm.product.service.*;
 import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
-import org.tinygroup.sdpm.project.dao.pojo.*;
+
+import org.tinygroup.sdpm.project.dao.pojo.Project;
+import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
 import org.tinygroup.sdpm.project.service.inter.BuildService;
 import org.tinygroup.sdpm.project.service.inter.ProjectProductService;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
@@ -41,7 +44,6 @@ import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import java.io.IOException;
 import java.util.*;
 
@@ -114,6 +116,7 @@ public class StoryAction extends BaseController {
      * @param model
      * @return
      */
+    @RequiresPermissions("pro-demand-add")
     @RequestMapping("/addstory")
     public String addStory( HttpServletRequest request, Model model) {
         List<ServiceRequest> requests = requestService.getRequestList(null);
@@ -506,6 +509,7 @@ public class StoryAction extends BaseController {
     /**
      * 实现了需求的搜索按钮功能
      *
+
      * @param start         当前页
      * @param pagesize     每页数量
      * @param story        需求对象
@@ -519,6 +523,7 @@ public class StoryAction extends BaseController {
      * @return
      */
     @RequestMapping("/search")
+
     public String storySearchAction(@CookieValue String cookieProductId, int start, int pagesize, ProductStory story,
                                     String type, String choose, String groupOperate,
                                     SearchInfos searchInfos, String order, String ordertype,
@@ -529,6 +534,7 @@ public class StoryAction extends BaseController {
         String condition = StoryUtil.getStatusCondition(choose);
         carrier.putStatus("status",condition);
         if (story.getModuleId() != null && story.getModuleId() > 0) {
+                   
             carrier.putModuleIn("productStory.moduleId",String.valueOf(story.getModuleId()));
         }
         story.setModuleId(null);
@@ -544,6 +550,10 @@ public class StoryAction extends BaseController {
             carrier.putIdNotIn("productStory.storyId",ids);
         }
         carrier.putSearch("search",searchInfos,groupOperate);
+
+
+
+
 
         Pager<ProductStory> p = storyService.findStoryByCondition(start, pagesize, story, carrier,order, "asc".equals(ordertype) ? true : false);
         model.addAttribute("storyList", p);

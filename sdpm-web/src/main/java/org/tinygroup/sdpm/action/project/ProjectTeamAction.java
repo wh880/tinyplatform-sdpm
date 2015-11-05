@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.action.project;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,6 +34,7 @@ public class ProjectTeamAction extends BaseController {
     @Autowired
     private UserService userService;
 
+    @RequiresPermissions("team")
     @RequestMapping("/index")
     public String jumpTeamIndex() {
         return "project/team/index.page";
@@ -52,6 +54,7 @@ public class ProjectTeamAction extends BaseController {
         return "project/team/manageTableData.pagelet";
     }
 
+    @RequiresPermissions("pro-team-report")
     @RequestMapping("/preTeamManage")
     public String preTeamManage(Model model, HttpServletRequest request, HttpServletResponse response) {
         Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
@@ -71,7 +74,7 @@ public class ProjectTeamAction extends BaseController {
         }
         model.addAttribute("userList", userList);
         model.addAttribute("teamList", teamList);
-        return "project/team/teamManage.page";
+        return "project/team/teamManage";
     }
 
     @RequestMapping("/teamManageSave")
@@ -113,6 +116,7 @@ public class ProjectTeamAction extends BaseController {
         return "project/team/index.page";
     }
 
+    @RequiresPermissions("pro-team-delete")
     @ResponseBody
     @RequestMapping("/del")
     public Map<String, String> del(String id) {

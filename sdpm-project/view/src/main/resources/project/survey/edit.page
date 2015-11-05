@@ -124,7 +124,7 @@
         #@sdpmItem("项目状态")
             #@Tselect2F()
                 #@Tselect2Body(
-                    "projectType" project?.projectStatus {"class":"input-text","minimumResultsForSearch":
+                    "projectStatus" project?.projectStatus {"class":"input-text","minimumResultsForSearch":
                     "Infinity"}) ##,"multiple":"multiple"加上为多选项
                     #foreach(type : getDict("projectStatus"))
                     <option value=${type.value}>${type.text}</option>
@@ -136,8 +136,9 @@
     #@elementItem()
         #@sdpmItem("产品负责人")
             #@Tselect2F()
-                #@Tselect2Body("projectPo" project?.projectPO {"class":"input-text select2"})
-                    #foreach(u : team)
+                #@Tselect2Body("projectPo" project?.projectPo {"class":"input-text select2"})
+                <option></option>
+                    #foreach(u : teamList)
                     <option value="${u.orgUserId}">
                         ${u.orgUserRealName}
                     </option>
@@ -154,7 +155,8 @@
         #@sdpmItem("项目负责人")
             #@Tselect2F()
                 #@Tselect2Body("projectPm" project?.projectPm {"class":"input-text select2"})
-                    #foreach(u : team)
+                <option></option>
+                    #foreach(u : teamList)
                     <option value="${u.orgUserId}">
                         ${u.orgUserRealName}
                     </option>
@@ -171,7 +173,8 @@
         #@sdpmItem("测试负责人")
             #@Tselect2F()
                 #@Tselect2Body("projectQd" project?.projectQd {"class":"input-text select2"})
-                    #foreach(u : team)
+                <option></option>
+                    #foreach(u : teamList)
                     <option value="${u.orgUserId}">
                         ${u.orgUserRealName}
                     </option>
@@ -188,7 +191,8 @@
         #@sdpmItem("发布负责人")
             #@Tselect2F()
                 #@Tselect2Body("projectRd" project?.projectRd {"class":"input-text select2"})
-                    #foreach(u : team)
+                <option></option>
+                    #foreach(u : teamList)
                     <option value="${u.orgUserId}">
                         ${u.orgUserRealName}
                     </option>
@@ -203,7 +207,7 @@
     #end
     #@elementItem()
         #@sdpmItem("项目描述")
-            #@Teditor("projectDesc" "content" {"initialFrameHeight":"200","initialFrameWidth":
+            #@Teditor("projectDesc" "projectDesc" {"initialFrameHeight":"200","initialFrameWidth":
                 "702"})${project?.projectDesc}#end
         #end
     #end

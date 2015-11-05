@@ -7,20 +7,12 @@
 #set(name="task")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
-        #@div(divClass="dropdownBox")
-            #include("/project/dropdownMenu.page")
-        #end
-        #@tabHead()
-            #include("/project/protab.page")
-        #end
-    ##head end
-    <br/>
-    ##body end
+        #@div(divClass="dropdownBox")#include("/project/dropdownMenu.page")#end
+        #@tabHead()#include("/project/protab.page")#end
     #end
 #end
 #@tinyForm(
-    "thisform" TINY_CONTEXT_PATH+adminPath+"/project/task/finish" "post" {"class":"test","enctype":
-    "multipart/form-data"})
+    "thisform" TINY_CONTEXT_PATH+adminPath+"/project/task/finish" "post" {"class":"test","enctype":"multipart/form-data"})
     #hiddenInput(hiddenInputName="taskId" hiddenInputValue=task?.taskId)
 <div style="width:70%;float:left" class="pageleftpart">
     <div class="infoContent">
@@ -40,8 +32,8 @@
                 #@Tselect2F()
                     #@Tselect2Body("taskFinishedBy"  {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         #foreach(t : teamList)
-                            <option value="${t?.teamUserId}">
-                                ${t?.teamUserId==null?"":UserUtils.getUserById(t?.teamUserId)?.orgUserRealName}
+                            <option value="${t.orgUserId}">
+                                ${t.orgUserRealName}
                             </option>
                         #end
                     #end
