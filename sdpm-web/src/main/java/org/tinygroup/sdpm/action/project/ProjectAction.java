@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.action.project;
 
+import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -68,7 +69,7 @@ public class ProjectAction extends BaseController {
      * @param model
      * @return
      */
-    @RequiresPermissions("project-op-add")
+    @RequiresPermissions(value = {"project-op-add", "batch-distribute-task", "pro-Info2-copy", "pro-task-proposeversion"}, logical = Logical.OR)
     @RequestMapping("/form")
     public String form(Model model) {
         model.addAttribute("productList", ProductUtils.getAllProductListByUser());

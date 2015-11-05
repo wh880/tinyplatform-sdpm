@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.action.product;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.action.product.util.StoryUtil;
-import org.tinygroup.sdpm.common.log.LogPrepareUtil;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SqlUtil;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
@@ -18,7 +18,8 @@ import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
 import org.tinygroup.sdpm.product.dao.pojo.*;
 import org.tinygroup.sdpm.product.service.*;
 import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
-import org.tinygroup.sdpm.project.dao.pojo.*;
+import org.tinygroup.sdpm.project.dao.pojo.Project;
+import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
 import org.tinygroup.sdpm.project.service.inter.BuildService;
 import org.tinygroup.sdpm.project.service.inter.ProjectProductService;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
@@ -40,7 +41,6 @@ import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import java.io.IOException;
 import java.util.*;
 
@@ -113,6 +113,7 @@ public class StoryAction extends BaseController {
      * @param model
      * @return
      */
+    @RequiresPermissions("pro-demand-add")
     @RequestMapping("/addstory")
     public String addStory( HttpServletRequest request, Model model) {
         List<ServiceRequest> requests = requestService.getRequestList(null);
