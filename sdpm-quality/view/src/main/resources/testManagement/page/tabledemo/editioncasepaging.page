@@ -76,11 +76,11 @@
 								 #for(product : ProductUtils.getAllProductListByUser())
 	                            <option value="${product?.productId}" >${product?.productName}</option>
 	                            #end
-	                    	#end 
+	                    	#end
 
-	                    	#@Tselect2Fix()
-	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/product/page/tabledemo/addProduct.page" class="r ">增加</a>
-	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/product/page/tabledemo/product-listall.page">全部</a>#end
+						#@Tselect2Fix()
+                        <a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition" class="r ">增加</a>
+                        <a href="${TINY_CONTEXT_PATH+adminPath}/product/allproduct/addition">全部</a>#end
                 	  #end
                 	  
                 	   	
@@ -112,11 +112,11 @@
 							 #@Tselect2F()
 	                   		 #@Tselect2Body("storyId" testCase?.storyId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 	                       
-	                    	#end                
-	                      	#@Tselect2Fix()
-	                      	<a href="${TINY_CONTEXT_PATH+adminPath}/product/page/tabledemo/product-demand-add.page" class="r ">增加</a>
-	                      	<a href="${TINY_CONTEXT_PATH+adminPath}/product/page/project/togglebox.page">全部</a>#end
-                			#end
+	                    	#end
+								 #@Tselect2Fix()
+                                 <a href="${TINY_CONTEXT_PATH+adminPath}/product/story/addstory" class="r ">增加</a>
+                                 <a href="${TINY_CONTEXT_PATH+adminPath}/product/story?choose=1">全部</a>#end
+							 #end
 				#end
 
 			#@tr()

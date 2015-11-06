@@ -6,7 +6,50 @@
 <style>
     .select_boxes{margin-top:0}
 </style>
+<script type="text/javascript">
+    function ajaxRead(id,toName,opKey,opvalue,url,value,isBuild){
+        var selectCheck = "select[name="+toName+"]";
+        $(selectCheck).each(function(){
+            var sele = $(this);
+            var s;
+            $.ajax({
+                type: "POST",
+                url: "${TINY_CONTEXT_PATH+adminPath}"+url,
+                data: $(this).attr('data'),
+                dataType:"json",
+                success: function(data){
+                    sele.empty();
+                    var em;
+                    if("build"==(isBuild)){
+                        em = "<option value='0' selected  >trunk</option>";
+                    }else if("module"==isBuild){
+                        em = "<option value='0' selected  >/</option>";
+                    }
+                    sele.append(em);
+                    for(var i=0,l=data.length;i<l;i++){
+                        var em = "<option value='"+data[i][opKey]+"' >"+ data[i][opvalue] +"</option>";
+                        sele.append(em);
 
+                    }
+
+                    if(value!=null) {
+                        sele.val(value).trigger("change");
+                    }else {
+                        sele.val(data[0][opKey]).trigger("change");
+                    }
+
+
+                },
+                error: function(res){
+//                    alert("失败");
+                }
+            });
+
+
+        });
+
+    }
+</script>
 
 #set(name="qualityVersion")
 #@div()
@@ -49,44 +92,44 @@
     			<div class="infoContent">
     				<p class="titleName">编辑版本</p>
 			#@elementItem()
-				#@colLabel()所属项目：#end
+				#@colLabel()<span class="c-red">*</span>所属项目：#end
 				#@formControlDiv("col-8")
 					#@div(divClass="col-5")
 					 #@Tselect2F()
 	                   		 #@Tselect2Body("projectId" testTask?.projectId?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                   		 <option value="0">/</option>
-	                   		 #for(project : getAllProductListByUser)
-	                        <option value="${project?.projectId}">${project?.projectName}</option>
-	                        #end
+
 	                    	#end
                            <script type="text/javascript">
+                               ajaxRead("${sid}", "projectId", "projectId", "projectName", "/quality/bug/ajax/project?productId=${qualityProductId}", "${testTask?.projectId?:(projectId?:0)}");
                                 $("#${sid}").on("change",function(){
                                     var pId = $("#${sid}  option:selected").val();
-                                    ajaxRead("${sid}","buildName","buildId","buildName","/quality/version/ajax/build?buildProject="+pId+"&buildProduct=${qualityProductId?:0}",${testTask?.buildName?:0},"build");
-                                    ajaxRead("${sid}","testtaskOwner","orgUserId","orgUserRealName","/quality/version/ajax/user?projectId="+pId,"${testTask?.testtaskOwner?:0}");
+									if(pId>0){
+										ajaxRead("${sid}","buildName","buildId","buildName","/quality/version/ajax/build?buildProject="+pId+"&buildProduct=${qualityProductId?:0}",${testTask?.buildName?:0},"build");
+										ajaxRead("${sid}","testtaskOwner","orgUserId","orgUserRealName","/quality/version/ajax/user?projectId="+pId,"${testTask?.testtaskOwner?:0}");
+									}
                                 })
                             </script>
-	                    	#@Tselect2Fix()
-	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/addProject.page" class="r ">增加</a>
-	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/allProject.page">全部</a>
-	                    	#end
+						#@Tselect2Fix()
+                            <a href="${TINY_CONTEXT_PATH+adminPath}/project/form" class="r ">增加</a>
+                            <a href="${TINY_CONTEXT_PATH+adminPath}/project/list">全部</a>
+						#end
                 	  #end
                 	 #end
 					#@validateDiv("col-2")#end
 					#end
 			#end
 			#@elementItem()
-				#@colLabel()版本：#end
+				#@colLabel()<span class="c-red">*</span>版本：#end
 				#@formControlDiv("col-8")
 					#@div(divClass="col-5")
 					 #@Tselect2F()
 	                   		 #@Tselect2Body("buildName" testTask?.buildName?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 
-	                    	#end                
-	                    	#@Tselect2Fix()
-	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/addProject.page" class="r ">增加</a>
-	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/allProject.page">全部</a>
 	                    	#end
+						 #@Tselect2Fix()
+                             <a href="${TINY_CONTEXT_PATH+adminPath}/project/build/add" class="r ">增加</a>
+                             <a href="${TINY_CONTEXT_PATH+adminPath}/project/build/index">全部</a>
+						 #end
                 	  #end
                 	 #end
 					#@validateDiv("col-2")#end
@@ -100,11 +143,8 @@
 					 #@Tselect2F()
 	                   		 #@Tselect2Body("testtaskOwner" testTask?.testtaskOwner?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 
-	                    	#end                
-                        	#@Tselect2Fix()
-	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/addProject.page" class="r ">增加</a>
-	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/allProject.page">全部</a>
 	                    	#end
+						 #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH+adminPath}/org/user/form" class="r ">增加</a>#end
                 	  #end
                 	 #end
 					#@validateDiv("col-2")#end
@@ -129,7 +169,7 @@
 				#@validateDiv("col-2")#end
 			#end
 				#@elementItem()
-					#@colLabel()开始日期：#end
+					#@colLabel()<span class="c-red">*</span>开始日期：#end
 					#@formControlDiv("col-8")
 						#@div(divClass="col-5")
 						#@tinyDateInput("testtaskBegin" testTask?.testtaskBegin "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空"})#end
@@ -138,7 +178,7 @@
 					#@validateDiv("col-2")#end
 				#end
 				#@elementItem()
-					#@colLabel()结束日期：#end
+					#@colLabel()<span class="c-red">*</span>结束日期：#end
 					#@formControlDiv("col-8")
 						#@div(divClass="col-5")
 						#@tinyDateInput("testtaskEnd" testTask?.testtaskEnd "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空"})#end
@@ -206,46 +246,4 @@
 	#end
 	#end
 
-<script type="text/javascript">
-	function ajaxRead(id,toName,opKey,opvalue,url,value,isBuild){
-    		var selectCheck = "select[name="+toName+"]";
-    		$(selectCheck).each(function(){
-    			var sele = $(this);
-    			var s;
-    			$.ajax({
-    				type: "POST",
-    				url: "${TINY_CONTEXT_PATH+adminPath}"+url,
-    				data: $(this).attr('data'),
-    				dataType:"json",
-    				success: function(data){
-    					sele.empty();
-    					if("build"==(isBuild)){
-    					var em = "<option value='0' selected  >trunk</option>";
-    					}else{
-    					var em = "<option value='0' selected  >/</option>";
-    					}
-    					sele.append(em);
-    					for(var i=0,l=data.length;i<l;i++){
-    						var em = "<option value='"+data[i][opKey]+"' >"+ data[i][opvalue] +"</option>";
-    						sele.append(em);
 
-    					}
-
-    					if(value!=null) {
-    						sele.val(value).trigger("change");
-    					}else {
-    						sele.val(data[0][opKey]).trigger("change");
-    					}
-
-
-    				},
-    				error: function(res){
-    					alert("失败");
-    				}
-    			});
-
-
-    		});
-
-    	}
-</script>

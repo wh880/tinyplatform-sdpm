@@ -240,7 +240,7 @@ public class ProductStoryTable extends Table {
 	public final Column DELETED = new Column(this, "deleted");
 
 
-	private ProductStoryTable() {
+	public ProductStoryTable() {
 		super("product_story");
 	}
 

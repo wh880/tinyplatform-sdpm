@@ -332,40 +332,85 @@ public class QualityBug implements Serializable {
 	 */
 	private Integer deleted;
 
-	private String assignedUser;
 
 	private String productName;
 
 	private String moduleName;
 
-	private String userName;
+	private String planName;
 
-	private String openBuildName;
+	private String resolveBuild;
 
-	private String resolveBuildName;
+	private String fromCase;
 
-	public String getOpenBuildName() {
-		return openBuildName;
+	private String linkStoryName;
+
+	private String toTaskName;
+
+	private String linkCaseTitle;
+
+	private String linkBugTitle;
+
+	private String projectName;
+
+	private String linkTaskName;
+
+	private String toStoryTitle;
+
+	public String getModuleName() {
+		return moduleName;
 	}
 
-	public void setOpenBuildName(String openBuildName) {
-		this.openBuildName = openBuildName;
+	public void setModuleName(String moduleName) {
+		this.moduleName = moduleName;
 	}
 
-	public String getResolveBuildName() {
-		return resolveBuildName;
+	public String getResolveBuild() {
+		return resolveBuild;
 	}
 
-	public void setResolveBuildName(String resolveBuildName) {
-		this.resolveBuildName = resolveBuildName;
+	public void setResolveBuild(String resolveBuild) {
+		this.resolveBuild = resolveBuild;
 	}
 
-	public String getUserName() {
-		return userName;
+	public String getFromCase() {
+		return fromCase;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setFromCase(String fromCase) {
+		this.fromCase = fromCase;
+	}
+
+	public String getLinkCaseTitle() {
+		return linkCaseTitle;
+	}
+
+	public void setLinkCaseTitle(String linkCaseTitle) {
+		this.linkCaseTitle = linkCaseTitle;
+	}
+
+	public String getLinkBugTitle() {
+		return linkBugTitle;
+	}
+
+	public void setLinkBugTitle(String linkBugTitle) {
+		this.linkBugTitle = linkBugTitle;
+	}
+
+	public String getLinkTaskName() {
+		return linkTaskName;
+	}
+
+	public void setLinkTaskName(String linkTaskName) {
+		this.linkTaskName = linkTaskName;
+	}
+
+	public String getToStoryTitle() {
+		return toStoryTitle;
+	}
+
+	public void setToStoryTitle(String toStoryTitle) {
+		this.toStoryTitle = toStoryTitle;
 	}
 
 	public String getProductName() {
@@ -374,14 +419,6 @@ public class QualityBug implements Serializable {
 
 	public void setProductName(String productName) {
 		this.productName = productName;
-	}
-
-	public String getModuleName() {
-		return moduleName;
-	}
-
-	public void setModuleName(String moduleName) {
-		this.moduleName = moduleName;
 	}
 
 	public String getPlanName() {
@@ -400,36 +437,20 @@ public class QualityBug implements Serializable {
 		this.projectName = projectName;
 	}
 
-	public String getStoryName() {
-		return storyName;
+	public String getLinkStoryName() {
+		return linkStoryName;
 	}
 
-	public void setStoryName(String storyName) {
-		this.storyName = storyName;
+	public void setLinkStoryName(String linkStoryName) {
+		this.linkStoryName = linkStoryName;
 	}
 
-	public String getTaskName() {
-		return taskName;
+	public String getToTaskName() {
+		return toTaskName;
 	}
 
-	public void setTaskName(String taskName) {
-		this.taskName = taskName;
-	}
-
-	private String planName;
-
-	private String projectName;
-
-	private String storyName;
-
-	private String taskName;
-
-	public String getAssignedUser() {
-		return assignedUser;
-	}
-
-	public void setAssignedUser(String assignedUser) {
-		this.assignedUser = assignedUser;
+	public void setToTaskName(String toTaskName) {
+		this.toTaskName = toTaskName;
 	}
 
 	public void setBugId(Integer bugId){

@@ -70,5 +70,5 @@ public interface RoleManager {
      * @return
      */
     Integer delete(Integer id);
-
+    List<OrgRole> getRolesByIds(String...ids);
 }

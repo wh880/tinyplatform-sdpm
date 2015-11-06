@@ -106,6 +106,24 @@ public class QualityTestTask implements Serializable {
 	 */
 	private Integer deleted;
 
+	private String searchBuildName;
+	private String projectName;
+
+	public String getSearchBuildName() {
+		return searchBuildName;
+	}
+
+	public void setSearchBuildName(String searchBuildName) {
+		this.searchBuildName = searchBuildName;
+	}
+
+	public String getProjectName() {
+		return projectName;
+	}
+
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
+	}
 
 	public void setTestversionId(Integer testversionId){
 		this. testversionId = testversionId;

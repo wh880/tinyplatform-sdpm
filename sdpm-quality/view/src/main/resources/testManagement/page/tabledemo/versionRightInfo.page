@@ -7,11 +7,11 @@
     			#@tr()
     				#@th()所属项目#end
     				#@td()
-    				<a href="${TINY_CONTEXT_PATH+adminPath}/project/demand/index.page">${testTask?.projectId?ProjectUtils.getProject(String.valueOf(testTask?.projectId))?.projectName:""}#end
+    				<a href="${TINY_CONTEXT_PATH+adminPath}/project/view?projectId=${testTask?.projectId}">${testTask?.projectName}#end
     			#end
     			#@tr()
     				#@th()版本#end
-    				#@td()${testTask?.buildName}#end
+    				#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/project/build/productalbug?buildId=${testTask?.buildName}">${testTask?.searchBuildName}</a>#end
     			#end
     			#@tr()
     				#@th()负责人#end

@@ -98,6 +98,7 @@ public class Product implements Serializable {
     /**
      * 已删除
      */
+    private String productLineName;
     private Integer deleted;
     private Integer activeSum;
     private Integer changeSum;
@@ -108,6 +109,14 @@ public class Product implements Serializable {
     private Integer bugCount;
     private Integer resolveSum;
     private Integer assignSum;
+
+    public String getProductLineName() {
+        return productLineName;
+    }
+
+    public void setProductLineName(String productLineName) {
+        this.productLineName = productLineName;
+    }
 
     public Product() {
         setDeleted(DELETE_NO);

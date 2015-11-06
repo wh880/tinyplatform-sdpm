@@ -5,9 +5,13 @@
 		       		#@thead()
 		       		#end
 		       		#@tbody()
+						#@tr()
+							#@td()产品线名称#end
+							#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/productLine/find/overview?productLineId=${product?.productLineId}">${product?.productLineName}</a>#end
+						#end
 		       			#@tr()
-							#@td()<b>产品名称</b>#end
-		       				#@td()<b>${product?.productName}</b>#end
+							#@td()产品名称#end
+		       				#@td()${product?.productName}#end
 		       			#end
 		       			#@tr()
 							#@td()产品代号#end
@@ -38,15 +42,11 @@
 							#@td()分组白名单#end
 		       				#@td()
 								#if(product?.productWhiteList)
-									#for(str : product?.productWhiteList?.split(","))
-										#for(role : UserUtils.getAllRoleList())
-											#if(strFor.index!=1)
-												,
-											#end
-											#if(role?.orgRoleId == str)
-												${role?.orgRoleName}
-											#end
+									#for(role : whiteLists)
+										#if(roleFor.index!=1)
+											,
 										#end
+									${role?.orgRoleName}
 									#end
 								#end
 							#end
@@ -62,56 +62,56 @@
 		       		#end
 		       	#end
 		#end
-#*		#@div(divClass="infoContent")
+		#@div(divClass="infoContent")
 		        <p class="titleName">其他信息</p>
 		       	#@table()
 		       		#@thead()
 		       		#end
 		       		#@tbody()
 		       			#@tr()
-							#@td()<b>激活需求</b>#end
-		       				#@td()<b>4</b>#end
+							#@td()激活需求#end
+		       				#@td()${product?.activeSum}#end
 		       			#end
 		       			#@tr()
 							#@td()已变更需求#end
-		       				#@td()0#end
+		       				#@td()${product?.changeSum}#end
 		       			#end
 		       			#@tr()
 							#@td()草稿需求#end
-		       				#@td()0#end
+		       				#@td()${product?.draftSum}#end
 		       			#end
 		       			#@tr()
 							#@td()已关闭需求#end
-		       				#@td()0#end
+		       				#@td()${product?.closeSum}#end
 		       			#end
 		       			#@tr()
 							#@td()计划数#end
-		       				#@td()0#end
+		       				#@td()${product?.planCount}#end
 		       			#end
 		       			#@tr()
 							#@td()关联项目数#end
-		       				#@td()0#end
+		       				#@td()${projectSum}#end
 		       			#end
 		       			#@tr()
 							#@td()相关BUG#end
-		       				#@td()0#end
+		       				#@td()${product?.bugCount}#end
 		       			#end
 		       			#@tr()
 							#@td()文档数#end
-		       				#@td()0#end
+		       				#@td()${docSum}#end
 		       			#end
 		       			#@tr()
 							#@td()用例数#end
-		       				#@td()3#end
+		       				#@td()${testCaseSum}#end
 		       			#end
 		       			#@tr()
 							#@td()BUILD数#end
-		       				#@td()0#end
+		       				#@td()${buildSum}#end
 		       			#end	
 		       			#@tr()
 							#@td()发布数#end
-		       				#@td()0#end
+		       				#@td()${product?.releaseCount}#end
 		       			#end	
 		       		#end
 		       	#end
-		#end*#
+		#end

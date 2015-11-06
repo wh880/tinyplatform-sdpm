@@ -70,7 +70,7 @@
     	<div class="infoContent">
     		<p class="titleName">提交测试</p>
         #@elementItem()
-            #@colLabel()所属项目：#end
+            #@colLabel()<span class="c-red">*</span>所属项目：#end
             #@formControlDiv("col-8")
 					#@div(divClass="col-5")
 					 #@Tselect2F()
@@ -90,27 +90,27 @@
                              "projectId" testTask?.projectId?:(projectId?:0) {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 
 	                    	#end
-	                    	#@Tselect2Fix()
-	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/form" class="r ">增加</a>
-	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/list">全部</a>
-	                    	#end
+                         #@Tselect2Fix()
+                             <a href="${TINY_CONTEXT_PATH+adminPath}/project/form" class="r ">增加</a>
+                             <a href="${TINY_CONTEXT_PATH+adminPath}/project/list">全部</a>
+                         #end
                 	  #end
                 	 #end
 				#end
         #end
         #@elementItem()
-            #@colLabel()版本：#end
+            #@colLabel()<span class="c-red">*</span>版本：#end
             #@formControlDiv("col-8")
 					#@div(divClass="col-5")
 					 #@Tselect2F()
                          #@Tselect2Body("buildName" testTask?.buildName?:buildId {"class":
                              "input-text select2"}) ##,"multiple":"multiple"加上为多选项
 
-	                    	#end                
-	                    	#@Tselect2Fix()
-	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/form" class="r ">增加</a>
-	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/list">全部</a>
 	                    	#end
+                         #@Tselect2Fix()
+                             <a href="${TINY_CONTEXT_PATH+adminPath}/project/build/add" class="r ">增加</a>
+                             <a href="${TINY_CONTEXT_PATH+adminPath}/project/build/index">全部</a>
+                         #end
                 	  #end
                 	 #end
 				#end
@@ -123,11 +123,8 @@
 					 #@Tselect2F()
 	                   		 #@Tselect2Body("testtaskOwner" testTask?.testtaskOwner {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 
-	                    	#end                
-	                    	#@Tselect2Fix()
-	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/form" class="r ">增加</a>
-	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/list">全部</a>
 	                    	#end
+                         #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH+adminPath}/org/user/form" class="r ">增加</a>#end
                 	  #end
                 	 #end
 				#end
@@ -151,7 +148,7 @@
         #end
 
         #@elementItem()
-            #@colLabel()开始日期：#end
+            #@colLabel()<span class="c-red">*</span>开始日期：#end
             #@formControlDiv("col-8")
             	#@div(divClass="col-5")
                 #@tinyDateInput("testtaskBegin" formatDate(testTask?.testtaskBegin,"yyyy-MM-dd") "yyyy-MM-dd" {"datatype":"*","nullmsg":"日期不能为空","placeholder":""})#end
@@ -160,7 +157,7 @@
             #@validateDiv("col-2")#end
         #end
         #@elementItem()
-            #@colLabel()结束日期：#end
+            #@colLabel()<span class="c-red">*</span>结束日期：#end
             #@formControlDiv("col-8")
                 #@div(divClass="col-5")
                 #@tinyDateInput("testtaskEnd" formatDate(testTask?.testtaskEnd,"yyyy-MM-dd") "yyyy-MM-dd" {"datatype":"*","nullmsg":"日期不能为空","placeholder":""})#end

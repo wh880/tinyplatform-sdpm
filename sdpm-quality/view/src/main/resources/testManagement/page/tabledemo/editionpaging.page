@@ -84,7 +84,6 @@
         });
     </script>
                         #@Tselect2Body("productId" bug?.productId?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                            <option value="0">/</option>
                             #foreach(product : ProductUtils.getAllProductListByUser())
                                 #if(product?.deleted==0)
                                 <option value="${product?.productId}">${product?.productName}</option>
@@ -103,7 +102,6 @@
                     #@td()
                         #@Tselect2F()
                         #@Tselect2Body("moduleId" bug?.moduleId?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                        <option value="0">/</option>
                         #end
                         <script type="text/javascript">
                             $(function() {
@@ -122,7 +120,7 @@
                     #@th()所属计划#end
                     #@td()
                         #@Tselect2F()
-                        #@Tselect2Body("planId" bug?.planId?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        #@Tselect2Body("planId" bug?.planId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 
                         #end
                             #@Tselect2Fix()
@@ -178,7 +176,6 @@
                     #@td()
                         #@Tselect2F()
                         #@Tselect2Body("bugAssignedTo" bug?.bugAssignedTo?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                        <option value="0">/</option>
                         #foreach(user : userList)
                         <option value="${user?.orgUserId}">${user?.orgUserRealName}</option>
                         #end
@@ -215,7 +212,7 @@
                 #@tr()
                     #@th()关键词#end
                     #@td()
-                        #tinyInput("text" "bugKeywords" ""{"datatype":"","id":"版本","class":"input-text"})
+                        #tinyInput("text" "bugKeywords" bug?.bugKeywords {"datatype":"","id":"版本","class":"input-text"})
                     #end
                 #end
                 #@tr()
@@ -234,6 +231,7 @@
                 #end
             #end
         #end
+#end
     #@div(divClass="infoContent")
         <p class="titleName">项目/需求/任务</p>
     ##该样式在comm.css样式中自定义
@@ -254,7 +252,6 @@
                                 })
                             </script>
                         #@Tselect2Body("projectId" bug?.projectId?:(projectList.size()>0?projectList.get(0).projectId:0) {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                        <option value="0">/</option>
                          #foreach(project : ProjectUtils.getUserProjectList())
                         <option value="${project?.projectId}">${project?.projectName}</option>
                         #end
@@ -297,7 +294,7 @@
                 #end
             #end
         #end
-    #end
+
     #@div(divClass="infoContent")
         <p class="titleName">BUG的一生</p>
     ##该样式在comm.css样式中自定义
@@ -310,7 +307,6 @@
                     #@td()
                         #@Tselect2F()
                         #@Tselect2Body("bugOpenedBy" bug?.bugOpenedBy?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                        <option value="0">/</option>
                         #foreach(user : userList)
                         <option value="${user?.orgUserId}">${user?.orgUserRealName}</option>
                         #end
@@ -322,14 +318,14 @@
                 #@tr()
                     #@th()<span class="c-red">*</span>影响版本#end
                     #@td()
-                   #@Tselect2F()
-						#@Tselect2Body("bugOpenedBuild" bug?.bugOpenedBuild {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-
-	                    	#end
-                       #@Tselect2Fix()
-                       <a href="${TINY_CONTEXT_PATH+adminPath}/project/build/add" class="r ">增加</a>
-                       <a href="${TINY_CONTEXT_PATH+adminPath}/project/build/index">全部</a>
-                       #end                	  #end
+                        #@Tselect2F()
+                            #@Tselect2Body("bugOpenedBuild" bug?.bugOpenedBuild {"class":"input-text select2","multiple":"multiple"}) ##,"multiple":"multiple"加上为多选项
+                            #end
+                            #@Tselect2Fix()
+                            <a href="${TINY_CONTEXT_PATH+adminPath}/project/build/add" class="r ">增加</a>
+                            <a href="${TINY_CONTEXT_PATH+adminPath}/project/build/index">全部</a>
+                            #end
+                        #end
                     #end
                 #end
                 #@tr()
@@ -337,7 +333,7 @@
                     #@td()
                             #@Tselect2F()
                             #@Tselect2Body("bugResolvedBy" bug?.bugResolvedBy?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                            <option value="0">/</option>
+                            <option value=""></option>
                             #foreach(user : userList)
 
                             <option value="${user?.orgUserId}">${user?.orgUserRealName}</option>
@@ -352,7 +348,7 @@
                 #@tr()
                     #@th()解决日期#end
                     #@td()
-
+                        ${bug?.bugResolvedDate?formatDate(bug?.bugResolvedDate,"yyyy-MM-dd hh-mm-ss"):""}
                     #end
                 #end
                 #@tr()
@@ -376,6 +372,7 @@
                     #@td()
                     #@Tselect2F()
 	                   		 #@Tselect2Body("bugResolution" bug?.bugResolution {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                             <option value=""></option>
 	                         #for(re : getDict("bugResolution"))
                                     #@tinyOptionItem(re.value)${re.text}#end
                             #end
@@ -387,8 +384,8 @@
                     #@th()由谁关闭#end
                     #@td()
                             #@Tselect2F()
-                            #@Tselect2Body("bugClosedBy" bug?.bugClosedBy?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-
+                            #@Tselect2Body("bugClosedBy" bug?.bugClosedBy {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                            <option value=""></option>
                             #foreach(user : userList)
 
                             <option value="${user?.orgUserId}">${user?.orgUserRealName}</option>
@@ -409,7 +406,7 @@
                 #@tr()
                     #@th()关闭日期#end
                     #@td()
-
+                        ${bug?.bugClosedDate?formatDate(bug?.bugClosedDate,"yyyy-MM-dd hh-mm-ss"):""}
                     #end
                 #end               
             #end

@@ -223,7 +223,7 @@ public class ProjectTaskTable extends Table {
 	public final Column TASK_DELETED = new Column(this, "task_deleted");
 
 
-	private ProjectTaskTable() {
+	public ProjectTaskTable() {
 		super("project_task");
 	}
 

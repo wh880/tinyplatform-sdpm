@@ -24,14 +24,21 @@ import org.tinygroup.jdbctemplatedslsession.callback.*;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
 import org.tinygroup.sdpm.common.util.update.UpdateUtil;
+import org.tinygroup.sdpm.product.dao.constant.ProductStoryTable;
+import org.tinygroup.sdpm.project.dao.constant.ProjectTaskTable;
 import org.tinygroup.sdpm.quality.dao.QualityBugDao;
+import org.tinygroup.sdpm.quality.dao.constant.QualityBugTable;
+import org.tinygroup.sdpm.quality.dao.constant.QualityTestCaseTable;
 import org.tinygroup.sdpm.quality.dao.pojo.BugCount;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.tinysqldsl.*;
+import org.tinygroup.tinysqldsl.base.Column;
 import org.tinygroup.tinysqldsl.base.Condition;
 import org.tinygroup.tinysqldsl.base.FragmentSql;
+import org.tinygroup.tinysqldsl.base.Table;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
+import org.tinygroup.tinysqldsl.formitem.SubSelect;
 import org.tinygroup.tinysqldsl.select.Join;
 import org.tinygroup.tinysqldsl.select.OrderByElement;
 import sun.swing.StringUIClientPropertyKey;
@@ -43,6 +50,13 @@ import java.util.List;
 import static org.tinygroup.sdpm.org.dao.constant.OrgUserTable.ORG_USERTABLE;
 import static org.tinygroup.sdpm.quality.dao.constant.QualityBugTable.QUALITY_BUGTABLE;
 import static org.tinygroup.sdpm.product.dao.constant.ProductStoryTable.PRODUCT_STORYTABLE;
+import static org.tinygroup.sdpm.product.dao.constant.ProductPlanTable.PRODUCT_PLANTABLE;
+import static org.tinygroup.sdpm.product.dao.constant.ProductTable.PRODUCTTABLE;
+import static org.tinygroup.sdpm.system.dao.constant.SystemModuleTable.SYSTEM_MODULETABLE;
+import static org.tinygroup.sdpm.quality.dao.constant.QualityTestCaseTable.QUALITY_TEST_CASETABLE;
+import static org.tinygroup.sdpm.project.dao.constant.ProjectBuildTable.PROJECT_BUILDTABLE;
+import static org.tinygroup.sdpm.project.dao.constant.ProjectTaskTable.PROJECT_TASKTABLE;
+import static org.tinygroup.sdpm.project.dao.constant.ProjectTable.PROJECTTABLE;
 import static org.tinygroup.tinysqldsl.Delete.delete;
 import static org.tinygroup.tinysqldsl.Insert.insertInto;
 import static org.tinygroup.tinysqldsl.Select.select;
@@ -151,15 +165,33 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
 		return getDslTemplate().getByKey(pk, QualityBug.class, new SelectGenerateCallback<Serializable>() {
 		@SuppressWarnings("rawtypes")
 		public Select generate(Serializable t) {
-			return select(QUALITY_BUGTABLE.ALL,FragmentSql.fragmentSelect("product_name productName,module_name moduleName,plan_name planName,project_name projectName,story_title storyName,task_name taskName,pb1.build_name openBuildName,pb2.build_name resolveBuildName"))
-					.from(FragmentSql.fragmentFrom("quality_bug LEFT JOIN product p ON quality_bug.product_id = p.product_id\n" +
-							" LEFT JOIN system_module m ON quality_bug.module_id = m.module_id\n" +
-							" LEFT JOIN product_plan pp ON quality_bug.plan_id = pp.plan_id\n" +
-							" LEFT JOIN project  pj ON quality_bug.project_id = pj.project_id\n" +
-							" LEFT JOIN product_story ps ON quality_bug.story_id = ps.story_id\n" +
-							" LEFT JOIN project_task pt ON quality_bug.task_id = pt.task_id \n" +
-							" LEFT JOIN project_build pb1 ON quality_bug.bug_opened_build = pb1.build_id\n" +
-							" LEFT JOIN project_build pb2 ON quality_bug.bug_resolved_build = pb2.build_id")).where(QUALITY_BUGTABLE.BUG_ID.eq(t));
+			return select(QUALITY_BUGTABLE.ALL,PRODUCTTABLE.PRODUCT_NAME.as("productName"),
+					PROJECTTABLE.PROJECT_NAME.as("projectName"),
+					SYSTEM_MODULETABLE.MODULE_NAME.as("moduleName"),
+					PRODUCT_PLANTABLE.PLAN_NAME.as("planName"),
+					PROJECT_BUILDTABLE.BUILD_NAME.as("resolveBuild"),
+					QUALITY_TEST_CASETABLE.CASE_TITLE.as("fromCase"),
+					PRODUCT_STORYTABLE.STORY_TITLE.as("linkStoryName"),
+					PROJECT_TASKTABLE.TASK_NAME.as("toTaskName"),
+					new Column(new Table("linkCaseTable"),"case_title").as("linkCaseTitle"),
+					new Column(new Table("linkBugTable"),"bug_title").as("linkBugTitle"),
+					new Column(new Table("linkTaskTable"),"task_name").as("linkTaskName"),
+					new Column(new Table("toStoryTable"),"story_title").as("toStoryTitle")
+					)
+					.from(QUALITY_BUGTABLE).join(
+							Join.leftJoin(PRODUCTTABLE, PRODUCTTABLE.PRODUCT_ID.eq(QUALITY_BUGTABLE.PRODUCT_ID)),
+							Join.leftJoin(PROJECTTABLE, PROJECTTABLE.PROJECT_ID.eq(QUALITY_BUGTABLE.PROJECT_ID)),
+							Join.leftJoin(SYSTEM_MODULETABLE, SYSTEM_MODULETABLE.MODULE_ID.eq(QUALITY_BUGTABLE.MODULE_ID)),
+							Join.leftJoin(PRODUCT_PLANTABLE, PRODUCT_PLANTABLE.PLAN_ID.eq(QUALITY_BUGTABLE.PLAN_ID)),
+							Join.leftJoin(PROJECT_BUILDTABLE, PROJECT_BUILDTABLE.BUILD_ID.eq(QUALITY_BUGTABLE.BUG_RESOLVED_BUILD)),
+							Join.leftJoin(QUALITY_TEST_CASETABLE, QUALITY_BUGTABLE.BUG_FROM_CASE.eq(QUALITY_TEST_CASETABLE.CASE_ID)),
+							Join.leftJoin(PRODUCT_STORYTABLE, PRODUCT_STORYTABLE.STORY_ID.eq(QUALITY_BUGTABLE.STORY_ID)),
+							Join.leftJoin(PROJECT_TASKTABLE, PROJECT_TASKTABLE.TASK_ID.eq(QUALITY_BUGTABLE.TO_TASK_ID)),
+							Join.leftJoin(QUALITY_TEST_CASETABLE.as("linkCaseTable"), QUALITY_BUGTABLE.LINK_CASE.eq(((QualityTestCaseTable) QUALITY_TEST_CASETABLE.as("linkCaseTable")).CASE_ID)),
+							Join.leftJoin(QUALITY_BUGTABLE.as("linkBugTable"), QUALITY_BUGTABLE.LINK_BUG.eq(((QualityBugTable) QUALITY_BUGTABLE.as("linkBugTable")).BUG_ID)),
+							Join.leftJoin(PROJECT_TASKTABLE.as("linkTaskTable"), QUALITY_BUGTABLE.TASK_ID.eq(((ProjectTaskTable) PROJECT_TASKTABLE.as("linkTaskTable")).TASK_ID)),
+							Join.leftJoin(PRODUCT_STORYTABLE.as("toStoryTable"), QUALITY_BUGTABLE.TO_STORY_ID.eq(((ProductStoryTable) PRODUCT_STORYTABLE.as("toStoryTable")).STORY_ID))
+					).where(QUALITY_BUGTABLE.BUG_ID.eq(t));
 			}
 		});
 	}

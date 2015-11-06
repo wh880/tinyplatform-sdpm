@@ -19,6 +19,8 @@ package org.tinygroup.sdpm.org.dao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
 import org.tinygroup.sdpm.org.dao.pojo.OrgRole;
 
-public interface OrgRoleDao extends BaseDao<OrgRole, Integer> {
+import java.util.List;
 
+public interface OrgRoleDao extends BaseDao<OrgRole, Integer> {
+    List<OrgRole> getRolesByIds(String...ids);
 }

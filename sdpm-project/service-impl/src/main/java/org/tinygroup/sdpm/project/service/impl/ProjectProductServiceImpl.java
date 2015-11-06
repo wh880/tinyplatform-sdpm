@@ -34,9 +34,9 @@ public class ProjectProductServiceImpl implements ProjectProductService {
         return projectProductManager.findList(projectProduct);
     }
 
-    public List<ProjectProduct> findProjects(Integer projectId) {
+    public List<ProjectProduct> findProjects(Integer productId) {
         ProjectProduct projectProduct = new ProjectProduct();
-        projectProduct.setProjectId(projectId);
+        projectProduct.setProductId(productId);
         return projectProductManager.findList(projectProduct);
     }
 

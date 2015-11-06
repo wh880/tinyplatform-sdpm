@@ -147,7 +147,22 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
 			return getDslTemplate().getByKey(pk, Product.class, new SelectGenerateCallback<Serializable>() {
 				@SuppressWarnings("rawtypes")
 				public Select generate(Serializable t) {
-					return selectFrom(PRODUCTTABLE).where(PRODUCTTABLE.PRODUCT_ID.eq(t));
+					return MysqlSelect.select(PRODUCTTABLE.ALL,PRODUCT_LINETABLE.PRODUCT_LINE_NAME.as("productLineName"), FragmentSql.fragmentSelect(
+							"(SELECT COUNT(story_id)FROM product_story a JOIN product b ON a.`product_id`=b.`product_id` WHERE a.`story_status`=1 AND b.product_id = product.product_id) activeSum,\n" +
+									"(SELECT COUNT(story_id)FROM product_story a JOIN product b ON a.`product_id`=b.`product_id` WHERE a.`story_status`=3 AND b.product_id = product.product_id) changeSum,\n" +
+									"(SELECT COUNT(story_id)FROM product_story a JOIN product b ON a.`product_id`=b.`product_id` WHERE a.`story_status`=0 AND b.product_id = product.product_id) draftSum,\n" +
+									"(SELECT COUNT(story_id)FROM product_story a JOIN product b ON a.`product_id`=b.`product_id` WHERE a.`story_status`=2 AND b.product_id = product.product_id) closeSum,\n" +
+									"COUNT(DISTINCT(product_plan.plan_id)) planCount,\n" +
+									"COUNT(DISTINCT(product_release.release_id)) releaseCount,\n" +
+									"COUNT(DISTINCT(quality_bug.bug_id)) bugCount,\n" +
+									"(SELECT COUNT(bug_id)FROM quality_bug a JOIN product b ON a.`product_id`=b.`product_id` WHERE a.`bug_status`<2 AND b.product_id = product.product_id) resolveSum,\n" +
+									"(SELECT COUNT(bug_id)FROM quality_bug a JOIN product b ON a.`product_id`=b.`product_id` WHERE a.`bug_assigned_to` IS NULL AND b.product_id = product.product_id) assignSum")).
+							from(FragmentSql.fragmentFrom(" product \n" +
+									"LEFT JOIN product_plan ON product.`product_id` = product_plan.`product_id` \n" +
+									"LEFT JOIN product_release ON product.`product_id` = product_release.`product_id` \n" +
+									"LEFT JOIN quality_bug ON product.`product_id` = quality_bug.`product_id`")).join(
+							leftJoin(PRODUCT_LINETABLE,PRODUCTTABLE.PRODUCT_LINE_ID.eq(PRODUCT_LINETABLE.PRODUCT_LINE_ID))
+					).where(PRODUCTTABLE.PRODUCT_ID.eq(t));
 					}
 				});
 		} catch (EmptyResultDataAccessException e) {

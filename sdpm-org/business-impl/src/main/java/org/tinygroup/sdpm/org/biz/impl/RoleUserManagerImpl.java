@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.sdpm.org.biz.inter.RoleUserManager;
 import org.tinygroup.sdpm.org.dao.OrgRoleUserDao;
+import org.tinygroup.sdpm.org.dao.pojo.OrgRole;
 import org.tinygroup.sdpm.org.dao.pojo.OrgRoleUser;
 
 import java.util.ArrayList;
@@ -62,5 +63,9 @@ public class RoleUserManagerImpl implements RoleUserManager {
 
     public void batchAdd(List<OrgRoleUser> orgRoleUserList) {
         orgRoleUserDao.batchInsert(orgRoleUserList);
+    }
+
+    public List<OrgRoleUser> getRolesByIds(String... ids) {
+        return orgRoleUserDao.getRolesByIds(ids);
     }
 }

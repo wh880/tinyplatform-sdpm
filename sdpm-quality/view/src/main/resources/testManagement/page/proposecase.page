@@ -25,6 +25,7 @@
 
     #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/quality/testCase/save" "post" {"class":"","enctype":"multipart/form-data"})
     #hiddenInput(hiddenInputName="caseId" hiddenInputValue=testCase?.caseId)
+    #hiddenInput(hiddenInputName="caseFromBug" hiddenInputValue=bugId)
 	<div style="width:100%">
     	<div class="infoContent">
     		<p class="titleName">建用例</p>
@@ -38,9 +39,9 @@
                                 <option value="${product?.productId}">${product?.productName}</option>
                                 #end
                      #end
-	                    	#@Tselect2Fix()
-	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/product/page/tabledemo/addProduct.page" class="r ">增加</a>
-	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/product/page/tabledemo/product-listall.page">全部</a>#end
+                #@Tselect2Fix()
+                    <a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition" class="r ">增加</a>
+                    <a href="${TINY_CONTEXT_PATH+adminPath}/product/allproduct/addition">全部</a>#end
                     <script type="text/javascript">
                         $("#${sid}").on("change",function(){
                             var pId = $("#${sid}  option:selected").val();
@@ -108,9 +109,9 @@
             #@formControlDiv("col-8")
                 #@div(divClass="col-5")
 					#@tinySelect("priority" testCase?.priority {"class":"select2"})
-							#@tinyOptionItem("3")1#end
-							#@tinyOptionItem("1")2#end
-							#@tinyOptionItem("2")3#end
+                        #for(stage : getDict("casePriority"))
+                        <option value="${stage.value}">${stage.text}</option>
+                    #end
 					#end
                 #end
             #end
@@ -125,10 +126,11 @@
 	                   		 #@Tselect2Body("storyId" testCase?.storyId?:storyId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 
                              #end
-	                      	#@Tselect2Fix()
-                                <a href="${TINY_CONTEXT_PATH+adminPath}/product/page/tabledemo/product-demand-add.page" class="r ">增加</a>
-                                <a href="${TINY_CONTEXT_PATH+adminPath}/product/page/project/togglebox.page">全部</a>
-                            #end
+                            #@Tselect2Fix()
+
+                                <a href="${TINY_CONTEXT_PATH+adminPath}/product/story/addstory" class="r ">增加</a>
+                                <a href="${TINY_CONTEXT_PATH+adminPath}/product/story?choose=1">全部</a>
+                        #end
                             <script type="text/javascript">
                                 $(document).ready(function(){
                                     var pId = $("select[name=productId]  option:selected").val();

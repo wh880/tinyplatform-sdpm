@@ -223,6 +223,45 @@ public class QualityTestCase implements Serializable {
 	 */
 	private String caseLastRunResult;
 
+	private String moduleName;
+
+	private String storyTitle;
+
+	private String caseFromBugTitle;
+
+	private String linkCaseTile;
+
+	public String getModuleName() {
+		return moduleName;
+	}
+
+	public void setModuleName(String moduleName) {
+		this.moduleName = moduleName;
+	}
+
+	public String getStoryTitle() {
+		return storyTitle;
+	}
+
+	public void setStoryTitle(String storyTitle) {
+		this.storyTitle = storyTitle;
+	}
+
+	public String getCaseFromBugTitle() {
+		return caseFromBugTitle;
+	}
+
+	public void setCaseFromBugTitle(String caseFromBugTitle) {
+		this.caseFromBugTitle = caseFromBugTitle;
+	}
+
+	public String getLinkCaseTile() {
+		return linkCaseTile;
+	}
+
+	public void setLinkCaseTile(String linkCaseTile) {
+		this.linkCaseTile = linkCaseTile;
+	}
 
 	public void setCaseId(Integer caseId){
 		this. caseId = caseId;

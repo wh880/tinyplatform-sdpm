@@ -147,14 +147,14 @@ return format;
 <div class="infoContent">
         <p class="titleName">创建新计划</p>
      #@elementItem()
-        #@colLabel()产品:#end
+        #@colLabel("col-1")产品:#end
         #@formControlDiv("col-4")
         	  ${product?.productName}
         #end
         #@validateDiv("col-2")#end
       #end
     #@elementItem()
-        #@colLabel()<span class="c-red">*</span>名称:#end
+        #@colLabel("col-1")<span class="c-red">*</span>名称:#end
         #@formControlDiv("col-4")
           #tinyInput("text" "planName" ""{"datatype":"*","nullmsg":"用户名不能为空！","id":"planName","class":"input-text"})
         #end
@@ -162,18 +162,18 @@ return format;
     #end
 
     #@elementItem()
-        #@colLabel()<span class="c-red">*</span>开始日期:#end
+        #@colLabel("col-1")<span class="c-red">*</span>开始日期:#end
         #@formControlDiv("col-4")
            #@tinyDateInput("planBeginDate" "" "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空","id":"planBeginDate","readonly":"readonly"})#end
         #end
         #@validateDiv("col-2")#end
     #end
     #@elementItem()
-        #@colLabel()<span class="c-red">*</span>结束日期:#end
+        #@colLabel("col-1")<span class="c-red">*</span>结束日期:#end
         #@formControlDiv("col-4")
         	 #@tinyDateInput("planEndDate" "" "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空","readonly":"readonly"})#end
         #end
-         <div  class="col-6"> 
+         <div  class="col-6">
          	
 			 #@radioBox()
 	          	#@tinyRadioes("endTime" "one-week" "time")一周#end
@@ -196,13 +196,11 @@ return format;
 	          
 	          
         </div>
-          
-           	
-	          
+
         #@validateDiv("col-2")#end
     #end
     #@elementItem()
-        #@colLabel()描述:#end
+        #@colLabel("col-1")描述:#end
         #@formControlDiv("col-10")
            #@Teditor("planSpec" "planSpec" {"initialFrameHeight":"250" ,"placeholder":"","datatype":"*0-500"})#end
         #end
