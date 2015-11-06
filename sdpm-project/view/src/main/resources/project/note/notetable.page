@@ -31,8 +31,9 @@
                                 #@Tselect2Body(
                                     "orgUserAccount" u?.orgUserAccount {"class":
                                     "input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                                    <option></option>
                                     #foreach(u:user)
-                                        <option value="${u?.orgUserAccount}">${u?.orgUserAccount}</option>
+                                        <option value="${u?.orgUserAccount}">${u?.orgUserRealName}</option>
                                     #end
 
                                 #end
