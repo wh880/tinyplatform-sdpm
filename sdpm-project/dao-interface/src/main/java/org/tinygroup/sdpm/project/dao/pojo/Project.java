@@ -21,7 +21,6 @@ import java.util.Date;
 
 /**
  * 项目
- *
  */
 public class Project implements Serializable {
 
@@ -192,6 +191,7 @@ public class Project implements Serializable {
     public Project() {
         setProjectDeleted(DELETE_NO);
     }
+
     public float getAllLeft() {
         return allLeft;
     }
