@@ -11,6 +11,7 @@ import org.tinygroup.sdpm.project.dao.impl.FieldUtil;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.tinysqldsl.Pager;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -69,7 +70,18 @@ public class ProjectManagerImpl implements ProjectManager {
     }
 
     public Integer batchDelete(Integer[] projectIds) {
-        return projectDao.deleteByKeys(projectIds);
+        ArrayList<Project> list = new ArrayList<Project>();
+        for (Integer projectId : projectIds) {
+            Project project = new Project();
+            project.setProjectId(projectId);
+            project.setProjectDeleted(Project.DELETE_YES);
+            list.add(project);
+        }
+        int[] effective = projectDao.batchUpdate(list);
+        if (effective == null) {
+            return 0;
+        }
+        return effective.length;
     }
 
     public List<Project> findListByIds(List<Integer> ids) {
@@ -81,7 +93,11 @@ public class ProjectManagerImpl implements ProjectManager {
     }
 
     public Project find(Integer projectId) {
-        return projectDao.getByKey(projectId);
+        try {
+            return projectDao.getByKey(projectId);
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public List<Project> findList(Project project, String order, String ordertype) {
@@ -98,7 +114,6 @@ public class ProjectManagerImpl implements ProjectManager {
     }
 
     public List<Project> getProjectByStoryId(Integer storyId) {
-
         return projectDao.getProjectByStoryId(storyId);
     }
 }

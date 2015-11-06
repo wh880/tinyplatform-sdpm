@@ -24,7 +24,6 @@ import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
 import org.tinygroup.sdpm.project.dao.ProjectDao;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.tinysqldsl.*;
-import org.tinygroup.tinysqldsl.base.FragmentSql;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 import org.tinygroup.tinysqldsl.select.Join;
@@ -35,6 +34,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.tinygroup.sdpm.project.dao.constant.ProjectStoryTable.PROJECT_STORYTABLE;
 import static org.tinygroup.sdpm.project.dao.constant.ProjectTable.PROJECTTABLE;
 import static org.tinygroup.sdpm.project.dao.constant.ProjectTaskTable.PROJECT_TASKTABLE;
 import static org.tinygroup.sdpm.project.dao.constant.ProjectTeamTable.PROJECT_TEAMTABLE;
@@ -49,7 +49,7 @@ import static org.tinygroup.tinysqldsl.formitem.SubSelect.subSelect;
 @Repository
 public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
 
-    public Pager<Project> findPageWithStatistics(int start, int limit, Project project, final Integer[] projectIds,
+    public Pager<Project> findPageWithStatistics(int start, int limit,  Project project, final Integer[] projectIds,
                                                  final OrderBy... args) {
         if (project == null) {
             project = new Project();
@@ -64,7 +64,7 @@ public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
                         FragmentSelectItemSql.fragmentSelect("SUM(project_task.task_consumed)/(SUM(project_task.task_consumed)+SUM(project_task.task_left)) as percent")
                 ).from(PROJECTTABLE)
                         .join(Join.leftJoin(PROJECT_TASKTABLE, PROJECT_TASKTABLE.TASK_PROJECT.eq(PROJECTTABLE.PROJECT_ID)))
-                        .where(PROJECTTABLE.PROJECT_ID.in(projectIds))
+                        .where(and(PROJECTTABLE.PROJECT_ID.in(projectIds),PROJECTTABLE.PROJECT_ID.eq(t.getProjectId())))
                         .groupBy(PROJECTTABLE.PROJECT_ID);
                 return addOrderByElements(select, args);
             }
@@ -80,7 +80,7 @@ public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
         ).from(PROJECTTABLE).join(
                 Join.leftJoin(PROJECT_TASKTABLE,
                         PROJECT_TASKTABLE.TASK_PROJECT.equal(PROJECTTABLE.PROJECT_ID)))
-                .where(PROJECTTABLE.PROJECT_ID.eq(project.getProjectId()))
+                .where(and(PROJECTTABLE.PROJECT_DELETED.eq(Project.DELETE_NO),PROJECTTABLE.PROJECT_ID.eq(project.getProjectId())))
                 .groupBy(PROJECTTABLE.PROJECT_ID);
         return getDslSession().fetchList(select, Project.class);
     }
@@ -190,7 +190,10 @@ public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
         return getDslTemplate().getByKey(pk, Project.class, new SelectGenerateCallback<Serializable>() {
             @SuppressWarnings("rawtypes")
             public Select generate(Serializable t) {
-                return selectFrom(PROJECTTABLE).where(PROJECTTABLE.PROJECT_ID.eq(t));
+                return selectFrom(PROJECTTABLE).where(and(
+                        PROJECTTABLE.PROJECT_ID.eq(t),
+                        PROJECTTABLE.PROJECT_DELETED.eq(Project.DELETE_NO)
+                ));
             }
         });
     }
@@ -281,47 +284,6 @@ public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
     }
 
 
-    public Pager<Project> queryPagerByIds(int start, int limit, Project project, final OrderBy... orderArgs) {
-        if (project == null) {
-            project = new Project();
-        }
-        return getDslTemplate().queryPager(start, limit, project, false, new SelectGenerateCallback<Project>() {
-
-            public Select generate(Project t) {
-                Select select = MysqlSelect.selectFrom(PROJECTTABLE).where(
-                        and(
-                                PROJECTTABLE.PROJECT_IS_CAT.eq(t.getProjectIsCat()),
-                                PROJECTTABLE.PROJECT_CAT_ID.eq(t.getProjectCatId()),
-                                PROJECTTABLE.PROJECT_TYPE.eq(t.getProjectType()),
-                                PROJECTTABLE.PROJECT_NAME.eq(t.getProjectName()),
-                                PROJECTTABLE.PROJECT_CODE.eq(t.getProjectCode()),
-                                PROJECTTABLE.PROJECT_BEGIN.eq(t.getProjectBegin()),
-                                PROJECTTABLE.PROJECT_END.eq(t.getProjectEnd()),
-                                PROJECTTABLE.PROJECT_DAYS.eq(t.getProjectDays()),
-                                PROJECTTABLE.PROJECT_STATUS.eq(t.getProjectStatus()),
-                                PROJECTTABLE.PROJECT_STATGE.eq(t.getProjectStatge()),
-                                PROJECTTABLE.PROJECT_PRI.eq(t.getProjectPri()),
-                                PROJECTTABLE.PROJECT_DESC.eq(t.getProjectDesc()),
-                                PROJECTTABLE.PROJECT_OPENED_BY.eq(t.getProjectOpenedBy()),
-                                PROJECTTABLE.PROJECT_OPENED_DATE.eq(t.getProjectOpenedDate()),
-                                PROJECTTABLE.PROJECT_OPENED_VERSION.eq(t.getProjectOpenedVersion()),
-                                PROJECTTABLE.PROJECT_CLOSE_BY.eq(t.getProjectCloseBy()),
-                                PROJECTTABLE.PROJECT_CLOSE_DATE.eq(t.getProjectCloseDate()),
-                                PROJECTTABLE.PROJECT_CANCELED_BY.eq(t.getProjectCanceledBy()),
-                                PROJECTTABLE.PROJECT_CANCELED_DATE.eq(t.getProjectCanceledDate()),
-                                PROJECTTABLE.PROJECT_PO.eq(t.getProjectPo()),
-                                PROJECTTABLE.PROJECT_PM.eq(t.getProjectPm()),
-                                PROJECTTABLE.PROJECT_QD.eq(t.getProjectQd()),
-                                PROJECTTABLE.PROJECT_RD.eq(t.getProjectRd()),
-                                PROJECTTABLE.PROJECT_TEAM.eq(t.getProjectTeam()),
-                                PROJECTTABLE.PROJECT_ACL.eq(t.getProjectAcl()),
-                                PROJECTTABLE.PROJECT_WHITE_LIST.eq(t.getProjectWhiteList()),
-                                PROJECTTABLE.PROJECT_ORDER.eq(t.getProjectOrder()),
-                                PROJECTTABLE.PROJECT_DELETED.eq(t.getProjectDeleted())));
-                return addOrderByElements(select, orderArgs);
-            }
-        });
-    }
 
     public int[] batchInsert(boolean autoGeneratedKeys, List<Project> projects) {
         if (CollectionUtil.isEmpty(projects)) {
@@ -464,26 +426,27 @@ public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
     }
 
     public List<Project> getProjectByStoryId(Integer storyId) {
-        Select select = MysqlSelect.select(FragmentSelectItemSql.fragmentSelect("p.*")).from(
-                FragmentSelectItemSql.fragmentFrom("project_story ps left join project p on p.project_id = ps.project_id"))
-                .where(and(
-                        FragmentSql.fragmentCondition("ps.story_id = " + storyId),
-                        FragmentSql.fragmentCondition("ps.story_id is not null")
-                ));
+        Select select = selectFrom(PROJECTTABLE).where(
+                and(
+                        PROJECTTABLE.PROJECT_ID.inExpression(subSelect(select(PROJECT_STORYTABLE.PROJECT_ID).from(PROJECT_STORYTABLE).where(PROJECT_STORYTABLE.STORY_ID.eq(storyId)))),
+                        PROJECTTABLE.PROJECT_DELETED.eq(Project.DELETE_NO)
+                )
+        );
         return getDslSession().fetchList(select, Project.class);
     }
 
     public List<Project> findByIds(Integer... ids) {
-        Select select = selectFrom(PROJECTTABLE).where(PROJECTTABLE.PROJECT_ID.in(ids));
+        Select select = selectFrom(PROJECTTABLE).where(and(PROJECTTABLE.PROJECT_DELETED.eq(Project.DELETE_NO),PROJECTTABLE.PROJECT_ID.in(ids)));
         return getDslSession().fetchList(select, Project.class);
     }
 
     public List<Project> findListByTeamUserId(String userId) {
-        Select select = selectFrom(PROJECTTABLE).where(PROJECTTABLE.PROJECT_ID.inExpression(
-                subSelect(
-                        select(PROJECT_TEAMTABLE.PROJECT_ID).from(PROJECT_TEAMTABLE).where(PROJECT_TEAMTABLE.TEAM_USER_ID.eq(userId))
+        Select select = selectFrom(PROJECTTABLE).where(
+                and(
+                PROJECTTABLE.PROJECT_ID.inExpression(subSelect(select(PROJECT_TEAMTABLE.PROJECT_ID).from(PROJECT_TEAMTABLE).where(PROJECT_TEAMTABLE.TEAM_USER_ID.eq(userId)))),
+                        PROJECTTABLE.PROJECT_DELETED.eq(Project.DELETE_NO)
                 )
-        ));
+        );
         return getDslSession().fetchList(select, Project.class);
     }
 }

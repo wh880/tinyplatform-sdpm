@@ -34,7 +34,7 @@
                 #@Tselect2F()
                     #@Tselect2Body("taskModule" copyTask?.taskModule {"class":
                         "input-text select2"})
-                        <option value="">/</option>
+                        <option value=""></option>
                         #foreach(m : moduleList)
                             <option value=${m.moduleId}>${m.moduleName}</option>
                         #end

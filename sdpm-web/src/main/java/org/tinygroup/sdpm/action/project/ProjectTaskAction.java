@@ -92,6 +92,20 @@ public class ProjectTaskAction extends BaseController {
     }
 
     /**
+     * 时间消耗
+     *
+     * @param taskId
+     * @param model
+     * @return
+     */
+    @RequestMapping("/consumeTime")
+    public String consumeTime(Integer taskId, Model model) {
+        ProjectTask task = taskService.findTask(taskId);
+        model.addAttribute("task", task);
+        return "project/task/consumeTime";
+    }
+
+    /**
      * 指派
      *
      * @param taskId
@@ -380,7 +394,6 @@ public class ProjectTaskAction extends BaseController {
 
         model.addAttribute("moduleList", moduleList);
         model.addAttribute("storyList", storyList);
-
         return "project/task/add";
     }
 
@@ -464,7 +477,6 @@ public class ProjectTaskAction extends BaseController {
         if (projectId == null) {
             return redirectProjectForm();
         }
-
         model.addAttribute("teamList", userService.findTeamUserListByProjectId(projectId));
 
         List<ProductStory> storyList = storyService.findStoryByProject(projectId);
@@ -573,35 +585,39 @@ public class ProjectTaskAction extends BaseController {
     }
 
     @RequestMapping("/board")
-    public String board(Model model, String ajax) {
-        ProjectTask task = new ProjectTask();
-        task.setTaskStatus(task.WAIT);
-        List<ProjectTask> resList = taskService.findListTask(task);
+    public String board(Model model, HttpServletRequest request, HttpServletResponse response) {
+        Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
+
+        ProjectTask projectTask = new ProjectTask();
+        projectTask.setTaskProject(projectId);
+
+        projectTask.setTaskStatus(projectTask.WAIT);
+        List<ProjectTask> resList = taskService.findListTask(projectTask);
         model.addAttribute("waitList", resList);
 
-        task.setTaskStatus(task.DOING);
-        resList = taskService.findListTask(task);
+        projectTask.setTaskStatus(projectTask.DOING);
+        resList = taskService.findListTask(projectTask);
         model.addAttribute("doingList", resList);
 
-        task.setTaskStatus(task.DONE);
-        resList = taskService.findListTask(task);
+        projectTask.setTaskStatus(projectTask.DONE);
+        resList = taskService.findListTask(projectTask);
         model.addAttribute("doneList", resList);
 
-        task.setTaskStatus(task.CANCEL);
-        resList = taskService.findListTask(task);
+        projectTask.setTaskStatus(projectTask.CANCEL);
+        resList = taskService.findListTask(projectTask);
         model.addAttribute("cancelList", resList);
 
-        task.setTaskStatus(task.CLOSE);
-        resList = taskService.findListTask(task);
+        projectTask.setTaskStatus(projectTask.CLOSE);
+        resList = taskService.findListTask(projectTask);
         model.addAttribute("closeList", resList);
 
-        return "project/task/board.page" + (ajax != null ? "let" : "");
+        return "project/task/board";
     }
 
     @RequestMapping("/modal/{forward}")
     public String doc(@PathVariable(value = "forward") String forward, Model model, String taskId) {
         ProjectTask task = taskService.findTask(Integer.parseInt(taskId));
-        model.addAttribute("teamList", teamService.findTeamByProjectId(task.getTaskProject()));
+        model.addAttribute("teamList", userService.findTeamUserListByProjectId(task.getTaskProject()));
         model.addAttribute("task", task);
         return "project/task/modal/" + forward + ".pagelet";
     }
@@ -628,37 +644,44 @@ public class ProjectTaskAction extends BaseController {
         return "project/task/grouping.page";
     }
 
+    /**
+     * 改变任务状态 用于Ajax请求
+     * @param task
+     * @param content 备注内容
+     * @param taskStatus 改变的状态
+     * @return
+     */
     @ResponseBody
-    @RequestMapping("/ajaxChangeStatu")
-    public Map<String, String> ajaxChangeStatu(ProjectTask task, String content, String taskStatus) {
+    @RequestMapping("/changeStatus")
+    public Map<String, String> changeStatus(ProjectTask task, String content, String taskStatus) {
         Map<String, String> map;
         task.setTaskLastEditedBy(UserUtils.getUserId());
         Integer res;
-        LogUtil.LogAction logAction = null;
+        LogUtil.LogAction logAction;
         if ("doing".equals(taskStatus)) {
             res = taskService.updateDoingTask(task);
             logAction = LogUtil.LogAction.ACTIVATED;
-            map = getMap(res, "激活成功", "激活失败");
+            map = generateResultMap(res, "激活成功", "激活失败");
         } else if ("close".equals(taskStatus)) {
             res = taskService.updateCloseTask(task);
-            map = getMap(res, "关闭成功", "关闭失败");
+            map = generateResultMap(res, "关闭成功", "关闭失败");
             logAction = LogUtil.LogAction.CLOSED;
         } else if ("cancel".equals(taskStatus)) {
             res = taskService.updateCancelTask(task);
             logAction = LogUtil.LogAction.CANCELED;
-            map = getMap(res, "取消成功", "取消失败");
+            map = generateResultMap(res, "取消成功", "取消失败");
         } else if ("finish".equals(taskStatus)) {
             res = taskService.updateFinishTask(task);
             logAction = LogUtil.LogAction.FINISHED;
-            map = getMap(res, "完成成功", "完成失败");
+            map = generateResultMap(res, "完成成功", "完成失败");
         } else if ("start".equals(taskStatus)) {
             res = taskService.updateStartTask(task);
             logAction = LogUtil.LogAction.STARTED;
-            map = getMap(res, "开始成功", "开始失败");
+            map = generateResultMap(res, "开始成功", "开始失败");
         } else {
             res = taskService.updateTask(task);
             logAction = LogUtil.LogAction.EDITED;
-            map = getMap(res, "编辑成功", "编辑失败");
+            map = generateResultMap(res, "编辑成功", "编辑失败");
         }
         LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, logAction, task.getTaskId().toString(),
                 UserUtils.getUserId(), null, taskService.findTask(task.getTaskId()).getTaskProject().toString(),
@@ -668,7 +691,7 @@ public class ProjectTaskAction extends BaseController {
 
     @RequiresPermissions("pro-task-report")
     @RequestMapping("/reportform")
-    public String reportform() {
+    public String reportForm() {
         return "project/task/reportform.page";
     }
 
@@ -696,14 +719,12 @@ public class ProjectTaskAction extends BaseController {
         return "project/task/reportFormDate.pagelet";
     }
 
-    private Map<String, String> getMap(Integer res, String successMsg, String falseMsg) {
-        Map<String, String> map = new HashMap<String, String>();
+    private Map<String, String> generateResultMap(Integer res, String successMsg, String falseMsg) {
         if (res > 0) {
-            map.putAll(resultMap(true, successMsg));
+            return resultMap(true, successMsg);
         } else {
-            map.putAll(resultMap(false, falseMsg));
+            return resultMap(false, falseMsg);
         }
-        return map;
     }
 
 }

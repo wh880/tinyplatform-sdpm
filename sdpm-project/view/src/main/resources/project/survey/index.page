@@ -64,13 +64,19 @@
                     </script>
 
                     #foreach(m:menuManager.getScopeMenus("pro-surveymenu2-op"))
+                        #if(m.id!="pro-survey-return")
                         <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?projectId=${project?.projectId}"
                            title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+                        #else
+                            <a href="${m.href}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+                        #end
                     #end
 
                     #set(m4=menuManager.getMenu("pro-survey-remove"))
                     #if(m4)
-                        #@aModal("#m" "提示" "300" "50")#buttonIcon(iconClass="icon-remove")#end
+                        #@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m4.href project?.projectId TINY_CONTEXT_PATH+adminPath+
+                            "/project/task/index")
+                            #buttonIcon(iconClass=m4.icon)#end
                     #end
 				</span>
                 #div(divClass="clearfix")

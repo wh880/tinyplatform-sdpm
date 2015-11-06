@@ -15,8 +15,8 @@
     <description></description>
   </standard-field>
   <standard-field id="5cafe4cc5fab4097a8c488b96b69b5f6" name="project_code" title="项目代号" business-type-id="095e594e1550424b9643c7e2279e85be"/>
-  <standard-field id="eb64fc3731a74e6b83fbd21e04d9c2c8" name="project_begin" title="项目开始日期" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff"/>
-  <standard-field id="b60537fc2b034196958ac32b0d598bd5" name="project_end" title="项目结束日期" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff"/>
+  <standard-field id="eb64fc3731a74e6b83fbd21e04d9c2c8" name="project_begin" title="项目开始日期" business-type-id="af7b470e7d404b4882e7ec5a1513165f"/>
+  <standard-field id="b60537fc2b034196958ac32b0d598bd5" name="project_end" title="项目结束日期" business-type-id="af7b470e7d404b4882e7ec5a1513165f"/>
   <standard-field id="d3bdb7016bcf4199aa9ba4a6f8c58b8f" name="project_days" title="可用工作日" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
   <standard-field id="c3f62efdcb7a47abb9d9b9f2571f5e64" name="project_status" title="项目状态" business-type-id="b6a9bc04774b40859a7dd8c6fd52a629"/>
   <standard-field id="0a23fb9850164fa9b731b667c85ec3ec" name="project_statge" title="项目所处阶段" business-type-id="b6a9bc04774b40859a7dd8c6fd52a629" default="0">

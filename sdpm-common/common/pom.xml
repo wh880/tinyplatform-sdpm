@@ -11,7 +11,6 @@
     <name>sdpm-common-common</name>
 
     <properties>
-
         <commons-codec.version>1.9</commons-codec.version>
     </properties>
     <dependencies>
@@ -57,7 +56,7 @@
             <artifactId>guava</artifactId>
             <version>18.0</version>
         </dependency>
-		<dependency>
+        <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>org.tinygroup.jdbctemplatedslsession</artifactId>
             <version>${tiny_version}</version>
@@ -67,16 +66,19 @@
             <artifactId>org.tinygroup.tinysqldsl</artifactId>
             <version>${tiny_version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>org.tinygroup.metadata</artifactId>
             <version>${tiny_version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>org.tinygroup.database</artifactId>
             <version>${tiny_version}</version>
         </dependency>
+
         <dependency>
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>

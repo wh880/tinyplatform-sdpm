@@ -42,7 +42,7 @@ public class EffortAction extends BaseController {
     public String note(Model model) {
         Date date = new Date();
         model.addAttribute("date", date);
-        return "/project/note/index.page";
+        return "/project/note/index";
     }
 
     @RequestMapping("date/{type}")
@@ -50,8 +50,8 @@ public class EffortAction extends BaseController {
         if ("1".equals(type)) {
             return "/project/note/notetable.page";
         }
-        List<OrgUser> uers = userService.findUserList(new OrgUser());
-        model.addAttribute("user", uers);
+        List<OrgUser> user = userService.findUserList(new OrgUser());
+        model.addAttribute("user", user);
         return "/project/note/notetable.page";
     }
 
@@ -72,7 +72,6 @@ public class EffortAction extends BaseController {
         model.addAttribute("taskId", taskId);
         model.addAttribute("list", effortList);
         return "project/task/note";
-
     }
 
     @RequestMapping("save")
@@ -203,8 +202,7 @@ public class EffortAction extends BaseController {
     }
 
     @RequestMapping("calendar")
-    public String calendar(String Action, @RequestParam(required = false) String id, String date, Model model) throws Exception {
-
+    public String calendar(String Action, Integer id, String date, Model model) throws Exception {
         ProjectTask task = new ProjectTask();
         List<ProjectTask> taskList = taskService.findListTask(task);
         List<OrgUser> users = userService.findUserList(new OrgUser());
@@ -216,8 +214,7 @@ public class EffortAction extends BaseController {
             model.addAttribute("effort", effort);
         }
         if (Action.equals("edit")) {
-            SystemEffort effort = effortService.findById(Integer.valueOf(id));
-
+            SystemEffort effort = effortService.findById(id);
             model.addAttribute("effort", effort);
         }
         return "project/note/calendarEvent.pagelet";

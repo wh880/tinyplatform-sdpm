@@ -3,7 +3,7 @@
 #import("/org/tinygroup/button/components/button_common.component")
 #import("/org/tinygroup/button/components/button.component")
 #import("/org/tinygroup/pieCharts/components/pieCharts.component")
-#!set(activeTitle="项目管理",activeMenuId=currentPageId)
+#!set(activeTitle="报表",activeMenuId=currentPageId)
 
 <style>
     .togglebox.open .tableBoxessty {
@@ -79,7 +79,7 @@
                             dataType: "html",
                             data: {ids: list.join(",")},
                             success: function (data) {
-                                $("#chart").html(data);                                //刷新数据
+                                $("#chart").html(data); //刷新数据
                             },
                             error: function (data) {
                                 layer.msg(data.info, 2, 9);

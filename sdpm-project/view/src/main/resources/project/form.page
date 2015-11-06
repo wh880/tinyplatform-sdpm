@@ -135,7 +135,7 @@
         #end
         #@elementItem()
             #@sdpmItem("项目描述")
-                #@TeditorMini("projectDesc" "content" {"initialFrameHeight":"200","initialFrameWidth":"702"})#end
+                #@Teditor("projectDesc" "projectDesc" {"initialFrameHeight":"200","initialFrameWidth":"702"})#end
             #end
         #end
         #@elementItem()

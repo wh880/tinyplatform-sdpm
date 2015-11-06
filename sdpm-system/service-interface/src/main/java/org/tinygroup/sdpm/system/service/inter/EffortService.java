@@ -1,11 +1,10 @@
 package org.tinygroup.sdpm.system.service.inter;
 
-import java.util.Date;
-import java.util.List;
-
-import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.system.dao.pojo.SystemEffort;
 import org.tinygroup.tinysqldsl.Pager;
+
+import java.util.Date;
+import java.util.List;
 
 public interface EffortService {
 	
@@ -40,7 +39,6 @@ public interface EffortService {
 	  * @param nowdate
 	  * @return
 	  */
-
 	 List<SystemEffort> findBetweenDate(Date begindate,Date enddate);
 	 /**
 	  * 通过projectID查询所有数据
@@ -80,7 +78,7 @@ public interface EffortService {
 	  * @param orderArgs
 	  * @return
 	  */
-	 public Pager<SystemEffort> findByDate(int start, int limit, SystemEffort effort,Date startDate,
+	  Pager<SystemEffort> findByDate(int start, int limit, SystemEffort effort,Date startDate,
 			 Date endDate, String sortName,boolean asc);
 	 /**
 	  * 通过ID查询

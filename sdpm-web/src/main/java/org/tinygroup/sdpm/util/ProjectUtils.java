@@ -126,6 +126,9 @@ public class ProjectUtils {
         if (project == null) {
             project = projectService.findProjectById(Integer.valueOf(projectId));
         }
+        if (project == null) {
+            project = new Project();
+        }
         return project;
     }
 

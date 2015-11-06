@@ -1,4 +1,4 @@
-#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/project/task/ajaxChangeStatu" "post" {"class":"test","enctype":
+#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/project/task/changeStatus" "post" {"class":"test","enctype":
     "multipart/form-data"})
     #hiddenInput(hiddenInputName="taskId" hiddenInputValue=task?.taskId)
     #hiddenInput(hiddenInputName="taskStatus" hiddenInputValue="finish")

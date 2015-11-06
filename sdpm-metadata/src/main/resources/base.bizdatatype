@@ -53,4 +53,7 @@
       <placeholder-value name="length" value="1"/>
     </placeholder-value-list>
   </business-type>
+  <business-type id="af7b470e7d404b4882e7ec5a1513165f" name="DATE" title="DATE" standard-type-id="310cd8e63e4f462d8115de82732f5381">
+    <placeholder-value-list/>
+  </business-type>
 </business-types>

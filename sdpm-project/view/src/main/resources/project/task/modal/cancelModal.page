@@ -1,4 +1,4 @@
-#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/project/task/ajaxChangeStatu" "post" {"class":"test"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/project/task/changeStatus" "post" {"class":"test"})
     #hiddenInput(hiddenInputName="taskId" hiddenInputValue=task?.taskId)
     #hiddenInput(hiddenInputName="taskProject" hiddenInputValue=task?.taskProject)
     #hiddenInput(hiddenInputName="taskStatus" hiddenInputValue="cancel")
@@ -12,13 +12,10 @@
             #end
             #@validateDiv("col-2")#end
         #end
-        <br/>
     </div>
     #@elementItem()
         <div class="col-12">
-            <div class="col-5">
-
-            </div>
+            <div class="col-5"></div>
             <div class="col-1">
                 <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
             </div>
@@ -28,7 +25,6 @@
             <div class="col-5"></div>
         </div>
     #end
-    <br>
 </div>
 #end
 <div style="width:30%;float:right;padding-right: 10px;">
