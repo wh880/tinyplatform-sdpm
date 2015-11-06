@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by wangying14938 on 2015-09-22.
@@ -44,13 +46,14 @@ public class ProjectProductAction extends BaseController {
         return "project/product/index.page";
     }
 
+    @ResponseBody
     @RequestMapping("/save")
-    public String save(Integer[] array, HttpServletResponse response,HttpServletRequest request) {
+    public Map<String, String> save(Integer[] array, HttpServletResponse response, HttpServletRequest request) {
         Integer projectId = ProjectUtils.getCurrentProjectId(request,response);
         if (projectId==null){
-            return redirectProjectForm();
+            return resultMap(false, "项目不存在");
         }
         projectProductService.addProjectLinkToProduct(array, projectId);
-        return "redirect:" + adminPath + "/project/product/findLinkProduct";
+        return resultMap(true, "保存成功");
     }
 }

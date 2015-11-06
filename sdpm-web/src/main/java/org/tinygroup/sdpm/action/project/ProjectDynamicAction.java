@@ -20,6 +20,7 @@ import org.tinygroup.tinysqldsl.Pager;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by shenly13343 on 2015-10-16.
@@ -41,7 +42,8 @@ public class ProjectDynamicAction extends BaseController {
         if (projectId == null) {
             return redirectProjectForm();
         }
-        model.addAttribute("teamList", userService.findTeamUserListByProjectId(projectId));
+        List<OrgUser> teamList = userService.findTeamUserListByProjectId(projectId);
+        model.addAttribute("teamList", teamList);
         return "project/dynamic/index.page";
     }
 
