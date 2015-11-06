@@ -63,7 +63,7 @@
                         #@aExtendButton("btn-primary btn-sm" TINY_CONTEXT_PATH+adminPath+m.href+"?id="+client.clientId)
                             编辑#end
                     #else
-                        #@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m.href client.clientId TINY_CONTEXT_PATH+adminPath+adminPath+
+                        #@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m.href client.clientId TINY_CONTEXT_PATH+adminPath+
                             "/service/client/list"{
                             "class":"btn radius btn-danger btn-sm"}) 删除#end
                     #end

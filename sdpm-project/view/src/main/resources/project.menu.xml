@@ -200,9 +200,9 @@
         <menu id="survey-menu2" name="任务菜单2" href="/project/view" icon="" sort="1" isShow="1">
             <menu id="pro-survey-edit" name="编辑" href="/project/edit" icon="icon-pencil" sort="8" isShow="1"
                   scope="pro-surveymenu2-op"/>
-            <menu id="pro-survey-remove" name="删除" href="" icon="" sort="6" isShow="1"
-                  scope="pro-surveymenu2-op"/>
-            <menu id="pro-survey-return" name="返回" href="/project/view" icon="icon-level-up" sort="4"
+            <menu id="pro-survey-remove" name="删除" href="/project/delete" icon="icon-remove" sort="6" isShow="1"
+                  scope="pro-surveymenu3-op"/>
+            <menu id="pro-survey-return" name="返回" href="javascript:history.go(-1)" icon="icon-level-up" sort="4"
                   isShow="1" scope="pro-surveymenu2-op"/>
         </menu>
     </menu>

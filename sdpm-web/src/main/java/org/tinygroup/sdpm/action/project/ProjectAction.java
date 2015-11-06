@@ -51,7 +51,7 @@ public class ProjectAction extends BaseController {
     @RequiresPermissions("survey")
     @RequestMapping("/view")
     public String view(Model model, HttpServletRequest request, HttpServletResponse response,
-                     Integer projectId) {
+                       Integer projectId) {
         if (null == projectId) {
             projectId = ProjectUtils.getCurrentProjectId(request, response);
             if (projectId == null) {
@@ -59,7 +59,7 @@ public class ProjectAction extends BaseController {
             }
         }
         Project project = projectService.findProjectById(projectId);
-        CookieUtils.setCookie(response, ProjectUtils.COOKIE_PROJECT_ID,projectId.toString());
+        CookieUtils.setCookie(response, ProjectUtils.COOKIE_PROJECT_ID, projectId.toString());
         model.addAttribute("project", project);
         return "/project/survey/index";
     }
@@ -259,7 +259,7 @@ public class ProjectAction extends BaseController {
         Integer res = projectService.updateProject(project);
         LogUtil.logWithComment(LogUtil.LogOperateObject.PROJECT, LogUtil.LogAction.FINISHED, oldProject.getProjectId().toString(),
                 UserUtils.getUserId(), null, oldProject.getProjectId().toString(), oldProject, project, content);
-        return resultMap(res > 0 ? true : false, res > 0 ? "完成成功" : "完成失败");
+        return resultMap(res > 0 ? true : false, res > 0 ? "结束成功" : "结束失败");
     }
 
     /**
@@ -269,7 +269,6 @@ public class ProjectAction extends BaseController {
      * @param model
      * @return
      */
-    @RequiresPermissions("project-basicInfo")
     @RequestMapping("/basicInformation")
     public String basicInformation(Integer projectID, Model model) {
         Project project = projectService.findProjectById(projectID);
@@ -323,5 +322,18 @@ public class ProjectAction extends BaseController {
         return resultMap(true, "删除项目成功");
     }
 
+    @RequiresPermissions("pro-survey-remove")
+    @ResponseBody
+    @RequestMapping("/delete")
+    public Map delete(Integer id) {
+        if (id == null) {
+            return resultMap(false, "请选择删除的项目");
+        }
+        Project project = projectService.findProjectById(id);
+        project.setProjectDeleted(project.DELETE_YES);
+        projectService.updateProject(project);
+        ProjectUtils.removeProjectList();
+        return resultMap(true, "删除项目成功");
+    }
 
 }
