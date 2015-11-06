@@ -189,6 +189,9 @@ public class Project implements Serializable {
      */
     private String projectDeleted;
 
+    public Project() {
+        setProjectDeleted(DELETE_NO);
+    }
     public float getAllLeft() {
         return allLeft;
     }
