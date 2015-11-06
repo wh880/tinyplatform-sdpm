@@ -5,8 +5,8 @@
         #end
         #@tbody()
             #@tr()
-                #@td()<b>产品线名称</b>#end
-                #@td()<b>${productLine?.productLineName}</b>#end
+                <td style="width:35%">产品线名称</td>
+                #@td()${productLine?.productLineName}#end
             #end
             #@tr()
                 #@td()产品线编号#end
@@ -40,17 +40,13 @@
                 #@td()分组白名单#end
                 #@td()
                     #if(productLine?.productLineWhiteList)
-                        #for(str : productLine?.productLineWhiteList?.split(","))
-                        #for(role : UserUtils.getAllRoleList())
-                        #if(strFor.index!=1)
+                        #for(role : whiteLists)
+                        #if(roleFor.index!=1)
                         ,
                         #end
-                        #if(role?.orgRoleId == str)
-                            ${role?.orgRoleName}
-                        #end
+                        ${role?.orgRoleName}
                     #end
-                #end
-            #end
+                    #end
                 #end
                 #@td()#end
             #end

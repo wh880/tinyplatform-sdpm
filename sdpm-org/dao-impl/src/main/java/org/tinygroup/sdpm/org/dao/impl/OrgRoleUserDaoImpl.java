@@ -22,6 +22,7 @@ import org.tinygroup.jdbctemplatedslsession.callback.*;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
 import org.tinygroup.sdpm.org.dao.OrgRoleUserDao;
+import org.tinygroup.sdpm.org.dao.pojo.OrgRole;
 import org.tinygroup.sdpm.org.dao.pojo.OrgRoleUser;
 import org.tinygroup.tinysqldsl.*;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
@@ -33,6 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.tinygroup.sdpm.org.dao.constant.OrgRoleUserTable.ORG_ROLE_USERTABLE;
+import static org.tinygroup.sdpm.org.dao.constant.OrgUserTable.ORG_USERTABLE;
 import static org.tinygroup.tinysqldsl.Delete.delete;
 import static org.tinygroup.tinysqldsl.Insert.insertInto;
 import static org.tinygroup.tinysqldsl.Select.selectFrom;
@@ -96,6 +98,16 @@ public class OrgRoleUserDaoImpl extends TinyDslDaoSupport implements OrgRoleUser
     public int deleteByRoleId(Integer roleId) {
         Delete delete = delete(ORG_ROLE_USERTABLE).where(ORG_ROLE_USERTABLE.ORG_ROLE_ID.eq(roleId));
         return getDslSession().execute(delete);
+    }
+
+    public List<OrgRoleUser> getRolesByIds(String... ids) {
+        SelectGenerateCallback<Serializable[]> callback = new SelectGenerateCallback<Serializable[]>() {
+
+            public Select generate(Serializable[] serializables) {
+                return selectFrom(ORG_ROLE_USERTABLE).where(ORG_ROLE_USERTABLE.ORG_ROLE_ID.in(serializables));
+            }
+        };
+        return getDslSession().fetchList(callback.generate(ids),OrgRoleUser.class);
     }
 
     public OrgRoleUser getByKey(Integer pk) {

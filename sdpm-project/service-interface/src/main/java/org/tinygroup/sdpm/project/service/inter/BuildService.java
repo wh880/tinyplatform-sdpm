@@ -145,4 +145,6 @@ public interface BuildService {
      */
     public Pager<QualityBug> findBugLegacyPager(int start, int limit, int id, SearchInfos conditions, String groupOperate);
 
+    List<ProjectBuild> getBuildByIds(String ...ids);
+
     }

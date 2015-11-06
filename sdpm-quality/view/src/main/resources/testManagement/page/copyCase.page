@@ -94,10 +94,10 @@
                                         ajaxRead("${sid}", "moduleId", "moduleId", "moduleName", "/quality/bug/ajax/module?moduleRoot=" + pId,${testCase?.moduleId?:0},"module");
                                     }
 		                        });
-		                    </script>              
-	                    	#@Tselect2Fix()
-	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/product/page/tabledemo/addProduct.page" class="r ">增加</a>
-	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/product/page/tabledemo/product-listall.page">全部</a>#end
+		                    </script>
+                         #@Tselect2Fix()
+                             <a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition" class="r ">增加</a>
+                             <a href="${TINY_CONTEXT_PATH+adminPath}/product/allproduct/addition">全部</a>#end
                 	  #end
 #*					#@tinySelect("lang" "1" {"class":"select2"})
 							#@tinyOptionItem("1")日本三菱#end
@@ -185,16 +185,17 @@
 					#@div(divClass="col-5")
 							 #@Tselect2F()
 	                   		 #@Tselect2Body("storyId" testCase?.storyId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                    	#end                
-	                      	#@Tselect2Fix()
-	                      	<a href="${TINY_CONTEXT_PATH+adminPath}/product/page/tabledemo/product-demand-add.page" class="r ">增加</a>
-	                      	<a href="${TINY_CONTEXT_PATH+adminPath}/product/page/project/togglebox.page">全部</a>#end
+	                    	#end
+                                 #@Tselect2Fix()
+                                     <a href="${TINY_CONTEXT_PATH+adminPath}/product/story/addstory" class="r ">增加</a>
+                                     <a href="${TINY_CONTEXT_PATH+adminPath}/product/story?choose=1">全部</a>#end
+
                 			#end
 					#end
 			#end
         #end
         #@elementItem()
-            #@colLabel()用例标题：#end
+            #@colLabel()<span class="c-red">*</span>用例标题：#end
             #@formControlDiv("col-8")
             #@div(divClass="col-5")
                 #tinyInput("text" "caseTitle" testCase?.caseTitle {"datatype":"*10-500","id":"版本","class":"input-text"})

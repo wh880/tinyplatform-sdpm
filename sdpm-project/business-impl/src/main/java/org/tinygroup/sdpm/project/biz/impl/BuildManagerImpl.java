@@ -86,6 +86,10 @@ public class BuildManagerImpl implements BuildManager {
         return projectBuildDao.findBuildLegacyBugs(start,limit,buildId);
     }
 
+    public List<ProjectBuild> getBuildByIds(String... ids) {
+        return projectBuildDao.getBuildByKeys(ids);
+    }
+
     public Pager<ProductStory> findnoBuildStory(int start, int limit,String condition, Integer buildId) {
         return projectBuildDao.findNoBuildStorys(start, limit, condition, buildId);
     }

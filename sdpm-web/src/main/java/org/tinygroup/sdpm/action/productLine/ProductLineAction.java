@@ -6,6 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
+import org.tinygroup.sdpm.org.dao.pojo.OrgRole;
+import org.tinygroup.sdpm.org.service.inter.RoleService;
 import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
@@ -39,6 +41,8 @@ public class ProductLineAction extends BaseController {
     private ProductService productService;
     @Autowired
     private BuildService buildService;
+    @Autowired
+    private RoleService roleService;
 
     @RequestMapping("/content/{type}")
     public String productline(@PathVariable(value = "type") String type) {
@@ -195,6 +199,11 @@ public class ProductLineAction extends BaseController {
         if ("overview".equals(forword)) {
             return "/productLine/page/project/overview.page";
         } else if ("productLineDetail".equals(forword)) {
+            if(!StringUtil.isBlank(productLine.getProductLineWhiteList())){
+                String[] ids = productLine.getProductLineWhiteList().split(",");
+                List<OrgRole> roles = roleService.getRoleByIds(ids);
+                model.addAttribute("whiteLists",roles);
+            }
             return "/productLine/page/tabledemo/other-information.pagelet";
         }
         return "";

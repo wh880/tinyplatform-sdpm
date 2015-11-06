@@ -28,16 +28,14 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="dLabel">
                         #foreach(team : teamList )
-                            #if(var != 0)
-                                ${project
-                                ?.projectPo==null?"":UserUtils.getUserById(project?.projectPo)?.orgUserRealName}
+                        ##                            #if(var != 0)
+                        ##                                ${project?.projectPo==null?"":UserUtils.getUserById(project?.projectPo)?.orgUserRealName}
                                 <li>
                                     <a class="selUser" val="${team?.teamUserId}">
-                                        ${team
-                                        ?.teamUserId==null?"":UserUtils.getUserById(team?.teamUserId)?.orgUserRealName}
+                                        ${UserUtils.getUserById(team?.teamUserId).orgUserRealName}
                                     </a>
                                 </li>
-                            #end
+                        ##                            #end
                         #end
                     </ul>
                 </div>

@@ -37,3 +37,30 @@
         #end
     #end
 #end
+
+<script>
+    $(function () {
+        $("form[name=linkProduct]").Validform({
+            beforeSubmit: function (curform) {
+                $(curform).ajaxSubmit({
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.status == "y") {
+                            layer.msg(data.info, 2, 1);
+                            $(curform).closest(".modal").trigger("close");
+                        } else {
+                            layer.msg(data.info);
+                        }
+                    },
+                    error: function () {
+                        layer.msg(data.info);
+                    }
+                });
+                return false;
+            }
+        });
+        $("#cancel").click(function () {
+            $(this).closest(".modal").trigger("close");
+        });
+    });
+</script>

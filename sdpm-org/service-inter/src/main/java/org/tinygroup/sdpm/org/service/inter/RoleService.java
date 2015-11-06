@@ -178,4 +178,6 @@ public interface RoleService {
      */
     void copyRoleUser(Integer orgRoleIdNew, Integer orgRoleId);
 
+    List<OrgRole> getRoleByIds(String...ids);
+
 }

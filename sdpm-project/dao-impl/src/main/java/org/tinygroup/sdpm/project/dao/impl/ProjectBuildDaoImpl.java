@@ -41,6 +41,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.tinygroup.sdpm.org.dao.constant.OrgUserTable.ORG_USERTABLE;
 import static org.tinygroup.sdpm.product.dao.constant.ProductStoryTable.PRODUCT_STORYTABLE;
 import static org.tinygroup.sdpm.product.dao.constant.ProductTable.PRODUCTTABLE;
 import static org.tinygroup.sdpm.productLine.dao.constant.ProductLineTable.PRODUCT_LINETABLE;
@@ -371,6 +372,17 @@ public class ProjectBuildDaoImpl extends TinyDslDaoSupport implements ProjectBui
             }
         });
 
+    }
+
+    public List<ProjectBuild> getBuildByKeys(String... ids) {
+        SelectGenerateCallback<Serializable[]> callback = new SelectGenerateCallback<Serializable[]>() {
+            @SuppressWarnings("rawtypes")
+            public Select generate(Serializable[] t) {
+                return selectFrom(PROJECT_BUILDTABLE).where(PROJECT_BUILDTABLE.BUILD_ID.in(t));
+            }
+        };
+        Select select = callback.generate(ids);
+        return getDslSession().fetchList(select,ProjectBuild.class);
     }
 
 

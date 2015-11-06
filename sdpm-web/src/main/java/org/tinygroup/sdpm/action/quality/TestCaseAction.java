@@ -53,6 +53,8 @@ public class TestCaseAction extends BaseController {
 	private TestTaskService testTaskService;
 	@Autowired
 	private ProfileService profileService;
+	@Autowired
+	private BugService bugService;
 
 
 	@RequestMapping("")
@@ -521,6 +523,11 @@ public class TestCaseAction extends BaseController {
 	@RequestMapping("/case/rightInfo")
 	public String rightInfo(Integer caseId,Model model){
 		QualityTestCase testCase = testCaseService.findById(caseId);
+		QualityBug bug = new QualityBug();
+		bug.setDeleted(0);
+		bug.setBugFromCase(caseId);
+		List<QualityBug> bugList = bugService.findBugList(bug);
+		model.addAttribute("bugFromCase",bugList);
 		model.addAttribute("testCase", testCase);
 		return "/testManagement/page/tabledemo/caseEditInfo.pagelet";
 	}

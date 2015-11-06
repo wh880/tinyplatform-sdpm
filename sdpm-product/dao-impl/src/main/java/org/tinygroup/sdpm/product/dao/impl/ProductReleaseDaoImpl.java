@@ -19,6 +19,7 @@ package org.tinygroup.sdpm.product.dao.impl;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 import static org.tinygroup.sdpm.product.dao.constant.ProductPlanTable.PRODUCT_PLANTABLE;
 import static org.tinygroup.sdpm.product.dao.constant.ProductReleaseTable.*;
+import static org.tinygroup.sdpm.product.dao.constant.ProductTable.*;
 import static org.tinygroup.sdpm.product.dao.constant.ProductStorySpecTable.PRODUCT_STORY_SPECTABLE;
 import static org.tinygroup.sdpm.project.dao.constant.ProjectBuildTable.PROJECT_BUILDTABLE;
 import static org.tinygroup.tinysqldsl.Select.*;
@@ -138,8 +139,9 @@ public class ProductReleaseDaoImpl extends TinyDslDaoSupport implements
 			public Select generate(Serializable[] t) {
 
 				return MysqlSelect.select(
-						PRODUCT_RELEASETABLE.ALL,PROJECT_BUILDTABLE.BUILD_NAME.as("buildName")).
-						from(PRODUCT_RELEASETABLE).join(Join.leftJoin(PROJECT_BUILDTABLE, PRODUCT_RELEASETABLE.BUILD_ID.eq(PROJECT_BUILDTABLE.BUILD_ID))).where(
+						PRODUCT_RELEASETABLE.ALL,PRODUCTTABLE.PRODUCT_NAME.as("productName"),PROJECT_BUILDTABLE.BUILD_NAME.as("buildName")).
+						from(PRODUCT_RELEASETABLE).join(Join.leftJoin(PROJECT_BUILDTABLE, PRODUCT_RELEASETABLE.BUILD_ID.eq(PROJECT_BUILDTABLE.BUILD_ID)),
+						Join.leftJoin(PRODUCTTABLE,PRODUCTTABLE.PRODUCT_ID.eq(PRODUCT_RELEASETABLE.PRODUCT_ID))).where(
 						PRODUCT_RELEASETABLE.RELEASE_ID.in(t));
 			}
 
@@ -155,8 +157,9 @@ public class ProductReleaseDaoImpl extends TinyDslDaoSupport implements
 						@SuppressWarnings("rawtypes")
 						public Select generate(Serializable t) {
 							return MysqlSelect.select(
-									PRODUCT_RELEASETABLE.ALL,PROJECT_BUILDTABLE.BUILD_NAME.as("buildName")).
-									from(PRODUCT_RELEASETABLE).join(Join.leftJoin(PROJECT_BUILDTABLE, PRODUCT_RELEASETABLE.BUILD_ID.eq(PROJECT_BUILDTABLE.BUILD_ID))).where(
+									PRODUCT_RELEASETABLE.ALL,PRODUCT_RELEASETABLE.ALL,PRODUCTTABLE.PRODUCT_NAME.as("productName"),PROJECT_BUILDTABLE.BUILD_NAME.as("buildName")).
+									from(PRODUCT_RELEASETABLE).join(Join.leftJoin(PROJECT_BUILDTABLE, PRODUCT_RELEASETABLE.BUILD_ID.eq(PROJECT_BUILDTABLE.BUILD_ID)),
+									Join.leftJoin(PRODUCTTABLE,PRODUCTTABLE.PRODUCT_ID.eq(PRODUCT_RELEASETABLE.PRODUCT_ID))).where(
 									PRODUCT_RELEASETABLE.RELEASE_ID.eq(t));
 						}
 					});

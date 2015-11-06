@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.org.biz.inter;
 
+import org.tinygroup.sdpm.org.dao.pojo.OrgRole;
 import org.tinygroup.sdpm.org.dao.pojo.OrgRoleUser;
 
 import java.util.List;
@@ -59,4 +60,6 @@ public interface RoleUserManager {
 
 
     void batchAdd(List<OrgRoleUser> orgRoleUserList);
+
+    List<OrgRoleUser> getRolesByIds(String...ids);
 }

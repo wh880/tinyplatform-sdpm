@@ -18,6 +18,8 @@ package org.tinygroup.sdpm.quality.dao.impl;
 
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 import static org.tinygroup.sdpm.quality.dao.constant.QualityTestTaskTable.*;
+import static org.tinygroup.sdpm.project.dao.constant.ProjectTable.*;
+import static org.tinygroup.sdpm.project.dao.constant.ProjectBuildTable.*;
 import static org.tinygroup.tinysqldsl.Select.*;
 import static org.tinygroup.tinysqldsl.Insert.*;
 import static org.tinygroup.tinysqldsl.Delete.*;
@@ -40,7 +42,8 @@ import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.tinysqldsl.base.Condition;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
-	import org.tinygroup.tinysqldsl.select.OrderByElement;
+import org.tinygroup.tinysqldsl.select.Join;
+import org.tinygroup.tinysqldsl.select.OrderByElement;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityTestTask;
 import org.tinygroup.sdpm.quality.dao.QualityTestTaskDao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
@@ -117,7 +120,14 @@ public class QualityTestTaskDaoImpl extends TinyDslDaoSupport implements Quality
 		return getDslTemplate().getByKey(pk, QualityTestTask.class, new SelectGenerateCallback<Serializable>() {
 		@SuppressWarnings("rawtypes")
 		public Select generate(Serializable t) {
-			return selectFrom(QUALITY_TEST_TASKTABLE).where(QUALITY_TEST_TASKTABLE.TESTVERSION_ID.eq(t));
+			return select(QUALITY_TEST_TASKTABLE.ALL,
+					PROJECT_BUILDTABLE.BUILD_NAME.as("searchBuildName"),
+					PROJECTTABLE.PROJECT_NAME.as("projectName")).
+					from(QUALITY_TEST_TASKTABLE).join(
+						Join.leftJoin(PROJECTTABLE,PROJECTTABLE.PROJECT_ID.eq(QUALITY_TEST_TASKTABLE.PROJECT_ID)),
+						Join.leftJoin(PROJECT_BUILDTABLE,PROJECT_BUILDTABLE.BUILD_ID.eq(QUALITY_TEST_TASKTABLE.BUILD_NAME))
+					).
+					where(QUALITY_TEST_TASKTABLE.TESTVERSION_ID.eq(t));
 			}
 		});
 	}

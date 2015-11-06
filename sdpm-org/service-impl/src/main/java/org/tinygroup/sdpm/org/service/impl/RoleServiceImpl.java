@@ -50,7 +50,6 @@ public class RoleServiceImpl implements RoleService {
         return roleManager.delete(id);
     }
 
-    ////////////////////////////
     public List<OrgRoleMenu> findRoleMenuListByUser(String userId) {
         return roleMenuManager.findMenuListByUser(userId);
     }
@@ -103,7 +102,7 @@ public class RoleServiceImpl implements RoleService {
         return roleList;
     }
 
-    /////////////////////////
+
 
     public List<OrgRoleUser> findUserByRoleId(Integer roleId) {
         return roleUserManager.findUserIds(roleId);
@@ -133,6 +132,10 @@ public class RoleServiceImpl implements RoleService {
         if (orgRoleUserList != null || !orgRoleUserList.isEmpty()) {
             roleUserManager.batchAdd(orgRoleUserList);
         }
+    }
+
+    public List<OrgRole> getRoleByIds(String... ids) {
+        return roleManager.getRolesByIds(ids);
     }
 
 }

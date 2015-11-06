@@ -23,6 +23,7 @@ import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
 import org.tinygroup.sdpm.org.dao.OrgRoleDao;
 import org.tinygroup.sdpm.org.dao.pojo.OrgRole;
+import org.tinygroup.sdpm.org.dao.pojo.OrgRoleUser;
 import org.tinygroup.tinysqldsl.*;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
@@ -33,6 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.tinygroup.sdpm.org.dao.constant.OrgRoleTable.ORG_ROLETABLE;
+import static org.tinygroup.sdpm.org.dao.constant.OrgRoleUserTable.ORG_ROLE_USERTABLE;
 import static org.tinygroup.tinysqldsl.Delete.delete;
 import static org.tinygroup.tinysqldsl.Insert.insertInto;
 import static org.tinygroup.tinysqldsl.Select.selectFrom;
@@ -200,5 +202,15 @@ public class OrgRoleDaoImpl extends TinyDslDaoSupport implements OrgRoleDao {
             select.orderBy(orderByElements.toArray(new OrderByElement[0]));
         }
         return select;
+    }
+
+    public List<OrgRole> getRolesByIds(String... ids) {
+        SelectGenerateCallback<Serializable[]> callback = new SelectGenerateCallback<Serializable[]>() {
+
+            public Select generate(Serializable[] serializables) {
+                return selectFrom(ORG_ROLETABLE).where(ORG_ROLETABLE.ORG_ROLE_ID.in(serializables));
+            }
+        };
+        return getDslSession().fetchList(callback.generate(ids),OrgRole.class);
     }
 }

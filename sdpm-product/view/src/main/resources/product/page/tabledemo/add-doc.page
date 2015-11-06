@@ -70,7 +70,7 @@
         #@formControlDiv("col-4")
             #@div(divClass="col-12")
                 #@Tselect2F()
-                    #@Tselect2Body("docProduct" product?.productId?:cookieProductId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                    #@Tselect2Body("docProduct" cookieProductId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         <option value="0">/</option>
                         #if(cookieProductLineId)
                             #foreach(product : ProductUtils.getProductListByLine(cookieProductLineId))

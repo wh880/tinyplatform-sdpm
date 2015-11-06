@@ -23,9 +23,12 @@ import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
 import org.tinygroup.sdpm.common.util.update.UpdateUtil;
 import org.tinygroup.sdpm.quality.dao.QualityTestCaseDao;
+import org.tinygroup.sdpm.quality.dao.constant.QualityTestCaseTable;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityTestCase;
 import org.tinygroup.tinysqldsl.*;
+import org.tinygroup.tinysqldsl.base.Column;
 import org.tinygroup.tinysqldsl.base.Condition;
+import org.tinygroup.tinysqldsl.base.Table;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 import org.tinygroup.tinysqldsl.select.Join;
@@ -38,9 +41,12 @@ import java.util.List;
 
 import static org.tinygroup.sdpm.quality.dao.constant.QualityTestCaseTable.QUALITY_TEST_CASETABLE;
 import static org.tinygroup.sdpm.product.dao.constant.ProductStoryTable.PRODUCT_STORYTABLE;
+import static org.tinygroup.sdpm.system.dao.constant.SystemModuleTable.SYSTEM_MODULETABLE;
+import static org.tinygroup.sdpm.quality.dao.constant.QualityBugTable.QUALITY_BUGTABLE;
 import static org.tinygroup.tinysqldsl.Delete.delete;
 import static org.tinygroup.tinysqldsl.Insert.insertInto;
 import static org.tinygroup.tinysqldsl.Select.selectFrom;
+import static org.tinygroup.tinysqldsl.Select.select;
 import static org.tinygroup.tinysqldsl.Update.update;
 import static org.tinygroup.tinysqldsl.base.FragmentSql.fragmentCondition;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
@@ -126,7 +132,17 @@ public class QualityTestCaseDaoImpl extends TinyDslDaoSupport implements Quality
 		return getDslTemplate().getByKey(pk, QualityTestCase.class, new SelectGenerateCallback<Serializable>() {
 			@SuppressWarnings("rawtypes")
 			public Select generate(Serializable t) {
-				return selectFrom(QUALITY_TEST_CASETABLE).where(QUALITY_TEST_CASETABLE.CASE_ID.eq(t));
+				return select(QUALITY_TEST_CASETABLE.ALL,
+						SYSTEM_MODULETABLE.MODULE_NAME.as("moduleName"),
+						PRODUCT_STORYTABLE.STORY_TITLE.as("storyTitle"),
+						QUALITY_BUGTABLE.BUG_TITLE.as("caseFromBugTitle"),
+						new Column(new Table("linkCaseTable"),"case_title").as("linkCaseTile")
+						).from(QUALITY_TEST_CASETABLE).join(
+						Join.leftJoin(SYSTEM_MODULETABLE, QUALITY_TEST_CASETABLE.MODULE_ID.eq(SYSTEM_MODULETABLE.MODULE_ID)),
+						Join.leftJoin(PRODUCT_STORYTABLE, QUALITY_TEST_CASETABLE.STORY_ID.eq(PRODUCT_STORYTABLE.STORY_ID)),
+						Join.leftJoin(QUALITY_BUGTABLE, QUALITY_TEST_CASETABLE.CASE_FROM_BUG.eq(QUALITY_BUGTABLE.BUG_ID)),
+						Join.leftJoin(QUALITY_TEST_CASETABLE.as("linkCaseTable"), QUALITY_TEST_CASETABLE.LINK_CASE.eq(((QualityTestCaseTable) QUALITY_TEST_CASETABLE.as("linkCaseTable")).CASE_ID))
+				).where(QUALITY_TEST_CASETABLE.CASE_ID.eq(t));
 			}
 		});
 	}

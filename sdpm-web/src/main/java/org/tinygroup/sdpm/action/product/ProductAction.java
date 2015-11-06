@@ -6,11 +6,23 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
+import org.tinygroup.sdpm.document.dao.pojo.DocumentDoc;
+import org.tinygroup.sdpm.document.service.inter.DocService;
+import org.tinygroup.sdpm.org.dao.pojo.OrgRole;
+import org.tinygroup.sdpm.org.dao.pojo.OrgRoleUser;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
+import org.tinygroup.sdpm.org.service.inter.RoleService;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.productLine.service.ProductLineService;
+import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
+import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
+import org.tinygroup.sdpm.project.service.inter.BuildService;
+import org.tinygroup.sdpm.project.service.inter.ProjectProductService;
+import org.tinygroup.sdpm.project.service.inter.ProjectService;
+import org.tinygroup.sdpm.quality.dao.pojo.QualityTestCase;
+import org.tinygroup.sdpm.quality.service.inter.TestCaseService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.dao.pojo.SystemHistory;
 import org.tinygroup.sdpm.system.service.inter.ActionService;
@@ -41,19 +53,26 @@ public class ProductAction extends BaseController {
 
     @Autowired
     private ProductService productService;
-
     @Autowired
     private UserService userService;
-
     @Autowired
     private HistoryService historyService;
-
     @Autowired
     private ActionService actionService;
-
     @Autowired
     private ProductLineService productLineService;
-
+    @Autowired
+    private RoleService roleService;
+    @Autowired
+    private BuildService buildService;
+    @Autowired
+    private TestCaseService testCaseService;
+    @Autowired
+    private ProjectService productProject;
+    @Autowired
+    private DocService docService;
+    @Autowired
+    private ProjectProductService projectProductService;
 
     @RequestMapping("/{forward}/content")
     public String doc(@PathVariable(value = "forward") String forward, HttpServletRequest request, Model model) {
@@ -209,6 +228,28 @@ public class ProductAction extends BaseController {
         	
             return "/product/page/project/overview.page";
         } else if ("baseinfo".equals(forward)) {
+            List<ProjectProduct> projectProducts = projectProductService.findProjects(Integer.parseInt(cookieProductId));
+            ProjectBuild build = new ProjectBuild();
+            build.setBuildProduct(Integer.parseInt(cookieProductId));
+            build.setBuildDeleted("0");
+            List<ProjectBuild> builds = buildService.findListBuild(build);
+            QualityTestCase testCase = new QualityTestCase();
+            testCase.setProductId(Integer.parseInt(cookieProductId));
+            testCase.setDeleted(0);
+            List<QualityTestCase> testCases = testCaseService.findTestCaseList(testCase);
+            DocumentDoc documentDoc = new DocumentDoc();
+            documentDoc.setDocProduct(Integer.parseInt(cookieProductId));
+            documentDoc.setDocDeleted("0");
+            List<DocumentDoc> documentDocs = docService.findDocList(documentDoc);
+            model.addAttribute("projectSum",projectProducts.size());
+            model.addAttribute("buildSum",builds.size());
+            model.addAttribute("testCaseSum",testCases.size());
+            model.addAttribute("docSum",documentDocs.size());
+            if(!StringUtil.isBlank(product.getProductWhiteList())){
+                String[] ids = product.getProductWhiteList().split(",");
+                List<OrgRole> roles = roleService.getRoleByIds(ids);
+                model.addAttribute("whiteLists",roles);
+            }
             return "/product/page/tabledemo/baseinfo.pagelet";
         }
         return "";
@@ -266,9 +307,8 @@ public class ProductAction extends BaseController {
 
 
     @RequestMapping("/{forward}/addition")
-    public String addpro(@CookieValue(value = "cookieProductLineId") String cookieProductLineId,
+    public String addpro(
             @PathVariable(value = "forward") String forward,HttpServletRequest request, Model model) {
-        Integer productLineId = Integer.parseInt(cookieProductLineId);
 		if ("addproduct".equals(forward)) {
 			return "/product/page/tabledemo/addProduct.page";
 		} else if ("allproduct".equals(forward)) {
@@ -278,10 +318,7 @@ public class ProductAction extends BaseController {
     }
 
     @RequestMapping("/addDoc")
-    public String addDoc(@CookieValue(value = "cookieProductId") String cookieProductId,HttpServletRequest request, Model model) {
-
-        Product product = productService.findProduct(Integer.parseInt(cookieProductId));
-        model.addAttribute("product", product);
+    public String addDoc(HttpServletRequest request, Model model) {
        return  "/product/page/tabledemo/add-doc.page";
     }
 

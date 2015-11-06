@@ -31,8 +31,10 @@ import org.tinygroup.sdpm.project.service.inter.TaskService;
 import org.tinygroup.sdpm.quality.dao.pojo.BugCount;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityCaseStep;
+import org.tinygroup.sdpm.quality.dao.pojo.QualityTestCase;
 import org.tinygroup.sdpm.quality.service.inter.BugService;
 import org.tinygroup.sdpm.quality.service.inter.CaseStepService;
+import org.tinygroup.sdpm.quality.service.inter.TestCaseService;
 import org.tinygroup.sdpm.system.dao.pojo.ProfileType;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
@@ -83,6 +85,8 @@ public class BugAction extends BaseController {
     private ProjectProductService projectProductService;
     @Autowired
     private CaseStepService caseStepService;
+    @Autowired
+    private TestCaseService testCaseService;
 
     @RequestMapping("")
     public String form(QualityBug bug, Model model, HttpServletRequest request) {
@@ -134,11 +138,21 @@ public class BugAction extends BaseController {
     @RequestMapping("/bugBasicInfo")
     public String bugBasicInfo(Integer bugId, Model model) {
         QualityBug bug = bugService.findById(bugId);
+        QualityTestCase qualityTestCase = new QualityTestCase();
+        qualityTestCase.setCaseFromBug(bugId);
+        qualityTestCase.setDeleted(0);
+        List<QualityTestCase> cases = testCaseService.findTestCaseList(qualityTestCase);
+        if(!StringUtil.isBlank(bug.getBugOpenedBuild())){
+            String[] buildIds = bug.getBugOpenedBuild().split(",");
+            List<ProjectBuild> projectBuilds = buildService.getBuildByIds(buildIds);
+            model.addAttribute("openedBuilds",projectBuilds);
+        }
         if(!StringUtil.isBlank(bug.getBugAssignedTo())) {
             String[] userIds = bug.getBugAssignedTo().split(",");
             List<OrgUser> assignUsers = userService.findUserListByIds(userIds);
             model.addAttribute("assignUsers", assignUsers);
         }
+        model.addAttribute("caseFromBug", cases);
         model.addAttribute("qualityBug", bug);
         return "/testManagement/page/bugRightInfo.pagelet";
     }

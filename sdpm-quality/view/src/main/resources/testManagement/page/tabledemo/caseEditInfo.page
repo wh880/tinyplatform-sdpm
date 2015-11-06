@@ -8,15 +8,15 @@
 	    		#@tr()
 	    			#@th()所属产品#end
 	    			#@td()
-	    			<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/cases.page">${testCase?.productId?ProductUtils.getProduct(String.valueOf(testCase?.productId))?.productName:""}#end
+                    <a href="${TINY_CONTEXT_PATH+adminPath}/product/find/overview?productId=${testCase?.productId}">${testCase?.productId?ProductUtils.getProduct(String.valueOf(testCase?.productId))?.productName:""}#end
 	    		#end
 	    		#@tr()
 	    			#@th()所属模块#end
-	    			#@td()${testCase?.moduleId}#end
+	    			#@td()${testCase?.moduleName}#end
 	    		#end
 	    		#@tr()
 	    			#@th()相关需求#end
-	    			#@td()${testCase?.storyId}#end
+	    			#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/product/storySpec/find/productDemandDetail?storyId=${testCase?.storyId}">${testCase?.storyTitle}</a>#end
 	    		#end
 	    		#@tr()
 	    			#@th()用例类型#end
@@ -55,7 +55,7 @@
 	    		#end
 	    		#@tr()
 	    			#@th()相关用例#end
-	    			#@td()${testCase?.linkCase}#end
+	    			#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/testCase/case/viewInfo?id=${testCase?.linkCase}">${testCase?.linkCaseTile}</a>#end
 	    		#end
 	    	#end	
     	#end   	
@@ -66,11 +66,18 @@
 			#@tbody()
 	    		#@tr()
 	    			#@th()来源Bug#end
-	    			#@td()${testCase?.caseFromBug}#end
+	    			#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/bug/bugInfo?bugId=${testCase?.caseFromBug}">${testCase?.caseFromBugTitle}</a>#end
 	    		#end
 	    		#@tr()
 	    			#@th()生成Bug#end
-	    			#@td()#end
+	    			#@td()
+						#for(bug : bugFromCase)
+							#if(bugFor.index!=1)
+								,
+							#end
+                    <a href="${TINY_CONTEXT_PATH+adminPath}/quality/bug/bugInfo?bugId=${bug?.bugId}">${bug?.bugTitle}</a>
+						#end
+					#end
 	    		#end
 	    	#end
 	    #end

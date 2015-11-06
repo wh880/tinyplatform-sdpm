@@ -10,7 +10,7 @@
 			       		#@tbody()
 			       			#@tr()
 								#@td()所属产品#end
-			       				#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/product/page/project/togglebox.page">${qualityBug?.productName}</a>#end
+			       				#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/product/find/overview?productId=${qualityBug?.productId}">${qualityBug?.productName}</a>#end
 			       			#end
 			       			#@tr()
 								#@td()所属模块#end
@@ -18,7 +18,7 @@
 			       			#end
 			       			#@tr()
 								#@td()所属计划#end
-			       				#@td()${qualityBug?.planName}#end
+			       				#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/product/plan/forword/reRelateStory?planId=${qualityBug?.planId}">${qualityBug?.planName}</a>#end
 			       			#end
 			       			#@tr()
 								#@td()Bug类型#end
@@ -79,15 +79,15 @@
 			       		#@tbody()
 			       			#@tr()
 								#@td()所属项目#end
-			       				#@td()${qualityBug?.projectName}#end
+			       				#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/project/view?projectId=${qualityBug?.projectId}">${qualityBug?.projectName}</a>#end
 			       			#end
 			       			#@tr()
 								#@td()相关需求#end
-			       				#@td()${qualityBug?.storyName}#end
+			       				#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/product/storySpec/find/productDemandDetail?storyId=${qualityBug?.storyId}">${qualityBug?.linkStoryName}</a>#end
 			       			#end
 			       			#@tr()
 								#@td()相关任务#end
-			       				#@td()${qualityBug?.taskName}#end
+			       				#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/project/task/findTask?taskId=${qualityBug?.taskId}">${qualityBug?.linkTaskName}</a>#end
 			       			#end
 			       		#end
 			 #end
@@ -110,11 +110,18 @@
 			       		#@tbody()
 			       			#@tr()
 								#@td()由谁创建#end
-			       				#@td()${qualityBug?.bugOpenedBy?UserUtils.getUserById(qualityBug?.bugOpenedBy)?.orgUserRealName:""} 于 ${formatDate(qualityBug?.bugOpenedDate,"yyyy-MM-dd hh-mm-ss")}#end
+			       				#@td()${qualityBug?.bugOpenedBy?UserUtils.getUserById(qualityBug?.bugOpenedBy)?.orgUserRealName:""} ${qualityBug?.bugOpenedDate?"于 "+formatDate(qualityBug?.bugOpenedDate,"yyyy-MM-dd hh-mm-ss"):""}#end
 			       			#end
 			       			#@tr()
 								#@td()影响版本#end
-			       				#@td()${qualityBug?.openBuildName}#end
+			       				#@td()
+									#for(build : openedBuilds)
+										#if(buildFor?.index!=1)
+											,
+										#end
+                                <a href="${TINY_CONTEXT_PATH+adminPath}/project/build/productalbug?buildId=${build?.buildId}">${build?.buildName}</a>
+									#end
+								#end
 			       			#end
 			       			#@tr()
 								#@td()由谁解决#end
@@ -122,7 +129,7 @@
 			       			#end
 			       			#@tr()
 								#@td()解决版本#end
-			       				#@td()${qualityBug?.resolveBuildName}#end
+			       				#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/project/build/productalbug?buildId=${qualityBug?.bugResolvedBuild}">${qualityBug?.resolveBuild}</a>#end
 			       			#end
 			       			#@tr()
 								#@td()解决方案#end
@@ -134,7 +141,7 @@
 			       			#end
 			       			#@tr()
 								#@td()最后修改#end
-			       				#@td()${qualityBug?.bugLastEditedBy?(UserUtils.getUserById(qualityBug?.bugLastEditedBy)?.orgUserRealName):""}#end
+			       				#@td()${qualityBug?.bugLastEditedBy?(UserUtils.getUserById(qualityBug?.bugLastEditedBy)?.orgUserRealName):""} ${qualityBug?.bugLastEditedDate?"于 "+formatDate(qualityBug?.bugLastEditedDate,"yyyy-MM-dd hh-mm-ss"):""}#end
 			       			#end
 			       		#end
 			 #end
@@ -147,27 +154,34 @@
 			       		#@tbody()
 			       			#@tr()
 								#@td()生源用例#end
-			       				#@td()${qualityBug?.bugFromCase}#end
+			       				#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/testCase/case/viewInfo?id=${qualityBug?.bugFromCase}">${qualityBug?.fromCase}</a>#end
 			       			#end
 			       			#@tr()
 								#@td()生成用例#end
-			       				#@td()${case?.caseFromBug}#end
+			       				#@td()
+									#for(case : caseFromBug)
+										#if(caseFor?.index!=1)
+											,
+										#end
+                                <a href="${TINY_CONTEXT_PATH+adminPath}/quality/testCase/case/viewInfo?id=${case?.caseId}">${case?.caseTitle}</a>
+									#end
+								#end
 			       			#end
 			       			#@tr()
 								#@td()相关BUG#end
-			       				#@td()${qualityBug?.linkBug}#end
+			       				#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/bug/bugInfo?bugId=${qualityBug?.linkBug}">${qualityBug?.linkBugTitle}</a>#end
 			       			#end
 			       			#@tr()
 								#@td()相关用例#end
-			       				#@td()${qualityBug?.linkCase}#end
+			       				#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/testCase/case/viewInfo?id=${qualityBug?.linkCase}">${qualityBug?.linkCaseTitle}</a>#end
 			       			#end
 			       			#@tr()
 								#@td()转需求#end
-			       				#@td()${qualityBug?.toStoryId}#end
+			       				#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/product/storySpec/find/productDemandDetail?storyId=${qualityBug?.toStoryId}">${qualityBug?.toStoryTitle}</a>#end
 			       			#end
 			       			#@tr()
 								#@td()转任务#end
-			       				#@td()${qualityBug?.toTaskId}#end
+			       				#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/project/task/findTask?taskId=${qualityBug?.toTaskId}">${qualityBug?.toTaskName}</a>#end
 			       			#end
 			       		#end
 			 #end
