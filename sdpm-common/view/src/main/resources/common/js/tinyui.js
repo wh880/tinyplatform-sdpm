@@ -333,7 +333,7 @@
         ' padding-right: 11px;',
         ' position: absolute;',
         ' left: -40px;',
-        ' top: 0;',
+        ' top:2px;',
         ' background: #444;',
         ' text-align: center;',
         ' line-height: 40px;',
