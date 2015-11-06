@@ -18,11 +18,11 @@
             #end
         #end
         #@tbody()
-            #for(p:proPros)
-               #@tr("text-c")
-               <td>${p?.productName}</td>
-               <td>${p?.projectNum}</td>
-               <td>${p?.consumedSum}</td>
+            #foreach(p:proPros)
+                #@tr("text-c")
+                <td>${p?.productName}</td>
+                <td>${p?.projectNum}</td>
+                <td>${p?.consumedSum}</td>
                 #end
             #end
         #end

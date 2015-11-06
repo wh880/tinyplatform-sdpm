@@ -59,8 +59,7 @@ public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
                 Select select = MysqlSelect.select(PROJECTTABLE.ALL,
                         PROJECT_TASKTABLE.TASK_ESTIMATE.sum().as("estimate"),
                         PROJECT_TASKTABLE.TASK_CONSUMED.sum().as("consumed"),
-//                        FragmentSelectItemSql.fragmentSelect("SUM(project_task.task_estimate) as estimate"),
-//                        FragmentSelectItemSql.fragmentSelect("SUM(project_task.task_consumed) as consumed"),
+                        PROJECT_TASKTABLE.TASK_LEFT.sum().as("allLeft"),
                         FragmentSelectItemSql.fragmentSelect("SUM(project_task.task_consumed)/(SUM(project_task.task_consumed)+SUM(project_task.task_left)) as percent")
                 ).from(PROJECTTABLE)
                         .join(Join.leftJoin(PROJECT_TASKTABLE, PROJECT_TASKTABLE.TASK_PROJECT.eq(PROJECTTABLE.PROJECT_ID)))
@@ -72,10 +71,13 @@ public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
     }
 
     public List<Project> findListWithStatistics(Project project) {
+        if (project == null) {
+            project = new Project();
+        }
         Select select = MysqlSelect.select(PROJECTTABLE.ALL,
-                FragmentSelectItemSql.fragmentSelect("SUM(project_task.task_estimate) as estimate"),
-                FragmentSelectItemSql.fragmentSelect("SUM(project_task.task_consumed) as consumed"),
-                FragmentSelectItemSql.fragmentSelect("SUM(project_task.task_left) as allLeft"),
+                PROJECT_TASKTABLE.TASK_ESTIMATE.sum().as("estimate"),
+                PROJECT_TASKTABLE.TASK_CONSUMED.sum().as("consumed"),
+                PROJECT_TASKTABLE.TASK_LEFT.sum().as("allLeft"),
                 FragmentSelectItemSql.fragmentSelect("SUM(project_task.task_consumed)/(SUM(project_task.task_consumed)+SUM(project_task.task_left)) as percent")
         ).from(PROJECTTABLE).join(
                 Join.leftJoin(PROJECT_TASKTABLE,

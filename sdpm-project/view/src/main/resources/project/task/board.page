@@ -194,7 +194,6 @@
             $(this).parents(".board").toggleClass("show-info");
         });
         var statarr = ["board-task-closed", "board-task-cancel", "board-task-done", "board-task-doing", "board-task-wait"];
-        var $kanban =$("#kanbanHeader");
         $(".col-droppable").droppable({
             drop: function (event, ui) {
                 ui.helper.css({"left": "0", "top": "0"});

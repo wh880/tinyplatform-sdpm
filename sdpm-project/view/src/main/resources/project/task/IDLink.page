@@ -1,10 +1,9 @@
-#!set(activeTitle="项目管理",activeMenuId=currentPageId)
+#!set(activeTitle="任务信息",activeMenuId=currentPageId)
 #import("/org/tinygroup/form/components/form.component")
 #import("/org/tinygroup/button/components/button_common.component")
 #import("/org/tinygroup/button/components/button.component")
 #import("/org/tinygroup/table/components/table.component")
 
-#set(name="task")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
         #@div(divClass="dropdownBox")
@@ -55,10 +54,7 @@
     #end
     #@div(divClass="infoContent")
         <p class="titleName">附件</p>
-
-        <div>
-
-        </div>
+        <div></div>
     #end
     #history(adminPath+"/system/action/ajax/history?actionObjectType=task&actionObjectId="+task?.taskId)
     <center>

@@ -208,11 +208,11 @@ public class Project implements Serializable {
         this.estimate = estimate;
     }
 
-    public float getConsume() {
+    public float getConsumed() {
         return consumed;
     }
 
-    public void setConsume(float consumed) {
+    public void setConsumed(float consumed) {
         this.consumed = consumed;
     }
 

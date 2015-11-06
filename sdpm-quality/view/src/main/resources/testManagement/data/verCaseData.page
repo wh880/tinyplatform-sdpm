@@ -9,7 +9,7 @@
 						#@td()${getDict("caseType",run?.caseType)}#end
 						#@td()${run?.testRunAssignedTo?UserUtils.getUserById(run?.testRunAssignedTo)?.orgUserRealName:""}#end
 						#@td()${run?.testRunLastRunner?UserUtils.getUserById(run?.testRunLastRunner)?.orgUserRealName:""}#end
-						#@td()${run?.testRunLastRunDate?formatDate(run?.testRunLastRunDate,'yyyy-MM-dd hh:mm:ss'):""}#end
+						#@td()${run?.testRunLastRunDate?formatDate(run?.testRunLastRunDate,'yyyy-MM-dd HH:mm:ss'):""}#end
 						#@td()${getDict("caseResult",run?.testRunLastRunResult)}#end
 						#@td()${getDict("caseStatus",run?.testRunStatus)}#end
 						 #@td()

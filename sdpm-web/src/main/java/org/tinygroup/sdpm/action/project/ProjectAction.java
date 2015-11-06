@@ -322,6 +322,11 @@ public class ProjectAction extends BaseController {
         return resultMap(true, "删除项目成功");
     }
 
+    /**
+     * 删除项目
+     * @param id
+     * @return
+     */
     @RequiresPermissions("pro-survey-remove")
     @ResponseBody
     @RequestMapping("/delete")

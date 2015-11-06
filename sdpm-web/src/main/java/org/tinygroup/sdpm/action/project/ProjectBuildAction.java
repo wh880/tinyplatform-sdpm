@@ -393,7 +393,7 @@ public class ProjectBuildAction extends BaseController {
     @RequestMapping(value = "/batchDeleteReq")
     public Map bctchDelReq(String ids, Integer buildId) {
         Map<String, String> map = new HashMap<String, String>();
-        if (ids == null || ids == "") {
+        if (StringUtil.isBlank(ids)) {
             map.put("status", "fail");
             map.put("info", "请至少选择一条数据");
             return map;

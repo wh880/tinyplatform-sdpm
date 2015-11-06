@@ -13,7 +13,7 @@
             #end
         #end
         #@tbody()
-            #foreach(i:[1..8])
+            #foreach(i:[1..5])
             #@tr()
                 #@th()    ${i}    #end
                 #@th()

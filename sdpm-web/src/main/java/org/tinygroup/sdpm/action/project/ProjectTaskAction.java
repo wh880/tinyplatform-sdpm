@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.tinygroup.commons.tools.StringUtil;
+import org.tinygroup.logger.LogLevel;
 import org.tinygroup.sdpm.action.project.dto.Tasks;
 import org.tinygroup.sdpm.action.project.util.TaskStatusUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
@@ -23,6 +24,7 @@ import org.tinygroup.sdpm.project.dao.pojo.TaskChartBean;
 import org.tinygroup.sdpm.project.service.inter.*;
 import org.tinygroup.sdpm.system.dao.pojo.ProfileType;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
+import org.tinygroup.sdpm.system.service.inter.EffortService;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.sdpm.util.*;
 import org.tinygroup.tinysqldsl.Pager;
@@ -46,7 +48,7 @@ public class ProjectTaskAction extends BaseController {
     @Autowired
     private ProjectService projectService;
     @Autowired
-    private TeamService teamService;
+    private EffortService effortService;
     @Autowired
     private ModuleService moduleService;
     @Autowired
@@ -100,6 +102,20 @@ public class ProjectTaskAction extends BaseController {
      */
     @RequestMapping("/consumeTime")
     public String consumeTime(Integer taskId, Model model) {
+        ProjectTask task = taskService.findTask(taskId);
+        model.addAttribute("task", task);
+        return "project/task/consumeTime";
+    }
+
+    /**
+     * 时间消耗
+     *
+     * @param taskId
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/consumeTime", method = RequestMethod.POST)
+    public String consumeTimeSave(Integer taskId, Model model) {
         ProjectTask task = taskService.findTask(taskId);
         model.addAttribute("task", task);
         return "project/task/consumeTime";
@@ -261,13 +277,13 @@ public class ProjectTaskAction extends BaseController {
             Integer start, Integer limit, String statu, String choose, Model model,
             HttpServletRequest request, HttpServletResponse response, String moduleId,
             @RequestParam(required = false, defaultValue = "task_id") String order,
-            String ordertype) {
+            String orderType) {
         Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
         if (projectId == null) {
             return redirectProjectForm();
         }
         boolean asc = false;
-        if ("desc".equals(ordertype)) {
+        if ("desc".equals(orderType)) {
             asc = true;
         }
         ProjectTask task = new ProjectTask();
@@ -316,15 +332,15 @@ public class ProjectTaskAction extends BaseController {
                 }
             }
             task.setTaskMailto(taskMailTo);
-            ProjectTask newtask = taskService.addTask(task);
+            ProjectTask newTask = taskService.addTask(task);
             LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, LogUtil.LogAction.OPENED,
-                    newtask.getTaskId().toString(), UserUtils.getUserId(),
-                    null, newtask.getTaskProject().toString(), null,
-                    newtask, comment);
+                    newTask.getTaskId().toString(), UserUtils.getUserId(),
+                    null, newTask.getTaskProject().toString(), null,
+                    newTask, comment);
             try {
-                uploadNoTitle(file, newtask.getTaskId(), ProfileType.TASK);
+                uploadNoTitle(file, newTask.getTaskId(), ProfileType.TASK);
             } catch (IOException e) {
-                e.printStackTrace();
+                logger.logMessage(LogLevel.ERROR, "上传文件文件出错，请求路径{}", e, request.getRequestURI());
             }
         } else {
             taskService.updateTask(task);
@@ -414,9 +430,16 @@ public class ProjectTaskAction extends BaseController {
         ProjectTask task = taskService.findTask(taskId);
         model.addAttribute("task", task);
 
-        return "project/task/IDLink.page";
+        return "project/task/IDLink";
     }
 
+    /**
+     * 任务编辑
+     *
+     * @param taskId
+     * @param model
+     * @return
+     */
     @RequestMapping("/basicInfoEdit")
     public String basicInfoEdit(Integer taskId, Model model) {
         ProjectTask task = taskService.findTask(taskId);
@@ -448,6 +471,13 @@ public class ProjectTaskAction extends BaseController {
         return "project/task/basicInfoEdit.pagelet";
     }
 
+    /**
+     * 任务基本信息
+     *
+     * @param taskId
+     * @param model
+     * @return
+     */
     @RequestMapping("/basicInformation")
     public String basicInformation(Integer taskId, Model model) {
         ProjectTask task = taskService.findTask(taskId);
@@ -456,13 +486,13 @@ public class ProjectTaskAction extends BaseController {
         model.addAttribute("project", project);
 
         //查询所属模块string
-        String modulPath;
+        String modulePath;
         if (task.getTaskModule() == null) {
-            modulPath = "/";
+            modulePath = "/";
         } else {
-            modulPath = ModuleUtil.getPath(task.getTaskModule(), " > ", moduleService, task.getTaskProject().toString(), true);
+            modulePath = ModuleUtil.getPath(task.getTaskModule(), " > ", moduleService, task.getTaskProject().toString(), true);
         }
-        model.addAttribute("modulPath", modulPath);
+        model.addAttribute("modulPath", modulePath);
         //查询相关需求名字
         ProductStory productStory = productStoryService.findStory(task.getTaskStory());
         String storyTitle = productStory == null ? "" : productStory.getStoryTitle();
@@ -531,8 +561,7 @@ public class ProjectTaskAction extends BaseController {
 
     @ResponseBody
     @RequestMapping("/gantt/init")
-    public List<Map<String, Object>> ganttInit(HttpServletRequest request,
-                                               HttpServletResponse response) {
+    public List<Map<String, Object>> ganttInit(HttpServletRequest request, HttpServletResponse response) {
         Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
         if (projectId == null) {
             return null;
@@ -646,8 +675,9 @@ public class ProjectTaskAction extends BaseController {
 
     /**
      * 改变任务状态 用于Ajax请求
+     *
      * @param task
-     * @param content 备注内容
+     * @param content    备注内容
      * @param taskStatus 改变的状态
      * @return
      */
