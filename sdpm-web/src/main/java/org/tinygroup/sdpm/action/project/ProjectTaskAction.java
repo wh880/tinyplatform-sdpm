@@ -93,6 +93,7 @@ public class ProjectTaskAction extends BaseController {
 
     /**
      * 时间消耗
+     *
      * @param taskId
      * @param model
      * @return
@@ -584,7 +585,7 @@ public class ProjectTaskAction extends BaseController {
     }
 
     @RequestMapping("/board")
-    public String board(Model model, HttpServletRequest request,HttpServletResponse response) {
+    public String board(Model model, HttpServletRequest request, HttpServletResponse response) {
         Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
 
         ProjectTask projectTask = new ProjectTask();
@@ -643,37 +644,44 @@ public class ProjectTaskAction extends BaseController {
         return "project/task/grouping.page";
     }
 
+    /**
+     * 改变任务状态 用于Ajax请求
+     * @param task
+     * @param content 备注内容
+     * @param taskStatus 改变的状态
+     * @return
+     */
     @ResponseBody
-    @RequestMapping("/ajaxChangeStatu")
-    public Map<String, String> ajaxChangeStatus(ProjectTask task, String content, String taskStatus) {
+    @RequestMapping("/changeStatus")
+    public Map<String, String> changeStatus(ProjectTask task, String content, String taskStatus) {
         Map<String, String> map;
         task.setTaskLastEditedBy(UserUtils.getUserId());
         Integer res;
-        LogUtil.LogAction logAction ;
+        LogUtil.LogAction logAction;
         if ("doing".equals(taskStatus)) {
             res = taskService.updateDoingTask(task);
             logAction = LogUtil.LogAction.ACTIVATED;
-            map = getMap(res, "激活成功", "激活失败");
+            map = generateResultMap(res, "激活成功", "激活失败");
         } else if ("close".equals(taskStatus)) {
             res = taskService.updateCloseTask(task);
-            map = getMap(res, "关闭成功", "关闭失败");
+            map = generateResultMap(res, "关闭成功", "关闭失败");
             logAction = LogUtil.LogAction.CLOSED;
         } else if ("cancel".equals(taskStatus)) {
             res = taskService.updateCancelTask(task);
             logAction = LogUtil.LogAction.CANCELED;
-            map = getMap(res, "取消成功", "取消失败");
+            map = generateResultMap(res, "取消成功", "取消失败");
         } else if ("finish".equals(taskStatus)) {
             res = taskService.updateFinishTask(task);
             logAction = LogUtil.LogAction.FINISHED;
-            map = getMap(res, "完成成功", "完成失败");
+            map = generateResultMap(res, "完成成功", "完成失败");
         } else if ("start".equals(taskStatus)) {
             res = taskService.updateStartTask(task);
             logAction = LogUtil.LogAction.STARTED;
-            map = getMap(res, "开始成功", "开始失败");
+            map = generateResultMap(res, "开始成功", "开始失败");
         } else {
             res = taskService.updateTask(task);
             logAction = LogUtil.LogAction.EDITED;
-            map = getMap(res, "编辑成功", "编辑失败");
+            map = generateResultMap(res, "编辑成功", "编辑失败");
         }
         LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, logAction, task.getTaskId().toString(),
                 UserUtils.getUserId(), null, taskService.findTask(task.getTaskId()).getTaskProject().toString(),
@@ -683,7 +691,7 @@ public class ProjectTaskAction extends BaseController {
 
     @RequiresPermissions("pro-task-report")
     @RequestMapping("/reportform")
-    public String reportform() {
+    public String reportForm() {
         return "project/task/reportform.page";
     }
 
@@ -711,14 +719,12 @@ public class ProjectTaskAction extends BaseController {
         return "project/task/reportFormDate.pagelet";
     }
 
-    private Map<String, String> getMap(Integer res, String successMsg, String falseMsg) {
-        Map<String, String> map = new HashMap<String, String>();
+    private Map<String, String> generateResultMap(Integer res, String successMsg, String falseMsg) {
         if (res > 0) {
-            map.putAll(resultMap(true, successMsg));
+            return resultMap(true, successMsg);
         } else {
-            map.putAll(resultMap(false, falseMsg));
+            return resultMap(false, falseMsg);
         }
-        return map;
     }
 
 }

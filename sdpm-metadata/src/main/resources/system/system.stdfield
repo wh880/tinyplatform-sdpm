@@ -26,7 +26,7 @@
   <standard-field id="c757c19c5c7e42e4bb25eb49244f2067" name="effort_project" title="所属项目" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
   <standard-field id="646f793a61ea4c8e95d7cf89815a6c13" name="effort_account" title="登记人" business-type-id="a2c7afa4de724b0cb8f2f46fd8389a37"/>
   <standard-field id="bc99a8114d0149beb77beb94afd34209" name="effort_work" title="工作内容" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
-  <standard-field id="488614bbfcc5404aa5b4ddda4cef56d8" name="effort_date" title="日期" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff"/>
+  <standard-field id="488614bbfcc5404aa5b4ddda4cef56d8" name="effort_date" title="日期" business-type-id="af7b470e7d404b4882e7ec5a1513165f"/>
   <standard-field id="75dacdf666084a95b5a5faf4cf6a2527" name="effort_left" title="剩余" business-type-id="8068bb7c6e5a4302b60e801f63ca7b35"/>
   <standard-field id="494874a140a54ab9a00d92382c8c67be" name="effort_consumed" title="耗时" business-type-id="8068bb7c6e5a4302b60e801f63ca7b35"/>
   <standard-field id="a6dbb44cffaa49519898a71944b5c78f" name="effort_begin" title="开始" business-type-id="a2c7afa4de724b0cb8f2f46fd8389a37"/>

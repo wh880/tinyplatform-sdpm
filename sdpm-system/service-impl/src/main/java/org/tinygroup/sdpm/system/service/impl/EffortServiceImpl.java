@@ -69,8 +69,7 @@ public class EffortServiceImpl implements EffortService {
         return effortManager.findByPage(start, limit, SystemEffort, sortName, asc);
     }
 
-    public List<SystemEffort> findList(SystemEffort systemEffort, String order,
-                                       String orderType) {
+    public List<SystemEffort> findList(SystemEffort systemEffort, String order, String orderType) {
         return effortManager.findList(systemEffort, order, orderType);
     }
 

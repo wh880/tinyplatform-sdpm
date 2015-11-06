@@ -190,7 +190,10 @@ public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
         return getDslTemplate().getByKey(pk, Project.class, new SelectGenerateCallback<Serializable>() {
             @SuppressWarnings("rawtypes")
             public Select generate(Serializable t) {
-                return selectFrom(PROJECTTABLE).where(PROJECTTABLE.PROJECT_ID.eq(t));
+                return selectFrom(PROJECTTABLE).where(and(
+                        PROJECTTABLE.PROJECT_ID.eq(t),
+                        PROJECTTABLE.PROJECT_DELETED.eq(Project.DELETE_NO)
+                ));
             }
         });
     }

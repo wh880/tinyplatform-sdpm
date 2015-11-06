@@ -269,7 +269,7 @@ public class ProjectAction extends BaseController {
      * @param model
      * @return
      */
-//    @RequiresPermissions("project-basicInfo")
+    @RequiresPermissions("project-basicInfo")
     @RequestMapping("/basicInformation")
     public String basicInformation(Integer projectID, Model model) {
         Project project = projectService.findProjectById(projectID);
@@ -302,7 +302,7 @@ public class ProjectAction extends BaseController {
      * @param projectIds
      * @return
      */
-//    @RequiresPermissions("project-batchDel")
+    @RequiresPermissions("project-batchDel")
     @ResponseBody
     @RequestMapping("/batchDelete")
     public Map batchDelete(@RequestParam(value = "ids") String projectIds) {

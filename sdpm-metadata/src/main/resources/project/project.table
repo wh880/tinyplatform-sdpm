@@ -7,8 +7,8 @@
     <table-field standard-field-id="e5d28aec72b24c58ac03fc7dfbaff40f" primary="false" unique="false" not-null="false" id="project_type" auto-increase="false"/>
     <table-field standard-field-id="c4604e5a5f7a49e8906ec39c7c1489e2" primary="false" unique="false" not-null="true" id="project_name" auto-increase="false"/>
     <table-field standard-field-id="5cafe4cc5fab4097a8c488b96b69b5f6" primary="false" unique="false" not-null="true" id="project_code" auto-increase="false"/>
-    <table-field standard-field-id="eb64fc3731a74e6b83fbd21e04d9c2c8" primary="false" unique="false" not-null="false" id="project_begin" auto-increase="false"/>
-    <table-field standard-field-id="b60537fc2b034196958ac32b0d598bd5" primary="false" unique="false" not-null="false" id="project_end" auto-increase="false"/>
+    <table-field standard-field-id="eb64fc3731a74e6b83fbd21e04d9c2c8" primary="false" unique="false" not-null="true" id="project_begin" auto-increase="false"/>
+    <table-field standard-field-id="b60537fc2b034196958ac32b0d598bd5" primary="false" unique="false" not-null="true" id="project_end" auto-increase="false"/>
     <table-field standard-field-id="d3bdb7016bcf4199aa9ba4a6f8c58b8f" primary="false" unique="false" not-null="false" id="project_days" auto-increase="false"/>
     <table-field standard-field-id="c3f62efdcb7a47abb9d9b9f2571f5e64" primary="false" unique="false" not-null="false" id="project_status" auto-increase="false"/>
     <table-field standard-field-id="0a23fb9850164fa9b731b667c85ec3ec" primary="false" unique="false" not-null="false" id="project_statge" auto-increase="false"/>
