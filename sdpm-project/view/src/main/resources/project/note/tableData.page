@@ -13,7 +13,7 @@
     #@td()<input type="checkbox" value="${l?.effortId}" name="idCheck">#end
 	#@td()${l?.effortId}#end
 	#@td()${formatDate(l?.effortDate,"yyyy-MM-dd")}#end
-	#@td()${l?.effortAccount}#end
+	#@td()${UserUtils.getUserByAccount(l?.effortAccount)?.orgUserRealName}#end
 	#@td()${l?.effortWork}#end
 	#@td() ${l?.effortConsumed}#end
 	#@td() ${l?.effortObjectType} #end

@@ -42,7 +42,7 @@
                         "demand"?
                         "Current":"")
                         #@buttons("","icon-lightbulb")
-                            已完成需求
+                            已关联需求
                         #end
                     #end
                     #@aHeadCol(TINY_CONTEXT_PATH+adminPath+

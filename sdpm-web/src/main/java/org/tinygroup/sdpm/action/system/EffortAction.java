@@ -20,9 +20,11 @@ import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
 import org.tinygroup.sdpm.project.service.inter.TaskService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemEffort;
 import org.tinygroup.sdpm.system.service.inter.EffortService;
+import org.tinygroup.sdpm.util.ProjectUtils;
 import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -46,11 +48,13 @@ public class EffortAction extends BaseController {
     }
 
     @RequestMapping("date/{type}")
-    public String date(@PathVariable(value = "type") String type, Model model) {
+    public String date(@PathVariable(value = "type") String type, HttpServletRequest request,
+                       HttpServletResponse response, Model model) {
+        Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
         if ("1".equals(type)) {
             return "/project/note/notetable.page";
         }
-        List<OrgUser> user = userService.findUserList(new OrgUser());
+        List<OrgUser> user = userService.findTeamUserListByProjectId(projectId);
         model.addAttribute("user", user);
         return "/project/note/notetable.page";
     }
