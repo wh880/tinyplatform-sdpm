@@ -21,13 +21,11 @@ import org.tinygroup.sdpm.project.service.inter.TaskService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemEffort;
 import org.tinygroup.sdpm.system.service.inter.EffortService;
 import org.tinygroup.sdpm.util.ProjectUtils;
-import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Controller
@@ -64,7 +62,7 @@ public class EffortAction extends BaseController {
         String order = "effort_date";
         String orderType = "desc";
         effort.setEffortObjectId(taskId);
-        List<SystemEffort> list = effortService.findList(effort, order, orderType);
+        List<SystemEffort> list = effortService.findSystemEffortListByOrder(effort, order, orderType);
         List<SystemEffort> effortList = new ArrayList<SystemEffort>();
         if (list.size() > 5) {
             for (int i = 0; i < 5; i++) {
@@ -78,17 +76,17 @@ public class EffortAction extends BaseController {
         return "project/task/note";
     }
 
-    @RequestMapping("save")
-    public String add(SystemEffort systemEffort, Model model) {
-        if (systemEffort.getEffortDate() != null) {
-            if (systemEffort.getEffortId() == null) {
-                systemEffort.setEffortBegin(new SimpleDateFormat("yyyy-MM-dd").format(systemEffort.getEffortDate()));
-                systemEffort.setEffortAccount(UserUtils.getUserAccount());
-            }
-            effortService.save(systemEffort);
-        }
-        return "project/note/notetable.page";
-    }
+//    @RequestMapping("save")
+//    public String add(SystemEffort systemEffort, Model model) {
+//        if (systemEffort.getEffortDate() != null) {
+//            if (systemEffort.getEffortId() == null) {
+//                systemEffort.setEffortBegin(new SimpleDateFormat("yyyy-MM-dd").format(systemEffort.getEffortDate()));
+//                systemEffort.setEffortAccount(UserUtils.getUserAccount());
+//            }
+//            effortService.saveSystemEffort(systemEffort);
+//        }
+//        return "project/note/notetable.page";
+//    }
 
     @RequestMapping("findPager")
     public String findPager(Integer start, Integer limit, String order, String ordertype, Integer effortId, Model model) {
@@ -98,7 +96,7 @@ public class EffortAction extends BaseController {
         }
         SystemEffort effort = new SystemEffort();
         effort.setEffortId(effortId);
-        Pager<SystemEffort> effortPager = effortService.findByPage(start, limit, effort, order, asc);
+        Pager<SystemEffort> effortPager = effortService.findSystemEffortPage(start, limit, effort, order, asc);
         model.addAttribute("effortPager", effortPager);
         return "project/note/tableData.pagelet";
     }
@@ -114,7 +112,7 @@ public class EffortAction extends BaseController {
                 String date = DateUtils.formatDate(effort.getEffortDate());
                 Map<String, Object> map = new HashMap<String, Object>();
                 map.put("id", effort.getEffortId());
-                map.put("title", effort.getEffortWork());
+                map.put("title", effort.getEffortWork()+"("+effort.getEffortConsumed()+"h)");
                 map.put("start", date);
                 map.put("end", date);
                 mapList.add(map);
@@ -148,14 +146,14 @@ public class EffortAction extends BaseController {
             asc = false;
         }
         if (date == 0) {
-            pager = effortService.findByPage(start, limit, systemEffort, order, asc);//全部日志
+            pager = effortService.findSystemEffortPage(start, limit, systemEffort, order, asc);//全部日志
         } else if (date == 1) {
             systemEffort.setEffortDate(new Date());
-            pager = effortService.findByPage(start, limit, systemEffort, order, asc);
+            pager = effortService.findSystemEffortPage(start, limit, systemEffort, order, asc);
         } else if (date == 2) {
             Date yesterday = DateUtils.addDays(new Date(), -1);
             systemEffort.setEffortDate(yesterday);
-            pager = effortService.findByPage(start, limit, systemEffort, order, asc);
+            pager = effortService.findSystemEffortPage(start, limit, systemEffort, order, asc);
         } else if (date == 3) {
             startDate = DateUtils.getFirstDayOfWeek(startDate);
             endDate = DateUtils.getLastDayOfWeek(startDate);
@@ -185,7 +183,7 @@ public class EffortAction extends BaseController {
 
         if (!StringUtil.isBlank(effortAccount) && date == null) {
             systemEffort.setEffortAccount(effortAccount);
-            pager = effortService.findByPage(start, limit, systemEffort, order, asc);
+            pager = effortService.findSystemEffortPage(start, limit, systemEffort, order, asc);
         }
         model.addAttribute("effortPager", pager);
         return "project/note/tableData.pagelet";
@@ -222,7 +220,7 @@ public class EffortAction extends BaseController {
 
             return map;
         } else if (isvip.equals("n")) {
-            effortService.save(effort);
+            effortService.saveSystemEffort(effort);
             map.put("status", "y");
             map.put("info", "1");
             return map;

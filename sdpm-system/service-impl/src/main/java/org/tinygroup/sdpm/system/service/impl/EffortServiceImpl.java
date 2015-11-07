@@ -20,7 +20,7 @@ public class EffortServiceImpl implements EffortService {
     @Autowired
     private TaskManager taskManager;
 
-    public SystemEffort save(SystemEffort systemEffort) {
+    public SystemEffort saveSystemEffort(SystemEffort systemEffort) {
         if (systemEffort.getEffortId() == null) {
             if (systemEffort.getEffortBegin() == null && systemEffort.getEffortEnd() == null) {
                 ProjectTask task =
@@ -45,11 +45,11 @@ public class EffortServiceImpl implements EffortService {
         }
     }
 
-    public List<SystemEffort> findByAccount(String account) {
+    public List<SystemEffort> findSystemEffortByAccount(String account) {
         return effortManager.findByAccount(account);
     }
 
-    public List<SystemEffort> findSystemEffort(SystemEffort systemEffort) {
+    public List<SystemEffort> findSystemEffortList(SystemEffort systemEffort) {
         return effortManager.find(systemEffort);
     }
 
@@ -61,11 +61,11 @@ public class EffortServiceImpl implements EffortService {
         return effortManager.findByProject(projectId);
     }
 
-    public Pager<SystemEffort> findByPage(Integer start, Integer limit, SystemEffort SystemEffort, String sortName, boolean asc) {
+    public Pager<SystemEffort> findSystemEffortPage(Integer start, Integer limit, SystemEffort SystemEffort, String sortName, boolean asc) {
         return effortManager.findByPage(start, limit, SystemEffort, sortName, asc);
     }
 
-    public List<SystemEffort> findList(SystemEffort systemEffort, String order, String orderType) {
+    public List<SystemEffort> findSystemEffortListByOrder(SystemEffort systemEffort, String order, String orderType) {
         return effortManager.findList(systemEffort, order, orderType);
     }
 

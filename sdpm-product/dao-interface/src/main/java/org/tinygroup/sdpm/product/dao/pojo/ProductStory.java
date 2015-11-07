@@ -26,8 +26,6 @@ import java.util.List;
  */
 public class ProductStory implements Serializable{
 	
-	
-
 	private Integer releaseId;
 	
 	private Integer bugId;
@@ -36,15 +34,6 @@ public class ProductStory implements Serializable{
 	 * 抄送人
 	 */
 	private List<String> mailto;
-
-	public List<String> getMailto() {
-		return mailto;
-	}
-
-	public void setMailto(List<String> mailto) {
-		this.mailto = mailto;
-	}
-
 	/**
 	 * 关联任务的数量，用于前台显示
 	 */
@@ -57,38 +46,18 @@ public class ProductStory implements Serializable{
 	 * 用于项目下需求模块关联需求列表显示所属计划
 	 */
 	private String planName;
-	
 	/**
 	 * 模块名称
 	 */
 	private String moduleTitle;
-	
 	/**
 	 * 创建人名称
 	 */
 	private String storyOpenedName;
-	
 	/**
 	 * 指派人名称
 	 */
 	private String storyAssignedName;
-	
-	public String getStoryOpenedName() {
-		return storyOpenedName;
-	}
-
-	public void setStoryOpenedName(String storyOpenedName) {
-		this.storyOpenedName = storyOpenedName;
-	}
-
-	public String getStoryAssignedName() {
-		return storyAssignedName;
-	}
-
-	public void setStoryAssignedName(String storyAssignedName) {
-		this.storyAssignedName = storyAssignedName;
-	}
-
 	/**
 	 * 需求ID
 	 *
@@ -265,6 +234,30 @@ public class ProductStory implements Serializable{
 	 *
 	 */
 	private Integer deleted;
+
+	public List<String> getMailto() {
+		return mailto;
+	}
+
+	public void setMailto(List<String> mailto) {
+		this.mailto = mailto;
+	}
+
+	public String getStoryOpenedName() {
+		return storyOpenedName;
+	}
+
+	public void setStoryOpenedName(String storyOpenedName) {
+		this.storyOpenedName = storyOpenedName;
+	}
+
+	public String getStoryAssignedName() {
+		return storyAssignedName;
+	}
+
+	public void setStoryAssignedName(String storyAssignedName) {
+		this.storyAssignedName = storyAssignedName;
+	}
 
 	public Integer getTaskNumber() {
 		return taskNumber;

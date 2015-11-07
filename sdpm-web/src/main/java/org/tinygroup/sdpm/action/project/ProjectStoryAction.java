@@ -42,14 +42,14 @@ public class ProjectStoryAction extends BaseController {
 
     @RequestMapping("/list/data")
     public String listData(HttpServletRequest request, HttpServletResponse response,
-                       Model model, Integer start, Integer limit, String order, String ordertype, String moduleId) {
+                       Model model, Integer start, Integer limit, String order, String orderType, String moduleId) {
 
         Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
         if (projectId == null) {
             return redirectProjectForm();
         }
-        Pager<ProductStory> story = projectStoryService.findStoryByProject(projectId, start, limit, order, ordertype, moduleId);
-        model.addAttribute("storys", story);
+        Pager<ProductStory> storyPager = projectStoryService.findStoryByProject(projectId, start, limit, order, orderType, moduleId);
+        model.addAttribute("storyPager", storyPager);
         return "project/demand/demandTableData.pagelet";
     }
 

@@ -23,6 +23,7 @@ import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
 import org.tinygroup.sdpm.project.dao.pojo.TaskChartBean;
 import org.tinygroup.sdpm.project.service.inter.*;
 import org.tinygroup.sdpm.system.dao.pojo.ProfileType;
+import org.tinygroup.sdpm.system.dao.pojo.SystemEffort;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.service.inter.EffortService;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
@@ -103,7 +104,12 @@ public class ProjectTaskAction extends BaseController {
     @RequestMapping("/consumeTime")
     public String consumeTime(Integer taskId, Model model) {
         ProjectTask task = taskService.findTask(taskId);
+        SystemEffort systemEffort = new SystemEffort();
+        systemEffort.setEffortObjectId(taskId);
+        systemEffort.setEffortObjectType("task");
+        List<SystemEffort> systemEffortList = effortService.findSystemEffortList(systemEffort);
         model.addAttribute("task", task);
+        model.addAttribute("systemEffortList", systemEffortList);
         return "project/task/consumeTime";
     }
 
@@ -379,50 +385,48 @@ public class ProjectTaskAction extends BaseController {
         Integer projectId = Integer.valueOf(cookie);
         model.addAttribute("teamList", userService.findTeamUserListByProjectId(projectId));
 
-        SystemModule module = new SystemModule();
-        module.setModuleType("task");
-        module.setModuleRoot(projectId);
-        List<SystemModule> moduleList = moduleService.findModuleList(module);
-        for (SystemModule m : moduleList) {
-            m.setModuleName(ModuleUtil.getPath(m.getModuleId(), "/", moduleService, "", false));
-        }
-        List<ProjectProduct> projectProductList = projectProductService.findProducts(projectId);
-        for (ProjectProduct pp : projectProductList) {
-            module.setModuleType("story");
-            module.setModuleRoot(pp.getProductId());
-            List<SystemModule> tModuleList = moduleService.findModuleList(module);
-            for (SystemModule m : tModuleList) {
-                m.setModuleName(ModuleUtil.getPath(m.getModuleId(), "/", moduleService, "", false));
-            }
-            moduleList.addAll(tModuleList);
-        }
         if (taskId != null) {
             ProjectTask task = taskService.findTask(Integer.parseInt(taskId));
             model.addAttribute("copyTask", task);
         }
-
         List<ProductStory> storyList = storyService.findStoryByProject(projectId);
-        ProductStory story = new ProductStory();
-        if (storyId != null) {
-            story = productStoryService.findStory(storyId);
-        }
-        model.addAttribute("story", story);
-
-        model.addAttribute("moduleList", moduleList);
+        model.addAttribute("storyId", storyId);
+        model.addAttribute("moduleList", generateModuleList(projectId));
         model.addAttribute("storyList", storyList);
         return "project/task/add";
     }
 
-    @RequiresPermissions("distribute-task")
-    @RequestMapping("/batchadd")
-    public String batchAdd(Integer taskId, Model model) {
-        if (taskId != null) {
-            ProjectTask task = taskService.findTask(taskId);
-            model.addAttribute("task", task);
-            //还需要查询其他相关任务剩余时间的信息
-            return "project/task/batchAdd.page";
+    @RequiresPermissions(value = {"pro-task-batchadd","distribute-task"},logical = Logical.OR)
+    @RequestMapping("/batchAdd")
+    public String preBatchAdd(Model model, HttpServletRequest request, HttpServletResponse response) {
+        Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
+        if (projectId == null) {
+            return redirectProjectForm();
         }
+        model.addAttribute("teamList", userService.findTeamUserListByProjectId(projectId));
+
+        List<ProductStory> storyList = storyService.findStoryByProject(projectId);
+        model.addAttribute("storyList", storyList);
+        model.addAttribute("moduleList", generateModuleList(projectId));
         return "project/task/batchAdd.page";
+    }
+
+    @RequestMapping(value = "/batchAdd",method = RequestMethod.POST)
+    public String batchAdd(Tasks tasks, HttpServletRequest request) {
+        List<ProjectTask> taskList = tasks.getTaskList();
+        for (int i = 0; i < taskList.size(); i++) {
+            if (StringUtil.isBlank(taskList.get(i).getTaskName())) {
+                taskList.remove(i);
+                i--;
+            }
+        }
+        if (taskList.isEmpty()) {
+            return "project/task/index.page";
+        } else {
+            Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, ProjectUtils.COOKIE_PROJECT_ID));
+            taskService.batchAdd(taskList, projectId);
+            return "project/task/index.page";
+        }
     }
 
     @RequestMapping("/findTask")
@@ -444,29 +448,12 @@ public class ProjectTaskAction extends BaseController {
     public String basicInfoEdit(Integer taskId, Model model) {
         ProjectTask task = taskService.findTask(taskId);
         String projectName = projectService.findProjectById(task.getTaskProject()).getProjectName();
-        SystemModule module = new SystemModule();
-        module.setModuleType("task");
-        module.setModuleRoot(task.getTaskProject());
-        List<SystemModule> moduleList = moduleService.findModuleList(module);
-        for (SystemModule m : moduleList) {
-            m.setModuleName(ModuleUtil.getPath(m.getModuleId(), "/", moduleService, "", false));
-        }
-        List<ProjectProduct> projectProductList = projectProductService.findProducts(task.getTaskProject());
-        for (ProjectProduct pp : projectProductList) {
-            module.setModuleType("story");
-            module.setModuleRoot(pp.getProductId());
-            List<SystemModule> tModuleList = moduleService.findModuleList(module);
-            for (SystemModule m : tModuleList) {
-                m.setModuleName(ModuleUtil.getPath(m.getModuleId(), "/", moduleService, "", false));
-            }
-            moduleList.addAll(tModuleList);
-        }
 
         List<ProductStory> storyList = storyService.findStoryByProject(task.getTaskProject());
         model.addAttribute("task", task);
         model.addAttribute("projectName", projectName);
         model.addAttribute("teamList", userService.findTeamUserListByProjectId(task.getTaskProject()));
-        model.addAttribute("moduleList", moduleList);
+        model.addAttribute("moduleList", generateModuleList(task.getTaskProject()));
         model.addAttribute("storyList", storyList);
         return "project/task/basicInfoEdit.pagelet";
     }
@@ -500,57 +487,6 @@ public class ProjectTaskAction extends BaseController {
         return "project/task/basicInformation.pagelet";
     }
 
-    @RequiresPermissions("pro-task-batchadd")
-    @RequestMapping("/preBatchAdd")
-    public String preBatchAdd(Model model, HttpServletRequest request, HttpServletResponse response) {
-        Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
-        if (projectId == null) {
-            return redirectProjectForm();
-        }
-        model.addAttribute("teamList", userService.findTeamUserListByProjectId(projectId));
-
-        List<ProductStory> storyList = storyService.findStoryByProject(projectId);
-        model.addAttribute("storyList", storyList);
-
-        SystemModule module = new SystemModule();
-        module.setModuleType("task");
-        module.setModuleRoot(projectId);
-        List<SystemModule> moduleList = moduleService.findModuleList(module);
-        for (SystemModule m : moduleList) {
-            m.setModuleName(ModuleUtil.getPath(m.getModuleId(), "/", moduleService, "", false));
-        }
-        List<ProjectProduct> projectProductList = projectProductService.findProducts(projectId);
-        for (ProjectProduct pp : projectProductList) {
-            module.setModuleType("story");
-            module.setModuleRoot(pp.getProductId());
-            List<SystemModule> tModuleList = moduleService.findModuleList(module);
-            for (SystemModule m : tModuleList) {
-                m.setModuleName(ModuleUtil.getPath(m.getModuleId(), "/", moduleService, "", false));
-            }
-            moduleList.addAll(tModuleList);
-        }
-        model.addAttribute("modulesList", moduleList);
-
-        return "project/task/batchAdd.page";
-    }
-
-    @RequestMapping("/batchAdd")
-    public String batchAdd(Tasks tasks, HttpServletRequest request) {
-        List<ProjectTask> taskList = tasks.getTaskList();
-        for (int i = 0; i < taskList.size(); i++) {
-            if (StringUtil.isBlank(taskList.get(i).getTaskName())) {
-                taskList.remove(i);
-                i--;
-            }
-        }
-        if (taskList.isEmpty()) {
-            return "project/task/index.page";
-        } else {
-            Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, ProjectUtils.COOKIE_PROJECT_ID));
-            taskService.batchAdd(taskList, projectId);
-            return "project/task/index.page";
-        }
-    }
 
     @RequiresPermissions("gantt")
     @RequestMapping("/gantt")
@@ -756,5 +692,27 @@ public class ProjectTaskAction extends BaseController {
             return resultMap(false, falseMsg);
         }
     }
+
+    private List<SystemModule> generateModuleList(Integer projectId) {
+        SystemModule module = new SystemModule();
+        module.setModuleType("task");
+        module.setModuleRoot(projectId);
+        List<SystemModule> moduleList = moduleService.findModuleList(module);
+        for (SystemModule m : moduleList) {
+            m.setModuleName(ModuleUtil.getPath(m.getModuleId(), "/", moduleService, "", false));
+        }
+        List<ProjectProduct> projectProductList = projectProductService.findProducts(projectId);
+        for (ProjectProduct pp : projectProductList) {
+            module.setModuleType("story");
+            module.setModuleRoot(pp.getProductId());
+            List<SystemModule> tModuleList = moduleService.findModuleList(module);
+            for (SystemModule m : tModuleList) {
+                m.setModuleName(ModuleUtil.getPath(m.getModuleId(), "/", moduleService, "", false));
+            }
+            moduleList.addAll(tModuleList);
+        }
+        return moduleList;
+    }
+
 
 }

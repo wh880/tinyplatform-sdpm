@@ -100,17 +100,17 @@ public class ProjectManagerImpl implements ProjectManager {
         }
     }
 
-    public List<Project> findList(Project project, String order, String ordertype) {
+    public List<Project> findList(Project project, String order, String orderType) {
         if (order != null) {
-            return projectDao.query(project, new OrderBy(FieldUtil.stringFormat(order), !("desc".equals(ordertype)) ? true : false));
+            return projectDao.query(project, new OrderBy(FieldUtil.stringFormat(order), !("desc".equals(orderType)) ? true : false));
         } else {
             return projectDao.query(project);
         }
 
     }
 
-    public Pager<Project> findPager(int start, int limit, Project project, String order, String ordertype) {
-        return projectDao.queryPager((start - 1) * limit, limit, project, new OrderBy(FieldUtil.stringFormat(order), !("desc".equals(ordertype)) ? true : false));
+    public Pager<Project> findPager(int start, int limit, Project project, String order, String orderType) {
+        return projectDao.queryPager((start - 1) * limit, limit, project, new OrderBy(FieldUtil.stringFormat(order), !("desc".equals(orderType)) ? true : false));
     }
 
     public List<Project> getProjectByStoryId(Integer storyId) {

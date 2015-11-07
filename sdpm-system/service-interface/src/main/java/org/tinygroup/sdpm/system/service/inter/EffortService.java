@@ -15,7 +15,7 @@ public interface EffortService {
      * @param systemEffort
      * @return
      */
-    SystemEffort save(SystemEffort systemEffort);
+    SystemEffort saveSystemEffort(SystemEffort systemEffort);
 
     /**
      * 根据登记人查询
@@ -23,14 +23,14 @@ public interface EffortService {
      * @param account
      * @return
      */
-    List<SystemEffort> findByAccount(String account);
+    List<SystemEffort> findSystemEffortByAccount(String account);
 
     /**
      * 查询所有字段
      *
      * @return
      */
-    List<SystemEffort> findSystemEffort(SystemEffort systemEffort);
+    List<SystemEffort> findSystemEffortList(SystemEffort systemEffort);
 
     /**
      * 根据时间段查询
@@ -51,24 +51,14 @@ public interface EffortService {
     List<SystemEffort> findSystemEffortByProjectId(Integer projectId);
 
     /**
-     * @param start
-     * @param limit
-     * @param systemEffort
-     * @param sortName
-     * @param asc
-     * @return
-     */
-    Pager<SystemEffort> findByPage(Integer start, Integer limit, SystemEffort systemEffort, String sortName, boolean asc);
-
-    /**
      * 排序查询
      *
      * @param systemEffort
      * @param order
-     * @param orderTpye
+     * @param orderType
      * @return
      */
-    List<SystemEffort> findList(SystemEffort systemEffort, String order, String orderTpye);
+    List<SystemEffort> findSystemEffortListByOrder(SystemEffort systemEffort, String order, String orderType);
 
     /**
      * 批量删除
@@ -77,6 +67,16 @@ public interface EffortService {
      * @return
      */
     Integer batchDelete(Integer... ids);
+    /**
+     * @param start
+     * @param limit
+     * @param systemEffort
+     * @param sortName
+     * @param asc
+     * @return
+     */
+    Pager<SystemEffort> findSystemEffortPage(Integer start, Integer limit, SystemEffort systemEffort, String sortName, boolean asc);
+
 
     /**
      * 根据时间段查询

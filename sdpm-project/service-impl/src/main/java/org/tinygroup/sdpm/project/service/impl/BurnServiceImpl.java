@@ -50,21 +50,23 @@ public class BurnServiceImpl implements BurnService {
                         burnManager.update(burn);
                     }
                 }
+
             }
         } else {
             ProjectTask task = taskManager.find(taskId);
-            Project project = projectManager.find(task.getTaskProject());
-            List<Project> projectList = projectManager.findListProjects(project);
+            Project project= new Project();
+            project.setProjectId(task.getTaskProject());
+            project = projectManager.findListProjects(project).get(0);
             ProjectBurn burn = new ProjectBurn();
             burn.setProjectId(project.getProjectId());
             burn.setBurnDate(DateUtils.getDateStart(new Date()));
-            List<ProjectBurn> res = burnManager.findList(burn);
-            burn.setBurnConsumed(projectList.get(0).getConsumed());
-            burn.setBurnLeft(projectList.get(0).getAllLeft());
-            if (res.isEmpty()) {
+            List<ProjectBurn> burnList = burnManager.findList(burn);
+            burn.setBurnConsumed(project.getConsumed());
+            burn.setBurnLeft(project.getAllLeft());
+            if (burnList.isEmpty()) {
                 burnManager.add(burn);
             } else {
-                burn.setId(res.get(0).getId());
+                burn.setId(burnList.get(0).getId());
                 burnManager.update(burn);
             }
         }

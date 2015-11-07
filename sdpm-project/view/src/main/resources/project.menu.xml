@@ -44,7 +44,7 @@
             <menu id="pro-task-report" name="报表" href="/project/task/reportform" icon="icon-bar-chart" sort="8"
                   isShow="1"
                   scope="pro-taskmenu2-op"/>
-            <menu id="pro-task-batchadd" name="批量增加" href="/project/task/preBatchAdd" icon="icon-plus-sign" sort="6"
+            <menu id="pro-task-batchadd" name="批量增加" href="/project/task/batchAdd" icon="icon-plus-sign" sort="6"
                   isShow="1"
                   scope="pro-taskmenu2-op"/>
             <menu id="pro-task-proposeversion" name="建任务" href="/project/task/form" icon="icon-plus" sort="4"
