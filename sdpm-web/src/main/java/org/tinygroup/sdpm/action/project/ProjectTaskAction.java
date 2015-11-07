@@ -396,23 +396,23 @@ public class ProjectTaskAction extends BaseController {
         return "project/task/add";
     }
 
-    @RequiresPermissions(value = {"pro-task-batchadd","distribute-task"},logical = Logical.OR)
+    @RequiresPermissions(value = {"pro-task-batchadd", "distribute-task"}, logical = Logical.OR)
     @RequestMapping("/batchAdd")
-    public String preBatchAdd(Model model, HttpServletRequest request, HttpServletResponse response) {
+    public String batchAddForm(Integer storyId, Model model, HttpServletRequest request, HttpServletResponse response) {
         Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
         if (projectId == null) {
             return redirectProjectForm();
         }
         model.addAttribute("teamList", userService.findTeamUserListByProjectId(projectId));
-
+        model.addAttribute("storyId", storyId);
         List<ProductStory> storyList = storyService.findStoryByProject(projectId);
         model.addAttribute("storyList", storyList);
         model.addAttribute("moduleList", generateModuleList(projectId));
         return "project/task/batchAdd.page";
     }
 
-    @RequestMapping(value = "/batchAdd",method = RequestMethod.POST)
-    public String batchAdd(Tasks tasks, HttpServletRequest request) {
+    @RequestMapping(value = "/batchAdd", method = RequestMethod.POST)
+    public String batchAddSave(Tasks tasks, HttpServletRequest request) {
         List<ProjectTask> taskList = tasks.getTaskList();
         for (int i = 0; i < taskList.size(); i++) {
             if (StringUtil.isBlank(taskList.get(i).getTaskName())) {
