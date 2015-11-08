@@ -1,7 +1,3 @@
-#macro setTinyItemCount(num)
-<input type="hidden" name="records" value="${num}"/>
-#end
-#include("/project/task/maplist.page")
 #setTinyItemCount(taskPager.totalCount)
 #foreach(t:taskPager?.records)
 #@tr()
@@ -10,14 +6,17 @@
     #@td()${t?.taskPri}</a>#end
     #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/project/task/findTask?taskId=${t?.taskId}">${t?.taskName}#end
     #if(t.taskStatus)
-        #@td()${showStatuMap.get(t.taskStatus)}#end
-    #else#@td()#end
+        #@td()${getDict("taskStatus",t.taskStatus)}#end
+    #else
+        #@td()#end
     #end
-
     #@td()${formatdate(t?.taskDeadLine,"yyyy-MM-dd")}#end
-    #@td()#if(t.taskOpenedDate)${formatdate(t.taskOpenedDate,"yyyy-MM-dd")}#end#end
     #@td()${t?.taskAssignedTo==null?"":UserUtils.getUserById(t?.taskAssignedTo)?.orgUserRealName}#end
     #@td()${t?.taskFinishedBy==null?"":UserUtils.getUserById(t?.taskFinishedBy)?.orgUserRealName}#end
+    #@td()${t.taskEstimate}#end
+    #@td()${t.taskConsumed}#end
+    #@td()${t.taskLeft}#end
+
     #@td()
         #foreach(m:menuManager.getScopeMenus("pro-task-op"))
         ##逻辑判断，根据状态判断是否可选择。

@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.tinygroup.commons.tools.StringUtil;
+import org.tinygroup.logger.LogLevel;
 import org.tinygroup.sdpm.action.project.dto.Tasks;
 import org.tinygroup.sdpm.action.project.util.TaskStatusUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
@@ -22,7 +23,9 @@ import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
 import org.tinygroup.sdpm.project.dao.pojo.TaskChartBean;
 import org.tinygroup.sdpm.project.service.inter.*;
 import org.tinygroup.sdpm.system.dao.pojo.ProfileType;
+import org.tinygroup.sdpm.system.dao.pojo.SystemEffort;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
+import org.tinygroup.sdpm.system.service.inter.EffortService;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.sdpm.util.*;
 import org.tinygroup.tinysqldsl.Pager;
@@ -46,7 +49,7 @@ public class ProjectTaskAction extends BaseController {
     @Autowired
     private ProjectService projectService;
     @Autowired
-    private TeamService teamService;
+    private EffortService effortService;
     @Autowired
     private ModuleService moduleService;
     @Autowired
@@ -100,6 +103,25 @@ public class ProjectTaskAction extends BaseController {
      */
     @RequestMapping("/consumeTime")
     public String consumeTime(Integer taskId, Model model) {
+        ProjectTask task = taskService.findTask(taskId);
+        SystemEffort systemEffort = new SystemEffort();
+        systemEffort.setEffortObjectId(taskId);
+        systemEffort.setEffortObjectType("task");
+        List<SystemEffort> systemEffortList = effortService.findSystemEffortList(systemEffort);
+        model.addAttribute("task", task);
+        model.addAttribute("systemEffortList", systemEffortList);
+        return "project/task/consumeTime";
+    }
+
+    /**
+     * 时间消耗
+     *
+     * @param taskId
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/consumeTime", method = RequestMethod.POST)
+    public String consumeTimeSave(Integer taskId, Model model) {
         ProjectTask task = taskService.findTask(taskId);
         model.addAttribute("task", task);
         return "project/task/consumeTime";
@@ -261,13 +283,13 @@ public class ProjectTaskAction extends BaseController {
             Integer start, Integer limit, String statu, String choose, Model model,
             HttpServletRequest request, HttpServletResponse response, String moduleId,
             @RequestParam(required = false, defaultValue = "task_id") String order,
-            String ordertype) {
+            String orderType) {
         Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
         if (projectId == null) {
             return redirectProjectForm();
         }
         boolean asc = false;
-        if ("desc".equals(ordertype)) {
+        if ("desc".equals(orderType)) {
             asc = true;
         }
         ProjectTask task = new ProjectTask();
@@ -316,15 +338,15 @@ public class ProjectTaskAction extends BaseController {
                 }
             }
             task.setTaskMailto(taskMailTo);
-            ProjectTask newtask = taskService.addTask(task);
+            ProjectTask newTask = taskService.addTask(task);
             LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, LogUtil.LogAction.OPENED,
-                    newtask.getTaskId().toString(), UserUtils.getUserId(),
-                    null, newtask.getTaskProject().toString(), null,
-                    newtask, comment);
+                    newTask.getTaskId().toString(), UserUtils.getUserId(),
+                    null, newTask.getTaskProject().toString(), null,
+                    newTask, comment);
             try {
-                uploadNoTitle(file, newtask.getTaskId(), ProfileType.TASK);
+                uploadNoTitle(file, newTask.getTaskId(), ProfileType.TASK);
             } catch (IOException e) {
-                e.printStackTrace();
+                logger.logMessage(LogLevel.ERROR, "上传文件文件出错，请求路径{}", e, request.getRequestURI());
             }
         } else {
             taskService.updateTask(task);
@@ -363,149 +385,34 @@ public class ProjectTaskAction extends BaseController {
         Integer projectId = Integer.valueOf(cookie);
         model.addAttribute("teamList", userService.findTeamUserListByProjectId(projectId));
 
-        SystemModule module = new SystemModule();
-        module.setModuleType("task");
-        module.setModuleRoot(projectId);
-        List<SystemModule> moduleList = moduleService.findModuleList(module);
-        for (SystemModule m : moduleList) {
-            m.setModuleName(ModuleUtil.getPath(m.getModuleId(), "/", moduleService, "", false));
-        }
-        List<ProjectProduct> projectProductList = projectProductService.findProducts(projectId);
-        for (ProjectProduct pp : projectProductList) {
-            module.setModuleType("story");
-            module.setModuleRoot(pp.getProductId());
-            List<SystemModule> tModuleList = moduleService.findModuleList(module);
-            for (SystemModule m : tModuleList) {
-                m.setModuleName(ModuleUtil.getPath(m.getModuleId(), "/", moduleService, "", false));
-            }
-            moduleList.addAll(tModuleList);
-        }
         if (taskId != null) {
             ProjectTask task = taskService.findTask(Integer.parseInt(taskId));
             model.addAttribute("copyTask", task);
         }
-
         List<ProductStory> storyList = storyService.findStoryByProject(projectId);
-        ProductStory story = new ProductStory();
-        if (storyId != null) {
-            story = productStoryService.findStory(storyId);
-        }
-        model.addAttribute("story", story);
-
-        model.addAttribute("moduleList", moduleList);
+        model.addAttribute("storyId", storyId);
+        model.addAttribute("moduleList", generateModuleList(projectId));
         model.addAttribute("storyList", storyList);
         return "project/task/add";
     }
 
-    @RequiresPermissions("distribute-task")
-    @RequestMapping("/batchadd")
-    public String batchAdd(Integer taskId, Model model) {
-        if (taskId != null) {
-            ProjectTask task = taskService.findTask(taskId);
-            model.addAttribute("task", task);
-            //还需要查询其他相关任务剩余时间的信息
-            return "project/task/batchAdd.page";
-        }
-        return "project/task/batchAdd.page";
-    }
-
-    @RequestMapping("/findTask")
-    public String findTask(Model model, Integer taskId) {
-        ProjectTask task = taskService.findTask(taskId);
-        model.addAttribute("task", task);
-
-        return "project/task/IDLink.page";
-    }
-
-    @RequestMapping("/basicInfoEdit")
-    public String basicInfoEdit(Integer taskId, Model model) {
-        ProjectTask task = taskService.findTask(taskId);
-        String projectName = projectService.findProjectById(task.getTaskProject()).getProjectName();
-        SystemModule module = new SystemModule();
-        module.setModuleType("task");
-        module.setModuleRoot(task.getTaskProject());
-        List<SystemModule> moduleList = moduleService.findModuleList(module);
-        for (SystemModule m : moduleList) {
-            m.setModuleName(ModuleUtil.getPath(m.getModuleId(), "/", moduleService, "", false));
-        }
-        List<ProjectProduct> projectProductList = projectProductService.findProducts(task.getTaskProject());
-        for (ProjectProduct pp : projectProductList) {
-            module.setModuleType("story");
-            module.setModuleRoot(pp.getProductId());
-            List<SystemModule> tModuleList = moduleService.findModuleList(module);
-            for (SystemModule m : tModuleList) {
-                m.setModuleName(ModuleUtil.getPath(m.getModuleId(), "/", moduleService, "", false));
-            }
-            moduleList.addAll(tModuleList);
-        }
-
-        List<ProductStory> storyList = storyService.findStoryByProject(task.getTaskProject());
-        model.addAttribute("task", task);
-        model.addAttribute("projectName", projectName);
-        model.addAttribute("teamList", userService.findTeamUserListByProjectId(task.getTaskProject()));
-        model.addAttribute("moduleList", moduleList);
-        model.addAttribute("storyList", storyList);
-        return "project/task/basicInfoEdit.pagelet";
-    }
-
-    @RequestMapping("/basicInformation")
-    public String basicInformation(Integer taskId, Model model) {
-        ProjectTask task = taskService.findTask(taskId);
-        Project project = projectService.findProjectById(task.getTaskProject());
-        model.addAttribute("task", task);
-        model.addAttribute("project", project);
-
-        //查询所属模块string
-        String modulPath;
-        if (task.getTaskModule() == null) {
-            modulPath = "/";
-        } else {
-            modulPath = ModuleUtil.getPath(task.getTaskModule(), " > ", moduleService, task.getTaskProject().toString(), true);
-        }
-        model.addAttribute("modulPath", modulPath);
-        //查询相关需求名字
-        ProductStory productStory = productStoryService.findStory(task.getTaskStory());
-        String storyTitle = productStory == null ? "" : productStory.getStoryTitle();
-        model.addAttribute("storyTitle", storyTitle);
-        return "project/task/basicInformation.pagelet";
-    }
-
-    @RequiresPermissions("pro-task-batchadd")
-    @RequestMapping("/preBatchAdd")
-    public String preBatchAdd(Model model, HttpServletRequest request, HttpServletResponse response) {
+    @RequiresPermissions(value = {"pro-task-batchadd", "distribute-task"}, logical = Logical.OR)
+    @RequestMapping("/batchAdd")
+    public String batchAddForm(Integer storyId, Model model, HttpServletRequest request, HttpServletResponse response) {
         Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
         if (projectId == null) {
             return redirectProjectForm();
         }
         model.addAttribute("teamList", userService.findTeamUserListByProjectId(projectId));
-
+        model.addAttribute("storyId", storyId);
         List<ProductStory> storyList = storyService.findStoryByProject(projectId);
         model.addAttribute("storyList", storyList);
-
-        SystemModule module = new SystemModule();
-        module.setModuleType("task");
-        module.setModuleRoot(projectId);
-        List<SystemModule> moduleList = moduleService.findModuleList(module);
-        for (SystemModule m : moduleList) {
-            m.setModuleName(ModuleUtil.getPath(m.getModuleId(), "/", moduleService, "", false));
-        }
-        List<ProjectProduct> projectProductList = projectProductService.findProducts(projectId);
-        for (ProjectProduct pp : projectProductList) {
-            module.setModuleType("story");
-            module.setModuleRoot(pp.getProductId());
-            List<SystemModule> tModuleList = moduleService.findModuleList(module);
-            for (SystemModule m : tModuleList) {
-                m.setModuleName(ModuleUtil.getPath(m.getModuleId(), "/", moduleService, "", false));
-            }
-            moduleList.addAll(tModuleList);
-        }
-        model.addAttribute("modulesList", moduleList);
-
+        model.addAttribute("moduleList", generateModuleList(projectId));
         return "project/task/batchAdd.page";
     }
 
-    @RequestMapping("/batchAdd")
-    public String batchAdd(Tasks tasks, HttpServletRequest request) {
+    @RequestMapping(value = "/batchAdd", method = RequestMethod.POST)
+    public String batchAddSave(Tasks tasks, HttpServletRequest request) {
         List<ProjectTask> taskList = tasks.getTaskList();
         for (int i = 0; i < taskList.size(); i++) {
             if (StringUtil.isBlank(taskList.get(i).getTaskName())) {
@@ -522,6 +429,65 @@ public class ProjectTaskAction extends BaseController {
         }
     }
 
+    @RequestMapping("/findTask")
+    public String findTask(Model model, Integer taskId) {
+        ProjectTask task = taskService.findTask(taskId);
+        model.addAttribute("task", task);
+
+        return "project/task/IDLink";
+    }
+
+    /**
+     * 任务编辑
+     *
+     * @param taskId
+     * @param model
+     * @return
+     */
+    @RequestMapping("/basicInfoEdit")
+    public String basicInfoEdit(Integer taskId, Model model) {
+        ProjectTask task = taskService.findTask(taskId);
+        String projectName = projectService.findProjectById(task.getTaskProject()).getProjectName();
+
+        List<ProductStory> storyList = storyService.findStoryByProject(task.getTaskProject());
+        model.addAttribute("task", task);
+        model.addAttribute("projectName", projectName);
+        model.addAttribute("teamList", userService.findTeamUserListByProjectId(task.getTaskProject()));
+        model.addAttribute("moduleList", generateModuleList(task.getTaskProject()));
+        model.addAttribute("storyList", storyList);
+        return "project/task/basicInfoEdit.pagelet";
+    }
+
+    /**
+     * 任务基本信息
+     *
+     * @param taskId
+     * @param model
+     * @return
+     */
+    @RequestMapping("/basicInformation")
+    public String basicInformation(Integer taskId, Model model) {
+        ProjectTask task = taskService.findTask(taskId);
+        Project project = projectService.findProjectById(task.getTaskProject());
+        model.addAttribute("task", task);
+        model.addAttribute("project", project);
+
+        //查询所属模块string
+        String modulePath;
+        if (task.getTaskModule() == null) {
+            modulePath = "/";
+        } else {
+            modulePath = ModuleUtil.getPath(task.getTaskModule(), " > ", moduleService, task.getTaskProject().toString(), true);
+        }
+        model.addAttribute("modulPath", modulePath);
+        //查询相关需求名字
+        ProductStory productStory = productStoryService.findStory(task.getTaskStory());
+        String storyTitle = productStory == null ? "" : productStory.getStoryTitle();
+        model.addAttribute("storyTitle", storyTitle);
+        return "project/task/basicInformation.pagelet";
+    }
+
+
     @RequiresPermissions("gantt")
     @RequestMapping("/gantt")
     public String gantt(Model model, String choose) {
@@ -531,8 +497,7 @@ public class ProjectTaskAction extends BaseController {
 
     @ResponseBody
     @RequestMapping("/gantt/init")
-    public List<Map<String, Object>> ganttInit(HttpServletRequest request,
-                                               HttpServletResponse response) {
+    public List<Map<String, Object>> ganttInit(HttpServletRequest request, HttpServletResponse response) {
         Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
         if (projectId == null) {
             return null;
@@ -646,8 +611,9 @@ public class ProjectTaskAction extends BaseController {
 
     /**
      * 改变任务状态 用于Ajax请求
+     *
      * @param task
-     * @param content 备注内容
+     * @param content    备注内容
      * @param taskStatus 改变的状态
      * @return
      */
@@ -726,5 +692,27 @@ public class ProjectTaskAction extends BaseController {
             return resultMap(false, falseMsg);
         }
     }
+
+    private List<SystemModule> generateModuleList(Integer projectId) {
+        SystemModule module = new SystemModule();
+        module.setModuleType("task");
+        module.setModuleRoot(projectId);
+        List<SystemModule> moduleList = moduleService.findModuleList(module);
+        for (SystemModule m : moduleList) {
+            m.setModuleName(ModuleUtil.getPath(m.getModuleId(), "/", moduleService, "", false));
+        }
+        List<ProjectProduct> projectProductList = projectProductService.findProducts(projectId);
+        for (ProjectProduct pp : projectProductList) {
+            module.setModuleType("story");
+            module.setModuleRoot(pp.getProductId());
+            List<SystemModule> tModuleList = moduleService.findModuleList(module);
+            for (SystemModule m : tModuleList) {
+                m.setModuleName(ModuleUtil.getPath(m.getModuleId(), "/", moduleService, "", false));
+            }
+            moduleList.addAll(tModuleList);
+        }
+        return moduleList;
+    }
+
 
 }

@@ -4,6 +4,6 @@
         #@td()${h?.holidayName}#end
         #@td()${UserUtils.getUserById(h?.actionActor).orgUserRealName}#end
         #@td()${getDict("actionOperate",h?.actionAction)}#end
-        #@td()${formatDate(h?.actionDate,"yyyy-MM-dd hh:mm:ss")}#end
+        #@td()${formatDate(h?.actionDate,"yyyy-MM-dd HH:mm:ss")}#end
     #end
 #end

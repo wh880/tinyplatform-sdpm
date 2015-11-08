@@ -16,7 +16,7 @@ ${casepager?.totalCount+1}
     #@td()${getDict("caseType",c?.caseType)}#end
     #@td()${c?.caseOpenedBy?UserUtils.getUserById(c?.caseOpenedBy)?.orgUserRealName:""}#end
     #@td()${c?.caseLastRunner?UserUtils.getUserById(c?.caseLastRunner)?.orgUserRealName:""}#end
-    #@td()${c?.caseLastRunDate?formatDate(c?.caseLastRunDate,'yyyy-MM-dd hh:mm:ss'):""}#end
+    #@td()${c?.caseLastRunDate?formatDate(c?.caseLastRunDate,'yyyy-MM-dd HH:mm:ss'):""}#end
     #@td()${getDict("caseResult",c?.caseLastRunResult)}#end
     #@td()${getDict("caseStatus",c?.caseStatus)}#end
     #@td()

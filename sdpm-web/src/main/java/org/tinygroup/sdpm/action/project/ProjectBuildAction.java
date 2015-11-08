@@ -328,7 +328,6 @@ public class ProjectBuildAction extends BaseController {
     @ResponseBody
     @RequestMapping("/releateReq")
     public Map<String, String> releateReq(String ids, Integer buildId) {
-        Map<String, String> map = new HashMap<String, String>();
         for (String storyId : ids.split(",")) {
             buildService.releateReq(Integer.valueOf(storyId), buildId);
         }
@@ -338,7 +337,6 @@ public class ProjectBuildAction extends BaseController {
     @ResponseBody
     @RequestMapping("/releateBug")
     public Map<String, String> releateBug(String ids, Integer buildId) {
-        Map<String, String> map = new HashMap<String, String>();
         for (String bugId : ids.split(",")) {
             buildService.releateBug(Integer.valueOf(bugId), buildId);
         }
@@ -393,7 +391,7 @@ public class ProjectBuildAction extends BaseController {
     @RequestMapping(value = "/batchDeleteReq")
     public Map bctchDelReq(String ids, Integer buildId) {
         Map<String, String> map = new HashMap<String, String>();
-        if (ids == null || ids == "") {
+        if (StringUtil.isBlank(ids)) {
             map.put("status", "fail");
             map.put("info", "请至少选择一条数据");
             return map;

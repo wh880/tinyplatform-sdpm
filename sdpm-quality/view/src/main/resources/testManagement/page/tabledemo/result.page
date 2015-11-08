@@ -7,7 +7,7 @@
     <p class="titleName">测试结果   共执行${testResults?.size()}次</p>
     #for(result : testResults)
         #@foldMenu("" "Tinyfold3" "" "width:100%")
-            #@foldItem("#"+result?.testResultId+"   "+formatDate(result?.testResultDate,"yyyy-MM-dd hh:mm:ss")+" 由 "+(result?.testResultLastRunner?UserUtils.getUserById(result?.testResultLastRunner)?.orgUserRealName:"")+"  执行   "+getDict("caseResult",result?.caseResult))
+            #@foldItem("#"+result?.testResultId+"   "+formatDate(result?.testResultDate,"yyyy-MM-dd HH:mm:ss")+" 由 "+(result?.testResultLastRunner?UserUtils.getUserById(result?.testResultLastRunner)?.orgUserRealName:"")+"  执行   "+getDict("caseResult",result?.caseResult))
                 #if(caseSteps.get(result?.testResultId))
                     #@tableStriped()
                         #@thead()

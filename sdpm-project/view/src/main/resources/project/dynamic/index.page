@@ -31,8 +31,8 @@
                         ##                            #if(var != 0)
                         ##                                ${project?.projectPo==null?"":UserUtils.getUserById(project?.projectPo)?.orgUserRealName}
                                 <li>
-                                    <a class="selUser" val="${team?.teamUserId}">
-                                        ${UserUtils.getUserById(team?.teamUserId).orgUserRealName}
+                                    <a class="selUser" val="${team.orgUserId}">
+                                        ${team.orgUserRealName}
                                     </a>
                                 </li>
                         ##                            #end

@@ -50,8 +50,8 @@
                             #@Tselect2Body("taskList["+i+"].moduleId" "" {"class":
                                 "input-text select2"})
                             <option value=""></option>
-                                #foreach(m : modulesList)
-                                <option value=${m.moduleId}>${m.moduleName}</option>
+                                #foreach(m : moduleList)
+                                <option value=${m.moduleId}>/${m.moduleName}</option>
                                 #end
                             #end
                         #end
@@ -59,7 +59,7 @@
                     #@td()
                         #@Tselect2F()
                             #@Tselect2Body(
-                                "taskList["+i+"].taskStory" "" {"class":
+                                "taskList["+i+"].taskStory" storyId {"class":
                                 "input-text select2"})
                             <option value=""></option>
                                 #foreach(s : storyList)
@@ -82,7 +82,7 @@
                         #@formControlDiv( )
                             #@Tselect2F()
                                 #@Tselect2Body(
-                                    "taskList["+i+"].taskType" "" {"class":"input-text select2",
+                                    "taskList["+i+"].taskType" "" {"class":"input-text",
                                     "datatype":"*",
                                     "nullmsg":"不能为空"})
                                     #foreach(item : getDict("taskType"))
@@ -123,7 +123,7 @@
                             #@Tselect2Body(
                                 "taskList["+i+"].taskPri" "" {"class":"input-text select2","datatype":"*4-16","nullmsg":
                                 "不能为空","minimumResultsForSearch":"Infinity"}) ##,"multiple":"multiple"加上为多选项
-                                #foreach(item : getDict("Pri"))
+                                #foreach(item : getDict("taskPri"))
                                     #@tinyOptionItem(item.value)${item.text}#end
                                 #end
                             #end

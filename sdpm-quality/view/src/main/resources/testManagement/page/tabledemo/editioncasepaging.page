@@ -191,11 +191,11 @@
 			#@tbody()
 				#@tr()
 					#@th()由谁创建#end
-					#@td()${testCase?.caseOpenedBy?UserUtils.getUserById(testCase?.caseOpenedBy)?.orgUserRealName:""} ${testCase?.caseOpenedDate?" 于 "+formatDate(testCase?.caseOpenedDate,'yyyy-MM-dd hh:mm:ss'):""}#end
+					#@td()${testCase?.caseOpenedBy?UserUtils.getUserById(testCase?.caseOpenedBy)?.orgUserRealName:""} ${testCase?.caseOpenedDate?" 于 "+formatDate(testCase?.caseOpenedDate,'yyyy-MM-dd HH:mm:ss'):""}#end
 				#end
 				#@tr()
 					#@th()最后编辑#end
-					#@td()${testCase?.caseLastEditedBy?UserUtils.getUserById(testCase?.caseLastEditedBy)?.orgUserRealName:""} ${testCase?.caseLastEditedDate?" 于 "+formatDate(testCase?.caseLastEditedDate,'yyyy-MM-dd hh:mm:ss'):""}  #end
+					#@td()${testCase?.caseLastEditedBy?UserUtils.getUserById(testCase?.caseLastEditedBy)?.orgUserRealName:""} ${testCase?.caseLastEditedDate?" 于 "+formatDate(testCase?.caseLastEditedDate,'yyyy-MM-dd HH:mm:ss'):""}  #end
 				#end
 			#end
 		#end

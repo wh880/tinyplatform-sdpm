@@ -41,7 +41,7 @@ public class ProjectCommonAction extends BaseController {
 
     @RequestMapping("/selModelDemand")
     public String selModelDemand(String moduleId) {
-        return "redirect:" + adminPath + "/project/manage/demand/index?moduleId=" + moduleId;
+        return "redirect:" + adminPath + "/project/demand/index?moduleId=" + moduleId;
     }
 
 }

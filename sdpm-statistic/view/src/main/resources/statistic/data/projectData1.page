@@ -1,18 +1,16 @@
-## #import("/org/tinygroup/bootstrapDate/components/bootstrapDate.component")
-
 #@tinyForm("thisform" "url" "post" {"class":""})
-				#@elementItem()
-					#@colLabel("l")日期：#end
-					#@formControlDiv("col-8")
-						#@div(divClass="col-3")
-							#@tinyDateInput("birthday" "" "YYYY-MM-DD" {})#end
-						#end						
-						#@div(divClass="col-0")&nbsp&nbsp至&nbsp&nbsp#end
-						#@div(divClass="col-3")
-							#@tinyDateInput("birthday" "" "YYYY-MM-DD" {})#end
-						#end
-					#end					
-				#end																		
+    #@elementItem()
+        #@colLabel("l")日期：#end
+        #@formControlDiv("col-8")
+            #@div(divClass="col-3")
+                #@tinyDateInput("birthday" "" "YYYY-MM-DD" {})#end
+            #end
+            #@div(divClass="col-0")&nbsp&nbsp至&nbsp&nbsp#end
+            #@div(divClass="col-3")
+                #@tinyDateInput("birthday" "" "YYYY-MM-DD" {})#end
+            #end
+        #end
+    #end
 #end
 
 <div style="height: 10px;"></div>
@@ -39,15 +37,15 @@
             #end
         #end
         #@tbody()
-            #for(p:projects)
-            #@tr("text-c")
-            <td >${p?.projectId}</td>
-            <td >${p?.projectName}</td>
-            <td>${p?.estimate}</td>
-            <td>${p?.consume}</td>
-            <td>${p?.estimate-p?.consume}</td>
-            <td>${((p?.estimate-p?.consume)/p?.estimate)*100}%</td>
-            #end
+            #foreach(p:projects)
+                #@tr("text-c")
+                <td>${p?.projectId}</td>
+                <td>${p?.projectName}</td>
+                <td>${p?.estimate}</td>
+                <td>${p?.consumed}</td>
+                <td>${p?.estimate-p?.consumed}</td>
+                <td>${((p?.estimate-p?.consumed)/p?.estimate)*100}%</td>
+                #end
             #end
         #end
     #end

@@ -21,9 +21,9 @@
         </dictNodeEntry>
 
         <dictNodeEntry name="taskPri" title="任务优先级">
-            <dictItem key="1" value="1" sort="1"/>
-            <dictItem key="2" value="2" sort="2"/>
-            <dictItem key="3" value="3" sort="3"/>
+            <dictItem key="1" value="1" sort="2"/>
+            <dictItem key="2" value="2" sort="3"/>
+            <dictItem key="3" value="3" sort="1"/>
             <dictItem key="4" value="4" sort="4"/>
             <dictItem key="5" value="5" sort="5"/>
         </dictNodeEntry>

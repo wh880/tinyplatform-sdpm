@@ -33,18 +33,16 @@ public class BurnServiceImpl implements BurnService {
 
     public void updateDate(Integer taskId) {
         //当任务修改以后 根据跟新的任务刷新燃尽图，统计项目
-
         if (taskId == null) {
-            List<Project> projectList = projectManager.findListProjects(new Project());
+            List<Project> projectList = projectManager.findListProjects(null);
             if (!projectList.isEmpty()) {
                 for (Project p : projectList) {
-                    List<Project> tList = projectManager.findListProjects(p);
                     ProjectBurn burn = new ProjectBurn();
                     burn.setProjectId(p.getProjectId());
                     burn.setBurnDate(DateUtils.getDateStart(new Date()));
                     List<ProjectBurn> res = burnManager.findList(burn);
-                    burn.setBurnConsumed(tList.get(0).getConsume());
-                    burn.setBurnLeft(tList.get(0).getAllLeft());
+                    burn.setBurnConsumed(p.getConsumed());
+                    burn.setBurnLeft(p.getAllLeft());
                     if (res.isEmpty()) {
                         burnManager.add(burn);
                     } else {
@@ -52,21 +50,23 @@ public class BurnServiceImpl implements BurnService {
                         burnManager.update(burn);
                     }
                 }
+
             }
         } else {
             ProjectTask task = taskManager.find(taskId);
-            Project project = projectManager.find(task.getTaskProject());
-            List<Project> projectList = projectManager.findListProjects(project);
+            Project project= new Project();
+            project.setProjectId(task.getTaskProject());
+            project = projectManager.findListProjects(project).get(0);
             ProjectBurn burn = new ProjectBurn();
             burn.setProjectId(project.getProjectId());
             burn.setBurnDate(DateUtils.getDateStart(new Date()));
-            List<ProjectBurn> res = burnManager.findList(burn);
-            burn.setBurnConsumed(projectList.get(0).getConsume());
-            burn.setBurnLeft(projectList.get(0).getAllLeft());
-            if (res.isEmpty()) {
+            List<ProjectBurn> burnList = burnManager.findList(burn);
+            burn.setBurnConsumed(project.getConsumed());
+            burn.setBurnLeft(project.getAllLeft());
+            if (burnList.isEmpty()) {
                 burnManager.add(burn);
             } else {
-                burn.setId(res.get(0).getId());
+                burn.setId(burnList.get(0).getId());
                 burnManager.update(burn);
             }
         }

@@ -1,3 +1,4 @@
+#!set(activeTitle="建任务",activeMenuId=currentPageId)
 #import("/org/tinygroup/form/components/form.component")
 #import("/org/tinygroup/bootstrapDate/components/bootstrapDate.component")
 #import("/org/tinygroup/button/components/button_common.component")
@@ -12,9 +13,6 @@
         #@tabHead()
             #include("/project/protab.page")
         #end
-    ##head end
-    <br/>
-    ##body end
     #end
 #end
 #@tinyForm(
@@ -34,9 +32,9 @@
                 #@Tselect2F()
                     #@Tselect2Body("taskModule" copyTask?.taskModule {"class":
                         "input-text select2"})
-                        <option value=""></option>
+                        <option value="">/</option>
                         #foreach(m : moduleList)
-                            <option value=${m.moduleId}>${m.moduleName}</option>
+                            <option value=${m.moduleId}>/${m.moduleName}</option>
                         #end
                     #end
                 #end
@@ -45,7 +43,7 @@
         #@elementItem()
             #@sdpmItem("任务类型" "*")
                 #@Tselect2F()
-                    #@Tselect2Body("taskType" copyTask?.taskType {"class":"input-text select2","placeholder":"任务类型","datatype":"*",
+                    #@Tselect2Body("taskType" copyTask?.taskType {"class":"input-text select2","placeholder":"请选择任务类型","datatype":"*",
                         "nullmsg":"任务类型不能为空！"})
                         <option value=""></option>
                         #foreach(item : getDict("taskType"))
@@ -72,12 +70,11 @@
         #end
         #@elementItem()
             #@sdpmItem("相关需求")
-                #if(!storyList)
+                #if(storyList)
                     #@Tselect2F()
-                        #@Tselect2Body("taskStory" story?.storyId==null?"":story.storyId {"class":
-                            "input-text select2"})
+                        #@Tselect2Body("taskStory" storyId==null?"":storyId {"class":"input-text select2"})
                             #foreach(s:storyList)
-                                <option value="${s.storyId}">${s.storyTitle}</option>
+                                <option value="${s.storyId}">${s.storyId}：${s.storyTitle}（优先级：${s.storyPri}，预计工时:${s.storyEstimate}）</option>
                             #end
                         #end
                         #@Tselect2Fix()
