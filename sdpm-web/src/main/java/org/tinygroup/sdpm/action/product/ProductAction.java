@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.tinygroup.commons.tools.StringUtil;
+import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.document.dao.pojo.DocumentDoc;
 import org.tinygroup.sdpm.document.service.inter.DocService;
@@ -16,9 +17,12 @@ import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.productLine.service.ProductLineService;
+import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
+import org.tinygroup.sdpm.project.service.dto.BurnDTO;
 import org.tinygroup.sdpm.project.service.inter.BuildService;
+import org.tinygroup.sdpm.project.service.inter.BurnService;
 import org.tinygroup.sdpm.project.service.inter.ProjectProductService;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityTestCase;
@@ -70,9 +74,13 @@ public class ProductAction extends BaseController {
     @Autowired
     private ProjectService productProject;
     @Autowired
+    private BurnService burnService;
+    @Autowired
     private DocService docService;
     @Autowired
     private ProjectProductService projectProductService;
+    @Autowired
+    private ProjectService projectService;
 
     @RequestMapping("/{forward}/content")
     public String doc(@PathVariable(value = "forward") String forward, HttpServletRequest request, Model model) {
@@ -298,7 +306,8 @@ public class ProductAction extends BaseController {
 
     @ResponseBody
     @RequestMapping("/productList")
-    public List<Product> findProduct(Product product) {
+    public List<Product> findProduct(Product product,String type,String productLineId) {
+        if("user".equals(type))return ProductUtils.getProductListByProductLineUser(productLineId);
 
         List<Product> list = productService.findProductList(product);
 
@@ -322,5 +331,28 @@ public class ProductAction extends BaseController {
        return  "/product/page/tabledemo/add-doc.page";
     }
 
+    @RequestMapping("project/listData")
+    public String list(Project project,
+                       @CookieValue(value = "cookieProductId", defaultValue = "0") String cookieProductId,
+                       @RequestParam(required = false, defaultValue = "0") int start,
+                       @RequestParam(required = false, defaultValue = "10") int pagesize,
+                       @RequestParam(required = false, defaultValue = "projectId") String order,
+                       @RequestParam(required = false, defaultValue = "asc") String ordertype, Model model, HttpServletRequest request) {
 
+        List<ProjectProduct> projects = projectProductService.findProjects(Integer.parseInt(cookieProductId));
+        Integer[] ids = new Integer[projects.size()];
+        for (int i = 0; i < projects.size(); i++) {
+            ids[i] = projects.get(i).getProjectId();
+        }
+        Pager<Project> pagerProject = projectService.findProjects(start, pagesize, NameUtil.resolveNameDesc(order), ordertype, ids);
+        Integer interval = 2;
+        if (pagerProject != null) {
+            for (Project project1 : pagerProject.getRecords()) {
+                BurnDTO burnDTO = burnService.initBurn(project1.getProjectId(), interval);
+                project1.setBurnValue(burnDTO.getLeftValues());
+            }
+        }
+        model.addAttribute("projectPager", pagerProject);
+        return "/project/listData.pagelet";
+    }
 }

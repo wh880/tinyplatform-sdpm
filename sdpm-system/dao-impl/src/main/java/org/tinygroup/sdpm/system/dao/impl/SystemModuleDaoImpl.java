@@ -64,7 +64,7 @@ public class SystemModuleDaoImpl extends TinyDslDaoSupport implements SystemModu
 					SYSTEM_MODULETABLE.MODULE_ORDER.value(t.getModuleOrder()),
 					SYSTEM_MODULETABLE.MODULE_TYPE.value(t.getModuleType()),
 					SYSTEM_MODULETABLE.MODULE_OWNER.value(t.getModuleOwner()),
-					SYSTEM_MODULETABLE.MODULE_ID.value(t.getModuleId()),
+//					SYSTEM_MODULETABLE.MODULE_ID.value(t.getModuleId()),
 					SYSTEM_MODULETABLE.MODULE_TITLE.value(t.getModuleTitle()));
 				return insert;
 			}

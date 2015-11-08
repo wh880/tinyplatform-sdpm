@@ -33,7 +33,7 @@ public class ProductProjectAction extends BaseController{
 
 	@RequestMapping("/list")
 	public String list(Project project,
-			@CookieValue("cookieProductId") String currentProjectId,
+			@CookieValue("currentProjectId") String currentProjectId,
 			@RequestParam(required = false,defaultValue = "1")int page,
 			@RequestParam(required = false,defaultValue = "10")int pagesize,
 			@RequestParam(required = false,defaultValue = "projectId")String order,

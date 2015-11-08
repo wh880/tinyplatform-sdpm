@@ -1,43 +1,43 @@
 #import("/org/tinygroup/publicComponent/macro/navselect.component")
 
+#if(!cookieProductLineIdTemp&&cookieProductLineId)
+<script type="text/javascript">
+    $(function(){
+        $.cookie('cookieProductLineId', "${cookieProductLineId}", {path: "/"});
+    })
+</script>
+#end
 #@navSelect2("productLine" "productLine")
     #@navSelect2Nav()
+
         #if(cookieProductLineId&&ProductUtils.getProductLineListByUser()?.size()>0)
             #for(productLine : ProductUtils.getProductLineListByUser())
                 #if(productLine?.productLineId == cookieProductLineId)
-                    ${productLine?.productLineName}
+                    <span id="productLineNameOnTop" value="${cookieProductLineId}"> ${productLine?.productLineName}</span>
                 #end
             #end
         #else
-            #if(ProductUtils.getProductLineListByUser()?.size()>0)
-        <script type="text/javascript">
-            $(function(){
-                $.cookie('cookieProductLineId', "${ProductUtils.getProductLineListByUser()?.get(0)?.productLineId}", {path: "/"});
-                window.location.reload();
-            })
-        </script>
-        #else
-            #set(msg="目前没有产品线，现在将前往添加。")
-            #if(CmsUtils.getProductLineList().size()>0)
-                #set(msg="目前没有你可访问的产品线，现在将前往添加。")
+            #if(ProductUtils.getProductLineListByUser()?.size()==0)
+                #set(lineMsg="目前没有产品线，现在将前往添加。")
+                #if(ProductUtils.getProductLineList().size()>0)
+                    #set(lineMsg="目前没有你可访问的产品线，现在将前往添加。")
+                #end
+            <script type="text/javascript">
+                $(function(){
+                    layer.msg('${lineMsg}<div style="text-align:center"><a href="${TINY_CONTEXT_PATH+adminPath}/productLine/content/add"><span id="showTime">5</span>秒后前往</a></div>',5,-1,function(){
+                        window.location.href = "${TINY_CONTEXT_PATH+adminPath}/productLine/content/add";
+                    });
+                    var timeVal=5;
+                    function changeTimeVal(){
+                        $("#showTime").html(--timeVal);
+                        window.setTimeout(function(){
+                            changeTimeVal();
+                        },1000);
+                    }
+                    changeTimeVal();
+                })
+            </script>
             #end
-        <script type="text/javascript">
-            $(function(){
-                layer.msg('${msg}<div style="text-align:center"><a href="${TINY_CONTEXT_PATH+adminPath}/productLine/content/add"><span id="showTime">5</span>秒后前往</a></div>',5,-1,function(){
-                    window.location.href = "${TINY_CONTEXT_PATH+adminPath}/productLine/content/add";
-                });
-                var timeVal=5;
-                function changeTimeVal(){
-                    $("#showTime").html(--timeVal);
-                    window.setTimeout(function(){
-                        changeTimeVal();
-                    },1000);
-                }
-                changeTimeVal();
-            })
-        </script>
-        无产品线
-        #end
         #end
 
 <span class="caret"></span>#end

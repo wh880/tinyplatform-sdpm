@@ -1,13 +1,21 @@
 #import("/org/tinygroup/publicComponent/macro/navselect.component")
+#set(qualityProductIdTemp = qualityProductId,qualityProductId=qualityProductId?:ProductUtils.getAllProductListByUser()?.get(0)?.productId)
 #@navSelect2("product" "product")
 #@navSelect2Nav()
+	#if(!qualityProductIdTemp&&qualityProductId)
+    <script type="text/javascript">
+        $(function(){
+            $.cookie('qualityProductId', "${qualityProductId}", {path: "/"});
+        })
+    </script>
+	#end
 
 	#if(qualityProductId&&ProductUtils.getAllProductListByUser()?.size()>0)
 			#set(finded = 0)
 
 		#for(product : ProductUtils.getAllProductListByUser())
 				#if(product?.productId == qualityProductId)
-					${product?.productName}
+					<span id="productNameOnTop" value="${qualityProductId}">${product?.productName}</span>
 					#set(finded=1)
 				#end
 			#end
@@ -19,16 +27,7 @@
 			</script>
 			#end
 		#else
-
-			#if(ProductUtils.getAllProductListByUser()?.size()>0)
-			<script type="text/javascript">
-				$(function(){
-
-                    $.cookie('qualityProductId', "${ProductUtils.getAllProductListByUser()?.get(0)?.productId}", {path: "/"});
-					window.location.reload();
-				})
-			</script>
-			#else
+			#if(ProductUtils.getAllProductListByUser()?.size()==0)
 			<script type="text/javascript">
 					#set(msg="目前没有产品，现在将前往添加。")
 

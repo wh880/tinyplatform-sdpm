@@ -4,7 +4,10 @@
 #!set(activeTitle="产品管理",activeMenuId=currentPageId)
 #include("/product/page/event/common.page")
 #set(currentPageId=3)
-
+#set(cookieProductLineIdTemp=cookieProductLineId,cookieProductLineId=cookieProductLineId?:ProductUtils.getProductLineListByUser()?.get(0)?.productLineId,cookieProductLineId=cookieProductLineId?String.valueOf(cookieProductLineId):null)
+#if(cookieProductLineId)
+    #set(cookieProductIdTemp = cookieProductId,cookieProductId=cookieProductId?:ProductUtils.getProductListByProductLineUser(cookieProductLineId)?.get(0)?.productId)
+#end
 <style>
     .btn-group #Dropdown {
         background: none;

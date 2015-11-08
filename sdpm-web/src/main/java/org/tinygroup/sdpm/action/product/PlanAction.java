@@ -89,7 +89,7 @@ public class PlanAction  extends BaseController{
 	}
 
 	@RequestMapping("/addplan")
-	public 	String addplan(@CookieValue(value = "cookieProductId",defaultValue = "0") String cookieProductId, HttpServletRequest request, Model model){
+	public String addplan(@CookieValue(value = "cookieProductId",defaultValue = "0") String cookieProductId, HttpServletRequest request, Model model){
 
 			if(Integer.parseInt(cookieProductId)>0) {
 				Product product = productService.findProduct(Integer.parseInt(cookieProductId));

@@ -1,6 +1,3 @@
-#!set(linkName="product-demand",sonitem="
-<li>"+"需求"+"</li>")
-
 
 <script>
     $(document).ready(function () {
@@ -29,6 +26,8 @@
         });
 
     });
+
+
 </script>
 
 
@@ -48,14 +47,23 @@
             #@formControlDiv("col-4")
                 <div class="col-5">
                     #@Tselect2F()
-                        #@Tselect2Body("productId" cookieProductId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                            #if(cookieProductLineId)
-                                #foreach(product : ProductUtils.getProductListByProductLineUser(cookieProductLineId))
-                                    #if(product?.deleted==0)
-                                        <option value="${product?.productId}">${product?.productName}</option>
+                            <script>
+                                $(function(){
+                                    var lineId = $("#productLineNameOnTop").attr("value");
+                                    if(lineId>0) {
+                                        ajaxRead("${sid}", "productId", "productId", "productName", "/product/productList?deleted=0&type=user&productLineId="+lineId);
+                                    }
+                                    #if(!cookieProductId)
+                                    var productId = $("#productNameOnTop").attr("value");
+                                    if(productId>0) {
+                                        $("select[name=productId]").val(productId).trigger("change");
+                                    }
                                     #end
-                                #end
-                            #end
+                                })
+
+                            </script>
+                        #@Tselect2Body("productId" cookieProductId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+
                         #end
 
                         <script>

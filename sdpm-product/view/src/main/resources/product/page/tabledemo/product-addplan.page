@@ -137,7 +137,9 @@ return format;
         $("form[name=thisform").Validform({
             tiptype: 2
         });
+		$(".productName").html($("#productNameOnTop").html());
     });
+
 </script>
 
 #@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/product/plan/save" "post" {"class":""})
@@ -148,8 +150,8 @@ return format;
         <p class="titleName">创建新计划</p>
      #@elementItem()
         #@colLabel("col-1")产品:#end
-        #@formControlDiv("col-4")
-        	  ${product?.productName}
+        #@formControlDiv("col-4" "productName")
+
         #end
         #@validateDiv("col-2")#end
       #end
