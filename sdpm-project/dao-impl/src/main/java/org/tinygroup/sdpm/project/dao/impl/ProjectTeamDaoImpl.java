@@ -179,7 +179,7 @@ public class ProjectTeamDaoImpl extends TinyDslDaoSupport implements ProjectTeam
 	public int[] batchInsert(List<ProjectTeam> projectTeams) {
 		return batchInsert(true, projectTeams);
 	}
-	@LogMethod("add")
+
 	public int[] batchUpdate(List<ProjectTeam> projectTeams) {
 		if (CollectionUtil.isEmpty(projectTeams)) {
 			return new int[0];

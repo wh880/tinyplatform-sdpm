@@ -594,17 +594,20 @@ public class ProjectTaskAction extends BaseController {
         if (type.equals("1")) {
             for (String key : map.keySet()) {
                 if (key.isEmpty()) {
-                    mapDocument.put(key, map.get(key));
+                    mapDocument.put("未关联需求", map.get(key));
                 } else {
-                    String t = productStoryService.findStory(Integer.parseInt(key)).getStoryTitle();
-                    mapDocument.put(t, map.get(key));
+                    ProductStory story = productStoryService.findStory(Integer.valueOf(key));
+                    if (story != null) {
+                        String title = story.getStoryTitle();
+                        mapDocument.put(title, map.get(key));
+                    }
                 }
             }
         }
         model.addAttribute("mapDocument", mapDocument);
         model.addAttribute("map", map);
         model.addAttribute("type", type);
-        return "project/task/grouping.page";
+        return "project/task/grouping";
     }
 
     /**

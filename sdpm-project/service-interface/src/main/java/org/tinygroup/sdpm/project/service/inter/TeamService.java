@@ -25,16 +25,12 @@ public interface TeamService {
      * @param list
      * @return
      */
-    public Integer batchUpdate(List<ProjectTeam> list);
-    /**
-     * 新增成员
-     */
-    public int save(ProjectTeam projectTeam);
+     Integer batchUpdate(List<ProjectTeam> list);
 
     /**
      * 移除项目下的成员,根据逻辑id
      */
-     int delete(int id);
+     Integer delete(int id);
 
     /**
      * 查询项目下的所有成员

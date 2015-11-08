@@ -146,8 +146,8 @@
   <standard-field id="dcaad72616324712a1988f2743e4a0e8" name="team_user_id" title="用户" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
   <standard-field id="ccae118619c147f2902feffbb66f9c77" name="team_role" title="角色" business-type-id="095e594e1550424b9643c7e2279e85be"/>
   <standard-field id="bab7c0daedc34545a255b9be36aed755" name="team_join" title="加盟日" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff"/>
-  <standard-field id="e26d8ad4172d4f6297b5bca12dc6994b" name="team_days" title="可用工时" business-type-id="8068bb7c6e5a4302b60e801f63ca7b35"/>
-  <standard-field id="53e3179919434d0fbef0818a4039f5e1" name="team_hours" title="可用工时" business-type-id="8068bb7c6e5a4302b60e801f63ca7b35"/>
+  <standard-field id="e26d8ad4172d4f6297b5bca12dc6994b" name="team_days" title="可用工时" business-type-id="8068bb7c6e5a4302b60e801f63ca7b35" default="0"/>
+  <standard-field id="53e3179919434d0fbef0818a4039f5e1" name="team_hours" title="可用工时" business-type-id="8068bb7c6e5a4302b60e801f63ca7b35" default="0"/>
   <standard-field id="2c6c160a6c2b442ca13ebff69461443f" name="per_task" title="前置任务" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
   <standard-field id="1c3b9f70044d44cfa691da4f6e98da4e" name="taskrelation_conditon" title="前置条件" business-type-id="b6a9bc04774b40859a7dd8c6fd52a629">
     <description>0-开始后，1-完成后</description>
