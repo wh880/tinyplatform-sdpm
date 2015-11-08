@@ -63,9 +63,9 @@
     <table-field standard-field-id="23aba5dca629484db6d0d7d95b905c79" primary="false" unique="false" not-null="true" id="task_name" auto-increase="false"/>
     <table-field standard-field-id="5b511aed51c44ca79423ffc1768ea355" primary="false" unique="false" not-null="true" id="task_type" auto-increase="false"/>
     <table-field standard-field-id="5536a2ac6a4840f896ce8625ba1b1e6f" primary="false" unique="false" not-null="false" id="task_pri" auto-increase="false"/>
-    <table-field standard-field-id="0f21714367f147e2b3cbbe0287ee58da" primary="false" unique="false" not-null="false" id="task_estimate" auto-increase="false"/>
-    <table-field standard-field-id="b8174ca90ba54768909d91760aeffc9c" primary="false" unique="false" not-null="false" id="task_consumed" auto-increase="false"/>
-    <table-field standard-field-id="eaddc6ac33814e21bf01fab77e7072c1" primary="false" unique="false" not-null="false" id="task_left" auto-increase="false"/>
+    <table-field standard-field-id="0f21714367f147e2b3cbbe0287ee58da" primary="false" unique="false" not-null="true" id="task_estimate" auto-increase="false"/>
+    <table-field standard-field-id="b8174ca90ba54768909d91760aeffc9c" primary="false" unique="false" not-null="true" id="task_consumed" auto-increase="false"/>
+    <table-field standard-field-id="eaddc6ac33814e21bf01fab77e7072c1" primary="false" unique="false" not-null="true" id="task_left" auto-increase="false"/>
     <table-field standard-field-id="43c75930464542fc81fddfa340d85e99" primary="false" unique="false" not-null="false" id="task_dead_line" auto-increase="false"/>
     <table-field standard-field-id="8296af574d80406bb78cfb7060b7ab86" primary="false" unique="false" not-null="false" id="task_status" auto-increase="false"/>
     <table-field standard-field-id="88bc935554ec47818157cfa52d623e32" primary="false" unique="false" not-null="false" id="task_mailto" auto-increase="false"/>

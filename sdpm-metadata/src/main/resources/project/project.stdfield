@@ -75,14 +75,16 @@
   <standard-field id="5536a2ac6a4840f896ce8625ba1b1e6f" name="task_pri" title="任务优先级" business-type-id="b6a9bc04774b40859a7dd8c6fd52a629" default="1">
     <description>1，2，4，5 递增</description>
   </standard-field>
-  <standard-field id="b8174ca90ba54768909d91760aeffc9c" name="task_consumed" title="总消耗" business-type-id="8068bb7c6e5a4302b60e801f63ca7b35" default="">
+  <standard-field id="b8174ca90ba54768909d91760aeffc9c" name="task_consumed" title="总消耗" business-type-id="8068bb7c6e5a4302b60e801f63ca7b35" default="0">
     <description></description>
   </standard-field>
-  <standard-field id="0f21714367f147e2b3cbbe0287ee58da" name="task_estimate" title="最初预计" business-type-id="8068bb7c6e5a4302b60e801f63ca7b35" default="">
+  <standard-field id="0f21714367f147e2b3cbbe0287ee58da" name="task_estimate" title="最初预计" business-type-id="8068bb7c6e5a4302b60e801f63ca7b35" default="0">
     <description></description>
   </standard-field>
-  <standard-field id="eaddc6ac33814e21bf01fab77e7072c1" name="task_left" title="预计剩余" business-type-id="8068bb7c6e5a4302b60e801f63ca7b35"/>
-  <standard-field id="43c75930464542fc81fddfa340d85e99" name="task_dead_line" title="截止日期" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff"/>
+  <standard-field id="eaddc6ac33814e21bf01fab77e7072c1" name="task_left" title="预计剩余" business-type-id="8068bb7c6e5a4302b60e801f63ca7b35" default="0"/>
+  <standard-field id="43c75930464542fc81fddfa340d85e99" name="task_dead_line" title="截止日期" business-type-id="af7b470e7d404b4882e7ec5a1513165f" default="">
+    <description></description>
+  </standard-field>
   <standard-field id="8296af574d80406bb78cfb7060b7ab86" name="task_status" title="任务状态" business-type-id="b6a9bc04774b40859a7dd8c6fd52a629" default="0">
     <description>0-等待，1-未开始，2-进行中，3-已完成，4-已暂停，5-已取消,6-已关闭</description>
   </standard-field>
@@ -97,7 +99,7 @@
     <description></description>
   </standard-field>
   <standard-field id="3cfeefa0e3a84b2fb6848ea05efe6ff0" name="task_est_stared" title="预计开始" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff"/>
-  <standard-field id="1c9e7e4fb94241d6ad60dff7f1053451" name="task_real_started" title="实际开始" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff"/>
+  <standard-field id="1c9e7e4fb94241d6ad60dff7f1053451" name="task_real_started" title="实际开始" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff" default=""/>
   <standard-field id="f7a0e6a4e9c44879b960c7b778fa972e" name="task_finished_by" title="由谁完成" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
   <standard-field id="e458bda7278c46028b1ce52f69cac2aa" name="task_finished_date" title="完成时间" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff" default="">
     <description></description>

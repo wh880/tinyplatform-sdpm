@@ -16,31 +16,10 @@
 
 package org.tinygroup.sdpm.product.dao.impl;
 
-import static org.tinygroup.sdpm.product.dao.constant.ProductPlanTable.PRODUCT_PLANTABLE;
-import static org.tinygroup.sdpm.product.dao.constant.ProductStorySpecTable.PRODUCT_STORY_SPECTABLE;
-import static org.tinygroup.sdpm.product.dao.constant.ProductTable.PRODUCTTABLE;
-import static org.tinygroup.sdpm.productLine.dao.constant.ProductLineTable.PRODUCT_LINETABLE;
-import static org.tinygroup.tinysqldsl.Delete.delete;
-import static org.tinygroup.tinysqldsl.Insert.insertInto;
-import static org.tinygroup.tinysqldsl.Select.*;
-import static org.tinygroup.tinysqldsl.Update.update;
-import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
-import static org.tinygroup.tinysqldsl.select.Join.*;
-
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Repository;
 import org.tinygroup.commons.tools.CollectionUtil;
-import org.tinygroup.jdbctemplatedslsession.callback.DeleteGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.InsertGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.NoParamDeleteGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.NoParamInsertGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
+import org.tinygroup.jdbctemplatedslsession.callback.*;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
 import org.tinygroup.sdpm.common.util.update.InsertUtil;
@@ -48,24 +27,53 @@ import org.tinygroup.sdpm.common.util.update.UpdateUtil;
 import org.tinygroup.sdpm.product.dao.ProductDao;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
-import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
-import org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec;
-import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
-import org.tinygroup.tinysqldsl.Delete;
-import org.tinygroup.tinysqldsl.Insert;
-import org.tinygroup.tinysqldsl.Pager;
-import org.tinygroup.tinysqldsl.Select;
-import org.tinygroup.tinysqldsl.Update;
+import org.tinygroup.tinysqldsl.*;
 import org.tinygroup.tinysqldsl.base.Condition;
 import org.tinygroup.tinysqldsl.base.FragmentSql;
 import org.tinygroup.tinysqldsl.base.Table;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 import org.tinygroup.tinysqldsl.select.OrderByElement;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.tinygroup.sdpm.product.dao.constant.ProductTable.PRODUCTTABLE;
+import static org.tinygroup.sdpm.productLine.dao.constant.ProductLineTable.PRODUCT_LINETABLE;
+import static org.tinygroup.tinysqldsl.Delete.delete;
+import static org.tinygroup.tinysqldsl.Insert.insertInto;
+import static org.tinygroup.tinysqldsl.Select.select;
+import static org.tinygroup.tinysqldsl.Select.selectFrom;
+import static org.tinygroup.tinysqldsl.Update.update;
+import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
+import static org.tinygroup.tinysqldsl.select.Join.leftJoin;
 @Repository
 public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
 
 	protected static final Table SERVICE_CLIENTTABLE = null;
+
+	public static Condition productPueryCondition(Product t){
+		return
+				t==null?null:and(
+						PRODUCTTABLE.COMPANY_ID.eq(t.getCompanyId()),
+						PRODUCTTABLE.DEPT_ID.eq(t.getDeptId()),
+						PRODUCTTABLE.PRODUCT_LINE_ID.eq(t.getProductLineId()),
+						PRODUCTTABLE.PRODUCT_NAME.eq(t.getProductName()),
+						PRODUCTTABLE.PRODUCT_CODE.eq(t.getProductCode()),
+						PRODUCTTABLE.PRODUCT_ORDER.eq(t.getProductOrder()),
+						PRODUCTTABLE.PRODUCT_STATUS.eq(t.getProductStatus()),
+						PRODUCTTABLE.PRODUCT_DESC.eq(t.getProductDesc()),
+						PRODUCTTABLE.PRODUCT_OWNER.eq(t.getProductOwner()),
+						PRODUCTTABLE.PRODUCT_QUALITY_MANAGER.eq(t.getProductQualityManager()),
+						PRODUCTTABLE.PRODUCT_DELIVERY_MANAGER.eq(t.getProductDeliveryManager()),
+						PRODUCTTABLE.ACL.eq(t.getAcl()),
+						PRODUCTTABLE.PRODUCT_WHITE_LIST.eq(t.getProductWhiteList()),
+						PRODUCTTABLE.PRODUCT_CREATED_BY.eq(t.getProductCreatedBy()),
+						PRODUCTTABLE.PRODUCT_CREATED_DATE.eq(t.getProductCreatedDate()),
+						PRODUCTTABLE.PRODUCT_CREATED_VERSION.eq(t.getProductCreatedVersion()),
+						PRODUCTTABLE.DELETED.eq(t.getDeleted()));
+	}
 
 	public Product add(final Product product) {
 		return getDslTemplate().insertAndReturnKey(product, new InsertGenerateCallback<Product>() {
@@ -116,7 +124,7 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
 			}
 		});
 	}
-
+	
 	public int deleteByKeys(Integer... pks) {
 		if(pks == null || pks.length == 0){
 			return 0;
@@ -127,16 +135,16 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
 		}
 		},pks);
 	}
-	
+
 	public List<Product> getByKeys(Integer... pk){
-		
+
 		SelectGenerateCallback<Serializable[]> callback = new SelectGenerateCallback<Serializable[]>() {
 			@SuppressWarnings("rawtypes")
 			public Select generate(Serializable[] t) {
 
 				return selectFrom(PRODUCTTABLE).where(PRODUCTTABLE.PRODUCT_ID.in(t));
 			}
-			
+
 		};
 		Select select = callback.generate(pk);
 		return getDslSession().fetchList(select, Product.class);
@@ -168,7 +176,7 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		}
-		
+
 	}
 
 	public List<Product> query(Product product ,final OrderBy... orderArgs) {
@@ -344,11 +352,11 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
 		if(orderBies==null||orderBies.length==0){
 			return select;
 		}
-		
+
 		List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
 		for (int i = 0; orderBies != null && i < orderBies.length; i++) {
 			OrderByElement tempElement = null;
-			
+
 			if(orderBies[i]!=null){
 				tempElement = orderBies[i].getOrderByElement();
 			}
@@ -361,7 +369,7 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
 		}
 		return select;
 	}
-
+	
 	public Integer softDelete(Integer id) {
         return getDslTemplate().update(id, new UpdateGenerateCallback<Integer>() {
             public Update generate(Integer id) {
@@ -375,7 +383,7 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
     }
 	
 	public List<ProductAndLine> getProductAndLine(Product t){
-		
+
 		if(t==null){
 			t = new Product();
 		}
@@ -400,31 +408,9 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
 								PRODUCTTABLE.PRODUCT_CREATED_VERSION.eq(t.getProductCreatedVersion()),
 								PRODUCTTABLE.DELETED.eq(t.getDeleted())));
 		return getDslSession().fetchList(select, ProductAndLine.class);
-		
-		/*select product.product_id,product.product_name,product_line.product_line_id,product_line.product_line_name  
+
+		/*select product.product_id,product.product_name,product_line.product_line_id,product_line.product_line_name
 		 * from product left join product_line on product.product_line_id=product_line.product_line_id;*/
-	}
-	
-	public static Condition productPueryCondition(Product t){
-		return 
-				t==null?null:and(
-						PRODUCTTABLE.COMPANY_ID.eq(t.getCompanyId()),
-						PRODUCTTABLE.DEPT_ID.eq(t.getDeptId()),
-						PRODUCTTABLE.PRODUCT_LINE_ID.eq(t.getProductLineId()),
-						PRODUCTTABLE.PRODUCT_NAME.eq(t.getProductName()),
-						PRODUCTTABLE.PRODUCT_CODE.eq(t.getProductCode()),
-						PRODUCTTABLE.PRODUCT_ORDER.eq(t.getProductOrder()),
-						PRODUCTTABLE.PRODUCT_STATUS.eq(t.getProductStatus()),
-						PRODUCTTABLE.PRODUCT_DESC.eq(t.getProductDesc()),
-						PRODUCTTABLE.PRODUCT_OWNER.eq(t.getProductOwner()),
-						PRODUCTTABLE.PRODUCT_QUALITY_MANAGER.eq(t.getProductQualityManager()),
-						PRODUCTTABLE.PRODUCT_DELIVERY_MANAGER.eq(t.getProductDeliveryManager()),
-						PRODUCTTABLE.ACL.eq(t.getAcl()),
-						PRODUCTTABLE.PRODUCT_WHITE_LIST.eq(t.getProductWhiteList()),
-						PRODUCTTABLE.PRODUCT_CREATED_BY.eq(t.getProductCreatedBy()),
-						PRODUCTTABLE.PRODUCT_CREATED_DATE.eq(t.getProductCreatedDate()),
-						PRODUCTTABLE.PRODUCT_CREATED_VERSION.eq(t.getProductCreatedVersion()),
-						PRODUCTTABLE.DELETED.eq(t.getDeleted()));
 	}
 
 	public List<String> getProductNameByLineId(Integer productLineId) {

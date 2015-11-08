@@ -97,7 +97,7 @@
         #@elementItem()
             #@sdpmItem("任务描述")
                 #@formControlDiv("col-8")
-                    #@Teditor("taskDesc" "taskDesc" {"initialFrameHeight":"150","initialFrameWidth":"702"})${copyTask
+                    #@Teditor("taskDesc" copyTask.taskDesc {"initialFrameHeight":"150","initialFrameWidth":"702"})${copyTask
                         ?.taskDesc}#end
                 #end
             #end
@@ -149,7 +149,7 @@
         #@elementItem()
             #@sdpmItem("抄送给")
                 #@Tselect2F()
-                    #@Tselect2Body("taskMailtoArray" copyTask?.taskMailTo {"class":"input-text select2","multiple":
+                    #@Tselect2Body("taskMailToArray" copyTask?.taskMailTo {"class":"input-text select2","multiple":
                         "multiple"}) ##加上为多选项
                         #foreach(t : teamList)
                             <option value="${t.orgUserId}">${t.orgUserRealName}</option>

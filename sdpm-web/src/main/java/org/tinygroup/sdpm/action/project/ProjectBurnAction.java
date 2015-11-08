@@ -67,8 +67,12 @@ public class ProjectBurnAction extends BaseController {
 
     @ResponseBody
     @RequestMapping("/update")
-    public Map<String, String> update() {
-        burnService.updateDate(null);
+    public Map<String, String> update(HttpServletRequest request, HttpServletResponse response) {
+        Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
+        if (projectId == null) {
+            return resultMap(false, "更新失败，请选择更新项目");
+        }
+        burnService.updateBurnByProjectId(projectId);
         return resultMap(true, "更新成功");
     }
 

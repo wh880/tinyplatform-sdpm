@@ -31,6 +31,25 @@ public class BurnServiceImpl implements BurnService {
     @Autowired
     private TaskManager taskManager;
 
+    public void updateBurnByProjectId(Integer projectId) {
+        Project project = new Project();
+        project.setProjectId(projectId);
+        project = projectManager.findListProjects(project).get(0);
+        ProjectBurn burn = new ProjectBurn();
+        burn.setProjectId(project.getProjectId());
+        burn.setBurnDate(new Date());
+        List<ProjectBurn> burnList = burnManager.findList(burn);//查询本项目当天的燃尽情况
+
+        burn.setBurnConsumed(project.getConsumed());
+        burn.setBurnLeft(project.getAllLeft());
+        if (burnList.isEmpty()) {
+            burnManager.add(burn);
+        } else {
+            burn.setId(burnList.get(0).getId());
+            burnManager.update(burn);
+        }
+    }
+
     public void updateDate(Integer taskId) {
         //当任务修改以后 根据跟新的任务刷新燃尽图，统计项目
         if (taskId == null) {
@@ -50,11 +69,10 @@ public class BurnServiceImpl implements BurnService {
                         burnManager.update(burn);
                     }
                 }
-
             }
         } else {
             ProjectTask task = taskManager.find(taskId);
-            Project project= new Project();
+            Project project = new Project();
             project.setProjectId(task.getTaskProject());
             project = projectManager.findListProjects(project).get(0);
             ProjectBurn burn = new ProjectBurn();

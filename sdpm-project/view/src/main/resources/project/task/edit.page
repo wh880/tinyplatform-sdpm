@@ -1,4 +1,4 @@
-#!set(activeTitle="项目管理",activeMenuId=currentPageId)
+#!set(activeTitle="任务编辑",activeMenuId=currentPageId)
 #import("/org/tinygroup/button/components/button_smart.component")
 #import("/org/tinygroup/UEditor/component/ueditor.component")
 #import("/org/tinygroup/form/components/form.component")
@@ -85,7 +85,6 @@
 <div class="infoPage-right">
     #TypeInfo("projectEdit", task?.taskId)
 </div>
-
 #end
 
 <script>

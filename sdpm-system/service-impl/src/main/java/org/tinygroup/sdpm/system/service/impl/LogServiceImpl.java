@@ -3,7 +3,6 @@ package org.tinygroup.sdpm.system.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
-import org.tinygroup.sdpm.org.biz.impl.UserManagerImpl;
 import org.tinygroup.sdpm.org.biz.inter.UserManager;
 import org.tinygroup.sdpm.system.biz.inter.ActionManager;
 import org.tinygroup.sdpm.system.biz.inter.HistoryManager;
@@ -20,7 +19,7 @@ import java.util.Date;
  * Created by wangll13383 on 2015/10/8.
  */
 @Component
-public class LogServiceImpl implements LogService{
+public class LogServiceImpl implements LogService {
     @Autowired
     private ActionManager actionManager;
     @Autowired
@@ -28,38 +27,38 @@ public class LogServiceImpl implements LogService{
     @Autowired
     private UserManager userManager;
 
-    public void log(Object oldObject, Object newObject, SystemAction systemAction){
+    public void log(Object oldObject, Object newObject, SystemAction systemAction) {
         systemAction.setActionDate(new Date());
         systemAction = actionManager.add(systemAction);
-        if(oldObject != null) {
+        if (oldObject != null) {
             recordEdit(oldObject, newObject, systemAction);
         }
-
-    }
-    public void log(SystemAction systemAction){
-        log(null,null,systemAction);
     }
 
-    private void recordEdit( Object oldObject, Object newObject, SystemAction systemAction){
-        Field[] fields =  oldObject.getClass().getDeclaredFields();
-        for(Field field : fields){
-            Object oldValue = null;
-            Object newValue = null;
-            try{
+    public void log(SystemAction systemAction) {
+        log(null, null, systemAction);
+    }
+
+    private void recordEdit(Object oldObject, Object newObject, SystemAction systemAction) {
+        Field[] fields = oldObject.getClass().getDeclaredFields();
+        for (Field field : fields) {
+            Object oldValue;
+            Object newValue;
+            try {
                 oldValue = reflectValue(oldObject, NameUtil.toMethod(field.getName()));
-                newValue = reflectValue(newObject,NameUtil.toMethod(field.getName()));
-            }catch (NoSuchMethodException n){
+                newValue = reflectValue(newObject, NameUtil.toMethod(field.getName()));
+            } catch (NoSuchMethodException n) {
                 continue;
             }
             if (beforeAndCompare(oldValue, newValue)) {
                 continue;
-            }else {
+            } else {
 
                 SystemHistory systemHistory = new SystemHistory();
                 systemHistory.setHistoryAction(systemAction.getActionId());
                 systemHistory.setHistoryField(field.getName());
-                systemHistory.setHistoryOld(String.valueOf((oldObject == null?"":dataChange(oldValue))));
-                systemHistory.setHistoryNew(String.valueOf((newObject == null?"":dataChange(newValue))));
+                systemHistory.setHistoryOld(String.valueOf((oldObject == null ? "" : dataChange(oldValue))));
+                systemHistory.setHistoryNew(String.valueOf((newObject == null ? "" : dataChange(newValue))));
                 historyManager.add(systemHistory);
             }
 
@@ -72,14 +71,13 @@ public class LogServiceImpl implements LogService{
         return compare(oldValue, newValue);
     }
 
-    private boolean compare(Object oldOne, Object newOne){
-
-        if(oldOne == null&&newOne == null){
+    private boolean compare(Object oldOne, Object newOne) {
+        if (oldOne == null && newOne == null) {
             return true;
-        }else if(newOne == null){
+        } else if (newOne == null) {
             return true;
-        }else if(oldOne == null){
-        	return false;
+        } else if (oldOne == null) {
+            return false;
         }
         return oldOne.equals(newOne);
     }
@@ -96,20 +94,20 @@ public class LogServiceImpl implements LogService{
         return value;
     }
 
-    private Object dataChange(Object object){
+    private Object dataChange(Object object) {
         if (object instanceof Date) {
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
             Date date = (Date) object;
             return format.format(date);
-        }else if(validateUserId(object)){
-            return userManager.find((String)object).getOrgUserRealName();
+        } else if (validateUserId(object)) {
+            return userManager.find((String) object).getOrgUserRealName();
         }
         return object;
     }
 
-    private boolean validateUserId(Object value){
-        if(value instanceof String){
-            if(((String)value).matches("(([a-z])|(\\d)){32}")){
+    private boolean validateUserId(Object value) {
+        if (value instanceof String) {
+            if (((String) value).matches("(([a-z])|(\\d)){32}")) {
                 return true;
             }
         }

@@ -24,29 +24,11 @@ public class TaskServiceImpl implements TaskService {
     @Autowired
     private StoryManager storyManager;
 
-    private static Object getFieldValueByName(String fieldName, Object o) {
-        try {
-            String firstLetter = fieldName.substring(0, 1).toUpperCase();
-            String getter = "get" + firstLetter + fieldName.substring(1);
-            Method method = o.getClass().getMethod(getter, new Class[]{});
-            Object value = method.invoke(o, new Object[]{});
-            if (value == null) {
-                value = "";
-            }
-            return value;
-        } catch (Exception e) {
-            return null;
-        }
-    }
 
     public Integer updateDoingTask(ProjectTask task) {
         task.setTaskStatus(task.DOING);
         task.setTaskLastEditedDate(new Date());
-        return taskManager.updateColum(task);
-    }
-
-    public Integer batchSoftDel(String condition) {
-        return taskManager.batchSoftDel(condition);
+        return taskManager.update(task);
     }
 
     public Integer batchAdd(List<ProjectTask> taskList, Integer projectId) {
@@ -92,43 +74,39 @@ public class TaskServiceImpl implements TaskService {
 
     public Integer updateEditTask(ProjectTask task) {
         task.setTaskLastEditedDate(new Date());
-        return taskManager.updateEditTask(task);
+        return taskManager.update(task);
     }
 
     public Integer updateCallTask(ProjectTask task) {
-        return taskManager.updateColum(task);
+        return taskManager.update(task);
     }
 
     public Integer updateFinishTask(ProjectTask task) {
         task.setTaskStatus("3");
         task.setTaskLastEditedDate(new Date());
         task.setTaskLeft(0f);
-        return taskManager.updateColum(task);
+        return taskManager.update(task);
     }
 
     public Integer updateStartTask(ProjectTask task) {
         task.setTaskRealStarted(new Date());
         task.setTaskStatus("2");
         task.setTaskLastEditedDate(new Date());
-        return taskManager.updateColum(task);
+        return taskManager.update(task);
     }
 
     public Integer updateCloseTask(ProjectTask task) {
         task.setTaskCloseDate(new Date());
         task.setTaskStatus("6");
         task.setTaskLastEditedDate(new Date());
-        return taskManager.updateColum(task);
+        return taskManager.update(task);
     }
 
     public Integer updateCancelTask(ProjectTask task) {
         task.setTaskCanceledDate(new Date());
         task.setTaskStatus("5");
         task.setTaskLastEditedDate(new Date());
-        return taskManager.updateColum(task);
-    }
-
-    public Pager<ProjectTask> findComplexTask() {
-        return null;
+        return taskManager.update(task);
     }
 
     public Map<String, List<ProjectTask>> findGroup(String type, Integer projectId) {
@@ -146,9 +124,7 @@ public class TaskServiceImpl implements TaskService {
                 resMap.put(value, tList);
             }
         }
-
         //转化为前台显示格式
-
         return resMap;
     }
 
@@ -158,6 +134,21 @@ public class TaskServiceImpl implements TaskService {
 
     public Map<String, List<ProjectTask>> findTaskByGroup(int projectId, String colum) {
         return null;
+    }
+
+    private  Object getFieldValueByName(String fieldName, Object o) {
+        try {
+            String firstLetter = fieldName.substring(0, 1).toUpperCase();
+            String getter = "get" + firstLetter + fieldName.substring(1);
+            Method method = o.getClass().getMethod(getter, new Class[]{});
+            Object value = method.invoke(o, new Object[]{});
+            if (value == null) {
+                value = "";
+            }
+            return value;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
 }
