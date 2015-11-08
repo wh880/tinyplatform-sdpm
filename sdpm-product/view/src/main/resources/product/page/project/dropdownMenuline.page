@@ -11,10 +11,19 @@
     #@navSelect2Nav()
 
         #if(cookieProductLineId&&ProductUtils.getProductLineListByUser()?.size()>0)
+            #set(finded = 0)
             #for(productLine : ProductUtils.getProductLineListByUser())
                 #if(productLine?.productLineId == cookieProductLineId)
                     <span id="productLineNameOnTop" value="${cookieProductLineId}"> ${productLine?.productLineName}</span>
+                    #set(finded=1)
                 #end
+            #end
+            #if(finded==0)
+                #set(cookieProductLineId=null)
+            <script type="text/javascript">
+                $.removeCookie('cookieProductLineId',{path:"/"})
+                window.location.reload();
+            </script>
             #end
         #else
             #if(ProductUtils.getProductLineListByUser()?.size()==0)
