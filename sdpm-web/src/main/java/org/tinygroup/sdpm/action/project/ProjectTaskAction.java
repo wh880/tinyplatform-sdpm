@@ -133,7 +133,7 @@ public class ProjectTaskAction extends BaseController {
         task.setTaskProject(projectId);
         String taskMailTo = StringUtil.join(taskMailToArray, ",");
         task.setTaskMailto(taskMailTo);
-        task.setTaskConsumed(task.getTaskEstimate());
+        task.setTaskLeft(task.getTaskEstimate());
         task = taskService.addTask(task);
         LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, LogUtil.LogAction.OPENED,
                 task.getTaskId().toString(), UserUtils.getUserId(),
