@@ -333,6 +333,8 @@ public class QualityBugTable extends Table {
 	 */
 	public final Column DELETED = new Column(this, "deleted");
 
+	public final Column NO = new Column(this, "no");
+
 
 	public QualityBugTable() {
 		super("quality_bug");

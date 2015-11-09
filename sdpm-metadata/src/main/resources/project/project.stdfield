@@ -132,7 +132,7 @@
   <standard-field id="17eedc084da5420bb4e6de6c5b152ecb" name="build_deleted" title="已删除" business-type-id="b6a9bc04774b40859a7dd8c6fd52a629" default="0">
     <description>0-未删除，1-删除</description>
   </standard-field>
-  <standard-field id="148e8200ce404e8eb048888f07802a55" name="burn_date" title="日期" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff" default="">
+  <standard-field id="148e8200ce404e8eb048888f07802a55" name="burn_date" title="日期" business-type-id="af7b470e7d404b4882e7ec5a1513165f" default="">
     <description></description>
   </standard-field>
   <standard-field id="e2e5845ea87649128dcba54700676efe" name="burn_left" title="剩余" business-type-id="8068bb7c6e5a4302b60e801f63ca7b35"/>

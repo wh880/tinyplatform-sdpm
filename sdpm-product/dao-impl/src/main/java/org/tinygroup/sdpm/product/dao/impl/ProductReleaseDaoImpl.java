@@ -150,6 +150,11 @@ public class ProductReleaseDaoImpl extends TinyDslDaoSupport implements
 		return getDslSession().fetchList(select, ProductRelease.class);
 	}
 
+	public Integer getMaxNo(Integer productId) {
+		Select select = select(PRODUCT_RELEASETABLE.NO.max()).from(PRODUCT_RELEASETABLE).where(PRODUCT_RELEASETABLE.PRODUCT_ID.eq(productId));
+		return getDslSession().fetchOneResult(select,Integer.class);
+	}
+
 	public ProductRelease getByKey(Integer pk) {
 		try {
 			return getDslTemplate().getByKey(pk, ProductRelease.class,

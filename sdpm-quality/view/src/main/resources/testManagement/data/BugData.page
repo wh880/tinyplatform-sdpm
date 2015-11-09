@@ -4,7 +4,7 @@
 #for(var:bugpager.records)
 #@tr()
     #@td()<input type="checkbox" value="${var?.bugId}" name="idCheck">#end
-    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/bug/bugInfo?currentPageId=5&bugId=${var?.bugId}">${var?.bugId}</a>#end
+    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/bug/bugInfo?currentPageId=5&bugId=${var?.bugId}">${var?.no}</a>#end
     #@td()${var?.bugSeverity}#end
     #@td()${var?.priority}#end
     #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/bug/bugInfo?currentPageId=5&bugId=${var?.bugId}">[${var?.bugConfirmed==1?"已确认":"未确认"}]${var?.bugTitle}</a>#end

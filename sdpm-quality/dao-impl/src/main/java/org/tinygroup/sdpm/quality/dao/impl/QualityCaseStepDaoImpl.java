@@ -16,6 +16,7 @@
 
 package org.tinygroup.sdpm.quality.dao.impl;
 
+import static org.tinygroup.sdpm.product.dao.constant.ProductStorySpecTable.PRODUCT_STORY_SPECTABLE;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 import static org.tinygroup.sdpm.quality.dao.constant.QualityCaseStepTable.*;
 import static org.tinygroup.tinysqldsl.Select.*;
@@ -223,5 +224,10 @@ public class QualityCaseStepDaoImpl extends TinyDslDaoSupport implements Quality
 			select.orderBy(orderByElements.toArray(new OrderByElement[0]));
 		}
 		return select;
+	}
+
+	public Integer getMaxVersion(Integer testCaseId) {
+		Select select = select(QUALITY_CASE_STEPTABLE.CASE_VERSION.max()).from(QUALITY_CASE_STEPTABLE).where(QUALITY_CASE_STEPTABLE.CASE_ID.eq(testCaseId));
+		return getDslSession().fetchOneResult(select,Integer.class);
 	}
 }

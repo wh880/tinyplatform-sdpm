@@ -37,4 +37,5 @@ public interface ProductPlanDao extends BaseDao<ProductPlan,Integer> {
      */
 	List<ProductPlan> statisticQuery(ProductPlan productPlan ,OrderBy... orderArgs);
 
+	Integer getMaxNo(Integer productId);
 }

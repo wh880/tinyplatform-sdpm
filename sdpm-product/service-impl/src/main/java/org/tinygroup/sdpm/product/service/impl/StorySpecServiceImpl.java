@@ -42,6 +42,10 @@ public class StorySpecServiceImpl implements StorySpecService {
 		return storySpecManager.getNewStoryVersion(storyId);
 	}
 
+	public Integer getMaxVersion(Integer storyId) {
+		return storySpecManager.getMaxVersion(storyId);
+	}
+
 	public ProductStorySpec add(ProductStorySpec storySpec) {
 
 		return storySpecManager.add(storySpec);

@@ -1,19 +1,4 @@
 <tables>
-  <table id="10dd982b856643ce8a43a91db3c98695" name="effort" title="日志表单" schema="" package-name="">
-    <description></description>
-    <table-field standard-field-id="02058421c0be48dcab02f68cf7490361" primary="true" unique="true" not-null="true" id="effort_id" auto-increase="true"/>
-    <table-field standard-field-id="41c2d4fa69994d27b18ce0512040b599" primary="false" unique="false" not-null="true" id="effort_objectType" auto-increase="false"/>
-    <table-field standard-field-id="4f1e941334234d2c99bde0ff28a3d757" primary="false" unique="false" not-null="true" id="effort_objectID" auto-increase="false"/>
-    <table-field standard-field-id="20e466bed2f746bdbaa7cfb3c98d6c78" primary="false" unique="false" not-null="true" id="effort_product" auto-increase="false"/>
-    <table-field standard-field-id="c757c19c5c7e42e4bb25eb49244f2067" primary="false" unique="false" not-null="true" id="effort_project" auto-increase="false"/>
-    <table-field standard-field-id="646f793a61ea4c8e95d7cf89815a6c13" primary="false" unique="false" not-null="true" id="effort_account" auto-increase="false"/>
-    <table-field standard-field-id="bc99a8114d0149beb77beb94afd34209" primary="false" unique="false" not-null="true" id="effort_work" auto-increase="false"/>
-    <table-field standard-field-id="488614bbfcc5404aa5b4ddda4cef56d8" primary="false" unique="false" not-null="true" id="effort_date" auto-increase="false"/>
-    <table-field standard-field-id="75dacdf666084a95b5a5faf4cf6a2527" primary="false" unique="false" not-null="true" id="effort_left" auto-increase="false"/>
-    <table-field standard-field-id="494874a140a54ab9a00d92382c8c67be" primary="false" unique="false" not-null="true" id="effort_consumed" auto-increase="false"/>
-    <table-field standard-field-id="a6dbb44cffaa49519898a71944b5c78f" primary="false" unique="false" not-null="true" id="effort_begin" auto-increase="false"/>
-    <table-field standard-field-id="b5034e7b78254e7b82b4e3e01ede383a" primary="false" unique="false" not-null="true" id="effort_end" auto-increase="false"/>
-  </table>
   <table id="69f89e7f02b64fcb8176e03c3ea9bb36" name="profile" title="附件表">
     <table-field standard-field-id="8f7f46caee354c88a4068200c4045973" primary="true" unique="true" not-null="true" id="file_id" auto-increase="true"/>
     <table-field standard-field-id="11dc002e23a649e48888fabb340fae2e" primary="false" unique="false" not-null="true" id="file_pathname" auto-increase="false"/>

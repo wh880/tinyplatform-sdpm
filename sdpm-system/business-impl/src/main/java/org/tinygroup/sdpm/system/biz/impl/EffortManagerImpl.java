@@ -3,6 +3,7 @@ package org.tinygroup.sdpm.system.biz.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.tinygroup.commons.tools.ArrayUtil;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.system.biz.inter.EffortManager;
@@ -21,6 +22,14 @@ public class EffortManagerImpl implements EffortManager {
 
     public SystemEffort add(SystemEffort systemEffort) {
         return systemEffortDao.add(systemEffort);
+    }
+
+    public Integer batchAdd(List<SystemEffort> list) {
+        int[] result = systemEffortDao.batchInsert(list);
+        if (ArrayUtil.isEmptyArray(result)) {
+            return 0;
+        }
+        return result.length;
     }
 
     public SystemEffort update(SystemEffort systemEffort) {
@@ -79,7 +88,6 @@ public class EffortManagerImpl implements EffortManager {
     public Pager<SystemEffort> findByDate(int start, int limit,
                                           SystemEffort effort, Date startDate, Date endDate, String sortName,
                                           boolean asc) {
-
         if (StringUtil.isBlank(sortName)) {
             return systemEffortDao.findByDate(start, limit, effort, startDate, endDate);
         }

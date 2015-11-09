@@ -59,4 +59,6 @@ public interface ProductStoryDao extends BaseDao<ProductStory,Integer> {
 
 	Pager<ProductStory> projectLinkedStory(int start, int limit, ProductStory productStory, final String condition, final OrderBy... orderBys);
 
+	Integer getMaxNo(Integer productId);
+
 }

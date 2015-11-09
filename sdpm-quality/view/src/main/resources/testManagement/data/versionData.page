@@ -5,7 +5,7 @@
     #@td()<input type="checkbox" value="${v?.testversionId}" name="idCheck">#end
     #@td()<a
             href="${TINY_CONTEXT_PATH+adminPath}/quality/version/taskToCase?testversionId=${v?.testversionId}&currentPageId=5&status=tverallcase">${v
-        ?.testversionId}</a>#end
+        ?.no}</a>#end
     #@td()<a
             href="${TINY_CONTEXT_PATH+adminPath}/quality/version/taskToCase?testversionId=${v?.testversionId}&currentPageId=5&status=tverallcase">${v
         ?.testtaskTitle}</a>#end

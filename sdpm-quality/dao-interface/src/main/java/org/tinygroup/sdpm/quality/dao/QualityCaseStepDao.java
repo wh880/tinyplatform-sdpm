@@ -22,4 +22,5 @@ import org.tinygroup.sdpm.quality.dao.pojo.QualityCaseStep;
 
 public interface QualityCaseStepDao extends BaseDao<QualityCaseStep,Integer> {
 
+    Integer getMaxVersion(Integer testCaseId);
 }

@@ -310,7 +310,6 @@
     					sele.empty();
                         var em
     					if("build"==(isBuild)){
-
     					 em = "<option value='0' selected  >trunk</option>";
     					}else if("module"==isBuild){
     					 em = "<option value='0' selected  >/</option>";
@@ -331,7 +330,7 @@
 
     				},
     				error: function(res){
-    					alert("失败");
+//    					alert("失败");
     				}
     			});
 

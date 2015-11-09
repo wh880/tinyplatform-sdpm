@@ -34,4 +34,8 @@ public class CaseStepServiceImpl implements CaseStepService {
 	public int[] batchAdd(List<QualityCaseStep> qualityCaseSteps) {
 		return casestepmanager.batchAdd(qualityCaseSteps);
 	}
+
+	public Integer getMaxVersion(Integer caseId) {
+		return casestepmanager.getMaxVersion(caseId);
+	}
 }

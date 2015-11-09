@@ -48,4 +48,6 @@ public interface StorySpecService {
 	 * @return
 	 */
 	int getNewStoryVersion(Integer storyId);
+
+	Integer getMaxVersion(Integer storyId);
 }

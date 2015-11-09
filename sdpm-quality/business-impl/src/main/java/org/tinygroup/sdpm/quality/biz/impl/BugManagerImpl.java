@@ -29,7 +29,8 @@ public class BugManagerImpl implements BugManager {
 	}
 	
 	public QualityBug add(QualityBug bug){
-				
+		Integer no = bugdao.getMaxNo(bug.getProductId());
+		bug.setNo(no==null?1:no+1);
 		return bugdao.add(bug);
 	}
 	

@@ -35,4 +35,6 @@ public interface CaseStepManager {
 		List<QualityCaseStep> findList(QualityCaseStep casestep);
 
 		int[] batchAdd(List<QualityCaseStep> qualityCaseSteps);
+
+	Integer getMaxVersion(Integer caseId);
 }

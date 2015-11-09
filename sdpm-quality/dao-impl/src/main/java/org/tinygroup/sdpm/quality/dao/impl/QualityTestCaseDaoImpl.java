@@ -88,7 +88,8 @@ public class QualityTestCaseDaoImpl extends TinyDslDaoSupport implements Quality
 						QUALITY_TEST_CASETABLE.DELETED.value(t.getDeleted()),
 						QUALITY_TEST_CASETABLE.CASE_LAST_RUNNER.value(t.getCaseLastRunner()),
 						QUALITY_TEST_CASETABLE.CASE_LAST_RUN_DATE.value(t.getCaseLastRunDate()),
-						QUALITY_TEST_CASETABLE.CASE_LAST_RUN_RESULT.value(t.getCaseLastRunResult()));
+						QUALITY_TEST_CASETABLE.CASE_LAST_RUN_RESULT.value(t.getCaseLastRunResult()),
+						QUALITY_TEST_CASETABLE.NO.value(t.getNo()));
 				return insert;
 			}
 		});
@@ -528,5 +529,10 @@ public class QualityTestCaseDaoImpl extends TinyDslDaoSupport implements Quality
 
 		List<Integer> list = getDslSession().fetchList(select, Integer.class);
 		return list;
+	}
+
+	public Integer getMaxNo(Integer productId) {
+		Select select = select(QUALITY_TEST_CASETABLE.NO.max()).from(QUALITY_TEST_CASETABLE).where(QUALITY_TEST_CASETABLE.PRODUCT_ID.eq(productId));
+		return getDslSession().fetchOneResult(select,Integer.class);
 	}
 }

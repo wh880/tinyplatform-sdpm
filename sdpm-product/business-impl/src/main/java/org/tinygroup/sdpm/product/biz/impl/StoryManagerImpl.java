@@ -40,7 +40,8 @@ public class StoryManagerImpl implements StoryManager {
     private SystemModuleDao systemModuleDao;
 
     public ProductStory add(ProductStory story, ProductStorySpec storySpec) {
-
+        Integer no = productStoryDao.getMaxNo(story.getProductId());
+        story.setNo(no==null?1:no+1);
         story.setDeleted(FieldUtil.DELETE_NO);
         story = productStoryDao.add(story);
         storySpec.setStoryId(story.getStoryId());

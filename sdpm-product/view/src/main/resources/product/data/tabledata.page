@@ -67,7 +67,7 @@
             #@td()
                 <input type="checkbox" value="${story.storyId}" id="fieldid" name="storyId">
             #end
-            #@td()<a href="${TINY_CONTEXT_PATH +adminPath}/product/storySpec/find/productDemandDetail?storyId=${story.storyId}">${story.storyId}</a>#end
+            #@td()<a href="${TINY_CONTEXT_PATH +adminPath}/product/storySpec/find/productDemandDetail?storyId=${story.storyId}">${story.no}</a>#end
             #@td()${getDict("storyPri",story?.storyPri)}#end
             #@td()<a href="${TINY_CONTEXT_PATH +adminPath}/product/storySpec/find/productDemandDetail?storyId=${story.storyId}">${story.storyTitle}</a>#end
             #@td()${story?.planName}#end
@@ -84,13 +84,13 @@
                          #if(Integer.parseInt(story?.storyStatus)==0||Integer.parseInt(story?.storyStatus)==3)
                          <a title="${m?.name}" class="ml-5" href="${TINY_CONTEXT_PATH +adminPath}${url}"><i class="${m?.icon}"></i></a>
                          #else
-                         <span style="color:grey"><i class="${m?.icon}" /></span>
+                         <span class="ml-5" style="color:grey"><i class="${m?.icon}" /></span>
                          #end
                      #elseif(m?.id=="product-demand-close")
                          #if(Integer.parseInt(story?.storyStatus)!=2)
                          <a title="${m?.name}" class="ml-5" href="${TINY_CONTEXT_PATH +adminPath}${url}"><i class="${m?.icon}"></i></a>
                          #else
-                         <span style="color:grey"><i class="${m?.icon}" /></span>
+                         <span class="ml-5" style="color:grey"><i class="${m?.icon}" /></span>
                          #end
                      #elseif(m?.id=="add-case")
                      <a title="${m?.name}" class="caseAdd ml-5" href="${TINY_CONTEXT_PATH +adminPath}${url}?storyId=${story?.storyId}${story?.moduleId?'&moduleId='+story?.moduleId:''}"><i class="${m?.icon}"></i></a>

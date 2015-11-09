@@ -357,6 +357,16 @@ public class QualityBug implements Serializable {
 
 	private String toStoryTitle;
 
+	private Integer no;
+
+	public Integer getNo() {
+		return no;
+	}
+
+	public void setNo(Integer no) {
+		this.no = no;
+	}
+
 	public String getModuleName() {
 		return moduleName;
 	}

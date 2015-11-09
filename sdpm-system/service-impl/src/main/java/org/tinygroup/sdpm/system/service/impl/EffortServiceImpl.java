@@ -20,6 +20,10 @@ public class EffortServiceImpl implements EffortService {
     @Autowired
     private TaskManager taskManager;
 
+    public Integer batchEffortSave(List<SystemEffort> list) {
+        return effortManager.batchAdd(list);
+    }
+
     public SystemEffort saveSystemEffort(SystemEffort systemEffort) {
         if (systemEffort.getEffortId() == null) {
             if (systemEffort.getEffortBegin() == null && systemEffort.getEffortEnd() == null) {
@@ -40,7 +44,6 @@ public class EffortServiceImpl implements EffortService {
             }
             return effortManager.add(systemEffort);
         } else {
-
             return effortManager.update(systemEffort);
         }
     }

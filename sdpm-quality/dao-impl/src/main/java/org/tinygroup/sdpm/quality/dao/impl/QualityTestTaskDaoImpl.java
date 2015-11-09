@@ -16,6 +16,7 @@
 
 package org.tinygroup.sdpm.quality.dao.impl;
 
+import static org.tinygroup.sdpm.quality.dao.constant.QualityTestCaseTable.QUALITY_TEST_CASETABLE;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 import static org.tinygroup.sdpm.quality.dao.constant.QualityTestTaskTable.*;
 import static org.tinygroup.sdpm.project.dao.constant.ProjectTable.*;
@@ -76,7 +77,8 @@ public class QualityTestTaskDaoImpl extends TinyDslDaoSupport implements Quality
 					QUALITY_TEST_TASKTABLE.TESTTASK_DESC.value(t.getTesttaskDesc()),
 					QUALITY_TEST_TASKTABLE.TESTTASK_REPORT.value(t.getTesttaskReport()),
 					QUALITY_TEST_TASKTABLE.TESTTASK_STATUS.value(t.getTesttaskStatus()),
-					QUALITY_TEST_TASKTABLE.DELETED.value(t.getDeleted()));
+					QUALITY_TEST_TASKTABLE.DELETED.value(t.getDeleted()),
+						QUALITY_TEST_TASKTABLE.NO.value(t.getNo()));
 				return insert;
 			}
 		});
@@ -298,5 +300,10 @@ public class QualityTestTaskDaoImpl extends TinyDslDaoSupport implements Quality
 						QUALITY_TEST_TASKTABLE.DELETED.eq(qualityTestTask.getDeleted())));
 		select =  addOrderByElements(select, orderArgs);
 		return getDslSession().fetchPage(select,start,limit,false,QualityTestTask.class);
+	}
+
+	public Integer getMaxNo(Integer productId) {
+		Select select = select(QUALITY_TEST_TASKTABLE.NO.max()).from(QUALITY_TEST_TASKTABLE).where(QUALITY_TEST_TASKTABLE.PRODUCT_ID.eq(productId));
+		return getDslSession().fetchOneResult(select,Integer.class);
 	}
 }
