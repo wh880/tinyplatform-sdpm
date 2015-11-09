@@ -10,7 +10,6 @@ import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.document.dao.pojo.DocumentDoc;
 import org.tinygroup.sdpm.document.service.inter.DocService;
 import org.tinygroup.sdpm.org.dao.pojo.OrgRole;
-import org.tinygroup.sdpm.org.dao.pojo.OrgRoleUser;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.RoleService;
 import org.tinygroup.sdpm.org.service.inter.UserService;
@@ -35,7 +34,6 @@ import org.tinygroup.sdpm.util.LogUtil;
 import org.tinygroup.sdpm.util.ProductUtils;
 import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
-import org.tinygroup.weblayer.WebContext;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -319,8 +317,8 @@ public class ProductAction extends BaseController {
     public String addpro(
             @PathVariable(value = "forward") String forward,HttpServletRequest request, Model model) {
 		if ("addproduct".equals(forward)) {
-			return "/product/page/tabledemo/addProduct.page";
-		} else if ("allproduct".equals(forward)) {
+            return "/product/page/tabledemo/addProduct";
+        } else if ("allproduct".equals(forward)) {
             return "/product/page/tabledemo/product-listall.page";
         }
 		return "";
@@ -354,5 +352,22 @@ public class ProductAction extends BaseController {
         }
         model.addAttribute("projectPager", pagerProject);
         return "/project/listData.pagelet";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/judgeProductName")
+    public Map judgeProductName(String param) {
+        if (param != null) {
+            String productName = param;
+            Product product = new Product();
+            product.setProductName(productName);
+            List<Product> products = productService.findProductList(product);
+            if (products.size() != 0) {
+                return resultMap(false, "该产品已存在");
+            } else {
+                return resultMap(true, "");
+            }
+        }
+        return resultMap(false, "请输入产品名称");
     }
 }

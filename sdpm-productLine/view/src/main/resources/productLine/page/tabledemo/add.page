@@ -26,7 +26,8 @@
         #@formControlDiv("col-4")
             #tinyInput(
                 "text" "productLineName" ""{"placeholder":"产品线名称","nullmsg":"请输入产品线名称！","datatype":"*","id":
-                "product-name","class":"input-text"})
+                "product-name","class":"input-text","ajaxurl":TINY_CONTEXT_PATH+adminPath+
+                "/productLine/judgeProductLineName"})
         #end
         #@validateDiv("col-2")#end
     #end
