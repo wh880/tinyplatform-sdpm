@@ -113,6 +113,7 @@ public class BurnServiceImpl implements BurnService {
         Date nextDay = startData;
         Float tLeft = 0f;
 
+        Date today = new Date();
         List<Float> leftList = new ArrayList<Float>();
         List<Float> averageList = new ArrayList<Float>();
         List<String> dateList = new ArrayList<String>();
@@ -125,7 +126,9 @@ public class BurnServiceImpl implements BurnService {
             if (0 == i % interval || i == period) {
                 averageList.add(topLeft - rake * i);
                 dateList.add(format.format(nextDay));
-                leftList.add(tLeft);
+                if (projectBurn != null || today.after(nextDay)) {
+                    leftList.add(tLeft);
+                }
             }
             i++;
             nextDay = DateUtils.addDays(startData, i);

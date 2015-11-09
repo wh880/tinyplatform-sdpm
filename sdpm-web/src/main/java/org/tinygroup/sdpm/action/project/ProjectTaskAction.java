@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.logger.LogLevel;
 import org.tinygroup.sdpm.action.project.dto.Tasks;
@@ -195,14 +196,32 @@ public class ProjectTaskAction extends BaseController {
      * 时间消耗
      *
      * @param taskId
-     * @param model
      * @return
      */
     @RequestMapping(value = "/consumeTime", method = RequestMethod.POST)
-    public String consumeTimeSave(Integer taskId, Model model) {
+    public String consumeTimeSave(List<SystemEffort> list, Integer taskId) {
         ProjectTask task = taskService.findTask(taskId);
-        model.addAttribute("task", task);
-        return "project/task/consumeTime";
+        for (int i = 0; i < list.size(); i++) {
+            SystemEffort systemEffort = list.get(i);
+            if (systemEffort.getEffortLeft() == null || systemEffort.getEffortConsumed() == null) {
+                list.remove(systemEffort);
+                i--;
+            } else {
+                systemEffort.setEffortObjectType("task");
+                systemEffort.setEffortObjectId(taskId);
+                systemEffort.setEffortAccount(UserUtils.getUserAccount());
+                systemEffort.setEffortProject(task.getTaskProject());
+            }
+        }
+        if (!CollectionUtil.isEmpty(list)){
+            SystemEffort systemEffort = list.get(list.size() - 1);
+            task.setTaskLeft(systemEffort.getEffortLeft());
+            task.setTaskConsumed(systemEffort.getEffortConsumed());
+            taskService.updateTask(task);
+            burnService.updateBurnByProjectId(task.getTaskProject());
+        }
+        effortService.batchEffortSave(list);
+        return "redirect:" + adminPath + "/project/task/consumeTime";
     }
 
     /**

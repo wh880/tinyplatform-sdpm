@@ -27,17 +27,17 @@
                 #@tr()
                     #@td()    ${++count}    #end
                     #@td()
-                        #@tinyDateInput("effortDate" formatDate(now()) "YYYY-MM-DD" {"style":"width:150px","datatype":"*","placeholder": "选择日期"})#end
+                        #@tinyDateInput("list["+iFor.index+"].effortDate" formatDate(now()) "YYYY-MM-DD" {"style":"width:150px","datatype":"*","placeholder": "选择日期"})#end
                         #@validateDiv("col-2")#end
                     #end
                     #@td()
-                        #tinyInput("text" "effortConsumed")
+                        #tinyInput("text" "list["+iFor.index+"].effortConsumed")
                     #end
                     #@td()
-                        #tinyInput("text" "effortLeft")
+                        #tinyInput("text" "list["+iFor.index+"].effortLeft")
                     #end
                     #@td()
-                        #tinyInput("text" "effortWork")
+                        #tinyInput("text" "list["+iFor.index+"].effortWork")
                     #end
                 #end
             #end
