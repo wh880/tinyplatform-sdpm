@@ -235,6 +235,17 @@ public class ProductStory implements Serializable{
 	 */
 	private Integer deleted;
 
+	private Integer no;
+
+
+	public Integer getNo() {
+		return no;
+	}
+
+	public void setNo(Integer no) {
+		this.no = no;
+	}
+
 	public List<String> getMailto() {
 		return mailto;
 	}

@@ -14,7 +14,7 @@ public class StoryCount implements Serializable{
 
 	public String getPercentToString() {
 		String s = String.valueOf(percent*100);
-		return s.substring(0,s.indexOf("."))+"%";
+		return s+"%";
 	}
 
 	public void setPercentToString(String percentToString) {

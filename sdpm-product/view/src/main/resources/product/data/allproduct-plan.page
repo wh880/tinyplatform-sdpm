@@ -6,7 +6,7 @@
 #for(plan:productPlan?.records)
 #@tr()
 	#@td()<input type="checkbox" value="1" name="product-plan">#end
-	#@td()${plan?.planId}#end
+	#@td()<a href="${TINY_CONTEXT_PATH +adminPath}/product/plan/forword/reRelateStory?planId=${plan.planId}">${plan?.no}</a>#end
 	#@td()<a href="${TINY_CONTEXT_PATH +adminPath}/product/plan/forword/reRelateStory?planId=${plan.planId}">${plan
         ?.planName}</a>#end
 	#@td()${plan?.planSpec}#end

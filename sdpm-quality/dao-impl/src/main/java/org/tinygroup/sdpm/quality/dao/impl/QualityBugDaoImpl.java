@@ -48,6 +48,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.tinygroup.sdpm.org.dao.constant.OrgUserTable.ORG_USERTABLE;
+import static org.tinygroup.sdpm.product.dao.constant.ProductReleaseTable.PRODUCT_RELEASETABLE;
 import static org.tinygroup.sdpm.quality.dao.constant.QualityBugTable.QUALITY_BUGTABLE;
 import static org.tinygroup.sdpm.product.dao.constant.ProductStoryTable.PRODUCT_STORYTABLE;
 import static org.tinygroup.sdpm.product.dao.constant.ProductPlanTable.PRODUCT_PLANTABLE;
@@ -121,7 +122,8 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
 					QUALITY_BUGTABLE.TESTTASK.value(t.getTesttask()),
 					QUALITY_BUGTABLE.BUG_LAST_EDITED_BY.value(t.getBugLastEditedBy()),
 					QUALITY_BUGTABLE.BUG_LAST_EDITED_DATE.value(t.getBugLastEditedDate()),
-					QUALITY_BUGTABLE.DELETED.value(t.getDeleted()));
+					QUALITY_BUGTABLE.DELETED.value(t.getDeleted()),
+						QUALITY_BUGTABLE.NO.value(t.getNo()));
 				return insert;
 			}
 		});
@@ -722,5 +724,10 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
 								QUALITY_BUGTABLE.STORY_VERSION.neq(PRODUCT_STORYTABLE.STORY_VERSION)
 						));
 			return getDslSession().fetchPage(addOrderByElements(select, orderArgs),start,limit,false,QualityBug.class);
+	}
+
+	public Integer getMaxNo(Integer productId) {
+		Select select = select(QUALITY_BUGTABLE.NO.max()).from(QUALITY_BUGTABLE).where(QUALITY_BUGTABLE.PRODUCT_ID.eq(productId));
+		return getDslSession().fetchOneResult(select,Integer.class);
 	}
 }

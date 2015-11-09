@@ -39,6 +39,7 @@ import java.util.List;
 import static org.tinygroup.sdpm.product.dao.constant.ProductStorySpecTable.PRODUCT_STORY_SPECTABLE;
 import static org.tinygroup.tinysqldsl.Delete.delete;
 import static org.tinygroup.tinysqldsl.Insert.insertInto;
+import static org.tinygroup.tinysqldsl.Select.select;
 import static org.tinygroup.tinysqldsl.Select.selectFrom;
 import static org.tinygroup.tinysqldsl.Update.update;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
@@ -256,7 +257,7 @@ public class ProductStorySpecDaoImpl extends TinyDslDaoSupport implements Produc
         return select;
     }
 
-    public int getNewStoryVersion(Integer storyId) {
+    public Integer getNewStoryVersion(Integer storyId) {
         ProductStorySpec spec = new ProductStorySpec();
         spec.setStoryId(storyId);
         Pager<ProductStorySpec> pager = queryPager(0, 1, spec, new OrderBy("story_version", false));
@@ -266,5 +267,10 @@ public class ProductStorySpecDaoImpl extends TinyDslDaoSupport implements Produc
             }
         }
         return -1;
+    }
+
+    public Integer getMaxVersion(Integer storyId) {
+        Select select = select(PRODUCT_STORY_SPECTABLE.STORY_VERSION.max()).from(PRODUCT_STORY_SPECTABLE).where(PRODUCT_STORY_SPECTABLE.STORY_ID.eq(storyId));
+        return getDslSession().fetchOneResult(select,Integer.class);
     }
 }

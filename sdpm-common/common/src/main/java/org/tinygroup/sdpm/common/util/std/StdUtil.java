@@ -26,7 +26,7 @@ public class StdUtil {
     static {
         tableMapping.put("user","org_user");
         tableMapping.put("story","product_story");
-        tableMapping.put("productplan","product_plan");
+        tableMapping.put("plan","product_plan");
         tableMapping.put("release","product_release");
         tableMapping.put("project","project");
         tableMapping.put("product","product");
@@ -42,8 +42,10 @@ public class StdUtil {
         tableMapping.put("reply","service_reply");
         tableMapping.put("review","service_review");
         tableMapping.put("request","service_request");
-
-
+        tableMapping.put("task","project_task");
+        tableMapping.put("plan","product_plan");
+        tableMapping.put("holiday","holiday");
+        tableMapping.put("productLine","product_line");
     }
 
     public static void stdProcess(List<Table> tables){

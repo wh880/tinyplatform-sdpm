@@ -55,4 +55,6 @@ public interface StorySpecManager {
 	 * @return
 	 */
 	int getNewStoryVersion(Integer storyId);
+
+	Integer getMaxVersion(Integer storyId);
 }

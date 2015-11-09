@@ -25,7 +25,7 @@ public interface ProductStorySpecDao extends BaseDao<ProductStorySpec,Integer> {
 	
 	List<ProductStorySpec> getByKeys(Integer... id);
 	
-	int getNewStoryVersion(Integer storyId);
+	Integer getNewStoryVersion(Integer storyId);
 
-
+	Integer getMaxVersion(Integer storyId);
 }

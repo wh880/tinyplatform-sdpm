@@ -83,6 +83,16 @@ public class ProductRelease implements Serializable{
 
 	private String productName;
 
+	private Integer no;
+
+	public Integer getNo() {
+		return no;
+	}
+
+	public void setNo(Integer no) {
+		this.no = no;
+	}
+
 	public String getProductName() {
 		return productName;
 	}

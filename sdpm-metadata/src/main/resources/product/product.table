@@ -9,6 +9,7 @@
     <table-field standard-field-id="e0722a6a05ab4b3a8875fa8aaf6c0386" primary="false" unique="false" not-null="false" id="plan_beginDate" auto-increase="false"/>
     <table-field standard-field-id="32ed57583f5643cf86baaca014e19502" primary="false" unique="false" not-null="false" id="plan_endDate" auto-increase="false"/>
     <table-field standard-field-id="61c90281c2c54787a0588095fa5d5e96" primary="false" unique="false" not-null="false" id="deleted" auto-increase="false"/>
+    <table-field standard-field-id="bbdd486351bc40fe9173c0bdce7d0a2e" primary="false" unique="false" not-null="false" id="no" auto-increase="false"/>
   </table>
   <table id="972c8ec0370845668750ba23036e16ef" name="product" title="产品表" package-name="">
     <table-field standard-field-id="cbf5d6fba9d341758f6ef4071e16aa1d" primary="true" unique="true" not-null="true" id="product_id" auto-increase="true"/>
@@ -66,6 +67,7 @@
     <table-field standard-field-id="d375c0a459c0490d840add34075e27f5" primary="false" unique="false" not-null="false" id="build_id" auto-increase="false"/>
     <table-field standard-field-id="7d045d07a379467799bb865c513acad8" primary="false" unique="false" not-null="false" id="client_request_id" auto-increase="false"/>
     <table-field standard-field-id="61c90281c2c54787a0588095fa5d5e96" primary="false" unique="false" not-null="false" id="deleted" auto-increase="false"/>
+    <table-field standard-field-id="bbdd486351bc40fe9173c0bdce7d0a2e" primary="false" unique="false" not-null="false" id="no" auto-increase="false"/>
   </table>
   <table id="58b2365c896646dc8d04b5539f40cd67" name="product_story_spec" title="需求表述表" package-name="">
     <table-field standard-field-id="67ace46d5ae741c8af5b9cdfc7a72a30" primary="true" unique="true" not-null="true" id="storyspec_id" auto-increase="true"/>
@@ -86,5 +88,6 @@
     <table-field standard-field-id="5bc3d632bf8444de9d1ac8a851ddbdd0" primary="false" unique="false" not-null="false" id="release_bugs" auto-increase="false"/>
     <table-field standard-field-id="fa9c452cfb5944288f43e0ca22d78a34" primary="false" unique="false" not-null="false" id="release_desc" auto-increase="false"/>
     <table-field standard-field-id="61c90281c2c54787a0588095fa5d5e96" primary="false" unique="false" not-null="false" id="deleted" auto-increase="false"/>
+    <table-field standard-field-id="bbdd486351bc40fe9173c0bdce7d0a2e" primary="false" unique="false" not-null="false" id="no" auto-increase="false"/>
   </table>
 </tables>

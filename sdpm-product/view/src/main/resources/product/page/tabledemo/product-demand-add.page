@@ -72,8 +72,8 @@
                             $("#${sid}").on("change", function () {
                                 var pId = $("#${sid}  option:selected").val();
                                 if (pId > 0) {
-                                    ajaxRead("${sid}", "moduleId", "moduleId", "moduleName", "/quality/bug/ajax/module?moduleRoot=" + pId,"","module");
-                                    ajaxRead("${sid}", "planId", "planId", "planName", "/product/plan/planList?productId=" + pId);
+                                    ajaxRead("${sid}", "moduleId", "moduleId", "moduleName", "/quality/bug/ajax/module?moduleRoot=" + pId,"0","module");
+                                    ajaxRead("${sid}", "planId", "planId", "planName", "/product/plan/planList?productId=" + pId,"0","plan");
                                 }
                             })
 
@@ -88,7 +88,7 @@
                     <div class="col-4 text-c">所属模块：</div>
                     <div class="col-8">
                         #@Tselect2F()
-                            #@Tselect2Body("moduleId" "" {"class":"input-text select2","url":"/system/module/moduleList","ajaxType":
+                            #@Tselect2Body("moduleId" 0 {"class":"input-text select2","url":"/system/module/moduleList","ajaxType":
                                 "systemModel","data":"moduleType=product","relateElem":
                                 "relateModelTwo"}) ##,"multiple":"multiple"加上为多选项
                             #end
@@ -105,8 +105,7 @@
             #@colLabel()所属计划：#end
             #@formControlDiv("col-4")
                 #@Tselect2F()
-                    #@Tselect2Body("planId" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-
+                    #@Tselect2Body("planId" 0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                     #end
 
                     #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH +adminPath}/product/plan/addplan"

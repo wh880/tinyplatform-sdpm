@@ -17,7 +17,7 @@
 	 		
 	 		#for(story:storyList)
 				#@tr()
-					#@td()	${story?.storyId}	#end
+					#@td()	${story?.no}	#end
 		 			#@td()	${story?.storyTitle}	#end
 		 			#@td()	${story?.storyStatus}	#end
 		 			#@td()	

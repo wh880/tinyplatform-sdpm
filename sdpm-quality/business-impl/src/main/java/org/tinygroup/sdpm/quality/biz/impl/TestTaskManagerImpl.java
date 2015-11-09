@@ -27,6 +27,8 @@ public class TestTaskManagerImpl implements TestTaskManager {
 	}
 	
 	public QualityTestTask add(QualityTestTask testtask){
+		Integer no = testtaskdao.getMaxNo(testtask.getProductId());
+		testtask.setNo(no==null?1:no+1);
 		return testtaskdao.add(testtask);
 	}
 	

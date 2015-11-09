@@ -109,6 +109,16 @@ public class QualityTestTask implements Serializable {
 	private String searchBuildName;
 	private String projectName;
 
+	private Integer no;
+
+	public Integer getNo() {
+		return no;
+	}
+
+	public void setNo(Integer no) {
+		this.no = no;
+	}
+
 	public String getSearchBuildName() {
 		return searchBuildName;
 	}

@@ -21,7 +21,8 @@ public class ReleaseMangerImpl implements ReleaseManger{
 	private ProductReleaseDao productReleaseDao;
 	
 	public ProductRelease add(ProductRelease release) {
-
+		Integer no = productReleaseDao.getMaxNo(release.getProductId());
+		release.setNo(no==null?1:no+1);
 		return productReleaseDao.add(release);
 	}
 

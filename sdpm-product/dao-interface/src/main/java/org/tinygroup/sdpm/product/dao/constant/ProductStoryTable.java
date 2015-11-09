@@ -239,6 +239,7 @@ public class ProductStoryTable extends Table {
 	 */
 	public final Column DELETED = new Column(this, "deleted");
 
+	public final Column NO = new Column(this, "no");
 
 	public ProductStoryTable() {
 		super("product_story");

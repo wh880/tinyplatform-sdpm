@@ -28,4 +28,5 @@ public interface ProductReleaseDao extends BaseDao<ProductRelease,Integer> {
 	
 	List<ProductRelease> getByKeys(Integer... id);
 
+	Integer getMaxNo(Integer product);
 }

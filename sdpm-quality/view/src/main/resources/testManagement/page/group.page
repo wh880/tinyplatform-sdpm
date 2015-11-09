@@ -29,7 +29,7 @@
             #foreach(c : casesMap.get(story?.key))
                 <tr class="data-g-${story?.key} hide">
                     #@td()#end
-                    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/testCase/case/viewInfo?id=${c?.caseId}">${c?.caseId}</a>#end
+                    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/testCase/case/viewInfo?id=${c?.caseId}">${c?.no}</a>#end
                     #@td()${getDict("casePriority",c?.priority)}#end
                     #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/testCase/case/viewInfo?id=${c?.caseId}">${c?.caseTitle}</a>#end
                     #@td()${getDict("caseType",c?.caseType)}#end

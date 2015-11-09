@@ -52,6 +52,10 @@ public class StorySpecManagerImpl implements StorySpecManager{
 		return productStorySpecDao.getNewStoryVersion(storyId);
 	}
 
+	public Integer getMaxVersion(Integer storyId) {
+		return productStorySpecDao.getMaxVersion(storyId);
+	}
+
 	public ProductStorySpec add(ProductStorySpec storySpec) {
 
 		return productStorySpecDao.add(storySpec);

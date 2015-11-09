@@ -36,4 +36,8 @@ public class CaseStepManagerImpl implements CaseStepManager {
 	public int[] batchAdd(List<QualityCaseStep> qualityCaseSteps) {
 		return casestepdao.batchInsert(qualityCaseSteps);
 	}
+
+	public Integer getMaxVersion(Integer caseId) {
+		return casestepdao.getMaxVersion(caseId);
+	}
 }

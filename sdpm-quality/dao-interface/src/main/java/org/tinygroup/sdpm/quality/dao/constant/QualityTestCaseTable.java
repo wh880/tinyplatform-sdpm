@@ -213,6 +213,8 @@ public class QualityTestCaseTable extends Table {
 	 */
 	public final Column CASE_LAST_RUN_RESULT = new Column(this, "case_last_run_result");
 
+	public final Column NO = new Column(this, "no");
+
 
 	public QualityTestCaseTable() {
 		super("quality_test_case");

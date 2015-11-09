@@ -75,6 +75,7 @@ public class ProductPlanTable extends Table {
 	 */
 	public final Column DELETED = new Column(this, "deleted");
 
+	public final Column NO = new Column(this, "no");
 
 	private ProductPlanTable() {
 		super("product_plan");

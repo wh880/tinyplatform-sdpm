@@ -34,4 +34,5 @@ public interface QualityTestCaseDao extends BaseDao<QualityTestCase,Integer> {
 	
 	List<Integer> getStoryIds(QualityTestCase t);
 
+	Integer getMaxNo(Integer productId);
 }

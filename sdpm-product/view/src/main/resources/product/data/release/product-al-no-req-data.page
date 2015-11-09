@@ -7,8 +7,7 @@
 #@tr()
 	#@td()<input type="checkbox" value="${story?.storyId}" id="field" name="storyId">#end
     #@td()<a
-            href="${TINY_CONTEXT_PATH +adminPath}/product/storySpec/find/productDemandDetail?storyId=${story.storyId}">${story
-        ?.storyId}</a>#end
+            href="${TINY_CONTEXT_PATH +adminPath}/product/storySpec/find/productDemandDetail?storyId=${story.storyId}">${story?.no}</a>#end
     #@td()${getDict("storyPri",story?.storyPri)}#end
     #@td()<a href="${TINY_CONTEXT_PATH +adminPath}/product/page/project/demdtablehref.page">${story?.storyTitle}</a>#end
     #@td()${story?.storyOpenedBy?UserUtils.getUserById(story?.storyOpenedBy)?.orgUserRealName:""}#end

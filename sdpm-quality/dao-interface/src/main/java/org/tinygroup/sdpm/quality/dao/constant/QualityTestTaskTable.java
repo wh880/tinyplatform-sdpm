@@ -105,6 +105,8 @@ public class QualityTestTaskTable extends Table {
 	 */
 	public final Column DELETED = new Column(this, "deleted");
 
+	public final Column NO = new Column(this, "no");
+
 
 	private QualityTestTaskTable() {
 		super("quality_test_task");

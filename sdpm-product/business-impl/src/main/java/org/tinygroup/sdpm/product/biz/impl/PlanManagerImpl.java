@@ -20,7 +20,8 @@ public class PlanManagerImpl implements PlanManager{
 	private ProductPlanDao productPlanDao;
 	
 	public ProductPlan add(ProductPlan plan) {
-		
+		Integer no = productPlanDao.getMaxNo(plan.getProductId());
+		plan.setNo(no==null?1:no+1);
 		return productPlanDao.add(plan);
 	}
 

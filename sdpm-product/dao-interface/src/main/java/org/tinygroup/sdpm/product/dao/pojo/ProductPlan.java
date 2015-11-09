@@ -90,6 +90,16 @@ public class ProductPlan implements Serializable{
 	 */
 	private Integer close;
 
+	private Integer no;
+
+	public Integer getNo() {
+		return no;
+	}
+
+	public void setNo(Integer no) {
+		this.no = no;
+	}
+
 	public Integer getDraft() {
 		return draft;
 	}

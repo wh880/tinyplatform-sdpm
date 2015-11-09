@@ -37,6 +37,8 @@ public class TestCaseManagerImpl implements TestCaseManager {
 	}
 	
 	public QualityTestCase add(QualityTestCase testcase){
+		Integer no = testcasedao.getMaxNo(testcase.getProductId());
+		testcase.setNo(no==null?1:no+1);
 		testcase.setCaseOpenedDate(new Date());
 		return testcasedao.add(testcase);
 	}

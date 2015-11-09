@@ -138,7 +138,8 @@ public class TestCaseAction extends BaseController {
 			step1.setCaseId(testcase.getCaseId());
 			List<QualityCaseStep> steps = caseStepService.findCaseStepList(step1);
 			if(isCaseModify(step,expect,steps)){
-				testcase.setCaseVersion(testCase.getCaseVersion()+1);
+				Integer maxVersion = caseStepService.getMaxVersion(testCase.getCaseId());
+				testcase.setCaseVersion(maxVersion==null?1:maxVersion+1);
 				insertStep(step, expect, testcase);
 			}
 			testcase.setCaseLastEditedBy(UserUtils.getUserId());

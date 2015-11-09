@@ -52,6 +52,7 @@
     <table-field standard-field-id="f6a7e4ea3f6e48de8db3d22ffc1ef267" primary="false" unique="false" not-null="false" id="bug_last_edited_by" auto-increase="false"/>
     <table-field standard-field-id="48706c454e294123bb6eeba92516c9bb" primary="false" unique="false" not-null="false" id="bug_last_edited_date" auto-increase="false"/>
     <table-field standard-field-id="61c90281c2c54787a0588095fa5d5e96" primary="false" unique="false" not-null="false" id="deleted" auto-increase="false"/>
+    <table-field standard-field-id="bbdd486351bc40fe9173c0bdce7d0a2e" primary="false" unique="false" not-null="false" id="no" auto-increase="false"/>
   </table>
   <table id="14ae970c05254e4ab673f0f2e3e7a2a2" name="quality_case_step" title="测试用例步骤表" package-name="">
     <table-field standard-field-id="9fa084dd34924126a1d0bb8db870bc2a" primary="true" unique="true" not-null="true" id="case_step_id" auto-increase="true"/>
@@ -92,6 +93,7 @@
     <table-field standard-field-id="3f6944b54ca7450da5ba8efea406903f" primary="false" unique="false" not-null="false" id="case_last_runner" auto-increase="false"/>
     <table-field standard-field-id="0013a178503c4488b063d0d4ad1ddf44" primary="false" unique="false" not-null="false" id="case_last_run_date" auto-increase="false"/>
     <table-field standard-field-id="f2f3b185f1f441d486d2cfadf2d033f5" primary="false" unique="false" not-null="false" id="case_last_run_result" auto-increase="false"/>
+    <table-field standard-field-id="bbdd486351bc40fe9173c0bdce7d0a2e" primary="false" unique="false" not-null="false" id="no" auto-increase="false"/>
   </table>
   <table id="7f7004228ccd4e5a9ad7b545089ba027" name="quality_test_task" title="测试任务表" package-name="">
     <table-field standard-field-id="56604bfad9b54abeaa55e26ebf0a3377" primary="true" unique="true" not-null="true" id="testversion_id" auto-increase="true"/>
@@ -107,6 +109,7 @@
     <table-field standard-field-id="d986aee39bcf4047933ce1db87380b4b" primary="false" unique="false" not-null="false" id="testtask_report" auto-increase="false"/>
     <table-field standard-field-id="4256034e4ff14101a50181a8acbfd33d" primary="false" unique="false" not-null="false" id="testtask_status" auto-increase="false"/>
     <table-field standard-field-id="61c90281c2c54787a0588095fa5d5e96" primary="false" unique="false" not-null="false" id="deleted" auto-increase="false"/>
+    <table-field standard-field-id="bbdd486351bc40fe9173c0bdce7d0a2e" primary="false" unique="false" not-null="false" id="no" auto-increase="false"/>
   </table>
   <table id="4b61eab6145442e4ad30828355f2b6bc" name="quality_test_result" title="测试结果表" package-name="">
     <table-field standard-field-id="682cae09812d41c6b726a3d7c7a2e770" primary="true" unique="true" not-null="true" id="test_result_id" auto-increase="true"/>

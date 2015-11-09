@@ -130,6 +130,11 @@ public class ProductPlanDaoImpl extends TinyDslDaoSupport implements ProductPlan
         });
     }
 
+    public Integer getMaxNo(Integer productId) {
+        Select select = select(PRODUCT_PLANTABLE.NO.max()).from(PRODUCT_PLANTABLE).where(PRODUCT_PLANTABLE.PRODUCT_ID.eq(productId));
+        return getDslSession().fetchOneResult(select,Integer.class);
+    }
+
     public int deleteByKey(Integer pk) {
         if (pk == null) {
             return 0;

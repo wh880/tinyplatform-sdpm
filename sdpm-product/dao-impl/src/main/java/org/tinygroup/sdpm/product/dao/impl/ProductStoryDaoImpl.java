@@ -689,6 +689,11 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 		return getDslSession().fetchPage(addOrderByElements(select, orderBys),start,limit,false,ProductStory.class);
 	}
 
+	public Integer getMaxNo(Integer productId) {
+		Select select = select(PRODUCT_STORYTABLE.NO.max()).from(PRODUCT_STORYTABLE).where(PRODUCT_STORYTABLE.PRODUCT_ID.eq(productId));
+		return getDslSession().fetchOneResult(select,Integer.class);
+	}
+
 	public Integer softDelete(Integer id) {
         return getDslTemplate().update(id, new UpdateGenerateCallback<Integer>() {
             public Update generate(Integer id) {

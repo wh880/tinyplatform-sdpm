@@ -384,8 +384,10 @@ public class StoryAction extends BaseController {
         QualityBug bug = new QualityBug();
         bug.setStoryId(storyId);
         List<QualityBug> bugList = bugService.findBugList(bug);
-        List<OrgUser> userList = userService.findUserListByIds(productStory
-                .getStoryMailto().split(","));
+        if(!StringUtil.isBlank(productStory.getStoryMailto())){
+            List<OrgUser> userList = userService.findUserListByIds(productStory.getStoryMailto().split(","));
+            model.addAttribute("storyMailTo", userList);
+        }
         List<Project> projectList = projectService.getProjectByStoryId(storyId);
 
         model.addAttribute("story", productStory);
@@ -393,7 +395,6 @@ public class StoryAction extends BaseController {
         model.addAttribute("testCaseList", testCaseList);
         model.addAttribute("bugList", bugList);
         model.addAttribute("projectList", projectList);
-        model.addAttribute("storyMailTo", userList);
         model.addAttribute("stories", stories);
 
         if ("productDemandClose".equals(forwordPager)) {
@@ -434,6 +435,7 @@ public class StoryAction extends BaseController {
             ProductStorySpec storySpec,
             @RequestParam(value = "file", required = false) MultipartFile[] file,
             String[] title) throws IOException {
+        Integer maxVersion = storySpecService.getMaxVersion(productStory.getStoryId());
         ProductStory story = storyService.findStory(productStory.getStoryId());
         if(productStory.getStoryReviewedBy().equals("0")){
             productStory.setStoryStatus("1");
@@ -441,7 +443,7 @@ public class StoryAction extends BaseController {
         }else {
             productStory.setStoryStatus("3");
         }
-        productStory.setStoryVersion(story.getStoryVersion()+1);
+        productStory.setStoryVersion(maxVersion==null?1:maxVersion+1);
         storyService.updateStory(productStory);
         storySpec.setStoryVersion(story.getStoryVersion() + 1);
         storySpecService.add(storySpec);
