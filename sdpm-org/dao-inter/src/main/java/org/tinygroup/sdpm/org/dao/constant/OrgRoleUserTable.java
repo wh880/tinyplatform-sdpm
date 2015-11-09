@@ -53,7 +53,7 @@ public class OrgRoleUserTable extends Table {
 
 
     private OrgRoleUserTable() {
-        super("org_role_User");
+        super("org_role_user");
     }
 
 }

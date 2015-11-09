@@ -97,7 +97,7 @@
         #@elementItem()
             #@sdpmItem("任务描述")
                 #@formControlDiv("col-8")
-                    #@Teditor("taskDesc" copyTask.taskDesc {"initialFrameHeight":"150","initialFrameWidth":"702"})${copyTask
+                    #@Teditor("taskDesc" copyTask?.taskDesc {"initialFrameHeight":"150","initialFrameWidth":"702"})${copyTask
                         ?.taskDesc}#end
                 #end
             #end

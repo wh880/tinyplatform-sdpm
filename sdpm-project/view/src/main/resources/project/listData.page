@@ -60,7 +60,7 @@
             ${getDict("projectStatus", p.projectStatus)}
         #end
         #@td()${format("%.2f",p.estimate)}#end
-        #@td()${format("%.2f",p.consume)}#end
+        #@td()${format("%.2f",p.consumed)}#end
         #@td()
         <div class="progress-bars text-l" style="width:110px">
             format("%.2f",d)p.percent
