@@ -44,7 +44,7 @@ public class HolidayManagerImpl implements HolidayManager {
 		if(StringUtil.isBlank(sortName)){
 			return holidayDao.queryPager(start,limit,holiday);
 		}
-		return holidayDao.queryPager(start,limit,holiday,new OrderBy(NameUtil.resolveNameDesc("systemAction."+sortName),asc));
+		return holidayDao.queryPager(start,limit,holiday,new OrderBy(NameUtil.resolveNameDesc(sortName),asc));
 		
 	}
 
