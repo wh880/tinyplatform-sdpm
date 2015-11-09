@@ -37,7 +37,7 @@ public class BurnServiceImpl implements BurnService {
         project = projectManager.findListProjects(project).get(0);
         ProjectBurn burn = new ProjectBurn();
         burn.setProjectId(project.getProjectId());
-        burn.setBurnDate(new Date());
+        burn.setBurnDate(DateUtils.getDateStart(new Date()));
         List<ProjectBurn> burnList = burnManager.findList(burn);//查询本项目当天的燃尽情况
 
         burn.setBurnConsumed(project.getConsumed());

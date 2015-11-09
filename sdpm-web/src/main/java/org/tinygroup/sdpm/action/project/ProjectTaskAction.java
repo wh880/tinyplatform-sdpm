@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.logger.LogLevel;
+import org.tinygroup.sdpm.action.project.dto.EffortList;
 import org.tinygroup.sdpm.action.project.dto.Tasks;
 import org.tinygroup.sdpm.action.project.util.TaskStatusUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
@@ -199,7 +200,8 @@ public class ProjectTaskAction extends BaseController {
      * @return
      */
     @RequestMapping(value = "/consumeTime", method = RequestMethod.POST)
-    public String consumeTimeSave(List<SystemEffort> list, Integer taskId) {
+    public String consumeTimeSave(EffortList effortList, Integer taskId) {
+        List<SystemEffort> list = effortList.getList();
         ProjectTask task = taskService.findTask(taskId);
         for (int i = 0; i < list.size(); i++) {
             SystemEffort systemEffort = list.get(i);
@@ -217,11 +219,12 @@ public class ProjectTaskAction extends BaseController {
             SystemEffort systemEffort = list.get(list.size() - 1);
             task.setTaskLeft(systemEffort.getEffortLeft());
             task.setTaskConsumed(systemEffort.getEffortConsumed());
+            task.setTaskId(taskId);
             taskService.updateTask(task);
             burnService.updateBurnByProjectId(task.getTaskProject());
         }
         effortService.batchEffortSave(list);
-        return "redirect:" + adminPath + "/project/task/consumeTime";
+        return "redirect:" + adminPath + "/project/task/index";
     }
 
     /**
@@ -287,14 +290,14 @@ public class ProjectTaskAction extends BaseController {
         return "redirect:" + adminPath + "/project/task/index";
     }
 
-    @RequestMapping("/note")
-    public String note(Integer taskId, Model model) {
-        // TODO delete it
-        ProjectTask task = taskService.findTask(taskId);
-        model.addAttribute("task", task);
-        //还需要查询其他相关任务剩余时间的信息
-        return "project/task/note";
-    }
+//    @RequestMapping("/note")
+//    public String note(Integer taskId, Model model) {
+//        // TODO delete it
+//        ProjectTask task = taskService.findTask(taskId);
+//        model.addAttribute("task", task);
+//        //还需要查询其他相关任务剩余时间的信息
+//        return "project/task/note";
+//    }
 
     @RequiresPermissions("pro-task-close")
     @RequestMapping(value = "/close", method = RequestMethod.GET)
