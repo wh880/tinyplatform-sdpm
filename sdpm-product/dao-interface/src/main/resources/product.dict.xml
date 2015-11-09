@@ -1,6 +1,6 @@
 <dictNodeEntries name="product" title="产品">
 	
-	 <dictNodeEntry name="story" title="story">
+	 <dictNodeEntry name="story" title="需求">
         <dictNodeEntry name="storyStage" title="需求阶段">
             <dictItem key="1" value="未开始" sort="2"/>
             <dictItem key="2" value="已计划" sort="3"/>

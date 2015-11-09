@@ -72,7 +72,7 @@
                             $("#${sid}").on("change", function () {
                                 var pId = $("#${sid}  option:selected").val();
                                 if (pId > 0) {
-                                    ajaxRead("${sid}", "moduleId", "moduleId", "moduleName", "/quality/bug/ajax/module?moduleRoot=" + pId);
+                                    ajaxRead("${sid}", "moduleId", "moduleId", "moduleName", "/quality/bug/ajax/module?moduleRoot=" + pId,"","module");
                                     ajaxRead("${sid}", "planId", "planId", "planName", "/product/plan/planList?productId=" + pId);
                                 }
                             })

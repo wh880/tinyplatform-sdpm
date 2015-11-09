@@ -17,7 +17,7 @@ loadURL('#link(adminPath+"/system/dict/dictItem?moduleId='+id+'")', $("#tBox"));
 #@divDataTablebox()
 #@tableHeaderBar()字典项#end
 #@leftTreeCol()
-#@searchZtreeWithInit("treeDemo" "height:454px;" adminPath+"/system/module/tree?moduleType=dict")
+#@searchZtreeWithInit("treeDemo" "height:454px;" adminPath+"/system/module/tree?moduleType=dict&type=title")
 #end
 #end
 #@tableBox("tBox")
