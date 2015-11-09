@@ -110,14 +110,16 @@ public class ProjectTeamAction extends BaseController {
                 addList.add(team);
             }
         }
+        teamService.batchAdd(addList);
+        teamService.batchUpdate(updateList);
         return "redirect:"+adminPath+"/project/team/index";
     }
 
     @RequiresPermissions("pro-team-delete")
     @ResponseBody
     @RequestMapping("/del")
-    public Map<String, String> del(String id) {
-        Integer res = teamService.delete(Integer.parseInt(id));
+    public Map<String, String> del(Integer id) {
+        Integer res = teamService.delete(id);
         return resultMap(res > 0 ? true : false, res > 0 ? "删除成功" : "删除失败");
     }
 }

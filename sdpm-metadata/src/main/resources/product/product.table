@@ -40,7 +40,7 @@
     <table-field standard-field-id="eb01c1b4f1694e288223c34e1689a645" primary="false" unique="false" not-null="false" id="story_status" auto-increase="false"/>
     <table-field standard-field-id="2b324902ce2f41c9b3c1d9ec7003c6eb" primary="false" unique="false" not-null="false" id="story_source" auto-increase="false"/>
     <table-field standard-field-id="932480be92ac4aef93efa9aeb3c20cf5" primary="false" unique="false" not-null="false" id="story_fromBug" auto-increase="false"/>
-    <table-field standard-field-id="b82777e73fcd488cb571f5d5671558d4" primary="false" unique="false" not-null="false" id="story_title" auto-increase="false"/>
+    <table-field standard-field-id="b82777e73fcd488cb571f5d5671558d4" primary="false" unique="false" not-null="true" id="story_title" auto-increase="false"/>
     <table-field standard-field-id="ff1ca1f501f14817abe7e46cdcd7c4de" primary="false" unique="false" not-null="false" id="story_keywords" auto-increase="false"/>
     <table-field standard-field-id="d9063e636acf4e779e74cbf796209228" primary="false" unique="false" not-null="false" id="story_type" auto-increase="false"/>
     <table-field standard-field-id="9400ac991c6c4632a1588734e3f5f9fd" primary="false" unique="false" not-null="false" id="story_pri" auto-increase="false"/>

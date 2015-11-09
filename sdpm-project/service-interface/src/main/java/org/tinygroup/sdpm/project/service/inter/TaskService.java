@@ -21,14 +21,6 @@ public interface TaskService {
      */
     Integer updateDoingTask(ProjectTask task);
 
-    /**
-     * 批量软删除
-     *
-     * @param condition
-     * @return
-     */
-    Integer batchSoftDel(String condition);
-
     Integer batchAdd(List<ProjectTask> taskList, Integer projectId);
 
     /**
@@ -40,7 +32,7 @@ public interface TaskService {
     ProjectTask addTask(ProjectTask Task);
 
     /**
-     * 分组产看任务
+     * 分组看任务
      *
      * @param colum
      * @param projectId
@@ -143,13 +135,6 @@ public interface TaskService {
     Integer updateFinishTask(ProjectTask projectTask);
 
     Integer updateCancelTask(ProjectTask task);
-
-    /**
-     * 复杂查询
-     *
-     * @return
-     */
-    Pager<ProjectTask> findComplexTask();
 
     /**
      * 分组查看

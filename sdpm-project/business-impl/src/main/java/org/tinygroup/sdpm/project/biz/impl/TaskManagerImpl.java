@@ -23,10 +23,6 @@ public class TaskManagerImpl implements TaskManager {
     @Autowired
     private ProjectTaskDao taskDao;
 
-    public Integer batchSoftDel(String condition) {
-        return taskDao.batchSoftDel(condition);
-    }
-
     public int[] batchAdd(List<ProjectTask> taskList) {
         return taskDao.batchInsert(taskList);
     }
@@ -73,29 +69,6 @@ public class TaskManagerImpl implements TaskManager {
         return taskDao.edit(task);
     }
 
-    public Integer updateTask(ProjectTask task) {
-        return taskDao.edit(task);
-    }
-
-    public Integer updateEditTask(ProjectTask task) {
-        return taskDao.updateColum(task);
-    }
-
-    public Integer updateCallTask(ProjectTask task) {
-        return taskDao.editcall(task);
-    }
-
-    public Integer updateFinishTask(ProjectTask task) {
-        return taskDao.updateColum(task);
-    }
-
-    public Integer updateStartTask(ProjectTask task) {
-        return taskDao.editstart(task);
-    }
-
-    public Integer updateCloseTask(ProjectTask task) {
-        return taskDao.updateColum(task);
-    }
 
     public List<TaskChartBean> findByGroup(String id) {
         if ("1".equals(id)) {
@@ -119,10 +92,6 @@ public class TaskManagerImpl implements TaskManager {
         }
     }
 
-    public Integer updateColum(ProjectTask task) {
-        return taskDao.updateColum(task);
-    }
-
     public Integer delete(int id) {
         ProjectTask task = new ProjectTask();
         task.setTaskId(id);
@@ -131,7 +100,4 @@ public class TaskManagerImpl implements TaskManager {
         return taskDao.edit(task);
     }
 
-    public List<ProjectTask> findAll() {
-        return taskDao.findAll();
-    }
 }

@@ -1,5 +1,5 @@
 <tables>
-  <table id="44e40fa2fc62417788f9c7a67f1058bb" name="org_role_User" title="角色用户分配" schema="" package-name="">
+  <table id="44e40fa2fc62417788f9c7a67f1058bb" name="org_role_user" title="角色用户分配" schema="" package-name="">
     <description></description>
     <table-field standard-field-id="7edc4cffb5cf4a9f94ffca41db249285" primary="true" unique="true" not-null="true" id="id" auto-increase="true"/>
     <table-field standard-field-id="9d637734f8044ad789dbc9e2c5193c32" primary="false" unique="false" not-null="false" id="org_role_id" auto-increase="false"/>

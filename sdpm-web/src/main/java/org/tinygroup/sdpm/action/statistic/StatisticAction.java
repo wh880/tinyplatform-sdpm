@@ -58,7 +58,7 @@ public class StatisticAction extends BaseController {
             return "/statistic/page/product.page";
         }
         if ("project".equals(type)) {
-            List<Project> projects = projectService.findProjects(new Project());
+            List<Project> projects = projectService.findProjects(null);
             model.addAttribute("projects", projects);
             return "/statistic/page/project.page";
         }

@@ -10,7 +10,7 @@ import java.util.Date;
  * Created by wangll13383 on 2015/10/13.
  */
 public class LogUtil {
-    //之后要换成服务包装类型
+
     public final static LogService logService = SpringContextHolder.getBean(LogServiceImpl.class);
 
     public static void log(LogOperateObject objectType, LogAction action, String objectId, String userId) {

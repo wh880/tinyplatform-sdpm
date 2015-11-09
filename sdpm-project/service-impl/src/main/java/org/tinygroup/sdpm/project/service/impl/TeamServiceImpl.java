@@ -29,11 +29,8 @@ public class TeamServiceImpl implements TeamService {
         return teamManager.batchUpdate(list);
     }
 
-    public int save(ProjectTeam team) {
-        return 0;
-    }
 
-    public int delete(int id) {
+    public Integer delete(int id) {
         return teamManager.delete(id);
     }
 

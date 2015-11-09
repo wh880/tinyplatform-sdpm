@@ -86,21 +86,99 @@ public class ProjectTaskAction extends BaseController {
         return "project/task/index";
     }
 
-    @RequiresPermissions(value = {"pro-task-edit", "pro-Info2-edit"}, logical = Logical.OR)
-    @RequestMapping("/edit")
-    public String form(Integer taskId, Model model) {
-        ProjectTask task = taskService.findTask(taskId);
-        model.addAttribute("task", task);
-        return "project/task/edit.page";
+    /**
+     * 新增任务表单
+     *
+     * @param request
+     * @param model
+     * @param storyId
+     * @param taskId
+     * @return
+     */
+    @RequiresPermissions(value = {"pro-task-proposeversion", "pro-Info2-copy", "batch-distribute-task"}, logical = Logical.OR)
+    @RequestMapping("/form")
+    public String form(HttpServletRequest request, Model model, Integer storyId, String taskId) {
+        String cookie = CookieUtils.getCookie(request, ProjectUtils.COOKIE_PROJECT_ID);
+        if (StringUtil.isBlank(cookie)) {
+            addMessage(model, "请选择项目");
+        }
+        Integer projectId = Integer.valueOf(cookie);
+        model.addAttribute("teamList", userService.findTeamUserListByProjectId(projectId));
+
+        if (taskId != null) {
+            ProjectTask task = taskService.findTask(Integer.parseInt(taskId));
+            model.addAttribute("copyTask", task);
+        }
+        List<ProductStory> storyList = storyService.findStoryByProject(projectId);
+        model.addAttribute("storyId", storyId);
+        model.addAttribute("moduleList", generateModuleList(projectId));
+        model.addAttribute("storyList", storyList);
+        return "project/task/add";
     }
 
     /**
-     * 时间消耗
+     * 新增任务报存
+     *
+     * @param task
+     * @param file
+     * @param taskMailToArray
+     * @param request
+     * @param comment
+     * @return
+     */
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    public String save(ProjectTask task, @RequestParam(value = "file", required = false) MultipartFile file,
+                       String[] taskMailToArray, HttpServletRequest request, String comment) {
+        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, ProjectUtils.COOKIE_PROJECT_ID));
+        task.setTaskProject(projectId);
+        String taskMailTo = StringUtil.join(taskMailToArray, ",");
+        task.setTaskMailto(taskMailTo);
+        task.setTaskConsumed(task.getTaskEstimate());
+        task = taskService.addTask(task);
+        LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, LogUtil.LogAction.OPENED,
+                task.getTaskId().toString(), UserUtils.getUserId(),
+                null, task.getTaskProject().toString(), null, null, comment);
+        try {
+            uploadNoTitle(file, task.getTaskId(), ProfileType.TASK);
+        } catch (IOException e) {
+            logger.logMessage(LogLevel.ERROR, "上传文件文件出错，请求路径{}", e, request.getRequestURI());
+        }
+        return "redirect:" + adminPath + "/project/task/index";
+    }
+
+    /**
+     * 编辑任务
      *
      * @param taskId
      * @param model
      * @return
      */
+    @RequiresPermissions(value = {"pro-task-edit", "pro-Info2-edit"}, logical = Logical.OR)
+    @RequestMapping("/edit")
+    public String editForm(Integer taskId, Model model) {
+        ProjectTask task = taskService.findTask(taskId);
+        model.addAttribute("task", task);
+        return "project/task/edit";
+    }
+
+    /**
+     * 编辑保存
+     *
+     * @param task
+     * @param model
+     * @param contents
+     * @return
+     */
+    @RequestMapping(value = "/editsave", method = RequestMethod.POST)
+    public String editSave(ProjectTask task, Model model, String contents) {
+        ProjectTask oldTask = taskService.findTask(task.getTaskId());
+        taskService.updateEditTask(task);
+        LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, LogUtil.LogAction.EDITED, oldTask.getTaskId().toString(),
+                UserUtils.getUserId(), null, oldTask.getTaskProject().toString(), oldTask, task, contents);
+        model.addAttribute("task", task);
+        return "redirect:" + adminPath + "/project/task/index";
+    }
+
     @RequestMapping("/consumeTime")
     public String consumeTime(Integer taskId, Model model) {
         ProjectTask task = taskService.findTask(taskId);
@@ -132,15 +210,13 @@ public class ProjectTaskAction extends BaseController {
      *
      * @param taskId
      * @param model
-     * @param request
      * @return
      */
     @RequiresPermissions("pro-task-call")
     @RequestMapping(value = "/call", method = RequestMethod.GET)
-    public String call(Integer taskId, Model model, HttpServletRequest request) {
-        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, ProjectUtils.COOKIE_PROJECT_ID));
+    public String call(Integer taskId, Model model) {
         ProjectTask task = taskService.findTask(taskId);
-        model.addAttribute("teamList", userService.findTeamUserListByProjectId(projectId));
+        model.addAttribute("teamList", userService.findTeamUserListByProjectId(task.getTaskProject()));
         model.addAttribute("task", task);
         return "project/task/call";
     }
@@ -149,25 +225,21 @@ public class ProjectTaskAction extends BaseController {
      * 保存指派
      *
      * @param task
-     * @param model
-     * @param commnet
+     * @param comment
      * @return
      */
     @RequiresPermissions("pro-task-call")
     @RequestMapping(value = "/call", method = RequestMethod.POST)
-    public String callSave(ProjectTask task, Model model, String commnet) {
-        if (task.getTaskId() == null) {
-            taskService.addTask(task);
-        } else {
-            ProjectTask oldTask = taskService.findTask(task.getTaskId());
-            taskService.updateCallTask(task);
-
-            LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, LogUtil.LogAction.ASSIGNED, task.getTaskId().toString(), UserUtils.getUserId(),
-                    null, oldTask.getTaskProject().toString(), oldTask, task, commnet);
-
+    public String callSave(ProjectTask task, String comment) {
+        ProjectTask oldTask = taskService.findTask(task.getTaskId());
+        taskService.updateCallTask(task);
+        if (!task.getTaskLeft().equals(oldTask.getTaskLeft())) {
+            burnService.updateBurnByProjectId(oldTask.getTaskProject());
         }
-        model.addAttribute("task", task);
-        return "project/task/index.page";
+        LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, LogUtil.LogAction.ASSIGNED, task.getTaskId().toString(), UserUtils.getUserId(),
+                null, oldTask.getTaskProject().toString(), oldTask, task, comment);
+
+        return "redirect:" + adminPath + "/project/task/index";
     }
 
     @RequiresPermissions("pro-task-finish")
@@ -177,28 +249,28 @@ public class ProjectTaskAction extends BaseController {
         ProjectTask task = taskService.findTask(taskId);
         model.addAttribute("task", task);
         model.addAttribute("teamList", userService.findTeamUserListByProjectId(projectId));
-        //还需要查询其他相关任务剩余时间的信息
         return "project/task/finish";
     }
 
     @RequiresPermissions("pro-task-finish")
     @RequestMapping(value = "/finish", method = RequestMethod.POST)
-    public String finishSave(ProjectTask task, Model model, String commnet) {
-        if (task.getTaskId() == null) {
-            taskService.addTask(task);
-        } else {
-            taskService.updateFinishTask(task);
-            LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, LogUtil.LogAction.ASSIGNED, task.getTaskId().toString(), UserUtils.getUserId(),
-                    null, taskService.findTask(task.getTaskId()).getTaskProject().toString(),
-                    taskService.findTask(task.getTaskId()), task, commnet);
-        }
+    public String finishSave(ProjectTask task, String comment) {
+        ProjectTask oldTask = taskService.findTask(task.getTaskId());
+        taskService.updateFinishTask(task);
 
-        model.addAttribute("task", task);
-        return "project/task/index.page";
+        if (!oldTask.getTaskConsumed().equals(task.getTaskConsumed())) {
+            burnService.updateBurnByProjectId(oldTask.getTaskProject());
+        }
+        LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, LogUtil.LogAction.ASSIGNED, task.getTaskId().toString(),
+                UserUtils.getUserId(),
+                null, oldTask.getTaskProject().toString(),
+                oldTask, task, comment);
+        return "redirect:" + adminPath + "/project/task/index";
     }
 
     @RequestMapping("/note")
     public String note(Integer taskId, Model model) {
+        // TODO delete it
         ProjectTask task = taskService.findTask(taskId);
         model.addAttribute("task", task);
         //还需要查询其他相关任务剩余时间的信息
@@ -219,7 +291,7 @@ public class ProjectTaskAction extends BaseController {
         taskService.updateCloseTask(task);
         LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, LogUtil.LogAction.CLOSED, task.getTaskId().toString(),
                 UserUtils.getUserId(), null, taskService.findTask(task.getTaskId()).getTaskProject().toString(),
-                taskService.findTask(task.getTaskId()), task, content);
+                null, null, content);
         return "project/task/index.page";
     }
 
@@ -233,17 +305,16 @@ public class ProjectTaskAction extends BaseController {
 
     @RequiresPermissions("pro-task-start")
     @RequestMapping(value = "/start", method = RequestMethod.POST)
-    public String startSave(ProjectTask task, Model model, String content) {
-        if (task.getTaskId() == null) {
-            taskService.addTask(task);
-        } else {
-            taskService.updateStartTask(task);
-            LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, LogUtil.LogAction.STARTED, task.getTaskId().toString(),
-                    UserUtils.getUserId(), null, taskService.findTask(task.getTaskId()).getTaskProject().toString(),
-                    taskService.findTask(task.getTaskId()), task, content);
-            burnService.updateDate(task.getTaskId());
+    public String startSave(ProjectTask task, String content) {
+        ProjectTask projectTask = taskService.findTask(task.getTaskId());
+        taskService.updateStartTask(task);
+        LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, LogUtil.LogAction.STARTED, task.getTaskId().toString(),
+                UserUtils.getUserId(), null, projectTask.getTaskProject().toString(),
+                taskService.findTask(task.getTaskId()), task, content);
+        if (!projectTask.getTaskConsumed().equals(task.getTaskConsumed()) ||
+                !projectTask.getTaskLeft().equals(task.getTaskLeft())) {
+            burnService.updateBurnByProjectId(projectTask.getTaskProject());
         }
-        model.addAttribute("task", task);
         return "redirect:" + adminPath + "/project/task/index";
     }
 
@@ -254,16 +325,13 @@ public class ProjectTaskAction extends BaseController {
         return "project/task/cancel";
     }
 
-    @RequestMapping("/cancel")
+    @RequestMapping(value = "/cancel", method = RequestMethod.POST)
     public String cancelSave(ProjectTask task, String content) {
-        if (task.getTaskId() == null) {
-            taskService.addTask(task);
-        } else {
-            taskService.updateCancelTask(task);
-            LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, LogUtil.LogAction.CANCELED, task.getTaskId().toString(),
-                    UserUtils.getUserId(), null, taskService.findTask(task.getTaskId()).getTaskProject().toString(),
-                    taskService.findTask(task.getTaskId()), task, content);
-        }
+        ProjectTask old = taskService.findTask(task.getTaskId());
+        taskService.updateCancelTask(task);
+        LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, LogUtil.LogAction.CANCELED, task.getTaskId().toString(),
+                UserUtils.getUserId(), null, old.getTaskProject().toString(),
+                old, task, content);
         return "redirect:" + adminPath + "/project/task/index";
     }
 
@@ -321,80 +389,6 @@ public class ProjectTaskAction extends BaseController {
         return "project/task/datalist.pagelet";
     }
 
-    @RequestMapping("/save")
-    public String save(ProjectTask task, @RequestParam(value = "file", required = false) MultipartFile file,
-                       Model model, String[] taskMailtoArray, HttpServletRequest request, String comment) {
-        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, ProjectUtils.COOKIE_PROJECT_ID));
-        task.setTaskProject(projectId);
-        if (task.getTaskId() == null) {
-            String taskMailTo = "";
-            if (taskMailtoArray != null) {
-                for (String i : taskMailtoArray) {
-                    if (StringUtil.isBlank(taskMailTo)) {
-                        taskMailTo = taskMailTo + i;
-                    } else {
-                        taskMailTo = taskMailTo + "," + i;
-                    }
-                }
-            }
-            task.setTaskMailto(taskMailTo);
-            ProjectTask newTask = taskService.addTask(task);
-            LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, LogUtil.LogAction.OPENED,
-                    newTask.getTaskId().toString(), UserUtils.getUserId(),
-                    null, newTask.getTaskProject().toString(), null,
-                    newTask, comment);
-            try {
-                uploadNoTitle(file, newTask.getTaskId(), ProfileType.TASK);
-            } catch (IOException e) {
-                logger.logMessage(LogLevel.ERROR, "上传文件文件出错，请求路径{}", e, request.getRequestURI());
-            }
-        } else {
-            taskService.updateTask(task);
-        }
-        model.addAttribute("task", task);
-        return "redirect:" + adminPath + "/project/task/index";
-    }
-
-
-    @RequestMapping(value = "/editsave", method = RequestMethod.POST)
-    public String editSave(ProjectTask task, Model model, String contents) {
-        ProjectTask oldTask = taskService.findTask(task.getTaskId());
-        taskService.updateEditTask(task);
-        LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, LogUtil.LogAction.EDITED, oldTask.getTaskId().toString(),
-                UserUtils.getUserId(), null, oldTask.getTaskProject().toString(), oldTask, task, contents);
-        model.addAttribute("task", task);
-        return "redirect:" + adminPath + "/project/task/index";
-    }
-
-    /**
-     * 新增任务表单
-     *
-     * @param request
-     * @param model
-     * @param storyId
-     * @param taskId
-     * @return
-     */
-    @RequiresPermissions(value = {"pro-task-proposeversion", "pro-Info2-copy", "batch-distribute-task"}, logical = Logical.OR)
-    @RequestMapping("/form")
-    public String form(HttpServletRequest request, Model model, Integer storyId, String taskId) {
-        String cookie = CookieUtils.getCookie(request, ProjectUtils.COOKIE_PROJECT_ID);
-        if (StringUtil.isBlank(cookie)) {
-            addMessage(model, "请选择项目");
-        }
-        Integer projectId = Integer.valueOf(cookie);
-        model.addAttribute("teamList", userService.findTeamUserListByProjectId(projectId));
-
-        if (taskId != null) {
-            ProjectTask task = taskService.findTask(Integer.parseInt(taskId));
-            model.addAttribute("copyTask", task);
-        }
-        List<ProductStory> storyList = storyService.findStoryByProject(projectId);
-        model.addAttribute("storyId", storyId);
-        model.addAttribute("moduleList", generateModuleList(projectId));
-        model.addAttribute("storyList", storyList);
-        return "project/task/add";
-    }
 
     @RequiresPermissions(value = {"pro-task-batchadd", "distribute-task"}, logical = Logical.OR)
     @RequestMapping("/batchAdd")
@@ -433,7 +427,6 @@ public class ProjectTaskAction extends BaseController {
     public String findTask(Model model, Integer taskId) {
         ProjectTask task = taskService.findTask(taskId);
         model.addAttribute("task", task);
-
         return "project/task/IDLink";
     }
 
@@ -589,24 +582,32 @@ public class ProjectTaskAction extends BaseController {
 
     @RequiresPermissions("task-group")
     @RequestMapping("/grouping")
-    public String grouping(@CookieValue(value = ProjectUtils.COOKIE_PROJECT_ID, required = false) String projectId,
+    public String grouping(HttpServletRequest request, HttpServletResponse response,
                            String type, Model model) {
-        Map<String, List<ProjectTask>> map = taskService.findGroup(DictUtil.getValue("groupType", type), Integer.parseInt(projectId));
+        Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
+        if (projectId == null) {
+            return redirectProjectForm();
+        }
+
+        Map<String, List<ProjectTask>> map = taskService.findGroup(DictUtil.getValue("groupType", type), projectId);
         Map<String, List<ProjectTask>> mapDocument = new HashMap<String, List<ProjectTask>>();
         if (type.equals("1")) {
             for (String key : map.keySet()) {
                 if (key.isEmpty()) {
-                    mapDocument.put(key, map.get(key));
+                    mapDocument.put("未关联需求", map.get(key));
                 } else {
-                    String t = productStoryService.findStory(Integer.parseInt(key)).getStoryTitle();
-                    mapDocument.put(t, map.get(key));
+                    ProductStory story = productStoryService.findStory(Integer.valueOf(key));
+                    if (story != null) {
+                        String title = story.getStoryTitle();
+                        mapDocument.put(title, map.get(key));
+                    }
                 }
             }
         }
         model.addAttribute("mapDocument", mapDocument);
         model.addAttribute("map", map);
         model.addAttribute("type", type);
-        return "project/task/grouping.page";
+        return "project/task/grouping";
     }
 
     /**
@@ -655,6 +656,11 @@ public class ProjectTaskAction extends BaseController {
         return map;
     }
 
+    /**
+     * 报表
+     *
+     * @return
+     */
     @RequiresPermissions("pro-task-report")
     @RequestMapping("/reportform")
     public String reportForm() {

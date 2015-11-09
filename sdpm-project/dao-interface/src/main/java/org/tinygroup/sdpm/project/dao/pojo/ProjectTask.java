@@ -49,7 +49,7 @@ public class ProjectTask implements Serializable {
 	 */
 	private Integer taskId;
 	/**
-	 * 任务所属项目
+	 * 任务所属项目Id
 	 */
 	private Integer taskProject;
 	/**

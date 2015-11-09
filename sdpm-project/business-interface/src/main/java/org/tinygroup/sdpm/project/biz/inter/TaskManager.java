@@ -12,14 +12,6 @@ import java.util.List;
  */
 public interface TaskManager {
 
-    /**
-     * 查询所有任务
-     *
-     * @return
-     */
-    List<ProjectTask> findAll();
-
-    Integer batchSoftDel(String condition);
 
     int[] batchAdd(List<ProjectTask> taskList);
 
@@ -70,7 +62,7 @@ public interface TaskManager {
      * @param condition
      * @return
      */
-    public Pager<ProjectTask> findPagerByStatus(Integer start, Integer limit, ProjectTask task, String sortName, boolean asc, String conditon);
+    Pager<ProjectTask> findPagerByStatus(Integer start, Integer limit, ProjectTask task, String sortName, boolean asc, String condition);
 
     /**
      * 由我完成
@@ -83,80 +75,19 @@ public interface TaskManager {
      * @param user
      * @return
      */
-    public Pager<ProjectTask> findPagerByMe(Integer start, Integer limit, ProjectTask task, String sortName, boolean asc, OrgUser user);
-    /**
-     * 新增有一个用户
-     *
-     * @param task 新增实体类
-     * @return
-     */
+    Pager<ProjectTask> findPagerByMe(Integer start, Integer limit, ProjectTask task, String sortName, boolean asc, OrgUser user);
+
     ProjectTask add(ProjectTask task);
 
-    /**
-     * 更新用户
-     *
-     * @param task 需要更新的实体类
-     * @return
-     */
     Integer update(ProjectTask task);
 
     /**
-     * 更新用户
-     *
-     * @param task 需要更新的实体类
-     * @return
-     */
-    Integer updateTask(ProjectTask task);
-
-    /**
-     * 更新用户
-     *
-     * @param task 需要更新的实体类
-     * @return
-     */
-    Integer updateEditTask(ProjectTask task);
-
-    /**
-     * 更新用户
-     *
-     * @param task 需要更新的实体类
-     * @return
-     */
-    Integer updateCallTask(ProjectTask task);
-
-    /**
-     * 更新用户
-     *
-     * @param task 需要更新的实体类
-     * @return
-     */
-    Integer updateFinishTask(ProjectTask task);
-
-    /**
-     * 更新用户
-     *
-     * @param task 需要更新的实体类
-     * @return
-     */
-    Integer updateStartTask(ProjectTask task);
-
-    /**
-     * 公用更新，更新字段
-     *
-     * @param task
-     * @return
-     */
-    public Integer updateColum(ProjectTask task);
-
-    /**
-     * 根据id进行软删除用户
+     * 根据id进行软删除
      *
      * @param id 主键
      * @return
      */
     Integer delete(int id);
-
-    Integer updateCloseTask(ProjectTask task);
 
     List<TaskChartBean> findByGroup(String id);
 }

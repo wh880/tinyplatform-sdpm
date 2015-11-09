@@ -222,7 +222,6 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
         return getDslSession().execute(update);
     }
 
-    @LogMethod("editfinish")
     public Integer editfinish(ProjectTask projectTask) {
 
         return null;

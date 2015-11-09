@@ -188,19 +188,21 @@
                     #@th()最初预计#end
                     #@td()
                         #@formControlDiv("col-10")
+                        <div class="input-group">
                             #tinyInput(
-                                "text" "taskEstimate" task?.taskEstimate {"placeholder":"最初预计","datatype":
+                                "text" "taskEstimate" task.taskEstimate {"placeholder":"最初预计","datatype":
                                 "/^[0-9]+(\.[0-9]{1,2})?$/",
-                                "class":"",
                                 "aria-describedby":"basic-addon2"})
+                            <span class="input-group-addon" id="basic-addon2">小时</span>
+                        </div>
                         #end
                     #end
                 #end
                 #@tr()
                     #@th()总耗时#end
                     #@td()
-                        ${task?.taskConsumed}
                         #@simpleModal("myModal" "新增日志")#end
+                        ${task.taskConsumed}小时
                         #@iconOperations("#myModal" "icon-time" "新增日志" "900" "400"
                             "/project/task/consumeTime.pagelet" "ml-5")
                         #end
@@ -211,7 +213,7 @@
                     #@td()
                         #@formControlDiv("col-10")
                             <div class="input-group">
-                                #tinyInput("text" "taskLeft" task?.taskLeft {"placeholder":"最初预计",
+                                #tinyInput("text" "taskLeft" task.taskLeft {"placeholder":"预计剩余",
                                     "class":"","aria-describedby":"basic-addon2"})
                                 <span class="input-group-addon" id="basic-addon2">小时</span>
                             </div>
