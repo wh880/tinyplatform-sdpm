@@ -57,6 +57,7 @@
             #@sdpmItem("指派给")
                 #@Tselect2F()
                     #@Tselect2Body("taskAssignedTo" copyTask?.taskAssignedTo {"class":"input-text select2"})
+                        <option value=""></option>
                         #foreach(t : teamList)
                             <option value="${t.orgUserId}">${t.orgUserRealName}</option>
                         #end

@@ -2,12 +2,14 @@ package org.tinygroup.sdpm.product.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.tinygroup.commons.tools.ArrayUtil;
 import org.tinygroup.sdpm.product.biz.inter.ProductManager;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.tinysqldsl.Pager;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -45,6 +47,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     public List<Product> findProductListByIds(Integer... productId) {
+        if (ArrayUtil.isEmptyArray(productId)) {
+            return new ArrayList<Product>();
+        }
         return productManager.findList(productId);
     }
 
@@ -56,10 +61,10 @@ public class ProductServiceImpl implements ProductService {
         return productManager.getProductAndLine(product);
     }
 
-	public List<String> getProductNameByLineId(Integer productLineId) {
+    public List<String> getProductNameByLineId(Integer productLineId) {
 
-		return productManager.getProductNameByLineId(productLineId);
-	}
+        return productManager.getProductNameByLineId(productLineId);
+    }
 
 
 }
