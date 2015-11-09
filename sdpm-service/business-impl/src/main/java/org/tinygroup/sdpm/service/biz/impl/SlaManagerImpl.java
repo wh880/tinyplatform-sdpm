@@ -3,6 +3,7 @@ package org.tinygroup.sdpm.service.biz.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SqlUtil;
@@ -58,7 +59,7 @@ public class SlaManagerImpl implements SlaManager {
     public Pager<ServiceSla> findPager(Integer start, Integer limit, ServiceSla sla, Integer treeId, String groupOperate, SearchInfos searchInfos, String order, String orderType) {
         String condition = searchInfos != null ? SqlUtil.toSql(searchInfos.getInfos(), groupOperate) : "";
         Condition condition1 = null;
-        if (condition != null) {
+        if (!StringUtil.isBlank(condition)) {
             condition1 = fragmentCondition(condition);
         }
         return slaDao.queryPagerTree(start, limit, sla, treeId, condition1, (order == null || "".equals(order)) ? null : new OrderBy(NameUtil.resolveNameDesc(order), !("desc".equals(orderType)) ? true : false));
