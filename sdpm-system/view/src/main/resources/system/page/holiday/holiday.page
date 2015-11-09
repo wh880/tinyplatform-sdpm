@@ -7,15 +7,15 @@
 
 #@tabWithInit("tab_demo" "optionsBox")
 	#@tabBodyCol("ptop-5")
-		#@div(divClass="operationbar")
-			<span class="f">
-					<a href="${TINY_CONTEXT_PATH}/system/page/holiday/holiday.page" >节假日&工作日</a>
-			</span>
-			<span class="r">
-
-				<a href="javascript :;" onClick="javascript :history.back(-1);" title="返回">#buttonIcon(iconClass="icon-reply")</a>
-			</span>
-		#end
+##		#@div(divClass="operationbar")
+##			<span class="f">
+##					<a href="${TINY_CONTEXT_PATH}/system/page/holiday/holiday.page" >节假日&工作日</a>
+##			</span>
+##			<span class="r">
+##
+##				<a href="javascript :;" onClick="javascript :history.back(-1);" title="返回">#buttonIcon(iconClass="icon-reply")</a>
+##			</span>
+##		#end
 	#end
 
 	<div style="width:70%;float:left">
@@ -32,12 +32,12 @@
 				#@thead()
 					#@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
 						#@tinyTh({"width":"8"})<input type="checkbox" name="allck" value="">#end
-						#@tinyTh({"class":"sorting sorting_asc","rel":"holiday_id"})ID#end
-						#@tinyTh({"class":"sorting","rel":"holiday_name"})名称#end
-						#@tinyTh({"class":"sorting","rel":"holiday_date"})日期#end
-						#@tinyTh({"class":"sorting","rel":"holiday_account"})创建者#end
-						#@tinyTh({"class":"sorting","rel":"holiday_type"})类型#end
-						#@tinyTh({"class":"sorting","rel":"holiday_detail"})描述#end
+						#@tinyTh({"class":"sorting sorting_asc","rel":"holiday.holiday_id"})ID#end
+						#@tinyTh({"class":"sorting","rel":"holiday.holiday_name"})名称#end
+						#@tinyTh({"class":"sorting","rel":"holiday.holiday_date"})日期#end
+						#@tinyTh({"class":"sorting","rel":"holiday.holiday_account"})创建者#end
+						#@tinyTh({"class":"sorting","rel":"holiday.holiday_type"})类型#end
+						#@tinyTh({"class":"sorting","rel":"holiday.holiday_detail"})描述#end
 						#@tinyTh({"class":"","rel":""})操作#end
 					#end
 				#end

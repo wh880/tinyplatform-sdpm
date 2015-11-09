@@ -1,5 +1,5 @@
 <dictNodeEntries name="project" title="项目">
-    <dictNodeEntry name="task" title="task">
+    <dictNodeEntry name="task" title="任务">
         <dictNodeEntry name="taskStatus" title="任务状态">
             <dictItem key="1" value="未开始" sort="1"/>
             <dictItem key="2" value="进行中" sort="2"/>
