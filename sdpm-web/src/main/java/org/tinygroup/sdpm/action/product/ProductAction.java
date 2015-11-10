@@ -356,11 +356,12 @@ public class ProductAction extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "/judgeProductName")
-    public Map judgeProductName(String param) {
+    public Map judgeProductName(String param, Integer productLineId) {
         if (param != null) {
             String productName = param;
             Product product = new Product();
             product.setProductName(productName);
+            product.setProductLineId(productLineId);
             List<Product> products = productService.findProductList(product);
             if (products.size() != 0) {
                 return resultMap(false, "该产品已存在");
