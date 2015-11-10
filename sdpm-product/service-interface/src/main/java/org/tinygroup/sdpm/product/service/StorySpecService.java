@@ -16,7 +16,7 @@ public interface StorySpecService {
 	 * @param storyId
 	 * @return
 	 */
-	ProductStorySpec findStorySpec(Integer storyId);
+	ProductStorySpec findStorySpec(Integer storyId,Integer version);
 	
 	/**
 	 * 根据多个ID查找

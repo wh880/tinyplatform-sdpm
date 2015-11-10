@@ -582,5 +582,34 @@ public class TestCaseAction extends BaseController {
 			testTaskService.updateTestTask(testTask);
 		}
 	}
-
+	@RequestMapping("caseVersion")
+	public String caseVersion(){
+		return "/testManagement/page/version/allVersion.pagelet";
+	}
+	@RequestMapping("caseVersionData")
+	public String caseVersionData(Integer caseId,Model model,Integer start,Integer limit,@RequestParam(defaultValue = "caseVersion") String order,@RequestParam(defaultValue = "asc")String ordertype){
+		QualityTestCase testCase = testCaseService.findById(caseId);
+		Integer maxCaseVersion = caseStepService.getMaxVersion(caseId);
+		Map<String,List<QualityCaseStep>> versionStep = new HashMap<String, List<QualityCaseStep>>();
+		for(Integer i=maxCaseVersion>(start+limit)?(start+limit):maxCaseVersion;i>start;i--){
+			QualityCaseStep step = new QualityCaseStep();
+			step.setCaseId(caseId);
+			step.setCaseVersion(i);
+			List<QualityCaseStep> steps = caseStepService.findCaseStepList(step);
+			versionStep.put(i.toString(),steps);
+		}
+		model.addAttribute("case",testCase);
+		model.addAttribute("stepMap",versionStep);
+		model.addAttribute("start",start);
+		model.addAttribute("maxVersion", maxCaseVersion);
+		model.addAttribute("end",maxCaseVersion>(start+limit)?(start+limit):maxCaseVersion);
+		return "/testManagement/page/version/allVersionData.pagelet";
+	}
+	@RequestMapping("versionRollback")
+	public String caseVersionRollBack(Integer caseId,Integer caseVersion){
+		QualityTestCase testCase = testCaseService.findById(caseId);
+		testCase.setCaseVersion(caseVersion);
+		testCaseService.updateTestCase(testCase);
+		return "redirect:/a/quality/testCase/case/viewInfo?id="+caseId;
+	}
 }

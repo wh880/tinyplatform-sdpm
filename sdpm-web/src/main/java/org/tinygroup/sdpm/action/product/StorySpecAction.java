@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec;
@@ -41,9 +42,8 @@ public class StorySpecAction extends BaseController{
 	
 	@RequestMapping("/find/{forward}")
 	public String find(@PathVariable(value="forward")String forward,ProductStory story,Model model,SystemProfile systemProfile){
-		
-		ProductStorySpec storySpec = specService.findStorySpec(story.getStoryId());
 		ProductStory productStory = storyService.findStory(story.getStoryId());
+		ProductStorySpec storySpec = specService.findStorySpec(productStory.getStoryId(),productStory.getStoryVersion());
 		model.addAttribute("storySpec", storySpec);
 		model.addAttribute("story", productStory);
 		systemProfile.setFileObjectType("story");
@@ -62,18 +62,20 @@ public class StorySpecAction extends BaseController{
 		return "/product/page/version/allVersion.pagelet";
 	}
 	@RequestMapping("storyVersionData")
-	public String storyHistoryVersion(Integer storyId,Model model,Integer start,Integer limit,String order,String orderType){
+	public String storyHistoryVersion(Integer storyId,Model model,Integer start,Integer limit,@RequestParam(defaultValue = "storyVersion") String order,@RequestParam(defaultValue = "asc")String ordertype){
 		ProductStory story = storyService.findStory(storyId);
 		ProductStorySpec spec = new ProductStorySpec();
 		spec.setStoryId(storyId);
-		Pager<ProductStorySpec> specs = specService.findStorySpecPager(start, limit, spec, order, orderType);
+		Pager<ProductStorySpec> specs = specService.findStorySpecPager(start, limit, spec, order, ordertype);
 		model.addAttribute("story",story);
 		model.addAttribute("versions",specs);
 		return "/product/page/version/allVersionData.pagelet";
 	}
 	@RequestMapping("versionRollback")
 	public String storyVersionRollback(Integer storyId,Integer storyVersion){
+		ProductStorySpec spec = specService.findStorySpec(storyId,storyVersion);
 		ProductStory story = storyService.findStory(storyId);
+		story.setStoryTitle(spec.getStoryTitle());
 		story.setStoryVersion(storyVersion);
 		storyService.updateStory(story);
 		return "redirect:/a/product/storySpec/find/productDemandDetail?storyId="+storyId;

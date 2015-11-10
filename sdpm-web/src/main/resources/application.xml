@@ -49,6 +49,7 @@
 
             <!-- 需要加的自己署名 -->
             <!-- Hulk's Path -->
+            <class-path path="E:\workcode\sdpm\sdpm-org\view\src\main\resources"/>
             <class-path path="E:\workcode\sdpm\sdpm-project\view\src\main\resources"/>
             <class-path path="E:\workcode\sdpm\sdpm-common\view\src\main\resources"/>
             <class-path path="E:\workcode\sdpm\sdpm-project\view\src\main\resources"/>

@@ -59,7 +59,7 @@ public class RoleMenuAction extends BaseController {
     public String showMenuIds(Integer id, Model model) {
         List<OrgRoleMenu> orgRoleMenus = roleService.findMenuByRoleId(id);
         model.addAttribute("orgRoleMenus", initMenuIdList(orgRoleMenus));
-        return "organization/privilege/privilegeMaintain.page";
+        return "organization/privilege/privilegeMaintain";
     }
 
     /**

@@ -29,6 +29,7 @@
 			${testCase?.caseTitle}</span>
 		<span class="r">
 		##加一个转bug
+			#@aModal("#myModal" "" "1000" "500" "btn-class ml-5" adminPath+"/quality/testCase/caseVersion?caseId="+id)历史版本#end&nbsp;&nbsp;
 			#foreach(m:menuManager.getScopeMenus("testcaseinfo-tab"))
 				#if(m.id=="texecution"||m.id=="tresult")
 					#@aModal("#myModal" m.name "800" "400" "" adminPath+m.href+"?caseId="+testCase?.caseId+"&currentPageId=5" "ml-5")
@@ -104,15 +105,15 @@
                 #end
             #end
             #@tbody()
-            #if(stepList?.size()>0)
-            	#foreach(step:stepList)
-                #@tr()
-                    #@th()${stepFor.index}#end
-                    #@td()${step?.caseStepDesc}#end
-                    #@td()${step?.caseStepExpect}#end
-                #end
-                #end
-                #end
+				#if(stepList?.size()>0)
+						#foreach(step:stepList)
+							#@tr()
+								#@th()${stepFor.index}#end
+								#@td()${step?.caseStepDesc}#end
+								#@td()${step?.caseStepExpect}#end
+							#end
+						#end
+				#end
             #end
         #end
     	</div>    		

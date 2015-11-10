@@ -37,7 +37,7 @@
 					<a href="#" class="active_btn">${story?.storyTitle}</a>
 			</span>
     <span class="r">
-            #@aModal("#myModal" "" "1000" "500" "btn-class" adminPath+"/product/storySpec/storyVersion?storyId="+storySpec?.storyId)历史版本#end
+            #@aModal("#myModal" "" "1000" "500" "btn-class" adminPath+"/product/storySpec/storyVersion?storyId="+storyId)历史版本#end
          #foreach(m:menuManager.getScopeMenus("pro_demand_log"))
              #set(url=eval(m?.href))
              #if(m?.map?.type=="aModal")
