@@ -445,7 +445,7 @@ public class StoryAction extends BaseController {
         }
         productStory.setStoryVersion(maxVersion==null?1:maxVersion+1);
         storyService.updateStory(productStory);
-        storySpec.setStoryVersion(story.getStoryVersion() + 1);
+        storySpec.setStoryVersion(productStory.getStoryVersion());
         storySpecService.add(storySpec);
         uploads(file, story.getStoryId(), ProfileType.STORY, title);
 
@@ -942,7 +942,7 @@ public class StoryAction extends BaseController {
     @RequestMapping("/findcopy")
     public String findcopy(Integer storyId, Model model) {
         ProductStory productStory = storyService.findStory(storyId);
-        ProductStorySpec storySpec = storySpecService.findStorySpec(storyId);
+        ProductStorySpec storySpec = storySpecService.findStorySpec(storyId,productStory.getStoryVersion());
         List<ServiceRequest> requests = requestService.getRequestList(null);
         model.addAttribute("requestList",requests);
         model.addAttribute("story", productStory);

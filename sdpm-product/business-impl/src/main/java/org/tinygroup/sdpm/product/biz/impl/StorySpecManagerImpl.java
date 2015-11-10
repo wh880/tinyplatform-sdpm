@@ -21,9 +21,10 @@ public class StorySpecManagerImpl implements StorySpecManager{
 	@Autowired
 	private ProductStorySpecDao productStorySpecDao;
 
-	public ProductStorySpec find(Integer storyId) {
+	public ProductStorySpec find(Integer storyId,Integer version) {
 		ProductStorySpec storySpec = new ProductStorySpec();
 		storySpec.setStoryId(storyId);
+		storySpec.setStoryVersion(version);
 		List<ProductStorySpec> list = productStorySpecDao.query(storySpec,  new OrderBy(NameUtil.resolveNameDesc("storyVersion"), false));
 		return list.size()>0?list.get(0):null;
 	}
