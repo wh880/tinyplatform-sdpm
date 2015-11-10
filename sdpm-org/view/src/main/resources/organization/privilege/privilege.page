@@ -27,9 +27,7 @@
     #end
 #end
 #simpleModal(editpageModalId)
-
 #@simpleModal("myModal" )#end
-
 <script>
     $(function () {
         $(".tinytable").on("click", ".icon-remove", function () {
