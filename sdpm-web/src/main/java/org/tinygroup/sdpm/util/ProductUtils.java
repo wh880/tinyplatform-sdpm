@@ -369,6 +369,7 @@ public class ProductUtils {
                 return 2;
             } else {
                 for (OrgRole role : UserUtils.getUserRoleList()) {
+                    if(StringUtil.isBlank(product.getProductWhiteList()))return 3;
                     if (product.getProductWhiteList().contains(String.valueOf(role.getOrgRoleId()))) {
                         return 2;
                     }

@@ -59,7 +59,7 @@ public class StorySpecAction extends BaseController{
 	}
 	@RequestMapping("storyVersion")
 	public String storyVersion(){
-		return "/product/page/version/a/allVersion.pagelet";
+		return "/product/page/version/allVersion.pagelet";
 	}
 	@RequestMapping("storyVersionData")
 	public String storyHistoryVersion(Integer storyId,Model model,Integer start,Integer limit,String order,String orderType){
