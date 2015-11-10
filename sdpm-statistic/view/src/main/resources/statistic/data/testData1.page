@@ -1,49 +1,42 @@
-#@tinyForm("thisform" "url" "post" {"class":""})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/statistic/quality/bugCreate" "post" {"class":""})
 				#@elementItem()
 					#@colLabel("col-1")Bug创建：#end
 					#@formControlDiv("col-11")
 						#@div(divClass="col-2")
-							#@tinyDateInput("birthday" "" "YYYY-MM-DD" {})#end
+							#@tinyDateInput("startDate" startDate?formatDate(startDate,"yyyy-MM-dd"):"" "yyyy-MM-dd" {})#end
 						#end
 						#@div(divClass="col-0")&nbsp&nbsp至&nbsp&nbsp#end
 						#@div(divClass="col-2")
-							#@tinyDateInput("birthday" "" "YYYY-MM-DD" {})#end
+							#@tinyDateInput("endDate" endDate?formatDate(endDate,"yyyy-MM-dd"):"" "yyyy-MM-dd" {})#end
 						#end
 						#@div(divClass="col-3")
 							#@colLabel("col-3")产品：#end
 							#@div(divClass="col-9")
 							#@Tselect2F()
-                    			#@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                        			<option value="CT">请选择产品</option>
-                        			<option value="DE">产品1</option>
-                        			<option value="FL">产品2</option>
-                        			<option value="GA">产品3</option>   
+                    			#@Tselect2Body("cProduct" cProduct?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                                <option value="">/</option>
+                                    #for(product : ProductUtils.getAllProductListByUser())
+                                        <option value="${product?.productId}">${product?.productName}</option>
+                                    #end
                     			#end               
-                    			#@Tselect2Fix()
-                    				<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/addProduct.page" class="r ">增加</a>
-	                    			<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-listall.page">全部</a>#end                			#end
+                    			#end
                 			#end
 						#end
 						#@div(divClass="col-3")
 							#@colLabel("col-3")项目：#end
 							#@div(divClass="col-9")
 							#@Tselect2F()
-                    			#@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                        			<option value="CT">请选择项目</option>
-                        			<option value="DE">项目1</option>
-                        			<option value="FL">项目2</option>
-                        			<option value="GA">项目3</option>   
-                    			#end               
-                    			#@Tselect2Fix()
-                    				<a href="${TINY_CONTEXT_PATH}/project/form" class="r ">增加</a>
-	                    			<a href="${TINY_CONTEXT_PATH}/project/list">全部</a>
+                    			#@Tselect2Body("cProject" cProject?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                                    <option value="">/</option>
+                                    #for(project : ProjectUtils.getUserProjectList())
+                        			<option value="${project?.projectId}">${project?.projectName}</option>
+                                    #end
                     			#end
                 			#end
                 			#end
 						#end
 						<div class="col-1">
-							<a href="${TINY_CONTEXT_PATH}/statistic/page/org.page">
-						<input style="float:right" type="button" class="commitBtn" value="保存" /></a>
+						<input style="float:right" type="submit" class="commitBtn" value="保存" />
 				</div>						
 					#end					
 				#end																				

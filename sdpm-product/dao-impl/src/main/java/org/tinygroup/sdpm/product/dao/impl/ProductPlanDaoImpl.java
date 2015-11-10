@@ -35,6 +35,7 @@ import org.tinygroup.tinysqldsl.select.OrderByElement;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static org.tinygroup.sdpm.product.dao.constant.ProductPlanTable.PRODUCT_PLANTABLE;
@@ -104,20 +105,23 @@ public class ProductPlanDaoImpl extends TinyDslDaoSupport implements ProductPlan
         });
     }
 
-    public List<ProductPlan> statisticQuery(ProductPlan productPlan, final OrderBy... orderArgs) {
+    public List<ProductPlan> statisticQuery(ProductPlan productPlan, final boolean isOverdue, final OrderBy... orderArgs) {
         if (productPlan == null) {
             productPlan = new ProductPlan();
         }
         return getDslTemplate().query(productPlan, new SelectGenerateCallback<ProductPlan>() {
-
-
             public Select generate(ProductPlan t) {
+                Condition condition =null;
+                if(isOverdue){
+                    condition = PRODUCT_PLANTABLE.PLAN_END_DATE.lte(new Date());
+                }
                 Select select = select(FragmentSql.fragmentSelect("product_plan.*,SUM(CASE WHEN product_story.`story_status`=1 THEN 1 ELSE 0 END) draft," +
                         "SUM(CASE WHEN product_story.`story_status`=2 THEN 1 ELSE 0 END) active," +
                         "SUM(CASE WHEN product_story.`story_status`=3 THEN 1 ELSE 0 END) `change`," +
                         "SUM(CASE WHEN product_story.`story_status`=4 THEN 1 ELSE 0 END) `close`"
                 )).from(PRODUCT_PLANTABLE).join(leftJoin(PRODUCT_STORYTABLE, PRODUCT_PLANTABLE.PLAN_ID.eq(PRODUCT_STORYTABLE.PLAN_ID))).where(
                         and(
+                                condition,
                                 PRODUCT_PLANTABLE.COMPANY_ID.eq(t.getCompanyId()),
                                 PRODUCT_PLANTABLE.PRODUCT_ID.eq(t.getProductId()),
                                 PRODUCT_PLANTABLE.PLAN_NAME.eq(t.getPlanName()),

@@ -24,6 +24,7 @@ import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
 import org.tinygroup.sdpm.project.dao.ProjectDao;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.tinysqldsl.*;
+import org.tinygroup.tinysqldsl.base.Condition;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 import org.tinygroup.tinysqldsl.select.Join;
@@ -32,6 +33,7 @@ import org.tinygroup.tinysqldsl.selectitem.FragmentSelectItemSql;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static org.tinygroup.sdpm.project.dao.constant.ProjectStoryTable.PROJECT_STORYTABLE;
@@ -70,7 +72,11 @@ public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
         });
     }
 
-    public List<Project> findListWithStatistics(Project project) {
+    public List<Project> findListWithStatistics(Project project,Date startDate,Date endDate) {
+        Condition condition = null;
+        if(startDate!=null&&endDate!=null){
+            condition = and(PROJECTTABLE.PROJECT_OPENED_DATE.gte(startDate),PROJECTTABLE.PROJECT_OPENED_DATE.lte(endDate));
+        }
         if (project == null) {
             project = new Project();
         }
@@ -82,7 +88,7 @@ public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
         ).from(PROJECTTABLE).join(
                 Join.leftJoin(PROJECT_TASKTABLE,
                         PROJECT_TASKTABLE.TASK_PROJECT.equal(PROJECTTABLE.PROJECT_ID)))
-                .where(and(PROJECTTABLE.PROJECT_DELETED.eq(Project.DELETE_NO), PROJECTTABLE.PROJECT_ID.eq(project.getProjectId())))
+                .where(and(condition,PROJECTTABLE.PROJECT_DELETED.eq(Project.DELETE_NO), PROJECTTABLE.PROJECT_ID.eq(project.getProjectId())))
                 .groupBy(PROJECTTABLE.PROJECT_ID);
         return getDslSession().fetchList(select, Project.class);
     }

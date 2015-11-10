@@ -18,6 +18,7 @@ import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.sdpm.statistic.dao.pojo.*;
 import org.tinygroup.sdpm.statistic.service.inter.StatisticService;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,34 +43,56 @@ public class StatisticAction extends BaseController {
     private UserService userService;
 
     @RequestMapping("{type}/all")
-    public String productAll(Model model, @PathVariable(value = "type") String type) {
+    public String productAll(Model model, @PathVariable(value = "type") String type , Integer deleted,Integer overdue,Date startDate,Date endDate,Integer workHours,Integer roleId) {
         model.addAttribute("order", "1");
         if ("product".equals(type)) {
-            List<Product> products = productService.findProductList(new Product());
+            Product product = new Product();
+            if(deleted!=null&&deleted==1){
+                product.setDeleted(deleted);
+            }
+            List<Product> products = productService.findProductList(product);
             Map<Product, List<ProductPlan>> map = new HashMap<Product, List<ProductPlan>>();
             for (int i = 0, n = products.size(); i < n; i++) {
                 ProductPlan plan = new ProductPlan();
                 plan.setDeleted(0);
                 plan.setProductId(products.get(i).getProductId());
-                List<ProductPlan> productPlans = planService.statisticfind(plan);
+                List<ProductPlan> productPlans = planService.statisticfind(plan,overdue!=null&&overdue==1?true:false);
                 map.put(products.get(i), productPlans);
             }
             model.addAttribute("product", map);
             return "/statistic/page/product.page";
         }
         if ("project".equals(type)) {
-            List<Project> projects = projectService.findProjects(null);
+            if(startDate!=null&&endDate!=null){
+                model.addAttribute("startDate",startDate);
+                model.addAttribute("endDate",endDate);
+            }
+            List<Project> projects = projectService.findProjects(null,startDate,endDate);
             model.addAttribute("projects", projects);
             return "/statistic/page/project.page";
         }
         if ("org".equals(type)) {
+            if(startDate!=null&&endDate!=null){
+                model.addAttribute("startDate",startDate);
+                model.addAttribute("endDate",endDate);
+            }
+            if(workHours!=null){
+                model.addAttribute("workHours",workHours);
+            }else{
+                model.addAttribute("workHours",7);
+            }
+            if(roleId!=null){
+                model.addAttribute("roleId",roleId);
+            }
             List<OrgUser> orgUsers = userService.findUserList(new OrgUser());
             Map<OrgUser, List<ProjectTaskSta>> map = new HashMap<OrgUser, List<ProjectTaskSta>>();
             for (int i = 0, n = orgUsers.size(); i < n; i++) {
                 ProjectTaskSta projectTaskSta = new ProjectTaskSta();
                 projectTaskSta.setAssignedTo(orgUsers.get(i).getOrgUserId());
-                List<ProjectTaskSta> projectTaskStas = statisticService.findProTasks(projectTaskSta);
-                map.put(orgUsers.get(i), projectTaskStas);
+                List<ProjectTaskSta> projectTaskStas = statisticService.findProTasks(projectTaskSta,startDate,endDate,roleId);
+                if(projectTaskStas.size()>0) {
+                    map.put(orgUsers.get(i), projectTaskStas);
+                }
             }
             model.addAttribute("orgsmap", map);
             return "/statistic/page/org.page";
@@ -78,7 +101,7 @@ public class StatisticAction extends BaseController {
     }
 
     @RequestMapping("product/invest")
-    public String productInvest(Model model) {
+    public String productInvest(Model model,Integer deleted) {
 //        List<Product> products = productService.findProductList(new Product());
 //        Map<Product,List<ProjectProduct>> map = new HashMap<Product, List<ProjectProduct>>();
 //
@@ -87,17 +110,21 @@ public class StatisticAction extends BaseController {
 //            map.put(products.get(i),projectProducts);
 //        }
 //        model.addAttribute("productmap",map);
-        List<ProductProject> productProjects = statisticService.productProjects(new ProductProject());
+        List<ProductProject> productProjects = statisticService.productProjects(new ProductProject(),deleted!=null&&deleted==1?true:false);
         model.addAttribute("proPros", productProjects);
         model.addAttribute("order", "2");
         return "/statistic/page/product.page";
     }
 
     @RequestMapping("quality/bugCreate")
-    public String qualityBugCreate(Model model) {
+    public String qualityBugCreate(Model model,Date startDate,Date endDate,Integer cProject,Integer cProduct) {
         model.addAttribute("order", "1");
-        List<QualityBugSta> bugStas = statisticService.findBugCreate(new QualityBugSta());
+        List<QualityBugSta> bugStas = statisticService.findBugCreate(new QualityBugSta(),startDate,endDate,cProject,cProduct);
+        model.addAttribute("startDate", startDate);
+        model.addAttribute("endDate", endDate);
         model.addAttribute("bugStas", bugStas);
+        model.addAttribute("cProject", cProject);
+        model.addAttribute("cProduct", cProduct);
         return "/statistic/page/test.page";
     }
 

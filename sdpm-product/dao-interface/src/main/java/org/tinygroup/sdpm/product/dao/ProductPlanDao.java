@@ -35,7 +35,7 @@ public interface ProductPlanDao extends BaseDao<ProductPlan,Integer> {
 	 * @param productPlan
 	 * @return
      */
-	List<ProductPlan> statisticQuery(ProductPlan productPlan ,OrderBy... orderArgs);
+	List<ProductPlan> statisticQuery(ProductPlan productPlan ,boolean isOverdue,OrderBy... orderArgs);
 
 	Integer getMaxNo(Integer productId);
 }

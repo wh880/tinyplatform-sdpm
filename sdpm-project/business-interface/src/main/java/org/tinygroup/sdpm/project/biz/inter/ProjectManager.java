@@ -3,6 +3,7 @@ package org.tinygroup.sdpm.project.biz.inter;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.tinysqldsl.Pager;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -23,7 +24,7 @@ public interface ProjectManager {
      * @param project
      * @return
      */
-    List<Project> findListProjects(Project project);
+    List<Project> findListProjects(Project project,Date startDate,Date endDate);
 
     /**
      * 根据ids查询项目

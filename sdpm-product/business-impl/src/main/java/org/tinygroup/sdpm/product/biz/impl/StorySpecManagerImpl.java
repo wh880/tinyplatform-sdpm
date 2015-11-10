@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.product.biz.inter.StorySpecManager;
@@ -28,8 +29,10 @@ public class StorySpecManagerImpl implements StorySpecManager{
 	}
 
 	public List<ProductStorySpec> findList(ProductStorySpec storySpec,String order,String ordertype) {
-		
-		return productStorySpecDao.query(storySpec,  (order==null||"".equals(order))?null:new OrderBy(NameUtil.resolveNameDesc(order), !("desc".equals(ordertype))?true:false));
+		if(StringUtil.isBlank(order)){
+			return  productStorySpecDao.query(storySpec);
+		}
+		return productStorySpecDao.query(storySpec, new OrderBy(NameUtil.resolveNameDesc(order), "asc".equals(ordertype)?true:false));
 	}
 
 	public Pager<ProductStorySpec> findPager(int page, int limit, ProductStorySpec storySpec, String order,String ordertype) {

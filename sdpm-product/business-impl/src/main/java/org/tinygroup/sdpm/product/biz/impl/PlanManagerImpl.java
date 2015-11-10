@@ -45,8 +45,8 @@ public class PlanManagerImpl implements PlanManager{
 		return productPlanDao.queryPager((start-1)*limit, limit, productPlan, (order==null||"".equals(order))?null:new OrderBy(NameUtil.resolveNameDesc(order), !("desc".equals(ordertype))?true:false));
 	}
 
-	public List<ProductPlan> statisticFind(ProductPlan productPlan ) {
-		return productPlanDao.statisticQuery(productPlan);
+	public List<ProductPlan> statisticFind(ProductPlan productPlan , boolean isOverdue) {
+		return productPlanDao.statisticQuery(productPlan,isOverdue);
 	}
 
 	public List<ProductPlan> findList(ProductPlan productplan, String order, String ordertype) {

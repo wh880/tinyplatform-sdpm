@@ -12,6 +12,7 @@ import org.tinygroup.sdpm.product.service.StoryService;
 import org.tinygroup.sdpm.product.service.StorySpecService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;
 import org.tinygroup.sdpm.system.service.inter.ProfileService;
+import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.List;
 
@@ -56,5 +57,25 @@ public class StorySpecAction extends BaseController{
 		}
 		return "";
 	}
-	
+	@RequestMapping("storyVersion")
+	public String storyVersion(){
+		return "/product/page/version/a/allVersion.pagelet";
+	}
+	@RequestMapping("storyVersionData")
+	public String storyHistoryVersion(Integer storyId,Model model,Integer start,Integer limit,String order,String orderType){
+		ProductStory story = storyService.findStory(storyId);
+		ProductStorySpec spec = new ProductStorySpec();
+		spec.setStoryId(storyId);
+		Pager<ProductStorySpec> specs = specService.findStorySpecPager(start, limit, spec, order, orderType);
+		model.addAttribute("story",story);
+		model.addAttribute("versions",specs);
+		return "/product/page/version/allVersionData.pagelet";
+	}
+	@RequestMapping("versionRollback")
+	public String storyVersionRollback(Integer storyId,Integer storyVersion){
+		ProductStory story = storyService.findStory(storyId);
+		story.setStoryVersion(storyVersion);
+		storyService.updateStory(story);
+		return "redirect:/a/product/storySpec/find/productDemandDetail?storyId="+storyId;
+	}
 }

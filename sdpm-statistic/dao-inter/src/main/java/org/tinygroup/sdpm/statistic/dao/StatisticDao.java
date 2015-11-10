@@ -2,6 +2,7 @@ package org.tinygroup.sdpm.statistic.dao;
 
 import org.tinygroup.sdpm.statistic.dao.pojo.*;
 
+import java.util.Date;
 import java.util.List;
 
 public interface StatisticDao {
@@ -12,14 +13,14 @@ public interface StatisticDao {
 	 * @param projectTaskSta
 	 * @return
      */
-	 List<ProjectTaskSta> findProTasks(ProjectTaskSta projectTaskSta);
+	 List<ProjectTaskSta> findProTasks(ProjectTaskSta projectTaskSta,Date startDate,Date endDate,Integer roleId);
 
 	/**
 	 * Bug创建
 	 * @param qualityBugSta
 	 * @return
      */
-	 List<QualityBugSta> findBugCreate(QualityBugSta qualityBugSta);
+	 List<QualityBugSta> findBugCreate(QualityBugSta qualityBugSta,Date startDate,Date endDate,Integer cProject,Integer cProduct);
 
 	/**
 	 * 获取被指派人和其bug数
@@ -40,6 +41,6 @@ public interface StatisticDao {
 	 * @param productProject
 	 * @return
      */
-	List<ProductProject> productProjects(ProductProject productProject);
+	List<ProductProject> productProjects(ProductProject productProject,boolean deleted);
 
 }

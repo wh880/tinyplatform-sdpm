@@ -1,7 +1,29 @@
 #@bkGrayDiv("pd-20")
 筛选条件：
-    #labelCheckbox(ckId="shutdown" labelText="关闭产品")
-    #labelCheckbox(ckId="overdate" labelText="过期计划")
+<script>
+    $(function(){
+        #if(deleted&&deleted==1)
+            $("#closed").attr("checked","checked");
+        #end
+        #if(overdue&&overdue==1)
+            $("#overdue").attr("checked","checked");
+        #end
+        $(".check-box .condition").on("click",function(){
+            if($("#closed").is(':checked')&&$("#overdue").is(':checked')){
+                window.location.href="${TINY_CONTEXT_PATH+adminPath}/statistic/product/all?deleted=1&overdue=1";
+            }else if($("#closed").is(':checked')){
+                window.location.href="${TINY_CONTEXT_PATH+adminPath}/statistic/product/all?deleted=1&overdue=0";
+            }else if($("#overdue").is(':checked')){
+                window.location.href="${TINY_CONTEXT_PATH+adminPath}/statistic/product/all?deleted=0&overdue=1";
+            }else{
+                window.location.href="${TINY_CONTEXT_PATH+adminPath}/statistic/product/all?deleted=0&overdue=0";
+            }
+        });
+    })
+
+</script>
+    #labelCheckbox(ckId="closed" ckClass="condition" labelText="关闭产品")
+    #labelCheckbox(ckId="overdue" ckClass="condition" labelText="过期计划")
 #end
 <div style="height: 10px;"></div>
 <style>

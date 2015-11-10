@@ -6,6 +6,7 @@ import org.tinygroup.sdpm.statistic.biz.inter.StatisticManager;
 import org.tinygroup.sdpm.statistic.dao.pojo.*;
 import org.tinygroup.sdpm.statistic.service.inter.StatisticService;
 
+import java.util.Date;
 import java.util.List;
 @Component
 public class StatisticServiceImpl implements StatisticService{
@@ -16,12 +17,12 @@ public class StatisticServiceImpl implements StatisticService{
 		return statisticManager.findList(statisticOrg);
 	}
 
-	public List<ProjectTaskSta> findProTasks(ProjectTaskSta projectTaskSta) {
-		return statisticManager.findListProTask(projectTaskSta);
+	public List<ProjectTaskSta> findProTasks(ProjectTaskSta projectTaskSta,Date startDate,Date endDate,Integer roleId) {
+		return statisticManager.findListProTask(projectTaskSta,startDate,endDate,roleId);
 	}
 
-	public List<QualityBugSta> findBugCreate(QualityBugSta qualityBugSta) {
-		return statisticManager.findBugCreate(qualityBugSta);
+	public List<QualityBugSta> findBugCreate(QualityBugSta qualityBugSta,Date startDate,Date endDate,Integer cProject,Integer cProduct) {
+		return statisticManager.findBugCreate(qualityBugSta,startDate,endDate,cProject,cProduct);
 	}
 
 	public List<Assigned> findAssigned(Assigned assigned) {
@@ -32,8 +33,8 @@ public class StatisticServiceImpl implements StatisticService{
 		return statisticManager.findBugCall(qualityBugCall);
 	}
 
-	public List<ProductProject> productProjects(ProductProject productProject) {
-		return statisticManager.productProjects(productProject);
+	public List<ProductProject> productProjects(ProductProject productProject,boolean deleted) {
+		return statisticManager.productProjects(productProject,deleted);
 	}
 
 }

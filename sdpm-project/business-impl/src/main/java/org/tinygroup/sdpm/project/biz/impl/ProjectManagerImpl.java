@@ -12,6 +12,7 @@ import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -33,8 +34,8 @@ public class ProjectManagerImpl implements ProjectManager {
         return projectDao.findListByTeamUserId(userId);
     }
 
-    public List<Project> findListProjects(Project project) {
-        return projectDao.findListWithStatistics(project);
+    public List<Project> findListProjects(Project project,Date startDate,Date endDate) {
+        return projectDao.findListWithStatistics(project,startDate,endDate);
     }
 
     public Pager<Project> findPagerProjects(Integer start, Integer limit, String sortName, boolean asc, Integer... ids) {
