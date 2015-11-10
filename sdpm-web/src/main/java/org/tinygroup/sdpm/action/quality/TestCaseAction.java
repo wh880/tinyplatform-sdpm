@@ -600,7 +600,9 @@ public class TestCaseAction extends BaseController {
 		}
 		model.addAttribute("case",testCase);
 		model.addAttribute("stepMap",versionStep);
-		model.addAttribute("maxVersion", maxCaseVersion >(start+limit)?(start+limit):maxCaseVersion);
+		model.addAttribute("start",start);
+		model.addAttribute("maxVersion", maxCaseVersion);
+		model.addAttribute("end",maxCaseVersion>(start+limit)?(start+limit):maxCaseVersion);
 		return "/testManagement/page/version/allVersionData.pagelet";
 	}
 	@RequestMapping("versionRollback")
