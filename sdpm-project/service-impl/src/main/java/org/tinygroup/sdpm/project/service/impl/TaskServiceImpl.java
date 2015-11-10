@@ -24,7 +24,6 @@ public class TaskServiceImpl implements TaskService {
     @Autowired
     private StoryManager storyManager;
 
-
     public Integer updateDoingTask(ProjectTask task) {
         task.setTaskStatus(task.DOING);
         task.setTaskLastEditedDate(new Date());

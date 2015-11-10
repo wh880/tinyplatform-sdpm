@@ -1,5 +1,4 @@
-#!set(activeTitle="组织管理",activeMenuId=currentPageId,treeid=treeid?:"0")
-
+#!set(activeTitle="角色管理",activeMenuId=currentPageId,treeid=treeid?:"0")
 #import("/common/component/form.component")
 
 #set(name="organizationPrivilege")
@@ -74,8 +73,7 @@
             open: true,
             checked: ${orgRoleMenus.contains(m.id)? 'true' : 'false'
         }
-        })
-        ;
+        });
         #end
 
 
