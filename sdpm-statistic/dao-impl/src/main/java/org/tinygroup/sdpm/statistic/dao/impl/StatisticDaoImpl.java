@@ -5,13 +5,16 @@ import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
 import org.tinygroup.sdpm.statistic.dao.StatisticDao;
 import org.tinygroup.sdpm.statistic.dao.pojo.*;
 import org.tinygroup.tinysqldsl.Select;
+import org.tinygroup.tinysqldsl.base.Condition;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 import org.tinygroup.tinysqldsl.select.Join;
 import org.tinygroup.tinysqldsl.selectitem.FragmentSelectItemSql;
 
+import java.util.Date;
 import java.util.List;
 
 import static org.tinygroup.sdpm.org.dao.constant.OrgUserTable.ORG_USERTABLE;
+import static org.tinygroup.sdpm.org.dao.constant.OrgRoleUserTable.ORG_ROLE_USERTABLE;
 import static org.tinygroup.sdpm.product.dao.constant.ProductStoryTable.PRODUCT_STORYTABLE;
 import static org.tinygroup.sdpm.product.dao.constant.ProductTable.PRODUCTTABLE;
 import static org.tinygroup.sdpm.project.dao.constant.ProjectTable.PROJECTTABLE;
@@ -43,21 +46,27 @@ public class StatisticDaoImpl extends TinyDslDaoSupport implements StatisticDao{
 	 * @param projectTaskSta
 	 * @return
      */
-	public List<ProjectTaskSta> findProTasks(ProjectTaskSta projectTaskSta) {
+	public List<ProjectTaskSta> findProTasks(ProjectTaskSta projectTaskSta,Date startDate,Date endDate,Integer roleId) {
+		Condition condition = null;
+		if(startDate!=null&&endDate!=null){
+			condition = and(PROJECT_TASKTABLE.TASK_ASSIGNED_DATE.gte(startDate),PROJECT_TASKTABLE.TASK_ASSIGNED_DATE.lte(endDate));
+		}
+		if(roleId!=null){
+			condition = condition!=null?and(condition,ORG_ROLE_USERTABLE.ORG_ROLE_ID.eq(roleId)):ORG_ROLE_USERTABLE.ORG_ROLE_ID.eq(roleId);
+		}
 		if(projectTaskSta.getAssignedTo()==null){
 			return null;
 		}
 		Select select = MysqlSelect.select(FragmentSelectItemSql.fragmentSelect("project_task.task_id AS taskId," +
 				"project.project_name AS projectName," +
 				"project_task.task_assigned_to AS assignedTo," +
-				"SUM(project_task.task_id) AS taskNum," +
+				"COUNT(project_task.task_id) AS taskNum," +
 				"SUM(project_task.task_estimate) AS estimate," +
 				"SUM(project_task.task_left) AS 'left'")).from(PROJECT_TASKTABLE).join(Join.leftJoin(PROJECTTABLE,
-				PROJECT_TASKTABLE.TASK_PROJECT.eq(PROJECTTABLE.PROJECT_ID)),Join.leftJoin(ORG_USERTABLE,
-				PROJECT_TASKTABLE.TASK_ASSIGNED_TO.eq(ORG_USERTABLE.ORG_USER_ID))).where(and(
-				PROJECT_TASKTABLE.TASK_ASSIGNED_TO.eq(projectTaskSta.getAssignedTo()),
-				PROJECT_TASKTABLE.TASK_ASSIGNED_DATE.eq(projectTaskSta.getAssignedDate()),
-				ORG_USERTABLE.ORG_USER_ID.eq(projectTaskSta.getAssignedTo()))
+				PROJECT_TASKTABLE.TASK_PROJECT.eq(PROJECTTABLE.PROJECT_ID)), Join.leftJoin(ORG_ROLE_USERTABLE,PROJECT_TASKTABLE.TASK_ASSIGNED_TO.eq(ORG_ROLE_USERTABLE.ORG_USER_ID))).where(
+				and(
+						condition,
+						PROJECT_TASKTABLE.TASK_ASSIGNED_TO.eq(projectTaskSta.getAssignedTo()))
 		).groupBy(PROJECTTABLE.PROJECT_ID);
 		return getDslSession().fetchList(select,ProjectTaskSta.class);
 	}
@@ -67,7 +76,17 @@ public class StatisticDaoImpl extends TinyDslDaoSupport implements StatisticDao{
 	 * @param qualityBugSta
 	 * @return
      */
-	public List<QualityBugSta> findBugCreate(QualityBugSta qualityBugSta){
+	public List<QualityBugSta> findBugCreate(QualityBugSta qualityBugSta,Date startDate,Date endDate,Integer cProject,Integer cProduct){
+		Condition condition = null;
+		if(startDate!=null&&endDate!=null){
+			condition = and(QUALITY_BUGTABLE.BUG_OPENED_DATE.gte(startDate),QUALITY_BUGTABLE.BUG_OPENED_DATE.lte(endDate));
+		}
+		if(cProject!=null){
+			condition = condition!=null?and(condition,QUALITY_BUGTABLE.PROJECT_ID.eq(cProject)):QUALITY_BUGTABLE.PROJECT_ID.eq(cProject);
+		}
+		if(cProduct!=null){
+			condition = condition!=null?and(condition,QUALITY_BUGTABLE.PRODUCT_ID.eq(cProduct)):QUALITY_BUGTABLE.PRODUCT_ID.eq(cProduct);
+		}
 		if (qualityBugSta==null){
 			qualityBugSta = new QualityBugSta();
 		}
@@ -83,6 +102,7 @@ public class StatisticDaoImpl extends TinyDslDaoSupport implements StatisticDao{
 		          " COUNT(quality_bug.bug_id) AS bugNum")).from(QUALITY_BUGTABLE).join(Join.leftJoin(
 				ORG_USERTABLE,ORG_USERTABLE.ORG_USER_ID.eq(QUALITY_BUGTABLE.BUG_OPENED_BY)
 		),Join.leftJoin(PRODUCT_STORYTABLE,PRODUCT_STORYTABLE.STORY_FROM_BUG.eq(QUALITY_BUGTABLE.BUG_ID))).where(and(
+				condition,
 				QUALITY_BUGTABLE.BUG_OPENED_DATE.eq(qualityBugSta.getBugCreateDate()),
 				QUALITY_BUGTABLE.PRODUCT_ID.eq(qualityBugSta.getProductId()),
 				QUALITY_BUGTABLE.PROJECT_ID.eq(qualityBugSta.getProjectId()))).groupBy(ORG_USERTABLE.ORG_USER_ID);
@@ -127,16 +147,19 @@ public class StatisticDaoImpl extends TinyDslDaoSupport implements StatisticDao{
 	 * @param productProject
 	 * @return
      */
-   public List<ProductProject> productProjects(ProductProject productProject){
+   public List<ProductProject> productProjects(ProductProject productProject,boolean deleted){
+	   Condition condition = null;
+	   if(deleted){
+		   condition = PRODUCTTABLE.DELETED.eq(1);
+	   }
 	  if(productProject==null){
 		  productProject = new ProductProject();
 	  }
 	  Select select = MysqlSelect.select(FragmentSelectItemSql.fragmentSelect(
-			  "count(distinct(project_product.project_id)) As projectNum," +
-			  "product.product_name As productName," +
-			  "sum(project_task.task_consumed) As consumedSum")).from(PRODUCTTABLE).join(
-			  Join.leftJoin(PROJECT_PRODUCTTABLE,PROJECT_PRODUCTTABLE.PRODUCT_ID.eq(PRODUCTTABLE.PRODUCT_ID)),
-			  Join.leftJoin(PROJECT_TASKTABLE,PROJECT_TASKTABLE.TASK_PROJECT.eq(PROJECT_PRODUCTTABLE.PROJECT_ID))).
+					  "count(distinct(project_product.project_id)) As projectNum ,sum(project_task.task_consumed) As consumedSum"),
+			  PRODUCTTABLE.PRODUCT_NAME.as("productName")).from(PRODUCTTABLE).join(
+			  Join.leftJoin(PROJECT_PRODUCTTABLE, PROJECT_PRODUCTTABLE.PRODUCT_ID.eq(PRODUCTTABLE.PRODUCT_ID)),
+			  Join.leftJoin(PROJECT_TASKTABLE, PROJECT_TASKTABLE.TASK_PROJECT.eq(PROJECT_PRODUCTTABLE.PROJECT_ID))).where(condition).
 			  groupBy(PRODUCTTABLE.PRODUCT_ID);
 	  return getDslSession().fetchList(select,ProductProject.class);
   }

@@ -4,6 +4,7 @@ package org.tinygroup.sdpm.project.service.inter;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.tinysqldsl.Pager;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -40,7 +41,7 @@ public interface ProjectService {
      * @param project
      * @return
      */
-    List<Project> findProjects(Project project);
+    List<Project> findProjects(Project project,Date startDate,Date endDate);
 
     /**
      * 批量删除项目

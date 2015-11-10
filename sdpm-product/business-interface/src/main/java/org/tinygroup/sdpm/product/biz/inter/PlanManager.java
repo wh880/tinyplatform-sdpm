@@ -83,7 +83,7 @@ public interface PlanManager {
 	 * @param productPlan
 	 * @return
      */
-	List<ProductPlan> statisticFind(ProductPlan productPlan);
+	List<ProductPlan> statisticFind(ProductPlan productPlan,boolean isOverdue);
 	
 	
 

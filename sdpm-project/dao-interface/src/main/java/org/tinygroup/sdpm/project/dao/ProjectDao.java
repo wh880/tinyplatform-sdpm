@@ -21,6 +21,7 @@ import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.tinysqldsl.Pager;
 
+import java.util.Date;
 import java.util.List;
 
 public interface ProjectDao extends BaseDao<Project, Integer> {
@@ -31,7 +32,7 @@ public interface ProjectDao extends BaseDao<Project, Integer> {
      * @param project
      * @return
      */
-    List<Project> findListWithStatistics(Project project);
+    List<Project> findListWithStatistics(Project project,Date startDate,Date endDate);
 
     /**
      * 获取项目分页，并附带统计信息

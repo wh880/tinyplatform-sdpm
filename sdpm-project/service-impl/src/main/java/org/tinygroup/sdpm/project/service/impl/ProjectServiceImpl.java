@@ -7,6 +7,7 @@ import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.tinysqldsl.Pager;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -34,8 +35,8 @@ public class ProjectServiceImpl implements ProjectService {
         return projectManager.findListByIds(list);
     }
 
-    public List<Project> findProjects(Project project) {
-        return projectManager.findListProjects(project);
+    public List<Project> findProjects(Project project,Date startDate,Date endDate) {
+        return projectManager.findListProjects(project,startDate,endDate);
     }
 
     public Integer batchDeleteProject(Integer[] projectIds) {

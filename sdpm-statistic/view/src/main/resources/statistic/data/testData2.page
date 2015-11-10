@@ -1,8 +1,8 @@
-#@bkGrayDiv("pd-20")
-筛选条件：
-##加个tinyform 和 一段js 选择后提交
-    #labelCheckbox(ckId="shutdown" labelText="关闭产品")
-#end
+###@bkGrayDiv("pd-20")
+##筛选条件：
+####加个tinyform 和 一段js 选择后提交
+##    #labelCheckbox(ckId="shutdown" labelText="关闭产品")
+###end
 <div style="height: 10px;"></div>
 #@tableStriped("table-border")
     #@thead()

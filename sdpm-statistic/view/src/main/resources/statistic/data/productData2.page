@@ -1,7 +1,22 @@
 #@bkGrayDiv("pd-20")
 筛选条件：
 ##加个tinyform 和 一段js 选择后提交
-    #labelCheckbox(ckId="shutdown" labelText="关闭产品")
+<script>
+    $(function(){
+        #if(deleted&&deleted==1)
+            $("#closed").attr("checked","checked");
+        #end
+        $(".check-box .condition").on("click",function(){
+            if($("#closed").is(':checked')){
+                window.location.href="${TINY_CONTEXT_PATH+adminPath}/statistic/product/invest?deleted=1";
+            }else{
+                window.location.href="${TINY_CONTEXT_PATH+adminPath}/statistic/product/invest?deleted=0";
+            }
+        });
+    })
+
+</script>
+    #labelCheckbox(ckId="closed" ckClass="condition" labelText="关闭产品")
 #end
 <div style="height: 10px;"></div>
 #@tableStriped("table-border")

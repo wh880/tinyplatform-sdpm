@@ -62,7 +62,8 @@
                         })
 
                     </script>
-                    #@Tselect2Body("productLineId" cookieProductLineId {"class":"input-text select2"})
+                    #@Tselect2Body("productLineId" cookieProductLineId {"placeholder":"请选择产品线","datatype":"*","nullmsg":"产品线不能为空！","id":
+                        "productCode","class":"input-text select2"})
                         #for(productLine : ProductUtils.getProductLineList())
                             <option value="${productLine?.productLineId}">${productLine?.productLineName}</option>
                         #end
