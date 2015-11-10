@@ -42,8 +42,8 @@
         <!--<menu id="allproductline-remove" name="删除产品线" href="/productLine/delete"-->
         <!--icon="icon-remove" sort="99" isShow="1" scope="productLine-all"/>-->
     </menu>
-    <menu id="productLine-view" parent-id="productLine" name="浏览产品线" href="">
-        <menu id="productLine-view-all" parent-id="productLine-view" name="全部" href="/productLine/to?status=1"
+    <!--<menu id="productLine-view" parent-id="productLine" name="浏览产品线" href="">-->
+    <menu id="productLine-view-all" parent-id="productLine-view" name="全部产品线" href="/productLine/to?status=1"
               sort="100"
               isShow="1" scope="productLineView" icon="icon-plus-sign">
         </menu>
@@ -56,5 +56,5 @@
         <!--<menu id="productLine-deliveryMe" parent-id="productLine-view" name="由我交付" href="/productLine/to?status=4" sort="103"-->
         <!--isShow="1" scope="productLineView" icon="icon-plus-sign">-->
         <!--</menu>-->
-    </menu>
+    <!--</menu>-->
 </menu>
