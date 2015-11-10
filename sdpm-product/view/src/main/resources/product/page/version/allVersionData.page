@@ -10,7 +10,13 @@
     #@td()<span class="glyphicon glyphicon-chevron-right">${story?.no}</span>#end
     #@td()${version?.storyTitle}#end
     #@td()${version?.storyVersion}#end
-    #@td()<a href="">回滚到此版本</a>#end
+    #@td()
+        #if(story?.storyVersion==version?.storyVersion)
+            回滚到此版本
+        #else
+            <a href="${TINY_CONTEXT_PATH+adminPath}/product/storySpec/versionRollback?storyId=${version?.storyId}&storyVersion=${version?.storyVersion}">回滚到此版本</a>
+        #end
+        #end
 </tr>
 <tr class="hide" ><td colspan="20">
     <div class="infoContentRap hide">
