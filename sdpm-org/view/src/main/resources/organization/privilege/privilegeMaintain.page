@@ -2,14 +2,12 @@
 #import("/common/component/form.component")
 
 #set(name="organizationPrivilege")
-
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
         #@tabHead()
             #include("/organization/common/tab.page")
         #end
         #@tabBodyCol("ptop-5")
-
             #@div(divClass="operationbar")
             <span style="float:left">
                 <a href="${TINY_CONTEXT_PATH+adminPath}/org/roleMenu/show?treeid=0&id=${id}" ${treeid=='0'?" class='active_btn'":""}>所有权限</a>
@@ -23,89 +21,143 @@
                 <a href="${TINY_CONTEXT_PATH+adminPath}/org/roleMenu/show?treeid=service&id=${id}" ${treeid=='service'?" class='active_btn'":""}>客服</a>
                 <a href="${TINY_CONTEXT_PATH+adminPath}/org/roleMenu/show?treeid=organization&id=${id}" ${treeid=='organization'?" class='active_btn'":""}>组织</a>
                 <a href="${TINY_CONTEXT_PATH+adminPath}/org/roleMenu/show?treeid=mysystem&id=${id}" ${treeid=='mysystem'?" class='active_btn'":""}>系统</a>
-         </span>
+            </span>
                 #div(divClass="clearfix")
             #end
         #end
     #end
 #end
+<style>
+    .group-check-list li {
+        width: 160px;
+        float: left
+    }
 
+    .group-check-list {
+        border-top: 1px solid #eee;
+    }
 
-#@noRespsGridSystem()
-    #@gridSysRow()
-        #@gridSysCol(3)
-        #end
-        #@gridSysCol(6)
-            #@gridSysRow()
-            <ul id="treeDemo" class="ztree" style="width:100%;min-height:360px;max-height:300px;"></ul>
-            <div style="padding-top: 20px;float: right">
-                #@div(divClass="col-7 col-offset-5 form-inline")
-                        #tinyInput("submit" "submitbtn" " 提交 " {"class":"btn btn-primary"})
+    .form .row.group-check-list {
+        margin: 0
+    }
+
+    .group-check-list > div {
+        padding: 15px;
+    }
+
+    .group-check-list > div:first-child {
+        text-align: right;
+    }
+
+    .group-check-list > div:last-child {
+        border-left: 1px solid #eee;
+    }
+</style>
+#@tinyForm("thisform" call("link","/data/Validform_post.html") "post")
+    #@Tcheckboxes("checkbox2" ["1-1","3-3","2-5"] {"nullmsg":"爱好不能为空！","datatype":"*"})
+        #foreach(m:menuManager.getChildMenus("0"))
+        <div class="row group-check-list">
+            <div class="col-2">#@Tcheckbox("12" {"data-targetGroup":"g"+m.id})${m.name}#end</div>
+            <div class="col-10">
+                <ul>
+                    #foreach(m2:menuManager.getAllChildMenusWithoutParent(m.id))
+                        <li>#@Tcheckbox(m2.id {"data-group":"g"+m.id})${m2.name}#end</li>
                     #end
+                </ul>
+                <div class="clear"></div>
             </div>
-            #end
+        </div>
         #end
-        #@gridSysCol(3)
-        #end
-
     #end
 #end
-
-<SCRIPT type="text/javascript">
-    <!--
-    var setting = {
-        check: {
-            enable: true
-        },
-        data: {
-            simpleData: {
-                enable: true
+<script type="text/javascript">
+    $(function () {
+        $("input[data-targetgroup]").click(function () {
+            var check = "uncheck";
+            var gid = $(this).attr("data-targetgroup");
+            if (this.checked) {
+                check = "check";
             }
-        }
-    };
-
-    var zNodes = [];
-        #foreach(m:menuManager.getAllChildMenus(treeid))
-        zNodes.push({
-            id: '${m.id}',
-            pId: '${m.parentId}',
-            name: "${m.name}",
-            open: true,
-            checked: ${orgRoleMenus.contains(m.id)? 'true' : 'false'
-        }
-        });
-        #end
-
-
-    $(document).ready(function () {
-        var $ztree=
-        $.fn.zTree.init($("#treeDemo"), setting, zNodes);
-        $("input[name=submitbtn]").on("click", function () {
-            var nodes =$ztree.getCheckedNodes(true);
-            var checkarr = [];
-            for (var i = 0, l = nodes.length; i < l; i++) {
-                checkarr.push(nodes[i].id);
-            }
-            $.ajax({
-                url: "${TINY_CONTEXT_PATH+adminPath}/org/roleMenu/save",
-                type: "post",
-                traditional: true,
-                data: {ids: checkarr, id:${id}},
-                dataType: "json",
-                success: function (data) {
-                    if (data.status == "y") {
-                        layer.msg(data.info, 2, 1, function () {
-                            window.location.href = load;
-                        })
-                    } else {
-                        layer.msg(data.info)
-                    }
-                }
-            })
+            $("input[data-group=" + gid + "]").iCheck(check);
         })
-
-    });
-    //-->
-</SCRIPT>
-
-
+    })
+</script>
+##
+###@noRespsGridSystem()
+##    #@gridSysRow()
+##        #@gridSysCol(3)
+##        #end
+##        #@gridSysCol(6)
+##            #@gridSysRow()
+##            <ul id="treeDemo" class="ztree" style="width:100%;min-height:360px;max-height:300px;"></ul>
+##            <div style="padding-top: 20px;float: right">
+##                #@div(divClass="col-7 col-offset-5 form-inline")
+##                        #tinyInput("submit" "submitbtn" " 提交 " {"class":"btn btn-primary"})
+##                    #end
+##            </div>
+##            #end
+##        #end
+##        #@gridSysCol(3)
+##        #end
+##
+##    #end
+###end
+##
+##<SCRIPT type="text/javascript">
+##    <!--
+##    var setting = {
+##        check: {
+##            enable: true
+##        },
+##        data: {
+##            simpleData: {
+##                enable: true
+##            }
+##        }
+##    };
+##
+##    var zNodes = [];
+##        #foreach(m:menuManager.getAllChildMenus(treeid))
+##        zNodes.push({
+##            id: '${m.id}',
+##            pId: '${m.parentId}',
+##            name: "${m.name}",
+##            open: true,
+##            checked: ${orgRoleMenus.contains(m.id)? 'true' : 'false'
+##        }
+##        });
+##        #end
+##
+##
+##    $(document).ready(function () {
+##        var $ztree=
+##        $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+##        $("input[name=submitbtn]").on("click", function () {
+##            var nodes =$ztree.getCheckedNodes(true);
+##            var checkarr = [];
+##            for (var i = 0, l = nodes.length; i < l; i++) {
+##                checkarr.push(nodes[i].id);
+##            }
+##            $.ajax({
+##                url: "${TINY_CONTEXT_PATH+adminPath}/org/roleMenu/save",
+##                type: "post",
+##                traditional: true,
+##                data: {ids: checkarr, id:${id}},
+##                dataType: "json",
+##                success: function (data) {
+##                    if (data.status == "y") {
+##                        layer.msg(data.info, 2, 1, function () {
+##                            window.location.href = load;
+##                        })
+##                    } else {
+##                        layer.msg(data.info)
+##                    }
+##                }
+##            })
+##        })
+##
+##    });
+##    //-->
+##</SCRIPT>
+##
+##
