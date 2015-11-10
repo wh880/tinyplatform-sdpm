@@ -10,12 +10,10 @@ import org.tinygroup.sdpm.org.dao.pojo.OrgRole;
 import org.tinygroup.sdpm.org.service.inter.RoleService;
 import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
-import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.sdpm.productLine.service.ProductLineService;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
-import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
 import org.tinygroup.sdpm.project.service.inter.BuildService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.util.LogUtil;
@@ -404,5 +402,21 @@ public class ProductLineAction extends BaseController {
         return "";
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/judgeProductLineName")
+    public Map judgeProductLineName(String param) {
+        if (param != null) {
+            String productLineName = param;
+            ProductLine productLine = new ProductLine();
+            productLine.setProductLineName(productLineName);
+            List<ProductLine> productLines = productLineService.findList(productLine);
+            if (productLines.size() != 0) {
+                return resultMap(false, "该产品已存在");
+            } else {
+                return resultMap(true, "");
+            }
+        }
+        return resultMap(false, "请输入产品名称");
+    }
 }
 
