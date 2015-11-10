@@ -88,7 +88,7 @@
                 <property key="type" value="icon"/>
             </map>
         </menu>
-        
+
 
         <menu id="notclosed" name="未关闭" href="/product/page/project/togglebox.page" icon="" sort="33" isShow="1"
               scope="demand-state"/>
@@ -115,7 +115,6 @@
         <menu id="showsearchmore" name="搜索" href="#" icon="icon-search" sort="22" isShow="1" scope="demand-state"/>
 
 
-       
         <menu id="allproduct-close" name="关闭" href="/product/find/close?productId=${product?.productId}"
               icon="icon-off" sort="21" isShow="1" scope="allproduct-op">
             <map>
@@ -176,7 +175,7 @@
               scope="plan-badel"/>
         <menu id="linkstory" name="删除" href="/product/story/ajaxUpdate?storyId=${story.storyId}&amp;planId=0" icon="icon-remove" sort="80" isShow="1" scope="plan-linkdemand"/>
  		<menu id="linkbug" name="删除" href="/quality/bug/ajaxUpdate?bugId=${bug.bugId}&amp;planId=0" icon="icon-remove" sort="79" isShow="1" scope="plan-linkbug"/>
-        
+
     </menu>
 
     <menu id="product-release" parent-id="myproduct" name="发布" href="/product/release/content"

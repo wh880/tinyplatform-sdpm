@@ -252,7 +252,7 @@ public class ProductLineAction extends BaseController {
 
         String query = request.getQueryString();
         if(StringUtil.isBlank(query)||!query.contains("status")){
-            model.addAttribute("status",1);
+            model.addAttribute("status", 2);
         }
         return "/productLine/page/project/productLine.page";
     }
