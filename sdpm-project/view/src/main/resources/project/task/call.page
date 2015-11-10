@@ -58,7 +58,6 @@
     #@elementItem()
         <div class="col-12">
             <div class="col-5">
-
             </div>
             <div class="col-1">
                 <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>

@@ -242,6 +242,7 @@
                             #@Tselect2F()
                                 #@Tselect2Body("taskFinishedBy" task?.taskFinishedBy {"class":
                                     "input-text select2"})
+                                    <option></option>
                                     #foreach(t : teamList)
                                         <option value="${t.orgUserId}">${t.orgUserRealName}</option>
                                     #end
@@ -279,6 +280,7 @@
                         #@formControlDiv("col-10")
                             #@Tselect2F()
                                 #@Tselect2Body("taskCanceledBy" task?.taskCanceledBy {"class":"input-text select2"})
+                                    <option></option>
                                     #foreach(t : teamList)
                                         <option value="${t.orgUserId}">${t.orgUserRealName}</option>
                                     #end
@@ -317,6 +319,7 @@
                             #@Tselect2F()
                                 #@Tselect2Body("taskClosedBy" task?.taskClosedBy==null?"":task?.taskClosedBy {"class":
                                     "input-text select2"})
+                                    <option></option>
                                     #foreach(t : teamList)
                                         <option value="${t.orgUserId}">${t.orgUserRealName}</option>
                                     #end

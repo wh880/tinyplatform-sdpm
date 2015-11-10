@@ -5,5 +5,5 @@
        default-autowire="byName">
     <context:annotation-config/>
 
-    <context:component-scan base-package="org.tinygroup.sdpm.*"/>
+    <context:component-scan base-package="org.tinygroup.sdpm"/>
 </beans>

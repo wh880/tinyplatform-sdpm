@@ -2,6 +2,7 @@ package org.tinygroup.sdpm.common.menu.impl;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
+import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.logger.LogLevel;
 import org.tinygroup.logger.Logger;
 import org.tinygroup.logger.LoggerFactory;
@@ -100,6 +101,12 @@ public class MenuManagerImpl implements MenuManager {
         return childMenus;
     }
 
+    public List<Menu> getAllChildMenusWithoutParent(String parentId) {
+        List<Menu> childMenus = new ArrayList<Menu>();
+        getChildrenWithoutParent(parentId, childMenus);
+        return childMenus;
+    }
+
     public List<Menu> getScopeMenus(String scope) {
         if (scope == null || scope.isEmpty()) {
             logger.logMessage(LogLevel.ERROR, "获取聚合菜单名称为空");
@@ -161,6 +168,28 @@ public class MenuManagerImpl implements MenuManager {
                 childList.addAll(childMenus);
                 for (Menu m : childMenus) {
                     getChildren(m.getId(), childList);
+                }
+            }
+        }
+    }
+
+    /**
+     * 递归调用找出子菜单。
+     *
+     * @param parentId
+     * @return
+     */
+    private void getChildrenWithoutParent(String parentId, List<Menu> childList) {
+        Menu parentMenu = menuMap.get(parentId);
+        if (parentMenu != null) {
+            List<Menu> childMenus = parentMenu.getChildMenus();
+            if (childMenus != null) {
+                for (Menu m : childMenus) {
+                    if (CollectionUtil.isEmpty(m.getChildMenus())) {
+                        childList.add(m);
+                    } else {
+                        getChildrenWithoutParent(m.getId(), childList);
+                    }
                 }
             }
         }

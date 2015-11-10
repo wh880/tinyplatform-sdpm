@@ -28,7 +28,7 @@ public class TaskStatusUtil {
     }
 
     public static String getCondition(String statu, String choose, String userId, String moduleIds) {
-        String condition = "";
+        String condition;
         if (statu != null && choose == null) {
             condition = status.get(statu);
         } else if (statu == null && choose != null) {

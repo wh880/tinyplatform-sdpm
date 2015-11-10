@@ -9,13 +9,23 @@ import java.util.List;
 public interface EffortManager {
     /**
      * 添加日志
+     *
      * @param systemEffort
      * @return
      */
     SystemEffort add(SystemEffort systemEffort);
 
     /**
+     * 批量添加
+     *
+     * @param list
+     * @return
+     */
+    Integer batchAdd(List<SystemEffort> list);
+
+    /**
      * 更新日志
+     *
      * @param systemEffort
      * @return
      */
@@ -23,6 +33,7 @@ public interface EffortManager {
 
     /**
      * 查询所有的日志
+     *
      * @param systemEffort
      * @return
      */
@@ -39,6 +50,7 @@ public interface EffortManager {
 
     /**
      * 删除日志
+     *
      * @param systemEffort
      * @return
      */
