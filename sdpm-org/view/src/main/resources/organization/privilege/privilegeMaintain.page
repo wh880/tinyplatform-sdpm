@@ -1,4 +1,4 @@
-#!set(activeTitle="角色管理",activeMenuId=currentPageId,treeid=treeid?:"0")
+#!set(activeTitle="角色管理",activeMenuId=currentPageId,parentId=parentId?:"0")
 #import("/common/component/form.component")
 
 #set(name="organizationPrivilege")
@@ -10,17 +10,19 @@
         #@tabBodyCol("ptop-5")
             #@div(divClass="operationbar")
             <span style="float:left">
-                <a href="${TINY_CONTEXT_PATH+adminPath}/org/roleMenu/show?treeid=0&id=${id}" ${treeid=='0'?" class='active_btn'":""}>所有权限</a>
-                <a href="${TINY_CONTEXT_PATH+adminPath}/org/roleMenu/show?treeid=home&id=${id}" ${treeid=='home'?" class='active_btn'":""}>我的地盘</a>
-                <a href="${TINY_CONTEXT_PATH+adminPath}/org/roleMenu/show?treeid=productLine&id=${id}" ${treeid=='productLine'?" class='active_btn'":""}>产品线</a>
-                <a href="${TINY_CONTEXT_PATH+adminPath}/org/roleMenu/show?treeid=myproduct&id=${id}" ${treeid=='myproduct'?" class='active_btn'":""}>产品</a>
-                <a href="${TINY_CONTEXT_PATH+adminPath}/org/roleMenu/show?treeid=project&id=${id}" ${treeid=='project'?" class='active_btn'":""}>迭代</a>
-                <a href="${TINY_CONTEXT_PATH+adminPath}/org/roleMenu/show?treeid=quality&id=${id}" ${treeid=='quality'?" class='active_btn'":""}>测试</a>
-                <a href="${TINY_CONTEXT_PATH+adminPath}/org/roleMenu/show?treeid=idocument&id=${id}" ${treeid=='idocument'?" class='active_btn'":""}>文档</a>
-                <a href="${TINY_CONTEXT_PATH+adminPath}/org/roleMenu/show?treeid=statistic&id=${id}" ${treeid=='statistic'?" class='active_btn'":""}>统计</a>
-                <a href="${TINY_CONTEXT_PATH+adminPath}/org/roleMenu/show?treeid=service&id=${id}" ${treeid=='service'?" class='active_btn'":""}>客服</a>
-                <a href="${TINY_CONTEXT_PATH+adminPath}/org/roleMenu/show?treeid=organization&id=${id}" ${treeid=='organization'?" class='active_btn'":""}>组织</a>
-                <a href="${TINY_CONTEXT_PATH+adminPath}/org/roleMenu/show?treeid=mysystem&id=${id}" ${treeid=='mysystem'?" class='active_btn'":""}>系统</a>
+                <a href="${TINY_CONTEXT_PATH+adminPath}/org/roleMenu/show?parentId=0&id=${id}" ${parentId=='0'?" class='active_btn'":""}>所有权限</a>
+                #foreach(root:menuManager.getChildMenus)
+                    <a href="${TINY_CONTEXT_PATH+adminPath}/org/roleMenu/show?parentId=${root.id}&id=${id}" ${parentId=='root.id'?" class='active_btn'":""}>${root.name}</a>
+                #end
+##                <a href="${TINY_CONTEXT_PATH+adminPath}/org/roleMenu/show?parentId=productLine&id=${id}" ${parentId=='productLine'?" class='active_btn'":""}>产品线</a>
+##                <a href="${TINY_CONTEXT_PATH+adminPath}/org/roleMenu/show?parentId=myproduct&id=${id}" ${parentId=='myproduct'?" class='active_btn'":""}>产品</a>
+##                <a href="${TINY_CONTEXT_PATH+adminPath}/org/roleMenu/show?parentId=project&id=${id}" ${parentId=='project'?" class='active_btn'":""}>迭代</a>
+##                <a href="${TINY_CONTEXT_PATH+adminPath}/org/roleMenu/show?parentId=quality&id=${id}" ${parentId=='quality'?" class='active_btn'":""}>测试</a>
+##                <a href="${TINY_CONTEXT_PATH+adminPath}/org/roleMenu/show?parentId=idocument&id=${id}" ${parentId=='idocument'?" class='active_btn'":""}>文档</a>
+##                <a href="${TINY_CONTEXT_PATH+adminPath}/org/roleMenu/show?parentId=statistic&id=${id}" ${parentId=='statistic'?" class='active_btn'":""}>统计</a>
+##                <a href="${TINY_CONTEXT_PATH+adminPath}/org/roleMenu/show?parentId=service&id=${id}" ${parentId=='service'?" class='active_btn'":""}>客服</a>
+##                <a href="${TINY_CONTEXT_PATH+adminPath}/org/roleMenu/show?parentId=organization&id=${id}" ${parentId=='organization'?" class='active_btn'":""}>组织</a>
+##                <a href="${TINY_CONTEXT_PATH+adminPath}/org/roleMenu/show?parentId=mysystem&id=${id}" ${parentId=='mysystem'?" class='active_btn'":""}>系统</a>
             </span>
                 #div(divClass="clearfix")
             #end
@@ -53,11 +55,11 @@
         border-left: 1px solid #eee;
     }
 </style>
-#@tinyForm("thisform" call("link","/data/Validform_post.html") "post")
-    #@Tcheckboxes("checkbox2" ["1-1","3-3","2-5"] {"nullmsg":"爱好不能为空！","datatype":"*"})
+#@tinyForm("thisform" call("link",adminPath+"/org/roleMenu/save") "post")
+    #@Tcheckboxes("menuId" orgRoleMenuIdList {"nullmsg":"请选择角色应有的菜单！","datatype":""})
         #foreach(m:menuManager.getChildMenus("0"))
         <div class="row group-check-list">
-            <div class="col-2">#@Tcheckbox("12" {"data-targetGroup":"g"+m.id})${m.name}#end</div>
+            <div class="col-2">#@Tcheckbox(m.id {"data-targetGroup":"g"+m.id})${m.name}#end</div>
             <div class="col-10">
                 <ul>
                     #foreach(m2:menuManager.getAllChildMenusWithoutParent(m.id))
@@ -117,7 +119,7 @@
 ##    };
 ##
 ##    var zNodes = [];
-##        #foreach(m:menuManager.getAllChildMenus(treeid))
+##        #foreach(m:menuManager.getAllChildMenus(parentId))
 ##        zNodes.push({
 ##            id: '${m.id}',
 ##            pId: '${m.parentId}',

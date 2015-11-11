@@ -61,6 +61,7 @@
     <table-field standard-field-id="f83ce375673546bdb35a8fcb6d751332" primary="false" unique="false" not-null="false" id="org_role_name" auto-increase="false"/>
     <table-field standard-field-id="2c70414be6154f128898e5ebb03e137d" primary="false" unique="false" not-null="false" id="org_role_remarks" auto-increase="false"/>
     <table-field standard-field-id="61c90281c2c54787a0588095fa5d5e96" primary="false" unique="false" not-null="false" id="deleted" auto-increase="false"/>
+    <table-field standard-field-id="1ab7e14f11134b91b03d89e186cb87a1" primary="false" unique="false" not-null="true" id="org_role_type" auto-increase="false"/>
   </table>
   <table id="f20e3c631c62453a8db4f83f660e60bb" name="org_role_menu" title="角色菜单表">
     <table-field standard-field-id="7edc4cffb5cf4a9f94ffca41db249285" primary="true" unique="true" not-null="true" id="id" auto-increase="true"/>

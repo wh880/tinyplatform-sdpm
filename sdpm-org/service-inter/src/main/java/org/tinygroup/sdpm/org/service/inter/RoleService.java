@@ -66,7 +66,14 @@ public interface RoleService {
      */
     Integer deleteRole(Integer id);
 
-
+    /**
+     * 保存角色在当前模块的菜单，若数据库已经存在，则清除原有的模块的数据后再新增数据。
+     * @param roleId
+     * @param parentMenuId 当前模块的id
+     * @param newMenuIds 当前模块中需要保存的菜单
+     * @return
+     */
+    Integer saveRoleMenu(Integer roleId, String parentMenuId, String[] newMenuIds);
     /**
      * 找出用户的所有菜单Id
      * @param userId
@@ -83,31 +90,7 @@ public interface RoleService {
     List<OrgRoleMenu> findMenuByRoleId(Integer roleId);
 
 
-    /**
-     * 新增有一个角色菜单
-     *
-     * @param orgRoleMenu 新增实体类
-     * @return
-     */
-    OrgRoleMenu addRoleMenu(OrgRoleMenu orgRoleMenu);
-
-    /**
-     * 更新角色
-     *
-     * @param orgRoleMenu 需要更新的实体类
-     * @return
-     */
-    OrgRoleMenu updateRoleMenu(OrgRoleMenu orgRoleMenu);
-
-    /**
-     * 根据id进行软删除角色菜单
-     *
-     * @param id 主键
-     * @return
-     */
-    Integer deleteRoleMenu(Integer id);
-
-    void batchAddRoleMenu(List<OrgRoleMenu> orgRoleMenuList);
+    Integer batchAddRoleMenu(List<OrgRoleMenu> orgRoleMenuList);
 
     /**
      * 根据角色Id删除该角色的权限

@@ -23,7 +23,6 @@ import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
 import org.tinygroup.sdpm.org.dao.OrgRoleDao;
 import org.tinygroup.sdpm.org.dao.pojo.OrgRole;
-import org.tinygroup.sdpm.org.dao.pojo.OrgRoleUser;
 import org.tinygroup.tinysqldsl.*;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
@@ -34,7 +33,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.tinygroup.sdpm.org.dao.constant.OrgRoleTable.ORG_ROLETABLE;
-import static org.tinygroup.sdpm.org.dao.constant.OrgRoleUserTable.ORG_ROLE_USERTABLE;
 import static org.tinygroup.tinysqldsl.Delete.delete;
 import static org.tinygroup.tinysqldsl.Insert.insertInto;
 import static org.tinygroup.tinysqldsl.Select.selectFrom;
@@ -50,6 +48,7 @@ public class OrgRoleDaoImpl extends TinyDslDaoSupport implements OrgRoleDao {
                 Insert insert = insertInto(ORG_ROLETABLE).values(
                         ORG_ROLETABLE.ORG_ROLE_ID.value(t.getOrgRoleId()),
                         ORG_ROLETABLE.ORG_ROLE_NAME.value(t.getOrgRoleName()),
+                        ORG_ROLETABLE.ORG_ROLE_TYPE.value(t.getOrgRoleType()),
                         ORG_ROLETABLE.ORG_ROLE_REMARKS.value(t.getOrgRoleRemarks()),
                         ORG_ROLETABLE.DELETED.value(t.getDeleted()));
                 return insert;
@@ -65,6 +64,7 @@ public class OrgRoleDaoImpl extends TinyDslDaoSupport implements OrgRoleDao {
             public Update generate(OrgRole t) {
                 Update update = update(ORG_ROLETABLE).set(
                         ORG_ROLETABLE.ORG_ROLE_NAME.value(t.getOrgRoleName()),
+                        ORG_ROLETABLE.ORG_ROLE_TYPE.value(t.getOrgRoleType()),
                         ORG_ROLETABLE.ORG_ROLE_REMARKS.value(t.getOrgRoleRemarks()),
                         ORG_ROLETABLE.DELETED.value(t.getDeleted())).where(
                         ORG_ROLETABLE.ORG_ROLE_ID.eq(t.getOrgRoleId()));
@@ -115,6 +115,7 @@ public class OrgRoleDaoImpl extends TinyDslDaoSupport implements OrgRoleDao {
                 Select select = selectFrom(ORG_ROLETABLE).where(
                         and(
                                 ORG_ROLETABLE.ORG_ROLE_NAME.eq(t.getOrgRoleName()),
+                                ORG_ROLETABLE.ORG_ROLE_TYPE.eq(t.getOrgRoleType()),
                                 ORG_ROLETABLE.ORG_ROLE_REMARKS.eq(t.getOrgRoleRemarks()),
                                 ORG_ROLETABLE.DELETED.eq(t.getDeleted())));
                 return addOrderByElements(select, orderBies);
@@ -132,6 +133,7 @@ public class OrgRoleDaoImpl extends TinyDslDaoSupport implements OrgRoleDao {
                 Select select = MysqlSelect.selectFrom(ORG_ROLETABLE).where(
                         and(
                                 ORG_ROLETABLE.ORG_ROLE_NAME.eq(t.getOrgRoleName()),
+                                ORG_ROLETABLE.ORG_ROLE_TYPE.eq(t.getOrgRoleType()),
                                 ORG_ROLETABLE.ORG_ROLE_REMARKS.eq(t.getOrgRoleRemarks()),
                                 ORG_ROLETABLE.DELETED.eq(t.getDeleted())));
                 return addOrderByElements(select, orderBies);
@@ -148,6 +150,7 @@ public class OrgRoleDaoImpl extends TinyDslDaoSupport implements OrgRoleDao {
             public Insert generate() {
                 return insertInto(ORG_ROLETABLE).values(
                         ORG_ROLETABLE.ORG_ROLE_NAME.value(new JdbcNamedParameter("orgRoleName")),
+                        ORG_ROLETABLE.ORG_ROLE_TYPE.value(new JdbcNamedParameter("orgRoleType")),
                         ORG_ROLETABLE.ORG_ROLE_REMARKS.value(new JdbcNamedParameter("orgRoleRemarks")),
                         ORG_ROLETABLE.DELETED.value(new JdbcNamedParameter("deleted")));
             }
@@ -168,6 +171,7 @@ public class OrgRoleDaoImpl extends TinyDslDaoSupport implements OrgRoleDao {
                 return update(ORG_ROLETABLE).set(
                         ORG_ROLETABLE.ORG_ROLE_NAME.value(new JdbcNamedParameter("orgRoleName")),
                         ORG_ROLETABLE.ORG_ROLE_REMARKS.value(new JdbcNamedParameter("orgRoleRemarks")),
+                        ORG_ROLETABLE.ORG_ROLE_TYPE.value(new JdbcNamedParameter("orgRoleType")),
                         ORG_ROLETABLE.DELETED.value(new JdbcNamedParameter("deleted"))).where(
                         ORG_ROLETABLE.ORG_ROLE_ID.eq(new JdbcNamedParameter("orgRoleId")));
             }
@@ -184,6 +188,7 @@ public class OrgRoleDaoImpl extends TinyDslDaoSupport implements OrgRoleDao {
                 return delete(ORG_ROLETABLE).where(and(
                         ORG_ROLETABLE.ORG_ROLE_ID.eq(new JdbcNamedParameter("orgRoleId")),
                         ORG_ROLETABLE.ORG_ROLE_NAME.eq(new JdbcNamedParameter("orgRoleName")),
+                        ORG_ROLETABLE.ORG_ROLE_TYPE.eq(new JdbcNamedParameter("orgRoleType")),
                         ORG_ROLETABLE.ORG_ROLE_REMARKS.eq(new JdbcNamedParameter("orgRoleRemarks")),
                         ORG_ROLETABLE.DELETED.eq(new JdbcNamedParameter("deleted"))));
             }

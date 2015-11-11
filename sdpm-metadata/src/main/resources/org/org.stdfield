@@ -142,4 +142,9 @@
   <standard-field id="f83ce375673546bdb35a8fcb6d751332" name="org_role_name" title="角色名称" business-type-id="095e594e1550424b9643c7e2279e85be"/>
   <standard-field id="2c70414be6154f128898e5ebb03e137d" name="org_role_remarks" title="角色备注" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
   <standard-field id="40cf45e575c0442e83c7fe2da3119b5e" name="org_role_menu_id" title="角色菜单id" business-type-id="095e594e1550424b9643c7e2279e85be"/>
+  <standard-field id="1ab7e14f11134b91b03d89e186cb87a1" name="org_role_type" title="角色类型" business-type-id="b6a9bc04774b40859a7dd8c6fd52a629" default="0">
+    <description>系统角色-0&#xd;
+产品角色-1&#xd;
+项目角色-2</description>
+  </standard-field>
 </standard-fields>

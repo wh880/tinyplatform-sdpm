@@ -36,7 +36,7 @@ public class RoleAction extends BaseController {
             OrgRole role = roleService.findRole(id);
             model.addAttribute("role", role);
         }
-        return "organization/privilege/addGroup.page";
+        return "organization/privilege/addRoleForm";
     }
 
     /**
