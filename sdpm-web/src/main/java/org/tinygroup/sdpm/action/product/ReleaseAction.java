@@ -13,7 +13,6 @@ import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.product.service.ReleaseService;
 import org.tinygroup.sdpm.product.service.StoryService;
-import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.sdpm.system.dao.pojo.ProfileType;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;
@@ -130,7 +129,7 @@ public class ReleaseAction extends BaseController {
     public String find(Integer releaseId, Model model) {
         ProductRelease release = releaseService.findRelease(releaseId);
         model.addAttribute("release", release);
-        return "/product/page/tabledemo/product-release-update.page";
+        return "/product/page/tabledemo/product-release-update.pagelet";
     }
 
     @RequestMapping("/find/{forwordPager}")

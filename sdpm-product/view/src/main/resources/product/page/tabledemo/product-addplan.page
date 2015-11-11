@@ -29,16 +29,8 @@ return format;
 
 
 	$(document).ready(function(){
-	
-	
-	
-#*	setInterval(function(event){
-		
-		
-		
-	},100);*#
-	
-	var oldvalue = "";
+
+        var oldvalue = "";
 	$("input[name='planBeginDate']").bind("click",function(){
 		oldvalue = $(this).val();
 		

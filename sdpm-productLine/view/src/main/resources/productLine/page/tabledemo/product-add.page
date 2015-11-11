@@ -88,7 +88,7 @@
 		#@colLabel()产品描述：#end
 		#@formControlDiv("col-8")
 			#@Teditor("content1" "content1" {"initialFrameHeight":"200" ,"placeholder":"说点什么...最少输入10个字符","datatype":
-				"*10-500"})描述一下产品的相关信息...#end
+				"*10-500"})#end
 		#end
 		#@validateDiv("col-2")#end
 	#end
