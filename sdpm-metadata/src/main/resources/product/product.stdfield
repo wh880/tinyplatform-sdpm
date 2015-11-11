@@ -95,5 +95,4 @@
     <description></description>
   </standard-field>
   <standard-field id="67ace46d5ae741c8af5b9cdfc7a72a30" name="storyspec_id" title="需求描述ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
-  <standard-field id="bbdd486351bc40fe9173c0bdce7d0a2e" name="no" title="独立编号" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
 </standard-fields>

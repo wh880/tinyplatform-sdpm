@@ -35,7 +35,7 @@
         #@colLabel()描述：#end
 	#@formControlDiv("col-8")
         #@tinyTextarea("holidayDetail" {"placeholder":"请输入该假期的描述","datatype":"*0-500","nullmsg":
-            "备注不能为空！"})${holiday?.holidayDetail}#end
+            ""})${holiday?.holidayDetail}#end
 	#end
         #@validateDiv("col-2")#end
     #end

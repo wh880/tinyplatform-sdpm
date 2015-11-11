@@ -31,7 +31,7 @@
 			*#
 			
 			#@dialog("myModal")
-				#@dialogHeader()对话框标题#end
+				#@dialogHeader()#end
 				#@dialogBody()<p>对话框内容…</p>#end
 				#@dialogFooter()
 					#@buttonEnsure()确定#end

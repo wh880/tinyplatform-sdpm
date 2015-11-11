@@ -3,7 +3,7 @@
 #for(run :runsPager?.records)
 					#@tr()
 						#@td()<input type="checkbox" value="${run?.testRunId}" name="idCheck">#end
-						#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/testCase/case/viewInfo?id=${run?.caseId}">${run?.caseId}</a>#end
+						#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/testCase/case/viewInfo?id=${run?.caseId}">${run?.no}</a>#end
 						#@td()${getDict("casePriority",run?.priority)}#end
 						#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/testCase/case/viewInfo?id=${run?.caseId}">${run?.caseTitle}</a>#end
 						#@td()${getDict("caseType",run?.caseType)}#end

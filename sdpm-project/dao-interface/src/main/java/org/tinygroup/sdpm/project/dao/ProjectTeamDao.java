@@ -24,4 +24,5 @@ import java.util.List;
 public interface ProjectTeamDao extends BaseDao<ProjectTeam, Integer> {
 
     public List<ProjectTeam> findByProjectId(Integer projectId);
+    public List<ProjectTeam> findByProductId(Integer productId);
 }

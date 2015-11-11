@@ -85,6 +85,24 @@ public class QualityTestRun implements Serializable {
 
 	private String priority;
 
+	private Integer storyId;
+
+	private Integer no;
+
+	public Integer getNo() {
+		return no;
+	}
+
+	public void setNo(Integer no) {
+		this.no = no;
+	}
+
+	public Integer getStoryId() {
+		return storyId;
+	}
+	public void setStoryId(Integer storyId) {
+		this.storyId = storyId;
+	}
 	public String getCaseType() {
 		return caseType;
 	}
