@@ -118,13 +118,11 @@
         #end
     ##operationbar end
     #end
-<div id="caseGroup">
     #if(type!="noCase")
 		#include("/testManagement/page/testCase.page")
 	#else
 		#include("/testManagement/page/NoTestCaseStory.page")
 	#end
-</div>
 #end
 
 ##tab end

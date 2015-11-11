@@ -44,7 +44,7 @@
 	});
 	
 </script>
-
+<div id="caseGroup">
 
             #@tinyTable(storyTableId) ##ID为空则系统自动生成 带入参数则取该参数为ID
                 #@div(divBaseClass="tinyheaderTools form-inline")
@@ -174,3 +174,4 @@
             </script>
 
             #end
+</div>

@@ -21,6 +21,7 @@
 	
 
     #@toggleRight()
+    <div id="caseGroup">
 #@tinyTable(testCaseTableId)
 #@div(divBaseClass="tinyheaderTools form-inline")
 			<div class="f col-3">
@@ -80,6 +81,7 @@ user_del(this,'1');
 #end
 ##tinyTable end
 #end
+</div>
 ##toggleright end
 #end
 

@@ -88,7 +88,7 @@
             #@validateDiv("col-2")#end
         #end
         #@elementItem()
-            #@colLabel()<span class="c-red">*</span>试用阶段：#end
+            #@colLabel()<span class="c-red">*</span>适用阶段：#end
             #@formControlDiv("col-8")
                #@div(divClass="col-5")
 					 #@Tselect2F()

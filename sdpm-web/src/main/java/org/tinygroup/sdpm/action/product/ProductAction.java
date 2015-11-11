@@ -371,4 +371,8 @@ public class ProductAction extends BaseController {
         }
         return resultMap(false, "请输入产品名称");
     }
+    @RequestMapping("addModule")
+    public String toAddModule(){
+        return "/product/page/tabledemo/addModule.pagelet";
+    }
 }

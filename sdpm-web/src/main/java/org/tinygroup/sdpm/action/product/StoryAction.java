@@ -262,12 +262,6 @@ public class StoryAction extends BaseController {
     @ResponseBody
     @RequestMapping("/updateBatch")
     public boolean updateBatch(@RequestBody ProductStory[] stories) {
-        /*
-         * List<ProductStory> productStories = new ArrayList<ProductStory>(); if
-		 * (stories != null && stories.length > 0) { productStories =
-		 * Arrays.asList(stories); } return
-		 * storyService.updateBatchStory(productStories);
-		 */
 
         if (stories.length == 0 || stories == null) {
             return false;
@@ -354,7 +348,6 @@ public class StoryAction extends BaseController {
      */
     @RequestMapping("/findByKeys")
     public String findByKeys(Integer[] storyId, Model model) {
-        // storyId =new Integer[]{33,34,35,36};
         List<ProductStory> storyList = storyService.findStoryList(storyId);
         model.addAttribute("storyList", storyList);
         return "/product/page/tabledemo/product-demand-del.pagelet";
@@ -548,10 +541,6 @@ public class StoryAction extends BaseController {
             carrier.putIdNotIn("productStory.storyId",ids);
         }
         carrier.putSearch("search",searchInfos,groupOperate);
-
-
-
-
 
         Pager<ProductStory> p = storyService.findStoryByCondition(start, pagesize, story, carrier,order, "asc".equals(ordertype) ? true : false);
         model.addAttribute("storyList", p);

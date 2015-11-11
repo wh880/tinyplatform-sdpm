@@ -80,8 +80,8 @@
                         </script>
 
                         #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH +adminPath}/product/addproduct/addition "
-                                          class="r ">添加</a><a
-                                href=" ${TINY_CONTEXT_PATH +adminPath}/product/allproduct/addition">全部</a>#end
+                                          class="r ">添加</a>
+                            <a href=" ${TINY_CONTEXT_PATH +adminPath}/product/allproduct/addition">全部</a>#end
                     #end
                 </div>
                 <div class="col-7">
@@ -92,6 +92,7 @@
                                 "systemModel","data":"moduleType=product","relateElem":
                                 "relateModelTwo"}) ##,"multiple":"multiple"加上为多选项
                             #end
+                            #@Tselect2Fix() #@aModal("#myModal" "" "1000" "500" "btn-class" adminPath+"/product/addModule")添加#end#end
                         #end
                     </div>
                 </div>
@@ -294,7 +295,6 @@
     #end
 </div>
 #end
-
 
 
     <script type="text/javascript">

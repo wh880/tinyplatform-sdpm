@@ -431,7 +431,7 @@ public class ModuleAction extends BaseController {
             Map<String, Object> mapTop = Maps.newHashMap();
             mapTop.put("id", "p" + p.getProductId());
             mapTop.put("pId", 0);
-            mapTop.put("open", false);
+            mapTop.put("open", true);
             if ("doc".equals(type)) {
                 mergeModule(systemModules, mapList, "p" + p.getProductId().toString(),nameOrTitle, true, true);
             } else {
@@ -472,4 +472,5 @@ public class ModuleAction extends BaseController {
         }
         moduleService.deleteById(id);
     }
+
 }

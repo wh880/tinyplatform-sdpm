@@ -76,7 +76,7 @@
                                            $("#group").on("click",function(){
                                                   $.ajax({
                                                      type: "get",
-                                                     url: "${TINY_CONTEXT_PATH+adminPath}/quality/testCase/group?productId=${qualityProductId}",
+                                                     url: "${TINY_CONTEXT_PATH+adminPath}/quality/testCase/group?productId=${qualityProductId}&testtaskId=${testversionId}",
                                                      dataType:"html",
                                                      success: function(data){
                                                          $("#caseGroup").html(data);
@@ -117,7 +117,6 @@
     ##operationbar end
     #end
 ##tabbody end
-    <div id="caseGroup">
 #@toggleBox({"class":"open"})
 	#@toggleLeft({"class":"aclass"})
 		#@settoggleLeftTitle()#for(product : ProductUtils.getProductList())
@@ -138,6 +137,7 @@
 	#end
 
     #@toggleRight()
+    <div id="caseGroup">
 #@tinyTable(testCaseTableId)
 #@div(divBaseClass="tinyheaderTools")
 	<div class="f col-5">
@@ -203,10 +203,11 @@ user_del(this,'1');
 ##tinyTable end
 #end
 ##toggleright end
+</div>
 #end
 ##togglebox end
 #end
-</div>
+
 ##tab end
 #end
 <script type="text/javascript">

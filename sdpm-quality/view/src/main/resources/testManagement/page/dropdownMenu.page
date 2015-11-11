@@ -1,90 +1,90 @@
 #import("/org/tinygroup/publicComponent/macro/navselect.component")
 #set(qualityProductIdTemp = qualityProductId,qualityProductId=qualityProductId?:ProductUtils.getAllProductListByUser()?.get(0)?.productId)
 #@navSelect2("product" "product")
-#@navSelect2Nav()
-	#if(!qualityProductIdTemp&&qualityProductId)
-    <script type="text/javascript">
-        $(function(){
-            $.cookie('qualityProductId', "${qualityProductId}", {path: "/"});
-        })
-    </script>
-	#end
+    #@navSelect2Nav()
+        #if(!qualityProductIdTemp&&qualityProductId)
+        <script type="text/javascript">
+            $(function(){
+                $.cookie('qualityProductId', "${qualityProductId}", {path: "/"});
+            })
+        </script>
+        #end
 
-	#if(qualityProductId&&ProductUtils.getAllProductListByUser()?.size()>0)
-			#set(finded = 0)
+        #if(qualityProductId&&ProductUtils.getAllProductListByUser()?.size()>0)
+            #set(finded = 0)
 
-		#for(product : ProductUtils.getAllProductListByUser())
-				#if(product?.productId == qualityProductId)
-					<span id="productNameOnTop" value="${qualityProductId}">${product?.productName}</span>
-					#set(finded=1)
-				#end
-			#end
-			#if(finded==0)
-			<script type="text/javascript">
-				$.removeCookie('qualityProductId',{path:"/"})
-				//window.location.href='http://localhost:8989/sdpm-web/a/project/task/index';
-				window.location.reload();
-			</script>
-			#end
-		#else
-			#if(ProductUtils.getAllProductListByUser()?.size()==0)
-			<script type="text/javascript">
-					#set(msg="目前没有产品，现在将前往添加。")
+            #for(product : ProductUtils.getAllProductListByUser())
+            #if(product?.productId == qualityProductId)
+            <span id="productNameOnTop" value="qualityProductId">${product?.productName}</span>
+                #set(finded=1)
+            #end
+        #end
+        #if(finded==0)
+        <script type="text/javascript">
+            $.removeCookie('qualityProductId',{path:"/"})
+            //window.location.href='http://localhost:8989/sdpm-web/a/project/task/index';
+            window.location.reload();
+        </script>
+        #end
+    #else
+        #if(ProductUtils.getAllProductListByUser()?.size()==0)
+        <script type="text/javascript">
+                #set(msg="目前没有产品，现在将前往添加。")
 
-					#if(ProductUtils.getProductList().size()>0)
-						#set(msg="目前没有你可访问的产品，现在将前往添加。")
-					#end
-				$(function(){
-					var url = window.location.pathname;
-					if(url.indexOf("addproduct")<0){
-						layer.msg('${msg}<div style="text-align:center"><a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition"><span id="showTime">5</span>秒后前往</a></div>',5,-1,function(){
-							window.location.href = "${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition";
-						});
-						var timeVal=5;
-						function changeTimeVal(){
-							$("#showTime").html(--timeVal);
-							window.setTimeout(function(){
-								changeTimeVal();
-							},1000);
-						}
-						changeTimeVal();
-					}
-				})
-			</script>
-			#end
-		#end
+                #if(ProductUtils.getProductList().size()>0)
+                    #set(msg="目前没有你可访问的产品，现在将前往添加。")
+                #end
+            $(function(){
+                var url = window.location.pathname;
+                if(url.indexOf("addproduct")<0){
+                    layer.msg('${msg}<div style="text-align:center"><a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition"><span id="showTime">5</span>秒后前往</a></div>',5,-1,function(){
+                        window.location.href = "${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition";
+                    });
+                    var timeVal=5;
+                    function changeTimeVal(){
+                        $("#showTime").html(--timeVal);
+                        window.setTimeout(function(){
+                            changeTimeVal();
+                        },1000);
+                    }
+                    changeTimeVal();
+                }
+            })
+        </script>
+        #end
+    #end
 
 <span class="caret"></span>#end
 #@navSelect2Body()
-		#@navSelect2Data()
-			<option value=""></option>
-			<optgroup label="产品">
+    #@navSelect2Data()
+    <option value=""></option>
+    <optgroup label="产品">
 
-			#for(product : ProductUtils.getAllProductListByUser())
-					#if(product?.deleted==0)
-					<option value="${product?.productId}">${product?.productName}</option>
-					#end
-				#end
-			</optgroup>
+        #for(product : ProductUtils.getAllProductListByUser())
+        #if(product?.deleted==0)
+            <option value="${product?.productId}">${product?.productName}</option>
+        #end
+    #end
+</optgroup>
 
-		#end
-		#@navSelect2Fix()
+#end
+#@navSelect2Fix()
 
-		<a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition" class="r">增加</a>&nbsp
-		<a href="${TINY_CONTEXT_PATH+adminPath}/product/allproduct/addition">全部</a>&nbsp
-		#end
+<a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition" class="r">增加</a>&nbsp
+<a href="${TINY_CONTEXT_PATH+adminPath}/product/allproduct/addition">全部</a>&nbsp
+#end
 
 #hiddenInput("productIdHidden","productId","","")
 
 <script type="text/javascript">
 
-	$(function(){
-		$("#product-select").on("change",function(){
-			var dataValue = $(this).val();
-			$.cookie('qualityProductId',dataValue,{path:"/"});
-			window.location.reload();
-		});
-	});
+    $(function(){
+        $("#product-select").on("change",function(){
+            var dataValue = $(this).val();
+            $.cookie('qualityProductId',dataValue,{path:"/"});
+            window.location.reload();
+        });
+    });
 
 </script>
 #end
