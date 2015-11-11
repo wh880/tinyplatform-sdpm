@@ -25,9 +25,9 @@
                 <property key="type" value="delete"/>
             </map>
         </menu>
-        <menu id="newpro" parent-id="line-product" name="添加产品" href="/product/addproduct/addition" sort="199"
-              isShow="1" scope="product-new" icon="icon-plus-sign">
-        </menu>
+        <!--<menu id="newpro" parent-id="line-product" name="添加产品" href="/product/addproduct/addition" sort="199"-->
+        <!--isShow="1" scope="product-new" icon="icon-plus-sign">-->
+        <!--</menu>-->
         <menu id="productLine-add" parent-id="line-product" name="添加产品线" href="/productLine/content/add"
               icon="icon-plus-sign"
               sort="200" isShow="1" scope="productLine-right">

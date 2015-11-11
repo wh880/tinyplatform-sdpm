@@ -68,11 +68,10 @@
                     <td>${formatDate(task?.taskDeadLine, "yyyy-MM-dd")}</td>
                     <td>${getDict("taskStatus",task?.taskStatus)}</td>
                     <td>
-                        #foreach(m:menuManager.getScopeMenus("pro-task-op"))
-                            #if(m.id=="pro-task-edit")
-                                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?taskId=${task?.taskId}"
-                                   title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
-                            #end
+                        #set(m=menuManage.getMenu("pro-task-edit"))
+                        #if(m)
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?taskId=${task?.taskId}"
+                               title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
                         #end
                     </td>
                 </tr>

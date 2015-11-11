@@ -129,7 +129,7 @@ public class ReleaseAction extends BaseController {
     public String find(Integer releaseId, Model model) {
         ProductRelease release = releaseService.findRelease(releaseId);
         model.addAttribute("release", release);
-        return "/product/page/tabledemo/product-release-update.pagelet";
+        return "/product/page/tabledemo/product-release-update.page";
     }
 
     @RequestMapping("/find/{forwordPager}")

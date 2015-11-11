@@ -9,17 +9,10 @@
               scope="pro-task-op"/>
         <menu id="pro-task-finish" name="完成" href="/project/task/finish" icon="icon-ok-sign" sort="8" isShow="1"
               scope="pro-task-op"/>
-        <menu id="pro-task-close" name="关闭" href="/project/task/close" icon="icon-off" sort="6" isShow="1"
-              scope="pro-task-op"/>
         <menu id="pro-task-edit" name="编辑" href="/project/task/edit" icon="icon-pencil" sort="4" isShow="1"
               scope="pro-task-op"/>
-
-        <menu id="task-menu" name="任务菜单1" href="/project/task/index.page" icon="" sort="1" isShow="1">
-            <menu id="pro-task-input" sort="15" isShow="1"
-                  scope="pro-taskmenu-op"/>
-            <menu id="pro-task-output"  sort="10" isShow="1"
-                  scope="pro-taskmenu-op"/>
-        </menu>
+        <menu id="pro-task-close" name="关闭" href="/project/task/close" icon="icon-off" sort="6" isShow="1"
+              scope="pro-task-op"/>
 
         <menu id="task-group" name="分组查询" icon="" sort="10">
             <menu id="task-group-story" icon="" href="/project/task/grouping?type=1" sort="100" name="需求分组"
@@ -36,8 +29,6 @@
                   scope="task-group-menu"/>
             <menu id="task-group-closedBy" icon="" href="/project/task/grouping?type=7" sort="40" name="关闭者分组"
                   scope="task-group-menu"/>
-            <!--<menu id="task-group-story" icon="" href="/project/task/grouping" sort="" name="" scope="task-group-menu"/>-->
-            <!--<menu id="task-group-story" icon="" href="/project/task/grouping" sort="" name="" scope="task-group-menu"/>-->
         </menu>
 
         <menu id="task-menu2" name="任务菜单2" href="/project/task/index.page" icon="" sort="1" isShow="1">
@@ -61,27 +52,25 @@
         </menu>
 
         <menu id="task-Info" name="详情" href="/project/task/IDLinkremark.page" icon="" sort="1" isShow="1">
-            <menu id="pro-Info-call" name="指派" href="/project/task/call" icon="icon-hand-right" sort="20" isShow="1"
-                  scope="pro-taskInfo-op"/>
-            <menu id="pro-Info-start" name="开始" href="/project/task/start" icon="icon-play" sort="15" isShow="1"
-                  scope="pro-taskInfo-op"/>
-            <menu id="pro-Info-note" name="日志" href="/system/effort/list" icon="icon-time" sort="10" isShow="1"
-                  scope="pro-taskInfo-op"/>
-            <menu id="pro-Info-finish" name="完成" href="/project/task/finish" icon="icon-ok-sign" sort="8" isShow="1"
-                  scope="pro-taskInfo-op"/>
-            <menu id="pro-Info-close" name="取消" href="/project/task/cancel" icon="icon-off" sort="6" isShow="1"
-                  scope="pro-taskInfo-op"/>
+            <!--<menu id="pro-Info-call" name="指派" href="/project/task/call" icon="icon-hand-right" sort="20" isShow="1"-->
+            <!--scope="pro-taskInfo-op"/>-->
+            <!--<menu id="pro-Info-start" name="开始" href="/project/task/start" icon="icon-play" sort="15" isShow="1"-->
+            <!--scope="pro-taskInfo-op"/>-->
+            <!--<menu id="pro-Info-note" name="日志" href="/system/effort/list" icon="icon-time" sort="10" isShow="1"-->
+            <!--scope="pro-taskInfo-op"/>-->
+            <!--<menu id="pro-Info-finish" name="完成" href="/project/task/finish" icon="icon-ok-sign" sort="8" isShow="1"-->
+            <!--scope="pro-taskInfo-op"/>-->
+            <!--<menu id="pro-Info2-edit" name="编辑" href="/project/task/edit" icon="icon-pencil" sort="4" isShow="1"-->
+            <!--scope="pro-taskInfo-op"/>-->
 
         </menu>
 
         <menu id="task-Info2" name="任务菜单1" href="/project/task/index.page" icon="" sort="1" isShow="1">
-            <menu id="pro-Info2-edit" name="编辑" href="/project/task/edit" icon="icon-pencil" sort="4" isShow="1"
+            <menu id="pro-Info-close" name="取消" href="/project/task/cancel" icon="icon-off" sort="6" isShow="1"
                   scope="pro-taskInfo2-op"/>
             <!--<menu id="pro-Info2-remark" name="备注" href="/project/task/IDLinkremark.page" icon="icon-book" sort="10" isShow="1"-->
             <!--scope="pro-taskInfo2-op"/>-->
             <menu id="pro-Info2-copy" name="复制" href="/project/task/form" icon="icon-copy" sort="8" isShow="1"
-                  scope="pro-taskInfo2-op"/>
-            <menu id="pro-Info2-return" name="返回" href="/project/task/index" icon="icon-reply" sort="4" isShow="1"
                   scope="pro-taskInfo2-op"/>
         </menu>
         <menu id="gantt" name="甘特图" href="/project/task/gantt" icon="" sort="1" isShow="1">

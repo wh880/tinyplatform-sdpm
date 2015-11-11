@@ -17,16 +17,19 @@
             <span class="f">ID:${task.taskId}&nbsp${task.taskName}
             </span>
             <span class="r">
-                #foreach(m:menuManager.getScopeMenus("pro-taskInfo-op"))
-                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?taskId=${task.taskId}"
-                       title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
+                #foreach(m:menuManager.getScopeMenus("pro-task-op"))
+                    #if(m.id!="pro-task-close")
+                        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?taskId=${task.taskId}"
+                           title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
+                    #end
                 #end
 
                 #foreach(m:menuManager.getScopeMenus("pro-taskInfo2-op"))
                     <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?taskId=${task.taskId}"
                        title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
                 #end
-
+                <a href="javascript :;" onclick="javascript:history.back(-1);" title="返回">#buttonIcon(iconClass=
+                    "icon-reply")</a>
                 #set(m1=menuManager.getMenu("pro-Info-close"))
             </span>
                 #div(divClass="clearfix")
@@ -58,15 +61,18 @@
     #end
     #history(adminPath+"/system/action/ajax/history?actionObjectType=task&actionObjectId="+task?.taskId)
     <center>
-        #foreach(m:menuManager.getScopeMenus("pro-taskInfo-op"))
-            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?taskId=${task.taskId}"
-               title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
+        #foreach(m:menuManager.getScopeMenus("pro-task-op"))
+            #if(m.id!="pro-task-close")
+                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?taskId=${task.taskId}"
+                   title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
+            #end
         #end
         #foreach(m:menuManager.getScopeMenus("pro-taskInfo2-op"))
             <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?taskId=${task.taskId}"
                title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
         #end
-        #set(m1=menuManager.getMenu("pro-Info-close"))
+        <a href="javascript :;" onclick="javascript:history.back(-1);" title="返回">#buttonIcon(iconClass=
+            "icon-reply")</a>
     </center>
 </div>
 <div style="width:30%;float:right">

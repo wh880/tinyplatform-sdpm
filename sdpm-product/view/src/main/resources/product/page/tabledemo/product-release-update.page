@@ -29,14 +29,10 @@
        #@formControlDiv("col-4")
 			#@Tselect2F()
                 #@Tselect2Body("buildId" release?.buildId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-
                 #end
-
                 <script>
-
                    ajaxRead("${sid}", "buildId", "buildId", "buildName", "/project/version/buildList?buildProduct=${cookieProductId}&from=product");
                 </script>
-
                 #@Tselect2Fix()
                     <a href="${TINY_CONTEXT_PATH}/a/org/user/form">增加</a>
                     <a href="${TINY_CONTEXT_PATH}/a/org/user/list" class="r">全部</a>
