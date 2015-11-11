@@ -8,10 +8,14 @@
 
     <span class="f">
         #if(!type)
-            <a val="all" href="${TINY_CONTEXT_PATH+adminPath}/productLine/to?status=1" class="${status=="1"?"active_btn":""}">全部</a>
-            <a val="user" href="${TINY_CONTEXT_PATH+adminPath}/productLine/to?status=2"  class="${status=="2"?"active_btn":""}">归我所属</a>
-            <a val="chargeBy" href="${TINY_CONTEXT_PATH+adminPath}/productLine/to?status=3"  class="${status=="3"?"active_btn":""}">由我负责</a>
-            <a val="deliverBy" href="${TINY_CONTEXT_PATH+adminPath}/productLine/to?status=4"  class="${status=="4"?"active_btn":""}">由我交付</a>
+            #set(m=menuManager.getMenu("productLine-view-all"))
+            #if(m)
+                <a title="${m.name}" class="ml-5" href="${TINY_CONTEXT_PATH +adminPath}${m.href}">${m.name}</a>
+            #end
+        ##            <a val="all" href="${TINY_CONTEXT_PATH+adminPath}/productLine/to?status=1" class="${status==" 1"?"active_btn":""}">全部</a>
+            <a val="user" href="${TINY_CONTEXT_PATH+adminPath}/productLine/to?status=2" class="${status==" 2"?"active_btn":""}">归我所属</a>
+            <a val="chargeBy" href="${TINY_CONTEXT_PATH+adminPath}/productLine/to?status=3" class="${status==" 3"?"active_btn":""}">由我负责</a>
+            <a val="deliverBy" href="${TINY_CONTEXT_PATH+adminPath}/productLine/to?status=4" class="${status==" 4"?"active_btn":""}">由我交付</a>
         #end
     </span>
     <span class="r">

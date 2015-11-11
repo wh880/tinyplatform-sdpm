@@ -16,24 +16,18 @@
 			</span>
         <span class="r">
 
-			#foreach(m:menuManager?.getScopeMenus("overview-cl"))
-			#set(url=eval(m?.href))
-             
-                #if(m?.id=="product-overview-close")
-                        #@iconOperations("#myModal" "icon-off" "关闭" "865" "448" "/product/page/tabledemo/overview-close.pagelet""ml-5")关闭#end
-                #elseif(m?.id=="product-overview-back")
-                       <a href="${url}" title="${m?.name}">#buttonIcon(iconClass=m?.icon)</a>
-                #elseif(m.id=="product-overview-editor")
-                    <a href="${TINY_CONTEXT_PATH +adminPath}${url}" title="${m?.name}">#buttonIcon(iconClass=m?.icon)</a>
-
-
+            #foreach(m:menuManager.getScopeMenus("allproduct-op"))
+                #set(url=eval(m?.href))
+                #if(m.map.type=="close")
+                    #iconOperations("#myModal" m?.icon "关闭" "865" "500" adminPath+url "ml-5")&nbsp;
+                #elseif(m.map.type=="editor")
+                    <a class="jump" href="${TINY_CONTEXT_PATH +adminPath}${eval(url)}"
+                       title="编辑">#buttonIcon(iconClass=m?.icon)</a>&nbsp;
                 #end
             #end
-
-        #*<a href="${TINY_CONTEXT_PATH +adminPath}/product/page/tabledemo/product-module-editor.page" title="编辑">#buttonIcon(iconClass="icon-pencil")</a>
-        <a href="${TINY_CONTEXT_PATH +adminPath}/product/page/project/togglebox.page" title="返回">#buttonIcon(iconClass="icon-reply")</a>
-*#
-			</span>
+            <a href="javascript :;" onclick="javascript:history.back(-1);" title="返回">#buttonIcon(iconClass=
+                "icon-reply")</a>
+        </span>
         #end
     #end
 
@@ -55,19 +49,17 @@
 
     <div style="text-align:center;margin:auto">
 	        <span class="c">
-                #foreach(m:menuManager?.getScopeMenus("overview-cl"))
-                    &nbsp;
-				#set(url=eval(m?.href))
-	                #if(m?.id=="product-overview-close")
-	                        #@iconOperations("#myModal" "icon-off" "关闭" "865" "448" "/product/page/tabledemo/overview-close.pagelet""ml-5")关闭#end
-	                #elseif(m?.id=="product-overview-back")
-	                       <a href="${url}" title="${m?.name}">#buttonIcon(iconClass=m?.icon)</a>
-	                #elseif(m?.id=="product-overview-editor")
-                        <a href="${TINY_CONTEXT_PATH +adminPath}${url}"
-                           title="${m?.name}">#buttonIcon(iconClass=m?.icon)</a>
-	                #end
-	            #end
-
+                #foreach(m:menuManager.getScopeMenus("allproduct-op"))
+                    #set(url=eval(m?.href))
+                    #if(m.map.type=="close")
+                        #iconOperations("#myModal" m?.icon "关闭" "865" "500" adminPath+url "ml-5")&nbsp;
+                    #elseif(m.map.type=="editor")
+                        <a class="jump" href="${TINY_CONTEXT_PATH +adminPath}${eval(url)}"
+                           title="编辑">#buttonIcon(iconClass=m?.icon)</a>&nbsp;
+                    #end
+                #end
+                <a href="javascript :;" onclick="javascript:history.back(-1);" title="返回">#buttonIcon(iconClass=
+                    "icon-reply")</a>
             </span>
     </div>
 

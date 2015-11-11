@@ -78,24 +78,27 @@
             #@td()${getDict("storyStatus",story?.storyStatus)}#end
             #@td()${getDict("storyStage",story?.storyStage)}#end
             #@td()
-                 #foreach(m:menuManager?.getScopeMenus("product-de"))
-                     #set(url=eval(m?.href))
-                     #if(m?.id=="product-demand-review")
+                #foreach(m:menuManager?.getScopeMenus("pro_demand_log"))
+                    #if(m?.id=="demand-overview")
                          #if(Integer.parseInt(story?.storyStatus)==0||Integer.parseInt(story?.storyStatus)==3)
-                         <a title="${m?.name}" class="ml-5" href="${TINY_CONTEXT_PATH +adminPath}${url}"><i class="${m?.icon}"></i></a>
+                         <a title="${m?.name}" class="ml-5"
+                            href="${TINY_CONTEXT_PATH +adminPath}${m.href}${story?.storyId}"><i class="${m?.icon}"></i></a>
                          #else
                          <span class="ml-5" style="color:grey"><i class="${m?.icon}" /></span>
                          #end
-                     #elseif(m?.id=="product-demand-close")
+                    #elseif(m?.id=="demand_close")
                          #if(Integer.parseInt(story?.storyStatus)!=2)
-                         <a title="${m?.name}" class="ml-5" href="${TINY_CONTEXT_PATH +adminPath}${url}"><i class="${m?.icon}"></i></a>
+                         <a title="${m?.name}" class="ml-5"
+                            href="${TINY_CONTEXT_PATH +adminPath}${m.href}${story?.storyId}"><i class="${m?.icon}"></i></a>
                          #else
                          <span class="ml-5" style="color:grey"><i class="${m?.icon}" /></span>
                          #end
-                     #elseif(m?.id=="add-case")
+                    #elseif(m?.id=="demand_set")
+                        #set(url=eval(m?.href))
                      <a title="${m?.name}" class="caseAdd ml-5" href="${TINY_CONTEXT_PATH +adminPath}${url}?storyId=${story?.storyId}${story?.moduleId?'&moduleId='+story?.moduleId:''}"><i class="${m?.icon}"></i></a>
                      #else
-                     <a title="${m?.name}" class="ml-5" href="${TINY_CONTEXT_PATH +adminPath}${url}"><i class="${m?.icon}"></i></a>
+                     <a title="${m?.name}" class="ml-5"
+                        href="${TINY_CONTEXT_PATH +adminPath}${m.href}${story?.storyId}"><i class="${m?.icon}"></i></a>
                      #end
                  #end
             #end
