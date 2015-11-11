@@ -53,7 +53,7 @@
                 <td>${p?.estimate}</td>
                 <td>${p?.consumed}</td>
                 <td>${p?.estimate-p?.consumed}</td>
-                <td>${((p?.estimate-p?.consumed)/p?.estimate)*100}%</td>
+                <td>${(p?.estimate-p?.consumed)==0?0:(((p?.estimate-p?.consumed)/p?.estimate)*100)}%</td>
                 #end
             #end
         #end

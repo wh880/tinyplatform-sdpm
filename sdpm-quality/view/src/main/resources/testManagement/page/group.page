@@ -20,14 +20,52 @@
         #foreach(story : storyMap)
             <tr class="show-group" data-tr="data-g-${story?.key}">
                 <td>
-                    <span class="glyphicon glyphicon-chevron-right">
+                    <span class="glyphicon glyphicon-chevron-right glyphicon-chevron-down">
                         ${story?.value?.storyTitle}
                     </span>
                 </td>
                 <td colspan="11"></td>
             </tr>
-            #foreach(c : casesMap.get(story?.key))
-                <tr class="data-g-${story?.key} hide">
+            #foreach(run : runsMap?.get(story?.key))
+                <tr class="data-g-${story?.key}">
+                    #@td()#end
+                    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/testCase/case/viewInfo?id=${run?.caseId}">${run?.no}</a>#end
+                    #@td()${getDict("casePriority",run?.priority)}#end
+                    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/testCase/case/viewInfo?id=${run?.caseId}">${run?.caseTitle}</a>#end
+                    #@td()${getDict("caseType",run?.caseType)}#end
+                    #@td()${run?.testRunAssignedTo?UserUtils.getUserById(run?.testRunAssignedTo)?.orgUserRealName:""}#end
+                    #@td()${run?.testRunLastRunner?UserUtils.getUserById(run?.testRunLastRunner)?.orgUserRealName:""}#end
+                    #@td()${run?.testRunLastRunDate?formatDate(run?.testRunLastRunDate,'yyyy-MM-dd HH:mm:ss'):""}#end
+                    #@td()${getDict("caseResult",run?.testRunLastRunResult)}#end
+                    #@td()${getDict("caseStatus",run?.testRunStatus)}#end
+                    #@td()
+                        #foreach(m:menuManager.getScopeMenus("version-case-op"))
+                            #if(m.id=="tverremove")
+                                <a class="deleteRun" href="javascript:void(0)" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+                            #elseif(m.id=="tvertobug")
+                                #if("2".equals(run?.testRunLastRunResult))
+                                    #iconOperations("#myModal" m.icon m.name "865" "400" adminPath+m.href+"?caseId="+run?.caseId+"&caseVersion="+run?.caseVersion+"&runId="+run?.testRunId "ml-1")
+                                #else
+                                    <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>
+                                #end
+                            #else
+                                #if(m.id=="tvergo")
+                                    #if(run?.testRunAssignedTo == UserUtils.getUserId())
+                                        #iconOperations("#myModal" m.icon m.name "865" "400" adminPath+m.href+"?caseId="+run?.caseId+"&from=task&runId="+run?.testRunId+"&caseVersion="+run?.caseVersion "ml-1")
+                                    #else
+                                        <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>
+                                    #end
+                                #else
+                                    #iconOperations("#myModal" m.icon m.name "865" "400" adminPath+m.href+"?caseId="+run?.caseId+"&from=task&runId="+run?.testRunId+"&caseVersion="+run?.caseVersion "ml-1")
+                                #end
+                            #end
+                        #end
+
+                    #end
+                </tr>
+            #end
+            #foreach(c : casesMap?.get(story?.key))
+                <tr class="data-g-${story?.key}">
                     #@td()#end
                     #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/testCase/case/viewInfo?id=${c?.caseId}">${c?.no}</a>#end
                     #@td()${getDict("casePriority",c?.priority)}#end
@@ -63,7 +101,7 @@
 <script>
     $(function () {
         $("#group-Table").off("click", ">tbody>tr>td").on("click", ".show-group", function (e) {
-            $(this).find(".glyphicon").toggleClass("glyphicon-chevron-right glyphicon-chevron-down");
+            $(this).find(".glyphicon").toggleClass("glyphicon-chevron-down");
             $("#group-Table>tbody").children("tr." + $(this).attr("data-tr")).toggle();
         });
     })

@@ -126,7 +126,7 @@
 #end
 
 #@dialog("myModal")
-    #@dialogHeader()对话框标题#end
+    #@dialogHeader()#end
     #@dialogBody()<p>对话框内容…</p>#end
     #@dialogFooter()
         #@buttonCancel()关闭#end

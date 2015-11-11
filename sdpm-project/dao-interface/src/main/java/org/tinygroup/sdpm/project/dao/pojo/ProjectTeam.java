@@ -31,6 +31,12 @@ public class ProjectTeam implements Serializable {
 	 */
 	private Integer id;
 
+	/**
+	 * 产品id
+	 *
+	 */
+	private Integer productId;
+
 	/** 
 	 * 项目id
 	 * 
@@ -66,6 +72,14 @@ public class ProjectTeam implements Serializable {
 	 * 
 	 */
 	private Float teamHours;
+
+	public Integer getProductId() {
+		return productId;
+	}
+
+	public void setProductId(Integer productId) {
+		this.productId = productId;
+	}
 
 	public Integer getId() {
 		return id;

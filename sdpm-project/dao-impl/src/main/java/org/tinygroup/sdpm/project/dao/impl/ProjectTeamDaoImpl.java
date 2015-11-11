@@ -50,12 +50,17 @@ public class ProjectTeamDaoImpl extends TinyDslDaoSupport implements ProjectTeam
 		return getDslSession().fetchList(select, ProjectTeam.class);
 	}
 
-	@LogMethod("add")
+	public List<ProjectTeam> findByProductId(Integer productId) {
+		Select select = selectFrom(PROJECT_TEAMTABLE).where(PROJECT_TEAMTABLE.PRODUCT_ID.eq(productId));
+		return getDslSession().fetchList(select, ProjectTeam.class);
+	}
+
 	public ProjectTeam add(ProjectTeam projectTeam) {
 		return getDslTemplate().insertAndReturnKey(projectTeam, new InsertGenerateCallback<ProjectTeam>() {
 			public Insert generate(ProjectTeam t) {
 				Insert insert = insertInto(PROJECT_TEAMTABLE).values(
 						PROJECT_TEAMTABLE.ID.value(t.getId()),
+						PROJECT_TEAMTABLE.PRODUCT_ID.value(t.getProductId()),
 						PROJECT_TEAMTABLE.PROJECT_ID.value(t.getProjectId()),
 						PROJECT_TEAMTABLE.TEAM_USER_ID.value(t.getTeamUserId()),
 						PROJECT_TEAMTABLE.TEAM_ROLE.value(t.getTeamRole()),
@@ -66,7 +71,6 @@ public class ProjectTeamDaoImpl extends TinyDslDaoSupport implements ProjectTeam
 			}
 		});
 	}
-	@LogMethod("edit")
 	public int edit(ProjectTeam projectTeam) {
 		if (projectTeam == null || projectTeam.getId() == null) {
 			return 0;
@@ -74,6 +78,7 @@ public class ProjectTeamDaoImpl extends TinyDslDaoSupport implements ProjectTeam
 		return getDslTemplate().update(projectTeam, new UpdateGenerateCallback<ProjectTeam>() {
 			public Update generate(ProjectTeam t) {
 				Update update = update(PROJECT_TEAMTABLE).set(
+						PROJECT_TEAMTABLE.PRODUCT_ID.value(t.getProductId()),
 						PROJECT_TEAMTABLE.PROJECT_ID.value(t.getProjectId()),
 						PROJECT_TEAMTABLE.TEAM_USER_ID.value(t.getTeamUserId()),
 						PROJECT_TEAMTABLE.TEAM_ROLE.value(t.getTeamRole()),
@@ -85,7 +90,6 @@ public class ProjectTeamDaoImpl extends TinyDslDaoSupport implements ProjectTeam
 			}
 		});
 	}
-	@LogMethod("deleteByKey")
 	public int deleteByKey(Integer pk) {
 		if (pk == null) {
 			return 0;
@@ -96,7 +100,6 @@ public class ProjectTeamDaoImpl extends TinyDslDaoSupport implements ProjectTeam
 			}
 		});
 	}
-	@LogMethod("deleteByKeys")
 	public int deleteByKeys(Integer... pks) {
 		if (pks == null || pks.length == 0) {
 			return 0;
@@ -127,6 +130,7 @@ public class ProjectTeamDaoImpl extends TinyDslDaoSupport implements ProjectTeam
 			public Select generate(ProjectTeam t) {
 				Select select = selectFrom(PROJECT_TEAMTABLE).where(
 						and(
+								PROJECT_TEAMTABLE.PRODUCT_ID.eq(t.getProductId()),
 								PROJECT_TEAMTABLE.PROJECT_ID.eq(t.getProjectId()),
 								PROJECT_TEAMTABLE.TEAM_USER_ID.eq(t.getTeamUserId()),
 								PROJECT_TEAMTABLE.TEAM_ROLE.eq(t.getTeamRole()),
@@ -147,6 +151,7 @@ public class ProjectTeamDaoImpl extends TinyDslDaoSupport implements ProjectTeam
 			public Select generate(ProjectTeam t) {
 				Select select = MysqlSelect.selectFrom(PROJECT_TEAMTABLE).where(
 						and(
+								PROJECT_TEAMTABLE.PRODUCT_ID.eq(t.getProductId()),
 								PROJECT_TEAMTABLE.PROJECT_ID.eq(t.getProjectId()),
 								PROJECT_TEAMTABLE.TEAM_USER_ID.eq(t.getTeamUserId()),
 								PROJECT_TEAMTABLE.TEAM_ROLE.eq(t.getTeamRole()),
@@ -166,6 +171,7 @@ public class ProjectTeamDaoImpl extends TinyDslDaoSupport implements ProjectTeam
 
 			public Insert generate() {
 				return insertInto(PROJECT_TEAMTABLE).values(
+						PROJECT_TEAMTABLE.PRODUCT_ID.value(new JdbcNamedParameter("productId")),
 						PROJECT_TEAMTABLE.PROJECT_ID.value(new JdbcNamedParameter("projectId")),
 						PROJECT_TEAMTABLE.TEAM_USER_ID.value(new JdbcNamedParameter("teamUserId")),
 						PROJECT_TEAMTABLE.TEAM_ROLE.value(new JdbcNamedParameter("teamRole")),
@@ -188,6 +194,7 @@ public class ProjectTeamDaoImpl extends TinyDslDaoSupport implements ProjectTeam
 
 			public Update generate() {
 				return update(PROJECT_TEAMTABLE).set(
+						PROJECT_TEAMTABLE.PRODUCT_ID.value(new JdbcNamedParameter("productId")),
 						PROJECT_TEAMTABLE.PROJECT_ID.value(new JdbcNamedParameter("projectId")),
 						PROJECT_TEAMTABLE.TEAM_USER_ID.value(new JdbcNamedParameter("teamUserId")),
 						PROJECT_TEAMTABLE.TEAM_ROLE.value(new JdbcNamedParameter("teamRole")),
@@ -198,7 +205,6 @@ public class ProjectTeamDaoImpl extends TinyDslDaoSupport implements ProjectTeam
 			}
 		});
 	}
-	@LogMethod("batchDelete")
 	public int[] batchDelete(List<ProjectTeam> projectTeams) {
 		if (CollectionUtil.isEmpty(projectTeams)) {
 			return new int[0];
@@ -208,6 +214,7 @@ public class ProjectTeamDaoImpl extends TinyDslDaoSupport implements ProjectTeam
 			public Delete generate() {
 				return delete(PROJECT_TEAMTABLE).where(and(
 						PROJECT_TEAMTABLE.ID.eq(new JdbcNamedParameter("id")),
+						PROJECT_TEAMTABLE.PRODUCT_ID.eq	(new JdbcNamedParameter("productId")),
 						PROJECT_TEAMTABLE.PROJECT_ID.eq(new JdbcNamedParameter("projectId")),
 						PROJECT_TEAMTABLE.TEAM_USER_ID.eq(new JdbcNamedParameter("teamUserId")),
 						PROJECT_TEAMTABLE.TEAM_ROLE.eq(new JdbcNamedParameter("teamRole")),
@@ -217,7 +224,6 @@ public class ProjectTeamDaoImpl extends TinyDslDaoSupport implements ProjectTeam
 			}
 		});
 	}
-	@LogMethod("addOrderByElements")
 	private Select addOrderByElements(Select select, OrderBy... orderBies) {
 		List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
 		for (int i = 0; orderBies != null && i < orderBies.length; i++) {

@@ -33,6 +33,12 @@ public class ProjectTeamTable extends Table {
 	 */
 	public final Column ID = new Column(this, "id");
 
+	/**
+	 * 产品id
+	 *
+	 */
+	public final Column PRODUCT_ID = new Column(this, "product_id");
+
 	/** 
 	 * 项目id
 	 * 

@@ -1,0 +1,43 @@
+#!set(activeTitle="团队管理",activeMenuId=currentPageId)
+#*<style>
+.tabLayout .tabBar span a{color:#333}
+.tabLayout .tabBar .Current a{color:#fff}
+.operationbar{border-top:none;background:#f9fafe;padding:6px 5px 6px 10px;}
+</style>*#
+#set(name="team")
+#@div()
+    #@tabWithInit("tab_demo" "optionsBox")
+        #@tabBodyCol("ptop-5")
+            #@div(divClass="operationbar")
+            <span class="f">
+					团队成员
+				</span>
+            <span class="r">
+                #foreach(m:menuManager.getScopeMenus("pro-teammenu-op"))
+                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
+                #end
+            </span>
+                #div(divClass="clearfix")
+            #end
+            #@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
+                #@div(divBaseClass="tinyheaderTools form-inline")
+                    #setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置
+                #end
+                #@tinyTableContent(TINY_CONTEXT_PATH+adminPath+"/project/team/find") ##取数据地址 总数据
+                    #@thead()
+                        #@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
+                            #@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
+                            #@tinyTh({"class":"sorting","rel":"team_account"})用户#end
+                            #@tinyTh({"class":"sorting","rel":"team_role"})角色#end
+                            #@tinyTh({"class":"sorting","rel":"team_join"})加盟日#end
+                            #@tinyTh({"class":"sorting","rel":"team_days"})可用工日#end
+                            #@tinyTh({"class":"sorting","rel":"team_hours"})可用工日/天#end
+                            #@tinyTh({"class":"","rel":""})总计#end
+                            #@tinyTh({"class":"","rel":""})操作#end
+                        #end
+                    #end
+                #end
+            #end
+        #end
+    #end
+#end

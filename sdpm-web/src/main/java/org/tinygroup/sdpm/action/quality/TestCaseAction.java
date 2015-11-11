@@ -263,25 +263,49 @@ public class TestCaseAction extends BaseController {
 	}
 
 	@RequestMapping("group")
-	public String group(QualityTestCase qualityTestCase,Model model){
+	public String group(QualityTestCase qualityTestCase,Integer testtaskId,Model model){
 		Map<String, ProductStory> storyMap = new HashMap<String, ProductStory>();
 		Map<String, List<QualityTestCase>> casesMap = new HashMap<String, List<QualityTestCase>>();
-		List<QualityTestCase> cases = testCaseService.findTestCaseList(qualityTestCase);
-		for(QualityTestCase testCase : cases){
-			if(!storyMap.containsKey(testCase.getStoryId())){
-				ProductStory story = storyService.findStory(testCase.getStoryId());
-				storyMap.put(String.valueOf(story.getStoryId()),story);
+		Map<String, List<QualityTestRun>> runsMap = new HashMap<String, List<QualityTestRun>>();
+		if(testtaskId!=null){
+			QualityTestRun run = new QualityTestRun();
+			run.setTaskId(testtaskId);
+			List<QualityTestRun> runs = testRunService.findTestRunList(run);
+			for(QualityTestRun run1 : runs){
+				if(!storyMap.containsKey(run1.getStoryId())){
+					ProductStory story = storyService.findStory(run1.getStoryId());
+					if(story!=null){
+						storyMap.put(String.valueOf(story.getStoryId()),story);
+					}
+				}
+				if(!runsMap.containsKey(run1.getStoryId())){
+					runsMap.put(String.valueOf(run1.getStoryId()),new ArrayList<QualityTestRun>());
+					runsMap.get(String.valueOf(run1.getStoryId())).add(run1);
+				}else{
+					runsMap.get(String.valueOf(run1.getStoryId())).add(run1);
+				}
 			}
-			if(!casesMap.containsKey(testCase.getStoryId())){
-				casesMap.put(String.valueOf(testCase.getStoryId()),new ArrayList<QualityTestCase>());
-				casesMap.get(String.valueOf(testCase.getStoryId())).add(testCase);
-			}else{
-				casesMap.get(String.valueOf(testCase.getStoryId())).add(testCase);
+			model.addAttribute("runsMap",runsMap);
+		}else{
+			List<QualityTestCase> cases = testCaseService.findTestCaseList(qualityTestCase);
+			for(QualityTestCase testCase : cases){
+				if(!storyMap.containsKey(testCase.getStoryId())){
+					ProductStory story = storyService.findStory(testCase.getStoryId());
+					if(story!=null){
+						storyMap.put(String.valueOf(story.getStoryId()),story);
+					}
+				}
+				if(!casesMap.containsKey(testCase.getStoryId())){
+					casesMap.put(String.valueOf(testCase.getStoryId()),new ArrayList<QualityTestCase>());
+					casesMap.get(String.valueOf(testCase.getStoryId())).add(testCase);
+				}else{
+					casesMap.get(String.valueOf(testCase.getStoryId())).add(testCase);
+				}
 			}
+			model.addAttribute("casesMap",casesMap);
 		}
 
 		model.addAttribute("storyMap",storyMap);
-		model.addAttribute("casesMap",casesMap);
 		return "/testManagement/page/group.pagelet";
 	}
 

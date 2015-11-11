@@ -27,7 +27,7 @@
     #end
 #end
 #@dialog("myModal")
-    #@dialogHeader()对话框标题#end
+    #@dialogHeader()#end
     #@dialogBody()<p></p>#end
     #@dialogFooter()
     #end
