@@ -1,0 +1,51 @@
+#setTinyItemCount(maxVersion)
+<tr class="">
+    #@td()${case?.no}#end
+    #@td()${case?.caseTitle}#end
+    #@td()${case?.caseVersion}#end
+    #@td()目前版本#end
+</tr>
+#set(i=start+1)
+#while(i<=end)
+<tr class="g-row">
+    #@td()<span class="glyphicon glyphicon-chevron-right">${case?.no}</span>#end
+    #@td()${case?.caseTitle}#end
+    #@td()${i}#end
+    #@td()
+        #if(case?.caseVersion==i)
+            回滚到此版本
+        #else
+            <a href="${TINY_CONTEXT_PATH+adminPath}/quality/testCase/versionRollback?caseId=${case?.caseId}&caseVersion=${i}">回滚到此版本</a>
+        #end
+        #end
+</tr>
+<tr class="hide" ><td colspan="20">
+    <div class="infoContentRap hide">
+        #@tableStriped()
+            #@thead()
+                #@tr()
+                    #@th()编号#end
+                    #@th()步骤#end
+                    #@th()预期 #end
+                #end
+            #end
+            #@tbody()
+##                #if(stepMap.keySet())
+##                    ${stepMap.keySet()}
+##                    ${i}
+##                    ${stepMap.containsKey(i)}
+##                    ${stepMap.i}
+##                #end
+                #for(step:stepMap.get(i))
+                    #@tr()
+                        #@th()${stepFor.index}#end
+                        #@td()${step?.caseStepDesc}#end
+                        #@td()${step?.caseStepExpect}#end
+                    #end
+                #end
+            #end
+        #end
+    </div>
+</td></tr>
+#set(i=i+1)
+#end

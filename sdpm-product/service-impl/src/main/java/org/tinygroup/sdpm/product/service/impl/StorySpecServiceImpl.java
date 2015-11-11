@@ -17,9 +17,9 @@ public class StorySpecServiceImpl implements StorySpecService {
 	@Autowired
 	private StorySpecManager storySpecManager;
 	
-	public ProductStorySpec findStorySpec(Integer storyId) {
+	public ProductStorySpec findStorySpec(Integer storyId,Integer version) {
 
-		return storySpecManager.find(storyId);
+		return storySpecManager.find(storyId,version);
 	}
 
 	public List<ProductStorySpec> findStorySpecList(ProductStorySpec storySpec,String order,String ordertype) {
