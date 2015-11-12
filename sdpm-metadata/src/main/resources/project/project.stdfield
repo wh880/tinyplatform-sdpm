@@ -59,6 +59,7 @@
   <standard-field id="8cd36378dabf44a99afef4d1f7e433a0" name="task_id" title="任务id" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" default="">
     <description></description>
   </standard-field>
+  <standard-field id="2edcaf63d42a4618bb2cac69ebdaca7c" name="task_no" title="编号" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" default="0"/>
   <standard-field id="03ee1372ef3b480681b5aaa5032f35d7" name="task_project" title="任务所属项目" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" default="0"/>
   <standard-field id="dfa99c9c348b4bb6a4aef3b27bfa7bbf" name="task_story" title="任务相关需求" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" default="0"/>
   <standard-field id="7c34fb19edc74d36a42ad2add274e79b" name="task_module" title="模块id" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" default="">
@@ -144,7 +145,7 @@
   <standard-field id="83dabbaef75d4d1fbab0d563afd3c90f" name="taskestimate_account" title="操作人帐号" business-type-id="27ebfcdc558c477da425a46e566d4637" default=""/>
   <standard-field id="e24f8e6ec85e4d1899fd87dacc4082a7" name="taskestimate_work" title="备用字段" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
   <standard-field id="dcaad72616324712a1988f2743e4a0e8" name="team_user_id" title="用户" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
-  <standard-field id="ccae118619c147f2902feffbb66f9c77" name="team_role" title="角色" business-type-id="095e594e1550424b9643c7e2279e85be"/>
+  <standard-field id="ccae118619c147f2902feffbb66f9c77" name="team_role" title="角色" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
   <standard-field id="bab7c0daedc34545a255b9be36aed755" name="team_join" title="加盟日" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff"/>
   <standard-field id="e26d8ad4172d4f6297b5bca12dc6994b" name="team_days" title="可用工时" business-type-id="8068bb7c6e5a4302b60e801f63ca7b35" default="0"/>
   <standard-field id="53e3179919434d0fbef0818a4039f5e1" name="team_hours" title="可用工时" business-type-id="8068bb7c6e5a4302b60e801f63ca7b35" default="0"/>

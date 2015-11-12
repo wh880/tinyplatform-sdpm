@@ -22,8 +22,7 @@ public class RoleMenuAction extends BaseController {
 
     /**
      * 保存菜单的权限
-     *
-     * @param id
+     * @param roleId
      * @param menuId
      * @param parentId
      * @return
@@ -37,8 +36,8 @@ public class RoleMenuAction extends BaseController {
 
     /**
      * 显示角色拥有的权限
-     *
-     * @param id
+     * @param parentId
+     * @param roleId
      * @param model
      * @return
      */
@@ -51,6 +50,5 @@ public class RoleMenuAction extends BaseController {
         model.addAttribute("parentId", parentId);
         return "organization/privilege/privilegeMaintain";
     }
-
 
 }

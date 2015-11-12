@@ -52,7 +52,7 @@ public class ProjectTask implements Serializable {
 	/**
 	 * 编号
 	 */
-	private Integer no;
+	private Integer taskNo;
 
 	/**
 	 * 任务所属项目Id
@@ -236,12 +236,12 @@ public class ProjectTask implements Serializable {
 		this.storySpec = storySpec;
 	}
 
-	public Integer getNo() {
-		return no;
+	public Integer getTaskNo() {
+		return taskNo;
 	}
 
-	public void setNo(Integer no) {
-		this.no = no;
+	public void setTaskNo(Integer taskNo) {
+		this.taskNo = taskNo;
 	}
 
 	public Integer getTaskId() {

@@ -23,6 +23,10 @@ public class TaskManagerImpl implements TaskManager {
     @Autowired
     private ProjectTaskDao taskDao;
 
+    public Integer getMaxNo(Integer projectId) {
+        return taskDao.getMaxNo(projectId);
+    }
+
     public int[] batchAdd(List<ProjectTask> taskList) {
         return taskDao.batchInsert(taskList);
     }

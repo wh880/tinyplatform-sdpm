@@ -11,15 +11,14 @@ import java.util.List;
  */
 public interface TeamManager {
 
-
-    public List<ProjectTeam> find(ProjectTeam team);
+     List<ProjectTeam> find(ProjectTeam team);
     /**
      * 批量添加
      *
      * @param list
      * @return
      */
-    public Integer batchAdd(List<ProjectTeam> list);
+     Integer batchAdd(List<ProjectTeam> list);
 
     /**
      * 批量更新
@@ -27,7 +26,7 @@ public interface TeamManager {
      * @param list
      * @return
      */
-    public Integer batchUpdate(List<ProjectTeam> list);
+     Integer batchUpdate(List<ProjectTeam> list);
     /**
      * 根据主键id查找
      *
@@ -37,26 +36,18 @@ public interface TeamManager {
     ProjectTeam find(int id);
 
     /**
-     * 根据条件查询List
-     *
-     * @param projectId 用于查询条件
-     * @return
-     */
-    List<ProjectTeam> findListAccount(int projectId);
-
-    /**
      * 根据项目id查团队成员
      * @param projectId
      * @return
      */
-    public List<ProjectTeam> findByProjectId(Integer projectId);
+     List<ProjectTeam> findByProjectId(Integer projectId);
 
     /**
      * 根据产品id查团队成员
-     * @param projectId
+     * @param productId
      * @return
      */
-    public List<ProjectTeam> findByProductId(Integer productId);
+     List<ProjectTeam> findByProductId(Integer productId);
     /**
      * 新增有一个成员
      *
@@ -91,5 +82,5 @@ public interface TeamManager {
      * @param asc
      * @return
      */
-    public Pager<ProjectTeam> findPager(ProjectTeam team, Integer start, Integer limit, String order, boolean asc);
+     Pager<ProjectTeam> findPager(ProjectTeam team, Integer start, Integer limit, String order, boolean asc);
 }

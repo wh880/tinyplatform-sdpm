@@ -38,9 +38,6 @@ public class TeamServiceImpl implements TeamService {
         return teamManager.findByProjectId(projectId);
     }
 
-    public List<ProjectTeam> findTeamByProductId(Integer productId) {
-        return teamManager.findByProductId(productId);
-    }
 
     public Pager<ProjectTeam> findPager(ProjectTeam team, Integer start, Integer limit, String order, String ordertype) {
         boolean asc = "asc".equals(ordertype) ? true : false;

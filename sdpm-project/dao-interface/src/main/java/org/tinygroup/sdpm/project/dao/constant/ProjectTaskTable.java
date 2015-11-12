@@ -36,7 +36,7 @@ public class ProjectTaskTable extends Table {
 	 * 任务id
 	 *
 	 */
-	public final Column NO = new Column(this, "no");
+	public final Column TASK_NO = new Column(this, "taskNo");
 
 	/** 
 	 * 任务所属项目

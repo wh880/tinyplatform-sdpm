@@ -21,8 +21,6 @@ import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.jdbctemplatedslsession.callback.*;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
-import org.tinygroup.sdpm.common.log.annotation.LogClass;
-import org.tinygroup.sdpm.common.log.annotation.LogMethod;
 import org.tinygroup.sdpm.project.dao.ProjectTeamDao;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTeam;
 import org.tinygroup.tinysqldsl.*;
@@ -41,7 +39,6 @@ import static org.tinygroup.tinysqldsl.Select.selectFrom;
 import static org.tinygroup.tinysqldsl.Update.update;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 
-@LogClass("team")
 @Repository
 public class ProjectTeamDaoImpl extends TinyDslDaoSupport implements ProjectTeamDao {
 
@@ -224,10 +221,10 @@ public class ProjectTeamDaoImpl extends TinyDslDaoSupport implements ProjectTeam
 			}
 		});
 	}
-	private Select addOrderByElements(Select select, OrderBy... orderBies) {
+	private Select addOrderByElements(Select select, OrderBy... orderByArgs) {
 		List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
-		for (int i = 0; orderBies != null && i < orderBies.length; i++) {
-			OrderByElement tempElement = orderBies[i].getOrderByElement();
+		for (int i = 0; orderByArgs != null && i < orderByArgs.length; i++) {
+			OrderByElement tempElement = orderByArgs[i].getOrderByElement();
 			if (tempElement != null) {
 				orderByElements.add(tempElement);
 			}

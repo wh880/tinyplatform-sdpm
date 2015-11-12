@@ -32,11 +32,6 @@ public class ProjectTable extends Table {
 	 *
 	 */
 	public final Column PROJECT_ID = new Column(this, "project_id");
-	/**
-	 * 编号
-	 *
-	 */
-	public final Column NO = new Column(this, "no");
 
 	/** 
 	 * 是否作为目录
