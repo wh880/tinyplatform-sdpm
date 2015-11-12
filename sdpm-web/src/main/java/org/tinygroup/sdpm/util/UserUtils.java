@@ -210,7 +210,6 @@ public class UserUtils {
         }
         return false;
     }
-
     /**
      * 获取当前登录者对象
      */

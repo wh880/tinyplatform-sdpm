@@ -6,14 +6,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.tinygroup.sdpm.common.util.Collections3;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.org.dao.pojo.OrgRoleMenu;
 import org.tinygroup.sdpm.org.service.inter.RoleService;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping("/a/org/roleMenu")
@@ -22,29 +21,18 @@ public class RoleMenuAction extends BaseController {
     private RoleService roleService;
 
     /**
-     * 权限管理保存
+     * 保存菜单的权限
      *
      * @param id
-     * @param ids
+     * @param menuId
+     * @param parentId
      * @return
      */
     @RequiresPermissions("org-privilege-maintain")
-    @ResponseBody
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public Map<String, String> save(Integer id, String[] ids) {
-        List<OrgRoleMenu> list = new ArrayList<OrgRoleMenu>();
-        List<OrgRoleMenu> orgRoleMenus = roleService.findMenuByRoleId(id);
-        roleService.batchDeleteRoleMenu(orgRoleMenus);
-        for (String i : ids) {
-                OrgRoleMenu orgRoleMenu = new OrgRoleMenu();
-                orgRoleMenu.setOrgRoleId(id);
-                orgRoleMenu.setOrgRoleMenuId(i);
-                list.add(orgRoleMenu);
-        }
-        if (!list.isEmpty()) {
-            roleService.batchAddRoleMenu(list);
-        }
-        return resultMap(true, "保存成功！");
+    public String save(Integer roleId, String[] menuId, String parentId) {
+        roleService.saveRoleMenu(roleId, parentId, menuId);
+        return "redirect:" + adminPath + "/org/roleMenu/show?roleId=" + roleId;
     }
 
     /**
@@ -56,25 +44,13 @@ public class RoleMenuAction extends BaseController {
      */
     @RequiresPermissions("org-privilege-maintain")
     @RequestMapping("/show")
-    public String showMenuIds(Integer id, Model model) {
-        List<OrgRoleMenu> orgRoleMenus = roleService.findMenuByRoleId(id);
-        model.addAttribute("orgRoleMenus", initMenuIdList(orgRoleMenus));
+    public String showMenuIds(@RequestParam(value = "parentId", defaultValue = "0") String parentId, Integer roleId, Model model) {
+        List<OrgRoleMenu> orgRoleMenus = roleService.findMenuByRoleId(roleId);
+        List<String> orgRoleMenuIdList = Collections3.extractToList(orgRoleMenus, "orgRoleMenuId");
+        model.addAttribute("orgRoleMenuIdList", orgRoleMenuIdList);
+        model.addAttribute("parentId", parentId);
         return "organization/privilege/privilegeMaintain";
     }
 
-    /**
-     * 对树的权限勾选显示
-     * @param orgRoleMenuList
-     * @return
-     */
-    private List<String> initMenuIdList(List<OrgRoleMenu> orgRoleMenuList) {
-        List<String> list = new ArrayList<String>();
-        if (orgRoleMenuList != null && !orgRoleMenuList.isEmpty()) {
-            for (OrgRoleMenu orgRoleMenu : orgRoleMenuList) {
-                list.add(orgRoleMenu.getOrgRoleMenuId());
-            }
-        }
-        return list;
-    }
 
 }

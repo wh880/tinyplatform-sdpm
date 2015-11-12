@@ -18,11 +18,13 @@ package org.tinygroup.sdpm.org.biz.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.tinygroup.commons.tools.ArrayUtil;
 import org.tinygroup.sdpm.org.biz.inter.RoleManager;
 import org.tinygroup.sdpm.org.dao.OrgRoleDao;
 import org.tinygroup.sdpm.org.dao.pojo.OrgRole;
 import org.tinygroup.tinysqldsl.Pager;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -59,6 +61,9 @@ public class RoleManagerImpl implements RoleManager {
     }
 
     public List<OrgRole> getRolesByIds(String... ids) {
+        if (ArrayUtil.isEmptyArray(ids)) {
+            return new ArrayList<OrgRole>();
+        }
         return orgRoleDao.getRolesByIds(ids);
     }
 }

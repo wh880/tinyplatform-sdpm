@@ -41,6 +41,17 @@
                 #end
             #end
             #@gridSysRow()
+                #@colLabel("col-2")角色类型：#end
+                #@gridSysCol(7)
+                    #@Tselect2Body("orgRoleType" role?.orgRoleType {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        #foreach(type : getDict("roleType"))
+                        <option value=${type.value}>${type.text}</option>
+                        #end
+                    #end
+                #end
+            #end
+
+            #@gridSysRow()
                 #@colLabel("col-2")角色描述：#end
                 #@gridSysCol(7)
                     #tinyInput("text" "orgRoleRemarks" role?.orgRoleRemarks{"class":"input-text"})

@@ -56,16 +56,7 @@ public interface RoleMenuManager {
      */
     OrgRoleMenu update(OrgRoleMenu orgRoleMenu);
 
-    /**
-     * 根据id进行软删除角色菜单
-     *
-     * @param id 主键
-     * @return
-     */
-    Integer delete(Integer id);
-
-
-    void batchAdd(List<OrgRoleMenu> orgRoleMenuList);
+    Integer batchAdd(List<OrgRoleMenu> orgRoleMenuList);
 
     void batchDelete(List<OrgRoleMenu> orgRoleMenuList);
 

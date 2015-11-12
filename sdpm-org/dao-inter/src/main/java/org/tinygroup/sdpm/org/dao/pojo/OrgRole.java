@@ -26,17 +26,26 @@ public class OrgRole implements Serializable {
 
 	public static Integer DELETE_YES = 1;
 	public static Integer DELETE_NO = 0;
-	/** 
+	public static String ROLE_TYPE_SYS = "0";
+	public static String ROLE_TYPE_PRODUCT = "1";
+	public static String ROLE_TYPE_PROJECT = "2";
+	/**
 	 * 角色ID
 	 * 
 	 */
 	private Integer orgRoleId;
 
-	/** 
+	/**
 	 * 角色名称
-	 * 
+	 *
 	 */
 	private String orgRoleName;
+
+	/**
+	 * 角色类型
+	 *
+	 */
+	private String orgRoleType;
 
 	/** 
 	 * 角色备注
@@ -86,4 +95,11 @@ public class OrgRole implements Serializable {
 		this. deleted = deleted;
 	}
 
+	public String getOrgRoleType() {
+		return orgRoleType;
+	}
+
+	public void setOrgRoleType(String orgRoleType) {
+		this.orgRoleType = orgRoleType;
+	}
 }

@@ -27,11 +27,16 @@ public class ProjectTaskTable extends Table {
 
 	public static final ProjectTaskTable PROJECT_TASKTABLE = new ProjectTaskTable();
 
-	/** 
+	/**
 	 * 任务id
-	 * 
+	 *
 	 */
 	public final Column TASK_ID = new Column(this, "task_id");
+	/**
+	 * 任务id
+	 *
+	 */
+	public final Column NO = new Column(this, "no");
 
 	/** 
 	 * 任务所属项目

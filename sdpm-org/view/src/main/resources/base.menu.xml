@@ -2,7 +2,7 @@
 <menu id="organization" parent-id="0" name="组织" href="/org/user/list" icon="icon-sitemap" sort="200"
       isShow="1">
     <menu id="organizationUser" name="用户" href="/org/user/list" icon="" sort="1" isShow="1">
-        <menu id="org-user-edit" name="用户编辑" href="/org/user/form" icon="icon-pencil" sort="1"
+        <menu id="org-user-edit" name="编辑用户" href="/org/user/form" icon="icon-pencil" sort="1"
               isShow="1"
               scope="org-user">
             <map>
@@ -11,8 +11,7 @@
             </map>
 
         </menu>
-
-        <menu id="org-user-delete" name="删除" href="/org/user/delete/page" icon="icon-remove" sort="1"
+        <menu id="org-user-delete" name="删除用户" href="/org/user/delete/page" icon="icon-remove" sort="1"
               isShow="1"
               scope="org-user">
             <map>
@@ -21,7 +20,10 @@
 
             </map>
         </menu>
-
+        <menu id="organizationAddUser" name="添加用户" href="/org/user/form" icon="icon-plus" sort="1"
+              isShow="1"
+              scope="org-menu">
+        </menu>
         <menu id="org-user-batchdel" name="批量删除" href="#" icon="icon-trash" sort="1" isShow="1"
               scope="org-user-batchdel"/>
         <menu id="org-user-add" name="增加" href="/org/user/form" icon="icon-plus" sort="1" isShow="1"
@@ -83,7 +85,7 @@
               scope="org-privilege">
         </menu>
 
-        <menu id="org-privilege-delete" name="删除" href="/org/privilege/delete" icon="icon-remove" sort="1" isShow="1"
+        <menu id="org-privilege-delete" name="删除角色" href="/org/privilege/delete" icon="icon-remove" sort="1" isShow="1"
               scope="org-privilege"/>
 
         <menu id="org-privilege-add" name="添加角色" href="/organization/privilege/groupAdd.pagelet" icon="icon-plus"
@@ -91,18 +93,15 @@
               scope="org-privilege-addGroup"/>
 
     </menu>
-    <menu id="organizationCompany" name="公司" href="/org/company/show" icon="" sort="1" isShow="1"
-    >
-        <menu id="org-company-edit" name="编辑" href="/org/company/edit" icon="icon-edit"
-              sort="1" isShow="1"
-              scope="org-company-edit"/>
-    </menu>
-    <menu id="organizationAddUser" name="添加用户" href="/org/user/form" icon="icon-plus" sort="1"
-          isShow="1"
-          scope="org-menu">
-    </menu>
     <menu id="organizationAddGroup" name="添加角色 " href="/org/privilege/form" icon="icon-group" sort="1"
           isShow="1"
           scope="org-menu">
     </menu>
+    <menu id="organizationCompany" name="公司" href="/org/company/show" icon="" sort="1" isShow="1">
+        <menu id="org-company-edit" name="编辑公司" href="/org/company/edit" icon="icon-edit"
+              sort="1" isShow="1"
+              scope="org-company-edit"/>
+    </menu>
+
+
 </menu>
