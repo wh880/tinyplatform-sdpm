@@ -76,7 +76,22 @@
                 #end
                 #@validateDiv("col-3")#end
             #end
-
+            #@elementItem()
+                #@colLabel("col-3")公司LOGO：#end
+                #@formControlDiv("col-6")
+                ##三个参数 第一个为表单name 第二个初始值  第三个为MAP对像会带入到表单中进行处理
+                    #tinyFileInput("orgCompanyLogo",company?.orgCompanyLogo)
+                #end
+                #@validateDiv("col-2")#end
+            #end
+            #@elementItem()
+                #@colLabel("col-3")公司LOGO：
+                #end
+                #@formControlDiv("col-6")
+                    #tinyUploadInputMini("orgCompanyLogo",company?.orgCompanyLogo)
+                #end
+                #@validateDiv("col-2")#end
+            #end
         #end
         #@gridSysRow()
 

@@ -56,6 +56,7 @@ public class OrgCompanyDaoImpl extends TinyDslDaoSupport implements OrgCompanyDa
                         ORG_COMPANYTABLE.ORG_COMPANY_BACKYARD.value(t.getOrgCompanyBackyard()),
                         ORG_COMPANYTABLE.ORG_COMPANY_GUEST.value(t.getOrgCompanyGuest()),
                         ORG_COMPANYTABLE.ORG_COMPANY_ADMINS.value(t.getOrgCompanyAdmins()),
+                        ORG_COMPANYTABLE.ORG_COMPANY_LOGO.value(t.getOrgCompanyLogo()),
                         ORG_COMPANYTABLE.ORG_COMPANY_DELETED.value(t.getOrgCompanyDeleted()));
                 return insert;
             }
@@ -78,6 +79,7 @@ public class OrgCompanyDaoImpl extends TinyDslDaoSupport implements OrgCompanyDa
                         ORG_COMPANYTABLE.ORG_COMPANY_BACKYARD.value(t.getOrgCompanyBackyard()),
                         ORG_COMPANYTABLE.ORG_COMPANY_GUEST.value(t.getOrgCompanyGuest()),
                         ORG_COMPANYTABLE.ORG_COMPANY_ADMINS.value(t.getOrgCompanyAdmins()),
+                        ORG_COMPANYTABLE.ORG_COMPANY_LOGO.value(t.getOrgCompanyLogo()),
                         ORG_COMPANYTABLE.ORG_COMPANY_DELETED.value(t.getOrgCompanyDeleted())).where(
                         ORG_COMPANYTABLE.ORG_COMPANY_ID.eq(t.getOrgCompanyId()));
                 return update;
@@ -135,6 +137,7 @@ public class OrgCompanyDaoImpl extends TinyDslDaoSupport implements OrgCompanyDa
                                 ORG_COMPANYTABLE.ORG_COMPANY_BACKYARD.eq(t.getOrgCompanyBackyard()),
                                 ORG_COMPANYTABLE.ORG_COMPANY_GUEST.eq(t.getOrgCompanyGuest()),
                                 ORG_COMPANYTABLE.ORG_COMPANY_ADMINS.eq(t.getOrgCompanyAdmins()),
+                                ORG_COMPANYTABLE.ORG_COMPANY_LOGO.eq(t.getOrgCompanyLogo()),
                                 ORG_COMPANYTABLE.ORG_COMPANY_DELETED.eq(t.getOrgCompanyDeleted())));
                 return addOrderByElements(select, orderBies);
             }
@@ -159,6 +162,7 @@ public class OrgCompanyDaoImpl extends TinyDslDaoSupport implements OrgCompanyDa
                                 ORG_COMPANYTABLE.ORG_COMPANY_BACKYARD.eq(t.getOrgCompanyBackyard()),
                                 ORG_COMPANYTABLE.ORG_COMPANY_GUEST.eq(t.getOrgCompanyGuest()),
                                 ORG_COMPANYTABLE.ORG_COMPANY_ADMINS.eq(t.getOrgCompanyAdmins()),
+                                ORG_COMPANYTABLE.ORG_COMPANY_LOGO.eq(t.getOrgCompanyLogo()),
                                 ORG_COMPANYTABLE.ORG_COMPANY_DELETED.eq(t.getOrgCompanyDeleted())));
                 return addOrderByElements(select, orderBies);
             }
@@ -182,6 +186,7 @@ public class OrgCompanyDaoImpl extends TinyDslDaoSupport implements OrgCompanyDa
                         ORG_COMPANYTABLE.ORG_COMPANY_BACKYARD.value(new JdbcNamedParameter("orgCompanyBackyard")),
                         ORG_COMPANYTABLE.ORG_COMPANY_GUEST.value(new JdbcNamedParameter("orgCompanyGuest")),
                         ORG_COMPANYTABLE.ORG_COMPANY_ADMINS.value(new JdbcNamedParameter("orgCompanyAdmins")),
+                        ORG_COMPANYTABLE.ORG_COMPANY_LOGO.value(new JdbcNamedParameter("orgCompanyLogo")),
                         ORG_COMPANYTABLE.ORG_COMPANY_DELETED.value(new JdbcNamedParameter("orgCompanyDeleted")));
             }
         });
@@ -208,6 +213,7 @@ public class OrgCompanyDaoImpl extends TinyDslDaoSupport implements OrgCompanyDa
                         ORG_COMPANYTABLE.ORG_COMPANY_BACKYARD.value(new JdbcNamedParameter("orgCompanyBackyard")),
                         ORG_COMPANYTABLE.ORG_COMPANY_GUEST.value(new JdbcNamedParameter("orgCompanyGuest")),
                         ORG_COMPANYTABLE.ORG_COMPANY_ADMINS.value(new JdbcNamedParameter("orgCompanyAdmins")),
+                        ORG_COMPANYTABLE.ORG_COMPANY_LOGO.value(new JdbcNamedParameter("orgCompanyLogo")),
                         ORG_COMPANYTABLE.ORG_COMPANY_DELETED.value(new JdbcNamedParameter("orgCompanyDeleted"))).where(
                         ORG_COMPANYTABLE.ORG_COMPANY_ID.eq(new JdbcNamedParameter("orgCompanyId")));
             }
@@ -232,6 +238,7 @@ public class OrgCompanyDaoImpl extends TinyDslDaoSupport implements OrgCompanyDa
                         ORG_COMPANYTABLE.ORG_COMPANY_BACKYARD.eq(new JdbcNamedParameter("orgCompanyBackyard")),
                         ORG_COMPANYTABLE.ORG_COMPANY_GUEST.eq(new JdbcNamedParameter("orgCompanyGuest")),
                         ORG_COMPANYTABLE.ORG_COMPANY_ADMINS.eq(new JdbcNamedParameter("orgCompanyAdmins")),
+                        ORG_COMPANYTABLE.ORG_COMPANY_LOGO.eq(new JdbcNamedParameter("orgCompanyLogo")),
                         ORG_COMPANYTABLE.ORG_COMPANY_DELETED.eq(new JdbcNamedParameter("orgCompanyDeleted"))));
             }
         });

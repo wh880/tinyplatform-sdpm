@@ -54,6 +54,7 @@
     <table-field standard-field-id="6ba616d1ae6f4d70b312bfbf1ffbcc6e" primary="false" unique="false" not-null="true" id="org_company_guest" auto-increase="false"/>
     <table-field standard-field-id="1162306b8f4b43e99c489c34888a3335" primary="false" unique="false" not-null="false" id="org_company_admins" auto-increase="false"/>
     <table-field standard-field-id="8e8078a1954e464cb4d5f280b5d463b3" primary="false" unique="false" not-null="true" id="org_company_deleted" auto-increase="false"/>
+    <table-field standard-field-id="b1125fb09e5546f783309448d5bd0499" primary="false" unique="false" not-null="false" id="org_company_logo" auto-increase="false"/>
   </table>
   <table id="dee51d41a02b4fb0bba2f46c7e1518ac" name="org_role" title="角色表">
     <description></description>

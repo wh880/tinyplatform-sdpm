@@ -2,42 +2,6 @@
 #!set(linkName="product-demand",sonitem="<li>"+"需求"+"</li>")
 *#
 #set(pltype="addProduct")
-<script>
-
-
-    $(document).ready(function () {
-
-
-
-    #*		$("select[ajaxType='orguser']").each(function(){
-
-                var sele = $(this);
-
-                $.ajax({
-                    type: "POST",
-                    url: "${TINY_CONTEXT_PATH +adminPath}"+$(this).attr('url'),
-                       data: $(this).attr('data'),
-                       dataType:"json",
-                       contentType : 'application/json;charset=utf-8', //设置请求头信息
-                    success: function(data){
-                        for(var i=0;i<data.length;data){
-                            var em = "<option value='"+data[i].orgUserId+"'>"+ data[i].orgUserAccount +"</option>";
-                            sele.append(em);
-                            ++i;
-                        }
-
-                    },
-                    error: function(res){
-                        alert("失败");
-                    }
-                });
-
-
-            });*#
-
-    });
-
-</script>
 
 #import("/org/tinygroup/button/components/button_common.component")
 #import("/org/tinygroup/button/components/button.component")
@@ -67,9 +31,7 @@
                     <option value="${productLine?.productLineId}">${productLine?.productLineName}</option>
                 #end
             #end
-        ##                    <script>
-        ##                        ajaxRead("${sid}", "productLineId", "productLineId", "productLineName", "/productLine/productLineList",${sessionProductLineId?:0});
-        ##                    </script>
+
             #@Tselect2Fix()
                 <a href="${TINY_CONTEXT_PATH}/a/productLine/add">增加</a>
                 <a href="${TINY_CONTEXT_PATH}/a/productLine/all" class="r">全部</a>
@@ -112,19 +74,13 @@
         #@Tselect2F()
             #@Tselect2Body("productOwner" "" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
             #end
-
             <script>
-
                 ajaxRead("${sid}", "productOwner", "orgUserId", "orgUserRealName", "/org/user/userList");
-
             </script>
-
             #@Tselect2Fix()
                 <a href="${TINY_CONTEXT_PATH}/a/org/user/form">增加</a>
                 <a href="${TINY_CONTEXT_PATH}/a/org/user/list" class="r">全部</a>
             #end
-
-
         #end
 
     #end
@@ -139,13 +95,9 @@
             #@Tselect2Body(
                 "productQualityManager" "" {"class":"input-text select2","url":"/org/user/userList",
                 "ajaxType":"orguser","data":""}) ##,"multiple":"multiple"加上为多选项
-
             #end
-
             <script>
-
                 ajaxRead("${sid}", "productQualityManager", "orgUserId", "orgUserRealName", "/org/user/userList");
-
             </script>
 
             #@Tselect2Fix()
@@ -166,20 +118,15 @@
             #@Tselect2Body(
                 "productDeliveryManager" "" {"class":"input-text select2 ","url":"/org/user/userList",
                 "ajaxType":"orguser","data":""}) ##,"multiple":"multiple"加上为多选项
-
             #end
-
             <script>
-
                 ajaxRead("${sid}", "productDeliveryManager", "orgUserId", "orgUserRealName", "/org/user/userList");
-
             </script>
 
             #@Tselect2Fix()
                 <a href="${TINY_CONTEXT_PATH}/a/org/user/form">增加</a>
                 <a href="${TINY_CONTEXT_PATH}/a/org/user/list" class="r">全部</a>
             #end
-
         #end
 
     #end
