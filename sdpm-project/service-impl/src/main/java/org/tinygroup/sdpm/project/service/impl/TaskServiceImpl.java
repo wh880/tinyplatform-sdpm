@@ -35,7 +35,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     public Integer batchAdd(List<ProjectTask> taskList, Integer projectId) {
-        Integer maxNo = taskManager.getMaxNo(projectId);
+        int maxNo = taskManager.getMaxNo(projectId);
         for (ProjectTask task : taskList) {
             task.setTaskNo(maxNo++);
             task.setTaskLastEditedDate(new Date());
