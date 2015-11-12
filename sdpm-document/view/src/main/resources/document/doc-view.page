@@ -6,28 +6,26 @@
 #set(name="documentDocu")
 #include("doc-tab.page")
 #@div()
-	#@p(pClass="title_sty")
-		<span class="f"> ${doc?.docTitle}</span>
-		<span class="r">
-			#foreach(m:menuManager.getScopeMenus("doc-view-op"))
-				#if(m.id == "doc-view-delete")
-					#@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m.href doc?.docId TINY_CONTEXT_PATH+adminPath+"/document" {"title":"返回"})
-						#buttonIcon(iconClass=m.icon)
-					#end&nbsp
-				#else
-				#if(m.id == "doc-view-edit")
-					<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?docId=${doc?.docId}" title="${m.name}">
-						#buttonIcon(iconClass=m.icon)</a>&nbsp
-				#else
-					<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" title="${m.name}">
-						#buttonIcon(iconClass=m.icon)</a>&nbsp
-				#end	
-				#end
-			#end											
+    #@p(pClass="title_sty")
+    <span class="f"> ${doc?.docTitle}</span>
+    <span class="r">
+       #foreach(m:menuManager.getScopeMenus("doc-op"))
+           #if(m.id == "docdelete")
+               #@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m.href doc?.docId TINY_CONTEXT_PATH+adminPath+"/document")
+                   #buttonIcon(iconClass=m.icon)
+               #end&nbsp
+               #if(m.id == "docedit")
+                   <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?docId=${doc?.docId}" title="${m.name}">
+                       #buttonIcon(iconClass=m.icon)</a>&nbsp
+               #end
+           #end
+       #end
+        <a href="javascript :;" onClick="javascript :history.back(-1);" title="返回">#buttonIcon(iconClass=
+            "icon-reply")</a>
 		</span>
-	#end
+    #end
 <div style="width:70%;float:left" class="pageleftpart">
-	#@div(divClass="infoContent")
+    #@div(divClass="infoContent")
         <p class="titleName">文档摘要</p>
         ${doc?.docDigest}
     #end
@@ -36,71 +34,71 @@
         ${doc?.docKeywords}
     #end
     #@div(divClass="infoContent")
-    #if(doc?.docType=='2')
-        <p class="titleName">文档URL </p>
-        <a href="//${doc?.docUrl}">${doc?.docUrl}</a>
-    #elseif(doc?.docType=='1')<p class="titleName">附件 </p>
-    #foreach(f : file)   	
-    	 #set(path=f?.filePathname)
-    		<a href="${path}">${f?.fileTitle}.${f?.fileExtension}</a>&nbsp&nbsp&nbsp&nbsp
-    		#foreach(m:menuManager.getScopeMenus("file-op"))
-				#if(m.id == "doc-file-edit")					
-    				#@aModal("#myModal" m.name "400" "120" "class-m" adminPath+m.href+"?fileId="+f?.fileId)
-        	        	#buttonIcon(iconClass=m.icon)#end&nbsp
-        	    #else
-        	    	#@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m.href f?.fileId )
-						#buttonIcon(iconClass=m.icon)
-					#end
-        	    #end       	    
-        	#end <br>   		
-    #end
-   
-    #else <p class="titleName">网页</p>
-    ${doc?.docContent}
-    #end
+        #if(doc?.docType=='2')
+            <p class="titleName">文档URL </p>
+            <a href="//${doc?.docUrl}">${doc?.docUrl}</a>
+        #elseif(doc?.docType=='1')<p class="titleName">附件 </p>
+            #foreach(f : file)
+                #set(path=f?.filePathname)
+                <a href="${path}">${f?.fileTitle}.${f?.fileExtension}</a>&nbsp&nbsp&nbsp&nbsp
+                #foreach(m:menuManager.getScopeMenus("file-op"))
+                    #if(m.id == "doc-file-edit")
+                        #@aModal("#myModal" m.name "400" "120" "class-m" adminPath+m.href+"?fileId="+f?.fileId)
+                            #buttonIcon(iconClass=m.icon)#end&nbsp
+                    #else
+                        #@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m.href f?.fileId )
+                            #buttonIcon(iconClass=m.icon)
+                        #end
+                    #end
+                #end <br>
+            #end
+
+        #else <p class="titleName">网页</p>
+            ${doc?.docContent}
+        #end
     #end
     #history(adminPath+"/system/action/ajax/history?actionObjectType=doc&actionObjectId="+doc?.docId)
-    <center>		
-		#foreach(m:menuManager.getScopeMenus("doc-view-op"))
-				#if(m.id == "doc-view-delete")
-					#@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m.href doc?.docId TINY_CONTEXT_PATH+adminPath+"/document" {"title":"返回"})
-						#buttonIcon(iconClass=m.icon)
-					#end&nbsp
-				#else
-				#if(m.id == "doc-view-edit")
-					<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?docId=${doc?.docId}" title="${m.name}">
-						#buttonIcon(iconClass=m.icon)</a>&nbsp
-				#else
-					<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" title="${m.name}">
-						#buttonIcon(iconClass=m.icon)</a>&nbsp
-				#end	
-				#end
-		#end
-	</center>
+    <center>
+        #foreach(m:menuManager.getScopeMenus("doc-op"))
+            #if(m.id == "docdelete")
+                #@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m.href doc?.docId TINY_CONTEXT_PATH+adminPath+"/document")
+                    #buttonIcon(iconClass=m.icon)
+                #end&nbsp
+                #if(m.id == "docedit")
+                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?docId=${doc?.docId}" title="${m.name}">
+                        #buttonIcon(iconClass=m.icon)</a>&nbsp
+                #end
+            #end
+        #end
+        <a href="javascript :;" onClick="javascript :history.back(-1);" title="返回">#buttonIcon(iconClass=
+            "icon-reply")</a>
+    </center>
 </div>
 <div style="width:30%;float:right;">
-		#TypeInfo("docInfo" doc?.docId)
+    #TypeInfo("docInfo" doc?.docId)
  ##    #include("basic-info.page")
 </div>
 #end
 ##遗漏的弹出框
 <script type="text/javascript">
 
-    $(function(){
-        var minTop=96;
-        var maxTop=153;
-        var currenttop=maxTop;
-        function doscroll(){
-            currenttop=maxTop-parseInt($(window).scrollTop());
-            if(currenttop<minTop) currenttop=minTop;
-            $(".rightpart").css("top",currenttop+"px");
+    $(function () {
+        var minTop = 96;
+        var maxTop = 153;
+        var currenttop = maxTop;
+
+        function doscroll() {
+            currenttop = maxTop - parseInt($(window).scrollTop());
+            if (currenttop < minTop) currenttop = minTop;
+            $(".rightpart").css("top", currenttop + "px");
         }
+
         var timer_scroll;
-        $(window).scroll(function(){
+        $(window).scroll(function () {
             clearTimeout(timer_scroll);
-            setTimeout(function() {
+            setTimeout(function () {
                 doscroll();
-            },10);
+            }, 10);
         })
     })
 </script>
