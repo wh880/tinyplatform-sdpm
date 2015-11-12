@@ -24,7 +24,10 @@ import java.util.Date;
  * 
  */
 public class ProductLine implements Serializable{
-	
+
+	public static final Integer ACl_All=0;
+	public static final Integer ACl_TEAM=0;
+	public static final Integer ACl_TEAM_AND_ROLE=0;
 	/**
 	 * 经理名称
 	 */
@@ -318,5 +321,11 @@ public class ProductLine implements Serializable{
 		this.deliveryManagerName = deliveryManagerName;
 	}
 
-
+	@Override
+	public boolean equals(Object object){
+		if(this.getProductLineId().equals(((ProductLine)object).getProductLineId())){
+			return true;
+		}
+		return false;
+	}
 }

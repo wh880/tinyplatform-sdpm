@@ -32,7 +32,10 @@ import org.tinygroup.tinysqldsl.base.Condition;
 import org.tinygroup.tinysqldsl.base.FragmentSql;
 import org.tinygroup.tinysqldsl.base.Table;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
+import org.tinygroup.tinysqldsl.expression.relational.ExistsExpression;
+import org.tinygroup.tinysqldsl.expression.relational.InExpression;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
+import org.tinygroup.tinysqldsl.formitem.SubSelect;
 import org.tinygroup.tinysqldsl.select.OrderByElement;
 
 import java.io.Serializable;
@@ -41,17 +44,19 @@ import java.util.List;
 
 import static org.tinygroup.sdpm.product.dao.constant.ProductTable.PRODUCTTABLE;
 import static org.tinygroup.sdpm.productLine.dao.constant.ProductLineTable.PRODUCT_LINETABLE;
+import static org.tinygroup.sdpm.org.dao.constant.OrgUserTable.ORG_USERTABLE;
+import static org.tinygroup.sdpm.project.dao.constant.ProjectTeamTable.PROJECT_TEAMTABLE;
 import static org.tinygroup.tinysqldsl.Delete.delete;
 import static org.tinygroup.tinysqldsl.Insert.insertInto;
 import static org.tinygroup.tinysqldsl.Select.select;
 import static org.tinygroup.tinysqldsl.Select.selectFrom;
 import static org.tinygroup.tinysqldsl.Update.update;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
+import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.or;
 import static org.tinygroup.tinysqldsl.select.Join.leftJoin;
 @Repository
 public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
 
-	protected static final Table SERVICE_CLIENTTABLE = null;
 
 	public static Condition productPueryCondition(Product t){
 		return
@@ -419,6 +424,12 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
 		
 		return getDslSession().fetchList(select, String.class);
 	}
-	
+
+	public List<Product> getProductByUser(String userId) {
+		Select select = selectFrom(PRODUCTTABLE).where(ExistsExpression.existsCondition(SubSelect.subSelect(selectFrom(PROJECT_TEAMTABLE).
+				where(or(PRODUCTTABLE.ACL.eq(Product.ACl_All), and(PRODUCTTABLE.ACL.eq(Product.ACl_TEAM), PROJECT_TEAMTABLE.PRODUCT_ID.eq(PRODUCTTABLE.PRODUCT_ID), PROJECT_TEAMTABLE.TEAM_USER_ID.eq(userId)))))));
+		return getDslSession().fetchList(select,Product.class);
+	}
+
 
 }

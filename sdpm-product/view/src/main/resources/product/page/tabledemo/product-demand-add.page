@@ -46,26 +46,23 @@
 
             #@formControlDiv("col-4")
                 <div class="col-5">
-                    #@Tselect2F()
-                            <script>
-                                $(function(){
-                                    var lineId = $("#productLineNameOnTop").attr("value");
-                                    if(lineId>0) {
-                                        ajaxRead("${sid}", "productId", "productId", "productName", "/product/productList?deleted=0&type=user&productLineId="+lineId);
-                                    }
-                                    #if(!cookieProductId)
-                                    var productId = $("#productNameOnTop").attr("value");
-                                    if(productId>0) {
-                                        $("select[name=productId]").val(productId).trigger("change");
-                                    }
-                                    #end
-                                })
-
-                            </script>
-                        #@Tselect2Body("productId" cookieProductId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-
-                        #end
-
+                    #TzTreeSelect("productId" cookieProductId {"class":"input-text","data-URL":call("link",adminPath+"/productLine/userProductTree")})
+##                    #@Tselect2F()
+##                            <script>
+##                                $(function(){
+##                                    #if(!cookieProductId)
+##                                    var productId = $("#productNameOnTop").attr("value");
+##                                    if(productId>0) {
+##                                        $("select[name=productId]").val(productId).trigger("change");
+##                                    }
+##                                    #end
+##                                })
+##
+##                            </script>
+##                        #@Tselect2Body("productId" cookieProductId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+##
+##                        #end
+##
                         <script>
 
 
@@ -78,11 +75,11 @@
                             })
 
                         </script>
-
-                        #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH +adminPath}/product/addproduct/addition "
-                                          class="r ">添加</a>
-                            <a href=" ${TINY_CONTEXT_PATH +adminPath}/product/allproduct/addition">全部</a>#end
-                    #end
+##
+##                        #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH +adminPath}/product/addproduct/addition "
+##                                          class="r ">添加</a>
+##                            <a href=" ${TINY_CONTEXT_PATH +adminPath}/product/allproduct/addition">全部</a>#end
+##                    #end
                 </div>
                 <div class="col-7">
                     <div class="col-4 text-c">所属模块：</div>
@@ -92,13 +89,31 @@
                                 "systemModel","data":"moduleType=product","relateElem":
                                 "relateModelTwo"}) ##,"multiple":"multiple"加上为多选项
                             #end
-                            #@Tselect2Fix() #@aModal("#myModal" "" "1000" "500" "btn-class" adminPath+"/product/addModule")添加#end#end
+                            #@Tselect2Fix()#@aModal("#myModal" "" "1000" "500" "btn-class" adminPath+"/product/addModule" "modelA")添加#end#end
+
                         #end
                     </div>
                 </div>
             #end
 
-
+            #macro Tselect2Fix()
+                <div class="fixtools hide" id="${sid}-fix"><div class="fixselect2foot">#bodyContent</div></div>
+                <script type="text/javascript">
+                    $(function(){
+                        var isinit=false;
+                        $("#${sid}").on("select2-open", function (e) {
+                            if(!isinit){
+                                $("#select2-drop").append($("#${sid}-fix").html());
+                                $("#select2-drop").on("click","a",function(){
+                                    $("#modelA").click();
+                                    $("#select2-drop").hide();
+                                });
+                                isinit=true;
+                            }
+                        });
+                    });
+                </script>
+            #end
 
         #end
 

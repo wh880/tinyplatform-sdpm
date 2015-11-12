@@ -114,7 +114,7 @@ public class ModuleAction extends BaseController {
             Map<String, Object> mapTop = Maps.newHashMap();
             mapTop.put("id", "p" + p.getProjectId());
             mapTop.put("pId", 0);
-            mapTop.put("open", false);
+            mapTop.put("open", true);
             mergeModule(systemModules, mapList, "p" + p.getProjectId().toString(),"name", true, true);
             mapTop.put("isParent", true);
             mapTop.put("add", true);

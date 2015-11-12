@@ -2,6 +2,7 @@ package org.tinygroup.sdpm.productLine.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.tinygroup.sdpm.product.biz.inter.ProductManager;
 import org.tinygroup.sdpm.productLine.biz.inter.ProductLineManager;
 import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.sdpm.productLine.service.ProductLineService;
@@ -14,6 +15,8 @@ public class ProductLineServiceImpl implements ProductLineService {
 	
 	@Autowired
 	private ProductLineManager productLineManager;
+	@Autowired
+	private ProductManager productManager;
 	
 	public ProductLine addProductLine(ProductLine productLine) {
 
@@ -49,6 +52,25 @@ public class ProductLineServiceImpl implements ProductLineService {
 			String ordertype) {
 		
 		return productLineManager.findPager(page, pagesize,condition, productLine, order, ordertype);
+	}
+
+	public List<ProductLine> getProductLineByIds(Integer... ids) {
+		return productLineManager.getProductLineByIds(ids);
+	}
+
+	public List<ProductLine> getUserProductLine(String userId) {
+		ProductLine line = new ProductLine();
+		line.setAcl(ProductLine.ACl_All);
+		List<ProductLine> lines = productLineManager.findList(line);
+		List<Integer> idList = productManager.getTeamRoleProductLineIds(userId);
+		Integer[] ids = new Integer[idList.size()];
+		List<ProductLine> productLines = productLineManager.getProductLineByIds(idList.toArray(ids));
+		for(ProductLine p : productLines){
+			if(!lines.contains(p)){
+				lines.add(p);
+			}
+		}
+		return lines;
 	}
 
 	public List<ProductLine> findList(ProductLine productLine) {

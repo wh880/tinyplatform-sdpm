@@ -69,5 +69,7 @@ public interface ProductLineManager {
 	 */
 	Pager<ProductLine> findPager(int page,int pagesize,String condition,ProductLine productLine,String order,String ordertype);
 	
-	
+	List<ProductLine> getProductLineByIds(Integer...ids);
+
+	List<ProductLine> getUserProductLine(String userId);
 }
