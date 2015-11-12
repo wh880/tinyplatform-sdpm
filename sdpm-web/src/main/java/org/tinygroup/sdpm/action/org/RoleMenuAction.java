@@ -30,9 +30,9 @@ public class RoleMenuAction extends BaseController {
      */
     @RequiresPermissions("org-privilege-maintain")
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String save(Integer id, String[] menuId, String parentId) {
-        roleService.saveRoleMenu(id, parentId, menuId);
-        return "redirect:" + adminPath + "/org/roleMenu/show?id=" + id;
+    public String save(Integer roleId, String[] menuId, String parentId) {
+        roleService.saveRoleMenu(roleId, parentId, menuId);
+        return "redirect:" + adminPath + "/org/roleMenu/show?roleId=" + roleId;
     }
 
     /**
@@ -44,8 +44,8 @@ public class RoleMenuAction extends BaseController {
      */
     @RequiresPermissions("org-privilege-maintain")
     @RequestMapping("/show")
-    public String showMenuIds(@RequestParam(value = "parentId", defaultValue = "0") String parentId, Integer id, Model model) {
-        List<OrgRoleMenu> orgRoleMenus = roleService.findMenuByRoleId(id);
+    public String showMenuIds(@RequestParam(value = "parentId", defaultValue = "0") String parentId, Integer roleId, Model model) {
+        List<OrgRoleMenu> orgRoleMenus = roleService.findMenuByRoleId(roleId);
         List<String> orgRoleMenuIdList = Collections3.extractToList(orgRoleMenus, "orgRoleMenuId");
         model.addAttribute("orgRoleMenuIdList", orgRoleMenuIdList);
         model.addAttribute("parentId", parentId);

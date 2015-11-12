@@ -67,9 +67,13 @@
     <table-field standard-field-id="7edc4cffb5cf4a9f94ffca41db249285" primary="true" unique="true" not-null="true" id="id" auto-increase="true"/>
     <table-field standard-field-id="9d637734f8044ad789dbc9e2c5193c32" primary="false" unique="false" not-null="true" id="org_role_id" auto-increase="false"/>
     <table-field standard-field-id="40cf45e575c0442e83c7fe2da3119b5e" primary="false" unique="false" not-null="true" id="org_role_menu_id" auto-increase="false"/>
-    <index name="org_rold_menu" unique="true">
+    <index name="org_rold_id_menu_id" unique="true">
       <index-field field="org_role_id" direction="asc"/>
       <index-field field="org_role_menu_id" direction="asc"/>
+    </index>
+    <index name="org_rold_menu_org_rold_id">
+      <description></description>
+      <index-field field="org_role_id" direction="asc"/>
     </index>
   </table>
 </tables>

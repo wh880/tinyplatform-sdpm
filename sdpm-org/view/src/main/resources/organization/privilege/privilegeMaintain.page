@@ -1,6 +1,5 @@
 #!set(activeTitle="角色管理",activeMenuId=currentPageId,parentId=parentId?:"0")
 #import("/common/component/form.component")
-
 #set(name="organizationPrivilege")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
@@ -10,9 +9,9 @@
         #@tabBodyCol("ptop-5")
             #@div(divClass="operationbar")
             <span style="float:left">
-                <a href="${TINY_CONTEXT_PATH+adminPath}/org/roleMenu/show?parentId=0&id=${id}" ${parentId=='0'?" class='active_btn'":""}>所有权限</a>
-                #foreach(root:menuManager.getChildMenus)
-                    <a href="${TINY_CONTEXT_PATH+adminPath}/org/roleMenu/show?parentId=${root.id}&id=${id}" ${parentId=='root.id'?" class='active_btn'":""}>${root.name}</a>
+                <a href="${TINY_CONTEXT_PATH+adminPath}/org/roleMenu/show?parentId=0&roleId=${roleId}" ${parentId=='0'?" class='active_btn'":""}>所有权限</a>
+                #foreach(root:menuManager.getChildMenus("0"))
+                    <a href="${TINY_CONTEXT_PATH+adminPath}/org/roleMenu/show?parentId=${root.id}&roleId=${roleId}" ${parentId=='root.id'?" class='active_btn'":""}>${root.name}</a>
                 #end
 ##                <a href="${TINY_CONTEXT_PATH+adminPath}/org/roleMenu/show?parentId=productLine&id=${id}" ${parentId=='productLine'?" class='active_btn'":""}>产品线</a>
 ##                <a href="${TINY_CONTEXT_PATH+adminPath}/org/roleMenu/show?parentId=myproduct&id=${id}" ${parentId=='myproduct'?" class='active_btn'":""}>产品</a>
@@ -56,8 +55,10 @@
     }
 </style>
 #@tinyForm("thisform" call("link",adminPath+"/org/roleMenu/save") "post")
+<input type="hidden" name="roleId" value="${roleId}"/>
+<input type="hidden" name="parentId" value="${parentId?:0}"/>
     #@Tcheckboxes("menuId" orgRoleMenuIdList {"nullmsg":"请选择角色应有的菜单！","datatype":""})
-        #foreach(m:menuManager.getChildMenus("0"))
+        #foreach(m:menuManager.getChildMenus(parentId))
         <div class="row group-check-list">
             <div class="col-2">#@Tcheckbox(m.id {"data-targetGroup":"g"+m.id})${m.name}#end</div>
             <div class="col-10">
@@ -69,6 +70,12 @@
                 <div class="clear"></div>
             </div>
         </div>
+        #end
+    #end
+    #@gridSysRow()
+        #@div(divClass="col-7 col-offset-5 form-inline")
+            #tinyInput("submit" "submitbtn" " 保存 " {"class":"btn btn-primary"})
+        <a href="javascript:history.go(-1)" class="btn radius btn-default">返回</a>
         #end
     #end
 #end
@@ -84,82 +91,3 @@
         })
     })
 </script>
-##
-###@noRespsGridSystem()
-##    #@gridSysRow()
-##        #@gridSysCol(3)
-##        #end
-##        #@gridSysCol(6)
-##            #@gridSysRow()
-##            <ul id="treeDemo" class="ztree" style="width:100%;min-height:360px;max-height:300px;"></ul>
-##            <div style="padding-top: 20px;float: right">
-##                #@div(divClass="col-7 col-offset-5 form-inline")
-##                        #tinyInput("submit" "submitbtn" " 提交 " {"class":"btn btn-primary"})
-##                    #end
-##            </div>
-##            #end
-##        #end
-##        #@gridSysCol(3)
-##        #end
-##
-##    #end
-###end
-##
-##<SCRIPT type="text/javascript">
-##    <!--
-##    var setting = {
-##        check: {
-##            enable: true
-##        },
-##        data: {
-##            simpleData: {
-##                enable: true
-##            }
-##        }
-##    };
-##
-##    var zNodes = [];
-##        #foreach(m:menuManager.getAllChildMenus(parentId))
-##        zNodes.push({
-##            id: '${m.id}',
-##            pId: '${m.parentId}',
-##            name: "${m.name}",
-##            open: true,
-##            checked: ${orgRoleMenus.contains(m.id)? 'true' : 'false'
-##        }
-##        });
-##        #end
-##
-##
-##    $(document).ready(function () {
-##        var $ztree=
-##        $.fn.zTree.init($("#treeDemo"), setting, zNodes);
-##        $("input[name=submitbtn]").on("click", function () {
-##            var nodes =$ztree.getCheckedNodes(true);
-##            var checkarr = [];
-##            for (var i = 0, l = nodes.length; i < l; i++) {
-##                checkarr.push(nodes[i].id);
-##            }
-##            $.ajax({
-##                url: "${TINY_CONTEXT_PATH+adminPath}/org/roleMenu/save",
-##                type: "post",
-##                traditional: true,
-##                data: {ids: checkarr, id:${id}},
-##                dataType: "json",
-##                success: function (data) {
-##                    if (data.status == "y") {
-##                        layer.msg(data.info, 2, 1, function () {
-##                            window.location.href = load;
-##                        })
-##                    } else {
-##                        layer.msg(data.info)
-##                    }
-##                }
-##            })
-##        })
-##
-##    });
-##    //-->
-##</SCRIPT>
-##
-##

@@ -35,6 +35,7 @@ public class Project implements Serializable {
     public static String ACL_OPEN = "0";
     public static String ACL_PRIVATE = "1";
     public static String ACL_CUSTOM = "2";
+    ////////////////////////
     /**
      * 项目下任务完成进度
      */
@@ -57,10 +58,16 @@ public class Project implements Serializable {
      * 总剩余
      */
     private float allLeft;
+    ///////////////////////
+
     /**
      * 项目id
      */
     private Integer projectId;
+    /**
+     * 编号
+     */
+    private Integer no;
     /**
      * 是否作为目录
      * <p>
@@ -190,6 +197,14 @@ public class Project implements Serializable {
 
     public Project() {
         setProjectDeleted(DELETE_NO);
+    }
+
+    public Integer getNo() {
+        return no;
+    }
+
+    public void setNo(Integer no) {
+        this.no = no;
     }
 
     public float getAllLeft() {

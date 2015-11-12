@@ -34,7 +34,7 @@ public class ProjectTask implements Serializable {
 	public static String PAUSE = "4";
 	public static String CANCEL = "5";
 	public static String CLOSE = "6";
-
+	/////////////////
 	/**
 	 * 用于显示关联项目名称
 	 */
@@ -43,11 +43,17 @@ public class ProjectTask implements Serializable {
 	 * 关联需求及需求描述表
 	 */
 	private String storySpec;
+	//////////////////
 	/**
 	 * 任务id
 	 *
 	 */
 	private Integer taskId;
+	/**
+	 * 编号
+	 */
+	private Integer no;
+
 	/**
 	 * 任务所属项目Id
 	 */
@@ -228,6 +234,14 @@ public class ProjectTask implements Serializable {
 
 	public void setStorySpec(String storySpec) {
 		this.storySpec = storySpec;
+	}
+
+	public Integer getNo() {
+		return no;
+	}
+
+	public void setNo(Integer no) {
+		this.no = no;
 	}
 
 	public Integer getTaskId() {

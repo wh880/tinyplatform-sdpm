@@ -197,6 +197,9 @@ public class MenuManagerImpl implements MenuManager {
 
 
     private List<Menu> findShow(List<Menu> list) {
+        if (CollectionUtil.isEmpty(list)) {
+            return new ArrayList<Menu>();
+        }
         Predicate<Menu> predicate = new Predicate<Menu>() {
             public boolean apply(Menu menu) {
                 return Menu.IS_SHOW_YES.equals(menu.getIsShow());
