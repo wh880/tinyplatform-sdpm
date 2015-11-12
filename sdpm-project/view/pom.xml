@@ -17,5 +17,11 @@
             <version>${project.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>org.tinygroup.gantt</artifactId>
+            <version>${tiny_ui_version}</version>
+        </dependency>
+
     </dependencies>
 </project>

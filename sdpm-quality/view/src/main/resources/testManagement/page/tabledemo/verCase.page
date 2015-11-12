@@ -4,43 +4,44 @@
 #import("/org/tinygroup/button/components/button_common.component")
 #import("/org/tinygroup/button/components/button.component")
 #import("/org/tinygroup/button/components/button_smart.component")
-#macro assignOperation(operation doActionUrl map)<span id="${operation}-${tableId}">#bodyContent</span><script type="text/javascript">
- $(function(){
-  $("#${operation}-${tableId}").on("click",function() {
-		layer.confirm("请确认?",function() {
-			 var checklist = [];
-			 var userId = $("select[name=assignTo] option:selected").val();
-			 if(userId == 0){
-			    layer.msg("请选择指派对象")
-                return false;
-			 }
-			 $("#${tableId} input[name=idCheck]:checked").each(function (e) {
-				  checklist.push($(this).val());
-			 });
-			 if(checklist.length==0){
-				layer.msg("请选择记录")
-				 return false;
-			 }
-			 $.ajax({
-				  url: "${doActionUrl}",
-				  data: {ids: checklist,userId:userId, action: "${operation}"#mapToJson(map)},
-				  dataType: "json",
-				  traditional:true,
-				  success: function (data) {
-						if (data.status=="success"||data.status=="y") {
-							  location.href = "${TINY_CONTEXT_PATH+adminPath+"/quality/version/taskToCase?testversionId="+testversionId+"&currentPageId=5&status=tverallcase"}";
-						}else{
-							 layer.msg(data.info);
-						}
-				  },
-				  error:function(){
-					  layer.msg("系统出错，请确认你的请求地址");
-				  }
-			 })
-		});
-		//return false;
-  })
- });
+#macro assignOperation(operation doActionUrl map)<span id="${operation}-${tableId}">#bodyContent</span>
+<script type="text/javascript">
+    $(function () {
+        $("#${operation}-${tableId}").on("click", function () {
+            layer.confirm("请确认?", function () {
+                var checklist = [];
+                var userId = $("select[name=assignTo] option:selected").val();
+                if (userId == 0) {
+                    layer.msg("请选择指派对象")
+                    return false;
+                }
+                $("#${tableId} input[name=idCheck]:checked").each(function (e) {
+                    checklist.push($(this).val());
+                });
+                if (checklist.length == 0) {
+                    layer.msg("请选择记录")
+                    return false;
+                }
+                $.ajax({
+                    url: "${doActionUrl}",
+                    data: {ids: checklist, userId: userId, action: "${operation}"#mapToJson(map)},
+                    dataType: "json",
+                    traditional: true,
+                    success: function (data) {
+                        if (data.status == "success" || data.status == "y") {
+                            location.href = "${TINY_CONTEXT_PATH+adminPath+" / quality / version / taskToCase ? testversionId = "+testversionId+" & currentPageId = 5 & status = tverallcase"}";
+                        } else {
+                            layer.msg(data.info);
+                        }
+                    },
+                    error: function () {
+                        layer.msg("系统出错，请确认你的请求地址");
+                    }
+                })
+            });
+            //return false;
+        })
+    });
 </script>#end
 #!set(activeTitle="测试管理",activeMenuId=currentPageId)
 #set(testCaseTableId="testCaseTableId")
@@ -48,160 +49,170 @@
 
 #set(name="qualityVersion")
 #@div()
-#@tabWithInit("tab_demo" "optionsBox")
-    #@div(divClass="dropdownBox")
-        #include("/testManagement/page/dropdownMenu.page")
-    #end
-    #@tabHead()
-        #include("/testManagement/page/Tab.page")
-    #end
+    #@tabWithInit("tab_demo" "optionsBox")
+        #@div(divClass="dropdownBox")
+            #include("/testManagement/page/dropdownMenu.page")
+        #end
+        #@tabHead()
+            #include("/testManagement/page/Tab.page")
+        #end
 
-    #@tabBodyCol("ptop-5")
-    #set(testversionId = testversionId)
-    ##operationbar start1
-        #@div(divClass="operationbar")
-        <span class="f">
-        	<a href="${TINY_CONTEXT_PATH+adminPath}/quality/version/versionInfo?testversionId=${testversionId}&currentPageId=5">${testTask?.testtaskTitle}</a>>
-        		#foreach(m:menuManager.getScopeMenus("version-case"))
-    				#if(m.id=="tversee")
-    					#@buttonGroup()
-		                    #@buttonDropdown("more" buttonClass="btnDropDown")<span>分组查看</span>
-		                     	#@spanCaret()#end
-		                    #end
-		                    #@ulDropdownMenu("downMenuSty")                       
-		                         <p>
-		                             <a id="group" href="javascript:void(0)">需求分组</a>
-		                             <script>
-                                        $(function(){
-                                           $("#group").on("click",function(){
-                                                  $.ajax({
-                                                     type: "get",
-                                                     url: "${TINY_CONTEXT_PATH+adminPath}/quality/testCase/group?productId=${qualityProductId}&testtaskId=${testversionId}",
-                                                     dataType:"html",
-                                                     success: function(data){
-                                                         $("#caseGroup").html(data);
-                                                     },
-                                                     error: function(res){
-                                                         alert("失败");
-                                                     }
-                                                 });
-                                                 $(".operationbar a").removeClass("active_btn");
-                                                 $(this).closest(".btn-group").find("button:first span:first").addClass("active_btn").html($(this).html());
+        #@tabBodyCol("ptop-5")
+            #set(testversionId = testversionId)
+        ##operationbar start1
+            #@div(divClass="operationbar")
+            <span class="f">
+        	<a href="${TINY_CONTEXT_PATH+adminPath}/quality/version/versionInfo?testversionId=${testversionId}&currentPageId=5">${testTask
+                ?.testtaskTitle}</a>>
+                #foreach(m:menuManager.getScopeMenus("version-case"))
+                    #if(m.id=="tversee")
+                        #@buttonGroup()
+                            #@buttonDropdown("more" buttonClass="btnDropDown")<span>分组查看</span>
+                                #@spanCaret()#end
+                            #end
+                            #@ulDropdownMenu("downMenuSty")
+                                <p>
+                                    <a id="group" href="javascript:void(0)">需求分组</a>
+                                    <script>
+                                        $(function () {
+                                            $("#group").on("click", function () {
+                                                $.ajax({
+                                                    type: "get",
+                                                    url: "${TINY_CONTEXT_PATH+adminPath}/quality/testCase/group?productId=${qualityProductId}&testtaskId=${testversionId}",
+                                                    dataType: "html",
+                                                    success: function (data) {
+                                                        $("#caseGroup").html(data);
+                                                    },
+                                                    error: function (res) {
+                                                        alert("失败");
+                                                    }
+                                                });
+                                                $(".operationbar a").removeClass("active_btn");
+                                                $(this).closest(".btn-group").find("button:first span:first").addClass("active_btn").html($(this).html());
 
 
-                                           });
+                                            });
                                         })
 
-                                     </script>
-		                         </p>	
-		                        #@liDivider()#end
-		                    #end
-		                #end
-		             #else
-		             #if(m.id == "tversearch")
-		             	<a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
-		             #else
-		             	<a href="${TINY_CONTEXT_PATH+adminPath}${eval(m.href)+"&testversionId="+testversionId}" class="${m.id==status?'active_btn':''}">${m.name}</a>
-		             #end
-		             #end
-		         #end  				
+                                    </script>
+                                </p>
+                                #@liDivider()#end
+                            #end
+                        #end
+                    #else
+                        #if(m.id == "tversearch")
+                            <a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
+                        #else
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${eval(m.href)+" &testversionId="+testversionId}"
+                               class="${m.id==status?'active_btn':''}">${m.name}</a>
+                        #end
+                    #end
+                #end
 				</span>
-        <span class="r">
-				#foreach(m:menuManager.getScopeMenus("version-case-right"))             
-             		<a href="${TINY_CONTEXT_PATH+adminPath}${eval(m.href)}">#buttonIcon(iconClass=m.icon)${m.name}</a>
-		 		#end
+            <span class="r">
+                #set(m=menuManager.getMenu("tveroutdata"))
+                #if(m)
+                    <a href="${TINY_CONTEXT_PATH+adminPath}${eval(m.href)}">#buttonIcon(iconClass=m.icon)${m.name}</a>
+                #end
+                #set(m=menuManager.getMenu("tverrelcase"))
+                #if(m)
+                    <a href="${TINY_CONTEXT_PATH+adminPath}${eval(m.href)}">#buttonIcon(iconClass=m.icon)${m.name}</a>
+                #end
 				</span>
-            #div(divClass="clearfix")
-            #include("/testManagement/page/mulsearchTestCase.page")
+                #div(divClass="clearfix")
+                #include("/testManagement/page/mulsearchTestCase.page")
+            #end
+        ##operationbar end
         #end
-    ##operationbar end
-    #end
-##tabbody end
-#@toggleBox({"class":"open"})
-	#@toggleLeft({"class":"aclass"})
-		#@settoggleLeftTitle()#for(product : ProductUtils.getProductList())
-                              #if(product?.productId == qualityProductId)
-                              ${product?.productName}
-                              #break
-                              #end
-                              #end#end
-			#@settoggleLeftBody("treeLeftbox")
+    ##tabbody end
+        #@toggleBox({"class":"open"})
+            #@toggleLeft({"class":"aclass"})
+                #@settoggleLeftTitle()#for(product : ProductUtils.getProductList())
+                    #if(product?.productId == qualityProductId)
+                        ${product?.productName}
+                        #break
+                    #end
+                #end#end
+            #@settoggleLeftBody("treeLeftbox")
                 #@zTreeList(call("link",adminPath+"/system/module/bugTree?moduleType=bug&moduleRoot="+qualityProductId))
                     #setzTreeValMap({"id":"moduleId","name":"moduleName","pid":"moduleParent"}) ##key值为固定
-                    #zTreeSetLinkUrl(TINY_CONTEXT_PATH+adminPath+"/quality/version/taskToCase?status="+status+"&currentPageId=5&testversionId="+testversionId)
-                    #zTreeSetAddUrl(TINY_CONTEXT_PATH+adminPath+"/system/module/ajax/save?moduleType=bug&moduleRoot="+qualityProductId)
+                    #zTreeSetLinkUrl(TINY_CONTEXT_PATH+adminPath+"/quality/version/taskToCase?status="+status+
+                        "&currentPageId=5&testversionId="+testversionId)
+                    #zTreeSetAddUrl(TINY_CONTEXT_PATH+adminPath+
+                        "/system/module/ajax/save?moduleType=bug&moduleRoot="+qualityProductId)
                     #zTreeSetEditUrl(TINY_CONTEXT_PATH+adminPath+"/system/module/ajax/save")
                     #zTreeSetDelUrl(TINY_CONTEXT_PATH+adminPath+"/system/module/ajax/delete")
                 #end
             #end
-	#end
+        #end
 
-    #@toggleRight()
-    <div id="caseGroup">
-#@tinyTable(testCaseTableId)
-#@div(divBaseClass="tinyheaderTools")
-	<div class="f col-5">
-		<input type="button" value="全选" class="btn btn-default btn-primary col-1.5" 
-			onclick="selectAllNullorReserve('idCheck','全选');" />
-		<div class="col-0">&nbsp&nbsp</div>
-		<input type="button" value="反选" class="btn btn-default btn-primary col-1.5"
-		 	onclick="selectAllNullorReserve('idCheck','反选');" />
-		<div class="col-2 text-r">
-		#@assignOperation("assign" TINY_CONTEXT_PATH+adminPath+"/quality/version/ajax/assign")<div><input type="button" value="指派" class="btn radius grayBtn" /></div>#end
-				</div>		
-		<div class="col-4">		
-			#@Tselect2F()
-               	#@Tselect2Body("assignTo" "" {"class":"input-text select2"})
-               	    <option value="0">/</option>
-               	    #for(user : userList)
-               		<option value="${user?.orgUserId}">${user?.orgUserRealName}</option>
-               		#end
-                #end                  
-        	#end   	 
-        	</div>
-        <div class="col-0">&nbsp&nbsp</div>
+        #@toggleRight()
+        <div id="caseGroup">
+            #@tinyTable(testCaseTableId)
+                #@div(divBaseClass="tinyheaderTools")
+                <div class="f col-5">
+                    <input type="button" value="全选" class="btn btn-default btn-primary col-1.5"
+                           onclick="selectAllNullorReserve('idCheck','全选');"/>
+                    <div class="col-0">&nbsp&nbsp</div>
+                    <input type="button" value="反选" class="btn btn-default btn-primary col-1.5"
+                           onclick="selectAllNullorReserve('idCheck','反选');"/>
+                    <div class="col-2 text-r">
+                        #@assignOperation("assign" TINY_CONTEXT_PATH+adminPath+"/quality/version/ajax/assign")
+                            <div><input type="button" value="指派" class="btn radius grayBtn"/></div>#end
+                    </div>
+                <div class="col-4">
+                    #@Tselect2F()
+                        #@Tselect2Body("assignTo" "" {"class":"input-text select2"})
+                            <option value="0">/</option>
+                            #for(user : userList)
+                            <option value="${user?.orgUserId}">${user?.orgUserRealName}</option>
+                        #end
+                    #end
+                #end
+            </div>
+                <div class="col-0">&nbsp&nbsp</div>
 
-	</div>
-	<span class=" form-inline">
+            </div>
+                <span class=" form-inline">
 #setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置
 </span>
-#end
-#set(requestStatusString = tinyRequestQueryString!=null ?("?"+tinyRequestQueryString):"")
-#@tinyTableContent(TINY_CONTEXT_PATH+adminPath+"/quality/version/taskToCaseData"+requestStatusString)
-#@thead()
-#@tr()
-	#@tinyTh({"width":"6"})<input type="checkbox" name="userid" value="">#end
-	#@tinyTh({"class":"sorting","rel":"caseId"})ID#end
-	#@tinyTh({"class":"sorting","rel":"priority"})P#end
-	#@tinyTh({"class":"sorting","rel":"caseTitle"})用例标题#end
-	#@tinyTh({"class":"sorting","rel":"caseType"})用例类型#end
-	#@tinyTh({"class":"sorting","rel":"caseScriptedBy"})指派给#end
-	#@tinyTh({"class":"sorting","rel":"caseLastRunner"})执行人#end
-	#@tinyTh({"class":"sorting","rel":"caseLastRunDate"})执行时间#end
-	#@tinyTh({"class":"sorting","rel":"caseLastRunResult"})结果#end
-	#@tinyTh({"class":"sorting","rel":"caseStatus"})状态#end
-	#@tinyTh({"csortinglass":"sorting","rel":"sortname"})操作#end
-	#end
-#end
-<script type="text/javascript">
-    $(function(){
-    $('#${tableId}').on('click','.delBtn',function(e){
-user_del(this,'1');
-});
-})
-</script>
-#@dialog("myModal")
-#@dialogHeader()#end
-#@dialogBody()<p>对话框内容…</p>#end
-#@dialogFooter()
-	#@buttonEnsure()确定#end
-	#@buttonCancel()关闭#end
-#end
-#end
-#end
-#end
-##tinyTable end
-#end
+            #end
+            #set(requestStatusString = tinyRequestQueryString!=null ?("?"+tinyRequestQueryString):"")
+            #@tinyTableContent(TINY_CONTEXT_PATH+adminPath+"/quality/version/taskToCaseData"+requestStatusString)
+                #@thead()
+                    #@tr()
+                        #@tinyTh({"width":"6"})<input type="checkbox" name="userid" value="">#end
+                        #@tinyTh({"class":"sorting","rel":"caseId"})ID#end
+                        #@tinyTh({"class":"sorting","rel":"priority"})P#end
+                        #@tinyTh({"class":"sorting","rel":"caseTitle"})用例标题#end
+                        #@tinyTh({"class":"sorting","rel":"caseType"})用例类型#end
+                        #@tinyTh({"class":"sorting","rel":"caseScriptedBy"})指派给#end
+                        #@tinyTh({"class":"sorting","rel":"caseLastRunner"})执行人#end
+                        #@tinyTh({"class":"sorting","rel":"caseLastRunDate"})执行时间#end
+                        #@tinyTh({"class":"sorting","rel":"caseLastRunResult"})结果#end
+                        #@tinyTh({"class":"sorting","rel":"caseStatus"})状态#end
+                        #@tinyTh({"csortinglass":"sorting","rel":"sortname"})操作#end
+                    #end
+                #end
+                <script type="text/javascript">
+                    $(function () {
+                        $('#${tableId}').on('click', '.delBtn', function (e) {
+                            user_del(this, '1');
+                        });
+                    })
+                </script>
+                #@dialog("myModal")
+                    #@dialogHeader()#end
+                    #@dialogBody()<p>对话框内容…</p>#end
+                    #@dialogFooter()
+                        #@buttonEnsure()确定#end
+                        #@buttonCancel()关闭#end
+                    #end
+                #end
+            #end
+        #end
+    ##tinyTable end
+    #end
 ##toggleright end
 </div>
 #end
@@ -211,32 +222,32 @@ user_del(this,'1');
 ##tab end
 #end
 <script type="text/javascript">
-function selectAllNullorReserve(obj,type){
-   if(obj!=null&&obj!=""){
-    if(document.getElementsByName(obj)!=undefined&&document.getElementsByName(obj).length>0){	//getElementsByName函数的作用按名字查找对象，返回一个数组。
-     var userids = document.getElementsByName(obj);
-     if(type=="全选"){
-      for(var i=0;i<userids.length;i++){
-       if(userids[i].checked == false){
-        userids[i].checked = true;
-       }
-      }
-     }else if(type=="全不选"){
-      for(var i=0;i<userids.length;i++){
-       if(userids[i].checked == true){
-        userids[i].checked = false;
-       }
-      }
-     }else if(type=="反选"){
-      for(var i=0;i<userids.length;i++){
-       if(userids[i].checked == true){
-        userids[i].checked = false;
-       }else{
-        userids[i].checked = true;
-       }
-      }
-     }
+    function selectAllNullorReserve(obj, type) {
+        if (obj != null && obj != "") {
+            if (document.getElementsByName(obj) != undefined && document.getElementsByName(obj).length > 0) {	//getElementsByName函数的作用按名字查找对象，返回一个数组。
+                var userids = document.getElementsByName(obj);
+                if (type == "全选") {
+                    for (var i = 0; i < userids.length; i++) {
+                        if (userids[i].checked == false) {
+                            userids[i].checked = true;
+                        }
+                    }
+                } else if (type == "全不选") {
+                    for (var i = 0; i < userids.length; i++) {
+                        if (userids[i].checked == true) {
+                            userids[i].checked = false;
+                        }
+                    }
+                } else if (type == "反选") {
+                    for (var i = 0; i < userids.length; i++) {
+                        if (userids[i].checked == true) {
+                            userids[i].checked = false;
+                        } else {
+                            userids[i].checked = true;
+                        }
+                    }
+                }
+            }
+        }
     }
-   }  
-}
 </script>

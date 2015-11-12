@@ -73,7 +73,7 @@
             </div>
             <div class="col-1">
                 <button style="float: left" type="submit" id="submit" class="backBtn"><a
-                        href="${TINY_CONTEXT_PATH+adminPath}/product/page/project/product-release.page">返回</a></button>
+                        href="javascript :;" onclick="javascript:history.back(-1);">返回</a></button>
             </div>
             <div class="col-5"></div>
         </div>
