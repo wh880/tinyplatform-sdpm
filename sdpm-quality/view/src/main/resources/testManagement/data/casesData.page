@@ -21,20 +21,19 @@ ${casepager?.totalCount+1}
     #@td()${getDict("caseStatus",c?.caseStatus)}#end
     #@td()
         #foreach(m:menuManager.getScopeMenus("testcase-op"))
-
             #if(m.id=="teditioncase"||m.id=="tproposecase")
             <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?caseId=${c?.caseId}"
                title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
             #else
-                #if(m.id=="texecution"||m.id=="tresult")
                     #iconOperations("#myModal" m.icon m.name "865" "400" adminPath + m.href+"?caseId="+c?.caseId+"&caseVersion="+c?.caseVersion "ml-1")
-                #else
-                    #@tinyTableItemRemove(TINY_CONTEXT_PATH +adminPath+m.href  c?.caseId)<i class="${m.icon}"></i>
-                    #end
-                #end
             #end
         #end
-
+        #set(m=menuManager.getMenu("tcaseinfodelete"))
+        #if(m)
+            #@tinyTableItemRemove(TINY_CONTEXT_PATH +adminPath+m.href  c?.caseId)<i
+                    class="${m.icon}"></i>
+            #end
+        #end
     #end
 #end
 #end

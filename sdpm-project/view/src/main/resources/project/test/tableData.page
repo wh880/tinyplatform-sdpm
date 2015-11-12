@@ -1,32 +1,33 @@
 #macro setTinyItemCount(num)
-	<input type="hidden" name="records" value="${num}"/>
+<input type="hidden" name="records" value="${num}"/>
 #end
 
 #set(records=versionPager?.getTotalCount(),temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
 #if (pagesize>records-pagesize*(page-1))
-#set(pagesize=records-(page-1)*pagesize)
+    #set(pagesize=records-(page-1)*pagesize)
 #end
 #setTinyItemCount(records)
-#for(v:versionPager.getRecords())
-#@tr()
-    #@td()<input type="checkbox" value="${v?.testversionId}" name="idCheck">#end
-    #@td()<a
-            href="${TINY_CONTEXT_PATH+adminPath}/quality/version/taskToCase?testversionId=${v?.testversionId}&currentPageId=5&status=tverallcase">${v
-        ?.testversionId}</a>#end
-    #@td()<a
-            href="${TINY_CONTEXT_PATH+adminPath}/quality/version/taskToCase?testversionId=${v?.testversionId}&currentPageId=5&status=tverallcase">${v
-        ?.testtaskTitle}</a>#end
-    #@td()${v?.buildName}#end
-    #@td()${v?.testtaskOwner?UserUtils.getUserById(v?.testtaskOwner)?.orgUserRealName:""}#end
-    #@td()${formatDate(v?.testtaskBegin, "yyyy-MM-dd")}#end
-    #@td()${formatDate(v?.testtaskEnd, "yyyy-MM-dd")}#end
-    #@td()${getDict("versionStatus",v?.testtaskStatus)}#end
-    #@td()
-        #foreach(m:menuManager.getScopeMenus("testversion-op"))
-            #if(m.id != "tversiondelete")
+#foreach(v:versionPager.getRecords())
+    #@tr()
+        #@td()<input type="checkbox" value="${v?.testversionId}" name="idCheck">#end
+        #@td()<a
+                href="${TINY_CONTEXT_PATH+adminPath}/quality/version/taskToCase?testversionId=${v?.testversionId}&currentPageId=5&status=tverallcase">${v
+            ?.testversionId}</a>#end
+        #@td()<a
+                href="${TINY_CONTEXT_PATH+adminPath}/quality/version/taskToCase?testversionId=${v?.testversionId}&currentPageId=5&status=tverallcase">${v
+            ?.testtaskTitle}</a>#end
+        #@td()${v?.buildName}#end
+        #@td()${v?.testtaskOwner?UserUtils.getUserById(v?.testtaskOwner)?.orgUserRealName:""}#end
+        #@td()${formatDate(v?.testtaskBegin, "yyyy-MM-dd")}#end
+        #@td()${formatDate(v?.testtaskEnd, "yyyy-MM-dd")}#end
+        #@td()${getDict("versionStatus",v?.testtaskStatus)}#end
+        #@td()
+            #foreach(m:menuManager.getScopeMenus("testversion-op"))
             <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?testversionId=${v?.testversionId}&currentPageId=5"
                title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
-            #else
+            #end
+            #set(m=menuManager.getMenu("tversiondelete"))
+            #if(m)
             <a class="versionDelete" href="javascript:void(0)"><i class="${m.icon}" title="删除"></i></a>
             <script type="text/javascript">
                 $(function () {
@@ -35,7 +36,7 @@
                         layer.confirm("是否确认删除?", function () {
                             $.ajax({
                                 type: "get",
-                                url: "${TINY_CONTEXT_PATH+adminPath+m?.href+" ? testversionId = "+v?.testversionId}",
+                                url: "${TINY_CONTEXT_PATH+adminPath+m?.href+'?testversionId ='+v?.testversionId}",
                                 dataType: "json",
                                 success: function (data) {
                                     if (data.status == "y") {
@@ -49,12 +50,7 @@
                 })
 
             </script>
-			#end
+            #end
         #end
-
-    ###iconOperations("#myModal" "icon-remove" "删除版本" "250" "60" "/testManagement/page/tabledemo/delete.pagelet" "ml-5")
-
-
-	#end
-#end
+    #end
 #end
