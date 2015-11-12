@@ -203,7 +203,6 @@ public class OrgRoleMenuDaoImpl extends TinyDslDaoSupport implements OrgRoleMenu
 
             public Delete generate() {
                 return delete(ORG_ROLE_MENUTABLE).where(and(
-                        ORG_ROLE_MENUTABLE.ID.eq(new JdbcNamedParameter("id")),
                         ORG_ROLE_MENUTABLE.ORG_ROLE_ID.eq(new JdbcNamedParameter("orgRoleId")),
                         ORG_ROLE_MENUTABLE.ORG_ROLE_MENU_ID.eq(new JdbcNamedParameter("orgRoleMenuId"))));
             }

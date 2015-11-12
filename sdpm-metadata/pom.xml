@@ -7,9 +7,7 @@
         <groupId>org.tinygroup</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <groupId>org.tinygroup</groupId>
     <artifactId>sdpm-metadata</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
     <name>sdpm-metadata develop</name>
 
     <dependencies>

@@ -13,4 +13,6 @@
         <property name="dictHandle" ref="dictHandle"></property>
         <property name="isInitFromFile" value="true"></property>
     </bean>
+
+    <bean id="commonFilter" class="org.tinygroup.sdpm.common.web.CommonFilter"/>
 </beans>

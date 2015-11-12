@@ -2,6 +2,11 @@ package org.tinygroup.sdpm.org.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.tinygroup.commons.tools.ArrayUtil;
+import org.tinygroup.commons.tools.CollectionUtil;
+import org.tinygroup.sdpm.common.menu.Menu;
+import org.tinygroup.sdpm.common.menu.MenuManager;
+import org.tinygroup.sdpm.common.util.Collections3;
 import org.tinygroup.sdpm.org.biz.inter.RoleManager;
 import org.tinygroup.sdpm.org.biz.inter.RoleMenuManager;
 import org.tinygroup.sdpm.org.biz.inter.RoleUserManager;
@@ -16,6 +21,8 @@ import java.util.List;
 
 @Component
 public class RoleServiceImpl implements RoleService {
+    @Autowired
+    private MenuManager menuManager;
 
     @Autowired
     private RoleManager roleManager;
@@ -58,24 +65,38 @@ public class RoleServiceImpl implements RoleService {
         return roleMenuManager.findMenuIds(roleId);
     }
 
-    public OrgRoleMenu findRoleMenuId(String id) {
-        return roleMenuManager.findId(id);
+    public Integer batchAddRoleMenu(List<OrgRoleMenu> orgRoleMenuList) {
+        return roleMenuManager.batchAdd(orgRoleMenuList);
     }
 
-    public OrgRoleMenu addRoleMenu(OrgRoleMenu orgRoleMenu) {
-        return roleMenuManager.add(orgRoleMenu);
+    public Integer saveRoleMenu(Integer roleId, String parentMenuId, String[] newMenuIds) {
+        List<OrgRoleMenu> orgRoleMenus = findMenuByRoleId(roleId);
+        if (!CollectionUtil.isEmpty(orgRoleMenus)) {
+            List<Menu> allChildMenus = menuManager.getAllChildMenus(parentMenuId);
+            List<String> menuIdList = Collections3.extractToList(allChildMenus, "id");//所有的菜单
+            List<String> roleMenuIdList = Collections3.extractToList(orgRoleMenus, "orgRoleMenuId");//当前角色已经拥有的菜单
+            List<String> currentParentRoleMenuIdList = Collections3.intersection(menuIdList, roleMenuIdList);//当前父级菜单已存在菜单，需要请清除
+            List<OrgRoleMenu> delOrgRoleMenus = new ArrayList<OrgRoleMenu>();
+            assembleOrgRoleMenuList(delOrgRoleMenus, currentParentRoleMenuIdList.toArray(new String[0]), roleId);
+            batchDeleteRoleMenu(delOrgRoleMenus);
+        }
+        List<OrgRoleMenu> newOrgRoleMenus = new ArrayList<OrgRoleMenu>();
+        assembleOrgRoleMenuList(newOrgRoleMenus, newMenuIds, roleId);
+
+        return batchAddRoleMenu(newOrgRoleMenus);
     }
 
-    public void batchAddRoleMenu(List<OrgRoleMenu> orgRoleMenuList) {
-        roleMenuManager.batchAdd(orgRoleMenuList);
-    }
+    private void assembleOrgRoleMenuList(final List<OrgRoleMenu> newOrgRoleMenus, String[] menuIds, Integer roleId) {
+        if (ArrayUtil.isEmptyArray(menuIds)){
+            return;
+        }
+        for (String newMenuId : menuIds) {
+            OrgRoleMenu orgRoleMenu = new OrgRoleMenu();
+            orgRoleMenu.setOrgRoleId(roleId);
+            orgRoleMenu.setOrgRoleMenuId(newMenuId);
+            newOrgRoleMenus.add(orgRoleMenu);
+        }
 
-    public OrgRoleMenu updateRoleMenu(OrgRoleMenu orgRoleMenu) {
-        return roleMenuManager.update(orgRoleMenu);
-    }
-
-    public Integer deleteRoleMenu(Integer id) {
-        return roleMenuManager.delete(id);
     }
 
     public void batchDeleteRoleMenu(List<OrgRoleMenu> orgRoleMenuList) {
@@ -101,8 +122,6 @@ public class RoleServiceImpl implements RoleService {
         }
         return roleList;
     }
-
-
 
     public List<OrgRoleUser> findUserByRoleId(Integer roleId) {
         return roleUserManager.findUserIds(roleId);
@@ -135,6 +154,9 @@ public class RoleServiceImpl implements RoleService {
     }
 
     public List<OrgRole> getRoleByIds(String... ids) {
+        if (ArrayUtil.isEmptyArray(ids)) {
+            return new ArrayList<OrgRole>();
+        }
         return roleManager.getRolesByIds(ids);
     }
 

@@ -7,5 +7,5 @@
         <property name="menuManager" ref="menuManager"></property>
     </bean>
     <bean id="menuManager" class="org.tinygroup.sdpm.common.menu.impl.MenuManagerImpl"/>
-    <bean id="commonFilter" class="org.tinygroup.sdpm.common.filter.CommonFilter"/>
+
 </beans>

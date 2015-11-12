@@ -25,18 +25,18 @@ public class RoleAction extends BaseController {
     /**
      * 增加或编辑时候显示页面
      *
-     * @param id
+     * @param roleId
      * @param model
      * @return
      */
     @RequiresPermissions(value = {"org-privilege-edit", "organizationAddGroup"}, logical = Logical.OR)
     @RequestMapping("/form")
-    public String form(Integer id, Model model) {
-        if (id != null) {
-            OrgRole role = roleService.findRole(id);
+    public String form(Integer roleId, Model model) {
+        if (roleId != null) {
+            OrgRole role = roleService.findRole(roleId);
             model.addAttribute("role", role);
         }
-        return "organization/privilege/addGroup.page";
+        return "organization/privilege/addRoleForm";
     }
 
     /**
