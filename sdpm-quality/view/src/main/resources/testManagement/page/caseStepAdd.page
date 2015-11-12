@@ -25,7 +25,7 @@
 					#iconOperations(iconOperationsIcon="icon-remove",iconOperationsTitle="删除",iconOperationsCls="btn btn-small btn-default delbutton")
 			#end
 		#end
-		
+
 	#end
 	#else
 	#@tr(trId="row1")
@@ -47,8 +47,8 @@
 #end
 <script>
 $(function(){
-	function updateStepID(){    
-		$('.itemlist-table>.databody .stepID').each(function(index){	
+	function updateStepID(){
+		$('.itemlist-table>.databody .stepID').each(function(index){
 			$(this).html(index+1);		
 		});
 	}
@@ -63,13 +63,13 @@ $(function(){
     	var $tpl=$thisTr.clone();
     	    $tpl.find("input:text").val("");
     		$thisTr.after($tpl);
-		updateStepID();		
+		updateStepID();
 	}).on("click",".delbutton",function(){
 		if($('.databody .stepID').size() == 1) return;
 		var that=this;
 		layer.confirm('确定删除?', function(){
 		    $(that).closest("tr").remove();
-			updateStepID();	
+			updateStepID();
 			layer.msg('删除成功！') 
 		})
 	});
