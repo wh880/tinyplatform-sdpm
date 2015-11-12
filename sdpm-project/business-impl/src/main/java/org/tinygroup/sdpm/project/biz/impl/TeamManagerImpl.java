@@ -47,6 +47,10 @@ public class TeamManagerImpl implements TeamManager {
         return teamDao.findByProjectId(projectId);
     }
 
+    public List<ProjectTeam> findByProductId(Integer productId) {
+        return teamDao.findByProductId(productId);
+    }
+
     public ProjectTeam add(ProjectTeam team) {
         return teamDao.add(team);
     }

@@ -36,7 +36,7 @@
         <application-processor bean="fileMonitorProcessor"></application-processor>
         <application-processor bean="tinyTemplateConfigProcessor"></application-processor>
         <!--数据库安装-->
-        <!--<application-processor bean="databaseInstallerProcessor"></application-processor>-->
+        <application-processor bean="databaseInstallerProcessor"></application-processor>
         <application-processor bean="stdProcessor"></application-processor>
         <application-processor bean="dictLoadProcessor"></application-processor>
     </application-processors>

@@ -1,4 +1,4 @@
-#setTinyItemCount(records)
+#setTinyItemCount(teamPager?.getTotalCount())
 #for(t:teamPager?.getRecords())
 #@tr()
     #@td()<input type="checkbox" value="1"

@@ -19,11 +19,9 @@ import org.tinygroup.sdpm.productLine.service.ProductLineService;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
+import org.tinygroup.sdpm.project.dao.pojo.ProjectTeam;
 import org.tinygroup.sdpm.project.service.dto.BurnDTO;
-import org.tinygroup.sdpm.project.service.inter.BuildService;
-import org.tinygroup.sdpm.project.service.inter.BurnService;
-import org.tinygroup.sdpm.project.service.inter.ProjectProductService;
-import org.tinygroup.sdpm.project.service.inter.ProjectService;
+import org.tinygroup.sdpm.project.service.inter.*;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityTestCase;
 import org.tinygroup.sdpm.quality.service.inter.TestCaseService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
@@ -32,6 +30,7 @@ import org.tinygroup.sdpm.system.service.inter.ActionService;
 import org.tinygroup.sdpm.system.service.inter.HistoryService;
 import org.tinygroup.sdpm.util.LogUtil;
 import org.tinygroup.sdpm.util.ProductUtils;
+import org.tinygroup.sdpm.util.ProjectUtils;
 import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -79,6 +78,8 @@ public class ProductAction extends BaseController {
     private ProjectProductService projectProductService;
     @Autowired
     private ProjectService projectService;
+    @Autowired
+    private TeamService teamService;
 
     @RequestMapping("/{forward}/content")
     public String doc(@PathVariable(value = "forward") String forward, HttpServletRequest request, Model model) {
@@ -374,5 +375,40 @@ public class ProductAction extends BaseController {
     @RequestMapping("addModule")
     public String toAddModule(){
         return "/product/page/tabledemo/addModule.pagelet";
+    }
+    @RequestMapping("team")
+    public String team(){
+        return "/product/page/team/productTeam.page";
+    }
+    @RequestMapping("team/teamManage")
+    public String deleteTeamMember(@CookieValue(value = "cookieProductId",defaultValue = "0")String productId,
+                                   Model model){
+        Integer pId = Integer.valueOf(productId);
+        if(pId!=0){
+            List<ProjectTeam> teamList = teamService.findTeamByProductId(pId);
+            model.addAttribute("teamList", teamList);
+            String[] ids = new String[teamList.size()];
+            if(ids.length>0){
+                for(int i=0;i<teamList.size();i++){
+                    ids[i] = teamList.get(i).getTeamUserId();
+                }
+                List<OrgUser> userList = userService.findUserListByIds(ids);
+                model.addAttribute("userList", userList);
+            }
+        }
+        return "/product/page/team/teamManage.page";
+    }
+
+    @RequestMapping("team/teamData")
+    public String teamManage(@CookieValue(value = "cookieProductId",defaultValue = "0")String productId,
+                             Model model, Integer start, Integer limit, String order, String ordertype){
+        Integer pId = Integer.valueOf(productId);
+        if (pId != 0) {
+            ProjectTeam team = new ProjectTeam();
+            team.setProductId(pId);
+            Pager<ProjectTeam> pager = teamService.findPager(team, start, limit, order, ordertype);
+            model.addAttribute("teamPager", pager);
+        }
+        return "/product/page/team/teamData.pagelet";
     }
 }

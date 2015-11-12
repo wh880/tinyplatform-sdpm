@@ -17,7 +17,8 @@
 #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/project/team/teamManageSave" "post" {"class":"test"})
     #@table()
     <tr>
-        <td width="20%">
+        <td style="width: 2%"></td>
+        <td width="18%">
             用户
         </td>
         <td width="20%">
@@ -26,41 +27,27 @@
         <td width="20%">
             加盟日
         </td>
-        <td width="20%">
+        <td width="15%">
             可用工日
         </td>
-        <td width="20%">
+        <td width="15%">
             可用工时/天
         </td>
+        #@td("w-p125")
+            #end
     </tr>
         #set(a = 0)
         #foreach(t : teamList)
         <tr>
-            #@thW("250px")
+            <td style="width: 2%"></td>
+            #@thW()
                 ${t?.teamUserId==null?"":UserUtils.getUserById(t?.teamUserId)?.orgUserRealName}
                 <input name="teamList[${a}].teamUserId" value="${t?.teamUserId}" type="hidden">
                 <input name="teamList[${a}].id" value="${t.id}" type="hidden">
             #end
             <td>
-                #tinyInput("text" "teamList["+a+"].teamRole" t.teamRole {"datatype":"","class":"input-text"})
-            </td>
-            <td>
-                #@tinyDateInput("teamList["+a+"].teamJoin" formatDate(now(),"yyyy-MM-dd") "YYYY-MM-DD" )#end
-            </td>
-            <td>
-                #tinyInput("text" "teamList["+a+"].teamDays" t.teamDays {"datatype":"","class":"input-text"})
-            </td>
-            <td>
-                #tinyInput("text" "teamList["+a+"].teamHours" t.teamHours {"datatype":"","class":"input-text"})
-            </td>
-        </tr>
-            #set(a = a + 1)
-        #end
-        #foreach(i : userList)
-        <tr>
-            <td>
                 #@Tselect2F()
-                    #@Tselect2Body("teamList["+a+"].teamUserId" "" {"class":"input-text select2"})
+                    #@Tselect2Body("teamList["a"].teamRole" "" {"class":"input-text select2"})
                         <option></option>
                         #foreach(u : userList)
                             <option value="${u.orgUserId}">${u.orgUserRealName}</option>
@@ -73,20 +60,19 @@
                 #end
             </td>
             <td>
-                #tinyInput("text" "teamList["+a+"].teamRole" "" {"datatype":"","class":"input-text"})
-            </td>
-            <td>
                 #@tinyDateInput("teamList["+a+"].teamJoin" formatDate(now(),"yyyy-MM-dd") "YYYY-MM-DD" )#end
             </td>
             <td>
-                #tinyInput("text" "teamList["+a+"].teamDays" "" {"datatype":"","class":"input-text"})
+                #tinyInput("text" "teamList["+a+"].teamDays" t.teamDays {"datatype":"","class":"input-text"})
             </td>
             <td>
-                #tinyInput("text" "teamList["+a+"].teamHours" "" {"datatype":"","class":"input-text"})
+                #tinyInput("text" "teamList["+a+"].teamHours" t.teamHours {"datatype":"","class":"input-text"})
             </td>
+            <td></td>
         </tr>
             #set(a = a + 1)
         #end
+        #include("teamAdd.page")
     #end
     #@div(divClass="col-7 col-offset-5 form-inline")
         #tinyInput("submit" "submitbtn" " 保存 " {"class":"btn btn-primary"})
