@@ -40,6 +40,13 @@ public interface TeamService {
      List<ProjectTeam> findTeamByProjectId(Integer projectId);
 
     /**
+     * 查询产品下的所有成员
+     * @param projectId
+     * @return
+     */
+    List<ProjectTeam> findTeamByProductId(Integer productId);
+
+    /**
      * 查询
      *
      * @param team

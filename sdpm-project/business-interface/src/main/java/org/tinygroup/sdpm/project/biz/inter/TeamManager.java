@@ -52,6 +52,12 @@ public interface TeamManager {
     public List<ProjectTeam> findByProjectId(Integer projectId);
 
     /**
+     * 根据产品id查团队成员
+     * @param projectId
+     * @return
+     */
+    public List<ProjectTeam> findByProductId(Integer productId);
+    /**
      * 新增有一个成员
      *
      * @param team 新增实体类

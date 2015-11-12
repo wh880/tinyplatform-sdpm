@@ -218,11 +218,20 @@
               icon="icon-remove" sort="1" isShow="1" scope="release-linkbug"/>
     </menu>
 
+    <menu id="product-team" parent-id="myproduct" name="团队" href="/product/team"
+          sort="12" isShow="1" permission="Permission">
+        <menu id="product-team-delete" name="删除" href="/product/team/del" icon="icon-remove" sort="10" isShow="1"
+              scope="product-team-op"/>
+        <menu id="product-team-report" name="团队管理" href="/product/team/teamManage" icon="icon-user" sort="8"
+              isShow="1"
+              scope="product-teammenu-op"/>
+    </menu>
+
     <menu id="product-roadmap" parent-id="myproduct" name="路线图" href="/product/common/roadMap"
-          sort="12" isShow="1" permission="Permission"></menu>
+          sort="11" isShow="1" permission="Permission"></menu>
 
     <menu id="product-archive" parent-id="myproduct" name="文档" href="/product/doc/content"
-          scope="liop" sort="11" isShow="1" permission="Permission">
+          scope="liop" sort="10" isShow="1" permission="Permission">
         <menu id="product-archive-badel" name="批量删除" href="" icon="" sort="9" isShow="1" scope="archive-badel"/>
         <menu id="product-archive-add" name="创建文档" href="" icon="" sort="8" isShow="1" scope="archive-add"/>
         <menu id="product-archive-edit" name="编辑文档" href="/document/doc/edit?docId=${l.docId}" icon="icon-pencil"
@@ -233,7 +242,7 @@
     </menu>
 
     <menu id="product-project" parent-id="myproduct" name="项目" href="/product/project/content"
-          sort="10" isShow="1" permission="Permission"></menu>
+          sort="9" isShow="1" permission="Permission"></menu>
 
     <!--<menu id="product-modular" parent-id="myproduct" name="模块" href="/system/module/findProductModule?moduleParent=0"-->
     <!--sort="9" isShow="1" permission="Permission">-->

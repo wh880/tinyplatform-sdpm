@@ -22,7 +22,6 @@
 			<span class="r">
 				<div style="text-align:center;margin:auto">
 					#foreach(m:menuManager.getScopeMenus("testverinfo-tab"))
-
 						#if(m.id=="tverclose")
 							#@aModal("#closeModal" m.name "800" "600" "" adminPath+m.href+"?testversionId="+testTask?.testversionId "ml-5")
 								#buttonIcon(iconClass=m.icon)${m.name}#end&nbsp;&nbsp;
@@ -34,18 +33,9 @@
                             <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?testversionId=${testTask?.testversionId}&currentPageId=5">
 								#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp;&nbsp;
 						#else
-							#if(m.id=="tverback")
-                                <a class="back" href="javascript:void(0);" title="${m.name}">
-									#buttonIcon(iconClass=m.icon)</a>&nbsp;&nbsp;
-                                <script type="text/javascript">
-                                    $(function(){
-                                        $(".back").on("click",function(){
-                                            window.location.href ="${TINY_CONTEXT_PATH+adminPath}/quality/version?status=tvernotest&currentPageId=5";
-                                        });
-                                    })
-                                </script>
-							#elseif(m.id=="tversionedit")
-                                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?testversionId=${testTask?.testversionId}&currentPageId=5" title="${m.name}">
+							#if(m.id=="tversionedit")
+                                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?testversionId=${testTask?.testversionId}&currentPageId=5"
+                                   title="${m.name}">
 									#buttonIcon(iconClass=m.icon)</a>&nbsp;&nbsp;
 							#elseif(m.id=="tverdelete")
                                 <a class="versionDelete" href="javascript:void(0);" title="${m.name}">
@@ -73,8 +63,9 @@
                                 </script>
 							#end
 						#end
-
 					#end
+                    <a href="javascript :;" onClick="javascript :history.back(-1);" title="返回">#buttonIcon(iconClass=
+						"icon-reply")</a>
 			</span>
 		#end
 		##operationbar end
@@ -109,17 +100,7 @@
                     <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?testversionId=${testTask?.testversionId}&currentPageId=5">
 						#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp;&nbsp;
 				#else
-					#if(m.id=="tverback")
-                        <a class="back" href="javascript:void(0);" title="${m.name}">
-							#buttonIcon(iconClass=m.icon)</a>&nbsp;&nbsp;
-                        <script type="text/javascript">
-                            $(function(){
-                                $(".back").on("click",function(){
-                                    window.location.href ="${TINY_CONTEXT_PATH+adminPath}/quality/version?status=tvernotest&currentPageId=5";
-                                });
-                            })
-                        </script>
-					#elseif(m.id=="tversionedit")
+					#if(m.id=="tversionedit")
                         <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?testversionId=${testTask?.testversionId}&currentPageId=5" title="${m.name}">
 							#buttonIcon(iconClass=m.icon)</a>&nbsp;&nbsp;
 					#elseif(m.id=="tverdelete")
@@ -148,8 +129,9 @@
                         </script>
 					#end
 				#end
-
 			#end
+            <a href="javascript :;" onClick="javascript :history.back(-1);" title="返回">#buttonIcon(iconClass=
+				"icon-reply")</a>
 	</div>
 	</div>
 
