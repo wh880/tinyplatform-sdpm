@@ -137,11 +137,11 @@
             <artifactId>org.tinygroup.jqueryUi</artifactId>
             <version>${tiny_ui_version}</version>
         </dependency>
-        <!--<dependency>-->
-        <!--<groupId>org.tinygroup</groupId>-->
-        <!--<artifactId>org.tinygroup.widget</artifactId>-->
-        <!--<version>${tiny_ui_version}</version>-->
-        <!--</dependency>-->
+        <dependency>
+        <groupId>org.tinygroup</groupId>
+        <artifactId>org.tinygroup.widget</artifactId>
+        <version>${tiny_ui_version}</version>
+        </dependency>
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>org.tinygroup.layer</artifactId>

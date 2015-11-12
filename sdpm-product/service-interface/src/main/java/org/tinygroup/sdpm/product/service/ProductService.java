@@ -94,5 +94,7 @@ public interface ProductService {
 	 */
 	List<String> getProductNameByLineId(Integer productLineId);
 
+    List<Product> getProductByUser(String userId);
+
 
 }

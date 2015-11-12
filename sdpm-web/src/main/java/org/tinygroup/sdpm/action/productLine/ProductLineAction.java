@@ -1,5 +1,7 @@
 package org.tinygroup.sdpm.action.productLine;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,9 +15,11 @@ import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.sdpm.productLine.service.ProductLineService;
+import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
 import org.tinygroup.sdpm.project.service.inter.BuildService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
+import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.util.LogUtil;
 import org.tinygroup.sdpm.util.ProductUtils;
 import org.tinygroup.sdpm.util.UserUtils;
@@ -417,6 +421,41 @@ public class ProductLineAction extends BaseController {
             }
         }
         return resultMap(false, "请输入产品名称");
+    }
+    @ResponseBody
+    @RequestMapping(value = "/userProductTree")
+    public List<Map<String,Object>> getUserProductTree(){
+        List<Product> products = productService.getProductByUser(UserUtils.getUserId());
+        List<Map<String, Object>> mapList = Lists.newArrayList();
+        List<Integer> productLineIds = new ArrayList<Integer>();
+        for (Product p : products) {
+            productLineIds.add(p.getProductLineId());
+            Map<String, Object> mapTop = Maps.newHashMap();
+            mapTop.put("id", p.getProductId());
+            mapTop.put("pId", "p"+p.getProductLineId());
+            mapTop.put("open", false);
+            mapTop.put("isParent", false);
+            mapTop.put("add", true);
+            mapTop.put("edit", false);
+            mapTop.put("name", p.getProductName());
+            mapList.add(mapTop);
+        }
+        Integer[] ids = new Integer[productLineIds.size()];
+        ids = productLineIds.toArray(ids);
+        List<ProductLine> productLines = productLineService.getProductLineByIds(ids);
+        for (ProductLine p : productLines) {
+            productLineIds.add(p.getProductLineId());
+            Map<String, Object> mapTop = Maps.newHashMap();
+            mapTop.put("id", "p"+ p.getProductLineId());
+            mapTop.put("pId", 0);
+            mapTop.put("open", true);
+            mapTop.put("isParent", true);
+            mapTop.put("add", true);
+            mapTop.put("edit", false);
+            mapTop.put("name", p.getProductLineName());
+            mapList.add(mapTop);
+        }
+        return mapList;
     }
 }
 

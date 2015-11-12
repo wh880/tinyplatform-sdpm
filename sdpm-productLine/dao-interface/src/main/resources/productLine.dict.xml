@@ -1,6 +1,6 @@
 <dictNodeEntries name="productLine" title="产品线">
 	
-	 <dictNodeEntry name="productLine" title="productLine">
+	 <dictNodeEntry name="productLine" title="产品线">
 
          <dictNodeEntry name="whiteList" title="白名单">
              <dictItem key="0" value="管理员" sort="1"/>

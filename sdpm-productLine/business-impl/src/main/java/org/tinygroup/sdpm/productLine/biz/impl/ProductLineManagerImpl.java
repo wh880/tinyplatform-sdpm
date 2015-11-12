@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.productLine.biz.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,6 +61,20 @@ public class ProductLineManagerImpl implements ProductLineManager{
 					new OrderBy("product_line." + NameUtil.resolveNameDesc(order), !("desc".equals(ordertype)) ? true : false));
 		}
 		return productLineDao.findList(start, pagesize,condition1, productLine);
+	}
+
+	public List<ProductLine> getProductLineByIds(Integer... ids) {
+		if(ids==null){
+			return new ArrayList<ProductLine>();
+		}
+		return productLineDao.getByKeys(ids);
+	}
+
+	public List<ProductLine> getUserProductLine(String userId) {
+		ProductLine line = new ProductLine();
+		line.setAcl(ProductLine.ACl_All);
+		List<ProductLine> productLines = productLineDao.query(line);
+		return productLines;
 	}
 
 	public int[] updateBatch(List<ProductLine> productLine) {
