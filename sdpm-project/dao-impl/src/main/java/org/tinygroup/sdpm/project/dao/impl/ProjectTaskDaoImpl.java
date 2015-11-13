@@ -21,7 +21,6 @@ import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.jdbctemplatedslsession.callback.*;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
-import org.tinygroup.sdpm.common.log.annotation.LogMethod;
 import org.tinygroup.sdpm.common.util.update.UpdateUtil;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.project.dao.ProjectTaskDao;
@@ -56,11 +55,6 @@ import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 
 @Repository
 public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTaskDao {
-
-    public List<ProjectTask> findAll() {
-        Select select = selectFrom(PROJECT_TASKTABLE);
-        return getDslSession().fetchList(select, ProjectTask.class);
-    }
 
     public List<TaskChartBean> queryChartAssigned() {
         Select select = select(FragmentSelectItemSql.fragmentSelect("count(*) as taskCount, org_user.ORG_USER_REAL_NAME as title"))
@@ -97,7 +91,7 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
     public List<TaskChartBean> queryChartModule() {
         Select select = select(FragmentSelectItemSql.fragmentSelect("count(*) as taskCount, system_module.module_name as title"))
                 .from(PROJECT_TASKTABLE)
-                .join(Join.leftJoin(SYSTEM_MODULETABLE, SYSTEM_MODULETABLE.MODULE_ID.eq(PROJECT_TASKTABLE.TASK_MOMODULE)))
+                .join(Join.leftJoin(SYSTEM_MODULETABLE, SYSTEM_MODULETABLE.MODULE_ID.in(PROJECT_TASKTABLE.TASK_MOMODULE)))
                 .groupBy(PROJECT_TASKTABLE.TASK_MOMODULE);
 
         return getDslSession().fetchList(select, TaskChartBean.class);
@@ -128,26 +122,23 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
         return getDslSession().fetchList(select, TaskChartBean.class);
     }
 
-    public Integer batchSoftDel(String condition) {
-        Update update = update(PROJECT_TASKTABLE).set(PROJECT_TASKTABLE.TASK_DELETED.value(1))
-                .where(
-                        fragmentCondition(condition)
-                );
-        return getDslSession().execute(update);
-    }
 
     public Integer getSumByStory(Integer storyId) {
         Select select = selectFrom(PROJECT_TASKTABLE).where(PROJECT_TASKTABLE.TASK_STORY.eq(storyId));
         return getDslSession().count(select);
     }
 
-    @LogMethod("add")
+
     public ProjectTask add(ProjectTask projectTask) {
+        if (projectTask == null) {
+            return null;
+        }
+        final int maxNo = getMaxNo(projectTask.getTaskProject());
         return getDslTemplate().insertAndReturnKey(projectTask, new InsertGenerateCallback<ProjectTask>() {
             public Insert generate(ProjectTask t) {
                 Insert insert = insertInto(PROJECT_TASKTABLE).values(
                         PROJECT_TASKTABLE.TASK_ID.value(t.getTaskId()),
-                        PROJECT_TASKTABLE.NO.value(t.getNo()),
+                        PROJECT_TASKTABLE.TASK_NO.value(maxNo + 1),
                         PROJECT_TASKTABLE.TASK_PROJECT.value(t.getTaskProject()),
                         PROJECT_TASKTABLE.TASK_STORY.value(t.getTaskStory()),
                         PROJECT_TASKTABLE.TASK_STORY_VERSION.value(t.getTaskStoryVersion()),
@@ -158,7 +149,6 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
                         PROJECT_TASKTABLE.TASK_PRI.value(t.getTaskPri()),
                         PROJECT_TASKTABLE.TASK_ESTIMATE.value(t.getTaskEstimate()),
                         PROJECT_TASKTABLE.TASK_CONSUMED.value(t.getTaskConsumed()),
-                        PROJECT_TASKTABLE.TASK_LEFT.value(t.getTaskLeft()),
                         PROJECT_TASKTABLE.TASK_DEAD_LINE.value(t.getTaskDeadLine()),
                         PROJECT_TASKTABLE.TASK_STATUS.value(t.getTaskStatus()),
                         PROJECT_TASKTABLE.TASK_MAILTO.value(t.getTaskMailto()),
@@ -184,7 +174,6 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
         });
     }
 
-    @LogMethod("edit")
     public int edit(ProjectTask projectTask) {
         if (projectTask == null || projectTask.getTaskId() == null) {
             return 0;
@@ -195,57 +184,6 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
                 return update;
             }
         });
-    }
-
-    @LogMethod("editTask")
-    public Integer editTask(ProjectTask projectTask) {
-        if (projectTask == null || projectTask.getTaskId() == null) {
-            return 0;
-        }
-        Update update = UpdateUtil.getUpdate(PROJECT_TASKTABLE, projectTask);
-        getDslSession().execute(update);
-        return null;
-    }
-
-    @LogMethod("editcall")
-    public Integer editcall(ProjectTask projectTask) {
-        if (projectTask == null || projectTask.getTaskId() == null) {
-            return 0;
-        }
-        Update update = UpdateUtil.getUpdate(PROJECT_TASKTABLE, projectTask);
-        getDslSession().execute(update);
-
-        return null;
-    }
-
-    public Integer updateColum(ProjectTask projectTask) {
-        Update update = UpdateUtil.getUpdate(PROJECT_TASKTABLE, projectTask);
-        return getDslSession().execute(update);
-    }
-
-    public Integer editfinish(ProjectTask projectTask) {
-
-        return null;
-    }
-
-    @LogMethod("editstart")
-    public Integer editstart(ProjectTask projectTask) {
-        Update update = UpdateUtil.getUpdate(PROJECT_TASKTABLE, projectTask);
-        return getDslSession().execute(update);
-    }
-
-    @LogMethod("editclose")
-    public Integer editclose(ProjectTask projectTask) {
-        if (projectTask == null || projectTask.getTaskId() == null) {
-            return 0;
-        }
-        Update update = update(PROJECT_TASKTABLE).set(
-                PROJECT_TASKTABLE.TASK_CLOSE_DATE.value(projectTask.getTaskCloseDate()),
-                PROJECT_TASKTABLE.TASK_CLOSED_BY.value(projectTask.getTaskClosedBy()),
-                PROJECT_TASKTABLE.TASK_STATUS.value(projectTask.getTaskStatus()),
-                PROJECT_TASKTABLE.TASK_CLOSED_REASON.value(projectTask.getTaskClosedReason())).where(PROJECT_TASKTABLE.TASK_ID.eq(projectTask.getTaskId()));
-        getDslSession().execute(update);
-        return null;
     }
 
     public ProjectTask findTaskStory(Integer taskId) {
@@ -270,7 +208,6 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
         return getDslSession().fetchOneResult(select, ProjectTask.class);
     }
 
-    @LogMethod("deleteByKey")
     public int deleteByKey(Integer pk) {
         if (pk == null) {
             return 0;
@@ -282,7 +219,6 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
         });
     }
 
-    @LogMethod("deleteByKeys")
     public int deleteByKeys(Integer... pks) {
         if (pks == null || pks.length == 0) {
             return 0;
@@ -314,7 +250,7 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
                 Select select = selectFrom(PROJECT_TASKTABLE).where(
                         and(
                                 PROJECT_TASKTABLE.TASK_PROJECT.eq(t.getTaskProject()),
-                                PROJECT_TASKTABLE.NO.eq(t.getNo()),
+                                PROJECT_TASKTABLE.TASK_NO.eq(t.getTaskNo()),
                                 PROJECT_TASKTABLE.TASK_STORY.eq(t.getTaskStory()),
                                 PROJECT_TASKTABLE.TASK_STORY_VERSION.eq(t.getTaskStoryVersion()),
                                 PROJECT_TASKTABLE.TASK_MOMODULE.eq(t.getTaskModule()),
@@ -350,6 +286,13 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
         });
     }
 
+    public Integer getMaxNo(Integer projectId) {
+        Select select = select(PROJECT_TASKTABLE.TASK_NO.max())
+                .from(PROJECT_TASKTABLE)
+                .where(PROJECT_TASKTABLE.TASK_ID.eq(projectId));
+        return getDslSession().fetchOneResult(select, Integer.class);
+    }
+
     public Pager<ProjectTask> queryPagerByStatus(int start, int limit, ProjectTask projectTask, final String condition, final OrderBy... orderArgs) {
         if (projectTask == null) {
             projectTask = new ProjectTask();
@@ -370,7 +313,7 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
                                             PROJECT_TASKTABLE.TASK_FROM_BUG.eq(t.getTaskFromBug()),
                                             PROJECT_TASKTABLE.TASK_NAME.eq(t.getTaskName()),
                                             PROJECT_TASKTABLE.TASK_TYPE.eq(t.getTaskType()),
-                                            PROJECT_TASKTABLE.NO.eq(t.getNo()),
+                                            PROJECT_TASKTABLE.TASK_NO.eq(t.getTaskNo()),
                                             PROJECT_TASKTABLE.TASK_PRI.eq(t.getTaskPri()),
                                             PROJECT_TASKTABLE.TASK_ESTIMATE.eq(t.getTaskEstimate()),
                                             PROJECT_TASKTABLE.TASK_CONSUMED.eq(t.getTaskConsumed()),
@@ -409,7 +352,7 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
                                 and(
                                         fragmentCondition(condition),
                                         PROJECT_TASKTABLE.TASK_PROJECT.eq(t.getTaskProject()),
-                                        PROJECT_TASKTABLE.NO.eq(t.getNo()),
+                                        PROJECT_TASKTABLE.TASK_NO.eq(t.getTaskNo()),
                                         PROJECT_TASKTABLE.TASK_STORY.eq(t.getTaskStory()),
                                         PROJECT_TASKTABLE.TASK_STORY_VERSION.eq(t.getTaskStoryVersion()),
                                         PROJECT_TASKTABLE.TASK_MOMODULE.eq(t.getTaskModule()),
@@ -459,7 +402,7 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
                                 and(
                                         PROJECT_TASKTABLE.TASK_PROJECT.eq(t.getTaskProject()),
                                         PROJECT_TASKTABLE.TASK_STORY.eq(t.getTaskStory()),
-                                        PROJECT_TASKTABLE.NO.eq(t.getNo()),
+                                        PROJECT_TASKTABLE.TASK_NO.eq(t.getTaskNo()),
                                         PROJECT_TASKTABLE.TASK_STORY_VERSION.eq(t.getTaskStoryVersion()),
                                         PROJECT_TASKTABLE.TASK_MOMODULE.eq(t.getTaskModule()),
                                         PROJECT_TASKTABLE.TASK_FROM_BUG.eq(t.getTaskFromBug()),
@@ -507,7 +450,7 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
                         .where(
                                 and(
                                         PROJECT_TASKTABLE.TASK_PROJECT.eq(t.getTaskProject()),
-                                        PROJECT_TASKTABLE.NO.eq(t.getNo()),
+                                        PROJECT_TASKTABLE.TASK_NO.eq(t.getTaskNo()),
                                         PROJECT_TASKTABLE.TASK_STORY.eq(t.getTaskStory()),
                                         PROJECT_TASKTABLE.TASK_STORY_VERSION.eq(t.getTaskStoryVersion()),
                                         PROJECT_TASKTABLE.TASK_MOMODULE.eq(t.getTaskModule()),
@@ -553,7 +496,7 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
                 return insertInto(PROJECT_TASKTABLE).values(
                         PROJECT_TASKTABLE.TASK_PROJECT.value(new JdbcNamedParameter("taskProject")),
                         PROJECT_TASKTABLE.TASK_STORY.value(new JdbcNamedParameter("taskStory")),
-                        PROJECT_TASKTABLE.NO.value(new JdbcNamedParameter("no")),
+                        PROJECT_TASKTABLE.TASK_NO.value(new JdbcNamedParameter("no")),
                         PROJECT_TASKTABLE.TASK_STORY_VERSION.value(new JdbcNamedParameter("taskStoryVersion")),
                         PROJECT_TASKTABLE.TASK_MOMODULE.value(new JdbcNamedParameter("taskModel")),
                         PROJECT_TASKTABLE.TASK_FROM_BUG.value(new JdbcNamedParameter("taskFromBug")),
@@ -591,7 +534,6 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
         return batchInsert(true, projectTasks);
     }
 
-    @LogMethod("batchUpdate")
     public int[] batchUpdate(List<ProjectTask> projectTasks) {
         if (CollectionUtil.isEmpty(projectTasks)) {
             return new int[0];
@@ -602,7 +544,7 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
                 return update(PROJECT_TASKTABLE).set(
                         PROJECT_TASKTABLE.TASK_PROJECT.value(new JdbcNamedParameter("taskProject")),
                         PROJECT_TASKTABLE.TASK_STORY.value(new JdbcNamedParameter("taskStory")),
-                        PROJECT_TASKTABLE.NO.value(new JdbcNamedParameter("no")),
+                        PROJECT_TASKTABLE.TASK_NO.value(new JdbcNamedParameter("no")),
                         PROJECT_TASKTABLE.TASK_STORY_VERSION.value(new JdbcNamedParameter("taskStoryVersion")),
                         PROJECT_TASKTABLE.TASK_MOMODULE.value(new JdbcNamedParameter("taskModel")),
                         PROJECT_TASKTABLE.TASK_FROM_BUG.value(new JdbcNamedParameter("taskFromBug")),
@@ -637,7 +579,6 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
         });
     }
 
-    @LogMethod("batchDelete")
     public int[] batchDelete(List<ProjectTask> projectTasks) {
         if (CollectionUtil.isEmpty(projectTasks)) {
             return new int[0];
@@ -649,7 +590,7 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
                         PROJECT_TASKTABLE.TASK_ID.eq(new JdbcNamedParameter("taskId")),
                         PROJECT_TASKTABLE.TASK_PROJECT.eq(new JdbcNamedParameter("taskProject")),
                         PROJECT_TASKTABLE.TASK_STORY.eq(new JdbcNamedParameter("taskStory")),
-                        PROJECT_TASKTABLE.NO.eq(new JdbcNamedParameter("no")),
+                        PROJECT_TASKTABLE.TASK_NO.eq(new JdbcNamedParameter("no")),
                         PROJECT_TASKTABLE.TASK_STORY_VERSION.eq(new JdbcNamedParameter("taskStoryVersion")),
                         PROJECT_TASKTABLE.TASK_MOMODULE.eq(new JdbcNamedParameter("taskModule")),
                         PROJECT_TASKTABLE.TASK_FROM_BUG.eq(new JdbcNamedParameter("taskFromBug")),
@@ -683,7 +624,6 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
         });
     }
 
-    @LogMethod("addOrderByElements")
     private Select addOrderByElements(Select select, OrderBy... orderArgs) {
         if (orderArgs == null) {
             return select;

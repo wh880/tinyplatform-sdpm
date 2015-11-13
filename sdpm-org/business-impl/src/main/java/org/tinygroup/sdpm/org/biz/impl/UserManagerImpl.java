@@ -26,6 +26,7 @@ import org.tinygroup.sdpm.org.dao.OrgUserDao;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.tinysqldsl.Pager;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -119,6 +120,9 @@ public class UserManagerImpl implements UserManager {
     }
 
     public List<OrgUser> findTeamUserListByProjectId(Integer projectId) {
+        if (projectId==null){
+            return new ArrayList<OrgUser>();
+        }
         return orgUserDao.getTeamUserByProjectId(projectId);
     }
 

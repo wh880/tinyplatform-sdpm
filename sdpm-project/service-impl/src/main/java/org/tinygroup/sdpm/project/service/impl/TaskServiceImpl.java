@@ -24,6 +24,10 @@ public class TaskServiceImpl implements TaskService {
     @Autowired
     private StoryManager storyManager;
 
+    public Integer getMaxNo(Integer projectId) {
+        return taskManager.getMaxNo(projectId);
+    }
+
     public Integer updateDoingTask(ProjectTask task) {
         task.setTaskStatus(task.DOING);
         task.setTaskLastEditedDate(new Date());
@@ -31,7 +35,9 @@ public class TaskServiceImpl implements TaskService {
     }
 
     public Integer batchAdd(List<ProjectTask> taskList, Integer projectId) {
+        int maxNo = taskManager.getMaxNo(projectId);
         for (ProjectTask task : taskList) {
+            task.setTaskNo(maxNo++);
             task.setTaskLastEditedDate(new Date());
             task.setTaskOpenedDate(new Date());
             task.setTaskStatus("1");
@@ -44,6 +50,7 @@ public class TaskServiceImpl implements TaskService {
 
     public ProjectTask addTask(ProjectTask task) {
         task.setTaskStatus("1");
+        task.setTaskConsumed(0f);
         task.setTaskOpenedDate(new Date());
         return taskManager.add(task);
     }

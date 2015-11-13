@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.dto.project.Teams;
+import org.tinygroup.sdpm.org.dao.pojo.OrgRole;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
+import org.tinygroup.sdpm.org.service.inter.RoleService;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTeam;
 import org.tinygroup.sdpm.project.service.inter.TeamService;
@@ -33,6 +35,8 @@ public class ProjectTeamAction extends BaseController {
     private TeamService teamService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private RoleService roleService;
 
     @RequiresPermissions("team")
     @RequestMapping("/index")
@@ -61,6 +65,12 @@ public class ProjectTeamAction extends BaseController {
         if (projectId == null) {
             return redirectProjectForm();
         }
+
+        OrgRole orgRole = new OrgRole();
+        orgRole.setOrgRoleType(OrgRole.ROLE_TYPE_PROJECT);
+        List<OrgRole> roleList = roleService.findRoleList(orgRole);
+        model.addAttribute("roleList",roleList);
+
         List<ProjectTeam> teamList = teamService.findTeamByProjectId(projectId);
         List<OrgUser> userList = userService.findUserList(new OrgUser());
         //删除用户列表中的团队成员

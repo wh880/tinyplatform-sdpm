@@ -84,7 +84,7 @@ public class UserAction extends BaseController {
             model.addAttribute("user", user);
             model.addAttribute("dept", dept);
         }
-        return "organization/user/addUser.page";
+        return "organization/user/form";
     }
 
     /**
@@ -165,7 +165,7 @@ public class UserAction extends BaseController {
     @RequiresPermissions("organizationUser")
     @RequestMapping("/list")
     public String list() {
-        return "organization/user/user.page";
+        return "organization/user/index";
     }
 
     /**

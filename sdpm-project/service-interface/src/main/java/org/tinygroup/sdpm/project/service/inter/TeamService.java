@@ -10,14 +10,15 @@ import java.util.List;
  */
 public interface TeamService {
 
-    public List<ProjectTeam> findTeamList(ProjectTeam team);
+    List<ProjectTeam> findTeamList(ProjectTeam team);
+
     /**
      * 批量添加
      *
      * @param list
      * @return
      */
-    public Integer batchAdd(List<ProjectTeam> list);
+    Integer batchAdd(List<ProjectTeam> list);
 
     /**
      * 批量更新
@@ -25,27 +26,21 @@ public interface TeamService {
      * @param list
      * @return
      */
-     Integer batchUpdate(List<ProjectTeam> list);
+    Integer batchUpdate(List<ProjectTeam> list);
 
     /**
      * 移除项目下的成员,根据逻辑id
      */
-     Integer delete(int id);
+    Integer delete(int id);
 
     /**
      * 查询项目下的所有成员
+     *
      * @param projectId
      * @return
      */
-     List<ProjectTeam> findTeamByProjectId(Integer projectId);
-
-    /**
-     * 查询产品下的所有成员
-     * @param projectId
-     * @return
-     */
+    List<ProjectTeam> findTeamByProjectId(Integer projectId);
     List<ProjectTeam> findTeamByProductId(Integer productId);
-
     /**
      * 查询
      *

@@ -1,8 +1,7 @@
 #setTinyItemCount(teamPager?.getTotalCount())
 #for(t:teamPager?.getRecords())
 #@tr()
-    #@td()<input type="checkbox" value="1"
-                 name="idCheck">#end
+    #@td()<input type="checkbox" value="1" name="idCheck">#end
     #@td()
     <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/story?id=${t?.teamUserId}&choose=3">
         ${t?.teamUserId==null?"":UserUtils.getUserById(t?.teamUserId)?.orgUserRealName}

@@ -52,7 +52,6 @@ public class Collections3 {
     @SuppressWarnings("unchecked")
     public static List extractToList(final Collection collection, final String propertyName) {
         List list = new ArrayList(collection.size());
-
         try {
             for (Object obj : collection) {
                 list.add(PropertyUtils.getProperty(obj, propertyName));

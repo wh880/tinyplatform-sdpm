@@ -98,7 +98,6 @@ public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
             public Insert generate(Project t) {
                 Insert insert = insertInto(PROJECTTABLE).values(
                         PROJECTTABLE.PROJECT_ID.value(t.getProjectId()),
-                        PROJECTTABLE.NO.value(t.getNo()),
                         PROJECTTABLE.PROJECT_IS_CAT.value(t.getProjectIsCat()),
                         PROJECTTABLE.PROJECT_CAT_ID.value(t.getProjectCatId()),
                         PROJECTTABLE.PROJECT_TYPE.value(t.getProjectType()),
@@ -141,7 +140,6 @@ public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
                 Update update = update(PROJECTTABLE).set(
                         PROJECTTABLE.PROJECT_IS_CAT.value(t.getProjectIsCat()),
                         PROJECTTABLE.PROJECT_CAT_ID.value(t.getProjectCatId()),
-                        PROJECTTABLE.NO.value(t.getNo()),
                         PROJECTTABLE.PROJECT_TYPE.value(t.getProjectType()),
                         PROJECTTABLE.PROJECT_NAME.value(t.getProjectName()),
                         PROJECTTABLE.PROJECT_CODE.value(t.getProjectCode()),
@@ -219,7 +217,6 @@ public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
                 Select select = selectFrom(PROJECTTABLE).where(
                         and(
                                 PROJECTTABLE.PROJECT_IS_CAT.eq(t.getProjectIsCat()),
-                                PROJECTTABLE.NO.eq(t.getNo()),
                                 PROJECTTABLE.PROJECT_CAT_ID.eq(t.getProjectCatId()),
                                 PROJECTTABLE.PROJECT_TYPE.eq(t.getProjectType()),
                                 PROJECTTABLE.PROJECT_NAME.eq(t.getProjectName()),
@@ -263,7 +260,6 @@ public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
                         and(
                                 PROJECTTABLE.PROJECT_IS_CAT.eq(t.getProjectIsCat()),
                                 PROJECTTABLE.PROJECT_CAT_ID.eq(t.getProjectCatId()),
-                                PROJECTTABLE.NO.eq(t.getNo()),
                                 PROJECTTABLE.PROJECT_TYPE.eq(t.getProjectType()),
                                 PROJECTTABLE.PROJECT_NAME.eq(t.getProjectName()),
                                 PROJECTTABLE.PROJECT_CODE.eq(t.getProjectCode()),
@@ -306,7 +302,6 @@ public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
                 return insertInto(PROJECTTABLE).values(
                         PROJECTTABLE.PROJECT_IS_CAT.value(new JdbcNamedParameter("projectIsCat")),
                         PROJECTTABLE.PROJECT_CAT_ID.value(new JdbcNamedParameter("projectCatId")),
-                        PROJECTTABLE.NO.value(new JdbcNamedParameter("no")),
                         PROJECTTABLE.PROJECT_TYPE.value(new JdbcNamedParameter("projectType")),
                         PROJECTTABLE.PROJECT_NAME.value(new JdbcNamedParameter("projectName")),
                         PROJECTTABLE.PROJECT_CODE.value(new JdbcNamedParameter("projectCode")),
@@ -351,7 +346,6 @@ public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
                 return update(PROJECTTABLE).set(
                         PROJECTTABLE.PROJECT_IS_CAT.value(new JdbcNamedParameter("projectIsCat")),
                         PROJECTTABLE.PROJECT_CAT_ID.value(new JdbcNamedParameter("projectCatId")),
-                        PROJECTTABLE.NO.value(new JdbcNamedParameter("no")),
                         PROJECTTABLE.PROJECT_TYPE.value(new JdbcNamedParameter("projectType")),
                         PROJECTTABLE.PROJECT_NAME.value(new JdbcNamedParameter("projectName")),
                         PROJECTTABLE.PROJECT_CODE.value(new JdbcNamedParameter("projectCode")),
@@ -393,7 +387,6 @@ public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
                 return delete(PROJECTTABLE).where(and(
                         PROJECTTABLE.PROJECT_ID.eq(new JdbcNamedParameter("projectId")),
                         PROJECTTABLE.PROJECT_IS_CAT.eq(new JdbcNamedParameter("projectIsCat")),
-                        PROJECTTABLE.NO.eq(new JdbcNamedParameter("no")),
                         PROJECTTABLE.PROJECT_CAT_ID.eq(new JdbcNamedParameter("projectCatId")),
                         PROJECTTABLE.PROJECT_TYPE.eq(new JdbcNamedParameter("projectType")),
                         PROJECTTABLE.PROJECT_NAME.eq(new JdbcNamedParameter("projectName")),

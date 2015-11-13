@@ -37,12 +37,6 @@ public class TeamManagerImpl implements TeamManager {
         return teamDao.getByKey(id);
     }
 
-    public List<ProjectTeam> findListAccount(int projectId) {
-        ProjectTeam team = new ProjectTeam();
-        team.setProjectId(projectId);
-        return teamDao.query(team);
-    }
-
     public List<ProjectTeam> findByProjectId(Integer projectId) {
         return teamDao.findByProjectId(projectId);
     }

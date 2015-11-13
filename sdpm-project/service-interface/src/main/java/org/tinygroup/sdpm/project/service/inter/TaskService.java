@@ -13,6 +13,12 @@ import java.util.Map;
  * Created by shenly13343 on 2015-09-20.
  */
 public interface TaskService {
+    /**
+     * 获取项目最大编号
+     * @param projectId
+     * @return
+     */
+    Integer getMaxNo(Integer projectId);
 
     /**
      * 激活项目

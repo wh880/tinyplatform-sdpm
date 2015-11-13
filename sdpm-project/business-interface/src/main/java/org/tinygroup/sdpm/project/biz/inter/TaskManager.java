@@ -12,6 +12,12 @@ import java.util.List;
  */
 public interface TaskManager {
 
+    /**
+     * 获取项目最大编号
+     * @param projectId
+     * @return
+     */
+    Integer getMaxNo(Integer projectId);
 
     int[] batchAdd(List<ProjectTask> taskList);
 

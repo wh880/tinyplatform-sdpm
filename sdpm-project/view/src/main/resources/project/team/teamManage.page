@@ -42,7 +42,18 @@
                 <input name="teamList[${a}].id" value="${t.id}" type="hidden">
             #end
             <td>
-                #tinyInput("text" "teamList["+a+"].teamRole" t.teamRole {"datatype":"","class":"input-text"})
+                #@Tselect2F()
+                    #@Tselect2Body("teamList["+a+"].teamRole" t.teamRole {"class":"input-text select2","multiple":"multiple"})
+                        #foreach(r : roleList)
+                            <option value="${r.orgRoleId}">${r.orgRoleName}</option>
+                        #end
+                    #end
+                    #@Tselect2Fix()
+                        <a href="${TINY_CONTEXT_PATH+adminPath}/org/privilege/form">增加</a>
+                        <a href="${TINY_CONTEXT_PATH+adminPath}/org/privilege/list" class="r">全部</a>
+                    #end
+                #end
+##                #tinyInput("text" "teamList["+a+"].teamRole" t.teamRole {"datatype":"","class":"input-text"})
             </td>
             <td>
                 #@tinyDateInput("teamList["+a+"].teamJoin" formatDate(now(),"yyyy-MM-dd") "YYYY-MM-DD" )#end
@@ -73,7 +84,19 @@
                 #end
             </td>
             <td>
-                #tinyInput("text" "teamList["+a+"].teamRole" "" {"datatype":"","class":"input-text"})
+                #@Tselect2F()
+                    #@Tselect2Body("teamList["+a+"].teamRole" "" {"class":"input-text select2","multiple":"multiple"})
+                        #foreach(r : roleList)
+                            <option value="${r.orgRoleId}">${r.orgRoleName}</option>
+                        #end
+                    #end
+                    #@Tselect2Fix()
+                        <a href="${TINY_CONTEXT_PATH+adminPath}/org/privilege/form">增加</a>
+                        <a href="${TINY_CONTEXT_PATH+adminPath}/org/privilege/list" class="r">全部</a>
+                    #end
+                #end
+
+##                #tinyInput("text" "teamList["+a+"].teamRole" "" {"datatype":"","class":"input-text"})
             </td>
             <td>
                 #@tinyDateInput("teamList["+a+"].teamJoin" formatDate(now(),"yyyy-MM-dd") "YYYY-MM-DD" )#end

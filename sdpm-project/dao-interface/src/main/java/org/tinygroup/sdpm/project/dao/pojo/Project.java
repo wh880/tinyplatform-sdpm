@@ -65,10 +65,6 @@ public class Project implements Serializable {
      */
     private Integer projectId;
     /**
-     * 编号
-     */
-    private Integer no;
-    /**
      * 是否作为目录
      * <p>
      * 0-false,1-true
@@ -197,14 +193,6 @@ public class Project implements Serializable {
 
     public Project() {
         setProjectDeleted(DELETE_NO);
-    }
-
-    public Integer getNo() {
-        return no;
-    }
-
-    public void setNo(Integer no) {
-        this.no = no;
     }
 
     public float getAllLeft() {
