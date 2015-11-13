@@ -1,31 +1,53 @@
 
-#@tinyForm("holidayForm" TINY_CONTEXT_PATH+adminPath+"/system/holiday/save" "post" {"class":"test"})
-<input type="hidden" name="dictId" value="${holiday?.holidayId}"/>
-<input type="hidden" name="holidayDeleted" value="0"/>
+#@tinyForm("moduleForm" TINY_CONTEXT_PATH+adminPath+"/system/module/moduleAdd" "post" {"class":"test"})
+<input type="hidden" name="moduleType" value="story"/>
+<input type="hidden" name="moduleRoot" value="${pId}"/>
     #@elementItem()
-        #@colLabel()模块名称：#end
-        #@formControlDiv("col-6")
+        #@colLabel("col-4")模块名称：#end
+        #@formControlDiv("col-5")
             #tinyInput("moduleName" "moduleName" "" {"datatype":"*","id":"moduleName","class":"input-text","nullmsg":"模块名不为空"})
         #end
         #@validateDiv("col-2")#end
     #end
     #@elementItem()
-        #@colLabel()模块父节点：#end
-        #@formControlDiv("col-6")
-            #TzTreeSelect("moduleParent" "" {"class":"input-text","data-URL":call("link","/data/ztreeData.pagelet")})
+        #@colLabel("col-4")模块父节点：#end
+        #@formControlDiv("col-5")
+            #@Tselect2F()
+                <script>
+                    ajaxRead("${sid}", "moduleParent", "moduleId", "moduleName", "/quality/bug/ajax/module?moduleRoot=${pId}","0","module");
+                </script>
+                #@Tselect2Body("moduleParent" 0 {"class":"input-text select2","url":"/system/module/moduleList","ajaxType":
+                    "systemModel","data":"moduleType=product","relateElem":
+                    "relateModelTwo"}) ##,"multiple":"multiple"加上为多选项
+                #end
+            #end
         #end
         #@validateDiv("col-2")#end
     #end
     #@elementItem()
-        #@div(divClass="col-8 col-offset-2 form-inline")
+        #@colLabel("col-4")#end
+        #@div(divClass="col-4 col-offset-2 form-inline")
             #tinyInput("submit" "submitbtn" " 提交 " {"class":"btn btn-primary"})
         #end
     #end
 #end
 <script type="text/javascript">
     $(function () {
-        $("form[name=holidayForm]").Validform({
+        $("form[name=moduleForm]").Validform({
             tiptype: 2
+        });
+        $("form[name=moduleForm]").on("submit",function(){
+            $.ajax({
+                url:$(this).attr("action"),
+                data:$(this).serialize(),
+                type:"POST",
+                success:function(data){
+                    if(data.status=="success"){
+                        window.location.reload();
+                    }
+                }
+            });
+            return false;
         });
     });
 </script>

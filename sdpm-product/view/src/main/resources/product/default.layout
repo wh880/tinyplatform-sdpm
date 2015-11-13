@@ -3,11 +3,11 @@
 #import("/org/tinygroup/button/components/button.component")
 #!set(activeTitle="产品管理",activeMenuId=currentPageId)
 #include("/product/page/event/common.page")
-#set(currentPageId=3)
-#set(cookieProductLineIdTemp=cookieProductLineId,cookieProductLineId=cookieProductLineId?:ProductUtils.getProductLineListByUser()?.get(0)?.productLineId,cookieProductLineId=cookieProductLineId?String.valueOf(cookieProductLineId):null)
-#if(cookieProductLineId)
-    #set(cookieProductIdTemp = cookieProductId,cookieProductId=cookieProductId?:ProductUtils.getProductListByProductLineUser(cookieProductLineId)?.get(0)?.productId)
-#end
+###set(currentPageId=3)
+###set(cookieProductLineIdTemp=cookieProductLineId,cookieProductLineId=cookieProductLineId?:ProductUtils.getProductLineListByUser()?.get(0)?.productLineId,cookieProductLineId=cookieProductLineId?String.valueOf(cookieProductLineId):null)
+###if(cookieProductLineId)
+##    #set(cookieProductIdTemp = cookieProductId,cookieProductId=cookieProductId?:ProductUtils.getProductListByProductLineUser(cookieProductLineId)?.get(0)?.productId)
+###end
 <style>
     .btn-group #Dropdown {
         background: none;
@@ -72,13 +72,12 @@
 
 </script>
 
-
 #@div()
     #@tabWithInit("top_demo" "optionsBox")
 
-        #@div(divClass="dropdownBox")
-            #include("/product/page/project/dropdownMenuline.page")
-        #end
+##        #@div(divClass="dropdownBox")
+##            #include("/product/page/project/dropdownMenuline.page")
+##        #end
 		 #@div(divClass="dropdownBox")
             #include("/product/page/project/dropdownMenu.page")
         #end
@@ -93,25 +92,7 @@
                     #@aHeadCol(TINY_CONTEXT_PATH +adminPath+url linkName==m.id?"Current":"")${m.name}#end
                 #end
             #end
-        #*
-                        #@aHeadCol(TINY_CONTEXT_PATH +adminPath+"/product/page/project/togglebox.page?currentPageId="+currentPageId linkName=="demand"?"Current":"")需求#end
 
-                        #@aHeadCol(TINY_CONTEXT_PATH +adminPath+"/product/page/project/dymanicdata.page?currentPageId="+currentPageId  linkName=="dynamic"?"Current":"")动态#end
-
-                        #@aHeadCol(TINY_CONTEXT_PATH +adminPath+"/product/page/project/product-plan.page?currentPageId="+currentPageId  linkName=="plan"?"Current":"")计划#end
-
-                        #@aHeadCol(TINY_CONTEXT_PATH +adminPath+"/product/page/project/product-release.page?currentPageId="+currentPageId  linkName=="release"?"Current":"")发布#end
-
-                        #@aHeadCol(TINY_CONTEXT_PATH +adminPath+"/product/page/project/product-roadmap.page?currentPageId="+currentPageId  linkName=="roadmap"?"Current":"")路线图#end
-
-                        #@aHeadCol(TINY_CONTEXT_PATH +adminPath+"/product/page/project/archive-list.page?currentPageId="+currentPageId  linkName=="archive"?"Current":"")文档#end
-
-                        #@aHeadCol(TINY_CONTEXT_PATH +adminPath+"/product/page/project/product-project-list.page?currentPageId="+currentPageId  linkName=="project"?"Current":"")项目#end
-
-                        #@aHeadCol(TINY_CONTEXT_PATH +adminPath+"/product/page/project/product-modular.page?currentPageId="+currentPageId  linkName=="modular"?"Current":"")模块#end
-
-                        #@aHeadCol(TINY_CONTEXT_PATH +adminPath+"/product/page/project/overview.page?currentPageId="+currentPageId  linkName=="overview"?"Current":"")概况#end
-                        *#
         #end
 
     <span class="r" style="position:relative;top:-28px;height:0">

@@ -216,6 +216,18 @@ public class ModuleAction extends BaseController {
         }
         return "redirect: list?moduleType=dict";
     }
+    @ResponseBody
+    @RequestMapping("moduleAdd")
+    public Map moduleAdd(SystemModule module){
+        SystemModule pModule = moduleService.findById(module.getModuleParent());
+        if(module.getModuleRoot()==null){
+            module.setModuleRoot(pModule.getModuleRoot());
+        }
+        if(module.getModuleType()==null){
+            module.setModuleType(pModule.getModuleType());
+        }
+        return ajaxSaveModule(module);
+    }
 
     @ResponseBody
     @RequestMapping("ajax/save")

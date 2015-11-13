@@ -139,7 +139,7 @@
   <table id="101d5e140ea341688cc789d063e88659" name="project_team" title="团队" package-name="">
     <table-field standard-field-id="7edc4cffb5cf4a9f94ffca41db249285" primary="true" unique="true" not-null="true" id="id" auto-increase="true"/>
     <table-field standard-field-id="cbf5d6fba9d341758f6ef4071e16aa1d" primary="false" unique="false" not-null="false" id="product_id" auto-increase="false"/>
-    <table-field standard-field-id="dca4d75a1c1347d8baeff4f420dc894a" primary="false" unique="false" not-null="true" id="project_id" auto-increase="false"/>
+    <table-field standard-field-id="dca4d75a1c1347d8baeff4f420dc894a" primary="false" unique="false" not-null="false" id="project_id" auto-increase="false"/>
     <table-field standard-field-id="dcaad72616324712a1988f2743e4a0e8" primary="false" unique="false" not-null="true" id="team_account" auto-increase="false"/>
     <table-field standard-field-id="ccae118619c147f2902feffbb66f9c77" primary="false" unique="false" not-null="true" id="team_role" auto-increase="false"/>
     <table-field standard-field-id="bab7c0daedc34545a255b9be36aed755" primary="false" unique="false" not-null="false" id="team_join" auto-increase="false"/>
