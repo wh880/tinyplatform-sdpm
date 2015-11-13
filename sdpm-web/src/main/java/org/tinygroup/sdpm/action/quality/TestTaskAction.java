@@ -1,5 +1,7 @@
 package org.tinygroup.sdpm.action.quality;
 
+import org.apache.shiro.authz.annotation.Logical;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -149,6 +151,7 @@ public class TestTaskAction extends BaseController {
         return result;
     }
 
+    @RequiresPermissions("tproposeversion")
     @RequestMapping("/add")
     public String add(@CookieValue(value = "qualityProductId", defaultValue = "0") Integer qualityProductId, Integer buildId, Model model, HttpServletRequest request, HttpServletResponse response) {
         List<Project> projects = projectService.findProjectList(null, null, null);
@@ -176,6 +179,7 @@ public class TestTaskAction extends BaseController {
         return "/testManagement/page/versionSituation.page";
     }
 
+    @RequiresPermissions(value = {"tversionSituation", "tverInfo"}, logical = Logical.OR)
     @RequestMapping("/versionRightInfo")
     public String versionRightInfo(Integer testversionId, Model model) {
         QualityTestTask testTask = testTaskService.findById(testversionId);
@@ -200,19 +204,20 @@ public class TestTaskAction extends BaseController {
         return result;
     }
 
+    @RequiresPermissions("tversionLink")
     @RequestMapping("/linkCase")
     public String linkCase(int testversionId, Model model) {
         return "/testManagement/page/versionLink.page";
     }
 
     @RequestMapping("/link")
-    public String link(@CookieValue(value = "qualityProductId",defaultValue = "0") String cookieProductId,Integer testversionId, Integer start, Integer limit, SearchInfos infos, String groupOperate, String order, String ordertype, Model model) {
+    public String link(@CookieValue(value = "qualityProductId", defaultValue = "0") String cookieProductId, Integer testversionId, Integer start, Integer limit, SearchInfos infos, String groupOperate, String order, String ordertype, Model model) {
         QualityTestRun run = new QualityTestRun();
         run.setTaskId(testversionId);
         List<QualityTestRun> runs = testRunService.findTestRunList(run);
         String conditions = mergeCondition(mergeCondition(runs, false), SqlUtil.toSql(infos.getInfos(), groupOperate));
         QualityTestCase testCase = new QualityTestCase();
-        if(Integer.parseInt(cookieProductId)>0){
+        if (Integer.parseInt(cookieProductId) > 0) {
             testCase.setProductId(Integer.parseInt(cookieProductId));
         }
         testCase.setDeleted(0);
@@ -221,6 +226,7 @@ public class TestTaskAction extends BaseController {
         return "/testManagement/data/link.pagelet";
     }
 
+    @RequiresPermissions("tversionedit")
     @RequestMapping("/toEdit")
     public String edit(@CookieValue Integer qualityProductId, Integer testversionId, Model model, HttpServletRequest request) {
         QualityTestTask testTask = testTaskService.findById(testversionId);
@@ -300,6 +306,7 @@ public class TestTaskAction extends BaseController {
         return result;
     }
 
+    @RequiresPermissions(value = {"tvercase", "tverallcase", "tverassign"}, logical = Logical.OR)
     @RequestMapping("/taskToCase")
     public String taskToCase(Integer testversionId, String moduleId, Model model, HttpServletRequest request) {
         QualityTestTask testTask = testTaskService.findById(testversionId);
@@ -345,6 +352,7 @@ public class TestTaskAction extends BaseController {
         return result;
     }
 
+    @RequiresPermissions("tverclose")
     @RequestMapping("/toTaskEnd")
     public String toTaskEnd() {
         return "/testManagement/page/versionEnd.pagelet";

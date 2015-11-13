@@ -745,12 +745,10 @@ public class BugAction extends BaseController {
         return "product/data/tabledata.pagelet";
     }
 
-
+    @RequiresPermissions("linkbug")
     @ResponseBody
     @RequestMapping("/ajaxUpdate")
     public Map deleteRel(QualityBug bug) {
-
-
         bugService.updateBug(bug);
         Map<String, String> map = new HashMap<String, String>();
         map.put("status", "success");
@@ -762,12 +760,6 @@ public class BugAction extends BaseController {
     @ResponseBody
     @RequestMapping("/updateBatch")
     public boolean updateBatch(@RequestBody QualityBug[] bugs) {
-	       /* List<ProductStory> productStories = new ArrayList<ProductStory>();
-	        if (stories != null && stories.length > 0) {
-	            productStories = Arrays.asList(stories);
-	        }
-	        return storyService.updateBatchStory(productStories);*/
-
         if (bugs.length == 0 || bugs == null) {
             return false;
         }

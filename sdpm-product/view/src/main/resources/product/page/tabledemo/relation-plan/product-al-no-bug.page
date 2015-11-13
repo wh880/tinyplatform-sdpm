@@ -7,24 +7,15 @@
 
 
 <script>
-
     $(document).ready(function () {
-
-
             $("#relateBug").on("click", function () {
-            		
                 var bugList = new Array();
                 $("input[type='checkbox']").each(function () {
-
                     if (this.checked == true && this.id != "checkboxall") {
-                        
                         var bugId = $(this).val();
                         bugList.push({bugId: bugId, planId: ${planId}});
-                        
                     }
-
                 });
-
                 if (bugList.length > 0) {
                     $.ajax({
                         type: "POST",
@@ -36,7 +27,7 @@
                         	if(data==true){
                         		window.location.reload();
                         	}
-                            
+
                         },
                         error: function (res) {
                             layer.msg("系统出错，请确认你的请求地址");
@@ -53,19 +44,17 @@
 
 </script>
 
-
-
-#include("/product/page/event/mulsearch-bug.page")	
+#include("/product/page/event/mulsearch-bug.page")
 
 		#@tinyTable(bugTableId) ##ID为空则系统自动生成 带入参数则取该参数为ID
 			#@div(divBaseClass="tinyheaderTools form-inline")
-			
-				
+
+
 				#setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置
 			<input type="button" value="全选"  class="btn btn-default btn-primary "  onclick="selectAllNullorReserve('bugId','全选');" />
             <input type="button" value="反选"   class="btn btn-default btn-primary"  onclick="selectAllNullorReserve('bugId','反选');" />
             #submitButton("relateBug","关联Bug","btn btn-submit btn-primary","关联")
-				
+
 			#end
 			#@tinyTableContent(TINY_CONTEXT_PATH +adminPath + "/product/story/bugSearch/noRelateBug?type=noRelate&deleted=0&planId="+planId) ##取数据地址 总数据
 				#@thead()
@@ -80,17 +69,17 @@
 					#end
 				#end
 			#end
-#*			
-			##以下部分为对删除和修改的影响 因为存在不同的信息故放在外面自行更改 #dialog 配合修改使用
-			<script type="text/javascript">
-				$(function(){
-					$('#${tableId}').on('click','.delBtn',function(e){
-						user_del(this,'1');
-					});
-				})
-			</script>
-			*#
-			
+		#*
+                    ##以下部分为对删除和修改的影响 因为存在不同的信息故放在外面自行更改 #dialog 配合修改使用
+                    <script type="text/javascript">
+                        $(function(){
+                            $('#${tableId}').on('click','.delBtn',function(e){
+                                user_del(this,'1');
+                            });
+                        })
+                    </script>
+                    *#
+
 			#@dialog("myModal")
 				#@dialogHeader()#end
 				#@dialogBody()<p>对话框内容…</p>#end
@@ -100,4 +89,3 @@
 				#end
 			#end
 		#end
-	

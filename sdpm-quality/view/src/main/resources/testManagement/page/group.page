@@ -56,7 +56,7 @@
                                     <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>
                                 #end
                             #else
-                                #if(m.id=="tvergo")
+                                #if(m.id=="texecution")
                                     #if(run?.testRunAssignedTo == UserUtils.getUserId())
                                         #iconOperations("#myModal" m.icon m.name "865" "400" adminPath+m.href+
                                             "?caseId="+run?.caseId+"&from=task&runId="+run?.testRunId+
