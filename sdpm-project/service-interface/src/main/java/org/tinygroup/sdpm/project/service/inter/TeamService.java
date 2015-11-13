@@ -40,7 +40,7 @@ public interface TeamService {
      * @return
      */
     List<ProjectTeam> findTeamByProjectId(Integer projectId);
-
+    List<ProjectTeam> findTeamByProductId(Integer productId);
     /**
      * 查询
      *
