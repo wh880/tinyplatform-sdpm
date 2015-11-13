@@ -9,6 +9,7 @@ import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.document.dao.pojo.DocumentDoc;
 import org.tinygroup.sdpm.document.service.inter.DocService;
+import org.tinygroup.sdpm.dto.project.Teams;
 import org.tinygroup.sdpm.org.dao.pojo.OrgRole;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.RoleService;
@@ -26,6 +27,7 @@ import org.tinygroup.sdpm.quality.dao.pojo.QualityTestCase;
 import org.tinygroup.sdpm.quality.service.inter.TestCaseService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.dao.pojo.SystemHistory;
+import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.service.inter.ActionService;
 import org.tinygroup.sdpm.system.service.inter.HistoryService;
 import org.tinygroup.sdpm.util.LogUtil;
@@ -37,10 +39,7 @@ import org.tinygroup.tinysqldsl.Pager;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 产品控制器
@@ -373,7 +372,8 @@ public class ProductAction extends BaseController {
         return resultMap(false, "请输入产品名称");
     }
     @RequestMapping("addModule")
-    public String toAddModule(){
+    public String toAddModule(Integer pId,Model model){
+        model.addAttribute("pId",pId);
         return "/product/page/tabledemo/addModule.pagelet";
     }
     @RequestMapping("team")
@@ -388,13 +388,12 @@ public class ProductAction extends BaseController {
             List<ProjectTeam> teamList = teamService.findTeamByProductId(pId);
             model.addAttribute("teamList", teamList);
             String[] ids = new String[teamList.size()];
-            if(ids.length>0){
-                for(int i=0;i<teamList.size();i++){
-                    ids[i] = teamList.get(i).getTeamUserId();
-                }
-                List<OrgUser> userList = userService.findUserListByIds(ids);
-                model.addAttribute("userList", userList);
-            }
+
+            List<OrgUser> userList = userService.findUserList(null);
+            model.addAttribute("userList", userList);
+
+            List<OrgRole> roleList = roleService.findRoleList(null);
+            model.addAttribute("roleList", roleList);
         }
         return "/product/page/team/teamManage.page";
     }
@@ -410,5 +409,60 @@ public class ProductAction extends BaseController {
             model.addAttribute("teamPager", pager);
         }
         return "/product/page/team/teamData.pagelet";
+    }
+
+    @RequestMapping("/teamSave")
+    public String teamManageSave(@CookieValue(value = "cookieProductId",defaultValue = "0")String productId,Teams teams, HttpServletRequest request, HttpServletResponse response) {
+        if (productId == "0") {
+            return "redirect:"+adminPath+"/product";
+        }
+        List<ProjectTeam> updateList = new ArrayList<ProjectTeam>();
+        List<ProjectTeam> addList = new ArrayList<ProjectTeam>();
+
+        List<ProjectTeam> teamList = teams.getTeamList();
+        //删选没有账号的team
+        for (int i = 0; i < teamList.size(); i++) {
+            if (StringUtil.isBlank(teamList.get(i).getTeamUserId())) {
+                teamList.remove(teamList.get(i));
+                i--;
+            }
+        }
+        //根据是否有teamId分为增加列表和更新列表
+        for (ProjectTeam team : teamList) {
+            if (team.getId() != null) {
+                team.setProductId(Integer.valueOf(productId));
+                updateList.add(team);
+            } else {
+                team.setProjectId(0);
+                team.setProductId(Integer.valueOf(productId));
+                if (team.getTeamDays() == null) {
+                    team.setTeamDays((float) 0.0);
+                }
+                if (team.getTeamHours() == null) {
+                    team.setTeamHours((float) 0.0);
+                }
+                addList.add(team);
+            }
+        }
+        teamService.batchAdd(addList);
+        teamService.batchUpdate(updateList);
+        return "redirect:"+adminPath+"/product/team";
+    }
+    @RequestMapping("team/nextTr")
+    public String getNextTeamTr(Integer a,Model model){
+        List<OrgUser> userList = userService.findUserList(null);
+        model.addAttribute("userList", userList);
+        List<OrgRole> roleList = roleService.findRoleList(null);
+        model.addAttribute("roleList", roleList);
+        model.addAttribute("a",a+1);
+        return "/product/page/team/teamAddTr.pagelet";
+    }
+    @ResponseBody
+    @RequestMapping("team/del")
+    public Map deleteTeamMember(Integer id){
+        teamService.delete(id);
+        Map<String,String> result = new HashMap<String, String>();
+        result.put("status","success");
+        return result;
     }
 }

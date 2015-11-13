@@ -8,7 +8,7 @@
         #end
     #end
 #end
-#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/project/team/teamManageSave" "post" {"class":"test"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/product/teamSave" "post" {"class":"test"})
     #@table()
     <tr>
         <td style="width: 2%"></td>
@@ -37,14 +37,17 @@
             #@thW()
                 ${t?.teamUserId==null?"":UserUtils.getUserById(t?.teamUserId)?.orgUserRealName}
                 <input name="teamList[${a}].teamUserId" value="${t?.teamUserId}" type="hidden">
-                <input name="teamList[${a}].id" value="${t.id}" type="hidden">
+                <input name="teamList[${a}].id" value="${t?.id}" type="hidden">
+                <input name="teamList[${a}].productId" value="${t?.productId}" type="hidden">
+                <input name="teamList[${a}].projectId" value="${t?.projectId}" type="hidden">
             #end
             <td>
                 #@Tselect2F()
-                    #@Tselect2Body("teamList["a"].teamRole" "" {"class":"input-text select2"})
+                    #@Tselect2Body("teamList["+a+"].teamRole" t.teamRole {"class":"input-text select2","multiple":
+                        "multiple"})
                         <option></option>
-                        #foreach(u : userList)
-                            <option value="${u.orgUserId}">${u.orgUserRealName}</option>
+                        #foreach(u : roleList)
+                            <option value="${u.orgRoleId}">${u.orgRoleName}</option>
                         #end
                     #end
                     #@Tselect2Fix()

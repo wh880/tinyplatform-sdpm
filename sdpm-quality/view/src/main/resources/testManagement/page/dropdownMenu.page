@@ -1,7 +1,180 @@
+#macro TzTreeSelect(name value mapInfo)
+    #set(sid=fmt("sid%d",rand()))
+<input id="${sid}-input-name" type="text" value="" #getMapInfo(mapInfo)/>
+<input id="${sid}-input" name="${name}" type="hidden" value="${value}" #getMapInfo(mapInfo)/>
+<div class="hide" id="${sid}-rap">
+    <div id="${sid}-content" class="t-menu-content" style="display:none; position: absolute;z-index:9999;border:1px solid #0f9ae0;border-top:0;background:#fff;padding:5px 5px 10px">
+        <ul id="ztree${sid}" class="ztree" style="margin-top:0;max-height:400px;overflow-x:auto;overflow-y:auto;background:none;border:0">
+        </ul>
+        <div class="hide" id="${sid}-msg">暂无信息</div>
+        <span style="position:absolute;right:10px;bottom:5px;z-index:2;cursor:pointer" id="close${sid}"><i class="icon-remove"></i></span>
+        #bodyContent
+    </div>
+</div>
+<script type="text/javascript">
+    $(function(){
+        //$("body").append('<div id="${sid}-content" class="t-menu-content" style="display:none; position: absolute;z-index:9999"><ul id="ztree${sid}" class="ztree mCustomScrollbar" style="margin-top:0;max-height:400px;overflow-x:auto;overflow-y:auto"></ul><span style="position:absolute;right:5px;bottom:0px;z-index:2;cursor:pointer" id="close${sid}"><i class="icon-remove"></i></span></div>');
+        var setting = {
+            view: {
+                dblClickExpand: false
+            },
+            data: {
+                simpleData: {
+                    enable: true
+                }
+            },
+            callback: {
+                beforeClick: beforeClick,
+                onClick: onClick
+            }
+        };
+        var zTree;
+        var zNodes =[];
+        var $treeContent=$("#ztree${sid}");
+        var $treeRap=$("#${sid}-content");
+        var $input=$("#${sid}-input-name");
+        var $inputV=$("#${sid}-input");
+        #set(dataurl=call("getMapVal","data-URL",mapInfo))
+        #if(dataurl)
+            $.ajax({
+                type: "GET",
+                url: "${dataurl}",
+                dataType: "json",
+                success: function(data) {
+                    //data= eval(' ' +data+ ' ');
+                    zNodes=data;
+                    //console.log(zNodes);
+                    initzTree();
+                }
+            });
+        #else
+//            #bodyContent
+            initzTree();
+        #end
+            $input.on("change",function(){
+            $inputV.val("");
+        });
+        function initzTree(){
+            zTree=$.fn.zTree.init($treeContent, setting, zNodes);
+            initInputVale();
+        }
+        function initInputVale(){
+            var $val=$inputV.val();
+            if(!$val) return false;
+            for(var i=0;i<zNodes.length;i++){
+                if($val==zNodes[i].id){
+                        $input.val(zNodes[i].name);
+                        $inputV.val($val);
+                    break;
+                }
+            }
+        }
+
+        function beforeClick(treeId, treeNode) {
+            var check = (treeNode && !treeNode.isParent);
+            if (!check) {
+                zTree.expandNode(treeNode);
+                return false;
+            }//return check;
+        }
+        function onClick(e, treeId, treeNode) {
+                $input.val(treeNode.name);
+                $inputV.val(treeNode.id);
+                $("#topNav").html(treeNode.name+"<span class='caret'></span>");
+                var dataValue = treeNode.id;
+                $.cookie('qualityProductId',dataValue,{path:"/"});
+                window.location.reload();
+                $inputV.change();
+            hideMenu();
+        }
+        function hideMenu() {
+                $treeRap.fadeOut("fast");
+            $("#${sid}-rap").append($treeRap);
+        }
+            $("#topNav").on("click",function(){
+            $("body").append($treeRap);
+        var thisOffset = $(this).offset();
+            $treeRap.css({width:"200px",left:thisOffset.left + "px", top:thisOffset.top + $(this).outerHeight() + "px"}).slideDown("fast");
+        });
+        $treeRap.find("#close${sid}").on("click",function(){
+            hideMenu();
+         });
+        function bfxs(zTree, nodes, tt) {
+            if (nodes.children == null) {//无子节点
+                if (nodes[zTree.setting.data.key.name].indexOf(tt) >= 0) {//无子节点，但是包含tt
+                    fjdxs(zTree, nodes);
+                }
+            }else {//有子节点
+                if (nodes[zTree.setting.data.key.name].indexOf(tt) >= 0){//有而且包含
+                    fjdxs(zTree, nodes);
+                    xsall(zTree, nodes);
+                }else {//有但不包含
+                    $.each(nodes.children, function (aa, bb) {
+                        bfxs(zTree, bb, tt);
+                    })
+                }
+            }
+        }
+        ///显示所有父节点
+        function fjdxs(zTree, nodes) {
+            if (nodes.getParentNode() == null) {
+                zTree.showNode(nodes);
+            }
+            else {
+                zTree.showNode(nodes);
+                fjdxs(zTree, nodes.getParentNode());
+            }
+        }
+        ///全显
+        function xsall(ztree, nodes) {
+            ztree.showNode(nodes);
+            if (nodes.children != null) {
+                $.each(nodes.children, function (x, y) {
+                    xsall(ztree, y);
+                })
+            }
+        }
+        ///么有子节点的直接隐藏
+        function ycall(ztree, nodes) {
+            ztree.hideNode(nodes);
+            if (nodes.children != null) {
+                $.each(nodes.children, function (x, y) {
+                    ycall(ztree, y);
+                })
+            }
+        }
+        $("#${sid}-input-name").on("propertychange input",function(){
+            var key = $(this).val();
+            var nodes = zTree.getNodes();
+            zTree.showNodes(nodes);
+            if(!key){
+                $("#${sid}-msg").hide();
+                return;
+            }
+            var zts = zTree.getNodesByParamFuzzy("name", key);
+            if (zts.length==0){
+                $("#${sid}-msg").show();
+            }else{
+                $("#${sid}-msg").hide();
+            }
+
+            $.each(nodes, function (x, y) {
+                ycall(zTree, y);
+            });
+
+            $.each(nodes, function (index, node) {
+                bfxs(zTree, node, key);
+            })
+            zTree.expandAll(true);
+        })
+    });
+</script>
+#end
 #import("/org/tinygroup/publicComponent/macro/navselect.component")
 #set(qualityProductIdTemp = qualityProductId,qualityProductId=qualityProductId?:ProductUtils.getAllProductListByUser()?.get(0)?.productId)
 #@navSelect2("product" "product")
-    #@navSelect2Nav()
+    <span id="topNav" style="">
+        <span id="topVal">
         #if(!qualityProductIdTemp&&qualityProductId)
         <script type="text/javascript">
             $(function(){
@@ -53,27 +226,30 @@
         </script>
         #end
     #end
-
-<span class="caret"></span>#end
+</span>
+<span class="caret"></span></span>
 #@navSelect2Body()
-    #@navSelect2Data()
-    <option value=""></option>
-    <optgroup label="产品">
+##    #@navSelect2Data()
+##    <option value=""></option>
+##    <optgroup label="产品">
 
-        #for(product : ProductUtils.getAllProductListByUser())
-        #if(product?.deleted==0)
-            <option value="${product?.productId}">${product?.productName}</option>
+##        #for(product : ProductUtils.getAllProductListByUser())
+##        #if(product?.deleted==0)
+##            <option value="${product?.productId}">${product?.productName}</option>
+##        #end
+##    #end
+##</optgroup>
+
+###end
+###@navSelect2Fix()
+##
+##<a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition" class="r">增加</a>&nbsp
+##<a href="${TINY_CONTEXT_PATH+adminPath}/product/allproduct/addition">全部</a>&nbsp
+###end
+    #@TzTreeSelect("productId" cookieProductId {"class":"input-text","data-URL":call("link",adminPath+"/productLine/userProductTree")})
+    <span class="l"><a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition" >增加</a>&nbsp
+    <a href="${TINY_CONTEXT_PATH+adminPath}/product/allproduct/addition">全部</a>&nbsp</span>
         #end
-    #end
-</optgroup>
-
-#end
-#@navSelect2Fix()
-
-<a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition" class="r">增加</a>&nbsp
-<a href="${TINY_CONTEXT_PATH+adminPath}/product/allproduct/addition">全部</a>&nbsp
-#end
-
 #hiddenInput("productIdHidden","productId","","")
 
 <script type="text/javascript">
