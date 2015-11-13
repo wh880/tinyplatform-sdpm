@@ -27,7 +27,7 @@
                 #@colLabel("col-3")传真：#end
                 #@formControlDiv("col-6")
                     #tinyInput(
-                        "text" "orgUserRealName" user?.orgUserRealName {"placeholder":"请输入传真",
+                        "text" "orgCompanyFax" company?.orgCompanyFax {"placeholder":"请输入传真",
                         "id":"org_user_real_name","class":
                         "input-text"})
                 #end
