@@ -67,6 +67,10 @@
                     <p>${company?.orgCompanyBackyard}</p>
                 #end
             #end
+            <img style="float: right" src="${TINY_CONTEXT_PATH}${company?.orgCompanyLogo}" width="270"
+                 height="80"></img>
+
+            <p style="clear:both"></p>
         </div>
         #end
 

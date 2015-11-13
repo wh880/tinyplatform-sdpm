@@ -24,7 +24,6 @@
                             }
                         #end
                     })
-
                 </script>
                 #@Tselect2Body("productLineId" cookieProductLineId {"class":"input-text select2"})
                     #for(productLine : ProductUtils.getProductLineList())

@@ -19,6 +19,7 @@ import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;
 import org.tinygroup.sdpm.system.service.inter.ProfileService;
 import org.tinygroup.sdpm.util.UserUtils;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
@@ -52,25 +53,27 @@ public class CompanyAction extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "/uploadLogo", method = RequestMethod.POST)
-    public Map uploadLogo(OrgCompany company, @RequestParam(value = "upfile", required = false) MultipartFile upfile) throws IOException {
-//        upload(upfile, company.getOrgCompanyId(), ProfileType.ORG, "");
-
-        String origName = upfile.getOriginalFilename();
+    public Map uploadLogo(OrgCompany company,
+                          @RequestParam(value = "upfile", required = false) MultipartFile upFile,
+                          HttpServletResponse response) throws IOException {
+        String origName = upFile.getOriginalFilename();
         String ext = FilenameUtils.getExtension(origName);
-        String fileUrl = fileRepository.storeByExt(UPLOAD_PATH, origName, upfile);
+        String fileUrl = fileRepository.storeByExt(UPLOAD_PATH, origName, upFile);
         fileUrl = fileRepository.resolverFilePath(fileUrl, UPLOAD_PATH);
-        long size = upfile.getSize();
+        long size = upFile.getSize();
         SystemProfile profile = new SystemProfile(fileUrl, null, ext, (int) size,
                 ProfileType.ORG.getType(), company.getOrgCompanyId(), UserUtils.getUserAccount(), new Date(), null, null);
         profileService.add(profile);
-        company.setOrgCompanyLogo(fileUrl);
-        companyService.updateCompany(company);
+//        company.setOrgCompanyLogo(fileUrl);
+//        companyService.updateCompany(company);
+//        model.addAttribute("company", company);
         Map<String, String> map = new HashMap<String, String>();
-        map.put("status", "success");
+        map.put("url", fileUrl);
+        map.put("state", "SUCCESS");
+        response.setContentType("application/json");
+
         return map;
     }
-
-
     /**
      * 显示公司页面
      *
