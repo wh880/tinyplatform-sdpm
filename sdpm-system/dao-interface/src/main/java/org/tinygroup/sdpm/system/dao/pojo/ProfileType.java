@@ -5,13 +5,14 @@ package org.tinygroup.sdpm.system.dao.pojo;
  * Created by Hulk on 2015/10/21.
  */
 public enum ProfileType {
-    PROJECT("project"),          //创建
-    EDITED("edited"),         //编辑了
+    PROJECT("project"),
+    EDITED("edited"),
     STORY("story"),
     DOCUMENT("document"),
     TASK("task"),
     RELEASE("release"),
     BUG("bug"),
+    ORG("org"),
     TESTCASE("testCase");
     private final String type;
 

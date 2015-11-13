@@ -8,7 +8,7 @@
 #macro ztreeClick()
 if(!treeNode.isParent){
 var id = treeNode.id;
-loadURL('#link(adminPath+"/system/dict/dictItem?moduleId='+id+'")', $("#tBox"));
+	loadURL("${TINY_CONTEXT_PATH+adminPath}/system/dict/dictItem?moduleId="+id, $("#tBox"));
 }
 #end
 

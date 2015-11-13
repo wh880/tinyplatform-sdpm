@@ -114,7 +114,7 @@ public class ModuleAction extends BaseController {
             Map<String, Object> mapTop = Maps.newHashMap();
             mapTop.put("id", "p" + p.getProjectId());
             mapTop.put("pId", 0);
-            mapTop.put("open", false);
+            mapTop.put("open", true);
             mergeModule(systemModules, mapList, "p" + p.getProjectId().toString(),"name", true, true);
             mapTop.put("isParent", true);
             mapTop.put("add", true);
@@ -215,6 +215,18 @@ public class ModuleAction extends BaseController {
             moduleService.editNameAndTitle(systemModule);
         }
         return "redirect: list?moduleType=dict";
+    }
+    @ResponseBody
+    @RequestMapping("moduleAdd")
+    public Map moduleAdd(SystemModule module){
+        SystemModule pModule = moduleService.findById(module.getModuleParent());
+        if(module.getModuleRoot()==null){
+            module.setModuleRoot(pModule.getModuleRoot());
+        }
+        if(module.getModuleType()==null){
+            module.setModuleType(pModule.getModuleType());
+        }
+        return ajaxSaveModule(module);
     }
 
     @ResponseBody

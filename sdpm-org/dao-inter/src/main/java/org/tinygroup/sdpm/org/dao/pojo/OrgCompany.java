@@ -84,6 +84,12 @@ public class OrgCompany implements Serializable {
 	 */
 	private String orgCompanyDeleted;
 
+
+	/**
+	 * 公司logo
+	 */
+	private String orgCompanyLogo;
+
 	public OrgCompany() {
 		setOrgCompanyId(1);
 		setOrgCompanyDeleted(DELETE_NO);
@@ -177,4 +183,11 @@ public class OrgCompany implements Serializable {
 		this. orgCompanyDeleted = orgCompanyDeleted;
 	}
 
+	public String getOrgCompanyLogo() {
+		return orgCompanyLogo;
+	}
+
+	public void setOrgCompanyLogo(String orgCompanyLogo) {
+		this.orgCompanyLogo = orgCompanyLogo;
+	}
 }

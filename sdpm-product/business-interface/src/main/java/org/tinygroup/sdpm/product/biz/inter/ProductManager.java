@@ -89,5 +89,9 @@ public interface ProductManager {
 	 * @return
 	 */
 	List<String> getProductNameByLineId(Integer productLineId);
+
+	List<Product> getProductByUser(String userId);
+
+	List<Integer> getTeamRoleProductLineIds(String userId);
 	
 }

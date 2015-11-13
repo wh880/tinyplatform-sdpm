@@ -30,14 +30,15 @@
     </div>
     <div style="text-align:right;margin:right">
     #*点击问题进去，里面的编辑和删除*#
-        #foreach(m:menuManager.getScopeMenus("FaqContent"))
-            #if(m.id != "Faq_deleteContent")
-                #@aExtendButton(
-                    "btn-primary btn-sm" TINY_CONTEXT_PATH+adminPath+m.href+"?id="+faqs?.faqId "" "")编辑#end
-            #else
-                #@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m.href faqs?.faqId TINY_CONTEXT_PATH+adminPath+
-                    "/service/faq/list" {
-                    "class":"btn radius btn-danger btn-sm"}) 删除#end
+        #foreach(m:menuManager.getScopeMenus("service-faq"))
+            #if(m.id!="faq-add")
+                #if(m.id != "faq-del")
+                    #@aExtendButton(
+                        "btn-primary btn-sm" TINY_CONTEXT_PATH+adminPath+m.href+"?id="+faqs?.faqId "" "")编辑#end
+                #else
+                    #@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m.href faqs?.faqId TINY_CONTEXT_PATH+adminPath+m.href {
+                        "class":"btn radius btn-danger btn-sm"}) 删除#end
+                #end
             #end
         #end
     </div>

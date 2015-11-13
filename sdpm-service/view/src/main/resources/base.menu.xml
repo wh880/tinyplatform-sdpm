@@ -80,29 +80,16 @@
               scope="service-sla"/>
         <menu id="sla-del" name="删除协议" href="/service/sla/delete" icon="icon-remove" sort="1" isShow="1"
               scope="service-sla"/>
-        <!--下面是协议里面，点击“详情”页面后的“编辑”和“删除”-->
-        <!--<menu id="clientSla_editContent" name="协议编辑" href="/service/sla/form" sort="1" isShow="1"-->
-        <!--scope="clientSlaContent"/>-->
-        <!--<menu id="clientSla_deleteContent" name="协议删除" href="/service/sla/delete" sort="1" isShow="1"-->
-        <!--scope="clientSlaContent"/>-->
-        <!--下面是协议里面，点击“协议标题”里面的“编辑”和“删除”-->
-        <!--<menu id="Sla_editContent" name="协议编辑" href="/service/sla/form" sort="1" isShow="1"-->
-        <!--scope="SlaContent"/>-->
-        <!--<menu id="Sla_deleteContent" name="协议删除" href="/service/sla/delete" sort="1" isShow="1"-->
-        <!--scope="SlaContent"/>-->
+
     </menu>
     <menu id="faq" name="FAQ" href="/service/faq/list" sort="100" isShow="1">
-        <menu id="faq-edit" name="编辑" href="/service/faq/form" icon="icon-pencil" sort="1" isShow="1"
+        <menu id="faq-edit" name="编辑问题" href="/service/faq/form" icon="icon-pencil" sort="1" isShow="1"
               scope="service-faq"/>
-        <menu id="faq-del" name="删除" href="/service/faq/delete" icon="icon-trash" sort="1" isShow="1"
+        <menu id="faq-del" name="删除问题" href="/service/faq/delete" icon="icon-trash" sort="1" isShow="1"
               scope="service-faq"/>
         <menu id="faq-add" name="新增问题" href="/service/faq/form" icon="icon-plus-sign" sort="1" isShow="1"
               scope="service-faq"/>
-        <!--点击问题，进去后，里面的编辑和删除-->
-        <menu id="Faq_editContent" name="协议编辑" href="/service/faq/form" sort="1" isShow="1"
-              scope="FaqContent"/>
-        <menu id="Faq_deleteContent" name="协议删除" href="/service/faq/delete" sort="1" isShow="1"
-              scope="FaqContent"/>
+
     </menu>
 
 </menu>

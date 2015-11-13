@@ -24,6 +24,9 @@ public class Product implements Serializable {
 
     public static Integer DELETE_YES = 1;
     public static Integer DELETE_NO = 0;
+    public static final Integer ACl_All=0;
+    public static final Integer ACl_TEAM=0;
+    public static final Integer ACl_TEAM_AND_ROLE=0;
     /**
      * 产品ID
      */
@@ -336,6 +339,14 @@ public class Product implements Serializable {
 
     public void setDeleted(Integer deleted) {
         this.deleted = deleted;
+    }
+
+    @Override
+    public boolean equals(Object object){
+        if(this.getProductId()==((Product)object).getProductId()){
+            return true;
+        }
+        return false;
     }
 
 }

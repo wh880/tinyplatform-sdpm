@@ -3,8 +3,14 @@ package org.tinygroup.sdpm.product.biz.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
+import org.tinygroup.sdpm.org.dao.OrgRoleDao;
+import org.tinygroup.sdpm.org.dao.OrgRoleUserDao;
+import org.tinygroup.sdpm.org.dao.pojo.OrgRole;
+import org.tinygroup.sdpm.org.dao.pojo.OrgRoleUser;
+import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.product.biz.inter.ProductManager;
 import org.tinygroup.sdpm.product.dao.ProductDao;
 import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
@@ -12,6 +18,8 @@ import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
 import org.tinygroup.tinysqldsl.Pager;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -20,6 +28,8 @@ public class ProductManagerImpl implements ProductManager{
 
 	@Autowired
 	private ProductDao productDao;
+	@Autowired
+	private OrgRoleUserDao orgRoleUserDao;
 	
 	public Product add(Product product) {
 		
@@ -60,8 +70,10 @@ public class ProductManagerImpl implements ProductManager{
 	}
 	
 	public List<Product> findList(Product product, String order,String ordertype) {
-
-		return productDao.query(product,  (order==null||"".equals(order))?null:new OrderBy(NameUtil.resolveNameDesc("product."+order), !("desc".equals(ordertype))?true:false));
+		if(StringUtil.isBlank(order)){
+			return productDao.query(product);
+		}
+		return productDao.query(product,new OrderBy(NameUtil.resolveNameDesc("product."+order), !("desc".equals(ordertype))?true:false));
 	}
 
 	public Pager<Product> findPager(int page, int limit, Product product, String order,String ordertype) {
@@ -84,5 +96,37 @@ public class ProductManagerImpl implements ProductManager{
 		return productDao.getProductNameByLineId(productLineId);
 	}
 
-	
+	public List<Product> getProductByUser(String userId) {
+
+		List<Product> productList = productDao.getProductByUser(userId);
+		Product product = new Product();
+		product.setAcl(product.ACl_TEAM_AND_ROLE);
+		List<Product> products = productDao.query(product);
+		OrgRoleUser role = new OrgRoleUser();
+		role.setOrgUserId(userId);
+		List<OrgRoleUser> orgRoles = orgRoleUserDao.query(role);
+		for(OrgRoleUser orgRoleUser : orgRoles) {
+			for (Product product1:products) {
+				String whiteList = product1.getProductWhiteList();
+				if (whiteList != null){
+					String[] ids = whiteList.split(",");
+					List<String> idList = Arrays.asList(ids);
+					if(idList.contains(String.valueOf(product1.getProductId()))&&!productList.contains(product1)){
+						productList.add(product1);
+					}
+				}
+			}
+		}
+
+		return productList;
+	}
+
+	public List<Integer> getTeamRoleProductLineIds(String userId){
+		List<Integer> pIds = new ArrayList<Integer>();
+		for(Product product : getProductByUser(userId)){
+			pIds.add(product.getProductLineId());
+		}
+		return pIds;
+	}
+
 }

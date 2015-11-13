@@ -17,7 +17,7 @@
                 #set(m=menuManager.getMenu("org-company-edit"))
                     #if(m)
                         #@aModal("#myModal" m.name "600" "400" ""
-                        adminPath+m.href)#buttonIcon(iconClass="icon-edit")<b>${m.name}</b>#end
+                        adminPath+m.href)#buttonIcon(iconClass="icon-edit")<b>编辑</b>#end
                     #end
                     #@dialog("myModal")
                         #@dialogHeader()公司#end

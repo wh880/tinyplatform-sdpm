@@ -86,6 +86,10 @@ public class OrgCompanyTable extends Table {
 	 * 
 	 */
 	public final Column ORG_COMPANY_ADMINS = new Column(this, "org_company_admins");
+	/**
+	 * 公司logo
+	 */
+	public final Column ORG_COMPANY_LOGO = new Column(this, "org_company_logo");
 
 	/** 
 	 * 删除标志 

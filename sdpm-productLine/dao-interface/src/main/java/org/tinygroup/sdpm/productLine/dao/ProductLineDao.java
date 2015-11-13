@@ -30,6 +30,6 @@ public interface ProductLineDao extends BaseDao<ProductLine,Integer> {
 	
 	Pager<ProductLine> findList(int start, int limit, Condition condition, ProductLine productLine , final OrderBy... orderArgs);
 	
-	
+	List<ProductLine> getByKeys(Integer...ids);
 
 }
