@@ -42,6 +42,7 @@ public class RoleUserAction extends BaseController {
         }
         model.addAttribute("userIdList", idList);
         model.addAttribute("userList", userList);
+        model.addAttribute("id", id);//角色id
         return "organization/privilege/groupMaintain.page";
     }
 

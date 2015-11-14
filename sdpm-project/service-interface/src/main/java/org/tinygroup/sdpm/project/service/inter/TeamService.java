@@ -40,7 +40,9 @@ public interface TeamService {
      * @return
      */
     List<ProjectTeam> findTeamByProjectId(Integer projectId);
+
     List<ProjectTeam> findTeamByProductId(Integer productId);
+
     /**
      * 查询
      *
@@ -51,6 +53,24 @@ public interface TeamService {
      * @param ordertype
      * @return
      */
-    public Pager<ProjectTeam> findPager(ProjectTeam team, Integer start, Integer limit, String order, String ordertype);
+    Pager<ProjectTeam> findPager(ProjectTeam team, Integer start, Integer limit, String order, String ordertype);
+
+    /**
+     * 根据用户和项目Id获取团队成员拥有的菜单
+     *
+     * @param projectId
+     * @param userId
+     * @return
+     */
+    List<String> getMenuIdListByProjectAndUser(Integer projectId, String userId);
+
+    /**
+     * 根据用户和产品Id获取团队成员拥有的菜单
+     *
+     * @param productId
+     * @param userId
+     * @return
+     */
+    List<String> getMenuIdListByProductAndUser(Integer productId, String userId);
 
 }

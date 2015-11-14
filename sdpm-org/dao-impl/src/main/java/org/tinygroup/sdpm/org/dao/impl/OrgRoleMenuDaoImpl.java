@@ -115,12 +115,6 @@ public class OrgRoleMenuDaoImpl extends TinyDslDaoSupport implements OrgRoleMenu
         Select select = selectFrom(ORG_ROLE_MENUTABLE).where(
                 ORG_ROLE_MENUTABLE.ORG_ROLE_ID.eq(roleId));
         return getDslSession().fetchList(select, OrgRoleMenu.class);
-//		return getDslTemplate().query(roleId, new SelectGenerateCallback<OrgRoleMenu>() {
-//			public Select generate(OrgRoleMenu t) {
-//				);
-//				return addOrderByElements(select);
-//			}
-//		});
     }
 
     public List<OrgRoleMenu> findMenuListByUser(String userId) {
@@ -128,6 +122,7 @@ public class OrgRoleMenuDaoImpl extends TinyDslDaoSupport implements OrgRoleMenu
                 .where(ORG_ROLE_USERTABLE.ORG_USER_ID.eq(userId));
         return getDslSession().fetchList(select, OrgRoleMenu.class);
     }
+
 
     public List<OrgRoleMenu> query(OrgRoleMenu orgRoleMenu, final OrderBy... orderBies) {
         if (orgRoleMenu == null) {
