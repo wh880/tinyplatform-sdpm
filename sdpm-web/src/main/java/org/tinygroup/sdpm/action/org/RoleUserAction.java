@@ -5,13 +5,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.tinygroup.sdpm.common.util.Collections3;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.org.dao.pojo.OrgRoleUser;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.RoleService;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,36 +27,33 @@ public class RoleUserAction extends BaseController {
     UserService userService;
     /**
      * 显示角色的用户
-     * @param id
+     * @param roleId
      * @param model
      * @return
      */
     @RequiresPermissions("org-privilege-user")
     @RequestMapping("/show")
-    public String showUser(Integer id, Model model) {
-        List<OrgUser> userList = userService.findUserList(new OrgUser());
-        List<OrgRoleUser> linkList = roleService.findUserByRoleId(id);
-        ArrayList<String> idList = new ArrayList<String>();
-        for (OrgRoleUser orgRoleUser : linkList) {
-            idList.add(orgRoleUser.getOrgUserId());
-        }
+    public String showUser(Integer roleId, Model model) {
+        List<OrgUser> userList = userService.findUserList(null);
+        List<OrgRoleUser> linkList = roleService.findUserByRoleId(roleId);
+        List<String> idList = Collections3.extractToList(linkList,"orgUserId");
         model.addAttribute("userIdList", idList);
         model.addAttribute("userList", userList);
-        model.addAttribute("id", id);//角色id
+        model.addAttribute("roleId", roleId);//角色id
         return "organization/privilege/groupMaintain.page";
     }
 
     /**
      * 保存角色用户
      *
-     * @param id
+     * @param roleId
      * @param array
      * @return
      */
     @RequiresPermissions("org-privilege-user")
     @RequestMapping("/save")
-    public String save(Integer id, String[] array) {
-        roleService.addRoleUser(array, id);
+    public String save(Integer roleId, String[] array) {
+        roleService.addRoleUser(array, roleId);
         return "redirect:" + adminPath + "/org/privilege/list";
     }
 }

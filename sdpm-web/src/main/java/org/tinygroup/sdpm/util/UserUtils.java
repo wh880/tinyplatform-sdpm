@@ -6,15 +6,18 @@ import org.apache.shiro.session.InvalidSessionException;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.menu.Menu;
 import org.tinygroup.sdpm.common.menu.MenuManager;
+import org.tinygroup.sdpm.common.menu.impl.MenuManagerImpl;
 import org.tinygroup.sdpm.org.dao.pojo.OrgRole;
 import org.tinygroup.sdpm.org.dao.pojo.OrgRoleMenu;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
+import org.tinygroup.sdpm.org.service.impl.RoleServiceImpl;
+import org.tinygroup.sdpm.org.service.impl.UserServiceImpl;
 import org.tinygroup.sdpm.org.service.inter.RoleService;
 import org.tinygroup.sdpm.org.service.inter.UserService;
+import org.tinygroup.sdpm.project.service.impl.TeamServiceImpl;
 import org.tinygroup.sdpm.project.service.inter.TeamService;
 import org.tinygroup.sdpm.security.Principal;
 
@@ -24,7 +27,6 @@ import java.util.List;
 /**
  * 用户工具类
  */
-@Component
 public class UserUtils {
     public static final String USER_CACHE = "userCache";
     public static final String USER_CACHE_ID_ = "id_";
@@ -34,13 +36,13 @@ public class UserUtils {
     public static final String CACHE_MENU_LIST_IN_PROJECT_ = "menuProject_";
     public static final String CACHE_MENU_LIST_IN_PRODUCT_ = "menuProduct_";
     @Autowired
-    private static RoleService roleService;
+    private static RoleService roleService = SpringContextHolder.getBean(RoleServiceImpl.class);
     @Autowired
-    private static UserService userService;
+    private static UserService userService = SpringContextHolder.getBean(UserServiceImpl.class);
     @Autowired
-    private static MenuManager menuManager;
+    private static MenuManager menuManager = SpringContextHolder.getBean(MenuManagerImpl.class);
     @Autowired
-    private static TeamService teamService;
+    private static TeamService teamService = SpringContextHolder.getBean(TeamServiceImpl.class);
 
     /**
      * 根据ID获取用户
@@ -177,6 +179,7 @@ public class UserUtils {
         }
         return menuList;
     }
+
     /**
      * 获取当前用户产品角色列表
      *

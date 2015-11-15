@@ -2,7 +2,7 @@
 #import("/common/component/form.component")
 #set(name="organizationPrivilege")
 #@tinyForm("roleUserManager" TINY_CONTEXT_PATH+adminPath+"/org/roleUser/save" "post")
-<input type="hidden" name="id" value="${id}"/>
+<input type="hidden" name="roleId" value="${roleId}"/>
     #@div()
         #@tabWithInit("tab_demo" "optionsBox")
             #@tabHead()
