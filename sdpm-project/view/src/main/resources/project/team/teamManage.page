@@ -21,6 +21,7 @@
             用户
         </td>
         <td width="20%">
+            <span class="c-red">*</span>
             角色
         </td>
         <td width="20%">
