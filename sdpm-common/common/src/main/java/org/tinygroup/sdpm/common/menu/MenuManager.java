@@ -47,11 +47,4 @@ public interface MenuManager {
 
     List<Menu> getMenus();
 
-    /**
-     * 判断当前用户是否某个菜单权限
-     * @param menuId
-     * @return
-     */
-    Boolean hasMenu(String menuId);
-
 }

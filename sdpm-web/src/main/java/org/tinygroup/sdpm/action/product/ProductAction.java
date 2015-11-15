@@ -117,7 +117,7 @@ public class ProductAction extends BaseController {
         product.setProductCreatedBy(UserUtils.getUserId());
         product.setProductCreatedDate(new Date());
         product.setProductStatus("0");
-        
+
         product = productService.addProduct(product);
         ProductUtils.removeProductList();
         ProductUtils.removeProductList(productLine);
@@ -232,7 +232,7 @@ public class ProductAction extends BaseController {
         model.addAttribute("product", product);
 
         if ("overview".equals(forward)) {
-        	
+
             return "/product/page/project/overview.page";
         } else if ("baseinfo".equals(forward)) {
             List<ProjectProduct> projectProducts = projectProductService.findProjects(Integer.parseInt(cookieProductId));

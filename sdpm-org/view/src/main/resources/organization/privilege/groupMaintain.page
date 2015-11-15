@@ -1,8 +1,8 @@
-#!set(activeTitle="组织管理",activeMenuId=currentPageId)
+#!set(activeTitle="角色用户管理",activeMenuId=currentPageId)
 #import("/common/component/form.component")
 #set(name="organizationPrivilege")
 #@tinyForm("roleUserManager" TINY_CONTEXT_PATH+adminPath+"/org/roleUser/save" "post")
-<input type="hidden" name="id" value="${id}"/>
+<input type="hidden" name="roleId" value="${roleId}"/>
     #@div()
         #@tabWithInit("tab_demo" "optionsBox")
             #@tabHead()
@@ -19,7 +19,7 @@
                             #@Tcheckboxes("array" userIdList)
                                 #for(p : userList)
                                 #@gridSysCol(2)
-                                    #@Tcheckbox(p.orgUserId)${p?.orgUserRealName}#end
+                                    #@Tcheckbox(p.orgUserId)${p.orgUserRealName}#end
                                 #end
                             #end
                         #end

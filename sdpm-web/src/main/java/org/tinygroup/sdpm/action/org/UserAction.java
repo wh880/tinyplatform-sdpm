@@ -67,6 +67,32 @@ public class UserAction extends BaseController {
     @Autowired
     private ActionService actionService;
 
+    /**
+     * 修改密码表单
+     * @return
+     */
+    @RequestMapping("/passwordForm")
+    public String passwordForm() {
+        return "organization/user/updatePassword";
+    }
+    /**
+     * 修改密码表单保存
+     * @return
+     */
+    @RequestMapping("/passwordSave")
+    public String passwordSave(String oldPassword,String newPassword,Model model) {
+        OrgUser user = UserUtils.getUser();
+        if (userService.validatePassword(oldPassword,user.getOrgUserPassword())){
+            OrgUser newUser = new OrgUser();
+            newUser.setOrgUserId(user.getOrgUserId());
+            newUser.setOrgUserPassword(newPassword);
+            userService.updateUser(newUser);
+            addMessage(model,"修改密码成功！");
+        }else {
+            addMessage(model,"修改密码失败，原始密码错误！");
+        }
+        return "organization/user/updatePassword";
+    }
 
     /**
      * 用户新增和编辑页面显示
@@ -96,7 +122,6 @@ public class UserAction extends BaseController {
      * @param password2
      * @return
      */
-
     @RequiresPermissions(value = {"org-user-edit", "org-user-add", "organizationAddUser"}, logical = Logical.OR)
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(OrgUser user, Model model, String password1, String password2) {
@@ -390,7 +415,6 @@ public class UserAction extends BaseController {
     @RequiresPermissions("org-user-bugAdmin")
     @RequestMapping("/bug/search")
     public String bugSearchAction(String id, Integer start, Integer limit, int page, int pagesize, String choose, ProjectTask task, String order, String ordertype, Model model, HttpServletRequest request) {
-        OrgUser user = userService.findUser(id);
         QualityBug bug = new QualityBug();
         if (choose.equals("6")) {
             bug.setBugClosedBy(id);
@@ -425,7 +449,6 @@ public class UserAction extends BaseController {
     @RequiresPermissions("org-user-testtaskAdmin")
     @RequestMapping("/testtask/search")
     public String testTaskSearchAction(String id, Integer start, Integer limit, int page, int pagesize, String choose, QualityTestTask testTask, String order, String ordertype, Model model, HttpServletRequest request) {
-        OrgUser user = userService.findUser(id);
         QualityTestTask testTask1 = new QualityTestTask();
         testTask1.setTesttaskOwner(id);
         Pager<QualityTestTask> testTaskPager = testTaskService.findTestTaskPager(start, limit, testTask1, order, false);

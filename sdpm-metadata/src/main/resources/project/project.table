@@ -2,7 +2,6 @@
   <table id="cbcedea659a442ef88eca868880f9667" name="project" title="项目" schema="" package-name="">
     <description></description>
     <table-field standard-field-id="dca4d75a1c1347d8baeff4f420dc894a" primary="true" unique="true" not-null="true" id="project_id" auto-increase="true"/>
-    <table-field standard-field-id="bbdd486351bc40fe9173c0bdce7d0a2e" primary="false" unique="false" not-null="false" id="no" auto-increase="false"/>
     <table-field standard-field-id="f7474ba7379f4d9fbd44e6feffa2c70e" primary="false" unique="false" not-null="false" id="project_is_cat" auto-increase="false"/>
     <table-field standard-field-id="bd3dcef09ad646e19196aea417b47baa" primary="false" unique="false" not-null="false" id="project_cat_id" auto-increase="false"/>
     <table-field standard-field-id="e5d28aec72b24c58ac03fc7dfbaff40f" primary="false" unique="false" not-null="false" id="project_type" auto-increase="false"/>
@@ -56,7 +55,7 @@
   </table>
   <table id="dff2d0bd76b849d89140ba3c038ac673" name="project_task" title="任务" package-name="">
     <table-field standard-field-id="8cd36378dabf44a99afef4d1f7e433a0" primary="true" unique="true" not-null="true" id="task_id" auto-increase="true"/>
-    <table-field standard-field-id="bbdd486351bc40fe9173c0bdce7d0a2e" primary="false" unique="false" not-null="false" id="no" auto-increase="false"/>
+    <table-field standard-field-id="2edcaf63d42a4618bb2cac69ebdaca7c" primary="false" unique="false" not-null="false" id="task_no" auto-increase="false"/>
     <table-field standard-field-id="03ee1372ef3b480681b5aaa5032f35d7" primary="false" unique="false" not-null="false" id="task_project" auto-increase="false"/>
     <table-field standard-field-id="dfa99c9c348b4bb6a4aef3b27bfa7bbf" primary="false" unique="false" not-null="false" id="task_story" auto-increase="false"/>
     <table-field standard-field-id="831bc52d5d5b43f989178551619c0bf6" primary="false" unique="false" not-null="false" id="task_story_version" auto-increase="false"/>

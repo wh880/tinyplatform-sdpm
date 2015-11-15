@@ -5,6 +5,7 @@ import org.apache.shiro.UnavailableSecurityManagerException;
 import org.apache.shiro.session.InvalidSessionException;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.menu.Menu;
 import org.tinygroup.sdpm.common.menu.MenuManager;
@@ -16,6 +17,8 @@ import org.tinygroup.sdpm.org.service.impl.RoleServiceImpl;
 import org.tinygroup.sdpm.org.service.impl.UserServiceImpl;
 import org.tinygroup.sdpm.org.service.inter.RoleService;
 import org.tinygroup.sdpm.org.service.inter.UserService;
+import org.tinygroup.sdpm.project.service.impl.TeamServiceImpl;
+import org.tinygroup.sdpm.project.service.inter.TeamService;
 import org.tinygroup.sdpm.security.Principal;
 
 import java.util.ArrayList;
@@ -30,9 +33,16 @@ public class UserUtils {
     public static final String USER_CACHE_LOGIN_NAME_ = "ln";
     public static final String CACHE_ROLE_LIST = "roleList";
     public static final String CACHE_MENU_LIST = "menuList";
+    public static final String CACHE_MENU_LIST_IN_PROJECT_ = "menuProject_";
+    public static final String CACHE_MENU_LIST_IN_PRODUCT_ = "menuProduct_";
+    @Autowired
     private static RoleService roleService = SpringContextHolder.getBean(RoleServiceImpl.class);
+    @Autowired
     private static UserService userService = SpringContextHolder.getBean(UserServiceImpl.class);
+    @Autowired
     private static MenuManager menuManager = SpringContextHolder.getBean(MenuManagerImpl.class);
+    @Autowired
+    private static TeamService teamService = SpringContextHolder.getBean(TeamServiceImpl.class);
 
     /**
      * 根据ID获取用户
@@ -153,6 +163,39 @@ public class UserUtils {
         return roleList;
     }
 
+    /**
+     * 获取当前用户项目角色列表
+     *
+     * @return
+     */
+    public static List<String> getUserMenuByProject(Integer projectId) {
+        if (projectId == null || StringUtil.isBlank(getUserId())) {
+            return new ArrayList<String>();
+        }
+        List<String> menuList = (List<String>) getCache(CACHE_MENU_LIST_IN_PROJECT_ + projectId);
+        if (menuList == null) {
+            menuList = teamService.getMenuIdListByProjectAndUser(projectId, getUserId());
+            putCache(CACHE_MENU_LIST_IN_PROJECT_ + projectId, menuList);
+        }
+        return menuList;
+    }
+
+    /**
+     * 获取当前用户产品角色列表
+     *
+     * @return
+     */
+    public static List<String> getUserMenuByProduct(Integer productId) {
+        if (productId == null || StringUtil.isBlank(getUserId())) {
+            return new ArrayList<String>();
+        }
+        List<String> menuList = (List<String>) getCache(CACHE_MENU_LIST_IN_PRODUCT_ + productId);
+        if (menuList == null) {
+            menuList = teamService.getMenuIdListByProductAndUser(productId, getUserId());
+            putCache(CACHE_MENU_LIST_IN_PRODUCT_ + productId, menuList);
+        }
+        return menuList;
+    }
 
     /**
      * 获取当前用户角色列表
@@ -211,6 +254,7 @@ public class UserUtils {
         }
         return false;
     }
+
     /**
      * 获取当前登录者对象
      */

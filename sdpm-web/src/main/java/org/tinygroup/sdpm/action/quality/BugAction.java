@@ -129,7 +129,7 @@ public class BugAction extends BaseController {
         systemProfile.setFileDeleted("0");
         systemProfile.setFileObjectId(bug.getBugId());
         List<SystemProfile> list = profileService.find(systemProfile);
-        model.addAttribute("file",list);
+        model.addAttribute("file", list);
         model.addAttribute("qualityBug", bug);
         model.addAttribute("nextId", nextId);
         return "/testManagement/page/bugInfo.page";
@@ -142,12 +142,12 @@ public class BugAction extends BaseController {
         qualityTestCase.setCaseFromBug(bugId);
         qualityTestCase.setDeleted(0);
         List<QualityTestCase> cases = testCaseService.findTestCaseList(qualityTestCase);
-        if(!StringUtil.isBlank(bug.getBugOpenedBuild())){
+        if (!StringUtil.isBlank(bug.getBugOpenedBuild())) {
             String[] buildIds = bug.getBugOpenedBuild().split(",");
             List<ProjectBuild> projectBuilds = buildService.getBuildByIds(buildIds);
-            model.addAttribute("openedBuilds",projectBuilds);
+            model.addAttribute("openedBuilds", projectBuilds);
         }
-        if(!StringUtil.isBlank(bug.getBugAssignedTo())) {
+        if (!StringUtil.isBlank(bug.getBugAssignedTo())) {
             String[] userIds = bug.getBugAssignedTo().split(",");
             List<OrgUser> assignUsers = userService.findUserListByIds(userIds);
             model.addAttribute("assignUsers", assignUsers);
@@ -175,9 +175,9 @@ public class BugAction extends BaseController {
             bug.setModuleId(null);
         }
         Pager<QualityBug> bugpager = null;
-        if("tbugneedchange".equals(status)){
+        if ("tbugneedchange".equals(status)) {
             bugpager = bugService.findStoryChangedBugs(start, limit, conditions, bug, order, asc);
-        }else{
+        } else {
             bugpager = bugService.findBugListPager(start, limit, conditions, bug, order, asc);
         }
         model.addAttribute("bugpager", bugpager);
@@ -391,7 +391,7 @@ public class BugAction extends BaseController {
 
     @RequestMapping("/solve")
     public String solve(QualityBug bug, SystemAction systemAction,
-                        HttpServletRequest request,@RequestParam(value = "file", required = false) MultipartFile[] file,
+                        HttpServletRequest request, @RequestParam(value = "file", required = false) MultipartFile[] file,
                         String[] title) throws IOException {
         QualityBug qualityBug = bugService.findById(bug.getBugId());
         if (qualityBug.getBugAssignedTo() != bug.getBugAssignedTo()) {
@@ -448,8 +448,7 @@ public class BugAction extends BaseController {
     @RequiresPermissions("tedition")
     @RequestMapping("/toEdit")
     public String edit(Integer bugId, Model model) {
-        QualityBug bug = new QualityBug();
-        bug = bugService.findById(bugId);
+        QualityBug bug = bugService.findById(bugId);
         model.addAttribute("bug", bug);
         return "/testManagement/page/tabledemo/edition.page";
     }
@@ -660,8 +659,6 @@ public class BugAction extends BaseController {
         bug.setDeleted(0);
         Pager<QualityBug> bugPage = bugService.findBugListPager(start, limit, null, bug, order, asc);
         model.addAttribute("bugPage", bugPage);
-        bugPage.getRecords();
-        bugPage.getTotalCount();
         return "project/bug/bugViewTableData.pagelet";
     }
 
@@ -745,12 +742,10 @@ public class BugAction extends BaseController {
         return "product/data/tabledata.pagelet";
     }
 
-
+    @RequiresPermissions("linkbug")
     @ResponseBody
     @RequestMapping("/ajaxUpdate")
     public Map deleteRel(QualityBug bug) {
-
-
         bugService.updateBug(bug);
         Map<String, String> map = new HashMap<String, String>();
         map.put("status", "success");
@@ -762,12 +757,6 @@ public class BugAction extends BaseController {
     @ResponseBody
     @RequestMapping("/updateBatch")
     public boolean updateBatch(@RequestBody QualityBug[] bugs) {
-	       /* List<ProductStory> productStories = new ArrayList<ProductStory>();
-	        if (stories != null && stories.length > 0) {
-	            productStories = Arrays.asList(stories);
-	        }
-	        return storyService.updateBatchStory(productStories);*/
-
         if (bugs.length == 0 || bugs == null) {
             return false;
         }

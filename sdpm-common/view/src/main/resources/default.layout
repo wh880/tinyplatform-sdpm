@@ -140,7 +140,7 @@
                 <ul class="dropdown-menu">
                     <li><a href="javascript:void(0);"><span class="label label-warning pull-right">新的</span>资料文件</a>
                     </li>
-                    <li><a href="javascript:void(0);">修改密码</a></li>
+                    <li><a href="${TINY_CONTEXT_PATH+adminPath}/org/user/passwordForm">修改密码</li>
                     <li><a href="javascript:void(0);"><i class="dropdown-icon fa fa-cog"></i>&nbsp;&nbsp;设置</a></li>
                     <li class="divider"></li>
                     <li><a href="${TINY_CONTEXT_PATH}/logout"><i class="dropdown-icon fa fa-power-off"></i>&nbsp;&nbsp;退出</a>

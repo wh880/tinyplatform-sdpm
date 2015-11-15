@@ -67,4 +67,12 @@ public class TeamManagerImpl implements TeamManager {
 
     }
 
+    public List<String> getMenuIdListByProjectAndUser(Integer projectId, String userId) {
+        return teamDao.getMenuByUserId(projectId, null, userId);
+    }
+
+    public List<String> getMenuIdListByProductAndUser(Integer productId, String userId) {
+        return teamDao.getMenuByUserId(null, productId, userId);
+    }
+
 }

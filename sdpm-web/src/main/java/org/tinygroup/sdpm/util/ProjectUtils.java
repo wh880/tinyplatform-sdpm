@@ -55,6 +55,10 @@ public class ProjectUtils {
         return userProjectList;
     }
 
+    public static void removeUserProjectList() {
+        UserUtils.removeCache(USER_CACHE_PROJECT_LIST);
+    }
+
     /**
      * 获得当前用户项目id列表
      */

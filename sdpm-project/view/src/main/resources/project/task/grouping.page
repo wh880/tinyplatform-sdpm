@@ -68,7 +68,7 @@
                     <td>${formatDate(task?.taskDeadLine, "yyyy-MM-dd")}</td>
                     <td>${getDict("taskStatus",task?.taskStatus)}</td>
                     <td>
-                        #set(m=menuManage.getMenu("pro-task-edit"))
+                        #set(m=menuManager.getMenu("pro-task-edit"))
                         #if(m)
                             <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?taskId=${task?.taskId}"
                                title="${m.name}">#buttonIcon(iconClass=m.icon)</a>

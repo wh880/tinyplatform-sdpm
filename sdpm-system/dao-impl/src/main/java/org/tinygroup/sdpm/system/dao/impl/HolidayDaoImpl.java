@@ -291,8 +291,7 @@ public class HolidayDaoImpl extends TinyDslDaoSupport implements HolidayDao {
 			return list;
 		}
 		for(int i=0,n=ids.length;i<n;i++){
-			Holiday holiday = new Holiday();
-			holiday = getByKey(ids[i]);
+			Holiday holiday = getByKey(ids[i]);
 			list.add(holiday);
 		}
 		return list;

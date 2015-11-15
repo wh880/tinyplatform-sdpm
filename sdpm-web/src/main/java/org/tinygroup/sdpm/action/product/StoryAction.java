@@ -17,7 +17,6 @@ import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
 import org.tinygroup.sdpm.product.dao.pojo.*;
 import org.tinygroup.sdpm.product.service.*;
-import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
 import org.tinygroup.sdpm.project.service.inter.BuildService;
@@ -90,8 +89,6 @@ public class StoryAction extends BaseController {
     public String storyAction(ProductStory story, String groupOperate,
                               Model model, HttpServletRequest request,
                               HttpServletResponse response) {
-        List<ProductAndLine> i = buildService
-                .getProductLineTree(new ProductLine());
 
         String queryString = request.getQueryString();
         if (queryString != null && !queryString.contains("choose")) {

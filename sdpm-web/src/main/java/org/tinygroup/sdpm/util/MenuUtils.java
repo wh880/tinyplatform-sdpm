@@ -16,6 +16,10 @@ public class MenuUtils {
     @Autowired
     private MenuManager menuManager;
 
+    public Menu getMenu(String menuId) {
+        return menuManager.getMenu(menuId);
+    }
+
     public List<Menu> getChildMenus(String parentId) {
         List<Menu> childMenus = menuManager.getChildMenus(parentId);
         filterMenu(childMenus);

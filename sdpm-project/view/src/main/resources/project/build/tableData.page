@@ -11,18 +11,11 @@
         #@td()${formatDate(b?.buildDate,"yyyy-MM-dd")}#end
         #@td()${b?.buildBuilder?UserUtils.getUserById(b?.buildBuilder)?.orgUserRealName:""}#end
         #@td()
-            #set(m=menuManager.getMenu("tproposeversion"))
+            #set(m=menuManager.getMenu("tversionpro"))
             #if(m)
             <a class="openTestTask"
                href="${TINY_CONTEXT_PATH+adminPath}${m.href}?buildId=${b?.buildId}&projectId=${b?.buildProject}"
                title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
-##            <script>
-##                $(function () {
-##                    $(".openTestTask").on("click", function () {
-##                        $.cookie("qualityProductId", b?.buildProduct, {path: "/"})
-##                    });
-##                })
-##            </script>
             #end
             #foreach(m:menuManager.getScopeMenus("pro-version-op"))
                 #if(m.id != "pro-version-delete")

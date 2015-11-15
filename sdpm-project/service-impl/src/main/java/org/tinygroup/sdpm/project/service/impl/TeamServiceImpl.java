@@ -46,4 +46,12 @@ public class TeamServiceImpl implements TeamService {
         boolean asc = "asc".equals(ordertype) ? true : false;
         return teamManager.findPager(team, start, limit, order, asc);
     }
+
+    public List<String> getMenuIdListByProjectAndUser(Integer projectId, String userId) {
+        return teamManager.getMenuIdListByProjectAndUser(projectId, userId);
+    }
+
+    public List<String> getMenuIdListByProductAndUser(Integer productId, String userId) {
+        return teamManager.getMenuIdListByProductAndUser(productId, userId);
+    }
 }

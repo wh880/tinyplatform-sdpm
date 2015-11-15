@@ -55,12 +55,6 @@
                 <property key="type" value="icon-href"/>
             </map>
         </menu>
-        <menu id="demand_set" name="建用例" href="/quality/testCase/add" icon="icon-sitemap" sort="41"
-              isShow="1" scope="pro_demand_log">
-            <map>
-                <property key="type" value="icon-href"/>
-            </map>
-        </menu>
         <menu id="demand-edit" name="编辑需求" href="/product/storySpec/find?storyId=" icon="icon-pencil" sort="40"
               isShow="1" scope="pro_demand_log">
             <map>

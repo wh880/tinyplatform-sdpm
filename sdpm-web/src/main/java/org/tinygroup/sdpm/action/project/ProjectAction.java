@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.util.Collections3;
 import org.tinygroup.sdpm.common.web.BaseController;
@@ -28,6 +29,7 @@ import org.tinygroup.tinysqldsl.Pager;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -75,6 +77,25 @@ public class ProjectAction extends BaseController {
     public String form(Model model) {
         model.addAttribute("productList", ProductUtils.getAllProductListByUser());
         return "project/form";
+    }
+
+    /**
+     * 校验项目名称
+     *
+     * @param param
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/validProjectName")
+    public Map validProjectName(String param) {
+        Project project = new Project();
+        project.setProjectName(param);
+        List<Project> projectList = projectService.findProjectList(project, null, null);
+        if (CollectionUtil.isEmpty(projectList)){
+            return resultMap(true,"验证成功！");
+        }else {
+            return resultMap(false,"已经存在相同的项目名，请更换项目名称。");
+        }
     }
 
     /**
@@ -216,6 +237,7 @@ public class ProjectAction extends BaseController {
     public Map<String, String> startSave(Project project, String content) {
         Project oldProject = projectService.findProjectById(project.getProjectId());
         project.setProjectStatus(project.DOING);
+
         Integer res = projectService.updateProject(project);
         LogUtil.logWithComment(LogUtil.LogOperateObject.PROJECT, LogUtil.LogAction.STARTED, oldProject.getProjectId().toString(),
                 UserUtils.getUserId(), null, oldProject.getProjectId().toString(), oldProject, project, content);
@@ -256,6 +278,8 @@ public class ProjectAction extends BaseController {
     public Map<String, String> finishSave(Project project, String content) {
         Project oldProject = projectService.findProjectById(project.getProjectId());
         project.setProjectStatus(project.FINISH);
+        project.setProjectCloseBy(UserUtils.getUserId());
+        project.setProjectCloseDate(new Date());
         Integer res = projectService.updateProject(project);
         LogUtil.logWithComment(LogUtil.LogOperateObject.PROJECT, LogUtil.LogAction.FINISHED, oldProject.getProjectId().toString(),
                 UserUtils.getUserId(), null, oldProject.getProjectId().toString(), oldProject, project, content);
@@ -324,6 +348,7 @@ public class ProjectAction extends BaseController {
 
     /**
      * 删除项目
+     *
      * @param id
      * @return
      */

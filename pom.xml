@@ -14,7 +14,6 @@
         <tiny_ext_version>2.0.26</tiny_ext_version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-    <description/>
     <organization>
         <name>TinyGroup</name>
         <url>http://www.tinygroup.org</url>
