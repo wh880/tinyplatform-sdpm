@@ -27,12 +27,10 @@ import org.tinygroup.sdpm.quality.dao.pojo.QualityTestCase;
 import org.tinygroup.sdpm.quality.service.inter.TestCaseService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.dao.pojo.SystemHistory;
-import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.service.inter.ActionService;
 import org.tinygroup.sdpm.system.service.inter.HistoryService;
 import org.tinygroup.sdpm.util.LogUtil;
 import org.tinygroup.sdpm.util.ProductUtils;
-import org.tinygroup.sdpm.util.ProjectUtils;
 import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -107,7 +105,7 @@ public class ProductAction extends BaseController {
     @RequestMapping("/save")
     public String save(@CookieValue(value = "cookieProductLineId") String cookieProductLineId,Product product,SystemAction systemAction, HttpServletRequest request) {
         String productLine = cookieProductLineId;
-        if(product.getProductLineId()==null&&product.getProductLineId()<1) {
+        if (product.getProductLineId() == null || product.getProductLineId() < 1) {
             product.setProductLineId(Integer.parseInt(productLine));
         }else{
             productLine=String.valueOf(product.getProductLineId());
