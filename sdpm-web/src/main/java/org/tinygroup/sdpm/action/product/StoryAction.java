@@ -930,4 +930,22 @@ public class StoryAction extends BaseController {
         return "/product/page/tabledemo/product-demand-copy.page";
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/judgeStoryName")
+    public Map judgeStoryName(ProductStory productStory) {
+        Integer storyId=null;
+        if(productStory.getProductId()!=null){
+            storyId = productStory.getProductId();
+            productStory.setProductId(null);
+        }
+        List<ProductStory> stories = storyService.findStoryList(productStory);
+        if (stories.size() >=1) {
+            if(stories.size()==1&&storyId!=null){
+                return resultMap(storyId.equals(stories.get(0).getStoryId())?false:true,"");
+            }
+            return resultMap(true, "");
+        } else {
+            return resultMap(false, "");
+        }
+    }
 }

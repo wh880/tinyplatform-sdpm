@@ -100,25 +100,25 @@ public class ProductManagerImpl implements ProductManager{
 
 		List<Product> productList = productDao.getProductByUser(userId);
 		Product product = new Product();
+		product.setDeleted(0);
 		product.setAcl(product.ACl_TEAM_AND_ROLE);
 		List<Product> products = productDao.query(product);
 		OrgRoleUser role = new OrgRoleUser();
 		role.setOrgUserId(userId);
 		List<OrgRoleUser> orgRoles = orgRoleUserDao.query(role);
-		for(OrgRoleUser orgRoleUser : orgRoles) {
-			for (Product product1:products) {
-				String whiteList = product1.getProductWhiteList();
-				if (whiteList != null){
-					String[] ids = whiteList.split(",");
-					List<String> idList = Arrays.asList(ids);
-					if(idList.contains(String.valueOf(product1.getProductId()))&&!productList.contains(product1)){
-						productList.add(product1);
-					}
-				}
-			}
-		}
+		return mergeUserProducts(productList,products,orgRoles);
+	}
 
-		return productList;
+	public List<Product> getProductByUserWithCount(String userId) {
+		List<Product> productList = productDao.getProductByUserWithCount(userId);
+		Product product = new Product();
+		product.setDeleted(0);
+		product.setAcl(product.ACl_TEAM_AND_ROLE);
+		List<Product> products = productDao.queryWithCount(product);
+		OrgRoleUser role = new OrgRoleUser();
+		role.setOrgUserId(userId);
+		List<OrgRoleUser> orgRoles = orgRoleUserDao.query(role);
+		return mergeUserProducts(productList,products,orgRoles);
 	}
 
 	public List<Integer> getTeamRoleProductLineIds(String userId){
@@ -129,4 +129,19 @@ public class ProductManagerImpl implements ProductManager{
 		return pIds;
 	}
 
+	private List<Product> mergeUserProducts(List<Product> productWithoutRole,List<Product> productWithRole,List<OrgRoleUser> roleUsers){
+		for(OrgRoleUser orgRoleUser : roleUsers) {
+			for (Product product1:productWithRole) {
+				String whiteList = product1.getProductWhiteList();
+				if (whiteList != null){
+					String[] ids = whiteList.split(",");
+					List<String> idList = Arrays.asList(ids);
+					if(idList.contains(String.valueOf(product1.getProductId()))&&!productWithoutRole.contains(product1)){
+						productWithoutRole.add(product1);
+					}
+				}
+			}
+		}
+		return productWithoutRole;
+	}
 }

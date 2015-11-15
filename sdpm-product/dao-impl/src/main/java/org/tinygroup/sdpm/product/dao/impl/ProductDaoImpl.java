@@ -223,38 +223,25 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
 		return getDslTemplate().queryPager(start>0?start:0, limit, product, false, new SelectGenerateCallback<Product>() {
 
 			public Select generate(Product t) {
-				Select select = MysqlSelect.select(PRODUCTTABLE.ALL, FragmentSql.fragmentSelect(
-						"(SELECT COUNT(story_id)FROM product_story a JOIN product b ON a.`product_id`=b.`product_id` WHERE a.`story_status`=1 AND b.product_id = product.product_id) activeSum,\n" +
-						"(SELECT COUNT(story_id)FROM product_story a JOIN product b ON a.`product_id`=b.`product_id` WHERE a.`story_status`=3 AND b.product_id = product.product_id) changeSum,\n" +
-						"(SELECT COUNT(story_id)FROM product_story a JOIN product b ON a.`product_id`=b.`product_id` WHERE a.`story_status`=0 AND b.product_id = product.product_id) draftSum,\n" +
-						"(SELECT COUNT(story_id)FROM product_story a JOIN product b ON a.`product_id`=b.`product_id` WHERE a.`story_status`=2 AND b.product_id = product.product_id) closeSum,\n" +
-						"COUNT(DISTINCT(product_plan.plan_id)) planCount,\n" +
-						"COUNT(DISTINCT(product_release.release_id)) releaseCount,\n" +
-						"COUNT(DISTINCT(quality_bug.bug_id)) bugCount,\n" +
-						"(SELECT COUNT(bug_id)FROM quality_bug a JOIN product b ON a.`product_id`=b.`product_id` WHERE a.`bug_status`<2 AND b.product_id = product.product_id) resolveSum,\n" +
-						"(SELECT COUNT(bug_id)FROM quality_bug a JOIN product b ON a.`product_id`=b.`product_id` WHERE a.`bug_assigned_to` IS NULL AND b.product_id = product.product_id) assignSum")).
-						from(FragmentSql.fragmentFrom(" product \n" +
-						"LEFT JOIN product_plan ON product.`product_id` = product_plan.`product_id` \n" +
-						"LEFT JOIN product_release ON product.`product_id` = product_release.`product_id` \n" +
-						"LEFT JOIN quality_bug ON product.`product_id` = quality_bug.`product_id`")).where(
-				and(
-					PRODUCTTABLE.COMPANY_ID.eq(t.getCompanyId()),
-					PRODUCTTABLE.DEPT_ID.eq(t.getDeptId()),
-					PRODUCTTABLE.PRODUCT_LINE_ID.eq(t.getProductLineId()),
-					PRODUCTTABLE.PRODUCT_NAME.eq(t.getProductName()),
-					PRODUCTTABLE.PRODUCT_CODE.eq(t.getProductCode()),
-					PRODUCTTABLE.PRODUCT_ORDER.eq(t.getProductOrder()),
-					PRODUCTTABLE.PRODUCT_STATUS.eq(t.getProductStatus()),
-					PRODUCTTABLE.PRODUCT_DESC.eq(t.getProductDesc()),
-					PRODUCTTABLE.PRODUCT_OWNER.eq(t.getProductOwner()),
-					PRODUCTTABLE.PRODUCT_QUALITY_MANAGER.eq(t.getProductQualityManager()),
-					PRODUCTTABLE.PRODUCT_DELIVERY_MANAGER.eq(t.getProductDeliveryManager()),
-					PRODUCTTABLE.ACL.eq(t.getAcl()),
-					PRODUCTTABLE.PRODUCT_WHITE_LIST.eq(t.getProductWhiteList()),
-					PRODUCTTABLE.PRODUCT_CREATED_BY.eq(t.getProductCreatedBy()),
-					PRODUCTTABLE.PRODUCT_CREATED_DATE.eq(t.getProductCreatedDate()),
-					PRODUCTTABLE.PRODUCT_CREATED_VERSION.eq(t.getProductCreatedVersion()),
-					PRODUCTTABLE.DELETED.eq(t.getDeleted()))).groupBy(PRODUCTTABLE.PRODUCT_ID);
+				Select select = getComplexSelect().where(
+						and(
+								PRODUCTTABLE.COMPANY_ID.eq(t.getCompanyId()),
+								PRODUCTTABLE.DEPT_ID.eq(t.getDeptId()),
+								PRODUCTTABLE.PRODUCT_LINE_ID.eq(t.getProductLineId()),
+								PRODUCTTABLE.PRODUCT_NAME.eq(t.getProductName()),
+								PRODUCTTABLE.PRODUCT_CODE.eq(t.getProductCode()),
+								PRODUCTTABLE.PRODUCT_ORDER.eq(t.getProductOrder()),
+								PRODUCTTABLE.PRODUCT_STATUS.eq(t.getProductStatus()),
+								PRODUCTTABLE.PRODUCT_DESC.eq(t.getProductDesc()),
+								PRODUCTTABLE.PRODUCT_OWNER.eq(t.getProductOwner()),
+								PRODUCTTABLE.PRODUCT_QUALITY_MANAGER.eq(t.getProductQualityManager()),
+								PRODUCTTABLE.PRODUCT_DELIVERY_MANAGER.eq(t.getProductDeliveryManager()),
+								PRODUCTTABLE.ACL.eq(t.getAcl()),
+								PRODUCTTABLE.PRODUCT_WHITE_LIST.eq(t.getProductWhiteList()),
+								PRODUCTTABLE.PRODUCT_CREATED_BY.eq(t.getProductCreatedBy()),
+								PRODUCTTABLE.PRODUCT_CREATED_DATE.eq(t.getProductCreatedDate()),
+								PRODUCTTABLE.PRODUCT_CREATED_VERSION.eq(t.getProductCreatedVersion()),
+								PRODUCTTABLE.DELETED.eq(t.getDeleted()))).groupBy(PRODUCTTABLE.PRODUCT_ID);;
 			return addOrderByElements(select, orderArgs);
 			}
 		});
@@ -426,10 +413,54 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
 	}
 
 	public List<Product> getProductByUser(String userId) {
-		Select select = selectFrom(PRODUCTTABLE).where(ExistsExpression.existsCondition(SubSelect.subSelect(selectFrom(PROJECT_TEAMTABLE).
-				where(or(PRODUCTTABLE.ACL.eq(Product.ACl_All), and(PRODUCTTABLE.ACL.eq(Product.ACl_TEAM), PROJECT_TEAMTABLE.PRODUCT_ID.eq(PRODUCTTABLE.PRODUCT_ID), PROJECT_TEAMTABLE.TEAM_USER_ID.eq(userId)))))));
+		Select select = selectFrom(PRODUCTTABLE).where(and(PRODUCTTABLE.DELETED.eq(0), or(PRODUCTTABLE.ACL.eq(Product.ACl_All), ExistsExpression.existsCondition(SubSelect.subSelect(selectFrom(PROJECT_TEAMTABLE).
+				where(and(PRODUCTTABLE.ACL.eq(Product.ACl_TEAM), PROJECT_TEAMTABLE.PRODUCT_ID.eq(PRODUCTTABLE.PRODUCT_ID), PROJECT_TEAMTABLE.TEAM_USER_ID.eq(userId))))))));
 		return getDslSession().fetchList(select,Product.class);
 	}
 
+	public List<Product> getProductByUserWithCount(String userId) {
+		Select select = getComplexSelect().where(and(PRODUCTTABLE.DELETED.eq(0), or(PRODUCTTABLE.ACL.eq(Product.ACl_All), ExistsExpression.existsCondition(SubSelect.subSelect(selectFrom(PROJECT_TEAMTABLE).
+				where(and(PRODUCTTABLE.ACL.eq(Product.ACl_TEAM), PROJECT_TEAMTABLE.PRODUCT_ID.eq(PRODUCTTABLE.PRODUCT_ID), PROJECT_TEAMTABLE.TEAM_USER_ID.eq(userId))))))));
+		return getDslSession().fetchList(select,Product.class);
+	}
 
+	public List<Product> queryWithCount(Product product) {
+		Select select = getComplexSelect().where(
+				and(
+						PRODUCTTABLE.COMPANY_ID.eq(product.getCompanyId()),
+						PRODUCTTABLE.DEPT_ID.eq(product.getDeptId()),
+						PRODUCTTABLE.PRODUCT_LINE_ID.eq(product.getProductLineId()),
+						PRODUCTTABLE.PRODUCT_NAME.eq(product.getProductName()),
+						PRODUCTTABLE.PRODUCT_CODE.eq(product.getProductCode()),
+						PRODUCTTABLE.PRODUCT_ORDER.eq(product.getProductOrder()),
+						PRODUCTTABLE.PRODUCT_STATUS.eq(product.getProductStatus()),
+						PRODUCTTABLE.PRODUCT_DESC.eq(product.getProductDesc()),
+						PRODUCTTABLE.PRODUCT_OWNER.eq(product.getProductOwner()),
+						PRODUCTTABLE.PRODUCT_QUALITY_MANAGER.eq(product.getProductQualityManager()),
+						PRODUCTTABLE.PRODUCT_DELIVERY_MANAGER.eq(product.getProductDeliveryManager()),
+						PRODUCTTABLE.ACL.eq(product.getAcl()),
+						PRODUCTTABLE.PRODUCT_WHITE_LIST.eq(product.getProductWhiteList()),
+						PRODUCTTABLE.PRODUCT_CREATED_BY.eq(product.getProductCreatedBy()),
+						PRODUCTTABLE.PRODUCT_CREATED_DATE.eq(product.getProductCreatedDate()),
+						PRODUCTTABLE.PRODUCT_CREATED_VERSION.eq(product.getProductCreatedVersion()),
+						PRODUCTTABLE.DELETED.eq(product.getDeleted())));
+		return getDslSession().fetchList(select,Product.class);
+	}
+
+	private Select getComplexSelect(){
+		return MysqlSelect.select(PRODUCTTABLE.ALL, FragmentSql.fragmentSelect(
+				"(SELECT COUNT(story_id)FROM product_story a JOIN product b ON a.`product_id`=b.`product_id` WHERE a.`story_status`=1 AND b.product_id = product.product_id) activeSum,\n" +
+						"(SELECT COUNT(story_id)FROM product_story a JOIN product b ON a.`product_id`=b.`product_id` WHERE a.`story_status`=3 AND b.product_id = product.product_id) changeSum,\n" +
+						"(SELECT COUNT(story_id)FROM product_story a JOIN product b ON a.`product_id`=b.`product_id` WHERE a.`story_status`=0 AND b.product_id = product.product_id) draftSum,\n" +
+						"(SELECT COUNT(story_id)FROM product_story a JOIN product b ON a.`product_id`=b.`product_id` WHERE a.`story_status`=2 AND b.product_id = product.product_id) closeSum,\n" +
+						"COUNT(DISTINCT(product_plan.plan_id)) planCount,\n" +
+						"COUNT(DISTINCT(product_release.release_id)) releaseCount,\n" +
+						"COUNT(DISTINCT(quality_bug.bug_id)) bugCount,\n" +
+						"(SELECT COUNT(bug_id)FROM quality_bug a JOIN product b ON a.`product_id`=b.`product_id` WHERE a.`bug_status`<2 AND b.product_id = product.product_id) resolveSum,\n" +
+						"(SELECT COUNT(bug_id)FROM quality_bug a JOIN product b ON a.`product_id`=b.`product_id` WHERE a.`bug_assigned_to` IS NULL AND b.product_id = product.product_id) assignSum")).
+				from(FragmentSql.fragmentFrom(" product \n" +
+						"LEFT JOIN product_plan ON product.`product_id` = product_plan.`product_id` \n" +
+						"LEFT JOIN product_release ON product.`product_id` = product_release.`product_id` \n" +
+						"LEFT JOIN quality_bug ON product.`product_id` = quality_bug.`product_id`"));
+	}
 }

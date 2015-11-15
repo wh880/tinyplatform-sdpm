@@ -246,7 +246,7 @@
 ##<a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition" class="r">增加</a>&nbsp
 ##<a href="${TINY_CONTEXT_PATH+adminPath}/product/allproduct/addition">全部</a>&nbsp
 ###end
-	#@TzTreeSelect("productId" cookieProductId {"class":"input-text","data-URL":call("link",adminPath+"/productLine/userProductTree")})
+	#@TzTreeSelect("topProductId" cookieProductId {"class":"input-text","data-URL":call("link",adminPath+"/productLine/userProductTree")})
     <span class="l"><a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition" >增加</a>&nbsp
     <a href="${TINY_CONTEXT_PATH+adminPath}/product/allproduct/addition">全部</a>&nbsp</span>
 	#end

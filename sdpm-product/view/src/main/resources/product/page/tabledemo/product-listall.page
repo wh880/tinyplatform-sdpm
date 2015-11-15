@@ -31,6 +31,15 @@
 						#@tinyTh({"class":"","rel":"sortname"})操作#end
 					#end
 				#end
+            <script>
+                $(function () {
+                    $("#${tableId}").off("click", ">tbody>tr>td").on("click", ".show-group", function (e) {
+                        $(this).find(".glyphicon").toggleClass("glyphicon-chevron-right glyphicon-chevron-down");
+                        $("#${tableId}>tbody").children("tr." + $(this).attr("data-tr")).toggle();
+                    });
+                })
+
+            </script>
 			#end
 #*			
 			##以下部分为对删除和修改的影响 因为存在不同的信息故放在外面自行更改 #dialog 配合修改使用

@@ -92,6 +92,8 @@ public interface ProductManager {
 
 	List<Product> getProductByUser(String userId);
 
+	List<Product> getProductByUserWithCount(String userId);
+
 	List<Integer> getTeamRoleProductLineIds(String userId);
 	
 }

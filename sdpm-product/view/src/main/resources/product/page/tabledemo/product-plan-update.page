@@ -157,6 +157,31 @@
             #tinyInput("text" "planName" plan?.planName {"datatype":"*","class":"input-text","nullmsg":"计划名称不能为空！",
                 "placeholder":""})
         #end
+        <script>
+            $("input[name=planName]").on("blur",function(){
+                var pName = $(this).val();
+                if(pName){
+                    var pId = "${cookieProductId}";
+                    if(pId>0){
+                        $.ajax({
+                            url:"${TINY_CONTEXT_PATH+adminPath}/product/plan/judgePlanName",
+                            type:"POST",
+                            data:{planName:pName,productId:pId,planId:"${plan?.planId}"},
+                            success:function(data){
+                                if(data.status=="y"){
+                                    $("input[name=planName]").addClass("Validform_error");
+                                    $("input[name=planName]").parent().parent().find("div[class=col-2]").html("<span class='Validform_checktip Validform_wrong'>该计划已存在！</span>");
+                                }else{
+                                    $("input[name=planName]").removeClass("Validform_error");
+                                    $("input[name=planName]").parent().parent().find("div[class=col-2]").html("");
+                                }
+                            }
+                        });
+                        return false;
+                    }
+                }
+            });
+        </script>
         #@validateDiv("col-2")#end
     #end
 

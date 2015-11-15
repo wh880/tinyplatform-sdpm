@@ -251,6 +251,7 @@
                                         url = url.substring(0,url.indexOf("=")+1);
                                     }
                                     $("#modelA").attr("href",url+pId)
+                                    $("input[name=storyTitle]").blur();
                                 }
                             })
 
@@ -357,6 +358,36 @@
                     "text" "storyTitle" ""{"placeholder":"请输入需求名称","datatype":"*","nullmsg":"需求名称不能为空！","id":"email",
                     "class":"input-text"})
             #end
+            <script>
+                $("input[name=storyTitle]").on("blur",function(){
+                    var pName = $(this).val();
+                    if(pName){
+                        var pId ;
+                        $("form[name=thisform]").find("input[type=hidden]").each(function(){
+                            if($(this).attr("id").indexOf("-input")>0&&$(this).attr("id").indexOf("-name")<0){
+                                pId = $(this).val();
+                            }
+                        });
+                        if(pId>0){
+                            $.ajax({
+                                url:"${TINY_CONTEXT_PATH+adminPath}/product/story/judgeStoryName",
+                                type:"POST",
+                                data:{storyTitle:pName,productId:pId},
+                                success:function(data){
+                                    if(data.status=="y"){
+                                        $("input[name=storyTitle]").addClass("Validform_error");
+                                        $("input[name=storyTitle]").parent().parent().find("div[class=col-2]").html("<span class='Validform_checktip Validform_wrong'>该需求名已存在！</span>");
+                                    }else{
+                                        $("input[name=storyTitle]").removeClass("Validform_error");
+                                        $("input[name=storyTitle]").parent().parent().find("div[class=col-2]").html("");
+                                    }
+                                }
+                            });
+                            return false;
+                        }
+                    }
+                });
+            </script>
             #@validateDiv("col-2")#end
         #end
 
