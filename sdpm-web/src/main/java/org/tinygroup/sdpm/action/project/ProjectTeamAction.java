@@ -69,7 +69,7 @@ public class ProjectTeamAction extends BaseController {
         OrgRole orgRole = new OrgRole();
         orgRole.setOrgRoleType(OrgRole.ROLE_TYPE_PROJECT);
         List<OrgRole> roleList = roleService.findRoleList(orgRole);
-        model.addAttribute("roleList",roleList);
+        model.addAttribute("roleList", roleList);
 
         List<ProjectTeam> teamList = teamService.findTeamByProjectId(projectId);
         List<OrgUser> userList = userService.findUserList(new OrgUser());
@@ -122,8 +122,8 @@ public class ProjectTeamAction extends BaseController {
         }
         teamService.batchAdd(addList);
         teamService.batchUpdate(updateList);
-//        UserUtils.get
-        return "redirect:"+adminPath+"/project/team/index";
+        ProjectUtils.removeUserProjectList();
+        return "redirect:" + adminPath + "/project/team/index";
     }
 
     @RequiresPermissions("pro-team-delete")
