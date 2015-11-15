@@ -415,7 +415,6 @@ public class UserAction extends BaseController {
     @RequiresPermissions("org-user-bugAdmin")
     @RequestMapping("/bug/search")
     public String bugSearchAction(String id, Integer start, Integer limit, int page, int pagesize, String choose, ProjectTask task, String order, String ordertype, Model model, HttpServletRequest request) {
-        OrgUser user = userService.findUser(id);
         QualityBug bug = new QualityBug();
         if (choose.equals("6")) {
             bug.setBugClosedBy(id);
@@ -450,7 +449,6 @@ public class UserAction extends BaseController {
     @RequiresPermissions("org-user-testtaskAdmin")
     @RequestMapping("/testtask/search")
     public String testTaskSearchAction(String id, Integer start, Integer limit, int page, int pagesize, String choose, QualityTestTask testTask, String order, String ordertype, Model model, HttpServletRequest request) {
-        OrgUser user = userService.findUser(id);
         QualityTestTask testTask1 = new QualityTestTask();
         testTask1.setTesttaskOwner(id);
         Pager<QualityTestTask> testTaskPager = testTaskService.findTestTaskPager(start, limit, testTask1, order, false);

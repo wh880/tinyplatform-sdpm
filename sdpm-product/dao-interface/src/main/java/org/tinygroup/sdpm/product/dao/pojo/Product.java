@@ -22,11 +22,11 @@ import java.util.Date;
 
 public class Product implements Serializable {
 
+    public static final Integer ACl_All = 0;
+    public static final Integer ACl_TEAM = 0;
+    public static final Integer ACl_TEAM_AND_ROLE = 0;
     public static Integer DELETE_YES = 1;
     public static Integer DELETE_NO = 0;
-    public static final Integer ACl_All=0;
-    public static final Integer ACl_TEAM=0;
-    public static final Integer ACl_TEAM_AND_ROLE=0;
     /**
      * 产品ID
      */
@@ -113,16 +113,16 @@ public class Product implements Serializable {
     private Integer resolveSum;
     private Integer assignSum;
 
+    public Product() {
+        setDeleted(DELETE_NO);
+    }
+
     public String getProductLineName() {
         return productLineName;
     }
 
     public void setProductLineName(String productLineName) {
         this.productLineName = productLineName;
-    }
-
-    public Product() {
-        setDeleted(DELETE_NO);
     }
 
     public Integer getActiveSum() {
@@ -342,9 +342,11 @@ public class Product implements Serializable {
     }
 
     @Override
-    public boolean equals(Object object){
-        if(this.getProductId()==((Product)object).getProductId()){
-            return true;
+    public boolean equals(Object object) {
+        if (object != null) {
+            if (this.getProductId() == ((Product) object).getProductId()) {
+                return true;
+            }
         }
         return false;
     }

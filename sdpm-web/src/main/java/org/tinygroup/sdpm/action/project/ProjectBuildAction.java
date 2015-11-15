@@ -189,9 +189,9 @@ public class ProjectBuildAction extends BaseController {
     //    @RequiresPermissions("projectBuild-batchDel")
     @ResponseBody
     @RequestMapping(value = "/batchDelete")
-    public Map bctchDelDoc(String ids) {
+    public Map batchDelDoc(String ids) {
         Map<String, String> map = new HashMap<String, String>();
-        if (ids == null || ids == "") {
+        if (StringUtil.isBlank(ids)) {
             map.put("status", "fail");
             map.put("info", "请至少选择一条数据");
             return map;
@@ -374,7 +374,6 @@ public class ProjectBuildAction extends BaseController {
     @RequestMapping("/deletereleate")
     public Map deletereleate(Integer storyId, Integer buildId) {
         buildService.deletereleate(storyId, buildId);
-        Map<String, String> map = new HashMap<String, String>();
         return resultMap(true, "解除关联成功");
 
     }
@@ -410,7 +409,7 @@ public class ProjectBuildAction extends BaseController {
     @RequestMapping(value = "/batchDeleteBug")
     public Map bctchDelBug(String ids, Integer buildId) {
         Map<String, String> map = new HashMap<String, String>();
-        if (ids == null || ids == "") {
+        if (StringUtil.isBlank(ids)) {
             map.put("status", "fail");
             map.put("info", "请至少选择一条数据");
             return map;

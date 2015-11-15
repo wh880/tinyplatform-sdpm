@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.util.Collections3;
 import org.tinygroup.sdpm.common.web.BaseController;
@@ -75,6 +76,24 @@ public class ProjectAction extends BaseController {
     public String form(Model model) {
         model.addAttribute("productList", ProductUtils.getAllProductListByUser());
         return "project/form";
+    }
+
+    /**
+     * 校验项目名称
+     *
+     * @param param
+     * @return
+     */
+    @RequestMapping("/validProjectName")
+    public Map validProjectName(String param) {
+        Project project = new Project();
+        project.setProjectName(param);
+        List<Project> projectList = projectService.findProjectList(project, null, null);
+        if (CollectionUtil.isEmpty(projectList)){
+            return resultMap(true,"验证成功！");
+        }else {
+            return resultMap(false,"已经存在相同的项目名，请更换项目名称。");
+        }
     }
 
     /**
@@ -324,6 +343,7 @@ public class ProjectAction extends BaseController {
 
     /**
      * 删除项目
+     *
      * @param id
      * @return
      */
