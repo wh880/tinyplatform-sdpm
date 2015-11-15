@@ -123,6 +123,9 @@
                             #@tinyOptionItem(l.clientId)${l?.clientName}#end
                         #end
                     #end
+                    #@Tselect2Fix()
+                        <a href="${TINY_CONTEXT_PATH+adminPath}/service/client/form">新增</a>
+                    #end
                 #end
             #end
         #end
