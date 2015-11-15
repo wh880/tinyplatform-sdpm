@@ -121,9 +121,10 @@ public class UploadUtils {
      *
      * @param dir directory to check/create
      */
-    public static void checkDirAndCreate(File dir) {
+    public static boolean checkDirAndCreate(File dir) {
         if (!dir.exists())
-            dir.mkdirs();
+           return dir.mkdirs();
+        return false;
     }
 
     /**

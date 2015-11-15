@@ -48,7 +48,7 @@
         #@elementItem()
             #@sdpmItem("项目名称" "*")
                 #tinyInput("text" "projectName" "" {"placeholder":"请输入项目名称","datatype":"*","nullmsg":"项目名称不能为空！",
-                    "class":"input-text"})
+                    "class":"input-text","ajaxurl":TINY_CONTEXT_PATH+adminPath+"/project/validProjectName"})
             #end
         #end
         #@elementItem()
@@ -154,7 +154,7 @@
             #@skinMinimal("col-8")
                 #@Tcheckboxes("whiteList" "")
                     #foreach(role : UserUtils.getAllRoleList())
-                        #@gridSysCol(2)
+                        #@gridSysCol(2)345
                             #@Tcheckbox(role.orgRoleId)${role.orgRoleName}#end
                         #end
                     #end

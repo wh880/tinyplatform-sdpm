@@ -360,7 +360,7 @@ public class DateUtils extends org.apache.commons.lang.time.DateUtils {
      */
     public static Date getFirstDayOfQuarter(Integer year, Integer quarter) {
         Calendar calendar = Calendar.getInstance();
-        Integer month = new Integer(0);
+        Integer month;
         if (quarter == 1) {
             month = 1 - 1;
         } else if (quarter == 2) {
@@ -397,7 +397,7 @@ public class DateUtils extends org.apache.commons.lang.time.DateUtils {
      */
     public static Date getLastDayOfQuarter(Integer year, Integer quarter) {
         Calendar calendar = Calendar.getInstance();
-        Integer month = new Integer(0);
+        Integer month;
         if (quarter == 1) {
             month = 3 - 1;
         } else if (quarter == 2) {

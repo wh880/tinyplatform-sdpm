@@ -55,7 +55,7 @@
   </table>
   <table id="dff2d0bd76b849d89140ba3c038ac673" name="project_task" title="任务" package-name="">
     <table-field standard-field-id="8cd36378dabf44a99afef4d1f7e433a0" primary="true" unique="true" not-null="true" id="task_id" auto-increase="true"/>
-    <table-field standard-field-id="bbdd486351bc40fe9173c0bdce7d0a2e" primary="false" unique="false" not-null="false" id="no" auto-increase="false"/>
+    <table-field standard-field-id="2edcaf63d42a4618bb2cac69ebdaca7c" primary="false" unique="false" not-null="false" id="task_no" auto-increase="false"/>
     <table-field standard-field-id="03ee1372ef3b480681b5aaa5032f35d7" primary="false" unique="false" not-null="false" id="task_project" auto-increase="false"/>
     <table-field standard-field-id="dfa99c9c348b4bb6a4aef3b27bfa7bbf" primary="false" unique="false" not-null="false" id="task_story" auto-increase="false"/>
     <table-field standard-field-id="831bc52d5d5b43f989178551619c0bf6" primary="false" unique="false" not-null="false" id="task_story_version" auto-increase="false"/>

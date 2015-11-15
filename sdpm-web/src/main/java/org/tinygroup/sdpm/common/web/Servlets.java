@@ -8,7 +8,6 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.UnsupportedEncodingException;
 import java.util.*;
 import java.util.Map.Entry;
 
@@ -106,21 +105,6 @@ public class Servlets {
     }
 
     /**
-     * 设置让浏览器弹出下载对话框的Header.
-     *
-     * @param fileName 下载后的文件名.
-     */
-    public static void setFileDownloadHeader(HttpServletResponse response, String fileName) {
-        try {
-            // 中文文件名支持
-            String encodedFileName = new String(fileName.getBytes(), "ISO8859-1");
-            response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + encodedFileName + "\"");
-        } catch (UnsupportedEncodingException e) {
-            e.getMessage();
-        }
-    }
-
-    /**
      * 取得带相同前缀的Request Parameters, copy from spring WebUtils.
      *
      * 返回的结果的Parameter名已去除前缀.
@@ -140,7 +124,6 @@ public class Servlets {
                 String unprefixed = paramName.substring(pre.length());
                 String[] values = request.getParameterValues(paramName);
                 if (values == null || values.length == 0) {
-                    values = new String[]{};
                     // Do nothing, no values found at all.
                 } else if (values.length > 1) {
                     params.put(unprefixed, values);
