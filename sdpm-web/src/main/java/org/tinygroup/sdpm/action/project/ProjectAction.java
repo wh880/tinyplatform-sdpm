@@ -85,6 +85,7 @@ public class ProjectAction extends BaseController {
      * @param param
      * @return
      */
+    @ResponseBody
     @RequestMapping("/validProjectName")
     public Map validProjectName(String param) {
         Project project = new Project();

@@ -148,10 +148,10 @@ public class EffortAction extends BaseController {
         if (date == 0) {
             pager = effortService.findSystemEffortPage(start, limit, systemEffort, order, asc);//全部日志
         } else if (date == 1) {
-            systemEffort.setEffortDate(new Date());
+            systemEffort.setEffortDate(DateUtils.getDateStart(new Date()));
             pager = effortService.findSystemEffortPage(start, limit, systemEffort, order, asc);
         } else if (date == 2) {
-            Date yesterday = DateUtils.addDays(new Date(), -1);
+            Date yesterday = DateUtils.getDateStart(DateUtils.addDays(new Date(), -1));
             systemEffort.setEffortDate(yesterday);
             pager = effortService.findSystemEffortPage(start, limit, systemEffort, order, asc);
         } else if (date == 3) {
@@ -180,7 +180,6 @@ public class EffortAction extends BaseController {
             endDate = DateUtils.getDateEnd(endDate);
             pager = effortService.findSystemEffortPagerByDate(start, limit, systemEffort, startDate, endDate, order, asc);
         }
-
         if (!StringUtil.isBlank(effortAccount) && date == null) {
             systemEffort.setEffortAccount(effortAccount);
             pager = effortService.findSystemEffortPage(start, limit, systemEffort, order, asc);
