@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
-import org.tinygroup.sdpm.product.biz.inter.StoryManager;
 import org.tinygroup.sdpm.project.biz.inter.TaskManager;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
 import org.tinygroup.sdpm.project.dao.pojo.TaskChartBean;
@@ -21,8 +20,6 @@ import java.util.*;
 public class TaskServiceImpl implements TaskService {
     @Autowired
     private TaskManager taskManager;
-    @Autowired
-    private StoryManager storyManager;
 
     public Integer getMaxNo(Integer projectId) {
         return taskManager.getMaxNo(projectId);

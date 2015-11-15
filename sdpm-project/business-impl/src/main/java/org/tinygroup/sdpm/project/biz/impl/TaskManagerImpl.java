@@ -66,6 +66,11 @@ public class TaskManagerImpl implements TaskManager {
 
 
     public ProjectTask add(ProjectTask task) {
+        Integer maxNo = getMaxNo(task.getTaskProject());
+        if (maxNo == null) {
+            maxNo = 0;
+        }
+        task.setTaskNo(maxNo);
         return taskDao.add(task);
     }
 

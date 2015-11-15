@@ -133,12 +133,11 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
         if (projectTask == null) {
             return null;
         }
-        final int maxNo = getMaxNo(projectTask.getTaskProject());
         return getDslTemplate().insertAndReturnKey(projectTask, new InsertGenerateCallback<ProjectTask>() {
             public Insert generate(ProjectTask t) {
                 Insert insert = insertInto(PROJECT_TASKTABLE).values(
                         PROJECT_TASKTABLE.TASK_ID.value(t.getTaskId()),
-                        PROJECT_TASKTABLE.TASK_NO.value(maxNo + 1),
+                        PROJECT_TASKTABLE.TASK_NO.value(t.getTaskNo()),
                         PROJECT_TASKTABLE.TASK_PROJECT.value(t.getTaskProject()),
                         PROJECT_TASKTABLE.TASK_STORY.value(t.getTaskStory()),
                         PROJECT_TASKTABLE.TASK_STORY_VERSION.value(t.getTaskStoryVersion()),
