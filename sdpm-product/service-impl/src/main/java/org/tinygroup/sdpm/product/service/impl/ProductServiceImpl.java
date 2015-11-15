@@ -70,5 +70,15 @@ public class ProductServiceImpl implements ProductService {
         return productManager.getProductByUser(userId);
     }
 
+    public List<Product> getProductByUserWithCount(String userId) {
+        return productManager.getProductByUserWithCount(userId);
+    }
+
+    public Integer[] getTeamRoleProductLineIds(String userId) {
+        List<Integer> ids = productManager.getTeamRoleProductLineIds(userId);
+        Integer[] Ids = new Integer[ids.size()];
+        return ids.toArray(Ids);
+    }
+
 
 }

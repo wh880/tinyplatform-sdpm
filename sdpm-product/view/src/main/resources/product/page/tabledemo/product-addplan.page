@@ -152,6 +152,31 @@ return format;
         #@formControlDiv("col-4")
           #tinyInput("text" "planName" ""{"datatype":"*","nullmsg":"用户名不能为空！","id":"planName","class":"input-text"})
         #end
+        <script>
+            $("input[name=planName]").on("blur",function(){
+                var pName = $(this).val();
+                if(pName){
+                    var pId = "${cookieProductId}";
+                    if(pId>0){
+                        $.ajax({
+                            url:"${TINY_CONTEXT_PATH+adminPath}/product/plan/judgePlanName",
+                            type:"POST",
+                            data:{planName:pName,productId:pId},
+                            success:function(data){
+                                if(data.status=="y"){
+                                    $("input[name=planName]").addClass("Validform_error");
+                                    $("input[name=planName]").parent().parent().find("div[class=col-2]").html("<span class='Validform_checktip Validform_wrong'>该计划已存在！</span>");
+                                }else{
+                                    $("input[name=planName]").removeClass("Validform_error");
+                                    $("input[name=planName]").parent().parent().find("div[class=col-2]").html("");
+                                }
+                            }
+                        });
+                        return false;
+                    }
+                }
+            });
+        </script>
         #@validateDiv("col-2")#end
     #end
 

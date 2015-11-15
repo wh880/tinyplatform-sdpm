@@ -37,4 +37,8 @@ public interface ProductDao extends BaseDao<Product,Integer> {
 
 	List<Product> getProductByUser(String userId);
 
+	List<Product> getProductByUserWithCount(String userId);
+
+	List<Product> queryWithCount(Product product);
+
 }

@@ -294,6 +294,11 @@ public class ProductUtils {
             }
             UserUtils.putCache(USER_CACHE_ALL_PRODUCT_LIST_BY_USER, result);
         }
+//        if (result == null) {
+//            String loginId = UserUtils.getUserId();
+//            result = productService.getProductByUser(loginId);
+//            UserUtils.putCache(USER_CACHE_ALL_PRODUCT_LIST_BY_USER, result);
+//        }
         return result;
     }
 

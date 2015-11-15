@@ -222,7 +222,7 @@
             #@colLabel()关键词：#end
             #@formControlDiv("col-8")
             	#@div(divClass="col-5")
-                	#tinyInput("text" "caseKeywords" testCase?.caseKeywords {"datatype":"","id":"关键词","class":"input-text"})
+                	#tinyInput("text" "caseKeywords" testCase?.caseKeywords {"datatype":"","id":"","class":"input-text"})
             	#end
             #end
             #@validateDiv("col-2")#end

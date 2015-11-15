@@ -328,7 +328,7 @@
 				dataType:"json",
 				success: function(data){
 					sele.empty();
-                    var em；
+                    var em;
 					if("build"==(isBuild)){
 					 em = "<option value='0' selected  >trunk</option>";
 					}else if("module"==isBuild){

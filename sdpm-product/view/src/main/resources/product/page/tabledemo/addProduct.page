@@ -23,8 +23,11 @@
                                 $("select[name=productLineId]").val(productLineId).trigger("change");
                             }
                         #end
+                        $("select[name=productLineId]").on("change",function(){
+                            $("input[name=productName]").blur();
+                            $("input[name=productCode]").blur();
+                        });
                     })
-
                 </script>
                 #@Tselect2Body("productLineId" cookieProductLineId {"class":"input-text select2"})
                     #for(productLine : ProductUtils.getProductLineList())
@@ -51,8 +54,34 @@
     #@formControlDiv("col-3")
         #tinyInput(
             "text" "productName" ""{"placeholder":"请输入产品名称","datatype":"*","nullmsg":"产品名称不能为空！","id":
-            "productCode","class":"input-text"})
-    #end
+            "productName","class":"input-text"})
+        #end
+        <script>
+
+            $("input[name=productName]").on("blur",function(){
+                var pName = $(this).val();
+                if(pName){
+                var plId = $("select[name=productLineId] option:selected").val();
+                    if(plId>0){
+                        $.ajax({
+                            url:"${TINY_CONTEXT_PATH+adminPath}/product/judgeProductName",
+                            type:"POST",
+                            data:{productName:pName,productLineId:plId},
+                            success:function(data){
+                                if(data.status=="y"){
+                                    $("input[name=productName]").addClass("Validform_error");
+                                    $("input[name=productName]").parent().parent().find("div[class=col-2]").html("<span class='Validform_checktip Validform_wrong'>该产品已存在！</span>");
+                                }else{
+                                    $("input[name=productName]").removeClass("Validform_error");
+                                    $("input[name=productName]").parent().parent().find("div[class=col-2]").html("");
+                                }
+                            }
+                        });
+                        return false;
+                    }
+                }
+            });
+        </script>
     #@validateDiv("col-2")#end
 #end
 
@@ -63,6 +92,28 @@
         #tinyInput(
             "text" "productCode" ""{"placeholder":"请输入产品代号","datatype":"*","nullmsg":"代号不能为空！","id":
             "productCode","class":"input-text"})
+        <script>
+            $("input[name=productCode]").on("blur",function(){
+                var pName = $(this).val();
+                if(pName){
+                $.ajax({
+                    url:"${TINY_CONTEXT_PATH+adminPath}/product/judgeProductName",
+                    type:"POST",
+                    data:{productCode:pName},
+                    success:function(data){
+                        if(data.status=="y"){
+                            $("input[name=productCode]").addClass("Validform_error");
+                            $("input[name=productCode]").parent().parent().find("div[class=col-2]").html("<span class='Validform_checktip Validform_wrong'>该代号已存在！</span>");
+                        }else{
+                            $("input[name=productCode]").removeClass("Validform_error");
+                            $("input[name=productCode]").parent().parent().find("div[class=col-2]").html("");
+                        }
+                    }
+                });
+                return false;
+            }
+            });
+        </script>
     #end
     #@validateDiv("col-2")#end
 #end
@@ -193,6 +244,7 @@
 
 
     <script type="text/javascript">
+
         $(function () {
             $("form[name=thisform").Validform({
                 tiptype: 2

@@ -308,7 +308,7 @@
     				dataType:"json",
     				success: function(data){
     					sele.empty();
-                        var em
+                        var em;
     					if("build"==(isBuild)){
     					 em = "<option value='0' selected  >trunk</option>";
     					}else if("module"==isBuild){
@@ -320,14 +320,11 @@
     						sele.append(em);
 
     					}
-
     					if(value!=null) {
     						sele.val(value).trigger("change");
     					}else {
     						sele.val(data[0][opKey]).trigger("change");
     					}
-
-
     				},
     				error: function(res){
 //    					alert("失败");

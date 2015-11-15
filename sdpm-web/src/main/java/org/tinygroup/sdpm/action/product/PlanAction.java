@@ -8,6 +8,7 @@ import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
+import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.service.PlanService;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
@@ -201,7 +202,24 @@ public class PlanAction  extends BaseController{
 		List<ProductPlan> productPlans = planService.findPlanList(plan);
 		return productPlans;
     }
-
+	@ResponseBody
+	@RequestMapping(value = "/judgePlanName")
+	public Map judgePlanName(ProductPlan productPlan) {
+		Integer planId=null;
+		if(productPlan.getProductId()!=null){
+			planId = productPlan.getProductId();
+			productPlan.setProductId(null);
+		}
+		List<ProductPlan> plans = planService.findPlanList(productPlan);
+		if (plans.size() >=1) {
+			if(plans.size()==1&&planId!=null){
+				return resultMap(planId.equals(plans.get(0).getPlanId())?false:true,"");
+			}
+			return resultMap(true, "");
+		} else {
+			return resultMap(false, "");
+		}
+	}
 	
 	@ResponseBody
 	@RequestMapping(value="/batchDelete")

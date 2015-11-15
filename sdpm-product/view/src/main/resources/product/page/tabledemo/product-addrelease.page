@@ -24,8 +24,33 @@
         #@colLabel()<span class="c-red">*</span>发布名称:#end
         #@formControlDiv("col-4")
             #tinyInput(
-                "text" "releaseName" ""{"datatype":"*","nullmsg":"用户名不能为空！","id":"username","class":"input-text"})
+                "text" "releaseName" ""{"datatype":"*","nullmsg":"发布名称不能为空！","id":"username","class":"input-text"})
        #end
+         <script>
+             $("input[name=releaseName]").on("blur",function(){
+                 var pName = $(this).val();
+                 if(pName){
+                     var pId = "${cookieProductId}";
+                     if(pId>0){
+                         $.ajax({
+                             url:"${TINY_CONTEXT_PATH+adminPath}/product/release/judgeReleaseName",
+                             type:"POST",
+                             data:{releaseName:pName,productId:pId},
+                             success:function(data){
+                                 if(data.status=="y"){
+                                     $("input[name=releaseName]").addClass("Validform_error");
+                                     $("input[name=releaseName]").parent().parent().find("div[class=col-2]").html("<span class='Validform_checktip Validform_wrong'>该发布已存在！</span>");
+                                 }else{
+                                     $("input[name=releaseName]").removeClass("Validform_error");
+                                     $("input[name=releaseName]").parent().parent().find("div[class=col-2]").html("");
+                                 }
+                             }
+                         });
+                         return false;
+                     }
+                 }
+             });
+         </script>
         #@validateDiv("col-2")#end
       #end
     #@elementItem()

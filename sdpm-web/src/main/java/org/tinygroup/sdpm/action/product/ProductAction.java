@@ -16,6 +16,7 @@ import org.tinygroup.sdpm.org.service.inter.RoleService;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.service.ProductService;
+import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.sdpm.productLine.service.ProductLineService;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
@@ -263,24 +264,45 @@ public class ProductAction extends BaseController {
 
     @RequestMapping("/list")
     public String list(Product product,String treeId,Integer productLineId,
-                       @CookieValue(value = "cookieProductLineId",defaultValue = "0") String cookieProductLineId,
+//                       @CookieValue(value = "cookieProductLineId",defaultValue = "0") String cookieProductLineId,
                        @RequestParam(required = false, defaultValue = "1") int page,
                        @RequestParam(required = false, defaultValue = "10") int pagesize,
                        @RequestParam(required = false, defaultValue = "productId") String order,
                        @RequestParam(required = false, defaultValue = "asc") String ordertype, Model model) {
 
-        if(productLineId!=null&&productLineId>0){
-            product.setProductLineId(productLineId);
-        }else {
-            if(!StringUtil.isBlank(cookieProductLineId)) {
-                product.setProductLineId(Integer.parseInt(cookieProductLineId));
+//        if(productLineId!=null&&productLineId>0){
+//            product.setProductLineId(productLineId);
+//        }else {
+//            if(!StringUtil.isBlank(cookieProductLineId)) {
+//                product.setProductLineId(Integer.parseInt(cookieProductLineId));
+//            }
+//        }
+
+//        product.setDeleted(0);
+        Map<String,List<Product>> productMap = new HashMap<String, List<Product>>();
+        List<Product> products = ProductUtils.getAllProductListByUser();
+        List<Product> countProduct = new ArrayList<Product>();
+        for(Product product1: products){
+            countProduct.add(productService.findProduct(product1.getProductId()));
+        }
+//        List<Product> products = productService.getProductByUserWithCount(UserUtils.getUserId());
+        List<Integer> idList = new ArrayList<Integer>();
+        for(Product product1 : products){
+            idList.add(product1.getProductLineId());
+        }
+        Integer[] ids = new Integer[idList.size()];
+        List<ProductLine> lines = productLineService.getProductLineByIds(idList.toArray(ids));/*productService.getTeamRoleProductLineIds(UserUtils.getUserId())*/
+        for(Product product1:countProduct){
+            if(productMap.containsKey(String.valueOf(product1.getProductLineId()))){
+                productMap.get(String.valueOf(product1.getProductLineId())).add(product1);
+            }else{
+                List<Product> ps = new ArrayList<Product>();
+                ps.add(product1);
+                productMap.put(String.valueOf(product1.getProductLineId()),ps);
             }
         }
-
-        product.setDeleted(0);
-        Pager<Product> pagerProduct = productService.findProductPager(page, pagesize, product, order, ordertype);
-
-        model.addAttribute("pagerProduct", pagerProduct);
+        model.addAttribute("productLines",lines);
+        model.addAttribute("productMap", productMap);
         return  "/product/data/allproductdata.pagelet";
     }
 
@@ -356,20 +378,21 @@ public class ProductAction extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "/judgeProductName")
-    public Map judgeProductName(String param, Integer productLineId) {
-        if (param != null) {
-            String productName = param;
-            Product product = new Product();
-            product.setProductName(productName);
-            product.setProductLineId(productLineId);
-            List<Product> products = productService.findProductList(product);
-            if (products.size() != 0) {
-                return resultMap(false, "该产品已存在");
-            } else {
-                return resultMap(true, "");
-            }
+    public Map judgeProductName(Product product) {
+        Integer productId=null;
+        if(product.getProductId()!=null){
+            productId = product.getProductId();
+            product.setProductId(null);
         }
-        return resultMap(false, "请输入产品名称");
+        List<Product> products = productService.findProductList(product);
+        if (products.size() >=1) {
+            if(products.size()==1&&productId!=null){
+                return resultMap(productId.equals(products.get(0).getProductId())?false:true,"");
+            }
+            return resultMap(true, "该产品已存在");
+        } else {
+            return resultMap(false, "");
+        }
     }
     @RequestMapping("addModule")
     public String toAddModule(Integer pId,Model model){

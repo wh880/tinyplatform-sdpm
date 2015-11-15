@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
+import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
 import org.tinygroup.sdpm.product.dao.pojo.ProductRelease;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.service.ProductService;
@@ -339,5 +340,22 @@ public class ReleaseAction extends BaseController {
         return map;
     }
 
-
+    @ResponseBody
+    @RequestMapping(value = "/judgeReleaseName")
+    public Map judgeReleaseName(ProductRelease productRelease) {
+        Integer releaseId=null;
+        if(productRelease.getProductId()!=null){
+            releaseId = productRelease.getProductId();
+            productRelease.setReleaseId(null);
+        }
+        List<ProductRelease> releases = releaseService.findReleaseList(productRelease);
+        if (releases.size() >=1) {
+            if(releases.size()==1&&releaseId!=null){
+                return resultMap(releaseId.equals(releases.get(0).getReleaseId())?false:true,"");
+            }
+            return resultMap(true, "");
+        } else {
+            return resultMap(false, "");
+        }
+    }
 }
