@@ -13,7 +13,8 @@ import org.tinygroup.logger.LogLevel;
 import org.tinygroup.sdpm.action.project.util.TaskStatusUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.dict.util.DictUtil;
-import org.tinygroup.sdpm.dto.project.EffortList;import org.tinygroup.sdpm.dto.project.Tasks;
+import org.tinygroup.sdpm.dto.project.EffortList;
+import org.tinygroup.sdpm.dto.project.Tasks;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
@@ -277,6 +278,8 @@ public class ProjectTaskAction extends BaseController {
     @RequestMapping(value = "/finish", method = RequestMethod.POST)
     public String finishSave(ProjectTask task, String comment) {
         ProjectTask oldTask = taskService.findTask(task.getTaskId());
+        task.setTaskFinishedBy(UserUtils.getUserId());
+        task.setTaskFinishedDate(new Date());
         taskService.updateFinishTask(task);
 
         if (!oldTask.getTaskConsumed().equals(task.getTaskConsumed())) {
@@ -289,14 +292,6 @@ public class ProjectTaskAction extends BaseController {
         return "redirect:" + adminPath + "/project/task/index";
     }
 
-//    @RequestMapping("/note")
-//    public String note(Integer taskId, Model model) {
-//        // TODO delete it
-//        ProjectTask task = taskService.findTask(taskId);
-//        model.addAttribute("task", task);
-//        //还需要查询其他相关任务剩余时间的信息
-//        return "project/task/note";
-//    }
 
     @RequiresPermissions("pro-task-close")
     @RequestMapping(value = "/close", method = RequestMethod.GET)
@@ -309,6 +304,8 @@ public class ProjectTaskAction extends BaseController {
     @RequiresPermissions("pro-task-close")
     @RequestMapping(value = "/close", method = RequestMethod.POST)
     public String closeSave(ProjectTask task, String content) {
+        task.setTaskCloseDate(new Date());
+        task.setTaskClosedBy(UserUtils.getUserId());
         taskService.updateCloseTask(task);
         LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, LogUtil.LogAction.CLOSED, task.getTaskId().toString(),
                 UserUtils.getUserId(), null, taskService.findTask(task.getTaskId()).getTaskProject().toString(),
@@ -328,6 +325,8 @@ public class ProjectTaskAction extends BaseController {
     @RequestMapping(value = "/start", method = RequestMethod.POST)
     public String startSave(ProjectTask task, String content) {
         ProjectTask projectTask = taskService.findTask(task.getTaskId());
+        task.setTaskOpenBy(UserUtils.getUserId());
+        task.setTaskOpenedDate(new Date());
         taskService.updateStartTask(task);
         LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, LogUtil.LogAction.STARTED, task.getTaskId().toString(),
                 UserUtils.getUserId(), null, projectTask.getTaskProject().toString(),
@@ -348,6 +347,8 @@ public class ProjectTaskAction extends BaseController {
 
     @RequestMapping(value = "/cancel", method = RequestMethod.POST)
     public String cancelSave(ProjectTask task, String content) {
+        task.setTaskCanceledBy(UserUtils.getUserId());
+        task.setTaskCanceledDate(new Date());
         ProjectTask old = taskService.findTask(task.getTaskId());
         taskService.updateCancelTask(task);
         LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, LogUtil.LogAction.CANCELED, task.getTaskId().toString(),
