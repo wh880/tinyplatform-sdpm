@@ -1,5 +1,5 @@
 <ui-components>
-    <ui-component name="newLogin" dependencies="jquery">
+    <ui-component name="login" dependencies="jquery">
         <css-resource></css-resource>
 	<js-resource>
 		/login/js/cloud.js
