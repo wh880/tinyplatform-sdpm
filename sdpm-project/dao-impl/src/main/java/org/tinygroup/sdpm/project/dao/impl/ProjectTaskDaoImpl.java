@@ -91,7 +91,7 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
     public List<TaskChartBean> queryChartModule() {
         Select select = select(FragmentSelectItemSql.fragmentSelect("count(*) as taskCount, system_module.module_name as title"))
                 .from(PROJECT_TASKTABLE)
-                .join(Join.leftJoin(SYSTEM_MODULETABLE, SYSTEM_MODULETABLE.MODULE_ID.in(PROJECT_TASKTABLE.TASK_MOMODULE)))
+                .join(Join.leftJoin(SYSTEM_MODULETABLE, SYSTEM_MODULETABLE.MODULE_ID.eq(PROJECT_TASKTABLE.TASK_MOMODULE)))
                 .groupBy(PROJECT_TASKTABLE.TASK_MOMODULE);
 
         return getDslSession().fetchList(select, TaskChartBean.class);
