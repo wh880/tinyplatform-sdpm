@@ -7,29 +7,32 @@
     #set(pagesize=records-(page-1)*pagesize)
 #end
 #setTinyItemCount(records)
-#for(s:storys.getRecords())
-#@tr()
-    #@td()<input type="checkbox" value="${s?.storyId}" name="idCheck">#end
-    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/product/storySpec/find/productDemandDetail?storyId=${s?.storyId}">${s
-        ?.storyId}</a>#end
-    #@td()${s?.storyPri}</a>#end
-    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/product/storySpec/find/productDemandDetail?storyId=${s?.storyId}">${s
-        ?.storyTitle}#end
-    #@td()${s?.storyOpenedBy?UserUtils.getUserById(s?.storyOpenedBy)?.orgUserRealName:""}#end
-    #@td()${s?.storyAssignedTo?UserUtils.getUserById(s?.storyAssignedTo)?.orgUserRealName:""}#end
-    #@td()${s?.storyEstimate}#end
-    #@td()${getDict("storyStatus",s?.storyStatus)}#end
-    #@td()${getDict("storyStage",s?.storyStage)}#end
+#foreach(s:storys.getRecords())
+    #@tr()
+        #@td()<input type="checkbox" value="${s?.storyId}" name="idCheck">#end
+        #@td()<a
+                href="${TINY_CONTEXT_PATH+adminPath}/product/storySpec/find/productDemandDetail?storyId=${s?.storyId}">${s
+            ?.storyId}</a>#end
+        #@td()${s?.storyPri}</a>#end
+        #@td()<a
+                href="${TINY_CONTEXT_PATH+adminPath}/product/storySpec/find/productDemandDetail?storyId=${s?.storyId}">${s
+            ?.storyTitle}#end
+        #@td()${s?.storyOpenedBy?UserUtils.getUserById(s?.storyOpenedBy)?.orgUserRealName:""}#end
+        #@td()${s?.storyAssignedTo?UserUtils.getUserById(s?.storyAssignedTo)?.orgUserRealName:""}#end
+        #@td()${s?.storyEstimate}#end
+        #@td()${getDict("storyStatus",s?.storyStatus)}#end
+        #@td()${getDict("storyStage",s?.storyStage)}#end
 
-    #@td()
-        #foreach(m:menuManager.getScopeMenus("version-linkdemand"))
-            #if(m.id == "versionstory")
-                #@tinyTableItemRemove(TINY_CONTEXT_PATH+adminPath+m.href+"?storyId="+s.storyId+"&buildId="+id)<i class="${m.icon}"
-                                                                                      title=${m.name}></i>#end
-##                #@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m.href+"?storyId="+s.storyId+"&buildId="+id
-##                )#buttonIcon(iconClass=m.icon)#end
+        #@td()
+            #foreach(m:menuManager.getScopeMenus("version-linkdemand"))
+                #if(m.id == "versionstory")
+                    #@tinyTableItemRemove(TINY_CONTEXT_PATH+adminPath+m.href+"?storyId="+s.storyId+"&buildId="+id)<i
+                            class="${m.icon}"
+                            title=${m.name}></i>#end
+                ##                #@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m.href+"?storyId="+s.storyId+"&buildId="+id
+                ##                )#buttonIcon(iconClass=m.icon)#end
+                #end
             #end
         #end
     #end
-#end
 #end

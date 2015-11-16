@@ -27,7 +27,7 @@
     #set(m=menuManager.getMenu("pro-version-delete"))
     #if(m)
         <a href="${TINY_CONTEXT_PATH+adminPath}/project/build/delete?id=${build.buildId}"
-           name="删除发布">#buttonIcon(iconClass=
+           name="删除发布" title="删除发布">#buttonIcon(iconClass=
             "icon-remove")</a>&nbsp;
     #end
     <a href="javascript :;" onclick="javascript:history.back(-1);" title="返回">#buttonIcon(iconClass=

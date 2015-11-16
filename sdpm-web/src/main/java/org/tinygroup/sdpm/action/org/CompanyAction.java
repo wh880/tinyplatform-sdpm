@@ -18,6 +18,7 @@ import org.tinygroup.sdpm.system.dao.pojo.ProfileType;
 import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;
 import org.tinygroup.sdpm.system.service.inter.ProfileService;
 import org.tinygroup.sdpm.util.UserUtils;
+import org.tinygroup.weblayer.WebContext;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -53,9 +54,9 @@ public class CompanyAction extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "/uploadLogo", method = RequestMethod.POST)
-    public Map uploadLogo(OrgCompany company,
-                          @RequestParam(value = "upfile", required = false) MultipartFile upFile,
-                          HttpServletResponse response) throws IOException {
+    public void uploadLogo(OrgCompany company,
+                           @RequestParam(value = "upfile", required = false) MultipartFile upFile,
+                           HttpServletResponse response, WebContext webContext) throws IOException {
         String origName = upFile.getOriginalFilename();
         String ext = FilenameUtils.getExtension(origName);
         String fileUrl = fileRepository.storeByExt(UPLOAD_PATH, origName, upFile);
@@ -70,10 +71,22 @@ public class CompanyAction extends BaseController {
         Map<String, String> map = new HashMap<String, String>();
         map.put("url", fileUrl);
         map.put("state", "SUCCESS");
-        response.setContentType("application/json");
+//        response.setContentType("text/html;charset=UTF-8");
+//        webContext.getResponse().setContentType("text/html");
+//        ObjectToJson objectToJson = new ObjectToJson();
+//        return objectToJson.convert(map);
 
-        return map;
+
+        StringBuffer buffer = new StringBuffer();
+        buffer.append("{'url':")
+                .append("'")
+                .append(fileUrl).append("'").append(",")
+                .append("'state':").append("'SUCCESS'").append("}");
+
+        webContext.getResponse().setContentType("text/html");
+        webContext.getResponse().getWriter().write(buffer.toString());
     }
+
     /**
      * 显示公司页面
      *

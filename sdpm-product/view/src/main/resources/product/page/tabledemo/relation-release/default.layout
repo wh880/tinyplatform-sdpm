@@ -11,18 +11,6 @@
 <li>"+"发布"+"</li>")
 #@div(divClass="operationbar")
 <span class="r">
-##  #foreach(m:menuManager.getScopeMenus("product-relog"))
-####  #set(url=eval(m.href))
-##      #if(m.id=="product-release-log")
-##      	#@aModal("#myModal" m.name "1000" "500" "btn-class" url)#buttonIcon(iconClass=m.icon)日志#end
-##      #elseif(m.id=="product-release-del")
-##      	#@delItemsdpm(url)#buttonIcon(iconClass=m.icon)#end
-##      #elseif(m.id=="product-release-editor")
-##          #iconOperations("#myModal" m.icon m.name "865" "448" adminPath+url "ml-5")
-##      #else
-##          <a href="${TINY_CONTEXT_PATH +adminPath}${url}">#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp;
-##      #end
-##  #end
     #set(m=menuManager.getMenu("product-release-log"))
     #if(m)
         #set(url=eval(m.href))
@@ -63,14 +51,13 @@
                         #end
                     #end
                     <div class="r">
-                        #foreach(m:menuManager.getScopeMenus("table-rebug"))
-                            #if(m.id=="release-table-rebug")
-                                #@aHeadCol(TINY_CONTEXT_PATH +adminPath+
-                                    "/product/release/forword/reRelateBug?releaseId="+releaseId cname=="link-demand"?
-                                    "Current":"")
-                                    #@buttons("","icon-bug")
-                                        关联BUG
-                                    #end
+                        #set(m=menuManager.getMenu("product-plan-bug"))
+                        #if(m)
+                            #@aHeadCol(TINY_CONTEXT_PATH +adminPath+
+                                "/product/release/forword/reRelateBug?releaseId="+releaseId cname=="link-demand"?
+                                "Current":"")
+                                #@buttons("","icon-bug")
+                                    关联BUG
                                 #end
                             #end
                         #end
