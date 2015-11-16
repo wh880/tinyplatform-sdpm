@@ -61,6 +61,7 @@ public class ProductLineServiceImpl implements ProductLineService {
 	public List<ProductLine> getUserProductLine(String userId) {
 		ProductLine line = new ProductLine();
 		line.setAcl(ProductLine.ACl_All);
+		line.setDeleted(0);
 		List<ProductLine> lines = productLineManager.findList(line);
 		List<Integer> idList = productManager.getTeamRoleProductLineIds(userId);
 		Integer[] ids = new Integer[idList.size()];
