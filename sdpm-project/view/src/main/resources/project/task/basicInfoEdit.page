@@ -151,8 +151,7 @@
                     #@td()
                         #@formControlDiv("col-10")
                             #@tinyDateInput(
-                                "taskEstStared" formatDate(task?.taskEstStared,
-                                "yyyy-MM-dd") "YYYY-MM-dd" {"placeholder":"选择日期"})
+                                "taskEstStared" formatDate(task?.taskEstStared,"yyyy-MM-dd") "YYYY-MM-dd" {"placeholder":"选择日期"})
                             #end
                         #end
                     #end
@@ -161,16 +160,9 @@
                     #@th()实际开始#end
                     #@td()
                         #@formControlDiv("col-10")
-                            #if(task.taskRealStarted)
                                 #@tinyDateInput("taskRealStarted" formatDate(task.taskRealStarted,
                                     "YYYY-MM-dd") "YYYY-MM-dd" {"placeholder":"选择日期"})
                                 #end
-                            #else
-                                #@tinyDateInput("taskRealStarted" "" "YYYY-MM-dd" {"style":"width:140px",
-                                    "placeholder":"选择日期"})
-                                #end
-                            #end
-
                         #end
                     #end
                 #end
@@ -261,16 +253,9 @@
                     #@th()完成时间#end
                     #@td()
                         #@formControlDiv("col-10")
-                            #if(task.taskFinishedDate)
                                 #@tinyDateInput(
-                                    "taskEstStared" formatDate(task.taskFinishedDate,
-                                    "yyyy-MM-dd") "YYYY-MM-dd" {"placeholder":"选择日期"})
+                                    "taskFinishedDate" formatDate(task.taskFinishedDate,"yyyy-MM-dd") "YYYY-MM-dd" {"placeholder":"选择日期"})
                                 #end
-                            #else
-                                #@tinyDateInput(
-                                    "taskEstStared" "" "YYYY-MM-dd" {"placeholder":"选择日期"})
-                                #end
-                            #end
                         #end
                     #end
                 #end
@@ -299,16 +284,10 @@
                     #@th()取消时间#end
                     #@td()
                         #@formControlDiv("col-10")
-                            #if(task.taskFinishedDate)
                                 #@tinyDateInput(
-                                    "taskEstStared" formatDate(task.taskCanceledDate,
+                                    "taskCanceledDate" formatDate(task.taskCanceledDate,
                                     "yyyy-MM-dd") "YYYY-MM-dd" {"placeholder":"选择日期"})
                                 #end
-                            #else
-                                #@tinyDateInput(
-                                    "taskEstStared" "" "YYYY-MM-dd" {"placeholder":"选择日期"})
-                                #end
-                            #end
                         #end
                     #end
                 #end
@@ -337,16 +316,9 @@
                     #@th()关闭时间#end
                     #@td()
                         #@formControlDiv("col-10")
-                            #if(task.taskCloseDate  )
                                 #@tinyDateInput(
-                                    "taskEstStared" formatDate(task.taskCloseDate,
-                                    "yyyy-MM-dd") "YYYY-MM-dd" {"placeholder":"选择日期"})
+                                    "taskCloseDate" formatDate(task.taskCloseDate, "yyyy-MM-dd") "YYYY-MM-dd" {"placeholder":"选择日期"})
                                 #end
-                            #else
-                                #@tinyDateInput(
-                                    "taskEstStared" "" "YYYY-MM-dd" {"placeholder":"选择日期"})
-                                #end
-                            #end
                         #end
                     #end
                 #end

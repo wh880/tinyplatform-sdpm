@@ -1,57 +1,21 @@
 <div style="width:70%;float:left">
     #@div(divClass="infoContent")
         <p class="titleName">任务描述</p>
-
-        <div>
-            ${task.taskDesc}
-        </div>
+        <div>${task.taskDesc}</div>
     #end
     #@div(divClass="infoContent")
         <p class="titleName">需求描述</p>
-
         <div>
             #if(task.storySpec)
                 ${task.storySpec}
             #end
-
         </div>
     #end
     #@div(divClass="infoContent")
         <p class="titleName">附件</p>
-
-        <div>
-
-        </div>
+        <div></div>
     #end
-    #@div(divClass="infoContent")
-        <p class="titleName">历史记录</p>
-    ##加入后，js代码会导致页面排版混乱
-##        #include("/project/recordlist.page")
-    #end
-##    <center>
-##        #foreach(m:menuManager.getScopeMenus("pro-taskInfo-op"))
-##            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?taskId=${task.taskId}"
-##               title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
-##        #end
-##        #foreach(m:menuManager.getScopeMenus("pro-taskInfo2-op"))
-##            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?taskId=${task.taskId}"
-##               title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
-##        #end
-##        #set(m1=menuManager.getMenu("pro-Info-close"))
-##        #if(m1)
-##            #@iconOperations(
-##                "#deleteModal" "icon-remove" "删除版本" "250" "60" "/testManagement/page/tabledemo/delete.pagelet"
-##                "ml-5")&nbsp#end
-##            #@dialog("deleteModal")
-##                #@dialogHeader()对话框标题#end
-##                #@dialogBody()<p>对话框内容…</p>#end
-##                #@dialogFooter()
-##                    #@buttonEnsure()确定#end
-##                    #@buttonCancel()关闭#end
-##                #end
-##            #end
-##        #end
-##    </center>
+    #history(adminPath+"/system/action/ajax/history?actionObjectType=task&actionObjectId="+task?.taskId)
 </div>
 <div style="width:30%;float:right">
     #TypeInfo("information", task.taskId)

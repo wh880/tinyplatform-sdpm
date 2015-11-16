@@ -18,16 +18,15 @@ import javax.servlet.ServletResponse;
 
 /**
  * 表单验证（包含验证码）过滤类
+ *
  * @author Hulk
  */
 @Service
 public class FormAuthenticationFilter extends org.apache.shiro.web.filter.authc.FormAuthenticationFilter {
     public static final String DEFAULT_CAPTCHA_PARAM = "validateCode";
-    public static final String DEFAULT_MOBILE_PARAM = "mobileLogin";
-    public static final String DEFAULT_MESSAGE_PARAM = "message";
+    public static final String DEFAULT_MESSAGE_PARAM = "msg";
     protected static final Logger logger = LoggerFactory.getLogger(FormAuthenticationFilter.class);
     private String captchaParam = DEFAULT_CAPTCHA_PARAM;
-    private String mobileLoginParam = DEFAULT_MOBILE_PARAM;
     private String messageParam = DEFAULT_MESSAGE_PARAM;
 
     protected AuthenticationToken createToken(ServletRequest request, ServletResponse response) {
@@ -39,7 +38,6 @@ public class FormAuthenticationFilter extends org.apache.shiro.web.filter.authc.
         boolean rememberMe = isRememberMe(request);
         String host = request.getRemoteHost();
         String captcha = getCaptcha(request);
-//        boolean mobile = isMobileLogin(request);
         return new UsernamePasswordToken(username, password.toCharArray(), rememberMe, host, captcha);
     }
 
@@ -50,24 +48,9 @@ public class FormAuthenticationFilter extends org.apache.shiro.web.filter.authc.
     protected String getCaptcha(ServletRequest request) {
         return WebUtils.getCleanParam(request, getCaptchaParam());
     }
-//
-//    public String getMobileLoginParam() {
-//        return mobileLoginParam;
-//    }
-//
-//    protected boolean isMobileLogin(ServletRequest request) {
-//        return WebUtils.isTrue(request, getMobileLoginParam());
-//    }
 
     public String getMessageParam() {
         return messageParam;
-    }
-
-    /**
-     * 登录成功之后跳转URL
-     */
-    public String getSuccessUrl() {
-        return super.getSuccessUrl();
     }
 
     /**
@@ -80,11 +63,7 @@ public class FormAuthenticationFilter extends org.apache.shiro.web.filter.authc.
         if (IncorrectCredentialsException.class.getName().equals(className)
                 || UnknownAccountException.class.getName().equals(className)) {
             message = "用户或密码错误, 请重试.";
-        }
-//		else if (e.getMessage() != null && StringUtils.startsWith(e.getMessage(), "msg:")){
-//			message = StringUtils.replace(e.getMessage(), "msg:", "");
-//		}
-        else {
+        } else {
             logger.logMessage(LogLevel.ERROR, "系统出现点问题，请稍后再试！", e);
         }
         request.setAttribute(getFailureKeyAttribute(), className);

@@ -14,7 +14,7 @@
         #end
         #@tabBodyCol("ptop-5")
             #@div(divClass="operationbar")
-            <span class="f">ID:${task.taskId}&nbsp${task.taskName}
+            <span class="f">ID:${task.taskNo}&nbsp${task.taskName}
             </span>
             <span class="r">
                 #foreach(m:menuManager.getScopeMenus("pro-task-op"))

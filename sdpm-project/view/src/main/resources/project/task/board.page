@@ -238,7 +238,7 @@
                     case "cancel":
                         ui.helper.find("a.cancel").trigger("click");
                         break;
-                    case "close":
+                    case "closed":
                         ui.helper.find("a.boardClose").trigger("click");
                         break;
                 }

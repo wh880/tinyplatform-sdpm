@@ -215,7 +215,7 @@ public class ProjectTaskAction extends BaseController {
                 systemEffort.setEffortProject(task.getTaskProject());
             }
         }
-        if (!CollectionUtil.isEmpty(list)){
+        if (!CollectionUtil.isEmpty(list)) {
             SystemEffort systemEffort = list.get(list.size() - 1);
             task.setTaskLeft(systemEffort.getEffortLeft());
             task.setTaskConsumed(systemEffort.getEffortConsumed());
@@ -434,6 +434,8 @@ public class ProjectTaskAction extends BaseController {
             if (StringUtil.isBlank(taskList.get(i).getTaskName())) {
                 taskList.remove(i);
                 i--;
+            }else {
+                taskList.get(i).setTaskConsumed(0f);
             }
         }
         if (taskList.isEmpty()) {
@@ -449,7 +451,7 @@ public class ProjectTaskAction extends BaseController {
     public String findTask(Model model, Integer taskId) {
         ProjectTask task = taskService.findTask(taskId);
         model.addAttribute("task", task);
-        return "project/task/IDLink";
+        return "project/task/view";
     }
 
     /**
@@ -517,26 +519,32 @@ public class ProjectTaskAction extends BaseController {
         if (projectId == null) {
             return null;
         }
+        Project project = ProjectUtils.getProject(projectId.toString());
         ProjectTask task = new ProjectTask();
         task.setTaskProject(projectId);
         List<ProjectTask> taskList = taskService.findListTask(task);
         List<Map<String, Object>> resultList = new ArrayList<Map<String, Object>>();
 
         for (ProjectTask t : taskList) {
-            SimpleDateFormat format = new SimpleDateFormat("M/d/yyyy");
+            SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("pID", t.getTaskId().toString());
             map.put("pName", t.getTaskName());
             if (t.getTaskRealStarted() != null) {
                 map.put("pStart", format.format(t.getTaskRealStarted()));
+            } else if (t.getTaskEstStared() != null) {
+                map.put("pStart", format.format(t.getTaskEstStared()));
             } else {
-                map.put("pStart", "");
+                map.put("pStart", format.format(project.getProjectBegin()));
             }
-            if (t.getTaskFinishedDate() != null) {
-                map.put("pEnd", format.format(t.getTaskFinishedDate()));
+
+
+            if (t.getTaskDeadLine() != null) {
+                map.put("pEnd", format.format(t.getTaskDeadLine()));
             } else {
-                map.put("pEnd", format.format(new Date()));
+                map.put("pEnd", format.format(project.getProjectEnd()));
             }
+
             map.put("pColor", t.getTaskPri().toString());
             map.put("pRes", UserUtils.getUserById(t.getTaskAssignedTo()).getOrgUserRealName());
             //进度
