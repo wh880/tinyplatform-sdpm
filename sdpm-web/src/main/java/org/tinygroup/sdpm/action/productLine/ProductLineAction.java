@@ -15,9 +15,11 @@ import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.sdpm.productLine.service.ProductLineService;
+import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
 import org.tinygroup.sdpm.project.service.inter.BuildService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
+import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.util.LogUtil;
 import org.tinygroup.sdpm.util.ProductUtils;
 import org.tinygroup.sdpm.util.UserUtils;
@@ -175,7 +177,7 @@ public class ProductLineAction extends BaseController {
                        @RequestParam(required = false, defaultValue = "productLineId") String order,
                        @RequestParam(required = false, defaultValue = "asc") String ordertype,Integer status, Model model) {
         String condition = getStatusCondition(status);
-        
+
         Pager<ProductLine> pagerProductLine = productLineService.findProductLinePager(start, pagesize,condition, productLine, order, ordertype);
 
         model.addAttribute("productLine", pagerProductLine);
@@ -189,10 +191,10 @@ public class ProductLineAction extends BaseController {
     	if (productLineId == null) {
     		productLineId = Integer.parseInt(cookieProductLineId);
         }
-    	
+
         ProductLine productLine = productLineService.findProductLine(productLineId);
         List<String> lineNameList = productService.getProductNameByLineId(productLineId);
-        
+
         model.addAttribute("productLine", productLine);
         model.addAttribute("lineNameList", lineNameList);
 
@@ -352,7 +354,9 @@ public class ProductLineAction extends BaseController {
                  model.addAttribute("type","build");
              }
          }
-         return "/productLine/page/project/productLine.page";
+
+
+      return "/productLine/page/project/productLine.page";
     }
 
 

@@ -24,6 +24,7 @@ import java.util.List;
  * Created by Hulk on 2015/10/29.
  */
 public class ProductUtils {
+    public static final String COOKIE_PRODUCT_ID = "cookieProductId";
     private static final String CMS_CACHE = "cmsCache";
     private static final String USER_CACHE_ALL_PRODUCT_LIST_BY_USER = "allProductList_user";
     private static final String USER_CACHE_TEAM_LIST_BY_PRODUCT = "teamList_product";

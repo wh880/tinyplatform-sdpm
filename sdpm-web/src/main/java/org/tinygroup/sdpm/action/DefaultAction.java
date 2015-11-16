@@ -44,11 +44,6 @@ public class DefaultAction extends BaseController {
         return "login/login.pagelet";
     }
 
-    @RequestMapping(value = {"a", "a/home"})
-    public String index() {
-        return "main/index.page";
-    }
-
     @RequestMapping("saveTree")
     @ResponseBody
     public void saveTree(String treeString, HttpSession session) {

@@ -55,13 +55,12 @@
         #tinyInput(
             "text" "productName" ""{"placeholder":"请输入产品名称","datatype":"*","nullmsg":"产品名称不能为空！","id":
             "productName","class":"input-text"})
-        #end
         <script>
 
             $("input[name=productName]").on("blur",function(){
                 var pName = $(this).val();
                 if(pName){
-                var plId = $("select[name=productLineId] option:selected").val();
+                    var plId = $("select[name=productLineId] option:selected").val();
                     if(plId>0){
                         $.ajax({
                             url:"${TINY_CONTEXT_PATH+adminPath}/product/judgeProductName",
@@ -82,6 +81,7 @@
                 }
             });
         </script>
+        #end
     #@validateDiv("col-2")#end
 #end
 

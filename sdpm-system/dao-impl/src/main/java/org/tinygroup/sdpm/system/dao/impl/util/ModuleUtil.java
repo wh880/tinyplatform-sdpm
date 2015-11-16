@@ -1,15 +1,11 @@
-package org.tinygroup.sdpm.util;
+package org.tinygroup.sdpm.system.dao.impl.util;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.tinygroup.beancontainer.BeanContainerFactory;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.system.dao.SystemModuleDao;
 import org.tinygroup.sdpm.system.dao.impl.SystemModuleDaoImpl;
-import org.tinygroup.sdpm.system.dao.impl.util.DefaultModuleUtils;
-import org.tinygroup.sdpm.system.dao.impl.util.ModuleCallBackFunction;
-import org.tinygroup.sdpm.system.dao.impl.util.ModuleListCallBackFunction;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
-import org.tinygroup.sdpm.system.service.impl.ModuleServiceImpl;
-import org.tinygroup.sdpm.system.service.inter.ModuleService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,9 +13,9 @@ import java.util.List;
 /**
  * Created by wangll13383 on 2015/10/13.
  */
-public class ModuleUtil {
+public class ModuleUtil{
 
-    private static ModuleService moduleService = BeanContainerFactory.getBeanContainer(ModuleUtil.class.getClassLoader()).getBean(ModuleServiceImpl.class);
+    private static SystemModuleDao systemModuleDao = BeanContainerFactory.getBeanContainer(ModuleUtil.class.getClassLoader()).getBean(SystemModuleDaoImpl.class);
 
     private static ModuleListCallBackFunction moduleList;
 
@@ -28,18 +24,18 @@ public class ModuleUtil {
     static {
         moduleList = new ModuleListCallBackFunction() {
             public List<SystemModule> getModuleList(SystemModule systemModule) {
-                return moduleService.findModuleList(systemModule);
+                return systemModuleDao.query(systemModule);
             }
         };
         singleModule = new ModuleCallBackFunction() {
             public SystemModule getModule(Integer moduleId) {
-                return moduleService.findById(moduleId);
+                return systemModuleDao.getByKey(moduleId);
             }
         };
     }
 
     private static void mergeModuleCondition(StringBuffer condition, int moduleId) {
-        DefaultModuleUtils.mergeModuleCondition(condition, moduleId, moduleList);
+        DefaultModuleUtils.mergeModuleCondition(condition,moduleId,moduleList);
     }
 
     public static StringBuffer getConditionByModule(StringBuffer condition,SystemModule systemModule){
@@ -47,15 +43,15 @@ public class ModuleUtil {
     }
 
     public static String getCondition(Integer moduleId){
-        return  DefaultModuleUtils.getCondition(moduleId,moduleList);
+       return  DefaultModuleUtils.getCondition(moduleId,moduleList);
     }
 
     public static String getConditionByRoot(Integer rootId,String moduleType ){
-        return DefaultModuleUtils.getConditionByRoot(rootId,moduleType,moduleList);
+       return DefaultModuleUtils.getConditionByRoot(rootId,moduleType,moduleList);
     }
 
     public static String getPath(Integer moduleId, String division,String root, boolean openRoot){
-        return DefaultModuleUtils.getPath(moduleId,division,singleModule,root,openRoot);
+       return DefaultModuleUtils.getPath(moduleId,division,singleModule,root,openRoot);
     }
 
     private static String mergePath(String division, String paths ){

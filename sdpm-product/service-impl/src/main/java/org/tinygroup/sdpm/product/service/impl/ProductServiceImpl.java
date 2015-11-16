@@ -27,6 +27,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     public int deleteProduct(Integer productId) {
+
         return productManager.delete(productId);
     }
 

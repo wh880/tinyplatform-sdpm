@@ -15,6 +15,7 @@ import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.dict.util.DictUtil;
 import org.tinygroup.sdpm.dto.project.EffortList;
 import org.tinygroup.sdpm.dto.project.Tasks;
+import org.tinygroup.sdpm.org.dao.pojo.OrgRole;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
@@ -387,9 +388,9 @@ public class ProjectTaskAction extends BaseController {
         String moduleIds = "";
         if (!StringUtil.isBlank(moduleId)) {
             if (moduleId.contains("p")) {
-                moduleIds = ModuleUtil.getConditionByRoot(Integer.parseInt(moduleId.substring(1)), moduleService);
+                moduleIds = ModuleUtil.getConditionByRoot(Integer.parseInt(moduleId.substring(1)),"story");
             } else {
-                moduleIds = ModuleUtil.getCondition(Integer.parseInt(moduleId), moduleService);
+                moduleIds = ModuleUtil.getCondition(Integer.parseInt(moduleId));
             }
         }
         //默认显示未关闭任务
@@ -492,7 +493,7 @@ public class ProjectTaskAction extends BaseController {
         if (task.getTaskModule() == null) {
             modulePath = "/";
         } else {
-            modulePath = ModuleUtil.getPath(task.getTaskModule(), " > ", moduleService, task.getTaskProject().toString(), true);
+            modulePath = ModuleUtil.getPath(task.getTaskModule(), " > ", task.getTaskProject().toString(), true);
         }
         model.addAttribute("modulPath", modulePath);
         //查询相关需求名字
@@ -727,7 +728,7 @@ public class ProjectTaskAction extends BaseController {
         module.setModuleRoot(projectId);
         List<SystemModule> moduleList = moduleService.findModuleList(module);
         for (SystemModule m : moduleList) {
-            m.setModuleName(ModuleUtil.getPath(m.getModuleId(), "/", moduleService, "", false));
+            m.setModuleName(ModuleUtil.getPath(m.getModuleId(), "/", "", false));
         }
         List<ProjectProduct> projectProductList = projectProductService.findProducts(projectId);
         for (ProjectProduct pp : projectProductList) {
@@ -735,7 +736,7 @@ public class ProjectTaskAction extends BaseController {
             module.setModuleRoot(pp.getProductId());
             List<SystemModule> tModuleList = moduleService.findModuleList(module);
             for (SystemModule m : tModuleList) {
-                m.setModuleName(ModuleUtil.getPath(m.getModuleId(), "/", moduleService, "", false));
+                m.setModuleName(ModuleUtil.getPath(m.getModuleId(), "/", "", false));
             }
             moduleList.addAll(tModuleList);
         }

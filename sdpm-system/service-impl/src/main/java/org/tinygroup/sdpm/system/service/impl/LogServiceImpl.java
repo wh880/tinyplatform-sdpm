@@ -57,8 +57,8 @@ public class LogServiceImpl implements LogService {
                 SystemHistory systemHistory = new SystemHistory();
                 systemHistory.setHistoryAction(systemAction.getActionId());
                 systemHistory.setHistoryField(field.getName());
-                systemHistory.setHistoryOld(String.valueOf((oldObject == null ? "" : dataChange(oldValue))));
-                systemHistory.setHistoryNew(String.valueOf((newObject == null ? "" : dataChange(newValue))));
+                systemHistory.setHistoryOld(String.valueOf((oldValue == null ? "空" : dataChange(oldValue))));
+                systemHistory.setHistoryNew(String.valueOf((newValue == null ? "空" : dataChange(newValue))));
                 historyManager.add(systemHistory);
             }
 

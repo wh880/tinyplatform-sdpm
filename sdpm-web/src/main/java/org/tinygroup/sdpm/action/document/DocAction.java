@@ -105,15 +105,15 @@ public class DocAction extends BaseController {
             } else if ("productDoc".equals(moduleService.findById(Integer.valueOf(moduleId)).getModuleType())) {
                 Integer root = moduleService.findById(Integer.valueOf(moduleId)).getModuleRoot();
                 doc.setDocProduct(Integer.valueOf(root));
-                condition = NameUtil.resolveNameDesc("docModule") + " " + ModuleUtil.getCondition(Integer.valueOf(moduleId), moduleService);
+                condition = NameUtil.resolveNameDesc("docModule") + " " + ModuleUtil.getCondition(Integer.valueOf(moduleId));
                 pager = docservice.findDocRetPager(limit * (page - 1), limit, doc, condition, searchInfos, groupOperate, order, asc);
             } else if ("projectDoc".equals(moduleService.findById(Integer.valueOf(moduleId)).getModuleType())) {
                 Integer root = moduleService.findById(Integer.valueOf(moduleId)).getModuleRoot();
                 doc.setDocProject(Integer.valueOf(root));
-                condition = NameUtil.resolveNameDesc("docModule") + " " + ModuleUtil.getCondition(Integer.valueOf(moduleId), moduleService);
+                condition = NameUtil.resolveNameDesc("docModule") + " " + ModuleUtil.getCondition(Integer.valueOf(moduleId));
                 pager = docservice.findDocRetPager(limit * (page - 1), limit, doc, condition, searchInfos, groupOperate, order, asc);
             } else if ("doc".equals(moduleService.findById(Integer.valueOf(moduleId)).getModuleType())) {
-                condition = NameUtil.resolveNameDesc("docModule") + " " + ModuleUtil.getCondition(Integer.valueOf(moduleId), moduleService);
+                condition = NameUtil.resolveNameDesc("docModule") + " " + ModuleUtil.getCondition(Integer.valueOf(moduleId));
                 pager = docservice.findDocRetPager(limit * (page - 1), limit, doc, condition, searchInfos, groupOperate, order, asc);
             }
         } else {

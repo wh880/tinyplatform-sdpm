@@ -139,6 +139,18 @@ public class ProductPlanDaoImpl extends TinyDslDaoSupport implements ProductPlan
         return getDslSession().fetchOneResult(select,Integer.class);
     }
 
+    public Integer batchDelete(Integer... ids) {
+        UpdateGenerateCallback callback = new UpdateGenerateCallback<Serializable[]>() {
+
+            public Update generate(Serializable[] serializables) {
+                return update(PRODUCT_PLANTABLE).set(
+                        PRODUCT_PLANTABLE.DELETED.value(FieldUtil.DELETE_YES)).where(
+                        PRODUCT_PLANTABLE.PLAN_ID.in(serializables));
+            }
+        };
+        return getDslSession().execute(callback.generate(ids));
+    }
+
     public int deleteByKey(Integer pk) {
         if (pk == null) {
             return 0;

@@ -171,7 +171,7 @@ public class BugAction extends BaseController {
         bug.setProductId(qualityProductId);
         bug.setDeleted(0);
         if (bug.getModuleId() != null) {
-            conditions = ("".equals(conditions) ? " module_id " : conditions + " and module_id ") + ModuleUtil.getCondition(bug.getModuleId(), moduleService);
+            conditions = ("".equals(conditions) ? " module_id " : conditions + " and module_id ") + ModuleUtil.getCondition(bug.getModuleId());
             bug.setModuleId(null);
         }
         Pager<QualityBug> bugpager = null;
@@ -550,7 +550,7 @@ public class BugAction extends BaseController {
         systemModule.setModuleType("story");
         List<SystemModule> moduleList = moduleService.findModules(systemModule);
         for (SystemModule module : moduleList) {
-            module.setModuleName(ModuleUtil.getPath(module.getModuleId(), "/", moduleService, null, false));
+            module.setModuleName(ModuleUtil.getPath(module.getModuleId(), "/", null, false));
         }
         return moduleList;
     }

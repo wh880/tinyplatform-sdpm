@@ -19,8 +19,7 @@ import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec;
 import org.tinygroup.sdpm.product.dao.pojo.StoryCount;
 import org.tinygroup.sdpm.system.dao.SystemModuleDao;
-import org.tinygroup.sdpm.system.dao.impl.ModuleUtil;
-import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
+import org.tinygroup.sdpm.system.dao.impl.util.ModuleUtil;
 import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.Comparator;
@@ -192,9 +191,9 @@ public class StoryManagerImpl implements StoryManager {
                 if(ConditionUtils.CommonFieldType.MODULE.getOperate().equals(carrier.getFieldType(field))){
                     String moduleId = (String)carrier.getValue(field)[0];
                     if(moduleId.contains("p")){
-                        result = ModuleUtil.getConditionByRoot(Integer.parseInt(moduleId.substring(1)), systemModuleDao);
+                        result = ModuleUtil.getConditionByRoot(Integer.parseInt(moduleId.substring(1)),"story");
                     }else{
-                        result = ModuleUtil.getCondition(Integer.parseInt(moduleId.substring(1)), systemModuleDao);
+                        result = ModuleUtil.getCondition(Integer.parseInt(moduleId.substring(1)));
                     }
                     carrier.setCondition(field,result,carrier.DEFAULT_RELATION);
                     return true;

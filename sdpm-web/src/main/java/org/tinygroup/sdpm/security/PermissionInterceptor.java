@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.web.Servlets;
 import org.tinygroup.sdpm.util.CookieUtils;
+import org.tinygroup.sdpm.util.ProductUtils;
 import org.tinygroup.sdpm.util.ProjectUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -35,16 +36,16 @@ public class PermissionInterceptor {
         interceptor(joinPoint, subject);
     }
 
-//    @Before("execution(* org.tinygroup.sdpm.action.product.*.*(..))")
-//    public void productInterceptor(JoinPoint joinPoint) {
-//        HttpServletRequest request = Servlets.getRequest();
-//        String projectId = CookieUtils.getCookie(request, ProductUtils.);
-//        if (StringUtil.isBlank(projectId)) {
-//            return;
-//        }
-//        MenuPermissionSubject subject = MenuPermissionSubject.productBuilder(Integer.valueOf(projectId));
-//        interceptor(joinPoint, subject);
-//    }
+    @Before("execution(* org.tinygroup.sdpm.action.product.*.*(..))")
+    public void productInterceptor(JoinPoint joinPoint) {
+        HttpServletRequest request = Servlets.getRequest();
+        String projectId = CookieUtils.getCookie(request, ProductUtils.COOKIE_PRODUCT_ID);
+        if (StringUtil.isBlank(projectId)) {
+            return;
+        }
+        MenuPermissionSubject subject = MenuPermissionSubject.productBuilder(Integer.valueOf(projectId));
+        interceptor(joinPoint, subject);
+    }
 
     private void interceptor(JoinPoint joinPoint, MenuPermissionSubject subject) {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();

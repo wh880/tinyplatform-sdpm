@@ -16,6 +16,7 @@
 
 package org.tinygroup.sdpm.product.dao.impl;
 
+import static org.tinygroup.sdpm.product.dao.constant.ProductStoryTable.PRODUCT_STORYTABLE;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 import static org.tinygroup.sdpm.product.dao.constant.ProductPlanTable.PRODUCT_PLANTABLE;
 import static org.tinygroup.sdpm.product.dao.constant.ProductReleaseTable.*;
@@ -153,6 +154,18 @@ public class ProductReleaseDaoImpl extends TinyDslDaoSupport implements
 	public Integer getMaxNo(Integer productId) {
 		Select select = select(PRODUCT_RELEASETABLE.NO.max()).from(PRODUCT_RELEASETABLE).where(PRODUCT_RELEASETABLE.PRODUCT_ID.eq(productId));
 		return getDslSession().fetchOneResult(select,Integer.class);
+	}
+
+	public Integer batchDelete(Integer... ids) {
+		UpdateGenerateCallback callback = new UpdateGenerateCallback<Serializable[]>() {
+
+			public Update generate(Serializable[] serializables) {
+				return update(PRODUCT_RELEASETABLE).set(
+						PRODUCT_RELEASETABLE.DELETED.value(FieldUtil.DELETE_YES)).where(
+						PRODUCT_RELEASETABLE.RELEASE_ID.in(serializables));
+			}
+		};
+		return getDslSession().execute(callback.generate(ids));
 	}
 
 	public ProductRelease getByKey(Integer pk) {

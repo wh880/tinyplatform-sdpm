@@ -86,7 +86,7 @@ public class TestCaseAction extends BaseController {
             module.setModuleId(testcase.getModuleId());
             StringBuffer stringBuffer = new StringBuffer();
             stringBuffer.append("in (");
-            ModuleUtil.getConditionByModule(stringBuffer, module, moduleService);
+            ModuleUtil.getConditionByModule(stringBuffer, module);
             stringBuffer.append(")");
             if (!("".equals(condition.trim()) || condition == null)) {
                 condition += " and ";
@@ -429,7 +429,7 @@ public class TestCaseAction extends BaseController {
         systemModule.setModuleType("story");
         List<SystemModule> result = moduleService.findModules(systemModule);
         for (SystemModule module : result) {
-            module.setModuleName(ModuleUtil.getPath(module.getModuleId(), "/", moduleService, null, false));
+            module.setModuleName(ModuleUtil.getPath(module.getModuleId(), "/", null, false));
         }
         return result;
     }

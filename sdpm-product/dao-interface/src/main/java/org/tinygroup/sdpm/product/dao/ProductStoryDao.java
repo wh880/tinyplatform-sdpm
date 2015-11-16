@@ -61,4 +61,6 @@ public interface ProductStoryDao extends BaseDao<ProductStory,Integer> {
 
 	Integer getMaxNo(Integer productId);
 
+	Integer batchDelete(Integer ...ids);
+
 }

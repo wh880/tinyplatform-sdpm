@@ -17,6 +17,14 @@
         </div>*#
 
         #@div(divClass="infoContent")
+            <p class="titleName">描述标题</p>
+
+            <div>
+                ${storySpec?.storyTitle}
+            </div>
+        #end
+
+        #@div(divClass="infoContent")
             <p class="titleName">描述需求</p>
 
             <div>

@@ -321,7 +321,7 @@ public class TestTaskAction extends BaseController {
         run.setTaskId(testversionId);
         String conditions = mergeCondition(getTaskToCaseCondition(status), SqlUtil.toSql(infos.getInfos(), groupOperate));
         if (moduleId != null) {
-            String moduleCondition = ModuleUtil.getCondition(moduleId, moduleService);
+            String moduleCondition = ModuleUtil.getCondition(moduleId);
             conditions = mergeCondition(conditions, StringUtil.isBlank(moduleCondition) ? "" : (" module_id " + moduleCondition));
         }
         Pager<QualityTestRun> runsPager = testRunService.findTestRunPager(start, limit, run, conditions, order, "asc".equals(ordertype) ? true : false);

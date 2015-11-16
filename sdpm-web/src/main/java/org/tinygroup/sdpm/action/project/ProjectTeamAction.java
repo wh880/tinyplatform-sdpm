@@ -133,4 +133,17 @@ public class ProjectTeamAction extends BaseController {
         Integer res = teamService.delete(id);
         return resultMap(res > 0 ? true : false, res > 0 ? "删除成功" : "删除失败");
     }
+
+    @RequestMapping("team/nextTr")
+    public String getNextTeamTr(Integer a,Model model){
+        List<OrgUser> userList = userService.findUserList(null);
+        model.addAttribute("userList", userList);
+        OrgRole role = new OrgRole();
+        role.setDeleted(0);
+        role.setOrgRoleType(OrgRole.ROLE_TYPE_PROJECT);
+        List<OrgRole> roleList = roleService.findRoleList(role);
+        model.addAttribute("roleList", roleList);
+        model.addAttribute("a",a+1);
+        return "/product/page/team/teamAddTr.pagelet";
+    }
 }

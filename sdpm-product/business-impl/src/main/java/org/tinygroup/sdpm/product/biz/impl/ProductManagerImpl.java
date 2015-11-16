@@ -13,9 +13,11 @@ import org.tinygroup.sdpm.org.dao.pojo.OrgRoleUser;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.product.biz.inter.ProductManager;
 import org.tinygroup.sdpm.product.dao.ProductDao;
+import org.tinygroup.sdpm.product.dao.ProductPlanDao;
+import org.tinygroup.sdpm.product.dao.ProductReleaseDao;
+import org.tinygroup.sdpm.product.dao.ProductStoryDao;
 import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
-import org.tinygroup.sdpm.product.dao.pojo.Product;
-import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
+import org.tinygroup.sdpm.product.dao.pojo.*;
 import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.ArrayList;
@@ -30,6 +32,12 @@ public class ProductManagerImpl implements ProductManager{
 	private ProductDao productDao;
 	@Autowired
 	private OrgRoleUserDao orgRoleUserDao;
+	@Autowired
+	private ProductStoryDao productStoryDao;
+	@Autowired
+	private ProductReleaseDao productReleaseDao;
+	@Autowired
+	private ProductPlanDao productPlanDao;
 	
 	public Product add(Product product) {
 		
@@ -50,6 +58,42 @@ public class ProductManagerImpl implements ProductManager{
 		Product product = new Product();
 		product.setProductId(productId);
 		product.setDeleted(FieldUtil.DELETE_YES);
+		ProductPlan plan = new ProductPlan();
+		plan.setDeleted(0);
+		plan.setProductId(productId);
+		List<ProductPlan> plans = productPlanDao.query(plan);
+		if(plans.size()>0){
+			List<Integer> idList = new ArrayList<Integer>();
+			for(ProductPlan plan1:plans){
+				idList.add(plan1.getPlanId());
+			}
+			Integer[] ids = new Integer[idList.size()];
+			productPlanDao.batchDelete(idList.toArray(ids));
+		}
+		ProductStory story = new ProductStory();
+		story.setProductId(productId);
+		story.setDeleted(0);
+		List<ProductStory> stories = productStoryDao.query(story);
+		if(stories.size()>0){
+			List<Integer> idList = new ArrayList<Integer>();
+			for(ProductStory story1:stories){
+				idList.add(story1.getStoryId());
+			}
+			Integer[] ids = new Integer[idList.size()];
+			productStoryDao.batchDelete(idList.toArray(ids));
+		}
+		ProductRelease release = new ProductRelease();
+		release.setDeleted(0);
+		release.setProductId(productId);
+		List<ProductRelease> releases = productReleaseDao.query(release);
+		if(releases.size()>0){
+			List<Integer> idList = new ArrayList<Integer>();
+			for(ProductRelease release1:releases){
+				idList.add(release1.getReleaseId());
+			}
+			Integer[] ids = new Integer[idList.size()];
+			productReleaseDao.batchDelete(idList.toArray(ids));
+		}
 		return productDao.edit(product);
 	}
 

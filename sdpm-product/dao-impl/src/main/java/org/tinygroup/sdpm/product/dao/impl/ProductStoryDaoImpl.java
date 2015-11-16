@@ -694,6 +694,19 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 		return getDslSession().fetchOneResult(select,Integer.class);
 	}
 
+	public Integer batchDelete(Integer... ids) {
+		UpdateGenerateCallback callback = new UpdateGenerateCallback<Serializable[]>() {
+
+			public Update generate(Serializable[] serializables) {
+				return update(PRODUCT_STORYTABLE).set(
+						PRODUCT_STORYTABLE.DELETED.value(FieldUtil.DELETE_YES)).where(
+						PRODUCT_STORYTABLE.STORY_ID.in(serializables));
+			}
+		};
+
+		return getDslSession().execute(callback.generate(ids));
+	}
+
 	public Integer softDelete(Integer id) {
         return getDslTemplate().update(id, new UpdateGenerateCallback<Integer>() {
             public Update generate(Integer id) {

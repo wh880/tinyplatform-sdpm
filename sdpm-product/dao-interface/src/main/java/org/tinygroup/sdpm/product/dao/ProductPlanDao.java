@@ -38,4 +38,6 @@ public interface ProductPlanDao extends BaseDao<ProductPlan,Integer> {
 	List<ProductPlan> statisticQuery(ProductPlan productPlan ,boolean isOverdue,OrderBy... orderArgs);
 
 	Integer getMaxNo(Integer productId);
+
+	Integer batchDelete(Integer...ids);
 }

@@ -7,9 +7,12 @@ import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.product.biz.inter.PlanManager;
 import org.tinygroup.sdpm.product.dao.ProductPlanDao;
+import org.tinygroup.sdpm.product.dao.ProductStoryDao;
 import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
+import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.tinysqldsl.Pager;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -18,6 +21,8 @@ public class PlanManagerImpl implements PlanManager{
 	
 	@Autowired
 	private ProductPlanDao productPlanDao;
+	@Autowired
+	private ProductStoryDao productStoryDao;
 	
 	public ProductPlan add(ProductPlan plan) {
 		Integer no = productPlanDao.getMaxNo(plan.getProductId());
@@ -55,7 +60,18 @@ public class PlanManagerImpl implements PlanManager{
 	}
 
 	public Integer delete(Integer planId) {
-		
+		ProductStory story = new ProductStory();
+		story.setDeleted(0);
+		story.setPlanId(planId);
+		List<ProductStory> stories = productStoryDao.query(story);
+		if(stories.size()>0){
+			List<Integer> idList = new ArrayList<Integer>();
+			for(ProductStory story1:stories){
+				idList.add(story1.getStoryId());
+			}
+			Integer[] ids = new Integer[idList.size()];
+			productStoryDao.batchDelete(idList.toArray(ids));
+		}
 		return productPlanDao.softDelete(planId);
 	}
 

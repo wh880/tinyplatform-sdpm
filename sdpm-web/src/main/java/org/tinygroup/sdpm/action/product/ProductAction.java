@@ -412,8 +412,10 @@ public class ProductAction extends BaseController {
 
             List<OrgUser> userList = userService.findUserList(null);
             model.addAttribute("userList", userList);
-
-            List<OrgRole> roleList = roleService.findRoleList(null);
+            OrgRole role = new OrgRole();
+            role.setDeleted(0);
+            role.setOrgRoleType(OrgRole.ROLE_TYPE_PRODUCT);
+            List<OrgRole> roleList = roleService.findRoleList(role);
             model.addAttribute("roleList", roleList);
         }
         return "/product/page/team/teamManage.page";
@@ -473,7 +475,10 @@ public class ProductAction extends BaseController {
     public String getNextTeamTr(Integer a,Model model){
         List<OrgUser> userList = userService.findUserList(null);
         model.addAttribute("userList", userList);
-        List<OrgRole> roleList = roleService.findRoleList(null);
+        OrgRole role = new OrgRole();
+        role.setDeleted(0);
+        role.setOrgRoleType(OrgRole.ROLE_TYPE_PRODUCT);
+        List<OrgRole> roleList = roleService.findRoleList(role);
         model.addAttribute("roleList", roleList);
         model.addAttribute("a",a+1);
         return "/product/page/team/teamAddTr.pagelet";
