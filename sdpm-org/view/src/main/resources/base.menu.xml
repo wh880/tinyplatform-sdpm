@@ -88,15 +88,12 @@
         <menu id="org-privilege-delete" name="删除角色" href="/org/privilege/delete" icon="icon-remove" sort="1" isShow="1"
               scope="org-privilege"/>
 
-        <menu id="org-privilege-add" name="添加角色" href="/organization/privilege/groupAdd.pagelet" icon="icon-plus"
-              sort="1" isShow="1"
-              scope="org-privilege-addGroup"/>
+        <menu id="organizationAddGroup" name="添加角色 " href="/org/privilege/form" icon="icon-group" sort="1"
+              isShow="1"
+              scope="org-menu">
+        </menu>
+    </menu>
 
-    </menu>
-    <menu id="organizationAddGroup" name="添加角色 " href="/org/privilege/form" icon="icon-group" sort="1"
-          isShow="1"
-          scope="org-menu">
-    </menu>
     <menu id="organizationCompany" name="公司" href="/org/company/show" icon="" sort="1" isShow="1">
         <menu id="org-company-edit" name="编辑公司" href="/org/company/edit" icon="icon-edit"
               sort="1" isShow="1"
