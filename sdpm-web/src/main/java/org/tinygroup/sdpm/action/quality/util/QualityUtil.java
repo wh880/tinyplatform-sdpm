@@ -38,7 +38,7 @@ public class QualityUtil {
             case 5:return " bug_resolved_by = "+(UserUtils.getUserId() == null?"0":"'"+UserUtils.getUserId())+"' ";
             case 6:return " (bug_confirmed <> 1 or bug_confirmed is null)";
             case 7:return " bug_assigned_to is null";
-            case 8:return " bug_status > 1";
+            case 8:return " bug_status = 1";
             case 9:return " bug_status = 1";
             case 10:return " bug_resolution = 6";
             case 11:return "";

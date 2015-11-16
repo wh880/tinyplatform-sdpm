@@ -21,7 +21,7 @@ public class CommonFilter extends AbstractTinyFilter {
 
     public void preProcess(WebContext webContext) throws ServletException, IOException {
         Object menuManager = springUtil.getBean("menuUtils");
-        webContext.put("menuManager", menuManager);
+        webContext.put("menuUtils", menuManager);
     }
 
     public void postProcess(WebContext webContext) throws ServletException, IOException {

@@ -58,8 +58,7 @@
               scope="org-user-editprofile"/>
 
     </menu>
-    <menu id="organizationActive" name="动态" href="/org/active/show" icon="" sort="1" isShow="1"
-    >
+    <menu id="organizationActive" name="动态" href="/org/active/show" icon="" sort="1" isShow="1">
     </menu>
     <menu id="organizationPrivilege" name="角色" href="/org/privilege/list" icon="" sort="1" isShow="1"
     >
@@ -88,17 +87,16 @@
         <menu id="org-privilege-delete" name="删除角色" href="/org/privilege/delete" icon="icon-remove" sort="1" isShow="1"
               scope="org-privilege"/>
 
-        <menu id="organizationAddGroup" name="添加角色 " href="/org/privilege/form" icon="icon-group" sort="1"
-              isShow="1"
-              scope="org-menu">
-        </menu>
-    </menu>
-
-    <menu id="organizationCompany" name="公司" href="/org/company/show" icon="" sort="1" isShow="1">
-        <menu id="org-company-edit" name="编辑公司" href="/org/company/edit" icon="icon-edit"
+        <menu id="org-privilege-add" name="添加角色" href="/organization/privilege/groupAdd.pagelet" icon="icon-plus"
               sort="1" isShow="1"
-              scope="org-company-edit"/>
+              scope="org-privilege-addGroup"/>
+
     </menu>
-
-
+    <menu id="organizationAddGroup" name="添加角色 " href="/org/privilege/form" icon="icon-group" sort="1"
+          isShow="1" scope="org-menu">
+    </menu>
+    <menu id="organizationCompany" name="公司" href="/org/company/show" sort="1" isShow="1">
+        <menu id="org-company-edit" name="编辑公司" href="/org/company/edit" icon="icon-edit"
+              sort="1" isShow="1" scope="org-company-edit"/>
+    </menu>
 </menu>
