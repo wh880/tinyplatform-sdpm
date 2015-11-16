@@ -50,7 +50,7 @@
     <table-field standard-field-id="b33c838369a34f0ba6b0a2063fc62b59" primary="false" unique="false" not-null="true" id="build_stories" auto-increase="false"/>
     <table-field standard-field-id="9c60fef54ff64aba8d2fb9ebb554c11e" primary="false" unique="false" not-null="true" id="build_bugs" auto-increase="false"/>
     <table-field standard-field-id="674d345ce14c42b6a25eb283f666d882" primary="false" unique="false" not-null="true" id="build_builder" auto-increase="false"/>
-    <table-field standard-field-id="8d1c5a7ab2ce4b5384f9f0315f52db58" primary="false" unique="false" not-null="true" id="build_desc" auto-increase="false"/>
+    <table-field standard-field-id="8d1c5a7ab2ce4b5384f9f0315f52db58" primary="false" unique="false" not-null="false" id="build_desc" auto-increase="false"/>
     <table-field standard-field-id="17eedc084da5420bb4e6de6c5b152ecb" primary="false" unique="false" not-null="true" id="build_deleted" auto-increase="false"/>
   </table>
   <table id="dff2d0bd76b849d89140ba3c038ac673" name="project_task" title="任务" package-name="">

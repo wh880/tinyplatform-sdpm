@@ -175,12 +175,6 @@
 
         </menu>
 
-        <!--<menu id="tvergo" name="执行用例" href="/quality/testCase/execution" icon="icon-play" sort="4"-->
-        <!--isShow="1" scope="version-case-op"></menu>-->
-        <!--<menu id="tverresult" name="执行结果" href="/quality/testCase/result" icon="icon-flag" sort="3"-->
-        <!--isShow="1" scope="version-case-op">-->
-
-    </menu>
         <menu id="tverremove" name="移除版本" href="#" icon="icon-trash" sort="2"
               isShow="1" scope="version-case-op">
 

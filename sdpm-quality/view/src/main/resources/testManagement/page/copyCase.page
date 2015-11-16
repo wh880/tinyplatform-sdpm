@@ -99,11 +99,6 @@
                              <a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition" class="r ">增加</a>
                              <a href="${TINY_CONTEXT_PATH+adminPath}/product/allproduct/addition">全部</a>#end
                 	  #end
-#*					#@tinySelect("lang" "1" {"class":"select2"})
-							#@tinyOptionItem("1")日本三菱#end
-							#@tinyOptionItem("2")销售系统#end
-							#@tinyOptionItem("3")国产需求#end
-					#end*#
 					#end
 					#@div(divClass="col-0")&nbsp;&nbsp#end
 					#@div(divClass="col-3")
@@ -120,14 +115,7 @@
                              });
                          </script>
                 	  #end
-#*					#@tinySelect("lang" "zh" {"class":"select2"})
-							#@tinyOptionItem("zh")/首页#end
-							#@tinyOptionItem("en")/轮播图#end
-							#@tinyOptionItem("ta")/导航#end
-					#end*#
 					#end
-#*					#buttonRadiusDefault(caption="维护模板")
-					#buttonRadiusDefault(caption="刷新")*#
 				#end
         #end
         #@elementItem()
@@ -139,7 +127,6 @@
 	                   		 	#foreach(caseType:getDict("caseType"))
 	                   		 		<option value="${caseType.value}">${caseType.text}</option>
 	                   		 	#end
-	                       
 	                    	#end              
                 	  #end
                 #end
@@ -188,8 +175,8 @@
 	                    	#end
                                  #@Tselect2Fix()
                                      <a href="${TINY_CONTEXT_PATH+adminPath}/product/story/addstory" class="r ">增加</a>
-                                     <a href="${TINY_CONTEXT_PATH+adminPath}/product/story?choose=1">全部</a>#end
-
+                                     <a href="${TINY_CONTEXT_PATH+adminPath}/product/story?choose=1">全部</a>
+                                 #end
                 			#end
 					#end
 			#end

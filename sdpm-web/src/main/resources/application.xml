@@ -9,6 +9,7 @@
         <property name="labelWidth" value="80pt"/>
         <property name="fieldWidth" value="120pt"/>
         <property name="cardWidth" value="200pt"/>
+        <property name="UPLOAD_ACTION_URL" value="/a/org/company/uploadLogo"/>
         <!--缓存配置-->
         <property name="cache_region" value="sessionCache"></property>
         <property name="cache_manager" value="ehCacheManager"></property>
@@ -55,7 +56,14 @@
             <class-path path="E:\workcode\sdpm\sdpm-project\view\src\main\resources"/>
             <class-path path="E:\workcode\sdpm\sdpm-document\view\src\main\resources\"/>
             <!-- 徐丹洋-->
-            <class-path path="D:\sdpm\sdpm-service\view\src\main\resources"/>
+            <class-path path="D:\workSpace\sdpm\sdpm-service\view\src\main\resources"/>
+            <class-path path="D:\workSpace\sdpm\sdpm-product\view\src\main\resources"/>
+            <class-path path="D:\workSpace\sdpm\sdpm-quality\view\src\main\resources"/>
+            <class-path path="D:\workSpace\sdpm\sdpm-project\view\src\main\resources"/>
+            <class-path path="D:\workSpace\sdpm\sdpm-system\view\src\main\resources"/>
+            <class-path path="D:\workSpace\sdpm\sdpm-document\view\src\main\resources"/>
+            <class-path path="D:\workSpace\sdpm\sdpm-productLine\view\src\main\resources"/>
+            <class-path path="D:\workSpace\sdpm\sdpm-org\view\src\main\resources"/>
             <!--wll -->
             <class-path path="D:\java\eclipseworkspace\sdpm\sdpm-product\view\src\main\resources"/>
             <class-path path="D:\java\eclipseworkspace\sdpm\sdpm-quality\view\src\main\resources"/>
@@ -449,7 +457,7 @@
     <cache-init-config region="dictCache"></cache-init-config>
 
     <!-- 文件监控器配置参数，具体参见FileMonitorProcessor配置管理手册，interrupt扫描间隔时间，单位秒 -->
-    <file-monitor interval="10" enable="false"/>
+    <file-monitor interval="10" enable="true"/>
 
     <gzip-filter max-content-length="0">
         <!-- 多个content-type已分号隔开 -->

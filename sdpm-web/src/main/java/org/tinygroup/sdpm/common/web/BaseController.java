@@ -162,6 +162,7 @@ public abstract class BaseController {
         }
     }
 
+
     /**
      * 初始化数据绑定
      * 1. 将所有传递进来的String进行HTML编码，防止XSS攻击
