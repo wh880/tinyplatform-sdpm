@@ -291,13 +291,13 @@ public class TestCaseAction extends BaseController {
         } else {
             List<QualityTestCase> cases = testCaseService.findTestCaseList(qualityTestCase);
             for (QualityTestCase testCase : cases) {
-                if (!storyMap.containsKey(testCase.getStoryId())) {
+                if (!storyMap.containsKey(String.valueOf(testCase.getStoryId()))) {
                     ProductStory story = storyService.findStory(testCase.getStoryId());
                     if (story != null) {
                         storyMap.put(String.valueOf(story.getStoryId()), story);
                     }
                 }
-                if (!casesMap.containsKey(testCase.getStoryId())) {
+                if (!casesMap.containsKey(String.valueOf(testCase.getStoryId()))) {
                     casesMap.put(String.valueOf(testCase.getStoryId()), new ArrayList<QualityTestCase>());
                     casesMap.get(String.valueOf(testCase.getStoryId())).add(testCase);
                 } else {

@@ -108,12 +108,10 @@ public class ProductAction extends BaseController {
     @RequestMapping("/save")
     public String save(@CookieValue(value = "cookieProductLineId") String cookieProductLineId,Product product,SystemAction systemAction, HttpServletRequest request) {
         String productLine = cookieProductLineId;
-        if(product.getProductLineId()==null&&product.getProductLineId()<1) {
-            product.setProductLineId(Integer.parseInt(productLine));
-        }else{
+        if(product.getProductLineId()!=null&&product.getProductLineId()!=0) {
             productLine=String.valueOf(product.getProductLineId());
         }
-        product.setProductLineId(Integer.parseInt(cookieProductLineId));
+        product.setProductLineId(Integer.parseInt(productLine));
         product.setProductCreatedBy(UserUtils.getUserId());
         product.setProductCreatedDate(new Date());
         product.setProductStatus("0");

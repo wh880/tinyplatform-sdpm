@@ -117,9 +117,9 @@
 
 <script>
     $(function () {
-        $(, function (e) {
-            $(this).find();
-            $(+$(this).attr()).toggle();
+        $("#group-Table").off("click", ">tbody>tr>td").on("click", ".show-group", function (e) {
+            $(this).find(".glyphicon").toggleClass("glyphicon-chevron-down");
+            $("#group-Table>tbody").children("tr." + $(this).attr("data-tr")).toggle();
         });
     })
 </script>
