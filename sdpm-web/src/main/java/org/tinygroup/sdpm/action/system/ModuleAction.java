@@ -428,7 +428,7 @@ public class ModuleAction extends BaseController {
 
         module.setModuleType("story");
         List<SystemModule> list = moduleService.findAllModules(module);
-        String modulePath = ModuleUtil.getPath(module.getModuleParent(), ">", moduleService, null, false);
+        String modulePath = ModuleUtil.getPath(module.getModuleParent(), ">", null, false);
         model.addAttribute("list", list);
         model.addAttribute("modulePath", modulePath);
         return "/product/page/project/product-modular.page";
