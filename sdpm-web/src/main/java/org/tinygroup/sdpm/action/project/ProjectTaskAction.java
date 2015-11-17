@@ -15,7 +15,6 @@ import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.dict.util.DictUtil;
 import org.tinygroup.sdpm.dto.project.EffortList;
 import org.tinygroup.sdpm.dto.project.Tasks;
-import org.tinygroup.sdpm.org.dao.pojo.OrgRole;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
@@ -527,7 +526,7 @@ public class ProjectTaskAction extends BaseController {
         List<Map<String, Object>> resultList = new ArrayList<Map<String, Object>>();
 
         for (ProjectTask t : taskList) {
-            SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("pID", t.getTaskId().toString());
             map.put("pName", t.getTaskName());

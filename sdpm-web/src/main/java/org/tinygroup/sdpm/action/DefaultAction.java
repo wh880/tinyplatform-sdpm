@@ -31,7 +31,7 @@ public class DefaultAction extends BaseController {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginForm() {
         if (UserUtils.getPrincipal() != null) {
-            return "redirect:" + adminPath + "/";
+            return "redirect:" + adminPath + "/home";
         }
         return "login/login.pagelet";
     }

@@ -209,7 +209,7 @@ public abstract class BaseController {
     public void upload(MultipartFile uploadFile, Integer objectId, ProfileType type, String title) throws IOException {
         String origName = uploadFile.getOriginalFilename();
         String ext = FilenameUtils.getExtension(origName);
-        String fileUrl = fileRepository.storeByExt(UPLOAD_PATH, origName, uploadFile);
+        String fileUrl = fileRepository.storeByExt(UPLOAD_PATH, ext, uploadFile);
         fileUrl = fileRepository.resolverFilePath(fileUrl, UPLOAD_PATH);
         long size = uploadFile.getSize();
         SystemProfile profile = new SystemProfile(fileUrl, title, ext, (int) size,
