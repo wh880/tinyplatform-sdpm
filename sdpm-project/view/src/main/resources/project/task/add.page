@@ -80,7 +80,7 @@
                 });
             });
         </script>
-
+        <input type="hidden" name="taskAssignedDate">
         #@elementItem()
             #@sdpmItem("相关需求")
                 #if(storyList)

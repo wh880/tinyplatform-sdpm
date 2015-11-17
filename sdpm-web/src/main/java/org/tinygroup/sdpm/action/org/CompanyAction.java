@@ -100,7 +100,6 @@ public class CompanyAction extends BaseController {
         model.addAttribute("company", company);
         return "organization/company/company.page";
     }
-
     /**
      * 编辑时候查询公司详情
      *

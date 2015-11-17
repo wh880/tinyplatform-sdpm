@@ -9,3 +9,11 @@
         <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">#buttonIcon(iconClass=m.icon)${m.name}</a>
     #end
 </div>
+
+##    <script type="text/javascript">
+##            $(function () {
+##                $("[id=organizationCompany]").on("change", function () {
+##                    $("input[name=taskAssignedDate]").val(moment().format('YYYY-MM-DD'));
+##                });
+##            });
+##</script>
