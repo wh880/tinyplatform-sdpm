@@ -17,26 +17,22 @@ public class ModuleManagerImpl implements ModuleManager {
     private SystemModuleDao systemModuleDao;
 
     public SystemModule edit(SystemModule systemModule) {
-        // TODO Auto-generated method stub
         systemModuleDao.edit(systemModule);
         return systemModule;
 
     }
 
-    public int deleteById(int id) {
-        // TODO Auto-generated method stub
+    public Integer deleteById(Integer id) {
         return systemModuleDao.deleteByKey(id);
     }
 
 
-    public int delete(SystemModule systemModule) {
-        // TODO Auto-generated method stub
-        int pk = systemModule.getModuleId();
+    public Integer delete(SystemModule systemModule) {
+        Integer pk = systemModule.getModuleId();
         return systemModuleDao.deleteByKey(pk);
     }
 
-    public SystemModule findById(int id) {
-        // TODO Auto-generated method stub
+    public SystemModule findById(Integer id) {
         try {
             return systemModuleDao.getByKey(id);
         } catch (Exception e) {
@@ -72,23 +68,18 @@ public class ModuleManagerImpl implements ModuleManager {
             }
         }
         return list;
-
-
     }
 
     public SystemModule add(SystemModule systemModule) {
-        // TODO Auto-generated method stub
         return systemModuleDao.add(systemModule);
     }
 
     public SystemModule editNameAndTitle(SystemModule systemModule) {
-        // TODO Auto-generated method stub
         systemModuleDao.editNameAndTitle(systemModule);
         return systemModule;
     }
 
-    public int batchDelete(Integer... ids) {
-        // TODO Auto-generated method stub
+    public Integer batchDelete(Integer... ids) {
         return systemModuleDao.deleteByKeys(ids);
     }
 
@@ -97,12 +88,11 @@ public class ModuleManagerImpl implements ModuleManager {
         return systemModuleDao.query(systemModule);
     }
 
-    public int deleteAndedit(Integer id) {
-        // TODO Auto-generated method stub
+    public Integer deleteAndEdit(Integer id) {
         return systemModuleDao.deletebyKeyAndedit(id);
     }
 
-    public int deleteByType(String type) {
+    public Integer deleteByType(String type) {
         return systemModuleDao.deleteByType(type);
     }
 
