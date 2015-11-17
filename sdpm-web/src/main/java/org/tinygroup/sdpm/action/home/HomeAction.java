@@ -6,7 +6,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.service.ProductService;
+import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
+import org.tinygroup.sdpm.project.service.inter.TaskService;
 import org.tinygroup.sdpm.util.ProductUtils;
+import org.tinygroup.sdpm.util.UserUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,6 +23,10 @@ import java.util.Map;
 public class HomeAction {
     @Autowired
     private ProductService productService;
+
+    @Autowired
+    private TaskService taskService;
+
     @RequestMapping(value = {"a", "a/home"})
     public String index(Model model) {
         List<Product> products = ProductUtils.getAllProductListByUser();
@@ -43,6 +50,11 @@ public class HomeAction {
         }
         model.addAttribute("productList",countProduct);
         model.addAttribute("productSumMap",productSum);
+        ProjectTask task = new ProjectTask();
+        task.setTaskAssignedTo(UserUtils.getUserId());
+        task.setTaskDeleted(ProjectTask.DELETE_NO);
+        List<ProjectTask> tasks = taskService.findListTask(task);
+        model.addAttribute("myTaskList",tasks);
         return "main/index.page";
     }
 }

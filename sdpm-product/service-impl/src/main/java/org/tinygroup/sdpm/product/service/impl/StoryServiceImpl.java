@@ -123,9 +123,9 @@ public class StoryServiceImpl implements StoryService {
                 if(ConditionUtils.CommonFieldType.MODULE.getOperate().equals(carrier.getFieldType(field))){
                     String moduleId = (String)carrier.getValue(field)[0];
                     if(moduleId.contains("p")){
-                        result = ModuleUtil.getConditionByRoot(Integer.parseInt(moduleId.substring(1)),moduleManager);
+                        result = ModuleUtil.getConditionByRoot(Integer.parseInt(moduleId.substring(1)),"story");
                     }else{
-                        result = ModuleUtil.getCondition(Integer.parseInt(moduleId), moduleManager);
+                        result = ModuleUtil.getCondition(Integer.parseInt(moduleId));
                     }
                     carrier.setCondition(field,result,carrier.DEFAULT_RELATION);
                     return true;

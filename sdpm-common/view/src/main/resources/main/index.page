@@ -5,7 +5,7 @@
 		#@simpleArticle("col-lg-12")
         <!-- new widget -->
 			#@widgetDiv("padding-clear" "wid-id-1" {"data-widget-editbutton":"false","data-widget-fullscreenbutton":"true"})
-				#@headerBox(" icon-bar-chart" "任务统计")
+				#@headerBox(" icon-bar-chart" "产品统计")
 					#@navTab("pull-right")
 						#foreach(product : productList)
 							#set(active = productFor.index==1?"active":"")
@@ -113,17 +113,18 @@
 		#@simpleArticle("col-lg-4")
         <!-- start widget -->
 			#@widgetDiv("jarviswidget-color-teal" "wid-id-3" {"data-widget-editbutton":"false","data-widget-fullscreenbutton":"true"})
-				#@headerBox("txt-color-white fa-comments" "标题名称")
+				#@headerBox("txt-color-white fa-comments" "我的任务")
 					#@toolbarA("toolbarMore" "#" "fa-location-arrow")更多#end
 				#end
 
 				#@dragBox("widgetDrag" "infoent" "264")
 				##start
 					#@dynamicInfo()
-						#@ticketBox("label-success" "在进行中" "#" "#201798" "#" "张小三" "今天")OA管理项目#end
-						#@ticketBox("label-warning" "等待" "#" "#201797" "#" "李小四" "1天前")P2P管理项目#end
-						#@ticketBox("label-info" "在进行中" "#" "#201796" "#" "王晓武" "2天前")#faIcon("fa-warning text-danger")O2O管理项目#end
-						#@ticketBox("label-danger" "已拒绝" "#" "#201795" "#" "刘老大" "3天前")B2B管理项目#end
+						#foreach(task : myTaskList)
+							#set(taskStatus = Integer.parseInt(task?.taskStatus))
+							#set(status = (taskStatus/3)>1?"label-danger":(taskStatus==1?"label-warning":"label-success"))
+							#@ticketBox(status getDict("taskStatus",task.taskStatus) "#" "#"+task.taskId "#" "王晓武" "2天前")#if((taskStatus/3)>1)#faIcon("fa-warning text-danger")#end ${task.taskName}#end
+						#end
 					#end
 				##end
 				#end
@@ -135,7 +136,7 @@
 		#@simpleArticle("col-lg-4")
         <!-- start widget -->
 			#@widgetDiv("jarviswidget-color-teal" "wid-id-4" {"data-widget-editbutton":"false"})
-				#@headerBox("fa-map-marker" "标题名称")
+				#@headerBox("fa-map-marker" "标题名称dfgh")
 					#@toolbarA("toolbarMore" "#" "fa-location-arrow")更多#end
 				#end
 
@@ -156,7 +157,7 @@
 		#@simpleArticle("col-lg-4")
         <!-- start widget -->
 			#@widgetDiv("jarviswidget-color-teal" "wid-id-5" {"data-widget-editbutton":"false"})
-				#@headerBox("fa-map-marker" "标题名称")
+				#@headerBox("fa-map-marker" "标题名称dfg")
 					#@toolbarA("toolbarMore" "#" "fa-location-arrow")更多#end
 				#end
 
