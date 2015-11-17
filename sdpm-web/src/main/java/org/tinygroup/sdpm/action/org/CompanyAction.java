@@ -24,6 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -51,6 +52,14 @@ public class CompanyAction extends BaseController {
         model.addAttribute("company", company);
         return "redirect:" + adminPath + "/org/company/show/";
     }
+
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public String add(OrgCompany company, Model model) {
+        companyService.addCompany(company);
+        model.addAttribute("company", company);
+        return "redirect:" + adminPath + "/org/company/show/";
+    }
+
 
     @ResponseBody
     @RequestMapping(value = "/uploadLogo", method = RequestMethod.POST)
@@ -96,9 +105,14 @@ public class CompanyAction extends BaseController {
     @RequiresPermissions("organizationCompany")
     @RequestMapping("/show")
     public String show(Model model) {
-        OrgCompany company = companyService.findCompany(1);
-        model.addAttribute("company", company);
-        return "organization/company/company.page";
+        List<OrgCompany> companies = companyService.findCompanyList();
+        if (companies.isEmpty()) {
+            return "organization/company/addCompany.page";
+        } else {
+            OrgCompany company = companies.get(0);
+            model.addAttribute("company", company);
+            return "organization/company/company.page";
+        }
     }
 
     /**

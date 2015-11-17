@@ -78,7 +78,7 @@
                 //$.ajax()
                 //console.log(index);
 //                layer.msg($("已删除").attr("deleteList"), 1);
-                layer.msg('已删除', 1);
+                layer.msg('已删除', 1,1);
             })
         });
     });

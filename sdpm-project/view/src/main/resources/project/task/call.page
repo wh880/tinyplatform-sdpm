@@ -19,7 +19,7 @@
     <div class="infoContent">
         <p class="titleName">${task.taskName}>编辑指派</p>
         <input type="hidden" name="records" value="${num}"/>
-        <input type="hidden" name="taskAssignedDate" value="${formatDate(now()," yyyy-MM-dd")}"
+        <input type="hidden" name="taskAssignedDate" value="${formatDate(now()," yyyy-MM-dd")}"/>
         #@elementItem()
             #@sdpmItem("指派给")
                 #@Tselect2F()

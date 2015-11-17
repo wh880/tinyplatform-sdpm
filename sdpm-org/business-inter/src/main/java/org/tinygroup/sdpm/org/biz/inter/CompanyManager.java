@@ -17,6 +17,8 @@ package org.tinygroup.sdpm.org.biz.inter;
 
 import org.tinygroup.sdpm.org.dao.pojo.OrgCompany;
 
+import java.util.List;
+
 public interface CompanyManager {
     /**
      * 根据主键id查找公司
@@ -50,5 +52,13 @@ public interface CompanyManager {
      * @return
      */
     Integer delete(Integer id);
+
+    /**
+     * 查找表中的公司记录
+     *
+     * @return
+     */
+    List<OrgCompany> findList();
+
 
 }

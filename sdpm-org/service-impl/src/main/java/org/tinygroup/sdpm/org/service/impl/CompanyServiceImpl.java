@@ -7,6 +7,8 @@ import org.tinygroup.sdpm.org.biz.inter.CompanyManager;
 import org.tinygroup.sdpm.org.dao.pojo.OrgCompany;
 import org.tinygroup.sdpm.org.service.inter.CompanyService;
 
+import java.util.List;
+
 @Component
 public class CompanyServiceImpl implements CompanyService {
 
@@ -17,6 +19,9 @@ public class CompanyServiceImpl implements CompanyService {
         return companyManager.find(id);
     }
 
+    public List<OrgCompany> findCompanyList() {
+        return companyManager.findList();
+    }
     public OrgCompany addCompany(OrgCompany orgCompany) {
         return companyManager.add(orgCompany);
     }

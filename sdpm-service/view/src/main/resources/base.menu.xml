@@ -12,7 +12,7 @@
               scope="service-cil-batchdel"/>
         <menu id="client-add" name="新建客户" href="/service/client/form" icon="icon-plus" sort="1" isShow="1"
               scope="service-cil-add"/>
-        <menu id="linkman" name="联系人" href="#" sort="100" isShow="1">
+        <!--<menu id="linkman" name="联系人" href="#" sort="100" isShow="1">-->
             <menu id="linkman-edit" name="编辑联系人" href="/service/client/clientUserUpdate/date" icon="icon-pencil"
                   sort="1"
                   isShow="1"
@@ -24,22 +24,22 @@
                   sort="1"
                   isShow="1"
                   scope="linkman-cil"/>
-        </menu>
-        <menu id="client-sla" name="协议" href="/service/client/clientSla" sort="100" isShow="1">
-            <menu id="clientSla_edit" name="协议编辑" href="/service/sla/form" sort="1" isShow="1" scope="clientSla"/>
-            <menu id="clientSla_delete" name="协议删除" href="/service/client/slaDelete" sort="1" isShow="1"
+        <!--</menu>-->
+        <!--<menu id="client-sla" name="协议" href="/service/client/clientSla" sort="100" isShow="1">-->
+        <!--<menu id="clientSla_edit" name="协议编辑" href="/service/sla/form" sort="1" isShow="1" scope="clientSla"/>-->
+        <menu id="clientSla_delete" name="删除协议" href="/service/client/slaDelete" sort="1" isShow="1"
                   scope="clientSla"/>
             <menu id="clientSla-add" name="绑定协议" href="/service/client/slaAdd" icon="icon-plus" sort="1" isShow="1"
                   scope="service-sla-add"/>
-        </menu>
+        <!--</menu>-->
     </menu>
 
     <menu id="request" name="需求" href="/service/request/list" sort="100" isShow="1">
         <menu id="request-batchdel" name="批量删除" href="#" icon="icon-trash" sort="1" isShow="1"
               scope="service-req-batchdel"/>
-        <menu id="request-solve" name="回复" href="/service/request/reply" icon="icon-wrench " sort="1"
+        <menu id="request-solve" name="回复请求" href="/service/request/reply" icon="icon-wrench " sort="1"
               isShow="1" scope="service-request"/>
-        <menu id="request-back" name="回访" href="/service/request/review" icon="icon-comment" sort="1"
+        <menu id="request-back" name="回访请求" href="/service/request/review" icon="icon-comment" sort="1"
               isShow="1" scope="service-request"/>
         <menu id="request-edit" name="变更请求" href="/service/request/form" icon="icon-random" sort="1"
               isShow="1" scope="service-request"/>
@@ -65,7 +65,7 @@
               isShow="1" scope="service-request-r"/>
         <menu id="request-add" name="新增请求" icon="icon-plus" href="/service/request/form" sort="1"
               isShow="1" scope="service-request-r"/>
-        <menu id="service-request-operation" name="指派" href="" icon=""
+        <menu id="service-request-operation" name="指派操作" href="" icon=""
               sort="1" isShow="1"
               scope="service-request-oper"/>
     </menu>
@@ -77,19 +77,18 @@
         <menu id="sla-add" name="新建协议" href="/service/sla/form" icon="icon-plus" sort="1" isShow="1"
               scope="service-sla-batchdel"/>
         <menu id="sla-edit" name="编辑协议" href="/service/sla/form" icon="icon-pencil" sort="1" isShow="1"
-              scope="service-sla"/>
+              scope="service-sla，clientSla"/>
         <menu id="sla-del" name="删除协议" href="/service/sla/delete" icon="icon-remove" sort="1" isShow="1"
               scope="service-sla"/>
 
     </menu>
     <menu id="faq" name="FAQ" href="/service/faq/list" sort="100" isShow="1">
-        <menu id="faq-edit" name="编辑问题" href="/service/faq/form" icon="icon-pencil" sort="1" isShow="1"
+        <menu id="faq-edit" name="编辑FAQ" href="/service/faq/form" icon="icon-pencil" sort="1" isShow="1"
               scope="service-faq"/>
-        <menu id="faq-del" name="删除问题" href="/service/faq/delete" icon="icon-trash" sort="1" isShow="1"
+        <menu id="faq-del" name="删除FAQ" href="/service/faq/delete" icon="icon-trash" sort="1" isShow="1"
               scope="service-faq"/>
-        <menu id="faq-add" name="新增问题" href="/service/faq/form" icon="icon-plus-sign" sort="1" isShow="1"
+        <menu id="faq-add" name="新增FAQ" href="/service/faq/form" icon="icon-plus-sign" sort="1" isShow="1"
               scope="service-faq"/>
-
     </menu>
 
 </menu>

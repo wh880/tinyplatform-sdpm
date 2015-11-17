@@ -10,7 +10,9 @@ import org.tinygroup.sdpm.common.util.ComplexSearch.SqlUtil;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.quality.biz.inter.TestCaseManager;
 import org.tinygroup.sdpm.quality.dao.QualityTestCaseDao;
+import org.tinygroup.sdpm.quality.dao.QualityTestRunDao;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityTestCase;
+import org.tinygroup.sdpm.quality.dao.pojo.QualityTestRun;
 import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.tinysqldsl.base.Condition;
 import org.tinygroup.tinysqldsl.base.FragmentSql;
@@ -27,6 +29,8 @@ public class TestCaseManagerImpl implements TestCaseManager {
 	
 	@Autowired
 	private QualityTestCaseDao testcasedao;
+	@Autowired
+	private QualityTestRunDao testRunDao;
 	
 	public List<QualityTestCase> findList(QualityTestCase testcase){
 		return testcasedao.query(testcase);
@@ -55,7 +59,7 @@ public class TestCaseManagerImpl implements TestCaseManager {
 	}
 	
 	public Integer delete(Integer id){
-
+		testRunDao.deleteByCase(id);
 		return testcasedao.softDelete(id);
 
 	}
