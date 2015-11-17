@@ -1,4 +1,8 @@
 #set(productSumTitle={"resolvedSum":"未解决bug数","closeSum":"已关闭需求数","changedSum":"已变更需求数","assignSum":"未指派bug数","activeSum":"激活需求数","bugCount":"相关bug数","planCount":"计划数","draftSum":"草稿需求数","releaseCount":"发布数"})
+<style>
+	table.table.sdpm-table tr>td,table.table.sdpm-table tr>th{vertical-align: middle}
+    table.table.sdpm-table tr>th{border-bottom:2px solid #ddd}
+</style>
 #macro ticketBoxAdmin(labelBg labelInfo ticketBoxHref ticketBoxNum ticketInfo ticketBoxMap)
 <div class="ticket" #mapToHtml(ticketBoxMap)>
     <span class="label ${labelBg} ticket-label">${labelInfo}</span>
@@ -15,23 +19,9 @@
 		#@simpleArticle("col-lg-12")
         <!-- new widget -->
 			#@widgetDiv("padding-clear" "wid-id-1" {"data-widget-editbutton":"false","data-widget-fullscreenbutton":"true"})
-            <header style="position: relative;">
 
-                <table style="position: absolute;left:10px;top:0;line-height:34px"> ##取数据地址 总数据
-					#@thead()
-						#@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
-                            <th style="width: 15%">项目名称</th>
-                            <th style="width: 15%">项目代号</th>
-                            <th style="width: 15%">结束日期</th>
-                            <th style="width: 10%">项目状态</th>
-                            <th style="width: 10%">总预计</th>
-                            <th style="width: 10%">总消耗</th>
-                            <th style="width: 15%">总剩余</th>
-                            <th style="width: 10%">进度</th>
-						#end
-					#end
-                </table>
-            </header>
+				#headerBox(" icon-bar-chart" "产品统计")
+
             <!-- widget div-->
             <div class="no-padding">
 				#@dragBox("widgetDrag" "widgetchar1" "220")
@@ -79,7 +69,20 @@
                                     $('.projectline').projectLine();
                                 });
                             </script>
-							<table style="margin-left:10px;margin-top:10px">
+							<div style="margin:10px 10px">
+							<table class="table table-condensed sdpm-table">
+								#@thead()
+									<tr style="background:none">  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
+                                        <th style="width: 16%">项目名称</th>
+                                        <th style="width: 16%">项目代号</th>
+                                        <th style="width: 16%">结束日期</th>
+                                        <th style="width: 11%">项目状态</th>
+                                        <th style="width: 10%">总预计</th>
+                                        <th style="width: 11%">总消耗</th>
+                                        <th style="width: 16%">总剩余</th>
+                                        <th style="width: 10%">进度</th>
+									</tr>
+								#end
 							#foreach(p:myProjectList)
 								#@tr()
 									<td style="width: 15%"><a href="${TINY_CONTEXT_PATH+adminPath}/project/view?projectId=${p.projectId}">${p.projectName}</a></td>
@@ -107,6 +110,7 @@
 								#end
 							#end
 							</table>
+							</div>
 						#end
 					#end
 					<!-- end content -->
