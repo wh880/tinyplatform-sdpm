@@ -95,7 +95,7 @@
                                 $(curform).closest(".modal").trigger("close");
                             });
                         } else {
-                            layer.msg(data.info, 1, 9);
+                            layer.msg(data.info);
                         }
 //                        try {
 //                            //当弹出框时触发弹出框关闭

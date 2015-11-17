@@ -129,7 +129,7 @@
                     dataType: "json",
                     success: function (data) {
                         if (data.status == "success" || data.status == "y") {
-                            layer.msg(data.info, 2, -1);
+                            layer.msg(data.info, 2, 1);
                             setTimeout(function () {
                                 layer.closeAll();
                                 window.location.href = window.location.href;

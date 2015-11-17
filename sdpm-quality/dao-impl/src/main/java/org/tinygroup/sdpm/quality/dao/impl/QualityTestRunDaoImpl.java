@@ -284,4 +284,9 @@ public class QualityTestRunDaoImpl extends TinyDslDaoSupport implements QualityT
 		select =  addOrderByElements(select, orderArgs);
 		return getDslSession().fetchPage(select,start,limit,false, QualityTestRun.class);
 	}
+
+	public Integer deleteByCase(Integer caseId) {
+		Delete delete = delete(QUALITY_TEST_RUNTABLE).where(QUALITY_TEST_RUNTABLE.CASE_ID.eq(caseId));
+		return getDslSession().execute(delete);
+	}
 }
