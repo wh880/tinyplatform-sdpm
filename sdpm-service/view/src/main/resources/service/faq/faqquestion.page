@@ -6,11 +6,11 @@
             #set(m1=menuManager.getMenu("faq-edit"))
             #if(m1)
             <a href="${TINY_CONTEXT_PATH+adminPath}${m1.href}?id=${l.faqId}">#buttonIcon(iconClass=
-                "icon-pencil")${m1.name}</a>
+                "icon-pencil")编辑</a>
             #end
             #set(m2=menuManager.getMenu("faq-del"))
             #if(m2)
-                #@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m2.href l.faqId "../faq/list"{"class":m2.icon})${m2.name}#end
+                #@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m2.href l.faqId "../faq/list"{"class":m2.icon})删除#end
             #end
             #@dialog("myModal")
                 #@dialogHeader()对话框标题#end

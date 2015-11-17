@@ -46,54 +46,60 @@
     <div class="infoContent">
         <p class="titleName">新建文档</p>
         #@elementItem()
-        <div class="col-12">
-            <div class="col-2 text-r"><label>所属文档库：</label></div>
-        <div class="col-4">
-            #@Tselect2F()
-                #@Tselect2Body("docLibId" doc?.docLibId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                    #foreach(var:libList)
-                        #if(var?.docLibDeleted != "1")
-                            <option value="${var?.docLibId}">${var?.docLibName}</option>
+            <div class="col-12">
+                <div class="col-2 text-r"><label>所属文档库：</label></div>
+                <div class="col-4">
+                    #@Tselect2F()
+                        #@Tselect2Body(
+                            "docLibId" doc?.docLibId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                            #foreach(var:libList)
+                                #if(var?.docLibDeleted != "1")
+                                    <option value="${var?.docLibId}">${var?.docLibName}</option>
+                                #end
+                            #end
+                            <script type="text/javascript">
+                                $("#${sid}").on("change", function () {
+                                    var type = $("#${sid} option:selected").val();
+                                    if (type == 1) {
+                                        $('#product').removeClass('hidden');
+                                        $('#project').addClass('hidden');
+                                    }
+                                    else if (type == 2) {
+                                        $('#project').removeClass('hidden');
+                                        $('#product').removeClass('hidden');
+                                    } else {
+                                        $('#project').addClass('hidden');
+                                        $('#product').addClass('hidden');
+                                    }
+                                });
+                            </script>
+                            <script type="text/javascript">
+                                $("#${sid}").on("change", function () {
+                                    var pId = $("#${sid}  option:selected").val();
+                                    if (pId == '1') {
+                                        ajaxRead("${sid}", "docProduct", "productId", "productName", "/document/ajax/productByDocLib", ${doc?.docProduct ? doc.docProduct : 0
+                                    }
+                                    );
+                                }
+                                if (pId == '2') {
+                                    $("select[name=docProject]").val("${doc?.docProject}").trigger("change");
+                                } else {
+                                    ajaxRead("${sid}", "docModule", "moduleId", "moduleName", "/document/ajax/moduleByDoclib?libId=" + pId, ${doc?.docModule ? doc.docModule : 0
+                                }
+                                )
+                                ;
+                                }
+                                })
+                            </script>
                         #end
+                    ##                        #@Tselect2Fix()
+                    ##                            <a href="${TINY_CONTEXT_PATH+adminPath}/document/doclib/toAdd">增加</a>
+                    ####                            #@aModal("#myModal" "增加文档库" "400" "160" "class-l" adminPath+"/document/doclib/toAdd")增加#end
+                    ##                            <a href="${TINY_CONTEXT_PATH+adminPath}/org/privilege/list" class="r">全部</a>
+                    ##                        #end
                     #end
-                    <script type="text/javascript">
-                        $("#${sid}").on("change", function () {
-                            var type = $("#${sid} option:selected").val();
-                            if (type == 1) {
-                                $('#product').removeClass('hidden');
-                                $('#project').addClass('hidden');
-                            }
-                            else if (type == 2) {
-                                $('#project').removeClass('hidden');
-                                $('#product').removeClass('hidden');
-                            } else {
-                                $('#project').addClass('hidden');
-                                $('#product').addClass('hidden');
-                            }
-                        });
-                    </script>
-                    <script type="text/javascript">
-                        $("#${sid}").on("change", function () {
-                            var pId = $("#${sid}  option:selected").val();
-                            if (pId == '1') {
-                                ajaxRead("${sid}", "docProduct", "productId", "productName", "/document/ajax/productByDocLib", ${doc?.docProduct ? doc.docProduct : 0
-                            }
-                            );
-                        }
-                        if (pId == '2') {
-                            $("select[name=docProject]").val("${doc?.docProject}").trigger("change");
-                        } else {
-                            ajaxRead("${sid}", "docModule", "moduleId", "moduleName", "/document/ajax/moduleByDoclib?libId=" + pId, ${doc?.docModule ? doc.docModule : 0
-                        }
-                        )
-                        ;
-                        }
-                        })
-                    </script>
-                #end
+                </div>
             </div>
-            </div>
-            #end
         #end
 
         #@elementItem(elementId="project" eleItemClass="hidden")

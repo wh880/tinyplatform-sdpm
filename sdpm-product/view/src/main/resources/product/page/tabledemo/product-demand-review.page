@@ -84,17 +84,14 @@
                             "class":"input-text select2","style":"width:300px" })
 
                         #end
+                        <script>
+                            ajaxRead("${sid}", "storyAssignedTo", "orgUserId", "orgUserRealName", "/org/user/userList", "");
+                        </script>
+                        #@Tselect2Fix()
+                            <a href="${TINY_CONTEXT_PATH}/a/org/user/form">增加</a>
+                            <a href="${TINY_CONTEXT_PATH}/a/org/user/list" class="r">全部</a>
+                        #end
                     #end
-                    <script>
-                        ajaxRead("${sid}", "storyAssignedTo", "orgUserId", "orgUserRealName", "/org/user/userList", "");
-                    </script>
-
-                    #@Tselect2Fix()
-                        <a href="${TINY_CONTEXT_PATH}/a/org/user/form">增加</a>
-                        <a href="${TINY_CONTEXT_PATH}/a/org/user/list" class="r">全部</a>
-                    #end
-
-
                 </div>
             #end
         #end
@@ -115,11 +112,11 @@
                         <a href="${TINY_CONTEXT_PATH}/a/org/user/form">增加</a>
                         <a href="${TINY_CONTEXT_PATH}/a/org/user/list" class="r">全部</a>
                     #end
-                    #end
-
                 #end
-            #@validateDiv("col-2")#end
+
             #end
+            #@validateDiv("col-2")#end
+        #end
 
         #@elementItem()
             <div class="col-12">
