@@ -24,7 +24,7 @@ public class ProjectProductServiceImpl implements ProjectProductService {
         projectProductManager.addLink(productIdArray, projectId);
     }
 
-    public List<Product> findLinkProduct() {
+    public List<Product> findLinkProductByProjectId(Integer projectId) {
         return  productManager.findList(new Product());
     }
 
@@ -40,11 +40,4 @@ public class ProjectProductServiceImpl implements ProjectProductService {
         return projectProductManager.findList(projectProduct);
     }
 
-    public Integer add(Integer projectId, Integer productId) {
-        return 0;
-    }
-
-    public Integer deleteByProjectId(Integer projectId) {
-        return 0;
-    }
 }

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.commons.tools.ArrayUtil;
+import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.project.biz.inter.ProjectProductManager;
 import org.tinygroup.sdpm.project.dao.ProjectProductDao;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
@@ -19,6 +20,13 @@ import java.util.List;
 public class ProjectProductManagerImpl implements ProjectProductManager {
     @Autowired
     private ProjectProductDao projectProductDao;
+
+    public List<Product> findLinkProductByProjectId(Integer projectId) {
+        if (projectId == null) {
+            return new ArrayList<Product>();
+        }
+        return projectProductDao.findLinkProductByProjectId(projectId);
+    }
 
     public void addLink(Integer[] productIds, Integer projectId) {
         if (ArrayUtil.isEmptyArray(productIds)) {
@@ -46,5 +54,4 @@ public class ProjectProductManagerImpl implements ProjectProductManager {
     public Integer update(ProjectProduct projectproduct) {
         return projectProductDao.edit(projectproduct);
     }
-
 }

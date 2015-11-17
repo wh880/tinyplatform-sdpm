@@ -22,8 +22,8 @@
                 <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?buildId=${b?.buildId}&projectId=${b?.buildProject}"
                    title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
                 #else
-                    #@tinyTableItemRemove(TINY_CONTEXT_PATH+adminPath+m.href b.buildId)<i class="${m.icon}"
-                                                                                          title=${m.name}></i>#end
+                    #@tinyTableItemRemove(TINY_CONTEXT_PATH+adminPath+m.href b.buildId)
+                    <i class="${m.icon}" title=${m.name}></i>#end
                 #end
             #end
         #end

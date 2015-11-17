@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.action.project;
 
+import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,9 +20,9 @@ import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
 import org.tinygroup.sdpm.project.service.inter.BuildService;
+import org.tinygroup.sdpm.project.service.inter.ProjectProductService;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.sdpm.project.service.inter.ProjectStoryService;
-import org.tinygroup.sdpm.project.service.inter.TeamService;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.util.LogUtil;
@@ -48,13 +49,13 @@ public class ProjectBuildAction extends BaseController {
     @Autowired
     private BuildService buildService;
     @Autowired
-    private TeamService teamService;
-    @Autowired
     private ProjectService projectService;
     @Autowired
     private ProductService productService;
     @Autowired
     private ProjectStoryService projectStoryService;
+    @Autowired
+    private ProjectProductService projectProductService;
 
     @RequiresPermissions("version-menu")
     @RequestMapping("/index")
@@ -81,9 +82,9 @@ public class ProjectBuildAction extends BaseController {
 
     @RequestMapping("/find")
     public String find(Model model, Integer start, Integer limit, String order, String ordertype,
-                       HttpServletRequest request,HttpServletResponse response) {
-        Integer projectId = ProjectUtils.getCurrentProjectId(request,response);
-        if (projectId==null){
+                       HttpServletRequest request, HttpServletResponse response) {
+        Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
+        if (projectId == null) {
             return redirectProjectForm();
         }
         boolean asc = "asc".equals(ordertype) ? true : false;
@@ -92,38 +93,43 @@ public class ProjectBuildAction extends BaseController {
         return "project/build/tableData.pagelet";
     }
 
+    /**
+     * 查看当前版本对应的bug
+     *
+     * @return
+     */
     @RequiresPermissions("pro-version-look")
     @RequestMapping("/look")
     public String look() {
         return "project/bug/index";
     }
 
-    @RequiresPermissions("pro-version-edit")
+    @RequiresPermissions(value = {"pro-version-edit", "pro-version-add"}, logical = Logical.OR)
     @RequestMapping("/edit")
     public String edit(HttpServletRequest request, HttpServletResponse response,
-                       Integer projectId, Integer buildId, Model model) {
-        projectId = ProjectUtils.getCurrentProjectId(request, response);
+                       Integer buildId, Model model) {
+        Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
         if (projectId == null) {
             return redirectProjectForm();
         }
+
+        List<Product> linkProductByProjectId = projectProductService.findLinkProductByProjectId(projectId);
+        model.addAttribute("productList", linkProductByProjectId);
+
         SystemModule module = new SystemModule();
         module.setModuleType("project");
         module.setModuleRoot(projectId);
-        List<Product> list = productService.findProductList(new Product(), "productId", "desc");
         model.addAttribute("teamList", userService.findTeamUserListByProjectId(projectId));
-        model.addAttribute("productList", list);
         if (buildId != null && buildId != 0) {
             ProjectBuild build = buildService.findBuild(buildId);
             model.addAttribute("build", build);
-        } else {
-            model.addAttribute("build", null);
         }
         return "project/build/edit";
     }
 
 
-    @RequestMapping(value = "/addsave", method = RequestMethod.POST)
-    public String addSave(ProjectBuild build, Model model, String commnet) {
+    @RequestMapping(value = "/addSave", method = RequestMethod.POST)
+    public String addSave(ProjectBuild build, Model model) {
         ProjectBuild temp;
         if (build.getBuildId() == null) {
             build.setBuildBuilder(UserUtils.getUserId());
@@ -156,7 +162,7 @@ public class ProjectBuildAction extends BaseController {
     @RequiresPermissions("pro-version-delete")
     @ResponseBody
     @RequestMapping(value = "/delete")
-    public Map<String, String> delete(Integer id, Model model) {
+    public Map<String, String> delete(Integer id) {
         buildService.softDeleteBuild(id);
         ProjectBuild temp = buildService.findBuild(id);
         LogUtil.logWithComment(LogUtil.LogOperateObject.BUILD,
@@ -186,15 +192,12 @@ public class ProjectBuildAction extends BaseController {
         return "/project/task/relation-release/product-al-no-bug.page";
     }
 
-    //    @RequiresPermissions("projectBuild-batchDel")
+    @RequiresPermissions("pro-version-delete")
     @ResponseBody
     @RequestMapping(value = "/batchDelete")
     public Map batchDelDoc(String ids) {
-        Map<String, String> map = new HashMap<String, String>();
         if (StringUtil.isBlank(ids)) {
-            map.put("status", "fail");
-            map.put("info", "请至少选择一条数据");
-            return map;
+            return resultMap(false, "请至少选择一条数据");
         }
         List<ProjectBuild> list = new ArrayList<ProjectBuild>();
         for (String s : ids.split(",")) {
@@ -216,53 +219,48 @@ public class ProjectBuildAction extends BaseController {
         }
 
         buildService.deleteBuildByIds(list);
-        map.put("status", "success");
-        map.put("info", "删除成功");
-        return map;
+        return resultMap(true, "删除成功");
     }
 
-    @RequiresPermissions("pro-version-report")
-    @RequestMapping("/add")
-    public String add(HttpServletRequest request, HttpServletResponse response, Integer buildId, Model model, String commnet) {
-
-        Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
-        if (projectId == null) {
-            return redirectProjectForm();
-        }
-        SystemModule module = new SystemModule();
-        module.setModuleType("project");
-        module.setModuleRoot(projectId);
-        List<Product> list = productService.findProductList(new Product(), "productId", "desc");
-        model.addAttribute("teamList", userService.findTeamUserListByProjectId(projectId));
-        model.addAttribute("prodcutList", list);
-        if (buildId != null && buildId != 0) {
-            ProjectBuild build = buildService.findBuild(buildId);
-            model.addAttribute("build", build);
-
-        } else {
-            model.addAttribute("build", null);
-        }
-        return "project/build/add.page";
-    }
+//    @RequiresPermissions("pro-version-report")
+//    @RequestMapping("/add")
+//    public String add(HttpServletRequest request, HttpServletResponse response, Integer buildId, Model model) {
+//
+//        Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
+//        if (projectId == null) {
+//            return redirectProjectForm();
+//        }
+//        SystemModule module = new SystemModule();
+//        module.setModuleType("project");
+//        module.setModuleRoot(projectId);
+//        List<Product> list = productService.findProductList(new Product(), "productId", "desc");
+//        model.addAttribute("teamList", userService.findTeamUserListByProjectId(projectId));
+//        model.addAttribute("prodcutList", list);
+//        if (buildId != null && buildId != 0) {
+//            ProjectBuild build = buildService.findBuild(buildId);
+//            model.addAttribute("build", build);
+//
+//        } else {
+//            model.addAttribute("build", null);
+//        }
+//        return "project/build/add.page";
+//    }
 
     @RequestMapping("/productalbug")
     public String productalbug(Integer buildId, Model model) {
-            ProjectBuild build = buildService.findBuild(buildId);
-            model.addAttribute("build", build);
-            //还需要查询其他相关任务剩余时间的信息
-            return "/project/task/relation-release/product-al-bug.page";
+        ProjectBuild build = buildService.findBuild(buildId);
+        model.addAttribute("build", build);
+        //还需要查询其他相关任务剩余时间的信息
+        return "/project/task/relation-release/product-al-bug.page";
     }
 
     //    @RequiresPermissions("projectBuild-releaseBaseInfo")
     @RequestMapping("/releasebaseinfo")
     public String releasebaseinfo(Integer buildId, Model model) {
-        if (buildId != null) {
-            ProjectBuild build = buildService.findBuild(buildId);
-            model.addAttribute("build", build);
-            //还需要查询其他相关任务剩余时间的信息
-            return "/project/task/relation-release/releasebaseinfo.pagelet";
-        }
-        return "error";
+        ProjectBuild build = buildService.findBuild(buildId);
+        model.addAttribute("build", build);
+        //还需要查询其他相关任务剩余时间的信息
+        return "/project/task/relation-release/releasebaseinfo.pagelet";
     }
 
     //    @RequiresPermissions("projectBuild-forword")
@@ -372,7 +370,7 @@ public class ProjectBuildAction extends BaseController {
 
     @ResponseBody
     @RequestMapping("/deletereleate")
-    public Map deletereleate(Integer storyId, Integer buildId) {
+    public Map deleteReleate(Integer storyId, Integer buildId) {
         buildService.deletereleate(storyId, buildId);
         return resultMap(true, "解除关联成功");
 
@@ -388,50 +386,38 @@ public class ProjectBuildAction extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "/batchDeleteReq")
-    public Map bctchDelReq(String ids, Integer buildId) {
-        Map<String, String> map = new HashMap<String, String>();
+    public Map batchDelReq(String ids, Integer buildId) {
         if (StringUtil.isBlank(ids)) {
-            map.put("status", "fail");
-            map.put("info", "请至少选择一条数据");
-            return map;
+            return resultMap(false, "请至少选择一条数据");
         }
-
         for (String s : ids.split(",")) {
             Integer S = Integer.valueOf(s);
             buildService.deletereleate(S, buildId);
         }
-        map.put("status", "success");
-        map.put("info", "删除成功");
-        return map;
+        return resultMap(false, "删除成功");
     }
 
     @ResponseBody
     @RequestMapping(value = "/batchDeleteBug")
-    public Map bctchDelBug(String ids, Integer buildId) {
-        Map<String, String> map = new HashMap<String, String>();
+    public Map batchDeleteBug(String ids, Integer buildId) {
         if (StringUtil.isBlank(ids)) {
-            map.put("status", "fail");
-            map.put("info", "请至少选择一条数据");
-            return map;
+            return resultMap(false, "请至少选择一条数据");
         }
-
         for (String bug : ids.split(",")) {
             Integer Bug = Integer.valueOf(bug);
             buildService.deletereleateBug(Bug, buildId);
         }
-        map.put("status", "success");
-        map.put("info", "删除成功");
-        return map;
+        return resultMap(false, "删除成功");
     }
 
 
     @ResponseBody
     @RequestMapping("/buildList")
-    public List<ProjectBuild> findProjectBuild(ProjectBuild build,String from) {
-        if("product".equals(from)){
-            if(build.getBuildProduct()==null&&build.getBuildProduct()<1){
+    public List<ProjectBuild> findProjectBuild(ProjectBuild build, String from) {
+        if ("product".equals(from)) {
+            if (build.getBuildProduct() == null && build.getBuildProduct() < 1) {
                 return new ArrayList<ProjectBuild>();
-            }else{
+            } else {
                 build.setBuildDeleted("0");
             }
         }

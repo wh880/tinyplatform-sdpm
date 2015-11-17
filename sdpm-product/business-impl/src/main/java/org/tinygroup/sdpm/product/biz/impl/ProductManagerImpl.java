@@ -6,11 +6,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
-import org.tinygroup.sdpm.org.dao.OrgRoleDao;
 import org.tinygroup.sdpm.org.dao.OrgRoleUserDao;
-import org.tinygroup.sdpm.org.dao.pojo.OrgRole;
 import org.tinygroup.sdpm.org.dao.pojo.OrgRoleUser;
-import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.product.biz.inter.ProductManager;
 import org.tinygroup.sdpm.product.dao.ProductDao;
 import org.tinygroup.sdpm.product.dao.ProductPlanDao;
@@ -40,12 +37,10 @@ public class ProductManagerImpl implements ProductManager{
 	private ProductPlanDao productPlanDao;
 	
 	public Product add(Product product) {
-		
 		return productDao.add(product);
 	}
 
 	public int update(Product product) {
-		
 		if(1!=product.getAcl()){
 			product.setProductWhiteList("");
 		}
@@ -54,7 +49,6 @@ public class ProductManagerImpl implements ProductManager{
 	}
 
 	public int delete(Integer productId) {
-		
 		Product product = new Product();
 		product.setProductId(productId);
 		product.setDeleted(FieldUtil.DELETE_YES);
@@ -98,18 +92,15 @@ public class ProductManagerImpl implements ProductManager{
 	}
 
 	public Product find(Integer productId) {
-
 		return productDao.getByKey(productId);
 	}
 
 
 	public int[] updateBatch(List<Product> products) {
-
 		return productDao.batchUpdate(products);
 	}
 	
 	public List<Product> findList(Product product){
-		
 		return productDao.query(product, null);
 	}
 	
@@ -141,7 +132,6 @@ public class ProductManagerImpl implements ProductManager{
 	}
 
 	public List<Product> getProductByUser(String userId) {
-
 		List<Product> productList = productDao.getProductByUser(userId);
 		Product product = new Product();
 		product.setDeleted(0);

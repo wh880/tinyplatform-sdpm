@@ -31,7 +31,7 @@
         <menu id="tbugreport" name="报表" href="/quality/bug/reportForm" icon="icon-plus-sign" sort="2"
               isShow="1" scope="testbug-tab">
         </menu>
-        <menu id="tbugpro" name="提Bug" href="/quality/bug/add" icon="icon-plus" sort="1"
+        <menu id="bug-add" name="提Bug" href="/quality/bug/add" icon="icon-plus" sort="1"
               isShow="1" scope="testbug-tab">
         </menu>
         <menu id="tbugnote" name="日志" href="/testManagement/page/addLog.pagelet" icon="icon-time" sort="7"

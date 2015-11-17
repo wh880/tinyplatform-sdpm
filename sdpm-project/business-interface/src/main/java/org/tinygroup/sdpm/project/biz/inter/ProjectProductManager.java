@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.project.biz.inter;
 
+import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
 
 import java.util.List;
@@ -9,8 +10,14 @@ import java.util.List;
  */
 public interface ProjectProductManager {
 
+    /**
+     * 查询项目关联的产品
+     *
+     * @return
+     */
+    List<Product> findLinkProductByProjectId(Integer projectId);
 
-    public void addLink(Integer[] productArray, Integer projectId);
+    void addLink(Integer[] productArray, Integer projectId);
 
     /**
      * 根据projectId查找关联产品

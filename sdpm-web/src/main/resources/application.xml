@@ -55,24 +55,24 @@
             <class-path path="E:\workcode\sdpm\sdpm-common\view\src\main\resources"/>
             <class-path path="E:\workcode\sdpm\sdpm-project\view\src\main\resources"/>
             <class-path path="E:\workcode\sdpm\sdpm-document\view\src\main\resources\"/>
-            <!--&lt;!&ndash; 徐丹洋&ndash;&gt;-->
-            <!--<class-path path="D:\workSpace\sdpm\sdpm-service\view\src\main\resources"/>-->
-            <!--<class-path path="D:\workSpace\sdpm\sdpm-product\view\src\main\resources"/>-->
-            <!--<class-path path="D:\workSpace\sdpm\sdpm-quality\view\src\main\resources"/>-->
-            <!--<class-path path="D:\workSpace\sdpm\sdpm-project\view\src\main\resources"/>-->
-            <!--<class-path path="D:\workSpace\sdpm\sdpm-system\view\src\main\resources"/>-->
-            <!--<class-path path="D:\workSpace\sdpm\sdpm-document\view\src\main\resources"/>-->
-            <!--<class-path path="D:\workSpace\sdpm\sdpm-productLine\view\src\main\resources"/>-->
-            <!--<class-path path="D:\workSpace\sdpm\sdpm-org\view\src\main\resources"/>-->
-            <!--&lt;!&ndash;wll &ndash;&gt;-->
-            <!--<class-path path="D:\java\eclipseworkspace\sdpm\sdpm-product\view\src\main\resources"/>-->
-            <!--<class-path path="D:\java\eclipseworkspace\sdpm\sdpm-quality\view\src\main\resources"/>-->
-            <!--<class-path path="D:\java\eclipseworkspace\sdpm\sdpm-project\view\src\main\resources"/>-->
-            <!--<class-path path="D:\java\eclipseworkspace\sdpm\sdpm-system\view\src\main\resources"/>-->
-            <!--<class-path path="D:\java\eclipseworkspace\sdpm\sdpm-document\view\src\main\resources"/>-->
-            <!--<class-path path="D:\java\eclipseworkspace\sdpm\sdpm-productLine\view\src\main\resources"/>-->
-            <!--<class-path path="D:\java\eclipseworkspace\sdpm\sdpm-statistic\view\src\main\resources"/>-->
-            <!--<class-path path="D:\java\eclipseworkspace\sdpm\sdpm-common\view\src\main\resources"/>-->
+            <!-- 徐丹洋-->
+            <class-path path="D:\workSpace\sdpm\sdpm-service\view\src\main\resources"/>
+            <class-path path="D:\workSpace\sdpm\sdpm-product\view\src\main\resources"/>
+            <class-path path="D:\workSpace\sdpm\sdpm-quality\view\src\main\resources"/>
+            <class-path path="D:\workSpace\sdpm\sdpm-project\view\src\main\resources"/>
+            <class-path path="D:\workSpace\sdpm\sdpm-system\view\src\main\resources"/>
+            <class-path path="D:\workSpace\sdpm\sdpm-document\view\src\main\resources"/>
+            <class-path path="D:\workSpace\sdpm\sdpm-productLine\view\src\main\resources"/>
+            <class-path path="D:\workSpace\sdpm\sdpm-org\view\src\main\resources"/>
+            <!--wll -->
+            <class-path path="D:\java\eclipseworkspace\sdpm\sdpm-product\view\src\main\resources"/>
+            <class-path path="D:\java\eclipseworkspace\sdpm\sdpm-quality\view\src\main\resources"/>
+            <class-path path="D:\java\eclipseworkspace\sdpm\sdpm-project\view\src\main\resources"/>
+            <class-path path="D:\java\eclipseworkspace\sdpm\sdpm-system\view\src\main\resources"/>
+            <class-path path="D:\java\eclipseworkspace\sdpm\sdpm-document\view\src\main\resources"/>
+            <class-path path="D:\java\eclipseworkspace\sdpm\sdpm-productLine\view\src\main\resources"/>
+            <class-path path="D:\java\eclipseworkspace\sdpm\sdpm-statistic\view\src\main\resources"/>
+            <class-path path="D:\java\eclipseworkspace\sdpm\sdpm-common\view\src\main\resources"/>
         </class-paths>
         <include-patterns>
             <include-pattern pattern="org\.tinygroup\.(.)*\.jar"/>
@@ -303,9 +303,7 @@
             <servlet-mapping url-pattern=".*\.xwd"></servlet-mapping>
             <servlet-mapping url-pattern=".*\.mht"></servlet-mapping>
             <servlet-mapping url-pattern=".*\.mhtml"></servlet-mapping>
-            <servlet-mapping url-pattern=".*\.nws"></servlet-mapping>
             <servlet-mapping url-pattern=".*\.css"></servlet-mapping>
-            <servlet-mapping url-pattern=".*\.323"></servlet-mapping>
             <servlet-mapping url-pattern=".*\.htm"></servlet-mapping>
             <servlet-mapping url-pattern=".*\.html"></servlet-mapping>
             <servlet-mapping url-pattern=".*\.stm"></servlet-mapping>

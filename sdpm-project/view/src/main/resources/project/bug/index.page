@@ -1,5 +1,4 @@
-#!set(activeTitle="项目管理",activeMenuId=currentPageId)
-
+#!set(activeTitle="项目-BUG",activeMenuId=currentPageId)
 #set(name="bug")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
@@ -17,13 +16,55 @@
                     <font style="font-weight: bold">Bug列表</font>
                 </span>
             <span class="r">
-                    <a href="${TINY_CONTEXT_PATH+adminPath}/quality/bug/add" title="提Bug">#buttonIcon(iconClass=
-                        "icon-plus")提Bug</a>
-                </span>
-            #end
-        ##operationbay end
+                #@hasMenu("bug-add")
+                <a href="${TINY_CONTEXT_PATH+adminPath}/quality/bug/add" title="提Bug">
+                    #buttonIcon(iconClass="icon-plus")提Bug
+                </a>
+                #end
+        </span>
         #end
-    ##body end
+    ##operationbay end
+    #end
+##body end
+#end
+#@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
+
+    #@div(divBaseClass="tinyheaderTools form-inline")
+        #setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置
+        #@hasMenu("bug-add")<a class="btn btn-success" href="${TINY_CONTEXT_PATH+adminPath}/quality/bug/add">提BUG</a>#end
+    #end
+    #@tinyTableContent(TINY_CONTEXT_PATH+adminPath+"/quality/bug/projectFindList?projectId="+projectId+
+        "&buildId="+buildId) ##取数据地址 总数据
+        #@thead()
+            #@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
+                #@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
+                #@tinyTh({"class":"sorting","rel":"no"})ID#end
+                #@tinyTh({"class":"sorting","rel":"bug_severity"})级别#end
+                #@tinyTh({"class":"sorting","rel":"priority"})P#end
+                #@tinyTh({"class":"sorting","rel":"bug_title"})bug标题#end
+                #@tinyTh({"class":"sorting","rel":"bug_opened_by"})创建#end
+                #@tinyTh({"class":"sorting","rel":"bug_assigned_to"})指派#end
+                #@tinyTh({"class":"sorting","rel":"bug_resolved_by"})解决者#end
+                #@tinyTh({"class":"sorting","rel":"bug_resolution"})方案#end
+                #@tinyTh({"class":"","rel":""})操作#end
+            #end
+        #end
+    #end
+##以下部分为对删除和修改的影响 因为存在不同的信息故放在外面自行更改 #dialog 配合修改使用
+<script type="text/javascript">
+    $(function () {
+        $('#${tableId}').on('click', '.delBtn', function (e) {
+            user_del(this, '1');
+        });
+    })
+</script>
+    #@dialog("myModal")
+        #@dialogHeader()对话框标题#end
+        #@dialogBody()<p>对话框内容…</p>#end
+        #@dialogFooter()
+            #@buttonEnsure()确定#end
+            #@buttonCancel()关闭#end
+        #end
     #end
 #end
-#include("/project/bug/bugTogglebox.page")
+
