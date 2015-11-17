@@ -25,4 +25,6 @@ import org.tinygroup.tinysqldsl.base.Condition;
 
 public interface QualityTestRunDao extends BaseDao<QualityTestRun,Integer> {
     public Pager<QualityTestRun> queryPager(int start, int limit, QualityTestRun testRun, Condition condition, OrderBy... orderArgs);
+
+    Integer deleteByCase(Integer caseId);
 }
