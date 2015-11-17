@@ -35,7 +35,7 @@
                                 $(curform).closest(".modal").trigger("close");
                             });
                         } else {
-                            layer.msg(data.info, 1, 9);
+                            layer.msg(data.info, 1);
                         }
                     },
                     error: function () {

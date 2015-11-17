@@ -28,7 +28,7 @@
 					success: function (data) {
 						// alert('success');
 						if(data.status=="y") {
-							layer.msg(data.info, 3, 1);
+							layer.msg(data.info, 2, 1);
 							$("#${tableId}").trigger("refresh");
 						}else{
 							layer.msg(data.info)
@@ -57,7 +57,7 @@
 			#@tabHead()
 				#include("/testManagement/page/Tab.page")
 			#end
-			
+
 			#@tabBodyCol("ptop-5")
 			##operationbar star
 			#@div(divClass="operationbar")
@@ -96,7 +96,7 @@
     					#end
     				#end
     				#end
-    									
+
 		                #@dialog("myModal")
 								#@dialogHeader()#end
 								#@dialogBody()<p></p>#end
@@ -105,7 +105,7 @@
 								    #@buttonCancel()关闭#end
 							  	#end
 						#end
-                    
+
 				</span>
 				#div(divClass="clearfix")
 				#include("/testManagement/page/mulsearch.page")
@@ -131,12 +131,12 @@
 							#end
 						#end
 				#end
-			
+
 			#@toggleRight()
 			#@tinyTable(bugTableId)
 				#@div(divBaseClass="tinyheaderTools form-inline")
 					<div class="f col-3">
-						<input type="button" value="全选" class="btn btn-default btn-primary col-3" 
+						<input type="button" value="全选" class="btn btn-default btn-primary col-3"
 						onclick="selectAllNullorReserve('idCheck','全选');" />
 						<div class="col-0">&nbsp&nbsp</div>
 						<input type="button" value="反选" class="btn btn-default btn-primary col-3"
@@ -192,7 +192,7 @@
 							#@mulOperation("muldelete" "http://127.0.0.1:8080/sqdm-quality/testManagement/page/Bug.page")
 							<a href="javascript:;" class="btn radius btn-danger "><i class="icon-trash"></i>批量删除</a>#end
 						</div>*#
-					</div>					
+					</div>
 					#setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置
 				#end
 			#@tinyTableContent(TINY_CONTEXT_PATH+adminPath+"/quality/bug/findBug?"+requestStatuString)
@@ -259,6 +259,6 @@ function selectAllNullorReserve(obj,type){
       }
      }
     }
-   }  
+   }
 }
 </script>

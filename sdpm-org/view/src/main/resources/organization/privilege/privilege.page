@@ -36,7 +36,7 @@
             layer.confirm('确定要删除该用户？', function (index) {
                 layer.msg($("已删除").attr("deleteList"), 1);
             }, function (index) {
-                layer.msg('已删除', 1)
+                layer.msg('已删除', 1,1)
             })
         });
     });

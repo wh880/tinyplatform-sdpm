@@ -46,7 +46,7 @@ $(function(){
 			dataType:"json",
 			success:function(data){
 				if(data.status=="y"){
-					layer.msg(data.info,2, -1);
+					layer.msg(data.info,2, 1);
 				}else{
 					layer.msg(data.info);
 				}
