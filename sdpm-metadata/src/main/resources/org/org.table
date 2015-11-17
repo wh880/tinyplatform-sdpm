@@ -51,7 +51,7 @@
     <table-field standard-field-id="a46cdb36c2864cb7a87d80b6a3be59c0" primary="false" unique="false" not-null="false" id="org_company_ZipCode" auto-increase="false"/>
     <table-field standard-field-id="7ecd44f91d124a2fb9f2cf3df01477a3" primary="false" unique="false" not-null="false" id="org_company_website" auto-increase="false"/>
     <table-field standard-field-id="d434a6039fa049ceb149ad7902dfe401" primary="false" unique="false" not-null="false" id="org_company_backyard" auto-increase="false"/>
-    <table-field standard-field-id="6ba616d1ae6f4d70b312bfbf1ffbcc6e" primary="false" unique="false" not-null="true" id="org_company_guest" auto-increase="false"/>
+    <table-field standard-field-id="6ba616d1ae6f4d70b312bfbf1ffbcc6e" primary="false" unique="false" not-null="false" id="org_company_guest" auto-increase="false"/>
     <table-field standard-field-id="1162306b8f4b43e99c489c34888a3335" primary="false" unique="false" not-null="false" id="org_company_admins" auto-increase="false"/>
     <table-field standard-field-id="8e8078a1954e464cb4d5f280b5d463b3" primary="false" unique="false" not-null="true" id="org_company_deleted" auto-increase="false"/>
     <table-field standard-field-id="b1125fb09e5546f783309448d5bd0499" primary="false" unique="false" not-null="false" id="org_company_logo" auto-increase="false"/>
@@ -77,7 +77,6 @@
       <index-field field="org_role_id" direction="asc"/>
     </index>
   </table>
-  
   <table id="44e40fa2fc62417788f9c7a67f1058bb" name="org_role_user" title="角色用户分配" schema="" package-name="">
     <description></description>
     <table-field standard-field-id="7edc4cffb5cf4a9f94ffca41db249285" primary="true" unique="true" not-null="true" id="id" auto-increase="true"/>
@@ -85,5 +84,4 @@
     <table-field standard-field-id="c7d7754bfa85454993ffd049f902f1be" primary="false" unique="false" not-null="false" id="org_user_id" auto-increase="false"/>
     <table-field standard-field-id="2d8d08288ada42f78cd291bd3cca33c6" primary="false" unique="false" not-null="false" id="org_user_real_name" auto-increase="false"/>
   </table>
-  
 </tables>

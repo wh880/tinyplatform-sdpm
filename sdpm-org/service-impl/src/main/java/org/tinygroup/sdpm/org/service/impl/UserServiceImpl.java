@@ -100,8 +100,8 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     public OrgUser updateUser(OrgUser orgUser) {
-        String password = orgUser.getOrgUserPassword();
-        orgUser.setOrgUserPassword(userManager.encryptPassword(password));
+//        String password = orgUser.getOrgUserPassword();
+//        orgUser.setOrgUserPassword(userManager.encryptPassword(password));
         return userManager.update(orgUser);
     }
 
