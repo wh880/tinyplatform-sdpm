@@ -233,12 +233,13 @@
         <p class="titleName">提需求</p>
         #@elementItem()
             #@colLabel()<span class="c-red">*</span>所属产品：#end
-
             #@formControlDiv("col-4")
                 <div class="col-5">
-                    #@TzTreeSelect("productId" cookieProductId {"class":"input-text","data-URL":call("link",adminPath+"/productLine/userProductTree")})
+                    #@TzTreeSelect(
+                        "productId" cookieProductId {"class":"input-text","datatype":"*","nullmsg":"所属产品不能为空！",
+                        "data-URL":call("link",adminPath+"/productLine/userProductTree")})
                         <span><a href="${TINY_CONTEXT_PATH +adminPath}/product/addproduct/addition "
-                                                                  class="l ">添加</a>
+                                 class="r ">增加</a>
                         </span>
                         <script>
                             $("#${sid}-input").on("change",function(){
@@ -257,28 +258,6 @@
 
                         </script>
                     #end
-##                    #@Tselect2F()
-##                            <script>
-##                                $(function(){
-##                                    #if(!cookieProductId)
-##                                    var productId = $("#productNameOnTop").attr("value");
-##                                    if(productId>0) {
-##                                        $("select[name=productId]").val(productId).trigger("change");
-##                                    }
-##                                    #end
-##                                })
-##
-##                            </script>
-##                        #@Tselect2Body("productId" cookieProductId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-##
-##                        #end
-##
-
-##
-##                        #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH +adminPath}/product/addproduct/addition "
-##                                          class="r ">添加</a>
-##                            <a href=" ${TINY_CONTEXT_PATH +adminPath}/product/allproduct/addition">全部</a>#end
-##                    #end
                 </div>
                 <div class="col-7">
                     <div class="col-4 text-c">所属模块：</div>
@@ -288,15 +267,14 @@
                                 "systemModel","data":"moduleType=product","relateElem":
                                 "relateModelTwo"}) ##,"multiple":"multiple"加上为多选项
                             #end
-                            #@Tselect2FixModal()#@aModal("#myModal" "" "500" "300" "btn-class" adminPath+"/product/addModule?pId=" "modelA")添加#end
-
+                            #@Tselect2FixModal()#@aModal(
+                                "#myModal" "" "500" "300" "btn-class" adminPath+"/product/addModule?pId=" "modelA")
+                                增加#end
                             #end
-
                         #end
                     </div>
                 </div>
             #end
-
         #end
 
         #@elementItem()
@@ -307,7 +285,7 @@
                     #end
 
                     #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH +adminPath}/product/plan/addplan"
-                                      class="r ">增加</a>#end
+                                      class="r">增加</a>#end
                 #end
             #end
             #@validateDiv("col-2")#end
@@ -342,7 +320,7 @@
                                 #end
                             #end
                             #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH +adminPath}/service/request/form"
-                                  class="r ">增加</a>#end
+                                              class="r">增加</a>#end
                         #end
                     </div>
                 </span>

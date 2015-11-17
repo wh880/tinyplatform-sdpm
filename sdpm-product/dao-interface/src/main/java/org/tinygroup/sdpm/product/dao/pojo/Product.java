@@ -23,8 +23,8 @@ import java.util.Date;
 public class Product implements Serializable {
 
     public static final Integer ACl_All = 0;
-    public static final Integer ACl_TEAM = 0;
-    public static final Integer ACl_TEAM_AND_ROLE = 0;
+    public static final Integer ACl_TEAM = 1;
+    public static final Integer ACl_TEAM_AND_ROLE = 2;
     public static Integer DELETE_YES = 1;
     public static Integer DELETE_NO = 0;
     /**

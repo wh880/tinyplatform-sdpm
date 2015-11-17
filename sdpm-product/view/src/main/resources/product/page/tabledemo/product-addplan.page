@@ -183,14 +183,15 @@ return format;
     #@elementItem()
         #@colLabel("col-1")<span class="c-red">*</span>开始日期:#end
         #@formControlDiv("col-4")
-           #@tinyDateInput("planBeginDate" "" "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空","id":"planBeginDate","readonly":"readonly"})#end
+			#@tinyDateInput(
+				"planBeginDate" "" "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空","id":"planBeginDate"})#end
         #end
         #@validateDiv("col-2")#end
     #end
     #@elementItem()
         #@colLabel("col-1")<span class="c-red">*</span>结束日期:#end
         #@formControlDiv("col-4")
-        	 #@tinyDateInput("planEndDate" "" "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空","readonly":"readonly"})#end
+			#@tinyDateInput("planEndDate" "" "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空"})#end
         #end
          <div  class="col-6">
          	

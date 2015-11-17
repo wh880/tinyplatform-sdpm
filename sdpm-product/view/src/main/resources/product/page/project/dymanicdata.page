@@ -12,52 +12,23 @@
 				<span class="f">
 
     #foreach(m:menuManager?.getScopeMenus("dymanci-time"))
-        #set(url=eval(m?.href))
-        <a href="${TINY_CONTEXT_PATH}${adminPath}${url}" ${choice==m?.id?'class="active_btn"':""}>${m.name}</a>
+##        #set(url=eval(m?.href))
+        <a href="javascript:void(0);" value="${m?.href}" name="dynamic" ${choice==m?.id?'class="active_btn"':""}>${m.name}</a>
     #end
 
-                #*  <span style="left:330px;top:-35px; position:relative; height:10%">
-                      #@tinyForm("thisform" "" "" {"class":"test"})
-                          #@elementItem()
-                              #@formControlDiv("col-2")
-                                  #@Tselect2F()
-                                      #@Tselect2Body("lang" "IN" {"class":"input-text select2"})
-                                          <option value="CV"><a
-                                                  href="${TINY_CONTEXT_PATH +adminPath}/product/page/project/dymanicdata.page">上周</a>
-                                          </option>
-                                          <option value="BN"><a
 
-                                                  href="${TINY_CONTEXT_PATH +adminPath}/product/page/project/dymanicdata.page">上月</a>
-                                          </option>
-                                          <option value="MK"><a
-                                                  href="${TINY_CONTEXT_PATH +adminPath}/product/page/project/dymanicdata.page">前半年</a>
-                                          </option>
-                                          <option value="AS"><a
-                                                  href="${TINY_CONTEXT_PATH +adminPath}/product/page/project/dymanicdata.page">去年</a>
-                                          </option>
-                                      #end
-                                  #end
-                              #end
-                              #@validateDiv("col-2")#end
-                          #end
-                          #div(divClass="clearfix")
-                      #end
-                  </span>*#
 				</span>
     #div(divClass="clearfix")
 </div>
-##operationbar end
-    #@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
+
+    #@tinyTable("dynamicTable") ##ID为空则系统自动生成 带入参数则取该参数为ID
         #@div(divClass="tinyheaderTools form-inline")
             #setTinyTablePageSize([8,10,20,50,100,200])
-##        <input type="button" value="全选" class="btn btn-default btn-primary "
-##               onclick="selectAllNullorReserve('product-dymanic','全选');"/>
-##        <input type="button" value="反选" class="btn btn-default btn-primary"
-##               onclick="selectAllNullorReserve('product-dymanic','反选');"/>
+
 
 
         #end
-        #@tinyTableContent(TINY_CONTEXT_PATH+adminPath+"/system/action/list?"+tinyRequestQueryString) ##取数据地址 总数据
+        #@tinyTableContent(TINY_CONTEXT_PATH+adminPath+"/system/action/list") ##取数据地址 总数据
             #@thead()
                 #@tr()###th  class 为sorting 表票可排序 为sorting_desc 为当前倒序
                     #@tinyTh({"width":"6"})<input type="checkbox" name="product-dymanic" value="">#end
@@ -65,11 +36,29 @@
                     #@tinyTh({"class":"sorting","rel":"actionActor"})操作者#end
                     #@tinyTh({"class":"sorting","rel":"actionAction"})动作#end
                     #@tinyTh({"class":"sorting","rel":"actionObjectType"})对象类型#end
-##                    #@tinyTh({"class":"sorting","rel":"actionObjectId"})ID#end
                     #@tinyTh({"class":"","rel":"sortname"})对象名称#end
                 #end
             #end
         #end
     #end
 #end
+<script>
+    $(function(){
+        var dataUrl = $("#dynamicTable").attr("data-url");
+        if(dataUrl.indexOf("choice")<0){
+            $("#dynamicTable").attr("data-url",dataUrl+"?choice=today");
+            $("#dynamicTable").trigger("refresh");
+//            $("a[class=active_btn]").removeClass("active_btn");
+            $("a[value=today]").addClass("active_btn");
+        }
+        $("a[name=dynamic]").on("click",function(){
+            var choice = $(this).attr("value");
+            $("#dynamicTable").attr("data-url",dataUrl+"?choice="+choice);
+            $("#dynamicTable").trigger("refresh");
+            $("a[class=active_btn]").removeClass("active_btn");
+            $(this).addClass("active_btn");
 
+        });
+    })
+
+</script>

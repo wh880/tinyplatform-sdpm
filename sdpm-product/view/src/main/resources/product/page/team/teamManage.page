@@ -51,8 +51,8 @@
                         #end
                     #end
                     #@Tselect2Fix()
-                        <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/form?roleType=1">增加</a>
-                        <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/list" class="r">全部</a>
+                        <a href="${TINY_CONTEXT_PATH+adminPath}/org/privilege/form">增加</a>
+                        <a href="${TINY_CONTEXT_PATH+adminPath}/org/privilege/list" class="r">全部</a>
                     #end
                 #end
             </td>

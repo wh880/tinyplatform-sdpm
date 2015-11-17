@@ -163,19 +163,20 @@ public class ProductManagerImpl implements ProductManager{
 		return pIds;
 	}
 
-	private List<Product> mergeUserProducts(List<Product> productWithoutRole,List<Product> productWithRole,List<OrgRoleUser> roleUsers){
+	private List<Product> mergeUserProducts(List<Product> productWithOutRole,List<Product> productWithRole,List<OrgRoleUser> roleUsers){
+		if(productWithRole.size()==0)return productWithOutRole;
 		for(OrgRoleUser orgRoleUser : roleUsers) {
 			for (Product product1:productWithRole) {
 				String whiteList = product1.getProductWhiteList();
 				if (whiteList != null){
 					String[] ids = whiteList.split(",");
 					List<String> idList = Arrays.asList(ids);
-					if(idList.contains(String.valueOf(product1.getProductId()))&&!productWithoutRole.contains(product1)){
-						productWithoutRole.add(product1);
+					if(idList.contains(String.valueOf(orgRoleUser.getOrgRoleId()))&&!productWithOutRole.contains(product1)){
+						productWithOutRole.add(product1);
 					}
 				}
 			}
 		}
-		return productWithoutRole;
+		return productWithOutRole;
 	}
 }

@@ -48,7 +48,7 @@ public class HomeAction {
     @RequestMapping(value = {"a", "a/home"})
     public String index(Model model) {
         //首页产品统计展示
-        List<Product> products = ProductUtils.getAllProductListByUser();
+        List<Product> products = productService.getProductByUser(UserUtils.getUserId());
         List<Product> countProduct = new ArrayList<Product>();
         for(Product product1: products){
             countProduct.add(productService.findProduct(product1.getProductId()));

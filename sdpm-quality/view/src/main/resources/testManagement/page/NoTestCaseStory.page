@@ -75,17 +75,7 @@
                                             	#for(stage:getDict("storyStage"))
                                             		#@dropdownItem("javascript:void(0);" "" "secondMenu" {"field":"storyStage","value":stage?.value}) ${stage?.text}#end
                                             	#end
-                                            	
-#*                                            	
-                                                #@dropdownItem("javascript:void(0);" "storyStage" "secondMenu")未开始#end
-                                                #@dropdownItem("javascript:void(0);" "storyStage" "secondMenu")已计划#end
-                                                #@dropdownItem("javascript:void(0);" "storyStage" "secondMenu")已立项#end
-                                                #@dropdownItem("javascript:void(0);" "storyStage" "secondMenu")研发中#end
-                                                #@dropdownItem("javascript:void(0);" "storyStage" "secondMenu")完毕#end
-                                                #@dropdownItem("javascript:void(0);" "storyStage" "secondMenu")测试中#end
-                                                #@dropdownItem("javascript:void(0);" "storyStage" "secondMenu")测试完毕#end
-                                                #@dropdownItem("javascript:void(0);" "storyStage" "secondMenu")已验收#end
-                                                #@dropdownItem("javascript:void(0);" "storyStage" "secondMenu")已发布#end*#
+
                                             #end
                                         #end
 

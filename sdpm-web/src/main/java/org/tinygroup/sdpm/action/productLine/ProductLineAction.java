@@ -15,11 +15,9 @@ import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.sdpm.productLine.service.ProductLineService;
-import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
 import org.tinygroup.sdpm.project.service.inter.BuildService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
-import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.util.LogUtil;
 import org.tinygroup.sdpm.util.ProductUtils;
 import org.tinygroup.sdpm.util.UserUtils;
@@ -414,7 +412,7 @@ public class ProductLineAction extends BaseController {
             productLine.setProductLineName(productLineName);
             List<ProductLine> productLines = productLineService.findList(productLine);
             if (productLines.size() != 0) {
-                return resultMap(false, "该产品已存在");
+                return resultMap(false, "该产品线已存在");
             } else {
                 return resultMap(true, "");
             }
@@ -424,7 +422,7 @@ public class ProductLineAction extends BaseController {
     @ResponseBody
     @RequestMapping(value = "/userProductTree")
     public List<Map<String,Object>> getUserProductTree(){
-        List<Product> products = /*productService.getProductByUser(UserUtils.getUserId());*/ProductUtils.getAllProductListByUser();
+        List<Product> products = productService.getProductByUser(UserUtils.getUserId());
         List<Map<String, Object>> mapList = Lists.newArrayList();
         List<Integer> productLineIds = new ArrayList<Integer>();
         for (Product p : products) {

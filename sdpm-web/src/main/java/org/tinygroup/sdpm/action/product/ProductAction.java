@@ -278,19 +278,14 @@ public class ProductAction extends BaseController {
 
 //        product.setDeleted(0);
         Map<String,List<Product>> productMap = new HashMap<String, List<Product>>();
-        List<Product> products = ProductUtils.getAllProductListByUser();
-        List<Product> countProduct = new ArrayList<Product>();
-        for(Product product1: products){
-            countProduct.add(productService.findProduct(product1.getProductId()));
-        }
-//        List<Product> products = productService.getProductByUserWithCount(UserUtils.getUserId());
+        List<Product> products = productService.getProductByUserWithCount(UserUtils.getUserId());
         List<Integer> idList = new ArrayList<Integer>();
         for(Product product1 : products){
             idList.add(product1.getProductLineId());
         }
         Integer[] ids = new Integer[idList.size()];
         List<ProductLine> lines = productLineService.getProductLineByIds(idList.toArray(ids));/*productService.getTeamRoleProductLineIds(UserUtils.getUserId())*/
-        for(Product product1:countProduct){
+        for(Product product1:products){
             if(productMap.containsKey(String.valueOf(product1.getProductLineId()))){
                 productMap.get(String.valueOf(product1.getProductLineId())).add(product1);
             }else{

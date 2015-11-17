@@ -303,7 +303,9 @@
             <servlet-mapping url-pattern=".*\.xwd"></servlet-mapping>
             <servlet-mapping url-pattern=".*\.mht"></servlet-mapping>
             <servlet-mapping url-pattern=".*\.mhtml"></servlet-mapping>
+            <servlet-mapping url-pattern=".*\.nws"></servlet-mapping>
             <servlet-mapping url-pattern=".*\.css"></servlet-mapping>
+            <servlet-mapping url-pattern=".*\.323"></servlet-mapping>
             <servlet-mapping url-pattern=".*\.htm"></servlet-mapping>
             <servlet-mapping url-pattern=".*\.html"></servlet-mapping>
             <servlet-mapping url-pattern=".*\.stm"></servlet-mapping>
