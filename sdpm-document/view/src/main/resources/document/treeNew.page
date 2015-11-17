@@ -29,7 +29,7 @@
             #set(saveUrl = "/system/module/ajax/docTreeSave?moduleType=projectDoc")
         #end
         #@settoggleLeftBody("treeLeftbox")
-            #@zTreeList(call("link",adminPath+dataUrl) {"readOnly":true})
+            #@zTreeList(call("link",adminPath+dataUrl) )
                 #setzTreeValMap({"id":"moduleId","name":"moduleName","pid":"moduleParent"}) ##key值为固定
                 #zTreeSetLinkUrl(TINY_CONTEXT_PATH+adminPath+"/document?tree=true")
                 #zTreeSetAddUrl(TINY_CONTEXT_PATH+adminPath+saveUrl)

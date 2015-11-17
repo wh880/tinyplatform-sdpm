@@ -12,6 +12,7 @@
 #for(b : bugPage.getRecords())
 #@tr()
     #@td()<input type="checkbox" value="1" name="idCheck">#end
+    #@td()${b?.no}#end
     #@td()${b?.bugSeverity}#end
     #@td()${b?.priority}#end
     #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/bug/bugInfo?bugId=${b?.bugId}">${b?.bugTitle}#end

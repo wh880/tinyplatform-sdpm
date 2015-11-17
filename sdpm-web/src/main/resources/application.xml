@@ -64,15 +64,15 @@
             <!--<class-path path="D:\workSpace\sdpm\sdpm-document\view\src\main\resources"/>-->
             <!--<class-path path="D:\workSpace\sdpm\sdpm-productLine\view\src\main\resources"/>-->
             <!--<class-path path="D:\workSpace\sdpm\sdpm-org\view\src\main\resources"/>-->
-            <!--&lt;!&ndash;wll &ndash;&gt;-->
-            <!--<class-path path="D:\java\eclipseworkspace\sdpm\sdpm-product\view\src\main\resources"/>-->
-            <!--<class-path path="D:\java\eclipseworkspace\sdpm\sdpm-quality\view\src\main\resources"/>-->
-            <!--<class-path path="D:\java\eclipseworkspace\sdpm\sdpm-project\view\src\main\resources"/>-->
-            <!--<class-path path="D:\java\eclipseworkspace\sdpm\sdpm-system\view\src\main\resources"/>-->
-            <!--<class-path path="D:\java\eclipseworkspace\sdpm\sdpm-document\view\src\main\resources"/>-->
-            <!--<class-path path="D:\java\eclipseworkspace\sdpm\sdpm-productLine\view\src\main\resources"/>-->
-            <!--<class-path path="D:\java\eclipseworkspace\sdpm\sdpm-statistic\view\src\main\resources"/>-->
-            <!--<class-path path="D:\java\eclipseworkspace\sdpm\sdpm-common\view\src\main\resources"/>-->
+            <!--wll -->
+            <class-path path="D:\java\eclipseworkspace\sdpm\sdpm-product\view\src\main\resources"/>
+            <class-path path="D:\java\eclipseworkspace\sdpm\sdpm-quality\view\src\main\resources"/>
+            <class-path path="D:\java\eclipseworkspace\sdpm\sdpm-project\view\src\main\resources"/>
+            <class-path path="D:\java\eclipseworkspace\sdpm\sdpm-system\view\src\main\resources"/>
+            <class-path path="D:\java\eclipseworkspace\sdpm\sdpm-document\view\src\main\resources"/>
+            <class-path path="D:\java\eclipseworkspace\sdpm\sdpm-productLine\view\src\main\resources"/>
+            <class-path path="D:\java\eclipseworkspace\sdpm\sdpm-statistic\view\src\main\resources"/>
+            <class-path path="D:\java\eclipseworkspace\sdpm\sdpm-common\view\src\main\resources"/>
         </class-paths>
         <include-patterns>
             <include-pattern pattern="org\.tinygroup\.(.)*\.jar"/>

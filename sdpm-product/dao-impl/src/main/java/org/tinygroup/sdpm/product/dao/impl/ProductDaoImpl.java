@@ -41,7 +41,8 @@ import org.tinygroup.tinysqldsl.select.OrderByElement;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
+import static org.tinygroup.tinysqldsl.base.Condition.andWithBrackets;
+import static org.tinygroup.tinysqldsl.base.Condition.orWithBrackets;
 import static org.tinygroup.sdpm.product.dao.constant.ProductTable.PRODUCTTABLE;
 import static org.tinygroup.sdpm.productLine.dao.constant.ProductLineTable.PRODUCT_LINETABLE;
 import static org.tinygroup.sdpm.org.dao.constant.OrgUserTable.ORG_USERTABLE;
@@ -413,14 +414,14 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
 	}
 
 	public List<Product> getProductByUser(String userId) {
-		Select select = selectFrom(PRODUCTTABLE).where(and(PRODUCTTABLE.DELETED.eq(0), or(PRODUCTTABLE.ACL.eq(Product.ACl_All), ExistsExpression.existsCondition(SubSelect.subSelect(selectFrom(PROJECT_TEAMTABLE).
+		Select select = selectFrom(PRODUCTTABLE).where(andWithBrackets(PRODUCTTABLE.DELETED.eq(0), orWithBrackets(PRODUCTTABLE.ACL.eq(Product.ACl_All), ExistsExpression.existsCondition(SubSelect.subSelect(selectFrom(PROJECT_TEAMTABLE).
 				where(and(PRODUCTTABLE.ACL.eq(Product.ACl_TEAM), PROJECT_TEAMTABLE.PRODUCT_ID.eq(PRODUCTTABLE.PRODUCT_ID), PROJECT_TEAMTABLE.TEAM_USER_ID.eq(userId))))))));
 		return getDslSession().fetchList(select,Product.class);
 	}
 
 	public List<Product> getProductByUserWithCount(String userId) {
-		Select select = getComplexSelect().where(and(PRODUCTTABLE.DELETED.eq(0), or(PRODUCTTABLE.ACL.eq(Product.ACl_All), ExistsExpression.existsCondition(SubSelect.subSelect(selectFrom(PROJECT_TEAMTABLE).
-				where(and(PRODUCTTABLE.ACL.eq(Product.ACl_TEAM), PROJECT_TEAMTABLE.PRODUCT_ID.eq(PRODUCTTABLE.PRODUCT_ID), PROJECT_TEAMTABLE.TEAM_USER_ID.eq(userId))))))));
+		Select select = getComplexSelect().where(andWithBrackets(PRODUCTTABLE.DELETED.eq(0), orWithBrackets(PRODUCTTABLE.ACL.eq(Product.ACl_All), ExistsExpression.existsCondition(SubSelect.subSelect(selectFrom(PROJECT_TEAMTABLE).
+				where(and(PRODUCTTABLE.ACL.eq(Product.ACl_TEAM), PROJECT_TEAMTABLE.PRODUCT_ID.eq(PRODUCTTABLE.PRODUCT_ID), PROJECT_TEAMTABLE.TEAM_USER_ID.eq(userId)))))))).groupBy(PRODUCTTABLE.PRODUCT_ID);
 		return getDslSession().fetchList(select,Product.class);
 	}
 

@@ -89,7 +89,7 @@ public class ModuleAction extends BaseController {
     @ResponseBody
     @RequestMapping("docProductTree")
     public List<Map<String, Object>> productDocTree(HttpServletResponse response) {
-        response.setContentType("application/json; charset=UTF-8");
+//        response.setContentType("application/json; charset=UTF-8");
         List<Map<String, Object>> mapList = Lists.newArrayList();
         Product product = new Product();
         product.setDeleted(0);

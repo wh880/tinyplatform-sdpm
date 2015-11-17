@@ -37,8 +37,9 @@
                 <script type="text/javascript">
                     $("#${sid}").on("change", function () {
                         var pId = $("#${sid}  option:selected").val();
-                        ajaxRead("${sid}", "docModule", "moduleId", "moduleName", "/document/ajax/module1?productId=" + pId, ${doc?.docModule ? doc.docModule : 0
-                    });
+                        if(pId>0){
+                            ajaxRead("${sid}", "docModule", "moduleId", "moduleName", "/document/ajax/module?productId=" + pId, ${doc?.docModule?doc.docModule : 0});
+                        }
                     })
                 </script>
             #end

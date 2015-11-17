@@ -37,6 +37,13 @@ public class StorySpecAction extends BaseController{
 		List<ProductStorySpec> storySpecs = specService.findStorySpecList(storySpec,null,null);
 		storySpec = storySpecs!=null&&storySpecs.size()>0?storySpecs.get(0):new ProductStorySpec();
 		model.addAttribute("storySpec", storySpec);
+
+		SystemProfile systemProfile = new SystemProfile();
+		systemProfile.setFileObjectType("story");
+		systemProfile.setFileDeleted("0");
+		systemProfile.setFileObjectId(story.getStoryId());
+		List<SystemProfile> list = profileService.find(systemProfile);
+		model.addAttribute("file",list);
 		return "/product/page/tabledemo/demand-edit.page";
 	}
 	

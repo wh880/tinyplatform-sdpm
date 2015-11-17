@@ -284,22 +284,21 @@ public class ProductUtils {
      */
     public static List<Product> getAllProductListByUser() {
         List<Product> result = (List<Product>) UserUtils.getCache(USER_CACHE_ALL_PRODUCT_LIST_BY_USER);
-        if (result == null) {
-            List<Product> products = getProductList();
-            result = new ArrayList<Product>();
-            String loginId = UserUtils.getUserId();
-            for (Product product : products) {
-                if (validateProduct(loginId, product) < 3) {
-                    result.add(product);
-                }
-            }
-            UserUtils.putCache(USER_CACHE_ALL_PRODUCT_LIST_BY_USER, result);
-        }
 //        if (result == null) {
+//            List<Product> products = getProductList();
+//            result = new ArrayList<Product>();
 //            String loginId = UserUtils.getUserId();
-//            result = productService.getProductByUser(loginId);
+//            for (Product product : products) {
+//                if (validateProduct(loginId, product) < 3) {
+//                    result.add(product);
+//                }
+//            }
 //            UserUtils.putCache(USER_CACHE_ALL_PRODUCT_LIST_BY_USER, result);
 //        }
+        if (result == null) {
+            result = productService.getProductByUser(UserUtils.getUserId());
+            UserUtils.putCache(USER_CACHE_ALL_PRODUCT_LIST_BY_USER, result);
+        }
         return result;
     }
 

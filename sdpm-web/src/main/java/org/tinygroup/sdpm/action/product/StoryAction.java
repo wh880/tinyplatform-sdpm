@@ -512,17 +512,18 @@ public class StoryAction extends BaseController {
      */
     @RequestMapping("/search")
 
-    public String storySearchAction(@CookieValue String cookieProductId, int start, int pagesize, ProductStory story,
+    public String storySearchAction(@CookieValue(value = "cookieProductId",defaultValue = "0") String cookieProductId, int start, int pagesize, ProductStory story,
                                     String type, String choose, String groupOperate,
                                     SearchInfos searchInfos, String order, String ordertype,
                                     Model model, HttpServletRequest request) {
-
-        story.setProductId(Integer.parseInt(cookieProductId));
+        story.setDeleted(0);
+        if(story.getProductId()!=null&&story.getProductId()!=0) {
+            story.setProductId(Integer.parseInt(cookieProductId));
+        }
         ConditionCarrier carrier = new ConditionCarrier();
         String condition = StoryUtil.getStatusCondition(choose);
         carrier.putStatus("status",condition);
         if (story.getModuleId() != null && story.getModuleId() > 0) {
-                   
             carrier.putModuleIn("productStory.moduleId",String.valueOf(story.getModuleId()));
         }
         story.setModuleId(null);

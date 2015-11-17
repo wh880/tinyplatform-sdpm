@@ -424,7 +424,7 @@ public class ProductLineAction extends BaseController {
     @ResponseBody
     @RequestMapping(value = "/userProductTree")
     public List<Map<String,Object>> getUserProductTree(){
-        List<Product> products = /*productService.getProductByUser(UserUtils.getUserId());*/ProductUtils.getAllProductListByUser();
+        List<Product> products = productService.getProductByUser(UserUtils.getUserId());
         List<Map<String, Object>> mapList = Lists.newArrayList();
         List<Integer> productLineIds = new ArrayList<Integer>();
         for (Product p : products) {
