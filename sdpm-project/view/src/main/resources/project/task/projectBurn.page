@@ -70,7 +70,7 @@
                     }
                 },
                 error: function (data) {
-                    layer.msg(data.info, 2, 9);
+                    layer.msg(data.info);
                 }
             });
             return false;

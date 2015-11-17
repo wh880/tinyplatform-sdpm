@@ -49,7 +49,7 @@
 $(function(){
 	function updateStepID(){
 		$('.itemlist-table>.databody .stepID').each(function(index){
-			$(this).html(index+1);		
+			$(this).html(index+1);
 		});
 	}
 	$(".itemlist-table").on("click",".addpre",function(){
@@ -70,7 +70,7 @@ $(function(){
 		layer.confirm('确定删除?', function(){
 		    $(that).closest("tr").remove();
 			updateStepID();
-			layer.msg('删除成功！') 
+			layer.msg('删除成功！',1,1)
 		})
 	});
 });

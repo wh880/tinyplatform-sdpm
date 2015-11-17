@@ -6,7 +6,7 @@
             }
             else {
                 layer.confirm('确认要删除吗？', function (index) {
-                    layer.msg('已删除!', 1);
+                    layer.msg('已删除!', 1,1);
                 });
             }
         });

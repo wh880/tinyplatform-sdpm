@@ -43,23 +43,23 @@
 #end
 <script>
 $(function(){
-	function fileupload(){    
-		$('.filelist-table>.datatbody .fieID').each(function(index){	
-			$(this).html(index+1);		
+	function fileupload(){
+		$('.filelist-table>.datatbody .fieID').each(function(index){
+			$(this).html(index+1);
 		});
 	}
 	$(".filelist-table").on("click",".addpre",function(){
 		$(this).parents("tr:first").before($("tbody.fiel").html());
-		fileupload();		
+		fileupload();
 	}).on("click",".addnext",function(){
 		$(this).parents("tr:first").after($("tbody.fiel").html());
-		fileupload();		
+		fileupload();
 	}).on("click",".deletebutton",function(){
 		if($('.datatbody .fieID').size() == 1) return;
 		layer.confirm('确定删除?', function(){
 			$('.datatbody .fieID').parents("tr:first").remove();
-			fileupload();	
-			layer.msg('删除成功！') 
+			fileupload();
+			layer.msg('删除成功！',1,1)
 		})
 	});
 });
