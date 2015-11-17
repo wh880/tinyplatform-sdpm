@@ -73,6 +73,14 @@
                 #end
             #end
         #end
+        <script type="text/javascript">
+            $(function () {
+                $("select[name=taskAssignedTo]").on("change", function () {
+                    $("input[name=taskAssignedDate]").val(moment().format('YYYY-MM-DD'));
+                });
+            });
+        </script>
+
         #@elementItem()
             #@sdpmItem("相关需求")
                 #if(storyList)

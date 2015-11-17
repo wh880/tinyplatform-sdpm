@@ -55,7 +55,7 @@ public class ModuleServiceImpl implements ModuleService {
     }
 
     public int deleteAndEdit(Integer id) {
-        return systemModuleManager.deleteAndedit(id);
+        return systemModuleManager.deleteAndEdit(id);
     }
 
     public int deleteByType(String type) {

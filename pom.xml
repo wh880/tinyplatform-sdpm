@@ -9,7 +9,7 @@
     <name>sdpm</name>
     <url>http://www.tinygroup.org</url>
     <properties>
-        <tiny_version>2.0.28-SNAPSHOT</tiny_version>
+        <tiny_version>2.0.29-SNAPSHOT</tiny_version>
         <tiny_ui_version>2.0.28-SNAPSHOT</tiny_ui_version>
         <tiny_ext_version>2.0.26</tiny_ext_version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
