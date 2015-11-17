@@ -36,7 +36,7 @@
             #end
 
             #@Tselect2Fix()
-                <a href="${TINY_CONTEXT_PATH}/a/productLine/add">增加</a>
+                <a href="${TINY_CONTEXT_PATH}/a/productLine/content/add">增加</a>
                 <a href="${TINY_CONTEXT_PATH}/a/productLine/all" class="r">全部</a>
             #end
 

@@ -55,26 +55,33 @@
         <p class="titleName">请求</p>
         <input type="hidden" name="clientRequestId" value="${request?.clientRequestId}"/>
         #@elementItem()
-            #@sdpmItem("产品名称","*")
-                #@Tselect2F()
-                    #@Tselect2Body(
-                        "productId" request?.productId {"placeholder":"产品名称","datatype":"*","nullmsg":"产品名称不能为空！",
-                        "class":"input-text select2"})  ##,"multiple":"multiple"加上为多选项
-                        #@tinyOptionItem("")请选择#end
-                        #foreach(l:productList)
-                            #@tinyOptionItem(l.productId)${l?.productName}#end
-                        #end
-                        <script type="text/javascript">
-                            $("#${sid}").on("change", function () {
+            #@colLabel("col-2")<span class="c-red">*</span>所属产品：#end
+            #@formControlDiv("col-4")
+                #@TzTreeSelect("productId" cookieProductId {"class":"input-text","datatype":"*","nullmsg":"所属产品不能为空！",
+                    "data-URL":call("link",adminPath+
+                    "/productLine/userProductTree")})
+                    <span><a href="${TINY_CONTEXT_PATH +adminPath}/product/addproduct/addition "
+                             class="r ">增加</a>
+                        </span>
+                    <script>
+                        $("#${sid}-input").on("change", function () {
                                 var pId = $(this).val();
-                                ajaxRead("${sid}", "moduleId", "moduleId", "moduleName", "/document/ajax/moduleByProduct?productId=" + pId, ${request?.moduleId ? request.moduleId : 0
-                            });
+                            if (pId > 0) {
+                                ajaxRead("${sid}", "moduleId", "moduleId", "moduleName", "/quality/bug/ajax/module?moduleRoot=" + pId, "0", "module");
+                                ajaxRead("${sid}", "planId", "planId", "planName", "/product/plan/planList?productId=" + pId, "0", "plan");
+                                var url = $("#modelA").attr("href");
+                                if (!url.endsWith("=")) {
+                                    url = url.substring(0, url.indexOf("=") + 1);
+                                }
+                                $("#modelA").attr("href", url + pId)
+                                $("input[name=storyTitle]").blur();
+                            }
                             })
+
                         </script>
                     #end
-
-                #end
             #end
+            #@validateDiv("col-2")#end
         #end
         #@elementItem()
             #@sdpmItem("请求类型" "*")
@@ -124,7 +131,8 @@
                         #end
                     #end
                     #@Tselect2Fix()
-                        <a href="${TINY_CONTEXT_PATH+adminPath}/service/client/form">新增</a>
+                        <a href="${TINY_CONTEXT_PATH+adminPath}/service/client/form">增加</a>
+                        <a href="${TINY_CONTEXT_PATH+adminPath}/service/client/list" class="r">全部</a>
                     #end
                 #end
             #end

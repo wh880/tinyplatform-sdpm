@@ -31,22 +31,22 @@
 
 #@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/product/edit" "post" {"class":"test"})
 <div style="width:100%;float:center" class="pageleftpart">
-    <div class="infoContent">
-        <p class="titleName">编辑</p>
-        #tinyInput("text" "productId" product?.productId {"class":"input-text hidden"})
+<div class="infoContent">
+    <p class="titleName">编辑</p>
+    #tinyInput("text" "productId" product?.productId {"class":"input-text hidden"})
     #@elementItem()
         #@colLabel()<span class="c-red">*</span>产品线名称：#end
         #@formControlDiv("col-4")
             #@Tselect2F()
                 <script>
-                    $(function(){
-##                        #if(!cookieProductLineId)
-##                            var productLineId = $("#productLineNameOnTop").attr("value");
-##                            if(productLineId>0) {
-##                                $("select[name=productLineId]").val(productLineId).trigger("change");
-##                            }
-##                        #end
-                        $("select[name=productLineId]").on("change",function(){
+                    $(function () {
+                    ##                        #if(!cookieProductLineId)
+                    ##                            var productLineId = $("#productLineNameOnTop").attr("value");
+                    ##                            if(productLineId>0) {
+                    ##                                $("select[name=productLineId]").val(productLineId).trigger("change");
+                    ##                            }
+                    ##                        #end
+                        $("select[name=productLineId]").on("change", function () {
                             $("input[name=productName]").blur();
                             $("input[name=productCode]").blur();
                         });
@@ -69,213 +69,200 @@
     #end
     #@validateDiv("col-2")#end
 #end
-        #@elementItem()
-            #@colLabel()<span class="c-red">*</span>产品名称：#end
-            #@formControlDiv("col-4")
-                #tinyInput(
-                    "text" "productName" product?.productName {"nullmsg":"请输入产品名称！","id":"33","class":"input-text",
-                    "url":""})
-            #end
-            <script>
+#@elementItem()
+    #@colLabel()<span class="c-red">*</span>产品名称：#end
+    #@formControlDiv("col-4")
+        #tinyInput(
+            "text" "productName" product?.productName {"nullmsg":"请输入产品名称！","id":"33","class":"input-text",
+            "url":""})
+    #end
+    <script>
 
-                $("input[name=productName]").on("blur",function(){
-                    var pName = $(this).val();
-                    if(pName){
-                        var plId = $("select[name=productLineId] option:selected").val();
-                        if(plId>0){
-                            $.ajax({
-                                url:"${TINY_CONTEXT_PATH+adminPath}/product/judgeProductName",
-                                type:"POST",
-                                data:{productName:pName,productLineId:plId,productId:"${product?.productId}"},
-                                success:function(data){
-                                    if(data.status=="y"){
-                                        $("input[name=productName]").addClass("Validform_error");
-                                        $("input[name=productName]").parent().parent().find("div[class=col-2]").html("<span class='Validform_checktip Validform_wrong'>该产品已存在！</span>");
-                                    }else{
-                                        $("input[name=productName]").removeClass("Validform_error");
-                                        $("input[name=productName]").parent().parent().find("div[class=col-2]").html("");
-                                    }
-                                }
-                            });
-                            return false;
+        $("input[name=productName]").on("blur", function () {
+            var pName = $(this).val();
+            if (pName) {
+                var plId = $("select[name=productLineId] option:selected").val();
+                if (plId > 0) {
+                    $.ajax({
+                        url: "${TINY_CONTEXT_PATH+adminPath}/product/judgeProductName",
+                        type: "POST",
+                        data: {productName: pName, productLineId: plId, productId: "${product?.productId}"},
+                        success: function (data) {
+                            if (data.status == "y") {
+                                $("input[name=productName]").addClass("Validform_error");
+                                $("input[name=productName]").parent().parent().find("div[class=col-2]").html("<span class='Validform_checktip Validform_wrong'>该产品已存在！</span>");
+                            } else {
+                                $("input[name=productName]").removeClass("Validform_error");
+                                $("input[name=productName]").parent().parent().find("div[class=col-2]").html("");
+                            }
+                        }
+                    });
+                    return false;
+                }
+            }
+        });
+    </script>
+    #@validateDiv("col-2")#end
+#end
+#@elementItem()
+    #@colLabel()<span class="c-red">*</span>产品代号：#end
+    #@formControlDiv("col-4")
+        #tinyInput(
+            "text" "productCode" product?.productCode {"nullmsg":"请输入产品代号！","id":"33","class":"input-text"})
+    #end
+    <script>
+        $("input[name=productCode]").on("blur", function () {
+            var pName = $(this).val();
+            if (pName) {
+                $.ajax({
+                    url: "${TINY_CONTEXT_PATH+adminPath}/product/judgeProductName",
+                    type: "POST",
+                    data: {productCode: pName, productId: "${product?.productId}"},
+                    success: function (data) {
+                        if (data.status == "y") {
+                            $("input[name=productCode]").addClass("Validform_error");
+                            $("input[name=productCode]").parent().parent().find("div[class=col-2]").html("<span class='Validform_checktip Validform_wrong'>该代号已存在！</span>");
+                        } else {
+                            $("input[name=productCode]").removeClass("Validform_error");
+                            $("input[name=productCode]").parent().parent().find("div[class=col-2]").html("");
                         }
                     }
                 });
-            </script>
-            #@validateDiv("col-2")#end
-        #end
-        #@elementItem()
-            #@colLabel()<span class="c-red">*</span>产品代号：#end
-            #@formControlDiv("col-4")
-                #tinyInput(
-                    "text" "productCode" product?.productCode {"nullmsg":"请输入产品代号！","id":"33","class":"input-text"})
+                return false;
+            }
+        });
+    </script>
+    #@validateDiv("col-2")#end
+#end
+#@elementItem()
+    #@colLabel()<span class="c-red">*</span>产品负责人：#end
+    #@formControlDiv("col-4")
+        #@Tselect2F()
+            #@Tselect2Body(
+                "productOwner" product?.productOwner {"class":"input-text select2","url":"/product/productList",
+                "ajaxType":"owner","data":""}) ##,"multiple":"multiple"加上为多选项
             #end
             <script>
-                $("input[name=productCode]").on("blur",function(){
-                    var pName = $(this).val();
-                    if(pName){
-                        $.ajax({
-                            url:"${TINY_CONTEXT_PATH+adminPath}/product/judgeProductName",
-                            type:"POST",
-                            data:{productCode:pName,productId:"${product?.productId}"},
-                            success:function(data){
-                                if(data.status=="y"){
-                                    $("input[name=productCode]").addClass("Validform_error");
-                                    $("input[name=productCode]").parent().parent().find("div[class=col-2]").html("<span class='Validform_checktip Validform_wrong'>该代号已存在！</span>");
-                                }else{
-                                    $("input[name=productCode]").removeClass("Validform_error");
-                                    $("input[name=productCode]").parent().parent().find("div[class=col-2]").html("");
-                                }
-                            }
-                        });
-                        return false;
-                    }
-                });
+                ajaxRead("${sid}", "productOwner", "orgUserId", "orgUserRealName", "/org/user/userList");
+
             </script>
-            #@validateDiv("col-2")#end
-        #end
-        #@elementItem()
-            #@colLabel()<span class="c-red">*</span>产品负责人：#end
-            #@formControlDiv("col-4")
-                #@Tselect2F()
-                    #@Tselect2Body(
-                        "productOwner" product?.productOwner {"class":"input-text select2","url":"/product/productList",
-                        "ajaxType":"owner","data":""}) ##,"multiple":"multiple"加上为多选项
-                    #end
-                #end
-                <script>
-
-                    ajaxRead("${sid}", "productOwner", "orgUserId", "orgUserRealName", "/org/user/userList");
-
-                </script>
-
-                #@Tselect2Fix()
-                    <a href="${TINY_CONTEXT_PATH}/a/org/user/form">增加</a>
-                    <a href="${TINY_CONTEXT_PATH}/a/org/user/list" class="r">全部</a>
-                #end
-
-
+            #@Tselect2Fix()
+                <a href="${TINY_CONTEXT_PATH}/a/org/user/form">增加</a>
+                <a href="${TINY_CONTEXT_PATH}/a/org/user/list" class="r">全部</a>
             #end
-            #@validateDiv("col-2")#end
-        #end
-        #@elementItem()
-            #@colLabel()测试负责人：#end
-            #@formControlDiv("col-4")
-                #@Tselect2F()
-                    #@Tselect2Body(
-                        "productQualityManager" product?.productQualityManager {"class":"input-text select2","url":
-                        "/product/productList","ajaxType":"qualityMnager","data":""}) ##,"multiple":"multiple"加上为多选项
-
-                    #end
-
-                    <script>
-
-                        ajaxRead("${sid}", "productQualityManager", "orgUserId", "orgUserRealName", "/org/user/userList");
-
-                    </script>
-
-                    #@Tselect2Fix()
-                        <a href="${TINY_CONTEXT_PATH}/a/org/user/form">增加</a>
-                        <a href="${TINY_CONTEXT_PATH}/a/org/user/list" class="r">全部</a>
-                    #end
-
-                #end
-
-            #end
-            #@validateDiv("col-2")#end
-        #end
-        #@elementItem()
-            #@colLabel()发布负责人：#end
-            #@formControlDiv("col-4")
-                #@Tselect2F()
-                    #@Tselect2Body(
-                        "productDeliveryManager" product?.productDeliveryManager {"class":"input-text select2","url":
-                        "/product/productList","ajaxType":"deliveryManagerManager","data":
-                        ""}) ##,"multiple":"multiple"加上为多选项
-                    #end
-                #end
-                <script>
-
-                    ajaxRead("${sid}", "productDeliveryManager", "orgUserId", "orgUserRealName", "/org/user/userList");
-
-                </script>
-
-                #@Tselect2Fix()
-                    <a href="${TINY_CONTEXT_PATH}/a/org/user/form">增加</a>
-                    <a href="${TINY_CONTEXT_PATH}/a/org/user/list" class="r">全部</a>
-                #end
-
-
-            #end
-            #@validateDiv("col-2")#end
-        #end
-        #@elementItem()
-            #@colLabel()状态：#end
-            #@formControlDiv("col-4")
-                #@Tselect2F()
-                    #@Tselect2Body("productStatus" product?.productStatus {"class":
-                        "input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                        <option value="0">正常</option>
-                        <option value="1">结束</option>
-                    #end
-
-                #end
-            #end
-            #@validateDiv("col-2")#end
-        #end
-        #@elementItem()
-            #@colLabel()产品描述：#end
-            #@formControlDiv("col-8")
-                #@Teditor("productDesc" "productDesc" {"initialFrameHeight":"250" ,"placeholder":"说点什么...最少输入10个字符",
-                    "datatype":"*10-500"})${product?.productDesc}#end
-            #end
-            #@validateDiv("col-2")#end
         #end
 
-
-        #@elementItem()
-            #@colLabel()访问控制：#end
-            #@skinMinimal("col-8")
-
-                #@Tradioes("acl" product?.acl {"onclick":"setWhite(this.value)"})
-                    #foreach(source:getDict("accessControl"))
-                        <div>#@Tradio(source?.value)${source?.text}#end</div>
-                    #end
-                #end
-
-            #end
-            #@validateDiv("col-2")#end
-        #end
-        #@elementItem("whitelistBox" product?.acl!=2?'hidden':'')
-            #@colLabel()<span class="c-red">*</span>分组白名单#end
-            #@skinMinimal()
-                #@Tcheckboxes("productWhiteList" product?.productWhiteList)
-                    #foreach(role : UserUtils.getAllRoleList())
-                        #@Tcheckbox(role?.orgRoleId)${role?.orgRoleName}#end
-                    #end
-                #end
-
-
-
-            #end
-            #@validateDiv("col-2")#end
-        #end
-    </div>
-
-    #@elementItem()
-        <div class="col-12">
-            <div class="col-5">
-
-            </div>
-            <div class="col-1">
-                <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
-            </div>
-            <div class="col-1">
-                #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end
-            </div>
-            <div class="col-5"></div>
-        </div>
     #end
+    #@validateDiv("col-2")#end
+#end
+#@elementItem()
+    #@colLabel()测试负责人：#end
+    #@formControlDiv("col-4")
+        #@Tselect2F()
+            #@Tselect2Body(
+                "productQualityManager" product?.productQualityManager {"class":"input-text select2","url":
+                "/product/productList","ajaxType":"qualityMnager","data":""}) ##,"multiple":"multiple"加上为多选项
+                <script>
+                    ajaxRead("${sid}", "productQualityManager", "orgUserId", "orgUserRealName", "/org/user/userList");
+                </script>
+            #end
+            #@Tselect2Fix()
+                <a href="${TINY_CONTEXT_PATH}/a/org/user/form">增加</a>
+                <a href="${TINY_CONTEXT_PATH}/a/org/user/list" class="r">全部</a>
+            #end
+        #end
+
+    #end
+    #@validateDiv("col-2")#end
+#end
+#@elementItem()
+    #@colLabel()发布负责人：#end
+    #@formControlDiv("col-4")
+        #@Tselect2F()
+            #@Tselect2Body(
+                "productDeliveryManager" product?.productDeliveryManager {"class":"input-text select2","url":
+                "/product/productList","ajaxType":"deliveryManagerManager","data":
+                ""}) ##,"multiple":"multiple"加上为多选项
+            #end
+
+            <script>
+                ajaxRead("${sid}", "productDeliveryManager", "orgUserId", "orgUserRealName", "/org/user/userList");
+            </script>
+            #@Tselect2Fix()
+                <a href="${TINY_CONTEXT_PATH}/a/org/user/form">增加</a>
+                <a href="${TINY_CONTEXT_PATH}/a/org/user/list" class="r">全部</a>
+            #end
+        #end
+    #end
+    #@validateDiv("col-2")#end
+#end
+#@elementItem()
+    #@colLabel()状态：#end
+    #@formControlDiv("col-4")
+        #@Tselect2F()
+            #@Tselect2Body("productStatus" product?.productStatus {"class":
+                "input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                <option value="0">正常</option>
+                <option value="1">结束</option>
+            #end
+
+        #end
+    #end
+    #@validateDiv("col-2")#end
+#end
+#@elementItem()
+    #@colLabel()产品描述：#end
+    #@formControlDiv("col-8")
+        #@Teditor("productDesc" "productDesc" {"initialFrameHeight":"250" ,"placeholder":"说点什么...最少输入10个字符",
+            "datatype":"*10-500"})${product?.productDesc}#end
+    #end
+    #@validateDiv("col-2")#end
+#end
+
+
+#@elementItem()
+    #@colLabel()访问控制：#end
+    #@skinMinimal("col-8")
+
+        #@Tradioes("acl" product?.acl {"onclick":"setWhite(this.value)"})
+            #foreach(source:getDict("accessControl"))
+                <div>#@Tradio(source?.value)${source?.text}#end</div>
+            #end
+        #end
+
+    #end
+    #@validateDiv("col-2")#end
+#end
+#@elementItem("whitelistBox" product?.acl!=2?'hidden':'')
+    #@colLabel()<span class="c-red">*</span>分组白名单#end
+    #@skinMinimal()
+        #@Tcheckboxes("productWhiteList" product?.productWhiteList)
+            #foreach(role : UserUtils.getAllRoleList())
+                #@Tcheckbox(role?.orgRoleId)${role?.orgRoleName}#end
+            #end
+        #end
+
+
+
+    #end
+    #@validateDiv("col-2")#end
+#end
+</div>
+
+#@elementItem()
+    <div class="col-12">
+        <div class="col-5">
+
+        </div>
+        <div class="col-1">
+            <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
+        </div>
+        <div class="col-1">
+            #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end
+        </div>
+        <div class="col-5"></div>
+    </div>
+#end
 
 #end
     <br/>
