@@ -180,6 +180,12 @@
         <menu id="tverassign" name="指派给我" href="/quality/version/taskToCase?status=tverassign&amp;currentPageId=5"
               icon="" sort="6"
               isShow="1" scope="version-case"></menu>
+        <menu id="tvernotest" name="待测版本" href="/quality/version/?status=tvernotest" icon="" sort="1"
+              isShow="1" scope="testverleft-tab">
+        </menu>
+        <menu id="tvertest" name="已测版本" href="/quality/version/?status=tvertest" icon="" sort="1"
+              isShow="1" scope="testverleft-tab">
+        </menu>
         <menu id="tversee" name="分组查看" href="#" icon="" sort="5"
               isShow="1" scope="version-case"></menu>
         <menu id="tversearch" name="搜索版本" href="#" icon="" sort="4"
