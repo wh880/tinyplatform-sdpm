@@ -6,9 +6,12 @@
             #include("/organization/common/tab.page")
         #end
     #end
-    #@noRespsGridSystem()
-        #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/org/company/add" "post" {"class":"test","enctype":
-            "multipart/form-data"})
+
+    #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/org/company/add" "post" {"class":"test","enctype":
+        "multipart/form-data"})
+        #@noRespsGridSystem()
+        <div class="infoContent">
+            <p class="titleName">添加公司信息</p>
             #@gridSysRow()
                 #@elementItem()
                     #@colLabel("col-3")<span class="c-red">*</span>公司名称：#end
@@ -94,6 +97,7 @@
                     #end
                     #@validateDiv("col-2")#end
                 #end
+            </div>
             #end
             #@gridSysRow()
 
