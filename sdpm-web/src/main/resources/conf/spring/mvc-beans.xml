@@ -39,7 +39,7 @@
     <!-- 对静态资源文件的访问， 将无法mapping到Controller的path交给default servlet handler处理 -->
     <mvc:default-servlet-handler/>
 
-    <mvc:resources mapping="/static/**" location=""/>
+    <mvc:resources mapping="${userFiles.prefix}/**" location="${userfiles.basedir}"/>
     <!-- 启动aop的注解解析器-->
     <aop:aspectj-autoproxy/>
 </beans>

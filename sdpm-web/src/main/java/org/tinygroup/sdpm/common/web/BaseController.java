@@ -60,6 +60,11 @@ public abstract class BaseController {
      */
     @Value("${userfiles.basedir}")
     protected String UPLOAD_PATH;
+    /**
+     * 用户url前缀
+     */
+    @Value("${userFiles.prefix}")
+    protected String UPLOAD_PREFIX;
 
     @Autowired
     private FileRepository fileRepository;
@@ -212,7 +217,7 @@ public abstract class BaseController {
         String fileUrl = fileRepository.storeByExt(UPLOAD_PATH, ext, uploadFile);
         fileUrl = fileRepository.resolverFilePath(fileUrl, UPLOAD_PATH);
         long size = uploadFile.getSize();
-        SystemProfile profile = new SystemProfile(fileUrl, title, ext, (int) size,
+        SystemProfile profile = new SystemProfile(UPLOAD_PREFIX+fileUrl, title, ext, (int) size,
                 type.getType(), objectId, UserUtils.getUserAccount(), new Date(), null, null);
         profileService.add(profile);
     }
@@ -252,7 +257,7 @@ public abstract class BaseController {
         String fileUrl = fileRepository.storeByExt(UPLOAD_PATH, origName, uploadFile);
         fileUrl = fileRepository.resolverFilePath(fileUrl, UPLOAD_PATH);
         long size = uploadFile.getSize();
-        SystemProfile profile = new SystemProfile(fileUrl, null, ext, (int) size,
+        SystemProfile profile = new SystemProfile(UPLOAD_PREFIX+fileUrl, null, ext, (int) size,
                 type.getType(), objectId, UserUtils.getUserId(), new Date(), null, null);
         profileService.add(profile);
     }
