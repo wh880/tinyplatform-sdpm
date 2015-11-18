@@ -233,7 +233,7 @@
                         ui.helper.find("a.doing").trigger("click");
                         break;
                     case "done":
-                        ui.helper.find("a.done").trigger("click");
+                        ui.helper.find("a.finish").trigger("click");
                         break;
                     case "cancel":
                         ui.helper.find("a.cancel").trigger("click");
