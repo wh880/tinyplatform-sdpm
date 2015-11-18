@@ -221,9 +221,6 @@
                     #@TzTreeSelect(
                         "productId" cookieProductId {"class":"input-text","datatype":"*","nullmsg":"所属产品不能为空！",
                         "data-URL":call("link",adminPath+"/productLine/userProductTree")})
-                        <span><a href="${TINY_CONTEXT_PATH +adminPath}/product/addproduct/addition "
-                                 class="r ">增加</a>
-                        </span>
                         <script>
                             $("#${sid}-input").on("change",function(){
                                 var pId = $(this).val();
@@ -240,6 +237,7 @@
                             })
 
                         </script>
+                        <span><a href="${TINY_CONTEXT_PATH +adminPath}/product/addproduct/addition " class="r ">增加</a></span>
                     #end
                 </div>
                 <div class="col-7">
@@ -250,8 +248,7 @@
                                 "systemModel","data":"moduleType=product","relateElem":
                                 "relateModelTwo"}) ##,"multiple":"multiple"加上为多选项
                             #end
-                            #@Tselect2FixModal()#@aModal(
-                                "#myModal" "" "500" "300" "btn-class" adminPath+"/product/addModule?pId="+cookieProductId )
+                            #@Tselect2Fix()#@aModal("#myModal" "" "500" "300" "btn-class" adminPath+"/product/addModule?pId=" "modelA")
                                 增加#end
                             #end
                         #end
