@@ -1,5 +1,5 @@
 #import("/org/tinygroup/button/components/button_smart.component")
-#!set(activeTitle="服务管理",activeMenuId=currentPageId)
+#!set(activeTitle="产品管理",activeMenuId=currentPageId)
 
 #set(name="request")
 #set(requestTableId = "requestTableId")
