@@ -247,8 +247,14 @@
 ##<a href="${TINY_CONTEXT_PATH+adminPath}/product/allproduct/addition">全部</a>&nbsp
 ###end
     #@TzTreeSelect("productId" cookieProductId {"class":"input-text","data-URL":call("link",adminPath+"/productLine/userProductTree")})
-    <span class="l"><a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition" >增加</a>&nbsp
-    <a href="${TINY_CONTEXT_PATH+adminPath}/product/allproduct/addition">全部</a>&nbsp</span>
+    <span class="l">
+        #@hasMenu("newproduct")
+            <a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition">增加</a>
+        #end
+        #@hasMenu("allproduct")
+            <a href="${TINY_CONTEXT_PATH+adminPath}/product/allproduct/addition" class="r">全部</a>
+        #end
+    </span>
         #end
 #hiddenInput("productIdHidden","productId","","")
 

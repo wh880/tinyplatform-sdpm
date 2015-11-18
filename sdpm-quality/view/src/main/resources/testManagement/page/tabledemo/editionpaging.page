@@ -107,8 +107,12 @@
                         #end
 
                         #@Tselect2Fix()
-                        <a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition" class="r ">增加</a>
-                        <a href="${TINY_CONTEXT_PATH+adminPath}/product/allproduct/addition">全部</a>
+                            #@hasMenu("newproduct")
+                            <a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition">增加</a>
+                            #end
+                            #@hasMenu("allproduct")
+                            <a href="${TINY_CONTEXT_PATH+adminPath}/product/allproduct/addition" class="r">全部</a>
+                            #end
                         #end
                     #end
                 #end
@@ -143,8 +147,13 @@
 
                                     #end
                                     #@Tselect2Fix()
-                                    <a href="${TINY_CONTEXT_PATH+adminPath}/product/plan/addplan" class="r ">增加</a>
-                                    <a href="${TINY_CONTEXT_PATH+adminPath}/product/plan/content">全部</a>#end
+                                        #@hasMenu("product-plan-add")
+                                        <a href="${TINY_CONTEXT_PATH+adminPath}/product/plan/addplan" class="r ">增加</a>
+                                        #end
+                                        #@hasMenu("product-plan")
+                                        <a href="${TINY_CONTEXT_PATH+adminPath}/product/plan/content">全部</a>
+                                        #end
+                                    #end
                                 #end
                             #end
                         #end     #end
@@ -300,8 +309,12 @@
                         #end
 
                         #@Tselect2Fix()
-                        <a href="${TINY_CONTEXT_PATH+adminPath}/project/form" class="r ">增加</a>
-                        <a href="${TINY_CONTEXT_PATH+adminPath}/project/list">全部</a>
+                            #@hasMenu("project-op-add")
+                            <a href="${TINY_CONTEXT_PATH+adminPath}/project/form" class="r">增加</a>
+                            #end
+                            #@hasMenu("project-op-all")
+                            <a href="${TINY_CONTEXT_PATH+adminPath}/project/list">全部</a>
+                            #end
                         #end
                     #end
                 #end
@@ -314,8 +327,12 @@
 
                         #end
                         #@Tselect2Fix()
-                        <a href="${TINY_CONTEXT_PATH+adminPath}/product/story/addstory" class="r ">增加</a>
-                        <a href="${TINY_CONTEXT_PATH+adminPath}/product/story?choose=1">全部</a>
+                            #@hasMenu("product-demand-add")
+                            <a href="${TINY_CONTEXT_PATH+adminPath}/product/story/addstory" class="r ">增加</a>
+                            #end
+                            #@hasMenu("product-demand")
+                            <a href="${TINY_CONTEXT_PATH+adminPath}/product/story?choose=1">全部</a>
+                            #end
                         #end
                     #end
                 #end
@@ -329,8 +346,13 @@
 
                         #end
                         #@Tselect2Fix()
-                        <a href="${TINY_CONTEXT_PATH+adminPath}/project/task/form" class="r ">增加</a>
-                        <a href="${TINY_CONTEXT_PATH+adminPath}/project/task/index">全部</a>#end
+                            #@hasMenu("task")
+                            <a href="${TINY_CONTEXT_PATH+adminPath}/project/task/form" class="r ">增加</a>
+                            #end
+                            #@hasMenu("project")
+                            <a href="${TINY_CONTEXT_PATH+adminPath}/project/task/index">全部</a>
+                            #end
+                        #end
                     #end
                 #end
             #end
@@ -355,7 +377,14 @@
                             <option value="${user?.orgUserId}">${user?.orgUserRealName}</option>
                             #end
                         #end
-                        #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH+adminPath}/org/user/form" class="r ">增加</a>#end
+                        #@Tselect2Fix()
+                            #@hasMenu("organizationAddUser")
+                            <a href="${TINY_CONTEXT_PATH}/a/org/user/form">增加</a>
+                            #end
+                            #@hasMenu("organizationUser")
+                            <a href="${TINY_CONTEXT_PATH}/a/org/user/list" class="r">全部</a>
+                            #end
+                        #end
                     #end
                 #end
             #end
@@ -367,8 +396,12 @@
                             "multiple"}) ##,"multiple":"multiple"加上为多选项
                         #end
                         #@Tselect2Fix()
-                        <a href="${TINY_CONTEXT_PATH+adminPath}/project/build/add" class="r ">增加</a>
-                        <a href="${TINY_CONTEXT_PATH+adminPath}/project/build/index">全部</a>
+                            #@hasMenu("pro-version-add")
+                            <a href="${TINY_CONTEXT_PATH+adminPath}/project/build/edit" class="r ">增加</a>
+                            #end
+                            #@hasMenu("version")
+                            <a href="${TINY_CONTEXT_PATH+adminPath}/project/build/index">全部</a>
+                            #end
                         #end
                     #end
                 #end
@@ -414,8 +447,12 @@
 
                         #end
                         #@Tselect2Fix()
-                        <a href="${TINY_CONTEXT_PATH+adminPath}/project/build/add" class="r ">增加</a>
-                        <a href="${TINY_CONTEXT_PATH+adminPath}/project/build/index">全部</a>
+                            #@hasMenu("pro-version-add")
+                            <a href="${TINY_CONTEXT_PATH+adminPath}/project/build/edit" class="r ">增加</a>
+                            #end
+                            #@hasMenu("version")
+                            <a href="${TINY_CONTEXT_PATH+adminPath}/project/build/index">全部</a>
+                            #end
                         #end
                     #end
                     #@validateDiv("col-2")#end

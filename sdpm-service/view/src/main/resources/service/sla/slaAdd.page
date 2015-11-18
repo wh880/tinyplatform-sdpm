@@ -32,8 +32,12 @@
                             #end
                         #end
                         #@Tselect2Fix()
-                            <a href="${TINY_CONTEXT_PATH+adminPath}/service/client/form">增加</a>
-                            <a href="${TINY_CONTEXT_PATH+adminPath}/service/client/list" class="r">全部</a>
+                            #@hasMenu("client-add")
+                                <a href="${TINY_CONTEXT_PATH+adminPath}/service/client/form">增加</a>
+                            #end
+                            #@hasMenu("client")
+                                <a href="${TINY_CONTEXT_PATH+adminPath}/service/client/list" class="r">全部</a>
+                            #end
                         #end
                     #end
                 #end
@@ -44,8 +48,14 @@
                     #@TzTreeSelect("productId" cookieProductId {"class":"input-text",
                         "datatype":"*","nullmsg":"所属产品不能为空！","data-URL":call("link",adminPath+
                         "/productLine/userProductTree")})
-                        <span><a href="${TINY_CONTEXT_PATH +adminPath}/product/addproduct/addition "
-                                 class="r ">增加</a>
+                        <span>
+                            #@hasMenu("newproduct")
+                                <a href="${TINY_CONTEXT_PATH +adminPath}/product/addproduct/addition "
+                                   class="r ">增加</a>
+                            #end
+                            #@hasMenu("allproduct")
+                                <a href=" ${TINY_CONTEXT_PATH +adminPath}/product/allproduct/addition">全部</a>
+                            #end
                         </span>
                         <script>
                             $("#${sid}-input").on("change", function () {
@@ -167,7 +177,7 @@
                 #@sdpmItem("创建时间")
                     #@tinyDateInput(
                         "slaCreateDate" formatDate(sla?.slaCreateDate?:now(),
-                        "yyyy-MM-dd") "YYYY-MM-DD" {"style":"width:120px","id":"slaCreateDate","placeholder":""})#end
+                    "yyyy-MM-dd") "YYYY-MM-DD" {"style":"width:120px","id":"slaCreateDate","placeholder":""})#end
                 #end
             #end
             #@elementItem()

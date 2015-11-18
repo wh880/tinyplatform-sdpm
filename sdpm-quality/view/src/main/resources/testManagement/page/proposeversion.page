@@ -91,8 +91,12 @@
 
 	                    	#end
                          #@Tselect2Fix()
-                             <a href="${TINY_CONTEXT_PATH+adminPath}/project/form" class="r ">增加</a>
-                             <a href="${TINY_CONTEXT_PATH+adminPath}/project/list">全部</a>
+                             #@hasMenu("project-op-add")
+                                 <a href="${TINY_CONTEXT_PATH+adminPath}/project/form" class="r">增加</a>
+                             #end
+                             #@hasMenu("project-op-all")
+                                 <a href="${TINY_CONTEXT_PATH+adminPath}/project/list">全部</a>
+                             #end
                          #end
                 	  #end
                 	 #end
@@ -108,8 +112,12 @@
 
 	                    	#end
                          #@Tselect2Fix()
-                             <a href="${TINY_CONTEXT_PATH+adminPath}/project/build/add" class="r ">增加</a>
-                             <a href="${TINY_CONTEXT_PATH+adminPath}/project/build/index">全部</a>
+                             #@hasMenu("pro-version-add")
+                                 <a href="${TINY_CONTEXT_PATH+adminPath}/project/build/edit" class="r ">增加</a>
+                             #end
+                             #@hasMenu("version")
+                                 <a href="${TINY_CONTEXT_PATH+adminPath}/project/build/index">全部</a>
+                             #end
                          #end
                 	  #end
                 	 #end

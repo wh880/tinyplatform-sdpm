@@ -35,8 +35,12 @@
                 #end
             ##填写任意内容，侦听需重新填加 A侦听已内置
                 #@Tselect2Fix()
-                    <a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition">增加</a>
-                    <a href="${TINY_CONTEXT_PATH+adminPath}/product/allproduct/addition" class="r">全部</a>
+                    #@hasMenu("newproduct")
+                        <a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition">增加</a>
+                    #end
+                    #@hasMenu("allproduct")
+                        <a href="${TINY_CONTEXT_PATH+adminPath}/product/allproduct/addition" class="r">全部</a>
+                    #end
                 #end
             #end
         #end

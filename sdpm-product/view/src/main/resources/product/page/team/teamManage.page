@@ -28,7 +28,7 @@
             可用工时/天
         </td>
         #@td("w-p125")
-            #end
+        #end
     </tr>
         #set(a = 0)
         #foreach(t : teamList)
@@ -51,8 +51,12 @@
                         #end
                     #end
                     #@Tselect2Fix()
-                        <a href="${TINY_CONTEXT_PATH+adminPath}/org/privilege/form">增加</a>
-                        <a href="${TINY_CONTEXT_PATH+adminPath}/org/privilege/list" class="r">全部</a>
+                        #@hasMenu("organizationAddGroup")
+                            <a href="${TINY_CONTEXT_PATH+adminPath}/org/privilege/form">增加</a>
+                        #end
+                        #@hasMenu("organizationPrivilege")
+                            <a href="${TINY_CONTEXT_PATH+adminPath}/org/privilege/list" class="r">全部</a>
+                        #end
                     #end
                 #end
             </td>
