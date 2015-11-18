@@ -1,8 +1,8 @@
 #import("/org/tinygroup/button/components/button_smart.component")
-#!set(activeTitle="产品管理",activeMenuId=currentPageId)
+#!set(activeTitle="客服管理",activeMenuId=currentPageId)
 
 #set(name="request")
-#set(requestTableId = "requestTableId")
+###set(requestTableId = "requestTableId")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
         #@tabHead()

@@ -36,8 +36,51 @@
 </div>
 <script type="text/javascript">
 
-    $(function(){
-        //$("body").append('<div id="${sid}-content" class="t-menu-content" style="display:none; position: absolute;z-index:9999"><ul id="ztree${sid}" class="ztree mCustomScrollbar" style="margin-top:0;max-height:400px;overflow-x:auto;overflow-y:auto"></ul><span style="position:absolute;right:5px;bottom:0px;z-index:2;cursor:pointer" id="close${sid}"><i class="icon-remove"></i></span></div>');
+    $(function () {
+        //$("body").append('<div id="${sid}
+        -content
+        " class="
+        t - menu - content
+        " style="
+        display:none;
+        position: absolute;
+        z - index
+        :
+        9999
+        "><ul id="
+        ztree${sid}
+        " class="
+        ztree
+        mCustomScrollbar
+        " style="
+        margin - top
+        :
+        0;
+        max - height
+        :
+        400
+        px;
+        overflow - x
+        :
+        auto;
+        overflow - y
+        :
+        auto
+        "></ul><span style="
+        position:absolute;
+        right:5
+        px;
+        bottom:0
+        px;
+        z - index
+        :
+        2;
+        cursor:pointer
+        " id="
+        close${sid}
+        "><i class="
+        icon - remove
+        "></i></span></div>');
         var setting = {
             view: {
                 dblClickExpand: false
@@ -53,11 +96,15 @@
             }
         };
         var zTree;
-        var zNodes =[];
-        var $treeContent=$("#ztree${sid}");
-        var $treeRap=$("#${sid}-content");
-        var $input=$("#${sid}-input-name");
-        var $inputV=$("#${sid}-input");
+        var zNodes = [];
+        var $treeContent =
+        $("#ztree${sid}");
+        var $treeRap =
+        $("#${sid}-content");
+        var $input =
+        $("#${sid}-input-name");
+        var $inputV =
+        $("#${sid}-input");
 
         #set(dataurl=call("getMapVal","data-URL",mapInfo))
         #if(dataurl)
@@ -65,7 +112,7 @@
                 type: "GET",
                 url: "${dataurl}",
                 dataType: "json",
-                success: function(data) {
+                success: function (data) {
                     //data= eval(' ' +data+ ' ');
                     zNodes = data;
                     //console.log(zNodes);
@@ -443,12 +490,9 @@
             #@Tselect2Body(
                 "storyReviewedBy" "" {"class":"input-text select2","url":"/org/user/userList","ajaxType":
                 "orgUser","data":""})
-
             #end
             <script>
-
                 ajaxRead("${sid}", "storyReviewedBy", "orgUserId", "orgUserRealName", "/org/user/userList");
-
             </script>
 
             #@Tselect2Fix()
@@ -460,8 +504,6 @@
                 #end
 
             #end
-
-
         #end
         #@checkboxBox()
 
@@ -472,66 +514,66 @@
         #end
 
     #end
+#end
 
-    #@elementItem()
-        #@colLabel()抄送给：#end
-        #@formControlDiv("col-4")
-            #@Tselect2F()
-                #@Tselect2Body("storyMailto" "" {"class":"input-text select2","multiple":
-                    "multiple"}) ##,"multiple":"multiple"加上为多选项
+#@elementItem()
+    #@colLabel()抄送给：#end
+    #@formControlDiv("col-4")
+        #@Tselect2F()
+            #@Tselect2Body("storyMailto" "" {"class":"input-text select2","multiple":
+                "multiple"}) ##,"multiple":"multiple"加上为多选项
+            #end
+            <script>
+                ajaxRead("${sid}", "storyMailto", "orgUserId", "orgUserRealName", "/org/user/userList");
+            </script>
+            #@Tselect2Fix()
+                #@hasMenu("organizationAddUser")
+                    <a href="${TINY_CONTEXT_PATH}/a/org/user/form">增加</a>
                 #end
-                <script>
-                    ajaxRead("${sid}", "storyMailto", "orgUserId", "orgUserRealName", "/org/user/userList");
-                </script>
-                #@Tselect2Fix()
-                    #@hasMenu("organizationAddUser")
-                        <a href="${TINY_CONTEXT_PATH}/a/org/user/form">增加</a>
-                    #end
-                    #@hasMenu("organizationUser")
-                        <a href="${TINY_CONTEXT_PATH}/a/org/user/list" class="r">全部</a>
-                    #end
+                #@hasMenu("organizationUser")
+                    <a href="${TINY_CONTEXT_PATH}/a/org/user/list" class="r">全部</a>
                 #end
             #end
         #end
-        #@validateDiv("col-2")#end
     #end
-
-
-    #@elementItem()
-        #@colLabel()关键词：#end
-        #@formControlDiv("col-4")
-            #tinyInput(
-                "text" "storyKeywords" ""{"datatype":"","id":"text","class":"input-text"})
-        #end
-        #@validateDiv("col-2")#end
-    #end
-
-
-    #@elementItem()
-        #@colLabel()附件：#end
-        #@formControlDiv("col-10")
-            #include("/product/page/event/fileupload.page")
-        #end
-        #@validateDiv("col-2")#end
-    #end
-</div>
-    #@elementItem()
-    <div class="col-12">
-        <div class="col-5">
-
-        </div>
-        <div class="col-1">
-            <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
-        </div>
-        <div class="col-1">
-            #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end
-        </div>
-        <div class="col-5"></div>
-
-    #end
-</div>
+    #@validateDiv("col-2")#end
 #end
 
+
+#@elementItem()
+    #@colLabel()关键词：#end
+    #@formControlDiv("col-4")
+        #tinyInput(
+            "text" "storyKeywords" ""{"datatype":"","id":"text","class":"input-text"})
+    #end
+    #@validateDiv("col-2")#end
+#end
+
+
+#@elementItem()
+    #@colLabel()附件：#end
+    #@formControlDiv("col-10")
+        #include("/product/page/event/fileupload.page")
+    #end
+    #@validateDiv("col-2")#end
+#end
+</div>
+#@elementItem()
+<div class="col-12">
+    <div class="col-5">
+
+    </div>
+    <div class="col-1">
+        <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
+    </div>
+    <div class="col-1">
+        #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end
+    </div>
+    <div class="col-5"></div>
+
+#end
+</div>
+#end
 
     <script type="text/javascript">
         $(function () {

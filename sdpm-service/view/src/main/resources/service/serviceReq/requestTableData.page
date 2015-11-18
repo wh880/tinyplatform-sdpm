@@ -4,7 +4,8 @@
         #@td()<input type="checkbox" value="${var.clientRequestId}" name="idCheck">#end
         #@td()<a
                 href="${TINY_CONTEXT_PATH+adminPath}/service/client/clientSla?id=${var.clientId}">${var.clientName}</a>#end
-        #@td()${var.requestTitle}#end
+        #@td()<a
+                href="${TINY_CONTEXT_PATH+adminPath}/service/request/overview?id=${var.clientRequestId}">${var.requestTitle}</a>#end
         #@td()${getDict("requestPre",var.requestPre)}#end
         #@td()${getDict("requestStatus",var.requestStatus)}#end
         #@td()${formatDate(var.requestCommitmentDate,"yyyy-MM-dd")}#end

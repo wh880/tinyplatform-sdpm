@@ -17,49 +17,9 @@
 <script type="text/javascript">
     $(function () {
         //$("body").append('<div id="${sid}
-        -content
-        " class="
-        t - menu - content
-        " style="
-        display:none;
-        position: absolute;
-        z - index
-        :
-        9999
-        "><ul id="
-        ztree${sid}
-        " class="
-        ztree
-        mCustomScrollbar
-        " style="
-        margin - top
-        :
-        0;
-        max - height
-        :
-        400
-        px;
-        overflow - x
-        :
-        auto;
-        overflow - y
-        :
-        auto
-        "></ul><span style="
-        position:absolute;
-        right:5
-        px;
-        bottom:0
-        px;
-        z - index
-        :
-        2;
-        cursor:pointer
-        " id="
-        close${sid}
-        "><i class="
-        icon - remove
-        "></i></span></div>');
+        -content" class="t-menu-content" style="display:none; position: absolute;z-index:9999"><ul id="ztree${sid}
+        " class="ztree mCustomScrollbar" style="margin-top:0;max-height:400px;overflow-x:auto;overflow-y:auto"></ul><span style="position:absolute;right:5px;bottom:0px;z-index:2;cursor:pointer" id="close${sid}
+        "><i class="icon-remove"></i></span></div>');
         var setting = {
             view: {
                 dblClickExpand: false
@@ -130,7 +90,6 @@
                 return false;
             }//return check;
         }
-
         function onClick(e, treeId, treeNode) {
                 $input.val(treeNode.name);
                 $inputV.val(treeNode.id);
@@ -141,7 +100,6 @@
                 $inputV.change();
             hideMenu();
         }
-
         function hideMenu() {
                 $treeRap.fadeOut("fast");
             $("#${sid}-rap").append($treeRap);
@@ -173,7 +131,6 @@
                 }
             }
         }
-
         ///显示所有父节点
         function fjdxs(zTree, nodes) {
             if (nodes.getParentNode() == null) {
@@ -184,7 +141,6 @@
                 fjdxs(zTree, nodes.getParentNode());
             }
         }
-
         ///全显
         function xsall(ztree, nodes) {
             ztree.showNode(nodes);
@@ -194,7 +150,6 @@
                 })
             }
         }
-
         ///么有子节点的直接隐藏
         function ycall(ztree, nodes) {
             ztree.hideNode(nodes);
@@ -283,7 +238,6 @@
                             changeTimeVal();
                         }, 1000);
                     }
-
                     changeTimeVal();
                 }
             })
@@ -317,7 +271,7 @@
             <a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition" class="r">增加</a>
         #end
         #@hasMenu("allproduct")
-            <a href="${TINY_CONTEXT_PATH+adminPath}/product/allproduct/addition">全部</a>
+            <a href="${TINY_CONTEXT_PATH+adminPath}/product/allproduct/addition">全部&nbsp&nbsp</a>
         #end
     </span>
     #end
