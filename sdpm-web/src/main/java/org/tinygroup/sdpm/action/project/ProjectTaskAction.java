@@ -45,7 +45,8 @@ import java.util.*;
 @Controller
 @RequestMapping("/a/project/task")
 public class ProjectTaskAction extends BaseController {
-
+    @Autowired
+    private StoryService storyService;
     @Autowired
     private TaskService taskService;
     @Autowired
@@ -55,7 +56,7 @@ public class ProjectTaskAction extends BaseController {
     @Autowired
     private ModuleService moduleService;
     @Autowired
-    private ProjectStoryService storyService;
+    private ProjectStoryService projectStoryService;
     @Autowired
     private StoryService productStoryService;
     @Autowired
@@ -99,7 +100,7 @@ public class ProjectTaskAction extends BaseController {
      */
     @RequiresPermissions(value = {"pro-task-proposeversion", "pro-Info2-copy", "batch-distribute-task"}, logical = Logical.OR)
     @RequestMapping("/form")
-    public String form(HttpServletRequest request, Model model, Integer storyId, String taskId) {
+    public String form(HttpServletRequest request, Model model, Integer storyId, String taskId, Integer moduleId) {
         String cookie = CookieUtils.getCookie(request, ProjectUtils.COOKIE_PROJECT_ID);
         if (StringUtil.isBlank(cookie)) {
             addMessage(model, "请选择项目");
@@ -111,9 +112,17 @@ public class ProjectTaskAction extends BaseController {
             ProjectTask task = taskService.findTask(Integer.parseInt(taskId));
             model.addAttribute("copyTask", task);
         }
-        List<ProductStory> storyList = storyService.findStoryByProject(projectId);
+        List<ProductStory> storyList = projectStoryService.findStoryByProject(projectId);
+        ProductStory productStory = storyService.findStory(storyId);
+        SystemModule systemModule = new SystemModule();
+        systemModule.setModuleRoot(productStory.getProductId());
+        List<SystemModule> moduleList = moduleService.findModules(systemModule);
+        for (SystemModule module : moduleList) {
+            module.setModuleName(ModuleUtil.getPath(module.getModuleId(), "/", null, false));
+        }
+        model.addAttribute("moduleList", moduleList);
+        model.addAttribute("moduleId", moduleId);
         model.addAttribute("storyId", storyId);
-        model.addAttribute("moduleList", generateModuleList(projectId));
         model.addAttribute("storyList", storyList);
         return "project/task/add";
     }
@@ -387,7 +396,7 @@ public class ProjectTaskAction extends BaseController {
         String moduleIds = "";
         if (!StringUtil.isBlank(moduleId)) {
             if (moduleId.contains("p")) {
-                moduleIds = ModuleUtil.getConditionByRoot(Integer.parseInt(moduleId.substring(1)),"story");
+                moduleIds = ModuleUtil.getConditionByRoot(Integer.parseInt(moduleId.substring(1)), "story");
             } else {
                 moduleIds = ModuleUtil.getCondition(Integer.parseInt(moduleId));
             }
@@ -421,7 +430,7 @@ public class ProjectTaskAction extends BaseController {
         }
         model.addAttribute("teamList", userService.findTeamUserListByProjectId(projectId));
         model.addAttribute("storyId", storyId);
-        List<ProductStory> storyList = storyService.findStoryByProject(projectId);
+        List<ProductStory> storyList = projectStoryService.findStoryByProject(projectId);
         model.addAttribute("storyList", storyList);
         model.addAttribute("moduleList", generateModuleList(projectId));
         return "project/task/batchAdd.page";
@@ -434,7 +443,7 @@ public class ProjectTaskAction extends BaseController {
             if (StringUtil.isBlank(taskList.get(i).getTaskName())) {
                 taskList.remove(i);
                 i--;
-            }else {
+            } else {
                 taskList.get(i).setTaskConsumed(0f);
             }
         }
@@ -466,7 +475,7 @@ public class ProjectTaskAction extends BaseController {
         ProjectTask task = taskService.findTask(taskId);
         String projectName = projectService.findProjectById(task.getTaskProject()).getProjectName();
 
-        List<ProductStory> storyList = storyService.findStoryByProject(task.getTaskProject());
+        List<ProductStory> storyList = projectStoryService.findStoryByProject(task.getTaskProject());
         model.addAttribute("task", task);
         model.addAttribute("projectName", projectName);
         model.addAttribute("teamList", userService.findTeamUserListByProjectId(task.getTaskProject()));

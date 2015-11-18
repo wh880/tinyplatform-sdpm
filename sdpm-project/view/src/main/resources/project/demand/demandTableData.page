@@ -18,7 +18,7 @@
         #@td()
             #foreach(m:menuManager.getScopeMenus("demand-op"))
                 #if(m.id != "rm-demand")
-                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?storyId=${s.storyId}"
+                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?storyId=${s.storyId}&moduleId=${s.moduleId}"
                        title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
                 #else
                     #@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m.href s.storyId)#buttonIcon(iconClass=m.icon)#end

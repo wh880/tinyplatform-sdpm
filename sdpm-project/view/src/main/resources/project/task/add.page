@@ -32,7 +32,7 @@
         #@elementItem()
             #@sdpmItem("所属模块")
                 #@Tselect2F()
-                    #@Tselect2Body("taskModule" copyTask?.taskModule {"class":
+                    #@Tselect2Body("taskModule" moduleId {"class":
                         "input-text select2"})
                         <option value="">/</option>
                         #foreach(m : moduleList)
