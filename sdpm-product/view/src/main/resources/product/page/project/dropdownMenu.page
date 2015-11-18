@@ -61,9 +61,7 @@
 //            #bodyContent
             initzTree();
         #end
-            $input.on("change",function(){
-            $inputV.val("");
-        });
+            $input.on("change",function(){$inputV.val("");});
         function initzTree() {
             zTree = $.fn.zTree.init($treeContent, setting, zNodes);
             initInputVale();
@@ -216,7 +214,7 @@
             window.location.reload();
         </script>
     #end
-#else
+
     #if(ProductUtils.getAllProductListByUser()?.size()==0)
         <script type="text/javascript">
                 #set(msg="目前没有产品，现在将前往添加。")
@@ -247,23 +245,6 @@
 </span>
     <span class="caret"></span></span>
 #@navSelect2Body()
-##    #@navSelect2Data()
-##    <option value=""></option>
-##    <optgroup label="产品">
-
-##        #for(product : ProductUtils.getAllProductListByUser())
-##        #if(product?.deleted==0)
-##            <option value="${product?.productId}">${product?.productName}</option>
-##        #end
-##    #end
-##</optgroup>
-
-###end
-###@navSelect2Fix()
-##
-##<a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition" class="r">增加</a>&nbsp
-##<a href="${TINY_CONTEXT_PATH+adminPath}/product/allproduct/addition">全部</a>&nbsp
-###end
     #@TzTreeSelect("topProductId" cookieProductId {"class":"input-text","data-URL":call("link",adminPath+
         "/productLine/userProductTree")})
     <span class="l">
