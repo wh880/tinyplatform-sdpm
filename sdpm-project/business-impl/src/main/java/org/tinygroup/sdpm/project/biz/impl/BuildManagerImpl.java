@@ -5,9 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
-import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
-import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.sdpm.project.biz.inter.BuildManager;
 import org.tinygroup.sdpm.project.dao.ProjectBuildDao;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
@@ -27,6 +25,10 @@ public class BuildManagerImpl implements BuildManager {
 
     public Integer softDelete(ProjectBuild build) {
         return projectBuildDao.softDelete(build);
+    }
+
+    public Integer deleteBuildByProductId(Integer productId) {
+        return projectBuildDao.deleteBuildByProductId(productId);
     }
 
     public ProjectBuild find(Integer id) {
@@ -65,17 +67,12 @@ public class BuildManagerImpl implements BuildManager {
         return projectBuildDao.batchUpdateDel(keys);
     }
 
-	public List<ProductAndLine> getProductLineTree(ProductLine t) {
-
-		return projectBuildDao.getProductLineTree(t);
-	}
     public List<ProjectBuild> findStoryList(ProjectBuild projectBuild) {
-//        projectBuildDao.findBuildStory(projectBuild.getBuildId());
         return projectBuildDao.query(projectBuild);
     }
 
     public Pager<ProductStory> findBuildStory(int start, int limit, Integer buildId) {
-        return projectBuildDao.findBuildStorys(start,limit,buildId);
+        return projectBuildDao.findBuildStoryList(start,limit,buildId);
     }
 
     public Pager<QualityBug> findBuildBug(int start, int limit, Integer buildId) {
@@ -90,29 +87,28 @@ public class BuildManagerImpl implements BuildManager {
         return projectBuildDao.getBuildByKeys(ids);
     }
 
-    public Pager<ProductStory> findnoBuildStory(int start, int limit,String condition, Integer buildId) {
-        return projectBuildDao.findNoBuildStorys(start, limit, condition, buildId);
+    public Pager<ProductStory> findNoBuildStory(int start, int limit, String condition, Integer buildId) {
+        return projectBuildDao.findNoBuildStoryList(start, limit, condition, buildId);
     }
 
-    public Pager<QualityBug> findnoBuildBug(int start, int limit,String condition, Integer buildId) {
-        return projectBuildDao.findnoBuildBugs(start,limit,condition,buildId);
+    public Pager<QualityBug> findNoBuildBug(int start, int limit, String condition, Integer buildId) {
+        return projectBuildDao.findNoBuildBugs(start,limit,condition,buildId);
     }
 
-    public Integer deletereleate(Integer storyId,Integer buildId){
-        return projectBuildDao.deletereleate(storyId,buildId);
+    public Integer deleteBuildStory(Integer storyId, Integer buildId){
+        return projectBuildDao.deleteBuildStory(storyId,buildId);
     }
 
-    public Integer deletereleateBug(Integer bugId,Integer buildId){
-        return projectBuildDao.deletereleateBug(bugId,buildId);
+    public Integer deleteBuildBug(Integer bugId, Integer buildId){
+        return projectBuildDao.deleteBuildBug(bugId,buildId);
     }
 
-
-    public Integer releateReq(Integer storyId,Integer buildId){
-        return projectBuildDao.releateReq(storyId, buildId);
+    public Integer linkBuildStory(Integer storyId, Integer buildId){
+        return projectBuildDao.linkBuildStory(storyId, buildId);
     }
 
-    public Integer releateBug(Integer bugId,Integer buildId){
-        return projectBuildDao.releateBug(bugId, buildId);
+    public Integer linkBuildBug(Integer bugId, Integer buildId){
+        return projectBuildDao.linkBuildBug(bugId, buildId);
     }
 
 }

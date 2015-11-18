@@ -1,9 +1,7 @@
 package org.tinygroup.sdpm.project.biz.inter;
 
 
-import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
-import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.tinysqldsl.Pager;
@@ -21,10 +19,16 @@ public interface BuildManager {
      * @param build
      * @return
      */
-    public Integer softDelete(ProjectBuild build);
-
+     Integer softDelete(ProjectBuild build);
     /**
-     * 根据主键id查找用户
+     * 根据产品id进行软删删除
+     *
+     * @param productId
+     * @return
+     */
+    Integer deleteBuildByProductId(Integer productId);
+    /**
+     * 根据主键id查找
      *
      * @param id 主键
      * @return
@@ -49,7 +53,7 @@ public interface BuildManager {
      * @param asc
      * @return
      */
-    public Pager<ProjectBuild> findPager(ProjectBuild build, Integer start, Integer limit, String order, boolean asc);
+     Pager<ProjectBuild> findPager(ProjectBuild build, Integer start, Integer limit, String order, boolean asc);
 
     /**
      * 新增有一个版本
@@ -75,14 +79,8 @@ public interface BuildManager {
      */
     Integer delete(int id);
 
-    public int[] batchDelBuildByIds(List<ProjectBuild> keys);
+     int[] batchDelBuildByIds(List<ProjectBuild> keys);
     
-    /**
-	 * 产品线树
-	 * @param t
-	 * @return
-	 */
-	List<ProductAndLine> getProductLineTree(ProductLine t);
     /**
      * 需求列表
      * @param projectBuild
@@ -90,40 +88,40 @@ public interface BuildManager {
      */
      List<ProjectBuild> findStoryList(ProjectBuild projectBuild);
 
-    public Pager<ProductStory> findBuildStory(int start, int limit, Integer buildId);
-    public Pager<ProductStory> findnoBuildStory(int start, int limit,String condition, Integer buildId) ;
+     Pager<ProductStory> findBuildStory(int start, int limit, Integer buildId);
+     Pager<ProductStory> findNoBuildStory(int start, int limit, String condition, Integer buildId) ;
     /**
      * 删除关联
      * @param storyId，buildId
      * @return
      */
-    public Integer deletereleate(Integer storyId,Integer buildId);
+     Integer deleteBuildStory(Integer storyId, Integer buildId);
     /**
      * 关联需求
      * @param storyId，buildId
      * @return
      */
-    public Integer releateReq(Integer storyId,Integer buildId);
-    public Pager<QualityBug> findnoBuildBug(int start, int limit,String condition, Integer buildId);
-    public Pager<QualityBug> findBuildBug(int start, int limit, Integer buildId);
+     Integer linkBuildStory(Integer storyId, Integer buildId);
+     Pager<QualityBug> findNoBuildBug(int start, int limit, String condition, Integer buildId);
+     Pager<QualityBug> findBuildBug(int start, int limit, Integer buildId);
     /**
      * 删除关联
      * @param storyId，buildId
      * @return
      */
-    public Integer deletereleateBug(Integer storyId,Integer buildId);
+     Integer deleteBuildBug(Integer storyId, Integer buildId);
     /**
      * 关联需求
      * @param storyId，buildId
      * @return
      */
-    public Integer releateBug(Integer storyId,Integer buildId);
+     Integer linkBuildBug(Integer storyId, Integer buildId);
     /**
      * 关联需求
      * @param buildId
      * @return
      */
-    public Pager<QualityBug> findBuildLegacyBug(int start, int limit, Integer buildId);
+     Pager<QualityBug> findBuildLegacyBug(int start, int limit, Integer buildId);
 
     List<ProjectBuild> getBuildByIds(String...ids);
 }
