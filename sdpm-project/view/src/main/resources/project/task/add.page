@@ -36,7 +36,7 @@
                         "input-text select2"})
                         <option value="">/</option>
                         #foreach(m : moduleList)
-                            <option value=${m.moduleId}>/${m.moduleName}</option>
+                            <option value=${m.moduleId}>${m.moduleName}</option>
                         #end
                     #end
                 #end

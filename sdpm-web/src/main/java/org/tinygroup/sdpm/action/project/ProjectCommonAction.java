@@ -28,12 +28,6 @@ public class ProjectCommonAction extends BaseController {
     }
 
 
-//    @RequestMapping("/select")
-//    public String selectProject(Integer projectId, String oldUrl, HttpServletResponse response, HttpServletRequest request) {
-//        CookieUtils.setCookie(response, TaskAction.COOKIE_PROJECT_ID, projectId.toString(), -1);
-//        return "redirect:" + oldUrl;
-//    }
-
     @RequestMapping("/selModelTask")
     public String selModelTask(String moduleId) {
         return "redirect:" + adminPath + "/project/task/index?moduleId=" + moduleId;

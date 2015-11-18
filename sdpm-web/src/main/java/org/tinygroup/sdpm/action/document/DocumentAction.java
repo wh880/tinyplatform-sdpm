@@ -135,8 +135,8 @@ public class DocumentAction extends BaseController {
     @ResponseBody
     @RequestMapping("/ajax/product")
     public List<Product> getProduct(Product product, Integer projectId) {
-        if (projectId == 0) {
-            return projectProductService.findLinkProduct();
+        if (projectId == null) {
+            return productService.findProductList(null);
         }
         List<ProjectProduct> projectProductList = projectProductService.findProducts(projectId);
 

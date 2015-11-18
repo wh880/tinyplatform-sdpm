@@ -116,7 +116,7 @@
               scope="pro-version-op"/>
 
         <!--<menu id="version-menu" name="任务菜单" href="/project/build/index" icon="" sort="1" isShow="1">-->
-        <menu id="pro-version-report" name="新建版本" href="/project/build/add" icon="icon-plus" sort="8" isShow="1"
+        <menu id="pro-version-add" name="新建版本" href="/project/build/edit" icon="icon-plus" sort="8" isShow="1"
               scope="pro-versionmenu-op"/>
         <!--</menu>-->
 

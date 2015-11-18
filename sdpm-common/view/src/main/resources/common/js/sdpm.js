@@ -1,5 +1,4 @@
 //配合sdpmItem校验
-
 $(function () {
     $("#tinypagecontent").on("click", "[data-removeid]", function (e) {
         var url = $(this).attr("href") ? $(this).attr("href") : window.location.href;

@@ -19,11 +19,11 @@ public interface ProjectProductService {
      void addProjectLinkToProduct(Integer[] productIds, Integer projectId);
 
     /**
-     * 查询所有产品
+     * 查询项目关联的产品
      *
      * @return
      */
-     List<Product> findLinkProduct();
+     List<Product> findLinkProductByProjectId(Integer projectId);
 
     /**
      * 通过projectId获得productId列表
@@ -41,10 +41,4 @@ public interface ProjectProductService {
      */
     List<ProjectProduct> findProjects(Integer productId);
 
-    /**
-     * 根据项目id删除所有关联的产品
-     * @param projectId
-     * @return
-     */
-     Integer deleteByProjectId(Integer projectId) ;
 }

@@ -18,12 +18,14 @@ package org.tinygroup.sdpm.project.dao;
 
 import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
+import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectStory;
 import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.List;
 
 public interface ProjectStoryDao extends BaseDao<ProjectStory, Integer> {
+    Pager<ProductStory> findStory(Integer projectId, Integer start, Integer limit, final OrderBy... orderByArgs);
 
     /**
      * 批量硬删除

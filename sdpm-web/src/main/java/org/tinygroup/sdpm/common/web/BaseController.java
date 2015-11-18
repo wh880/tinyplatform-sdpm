@@ -35,6 +35,21 @@ import java.util.Map;
  */
 public abstract class BaseController {
     /**
+     * 管理基础路径
+     */
+    @Value("${adminPath}")
+    protected static String adminPath;
+    /**
+     * 上传路径
+     */
+    @Value("${userfiles.basedir}")
+    protected static String UPLOAD_PATH;
+    /**
+     * 用户url前缀
+     */
+    @Value("${userFiles.prefix}")
+    protected static String UPLOAD_PREFIX;
+    /**
      * 日志对象
      */
     protected Logger logger = LoggerFactory.getLogger(BaseController.class);
@@ -48,24 +63,6 @@ public abstract class BaseController {
      */
     @Autowired
     protected Validator validator;
-
-    /**
-     * 管理基础路径
-     */
-    @Value("${adminPath}")
-    protected String adminPath;
-
-    /**
-     * 上传路径
-     */
-    @Value("${userfiles.basedir}")
-    protected String UPLOAD_PATH;
-    /**
-     * 用户url前缀
-     */
-    @Value("${userFiles.prefix}")
-    protected String UPLOAD_PREFIX;
-
     @Autowired
     private FileRepository fileRepository;
     @Autowired

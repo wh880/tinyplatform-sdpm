@@ -191,7 +191,7 @@
 							#set(taskStatus = Integer.parseInt(task?.taskStatus))
 							#set(status = (taskStatus/3)>1?"label-danger":(taskStatus==1?"label-warning":"label-success"))
 							#set(info = (task?.taskAssignedDate?"于&nbsp;"+formatDate(task?.taskAssignedDate,"yyyy-MM-dd hh:mm:ss")+"被指派":""))
-							#@ticketBoxAdmin(status getDict("taskStatus",task.taskStatus) TINY_CONTEXT_PATH+adminPath+"/project/task/findTask?taskId="+task?.no "#"+task.taskId info)#if((taskStatus/3)>1)#faIcon("fa-warning text-danger")#end ${task.taskName}#end
+							#@ticketBoxAdmin(status getDict("taskStatus",task.taskStatus) TINY_CONTEXT_PATH+adminPath+"/project/task/findTask?taskId="+task?.taskId "#"+task.taskId info)#if((taskStatus/3)>1)#faIcon("fa-warning text-danger")#end ${task.taskName}#end
 						#end
 					#end
 				##end
@@ -215,7 +215,7 @@
 							#set(bugStatus = Integer.parseInt(bug?.bugStatus))
 							#set(status = bugStatus==1?"label-warning":(bugStatus==2?"label-success":"label-danger"))
 							#set(info = (bug?.bugAssignedDate?"于&nbsp;"+formatDate(bug?.bugAssignedDate,"yyyy-MM-dd hh:mm:ss")+"被指派":""))
-							#@ticketBoxAdmin(status getDict("bugStatus",bug.bugStatus) TINY_CONTEXT_PATH+adminPath+"/quality/bug/bugInfo?bugId="+bug?.no "#"+bug.bugId info)#if(bugStatus==3)#faIcon("fa-warning text-danger")#end ${bug.bugTitle}#end
+							#@ticketBoxAdmin(status getDict("bugStatus",bug.bugStatus) TINY_CONTEXT_PATH+adminPath+"/quality/bug/bugInfo?bugId="+bug?.bugId "#"+bug.bugId info)#if(bugStatus==3)#faIcon("fa-warning text-danger")#end ${bug.bugTitle}#end
 						#end
 					#end
 				##end

@@ -40,7 +40,7 @@ public class ProjectStoryServiceImpl implements ProjectStoryService {
     private BuildManager buildManager;
 
     public int[] updateLink(List<ProjectStory> projectStoryList) {
-        return projectStoryManager.updaeLink(projectStoryList);
+        return projectStoryManager.updateLink(projectStoryList);
     }
 
     public List<Project> findProjectsByStory(Integer storyId) {
@@ -73,7 +73,7 @@ public class ProjectStoryServiceImpl implements ProjectStoryService {
     }
 
     public List<ProductStory> findStoryByProject(Integer projectId) {
-        List<ProjectStory> projectStoryList = projectStoryManager.findSrotys(projectId);
+        List<ProjectStory> projectStoryList = projectStoryManager.findStoryList(projectId);
         if (projectStoryList == null || projectStoryList.isEmpty()) {
             return new ArrayList<ProductStory>();
         }
@@ -103,7 +103,7 @@ public class ProjectStoryServiceImpl implements ProjectStoryService {
     }
 
     public Pager<ProductStory> findStoryByProject(Integer projectId, Integer start, Integer limit, String order, String ordertype, String moduleId) {
-        List<ProjectStory> storyList = projectStoryManager.findSrotys(projectId);
+        List<ProjectStory> storyList = projectStoryManager.findStoryList(projectId);
         String[] ids = new String[storyList.size()];
         for (int i = 0; i < storyList.size(); i++) {
             ids[i] = String.valueOf(storyList.get(i).getStoryId());

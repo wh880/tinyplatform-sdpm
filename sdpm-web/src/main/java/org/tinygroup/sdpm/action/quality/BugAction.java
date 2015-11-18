@@ -494,7 +494,7 @@ public class BugAction extends BaseController {
         return "/testManagement/page/tabledemo/editionpaging.pagelet";
     }
 
-    @RequiresPermissions("tbugpro")
+    @RequiresPermissions("bug-add")
     @RequestMapping("/add")
     public String add(Model model) {
         List<Project> projects = projectService.findProjectList(null, null, null);
@@ -504,7 +504,7 @@ public class BugAction extends BaseController {
         return "/testManagement/page/proposeBug.page";
     }
 
-    @RequiresPermissions("tbugpro")
+    @RequiresPermissions("bug-add")
     @RequestMapping("/toCopy")
     public String copy(Integer bugId, Model model) {
         QualityBug bug = bugService.findById(bugId);
