@@ -122,7 +122,7 @@ public class UserAction extends BaseController {
      * @param password2
      * @return
      */
-    @RequiresPermissions(value = {"org-user-edit", "org-user-add", "organizationAddUser"}, logical = Logical.OR)
+    @RequiresPermissions("organizationAddUser")
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(OrgUser user, Model model, String password1, String password2) {
         if (StringUtil.isBlank(user.getOrgUserId())) {
@@ -165,7 +165,7 @@ public class UserAction extends BaseController {
      * @param orgUserId
      * @return
      */
-    @RequiresPermissions(value = {"org-user-add", "organizationAddUser"}, logical = Logical.OR)
+    @RequiresPermissions("organizationAddUser")
     @ResponseBody
     @RequestMapping(value = "/usercheck")
     public Map userCheck(@RequestParam("param") String account, String orgUserId) {

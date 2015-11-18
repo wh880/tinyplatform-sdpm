@@ -145,8 +145,12 @@
                     #end
                 #end
                 #@Tselect2Fix()
-                <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/form">增加</a>
-                <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/list" class="r">全部</a>
+                    #@hasMenu("organizationAddUser")
+                    <a href="${TINY_CONTEXT_PATH}/a/org/user/form">增加</a>
+                    #end
+                    #@hasMenu("organizationUser")
+                    <a href="${TINY_CONTEXT_PATH}/a/org/user/list" class="r">全部</a>
+                    #end
                 #end
             #end
         #end
@@ -163,8 +167,12 @@
                     #end
                 #end
                 #@Tselect2Fix()
-                <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/form">增加</a>
-                <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/list" class="r">全部</a>
+                    #@hasMenu("organizationAddUser")
+                    <a href="${TINY_CONTEXT_PATH}/a/org/user/form">增加</a>
+                    #end
+                    #@hasMenu("organizationUser")
+                    <a href="${TINY_CONTEXT_PATH}/a/org/user/list" class="r">全部</a>
+                    #end
                 #end
             #end
         #end
@@ -181,8 +189,12 @@
                     #end
                 #end
                 #@Tselect2Fix()
-                <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/form">增加</a>
-                <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/list" class="r">全部</a>
+                    #@hasMenu("organizationAddUser")
+                    <a href="${TINY_CONTEXT_PATH}/a/org/user/form">增加</a>
+                    #end
+                    #@hasMenu("organizationUser")
+                    <a href="${TINY_CONTEXT_PATH}/a/org/user/list" class="r">全部</a>
+                    #end
                 #end
             #end
         #end
@@ -199,8 +211,12 @@
                     #end
                 #end
                 #@Tselect2Fix()
-                <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/form">增加</a>
-                <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/list" class="r">全部</a>
+                    #@hasMenu("organizationAddUser")
+                    <a href="${TINY_CONTEXT_PATH}/a/org/user/form">增加</a>
+                    #end
+                    #@hasMenu("organizationUser")
+                    <a href="${TINY_CONTEXT_PATH}/a/org/user/list" class="r">全部</a>
+                    #end
                 #end
             #end
         #end

@@ -48,7 +48,8 @@
     #end
 #end
 #include("doc-tab.page")
-#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/document/doc/addSave" "post" {"class":"add","enctype":"multipart/form-data"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/document/doc/addSave" "post" {"class":"add","enctype":
+    "multipart/form-data"})
 <div style="width:100%">
 <div class="infoContent">
     <p class="titleName">创建文档</p>
@@ -68,8 +69,13 @@
                         #end
                     #end
                     #@Tselect2Fix()
-                        <a href="${TINY_CONTEXT_PATH+adminPath}/project/form" class="r">增加</a>
-                        <a href="${TINY_CONTEXT_PATH+adminPath}/project/list">全部</a>#end
+                        #@hasMenu("project-op-add")
+                            <a href="${TINY_CONTEXT_PATH+adminPath}/project/form" class="r">增加</a>
+                        #end
+                        #@hasMenu("project-op-all")
+                            <a href="${TINY_CONTEXT_PATH+adminPath}/project/list">全部</a>
+                        #end
+                    #end
                     <script type="text/javascript">
                         $("#${sid}").on("change", function () {
                             var pId = $("#${sid}  option:selected").val();
@@ -104,8 +110,12 @@
                         <option value="0">/</option>
                     #end
                     #@Tselect2Fix()
-                        <a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition" class="r">增加</a>
-                        <a href="${TINY_CONTEXT_PATH+adminPath}/product/allproduct/addition">全部</a>
+                        #@hasMenu("newproduct")
+                            <a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition" class="r">增加</a>
+                        #end
+                        #@hasMenu("allproduct")
+                            <a href="${TINY_CONTEXT_PATH+adminPath}/product/allproduct/addition">全部</a>
+                        #end
                     #end
                 #end
             #end

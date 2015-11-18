@@ -30,16 +30,22 @@
                         <option value="${product?.productId}">${product?.productName}</option>
                     #end
                 #end
-
                 #@Tselect2Fix()
-                    <a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition" class="r">增加</a>
-                    <a href="${TINY_CONTEXT_PATH+adminPath}/product/allproduct/addition">全部</a>#end
+                    #@hasMenu("newproduct")
+                        <a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition" class="r">增加</a>
+                    #end
+                    #@hasMenu("allproduct")
+                        <a href="${TINY_CONTEXT_PATH+adminPath}/product/allproduct/addition">全部</a>
+                    #end
+                #end
                 <script type="text/javascript">
                     $("#${sid}").on("change", function () {
                         var pId = $("#${sid}  option:selected").val();
-                        if(pId>0){
-                            ajaxRead("${sid}", "docModule", "moduleId", "moduleName", "/document/ajax/module?productId=" + pId, ${doc?.docModule?doc.docModule : 0});
+                        if (pId > 0) {
+                            ajaxRead("${sid}", "docModule", "moduleId", "moduleName", "/document/ajax/module?productId=" + pId, ${doc?.docModule ? doc.docModule : 0
                         }
+                        );
+                    }
                     })
                 </script>
             #end

@@ -14,7 +14,7 @@
             #end
         #end
 
-        #set(m2=menuManager.getMenu("org-user-add"))
+        #set(m2=menuManager.getMenu("organizationAddUser"))
         #if(m2)
             #@aExtendButton("btn radius btn-primary btn-sm" TINY_CONTEXT_PATH+adminPath+
                 "/org/user/form")#buttonIcon(iconClass=m2.icon)添加用户#end

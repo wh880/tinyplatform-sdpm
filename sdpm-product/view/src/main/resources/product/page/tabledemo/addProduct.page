@@ -16,14 +16,14 @@
         #@formControlDiv("col-3")
             #@Tselect2F()
                 <script>
-                    $(function(){
+                    $(function () {
                         #if(!cookieProductLineId)
                             var productLineId = $("#productLineNameOnTop").attr("value");
-                            if(productLineId>0) {
+                            if (productLineId > 0) {
                                 $("select[name=productLineId]").val(productLineId).trigger("change");
                             }
                         #end
-                        $("select[name=productLineId]").on("change",function(){
+                        $("select[name=productLineId]").on("change", function () {
                             $("input[name=productName]").blur();
                             $("input[name=productCode]").blur();
                         });
@@ -36,8 +36,12 @@
             #end
 
             #@Tselect2Fix()
-                <a href="${TINY_CONTEXT_PATH}/a/productLine/content/add">增加</a>
-                <a href="${TINY_CONTEXT_PATH}/a/productLine/all" class="r">全部</a>
+                #@hasMenu("productLine-add")
+                    <a href="${TINY_CONTEXT_PATH}/a/productLine/content/add">增加</a>
+                #end
+                #@hasMenu("productLine-view-all")
+                    <a href="${TINY_CONTEXT_PATH}/a/productLine/all" class="r">全部</a>
+                #end
             #end
 
 
@@ -57,20 +61,20 @@
             "productName","class":"input-text"})
         <script>
 
-            $("input[name=productName]").on("blur",function(){
+            $("input[name=productName]").on("blur", function () {
                 var pName = $(this).val();
-                if(pName){
+                if (pName) {
                     var plId = $("select[name=productLineId] option:selected").val();
-                    if(plId>0){
+                    if (plId > 0) {
                         $.ajax({
-                            url:"${TINY_CONTEXT_PATH+adminPath}/product/judgeProductName",
-                            type:"POST",
-                            data:{productName:pName,productLineId:plId},
-                            success:function(data){
-                                if(data.status=="y"){
+                            url: "${TINY_CONTEXT_PATH+adminPath}/product/judgeProductName",
+                            type: "POST",
+                            data: {productName: pName, productLineId: plId},
+                            success: function (data) {
+                                if (data.status == "y") {
                                     $("input[name=productName]").addClass("Validform_error");
                                     $("input[name=productName]").parent().parent().find("div[class=col-2]").html("<span class='Validform_checktip Validform_wrong'>该产品已存在！</span>");
-                                }else{
+                                } else {
                                     $("input[name=productName]").removeClass("Validform_error");
                                     $("input[name=productName]").parent().parent().find("div[class=col-2]").html("");
                                 }
@@ -81,7 +85,7 @@
                 }
             });
         </script>
-        #end
+    #end
     #@validateDiv("col-2")#end
 #end
 
@@ -93,25 +97,25 @@
             "text" "productCode" ""{"placeholder":"请输入产品代号","datatype":"*","nullmsg":"代号不能为空！","id":
             "productCode","class":"input-text"})
         <script>
-            $("input[name=productCode]").on("blur",function(){
+            $("input[name=productCode]").on("blur", function () {
                 var pName = $(this).val();
-                if(pName){
-                $.ajax({
-                    url:"${TINY_CONTEXT_PATH+adminPath}/product/judgeProductName",
-                    type:"POST",
-                    data:{productCode:pName},
-                    success:function(data){
-                        if(data.status=="y"){
-                            $("input[name=productCode]").addClass("Validform_error");
-                            $("input[name=productCode]").parent().parent().find("div[class=col-2]").html("<span class='Validform_checktip Validform_wrong'>该代号已存在！</span>");
-                        }else{
-                            $("input[name=productCode]").removeClass("Validform_error");
-                            $("input[name=productCode]").parent().parent().find("div[class=col-2]").html("");
+                if (pName) {
+                    $.ajax({
+                        url: "${TINY_CONTEXT_PATH+adminPath}/product/judgeProductName",
+                        type: "POST",
+                        data: {productCode: pName},
+                        success: function (data) {
+                            if (data.status == "y") {
+                                $("input[name=productCode]").addClass("Validform_error");
+                                $("input[name=productCode]").parent().parent().find("div[class=col-2]").html("<span class='Validform_checktip Validform_wrong'>该代号已存在！</span>");
+                            } else {
+                                $("input[name=productCode]").removeClass("Validform_error");
+                                $("input[name=productCode]").parent().parent().find("div[class=col-2]").html("");
+                            }
                         }
-                    }
-                });
-                return false;
-            }
+                    });
+                    return false;
+                }
             });
         </script>
     #end
@@ -129,8 +133,12 @@
                 ajaxRead("${sid}", "productOwner", "orgUserId", "orgUserRealName", "/org/user/userList");
             </script>
             #@Tselect2Fix()
-                <a href="${TINY_CONTEXT_PATH}/a/org/user/form">增加</a>
-                <a href="${TINY_CONTEXT_PATH}/a/org/user/list" class="r">全部</a>
+                #@hasMenu("organizationAddUser")
+                    <a href="${TINY_CONTEXT_PATH}/a/org/user/form">增加</a>
+                #end
+                #@hasMenu("organizationUser")
+                    <a href="${TINY_CONTEXT_PATH}/a/org/user/list" class="r">全部</a>
+                #end
             #end
         #end
 
@@ -152,8 +160,12 @@
             </script>
 
             #@Tselect2Fix()
-                <a href="${TINY_CONTEXT_PATH}/a/org/user/form">增加</a>
-                <a href="${TINY_CONTEXT_PATH}/a/org/user/list" class="r">全部</a>
+                #@hasMenu("organizationAddUser")
+                    <a href="${TINY_CONTEXT_PATH}/a/org/user/form">增加</a>
+                #end
+                #@hasMenu("organizationUser")
+                    <a href="${TINY_CONTEXT_PATH}/a/org/user/list" class="r">全部</a>
+                #end
             #end
 
 
@@ -175,8 +187,12 @@
             </script>
 
             #@Tselect2Fix()
-                <a href="${TINY_CONTEXT_PATH}/a/org/user/form">增加</a>
-                <a href="${TINY_CONTEXT_PATH}/a/org/user/list" class="r">全部</a>
+                #@hasMenu("organizationAddUser")
+                    <a href="${TINY_CONTEXT_PATH}/a/org/user/form">增加</a>
+                #end
+                #@hasMenu("organizationUser")
+                    <a href="${TINY_CONTEXT_PATH}/a/org/user/list" class="r">全部</a>
+                #end
             #end
         #end
 

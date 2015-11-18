@@ -1,89 +1,104 @@
 <script type="text/javascript">
-    function ajaxRead(id,toName,opKey,opvalue,url,value,isBuild){
-    		var selectCheck = "select[name="+toName+"]";
-    		$(selectCheck).each(function(){
-    			var sele = $(this);
-    			var s;
-    			$.ajax({
-    				type: "POST",
-    				url: "${TINY_CONTEXT_PATH+adminPath}"+url,
-    				data: $(this).attr('data'),
-    				dataType:"json",
-    				success: function(data){
-    					sele.empty();
-                        var em;
-    					if("build"==(isBuild)){
-    					 em = "<option value='0' selected  >trunk</option>";
-    					}else if("module"==(isBuild)){
-    					 em = "<option value='0' selected  >/</option>";
-    					}
-    					sele.append(em);
-                            for(var i=0,l=data.length;i<l;i++){
-                                var em = "<option value='"+data[i][opKey]+"' >"+ data[i][opvalue] +"</option>";
-                                sele.append(em);
+    function ajaxRead(id, toName, opKey, opvalue, url, value, isBuild) {
+        var selectCheck = "select[name=" + toName + "]";
+        $(selectCheck).each(function () {
+            var sele = $(this);
+            var s;
+            $.ajax({
+                type: "POST",
+                url: "${TINY_CONTEXT_PATH+adminPath}" + url,
+                data: $(this).attr('data'),
+                dataType: "json",
+                success: function (data) {
+                    sele.empty();
+                    var em;
+                    if ("build" == (isBuild)) {
+                        em = "<option value='0' selected  >trunk</option>";
+                    } else if ("module" == (isBuild)) {
+                        em = "<option value='0' selected  >/</option>";
+                    }
+                    sele.append(em);
+                    for (var i = 0, l = data.length; i < l; i++) {
+                        var em = "<option value='" + data[i][opKey] + "' >" + data[i][opvalue] + "</option>";
+                        sele.append(em);
 
-                            }
-    					if(value!=null) {
-    						sele.val(value).trigger("change");
-    					}else {
-    						sele.val(data[0][opKey]).trigger("change");
-    					}
-    				},
-    				error: function(res){
+                    }
+                    if (value != null) {
+                        sele.val(value).trigger("change");
+                    } else {
+                        sele.val(data[0][opKey]).trigger("change");
+                    }
+                },
+                error: function (res) {
 //    					alert("失败");
-    				}
-    			});
+                }
+            });
 
 
-    		});
+        });
 
-    	}
+    }
 </script>
 #macro Tselect2Body(name value mapInfo)
-#set(sid=mapInfo?.id?:sid)
-	<select name="${name}" class="form-control" #getMapInfo(mapInfo) id="${sid}">
-	#bodyContent
-	</select>
-	<script type="text/javascript">
-	$(function(){
-		$("#${sid}").select2();
-		#if(value)
-		var valuestr="${value}";
-		var values=valuestr.split(",");
-		if(values.length>1){
-			$("#${sid}").val(values).trigger("change");
-		}else{
-			$("#${sid}").val(valuestr).trigger("change");
-		}
-		#end
-	});
-	</script>
+    #set(sid=mapInfo?.id?:sid)
+<select name="${name}" class="form-control" #getMapInfo(mapInfo) id="${sid}">
+    #bodyContent
+</select>
+<script type="text/javascript">
+    $(function () {
+        $("#${sid}").select2();
+        #if(value)
+            var valuestr = "${value}";
+            var values = valuestr.split(",");
+            if (values.length > 1) {
+                $("#${sid}").val(values).trigger("change");
+            } else {
+                $("#${sid}").val(valuestr).trigger("change");
+            }
+        #end
+    });
+</script>
 #end
-    #@div(divClass="infoContent")
-        <p class="titleName">基本信息</p>
-    ##该样式在comm.css样式中自定义
-        #@table("adjustTable")
-            #@thead()
-            #end
-            #@tbody()
-                #@tr()
-                    #@th()所属产品#end
-                    #@td()
-                        #@Tselect2F()
-    <script type="text/javascript">
-        $(function() {
-            $("#${sid}").on("change", function () {
-                var pId = $("#${sid}  option:selected").val();
-                if(pId>0){
-                    ajaxRead("${sid}", "moduleId", "moduleId", "moduleName", "/quality/bug/ajax/module?moduleRoot="+ pId, ${bug?.moduleId?:0},"module");
-                    ajaxRead("${sid}","planId","planId","planName","/quality/bug/ajax/plan?deleted=0&productId="+pId,${bug?.planId?:0});
-                    ajaxRead("${sid}","bugOpenedBuild","buildId","buildName","/quality/bug/ajax/build?buildProduct="+pId,${bug?.bugOpenedBuild?:0},"build");
-                    ajaxRead("${sid}","bugResolvedBuild","buildId","buildName","/quality/bug/ajax/build?buildProduct="+pId,${bug?.bugResolvedBuild?:0},"build");
-                }
-            })
-        });
-    </script>
-                        #@Tselect2Body("productId" bug?.productId?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+#@div(divClass="infoContent")
+<p class="titleName">基本信息</p>
+##该样式在comm.css样式中自定义
+    #@table("adjustTable")
+        #@thead()
+        #end
+        #@tbody()
+            #@tr()
+                #@th()所属产品#end
+                #@td()
+                    #@Tselect2F()
+                    <script type="text/javascript">
+                        $(function () {
+                            $("#${sid}").on("change", function () {
+                                var pId = $("#${sid}  option:selected").val();
+                                if (pId > 0) {
+                                    ajaxRead("${sid}", "moduleId", "moduleId", "moduleName", "/quality/bug/ajax/module?moduleRoot=" + pId, ${bug?.moduleId ? : 0
+                                }
+                                ,
+                                "module"
+                                );
+                            ajaxRead("${sid}", "planId", "planId", "planName", "/quality/bug/ajax/plan?deleted=0&productId=" + pId, ${bug?.planId ? : 0
+                        });
+                        ajaxRead("${sid}", "bugOpenedBuild", "buildId", "buildName", "/quality/bug/ajax/build?buildProduct=" + pId, ${bug?.bugOpenedBuild ? : 0
+                        },
+                        "build"
+                        )
+                        ;
+                        ajaxRead("${sid}", "bugResolvedBuild", "buildId", "buildName", "/quality/bug/ajax/build?buildProduct=" + pId, ${bug?.bugResolvedBuild ? : 0
+                        },
+                        "build"
+                        )
+                        ;
+                        }
+                        })
+                        })
+                        ;
+                    </script>
+                        #@Tselect2Body(
+                            "productId" bug?.productId?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                             #foreach(product : ProductUtils.getAllProductListByUser())
                                 #if(product?.deleted==0)
                                 <option value="${product?.productId}">${product?.productName}</option>
@@ -91,356 +106,405 @@
                             #end
                         #end
 
-                            #@Tselect2Fix()
-                            <a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition" class="r ">增加</a>
-                            <a href="${TINY_CONTEXT_PATH+adminPath}/product/allproduct/addition">全部</a>
-                            #end
-                	 #end
-                 #end
+                        #@Tselect2Fix()
+                        <a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition" class="r ">增加</a>
+                        <a href="${TINY_CONTEXT_PATH+adminPath}/product/allproduct/addition">全部</a>
+                        #end
+                    #end
+                #end
                 #@tr()
                     #@th()所属模块#end
                     #@td()
                         #@Tselect2F()
-                        #@Tselect2Body("moduleId" bug?.moduleId?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                        #end
+                            #@Tselect2Body("moduleId" bug?.moduleId?:0 {"class":
+                                "input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                            #end
                         <script type="text/javascript">
-                            $(function() {
+                            $(function () {
                                 $("#${sid}").on("change", function () {
                                     var mId = $("#${sid}  option:selected").val();
                                     var pId = $("select[name=productId]  option:selected").val();
-                                    if(mId>=0){
-                                        ajaxRead("${sid}", "storyId", "storyId", "storyTitle", "/quality/bug/ajax/story?productId=" + pId + "&moduleId=" + mId, ${bug?.storyId?:0});
+                                    if (mId >= 0) {
+                                        ajaxRead("${sid}", "storyId", "storyId", "storyTitle", "/quality/bug/ajax/story?productId=" + pId + "&moduleId=" + mId, ${bug?.storyId ? : 0
                                     }
-                                })
+                                    );
+                            }
+                            })
                             })
                         </script>
                         #end
 
-                #@tr()
-                    #@th()所属计划#end
-                    #@td()
-                        #@Tselect2F()
-                        #@Tselect2Body("planId" bug?.planId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        #@tr()
+                            #@th()所属计划#end
+                            #@td()
+                                #@Tselect2F()
+                                    #@Tselect2Body("planId" bug?.planId {"class":
+                                        "input-text select2"}) ##,"multiple":"multiple"加上为多选项
 
-                        #end
-                            #@Tselect2Fix()
-                            <a href="${TINY_CONTEXT_PATH+adminPath}/product/plan/addplan" class="r ">增加</a>
-                            <a href="${TINY_CONTEXT_PATH+adminPath}/product/plan/content">全部</a>#end
-                        #end
-                     #end
-                #end 	 #end
+                                    #end
+                                    #@Tselect2Fix()
+                                    <a href="${TINY_CONTEXT_PATH+adminPath}/product/plan/addplan" class="r ">增加</a>
+                                    <a href="${TINY_CONTEXT_PATH+adminPath}/product/plan/content">全部</a>#end
+                                #end
+                            #end
+                        #end     #end
                 #end
                 #@tr()
                     #@th()Bug类型#end
                     #@td()
-                     #@Tselect2F()
-	                   		 #@Tselect2Body("bugType" bug?.bugType {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        #for(type : getDict("bugType"))
-	                        <option value="${type.value}">${type.text}</option>
-	                        #end
-	                    	#end                
-##	                    	#@Tselect2Fix()
-##	                    		<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/proposeBug.page" class="r">增加</a>
-##	                    		<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/Bug.page">全部</a>
-##	                    	#end
-                	  #end
-
-                    #end
-                #end
-                #@tr()
-                    #@th()优先级#end
-                    #@td()
-                    	#@Tselect2F()
-	                   		 #@Tselect2Body("priority" bug?.priority {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        #for(pri : getDict("bugPriority"))
-                                    #@tinyOptionItem(pri.value)${pri.text}#end
-                            #end
-	                    	#end                
-                	  #end
-                	#end
-                #end
-                #@tr()
-                    #@th()Bug状态#end
-                    #@td()
-                    	#@Tselect2F()
-	                   		 #@Tselect2Body("bugStatus" bug?.bugStatus {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        #for(status : getDict("bugStatus"))
-                                    #@tinyOptionItem(status.value)${status.text}#end
-                            #end
-	                    	#end                
-                	  	#end
-                    #end
-                #end
-                #@tr()
-                    #@th()指派给#end
-                    #@td()
                         #@Tselect2F()
-                        #@Tselect2Body("bugAssignedTo" bug?.bugAssignedTo?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                        #foreach(user : userList)
-                        <option value="${user?.orgUserId}">${user?.orgUserRealName}</option>
+                            #@Tselect2Body(
+                                "bugType" bug?.bugType {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                                #for(type : getDict("bugType"))
+                            <option value="${type.value}">${type.text}</option>
+                            #end
                         #end
-                        #end
-                            #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH+adminPath}/org/user/form" class="r ">增加</a>#end
-                        #end
-                        #@validateDiv("col-2")#end
+                    ##	                    	#@Tselect2Fix()
+                    ##	                    		<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/proposeBug.page" class="r">增加</a>
+                    ##	                    		<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/Bug.page">全部</a>
+                    ##	                    	#end
                     #end
+
                 #end
-                #@tr()
-                    #@th()操作系统#end
-                    #@td()
+            #end
+            #@tr()
+                #@th()优先级#end
+                #@td()
                     #@Tselect2F()
-                             #@Tselect2Body("operatingSystem" bug?.operatingSystem {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                             #for(os : getDict("bugOS"))
-                                    #@tinyOptionItem(os.value)${os.text}#end
-                            #end
-	                    	#end 
-	                  #end               
-                	#end
-                #end
-                #@tr()
-                    #@th()浏览器#end
-                    #@td()
-						#@Tselect2F()
-	                   		 #@Tselect2Body("browser" bug?.browser {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        #for(bro : getDict("bugBrowser"))
-                                    #@tinyOptionItem(bro.value)${bro.text}#end
-                            #end
-	                    	#end                
-                		#end
-                    #end
-                #end
-                #@tr()
-                    #@th()关键词#end
-                    #@td()
-                        #tinyInput("text" "bugKeywords" bug?.bugKeywords {"datatype":"","id":"版本","class":"input-text"})
-                    #end
-                #end
-                #@tr()
-                    #@th()抄送给#end
-                    	#@td()
-                            #@Tselect2F()
-                            #@Tselect2Body("bugMailto" bug?.bugMailto {"class":"input-text select2","multiple":"multiple"}) ##,"multiple":"multiple"加上为多选项
-                            #foreach(user : userList)
-                            <option value="${user?.orgUserId}">${user?.orgUserRealName}</option>
-                            #end
-                            #end
-                                #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH+adminPath}/org/user/form" class="r ">增加</a>#end
-                            #end
-                	  	#end
+                        #@Tselect2Body(
+                            "priority" bug?.priority {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                            #for(pri : getDict("bugPriority"))
+                            #@tinyOptionItem(pri.value)${pri.text}#end
+                        #end
                     #end
                 #end
             #end
         #end
+        #@tr()
+            #@th()Bug状态#end
+            #@td()
+                #@Tselect2F()
+                    #@Tselect2Body(
+                        "bugStatus" bug?.bugStatus {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        #for(status : getDict("bugStatus"))
+                        #@tinyOptionItem(status.value)${status.text}#end
+                    #end
+                #end
+            #end
+        #end
+    #end
+    #@tr()
+        #@th()指派给#end
+        #@td()
+            #@Tselect2F()
+                #@Tselect2Body(
+                    "bugAssignedTo" bug?.bugAssignedTo?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                    #foreach(user : userList)
+                    <option value="${user?.orgUserId}">${user?.orgUserRealName}</option>
+                    #end
+                #end
+                #@Tselect2Fix()
+                    #@hasMenu("organizationAddUser")
+                    <a href="${TINY_CONTEXT_PATH}/a/org/user/form">增加</a>
+                    #end
+                    #@hasMenu("organizationUser")
+                    <a href="${TINY_CONTEXT_PATH}/a/org/user/list" class="r">全部</a>
+                    #end
+                #end
+            #end
+            #@validateDiv("col-2")#end
+        #end
+    #end
+    #@tr()
+        #@th()操作系统#end
+        #@td()
+            #@Tselect2F()
+                #@Tselect2Body("operatingSystem" bug?.operatingSystem {"class":
+                    "input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                    #for(os : getDict("bugOS"))
+                    #@tinyOptionItem(os.value)${os.text}#end
+                #end
+            #end
+        #end
+    #end
 #end
-    #@div(divClass="infoContent")
-        <p class="titleName">项目/需求/任务</p>
-    ##该样式在comm.css样式中自定义
-        #@table("adjustTable")
-            #@thead()
+#@tr()
+    #@th()浏览器#end
+    #@td()
+        #@Tselect2F()
+            #@Tselect2Body("browser" bug?.browser {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                #for(bro : getDict("bugBrowser"))
+                #@tinyOptionItem(bro.value)${bro.text}#end
             #end
-            #@tbody()
-                #@tr()
-                    #@th()所属项目#end
-                    #@td()
-                        #@Tselect2F()
-                            <script type="text/javascript">
-                                $("#${sid}").on("change",function(){
-                                    var pId = $("#${sid}  option:selected").val();
-                                    if(pId>0){
-                                        ajaxRead("${sid}","taskId","taskId","taskName","/quality/bug/ajax/task?taskProject="+pId,${bug?.taskId?:0});
-                                    }
-                                })
-                            </script>
-                        #@Tselect2Body("projectId" bug?.projectId?:(projectList.size()>0?projectList.get(0).projectId:0) {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                         #foreach(project : ProjectUtils.getUserProjectList())
-                        <option value="${project?.projectId}">${project?.projectName}</option>
-                        #end
-                        #end
-
-                            #@Tselect2Fix()
-                            <a href="${TINY_CONTEXT_PATH+adminPath}/project/form" class="r ">增加</a>
-                            <a href="${TINY_CONTEXT_PATH+adminPath}/project/list">全部</a>
-                            #end
-                        #end
-                 #end
+        #end
+    #end
+#end
+#end
+#@tr()
+    #@th()关键词#end
+    #@td()
+        #tinyInput("text" "bugKeywords" bug?.bugKeywords {"datatype":"","id":"版本","class":"input-text"})
+    #end
+#end
+#@tr()
+    #@th()抄送给#end
+    #@td()
+        #@Tselect2F()
+            #@Tselect2Body("bugMailto" bug?.bugMailto {"class":"input-text select2","multiple":
+                "multiple"}) ##,"multiple":"multiple"加上为多选项
+                #foreach(user : userList)
+                <option value="${user?.orgUserId}">${user?.orgUserRealName}</option>
                 #end
-                    #@tr()
-                    #@th()相关需求#end
-                    #@td()
-                        #@Tselect2F()
-                            #@Tselect2Body("storyId" "" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-
-                            #end
-                            #@Tselect2Fix()
-                            <a href="${TINY_CONTEXT_PATH+adminPath}/product/story/addstory" class="r ">增加</a>
-                            <a href="${TINY_CONTEXT_PATH+adminPath}/product/story?choose=1">全部</a>
-                            #end
-                        #end
-                        #end
-                    #end
-                #@tr()
-                    #@th()相关任务#end
-                    #@td()
-                        #@Tselect2F()
-                        #@Tselect2Body("taskId" bug?.taskId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-
-                        #end
-                            #@Tselect2Fix()
-                            <a href="${TINY_CONTEXT_PATH+adminPath}/project/task/form" class="r ">增加</a>
-                            <a href="${TINY_CONTEXT_PATH+adminPath}/project/task/index">全部</a>#end
-                        #end
-                    #end
+            #end
+            #@Tselect2Fix()
+                #@hasMenu("organizationAddUser")
+                <a href="${TINY_CONTEXT_PATH}/a/org/user/form">增加</a>
                 #end
+                #@hasMenu("organizationUser")
+                <a href="${TINY_CONTEXT_PATH}/a/org/user/list" class="r">全部</a>
                 #end
             #end
         #end
+    #end
+#end
+#end
+#end
+#end
+#end
+#@div(divClass="infoContent")
+<p class="titleName">项目/需求/任务</p>
+##该样式在comm.css样式中自定义
+    #@table("adjustTable")
+        #@thead()
+        #end
+        #@tbody()
+            #@tr()
+                #@th()所属项目#end
+                #@td()
+                    #@Tselect2F()
+                    <script type="text/javascript">
+                        $("#${sid}").on("change", function () {
+                            var pId = $("#${sid}  option:selected").val();
+                            if (pId > 0) {
+                                ajaxRead("${sid}", "taskId", "taskId", "taskName", "/quality/bug/ajax/task?taskProject=" + pId, ${bug?.taskId ? : 0
+                            }
+                            );
+                        }
+                        })
+                    </script>
+                        #@Tselect2Body(
+                            "projectId" bug?.projectId?:(projectList.size()>0?projectList.get(0).projectId:0) {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                            #foreach(project : ProjectUtils.getUserProjectList())
+                            <option value="${project?.projectId}">${project?.projectName}</option>
+                            #end
+                        #end
 
-    #@div(divClass="infoContent")
-        <p class="titleName">BUG的一生</p>
-    ##该样式在comm.css样式中自定义
-        #@table("adjustTable")
-            #@thead()
+                        #@Tselect2Fix()
+                        <a href="${TINY_CONTEXT_PATH+adminPath}/project/form" class="r ">增加</a>
+                        <a href="${TINY_CONTEXT_PATH+adminPath}/project/list">全部</a>
+                        #end
+                    #end
+                #end
             #end
-            #@tbody()
-                #@tr()
-                    #@th()由谁创建#end
-                    #@td()
-                        #@Tselect2F()
-                        #@Tselect2Body("bugOpenedBy" bug?.bugOpenedBy?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+            #@tr()
+                #@th()相关需求#end
+                #@td()
+                    #@Tselect2F()
+                        #@Tselect2Body("storyId" "" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+
+                        #end
+                        #@Tselect2Fix()
+                        <a href="${TINY_CONTEXT_PATH+adminPath}/product/story/addstory" class="r ">增加</a>
+                        <a href="${TINY_CONTEXT_PATH+adminPath}/product/story?choose=1">全部</a>
+                        #end
+                    #end
+                #end
+            #end
+            #@tr()
+                #@th()相关任务#end
+                #@td()
+                    #@Tselect2F()
+                        #@Tselect2Body(
+                            "taskId" bug?.taskId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+
+                        #end
+                        #@Tselect2Fix()
+                        <a href="${TINY_CONTEXT_PATH+adminPath}/project/task/form" class="r ">增加</a>
+                        <a href="${TINY_CONTEXT_PATH+adminPath}/project/task/index">全部</a>#end
+                    #end
+                #end
+            #end
+        #end
+    #end
+#end
+
+#@div(divClass="infoContent")
+<p class="titleName">BUG的一生</p>
+##该样式在comm.css样式中自定义
+    #@table("adjustTable")
+        #@thead()
+        #end
+        #@tbody()
+            #@tr()
+                #@th()由谁创建#end
+                #@td()
+                    #@Tselect2F()
+                        #@Tselect2Body("bugOpenedBy" bug?.bugOpenedBy?:0 {"class":
+                            "input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                            #foreach(user : userList)
+                            <option value="${user?.orgUserId}">${user?.orgUserRealName}</option>
+                            #end
+                        #end
+                        #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH+adminPath}/org/user/form" class="r ">增加</a>#end
+                    #end
+                #end
+            #end
+            #@tr()
+                #@th()<span class="c-red">*</span>影响版本#end
+                #@td()
+                    #@Tselect2F()
+                        #@Tselect2Body("bugOpenedBuild" bug?.bugOpenedBuild {"class":"input-text select2","multiple":
+                            "multiple"}) ##,"multiple":"multiple"加上为多选项
+                        #end
+                        #@Tselect2Fix()
+                        <a href="${TINY_CONTEXT_PATH+adminPath}/project/build/add" class="r ">增加</a>
+                        <a href="${TINY_CONTEXT_PATH+adminPath}/project/build/index">全部</a>
+                        #end
+                    #end
+                #end
+            #end
+            #@tr()
+                #@th()解决者#end
+                #@td()
+                    #@Tselect2F()
+                        #@Tselect2Body("bugResolvedBy" bug?.bugResolvedBy?:0 {"class":
+                            "input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        <option value=""></option>
+                            #foreach(user : userList)
+
+                            <option value="${user?.orgUserId}">${user?.orgUserRealName}</option>
+                            #end
+                        #end
+
+                        #@Tselect2Fix()
+                            #@hasMenu("organizationAddUser")
+                            <a href="${TINY_CONTEXT_PATH}/a/org/user/form">增加</a>
+                            #end
+                            #@hasMenu("organizationUser")
+                            <a href="${TINY_CONTEXT_PATH}/a/org/user/list" class="r">全部</a>
+                            #end
+                        #end
+                    #end
+                    #@validateDiv("col-2")#end
+                #end
+            #end
+            #@tr()
+                #@th()解决日期#end
+                #@td()
+                    ${bug?.bugResolvedDate?formatDate(bug?.bugResolvedDate,"yyyy-MM-dd hh-mm-ss"):""}
+                #end
+            #end
+            #@tr()
+                #@th()解决版本#end
+                #@td()
+                    #@Tselect2F()
+                        #@Tselect2Body("bugResolvedBuild" bug?.bugResolvedBuild?:0 {"class":
+                            "input-text select2"}) ##,"multiple":"multiple"加上为多选项
+
+
+                        #end
+                        #@Tselect2Fix()
+                        <a href="${TINY_CONTEXT_PATH+adminPath}/project/build/add" class="r ">增加</a>
+                        <a href="${TINY_CONTEXT_PATH+adminPath}/project/build/index">全部</a>
+                        #end
+                    #end
+                    #@validateDiv("col-2")#end
+                #end
+            #end
+            #@tr()
+                #@th()解决方案#end
+                #@td()
+                    #@Tselect2F()
+                        #@Tselect2Body("bugResolution" bug?.bugResolution {"class":
+                            "input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        <option value=""></option>
+                            #for(re : getDict("bugResolution"))
+                            #@tinyOptionItem(re.value)${re.text}#end
+                        #end
+                    #end
+                #end
+            #end
+        #end
+        #@tr()
+            #@th()由谁关闭#end
+            #@td()
+                #@Tselect2F()
+                    #@Tselect2Body(
+                        "bugClosedBy" bug?.bugClosedBy {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                    <option value=""></option>
                         #foreach(user : userList)
+
                         <option value="${user?.orgUserId}">${user?.orgUserRealName}</option>
                         #end
-                        #end
-                            #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH+adminPath}/org/user/form" class="r ">增加</a>#end
-                        #end
                     #end
-                #end
-                #@tr()
-                    #@th()<span class="c-red">*</span>影响版本#end
-                    #@td()
-                        #@Tselect2F()
-                            #@Tselect2Body("bugOpenedBuild" bug?.bugOpenedBuild {"class":"input-text select2","multiple":"multiple"}) ##,"multiple":"multiple"加上为多选项
-                            #end
-                            #@Tselect2Fix()
-                            <a href="${TINY_CONTEXT_PATH+adminPath}/project/build/add" class="r ">增加</a>
-                            <a href="${TINY_CONTEXT_PATH+adminPath}/project/build/index">全部</a>
-                            #end
+
+                    #@Tselect2Fix()
+                        #@hasMenu("organizationAddUser")
+                        <a href="${TINY_CONTEXT_PATH}/a/org/user/form">增加</a>
+                        #end
+                        #@hasMenu("organizationUser")
+                        <a href="${TINY_CONTEXT_PATH}/a/org/user/list" class="r">全部</a>
                         #end
                     #end
                 #end
-                #@tr()
-                    #@th()解决者#end
-                    #@td()
-                            #@Tselect2F()
-                            #@Tselect2Body("bugResolvedBy" bug?.bugResolvedBy?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                            <option value=""></option>
-                            #foreach(user : userList)
-
-                            <option value="${user?.orgUserId}">${user?.orgUserRealName}</option>
-                            #end
-                            #end
-
-                                #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH+adminPath}/org/user/form" class="r ">增加</a>#end
-                            #end
-                        #@validateDiv("col-2")#end
-                    #end
-                #end
-                #@tr()
-                    #@th()解决日期#end
-                    #@td()
-                        ${bug?.bugResolvedDate?formatDate(bug?.bugResolvedDate,"yyyy-MM-dd hh-mm-ss"):""}
-                    #end
-                #end
-                #@tr()
-                    #@th()解决版本#end
-                    #@td()
-                        #@Tselect2F()
-	                   		 #@Tselect2Body("bugResolvedBuild" bug?.bugResolvedBuild?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-
-
-	                    	#end
-                            #@Tselect2Fix()
-                            <a href="${TINY_CONTEXT_PATH+adminPath}/project/build/add" class="r ">增加</a>
-                            <a href="${TINY_CONTEXT_PATH+adminPath}/project/build/index">全部</a>
-                            #end
-                	  #end
-                        #@validateDiv("col-2")#end
-                    #end
-                #end
-                #@tr()
-                    #@th()解决方案#end
-                    #@td()
-                    #@Tselect2F()
-	                   		 #@Tselect2Body("bugResolution" bug?.bugResolution {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                             <option value=""></option>
-	                         #for(re : getDict("bugResolution"))
-                                    #@tinyOptionItem(re.value)${re.text}#end
-                            #end
-	                    	#end                
-                	  #end
-                	  #end
-                #end
-                #@tr()
-                    #@th()由谁关闭#end
-                    #@td()
-                            #@Tselect2F()
-                            #@Tselect2Body("bugClosedBy" bug?.bugClosedBy {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                            <option value=""></option>
-                            #foreach(user : userList)
-
-                            <option value="${user?.orgUserId}">${user?.orgUserRealName}</option>
-                            #end
-                            #end
-
-                                #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH+adminPath}/org/user/form" class="r ">增加</a>#end
-                            #end
-                        #@validateDiv("col-2")#end
-                    #end
-                #end
-                #@tr()
-                    #@th()重复ID#end
-                    #@td()
-                    	#tinyInput("text" "bugDuplicateBug" bug?.bugDuplicateBug {"datatype":"","id":"抄送给","class":"input-text"})
-                    #end
-                #end
-                #@tr()
-                    #@th()关闭日期#end
-                    #@td()
-                        ${bug?.bugClosedDate?formatDate(bug?.bugClosedDate,"yyyy-MM-dd hh-mm-ss"):""}
-                    #end
-                #end               
+                #@validateDiv("col-2")#end
+            #end
+        #end
+        #@tr()
+            #@th()重复ID#end
+            #@td()
+                #tinyInput(
+                    "text" "bugDuplicateBug" bug?.bugDuplicateBug {"datatype":"","id":"抄送给","class":"input-text"})
+            #end
+        #end
+        #@tr()
+            #@th()关闭日期#end
+            #@td()
+                ${bug?.bugClosedDate?formatDate(bug?.bugClosedDate,"yyyy-MM-dd hh-mm-ss"):""}
             #end
         #end
     #end
-    #@div(divClass="infoContent")
-    <p class="titleName">其他相关</p>
-    ##该样式在comm.css样式中自定义
-        #@table("adjustTable")
-            #@thead()
-            #end
-            #@tbody()
-                #@tr()
-                    #@th()相关Bug#end
-                    #@td()#tinyInput("text" "linkBug" bug?.linkBug {"datatype":"","id":"抄送给","class":"input-text"})
-                    #end
+#end
+#end
+#@div(divClass="infoContent")
+<p class="titleName">其他相关</p>
+##该样式在comm.css样式中自定义
+    #@table("adjustTable")
+        #@thead()
+        #end
+        #@tbody()
+            #@tr()
+                #@th()相关Bug#end
+                #@td()#tinyInput("text" "linkBug" bug?.linkBug {"datatype":"","id":"抄送给","class":"input-text"})
                 #end
-                #@tr()
-                    #@th()相关用例#end
-                    #@td()#tinyInput("text" "linkCase" bug?.linkCase {"datatype":"","id":"抄送给","class":"input-text"})
-                    #end
+            #end
+            #@tr()
+                #@th()相关用例#end
+                #@td()#tinyInput("text" "linkCase" bug?.linkCase {"datatype":"","id":"抄送给","class":"input-text"})
                 #end
             #end
         #end
     #end
+#end
 
-					#@dialog("myModal")
-						#@dialogHeader()对话框标题#end
-						#@dialogBody()<p>对话框内容…</p>#end
-						#@dialogFooter()
-							#@buttonEnsure()确定#end
-							#@buttonCancel()关闭#end
-                		#end	  
-                	#end
+#@dialog("myModal")
+    #@dialogHeader()对话框标题#end
+    #@dialogBody()<p>对话框内容…</p>#end
+    #@dialogFooter()
+        #@buttonEnsure()确定#end
+        #@buttonCancel()关闭#end
+    #end
+#end
 <script>
-	$('select.select2').select2()
+    $('select.select2').select2()
 </script>
