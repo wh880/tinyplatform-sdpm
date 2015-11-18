@@ -172,8 +172,8 @@
         </div>
     </div>
     <div class="board-footer clearfix">
-        <span class="task-id board-id" title="编号">${task.taskId}</span>
-        <span class="task-pri pri-3" title="优先级">${task.taskPri}</span>
+      <span class="task-id board-id" title="编号">${task.taskId}</span>
+      <span class="task-pri pri-3" title="优先级">${task.taskPri}</span>
 	  <span class="task-assignedTo" title="指派给">
 		 #@aModal("#myModal" "指派给-"+task?.taskName 1200 600 "" assignedPage+"?taskId="+task?.taskId)
              <i class="icon-hand-right"></i>

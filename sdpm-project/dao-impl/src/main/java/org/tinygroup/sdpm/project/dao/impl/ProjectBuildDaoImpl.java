@@ -1,12 +1,12 @@
 /**
  * Copyright (c) 1997-2013, www.tinygroup.org (luo_guo@icloud.com).
- * <p/>
+ * <p>
  * Licensed under the GPL, Version 3.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p/>
+ * <p>
  * http://www.gnu.org/licenses/gpl.html
- * <p/>
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -22,11 +22,8 @@ import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.jdbctemplatedslsession.callback.*;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
-import org.tinygroup.sdpm.common.log.annotation.LogMethod;
 import org.tinygroup.sdpm.common.util.update.UpdateUtil;
-import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
-import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.sdpm.project.dao.ProjectBuildDao;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
@@ -41,10 +38,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.tinygroup.sdpm.org.dao.constant.OrgUserTable.ORG_USERTABLE;
 import static org.tinygroup.sdpm.product.dao.constant.ProductStoryTable.PRODUCT_STORYTABLE;
 import static org.tinygroup.sdpm.product.dao.constant.ProductTable.PRODUCTTABLE;
-import static org.tinygroup.sdpm.productLine.dao.constant.ProductLineTable.PRODUCT_LINETABLE;
 import static org.tinygroup.sdpm.project.dao.constant.ProjectBuildTable.PROJECT_BUILDTABLE;
 import static org.tinygroup.sdpm.quality.dao.constant.QualityBugTable.QUALITY_BUGTABLE;
 import static org.tinygroup.tinysqldsl.Delete.delete;
@@ -53,12 +48,10 @@ import static org.tinygroup.tinysqldsl.Select.select;
 import static org.tinygroup.tinysqldsl.Select.selectFrom;
 import static org.tinygroup.tinysqldsl.Update.update;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
-import static org.tinygroup.tinysqldsl.select.Join.leftJoin;
 
 @Repository
 public class ProjectBuildDaoImpl extends TinyDslDaoSupport implements ProjectBuildDao {
 
-    @LogMethod("add")
     public ProjectBuild add(ProjectBuild projectBuild) {
         return getDslTemplate().insertAndReturnKey(projectBuild, new InsertGenerateCallback<ProjectBuild>() {
             public Insert generate(ProjectBuild t) {
@@ -88,13 +81,21 @@ public class ProjectBuildDaoImpl extends TinyDslDaoSupport implements ProjectBui
         return getDslSession().execute(update);
     }
 
+    public Integer deleteBuildByProductId(Integer productId) {
+        if (productId == null) {
+            return 0;
+        }
+        Update update = update(PROJECT_BUILDTABLE).set(PROJECT_BUILDTABLE.BUILD_DELETED.value(ProjectBuild.DELETE_YES))
+                .where(PROJECT_BUILDTABLE.BUILD_PRODUCT.eq(productId));
+        return getDslSession().execute(update);
+    }
+
     public Integer softDelete(ProjectBuild build) {
         Update update = update(PROJECT_BUILDTABLE).set(PROJECT_BUILDTABLE.BUILD_DELETED.value(build.getBuildDeleted()))
                 .where(PROJECT_BUILDTABLE.BUILD_ID.eq(build.getBuildId()));
         return getDslSession().execute(update);
     }
 
-    @LogMethod("deleteByKey")
     public int deleteByKey(Integer pk) {
         if (pk == null) {
             return 0;
@@ -106,7 +107,6 @@ public class ProjectBuildDaoImpl extends TinyDslDaoSupport implements ProjectBui
         });
     }
 
-    @LogMethod("deleteByKeys")
     public int deleteByKeys(Integer... pks) {
         if (pks == null || pks.length == 0) {
             return 0;
@@ -207,7 +207,6 @@ public class ProjectBuildDaoImpl extends TinyDslDaoSupport implements ProjectBui
         return batchInsert(true, projectBuilds);
     }
 
-    @LogMethod("batchUpdate")
     public int[] batchUpdate(List<ProjectBuild> projectBuilds) {
         if (CollectionUtil.isEmpty(projectBuilds)) {
             return new int[0];
@@ -232,7 +231,6 @@ public class ProjectBuildDaoImpl extends TinyDslDaoSupport implements ProjectBui
         });
     }
 
-    @LogMethod("batchDelete")
     public int[] batchDelete(List<ProjectBuild> projectBuilds) {
         if (CollectionUtil.isEmpty(projectBuilds)) {
             return new int[0];
@@ -257,7 +255,6 @@ public class ProjectBuildDaoImpl extends TinyDslDaoSupport implements ProjectBui
         });
     }
 
-    @LogMethod("addOrderByElements")
     private Select addOrderByElements(Select select, OrderBy... orderBies) {
         List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
         for (int i = 0; orderBies != null && i < orderBies.length; i++) {
@@ -286,39 +283,39 @@ public class ProjectBuildDaoImpl extends TinyDslDaoSupport implements ProjectBui
         });
 
     }
+//
+//    public List<ProductAndLine> getProductLineTree(ProductLine t) {
+//
+//        Select select = select(PRODUCT_LINETABLE.PRODUCT_LINE_ID, PRODUCT_LINETABLE.PRODUCT_LINE_NAME, PRODUCTTABLE.PRODUCT_ID, PRODUCTTABLE.PRODUCT_NAME, PROJECT_BUILDTABLE.BUILD_ID, PROJECT_BUILDTABLE.BUILD_NAME).
+//                from(PRODUCT_LINETABLE).join(leftJoin(PRODUCTTABLE, PRODUCT_LINETABLE.PRODUCT_LINE_ID.eq(PRODUCTTABLE.PRODUCT_LINE_ID))).join(leftJoin(PROJECT_BUILDTABLE, PRODUCTTABLE.PRODUCT_ID.eq(PROJECT_BUILDTABLE.BUILD_PRODUCT))).
+//                where(
+//                        and(
+//                                PRODUCT_LINETABLE.PRODUCT_LINE_ID.isNotNull(),
+//                                PRODUCTTABLE.PRODUCT_ID.isNotNull(),
+//                                PROJECT_BUILDTABLE.BUILD_ID.isNotNull(),
+//
+//                                PRODUCT_LINETABLE.COMPANY_ID.eq(t.getCompanyId()),
+//                                PRODUCT_LINETABLE.DEPT_ID.eq(t.getDeptId()),
+//                                PRODUCT_LINETABLE.PRODUCT_LINE_ROOT.eq(t.getProductLineRoot()),
+//                                PRODUCT_LINETABLE.PRODUCT_LINE_PARENT.eq(t.getProductLineParent()),
+//                                PRODUCT_LINETABLE.PRODUCT_LINE_NAME.eq(t.getProductLineName()),
+//                                PRODUCT_LINETABLE.PRODUCT_LINE_CODE.eq(t.getProductLineCode()),
+//                                PRODUCT_LINETABLE.PRODUCT_LINE_ORDER.eq(t.getProductLineOrder()),
+//                                PRODUCT_LINETABLE.PRODUCT_LINE_SPEC.eq(t.getProductLineSpec()),
+//                                PRODUCT_LINETABLE.PRODUCT_LINE_STATUS.eq(t.getProductLineStatus()),
+//                                PRODUCT_LINETABLE.PRODUCT_LINE_OWNER.eq(t.getProductLineOwner()),
+//                                PRODUCT_LINETABLE.PRODUCT_LINE_QUALITY_MANAGER.eq(t.getProductLineQualityManager()),
+//                                PRODUCT_LINETABLE.PRODUCT_LINE_DELIVERY_MANAGER.eq(t.getProductLineDeliveryManager()),
+//                                PRODUCT_LINETABLE.ACL.eq(t.getAcl()),
+//                                PRODUCT_LINETABLE.PRODUCT_LINE_WHITE_LIST.eq(t.getProductLineWhiteList()),
+//                                PRODUCT_LINETABLE.PRODUCT_LINE_CREATED_BY.eq(t.getProductLineCreatedBy()),
+//                                PRODUCT_LINETABLE.PRODUCT_LINE_CREATED_DATE.eq(t.getProductLineCreatedDate()),
+//                                PRODUCT_LINETABLE.DELETED.eq(t.getDeleted())));
+//        List<ProductAndLine> productLines = getDslSession().fetchList(select, ProductAndLine.class);
+//        return productLines;
+//    }
 
-    public List<ProductAndLine> getProductLineTree(ProductLine t) {
-
-        Select select = select(PRODUCT_LINETABLE.PRODUCT_LINE_ID, PRODUCT_LINETABLE.PRODUCT_LINE_NAME, PRODUCTTABLE.PRODUCT_ID, PRODUCTTABLE.PRODUCT_NAME, PROJECT_BUILDTABLE.BUILD_ID, PROJECT_BUILDTABLE.BUILD_NAME).
-                from(PRODUCT_LINETABLE).join(leftJoin(PRODUCTTABLE, PRODUCT_LINETABLE.PRODUCT_LINE_ID.eq(PRODUCTTABLE.PRODUCT_LINE_ID))).join(leftJoin(PROJECT_BUILDTABLE, PRODUCTTABLE.PRODUCT_ID.eq(PROJECT_BUILDTABLE.BUILD_PRODUCT))).
-                where(
-                        and(
-                                PRODUCT_LINETABLE.PRODUCT_LINE_ID.isNotNull(),
-                                PRODUCTTABLE.PRODUCT_ID.isNotNull(),
-                                PROJECT_BUILDTABLE.BUILD_ID.isNotNull(),
-
-                                PRODUCT_LINETABLE.COMPANY_ID.eq(t.getCompanyId()),
-                                PRODUCT_LINETABLE.DEPT_ID.eq(t.getDeptId()),
-                                PRODUCT_LINETABLE.PRODUCT_LINE_ROOT.eq(t.getProductLineRoot()),
-                                PRODUCT_LINETABLE.PRODUCT_LINE_PARENT.eq(t.getProductLineParent()),
-                                PRODUCT_LINETABLE.PRODUCT_LINE_NAME.eq(t.getProductLineName()),
-                                PRODUCT_LINETABLE.PRODUCT_LINE_CODE.eq(t.getProductLineCode()),
-                                PRODUCT_LINETABLE.PRODUCT_LINE_ORDER.eq(t.getProductLineOrder()),
-                                PRODUCT_LINETABLE.PRODUCT_LINE_SPEC.eq(t.getProductLineSpec()),
-                                PRODUCT_LINETABLE.PRODUCT_LINE_STATUS.eq(t.getProductLineStatus()),
-                                PRODUCT_LINETABLE.PRODUCT_LINE_OWNER.eq(t.getProductLineOwner()),
-                                PRODUCT_LINETABLE.PRODUCT_LINE_QUALITY_MANAGER.eq(t.getProductLineQualityManager()),
-                                PRODUCT_LINETABLE.PRODUCT_LINE_DELIVERY_MANAGER.eq(t.getProductLineDeliveryManager()),
-                                PRODUCT_LINETABLE.ACL.eq(t.getAcl()),
-                                PRODUCT_LINETABLE.PRODUCT_LINE_WHITE_LIST.eq(t.getProductLineWhiteList()),
-                                PRODUCT_LINETABLE.PRODUCT_LINE_CREATED_BY.eq(t.getProductLineCreatedBy()),
-                                PRODUCT_LINETABLE.PRODUCT_LINE_CREATED_DATE.eq(t.getProductLineCreatedDate()),
-                                PRODUCT_LINETABLE.DELETED.eq(t.getDeleted())));
-        List<ProductAndLine> productLines = getDslSession().fetchList(select, ProductAndLine.class);
-        return productLines;
-    }
-
-    public Pager<ProductStory> findBuildStorys(int start, int limit, Integer buildId, final OrderBy... orderBies) {
+    public Pager<ProductStory> findBuildStoryList(int start, int limit, Integer buildId, final OrderBy... orderBies) {
         Select select = select(PROJECT_BUILDTABLE.BUILD_STORIES).from(PROJECT_BUILDTABLE)
                 .where(PROJECT_BUILDTABLE.BUILD_ID.eq(buildId));
         ProjectBuild test = getDslSession().fetchOneResult(select, ProjectBuild.class);
@@ -375,18 +372,12 @@ public class ProjectBuildDaoImpl extends TinyDslDaoSupport implements ProjectBui
     }
 
     public List<ProjectBuild> getBuildByKeys(String... ids) {
-        SelectGenerateCallback<Serializable[]> callback = new SelectGenerateCallback<Serializable[]>() {
-            @SuppressWarnings("rawtypes")
-            public Select generate(Serializable[] t) {
-                return selectFrom(PROJECT_BUILDTABLE).where(PROJECT_BUILDTABLE.BUILD_ID.in(t));
-            }
-        };
-        Select select = callback.generate(ids);
-        return getDslSession().fetchList(select,ProjectBuild.class);
+        Select select = selectFrom(PROJECT_BUILDTABLE).where(PROJECT_BUILDTABLE.BUILD_ID.in(ids));
+        return getDslSession().fetchList(select, ProjectBuild.class);
     }
 
 
-    public Pager<ProductStory> findNoBuildStorys(int start, int limit, final String condition, Integer buildId, final OrderBy... orderBies) {
+    public Pager<ProductStory> findNoBuildStoryList(int start, int limit, final String condition, Integer buildId, final OrderBy... orderBies) {
         Select select = select(PROJECT_BUILDTABLE.BUILD_STORIES).from(PROJECT_BUILDTABLE)
                 .where(PROJECT_BUILDTABLE.BUILD_ID.eq(buildId));
         ProjectBuild test = getDslSession().fetchOneResult(select, ProjectBuild.class);
@@ -405,7 +396,7 @@ public class ProjectBuildDaoImpl extends TinyDslDaoSupport implements ProjectBui
         });
     }
 
-    public Pager<QualityBug> findnoBuildBugs(int start, int limit, final String condition, Integer buildId, final OrderBy... orderBies) {
+    public Pager<QualityBug> findNoBuildBugs(int start, int limit, final String condition, Integer buildId, final OrderBy... orderBies) {
         Select select = select(PROJECT_BUILDTABLE.BUILD_BUGS).from(PROJECT_BUILDTABLE)
                 .where(PROJECT_BUILDTABLE.BUILD_ID.eq(buildId));
         ProjectBuild test = getDslSession().fetchOneResult(select, ProjectBuild.class);
@@ -425,7 +416,7 @@ public class ProjectBuildDaoImpl extends TinyDslDaoSupport implements ProjectBui
         });
     }
 
-    public Integer deletereleate(Integer storyId, Integer buildId) {
+    public Integer deleteBuildStory(Integer storyId, Integer buildId) {
         Select select = select(PROJECT_BUILDTABLE.BUILD_STORIES).from(PROJECT_BUILDTABLE)
                 .where(PROJECT_BUILDTABLE.BUILD_ID.eq(buildId));
         ProjectBuild test = getDslSession().fetchOneResult(select, ProjectBuild.class);
@@ -444,7 +435,7 @@ public class ProjectBuildDaoImpl extends TinyDslDaoSupport implements ProjectBui
     }
 
 
-    public Integer deletereleateBug(Integer bugId, Integer buildId) {
+    public Integer deleteBuildBug(Integer bugId, Integer buildId) {
         Select select = select(PROJECT_BUILDTABLE.BUILD_BUGS).from(PROJECT_BUILDTABLE)
                 .where(PROJECT_BUILDTABLE.BUILD_ID.eq(buildId));
         ProjectBuild test = getDslSession().fetchOneResult(select, ProjectBuild.class);
@@ -462,7 +453,7 @@ public class ProjectBuildDaoImpl extends TinyDslDaoSupport implements ProjectBui
         return getDslSession().execute(update);
     }
 
-    public Integer releateReq(Integer storyId, Integer buildId) {
+    public Integer linkBuildStory(Integer storyId, Integer buildId) {
         Select select = select(PROJECT_BUILDTABLE.BUILD_STORIES).from(PROJECT_BUILDTABLE)
                 .where(PROJECT_BUILDTABLE.BUILD_ID.eq(buildId));
         ProjectBuild test = getDslSession().fetchOneResult(select, ProjectBuild.class);
@@ -474,7 +465,7 @@ public class ProjectBuildDaoImpl extends TinyDslDaoSupport implements ProjectBui
         return getDslSession().execute(update);
     }
 
-    public Integer releateBug(Integer bugId, Integer buildId) {
+    public Integer linkBuildBug(Integer bugId, Integer buildId) {
         Select select = select(PROJECT_BUILDTABLE.BUILD_BUGS).from(PROJECT_BUILDTABLE)
                 .where(PROJECT_BUILDTABLE.BUILD_ID.eq(buildId));
         ProjectBuild test = getDslSession().fetchOneResult(select, ProjectBuild.class);
