@@ -1,3 +1,5 @@
+#!set(activeTitle="产品管理",activeMenuId=currentPageId)
+#!set(linkName="product-team")
 ###set(name="product-team")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
