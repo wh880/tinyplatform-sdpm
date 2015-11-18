@@ -1,21 +1,4 @@
-#macro Tselect2FixModal()
-<div class="fixtools hide" id="${sid}-fix"><div class="fixselect2foot">#bodyContent</div></div>
-<script type="text/javascript">
-    $(function(){
-        var isinit=false;
-        $("#${sid}").on("select2-open", function (e) {
-            if(!isinit){
-                $("#select2-drop").append($("#${sid}-fix").html());
-                $("#select2-drop").on("click","a",function(){
-                    $("#modelA").click();
-                    $("#select2-drop").hide();
-                });
-                isinit=true;
-            }
-        });
-    });
-</script>
-#end
+
 #macro TzTreeSelect(name value mapInfo)
     #set(sid=fmt("sid%d",rand()))
 <input id="${sid}-input-name" type="text" value="" #getMapInfo(mapInfo)/>
@@ -268,7 +251,7 @@
                                 "relateModelTwo"}) ##,"multiple":"multiple"加上为多选项
                             #end
                             #@Tselect2FixModal()#@aModal(
-                                "#myModal" "" "500" "300" "btn-class" adminPath+"/product/addModule?pId=" "modelA")
+                                "#myModal" "" "500" "300" "btn-class" adminPath+"/product/addModule?pId="+cookieProductId )
                                 增加#end
                             #end
                         #end
@@ -297,7 +280,7 @@
                 <div id="demand-sources">
                     #@Tselect2F()
                         #@Tselect2Body("storySource" "0" {"class":
-                            "input-text select2"}) ##,"multiple":"multiple"加上为多选项#for(stage:getDict("storySource"))
+                            "input-text select2"})
 
                             #foreach(source:getDict("storySource"))
                                 <option value="${source?.value}"> ${source?.text}</option>
