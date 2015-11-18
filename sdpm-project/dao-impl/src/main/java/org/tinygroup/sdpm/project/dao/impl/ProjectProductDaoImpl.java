@@ -40,6 +40,7 @@ import static org.tinygroup.tinysqldsl.Insert.insertInto;
 import static org.tinygroup.tinysqldsl.Select.selectFrom;
 import static org.tinygroup.tinysqldsl.Update.update;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
+import static org.tinygroup.tinysqldsl.formitem.SubSelect.subSelect;
 
 @Repository
 public class ProjectProductDaoImpl extends TinyDslDaoSupport implements ProjectProductDao {
@@ -50,10 +51,11 @@ public class ProjectProductDaoImpl extends TinyDslDaoSupport implements ProjectP
     }
 
     public List<Product> findLinkProductByProjectId(Integer projectId) {
-        Select select = selectFrom(PRODUCTTABLE).from(PROJECT_PRODUCTTABLE)
-                .where(and(
-                        PRODUCTTABLE.PRODUCT_ID.eq(PROJECT_PRODUCTTABLE.PRODUCT_ID),
-                        PROJECT_PRODUCTTABLE.PROJECT_ID.eq(projectId)
+        Select subSelect = Select.select(PROJECT_PRODUCTTABLE.PRODUCT_ID).from(PROJECT_PRODUCTTABLE)
+                .where(PROJECT_PRODUCTTABLE.PROJECT_ID.eq(projectId));
+        Select select = selectFrom(PRODUCTTABLE)
+                .where(PRODUCTTABLE.PRODUCT_ID.inExpression(
+                        subSelect(subSelect)
                 ));
         return getDslSession().fetchList(select, Product.class);
     }

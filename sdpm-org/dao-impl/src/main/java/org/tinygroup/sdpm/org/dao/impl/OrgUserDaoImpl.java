@@ -18,6 +18,7 @@ package org.tinygroup.sdpm.org.dao.impl;
 
 import org.springframework.stereotype.Repository;
 import org.tinygroup.commons.tools.CollectionUtil;
+import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.jdbctemplatedslsession.callback.*;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
@@ -421,12 +422,11 @@ public class OrgUserDaoImpl extends TinyDslDaoSupport implements OrgUserDao {
     }
 
     public String getNameById(String id) {
-        if ("".equals(id) || id == null) {
+        if (StringUtil.isBlank(id)) {
             return null;
         }
         try {
             Select select = select(ORG_USERTABLE.ORG_USER_ACCOUNT).from(ORG_USERTABLE).where(ORG_USERTABLE.ORG_USER_ID.eq(id));
-
             return getDslSession().fetchOneResult(select, String.class);
         } catch (Exception e) {
             return "";

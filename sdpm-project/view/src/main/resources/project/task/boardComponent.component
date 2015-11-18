@@ -10,12 +10,12 @@
                     <span class="icon-reorder"></span>
                 </button>
                 <div class="dropdown-menu pull-right">
-                    #@aModal("#myModal" task?.taskName 1050 540 "assigned" assignedPage+"?taskId="+task?.taskId)指派#end
-                    #@aModal("#myModal" task?.taskName 1050 540 "doing" startPage+"?taskId="+task?.taskId)开始#end
-                    #@aModal("#myModal" task?.taskName 1050 600 "finish" finishPage+"?taskId="+task?.taskId)完成#end
-                    #@aModal("#myModal" task?.taskName 1050 450 "cancel" cancelPage+"?taskId="+task?.taskId)取消#end
-                    #@aModal("#myModal" task?.taskName 1050 460 "boardClose" closePage+"?taskId="+task?.taskId)关闭#end
-                    #@aModal("#myModal" task?.taskName 1300 600 "edit" editPage+"?taskId="+task?.taskId)编辑#end
+                    #@aModal("#myModal" "指派-"+task?.taskName 1050 540 "assigned" assignedPage+"?taskId="+task?.taskId)指派#end
+                    #@aModal("#myModal" "开始-"+task?.taskName 1050 540 "doing" startPage+"?taskId="+task?.taskId)开始#end
+                    #@aModal("#myModal" "完成-"+task?.taskName 1050 600 "finish" finishPage+"?taskId="+task?.taskId)完成#end
+                    #@aModal("#myModal" "取消-"+task?.taskName 1050 450 "cancel" cancelPage+"?taskId="+task?.taskId)取消#end
+                    #@aModal("#myModal" "关闭-"+task?.taskName 1050 460 "boardClose" closePage+"?taskId="+task?.taskId)关闭#end
+                    #@aModal("#myModal" "编辑-"+task?.taskName 1300 600 "edit" editPage+"?taskId="+task?.taskId)编辑#end
                 </div>
             </div>
         </div>
@@ -24,7 +24,7 @@
         <span class="task-id board-id" title="编号">${task.taskId}</span>
         <span class="task-pri pri-3" title="优先级">${task.taskPri}</span>
 	  <span class="task-assignedTo" title="指派给">
-          #@aModal("#myModal" task?.taskName 1200 600 "" assignedPage+"?taskId="+task?.taskId)
+          #@aModal("#myModal" "指派给-"+task?.taskName 1200 600 "" assignedPage+"?taskId="+task?.taskId)
               <i class="icon-hand-right"></i>
           #end
           <small>${UserUtils.getUserById(task.taskAssignedTo).orgUserRealName}</small>
@@ -50,11 +50,11 @@
                     <span class="icon-reorder"></span>
                 </button>
                 <div class="dropdown-menu pull-right">
-                    #@aModal("#myModal" task?.taskName 1050 540 "assigned" assignedPage+"?taskId="+task?.taskId)指派#end
-                    #@aModal("#myModal" task?.taskName 1050 600 "done" finishPage+"?taskId="+task?.taskId)完成#end
-                    #@aModal("#myModal" task?.taskName 1050 450 "cancel" cancelPage+"?taskId="+task?.taskId)取消#end
-                    #@aModal("#myModal" task?.taskName 1050 460 "boardClose" closePage+"?taskId="+task?.taskId)关闭#end
-                    #@aModal("#myModal" task?.taskName 1200 600 "edit" editPage+"?taskId="+task?.taskId)编辑#end
+                    #@aModal("#myModal" "指派-"+task?.taskName 1050 540 "assigned" assignedPage+"?taskId="+task?.taskId)指派#end
+                    #@aModal("#myModal" "完成-"+task?.taskName 1050 600 "done" finishPage+"?taskId="+task?.taskId)完成#end
+                    #@aModal("#myModal" "取消-"+task?.taskName 1050 450 "cancel" cancelPage+"?taskId="+task?.taskId)取消#end
+                    #@aModal("#myModal" "关闭-"+task?.taskName 1050 460 "boardClose" closePage+"?taskId="+task?.taskId)关闭#end
+                    #@aModal("#myModal" "编辑-"+task?.taskName 1200 600 "edit" editPage+"?taskId="+task?.taskId)编辑#end
                 </div>
             </div>
         </div>
@@ -63,7 +63,7 @@
         <span class="task-id board-id" title="编号">${task.taskId}</span>
         <span class="task-pri pri-3" title="优先级">${task.taskPri}</span>
 	  <span class="task-assignedTo" title="指派给">
-          #@aModal("#myModal" task?.taskName 1200 600 "" assignedPage+"?taskId="+task?.taskId)
+          #@aModal("#myModal" "指派给-"+task?.taskName 1200 600 "" assignedPage+"?taskId="+task?.taskId)
               <i class="icon-hand-right"></i>
           #end
           <small>${UserUtils.getUserById(task.taskAssignedTo).orgUserRealName}</small>
@@ -89,11 +89,11 @@
                     <span class="icon-reorder"></span>
                 </button>
                 <div class="dropdown-menu pull-right">
-                    #@aModal("#myModal" task?.taskName 1050 540 "assigned" assignedPage+"?taskId="+task?.taskId)指派#end
-                    #@aModal("#myModal" task?.taskName 1050 460 "boardClose" closePage+"?taskId="+task?.taskId)关闭#end
-                    #@aModal("#myModal" task?.taskName 1300 600 "doing" doingPage+"?taskId="+task?.taskId)激活#end
-                    #@aModal("#myModal" task?.taskName 1050 450 "cancel" cancelPage+"?taskId="+task?.taskId)取消#end
-                    #@aModal("#myModal" task?.taskName 1050 600 "edit" editPage+"?taskId="+task?.taskId)编辑#end
+                    #@aModal("#myModal" "指派-"+task?.taskName 1050 540 "assigned" assignedPage+"?taskId="+task?.taskId)指派#end
+                    #@aModal("#myModal" "取消-"+task?.taskName 1050 450 "cancel" cancelPage+"?taskId="+task?.taskId)取消#end
+                    #@aModal("#myModal" "关闭-"+task?.taskName 1050 460 "boardClose" closePage+"?taskId="+task?.taskId)关闭#end
+                    #@aModal("#myModal" "编辑-"+task?.taskName 1200 600 "edit" editPage+"?taskId="+task?.taskId)编辑#end
+                    #@aModal("#myModal" "激活-"+task?.taskName 1300 600 "doing" doingPage+"?taskId="+task?.taskId)激活#end
                 </div>
             </div>
         </div>
@@ -102,7 +102,7 @@
         <span class="task-id board-id" title="编号">${task.taskId}</span>
         <span class="task-pri pri-3" title="优先级">${task.taskPri}</span>
 	  <span class="task-assignedTo" title="指派给">
-          #@aModal("#myModal" task?.taskName 1200 600 "edit" assignedPage+"?taskId="+task?.taskId)
+          #@aModal("#myModal" "指派给-"+task?.taskName 1200 600 "edit" assignedPage+"?taskId="+task?.taskId)
               <i class="icon-hand-right"></i>
           #end
           <small>${UserUtils.getUserById(task.taskAssignedTo).orgUserRealName}</small>
@@ -129,8 +129,8 @@
                     <span class="icon-reorder"></span>
                 </button>
                 <div class="dropdown-menu pull-right">
-                    #@aModal("#myModal" task?.taskName 1300 600 "doing" doingPage+"?taskId="+task?.taskId)激活#end
-                    #@aModal("#myModal" task?.taskName 1050 600 "edit" editPage+"?taskId="+task?.taskId)编辑#end
+                    #@aModal("#myModal" "激活-"+task?.taskName 1300 600 "doing" doingPage+"?taskId="+task?.taskId)激活#end
+                    #@aModal("#myModal" "编辑-"+task?.taskName 1050 600 "edit" editPage+"?taskId="+task?.taskId)编辑#end
                 </div>
             </div>
         </div>
@@ -139,7 +139,7 @@
         <span class="task-id board-id" title="编号">${task.taskId}</span>
         <span class="task-pri pri-3" title="优先级">${task.taskPri}</span>
 	  <span class="task-assignedTo" title="指派给">
-		 #@aModal("#myModal" task?.taskName 1200 600 "" assignedPage+"?taskId="+task?.taskId)
+		 #@aModal("#myModal" "指派给-"+task?.taskName 1200 600 "" assignedPage+"?taskId="+task?.taskId)
              <i class="icon-hand-right"></i>
          #end
           <small>${UserUtils.getUserById(task.taskAssignedTo).orgUserRealName}</small>
@@ -165,8 +165,8 @@
                     <span class="icon-reorder"></span>
                 </button>
                 <div class="dropdown-menu pull-right">
-                    #@aModal("#myModal" task?.taskName 1300 600 "doing" doingPage+"?taskId="+task?.taskId)激活#end
-                    #@aModal("#myModal" task?.taskName 1050 600 "edit" editPage+"?taskId="+task?.taskId)编辑#end
+                    #@aModal("#myModal" "激活-"+task?.taskName 1300 600 "doing" doingPage+"?taskId="+task?.taskId)激活#end
+                    #@aModal("#myModal" "编辑-"+task?.taskName 1050 600 "edit" editPage+"?taskId="+task?.taskId)编辑#end
                 </div>
             </div>
         </div>
@@ -175,7 +175,7 @@
         <span class="task-id board-id" title="编号">${task.taskId}</span>
         <span class="task-pri pri-3" title="优先级">${task.taskPri}</span>
 	  <span class="task-assignedTo" title="指派给">
-		 #@aModal("#myModal" task?.taskName 1200 600 "" assignedPage+"?taskId="+task?.taskId)
+		 #@aModal("#myModal" "指派给-"+task?.taskName 1200 600 "" assignedPage+"?taskId="+task?.taskId)
              <i class="icon-hand-right"></i>
          #end
           <small>${UserUtils.getUserById(task.taskAssignedTo).orgUserRealName}</small>
