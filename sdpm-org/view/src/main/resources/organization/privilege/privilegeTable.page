@@ -12,7 +12,7 @@
             <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?roleId=${var?.orgRoleId}"
                title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
             #elseif(m.id=="org-privilege-copy")
-                #iconOperations("#myModal" m.icon m.name m.map.width m.map.heigth m.href+"?copyRoleId="+var?.orgRoleId "ml-5")
+                #iconOperations("#myModal" m.icon m.name m.map.width m.map.heigth adminPath+m.href+"?copyRoleId="+var?.orgRoleId "ml-5")
             #else
                 #@tinyTableItemRemove(TINY_CONTEXT_PATH+adminPath+m.href var.orgRoleId)<i class=${m.icon}></i>#end
             #end

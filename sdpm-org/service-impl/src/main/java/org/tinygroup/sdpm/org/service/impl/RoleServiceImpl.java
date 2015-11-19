@@ -2,6 +2,7 @@ package org.tinygroup.sdpm.org.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
 import org.tinygroup.commons.tools.ArrayUtil;
 import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.sdpm.common.menu.Menu;
@@ -107,8 +108,9 @@ public class RoleServiceImpl implements RoleService {
         List<OrgRoleMenu> orgRoleMenuList = roleMenuManager.findMenuIds(orgRoleId);
         for (OrgRoleMenu roleMenu : orgRoleMenuList) {
             roleMenu.setOrgRoleId(orgRoleIdNew);
+            roleMenu.setId(null);
         }
-        if (orgRoleMenuList != null || !orgRoleMenuList.isEmpty()) {
+        if (!CollectionUtil.isEmpty(orgRoleMenuList)) {
             roleMenuManager.batchAdd(orgRoleMenuList);
         }
     }
@@ -147,8 +149,9 @@ public class RoleServiceImpl implements RoleService {
         List<OrgRoleUser> orgRoleUserList = roleUserManager.findUserIds(orgRoleId);
         for (OrgRoleUser roleUser : orgRoleUserList) {
             roleUser.setOrgRoleId(orgRoleIdNew);
+            roleUser.setId(null);
         }
-        if (orgRoleUserList != null || !orgRoleUserList.isEmpty()) {
+        if (!CollectionUtils.isEmpty(orgRoleUserList)) {
             roleUserManager.batchAdd(orgRoleUserList);
         }
     }

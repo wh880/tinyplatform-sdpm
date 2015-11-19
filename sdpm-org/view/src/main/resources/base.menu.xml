@@ -49,9 +49,6 @@
         <menu id="org-user-profileAdmin" name="所属档案" href="/org/user/show/profile" icon="" sort="1"
               isShow="1"
               scope="org-user-detail"/>
-        <menu id="org-user-export" name="导出用户" href="/organization/common/fileOutput.pagelet" icon="icon-download-alt"
-              sort="1" isShow="1"
-              scope="org-user-export"/>
         <menu id="org-user-editprofile" name="修改档案" href="/org/user/form" icon="icon-edit"
               sort="1" isShow="1"
               scope="org-user-editprofile"/>
