@@ -53,6 +53,9 @@
                 <!--dict文件加载处理器-->
                 <ref bean="dictFileProcessor"/>
 
+                <!--doc文件加载处理器-->
+                <ref bean="docTemplateFileProcessor"/>
+
                 <!-- database -->
                 <ref bean="constantFileResolver"/>
                 <ref bean="standardTypeFileResolver"/>

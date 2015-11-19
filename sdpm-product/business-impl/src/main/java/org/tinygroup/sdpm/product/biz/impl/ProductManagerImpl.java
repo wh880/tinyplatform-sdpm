@@ -15,6 +15,7 @@ import org.tinygroup.sdpm.product.dao.ProductReleaseDao;
 import org.tinygroup.sdpm.product.dao.ProductStoryDao;
 import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
 import org.tinygroup.sdpm.product.dao.pojo.*;
+import org.tinygroup.sdpm.project.dao.impl.ProjectBuildDaoImpl;
 import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.ArrayList;
@@ -35,6 +36,8 @@ public class ProductManagerImpl implements ProductManager{
 	private ProductReleaseDao productReleaseDao;
 	@Autowired
 	private ProductPlanDao productPlanDao;
+	@Autowired
+	private ProjectBuildDaoImpl projectBuildDao;
 	
 	public Product add(Product product) {
 		return productDao.add(product);
@@ -49,9 +52,7 @@ public class ProductManagerImpl implements ProductManager{
 	}
 
 	public int delete(Integer productId) {
-		Product product = new Product();
-		product.setProductId(productId);
-		product.setDeleted(FieldUtil.DELETE_YES);
+		//删计划
 		ProductPlan plan = new ProductPlan();
 		plan.setDeleted(0);
 		plan.setProductId(productId);
@@ -64,6 +65,7 @@ public class ProductManagerImpl implements ProductManager{
 			Integer[] ids = new Integer[idList.size()];
 			productPlanDao.batchDelete(idList.toArray(ids));
 		}
+		//删需求
 		ProductStory story = new ProductStory();
 		story.setProductId(productId);
 		story.setDeleted(0);
@@ -76,6 +78,7 @@ public class ProductManagerImpl implements ProductManager{
 			Integer[] ids = new Integer[idList.size()];
 			productStoryDao.batchDelete(idList.toArray(ids));
 		}
+		//删发布
 		ProductRelease release = new ProductRelease();
 		release.setDeleted(0);
 		release.setProductId(productId);
@@ -88,6 +91,12 @@ public class ProductManagerImpl implements ProductManager{
 			Integer[] ids = new Integer[idList.size()];
 			productReleaseDao.batchDelete(idList.toArray(ids));
 		}
+		//删版本
+//		projectBuildDao.
+
+		Product product = new Product();
+		product.setProductId(productId);
+		product.setDeleted(FieldUtil.DELETE_YES);
 		return productDao.edit(product);
 	}
 

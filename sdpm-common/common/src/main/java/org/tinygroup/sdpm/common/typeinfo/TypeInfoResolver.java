@@ -5,7 +5,7 @@ import java.util.Map;
 /**
  * Created by wangll13383 on 2015/9/6.
  */
-public interface TypeInfoResolvor {
+public interface TypeInfoResolver {
     String TYPEINFO_XSTREAM_ = "typeinfo";
 
     void addTypeInfo(TypeInfos typeInfos, String filePath);

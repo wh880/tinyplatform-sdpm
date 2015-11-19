@@ -235,9 +235,8 @@
                                     $("input[name=storyTitle]").blur();
                                 }
                             })
-
                         </script>
-                        <span><a href="${TINY_CONTEXT_PATH +adminPath}/product/addproduct/addition " class="r ">增加</a></span>
+                        <span><a href="${TINY_CONTEXT_PATH +adminPath}/product/addproduct/addition " class="r">增加</a></span>
                     #end
                 </div>
                 <div class="col-7">

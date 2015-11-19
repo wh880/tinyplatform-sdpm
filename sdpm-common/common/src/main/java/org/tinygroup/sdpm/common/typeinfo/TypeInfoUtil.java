@@ -39,7 +39,7 @@ public class TypeInfoUtil {
 	}
 
 	private static void init(){
-		TypeInfoResolvor resolvor = BeanContainerFactory.getBeanContainer(TypeInfoUtil.class.getClassLoader()).getBean("typeInfoResolvor");
-		typeDict = resolvor.getDict();
+		TypeInfoResolver resolver = BeanContainerFactory.getBeanContainer(TypeInfoUtil.class.getClassLoader()).getBean("typeInfoResolver");
+		typeDict = resolver.getDict();
 	}
 }

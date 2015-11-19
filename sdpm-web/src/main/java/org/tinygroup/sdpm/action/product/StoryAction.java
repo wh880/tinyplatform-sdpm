@@ -517,7 +517,7 @@ public class StoryAction extends BaseController {
                                     SearchInfos searchInfos, String order, String ordertype,
                                     Model model, HttpServletRequest request) {
         story.setDeleted(0);
-        if(story.getProductId()!=null&&story.getProductId()!=0) {
+        if(story.getProductId()==null||story.getProductId()==0) {
             story.setProductId(Integer.parseInt(cookieProductId));
         }
         ConditionCarrier carrier = new ConditionCarrier();

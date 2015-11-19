@@ -337,7 +337,7 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
 			public Select generate(QualityBug t) {
 				Condition condition =null;
 				if(t.getBugOpenedBuild()!=null){
-					condition = or(QUALITY_BUGTABLE.BUG_OPENED_BUILD.like("%," + t.getBugOpenedBuild()),
+					condition = Condition.orWithBrackets(QUALITY_BUGTABLE.BUG_OPENED_BUILD.like("%," + t.getBugOpenedBuild()),
 							QUALITY_BUGTABLE.BUG_OPENED_BUILD.like("%," + t.getBugOpenedBuild()+",%"),
 							QUALITY_BUGTABLE.BUG_OPENED_BUILD.like(t.getBugOpenedBuild()+",%"),
 							QUALITY_BUGTABLE.BUG_OPENED_BUILD.eq(t.getBugOpenedBuild()));

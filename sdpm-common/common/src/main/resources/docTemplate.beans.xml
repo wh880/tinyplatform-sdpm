@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="docTemplateFileProcessor" class="org.tinygroup.sdpm.common.docTemplate.impl.DocTemplateFileProcessor">
+        <property name="fileResolver" ref="fileResolver"></property>
+        <property name="docTemplateResolver" ref="docTemplateResolver"></property>
+    </bean>
+    <bean id="docTemplateResolver" class="org.tinygroup.sdpm.common.docTemplate.impl.DocTemplateResolverImpl" scope="singleton">
+        <property name="docTemplateEngine" ref="docTemplateEngine" ></property>
+    </bean>
+
+    <bean id="docTemplateEngine" class="org.tinygroup.template.impl.TemplateEngineDefault" scope="singleton"></bean>
+</beans>
