@@ -26,4 +26,5 @@ import org.tinygroup.tinysqldsl.base.Condition;
 public interface QualityTestTaskDao extends BaseDao<QualityTestTask,Integer> {
     public Pager<QualityTestTask> queryPager(int start, int limit, QualityTestTask qualityTestTask, Condition condition, OrderBy... orderArgs);
     Integer getMaxNo(Integer ProductId);
+    Integer deleteTestTaskByProduct(Integer productId);
 }

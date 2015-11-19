@@ -17,12 +17,11 @@
                     })
                 </script>
                 #@Tselect2Body("productId" story?.productId  {"class":"input-text select2"})
-                    #if(cookieProductLineId)
-                        #for(product : ProductUtils.getProductListByLine(cookieProductLineId))
+                        #for(product : ProductUtils.getAllProductListByUser())
                         <option value="${product?.productId}">${product?.productName}</option>
-                    #end
+                        #end
+
                 #end
-            #end
             #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH +adminPath}/product/addproduct/addition "
                               class="r ">添加</a><a
                     href=" ${TINY_CONTEXT_PATH +adminPath}/product/allproduct/addition">全部</a>#end
@@ -50,7 +49,7 @@
             #@colLabel()所属计划：#end
             #@formControlDiv("col-8")
                 #@Tselect2F()
-                    #@Tselect2Body("planId" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                    #@Tselect2Body("planId" story?.planId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 
                     #end
 
@@ -171,13 +170,12 @@
     </li>
 
     <li>
-        #@tinyForm("thisform" "" "" {"class":"test"})
             #@elementItem()
                 #@colLabel()指派给：#end
                 #@formControlDiv("col-8")
                     #@Tselect2F()
                         <script>
-                            ajaxRead("${sid}", "storyAssignedTo", "orgUserId", "orgUserRealName", "/org/user/userList");
+                            ajaxRead("${sid}", "storyAssignedTo", "orgUserId", "orgUserRealName", "/org/user/userList","${story?.storyAssignedTo}");
                         </script>
                         #@Tselect2Body("storyAssignedTo" story?.storyAssignedTo {"class":
                             "input-text select2"}) ##,"multiple":"multiple"加上为多选项
@@ -195,7 +193,6 @@
                 #end
                 #@validateDiv("col-2")#end
             #end
-        #end
     </li>
 </ul>
 
@@ -211,7 +208,7 @@
             #@colLabel()重复需求：#end
             #@formControlDiv("col-8")
                 #tinyInput(
-                    "text" "storyDuplicateStory" story?.storyDuplicateStory {"id":"yujigongshi","class":"input-text"})
+                    "text" "storyDuplicateStory" story?.storyDuplicateStory {"id":"yujigongshi","class":"input-text","datatype":"^[0-9]*$","nullmsg":"内容必须为数字！"})
             #end
             #@validateDiv("col-2")#end
         #end
@@ -221,7 +218,7 @@
         #@elementItem()
             #@colLabel()相关需求：#end
             #@formControlDiv("col-8")
-                #tinyInput("text" "storyLinkStories" story?.storyLinkStories {"id":"yujigongshi","class":"input-text"})
+                #tinyInput("text" "storyLinkStories" story?.storyLinkStories {"id":"yujigongshi","class":"input-text","datatype":"^[0-9]*$","nullmsg":"内容必须为数字！"})
             #end
             #@validateDiv("col-2")#end
         #end
@@ -232,7 +229,7 @@
             #@colLabel()细分需求：#end
             #@formControlDiv("col-8")
                 #tinyInput(
-                    "text" "storyChildStories" story?.storyChildStories {"id":"yujigongshi","class":"input-text"})
+                    "text" "storyChildStories" story?.storyChildStories {"id":"yujigongshi","class":"input-text","datatype":"^[0-9]*$","nullmsg":"内容必须为数字！"})
             #end
             #@validateDiv("col-2")#end
         #end

@@ -69,12 +69,13 @@ public class RoleAction extends BaseController {
 
     /**
      * 角色的复制表单（表单）
+     *
      * @param copyRoleId
      * @param model
      * @return
      */
     @RequiresPermissions("org-privilege-copy")
-    @RequestMapping(value = "/copyRole",method = RequestMethod.GET)
+    @RequestMapping(value = "/copyRole", method = RequestMethod.GET)
     public String copyRoleForm(Integer copyRoleId, Model model) {
         OrgRole role = roleService.findRole(copyRoleId);
         model.addAttribute("role", role);
@@ -83,6 +84,7 @@ public class RoleAction extends BaseController {
 
     /**
      * 角色的复制表单提交（弹出框中提交）
+     *
      * @param orgRoleId
      * @param role
      * @param copyPart
@@ -90,18 +92,18 @@ public class RoleAction extends BaseController {
      */
     @ResponseBody
     @RequiresPermissions("org-privilege-copy")
-    @RequestMapping(value = "/copyRole",method = RequestMethod.POST)
-    public Map<String, String> copyRole(Integer orgRoleId, OrgRole role, String[] copyPart) {
-         role = roleService.addRole(role);
+    @RequestMapping(value = "/copyRole", method = RequestMethod.POST)
+    public Map<String, String> copyRole(Integer copyRoleId, OrgRole role, String[] copyPart) {
+        role = roleService.addRole(role);
         Integer orgRoleIdNew = role.getOrgRoleId();
         for (String check : copyPart) {
             if (check.equals("copyPrivilege")) {
-                roleService.copyRoleMenu(orgRoleIdNew, orgRoleId);
+                roleService.copyRoleMenu(orgRoleIdNew, copyRoleId);
             } else {
-                roleService.copyRoleUser(orgRoleIdNew, orgRoleId);
+                roleService.copyRoleUser(orgRoleIdNew, copyRoleId);
             }
         }
-        return resultMap(true,"复制角色成功！");
+        return resultMap(true, "复制角色成功！");
     }
 
     /**

@@ -52,9 +52,7 @@
                         <option value="0">/</option>
                     #end
                     <script>
-                        ajaxRead("${sid}", "productId", "productId", "productName", "/product/productList", ${story?.productId ? : 0
-                        })
-                        ;
+                        ajaxRead("${sid}", "productId", "productId", "productName", "/product/productList", ${story?.productId?:0});
                     </script>
                     <script>
                         $("#${sid}").on("change", function () {

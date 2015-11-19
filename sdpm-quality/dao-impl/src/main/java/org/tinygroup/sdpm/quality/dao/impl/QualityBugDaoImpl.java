@@ -730,4 +730,19 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
 		Select select = select(QUALITY_BUGTABLE.NO.max()).from(QUALITY_BUGTABLE).where(QUALITY_BUGTABLE.PRODUCT_ID.eq(productId));
 		return getDslSession().fetchOneResult(select,Integer.class);
 	}
+
+	public Integer deleteBugsByProduct(Integer product) {
+		Update update = update(QUALITY_BUGTABLE).set(QUALITY_BUGTABLE.DELETED.value(1)).where(and(QUALITY_BUGTABLE.PRODUCT_ID.eq(product), QUALITY_BUGTABLE.DELETED.eq(0)));
+		return getDslSession().execute(update);
+	}
+
+	public Integer deleteBugsByStory(Integer storyId) {
+		Update update = update(QUALITY_BUGTABLE).set(QUALITY_BUGTABLE.DELETED.value(1)).where(and(QUALITY_BUGTABLE.STORY_ID.eq(storyId), QUALITY_BUGTABLE.DELETED.eq(0)));
+		return getDslSession().execute(update);
+	}
+
+	public Integer deleteBugsByTask(Integer taskId) {
+		Update update = update(QUALITY_BUGTABLE).set(QUALITY_BUGTABLE.DELETED.value(1)).where(and(QUALITY_BUGTABLE.TASK_ID.eq(taskId), QUALITY_BUGTABLE.DELETED.eq(0)));
+		return getDslSession().execute(update);
+	}
 }

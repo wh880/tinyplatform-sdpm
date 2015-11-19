@@ -59,6 +59,7 @@ import static org.tinygroup.tinysqldsl.Update.update;
 import static org.tinygroup.tinysqldsl.base.FragmentSql.fragmentCondition;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 import static org.tinygroup.tinysqldsl.select.Join.leftJoin;
+import static org.tinygroup.tinysqldsl.select.Join.newJoin;
 
 @Repository
 public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductStoryDao {
@@ -648,7 +649,7 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 
 	public Pager<ProductStory> projectLinkedStory(int start, int limit, ProductStory productStory, String condition, OrderBy... orderBys) {
 		Select select = MysqlSelect.select(PRODUCT_STORYTABLE.ALL).
-				from(PRODUCT_STORYTABLE).join(leftJoin(PROJECT_STORYTABLE,PRODUCT_STORYTABLE.STORY_ID.eq(PROJECT_STORYTABLE.STORY_ID)))
+				from(PRODUCT_STORYTABLE).join(newJoin(PROJECT_STORYTABLE, PRODUCT_STORYTABLE.STORY_ID.eq(PROJECT_STORYTABLE.STORY_ID)))
 				.where(and(
 						StringUtil.isBlank(condition)?null:fragmentCondition(condition),
 						PRODUCT_STORYTABLE.COMPANY_ID.eq(productStory.getCompanyId()),
@@ -705,6 +706,16 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 		};
 
 		return getDslSession().execute(callback.generate(ids));
+	}
+
+	public Integer deleteStoryByProduct(Integer productId) {
+		Update update = update(PRODUCT_STORYTABLE).set(PRODUCT_STORYTABLE.DELETED.value(1)).where(and(PRODUCT_STORYTABLE.PRODUCT_ID.eq(productId), PRODUCT_STORYTABLE.DELETED.eq(0)));
+		return getDslSession().execute(update);
+	}
+
+	public Integer deleteStoryByPlan(Integer planId) {
+		Update update = update(PRODUCT_STORYTABLE).set(PRODUCT_STORYTABLE.DELETED.value(1)).where(and(PRODUCT_STORYTABLE.PLAN_ID.eq(planId), PRODUCT_STORYTABLE.DELETED.eq(0)));
+		return getDslSession().execute(update);
 	}
 
 	public Integer softDelete(Integer id) {

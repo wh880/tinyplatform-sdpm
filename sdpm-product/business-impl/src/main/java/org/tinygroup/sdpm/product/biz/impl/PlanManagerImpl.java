@@ -60,18 +60,8 @@ public class PlanManagerImpl implements PlanManager{
 	}
 
 	public Integer delete(Integer planId) {
-		ProductStory story = new ProductStory();
-		story.setDeleted(0);
-		story.setPlanId(planId);
-		List<ProductStory> stories = productStoryDao.query(story);
-		if(stories.size()>0){
-			List<Integer> idList = new ArrayList<Integer>();
-			for(ProductStory story1:stories){
-				idList.add(story1.getStoryId());
-			}
-			Integer[] ids = new Integer[idList.size()];
-			productStoryDao.batchDelete(idList.toArray(ids));
-		}
+		//删需求
+		productStoryDao.deleteStoryByPlan(planId);
 		return productPlanDao.softDelete(planId);
 	}
 

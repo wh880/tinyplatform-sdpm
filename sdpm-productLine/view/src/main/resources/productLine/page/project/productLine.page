@@ -5,36 +5,35 @@
 
 #@tabBodyCol("ptop-5")
     #@div(divClass="operationbar")
-
     <span class="f">
-        #if(!type)
+##        #if(!type)
             #foreach(m:menuManager.getScopeMenus("productLineView"))
                 <a title="${m.name}" class="ml-5" href="${TINY_CONTEXT_PATH +adminPath}${m.href}">${m.name}</a>
             #end
-        #end
+##        #end
     </span>
     <span class="r">
 
 				<!--导入导出修改-->
 
-        #@aModal("#myModal" "导入" "600" "65" "btn-class"
-            "/productLine/page/tabledemo/product-import.pagelet")#buttonIcon(iconClass="icon-download-alt")导入#end
-
-        #@buttonGroup()
-            #@buttonDropdown("Dropdown") #buttonIcon(iconClass="icon-upload-alt")导出#end
-            #@ulDropdownMenu("downMenuSty")
-
-                #@iconOperations(
-                    "#myModal" "" "导出" "500" "254"  "/productLine/page/tabledemo/product-export-data.pagelet" "ml-5")
-                    &nbsp;导出数据#end
-
-
-                #@iconOperations(
-                    "#myModal" "" "导出" "700" "80" "/productLine/page/tabledemo/product-export-template.pagelet" "ml-5")
-                    &nbsp;导出模板#end
-
-            #end
-        #end &nbsp;
+##        #@aModal("#myModal" "导入" "600" "65" "btn-class"
+##            "/productLine/page/tabledemo/product-import.pagelet")#buttonIcon(iconClass="icon-download-alt")导入#end
+##
+##        #@buttonGroup()
+##            #@buttonDropdown("Dropdown") #buttonIcon(iconClass="icon-upload-alt")导出#end
+##            #@ulDropdownMenu("downMenuSty")
+##
+##                #@iconOperations(
+##                    "#myModal" "" "导出" "500" "254"  "/productLine/page/tabledemo/product-export-data.pagelet" "ml-5")
+##                    &nbsp;导出数据#end
+##
+##
+##                #@iconOperations(
+##                    "#myModal" "" "导出" "700" "80" "/productLine/page/tabledemo/product-export-template.pagelet" "ml-5")
+##                    &nbsp;导出模板#end
+##
+##            #end
+##        #end &nbsp;
 
         #set(m=menuManager.getMenu("newproduct"))
         #if(m)

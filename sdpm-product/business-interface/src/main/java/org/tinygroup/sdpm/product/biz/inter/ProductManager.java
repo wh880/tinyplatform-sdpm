@@ -103,6 +103,8 @@ public interface ProductManager {
 
     List<Product> getProductByUserWithCount(String userId);
 
+    List<Product> getProductByUserAndProductLineWithCount(String userId,Integer productLineId);
+
     List<Integer> getTeamRoleProductLineIds(String userId);
 
 }

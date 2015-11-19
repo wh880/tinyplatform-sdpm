@@ -306,4 +306,9 @@ public class QualityTestTaskDaoImpl extends TinyDslDaoSupport implements Quality
 		Select select = select(QUALITY_TEST_TASKTABLE.NO.max()).from(QUALITY_TEST_TASKTABLE).where(QUALITY_TEST_TASKTABLE.PRODUCT_ID.eq(productId));
 		return getDslSession().fetchOneResult(select,Integer.class);
 	}
+
+	public Integer deleteTestTaskByProduct(Integer productId) {
+		Update update = update(QUALITY_TEST_TASKTABLE).set(QUALITY_TEST_TASKTABLE.DELETED.value(1)).where(and(QUALITY_TEST_TASKTABLE.PRODUCT_ID.eq(productId), QUALITY_TEST_TASKTABLE.DELETED.eq(0)));
+		return getDslSession().execute(update);
+	}
 }

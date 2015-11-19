@@ -535,4 +535,14 @@ public class QualityTestCaseDaoImpl extends TinyDslDaoSupport implements Quality
 		Select select = select(QUALITY_TEST_CASETABLE.NO.max()).from(QUALITY_TEST_CASETABLE).where(QUALITY_TEST_CASETABLE.PRODUCT_ID.eq(productId));
 		return getDslSession().fetchOneResult(select,Integer.class);
 	}
+
+	public Integer deleteCaseByProduct(Integer productId) {
+		Update update = update(QUALITY_TEST_CASETABLE).set(QUALITY_TEST_CASETABLE.DELETED.value(1)).where(and(QUALITY_TEST_CASETABLE.PRODUCT_ID.eq(productId), QUALITY_TEST_CASETABLE.DELETED.eq(0)));
+		return getDslSession().execute(update);
+	}
+
+	public Integer deleteCaseByStory(Integer storyId) {
+		Update update = update(QUALITY_TEST_CASETABLE).set(QUALITY_TEST_CASETABLE.DELETED.value(1)).where(and(QUALITY_TEST_CASETABLE.STORY_ID.eq(storyId), QUALITY_TEST_CASETABLE.DELETED.eq(0)));
+		return getDslSession().execute(update);
+	}
 }

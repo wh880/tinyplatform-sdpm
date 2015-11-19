@@ -24,6 +24,7 @@ import static org.tinygroup.tinysqldsl.Insert.insertInto;
 import static org.tinygroup.tinysqldsl.Select.selectFrom;
 import static org.tinygroup.tinysqldsl.Update.update;
 import static org.tinygroup.tinysqldsl.Select.*;
+import static org.tinygroup.tinysqldsl.base.Condition.orWithBrackets;
 import static org.tinygroup.tinysqldsl.select.Join.*;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 
@@ -55,7 +56,9 @@ import org.tinygroup.tinysqldsl.Update;
 import org.tinygroup.tinysqldsl.base.Condition;
 import org.tinygroup.tinysqldsl.base.FragmentSql;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
+import org.tinygroup.tinysqldsl.expression.relational.ExistsExpression;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
+import org.tinygroup.tinysqldsl.formitem.SubSelect;
 import org.tinygroup.tinysqldsl.select.OrderByElement;
 import org.tinygroup.tinysqldsl.selectitem.FragmentSelectItemSql;
 @Repository
@@ -245,6 +248,14 @@ public class ProductLineDaoImpl extends TinyDslDaoSupport implements ProductLine
 
 		};
 		Select select = callback.generate(ids);
+		return getDslSession().fetchList(select,ProductLine.class);
+	}
+
+	public List<ProductLine> getUserProductLines(String userId) {
+		Select select = selectFrom(PRODUCT_LINETABLE).where(
+				and(PRODUCT_LINETABLE.DELETED.eq(0),
+						orWithBrackets(PRODUCT_LINETABLE.ACL.eq(ProductLine.ACl_All),
+								orWithBrackets(PRODUCT_LINETABLE.PRODUCT_LINE_OWNER.eq(userId), PRODUCT_LINETABLE.PRODUCT_LINE_DELIVERY_MANAGER.eq(userId), PRODUCT_LINETABLE.PRODUCT_LINE_QUALITY_MANAGER.eq(userId)))));
 		return getDslSession().fetchList(select,ProductLine.class);
 	}
 
