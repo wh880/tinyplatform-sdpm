@@ -23,6 +23,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * 动态
  * Created by Administrator on 2015-10-17.
  */
 
@@ -61,6 +62,7 @@ public class ActiveAction extends BaseController {
 
     /**
      * 根据选择的时间段、用户、产品、项目来查询相应的动态
+     *
      * @param start
      * @param limit
      * @param order
@@ -87,7 +89,7 @@ public class ActiveAction extends BaseController {
         if (!StringUtil.isBlank(selDate) && StringUtil.isBlank(orgUserId)
                 && StringUtil.isBlank(productId) && StringUtil.isBlank(projectId)) {
             betweenDate(selDate, startDate, endDate);
-            if (startDate == null && endDate == null) {
+            if ("0".equals(selDate)) {
                 Pager<SystemAction> actionPager = actionService.findSystemActionPager(start, limit, systemAction, order, ordertype);
                 model.addAttribute("actionPager", actionPager);
             } else {
