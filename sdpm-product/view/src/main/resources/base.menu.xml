@@ -151,10 +151,10 @@
               scope="product-re"/>
         <menu id="product-release-add" name="创建发布" href="" icon="" sort="10" isShow="1"
               scope="product-addre"/>
-        <menu id="product-release-log" name="发布日志" href="/product/page/tabledemo/product-log.pagelet" icon="icon-time"
+        <menu id="product-release-doc" name="导出文档" href="" icon="icon-doc"
               sort="9" isShow="1"
               scope="product-relog"/>
-        <menu id="release-table-export" name="导出HTML" href="" icon="" sort="1" isShow="1"
+        <menu id="release-table-export" name="导出文档" href="/product/release/exportDoc" icon="" sort="1" isShow="1"
               scope="table-export"/>
         <menu id="product-release-badel" name="批量删除" href="" icon="" sort="1" isShow="1"
               scope="release-badel"/>

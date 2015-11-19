@@ -17,12 +17,15 @@ import org.tinygroup.sdpm.product.service.StoryService;
 import org.tinygroup.sdpm.system.dao.pojo.ProfileType;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;
+import org.tinygroup.sdpm.system.service.inter.ExportService;
 import org.tinygroup.sdpm.system.service.inter.ProfileService;
 import org.tinygroup.sdpm.util.LogUtil;
 import org.tinygroup.sdpm.util.UserUtils;
+import org.tinygroup.template.TemplateException;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.*;
 
@@ -44,6 +47,8 @@ public class ReleaseAction extends BaseController {
     private ProfileService profileService;
     @Autowired
     private StoryService storyService;
+    @Autowired
+    private ExportService exportService;
 
     public static String storyIdUtils(String soure, String inde) {
         soure = soure.replaceAll(inde, "").replaceAll(",,", ",");
@@ -357,5 +362,9 @@ public class ReleaseAction extends BaseController {
         } else {
             return resultMap(false, "");
         }
+    }
+    @RequestMapping("/exportDoc")
+    public void exportDocument(Integer releaseId, HttpServletResponse response) throws IOException, TemplateException {
+        exportService.exportReleaseDoc(response,releaseId);
     }
 }

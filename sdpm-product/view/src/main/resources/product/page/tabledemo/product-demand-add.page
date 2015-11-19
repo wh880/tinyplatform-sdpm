@@ -4,20 +4,18 @@
 <input id="${sid}-input-name" type="text" value="" #getMapInfo(mapInfo)/>
 <input id="${sid}-input" name="${name}" type="hidden" value="${value}" #getMapInfo(mapInfo)/>
 <div class="hide" id="${sid}-rap">
-    <div id="${sid}-content" class="t-menu-content"
-         style="display:none; position: absolute;z-index:9999;border:1px solid #0f9ae0;border-top:0;background:#fff;padding:5px 5px 10px">
-        <ul id="ztree${sid}" class="ztree"
-            style="margin-top:0;max-height:400px;overflow-x:auto;overflow-y:auto;background:none;border:0">
+    <div id="${sid}-content" class="t-menu-content" style="display:none; position: absolute;z-index:9999;border:1px solid #0f9ae0;border-top:0;background:#fff;padding:5px 5px 10px">
+        <ul id="ztree${sid}" class="ztree" style="margin-top:0;max-height:400px;overflow-x:auto;overflow-y:auto;background:none;border:0">
         </ul>
         <div class="hide" id="${sid}-msg">暂无信息</div>
-        <span style="position:absolute;right:10px;bottom:5px;z-index:2;cursor:pointer" id="close${sid}"><i
-                class="icon-remove"></i></span>
+        <span style="position:absolute;right:10px;bottom:5px;z-index:2;cursor:pointer" id="close${sid}"><i class="icon-remove"></i></span>
         #bodyContent
     </div>
 </div>
 <script type="text/javascript">
 
-    $(function () {
+    $(function(){
+        //$("body").append('<div id="${sid}-content" class="t-menu-content" style="display:none; position: absolute;z-index:9999"><ul id="ztree${sid}" class="ztree mCustomScrollbar" style="margin-top:0;max-height:400px;overflow-x:auto;overflow-y:auto"></ul><span style="position:absolute;right:5px;bottom:0px;z-index:2;cursor:pointer" id="close${sid}"><i class="icon-remove"></i></span></div>');
         var setting = {
             view: {
                 dblClickExpand: false
@@ -33,15 +31,11 @@
             }
         };
         var zTree;
-        var zNodes = [];
-        var $treeContent =
-        $("#ztree${sid}");
-        var $treeRap =
-        $("#${sid}-content");
-        var $input =
-        $("#${sid}-input-name");
-        var $inputV =
-        $("#${sid}-input");
+        var zNodes =[];
+        var $treeContent=$("#ztree${sid}");
+        var $treeRap=$("#${sid}-content");
+        var $input=$("#${sid}-input-name");
+        var $inputV=$("#${sid}-input");
 
         #set(dataurl=call("getMapVal","data-URL",mapInfo))
         #if(dataurl)
@@ -49,9 +43,9 @@
                 type: "GET",
                 url: "${dataurl}",
                 dataType: "json",
-                success: function (data) {
+                success: function(data) {
                     //data= eval(' ' +data+ ' ');
-                    zNodes = data;
+                    zNodes=data;
                     //console.log(zNodes);
                     initzTree();
                 }
@@ -63,21 +57,18 @@
             $input.on("change",function(){
             $inputV.val("");
         });
-        function initzTree() {
-            zTree = $.fn.zTree.init($treeContent, setting, zNodes);
+        function initzTree(){
+            zTree=$.fn.zTree.init($treeContent, setting, zNodes);
             initInputVale();
             #if(value)
                     $inputV.change();
             #end
         }
-
-        function initInputVale() {
-            var $val =$inputV.val();
-            if (!$val) return false;
-            for (var i = 0; i < zNodes.length; i++) {
-                if ($val==zNodes[i].id
-            )
-                {
+        function initInputVale(){
+            var $val=$inputV.val();
+            if(!$val) return false;
+            for(var i=0;i<zNodes.length;i++){
+                if($val==zNodes[i].id){
                         $input.val(zNodes[i].name);
                         $inputV.val($val);
                     break;
@@ -105,23 +96,21 @@
             $input.on("click",function(){
             $("body").append($treeRap);
         var thisOffset = $(this).offset();
-            $treeRap.css({width:$(this).css("width"),left:thisOffset.left +
-                "px", top:thisOffset.top + $(this).outerHeight() + "px"}).slideDown("fast");
+            $treeRap.css({width:$(this).css("width"),left:thisOffset.left + "px", top:thisOffset.top + $(this).outerHeight() + "px"}).slideDown("fast");
         });
         $treeRap.find("#close${sid}").on("click",function(){
     hideMenu();
-    })
-    ;
+    });
         function bfxs(zTree, nodes, tt) {
             if (nodes.children == null) {//无子节点
                 if (nodes[zTree.setting.data.key.name].indexOf(tt) >= 0) {//无子节点，但是包含tt
                     fjdxs(zTree, nodes);
                 }
-            } else {//有子节点
-                if (nodes[zTree.setting.data.key.name].indexOf(tt) >= 0) {//有而且包含
+            }else {//有子节点
+                if (nodes[zTree.setting.data.key.name].indexOf(tt) >= 0){//有而且包含
                     fjdxs(zTree, nodes);
                     xsall(zTree, nodes);
-                } else {//有但不包含
+                }else {//有但不包含
                     $.each(nodes.children, function (aa, bb) {
                         bfxs(zTree, bb, tt);
                     })
@@ -156,19 +145,18 @@
                 })
             }
         }
-
-        $("#${sid}-input-name").on("propertychange input", function () {
+        $("#${sid}-input-name").on("propertychange input",function(){
             var key = $(this).val();
             var nodes = zTree.getNodes();
             zTree.showNodes(nodes);
-            if (!key) {
+            if(!key){
                 $("#${sid}-msg").hide();
                 return;
             }
             var zts = zTree.getNodesByParamFuzzy("name", key);
-            if (zts.length == 0) {
+            if (zts.length==0){
                 $("#${sid}-msg").show();
-            } else {
+            }else{
                 $("#${sid}-msg").hide();
             }
 
@@ -234,57 +222,53 @@
                     "productId" cookieProductId {"class":"input-text","datatype":"*","nullmsg":"所属产品不能为空！",
                     "data-URL":call("link",adminPath+"/productLine/userProductTree")})
                     <script>
-                        $("#${sid}-input").on("change", function () {
+                        $("#${sid}-input").on("change",function(){
                             var pId = $(this).val();
                             if (pId > 0) {
-                                ajaxRead("${sid}", "moduleId", "moduleId", "moduleName", "/quality/bug/ajax/module?moduleRoot=" + pId, "0", "module");
-                                ajaxRead("${sid}", "planId", "planId", "planName", "/product/plan/planList?productId=" + pId, "0", "plan");
+                                ajaxRead("${sid}", "moduleId", "moduleId", "moduleName", "/quality/bug/ajax/module?moduleRoot=" + pId,"0","module");
+                                ajaxRead("${sid}", "planId", "planId", "planName", "/product/plan/planList?productId=" + pId,"0","plan");
                                 var url = $("#modelA").attr("href");
-                                if (!url.endsWith("=")) {
-                                    url = url.substring(0, url.indexOf("=") + 1);
+                                if(!url.endsWith("=")){
+                                    url = url.substring(0,url.indexOf("=")+1);
                                 }
-                                $("#modelA").attr("href", url + pId)
+                                $("#modelA").attr("href",url+pId)
                                 $("input[name=storyTitle]").blur();
-                                }
+                            }
                         })
-
                     </script>
-                    <span><a href="${TINY_CONTEXT_PATH +adminPath}/product/addproduct/addition "
-                             class="r ">增加</a></span>
-                    #end
-                </div>
+                    <span><a href="${TINY_CONTEXT_PATH +adminPath}/product/addproduct/addition " class="r ">增加</a></span>
+                #end
+            </div>
             <div class="col-7">
                 <div class="col-4 text-c">所属模块：</div>
                 <div class="col-8">
                     #@Tselect2F()
-                        #@Tselect2Body(
-                            "moduleId" 0 {"class":"input-text select2","url":"/system/module/moduleList","ajaxType":
+                        #@Tselect2Body("moduleId" 0 {"class":"input-text select2","url":"/system/module/moduleList","ajaxType":
                             "systemModel","data":"moduleType=product","relateElem":
                             "relateModelTwo"}) ##,"multiple":"multiple"加上为多选项
                         #end
-                        #@Tselect2Fix()#@aModal(
-                            "#myModal" "" "500" "300" "btn-class" adminPath+"/product/addModule?pId=" "modelA")
+                        #@Tselect2Fix()#@aModal("#myModal" "" "500" "300" "btn-class" adminPath+"/product/addModule?pId=" "modelA")
                             增加#end
                         #end
                     #end
                 </div>
             </div>
         #end
-        #end
+    #end
 
     #@elementItem()
         #@colLabel()所属计划：#end
         #@formControlDiv("col-4")
             #@Tselect2F()
                 #@Tselect2Body("planId" 0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                    #end
+                #end
 
                 #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH +adminPath}/product/plan/addplan"
                                   class="r">增加</a>#end
-                #end
             #end
-        #@validateDiv("col-2")#end
         #end
+        #@validateDiv("col-2")#end
+    #end
 
     #@elementItem()
         #@colLabel()<span class="c-red">*</span>来源：#end
@@ -298,9 +282,9 @@
                             <option value="${source?.value}"> ${source?.text}</option>
                         #end
 
-                        #end
-
                     #end
+
+                #end
             </div>
         <span class="customer-request" style="display:none">
             <div class="col-2 text-c">&nbsp;<span class="c-red">*</span>请求：
@@ -321,7 +305,7 @@
     </span>
 
     #end
-        #end
+#end
 
 
 #@elementItem()
@@ -331,32 +315,32 @@
             "text" "storyTitle" ""{"placeholder":"请输入需求名称","datatype":"*","nullmsg":"需求名称不能为空！","id":"email",
             "class":"input-text"})
         <script>
-            $("input[name=storyTitle]").on("blur", function () {
+            $("input[name=storyTitle]").on("blur",function(){
                 var pName = $(this).val();
-                if (pName) {
-                    var pId;
-                    $("form[name=thisform]").find("input[type=hidden]").each(function () {
-                        if ($(this).attr("id").indexOf("-input") > 0 && $(this).attr("id").indexOf("-name") < 0) {
+                if(pName){
+                    var pId ;
+                    $("form[name=thisform]").find("input[type=hidden]").each(function(){
+                        if($(this).attr("id").indexOf("-input")>0&&$(this).attr("id").indexOf("-name")<0){
                             pId = $(this).val();
-                                }
+                        }
                     });
-                    if (pId > 0) {
+                    if(pId>0){
                         $.ajax({
-                            url: "${TINY_CONTEXT_PATH+adminPath}/product/story/judgeStoryName",
-                            type: "POST",
-                            data: {storyTitle: pName, productId: pId},
-                            success: function (data) {
-                                if (data.status == "y") {
+                            url:"${TINY_CONTEXT_PATH+adminPath}/product/story/judgeStoryName",
+                            type:"POST",
+                            data:{storyTitle:pName,productId:pId},
+                            success:function(data){
+                                if(data.status=="y"){
                                     $("input[name=storyTitle]").addClass("Validform_error");
                                     $("input[name=storyTitle]").parent().parent().find("div[class=col-2]").html("<span class='Validform_checktip Validform_wrong'>该需求名已存在！</span>");
-                                } else {
+                                }else{
                                     $("input[name=storyTitle]").removeClass("Validform_error");
                                     $("input[name=storyTitle]").parent().parent().find("div[class=col-2]").html("");
                                 }
                             }
                         });
                         return false;
-                            }
+                    }
                 }
             });
         </script>
@@ -391,8 +375,8 @@
                 #end
             #end
 
-                #end
-            #end
+        #end
+    #end
     #@validateDiv("col-2")#end
 #end
 
@@ -406,7 +390,7 @@
         </div>
     #end
     #@validateDiv("col-2")#end
-        #end
+#end
 
 #@elementItem()
     #@sdpmItem("<span class='c-red'>*</span>由谁评审")
@@ -427,10 +411,10 @@
                 <a href="${TINY_CONTEXT_PATH}/a/org/user/list" class="r">全部</a>
             #end
 
-                #end
+        #end
 
 
-            #end
+    #end
     #@checkboxBox()
 
         #@label(labelFor="checkbox-6")
@@ -439,7 +423,7 @@
         #end
     #end
 
-        #end
+#end
 
 #@elementItem()
     #@colLabel()抄送给：#end
@@ -456,9 +440,9 @@
                 <a href="${TINY_CONTEXT_PATH}/a/org/user/list" class="r">全部</a>
             #end
         #end
-            #end
+    #end
     #@validateDiv("col-2")#end
-        #end
+#end
 
 
 #@elementItem()
@@ -466,9 +450,9 @@
     #@formControlDiv("col-4")
         #tinyInput(
             "text" "storyKeywords" ""{"datatype":"","id":"text","class":"input-text"})
-            #end
+    #end
     #@validateDiv("col-2")#end
-        #end
+#end
 
 
 #@elementItem()
@@ -492,7 +476,7 @@
     </div>
     <div class="col-5"></div>
 
-    #end
+#end
 </div>
 #end
 

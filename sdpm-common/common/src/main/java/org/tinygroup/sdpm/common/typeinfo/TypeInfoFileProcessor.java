@@ -12,25 +12,25 @@ import org.tinygroup.xstream.XStreamFactory;
 public class TypeInfoFileProcessor extends AbstractFileProcessor {
     private static final String TYPEINFO_EXT_FILE_NAME = ".typeinfo.xml";
 
-    private TypeInfoResolvor typeInfoResolvor;
+    private TypeInfoResolver typeInfoResolver;
 
-    public TypeInfoResolvor getTypeInfoResolvor() {
-        return typeInfoResolvor;
+    public TypeInfoResolver getTypeInfoResolver() {
+        return typeInfoResolver;
     }
 
-    public void setTypeInfoResolvor(TypeInfoResolvor typeInfoResolvor) {
-        this.typeInfoResolvor = typeInfoResolvor;
+    public void setTypeInfoResolver(TypeInfoResolver typeInfoResolver) {
+        this.typeInfoResolver = typeInfoResolver;
     }
 
     public void process() {
         XStream stream = XStreamFactory
-                .getXStream(TypeInfoResolvorImpl.TYPEINFO_XSTREAM_);
+                .getXStream(TypeInfoResolverImpl.TYPEINFO_XSTREAM_);
         for (FileObject fileObject : deleteList) {
             LOGGER.logMessage(LogLevel.INFO, "正在移除typeInfo文件[{0}]",
                     fileObject.getAbsolutePath());
             TypeInfos typeinfos = (TypeInfos) caches.get(fileObject.getAbsolutePath());
             if (typeinfos != null) {
-                typeInfoResolvor.removeTypeInfo(typeinfos);
+                typeInfoResolver.removeTypeInfo(typeinfos);
                 caches.remove(fileObject.getAbsolutePath());
             }
             LOGGER.logMessage(LogLevel.INFO, "移除typeInfo文件[{0}]结束",
@@ -41,11 +41,11 @@ public class TypeInfoFileProcessor extends AbstractFileProcessor {
                     fileObject.getAbsolutePath());
             TypeInfos oldTypeinfos = (TypeInfos) caches.get(fileObject.getAbsolutePath());
             if (oldTypeinfos != null) {
-                typeInfoResolvor.removeTypeInfo(oldTypeinfos);
+                typeInfoResolver.removeTypeInfo(oldTypeinfos);
             }
             TypeInfos typeinfos = (TypeInfos) stream
                     .fromXML(fileObject.getInputStream());
-            typeInfoResolvor.addTypeInfo(typeinfos, fileObject.getAbsolutePath());
+            typeInfoResolver.addTypeInfo(typeinfos, fileObject.getAbsolutePath());
             caches.put(fileObject.getAbsolutePath(), typeinfos);
             LOGGER.logMessage(LogLevel.INFO, "加载typeInfo文件[{0}]结束",
                     fileObject.getAbsolutePath());

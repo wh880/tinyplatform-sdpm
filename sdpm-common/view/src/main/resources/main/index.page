@@ -20,7 +20,7 @@
         <!-- new widget -->
 			#@widgetDiv("padding-clear" "wid-id-1" {"data-widget-editbutton":"false","data-widget-fullscreenbutton":"true"})
 
-				#headerBox(" icon-bar-chart" "产品统计")
+				#headerBox(" icon-bar-chart" "项目统计")
 
             <!-- widget div-->
             <div class="no-padding">

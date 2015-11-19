@@ -519,7 +519,7 @@ public class BugAction extends BaseController {
     @ResponseBody
     @RequestMapping("/ajax/project")
     public List<Project> getProject(ProjectProduct projectProduct) {
-        if (projectProduct.getProductId() < 1) {
+        if (projectProduct.getProductId()==null/*||projectProduct.getProductId() < 1*/) {
             return new ArrayList<Project>();
         }
         List<ProjectProduct> projectProducts = projectProductService.findProjects(projectProduct.getProductId());
@@ -582,6 +582,7 @@ public class BugAction extends BaseController {
         if (projectBuild.getBuildProduct() < 1 || projectBuild.getBuildProduct() == null) {
             return new ArrayList<ProjectBuild>();
         }
+        projectBuild.setBuildDeleted("0");
         return buildService.findListBuild(projectBuild);
     }
 

@@ -9,9 +9,9 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * Created by wangll13383 on 2015/9/6.
  */
-public class TypeInfoResolvorImpl implements TypeInfoResolvor {
+public class TypeInfoResolverImpl implements TypeInfoResolver {
 
-    protected static final Logger LOGGER = LoggerFactory.getLogger(TypeInfoResolvorImpl.class);
+    protected static final Logger LOGGER = LoggerFactory.getLogger(TypeInfoResolverImpl.class);
 
     private static Map<String, TypeInfo> typeDict = new ConcurrentHashMap<String, TypeInfo>();
 
