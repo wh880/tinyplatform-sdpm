@@ -413,14 +413,20 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
     }
 
     public List<Product> getProductByUser(String userId) {
-        Select select = selectFrom(PRODUCTTABLE).where(andWithBrackets(PRODUCTTABLE.DELETED.eq(0), orWithBrackets(PRODUCTTABLE.ACL.eq(Product.ACl_All), ExistsExpression.existsCondition(SubSelect.subSelect(selectFrom(PROJECT_TEAMTABLE).
-                where(and(PRODUCTTABLE.ACL.eq(Product.ACl_TEAM), PROJECT_TEAMTABLE.PRODUCT_ID.eq(PRODUCTTABLE.PRODUCT_ID), PROJECT_TEAMTABLE.TEAM_USER_ID.eq(userId))))))));
+        Select select = selectFrom(PRODUCTTABLE).where(
+                and(PRODUCTTABLE.DELETED.eq(0),
+                        orWithBrackets(PRODUCTTABLE.ACL.eq(Product.ACl_All),
+                                orWithBrackets(PRODUCTTABLE.PRODUCT_OWNER.eq(userId),PRODUCTTABLE.PRODUCT_DELIVERY_MANAGER.eq(userId),PRODUCTTABLE.PRODUCT_QUALITY_MANAGER.eq(userId),ExistsExpression.existsCondition(SubSelect.subSelect(selectFrom(PROJECT_TEAMTABLE).
+                where(and(PRODUCTTABLE.ACL.eq(Product.ACl_TEAM), PROJECT_TEAMTABLE.PRODUCT_ID.eq(PRODUCTTABLE.PRODUCT_ID), PROJECT_TEAMTABLE.TEAM_USER_ID.eq(userId)))))))));
         return getDslSession().fetchList(select, Product.class);
     }
 
     public List<Product> getProductByUserWithCount(String userId) {
-        Select select = getComplexSelect().where(andWithBrackets(PRODUCTTABLE.DELETED.eq(0), orWithBrackets(PRODUCTTABLE.ACL.eq(Product.ACl_All), ExistsExpression.existsCondition(SubSelect.subSelect(selectFrom(PROJECT_TEAMTABLE).
-                where(and(PRODUCTTABLE.ACL.eq(Product.ACl_TEAM), PROJECT_TEAMTABLE.PRODUCT_ID.eq(PRODUCTTABLE.PRODUCT_ID), PROJECT_TEAMTABLE.TEAM_USER_ID.eq(userId)))))))).groupBy(PRODUCTTABLE.PRODUCT_ID);
+        Select select = getComplexSelect().where(
+                and(PRODUCTTABLE.DELETED.eq(0),
+                        orWithBrackets(PRODUCTTABLE.ACL.eq(Product.ACl_All),
+                                orWithBrackets(PRODUCTTABLE.PRODUCT_OWNER.eq(userId), PRODUCTTABLE.PRODUCT_DELIVERY_MANAGER.eq(userId), PRODUCTTABLE.PRODUCT_QUALITY_MANAGER.eq(userId), ExistsExpression.existsCondition(SubSelect.subSelect(selectFrom(PROJECT_TEAMTABLE).
+                                        where(and(PRODUCTTABLE.ACL.eq(Product.ACl_TEAM), PROJECT_TEAMTABLE.PRODUCT_ID.eq(PRODUCTTABLE.PRODUCT_ID), PROJECT_TEAMTABLE.TEAM_USER_ID.eq(userId))))))))).groupBy(PRODUCTTABLE.PRODUCT_ID);
         return getDslSession().fetchList(select, Product.class);
     }
 
@@ -444,6 +450,15 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
                         PRODUCTTABLE.PRODUCT_CREATED_DATE.eq(product.getProductCreatedDate()),
                         PRODUCTTABLE.PRODUCT_CREATED_VERSION.eq(product.getProductCreatedVersion()),
                         PRODUCTTABLE.DELETED.eq(product.getDeleted())));
+        return getDslSession().fetchList(select, Product.class);
+    }
+
+    public List<Product> getProductByUserAndProductLineWithCount(String userId, Integer productLineId) {
+        Select select = getComplexSelect().where(
+                and(PRODUCTTABLE.DELETED.eq(0),
+                        orWithBrackets(PRODUCTTABLE.ACL.eq(Product.ACl_All),
+                                orWithBrackets(PRODUCTTABLE.PRODUCT_OWNER.eq(userId), PRODUCTTABLE.PRODUCT_DELIVERY_MANAGER.eq(userId), PRODUCTTABLE.PRODUCT_QUALITY_MANAGER.eq(userId), ExistsExpression.existsCondition(SubSelect.subSelect(selectFrom(PROJECT_TEAMTABLE).
+                                        where(and(PRODUCTTABLE.ACL.eq(Product.ACl_TEAM), PROJECT_TEAMTABLE.PRODUCT_ID.eq(PRODUCTTABLE.PRODUCT_ID), PROJECT_TEAMTABLE.TEAM_USER_ID.eq(userId))))))),PRODUCTTABLE.PRODUCT_LINE_ID.eq(productLineId))).groupBy(PRODUCTTABLE.PRODUCT_ID);
         return getDslSession().fetchList(select, Product.class);
     }
 

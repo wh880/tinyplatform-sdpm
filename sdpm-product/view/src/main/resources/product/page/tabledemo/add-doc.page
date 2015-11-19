@@ -73,12 +73,9 @@
                 #@Tselect2F()
                     #@Tselect2Body(
                         "docProduct" cookieProductId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                        <option value="0">/</option>
-                        #if(cookieProductLineId)
-                            #foreach(product : ProductUtils.getProductListByLine(cookieProductLineId))
+                            #foreach(product : ProductUtils.getAllProductListByUser())
                                 <option value="${product?.productId}">${product?.productName}</option>
                             #end
-                        #end
                     #end
 
                     #@Tselect2Fix()

@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.util;
 
+import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.service.impl.LogServiceImpl;
 import org.tinygroup.sdpm.system.service.inter.LogService;
@@ -34,8 +35,8 @@ public class LogUtil {
                                   Object oldObject, Object newObject, String comment) {
         SystemAction systemAction = new SystemAction();
         systemAction.setActionAction(action);
-        systemAction.setActionProduct(String.valueOf(product));
-        systemAction.setActionProject(String.valueOf(project));
+        systemAction.setActionProduct(String.valueOf(StringUtil.isBlank(product)?"":product));
+        systemAction.setActionProject(String.valueOf(StringUtil.isBlank(project)?"":project));
         systemAction.setActionObjectType(objectType);
         systemAction.setActionDate(new Date());
         systemAction.setActionObjectId(String.valueOf(objectId));

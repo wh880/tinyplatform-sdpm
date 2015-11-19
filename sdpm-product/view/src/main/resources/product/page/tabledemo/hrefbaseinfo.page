@@ -44,7 +44,7 @@
                 #end
                 #@tr()
                     #@td()关键词#end
-                    #@td()${stroy?.storyKeywords}#end
+                    #@td()${story?.storyKeywords}#end
                 #end
                 #@tr()
                     #@td()抄送给#end
@@ -116,9 +116,7 @@
                     #@th() 名称 #end
                     #for(task:taskList)
                     #@tr()
-                        #@td()${task?.taskId}#end #@td()<a
-                            href="${TINY_CONTEXT_PATH + adminPath}/project/task/findTask?taskId=1">${task
-                        ?.taskName}</a>#end
+                        #@td()${task?.taskId}#end #@td()<a href="${TINY_CONTEXT_PATH + adminPath}/project/task/findTask?taskId=1">${task?.taskName}</a>#end
                     #end
                 #end
 
@@ -143,9 +141,8 @@
             #@tr()
                 #@td()相关用例#end
                 #@td()
-                    #for(task:taskList)
-                    <a href="${TINY_CONTEXT_PATH + adminPath}/quality/bug/bugInfo?bugId=${bug?.bugId}">${task
-                        ?.taskName}</a>${taskFor.last?"":","}
+                    #for(case:caseList)
+                    <a href="${TINY_CONTEXT_PATH + adminPath}/quality/testCase/case/viewInfo?id=${case?.bcaseId}">${case?.caseTitle}</a>${taskFor.index==1?"":","}
                 #end
             #end
         #end

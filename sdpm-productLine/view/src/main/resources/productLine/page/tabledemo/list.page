@@ -13,8 +13,8 @@
 						#@tinyTh({"class":"sorting sorting_desc","rel":"productLineId"})ID#end
 						#@tinyTh({"class":"sorting","rel":"productLineName"})名称#end
 						#@tinyTh({"class":"sorting sorting_desc","rel":"productLineCode"})编号#end
-						#@tinyTh({"class":"sorting","rel":"companyId"})公司#end
-						#@tinyTh({"class":"sorting","rel":"deptId"})部门#end
+##						#@tinyTh({"class":"sorting","rel":"companyId"})公司#end
+##						#@tinyTh({"class":"sorting","rel":"deptId"})部门#end
 						#@tinyTh({"class":"sorting","rel":"productLineOwner"})经理#end
 						#@tinyTh({"class":"sorting","rel":"productLineQualityManager"})质量经理#end
 						#@tinyTh({"class":"sorting","rel":"productLineDeliveryManager"})交付经理#end

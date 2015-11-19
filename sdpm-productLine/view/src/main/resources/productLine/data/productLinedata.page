@@ -1,7 +1,4 @@
-#set(records=productLine?.totalCount,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)*#
-#if (pagesize>records-pagesize*(page-1))
-    #set(pagesize=records-(page-1)*pagesize)
-#end
+
 #setTinyItemCount(productLine?.totalCount)
 #for(productLine:productLine?.records)
 #@tr()
@@ -11,8 +8,8 @@
         ?.productLineName}</a>
     #end
     #@td()${productLine?.productLineCode}#end
-    #@td()${productLine?.companyId}#end
-    #@td()${productLine?.deptId}#end
+##    #@td()${productLine?.companyId}#end
+##    #@td()${productLine?.deptId}#end
     #@td()${productLine?.productLineOwner?UserUtils.getUserById(productLine?.productLineOwner)?.orgUserRealName:""}#end
     #@td()${productLine?.productLineQualityManager?UserUtils.getUserById(productLine?.productLineQualityManager)?.orgUserRealName:""}#end
     #@td()${productLine?.productLineDeliveryManager?UserUtils.getUserById(productLine?.productLineDeliveryManager)?.orgUserRealName:""}#end

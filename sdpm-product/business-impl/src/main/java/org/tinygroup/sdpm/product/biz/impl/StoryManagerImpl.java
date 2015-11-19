@@ -18,6 +18,8 @@ import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec;
 import org.tinygroup.sdpm.product.dao.pojo.StoryCount;
+import org.tinygroup.sdpm.quality.dao.QualityBugDao;
+import org.tinygroup.sdpm.quality.dao.QualityTestCaseDao;
 import org.tinygroup.sdpm.system.dao.SystemModuleDao;
 import org.tinygroup.sdpm.system.dao.impl.util.ModuleUtil;
 import org.tinygroup.tinysqldsl.Pager;
@@ -37,7 +39,10 @@ public class StoryManagerImpl implements StoryManager {
     private ProductStorySpecDao storySpecDao;
     @Autowired
     private SystemModuleDao systemModuleDao;
-
+    @Autowired
+    private QualityBugDao qualityBugDao;
+    @Autowired
+    private QualityTestCaseDao qualityTestCaseDao;
     public ProductStory add(ProductStory story, ProductStorySpec storySpec) {
         Integer no = productStoryDao.getMaxNo(story.getProductId());
         story.setNo(no==null?1:no+1);
@@ -99,6 +104,10 @@ public class StoryManagerImpl implements StoryManager {
     }
 
     public Integer delete(Integer storyId) {
+        //删bug
+        qualityBugDao.deleteBugsByStory(storyId);
+        //删case
+        qualityTestCaseDao.deleteCaseByStory(storyId);
 
         return productStoryDao.softDelete(storyId);
     }

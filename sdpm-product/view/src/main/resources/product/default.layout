@@ -55,6 +55,16 @@
                             }
 
                         }
+                    }else{
+                        if (value != null) {
+                            var values = value.split(",");
+                            if(values.length>1){
+                                sele.val(values).trigger("change");
+                            }else{
+                                sele.val(value).trigger("change");
+                            }
+
+                        }
                     }
                 },
                 error: function (res) {

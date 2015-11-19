@@ -63,4 +63,7 @@ public interface ProductStoryDao extends BaseDao<ProductStory,Integer> {
 
 	Integer batchDelete(Integer ...ids);
 
+	Integer deleteStoryByProduct(Integer productId);
+
+	Integer deleteStoryByPlan(Integer planId);
 }
