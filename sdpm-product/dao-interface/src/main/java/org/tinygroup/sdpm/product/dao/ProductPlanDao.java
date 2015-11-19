@@ -40,4 +40,6 @@ public interface ProductPlanDao extends BaseDao<ProductPlan,Integer> {
 	Integer getMaxNo(Integer productId);
 
 	Integer batchDelete(Integer...ids);
+
+	Integer deletePlanByProduct(Integer productId);
 }

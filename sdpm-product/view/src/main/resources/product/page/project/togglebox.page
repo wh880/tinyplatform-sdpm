@@ -119,27 +119,27 @@
     <span class="r">
         #foreach(m:menuManager?.getScopeMenus("product-io"))
             #if(m?.id=="product-demand-input")
-                #@aModal("#myModal" "导入" "600" "65" "btn-class"
-                    "/product/page/tabledemo/product-import.pagelet")#buttonIcon(iconClass="icon-download-alt")导入#end
+##                #@aModal("#myModal" "导入" "600" "65" "btn-class"
+##                    "/product/page/tabledemo/product-import.pagelet")#buttonIcon(iconClass="icon-download-alt")导入#end
 
             #else
 
                 #if(m?.id=="product-demand-output")
-                    #@buttonGroup()
-                        #@buttonDropdown("Dropdown") #buttonIcon(iconClass="icon-upload-alt")导出  #@spanCaret()#end#end
-                        #@ulDropdownMenu("downMenuSty")
-                            <p>#@iconOperations(
-                                "#myModal" "" "导出" "400" "254"  "/product/page/tabledemo/product-export-data.pagelet"
-                                "ml-5")
-                                &nbsp;导出数据#end</p>
-
-                            #@iconOperations(
-                                "#myModal" "" "导出" "700" "64" "/product/page/tabledemo/product-export-template.pagelet"
-                                "ml-5")
-                                &nbsp;导出模板#end
-
-                        #end
-                    #end
+##                    #@buttonGroup()
+##                        #@buttonDropdown("Dropdown") #buttonIcon(iconClass="icon-upload-alt")导出  #@spanCaret()#end#end
+##                        #@ulDropdownMenu("downMenuSty")
+##                            <p>#@iconOperations(
+##                                "#myModal" "" "导出" "400" "254"  "/product/page/tabledemo/product-export-data.pagelet"
+##                                "ml-5")
+##                                &nbsp;导出数据#end</p>
+##
+##                            #@iconOperations(
+##                                "#myModal" "" "导出" "700" "64" "/product/page/tabledemo/product-export-template.pagelet"
+##                                "ml-5")
+##                                &nbsp;导出模板#end
+##
+##                        #end
+##                    #end
                 #else
                     <a class="ml-5" href="${TINY_CONTEXT_PATH +adminPath}${m?.href}"><i
                             class="${m?.icon}">&nbsp;${m?.name}</i></a>

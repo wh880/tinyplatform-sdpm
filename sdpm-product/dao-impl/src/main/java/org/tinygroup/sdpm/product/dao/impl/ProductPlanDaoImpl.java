@@ -39,6 +39,7 @@ import java.util.Date;
 import java.util.List;
 
 import static org.tinygroup.sdpm.product.dao.constant.ProductPlanTable.PRODUCT_PLANTABLE;
+import static org.tinygroup.sdpm.product.dao.constant.ProductReleaseTable.PRODUCT_RELEASETABLE;
 import static org.tinygroup.sdpm.product.dao.constant.ProductStoryTable.PRODUCT_STORYTABLE;
 import static org.tinygroup.tinysqldsl.Delete.delete;
 import static org.tinygroup.tinysqldsl.Insert.insertInto;
@@ -149,6 +150,11 @@ public class ProductPlanDaoImpl extends TinyDslDaoSupport implements ProductPlan
             }
         };
         return getDslSession().execute(callback.generate(ids));
+    }
+
+    public Integer deletePlanByProduct(Integer productId) {
+        Update update = update(PRODUCT_PLANTABLE).set(PRODUCT_PLANTABLE.DELETED.value(1)).where(and(PRODUCT_PLANTABLE.PRODUCT_ID.eq(productId), PRODUCT_PLANTABLE.DELETED.eq(0)));
+        return getDslSession().execute(update);
     }
 
     public int deleteByKey(Integer pk) {

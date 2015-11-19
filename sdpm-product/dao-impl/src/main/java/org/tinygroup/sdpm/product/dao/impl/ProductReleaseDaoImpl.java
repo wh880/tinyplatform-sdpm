@@ -168,6 +168,11 @@ public class ProductReleaseDaoImpl extends TinyDslDaoSupport implements
 		return getDslSession().execute(callback.generate(ids));
 	}
 
+	public Integer deleteReleaseByProduct(Integer productId) {
+		Update update = update(PRODUCT_RELEASETABLE).set(PRODUCT_RELEASETABLE.DELETED.value(1)).where(and(PRODUCT_RELEASETABLE.PRODUCT_ID.eq(productId),PRODUCT_RELEASETABLE.DELETED.eq(0)));
+		return getDslSession().execute(update);
+	}
+
 	public ProductRelease getByKey(Integer pk) {
 		try {
 			return getDslTemplate().getByKey(pk, ProductRelease.class,

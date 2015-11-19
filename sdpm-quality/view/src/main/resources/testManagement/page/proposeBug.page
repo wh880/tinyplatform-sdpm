@@ -44,11 +44,11 @@
                                     var pjId = $("select[name=projectId]  option:selected").val();
                                     if(pId>0){
                                         ajaxRead("${sid}","moduleId","moduleId","moduleName","/quality/bug/ajax/module?moduleRoot="+pId,${bug?.moduleId?:0},"module");
-                                    ajaxRead("${sid}","projectId","projectId","projectName","/quality/bug/ajax/project?productId="+pId,${bug?.projectId?:0});
-                                }
-                                if(pId>0&&pjId>0) {
-                                    ajaxRead("${sid}","bugOpenedBuild","buildId","buildName","/quality/bug/ajax/build?buildProduct="+pId+"&buildProject="+pjId,${bug?.buildId?:0},"build");
-                                }
+                                        ajaxRead("${sid}","projectId","projectId","projectName","/quality/bug/ajax/project?productId="+pId,${bug?.projectId?:0});
+                                    }
+                                    if(pId>0&&pjId>0) {
+                                        ajaxRead("${sid}","bugOpenedBuild","buildId","buildName","/quality/bug/ajax/build?buildProduct="+pId+"&buildProject="+pjId,${bug?.buildId?:0},"build");
+                                    }
                                 })
                             </script>
                             #@Tselect2Fix()
@@ -89,13 +89,13 @@
                                 $("#${sid}").on("change",function(){
                                     var pjId = $("#${sid}  option:selected").val();
                                     var pId = $("select[name=productId]  option:selected").val();
-                                    if(pId>0){
-                                        ajaxRead("${sid}","taskId","taskId","taskName","/quality/bug/ajax/task?taskProject="+pId,${bug?.taskId?:0});
-                                    ajaxRead("${sid}","bugAssignedTo","orgUserId","orgUserRealName","/quality/version/ajax/user?projectId="+pId,"${bug?.bugAssignedTo?:0}");
-                                }
-                                if(pId>0&&pjId>0) {
-                                    ajaxRead("${sid}","bugOpenedBuild","buildId","buildName","/quality/bug/ajax/build?buildProduct="+pId+"&buildProject="+pjId,${bug?.buildId?:0},"build");
-                                }
+                                    if(pjId>0){
+                                        ajaxRead("${sid}","taskId","taskId","taskName","/quality/bug/ajax/task?taskProject="+pjId,${bug?.taskId?:0});
+                                    ajaxRead("${sid}","bugAssignedTo","orgUserId","orgUserRealName","/quality/version/ajax/user?projectId="+pjId,"${bug?.bugAssignedTo?:0}");
+                                    }
+                                    if(pId>0&&pjId>0) {
+                                        ajaxRead("${sid}","bugOpenedBuild","buildId","buildName","/quality/bug/ajax/build?buildProduct="+pId+"&buildProject="+pjId,${bug?.buildId?:0},"build");
+                                    }
                                 })
                             </script>
                             #@Tselect2Fix()

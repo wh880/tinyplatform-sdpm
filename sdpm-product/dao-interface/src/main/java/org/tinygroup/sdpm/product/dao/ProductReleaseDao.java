@@ -31,4 +31,6 @@ public interface ProductReleaseDao extends BaseDao<ProductRelease,Integer> {
 	Integer getMaxNo(Integer product);
 
 	Integer batchDelete(Integer...ids);
+
+	Integer deleteReleaseByProduct(Integer productId);
 }

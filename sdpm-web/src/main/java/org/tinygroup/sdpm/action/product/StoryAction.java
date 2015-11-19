@@ -397,6 +397,11 @@ public class StoryAction extends BaseController {
             List<ProjectTask> taskList = taskService.findListTask(task);
             model.addAttribute("taskList", taskList);
 
+            QualityTestCase testCase1 = new QualityTestCase();
+            testCase.setDeleted(0);
+            testCase.setStoryId(storyId);
+            List<QualityTestCase> testCases = testCaseService.findTestCaseList(testCase);
+            model.addAttribute("caseList",testCases);
             return "/product/page/tabledemo/hrefbaseinfo.pagelet";
         }
 
@@ -516,7 +521,9 @@ public class StoryAction extends BaseController {
                                     String type, String choose, String groupOperate,
                                     SearchInfos searchInfos, String order, String ordertype,
                                     Model model, HttpServletRequest request) {
-        story.setDeleted(0);
+        if(!"2".equals(choose)&&!"11".equals(choose)){
+            story.setDeleted(0);
+        }
         if(story.getProductId()==null||story.getProductId()==0) {
             story.setProductId(Integer.parseInt(cookieProductId));
         }

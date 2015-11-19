@@ -23,6 +23,11 @@
         </dependency>
         <dependency>
             <groupId>org.tinygroup</groupId>
+            <artifactId>sdpm-quality-dao-impl</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.tinygroup</groupId>
             <artifactId>sdpm-system-dao-impl</artifactId>
             <version>${project.version}</version>
         </dependency>

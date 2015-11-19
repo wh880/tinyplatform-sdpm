@@ -32,4 +32,5 @@ public interface ProductLineDao extends BaseDao<ProductLine,Integer> {
 	
 	List<ProductLine> getByKeys(Integer...ids);
 
+	List<ProductLine> getUserProductLines(String userId);
 }

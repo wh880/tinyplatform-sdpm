@@ -286,9 +286,12 @@ public class ProductLineAction extends BaseController {
     @RequestMapping("/treeData")
     public List data(String check) {
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
-
-        List<Product> productLists = ProductUtils.getAllProductListByUser();
-        List<ProductLine> productLines = ProductUtils.getProductLineListByUser();
+        Product product = new Product();
+        product.setDeleted(FieldUtil.DELETE_NO);
+        List<Product> productLists = productService.getProductByUser(UserUtils.getUserId());
+        ProductLine productLine = new ProductLine();
+        productLine.setDeleted(FieldUtil.DELETE_NO);
+        List<ProductLine> productLines = productLineService.findProductLineList(productLine,null,null);
         ProjectBuild projectBuild = new ProjectBuild();
         projectBuild.setBuildDeleted(FieldUtil.DELETE_NO_S);
         List<ProjectBuild> projectBuilds = buildService.findListBuild(projectBuild);
@@ -453,6 +456,12 @@ public class ProductLineAction extends BaseController {
             mapList.add(mapTop);
         }
         return mapList;
+    }
+    @RequestMapping(value = "/productLineProducts")
+    public String productLineProducts(Integer productLineId,Model model){
+        List<Product> products = productService.getProductByUserAndProductLineWithCount(UserUtils.getUserId(),productLineId);
+        model.addAttribute("productList",products);
+        return "/productLine/data/productListData.pagelet";
     }
 }
 

@@ -75,27 +75,13 @@
                             $("#${sid}").on("change", function () {
                                 var pId = $("#${sid}  option:selected").val();
                                 if (pId > 0) {
-                                    ajaxRead("${sid}", "moduleId", "moduleId", "moduleName", "/quality/bug/ajax/module?moduleRoot=" + pId, ${bug?.moduleId ? : 0
+                                    ajaxRead("${sid}", "moduleId", "moduleId", "moduleName", "/quality/bug/ajax/module?moduleRoot=" + pId, ${bug?.moduleId?: 0},"module");
+                                    ajaxRead("${sid}", "planId", "planId", "planName", "/quality/bug/ajax/plan?deleted=0&productId=" + pId, ${bug?.planId?: 0});
+                                    ajaxRead("${sid}", "bugOpenedBuild", "buildId", "buildName", "/quality/bug/ajax/build?buildProduct=" + pId, ${bug?.bugOpenedBuild?:0},"build");
+                                    ajaxRead("${sid}", "bugResolvedBuild", "buildId", "buildName", "/quality/bug/ajax/build?buildProduct=" + pId, ${bug?.bugResolvedBuild?:0},"build");
                                 }
-                                ,
-                                "module"
-                                );
-                            ajaxRead("${sid}", "planId", "planId", "planName", "/quality/bug/ajax/plan?deleted=0&productId=" + pId, ${bug?.planId ? : 0
+                             })
                         });
-                        ajaxRead("${sid}", "bugOpenedBuild", "buildId", "buildName", "/quality/bug/ajax/build?buildProduct=" + pId, ${bug?.bugOpenedBuild ? : 0
-                        },
-                        "build"
-                        )
-                        ;
-                        ajaxRead("${sid}", "bugResolvedBuild", "buildId", "buildName", "/quality/bug/ajax/build?buildProduct=" + pId, ${bug?.bugResolvedBuild ? : 0
-                        },
-                        "build"
-                        )
-                        ;
-                        }
-                        })
-                        })
-                        ;
                     </script>
                         #@Tselect2Body(
                             "productId" bug?.productId?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
@@ -129,11 +115,9 @@
                                     var mId = $("#${sid}  option:selected").val();
                                     var pId = $("select[name=productId]  option:selected").val();
                                     if (mId >= 0) {
-                                        ajaxRead("${sid}", "storyId", "storyId", "storyTitle", "/quality/bug/ajax/story?productId=" + pId + "&moduleId=" + mId, ${bug?.storyId ? : 0
+                                        ajaxRead("${sid}", "storyId", "storyId", "storyTitle", "/quality/bug/ajax/story?productId=" + pId + "&moduleId=" + mId, ${bug?.storyId?: 0});
                                     }
-                                    );
-                            }
-                            })
+                                })
                             })
                         </script>
                         #end
@@ -142,8 +126,7 @@
                             #@th()所属计划#end
                             #@td()
                                 #@Tselect2F()
-                                    #@Tselect2Body("planId" bug?.planId {"class":
-                                        "input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                                    #@Tselect2Body("planId" bug?.planId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 
                                     #end
                                     #@Tselect2Fix()
@@ -295,10 +278,8 @@
                         $("#${sid}").on("change", function () {
                             var pId = $("#${sid}  option:selected").val();
                             if (pId > 0) {
-                                ajaxRead("${sid}", "taskId", "taskId", "taskName", "/quality/bug/ajax/task?taskProject=" + pId, ${bug?.taskId ? : 0
+                                ajaxRead("${sid}", "taskId", "taskId", "taskName", "/quality/bug/ajax/task?taskProject=" + pId, ${bug?.taskId ?: 0});
                             }
-                            );
-                        }
                         })
                     </script>
                         #@Tselect2Body(

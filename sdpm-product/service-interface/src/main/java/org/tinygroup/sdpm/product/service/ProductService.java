@@ -98,5 +98,7 @@ public interface ProductService {
 
     List<Product> getProductByUserWithCount(String userId);
 
+    List<Product> getProductByUserAndProductLineWithCount(String userId,Integer productLineId);
+
     Integer[] getTeamRoleProductLineIds(String userId);
 }

@@ -1,6 +1,7 @@
 package org.tinygroup.sdpm.productLine.biz.impl;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
+import org.tinygroup.sdpm.org.dao.OrgRoleUserDao;
+import org.tinygroup.sdpm.org.dao.pojo.OrgRoleUser;
 import org.tinygroup.sdpm.productLine.biz.inter.ProductLineManager;
 import org.tinygroup.sdpm.productLine.dao.ProductLineDao;
 import org.tinygroup.sdpm.productLine.dao.impl.FieldUtil;
@@ -24,6 +27,8 @@ public class ProductLineManagerImpl implements ProductLineManager{
 	
 	@Autowired
 	private ProductLineDao productLineDao;
+	@Autowired
+	private OrgRoleUserDao orgRoleUserDao;
 	
 	public ProductLine add(ProductLine productLine) {
 
@@ -46,8 +51,10 @@ public class ProductLineManagerImpl implements ProductLineManager{
 	}
 
 	public List<ProductLine> findlist(ProductLine productLine, String order, String ordertype) {
-		
-		return productLineDao.query(productLine,  new OrderBy(FieldUtil.stringFormat(order), !("desc".equals(ordertype))?true:false));
+		if(StringUtil.isBlank(order)){
+			return productLineDao.query(productLine);
+		}
+		return productLineDao.query(productLine,  new OrderBy(NameUtil.resolveNameDesc(order), !("desc".equals(ordertype))?true:false));
 	}
 
 	public Pager<ProductLine> findPager(int start, int pagesize,String condition, ProductLine productLine, String order,
@@ -71,10 +78,16 @@ public class ProductLineManagerImpl implements ProductLineManager{
 	}
 
 	public List<ProductLine> getUserProductLine(String userId) {
-		ProductLine line = new ProductLine();
-		line.setAcl(ProductLine.ACl_All);
-		List<ProductLine> productLines = productLineDao.query(line);
-		return productLines;
+		List<ProductLine> productLines = productLineDao.getUserProductLines(userId);
+
+		ProductLine productLine = new ProductLine();
+		productLine.setDeleted(0);
+		productLine.setAcl(ProductLine.ACl_TEAM_AND_ROLE);
+		List<ProductLine> productLineList = productLineDao.query(productLine);
+		OrgRoleUser role = new OrgRoleUser();
+		role.setOrgUserId(userId);
+		List<OrgRoleUser> orgRoles = orgRoleUserDao.query(role);
+		return mergeUserProductLines(productLines,productLineList,orgRoles);
 	}
 
 	public int[] updateBatch(List<ProductLine> productLine) {
@@ -87,7 +100,22 @@ public class ProductLineManagerImpl implements ProductLineManager{
 		return productLineDao.query(productLine);
 	}
 
-	
+	private List<ProductLine> mergeUserProductLines(List<ProductLine> productLineWithOutRole,List<ProductLine> productLineWithRole,List<OrgRoleUser> roleUsers){
+		if(productLineWithRole.size()==0)return productLineWithOutRole;
+		for(OrgRoleUser orgRoleUser : roleUsers) {
+			for (ProductLine productLine:productLineWithRole) {
+				String whiteList = productLine.getProductLineWhiteList();
+				if (whiteList != null){
+					String[] ids = whiteList.split(",");
+					List<String> idList = Arrays.asList(ids);
+					if(idList.contains(String.valueOf(orgRoleUser.getOrgRoleId()))&&!productLineWithOutRole.contains(productLine)){
+						productLineWithOutRole.add(productLine);
+					}
+				}
+			}
+		}
+		return productLineWithOutRole;
+	}
 
 	
 
