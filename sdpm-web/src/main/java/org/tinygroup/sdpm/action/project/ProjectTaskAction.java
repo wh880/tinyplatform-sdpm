@@ -113,16 +113,18 @@ public class ProjectTaskAction extends BaseController {
             model.addAttribute("copyTask", task);
         }
         List<ProductStory> storyList = projectStoryService.findStoryByProject(projectId);
-        ProductStory productStory = storyService.findStory(storyId);
-        SystemModule systemModule = new SystemModule();
-        systemModule.setModuleRoot(productStory.getProductId());
-        List<SystemModule> moduleList = moduleService.findModules(systemModule);
-        for (SystemModule module : moduleList) {
-            module.setModuleName(ModuleUtil.getPath(module.getModuleId(), "/", null, false));
+        if (storyId != null) {
+            ProductStory productStory = storyService.findStory(storyId);
+            SystemModule systemModule = new SystemModule();
+            systemModule.setModuleRoot(productStory.getProductId());
+            List<SystemModule> moduleList = moduleService.findModules(systemModule);
+            for (SystemModule module : moduleList) {
+                module.setModuleName(ModuleUtil.getPath(module.getModuleId(), "/", null, false));
+            }
+            model.addAttribute("moduleList", moduleList);
+            model.addAttribute("storyId", storyId);
         }
-        model.addAttribute("moduleList", moduleList);
         model.addAttribute("moduleId", moduleId);
-        model.addAttribute("storyId", storyId);
         model.addAttribute("storyList", storyList);
         return "project/task/add";
     }
