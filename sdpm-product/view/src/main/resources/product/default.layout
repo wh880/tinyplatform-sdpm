@@ -56,8 +56,6 @@
 
                         }
                     }
-
-
                 },
                 error: function (res) {
 //                    alert("失败"+toName);
@@ -75,13 +73,20 @@
 #@div()
     #@tabWithInit("top_demo" "optionsBox")
 
+    ##        #@div(divClass="dropdownBox")
+    ##            #include("/product/page/project/dropdownMenuline.page")
+    ##        #end
 		 #@div(divClass="dropdownBox")
             #include("/product/page/project/dropdownMenu.page")
         #end
+
+
         #@tabHead()
+
             #foreach(m in menuManager.getChildMenus("myproduct"))
                 #set(url=eval(m.href))
                 #if(m.scope!="product-menu")
+
                     #@aHeadCol(TINY_CONTEXT_PATH +adminPath+url linkName==m.id?"Current":"")${m.name}#end
                 #end
             #end
