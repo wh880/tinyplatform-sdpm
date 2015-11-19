@@ -423,16 +423,26 @@ public class ProjectTaskAction extends BaseController {
 
     @RequiresPermissions(value = {"pro-task-batchadd", "distribute-task"}, logical = Logical.OR)
     @RequestMapping("/batchAdd")
-    public String batchAddForm(Integer storyId, Model model, HttpServletRequest request, HttpServletResponse response) {
+    public String batchAddForm(Integer storyId, Model model, HttpServletRequest request, HttpServletResponse response, Integer moduleId) {
         Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
         if (projectId == null) {
             return redirectProjectForm();
         }
+        ProductStory productStory = storyService.findStory(storyId);
+        SystemModule systemModule = new SystemModule();
+        systemModule.setModuleRoot(productStory.getProductId());
+        List<SystemModule> moduleList = moduleService.findModules(systemModule);
+        for (SystemModule module : moduleList) {
+            module.setModuleName(ModuleUtil.getPath(module.getModuleId(), "/", null, false));
+        }
+        model.addAttribute("moduleId", moduleId);
+        model.addAttribute("moduleList", moduleList);
         model.addAttribute("teamList", userService.findTeamUserListByProjectId(projectId));
-        model.addAttribute("storyId", storyId);
-        List<ProductStory> storyList = projectStoryService.findStoryByProject(projectId);
-        model.addAttribute("storyList", storyList);
-        model.addAttribute("moduleList", generateModuleList(projectId));
+//        model.addAttribute("storyId", storyId);
+        ProductStory story = productStoryService.findStory(storyId);
+//        List<ProductStory> storyList = projectStoryService.findStoryByProject(projectId);
+        model.addAttribute("story", story);
+//        model.addAttribute("moduleList", generateModuleList(projectId));
         return "project/task/batchAdd.page";
     }
 
@@ -444,6 +454,7 @@ public class ProjectTaskAction extends BaseController {
                 taskList.remove(i);
                 i--;
             } else {
+                taskList.get(i).setTaskLeft(taskList.get(i).getTaskEstimate());
                 taskList.get(i).setTaskConsumed(0f);
             }
         }
