@@ -27,7 +27,7 @@ public interface TaskManager {
      * @param taskId 主键
      * @return
      */
-    ProjectTask find(int taskId);
+    ProjectTask find(Integer taskId);
 
     /**
      * 根据条件查询List
@@ -93,7 +93,7 @@ public interface TaskManager {
      * @param id 主键
      * @return
      */
-    Integer delete(int id);
+    Integer delete(Integer id);
 
     List<TaskChartBean> findByGroup(String id);
 }

@@ -700,7 +700,7 @@ public class ProjectTaskAction extends BaseController {
     @RequiresPermissions("pro-task-report")
     @RequestMapping("/reportform")
     public String reportForm() {
-        return "project/task/reportform.page";
+        return "project/task/reportform";
     }
 
     @RequestMapping("/buildChart")
