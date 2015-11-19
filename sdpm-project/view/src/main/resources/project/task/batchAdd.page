@@ -36,7 +36,7 @@
                 #@thW("150px")任务名称#end
                 #@thW("150px")类型#end
                 #@thW("150px")指派给#end
-                #@thW("150px")预算 #end
+                #@thW("150px")<span class="c-red">*</span>预计剩余#end
                 #@thW("150px")任务描述#end
                 #@thW("100px")优先级#end
             #end
@@ -47,28 +47,25 @@
                     #@td()${i}#end
                     #@td()
                         #@Tselect2F()
-                            #@Tselect2Body("taskList["+i+"].moduleId" "" {"class":
+                            #@Tselect2Body("taskList["+i+"].moduleId" moduleId {"class":
                                 "input-text select2"})
-                            <option value=""></option>
+                            <option value="">/</option>
                                 #foreach(m : moduleList)
-                                <option value=${m.moduleId}>/${m.moduleName}</option>
+                                <option value=${m.moduleId}>${m.moduleName}</option>
                                 #end
                             #end
                         #end
                     #end
                     #@td()
+                    ##                        #@td()
+                    ##                            #tinyInput("text" "taskList["+i+"].taskStory" story?.storyId)
+                    ##                        #end
                         #@Tselect2F()
                             #@Tselect2Body(
-                                "taskList["+i+"].taskStory" storyId {"class":
+                                "taskList["+i+"].taskStory" story?.storyId {"class":
                                 "input-text select2"})
-                            <option value=""></option>
-                                #foreach(s : storyList)
-                                <option value=${s.storyId}>${s.storyTitle}</option>
-                                #end
-                            #end
-                            #@Tselect2Fix()
-                            <a href="${TINY_CONTEXT_PATH+adminPath}/product/story/addstory">新增</a>
-                            <a href="${TINY_CONTEXT_PATH+adminPath}/product/story/search" class="r">全部</a>
+                            <option value=${story?.storyId}>${story?.storyTitle}</option>
+                            <option value="">同上</option>
                             #end
                         #end
 
@@ -105,8 +102,12 @@
                                     #end
                                 #end
                                 #@Tselect2Fix()
-                                <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/form">增加</a>
-                                <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/list" class="r">全部</a>
+                                    #@hasMenu("organizationAddUser")
+                                    <a href="${TINY_CONTEXT_PATH}/a/org/user/form">增加</a>
+                                    #end
+                                    #@hasMenu("organizationUser")
+                                    <a href="${TINY_CONTEXT_PATH}/a/org/user/list" class="r">全部</a>
+                                    #end
                                 #end
                             #end
                         #end
@@ -115,6 +116,9 @@
                     #@td()
                         #tinyInput("text" "taskList["+i+"].taskEstimate" "")
                     #end
+                ##
+                ##                    <input type="hidden" name="taskList["+i+"].taskLeft" value="${taskList["+i+"].taskLeft}">
+                ##                    <input type="hidden" name="taskList["+i+"].taskConsumed" value="0">
                     #@td()
                         #tinyInput("text" "taskList["+i+"].taskDesc" "")
                     #end

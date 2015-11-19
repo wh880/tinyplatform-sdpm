@@ -44,17 +44,22 @@
             #end
             <td>
                 #@Tselect2F()
-                    #@Tselect2Body("teamList["+a+"].teamRole" t.teamRole {"class":"input-text select2","multiple":"multiple"})
+                    #@Tselect2Body(
+                        "teamList["+a+"].teamRole" t.teamRole {"class":"input-text select2","multiple":"multiple"})
                         #foreach(r : roleList)
                             <option value="${r.orgRoleId}">${r.orgRoleName}</option>
                         #end
                     #end
                     #@Tselect2Fix()
-                        <a href="${TINY_CONTEXT_PATH+adminPath}/org/privilege/form">增加</a>
-                        <a href="${TINY_CONTEXT_PATH+adminPath}/org/privilege/list" class="r">全部</a>
+                        #@hasMenu("organizationAddGroup")
+                            <a href="${TINY_CONTEXT_PATH+adminPath}/org/privilege/form">增加</a>
+                        #end
+                        #@hasMenu("organizationPrivilege")
+                            <a href="${TINY_CONTEXT_PATH+adminPath}/org/privilege/list" class="r">全部</a>
+                        #end
                     #end
                 #end
-##                #tinyInput("text" "teamList["+a+"].teamRole" t.teamRole {"datatype":"","class":"input-text"})
+            ##                #tinyInput("text" "teamList["+a+"].teamRole" t.teamRole {"datatype":"","class":"input-text"})
             </td>
             <td>
                 #@tinyDateInput("teamList["+a+"].teamJoin" formatDate(now(),"yyyy-MM-dd") "YYYY-MM-DD" )#end
@@ -74,34 +79,36 @@
             #end
         #end
     <script>
-        $(function(){
-            function updateUserID(){
-                $('.itemlist-table>.databody .userID').each(function(index){
-                    $(this).html(index+1);
+        $(function () {
+            function updateUserID() {
+                $('.itemlist-table>.databody .userID').each(function (index) {
+                    $(this).html(index + 1);
                 });
             }
-            $(".itemlist-table").on("click",".addnext",function(){
-                var $thisTr=$(this).closest("tr");
+
+            $(".itemlist-table").on("click", ".addnext", function () {
+                var $thisTr =
+                $(this).closest("tr");
                 var a = $thisTr.attr("class");
                 var no = a.substr(3);
                 $.ajax({
                     type: 'POST',
-                    url: "${TINY_CONTEXT_PATH+adminPath}/product/team/nextTr?a="+no ,
+                    url: "${TINY_CONTEXT_PATH+adminPath}/product/team/nextTr?a=" + no,
                     dataType: "html",
-                    success: function(data){
+                    success: function (data) {
                             $thisTr.after(data);
                     },
                 });
                     $thisTr.find(".addnext").css("display","none");
 //            updateUserID();
                 return false;
-            }).on("click",".delbutton",function(){
-                if($('.databody .userID').size() == 1) return;
-                var that=this;
-                layer.confirm('确定删除?', function(){
+            }).on("click", ".delbutton", function () {
+                if ($('.databody .userID').size() == 1) return;
+                var that = this;
+                layer.confirm('确定删除?', function () {
                     $(that).closest("tr").remove();
                     updateUserID();
-                    layer.msg('删除成功！',1,1)
+                    layer.msg('删除成功！', 1, 1)
                 })
             });
         });

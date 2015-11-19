@@ -63,8 +63,12 @@
                             #end
                         ##填写任意内容，侦听需重新填加 A侦听已内置
                             #@Tselect2Fix()
-                                <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/form">增加</a>
-                                <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/list" class="r">全部</a>
+                                #@hasMenu("organizationAddUser")
+                                    <a href="${TINY_CONTEXT_PATH}/a/org/user/form">增加</a>
+                                #end
+                                #@hasMenu("organizationUser")
+                                    <a href="${TINY_CONTEXT_PATH}/a/org/user/list" class="r">全部</a>
+                                #end
                             #end
                         #end
 
@@ -128,8 +132,12 @@
                                     #end
                                 #end
                                 #@Tselect2Fix()
-                                    <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/form">增加</a>
-                                    <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/list" class="r">全部</a>
+                                    #@hasMenu("organizationAddUser")
+                                        <a href="${TINY_CONTEXT_PATH}/a/org/user/form">增加</a>
+                                    #end
+                                    #@hasMenu("organizationUser")
+                                        <a href="${TINY_CONTEXT_PATH}/a/org/user/list" class="r">全部</a>
+                                    #end
                                 #end
                             #end
 
@@ -241,8 +249,12 @@
                                 #end
                             ##填写任意内容，侦听需重新填加 A侦听已内置
                                 #@Tselect2Fix()
-                                    <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/form">增加</a>
-                                    <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/list" class="r">全部</a>
+                                    #@hasMenu("organizationAddUser")
+                                        <a href="${TINY_CONTEXT_PATH}/a/org/user/form">增加</a>
+                                    #end
+                                    #@hasMenu("organizationUser")
+                                        <a href="${TINY_CONTEXT_PATH}/a/org/user/list" class="r">全部</a>
+                                    #end
                                 #end
                             #end
                             #@validateDiv("col-2")#end
@@ -272,8 +284,12 @@
                                 #end
                             ##填写任意内容，侦听需重新填加 A侦听已内置
                                 #@Tselect2Fix()
-                                    <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/form">增加</a>
-                                    <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/list" class="r">全部</a>
+                                    #@hasMenu("organizationAddUser")
+                                        <a href="${TINY_CONTEXT_PATH}/a/org/user/form">增加</a>
+                                    #end
+                                    #@hasMenu("organizationUser")
+                                        <a href="${TINY_CONTEXT_PATH}/a/org/user/list" class="r">全部</a>
+                                    #end
                                 #end
                             #end
                             #@validateDiv("col-2")#end
@@ -304,8 +320,12 @@
                                     #end
                                 #end
                                 #@Tselect2Fix()
-                                    <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/form">增加</a>
-                                    <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/list" class="r">全部</a>
+                                    #@hasMenu("organizationAddUser")
+                                        <a href="${TINY_CONTEXT_PATH}/a/org/user/form">增加</a>
+                                    #end
+                                    #@hasMenu("organizationUser")
+                                        <a href="${TINY_CONTEXT_PATH}/a/org/user/list" class="r">全部</a>
+                                    #end
                                 #end
                             #end
                             #@validateDiv("col-2")#end

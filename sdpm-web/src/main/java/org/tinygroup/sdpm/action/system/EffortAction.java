@@ -103,8 +103,12 @@ public class EffortAction extends BaseController {
 
     @ResponseBody
     @RequestMapping("event")
-    public List<Map<String, Object>> effortEvent(SystemEffort systemEffort, HttpServletResponse response, Date start, Date end) {
+    public List<Map<String, Object>> effortEvent(SystemEffort systemEffort, HttpServletRequest request, HttpServletResponse response, Date start, Date end) {
         response.setContentType("application/json; charset=UTF-8");
+        Integer currentProjectId = ProjectUtils.getCurrentProjectId(request, response);
+        if (currentProjectId != null) {
+            systemEffort.setEffortProject(currentProjectId);
+        }
         List<Map<String, Object>> mapList = Lists.newArrayList();
         List<SystemEffort> list = effortService.findSystemEffortBetweenDate(systemEffort, start, end);
         if (!CollectionUtil.isEmpty(list)) {
@@ -112,7 +116,7 @@ public class EffortAction extends BaseController {
                 String date = DateUtils.formatDate(effort.getEffortDate());
                 Map<String, Object> map = new HashMap<String, Object>();
                 map.put("id", effort.getEffortId());
-                map.put("title", effort.getEffortWork()+"("+effort.getEffortConsumed()+"h)");
+                map.put("title", effort.getEffortWork() + "(" + effort.getEffortConsumed() + "h)");
                 map.put("start", date);
                 map.put("end", date);
                 mapList.add(map);

@@ -133,7 +133,7 @@ public class ProjectBuildAction extends BaseController {
         ProjectBuild temp;
         if (build.getBuildId() == null) {
             build.setBuildBuilder(UserUtils.getUserId());
-            temp = buildService.add(build);
+            temp = buildService.addBuild(build);
             LogUtil.logWithComment(LogUtil.LogOperateObject.BUILD,
                     LogUtil.LogAction.OPENED,
                     String.valueOf(temp.getBuildId()),
@@ -254,7 +254,6 @@ public class ProjectBuildAction extends BaseController {
         return "/project/task/relation-release/product-al-bug.page";
     }
 
-    //    @RequiresPermissions("projectBuild-releaseBaseInfo")
     @RequestMapping("/releasebaseinfo")
     public String releasebaseinfo(Integer buildId, Model model) {
         ProjectBuild build = buildService.findBuild(buildId);
@@ -304,7 +303,7 @@ public class ProjectBuildAction extends BaseController {
                 }
             }
             bug.setProjectId(null);
-            Pager<QualityBug> p = buildService.findnoBugPager(pagesize * (page - 1), pagesize, id, condition, searchInfos, groupOperate);
+            Pager<QualityBug> p = buildService.findNoBuildBug(pagesize * (page - 1), pagesize, id, condition, searchInfos, groupOperate);
             model.addAttribute("bugList", p);
             return "/project/task/relation-release/product-al-no-bug-data.pagelet";
         } else if ("leRelateBugRelease".equals(relate)) {
@@ -327,7 +326,7 @@ public class ProjectBuildAction extends BaseController {
     @RequestMapping("/releateReq")
     public Map<String, String> releateReq(String ids, Integer buildId) {
         for (String storyId : ids.split(",")) {
-            buildService.releateReq(Integer.valueOf(storyId), buildId);
+            buildService.linkBuildStory(Integer.valueOf(storyId), buildId);
         }
         return resultMap(true, "关联成功");
     }
@@ -336,7 +335,7 @@ public class ProjectBuildAction extends BaseController {
     @RequestMapping("/releateBug")
     public Map<String, String> releateBug(String ids, Integer buildId) {
         for (String bugId : ids.split(",")) {
-            buildService.releateBug(Integer.valueOf(bugId), buildId);
+            buildService.deleteBuildBug(Integer.valueOf(bugId), buildId);
         }
         return resultMap(true, "关联成功");
     }
@@ -371,7 +370,7 @@ public class ProjectBuildAction extends BaseController {
     @ResponseBody
     @RequestMapping("/deletereleate")
     public Map deleteReleate(Integer storyId, Integer buildId) {
-        buildService.deletereleate(storyId, buildId);
+        buildService.deleteBuildStory(storyId, buildId);
         return resultMap(true, "解除关联成功");
 
     }
@@ -379,7 +378,7 @@ public class ProjectBuildAction extends BaseController {
     @ResponseBody
     @RequestMapping("/deletereleateBug")
     public Map deletereleateBug(Integer bugId, Integer buildId) {
-        buildService.deletereleateBug(bugId, buildId);
+        buildService.deleteBuildBug(bugId, buildId);
         Map<String, String> map = new HashMap<String, String>();
         return resultMap(true, "解除关联成功");
     }
@@ -392,7 +391,7 @@ public class ProjectBuildAction extends BaseController {
         }
         for (String s : ids.split(",")) {
             Integer S = Integer.valueOf(s);
-            buildService.deletereleate(S, buildId);
+            buildService.deleteBuildStory(S, buildId);
         }
         return resultMap(false, "删除成功");
     }
@@ -405,7 +404,7 @@ public class ProjectBuildAction extends BaseController {
         }
         for (String bug : ids.split(",")) {
             Integer Bug = Integer.valueOf(bug);
-            buildService.deletereleateBug(Bug, buildId);
+            buildService.deleteBuildBug(Bug, buildId);
         }
         return resultMap(false, "删除成功");
     }

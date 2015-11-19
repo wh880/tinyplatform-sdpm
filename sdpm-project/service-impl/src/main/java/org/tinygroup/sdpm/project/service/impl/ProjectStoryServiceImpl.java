@@ -99,7 +99,7 @@ public class ProjectStoryServiceImpl implements ProjectStoryService {
     }
 
     public Pager<ProductStory> findNoStoryPager(int start, int limit, int id, String condition, SearchInfos conditions, String groupOperate) {
-        return buildManager.findnoBuildStory(start, limit, condition, id);
+        return buildManager.findNoBuildStory(start, limit, condition, id);
     }
 
     public Pager<ProductStory> findStoryByProject(Integer projectId, Integer start, Integer limit, String order, String ordertype, String moduleId) {

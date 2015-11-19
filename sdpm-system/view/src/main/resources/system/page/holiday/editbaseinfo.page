@@ -2,7 +2,6 @@
 	<p class="titleName">基本信息</p>
 		<ul>
 			#@tinyForm("thisform" "" "" {"class":"test"})
-			
 			<li>	
 				 #@elementItem()
 			        #@colLabel()名称：#end
@@ -48,11 +47,8 @@
 			                        <option value="xbb">xbb</option>
 			                        <option value="wj">wj</option>
 			                    #end
-			                
 			                    #@Tselect2Fix()<a href="#" class="r ">增加</a><a href="#">全部</a>#end
 			                #end
-				        	 
-				        	 
 				        #end
 			        #@validateDiv("col-2")#end
 			      #end

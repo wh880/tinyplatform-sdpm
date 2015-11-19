@@ -23,6 +23,7 @@ import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.project.dao.ProjectProductDao;
+import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
 import org.tinygroup.tinysqldsl.*;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
@@ -54,8 +55,9 @@ public class ProjectProductDaoImpl extends TinyDslDaoSupport implements ProjectP
         Select subSelect = Select.select(PROJECT_PRODUCTTABLE.PRODUCT_ID).from(PROJECT_PRODUCTTABLE)
                 .where(PROJECT_PRODUCTTABLE.PROJECT_ID.eq(projectId));
         Select select = selectFrom(PRODUCTTABLE)
-                .where(PRODUCTTABLE.PRODUCT_ID.inExpression(
-                        subSelect(subSelect)
+                .where(and(
+                        PRODUCTTABLE.PRODUCT_ID.inExpression(subSelect(subSelect)),
+                        PRODUCTTABLE.DELETED.eq(Project.DELETE_NO)
                 ));
         return getDslSession().fetchList(select, Product.class);
     }

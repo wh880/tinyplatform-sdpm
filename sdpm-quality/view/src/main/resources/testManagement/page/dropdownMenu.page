@@ -13,7 +13,6 @@
 </div>
 <script type="text/javascript">
     $(function(){
-        //$("body").append('<div id="${sid}-content" class="t-menu-content" style="display:none; position: absolute;z-index:9999"><ul id="ztree${sid}" class="ztree mCustomScrollbar" style="margin-top:0;max-height:400px;overflow-x:auto;overflow-y:auto"></ul><span style="position:absolute;right:5px;bottom:0px;z-index:2;cursor:pointer" id="close${sid}"><i class="icon-remove"></i></span></div>');
         var setting = {
             view: {
                 dblClickExpand: false
@@ -247,8 +246,14 @@
 ##<a href="${TINY_CONTEXT_PATH+adminPath}/product/allproduct/addition">全部</a>&nbsp
 ###end
     #@TzTreeSelect("productId" cookieProductId {"class":"input-text","data-URL":call("link",adminPath+"/productLine/userProductTree")})
-    <span class="l"><a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition" >增加</a>&nbsp
-    <a href="${TINY_CONTEXT_PATH+adminPath}/product/allproduct/addition">全部</a>&nbsp</span>
+    <span class="l">
+        #@hasMenu("newproduct")
+            <a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition">增加</a>
+        #end
+        #@hasMenu("allproduct")
+            <a href="${TINY_CONTEXT_PATH+adminPath}/product/allproduct/addition" class="r">全部</a>
+        #end
+    </span>
         #end
 #hiddenInput("productIdHidden","productId","","")
 

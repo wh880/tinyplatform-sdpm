@@ -110,8 +110,12 @@
                                 })
                             </script>
 						#@Tselect2Fix()
-                            <a href="${TINY_CONTEXT_PATH+adminPath}/project/form" class="r ">增加</a>
-                            <a href="${TINY_CONTEXT_PATH+adminPath}/project/list">全部</a>
+							#@hasMenu("project-op-add")
+                                <a href="${TINY_CONTEXT_PATH+adminPath}/project/form" class="r">增加</a>
+							#end
+							#@hasMenu("project-op-all")
+                                <a href="${TINY_CONTEXT_PATH+adminPath}/project/list">全部</a>
+							#end
 						#end
                 	  #end
                 	 #end
@@ -127,8 +131,12 @@
 
 	                    	#end
 						 #@Tselect2Fix()
-                             <a href="${TINY_CONTEXT_PATH+adminPath}/project/build/add" class="r ">增加</a>
-                             <a href="${TINY_CONTEXT_PATH+adminPath}/project/build/index">全部</a>
+							 #@hasMenu("pro-version-add")
+                                 <a href="${TINY_CONTEXT_PATH+adminPath}/project/build/edit" class="r ">增加</a>
+							 #end
+							 #@hasMenu("version")
+                                 <a href="${TINY_CONTEXT_PATH+adminPath}/project/build/index">全部</a>
+							 #end
 						 #end
                 	  #end
                 	 #end
@@ -144,7 +152,14 @@
 	                   		 #@Tselect2Body("testtaskOwner" testTask?.testtaskOwner?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 
 	                    	#end
-						 #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH+adminPath}/org/user/form" class="r ">增加</a>#end
+						 #@Tselect2Fix()
+							 #@hasMenu("organizationAddUser")
+                                 <a href="${TINY_CONTEXT_PATH}/a/org/user/form">增加</a>
+							 #end
+							 #@hasMenu("organizationUser")
+                                 <a href="${TINY_CONTEXT_PATH}/a/org/user/list" class="r">全部</a>
+							 #end
+						 #end
                 	  #end
                 	 #end
 					#@validateDiv("col-2")#end

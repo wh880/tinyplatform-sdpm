@@ -1,5 +1,5 @@
 <script>
-    function ajaxRead(id, toName, opKey, opvalue, url, value,isBuild) {
+    function ajaxRead(id, toName, opKey, opvalue, url, value, isBuild) {
         var selectCheck = "select[name=" + toName + "]";
         $(selectCheck).each(function () {
             var sele = $(this);
@@ -12,9 +12,9 @@
                 success: function (data) {
                     sele.empty();
                     var em;
-                    if("build"==(isBuild)){
+                    if ("build" == (isBuild)) {
                         em = "<option value='0' selected  >trunk</option>";
-                    }else if("module"==isBuild){
+                    } else if ("module" == isBuild) {
                         em = "<option value='0' selected  >/</option>";
                     }
                     sele.append(em);
@@ -52,151 +52,176 @@
 </script>
 
 
-	#@div(divClass="infoContent")
-        <p class="titleName">基本信息</p>
-	##该样式在comm.css样式中自定义
-		#@table("adjustTable")
-			#@thead()
-			#end
-			#@tbody()
-				#@tr()
-					#@th()所属产品#end
-					#@td()
-					
-					 #@Tselect2F()
-                            <script>
-                                 $("#${sid}").on("change", function () {
-                                    var pId = $("#${sid}  option:selected").val();
-									 if(pId>0){
-										ajaxRead("${sid}", "moduleId", "moduleId", "moduleName", "/quality/bug/ajax/module?moduleRoot=" + pId,${testCase?.moduleId},"module");
-									 }
-                                });
-                            </script>
-	                   		 #@Tselect2Body("productId" testCase?.productId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-								 #for(product : ProductUtils.getAllProductListByUser())
-	                            <option value="${product?.productId}" >${product?.productName}</option>
-	                            #end
-	                    	#end
+#@div(divClass="infoContent")
+<p class="titleName">基本信息</p>
+##该样式在comm.css样式中自定义
+    #@table("adjustTable")
+        #@thead()
+        #end
+        #@tbody()
+            #@tr()
+                #@th()所属产品#end
+                #@td()
 
-						#@Tselect2Fix()
-                        <a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition" class="r ">增加</a>
-                        <a href="${TINY_CONTEXT_PATH+adminPath}/product/allproduct/addition">全部</a>#end
-                	  #end
-                	  
-                	   	
-					#end
-				#end
-				#@tr()
-					#@th()所属模块#end
-					#@td()
-						  #@Tselect2F()
-						  <script>
-                                $("#${sid}").on("change", function () {
-                                   var pId = $("select[name=productId]  option:selected").val();
-                                   var mId = $("select[name=moduleId]").val();
-                                   if(pId>0&&mId>=0){
-									   ajaxRead("${sid}", "storyId", "storyId", "storyTitle", "/product/story/storyList?productId=" + pId+"&moduleId="+mId,${testCase?.storyId?:0});
-									}
-                               });
-                           </script>
-	                   		 #@Tselect2Body("moduleId" testCase?.moduleId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        
-	                    	#end
-                	  #end
-					#end
+                    #@Tselect2F()
+                    <script>
+                        $("#${sid}").on("change", function () {
+                            var pId = $("#${sid}  option:selected").val();
+                            if (pId > 0) {
+                                ajaxRead("${sid}", "moduleId", "moduleId", "moduleName", "/quality/bug/ajax/module?moduleRoot=" + pId, ${testCase?.moduleId
+                            }
+                            ,
+                            "module"
+                            );
+                        }
+                        })
+                        ;
+                    </script>
+                        #@Tselect2Body("productId" testCase?.productId {"class":
+                            "input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                            #for(product : ProductUtils.getAllProductListByUser())
+                        <option value="${product?.productId}">${product?.productName}</option>
+                        #end
+                    #end
 
-				#end
-				
-				#@th()相关需求#end
-				#@td()
-							 #@Tselect2F()
-	                   		 #@Tselect2Body("storyId" testCase?.storyId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                       
-	                    	#end
-								 #@Tselect2Fix()
-                                 <a href="${TINY_CONTEXT_PATH+adminPath}/product/story/addstory" class="r ">增加</a>
-                                 <a href="${TINY_CONTEXT_PATH+adminPath}/product/story?choose=1">全部</a>#end
-							 #end
-				#end
+                    #@Tselect2Fix()
+                        #@hasMenu("newproduct")
+                        <a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition">增加</a>
+                        #end
+                        #@hasMenu("allproduct")
+                        <a href="${TINY_CONTEXT_PATH+adminPath}/product/allproduct/addition" class="r">全部</a>
+                        #end
+                    #end
 
-			#@tr()
-				#@th()<span class="c-red">*</span>用例类型#end
-				#@td()
-				#@Tselect2F()
-	                   		 #@Tselect2Body("caseType" testCase?.caseType {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                   		 	#foreach(caseType:getDict("caseType"))
-	                   		 		<option value="${caseType.value}">${caseType.text}</option>
-	                   		 	#end
-	                       
-	                    	#end                
-                 #end
-               	#end
-			#end
-			#@tr()
-				#@th()<span class="c-red">*</span>试用阶段#end
-				#@td()
-					#@Tselect2F()
-	                   		 #@Tselect2Body("caseStage" testCase?.caseStage {"class":"input-text select2","multiple":"multiple"}) ##,"multiple":"multiple"加上为多选项
-		                        #foreach(stage:getDict("caseStage"))
-	                   		 		<option value="${stage.value}">${stage.text}</option>
-	                   		 	#end
-	                    	#end                
-                 	#end
-				#end
-			#end
-			#@tr()
-				#@th()<span class="c-red">*</span>优先级#end
-				#@td() 
-					 #@Tselect2F()
-	                   		 #@Tselect2Body("priority" testCase?.priority {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-		                        #foreach(pri:getDict("casePriority"))
-	                   		 		<option value="${pri.value}">${pri.text}</option>
-	                   		 	#end
-	                    	#end                
-             		#end
-                 #end
-			#end
-			#@tr()
-				#@th()用例状态#end
-				#@td()
-				 #@Tselect2F()
-	                   		 #@Tselect2Body("caseStatus" testCase?.caseStatus {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        	#foreach(status:getDict("caseStatus"))
-	                   		 		<option value="${status.value}">${status.text}</option>
-	                   		 	#end
-	                    	#end                
-             		#end
+
                 #end
-			#end
-			#@tr()
-				#@th()关键词#end
-				#@td()
-					#tinyInput("text" "caseKeywords" testCase?.caseKeywords {"datatype":"","id":"版本","class":"input-text"})
-				#end
-			#end
-			#@tr()
-				#@th()相关用例#end
-				#@td()#tinyInput("text" "linkCase" testCase?.linkCase {"datatype":"","id":"抄送给","class":"input-text"})
-				#end
-			#end
-		#end
-		#end
-	#end
-	#@div(divClass="infoContent")
-        <p class="titleName">创建编辑</p>
-	##该样式在comm.css样式中自定义
-		#@table("adjustTable")
-			#@thead()
-			#end
-			#@tbody()
-				#@tr()
-					#@th()由谁创建#end
-					#@td()${testCase?.caseOpenedBy?UserUtils.getUserById(testCase?.caseOpenedBy)?.orgUserRealName:""} ${testCase?.caseOpenedDate?" 于 "+formatDate(testCase?.caseOpenedDate,'yyyy-MM-dd HH:mm:ss'):""}#end
-				#end
-				#@tr()
-					#@th()最后编辑#end
-					#@td()${testCase?.caseLastEditedBy?UserUtils.getUserById(testCase?.caseLastEditedBy)?.orgUserRealName:""} ${testCase?.caseLastEditedDate?" 于 "+formatDate(testCase?.caseLastEditedDate,'yyyy-MM-dd HH:mm:ss'):""}  #end
-				#end
-			#end
-		#end
-	#end
+            #end
+            #@tr()
+                #@th()所属模块#end
+                #@td()
+                    #@Tselect2F()
+                    <script>
+                        $("#${sid}").on("change", function () {
+                            var pId = $("select[name=productId]  option:selected").val();
+                            var mId = $("select[name=moduleId]").val();
+                            if (pId > 0 && mId >= 0) {
+                                ajaxRead("${sid}", "storyId", "storyId", "storyTitle", "/product/story/storyList?productId=" + pId + "&moduleId=" + mId, ${testCase?.storyId ? : 0
+                            }
+                            );
+                        }
+                        })
+                        ;
+                    </script>
+                        #@Tselect2Body(
+                            "moduleId" testCase?.moduleId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+
+                        #end
+                    #end
+                #end
+
+            #end
+
+            #@th()相关需求#end
+            #@td()
+                #@Tselect2F()
+                    #@Tselect2Body(
+                        "storyId" testCase?.storyId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+
+                    #end
+                    #@Tselect2Fix()
+                        #@hasMenu("product-demand-add")
+                        <a href="${TINY_CONTEXT_PATH+adminPath}/product/story/addstory" class="r ">增加</a>
+                        #end
+                        #@hasMenu("product-demand")
+                        <a href="${TINY_CONTEXT_PATH+adminPath}/product/story?choose=1">全部</a>
+                        #end
+                    #end
+                #end
+            #end
+
+            #@tr()
+                #@th()<span class="c-red">*</span>用例类型#end
+                #@td()
+                    #@Tselect2F()
+                        #@Tselect2Body(
+                            "caseType" testCase?.caseType {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                            #foreach(caseType:getDict("caseType"))
+                            <option value="${caseType.value}">${caseType.text}</option>
+                            #end
+
+                        #end
+                    #end
+                #end
+            #end
+            #@tr()
+                #@th()<span class="c-red">*</span>试用阶段#end
+                #@td()
+                    #@Tselect2F()
+                        #@Tselect2Body("caseStage" testCase?.caseStage {"class":"input-text select2","multiple":
+                            "multiple"}) ##,"multiple":"multiple"加上为多选项
+                            #foreach(stage:getDict("caseStage"))
+                            <option value="${stage.value}">${stage.text}</option>
+                            #end
+                        #end
+                    #end
+                #end
+            #end
+            #@tr()
+                #@th()<span class="c-red">*</span>优先级#end
+                #@td()
+                    #@Tselect2F()
+                        #@Tselect2Body(
+                            "priority" testCase?.priority {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                            #foreach(pri:getDict("casePriority"))
+                            <option value="${pri.value}">${pri.text}</option>
+                            #end
+                        #end
+                    #end
+                #end
+            #end
+            #@tr()
+                #@th()用例状态#end
+                #@td()
+                    #@Tselect2F()
+                        #@Tselect2Body("caseStatus" testCase?.caseStatus {"class":
+                            "input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                            #foreach(status:getDict("caseStatus"))
+                            <option value="${status.value}">${status.text}</option>
+                            #end
+                        #end
+                    #end
+                #end
+            #end
+            #@tr()
+                #@th()关键词#end
+                #@td()
+                    #tinyInput(
+                        "text" "caseKeywords" testCase?.caseKeywords {"datatype":"","id":"版本","class":"input-text"})
+                #end
+            #end
+            #@tr()
+                #@th()相关用例#end
+                #@td()#tinyInput("text" "linkCase" testCase?.linkCase {"datatype":"","id":"抄送给","class":"input-text"})
+                #end
+            #end
+        #end
+    #end
+#end
+#@div(divClass="infoContent")
+<p class="titleName">创建编辑</p>
+##该样式在comm.css样式中自定义
+    #@table("adjustTable")
+        #@thead()
+        #end
+        #@tbody()
+            #@tr()
+                #@th()由谁创建#end
+                #@td()${testCase?.caseOpenedBy?UserUtils.getUserById(testCase?.caseOpenedBy)?.orgUserRealName:""} ${testCase?.caseOpenedDate?" 于 "+formatDate(testCase?.caseOpenedDate,'yyyy-MM-dd HH:mm:ss'):""}#end
+            #end
+            #@tr()
+                #@th()最后编辑#end
+                #@td()${testCase?.caseLastEditedBy?UserUtils.getUserById(testCase?.caseLastEditedBy)?.orgUserRealName:""} ${testCase?.caseLastEditedDate?" 于 "+formatDate(testCase?.caseLastEditedDate,'yyyy-MM-dd HH:mm:ss'):""}  #end
+            #end
+        #end
+    #end
+#end

@@ -5,101 +5,117 @@
 #import("/org/tinygroup/fold/components/fold.component")
 #!set(activeTitle="测试管理",activeMenuId=currentPageId)
 #macro Tselect2Body(name value mapInfo)
-#set(sid=mapInfo?.id?:sid)
-	<select name="${name}" class="form-control" #getMapInfo(mapInfo) id="${sid}">
-	#bodyContent
-	</select>
-	<script type="text/javascript">
-	$(function(){
-		$("#${sid}").select2();
-		#if(value)
-		var valuestr="${value}";
-		var values=valuestr.split(",");
-		if(values.length>1){
-			$("#${sid}").val(values).trigger("change");
-		}else{
-			$("#${sid}").val(valuestr).trigger("change");
-		}
-		#end
-	});
-	</script>
+    #set(sid=mapInfo?.id?:sid)
+<select name="${name}" class="form-control" #getMapInfo(mapInfo) id="${sid}">
+    #bodyContent
+</select>
+<script type="text/javascript">
+    $(function () {
+        $("#${sid}").select2();
+        #if(value)
+            var valuestr = "${value}";
+            var values = valuestr.split(",");
+            if (values.length > 1) {
+                $("#${sid}").val(values).trigger("change");
+            } else {
+                $("#${sid}").val(valuestr).trigger("change");
+            }
+        #end
+    });
+</script>
 #end
 #set(name="qualityBug")
 #@div()
-	#@tabWithInit("tab_demo" "optionsBox")
-			#@div(divClass="dropdownBox")
-				#include("/testManagement/page/dropdownMenu.page")
-			#end
-			#@tabHead()
-				#include("/testManagement/page/Tab.page")
-			#end
-			
-			#@tabBodyCol("ptop-5")
-			
-			#end
-	#end
+    #@tabWithInit("tab_demo" "optionsBox")
+        #@div(divClass="dropdownBox")
+            #include("/testManagement/page/dropdownMenu.page")
+        #end
+        #@tabHead()
+            #include("/testManagement/page/Tab.page")
+        #end
+
+        #@tabBodyCol("ptop-5")
+
+        #end
+    #end
 #end
 
 #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/quality/bug/assignTo" "post" {"class":"test"})
-#hiddenInput(hiddenInputName="bugId" hiddenInputValue=bug?.bugId)
-	<div style="width:67%;float:left">
-    	<div class="infoContent">
-    		<p class="titleName">指派</p>
-    		<div class="RTtitle">
-            	<button type="submit" id="submit" class="commitBtn">保存</button>
-        	</div>
+    #hiddenInput(hiddenInputName="bugId" hiddenInputValue=bug?.bugId)
+<div style="width:67%;float:left">
+<div class="infoContent">
+    <p class="titleName">指派</p>
+    <div class="RTtitle">
+        <button type="submit" id="submit" class="commitBtn">保存</button>
+    </div>
     #@elementItem()
-    	 #@sdpmItem("指派给")       	
-             #@Tselect2F()
-					#@Tselect2Body("bugAssignedTo" bug?.bugAssignedTo?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-						 #for(user : userList)
-						<option value="${user?.orgUserId}">${user?.orgUserRealName}</option>
-						#end
-					#end
-			 #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH+adminPath}/org/user/form" class="r ">增加</a>#end
-              #end  
-         #end   
-    #end
-    #@elementItem()
-        #@sdpmItem("抄送给") 
+        #@sdpmItem("指派给")
             #@Tselect2F()
-					#@Tselect2Body("bugMailto" bug?.bugMailto {"class":"input-text select2","multiple":"multiple"}) ##,"multiple":"multiple"加上为多选项
-						#for(user : userList)
-						<option value="${user?.orgUserId}">${user?.orgUserAccount}</option>
-						#end
-					#end
-			#@Tselect2Fix()<a href="${TINY_CONTEXT_PATH+adminPath}/org/user/form" class="r ">增加</a>#end
-              #end 
-     	#end
-    #end
-
-   #@elementItem()
-            <div class="col-12">
-                <div class="col-2 text-r"><label>备注：</label></div>
-
-                <div class="col-9">
-					#@Teditor("actionComment" "actionComment" {"initialFrameHeight":"150"})#end</div>
-            </div>
+                #@Tselect2Body(
+                    "bugAssignedTo" bug?.bugAssignedTo?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                    #for(user : userList)
+                    <option value="${user?.orgUserId}">${user?.orgUserRealName}</option>
+                #end
+            #end
+            #@Tselect2Fix()
+                #@hasMenu("organizationAddUser")
+                    <a href="${TINY_CONTEXT_PATH}/a/org/user/form">增加</a>
+                #end
+                #@hasMenu("organizationUser")
+                    <a href="${TINY_CONTEXT_PATH}/a/org/user/list" class="r">全部</a>
+                #end
+            #end
         #end
-        <br/>
-       </div>
- #@elementItem()
-        <div class="col-12">
-            <div class="col-5">
-                <button style="float: right" type="submit" id="submit" class="commitBtn">保存</button>
-            </div>
-            <div class="col-1"></div>
-            <div class="col-1">
-#*                <a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/Bug.page">
-                <button style="float: left" type="button" id="back" class="backBtn">返回</button></a>*#
-                #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end
-            </div>
-            <div class="col-5"></div>
+    #end
+#end
+#@elementItem()
+    #@sdpmItem("抄送给")
+        #@Tselect2F()
+            #@Tselect2Body("bugMailto" bug?.bugMailto {"class":"input-text select2","multiple":
+                "multiple"}) ##,"multiple":"multiple"加上为多选项
+                #for(user : userList)
+                <option value="${user?.orgUserId}">${user?.orgUserAccount}</option>
+            #end
+        #end
+        #@Tselect2Fix()
+            #@hasMenu("organizationAddUser")
+                <a href="${TINY_CONTEXT_PATH}/a/org/user/form">增加</a>
+            #end
+            #@hasMenu("organizationUser")
+                <a href="${TINY_CONTEXT_PATH}/a/org/user/list" class="r">全部</a>
+            #end
+        #end
+    #end
+#end
+#end
+
+#@elementItem()
+    <div class="col-12">
+        <div class="col-2 text-r"><label>备注：</label></div>
+
+        <div class="col-9">
+            #@Teditor("actionComment" "actionComment" {"initialFrameHeight":"150"})#end</div>
+    </div>
+#end
+    <br/>
+</div>
+#@elementItem()
+    <div class="col-12">
+        <div class="col-5">
+            <button style="float: right" type="submit" id="submit" class="commitBtn">保存</button>
         </div>
-	#end
+        <div class="col-1"></div>
+        <div class="col-1">
+        #*                <a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/Bug.page">
+                        <button style="float: left" type="button" id="back" class="backBtn">返回</button></a>*#
+            #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end
+        </div>
+        <div class="col-5"></div>
+    </div>
+#end
     <br>
-   </div>
-    <div style="width:32%;float:right">
-		#history(adminPath+"/system/action/ajax/history?actionObjectType=bug&actionObjectId="+bug?.bugId)
-	</div>
+</div>
+<div style="width:32%;float:right">
+    #history(adminPath+"/system/action/ajax/history?actionObjectType=bug&actionObjectId="+bug?.bugId)
+</div>
 #end

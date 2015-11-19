@@ -2,33 +2,33 @@
 <li>"+"文档"+"</li>")
 
 <script type="text/javascript">
-    function ajaxRead(id,toName,opKey,opvalue,url,value){
-        var selectCheck = "select[name="+toName+"]";
-        $(selectCheck).each(function(){
+    function ajaxRead(id, toName, opKey, opvalue, url, value) {
+        var selectCheck = "select[name=" + toName + "]";
+        $(selectCheck).each(function () {
             var sele = $(this);
             var s;
             $.ajax({
                 type: "POST",
-                url: "${TINY_CONTEXT_PATH+adminPath}"+url,
+                url: "${TINY_CONTEXT_PATH+adminPath}" + url,
                 data: $(this).attr('data'),
-                dataType:"json",
-                success: function(data){
+                dataType: "json",
+                success: function (data) {
                     sele.empty();
-                    for(var i=0,l=data.length;i<l;i++){
-                        var em = "<option value='"+data[i][opKey]+"' >"+ data[i][opvalue] +"</option>";
+                    for (var i = 0, l = data.length; i < l; i++) {
+                        var em = "<option value='" + data[i][opKey] + "' >" + data[i][opvalue] + "</option>";
                         sele.append(em);
 
                     }
 
-                    if(value!=null) {
+                    if (value != null) {
                         sele.val(value).trigger("change");
-                    }else {
+                    } else {
                         sele.val(data[0][opKey]).trigger("change");
                     }
 
 
                 },
-                error: function(res){
+                error: function (res) {
                 ##    alert("失败");
                 }
             });
@@ -59,7 +59,8 @@
 #end
 
 
-#@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/document/product/save/updateDoc?docProduct="+cookieProductId+"&docLibId=1&docDeleted=0" "post" {"class":"test","enctype":
+#@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/document/product/save/updateDoc?docProduct="+cookieProductId+
+    "&docLibId=1&docDeleted=0" "post" {"class":"test","enctype":
     "multipart/form-data"})
 
 <div style="width:100%">
@@ -70,7 +71,8 @@
         #@formControlDiv("col-4")
             #@div(divClass="col-12")
                 #@Tselect2F()
-                    #@Tselect2Body("docProduct" cookieProductId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                    #@Tselect2Body(
+                        "docProduct" cookieProductId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         <option value="0">/</option>
                         #if(cookieProductLineId)
                             #foreach(product : ProductUtils.getProductListByLine(cookieProductLineId))
@@ -80,14 +82,19 @@
                     #end
 
                     #@Tselect2Fix()
-                        <a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition" class="r">增加</a>
-                        <a href="${TINY_CONTEXT_PATH+adminPath}/product/allproduct/addition">全部</a>#end
+                        #@hasMenu("newproduct")
+                            <a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition" class="r">增加</a>
+                        #end
+                        #@hasMenu("allproduct")
+                            <a href="${TINY_CONTEXT_PATH+adminPath}/product/allproduct/addition">全部</a>
+                        #end
+                    #end
                     <script type="text/javascript">
-                        $("#${sid}").on("change",function(){
+                        $("#${sid}").on("change", function () {
                             var pId = $("#${sid}  option:selected").val();
-                            if(pId>0){
-                            ajaxRead("${sid}","docModule","moduleId","moduleName","/document/ajax/module1?productId="+pId);
-                        }
+                            if (pId > 0) {
+                                ajaxRead("${sid}", "docModule", "moduleId", "moduleName", "/document/ajax/module1?productId=" + pId);
+                            }
                         })
                     </script>
                 #end
@@ -110,9 +117,12 @@
     #@elementItem()
         #@colLabel()<span class="c-red">*</span>文档类型#end
         #@skinMinimal("mt-20")
-            #labelRadio1(rId="typefile" rName="docType" rChecked="checked" rValue="1" "setType(this.value);" labelText=getDict("docType","1") )
-            #labelRadio1(rId="typeurl" rName="docType" rValue="2" labelText=getDict("docType","2") "setType(this.value);")
-            #labelRadio1(rId="typetext" rName="docType" rValue="3" labelText=getDict("docType","3") "setType(this.value);")
+            #labelRadio1(rId="typefile" rName="docType" rChecked="checked" rValue="1"
+                "setType(this.value);" labelText=getDict("docType","1") )
+            #labelRadio1(rId="typeurl" rName="docType" rValue="2" labelText=getDict("docType",
+                "2") "setType(this.value);")
+            #labelRadio1(rId="typetext" rName="docType" rValue="3" labelText=getDict("docType",
+                "3") "setType(this.value);")
 
         #end
         #@validateDiv("col-2")#end
@@ -122,7 +132,9 @@
         #@colLabel()<span class="c-red">*</span>文档标题#end
         #@formControlDiv("col-4")
             #@div(divClass="col-12")
-                #tinyInput("text" "docTitle" ""{"placeholder":"请输入文档标题","datatype":"*1-16","nullmsg":"文档标题不能为空！","class":"input-text"})
+                #tinyInput(
+                    "text" "docTitle" ""{"placeholder":"请输入文档标题","datatype":"*1-16","nullmsg":"文档标题不能为空！","class":
+                    "input-text"})
             #end
         #end
         #@validateDiv("col-2")#end
@@ -132,7 +144,8 @@
         #@colLabel()<span class="c-red">*</span>文档URL#end
         #@formControlDiv("col-4")
             #@div(divClass="col-12")
-                #tinyInput("text" "docUrl" ""{"placeholder":"相应的链接地址","datatype":"*","ignore":"ignore","class":"input-text"})
+                #tinyInput(
+                    "text" "docUrl" ""{"placeholder":"相应的链接地址","datatype":"*","ignore":"ignore","class":"input-text"})
             #end
         #end
         #@validateDiv("col-2")#end
@@ -191,22 +204,18 @@
 
     <script type="text/javascript">
         /* Set doc type. */
-        function setType(type)
-        {
-            if(type == '2')
-            {
+        function setType(type) {
+            if (type == '2') {
                 $('#urlBox').removeClass('hidden');
                 $('#fileBox').addClass('hidden');
                 $('#contentBox').addClass('hidden');
             }
-            else if(type == '3')
-            {
+            else if (type == '3') {
                 $('#urlBox').addClass('hidden');
                 $('#fileBox').addClass('hidden');
                 $('#contentBox').removeClass('hidden');
             }
-            else
-            {
+            else {
                 $('#urlBox').addClass('hidden');
                 $('#fileBox').removeClass('hidden');
                 $('#contentBox').addClass('hidden');
