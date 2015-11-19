@@ -113,14 +113,7 @@ public class ProjectTaskAction extends BaseController {
             model.addAttribute("copyTask", task);
         }
         List<ProductStory> storyList = projectStoryService.findStoryByProject(projectId);
-        ProductStory productStory = storyService.findStory(storyId);
-        SystemModule systemModule = new SystemModule();
-        systemModule.setModuleRoot(productStory.getProductId());
-        List<SystemModule> moduleList = moduleService.findModules(systemModule);
-        for (SystemModule module : moduleList) {
-            module.setModuleName(ModuleUtil.getPath(module.getModuleId(), "/", null, false));
-        }
-        model.addAttribute("moduleList", moduleList);
+        model.addAttribute("moduleList", findModuleList(storyId, projectId));
         model.addAttribute("moduleId", moduleId);
         model.addAttribute("storyId", storyId);
         model.addAttribute("storyList", storyList);
@@ -428,15 +421,8 @@ public class ProjectTaskAction extends BaseController {
         if (projectId == null) {
             return redirectProjectForm();
         }
-        ProductStory productStory = storyService.findStory(storyId);
-        SystemModule systemModule = new SystemModule();
-        systemModule.setModuleRoot(productStory.getProductId());
-        List<SystemModule> moduleList = moduleService.findModules(systemModule);
-        for (SystemModule module : moduleList) {
-            module.setModuleName(ModuleUtil.getPath(module.getModuleId(), "/", null, false));
-        }
+        model.addAttribute("moduleList", findModuleList(storyId, projectId));
         model.addAttribute("moduleId", moduleId);
-        model.addAttribute("moduleList", moduleList);
         model.addAttribute("teamList", userService.findTeamUserListByProjectId(projectId));
 //        model.addAttribute("storyId", storyId);
         ProductStory story = productStoryService.findStory(storyId);
@@ -770,5 +756,19 @@ public class ProjectTaskAction extends BaseController {
         return moduleList;
     }
 
+    private List<SystemModule> findModuleList(Integer storyId, Integer projectId) {
+        ProductStory productStory = storyService.findStory(storyId);
+        if (productStory != null) {
+            SystemModule systemModule = new SystemModule();
+            systemModule.setModuleRoot(productStory.getProductId());
+            List<SystemModule> moduleList = moduleService.findModules(systemModule);
+            for (SystemModule module : moduleList) {
+                module.setModuleName(ModuleUtil.getPath(module.getModuleId(), "/", null, false));
+            }
+            return moduleList;
+        } else {
+            return generateModuleList(projectId);
+        }
+    }
 
 }

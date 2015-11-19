@@ -1,0 +1,68 @@
+#@noRespsGridSystem()
+    #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/org/privilege/copyRole" "" {"class":"test"})
+    <input type="hidden" name="copyRoleId" value="${copyRoleId}"/>
+        #@gridSysRow()
+            #@colLabel("col-2")<span class="c-red">*</span>角色名称：#end
+            #@gridSysCol(7)
+                #tinyInput(
+                    "text" "orgRoleName" role?.orgRoleName {"placeholder":"","datatype":"*","nullmsg":"角色名不能为空！",
+                    "id":"username",
+                    "class":
+                    "input-text"})
+            #end
+        #end
+        #@gridSysRow()
+            #@colLabel("col-2")角色类型：#end
+            #@gridSysCol(7)
+                #@Tselect2Body("orgRoleType" role?.orgRoleType {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                    #foreach(type : getDict("roleType"))
+                    <option value=${type.value}>${type.text}</option>
+                    #end
+                #end
+            #end
+        #end
+
+        #@gridSysRow()
+            #@colLabel("col-2")角色描述：#end
+            #@gridSysCol(7)
+                #tinyInput("text" "orgRoleRemarks" role?.orgRoleRemarks{"class":"input-text"})
+            #end
+        #end
+
+
+        #@gridSysRow()
+            #@colLabel("col-2")选项：#end
+            #@gridSysCol(8)
+                #@Tcheckboxes("copyPart" )
+                    #@Tcheckbox("copyPrivilege")复制权限#end
+                    #@Tcheckbox("copyUser")复制用户#end
+                #end
+            #end
+        #end
+    #end
+#end
+
+<script type="text/javascript">
+    $(function () {
+        $("form[name=thisform").Validform({
+            beforeSubmit: function (curform) {
+                $(curform).ajaxSubmit({
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.status == "y" || data.status == "success") {
+                            layer.msg(data.info, 2, 1, function () {
+                                $(curform).closest(".modal").trigger("close");
+                            });
+                        } else {
+                            layer.msg(data.info);
+                        }
+                    },
+                    error: function () {
+                        layer.msg("error");
+                    }
+                });
+                return false;
+            }
+        });
+    });
+</script>

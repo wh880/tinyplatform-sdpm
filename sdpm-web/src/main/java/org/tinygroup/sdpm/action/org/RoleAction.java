@@ -31,10 +31,16 @@ public class RoleAction extends BaseController {
      */
     @RequiresPermissions(value = {"org-privilege-edit", "organizationAddGroup"}, logical = Logical.OR)
     @RequestMapping("/form")
-    public String form(Integer roleId, Model model) {
+    public String form(Integer roleId, Integer copyRoleId, Model model) {
         if (roleId != null) {
             OrgRole role = roleService.findRole(roleId);
             model.addAttribute("role", role);
+        }
+        if (copyRoleId != null) {
+            OrgRole role = roleService.findRole(copyRoleId);
+            role.setOrgRoleId(null);
+            model.addAttribute("role", role);
+            model.addAttribute("copyRoleId", copyRoleId);
         }
         return "organization/privilege/addRoleForm";
     }
@@ -51,6 +57,8 @@ public class RoleAction extends BaseController {
     public String save(OrgRole role, Model model) {
         if (role.getOrgRoleId() == null) {
             roleService.addRole(role);
+
+
         } else {
             roleService.updateRole(role);
         }
@@ -60,30 +68,42 @@ public class RoleAction extends BaseController {
 
 
     /**
-     * 角色的复制功能
+     * 角色的复制表单（表单）
      *
-     * @param orgRoleId
-     * @param orgRoleName
-     * @param orgRoleRemarks
-     * @param copyPart
+     * @param copyRoleId
+     * @param model
      * @return
      */
     @RequiresPermissions("org-privilege-copy")
-    @RequestMapping("/copyRole")
-    public String copyRole(Integer orgRoleId, String orgRoleName, String orgRoleRemarks, String[] copyPart) {
-        OrgRole orgRole1 = new OrgRole();
-        orgRole1.setOrgRoleName(orgRoleName);
-        orgRole1.setOrgRoleRemarks(orgRoleRemarks);
-        OrgRole orgRole2 = roleService.addRole(orgRole1);
-        Integer orgRoleIdNew = orgRole2.getOrgRoleId();
+    @RequestMapping(value = "/copyRole", method = RequestMethod.GET)
+    public String copyRoleForm(Integer copyRoleId, Model model) {
+        OrgRole role = roleService.findRole(copyRoleId);
+        model.addAttribute("role", role);
+        return "organization/privilege/roleCopy";
+    }
+
+    /**
+     * 角色的复制表单提交（弹出框中提交）
+     *
+     * @param orgRoleId
+     * @param role
+     * @param copyPart
+     * @return
+     */
+    @ResponseBody
+    @RequiresPermissions("org-privilege-copy")
+    @RequestMapping(value = "/copyRole", method = RequestMethod.POST)
+    public Map<String, String> copyRole(Integer copyRoleId, OrgRole role, String[] copyPart) {
+        role = roleService.addRole(role);
+        Integer orgRoleIdNew = role.getOrgRoleId();
         for (String check : copyPart) {
             if (check.equals("copyPrivilege")) {
-                roleService.copyRoleMenu(orgRoleIdNew, orgRoleId);
+                roleService.copyRoleMenu(orgRoleIdNew, copyRoleId);
             } else {
-                roleService.copyRoleUser(orgRoleIdNew, orgRoleId);
+                roleService.copyRoleUser(orgRoleIdNew, copyRoleId);
             }
         }
-        return "redirect:" + adminPath + "/org/privilege/list";
+        return resultMap(true, "复制角色成功！");
     }
 
     /**
@@ -112,7 +132,7 @@ public class RoleAction extends BaseController {
     public String list(OrgRole orgRole, Model model) {
         List<OrgRole> list = roleService.findRoleList(orgRole);
         model.addAttribute("list", list);
-        return "organization/privilege/privilege.page";
+        return "organization/privilege/privilege";
     }
 
     /**

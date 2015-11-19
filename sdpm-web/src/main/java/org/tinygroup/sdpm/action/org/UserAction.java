@@ -509,7 +509,7 @@ public class UserAction extends BaseController {
         Date endDate = new Date();
         betweenDate(selDate, startDate, endDate);
 
-        if (startDate == null && endDate == null) {
+        if ("0".equals(selDate)) {
             Pager<SystemAction> actionPager = actionService.findSystemActionPager(start, limit, systemAction, null, null);
             model.addAttribute("actionPager", actionPager);
         } else if (!startDate.equals(endDate)) {

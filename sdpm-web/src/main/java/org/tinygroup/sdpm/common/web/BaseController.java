@@ -304,8 +304,8 @@ public abstract class BaseController {
      */
     public void betweenDate(String selectDate, Date dateStart, Date dateEnd) {
         Date date = new Date();
-        Date startDate;
-        Date endDate;
+        Date startDate = null;
+        Date endDate = null;
 
         if ("1".equals(selectDate)) {
             startDate = DateUtils.getDateStart(date);
@@ -329,8 +329,8 @@ public abstract class BaseController {
             startDate = DateUtils.getFirstDayOfMonth(DateUtils.addMonths(date, -1));
             endDate = DateUtils.getLastDayOfMonth(DateUtils.addMonths(date, -1));
         } else {
-            startDate = null;
-            endDate = null;
+            dateStart = null;
+            dateEnd = null;
         }
         if (startDate != null) {
             dateStart.setTime(startDate.getTime());
