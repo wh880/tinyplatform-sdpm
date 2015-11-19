@@ -13,7 +13,6 @@
 </div>
 <script type="text/javascript">
     $(function(){
-        //$("body").append('<div id="${sid}-content" class="t-menu-content" style="display:none; position: absolute;z-index:9999"><ul id="ztree${sid}" class="ztree mCustomScrollbar" style="margin-top:0;max-height:400px;overflow-x:auto;overflow-y:auto"></ul><span style="position:absolute;right:5px;bottom:0px;z-index:2;cursor:pointer" id="close${sid}"><i class="icon-remove"></i></span></div>');
         var setting = {
             view: {
                 dblClickExpand: false

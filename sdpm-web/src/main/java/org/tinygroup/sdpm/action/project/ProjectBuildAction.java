@@ -254,7 +254,6 @@ public class ProjectBuildAction extends BaseController {
         return "/project/task/relation-release/product-al-bug.page";
     }
 
-    //    @RequiresPermissions("projectBuild-releaseBaseInfo")
     @RequestMapping("/releasebaseinfo")
     public String releasebaseinfo(Integer buildId, Model model) {
         ProjectBuild build = buildService.findBuild(buildId);
