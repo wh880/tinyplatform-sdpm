@@ -51,8 +51,8 @@
             #@daterangepickerPosition()
                 #@colLabel()评审时间：#end
                 #@formControlDiv("col-4")
-                    #@tinyDateInput("storyReviewedDate" story?.storyReviewedDate?formatDate(story?.storyReviewedDate,
-                        'yyyy-MM-dd'):"" "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空"})#end
+                    #@tinyDateInput(
+                        "storyReviewedDate" story?.storyReviewedDate?story?.storyReviewedDate:formatDate(now(),'yyyy-MM-dd') "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空"})#end
                 #end
                 #@validateDiv("col-2")#end
             #end
