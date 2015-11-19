@@ -69,7 +69,7 @@
               scope="org-privilege">
         </menu>
 
-        <menu id="org-privilege-copy" name="复制角色" href="/organization/privilege/form.pagelet" icon="icon-copy"
+        <menu id="org-privilege-copy" name="复制角色" href="/org/privilege/copyRole.pagelet" icon="icon-copy"
               sort="1" isShow="1"
               scope="org-privilege">
             <map>
