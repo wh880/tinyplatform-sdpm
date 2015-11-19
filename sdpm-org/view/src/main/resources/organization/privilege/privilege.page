@@ -1,4 +1,4 @@
-#!set(activeTitle="权限管理",activeMenuId=currentPageId)
+#!set(activeTitle="角色管理",activeMenuId=currentPageId)
 #set(editpagePath=
     "/organization/privilege/groupAdd.pagelet",editpageModalId="userEditModal",editpageModal="#"+editpageModalId)
 #set(name="organizationPrivilege")
