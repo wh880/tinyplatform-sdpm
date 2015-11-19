@@ -110,6 +110,7 @@
                             #@hasMenu("project-op-all")
                                 <a href="${TINY_CONTEXT_PATH+adminPath}/project/list">全部</a>
                             #end
+                        #end
                         <script type="text/javascript">
 
                             $("#${sid}").on("change", function () {
@@ -144,6 +145,7 @@
                             #@hasMenu("allproduct")
                                 <a href="${TINY_CONTEXT_PATH+adminPath}/product/allproduct/addition">全部</a>
                             #end
+                        #end
                         <script type="text/javascript">
                             $("#${sid}").on("change", function () {
                                 var dId = $("select[name=docLibId]").val();
