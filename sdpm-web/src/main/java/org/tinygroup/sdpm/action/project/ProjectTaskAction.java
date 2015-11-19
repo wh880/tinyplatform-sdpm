@@ -114,18 +114,6 @@ public class ProjectTaskAction extends BaseController {
         }
         List<ProductStory> storyList = projectStoryService.findStoryByProject(projectId);
         model.addAttribute("moduleList", findModuleList(storyId, projectId));
-//        ProductStory productStory = storyService.findStory(storyId);
-//        if (productStory != null) {
-//            SystemModule systemModule = new SystemModule();
-//            systemModule.setModuleRoot(productStory.getProductId());
-//            List<SystemModule> moduleList = moduleService.findModules(systemModule);
-//            for (SystemModule module : moduleList) {
-//                module.setModuleName(ModuleUtil.getPath(module.getModuleId(), "/", null, false));
-//            }
-//            model.addAttribute("moduleList", moduleList);
-//        }else{
-//            model.addAttribute("moduleList", generateModuleList(projectId));
-//        }
         model.addAttribute("moduleId", moduleId);
         model.addAttribute("storyId", storyId);
         model.addAttribute("storyList", storyList);
@@ -434,18 +422,6 @@ public class ProjectTaskAction extends BaseController {
             return redirectProjectForm();
         }
         model.addAttribute("moduleList", findModuleList(storyId, projectId));
-//        ProductStory productStory = storyService.findStory(storyId);
-//        if (productStory != null) {
-//            SystemModule systemModule = new SystemModule();
-//            systemModule.setModuleRoot(productStory.getProductId());
-//            List<SystemModule> moduleList = moduleService.findModules(systemModule);
-//            for (SystemModule module : moduleList) {
-//                module.setModuleName(ModuleUtil.getPath(module.getModuleId(), "/", null, false));
-//            }
-//            model.addAttribute("moduleList", moduleList);
-//        }else{
-//            model.addAttribute("moduleList", generateModuleList(projectId));
-//        }
         model.addAttribute("moduleId", moduleId);
         model.addAttribute("teamList", userService.findTeamUserListByProjectId(projectId));
 //        model.addAttribute("storyId", storyId);
