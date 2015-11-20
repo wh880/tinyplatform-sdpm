@@ -19,7 +19,7 @@
     <input type="hidden" name="slaId" value="${sla?.slaId}"/>
     <div style="width:100%;float:left" class="pageleftpart">
         <div class="infoContent">
-        ##            <p class="titleName">编辑协议</p>
+            <p class="titleName">新建/编辑协议</p>
             #@elementItem()
                 #@sdpmItem("客户名称" "*")
                     #@Tselect2F()

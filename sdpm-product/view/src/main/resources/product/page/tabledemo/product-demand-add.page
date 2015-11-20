@@ -226,7 +226,6 @@
                             var pId = $(this).val();
                             if (pId > 0) {
                                 ajaxRead("${sid}", "moduleId", "moduleId", "moduleName", "/quality/bug/ajax/module?moduleRoot=" + pId,"0","module");
-                                ajaxRead("${sid}", "planId", "planId", "planName", "/product/plan/planList?productId=" + pId,"0","plan");
                                 var url = $("#modelA").attr("href");
                                 if(!url.endsWith("=")){
                                     url = url.substring(0,url.indexOf("=")+1);

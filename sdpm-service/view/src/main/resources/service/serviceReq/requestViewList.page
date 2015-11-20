@@ -95,14 +95,22 @@
             #@validateDiv("col-2")#end
         #end
         #@elementItem()
-            <div class="col-2 text-r"><label><span class="c-red">*</span>回访描述：</label></div>
-            #@formControlDiv("col-8")
-                #@tinyTextarea(
-                    "reviewSpec" {"datatype":"*","nullmsg":"描述不能为空！"})${review
-                    ?.reviewSpec}#end
-            #end
+            <div class="col-12">
+                <div class="col-2 text-r"><label>回访描述：</label></div>
+                <div class="col-9">
+                    #@Teditor("content" "reviewSpec" {"initialFrameHeight":"300"})${review?.reviewSpec}#end</div>
+            </div>
             #@validateDiv("col-2")#end
         #end
+    ##        #@elementItem()
+    ##            <div class="col-2 text-r"><label><span class="c-red">*</span>回访描述：</label></div>
+    ##            #@formControlDiv("col-8")
+    ##                #@tinyTextarea(
+    ##                    "reviewSpec" {"datatype":"*","nullmsg":"描述不能为空！"})${review
+    ##                    ?.reviewSpec}#end
+    ##            #end
+    ##            #@validateDiv("col-2")#end
+    ##        #end
 
         #@elementItem()
             #@colLabel()是否通过：#end
@@ -133,12 +141,18 @@
     <script type="text/javascript">
         $(".select2").select2();
     </script>
+
     <script type="text/javascript">
         $(function () {
             $("form[name=thisform").Validform({
-                tiptype: 2
-
+                tiptype: 2,
+                beforeSubmit: function () {
+                    var replySpecText = $("textarea[name=reviewSpec]").val();
+                    if (!replySpecText) {
+                        layer.msg("回访描述不能为空");
+                        return false;
+                    }
+                }
             });
         });
     </script>
-
