@@ -31,9 +31,9 @@ public class StoryServiceImpl implements StoryService {
         return storyManager.add(story, storySpec);
     }
 
-    public Integer deleteStory(Integer storyId) {
+    public Integer deleteStory(ProductStory story) {
 
-        return storyManager.delete(storyId);
+        return storyManager.delete(story);
     }
 
     public int updateStory(ProductStory story) {

@@ -62,6 +62,7 @@ public class PlanManagerImpl implements PlanManager{
 	public Integer delete(Integer planId) {
 		//删需求
 		productStoryDao.deleteStoryByPlan(planId);
+
 		return productPlanDao.softDelete(planId);
 	}
 

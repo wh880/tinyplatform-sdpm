@@ -291,7 +291,10 @@ public class StoryAction extends BaseController {
     @ResponseBody
     @RequestMapping("/delete")
     public Map delete(ProductStory story) {
-        storyService.deleteStory(story.getStoryId());
+        story.setDeleted(FieldUtil.DELETE_YES);
+        story.setStoryClosedBy(UserUtils.getUserId());
+        story.setStoryClosedDate(new Date());
+        storyService.deleteStory(story);
         Map<String, String> map = new HashMap<String, String>();
         map.put("status", "success");
         map.put("info", "删除成功");
@@ -490,7 +493,7 @@ public class StoryAction extends BaseController {
         productStory.setStoryClosedDate(new Date());
         productStory.setDeleted(FieldUtil.DELETE_YES);
         productStory.setStoryStatus("2");
-        storyService.updateStory(productStory);
+        storyService.deleteStory(productStory);
         LogUtil.logWithComment(LogUtil.LogOperateObject.STORY,
                 LogUtil.LogAction.CLOSED,
                 String.valueOf(productStory.getStoryId()),
@@ -753,7 +756,7 @@ public class StoryAction extends BaseController {
     @ResponseBody
     @RequestMapping("/storyList")
     public List<ProductStory> findStory(ProductStory story) {
-        if(story.getProductId()==null||story.getProductId()<1)return new ArrayList<ProductStory>();
+        if(story.getProductId()==null||story.getProductId()==0)return new ArrayList<ProductStory>();
         Integer storyId= null;
         if(story.getStoryId()!=null){
             storyId = story.getStoryId();

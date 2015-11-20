@@ -103,13 +103,13 @@ public class StoryManagerImpl implements StoryManager {
         return productStoryDao.query(story, null);
     }
 
-    public Integer delete(Integer storyId) {
+    public Integer delete(ProductStory story) {
         //删bug
-        qualityBugDao.deleteBugsByStory(storyId);
+        qualityBugDao.deleteBugsByStory(story.getStoryId());
         //删case
-        qualityTestCaseDao.deleteCaseByStory(storyId);
+        qualityTestCaseDao.deleteCaseByStory(story.getStoryId());
 
-        return productStoryDao.softDelete(storyId);
+        return productStoryDao.edit(story);
     }
 
     public List<ProductStory> findList(Integer... storyId) {

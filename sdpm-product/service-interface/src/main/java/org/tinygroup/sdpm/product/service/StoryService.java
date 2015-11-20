@@ -23,7 +23,7 @@ public interface StoryService {
 	 * @param storyId
 	 * @return
 	 */
-	Integer deleteStory(Integer storyId);
+	Integer deleteStory(ProductStory story);
 	
 	/**
 	 * 编辑
