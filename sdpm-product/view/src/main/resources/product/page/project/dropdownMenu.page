@@ -50,6 +50,11 @@
 </script>
 #end
 #end
+#macro navZtreeBody(bodyMapInfo)
+<div class="dropdownbody ztree-dropdownbody" id="${navsid}-body" #mapToHtml(bodyMapInfo)>
+    #bodyContent
+</div>
+#end
 
 #@navZtree("product" "product")
     #@navZtreeNav()

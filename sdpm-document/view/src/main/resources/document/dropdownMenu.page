@@ -7,7 +7,7 @@
         无文档库
         #end
     <span class="caret"></span>#end
-    #@navSelect2Body()
+    #@navSelect2Body({"style":"left:-18px;top:26px"})
         #@navSelect2Data()
         <option value=""></option>
         <optgroup label="文档库">
