@@ -99,7 +99,7 @@ public class DocumentAction extends BaseController {
     @ResponseBody
     @RequestMapping("/ajax/module")
     public List<SystemModule> getModule(SystemModule systemModule, Integer projectId) {
-        if (projectId == 0) {
+        if (projectId!=null&&projectId == 0) {
             return moduleService.findModules(systemModule);
         }
         systemModule.setModuleRoot(projectId);
@@ -115,9 +115,9 @@ public class DocumentAction extends BaseController {
      * @return
      */
     @ResponseBody
-    @RequestMapping("/ajax/module1")
+    @RequestMapping("/ajax/productModule")
     public List<SystemModule> getModule1(SystemModule systemModule, Integer productId) {
-        if (productId == 0) {
+        if (productId!=null&&productId == 0) {
             return moduleService.findModules(systemModule);
         }
         systemModule.setModuleRoot(productId);

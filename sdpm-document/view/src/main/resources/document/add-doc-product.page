@@ -23,32 +23,23 @@
     #@elementItem()
         #@colLabel()所属产品：#end
         #@formControlDiv("col-3")
-            #@Tselect2F()
-                #@Tselect2Body(
-                    "docProduct" product?.productId?:0 {"class": "input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                    #foreach(product : productList)
-                        <option value="${product?.productId}">${product?.productName}</option>
-                    #end
-                #end
-                #@Tselect2Fix()
-                    #@hasMenu("newproduct")
-                        <a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition" class="r">增加</a>
-                    #end
-                    #@hasMenu("allproduct")
-                        <a href="${TINY_CONTEXT_PATH+adminPath}/product/allproduct/addition">全部</a>
-                    #end
-                #end
-                <script type="text/javascript">
-                    $("#${sid}").on("change", function () {
-                        var pId = $("#${sid}  option:selected").val();
-                        if (pId > 0) {
-                            ajaxRead("${sid}", "docModule", "moduleId", "moduleName", "/document/ajax/module?productId=" + pId, ${doc?.docModule ? doc.docModule : 0
-                        }
-                        );
-                    }
-                    })
+            #@TzTreeSelect(
+                "productId" "" {"class":"input-text","":"","nullmsg":"",
+                "data-URL":call("link",adminPath+"/productLine/userProductTree")})
+                <script>
+                    $(function(){
+                        $("#${sid}").on("setValue",function(o,treeNode){
+                            var pId = treeNode.id;
+                            if (pId > 0) {
+                                ajaxRead("${sid}", "docModule", "moduleId", "moduleName", "/document/ajax/productModule?productId=" + pId, ${doc?.docModule?doc.docModule:0},"module");
+                            }
+                        });
+                    });
                 </script>
+                <span><a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition" class="r ">增加</a>
+                                <a href="${TINY_CONTEXT_PATH+adminPath}/product/allproduct/addition">全部</a></span>
             #end
+
         #end
     #end
 
@@ -163,33 +154,5 @@
                 tiptype: 2
             });
         });
-        function ajaxRead(id, toName, opKey, opvalue, url, value) {
-            var selectCheck = "select[name=" + toName + "]";
-            $(selectCheck).each(function () {
-                var select = $(this);
-                $.ajax({
-                    type: "POST",
-                    url: "${TINY_CONTEXT_PATH+adminPath}" + url,
-                    data: $(this).attr('data'),
-                    dataType: "json",
-                    success: function (data) {
-                        select.empty();
-                        var em = "<option value='0' selected  >/</option>";
-                        select.append(em);
-                        for (var i = 0, l = data.length; i < l; i++) {
-                            var em = "<option value='" + data[i][opKey] + "' >" + data[i][opvalue] + "</option>";
-                            select.append(em);
-                        }
-                        if (value != null) {
-                            select.val(value).trigger("change");
-                        } else {
-                            select.val(data[0][opKey]).trigger("change");
-                        }
-                    },
-                    error: function (res) {
-                    ##    alert("失败");
-                    }
-                });
-            });
-        }
+
     </script>

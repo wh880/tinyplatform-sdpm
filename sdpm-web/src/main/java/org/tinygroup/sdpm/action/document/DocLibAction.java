@@ -50,7 +50,7 @@ public class DocLibAction extends BaseController {
      * @param model
      * @return
      */
-    @RequiresPermissions("doclib-edit")
+    @RequiresPermissions("doc-file-edit")
     @RequestMapping(value = "/edit")
     public String editDocLib(@CookieValue(value = DocLibAction.COOKIE_DOCLIB_ID) Integer documentLibId, DocumentDocLib docLib, Model model) {
         docLib = docservice.findDoclibById(documentLibId);
@@ -85,7 +85,7 @@ public class DocLibAction extends BaseController {
      * @param id
      * @return
      */
-    @RequiresPermissions(value = {"doclib-delete"})
+    @RequiresPermissions(value = {"doc-file-delete"})
     @ResponseBody
     @RequestMapping(value = "/delete")
     public Map delDocLib(@CookieValue(required = false, value = COOKIE_DOCLIB_ID) String documentLibId, Integer id,

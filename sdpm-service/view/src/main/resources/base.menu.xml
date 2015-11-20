@@ -77,7 +77,7 @@
         <menu id="sla-add" name="新建协议" href="/service/sla/form" icon="icon-plus" sort="1" isShow="1"
               scope="service-sla-batchdel"/>
         <menu id="sla-edit" name="编辑协议" href="/service/sla/form" icon="icon-pencil" sort="1" isShow="1"
-              scope="service-sla，clientSla"/>
+              scope="service-sla,clientSla"/>
         <menu id="sla-del" name="删除协议" href="/service/sla/delete" icon="icon-remove" sort="1" isShow="1"
               scope="service-sla"/>
 
