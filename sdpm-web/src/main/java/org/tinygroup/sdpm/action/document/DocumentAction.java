@@ -115,7 +115,7 @@ public class DocumentAction extends BaseController {
      * @return
      */
     @ResponseBody
-    @RequestMapping("/ajax/module1")
+    @RequestMapping("/ajax/productModule")
     public List<SystemModule> getModule1(SystemModule systemModule, Integer productId) {
         if (productId!=null&&productId == 0) {
             return moduleService.findModules(systemModule);

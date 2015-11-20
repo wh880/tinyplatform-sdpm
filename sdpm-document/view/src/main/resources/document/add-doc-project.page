@@ -1,36 +1,3 @@
-<script type="text/javascript">
-    function ajaxRead(id, toName, opKey, opvalue, url, value) {
-        var selectCheck = "select[name=" + toName + "]";
-        $(selectCheck).each(function () {
-            var sele = $(this);
-            var s;
-            $.ajax({
-                type: "POST",
-                url: "${TINY_CONTEXT_PATH+adminPath}" + url,
-                data: $(this).attr('data'),
-                dataType: "json",
-                success: function (data) {
-                    sele.empty();
-                    var em = "<option value='0' selected  >/</option>";
-                    sele.append(em);
-                    for (var i = 0, l = data.length; i < l; i++) {
-                        var em = "<option value='" + data[i][opKey] + "' >" + data[i][opvalue] + "</option>";
-                        sele.append(em);
-                    }
-                    if (value != null) {
-                        sele.val(value).trigger("change");
-                    } else {
-                        sele.val(data[0][opKey]).trigger("change");
-                    }
-                },
-                error: function (res) {
-                ##  alert("失败");
-                }
-            });
-        });
-    }
-</script>
-
 
 #import("/org/tinygroup/form/components/form.component")
 #import("/org/tinygroup/icon/components/icon.component")
