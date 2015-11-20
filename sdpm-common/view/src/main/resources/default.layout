@@ -24,71 +24,14 @@
         var contextPath = "${TINY_CONTEXT_PATH}";
         var pomlist = new Array()
     </script>
-##    #if(DEBUG_MODE && DEBUG_MODE=="true")
-##        #foreach(component in uiengine.getHealthUiComponents())
-##            #if(component.cssResource)#set(resources=component.cssResource.split(","))
-##                #foreach(path in resources)#set(path=path.trim(),newPath=path.replaceAll("[$][{]TINY_THEME[}]","${TINY_THEME}"))
-##                    <link href="${TINY_CONTEXT_PATH}${newPath}" rel="stylesheet" />
-##                #end
-##            #end
-##            #if(component.jsResource)
-##                #set(resources=component.jsResource.split(","))
-##                #foreach(path in resources)#set(path=path.trim())
-##                    <script src="${TINY_CONTEXT_PATH}${path}"></script>
-##                #end
-##            #end
-##            #if(component.jsCodelet)
-##                <script>
-##	$!{component.jsCodelet}
-##	</script>
-##            #end
-##            #if(component.cssCodelet)
-##                <style>
-##	$!{component.cssCodelet}
-##	</style>
-##            #end
-##            #if(component.compatibilityResources)
-##                #set(resources=component.compatibilityResources.getCompatibilityResources())
-##                #foreach(compatibilityResource in resources)
-##                    #if(compatibilityResource.condition)
-##                            <!--[if ${compatibilityResource.condition}]>
-##                            #if(compatibilityResource.cssResource)
-##                                #set(csslist=compatibilityResource.cssResource.split(","))
-##                                #foreach(path in csslist)
-##                                    #set(path=path.trim())
-##                                    #set(newPath=path.replaceAll("[$][{]TINY_THEME[}]","${TINY_THEME}"))
-##                                <link href="${TINY_CONTEXT_PATH}${newPath}" rel="stylesheet" />
-##                                #end
-##                            #end
-##                            #if(compatibilityResource.jsResource)
-##                                #set(jslist=compatibilityResource.jsResource.split(","))
-##                                #foreach(path in jslist)
-##                                    #set(path=path.trim())
-##                                <script src="${TINY_CONTEXT_PATH}${path}"></script>
-##                                #end
-##                            #end
-##                        <![endif]-->
-##                    #end
-##                #end
-##            #end
-##
-##        #end
-##    #else
         <!--[if lt ie 9]>
             #foreach(component in uiengine.getHealthUiComponents())
-                #if(component.cssResource)
-                    #set(resources=component.cssResource.split(","))
+                #if(component.cssResource)#set(resources=component.cssResource.split(","))
                     #foreach(path in resources)
-                        #set(path=path.trim())
-                        #set(newPath=path.replaceAll("[$][{]TINY_THEME[}]","${TINY_THEME}"))
-                    <link href="${TINY_CONTEXT_PATH}${newPath}" rel="stylesheet" />
+                        #set(path=path.trim())#set(newPath=path.replaceAll("[$][{]TINY_THEME[}]","${TINY_THEME}"))<link href="${TINY_CONTEXT_PATH}${newPath}" rel="stylesheet" />
                     #end
                 #end
-                #if(component.cssCodelet)
-                <style>
-                        $!{component.cssCodelet}
-                </style>
-                #end
+                #if(component.cssCodelet)<style>$!{component.cssCodelet}</style>#end
             #end
         <![endif]-->
         <!--[if (gte IE 9)|!(IE)]><!-->
@@ -138,9 +81,9 @@
                     <span>${UserUtils.getUser().orgUserRealName}</span>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a href="javascript:void(0);"><span class="label label-warning pull-right">新的</span>资料文件</a>
-                    </li>
-                    <li><a href="${TINY_CONTEXT_PATH+adminPath}/org/user/passwordForm">修改密码</li>
+##                    <li><a href="javascript:void(0);"><span class="label label-warning pull-right">新的</span>资料文件</a>
+##                    </li>
+                    <li><a href="${TINY_CONTEXT_PATH+adminPath}/org/user/passwordForm"><i class="dropdown-icon fa icon-key"></i>&nbsp;&nbsp;修改密码</li>
                     <li><a href="javascript:void(0);"><i class="dropdown-icon fa fa-cog"></i>&nbsp;&nbsp;设置</a></li>
                     <li class="divider"></li>
                     <li><a href="${TINY_CONTEXT_PATH}/logout"><i class="dropdown-icon fa fa-power-off"></i>&nbsp;&nbsp;退出</a>

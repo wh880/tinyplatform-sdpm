@@ -609,8 +609,8 @@ public class ProjectTaskAction extends BaseController {
     }
 
     @RequestMapping("/modal/{forward}")
-    public String doc(@PathVariable(value = "forward") String forward, Model model, String taskId) {
-        ProjectTask task = taskService.findTask(Integer.parseInt(taskId));
+    public String doc(@PathVariable(value = "forward") String forward, Model model, Integer taskId) {
+        ProjectTask task = taskService.findTask(taskId);
         model.addAttribute("teamList", userService.findTeamUserListByProjectId(task.getTaskProject()));
         model.addAttribute("task", task);
         return "project/task/modal/" + forward + ".pagelet";
@@ -619,7 +619,7 @@ public class ProjectTaskAction extends BaseController {
     @RequiresPermissions("task-group")
     @RequestMapping("/grouping")
     public String grouping(HttpServletRequest request, HttpServletResponse response,
-                           String type, Model model) {
+                           String type,String menuId, Model model) {
         Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
         if (projectId == null) {
             return redirectProjectForm();
@@ -643,6 +643,7 @@ public class ProjectTaskAction extends BaseController {
         model.addAttribute("mapDocument", mapDocument);
         model.addAttribute("map", map);
         model.addAttribute("type", type);
+        model.addAttribute("menuId", menuId);
         return "project/task/grouping";
     }
 
