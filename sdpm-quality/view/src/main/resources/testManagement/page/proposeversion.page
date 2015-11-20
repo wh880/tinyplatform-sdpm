@@ -4,50 +4,7 @@
 <style>
     .select_boxes{margin-top:0}
 </style>
-<script type="text/javascript">
-	function ajaxRead(id,toName,opKey,opvalue,url,value,isBuild){
-    		var selectCheck = "select[name="+toName+"]";
-    		$(selectCheck).each(function(){
-    			var sele = $(this);
-    			var s;
-    			$.ajax({
-    				type: "POST",
-    				url: "${TINY_CONTEXT_PATH+adminPath}"+url,
-    				data: $(this).attr('data'),
-    				dataType:"json",
-    				success: function(data){
-    					sele.empty();
-                        var em;
-                        if("build"==(isBuild)){
-                            em = "<option value='0' selected  >trunk</option>";
-                        }else if("module"==isBuild){
-                            em = "<option value='0' selected  >/</option>";
-                        }
-    					sele.append(em);
-    					for(var i=0,l=data.length;i<l;i++){
-    						var em = "<option value='"+data[i][opKey]+"' >"+ data[i][opvalue] +"</option>";
-    						sele.append(em);
 
-    					}
-
-    					if(value!=null) {
-    						sele.val(value).trigger("change");
-    					}else {
-    						sele.val(data[0][opKey]).trigger("change");
-    					}
-
-
-    				},
-    				error: function(res){
-//    					alert("失败");
-    				}
-    			});
-
-
-    		});
-
-    	}
-</script>
 
 #set(name="qualityVersion")
 #@div()
@@ -79,9 +36,9 @@
                          ajaxRead("${sid}", "projectId", "projectId", "projectName", "/quality/bug/ajax/project?productId=${qualityProductId}", "${testTask?.projectId?:(projectId?:0)}");
 					    $("#${sid}").on("change",function(){
                              var pId = $("#${sid}  option:selected").val();
-                            if(pId&&pId>0){
-                                ajaxRead("${sid}", "buildName", "buildId", "buildName", "/quality/version/ajax/build?buildProject=" + pId + "&buildProduct=${qualityProductId?:0}", "${testTask?.buildName?:(buildId?:0)}","build");
-                                 ajaxRead("${sid}","testtaskOwner","orgUserId","orgUserRealName","/quality/version/ajax/user?projectId="+pId,"${testTask?.testtaskOwner?:0}");
+                            if(pId>0){
+                                ajaxRead("${sid}", "buildName", "buildId", "buildName", "/quality/bug/ajax/build?buildProduct=${qualityProductId}&buildProject="+pId, "${testTask?.buildName?:(buildId?:0)}","build");
+                                ajaxRead("${sid}","testtaskOwner","orgUserId","orgUserRealName","/quality/version/ajax/user?projectId="+pId,"${testTask?.testtaskOwner?:0}");
                             }
                         });
 					 })
@@ -107,9 +64,7 @@
             #@formControlDiv("col-8")
 					#@div(divClass="col-5")
 					 #@Tselect2F()
-                         #@Tselect2Body("buildName" testTask?.buildName?:buildId {"class":
-                             "input-text select2"}) ##,"multiple":"multiple"加上为多选项
-
+                         #@Tselect2Body("buildName" testTask?.buildName?:buildId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 	                    	#end
                          #@Tselect2Fix()
                              #@hasMenu("pro-version-add")

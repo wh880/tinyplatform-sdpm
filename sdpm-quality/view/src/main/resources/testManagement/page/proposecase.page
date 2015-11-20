@@ -33,30 +33,25 @@
             #@colLabel()产品模块：#end
             #@formControlDiv("col-8")
             #@div(divClass="col-5")
-					 #@Tselect2F()
-                            #@Tselect2Body("productId" testCase?.productId?:qualityProductId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                                #for(product : ProductUtils.getAllProductListByUser())
-                                <option value="${product?.productId}">${product?.productName}</option>
-                                #end
-                     #end
-                #@Tselect2Fix()
-                    #@hasMenu("newproduct")
-                        <a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition">增加</a>
-                    #end
-                    #@hasMenu("allproduct")
-                        <a href="${TINY_CONTEXT_PATH+adminPath}/product/allproduct/addition" class="r">全部</a>
-                    #end
-                #end
-                    <script type="text/javascript">
-                        $("#${sid}").on("change",function(){
-                            var pId = $("#${sid}  option:selected").val();
-                            if(pId>0){
-                                ajaxRead("${sid}","moduleId","moduleId","moduleName","/quality/testCase/ajax/module?moduleRoot="+pId,${(testCase?.moduleId?:moduleId)?:0},"module");
-                            }
-                        })
+                #@TzTreeSelect(
+                    "productId" testCase?.productId?:qualityProductId {"class":"input-text","datatype":"*","nullmsg":"所属产品不能为空！",
+                    "data-URL":call("link",adminPath+"/productLine/userProductTree")})
+                    <script>
+                        $(function(){
+                            var mUrl = $("#modelA").attr("href");
+                            $("#${sid}").on("setValue",function(o,treeNode){
+                                var pId = treeNode.id;
+                                var pjId = $("select[name=projectId]").val("");
+                                if(pId>0){
+                                    ajaxRead("${sid}","moduleId","moduleId","moduleName","/quality/testCase/ajax/module?moduleRoot="+pId,${(testCase?.moduleId?:moduleId)?:0},"module");
+                                    $("#modelA").attr("href",mUrl+pId);
+                                }
+                            });
+                        });
                     </script>
-                	  #end
-
+                    <span><a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition" class="r ">增加</a>
+                                <a href="${TINY_CONTEXT_PATH+adminPath}/product/allproduct/addition">全部</a></span>
+                #end
 					#end
 					#@div(divClass="col-0")&nbsp;&nbsp#end
 					#@div(divClass="col-3")
@@ -65,13 +60,16 @@
 	                    	#end
                         <script type="text/javascript">
                             $("#${sid}").on("change",function(){
-                                var pId = $("select[name=productId] option:selected").val();
+                                var pId = $("input[name=productId]").val();
                                 var mId = $("#${sid}  option:selected").val();
-                                if(pId>0&&mId>0){
+                                if(pId>0&&mId>=0){
                                     ajaxRead("${sid}","storyId","storyId","storyTitle","/quality/testCase/ajax/story?productId="+pId+"&moduleId="+mId,${(testCase?.storyId?:storyId)?:0});
                                 }
                             });
                         </script>
+                         #@Tselect2Fix()#@aModal("#myModal" "添加模块" "500" "300" "btn-class" adminPath+"/product/addModule?pId=" "modelA")
+                             增加#end
+                         #end
                 	  #end
 					#end
 				#end
@@ -98,7 +96,6 @@
                #@div(divClass="col-5")
 					 #@Tselect2F()
 	                   		 #@Tselect2Body("caseStage" testCase?.caseStage {"class":"input-text select2","multiple":"multiple"}) ##,"multiple":"multiple"加上为多选项
-	                       <option value="0"></option>
                          #for(stage : getDict("caseStage"))
                             <option value="${stage.value}">${stage.text}</option>
                          #end
@@ -156,7 +153,7 @@
             #@colLabel()<span class="c-red">*</span>用例标题：#end
             #@formControlDiv("col-8")
             #@div(divClass="col-5")
-                #tinyInput("text" "caseTitle" testCase?.caseTitle {"datatype":"*10-500","id":"版本","class":"input-text"})
+                #tinyInput("text" "caseTitle" testCase?.caseTitle {"datatype":"*","id":"版本","class":"input-text"})
             #end
             #end
             #@validateDiv("col-2")#end
@@ -210,52 +207,6 @@
     </div>
    </div>
 
-<script type="text/javascript">
-
-
-	function ajaxRead(id,toName,opKey,opvalue,url,value,isBuild){
-    		var selectCheck = "select[name="+toName+"]";
-    		$(selectCheck).each(function(){
-    			var sele = $(this);
-    			var s;
-    			$.ajax({
-    				type: "POST",
-    				url: "${TINY_CONTEXT_PATH+adminPath}"+url,
-    				data: $(this).attr('data'),
-    				dataType:"json",
-    				success: function(data){
-    					sele.empty();
-                        var em;
-    					if("build"==(isBuild)){
-    					 em = "<option value='0' selected  >trunk</option>";
-    					}else if("module"==isBuild){
-    					 em = "<option value='0' selected  >/</option>";
-    					}
-    					sele.append(em);
-    					for(var i=0,l=data.length;i<l;i++){
-    						var em = "<option value='"+data[i][opKey]+"' >"+ data[i][opvalue] +"</option>";
-    						sele.append(em);
-
-    					}
-
-    					if(value!=null) {
-    						sele.val(value).trigger("change");
-    					}else {
-    						sele.val(data[0][opKey]).trigger("change");
-    					}
-
-
-    				},
-    				error: function(res){
-
-    				}
-    			});
-
-
-    		});
-
-    	}
-</script>
 
 #end
 #end

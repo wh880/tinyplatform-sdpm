@@ -1,44 +1,6 @@
 #!set(linkName="product-archive",sonitem="
 <li>"+"文档"+"</li>")
 
-<script type="text/javascript">
-    function ajaxRead(id, toName, opKey, opvalue, url, value) {
-        var selectCheck = "select[name=" + toName + "]";
-        $(selectCheck).each(function () {
-            var sele = $(this);
-            var s;
-            $.ajax({
-                type: "POST",
-                url: "${TINY_CONTEXT_PATH+adminPath}" + url,
-                data: $(this).attr('data'),
-                dataType: "json",
-                success: function (data) {
-                    sele.empty();
-                    for (var i = 0, l = data.length; i < l; i++) {
-                        var em = "<option value='" + data[i][opKey] + "' >" + data[i][opvalue] + "</option>";
-                        sele.append(em);
-
-                    }
-
-                    if (value != null) {
-                        sele.val(value).trigger("change");
-                    } else {
-                        sele.val(data[0][opKey]).trigger("change");
-                    }
-
-
-                },
-                error: function (res) {
-                ##    alert("失败");
-                }
-            });
-
-
-        });
-
-    }
-</script>
-
 
 #import("/org/tinygroup/form/components/form.component")
 #import("/org/tinygroup/icon/components/icon.component")
@@ -70,31 +32,23 @@
         #@colLabel()<span class="c-red">*</span>所属产品#end
         #@formControlDiv("col-4")
             #@div(divClass="col-12")
-                #@Tselect2F()
-                    #@Tselect2Body(
-                        "docProduct" cookieProductId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                            #foreach(product : ProductUtils.getAllProductListByUser())
-                                <option value="${product?.productId}">${product?.productName}</option>
-                            #end
-                    #end
-
-                    #@Tselect2Fix()
-                        #@hasMenu("newproduct")
-                            <a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition" class="r">增加</a>
-                        #end
-                        #@hasMenu("allproduct")
-                            <a href="${TINY_CONTEXT_PATH+adminPath}/product/allproduct/addition">全部</a>
-                        #end
-                    #end
-                    <script type="text/javascript">
-                        $("#${sid}").on("change", function () {
-                            var pId = $("#${sid}  option:selected").val();
-                            if (pId > 0) {
-                                ajaxRead("${sid}", "docModule", "moduleId", "moduleName", "/document/ajax/module1?productId=" + pId);
-                            }
-                        })
+                #@TzTreeSelect(
+                    "productId" cookieProductId {"class":"input-text","datatype":"*","nullmsg":"所属产品不能为空！",
+                    "data-URL":call("link",adminPath+"/productLine/userProductTree")})
+                    <script>
+                        $(function(){
+                            $("#${sid}").on("setValue",function(o,treeNode){
+                                var pId = treeNode.id;
+                                if (pId > 0) {
+                                    ajaxRead("${sid}", "docModule", "moduleId", "moduleName", "/document/ajax/module1?productId=" + pId,"","module");
+                                }
+                            });
+                        });
                     </script>
+                    <span><a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition" class="r ">增加</a>
+                                <a href="${TINY_CONTEXT_PATH+adminPath}/product/allproduct/addition">全部</a></span>
                 #end
+
             #end
         #end
     #end
