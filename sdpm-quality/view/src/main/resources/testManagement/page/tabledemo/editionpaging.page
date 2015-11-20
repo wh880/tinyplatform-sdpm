@@ -1,64 +1,4 @@
-<script type="text/javascript">
-    function ajaxRead(id, toName, opKey, opvalue, url, value, isBuild) {
-        var selectCheck = "select[name=" + toName + "]";
-        $(selectCheck).each(function () {
-            var sele = $(this);
-            var s;
-            $.ajax({
-                type: "POST",
-                url: "${TINY_CONTEXT_PATH+adminPath}" + url,
-                data: $(this).attr('data'),
-                dataType: "json",
-                success: function (data) {
-                    sele.empty();
-                    var em;
-                    if ("build" == (isBuild)) {
-                        em = "<option value='0' selected  >trunk</option>";
-                    } else if ("module" == (isBuild)) {
-                        em = "<option value='0' selected  >/</option>";
-                    }
-                    sele.append(em);
-                    for (var i = 0, l = data.length; i < l; i++) {
-                        var em = "<option value='" + data[i][opKey] + "' >" + data[i][opvalue] + "</option>";
-                        sele.append(em);
 
-                    }
-                    if (value != null) {
-                        sele.val(value).trigger("change");
-                    } else {
-                        sele.val(data[0][opKey]).trigger("change");
-                    }
-                },
-                error: function (res) {
-//    					alert("失败");
-                }
-            });
-
-
-        });
-
-    }
-</script>
-#macro Tselect2Body(name value mapInfo)
-    #set(sid=mapInfo?.id?:sid)
-<select name="${name}" class="form-control" #getMapInfo(mapInfo) id="${sid}">
-    #bodyContent
-</select>
-<script type="text/javascript">
-    $(function () {
-        $("#${sid}").select2();
-        #if(value)
-            var valuestr = "${value}";
-            var values = valuestr.split(",");
-            if (values.length > 1) {
-                $("#${sid}").val(values).trigger("change");
-            } else {
-                $("#${sid}").val(valuestr).trigger("change");
-            }
-        #end
-    });
-</script>
-#end
 #@div(divClass="infoContent")
 <p class="titleName">基本信息</p>
 ##该样式在comm.css样式中自定义
@@ -69,38 +9,28 @@
             #@tr()
                 #@th()所属产品#end
                 #@td()
-                    #@Tselect2F()
-                    <script type="text/javascript">
-                        $(function () {
-                            $("#${sid}").on("change", function () {
-                                var pId = $("#${sid}  option:selected").val();
-                                if (pId > 0) {
-                                    ajaxRead("${sid}", "moduleId", "moduleId", "moduleName", "/quality/bug/ajax/module?moduleRoot=" + pId, ${bug?.moduleId?: 0},"module");
-                                    ajaxRead("${sid}", "planId", "planId", "planName", "/quality/bug/ajax/plan?deleted=0&productId=" + pId, ${bug?.planId?: 0});
-                                    ajaxRead("${sid}", "bugOpenedBuild", "buildId", "buildName", "/quality/bug/ajax/build?buildProduct=" + pId, ${bug?.bugOpenedBuild?:0},"build");
-                                    ajaxRead("${sid}", "bugResolvedBuild", "buildId", "buildName", "/quality/bug/ajax/build?buildProduct=" + pId, ${bug?.bugResolvedBuild?:0},"build");
+                    #@TzTreeSelect(
+                        "productId" bug?.productId {"class":"input-text","datatype":"*","nullmsg":"所属产品不能为空！",
+                        "data-URL":call("link",adminPath+"/productLine/userProductTree")})
+                    <script>
+                        $(function(){
+                            var mUrl = $("#modelA").attr("href");
+                            $("#${sid}").on("setValue",function(o,treeNode){
+                                var pId = treeNode.id;
+                                var pjId = $("select[name=projectId]").val("");
+                                if(pId>0){
+                                    ajaxRead("${sid}","moduleId","moduleId","moduleName","/quality/bug/ajax/module?moduleRoot="+pId,${bug?.moduleId?:0},"module");
+                                    ajaxRead("${sid}","projectId","projectId","projectName","/quality/bug/ajax/project?productId="+pId,${bug?.projectId?:0});
+                                    ajaxRead("${sid}", "planId", "planId", "planName", "/quality/bug/ajax/plan?deleted=0&productId=" + pId, ${bug?.planId?: 0},"plan");
+                                    $("#modelA").attr("href",mUrl+pId);
                                 }
-                             })
+                            });
                         });
                     </script>
-                        #@Tselect2Body(
-                            "productId" bug?.productId?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                            #foreach(product : ProductUtils.getAllProductListByUser())
-                                #if(product?.deleted==0)
-                                <option value="${product?.productId}">${product?.productName}</option>
-                                #end
-                            #end
-                        #end
-
-                        #@Tselect2Fix()
-                            #@hasMenu("newproduct")
-                            <a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition">增加</a>
-                            #end
-                            #@hasMenu("allproduct")
-                            <a href="${TINY_CONTEXT_PATH+adminPath}/product/allproduct/addition" class="r">全部</a>
-                            #end
-                        #end
+                    <span><a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition" class="r ">增加</a>
+                                <a href="${TINY_CONTEXT_PATH+adminPath}/product/allproduct/addition">全部</a></span>
                     #end
+
                 #end
                 #@tr()
                     #@th()所属模块#end
@@ -113,13 +43,16 @@
                             $(function () {
                                 $("#${sid}").on("change", function () {
                                     var mId = $("#${sid}  option:selected").val();
-                                    var pId = $("select[name=productId]  option:selected").val();
+                                    var pId = $("input[name=productId]").val();
                                     if (mId >= 0) {
                                         ajaxRead("${sid}", "storyId", "storyId", "storyTitle", "/quality/bug/ajax/story?productId=" + pId + "&moduleId=" + mId, ${bug?.storyId?: 0});
                                     }
                                 })
                             })
                         </script>
+                            #@Tselect2Fix()#@aModal("#myModal" "" "500" "300" "btn-class" adminPath+"/product/addModule?pId=" "modelA")
+                            增加#end
+                            #end
                         #end
 
                         #@tr()
@@ -276,9 +209,14 @@
                     #@Tselect2F()
                     <script type="text/javascript">
                         $("#${sid}").on("change", function () {
-                            var pId = $("#${sid}  option:selected").val();
-                            if (pId > 0) {
-                                ajaxRead("${sid}", "taskId", "taskId", "taskName", "/quality/bug/ajax/task?taskProject=" + pId, ${bug?.taskId ?: 0});
+                            var pjId = $("#${sid}  option:selected").val();
+                            var pId = $("input[name=productId]").val();
+                            if (pjId > 0) {
+                                ajaxRead("${sid}", "taskId", "taskId", "taskName", "/quality/bug/ajax/task?taskProject=" + pjId, ${bug?.taskId ?: 0});
+                                if(pId>0){
+                                    ajaxRead("${sid}", "bugOpenedBuild", "buildId", "buildName", "/quality/bug/ajax/build?buildProduct=" + pId+"&buildProject="+pjId, ${bug?.bugOpenedBuild},"build");
+                                    ajaxRead("${sid}", "bugResolvedBuild", "buildId", "buildName", "/quality/bug/ajax/build?buildProduct=" + pId+"&buildProject="+pjId, ${bug?.bugResolvedBuild},"build");
+                                }
                             }
                         })
                     </script>
@@ -515,14 +453,7 @@
     #end
 #end
 
-#@dialog("myModal")
-    #@dialogHeader()对话框标题#end
-    #@dialogBody()<p>对话框内容…</p>#end
-    #@dialogFooter()
-        #@buttonEnsure()确定#end
-        #@buttonCancel()关闭#end
-    #end
-#end
+
 <script>
     $('select.select2').select2()
 </script>

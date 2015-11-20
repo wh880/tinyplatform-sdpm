@@ -53,17 +53,17 @@
 
 #@navZtree("product" "product")
     #@navZtreeNav()
-    <span id="productNameOnTop" value="${qualityProductId}">${currentProductName}</span><span class="caret"></span>
+    <span id="productNameOnTop" value="${cookieProductId}">${currentProductName}</span><span class="caret"></span>
     #end
 
     #@navZtreeBody({"style":"left:-18px;top:26px"})
-        #@TzTreeSelect("productId" "" {"class":"input-text blueline search-ico-bg","data-URL":call("link",adminPath+"/productLine/userProductTree"),"id":"productSelect"})
+        #@TzTreeSelect("aaa" "" {"class":"input-text blueline search-ico-bg","data-URL":call("link",adminPath+"/productLine/userProductTree"),"id":"productSelect"})
         <a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition" class="r">增加</a> <a href="${TINY_CONTEXT_PATH+adminPath}/product/allproduct/addition">全部</a>
         #end
     <script type="text/javascript">
 
         $(function(){
-            $("#productSelect").on("setValue",function(o,treeId,treeNode){
+            $("#productSelect").on("setValue",function(o,treeNode){
                 var dataValue = treeNode.id;
                 $.cookie('cookieProductId',dataValue,{path:"/"});
                 window.location.reload();
