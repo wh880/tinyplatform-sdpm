@@ -17,7 +17,6 @@
                     for (var i = 0, l = data.length; i < l; i++) {
                         var em = "<option value='" + data[i][opKey] + "' >" + data[i][opvalue] + "</option>";
                         sele.append(em);
-
                     }
 
                     if (value != null) {
@@ -25,21 +24,15 @@
                     } else {
                         sele.val(data[0][opKey]).trigger("change");
                     }
-
-
                 },
                 error: function (res) {
                 ##    alert("失败");
                 }
             });
 
-
         });
-
     }
 </script>
-
-
 #import("/org/tinygroup/form/components/form.component")
 #import("/org/tinygroup/icon/components/icon.component")
 #import("/org/tinygroup/button/components/button_common.component")
@@ -54,7 +47,8 @@
     #@radioBox()
     <label>
         #radio1(rId=rId rName=rName rValue=rValue rClass=rClass radioOthe=radioOther)
-        ${labelText}</label>
+        ${labelText}
+    </label>
     #end
 #end
 
@@ -62,7 +56,6 @@
 #@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/document/product/save/updateDoc?docProduct="+cookieProductId+
     "&docLibId=1&docDeleted=0" "post" {"class":"test","enctype":
     "multipart/form-data"})
-
 <div style="width:100%">
 <div class="infoContent">
     <p class="titleName">创建文档</p>
@@ -77,7 +70,6 @@
                                 <option value="${product?.productId}">${product?.productName}</option>
                             #end
                     #end
-
                     #@Tselect2Fix()
                         #@hasMenu("newproduct")
                             <a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition" class="r">增加</a>
@@ -120,7 +112,6 @@
                 "2") "setType(this.value);")
             #labelRadio1(rId="typetext" rName="docType" rValue="3" labelText=getDict("docType",
                 "3") "setType(this.value);")
-
         #end
         #@validateDiv("col-2")#end
     #end
@@ -184,7 +175,6 @@
     #@elementItem()
         <div class="col-12">
             <div class="col-5">
-
             </div>
             <div class="col-1">
                 <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
@@ -218,9 +208,6 @@
                 $('#contentBox').addClass('hidden');
             }
         }
-    </script>
-
-    <script type="text/javascript">
         $(function () {
             $("form[name=thisform]").Validform({
                 tiptype: 2

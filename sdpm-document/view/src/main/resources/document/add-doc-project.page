@@ -60,12 +60,10 @@
 
                 #@Tselect2F()
                     #@Tselect2Body(
-                        "docProject" doc?.docProject?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        "docProject" doc?.docProject?doc.docProject:currentProjectId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         <option></option>
                         #foreach(project : projectList)
-                            #if(project?.projectDeleted !="1")
-                                <option value="${project?.projectId}">${project?.projectName}</option>
-                            #end
+                            <option value="${project?.projectId}">${project?.projectName}</option>
                         #end
                     #end
                     #@Tselect2Fix()
@@ -86,8 +84,7 @@
                     <script type="text/javascript">
                         $("#${sid}").on("change", function () {
                             var pId = $("#${sid}  option:selected").val();
-                            ajaxRead("${sid}", "docModule", "moduleId", "moduleName", "/document/ajax/module?projectId=" + pId, ${doc?.docModule ? doc.docModule: 0
-                        });
+                            ajaxRead("${sid}", "docModule", "moduleId", "moduleName", "/document/ajax/module?projectId=" + pId, ${doc?.docModule ? doc.docModule: 0});
                         })
                     </script>
                 #end
@@ -100,9 +97,8 @@
         #@formControlDiv("col-8")
             #@div(divClass="col-6")
                 #@Tselect2F()
-                    #@Tselect2Body(
-                        "docProduct" doc?.docProduct {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                        <option value="0">/</option>
+                    #@Tselect2Body("docProduct" doc?.docProduct {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        <option></option>
                     #end
                     #@Tselect2Fix()
                         #@hasMenu("newproduct")
@@ -123,7 +119,7 @@
             #@div(divClass="col-6")
                 #@Tselect2F()
                     #@Tselect2Body("docModule234" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                        <option value="0">/123456</option>
+                        <option>/</option>
                     #end
                 #end
             #end
@@ -188,7 +184,6 @@
         #@colLabel()附件：#end
         #@formControlDiv("col-8")
             #include("fileupload.page")
-        #*					#tinyUploadInput("inputName" "" {"placeholder":"可直接输入地址，也可点击下图标进行上传"})*#
         #end
         #@validateDiv("col-2")#end
     #end
