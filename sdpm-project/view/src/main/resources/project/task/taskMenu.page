@@ -50,8 +50,8 @@
 ##分组查看
     <div class="btn-group btnDropDown">
         <a id="dLabel" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-            #if(menudId)
-                ${menuManager.getMenu(menudId).name}
+            #if(menuId)
+                ${menuManager.getMenu(menuId).name}
             #else
                     分组查看
             #end

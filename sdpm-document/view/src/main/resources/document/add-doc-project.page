@@ -61,7 +61,7 @@
                 #@Tselect2F()
                     #@Tselect2Body(
                         "docProject" doc?.docProject?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                        <option value="0">/</option>
+                        <option></option>
                         #foreach(project : projectList)
                             #if(project?.projectDeleted !="1")
                                 <option value="${project?.projectId}">${project?.projectName}</option>
@@ -79,19 +79,14 @@
                     <script type="text/javascript">
                         $("#${sid}").on("change", function () {
                             var pId = $("#${sid}  option:selected").val();
-                            ajaxRead("${sid}", "docProduct", "productId", "productName", "/document/ajax/product?projectId=" + pId, ${doc?.docProduct ? doc ?
-                            .
-                            docProduct: 0
-                        });
+                            ajaxRead("${sid}", "docProduct", "productId", "productName", "/document/ajax/product?projectId=" + pId, ${doc?.docProduct ? doc.docProduct: 0});
                         })
                     </script>
 
                     <script type="text/javascript">
                         $("#${sid}").on("change", function () {
                             var pId = $("#${sid}  option:selected").val();
-                            ajaxRead("${sid}", "docModule", "moduleId", "moduleName", "/document/ajax/module?projectId=" + pId, ${doc?.docModule ? doc ?
-                            .
-                            docModule: 0
+                            ajaxRead("${sid}", "docModule", "moduleId", "moduleName", "/document/ajax/module?projectId=" + pId, ${doc?.docModule ? doc.docModule: 0
                         });
                         })
                     </script>

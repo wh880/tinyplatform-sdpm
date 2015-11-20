@@ -1,4 +1,4 @@
-#!set(activeTitle="组织管理",activeMenuId=currentPageId)
+#!set(activeTitle="组织-动态" ,activeMenuId=currentPageId)
 #import("/common/component/form.component")
 #set(editpagePath=
     "/organization/common/fileOutput.pagelet",editpageModalId="userEditModal",editpageModal="#"+editpageModalId)
@@ -58,10 +58,9 @@
         #end
         &nbsp;
         #@navSelect2("navProject")
-            #@navSelect2Nav()<span>迭代</span><span class="caret"></span>#end
+            #@navSelect2Nav()<span>项目</span><span class="caret"></span>#end
             #@navSelect2Body()
                 #@navSelect2Data()
-                    <option value=null>迭代</option>
                     #for(project : projectList)
                     <option class="selProject" value="${project?.projectId}">${project?.projectName}</option>
                 #end
@@ -115,7 +114,7 @@
 
         $("select[name=navProject]").change(function (e) {
             resetHeadData();
-            $("#dynamicTable").attr("data-url", actionUrl + "?projectId=" + $(this).attr("val"));
+            $("#dynamicTable").attr("data-url", actionUrl + "?projectId=" + $(this).val());
             $(this).closest(".droptoprj").find(".toprj>span:first").html($(this).find("option:selected").text());
             $("#dynamicTable").trigger("refresh");
         });

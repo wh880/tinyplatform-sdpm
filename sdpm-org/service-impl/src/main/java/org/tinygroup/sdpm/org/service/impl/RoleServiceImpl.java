@@ -88,7 +88,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     private void assembleOrgRoleMenuList(final List<OrgRoleMenu> newOrgRoleMenus, String[] menuIds, Integer roleId) {
-        if (ArrayUtil.isEmptyArray(menuIds)){
+        if (ArrayUtil.isEmptyArray(menuIds)) {
             return;
         }
         for (String newMenuId : menuIds) {
@@ -130,6 +130,9 @@ public class RoleServiceImpl implements RoleService {
     }
 
     public void addRoleUser(String[] userIds, Integer roleId) {
+        if (ArrayUtil.isEmptyArray(userIds)) {
+            return;
+        }
         roleUserManager.addRoleUser(userIds, roleId);
     }
 

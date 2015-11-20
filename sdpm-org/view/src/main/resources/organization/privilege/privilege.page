@@ -9,7 +9,7 @@
             #include("/organization/common/tab.page")
         #end
     #end
-    #@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
+    #@tinyTable("org-role-list") ##ID为空则系统自动生成 带入参数则取该参数为ID
         #@div(divBaseClass="tinyheaderTools form-inline")
             #@aExtendButton("btn radius btn-primary btn-sm" TINY_CONTEXT_PATH+adminPath+"/org/privilege/form")#buttonIcon(iconClass="icon-group")添加#end
             #setTinyTablePageSize([8,10,20,50,100,200])

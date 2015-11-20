@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.tinygroup.commons.tools.ArrayUtil;
 import org.tinygroup.sdpm.common.util.Collections3;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.org.dao.pojo.OrgRoleUser;
@@ -25,8 +26,10 @@ public class RoleUserAction extends BaseController {
     RoleService roleService;
     @Autowired
     UserService userService;
+
     /**
      * 显示角色的用户
+     *
      * @param roleId
      * @param model
      * @return
@@ -36,7 +39,7 @@ public class RoleUserAction extends BaseController {
     public String showUser(Integer roleId, Model model) {
         List<OrgUser> userList = userService.findUserList(null);
         List<OrgRoleUser> linkList = roleService.findUserByRoleId(roleId);
-        List<String> idList = Collections3.extractToList(linkList,"orgUserId");
+        List<String> idList = Collections3.extractToList(linkList, "orgUserId");
         model.addAttribute("userIdList", idList);
         model.addAttribute("userList", userList);
         model.addAttribute("roleId", roleId);//角色id
@@ -53,7 +56,9 @@ public class RoleUserAction extends BaseController {
     @RequiresPermissions("org-privilege-user")
     @RequestMapping("/save")
     public String save(Integer roleId, String[] array) {
-        roleService.addRoleUser(array, roleId);
+        if (!ArrayUtil.isEmptyArray(array) && roleId != null) {
+            roleService.addRoleUser(array, roleId);
+        }
         return "redirect:" + adminPath + "/org/privilege/list";
     }
 }

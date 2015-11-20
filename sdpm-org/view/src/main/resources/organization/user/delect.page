@@ -1,13 +1,37 @@
 #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/org/user/delete" "post" {"class":"test"})
 <input type="hidden" name="id" value="${id}"/>
     #@elementItem()
-        #@colLabel("col-3")<span class="c-red">*</span>请输入密码：#end
+        #@colLabel("col-3")<span class="c-red">*</span>请输入您的密码：#end
         #@formControlDiv("col-8")
             #tinyInput(
-                "password" "password" ""{"placeholder":"密码","datatype":"*6-18","nullmsg":"请输入密码！","autocomplete":"off",
-                "id":"password","class":"input-text"})
+                "password" "password" ""{"placeholder":"密码","datatype":"*","nullmsg":"请输入您自己的密码！","id":"password","class":"input-text"})
         #end
         #@validateDiv("col-2")#end
     #end
 
 #end
+<script type="text/javascript">
+    $(function(){
+        $("form[name=thisform").Validform({
+            beforeSubmit: function (curform) {
+                $(curform).ajaxSubmit({
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.status == "y" || data.status == "success") {
+                            layer.msg(data.info, 1, 1, function () {
+                                $(curform).closest(".modal").trigger("close");
+                                $("#user-table-list").trigger("refresh");
+                            });
+                        } else {
+                            layer.msg(data.info, 1);
+                        }
+                    },
+                    error: function () {
+                        layer.msg(data.info);
+                    }
+                });
+                return false;
+            }
+        });
+    })
+</script>

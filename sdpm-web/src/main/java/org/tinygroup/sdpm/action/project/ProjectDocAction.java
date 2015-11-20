@@ -111,7 +111,7 @@ public class ProjectDocAction extends BaseController {
         model.addAttribute("projectList", listProject);
         model.addAttribute("listModule", listModule);
         model.addAttribute("libList", libList);
-        return "project/document/add.page";
+        return "project/document/add";
     }
 
     @RequestMapping("/save")
