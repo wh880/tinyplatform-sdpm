@@ -38,9 +38,7 @@
 			#include("/testManagement/page/Tab.page")
 		#end
 
-		#@tabBodyCol("ptop-5")
-		##operationbar start1
-		#end
+		#@tabBodyCol("ptop-5")#end
 		#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/quality/bug/copy" "post" {"class":"","enctype":
 			"multipart/form-data"})
         <div style="width:100%">
@@ -58,7 +56,7 @@
                                         <option value="${product?.productId}">${product?.productName}</option>
 									#end
 								#end
-							#end
+								#end
                             <script type="text/javascript">
                                 $("#${sid}").on("change", function () {
                                     var pId = $("#${sid}  option:selected").val();
@@ -69,14 +67,8 @@
                                 })
                             </script>
 							#@Tselect2Fix()
-								#@hasMenu("newproduct")
-                                    <a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition">增加</a>
-								#end
-								#@hasMenu("allproduct")
-                                    <a href="${TINY_CONTEXT_PATH+adminPath}/product/allproduct/addition"
-                                       class="r">全部</a>
-								#end
-							#end
+                                <a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition" class="r ">增加</a>
+                                <a href="${TINY_CONTEXT_PATH+adminPath}/product/allproduct/addition">全部</a>#end
 						#end
 
 					#end
@@ -110,11 +102,12 @@
 							#@Tselect2Body("projectId" bug?.projectId?:0 {"class":
 								"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                                 var em = "
-                                <option value='0' selected>/</option>";
+                                <option value='0' selected>/</option>
+                                ";
 								#foreach(project : projectList)
                                     <option value="${project?.projectId}">${project?.projectName}</option>
 								#end
-							#end
+								#end
                             <script type="text/javascript">
                                 $("#${sid}").on("change", function () {
                                     var pId = $("#${sid}  option:selected").val();
@@ -122,12 +115,8 @@
                                 })
                             </script>
 							#@Tselect2Fix()
-								#@hasMenu("project-op-add")
-                                    <a href="${TINY_CONTEXT_PATH+adminPath}/project/form" class="r">增加</a>
-								#end
-								#@hasMenu("project-op-all")
-                                    <a href="${TINY_CONTEXT_PATH+adminPath}/project/list">全部</a>
-								#end
+                                <a href="${TINY_CONTEXT_PATH+adminPath}/project/form" class="r ">增加</a>
+                                <a href="${TINY_CONTEXT_PATH+adminPath}/project/list">全部</a>
 							#end
 						#end
 					#end
@@ -145,12 +134,8 @@
 
 							#end
 							#@Tselect2Fix()
-								#@hasMenu("pro-version-add")
-                                    <a href="${TINY_CONTEXT_PATH+adminPath}/project/build/edit" class="r ">增加</a>
-								#end
-								#@hasMenu("version")
-                                    <a href="${TINY_CONTEXT_PATH+adminPath}/project/build/index">全部</a>
-								#end
+                                <a href="${TINY_CONTEXT_PATH+adminPath}/project/build/add" class="r ">增加</a>
+                                <a href="${TINY_CONTEXT_PATH+adminPath}/project/build/index">全部</a>
 							#end
 						#end
 					#end
@@ -170,14 +155,7 @@
                                     <option value="${user?.orgUserId}">${user?.orgUserRealName}</option>
 								#end
 							#end
-							#@Tselect2Fix()
-								#@hasMenu("organizationAddUser")
-                                    <a href="${TINY_CONTEXT_PATH}/a/org/user/form">增加</a>
-								#end
-								#@hasMenu("organizationUser")
-                                    <a href="${TINY_CONTEXT_PATH}/a/org/user/list" class="r">全部</a>
-								#end
-							#end
+							#@Tselect2Fix()<a href="${TINY_CONTEXT_PATH+adminPath}/org/user/form" class="r ">增加</a>#end
 						#end
 					#end
 					#@validateDiv("col-2")#end
@@ -193,46 +171,41 @@
 					#@div(divClass="col-0")&nbsp&nbsp#end
 					#@div(divClass="col-3")
 						#@tinySelect("priority" bug?.priority {"class":"select2"})
-							#for(pri : getDict("bugPriority"))
-							#@tinyOptionItem(pri.value)${pri.text}#end
-						#end
+							#foreach(pri : getDict("bugPriority"))
+								#@tinyOptionItem(pri.value)${pri.text}#end
+					#end
 
 					#end
+					#end
 				#end
+				#@validateDiv("col-2")#end
 			#end
-			#@validateDiv("col-2")#end
-		#end
-		#@elementItem()
-			#@colLabel()重现步骤：#end
-			#@formControlDiv("col-8")
-				#@Teditor("bugSteps" "bugSteps" {"initialFrameHeight":"150"})${bug?.bugSteps}#end
+			#@elementItem()
+				#@colLabel()重现步骤：#end
+				#@formControlDiv("col-8")
+					#@Teditor("bugSteps" "bugSteps" {"initialFrameHeight":"150"})${bug?.bugSteps}#end
+				#end
+				#@validateDiv("col-2")#end
 			#end
-			#@validateDiv("col-2")#end
-		#end
-		#@elementItem()
-			#@colLabel()相关需求：#end
-			#@formControlDiv("col-8")
-				#@div(divClass="col-5")
-					#@Tselect2F()
-						#@Tselect2Body(
-							"storyId" bug?.storyId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+			#@elementItem()
+				#@colLabel()相关需求：#end
+				#@formControlDiv("col-8")
+					#@div(divClass="col-5")
+						#@Tselect2F()
+							#@Tselect2Body(
+								"storyId" bug?.storyId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 
-						#end
-						#@Tselect2Fix()
-							#@hasMenu("product-demand-add")
+							#end
+							#@Tselect2Fix()
                                 <a href="${TINY_CONTEXT_PATH+adminPath}/product/story/addstory" class="r ">增加</a>
-							#end
-							#@hasMenu("product-demand")
-                                <a href="${TINY_CONTEXT_PATH+adminPath}/product/story?choose=1">全部</a>
-							#end
+                                <a href="${TINY_CONTEXT_PATH+adminPath}/product/story?choose=1">全部</a>#end
 						#end
 					#end
 				#end
 			#end
-		#end
-		#@elementItem()
-			#@colLabel()相关任务：#end
-			#@formControlDiv("col-8")
+			#@elementItem()
+				#@colLabel()相关任务：#end
+				#@formControlDiv("col-8")
 				#@div(divClass="col-5")
 					#@Tselect2F()
 						#@Tselect2Body(
@@ -240,124 +213,112 @@
 
 						#end
 						#@Tselect2Fix()
-							#@hasMenu("task")
-                                <a href="${TINY_CONTEXT_PATH+adminPath}/project/task/form" class="r ">增加</a>
-							#end
-							#@hasMenu("project")
-                                <a href="${TINY_CONTEXT_PATH+adminPath}/project/task/index">全部</a>
-							#end
-						#end
+                            <a href="${TINY_CONTEXT_PATH+adminPath}/project/task/form" class="r ">增加</a>
+                            <a href="${TINY_CONTEXT_PATH+adminPath}/project/task/index">全部</a>#end
 					#end
                 #end
+				#end
+				#@validateDiv("col-2")#end
 			#end
-			#@validateDiv("col-2")#end
-		#end
-		#@elementItem()
-			#@colLabel()类型/<span class="c-red">*</span>严重程度：#end
-			#@formControlDiv("col-8")
-				#@div(divClass="col-5")
+			#@elementItem()
+				#@colLabel()类型/<span class="c-red">*</span>严重程度：#end
+				#@formControlDiv("col-8")
+					#@div(divClass="col-5")
 					#@tinySelect("bugType" "1" {"class":"select2"})
-						#for(type : getDict("bugType"))
+						#foreach(type : getDict("bugType"))
 						#@tinyOptionItem(type.value)${type.text}#end
 					#end
-				#end
-			#end
-			#@div(divClass="col-0")&nbsp&nbsp#end
-			#@div(divClass="col-3")
-				#@Tselect2F()
-					#@Tselect2Body(
-						"bugSeverity" bug?.bugSeverity {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-						#for(se : getDict("bugSeverity"))
-						#@tinyOptionItem(se.value)${se.text}#end
+					#end
+					#end
+					#@div(divClass="col-0")&nbsp&nbsp#end
+					#@div(divClass="col-3")
+						#@Tselect2F()
+							#@Tselect2Body("bugSeverity" bug?.bugSeverity {"class":
+								"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+								#foreach(se : getDict("bugSeverity"))
+									#@tinyOptionItem(se.value)${se.text}#end
+								#end
+							#end
+						###@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
+						#end
 					#end
 				#end
-			###@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
 			#end
-		#end
-	#end
-#end
-#@elementItem()
-	#@colLabel()系统/浏览器：#end
-	#@formControlDiv("col-8")
-		#@div(divClass="col-5")
-			#@tinySelect("operatingSystem" "1" {"class":"select2"})
-				#for(os : getDict("bugOS"))
-				#@tinyOptionItem(os.value)${os.text}#end
-			#end
-		#end
-	#end
-	#@div(divClass="col-0")&nbsp&nbsp#end
-	#@div(divClass="col-3")
-		#@tinySelect("browser" "zh" {"class":"select2"})
-			#for(bro : getDict("bugBrowser"))
-			#@tinyOptionItem(bro.value)${bro.text}#end
-		#end
+			#@elementItem()
+				#@colLabel()系统/浏览器：#end
+				#@formControlDiv("col-8")
+					#@div(divClass="col-5")
+						#@tinySelect("operatingSystem" "1" {"class":"select2"})
+							#foreach(os : getDict("bugOS"))
+								#@tinyOptionItem(os.value)${os.text}#end
+					#end
+						#end
+					#end
+					#@div(divClass="col-0")&nbsp&nbsp#end
+					#@div(divClass="col-3")
+						#@tinySelect("browser" "zh" {"class":"select2"})
+							#foreach(bro : getDict("bugBrowser"))
+								#@tinyOptionItem(bro.value)${bro.text}#end
+							#end
 
-	#end
-#end
-#end
-#end
-#@elementItem()
-	#@colLabel()抄送给：#end
-	#@formControlDiv("col-8")
-		#@div(divClass="col-5")
-			#@Tselect2F()
-				#@Tselect2Body("bugMailto" bug?.bugMailto {"class":"input-text select2","multiple":
-					"multiple"}) ##,"multiple":"multiple"加上为多选项
-					#foreach(user : userList)
-                        <option value="${user?.orgUserId}">${user?.orgUserRealName}</option>
-					#end
-				#end
-				#@Tselect2Fix()
-					#@hasMenu("organizationAddUser")
-                        <a href="${TINY_CONTEXT_PATH}/a/org/user/form">增加</a>
-					#end
-					#@hasMenu("organizationUser")
-                        <a href="${TINY_CONTEXT_PATH}/a/org/user/list" class="r">全部</a>
+						#end
 					#end
 				#end
 			#end
-		#end
-	#end
-	#@validateDiv("col-2")#end
-#end
+			#@elementItem()
+				#@colLabel()抄送给：#end
+				#@formControlDiv("col-8")
+					#@div(divClass="col-5")
+						#@Tselect2F()
+							#@Tselect2Body("bugMailto" bug?.bugMailto {"class":"input-text select2","multiple":
+								"multiple"}) ##,"multiple":"multiple"加上为多选项
+								#foreach(user : userList)
+                                    <option value="${user?.orgUserId}">${user?.orgUserRealName}</option>
+								#end
+							#end
+							#@Tselect2Fix()<a href="${TINY_CONTEXT_PATH+adminPath}/org/user/form" class="r ">增加</a>#end
+						#end
+					#end
+				#end
+				#@validateDiv("col-2")#end
+			#end
 
-#@elementItem()
-	#@colLabel()关键词：#end
-	#@formControlDiv("col-8")
-		#@div(divClass="col-5")
-			#tinyInput("text" "bugKeywords" "" {"datatype":"","id":"关键词","class":"input-text"})
+			#@elementItem()
+				#@colLabel()关键词：#end
+				#@formControlDiv("col-8")
+					#@div(divClass="col-5")
+						#tinyInput("text" "bugKeywords" "" {"datatype":"","id":"关键词","class":"input-text"})
+				#end
+				#end
+				#@validateDiv("col-2")#end
+			#end
+			#@elementItem()
+				#@colLabel()附件：#end
+				#@formControlDiv("col-8")
+					#include("/testManagement/page/fileupload.page")
+				#*					#tinyUploadInput("inputName" "" {"placeholder":"可直接输入地址，也可点击下图标进行上传"})*#
+				#end
+				#@validateDiv("col-2")#end
+			#end
+			#@elementItem()
+                <div class="col-12">
+                    <div class="col-5">
+                        <button style="float: right" type="submit" id="submit" class="commitBtn">保存</button>
+                    </div>
+                    <div class="col-1"></div>
+                    <div class="col-1">
+					#*                <a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/Bug.page">
+                                    <button style="float: left" type="button" id="back" class="backBtn">返回</button></a>*#
+						#@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end
+                    </div>
+                    <div class="col-5"></div>
+                </div>
+			#end
+            <br>
 		#end
-	#end
-	#@validateDiv("col-2")#end
-#end
-#@elementItem()
-	#@colLabel()附件：#end
-	#@formControlDiv("col-8")
-		#include("/testManagement/page/fileupload.page")
-	#*					#tinyUploadInput("inputName" "" {"placeholder":"可直接输入地址，也可点击下图标进行上传"})*#
-	#end
-	#@validateDiv("col-2")#end
-#end
-#@elementItem()
-    <div class="col-12">
-        <div class="col-5">
-            <button style="float: right" type="submit" id="submit" class="commitBtn">保存</button>
-        </div>
-        <div class="col-1"></div>
-        <div class="col-1">
-		#*                <a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/Bug.page">
-                        <button style="float: left" type="button" id="back" class="backBtn">返回</button></a>*#
-			#@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end
-        </div>
-        <div class="col-5"></div>
     </div>
-#end
-    <br>
-#end
-</div>
-</div>
-#end
+    </div>
+	#end
 #end
 <script>
     $('select.select2').select2()

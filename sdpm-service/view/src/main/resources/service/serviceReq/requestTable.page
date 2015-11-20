@@ -23,7 +23,7 @@
                                 #foreach(l:userList)
                                     #@dropdownItem(
                                     TINY_CONTEXT_PATH+adminPath+"/service/request/solveBy" "records" "secondMenu")${l
-                                        ?.orgUserAccount}#end
+                                        ?.orgUserRealName}#end
                                 #end
                             #end
                         #end
@@ -34,7 +34,7 @@
                                 #foreach(l:userList)
                                     #@dropdownItem(
                                     TINY_CONTEXT_PATH+adminPath+"/service/request/reviewBy" "records" "secondMenu")${l
-                                        ?.orgUserAccount}#end
+                                        ?.orgUserRealName}#end
                                 #end
                             #end
                         #end

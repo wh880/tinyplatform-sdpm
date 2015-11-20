@@ -3,7 +3,7 @@
         ${currentProjectId?ProjectUtils.getProject(currentProjectId).projectName:"请选择项目"}
     <span class="caret"></span>
     #end
-    #@navSelect2Body()
+    #@navSelect2Body({"style":"left:-18px;top:26px"})
         #@navSelect2Data()
         <optgroup label="请选择项目">
             #foreach(p:ProjectUtils.getUserProjectList())
