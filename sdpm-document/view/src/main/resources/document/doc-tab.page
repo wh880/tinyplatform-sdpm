@@ -6,8 +6,8 @@
         #@tabHead()
             #include("tab.page")
         <span class="r" style="position:relative;top:2px;height:0">
-            #foreach(m:menuManager.getScopeMenus("doc-op"))
-                #if(m.id == "docedit")
+            #foreach(m:menuManager.getScopeMenus("file-op"))
+                #if(m.id == "doc-file-edit")
                     #@aModal("#myModal" m.name "400" "160" "class-m" adminPath+m.href)
                         #buttonIcon(iconClass=m.icon)${m.name}#end&nbsp
                 #else

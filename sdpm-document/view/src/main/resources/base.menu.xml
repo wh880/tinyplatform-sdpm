@@ -14,9 +14,9 @@
 		<!--icon="icon-remove" sort="2" isShow="1" scope="doclib-op"></menu>-->
 		<menu id="doclib-add" name="添加文档库" href="/document/doclib/toAdd"
 			icon="icon-plus-sign" sort="1" isShow="1" scope="doclib-op"></menu>
-		<menu id="doc-file-edit" name="编辑文档库" href="/system/profile/find/doc"
+		<menu id="doc-file-edit" name="编辑文档库" href="/document/doclib/edit"
 			  icon="icon-pencil" sort="3" isShow="1" scope="file-op"></menu>
-		<menu id="doc-file-delete" name="删除文档库" href="/system/profile/delete/doc"
+		<menu id="doc-file-delete" name="删除文档库" href="/document/doclib/delete"
 			  icon="icon-remove" sort="2" isShow="1" scope="file-op"></menu>
 
 		<menu id="docedit" name="编辑文档" href="/document/doc/edit"
