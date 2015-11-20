@@ -116,8 +116,8 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
 
     public List<TaskChartBean> queryChartFinishedBy() {
         Select select = select(FragmentSelectItemSql.fragmentSelect("count(*) as taskCount, org_user.ORG_USER_REAL_NAME as title"))
-                .from(PROJECT_TASKTABLE)
-                .join(Join.leftJoin(ORG_USERTABLE, ORG_USERTABLE.ORG_USER_ID.eq(PROJECT_TASKTABLE.TASK_FINISHED_BY)))
+                .from(PROJECT_TASKTABLE,ORG_USERTABLE)
+                .where(ORG_USERTABLE.ORG_USER_ID.eq(PROJECT_TASKTABLE.TASK_FINISHED_BY))
                 .groupBy(PROJECT_TASKTABLE.TASK_FINISHED_BY);
         return getDslSession().fetchList(select, TaskChartBean.class);
     }

@@ -66,7 +66,7 @@
                        href="${TINY_CONTEXT_PATH +adminPath}${url}?storyId=${story?.storyId}${story?.moduleId?'&moduleId='+story?.moduleId:''}">
                         <i class="${m?.icon}">${m?.name}</i></a>
                 #else
-                    <a href="${TINY_CONTEXT_PATH +adminPath}${m.href}${storyId}">#buttonIcon(iconClass=m.icon)${m
+                    <a href="${TINY_CONTEXT_PATH +adminPath}${m.href}?storyId=${storyId}">#buttonIcon(iconClass=m.icon)${m
                         ?.name}</a>
                 #end
             #elseif(m?.map?.type=="icon")

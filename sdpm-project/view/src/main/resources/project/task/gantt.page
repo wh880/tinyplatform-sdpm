@@ -15,4 +15,4 @@
     #end
 #end
 #gantt("GanttChartDIV" TINY_CONTEXT_PATH+adminPath+"/project/task/gantt/init" TINY_CONTEXT_PATH+adminPath+
-    "/project/task/findTask" {"width":"1050","height":"540"})
+    "/project/task/find" {"width":"1050","height":"540"})

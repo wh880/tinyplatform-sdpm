@@ -31,7 +31,7 @@ public class TaskManagerImpl implements TaskManager {
         return taskDao.batchInsert(taskList);
     }
 
-    public ProjectTask find(int id) {
+    public ProjectTask find(Integer id) {
         return taskDao.findTaskStory(id);
     }
 
@@ -101,11 +101,10 @@ public class TaskManagerImpl implements TaskManager {
         }
     }
 
-    public Integer delete(int id) {
+    public Integer delete(Integer id) {
         ProjectTask task = new ProjectTask();
         task.setTaskId(id);
         task.setTaskDeleted(task.DELETE_YES);
-
         return taskDao.edit(task);
     }
 

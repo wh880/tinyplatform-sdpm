@@ -9,30 +9,32 @@
             #include("/project/protab.page")
         #end
     ##head end
-        #@tabBodyCol("ptop-5")
-        ##operationbar start
-            #@div(divClass="operationbar")
-            <span class="f">
-                    <font style="font-weight: bold">Bug列表</font>
-                </span>
-            <span class="r">
-                #@hasMenu("bug-add")
-                    <a href="${TINY_CONTEXT_PATH+adminPath}/quality/bug/add" title="提Bug">
-                        #buttonIcon(iconClass="icon-plus")提Bug
-                    </a>
-                #end
-        </span>
-            #end
-        ##operationbay end
-        #end
+##        #@tabBodyCol("ptop-5")
+##        ##operationbar start
+##            #@div(divClass="operationbar")
+##            <span class="f">
+##                    <font style="font-weight: bold">Bug列表</font>
+##                </span>
+##            <span class="r">
+##                #@hasMenu("bug-add")
+##                    <a href="${TINY_CONTEXT_PATH+adminPath}/quality/bug/add" title="提Bug">
+##                        #buttonIcon(iconClass="icon-plus")提Bug
+##                    </a>
+##                #end
+##        </span>
+##            #end
+##        ##operationbay end
+##        #end
     ##body end
     #end
     #@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
-
         #@div(divBaseClass="tinyheaderTools form-inline")
             #setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置
-            #@hasMenu("bug-add")<a class="btn btn-success"
-                                   href="${TINY_CONTEXT_PATH+adminPath}/quality/bug/add">提BUG</a>#end
+            #@hasMenu("bug-add")
+            <a class="btn btn-success" href="${TINY_CONTEXT_PATH+adminPath}/quality/bug/add">
+               <i class="icon-plus"></i> 提BUG
+            </a>
+            #end
         #end
         #@tinyTableContent(TINY_CONTEXT_PATH+adminPath+"/quality/bug/projectFindList?projectId="+projectId+
             "&buildId="+buildId) ##取数据地址 总数据
