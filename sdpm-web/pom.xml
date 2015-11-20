@@ -341,19 +341,22 @@
                 <version>2.0-beta-1</version>
             </plugin>
             <plugin>
-                <groupId>org.eclipse.jetty</groupId>
+                <groupId>org.mortbay.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
-                <version>9.2.9.v20150224</version>
+                <version>8.1.16.v20140903</version>
                 <configuration>
                     <webApp>
                         <contextPath>/${project.name}</contextPath>
                     </webApp>
-                    <httpConnector>
-                        <port>8989</port>
-                        <!--<connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">-->
-                            <!--<port>8989</port>-->
-                        <!--</connector>-->
-                    </httpConnector>
+                    <!--<httpConnector>-->
+                    <!--<port>8989</port>-->
+                    <!--</httpConnector>-->
+                    <connectors>
+                        <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
+                            <port>8989</port>
+                            <maxIdleTime>60000</maxIdleTime>
+                        </connector>
+                    </connectors>
                     <scanIntervalSeconds>10</scanIntervalSeconds>
                     <stopKey>foo</stopKey>
                     <stopPort>9999</stopPort>

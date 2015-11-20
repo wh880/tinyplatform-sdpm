@@ -185,6 +185,8 @@
         color: #333;
         background: #ccc
     }
+    .board-task .task-pri{border:1px solid #fff;border-radius: 50%;padding: 0 3px; line-height: 13px; font-size: 12px; display: inline-block;}
+
 </style>
 <script type="text/javascript">
     <!--
@@ -210,7 +212,7 @@
                         }
                         break;
                     case "closed":
-                        if (ItemStat == "doing" || ItemStat == "closed") {
+                        if (ItemStat == "doing" || ItemStat == "closed" || ItemStat == "cancel") {
                             return false;
                         }
                         break;
@@ -233,7 +235,7 @@
                         ui.helper.find("a.doing").trigger("click");
                         break;
                     case "done":
-                        ui.helper.find("a.finish").trigger("click");
+                        ui.helper.find("a.done").trigger("click");
                         break;
                     case "cancel":
                         ui.helper.find("a.cancel").trigger("click");

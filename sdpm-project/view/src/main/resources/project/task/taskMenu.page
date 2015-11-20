@@ -50,12 +50,16 @@
 ##分组查看
     <div class="btn-group btnDropDown">
         <a id="dLabel" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-            分组查看
+            #if(menudId)
+                ${menuManager.getMenu(menudId).name}
+            #else
+                    分组查看
+            #end
             <span class="caret"></span>
         </a>
         <ul class="dropdown-menu" aria-labelledby="dLabel">
             #foreach(m:menuManager.getScopeMenus("task-group-menu"))
-                <li><a href="${TINY_CONTEXT_PATH+adminPath+m?.href}">${m?.name}</a></li>
+                <li><a href="${TINY_CONTEXT_PATH+adminPath+m.href}&menuId=${m.id}">${m.name}</a></li>
             #end
         </ul>
     </div>
