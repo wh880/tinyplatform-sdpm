@@ -566,6 +566,7 @@ public class ProjectTaskAction extends BaseController {
             map.put("pOpen", "1");
             map.put("pDepend", "0");
             map.put("pCaption", "");
+//            map.put("idName", "taskId");
             resultList.add(map);
         }
         return resultList;

@@ -30,10 +30,7 @@ import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.sdpm.system.service.inter.ProfileService;
-import org.tinygroup.sdpm.util.CookieUtils;
-import org.tinygroup.sdpm.util.LogUtil;
-import org.tinygroup.sdpm.util.ModuleUtil;
-import org.tinygroup.sdpm.util.UserUtils;
+import org.tinygroup.sdpm.util.*;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -135,27 +132,26 @@ public class DocAction extends BaseController {
      */
     @RequiresPermissions(value = {"add-doc"})
     @RequestMapping(value = "/add")
-    public String createDoc(HttpServletRequest request, Model model) {
-        Integer libId = Integer.parseInt(CookieUtils.getCookie(request, DocAction.COOKIE_DOCLIB_ID));
+    public String createDoc(Integer libId,HttpServletRequest request, Model model) {
+        if (libId==null){
+            libId = Integer.parseInt(CookieUtils.getCookie(request, DocAction.COOKIE_DOCLIB_ID));
+        }
         if (libId == 1) {
             Product product = new Product();
             List<Product> list = productService.findProductList(product);
             model.addAttribute("productList", list);
-            return "/document/add-doc-product.page";
+            return "/document/add-doc-product";
         } else if (libId == 2) {
-            List<Project> list = projectService.findList();
-            Product product = new Product();
-            List<Product> list1 = productService.findProductList(product);
-            model.addAttribute("productList", list1);
+            List<Project> list = ProjectUtils.getUserProjectList();
             model.addAttribute("projectList", list);
-            return "/document/add-doc-project.page";
+            return "/document/add-doc-project";
         } else {
             SystemModule module = new SystemModule();
             module.setModuleType("doc");
             module.setModuleRoot(libId);
             List<SystemModule> moduleList = moduleService.findModules(module);
             model.addAttribute("moduleList", moduleList);
-            return "/document/add-doc.page";
+            return "/document/add-doc";
         }
     }
 

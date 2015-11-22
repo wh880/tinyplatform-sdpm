@@ -214,9 +214,10 @@ public class UserAction extends BaseController {
      * @param password
      * @return
      */
+    @ResponseBody
     @RequiresPermissions("org-user-delete")
-    @RequestMapping("/delete")
-    public String delete(String id, String password) {
+    @RequestMapping(value = "/delete",method = RequestMethod.POST)
+    public Map delete(String id, String password) {
         OrgUser orgUser = userService.findUser(id);
         String userPassword = orgUser.getOrgUserPassword();
         if (userService.validatePassword(password, userPassword)) {
@@ -230,10 +231,9 @@ public class UserAction extends BaseController {
                     , null
                     , null
                     , null);
-        } else {
-            return "organization/user/delect.pagelet";
+            return resultMap(true,"验证成功，已经删除。");
         }
-        return "redirect:" + adminPath + "/org/user/list/";
+        return resultMap(false,"密码错误，验证失败。");
     }
 
     /**
@@ -429,7 +429,6 @@ public class UserAction extends BaseController {
         model.addAttribute("bugPager", bugPager);
         return "/organization/user/bugAdminTable.pagelet";
     }
-
 
     /**
      * 用户下的测试

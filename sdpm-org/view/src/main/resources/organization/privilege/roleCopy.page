@@ -50,8 +50,9 @@
                     dataType: "json",
                     success: function (data) {
                         if (data.status == "y" || data.status == "success") {
-                            layer.msg(data.info, 2, 1, function () {
+                            layer.msg(data.info, 1, 1, function () {
                                 $(curform).closest(".modal").trigger("close");
+                                $("#org-role-list").trigger("refresh");
                             });
                         } else {
                             layer.msg(data.info);

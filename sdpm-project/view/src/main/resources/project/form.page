@@ -193,7 +193,7 @@
                 var objtip = $(o.obj).closest(".form-item-body").parent().find(".validmsg");
                 cssctl(objtip, o.type);
                 objtip.text(msg);
-            },
+            }
 
         });
         $("input[name='projectAcl']").click(function (e) {
