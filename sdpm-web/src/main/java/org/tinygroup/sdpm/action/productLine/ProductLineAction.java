@@ -251,7 +251,6 @@ public class ProductLineAction extends BaseController {
     @RequestMapping("/to")
     public String to(HttpServletRequest request,Model model) {
         List<ProductLine> list = ProductUtils.getProductLineList();
-
         String query = request.getQueryString();
         if(StringUtil.isBlank(query)||!query.contains("status")){
             model.addAttribute("status", 2);
