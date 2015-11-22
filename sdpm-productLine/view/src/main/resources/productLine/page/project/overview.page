@@ -43,7 +43,7 @@
     #end
 
     #@div(divClass="infoContent")
-        <p class="titleName">分支结构</p>
+        <p class="titleName">产品列表</p>
         <ul class="treeList">
             #@settoggleLeftBody("treeLeftbox")
                 #@zTreeList(call("link",adminPath+"/productLine/overviewTree?productLineId="+productLineId))

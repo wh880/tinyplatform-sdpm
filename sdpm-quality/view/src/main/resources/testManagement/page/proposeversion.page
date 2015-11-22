@@ -151,7 +151,7 @@
             #@validateDiv("col-2")#end
         #end
         #@elementItem()
-            #@colLabel()<span class="c-red">*</span>任务名称：#end
+            #@colLabel()<span class="c-red">*</span>测试名称：#end
             #@formControlDiv("col-8")
             	#@div(divClass="col-5")
                 	#tinyInput("text" "testtaskTitle" testTask?.testtaskTitle {"datatype":"*","id":"关键词","class":"input-text"})

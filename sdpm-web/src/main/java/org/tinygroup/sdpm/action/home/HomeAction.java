@@ -77,7 +77,7 @@ public class HomeAction {
         model.addAttribute("myTaskList",tasks);
         //首页项目统计
         Integer[] userProjectIds = ProjectUtils.getUserProjectIdList();
-        Pager<Project> projectPager = projectService.findProjects(0, userProjectIds.length, null, null, userProjectIds);
+        Pager<Project> projectPager = projectService.findProjects(0, userProjectIds!=null?userProjectIds.length:0, null, null, userProjectIds);
         Integer interval = 2;
         if (projectPager.getRecords().size() > 0) {
             for (Project project : projectPager.getRecords()) {

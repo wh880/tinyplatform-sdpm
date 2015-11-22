@@ -28,12 +28,10 @@ import org.tinygroup.sdpm.quality.dao.pojo.QualityTestCase;
 import org.tinygroup.sdpm.quality.service.inter.TestCaseService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.dao.pojo.SystemHistory;
-import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.service.inter.ActionService;
 import org.tinygroup.sdpm.system.service.inter.HistoryService;
 import org.tinygroup.sdpm.util.LogUtil;
 import org.tinygroup.sdpm.util.ProductUtils;
-import org.tinygroup.sdpm.util.ProjectUtils;
 import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -44,7 +42,6 @@ import java.util.*;
 
 /**
  * 产品控制器
- *
  *
  * @author Administrator
  */
@@ -95,21 +92,20 @@ public class ProductAction extends BaseController {
     }
 
 
-
     @RequestMapping("")
-    public String productAction(@CookieValue(value = "cookieProductLineId",defaultValue = "0")String cookieProductLineId,HttpServletResponse response,HttpServletRequest request) {
-        if("0".equals(cookieProductLineId)) {
+    public String productAction(@CookieValue(value = "cookieProductLineId", defaultValue = "0") String cookieProductLineId, HttpServletResponse response, HttpServletRequest request) {
+        if ("0".equals(cookieProductLineId)) {
             ProductUtils.prepareForFirst(response);
         }
-        return "redirect:"+adminPath+"/product/story?choose=1" + (request.getQueryString() == null ? "" : ("&" + request.getQueryString()));
+        return "redirect:" + adminPath + "/product/story?choose=1" + (request.getQueryString() == null ? "" : ("&" + request.getQueryString()));
     }
 
 
     @RequestMapping("/save")
-    public String save(@CookieValue(value = "cookieProductLineId") String cookieProductLineId,Product product,SystemAction systemAction, HttpServletRequest request) {
+    public String save(@CookieValue(value = "cookieProductLineId") String cookieProductLineId, Product product, SystemAction systemAction, HttpServletRequest request) {
         String productLine = cookieProductLineId;
-        if(product.getProductLineId()!=null&&product.getProductLineId()!=0) {
-            productLine=String.valueOf(product.getProductLineId());
+        if (product.getProductLineId() != null && product.getProductLineId() != 0) {
+            productLine = String.valueOf(product.getProductLineId());
         }
         product.setProductLineId(Integer.parseInt(productLine));
         product.setProductCreatedBy(UserUtils.getUserId());
@@ -141,14 +137,14 @@ public class ProductAction extends BaseController {
         productService.updateProduct(product);
         ProductUtils.removeProductList();
         ProductUtils.removeProductList(String.valueOf(
-                product.getProductLineId().equals(product1.getProductId())?
-                product1.getProductLineId():product.getProductLineId()
-                ));
+                product.getProductLineId().equals(product1.getProductId()) ?
+                        product1.getProductLineId() : product.getProductLineId()
+        ));
         ProductUtils.removeAllProductListByUser();
         ProductUtils.removeProductListByProductLineUser(String.valueOf(
-                product.getProductLineId().equals(product1.getProductId())?
-                product1.getProductLineId():product.getProductLineId()
-                ));
+                product.getProductLineId().equals(product1.getProductId()) ?
+                        product1.getProductLineId() : product.getProductLineId()
+        ));
         LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCT,
                 LogUtil.LogAction.EDITED,
                 String.valueOf(product.getProductId()),
@@ -181,11 +177,11 @@ public class ProductAction extends BaseController {
             request.getSession().removeAttribute("sessionProductId");
             return false;
         }
-
     }
+
     @ResponseBody
     @RequestMapping("/delete")
-    public Map delete(Integer productId, HttpServletRequest request,SystemAction systemAction) {
+    public Map delete(Integer productId, HttpServletRequest request, SystemAction systemAction) {
         Product product1 = productService.findProduct(productId);
         productService.deleteProduct(productId);
         Product product = productService.findProduct(productId);
@@ -203,8 +199,8 @@ public class ProductAction extends BaseController {
                 product,
                 systemAction.getActionComment());
 
-        Map<String,String> result = new HashMap<String, String>();
-        result.put("status","y");
+        Map<String, String> result = new HashMap<String, String>();
+        result.put("status", "y");
         return result;
     }
 
@@ -217,12 +213,12 @@ public class ProductAction extends BaseController {
     }
 
     @RequestMapping("/find/{forward}")
-    public String find(@CookieValue(value = "cookieProductId",defaultValue = "0") String cookieProductId,
-            @PathVariable(value = "forward") String forward, Integer productId, Model model, HttpServletRequest request) {
-        if("close".equals(forward))return "/product/page/tabledemo/overview-close.pagelet";
-        if(productId!=null)cookieProductId=String.valueOf(productId);
+    public String find(@CookieValue(value = "cookieProductId", defaultValue = "0") String cookieProductId,
+                       @PathVariable(value = "forward") String forward, Integer productId, Model model, HttpServletRequest request) {
+        if ("close".equals(forward)) return "/product/page/tabledemo/overview-close.pagelet";
+        if (productId != null) cookieProductId = String.valueOf(productId);
         Product product = new Product();
-        if(Integer.parseInt(cookieProductId)>0) {
+        if (Integer.parseInt(cookieProductId) > 0) {
             product = productService.findProduct(Integer.parseInt(cookieProductId));
         }
         SystemHistory history = new SystemHistory();
@@ -246,14 +242,14 @@ public class ProductAction extends BaseController {
             documentDoc.setDocProduct(Integer.parseInt(cookieProductId));
             documentDoc.setDocDeleted("0");
             List<DocumentDoc> documentDocs = docService.findDocList(documentDoc);
-            model.addAttribute("projectSum",projectProducts.size());
-            model.addAttribute("buildSum",builds.size());
-            model.addAttribute("testCaseSum",testCases.size());
-            model.addAttribute("docSum",documentDocs.size());
-            if(!StringUtil.isBlank(product.getProductWhiteList())){
+            model.addAttribute("projectSum", projectProducts.size());
+            model.addAttribute("buildSum", builds.size());
+            model.addAttribute("testCaseSum", testCases.size());
+            model.addAttribute("docSum", documentDocs.size());
+            if (!StringUtil.isBlank(product.getProductWhiteList())) {
                 String[] ids = product.getProductWhiteList().split(",");
                 List<OrgRole> roles = roleService.getRoleByIds(ids);
-                model.addAttribute("whiteLists",roles);
+                model.addAttribute("whiteLists", roles);
             }
             return "/product/page/tabledemo/baseinfo.pagelet";
         }
@@ -261,7 +257,7 @@ public class ProductAction extends BaseController {
     }
 
     @RequestMapping("/list")
-    public String list(Product product,String treeId,Integer productLineId,
+    public String list(Product product, String treeId, Integer productLineId,
 //                       @CookieValue(value = "cookieProductLineId",defaultValue = "0") String cookieProductLineId,
                        @RequestParam(required = false, defaultValue = "1") int page,
                        @RequestParam(required = false, defaultValue = "10") int pagesize,
@@ -277,40 +273,40 @@ public class ProductAction extends BaseController {
 //        }
 
 //        product.setDeleted(0);
-        Map<String,List<Product>> productMap = new HashMap<String, List<Product>>();
+        Map<String, List<Product>> productMap = new HashMap<String, List<Product>>();
         List<Product> products = productService.getProductByUserWithCount(UserUtils.getUserId());
         List<Integer> idList = new ArrayList<Integer>();
-        for(Product product1 : products){
+        for (Product product1 : products) {
             idList.add(product1.getProductLineId());
         }
         Integer[] ids = new Integer[idList.size()];
         List<ProductLine> lines = productLineService.getProductLineByIds(idList.toArray(ids));/*productService.getTeamRoleProductLineIds(UserUtils.getUserId())*/
-        for(Product product1:products){
-            if(productMap.containsKey(String.valueOf(product1.getProductLineId()))){
+        for (Product product1 : products) {
+            if (productMap.containsKey(String.valueOf(product1.getProductLineId()))) {
                 productMap.get(String.valueOf(product1.getProductLineId())).add(product1);
-            }else{
+            } else {
                 List<Product> ps = new ArrayList<Product>();
                 ps.add(product1);
-                productMap.put(String.valueOf(product1.getProductLineId()),ps);
+                productMap.put(String.valueOf(product1.getProductLineId()), ps);
             }
         }
-        model.addAttribute("productLines",lines);
+        model.addAttribute("productLines", lines);
         model.addAttribute("productMap", productMap);
-        return  "/product/data/allproductdata.pagelet";
+        return "/product/data/allproductdata.pagelet";
     }
 
     @RequestMapping("/findManager")
     public String findManager(Integer productId, Model model) {
 
-        if(!StringUtil.isBlank(productService.findProduct(productId).getProductOwner())){
+        if (!StringUtil.isBlank(productService.findProduct(productId).getProductOwner())) {
             OrgUser productOwner = userService.findUser(productService.findProduct(productId).getProductOwner());
             model.addAttribute("productOwner", productOwner);
         }
-        if(!StringUtil.isBlank(productService.findProduct(productId).getProductQualityManager())){
+        if (!StringUtil.isBlank(productService.findProduct(productId).getProductQualityManager())) {
             OrgUser productQualityManager = userService.findUser(productService.findProduct(productId).getProductQualityManager());
             model.addAttribute("productQualityManager", productQualityManager);
         }
-        if(!StringUtil.isBlank(productService.findProduct(productId).getProductDeliveryManager())){
+        if (!StringUtil.isBlank(productService.findProduct(productId).getProductDeliveryManager())) {
             OrgUser productDeliveryManager = userService.findUser(productService.findProduct(productId).getProductDeliveryManager());
             model.addAttribute("productDeliveryManager", productDeliveryManager);
         }
@@ -319,8 +315,8 @@ public class ProductAction extends BaseController {
 
     @ResponseBody
     @RequestMapping("/productList")
-    public List<Product> findProduct(Product product,String type,String productLineId) {
-        if("user".equals(type))return ProductUtils.getProductListByProductLineUser(productLineId);
+    public List<Product> findProduct(Product product, String type, String productLineId) {
+        if ("user".equals(type)) return ProductUtils.getProductListByProductLineUser(productLineId);
 
         List<Product> list = productService.findProductList(product);
 
@@ -330,18 +326,18 @@ public class ProductAction extends BaseController {
 
     @RequestMapping("/{forward}/addition")
     public String addpro(
-            @PathVariable(value = "forward") String forward,HttpServletRequest request, Model model) {
-		if ("addproduct".equals(forward)) {
+            @PathVariable(value = "forward") String forward, HttpServletRequest request, Model model) {
+        if ("addproduct".equals(forward)) {
             return "/product/page/tabledemo/addProduct";
         } else if ("allproduct".equals(forward)) {
             return "/product/page/tabledemo/product-listall.page";
         }
-		return "";
+        return "";
     }
 
     @RequestMapping("/addDoc")
     public String addDoc(HttpServletRequest request, Model model) {
-       return  "/product/page/tabledemo/add-doc.page";
+        return "/product/page/tabledemo/add-doc.page";
     }
 
     @RequestMapping("project/listData")
@@ -372,35 +368,38 @@ public class ProductAction extends BaseController {
     @ResponseBody
     @RequestMapping(value = "/judgeProductName")
     public Map judgeProductName(Product product) {
-        Integer productId=null;
-        if(product.getProductId()!=null){
+        Integer productId = null;
+        if (product.getProductId() != null) {
             productId = product.getProductId();
             product.setProductId(null);
         }
         List<Product> products = productService.findProductList(product);
-        if (products.size() >=1) {
-            if(products.size()==1&&productId!=null){
-                return resultMap(productId.equals(products.get(0).getProductId())?false:true,"");
+        if (products.size() >= 1) {
+            if (products.size() == 1 && productId != null) {
+                return resultMap(productId.equals(products.get(0).getProductId()) ? false : true, "");
             }
             return resultMap(true, "该产品已存在");
         } else {
             return resultMap(false, "");
         }
     }
+
     @RequestMapping("addModule")
-    public String toAddModule(Integer pId,Model model){
-        model.addAttribute("pId",pId);
+    public String toAddModule(Integer pId, Model model) {
+        model.addAttribute("pId", pId);
         return "/product/page/tabledemo/addModule.pagelet";
     }
+
     @RequestMapping("team")
-    public String team(){
+    public String team() {
         return "/product/page/team/productTeam.page";
     }
+
     @RequestMapping("team/teamManage")
-    public String deleteTeamMember(@CookieValue(value = "cookieProductId",defaultValue = "0")String productId,
-                                   Model model){
+    public String deleteTeamMember(@CookieValue(value = "cookieProductId", defaultValue = "0") String productId,
+                                   Model model) {
         Integer pId = Integer.valueOf(productId);
-        if(pId!=0){
+        if (pId != 0) {
             List<ProjectTeam> teamList = teamService.findTeamByProductId(pId);
             model.addAttribute("teamList", teamList);
             String[] ids = new String[teamList.size()];
@@ -417,8 +416,8 @@ public class ProductAction extends BaseController {
     }
 
     @RequestMapping("team/teamData")
-    public String teamManage(@CookieValue(value = "cookieProductId",defaultValue = "0")String productId,
-                             Model model, Integer start, Integer limit, String order, String ordertype){
+    public String teamManage(@CookieValue(value = "cookieProductId", defaultValue = "0") String productId,
+                             Model model, Integer start, Integer limit, String order, String ordertype) {
         Integer pId = Integer.valueOf(productId);
         if (pId != 0) {
             ProjectTeam team = new ProjectTeam();
@@ -430,9 +429,9 @@ public class ProductAction extends BaseController {
     }
 
     @RequestMapping("/teamSave")
-    public String teamManageSave(@CookieValue(value = "cookieProductId",defaultValue = "0")String productId,Teams teams, HttpServletRequest request, HttpServletResponse response) {
+    public String teamManageSave(@CookieValue(value = "cookieProductId", defaultValue = "0") String productId, Teams teams, HttpServletRequest request, HttpServletResponse response) {
         if (productId == "0") {
-            return "redirect:"+adminPath+"/product";
+            return "redirect:" + adminPath + "/product";
         }
         List<ProjectTeam> updateList = new ArrayList<ProjectTeam>();
         List<ProjectTeam> addList = new ArrayList<ProjectTeam>();
@@ -464,10 +463,11 @@ public class ProductAction extends BaseController {
         }
         teamService.batchAdd(addList);
         teamService.batchUpdate(updateList);
-        return "redirect:"+adminPath+"/product/team";
+        return "redirect:" + adminPath + "/product/team";
     }
+
     @RequestMapping("team/nextTr")
-    public String getNextTeamTr(Integer a,Model model){
+    public String getNextTeamTr(Integer a, Model model) {
         List<OrgUser> userList = userService.findUserList(null);
         model.addAttribute("userList", userList);
         OrgRole role = new OrgRole();
@@ -475,15 +475,16 @@ public class ProductAction extends BaseController {
         role.setOrgRoleType(OrgRole.ROLE_TYPE_PRODUCT);
         List<OrgRole> roleList = roleService.findRoleList(role);
         model.addAttribute("roleList", roleList);
-        model.addAttribute("a",a+1);
+        model.addAttribute("a", a + 1);
         return "/product/page/team/teamAddTr.pagelet";
     }
+
     @ResponseBody
     @RequestMapping("team/del")
-    public Map deleteTeamMember(Integer id){
+    public Map deleteTeamMember(Integer id) {
         teamService.delete(id);
-        Map<String,String> result = new HashMap<String, String>();
-        result.put("status","success");
+        Map<String, String> result = new HashMap<String, String>();
+        result.put("status", "success");
         return result;
     }
 }

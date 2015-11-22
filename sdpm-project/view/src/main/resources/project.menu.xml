@@ -140,7 +140,7 @@
         <menu id="pro-document-delete" name="删除文档" href="/project/doc/del" icon="icon-remove" sort="10" isShow="1"
               scope="pro-document-op"/>
         <!--<menu id="documentmenu" name="任务菜单" href="/project/document/index.page" icon="" sort="1" isShow="1">-->
-        <menu id="pro-document-report" name="创建文档" href="/project/doc/preAdd" icon="icon-plus" sort="8" isShow="1"
+        <menu id="pro-document-report" name="创建文档" href="/document/doc/add?libId=2" icon="icon-plus" sort="8" isShow="1"
               scope="pro-documentmenu-op"/>
         <!--</menu>-->
     </menu>

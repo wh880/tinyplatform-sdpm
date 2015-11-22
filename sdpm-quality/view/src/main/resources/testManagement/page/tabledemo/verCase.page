@@ -205,7 +205,6 @@
                     #@dialogHeader()#end
                     #@dialogBody()<p>对话框内容…</p>#end
                     #@dialogFooter()
-                        #@buttonEnsure()确定#end
                         #@buttonCancel()关闭#end
                     #end
                 #end

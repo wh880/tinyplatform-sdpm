@@ -165,12 +165,9 @@
                                 if (dId == '1') {
                                     var pId = $(this).val();
                                     ajaxRead("${sid}", "docModule", "moduleId", "moduleName",
-                                            "/document/ajax/moduleByProduct?productId=" + pId, ${doc? doc.docModule : 0
-                                }
-                                );
+                                            "/document/ajax/moduleByProduct?productId=" + pId, ${doc? doc.docModule : 0});
                             }
-                            })
-                            ;
+                            });
 
                         </script>
                     #end
@@ -187,7 +184,6 @@
                 </div>
             </div>
         #end
-
 
         #@elementItem()
             <div class="col-12">

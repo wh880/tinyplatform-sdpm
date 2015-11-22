@@ -25,7 +25,17 @@ import java.util.List;
  * 
  */
 public class ProductStory implements Serializable{
-	
+
+	public static final String STAGE_NOT_BEGIN = "1";
+	public static final String STAGE_IS_PLANED = "2";
+	public static final String STAGE_IS_PROJECTED = "3";
+	public static final String STAGE_IS_DOING = "4";
+	public static final String STAGE_IS_DONE = "5";
+	public static final String STAGE_IS_TESTING = "6";
+	public static final String STAGE_IS_TESTED = "7";
+	public static final String STAGE_IS_ACCEPT = "8";
+	public static final String STAGE_IS_RELEASED = "9";
+
 	private Integer releaseId;
 	
 	private Integer bugId;

@@ -8,7 +8,7 @@
 
 #if(qualityProductId&&ProductUtils.getAllProductListByUser()?.size()>0)
     #set(finded = 0)
-    #for(product : ProductUtils.getAllProductListByUser())
+    #foreach(product : ProductUtils.getAllProductListByUser())
     #if(product?.productId == qualityProductId)
         #set(finded=1,currentProductName=product.productName)
     #end

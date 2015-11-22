@@ -72,6 +72,18 @@ public class ProjectTeam implements Serializable {
 	 * 
 	 */
 	private Float teamHours;
+	/**
+	 * 成员角色
+	 */
+	private String roleName;
+
+	public String getRoleName() {
+		return roleName;
+	}
+
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
+	}
 
 	public Integer getProductId() {
 		return productId;

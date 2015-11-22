@@ -71,7 +71,7 @@ public class ProductLineManagerImpl implements ProductLineManager{
 	}
 
 	public List<ProductLine> getProductLineByIds(Integer... ids) {
-		if(ids==null){
+		if(ids==null||ids.length==0){
 			return new ArrayList<ProductLine>();
 		}
 		return productLineDao.getByKeys(ids);

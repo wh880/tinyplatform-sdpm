@@ -243,7 +243,7 @@ public class ProductLineDaoImpl extends TinyDslDaoSupport implements ProductLine
 		SelectGenerateCallback<Serializable[]> callback = new SelectGenerateCallback<Serializable[]>() {
 			@SuppressWarnings("rawtypes")
 			public Select generate(Serializable[] t) {
-				return selectFrom(PRODUCT_LINETABLE).where(PRODUCT_LINETABLE.PRODUCT_LINE_ID.in(t));
+				return selectFrom(PRODUCT_LINETABLE).where(and(PRODUCT_LINETABLE.DELETED.eq(0),PRODUCT_LINETABLE.PRODUCT_LINE_ID.in(t)));
 			}
 
 		};

@@ -10,7 +10,7 @@
 #if(cookieProductId&&ProductUtils.getAllProductListByUser()?.size()>0)
     #set(finded = 0)
 
-    #for(product : ProductUtils.getAllProductListByUser())
+    #foreach(product : ProductUtils.getAllProductListByUser())
     #if(product?.productId == cookieProductId)
         #set(finded=1,currentProductName=product.productName)
     #end
@@ -22,8 +22,9 @@
     window.location.reload();
 </script>
 #end
-
+    #else
 #if(ProductUtils.getAllProductListByUser()?.size()==0)
+
 <script type="text/javascript">
         #set(msg="目前没有产品，现在将前往添加。")
 

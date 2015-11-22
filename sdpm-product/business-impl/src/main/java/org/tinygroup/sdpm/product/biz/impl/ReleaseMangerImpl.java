@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.product.biz.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,7 +64,7 @@ public class ReleaseMangerImpl implements ReleaseManger{
 	}
 
 	public List<ProductRelease> findList(Integer... releaseId) {
-
+		if(releaseId==null||releaseId.length==0)return new ArrayList<ProductRelease>();
 		return productReleaseDao.getByKeys(releaseId);
 	}
 

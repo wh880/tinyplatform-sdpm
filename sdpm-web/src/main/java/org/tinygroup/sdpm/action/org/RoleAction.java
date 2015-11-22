@@ -57,8 +57,6 @@ public class RoleAction extends BaseController {
     public String save(OrgRole role, Model model) {
         if (role.getOrgRoleId() == null) {
             roleService.addRole(role);
-
-
         } else {
             roleService.updateRole(role);
         }
