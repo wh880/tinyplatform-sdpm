@@ -11,7 +11,7 @@
     <bean id="dictFileProcessor" class="org.tinygroup.sdpm.dict.processor.DictFileProcessor" ></bean>
     <bean id="sdpmDictLoader" class="org.tinygroup.sdpm.dict.impl.SdpmDictLoader" scope="singleton">
         <property name="dictHandle" ref="dictHandle"></property>
-        <property name="isInitFromFile" value="true"></property>
+        <property name="isInitFromFile" value="false"></property>
     </bean>
 
     <bean id="commonFilter" class="org.tinygroup.sdpm.common.web.CommonFilter"/>

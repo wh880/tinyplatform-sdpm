@@ -72,7 +72,7 @@ public class PlanManagerImpl implements PlanManager{
 	}
 
 	public List<ProductPlan> findList(Integer... planId) {
-
+		if(planId==null||planId.length==0)return new ArrayList<ProductPlan>();
 		return productPlanDao.getByKeys(planId);
 	}
 

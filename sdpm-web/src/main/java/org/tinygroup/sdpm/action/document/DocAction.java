@@ -91,7 +91,8 @@ public class DocAction extends BaseController {
         if ("desc".equals(ordertype)) {
             asc = false;
         }
-        Integer libId = Integer.valueOf(CookieUtils.getCookie(request, DocAction.COOKIE_DOCLIB_ID));
+        String cookieDocLib = CookieUtils.getCookie(request, DocAction.COOKIE_DOCLIB_ID);
+        Integer libId = Integer.valueOf(StringUtil.isBlank(cookieDocLib)?0:Integer.parseInt(cookieDocLib));
         doc.setDocLibId(libId);
         String condition = null;
         Pager<DocumentDoc> pager = null;

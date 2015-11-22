@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.product.biz.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +48,7 @@ public class StorySpecManagerImpl implements StorySpecManager{
 	}
 
 	public List<ProductStorySpec> findList(Integer... storyspecId) {
-
+		if(storyspecId==null||storyspecId.length==0)return new ArrayList<ProductStorySpec>();
 		return productStorySpecDao.getByKeys(storyspecId);
 	}
 

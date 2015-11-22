@@ -108,7 +108,7 @@ public class ProductManagerImpl implements ProductManager{
 	}
 
 	public List<Product> findList(Integer... productId) {
-
+		if(productId==null||productId.length==0)return new ArrayList<Product>();
 		return productDao.getByKeys(productId);
 	}
 

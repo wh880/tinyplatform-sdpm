@@ -158,7 +158,7 @@ public class BugAction extends BaseController {
     }
 
     @RequestMapping("/findBug")
-    public String findBugPager(@CookieValue Integer qualityProductId, Integer start, Integer limit, SearchInfos infos, String groupOperate, String order, String ordertype, String status, QualityBug bug, Model model, HttpServletRequest request) {
+    public String findBugPager(@CookieValue(value = "qualityProductId",defaultValue ="0") Integer qualityProductId, Integer start, Integer limit, SearchInfos infos, String groupOperate, String order, String ordertype, String status, QualityBug bug, Model model, HttpServletRequest request) {
         boolean asc = true;
         if ("desc".equals(ordertype)) {
             asc = false;
