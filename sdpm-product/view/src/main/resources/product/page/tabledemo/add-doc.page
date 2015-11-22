@@ -40,7 +40,7 @@
                             $("#${sid}").on("setValue",function(o,treeNode){
                                 var pId = treeNode.id;
                                 if (pId > 0) {
-                                    ajaxRead("${sid}", "docModule", "moduleId", "moduleName", "/document/ajax/module1?productId=" + pId,"","module");
+                                    ajaxRead("${sid}", "docModule", "moduleId", "moduleName", "/document/ajax/productModule?productId=" + pId,"","module");
                                 }
                             });
                         });

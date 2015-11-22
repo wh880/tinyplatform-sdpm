@@ -282,8 +282,24 @@ public class ProjectTaskAction extends BaseController {
         ProjectTask oldTask = taskService.findTask(task.getTaskId());
         task.setTaskFinishedBy(UserUtils.getUserId());
         task.setTaskFinishedDate(new Date());
+        task.setTaskStatus(ProjectTask.DONE);
         taskService.updateFinishTask(task);
-
+        if(oldTask.getTaskStory()!=null){
+            ProjectTask task1 = new ProjectTask();
+            task1.setTaskStory(oldTask.getTaskStory());
+            List<ProjectTask> tasks = taskService.findListTask(task1);
+            boolean isDone = true;
+            for(ProjectTask projectTask : tasks){
+                if(Integer.parseInt(projectTask.getTaskStatus())%3!=0&&Integer.parseInt(projectTask.getTaskStatus())!=5){
+                    isDone=false;
+                }
+            }
+            if(isDone){
+                ProductStory story = storyService.findStory(task.getTaskStory());
+                story.setStoryStage(ProductStory.STAGE_IS_DONE);
+                storyService.updateStory(story);
+            }
+        }
         if (!oldTask.getTaskConsumed().equals(task.getTaskConsumed())) {
             burnService.updateBurnByProjectId(oldTask.getTaskProject());
         }
@@ -319,6 +335,11 @@ public class ProjectTaskAction extends BaseController {
     @RequestMapping(value = "/start", method = RequestMethod.GET)
     public String start(Integer taskId, Model model) {
         ProjectTask task = taskService.findTask(taskId);
+        if(task.getTaskStory()!=null){
+            ProductStory story = storyService.findStory(task.getTaskStory());
+            story.setStoryStage("4");
+            storyService.updateStory(story);
+        }
         model.addAttribute("task", task);
         return "project/task/start";
     }

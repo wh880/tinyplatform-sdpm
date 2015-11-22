@@ -15,7 +15,7 @@
     #@td()${b?.no}#end
     #@td()${b?.bugSeverity}#end
     #@td()${b?.priority}#end
-    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/bug/bugInfo?bugId=${b?.bugId}">${b?.bugTitle}#end
+    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/bug/bugInfo?bugId=${b?.bugId}">${"["+(bug?.bugConfirmed==0?"未确认":"已确认")+"]"+b?.bugTitle}#end
     #@td()${b?.bugOpenedBy?UserUtils.getUserById(b?.bugOpenedBy)?.orgUserRealName:""}#end
     #@td()${b?.bugAssignedTo?UserUtils.getUserById(b?.bugAssignedTo)?.orgUserRealName:""}#end
     #@td()${b?.bugResolvedBy?UserUtils.getUserById(b?.bugResolvedBy)?.orgUserRealName:""}#end

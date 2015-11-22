@@ -27,12 +27,14 @@ import org.tinygroup.sdpm.project.dao.pojo.ProjectTeam;
 import org.tinygroup.tinysqldsl.*;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
+import org.tinygroup.tinysqldsl.select.Join;
 import org.tinygroup.tinysqldsl.select.OrderByElement;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.tinygroup.sdpm.org.dao.constant.OrgRoleTable.ORG_ROLETABLE;
 import static org.tinygroup.sdpm.org.dao.constant.OrgRoleMenuTable.ORG_ROLE_MENUTABLE;
 import static org.tinygroup.sdpm.project.dao.constant.ProjectTeamTable.PROJECT_TEAMTABLE;
 import static org.tinygroup.tinysqldsl.Delete.delete;
@@ -179,7 +181,9 @@ public class ProjectTeamDaoImpl extends TinyDslDaoSupport implements ProjectTeam
         return getDslTemplate().queryPager(start, limit, projectTeam, false, new SelectGenerateCallback<ProjectTeam>() {
 
             public Select generate(ProjectTeam t) {
-                Select select = MysqlSelect.selectFrom(PROJECT_TEAMTABLE).where(
+                Select select = MysqlSelect.select(PROJECT_TEAMTABLE.ALL,ORG_ROLETABLE.ORG_ROLE_NAME.as("roleName")).from(PROJECT_TEAMTABLE).join(
+                        Join.leftJoin(ORG_ROLETABLE,ORG_ROLETABLE.ORG_ROLE_ID.eq(PROJECT_TEAMTABLE.TEAM_ROLE))
+                ).where(
                         and(
                                 PROJECT_TEAMTABLE.PRODUCT_ID.eq(t.getProductId()),
                                 PROJECT_TEAMTABLE.PROJECT_ID.eq(t.getProjectId()),

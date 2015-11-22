@@ -99,8 +99,8 @@ public class DocumentAction extends BaseController {
     @ResponseBody
     @RequestMapping("/ajax/module")
     public List<SystemModule> getModule(SystemModule systemModule, Integer projectId) {
-        if (projectId!=null&&projectId == 0) {
-            return moduleService.findModules(systemModule);
+        if (projectId==null) {
+            return new ArrayList<SystemModule>();
         }
         systemModule.setModuleRoot(projectId);
         systemModule.setModuleType("projectDoc");
@@ -117,8 +117,8 @@ public class DocumentAction extends BaseController {
     @ResponseBody
     @RequestMapping("/ajax/productModule")
     public List<SystemModule> getModule1(SystemModule systemModule, Integer productId) {
-        if (productId!=null&&productId == 0) {
-            return moduleService.findModules(systemModule);
+        if (productId==null) {
+            return new ArrayList<SystemModule>();
         }
         systemModule.setModuleRoot(productId);
         systemModule.setModuleType("productDoc");
@@ -136,7 +136,7 @@ public class DocumentAction extends BaseController {
     @RequestMapping("/ajax/product")
     public List<Product> getProduct(Product product, Integer projectId) {
         if (projectId == null) {
-            return productService.findProductList(null);
+            return new ArrayList<Product>();
         }
         List<ProjectProduct> projectProductList = projectProductService.findProducts(projectId);
 
@@ -161,6 +161,7 @@ public class DocumentAction extends BaseController {
     @ResponseBody
     @RequestMapping("/ajax/moduleByDoclib")
     public List<SystemModule> getModuleByDocLib(Integer libId) {
+        if(libId==null)return new ArrayList<SystemModule>();
         SystemModule module = new SystemModule();
         module.setModuleRoot(libId);
         module.setModuleType("doc");
@@ -177,6 +178,7 @@ public class DocumentAction extends BaseController {
     @ResponseBody
     @RequestMapping("/ajax/moduleByProject")
     public List<SystemModule> getModuleByProject(Integer projectId) {
+        if(projectId==null)return new ArrayList<SystemModule>();
         SystemModule module = new SystemModule();
         module.setModuleType("projectDoc");
         module.setModuleRoot(projectId);
@@ -193,6 +195,7 @@ public class DocumentAction extends BaseController {
     @ResponseBody
     @RequestMapping("/ajax/moduleByProduct")
     public List<SystemModule> getModuleByProduct(Integer productId) {
+        if(productId==null) return new ArrayList<SystemModule>();
         SystemModule module = new SystemModule();
         module.setModuleType("productDoc");
         module.setModuleRoot(productId);

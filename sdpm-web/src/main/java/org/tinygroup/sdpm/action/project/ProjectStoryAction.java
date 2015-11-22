@@ -103,6 +103,8 @@ public class ProjectStoryAction extends BaseController {
             projectStory.setProjectId(projectId);
             projectStory.setStoryId(Integer.parseInt(id[i]));
             ProductStory productStory = storyService.findStory(Integer.parseInt(id[i]));
+            productStory.setStoryStage("3");
+            storyService.updateStory(productStory);
             projectStory.setProductId(productStory.getProductId());
             projectStory.setStoryVersion(productStory.getStoryVersion());
             projectStoryList.add(projectStory);

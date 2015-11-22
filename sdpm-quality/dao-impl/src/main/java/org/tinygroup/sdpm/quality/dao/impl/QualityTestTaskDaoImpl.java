@@ -283,7 +283,9 @@ public class QualityTestTaskDaoImpl extends TinyDslDaoSupport implements Quality
 	}
 
 	public Pager<QualityTestTask> queryPager(int start, int limit, QualityTestTask qualityTestTask, Condition condition, OrderBy... orderArgs) {
-		Select select = MysqlSelect.select(QUALITY_TEST_TASKTABLE.ALL,PROJECTTABLE.PROJECT_NAME.as("projectName")).from(QUALITY_TEST_TASKTABLE).join(Join.leftJoin(PROJECTTABLE,PROJECTTABLE.PROJECT_ID.eq(QUALITY_TEST_TASKTABLE.PROJECT_ID))).where(
+		Select select = MysqlSelect.select(QUALITY_TEST_TASKTABLE.ALL,PROJECTTABLE.PROJECT_NAME.as("projectName"),PROJECT_BUILDTABLE.BUILD_NAME.as("searchBuildName")).from(QUALITY_TEST_TASKTABLE).join(
+				Join.leftJoin(PROJECTTABLE,PROJECTTABLE.PROJECT_ID.eq(QUALITY_TEST_TASKTABLE.PROJECT_ID)),
+				Join.leftJoin(PROJECT_BUILDTABLE,PROJECT_BUILDTABLE.BUILD_ID.eq(QUALITY_TEST_TASKTABLE.BUILD_NAME))).where(
 				and(
 						condition,
 						QUALITY_TEST_TASKTABLE.TESTTASK_TITLE.eq(qualityTestTask.getTesttaskTitle()),

@@ -44,14 +44,10 @@
                     <script type="text/javascript">
                         $("#${sid}").on("change", function () {
                             var pId = $("#${sid}  option:selected").val();
-                            ajaxRead("${sid}", "docProduct", "productId", "productName", "/document/ajax/product?projectId=" + pId, ${doc?.docProduct ? doc.docProduct: 0});
-                        })
-                    </script>
-
-                    <script type="text/javascript">
-                        $("#${sid}").on("change", function () {
-                            var pId = $("#${sid}  option:selected").val();
-                            ajaxRead("${sid}", "docModule", "moduleId", "moduleName", "/document/ajax/module?projectId=" + pId, ${doc?.docModule ? doc.docModule: 0});
+                            if(pId>0){
+                                ajaxRead("${sid}", "docProduct", "productId", "productName", "/document/ajax/product?projectId=" + pId, ${doc?.docProduct?doc.docProduct: 0});
+                                ajaxRead("${sid}", "docModule", "moduleId", "moduleName", "/document/ajax/module?projectId=" + pId, ${doc?.docModule?doc.docModule: 0},"module");
+                            }
                         })
                     </script>
                 #end
@@ -85,8 +81,7 @@
         #@formControlDiv("col-8")
             #@div(divClass="col-6")
                 #@Tselect2F()
-                    #@Tselect2Body("docModule234" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                        <option>/</option>
+                    #@Tselect2Body("docModule" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                     #end
                 #end
             #end
