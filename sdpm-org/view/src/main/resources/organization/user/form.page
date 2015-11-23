@@ -16,11 +16,6 @@
         #@tabHead()
             #include("/organization/common/tab.page")
         #end
-        #@tabBodyCol("ptop-5")
-            #@div(divClass="operationbar")
-            <span>添加用户</span>
-            #end
-        #end
     #end
 #end
 
@@ -49,7 +44,7 @@
                             #@colLabel("col-3")所属部门：#end
                             #@formControlDiv("col-6")
                                 #TzTreeSelect(
-                                    "orgDeptId" dept?.orgDeptId {"class":"input-text",
+                                    "orgDeptId" dept?.orgDeptId {"datatype":"*","class":"input-text",
                                     "data-URL":TINY_CONTEXT_PATH+adminPath+"/org/dept/data?check=n"} )
                             #end
                             #@validateDiv("col-3")#end
