@@ -132,7 +132,7 @@
         #@colLabel()<span class="c-red">*</span>访问控制：#end
         #@skinMinimal("col-8")
 
-            #@Tradioes("acl" productLine?.acl?:0 {"onclick":"setWhite(this.value)"})
+            #@Tradioes("acl" productLine?.acl?:1 {"onclick":"setWhite(this.value)"})
                 #foreach(source:getDict("lineAccessControl"))
                     <div>#@Tradio(source?.value)${source?.text}#end</div>
                 #end
