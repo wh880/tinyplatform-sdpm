@@ -42,8 +42,8 @@ public class ActionAction extends BaseController{
 	@RequestMapping("/list")
 	public String list(SystemAction action,String choice,
 					   @CookieValue(value = "cookieProductId",defaultValue = "0") String cookieProductId,
-			@RequestParam(required = false,defaultValue = "1")int start,
-			@RequestParam(required = false,defaultValue = "10")int pagesize,
+			@RequestParam(required = false,defaultValue = "0")int start,
+			@RequestParam(required = false,defaultValue = "10")int limit,
 			@RequestParam(required = false,defaultValue = "actionDate")String order,
 			@RequestParam(required = false,defaultValue = "asc")String ordertype,Model model,HttpServletRequest request){
 		
@@ -52,7 +52,7 @@ public class ActionAction extends BaseController{
 			action.setActionProduct(cookieProductId);
 		}
 		
-		Pager<SystemAction>  pagerSystemAction = actionService.queryPager(start, pagesize,ActionUtil.getActionDateCondition(choice), action, order, ordertype);
+		Pager<SystemAction>  pagerSystemAction = actionService.queryPager(start, limit,ActionUtil.getActionDateCondition(choice), action, order, ordertype);
 
 		model.addAttribute("systemAction",pagerSystemAction);
 		

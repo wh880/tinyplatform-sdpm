@@ -46,10 +46,10 @@
     $(function(){
         var dataUrl = $("#dynamicTable").attr("data-url");
         if(dataUrl.indexOf("choice")<0){
-            $("#dynamicTable").attr("data-url",dataUrl+"?choice=today");
+            $("#dynamicTable").attr("data-url",dataUrl+"?choice=all");
             $("#dynamicTable").trigger("refresh");
 //            $("a[class=active_btn]").removeClass("active_btn");
-            $("a[value=today]").addClass("active_btn");
+            $("a[value=all]").addClass("active_btn");
         }
         $("a[name=dynamic]").on("click",function(){
             var choice = $(this).attr("value");

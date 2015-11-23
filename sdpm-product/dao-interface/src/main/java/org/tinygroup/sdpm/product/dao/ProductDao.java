@@ -37,7 +37,7 @@ public interface ProductDao extends BaseDao<Product,Integer> {
 
 	List<Product> getProductByUser(String userId,Integer delete);
 
-	List<Product> getProductByUserWithCount(String userId,Integer delete);
+	List<Product> getProductByUserWithCount(String userId,Integer delete,boolean noRole);
 
 	List<Product> queryWithCount(Product product);
 

@@ -25,8 +25,8 @@ import static org.tinygroup.sdpm.project.dao.constant.ProjectTaskTable.PROJECT_T
 import static org.tinygroup.sdpm.project.dao.constant.ProjectTeamTable.PROJECT_TEAMTABLE;
 import static org.tinygroup.sdpm.quality.dao.constant.QualityBugTable.QUALITY_BUGTABLE;
 import static org.tinygroup.tinysqldsl.Select.selectFrom;
-import static org.tinygroup.tinysqldsl.base.Condition.orWithBrackets;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
+import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.or;
 import static org.tinygroup.sdpm.project.dao.constant.ProjectProductTable.PROJECT_PRODUCTTABLE;
 @Repository
 public class StatisticDaoImpl extends TinyDslDaoSupport implements StatisticDao{
@@ -166,8 +166,8 @@ public class StatisticDaoImpl extends TinyDslDaoSupport implements StatisticDao{
 			  PRODUCTTABLE.PRODUCT_NAME.as("productName")).from(PRODUCTTABLE).join(
 			  Join.leftJoin(PROJECT_PRODUCTTABLE, PROJECT_PRODUCTTABLE.PRODUCT_ID.eq(PRODUCTTABLE.PRODUCT_ID)),
 			  Join.leftJoin(PROJECT_TASKTABLE, PROJECT_TASKTABLE.TASK_PROJECT.eq(PROJECT_PRODUCTTABLE.PROJECT_ID))).where(and(PRODUCTTABLE.DELETED.eq(delete),
-			  orWithBrackets(PRODUCTTABLE.ACL.eq(Product.ACl_All),
-					  orWithBrackets(PRODUCTTABLE.PRODUCT_OWNER.eq(userId), PRODUCTTABLE.PRODUCT_DELIVERY_MANAGER.eq(userId), PRODUCTTABLE.PRODUCT_QUALITY_MANAGER.eq(userId), ExistsExpression.existsCondition(SubSelect.subSelect(selectFrom(PROJECT_TEAMTABLE).
+			  or(PRODUCTTABLE.ACL.eq(Product.ACl_All),
+					  or(PRODUCTTABLE.PRODUCT_OWNER.eq(userId), PRODUCTTABLE.PRODUCT_DELIVERY_MANAGER.eq(userId), PRODUCTTABLE.PRODUCT_QUALITY_MANAGER.eq(userId), ExistsExpression.existsCondition(SubSelect.subSelect(selectFrom(PROJECT_TEAMTABLE).
 							  where(and(PRODUCTTABLE.ACL.eq(Product.ACl_TEAM), PROJECT_TEAMTABLE.PRODUCT_ID.eq(PRODUCTTABLE.PRODUCT_ID), PROJECT_TEAMTABLE.TEAM_USER_ID.eq(userId))))))))).
 			  groupBy(PRODUCTTABLE.PRODUCT_ID);
 	  return getDslSession().fetchList(select,ProductProject.class);

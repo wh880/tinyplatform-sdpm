@@ -201,21 +201,21 @@
 
     <menu id="product-dynamic" parent-id="myproduct" name="动态" href="/product/dynamic/content" sort="7"
           isShow="1" permission="Permission">
-        <menu id="today" name="今天" href="today" icon="" sort="8" isShow="1"
+        <menu id="all" name="所有" href="all" icon="" sort="8" isShow="1"
               scope="dymanci-time"/>
-        <menu id="yesterday" name="昨天" href="yesterday" icon="" sort="7" isShow="1"
+        <menu id="today" name="今天" href="today" icon="" sort="7" isShow="1"
               scope="dymanci-time"/>
-        <menu id="beforeYesterday" name="前天" href="beforeYesterday" icon="" sort="6"
+        <menu id="yesterday" name="昨天" href="yesterday" icon="" sort="6" isShow="1"
+              scope="dymanci-time"/>
+        <menu id="beforeYesterday" name="前天" href="beforeYesterday" icon="" sort="5"
               isShow="1" scope="dymanci-time"/>
-        <menu id="thisWeek" name="本周" href="thisWeek" icon="" sort="5" isShow="1"
+        <menu id="thisWeek" name="本周" href="thisWeek" icon="" sort="4" isShow="1"
               scope="dymanci-time"/>
-        <menu id="lastWeek" name="上周" href="lastWeek" icon="" sort="4" isShow="1"
+        <menu id="lastWeek" name="上周" href="lastWeek" icon="" sort="3" isShow="1"
               scope="dymanci-time"/>
-        <menu id="thisMonth" name="本月" href="thisMonth" icon="" sort="3" isShow="1"
+        <menu id="thisMonth" name="本月" href="thisMonth" icon="" sort="2" isShow="1"
               scope="dymanci-time"/>
-        <menu id="lastMonth" name="上月" href="lastMonth" icon="" sort="2" isShow="1"
-              scope="dymanci-time"/>
-        <menu id="all" name="所有" href="all" icon="" sort="1" isShow="1"
+        <menu id="lastMonth" name="上月" href="lastMonth" icon="" sort="1" isShow="1"
               scope="dymanci-time"/>
         <menu id="allproduct" name="所有产品" href="/product/allproduct/addition" sort="6"
               isShow="1" permission="Permission" scope="product-menu" icon="icon-globe"></menu>
