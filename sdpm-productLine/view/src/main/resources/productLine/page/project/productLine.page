@@ -5,11 +5,9 @@
 #@tabBodyCol("ptop-5")
     #@div(divClass="operationbar")
     <span class="f">
-
 ##            #foreach(m:menuManager.getScopeMenus("productLineView"))
 ##                <a title="${m.name}" class="ml-5" href="${TINY_CONTEXT_PATH +adminPath}${m.href}">${m.name}</a>
 ##            #end
-
     #foreach(m:menuManager.getScopeMenus("productLineView"))
         <a title="${m.name}"  href="${TINY_CONTEXT_PATH +adminPath}${m.href}" class="ml-5 ${status==mFor.index?"active_btn":""}">${m.name}</a>
     #end
@@ -22,9 +20,7 @@
 ##    <a href="${TINY_CONTEXT_PATH+adminPath}/productLine/to?status=4" class="${status=="4"?"active_btn":""}">由我交付</a>
     </span>
     <span class="r">
-
 				<!--导入导出修改-->
-
 ##        #@aModal("#myModal" "导入" "600" "65" "btn-class"
 ##            "/productLine/page/tabledemo/product-import.pagelet")#buttonIcon(iconClass="icon-download-alt")导入#end
 ##
@@ -43,7 +39,6 @@
 ##
 ##            #end
 ##        #end &nbsp;
-
         #set(m=menuManager.getMenu("newproduct"))
         #if(m)
             #set(url=eval(m.href))
@@ -56,28 +51,20 @@
         #end
     </span>
         #div(divClass="clearfix")
-    #*   #include("/productLine/page/event/mulsearch.page")*#
     #end
-
     #@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
         #@toggleLeft({"class":"aclass"})
             #@settoggleLeftTitle()
             产品线
             #end
-
             #@settoggleLeftBody("treeLeftbox")
                 #@zTreeList(call("link",adminPath+"/productLine/treeData"))
                     #setzTreeValMap({"id":"treeId","name":"pName","pid":"pId"})
                     #zTreeSetLinkUrl(TINY_CONTEXT_PATH+adminPath+"/productLine/totree" )
                 #end
             #end
-
-
         #end
-
-
         #@toggleRight()
-
             #if(type=="product")
                 #include("/productLine/page/tabledemo/productlist.page")
             #elseif(type=="build")
@@ -85,12 +72,8 @@
             #else
                 #include("/productLine/page/tabledemo/list.page")
             #end
-
-
-
         #end
     #end
-
 #end
 
 

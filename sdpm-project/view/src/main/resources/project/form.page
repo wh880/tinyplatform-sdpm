@@ -42,7 +42,7 @@
 #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/project/save" "post" {"class":"test"})
 <div style="width:100%;float:left" class="pageleftpart">
     <div class="infoContent">
-        <p class="titleName">添加</p>
+        <p class="titleName">添加项目</p>
         <input type="hidden" name="projectOpenedDate" value="${formatDate(now()," yyyy-MM-dd")}"/>
         <input type="hidden" name="projectOpenedBy" value="${UserUtils.getUser().orgUserId}"/>
         #@elementItem()
@@ -146,11 +146,18 @@
         #end
         #@elementItem()
             #@sdpmItem("访问控制")
-                #@formControlDiv("skin-minimal col-10")
-                    #foreach(acl : getDict("projectAcl"))
-                        #@tinyRadio("projectAcl" acl.value "")${acl.text}#end
+                #@skinMinimal("col-10")
+                    #@Tradioes("projectAcl" "1" {"onclick":"setWhite(this.value)"})
+                        #foreach(source:getDict("projectAcl"))
+                            <div>#@Tradio(source?.value)${source?.text}#end</div>
+                        #end
                     #end
                 #end
+##                #@formControlDiv("skin-minimal col-10")
+##                    #foreach(acl : getDict("projectAcl"))
+##                        #@tinyRadio("projectAcl" acl.value "")${acl.text}#end
+##                    #end
+##                #end
             #end
         #end
         #@elementItem(elementId="whitelistBox" eleItemClass="hidden hidden_namesty")

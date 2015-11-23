@@ -69,27 +69,30 @@ public class UserAction extends BaseController {
 
     /**
      * 修改密码表单
+     *
      * @return
      */
     @RequestMapping("/passwordForm")
     public String passwordForm() {
         return "organization/user/updatePassword";
     }
+
     /**
      * 修改密码表单保存
+     *
      * @return
      */
     @RequestMapping("/passwordSave")
-    public String passwordSave(String oldPassword,String newPassword,Model model) {
+    public String passwordSave(String oldPassword, String newPassword, Model model) {
         OrgUser user = UserUtils.getUser();
-        if (userService.validatePassword(oldPassword,user.getOrgUserPassword())){
+        if (userService.validatePassword(oldPassword, user.getOrgUserPassword())) {
             OrgUser newUser = new OrgUser();
             newUser.setOrgUserId(user.getOrgUserId());
             newUser.setOrgUserPassword(newPassword);
             userService.updateUser(newUser);
-            addMessage(model,"修改密码成功！");
-        }else {
-            addMessage(model,"修改密码失败，原始密码错误！");
+            addMessage(model, "修改密码成功！");
+        } else {
+            addMessage(model, "修改密码失败，原始密码错误！");
         }
         return "organization/user/updatePassword";
     }
@@ -101,7 +104,7 @@ public class UserAction extends BaseController {
      * @param model
      * @return
      */
-    @RequiresPermissions(value = {"org-user-edit", "organizationAddUser", "org-user-editprofile"}, logical = Logical.OR)
+    @RequiresPermissions(value = {"org-user-edit", "org-user-editprofile"}, logical = Logical.OR)
     @RequestMapping("/form")
     public String form(String id, Model model) {
         if (id != null) {
@@ -111,6 +114,19 @@ public class UserAction extends BaseController {
             model.addAttribute("dept", dept);
         }
         return "organization/user/form";
+    }
+
+    /**
+     * 用户新增页面显示
+     *
+     * @param model
+     * @return
+     */
+    @RequiresPermissions(value = "organizationAddUser", logical = Logical.OR)
+    @RequestMapping("/add")
+    public String add(Model model) {
+        model.addAttribute("roleList",  UserUtils.getAllRoleList());
+        return "organization/user/userAdd";
     }
 
     /**
@@ -216,10 +232,9 @@ public class UserAction extends BaseController {
      */
     @ResponseBody
     @RequiresPermissions("org-user-delete")
-    @RequestMapping(value = "/delete",method = RequestMethod.POST)
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public Map delete(String id, String password) {
-        OrgUser orgUser = userService.findUser(id);
-        String userPassword = orgUser.getOrgUserPassword();
+        String userPassword = UserUtils.getUser().getOrgUserPassword();
         if (userService.validatePassword(password, userPassword)) {
             userService.deleteUser(id);
             LogUtil.logWithComment(LogUtil.LogOperateObject.USER
@@ -231,9 +246,9 @@ public class UserAction extends BaseController {
                     , null
                     , null
                     , null);
-            return resultMap(true,"验证成功，已经删除。");
+            return resultMap(true, "验证成功，已经删除。");
         }
-        return resultMap(false,"密码错误，验证失败。");
+        return resultMap(false, "密码错误，验证失败。");
     }
 
     /**
