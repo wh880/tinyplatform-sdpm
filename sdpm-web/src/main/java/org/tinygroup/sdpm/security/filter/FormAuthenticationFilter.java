@@ -68,6 +68,10 @@ public class FormAuthenticationFilter extends org.apache.shiro.web.filter.authc.
         }
         request.setAttribute(getFailureKeyAttribute(), className);
         request.setAttribute(getMessageParam(), message);
+        if (token != null) {
+            UsernamePasswordToken usernamePasswordToken = (UsernamePasswordToken) token;
+            request.setAttribute("username", usernamePasswordToken.getUsername());
+        }
         return true;
     }
 
