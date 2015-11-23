@@ -48,7 +48,7 @@ public class HomeAction {
     @RequestMapping(value = {"a", "a/home"})
     public String index(Model model) {
         //首页产品统计展示
-        List<Product> products = productService.getProductByUserWithCount(UserUtils.getUserId(), 0);
+        List<Product> products = productService.getProductByUserWithCount(UserUtils.getUserId(), 0,true);
 
         Map<String,Map<String,String>> productSum = new HashMap<String, Map<String, String>>();
         for(Product product:products){

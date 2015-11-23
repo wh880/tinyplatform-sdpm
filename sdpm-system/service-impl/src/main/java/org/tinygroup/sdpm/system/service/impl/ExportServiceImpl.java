@@ -102,7 +102,7 @@ public class ExportServiceImpl implements ExportService{
         Calendar today = Calendar.getInstance();
         FileObject fileObject = docTemplateResolver.getDocTemplate(type);
         response.reset();
-        response.setContentType("application/x-msdownload");
+        response.setContentType("application/msword");
         response.setHeader("Content-Disposition", "attachment; filename="
                 + (toUTF8(name)+today.get(Calendar.YEAR)+today.get(Calendar.MONTH)+today.get(Calendar.DAY_OF_MONTH)+today.get(Calendar.HOUR)+today.get(Calendar.MINUTE)+".doc"));
         OutputStream out = response.getOutputStream();

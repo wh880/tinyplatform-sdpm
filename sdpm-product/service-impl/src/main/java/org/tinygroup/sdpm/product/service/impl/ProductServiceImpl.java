@@ -71,8 +71,8 @@ public class ProductServiceImpl implements ProductService {
         return productManager.getProductByUser(userId,delete);
     }
 
-    public List<Product> getProductByUserWithCount(String userId,Integer delete) {
-        return productManager.getProductByUserWithCount(userId,delete);
+    public List<Product> getProductByUserWithCount(String userId,Integer delete,boolean noRole) {
+        return productManager.getProductByUserWithCount(userId,delete,noRole);
     }
 
     public List<Product> getProductByUserAndProductLineWithCount(String userId, Integer productLineId,Integer delete) {

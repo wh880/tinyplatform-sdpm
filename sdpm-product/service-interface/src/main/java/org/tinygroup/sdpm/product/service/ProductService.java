@@ -96,7 +96,7 @@ public interface ProductService {
 
     List<Product> getProductByUser(String userId,Integer delete);
 
-    List<Product> getProductByUserWithCount(String userId,Integer delete);
+    List<Product> getProductByUserWithCount(String userId,Integer delete,boolean noRole);
 
     List<Product> getProductByUserAndProductLineWithCount(String userId,Integer productLineId,Integer delete);
 
