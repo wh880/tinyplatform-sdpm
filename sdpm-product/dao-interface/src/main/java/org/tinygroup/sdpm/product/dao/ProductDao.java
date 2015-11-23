@@ -35,11 +35,11 @@ public interface ProductDao extends BaseDao<Product,Integer> {
 	
 	List<String> getProductNameByLineId(Integer productLineId);
 
-	List<Product> getProductByUser(String userId);
+	List<Product> getProductByUser(String userId,Integer delete);
 
-	List<Product> getProductByUserWithCount(String userId);
+	List<Product> getProductByUserWithCount(String userId,Integer delete);
 
 	List<Product> queryWithCount(Product product);
 
-	List<Product> getProductByUserAndProductLineWithCount(String userId,Integer productLineId);
+	List<Product> getProductByUserAndProductLineWithCount(String userId,Integer productLineId,Integer delete);
 }

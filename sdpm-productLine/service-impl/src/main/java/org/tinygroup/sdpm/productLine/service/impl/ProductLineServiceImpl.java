@@ -58,9 +58,9 @@ public class ProductLineServiceImpl implements ProductLineService {
 		return productLineManager.getProductLineByIds(ids);
 	}
 
-	public List<ProductLine> getUserProductLine(String userId) {
+	public List<ProductLine> getUserProductLine(String userId ) {
 		List<ProductLine> lines = productLineManager.getUserProductLine(userId);
-		List<Integer> idList = productManager.getTeamRoleProductLineIds(userId);
+		List<Integer> idList = productManager.getTeamRoleProductLineIds(userId,0);
 		Integer[] ids = new Integer[idList.size()];
 		List<ProductLine> productLines = productLineManager.getProductLineByIds(idList.toArray(ids));
 		for(ProductLine p : productLines){

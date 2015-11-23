@@ -97,26 +97,21 @@ public class ProductAction extends BaseController {
         if ("0".equals(cookieProductLineId)) {
             ProductUtils.prepareForFirst(response);
         }
-        return "redirect:" + adminPath + "/product/story?choose=1" + (request.getQueryString() == null ? "" : ("&" + request.getQueryString()));
+        return "redirect:" + adminPath + "/product/story?choose=1" + (request.getQueryString() == null? "" : ("&" + request.getQueryString()));
     }
 
 
     @RequestMapping("/save")
-    public String save(@CookieValue(value = "cookieProductLineId") String cookieProductLineId, Product product, SystemAction systemAction, HttpServletRequest request) {
-        String productLine = cookieProductLineId;
-        if (product.getProductLineId() != null && product.getProductLineId() != 0) {
-            productLine = String.valueOf(product.getProductLineId());
-        }
-        product.setProductLineId(Integer.parseInt(productLine));
+    public String save(Product product, SystemAction systemAction, HttpServletRequest request) {
+
+
         product.setProductCreatedBy(UserUtils.getUserId());
         product.setProductCreatedDate(new Date());
         product.setProductStatus("0");
 
         product = productService.addProduct(product);
         ProductUtils.removeProductList();
-        ProductUtils.removeProductList(productLine);
         ProductUtils.removeAllProductListByUser();
-        ProductUtils.removeProductListByProductLineUser(productLine);
         LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCT,
                 LogUtil.LogAction.OPENED,
                 String.valueOf(product.getProductId()),
@@ -274,7 +269,7 @@ public class ProductAction extends BaseController {
 
 //        product.setDeleted(0);
         Map<String, List<Product>> productMap = new HashMap<String, List<Product>>();
-        List<Product> products = productService.getProductByUserWithCount(UserUtils.getUserId());
+        List<Product> products = productService.getProductByUserWithCount(UserUtils.getUserId(),0);
         List<Integer> idList = new ArrayList<Integer>();
         for (Product product1 : products) {
             idList.add(product1.getProductLineId());

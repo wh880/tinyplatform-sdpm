@@ -99,12 +99,12 @@ public interface ProductManager {
      */
     List<String> getProductNameByLineId(Integer productLineId);
 
-    List<Product> getProductByUser(String userId);
+    List<Product> getProductByUser(String userId,Integer delete);
 
-    List<Product> getProductByUserWithCount(String userId);
+    List<Product> getProductByUserWithCount(String userId,Integer delete);
 
-    List<Product> getProductByUserAndProductLineWithCount(String userId,Integer productLineId);
+    List<Product> getProductByUserAndProductLineWithCount(String userId,Integer productLineId,Integer delete);
 
-    List<Integer> getTeamRoleProductLineIds(String userId);
+    List<Integer> getTeamRoleProductLineIds(String userId,Integer delete);
 
 }

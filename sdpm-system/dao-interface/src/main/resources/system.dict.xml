@@ -49,7 +49,7 @@
             <dictItem key="user" value="用户" sort="1"/>
             <dictItem key="story" value="需求" sort="2"/>
             <dictItem key="task" value="任务" sort="3"/>
-            <dictItem key="productplan" value="计划" sort="4"/>
+            <dictItem key="plan" value="计划" sort="4"/>
             <dictItem key="release" value="发布" sort="5"/>
             <dictItem key="project" value="项目" sort="6"/>
             <dictItem key="product" value="产品" sort="7"/>

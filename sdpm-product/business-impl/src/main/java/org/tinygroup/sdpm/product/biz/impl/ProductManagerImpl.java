@@ -122,10 +122,10 @@ public class ProductManagerImpl implements ProductManager{
 		return productDao.getProductNameByLineId(productLineId);
 	}
 
-	public List<Product> getProductByUser(String userId) {
-		List<Product> productList = productDao.getProductByUser(userId);
+	public List<Product> getProductByUser(String userId,Integer delete) {
+		List<Product> productList = productDao.getProductByUser(userId,delete);
 		Product product = new Product();
-		product.setDeleted(0);
+		product.setDeleted(delete);
 		product.setAcl(product.ACl_TEAM_AND_ROLE);
 		List<Product> products = productDao.query(product);
 		OrgRoleUser role = new OrgRoleUser();
@@ -134,10 +134,10 @@ public class ProductManagerImpl implements ProductManager{
 		return mergeUserProducts(productList,products,orgRoles);
 	}
 
-	public List<Product> getProductByUserWithCount(String userId) {
-		List<Product> productList = productDao.getProductByUserWithCount(userId);
+	public List<Product> getProductByUserWithCount(String userId,Integer delete) {
+		List<Product> productList = productDao.getProductByUserWithCount(userId,delete);
 		Product product = new Product();
-		product.setDeleted(0);
+		product.setDeleted(delete);
 		product.setAcl(product.ACl_TEAM_AND_ROLE);
 		List<Product> products = productDao.queryWithCount(product);
 		OrgRoleUser role = new OrgRoleUser();
@@ -146,13 +146,13 @@ public class ProductManagerImpl implements ProductManager{
 		return mergeUserProducts(productList,products,orgRoles);
 	}
 
-	public List<Product> getProductByUserAndProductLineWithCount(String userId, Integer productLineId) {
-		return productDao.getProductByUserAndProductLineWithCount(userId,productLineId);
+	public List<Product> getProductByUserAndProductLineWithCount(String userId, Integer productLineId,Integer delete) {
+		return productDao.getProductByUserAndProductLineWithCount(userId,productLineId,delete);
 	}
 
-	public List<Integer> getTeamRoleProductLineIds(String userId){
+	public List<Integer> getTeamRoleProductLineIds(String userId,Integer delete){
 		List<Integer> pIds = new ArrayList<Integer>();
-		for(Product product : getProductByUser(userId)){
+		for(Product product : getProductByUser(userId,delete)){
 			pIds.add(product.getProductLineId());
 		}
 		return pIds;

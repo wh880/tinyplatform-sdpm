@@ -48,13 +48,10 @@ public class HomeAction {
     @RequestMapping(value = {"a", "a/home"})
     public String index(Model model) {
         //首页产品统计展示
-        List<Product> products = productService.getProductByUser(UserUtils.getUserId());
-        List<Product> countProduct = new ArrayList<Product>();
-        for(Product product1: products){
-            countProduct.add(productService.findProduct(product1.getProductId()));
-        }
+        List<Product> products = productService.getProductByUserWithCount(UserUtils.getUserId(), 0);
+
         Map<String,Map<String,String>> productSum = new HashMap<String, Map<String, String>>();
-        for(Product product:countProduct){
+        for(Product product:products){
             Map<String,String> sumMap = new HashMap<String, String>();
             sumMap.put("activeSum",product.getActiveSum().toString());
             sumMap.put("assignSum",product.getAssignSum().toString());
@@ -67,7 +64,7 @@ public class HomeAction {
             sumMap.put("resolvedSum",product.getResolveSum().toString());
             productSum.put(product.getProductId().toString(),sumMap);
         }
-        model.addAttribute("productList",countProduct);
+        model.addAttribute("productList",products);
         model.addAttribute("productSumMap",productSum);
         //首页指派给我的任务
         ProjectTask task = new ProjectTask();

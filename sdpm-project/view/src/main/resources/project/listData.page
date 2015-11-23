@@ -39,17 +39,20 @@
         });
     }
     $(function () {
-        $('.projectline').projectLine();
+        $('.projectline').each(function(){
+            if($(this).attr("values"))
+                $(this).projectLine()
+            else
+                $(this).html("暂无数据")
+        })
     });
 </script>
 #setTinyItemCount(projectPager.totalCount)
 #foreach(p:projectPager.records)
     #@tr()
         #@td()<input type="checkbox" value="${p.projectId}" name="idCheck">#end
-        #@td()<a
-                href="${TINY_CONTEXT_PATH+adminPath}/project/view?projectId=${p.projectId}">${p.projectId}</a>#end
-        #@td()<a
-                href="${TINY_CONTEXT_PATH+adminPath}/project/view?projectId=${p.projectId}">${p.projectName}</a>#end
+        #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/project/view?projectId=${p.projectId}">${p.projectId}</a>#end
+        #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/project/view?projectId=${p.projectId}">${p.projectName}</a>#end
         #@td()${p.projectCode}#end
         #@td()
             #if(p.projectEnd)

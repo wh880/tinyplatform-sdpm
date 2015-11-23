@@ -32,8 +32,6 @@
 
 
 
-
-
 #@tinyForm(
     "thisform" TINY_CONTEXT_PATH +adminPath+"/product/story/save" "" {"class":"test","enctype":"multipart/form-data"})
 
@@ -50,6 +48,7 @@
                     "data-URL":call("link",adminPath+"/productLine/userProductTree")})
                     <script>
                         $(function(){
+                            var first = true;
                             var mUrl =  $("#modelA").attr("href");
                             $("#${sid}").on("setValue",function(o,treeNode){
                                 var pId = treeNode.id;
@@ -61,7 +60,12 @@
                                         url = url.substring(0,url.indexOf("=")+1);
                                     }
                                     $("#modelA").attr("href",mUrl+pId);
-                                    $("input[name=storyTitle]").blur();
+                                    if(first) {
+                                        first=false;
+                                    }else{
+                                        $("input[name=storyTitle]").blur();
+                                    }
+
                                 }
                             });
                         });

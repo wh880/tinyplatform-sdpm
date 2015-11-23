@@ -17,6 +17,7 @@ import org.tinygroup.sdpm.project.service.inter.ProjectProductService;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.sdpm.statistic.dao.pojo.*;
 import org.tinygroup.sdpm.statistic.service.inter.StatisticService;
+import org.tinygroup.sdpm.util.UserUtils;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -46,11 +47,11 @@ public class StatisticAction extends BaseController {
     public String productAll(Model model, @PathVariable(value = "type") String type , Integer deleted,Integer overdue,Date startDate,Date endDate,Integer workHours,Integer roleId) {
         model.addAttribute("order", "1");
         if ("product".equals(type)) {
-            Product product = new Product();
+            Integer delete = 0;
             if(deleted!=null&&deleted==1){
-                product.setDeleted(deleted);
+                delete=deleted;
             }
-            List<Product> products = productService.findProductList(product);
+            List<Product> products = productService.getProductByUser(UserUtils.getUserId(),delete);
             Map<Product, List<ProductPlan>> map = new HashMap<Product, List<ProductPlan>>();
             for (int i = 0, n = products.size(); i < n; i++) {
                 ProductPlan plan = new ProductPlan();
@@ -110,7 +111,7 @@ public class StatisticAction extends BaseController {
 //            map.put(products.get(i),projectProducts);
 //        }
 //        model.addAttribute("productmap",map);
-        List<ProductProject> productProjects = statisticService.productProjects(new ProductProject(),deleted!=null&&deleted==1?true:false);
+        List<ProductProject> productProjects = statisticService.productProjects(new ProductProject(),deleted!=null&&deleted==1?true:false,UserUtils.getUserId());
         model.addAttribute("proPros", productProjects);
         model.addAttribute("order", "2");
         return "/statistic/page/product.page";

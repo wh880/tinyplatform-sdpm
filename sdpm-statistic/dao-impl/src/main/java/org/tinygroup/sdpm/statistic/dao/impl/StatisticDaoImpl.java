@@ -2,11 +2,14 @@ package org.tinygroup.sdpm.statistic.dao.impl;
 
 import org.springframework.stereotype.Repository;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
+import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.statistic.dao.StatisticDao;
 import org.tinygroup.sdpm.statistic.dao.pojo.*;
 import org.tinygroup.tinysqldsl.Select;
 import org.tinygroup.tinysqldsl.base.Condition;
+import org.tinygroup.tinysqldsl.expression.relational.ExistsExpression;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
+import org.tinygroup.tinysqldsl.formitem.SubSelect;
 import org.tinygroup.tinysqldsl.select.Join;
 import org.tinygroup.tinysqldsl.selectitem.FragmentSelectItemSql;
 
@@ -19,7 +22,10 @@ import static org.tinygroup.sdpm.product.dao.constant.ProductStoryTable.PRODUCT_
 import static org.tinygroup.sdpm.product.dao.constant.ProductTable.PRODUCTTABLE;
 import static org.tinygroup.sdpm.project.dao.constant.ProjectTable.PROJECTTABLE;
 import static org.tinygroup.sdpm.project.dao.constant.ProjectTaskTable.PROJECT_TASKTABLE;
+import static org.tinygroup.sdpm.project.dao.constant.ProjectTeamTable.PROJECT_TEAMTABLE;
 import static org.tinygroup.sdpm.quality.dao.constant.QualityBugTable.QUALITY_BUGTABLE;
+import static org.tinygroup.tinysqldsl.Select.selectFrom;
+import static org.tinygroup.tinysqldsl.base.Condition.orWithBrackets;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 import static org.tinygroup.sdpm.project.dao.constant.ProjectProductTable.PROJECT_PRODUCTTABLE;
 @Repository
@@ -147,10 +153,10 @@ public class StatisticDaoImpl extends TinyDslDaoSupport implements StatisticDao{
 	 * @param productProject
 	 * @return
      */
-   public List<ProductProject> productProjects(ProductProject productProject,boolean deleted){
-	   Condition condition = null;
+   public List<ProductProject> productProjects(ProductProject productProject,boolean deleted,String userId){
+	   Integer delete = 0;
 	   if(deleted){
-		   condition = PRODUCTTABLE.DELETED.eq(1);
+		   delete=1;
 	   }
 	  if(productProject==null){
 		  productProject = new ProductProject();
@@ -159,7 +165,10 @@ public class StatisticDaoImpl extends TinyDslDaoSupport implements StatisticDao{
 					  "count(distinct(project_product.project_id)) As projectNum ,sum(project_task.task_consumed) As consumedSum"),
 			  PRODUCTTABLE.PRODUCT_NAME.as("productName")).from(PRODUCTTABLE).join(
 			  Join.leftJoin(PROJECT_PRODUCTTABLE, PROJECT_PRODUCTTABLE.PRODUCT_ID.eq(PRODUCTTABLE.PRODUCT_ID)),
-			  Join.leftJoin(PROJECT_TASKTABLE, PROJECT_TASKTABLE.TASK_PROJECT.eq(PROJECT_PRODUCTTABLE.PROJECT_ID))).where(condition).
+			  Join.leftJoin(PROJECT_TASKTABLE, PROJECT_TASKTABLE.TASK_PROJECT.eq(PROJECT_PRODUCTTABLE.PROJECT_ID))).where(and(PRODUCTTABLE.DELETED.eq(delete),
+			  orWithBrackets(PRODUCTTABLE.ACL.eq(Product.ACl_All),
+					  orWithBrackets(PRODUCTTABLE.PRODUCT_OWNER.eq(userId), PRODUCTTABLE.PRODUCT_DELIVERY_MANAGER.eq(userId), PRODUCTTABLE.PRODUCT_QUALITY_MANAGER.eq(userId), ExistsExpression.existsCondition(SubSelect.subSelect(selectFrom(PROJECT_TEAMTABLE).
+							  where(and(PRODUCTTABLE.ACL.eq(Product.ACl_TEAM), PROJECT_TEAMTABLE.PRODUCT_ID.eq(PRODUCTTABLE.PRODUCT_ID), PROJECT_TEAMTABLE.TEAM_USER_ID.eq(userId))))))))).
 			  groupBy(PRODUCTTABLE.PRODUCT_ID);
 	  return getDslSession().fetchList(select,ProductProject.class);
   }
