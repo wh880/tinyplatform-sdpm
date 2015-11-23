@@ -254,7 +254,7 @@ public class ProductLineAction extends BaseController {
         List<ProductLine> list = ProductUtils.getProductLineList();
         String query = request.getQueryString();
         if(StringUtil.isBlank(query)||!query.contains("status")){
-            model.addAttribute("status", 2);
+            model.addAttribute("status", 1);
         }
         return "/productLine/page/project/productLine.page";
     }
@@ -288,7 +288,7 @@ public class ProductLineAction extends BaseController {
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
         Product product = new Product();
         product.setDeleted(FieldUtil.DELETE_NO);
-        List<Product> productLists = productService.getProductByUser(UserUtils.getUserId());
+        List<Product> productLists = productService.getProductByUser(UserUtils.getUserId(),0);
         ProductLine productLine = new ProductLine();
         productLine.setDeleted(FieldUtil.DELETE_NO);
         List<ProductLine> productLines = productLineService.findProductLineList(productLine,null,null);
@@ -425,7 +425,7 @@ public class ProductLineAction extends BaseController {
     @ResponseBody
     @RequestMapping(value = "/userProductTree")
     public List<Map<String,Object>> getUserProductTree(){
-        List<Product> products = productService.getProductByUser(UserUtils.getUserId());
+        List<Product> products = productService.getProductByUser(UserUtils.getUserId(),0);
         List<Map<String, Object>> mapList = Lists.newArrayList();
         List<Integer> productLineIds = new ArrayList<Integer>();
         for (Product p : products) {
@@ -459,7 +459,7 @@ public class ProductLineAction extends BaseController {
     }
     @RequestMapping(value = "/productLineProducts")
     public String productLineProducts(Integer productLineId,Model model){
-        List<Product> products = productService.getProductByUserAndProductLineWithCount(UserUtils.getUserId(),productLineId);
+        List<Product> products = productService.getProductByUserAndProductLineWithCount(UserUtils.getUserId(),productLineId,0);
         model.addAttribute("productList",products);
         return "/productLine/data/productListData.pagelet";
     }

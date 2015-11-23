@@ -269,7 +269,7 @@ public class ProductAction extends BaseController {
 
 //        product.setDeleted(0);
         Map<String, List<Product>> productMap = new HashMap<String, List<Product>>();
-        List<Product> products = productService.getProductByUserWithCount(UserUtils.getUserId());
+        List<Product> products = productService.getProductByUserWithCount(UserUtils.getUserId(),0);
         List<Integer> idList = new ArrayList<Integer>();
         for (Product product1 : products) {
             idList.add(product1.getProductLineId());

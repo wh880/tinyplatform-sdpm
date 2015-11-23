@@ -33,8 +33,8 @@ public class StatisticServiceImpl implements StatisticService{
 		return statisticManager.findBugCall(qualityBugCall);
 	}
 
-	public List<ProductProject> productProjects(ProductProject productProject,boolean deleted) {
-		return statisticManager.productProjects(productProject,deleted);
+	public List<ProductProject> productProjects(ProductProject productProject,boolean deleted,String userId) {
+		return statisticManager.productProjects(productProject,deleted,userId);
 	}
 
 }

@@ -67,21 +67,21 @@ public class ProductServiceImpl implements ProductService {
         return productManager.getProductNameByLineId(productLineId);
     }
 
-    public List<Product> getProductByUser(String userId) {
-        return productManager.getProductByUser(userId);
+    public List<Product> getProductByUser(String userId,Integer delete) {
+        return productManager.getProductByUser(userId,delete);
     }
 
-    public List<Product> getProductByUserWithCount(String userId) {
-        return productManager.getProductByUserWithCount(userId);
+    public List<Product> getProductByUserWithCount(String userId,Integer delete) {
+        return productManager.getProductByUserWithCount(userId,delete);
     }
 
-    public List<Product> getProductByUserAndProductLineWithCount(String userId, Integer productLineId) {
-        return productManager.getProductByUserAndProductLineWithCount(userId,productLineId);
+    public List<Product> getProductByUserAndProductLineWithCount(String userId, Integer productLineId,Integer delete) {
+        return productManager.getProductByUserAndProductLineWithCount(userId,productLineId,delete);
     }
 
 
-    public Integer[] getTeamRoleProductLineIds(String userId) {
-        List<Integer> ids = productManager.getTeamRoleProductLineIds(userId);
+    public Integer[] getTeamRoleProductLineIds(String userId,Integer delete) {
+        List<Integer> ids = productManager.getTeamRoleProductLineIds(userId,delete);
         Integer[] Ids = new Integer[ids.size()];
         return ids.toArray(Ids);
     }

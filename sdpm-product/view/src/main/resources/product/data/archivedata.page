@@ -7,9 +7,9 @@
 #@tr()
 
 	#@td()<input type="checkbox" value="${l?.docId}" name="idCheck">#end
-	#@td()<a href="${TINY_CONTEXT_PATH +adminPath}/document/doc/view?docid=${l?.docId}&type=1">${l?.docId}#end
+	#@td()<a class="viewJump" value="${l?.docLibId}" href="${TINY_CONTEXT_PATH +adminPath}/document/doc/view?docid=${l?.docId}&type=1">${l?.docId}#end
 	#@td()${l?.moduleName}</a>#end
-	#@td()<a href="${TINY_CONTEXT_PATH +adminPath}/document/doc/view?docid=${l?.docId}&type=1">${l?.docTitle}</a>#end
+	#@td()<a class="viewJump" value="${l?.docLibId}" href="${TINY_CONTEXT_PATH +adminPath}/document/doc/view?docid=${l?.docId}&type=1">${l?.docTitle}</a>#end
 	#@td()  ${l?.docAddedBy?UserUtils.getUserById(l?.docAddedBy).orgUserRealName:""}
 	#end
 	#@td()${l?.docAddedDate?formatDate(l?.docAddedDate,'yyyy年MM月dd日'):""}#end
@@ -29,7 +29,14 @@
 	#end
 #end
 #end
-
+<script>
+	$(function(){
+		$(".viewJump").on("click",function(){
+			var libId = $(this).attr("value");
+			$.cookie("documentLibId",libId,{path:"/"});
+		});
+	})
+</script>
 #@dialog("myModal")
 	#@dialogHeader()#end
 	#@dialogBody()<p>对话框内容…</p>#end

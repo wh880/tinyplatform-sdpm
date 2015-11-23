@@ -255,7 +255,7 @@ public class ProductLineDaoImpl extends TinyDslDaoSupport implements ProductLine
 		Select select = selectFrom(PRODUCT_LINETABLE).where(
 				and(PRODUCT_LINETABLE.DELETED.eq(0),
 						orWithBrackets(PRODUCT_LINETABLE.ACL.eq(ProductLine.ACl_All),
-								orWithBrackets(PRODUCT_LINETABLE.PRODUCT_LINE_OWNER.eq(userId), PRODUCT_LINETABLE.PRODUCT_LINE_DELIVERY_MANAGER.eq(userId), PRODUCT_LINETABLE.PRODUCT_LINE_QUALITY_MANAGER.eq(userId)))));
+								orWithBrackets(PRODUCT_LINETABLE.PRODUCT_LINE_CREATED_BY.eq(userId),PRODUCT_LINETABLE.PRODUCT_LINE_OWNER.eq(userId), PRODUCT_LINETABLE.PRODUCT_LINE_DELIVERY_MANAGER.eq(userId), PRODUCT_LINETABLE.PRODUCT_LINE_QUALITY_MANAGER.eq(userId)))));
 		return getDslSession().fetchList(select,ProductLine.class);
 	}
 

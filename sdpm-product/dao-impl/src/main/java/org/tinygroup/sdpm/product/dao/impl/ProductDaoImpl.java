@@ -412,20 +412,20 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
         return getDslSession().fetchList(select, String.class);
     }
 
-    public List<Product> getProductByUser(String userId) {
+    public List<Product> getProductByUser(String userId,Integer delete) {
         Select select = selectFrom(PRODUCTTABLE).where(
-                and(PRODUCTTABLE.DELETED.eq(0),
+                and(PRODUCTTABLE.DELETED.eq(delete),
                         orWithBrackets(PRODUCTTABLE.ACL.eq(Product.ACl_All),
-                                orWithBrackets(PRODUCTTABLE.PRODUCT_OWNER.eq(userId),PRODUCTTABLE.PRODUCT_DELIVERY_MANAGER.eq(userId),PRODUCTTABLE.PRODUCT_QUALITY_MANAGER.eq(userId),ExistsExpression.existsCondition(SubSelect.subSelect(selectFrom(PROJECT_TEAMTABLE).
-                where(and(PRODUCTTABLE.ACL.eq(Product.ACl_TEAM), PROJECT_TEAMTABLE.PRODUCT_ID.eq(PRODUCTTABLE.PRODUCT_ID), PROJECT_TEAMTABLE.TEAM_USER_ID.eq(userId)))))))));
+                                orWithBrackets(PRODUCTTABLE.PRODUCT_CREATED_BY.eq(userId),PRODUCTTABLE.PRODUCT_OWNER.eq(userId),PRODUCTTABLE.PRODUCT_DELIVERY_MANAGER.eq(userId),PRODUCTTABLE.PRODUCT_QUALITY_MANAGER.eq(userId),ExistsExpression.existsCondition(SubSelect.subSelect(selectFrom(PROJECT_TEAMTABLE).
+                                        where(and(PRODUCTTABLE.ACL.eq(Product.ACl_TEAM), PROJECT_TEAMTABLE.PRODUCT_ID.eq(PRODUCTTABLE.PRODUCT_ID), PROJECT_TEAMTABLE.TEAM_USER_ID.eq(userId)))))))));
         return getDslSession().fetchList(select, Product.class);
     }
 
-    public List<Product> getProductByUserWithCount(String userId) {
+    public List<Product> getProductByUserWithCount(String userId,Integer delete) {
         Select select = getComplexSelect().where(
-                and(PRODUCTTABLE.DELETED.eq(0),
+                and(PRODUCTTABLE.DELETED.eq(delete),
                         orWithBrackets(PRODUCTTABLE.ACL.eq(Product.ACl_All),
-                                orWithBrackets(PRODUCTTABLE.PRODUCT_OWNER.eq(userId), PRODUCTTABLE.PRODUCT_DELIVERY_MANAGER.eq(userId), PRODUCTTABLE.PRODUCT_QUALITY_MANAGER.eq(userId), ExistsExpression.existsCondition(SubSelect.subSelect(selectFrom(PROJECT_TEAMTABLE).
+                                orWithBrackets(PRODUCTTABLE.PRODUCT_CREATED_BY.eq(userId),PRODUCTTABLE.PRODUCT_OWNER.eq(userId), PRODUCTTABLE.PRODUCT_DELIVERY_MANAGER.eq(userId), PRODUCTTABLE.PRODUCT_QUALITY_MANAGER.eq(userId), ExistsExpression.existsCondition(SubSelect.subSelect(selectFrom(PROJECT_TEAMTABLE).
                                         where(and(PRODUCTTABLE.ACL.eq(Product.ACl_TEAM), PROJECT_TEAMTABLE.PRODUCT_ID.eq(PRODUCTTABLE.PRODUCT_ID), PROJECT_TEAMTABLE.TEAM_USER_ID.eq(userId))))))))).groupBy(PRODUCTTABLE.PRODUCT_ID);
         return getDslSession().fetchList(select, Product.class);
     }
@@ -453,11 +453,11 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
         return getDslSession().fetchList(select, Product.class);
     }
 
-    public List<Product> getProductByUserAndProductLineWithCount(String userId, Integer productLineId) {
+    public List<Product> getProductByUserAndProductLineWithCount(String userId, Integer productLineId,Integer delete) {
         Select select = getComplexSelect().where(
-                and(PRODUCTTABLE.DELETED.eq(0),
+                and(PRODUCTTABLE.DELETED.eq(delete),
                         orWithBrackets(PRODUCTTABLE.ACL.eq(Product.ACl_All),
-                                orWithBrackets(PRODUCTTABLE.PRODUCT_OWNER.eq(userId), PRODUCTTABLE.PRODUCT_DELIVERY_MANAGER.eq(userId), PRODUCTTABLE.PRODUCT_QUALITY_MANAGER.eq(userId), ExistsExpression.existsCondition(SubSelect.subSelect(selectFrom(PROJECT_TEAMTABLE).
+                                orWithBrackets(PRODUCTTABLE.PRODUCT_CREATED_BY.eq(userId),PRODUCTTABLE.PRODUCT_OWNER.eq(userId), PRODUCTTABLE.PRODUCT_DELIVERY_MANAGER.eq(userId), PRODUCTTABLE.PRODUCT_QUALITY_MANAGER.eq(userId), ExistsExpression.existsCondition(SubSelect.subSelect(selectFrom(PROJECT_TEAMTABLE).
                                         where(and(PRODUCTTABLE.ACL.eq(Product.ACl_TEAM), PROJECT_TEAMTABLE.PRODUCT_ID.eq(PRODUCTTABLE.PRODUCT_ID), PROJECT_TEAMTABLE.TEAM_USER_ID.eq(userId))))))),PRODUCTTABLE.PRODUCT_LINE_ID.eq(productLineId))).groupBy(PRODUCTTABLE.PRODUCT_ID);
         return getDslSession().fetchList(select, Product.class);
     }

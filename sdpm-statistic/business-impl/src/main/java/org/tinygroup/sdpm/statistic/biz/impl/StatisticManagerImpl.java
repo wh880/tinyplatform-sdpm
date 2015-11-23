@@ -36,8 +36,8 @@ public class StatisticManagerImpl implements StatisticManager{
 		return statisticDao.findBugCall(qualityBugCall);
 	}
 
-	public List<ProductProject> productProjects(ProductProject productProject,boolean deleted) {
-		return statisticDao.productProjects(productProject,deleted);
+	public List<ProductProject> productProjects(ProductProject productProject,boolean deleted,String userId) {
+		return statisticDao.productProjects(productProject,deleted,userId);
 	}
 
 }

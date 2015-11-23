@@ -44,5 +44,5 @@ public interface StatisticService {
 	 * @param productProject
 	 * @return
 	 */
-	List<ProductProject> productProjects(ProductProject productProject,boolean deleted);
+	List<ProductProject> productProjects(ProductProject productProject,boolean deleted,String usrId);
 }
