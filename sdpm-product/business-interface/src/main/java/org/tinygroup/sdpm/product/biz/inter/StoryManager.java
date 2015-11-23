@@ -55,7 +55,7 @@ public interface StoryManager {
 	 * @param storyId
 	 * @return
 	 */
-	List<ProductStory> findList(Integer... storyId);
+	List<ProductStory> findList(boolean withSpec,Integer... storyId);
 	/**
 	 * 根据对象查询
 	 * @param story

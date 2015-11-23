@@ -288,7 +288,7 @@ public class ProductLineAction extends BaseController {
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
         Product product = new Product();
         product.setDeleted(FieldUtil.DELETE_NO);
-        List<Product> productLists = productService.getProductByUser(UserUtils.getUserId(),0);
+        List<Product> productLists = productService.getProductByUser(UserUtils.getUserId(),0,null);
         ProductLine productLine = new ProductLine();
         productLine.setDeleted(FieldUtil.DELETE_NO);
         List<ProductLine> productLines = productLineService.findProductLineList(productLine,null,null);
@@ -425,7 +425,7 @@ public class ProductLineAction extends BaseController {
     @ResponseBody
     @RequestMapping(value = "/userProductTree")
     public List<Map<String,Object>> getUserProductTree(){
-        List<Product> products = productService.getProductByUser(UserUtils.getUserId(),0);
+        List<Product> products = productService.getProductByUser(UserUtils.getUserId(),0,null);
         List<Map<String, Object>> mapList = Lists.newArrayList();
         List<Integer> productLineIds = new ArrayList<Integer>();
         for (Product p : products) {

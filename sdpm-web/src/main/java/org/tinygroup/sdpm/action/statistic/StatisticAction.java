@@ -51,7 +51,7 @@ public class StatisticAction extends BaseController {
             if(deleted!=null&&deleted==1){
                 delete=deleted;
             }
-            List<Product> products = productService.getProductByUser(UserUtils.getUserId(),delete);
+            List<Product> products = productService.getProductByUser(UserUtils.getUserId(),delete,null);
             Map<Product, List<ProductPlan>> map = new HashMap<Product, List<ProductPlan>>();
             for (int i = 0, n = products.size(); i < n; i++) {
                 ProductPlan plan = new ProductPlan();

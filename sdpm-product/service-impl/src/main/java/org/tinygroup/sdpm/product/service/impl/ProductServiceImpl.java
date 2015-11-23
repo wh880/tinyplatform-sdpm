@@ -7,16 +7,22 @@ import org.tinygroup.sdpm.product.biz.inter.ProductManager;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
 import org.tinygroup.sdpm.product.service.ProductService;
+import org.tinygroup.sdpm.productLine.biz.inter.ProductLineManager;
+import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Component
 public class ProductServiceImpl implements ProductService {
 
     @Autowired
     private ProductManager productManager;
+    @Autowired
+    private ProductLineManager productLineManager;
 
     public Product addProduct(Product product) {
         return productManager.add(product);
@@ -67,8 +73,8 @@ public class ProductServiceImpl implements ProductService {
         return productManager.getProductNameByLineId(productLineId);
     }
 
-    public List<Product> getProductByUser(String userId,Integer delete) {
-        return productManager.getProductByUser(userId,delete);
+    public List<Product> getProductByUser(String userId,Integer delete,Integer productLineId) {
+        return productManager.getProductByUser(userId,delete,productLineId);
     }
 
     public List<Product> getProductByUserWithCount(String userId,Integer delete,boolean noRole) {
@@ -84,6 +90,35 @@ public class ProductServiceImpl implements ProductService {
         List<Integer> ids = productManager.getTeamRoleProductLineIds(userId,delete);
         Integer[] Ids = new Integer[ids.size()];
         return ids.toArray(Ids);
+    }
+
+    public Map<String, List<Product>> getUserProductsWithCountMap(String userId) {
+        Map<String, List<Product>> productMap = new HashMap<String, List<Product>>();
+        List<Product> products = productManager.getProductByUserWithCount(userId,0,false);
+        for (Product product1 : products) {
+            if (productMap.containsKey(product1.getProductLineName())) {
+                productMap.get(product1.getProductLineName()).add(product1);
+            } else {
+                List<Product> ps = new ArrayList<Product>();
+                ps.add(product1);
+                productMap.put(product1.getProductLineName(), ps);
+            }
+        }
+        return productMap;
+    }
+    public Map<String, List<Product>> getUserProductsMap(String userId) {
+        Map<String, List<Product>> productMap = new HashMap<String, List<Product>>();
+        List<Product> products = productManager.getProductByUser(userId,0,null);
+        for (Product product1 : products) {
+            if (productMap.containsKey(product1.getProductLineName())) {
+                productMap.get(product1.getProductLineName()).add(product1);
+            } else {
+                List<Product> ps = new ArrayList<Product>();
+                ps.add(product1);
+                productMap.put(product1.getProductLineName(), ps);
+            }
+        }
+        return productMap;
     }
 
 

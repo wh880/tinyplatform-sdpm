@@ -244,9 +244,22 @@ public class ProductStory implements Serializable{
 	 *
 	 */
 	private Integer deleted;
-
+	/**
+	 * 需求描述
+	 */
+	private String storySpec;
+	/**
+	 * 需求编号
+	 */
 	private Integer no;
 
+	public String getStorySpec() {
+		return storySpec;
+	}
+
+	public void setStorySpec(String storySpec) {
+		this.storySpec = storySpec;
+	}
 
 	public Integer getNo() {
 		return no;

@@ -5,6 +5,7 @@ import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
 import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ProductService {
     /**
@@ -94,11 +95,15 @@ public interface ProductService {
 	 */
 	List<String> getProductNameByLineId(Integer productLineId);
 
-    List<Product> getProductByUser(String userId,Integer delete);
+    List<Product> getProductByUser(String userId,Integer delete,Integer productLineId);
 
     List<Product> getProductByUserWithCount(String userId,Integer delete,boolean noRole);
 
     List<Product> getProductByUserAndProductLineWithCount(String userId,Integer productLineId,Integer delete);
 
     Integer[] getTeamRoleProductLineIds(String userId,Integer delete);
+
+    Map<String, List<Product>> getUserProductsMap(String userId);
+
+    Map<String, List<Product>> getUserProductsWithCountMap(String userId);
 }

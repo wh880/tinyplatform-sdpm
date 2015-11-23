@@ -13,6 +13,7 @@ import org.tinygroup.sdpm.product.dao.pojo.ProductRelease;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.quality.biz.inter.BugManager;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
+import org.tinygroup.sdpm.system.service.impl.util.ExportUtil;
 import org.tinygroup.sdpm.system.service.inter.ExportService;
 import org.tinygroup.template.TemplateContext;
 import org.tinygroup.template.TemplateEngine;
@@ -63,9 +64,9 @@ public class ExportServiceImpl implements ExportService{
                 }
             }
             List<ProductStory> stories = new ArrayList<ProductStory>();
-            if(sIds.size()>0){
+            if(sIds!=null&&sIds.size()>0){
                 Integer[] nIds = new Integer[sIds.size()];
-                stories = storyManager.findList(sIds.toArray(nIds));
+                stories = storyManager.findList(true,sIds.toArray(nIds));
             }
             context.put("storyList",stories);
 
@@ -94,6 +95,7 @@ public class ExportServiceImpl implements ExportService{
             context.put("bugNoInList", notInBugList);
             context.put("userManager",userManager);
             context.put("productManager",productManager);
+            context.put("ExportUtil",ExportUtil.class);
         }
         mergeTemplate(DocTemplateResolver.RELEASE,context,response,"发布文档");
     }
@@ -121,7 +123,7 @@ public class ExportServiceImpl implements ExportService{
                 try {
                     b = Character.toString(c).getBytes("utf-8");
                 } catch (Exception ex) {
-                    System.out.println(ex);
+//                    System.out.println(ex);
                     b = new byte[0];
                 }
                 for (int j = 0; j < b.length; j++) {

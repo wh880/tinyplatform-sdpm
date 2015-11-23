@@ -411,9 +411,15 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
         return getDslSession().fetchList(select, String.class);
     }
 
-    public List<Product> getProductByUser(String userId,Integer delete) {
-        Select select = selectFrom(PRODUCTTABLE).where(
-                and(PRODUCTTABLE.DELETED.eq(delete),
+    public List<Product> getProductByUser(String userId,Integer delete,Integer productLineId) {
+        Condition condition = null;
+        if(productLineId!=null){
+            condition = PRODUCTTABLE.PRODUCT_LINE_ID.eq(productLineId);
+        }
+        Select select = select(PRODUCTTABLE.ALL,PRODUCT_LINETABLE.PRODUCT_LINE_NAME.as("productLineName")).from(PRODUCTTABLE).join(
+                leftJoin(PRODUCT_LINETABLE,PRODUCTTABLE.PRODUCT_LINE_ID.eq(PRODUCT_LINETABLE.PRODUCT_LINE_ID))
+        ).where(
+                and(PRODUCTTABLE.DELETED.eq(delete),condition,
                         or(PRODUCTTABLE.ACL.eq(Product.ACl_All),
                                 or(PRODUCTTABLE.PRODUCT_CREATED_BY.eq(userId),PRODUCTTABLE.PRODUCT_OWNER.eq(userId),PRODUCTTABLE.PRODUCT_DELIVERY_MANAGER.eq(userId),PRODUCTTABLE.PRODUCT_QUALITY_MANAGER.eq(userId),ExistsExpression.existsCondition(SubSelect.subSelect(selectFrom(PROJECT_TEAMTABLE).
                                         where(and(PRODUCTTABLE.ACL.eq(Product.ACl_TEAM), PROJECT_TEAMTABLE.PRODUCT_ID.eq(PRODUCTTABLE.PRODUCT_ID), PROJECT_TEAMTABLE.TEAM_USER_ID.eq(userId)))))))));
@@ -466,7 +472,7 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
     }
 
     private Select getComplexSelect() {
-        return MysqlSelect.select(PRODUCTTABLE.ALL, FragmentSql.fragmentSelect(
+        return MysqlSelect.select(PRODUCTTABLE.ALL,PRODUCT_LINETABLE.PRODUCT_LINE_NAME.as("productLineName"), FragmentSql.fragmentSelect(
                 "(SELECT COUNT(story_id)FROM product_story a JOIN product b ON a.`product_id`=b.`product_id` WHERE a.`story_status`=1 AND b.product_id = product.product_id) activeSum,\n" +
                         "(SELECT COUNT(story_id)FROM product_story a JOIN product b ON a.`product_id`=b.`product_id` WHERE a.`story_status`=3 AND b.product_id = product.product_id) changeSum,\n" +
                         "(SELECT COUNT(story_id)FROM product_story a JOIN product b ON a.`product_id`=b.`product_id` WHERE a.`story_status`=0 AND b.product_id = product.product_id) draftSum,\n" +
@@ -479,6 +485,9 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
                 from(FragmentSql.fragmentFrom(" product \n" +
                         "LEFT JOIN product_plan ON product.`product_id` = product_plan.`product_id` \n" +
                         "LEFT JOIN product_release ON product.`product_id` = product_release.`product_id` \n" +
-                        "LEFT JOIN quality_bug ON product.`product_id` = quality_bug.`product_id`"));
+                        "LEFT JOIN quality_bug ON product.`product_id` = quality_bug.`product_id`")).join(
+                leftJoin(PRODUCT_LINETABLE,PRODUCT_LINETABLE.PRODUCT_LINE_ID.eq(PRODUCTTABLE.PRODUCT_LINE_ID))
+
+        );
     }
 }

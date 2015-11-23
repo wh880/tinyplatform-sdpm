@@ -296,7 +296,7 @@ public class ProductUtils {
 //            UserUtils.putCache(USER_CACHE_ALL_PRODUCT_LIST_BY_USER, result);
 //        }
         if (result == null) {
-            result = productService.getProductByUser(UserUtils.getUserId(),0);
+            result = productService.getProductByUser(UserUtils.getUserId(),0,null);
             UserUtils.putCache(USER_CACHE_ALL_PRODUCT_LIST_BY_USER, result);
         }
         return result;

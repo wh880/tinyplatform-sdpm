@@ -109,9 +109,9 @@ public class StoryManagerImpl implements StoryManager {
         return productStoryDao.edit(story);
     }
 
-    public List<ProductStory> findList(Integer... storyId) {
+    public List<ProductStory> findList(boolean storySpec,Integer... storyId) {
         if(storyId==null||storyId.length==0)return new ArrayList<ProductStory>();
-        return productStoryDao.getByKeys(storyId);
+        return productStoryDao.getByKeys(storySpec,storyId);
     }
 
     public List<StoryCount> productStoryCount(ProductStory story) {

@@ -48,6 +48,7 @@ import java.util.List;
 import static org.tinygroup.sdpm.org.dao.constant.OrgUserTable.ORG_USERTABLE;
 import static org.tinygroup.sdpm.product.dao.constant.ProductPlanTable.PRODUCT_PLANTABLE;
 import static org.tinygroup.sdpm.product.dao.constant.ProductStoryTable.PRODUCT_STORYTABLE;
+import static org.tinygroup.sdpm.product.dao.constant.ProductStorySpecTable.PRODUCT_STORY_SPECTABLE;
 import static org.tinygroup.sdpm.product.dao.constant.ProductTable.PRODUCTTABLE;
 import static org.tinygroup.sdpm.project.dao.constant.ProjectStoryTable.PROJECT_STORYTABLE;
 import static org.tinygroup.sdpm.system.dao.constant.SystemModuleTable.SYSTEM_MODULETABLE;
@@ -234,12 +235,16 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 		return getDslSession().fetchOneResult(select, requiredType);
 	}
 
-	public List<ProductStory> getByKeys(Integer... pk){
+	public List<ProductStory> getByKeys(final boolean withSpec, Integer... pk){
 
 		SelectGenerateCallback<Serializable[]> callback = new SelectGenerateCallback<Serializable[]>() {
 			@SuppressWarnings("rawtypes")
 			public Select generate(Serializable[] t) {
-
+				if(withSpec){
+					return select(PRODUCT_STORYTABLE.ALL,PRODUCT_STORY_SPECTABLE.STORY_SPEC.as("storySpec")).from(PRODUCT_STORYTABLE).join(
+							leftJoin(PRODUCT_STORY_SPECTABLE,PRODUCT_STORY_SPECTABLE.STORY_ID.eq(PRODUCT_STORYTABLE.STORY_ID))
+					).where(and(PRODUCT_STORYTABLE.STORY_VERSION.eq(PRODUCT_STORY_SPECTABLE.STORY_VERSION),PRODUCT_STORYTABLE.STORY_ID.in(t)));
+				}
 				return selectFrom(PRODUCT_STORYTABLE).where(PRODUCT_STORYTABLE.STORY_ID.in(t));
 			}
 

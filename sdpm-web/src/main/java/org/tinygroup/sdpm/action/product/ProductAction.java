@@ -259,34 +259,8 @@ public class ProductAction extends BaseController {
                        @RequestParam(required = false, defaultValue = "productId") String order,
                        @RequestParam(required = false, defaultValue = "asc") String ordertype, Model model) {
 
-//        if(productLineId!=null&&productLineId>0){
-//            product.setProductLineId(productLineId);
-//        }else {
-//            if(!StringUtil.isBlank(cookieProductLineId)) {
-//                product.setProductLineId(Integer.parseInt(cookieProductLineId));
-//            }
-//        }
 
-//        product.setDeleted(0);
-        Map<String, List<Product>> productMap = new HashMap<String, List<Product>>();
-        List<Product> products = productService.getProductByUserWithCount(UserUtils.getUserId(),0,false);
-        List<Integer> idList = new ArrayList<Integer>();
-        for (Product product1 : products) {
-            idList.add(product1.getProductLineId());
-        }
-        Integer[] ids = new Integer[idList.size()];
-        List<ProductLine> lines = productLineService.getProductLineByIds(idList.toArray(ids));/*productService.getTeamRoleProductLineIds(UserUtils.getUserId())*/
-        for (Product product1 : products) {
-            if (productMap.containsKey(String.valueOf(product1.getProductLineId()))) {
-                productMap.get(String.valueOf(product1.getProductLineId())).add(product1);
-            } else {
-                List<Product> ps = new ArrayList<Product>();
-                ps.add(product1);
-                productMap.put(String.valueOf(product1.getProductLineId()), ps);
-            }
-        }
-        model.addAttribute("productLines", lines);
-        model.addAttribute("productMap", productMap);
+        model.addAttribute("productMap", productService.getUserProductsWithCountMap(UserUtils.getUserId()));
         return "/product/data/allproductdata.pagelet";
     }
 

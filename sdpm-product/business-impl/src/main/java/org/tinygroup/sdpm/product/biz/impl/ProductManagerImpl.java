@@ -122,8 +122,8 @@ public class ProductManagerImpl implements ProductManager{
 		return productDao.getProductNameByLineId(productLineId);
 	}
 
-	public List<Product> getProductByUser(String userId,Integer delete) {
-		List<Product> productList = productDao.getProductByUser(userId,delete);
+	public List<Product> getProductByUser(String userId,Integer delete,Integer productLineId) {
+		List<Product> productList = productDao.getProductByUser(userId,delete,productLineId);
 		Product product = new Product();
 		product.setDeleted(delete);
 		product.setAcl(product.ACl_TEAM_AND_ROLE);
@@ -152,7 +152,7 @@ public class ProductManagerImpl implements ProductManager{
 
 	public List<Integer> getTeamRoleProductLineIds(String userId,Integer delete){
 		List<Integer> pIds = new ArrayList<Integer>();
-		for(Product product : getProductByUser(userId,delete)){
+		for(Product product : getProductByUser(userId,delete,null)){
 			pIds.add(product.getProductLineId());
 		}
 		return pIds;

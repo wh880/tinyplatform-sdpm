@@ -99,7 +99,7 @@ public interface ProductManager {
      */
     List<String> getProductNameByLineId(Integer productLineId);
 
-    List<Product> getProductByUser(String userId,Integer delete);
+    List<Product> getProductByUser(String userId,Integer delete,Integer productLineId);
 
     List<Product> getProductByUserWithCount(String userId,Integer delete,boolean noRole);
 
