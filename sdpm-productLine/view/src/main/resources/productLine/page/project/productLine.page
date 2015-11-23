@@ -11,7 +11,7 @@
 ##            #end
 
 ##    #foreach(m:menuManager.getScopeMenus("productLineView"))
-##        <a title="${m.name}" class="ml-5" href="${TINY_CONTEXT_PATH +adminPath}${m.href}" class="${status==mFor.index?"active_btn":""}">${m.name}</a>
+##        <a title="${m.name}"  href="${TINY_CONTEXT_PATH +adminPath}${m.href}" class="ml-5 ${status==mFor.index?"active_btn":""}">${m.name}</a>
 ##    #end
     #set(m=menuManager.getMenu("productLine-view-all"))
     #if(m)

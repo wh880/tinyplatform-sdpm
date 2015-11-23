@@ -83,7 +83,7 @@
 <script>
     $(function () {
         $("#group-Table").off("click", ">tbody>tr>td").on("click", ".show-group", function (e) {
-            $(this).find(".glyphicon").toggleClass("glyphicon-chevron-right glyphicon-chevron-righ");
+            $(this).find(".glyphicon").toggleClass("glyphicon-chevron-right glyphicon-chevron-down");
             $("#group-Table>tbody").children("tr." + $(this).attr("data-tr")).toggle();
         });
     })
