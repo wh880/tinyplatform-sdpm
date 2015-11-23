@@ -66,7 +66,16 @@
                                     });
                                 }
                                 $(function () {
-                                    $('.projectline').projectLine();
+                                    $('.projectline').each(function(){
+										var v=$(this).attr("values");
+										v= v.replace(/0|\./ig,"");
+										console.log(v);
+										if($(v)){
+											$(this).projectLine();
+										}else{
+											$(this).html("暂无数据")
+										}
+									})
                                 });
                             </script>
 							<div style="margin:10px 10px">
@@ -129,6 +138,7 @@
 				#@headerBox(" icon-bar-chart" "产品统计")
 					#@navTab("pull-right")
 						#foreach(product : productList)
+							#break(productFor.index>7)
 							#set(active = productFor.index==1?"active":"")
 							#@liTab("s"+productFor.index "fa-clock-o" active)${product.productName}#end
 						#end
@@ -142,6 +152,7 @@
 					#@Div("tab-content" "myTabContent")
 							<!-- start s1 -->
 						#foreach(product : productList)
+							#break(productFor.index>7)
 							#set(active = productFor.index==1?"active":"")
 							#@tabInfos(active+" in" "s"+productFor.index)
 								<table id="${product?.productId}" class="table table-bordered hide">

@@ -34,7 +34,9 @@ a:hover{color:#00a4ac;text-decoration:none;}
 .loginpwd{font-family:"Microsoft Yahei";width:299px; height:46px; background:url(${TINY_CONTEXT_PATH}/login/images/loginpassword.png) no-repeat; border:none;line-height:46px; padding-left:44px; font-size:14px; color:#90a2bc;}
 .loginbtn{font-family:"Microsoft Yahei";width:111px;height:35px; background:url(${TINY_CONTEXT_PATH}/login/images/buttonbg.png) repeat-x; font-size:14px; font-weight:bold; color:#fff;cursor:pointer; line-height:35px;border:none}
 #login_tip{height:5px;margin-top:-18px;color:#c00}
-</style>
+input:- webkit-autofill { -webkit-box-shadow: 0 0 0 1000px white inset; }
+    </style>
+    <script>var contextPath = "${TINY_CONTEXT_PATH}";</script>
     <script src="${TINY_CONTEXT_PATH}/uiengine.uijs"></script>
 </head>
 <body>
@@ -48,10 +50,8 @@ a:hover{color:#00a4ac;text-decoration:none;}
         <form class="loginForm" method="post" role="form" action="${TINY_CONTEXT_PATH}/login">
             <ul>
                 <li><p id="login_tip">${msg}</p></li>
-                <li id="login_input1"><input name="username" type="text" class="loginuser" id="loginuser"
-                                             placeholder="请输入用户名"/></li>
-                <li id="login_input2"><input name="password" type="password" class="loginpwd" id="loginpwd"
-                                             placeholder="请输入密码"/></li>
+                <li id="login_input1"><input name="username" type="text" class="loginuser" id="loginuser" placeholder="请输入用户名"/></li>
+                <li id="login_input2"><input name="password" type="password" class="loginpwd" id="loginpwd" placeholder="请输入密码"/></li>
                 <li id="login_btn">
                     <input type="submit" class="loginbtn" value="登录"/>
                     <label><input name="rememberMe" type="checkbox"/>记住密码</label>
@@ -64,107 +64,22 @@ a:hover{color:#00a4ac;text-decoration:none;}
 </body>
 <script type="text/javascript">
     // 登录验证
-    $("#login_content_log").on('click', function () {
-        $("#login_content_log,#login_content_reg").fadeOut();
-        $("#login_content_log_02").fadeIn();
-    });
-    $("#login_close").on('click', function () {
-        $("#login_content_log,#login_content_reg").fadeIn();
-        $("#login_content_log_02").fadeOut();
-    });
-    $("#loginuser").on('focus', function () {
-        $(this).css('color', 'black');
-        if ($(this).val() == "用户名") {
-            $(this).val('');
-        }
-        $("#login_input1").css('borderColor', '#0099cc').css('box-shadow', '#0099cc 0px 0px 3px');
-    }).on('blur', function () {
-        $(this).css('color', 'gray');
-        if ($(this).val() == '') {
-            $(this).val('用户名');
-        }
-        $("#login_input1").css('borderColor', 'gray').css('box-shadow', 'none');
-    });
-    $("#loginpwd").on('focus', function () {
-        $(this).css('color', 'black');
-        //document.getElementById("loginpwd").type = 'loginpwd';
-        $("#loginpwd[type='text']").attr('type', 'loginpwd');
-        if ($(this).val() == "密码") {
-            $(this).val('');
-        }
-        $("#login_input2").css('borderColor', '#0099cc').css('box-shadow', '#0099cc 0px 0px 3px');
-    }).on('blur', function () {
-        $(this).css('color', 'gray');
-        //document.getElementById("loginpwd").type = 'text';
-        $("#loginpwd[type='loginpwd']").attr('type', 'text');
-        if ($(this).val() == '') {
-            $(this).val('密码');
-        }
-        $("#login_input2").css('borderColor', 'gray').css('box-shadow', 'none');
-        if ($(this).val() != '' && $(this).val() != "密码") {
-            //document.getElementById("loginpwd").type = 'loginpwd';
-            $("#loginpwd[type='text']").attr('type', 'loginpwd');
-        }
-    });
-
-    $("#login_btn1 .loginbtn1").on('click', function () {//登陆按钮
+    $("form.loginForm").on('submit', function () {//登陆按钮
         var user = $("#loginuser").val();
         var loginpwd = $("#loginpwd").val();
         if (user == '') {
-            //$("#login_tip").val("用户名不能为空");
-            document.getElementById('login_tip').innerHTML = "用户名不能为空";
+            $("#login_tip").html("用户名不能为空");
             $("#loginuser").focus();
             return false;
         }
-        else if (loginpwd == '') {
-            //$("#login_tip").val("密码不能为空")
-            document.getElementById('login_tip').innerHTML = "密码不能为空";
+        if (loginpwd == '') {
+            $("#login_tip").html("密码不能为空");
             $("#loginpwd").focus();
             return false;
         }
-        else {
-            //ajax请求
-            /*$.ajax({
-                type:"POST",
-                url:"ajax.jsp?action=login",
-                dataType:"json",
-                data:{"user":user,"loginpwd":loginpwd},
-                beforeSend:function(){
-                    document.getElementById("login_tip").innerHTML = "登录中..."
-                    },
-                success:function(json){
-                    if(json.success == 1){
-                        document.getElementById("welcome_user").innerHTML = json.user;
-                        $("#login_content_log_02").fadeOut();
-                        $("#login_content_log_03").fadeIn();
-                        //alert(getCookie(user));
-                        t1 = setTimeout("window.location.href='index.jsp'",3000);}
-                        else{
-                            document.getElementById("login_tip").innerHTML = json.msg;}
-                    }
-
-                });}*/
-
-            document.getElementById("login_tip").innerHTML = "登录中...";
-//            t = setTimeout("demo()", 1500);
-        }
+        //return false;
     });
-    function demo() {//效果测试
-        var user = $("#loginuser").val();
-        var loginpwd = $("#loginpwd").val();
-        if (user == "admin" && loginpwd == "123456") {
-            $("#login_content_log_02").fadeOut();
-            $("#login_content_log_03").fadeIn();
-            //t1 = setTimeout("window.location.href='login.html'",3000);
-        }
-        else {
-            document.getElementById("login_tip").innerHTML = "账号或密码错误";
-        }
-    }
 
-    $("#exit_button").on('click', function () {
-        $.post("ajax.XXX?action=exit");
-    });
 </script>
 </html>
 
