@@ -6,14 +6,30 @@
     #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/project/task/findTask?taskId=${t?.taskId}">${t?.taskNo}</a> #end
     #@td()${t?.taskPri}</a>#end
     #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/project/task/findTask?taskId=${t?.taskId}">${t?.taskName}#end
-    #if(t.taskStatus)
-        #@td()${getDict("taskStatus",t.taskStatus)}#end
-    #else
-        #@td()#end
+    #@td()
+        #if(t?.taskStatus == "2")
+            <span class="c-red">
+                ${getDict("taskStatus",t?.taskStatus)}
+            </span>
+        #elseif(t?.taskStatus =="3")
+            <span class="c-green">
+                ${getDict("taskStatus",t?.taskStatus)}
+            </span>
+        #else
+            ${getDict("taskStatus",t?.taskStatus)}
+        #end
     #end
     #@td()${formatdate(t?.taskDeadLine,"yyyy-MM-dd")}#end
-    #@td()${t?.taskAssignedTo==null?"":UserUtils.getUserById(t?.taskAssignedTo)?.orgUserRealName}#end
-    #@td()${t?.taskFinishedBy==null?"":UserUtils.getUserById(t?.taskFinishedBy)?.orgUserRealName}#end
+    #@td()
+        #if(t?.taskAssignedTo ==UserUtils.getUserId())
+            <span class="c-red">
+                ${t?.taskAssignedTo==null?"":UserUtils.getUserById(t.taskAssignedTo).orgUserRealName}
+            </span>
+        #else
+            ${t?.taskAssignedTo==null?"":UserUtils.getUserById(t.taskAssignedTo).orgUserRealName}
+        #end
+    #end
+    #@td()${t?.taskFinishedBy==null?"":UserUtils.getUserById(t.taskFinishedBy).orgUserRealName}#end
     #@td()${t.taskEstimate}#end
     #@td()${t.taskConsumed}#end
     #@td()${t.taskLeft}#end
