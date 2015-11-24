@@ -92,7 +92,7 @@ public class SystemProfile implements Serializable {
 
     public SystemProfile(String filePathname, String fileTitle, String fileExtension,
                          Integer fileSize, String fileObjectType, Integer fileObjectId,
-                         String fileAddedBy, Date fileAddedDate, Integer fileDownloads, String fileExtra) {
+                         String fileAddedBy, Date fileAddedDate) {
         this.filePathname = filePathname;
         this.fileTitle = fileTitle;
         this.fileExtension = fileExtension;
@@ -101,8 +101,6 @@ public class SystemProfile implements Serializable {
         this.fileObjectId = fileObjectId;
         this.fileAddedBy = fileAddedBy;
         this.fileAddedDate = fileAddedDate;
-        this.fileDownloads = fileDownloads;
-        this.fileExtra = fileExtra;
         this.fileDeleted = DELETE_NO;
     }
 

@@ -164,10 +164,7 @@ public class TestCaseAction extends BaseController {
                     comment
             );
         }
-        uploads(file, testcase.getCaseId(), ProfileType.TESTCASE, title);
-        if(!StringUtil.isBlank(lastAddress)){
-            return "redirect:"+lastAddress;
-        }
+        uploadMultiFiles(file, testcase.getCaseId(), ProfileType.TESTCASE, title);
         return "redirect:" + "/a/quality/testCase";
     }
 
@@ -554,7 +551,7 @@ public class TestCaseAction extends BaseController {
         systemProfile.setFileObjectType(ProfileType.TESTCASE.toString());
         systemProfile.setFileDeleted("0");
         systemProfile.setFileObjectId(testCase.getCaseId());
-        List<SystemProfile> list = profileService.find(systemProfile);
+        List<SystemProfile> list = profileService.findSystemProfile(systemProfile);
         model.addAttribute("file", list);
         model.addAttribute("testCase", testCase);
         model.addAttribute("stepList", stepList);

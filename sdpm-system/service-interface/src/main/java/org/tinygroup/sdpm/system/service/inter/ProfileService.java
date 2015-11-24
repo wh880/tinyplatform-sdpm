@@ -1,59 +1,79 @@
 package org.tinygroup.sdpm.system.service.inter;
 
-import java.util.List;
-
 import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;
+
+import java.util.List;
 
 
 public interface ProfileService {
-	/**
-	 * 添加附件
-	 * @param 
-	 * @return 附件
-	 */
-    SystemProfile add(SystemProfile systemProfile);
-   /**
-    * 批量添加附件
-    * @return
-    */
-    int[] batchAdd(List<SystemProfile> systemProfiles);
-   /**
-    * 查询附件信息
-    * @param
-    * @return 附件信息表
-    */
-    List<SystemProfile> find(SystemProfile systemProfile);
     /**
-     * 删除附件信息
-     * @param SystemProfile
+     * 添加附件
+     *
+     * @param
+     * @return 附件
+     */
+    SystemProfile addSystemProfile(SystemProfile systemProfile);
+
+    /**
+     * 批量添加附件
+     *
      * @return
      */
-    int delete(SystemProfile systemProfile);
+    Integer batchAddSystemProfile(List<SystemProfile> systemProfiles);
+
     /**
-     * 编辑附件
-     * @param SystemProfile
-     * @return Flie 对象
+     * 批量更新附件
+     *
+     * @return
      */
-    
-    SystemProfile edit(SystemProfile systemProfile);
+    Integer batchUpdateSystemProfile(List<SystemProfile> systemProfiles);
+
     /**
-     * 编辑文件名
+     * 查询附件信息
+     *
+     * @param
+     * @return 附件信息表
+     */
+    List<SystemProfile> findSystemProfile(SystemProfile systemProfile);
+
+    /**
+     * 删除附件信息
+     *
      * @param systemProfile
      * @return
      */
-    SystemProfile editTitle(SystemProfile systemProfile);
+    Integer deleteSystemProfile(SystemProfile systemProfile);
+
+    /**
+     * 编辑附件
+     * @param systemProfile
+     * @return
+     */
+    SystemProfile editSystemProfile(SystemProfile systemProfile);
+
+    /**
+     * 编辑文件名
+     *
+     * @param systemProfile
+     * @return
+     */
+    SystemProfile editSystemProfileTitle(SystemProfile systemProfile);
+
     /**
      * 软删除
+     *
      * @param id
      * @return
      */
-    
-    Integer softDelete(Integer id);
+
+    Integer softDeleteSystemProfile(Integer id);
+
     /**
      * 通过Id查询
+     *
      * @param id
      * @return
      */
-    SystemProfile findById(Integer id);
- 
+    SystemProfile findSystemProfileById(Integer id);
+
 }

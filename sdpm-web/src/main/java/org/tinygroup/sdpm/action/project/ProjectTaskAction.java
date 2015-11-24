@@ -13,6 +13,7 @@ import org.tinygroup.logger.LogLevel;
 import org.tinygroup.sdpm.action.project.util.TaskStatusUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.dict.util.DictUtil;
+import org.tinygroup.sdpm.dto.UploadProfile;
 import org.tinygroup.sdpm.dto.project.EffortList;
 import org.tinygroup.sdpm.dto.project.Tasks;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
@@ -27,8 +28,10 @@ import org.tinygroup.sdpm.project.service.inter.*;
 import org.tinygroup.sdpm.system.dao.pojo.ProfileType;
 import org.tinygroup.sdpm.system.dao.pojo.SystemEffort;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
+import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;
 import org.tinygroup.sdpm.system.service.inter.EffortService;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
+import org.tinygroup.sdpm.system.service.inter.ProfileService;
 import org.tinygroup.sdpm.util.*;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -65,6 +68,8 @@ public class ProjectTaskAction extends BaseController {
     private BurnService burnService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private ProfileService profileService;
 
     @RequiresPermissions(value = {"project", "task"}, logical = Logical.OR)
     @RequestMapping("index")
@@ -134,9 +139,8 @@ public class ProjectTaskAction extends BaseController {
      * @return
      */
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String save(ProjectTask task, @RequestParam(value = "file", required = false) MultipartFile file,
-                       String[] taskMailToArray, HttpServletRequest request, String comment,
-                       String lastAddress) {
+    public String save(ProjectTask task, @RequestParam(value = "file", required = false) MultipartFile[] file, String[] fileTitle,
+                       String[] taskMailToArray, HttpServletRequest request, String comment, String lastAddress) {
         Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, ProjectUtils.COOKIE_PROJECT_ID));
         task.setTaskProject(projectId);
         String taskMailTo = StringUtil.join(taskMailToArray, ",");
@@ -147,12 +151,12 @@ public class ProjectTaskAction extends BaseController {
                 task.getTaskId().toString(), UserUtils.getUserId(),
                 null, task.getTaskProject().toString(), null, null, comment);
         try {
-            uploadNoTitle(file, task.getTaskId(), ProfileType.TASK);
+            uploadMultiFiles(file, task.getTaskId(), ProfileType.TASK, fileTitle);
         } catch (IOException e) {
             logger.logMessage(LogLevel.ERROR, "上传文件文件出错，请求路径{}", e, request.getRequestURI());
         }
-        if(!StringUtil.isBlank(lastAddress)){
-            return "redirect:"+lastAddress;
+        if (!StringUtil.isBlank(lastAddress)) {
+            return "redirect:" + lastAddress;
         }
         return "redirect:" + adminPath + "/project/task/index";
     }
@@ -169,6 +173,11 @@ public class ProjectTaskAction extends BaseController {
     public String editForm(Integer taskId, Model model) {
         ProjectTask task = taskService.findTask(taskId);
         model.addAttribute("task", task);
+        SystemProfile systemProfile = new SystemProfile();
+        systemProfile.setFileId(taskId);
+        systemProfile.setFileObjectType(ProfileType.TASK.getType());
+        List<SystemProfile> fileList = profileService.findSystemProfile(systemProfile);
+        model.addAttribute("fileList", fileList);
         return "project/task/edit";
     }
 
@@ -181,9 +190,15 @@ public class ProjectTaskAction extends BaseController {
      * @return
      */
     @RequestMapping(value = "/editsave", method = RequestMethod.POST)
-    public String editSave(ProjectTask task, Model model, String contents) {
+    public String editSave(ProjectTask task, Model model, String contents,
+                           MultipartFile[] file, String[] fileTitle,
+                           UploadProfile uploadProfile) throws IOException {
         ProjectTask oldTask = taskService.findTask(task.getTaskId());
         taskService.updateEditTask(task);
+
+        uploadMultiFiles(file,task.getTaskId(),ProfileType.TASK,fileTitle);
+        updateUploadFile(uploadProfile,task.getTaskId(),ProfileType.TASK);
+
         LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, LogUtil.LogAction.EDITED, oldTask.getTaskId().toString(),
                 UserUtils.getUserId(), null, oldTask.getTaskProject().toString(), oldTask, task, contents);
         model.addAttribute("task", task);
@@ -291,17 +306,17 @@ public class ProjectTaskAction extends BaseController {
         task.setTaskFinishedDate(new Date());
         task.setTaskStatus(ProjectTask.DONE);
         taskService.updateFinishTask(task);
-        if(oldTask.getTaskStory()!=null){
+        if (oldTask.getTaskStory() != null) {
             ProjectTask task1 = new ProjectTask();
             task1.setTaskStory(oldTask.getTaskStory());
             List<ProjectTask> tasks = taskService.findListTask(task1);
             boolean isDone = true;
-            for(ProjectTask projectTask : tasks){
-                if(Integer.parseInt(projectTask.getTaskStatus())%3!=0&&Integer.parseInt(projectTask.getTaskStatus())!=5){
-                    isDone=false;
+            for (ProjectTask projectTask : tasks) {
+                if (Integer.parseInt(projectTask.getTaskStatus()) % 3 != 0 && Integer.parseInt(projectTask.getTaskStatus()) != 5) {
+                    isDone = false;
                 }
             }
-            if(isDone){
+            if (isDone) {
                 ProductStory story = storyService.findStory(task.getTaskStory());
                 story.setStoryStage(ProductStory.STAGE_IS_DONE);
                 storyService.updateStory(story);
@@ -342,7 +357,7 @@ public class ProjectTaskAction extends BaseController {
     @RequestMapping(value = "/start", method = RequestMethod.GET)
     public String start(Integer taskId, Model model) {
         ProjectTask task = taskService.findTask(taskId);
-        if(task.getTaskStory()!=null){
+        if (task.getTaskStory() != null) {
             ProductStory story = storyService.findStory(task.getTaskStory());
             story.setStoryStage("4");
             storyService.updateStory(story);
@@ -648,7 +663,7 @@ public class ProjectTaskAction extends BaseController {
     @RequiresPermissions("task-group")
     @RequestMapping("/grouping")
     public String grouping(HttpServletRequest request, HttpServletResponse response,
-                           String type,String menuId, Model model) {
+                           String type, String menuId, Model model) {
         Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
         if (projectId == null) {
             return redirectProjectForm();

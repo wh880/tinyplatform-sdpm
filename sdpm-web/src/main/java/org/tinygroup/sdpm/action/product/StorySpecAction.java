@@ -42,7 +42,7 @@ public class StorySpecAction extends BaseController{
 		systemProfile.setFileObjectType("story");
 		systemProfile.setFileDeleted("0");
 		systemProfile.setFileObjectId(story.getStoryId());
-		List<SystemProfile> list = profileService.find(systemProfile);
+		List<SystemProfile> list = profileService.findSystemProfile(systemProfile);
 		model.addAttribute("file",list);
 		return "/product/page/tabledemo/demand-edit.page";
 	}
@@ -56,7 +56,7 @@ public class StorySpecAction extends BaseController{
 		systemProfile.setFileObjectType("story");
 		systemProfile.setFileDeleted("0");
 		systemProfile.setFileObjectId(story.getStoryId());
-		List<SystemProfile> list = profileService.find(systemProfile);
+		List<SystemProfile> list = profileService.findSystemProfile(systemProfile);
 		model.addAttribute("file",list);
 		if ("productDemandDetail".equals(forward)) {
 			

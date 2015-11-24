@@ -8,7 +8,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
-import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
 import org.tinygroup.sdpm.product.dao.pojo.ProductRelease;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.service.ProductService;
@@ -77,7 +76,7 @@ public class ReleaseAction extends BaseController {
                        String lastAddress) throws IOException {
         productRelease.setProductId(Integer.parseInt(cookieProductId));
         ProductRelease release = releaseService.addRelease(productRelease);
-        uploads(file, release.getReleaseId(), ProfileType.RELEASE, title);
+        uploadMultiFiles(file, release.getReleaseId(), ProfileType.RELEASE, title);
         LogUtil.logWithComment(LogUtil.LogOperateObject.RELEASE
                 , LogUtil.LogAction.OPENED
                 , String.valueOf(release.getReleaseId())
@@ -102,7 +101,7 @@ public class ReleaseAction extends BaseController {
         ProductRelease release1 = releaseService.findRelease(release.getReleaseId());
         releaseService.updateRelease(release);
 
-        uploads(file, release.getReleaseId(), ProfileType.RELEASE, title);
+        uploadMultiFiles(file, release.getReleaseId(), ProfileType.RELEASE, title);
 
 
         LogUtil.logWithComment(LogUtil.LogOperateObject.RELEASE
@@ -158,7 +157,7 @@ public class ReleaseAction extends BaseController {
         systemProfile.setFileObjectType("release");
         systemProfile.setFileDeleted("0");
         systemProfile.setFileObjectId(releaseId);
-        List<SystemProfile> systemProfiles = profileService.find(systemProfile);
+        List<SystemProfile> systemProfiles = profileService.findSystemProfile(systemProfile);
         ProductRelease release = releaseService.findRelease(releaseId);
         model.addAttribute("release", release);
         model.addAttribute("file", systemProfiles);
