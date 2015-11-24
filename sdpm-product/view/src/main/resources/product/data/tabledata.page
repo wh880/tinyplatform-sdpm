@@ -72,12 +72,12 @@
             #@td()<a href="${TINY_CONTEXT_PATH +adminPath}/product/storySpec/find/productDemandDetail?storyId=${story.storyId}">${story.storyTitle}</a>#end
             #@td()${story?.planName}#end
             #@td()${getDict("storySource",story?.storySource)}#end
-            #@td()${story?.storyOpenedBy?UserUtils.getUserById(story?.storyOpenedBy).orgUserRealName:""}#end
-            #@td()${story?.storyAssignedTo?UserUtils.getUserById(story?.storyAssignedTo).orgUserRealName:""}#end
+            #@td("nowrap")${story?.storyOpenedBy?UserUtils.getUserById(story?.storyOpenedBy).orgUserRealName:""}#end
+            #@td("nowrap")${story?.storyAssignedTo?UserUtils.getUserById(story?.storyAssignedTo).orgUserRealName:""}#end
             #@td()${story?.storyEstimate}#end
             #@td()${getDict("storyStatus",story?.storyStatus)}#end
-            #@td()${getDict("storyStage",story?.storyStage)}#end
-            #@td()
+            #@td("nowrap")${getDict("storyStage",story?.storyStage)}#end
+            #@td("nowrap")
                 #foreach(m:menuManager?.getScopeMenus("pro_demand_log"))
                     #if(m?.id=="demand-overview")
                          #if(Integer.parseInt(story?.storyStatus)==0||Integer.parseInt(story?.storyStatus)==3)

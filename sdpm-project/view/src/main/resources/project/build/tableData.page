@@ -8,9 +8,9 @@
             ?.buildName}#end
         #@td()${b?.buildScmPath}</a>#end
         #@td()${b?.buildFilePath}#end
-        #@td()${formatDate(b?.buildDate,"yyyy-MM-dd")}#end
-        #@td()${b?.buildBuilder?UserUtils.getUserById(b?.buildBuilder)?.orgUserRealName:""}#end
-        #@td()
+        #@td("nowrap")${formatDate(b?.buildDate,"yyyy-MM-dd")}#end
+        #@td("nowrap")${b?.buildBuilder?UserUtils.getUserById(b?.buildBuilder)?.orgUserRealName:""}#end
+        #@td("nowrap")
             #set(m=menuManager.getMenu("tversionpro"))
             #if(m)
             <a class="openTestTask"

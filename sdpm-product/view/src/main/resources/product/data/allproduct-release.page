@@ -10,9 +10,9 @@
     #@td()<a href="${TINY_CONTEXT_PATH +adminPath}/product/release/forword/reRelateStory?releaseId=${release.releaseId}">${release?.no}</a>#end
     #@td()<a href="${TINY_CONTEXT_PATH +adminPath}/product/release/forword/reRelateStory?releaseId=${release.releaseId}">${release
         ?.releaseName}</a>#end
-    #@td()${release?.buildName}#end
-    #@td()${release?.releaseDate?formatDate(release?.releaseDate,'yyyy年MM月dd日'):""}#end
-    #@td()
+    #@td("nowrap")${release?.buildName}#end
+    #@td("nowrap")${release?.releaseDate?formatDate(release?.releaseDate,'yyyy年MM月dd日'):""}#end
+    #@td("nowrap")
 			#foreach(m:menuManager.getScopeMenus("product-re"))
             ##			#set(url=eval(m.href))
 			  #if(m.id!="product-release-remove")

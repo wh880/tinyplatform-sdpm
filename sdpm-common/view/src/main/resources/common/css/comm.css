@@ -462,3 +462,4 @@ table.table.filelist-table{border:#ddd 1px solid;}
 /*操作区 按钮重置*/
 .form-inline .btn-success{ background-image:none}
 .optionsBox .tabBar span{font-weight:normal}
+.nowrap{white-space:nowrap}

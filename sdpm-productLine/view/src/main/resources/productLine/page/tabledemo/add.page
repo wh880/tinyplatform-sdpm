@@ -23,7 +23,7 @@
         #@colLabel()<span class="c-red">*</span>产品线名称：#end
         #@formControlDiv("col-4")
             #tinyInput(
-                "text" "productLineName" ""{"placeholder":"产品线名称","nullmsg":"请输入产品线名称！","datatype":"*","id":
+                "text" "productLineName" ""{"placeholder":"产品线名称","nullmsg":"请输入产品线名称！","datatype":"*1-50","id":
                 "product-name","class":"input-text","ajaxurl":TINY_CONTEXT_PATH+adminPath+
                 "/productLine/judgeProductLineName"})
         #end
@@ -33,7 +33,7 @@
         #@colLabel()<span class="c-red">*</span>产品线编号：#end
         #@formControlDiv("col-4")
             #tinyInput(
-                "text" "productLineCode" ""{"placeholder":"产品编号","nullmsg":"请输入产品编号！","datatype":"*","id":
+                "text" "productLineCode" ""{"placeholder":"产品编号","nullmsg":"请输入产品编号！","datatype":"*1-20","id":
                 "product-id","class":"input-text"})
         #end
         #@validateDiv("col-2")#end

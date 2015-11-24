@@ -5,7 +5,6 @@
 		#@tinyTable("productLinetable") ##ID为空则系统自动生成 带入参数则取该参数为ID
 			#@div(divBaseClass="tinyheaderTools form-inline")
 				#setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置
-
 			#end
 			#@tinyTableContent(TINY_CONTEXT_PATH +adminPath+"/productLine/list?deleted=0"+(tinyRequestQueryString?"&"+tinyRequestQueryString:"")) ##取数据地址 总数据
 				#@thead()
@@ -13,8 +12,6 @@
 						#@tinyTh({"class":"sorting sorting_desc","rel":"productLineId"})ID#end
 						#@tinyTh({"class":"sorting","rel":"productLineName"})名称#end
 						#@tinyTh({"class":"sorting sorting_desc","rel":"productLineCode"})编号#end
-##						#@tinyTh({"class":"sorting","rel":"companyId"})公司#end
-##						#@tinyTh({"class":"sorting","rel":"deptId"})部门#end
 						#@tinyTh({"class":"sorting","rel":"productLineOwner"})经理#end
 						#@tinyTh({"class":"sorting","rel":"productLineQualityManager"})质量经理#end
 						#@tinyTh({"class":"sorting","rel":"productLineDeliveryManager"})交付经理#end

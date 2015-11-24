@@ -54,10 +54,10 @@
     #@td()${story.productName}#end
     #@td()<a
             href="${TINY_CONTEXT_PATH+adminPath}/product/storySpec/find/productDemandDetail?storyId=${story.storyId}">${story.storyTitle}</a>#end
-    #@td()${story.planName}#end
-    #@td()${story.storyOpenedName}#end
+    #@td("nowrap")${story.planName}#end
+    #@td("nowrap")${story.storyOpenedName}#end
     #@td()${story.storyEstimate}#end
-    #@td()${getDict("storyStatus",story?.storyStatus)}#end
-    #@td()${getDict("storyStage",story?.storyStage)}#end
+    #@td("nowrap")${getDict("storyStatus",story?.storyStatus)}#end
+    #@td("nowrap")${getDict("storyStage",story?.storyStage)}#end
 #end
 #end

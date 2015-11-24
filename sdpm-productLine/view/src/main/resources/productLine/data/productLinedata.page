@@ -1,4 +1,3 @@
-
 #setTinyItemCount(productLine?.totalCount)
 #for(productLine:productLine?.records)
 #@tr()
@@ -7,13 +6,13 @@
     <a class="infoJump" href="${TINY_CONTEXT_PATH +adminPath}/productLine/find/overview?productLineId=${productLine?.productLineId}">${productLine
         ?.productLineName}</a>
     #end
-    #@td()${productLine?.productLineCode}#end
+    #@td("nowrap")${productLine?.productLineCode}#end
 ##    #@td()${productLine?.companyId}#end
 ##    #@td()${productLine?.deptId}#end
-    #@td()${productLine?.productLineOwner?UserUtils.getUserById(productLine?.productLineOwner)?.orgUserRealName:""}#end
-    #@td()${productLine?.productLineQualityManager?UserUtils.getUserById(productLine?.productLineQualityManager)?.orgUserRealName:""}#end
-    #@td()${productLine?.productLineDeliveryManager?UserUtils.getUserById(productLine?.productLineDeliveryManager)?.orgUserRealName:""}#end
-    #@td()
+    #@td("nowrap")${productLine?.productLineOwner?UserUtils.getUserById(productLine?.productLineOwner)?.orgUserRealName:""}#end
+    #@td("nowrap")${productLine?.productLineQualityManager?UserUtils.getUserById(productLine?.productLineQualityManager)?.orgUserRealName:""}#end
+    #@td("nowrap")${productLine?.productLineDeliveryManager?UserUtils.getUserById(productLine?.productLineDeliveryManager)?.orgUserRealName:""}#end
+    #@td("nowrap")
         #foreach(m:menuManager.getScopeMenus("productLine-overview"))
             #set(url=eval(m.href))
             #if(m.id=="productLine-edit")

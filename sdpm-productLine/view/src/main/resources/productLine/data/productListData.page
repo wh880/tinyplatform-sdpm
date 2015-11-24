@@ -1,7 +1,8 @@
-#for(product:productList)
+#foreach(product:productList)
 #@tr()
     #@td()<input type="checkbox" value="1" name="product">#end
-    #@td()<a class="jump" value="${product?.productLineId}" id="${product?.productId}" href="${TINY_CONTEXT_PATH +adminPath}/product/find/overview?productId=${product?.productId}">${product
+    #@td()<a class="jump" value="${product?.productLineId}" id="${product?.productId}"
+             href="${TINY_CONTEXT_PATH +adminPath}/product/find/overview?productId=${product?.productId}">${product
         ?.productId}</a>#end
     #@td()<a class="jump" href="${TINY_CONTEXT_PATH +adminPath}/product/find/overview?productId=${product?.productId}">${product
         ?.productName}</a>#end
@@ -14,7 +15,7 @@
     #@td()${product?.bugCount}#end
     #@td()${product?.resolveSum}#end
     #@td()${product?.assignSum}#end
-    #@td()
+    #@td("nowrap")
         #foreach(m:menuManager.getScopeMenus("allproduct-op"))
             #set(url=eval(m?.href))
             #if(m.map.type=="close")

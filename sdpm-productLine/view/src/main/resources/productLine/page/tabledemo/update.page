@@ -17,7 +17,8 @@
             #@colLabel()<span class="c-red">*</span>产品线名称：#end
             #@formControlDiv("col-4")
                 #tinyInput(
-                    "text" "productLineName" productLine?.productLineName  {"placeholder":"","nullmsg":"请输入产品名称！","id":
+                    "text" "productLineName" productLine?.productLineName
+                {"placeholder":"","nullmsg":"请输入产品名称！","datatype":"*1-50","id":
                     "product-name","class":"input-text"})
             #end
             #@validateDiv("col-2")#end
@@ -26,7 +27,7 @@
             #@colLabel()<span class="c-red">*</span>产品编号：#end
             #@formControlDiv("col-4")
                 #tinyInput(
-                    "text" "productLineCode" productLine?.productLineCode {"placeholder":"","nullmsg":"代号不能为空！","id":
+                    "text" "productLineCode" productLine?.productLineCode {"placeholder":"","nullmsg":"编号不能为空！","datatype":"*1-20","id":
                     "product-id","class":"input-text"})
             #end
             #@validateDiv("col-2")#end

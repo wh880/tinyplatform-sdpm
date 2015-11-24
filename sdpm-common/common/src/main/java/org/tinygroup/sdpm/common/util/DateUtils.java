@@ -18,7 +18,7 @@ public class DateUtils extends org.apache.commons.lang.time.DateUtils {
     protected static final Logger logger = LoggerFactory.getLogger(DateUtils.class);
 
     private static String[] parsePatterns = {"yyyy-MM-dd", "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd HH:mm",
-            "yyyy/MM/dd", "yyyy/MM/dd HH:mm:ss", "yyyy/MM/dd HH:mm"};
+            "yyyy年MM月dd日", "yyyy年MM月dd日 HH:mm:ss", "yyyy年MM月dd日 HH:mm"};
 
     /**
      * 得到当前日期字符串 格式（yyyy-MM-dd）
@@ -99,7 +99,7 @@ public class DateUtils extends org.apache.commons.lang.time.DateUtils {
     /**
      * 日期型字符串转化为日期 格式
      * { "yyyy-MM-dd", "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd HH:mm",
-     * "yyyy/MM/dd", "yyyy/MM/dd HH:mm:ss", "yyyy/MM/dd HH:mm" }
+     * "yyyy年MM月dd日", "yyyy年MM月dd日 HH:mm:ss", "yyyy年MM月dd日 HH:mm" }
      */
     public static Date parseDate(Object str) {
         if (str == null) {

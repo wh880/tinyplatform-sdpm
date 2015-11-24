@@ -108,7 +108,6 @@
                 #@tinyTh({"class":"","rel":"story_estimate"})预计#end
                 #@tinyTh({"class":"","rel":"story_status"})状态#end
                 #@tinyTh({"class":"","rel":"story_stage"})阶段#end
-
             #end
         #end
     #end

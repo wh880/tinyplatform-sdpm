@@ -10,10 +10,10 @@
 	#@td()<a class="docJump" value="${l?.docLibId}" href="${TINY_CONTEXT_PATH +adminPath}/document/doc/view?docid=${l?.docId}&type=1">${l?.docId}#end
 	#@td()${l?.moduleName}</a>#end
 	#@td()<a class="docJump" value="${l?.docLibId}" href="${TINY_CONTEXT_PATH +adminPath}/document/doc/view?docid=${l?.docId}&type=1">${l?.docTitle}</a>#end
-	#@td()  ${l?.docAddedBy?UserUtils.getUserById(l?.docAddedBy).orgUserRealName:""}
+	#@td("nowrap")  ${l?.docAddedBy?UserUtils.getUserById(l?.docAddedBy).orgUserRealName:""}
 	#end
-	#@td()${l?.docAddedDate?formatDate(l?.docAddedDate,'yyyy年MM月dd日'):""}#end
-	#@td()
+	#@td("nowrap")${l?.docAddedDate?formatDate(l?.docAddedDate,'yyyy年MM月dd日'):""}#end
+	#@td("nowrap")
 
 
 		#foreach(m:menuManager.getScopeMenus("archive-oper"))
