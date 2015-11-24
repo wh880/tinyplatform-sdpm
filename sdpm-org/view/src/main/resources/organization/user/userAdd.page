@@ -31,41 +31,41 @@
                         <p class="titleName">添加用户</p>
                         #@elementItem()
                             #@colLabel("col-3")<span class="c-red">*</span>所属部门：#end
-                            #@formControlDiv("col-6")
+                            #@formControlDiv("col-5")
                                 #TzTreeSelect(
-                                    "orgDeptId" dept?.orgDeptId {"datatype":"*","class":"input-text",
+                                    "orgDeptId" dept?.orgDeptId {"datatype":"*","class":"input-text", "nullmsg":"请选择部门。",
                                     "data-URL":TINY_CONTEXT_PATH+adminPath+"/org/dept/data?check=n"} )
                             #end
-                            #@validateDiv("col-3")#end
+                            #@validateDiv("col-4")#end
                         #end
 
                         #@elementItem()
                             #@colLabel("col-3")<span class="c-red">*</span>用户名：#end
-                            #@formControlDiv("col-6")
+                            #@formControlDiv("col-5")
                                 #tinyInput(
                                     "text" "orgUserAccount" user?.orgUserAccount {"datatype":"*","nullmsg":"请输入用户名！",
                                     "id":"请求标题","class":
                                     "input-text","ajaxurl":TINY_CONTEXT_PATH+adminPath+
                                     "/org/user/usercheck?orgUserId="+user?.orgUserId})
                             #end
-                            #@validateDiv("col-3")#end
+                            #@validateDiv("col-4")#end
                         #end
 
                         #@elementItem()
                             #@colLabel("col-3")<span class="c-red">*</span>真实姓名：#end
-                            #@formControlDiv("col-6")
+                            #@formControlDiv("col-5")
                                 #tinyInput(
                                     "text" "orgUserRealName" user?.orgUserRealName {"datatype":"*","nullmsg":
                                     "用户真实姓名不能为空！","id":"org_user_real_name","class":
                                     "input-text"})
                             #end
-                            #@validateDiv("col-3")#end
+                            #@validateDiv("col-4")#end
                         #end
 
                         #if(user?.orgUserPassword==null)
                             #@elementItem()
                                 #@colLabel("col-3")<span class="c-red">*</span>密码 ：#end
-                                #@formControlDiv("col-6")
+                                #@formControlDiv("col-5")
                                     #tinyInput(
                                         "password" "password1" "" {"placeholder":"密码","datatype":
                                         "*6-18",
@@ -74,11 +74,11 @@
                                         "autocomplete":
                                         "off","id":"password","class":"input-text"})
                                 #end
-                                #@validateDiv("col-3")#end
+                                #@validateDiv("col-4")#end
                             #end
                             #@elementItem()
                                 #@colLabel("col-3")<span class="c-red">*</span>密码验证：#end
-                                #@formControlDiv("col-6")
+                                #@formControlDiv("col-5")
                                     #tinyInput(
                                         "password" "password2" ""{"placeholder":"密码","datatype":"*6-18","nullmsg":
                                         "请再输入一次密码！",
@@ -86,52 +86,51 @@
                                         "password2","class":
                                         "input-text"})
                                 #end
-                                #@validateDiv("col-3")#end
+                                #@validateDiv("col-4")#end
                             #end
                         #end
 
                         #@elementItem()
                             #@colLabel("col-3")性别：#end
-                            #@formControlDiv("col-6")
+                            #@formControlDiv("col-5")
                                 #@tinyRadio(
                                     "orgUserGender" "0" user?.orgUserGender?:"0" {"nullmsg":"请选择性别！","datatype":"*"})
                                     男#end
                                 #@tinyRadio("orgUserGender" "1" user?.orgUserGender?:"0")女#end
                             #end
-                            #@validateDiv("col-3")#end
+                            #@validateDiv("col-4")#end
                         #end
 
                         #@elementItem()
                             #@colLabel("col-3")<span class="c-red">*</span>邮箱：#end
-                            #@formControlDiv("col-6")
+                            #@formControlDiv("col-5")
                                 #tinyInput(
                                     "text" "orgUserEmail" user?.orgUserEmail {"placeholder":"@","datatype":"e",
                                     "nullmsg":"请输入邮箱！",
-                                    "class":
-                                    "input-text"})
+                                    "class":                                    "input-text"})
                             #end
-                            #@validateDiv("col-3")#end
+                            #@validateDiv("col-4")#end
                         #end
 
                         #@elementItem()
                             #@colLabel("col-3")源代码账号：#end
-                            #@formControlDiv("col-6")
+                            #@formControlDiv("col-5")
                                 #tinyInput(
                                     "text" "orgUserSubmitter" user?.orgUserSubmitter{"placeholder":""
                                 ,"id":"name",
                                     "class":
                                     "input-text"})
                             #end
-                            #@validateDiv("col-3")#end
+                            #@validateDiv("col-4")#end
                         #end
                         #@elementItem()
                             #@colLabel("col-3")<span class="c-red">*</span>角色：#end
-                            #@formControlDiv("col-6")
+                            #@formControlDiv("col-5")
                                 #@Tselect2F()
                                     #@Tselect2Body("taskMailToArray" "" {"class":"input-text select2","multiple":
                                         "multiple"}) ##加上为多选项
                                         #foreach(r : roleList)
-                                            <option value="${t.orgUserId}">${t.orgUserRealName}</option>
+                                            <option value="${r.orgRoleId}">${r.orgRoleName}</option>
                                         #end
                                     #end
                                 ##填写任意内容，侦听需重新填加 A侦听已内置
@@ -147,27 +146,30 @@
                                     #end
                                 #end
                             #end
-                            #@validateDiv("col-3")#end
+                            #@validateDiv("col-4")#end
                         #end
-
-
-
 
                         #@elementItem()
                             #@colLabel("col-3")职位：#end
-                            #@formControlDiv("col-6")
+                            #@formControlDiv("col-5")
                                 #tinyInput("text" "orgUserRole" user?.orgUserRole{"class":"input-text"})
                             #end
-                            #@validateDiv("col-3")#end
+                            #@validateDiv("col-4")#end
                         #end
                         #@elementItem()
                             #@colLabel("col-3")加入日期：#end
-                            #@formControlDiv("col-6")
+                            #@formControlDiv("col-5")
                                 #@tinyDateInput(
                                     "orgUserJoin" user?.orgUserJoin  "YYYY-MM-DD" {"style":"width:200px",
                                     "placeholder":""})#end
                             #end
-                            #@validateDiv("col-3")#end
+                            #@validateDiv("col-4")#end
+                        #end
+
+                        #@gridSysRow()
+                            #@div(divClass="col-8 col-offset-3 form-inline")
+                                #tinyInput("submit" "submitbtn" " 提交 " {"class":"btn btn-primary"})
+                            #end
                         #end
                     </div>
                     #end

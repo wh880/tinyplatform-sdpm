@@ -13,8 +13,10 @@ import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.util.DateUtils;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.org.dao.pojo.OrgDept;
+import org.tinygroup.sdpm.org.dao.pojo.OrgRole;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.DeptService;
+import org.tinygroup.sdpm.org.service.inter.RoleService;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.service.StoryService;
@@ -48,6 +50,8 @@ import java.util.Map;
 public class UserAction extends BaseController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private RoleService roleService;
     @Autowired
     private DeptService deptService;
     @Autowired
@@ -105,8 +109,8 @@ public class UserAction extends BaseController {
      * @return
      */
     @RequiresPermissions(value = {"org-user-edit", "org-user-editprofile"}, logical = Logical.OR)
-    @RequestMapping("/form")
-    public String form(String id, Model model) {
+    @RequestMapping("/editForm")
+    public String editForm(String id, Model model) {
         if (id != null) {
             OrgUser user = userService.findUser(id);
             OrgDept dept = deptService.findDept(user.getOrgDeptId());
@@ -123,9 +127,12 @@ public class UserAction extends BaseController {
      * @return
      */
     @RequiresPermissions(value = "organizationAddUser", logical = Logical.OR)
-    @RequestMapping("/add")
+    @RequestMapping("/form")
     public String add(Model model) {
-        model.addAttribute("roleList",  UserUtils.getAllRoleList());
+        OrgRole orgRole = new OrgRole();
+        orgRole.setOrgRoleType(OrgRole.ROLE_TYPE_SYS);
+        List<OrgRole> roleList = roleService.findRoleList(orgRole);
+        model.addAttribute("roleList",  roleList);
         return "organization/user/userAdd";
     }
 

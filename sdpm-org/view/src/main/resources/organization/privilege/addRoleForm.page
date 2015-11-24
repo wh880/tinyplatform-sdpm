@@ -29,6 +29,7 @@
     #@gridSysCol(6)
         #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/org/privilege/save" "post" {"class":"test"})
         <input type="hidden" name="copyRoleId" value="${copyRoleId}"/>
+        <input type="hidden" name="orgRoleId" value="${role?.orgRoleId}"/>
             #@gridSysRow()
                 #@colLabel("col-2")<span class="c-red">*</span>角色名称：#end
                 #@gridSysCol(7)
@@ -42,11 +43,11 @@
             #@gridSysRow()
                 #@colLabel("col-2")角色类型：#end
                 #@gridSysCol(7)
-                    #@Tselect2Body("orgRoleType" role?.orgRoleType {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                        #foreach(type : getDict("roleType"))
-                        <option value=${type.value}>${type.text}</option>
+                        #@Tselect("orgRoleType" role?.orgRoleType {"class":"input-text"}) ##,"multiple":"multiple"加上为多选项
+                            #foreach(type : getDict("roleType"))
+                                #@ToptionItem(type.value)${type.text}#end
+                            #end
                         #end
-                    #end
                 #end
             #end
 

@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * 项目关联产品
  * Created by wangying14938 on 2015-09-22.
  */
 @Controller
@@ -32,8 +33,8 @@ public class ProjectProductAction extends BaseController {
     @RequestMapping("/findLinkProduct")
     public String findLinkProduct(Model model, HttpServletResponse response, HttpServletRequest request) {
         List<Product> productList = ProductUtils.getProductList();
-        Integer projectId = ProjectUtils.getCurrentProjectId(request,response);
-        if (projectId==null){
+        Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
+        if (projectId == null) {
             return redirectProjectForm();
         }
         List<ProjectProduct> linkList = projectProductService.findProducts(projectId);
@@ -49,8 +50,8 @@ public class ProjectProductAction extends BaseController {
     @ResponseBody
     @RequestMapping("/save")
     public Map<String, String> save(Integer[] array, HttpServletResponse response, HttpServletRequest request) {
-        Integer projectId = ProjectUtils.getCurrentProjectId(request,response);
-        if (projectId==null){
+        Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
+        if (projectId == null) {
             return resultMap(false, "项目不存在");
         }
         projectProductService.addProjectLinkToProduct(array, projectId);
