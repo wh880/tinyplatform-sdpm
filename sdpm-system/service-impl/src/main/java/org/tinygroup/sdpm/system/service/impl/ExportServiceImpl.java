@@ -15,9 +15,11 @@ import org.tinygroup.sdpm.quality.biz.inter.BugManager;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.sdpm.system.service.impl.util.ExportUtil;
 import org.tinygroup.sdpm.system.service.inter.ExportService;
+import org.tinygroup.template.StaticClassOperator;
 import org.tinygroup.template.TemplateContext;
 import org.tinygroup.template.TemplateEngine;
 import org.tinygroup.template.TemplateException;
+import org.tinygroup.template.application.DefaultStaticClassOperator;
 import org.tinygroup.template.impl.TemplateContextDefault;
 import org.tinygroup.template.impl.TemplateEngineDefault;
 import org.tinygroup.tinysqldsl.Pager;
@@ -95,7 +97,6 @@ public class ExportServiceImpl implements ExportService{
             context.put("bugNoInList", notInBugList);
             context.put("userManager",userManager);
             context.put("productManager",productManager);
-            context.put("ExportUtil",ExportUtil.class);
         }
         mergeTemplate(DocTemplateResolver.RELEASE,context,response,"发布文档");
     }
@@ -108,6 +109,7 @@ public class ExportServiceImpl implements ExportService{
         response.setHeader("Content-Disposition", "attachment; filename="
                 + (toUTF8(name)+today.get(Calendar.YEAR)+today.get(Calendar.MONTH)+today.get(Calendar.DAY_OF_MONTH)+today.get(Calendar.HOUR)+today.get(Calendar.MINUTE)+".doc"));
         OutputStream out = response.getOutputStream();
+        docTemplateEngine.registerStaticClassOperator(new DefaultStaticClassOperator("ExportUtil",ExportUtil.class));
         docTemplateEngine.renderTemplate(fileObject.getFileName(),context,out);
         out.close();
     }
