@@ -1,5 +1,4 @@
 #!set(activeTitle="日志管理",activeMenuId=currentPageId)
-
 #set(name="note")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")

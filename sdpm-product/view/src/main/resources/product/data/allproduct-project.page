@@ -11,7 +11,7 @@
 	#@td()${project?.projectId}#end
 	#@td()<a href="${TINY_CONTEXT_PATH +adminPath}/project/task/index.page">${project?.projectName}</a>#end
 	#@td()${project?.projectCode}#end
-	#@td()${project?.projectEnd?formatDate(project?.projectEnd,'yyyy年MM月dd日'):""}#end
+	#@td()${project?.projectEnd?formatDate(project?.projectEnd,'yyyy-MM-dd'):""}#end
 	#@td()${project?.projectStatus}#end
 	#@td()${project?.projectId}#end
 	#@td()${project?.projectId}#end

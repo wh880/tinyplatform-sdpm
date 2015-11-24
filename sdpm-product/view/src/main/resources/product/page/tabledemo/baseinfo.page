@@ -57,7 +57,7 @@
 		       			#end	
 		       			#@tr()
 							#@td()创建日期#end 
-		       				#@td()${product?.productCreatedDate?formatDate(product?.productCreatedDate,'yyyy年MM月dd日'):""}#end
+		       				#@td()${product?.productCreatedDate?formatDate(product?.productCreatedDate,'yyyy-MM-dd'):""}#end
 		       			#end	
 		       		#end
 		       	#end

@@ -6,11 +6,11 @@
     #@td()${p?.projectCode}#end
     #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/project/task/index?projectId=${p?.projectId}">${p
         ?.projectName}</a>#end
-    #@td()${formatDate(p?.projectBegin,"yyyy年MM月dd日")}#end
-    #@td()${formatDate(p?.projectEnd,"yyyy年MM月dd日")}#end
+    #@td()${formatDate(p?.projectBegin,"yyyy-MM-dd")}#end
+    #@td()${formatDate(p?.projectEnd,"yyyy-MM-dd")}#end
     #@td()${getDict("projectStatus",p?.projectStatus)}#end
     #@td()${t?.teamRole}#end
-    #@td()${formatDate(t?.teamJoin,"yyyy年MM月dd日")}#end
+    #@td()${formatDate(t?.teamJoin,"yyyy-MM-dd")}#end
     #@td()${t?.teamDays}#end
 #end
 #end
