@@ -64,24 +64,33 @@
             #end
             #@elementItem()
                 #@sdpmItem("服务工时上限")
-                    #tinyInput(
+                    <div class="input-group">
+                        #tinyInput(
                         "text" "serviceEffortLimit" ""{"id":"serviceEffortLimit",
-                        "class":"input-text select2"})
+                            "class":"input-text select2"})
+                        <span class="input-group-addon" id="basic-addon2">小时</span>
+                    </div>
                 #end
             #end
             #@elementItem()
                 #@sdpmItem("服务响应时限")
+                <div class="input-group">
                     #tinyInput(
                         "text" "serviceReplyTimeLimit" ""{"id":
                         "serviceReplyTimeLimit","class":
                         "input-text select2"})
+                    <span class="input-group-addon" id="basic-addon2">小时</span>
+                </div>
                 #end
             #end
             #@elementItem()
                 #@sdpmItem("需求回访时限")
-                    #tinyInput(
+                    <div class="input-group">
+                        #tinyInput(
                         "text" "serviceReviewTimeLimit" ""{"id":
-                        "serviceReviewTimeLimit","class":"input-text select2"})
+                            "serviceReviewTimeLimit","class":"input-text select2"})
+                        <span class="input-group-addon" id="basic-addon2">小时</span>
+                    </div>
                 #end
             #end
             #@elementItem()
