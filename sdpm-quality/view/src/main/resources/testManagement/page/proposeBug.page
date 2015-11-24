@@ -46,8 +46,16 @@
                                 });
                             });
                         </script>
-                        <span><a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition" class="r ">增加</a>
-                                <a href="${TINY_CONTEXT_PATH+adminPath}/product/allproduct/addition">全部</a></span>
+                        <span>
+                            #set(m=menuManager.getMenu("newproduct"))
+                            #if(m)
+                                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
+                            #end
+                            #set(m=menuManager.getMenu("allproduct"))
+                            #if(m)
+                                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
+                            #end
+                        </span>
                     #end
                     #end
                     #@div(divClass="col-3")
@@ -95,8 +103,14 @@
                                 })
                             </script>
                             #@Tselect2Fix()
-                                <a href="${TINY_CONTEXT_PATH+adminPath}/project/form" class="r ">增加</a>
-                                <a href="${TINY_CONTEXT_PATH+adminPath}/project/list">全部</a>
+                                #set(m=menuManager.getMenu("project-op-add"))
+                                #if(m)
+                                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
+                                #end
+                                #set(m=menuManager.getMenu("project-op-all"))
+                                #if(m)
+                                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
+                                #end
                             #end
                         #end
                     #end
@@ -111,8 +125,14 @@
                             #@Tselect2Body("bugOpenedBuild" bug?.bugOpenedBuild {"class":"input-text select2","multiple":"multiple"}) ##,"multiple":"multiple"加上为多选项
                             #end
                             #@Tselect2Fix()
-                                <a href="${TINY_CONTEXT_PATH+adminPath}/project/build/edit" class="r ">增加</a>
-                                <a href="${TINY_CONTEXT_PATH+adminPath}/project/build/index">全部</a>
+                                #set(m=menuManager.getMenu("pro-version-add"))
+                                #if(m)
+                                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
+                                #end
+                                #set(m=menuManager.getMenu("version"))
+                                #if(m)
+                                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
+                                #end
                             #end
                         #end
                     #end
@@ -129,7 +149,16 @@
                                 "input-text select2"}) ##,"multiple":"multiple"加上为多选项
 
                             #end
-                            #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH+adminPath}/org/user/form" class="r ">增加</a>#end
+                            #@Tselect2Fix()
+                                #set(m=menuManager.getMenu("organizationAddUser"))
+                                #if(m)
+                                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
+                                #end
+                                #set(m=menuManager.getMenu("organizationUser"))
+                                #if(m)
+                                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
+                                #end
+                            #end
                         #end
                     #end
                     #@validateDiv("col-2")#end
@@ -172,8 +201,15 @@
 
                         #end
                         #@Tselect2Fix()
-                            <a href="${TINY_CONTEXT_PATH+adminPath}/product/story/addstory" class="r ">增加</a>
-                            <a href="${TINY_CONTEXT_PATH+adminPath}/product/story?choose=1">全部</a>#end
+                            #set(m=menuManager.getMenu("product-demand-add"))
+                            #if(m)
+                                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
+                            #end
+                            #set(m=menuManager.getMenu("product-demand"))
+                            #if(m)
+                                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
+                            #end
+                        #end
                     #end
                 #end
             #end
@@ -187,8 +223,15 @@
 
                         #end
                         #@Tselect2Fix()
-                            <a href="${TINY_CONTEXT_PATH+adminPath}/project/task/form" class="r ">增加</a>
-                            <a href="${TINY_CONTEXT_PATH+adminPath}/project/task/index">全部</a>#end
+                            #set(m=menuManager.getMenu("pro-task-proposeversion"))
+                            #if(m)
+                                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
+                            #end
+                            #set(m=menuManager.getMenu("task"))
+                            #if(m)
+                                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
+                            #end
+                        #end
                     #end
                 #end
             #end
@@ -248,7 +291,16 @@
                         <option value="${user?.orgUserId}">${user?.orgUserRealName}</option>
                     #end
                 #end
-                #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH+adminPath}/org/user/form" class="r ">增加</a>#end
+                #@Tselect2Fix()
+                    #set(m=menuManager.getMenu("organizationAddUser"))
+                    #if(m)
+                        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
+                    #end
+                    #set(m=menuManager.getMenu("organizationUser"))
+                    #if(m)
+                        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
+                    #end
+                #end
             #end
         #end
     #end

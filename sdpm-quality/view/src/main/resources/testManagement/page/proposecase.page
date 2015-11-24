@@ -49,8 +49,16 @@
                             });
                         });
                     </script>
-                    <span><a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition" class="r ">增加</a>
-                                <a href="${TINY_CONTEXT_PATH+adminPath}/product/allproduct/addition">全部</a></span>
+                    <span>
+                        #set(m=menuManager.getMenu("newproduct"))
+                        #if(m)
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
+                        #end
+                        #set(m=menuManager.getMenu("allproduct"))
+                        #if(m)
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
+                        #end
+                    </span>
                 #end
 					#end
 					#@div(divClass="col-0")&nbsp;&nbsp#end
@@ -129,14 +137,15 @@
 
                              #end
                             #@Tselect2Fix()
-
-                                #@hasMenu("product-demand-add")
-                                    <a href="${TINY_CONTEXT_PATH+adminPath}/product/story/addstory" class="r ">增加</a>
+                                #set(m=menuManager.getMenu("product-demand-add"))
+                                #if(m)
+                                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
                                 #end
-                                #@hasMenu("product-demand")
-                                    <a href="${TINY_CONTEXT_PATH+adminPath}/product/story?choose=1">全部</a>
+                                #set(m=menuManager.getMenu("product-demand"))
+                                #if(m)
+                                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
                                 #end
-                        #end
+                            #end
                             <script type="text/javascript">
                                 $(document).ready(function(){
                                     var pId = $("select[name=productId]  option:selected").val();

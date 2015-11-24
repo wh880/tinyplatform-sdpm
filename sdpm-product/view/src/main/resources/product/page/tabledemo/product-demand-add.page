@@ -70,8 +70,16 @@
                             });
                         });
                     </script>
-                    <span><a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition" class="r ">增加</a>
-                                <a href="${TINY_CONTEXT_PATH+adminPath}/product/allproduct/addition">全部</a></span>
+                    <span>
+                        #set(m=menuManager.getMenu("newproduct"))
+                        #if(m)
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
+                        #end
+                        #set(m=menuManager.getMenu("allproduct"))
+                        #if(m)
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
+                        #end
+                    </span>
                 #end
             </div>
             <div class="col-7">
@@ -242,8 +250,14 @@
             </script>
 
             #@Tselect2Fix()
-                <a href="${TINY_CONTEXT_PATH}/a/org/user/form">增加</a>
-                <a href="${TINY_CONTEXT_PATH}/a/org/user/list" class="r">全部</a>
+                #set(m=menuManager.getMenu("organizationAddUser"))
+                #if(m)
+                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
+                #end
+                #set(m=menuManager.getMenu("organizationUser"))
+                #if(m)
+                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
+                #end
             #end
 
         #end
@@ -271,8 +285,14 @@
                 ajaxRead("${sid}", "storyMailto", "orgUserId", "orgUserRealName", "/org/user/userList");
             </script>
             #@Tselect2Fix()
-                <a href="${TINY_CONTEXT_PATH}/a/org/user/form">增加</a>
-                <a href="${TINY_CONTEXT_PATH}/a/org/user/list" class="r">全部</a>
+                #set(m=menuManager.getMenu("organizationAddUser"))
+                #if(m)
+                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
+                #end
+                #set(m=menuManager.getMenu("organizationUser"))
+                #if(m)
+                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
+                #end
             #end
         #end
     #end

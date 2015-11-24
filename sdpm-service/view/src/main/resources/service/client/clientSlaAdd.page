@@ -30,14 +30,6 @@
                                 #@tinyOptionItem(l.productId)${l?.productName}#end
                             #end
                         #end
-                        #@Tselect2Fix()
-                            #@hasMenu("client-add")
-                                <a href="${TINY_CONTEXT_PATH+adminPath}/service/client/form">增加</a>
-                            #end
-                            #@hasMenu("client")
-                                <a href="${TINY_CONTEXT_PATH+adminPath}/service/client/list" class="r">全部</a>
-                            #end
-                        #end
                     #end
                 #end
             #end
