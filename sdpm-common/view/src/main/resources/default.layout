@@ -154,6 +154,13 @@
             });
         }
     })
+    $(document).ready(function(){
+        var referrer = document.referrer;
+        var classPath = "${TINY_CONTEXT_PATH}";
+        var oldUrl = referrer.substring(referrer.indexOf(classPath)+classPath.length);
+        if(oldUrl.indexOf("login")<0)
+            $("input[name=lastAddress]").attr("value",oldUrl);
+    });
 </script>
 </body>
 </html>

@@ -12,7 +12,7 @@
 
 #@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/product/release/update" "post" {"class":"","enctype":
     "multipart/form-data"})
-
+<input type="hidden" name="lastAddress" value=""/>
 	#tinyInput("text" "releaseId" release.releaseId {"class":"input-text hidden"})
     <div class="infoContent">
         <p class="titleName">编辑</p>

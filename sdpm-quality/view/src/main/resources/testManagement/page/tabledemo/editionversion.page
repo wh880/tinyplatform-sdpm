@@ -26,6 +26,7 @@
             $(function(){
                 var form = $("#${fromId}");
                 var action = form.attr("action");
+				var oldUrl = $("input[name=lastAddress]").attr("value");
                 form.submit(function(){
                     $.ajax({
                          type: "post",
@@ -34,7 +35,7 @@
                          dataType: "json",
                          success: function(data){
                                 if(data.status == "y"){
-                                window.location.href=document.referrer;
+                                window.location.href=oldUrl;
                                 }
                             }
                              });
@@ -43,6 +44,7 @@
             })
 
         </script>
+        <input type="hidden" name="lastAddress" value=""/>
 		#hiddenInput(hiddenInputName="testversionId" hiddenInputValue=testTask?.testversionId)
 			<div style="width:100%">
     			<div class="infoContent">

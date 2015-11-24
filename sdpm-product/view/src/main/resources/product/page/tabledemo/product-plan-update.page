@@ -140,7 +140,7 @@
 
 
 #@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/product/plan/update" "post" {"class":""})
-
+<input type="hidden" name="lastAddress" value=""/>
     #tinyInput("text" "planId" plan.planId {"class":"input-text hidden"})
 <div class="infoContent">
     <p class="titleName">编辑</p>

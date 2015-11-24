@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
@@ -47,7 +48,11 @@ public class PlanAction  extends BaseController{
 
 
 	@RequestMapping("/save")
-	public String save(@CookieValue("cookieProductId") String cookieProductId,ProductPlan productPlan, HttpServletRequest request, SystemAction systemAction) throws IOException {
+	public String save(
+			@CookieValue("cookieProductId") String cookieProductId,
+			ProductPlan productPlan, HttpServletRequest request,
+			SystemAction systemAction,
+			String lastAddress) throws IOException {
 
 
 		productPlan.setProductId(Integer.parseInt(cookieProductId));
@@ -64,13 +69,16 @@ public class PlanAction  extends BaseController{
 				, null
 				, null
 				, systemAction.getActionComment());
-
-
+		if(!StringUtil.isBlank(lastAddress)){
+			return "redirect:"+lastAddress;
+		}
 		return "redirect:" + "/a/product/plan/content";
 	}
 
 	@RequestMapping("/update")
-	public 	String update(ProductPlan plan,SystemAction systemAction) throws IOException {
+	public 	String update(ProductPlan plan,
+							SystemAction systemAction,
+							String lastAddress) throws IOException {
 		ProductPlan plan1 = planService.findPlan(plan.getPlanId());
 		planService.updatePlan(plan);
 
@@ -83,7 +91,9 @@ public class PlanAction  extends BaseController{
 				, plan1
 				, plan
 				, systemAction.getActionComment());
-
+		if(!StringUtil.isBlank(lastAddress)){
+			return "redirect:"+lastAddress;
+		}
 
 		return " redirect:" + adminPath + "/product/plan/content";
 
@@ -133,7 +143,7 @@ public class PlanAction  extends BaseController{
 
 		model.addAttribute("plan",plan);
 
-		return "/product/page/tabledemo/product-plan-update.page";
+		return "/product/page/tabledemo/product-plan-update";
 	}
 	
 	@RequestMapping("/find/{forwordPager}")

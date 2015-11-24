@@ -112,7 +112,14 @@ public class TestCaseAction extends BaseController {
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String save(QualityTestCase testcase, String comment, String[] step, String[] expect, @RequestParam(value = "file", required = false) MultipartFile[] file, String[] title, HttpServletRequest request) throws Exception {
+    public String save(QualityTestCase testcase,
+                       String comment,
+                       String[] step,
+                       String[] expect,
+                       @RequestParam(value = "file", required = false) MultipartFile[] file,
+                       String[] title,
+                       HttpServletRequest request,
+                       String lastAddress) throws Exception {
         if (testcase.getCaseId() == null || testcase.getCaseId() < 1) {
             testcase.setCaseOpenedBy(UserUtils.getUserId());
             if (testcase.getStoryId() != null && testcase.getStoryId() > 0) {
@@ -158,6 +165,9 @@ public class TestCaseAction extends BaseController {
             );
         }
         uploads(file, testcase.getCaseId(), ProfileType.TESTCASE, title);
+        if(!StringUtil.isBlank(lastAddress)){
+            return "redirect:"+lastAddress;
+        }
         return "redirect:" + "/a/quality/testCase";
     }
 

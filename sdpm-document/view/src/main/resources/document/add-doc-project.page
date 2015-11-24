@@ -17,6 +17,7 @@
 #include("doc-tab.page")
 #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/document/doc/addSave" "post" {"class":"add","enctype":
     "multipart/form-data"})
+<input type="hidden" name="lastAddress" value=""/>
 <div style="width:100%">
 <div class="infoContent">
     <p class="titleName">创建文档</p>

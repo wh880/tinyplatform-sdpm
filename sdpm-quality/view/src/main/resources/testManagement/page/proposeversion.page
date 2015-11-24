@@ -21,6 +21,7 @@
 
 #end
     #@tinyForm("thisform" "" "post" {"class":"test"})
+    <input type="hidden" name="lastAddress" value=""/>
     #hiddenInput(hiddenInputName="testversionId" hiddenInputValue=testTask?.testversionId)
     #hiddenInput(hiddenInputName="productId" hiddenInputValue=qualityProductId)
     <div style="width:100%">
@@ -276,7 +277,8 @@
             },
             callback:function(data){
                 if(data.status=="y"){
-                    window.location.href="${TINY_CONTEXT_PATH+adminPath}/quality/version?status=tvernotest";
+                    var olUrl = $("input[name=lastAddress]").attr("value");
+                    window.location.href="${TINY_CONTEXT_PATH}"+olUrl;
                 }
                 //返回数据data是json对象，{"info":"demo info","status":"y"}
                 //info: 输出提示信息;

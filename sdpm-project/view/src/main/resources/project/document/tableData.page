@@ -22,7 +22,7 @@
             #if(m.id == "pro-document-delete")
                 #@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m.href d?.docId)#buttonIcon(iconClass=m.icon)#end
             #else
-            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?docId=${d?.docId}"
+            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?docId=${d?.docId}" class="docJump" value="${d?.docLibId}"
                title="编辑">#buttonIcon(iconClass=m.icon)</a>
             #end
         #end
