@@ -43,7 +43,7 @@ public class ProjectBuild implements Serializable {
 	 */
 	private Integer buildProject;
 	/**
-	 * 名称编号
+	 * 版本名称
 	 *
 	 */
 	private String buildName;

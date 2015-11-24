@@ -48,10 +48,10 @@
     #end
 
     #@elementItem()
-        #@sdpmItem("名称编号")
+        #@sdpmItem("版本名称")
             #tinyInput(
                 "text" "buildName" build?.buildName{"placeholder":"","datatype":"*4-16","nullmsg":
-                "名称编号不能为空！","id":"username","class":"input-text"})
+                "版本名称不能为空！","id":"username","class":"input-text"})
         #end
     #end
     #@elementItem()
@@ -59,7 +59,7 @@
             #@Tselect2F()
                 #@Tselect2Body(
                     "buildBuilder" build?.buildBuilder {"class":"input-text select2","placeholder":"","nullmsg":
-                    "名称编号不能为空！"}) ##,"multiple":"multiple"加上为多选项
+                    "版本名称不能为空！"}) ##,"multiple":"multiple"加上为多选项
                     #foreach(t : teamList)
                         <option value="${t.orgUserId}">
                             ${t.orgUserRealName}

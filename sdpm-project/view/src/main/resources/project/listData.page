@@ -53,8 +53,8 @@
         #@td()<input type="checkbox" value="${p.projectId}" name="idCheck">#end
         #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/project/view?projectId=${p.projectId}">${p.projectId}</a>#end
         #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/project/view?projectId=${p.projectId}">${p.projectName}</a>#end
-        #@td()${p.projectCode}#end
-        #@td()
+        #@td("nowrap")${p.projectCode}#end
+        #@td("nowrap")
             #if(p.projectEnd)
                 ${formatdate(p.projectEnd,"yyyy-MM-dd")}
             #end
@@ -64,7 +64,7 @@
         #end
         #@td()${format("%.2f",p.estimate)}#end
         #@td()${format("%.2f",p.consumed)}#end
-        #@td()
+        #@td("nowrap")
         <div class="progress-bars text-l" style="width:110px">
             format("%.2f",d)p.percent
             <span class="sr-modern" style="width:${format(" %.2f%%",p.percent*100)}"></span>
@@ -72,7 +72,7 @@
         <span style="left:115px; float:left;height: 0; position: relative;top: -14px">${format
             ("%.2f%%",p.percent*100)}</span>
         #end
-        #@td()
+        #@td("nowrap")
         <p class='projectline text-left' values='${p.burnValue}' style="width:90px;height:30px;"></p>
         #end
     #end

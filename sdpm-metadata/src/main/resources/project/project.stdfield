@@ -122,7 +122,7 @@
   </standard-field>
   <standard-field id="c2eff8527271417b8a64e48d1e448562" name="build_product" title="产品" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" default="0"/>
   <standard-field id="bfbdd7d31ee44d52a0e598ec2a5435a2" name="build_project" title="项目" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" default="0"/>
-  <standard-field id="27b1f072f029411e930cd4b6fdb804ad" name="build_name" title="名称编号" business-type-id="27ebfcdc558c477da425a46e566d4637" default=""/>
+  <standard-field id="27b1f072f029411e930cd4b6fdb804ad" name="build_name" title="版本名称" business-type-id="27ebfcdc558c477da425a46e566d4637" default=""/>
   <standard-field id="d95ddb81995949f39760a718372669c2" name="build_scm_path" title="源码地址" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
   <standard-field id="8dde271313cf4c318deed6fe090c246a" name="build_file_path" title="下载地址" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
   <standard-field id="5ac4c0d6169044008a05dcc8d1610c6b" name="build_date" title="打包日期" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff"/>

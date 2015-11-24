@@ -72,8 +72,8 @@
             #@td()<a href="${TINY_CONTEXT_PATH +adminPath}/product/storySpec/find/productDemandDetail?storyId=${story.storyId}">${story.storyTitle}</a>#end
             #@td()${story?.planName}#end
             #@td()${getDict("storySource",story?.storySource)}#end
-            #@td()<span class="${story?.storyOpenedBy==UserUtils.getUserId()?'c-red':''}">${story?.storyOpenedBy?UserUtils.getUserById(story?.storyOpenedBy).orgUserRealName:""}</span>#end
-            #@td()<span class="${story?.storyAssignedTo==UserUtils.getUserId()?'c-red':''}">${story?.storyAssignedTo?UserUtils.getUserById(story?.storyAssignedTo).orgUserRealName:""}</span>#end
+            #@td("nowrap")<span class="${story?.storyOpenedBy==UserUtils.getUserId()?'c-red':''}">${story?.storyOpenedBy?UserUtils.getUserById(story?.storyOpenedBy).orgUserRealName:""}</span>#end
+            #@td("nowrap")<span class="${story?.storyAssignedTo==UserUtils.getUserId()?'c-red':''}">${story?.storyAssignedTo?UserUtils.getUserById(story?.storyAssignedTo).orgUserRealName:""}</span>#end
             #@td()${story?.storyEstimate}#end
             #@td()${getDict("storyStatus",story?.storyStatus)}#end
             #@td("nowrap")${getDict("storyStage",story?.storyStage)}#end

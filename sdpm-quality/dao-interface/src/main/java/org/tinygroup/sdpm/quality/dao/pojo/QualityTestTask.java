@@ -53,7 +53,7 @@ public class QualityTestTask implements Serializable {
 	private Integer projectId;
 
 	/** 
-	 * 名称编号
+	 * 版本名称
 	 * 
 	 */
 	private String buildName;
@@ -135,108 +135,108 @@ public class QualityTestTask implements Serializable {
 		this.projectName = projectName;
 	}
 
-	public void setTestversionId(Integer testversionId){
-		this. testversionId = testversionId;
-	}
-
 	public Integer getTestversionId(){
 		return testversionId;
 	}
 
-	public void setTesttaskTitle(String testtaskTitle){
-		this. testtaskTitle = testtaskTitle;
+	public void setTestversionId(Integer testversionId){
+		this. testversionId = testversionId;
 	}
 
 	public String getTesttaskTitle(){
 		return testtaskTitle;
 	}
 
-	public void setProductId(Integer productId){
-		this. productId = productId;
+	public void setTesttaskTitle(String testtaskTitle){
+		this. testtaskTitle = testtaskTitle;
 	}
 
 	public Integer getProductId(){
 		return productId;
 	}
 
-	public void setProjectId(Integer projectId){
-		this. projectId = projectId;
+	public void setProductId(Integer productId){
+		this. productId = productId;
 	}
 
 	public Integer getProjectId(){
 		return projectId;
 	}
 
-	public void setBuildName(String buildName){
-		this. buildName = buildName;
+	public void setProjectId(Integer projectId){
+		this. projectId = projectId;
 	}
 
 	public String getBuildName(){
 		return buildName;
 	}
 
-	public void setTesttaskOwner(String testtaskOwner){
-		this. testtaskOwner = testtaskOwner;
+	public void setBuildName(String buildName){
+		this. buildName = buildName;
 	}
 
 	public String getTesttaskOwner(){
 		return testtaskOwner;
 	}
 
-	public void setPriority(Integer priority){
-		this. priority = priority;
+	public void setTesttaskOwner(String testtaskOwner){
+		this. testtaskOwner = testtaskOwner;
 	}
 
 	public Integer getPriority(){
 		return priority;
 	}
 
-	public void setTesttaskBegin(Date testtaskBegin){
-		this. testtaskBegin = testtaskBegin;
+	public void setPriority(Integer priority){
+		this. priority = priority;
 	}
 
 	public Date getTesttaskBegin(){
 		return testtaskBegin;
 	}
 
-	public void setTesttaskEnd(Date testtaskEnd){
-		this. testtaskEnd = testtaskEnd;
+	public void setTesttaskBegin(Date testtaskBegin){
+		this. testtaskBegin = testtaskBegin;
 	}
 
 	public Date getTesttaskEnd(){
 		return testtaskEnd;
 	}
 
-	public void setTesttaskDesc(String testtaskDesc){
-		this. testtaskDesc = testtaskDesc;
+	public void setTesttaskEnd(Date testtaskEnd){
+		this. testtaskEnd = testtaskEnd;
 	}
 
 	public String getTesttaskDesc(){
 		return testtaskDesc;
 	}
 
-	public void setTesttaskReport(String testtaskReport){
-		this. testtaskReport = testtaskReport;
+	public void setTesttaskDesc(String testtaskDesc){
+		this. testtaskDesc = testtaskDesc;
 	}
 
 	public String getTesttaskReport(){
 		return testtaskReport;
 	}
 
-	public void setTesttaskStatus(String testtaskStatus){
-		this. testtaskStatus = testtaskStatus;
+	public void setTesttaskReport(String testtaskReport){
+		this. testtaskReport = testtaskReport;
 	}
 
 	public String getTesttaskStatus(){
 		return testtaskStatus;
 	}
 
-	public void setDeleted(Integer deleted){
-		this. deleted = deleted;
+	public void setTesttaskStatus(String testtaskStatus){
+		this. testtaskStatus = testtaskStatus;
 	}
 
 	public Integer getDeleted(){
 		return deleted;
+	}
+
+	public void setDeleted(Integer deleted){
+		this. deleted = deleted;
 	}
 
 }

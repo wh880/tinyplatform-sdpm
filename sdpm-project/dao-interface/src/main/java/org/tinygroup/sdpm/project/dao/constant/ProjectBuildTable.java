@@ -46,7 +46,7 @@ public class ProjectBuildTable extends Table {
 	public final Column BUILD_PROJECT = new Column(this, "build_project");
 
 	/** 
-	 * 名称编号
+	 * 版本名称
 	 * 
 	 */
 	public final Column BUILD_NAME = new Column(this, "build_name");
