@@ -8,11 +8,10 @@
         ?.productLineName}</a>
     #end
     #@td()${productLine?.productLineCode}#end
-##    #@td()${productLine?.companyId}#end
-##    #@td()${productLine?.deptId}#end
-    #@td()${productLine?.productLineOwner?UserUtils.getUserById(productLine?.productLineOwner)?.orgUserRealName:""}#end
-    #@td()${productLine?.productLineQualityManager?UserUtils.getUserById(productLine?.productLineQualityManager)?.orgUserRealName:""}#end
-    #@td()${productLine?.productLineDeliveryManager?UserUtils.getUserById(productLine?.productLineDeliveryManager)?.orgUserRealName:""}#end
+
+    #@td()<span class="${productLine?.productLineOwner==UserUtils.getUserId()?'c-red':''}">${productLine?.productLineOwner?UserUtils.getUserById(productLine?.productLineOwner)?.orgUserRealName:""}</span>#end
+    #@td()<span class="${productLine?.productLineQualityManager==UserUtils.getUserId()?'c-red':''}">${productLine?.productLineQualityManager?UserUtils.getUserById(productLine?.productLineQualityManager)?.orgUserRealName:""}</span>#end
+    #@td()<span class="${productLine?.productLineDeliveryManager==UserUtils.getUserId()?'c-red':''}">${productLine?.productLineDeliveryManager?UserUtils.getUserById(productLine?.productLineDeliveryManager)?.orgUserRealName:""}</span>#end
     #@td()
         #foreach(m:menuManager.getScopeMenus("productLine-overview"))
             #set(url=eval(m.href))

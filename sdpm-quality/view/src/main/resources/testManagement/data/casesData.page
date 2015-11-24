@@ -14,8 +14,8 @@ ${casepager?.totalCount+1}
     #@td()${getDict("casePriority",c?.priority)}#end
     #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/testCase/case/viewInfo?id=${c?.caseId}">${c?.caseTitle}</a>#end
     #@td()${getDict("caseType",c?.caseType)}#end
-    #@td()${c?.caseOpenedBy?UserUtils.getUserById(c?.caseOpenedBy)?.orgUserRealName:""}#end
-    #@td()${c?.caseLastRunner?UserUtils.getUserById(c?.caseLastRunner)?.orgUserRealName:""}#end
+    #@td()<span class="${c?.caseOpenedBy==UserUtils.getUserId()?'c-red':''}">${c?.caseOpenedBy?UserUtils.getUserById(c?.caseOpenedBy)?.orgUserRealName:""}</span>#end
+    #@td()<span class="${c?.caseLastRunner==UserUtils.getUserId()?'c-red':''}">${c?.caseLastRunner?UserUtils.getUserById(c?.caseLastRunner)?.orgUserRealName:""}</span>#end
     #@td()${c?.caseLastRunDate?formatDate(c?.caseLastRunDate,'yyyy-MM-dd HH:mm:ss'):""}#end
     #@td()${getDict("caseResult",c?.caseLastRunResult)}#end
     #@td()${getDict("caseStatus",c?.caseStatus)}#end
