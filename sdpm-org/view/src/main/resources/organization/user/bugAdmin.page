@@ -40,8 +40,14 @@
 
                         #end
                         #@navSelect2Fix()
-                        <a href="${TINY_CONTEXT_PATH +adminPath}/org/user/list" class="r">所有用户 </a>&nbsp;
-                        <a href="${TINY_CONTEXT_PATH +adminPath}/org/user/form">添加用户</a>&nbsp;
+                            #set(m=menuManager.getMenu("organizationAddUser"))
+                            #if(m)
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
+                            #end
+                            #set(m=menuManager.getMenu("organizationUser"))
+                            #if(m)
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
+                            #end
                         #end
                     #end
                     #hiddenInput("userIdHidden","orgUserId","","")
