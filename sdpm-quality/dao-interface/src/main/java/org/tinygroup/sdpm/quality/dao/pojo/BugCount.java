@@ -16,7 +16,7 @@ public class BugCount implements Serializable{
 
     public String getPercentToString() {
         String s = String.valueOf(percent*100);
-        return s+"%";
+        return s.substring(0,s.indexOf("\\.")+3)+"%";
     }
 
     public void setPercentToString(String percentToString) {

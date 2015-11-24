@@ -68,14 +68,11 @@
 		<a href="#" class="active_btn">报表</a>
 	</span>
     <span class="r">
-##    	#@aModal("#myModal" "导出HTML" "500" "130" "btn-class" "/product/page/tabledemo/product-export-demand.pagelet")#buttonIcon(iconClass="icon-download-alt")导出#end
 
-##        <a href="${TINY_CONTEXT_PATH +adminPath}/product/page/project/togglebox.page">#buttonIcon(iconClass=
-##			"icon-goback icon-level-up icon-large icon-rotate-270")返回</a>&nbsp;
 	</span>
         #div(divClass="clearfix")
     #end
-##operationbar end
+
         #end
     #@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
         #@toggleLeft({"class":"aclass","style":"width:250px;height:450px;overflow:auto"})
@@ -153,8 +150,25 @@
 	            			 	 
 	            			 	 #for(road:roadMap?.value)
 									#@centerAlignTr()        
-		            			 	 	
-		            			 	 	#@td()${road?.name}#end  
+		            			 	 	#if(roadMap?.key=="B_moduleCount")
+											#@td()${road?.name?:"无模块"}#end
+										#elseif(roadMap?.key=="D_storySource")
+											#@td()${getDict("storySource",road?.name)}#end
+										#elseif(roadMap?.key=="C_planCount")
+											#@td()${road?.name?:"无计划"}#end
+										#elseif(roadMap?.key=="E_storyStatus")
+											#@td()${getDict("storyStatus",road?.name)}#end
+										#elseif(roadMap?.key=="F_storyStage")
+											#@td()${getDict("storyStage",road?.name)}#end
+										#elseif(roadMap?.key=="G_storyPri")
+											#@td()${getDict("storyPri",road?.name)}#end
+										#elseif(roadMap?.key=="G_storyAssignedTo")
+											#@td()${road?.name?:"无指派"}#end
+										#elseif(roadMap?.key=="K_storyClosedReason")
+											#@td()${getDict("proCloseReason",road?.name)}#end
+										#else
+											#@td()${road?.name}#end
+										#end
 		            			 	 	#@td()${road?.number}#end      
 		            			 	 	#@td()${road?.percentToString}#end     
 		            			 	 #end

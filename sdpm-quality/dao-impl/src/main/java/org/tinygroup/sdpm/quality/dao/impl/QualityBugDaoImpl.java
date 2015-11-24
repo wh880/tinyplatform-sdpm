@@ -641,7 +641,7 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
 
 	public List<BugCount> getCount(String code, Integer productId) {
 		Select select = select(CountConditions.getSelectItem(code,productId)).
-				from(CountConditions.getFromItem(code)).
+				from(CountConditions.getFromItem(code)).where(QUALITY_BUGTABLE.PRODUCT_ID.eq(productId)).
 				groupBy(CountConditions.getGroupByColumn(code)).
 				having(CountConditions.getHavingCondition(code));
 		return getDslSession().fetchList(select,BugCount.class);
