@@ -4,8 +4,7 @@
         #@td()<input type="checkbox" value="${b?.buildId}" name="idCheck">#end
         #@td()${b?.buildId}#end
         #@td()${b?.productName}#end
-        #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/project/build/productalbug?buildId=${b?.buildId}">${b
-            ?.buildName}#end
+        #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/project/build/productalbug?buildId=${b?.buildId}">${b?.buildName}#end
         #@td()${b?.buildScmPath}</a>#end
         #@td()${b?.buildFilePath}#end
         #@td()${formatDate(b?.buildDate,"yyyy-MM-dd")}#end
@@ -13,13 +12,11 @@
         #@td()
             #set(m=menuManager.getMenu("tversionpro"))
             #if(m)
-            <a class="openTestTask"
-               href="${TINY_CONTEXT_PATH+adminPath}${m.href}?buildId=${b?.buildId}&projectId=${b?.buildProject}"
-               title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+            <a class="openTestTask testTaskJump" value="${b?.buildProduct}" href="${TINY_CONTEXT_PATH+adminPath}${m.href}?buildId=${b?.buildId}&projectId=${b?.buildProject}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
             #end
             #foreach(m:menuManager.getScopeMenus("pro-version-op"))
                 #if(m.id != "pro-version-delete")
-                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?buildId=${b?.buildId}&projectId=${b?.buildProject}"
+                <a class="buildJump" value="${b?.buildProject}" href="${TINY_CONTEXT_PATH+adminPath}${m.href}?buildId=${b?.buildId}&projectId=${b?.buildProject}&productId=${b?.buildProduct}"
                    title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
                 #else
                     #@tinyTableItemRemove(TINY_CONTEXT_PATH+adminPath+m.href b.buildId)
@@ -29,3 +26,16 @@
         #end
     #end
 #end
+<script>
+    $(function(){
+        $(".testTaskJump").on("click",function(){
+            var productId = $(this).attr("value");
+            $.cookie("qualityProductId",productId,{path:"/"});
+        });
+        $(".buildJump").on("click",function(){
+            var projectId = $(this).attr("value");
+            $.cookie("currentProjectId",projectId,{path:"/"});
+        });
+    })
+
+</script>
