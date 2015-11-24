@@ -7,7 +7,7 @@
 						#@td()${getDict("casePriority",run?.priority)}#end
 						#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/testCase/case/viewInfo?id=${run?.caseId}">${run?.caseTitle}</a>#end
 						#@td()${getDict("caseType",run?.caseType)}#end
-						#@td()${run?.testRunAssignedTo?UserUtils.getUserById(run?.testRunAssignedTo)?.orgUserRealName:""}#end
+						#@td()<span class="${run?.testRunAssignedTo==UserUtils.getUserId()?'c-red':''}">${run?.testRunAssignedTo?UserUtils.getUserById(run?.testRunAssignedTo)?.orgUserRealName:""}</span>#end
 						#@td()${run?.testRunLastRunner?UserUtils.getUserById(run?.testRunLastRunner)?.orgUserRealName:""}#end
 						#@td()${run?.testRunLastRunDate?formatDate(run?.testRunLastRunDate,'yyyy-MM-dd HH:mm:ss'):""}#end
 						#@td()${getDict("caseResult",run?.testRunLastRunResult)}#end

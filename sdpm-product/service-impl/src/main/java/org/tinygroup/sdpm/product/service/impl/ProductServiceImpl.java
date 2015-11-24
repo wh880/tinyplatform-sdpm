@@ -77,8 +77,8 @@ public class ProductServiceImpl implements ProductService {
         return productManager.getProductByUser(userId,delete,productLineId);
     }
 
-    public List<Product> getProductByUserWithCount(String userId,Integer delete,boolean noRole) {
-        return productManager.getProductByUserWithCount(userId,delete,noRole);
+    public List<Product> getProductByUserWithCount(String userId,Integer delete,boolean noRole,boolean justTeam) {
+        return productManager.getProductByUserWithCount(userId,delete,noRole,justTeam);
     }
 
     public List<Product> getProductByUserAndProductLineWithCount(String userId, Integer productLineId,Integer delete) {
@@ -94,7 +94,7 @@ public class ProductServiceImpl implements ProductService {
 
     public Map<String, List<Product>> getUserProductsWithCountMap(String userId) {
         Map<String, List<Product>> productMap = new HashMap<String, List<Product>>();
-        List<Product> products = productManager.getProductByUserWithCount(userId,0,false);
+        List<Product> products = productManager.getProductByUserWithCount(userId,0,true,false);
         for (Product product1 : products) {
             if (productMap.containsKey(product1.getProductLineName())) {
                 productMap.get(product1.getProductLineName()).add(product1);

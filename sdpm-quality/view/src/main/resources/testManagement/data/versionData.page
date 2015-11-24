@@ -10,10 +10,10 @@
                 href="${TINY_CONTEXT_PATH+adminPath}/quality/version/taskToCase?testversionId=${v?.testversionId}&currentPageId=5&status=tverallcase">${v
             ?.testtaskTitle}</a>#end
         #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/project/demand/index.page">${v?.projectName}</a>#end
-        #@td()${v?.searchBuildName}#end
-        #@td()${v?.testtaskOwner?UserUtils.getUserById(v?.testtaskOwner)?.orgUserRealName:""}#end
-        #@td()${v?.testtaskBegin}#end
-        #@td()${v?.testtaskEnd}#end
+        #@td()${v?.searchBuildName?:(v?.buildName=="0"?"trunk":"")}#end
+        #@td()<span class="${v?.testtaskOwner==UserUtils.getUserId()?'c-red':''}">${v?.testtaskOwner?UserUtils.getUserById(v?.testtaskOwner)?.orgUserRealName:""}</span>#end
+        #@td()${v?.testtaskBegin?formatDate(v?.testtaskBegin,"yyyy-MM-dd hh:mm"):""}#end
+        #@td()${v?.testtaskEnd?formatDate(v?.testtaskEnd,"yyyy-MM-dd hh:mm"):""}#end
         #@td()${getDict("versionStatus",v?.testtaskStatus)}#end
         #@td()
             #foreach(m:menuManager.getScopeMenus("testversion-op"))

@@ -28,7 +28,7 @@
         #@sdpmItem("产品")
             #@Tselect2F()
                 #@Tselect2Body(
-                    "buildProduct" build?.buildProduct {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                    "buildProduct" build?.buildProduct?:productId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 
                     #foreach(p : productList)
                         <option value="${p.productId}">${p.productName}</option>

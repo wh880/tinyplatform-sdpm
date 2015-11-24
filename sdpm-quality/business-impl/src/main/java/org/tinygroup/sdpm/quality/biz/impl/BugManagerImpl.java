@@ -63,6 +63,7 @@ public class BugManagerImpl implements BugManager {
 	}
 
 	public Map<String, List<BugCount>> report(String code, Integer productId) {
+		if(StringUtil.isBlank(code))return new HashMap<String, List<BugCount>>();
 		String[] codes = code.split(",");
 		if(codes!=null&&codes.length>0){
 			Map<String,List<BugCount>> bugCountMap = new HashMap<String, List<BugCount>>();
@@ -70,25 +71,6 @@ public class BugManagerImpl implements BugManager {
 				String[] sqlCodes = countCode.split("_");
 				List<BugCount> result = bugdao.getCount(sqlCodes[0],productId);
 				bugCountMap.put(countCode,result);
-				if("A".equals(sqlCodes[0])){
-					BugCount count = bugdao.getBugsNotInType("project",productId);
-					if(count.getNumber()!=null&&count.getNumber()>0){
-						count.setName("未设定");
-						result.add(count);
-					}
-				}else if("B".equals(sqlCodes[0])){
-					BugCount count = bugdao.getBugsNotInType("build",productId);
-					if(count.getNumber()!=null&&count.getNumber()>0){
-						count.setName("未设定");
-						result.add(count);
-					}
-				}else if("C".equals(sqlCodes[0])){
-					BugCount count = bugdao.getBugsNotInType("module",productId);
-					if(count.getNumber()!=null&&count.getNumber()>0){
-						count.setName("未设定");
-						result.add(count);
-					}
-				}
 			}
 			return bugCountMap;
 		}

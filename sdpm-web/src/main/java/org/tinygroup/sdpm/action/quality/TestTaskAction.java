@@ -302,8 +302,13 @@ public class TestTaskAction extends BaseController {
     @RequestMapping("/taskToCase")
     public String taskToCase(Integer testversionId, String moduleId, Model model, HttpServletRequest request) {
         QualityTestTask testTask = testTaskService.findById(testversionId);
-        List<OrgUser> orgUsers = userService.findUserList(null);
-        String queryString = request.getQueryString();
+        List<ProjectTeam> projectTeams = teamService.findTeamByProjectId(testTask.getProjectId());
+        String[] ids = new String[projectTeams.size()];
+        for(int i =0; i<ids.length; i++){
+            ids[i] = projectTeams.get(i).getTeamUserId();
+        }
+        List<OrgUser> orgUsers = userService.findUserListByIds(ids);
+//        String queryString = request.getQueryString();
         if (StringUtil.isBlank(moduleId)) {
             request.getSession().removeAttribute("taskToCaseModuleId");
         } else {

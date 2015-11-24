@@ -127,7 +127,7 @@
 ##                                #@th("text-r" "vertical-align:middle;width:20%")
 
                             <table id="${roadMap?.key}" class="table table-bordered hide">
-                                <caption>${titleLabel.get(roadMap?.key)}</caption>
+                                <caption name="${roadMap?.key}">${titleLabel.get(roadMap?.key)}</caption>
                                 <thead>
                                 <tr>
                                     <th></th>
@@ -143,23 +143,19 @@
                                 #end
                                 </tbody>
                             </table>
-##                            #end
                             #setColumnHighChart("#"+roadMap?.key {"min-width":"400px","height":"250px"})
-
                         #else
 
-##                            #@th("text-r" "vertical-align:middle;width:20%")
-##                                #@pieChart(pieChartStyle="width:600px;margin:0 auto;")
                                 <table id='${roadMap?.key}'>
                                     <caption name="${roadMap?.key}">${titleLabel.get(roadMap?.key)}</caption>
                                 <thead>
-                                <tr>
-                                    <th></th>
-                                    #for(road:roadMap?.value)
-                                    <th>${road?.name}</th>
-                                #end
-                            </tr>
-                            </thead>
+                                    <tr>
+                                        <th></th>
+                                        #for(road:roadMap?.value)
+                                        <th>${road?.name}</th>
+                                        #end
+                                    </tr>
+                                </thead>
 
                             <tbody>
                             <tr>
@@ -170,10 +166,7 @@
                         </tr>
                         </tbody>
                         </table>
-
-##                        #end
                         #pieChartInit("#"+roadMap?.key "PieChart" "No of players" "Month","500","250")
-##                        #end
                     #end
                 </td>
 
@@ -184,8 +177,29 @@
 
                     #for(road:roadMap?.value)
                     #@centerAlignTr()
-
-                        #@th()${road?.name}#end
+                        #if(roadMap?.key=="A_projectBugCount")
+                            #@th()${road?.name?:"无项目"}#end
+                        #elseif(roadMap?.key=="B_buildBugCount")
+                            #@th()${road?.name?:"无版本"}#end
+                        #elseif(roadMap?.key=="C_moduleBugCount")
+                            #@th()${road?.name?:"无模块"}#end
+                        #elseif(roadMap?.key=="D_bugIncreaseByDay")
+                            #@th()${road?.name?:"未设定"}#end
+                        #elseif(roadMap?.key=="E_bugResolveByDay")
+                            #@th()${road?.name?:"未设定"}#end
+                        #elseif(roadMap?.key=="F_bugCloseByDay")
+                            #@th()${road?.name?:"未设定"}#end
+                        #elseif(roadMap?.key=="J_bugSeverity")
+                            #@th()${getDict("bugSeverity",road?.name)}#end
+                        #elseif(roadMap?.key=="K_bugSolution")
+                            #@th()${getDict("bugResolution",road?.name)}#end
+                        #elseif(roadMap?.key=="L_bugStatus")
+                            #@th()${getDict("bugStatus",road?.name)}#end
+                        #elseif(roadMap?.key=="N_bugType")
+                            #@th()${getDict("bugType",road?.name)}#end
+                        #else
+                            #@th()${road?.name}#end
+                        #end
                         #@td()${road?.number}#end
                         #@td()${road?.getPercentToString()}#end
                     #end

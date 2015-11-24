@@ -1,3 +1,4 @@
+#set(qualityProductIdTemp = qualityProductId,qualityProductId=qualityProductId?:ProductUtils.getAllProductListByUser()?.get(0)?.productId)
 #if(!qualityProductIdTemp&&qualityProductId)
 <script type="text/javascript">
     $(function(){
@@ -47,7 +48,6 @@
     #end
 #end
 
-#set(qualityProductIdTemp = qualityProductId,qualityProductId=qualityProductId?:ProductUtils.getAllProductListByUser()?.get(0)?.productId)
 #@navZtree("product" "product")
     #@navZtreeNav()
         <span id="productNameOnTop" value="${qualityProductId}">${currentProductName}</span><span class="caret"></span>

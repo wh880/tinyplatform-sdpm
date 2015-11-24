@@ -134,8 +134,11 @@ public class ProductManagerImpl implements ProductManager{
 		return mergeUserProducts(productList,products,orgRoles);
 	}
 
-	public List<Product> getProductByUserWithCount(String userId,Integer delete,boolean noRole) {
+	public List<Product> getProductByUserWithCount(String userId,Integer delete,boolean noRole,boolean justTeam) {
 		List<Product> productList = productDao.getProductByUserWithCount(userId,delete,noRole);
+		if(justTeam){
+			return productList;
+		}
 		Product product = new Product();
 		product.setDeleted(delete);
 		product.setAcl(product.ACl_TEAM_AND_ROLE);

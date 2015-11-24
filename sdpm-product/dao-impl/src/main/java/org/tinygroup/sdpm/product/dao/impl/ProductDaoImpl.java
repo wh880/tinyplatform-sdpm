@@ -428,7 +428,7 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
 
     public List<Product> getProductByUserWithCount(String userId,Integer delete,boolean noRole) {
         Condition condition = null;
-        if(!noRole){
+        if(noRole){
             condition = PRODUCTTABLE.ACL.eq(Product.ACl_All);
         }
         Select select = getComplexSelect().where(
