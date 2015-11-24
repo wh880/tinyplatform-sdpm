@@ -35,11 +35,13 @@
                         #end
                     #end
                     #@Tselect2Fix()
-                        #@hasMenu("project-op-add")
-                            <a href="${TINY_CONTEXT_PATH+adminPath}/project/form" class="r">增加</a>
+                        #set(m=menuManager.getMenu("project-op-add"))
+                        #if(m)
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
                         #end
-                        #@hasMenu("project-op-all")
-                            <a href="${TINY_CONTEXT_PATH+adminPath}/project/list">全部</a>
+                        #set(m=menuManager.getMenu("project-op-all"))
+                        #if(m)
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
                         #end
                     #end
                     <script type="text/javascript">
@@ -65,11 +67,13 @@
                         <option></option>
                     #end
                     #@Tselect2Fix()
-                        #@hasMenu("newproduct")
-                            <a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition" class="r">增加</a>
+                        #set(m=menuManager.getMenu("newproduct"))
+                        #if(m)
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
                         #end
-                        #@hasMenu("allproduct")
-                            <a href="${TINY_CONTEXT_PATH+adminPath}/product/allproduct/addition">全部</a>
+                        #set(m=menuManager.getMenu("allproduct"))
+                        #if(m)
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
                         #end
                     #end
                 #end

@@ -12,7 +12,7 @@
                 #@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
                 #@tinyTh({"class":"sorting","rel":"build_id"})ID#end
                 #@tinyTh({"class":"","rel":"build_product"})产品#end
-                #@tinyTh({"class":"sorting","rel":"build_name","style":"color:#f00"})版本名称#end
+                #@tinyTh({"class":"sorting","rel":"build_name"})版本名称#end
                 #@tinyTh({"class":"sorting","rel":"build_scm_path"})源代码地址#end
                 #@tinyTh({"class":"sorting","rel":"build_file_path"})下载地址#end
                 #@tinyTh({"class":"sorting","rel":"build_date"})打包日期#end

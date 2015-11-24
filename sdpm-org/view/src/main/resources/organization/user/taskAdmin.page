@@ -94,7 +94,6 @@
     #@tinyTableContent(TINY_CONTEXT_PATH+adminPath+"/org/user/task/search?"+tinyRequestQueryString) ##取数据地址 总数据
         #@thead()
             #@tr()###th  class 为sorting 表票可排序 为sorting_desc 为当前倒序
-
                 #@tinyTh({"class":"","rel":"task_id"})ID#end
                 #@tinyTh({"class":"","rel":"task_pri"})P#end
                 #@tinyTh({"class":"","rel":"task_project"})所属项目#end
@@ -103,8 +102,7 @@
                 #@tinyTh({"class":"","rel":"task_consumed"})消耗时间#end
                 #@tinyTh({"class":"","rel":"task_left"})剩余时间#end
                 #@tinyTh({"class":"","rel":"taskDeadLine"})截止#end
-                #@tinyTh({"class":"","rel":"task_statu","style":"color:#f00"})状态#end
-
+                #@tinyTh({"class":"","rel":"task_statu"})状态#end
             #end
         #end
     #end

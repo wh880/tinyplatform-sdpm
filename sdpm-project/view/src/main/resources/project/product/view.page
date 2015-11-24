@@ -1,0 +1,66 @@
+#!set(activeTitle="关联产品",activeMenuId=currentPageId,parentId=parentId?:"0")
+#import("/common/component/form.component")
+#set(name="product")
+<style>
+    .group-check-list li {
+        width: 160px;
+        float: left
+    }
+
+    .group-check-list {
+        border-top: 1px solid #eee;
+    }
+
+    .form .row.group-check-list {
+        margin: 0
+    }
+
+    .group-check-list > div {
+        padding: 15px;
+    }
+
+    .group-check-list > div:first-child {
+        text-align: right;
+    }
+
+    .group-check-list > div:last-child {
+        border-left: 1px solid #eee;
+    }
+</style>
+#@tinyForm("thisform" call("link",adminPath+"/project/product/save") "post")
+<input type="hidden" name="roleId" value="${roleId}"/>
+<input type="hidden" name="parentId" value="${parentId?:0}"/>
+    #@Tcheckboxes("menuId" orgRoleMenuIdList {"nullmsg":"请选择角色应有的菜单！","datatype":""})
+        #foreach(m:menuManager.getChildMenus(parentId))
+        <div class="row group-check-list">
+            <div class="col-2">#@Tcheckbox(m.id {"data-targetGroup":"g"+m.id})${m.name}#end</div>
+            <div class="col-10">
+                <ul>
+                    #foreach(m2:menuManager.getAllChildMenus(m.id))
+                        <li>#@Tcheckbox(m2.id {"data-group":"g"+m.id})${m2.name}#end</li>
+                    #end
+                </ul>
+                <div class="clear"></div>
+            </div>
+        </div>
+        #end
+    #end
+    #@gridSysRow()
+        #@div(divClass="col-7 col-offset-5 form-inline")
+            #tinyInput("submit" "submitbtn" " 保存 " {"class":"btn btn-primary"})
+        <a href="javascript:history.go(-1)" class="btn radius btn-default">返回</a>
+        #end
+    #end
+#end
+<script type="text/javascript">
+    $(function () {
+        $("input[data-targetgroup]").click(function () {
+            var check = "uncheck";
+            var gid = $(this).attr("data-targetgroup");
+            if (this.checked) {
+                check = "check";
+            }
+            $("input[data-group=" + gid + "]").iCheck(check);
+        })
+    })
+</script>

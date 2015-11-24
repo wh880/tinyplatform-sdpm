@@ -44,26 +44,26 @@
 <script src="${TINY_CONTEXT_PATH}/common/js/tinyui.js"></script>
     #@mainWrapper()
         #@mainNavbar("/common/img/main-navbar-logo.png" "Tinyframework")
-            #@navbarNav()
-                #navbarNavItem("新增内容" "#")
-                #@navbarDropdownMenu("下拉菜单")
-                    #navbarNavItem("第一项" "#")
-                    #navbarNavItem("第二项" "#")
-                    #divider()##分割线
-                    #navbarNavItem("第三项" "#")
-                #end
-            #end
+##            #@navbarNav()
+##                #navbarNavItem("新增内容" "#")
+##                #@navbarDropdownMenu("下拉菜单")
+##                    #navbarNavItem("第一项" "#")
+##                    #navbarNavItem("第二项" "#")
+##                    #divider()##分割线
+##                    #navbarNavItem("第三项" "#")
+##                #end
+##            #end
             #@rightNavBar()
-            <li class="nav-icon-btn nav-icon-btn-danger dropdown">
-                #@notifyDropdown(5 "fa-bullhorn" "通知" "更多的通知")
-					#include("/common/notify.page")
-				#end
-            </li>
-            <li class="nav-icon-btn nav-icon-btn-success dropdown">
-                #@messagesDropdown(12 "fa-envelope" "所得的消息" "更多的信息")
-						#include("/common/messages.page")
-				#end
-            </li>
+##            <li class="nav-icon-btn nav-icon-btn-danger dropdown">
+##                #@notifyDropdown(5 "fa-bullhorn" "通知" "更多的通知")
+##					#include("/common/notify.page")
+##				#end
+##            </li>
+##            <li class="nav-icon-btn nav-icon-btn-success dropdown">
+##                #@messagesDropdown(12 "fa-envelope" "所得的消息" "更多的信息")
+##						#include("/common/messages.page")
+##				#end
+##            </li>
             <li class="fullscreen">
                 <a href="javascript:void(0);" onclick="launchFullScreen(document.documentElement);" title="全屏"><i
                         class="fa fa-fullscreen"></i></a>
@@ -158,7 +158,7 @@
         var referrer = document.referrer;
         var classPath = "${TINY_CONTEXT_PATH}";
         var oldUrl = referrer.substring(referrer.indexOf(classPath)+classPath.length);
-        if(oldUrl.indexOf("login")<0)
+        if(oldUrl.indexOf("login")<0&&referrer!=window.location.href)
             $("input[name=lastAddress]").attr("value",oldUrl);
     });
 </script>

@@ -6,6 +6,17 @@
 #import("/org/tinygroup/button/components/button.component")
 #import("/org/tinygroup/table/components/table.component")
 #import("/org/tinygroup/icon/components/icon.component")
+#macro mulFileInput(name value)
+<span class="form-inline">
+<span class="btn-upload">
+	<input name="${name}_name" value="${value}" type="text" class="form-control show-file-text">
+	<a class="btn btn-primary" role="button"><i class="glyphicon glyphicon-cloud-upload"></i> 浏览文件</a>
+	<input type="file" name="${name}" class="input-file">
+</span>
+</span>
+#end
+
+
 #set(name="task")
 
 
@@ -52,16 +63,7 @@
         <div class="col-12">
             <div class="col-2 text-r"><label>附件：</label></div>
             <div class="col-9">
-                <table class="tableInfoes">
-                    <tr>
-                        <td style="float:left;margin-bottom:5px"> #fileWithInput("file-0")</td>
-                        <td style="float:left;width:150px">#inputRadiusText(inputPlaceHolder="标题：")</td>
-                    </tr>
-                    <tr>
-                        <td style="float:left"> #fileWithInput("file-1")</td>
-                        <td style="float:left;width:150px">#inputRadiusText(inputPlaceHolder="标题：")</td>
-                    </tr>
-                </table>
+                #mulUploadFile("upfile" "" "save.page")
             </div>
         #end
     </div>

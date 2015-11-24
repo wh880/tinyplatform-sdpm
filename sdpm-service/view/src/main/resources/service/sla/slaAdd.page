@@ -32,11 +32,13 @@
                             #end
                         #end
                         #@Tselect2Fix()
-                            #@hasMenu("client-add")
-                                <a href="${TINY_CONTEXT_PATH+adminPath}/service/client/form">增加</a>
+                            #set(m=menuManager.getMenu("client-add"))
+                            #if(m)
+                                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
                             #end
-                            #@hasMenu("client")
-                                <a href="${TINY_CONTEXT_PATH+adminPath}/service/client/list" class="r">全部</a>
+                            #set(m=menuManager.getMenu("client"))
+                            #if(m)
+                                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
                             #end
                         #end
                     #end
@@ -109,24 +111,34 @@
             #end
             #@elementItem()
                 #@sdpmItem("服务工时上限")
+                <div class="input-group">
                     #tinyInput(
                         "text" "serviceEffortLimit" sla?.serviceEffortLimit{"id":"serviceEffortLimit",
                         "class":"input-text select2"})
+                    <span class="input-group-addon" id="basic-addon2">小时</span>
+                </div>
+
                 #end
             #end
             #@elementItem()
                 #@sdpmItem("服务响应时限")
+                <div class="input-group">
                     #tinyInput(
                         "text" "serviceReplyTimeLimit" sla?.serviceReplyTimeLimit{"id":
                         "serviceReplyTimeLimit","class":
                         "input-text select2"})
+                    <span class="input-group-addon" id="basic-addon2">小时</span>
+                    </div>
                 #end
             #end
             #@elementItem()
                 #@sdpmItem("需求回访时限")
-                    #tinyInput(
+                    <div class="input-group">
+                        #tinyInput(
                         "text" "serviceReviewTimeLimit" sla?.serviceReviewTimeLimit{"id":
-                        "serviceReviewTimeLimit","class":"input-text select2"})
+                            "serviceReviewTimeLimit","class":"input-text select2"})
+                        <span class="input-group-addon" id="basic-addon2">小时</span>
+                    </div>
                 #end
             #end
             #@elementItem()

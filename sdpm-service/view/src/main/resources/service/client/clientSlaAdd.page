@@ -30,14 +30,6 @@
                                 #@tinyOptionItem(l.productId)${l?.productName}#end
                             #end
                         #end
-                        #@Tselect2Fix()
-                            #@hasMenu("client-add")
-                                <a href="${TINY_CONTEXT_PATH+adminPath}/service/client/form">增加</a>
-                            #end
-                            #@hasMenu("client")
-                                <a href="${TINY_CONTEXT_PATH+adminPath}/service/client/list" class="r">全部</a>
-                            #end
-                        #end
                     #end
                 #end
             #end
@@ -72,24 +64,33 @@
             #end
             #@elementItem()
                 #@sdpmItem("服务工时上限")
-                    #tinyInput(
+                    <div class="input-group">
+                        #tinyInput(
                         "text" "serviceEffortLimit" ""{"id":"serviceEffortLimit",
-                        "class":"input-text select2"})
+                            "class":"input-text select2"})
+                        <span class="input-group-addon" id="basic-addon2">小时</span>
+                    </div>
                 #end
             #end
             #@elementItem()
                 #@sdpmItem("服务响应时限")
+                <div class="input-group">
                     #tinyInput(
                         "text" "serviceReplyTimeLimit" ""{"id":
                         "serviceReplyTimeLimit","class":
                         "input-text select2"})
+                    <span class="input-group-addon" id="basic-addon2">小时</span>
+                </div>
                 #end
             #end
             #@elementItem()
                 #@sdpmItem("需求回访时限")
-                    #tinyInput(
+                    <div class="input-group">
+                        #tinyInput(
                         "text" "serviceReviewTimeLimit" ""{"id":
-                        "serviceReviewTimeLimit","class":"input-text select2"})
+                            "serviceReviewTimeLimit","class":"input-text select2"})
+                        <span class="input-group-addon" id="basic-addon2">小时</span>
+                    </div>
                 #end
             #end
             #@elementItem()

@@ -46,7 +46,7 @@ public class ProjectStoryAction extends BaseController {
 
         Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
         if (projectId == null) {
-            return redirectProjectForm();
+            return null;
         }
         Pager<ProductStory> storyPager = projectStoryService.findStoryByProject(projectId, start, limit, order, orderType, moduleId);
         model.addAttribute("storyPager", storyPager);

@@ -55,7 +55,8 @@ public class RoleManagerImpl implements RoleManager {
     }
 
     public Integer delete(Integer id) {
-        OrgRole orgRole = orgRoleDao.getByKey(id);
+        OrgRole orgRole = new OrgRole();
+        orgRole.setOrgRoleId(id);
         orgRole.setDeleted(OrgRole.DELETE_YES);
         return orgRoleDao.edit(orgRole);
     }
