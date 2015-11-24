@@ -1,94 +1,11 @@
-#macro mulUploadFile(fileName fileList delAction fileMap)#set(ItemIdOrder=1,mulUploadFileTableId=fmt("tid%d",rand()))
-<table class="table itemlist-table " id="${mulUploadFileTableId}">
-    <thead>
-    <tr>
-        <th class="text-c w-50px">编号</th>
-        <th>描述</th>
-        <th>文件</th>
-        <th>操作</th>
-    </tr>
-    </thead>
-<tbody class="databody">
-    #for(var:[1..3])
-<tr>
-    <td class="text-c stepID">${ItemIdOrder++}</td>
-    <td>#tinyInput("hidden" "editFileId" var)#tinyInput("text" "fileTitle" var+"描述"{"class":"form-control" ,"placeholder":"描述"})</td>
-    <td>#mulFileInput("fileUrl" var+".jpg")</td>
-    <td>
-        <span title="删除" class="btn btn-small btn-default removeButton"><i class="icon-remove"></i></span>
-    </td>
-</tr>
-#end
-<tr>
-    <td class="text-c stepID newItem" width="50">${ItemIdOrder}</td>
-    <td>#tinyInput("text" "fileTitle" ""{"class":"form-control" ,"placeholder":"描述"})</td>
-    <td width="300">#mulFileInput("fileUrl")</td>
-    <td width="85">
-        <span title="增加" class="btn btn-small btn-default addnext"><i class="icon-plus"></i></span>
-        <span title="删除" class="btn btn-small btn-default delbutton"><i class="icon-remove"></i></span>
-    </td>
-</tr>
-</tbody>
-</table>
-<script>
-    $(function(){
-        var allowFileExt=["jpg","png","git","doc","rar"];
-        function updateStepID(){
-            $('#${mulUploadFileTableId}>.databody .stepID').each(function(index){
-                $(this).html(index+1);
-            });
-        }
-        $("#${mulUploadFileTableId}").on("click",".addpre",function(){
-            var $thisTr=$(this).closest("tr");
-            var $tpl=$thisTr.clone();
-                $tpl.find("input,select").val("");
-                $thisTr.before($tpl);
-            updateStepID();
-        }).on("click",".addnext",function(){
-            var $thisTr=$(this).closest("tr");
-            var $tpl=$thisTr.clone();
-                $tpl.find("input,select").val("");
-                $thisTr.after($tpl);
-            updateStepID();
-        }).on("click",".delbutton",function(){
-            if($('.databody .stepID.newItem').size() == 1) return;
-            var that=this;
-            layer.confirm('确定删除?', function(){
-                $(that).closest("tr").remove();
-                updateStepID();
-                layer.msg('删除成功！',1,1)
-            })
-        }).on("click",".removeButton",function(){
-            var that=this;
-            layer.confirm('确定删除?', function(){
-                $.ajax({
-                    type:"post",
-                    url:"${delAction}",
-                    data:{id:$(that).closest("tr").find("input:hidden:first").val()},
-                    success:function(data){
-                        if(data.status=="y"||data.status=="success"){
-                            layer.msg(data.info,1,1,function() {
-                                $(that).closest("tr").remove();
-                                updateStepID();
-                            })
-                        }else{
-                            layer.msg(data.info)
-                        }
-                    }
-                })
-            })
-        }).on("change",".input-file",function(){
-            var thisFile=$(this).val();
-            var ext=thisFile.substring(thisFile.lastIndexOf(".")+1);
-            if($.inArray( ext, allowFileExt)==-1){
-                layer.msg("扩展名错误");
-                $(this).val("");
-                return false;
-            }
-            $(this).siblings("input").val($(this).val())
-        });
-    });
-</script>
+#macro mulFileInput(name value)
+<span class="form-inline">
+<span class="btn-upload">
+	<input name="${name}_name" value="${value}" type="text" class="form-control show-file-text">
+	<a class="btn btn-primary" role="button"><i class="glyphicon glyphicon-cloud-upload"></i> 浏览文件</a>
+	<input type="file" name="${name}" class="input-file">
+</span>
+</span>
 #end
 
 #macro mulUploadFile(fileName fileList delAction fileMap)#set(ItemIdOrder=1,mulUploadFileTableId=fmt("tid%d",rand()))
@@ -183,4 +100,3 @@
     });
 </script>
 #end
-

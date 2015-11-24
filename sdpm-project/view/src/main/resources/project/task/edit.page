@@ -1,20 +1,12 @@
 #!set(activeTitle="任务编辑",activeMenuId=currentPageId)
 #import("/org/tinygroup/button/components/button_smart.component")
 #import("/org/tinygroup/UEditor/component/ueditor.component")
-#import("/org/tinygroup/form/components/form.component")
+
 #import("/org/tinygroup/button/components/button_common.component")
 #import("/org/tinygroup/button/components/button.component")
 #import("/org/tinygroup/table/components/table.component")
 #import("/org/tinygroup/icon/components/icon.component")
-#macro mulFileInput(name value)
-<span class="form-inline">
-<span class="btn-upload">
-	<input name="${name}_name" value="${value}" type="text" class="form-control show-file-text">
-	<a class="btn btn-primary" role="button"><i class="glyphicon glyphicon-cloud-upload"></i> 浏览文件</a>
-	<input type="file" name="${name}" class="input-file">
-</span>
-</span>
-#end
+
 
 
 #set(name="task")
