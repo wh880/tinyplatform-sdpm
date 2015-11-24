@@ -103,7 +103,7 @@
                 #@tinyTh({"class":"","rel":"task_consumed"})消耗时间#end
                 #@tinyTh({"class":"","rel":"task_left"})剩余时间#end
                 #@tinyTh({"class":"","rel":"taskDeadLine"})截止#end
-                #@tinyTh({"class":"","rel":"task_statu","style":"color:#f00"})状态#end
+                #@tinyTh({"class":"","rel":"task_statu"})状态#end
 
             #end
         #end
