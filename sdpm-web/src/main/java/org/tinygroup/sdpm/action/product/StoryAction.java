@@ -111,9 +111,12 @@ public class StoryAction extends BaseController {
      */
     @RequiresPermissions("pro-demand-add")
     @RequestMapping("/addstory")
-    public String addStory( HttpServletRequest request, Model model) {
+    public String addStory( HttpServletRequest request, Model model, String lastAddress) {
         List<ServiceRequest> requests = requestService.getRequestList(null);
         model.addAttribute("requestList",requests);
+        if(!StringUtil.isBlank(lastAddress)){
+            return "redirect:"+lastAddress;
+        }
         return "/product/page/tabledemo/product-demand-add.page";
     }
 
@@ -208,6 +211,7 @@ public class StoryAction extends BaseController {
             ProductStory productStory,
             ProductStorySpec productStorySpec,
             @RequestParam(value = "file", required = false) MultipartFile[] file,
+            String lastAddress,
             String[] title) throws IOException {
         ProductStory story = storyService.findStory(productStory.getStoryId());
         productStory.setStoryLastEditedBy(UserUtils.getUser().getOrgUserId());
@@ -226,6 +230,9 @@ public class StoryAction extends BaseController {
                 String.valueOf(productStory.getStoryId()),
                 UserUtils.getUserId(), String.valueOf(story.getProductId()),
                 null, story, productStory, systemAction.getActionComment());
+        if(!StringUtil.isBlank(lastAddress)){
+            return "redirect:"+lastAddress;
+        }
         return "redirect:" + "/a/product/story";
     }
 

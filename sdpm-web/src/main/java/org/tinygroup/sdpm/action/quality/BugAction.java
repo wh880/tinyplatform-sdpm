@@ -454,9 +454,11 @@ public class BugAction extends BaseController {
     }
 
     @RequestMapping("/edit")
-    public String edit(QualityBug bug, SystemAction systemAction, HttpServletRequest request,
+    public String edit(QualityBug bug, SystemAction systemAction,
+                       HttpServletRequest request,
                        @RequestParam(value = "file", required = false) MultipartFile[] file,
-                       String[] title) throws IOException {
+                       String[] title,
+                       String lastAddress) throws IOException {
 
         QualityBug qualityBug = bugService.findById(bug.getBugId());
 
@@ -474,6 +476,9 @@ public class BugAction extends BaseController {
                 , qualityBug
                 , bug
                 , systemAction.getActionComment());
+        if(!StringUtil.isBlank(lastAddress)){
+            return "redirect:"+lastAddress;
+        }
         return "redirect:" + "/a/quality/bug";
     }
 
@@ -614,8 +619,11 @@ public class BugAction extends BaseController {
     }
 
     @RequestMapping(value = "/save")
-    public String save(QualityBug bug, SystemAction systemAction, @RequestParam(value = "file", required = false) MultipartFile[] file,
-                       String[] title, HttpServletRequest request) throws IOException {
+    public String save(QualityBug bug, SystemAction systemAction,
+                       @RequestParam(value = "file", required = false) MultipartFile[] file,
+                       String[] title,
+                       HttpServletRequest request,
+                       String lastAddress) throws IOException {
 
         if (!StringUtil.isBlank(bug.getBugAssignedTo())) {
             bug.setBugAssignedDate(new Date());
@@ -642,6 +650,9 @@ public class BugAction extends BaseController {
                 , null
                 , null
                 , systemAction.getActionComment());
+        if(!StringUtil.isBlank(lastAddress)){
+            return "redirect:"+lastAddress;
+        }
         return "redirect:" + "/a/quality/bug";
     }
 

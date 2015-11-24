@@ -102,7 +102,7 @@ public class ProductAction extends BaseController {
 
 
     @RequestMapping("/save")
-    public String save(Product product, SystemAction systemAction, HttpServletRequest request) {
+    public String save(Product product, SystemAction systemAction, HttpServletRequest request, String lastAddress) {
 
 
         product.setProductCreatedBy(UserUtils.getUserId());
@@ -121,6 +121,9 @@ public class ProductAction extends BaseController {
                 null,
                 null,
                 systemAction.getActionComment());
+        if(!StringUtil.isBlank(lastAddress)){
+            return "redirect:"+lastAddress;
+        }
 
         return "redirect:" + adminPath + "/product/allproduct/addition";
 
@@ -154,11 +157,14 @@ public class ProductAction extends BaseController {
     }
 
     @RequestMapping("/edit")
-    public String edit(Product product, HttpServletRequest request) {
+    public String edit(Product product, HttpServletRequest request, String lastAddress) {
 
         productService.updateProduct(product);
         ProductUtils.removeProductList();
         ProductUtils.removeProductList(String.valueOf(product.getProductLineId()));
+        if(!StringUtil.isBlank(lastAddress)){
+            return "redirect:"+lastAddress;
+        }
         return "redirect:" + adminPath + "/product/find/overview?productId=" + product.getProductId();
     }
 
@@ -306,7 +312,7 @@ public class ProductAction extends BaseController {
 
     @RequestMapping("/addDoc")
     public String addDoc(HttpServletRequest request, Model model) {
-        return "/product/page/tabledemo/add-doc.page";
+        return "/product/page/tabledemo/add-doc";
     }
 
     @RequestMapping("project/listData")

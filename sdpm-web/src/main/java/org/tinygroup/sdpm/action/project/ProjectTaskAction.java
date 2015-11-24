@@ -100,7 +100,10 @@ public class ProjectTaskAction extends BaseController {
      */
     @RequiresPermissions(value = {"pro-task-proposeversion", "pro-Info2-copy", "batch-distribute-task"}, logical = Logical.OR)
     @RequestMapping("/form")
-    public String form(HttpServletRequest request, Model model, Integer storyId, String taskId, Integer moduleId) {
+    public String form(HttpServletRequest request, Model model,
+                       Integer storyId,
+                       String taskId,
+                       Integer moduleId) {
         String cookie = CookieUtils.getCookie(request, ProjectUtils.COOKIE_PROJECT_ID);
         if (StringUtil.isBlank(cookie)) {
             addMessage(model, "请选择项目");
@@ -132,7 +135,8 @@ public class ProjectTaskAction extends BaseController {
      */
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(ProjectTask task, @RequestParam(value = "file", required = false) MultipartFile file,
-                       String[] taskMailToArray, HttpServletRequest request, String comment) {
+                       String[] taskMailToArray, HttpServletRequest request, String comment,
+                       String lastAddress) {
         Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, ProjectUtils.COOKIE_PROJECT_ID));
         task.setTaskProject(projectId);
         String taskMailTo = StringUtil.join(taskMailToArray, ",");
@@ -146,6 +150,9 @@ public class ProjectTaskAction extends BaseController {
             uploadNoTitle(file, task.getTaskId(), ProfileType.TASK);
         } catch (IOException e) {
             logger.logMessage(LogLevel.ERROR, "上传文件文件出错，请求路径{}", e, request.getRequestURI());
+        }
+        if(!StringUtil.isBlank(lastAddress)){
+            return "redirect:"+lastAddress;
         }
         return "redirect:" + adminPath + "/project/task/index";
     }

@@ -135,7 +135,7 @@ return format;
 </script>
 
 #@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/product/plan/save" "post" {"class":""})
-
+<input type="hidden" name="lastAddress" value=""/>
 
 
 <div class="infoContent">

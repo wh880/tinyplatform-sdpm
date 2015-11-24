@@ -15,6 +15,7 @@
 #@tinyForm(
     "thisform" TINY_CONTEXT_PATH +adminPath+"/product/release/save" "post" {"class":"","enctype":"multipart/form-data"})
 ##    #hiddenInput("productId","productId","",cookieProductId)
+<input type="hidden" name="lastAddress" value=""/>
 <div class="infoContent">
     <p class="titleName">创建新发布</p>
 

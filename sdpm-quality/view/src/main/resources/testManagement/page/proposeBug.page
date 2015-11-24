@@ -21,6 +21,7 @@
         ##operationbar start1
         #end
         #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/quality/bug/save?bugConfirmed=0" "post" {"class":"test","enctype":"multipart/form-data"})
+            <input type="hidden" name="lastAddress" value=""/>
             #hiddenInput(hiddenInputName="bugId" hiddenInputValue=bug?.bugId)
             #hiddenInput(hiddenInputName="bugFromCase" hiddenInputValue=caseId)
         <div style="width:100%">

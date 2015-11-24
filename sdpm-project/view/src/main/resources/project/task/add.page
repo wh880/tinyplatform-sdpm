@@ -18,6 +18,7 @@
 #@tinyForm(
     "addTaskForm" TINY_CONTEXT_PATH+adminPath+"/project/task/save" "post" {"class":"test","enctype":
     "multipart/form-data"})
+<input type="hidden" name="lastAddress" value=""/>
 <div class="pageleftpart">
     <div class="infoContent">
         <input type="hidden" name="taskOpenBy" value="${UserUtils.getUserId()}"/>

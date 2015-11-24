@@ -68,7 +68,13 @@ public class ReleaseAction extends BaseController {
     }
 
     @RequestMapping("/save")
-    public String save(@CookieValue(value = "cookieProductId",defaultValue = "0") String cookieProductId,ProductRelease productRelease, HttpServletRequest request, SystemAction systemAction, @RequestParam(value = "file", required = false) MultipartFile[] file, String[] title) throws IOException {
+    public String save(@CookieValue(value = "cookieProductId",defaultValue = "0") String cookieProductId,
+                       ProductRelease productRelease,
+                       HttpServletRequest request,
+                       SystemAction systemAction,
+                       @RequestParam(value = "file", required = false) MultipartFile[] file,
+                       String[] title,
+                       String lastAddress) throws IOException {
         productRelease.setProductId(Integer.parseInt(cookieProductId));
         ProductRelease release = releaseService.addRelease(productRelease);
         uploads(file, release.getReleaseId(), ProfileType.RELEASE, title);
@@ -81,12 +87,18 @@ public class ReleaseAction extends BaseController {
                 , null
                 , null
                 , systemAction.getActionComment());
-
+        if(!StringUtil.isBlank(lastAddress)){
+            return "redirect:"+lastAddress;
+        }
         return "redirect:" + "/a/product/release/content";
     }
 
     @RequestMapping("/update")
-    public String update(ProductRelease release, SystemAction systemAction, @RequestParam(value = "file", required = false) MultipartFile[] file, String[] title) throws IOException {
+    public String update(ProductRelease release,
+                         SystemAction systemAction,
+                         @RequestParam(value = "file", required = false) MultipartFile[] file,
+                         String[] title,
+                         String lastAddress) throws IOException {
         ProductRelease release1 = releaseService.findRelease(release.getReleaseId());
         releaseService.updateRelease(release);
 
@@ -102,7 +114,9 @@ public class ReleaseAction extends BaseController {
                 , release1
                 , release
                 , systemAction.getActionComment());
-
+        if(!StringUtil.isBlank(lastAddress)){
+            return "redirect:"+lastAddress;
+        }
         return "redirect:" + adminPath + "/product/release/content";
     }
 
@@ -135,7 +149,7 @@ public class ReleaseAction extends BaseController {
     public String find(Integer releaseId, Model model) {
         ProductRelease release = releaseService.findRelease(releaseId);
         model.addAttribute("release", release);
-        return "/product/page/tabledemo/product-release-update.page";
+        return "/product/page/tabledemo/product-release-update";
     }
 
     @RequestMapping("/find/{forwordPager}")

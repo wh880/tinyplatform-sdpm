@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
@@ -254,7 +255,11 @@ public class DocumentAction extends BaseController {
     }
 
     @RequestMapping("/product/{type}/updateDoc")
-    public String saveDocument( DocumentDoc doc, @PathVariable(value = "type") String type, @RequestParam(value = "file", required = false) MultipartFile[] file, String[] title) throws IOException {
+    public String saveDocument( DocumentDoc doc,
+                                @PathVariable(value = "type") String type,
+                                @RequestParam(value = "file", required = false) MultipartFile[] file,
+                                String[] title,
+                                String lastAddress) throws IOException {
         if ("save".equals(type)) {
             doc.setDocAddedBy(UserUtils.getUserId());
             DocumentDoc document = docservice.createNewDoc(doc);
@@ -280,6 +285,9 @@ public class DocumentAction extends BaseController {
                     document,
                     doc,
                     null);
+        }
+        if(!StringUtil.isBlank(lastAddress)){
+            return "redirect"+lastAddress;
         }
         return "redirect:" + "/a/product/doc/content";
     }

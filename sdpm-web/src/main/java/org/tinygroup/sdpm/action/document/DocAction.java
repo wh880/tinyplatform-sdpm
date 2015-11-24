@@ -168,7 +168,13 @@ public class DocAction extends BaseController {
      * @throws IOException
      */
     @RequestMapping(value = "/addSave", method = RequestMethod.POST)
-    public String addSave(HttpServletRequest request, SystemAction systemAction, DocumentDoc doc, @RequestParam(value = "file", required = false) MultipartFile[] file, String[] title, Model model) throws IOException {
+    public String addSave(HttpServletRequest request,
+                          SystemAction systemAction,
+                          DocumentDoc doc,
+                          @RequestParam(value = "file", required = false) MultipartFile[] file,
+                          String[] title,
+                          Model model,
+                          String lastAddress) throws IOException {
         List<Product> product = productService.findProductList(new Product());
         doc.setDocLibId(Integer.parseInt(CookieUtils.getCookie(request, DocAction.COOKIE_DOCLIB_ID)));
         doc.setDocDeleted("0");
@@ -188,6 +194,9 @@ public class DocAction extends BaseController {
                 null,
                 systemAction.getActionComment());
 
+        if(!StringUtil.isBlank(lastAddress)){
+            return "redirect:"+lastAddress;
+        }
         if (request.getSession().getAttribute("moduleId") == null) {
             return "redirect:" + adminPath + "/document?docChange=true";
         }
@@ -197,7 +206,6 @@ public class DocAction extends BaseController {
     /**
      * 编辑文档的跳转
      *
-     * @param from
      * @param model
      * @param docId
      * @return
@@ -230,7 +238,7 @@ public class DocAction extends BaseController {
      */
     @RequestMapping(value = "/editSave", method = RequestMethod.POST)
     public String editSave(DocumentDoc doc,
-                           String from,
+                           String lastAddress,
                            @RequestParam(value = "file", required = false) MultipartFile[] file,
                            String[] title,
                            SystemAction systemAction,
@@ -250,8 +258,8 @@ public class DocAction extends BaseController {
                 documentDoc,
                 doc,
                 systemAction.getActionComment());
-        if("product".equals(from)){
-            return "redirect:/a/product/doc/content";
+        if(!StringUtil.isBlank(lastAddress)){
+            return "redirect:"+lastAddress;
         }
         return "redirect:" + adminPath + "/document?docChange=true";
     }
