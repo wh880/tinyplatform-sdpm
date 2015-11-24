@@ -68,12 +68,11 @@
                                 $(function () {
                                     $('.projectline').each(function(){
 										var v=$(this).attr("values");
-										v= v.replace(/0|\./ig,"");
-										console.log(v);
-										if($(v)){
+										v= v.replace(/[0\,\.]/ig,"");
+										if(v){
 											$(this).projectLine();
 										}else{
-											$(this).html("暂无数据")
+											$(this).prop('outerHTML',"暂无数据")
 										}
 									})
                                 });
