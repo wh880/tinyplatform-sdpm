@@ -124,4 +124,6 @@ public interface BuildManager {
      Pager<QualityBug> findBuildLegacyBug(int start, int limit, Integer buildId);
 
     List<ProjectBuild> getBuildByIds(String...ids);
+
+    List<ProjectBuild> getBuildByProducts(Integer... ids);
 }

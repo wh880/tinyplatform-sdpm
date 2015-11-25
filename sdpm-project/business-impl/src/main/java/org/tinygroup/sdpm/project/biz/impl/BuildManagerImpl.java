@@ -12,6 +12,7 @@ import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.tinysqldsl.Pager;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -85,6 +86,11 @@ public class BuildManagerImpl implements BuildManager {
 
     public List<ProjectBuild> getBuildByIds(String... ids) {
         return projectBuildDao.getBuildByKeys(ids);
+    }
+
+    public List<ProjectBuild> getBuildByProducts(Integer... ids) {
+        if(ids==null||ids.length==0)return new ArrayList<ProjectBuild>();
+        return projectBuildDao.getBuildByProducts(ids);
     }
 
     public Pager<ProductStory> findNoBuildStory(int start, int limit, String condition, Integer buildId) {

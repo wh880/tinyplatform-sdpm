@@ -29,6 +29,9 @@
             if ($(this).val() == '1') {
                 repeat.hide();
                 subdivision.show();
+                $("select[name=storyChildStories]").attr("ignore","");
+                $("select[name=storyDuplicateStory]").attr("ignore","ignore");
+                $("select[name=storyDuplicateStory]").val(0).trigger("change");
                 $(function() {
                     ajaxRead("${sid}", "storyChildStories", "storyId", "storyTitle", "/product/story/storyList?productId=${cookieProductId}&storyId=${story?.storyId}");
                 })
@@ -36,12 +39,19 @@
             } else if ($(this).val() == '2') {
                 subdivision.hide();
                 repeat.show();
+                $("select[name=storyDuplicateStory]").attr("ignore","");
+                $("select[name=storyChildStories]").attr("ignore","ignore");
+                $("select[name=storyChildStories]").val(0).trigger("change");
                 $(function() {
                     ajaxRead("${sid}", "storyDuplicateStory", "storyId", "storyTitle", "/product/story/storyList?productId=${cookieProductId}&storyId=${story?.storyId}");
                 })
             } else {
                 subdivision.hide();
                 repeat.hide();
+                $("select[name=storyDuplicateStory]").attr("ignore","ignore");
+                $("select[name=storyChildStories]").attr("ignore","ignore");
+                $("select[name=storyChildStories]").val(0).trigger("change");
+                $("select[name=storyDuplicateStory]").val(0).trigger("change");
             }
 
 
@@ -57,22 +67,24 @@
     <div class="infoContent">
         <p class="titleName">关闭</p>
         #@elementItem()
-            #@colLabel()关闭原因：#end
+            #@colLabel()<span class="c-red">*</span>关闭原因：#end
             #@formControlDiv("col-3")
-                #@tinySelect("storyClosedReason" story?.storyClosedReason {"class":"input-text","rel":"22"})
-                    #foreach(s:getDict("proCloseReason"))
-                        <option value="${s?.value}">${s?.text}</option>
+                #@Tselect2F()
+                    #@Tselect2Body("storyClosedReason" 0 {"class":"input-text","datatype":"*","nullmsg":"关闭原因不能为空！"})
+                        #foreach(s:getDict("proCloseReason"))
+                            <option value="${s?.value}">${s?.text}</option>
+                        #end
                     #end
                 #end
             #end
-            #@validateDiv("col-3")#end
+            #@validateDiv("col-2")#end
         #end
         #@elementItem("subdivision")
             #@colLabel()<span class="c-red">*</span>细分需求：#end
             #@formControlDiv("col-3")
                 #@Tselect2F()
-                    #@Tselect2Body("storyChildStories" "" {"class":"input-text select2","multiple":
-                        "multiple"}) ##,"multiple":"multiple"加上为多选项
+                    #@Tselect2Body("storyChildStories" "" {"class":"input-text","multiple":
+                        "multiple","datatype":"*","nullmsg":"细分需求不能为空！"}) ##,"multiple":"multiple"加上为多选项
 
                     #end
                     #@Tselect2Fix()
@@ -85,7 +97,7 @@
             #@colLabel()<span class="c-red">*</span>重复需求：#end
             #@formControlDiv("col-3")
                 #@Tselect2F()
-                    #@Tselect2Body("storyDuplicateStory" "" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                    #@Tselect2Body("storyDuplicateStory" "" {"class":"input-text","datatype":"*","nullmsg":"重复需求不能为空！"}) ##,"multiple":"multiple"加上为多选项
 
                     #end
                     #@Tselect2Fix()

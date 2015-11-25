@@ -13,10 +13,10 @@
     <tr>
         <td style="width: 2%"></td>
         <td width="18%">
-            用户
+            <span class="c-red">*</span>用户
         </td>
         <td width="20%">
-            角色
+            <span class="c-red">*</span>角色
         </td>
         <td width="20%">
             加盟日
@@ -44,7 +44,7 @@
             <td>
                 #@Tselect2F()
                     #@Tselect2Body("teamList["+a+"].teamRole" t.teamRole {"class":"input-text select2","multiple":
-                        "multiple"})
+                        "multiple","datatype":"*","nullmsg":"角色不能为空！"})
                         <option></option>
                         #foreach(u : roleList)
                             <option value="${u.orgRoleId}">${u.orgRoleName}</option>
@@ -83,3 +83,10 @@
     #end
 
 #end
+<script type="text/javascript">
+    $(function () {
+        $("form[name=thisform").Validform({
+            tiptype: 2
+        });
+    });
+</script>

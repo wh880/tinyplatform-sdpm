@@ -950,20 +950,25 @@ public class StoryAction extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "/judgeStoryName")
-    public Map judgeStoryName(ProductStory productStory) {
-        Integer storyId=null;
-        if(productStory.getProductId()!=null){
-            storyId = productStory.getProductId();
-            productStory.setProductId(null);
-        }
-        List<ProductStory> stories = storyService.findStoryList(productStory);
-        if (stories.size() >=1) {
-            if(stories.size()==1&&storyId!=null){
-                return resultMap(storyId.equals(stories.get(0).getStoryId())?false:true,"");
+    public Map judgeStoryName(String param,Integer storyId, Integer productId) {
+        if (param != null) {
+            String storyName = param;
+            ProductStory story = new ProductStory();
+            story.setStoryTitle(storyName);
+            story.setProductId(productId);
+            List<ProductStory> stories = storyService.findStoryList(story);
+            if (stories.size() != 0) {
+                if(storyId==null){
+                    return resultMap(false, "该需求已存在");
+                }else if(!storyId.equals(stories.get(0).getStoryId())){
+                    return resultMap(false, "该需求已存在");
+                }else{
+                    return resultMap(true, "");
+                }
+            } else {
+                return resultMap(true, "");
             }
-            return resultMap(true, "");
-        } else {
-            return resultMap(false, "");
         }
+        return resultMap(false, "请输入需求名称");
     }
 }

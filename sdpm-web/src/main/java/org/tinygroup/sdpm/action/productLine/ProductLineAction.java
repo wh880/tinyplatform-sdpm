@@ -177,7 +177,8 @@ public class ProductLineAction extends BaseController {
                        @RequestParam(required = false, defaultValue = "asc") String ordertype,Integer status, Model model) {
         String condition = getStatusCondition(status);
 
-        Pager<ProductLine> pagerProductLine = productLineService.findProductLinePager(start, pagesize,condition, productLine, order, ordertype);
+        Integer[] ids = productLineService.getUserProductLineIds(UserUtils.getUserId());
+        Pager<ProductLine> pagerProductLine = productLineService.findProductLinePagerInIds(start, pagesize,condition, productLine,ids, order, ordertype);
 
         model.addAttribute("productLine", pagerProductLine);
         return "/productLine/data/productLinedata.pagelet";
@@ -210,42 +211,8 @@ public class ProductLineAction extends BaseController {
         return "";
     }
 
-    @ResponseBody
-    @RequestMapping("sessionset")
-    public boolean sessionSet(Integer productLineId, HttpServletRequest request) {
-
-        if (productLineId != null) {
-            request.getSession().setAttribute("sessionProductLineId", productLineId);
-            Product product = new Product();
-            product.setProductLineId(productLineId);
-            List<Product> list = productService.findProductList(product, "productId", "desc");
-            if (list.size() > 0) {
-                request.getSession().setAttribute("sessionProductId", list.get(0).getProductId());
-            }
-            request.getSession().setAttribute("productList", list);
-            return true;
-        } else {
-            request.getSession().removeAttribute("sessionProductLineId");
-            return false;
-        }
-
-    }
-
     @RequestMapping("/toProduct")
     public String productLineAction(HttpServletRequest request) {
-        List<ProductLine> list = ProductUtils.getProductLineList();
-//        if (list == null || list.size() == 0) {
-//            list = productLineService.findProductLineList(new ProductLine(), "productLineId", "desc");
-//            if(list.size()==0||list==null){
-//            	return "redirect:" + adminPath + "/productLine/add";
-//            }
-//            request.getSession().setAttribute("productLineList", list);
-//
-//            if (request.getSession().getAttribute("sessionProductLineId") == null) {
-//                request.getSession().setAttribute("sessionProductLineId", list.size() > 0 ? list.get(0).getProductLineId() : null);
-//            }
-//        }
-
         return "redirect:" + adminPath + "/product";
     }
 
@@ -261,13 +228,6 @@ public class ProductLineAction extends BaseController {
 
     @RequestMapping("/listProduct")
     public String listProduct(HttpServletRequest request) {
-    /*	int productLine = -1;
-        if(request.getSession().getAttribute("sessionProductLineId")!=null){
-			ProductLineId = (Integer)request.getSession().getAttribute("sessionProductLineId");
-		}
-		ProductLine productLine = productLineService.findProductLine(ProductLineId);
-		model.addAttribute("ProductLine",ProductLine);
-	}*/
         return "/productLine/page/project/productLine.page";
 
     }
@@ -275,9 +235,7 @@ public class ProductLineAction extends BaseController {
     @ResponseBody
     @RequestMapping("/productLineList")
     public List<ProductLine> findProductLineList(ProductLine productLine) {
-
         List<ProductLine> list = productLineService.findList(new ProductLine());
-
         return list;
     }
 
@@ -291,27 +249,13 @@ public class ProductLineAction extends BaseController {
         List<Product> productLists = productService.getProductByUser(UserUtils.getUserId(),0,null);
         ProductLine productLine = new ProductLine();
         productLine.setDeleted(FieldUtil.DELETE_NO);
-        List<ProductLine> productLines = productLineService.findProductLineList(productLine,null,null);
-        ProjectBuild projectBuild = new ProjectBuild();
-        projectBuild.setBuildDeleted(FieldUtil.DELETE_NO_S);
-        List<ProjectBuild> projectBuilds = buildService.findListBuild(projectBuild);
-
-        for(int i = 0; i<projectBuilds.size();){
-            if(projectBuilds.get(i).getBuildProduct()!=null&&projectBuilds.get(i).getBuildProduct()>0){
-                boolean exist = false;
-                for(Product product1 : productLists) {
-                    if(projectBuilds.get(i).getBuildProduct().equals(product1.getProductId())){
-                        exist = true;
-                        break;
-                    }
-                }
-                if(!exist){
-                    projectBuilds.remove(projectBuilds.get(i));
-                    continue;
-                }
-            }
-            i++;
+        List<ProductLine> productLines = productLineService.getUserProductLine(UserUtils.getUserId());
+        Integer[] ids = new Integer[productLists.size()];
+        for(int i = 0; i<ids.length; i++){
+            ids[i] = productLists.get(i).getProductId();
         }
+        List<ProjectBuild> projectBuilds = buildService.getBuildByProducts(ids);
+
         for (ProductLine d : productLines) {
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("id", "p" + d.getProductLineId());
@@ -408,20 +352,51 @@ public class ProductLineAction extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "/judgeProductLineName")
-    public Map judgeProductLineName(String param) {
+    public Map judgeProductLineName(String param,Integer productLineId) {
         if (param != null) {
             String productLineName = param;
             ProductLine productLine = new ProductLine();
             productLine.setProductLineName(productLineName);
+            productLine.setProductLineId(productLineId);
             List<ProductLine> productLines = productLineService.findList(productLine);
             if (productLines.size() != 0) {
-                return resultMap(false, "该产品线已存在");
+                if(productLineId==null){
+                    return resultMap(false, "该产品线已存在");
+                }else if(!productLineId.equals(productLines.get(0).getProductLineId())){
+                    return resultMap(false, "该产品线已存在");
+                }else{
+                    return resultMap(true, "");
+                }
             } else {
                 return resultMap(true, "");
             }
         }
-        return resultMap(false, "请输入产品名称");
+        return resultMap(false, "请输入产品线名称");
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/judgeProductLineCode")
+    public Map judgeProductLineCode(String param,Integer productLineId) {
+        if (param != null) {
+            String productLineCode = param;
+            ProductLine productLine = new ProductLine();
+            productLine.setProductLineCode(productLineCode);
+            List<ProductLine> productLines = productLineService.findList(productLine);
+            if (productLines.size() != 0) {
+                if(productLineId==null){
+                    return resultMap(false, "该产品线编号已存在");
+                }else if(!productLineId.equals(productLines.get(0).getProductLineId())){
+                    return resultMap(false, "该产品线编号已存在");
+                }else{
+                    return resultMap(true, "");
+                }
+            } else {
+                return resultMap(true, "");
+            }
+        }
+        return resultMap(false, "请输入产品线编号");
+    }
+
     @ResponseBody
     @RequestMapping(value = "/userProductTree")
     public List<Map<String,Object>> getUserProductTree(){

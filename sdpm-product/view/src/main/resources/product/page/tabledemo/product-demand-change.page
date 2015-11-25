@@ -10,21 +10,20 @@
 <script>
     $(document).ready(function () {
 
-        ajaxRead("productStory", "storyId", "storyTitle");
-
         $("#story_reviewed").on("click", function () {
 
             var vm = this.checked;
             if (vm == true) {
                 $("select[name='storyReviewedBy']").attr("disabled", "disabled");
+                $("select[name='storyReviewedBy']").closest(".formControls").next("div[class=col-2]").hide();
             }
             if (vm == false) {
                 $("select[name='storyReviewedBy']").removeAttr("disabled");
+                $("select[name='storyReviewedBy']").closest(".formControls").next("div[class=col-2]").show();
             }
 
 
         });
-
     });
 </script>
 
@@ -36,51 +35,55 @@
 <div style="width:70%;float:left" class="pageleftpart">
     <div class="infoContent">
         <p class="titleName">变更</p>
-
-    #* <div class="RTtitle">
-         <button type="submit" id="submit" class="commitBtn">保存</button>
-     </div>*#
-
         #@elementItem()
-            #@sdpmItem("由谁评审")
-                #@Tselect2F()
-                    #@Tselect2Body("storyReviewedBy" story?.storyReviewedBy {"class":"input-text select2"})
-                    #end
-                    #@Tselect2Fix()
-                        #set(m=menuManager.getMenu("organizationAddUser"))
-                        #if(m)
-                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
+            #@colLabel()<span class='c-red'>*</span>由谁评审:#end
+            #@formControlDiv("col-4")
+                <div class="col-6">
+                    #@Tselect2F()
+                        <script>
+                            $(function(){
+                                ajaxRead("${sid}", "storyReviewedBy", "orgUserId", "orgUserRealName", "/org/user/userList");
+                            })
+                        </script>
+                        #@Tselect2Body(
+                            "storyReviewedBy" story?.storyReviewedBy {"class":"input-text select2","datatype":"*","nullmsg":"评审人不能为空！"})
                         #end
-                        #set(m=menuManager.getMenu("organizationUser"))
-                        #if(m)
-                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
+
+                        #@Tselect2Fix()
+                            #set(m=menuManager.getMenu("organizationAddUser"))
+                            #if(m)
+                                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
+                            #end
+                            #set(m=menuManager.getMenu("organizationUser"))
+                            #if(m)
+                                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
+                            #end
+                        #end
+
+                    #end
+                </div>
+                <div class="col-6">
+                    #@checkboxBox()
+                        #@label(labelFor="checkbox-6")
+                            #input(inputId="story_reviewed" inputName="storyReviewedBy" inputValue="0" inputType="checkbox" )
+                            不需要评审
                         #end
                     #end
-
-                #end
-
-                <script>
-                    ajaxRead("${sid}", "storyReviewedBy", "orgUserId", "orgUserRealName", "/org/user/userList");
-                </script>
-
+                </div>
             #end
-            #@checkboxBox()
-
-                #@label(labelFor="checkbox-6")
-                    #input(inputId="story_reviewed" inputName="storyReviewedBy" inputType="checkbox" inputValue="0")
-                    不需要评审
-                #end
-            #end
-
+            #@validateDiv("col-2")#end
         #end
 
         #@elementItem()
-            #@sdpmItem("需求名称")
-                <div class="input-group">
-                    <input type="text" name="storyTitle" value="${story?.storyTitle}" class="form-control"
-                           placeholder="" aria-describedby="basic-addon2" style="width:296px">
-                </div>
+            #@colLabel()<span class="c-red">*</span>需求名称：#end
+            #@formControlDiv("col-4")
+                #tinyInput(
+                    "text" "storyTitle" story?.storyTitle{"placeholder":"请输入需求名称","datatype":"*","nullmsg":"需求名称不能为空！","id":"storyTitle",
+                    "class":"input-text",
+                    "ajaxurl":TINY_CONTEXT_PATH+adminPath+"/product/story/judgeStoryName?storyId="+story?.storyId+"&productId="+story?.productId})
+
             #end
+            #@validateDiv("col-2")#end
         #end
 
         #@elementItem()
@@ -96,8 +99,7 @@
             <div class="col-12">
                 <div class="col-2 text-r"><label>验收标准：</label></div>
                 <div class="col-9">
-                    #@Teditor("content2" "storyVerification" {"initialFrameHeight":"150"})${storySpec
-                        ?.storyVerification}#end</div>
+                    #@Teditor("content2" "storyVerification" {"initialFrameHeight":"150"})${storySpec?.storyVerification}#end</div>
             </div>
         #end
 
@@ -157,3 +159,10 @@
 <div style="width:30%;float:right">
     #history(adminPath+"/system/action/ajax/history?actionObjectType=story&actionObjectId="+story?.storyId)
 </div>
+<script type="text/javascript">
+    $(function () {
+        $("form[name=thisform").Validform({
+            tiptype: 2
+        });
+    });
+</script>

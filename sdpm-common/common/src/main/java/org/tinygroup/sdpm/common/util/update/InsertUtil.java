@@ -23,13 +23,13 @@ public class InsertUtil {
 			for (Field field : fields) {
 				Method method = null;
 				Object value = null;
-
-				try {
-					method = object.getClass().getMethod(NameUtil.toMethod(field.getName()));
-				} catch (NoSuchMethodException e) {
-					continue;
+				if (StdUtil.getField(table.getName()).containsKey(field.getName())) {
+					try {
+						method = object.getClass().getMethod(NameUtil.toMethod(field.getName()));
+					} catch (NoSuchMethodException e) {
+						continue;
+					}
 				}
-
 				if (method != null) {
 					value = method.invoke(object);
 				}

@@ -41,12 +41,6 @@
             #@Tselect2F()
                 <script>
                     $(function () {
-                    ##                        #if(!cookieProductLineId)
-                    ##                            var productLineId = $("#productLineNameOnTop").attr("value");
-                    ##                            if(productLineId>0) {
-                    ##                                $("select[name=productLineId]").val(productLineId).trigger("change");
-                    ##                            }
-                    ##                        #end
                         $("select[name=productLineId]").on("change", function () {
                             $("input[name=productName]").blur();
                             $("input[name=productCode]").blur();
@@ -78,79 +72,37 @@
     #@colLabel()<span class="c-red">*</span>产品名称：#end
     #@formControlDiv("col-4")
         #tinyInput(
-            "text" "productName" product?.productName {"nullmsg":"请输入产品名称！","id":"33","class":"input-text",
-            "url":""})
-    #end
-    <script>
+            "text" "productName" product?.productName{"placeholder":"请输入产品名称","datatype":"*1-50","nullmsg":"产品名称不能为空！","id":
+            "productName","class":"input-text",
+            "ajaxurl":TINY_CONTEXT_PATH+adminPath+"/product/judgeProductName?productId="+product?.productId+"&productLineId="+product?.productLineId})
 
-        $("input[name=productName]").on("blur", function () {
-            var pName = $(this).val();
-            if (pName) {
-                var plId = $("select[name=productLineId] option:selected").val();
-                if (plId > 0) {
-                    $.ajax({
-                        url: "${TINY_CONTEXT_PATH+adminPath}/product/judgeProductName",
-                        type: "POST",
-                        data: {productName: pName, productLineId: plId, productId: "${product?.productId}"},
-                        success: function (data) {
-                            if (data.status == "y") {
-                                $("input[name=productName]").addClass("Validform_error");
-                                $("input[name=productName]").parent().parent().find("div[class=col-2]").html("<span class='Validform_checktip Validform_wrong'>该产品已存在！</span>");
-                            } else {
-                                $("input[name=productName]").removeClass("Validform_error");
-                                $("input[name=productName]").parent().parent().find("div[class=col-2]").html("");
-                            }
-                        }
-                    });
-                    return false;
-                }
-            }
-        });
-    </script>
+    #end
     #@validateDiv("col-2")#end
 #end
 #@elementItem()
     #@colLabel()<span class="c-red">*</span>产品代号：#end
     #@formControlDiv("col-4")
         #tinyInput(
-            "text" "productCode" product?.productCode {"nullmsg":"请输入产品代号！","id":"33","class":"input-text"})
+            "text" "productCode" product?.productCode{"placeholder":"请输入产品代号","datatype":"n","nullmsg":"代号不能为空！","id":
+            "productCode","class":"input-text",
+            "ajaxurl":TINY_CONTEXT_PATH+adminPath+"/product/judgeProductCode?productId="+product?.productId+"&productLineId="+product?.productLineId})
+
     #end
-    <script>
-        $("input[name=productCode]").on("blur", function () {
-            var pName = $(this).val();
-            if (pName) {
-                $.ajax({
-                    url: "${TINY_CONTEXT_PATH+adminPath}/product/judgeProductName",
-                    type: "POST",
-                    data: {productCode: pName, productId: "${product?.productId}"},
-                    success: function (data) {
-                        if (data.status == "y") {
-                            $("input[name=productCode]").addClass("Validform_error");
-                            $("input[name=productCode]").parent().parent().find("div[class=col-2]").html("<span class='Validform_checktip Validform_wrong'>该代号已存在！</span>");
-                        } else {
-                            $("input[name=productCode]").removeClass("Validform_error");
-                            $("input[name=productCode]").parent().parent().find("div[class=col-2]").html("");
-                        }
-                    }
-                });
-                return false;
-            }
-        });
-    </script>
     #@validateDiv("col-2")#end
 #end
 #@elementItem()
     #@colLabel()<span class="c-red">*</span>产品负责人：#end
     #@formControlDiv("col-4")
         #@Tselect2F()
-            #@Tselect2Body(
-                "productOwner" product?.productOwner {"class":"input-text select2","url":"/product/productList",
-                "ajaxType":"owner","data":""}) ##,"multiple":"multiple"加上为多选项
-            #end
             <script>
-                ajaxRead("${sid}", "productOwner", "orgUserId", "orgUserRealName", "/org/user/userList");
-
+                $(function(){
+                    ajaxRead("${sid}", "productOwner", "orgUserId", "orgUserRealName", "/org/user/userList");
+                })
             </script>
+            #@Tselect2Body(
+                "productOwner" product?.productOwner {"class":"input-text select2","nullmsg":"请选择产品负责人！","datatype":"*"}) ##,"multiple":"multiple"加上为多选项
+            #end
+
             #@Tselect2Fix()
                 #set(m=menuManager.getMenu("organizationAddUser"))
                 #if(m)
@@ -170,12 +122,13 @@
     #@colLabel()测试负责人：#end
     #@formControlDiv("col-4")
         #@Tselect2F()
-            #@Tselect2Body(
-                "productQualityManager" product?.productQualityManager {"class":"input-text select2","url":
-                "/product/productList","ajaxType":"qualityMnager","data":""}) ##,"multiple":"multiple"加上为多选项
-                <script>
+            <script>
+                $(function(){
                     ajaxRead("${sid}", "productQualityManager", "orgUserId", "orgUserRealName", "/org/user/userList");
-                </script>
+                })
+            </script>
+            #@Tselect2Body(
+                "productQualityManager" product?.productQualityManager {"class":"input-text select2","nullmsg":"请选择产品负责人！","datatype":"*"}) ##,"multiple":"multiple"加上为多选项
             #end
             #@Tselect2Fix()
                 #set(m=menuManager.getMenu("organizationAddUser"))
@@ -196,15 +149,15 @@
     #@colLabel()发布负责人：#end
     #@formControlDiv("col-4")
         #@Tselect2F()
+            <script>
+                $(function(){
+                    ajaxRead("${sid}", "productDeliveryManager", "orgUserId", "orgUserRealName", "/org/user/userList");
+                })
+            </script>
             #@Tselect2Body(
-                "productDeliveryManager" product?.productDeliveryManager {"class":"input-text select2","url":
-                "/product/productList","ajaxType":"deliveryManagerManager","data":
-                ""}) ##,"multiple":"multiple"加上为多选项
+                "productDeliveryManager" product?.productDeliveryManager {"class":"input-text select2","nullmsg":"请选择产品负责人！","datatype":"*"}) ##,"multiple":"multiple"加上为多选项
             #end
 
-            <script>
-                ajaxRead("${sid}", "productDeliveryManager", "orgUserId", "orgUserRealName", "/org/user/userList");
-            </script>
             #@Tselect2Fix()
                 #set(m=menuManager.getMenu("organizationAddUser"))
                 #if(m)
@@ -225,8 +178,9 @@
         #@Tselect2F()
             #@Tselect2Body("productStatus" product?.productStatus {"class":
                 "input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                <option value="0">正常</option>
-                <option value="1">结束</option>
+                #for(v　: getDict("productStatus"))
+                <option value="${v.value}">${v.text}</option>
+                #end
             #end
 
         #end
@@ -244,7 +198,7 @@
 
 
 #@elementItem()
-    #@colLabel()访问控制：#end
+    #@colLabel()<span class="c-red">*</span>访问控制：#end
     #@skinMinimal("col-8")
 
         #@Tradioes("acl" product?.acl {"onclick":"setWhite(this.value)"})

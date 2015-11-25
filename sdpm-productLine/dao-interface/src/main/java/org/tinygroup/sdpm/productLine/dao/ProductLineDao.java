@@ -29,6 +29,8 @@ public interface ProductLineDao extends BaseDao<ProductLine,Integer> {
 	Integer softDelete(Integer id);
 	
 	Pager<ProductLine> findList(int start, int limit, Condition condition, ProductLine productLine , final OrderBy... orderArgs);
+
+	Pager<ProductLine> findList(int start, int limit, Condition condition, ProductLine productLine ,Integer[] ids, final OrderBy... orderArgs);
 	
 	List<ProductLine> getByKeys(Integer...ids);
 

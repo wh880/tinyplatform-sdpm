@@ -24,40 +24,17 @@
     </div>*#
 
     #@elementItem()
-        #@colLabel()<span class="c-red">*</span>发布名称:#end
+        #@colLabel("col-1")<span class="c-red">*</span>发布名称:#end
         #@formControlDiv("col-4")
             #tinyInput(
-                "text" "releaseName" ""{"datatype":"*","nullmsg":"发布名称不能为空！","id":"username","class":"input-text"})
-            <script>
-                $("input[name=releaseName]").on("blur", function () {
-                    var pName = $(this).val();
-                    if (pName) {
-                        var pId = "${cookieProductId}";
-                        if (pId > 0) {
-                            $.ajax({
-                                url: "${TINY_CONTEXT_PATH+adminPath}/product/release/judgeReleaseName",
-                                type: "POST",
-                                data: {releaseName: pName, productId: pId},
-                                success: function (data) {
-                                    if (data.status == "y") {
-                                        $("input[name=releaseName]").addClass("Validform_error");
-                                        $("input[name=releaseName]").parent().parent().find("div[class=col-2]").html("<span class='Validform_checktip Validform_wrong'>该发布已存在！</span>");
-                                    } else {
-                                        $("input[name=releaseName]").removeClass("Validform_error");
-                                        $("input[name=releaseName]").parent().parent().find("div[class=col-2]").html("");
-                                    }
-                                }
-                            });
-                            return false;
-                        }
-                    }
-                });
-            </script>
+                "text" "releaseName" ""{"datatype":"*","nullmsg":"发布名称不能为空！","id":"releaseName","class":"input-text",
+                "ajaxurl":TINY_CONTEXT_PATH+adminPath+"/product/release/judgeReleaseName?productId="+cookieProductId})
+
         #end
         #@validateDiv("col-2")#end
     #end
     #@elementItem()
-        #@colLabel()版本:#end
+        #@colLabel("col-1")版本:#end
         #@formControlDiv("col-4")
             #@Tselect2F()
                 #@Tselect2Body(
@@ -65,7 +42,9 @@
                     "data":""}) ##,"multiple":"multiple"加上为多选项
                 #end
                 <script>
-                    ajaxRead("${sid}", "buildId", "buildId", "buildName", "/project/build/buildList?buildProduct=${cookieProductId}&from=product");
+                    $(function(){
+                        ajaxRead("${sid}", "buildId", "buildId", "buildName", "/project/build/buildList?buildProduct=${cookieProductId}&from=product");
+                    })
                 </script>
                 #@Tselect2Fix()
                     #@hasMenu("pro-version-add")
@@ -82,7 +61,7 @@
     #end
 
     #@elementItem()
-        #@colLabel()<span class="c-red">*</span>发布日期:#end
+        #@colLabel("col-1")<span class="c-red">*</span>发布日期:#end
         #@formControlDiv("col-4")
             #@tinyDateInput("releaseDate" "" "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空"})#end
         #end
@@ -90,8 +69,8 @@
     #end
 
     #@elementItem()
-        #@colLabel()描述:#end
-        #@formControlDiv("col-8")
+        #@colLabel("col-1")描述:#end
+        #@formControlDiv("col-9")
             #@Teditor(
                 "releaseDesc" "releaseDesc" {"initialFrameHeight":"250" ,"placeholder":"说点什么...最少输入10个字符","datatype":
                 ""})#end
@@ -101,7 +80,7 @@
 
     #@elementItem()
         <div class="col-12">
-            <div class="col-2 text-r"><label>附件：</label></div>
+            <div class="col-1 text-r"><label>附件：</label></div>
 
             <div class="col-9">
                 #@formControlDiv("col-12")

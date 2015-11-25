@@ -145,90 +145,64 @@
 <div class="infoContent">
     <p class="titleName">编辑</p>
     #@elementItem()
-        #@colLabel()产品:#end
-        #@formControlDiv("col-4")
+        #@colLabel("col-1")产品:#end
+        #@formControlDiv("col-3")
             ${product?.productName}
         #end
         #@validateDiv("col-2")#end
     #end
     #@elementItem()
-        #@colLabel()名称:#end
-        #@formControlDiv("col-4")
-            #tinyInput("text" "planName" plan?.planName {"datatype":"*","class":"input-text","nullmsg":"计划名称不能为空！",
-                "placeholder":""})
+        #@colLabel("col-1")名称:#end
+        #@formControlDiv("col-3")
+            #tinyInput("text" "planName" plan?.planName{"datatype":"*","nullmsg":"计划名不能为空！","id":"planName","class":"input-text",
+                "ajaxurl":TINY_CONTEXT_PATH+adminPath+"/product/plan/judgePlanName?planId="+plan?.planId+"&productId="+cookieProductId})
         #end
-        <script>
-            $("input[name=planName]").on("blur",function(){
-                var pName = $(this).val();
-                if(pName){
-                    var pId = "${cookieProductId}";
-                    if(pId>0){
-                        $.ajax({
-                            url:"${TINY_CONTEXT_PATH+adminPath}/product/plan/judgePlanName",
-                            type:"POST",
-                            data:{planName:pName,productId:pId,planId:"${plan?.planId}"},
-                            success:function(data){
-                                if(data.status=="y"){
-                                    $("input[name=planName]").addClass("Validform_error");
-                                    $("input[name=planName]").parent().parent().find("div[class=col-2]").html("<span class='Validform_checktip Validform_wrong'>该计划已存在！</span>");
-                                }else{
-                                    $("input[name=planName]").removeClass("Validform_error");
-                                    $("input[name=planName]").parent().parent().find("div[class=col-2]").html("");
-                                }
-                            }
-                        });
-                        return false;
-                    }
-                }
-            });
-        </script>
         #@validateDiv("col-2")#end
     #end
 
     #@elementItem()
-        #@colLabel()开始日期:#end
-        #@formControlDiv("col-4")
+        #@colLabel("col-1")开始日期:#end
+        #@formControlDiv("col-3")
             #@tinyDateInput("planBeginDate" plan?.planBeginDate?formatDate(plan?.planBeginDate,
                 'yyyy-MM-dd'):"" "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空","readonly":"readonly"})#end
         #end
         #@validateDiv("col-2")#end
     #end
     #@elementItem()
-        #@colLabel()结束日期:#end
-        #@formControlDiv("col-4")
-            #@tinyDateInput("planEndDate" plan?.planEndDate?formatDate(plan?.planEndDate,
-                'yyyy-MM-dd'):"" "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空","readonly":"readonly"})#end
+        #@colLabel("col-1")<span class="c-red">*</span>结束日期:#end
+        #@formControlDiv("col-9")
+            <div class="col-4">
+                #@tinyDateInput("planEndDate" plan?.planEndDate?formatDate(plan?.planEndDate,'yyyy-MM-dd'):"" "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空"})#end
+            </div>
+            <div  class="col-8">
+
+                #@radioBox()
+                    #@tinyRadioes("endTime" "one-week" "time")一周#end
+                #end
+                #@radioBox()
+                    #@tinyRadioes("endTime" "two-week" "time")两周#end
+                #end
+                #@radioBox()
+                    #@tinyRadioes("endTime" "one-month" "time")一个月#end
+                #end
+                #@radioBox()
+                    #@tinyRadioes("endTime" "two-month" "time")两个月#end
+                #end
+                #@radioBox()
+                    #@tinyRadioes("endTime" "half-year" "time")半年#end
+                #end
+                #@radioBox()
+                    #@tinyRadioes("endTime" "year" "time")一年#end
+                #end
+
+
+            </div>
         #end
-        <div class="col-6">
-
-            #@radioBox()
-                #@tinyRadioes("endTime" "one-week" "time")一周#end
-            #end
-            #@radioBox()
-                #@tinyRadioes("endTime" "two-week" "time")两周#end
-            #end
-            #@radioBox()
-                #@tinyRadioes("endTime" "one-month" "time")一个月#end
-            #end
-            #@radioBox()
-                #@tinyRadioes("endTime" "two-month" "time")两个月#end
-            #end
-            #@radioBox()
-                #@tinyRadioes("endTime" "half-year" "time")半年#end
-            #end
-            #@radioBox()
-                #@tinyRadioes("endTime" "year" "time")一年#end
-            #end
-
-
-        </div>
-
-
-
         #@validateDiv("col-2")#end
     #end
+
     #@elementItem()
-        #@colLabel()描述:#end
+        #@colLabel("col-1")描述:#end
         #@formControlDiv("col-10")
             #@Teditor("planSpec" "planSpec" {"initialFrameHeight":"250" ,"placeholder":"说点什么...最少输入10个字符","datatype":
                 "*10-500"})${plan?.planSpec}#end

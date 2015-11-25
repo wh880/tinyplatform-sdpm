@@ -361,21 +361,26 @@ public class ReleaseAction extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "/judgeReleaseName")
-    public Map judgeReleaseName(ProductRelease productRelease) {
-        Integer releaseId=null;
-        if(productRelease.getProductId()!=null){
-            releaseId = productRelease.getProductId();
-            productRelease.setReleaseId(null);
-        }
-        List<ProductRelease> releases = releaseService.findReleaseList(productRelease);
-        if (releases.size() >=1) {
-            if(releases.size()==1&&releaseId!=null){
-                return resultMap(releaseId.equals(releases.get(0).getReleaseId())?false:true,"");
+    public Map judgeReleaseName(String param,Integer releaseId,Integer productId) {
+        if (param != null) {
+            String releaseName = param;
+            ProductRelease release = new ProductRelease();
+            release.setReleaseName(releaseName);
+            release.setProductId(productId);
+            List<ProductRelease> releases= releaseService.findReleaseList(release);
+            if (releases.size() != 0) {
+                if(releaseId==null){
+                    return resultMap(false, "该发布已存在");
+                }else if(!releaseId.equals(releases.get(0).getReleaseId())){
+                    return resultMap(false, "该发布已存在");
+                }else{
+                    return resultMap(true, "");
+                }
+            } else {
+                return resultMap(true, "");
             }
-            return resultMap(true, "");
-        } else {
-            return resultMap(false, "");
         }
+        return resultMap(false, "请输入发布名称");
     }
     @RequestMapping("/exportDoc")
     public void exportDocument(Integer releaseId, HttpServletResponse response) throws IOException, TemplateException {

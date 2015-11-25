@@ -98,6 +98,10 @@ public class BuildServiceImpl implements BuildService {
         return buildManager.getBuildByIds(ids);
     }
 
+    public List<ProjectBuild> getBuildByProducts(Integer... ids) {
+        return buildManager.getBuildByProducts(ids);
+    }
+
     public Pager<QualityBug> findNoBuildBug(int start, int limit, int id, String condition, SearchInfos conditions, String groupOperate) {
         return buildManager.findNoBuildBug(start, limit, condition, id);
     }
