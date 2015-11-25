@@ -274,6 +274,9 @@ public class DocAction extends BaseController {
     @RequestMapping("/view")
     public String docView(Model model, Integer docid) {
         DocumentDoc doc = docservice.findDocById(docid);
+        if (doc == null) {
+            return notFoundView();
+        }
         if (doc.getDocLibId() != null) {
             DocumentDocLib docLib = docservice.findDoclibById(doc.getDocLibId());
             model.addAttribute("docLib", docLib);
