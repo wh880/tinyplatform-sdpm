@@ -9,13 +9,13 @@
         #@td()
         <a href="${TINY_CONTEXT_PATH+adminPath}/product/storySpec/find/productDemandDetail?storyId=${s.storyId}">${s.storyTitle}
         #end
-        #@td()${s.storyOpenedBy==null?"":UserUtils.getUserById(s.storyOpenedBy)?.orgUserRealName}#end
-        #@td()${s.storyAssignedTo==null?"":UserUtils.getUserById(s.storyAssignedTo)?.orgUserRealName}#end
+        #@td("nowrap")${s.storyOpenedBy==null?"":UserUtils.getUserById(s.storyOpenedBy)?.orgUserRealName}#end
+        #@td("nowrap")${s.storyAssignedTo==null?"":UserUtils.getUserById(s.storyAssignedTo)?.orgUserRealName}#end
         #@td()${s.storyEstimate}#end
         #@td()${getDict("storyStatus", s.storyStatus)}#end
         #@td()${getDict("storyStage", s.storyStage)}#end
         #@td()${s.taskNumber}#end
-        #@td()
+        #@td("nowrap")
             #foreach(m:menuManager.getScopeMenus("demand-op"))
                 #if(m.id != "rm-demand")
                     <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?storyId=${s.storyId}&moduleId=${s.moduleId}"

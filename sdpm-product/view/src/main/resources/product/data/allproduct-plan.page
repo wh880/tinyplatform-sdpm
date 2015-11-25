@@ -11,8 +11,8 @@
         #@td()<a href="${TINY_CONTEXT_PATH +adminPath}/product/plan/forword/reRelateStory?planId=${plan.planId}">${plan
             ?.planName}</a>#end
         #@td()${plan?.planSpec}#end
-        #@td("nowrap")${plan?.planBeginDate?formatDate(plan?.planBeginDate,'yyyy年MM月dd日'):""}#end
-        #@td("nowrap")${plan?.planEndDate?formatDate(plan?.planEndDate,'yyyy年MM月dd日'):""}#end
+        #@td("nowrap")${plan?.planBeginDate?formatDate(plan?.planBeginDate,'yyyy-MM-dd'):""}#end
+        #@td("nowrap")${plan?.planEndDate?formatDate(plan?.planEndDate,'yyyy-MM-dd'):""}#end
         #@td("nowrap")
             #foreach(m:menuManager.getScopeMenus("product-pl"))
             ##		  #set(url=eval(m.href))

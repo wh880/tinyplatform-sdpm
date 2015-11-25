@@ -229,6 +229,12 @@
 
 <script type="text/javascript">
     $(function () {
-        $("form").Validform({});
+        $("form[name=addTaskForm]").Validform({
+            tiptype: function (msg, o, cssctl) {
+                var objtip = $(o.obj).closest(".form-item-body").next(".validmsg");
+                cssctl(objtip, o.type);
+                objtip.text(msg);
+            }
+        });
     });
 </script>

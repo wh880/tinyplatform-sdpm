@@ -6,12 +6,12 @@
                 href="${TINY_CONTEXT_PATH+adminPath}/service/client/clientSla?id=${var.clientId}">${var.clientName}</a>#end
         #@td()<a
                 href="${TINY_CONTEXT_PATH+adminPath}/service/request/overview?id=${var.clientRequestId}">${var.requestTitle}</a>#end
-        #@td()${getDict("requestPre",var.requestPre)}#end
-        #@td()${getDict("requestStatus",var.requestStatus)}#end
-        #@td()${formatDate(var.requestCommitmentDate,"yyyy-MM-dd")}#end
-        #@td()${var.replier}#end
-        #@td()${var.requestReviewer}#end
-        #@td()
+        #@td("nowrap")${getDict("requestPre",var.requestPre)}#end
+        #@td("nowrap")${getDict("requestStatus",var.requestStatus)}#end
+        #@td("nowrap")${formatDate(var.requestCommitmentDate,"yyyy-MM-dd")}#end
+        #@td("nowrap")${var.replier}#end
+        #@td("nowrap")${var.requestReviewer}#end
+        #@td("nowrap")
             #foreach(m:menuManager.getScopeMenus("service-request"))
                 #if(m)
                 <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?id=${var.clientRequestId}&treeId=${treeId}&status=${status}"
