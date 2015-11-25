@@ -47,9 +47,8 @@
             #@sdpmItem("任务类型" "*")
                 #@Tselect2F()
                     #@Tselect2Body(
-                        "taskType" copyTask?.taskType {"class":"input-text select2","placeholder":"请选择任务类型","datatype":
-                        "*",
-                        "nullmsg":"任务类型不能为空！"})
+                        "taskType" copyTask?.taskType {"class":"input-text select2","placeholder":"请选择任务类型",
+                        "datatype":"*","nullmsg":"任务类型不能为空！"})
                         <option value=""></option>
                         #foreach(item : getDict("taskType"))
                             <option value="${item?.value}">${item?.text}</option>
@@ -228,6 +227,12 @@
 
 <script type="text/javascript">
     $(function () {
-        $("form").Validform({});
+        $("form[name=addTaskForm]").Validform({
+            tiptype: function (msg, o, cssctl) {
+                var objtip = $(o.obj).closest(".form-item-body").next(".validmsg");
+                cssctl(objtip, o.type);
+                objtip.text(msg);
+            }
+        });
     });
 </script>
