@@ -58,4 +58,6 @@ public interface ProjectBuildDao extends BaseDao<ProjectBuild, Integer> {
      Pager<QualityBug> findBuildLegacyBugs(int start, int limit, Integer buildId, final OrderBy... orderArgs);
 
      List<ProjectBuild> getBuildByKeys(String...ids);
+
+     List<ProjectBuild> getBuildByProducts(Integer... ids);
 }

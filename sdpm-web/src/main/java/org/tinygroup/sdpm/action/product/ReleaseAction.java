@@ -19,7 +19,9 @@ import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;
 import org.tinygroup.sdpm.system.service.inter.ExportService;
 import org.tinygroup.sdpm.system.service.inter.ProfileService;
+import org.tinygroup.sdpm.util.CookieUtils;
 import org.tinygroup.sdpm.util.LogUtil;
+import org.tinygroup.sdpm.util.ProductUtils;
 import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.template.TemplateException;
 import org.tinygroup.tinysqldsl.Pager;
@@ -177,8 +179,26 @@ public class ReleaseAction extends BaseController {
     }
 
     @RequestMapping("/forword/{forwordPager}")
-    public String forword(@PathVariable(value = "forwordPager") String forwordPager, Integer releaseId, Model model) {
+    public String forword(@PathVariable(value = "forwordPager") String forwordPager,
+                          Integer releaseId,
+                          Model model,
+                          Integer no,
+                          HttpServletRequest request) {
 
+        if(no!=null){
+            Integer cookieProductId = Integer.parseInt(CookieUtils.getCookie(request, ProductUtils.COOKIE_PRODUCT_ID));
+            if(cookieProductId==null){
+                notFoundView();
+            }
+            ProductRelease release = new ProductRelease();
+            release.setProductId(cookieProductId);
+            release.setNo(no);
+            List<ProductRelease> releaseList = releaseService.findReleaseList(release);
+            if(releaseList.size()==0){
+                notFoundView();
+            }
+            releaseId = releaseList.get(0).getReleaseId();
+        }
         model.addAttribute("releaseId", releaseId);
 
         if ("reRelateStory".equals(forwordPager)) {
@@ -368,21 +388,26 @@ public class ReleaseAction extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "/judgeReleaseName")
-    public Map judgeReleaseName(ProductRelease productRelease) {
-        Integer releaseId=null;
-        if(productRelease.getProductId()!=null){
-            releaseId = productRelease.getProductId();
-            productRelease.setReleaseId(null);
-        }
-        List<ProductRelease> releases = releaseService.findReleaseList(productRelease);
-        if (releases.size() >=1) {
-            if(releases.size()==1&&releaseId!=null){
-                return resultMap(releaseId.equals(releases.get(0).getReleaseId())?false:true,"");
+    public Map judgeReleaseName(String param,Integer releaseId,Integer productId) {
+        if (param != null) {
+            String releaseName = param;
+            ProductRelease release = new ProductRelease();
+            release.setReleaseName(releaseName);
+            release.setProductId(productId);
+            List<ProductRelease> releases= releaseService.findReleaseList(release);
+            if (releases.size() != 0) {
+                if(releaseId==null){
+                    return resultMap(false, "该发布已存在");
+                }else if(!releaseId.equals(releases.get(0).getReleaseId())){
+                    return resultMap(false, "该发布已存在");
+                }else{
+                    return resultMap(true, "");
+                }
+            } else {
+                return resultMap(true, "");
             }
-            return resultMap(true, "");
-        } else {
-            return resultMap(false, "");
         }
+        return resultMap(false, "请输入发布名称");
     }
     @RequestMapping("/exportDoc")
     public void exportDocument(Integer releaseId, HttpServletResponse response) throws IOException, TemplateException {

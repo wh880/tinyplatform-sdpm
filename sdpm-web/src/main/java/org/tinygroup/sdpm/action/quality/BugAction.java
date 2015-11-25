@@ -42,10 +42,7 @@ import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.sdpm.system.service.inter.ProfileService;
-import org.tinygroup.sdpm.util.LogUtil;
-import org.tinygroup.sdpm.util.ModuleUtil;
-import org.tinygroup.sdpm.util.ProjectUtils;
-import org.tinygroup.sdpm.util.UserUtils;
+import org.tinygroup.sdpm.util.*;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -118,13 +115,31 @@ public class BugAction extends BaseController {
     }
 
     @RequestMapping("/bugInfo")
-    public String bugInfo(Integer bugId, Model model) {
+    public String bugInfo(Integer bugId,Integer no, Model model, HttpServletRequest request) {
+        QualityBug bug = null;
+        if(no!=null){
+            Integer qualityProductId = Integer.parseInt(CookieUtils.getCookie(request,"qualityProductId"));
+            if(qualityProductId==null){
+                notFoundView();
+            }
+            bug = new QualityBug();
+            bug.setProductId(qualityProductId);
+            bug.setNo(no);
+            List<QualityBug> bugList = bugService.findBugList(bug);
+            if(bugList.size()==0){
+                notFoundView();
+            }
+            bug = bugList.get(0);
+            bugId = bug.getBugId();
+        }
         Pager<QualityBug> bugs = bugService.findBugListPager(0, 1, " bug_id <" + bugId + " ", null, "bugId", false);
         int nextId = 0;
         if (bugs.getRecords().size() > 0) {
             nextId = bugs.getRecords().get(0).getBugId();
         }
-        QualityBug bug = bugService.findById(bugId);
+        if(bug==null||bug.getBugId()==null){
+            bug = bugService.findById(bugId);
+        }
         SystemProfile systemProfile = new SystemProfile();
         systemProfile.setFileObjectType("bug");
         systemProfile.setFileDeleted("0");

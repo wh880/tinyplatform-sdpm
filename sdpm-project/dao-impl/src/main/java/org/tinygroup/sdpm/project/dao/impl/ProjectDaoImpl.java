@@ -72,10 +72,10 @@ public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
         });
     }
 
-    public List<Project> findListWithStatistics(Project project,Date startDate,Date endDate) {
+    public List<Project> findListWithStatistics(Project project, Date startDate, Date endDate) {
         Condition condition = null;
-        if(startDate!=null&&endDate!=null){
-            condition = and(PROJECTTABLE.PROJECT_OPENED_DATE.gte(startDate),PROJECTTABLE.PROJECT_OPENED_DATE.lte(endDate));
+        if (startDate != null && endDate != null) {
+            condition = and(PROJECTTABLE.PROJECT_OPENED_DATE.gte(startDate), PROJECTTABLE.PROJECT_OPENED_DATE.lte(endDate));
         }
         if (project == null) {
             project = new Project();
@@ -88,7 +88,7 @@ public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
         ).from(PROJECTTABLE).join(
                 Join.leftJoin(PROJECT_TASKTABLE,
                         PROJECT_TASKTABLE.TASK_PROJECT.equal(PROJECTTABLE.PROJECT_ID)))
-                .where(and(condition,PROJECTTABLE.PROJECT_DELETED.eq(Project.DELETE_NO), PROJECTTABLE.PROJECT_ID.eq(project.getProjectId())))
+                .where(and(condition, PROJECTTABLE.PROJECT_DELETED.eq(Project.DELETE_NO), PROJECTTABLE.PROJECT_ID.eq(project.getProjectId())))
                 .groupBy(PROJECTTABLE.PROJECT_ID);
         return getDslSession().fetchList(select, Project.class);
     }
@@ -446,11 +446,12 @@ public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
         return getDslSession().fetchList(select, Project.class);
     }
 
-    public List<Project> findListByTeamUserId(String userId) {
+    public List<Project> findListByTeamUserId(String userId, String acl) {
         Select select = selectFrom(PROJECTTABLE).where(
                 PROJECTTABLE.PROJECT_ID.inExpression(subSelect(select(PROJECT_TEAMTABLE.PROJECT_ID).from(PROJECT_TEAMTABLE).where(PROJECT_TEAMTABLE.TEAM_USER_ID.eq(userId))))
+                        .and(PROJECTTABLE.PROJECT_ACL.eq(acl))
                         .and(PROJECTTABLE.PROJECT_DELETED.eq(Project.DELETE_NO))
-        );
+                        );
         return getDslSession().fetchList(select, Project.class);
     }
 }

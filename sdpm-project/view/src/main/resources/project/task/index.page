@@ -41,7 +41,7 @@
             <a class="btn btn-success" href="${TINY_CONTEXT_PATH+adminPath}/project/task/form">建任务</a>
             #end
             #@tinyTableContent(TINY_CONTEXT_PATH+adminPath+
-                "/project/task/findPager?moduleId="+moduleId) ##取数据地址 总数据
+                "/project/task/findPager?moduleId="+moduleId+"&key="+key) ##取数据地址 总数据
                 #@thead()
                     #@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
                         #@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end

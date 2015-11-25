@@ -70,6 +70,19 @@ public class ProductLineManagerImpl implements ProductLineManager{
 		return productLineDao.findList(start, pagesize,condition1, productLine);
 	}
 
+	public Pager<ProductLine> findProductLinePagerInIds(int start, int limit, String condition, ProductLine productLine, Integer[] ids,String order,String ordertype) {
+		if(ids==null||ids.length==0)return new Pager<ProductLine>(0,0,new ArrayList<ProductLine>());
+		Condition condition1 = null;
+		if(!StringUtil.isBlank(condition)){
+			condition1 = FragmentSql.fragmentCondition(condition);
+		}
+		if(!StringUtil.isBlank(order)) {
+			return productLineDao.findList(start, limit, condition1, productLine,ids,
+					new OrderBy("product_line." + NameUtil.resolveNameDesc(order), !("desc".equals(ordertype)) ? true : false));
+		}
+		return productLineDao.findList(start, limit,condition1, productLine,ids);
+	}
+
 	public List<ProductLine> getProductLineByIds(Integer... ids) {
 		if(ids==null||ids.length==0){
 			return new ArrayList<ProductLine>();

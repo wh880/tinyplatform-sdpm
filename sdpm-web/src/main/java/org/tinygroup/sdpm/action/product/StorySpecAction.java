@@ -12,10 +12,14 @@ import org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec;
 import org.tinygroup.sdpm.product.service.StoryService;
 import org.tinygroup.sdpm.product.service.StorySpecService;
 import org.tinygroup.sdpm.system.dao.pojo.ProfileType;
+import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;
 import org.tinygroup.sdpm.system.service.inter.ProfileService;
+import org.tinygroup.sdpm.util.CookieUtils;
+import org.tinygroup.sdpm.util.ProductUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -50,8 +54,29 @@ public class StorySpecAction extends BaseController{
 	}
 	
 	@RequestMapping("/find/{forward}")
-	public String find(@PathVariable(value="forward")String forward,ProductStory story,Model model,SystemProfile systemProfile){
-		ProductStory productStory = storyService.findStory(story.getStoryId());
+	public String find(@PathVariable(value="forward")String forward,
+					   ProductStory story,
+					   Model model,
+					   SystemProfile systemProfile,
+					   HttpServletRequest request){
+		ProductStory productStory = null;
+		if(story.getNo()!=null){
+			Integer cookieProductId = Integer.parseInt(CookieUtils.getCookie(request, ProductUtils.COOKIE_PRODUCT_ID));
+			if(cookieProductId==null){
+				notFoundView();
+			}
+			productStory = new ProductStory();
+			productStory.setProductId(cookieProductId);
+			productStory.setNo(story.getNo());
+			List<ProductStory> storyList = storyService.findStoryList(productStory);
+			if(storyList.size()==0){
+				notFoundView();
+			}
+			productStory = storyList.get(0);
+		}
+		if(productStory == null || productStory.getStoryId()==null){
+			productStory = storyService.findStory(story.getStoryId());
+		}
 		ProductStorySpec storySpec = specService.findStorySpec(productStory.getStoryId(),productStory.getStoryVersion());
 		model.addAttribute("storySpec", storySpec);
 		model.addAttribute("story", productStory);

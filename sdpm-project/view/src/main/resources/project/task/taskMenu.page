@@ -26,7 +26,7 @@
 ##更多
     #include("/project/task/maplist.page")
 <div class="btn-group btnDropDown">
-    <a id="dLabel" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+    <a id="dLabel" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" class="selChoose ${choose=="8"?"active_btn":""}">
         ${statuMap.get(statu==null?"0":statu)}
         <span class="caret"></span>
     </a>
@@ -42,14 +42,20 @@
         $(function () {
             var actionUrl = $("#taskTable").attr("data-url");
             $(".projectMore").click(function (e) {
-                $("#taskTable").attr("data-url", actionUrl + "&statu=" + $(this).attr("val"));
-                $("#taskTable").trigger("refresh");
+                if(actionUrl) {
+                    $("#taskTable").attr("data-url", actionUrl + "&statu=" + $(this).attr("val"));
+                    $("#taskTable").trigger("refresh");
+                    $(".selChoose").removeClass("active_btn");
+                    $(this).closest("div").children("a").text($(this).text()).addClass("active_btn");
+                }else{
+                    window.location.href = "../task/index?choose=8&statu=" + $(this).attr("val");
+                }
             });
         });
     </script>
 ##分组查看
     <div class="btn-group btnDropDown">
-        <a id="dLabel" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+        <a id="dLabel" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"  class="${choose=="9"?"active_btn":""}">
             #if(menuId)
                 ${menuManager.getMenu(menuId).name}
             #else
@@ -59,7 +65,7 @@
         </a>
         <ul class="dropdown-menu" aria-labelledby="dLabel">
             #foreach(m:menuManager.getScopeMenus("task-group-menu"))
-                <li><a href="${TINY_CONTEXT_PATH+adminPath+m.href}&menuId=${m.id}">${m.name}</a></li>
+                <li><a href="${TINY_CONTEXT_PATH+adminPath+m.href}&choose=9&menuId=${m.id}">${m.name}</a></li>
             #end
         </ul>
     </div>

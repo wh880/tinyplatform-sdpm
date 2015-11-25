@@ -422,7 +422,7 @@ public class ProjectTaskAction extends BaseController {
             Integer start, Integer limit, String statu, String choose, Model model,
             HttpServletRequest request, HttpServletResponse response, String moduleId,
             @RequestParam(required = false, defaultValue = "task_id") String order,
-            String orderType) {
+            String orderType, Integer key) {
         Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
         if (projectId == null) {
             return redirectProjectForm();
@@ -432,6 +432,7 @@ public class ProjectTaskAction extends BaseController {
             asc = true;
         }
         ProjectTask task = new ProjectTask();
+        task.setTaskNo(key);
         task.setTaskProject(projectId);
         String moduleIds = "";
         if (!StringUtil.isBlank(moduleId)) {
@@ -501,9 +502,24 @@ public class ProjectTaskAction extends BaseController {
     }
 
     @RequestMapping("/findTask")
-    public String findTask(Model model, Integer taskId) {
-        ProjectTask task = taskService.findTask(taskId);
-        model.addAttribute("task", task);
+    public String findTask(Model model, Integer taskId, HttpServletRequest request, Integer no) {
+        if (no != null) {
+            Integer currentProjectId = ProjectUtils.getCurrentProjectId(request);
+            if (currentProjectId != null) {
+                ProjectTask projectTask = new ProjectTask();
+                projectTask.setTaskNo(no);
+                projectTask.setTaskProject(currentProjectId);
+                List<ProjectTask> listTask = taskService.findListTask(projectTask);
+                if (!CollectionUtil.isEmpty(listTask)) {
+                    model.addAttribute("task", listTask.get(0));
+                }else {
+                    return notFoundView();
+                }
+            }
+        } else {
+            ProjectTask task = taskService.findTask(taskId);
+            model.addAttribute("task", task);
+        }
         return "project/task/view";
     }
 

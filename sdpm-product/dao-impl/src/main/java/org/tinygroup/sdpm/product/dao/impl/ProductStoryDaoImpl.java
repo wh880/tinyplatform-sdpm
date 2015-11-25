@@ -116,9 +116,9 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 	public ProductStory add(final ProductStory productStory) {
 		return getDslTemplate().insertAndReturnKey(productStory, new InsertGenerateCallback<ProductStory>() {
 			public Insert generate(ProductStory t) {
-				Insert insert = InsertUtil.getInsert(PRODUCT_STORYTABLE, productStory);
+				Insert insert = /*InsertUtil.getInsert(PRODUCT_STORYTABLE, productStory);*/
 
-						/*insertInto(PRODUCT_STORYTABLE).values(
+						insertInto(PRODUCT_STORYTABLE).values(
 					PRODUCT_STORYTABLE.STORY_ID.value(t.getStoryId()),
 					PRODUCT_STORYTABLE.COMPANY_ID.value(t.getCompanyId()),
 					PRODUCT_STORYTABLE.PRODUCT_ID.value(t.getProductId()),
@@ -153,7 +153,8 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 					PRODUCT_STORYTABLE.STORY_VERSION.value(t.getStoryVersion()),
 					PRODUCT_STORYTABLE.BUILD_ID.value(t.getBuildId()),
 					PRODUCT_STORYTABLE.CLIENT_REQUEST_ID.value(t.getClientRequestId()),
-					PRODUCT_STORYTABLE.DELETED.value(t.getDeleted()));*/
+					PRODUCT_STORYTABLE.DELETED.value(t.getDeleted()),
+					PRODUCT_STORYTABLE.NO.value(t.getNo()));
 				return insert;
 			}
 		});
@@ -165,8 +166,8 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 		}
 		return getDslTemplate().update(productStory, new UpdateGenerateCallback<ProductStory>() {
 			public Update generate(ProductStory t) {
-				Update update = UpdateUtil.getUpdate(PRODUCT_STORYTABLE, t);
-						/*update(PRODUCT_STORYTABLE).set(
+				Update update = /*UpdateUtil.getUpdate(PRODUCT_STORYTABLE, t);*/
+						update(PRODUCT_STORYTABLE).set(
 					PRODUCT_STORYTABLE.COMPANY_ID.value(t.getCompanyId()),
 					PRODUCT_STORYTABLE.PRODUCT_ID.value(t.getProductId()),
 					PRODUCT_STORYTABLE.STORY_PARENT_ID.value(t.getStoryParentId()),
@@ -200,8 +201,9 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 					PRODUCT_STORYTABLE.STORY_VERSION.value(t.getStoryVersion()),
 					PRODUCT_STORYTABLE.BUILD_ID.value(t.getBuildId()),
 					PRODUCT_STORYTABLE.CLIENT_REQUEST_ID.value(t.getClientRequestId()),
-					PRODUCT_STORYTABLE.DELETED.value(t.getDeleted())).where(
-					PRODUCT_STORYTABLE.STORY_ID.eq(t.getStoryId()));*/
+					PRODUCT_STORYTABLE.DELETED.value(t.getDeleted()),
+					PRODUCT_STORYTABLE.NO.value(t.getNo())).where(
+					PRODUCT_STORYTABLE.STORY_ID.eq(t.getStoryId()));
 				return update;
 			}
 		});

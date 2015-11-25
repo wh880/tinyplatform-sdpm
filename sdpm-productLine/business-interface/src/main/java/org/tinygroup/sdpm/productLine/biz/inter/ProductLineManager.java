@@ -2,8 +2,10 @@ package org.tinygroup.sdpm.productLine.biz.inter;
 
 import java.util.List;
 
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.tinysqldsl.Pager;
+import org.tinygroup.tinysqldsl.base.Condition;
 
 public interface ProductLineManager {
 	
@@ -68,6 +70,8 @@ public interface ProductLineManager {
 	 * @return
 	 */
 	Pager<ProductLine> findPager(int page,int pagesize,String condition,ProductLine productLine,String order,String ordertype);
+
+	Pager<ProductLine> findProductLinePagerInIds(int start, int limit, String condition, ProductLine productLine ,Integer[] ids, String order,String ordertype);
 	
 	List<ProductLine> getProductLineByIds(Integer...ids);
 

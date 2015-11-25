@@ -90,7 +90,7 @@ public class DocAction extends BaseController {
             asc = false;
         }
         String cookieDocLib = CookieUtils.getCookie(request, DocAction.COOKIE_DOCLIB_ID);
-        Integer libId = Integer.valueOf(StringUtil.isBlank(cookieDocLib)?0:Integer.parseInt(cookieDocLib));
+        Integer libId = Integer.valueOf(StringUtil.isBlank(cookieDocLib) ? 0 : Integer.parseInt(cookieDocLib));
         doc.setDocLibId(libId);
         String condition = null;
         Pager<DocumentDoc> pager = null;
@@ -133,8 +133,8 @@ public class DocAction extends BaseController {
      */
     @RequiresPermissions(value = {"add-doc"})
     @RequestMapping(value = "/add")
-    public String createDoc(Integer libId,HttpServletRequest request, Model model) {
-        if (libId==null){
+    public String createDoc(Integer libId, HttpServletRequest request, Model model) {
+        if (libId == null) {
             libId = Integer.parseInt(CookieUtils.getCookie(request, DocAction.COOKIE_DOCLIB_ID));
         }
         if (libId == 1) {
@@ -196,8 +196,8 @@ public class DocAction extends BaseController {
                 null,
                 systemAction.getActionComment());
 
-        if(!StringUtil.isBlank(lastAddress)){
-            return "redirect:"+lastAddress;
+        if (!StringUtil.isBlank(lastAddress)) {
+            return "redirect:" + lastAddress;
         }
         if (request.getSession().getAttribute("moduleId") == null) {
             return "redirect:" + adminPath + "/document?docChange=true";
@@ -267,8 +267,8 @@ public class DocAction extends BaseController {
                 documentDoc,
                 doc,
                 systemAction.getActionComment());
-        if(!StringUtil.isBlank(lastAddress)){
-            return "redirect:"+lastAddress;
+        if (!StringUtil.isBlank(lastAddress)) {
+            return "redirect:" + lastAddress;
         }
         return "redirect:" + adminPath + "/document?docChange=true";
     }
@@ -276,27 +276,23 @@ public class DocAction extends BaseController {
     /**
      * 文档信息页面
      *
-     * @param request
-     * @param systemAction
-     * @param doc
-     * @param systemProfile
      * @param model
      * @param docid
      * @return
      */
     @RequestMapping("/view")
-    public String docView(HttpServletRequest request, SystemAction systemAction, DocumentDoc doc, SystemProfile systemProfile, Model model, Integer docid) {
-        doc = docservice.findDocById(docid);
+    public String docView(Model model, Integer docid) {
+        DocumentDoc doc = docservice.findDocById(docid);
+        if (doc == null) {
+            return notFoundView();
+        }
         if (doc.getDocLibId() != null) {
             DocumentDocLib docLib = docservice.findDoclibById(doc.getDocLibId());
             model.addAttribute("docLib", docLib);
-        } else {
-            DocumentDocLib docLib = null;
-            model.addAttribute("docLib", docLib);
         }
-        systemProfile.setFileObjectType("document");
+        SystemProfile systemProfile = new SystemProfile();
+        systemProfile.setFileObjectType(ProfileType.DOCUMENT.getType());
         systemProfile.setFileObjectId(docid);
-        systemProfile.setFileDeleted("0");
         List<SystemProfile> list = profileService.findSystemProfile(systemProfile);
         model.addAttribute("file", list);
         model.addAttribute("doc", doc);

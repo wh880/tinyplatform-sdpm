@@ -54,6 +54,10 @@ public class ProductLineServiceImpl implements ProductLineService {
 		return productLineManager.findPager(page, pagesize,condition, productLine, order, ordertype);
 	}
 
+	public Pager<ProductLine> findProductLinePagerInIds(int start, int limit, String condition, ProductLine productLine, Integer[] ids, String order, String ordertype) {
+		return productLineManager.findProductLinePagerInIds(start,limit,condition,productLine,ids,order,ordertype);
+	}
+
 	public List<ProductLine> getProductLineByIds(Integer... ids) {
 		return productLineManager.getProductLineByIds(ids);
 	}
@@ -69,6 +73,15 @@ public class ProductLineServiceImpl implements ProductLineService {
 			}
 		}
 		return lines;
+	}
+
+	public Integer[] getUserProductLineIds(String userId) {
+		List<ProductLine> lines = getUserProductLine(userId);
+		Integer[] ids = new Integer[lines.size()];
+		for(int i = 0; i<ids.length; i++){
+			ids[i] = lines.get(i).getProductLineId();
+		}
+		return ids;
 	}
 
 	public List<ProductLine> findList(ProductLine productLine) {

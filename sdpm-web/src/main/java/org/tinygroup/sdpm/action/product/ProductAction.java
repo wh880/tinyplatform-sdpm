@@ -303,6 +303,8 @@ public class ProductAction extends BaseController {
     public String addpro(
             @PathVariable(value = "forward") String forward, HttpServletRequest request, Model model) {
         if ("addproduct".equals(forward)) {
+            List<ProductLine> productLineList = productLineService.getUserProductLine(UserUtils.getUserId());
+            model.addAttribute("productLineList",productLineList);
             return "/product/page/tabledemo/addProduct";
         } else if ("allproduct".equals(forward)) {
             return "/product/page/tabledemo/product-listall.page";
@@ -342,21 +344,50 @@ public class ProductAction extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "/judgeProductName")
-    public Map judgeProductName(Product product) {
-        Integer productId = null;
-        if (product.getProductId() != null) {
-            productId = product.getProductId();
-            product.setProductId(null);
-        }
-        List<Product> products = productService.findProductList(product);
-        if (products.size() >= 1) {
-            if (products.size() == 1 && productId != null) {
-                return resultMap(productId.equals(products.get(0).getProductId()) ? false : true, "");
+    public Map judgeProductName(String param,Integer productId,Integer productLineId) {
+        if (param != null) {
+            String productName = param;
+            Product product = new Product();
+            product.setProductName(productName);
+            product.setProductLineId(productLineId);
+            List<Product> productList = productService.findProductList(product);
+            if (productList.size() != 0) {
+                if(productId==null){
+                    return resultMap(false, "该产品已存在");
+                }else if(!productId.equals(productList.get(0).getProductId())){
+                    return resultMap(false, "该产品已存在");
+                }else{
+                    return resultMap(true, "");
+                }
+            } else {
+                return resultMap(true, "");
             }
-            return resultMap(true, "该产品已存在");
-        } else {
-            return resultMap(false, "");
         }
+        return resultMap(false, "请输入产品名称");
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/judgeProductCode")
+    public Map judgeProductCode(String param,Integer productId,Integer productLineId) {
+        if (param != null) {
+            String productCode = param;
+            Product product = new Product();
+            product.setProductCode(productCode);
+            product.setProductLineId(productLineId);
+            List<Product> productList = productService.findProductList(product);
+            if (productList.size() != 0) {
+                if(productId==null){
+                    return resultMap(false, "该产品编号已存在");
+                }else if(!productId.equals(productList.get(0).getProductId())){
+                    return resultMap(false, "该产品编号已存在");
+                }else{
+                    return resultMap(true, "");
+                }
+            } else {
+                return resultMap(true, "");
+            }
+        }
+        return resultMap(false, "请输入产品编号");
     }
 
     @RequestMapping("addModule")
@@ -414,7 +445,7 @@ public class ProductAction extends BaseController {
         List<ProjectTeam> teamList = teams.getTeamList();
         //删选没有账号的team
         for (int i = 0; i < teamList.size(); i++) {
-            if (StringUtil.isBlank(teamList.get(i).getTeamUserId())) {
+            if (StringUtil.isBlank(teamList.get(i).getTeamUserId())||StringUtil.isBlank(teamList.get(i).getTeamRole())) {
                 teamList.remove(teamList.get(i));
                 i--;
             }

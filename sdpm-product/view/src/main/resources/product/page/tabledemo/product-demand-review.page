@@ -60,28 +60,30 @@
 
 
         #@elementItem()
-            #@colLabel()评审结果：#end
+            #@colLabel()<span class="c-red">*</span>评审结果：#end
             #@formControlDiv("col-4")
-                #@tinySelect(
-                    "reviewRequest" "" {"placeholder":"","datatype":"*","nullmsg":"评审结果不能为空！","class":
-                    "input-text","rel":"22"})
+                #@Tselect2F()
+                    #@Tselect2Body(
+                        "reviewRequest" "" {"placeholder":"","datatype":"*","nullmsg":"评审结果不能为空！","class":
+                        "input-text"})
 
-                    #foreach(source:getDict("proReviewResult"))
-                        <option value="${source?.value}"> ${source?.text}</option>
+                        #foreach(source:getDict("proReviewResult"))
+                            <option value="${source?.value}"> ${source?.text}</option>
+                        #end
+
                     #end
-
                 #end
             #end
             #@validateDiv("col-2")#end
         #end
 
         #@elementItem()
-            #@sdpmItem("指派给")
-                <div class="input-group">
+            #@colLabel()指派给：#end
+                #@formControlDiv("col-4")
                     #@Tselect2F()
                         #@Tselect2Body(
                             "storyAssignedTo" story?.storyAssignedTo {"placeholder":"",
-                            "class":"input-text select2","style":"width:300px" })
+                            "class":"input-text"})
 
                         #end
                         <script>
@@ -98,8 +100,7 @@
                             #end
                         #end
                     #end
-                </div>
-            #end
+                #end
         #end
 
         #@elementItem()

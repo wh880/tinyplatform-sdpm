@@ -117,7 +117,7 @@
      #@elementItem()
         #@colLabel()内容：#end
 	#@formControlDiv("col-8")
-		#@tinyueditor("content" "content")#end
+		#@Teditor("content" "content")#end
 	#end
         #@validateDiv("col-2")#end
     #end

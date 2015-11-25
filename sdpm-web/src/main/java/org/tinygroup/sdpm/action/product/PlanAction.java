@@ -9,11 +9,14 @@ import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
+import org.tinygroup.sdpm.product.dao.pojo.ProductRelease;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.service.PlanService;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
+import org.tinygroup.sdpm.util.CookieUtils;
 import org.tinygroup.sdpm.util.LogUtil;
+import org.tinygroup.sdpm.util.ProductUtils;
 import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -42,10 +45,8 @@ public class PlanAction  extends BaseController{
 
 	@RequestMapping("/content")
 	public String release(HttpServletRequest request, Model model) {
-
 		return "/product/page/project/product-plan.page";
 	}
-
 
 	@RequestMapping("/save")
 	public String save(
@@ -54,12 +55,9 @@ public class PlanAction  extends BaseController{
 			SystemAction systemAction,
 			String lastAddress) throws IOException {
 
-
 		productPlan.setProductId(Integer.parseInt(cookieProductId));
-
 		productPlan.setDeleted(FieldUtil.DELETE_NO);
 		ProductPlan productPlan1 = planService.addPlan(productPlan);
-
 		LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCTPLAN
 				, LogUtil.LogAction.OPENED
 				, String.valueOf(productPlan1.getPlanId())
@@ -79,29 +77,26 @@ public class PlanAction  extends BaseController{
 	public 	String update(ProductPlan plan,
 							SystemAction systemAction,
 							String lastAddress) throws IOException {
-		ProductPlan plan1 = planService.findPlan(plan.getPlanId());
-		planService.updatePlan(plan);
 
+		ProductPlan productPlan = planService.findPlan(plan.getPlanId());
+		planService.updatePlan(plan);
 		LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCTPLAN
 				, LogUtil.LogAction.EDITED
 				, String.valueOf(plan.getPlanId())
 				, UserUtils.getUserId()
 				, String.valueOf(plan.getProductId())
 				, null
-				, plan1
+				, productPlan
 				, plan
 				, systemAction.getActionComment());
 		if(!StringUtil.isBlank(lastAddress)){
 			return "redirect:"+lastAddress;
 		}
-
 		return " redirect:" + adminPath + "/product/plan/content";
-
 	}
 
 	@RequestMapping("/addplan")
 	public String addplan(@CookieValue(value = "cookieProductId",defaultValue = "0") String cookieProductId, HttpServletRequest request, Model model){
-
 			if(Integer.parseInt(cookieProductId)>0) {
 				Product product = productService.findProduct(Integer.parseInt(cookieProductId));
 				model.addAttribute("product", product);
@@ -117,7 +112,6 @@ public class PlanAction  extends BaseController{
         planService.deletePlan(planId);
 		ProductPlan plan = planService.findPlan(planId);
         Map<String, String> map = new HashMap<String, String>();
-
 		LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCTPLAN
 				, LogUtil.LogAction.DELETED
 				, String.valueOf(planId)
@@ -128,7 +122,6 @@ public class PlanAction  extends BaseController{
 				, plan
 				, systemAction.getActionComment());
 
-
 		map.put("status", "success");
         map.put("info", "删除成功");
         return map;
@@ -136,39 +129,48 @@ public class PlanAction  extends BaseController{
 
 	@RequestMapping("/find")
 	public String find(@CookieValue("cookieProductId") String cookieProductId,HttpServletRequest request,Integer planId,Model model){
-
 		Product product = productService.findProduct(Integer.parseInt(cookieProductId))	;
 		model.addAttribute("product",product);
 		ProductPlan plan = planService.findPlan(planId);
-
 		model.addAttribute("plan",plan);
-
 		return "/product/page/tabledemo/product-plan-update";
 	}
 	
 	@RequestMapping("/find/{forwordPager}")
 	public String find(@PathVariable(value="forwordPager")String forwordPager,Integer planId,Model model){
-		
 		ProductPlan plan = planService.findPlan(planId);
-		
 		model.addAttribute("plan",plan);
-		
-		
-		
 		if("relateStory".equals(forwordPager)){
 			return "/product/page/tabledemo/relation-plan/planbaseinfo.pagelet";
 		}
-		
 		return "/product/page/tabledemo/relation-plan/planbaseinfo.pagelet";
 	}
 	
 	@RequestMapping("/forword/{forwordPager}")
-	public String forword(@PathVariable(value="forwordPager")String forwordPager,Integer planId,Model model){
-
-		if(planId!=null&&planId>0){
-			model.addAttribute("plan",planService.findPlan(planId));
+	public String forword(@PathVariable(value="forwordPager")String forwordPager,
+						  Integer planId,
+						  Model model,
+						  Integer no,
+						  HttpServletRequest request){
+		ProductPlan plan = null;
+		if(no!=null){
+			Integer cookieProductId = Integer.parseInt(CookieUtils.getCookie(request, ProductUtils.COOKIE_PRODUCT_ID));
+			if(cookieProductId==null){
+				notFoundView();
+			}
+			plan = new ProductPlan();
+			plan.setProductId(cookieProductId);
+			plan.setNo(no);
+			List<ProductPlan> planList = planService.findPlanList(plan);
+			if(planList.size()==0){
+				notFoundView();
+			}
+			plan = planList.get(0);
 		}
-		
+		if(plan==null||plan.getPlanId()==null){
+			plan = planService.findPlan(planId);
+			model.addAttribute("plan",plan);
+		}
 		if ("reRelateStory".equals(forwordPager)) {
 			return "/product/page/tabledemo/relation-plan/product-al-req.page";
 		}else if("noRelateStory".equals(forwordPager)){
@@ -178,8 +180,6 @@ public class PlanAction  extends BaseController{
 		}else if ("noRelateBug".equals(forwordPager)) {
 			return "product/page/tabledemo/relation-plan/product-al-no-bug.page";
 		}
-		
-		
 		
 		return "/product/page/tabledemo/relation-plan/planbaseinfo.pagelet";
 	}
@@ -197,10 +197,7 @@ public class PlanAction  extends BaseController{
 		plan.setDeleted(FieldUtil.DELETE_NO);
 		pagerProductPlan = planService.findProductPlanPager(page, pagesize, plan, order, ordertype);
 
-		
-
 		model.addAttribute("productPlan",pagerProductPlan);
-
 		return "/product/data/allproduct-plan.pagelet";
 	}
 
@@ -214,21 +211,26 @@ public class PlanAction  extends BaseController{
     }
 	@ResponseBody
 	@RequestMapping(value = "/judgePlanName")
-	public Map judgePlanName(ProductPlan productPlan) {
-		Integer planId=null;
-		if(productPlan.getProductId()!=null){
-			planId = productPlan.getProductId();
-			productPlan.setProductId(null);
-		}
-		List<ProductPlan> plans = planService.findPlanList(productPlan);
-		if (plans.size() >=1) {
-			if(plans.size()==1&&planId!=null){
-				return resultMap(planId.equals(plans.get(0).getPlanId())?false:true,"");
+	public Map judgePlanName(String param,Integer planId,Integer productId) {
+		if (param != null) {
+			String planName = param;
+			ProductPlan productPlan = new ProductPlan();
+			productPlan.setPlanName(planName);
+			productPlan.setProductId(productId);
+			List<ProductPlan> plans= planService.findPlanList(productPlan);
+			if (plans.size() != 0) {
+				if(planId==null){
+					return resultMap(false, "该计划已存在");
+				}else if(!planId.equals(plans.get(0).getPlanId())){
+					return resultMap(false, "该计划已存在");
+				}else{
+					return resultMap(true, "");
+				}
+			} else {
+				return resultMap(true, "");
 			}
-			return resultMap(true, "");
-		} else {
-			return resultMap(false, "");
 		}
+		return resultMap(false, "请输入计划名称");
 	}
 	
 	@ResponseBody

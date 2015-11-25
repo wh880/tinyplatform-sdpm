@@ -87,6 +87,12 @@
 
 
 #end
-
+<script type="text/javascript">
+    $(function () {
+        $("form[name=thisform").Validform({
+            tiptype: 1
+        });
+    });
+</script>
 
 

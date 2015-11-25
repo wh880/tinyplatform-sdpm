@@ -153,6 +153,17 @@ public interface BuildService {
      */
      Pager<QualityBug> findBugLegacyPager(int start, int limit, int id, SearchInfos conditions, String groupOperate);
 
-    List<ProjectBuild> getBuildByIds(String... ids);
+    /**
+     * 多Id查询
+     * @param ids
+     * @return
+     */
+     List<ProjectBuild> getBuildByIds(String... ids);
 
+    /**
+     * 根据多产品查询build
+     * @param ids
+     * @return
+     */
+    List<ProjectBuild> getBuildByProducts(Integer ...ids);
 }

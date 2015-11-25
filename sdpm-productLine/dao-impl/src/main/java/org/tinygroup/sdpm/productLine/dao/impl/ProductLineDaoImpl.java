@@ -238,6 +238,10 @@ public class ProductLineDaoImpl extends TinyDslDaoSupport implements ProductLine
 		});
 	}
 
+	public Pager<ProductLine> findList(int start, int limit, Condition condition, ProductLine productLine, Integer[] ids, OrderBy... orderArgs) {
+		return findList(start,limit,and(condition,PRODUCT_LINETABLE.PRODUCT_LINE_ID.in(ids)),productLine,orderArgs);
+	}
+
 	public List<ProductLine> getByKeys(Integer... ids) {
 		SelectGenerateCallback<Serializable[]> callback = new SelectGenerateCallback<Serializable[]>() {
 			@SuppressWarnings("rawtypes")

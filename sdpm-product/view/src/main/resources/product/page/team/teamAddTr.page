@@ -2,7 +2,7 @@
 <td class="text-c userID" style="width: 2%"></td>
 <td style="width:18%">
     #@Tselect2F()
-        #@Tselect2Body("teamList["+a+"].teamUserId" "" {"class":"input-text select2"})
+        #@Tselect2Body("teamList["+a+"].teamUserId" "" {"class":"input-text","datatype":"*","nullmsg":"用户不能为空！","id":"teamUserId"})
             <option></option>
             #foreach(u : userList)
                 <option value="${u.orgUserId}">${u.orgUserRealName}</option>
@@ -22,8 +22,8 @@
 </td>
 <td style="width: 20%">
     #@Tselect2F()
-        #@Tselect2Body("teamList["+a+"].teamRole" "" {"class":"input-text select2","multiple":
-            "multiple"})
+        #@Tselect2Body("teamList["+a+"].teamRole" "" {"class":"input-text","multiple":
+            "multiple","datatype":"*","nullmsg":"角色不能为空！","id":"teamRole"})
             <option></option>
             #foreach(u : roleList)
                 <option value="${u.orgRoleId}">${u.orgRoleName}</option>

@@ -3,10 +3,14 @@
     $(document).ready(function () {
         $("select[name='storySource']").bind('change', function () {
             if (0 == $(this).val()) {
+                $("select[name='clientRequestId']").attr("ignore","")
+                $("select[name='clientRequestId']").blur();
                 $(".customer-request").show();
                 $("#demand-sources").addClass("col-5");
             } else {
+                $("select[name='clientRequestId']").attr("ignore","ignore");
                 $(".customer-request").hide();
+                $("select[name='clientRequestId']").val(0).trigger("change");
                 $("#demand-sources").removeClass("col-5");
             }
         });
@@ -17,9 +21,11 @@
             var vm = this.checked;
             if (vm == true) {
                 $("select[name='storyReviewedBy']").attr("disabled", "disabled");
+                $("select[name='storyReviewedBy']").closest(".formControls").next("div[class=col-2]").hide();
             }
             if (vm == false) {
                 $("select[name='storyReviewedBy']").removeAttr("disabled");
+                $("select[name='storyReviewedBy']").closest(".formControls").next("div[class=col-2]").show();
             }
 
 
@@ -50,6 +56,7 @@
                         $(function(){
                             var first = true;
                             var mUrl =  $("#modelA").attr("href");
+                            var sUrl = $("input[name=storyTitle]").attr("ajaxurl");
                             $("#${sid}").on("setValue",function(o,treeNode){
                                 var pId = treeNode.id;
                                 if (pId > 0) {
@@ -63,6 +70,7 @@
                                     if(first) {
                                         first=false;
                                     }else{
+                                        $("input[name=storyTitle]").attr("ajaxurl",sUrl+"?productId"+pId);
                                         $("input[name=storyTitle]").blur();
                                     }
 
@@ -86,9 +94,7 @@
                 <div class="col-4 text-c">所属模块：</div>
                 <div class="col-8">
                     #@Tselect2F()
-                        #@Tselect2Body("moduleId" 0 {"class":"input-text select2","url":"/system/module/moduleList","ajaxType":
-                            "systemModel","data":"moduleType=product","relateElem":
-                            "relateModelTwo"}) ##,"multiple":"multiple"加上为多选项
+                        #@Tselect2Body("moduleId" 0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         #end
                         #@Tselect2Fix()#@aModal("#myModal" "" "500" "300" "btn-class" adminPath+"/product/addModule?pId=" "modelA")
                             增加#end
@@ -97,6 +103,7 @@
                 </div>
             </div>
         #end
+        #@validateDiv("col-2")#end
     #end
 
     #@elementItem()
@@ -119,7 +126,7 @@
             <div id="demand-sources">
                 #@Tselect2F()
                     #@Tselect2Body("storySource" "0" {"class":
-                        "input-text select2"})
+                        "input-text select2","nullmsg":"请选择来源！","datatype":"*"})
 
                         #foreach(source:getDict("storySource"))
                             <option value="${source?.value}"> ${source?.text}</option>
@@ -136,7 +143,8 @@
         <div class="col-5">
 
             #@Tselect2F()
-                #@Tselect2Body("clientRequestId" "" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                #@Tselect2Body("clientRequestId" "" {"class":"input-text select2","nullmsg":"请选择客户请求！","datatype":"*"}) ##,"multiple":"multiple"加上为多选项
+                    <option value="">--请选择--</option>
                     #for(re : requestList)
                     <option value="${re?.clientRequestId}">${re?.clientName+"/"+re?.requestTitle}</option>
                 #end
@@ -148,6 +156,7 @@
     </span>
 
     #end
+    #@validateDiv("col-2")#end
 #end
 
 
@@ -155,38 +164,10 @@
     #@colLabel()<span class="c-red">*</span>需求名称：#end
     #@formControlDiv("col-4")
         #tinyInput(
-            "text" "storyTitle" ""{"placeholder":"请输入需求名称","datatype":"*","nullmsg":"需求名称不能为空！","id":"",
-            "class":"input-text"})
-        <script>
-            $("input[name=storyTitle]").on("blur",function(){
-                var pName = $(this).val();
-                if(pName){
-                    var pId ;
-                    $("form[name=thisform]").find("input[type=hidden]").each(function(){
-                        if($(this).attr("id").indexOf("-input")>0&&$(this).attr("id").indexOf("-name")<0){
-                            pId = $(this).val();
-                        }
-                    });
-                    if(pId>0){
-                        $.ajax({
-                            url:"${TINY_CONTEXT_PATH+adminPath}/product/story/judgeStoryName",
-                            type:"POST",
-                            data:{storyTitle:pName,productId:pId},
-                            success:function(data){
-                                if(data.status=="y"){
-                                    $("input[name=storyTitle]").addClass("Validform_error");
-                                    $("input[name=storyTitle]").parent().parent().find("div[class=col-2]").html("<span class='Validform_checktip Validform_wrong'>该需求名已存在！</span>");
-                                }else{
-                                    $("input[name=storyTitle]").removeClass("Validform_error");
-                                    $("input[name=storyTitle]").parent().parent().find("div[class=col-2]").html("");
-                                }
-                            }
-                        });
-                        return false;
-                    }
-                }
-            });
-        </script>
+            "text" "storyTitle" ""{"placeholder":"请输入需求名称","datatype":"*","nullmsg":"需求名称不能为空！","id":"storyTitle",
+            "class":"input-text",
+            "ajaxurl":TINY_CONTEXT_PATH+adminPath+"/product/story/judgeStoryName"})
+
     #end
     #@validateDiv("col-2")#end
 #end
@@ -195,15 +176,20 @@
 #@elementItem()
     #@colLabel()需求描述：#end
     #@formControlDiv("col-8")
-        #@tinyTextarea("storySpec" {"datatype":""})#end
+        #@Teditor("storySpec" "storySpec" {"initialFrameHeight":"150"})#end
     #end
     #@validateDiv("col-2")#end
 #end
-
+#@elementItem()
+    #@colLabel()#end
+    #@formControlDiv("col-8")
+        <div class="help-block">建议参考的模板：作为一名&lt;<i class="text-important"><font style="color: yellowgreen">某种类型的用户</font></i>&gt;，我希望&lt;<i class="text-important"><font style="color: yellowgreen">达成某些目的</font></i>&gt;，这样可以&lt;<i class="text-important"><font style="color: yellowgreen">开发的价值</font></i>&gt;。</div>
+    #end
+#end
 #@elementItem()
     #@colLabel()验收标准：#end
     #@formControlDiv("col-8")
-        #@tinyTextarea("storyVerification" {"datatype":""})#end
+        #@Teditor("storyVerification" "storyVerification" {"initialFrameHeight":"150"})#end
     #end
     #@validateDiv("col-2")#end
 #end
@@ -212,7 +198,7 @@
     #@colLabel()<span class="c-red">*</span>优先级：#end
     #@formControlDiv("col-4")
         #@Tselect2F()
-            #@Tselect2Body("storyPri" "" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+            #@Tselect2Body("storyPri" 0 {"class":"input-text select2","datatype":"*","nullmsg":"优先级不能为空！"}) ##,"multiple":"multiple"加上为多选项
                 #foreach(pri:getDict("storyPri"))
                     <option value="${pri?.value}"> ${pri?.text}</option>
                 #end
@@ -236,18 +222,18 @@
 #end
 
 #@elementItem()
-    #@sdpmItem("<span class='c-red'>*</span>由谁评审")
+    #@colLabel()<span class='c-red'>*</span>由谁评审:#end
+    #@formControlDiv("col-4")
+        <div class="col-7">
         #@Tselect2F()
-            #@Tselect2Body(
-                "storyReviewedBy" "" {"class":"input-text select2","url":"/org/user/userList","ajaxType":
-                "orgUser","data":""})
-
-            #end
             <script>
-
-                ajaxRead("${sid}", "storyReviewedBy", "orgUserId", "orgUserRealName", "/org/user/userList");
-
+                $(function(){
+                    ajaxRead("${sid}", "storyReviewedBy", "orgUserId", "orgUserRealName", "/org/user/userList");
+                })
             </script>
+            #@Tselect2Body(
+                "storyReviewedBy" UserUtils.getUserId() {"class":"input-text select2","datatype":"*","nullmsg":"评审人不能为空！"})
+            #end
 
             #@Tselect2Fix()
                 #set(m=menuManager.getMenu("organizationAddUser"))
@@ -261,17 +247,17 @@
             #end
 
         #end
-
-
+        </div>
+        <div class="col-5">
+            #@checkboxBox()
+                #@label(labelFor="checkbox-6")
+                    #input(inputId="story_reviewed" inputName="storyReviewedBy" inputValue="0" inputType="checkbox" )
+                    不需要评审
+                #end
+            #end
+        </div>
     #end
-    #@checkboxBox()
-
-        #@label(labelFor="checkbox-6")
-            #input(inputId="story_reviewed" inputName="storyReviewedBy" inputValue="0" inputType="checkbox" )
-            不需要评审
-        #end
-    #end
-
+    #@validateDiv("col-2")#end
 #end
 
 #@elementItem()

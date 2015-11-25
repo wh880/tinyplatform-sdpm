@@ -8,10 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
+import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
 import org.tinygroup.sdpm.project.service.inter.ProjectProductService;
-import org.tinygroup.sdpm.util.ProductUtils;
 import org.tinygroup.sdpm.util.ProjectUtils;
+import org.tinygroup.sdpm.util.UserUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,33 +29,35 @@ import java.util.Map;
 public class ProjectProductAction extends BaseController {
     @Autowired
     private ProjectProductService projectProductService;
+    @Autowired
+    private ProductService productService;
 
     @RequiresPermissions("product")
     @RequestMapping("/findLinkProduct")
     public String findLinkProduct(Model model, HttpServletResponse response, HttpServletRequest request) {
-        List<Product> productList = ProductUtils.getProductList();
         Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
         if (projectId == null) {
             return redirectProjectForm();
         }
+        Map<String, List<Product>> userProductsMap = productService.getUserProductsMap(UserUtils.getUserId());
         List<ProjectProduct> linkList = projectProductService.findProducts(projectId);
         List<String> linkIdList = new ArrayList<String>();
         for (ProjectProduct p : linkList) {
             linkIdList.add(p.getProductId().toString());
         }
         model.addAttribute("linkIdList", linkIdList);
-        model.addAttribute("productList", productList);
-        return "project/product/index.page";
+        model.addAttribute("userProductsMap", userProductsMap);
+        return "project/product/view";
     }
 
     @ResponseBody
     @RequestMapping("/save")
-    public Map<String, String> save(Integer[] array, HttpServletResponse response, HttpServletRequest request) {
+    public Map<String, String> save(Integer[] productIds, HttpServletResponse response, HttpServletRequest request) {
         Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
         if (projectId == null) {
-            return resultMap(false, "项目不存在");
+            return resultMap(false, "请选择所在项目");
         }
-        projectProductService.addProjectLinkToProduct(array, projectId);
+        projectProductService.addProjectLinkToProduct(productIds, projectId);
         return resultMap(true, "保存成功");
     }
 }

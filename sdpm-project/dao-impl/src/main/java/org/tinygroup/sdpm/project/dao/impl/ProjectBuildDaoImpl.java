@@ -376,6 +376,11 @@ public class ProjectBuildDaoImpl extends TinyDslDaoSupport implements ProjectBui
         return getDslSession().fetchList(select, ProjectBuild.class);
     }
 
+    public List<ProjectBuild> getBuildByProducts(Integer... ids) {
+        Select select = selectFrom(PROJECT_BUILDTABLE).where(and(PROJECT_BUILDTABLE.BUILD_DELETED.eq("0"), PROJECT_BUILDTABLE.BUILD_PRODUCT.in(ids)));
+        return getDslSession().fetchList(select,ProjectBuild.class);
+    }
+
 
     public Pager<ProductStory> findNoBuildStoryList(int start, int limit, final String condition, Integer buildId, final OrderBy... orderBies) {
         Select select = select(PROJECT_BUILDTABLE.BUILD_STORIES).from(PROJECT_BUILDTABLE)
