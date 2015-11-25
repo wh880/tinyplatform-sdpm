@@ -14,9 +14,10 @@ public interface ProjectManager {
      * 查找用户所在团队所拥有的项目
      *
      * @param userId OrgUser.Id
+     * @param acl    权限控制
      * @return
      */
-    List<Project> findListByTeamUserId(String userId);
+    List<Project> findListByTeamUserId(String userId, String acl);
 
     /**
      * 根据项目查，关联查询了总消耗等信息
@@ -24,7 +25,7 @@ public interface ProjectManager {
      * @param project
      * @return
      */
-    List<Project> findListProjects(Project project,Date startDate,Date endDate);
+    List<Project> findListProjects(Project project, Date startDate, Date endDate);
 
     /**
      * 根据ids查询项目

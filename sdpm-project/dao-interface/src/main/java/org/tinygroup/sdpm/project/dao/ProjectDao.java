@@ -65,8 +65,9 @@ public interface ProjectDao extends BaseDao<Project, Integer> {
      * 查找用户所在团队所拥有的项目
      *
      * @param userId OrgUser.Id
+     * @param acl 权限控制
      * @return
      */
-    List<Project> findListByTeamUserId(String userId);
+    List<Project> findListByTeamUserId(String userId,String acl);
 
 }

@@ -45,7 +45,7 @@ public class ProjectUtils {
                     userProjectList.add(project);
                 }
             }
-            List<Project> listByTeamUserId = projectService.findListByTeamUserId(UserUtils.getUserId());
+            List<Project> listByTeamUserId = projectService.findListByTeamUserId(UserUtils.getUserId(),Project.ACL_PRIVATE);
             if (listByTeamUserId != null) {
                 // 私有项目，根据角色定义
                 userProjectList.addAll(listByTeamUserId);
@@ -147,6 +147,18 @@ public class ProjectUtils {
         return userProjectList.get(0);
     }
 
+    /**
+     * 获得项目ID 存在Cookies中
+     */
+    public static Integer getCurrentProjectId(HttpServletRequest request ) {
+        Integer currentProjectId = null;
+        String cookie = CookieUtils.getCookie(request, COOKIE_PROJECT_ID);
+        if (!StringUtil.isBlank(cookie)) {
+            currentProjectId = Integer.valueOf(cookie);
+            return currentProjectId;
+        }
+        return null;
+    }
     /**
      * 获得项目ID 存在Cookies中
      */

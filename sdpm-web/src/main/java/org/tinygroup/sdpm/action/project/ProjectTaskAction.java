@@ -194,7 +194,7 @@ public class ProjectTaskAction extends BaseController {
      */
     @RequestMapping(value = "/editsave", method = RequestMethod.POST)
     public String editSave(ProjectTask task, Model model, String contents,
-                            UploadProfile uploadProfile) throws IOException {
+                           UploadProfile uploadProfile) throws IOException {
         ProjectTask oldTask = taskService.findTask(task.getTaskId());
         taskService.updateEditTask(task);
         processProfile(uploadProfile, task.getTaskId(), ProfileType.TASK);
@@ -498,9 +498,24 @@ public class ProjectTaskAction extends BaseController {
     }
 
     @RequestMapping("/findTask")
-    public String findTask(Model model, Integer taskId) {
-        ProjectTask task = taskService.findTask(taskId);
-        model.addAttribute("task", task);
+    public String findTask(Model model, Integer taskId, HttpServletRequest request, Integer no) {
+        if (no != null) {
+            Integer currentProjectId = ProjectUtils.getCurrentProjectId(request);
+            if (currentProjectId != null) {
+                ProjectTask projectTask = new ProjectTask();
+                projectTask.setTaskNo(no);
+                projectTask.setTaskProject(currentProjectId);
+                List<ProjectTask> listTask = taskService.findListTask(projectTask);
+                if (!CollectionUtil.isEmpty(listTask)) {
+                    model.addAttribute("task", listTask.get(0));
+                }else {
+                    return notFoundView();
+                }
+            }
+        } else {
+            ProjectTask task = taskService.findTask(taskId);
+            model.addAttribute("task", task);
+        }
         return "project/task/view";
     }
 
