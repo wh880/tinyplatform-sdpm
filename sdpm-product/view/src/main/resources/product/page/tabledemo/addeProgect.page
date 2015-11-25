@@ -77,7 +77,7 @@
      #@elementItem()
         #@colLabel()项目描述：#end
 		#@formControlDiv("col-8")
-			#@tinyueditor("content" "content")说点什么...最少输入10个字符#end
+			#@Teditor("content" "content")说点什么...最少输入10个字符#end
 		#end
         #@validateDiv("col-2")#end
     #end

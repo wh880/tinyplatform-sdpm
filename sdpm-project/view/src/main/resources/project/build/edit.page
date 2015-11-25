@@ -117,7 +117,7 @@
             <label>描述：&nbsp;</label>
         </div>
         <div class="col-8 form-item-body">
-            #@tinyueditor("contentid" "buildDesc" "width:40%;overflow:auto")${build?.buildDesc}#end
+            #@Teditor("contentid" "buildDesc" "width:40%;overflow:auto")${build?.buildDesc}#end
         </div>
     #end
     #@elementItem()
