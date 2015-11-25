@@ -16,9 +16,10 @@ public interface ProjectService {
      * 查找用户所在团队所拥有的项目
      *
      * @param userId OrgUser.Id
+     * @param acl 权限控制
      * @return
      */
-    List<Project> findListByTeamUserId(String userId);
+    List<Project> findListByTeamUserId(String userId, String acl);
 
     /**
      * 新增项目，保证项目名称唯一
@@ -41,10 +42,11 @@ public interface ProjectService {
      * @param project
      * @return
      */
-    List<Project> findProjects(Project project,Date startDate,Date endDate);
+    List<Project> findProjects(Project project, Date startDate, Date endDate);
 
     /**
      * 批量删除项目
+     *
      * @param projectIds
      * @return
      */

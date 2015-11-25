@@ -498,9 +498,24 @@ public class ProjectTaskAction extends BaseController {
     }
 
     @RequestMapping("/findTask")
-    public String findTask(Model model, Integer taskId, Integer no) {
-        ProjectTask task = taskService.findTask(taskId);
-        model.addAttribute("task", task);
+    public String findTask(Model model, Integer taskId, HttpServletRequest request, Integer no) {
+        if (no != null) {
+            Integer currentProjectId = ProjectUtils.getCurrentProjectId(request);
+            if (currentProjectId != null) {
+                ProjectTask projectTask = new ProjectTask();
+                projectTask.setTaskNo(no);
+                projectTask.setTaskProject(currentProjectId);
+                List<ProjectTask> listTask = taskService.findListTask(projectTask);
+                if (!CollectionUtil.isEmpty(listTask)) {
+                    model.addAttribute("task", listTask.get(0));
+                }else {
+                    return notFoundView();
+                }
+            }
+        } else {
+            ProjectTask task = taskService.findTask(taskId);
+            model.addAttribute("task", task);
+        }
         return "project/task/view";
     }
 

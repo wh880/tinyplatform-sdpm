@@ -28,16 +28,14 @@
     }
 </style>
 #@tinyForm("thisform" call("link",adminPath+"/project/product/save") "post")
-<input type="hidden" name="roleId" value="${roleId}"/>
-<input type="hidden" name="parentId" value="${parentId?:0}"/>
-    #@Tcheckboxes("menuId" orgRoleMenuIdList {"nullmsg":"请选择角色应有的菜单！","datatype":""})
-        #foreach(m:menuManager.getChildMenus(parentId))
+    #@Tcheckboxes("productIds" linkIdList)
+        #foreach(productLine:userProductsMap.keySet())
         <div class="row group-check-list">
-            <div class="col-2">#@Tcheckbox(m.id {"data-targetGroup":"g"+m.id})${m.name}#end</div>
+            <div class="col-2">#@Tcheckbox(})${productLine}#end</div>
             <div class="col-10">
                 <ul>
-                    #foreach(m2:menuManager.getAllChildMenus(m.id))
-                        <li>#@Tcheckbox(m2.id {"data-group":"g"+m.id})${m2.name}#end</li>
+                    #foreach(p:userProductsMap.get(productLine))
+                        <li>#@Tcheckbox(p.productId {"data-group":"g"+p.productId})${p.productName}#end</li>
                     #end
                 </ul>
                 <div class="clear"></div>

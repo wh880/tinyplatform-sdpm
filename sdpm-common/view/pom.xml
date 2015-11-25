@@ -57,6 +57,20 @@
             <version>${tiny_ui_version}</version>
         </dependency>
         <!--皮肤 end-->
+
+        <!-- 编辑器 -->
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>org.tinygroup.trumbowyg</artifactId>
+            <version>${tiny_ui_version}</version>
+        </dependency>
+        <!--<dependency>-->
+        <!--<groupId>org.tinygroup</groupId>-->
+        <!--<artifactId>org.tinygroup.UEditor</artifactId>-->
+        <!--<version>${tiny_ui_version}</version>-->
+        <!--</dependency>-->
+        <!-- 编辑器end -->
+
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>org.tinygroup.gridSystems</artifactId>
@@ -138,9 +152,9 @@
             <version>${tiny_ui_version}</version>
         </dependency>
         <dependency>
-        <groupId>org.tinygroup</groupId>
-        <artifactId>org.tinygroup.widget</artifactId>
-        <version>${tiny_ui_version}</version>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>org.tinygroup.widget</artifactId>
+            <version>${tiny_ui_version}</version>
         </dependency>
         <dependency>
             <groupId>org.tinygroup</groupId>
@@ -163,11 +177,7 @@
             <artifactId>org.tinygroup.burndownChart</artifactId>
             <version>${tiny_ui_version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.tinygroup</groupId>
-            <artifactId>org.tinygroup.UEditor</artifactId>
-            <version>${tiny_ui_version}</version>
-        </dependency>
+
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>org.tinygroup.interfaceElements</artifactId>

@@ -1,0 +1,4 @@
+#macro Teditor(ueditorId ueditorName mapInfo)
+#@Ttbditor(ueditorName)#bodyContent#end
+#end
+

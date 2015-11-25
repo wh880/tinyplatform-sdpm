@@ -30,8 +30,8 @@ public class ProjectManagerImpl implements ProjectManager {
         return projectDao.query(project);
     }
 
-    public List<Project> findListByTeamUserId(String userId) {
-        return projectDao.findListByTeamUserId(userId);
+    public List<Project> findListByTeamUserId(String userId,String acl) {
+        return projectDao.findListByTeamUserId(userId,acl);
     }
 
     public List<Project> findListProjects(Project project,Date startDate,Date endDate) {

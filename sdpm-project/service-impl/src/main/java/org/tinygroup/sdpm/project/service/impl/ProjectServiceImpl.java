@@ -50,8 +50,8 @@ public class ProjectServiceImpl implements ProjectService {
         return projectManager.findPagerProjects(start, limit, order, "asc".equals(orderType) ? true : false,ids);
     }
 
-    public List<Project> findListByTeamUserId(String userId) {
-        return projectManager.findListByTeamUserId(userId);
+    public List<Project> findListByTeamUserId(String userId, String acl) {
+        return projectManager.findListByTeamUserId(userId,acl);
     }
 
     public Project addProject(Project project) {
