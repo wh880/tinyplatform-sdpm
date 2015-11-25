@@ -2,7 +2,6 @@
 #import("/org/tinygroup/form/components/form.component")
 #import("/org/tinygroup/icon/components/icon.component")
 #import("/org/tinygroup/bootstrapDate/components/bootstrapDate.component")
-#import("/org/tinygroup/UEditor/component/ueditor.component")
 #@tinyForm("thisform" "" "" {"class":"test"})
     #@elementItem()
         #@colLabel()项目名称：#end

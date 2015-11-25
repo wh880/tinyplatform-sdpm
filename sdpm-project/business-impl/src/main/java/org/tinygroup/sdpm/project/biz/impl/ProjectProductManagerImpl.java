@@ -29,7 +29,7 @@ public class ProjectProductManagerImpl implements ProjectProductManager {
     }
 
     public void addLink(Integer[] productIds, Integer projectId) {
-        if (ArrayUtil.isEmptyArray(productIds)) {
+        if (ArrayUtil.isEmptyArray(productIds) || projectId == null) {
             return;
         }
         List<ProjectProduct> list = new ArrayList<ProjectProduct>();

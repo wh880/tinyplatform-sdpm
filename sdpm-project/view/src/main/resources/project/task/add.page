@@ -115,13 +115,14 @@
             #end
         #end
         #@elementItem()
-            #@sdpmItem("任务描述")
-                #@formControlDiv("col-8")
-                    #@Teditor("taskDesc" "taskDesc" {"initialFrameHeight":"150","initialFrameWidth":"702"})${copyTask
-                        ?.taskDesc}#end
-                #end
-            #end
+            <div class="col-12">
+                <div class="col-2 text-r"><label>任务描述：</label></div>
+                <div class="col-7">
+                    #@Teditor("taskDesc" "taskDesc")${copyTask?.taskDesc}#end
+                </div>
+            </div>
         #end
+
         #@elementItem()
             #@sdpmItem("优先级")
                 #@Tselect2F()
