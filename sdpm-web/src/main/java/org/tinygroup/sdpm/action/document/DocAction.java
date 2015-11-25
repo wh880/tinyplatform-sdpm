@@ -180,7 +180,7 @@ public class DocAction extends BaseController {
         doc.setDocDeleted("0");
         doc.setDocAddedBy(UserUtils.getUser().getOrgUserId());
         DocumentDoc document = docservice.createNewDoc(doc);
-        uploads(file, document.getDocId(), ProfileType.DOCUMENT, title);
+        uploadMultiFiles(file, document.getDocId(), ProfileType.DOCUMENT, title);
 
         model.addAttribute("productList", product);
 
@@ -247,7 +247,7 @@ public class DocAction extends BaseController {
         doc.setDocEditedBy(UserUtils.getUser().getOrgUserId());
         docservice.editDoc(doc);
 
-        uploads(file, doc.getDocId(), ProfileType.DOCUMENT, title);
+        uploadMultiFiles(file, doc.getDocId(), ProfileType.DOCUMENT, title);
 
         LogUtil.logWithComment(LogUtil.LogOperateObject.DOC,
                 LogUtil.LogAction.EDITED,
@@ -288,7 +288,7 @@ public class DocAction extends BaseController {
         systemProfile.setFileObjectType("document");
         systemProfile.setFileObjectId(docid);
         systemProfile.setFileDeleted("0");
-        List<SystemProfile> list = profileService.find(systemProfile);
+        List<SystemProfile> list = profileService.findSystemProfile(systemProfile);
         model.addAttribute("file", list);
         model.addAttribute("doc", doc);
         return "/document/doc-view.page";

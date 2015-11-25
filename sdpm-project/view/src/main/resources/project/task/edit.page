@@ -55,7 +55,7 @@
         <div class="col-12">
             <div class="col-2 text-r"><label>附件：</label></div>
             <div class="col-9">
-                #mulUploadFile("upfile" "" "save.page")
+                #mulUploadFile(fileList)
             </div>
         #end
     </div>

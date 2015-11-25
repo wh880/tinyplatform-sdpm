@@ -43,7 +43,8 @@ import java.io.IOException;
 import java.util.*;
 
 /**
- * 需求的控制器 Created by xubin、wangjie14929
+ * 需求的控制器
+ * Created by xubin、wangjie14929
  */
 @Controller
 @RequestMapping("/a/product/story")
@@ -157,7 +158,7 @@ public class StoryAction extends BaseController {
 
         storySpec.setStoryVersion(1);
         ProductStory story = storyService.addStory(productStory, storySpec);
-        uploads(file, story.getStoryId(), ProfileType.STORY, title);
+        uploadMultiFiles(file, story.getStoryId(), ProfileType.STORY, title);
 
         if ("copy".equals(type)) {
             LogUtil.logWithComment(LogUtil.LogOperateObject.STORY,
@@ -223,7 +224,7 @@ public class StoryAction extends BaseController {
         }
         storyService.updateStory(productStory);
 
-        uploads(file, story.getStoryId(), ProfileType.STORY, title);
+        uploadMultiFiles(file, story.getStoryId(), ProfileType.STORY, title);
 
         LogUtil.logWithComment(LogUtil.LogOperateObject.STORY,
                 LogUtil.LogAction.EDITED,
@@ -448,7 +449,7 @@ public class StoryAction extends BaseController {
         storyService.updateStory(productStory);
         storySpec.setStoryVersion(productStory.getStoryVersion());
         storySpecService.add(storySpec);
-        uploads(file, story.getStoryId(), ProfileType.STORY, title);
+        uploadMultiFiles(file, story.getStoryId(), ProfileType.STORY, title);
 
         LogUtil.logWithComment(LogUtil.LogOperateObject.STORY,
                 LogUtil.LogAction.CHANGED,

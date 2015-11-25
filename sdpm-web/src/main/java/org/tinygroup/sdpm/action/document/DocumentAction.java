@@ -263,7 +263,7 @@ public class DocumentAction extends BaseController {
         if ("save".equals(type)) {
             doc.setDocAddedBy(UserUtils.getUserId());
             DocumentDoc document = docservice.createNewDoc(doc);
-            uploads(file, document.getDocId(), ProfileType.DOCUMENT, title);
+            uploadMultiFiles(file, document.getDocId(), ProfileType.DOCUMENT, title);
             LogUtil.logWithComment(LogUtil.LogOperateObject.DOC,
                     LogUtil.LogAction.CREATED,
                     String.valueOf(document.getDocId()),

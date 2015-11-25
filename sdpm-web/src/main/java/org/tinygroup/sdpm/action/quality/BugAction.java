@@ -128,7 +128,7 @@ public class BugAction extends BaseController {
         systemProfile.setFileObjectType("bug");
         systemProfile.setFileDeleted("0");
         systemProfile.setFileObjectId(bug.getBugId());
-        List<SystemProfile> list = profileService.find(systemProfile);
+        List<SystemProfile> list = profileService.findSystemProfile(systemProfile);
         model.addAttribute("file", list);
         model.addAttribute("qualityBug", bug);
         model.addAttribute("nextId", nextId);
@@ -400,7 +400,7 @@ public class BugAction extends BaseController {
         bug.setBugResolvedBy(UserUtils.getUserId() != null ? UserUtils.getUserId() : "0");
         bug.setBugStatus("2");
         bugService.updateBug(bug);
-        uploads(file, bug.getBugId(), ProfileType.BUG, title);
+        uploadMultiFiles(file, bug.getBugId(), ProfileType.BUG, title);
 
         LogUtil.logWithComment(LogUtil.LogOperateObject.BUG
                 , LogUtil.LogAction.RESOLVED
@@ -465,7 +465,7 @@ public class BugAction extends BaseController {
         bug.setBugLastEditedBy(UserUtils.getUserId() != null ? UserUtils.getUserId() : "0");
         bug.setBugLastEditedDate(new Date());
         bugService.updateBug(bug);
-        uploads(file, bug.getBugId(), ProfileType.BUG, title);
+        uploadMultiFiles(file, bug.getBugId(), ProfileType.BUG, title);
 
         LogUtil.logWithComment(LogUtil.LogOperateObject.BUG
                 , LogUtil.LogAction.EDITED
@@ -604,7 +604,7 @@ public class BugAction extends BaseController {
         }
         bug.setBugOpenedBy(UserUtils.getUserId() != null ? UserUtils.getUserId() : "0");
         bug = bugService.addBug(bug);
-        uploads(file, bug.getBugId(), ProfileType.BUG, title);
+        uploadMultiFiles(file, bug.getBugId(), ProfileType.BUG, title);
         LogUtil.logWithComment(LogUtil.LogOperateObject.BUG
                 , LogUtil.LogAction.OPENED
                 , String.valueOf(bug.getBugId())
@@ -638,7 +638,7 @@ public class BugAction extends BaseController {
         }
         QualityBug qbug = bugService.addBug(bug);
 
-        uploads(file, qbug.getBugId(), ProfileType.BUG, title);
+        uploadMultiFiles(file, qbug.getBugId(), ProfileType.BUG, title);
 
 
         LogUtil.logWithComment(LogUtil.LogOperateObject.BUG

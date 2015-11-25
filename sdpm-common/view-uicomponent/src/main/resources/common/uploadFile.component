@@ -1,14 +1,14 @@
 #macro mulFileInput(name value)
 <span class="form-inline">
 <span class="btn-upload">
-	<input name="${name}_name" value="${value}" type="text" class="form-control show-file-text">
+	<input value="${value}" type="text" class="form-control show-file-text">
 	<a class="btn btn-primary" role="button"><i class="glyphicon glyphicon-cloud-upload"></i> 浏览文件</a>
 	<input type="file" name="${name}" class="input-file">
 </span>
 </span>
 #end
 
-#macro mulUploadFile(fileName fileList delAction fileMap)#set(ItemIdOrder=1,mulUploadFileTableId=fmt("tid%d",rand()))
+#macro mulUploadFile(fileList)#set(ItemIdOrder=1,mulUploadFileTableId=fmt("tid%d",rand()))
 <table class="table itemlist-table " id="${mulUploadFileTableId}">
     <thead>
     <tr>
@@ -19,11 +19,15 @@
     </tr>
     </thead>
 <tbody class="databody">
-    #for(var:[1..3])
+    #foreach(f:fileList)
+        #set(myIndex = fFor.index-1)
 <tr>
     <td class="text-c stepID">${ItemIdOrder++}</td>
-    <td>#tinyInput("hidden" "editFileId" var)#tinyInput("text" "fileTitle" var+"描述"{"class":"form-control" ,"placeholder":"描述"})</td>
-    <td>#mulFileInput("fileUrl" var+".jpg")</td>
+    <td>
+        #tinyInput("hidden" "updateProfileList["+myIndex+"].fileId" f.fileId)
+        #tinyInput("text" "updateProfileList["+myIndex+"].fileTitle" f.fileTitle {"class":"form-control" ,"placeholder":"描述"})
+    </td>
+    <td>#mulFileInput("updateFileList["+myIndex+"]" f.filePathname)</td>
     <td>
         <span title="删除" class="btn btn-small btn-default removeButton"><i class="icon-remove"></i></span>
     </td>
@@ -31,8 +35,8 @@
 #end
 <tr>
     <td class="text-c stepID newItem" width="50">${ItemIdOrder}</td>
-    <td>#tinyInput("text" "fileTitle" ""{"class":"form-control" ,"placeholder":"描述"})</td>
-    <td width="300">#mulFileInput("fileUrl")</td>
+    <td>#tinyInput("text" "newUploadFileTitle" ""{"class":"form-control" ,"placeholder":"描述"})</td>
+    <td width="300">#mulFileInput("newUploadFile")</td>
     <td width="85">
         <span title="增加" class="btn btn-small btn-default addnext"><i class="icon-plus"></i></span>
         <span title="删除" class="btn btn-small btn-default delbutton"><i class="icon-remove"></i></span>
@@ -40,9 +44,9 @@
 </tr>
 </tbody>
 </table>
-<script>
+<script type="text/javascript">
     $(function(){
-        var allowFileExt=["jpg","png","git","doc","rar"];
+        var allowFileExt=["jpg","png","git","doc","rar","docx","xls","xlsx"];
         function updateStepID(){
             $('#${mulUploadFileTableId}>.databody .stepID').each(function(index){
                 $(this).html(index+1);
@@ -73,7 +77,7 @@
             layer.confirm('确定删除?', function(){
                 $.ajax({
                     type:"post",
-                    url:"${delAction}",
+                    url:"${TINY_CONTEXT_PATH+adminPath}/system/profile/delete",
                     data:{id:$(that).closest("tr").find("input:hidden:first").val()},
                     success:function(data){
                         if(data.status=="y"||data.status=="success"){
@@ -95,7 +99,7 @@
                 $(this).val("");
                 return false;
             }
-            $(this).siblings("input").val($(this).val())
+            $(this).siblings("input").val(thisFile.substring(thisFile.lastIndexOf("\\\\")+1))
         });
     });
 </script>
