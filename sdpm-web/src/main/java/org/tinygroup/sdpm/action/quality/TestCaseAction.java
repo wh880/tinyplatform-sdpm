@@ -22,6 +22,7 @@ import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.sdpm.system.service.inter.ProfileService;
+import org.tinygroup.sdpm.util.CookieUtils;
 import org.tinygroup.sdpm.util.LogUtil;
 import org.tinygroup.sdpm.util.ModuleUtil;
 import org.tinygroup.sdpm.util.UserUtils;
@@ -537,8 +538,26 @@ public class TestCaseAction extends BaseController {
 
 
     @RequestMapping("/case/viewInfo")
-    public String viewInfo(Integer id, Integer version, Model model) {
-        QualityTestCase testCase = testCaseService.findById(id);
+    public String viewInfo(Integer id, Integer version, Model model, Integer no, HttpServletRequest request) {
+        QualityTestCase testCase = null;
+        if(no!=null){
+            Integer qualityProductId = Integer.parseInt(CookieUtils.getCookie(request, "qualityProductId"));
+            if(qualityProductId==null){
+                notFoundView();
+            }
+            testCase = new QualityTestCase();
+            testCase.setProductId(qualityProductId);
+            testCase.setNo(no);
+            List<QualityTestCase> caseList = testCaseService.findTestCaseList(testCase);
+            if(caseList.size()==0){
+                notFoundView();
+            }
+            testCase = caseList.get(0);
+            id = testCase.getCaseId();
+        }
+        if(testCase==null||testCase.getCaseId()==null) {
+            testCase = testCaseService.findById(id);
+        }
         QualityCaseStep step = new QualityCaseStep();
         step.setCaseId(id);
         if (version != null && version > 0) {

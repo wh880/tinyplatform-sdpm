@@ -194,7 +194,7 @@ public class ProjectTaskAction extends BaseController {
      */
     @RequestMapping(value = "/editsave", method = RequestMethod.POST)
     public String editSave(ProjectTask task, Model model, String contents,
-                           UploadProfile uploadProfile) throws IOException {
+                            UploadProfile uploadProfile) throws IOException {
         ProjectTask oldTask = taskService.findTask(task.getTaskId());
         taskService.updateEditTask(task);
         processProfile(uploadProfile, task.getTaskId(), ProfileType.TASK);

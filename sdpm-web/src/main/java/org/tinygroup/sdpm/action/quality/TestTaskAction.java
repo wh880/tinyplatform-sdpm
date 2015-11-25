@@ -173,8 +173,28 @@ public class TestTaskAction extends BaseController {
     }
 
     @RequestMapping("/versionInfo")
-    public String versionInfo(Integer testversionId, Model model) {
-        QualityTestTask testTask = testTaskService.findById(testversionId);
+    public String versionInfo(Integer testversionId,
+                              Integer no,
+                              HttpServletRequest request,
+                              Model model) {
+        QualityTestTask testTask = null;
+        if(no!=null){
+            Integer qualityProductId = Integer.parseInt(CookieUtils.getCookie(request, "qualityProductId"));
+            if(qualityProductId==null){
+                notFoundView();
+            }
+            testTask = new QualityTestTask();
+            testTask.setProductId(qualityProductId);
+            testTask.setNo(no);
+            List<QualityTestTask> testTaskList = testTaskService.findTestTaskList(testTask);
+            if(testTaskList.size()==0){
+                notFoundView();
+            }
+            testTask = testTaskList.get(0);
+        }
+        if(testTask==null||testTask.getTestversionId()==null) {
+            testTask = testTaskService.findById(testversionId);
+        }
         model.addAttribute("testTask", testTask);
         return "/testManagement/page/versionSituation.page";
     }
