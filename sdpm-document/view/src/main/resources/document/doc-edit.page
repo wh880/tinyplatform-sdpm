@@ -206,7 +206,7 @@
         #@elementItem(elementId="fileBox" eleItemClass="hide")
             #@sdpmItem("附件")
                 #@formControlDiv("col-8")
-                    #fileWithInput("file-1")
+                    #mulUploadFile(fileList)
                 #end
             #end
         #end

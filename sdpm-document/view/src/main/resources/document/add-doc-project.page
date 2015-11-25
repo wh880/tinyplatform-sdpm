@@ -150,9 +150,8 @@
     #@elementItem(elementId="fileBox")
         #@colLabel()附件：#end
         #@formControlDiv("col-8")
-            #include("fileupload.page")
+            #mulUploadFile()
         #end
-        #@validateDiv("col-2")#end
     #end
     #@elementItem(elementId="contentBox" eleItemClass="hidden")
         #@colLabel()文档正文#end

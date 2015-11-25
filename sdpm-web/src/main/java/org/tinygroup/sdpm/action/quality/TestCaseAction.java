@@ -13,6 +13,7 @@ import org.tinygroup.sdpm.action.quality.actionBean.CaseStepResults;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
+import org.tinygroup.sdpm.dto.UploadProfile;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.service.StoryService;
 import org.tinygroup.sdpm.quality.dao.pojo.*;
@@ -119,7 +120,7 @@ public class TestCaseAction extends BaseController {
                        @RequestParam(value = "file", required = false) MultipartFile[] file,
                        String[] title,
                        HttpServletRequest request,
-                       String lastAddress) throws Exception {
+                       String lastAddress,UploadProfile uploadProfile) throws Exception {
         if (testcase.getCaseId() == null || testcase.getCaseId() < 1) {
             testcase.setCaseOpenedBy(UserUtils.getUserId());
             if (testcase.getStoryId() != null && testcase.getStoryId() > 0) {
@@ -164,7 +165,7 @@ public class TestCaseAction extends BaseController {
                     comment
             );
         }
-        uploadMultiFiles(file, testcase.getCaseId(), ProfileType.TESTCASE, title);
+        processProfile(uploadProfile, testcase.getCaseId(), ProfileType.TESTCASE);
         return "redirect:" + "/a/quality/testCase";
     }
 
@@ -360,6 +361,13 @@ public class TestCaseAction extends BaseController {
 
         model.addAttribute("testCase", testCase);
         model.addAttribute("stepList", stepList);
+
+        SystemProfile systemProfile = new SystemProfile();
+        systemProfile.setFileObjectId(caseId);
+        systemProfile.setFileObjectType(ProfileType.TESTCASE.getType());
+        List<SystemProfile> fileList = profileService.findSystemProfile(systemProfile);
+        model.addAttribute("fileList", fileList);
+
         return "/testManagement/page/tabledemo/editioncase.page";
     }
 

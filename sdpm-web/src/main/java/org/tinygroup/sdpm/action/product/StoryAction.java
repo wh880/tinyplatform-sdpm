@@ -12,6 +12,7 @@ import org.tinygroup.sdpm.common.condition.ConditionCarrier;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SqlUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
+import org.tinygroup.sdpm.dto.UploadProfile;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
@@ -32,7 +33,9 @@ import org.tinygroup.sdpm.service.service.inter.RequestService;
 import org.tinygroup.sdpm.system.dao.pojo.ProfileType;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
+import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
+import org.tinygroup.sdpm.system.service.inter.ProfileService;
 import org.tinygroup.sdpm.util.LogUtil;
 import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
@@ -77,6 +80,8 @@ public class StoryAction extends BaseController {
     private RequestService requestService;
     @Autowired
     private ProjectProductService projectProductService;
+    @Autowired
+    private ProfileService profileService;
 
     /**
      * @param story
@@ -140,7 +145,7 @@ public class StoryAction extends BaseController {
             ProductStory productStory,
             ProductStorySpec storySpec,
             @RequestParam(value = "file", required = false) MultipartFile[] file,
-            String[] title, HttpServletRequest request) throws IOException {
+            String[] title, HttpServletRequest request,UploadProfile uploadProfile) throws IOException {
         if(productStory.getPlanId()!=null&&productStory.getPlanId()>0){
             productStory.setStoryStage("2");
         }else{
@@ -158,7 +163,7 @@ public class StoryAction extends BaseController {
 
         storySpec.setStoryVersion(1);
         ProductStory story = storyService.addStory(productStory, storySpec);
-        uploadMultiFiles(file, story.getStoryId(), ProfileType.STORY, title);
+        processProfile(uploadProfile, story.getStoryId(), ProfileType.STORY);
 
         if ("copy".equals(type)) {
             LogUtil.logWithComment(LogUtil.LogOperateObject.STORY,
@@ -213,7 +218,7 @@ public class StoryAction extends BaseController {
             ProductStorySpec productStorySpec,
             @RequestParam(value = "file", required = false) MultipartFile[] file,
             String lastAddress,
-            String[] title) throws IOException {
+            String[] title, UploadProfile uploadProfile) throws IOException {
         ProductStory story = storyService.findStory(productStory.getStoryId());
         productStory.setStoryLastEditedBy(UserUtils.getUser().getOrgUserId());
         productStory.setStoryLastEditedDate(new Date());
@@ -224,7 +229,7 @@ public class StoryAction extends BaseController {
         }
         storyService.updateStory(productStory);
 
-        uploadMultiFiles(file, story.getStoryId(), ProfileType.STORY, title);
+        processProfile(uploadProfile, story.getStoryId(), ProfileType.STORY);
 
         LogUtil.logWithComment(LogUtil.LogOperateObject.STORY,
                 LogUtil.LogAction.EDITED,
@@ -400,6 +405,11 @@ public class StoryAction extends BaseController {
 
             return "/product/page/tabledemo/product-demand-review.page";
         } else if ("productDemandChange".equals(forwordPager)) {
+            SystemProfile systemProfile = new SystemProfile();
+            systemProfile.setFileObjectId(storyId);
+            systemProfile.setFileObjectType(ProfileType.STORY.getType());
+            List<SystemProfile> fileList = profileService.findSystemProfile(systemProfile);
+            model.addAttribute("fileList", fileList);
             return "/product/page/tabledemo/product-demand-change.page";
         } else if ("productDemandDetail".equals(forwordPager)) {
 
@@ -436,7 +446,8 @@ public class StoryAction extends BaseController {
             ProductStory productStory,
             ProductStorySpec storySpec,
             @RequestParam(value = "file", required = false) MultipartFile[] file,
-            String[] title) throws IOException {
+            String[] title,
+            UploadProfile uploadProfile) throws IOException {
         Integer maxVersion = storySpecService.getMaxVersion(productStory.getStoryId());
         ProductStory story = storyService.findStory(productStory.getStoryId());
         if(productStory.getStoryReviewedBy().equals("0")){
@@ -449,7 +460,7 @@ public class StoryAction extends BaseController {
         storyService.updateStory(productStory);
         storySpec.setStoryVersion(productStory.getStoryVersion());
         storySpecService.add(storySpec);
-        uploadMultiFiles(file, story.getStoryId(), ProfileType.STORY, title);
+        processProfile(uploadProfile, productStory.getStoryId(), ProfileType.STORY);
 
         LogUtil.logWithComment(LogUtil.LogOperateObject.STORY,
                 LogUtil.LogAction.CHANGED,

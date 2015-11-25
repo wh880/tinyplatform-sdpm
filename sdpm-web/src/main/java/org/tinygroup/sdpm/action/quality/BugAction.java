@@ -12,6 +12,7 @@ import org.tinygroup.sdpm.action.quality.util.QualityUtil;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SqlUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
+import org.tinygroup.sdpm.dto.UploadProfile;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
@@ -382,6 +383,13 @@ public class BugAction extends BaseController {
         QualityBug qualityBug = new QualityBug();
         qualityBug.setDeleted(0);
         List<QualityBug> bugList = bugService.findBugList(qualityBug);
+
+        SystemProfile systemProfile = new SystemProfile();
+        systemProfile.setFileObjectId(bugId);
+        systemProfile.setFileObjectType(ProfileType.BUG.getType());
+        List<SystemProfile> fileList = profileService.findSystemProfile(systemProfile);
+        model.addAttribute("fileList", fileList);
+
         model.addAttribute("buildList", builds);
         model.addAttribute("userList", orgUsers);
         model.addAttribute("bug", bug);
@@ -392,7 +400,7 @@ public class BugAction extends BaseController {
     @RequestMapping("/solve")
     public String solve(QualityBug bug, SystemAction systemAction,
                         HttpServletRequest request, @RequestParam(value = "file", required = false) MultipartFile[] file,
-                        String[] title) throws IOException {
+                        String[] title,UploadProfile uploadProfile) throws IOException {
         QualityBug qualityBug = bugService.findById(bug.getBugId());
         if (qualityBug.getBugAssignedTo() != bug.getBugAssignedTo()) {
             bug.setBugAssignedDate(new Date());
@@ -400,7 +408,7 @@ public class BugAction extends BaseController {
         bug.setBugResolvedBy(UserUtils.getUserId() != null ? UserUtils.getUserId() : "0");
         bug.setBugStatus("2");
         bugService.updateBug(bug);
-        uploadMultiFiles(file, bug.getBugId(), ProfileType.BUG, title);
+        processProfile(uploadProfile, bug.getBugId(), ProfileType.BUG);
 
         LogUtil.logWithComment(LogUtil.LogOperateObject.BUG
                 , LogUtil.LogAction.RESOLVED
@@ -449,6 +457,12 @@ public class BugAction extends BaseController {
     @RequestMapping("/toEdit")
     public String edit(Integer bugId, Model model) {
         QualityBug bug = bugService.findById(bugId);
+
+        SystemProfile systemProfile = new SystemProfile();
+        systemProfile.setFileObjectId(bug.getBugId());
+        systemProfile.setFileObjectType(ProfileType.TASK.getType());
+        List<SystemProfile> fileList = profileService.findSystemProfile(systemProfile);
+        model.addAttribute("fileList", fileList);
         model.addAttribute("bug", bug);
         return "/testManagement/page/tabledemo/edition.page";
     }
@@ -456,16 +470,16 @@ public class BugAction extends BaseController {
     @RequestMapping("/edit")
     public String edit(QualityBug bug, SystemAction systemAction,
                        HttpServletRequest request,
-                       @RequestParam(value = "file", required = false) MultipartFile[] file,
                        String[] title,
-                       String lastAddress) throws IOException {
+                       String lastAddress,Model model, UploadProfile uploadProfile) throws IOException {
 
         QualityBug qualityBug = bugService.findById(bug.getBugId());
 
         bug.setBugLastEditedBy(UserUtils.getUserId() != null ? UserUtils.getUserId() : "0");
         bug.setBugLastEditedDate(new Date());
         bugService.updateBug(bug);
-        uploadMultiFiles(file, bug.getBugId(), ProfileType.BUG, title);
+
+        processProfile(uploadProfile, bug.getBugId(), ProfileType.BUG);
 
         LogUtil.logWithComment(LogUtil.LogOperateObject.BUG
                 , LogUtil.LogAction.EDITED
@@ -518,6 +532,12 @@ public class BugAction extends BaseController {
         model.addAttribute("userList", orgUsers);
         model.addAttribute("projectList", projects);
         model.addAttribute("bug", bug);
+
+        SystemProfile systemProfile = new SystemProfile();
+        systemProfile.setFileObjectId(bugId);
+        systemProfile.setFileObjectType(ProfileType.BUG.getType());
+        List<SystemProfile> fileList = profileService.findSystemProfile(systemProfile);
+        model.addAttribute("fileList", fileList);
         return "/testManagement/page/copyBug.page";
     }
 
@@ -593,7 +613,7 @@ public class BugAction extends BaseController {
 
     @RequestMapping(value = "/copy", method = RequestMethod.POST)
     public String copySave(QualityBug bug, SystemAction systemAction, HttpServletRequest request, @RequestParam(value = "file", required = false) MultipartFile[] file,
-                           String[] title) throws IOException {
+                           String[] title,UploadProfile uploadProfile) throws IOException {
         bug.setBugConfirmed(0);
         bug.setBugStatus("1");
         bug.setDeleted(0);
@@ -604,7 +624,7 @@ public class BugAction extends BaseController {
         }
         bug.setBugOpenedBy(UserUtils.getUserId() != null ? UserUtils.getUserId() : "0");
         bug = bugService.addBug(bug);
-        uploadMultiFiles(file, bug.getBugId(), ProfileType.BUG, title);
+        processProfile(uploadProfile,bug.getBugId(), ProfileType.BUG);
         LogUtil.logWithComment(LogUtil.LogOperateObject.BUG
                 , LogUtil.LogAction.OPENED
                 , String.valueOf(bug.getBugId())
@@ -623,7 +643,7 @@ public class BugAction extends BaseController {
                        @RequestParam(value = "file", required = false) MultipartFile[] file,
                        String[] title,
                        HttpServletRequest request,
-                       String lastAddress) throws IOException {
+                       String lastAddress,UploadProfile uploadProfile) throws IOException {
 
         if (!StringUtil.isBlank(bug.getBugAssignedTo())) {
             bug.setBugAssignedDate(new Date());
@@ -638,8 +658,7 @@ public class BugAction extends BaseController {
         }
         QualityBug qbug = bugService.addBug(bug);
 
-        uploadMultiFiles(file, qbug.getBugId(), ProfileType.BUG, title);
-
+        processProfile(uploadProfile, bug.getBugId(), ProfileType.BUG);
 
         LogUtil.logWithComment(LogUtil.LogOperateObject.BUG
                 , LogUtil.LogAction.OPENED

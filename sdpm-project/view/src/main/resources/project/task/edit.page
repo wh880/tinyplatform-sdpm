@@ -57,8 +57,8 @@
             <div class="col-9">
                 #mulUploadFile(fileList)
             </div>
+        </div>
         #end
-    </div>
     </div>
     #@elementItem()
         <div class="col-12">

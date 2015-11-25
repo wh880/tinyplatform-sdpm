@@ -195,7 +195,7 @@
                         <div class="input-group">
                             #tinyInput(
                                 "text" "taskEstimate" task.taskEstimate {"placeholder":"最初预计","datatype":
-                                "/^[0-9]+(\.[0-9]{1,2})?$/",
+                                "/^[0-9]+(\.[0-9]{1,2})?$/","nullmsg":"最初预计不能为空",
                                 "aria-describedby":"basic-addon2"})
                             <span class="input-group-addon" id="basic-addon2">小时</span>
                         </div>

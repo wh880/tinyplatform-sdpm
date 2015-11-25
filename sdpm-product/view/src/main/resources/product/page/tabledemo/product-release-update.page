@@ -7,7 +7,6 @@
         $("form[name=thisform]").Validform({
             tiptype: function (msg, o, cssctl) {
                 var objtip = $(o.obj).closest(".row").find(".validmsg");
-
                 cssctl(objtip, o.type);
                 objtip.text(msg);
             }
@@ -95,17 +94,15 @@
         #end
         #@validateDiv("col-2 validmsg")#end
     #end
-    
-   #@elementItem()
-        <div class="col-12">
+
+        #@elementItem()
+            <div class="col-12">
                 <div class="col-2 text-r"><label>附件：</label></div>
                 <div class="col-9">
-                  #@formControlDiv("col-12")
-		   				#include("/product/page/event/fileupload.page")
-      				 		#end
-       				</div>
+                    #mulUploadFile(fileList)
+                </div>
             </div>
-   		 #end
+        #end
    </div>
     #@elementItem()
         <div class="col-12">

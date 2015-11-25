@@ -154,7 +154,7 @@ public class ProjectTaskAction extends BaseController {
                 task.getTaskId().toString(), UserUtils.getUserId(),
                 null, task.getTaskProject().toString(), null, null, comment);
         try {
-            uploadMultiFiles(file, task.getTaskId(), ProfileType.TASK, fileTitle);
+            processProfile(uploadProfile,task.getTaskId(), ProfileType.TASK);
         } catch (IOException e) {
             logger.logMessage(LogLevel.ERROR, "上传文件文件出错，请求路径{}", e, request.getRequestURI());
         }
@@ -176,11 +176,15 @@ public class ProjectTaskAction extends BaseController {
     public String editForm(Integer taskId, Model model) {
         ProjectTask task = taskService.findTask(taskId);
         model.addAttribute("task", task);
+
+
         SystemProfile systemProfile = new SystemProfile();
         systemProfile.setFileObjectId(taskId);
         systemProfile.setFileObjectType(ProfileType.TASK.getType());
         List<SystemProfile> fileList = profileService.findSystemProfile(systemProfile);
         model.addAttribute("fileList", fileList);
+
+
         return "project/task/edit";
     }
 
