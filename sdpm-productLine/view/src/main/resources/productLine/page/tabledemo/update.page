@@ -38,7 +38,7 @@
             #@formControlDiv("col-4")
                 #@Tselect2F()
                     #@Tselect2Body("productLineOwner" productLine?.productLineOwner {"class":
-                        "input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        "input-text select2","datatype":"*","nullmsg":"产品线经理不能为空"}) ##,"multiple":"multiple"加上为多选项
                     #end
                     <script>
 

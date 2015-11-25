@@ -131,8 +131,12 @@
 
 <script type="text/javascript">
     $(function () {
-        $("form[name=thisform").Validform({
-            tiptype: 2
+        $("form[name=thisform]").Validform({
+            tiptype: function (msg, o, cssctl) {
+                var objtip = $(o.obj).closest(".form-item-body").next(".validmsg");
+                cssctl(objtip, o.type);
+                objtip.text(msg);
+            }
         });
     });
 </script>
@@ -152,11 +156,13 @@
         #@validateDiv("col-2")#end
     #end
     #@elementItem()
-        #@colLabel()名称:#end
-        #@formControlDiv("col-4")
-            #tinyInput("text" "planName" plan?.planName {"datatype":"*","class":"input-text","nullmsg":"计划名称不能为空！",
-                "placeholder":""})
+        #@colLabel()
+            <span class="c-red">*</span>名称：
         #end
+        #@formControlDiv("col-4")
+            #tinyInput("text" "planName" plan?.planName {"datatype":"*","class":"input-text","nullmsg":"计划名称不能为空！"})
+        #end
+        #@validateDiv("col-2")#end
         <script>
             $("input[name=planName]").on("blur",function(){
                 var pName = $(this).val();
@@ -182,7 +188,7 @@
                 }
             });
         </script>
-        #@validateDiv("col-2")#end
+
     #end
 
     #@elementItem()

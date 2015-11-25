@@ -114,7 +114,7 @@
                 <div class="input-group">
                     #tinyInput(
                         "text" "serviceEffortLimit" sla?.serviceEffortLimit{"id":"serviceEffortLimit",
-                        "class":"input-text select2"})
+                        "class":"input-text"})
                     <span class="input-group-addon" id="basic-addon2">小时</span>
                 </div>
 
@@ -199,7 +199,7 @@
                 #end
             #end
             #@elementItem()
-                #@sdpmItem("批准时间")
+                #@sdpmItem("批准时间","*")
                     #@tinyDateInput(
                         "slaReviewDate" formatDate(sla?.slaReviewDate,
                         "yyyy-MM-dd") "YYYY-MM-DD" {"style":"width:120px","id":"slaReviewDate",
@@ -236,7 +236,7 @@
 
 
 <script type="text/javascript">
-    $(".select2").select2();
+    $("select.select2").select2();
 </script>
 <script type="text/javascript">
     $(function () {

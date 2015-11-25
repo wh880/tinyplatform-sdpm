@@ -159,13 +159,12 @@
         #end
 
         #@elementItem()
-            <div class="col-12">
-                <div class="col-2 text-r"><label><span class="c-red">*</span>文档标题：</label></div>
-                <div class="col-4">
-                    #tinyInput("text" "docTitle" doc?.docTitle {"placeholder":"1~16个字符，字母/中文/数字/下划线","datatype":"*1-16",
+            #@sdpmItem("文档URL")
+                #@formControlDiv("col-12")
+                    #tinyInput("text" "docTitle" doc?.docTitle {"datatype":"*1-20",
                         "nullmsg":"标题不能为空！","class":"input-text"})
-                </div>
-            </div>
+                #end
+            #end
             #@validateDiv("col-2")#end
         #end
         #@elementItem(elementId="urlBox" eleItemClass="hide")
@@ -265,7 +264,11 @@
 <script type="text/javascript">
     $(function () {
         $("form[name=thisform]").Validform({
-            tiptype: 2
-        })
+            tiptype: function (msg, o, cssctl) {
+                var objtip = $(o.obj).closest(".form-item-body").next(".validmsg");
+                cssctl(objtip, o.type);
+                objtip.text(msg);
+            }
+        });
     });
 </script>

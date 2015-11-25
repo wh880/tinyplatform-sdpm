@@ -44,7 +44,8 @@
         #@elementItem()
             #@sdpmItem("由谁评审")
                 #@Tselect2F()
-                    #@Tselect2Body("storyReviewedBy" story?.storyReviewedBy {"class":"input-text select2"})
+                    #@Tselect2Body("storyReviewedBy" story?.storyReviewedBy {"class":"input-text select2",
+                        "datatype":"*","nullmsg":"由谁评审不能为空"})
                     #end
                     #@Tselect2Fix()
                         #set(m=menuManager.getMenu("organizationAddUser"))
@@ -77,8 +78,8 @@
         #@elementItem()
             #@sdpmItem("需求名称")
                 <div class="input-group">
-                    <input type="text" name="storyTitle" value="${story?.storyTitle}" class="form-control"
-                           placeholder="" aria-describedby="basic-addon2" style="width:296px">
+                    #tinyInput(
+                        "text" "storyTitle" story?.storyTitle {"class":"input-text","datatype":"*","nullmsg":"需求名不能为空","style":"width:296px"})
                 </div>
             #end
         #end
@@ -157,3 +158,14 @@
 <div style="width:30%;float:right">
     #history(adminPath+"/system/action/ajax/history?actionObjectType=story&actionObjectId="+story?.storyId)
 </div>
+<script type="text/javascript">
+    $(function () {
+        $("form[name=thisform]").Validform({
+            tiptype: function (msg, o, cssctl) {
+                var objtip = $(o.obj).closest(".form-item-body").next(".validmsg");
+                cssctl(objtip, o.type);
+                objtip.text(msg);
+            }
+        });
+    });
+</script>

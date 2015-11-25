@@ -23,7 +23,7 @@
 
 #end
 
-    #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/quality/testCase/save" "post" {"class":"","enctype":"multipart/form-data"})
+    #@tinyForm("addCaseForm" TINY_CONTEXT_PATH+adminPath+"/quality/testCase/save" "post" {"class":"","enctype":"multipart/form-data"})
     <input type="hidden" name="lastAddress" value=""/>
     #hiddenInput(hiddenInputName="caseId" hiddenInputValue=testCase?.caseId)
     #hiddenInput(hiddenInputName="caseFromBug" hiddenInputValue=bugId)
@@ -101,14 +101,15 @@
         #end
         #@elementItem()
             #@colLabel()<span class="c-red">*</span>适用阶段：#end
-            #@formControlDiv("col-8")
-               #@div(divClass="col-5")
+            #@formControlDiv("col-4")
+               #@div(divClass="col-10")
 					 #@Tselect2F()
-	                   		 #@Tselect2Body("caseStage" testCase?.caseStage {"class":"input-text select2","multiple":"multiple"}) ##,"multiple":"multiple"加上为多选项
-                         #for(stage : getDict("caseStage"))
+                         #@Tselect2Body("caseStage" testCase?.caseStage {"class":"input-text select2","multiple":"multiple",
+                                 "datatype":"*","nullmsg":"适用阶段不能为空！"}) ##,"multiple":"multiple"加上为多选项
+                         #foreach(stage : getDict("caseStage"))
                             <option value="${stage.value}">${stage.text}</option>
                          #end
-	                    	#end
+                         #end
                 	  #end
                 #end
             #end
@@ -161,9 +162,9 @@
         #end
         #@elementItem()
             #@colLabel()<span class="c-red">*</span>用例标题：#end
-            #@formControlDiv("col-8")
-            #@div(divClass="col-5")
-                #tinyInput("text" "caseTitle" testCase?.caseTitle {"datatype":"*","id":"版本","class":"input-text"})
+            #@formControlDiv("col-4")
+            #@div(divClass="col-10")
+                #tinyInput("text" "caseTitle" testCase?.caseTitle {"datatype":"*","nullmsg":"用例标题不能为空！","id":"版本","class":"input-text"})
             #end
             #end
             #@validateDiv("col-2")#end
@@ -220,3 +221,10 @@
 
 #end
 #end
+<script type="text/javascript">
+    $(function () {
+        $("form[name=addCaseForm]").Validform({
+            tiptype: 2
+        });
+    });
+</script>
