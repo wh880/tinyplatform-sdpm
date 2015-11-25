@@ -10,8 +10,8 @@
     #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/testCase">${testTask?.testtaskTitle}#end
     #@td()${testTask?.projectId}#end
     #@td()${testTask?.buildName}#end
-    #@td()${formatDate(testTask?.testtaskBegin,"yyyy年MM月dd日")}#end
-    #@td()${formatDate(testTask?.testtaskEnd,"yyyy年MM月dd日")}#end
+    #@td()${formatDate(testTask?.testtaskBegin,"yyyy-MM-dd")}#end
+    #@td()${formatDate(testTask?.testtaskEnd,"yyyy-MM-dd")}#end
     #@td()${getDict("versionStatus",testTask?.testtaskStatus)}#end
 #end
 #end

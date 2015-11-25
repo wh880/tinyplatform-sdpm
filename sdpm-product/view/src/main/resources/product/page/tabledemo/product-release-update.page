@@ -4,11 +4,18 @@
 #!set(linkName="product-release",sonitem="<li>"+"发布"+"</li>")
 <script type="text/javascript">
     $(function () {
-        $("form[name=thisform").Validform({
-            tiptype: 2
+
+        $("form[name=thisform]").Validform({
+            tiptype: function (msg, o, cssctl) {
+                var objtip = $(o.obj).closest(".row").find(".validmsg");
+
+                cssctl(objtip, o.type);
+                objtip.text(msg);
+            }
         });
     });
 </script>
+
 
 #@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/product/release/update" "post" {"class":"","enctype":
     "multipart/form-data"})
@@ -18,18 +25,23 @@
         <p class="titleName">编辑</p>
 
      #@elementItem()
+
         #@colLabel("col-1")<span class="c-red">*</span>发布名称:#end
         #@formControlDiv("col-4")
+
             #tinyInput(
                 "text" "releaseName" release?.releaseName{"datatype":"*","nullmsg":"发布名称不能为空！","id":"releaseName","class":"input-text",
                 "ajaxurl":TINY_CONTEXT_PATH+adminPath+"/product/release/judgeReleaseName?releaseId="+release?.releaseId+"&productId="+cookieProductId})
        #end
-        #@validateDiv("col-2")#end
+     
+        #@validateDiv("col-2 validmsg")#end
       #end
     #@elementItem()
+
         #@colLabel("col-1")版本:#end
        #@formControlDiv("col-4")
 			#@Tselect2F()
+
                 #@Tselect2Body("buildId" release?.buildId {"class":"input-text"}) ##,"multiple":"multiple"加上为多选项
                 #end
                 <script>
@@ -48,27 +60,33 @@
 
             #end
 		#end
-        #@validateDiv("col-2")#end
+
+        #@validateDiv("col-2 validmsg")#end
     #end
 
     #@elementItem()
+
         #@colLabel("col-1")<span class="c-red">*</span>发布日期:#end
         #@formControlDiv("col-4")
            #@tinyDateInput("releaseDate" release?.releaseDate?formatDate(release?.releaseDate,'yyyy-MM-dd'):"" "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空"})#end
         #end
-        #@validateDiv("col-2")#end
+
+        #@validateDiv("col-2 validmsg")#end
     #end
    
     #@elementItem()
+
         #@colLabel("col-1")描述:#end
         #@formControlDiv("col-9")
            #@Teditor("releaseDesc" "releaseDesc" {"initialFrameHeight":"250" ,"placeholder":"说点什么...最少输入10个字符","datatype":"*10-500"})${release?.releaseDesc}#end
         #end
-        #@validateDiv("col-2")#end
+
+        #@validateDiv("col-2 validmsg")#end
     #end
     
    #@elementItem()
         <div class="col-12">
+
                 <div class="col-1 text-r"><label>附件：</label></div>
                 <div class="col-9">
                   #@formControlDiv("col-12")

@@ -47,17 +47,17 @@
 #@tinyTableContent(TINY_CONTEXT_PATH+adminPath+"/quality/testCase/findPager"+requestStatusString)
 #@thead()
 #@tr()
-#@tinyTh({"width":"6"})<input type="checkbox" id ="checkboxall" name="userid" value="">#end
-#@tinyTh({"class":"sorting","rel":"caseId"})ID#end
-#@tinyTh({"class":"sorting","rel":"priority"})P#end
-#@tinyTh({"class":"sorting","rel":"caseTitle"})用例标题#end
-#@tinyTh({"class":"sorting","rel":"caseType"})类型#end
-#@tinyTh({"class":"sorting","rel":"caseOpenedBy","style":"color:#333"})创建#end
-#@tinyTh({"class":"sorting","rel":"caseLastRunner"})执行人#end
-#@tinyTh({"class":"sorting","rel":"caseLastRunDate"})执行时间#end
-#@tinyTh({"class":"sorting","rel":"caseLastRunResult"})结果#end
-#@tinyTh({"class":"sorting","rel":"caseStatus"})状态#end
-#@tinyTh({"csortinglass":"sorting","rel":"sortname"})操作#end
+	#@tinyTh({"width":"6"})<input type="checkbox" id ="checkboxall" name="userid" value="">#end
+	#@tinyTh({"class":"sorting","rel":"caseId"})ID#end
+	#@tinyTh({"class":"sorting","rel":"priority"})P#end
+	#@tinyTh({"class":"sorting","rel":"caseTitle"})用例标题#end
+	#@tinyTh({"class":"sorting","rel":"caseType"})类型#end
+	#@tinyTh({"class":"sorting","rel":"caseOpenedBy","style":"color:#333"})创建#end
+	#@tinyTh({"class":"sorting","rel":"caseLastRunner"})执行人#end
+	#@tinyTh({"class":"sorting","rel":"caseLastRunDate"})执行时间#end
+	#@tinyTh({"class":"sorting","rel":"caseLastRunResult"})结果#end
+	#@tinyTh({"class":"sorting","rel":"caseStatus"})状态#end
+	#@tinyTh({"csortinglass":"sorting","rel":"sortname"})操作#end
 #end
 #end
 <script type="text/javascript">

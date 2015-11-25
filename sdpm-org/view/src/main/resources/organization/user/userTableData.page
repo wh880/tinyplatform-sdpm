@@ -8,9 +8,9 @@
     #@td()<input type="checkbox" value="${var?.orgUserId}" name="idCheck">#end
     #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/org/user/story?choose=3&id=${var?.orgUserId}">${var
         ?.orgUserRealName}</a>#end
-    #@td()${var?.orgUserAccount}#end
-    #@td()${var.orgUserRole}#end
-    #@td()
+    #@td("nowrap")${var?.orgUserAccount}#end
+    #@td("nowrap")${var.orgUserRole}#end
+    #@td("nowrap")
     <a href="mailto:${var?.orgUserEmail}">${var?.orgUserEmail}</a>
     #end
     #@td()
@@ -20,8 +20,8 @@
         女
         #end
     #end
-    #@td()${var?.orgUserPhone}#end
-    #@td()${var?.orgUserJoin}#end
+    #@td("nowrap")${var?.orgUserPhone}#end
+    #@td("nowrap")${var?.orgUserJoin}#end
     #@td()
         #set(map={"org-user-edit":[665,448],"org-user-delete":[550,150]})
         #foreach(m:menuManager.getScopeMenus("org-user"))

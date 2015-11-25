@@ -33,8 +33,7 @@
         #@elementItem()
             #@sdpmItem("所属模块")
                 #@Tselect2F()
-                    #@Tselect2Body("taskModule" moduleId {"class":
-                        "input-text select2"})
+                    #@Tselect2Body("taskModule" moduleId {"class":"input-text select2"})
                         <option value="">/</option>
                         #foreach(m : moduleList)
                             <option value=${m.moduleId}>${m.moduleName}</option>
@@ -47,8 +46,7 @@
             #@sdpmItem("任务类型" "*")
                 #@Tselect2F()
                     #@Tselect2Body(
-                        "taskType" copyTask?.taskType {"class":"input-text select2","placeholder":"请选择任务类型","datatype":
-                        "*",
+                        "taskType" copyTask?.taskType {"class":"input-text select2","placeholder":"请选择任务类型","datatype":"*",
                         "nullmsg":"任务类型不能为空！"})
                         <option value=""></option>
                         #foreach(item : getDict("taskType"))
@@ -192,16 +190,19 @@
             #end
         #end
         #@elementItem()
-            #@sdpmItem("附件")
-                #fileWithInput("file")
-            #end
+            <div class="col-12">
+                <div class="col-2 text-r"><label>附件：</label></div>
+                <div class="col-7">
+                    #mulUploadFile()
+                </div>
+            </div>
         #end
 
         #@elementItem()
             <div class="col-12">
                 <div class="col-2 text-r"><label>备注：</label></div>
-                <div class="col-9">
-                    #@Teditor("comment" "comment" {"initialFrameHeight":"150","initialFrameWidth":"702"})#end
+                <div class="col-7">
+                    #@Teditor("comment" "comment" {"initialFrameHeight":"150"})#end
                 </div>
             </div>
         #end
@@ -228,6 +229,12 @@
 
 <script type="text/javascript">
     $(function () {
-        $("form").Validform({});
+        $("form[name=addTaskForm]").Validform({
+            tiptype: function (msg, o, cssctl) {
+                var objtip = $(o.obj).closest(".form-item-body").next(".validmsg");
+                cssctl(objtip, o.type);
+                objtip.text(msg);
+            }
+        });
     });
 </script>

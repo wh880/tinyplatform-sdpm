@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="renderer" content="webkit|ie-comp|ie-stand">
-    <link rel="shortcut icon" href="${TINY_CONTEXT_PATH}/common/img/tiny32.png">
+    <link rel="shortcut icon" href="${TINY_CONTEXT_PATH}/common/img/logo.ico">
     <meta name="keywords" content="Tiny SDPM ">
     <meta name="description" content="Tiny,TINY,Software Development Process Management">
     <title>Tiny SDPM登陆</title>

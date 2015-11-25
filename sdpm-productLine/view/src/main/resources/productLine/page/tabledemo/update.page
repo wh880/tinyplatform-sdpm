@@ -38,7 +38,9 @@
             #@colLabel()<span class="c-red">*</span>产品线经理：#end
             #@formControlDiv("col-4")
                 #@Tselect2F()
+
                     <script>
+
                         $(function(){
                             ajaxRead("${sid}", "productLineOwner", "orgUserId", "orgUserRealName", "/org/user/userList");
                         })
@@ -62,9 +64,11 @@
             #@validateDiv("col-2")#end
         #end
         #@elementItem()
+
             #@colLabel()<span class="c-red">*</span>产品线质量经理：#end
             #@formControlDiv("col-4")
                 #@Tselect2F()
+
                     <script>
                         $(function(){
                             ajaxRead("${sid}", "productLineQualityManager", "orgUserId", "orgUserRealName", "/org/user/userList");
@@ -73,8 +77,10 @@
                     #@Tselect2Body(
                         "productLineQualityManager" productLine?.productLineQualityManager {"class":"input-text select2","nullmsg":"请选择产品线质量经理！","datatype":"*"}) ##,"multiple":"multiple"加上为多选项
 
+
                     #end
 
+   
                     #@Tselect2Fix()
                         #set(m=menuManager.getMenu("organizationAddUser"))
                         #if(m)
@@ -91,10 +97,13 @@
             #@validateDiv("col-2")#end
         #end
         #@elementItem()
+
             #@colLabel()<span class="c-red">*</span>产品线交付经理：#end
             #@formControlDiv("col-4")
                 #@Tselect2F()
+
                     <script>
+
                         $(function(){
                             ajaxRead("${sid}", "productLineDeliveryManager", "orgUserId", "orgUserRealName", "/org/user/userList");
                         })

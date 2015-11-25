@@ -17,7 +17,7 @@
     #end
 #end
 
-#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/project/build/addSave" post {"class":"test","enctype":
+#@tinyForm("addform" TINY_CONTEXT_PATH+adminPath+"/project/build/addSave" post {"class":"test","enctype":
     "multipart/form-data"})
     #hiddenInput(hiddenInputName="buildId" hiddenInputValue=build?.buildId)
     <input type="hidden" name="buildProject" value="${build?.buildProject?:currentProjectId}">
@@ -25,11 +25,11 @@
     <p class="titleName">新建/编辑版本</p>
 
     #@elementItem()
-        #@sdpmItem("产品")
+        #@sdpmItem("产品","*")
             #@Tselect2F()
                 #@Tselect2Body(
-                    "buildProduct" build?.buildProduct?:productId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-
+                    "buildProduct" build?.buildProduct?:productId {"class":"input-text select2","datatype":"*",
+                    "nullmsg":"产品不能为空"}) ##,"multiple":"multiple"加上为多选项
                     #foreach(p : productList)
                         <option value="${p.productId}">${p.productName}</option>
                     #end
@@ -49,17 +49,18 @@
         #end
     #end
     #@elementItem()
-        #@sdpmItem("版本名称")
+        #@sdpmItem("版本名称","*")
             #tinyInput(
-                "text" "buildName" build?.buildName {"style":"width:43%","placeholder":"","datatype":"*4-16","nullmsg":
-                "标题不能为空！","id":"username","class":"input-text"})
+                "text" "buildName" build?.buildName {"style":"width:80%","placeholder":"","datatype":"*","nullmsg":
+                "版本名不能为空！","class":"input-text"})
         #end
     #end
     #@elementItem()
-        #@sdpmItem("构建者")
+        #@sdpmItem("构建者","*")
             #@Tselect2F()
                 #@Tselect2Body(
-                    "buildBuilder" build?.buildBuilder {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                    "buildBuilder" build?.buildBuilder {"class":"input-text select2","datatype":"*","nullmsg":
+                    "构建者不能为空！"}) ##,"multiple":"multiple"加上为多选项
                     #foreach(t : teamList)
                         <option value="${t.orgUserId}">${t.orgUserRealName}</option>
                     #end
@@ -83,31 +84,31 @@
             #@formHorizontal()
                 #@tinyDateInput(
                     "buildDate" formatDate(build?.buildDate,
-                    "yyyy-MM-dd") "YYYY-MM-DD" {"datatype":"*","placeholder":"选择日期"})
+                    "yyyy-MM-dd") "YYYY-MM-DD" {"style":"width:80%","placeholder":"选择日期"})
                 #end
             #end
         #end
     #end
 
     #@elementItem()
-        #@sdpmItem("源代码地址")
+        #@sdpmItem("源代码地址","*")
             #tinyInput(
-                "text" "buildScmPath" build?.buildScmPath{"style":"width:43%","placeholder":"","datatype":"*4-16",
+                "text" "buildScmPath" build?.buildScmPath{"style":"width:80%","placeholder":"","datatype":"*4-50",
                 "nullmsg":"标题不能为空！","id":"username","class":"input-text"})
         #end
     #end
 
     #@elementItem()
-        #@sdpmItem("下载地址")
+        #@sdpmItem("下载地址","*")
             #tinyInput(
-                "text" "buildFilePath" build?.buildFilePath{"style":"width:300px","placeholder":"","datatype":"*4-16",
-                "nullmsg":"标题不能为空！","id":"username","class":"input-text"})
+                "text" "buildFilePath" build?.buildFilePath{"style":"width:80%","placeholder":"","datatype":"*4-50",
+                "nullmsg":"下载地址不能为空！","id":"username","class":"input-text"})
         #end
     #end
     #@elementItem()
         #@sdpmItem("附件")
             #@formControlDiv("col-8")
-                #tinyUploadInput("inputName" "" {"style":"width:43%","placeholder":"可直接输入地址，也可点击下图标进行上传"})
+                #tinyUploadInput("inputName" "" {"style":"width:80%","placeholder":"可直接输入地址，也可点击下图标进行上传"})
             #end
         #end
     #end
@@ -134,3 +135,14 @@
     #end
 
 #end
+    <script type="text/javascript">
+        $(function () {
+            $("form[name=addform]").Validform({
+                tiptype: function (msg, o, cssctl) {
+                    var objtip = $(o.obj).closest(".form-item-body").next(".validmsg");
+                    cssctl(objtip, o.type);
+                    objtip.text(msg);
+                }
+            });
+        });
+    </script>

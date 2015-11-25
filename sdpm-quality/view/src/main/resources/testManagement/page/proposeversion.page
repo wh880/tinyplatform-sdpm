@@ -29,12 +29,12 @@
     		<p class="titleName">提交测试</p>
         #@elementItem()
             #@colLabel()<span class="c-red">*</span>所属项目：#end
-            #@formControlDiv("col-8")
-					#@div(divClass="col-5")
+            #@formControlDiv("col-4")
+					#@div(divClass="col-10")
 					 #@Tselect2F()
 					 <script type="text/javascript">
 					 $(function(){
-                         ajaxRead("${sid}", "projectId", "projectId", "projectName", "/quality/bug/ajax/project?productId=${qualityProductId}", "${testTask?.projectId?:(projectId?:0)}");
+                         ajaxRead("${sid}", "projectId", "projectId", "projectName", "/quality/bug/ajax/project?productId=${qualityProductId}", ${testTask?.projectId?:(projectId?:0)});
 					    $("#${sid}").on("change",function(){
                              var pId = $("#${sid}  option:selected").val();
                             if(pId>0){
@@ -45,8 +45,8 @@
 					 })
                      </script>
                          #@Tselect2Body(
-                             "projectId" testTask?.projectId?:(projectId?:0) {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-
+                             "projectId" testTask?.projectId?:(projectId?:0) {"class":"input-text select2","datatype":"*",
+                         "nullmsg":"所属项目不能为空"}) ##,"multiple":"multiple"加上为多选项
 	                    	#end
                          #@Tselect2Fix()
                              #set(m=menuManager.getMenu("project-op-add"))
@@ -61,13 +61,15 @@
                 	  #end
                 	 #end
 				#end
+            #@validateDiv("col-2")#end
         #end
         #@elementItem()
             #@colLabel()<span class="c-red">*</span>版本：#end
-            #@formControlDiv("col-8")
-					#@div(divClass="col-5")
+            #@formControlDiv("col-4")
+					#@div(divClass="col-10")
 					 #@Tselect2F()
-                         #@Tselect2Body("buildName" testTask?.buildName?:buildId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                         #@Tselect2Body("buildName" testTask?.buildName?:buildId {"class":"input-text select2","datatype":"*",
+                             "nullmsg":"版本不能为空"}) ##,"multiple":"multiple"加上为多选项
 	                    	#end
                          #@Tselect2Fix()
                              #set(m=menuManager.getMenu("pro-version-add"))
@@ -126,8 +128,8 @@
 
         #@elementItem()
             #@colLabel()<span class="c-red">*</span>开始日期：#end
-            #@formControlDiv("col-8")
-            	#@div(divClass="col-5")
+            #@formControlDiv("col-4")
+            	#@div(divClass="col-10")
                 #@tinyDateInput("testtaskBegin" formatDate(testTask?.testtaskBegin,"yyyy-MM-dd") "yyyy-MM-dd" {"datatype":"*","nullmsg":"日期不能为空","placeholder":""})#end
            		#end
             #end
@@ -135,8 +137,8 @@
         #end
         #@elementItem()
             #@colLabel()<span class="c-red">*</span>结束日期：#end
-            #@formControlDiv("col-8")
-                #@div(divClass="col-5")
+            #@formControlDiv("col-4")
+                #@div(divClass="col-10")
                 #@tinyDateInput("testtaskEnd" formatDate(testTask?.testtaskEnd,"yyyy-MM-dd") "yyyy-MM-dd" {"datatype":"*","nullmsg":"日期不能为空","placeholder":""})#end
            		#end
             #end
@@ -161,7 +163,7 @@
             #@colLabel()<span class="c-red">*</span>测试名称：#end
             #@formControlDiv("col-8")
             	#@div(divClass="col-5")
-                	#tinyInput("text" "testtaskTitle" testTask?.testtaskTitle {"datatype":"*","id":"关键词","class":"input-text"})
+                	#tinyInput("text" "testtaskTitle" testTask?.testtaskTitle {"datatype":"*","nullmsg":"测试名称不能为空","id":"关键词","class":"input-text"})
                 #end
             #end
             #@validateDiv("col-2")#end

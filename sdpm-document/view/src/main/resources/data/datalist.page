@@ -2,12 +2,12 @@
 #foreach(l:pager.getRecords())
 #@tr()
 	#@td()<input type="checkbox" value="${l?.docId}" name="idCheck">#end
-	#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/document/doc/view?docid=${l?.docId}">${l?.docId}</a>#end
+	#@td("nowrap")<a href="${TINY_CONTEXT_PATH+adminPath}/document/doc/view?docid=${l?.docId}">${l?.docId}</a>#end
 	#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/document/doc/view?docid=${l?.docId}">${l?.docTitle}</a>#end
-	#@td()${getDict("docType",l?.getDocType())}#end
-	#@td()${l?.docAddName}#end
-	#@td()${l?.docAddedDate?formatDate(l?.docAddedDate,'yyyy年MM月dd日'):""}#end
-	 #@td()
+	#@td("nowrap")${getDict("docType",l?.getDocType())}#end
+	#@td("nowrap")${UserUtils.getUserById(l?.docAddedBy).orgUserRealName?:""}#end
+	#@td("nowrap")${l?.docAddedDate?formatDate(l?.docAddedDate,'yyyy-MM-dd'):""}#end
+	 #@td("nowrap")
 	 	#foreach(m:menuManager.getScopeMenus("doc-op"))
 			#if(m.id != "docdelete")
 				<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?docId=${l?.docId}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>

@@ -120,10 +120,11 @@
             #end
             #@elementItem()
                 #@colLabel()<span class="c-red">*</span>影响版本：#end
-                #@formControlDiv("col-8")
-                    #@div(divClass="col-5")
+                #@formControlDiv("col-4")
+                    #@div(divClass="col-10")
                         #@Tselect2F()
-                            #@Tselect2Body("bugOpenedBuild" bug?.bugOpenedBuild {"class":"input-text select2","multiple":"multiple"}) ##,"multiple":"multiple"加上为多选项
+                            #@Tselect2Body("bugOpenedBuild" bug?.bugOpenedBuild {"class":"input-text select2","multiple":"multiple",
+                                "datatype":"*","nullmsg":"影响版本不能为空！"}) ##,"multiple":"multiple"加上为多选项
                             #end
                             #@Tselect2Fix()
                                 #set(m=menuManager.getMenu("pro-version-add"))

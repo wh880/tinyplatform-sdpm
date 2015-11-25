@@ -72,8 +72,8 @@ public class CompanyAction extends BaseController {
         fileUrl = fileRepository.resolverFilePath(fileUrl, UPLOAD_PATH);
         long size = upFile.getSize();
         SystemProfile profile = new SystemProfile(fileUrl, null, ext, (int) size,
-                ProfileType.ORG.getType(), company.getOrgCompanyId(), UserUtils.getUserAccount(), new Date(), null, null);
-        profileService.add(profile);
+                ProfileType.ORG.getType(), company.getOrgCompanyId(), UserUtils.getUserAccount(), new Date());
+        profileService.addSystemProfile(profile);
 //        company.setOrgCompanyLogo(fileUrl);
 //        companyService.updateCompany(company);
 //        model.addAttribute("company", company);

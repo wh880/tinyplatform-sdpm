@@ -1,6 +1,6 @@
 ##用于类似编辑页面的条目排版
 #macro sdpmItem(title star)
-<div class="col-6 formControls">
+<div class="col-6 formControls form-item-body">
     <div class="col-4 text-r">
         <span class="c-red">${star}</span>
         <label>${title}：&nbsp;</label>
