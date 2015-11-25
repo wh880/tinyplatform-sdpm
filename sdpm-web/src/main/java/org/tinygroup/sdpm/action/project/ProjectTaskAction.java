@@ -498,7 +498,7 @@ public class ProjectTaskAction extends BaseController {
     }
 
     @RequestMapping("/findTask")
-    public String findTask(Model model, Integer taskId) {
+    public String findTask(Model model, Integer taskId, Integer no) {
         ProjectTask task = taskService.findTask(taskId);
         model.addAttribute("task", task);
         return "project/task/view";

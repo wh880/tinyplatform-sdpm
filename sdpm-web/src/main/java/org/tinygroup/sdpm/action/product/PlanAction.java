@@ -9,11 +9,14 @@ import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
+import org.tinygroup.sdpm.product.dao.pojo.ProductRelease;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.service.PlanService;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
+import org.tinygroup.sdpm.util.CookieUtils;
 import org.tinygroup.sdpm.util.LogUtil;
+import org.tinygroup.sdpm.util.ProductUtils;
 import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -144,9 +147,29 @@ public class PlanAction  extends BaseController{
 	}
 	
 	@RequestMapping("/forword/{forwordPager}")
-	public String forword(@PathVariable(value="forwordPager")String forwordPager,Integer planId,Model model){
-		if(planId!=null&&planId>0){
-			model.addAttribute("plan",planService.findPlan(planId));
+	public String forword(@PathVariable(value="forwordPager")String forwordPager,
+						  Integer planId,
+						  Model model,
+						  Integer no,
+						  HttpServletRequest request){
+		ProductPlan plan = null;
+		if(no!=null){
+			Integer cookieProductId = Integer.parseInt(CookieUtils.getCookie(request, ProductUtils.COOKIE_PRODUCT_ID));
+			if(cookieProductId==null){
+				notFoundView();
+			}
+			plan = new ProductPlan();
+			plan.setProductId(cookieProductId);
+			plan.setNo(no);
+			List<ProductPlan> planList = planService.findPlanList(plan);
+			if(planList.size()==0){
+				notFoundView();
+			}
+			plan = planList.get(0);
+		}
+		if(plan==null||plan.getPlanId()==null){
+			plan = planService.findPlan(planId);
+			model.addAttribute("plan",plan);
 		}
 		if ("reRelateStory".equals(forwordPager)) {
 			return "/product/page/tabledemo/relation-plan/product-al-req.page";

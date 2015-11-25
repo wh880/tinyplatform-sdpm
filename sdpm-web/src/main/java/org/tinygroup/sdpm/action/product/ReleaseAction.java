@@ -18,7 +18,9 @@ import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;
 import org.tinygroup.sdpm.system.service.inter.ExportService;
 import org.tinygroup.sdpm.system.service.inter.ProfileService;
+import org.tinygroup.sdpm.util.CookieUtils;
 import org.tinygroup.sdpm.util.LogUtil;
+import org.tinygroup.sdpm.util.ProductUtils;
 import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.template.TemplateException;
 import org.tinygroup.tinysqldsl.Pager;
@@ -169,8 +171,26 @@ public class ReleaseAction extends BaseController {
     }
 
     @RequestMapping("/forword/{forwordPager}")
-    public String forword(@PathVariable(value = "forwordPager") String forwordPager, Integer releaseId, Model model) {
+    public String forword(@PathVariable(value = "forwordPager") String forwordPager,
+                          Integer releaseId,
+                          Model model,
+                          Integer no,
+                          HttpServletRequest request) {
 
+        if(no!=null){
+            Integer cookieProductId = Integer.parseInt(CookieUtils.getCookie(request, ProductUtils.COOKIE_PRODUCT_ID));
+            if(cookieProductId==null){
+                notFoundView();
+            }
+            ProductRelease release = new ProductRelease();
+            release.setProductId(cookieProductId);
+            release.setNo(no);
+            List<ProductRelease> releaseList = releaseService.findReleaseList(release);
+            if(releaseList.size()==0){
+                notFoundView();
+            }
+            releaseId = releaseList.get(0).getReleaseId();
+        }
         model.addAttribute("releaseId", releaseId);
 
         if ("reRelateStory".equals(forwordPager)) {
