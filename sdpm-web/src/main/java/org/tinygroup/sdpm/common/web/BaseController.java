@@ -130,6 +130,13 @@ public abstract class BaseController {
 //        return "error/40x";
 //    }
 //
+    /**
+     * 不存在异常返回
+     */
+    public String notFoundView() {
+        return "error/40x";
+    }
+
 
     /**
      * 添加Model消息

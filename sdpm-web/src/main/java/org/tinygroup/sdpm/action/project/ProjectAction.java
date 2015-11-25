@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.tinygroup.commons.tools.ArrayUtil;
 import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.util.Collections3;
@@ -91,10 +92,10 @@ public class ProjectAction extends BaseController {
         Project project = new Project();
         project.setProjectName(param);
         List<Project> projectList = projectService.findProjectList(project, null, null);
-        if (CollectionUtil.isEmpty(projectList)){
-            return resultMap(true,"验证成功！");
-        }else {
-            return resultMap(false,"已经存在相同的项目名，请更换项目名称。");
+        if (CollectionUtil.isEmpty(projectList)) {
+            return resultMap(true, "验证成功！");
+        } else {
+            return resultMap(false, "已经存在相同的项目名，请更换项目名称。");
         }
     }
 
@@ -136,14 +137,17 @@ public class ProjectAction extends BaseController {
      * @param start
      * @param limit
      * @param order
-     * @param ordertype
+     * @param orderType
      * @param model
      * @return
      */
     @RequestMapping("/list/data")
-    public String listData(Integer start, Integer limit, String order, String ordertype, Model model) {
+    public String listData(Integer start, Integer limit, String order, String orderType, Integer key, Model model) {
         Integer[] userProjectIds = ProjectUtils.getUserProjectIdList();
-        Pager<Project> projectPager = projectService.findProjects(start, limit, order, ordertype, userProjectIds);
+        if (key != null && !ArrayUtil.isEmptyArray(userProjectIds)) {//用于搜索
+            userProjectIds = new Integer[]{key};
+        }
+        Pager<Project> projectPager = projectService.findProjects(start, limit, order, orderType, userProjectIds);
         Integer interval = 2;
         if (projectPager != null) {
             for (Project project : projectPager.getRecords()) {
