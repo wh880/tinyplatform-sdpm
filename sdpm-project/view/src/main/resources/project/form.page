@@ -149,7 +149,7 @@
         #@elementItem()
             #@sdpmItem("访问控制")
                 #@skinMinimal("col-10")
-                    #@Tradioes("projectAcl" "1" {"onclick":"setWhite(this.value)"})
+                    #@Tradioes("projectAcl" "1")
                         #foreach(source:getDict("projectAcl"))
                             <div>#@Tradio(source?.value)${source?.text}#end</div>
                         #end
@@ -167,7 +167,7 @@
             #@skinMinimal("col-8")
                 #@Tcheckboxes("whiteList" "")
                     #foreach(role : UserUtils.getAllRoleList())
-                        #@gridSysCol(2)345
+                        #@gridSysCol(2)
                             #@Tcheckbox(role.orgRoleId)${role.orgRoleName}#end
                         #end
                     #end
@@ -205,8 +205,8 @@
             }
 
         });
-        $("input[name='projectAcl']").click(function (e) {
-            $(this).attr("value") == "3" ? $("#whitelistBox").removeClass("hidden") : $("#whitelistBox").addClass("hidden");
+        $("input[name='projectAcl']").change(function (e) {
+            $(this).attr("value") == "2" ? $("#whitelistBox").removeClass("hidden") : $("#whitelistBox").addClass("hidden");
         });
         $("[name=projectEnd]").on("change", function () {
             console.log("sfsdf");
@@ -244,4 +244,5 @@
         $("input[name=projectEnd]").val(moment($bTime.val(), "YYYY-MM-DD").add('days', delta).format('YYYY-MM-DD')).trigger("blur");
 
     }
+    console.log("testterfsfdsfds")
 </script>
