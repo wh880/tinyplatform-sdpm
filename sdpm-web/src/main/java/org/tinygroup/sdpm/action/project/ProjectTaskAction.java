@@ -140,13 +140,16 @@ public class ProjectTaskAction extends BaseController {
      */
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(ProjectTask task, @RequestParam(value = "file", required = false) MultipartFile[] file, String[] fileTitle,
-                       String[] taskMailToArray, HttpServletRequest request, String comment, String lastAddress) {
+                       String[] taskMailToArray, HttpServletRequest request, String comment, String lastAddress,
+                       UploadProfile uploadProfile) throws IOException {
         Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, ProjectUtils.COOKIE_PROJECT_ID));
         task.setTaskProject(projectId);
         String taskMailTo = StringUtil.join(taskMailToArray, ",");
         task.setTaskMailto(taskMailTo);
         task.setTaskLeft(task.getTaskEstimate());
         task = taskService.addTask(task);
+        processProfile(uploadProfile, task.getTaskId(), ProfileType.TASK);
+
         LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, LogUtil.LogAction.OPENED,
                 task.getTaskId().toString(), UserUtils.getUserId(),
                 null, task.getTaskProject().toString(), null, null, comment);
@@ -174,7 +177,7 @@ public class ProjectTaskAction extends BaseController {
         ProjectTask task = taskService.findTask(taskId);
         model.addAttribute("task", task);
         SystemProfile systemProfile = new SystemProfile();
-        systemProfile.setFileId(taskId);
+        systemProfile.setFileObjectId(taskId);
         systemProfile.setFileObjectType(ProfileType.TASK.getType());
         List<SystemProfile> fileList = profileService.findSystemProfile(systemProfile);
         model.addAttribute("fileList", fileList);
@@ -191,13 +194,10 @@ public class ProjectTaskAction extends BaseController {
      */
     @RequestMapping(value = "/editsave", method = RequestMethod.POST)
     public String editSave(ProjectTask task, Model model, String contents,
-                           MultipartFile[] file, String[] fileTitle,
-                           UploadProfile uploadProfile) throws IOException {
+                            UploadProfile uploadProfile) throws IOException {
         ProjectTask oldTask = taskService.findTask(task.getTaskId());
         taskService.updateEditTask(task);
-
-        uploadMultiFiles(file,task.getTaskId(),ProfileType.TASK,fileTitle);
-        updateUploadFile(uploadProfile,task.getTaskId(),ProfileType.TASK);
+        processProfile(uploadProfile, task.getTaskId(), ProfileType.TASK);
 
         LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, LogUtil.LogAction.EDITED, oldTask.getTaskId().toString(),
                 UserUtils.getUserId(), null, oldTask.getTaskProject().toString(), oldTask, task, contents);

@@ -9,8 +9,29 @@ import java.util.List;
  * Created by Hulk on 2015/11/24.
  */
 public class UploadProfile {
+
+    MultipartFile[] newUploadFile;
+    String[] newUploadFileTitle;
+
     List<MultipartFile> updateFileList;
     List<SystemProfile> updateProfileList;
+
+
+    public MultipartFile[] getNewUploadFile() {
+        return newUploadFile;
+    }
+
+    public void setNewUploadFile(MultipartFile[] newUploadFile) {
+        this.newUploadFile = newUploadFile;
+    }
+
+    public String[] getNewUploadFileTitle() {
+        return newUploadFileTitle;
+    }
+
+    public void setNewUploadFileTitle(String[] newUploadFileTitle) {
+        this.newUploadFileTitle = newUploadFileTitle;
+    }
 
     public List<SystemProfile> getUpdateProfileList() {
         return updateProfileList;

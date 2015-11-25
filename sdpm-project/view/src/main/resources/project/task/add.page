@@ -193,7 +193,7 @@
             <div class="col-12">
                 <div class="col-2 text-r"><label>附件：</label></div>
                 <div class="col-7">
-                    #mulUploadFile("file")
+                    #mulUploadFile()
                 </div>
             </div>
         #end

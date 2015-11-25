@@ -43,7 +43,8 @@ import java.io.IOException;
 import java.util.*;
 
 /**
- * 需求的控制器 Created by xubin、wangjie14929
+ * 需求的控制器
+ * Created by xubin、wangjie14929
  */
 @Controller
 @RequestMapping("/a/product/story")

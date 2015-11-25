@@ -200,14 +200,27 @@ public abstract class BaseController {
     }
 
     /**
+     * 处理附件
+     *
+     * @param uploadProfile
+     * @param objectId
+     * @param type
+     * @throws IOException
+     */
+    public void processProfile(UploadProfile uploadProfile, Integer objectId, ProfileType type) throws IOException {
+        uploadMultiFiles(uploadProfile, objectId, type);
+        updateUploadFile(uploadProfile, objectId, type);
+    }
+
+    /**
      * 更新附件
      *
      * @param uploadProfile
      * @throws IOException
      */
     public void updateUploadFile(UploadProfile uploadProfile, Integer objectId, ProfileType type) throws IOException {
-        List<MultipartFile> updateFileList = uploadProfile.getUpdateFileList();
         List<SystemProfile> updateProfileList = uploadProfile.getUpdateProfileList();
+        List<MultipartFile> updateFileList = uploadProfile.getUpdateFileList();
         List<SystemProfile> updateList = new ArrayList<SystemProfile>();
         if (CollectionUtil.isEmpty(updateFileList) || CollectionUtil.isEmpty(updateProfileList) ||
                 updateProfileList.size() != updateFileList.size()) {
@@ -216,14 +229,18 @@ public abstract class BaseController {
         for (int i = 0, n = updateFileList.size(); i < n; i++) {
             MultipartFile multipartFile = updateFileList.get(i);
             SystemProfile profile = updateProfileList.get(i);
-
+            if (profile.getFileId() == null) {
+                continue;
+            }
             SystemProfile systemProfile = saveProfile(multipartFile, objectId, type, null);
             if (systemProfile != null) {
                 systemProfile.setFileTitle(profile.getFileTitle());
                 systemProfile.setFileId(profile.getFileId());
                 updateList.add(systemProfile);
             } else {
-                updateList.add(profile);
+                SystemProfile oldProfile = profileService.findSystemProfileById(profile.getFileId());
+                oldProfile.setFileTitle(profile.getFileTitle());
+                updateList.add(oldProfile);
             }
         }
         profileService.batchUpdateSystemProfile(updateList);
@@ -243,7 +260,7 @@ public abstract class BaseController {
         profileService.addSystemProfile(systemProfile);
     }
 
-    private SystemProfile saveProfile(MultipartFile uploadFile, Integer objectId, ProfileType type, String title) throws IOException {
+    protected SystemProfile saveProfile(MultipartFile uploadFile, Integer objectId, ProfileType type, String title) throws IOException {
         if (uploadFile == null || uploadFile.isEmpty()) {
             return null;
         }
@@ -252,9 +269,35 @@ public abstract class BaseController {
         String fileUrl = fileRepository.storeByExt(UPLOAD_PATH, ext, uploadFile);
         fileUrl = fileRepository.resolverFilePath(fileUrl, UPLOAD_PATH);
         int size = (int) uploadFile.getSize();
-        return new SystemProfile(UPLOAD_PREFIX + fileUrl, title, ext, size,
+        return new SystemProfile(fileUrl, title, ext, size,
                 type.getType(), objectId, UserUtils.getUserAccount(), new Date());
 
+    }
+
+    /**
+     * 添加多个附件
+     *
+     * @param uploadProfile
+     * @param objectId
+     * @param type
+     * @throws IOException
+     */
+    public void uploadMultiFiles(UploadProfile uploadProfile, Integer objectId, ProfileType type) throws IOException {
+        MultipartFile[] uploadFiles = uploadProfile.getNewUploadFile();
+        String[] title = uploadProfile.getNewUploadFileTitle();
+        if (ArrayUtil.isEmptyArray(uploadFiles)) {
+            return;
+        }
+        List<SystemProfile> list = new ArrayList<SystemProfile>();
+        for (int i = 0, n = uploadFiles.length; i < n; i++) {
+            SystemProfile systemProfile = saveProfile(uploadFiles[i], objectId, type, title[i]);
+            if (systemProfile != null) {
+                list.add(systemProfile);
+            }
+        }
+        if (!CollectionUtil.isEmpty(list)) {
+            profileService.batchAddSystemProfile(list);
+        }
     }
 
     /**
@@ -267,13 +310,16 @@ public abstract class BaseController {
      * @throws IOException
      */
     public void uploadMultiFiles(MultipartFile[] uploadFiles, Integer objectId, ProfileType type, String[] title) throws IOException {
+
         if (ArrayUtil.isEmptyArray(uploadFiles)) {
             return;
         }
         List<SystemProfile> list = new ArrayList<SystemProfile>();
         for (int i = 0, n = uploadFiles.length; i < n; i++) {
             SystemProfile systemProfile = saveProfile(uploadFiles[i], objectId, type, title[i]);
-            list.add(systemProfile);
+            if (systemProfile != null) {
+                list.add(systemProfile);
+            }
         }
         if (!CollectionUtil.isEmpty(list)) {
             profileService.batchAddSystemProfile(list);
