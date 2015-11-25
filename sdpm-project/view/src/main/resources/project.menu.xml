@@ -150,7 +150,7 @@
     </menu>
     <menu id="survey" parent-id="project" name="概况" href="/project/view" icon="" sort="1" isShow="1">
 
-        <menu id="project-op-all" name="查看所有项目" href="/project/list" icon="icon-list" sort="1" isShow="1"
+        <menu id="project-op-all" name="所有项目" href="/project/list" icon="icon-list" sort="1" isShow="1"
               scope="project-op"/>
         <menu id="project-op-add" name="添加项目" href="/project/form" icon="icon-plus" sort="1" isShow="1"
               scope="project-op"/>
