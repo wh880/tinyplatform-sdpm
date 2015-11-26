@@ -13,7 +13,8 @@ public enum ProfileType {
     RELEASE("release"),
     BUG("bug"),
     ORG("org"),
-    TESTCASE("testCase");
+    TESTCASE("testCase"),
+    BUILD("build");
     private final String type;
 
     ProfileType(String type) {
