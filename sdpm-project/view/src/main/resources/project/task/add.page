@@ -239,3 +239,122 @@
         });
     });
 </script>
+<script>
+
+
+    Date.prototype.format =function(format)
+    {
+        var o = {
+            "M+" : this.getMonth()+1, //month
+            "d+" : this.getDate(), //day
+            "h+" : this.getHours(), //hour
+            "m+" : this.getMinutes(), //minute
+            "s+" : this.getSeconds(), //second
+            "q+" : Math.floor((this.getMonth()+3)/3), //quarter
+            "S" : this.getMilliseconds() //millisecond
+        }
+        if(/(y+)/.test(format)) format=format.replace(RegExp.$1,
+                (this.getFullYear()+"").substr(4- RegExp.$1.length));
+        for(var k in o)if(new RegExp("("+ k +")").test(format))
+            format = format.replace(RegExp.$1,
+                    RegExp.$1.length==1? o[k] :
+                            ("00"+ o[k]).substr((""+ o[k]).length));
+        return format;
+    }
+
+
+    $(document).ready(function(){
+
+        var oldvalue = "";
+        $("input[name='taskEstStared']").bind("click",function(){
+            oldvalue = $(this).val();
+
+        });
+
+        $("input[name='taskEstStared']").bind("blur input propertychange",function(){
+
+            var newvalue = $(this).val();
+
+            if(newvalue!=""&&newvalue!=oldvalue){
+                if($("input[name='endTime']:checked")[0]){
+                    $("input[name='endTime']:checked").trigger('click');
+                }
+
+
+
+            }
+        });
+
+        var oldvalueend = "";
+        $("input[name='taskDeadLine']").bind("click",function(){
+            oldvalueend = $(this).val();
+
+        });
+        $("input[name='taskDeadLine']").bind("blur",function(){
+            var newvalueend = $(this).val();
+            var dateend =new Date(Date.parse(newvalueend.replace(/-/g, "/")));
+            var datestart = new Date(Date.parse($("input[name='taskEstStared']").val().replace(/-/g, "/")));
+
+
+            if(newvalueend!=""&&newvalueend!=oldvalueend){
+
+                if(dateend<=datestart){
+                    $("input[name='taskDeadLine']").val(oldvalueend);
+                    alert("截止日期必须大于开始日期");
+
+                }else{
+                    $("input[name='endTime']:checked").attr("checked",false);
+                }
+
+            }
+        });
+
+
+
+
+        $("input[name='endTime']").each(function(){
+
+            $(this).unbind("click").bind("click",function(){
+
+                var start =	$("input[name='taskEstStared']").val();
+
+
+                if(start!=""){
+                    start = new Date(Date.parse(start.replace(/-/g, "/")));
+
+                    var time = $(this).val();
+                    var end = new Date();
+                    if(time=="one-week"){
+                        end = new Date(start.getFullYear(),start.getMonth(),start.getDate()+7);
+                    }
+                    if(time=="two-week"){
+                        end = new Date(start.getFullYear(),start.getMonth(),start.getDate()+14);
+                    }
+                    if(time=="one-month"){
+                        end = new Date(start.getFullYear(),start.getMonth()+1,start.getDate());
+                    }
+                    if(time=="two-month"){
+                        end = new Date(start.getFullYear(),start.getMonth()+2,start.getDate());
+                    }
+                    if(time=="half-year"){
+                        end = new Date(start.getFullYear(),start.getMonth()+6,start.getDate());
+                    }
+                    if(time=="year"){
+                        end = new Date(start.getFullYear()+1,start.getMonth(),start.getDate());
+                    }
+                    $("input[name='taskDeadLine']").val(end.format("yyyy-MM-dd"));
+                }else{
+                    this.checked=false;
+                    alert("请选择开始日期");
+
+                }
+
+
+            });
+
+        });
+
+
+    });
+
+</script>
