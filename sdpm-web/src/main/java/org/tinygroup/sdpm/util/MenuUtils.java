@@ -31,6 +31,10 @@ public class MenuUtils {
         filterMenu(allChildMenus);
         return allChildMenus;
     }
+    public List<Menu> getAllChildMenusWithoutPermisonFilter(String parentId) {
+        List<Menu> allChildMenus = menuManager.getAllChildMenus(parentId);
+        return allChildMenus;
+    }
 
     public List<Menu> getAllChildMenusWithoutParent(String parentId) {
         List<Menu> childMenus = menuManager.getAllChildMenusWithoutParent(parentId);

@@ -67,8 +67,13 @@
                     <p>${company?.orgCompanyBackyard}</p>
                 #end
             #end
-            <img style="float: right" src="${TINY_CONTEXT_PATH}${company?.orgCompanyLogo}" width="270"
-                 height="80"></img>
+            #@gridSysRow()
+                #@colLabel("col-4")Logo：#end
+                #@gridSysCol(8)
+                    <img src="${TINY_CONTEXT_PATH}${company?.orgCompanyLogo}"  height="80"></img>
+                #end
+            #end
+
 
             <p style="clear:both"></p>
         </div>

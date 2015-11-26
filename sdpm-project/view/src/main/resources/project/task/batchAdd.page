@@ -30,7 +30,7 @@
                 #@thW("50px")ID#end
                 #@thW("150px")所属模块#end
                 #@thW("150px")相关需求#end
-                #@thW("150px")任务名称#end
+                #@thW("150px")<span class="c-red">*</span>任务名称#end
                 #@thW("150px")类型#end
                 #@thW("150px")指派给#end
                 #@thW("150px")<span class="c-red">*</span>预计剩余#end
@@ -69,8 +69,7 @@
                     #end
                     #@td()
                         #tinyInput(
-                            "text" "taskList["+i+"].taskName"""{"placeholder":"","datatype":"*4-16","nullmsg":
-                            "任务名称不能为空！"})
+                            "text" "taskList["+i+"].taskName"""{"placeholder":"","groupName":"taskName"})
                     #end
                     #@td()
                         #@formControlDiv( )
@@ -113,7 +112,7 @@
 
                     #end
                     #@td()
-                        #tinyInput(inputType="text" inputName="taskList["+i+"].taskEstimate"  MapInfo={"datatype":"*","nullmsg":"不能为空"})
+                        #tinyInput("text" "taskList["+i+"].taskEstimate" "" {"groupName":"etime","datatype":"n","ignore":"ignore"})
                     #end
                     #@td()
                         #tinyInput("text" "taskList["+i+"].taskDesc" "")
@@ -121,8 +120,7 @@
                     #@td()
                         #@Tselect2F()
                             #@Tselect2Body(
-                                "taskList["+i+"].taskPri" "" {"class":"input-text select2","datatype":"*4-16","nullmsg":
-                                "不能为空","minimumResultsForSearch":"Infinity"}) ##,"multiple":"multiple"加上为多选项
+                                "taskList["+i+"].taskPri" "" {"class":"input-text select2","minimumResultsForSearch":"Infinity"})
                                 #foreach(item : getDict("taskPri"))
                                     #@tinyOptionItem(item.value)${item.text}#end
                                 #end
@@ -146,8 +144,35 @@
 
 <script type="text/javascript">
     $(function () {
-        $('#${tableId}').on('click', '.delBtn', function (e) {
-            user_del(this, '1');
+        $('form[name=bathAddForm]').Validform({
+            beforeSubmit:function(form){
+                var etimes=$(form).find("input[groupName=etime]");
+                var thisetime;
+                var showBreak=false;
+                $(form).find("input[groupName=taskName]").each(function(index){
+                    thisetime=etimes.eq(index).val()
+                    if($(this).val()){
+                        if(!thisetime){
+                            etimes.eq(index).addClass("Validform_error").get(0).focus();
+                            layer.msg("预计时间不能为空");
+                            showBreak=true;
+                            return false;
+                        }
+                    }else{
+                        if(thisetime){
+                            $(this).addClass("Validform_error").get(0).focus();
+                            layer.msg("任务名称不能为空");
+                            showBreak=true;
+                            return false;
+                        }
+                    }
+                    etimes.eq(index).blur();
+                    $(this).blur();
+                });
+                if(showBreak){
+                    return false;
+                }
+            }
         });
     })
 </script>

@@ -21,7 +21,6 @@ public class ActionUtil {
 		if(StringUtil.isBlank(choice)){
 			return  null;
 		}
-		Date date = new Date();
 		Calendar calendarBegin = Calendar.getInstance();
 		calendarBegin.setTime(new Date());
 		calendarBegin.set(calendarBegin.get(Calendar.YEAR), calendarBegin.get(Calendar.MONTH), calendarBegin.get(Calendar.DATE),0,0,0);
@@ -31,7 +30,7 @@ public class ActionUtil {
 		calendarEnd.set(calendarEnd.get(Calendar.YEAR), calendarEnd.get(Calendar.MONTH), calendarEnd.get(Calendar.DATE),0,0,0);
 
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		Condition dateCon = null;
+		Condition dateCon;
 
 
 		switch (DateChoice.valueOf(DateChoice.class, choice)) {
@@ -77,7 +76,6 @@ public class ActionUtil {
 
 		return dateCon;
 	}
-
 
 }
 

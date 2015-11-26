@@ -9,7 +9,7 @@
         <property name="labelWidth" value="80pt"/>
         <property name="fieldWidth" value="120pt"/>
         <property name="cardWidth" value="200pt"/>
-        <property name="UPLOAD_ACTION_URL" value="/a/org/company/uploadLogo"/>
+        <property name="UPLOAD_ACTION_URL" value="/ajaxUploadImage"/>
         <!--缓存配置-->
         <property name="cache_region" value="sessionCache"></property>
         <property name="cache_manager" value="ehCacheManager"></property>
@@ -57,14 +57,16 @@
             <class-path path="E:\workcode\sdpm\sdpm-project\view\src\main\resources"/>
             <class-path path="E:\workcode\sdpm\sdpm-document\view\src\main\resources\"/>
             <!-- 徐丹洋-->
-            <class-path path="D:\workSpace\sdpm\sdpm-service\view\src\main\resources"/>
-            <class-path path="D:\workSpace\sdpm\sdpm-product\view\src\main\resources"/>
-            <class-path path="D:\workSpace\sdpm\sdpm-quality\view\src\main\resources"/>
-            <class-path path="D:\workSpace\sdpm\sdpm-project\view\src\main\resources"/>
-            <class-path path="D:\workSpace\sdpm\sdpm-system\view\src\main\resources"/>
-            <class-path path="D:\workSpace\sdpm\sdpm-document\view\src\main\resources"/>
-            <class-path path="D:\workSpace\sdpm\sdpm-productLine\view\src\main\resources"/>
-            <class-path path="D:\workSpace\sdpm\sdpm-org\view\src\main\resources"/>
+            <class-path path="D:\javaworkspace\sdpm\sdpm-service\view\src\main\resources"/>
+            <class-path path="D:\javaworkspace\sdpm\sdpm-product\view\src\main\resources"/>
+            <class-path path="D:\javaworkspace\sdpm\sdpm-quality\view\src\main\resources"/>
+            <class-path path="D:\javaworkspace\sdpm\sdpm-project\view\src\main\resources"/>
+            <class-path path="D:\javaworkspace\sdpm\sdpm-system\view\src\main\resources"/>
+            <class-path path="D:\javaworkspace\sdpm\sdpm-document\view\src\main\resources"/>
+            <class-path path="D:\javaworkspace\sdpm\sdpm-productLine\view\src\main\resources"/>
+            <class-path path="D:\javaworkspace\sdpm\sdpm-org\view\src\main\resources"/>
+			<class-path path="D:\javaworkspace\sdpm\sdpm-common\view\src\main\resources"/>
+            <class-path path="D:\javaworkspace\sdpm\sdpm-common\view-uicomponent\src\main\resources"/>
             <!--wll -->
             <class-path path="D:\java\eclipseworkspace\sdpm\sdpm-product\view\src\main\resources"/>
             <class-path path="D:\java\eclipseworkspace\sdpm\sdpm-quality\view\src\main\resources"/>
@@ -478,7 +480,7 @@
         <template-function name="typeInfoFunction"></template-function>
         <template-function name="dictFunction"></template-function>
         <template-function name="stdFunction"></template-function>
-        <!--用户信息工具--> 
+        <!--用户信息工具-->
         <static-class name="UserUtils" class="org.tinygroup.sdpm.util.UserUtils"></static-class>
         <!--数据信息获取工具-->
         <static-class name="CmsUtils" class="org.tinygroup.sdpm.util.CmsUtils"></static-class>
