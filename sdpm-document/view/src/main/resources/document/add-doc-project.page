@@ -95,7 +95,7 @@
     #@elementItem()
         #@colLabel()文档类型#end
         #@skinMinimal("mt-20")
-            #@Tradioes("docType" "2")
+            #@Tradioes("docType" "1")
                 #@Tradio("1")${getDict("docType","1")} #end
                 #@Tradio("2")${getDict("docType","2")} #end
                 #@Tradio("3")${getDict("docType","3")} #end
