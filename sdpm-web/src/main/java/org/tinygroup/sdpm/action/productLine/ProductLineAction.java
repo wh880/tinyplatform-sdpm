@@ -438,5 +438,19 @@ public class ProductLineAction extends BaseController {
         model.addAttribute("productList",products);
         return "/productLine/data/productListData.pagelet";
     }
+
+    @ResponseBody
+    @RequestMapping("ajax/lineInCondition")
+    public List<ProductLine> lineInCondition(String key){
+        if(key.matches("[0-9]+")){
+            return productLineService.getProductLineByIds(Integer.parseInt(key));
+        }
+        List<ProductLine> lineList = productLineService.getUserProductLine(UserUtils.getUserId());
+        Integer[] ids = new Integer[lineList.size()];
+        for(int i = 0; i<ids.length; i++){
+            ids[i] = lineList.get(i).getProductLineId();
+        }
+        return productLineService.lineInCondition(key,ids);
+    }
 }
 

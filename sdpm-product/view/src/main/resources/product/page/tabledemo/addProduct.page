@@ -26,11 +26,9 @@
                     });
                 })
             </script>
-            #@Tselect2Body("productLineId" cookieProductLineId {"class":"input-text select2","nullmsg":"请选择产品线名称！","datatype":"*"})
-                #for(productLine : productLineList)
-                <option value="${productLine?.productLineId}">${productLine?.productLineName}</option>
-                #end
-            #end
+
+        #Tselect2Ajax("productLineId" cookieProductId TINY_CONTEXT_PATH+adminPath+"/productLine/ajax/lineInCondition"
+        {"dataId":"productLineId","dataText":"productLineName","placeholder":"查询数据"})
         #@Tselect2Fix()
                 #set(m=menuManager.getMenu("productLine-add"))
                 #if(m)
