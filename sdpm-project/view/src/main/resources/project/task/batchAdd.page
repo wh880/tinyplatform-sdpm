@@ -1,7 +1,4 @@
 #!set(activeTitle="项目管理",activeMenuId=currentPageId)
-###import("/org/tinygroup/button/components/button_common.component")
-###import("/org/tinygroup/button/components/button.component")
-###import("/org/tinygroup/button/components/button_smart.component")
 #set(name="task")
 <style>
     .open #downMenuSty {
@@ -116,11 +113,8 @@
 
                     #end
                     #@td()
-                        #tinyInput("text" "taskList["+i+"].taskEstimate" "")
+                        #tinyInput(inputType="text" inputName="taskList["+i+"].taskEstimate"  MapInfo={"datatype":"*","nullmsg":"不能为空"})
                     #end
-                ##
-                ##                    <input type="hidden" name="taskList["+i+"].taskLeft" value="${taskList["+i+"].taskLeft}">
-                ##                    <input type="hidden" name="taskList["+i+"].taskConsumed" value="0">
                     #@td()
                         #tinyInput("text" "taskList["+i+"].taskDesc" "")
                     #end
