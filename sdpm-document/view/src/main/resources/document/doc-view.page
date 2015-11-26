@@ -38,7 +38,7 @@
             <p class="titleName">文档URL </p>
             <a href="//${doc?.docUrl}">${doc?.docUrl}</a>
         #elseif(doc?.docType=='1')<p class="titleName">附件 </p>
-            #uploadFileList(file)
+            #uploadFileList(fileList)
 ##            #foreach(f : file)
 ##                #set(path=f?.filePathname)
 ##                <a href="${path}">${f?.fileTitle}.${f?.fileExtension}</a>&nbsp&nbsp&nbsp&nbsp
