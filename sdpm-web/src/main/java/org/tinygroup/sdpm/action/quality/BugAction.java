@@ -480,9 +480,10 @@ public class BugAction extends BaseController {
 
         SystemProfile systemProfile = new SystemProfile();
         systemProfile.setFileObjectId(bug.getBugId());
-        systemProfile.setFileObjectType(ProfileType.TASK.getType());
+        systemProfile.setFileObjectType(ProfileType.BUG.getType());
         List<SystemProfile> fileList = profileService.findSystemProfile(systemProfile);
         model.addAttribute("fileList", fileList);
+
         model.addAttribute("bug", bug);
         return "/testManagement/page/tabledemo/edition.page";
     }
