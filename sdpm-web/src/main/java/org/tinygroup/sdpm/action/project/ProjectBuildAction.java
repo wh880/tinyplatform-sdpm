@@ -63,6 +63,7 @@ public class ProjectBuildAction extends BaseController {
     private ProjectProductService projectProductService;
     @Autowired
     private ProfileService profileService;
+
     @RequiresPermissions("version-menu")
     @RequestMapping("/index")
     public String index(Model model, HttpServletRequest request, HttpServletResponse response) {
@@ -118,12 +119,13 @@ public class ProjectBuildAction extends BaseController {
         if (projectId == null) {
             return redirectProjectForm();
         }
-
-        SystemProfile systemProfile = new SystemProfile();
-        systemProfile.setFileObjectId(buildId);
-        systemProfile.setFileObjectType(ProfileType.BUILD.getType());
-        List<SystemProfile> fileList = profileService.findSystemProfile(systemProfile);
-        model.addAttribute("fileList", fileList);
+        if (buildId != null) {
+            SystemProfile systemProfile = new SystemProfile();
+            systemProfile.setFileObjectId(buildId);
+            systemProfile.setFileObjectType(ProfileType.BUILD.getType());
+            List<SystemProfile> fileList = profileService.findSystemProfile(systemProfile);
+            model.addAttribute("fileList", fileList);
+        }
 
         List<Product> linkProductByProjectId = projectProductService.findLinkProductByProjectId(projectId);
         model.addAttribute("productList", linkProductByProjectId);
@@ -141,12 +143,12 @@ public class ProjectBuildAction extends BaseController {
 
 
     @RequestMapping(value = "/addSave", method = RequestMethod.POST)
-    public String addSave(ProjectBuild build, Model model,UploadProfile uploadProfile) throws IOException {
+    public String addSave(ProjectBuild build, Model model, UploadProfile uploadProfile) throws IOException {
         ProjectBuild temp;
         if (build.getBuildId() == null) {
             build.setBuildBuilder(UserUtils.getUserId());
             temp = buildService.addBuild(build);
-            processProfile(uploadProfile,temp.getBuildId(),ProfileType.BUILD);
+            processProfile(uploadProfile, temp.getBuildId(), ProfileType.BUILD);
             LogUtil.logWithComment(LogUtil.LogOperateObject.BUILD,
                     LogUtil.LogAction.OPENED,
                     String.valueOf(temp.getBuildId()),
@@ -158,7 +160,7 @@ public class ProjectBuildAction extends BaseController {
                     null);
         } else {
             buildService.updateBuild(build);
-            processProfile(uploadProfile,build.getBuildId(),ProfileType.BUILD);
+            processProfile(uploadProfile, build.getBuildId(), ProfileType.BUILD);
             LogUtil.logWithComment(LogUtil.LogOperateObject.BUILD,
                     LogUtil.LogAction.EDITED,
                     String.valueOf(build.getBuildId()),
