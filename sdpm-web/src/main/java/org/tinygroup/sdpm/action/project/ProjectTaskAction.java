@@ -292,7 +292,6 @@ public class ProjectTaskAction extends BaseController {
         }
         LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, LogUtil.LogAction.ASSIGNED, task.getTaskId().toString(), UserUtils.getUserId(),
                 null, oldTask.getTaskProject().toString(), oldTask, task, comment);
-
         return "redirect:" + adminPath + "/project/task/index";
     }
 
@@ -476,11 +475,8 @@ public class ProjectTaskAction extends BaseController {
         model.addAttribute("moduleList", findModuleList(storyId, projectId));
         model.addAttribute("moduleId", moduleId);
         model.addAttribute("teamList", userService.findTeamUserListByProjectId(projectId));
-//        model.addAttribute("storyId", storyId);
         ProductStory story = productStoryService.findStory(storyId);
-//        List<ProductStory> storyList = projectStoryService.findStoryByProject(projectId);
         model.addAttribute("story", story);
-//        model.addAttribute("moduleList", generateModuleList(projectId));
         return "project/task/batchAdd.page";
     }
 
@@ -488,7 +484,7 @@ public class ProjectTaskAction extends BaseController {
     public String batchAddSave(Tasks tasks, HttpServletRequest request) {
         List<ProjectTask> taskList = tasks.getTaskList();
         for (int i = 0; i < taskList.size(); i++) {
-            if (StringUtil.isBlank(taskList.get(i).getTaskName())) {
+            if (StringUtil.isBlank(taskList.get(i).getTaskName()) || null == (taskList.get(i).getTaskEstimate())) {
                 taskList.remove(i);
                 i--;
             } else {
@@ -524,7 +520,6 @@ public class ProjectTaskAction extends BaseController {
             ProjectTask task = taskService.findTask(taskId);
             model.addAttribute("task", task);
         }
-
         SystemProfile systemProfile = new SystemProfile();
         systemProfile.setFileObjectId(taskId);
         systemProfile.setFileObjectType(ProfileType.TASK.getType());
@@ -581,8 +576,6 @@ public class ProjectTaskAction extends BaseController {
         ProductStory productStory = productStoryService.findStory(task.getTaskStory());
         String storyTitle = productStory == null ? "" : productStory.getStoryTitle();
         model.addAttribute("storyTitle", storyTitle);
-
-
         return "project/task/basicInformation.pagelet";
     }
 

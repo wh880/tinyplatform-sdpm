@@ -10,47 +10,11 @@
             您要求的网页无法找到，请联系您的网络管理员或请再试一次。在您的浏览器中，点击 <b>回退</b> 按钮，退回到之前的页面。
         </p>
 
-        <p class="font-md">
-            <b>... 没起作用？那么请尝试以下搜索功能?</b>
-        </p>
-        <br>
-
-        <div class="error-search well well-lg padding-10">
-            <div class="input-group">
-                <input class="form-control input-lg" type="text" placeholder="请重新尝试一次" id="search-error">
-                <span class="input-group-addon"><i class="fa fa-fw fa-lg fa-search"></i></span>
-            </div>
-        </div>
-
         <div class="row">
             <div class="col-sm-12">
                 <ul class="list-inline">
                     <li>
-                        &nbsp;<a href="javascript:void(0);">首页</a>&nbsp;
-                    </li>
-                    <li>
-                        .
-                    </li>
-                    <li>
-                        &nbsp;<a href="javascript:void(0);">图库</a>&nbsp;
-                    </li>
-                    <li>
-                        .
-                    </li>
-                    <li>
-                        &nbsp;<a href="javascript:void(0);">日程表</a>&nbsp;
-                    </li>
-                    <li>
-                        .
-                    </li>
-                    <li>
-                        &nbsp;<a href="javascript:void(0);">统计</a>&nbsp;
-                    </li>
-                    <li>
-                        .
-                    </li>
-                    <li>
-                        &nbsp;<a href="javascript:void(0);">我的主页</a>&nbsp;
+                        &nbsp;<a href="${TINT_CONTENT_PATH+adminPath}/home">我的地盘</a>&nbsp;
                     </li>
                 </ul>
             </div>
