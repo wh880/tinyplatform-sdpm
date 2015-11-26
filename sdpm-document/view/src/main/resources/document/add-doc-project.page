@@ -95,12 +95,12 @@
     #@elementItem()
         #@colLabel()文档类型#end
         #@skinMinimal("mt-20")
-            #labelRadio1(rId="typefile" rName="docType" rChecked="checked" rValue="1"
-                "setType(this.value);" labelText=getDict("docType","1") )
-            #labelRadio1(rId="typeurl" rName="docType" rValue="2" labelText=getDict("docType",
-                "2") "setType(this.value);")
-            #labelRadio1(rId="typetext" rName="docType" rValue="3" labelText=getDict("docType",
-                "3") "setType(this.value);")
+            #@Tradioes("docType" "2")
+                #@Tradio("1")${getDict("docType","1")} #end
+                #@Tradio("2")${getDict("docType","2")} #end
+                #@Tradio("3")${getDict("docType","3")} #end
+            #end
+
         #end
         #@validateDiv("col-2")#end
     #end
@@ -146,7 +146,7 @@
         #@validateDiv("col-2")#end
     #end
 
-    #@elementItem(elementId="fileBox")
+    #@elementItem(elementId="fileBox" eleItemClass="hidden")
         #@colLabel()附件：#end
         #@formControlDiv("col-8")
             #mulUploadFile()
@@ -175,24 +175,32 @@
 #end
     <script type="text/javascript">
         /* Set doc type. */
-        function setType(type) {
-            if (type == '2') {
-                $('#urlBox').removeClass('hidden');
-                $('#fileBox').addClass('hidden');
-                $('#contentBox').addClass('hidden');
-            }
-            else if (type == '3') {
-                $('#urlBox').addClass('hidden');
-                $('#fileBox').addClass('hidden');
-                $('#contentBox').removeClass('hidden');
-            }
-            else {
-                $('#urlBox').addClass('hidden');
-                $('#fileBox').removeClass('hidden');
-                $('#contentBox').addClass('hidden');
-            }
-        }
+
         $(function () {
+            $("[name=docType]").each(function(){
+                $(this).on("change",function(){
+                    var type=$(this).val();
+                    if (type == '2') {
+                        $('#urlBox').removeClass('hidden');
+                        $('#fileBox').addClass('hidden');
+                        $('#contentBox').addClass('hidden');
+                    }
+                    else if (type == '3') {
+                        $('#urlBox').addClass('hidden');
+                        $('#fileBox').addClass('hidden');
+                        $('#contentBox').removeClass('hidden');
+                    }
+                    else {
+                        $('#urlBox').addClass('hidden');
+                        $('#fileBox').removeClass('hidden');
+                        $('#contentBox').addClass('hidden');
+                    }
+                });
+                if(this.checked){
+                    $(this).trigger("change");
+                }
+            })
+
             $("form[name=thisform]").Validform({
                 tiptype: 2
             });

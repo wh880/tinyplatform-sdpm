@@ -171,7 +171,7 @@ public class DocAction extends BaseController {
         doc.setDocDeleted("0");
         doc.setDocAddedBy(UserUtils.getUser().getOrgUserId());
         DocumentDoc document = docservice.createNewDoc(doc);
-        processProfile(uploadProfile, doc.getDocId(), ProfileType.DOCUMENT);
+        processProfile(uploadProfile, document.getDocId(), ProfileType.DOCUMENT);
 
         model.addAttribute("productList", product);
 
