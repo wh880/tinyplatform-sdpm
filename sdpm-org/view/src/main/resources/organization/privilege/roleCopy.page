@@ -6,9 +6,7 @@
             #@gridSysCol(7)
                 #tinyInput(
                     "text" "orgRoleName" role?.orgRoleName {"placeholder":"","datatype":"*","nullmsg":"角色名不能为空！",
-                    "id":"username",
-                    "class":
-                    "input-text"})
+                    "id":"username","class":"input-text"})
             #end
         #end
         #@gridSysRow()

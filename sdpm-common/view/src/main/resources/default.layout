@@ -70,9 +70,10 @@
                         class="fa fa-fullscreen"></i></a>
             </li>
             <li>
+                #set(searchCurrentName=searchCurrentName?:getDict("searchType").get(0).value)
                 #@mulSearchBox(searchCurrentName)
                     #foreach(item : getDict("searchType"))
-                        #menusInfo(item.text item.value)
+                        #menusInfo(item.value item.text)
                     #end
                 #end
             </li>
@@ -85,8 +86,8 @@
                 <ul class="dropdown-menu">
 ##                    <li><a href="javascript:void(0);"><span class="label label-warning pull-right">新的</span>资料文件</a>
 ##                    </li>
-                    <li><a href="${TINY_CONTEXT_PATH+adminPath}/org/user/passwordForm"><i class="dropdown-icon fa icon-key"></i>&nbsp;&nbsp;修改密码</li>
-                    <li><a href="javascript:void(0);"><i class="dropdown-icon fa fa-cog"></i>&nbsp;&nbsp;设置</a></li>
+#@hasMenu("org-user-password")<li><a href="${TINY_CONTEXT_PATH+adminPath}/org/user/passwordForm"><i class="dropdown-icon fa icon-key"></i>&nbsp;&nbsp;修改密码</li>#end
+##                    <li><a href="javascript:void(0);"><i class="dropdown-icon fa fa-cog"></i>&nbsp;&nbsp;修改个人资料</a></li>
                     <li class="divider"></li>
                     <li><a href="${TINY_CONTEXT_PATH}/logout"><i class="dropdown-icon fa fa-power-off"></i>&nbsp;&nbsp;退出</a>
                     </li>

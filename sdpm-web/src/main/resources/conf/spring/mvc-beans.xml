@@ -24,14 +24,15 @@
         <property name="proxyTargetClass" value="true"/>
     </bean>
 
-    <!--<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">-->
-    <!--<property name="exceptionMappings">-->
-    <!--<props>-->
-    <!--<prop key="org.apache.shiro.authz.UnauthorizedException">error/40x.page</prop>-->
-    <!--<prop key="java.lang.Throwable">error/50x.page</prop>-->
-    <!--</props>-->
-    <!--</property>-->
-    <!--</bean>-->
+    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="exceptionMappings">
+            <props>
+                <prop key="org.apache.shiro.authz.UnauthorizedException">error/40x.page</prop>
+                <prop key="java.lang.Throwable">error/50x.page</prop>
+            </props>
+        </property>
+        <property name="warnLogCategory" value="exception"/>
+    </bean>
     <!-- 支持Shiro对Controller的方法级AOP安全控制 end -->
 
     <context:annotation-config/>
@@ -39,7 +40,6 @@
     <!-- 对静态资源文件的访问， 将无法mapping到Controller的path交给default servlet handler处理 -->
     <mvc:default-servlet-handler/>
 
-    <mvc:resources mapping="${userFiles.prefix}/**" location="classpath*:"/>
     <!-- 启动aop的注解解析器-->
     <aop:aspectj-autoproxy/>
 </beans>

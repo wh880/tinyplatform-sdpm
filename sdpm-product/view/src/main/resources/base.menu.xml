@@ -179,20 +179,21 @@
           sort="11" isShow="1" permission="Permission"></menu>
 
     <menu id="product-archive" parent-id="myproduct" name="文档" href="/product/doc/content"
-          scope="liop" sort="10" isShow="1" permission="Permission">
+
+          scope="liop" sort="10" isShow="1">
         <menu id="product-archive-badel" name="批量删除" href="" icon="" sort="9" isShow="1" scope="archive-badel"/>
         <menu id="product-archive-add" name="创建文档" href="" icon="" sort="8" isShow="1" scope="archive-add"/>
         <menu id="product-archive-edit" name="编辑文档" href="/document/doc/edit?docId=${l.docId}" icon="icon-pencil"
-              sort="7"
-              isShow="1" scope="archive-oper"/>
+
+
+              sort="7" isShow="1" scope="product-file-op"/>
         <menu id="product-archive-del" name="删除文档" href="/document/doc/delete?docId=${l.docId}" icon="icon-remove"
-              sort="6" isShow="1" scope="archive-oper"/>
+              sort="6" isShow="1" scope="product-file-op"/>
     </menu>
 
     <menu id="product-project" parent-id="myproduct" name="项目" href="/product/project/content"
-          sort="9" isShow="1" permission="Permission"></menu>
 
-
+          sort="9" isShow="1" permission="Permission"/>
 
     <menu id="product-overview" parent-id="myproduct" name="概况" href="/product/find/overview" sort="8"
           isShow="1" permission="Permission">
@@ -200,7 +201,9 @@
     </menu>
 
     <menu id="product-dynamic" parent-id="myproduct" name="动态" href="/product/dynamic/content" sort="7"
-          isShow="1" permission="Permission">
+
+          isShow="1">
+
         <menu id="allproduct" name="所有产品" href="/product/allproduct/addition" sort="6"
               isShow="1" permission="Permission" scope="product-menu" icon="icon-globe"></menu>
 

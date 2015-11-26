@@ -126,6 +126,7 @@
             </div>
             <div class="infoContent">
                 <p class="titleName">附件</p>
+                <div>#uploadFileList(file) </div>
                 #foreach(f:file)
                     #set(path=f?.filePathname)
                     <a href="${TINY_CONTEXT_PATH+path}">${f?.fileTitle}.${f?.fileExtension}</a>&nbsp&nbsp&nbsp&nbsp

@@ -5,11 +5,7 @@
 #import("/org/tinygroup/table/components/table.component")
 #import("/org/tinygroup/icon/components/icon.component")
 
-
-
 #set(name="task")
-
-
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
         #@div(divClass="dropdownBox")
@@ -24,10 +20,8 @@
     #end
 #end
 
-###macro tinyForm(formname action method formMapInfo)
 #@tinyForm(
-    "thisform" TINY_CONTEXT_PATH+adminPath+"/project/task/editsave" "post" {"class":"test","enctype":
-    "multipart/form-data"})
+    "thisform" TINY_CONTEXT_PATH+adminPath+"/project/task/editsave" "post" {"class":"test","enctype":"multipart/form-data"})
     #hiddenInput(hiddenInputName="taskId" hiddenInputValue=task?.taskId)
     #hiddenInput(hiddenInputName="taskProject" hiddenInputValue=task?.taskProject)
     #hiddenInput(hiddenInputName="taskLastEditedBy" hiddenInputValue=UserUtils.getUserId())

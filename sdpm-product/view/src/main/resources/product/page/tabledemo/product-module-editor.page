@@ -53,7 +53,7 @@
 
             #@Tselect2Fix()
                 #@hasMenu("productLine-add")
-                    <a href="${TINY_CONTEXT_PATH}/a/productLine/content/add">加</a>
+                    <a href="${TINY_CONTEXT_PATH}/a/productLine/content/add">增加</a>
                 #end
                 #@hasMenu("productLine")
                     <a href="${TINY_CONTEXT_PATH}/a/productLine/all" class="r">全部</a>
@@ -156,7 +156,7 @@
         #@Tselect2F()
             #@Tselect2Body("productStatus" product?.productStatus {"class":
                 "input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                #for(v　: getDict("productStatus"))
+                #for(v:getDict("productStatus"))
                 <option value="${v.value}">${v.text}</option>
                 #end
             #end
@@ -219,7 +219,7 @@
     </div>
 #end
 
-#end
+
     <br/>
 
     <script type="text/javascript">

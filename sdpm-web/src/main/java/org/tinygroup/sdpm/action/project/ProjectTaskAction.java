@@ -70,7 +70,10 @@ public class ProjectTaskAction extends BaseController {
     @Autowired
     private ProfileService profileService;
 
-//    @ModelAttribute
+    @ModelAttribute
+    public void init(Model model) {
+        initSearchBar(model, "任务");
+    }
 
 
     @RequiresPermissions(value = {"project", "task"}, logical = Logical.OR)
@@ -155,7 +158,7 @@ public class ProjectTaskAction extends BaseController {
                 task.getTaskId().toString(), UserUtils.getUserId(),
                 null, task.getTaskProject().toString(), null, null, comment);
         try {
-            processProfile(uploadProfile,task.getTaskId(), ProfileType.TASK);
+            processProfile(uploadProfile, task.getTaskId(), ProfileType.TASK);
         } catch (IOException e) {
             logger.logMessage(LogLevel.ERROR, "上传文件文件出错，请求路径{}", e, request.getRequestURI());
         }
@@ -199,7 +202,7 @@ public class ProjectTaskAction extends BaseController {
      */
     @RequestMapping(value = "/editsave", method = RequestMethod.POST)
     public String editSave(ProjectTask task, Model model, String contents,
-                            UploadProfile uploadProfile) throws IOException {
+                           UploadProfile uploadProfile) throws IOException {
         ProjectTask oldTask = taskService.findTask(task.getTaskId());
         taskService.updateEditTask(task);
         processProfile(uploadProfile, task.getTaskId(), ProfileType.TASK);
@@ -289,7 +292,6 @@ public class ProjectTaskAction extends BaseController {
         }
         LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, LogUtil.LogAction.ASSIGNED, task.getTaskId().toString(), UserUtils.getUserId(),
                 null, oldTask.getTaskProject().toString(), oldTask, task, comment);
-
         return "redirect:" + adminPath + "/project/task/index";
     }
 
@@ -473,11 +475,8 @@ public class ProjectTaskAction extends BaseController {
         model.addAttribute("moduleList", findModuleList(storyId, projectId));
         model.addAttribute("moduleId", moduleId);
         model.addAttribute("teamList", userService.findTeamUserListByProjectId(projectId));
-//        model.addAttribute("storyId", storyId);
         ProductStory story = productStoryService.findStory(storyId);
-//        List<ProductStory> storyList = projectStoryService.findStoryByProject(projectId);
         model.addAttribute("story", story);
-//        model.addAttribute("moduleList", generateModuleList(projectId));
         return "project/task/batchAdd.page";
     }
 
@@ -485,7 +484,7 @@ public class ProjectTaskAction extends BaseController {
     public String batchAddSave(Tasks tasks, HttpServletRequest request) {
         List<ProjectTask> taskList = tasks.getTaskList();
         for (int i = 0; i < taskList.size(); i++) {
-            if (StringUtil.isBlank(taskList.get(i).getTaskName())) {
+            if (StringUtil.isBlank(taskList.get(i).getTaskName()) || null == (taskList.get(i).getTaskEstimate())) {
                 taskList.remove(i);
                 i--;
             } else {
@@ -513,7 +512,7 @@ public class ProjectTaskAction extends BaseController {
                 List<ProjectTask> listTask = taskService.findListTask(projectTask);
                 if (!CollectionUtil.isEmpty(listTask)) {
                     model.addAttribute("task", listTask.get(0));
-                }else {
+                } else {
                     return notFoundView();
                 }
             }
@@ -521,6 +520,12 @@ public class ProjectTaskAction extends BaseController {
             ProjectTask task = taskService.findTask(taskId);
             model.addAttribute("task", task);
         }
+        SystemProfile systemProfile = new SystemProfile();
+        systemProfile.setFileObjectId(taskId);
+        systemProfile.setFileObjectType(ProfileType.TASK.getType());
+        List<SystemProfile> profileList = profileService.findSystemProfile(systemProfile);
+        model.addAttribute("profileList", profileList);
+
         return "project/task/view";
     }
 
@@ -639,6 +644,13 @@ public class ProjectTaskAction extends BaseController {
     @RequestMapping("/gantt/find")
     public String ganttFind(Integer id, Model model) {
         ProjectTask task = taskService.findTask(id);
+
+        SystemProfile systemProfile = new SystemProfile();
+        systemProfile.setFileObjectId(id);
+        systemProfile.setFileObjectType(ProfileType.TASK.getType());
+        List<SystemProfile> fileList = profileService.findSystemProfile(systemProfile);
+        model.addAttribute("fileList", fileList);
+
         model.addAttribute("task", task);
         return "project/task/ganttFind.pagelet";
     }

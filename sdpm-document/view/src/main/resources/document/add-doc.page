@@ -16,8 +16,6 @@
 #include("doc-tab.page")
 #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/document/doc/addSave" "post" {"class":"add","enctype":
     "multipart/form-data"})
-#*<input type="hidden" name="docLibId" value="${doc?.docLibId}"/>
-<input type="hidden" name="docId" value="${doc?.docId}"/>*#
 <div style="width:100%">
 <div class="infoContent">
     <p class="titleName">创建文档</p>
@@ -94,8 +92,7 @@
     #@elementItem(elementId="fileBox")
         #@colLabel()附件：#end
         #@formControlDiv("col-8")
-            #include("fileupload.page")
-        #*					#tinyUploadInput("inputName" "" {"placeholder":"可直接输入地址，也可点击下图标进行上传"})*#
+            #mulUploadFile()
         #end
         #@validateDiv("col-2")#end
     #end

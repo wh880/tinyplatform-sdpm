@@ -13,6 +13,7 @@ import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SqlUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
+import org.tinygroup.sdpm.dto.UploadProfile;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
@@ -25,15 +26,17 @@ import org.tinygroup.sdpm.project.service.inter.ProjectProductService;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.sdpm.project.service.inter.ProjectStoryService;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
+import org.tinygroup.sdpm.system.dao.pojo.ProfileType;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
-import org.tinygroup.sdpm.util.CookieUtils;
-import org.tinygroup.sdpm.util.LogUtil;
+import org.tinygroup.sdpm.util.CookieUtils;import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;
+import org.tinygroup.sdpm.system.service.inter.ProfileService;import org.tinygroup.sdpm.util.LogUtil;
 import org.tinygroup.sdpm.util.ProjectUtils;
 import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -58,6 +61,8 @@ public class ProjectBuildAction extends BaseController {
     private ProjectStoryService projectStoryService;
     @Autowired
     private ProjectProductService projectProductService;
+    @Autowired
+    private ProfileService profileService;
 
     @RequiresPermissions("version-menu")
     @RequestMapping("/index")
@@ -114,6 +119,13 @@ public class ProjectBuildAction extends BaseController {
         if (projectId == null) {
             return redirectProjectForm();
         }
+        if (buildId != null) {
+            SystemProfile systemProfile = new SystemProfile();
+            systemProfile.setFileObjectId(buildId);
+            systemProfile.setFileObjectType(ProfileType.BUILD.getType());
+            List<SystemProfile> fileList = profileService.findSystemProfile(systemProfile);
+            model.addAttribute("fileList", fileList);
+        }
 
         List<Product> linkProductByProjectId = projectProductService.findLinkProductByProjectId(projectId);
         model.addAttribute("productList", linkProductByProjectId);
@@ -131,11 +143,13 @@ public class ProjectBuildAction extends BaseController {
 
 
     @RequestMapping(value = "/addSave", method = RequestMethod.POST)
-    public String addSave(ProjectBuild build, Model model) {
+
+    public String addSave(ProjectBuild build, Model model, UploadProfile uploadProfile) throws IOException {
         ProjectBuild temp;
         if (build.getBuildId() == null) {
             build.setBuildBuilder(UserUtils.getUserId());
             temp = buildService.addBuild(build);
+            processProfile(uploadProfile, temp.getBuildId(), ProfileType.BUILD);
             LogUtil.logWithComment(LogUtil.LogOperateObject.BUILD,
                     LogUtil.LogAction.OPENED,
                     String.valueOf(temp.getBuildId()),
@@ -147,6 +161,7 @@ public class ProjectBuildAction extends BaseController {
                     null);
         } else {
             buildService.updateBuild(build);
+            processProfile(uploadProfile, build.getBuildId(), ProfileType.BUILD);
             LogUtil.logWithComment(LogUtil.LogOperateObject.BUILD,
                     LogUtil.LogAction.EDITED,
                     String.valueOf(build.getBuildId()),
@@ -224,29 +239,8 @@ public class ProjectBuildAction extends BaseController {
         return resultMap(true, "删除成功");
     }
 
-//    @RequiresPermissions("pro-version-report")
-//    @RequestMapping("/add")
-//    public String add(HttpServletRequest request, HttpServletResponse response, Integer buildId, Model model) {
-//
-//        Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
-//        if (projectId == null) {
-//            return redirectProjectForm();
-//        }
-//        SystemModule module = new SystemModule();
-//        module.setModuleType("project");
-//        module.setModuleRoot(projectId);
-//        List<Product> list = productService.findProductList(new Product(), "productId", "desc");
-//        model.addAttribute("teamList", userService.findTeamUserListByProjectId(projectId));
-//        model.addAttribute("prodcutList", list);
-//        if (buildId != null && buildId != 0) {
-//            ProjectBuild build = buildService.findBuild(buildId);
-//            model.addAttribute("build", build);
-//
-//        } else {
-//            model.addAttribute("build", null);
-//        }
-//        return "project/build/add.page";
-//    }
+
+
 
     @RequestMapping("/productalbug")
     public String productalbug(Integer buildId, Model model) {
@@ -277,10 +271,11 @@ public class ProjectBuildAction extends BaseController {
             return "project/task/relation-release/product-al-le-bug.page";
         } else if ("alnoReq".equals(forwordPager)) {
             return "project/task/relation-release/product-al-no-req.page";
-        } else if ("alReq".equals(forwordPager)) {
+
+        } else /* ("alReq".equals(forwordPager)) */{
             return "project/task/relation-release/product-al-req.page";
         }
-        return "";
+
     }
 
 

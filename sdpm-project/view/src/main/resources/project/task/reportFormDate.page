@@ -45,7 +45,7 @@
                     #end
                     #foreach(list : map.get(key))
                         #@centerAlignTr()
-                            #@td()${list?.title}#end
+                            #@td()${list.title?list.title:"（未指定）"}#end
                             #@td()${list?.taskCount}#end
                             #@td()
                                 ${fmt("%1.1f",1.0*list?.taskCount*100/sum)}%

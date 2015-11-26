@@ -86,6 +86,11 @@ public class BugAction extends BaseController {
     @Autowired
     private TestCaseService testCaseService;
 
+    @ModelAttribute
+    public void init(Model model) {
+        initSearchBar(model, "Bug");
+    }
+
     @RequestMapping("")
     public String form(QualityBug bug, Model model, HttpServletRequest request) {
         String queryString = request.getQueryString();
@@ -475,9 +480,10 @@ public class BugAction extends BaseController {
 
         SystemProfile systemProfile = new SystemProfile();
         systemProfile.setFileObjectId(bug.getBugId());
-        systemProfile.setFileObjectType(ProfileType.TASK.getType());
+        systemProfile.setFileObjectType(ProfileType.BUG.getType());
         List<SystemProfile> fileList = profileService.findSystemProfile(systemProfile);
         model.addAttribute("fileList", fileList);
+
         model.addAttribute("bug", bug);
         return "/testManagement/page/tabledemo/edition.page";
     }

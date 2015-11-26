@@ -103,7 +103,7 @@ public class StoryAction extends BaseController {
             return "redirect:" + adminPath + "/product/story?choose=1&"
                     + queryString;
         }
-        if(queryString == null){
+        if (queryString == null) {
             return "redirect:" + adminPath + "/product/story?choose=1";
         }
 
@@ -119,11 +119,11 @@ public class StoryAction extends BaseController {
      */
     @RequiresPermissions("pro-demand-add")
     @RequestMapping("/addstory")
-    public String addStory( HttpServletRequest request, Model model, String lastAddress) {
+    public String addStory(HttpServletRequest request, Model model, String lastAddress) {
         List<ServiceRequest> requests = requestService.getRequestList(null);
-        model.addAttribute("requestList",requests);
-        if(!StringUtil.isBlank(lastAddress)){
-            return "redirect:"+lastAddress;
+        model.addAttribute("requestList", requests);
+        if (!StringUtil.isBlank(lastAddress)) {
+            return "redirect:" + lastAddress;
         }
         return "/product/page/tabledemo/product-demand-add.page";
     }
@@ -147,16 +147,16 @@ public class StoryAction extends BaseController {
             ProductStory productStory,
             ProductStorySpec storySpec,
             @RequestParam(value = "file", required = false) MultipartFile[] file,
-            String[] title, HttpServletRequest request,UploadProfile uploadProfile) throws IOException {
-        if(productStory.getPlanId()!=null&&productStory.getPlanId()>0){
+            String[] title, HttpServletRequest request, UploadProfile uploadProfile) throws IOException {
+        if (productStory.getPlanId() != null && productStory.getPlanId() > 0) {
             productStory.setStoryStage("2");
-        }else{
+        } else {
             productStory.setStoryStage("1");
         }
         productStory.setProductId(Integer.parseInt(cookieProductId));
-        if("0".equals(productStory.getStoryReviewedBy())){
+        if ("0".equals(productStory.getStoryReviewedBy())) {
             productStory.setStoryStatus("1");
-        }else{
+        } else {
             productStory.setStoryStatus("0");
         }
         productStory.setStoryVersion(1);
@@ -197,7 +197,7 @@ public class StoryAction extends BaseController {
     @ResponseBody
     @RequestMapping("/ajax/plan")
     public List<ProductPlan> getPlan(ProductPlan productPlan) {
-        if(productPlan.getProductId()==null||productPlan.getProductId()<1)return new ArrayList<ProductPlan>();
+        if (productPlan.getProductId() == null || productPlan.getProductId() < 1) return new ArrayList<ProductPlan>();
         productPlan.setDeleted(0);
         List<ProductPlan> productPlans = planService.findPlanList(productPlan);
         return productPlans;
@@ -208,38 +208,30 @@ public class StoryAction extends BaseController {
      *
      * @param systemAction
      * @param productStory
-     * @param file
-     * @param title
      * @return
      * @throws IOException
      */
     @RequestMapping("/update")
-    public String update(
-            SystemAction systemAction,
-            ProductStory productStory,
-            ProductStorySpec productStorySpec,
-            @RequestParam(value = "file", required = false) MultipartFile[] file,
-            String lastAddress,
-            String[] title, UploadProfile uploadProfile) throws IOException {
+    public String update(SystemAction systemAction, ProductStory productStory,
+                         String lastAddress, UploadProfile uploadProfile) throws IOException {
         ProductStory story = storyService.findStory(productStory.getStoryId());
         productStory.setStoryLastEditedBy(UserUtils.getUser().getOrgUserId());
         productStory.setStoryLastEditedDate(new Date());
-        if(story.getStoryStatus()=="1"){
-            if(productStory.getPlanId()!=null&&productStory.getPlanId()>0){
+        if (story.getStoryStatus() == "1") {
+            if (productStory.getPlanId() != null && productStory.getPlanId() > 0) {
                 productStory.setStoryStage("2");
             }
         }
+        processProfile(uploadProfile, productStory.getStoryId(), ProfileType.STORY);
         storyService.updateStory(productStory);
-
-        processProfile(uploadProfile, story.getStoryId(), ProfileType.STORY);
 
         LogUtil.logWithComment(LogUtil.LogOperateObject.STORY,
                 LogUtil.LogAction.EDITED,
                 String.valueOf(productStory.getStoryId()),
                 UserUtils.getUserId(), String.valueOf(story.getProductId()),
                 null, story, productStory, systemAction.getActionComment());
-        if(!StringUtil.isBlank(lastAddress)){
-            return "redirect:"+lastAddress;
+        if (!StringUtil.isBlank(lastAddress)) {
+            return "redirect:" + lastAddress;
         }
         return "redirect:" + "/a/product/story";
     }
@@ -378,8 +370,8 @@ public class StoryAction extends BaseController {
         ProductStorySpec storySpec = new ProductStorySpec();
         storySpec.setStoryId(storyId);
         storySpec.setStoryVersion(productStory.getStoryVersion());
-        List<ProductStorySpec> storySpecs = storySpecService.findStorySpecList(storySpec,null,null);
-        storySpec = storySpecs!=null&&storySpecs.size()>0?storySpecs.get(0):new ProductStorySpec();
+        List<ProductStorySpec> storySpecs = storySpecService.findStorySpecList(storySpec, null, null);
+        storySpec = storySpecs != null && storySpecs.size() > 0 ? storySpecs.get(0) : new ProductStorySpec();
         List<ProductStory> stories = storyService.findProductName(storyId);
 
         QualityTestCase testCase = new QualityTestCase();
@@ -390,7 +382,7 @@ public class StoryAction extends BaseController {
         QualityBug bug = new QualityBug();
         bug.setStoryId(storyId);
         List<QualityBug> bugList = bugService.findBugList(bug);
-        if(!StringUtil.isBlank(productStory.getStoryMailto())){
+        if (!StringUtil.isBlank(productStory.getStoryMailto())) {
             List<OrgUser> userList = userService.findUserListByIds(productStory.getStoryMailto().split(","));
             model.addAttribute("storyMailTo", userList);
         }
@@ -426,7 +418,7 @@ public class StoryAction extends BaseController {
             testCase.setDeleted(0);
             testCase.setStoryId(storyId);
             List<QualityTestCase> testCases = testCaseService.findTestCaseList(testCase);
-            model.addAttribute("caseList",testCases);
+            model.addAttribute("caseList", testCases);
             return "/product/page/tabledemo/hrefbaseinfo.pagelet";
         }
 
@@ -454,13 +446,13 @@ public class StoryAction extends BaseController {
             UploadProfile uploadProfile) throws IOException {
         Integer maxVersion = storySpecService.getMaxVersion(productStory.getStoryId());
         ProductStory story = storyService.findStory(productStory.getStoryId());
-        if(productStory.getStoryReviewedBy().equals("0")){
+        if (productStory.getStoryReviewedBy().equals("0")) {
             productStory.setStoryStatus("1");
             productStory.setStoryReviewedBy(null);
-        }else {
+        } else {
             productStory.setStoryStatus("3");
         }
-        productStory.setStoryVersion(maxVersion==null?1:maxVersion+1);
+        productStory.setStoryVersion(maxVersion == null ? 1 : maxVersion + 1);
         storyService.updateStory(productStory);
         storySpec.setStoryVersion(productStory.getStoryVersion());
         storySpecService.add(storySpec);
@@ -484,11 +476,11 @@ public class StoryAction extends BaseController {
      * @throws IOException
      */
     @RequestMapping("/reviewed")
-    public String reviewed(SystemAction systemAction,Integer reviewRequest, ProductStory productStory)
+    public String reviewed(SystemAction systemAction, Integer reviewRequest, ProductStory productStory)
             throws IOException {
-        if(reviewRequest==0){
+        if (reviewRequest == 0) {
             productStory.setStoryStatus("1");
-        }else if(reviewRequest==2){
+        } else if (reviewRequest == 2) {
             productStory.setStoryStatus("4");
         }
         ProductStory story = storyService.findStory(productStory.getStoryId());
@@ -528,8 +520,7 @@ public class StoryAction extends BaseController {
     /**
      * 实现了需求的搜索按钮功能
      *
-
-     * @param start         当前页
+     * @param start        当前页
      * @param pagesize     每页数量
      * @param story        需求对象
      * @param choose
@@ -543,21 +534,21 @@ public class StoryAction extends BaseController {
      */
     @RequestMapping("/search")
 
-    public String storySearchAction(@CookieValue(value = "cookieProductId",defaultValue = "0") String cookieProductId, int start, int pagesize, ProductStory story,
+    public String storySearchAction(@CookieValue(value = "cookieProductId", defaultValue = "0") String cookieProductId, int start, int pagesize, ProductStory story,
                                     String type, String choose, String groupOperate,
                                     SearchInfos searchInfos, String order, String ordertype,
                                     Model model, HttpServletRequest request) {
-        if(!"2".equals(choose)&&!"11".equals(choose)){
+        if (!"2".equals(choose) && !"11".equals(choose)) {
             story.setDeleted(0);
         }
-        if(story.getProductId()==null||story.getProductId()==0) {
+        if (story.getProductId() == null || story.getProductId() == 0) {
             story.setProductId(Integer.parseInt(cookieProductId));
         }
         ConditionCarrier carrier = new ConditionCarrier();
         String condition = StoryUtil.getStatusCondition(choose);
-        carrier.putStatus("status",condition);
+        carrier.putStatus("status", condition);
         if (story.getModuleId() != null && story.getModuleId() > 0) {
-            carrier.putModuleIn("productStory.moduleId",String.valueOf(story.getModuleId()));
+            carrier.putModuleIn("productStory.moduleId", String.valueOf(story.getModuleId()));
         }
         story.setModuleId(null);
 
@@ -566,14 +557,14 @@ public class StoryAction extends BaseController {
             testCase.setProductId(story.getProductId());
             List<Integer> list = testCaseService.getStoryIds(testCase);
             String[] ids = new String[list.size()];
-            for(int i=0; i<list.size(); i++) {
+            for (int i = 0; i < list.size(); i++) {
                 ids[i] = String.valueOf(list.get(i));
             }
-            carrier.putIdNotIn("productStory.storyId",ids);
+            carrier.putIdNotIn("productStory.storyId", ids);
         }
-        carrier.putSearch("search",searchInfos,groupOperate);
+        carrier.putSearch("search", searchInfos, groupOperate);
 
-        Pager<ProductStory> p = storyService.findStoryByCondition(start, pagesize, story, carrier,order, "asc".equals(ordertype) ? true : false);
+        Pager<ProductStory> p = storyService.findStoryByCondition(start, pagesize, story, carrier, order, "asc".equals(ordertype) ? true : false);
         model.addAttribute("storyList", p);
 
         return "product/data/tabledata.pagelet";
@@ -597,18 +588,18 @@ public class StoryAction extends BaseController {
      */
     @RequestMapping("/search/{relate}")
     public String storyListAction(@CookieValue("cookieProductId") String cookieProductId,
-            @PathVariable(value = "relate") String relate,
-            int start,
-            int pagesize,
-            String type,
-            Integer releaseId,
-            ProductStory story,
-            String choose,
-            String groupOperate,
-            SearchInfos searchInfos,
-            @RequestParam(required = false, defaultValue = "storyId") String order,
-            @RequestParam(required = false, defaultValue = "asc") String ordertype,
-            Model model, HttpServletRequest request) {
+                                  @PathVariable(value = "relate") String relate,
+                                  int start,
+                                  int pagesize,
+                                  String type,
+                                  Integer releaseId,
+                                  ProductStory story,
+                                  String choose,
+                                  String groupOperate,
+                                  SearchInfos searchInfos,
+                                  @RequestParam(required = false, defaultValue = "storyId") String order,
+                                  @RequestParam(required = false, defaultValue = "asc") String ordertype,
+                                  Model model, HttpServletRequest request) {
 
 
         story.setProductId(Integer.parseInt(cookieProductId));
@@ -639,18 +630,18 @@ public class StoryAction extends BaseController {
             ProductRelease release = releaseService.findRelease(releaseId);
             if (release != null) {
                 String releaseStories = release.getReleaseStories();
-                String inCondition = StringUtil.isBlank(releaseStories)?"":releaseStories;
+                String inCondition = StringUtil.isBlank(releaseStories) ? "" : releaseStories;
                 if ("noWork".equals(type)) {
-                    if(!StringUtil.isBlank(inCondition)){
+                    if (!StringUtil.isBlank(inCondition)) {
                         condition = (StringUtil.isBlank(condition.trim()) ? " " : (condition + " and ")) + "product_story.story_id not in (" + inCondition + ") ";
                     }
                     p = storyService.findProjectLinkedStory(start,
                             pagesize, story, condition, order,
                             "asc".equals(ordertype) ? true : false);
-                }else{
-                    if(StringUtil.isBlank(inCondition)){
-                        p = new Pager<ProductStory>(0,0,new ArrayList<ProductStory>());
-                    }else {
+                } else {
+                    if (StringUtil.isBlank(inCondition)) {
+                        p = new Pager<ProductStory>(0, 0, new ArrayList<ProductStory>());
+                    } else {
                         condition = (StringUtil.isBlank(condition.trim()) ? " " : (condition + " and ")) + "product_story.story_id in (" + inCondition + ")";
                         p = storyService.findPager(start,
                                 pagesize, story, condition, order,
@@ -686,7 +677,7 @@ public class StoryAction extends BaseController {
      * @return 返回数据集合
      */
     @RequestMapping("/bugSearch/{relate}")
-    public String bugListAction(@CookieValue(value = "cookieProductId",defaultValue = "0") String cookieProductId,@PathVariable(value = "relate") String relate,
+    public String bugListAction(@CookieValue(value = "cookieProductId", defaultValue = "0") String cookieProductId, @PathVariable(value = "relate") String relate,
                                 int page,
                                 int pagesize,
                                 Integer releaseId,
@@ -697,7 +688,7 @@ public class StoryAction extends BaseController {
                                 String type,
                                 @RequestParam(required = false, defaultValue = "asc") String ordertype,
                                 Model model, HttpServletRequest request) {
-        if(Integer.parseInt(cookieProductId)>0) {
+        if (Integer.parseInt(cookieProductId) > 0) {
             bug.setProductId(Integer.parseInt(cookieProductId));
         }
         String condition = "";
@@ -727,25 +718,25 @@ public class StoryAction extends BaseController {
             if (release != null) {
                 bug.setBugOpenedBuild(String.valueOf(release.getBuildId()));
                 String releaseBugs = release.getReleaseBugs();
-                String inCondition = StringUtil.isBlank(releaseBugs)?"":releaseBugs;
+                String inCondition = StringUtil.isBlank(releaseBugs) ? "" : releaseBugs;
                 if ("reRelateBugRelease".equals(relate)) {
-                    if(StringUtil.isBlank(inCondition)){
-                        p = new Pager<QualityBug>(0,0,new ArrayList<QualityBug>());
-                    }else{
-                        condition = (StringUtil.isBlank(condition.trim()) ? " " : (condition + " and ")) + "quality_bug.bug_id in (" + inCondition+ ")";
+                    if (StringUtil.isBlank(inCondition)) {
+                        p = new Pager<QualityBug>(0, 0, new ArrayList<QualityBug>());
+                    } else {
+                        condition = (StringUtil.isBlank(condition.trim()) ? " " : (condition + " and ")) + "quality_bug.bug_id in (" + inCondition + ")";
                         p = bugService.findBugListPager(
                                 pagesize * (page - 1), pagesize, condition, bug, order,
                                 "asc".equals(ordertype) ? true : false);
                     }
-                }else if("noRelateBugRelease".equals(relate)){
+                } else if ("noRelateBugRelease".equals(relate)) {
                     bug.setBugStatus("2");
-                    if(!StringUtil.isBlank(inCondition)){
+                    if (!StringUtil.isBlank(inCondition)) {
                         condition = (StringUtil.isBlank(condition.trim()) ? " " : (condition + " and ")) + "quality_bug.bug_id not in (" + inCondition + ") ";
                     }
                     p = bugService.findBugListPager(
                             pagesize * (page - 1), pagesize, condition, bug, order,
                             "asc".equals(ordertype) ? true : false);
-                }else{
+                } else {
                     bug.setBugStatus("1");
                     p = bugService.findBugListPager(
                             pagesize * (page - 1), pagesize, condition, bug, order,
@@ -779,17 +770,17 @@ public class StoryAction extends BaseController {
     @ResponseBody
     @RequestMapping("/storyList")
     public List<ProductStory> findStory(ProductStory story) {
-        if(story.getProductId()==null||story.getProductId()==0)return new ArrayList<ProductStory>();
-        Integer storyId= null;
-        if(story.getStoryId()!=null){
+        if (story.getProductId() == null || story.getProductId() == 0) return new ArrayList<ProductStory>();
+        Integer storyId = null;
+        if (story.getStoryId() != null) {
             storyId = story.getStoryId();
             story.setStoryId(null);
         }
         story.setDeleted(0);
         List<ProductStory> list = storyService.findStoryList(story);
-        if(storyId!=null){
-            for(ProductStory productStory : list){
-                if(productStory.getStoryId()==storyId){
+        if (storyId != null) {
+            for (ProductStory productStory : list) {
+                if (productStory.getStoryId() == storyId) {
                     list.remove(productStory);
                     break;
                 }
@@ -842,10 +833,10 @@ public class StoryAction extends BaseController {
     @RequestMapping("/report")
     public String report(
             @CookieValue("cookieProductId") String cookieProductId,
-            ProductStory story, String chexkitem, Model model,HttpServletRequest request) {
+            ProductStory story, String chexkitem, Model model, HttpServletRequest request) {
 
-    	story.setProductId(Integer.parseInt(cookieProductId));
-        Map<String, List<StoryCount>> map = storyService.report(chexkitem,story);
+        story.setProductId(Integer.parseInt(cookieProductId));
+        Map<String, List<StoryCount>> map = storyService.report(chexkitem, story);
         model.addAttribute("map", map);
         model.addAttribute("fields", chexkitem);
         return "/product/page/tabledemo/product-report.page";
@@ -956,9 +947,9 @@ public class StoryAction extends BaseController {
     @RequestMapping("/findcopy")
     public String findcopy(Integer storyId, Model model) {
         ProductStory productStory = storyService.findStory(storyId);
-        ProductStorySpec storySpec = storySpecService.findStorySpec(storyId,productStory.getStoryVersion());
+        ProductStorySpec storySpec = storySpecService.findStorySpec(storyId, productStory.getStoryVersion());
         List<ServiceRequest> requests = requestService.getRequestList(null);
-        model.addAttribute("requestList",requests);
+        model.addAttribute("requestList", requests);
         model.addAttribute("story", productStory);
         model.addAttribute("storySpec", storySpec);
         return "/product/page/tabledemo/product-demand-copy.page";
@@ -966,7 +957,7 @@ public class StoryAction extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "/judgeStoryName")
-    public Map judgeStoryName(String param,Integer storyId, Integer productId) {
+    public Map judgeStoryName(String param, Integer storyId, Integer productId) {
         if (param != null) {
             String storyName = param;
             ProductStory story = new ProductStory();
@@ -974,11 +965,11 @@ public class StoryAction extends BaseController {
             story.setProductId(productId);
             List<ProductStory> stories = storyService.findStoryList(story);
             if (stories.size() != 0) {
-                if(storyId==null){
+                if (storyId == null) {
                     return resultMap(false, "该需求已存在");
-                }else if(!storyId.equals(stories.get(0).getStoryId())){
+                } else if (!storyId.equals(stories.get(0).getStoryId())) {
                     return resultMap(false, "该需求已存在");
-                }else{
+                } else {
                     return resultMap(true, "");
                 }
             } else {

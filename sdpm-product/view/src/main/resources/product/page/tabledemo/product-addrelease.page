@@ -68,17 +68,22 @@
                 "releaseDesc" "releaseDesc" {"initialFrameHeight":"250" ,"placeholder":"说点什么...最少输入10个字符","datatype":
                 ""})#end
         #end
-        #@validateDiv("col-2")#end
+    #end
+    #@elementItem()
+        #@colLabel("col-1")附件:#end
+        #@formControlDiv("col-9")
+            #mulUploadFile()
+        #end
     #end
 
-    #@elementItem()
-        <div class="col-12">
-            <div class="col-2 text-r"><label>附件：</label></div>
-            <div class="col-7">
-                #mulUploadFile()
-            </div>
-        </div>
-    #end
+##    #@elementItem()
+##        <div class="col-12">
+##            <div class="col-2 text-r"><label>附件：</label></div>
+##            <div class="col-7">
+##
+##            </div>
+##        </div>
+##    #end
 </div>
     #@elementItem()
     <div class="col-12">

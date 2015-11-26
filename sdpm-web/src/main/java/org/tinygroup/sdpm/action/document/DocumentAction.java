@@ -4,8 +4,10 @@ package org.tinygroup.sdpm.action.document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
@@ -260,8 +262,6 @@ public class DocumentAction extends BaseController {
     @RequestMapping("/product/{type}/updateDoc")
     public String saveDocument( DocumentDoc doc,
                                 @PathVariable(value = "type") String type,
-                                @RequestParam(value = "file", required = false) MultipartFile[] file,
-                                String[] title,
                                 String lastAddress,
                                 UploadProfile uploadProfile) throws IOException {
         if ("save".equals(type)) {
@@ -295,7 +295,7 @@ public class DocumentAction extends BaseController {
         if(!StringUtil.isBlank(lastAddress)){
             return "redirect"+lastAddress;
         }
-        return "redirect:" + "/a/product/doc/content";
+        return "redirect:"  + adminPath + "/product/doc/content";
     }
 
     @ResponseBody

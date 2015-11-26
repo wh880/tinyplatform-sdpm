@@ -17,6 +17,7 @@
                     $(".selChoose").removeClass("active_btn");
                     $(this).addClass("active_btn");
                     $("#taskTable").trigger("refresh");
+                    $("#dLabel>span:first").removeClass("active_btn").text("更多");
                 } else {
                     window.location.href = "../task/index?choose=" + $(this).attr("val");
                 }
@@ -26,8 +27,8 @@
 ##更多
     #include("/project/task/maplist.page")
 <div class="btn-group btnDropDown">
-    <a id="dLabel" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" class="selChoose ${choose=="8"?"active_btn":""}">
-        ${statuMap.get(statu==null?"0":statu)}
+    <a id="dLabel" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" class="${choose=="8"?"active_btn":""}">
+        <span>${statu?statuMap.get(statu):"更多"}</span>
         <span class="caret"></span>
     </a>
     <ul class="dropdown-menu" aria-labelledby="dLabel">
@@ -46,7 +47,7 @@
                     $("#taskTable").attr("data-url", actionUrl + "&statu=" + $(this).attr("val"));
                     $("#taskTable").trigger("refresh");
                     $(".selChoose").removeClass("active_btn");
-                    $(this).closest("div").children("a").text($(this).text()).addClass("active_btn");
+                    $(this).closest("div").find("a span:first").text($(this).text()).addClass("active_btn");
                 }else{
                     window.location.href = "../task/index?choose=8&statu=" + $(this).attr("val");
                 }

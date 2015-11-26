@@ -143,38 +143,27 @@
             </div>
         #end
         #@elementItem()
-            <div class="col-12">
-                <div class="col-2 text-r"><label>文档类型：</label></div>
-                <div class="col-8">
-                    #@Tradioes("docType" doc?.docType)
-                        #foreach(item:getDict("docType"))
-                            #@Tradio(item.value)${item.text}#end
-                        #end
-                    #end
-                    <script>
-                        $("input[name=docType]").change();
-                    </script>
-                </div>
-            </div>
-        #end
-
-        #@elementItem()
-            #@sdpmItem("文档URL")
-                #@formControlDiv("col-12")
-                    #tinyInput("text" "docTitle" doc?.docTitle {"datatype":"*1-20",
-                        "nullmsg":"标题不能为空！","class":"input-text"})
+            #@colLabel()文档类型：#end
+            #@skinMinimal("mt-20")
+                #@Tradioes("docType" doc?.docType)
+                    #@Tradio("1")${getDict("docType","1")} #end
+                    #@Tradio("2")${getDict("docType","2")} #end
+                    #@Tradio("3")${getDict("docType","3")} #end
                 #end
+
             #end
             #@validateDiv("col-2")#end
         #end
+
         #@elementItem(elementId="urlBox" eleItemClass="hide")
-            #@sdpmItem("文档URL")
-                #@formControlDiv("col-12")
+            <div class="col-12">
+                <div class="col-2 text-r"><label>文档URL：</label></div>
+                <div class="col-4">
                     #tinyInput(
-                        "text" "docUrl" ""{"style":"width:300px","placeholder":"相应的链接地址","datatype":"*4-16",
-                        "id":"docurl","class":"input-text","ignore":"ignore"})
-                #end
-            #end
+                   "text" "docUrl" ""{"placeholder":"相应的链接地址","datatype":"*4-16",
+                                   "id":"docurl","class":"input-text","ignore":"ignore"})
+                </div>
+            </div>
         #end
 
         #@elementItem()
@@ -204,18 +193,21 @@
         #end
 
         #@elementItem(elementId="fileBox" eleItemClass="hide")
-            #@sdpmItem("附件")
-                #@formControlDiv("col-8")
+            <div class="col-12">
+                <div class="col-2 text-r"><label>附件：</label></div>
+                <div class="col-6">
                     #mulUploadFile(fileList)
-                #end
-            #end
+                </div>
+            </div>
         #end
         #@elementItem(elementId="contentBox" eleItemClass="hide")
-            #@sdpmItem("文档正文")
-                #@formControlDiv("col-8")
-                    #@Teditor("content" "docContent" {"initialFrameHeight":"200","initialFrameWidth":"800"})${doc?.docContent}#end
-                #end
-            #end
+        <div class="col-12">
+            <div class="col-2 text-r"><label>文档正文：</label></div>
+            <div class="col-6">
+                #@Teditor("content" "docContent" {"initialFrameHeight":"200","initialFrameWidth":"800"})${doc?.docContent}#end
+            </div>
+        </div>
+
         #end
         #@elementItem()
             <div class="col-12">
@@ -238,27 +230,32 @@
 #end
 
 <script type="text/javascript">
+    /* Set doc type. */
+
     $(function () {
-        $("input[name=docType]").on("change", function () {
-            var type = $(this).val();
-            switch (type) {
-                case "1":
-                    $('#urlBox').hide();
-                    $('#fileBox').show();
-                    $('#contentBox').hide();
-                    break;
-                case "2":
+        $("[name=docType]").each(function(){
+            $(this).on("change",function(){
+                var type=$(this).val();
+                if (type == '2') {
                     $('#urlBox').show();
                     $('#fileBox').hide();
                     $('#contentBox').hide();
-                    break;
-                case "3":
+                }
+                else if (type == '3') {
                     $('#urlBox').hide();
                     $('#fileBox').hide();
                     $('#contentBox').show();
-                    break;
+                }
+                else {
+                    $('#urlBox').hide();
+                    $('#fileBox').show();
+                    $('#contentBox').hide();
+                }
+            });
+            if(this.checked){
+                $(this).trigger("change");
             }
-        });
+        })
     });
 </script>
 <script type="text/javascript">
