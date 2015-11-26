@@ -1,0 +1,5 @@
+#macro buttons(buttonsId buttonsClass)
+<div#if(buttonsId) id="${buttonsId}"#{end}#if(buttonsClass) class="${buttonsClass}"#end>
+    #bodyContent
+</div>
+#end

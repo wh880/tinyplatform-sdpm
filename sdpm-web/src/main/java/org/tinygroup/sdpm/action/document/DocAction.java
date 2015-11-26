@@ -280,7 +280,7 @@ public class DocAction extends BaseController {
         systemProfile.setFileObjectType(ProfileType.DOCUMENT.getType());
         systemProfile.setFileObjectId(docid);
         List<SystemProfile> list = profileService.findSystemProfile(systemProfile);
-        model.addAttribute("file", list);
+        model.addAttribute("fileList", list);
         model.addAttribute("doc", doc);
         return "/document/doc-view.page";
     }

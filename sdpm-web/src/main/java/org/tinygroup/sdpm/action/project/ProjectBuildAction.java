@@ -238,30 +238,6 @@ public class ProjectBuildAction extends BaseController {
         return resultMap(true, "删除成功");
     }
 
-//    @RequiresPermissions("pro-version-report")
-//    @RequestMapping("/add")
-//    public String add(HttpServletRequest request, HttpServletResponse response, Integer buildId, Model model) {
-//
-//        Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
-//        if (projectId == null) {
-//            return redirectProjectForm();
-//        }
-//        SystemModule module = new SystemModule();
-//        module.setModuleType("project");
-//        module.setModuleRoot(projectId);
-//        List<Product> list = productService.findProductList(new Product(), "productId", "desc");
-//        model.addAttribute("teamList", userService.findTeamUserListByProjectId(projectId));
-//        model.addAttribute("prodcutList", list);
-//        if (buildId != null && buildId != 0) {
-//            ProjectBuild build = buildService.findBuild(buildId);
-//            model.addAttribute("build", build);
-//
-//        } else {
-//            model.addAttribute("build", null);
-//        }
-//        return "project/build/add.page";
-//    }
-
     @RequestMapping("/productalbug")
     public String productalbug(Integer buildId, Model model) {
         ProjectBuild build = buildService.findBuild(buildId);
@@ -291,10 +267,9 @@ public class ProjectBuildAction extends BaseController {
             return "project/task/relation-release/product-al-le-bug.page";
         } else if ("alnoReq".equals(forwordPager)) {
             return "project/task/relation-release/product-al-no-req.page";
-        } else if ("alReq".equals(forwordPager)) {
+        } else /* ("alReq".equals(forwordPager)) */{
             return "project/task/relation-release/product-al-req.page";
         }
-        return "";
     }
 
 

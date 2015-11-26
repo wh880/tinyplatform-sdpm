@@ -77,7 +77,7 @@
 
         #@colLabel("col-1")描述:#end
         #@formControlDiv("col-9")
-           #@Teditor("releaseDesc" "releaseDesc" {"initialFrameHeight":"250" ,"placeholder":"说点什么...最少输入10个字符","datatype":"*10-500"})${release?.releaseDesc}#end
+           #@Teditor("releaseDesc" "releaseDesc")${release?.releaseDesc}#end
         #end
 
         #@validateDiv("col-2 validmsg")#end

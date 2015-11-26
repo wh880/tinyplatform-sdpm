@@ -1,3 +1,9 @@
+#macro uploadFileList(profileList)
+#foreach(p:profileList)
+    <li><a href="${TINY_CONTENT_PATH+p.filePathname}">${p.fileTitle}</a></li>
+#end
+#end
+
 #macro mulFileInput(name value)
 <span class="form-inline">
 <span class="btn-upload">
