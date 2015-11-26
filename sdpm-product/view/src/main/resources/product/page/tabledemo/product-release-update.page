@@ -15,32 +15,25 @@
     });
 </script>
 
-
 #@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/product/release/update" "post" {"class":"","enctype":
     "multipart/form-data"})
 <input type="hidden" name="lastAddress" value=""/>
 	#tinyInput("text" "releaseId" release.releaseId {"class":"input-text hidden"})
     <div class="infoContent">
         <p class="titleName">编辑</p>
-
      #@elementItem()
-
         #@colLabel("col-1")<span class="c-red">*</span>发布名称:#end
         #@formControlDiv("col-4")
-
             #tinyInput(
                 "text" "releaseName" release?.releaseName{"datatype":"*","nullmsg":"发布名称不能为空！","id":"releaseName","class":"input-text",
                 "ajaxurl":TINY_CONTEXT_PATH+adminPath+"/product/release/judgeReleaseName?releaseId="+release?.releaseId+"&productId="+cookieProductId})
        #end
-
         #@validateDiv("col-2 validmsg")#end
       #end
     #@elementItem()
-
         #@colLabel("col-1")版本:#end
-       #@formControlDiv("col-4")
+        #@formControlDiv("col-4")
 			#@Tselect2F()
-
                 #@Tselect2Body("buildId" release?.buildId {"class":"input-text"}) ##,"multiple":"multiple"加上为多选项
                 #end
                 <script>
@@ -56,30 +49,24 @@
                         <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
                     #end
                 #end
-
             #end
 		#end
-
         #@validateDiv("col-2 validmsg")#end
     #end
 
     #@elementItem()
-
         #@colLabel("col-1")<span class="c-red">*</span>发布日期:#end
         #@formControlDiv("col-4")
            #@tinyDateInput("releaseDate" release?.releaseDate?formatDate(release?.releaseDate,'yyyy-MM-dd'):"" "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空"})#end
         #end
-
         #@validateDiv("col-2 validmsg")#end
     #end
    
     #@elementItem()
-
         #@colLabel("col-1")描述:#end
         #@formControlDiv("col-9")
            #@Teditor("releaseDesc" "releaseDesc")${release?.releaseDesc}#end
         #end
-
         #@validateDiv("col-2 validmsg")#end
     #end
     #@elementItem()
@@ -88,13 +75,10 @@
             #mulUploadFile(fileList)
         #end
     #end
-
    </div>
     #@elementItem()
         <div class="col-12">
-            <div class="col-5">
-
-            </div>
+            <div class="col-5"></div>
             <div class="col-1">
                 <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
             </div>
@@ -104,12 +88,4 @@
             <div class="col-5"></div>
         </div>
     #end
-#*   </div>*#
 #end
-#*
-<div style="width:30%;float:right">
-    #@div(divClass="infoContent")
-        <p class="titleName">历史记录</p>
-        #include("/product/page/tabledemo/historyrecord.page")
-    #end
-</div>*#

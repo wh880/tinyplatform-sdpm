@@ -30,7 +30,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.*;
 
-
 /**
  * 发布控制器
  *
@@ -116,7 +115,6 @@ public class ReleaseAction extends BaseController {
         releaseService.deleteRelease(releaseId);
         ProductRelease release = releaseService.findRelease(releaseId);
         Map<String, String> map = new HashMap<String, String>();
-
 
         LogUtil.logWithComment(LogUtil.LogOperateObject.RELEASE
                 , LogUtil.LogAction.DELETED
