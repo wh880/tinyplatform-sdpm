@@ -9,8 +9,6 @@ import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
-import org.tinygroup.sdpm.product.dao.pojo.ProductRelease;
-import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.service.PlanService;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
@@ -38,10 +36,13 @@ import java.util.Map;
 public class PlanAction  extends BaseController{
 	@Autowired
 	private PlanService planService;
-
 	@Autowired
 	private ProductService productService;
 
+	@ModelAttribute
+	public void init(Model model) {
+		initSearchBar(model, "产品计划");
+	}
 
 	@RequestMapping("/content")
 	public String release(HttpServletRequest request, Model model) {

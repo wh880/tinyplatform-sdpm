@@ -71,6 +71,10 @@ public abstract class BaseController {
     protected BaseController() {
     }
 
+    public void initSearchBar(Model model, String label) {
+        model.addAttribute("searchCurrentName", label);
+    }
+
     /**
      * 服务端参数有效性验证
      *
@@ -130,6 +134,7 @@ public abstract class BaseController {
 //        return "error/40x";
 //    }
 //
+
     /**
      * 不存在异常返回
      */

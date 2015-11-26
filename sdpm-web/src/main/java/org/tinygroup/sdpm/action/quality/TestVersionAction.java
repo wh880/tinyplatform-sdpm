@@ -5,17 +5,13 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SqlUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.UserService;
-import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
@@ -30,7 +26,6 @@ import org.tinygroup.sdpm.quality.dao.pojo.QualityTestTask;
 import org.tinygroup.sdpm.quality.service.inter.TestCaseService;
 import org.tinygroup.sdpm.quality.service.inter.TestRunService;
 import org.tinygroup.sdpm.quality.service.inter.TestTaskService;
-import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.sdpm.util.*;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -46,12 +41,10 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/a/quality/version")
-public class TestTaskAction extends BaseController {
+public class TestVersionAction extends BaseController {
 
     @Autowired
     private TestTaskService testTaskService;
-    @Autowired
-    private ProductService productService;
     @Autowired
     private UserService userService;
     @Autowired
@@ -66,8 +59,11 @@ public class TestTaskAction extends BaseController {
     private ProjectProductService projectProductService;
     @Autowired
     private TeamService teamService;
-    @Autowired
-    private ModuleService moduleService;
+
+    @ModelAttribute
+    public void init(Model model) {
+        initSearchBar(model, "测试版本");
+    }
 
     @RequestMapping("")
     public String form(HttpServletRequest request, String get, Model model) {

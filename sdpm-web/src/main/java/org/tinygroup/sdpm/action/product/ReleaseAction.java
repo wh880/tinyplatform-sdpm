@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.dto.UploadProfile;
@@ -52,36 +51,24 @@ public class ReleaseAction extends BaseController {
     @Autowired
     private ExportService exportService;
 
-    public static String storyIdUtils(String soure, String inde) {
-        soure = soure.replaceAll(inde, "").replaceAll(",,", ",");
-        if (soure.startsWith(",")) {
-            soure = soure.substring(1);
-        }
-        if (soure.endsWith(",")) {
-            soure = soure.substring(0, soure.length() - 1);
-        }
-        return soure;
+    @ModelAttribute
+    public void init(Model model) {
+        initSearchBar(model, "发布");
     }
 
     @RequestMapping("/content")
-    public String release( HttpServletRequest request, Model model) {
-
+    public String release() {
         return "/product/page/project/product-release.page";
     }
 
     @RequestMapping("/save")
     public String save(@CookieValue(value = "cookieProductId",defaultValue = "0") String cookieProductId,
                        ProductRelease productRelease,
-                       HttpServletRequest request,
                        SystemAction systemAction,
-                       @RequestParam(value = "file", required = false) MultipartFile[] file,
-                       String[] title,
                        String lastAddress,
                        UploadProfile uploadProfile) throws IOException {
         productRelease.setProductId(Integer.parseInt(cookieProductId));
         ProductRelease release = releaseService.addRelease(productRelease);
-
-
         processProfile(uploadProfile,release.getReleaseId(), ProfileType.RELEASE);
         LogUtil.logWithComment(LogUtil.LogOperateObject.RELEASE
                 , LogUtil.LogAction.OPENED
@@ -101,8 +88,6 @@ public class ReleaseAction extends BaseController {
     @RequestMapping("/update")
     public String update(ProductRelease release,
                          SystemAction systemAction,
-                         @RequestParam(value = "file", required = false) MultipartFile[] file,
-                         String[] title,
                          String lastAddress,
                          UploadProfile uploadProfile) throws IOException {
         ProductRelease release1 = releaseService.findRelease(release.getReleaseId());
