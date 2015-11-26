@@ -70,9 +70,10 @@
                         class="fa fa-fullscreen"></i></a>
             </li>
             <li>
+                #set(searchCurrentName=searchCurrentName?:getDict("searchType").get(0).value)
                 #@mulSearchBox(searchCurrentName)
                     #foreach(item : getDict("searchType"))
-                        #menusInfo(item.text item.value)
+                        #menusInfo(item.value item.text)
                     #end
                 #end
             </li>

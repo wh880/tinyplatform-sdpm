@@ -5,7 +5,7 @@
 #end
 
 #macro menusInfo(menusInfoName menusInfoHref menuType)
-<li><a href="${menusInfoHref}" data-value="${menusInfoValue}" data-type="${menuType?:"form"}">${menusInfoName}</a></li>
+<li><a href="${TINY_CONTEXT_PATH+menusInfoHref}" data-value="${menusInfoValue}" data-type="${menuType?:"form"}">${menusInfoName}</a></li>
 #end
 
 #macro mulSearchBox(searchCurrentName searchCurrentAction)
