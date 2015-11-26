@@ -105,13 +105,20 @@
                 "nullmsg":"下载地址不能为空！","id":"username","class":"input-text"})
         #end
     #end
-    #@elementItem()
-        #@sdpmItem("附件")
-            #@formControlDiv("col-8")
-                #tinyUploadInput("inputName" "" {"style":"width:80%","placeholder":"可直接输入地址，也可点击下图标进行上传"})
-            #end
+    #@elementItem(elementId="fileBox")
+        #@colLabel()附件：#end
+        #@formControlDiv("col-8")
+            #mulUploadFile(fileList)
         #end
     #end
+
+##    #@elementItem()
+##        #@sdpmItem("附件")
+##            #@formControlDiv("col-8")
+##                #mulUploadFile(fileList)
+##            #end
+##        #end
+##    #end
     #@elementItem()
         <div class="col-2 text-r">
             <label>描述：&nbsp;</label>

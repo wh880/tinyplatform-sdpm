@@ -40,14 +40,19 @@
             </div>
         #end
 
-        #@elementItem()
-            <div class="col-12">
-                <div class="col-2 text-r"><label>附件：</label></div>
-                <div class="col-9">
-                    #mulUploadFile(fileList)
-                </div>
-            </div>
+        #@div(divClass="infoContent")
+            <p class="titleName">附件</p>
+            #mulUploadFile(fileList)
         #end
+
+##        #@elementItem()
+##            <div class="col-12">
+##                <div class="col-2 text-r"><label>附件：</label></div>
+##                <div class="col-9">
+##                    #mulUploadFile(fileList)
+##                </div>
+##            </div>
+##        #end
 
         #@elementItem("" "edui-Box")
             <b class="titleNames">备注</b>
