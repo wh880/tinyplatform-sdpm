@@ -38,20 +38,21 @@
             <p class="titleName">文档URL </p>
             <a href="//${doc?.docUrl}">${doc?.docUrl}</a>
         #elseif(doc?.docType=='1')<p class="titleName">附件 </p>
-            #foreach(f : file)
-                #set(path=f?.filePathname)
-                <a href="${path}">${f?.fileTitle}.${f?.fileExtension}</a>&nbsp&nbsp&nbsp&nbsp
-                #foreach(m:menuManager.getScopeMenus("file-op"))
-                    #if(m.id == "doc-file-edit")
-                        #@aModal("#myModal" m.name "400" "120" "class-m" adminPath+m.href+"?fileId="+f?.fileId)
-                            #buttonIcon(iconClass=m.icon)#end&nbsp
-                    #else
-                        #@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m.href f?.fileId )
-                            #buttonIcon(iconClass=m.icon)
-                        #end
-                    #end
-                #end <br>
-            #end
+            #uploadFileList(file)
+##            #foreach(f : file)
+##                #set(path=f?.filePathname)
+##                <a href="${path}">${f?.fileTitle}.${f?.fileExtension}</a>&nbsp&nbsp&nbsp&nbsp
+##                #foreach(m:menuManager.getScopeMenus("file-op"))
+##                    #if(m.id == "doc-file-edit")
+##                        #@aModal("#myModal" m.name "400" "120" "class-m" adminPath+m.href+"?fileId="+f?.fileId)
+##                            #buttonIcon(iconClass=m.icon)#end&nbsp
+##                    #else
+##                        #@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m.href f?.fileId )
+##                            #buttonIcon(iconClass=m.icon)
+##                        #end
+##                    #end
+##                #end <br>
+##            #end
 
         #else <p class="titleName">网页</p>
             ${doc?.docContent}

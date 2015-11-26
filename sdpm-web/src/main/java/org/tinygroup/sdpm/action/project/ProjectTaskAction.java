@@ -528,8 +528,8 @@ public class ProjectTaskAction extends BaseController {
         SystemProfile systemProfile = new SystemProfile();
         systemProfile.setFileObjectId(taskId);
         systemProfile.setFileObjectType(ProfileType.TASK.getType());
-        List<SystemProfile> fileList = profileService.findSystemProfile(systemProfile);
-        model.addAttribute("fileList", fileList);
+        List<SystemProfile> profileList = profileService.findSystemProfile(systemProfile);
+        model.addAttribute("profileList", profileList);
 
         return "project/task/view";
     }
@@ -651,6 +651,13 @@ public class ProjectTaskAction extends BaseController {
     @RequestMapping("/gantt/find")
     public String ganttFind(Integer id, Model model) {
         ProjectTask task = taskService.findTask(id);
+
+        SystemProfile systemProfile = new SystemProfile();
+        systemProfile.setFileObjectId(id);
+        systemProfile.setFileObjectType(ProfileType.TASK.getType());
+        List<SystemProfile> fileList = profileService.findSystemProfile(systemProfile);
+        model.addAttribute("fileList", fileList);
+
         model.addAttribute("task", task);
         return "project/task/ganttFind.pagelet";
     }
