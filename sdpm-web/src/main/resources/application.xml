@@ -9,7 +9,7 @@
         <property name="labelWidth" value="80pt"/>
         <property name="fieldWidth" value="120pt"/>
         <property name="cardWidth" value="200pt"/>
-        <property name="UPLOAD_ACTION_URL" value="/a/org/company/uploadLogo"/>
+        <property name="UPLOAD_ACTION_URL" value="/ajaxUploadImage"/>
         <!--缓存配置-->
         <property name="cache_region" value="sessionCache"></property>
         <property name="cache_manager" value="ehCacheManager"></property>
