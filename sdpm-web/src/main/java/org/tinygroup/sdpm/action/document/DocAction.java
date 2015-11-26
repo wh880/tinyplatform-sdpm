@@ -6,8 +6,10 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
@@ -32,7 +34,6 @@ import org.tinygroup.tinysqldsl.Pager;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -157,21 +158,14 @@ public class DocAction extends BaseController {
      * @param request
      * @param systemAction
      * @param doc
-     * @param file
-     * @param title
      * @param model
      * @return
      * @throws IOException
      */
     @RequestMapping(value = "/addSave", method = RequestMethod.POST)
-    public String addSave(HttpServletRequest request,
-                          SystemAction systemAction,
-                          DocumentDoc doc,
-                          @RequestParam(value = "file", required = false) MultipartFile[] file,
-                          String[] title,
-                          Model model,
-                          String lastAddress,
-                          UploadProfile uploadProfile) throws IOException {
+    public String addSave(HttpServletRequest request, SystemAction systemAction,
+                          DocumentDoc doc, Model model,
+                          String lastAddress, UploadProfile uploadProfile) throws IOException {
         List<Product> product = productService.findProductList(new Product());
         doc.setDocLibId(Integer.parseInt(CookieUtils.getCookie(request, DocAction.COOKIE_DOC_LIB_ID)));
         doc.setDocDeleted("0");
@@ -223,6 +217,7 @@ public class DocAction extends BaseController {
         systemProfile.setFileObjectType(ProfileType.DOCUMENT.getType());
         List<SystemProfile> fileList = profileService.findSystemProfile(systemProfile);
         model.addAttribute("fileList", fileList);
+
         model.addAttribute("doc", doc);
         model.addAttribute("productList", list1);
         model.addAttribute("projectList", list2);
@@ -236,16 +231,12 @@ public class DocAction extends BaseController {
      *
      * @param doc
      * @param systemAction
-     * @param model
      * @return
      */
     @RequestMapping(value = "/editSave", method = RequestMethod.POST)
     public String editSave(DocumentDoc doc,
                            String lastAddress,
-                           @RequestParam(value = "file", required = false) MultipartFile[] file,
-                           String[] title,
                            SystemAction systemAction,
-                           Model model,
                            UploadProfile uploadProfile) throws IOException {
         DocumentDoc documentDoc = docservice.findDocById(doc.getDocId());
         doc.setDocEditedBy(UserUtils.getUser().getOrgUserId());
@@ -356,10 +347,7 @@ public class DocAction extends BaseController {
     @RequestMapping(value = "/delete")
     public Map delDoc(Integer id) {
         docservice.deleteDocById(id);
-        Map<String, String> map = new HashMap<String, String>();
-        map.put("status", "success");
-        map.put("info", "删除成功");
-        return map;
+        return resultMap(true, "删除成功");
     }
 
     /**
@@ -372,7 +360,6 @@ public class DocAction extends BaseController {
     @ResponseBody
     @RequestMapping(value = "/batchDelete")
     public Map batchDelDoc(String ids) {
-        Map<String, String> map = new HashMap<String, String>();
         if (StringUtil.isBlank(ids)) {
             return resultMap(false, "请至少选择一条数据");
         }
@@ -386,6 +373,5 @@ public class DocAction extends BaseController {
         docservice.deleteDocByIds(list);
         return resultMap(true, "删除成功");
     }
-
 
 }
