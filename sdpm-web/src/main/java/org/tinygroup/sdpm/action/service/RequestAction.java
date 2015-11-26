@@ -13,6 +13,7 @@ import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.service.ProductService;
+import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceClient;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceRequest;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceReview;
@@ -331,5 +332,16 @@ public class RequestAction extends BaseController {
         }
         requestService.deleteBatchRequest(list);
         return resultMap(true, "删除成功");
+    }
+
+    @ResponseBody
+    @RequestMapping("ajax/requestInCondition")
+    public List<ServiceRequest> requestInCondition(String key, Integer initKey) {
+        if (initKey != null) {
+            List<ServiceRequest> result = new ArrayList<ServiceRequest>();
+            result.add(requestService.findRequest(initKey));
+            return result;
+        }
+        return requestService.requestInCondition(key);
     }
 }

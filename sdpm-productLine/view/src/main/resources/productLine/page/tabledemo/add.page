@@ -44,13 +44,8 @@
         #@colLabel()<span class="c-red">*</span>产品线经理：#end
         #@formControlDiv("col-4")
             #@Tselect2F()
-                <script>
-                    $(function(){
-                        ajaxRead("${sid}", "productLineOwner", "orgUserId", "orgUserRealName", "/org/user/userList");
-                    })
-                </script>
-                #@Tselect2Body("productLineOwner" "" {"class":"input-text select2","nullmsg":"请选择产品线经理！","datatype":"*"}) ##,"multiple":"multiple"加上为多选项
-                #end
+                #Tselect2Ajax("productLineOwner" "" TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
+                {"dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询经理","nullmsg":"请选择经理！","datatype":"*"})
                 #@Tselect2Fix()
                     #set(m=menuManager.getMenu("organizationAddUser"))
                     #if(m)
@@ -70,15 +65,8 @@
         #@colLabel()<span class="c-red">*</span>产品线质量经理：#end
         #@formControlDiv("col-4")
             #@Tselect2F()
-                <script>
-                    $(function(){
-                        ajaxRead("${sid}", "productLineQualityManager", "orgUserId", "orgUserRealName", "/org/user/userList");
-                    })
-                </script>
-
-                #@Tselect2Body(
-                    "productLineQualityManager" "" {"class":"input-text select2","nullmsg":"请选择产品线质量经理！","datatype":"*"}) ##,"multiple":"multiple"加上为多选项
-                #end
+                #Tselect2Ajax("productLineQualityManager" "" TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
+                {"dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询质量经理","nullmsg":"请选择质量经理！","datatype":"*"})
                 #@Tselect2Fix()
                     #set(m=menuManager.getMenu("organizationAddUser"))
                     #if(m)
@@ -98,15 +86,8 @@
         #@colLabel()<span class="c-red">*</span>产品线交付经理：#end
         #@formControlDiv("col-4")
             #@Tselect2F()
-                <script>
-                    $(function(){
-                        ajaxRead("${sid}", "productLineDeliveryManager", "orgUserId", "orgUserRealName", "/org/user/userList");
-                    })
-                </script>
-                #@Tselect2Body(
-                    "productLineDeliveryManager" "" {"class":"input-text select2","nullmsg":"请选择产品线交付经理！","datatype":"*"}) ##,"multiple":"multiple"加上为多选项
-                #end
-
+                #Tselect2Ajax("productLineDeliveryManager" "" TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
+                {"dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询交付经理","nullmsg":"请选择交付经理！","datatype":"*"})
                 #@Tselect2Fix()
                     #set(m=menuManager.getMenu("organizationAddUser"))
                     #if(m)

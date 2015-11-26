@@ -18,6 +18,7 @@ import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.service.ProductService;
+import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
 import org.tinygroup.sdpm.project.service.inter.ProjectProductService;
 import org.tinygroup.sdpm.system.dao.pojo.ProfileType;
@@ -31,6 +32,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping(value = "/a/document")
@@ -306,5 +308,29 @@ public class DocumentAction extends BaseController {
     @RequestMapping("/test")
     public String test() {
         return "testManagement/page/tabledemo/batchExecute.page";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/judgeDocName")
+    public Map judgeProductLineName(String param,Integer docModule, Integer docId) {
+        if (param != null) {
+            String docTitle = param;
+            DocumentDoc doc = new DocumentDoc();
+            doc.setDocTitle(docTitle);
+            doc.setDocModule(docModule);
+            List<DocumentDoc> documentDocs = docservice.findDocList(doc);
+            if (documentDocs.size() != 0) {
+                if(docId==null){
+                    return resultMap(false, "该文档已存在");
+                }else if(!docId.equals(documentDocs.get(0).getDocId())){
+                    return resultMap(false, "该文档已存在");
+                }else{
+                    return resultMap(true, "");
+                }
+            } else {
+                return resultMap(true, "");
+            }
+        }
+        return resultMap(false, "请输入文档名称");
     }
 }

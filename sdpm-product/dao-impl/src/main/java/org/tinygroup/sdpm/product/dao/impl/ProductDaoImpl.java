@@ -471,6 +471,11 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
         return getDslSession().fetchList(select, Product.class);
     }
 
+    public List<Product> productInCondition(String condition,Integer ...ids) {
+        Select select = select(PRODUCTTABLE.PRODUCT_ID,PRODUCTTABLE.PRODUCT_NAME).from(PRODUCTTABLE).where(and(PRODUCTTABLE.PRODUCT_NAME.like(condition),PRODUCTTABLE.DELETED.eq(0),PRODUCTTABLE.PRODUCT_ID.in(ids)));
+        return getDslSession().fetchList(select,Product.class);
+    }
+
     private Select getComplexSelect() {
         return MysqlSelect.select(PRODUCTTABLE.ALL,PRODUCT_LINETABLE.PRODUCT_LINE_NAME.as("productLineName"), FragmentSql.fragmentSelect(
                 "(SELECT COUNT(story_id)FROM product_story a JOIN product b ON a.`product_id`=b.`product_id` WHERE a.`story_status`=1 AND b.product_id = product.product_id) activeSum,\n" +

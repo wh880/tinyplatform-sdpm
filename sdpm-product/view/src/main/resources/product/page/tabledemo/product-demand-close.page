@@ -29,9 +29,9 @@
             if ($(this).val() == '1') {
                 repeat.hide();
                 subdivision.show();
-                $("select[name=storyChildStories]").attr("ignore","");
-                $("select[name=storyDuplicateStory]").attr("ignore","ignore");
-                $("select[name=storyDuplicateStory]").val(0).trigger("change");
+                $("[name=storyChildStories]").attr("ignore","");
+                $("[name=storyDuplicateStory]").attr("ignore","ignore");
+                $("[name=storyDuplicateStory]").val(0).trigger("change");
                 $(function() {
                     ajaxRead("${sid}", "storyChildStories", "storyId", "storyTitle", "/product/story/storyList?productId=${cookieProductId}&storyId=${story?.storyId}");
                 })
@@ -39,9 +39,9 @@
             } else if ($(this).val() == '2') {
                 subdivision.hide();
                 repeat.show();
-                $("select[name=storyDuplicateStory]").attr("ignore","");
-                $("select[name=storyChildStories]").attr("ignore","ignore");
-                $("select[name=storyChildStories]").val(0).trigger("change");
+                $("[name=storyDuplicateStory]").attr("ignore","");
+                $("[name=storyChildStories]").attr("ignore","ignore");
+                $("[name=storyChildStories]").val(0).trigger("change");
                 $(function() {
                     ajaxRead("${sid}", "storyDuplicateStory", "storyId", "storyTitle", "/product/story/storyList?productId=${cookieProductId}&storyId=${story?.storyId}");
                 })
@@ -83,10 +83,8 @@
             #@colLabel()<span class="c-red">*</span>细分需求：#end
             #@formControlDiv("col-3")
                 #@Tselect2F()
-                    #@Tselect2Body("storyChildStories" "" {"class":"input-text","multiple":
-                        "multiple","datatype":"*","nullmsg":"细分需求不能为空！"}) ##,"multiple":"multiple"加上为多选项
-
-                    #end
+                    #Tselect2Ajax("storyChildStories" "" TINY_CONTEXT_PATH+adminPath+"/product/story/ajax/storyInCondition"
+                    {"dataId":"storyId","dataText":"storyTitle","placeholder":"查询细分需求","nullmsg":"请选择细分需求！","datatype":"*"})
                     #@Tselect2Fix()
                         <a href="${TINY_CONTEXT_PATH+adminPath}/product/page/project/togglebox.page">全部</a>#end
                 #end
@@ -97,9 +95,8 @@
             #@colLabel()<span class="c-red">*</span>重复需求：#end
             #@formControlDiv("col-3")
                 #@Tselect2F()
-                    #@Tselect2Body("storyDuplicateStory" "" {"class":"input-text","datatype":"*","nullmsg":"重复需求不能为空！"}) ##,"multiple":"multiple"加上为多选项
-
-                    #end
+                    #Tselect2Ajax("storyDuplicateStory" "" TINY_CONTEXT_PATH+adminPath+"/product/story/ajax/storyInCondition"
+                    {"dataId":"storyId","dataText":"storyTitle","placeholder":"查询重复需求","nullmsg":"请选择重复需求！","datatype":"*"})
                     #@Tselect2Fix()
                         <a href="${TINY_CONTEXT_PATH+adminPath}/product/page/project/togglebox.page">全部</a>#end
                 #end

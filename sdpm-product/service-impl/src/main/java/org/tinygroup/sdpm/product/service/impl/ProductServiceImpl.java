@@ -106,6 +106,11 @@ public class ProductServiceImpl implements ProductService {
         }
         return productMap;
     }
+
+    public List<Product> productInCondition(String condition,Integer ...ids) {
+        return productManager.productInCondition(condition,ids);
+    }
+
     public Map<String, List<Product>> getUserProductsMap(String userId) {
         Map<String, List<Product>> productMap = new HashMap<String, List<Product>>();
         List<Product> products = productManager.getProductByUser(userId,0,null);

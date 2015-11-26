@@ -14,12 +14,12 @@
 
             var vm = this.checked;
             if (vm == true) {
-                $("select[name='storyReviewedBy']").attr("disabled", "disabled");
-                $("select[name='storyReviewedBy']").closest(".formControls").next("div[class=col-2]").hide();
+                $("[name='storyReviewedBy']").attr("disabled", "disabled");
+                $("[name='storyReviewedBy']").closest(".formControls").next("div[class=col-2]").hide();
             }
             if (vm == false) {
-                $("select[name='storyReviewedBy']").removeAttr("disabled");
-                $("select[name='storyReviewedBy']").closest(".formControls").next("div[class=col-2]").show();
+                $("[name='storyReviewedBy']").removeAttr("disabled");
+                $("[name='storyReviewedBy']").closest(".formControls").next("div[class=col-2]").show();
             }
 
 
@@ -40,15 +40,8 @@
             #@formControlDiv("col-4")
                 <div class="col-6">
                     #@Tselect2F()
-                        <script>
-                            $(function(){
-                                ajaxRead("${sid}", "storyReviewedBy", "orgUserId", "orgUserRealName", "/org/user/userList");
-                            })
-                        </script>
-                        #@Tselect2Body(
-                            "storyReviewedBy" story?.storyReviewedBy {"class":"input-text select2","datatype":"*","nullmsg":"评审人不能为空！"})
-                        #end
-
+                        #Tselect2Ajax("storyReviewedBy" story?.storyReviewedBy TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
+                        {"id":"reviewedSelect","dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询评审人","nullmsg":"请选择评审人！","datatype":"*"})
                         #@Tselect2Fix()
                             #set(m=menuManager.getMenu("organizationAddUser"))
                             #if(m)

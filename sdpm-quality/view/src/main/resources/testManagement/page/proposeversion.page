@@ -111,11 +111,11 @@
         #end
 
         #@elementItem()
-            #@colLabel()优先级：#end
+            #@colLabel()<span class="c-red">*</span>优先级：#end
             #@formControlDiv("col-8")
                     #@div(divClass="col-5")
 					 #@Tselect2F()
-	                   		 #@Tselect2Body("priority" testTask?.priority {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                   		 #@Tselect2Body("priority" testTask?.priority {"datatype":"*","nullmsg":"优先级不能为空","class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                                 #foreach(pri : getDict("versionPriority"))
                                     <option value="${pri?.value}">${pri?.text}</option>
                                 #end
@@ -130,7 +130,7 @@
             #@colLabel()<span class="c-red">*</span>开始日期：#end
             #@formControlDiv("col-4")
             	#@div(divClass="col-10")
-                #@tinyDateInput("testtaskBegin" formatDate(testTask?.testtaskBegin,"yyyy-MM-dd") "yyyy-MM-dd" {"datatype":"*","nullmsg":"日期不能为空","placeholder":""})#end
+                #@tinyDateInput("testtaskBegin" formatDate(now(),"yyyy-MM-dd") "yyyy-MM-dd" {"datatype":"*","nullmsg":"开始日期不能为空","placeholder":"","readOnly":""})#end
            		#end
             #end
             #@validateDiv("col-2")#end
@@ -139,7 +139,7 @@
             #@colLabel()<span class="c-red">*</span>结束日期：#end
             #@formControlDiv("col-4")
                 #@div(divClass="col-10")
-                #@tinyDateInput("testtaskEnd" formatDate(testTask?.testtaskEnd,"yyyy-MM-dd") "yyyy-MM-dd" {"datatype":"*","nullmsg":"日期不能为空","placeholder":""})#end
+                #@tinyDateInput("testtaskEnd" formatDate(testTask?.testtaskEnd,"yyyy-MM-dd") "yyyy-MM-dd" {"datatype":"*","nullmsg":"结束日期不能为空","placeholder":""})#end
            		#end
             #end
             #@validateDiv("col-2")#end
@@ -161,8 +161,8 @@
         #end
         #@elementItem()
             #@colLabel()<span class="c-red">*</span>测试名称：#end
-            #@formControlDiv("col-8")
-            	#@div(divClass="col-5")
+            #@formControlDiv("col-4")
+            	#@div(divClass="col-10")
                 	#tinyInput("text" "testtaskTitle" testTask?.testtaskTitle {"datatype":"*","nullmsg":"测试名称不能为空","id":"关键词","class":"input-text"})
                 #end
             #end

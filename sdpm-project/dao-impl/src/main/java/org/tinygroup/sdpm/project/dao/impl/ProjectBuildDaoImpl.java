@@ -28,6 +28,7 @@ import org.tinygroup.sdpm.project.dao.ProjectBuildDao;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.tinysqldsl.*;
+import org.tinygroup.tinysqldsl.base.Condition;
 import org.tinygroup.tinysqldsl.base.FragmentSql;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
@@ -283,37 +284,7 @@ public class ProjectBuildDaoImpl extends TinyDslDaoSupport implements ProjectBui
         });
 
     }
-//
-//    public List<ProductAndLine> getProductLineTree(ProductLine t) {
-//
-//        Select select = select(PRODUCT_LINETABLE.PRODUCT_LINE_ID, PRODUCT_LINETABLE.PRODUCT_LINE_NAME, PRODUCTTABLE.PRODUCT_ID, PRODUCTTABLE.PRODUCT_NAME, PROJECT_BUILDTABLE.BUILD_ID, PROJECT_BUILDTABLE.BUILD_NAME).
-//                from(PRODUCT_LINETABLE).join(leftJoin(PRODUCTTABLE, PRODUCT_LINETABLE.PRODUCT_LINE_ID.eq(PRODUCTTABLE.PRODUCT_LINE_ID))).join(leftJoin(PROJECT_BUILDTABLE, PRODUCTTABLE.PRODUCT_ID.eq(PROJECT_BUILDTABLE.BUILD_PRODUCT))).
-//                where(
-//                        and(
-//                                PRODUCT_LINETABLE.PRODUCT_LINE_ID.isNotNull(),
-//                                PRODUCTTABLE.PRODUCT_ID.isNotNull(),
-//                                PROJECT_BUILDTABLE.BUILD_ID.isNotNull(),
-//
-//                                PRODUCT_LINETABLE.COMPANY_ID.eq(t.getCompanyId()),
-//                                PRODUCT_LINETABLE.DEPT_ID.eq(t.getDeptId()),
-//                                PRODUCT_LINETABLE.PRODUCT_LINE_ROOT.eq(t.getProductLineRoot()),
-//                                PRODUCT_LINETABLE.PRODUCT_LINE_PARENT.eq(t.getProductLineParent()),
-//                                PRODUCT_LINETABLE.PRODUCT_LINE_NAME.eq(t.getProductLineName()),
-//                                PRODUCT_LINETABLE.PRODUCT_LINE_CODE.eq(t.getProductLineCode()),
-//                                PRODUCT_LINETABLE.PRODUCT_LINE_ORDER.eq(t.getProductLineOrder()),
-//                                PRODUCT_LINETABLE.PRODUCT_LINE_SPEC.eq(t.getProductLineSpec()),
-//                                PRODUCT_LINETABLE.PRODUCT_LINE_STATUS.eq(t.getProductLineStatus()),
-//                                PRODUCT_LINETABLE.PRODUCT_LINE_OWNER.eq(t.getProductLineOwner()),
-//                                PRODUCT_LINETABLE.PRODUCT_LINE_QUALITY_MANAGER.eq(t.getProductLineQualityManager()),
-//                                PRODUCT_LINETABLE.PRODUCT_LINE_DELIVERY_MANAGER.eq(t.getProductLineDeliveryManager()),
-//                                PRODUCT_LINETABLE.ACL.eq(t.getAcl()),
-//                                PRODUCT_LINETABLE.PRODUCT_LINE_WHITE_LIST.eq(t.getProductLineWhiteList()),
-//                                PRODUCT_LINETABLE.PRODUCT_LINE_CREATED_BY.eq(t.getProductLineCreatedBy()),
-//                                PRODUCT_LINETABLE.PRODUCT_LINE_CREATED_DATE.eq(t.getProductLineCreatedDate()),
-//                                PRODUCT_LINETABLE.DELETED.eq(t.getDeleted())));
-//        List<ProductAndLine> productLines = getDslSession().fetchList(select, ProductAndLine.class);
-//        return productLines;
-//    }
+
 
     public Pager<ProductStory> findBuildStoryList(int start, int limit, Integer buildId, final OrderBy... orderBies) {
         Select select = select(PROJECT_BUILDTABLE.BUILD_STORIES).from(PROJECT_BUILDTABLE)
@@ -378,6 +349,20 @@ public class ProjectBuildDaoImpl extends TinyDslDaoSupport implements ProjectBui
 
     public List<ProjectBuild> getBuildByProducts(Integer... ids) {
         Select select = selectFrom(PROJECT_BUILDTABLE).where(and(PROJECT_BUILDTABLE.BUILD_DELETED.eq("0"), PROJECT_BUILDTABLE.BUILD_PRODUCT.in(ids)));
+        return getDslSession().fetchList(select,ProjectBuild.class);
+    }
+
+    public List<ProjectBuild> buildInCondition(String condition, Integer productId, Integer projectId) {
+        Condition con = null;
+        if(productId!=null){
+            con = PROJECT_BUILDTABLE.BUILD_PRODUCT.eq(productId);
+        }
+        if(projectId!=null){
+            con = con==null?PROJECT_BUILDTABLE.BUILD_PROJECT.eq(projectId):and(con,PROJECT_BUILDTABLE.BUILD_PROJECT.eq(projectId));
+        }
+        Select select = select(PROJECT_BUILDTABLE.BUILD_NAME,PROJECT_BUILDTABLE.BUILD_ID).from(PROJECT_BUILDTABLE).where(
+                and(PROJECT_BUILDTABLE.BUILD_NAME.like(condition),con)
+                );
         return getDslSession().fetchList(select,ProjectBuild.class);
     }
 

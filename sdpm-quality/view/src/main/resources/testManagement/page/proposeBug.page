@@ -28,7 +28,7 @@
         <div class="infoContent">
             <p class="titleName">提Bug</p>
             #@elementItem()
-                #@colLabel()产品模块：#end
+                #@colLabel()<span class="c-red">*</span>产品/模块：#end
                 #@formControlDiv("col-8")
                     #@div(divClass="col-5")
                     #@TzTreeSelect(
@@ -83,11 +83,11 @@
                 #end
             #end
             #@elementItem()
-                #@colLabel()所属项目：#end
-                #@formControlDiv("col-8")
-                    #@div(divClass="col-5")
+                #@colLabel()<span class="c-red">*</span>所属项目：#end
+                #@formControlDiv("col-4")
+                    #@div(divClass="col-10")
                         #@Tselect2F()
-                            #@Tselect2Body("projectId" bug?.projectId?:(projectList.size()>0?projectList.get(0).projectId:0) {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                            #@Tselect2Body("projectId" bug?.projectId?:(projectList.size()>0?projectList.get(0).projectId:0) {"class":"input-text select2","datatype":"*","nullmsg":"所属项目不能为空！"}) ##,"multiple":"multiple"加上为多选项
 
                             #end
                             <script type="text/javascript">
@@ -147,10 +147,8 @@
                 #@formControlDiv("col-8")
                     #@div(divClass="col-5")
                         #@Tselect2F()
-                            #@Tselect2Body("bugAssignedTo" bug?.bugAssignedTo {"class":
-                                "input-text select2"}) ##,"multiple":"multiple"加上为多选项
-
-                            #end
+                            #Tselect2Ajax("bugAssignedTo" bug?.bugAssignedTo TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
+                            {"id":"","dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询用户"})
                             #@Tselect2Fix()
                                 #set(m=menuManager.getMenu("organizationAddUser"))
                                 #if(m)
@@ -175,7 +173,6 @@
 
                         #tinyInput("text" "bugTitle" bug?.bugTitle {"placeholder":"请输入bug名称","datatype":"*","nullmsg":"bug名称不能为空！","id":"版本","class":"input-text"})
                     #end
-                    #@div(divClass="col-0")&nbsp&nbsp#end
                     #@div(divClass="col-3")
 
                         #@tinySelect("priority" bug?.priority {"placeholder":"请选择优先级","datatype":"*","nullmsg":"优先级不能为空！","class":"select2"})
@@ -253,7 +250,7 @@
             #@div(divClass="col-0")&nbsp&nbsp#end
             #@div(divClass="col-3")
                 #@Tselect2F()
-                    #@Tselect2Body("bugSeverity" bug?.bugSeverity {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                    #@Tselect2Body("bugSeverity" bug?.bugSeverity {"class":"input-text"}) ##,"multiple":"multiple"加上为多选项
                         #for(se : getDict("bugSeverity"))
                         #@tinyOptionItem(se.value)${se.text}#end
                     #end
@@ -288,11 +285,10 @@
     #@formControlDiv("col-8")
         #@div(divClass="col-5")
             #@Tselect2F()
-                #@Tselect2Body("bugMailto" bug?.bugMailto {"class":"input-text select2","multiple":"multiple"}) ##,"multiple":"multiple"加上为多选项
-                    #foreach(user : userList)
-                        <option value="${user?.orgUserId}">${user?.orgUserRealName}</option>
-                    #end
-                #end
+                #Tselect2Ajax("bugMailto" bug?.bugMailto TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
+                {"id":"storyMailtoSelect","dataId":"orgUserId","dataText":"orgUserRealName",
+                    "placeholder":"查询抄送人","multiple":"multiple"})
+
                 #@Tselect2Fix()
                     #set(m=menuManager.getMenu("organizationAddUser"))
                     #if(m)

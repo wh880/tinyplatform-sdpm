@@ -39,4 +39,11 @@ public interface OrgUserDao extends BaseDao<OrgUser,String> {
      * @return
      */
     List<OrgUser> getTeamUserByProjectId(Integer projectId);
+
+    /**
+     * 根据名称条件查询
+     * @param condition
+     * @return
+     */
+    List<OrgUser> userInCondition(String condition,String ...ids);
 }

@@ -106,4 +106,11 @@ public interface ProductService {
     Map<String, List<Product>> getUserProductsMap(String userId);
 
     Map<String, List<Product>> getUserProductsWithCountMap(String userId);
+
+    /**
+     * 根据输入名称查询
+     * @param condition
+     * @return
+     */
+    List<Product> productInCondition(String condition,Integer ...ids);
 }

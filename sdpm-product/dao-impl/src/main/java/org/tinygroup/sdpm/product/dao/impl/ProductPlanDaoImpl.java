@@ -114,7 +114,7 @@ public class ProductPlanDaoImpl extends TinyDslDaoSupport implements ProductPlan
             public Select generate(ProductPlan t) {
                 Condition condition =null;
                 if(isOverdue){
-                    condition = PRODUCT_PLANTABLE.PLAN_END_DATE.lte(new Date());
+                    condition = and(PRODUCT_PLANTABLE.PLAN_END_DATE.isNotNull(),PRODUCT_PLANTABLE.PLAN_END_DATE.lte(new Date()));
                 }
                 Select select = select(FragmentSql.fragmentSelect("product_plan.*,SUM(CASE WHEN product_story.`story_status`=1 THEN 1 ELSE 0 END) draft," +
                         "SUM(CASE WHEN product_story.`story_status`=2 THEN 1 ELSE 0 END) active," +

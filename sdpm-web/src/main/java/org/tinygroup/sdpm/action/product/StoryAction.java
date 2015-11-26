@@ -36,7 +36,9 @@ import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.sdpm.system.service.inter.ProfileService;
+import org.tinygroup.sdpm.util.CookieUtils;
 import org.tinygroup.sdpm.util.LogUtil;
+import org.tinygroup.sdpm.util.ProductUtils;
 import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -348,6 +350,8 @@ public class StoryAction extends BaseController {
     public String find(Integer storyId, Model model) {
 
         ProductStory productStory = storyService.findStory(storyId);
+        List<ServiceRequest> requests = requestService.getRequestList(null);
+        model.addAttribute("requestList",requests);
         model.addAttribute("story", productStory);
         return "/product/page/tabledemo/editbaseinfo.pagelet";
     }
@@ -982,5 +986,16 @@ public class StoryAction extends BaseController {
             }
         }
         return resultMap(false, "请输入需求名称");
+    }
+
+    @ResponseBody
+    @RequestMapping("ajax/storyInCondition")
+    public List<ProductStory> userInCondition(String key, Integer initKey, Integer productId, HttpServletRequest request){
+        if(initKey!=null){
+            List<ProductStory> result = new ArrayList<ProductStory>();
+            result.add(storyService.findStory(initKey));
+            return result;
+        }
+        return storyService.storyInCondition(key, productId==null?Integer.parseInt(CookieUtils.getCookie(request,ProductUtils.COOKIE_PRODUCT_ID)):productId);
     }
 }

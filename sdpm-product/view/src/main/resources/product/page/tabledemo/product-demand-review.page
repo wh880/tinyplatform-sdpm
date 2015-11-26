@@ -81,14 +81,8 @@
             #@colLabel()指派给：#end
                 #@formControlDiv("col-4")
                     #@Tselect2F()
-                        #@Tselect2Body(
-                            "storyAssignedTo" story?.storyAssignedTo {"placeholder":"",
-                            "class":"input-text"})
-
-                        #end
-                        <script>
-                            ajaxRead("${sid}", "storyAssignedTo", "orgUserId", "orgUserRealName", "/org/user/userList", "");
-                        </script>
+                        #Tselect2Ajax("storyAssignedTo" story?.storyAssignedTo TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
+                        {"id":"assignedToSelect","dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询指派人","nullmsg":"请选择指派人！","datatype":"*"})
                         #@Tselect2Fix()
                             #set(m=menuManager.getMenu("organizationAddUser"))
                             #if(m)
@@ -107,13 +101,9 @@
             #@colLabel()由谁评审：#end
             #@formControlDiv("col-4")
                 #@Tselect2F()
-                    #@Tselect2Body("storyReviewedBy" story?.storyReviewedBy {"class":
-                        "input-text select2","multiple":"multiple"}) ##,"multiple":"multiple"加上为多选项
-                    #end
-
-                    <script>
-                        ajaxRead("${sid}", "storyReviewedBy", "orgUserId", "orgUserRealName", "/org/user/userList");
-                    </script>
+                    #Tselect2Ajax("storyReviewedBy" story?.storyReviewedBy TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
+                    {"id":"reviewedBySelect","dataId":"orgUserId","dataText":"orgUserRealName",
+                        "placeholder":"查询评审人","nullmsg":"请选择评审人！","datatype":"*","multiple":"multiple"})
 
                     #@Tselect2Fix()
                         #set(m=menuManager.getMenu("organizationAddUser"))

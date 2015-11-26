@@ -158,6 +158,11 @@ public class ProductManagerImpl implements ProductManager{
 		return pIds;
 	}
 
+	public List<Product> productInCondition(String condition,Integer ...ids) {
+		if(ids==null||ids.length==0)return new ArrayList<Product>();
+		return productDao.productInCondition(condition,ids);
+	}
+
 	private List<Product> mergeUserProducts(List<Product> productWithOutRole,List<Product> productWithRole,List<OrgRoleUser> roleUsers){
 		if(productWithRole.size()==0)return productWithOutRole;
 		for(OrgRoleUser orgRoleUser : roleUsers) {

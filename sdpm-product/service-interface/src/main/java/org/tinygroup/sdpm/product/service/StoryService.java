@@ -115,13 +115,34 @@ public interface StoryService {
      */
 	int countStatus(int productId,int status);
 
-
-
+	/**
+	 * 获取需求所在product名称
+	 * @param storyId
+	 * @return
+	 */
 	List<ProductStory> findProductName(Integer storyId);
-	
+
+	/**
+	 * 有条件page查询
+	 * @param start
+	 * @param limit
+	 * @param story
+	 * @param condition
+	 * @param columnName
+	 * @param asc
+	 * @return
+	 */
 	Pager<ProductStory> findPager(int start, int limit,ProductStory story, String condition, String columnName, boolean asc);
 
 	Pager<ProductStory> findProjectLinkedStory(int start, int limit,ProductStory story, String condition, String columnName, boolean asc);
 
 	Pager<ProductStory> findStoryByCondition(int start, int limit,ProductStory story, ConditionCarrier carrier, String columnName, boolean asc);
+
+	/**
+	 * 根据输入名称查询
+	 * @param condition
+	 * @param productId
+	 * @return
+	 */
+	List<ProductStory> storyInCondition(String condition, Integer productId);
 }

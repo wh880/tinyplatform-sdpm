@@ -128,4 +128,11 @@ public interface StoryManager {
 
 	Pager<ProductStory> findStoryByCondition(int start, int limit, ProductStory story, ConditionCarrier carrier, final String columnName, boolean asc);
 
+	/**
+	 * 根据输入名称查询
+	 * @param condition
+	 * @param productId
+	 * @return
+	 */
+	List<ProductStory> storyInCondition(String condition, Integer productId,Integer ...ids);
 }

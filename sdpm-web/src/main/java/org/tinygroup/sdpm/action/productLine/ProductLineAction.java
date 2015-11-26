@@ -441,9 +441,11 @@ public class ProductLineAction extends BaseController {
 
     @ResponseBody
     @RequestMapping("ajax/lineInCondition")
-    public List<ProductLine> lineInCondition(String key){
-        if(key.matches("[0-9]+")){
-            return productLineService.getProductLineByIds(Integer.parseInt(key));
+    public List<ProductLine> lineInCondition(String key, Integer initKey){
+        if(initKey!=null){
+            List<ProductLine> result = new ArrayList<ProductLine>();
+            result.add(productLineService.findProductLine(initKey));
+            return result;
         }
         List<ProductLine> lineList = productLineService.getUserProductLine(UserUtils.getUserId());
         Integer[] ids = new Integer[lineList.size()];

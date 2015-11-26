@@ -15,6 +15,7 @@ import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.RoleService;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
+import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.sdpm.productLine.service.ProductLineService;
@@ -30,6 +31,7 @@ import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.dao.pojo.SystemHistory;
 import org.tinygroup.sdpm.system.service.inter.ActionService;
 import org.tinygroup.sdpm.system.service.inter.HistoryService;
+import org.tinygroup.sdpm.util.CookieUtils;
 import org.tinygroup.sdpm.util.LogUtil;
 import org.tinygroup.sdpm.util.ProductUtils;
 import org.tinygroup.sdpm.util.UserUtils;
@@ -492,5 +494,29 @@ public class ProductAction extends BaseController {
         Map<String, String> result = new HashMap<String, String>();
         result.put("status", "success");
         return result;
+    }
+
+    @ResponseBody
+    @RequestMapping("ajax/productInCondition")
+    public List<Product> userInCondition(String key, String initKey, HttpServletRequest request){
+        if(initKey!=null){
+            if(initKey.indexOf(",")>0){
+                String[] ids = initKey.split(",");
+                Integer[] iIds = new Integer[ids.length];
+                for(int i = 0;i<iIds.length; i++){
+                    iIds[i] = Integer.parseInt(ids[i]);
+                }
+                return productService.findProductListByIds(iIds);
+            }
+            List<Product> result = new ArrayList<Product>();
+            result.add(productService.findProduct(Integer.parseInt(initKey)));
+            return result;
+        }
+        List<Product> products = productService.getProductByUser(UserUtils.getUserId(),0,null);
+        Integer[] pIds = new Integer[products.size()];
+        for(int i =0; i<pIds.length; i++){
+            pIds[i] = products.get(i).getProductId();
+        }
+        return productService.productInCondition(key,pIds);
     }
 }

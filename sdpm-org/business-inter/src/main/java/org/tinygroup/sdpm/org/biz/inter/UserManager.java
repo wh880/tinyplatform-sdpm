@@ -131,4 +131,11 @@ public interface UserManager {
      */
     List<OrgUser> findTeamUserListByProjectId(Integer projectId);
 
+    /**
+     * 根据名称条件查询
+     * @param condition
+     * @return
+     */
+    List<OrgUser> userInCondition(String condition,String ...ids);
+
 }

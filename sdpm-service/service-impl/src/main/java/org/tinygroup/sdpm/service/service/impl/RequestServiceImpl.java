@@ -72,4 +72,8 @@ public class RequestServiceImpl implements RequestService {
         return requestManager.deleteBatch(list);
     }
 
+    public List<ServiceRequest> requestInCondition(String condition) {
+        return requestManager.requestInCondition(condition);
+    }
+
 }

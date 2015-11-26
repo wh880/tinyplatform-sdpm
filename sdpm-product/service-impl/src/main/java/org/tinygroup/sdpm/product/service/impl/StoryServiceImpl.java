@@ -146,4 +146,8 @@ public class StoryServiceImpl implements StoryService {
         return storyManager.findPager(start,limit,story,carrier.resultCondition(),columnName,asc);
     }
 
+    public List<ProductStory> storyInCondition(String condition, Integer productId) {
+        return storyManager.storyInCondition(condition,productId);
+    }
+
 }

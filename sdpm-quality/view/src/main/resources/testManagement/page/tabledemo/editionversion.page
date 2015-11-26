@@ -51,10 +51,10 @@
     				<p class="titleName">编辑版本</p>
 			#@elementItem()
 				#@colLabel()<span class="c-red">*</span>所属项目：#end
-				#@formControlDiv("col-8")
-					#@div(divClass="col-5")
+				#@formControlDiv("col-4")
+					#@div(divClass="col-10")
 					 #@Tselect2F()
-	                   		 #@Tselect2Body("projectId" testTask?.projectId?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                   		 #@Tselect2Body("projectId" testTask?.projectId?:0 {"datatype":"*","nullmsg":"所属项目不能为空","class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 
 	                    	#end
                            <script type="text/javascript">
@@ -79,15 +79,15 @@
 						#end
                 	  #end
                 	 #end
-					#@validateDiv("col-2")#end
 					#end
+				#@validateDiv("col-2")#end
 			#end
 			#@elementItem()
 				#@colLabel()<span class="c-red">*</span>版本：#end
-				#@formControlDiv("col-8")
-					#@div(divClass="col-5")
+				#@formControlDiv("col-4")
+					#@div(divClass="col-10")
 					 #@Tselect2F()
-	                   		 #@Tselect2Body("buildName" testTask?.buildName?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                   		 #@Tselect2Body("buildName" testTask?.buildName?:0 {"datatype":"*","nullmsg":"版本不能为空","class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 
 	                    	#end
 						 #@Tselect2Fix()
@@ -102,14 +102,14 @@
 						 #end
                 	  #end
                 	 #end
-					#@validateDiv("col-2")#end
 					#end
+				#@validateDiv("col-2")#end
 			#end
 
 			#@elementItem()
 				#@colLabel()负责人：#end
-				#@formControlDiv("col-8")
-					#@div(divClass="col-5")
+				#@formControlDiv("col-4")
+					#@div(divClass="col-10")
 					 #@Tselect2F()
 	                   		 #@Tselect2Body("testtaskOwner" testTask?.testtaskOwner?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 
@@ -126,18 +126,16 @@
 						 #end
                 	  #end
                 	 #end
-					#@validateDiv("col-2")#end
-
 				#end
 				#@validateDiv("col-2")#end
 			#end
 
 			#@elementItem()
-				#@colLabel()优先级：#end
-				#@formControlDiv("col-8")
-					#@div(divClass="col-5")
+				#@colLabel()<span class="c-red">*</span>优先级：#end
+				#@formControlDiv("col-4")
+					#@div(divClass="col-10")
 	                        #@Tselect2F()
-	                   		 #@Tselect2Body("priority" testTask?.priority {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                   		 #@Tselect2Body("priority" testTask?.priority {"datatype":"*","nullmsg":"优先级不能为空","class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 	                        #for(pri : getDict("versionPriority"))
 	                             <option value="${pri?.value}">${pri?.text}</option>
 	                        #end
@@ -149,26 +147,27 @@
 			#end
 				#@elementItem()
 					#@colLabel()<span class="c-red">*</span>开始日期：#end
-					#@formControlDiv("col-8")
-						#@div(divClass="col-5")
-						#@tinyDateInput("testtaskBegin" testTask?.testtaskBegin "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空"})#end
+					#@formControlDiv("col-4")
+						#@div(divClass="col-10")
+						#@tinyDateInput("testtaskBegin" testTask?.testtaskBegin?formatDate(testTask?.testtaskBegin,"yyyy-MM-dd"):"" "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空"})#end
 						#end
 					#end
 					#@validateDiv("col-2")#end
 				#end
 				#@elementItem()
 					#@colLabel()<span class="c-red">*</span>结束日期：#end
-					#@formControlDiv("col-8")
-						#@div(divClass="col-5")
-						#@tinyDateInput("testtaskEnd" testTask?.testtaskEnd "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空"})#end
-						#end					#end
+					#@formControlDiv("col-4")
+						#@div(divClass="col-10")
+						#@tinyDateInput("testtaskEnd" testTask?.testtaskEnd?formatDate(testTask?.testtaskEnd,"yyyy-MM-dd"):"" "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空"})#end
+						#end
+					#end
 					#@validateDiv("col-2")#end
 				#end
 
 			#@elementItem()
 				#@colLabel()当前状态：#end
-				#@formControlDiv("col-8")
-					#@div(divClass="col-5")
+				#@formControlDiv("col-4")
+					#@div(divClass="col-10")
 					#@tinySelect("testtaskStatus" testTask?.testtaskStatus {"class":"#####","nullmsg":"请选择","datatype":""})
 					#for(status : getDict("versionStatus"))
 						#@optionItem(status?.value)${status?.text}#end
@@ -179,10 +178,10 @@
 				#@validateDiv("col-2")#end
 			#end
 			#@elementItem()
-				#@colLabel()任务名称：#end
-				#@formControlDiv("col-8")
-					#@div(divClass="col-5")
-						#tinyInput("text" "testtaskTitle" testTask?.testtaskTitle {"datatype":"*","id":"抄送给","class":"input-text"})
+				#@colLabel()<span class="c-red">*</span>测试名称：#end
+				#@formControlDiv("col-4")
+					#@div(divClass="col-10")
+						#tinyInput("text" "testtaskTitle" testTask?.testtaskTitle {"datatype":"*","nullmsg":"测试名称不能为空","id":"抄送给","class":"input-text"})
 					#end					
 				#end
 				#@validateDiv("col-2")#end
@@ -225,4 +224,10 @@
 	#end
 	#end
 
-
+<script type="text/javascript">
+    $(function () {
+        $("form[name=thisform]").Validform({
+            tiptype: 2
+        });
+    });
+</script>

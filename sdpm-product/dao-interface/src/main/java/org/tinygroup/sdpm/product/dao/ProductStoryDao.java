@@ -66,4 +66,12 @@ public interface ProductStoryDao extends BaseDao<ProductStory,Integer> {
 	Integer deleteStoryByProduct(Integer productId);
 
 	Integer deleteStoryByPlan(Integer planId);
+
+	/**
+	 * 根据输入名称查询
+	 * @param condition
+	 * @param productId
+	 * @return
+	 */
+	List<ProductStory> storyInCondition(String condition, Integer productId, Integer...ids);
 }

@@ -581,6 +581,12 @@ public class ServiceRequestDaoImpl extends TinyDslDaoSupport implements ServiceR
         });
     }
 
+    public List<ServiceRequest> requestInCondition(String condition) {
+        Select select = selectFrom(SERVICE_REQUESTTABLE).where(
+                and(SERVICE_REQUESTTABLE.REQUEST_TITLE.like(condition), SERVICE_REQUESTTABLE.DELETED.eq(0)));
+        return getDslSession().fetchList(select,ServiceRequest.class);
+    }
+
     public int[] batchUpdateReply(List<ServiceRequest> list) {
         if (CollectionUtil.isEmpty(list)) {
             return new int[0];

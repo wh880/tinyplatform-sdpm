@@ -148,4 +148,8 @@ public class UserServiceImpl implements UserService {
     public List<OrgUser> findTeamUserListByProjectId(Integer projectId) {
         return userManager.findTeamUserListByProjectId(projectId);
     }
+
+    public List<OrgUser> userInCondition(String condition, String ...ids) {
+        return userManager.userInCondition(condition,ids);
+    }
 }

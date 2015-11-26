@@ -6,7 +6,7 @@
 		       		#end
 		       		#@tbody()
 						#@tr()
-							#@td()产品线名称#end
+                        	<td style="width:35%">产品线名称</td>
 							#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/productLine/find/overview?productLineId=${product?.productLineId}">${product?.productLineName}</a>#end
 						#end
 		       			#@tr()
@@ -69,7 +69,7 @@
 		       		#end
 		       		#@tbody()
 		       			#@tr()
-							#@td()激活需求#end
+                        <td style="width:35%">激活需求</td>
 		       				#@td()${product?.activeSum}#end
 		       			#end
 		       			#@tr()

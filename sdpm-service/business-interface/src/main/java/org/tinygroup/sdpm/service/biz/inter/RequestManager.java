@@ -117,5 +117,12 @@ public interface RequestManager {
      * @return
      */
     int[] updateReview(List<ServiceRequest> list);
+
+    /**
+     * 根据查询名称查询
+     * @param condition
+     * @return
+     */
+    List<ServiceRequest> requestInCondition(String condition);
 }
 

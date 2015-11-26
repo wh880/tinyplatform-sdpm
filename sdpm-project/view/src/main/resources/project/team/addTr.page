@@ -2,12 +2,9 @@
 <td class="text-c userID" style="width: 2%"></td>
 <td style="width:18%">
     #@Tselect2F()
-        #@Tselect2Body("teamList["+a+"].teamUserId" "" {"class":"input-text select2"})
-            <option></option>
-            #foreach(u : userList)
-                <option value="${u.orgUserId}">${u.orgUserRealName}</option>
-            #end
-        #end
+        #Tselect2Ajax("teamList["+a+"].teamUserId" story?.storyAssignedTo TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
+        {"id":"","dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询用户","nullmsg":"请选择用户！","datatype":"*"})
+
         #@Tselect2Fix()
             #set(m=menuManager.getMenu("organizationAddUser"))
             #if(m)

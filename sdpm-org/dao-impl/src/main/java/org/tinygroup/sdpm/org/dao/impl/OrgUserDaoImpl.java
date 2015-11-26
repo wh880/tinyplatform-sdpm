@@ -25,6 +25,7 @@ import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
 import org.tinygroup.sdpm.org.dao.OrgUserDao;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.tinysqldsl.*;
+import org.tinygroup.tinysqldsl.base.Condition;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 import org.tinygroup.tinysqldsl.select.OrderByElement;
@@ -173,6 +174,15 @@ public class OrgUserDaoImpl extends TinyDslDaoSupport implements OrgUserDao {
                 )
         ));
         return getDslSession().fetchList(select, OrgUser.class);
+    }
+
+    public List<OrgUser> userInCondition(String condition,String ...ids) {
+        Condition con = null;
+        if(ids!=null&&ids.length!=0){
+            con = ORG_USERTABLE.ORG_USER_ID.in(ids);
+        }
+        Select select = select(ORG_USERTABLE.ORG_USER_ID,ORG_USERTABLE.ORG_USER_REAL_NAME).from(ORG_USERTABLE).where(and(ORG_USERTABLE.ORG_USER_DELETED.eq(0),ORG_USERTABLE.ORG_USER_REAL_NAME.like(condition),con));
+        return getDslSession().fetchList(select,OrgUser.class);
     }
 
     public Pager<OrgUser> getPagerByDeptId(int start, int limit, final Integer deptId, final OrderBy... orderBies) {

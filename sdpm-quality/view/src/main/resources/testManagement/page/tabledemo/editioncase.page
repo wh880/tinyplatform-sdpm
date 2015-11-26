@@ -109,5 +109,12 @@
         ###include("/testManagement/page/tabledemo/editioncasepaging.page")
     </div>
             
- #end      
-   
+ #end
+
+<script type="text/javascript">
+    $(function () {
+        $("form[name=addCaseForm]").Validform({
+            tiptype: 1
+        });
+    });
+</script>

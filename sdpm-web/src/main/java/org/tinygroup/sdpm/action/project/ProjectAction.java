@@ -76,7 +76,6 @@ public class ProjectAction extends BaseController {
     @RequiresPermissions(value = {"project-op-add", "batch-distribute-task", "pro-Info2-copy", "pro-task-proposeversion"}, logical = Logical.OR)
     @RequestMapping("/form")
     public String form(Model model) {
-        model.addAttribute("productList", ProductUtils.getAllProductListByUser());
         return "project/form";
     }
 

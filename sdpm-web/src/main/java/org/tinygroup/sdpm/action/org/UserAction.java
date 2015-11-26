@@ -20,6 +20,7 @@ import org.tinygroup.sdpm.org.service.inter.RoleService;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.service.StoryService;
+import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTeam;
@@ -575,5 +576,45 @@ public class UserAction extends BaseController {
         model.addAttribute("size", size);
         model.addAttribute("teamList", teamList);
         return "/organization/user/projectAdminTable.pagelet";
+    }
+
+    @ResponseBody
+    @RequestMapping("ajax/userInCondition")
+    public List<OrgUser> userInCondition(String key, String initKey){
+        if(initKey!=null){
+            List<OrgUser> result = new ArrayList<OrgUser>();
+            result.add(userService.findUser(initKey));
+            return result;
+        }
+        return userService.userInCondition(key);
+    }
+
+    @ResponseBody
+    @RequestMapping("ajax/userInConditionAndTeam")
+    public List<OrgUser> userInConditionAndTeam(String key, String initKey, Integer productId, Integer projectId){
+        if(initKey!=null){
+            if(initKey.indexOf(",")>0){
+                String[] ids = initKey.split(",");
+                return userService.findUserListByIds(ids);
+            }else{
+                List<OrgUser> result = new ArrayList<OrgUser>();
+                result.add(userService.findUser(initKey));
+                return result;
+            }
+        }
+        List<ProjectTeam> teams = null;
+        if(productId!=null){
+            teams = teamService.findTeamByProductId(productId);
+        }else if(projectId!=null){
+            teams = teamService.findTeamByProjectId(projectId);
+        }
+        String[] ids = null;
+        if(teams!=null){
+            ids = new String[teams.size()];
+            for(int i = 0; i < ids.length; i++){
+                ids[i] = teams.get(i).getTeamUserId();
+            }
+        }
+        return userService.userInCondition(key,ids);
     }
 }

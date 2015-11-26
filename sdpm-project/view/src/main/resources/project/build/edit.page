@@ -25,17 +25,12 @@
     <p class="titleName">新建/编辑版本</p>
 
     #@elementItem()
-        #@sdpmItem("产品","*")
+        #@colLabel()产品：#end
+        #@formControlDiv("col-4")
             #@Tselect2F()
-                #@Tselect2Body(
-                    "buildProduct" build?.buildProduct?:productId {"class":"input-text select2","datatype":"*",
-                    "nullmsg":"产品不能为空"}) ##,"multiple":"multiple"加上为多选项
-                    #foreach(p : productList)
-                        <option value="${p.productId}">${p.productName}</option>
-                    #end
-                #end
-            ##填写任意内容，侦听需重新填加 A侦听已内置
-                #@Tselect2Fix()
+                #@TzTreeSelect(
+                    "buildProduct" build?.buildProduct?:productId {"class":"input-text","datatype":"*","nullmsg":"产品不能为空！",
+                    "data-URL":call("link",adminPath+"/productLine/userProductTree")})
                     #set(m=menuManager.getMenu("newproduct"))
                     #if(m)
                         <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
@@ -49,22 +44,19 @@
         #end
     #end
     #@elementItem()
-        #@sdpmItem("版本名称","*")
+        #@colLabel()版本名称：#end
+        #@formControlDiv("col-4")
             #tinyInput(
                 "text" "buildName" build?.buildName {"style":"width:80%","placeholder":"","datatype":"*","nullmsg":
                 "版本名不能为空！","class":"input-text"})
         #end
     #end
     #@elementItem()
-        #@sdpmItem("构建者","*")
+        #@colLabel()构建者：#end
+        #@formControlDiv("col-4")
             #@Tselect2F()
-                #@Tselect2Body(
-                    "buildBuilder" build?.buildBuilder {"class":"input-text select2","datatype":"*","nullmsg":
-                    "构建者不能为空！"}) ##,"multiple":"multiple"加上为多选项
-                    #foreach(t : teamList)
-                        <option value="${t.orgUserId}">${t.orgUserRealName}</option>
-                    #end
-                #end
+                #Tselect2Ajax("buildBuilder" build?.buildBuilder TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
+            {"dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询构建者","nullmsg":"请选择构建者！","datatype":"*"})
             ##填写任意内容，侦听需重新填加 A侦听已内置
                 #@Tselect2Fix()
                     #set(m=menuManager.getMenu("organizationAddUser"))
@@ -80,7 +72,8 @@
         #end
     #end
     #@elementItem()
-        #@sdpmItem("打包日期")
+        #@colLabel()打包日期：#end
+        #@formControlDiv("col-4")
             #@formHorizontal()
                 #@tinyDateInput(
                     "buildDate" formatDate(build?.buildDate,
@@ -91,22 +84,25 @@
     #end
 
     #@elementItem()
-        #@sdpmItem("源代码地址","*")
+        #@colLabel()源代码地址：#end
+        #@formControlDiv("col-4")
             #tinyInput(
                 "text" "buildScmPath" build?.buildScmPath{"style":"width:80%","placeholder":"","datatype":"*4-50",
-                "nullmsg":"标题不能为空！","id":"username","class":"input-text"})
+                "nullmsg":"源代码地址不能为空！","id":"username","class":"input-text"})
         #end
     #end
 
     #@elementItem()
-        #@sdpmItem("下载地址","*")
+        #@colLabel()下载地址：#end
+        #@formControlDiv("col-4")
             #tinyInput(
                 "text" "buildFilePath" build?.buildFilePath{"style":"width:80%","placeholder":"","datatype":"*4-50",
                 "nullmsg":"下载地址不能为空！","id":"username","class":"input-text"})
         #end
     #end
     #@elementItem()
-        #@sdpmItem("附件")
+        #@colLabel()附件：#end
+        #@formControlDiv("col-4")
             #@formControlDiv("col-8")
                 #tinyUploadInput("inputName" "" {"style":"width:80%","placeholder":"可直接输入地址，也可点击下图标进行上传"})
             #end

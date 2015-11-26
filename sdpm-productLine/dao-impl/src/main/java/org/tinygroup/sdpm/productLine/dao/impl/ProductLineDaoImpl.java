@@ -263,7 +263,7 @@ public class ProductLineDaoImpl extends TinyDslDaoSupport implements ProductLine
 	}
 
 	public List<ProductLine> lineInCondition(String condition, Integer... ids) {
-		Select select = selectFrom(PRODUCT_LINETABLE).where(and(PRODUCT_LINETABLE.PRODUCT_LINE_NAME.like(condition),PRODUCT_LINETABLE.PRODUCT_LINE_ID.in(ids)));
+		Select select = select(PRODUCT_LINETABLE.PRODUCT_LINE_ID,PRODUCT_LINETABLE.PRODUCT_LINE_NAME).from(PRODUCT_LINETABLE).where(and(PRODUCT_LINETABLE.DELETED.eq(0),PRODUCT_LINETABLE.PRODUCT_LINE_NAME.like(condition),PRODUCT_LINETABLE.PRODUCT_LINE_ID.in(ids)));
 		return getDslSession().fetchList(select,ProductLine.class);
 	}
 

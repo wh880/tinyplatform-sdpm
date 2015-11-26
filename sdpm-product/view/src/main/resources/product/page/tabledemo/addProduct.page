@@ -20,7 +20,7 @@
         #@Tselect2F()
             <script>
                 $(function () {
-                    $("select[name=productLineId]").on("change", function () {
+                    $("[name=productLineId]").on("change", function () {
                         $("input[name=productName]").blur();
                         $("input[name=productCode]").blur();
                     });
@@ -28,7 +28,7 @@
             </script>
 
         #Tselect2Ajax("productLineId" cookieProductId TINY_CONTEXT_PATH+adminPath+"/productLine/ajax/lineInCondition"
-        {"dataId":"productLineId","dataText":"productLineName","placeholder":"查询数据"})
+        {"dataId":"productLineId","dataText":"productLineName","placeholder":"查询产品线","nullmsg":"请选择产品线！","datatype":"*"})
         #@Tselect2Fix()
                 #set(m=menuManager.getMenu("productLine-add"))
                 #if(m)
@@ -70,13 +70,8 @@
 #@colLabel()<span class="c-red">*</span>产品负责人：#end
 #@formControlDiv("col-3")
     #@Tselect2F()
-        <script>
-            $(function(){
-                ajaxRead("${sid}", "productOwner", "orgUserId", "orgUserRealName", "/org/user/userList");
-            })
-        </script>
-        #@Tselect2Body("productOwner" "" {"class":"input-text select2","nullmsg":"请选择产品负责人！","datatype":"*"}) ##,"multiple":"multiple"加上为多选项
-        #end
+        #Tselect2Ajax("productOwner" "" TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
+        {"dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询产品负责人","nullmsg":"请选择产品负责人！","datatype":"*"})
             #@Tselect2Fix()
                     #set(m=menuManager.getMenu("organizationAddUser"))
                     #if(m)
@@ -97,15 +92,8 @@
 #@colLabel()<span class="c-red">*</span>测试负责人：#end
 #@formControlDiv("col-3")
     #@Tselect2F()
-        <script>
-            $(function(){
-                ajaxRead("${sid}", "productQualityManager", "orgUserId", "orgUserRealName", "/org/user/userList");
-            })
-        </script>
-        #@Tselect2Body(
-            "productQualityManager" "" {"class":"input-text select2","nullmsg":"请选择测试负责人！","datatype":"*"}) ##,"multiple":"multiple"加上为多选项
-        #end
-
+        #Tselect2Ajax("productQualityManager" "" TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
+        {"dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询测试负责人","nullmsg":"请选择测试负责人！","datatype":"*"})
         #@Tselect2Fix()
                 #set(m=menuManager.getMenu("organizationAddUser"))
                 #if(m)
@@ -127,14 +115,9 @@
 #@colLabel()<span class="c-red">*</span>发布负责人：#end
 #@formControlDiv("col-3")
     #@Tselect2F()
-        <script>
-            $(function(){
-                ajaxRead("${sid}", "productDeliveryManager", "orgUserId", "orgUserRealName", "/org/user/userList");
-            })
 
-        </script>
-        #@Tselect2Body("productDeliveryManager" "" {"class":"input-text select2 ","nullmsg":"请选择发布负责人！","datatype":"*"}) ##,"multiple":"multiple"加上为多选项
-        #end
+        #Tselect2Ajax("productDeliveryManager" "" TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
+        {"dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询发布负责人","nullmsg":"请选择发布负责人！","datatype":"*"})
         #@Tselect2Fix()
                 #set(m=menuManager.getMenu("organizationAddUser"))
                 #if(m)

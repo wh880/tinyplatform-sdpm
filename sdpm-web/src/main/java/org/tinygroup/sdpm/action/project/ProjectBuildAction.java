@@ -17,6 +17,7 @@ import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.service.ProductService;
+import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
 import org.tinygroup.sdpm.project.service.inter.BuildService;
@@ -25,6 +26,7 @@ import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.sdpm.project.service.inter.ProjectStoryService;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
+import org.tinygroup.sdpm.util.CookieUtils;
 import org.tinygroup.sdpm.util.LogUtil;
 import org.tinygroup.sdpm.util.ProjectUtils;
 import org.tinygroup.sdpm.util.UserUtils;
@@ -423,4 +425,18 @@ public class ProjectBuildAction extends BaseController {
         return buildService.findListBuild(build);
     }
 
+    @ResponseBody
+    @RequestMapping("ajax/buildInCondition")
+    public List<ProjectBuild> buildInCondition(String key, String initKey,Integer productId, Integer projectId, HttpServletRequest request){
+        if(initKey!=null){
+            if(initKey.indexOf(",")>0){
+                String[] ids = initKey.split(",");
+                return buildService.getBuildByIds(ids);
+            }
+            List<ProjectBuild> result = new ArrayList<ProjectBuild>();
+            result.add(buildService.findBuild(Integer.parseInt(initKey)));
+            return result;
+        }
+        return buildService.buildInCondition(key, productId, projectId);
+    }
 }

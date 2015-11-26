@@ -107,4 +107,11 @@ public interface ProductManager {
 
     List<Integer> getTeamRoleProductLineIds(String userId,Integer delete);
 
+    /**
+     * 根据输入名称查询
+     * @param condition
+     * @return
+     */
+    List<Product> productInCondition(String condition,Integer ...ids);
+
 }

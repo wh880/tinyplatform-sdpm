@@ -166,4 +166,12 @@ public interface BuildService {
      * @return
      */
     List<ProjectBuild> getBuildByProducts(Integer ...ids);
+
+    /**
+     * 根据输入名称和产品查询
+     * @param condition
+     * @param productId
+     * @return
+     */
+    List<ProjectBuild> buildInCondition(String condition, Integer productId, Integer projectId);
 }

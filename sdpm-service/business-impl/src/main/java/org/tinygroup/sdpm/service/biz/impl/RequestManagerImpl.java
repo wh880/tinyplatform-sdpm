@@ -93,4 +93,8 @@ public class RequestManagerImpl implements RequestManager {
     public int[] updateReview(List<ServiceRequest> list) {
         return requestDao.batchUpdateReview(list);
     }
+
+    public List<ServiceRequest> requestInCondition(String condition) {
+        return requestDao.requestInCondition(condition);
+    }
 }

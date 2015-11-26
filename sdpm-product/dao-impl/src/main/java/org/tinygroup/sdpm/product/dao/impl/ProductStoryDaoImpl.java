@@ -27,6 +27,7 @@ import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.common.util.update.InsertUtil;
 import org.tinygroup.sdpm.common.util.update.UpdateUtil;
 import org.tinygroup.sdpm.product.dao.ProductStoryDao;
+import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.dao.pojo.StoryCount;
@@ -723,6 +724,18 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 	public Integer deleteStoryByPlan(Integer planId) {
 		Update update = update(PRODUCT_STORYTABLE).set(PRODUCT_STORYTABLE.DELETED.value(1)).where(and(PRODUCT_STORYTABLE.PLAN_ID.eq(planId), PRODUCT_STORYTABLE.DELETED.eq(0)));
 		return getDslSession().execute(update);
+	}
+
+	public List<ProductStory> storyInCondition(String condition, Integer productId, Integer ...ids) {
+		Condition con = null;
+		if(productId!=null){
+			con = PRODUCT_STORYTABLE.PRODUCT_ID.eq(productId);
+		}
+		if(ids !=null && ids.length!=0){
+			con = con==null?PRODUCT_STORYTABLE.STORY_ID.in(ids):and(con,PRODUCT_STORYTABLE.STORY_ID.in(ids));
+		}
+		Select select = select(PRODUCT_STORYTABLE.STORY_ID,PRODUCT_STORYTABLE.STORY_TITLE).from(PRODUCT_STORYTABLE).where(and(PRODUCT_STORYTABLE.STORY_TITLE.like(condition),con));
+		return getDslSession().fetchList(select, ProductStory.class);
 	}
 
 	public Integer softDelete(Integer id) {

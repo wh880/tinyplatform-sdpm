@@ -4,12 +4,12 @@
     $(document).ready(function () {
         $("select[name='storySource']").bind('change', function () {
             if (0 == $(this).val()) {
-                $("select[name='clientRequestId']").attr("ignore","")
+                $("[name='clientRequestId']").attr("ignore","")
                 $(".customer-request").show();
             } else {
-                $("select[name='clientRequestId']").attr("ignore","ignore");
+                $("[name='clientRequestId']").attr("ignore","ignore");
                 $(".customer-request").hide();
-                $("select[name='clientRequestId']").val(0).trigger("change");
+                $("[name='clientRequestId']").val(0).trigger("change");
             }
         });
 
@@ -74,7 +74,6 @@
                     #@Tselect2Body("planId" story?.planId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 
                     #end
-
                     #@Tselect2Fix()
                         #@hasMenu("product-plan-add")
                             <a href="${TINY_CONTEXT_PATH +adminPath}/product/plan/addplan"
@@ -93,7 +92,6 @@
                 #@Tselect2F()
                     #@Tselect2Body("storySource" story?.storySource {"class":
                         "input-text select2","nullmsg":"请选择来源！","datatype":"*"})
-
                         #foreach(source:getDict("storySource"))
                             <option value="${source?.value}"> ${source?.text}</option>
                         #end
@@ -110,12 +108,8 @@
             #@colLabel()<span class='c-red'>*</span>客户请求：#end
             #@formControlDiv("col-8")
             #@Tselect2F()
-                #@Tselect2Body("clientRequestId" "" {"class":"input-text select2","nullmsg":"请选择客户请求！","datatype":"*"}) ##,"multiple":"multiple"加上为多选项
-                    <option value="">--请选择--</option>
-                    #for(re : requestList)
-                     <option value="${re?.clientRequestId}">${re?.clientName+"/"+re?.requestTitle}</option>
-                    #end
-                #end
+                #Tselect2Ajax("clientRequestId" story?.clientRequestId TINY_CONTEXT_PATH+adminPath+"/service/request/ajax/requestInCondition"
+                {"dataId":"clientRequestId","dataText":"requestTitle","placeholder":"查询请求","nullmsg":"请选择请求！","datatype":"*"})
             #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH +adminPath}/service/request/form" class="r">增加</a>#end
             #end
             #end
@@ -178,12 +172,9 @@
             #@colLabel()抄送给：#end
             #@formControlDiv("col-8")
                 #@Tselect2F()
-                    <script>
-                        ajaxRead("${sid}", "storyMailto", "orgUserId", "orgUserRealName", "/org/user/userList", "${story?.storyMailto}");
-                    </script>
-                    #@Tselect2Body("storyMailto" story?.storyMailto {"class":"input-text select2","multiple":
-                        "multiple"}) ##,"multiple":"multiple"加上为多选项
-                    #end
+                    #Tselect2Ajax("storyMailto" story?.storyMailto TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
+                    {"id":"storyMailtoSelect","dataId":"orgUserId","dataText":"orgUserRealName",
+                        "placeholder":"查询抄送人","multiple":"multiple"})
                     #@Tselect2Fix()
                         #set(m=menuManager.getMenu("organizationAddUser"))
                         #if(m)
@@ -218,12 +209,8 @@
                 #@colLabel()指派给：#end
                 #@formControlDiv("col-8")
                     #@Tselect2F()
-                        <script>
-                            ajaxRead("${sid}", "storyAssignedTo", "orgUserId", "orgUserRealName", "/org/user/userList","${story?.storyAssignedTo}");
-                        </script>
-                        #@Tselect2Body("storyAssignedTo" story?.storyAssignedTo {"class":
-                            "input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                        #end
+                        #Tselect2Ajax("storyAssignedTo" story?.storyAssignedTo TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
+                        {"id":"reviewedSelect","dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询指派人","nullmsg":"请选择指派人！","datatype":"*"})
                         #@Tselect2Fix()
                             #set(m=menuManager.getMenu("organizationAddUser"))
                             #if(m)

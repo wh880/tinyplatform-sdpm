@@ -93,6 +93,10 @@ public class BuildManagerImpl implements BuildManager {
         return projectBuildDao.getBuildByProducts(ids);
     }
 
+    public List<ProjectBuild> buildInCondition(String condition, Integer productId, Integer projectId) {
+        return projectBuildDao.buildInCondition(condition,productId,projectId);
+    }
+
     public Pager<ProductStory> findNoBuildStory(int start, int limit, String condition, Integer buildId) {
         return projectBuildDao.findNoBuildStoryList(start, limit, condition, buildId);
     }

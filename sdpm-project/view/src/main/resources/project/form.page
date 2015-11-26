@@ -123,11 +123,9 @@
         #@elementItem()
             #@sdpmItem("关联产品")
                 #@Tselect2F()
-                    #@Tselect2Body("linkProduct" "" {"class":"input-text select2","multiple":"multiple"})
-                        #foreach(p : productList)
-                            <option value="${p?.productId}">${p.productName}</option>
-                        #end
-                    #end
+                    #Tselect2Ajax("linkProduct" "" TINY_CONTEXT_PATH+adminPath+"/product/ajax/productInCondition"
+                    {"id":"linkProductSelect","dataId":"productId","dataText":"productName",
+                        "placeholder":"关联产品","multiple":"multiple"})
                     #@Tselect2Fix()
                         #set(m=menuManager.getMenu("newproduct"))
                         #if(m)

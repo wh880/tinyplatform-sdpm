@@ -220,4 +220,8 @@ public class StoryManagerImpl implements StoryManager {
         });
         return findPager(start,limit,story,carrier.resultCondition(),columnName,asc);
     }
+
+    public List<ProductStory> storyInCondition(String condition, Integer productId, Integer ...ids) {
+        return productStoryDao.storyInCondition(condition,productId,ids);
+    }
 }

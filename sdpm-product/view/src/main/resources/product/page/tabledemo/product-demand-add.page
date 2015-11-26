@@ -3,14 +3,14 @@
     $(document).ready(function () {
         $("select[name='storySource']").bind('change', function () {
             if (0 == $(this).val()) {
-                $("select[name='clientRequestId']").attr("ignore","")
-                $("select[name='clientRequestId']").blur();
+                $("[name='clientRequestId']").attr("ignore","")
+                $("[name='clientRequestId']").blur();
                 $(".customer-request").show();
                 $("#demand-sources").addClass("col-5");
             } else {
-                $("select[name='clientRequestId']").attr("ignore","ignore");
+                $("[name='clientRequestId']").attr("ignore","ignore");
                 $(".customer-request").hide();
-                $("select[name='clientRequestId']").val(0).trigger("change");
+                $("[name='clientRequestId']").val(0).trigger("change");
                 $("#demand-sources").removeClass("col-5");
             }
         });
@@ -20,12 +20,12 @@
 
             var vm = this.checked;
             if (vm == true) {
-                $("select[name='storyReviewedBy']").attr("disabled", "disabled");
-                $("select[name='storyReviewedBy']").closest(".formControls").next("div[class=col-2]").hide();
+                $("[name='storyReviewedBy']").attr("disabled", "disabled");
+                $("[name='storyReviewedBy']").closest(".formControls").next("div[class=col-2]").hide();
             }
             if (vm == false) {
-                $("select[name='storyReviewedBy']").removeAttr("disabled");
-                $("select[name='storyReviewedBy']").closest(".formControls").next("div[class=col-2]").show();
+                $("[name='storyReviewedBy']").removeAttr("disabled");
+                $("[name='storyReviewedBy']").closest(".formControls").next("div[class=col-2]").show();
             }
 
 
@@ -141,14 +141,9 @@
             </div>
 
         <div class="col-5">
-
             #@Tselect2F()
-                #@Tselect2Body("clientRequestId" "" {"class":"input-text select2","nullmsg":"请选择客户请求！","datatype":"*"}) ##,"multiple":"multiple"加上为多选项
-                    <option value="">--请选择--</option>
-                    #for(re : requestList)
-                    <option value="${re?.clientRequestId}">${re?.clientName+"/"+re?.requestTitle}</option>
-                #end
-            #end
+                #Tselect2Ajax("clientRequestId" "" TINY_CONTEXT_PATH+adminPath+"/service/request/ajax/requestInCondition"
+                {"dataId":"clientRequestId","dataText":"requestTitle","placeholder":"查询请求","nullmsg":"请选择请求！","datatype":"*"})
             #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH +adminPath}/service/request/form"
                               class="r">增加</a>#end
         #end
@@ -226,15 +221,8 @@
     #@formControlDiv("col-4")
         <div class="col-7">
         #@Tselect2F()
-            <script>
-                $(function(){
-                    ajaxRead("${sid}", "storyReviewedBy", "orgUserId", "orgUserRealName", "/org/user/userList");
-                })
-            </script>
-            #@Tselect2Body(
-                "storyReviewedBy" UserUtils.getUserId() {"class":"input-text select2","datatype":"*","nullmsg":"评审人不能为空！"})
-            #end
-
+            #Tselect2Ajax("storyReviewedBy" UserUtils.getUserId() TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
+            {"dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询评审人","nullmsg":"请选择评审人！","datatype":"*"})
             #@Tselect2Fix()
                 #set(m=menuManager.getMenu("organizationAddUser"))
                 #if(m)
@@ -264,9 +252,9 @@
     #@colLabel()抄送给：#end
     #@formControlDiv("col-4")
         #@Tselect2F()
-            #@Tselect2Body("storyMailto" "" {"class":"input-text select2","multiple":
-                "multiple"}) ##,"multiple":"multiple"加上为多选项
-            #end
+            #Tselect2Ajax("storyMailto" "" TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
+            {"id":"storyMailtoSelect","dataId":"orgUserId","dataText":"orgUserRealName",
+                "placeholder":"查询抄送人","multiple":"multiple"})
             <script>
                 ajaxRead("${sid}", "storyMailto", "orgUserId", "orgUserRealName", "/org/user/userList");
             </script>

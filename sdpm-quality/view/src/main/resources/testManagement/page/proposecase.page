@@ -31,7 +31,7 @@
     	<div class="infoContent">
     		<p class="titleName">建用例</p>
         #@elementItem()
-            #@colLabel()产品模块：#end
+            #@colLabel()<span class="c-red">*</span>产品/模块：#end
             #@formControlDiv("col-8")
             #@div(divClass="col-5")
                 #@TzTreeSelect(
@@ -82,20 +82,20 @@
                 	  #end
 					#end
 				#end
+            #@validateDiv("col-2")#end
         #end
         #@elementItem()
             #@colLabel()<span class="c-red">*</span>用例类型：#end
-            #@formControlDiv("col-8")
-            	#@div(divClass="col-5")
+            #@formControlDiv("col-4")
+            	#@div(divClass="col-10")
                      #@Tselect2F()
-	                   		 #@Tselect2Body("caseType" testCase?.caseType {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                   		 #@Tselect2Body("caseType" testCase?.caseType {"class":"input-text select2","nullmsg":"请选择用例类型！","datatype":"*"}) ##,"multiple":"multiple"加上为多选项
 	                   		 #for(type : getDict("caseType"))
 	                   		    <option value="${type.value}">${type.text}</option>
 	                   		 #end
                      #end
                 	  #end
                 #end
-                    #@validateDiv("col-2")#end
             #end
             #@validateDiv("col-2")#end
         #end
@@ -105,7 +105,7 @@
                #@div(divClass="col-10")
 					 #@Tselect2F()
                          #@Tselect2Body("caseStage" testCase?.caseStage {"class":"input-text select2","multiple":"multiple",
-                                 "datatype":"*","nullmsg":"适用阶段不能为空！"}) ##,"multiple":"multiple"加上为多选项
+                                 "datatype":"*","nullmsg":"请选择适用阶段！"}) ##,"multiple":"multiple"加上为多选项
                          #foreach(stage : getDict("caseStage"))
                             <option value="${stage.value}">${stage.text}</option>
                          #end
@@ -118,9 +118,9 @@
 
         #@elementItem()
             #@colLabel()<span class="c-red">*</span>优先级：#end
-            #@formControlDiv("col-8")
-                #@div(divClass="col-5")
-					#@tinySelect("priority" testCase?.priority {"class":"select2"})
+            #@formControlDiv("col-4")
+                #@div(divClass="col-10")
+					#@tinySelect("priority" testCase?.priority {"class":"select2","datatype":"*","nullmsg":"请选择优先级！"})
                         #for(stage : getDict("casePriority"))
                         <option value="${stage.value}">${stage.text}</option>
                     #end

@@ -42,7 +42,7 @@
             #elseif(m.id=="tassign")
                 #if(qualityBug?.bugConfirmed==1)
                     <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${qualityBug?.bugId}"
-                       title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+                       title="${m.name}">#buttonIcon(iconClass=m.icon)</a>&nbsp;&nbsp;
                 #else
                     <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>&nbsp;&nbsp;
                 #end
@@ -116,6 +116,10 @@
 
         </script>
         <div style="width:70%;float:left" class="pageleftpart">
+            <div class="infoContent">
+                <p class="titleName">bug名称</p>
+                ${qualityBug?.bugTitle}
+            </div>
             <div class="infoContent">
                 <p class="titleName">重现步骤</p>
                 ${qualityBug?.bugSteps}

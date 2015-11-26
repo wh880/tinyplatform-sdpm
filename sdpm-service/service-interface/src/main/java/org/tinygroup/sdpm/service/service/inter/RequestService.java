@@ -111,5 +111,12 @@ public interface RequestService {
      * @return
      */
     int[] deleteBatchRequest(List<ServiceRequest> list);
+
+    /**
+     * 根据查询名称查询
+     * @param key
+     * @return
+     */
+    List<ServiceRequest> requestInCondition(String condition);
 }
 
