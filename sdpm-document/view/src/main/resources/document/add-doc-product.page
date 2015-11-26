@@ -121,7 +121,7 @@
     #@elementItem(elementId="contentBox" eleItemClass="hidden")
         #@colLabel()文档正文：#end
         #@formControlDiv("col-8")
-            #@tinyueditor("docContent" "docContent")#end
+            #@Teditor("docContent" "docContent")#end
         #end
         #@validateDiv("col-2")#end
     #end

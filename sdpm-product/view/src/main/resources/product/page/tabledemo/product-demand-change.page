@@ -117,9 +117,7 @@
             <div class="col-12">
                 <div class="col-2 text-r"><label>附件：</label></div>
                 <div class="col-9">
-                    #@formControlDiv("col-12")
-		   				#include("/product/page/event/fileupload.page")
-      				 		#end
+                    #mulUploadFile(fileList)
                 </div>
             </div>
         #end

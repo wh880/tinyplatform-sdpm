@@ -177,11 +177,12 @@
             #@validateDiv("col-2")#end
         #end
         #@elementItem()
-            #@colLabel()附件：#end
-            #@formControlDiv("col-8")
-                #include("/testManagement/page/fileupload.page")
-            #end
-            #@validateDiv("col-2")#end
+            <div class="col-12">
+                <div class="col-2 text-r"><label>附件：</label></div>
+                <div class="col-7">
+                    #mulUploadFile()
+                </div>
+            </div>
         #end
        #@elementItem()
         <div class="col-12">

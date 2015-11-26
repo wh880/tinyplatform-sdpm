@@ -1,7 +1,5 @@
 #!set(activeTitle="任务编辑",activeMenuId=currentPageId)
 #import("/org/tinygroup/button/components/button_smart.component")
-#import("/org/tinygroup/UEditor/component/ueditor.component")
-
 #import("/org/tinygroup/button/components/button_common.component")
 #import("/org/tinygroup/button/components/button.component")
 #import("/org/tinygroup/table/components/table.component")
@@ -57,8 +55,8 @@
             <div class="col-9">
                 #mulUploadFile(fileList)
             </div>
+        </div>
         #end
-    </div>
     </div>
     #@elementItem()
         <div class="col-12">

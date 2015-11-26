@@ -185,11 +185,6 @@
         </dependency>
         <dependency>
             <groupId>org.tinygroup</groupId>
-            <artifactId>org.tinygroup.uiupload</artifactId>
-            <version>${tiny_ui_version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.tinygroup</groupId>
             <artifactId>org.tinygroup.fullCalendar</artifactId>
             <version>${tiny_ui_version}</version>
         </dependency>

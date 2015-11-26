@@ -11,6 +11,7 @@ import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec;
 import org.tinygroup.sdpm.product.service.StoryService;
 import org.tinygroup.sdpm.product.service.StorySpecService;
+import org.tinygroup.sdpm.system.dao.pojo.ProfileType;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;
 import org.tinygroup.sdpm.system.service.inter.ProfileService;
@@ -42,12 +43,13 @@ public class StorySpecAction extends BaseController{
 		storySpec = storySpecs!=null&&storySpecs.size()>0?storySpecs.get(0):new ProductStorySpec();
 		model.addAttribute("storySpec", storySpec);
 
+
+
 		SystemProfile systemProfile = new SystemProfile();
-		systemProfile.setFileObjectType("story");
-		systemProfile.setFileDeleted("0");
-		systemProfile.setFileObjectId(story.getStoryId());
-		List<SystemProfile> list = profileService.findSystemProfile(systemProfile);
-		model.addAttribute("file",list);
+		systemProfile.setFileObjectId(storyId);
+		systemProfile.setFileObjectType(ProfileType.STORY.getType());
+		List<SystemProfile> fileList = profileService.findSystemProfile(systemProfile);
+		model.addAttribute("fileList", fileList);
 		return "/product/page/tabledemo/demand-edit.page";
 	}
 	

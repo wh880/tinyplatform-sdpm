@@ -18,6 +18,7 @@ import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.document.dao.pojo.DocumentDoc;
 import org.tinygroup.sdpm.document.dao.pojo.DocumentDocLib;
 import org.tinygroup.sdpm.document.service.inter.DocService;
+import org.tinygroup.sdpm.dto.UploadProfile;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.service.ProductService;
@@ -174,13 +175,14 @@ public class DocAction extends BaseController {
                           @RequestParam(value = "file", required = false) MultipartFile[] file,
                           String[] title,
                           Model model,
-                          String lastAddress) throws IOException {
+                          String lastAddress,
+                          UploadProfile uploadProfile) throws IOException {
         List<Product> product = productService.findProductList(new Product());
         doc.setDocLibId(Integer.parseInt(CookieUtils.getCookie(request, DocAction.COOKIE_DOCLIB_ID)));
         doc.setDocDeleted("0");
         doc.setDocAddedBy(UserUtils.getUser().getOrgUserId());
         DocumentDoc document = docservice.createNewDoc(doc);
-        uploadMultiFiles(file, document.getDocId(), ProfileType.DOCUMENT, title);
+        processProfile(uploadProfile, doc.getDocId(), ProfileType.DOCUMENT);
 
         model.addAttribute("productList", product);
 
@@ -220,6 +222,12 @@ public class DocAction extends BaseController {
         List<Project> list2 = projectService.findList();
         List<SystemModule> listModule = moduleService.findModuleList(module);
         List<DocumentDocLib> libList = docservice.findDoclibList(null);
+
+        SystemProfile systemProfile = new SystemProfile();
+        systemProfile.setFileObjectId(docId);
+        systemProfile.setFileObjectType(ProfileType.DOCUMENT.getType());
+        List<SystemProfile> fileList = profileService.findSystemProfile(systemProfile);
+        model.addAttribute("fileList", fileList);
         model.addAttribute("doc", doc);
         model.addAttribute("productList", list1);
         model.addAttribute("projectList", list2);
@@ -242,12 +250,13 @@ public class DocAction extends BaseController {
                            @RequestParam(value = "file", required = false) MultipartFile[] file,
                            String[] title,
                            SystemAction systemAction,
-                           Model model) throws IOException {
+                           Model model,
+                           UploadProfile uploadProfile) throws IOException {
         DocumentDoc documentDoc = docservice.findDocById(doc.getDocId());
         doc.setDocEditedBy(UserUtils.getUser().getOrgUserId());
         docservice.editDoc(doc);
 
-        uploadMultiFiles(file, doc.getDocId(), ProfileType.DOCUMENT, title);
+        processProfile(uploadProfile, doc.getDocId(), ProfileType.DOCUMENT);
 
         LogUtil.logWithComment(LogUtil.LogOperateObject.DOC,
                 LogUtil.LogAction.EDITED,

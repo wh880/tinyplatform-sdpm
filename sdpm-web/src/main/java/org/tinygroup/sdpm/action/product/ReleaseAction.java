@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
+import org.tinygroup.sdpm.dto.UploadProfile;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductRelease;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
@@ -75,10 +76,13 @@ public class ReleaseAction extends BaseController {
                        SystemAction systemAction,
                        @RequestParam(value = "file", required = false) MultipartFile[] file,
                        String[] title,
-                       String lastAddress) throws IOException {
+                       String lastAddress,
+                       UploadProfile uploadProfile) throws IOException {
         productRelease.setProductId(Integer.parseInt(cookieProductId));
         ProductRelease release = releaseService.addRelease(productRelease);
-        uploadMultiFiles(file, release.getReleaseId(), ProfileType.RELEASE, title);
+
+
+        processProfile(uploadProfile,release.getReleaseId(), ProfileType.RELEASE);
         LogUtil.logWithComment(LogUtil.LogOperateObject.RELEASE
                 , LogUtil.LogAction.OPENED
                 , String.valueOf(release.getReleaseId())
@@ -99,13 +103,11 @@ public class ReleaseAction extends BaseController {
                          SystemAction systemAction,
                          @RequestParam(value = "file", required = false) MultipartFile[] file,
                          String[] title,
-                         String lastAddress) throws IOException {
+                         String lastAddress,
+                         UploadProfile uploadProfile) throws IOException {
         ProductRelease release1 = releaseService.findRelease(release.getReleaseId());
+        processProfile(uploadProfile, release.getReleaseId(), ProfileType.RELEASE);
         releaseService.updateRelease(release);
-
-        uploadMultiFiles(file, release.getReleaseId(), ProfileType.RELEASE, title);
-
-
         LogUtil.logWithComment(LogUtil.LogOperateObject.RELEASE
                 , LogUtil.LogAction.EDITED
                 , String.valueOf(release.getReleaseId())
@@ -150,6 +152,12 @@ public class ReleaseAction extends BaseController {
     public String find(Integer releaseId, Model model) {
         ProductRelease release = releaseService.findRelease(releaseId);
         model.addAttribute("release", release);
+
+        SystemProfile systemProfile = new SystemProfile();
+        systemProfile.setFileObjectId(releaseId);
+        systemProfile.setFileObjectType(ProfileType.RELEASE.getType());
+        List<SystemProfile> fileList = profileService.findSystemProfile(systemProfile);
+        model.addAttribute("fileList", fileList);
         return "/product/page/tabledemo/product-release-update";
     }
 

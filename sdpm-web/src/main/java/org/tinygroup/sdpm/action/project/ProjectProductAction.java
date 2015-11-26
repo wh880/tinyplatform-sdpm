@@ -52,12 +52,12 @@ public class ProjectProductAction extends BaseController {
 
     @ResponseBody
     @RequestMapping("/save")
-    public Map<String, String> save(Integer[] array, HttpServletResponse response, HttpServletRequest request) {
+    public Map<String, String> save(Integer[] productIds, HttpServletResponse response, HttpServletRequest request) {
         Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
         if (projectId == null) {
-            return resultMap(false, "项目不存在");
+            return resultMap(false, "请选择所在项目");
         }
-        projectProductService.addProjectLinkToProduct(array, projectId);
+        projectProductService.addProjectLinkToProduct(productIds, projectId);
         return resultMap(true, "保存成功");
     }
 }

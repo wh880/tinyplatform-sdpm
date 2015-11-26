@@ -13,6 +13,7 @@ import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.document.dao.pojo.DocumentDoc;
 import org.tinygroup.sdpm.document.dao.pojo.DocumentDocLib;
 import org.tinygroup.sdpm.document.service.inter.DocService;
+import org.tinygroup.sdpm.dto.UploadProfile;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
@@ -259,11 +260,14 @@ public class DocumentAction extends BaseController {
                                 @PathVariable(value = "type") String type,
                                 @RequestParam(value = "file", required = false) MultipartFile[] file,
                                 String[] title,
-                                String lastAddress) throws IOException {
+                                String lastAddress,
+                                UploadProfile uploadProfile) throws IOException {
         if ("save".equals(type)) {
             doc.setDocAddedBy(UserUtils.getUserId());
             DocumentDoc document = docservice.createNewDoc(doc);
-            uploadMultiFiles(file, document.getDocId(), ProfileType.DOCUMENT, title);
+
+            processProfile(uploadProfile, doc.getDocId(), ProfileType.DOCUMENT);
+
             LogUtil.logWithComment(LogUtil.LogOperateObject.DOC,
                     LogUtil.LogAction.CREATED,
                     String.valueOf(document.getDocId()),

@@ -70,10 +70,11 @@
                         class="fa fa-fullscreen"></i></a>
             </li>
             <li>
-                <form class="navbar-form pull-left">
-                    <input type="text" class="form-control" placeholder="查找更多...">
-                    <span style="left:-27px;top:3px; position:relative;"><i class="fa fa-search"></i></span>
-                </form>
+                #@mulSearchBox(searchCurrentName)
+                    #foreach(item : getDict("searchType"))
+                        #menusInfo(item.text item.value)
+                    #end
+                #end
             </li>
             <li class="dropdown">
                 <a href="javascript:void(0);" class="dropdown-toggle user-menu" data-toggle="dropdown">

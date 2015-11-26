@@ -8,7 +8,6 @@
         $("form[name=thisform]").Validform({
             tiptype: function (msg, o, cssctl) {
                 var objtip = $(o.obj).closest(".row").find(".validmsg");
-
                 cssctl(objtip, o.type);
                 objtip.text(msg);
             }
@@ -33,7 +32,7 @@
                 "text" "releaseName" release?.releaseName{"datatype":"*","nullmsg":"发布名称不能为空！","id":"releaseName","class":"input-text",
                 "ajaxurl":TINY_CONTEXT_PATH+adminPath+"/product/release/judgeReleaseName?releaseId="+release?.releaseId+"&productId="+cookieProductId})
        #end
-     
+
         #@validateDiv("col-2 validmsg")#end
       #end
     #@elementItem()
@@ -83,18 +82,15 @@
 
         #@validateDiv("col-2 validmsg")#end
     #end
-    
-   #@elementItem()
-        <div class="col-12">
 
-                <div class="col-1 text-r"><label>附件：</label></div>
+        #@elementItem()
+            <div class="col-12">
+                <div class="col-2 text-r"><label>附件：</label></div>
                 <div class="col-9">
-                  #@formControlDiv("col-12")
-		   				#include("/product/page/event/fileupload.page")
-      				 		#end
-       				</div>
+                    #mulUploadFile(fileList)
+                </div>
             </div>
-   		 #end
+        #end
    </div>
     #@elementItem()
         <div class="col-12">
