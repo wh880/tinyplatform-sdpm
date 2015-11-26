@@ -103,6 +103,13 @@ public class ProductLineManagerImpl implements ProductLineManager{
 		return mergeUserProductLines(productLines,productLineList,orgRoles);
 	}
 
+	public List<ProductLine> lineInCondition(String condition, Integer... ids) {
+		if(condition==null||ids==null||ids.length==0){
+			return new ArrayList<ProductLine>();
+		}
+		return productLineDao.lineInCondition(condition,ids);
+	}
+
 	public int[] updateBatch(List<ProductLine> productLine) {
 		
 		return productLineDao.batchUpdate(productLine);

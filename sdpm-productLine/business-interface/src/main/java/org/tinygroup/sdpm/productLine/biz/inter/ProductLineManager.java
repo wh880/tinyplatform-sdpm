@@ -76,4 +76,6 @@ public interface ProductLineManager {
 	List<ProductLine> getProductLineByIds(Integer...ids);
 
 	List<ProductLine> getUserProductLine(String userId);
+
+	List<ProductLine> lineInCondition(String condition, Integer ...ids);
 }
