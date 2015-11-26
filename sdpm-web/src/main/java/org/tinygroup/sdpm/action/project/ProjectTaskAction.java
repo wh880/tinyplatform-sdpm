@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.logger.LogLevel;
@@ -70,6 +69,9 @@ public class ProjectTaskAction extends BaseController {
     private UserService userService;
     @Autowired
     private ProfileService profileService;
+
+//    @ModelAttribute
+
 
     @RequiresPermissions(value = {"project", "task"}, logical = Logical.OR)
     @RequestMapping("index")
@@ -139,7 +141,7 @@ public class ProjectTaskAction extends BaseController {
      * @return
      */
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String save(ProjectTask task, @RequestParam(value = "file", required = false) MultipartFile[] file, String[] fileTitle,
+    public String save(ProjectTask task,
                        String[] taskMailToArray, HttpServletRequest request, String comment, String lastAddress,
                        UploadProfile uploadProfile) throws IOException {
         Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, ProjectUtils.COOKIE_PROJECT_ID));
@@ -148,7 +150,6 @@ public class ProjectTaskAction extends BaseController {
         task.setTaskMailto(taskMailTo);
         task.setTaskLeft(task.getTaskEstimate());
         task = taskService.addTask(task);
-        processProfile(uploadProfile, task.getTaskId(), ProfileType.TASK);
 
         LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, LogUtil.LogAction.OPENED,
                 task.getTaskId().toString(), UserUtils.getUserId(),

@@ -2,7 +2,6 @@
     <dictNodeEntry name="search" title="搜索类型">
         <dictNodeEntry name="searchType" title="搜索类型">
 
-
             <dictItem key="Bug" value="/a/quality/bug/bugInfo?no=" sort="1"/>
             <dictItem key="需求" value="/a/product/storySpec/find/productDemandDetail?no=" sort="2"/>
 
@@ -10,8 +9,6 @@
             <dictItem key="用例" value="/a/quality/testCase/case/viewInfo?id=" sort="4"/>
             <dictItem key="项目" value="/a/project/view?projectId=" sort="5"/>
             <dictItem key="产品" value="/a/product/find/overview?productId=" sort="6"/>
-
-
 
             <dictItem key="版本" value="/a/quality/version/versionInfo?no=" sort="7"/>
             <dictItem key="发布" value="/a/product/release/forword/reRelateStory?no=" sort="8"/>
