@@ -25,6 +25,9 @@
 				#@radiusBtn("btn-danger spmuldet" "icon-trash" "javascript:","delete") 批量删除#end
 				#@aModal("#myModal" "批量删除" "1200" "500" "hidenmuldel hide" adminPath+"/system/holiday/findIds")#end
 
+##				#@aModal("#myModal" "添加" "500" "360" "btn radius btn-primary size-L" adminPath+"/system/holiday/add")添加#end
+##				#iconOperations(
+##					"#myModal" "icon-eye-open" "添加" "500" "360" adminPath+"/system/holiday/add" "ml-5")
 				#@aModal("#myModal" "添加" "500" "360" "btn radius btn-primary" adminPath+"/system/holiday/add")添加#end
 			
 			#end
@@ -48,10 +51,17 @@
 	<div style="width:30%;float:right"> 
 		#TypeInfo("holiday","1")
     </div>
-	
-		
-	
 #end
+
+###@dialog("myModal")
+##	#@dialogHeader()对话框标题#end
+##	#@dialogBody()<p>对话框内容…</p>#end
+##	#@dialogFooter()
+##		#@buttonEnsure() <a href="${TINY_CONTEXT_PATH+adminPath}/system/holiday/save">确定</a>#end
+##		#@buttonCancel()关闭#end
+##	#end
+###end
+
 <script>
 	$(function(){		
 		var href=$(".hidenmuldel").attr("href");
