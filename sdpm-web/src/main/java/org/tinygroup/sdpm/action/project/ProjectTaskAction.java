@@ -70,7 +70,10 @@ public class ProjectTaskAction extends BaseController {
     @Autowired
     private ProfileService profileService;
 
-//    @ModelAttribute
+    @ModelAttribute
+    public void init(Model model) {
+        initSearchBar(model, "任务");
+    }
 
 
     @RequiresPermissions(value = {"project", "task"}, logical = Logical.OR)
@@ -155,7 +158,7 @@ public class ProjectTaskAction extends BaseController {
                 task.getTaskId().toString(), UserUtils.getUserId(),
                 null, task.getTaskProject().toString(), null, null, comment);
         try {
-            processProfile(uploadProfile,task.getTaskId(), ProfileType.TASK);
+            processProfile(uploadProfile, task.getTaskId(), ProfileType.TASK);
         } catch (IOException e) {
             logger.logMessage(LogLevel.ERROR, "上传文件文件出错，请求路径{}", e, request.getRequestURI());
         }
@@ -199,7 +202,7 @@ public class ProjectTaskAction extends BaseController {
      */
     @RequestMapping(value = "/editsave", method = RequestMethod.POST)
     public String editSave(ProjectTask task, Model model, String contents,
-                            UploadProfile uploadProfile) throws IOException {
+                           UploadProfile uploadProfile) throws IOException {
         ProjectTask oldTask = taskService.findTask(task.getTaskId());
         taskService.updateEditTask(task);
         processProfile(uploadProfile, task.getTaskId(), ProfileType.TASK);
@@ -513,7 +516,7 @@ public class ProjectTaskAction extends BaseController {
                 List<ProjectTask> listTask = taskService.findListTask(projectTask);
                 if (!CollectionUtil.isEmpty(listTask)) {
                     model.addAttribute("task", listTask.get(0));
-                }else {
+                } else {
                     return notFoundView();
                 }
             }
@@ -521,6 +524,13 @@ public class ProjectTaskAction extends BaseController {
             ProjectTask task = taskService.findTask(taskId);
             model.addAttribute("task", task);
         }
+
+        SystemProfile systemProfile = new SystemProfile();
+        systemProfile.setFileObjectId(taskId);
+        systemProfile.setFileObjectType(ProfileType.TASK.getType());
+        List<SystemProfile> fileList = profileService.findSystemProfile(systemProfile);
+        model.addAttribute("fileList", fileList);
+
         return "project/task/view";
     }
 
@@ -571,6 +581,8 @@ public class ProjectTaskAction extends BaseController {
         ProductStory productStory = productStoryService.findStory(task.getTaskStory());
         String storyTitle = productStory == null ? "" : productStory.getStoryTitle();
         model.addAttribute("storyTitle", storyTitle);
+
+
         return "project/task/basicInformation.pagelet";
     }
 

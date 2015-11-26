@@ -6,10 +6,7 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
@@ -19,11 +16,9 @@ import org.tinygroup.sdpm.document.dao.pojo.DocumentDoc;
 import org.tinygroup.sdpm.document.dao.pojo.DocumentDocLib;
 import org.tinygroup.sdpm.document.service.inter.DocService;
 import org.tinygroup.sdpm.dto.UploadProfile;
-import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
-import org.tinygroup.sdpm.project.service.inter.ProjectProductService;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.sdpm.system.dao.pojo.ProfileType;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
@@ -47,8 +42,7 @@ import java.util.Map;
 @Controller
 @RequestMapping(value = "/a/document/doc")
 public class DocAction extends BaseController {
-
-    public static final String COOKIE_DOCLIB_ID = "documentLibId";
+    public static final String COOKIE_DOC_LIB_ID = "documentLibId";
 
     @Autowired
     private DocService docservice;
@@ -59,11 +53,12 @@ public class DocAction extends BaseController {
     @Autowired
     private ModuleService moduleService;
     @Autowired
-    private ProjectProductService projectProductService;
-    @Autowired
     private ProfileService profileService;
-    @Autowired
-    private UserService userService;
+
+    @ModelAttribute
+    public void init(Model model) {
+        initSearchBar(model, "文档");
+    }
 
     /**
      * 首页查出数据
@@ -89,7 +84,7 @@ public class DocAction extends BaseController {
         if ("desc".equals(ordertype)) {
             asc = false;
         }
-        String cookieDocLib = CookieUtils.getCookie(request, DocAction.COOKIE_DOCLIB_ID);
+        String cookieDocLib = CookieUtils.getCookie(request, DocAction.COOKIE_DOC_LIB_ID);
         Integer libId = Integer.valueOf(StringUtil.isBlank(cookieDocLib) ? 0 : Integer.parseInt(cookieDocLib));
         doc.setDocLibId(libId);
         String condition = null;
@@ -135,7 +130,7 @@ public class DocAction extends BaseController {
     @RequestMapping(value = "/add")
     public String createDoc(Integer libId, HttpServletRequest request, Model model) {
         if (libId == null) {
-            libId = Integer.parseInt(CookieUtils.getCookie(request, DocAction.COOKIE_DOCLIB_ID));
+            libId = Integer.parseInt(CookieUtils.getCookie(request, DocAction.COOKIE_DOC_LIB_ID));
         }
         if (libId == 1) {
             Product product = new Product();
@@ -178,7 +173,7 @@ public class DocAction extends BaseController {
                           String lastAddress,
                           UploadProfile uploadProfile) throws IOException {
         List<Product> product = productService.findProductList(new Product());
-        doc.setDocLibId(Integer.parseInt(CookieUtils.getCookie(request, DocAction.COOKIE_DOCLIB_ID)));
+        doc.setDocLibId(Integer.parseInt(CookieUtils.getCookie(request, DocAction.COOKIE_DOC_LIB_ID)));
         doc.setDocDeleted("0");
         doc.setDocAddedBy(UserUtils.getUser().getOrgUserId());
         DocumentDoc document = docservice.createNewDoc(doc);

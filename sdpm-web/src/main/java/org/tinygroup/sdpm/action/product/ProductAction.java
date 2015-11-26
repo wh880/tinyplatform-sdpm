@@ -77,6 +77,10 @@ public class ProductAction extends BaseController {
     private ProjectService projectService;
     @Autowired
     private TeamService teamService;
+    @ModelAttribute
+    public void init(Model model) {
+        initSearchBar(model, "产品");
+    }
 
     @RequestMapping("/{forward}/content")
     public String doc(@PathVariable(value = "forward") String forward, HttpServletRequest request, Model model) {

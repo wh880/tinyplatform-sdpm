@@ -24,14 +24,14 @@
         <property name="proxyTargetClass" value="true"/>
     </bean>
 
-    <!--<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">-->
-    <!--<property name="exceptionMappings">-->
-    <!--<props>-->
-    <!--<prop key="org.apache.shiro.authz.UnauthorizedException">error/40x.page</prop>-->
-    <!--<prop key="java.lang.Throwable">error/50x.page</prop>-->
-    <!--</props>-->
-    <!--</property>-->
-    <!--</bean>-->
+    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="exceptionMappings">
+            <props>
+                <prop key="org.apache.shiro.authz.UnauthorizedException">error/40x.page</prop>
+                <prop key="java.lang.Throwable">error/50x.page</prop>
+            </props>
+        </property>
+    </bean>
     <!-- 支持Shiro对Controller的方法级AOP安全控制 end -->
 
     <context:annotation-config/>

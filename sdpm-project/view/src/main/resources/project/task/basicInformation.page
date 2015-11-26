@@ -1,4 +1,4 @@
-#include("/project/task/maplist.page")
+'#include("/project/task/maplist.page")
 <div>
     #@div(divClass="infoContent")
         <p class="titleName">基本信息</p>

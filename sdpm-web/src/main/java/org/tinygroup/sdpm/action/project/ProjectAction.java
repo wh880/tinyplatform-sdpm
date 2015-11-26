@@ -5,10 +5,7 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.tinygroup.commons.tools.ArrayUtil;
 import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.commons.tools.StringUtil;
@@ -50,6 +47,11 @@ public class ProjectAction extends BaseController {
     private BurnService burnService;
     @Autowired
     private UserService userService;
+
+    @ModelAttribute
+    public void init(Model model) {
+        initSearchBar(model, "项目");
+    }
 
     @RequiresPermissions("survey")
     @RequestMapping("/view")

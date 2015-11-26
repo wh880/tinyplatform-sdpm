@@ -86,6 +86,11 @@ public class BugAction extends BaseController {
     @Autowired
     private TestCaseService testCaseService;
 
+    @ModelAttribute
+    public void init(Model model) {
+        initSearchBar(model, "Bug");
+    }
+
     @RequestMapping("")
     public String form(QualityBug bug, Model model, HttpServletRequest request) {
         String queryString = request.getQueryString();
