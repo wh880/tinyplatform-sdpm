@@ -20,7 +20,6 @@ import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.service.ProductService;
-import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
 import org.tinygroup.sdpm.project.service.inter.ProjectProductService;
 import org.tinygroup.sdpm.system.dao.pojo.ProfileType;
@@ -293,7 +292,7 @@ public class DocumentAction extends BaseController {
                     null);
         }
         if(!StringUtil.isBlank(lastAddress)){
-            return "redirect"+lastAddress;
+            return "redirect:"+ lastAddress;
         }
         return "redirect:"  + adminPath + "/product/doc/content";
     }

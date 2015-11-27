@@ -10,7 +10,7 @@
             #end
             #@tabBodyCol("ptop-5")
                 #@div(divClass="operationbar")
-                <span class="f">角色成员维护</span>
+                <span class="f">角色【${role.orgRoleName}】成员维护</span>
                     #div(divClass="clearfix")
                 #end
                 #@table()
