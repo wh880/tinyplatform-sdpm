@@ -110,7 +110,7 @@ public class HolidayAction extends BaseController{
 					UserUtils.getUserId(), null, null, holiday1, holiday, null);
 		}
 		model.addAttribute("holiday", holiday);
-		return "/system/page/holiday/holiday.page";
+		return "redirect:/a/system";
 	}
 	@ResponseBody
 	@RequestMapping(value="holiday/delete")

@@ -1,6 +1,7 @@
 package org.tinygroup.sdpm.dict.util;
 
 import org.tinygroup.beancontainer.BeanContainerFactory;
+import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.dict.Dict;
 import org.tinygroup.dict.DictGroup;
 import org.tinygroup.dict.DictItem;
@@ -173,7 +174,9 @@ public class DictUtil {
         try {
             item = loader.getDictItem(manager,groupType,key);
         }catch (RuntimeException r){
-            LOGGER.logMessage(LogLevel.ERROR,"找不到字典",r);
+            if(StringUtil.isBlank(groupType)) {
+                LOGGER.logMessage(LogLevel.ERROR, "找不到字典", r);
+            }
             return "";
         }
         if(item == null){

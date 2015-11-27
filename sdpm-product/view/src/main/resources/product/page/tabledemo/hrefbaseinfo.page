@@ -8,10 +8,8 @@
 
         #@tabBodyCol("tabBorder")
             #@table()
-                #@thead()
-                #end
                 #@tr()
-                    #@td()所属产品#end
+                    <td style="width:35%">所属产品</td>
                     #@td()<a
                             href="${TINY_CONTEXT_PATH +adminPath}/product/find/overview?productId=${story?.productId}">${story
                         ?.productName}</a>#end
@@ -66,7 +64,7 @@
         #end
         #@tbody()
             #@tr()
-                #@td()由谁创建#end
+            <td style="width:35%">由谁创建</td>
                 #@td()${story?.storyOpenedBy?UserUtils.getUserById(story?.storyOpenedBy)?.orgUserRealName:""}${story?.storyOpenedDate?"&nbsp;于&nbsp;"+formatDate(story?.storyOpenedDate,'yyyy-MM-dd'):""}&nbsp;创建 #end
             #end
 
@@ -112,7 +110,7 @@
                 #@thead()
                 #end
                 #@tbody()
-                    #@th() ID #end
+                    <th style="width: 35%"> ID </th>
                     #@th() 名称 #end
                     #for(task:taskList)
                     #@tr()
@@ -130,7 +128,7 @@
             #end
             #@tbody()
                 #@tr()
-                    #@td()相关BUG#end
+                <td style="width:35%">相关BUG</td>
                     #@td()
                         #for(bug:bugList)
                     <a href="${TINY_CONTEXT_PATH + adminPath}/quality/bug/bugInfo?bugId=${bug?.bugId}">${bug?.bugTitle}
