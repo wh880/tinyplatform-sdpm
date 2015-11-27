@@ -292,7 +292,7 @@ public class DocumentAction extends BaseController {
                     null);
         }
         if(!StringUtil.isBlank(lastAddress)){
-            return "redirect"+ adminPath+lastAddress;
+            return "redirect:"+ lastAddress;
         }
         return "redirect:"  + adminPath + "/product/doc/content";
     }
