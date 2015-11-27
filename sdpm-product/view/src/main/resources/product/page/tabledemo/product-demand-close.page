@@ -46,12 +46,12 @@
                     ajaxRead("${sid}", "storyDuplicateStory", "storyId", "storyTitle", "/product/story/storyList?productId=${cookieProductId}&storyId=${story?.storyId}");
                 })
             } else {
+                $("[name=storyDuplicateStory]").attr("ignore","ignore");
+                $("[name=storyChildStories]").attr("ignore","ignore");
+                $("[name=storyChildStories]").val(0).trigger("change");
+                $("[name=storyDuplicateStory]").val(0).trigger("change");
                 subdivision.hide();
                 repeat.hide();
-                $("select[name=storyDuplicateStory]").attr("ignore","ignore");
-                $("select[name=storyChildStories]").attr("ignore","ignore");
-                $("select[name=storyChildStories]").val(0).trigger("change");
-                $("select[name=storyDuplicateStory]").val(0).trigger("change");
             }
 
 
