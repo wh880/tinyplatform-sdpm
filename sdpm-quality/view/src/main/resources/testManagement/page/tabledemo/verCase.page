@@ -162,13 +162,9 @@
                     </div>
                 <div class="col-4">
                     #@Tselect2F()
-                        #@Tselect2Body("assignTo" "" {"class":"input-text select2"})
-                            <option value="0">/</option>
-                            #for(user : userList)
-                            <option value="${user?.orgUserId}">${user?.orgUserRealName}</option>
-                        #end
+                        #Tselect2Ajax("assignTo" "" TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
+                        {"dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询指派人"})
                     #end
-                #end
             </div>
                 <div class="col-0">&nbsp&nbsp</div>
 
