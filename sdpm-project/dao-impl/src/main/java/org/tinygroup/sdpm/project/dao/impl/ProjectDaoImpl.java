@@ -74,8 +74,11 @@ public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
 
     public List<Project> findListWithStatistics(Project project, Date startDate, Date endDate) {
         Condition condition = null;
-        if (startDate != null && endDate != null) {
+        if (startDate != null) {
             condition = and(PROJECTTABLE.PROJECT_OPENED_DATE.gte(startDate), PROJECTTABLE.PROJECT_OPENED_DATE.lte(endDate));
+        }
+        if(endDate != null){
+            condition = condition==null?PROJECTTABLE.PROJECT_OPENED_DATE.lte(endDate):and(condition,PROJECTTABLE.PROJECT_OPENED_DATE.lte(endDate));
         }
         if (project == null) {
             project = new Project();

@@ -177,14 +177,14 @@ public class TestVersionAction extends BaseController {
         if(no!=null){
             Integer qualityProductId = Integer.parseInt(CookieUtils.getCookie(request, "qualityProductId"));
             if(qualityProductId==null){
-                notFoundView();
+                return notFoundView();
             }
             testTask = new QualityTestTask();
             testTask.setProductId(qualityProductId);
             testTask.setNo(no);
             List<QualityTestTask> testTaskList = testTaskService.findTestTaskList(testTask);
             if(testTaskList.size()==0){
-                notFoundView();
+                return notFoundView();
             }
             testTask = testTaskList.get(0);
         }

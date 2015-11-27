@@ -187,7 +187,8 @@ public class QualityTestCaseDaoImpl extends TinyDslDaoSupport implements Quality
 								QUALITY_TEST_CASETABLE.DELETED.eq(t.getDeleted()),
 								QUALITY_TEST_CASETABLE.CASE_LAST_RUNNER.eq(t.getCaseLastRunner()),
 								QUALITY_TEST_CASETABLE.CASE_LAST_RUN_DATE.eq(t.getCaseLastRunDate()),
-								QUALITY_TEST_CASETABLE.CASE_LAST_RUN_RESULT.eq(t.getCaseLastRunResult())));
+								QUALITY_TEST_CASETABLE.CASE_LAST_RUN_RESULT.eq(t.getCaseLastRunResult()),
+								QUALITY_TEST_CASETABLE.NO.eq(t.getNo())));
 				return addOrderByElements(select, orderArgs);
 			}
 		});

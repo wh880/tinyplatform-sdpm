@@ -168,7 +168,7 @@
 				#@colLabel()当前状态：#end
 				#@formControlDiv("col-4")
 					#@div(divClass="col-10")
-					#@tinySelect("testtaskStatus" testTask?.testtaskStatus {"class":"#####","nullmsg":"请选择","datatype":""})
+					#@tinySelect("testtaskStatus" testTask?.testtaskStatus {"class":"#####","nullmsg":"请选择"})
 					#for(status : getDict("versionStatus"))
 						#@optionItem(status?.value)${status?.text}#end
 					#end

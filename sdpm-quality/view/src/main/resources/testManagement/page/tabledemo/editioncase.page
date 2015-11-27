@@ -48,9 +48,9 @@
         	</div>
         #@elementItem()
         	<div class="col-10">
-        	#@colLabel("col-2")用例名称：#end
+        	#@colLabel("col-2")<span class="c-red">*</span>用例名称：#end
         	<div class="col-4">
-           		#tinyInput("text" "caseTitle" testCase?.caseTitle {"datatype":"","id":"111","class":"input-text","placeholder":""})
+           		#tinyInput("text" "caseTitle" testCase?.caseTitle {"datatype":"*","nullmsg":"用例标题不能为空！","id":"111","class":"input-text","placeholder":""})
            </div>
            </div>
         #end
@@ -113,7 +113,7 @@
 
 <script type="text/javascript">
     $(function () {
-        $("form[name=addCaseForm]").Validform({
+        $("form[name=thisform]").Validform({
             tiptype: 1
         });
     });

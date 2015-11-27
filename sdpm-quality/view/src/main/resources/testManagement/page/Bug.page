@@ -108,7 +108,7 @@
 
 				</span>
 				#div(divClass="clearfix")
-				#include("/testManagement/page/mulsearch.page")
+##				#include("/testManagement/page/mulsearch.page")
 			#end
 			##operationbar end
 			#end

@@ -157,21 +157,21 @@ public class PlanAction  extends BaseController{
 		if(no!=null){
 			Integer cookieProductId = Integer.parseInt(CookieUtils.getCookie(request, ProductUtils.COOKIE_PRODUCT_ID));
 			if(cookieProductId==null){
-				notFoundView();
+				return notFoundView();
 			}
 			plan = new ProductPlan();
 			plan.setProductId(cookieProductId);
 			plan.setNo(no);
 			List<ProductPlan> planList = planService.findPlanList(plan);
 			if(planList.size()==0){
-				notFoundView();
+				return notFoundView();
 			}
 			plan = planList.get(0);
 		}
 		if(plan==null||plan.getPlanId()==null){
 			plan = planService.findPlan(planId);
-			model.addAttribute("plan",plan);
 		}
+		model.addAttribute("plan",plan);
 		if ("reRelateStory".equals(forwordPager)) {
 			return "/product/page/tabledemo/relation-plan/product-al-req.page";
 		}else if("noRelateStory".equals(forwordPager)){

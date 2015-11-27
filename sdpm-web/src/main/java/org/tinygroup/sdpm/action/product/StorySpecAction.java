@@ -63,14 +63,14 @@ public class StorySpecAction extends BaseController{
 		if(story.getNo()!=null){
 			Integer cookieProductId = Integer.parseInt(CookieUtils.getCookie(request, ProductUtils.COOKIE_PRODUCT_ID));
 			if(cookieProductId==null){
-				notFoundView();
+				return notFoundView();
 			}
 			productStory = new ProductStory();
 			productStory.setProductId(cookieProductId);
 			productStory.setNo(story.getNo());
 			List<ProductStory> storyList = storyService.findStoryList(productStory);
 			if(storyList.size()==0){
-				notFoundView();
+				return notFoundView();
 			}
 			productStory = storyList.get(0);
 		}
@@ -86,7 +86,6 @@ public class StorySpecAction extends BaseController{
 		List<SystemProfile> list = profileService.findSystemProfile(systemProfile);
 		model.addAttribute("file",list);
 		if ("productDemandDetail".equals(forward)) {
-			
 			return "/product/page/project/demdtablehref.page";
 		}
 		return "";

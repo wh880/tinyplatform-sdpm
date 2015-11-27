@@ -160,7 +160,7 @@
                 #@colLabel()关键词#end
                 #@formControlDiv("col-8")
                     #tinyInput(
-                        "text" "caseKeywords" testCase?.caseKeywords {"datatype":"","id":"版本","class":"input-text"})
+                        "text" "caseKeywords" testCase?.caseKeywords {"id":"版本","class":"input-text"})
                 #end
                 #@validateDiv("col-2")#end
             #end
@@ -169,7 +169,7 @@
             #@elementItem()
                 #@colLabel()相关用例#end
                 #@formControlDiv("col-8")
-                    #tinyInput("text" "linkCase" testCase?.linkCase {"datatype":"","id":"抄送给","class":"input-text"})
+                    #tinyInput("text" "linkCase" testCase?.linkCase {"id":"抄送给","class":"input-text"})
                 #end
                 #@validateDiv("col-2")#end
             #end

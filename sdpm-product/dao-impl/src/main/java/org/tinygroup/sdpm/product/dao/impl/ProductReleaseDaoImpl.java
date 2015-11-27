@@ -219,7 +219,8 @@ public class ProductReleaseDaoImpl extends TinyDslDaoSupport implements
 										PRODUCT_RELEASETABLE.RELEASE_DESC.eq(t
 												.getReleaseDesc()),
 										PRODUCT_RELEASETABLE.DELETED.eq(t
-												.getDeleted())));
+												.getDeleted()),
+										PRODUCT_RELEASETABLE.NO.eq(t.getNo())));
 						return addOrderByElements(select, orderArgs);
 					}
 				});

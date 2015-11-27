@@ -155,7 +155,8 @@ public class QualityTestTaskDaoImpl extends TinyDslDaoSupport implements Quality
 					QUALITY_TEST_TASKTABLE.TESTTASK_DESC.eq(t.getTesttaskDesc()),
 					QUALITY_TEST_TASKTABLE.TESTTASK_REPORT.eq(t.getTesttaskReport()),
 					QUALITY_TEST_TASKTABLE.TESTTASK_STATUS.eq(t.getTesttaskStatus()),
-					QUALITY_TEST_TASKTABLE.DELETED.eq(t.getDeleted())));
+					QUALITY_TEST_TASKTABLE.DELETED.eq(t.getDeleted()),
+						QUALITY_TEST_TASKTABLE.NO.eq(t.getNo())));
 			return addOrderByElements(select, orderArgs);
 			}
 		});

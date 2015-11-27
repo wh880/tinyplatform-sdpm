@@ -4,14 +4,16 @@
 		#@elementItem()
 			#@formControlDiv("col-12")
 				<div class="col-3">
-					#@colLabel("col-4")角色：#end
-					<div class="col-8">						
-					#@tinySelect("roleId" roleId {"class":"select2"})
-                        <option value=""></option>
-                        #for(role : UserUtils.getAllRoleList())
+					#@colLabel("col-4")角色:#end
+					<div class="col-8">
+                    #@Tselect2F()
+                        #@Tselect2Body("roleId" roleId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                            <option value=""></option>
+                            #for(role : UserUtils.getAllRoleList())
                             <option value="${role?.orgRoleId}">${role?.orgRoleName}</option>
+                            #end
                         #end
-					#end
+                    #end
 					</div>
 				</div>
 				<div class="col-3">
@@ -73,7 +75,7 @@
         #@tbody()
             #for(o:orgsmap)
             #@tr("text-c")
-                <td rowspan=${o?.value.size()+1}>${o?.key?.orgUserAccount}</td>
+                <td rowspan=${o?.value.size()+1}>${o?.key?.orgUserRealName}</td>
                 #if(!o.value)
                     <td></td>
                     <td></td>

@@ -331,7 +331,8 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 					PRODUCT_STORYTABLE.STORY_VERSION.eq(t.getStoryVersion()),
 					PRODUCT_STORYTABLE.BUILD_ID.eq(t.getBuildId()),
 					PRODUCT_STORYTABLE.CLIENT_REQUEST_ID.eq(t.getClientRequestId()),
-					PRODUCT_STORYTABLE.DELETED.eq(t.getDeleted())));
+					PRODUCT_STORYTABLE.DELETED.eq(t.getDeleted()),
+						PRODUCT_STORYTABLE.NO.eq(t.getNo())));
 			return addOrderByElements(select, orderArgs);
 			}
 		});

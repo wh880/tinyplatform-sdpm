@@ -224,7 +224,8 @@ public class ProductPlanDaoImpl extends TinyDslDaoSupport implements ProductPlan
                                 PRODUCT_PLANTABLE.PLAN_SPEC.eq(t.getPlanSpec()),
                                 PRODUCT_PLANTABLE.PLAN_BEGIN_DATE.eq(t.getPlanBeginDate()),
                                 PRODUCT_PLANTABLE.PLAN_END_DATE.eq(t.getPlanEndDate()),
-                                PRODUCT_PLANTABLE.DELETED.eq(t.getDeleted())));
+                                PRODUCT_PLANTABLE.DELETED.eq(t.getDeleted()),
+                                PRODUCT_PLANTABLE.NO.eq(t.getNo())));
                 return addOrderByElements(select, orderArgs);
             }
         });

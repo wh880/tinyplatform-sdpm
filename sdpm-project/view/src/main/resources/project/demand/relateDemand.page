@@ -21,7 +21,7 @@
                 <a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
             </span>
                 #div(divClass="clearfix")
-                #include("/project/mulsearch.page")
+##                #include("/project/mulsearch.page")
             #end
         ###!set(activeTitle="关联需求",activeMenuId=currentPageId)
         #end

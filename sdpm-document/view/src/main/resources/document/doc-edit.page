@@ -150,11 +150,19 @@
                     #@Tradio("2")${getDict("docType","2")} #end
                     #@Tradio("3")${getDict("docType","3")} #end
                 #end
-
             #end
             #@validateDiv("col-2")#end
         #end
 
+        #@elementItem()
+            #@colLabel()<span class="c-red">*</span>文档标题：#end
+            #@formControlDiv("col-4")
+                #tinyInput(
+                    "text" "docTitle" doc?.docTitle{"placeholder":"请填写文档标题","datatype":"*1-16","nullmsg":"标题不能为空！",
+                    "class":"input-text"})
+            #end
+            #@validateDiv("col-6")#end
+        #end
         #@elementItem(elementId="urlBox" eleItemClass="hide")
             <div class="col-12">
                 <div class="col-2 text-r"><label>文档URL：</label></div>
