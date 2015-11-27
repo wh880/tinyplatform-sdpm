@@ -34,9 +34,9 @@
         	</div>
         #@elementItem()
             <div class="col-12">
-                #@colLabel("col-2 text-r")bug名称：#end
+                #@colLabel("col-2 text-r")<span class="c-red">*</span>bug名称：#end
                 <div class="col-9">
-                    #tinyInput("text" "bugTitle" bug?.bugTitle {"datatype":"","id":"111","class":"input-text","placeholder":""})
+                    #tinyInput("text" "bugTitle" bug?.bugTitle {"datatype":"*","nullmsg":"bug标题不能为空！","id":"111","class":"input-text","placeholder":""})
                 </div>
             </div>
         #end

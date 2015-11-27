@@ -115,7 +115,7 @@
         #@formControlDiv("col-8")
                     #@Tselect2F()
                         #@Tselect2Body(
-                            "priority" bug?.priority {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                            "priority" bug?.priority {"class":"input-text select2","datatype":"*","nullmsg":"优先级不能为空！"}) ##,"multiple":"multiple"加上为多选项
                             #for(pri : getDict("bugPriority"))
                             #@tinyOptionItem(pri.value)${pri.text}#end
                         #end
@@ -194,7 +194,7 @@
 #@elementItem()
     #@colLabel()关键词：#end
     #@formControlDiv("col-8")
-        #tinyInput("text" "bugKeywords" bug?.bugKeywords {"datatype":"","id":"版本","class":"input-text"})
+        #tinyInput("text" "bugKeywords" bug?.bugKeywords {"id":"版本","class":"input-text"})
     #end
 #end
     </li>
@@ -459,7 +459,7 @@
     #@colLabel()重复ID:#end
     #@formControlDiv("col-8")
                 #tinyInput(
-                    "text" "bugDuplicateBug" bug?.bugDuplicateBug {"datatype":"","id":"抄送给","class":"input-text"})
+                    "text" "bugDuplicateBug" bug?.bugDuplicateBug {"id":"抄送给","class":"input-text"})
             #end
         #end
     </li>
@@ -481,7 +481,7 @@
 #@elementItem()
     #@colLabel()相关Bug:#end
     #@formControlDiv("col-8")
-        #tinyInput("text" "linkBug" bug?.linkBug {"datatype":"","id":"抄送给","class":"input-text"})
+        #tinyInput("text" "linkBug" bug?.linkBug {"id":"抄送给","class":"input-text"})
                 #end
             #end
     </li>
@@ -489,7 +489,7 @@
 #@elementItem()
     #@colLabel()相关用例:#end
     #@formControlDiv("col-8")
-         #tinyInput("text" "linkCase" bug?.linkCase {"datatype":"","id":"抄送给","class":"input-text"})
+         #tinyInput("text" "linkCase" bug?.linkCase {"id":"抄送给","class":"input-text"})
 
             #end
         #end
