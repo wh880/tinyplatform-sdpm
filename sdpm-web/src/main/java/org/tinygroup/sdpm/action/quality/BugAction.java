@@ -137,14 +137,18 @@ public class BugAction extends BaseController {
             bug = bugList.get(0);
             bugId = bug.getBugId();
         }
-        Pager<QualityBug> bugs = bugService.findBugListPager(0, 1, " no <" + bugId + " ", null, "no", false);
+        if(bug==null||bug.getBugId()==null){
+            bug = bugService.findById(bugId);
+        }
+        QualityBug qualityBug = new QualityBug();
+        qualityBug.setProductId(bug.getProductId());
+        qualityBug.setDeleted(0);
+        Pager<QualityBug> bugs = bugService.findBugListPager(0, 1, " no >" + bugId + " ", qualityBug, "no", false);
         int nextId = 0;
         if (bugs.getRecords().size() > 0) {
             nextId = bugs.getRecords().get(0).getBugId();
         }
-        if(bug==null||bug.getBugId()==null){
-            bug = bugService.findById(bugId);
-        }
+
         SystemProfile systemProfile = new SystemProfile();
         systemProfile.setFileObjectType("bug");
         systemProfile.setFileDeleted("0");
@@ -645,7 +649,7 @@ public class BugAction extends BaseController {
         }
         bug.setBugOpenedBy(UserUtils.getUserId() != null ? UserUtils.getUserId() : "0");
         bug = bugService.addBug(bug);
-        processProfile(uploadProfile,bug.getBugId(), ProfileType.BUG);
+        processProfile(uploadProfile, bug.getBugId(), ProfileType.BUG);
         LogUtil.logWithComment(LogUtil.LogOperateObject.BUG
                 , LogUtil.LogAction.OPENED
                 , String.valueOf(bug.getBugId())

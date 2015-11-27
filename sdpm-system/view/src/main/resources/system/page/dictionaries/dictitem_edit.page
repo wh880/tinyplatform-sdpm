@@ -31,7 +31,8 @@
                     #@Tselect2Body("moduleId" module?.moduleId?:dictModule?.moduleId {"class":
                         "input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         #for(m:moduleList)
-                    <option value="${m.moduleId}">${m.moduleName}</option>
+                        <option value="${m.moduleId}">${m.moduleName}</option>
+                        #end
                     #end
                 #end
                 #@Tselect2Fix()
