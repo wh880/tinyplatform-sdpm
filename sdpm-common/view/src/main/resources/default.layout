@@ -44,7 +44,7 @@
 <body class="theme-clean main-menu-animated menu-on-top" id="bodyrap">
 <script src="${TINY_CONTEXT_PATH}/common/js/tinyui.js"></script>
     #@mainWrapper()
-        #@mainNavbar("/common/img/main-navbar-logo.png" "Tinyframework")
+        #@mainNavbar("/common/img/main-navbar-logo.png" "Tinyframework" TINY_CONTEXT_PATH+adminPath+"/home")
 ##            #@navbarNav()
 ##                #navbarNavItem("新增内容" "#")
 ##                #@navbarDropdownMenu("下拉菜单")

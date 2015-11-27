@@ -46,7 +46,7 @@ public class DefaultAction extends BaseController {
         session.setAttribute("menuList", JSON.parse(treeString));
     }
 
-    @RequestMapping("system/about")
+    @RequestMapping("a/system/about")
     public String about() {
         return "common/about";
     }

@@ -26,29 +26,21 @@
         <menu id="org-user-password" name="修改密码" icon="icon-key" isShow="0"/>
 
         <menu id="org-user-storyAdmin" name="所属需求" href="/org/user/story" icon="" sort="1"
-              isShow="1"
-              scope="org-user-detail"/>
+              isShow="1" scope="org-user-detail"/>
         <menu id="org-user-taskAdmin" name="所属任务" href="/org/user/task" icon="" sort="1"
-              isShow="1"
-              scope="org-user-detail"/>
+              isShow="1" scope="org-user-detail"/>
         <menu id="org-user-bugAdmin" name="所属缺陷" href="/org/user/bug" icon="" sort="1"
-              isShow="1"
-              scope="org-user-detail"/>
+              isShow="1" scope="org-user-detail"/>
         <menu id="org-user-testtaskAdmin" name="所属测试" href="/org/user/testtask" icon="" sort="1"
-              isShow="1"
-              scope="org-user-detail"/>
+              isShow="1" scope="org-user-detail"/>
         <menu id="org-user-activeAdmin" name="所属动态" href="/org/user/active" icon="" sort="1"
-              isShow="1"
-              scope="org-user-detail"/>
+              isShow="1" scope="org-user-detail"/>
         <menu id="org-user-projectAdmin" name="所属项目" href="/org/user/project" icon="" sort="1"
-              isShow="1"
-              scope="org-user-detail"/>
+              isShow="1" scope="org-user-detail"/>
         <menu id="org-user-profileAdmin" name="所属档案" href="/org/user/show/profile" icon="" sort="1"
-              isShow="1"
-              scope="org-user-detail"/>
+              isShow="1" scope="org-user-detail"/>
         <menu id="org-user-editprofile" name="修改档案" href="/org/user/form" icon="icon-edit"
-              sort="1" isShow="1"
-              scope="org-user-editprofile"/>
+              sort="1" isShow="1" scope="org-user-editprofile"/>
 
     </menu>
     <menu id="organizationActive" name="动态" href="/org/active/show" icon="" sort="1" isShow="1">

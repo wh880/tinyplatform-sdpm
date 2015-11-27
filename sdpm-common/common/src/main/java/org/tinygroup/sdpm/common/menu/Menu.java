@@ -146,7 +146,7 @@ public class Menu implements Serializable, Comparable<Menu> {
     }
 
     public int compareTo(Menu o) {
-        if (o != null && o.getSort() != null) {
+        if (o != null && o.getSort() != null && sort != null) {
             return o.getSort() - sort;
         }
         return 0;

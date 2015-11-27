@@ -38,7 +38,7 @@
         </menu>
     </menu>
 
-    <menu id="about-us" name="关于我们" href="/system/about" isShow="1"/>
+    <menu id="about-us" name="关于我们" href="/system/about" isShow="1" sort="400"/>
     <menu id="upload-file" name="文件上传" sort="1000" isShow="0"/>
 
 </menu>
