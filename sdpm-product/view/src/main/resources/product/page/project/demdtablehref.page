@@ -225,7 +225,7 @@
 </div>
 
 <div style="width:30%;float:right">
-    #TypeInfo("demandhref" storyId)
+    #TypeInfo("demandhref" story?.storyId)
 </div>
 
 

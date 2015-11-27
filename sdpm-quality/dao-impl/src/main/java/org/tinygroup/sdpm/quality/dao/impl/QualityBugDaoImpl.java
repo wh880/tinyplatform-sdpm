@@ -257,7 +257,8 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
 					QUALITY_BUGTABLE.TESTTASK.eq(t.getTesttask()),
 					QUALITY_BUGTABLE.BUG_LAST_EDITED_BY.eq(t.getBugLastEditedBy()),
 					QUALITY_BUGTABLE.BUG_LAST_EDITED_DATE.eq(t.getBugLastEditedDate()),
-					QUALITY_BUGTABLE.DELETED.eq(t.getDeleted())));
+					QUALITY_BUGTABLE.DELETED.eq(t.getDeleted()),
+						QUALITY_BUGTABLE.NO.eq(t.getNo())));
 			return addOrderByElements(select, orderArgs);
 			}
 		});

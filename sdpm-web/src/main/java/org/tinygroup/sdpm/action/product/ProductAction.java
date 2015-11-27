@@ -227,6 +227,9 @@ public class ProductAction extends BaseController {
         Product product = new Product();
         if (Integer.parseInt(cookieProductId) > 0) {
             product = productService.findProduct(Integer.parseInt(cookieProductId));
+            if(product.getProductId()==null){
+                return notFoundView();
+            }
         }
         SystemHistory history = new SystemHistory();
 

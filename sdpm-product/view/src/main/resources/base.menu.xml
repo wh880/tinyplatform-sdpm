@@ -83,7 +83,7 @@
                   scope="demand-state"/>
             <menu id="closed" name="已关闭需求" href="/product/page/project/togglebox.page" icon="" sort="23" isShow="1"
                   scope="demand-state"/>
-            <menu id="showsearchmore" name="搜索" href="#" icon="icon-search" sort="22" isShow="1" scope="demand-state"/>
+            <!--<menu id="showsearchmore" name="搜索" href="#" icon="icon-search" sort="22" isShow="1" scope="demand-state"/>-->
         </menu>
 
         <menu id="allproduct-close" name="关闭产品" href="/product/find/close?productId=${product?.productId}"

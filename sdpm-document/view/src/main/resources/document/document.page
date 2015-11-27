@@ -6,7 +6,7 @@
 
 #include("/document/doc-tab.page")
 #@div(divClass="operationbar")
-    #include("/document/mulsearch.page")
+##    #include("/document/mulsearch.page")
 #end
 #include("/document/treeNew.page")
 #include("/document/common.page")

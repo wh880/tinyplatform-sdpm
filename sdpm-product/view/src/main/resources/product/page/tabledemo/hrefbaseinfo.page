@@ -140,7 +140,7 @@
                 #@td()相关用例#end
                 #@td()
                     #for(case:caseList)
-                    <a href="${TINY_CONTEXT_PATH + adminPath}/quality/testCase/case/viewInfo?id=${case?.bcaseId}">${case?.caseTitle}</a>${taskFor.index==1?"":","}
+                    <a href="${TINY_CONTEXT_PATH + adminPath}/quality/testCase/case/viewInfo?id=${case?.bcaseId}">${case?.caseTitle}</a>${caseFor?.index==1?"":","}
                 #end
             #end
         #end

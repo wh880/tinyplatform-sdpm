@@ -9,7 +9,9 @@
         </p>
         <script>
             $(function(){
-                window.location.href = document.referrer;
+                $("#errorBack").on("click",function(){
+                    window.location.href = document.referrer;
+                })
             })
         </script>
         <div class="row">

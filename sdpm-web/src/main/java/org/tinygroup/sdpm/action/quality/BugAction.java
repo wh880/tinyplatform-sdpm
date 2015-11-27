@@ -125,14 +125,14 @@ public class BugAction extends BaseController {
         if(no!=null){
             Integer qualityProductId = Integer.parseInt(CookieUtils.getCookie(request,"qualityProductId"));
             if(qualityProductId==null){
-                notFoundView();
+                return notFoundView();
             }
             bug = new QualityBug();
             bug.setProductId(qualityProductId);
             bug.setNo(no);
             List<QualityBug> bugList = bugService.findBugList(bug);
             if(bugList.size()==0){
-                notFoundView();
+                return notFoundView();
             }
             bug = bugList.get(0);
             bugId = bug.getBugId();

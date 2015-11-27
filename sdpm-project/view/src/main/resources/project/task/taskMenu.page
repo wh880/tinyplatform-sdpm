@@ -80,5 +80,5 @@
           #end
 </span>
     #div(divClass="clearfix")
-    #include("/project/mulsearch.page")
+##    #include("/project/mulsearch.page")
 #end

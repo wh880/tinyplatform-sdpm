@@ -555,14 +555,14 @@ public class TestCaseAction extends BaseController {
         if(no!=null){
             Integer qualityProductId = Integer.parseInt(CookieUtils.getCookie(request, "qualityProductId"));
             if(qualityProductId==null){
-                notFoundView();
+                return notFoundView();
             }
             testCase = new QualityTestCase();
             testCase.setProductId(qualityProductId);
             testCase.setNo(no);
             List<QualityTestCase> caseList = testCaseService.findTestCaseList(testCase);
             if(caseList.size()==0){
-                notFoundView();
+                return notFoundView();
             }
             testCase = caseList.get(0);
             id = testCase.getCaseId();
