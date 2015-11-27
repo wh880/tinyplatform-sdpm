@@ -71,7 +71,8 @@
                 #end
             #elseif(m?.map?.type=="icon")
                 <a href="${TINY_CONTEXT_PATH +adminPath}${m.href}${storyId}"
-                   title="${m?.name}">#buttonIcon(iconClass=m?.icon)</a>
+                   title="${m?.name}">#buttonIcon(iconClass=m?.icon)${m
+                    ?.name}</a>
             #end
         #end
         #set(m=menuManager.getMenu("demand_note"))
@@ -169,7 +170,8 @@
         #end
     #elseif(m?.map?.type=="icon")
         <a href="${TINY_CONTEXT_PATH +adminPath}${m.href}${storyId}"
-           title="${m?.name}">#buttonIcon(iconClass=m?.icon)</a>
+           title="${m?.name}">#buttonIcon(iconClass=m?.icon)${m
+            ?.name}</a>
     #end
 #end
     #set(m=menuManager.getMenu("demand_note"))
