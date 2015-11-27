@@ -467,3 +467,10 @@ table.table.filelist-table{border:#ddd 1px solid;}
 .files-box{display:inline-block;margin-left:6px;margin-bottom:6px;padding:3px 8px;border:#dde 1px solid; background:#fbfbfc;border-radius:2px;}
 .files-box a{color:#265F7B}
 .files-box a:hover,.files-box:hover{color:#f90;background:#fefefe}
+
+/*关于我们*/
+.pic-avatar{border:none;background:none;padding:0;margin-bottom:10px}
+.who-info .caption{padding:5px}
+.who-info{background:#fcfcfc;border:#f1f1f1 1px solid;padding:4px 5px;}
+.who-info .caption a{color:#333;}
+.who_info .caption a:hover{color:#f90;}
