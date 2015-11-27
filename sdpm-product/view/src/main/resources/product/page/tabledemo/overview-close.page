@@ -1,23 +1,6 @@
-#@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/product/delete" "" {"class":"test"})
-    <script>
-        $(function(){
-            $("#${fromId}").submit(function(){
-                var url = $(this).attr('action');
-                $.ajax({
-                    type: "POST",
-                    url: url,
-                    data: $(this).serialize(),
-                    dataType: "json",
-                    success:function(data){
-                        if(data.status=="y"){
-                            window.location.reload();
-                        }
-                    }
-                });
-                return false;
-            });
-        })
-    </script>
+
+#@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/product/delete" "" {"id":"closeId"})
+
 	#tinyInput("text" "productId" productId {"class":"input-text hidden"})
     #@elementItem()
         #@colLabel()关闭原因：#end
@@ -37,10 +20,35 @@
         #@validateDiv("col-2")#end
     #end
     
-     #@elementItem()
-        <div class="text-c">
-				#submitButton("productSubmit","关闭","commitBtn","关闭")
-        </div>
-    #end
+##     #@elementItem()
+##        <div class="text-c">
+##				#submitButton("productSubmit","关闭","commitBtn","关闭")
+##        </div>
+##    #end
 
 #end
+<script>
+    $(function(){
+        $("#closeId").Validform({
+            beforeSubmit:function(curform){
+                $(curform).ajaxSubmit({
+                    dataType:"json",
+                    success:function(data){
+                        if(data.status=="y"||data.status=="success"){
+                            layer.msg("关闭成功",1, 1);
+                            $(curform).closest(".modal").trigger("close");
+                        }else{
+                            layer.msg("关闭失败");
+                        }
+                        $(curform).closest(".modal").trigger("close");
+                        $("table.tinytable").trigger("refresh");
+                    },
+                    error:function(){
+                        layer.msg("暂无响应");
+                    }
+                });
+                return false;
+            }
+        })
+    })
+</script>

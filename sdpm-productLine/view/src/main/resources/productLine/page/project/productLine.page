@@ -1,6 +1,3 @@
-#import("/org/tinygroup/table/components/togglebox.component")
-#import("/org/tinygroup/compose/components/compose_typography.component")
-#import("/org/tinygroup/button/components/button_smart.component")
 #set(linkName="line-product")
 #@tabBodyCol("ptop-5")
     #@div(divClass="operationbar")
@@ -65,14 +62,19 @@
         #end
         #@toggleRight()
             #if(type=="product")
+
                 #include("/productLine/page/tabledemo/productlist.page")
             #elseif(type=="build")
+
                 #include("/productLine/page/tabledemo/buildlist.page")
             #else
+
                 #include("/productLine/page/tabledemo/list.page")
             #end
         #end
+
     #end
+
 #end
 
 
