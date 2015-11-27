@@ -29,3 +29,11 @@
     #end
 #end
 #end
+<script>
+    $(function(){
+        $(".docJump").on("click",function(){
+            var libId = $(this).attr("value");
+            $.cookie("documentLibId",libId,{path:"/"});
+        });
+    })
+</script>
