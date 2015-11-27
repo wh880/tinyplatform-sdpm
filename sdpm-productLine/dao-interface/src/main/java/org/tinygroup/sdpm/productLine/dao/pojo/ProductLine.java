@@ -305,11 +305,20 @@ public class ProductLine implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        if (object != null) {
+        if(this == object) {
+            return true;
+        }
+        else if (object != null) {
             if (this.getProductLineId().equals(((ProductLine) object).getProductLineId())) {
                 return true;
             }
         }
         return false;
+    }
+
+    @Override
+    public int hashCode(){
+        int result = 17;
+        return 37*result+productLineId;
     }
 }

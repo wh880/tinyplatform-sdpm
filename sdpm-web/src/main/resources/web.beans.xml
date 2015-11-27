@@ -1,7 +1,6 @@
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns="http://www.springframework.org/schema/beans"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-
     <!--模板内置函数-->
     <bean id="dictFunction" class="org.tinygroup.sdpm.functions.DictFunction"/>
     <bean id="stdFunction" class="org.tinygroup.sdpm.functions.StdFunction"/>
@@ -11,7 +10,7 @@
     <bean id="dictFileProcessor" class="org.tinygroup.sdpm.dict.processor.DictFileProcessor" ></bean>
     <bean id="sdpmDictLoader" class="org.tinygroup.sdpm.dict.impl.SdpmDictLoader" scope="singleton">
         <property name="dictHandle" ref="dictHandle"></property>
-        <property name="isInitFromFile" value="false"></property>
+        <property name="isInitFromFile" value="true"></property>
     </bean>
 
     <bean id="commonFilter" class="org.tinygroup.sdpm.common.web.CommonFilter"/>
