@@ -11,18 +11,9 @@
     $(document).ready(function () {
 
         $("#story_reviewed").on("click", function () {
-
             var vm = this.checked;
-            if (vm == true) {
-                $("[name='storyReviewedBy']").attr("disabled", "disabled");
-                $("[name='storyReviewedBy']").closest(".formControls").next("div[class=col-2]").hide();
-            }
-            if (vm == false) {
-                $("[name='storyReviewedBy']").removeAttr("disabled");
-                $("[name='storyReviewedBy']").closest(".formControls").next("div[class=col-2]").show();
-            }
-
-
+            $("[name='storyReviewedBy']").closest(".formControls").next("div[class=col-2]").toggle();//hide();            }
+            $("[name='storyReviewedBy']").trigger("disable");
         });
     });
 </script>
@@ -155,5 +146,9 @@
         $("form[name=thisform").Validform({
             tiptype: 2
         });
+        #if(story?.storyReviewedBy=="0")
+            $("#story_reviewed").click();
+
+        #end
     });
 </script>

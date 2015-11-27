@@ -598,7 +598,11 @@ public class UserAction extends BaseController {
                 return userService.findUserListByIds(ids);
             }else{
                 List<OrgUser> result = new ArrayList<OrgUser>();
-                result.add(userService.findUser(initKey));
+                if("0".equals(initKey)){
+                    result.add(new OrgUser());
+                }else {
+                    result.add(userService.findUser(initKey));
+                }
                 return result;
             }
         }

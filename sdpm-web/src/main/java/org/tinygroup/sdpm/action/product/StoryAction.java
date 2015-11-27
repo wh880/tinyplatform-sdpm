@@ -448,7 +448,7 @@ public class StoryAction extends BaseController {
         ProductStory story = storyService.findStory(productStory.getStoryId());
         if (productStory.getStoryReviewedBy().equals("0")) {
             productStory.setStoryStatus("1");
-            productStory.setStoryReviewedBy(null);
+//            productStory.setStoryReviewedBy(null);
         } else {
             productStory.setStoryStatus("3");
         }

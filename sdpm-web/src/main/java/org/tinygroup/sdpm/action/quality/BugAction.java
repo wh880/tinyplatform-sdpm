@@ -137,7 +137,7 @@ public class BugAction extends BaseController {
             bug = bugList.get(0);
             bugId = bug.getBugId();
         }
-        Pager<QualityBug> bugs = bugService.findBugListPager(0, 1, " bug_id <" + bugId + " ", null, "bugId", false);
+        Pager<QualityBug> bugs = bugService.findBugListPager(0, 1, " no <" + bugId + " ", null, "no", false);
         int nextId = 0;
         if (bugs.getRecords().size() > 0) {
             nextId = bugs.getRecords().get(0).getBugId();
