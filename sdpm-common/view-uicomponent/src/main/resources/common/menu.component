@@ -47,7 +47,9 @@
         });
         $("#msb-box").Validform({
             beforeSubmit:function(curform){
-                window.location.href=$(curform).attr("action")+$("#msb-box-input").val();
+                var Id=$("#msb-box-input").val();
+                if(!Id) return false;
+                window.location.href=$(curform).attr("action")+Id;
                 return false;
             }
         })
