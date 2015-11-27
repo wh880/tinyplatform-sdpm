@@ -71,18 +71,14 @@ public class StatisticAction extends BaseController {
             return "/statistic/page/project.page";
         }
         if ("org".equals(type)) {
-            if(startDate!=null&&endDate!=null){
-                model.addAttribute("startDate",startDate);
-                model.addAttribute("endDate",endDate);
-            }
+            model.addAttribute("startDate",startDate);
+            model.addAttribute("endDate",endDate);
             if(workHours!=null){
                 model.addAttribute("workHours",workHours);
             }else{
                 model.addAttribute("workHours",7);
             }
-            if(roleId!=null){
-                model.addAttribute("roleId",roleId);
-            }
+            model.addAttribute("roleId",roleId);
             List<OrgUser> orgUsers = userService.findUserList(new OrgUser());
             Map<OrgUser, List<ProjectTaskSta>> map = new HashMap<OrgUser, List<ProjectTaskSta>>();
             for (int i = 0, n = orgUsers.size(); i < n; i++) {
