@@ -32,7 +32,6 @@
                 <ref bean="xmlServiceFileProcessor"/>
                 <ref bean="xmlSysServiceFileProcessor"/>
 
-
                 <ref bean="tinyMacroFileProcessor"/>
                 <ref bean="fullContextFileFinder"/>
                 <ref bean="uIComponentFileProcessor"/>

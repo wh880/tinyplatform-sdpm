@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.tinygroup.commons.tools.ArrayUtil;
 import org.tinygroup.sdpm.common.util.Collections3;
 import org.tinygroup.sdpm.common.web.BaseController;
+import org.tinygroup.sdpm.org.dao.pojo.OrgRole;
 import org.tinygroup.sdpm.org.dao.pojo.OrgRoleUser;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.RoleService;
@@ -40,10 +41,12 @@ public class RoleUserAction extends BaseController {
         List<OrgUser> userList = userService.findUserList(null);
         List<OrgRoleUser> linkList = roleService.findUserByRoleId(roleId);
         List<String> idList = Collections3.extractToList(linkList, "orgUserId");
+        OrgRole role = roleService.findRole(roleId);
         model.addAttribute("userIdList", idList);
+        model.addAttribute("role", role);
         model.addAttribute("userList", userList);
         model.addAttribute("roleId", roleId);//角色id
-        return "organization/privilege/groupMaintain.page";
+        return "organization/privilege/member";
     }
 
     /**
