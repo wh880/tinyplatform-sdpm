@@ -1,0 +1,56 @@
+#@rowFrame()
+    #@thumbnailFrame("col-2 whoInfo-box")
+    <div class="who-info">
+    <a href="#">#@thumbnail("/img/default.jpg" "我是×××" "pic-avatar")</a>
+        #@h4()<a href="#">张*浩(Merfy)</a>#end
+        #@simpleH5("positionInfos")×××创始人#end
+        #@p()一个不懂欣赏优秀作品,无法领会优秀作品的精髓,可能永远都无法晋级为那最优秀一个！#end
+    #end
+    </div>
+    #end
+    #@thumbnailFrame("col-2 whoInfo-box")
+    <div class="who-info">
+    <a href="#">#@thumbnail("/img/default.jpg" "我是×××" "pic-avatar")</a>
+        #@h4()<a href="#">张*浩(Merfy)</a>#end
+        #@simpleH5("positionInfos")×××创始人#end
+        #@p()一个不懂欣赏优秀作品,无法领会优秀作品的精髓,可能永远都无法晋级为那最优秀一个！#end
+    #end
+    </div>
+    #end
+    #@thumbnailFrame("col-2 whoInfo-box")
+    <div class="who-info">
+    <a href="#">#@thumbnail("/img/default.jpg" "我是×××" "pic-avatar")</a>
+        #@h4()<a href="#">张*浩(Merfy)</a>#end
+        #@simpleH5("positionInfos")×××创始人#end
+        #@p()一个不懂欣赏优秀作品,无法领会优秀作品的精髓,可能永远都无法晋级为那最优秀一个！#end
+    #end
+    </div>
+    #end
+    #@thumbnailFrame("col-2 whoInfo-box")
+    <div class="who-info">
+        #@thumbnail("/img/default.jpg" "我是×××" "pic-avatar")
+            #@h4()<a href="#">张*浩(Merfy)</a>#end
+            #@simpleH5("positionInfos")×××创始人#end
+            #@p()一个不懂欣赏优秀作品,无法领会优秀作品的精髓,可能永远都无法晋级为那最优秀一个！#end
+        #end
+    </div>
+    #end
+    #@thumbnailFrame("col-2 whoInfo-box")
+    <div class="who-info">
+    <a href="#">#@thumbnail("/img/default.jpg" "我是×××" "pic-avatar")</a>
+        #@h4()<a href="#">张*浩(Merfy)</a>#end
+        #@simpleH5("positionInfos")×××创始人#end
+        #@p()一个不懂欣赏优秀作品,无法领会优秀作品的精髓,可能永远都无法晋级为那最优秀一个！#end
+    #end
+    </div>
+    #end
+    #@thumbnailFrame("col-2 whoInfo-box")
+    <div class="who-info">
+    <a href="#">#@thumbnail("/img/default.jpg" "我是×××" "pic-avatar")</a>
+        #@h4()<a href="#">张*浩(Merfy)</a>#end
+        #@simpleH5("positionInfos")×××创始人#end
+        #@p()一个不懂欣赏优秀作品,无法领会优秀作品的精髓,可能永远都无法晋级为那最优秀一个！#end
+    #end
+    </div>
+    #end
+#end

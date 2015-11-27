@@ -1,7 +1,6 @@
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns="http://www.springframework.org/schema/beans"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-
     <!--模板内置函数-->
     <bean id="dictFunction" class="org.tinygroup.sdpm.functions.DictFunction"/>
     <bean id="stdFunction" class="org.tinygroup.sdpm.functions.StdFunction"/>

@@ -86,10 +86,14 @@
                 <ul class="dropdown-menu">
 ##                    <li><a href="javascript:void(0);"><span class="label label-warning pull-right">新的</span>资料文件</a>
 ##                    </li>
-#@hasMenu("org-user-password")
-    <li><a href="${TINY_CONTEXT_PATH+adminPath}/org/user/passwordForm"><i class="dropdown-icon fa icon-key"></i>&nbsp;&nbsp;修改密码</li>
-    <li class="divider"></li>
-#end
+
+    #@hasMenu("org-user-profileAdmin")
+        <li><a href="${TINY_CONTEXT_PATH+adminPath}/org/user/show/profile?id=${UserUtils.getUserId()}"><i class="dropdown-icon fa icon-user"></i>&nbsp;&nbsp;个人档案</li>
+    #end
+    #@hasMenu("org-user-password")
+        <li><a href="${TINY_CONTEXT_PATH+adminPath}/org/user/passwordForm"><i class="dropdown-icon fa icon-key"></i>&nbsp;&nbsp;修改密码</li>
+        <li class="divider"></li>
+    #end
 ##                    <li><a href="javascript:void(0);"><i class="dropdown-icon fa fa-cog"></i>&nbsp;&nbsp;修改个人资料</a></li>
 
                     <li><a href="${TINY_CONTEXT_PATH}/logout"><i class="dropdown-icon fa fa-power-off"></i>&nbsp;&nbsp;退出</a>
@@ -169,4 +173,13 @@
     });
 </script>
 </body>
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?395d226c122589122e4f6654a6990984";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
 </html>

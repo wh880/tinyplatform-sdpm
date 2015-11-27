@@ -57,3 +57,10 @@ function selectAllNullorReserve(obj, type) {
         }
     }
 }
+var _hmt = _hmt || [];
+(function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?1b088a6c902e538dc40b10cb508e20f2";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+})();

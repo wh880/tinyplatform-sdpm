@@ -20,7 +20,6 @@ import org.tinygroup.sdpm.org.service.inter.RoleService;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.service.StoryService;
-import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTeam;
@@ -178,6 +177,7 @@ public class UserAction extends BaseController {
                     , null);
         }
         model.addAttribute("user", user);
+        UserUtils.clearCache(user);
         return "redirect:" + adminPath + "/org/user/list/";
     }
 

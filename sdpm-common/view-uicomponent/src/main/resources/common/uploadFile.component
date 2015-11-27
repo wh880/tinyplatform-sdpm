@@ -17,6 +17,7 @@
 #end
 
 #macro mulUploadFile(fileList)#set(ItemIdOrder=1,mulUploadFileTableId=fmt("tid%d",rand()))
+    #@hasMenu("upload-file")
 <table class="table itemlist-table " id="${mulUploadFileTableId}">
     <thead>
     <tr>
@@ -111,4 +112,5 @@
         });
     });
 </script>
+   #end
 #end
