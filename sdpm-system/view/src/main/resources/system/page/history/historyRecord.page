@@ -6,7 +6,7 @@
         记录详情<br>
         #end
             #for(h : a?.value)
-            <p>修改了<b>${getStd(a?.key?.actionObjectType,h?.historyField)}</b>旧值为 ${h?.historyOld}，新值为 ${h?.historyNew}。</p>
+            <p>修改了<b>${getStd(a?.key?.actionObjectType,h?.historyField)}</b>旧值为 ${getDict(h?.historyField,h?.historyOld)?:h?.historyOld}，新值为 ${getDict(h?.historyField,h?.historyNew)?:h?.historyNew}。</p>
             #end
             <br>
             ${a?.key?.actionComment}

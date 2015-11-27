@@ -161,7 +161,7 @@ public class HolidayDaoImpl extends TinyDslDaoSupport implements HolidayDao {
 			public Select generate(Holiday t) {
 				Column column = HOLIDAYTABLE.HOLIDAY_ID;
 				Condition condition = null;
-				if(orderArgs!=null&&orderArgs.length>0&&"action_date".equals(((Column)orderArgs[0].getOrderByElement().getExpression()).getColumnName())){
+				if(orderArgs!=null&&orderArgs.length>0&&SYSTEM_ACTIONTABLE.ACTION_DATE.toString().equals(((Column)orderArgs[0].getOrderByElement().getExpression()).getColumnName())){
 					column= SYSTEM_ACTIONTABLE.ACTION_ID;
 					condition = SYSTEM_ACTIONTABLE.ACTION_OBJECT_TYPE.eq("holiday");
 				}

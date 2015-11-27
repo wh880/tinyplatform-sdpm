@@ -116,21 +116,22 @@
         </div>
         <div class="infoContent">
             <p class="titleName">附件</p>
-            #foreach(f:file)
-                #set(path=f?.filePathname)
-                <a href="${TINY_CONTEXT_PATH+path}">${f?.fileTitle}.${f?.fileExtension}</a>&nbsp&nbsp&nbsp&nbsp
-                #foreach(m:menuManager.getScopeMenus("product-file-op"))
-                    #if(m.id == "story-file-edit")
-                        #@aModal("#myModal" m.name "400" "120" "class-m" adminPath+m.href+"?fileId="+f?.fileId)
-                            #buttonIcon(iconClass=m.icon)#end&nbsp&nbsp&nbsp
-
-                    #else
-                        #@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m.href f?.fileId )
-                            #buttonIcon(iconClass=m.icon)
-                        #end
-                    #end
-                #end <br>
-            #end
+            <div>#uploadFileList(file) </div>
+##            #foreach(f:file)
+##                #set(path=f?.filePathname)
+##                <a href="${TINY_CONTEXT_PATH+path}">${f?.fileTitle}.${f?.fileExtension}</a>&nbsp&nbsp&nbsp&nbsp
+##                #foreach(m:menuManager.getScopeMenus("product-file-op"))
+##                    #if(m.id == "story-file-edit")
+##                        #@aModal("#myModal" m.name "400" "120" "class-m" adminPath+m.href+"?fileId="+f?.fileId)
+##                            #buttonIcon(iconClass=m.icon)#end&nbsp&nbsp&nbsp
+##
+##                    #else
+##                        #@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m.href f?.fileId )
+##                            #buttonIcon(iconClass=m.icon)
+##                        #end
+##                    #end
+##                #end <br>
+##            #end
         </div>
         #history(adminPath+"/system/action/ajax/history?actionObjectType=case&actionObjectId="+testCase?.caseId)
         <center>

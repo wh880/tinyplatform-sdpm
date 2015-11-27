@@ -24,7 +24,7 @@
         #@colLabel()所属产品：#end
         #@formControlDiv("col-3")
             #@TzTreeSelect(
-                "productId" "" {"class":"input-text","":"","nullmsg":"",
+                "docProduct" "" {"class":"input-text","":"","nullmsg":"",
                 "data-URL":call("link",adminPath+"/productLine/userProductTree")})
                 <script>
                     $(function(){
