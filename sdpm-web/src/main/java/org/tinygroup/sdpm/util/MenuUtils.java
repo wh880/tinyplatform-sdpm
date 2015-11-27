@@ -17,7 +17,11 @@ public class MenuUtils {
     private MenuManager menuManager;
 
     public Menu getMenu(String menuId) {
-        return menuManager.getMenu(menuId);
+        if (UserUtils.hasMenu(menuId)) {
+            return menuManager.getMenu(menuId);
+        } else {
+            return null;
+        }
     }
 
     public List<Menu> getChildMenus(String parentId) {
@@ -31,6 +35,7 @@ public class MenuUtils {
         filterMenu(allChildMenus);
         return allChildMenus;
     }
+
     public List<Menu> getAllChildMenusWithoutPermisonFilter(String parentId) {
         List<Menu> allChildMenus = menuManager.getAllChildMenus(parentId);
         return allChildMenus;

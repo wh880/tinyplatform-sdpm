@@ -11,6 +11,7 @@ import org.tinygroup.sdpm.common.util.Collections3;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.org.dao.pojo.OrgRoleMenu;
 import org.tinygroup.sdpm.org.service.inter.RoleService;
+import org.tinygroup.sdpm.util.UserUtils;
 
 import java.util.List;
 
@@ -31,6 +32,7 @@ public class RoleMenuAction extends BaseController {
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(Integer roleId, String[] menuId, String parentId) {
         roleService.saveRoleMenu(roleId, parentId, menuId);
+        UserUtils.clearCache();
         return "redirect:" + adminPath + "/org/roleMenu/show?roleId=" + roleId;
     }
 
