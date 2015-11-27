@@ -10,7 +10,7 @@
     <meta name="description" content="Tiny,TINY,Software Development Process Management">
     <title>Tiny SDPM登陆</title>
     <style>
-body{font-family:'Microsoft Yahei'; margin:0 auto;background:#1c77ac; background-image:url(${TINY_CONTEXT_PATH}/login/images/light.png) no-repeat center top;}
+body{font-family:'Microsoft Yahei'; margin:0 auto;background:#6d2a7f; background-image:url(${TINY_CONTEXT_PATH}/login/images/light.png) no-repeat center top;}
 ul,li{display:block;margin:0;padding:0;list-style:none;height:100%;}
 a,a:focus{text-decoration:none;color:#000;outline:none;blr:expression(this.onFocus=this.blur());}
 a:hover{color:#00a4ac;text-decoration:none;}
@@ -23,7 +23,7 @@ a:hover{color:#00a4ac;text-decoration:none;}
 /*login*/
 .loginbody{font-size:9pt;background:url(${TINY_CONTEXT_PATH}/login/images/loginbg3.png) no-repeat center center; width:100%;position:absolute;height:96%}
 .loginbox{width:692px; height:336px;background:url(${TINY_CONTEXT_PATH}/login/images/logininfo.png) no-repeat; overflow:auto;position:absolute;margin-top:-168px;top:50%;left:50%;margin-left:-346px;}
-.loginbox ul{margin-top:88px; margin-left:285px;}
+.loginbox ul{margin-top:69px; margin-left:285px;}
 .loginbox ul li{margin-bottom:25px;width:299px;}
 .loginbox ul li label{color:#687f92; padding-left:25px;}
 .loginbox ul li label a{color:#687f92;}
@@ -32,7 +32,7 @@ a:hover{color:#00a4ac;text-decoration:none;}
 .loginuser{font-family:"Microsoft Yahei";width:299px; height:46px; background:url(${TINY_CONTEXT_PATH}/login/images/loginuser.png) no-repeat; border:none; line-height:46px; padding-left:44px; font-size:14px;}
 .loginpwd{font-family:"Microsoft Yahei";width:299px; height:46px; background:url(${TINY_CONTEXT_PATH}/login/images/loginpassword.png) no-repeat; border:none;line-height:46px; padding-left:44px; font-size:14px; color:#90a2bc;}
 .loginbtn{font-family:"Microsoft Yahei";width:111px;height:35px; background:url(${TINY_CONTEXT_PATH}/login/images/buttonbg.png) repeat-x; font-size:14px; font-weight:bold; color:#fff;cursor:pointer; line-height:35px;border:none}
-#login_tip{height:5px;margin-top:-18px;color:#c00}
+#login_tip{height:5px;padding-top:18px;color:#c00;}
 input:- webkit-autofill { -webkit-box-shadow: 0 0 0 1000px white inset; }
     </style>
     <script>var contextPath = "${TINY_CONTEXT_PATH}";</script>
