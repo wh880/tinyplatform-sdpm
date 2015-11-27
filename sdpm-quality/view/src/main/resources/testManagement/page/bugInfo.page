@@ -34,38 +34,38 @@
         #foreach(m:menuManager.getScopeMenus("testbuginfo-tab"))
             #if(m.id=="tmakesure")
                 #if(qualityBug?.bugConfirmed==1)
-                    <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>&nbsp;&nbsp;
+                    <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")${m.name}</span>&nbsp;&nbsp;
                 #else
                     <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${qualityBug?.bugId}"
-                       title="${m.name}">#buttonIcon(iconClass=m.icon)</a>&nbsp;&nbsp;
+                       title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp;&nbsp;
                 #end
             #elseif(m.id=="tassign")
                 #if(qualityBug?.bugConfirmed==1)
                     <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${qualityBug?.bugId}"
-                       title="${m.name}">#buttonIcon(iconClass=m.icon)</a>&nbsp;&nbsp;
+                       title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp;&nbsp;
                 #else
-                    <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>&nbsp;&nbsp;
+                    <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")${m.name}</span>&nbsp;&nbsp;
                 #end
             #elseif(m.id=="tsolution")
                 #if(qualityBug?.bugStatus=="1"&&qualityBug?.bugConfirmed==1)
                     <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${qualityBug?.bugId}"
-                       title="${m.name}">#buttonIcon(iconClass=m.icon)</a>&nbsp;&nbsp;
+                       title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp;&nbsp;
                 #else
-                    <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>&nbsp;&nbsp;
+                    <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")${m.name}</span>&nbsp;&nbsp;
                 #end
             #elseif(m.id=="tbugadddemand")
                 #if(qualityBug?.bugStatus!="3")
                     <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${qualityBug?.bugId}"
-                       title="${m.name}">#buttonIcon(iconClass=m.icon)</a>&nbsp;&nbsp;
+                       title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp;&nbsp;
                 #end
             #elseif(m.id=="reActive")
                 #if(qualityBug?.bugStatus=="3")
                     <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${qualityBug?.bugId}"
-                       title="${m.name}">#buttonIcon(iconClass=m.icon)</a>&nbsp;&nbsp;
+                       title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp;&nbsp;
                 #end
             #elseif(m.id=="add-case")
                 <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${qualityBug?.bugId}"
-                   title="${m.name}">#buttonIcon(iconClass=m.icon)</a>&nbsp;&nbsp;
+                   title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp;&nbsp;
             #end
         #end
         #foreach(m:menuManager.getScopeMenus("testbuginfo-tab"))
@@ -150,40 +150,39 @@
                 #foreach(m:menuManager.getScopeMenus("testbuginfo-tab"))
                     #if(m.id=="tmakesure")
                         #if(qualityBug?.bugConfirmed==1)
-                            <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>&nbsp;&nbsp;
+                            <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")${m.name}</span>&nbsp;&nbsp;
                         #else
                             <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${qualityBug?.bugId}"
-                               title="${m.name}">#buttonIcon(iconClass=m.icon)</a>&nbsp;&nbsp;
+                               title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp;&nbsp;
                         #end
                     #elseif(m.id=="tassign")
                         #if(qualityBug?.bugConfirmed==1)
                             <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${qualityBug?.bugId}"
-                               title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+                               title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp;&nbsp;
                         #else
-                            <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>&nbsp;&nbsp;
+                            <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")${m.name}</span>&nbsp;&nbsp;
                         #end
                     #elseif(m.id=="tsolution")
                         #if(qualityBug?.bugStatus=="1"&&qualityBug?.bugConfirmed==1)
                             <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${qualityBug?.bugId}"
-                               title="${m.name}">#buttonIcon(iconClass=m.icon)</a>&nbsp;&nbsp;
+                               title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp;&nbsp;
                         #else
-                            <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>&nbsp;&nbsp;
+                            <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")${m.name}</span>&nbsp;&nbsp;
                         #end
                     #elseif(m.id=="tbugadddemand")
                         #if(qualityBug?.bugStatus!="3")
                             <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${qualityBug?.bugId}"
-                               title="${m.name}">#buttonIcon(iconClass=m.icon)</a>&nbsp;&nbsp;
+                               title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp;&nbsp;
                         #end
                     #elseif(m.id=="reActive")
                         #if(qualityBug?.bugStatus=="3")
                             <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${qualityBug?.bugId}"
-                               title="${m.name}">#buttonIcon(iconClass=m.icon)</a>&nbsp;&nbsp;
+                               title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp;&nbsp;
                         #end
                     #elseif(m.id=="add-case")
                         <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${qualityBug?.bugId}"
-                           title="${m.name}">#buttonIcon(iconClass=m.icon)</a>&nbsp;&nbsp;
+                           title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp;&nbsp;
                     #end
-
                 #end
                 #foreach(m:menuManager.getScopeMenus("testbuginfo-tab"))
 
