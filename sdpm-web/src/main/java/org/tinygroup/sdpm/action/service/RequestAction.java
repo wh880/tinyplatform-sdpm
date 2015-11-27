@@ -13,7 +13,6 @@ import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.service.ProductService;
-import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceClient;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceRequest;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceReview;
@@ -244,7 +243,7 @@ public class RequestAction extends BaseController {
                 model.addAttribute("review", review);
             }
         }
-        return "service/serviceReq/requestViewList.page";
+        return "/service/serviceReq/requestViewList.page";
     }
 
     /**
@@ -332,6 +331,22 @@ public class RequestAction extends BaseController {
         }
         requestService.deleteBatchRequest(list);
         return resultMap(true, "删除成功");
+    }
+
+//    @RequiresPermissions("request-batchdel")
+
+    @RequestMapping(value = "/overview")
+    public String overview(Integer id,Model model) {
+        if(id!=null){
+//             serviceRequest = new ServiceRequest();
+            ServiceRequest serviceRequest=requestService.findRequest(id);
+            if(serviceRequest.getClientId()!=null){
+                ServiceClient serviceClient = clientService.findClient(serviceRequest.getClientId());
+                model.addAttribute("client",serviceClient);
+            }
+            model.addAttribute("request",serviceRequest);
+        }
+        return "/service/serviceReq/requestView.page";
     }
 
     @ResponseBody
