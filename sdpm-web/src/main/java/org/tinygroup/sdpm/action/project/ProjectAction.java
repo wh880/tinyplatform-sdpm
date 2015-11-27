@@ -64,6 +64,9 @@ public class ProjectAction extends BaseController {
             }
         }
         Project project = projectService.findProjectById(projectId);
+        if (project == null) {
+            return notFoundView();
+        }
         CookieUtils.setCookie(response, ProjectUtils.COOKIE_PROJECT_ID, projectId.toString());
         model.addAttribute("project", project);
         return "/project/survey/index";

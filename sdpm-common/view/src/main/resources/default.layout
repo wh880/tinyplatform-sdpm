@@ -44,7 +44,7 @@
 <body class="theme-clean main-menu-animated menu-on-top" id="bodyrap">
 <script src="${TINY_CONTEXT_PATH}/common/js/tinyui.js"></script>
     #@mainWrapper()
-        #@mainNavbar("/common/img/main-navbar-logo.png" "Tiny SDPM" "/home")
+        #@mainNavbar("/common/img/main-navbar-logo.png" "Tiny SDPM" TINY_CONTEXT_PATH+adminPath+"/home")
 ##            #@navbarNav()
 ##                #navbarNavItem("新增内容" "#")
 ##                #@navbarDropdownMenu("下拉菜单")
@@ -66,8 +66,8 @@
 ##				#end
 ##            </li>
             <li class="fullscreen">
-                <a href="javascript:void(0);" onclick="launchFullScreen(document.documentElement);" title="全屏"><i
-                        class="fa fa-fullscreen"></i></a>
+                <a href="javascript:void(0);" onclick="launchFullScreen(document.documentElement);" title="全屏">
+                    <i class="fa fa-fullscreen"></i></a>
             </li>
             <li>
                 #set(searchCurrentName=searchCurrentName?:getDict("searchType").get(0).value)

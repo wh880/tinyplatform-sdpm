@@ -604,7 +604,7 @@ public class ProjectTaskAction extends BaseController {
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("pID", t.getTaskId().toString());
-            map.put("pName", t.getTaskName());
+            map.put("pName", StringUtil.abbreviate(t.getTaskName(), 10));
             if (t.getTaskRealStarted() != null) {
                 map.put("pStart", format.format(t.getTaskRealStarted()));
             } else if (t.getTaskEstStared() != null) {

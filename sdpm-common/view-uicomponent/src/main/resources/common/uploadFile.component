@@ -1,7 +1,7 @@
 #macro uploadFileList(profileList)
 #foreach(p:profileList)
 	<div class="files-box">
-		<a href="${TINY_CONTEXT_PATH+p.filePathname}">${p.fileTitle+p.fileExtension}</a>
+		<a href="${TINY_CONTEXT_PATH+p.filePathname}">${p.fileTitle+"."+p.fileExtension}</a>
 	</div>
 #end
 #end

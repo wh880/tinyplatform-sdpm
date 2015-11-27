@@ -2,8 +2,6 @@
 
     var storageSupported = (typeof(window.Storage) !== "undefined");
 
-// Functions
-//
 
     var reloadPage = function () {
         location.reload();

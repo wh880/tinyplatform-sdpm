@@ -342,7 +342,7 @@ public class DocAction extends BaseController {
      * @param id
      * @return
      */
-    @RequiresPermissions(value = {"docdelete", "doc-view-delete"}, logical = Logical.AND)
+    @RequiresPermissions(value = {"docdelete", "doc-view-delete"}, logical = Logical.OR)
     @ResponseBody
     @RequestMapping(value = "/delete")
     public Map delDoc(Integer id) {
