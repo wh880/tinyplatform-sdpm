@@ -471,6 +471,6 @@ table.table.filelist-table{border:#ddd 1px solid;}
 /*关于我们*/
 .pic-avatar{border:none;background:none;padding:0;margin-bottom:10px}
 .who-info .caption{padding:5px}
-.who-info{background:#fcfcfc;border:#f1f1f1 1px solid;padding:4px 5px;}
+.who-info{background:#fcfcfc;border:#f1f1f1 1px solid;padding:4px 5px;height:300px;overflow:hidden}
 .who-info .caption a{color:#333;}
 .who_info .caption a:hover{color:#f90;}

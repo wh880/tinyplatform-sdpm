@@ -123,6 +123,10 @@
 					浙ICP备14043110号-1
 			</span>
                 TinyGroup &copy; 2013-${formatDate(now(),"yyyy")}
+                如有问题欢迎咨询，点击链接加入
+                <a href="http://shang.qq.com/wpa/qunwpa?idkey=5e6ef409eec4046b4aa0273c0359920bd875b87f834bee175917f96e8b216489" target="_blank" title="Tiny群">
+                    【Tiny】官方群
+                </a>
             </div>
         </div>
         #end
