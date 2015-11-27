@@ -72,7 +72,7 @@
               scope="pro-bug-op"/>
     </menu>
 
-    <menu id="version" parent-id="project" name="版本" href="/project/build/index" icon="" sort="1" isShow="1">
+    <menu id="version-menu" parent-id="project" name="版本" href="/project/build/index" icon="" sort="1" isShow="1">
         <menu id="pro-version-look" name="查看bug" href="/project/build/look" icon="icon-eye-open" sort="20"
               isShow="1"
               scope="pro-version-op"/>
@@ -114,24 +114,7 @@
         <!--</menu>-->
     </menu>
 
-    <menu id="note" parent-id="project" name="日志" href="/system/effort" icon="" sort="1" isShow="1">
-        <menu id="not-effort" name="日历" href="/system/effort" scope="noteScope" sort="2" isShow="1">
-        </menu>
-        <menu id="not-effort-today" name="今日" href="/system/effort/date/1" scope="noteScope" sort="9" isShow="1">
-        </menu>
-        <menu id="not-effort-yest" name="昨日" href="/system/effort/date/2" scope="noteScope" sort="8" isShow="1">
-        </menu>
-        <menu id="not-effort-thisWeek" name="本周" href="/system/effort/date/3" scope="noteScope" sort="7" isShow="1">
-        </menu>
-        <menu id="not-effort-lastWeek" name="上周" href="/system/effort/date/4" scope="noteScope" sort="6" isShow="1">
-        </menu>
-        <menu id="not-effort-thisMonth" name="本月" href="/system/effort/date/5" scope="noteScope" sort="5" isShow="1">
-        </menu>
-        <menu id="not-effort-lastMonth" name="上月" href="/system/effort/date/6" scope="noteScope" sort="4" isShow="1">
-        </menu>
-        <menu id="not-effort-all" name="所有日志" href="/system/effort/date/7" scope="noteScope" sort="3" isShow="1">
-        </menu>
-    </menu>
+    <menu id="note" parent-id="project" name="日志" href="/system/effort" icon="" sort="1" isShow="1"/>
 
     <menu id="dynamic" parent-id="project" name="动态" href="/project/dynamic/index" icon="" sort="1" isShow="1">
     </menu>

@@ -132,7 +132,7 @@
 				#div(divClass="clearfix")
 			#end
 			##operationbar end
-			#include("/page/project/calendar.page")
+##			#include("/page/project/calendar.page")
 		#end
 		#@tabBodyCol("ptop-5")
 			##operationbar start7

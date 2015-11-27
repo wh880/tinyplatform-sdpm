@@ -17,8 +17,6 @@ import org.tinygroup.sdpm.dto.UploadProfile;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
-import org.tinygroup.sdpm.product.service.ProductService;
-import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
 import org.tinygroup.sdpm.project.service.inter.BuildService;
@@ -28,8 +26,9 @@ import org.tinygroup.sdpm.project.service.inter.ProjectStoryService;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.sdpm.system.dao.pojo.ProfileType;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
-import org.tinygroup.sdpm.util.CookieUtils;import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;
-import org.tinygroup.sdpm.system.service.inter.ProfileService;import org.tinygroup.sdpm.util.LogUtil;
+import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;
+import org.tinygroup.sdpm.system.service.inter.ProfileService;
+import org.tinygroup.sdpm.util.LogUtil;
 import org.tinygroup.sdpm.util.ProjectUtils;
 import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
@@ -55,8 +54,6 @@ public class ProjectBuildAction extends BaseController {
     private BuildService buildService;
     @Autowired
     private ProjectService projectService;
-    @Autowired
-    private ProductService productService;
     @Autowired
     private ProjectStoryService projectStoryService;
     @Autowired
