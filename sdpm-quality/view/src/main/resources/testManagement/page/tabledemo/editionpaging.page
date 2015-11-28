@@ -238,8 +238,8 @@
                             if (pjId > 0) {
                                 ajaxRead("${sid}", "taskId", "taskId", "taskName", "/quality/bug/ajax/task?taskProject=" + pjId, ${bug?.taskId ?: 0});
                                 if(pId>0){
-                                    ajaxRead("${sid}", "bugOpenedBuild", "buildId", "buildName", "/quality/bug/ajax/build?buildProduct=" + pId+"&buildProject="+pjId, ${bug?.bugOpenedBuild},"build");
-                                    ajaxRead("${sid}", "bugResolvedBuild", "buildId", "buildName", "/quality/bug/ajax/build?buildProduct=" + pId+"&buildProject="+pjId, ${bug?.bugResolvedBuild},"build");
+                                    ajaxRead("${sid}", "bugOpenedBuild", "buildId", "buildName", "/quality/bug/ajax/build?buildProduct=" + pId+"&buildProject="+pjId, "${bug?.bugOpenedBuild?bug.bugOpenedBuild:"0"}","build");
+                                    ajaxRead("${sid}", "bugResolvedBuild", "buildId", "buildName", "/quality/bug/ajax/build?buildProduct=" + pId+"&buildProject="+pjId, "${bug?.bugResolvedBuild?bug.bugResolvedBuild:"0"}","build");
                                 }
                             }
                         })
