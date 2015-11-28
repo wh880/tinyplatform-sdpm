@@ -2,14 +2,8 @@
 <menu id="project" parent-id="0" name="项目" href="/project/task/index" icon="icon-book" sort="700" isShow="1">
     <menu id="task" parent-id="project" name="任务" href="/project/task/index" icon="" sort="1" isShow="1">
         <menu id="pro-task-proposeversion" name="建任务" href="/project/task/form" icon="icon-plus" sort="4"
-              isShow="1" scope="pro-taskmenu2-op"/>
-        <menu id="pro-task-batchadd" name="批量增加任务" href="/project/task/batchAdd" icon="icon-plus-sign" sort="6"
-              isShow="1" scope="pro-taskmenu2-op"/>
-        <menu id="pro-Info-close" name="取消任务" href="/project/task/cancel" icon="icon-off" sort="6" isShow="1"
-              scope="pro-taskInfo2-op"/>
-        <menu id="pro-Info2-copy" name="复制任务" href="/project/task/form" icon="icon-copy" sort="8" isShow="1"
-              scope="pro-taskInfo2-op"/>
-
+              isShow="1"
+              scope="pro-taskmenu2-op"/>
         <menu id="pro-task-call" name="任务指派" href="/project/task/call" icon="icon-hand-right" sort="20" isShow="1"
               scope="pro-task-op"/>
         <menu id="pro-task-start" name="开始任务" href="/project/task/start" icon="icon-play" sort="15" isShow="1"
@@ -23,27 +17,65 @@
         <menu id="pro-task-close" name="关闭任务" href="/project/task/close" icon="icon-off" sort="6" isShow="1"
               scope="pro-task-op"/>
 
-        <menu id="task-group" name="分组查询" isShow="0">
-            <menu id="task-group-story" icon="" href="/project/task/grouping?type=1" sort="100" name="需求分组"
-                  scope="task-group-menu"/>
-            <menu id="task-group-status" icon="" href="/project/task/grouping?type=2" sort="90" name="状态分组"
-                  scope="task-group-menu"/>
-            <menu id="task-group-pri" icon="" href="/project/task/grouping?type=3" sort="80" name="优先级分组"
-                  scope="task-group-menu"/>
-            <menu id="task-group-openedBy" icon="" href="/project/task/grouping?type=4" sort="70" name="创建者分组"
-                  scope="task-group-menu"/>
-            <menu id="task-group-assignedTo" icon="" href="/project/task/grouping?type=5" sort="60" name="指派人分组"
-                  scope="task-group-menu"/>
-            <menu id="task-group-finishedBy" icon="" href="/project/task/grouping?type=6" sort="50" name="完成者分组"
-                  scope="task-group-menu"/>
-            <menu id="task-group-closedBy" icon="" href="/project/task/grouping?type=7" sort="40" name="关闭者分组"
-                  scope="task-group-menu"/>
+        <!--<menu id="task-group" name="分组查询" icon="" sort="10">-->
+        <menu id="task-group-story" icon="" href="/project/task/grouping?type=1" sort="100" name="需求分组"
+              scope="task-group-menu"/>
+        <menu id="task-group-status" icon="" href="/project/task/grouping?type=2" sort="90" name="状态分组"
+              scope="task-group-menu"/>
+        <menu id="task-group-pri" icon="" href="/project/task/grouping?type=3" sort="80" name="优先级分组"
+              scope="task-group-menu"/>
+        <menu id="task-group-openedBy" icon="" href="/project/task/grouping?type=4" sort="70" name="创建者分组"
+              scope="task-group-menu"/>
+        <menu id="task-group-assignedTo" icon="" href="/project/task/grouping?type=5" sort="60" name="指派人分组"
+              scope="task-group-menu"/>
+        <menu id="task-group-finishedBy" icon="" href="/project/task/grouping?type=6" sort="50" name="完成者分组"
+              scope="task-group-menu"/>
+        <menu id="task-group-closedBy" icon="" href="/project/task/grouping?type=7" sort="40" name="关闭者分组"
+              scope="task-group-menu"/>
+        <!--</menu>-->
+
+        <!--<menu id="task-menu2" name="任务菜单" href="/project/task/index.page" icon="" sort="1" isShow="1">-->
+        <menu id="pro-task-report" name="报表" href="/project/task/reportform" icon="icon-bar-chart" sort="8"
+              isShow="1"
+              scope="pro-taskmenu2-op"/>
+        <menu id="pro-task-batchadd" name="批量增加" href="/project/task/batchAdd" icon="icon-plus-sign" sort="6"
+              isShow="1"
+              scope="pro-taskmenu2-op"/>
+
+        <!--</menu>-->
+
+        <!--<menu id="protab"  name="项目" href="/project/task/index.page" icon="" sort="1" isShow="1">-->
+
+        <menu id="project-op-all" name="所有项目" href="/project/list" icon="icon-list" sort="1" isShow="1"
+              scope="project-op"/>
+        <menu id="project-op-add" name="添加项目" href="/project/form" icon="icon-plus" sort="1" isShow="1"
+              scope="project-op"/>
+        <!--</menu>-->
+
+        <menu id="task-Info" name="详情" href="/project/task/IDLinkremark.page" icon="" sort="1" isShow="1">
+            <!--<menu id="pro-Info-call" name="指派" href="/project/task/call" icon="icon-hand-right" sort="20" isShow="1"-->
+            <!--scope="pro-taskInfo-op"/>-->
+            <!--<menu id="pro-Info-start" name="开始" href="/project/task/start" icon="icon-play" sort="15" isShow="1"-->
+            <!--scope="pro-taskInfo-op"/>-->
+            <!--<menu id="pro-Info-note" name="日志" href="/system/effort/list" icon="icon-time" sort="10" isShow="1"-->
+            <!--scope="pro-taskInfo-op"/>-->
+            <!--<menu id="pro-Info-finish" name="完成" href="/project/task/finish" icon="icon-ok-sign" sort="8" isShow="1"-->
+            <!--scope="pro-taskInfo-op"/>-->
+            <!--<menu id="pro-Info2-edit" name="编辑" href="/project/task/edit" icon="icon-pencil" sort="4" isShow="1"-->
+            <!--scope="pro-taskInfo-op"/>-->
+
         </menu>
 
-        <menu id="pro-task-report" name="任务报表" href="/project/task/reportform" icon="icon-bar-chart" sort="8"
-              isShow="1" scope="pro-taskmenu2-op"/>
-
-        <menu id="gantt" name="甘特图" href="/project/task/gantt" icon="" sort="1" isShow="1"/>
+        <!--<menu id="task-Info2" name="任务菜单1" href="/project/task/index.page" icon="" sort="1" isShow="1">-->
+        <menu id="pro-Info-close" name="取消项目" href="/project/task/cancel" icon="icon-off" sort="6" isShow="1"
+              scope="pro-taskInfo2-op"/>
+        <!--<menu id="pro-Info2-remark" name="备注" href="/project/task/IDLinkremark.page" icon="icon-book" sort="10" isShow="1"-->
+        <!--scope="pro-taskInfo2-op"/>-->
+        <menu id="pro-Info2-copy" name="复制项目" href="/project/task/form" icon="icon-copy" sort="8" isShow="1"
+              scope="pro-taskInfo2-op"/>
+        <!--</menu>-->
+        <menu id="gantt" name="甘特图" href="/project/task/gantt" icon="" sort="1" isShow="1">
+        </menu>
     </menu>
 
     <menu id="demand" parent-id="project" name="需求" href="/project/demand/index" icon="" sort="1" isShow="1">
@@ -54,10 +86,13 @@
         <menu id="distribute-task" name="批量分解任务" href="/project/task/batchAdd" icon="icon-paste" sort="80" isShow="1"
               scope="demand-op"/>
         <!--<menu id="demand-menu" name="任务菜单" href="/project/demand/index" icon="" sort="1" isShow="1">-->
-        <menu id="pro-demand-add" name="新增需求" href="/product/story/addstory" icon="icon-plus-sign" sort="6"
-              isShow="1" scope="pro-demandmenu-op"/>
+        <!--<menu id="pro-demand-add" name="新增需求" href="/product/story/addstory" icon="icon-plus-sign" sort="6"-->
+        <!--isShow="1"-->
+        <!--scope="pro-demandmenu-op"/>-->
         <menu id="pro-demand-relation" name="关联需求" href="/project/demand/preLinkStory" icon="icon-plus" sort="4"
-              isShow="1" scope="pro-demandmenu-op"/>
+              isShow="1"
+              scope="pro-demandmenu-op"/>
+        <!--</menu>-->
     </menu>
 
     <menu id="bug" parent-id="project" name="Bug" href="/project/manage/bug/index" icon="" sort="1" isShow="1">
@@ -71,7 +106,7 @@
               scope="pro-bug-op"/>
     </menu>
 
-    <menu id="version-menu" parent-id="project" name="版本" href="/project/build/index" icon="" sort="1" isShow="1">
+    <menu id="version" parent-id="project" name="版本" href="/project/build/index" icon="" sort="1" isShow="1">
         <menu id="pro-version-look" name="查看bug" href="/project/build/look" icon="icon-eye-open" sort="20"
               isShow="1"
               scope="pro-version-op"/>
@@ -80,13 +115,15 @@
         <menu id="pro-version-delete" name="删除版本" href="/project/build/delete" icon="icon-remove" sort="10" isShow="1"
               scope="pro-version-op"/>
 
+        <!--<menu id="version-menu" name="任务菜单" href="/project/build/index" icon="" sort="1" isShow="1">-->
         <menu id="pro-version-add" name="新建版本" href="/project/build/edit" icon="icon-plus" sort="8" isShow="1"
               scope="pro-versionmenu-op"/>
+        <!--</menu>-->
 
         <!--<menu id="version-bug" name="Bug" href="/project/build/productalbug" icon="" sort="1" isShow="1">-->
-        <menu id="versionbug" name="移除Bug" href="/project/build/deletereleateBug" icon="icon-remove" sort="8"
-              isShow="1"
-              scope="version-linkbug"/>
+            <menu id="versionbug" name="移除Bug" href="/project/build/deletereleateBug" icon="icon-remove" sort="8"
+                  isShow="1"
+                  scope="version-linkbug"/>
         <!--</menu>-->
         <!--<menu id="version-story" name="需求" href="/project/build/productalstory" icon="" sort="1" isShow="1">-->
         <menu id="versionstory" name="移除需求" href="/project/build/deletereleate" icon="icon-remove" sort="8"
@@ -113,7 +150,24 @@
         <!--</menu>-->
     </menu>
 
-    <menu id="note" parent-id="project" name="日志" href="/system/effort" icon="" sort="1" isShow="1"/>
+    <menu id="note" parent-id="project" name="日志" href="/system/effort" icon="" sort="1" isShow="1">
+        <menu id="not-effort" name="日历" href="/system/effort" scope="noteScope" sort="2" isShow="1">
+        </menu>
+        <menu id="not-effort-today" name="今日" href="/system/effort/date/1" scope="noteScope" sort="9" isShow="1">
+        </menu>
+        <menu id="not-effort-yest" name="昨日" href="/system/effort/date/2" scope="noteScope" sort="8" isShow="1">
+        </menu>
+        <menu id="not-effort-thisWeek" name="本周" href="/system/effort/date/3" scope="noteScope" sort="7" isShow="1">
+        </menu>
+        <menu id="not-effort-lastWeek" name="上周" href="/system/effort/date/4" scope="noteScope" sort="6" isShow="1">
+        </menu>
+        <menu id="not-effort-thisMonth" name="本月" href="/system/effort/date/5" scope="noteScope" sort="5" isShow="1">
+        </menu>
+        <menu id="not-effort-lastMonth" name="上月" href="/system/effort/date/6" scope="noteScope" sort="4" isShow="1">
+        </menu>
+        <menu id="not-effort-all" name="所有日志" href="/system/effort/date/7" scope="noteScope" sort="3" isShow="1">
+        </menu>
+    </menu>
 
     <menu id="dynamic" parent-id="project" name="动态" href="/project/dynamic/index" icon="" sort="1" isShow="1">
     </menu>
@@ -122,35 +176,32 @@
         <menu id="pro-document-delete" name="删除文档" href="/project/doc/del" icon="icon-remove" sort="10" isShow="1"
               scope="pro-document-op"/>
         <!--<menu id="documentmenu" name="任务菜单" href="/project/document/index.page" icon="" sort="1" isShow="1">-->
-        <menu id="pro-document-report" name="创建文档" href="/document/doc/add?libId=2" icon="icon-plus" sort="8" isShow="1"
-              scope="pro-documentmenu-op"/>
+            <menu id="pro-document-report" name="创建文档" href="/project/doc/preAdd" icon="icon-plus" sort="8" isShow="1"
+                  scope="pro-documentmenu-op"/>
         <!--</menu>-->
     </menu>
 
-    <menu id="product" parent-id="project" name="关联产品" href="/project/product/findLinkProduct" icon="" sort="1"
+    <menu id="product" parent-id="project" name="产品" href="/project/product/findLinkProduct" icon="" sort="1"
           isShow="1">
     </menu>
     <menu id="survey" parent-id="project" name="概况" href="/project/view" icon="" sort="1" isShow="1">
-
-        <menu id="project-op-all" name="所有项目" href="/project/list" icon="icon-list" sort="1" isShow="1"
-              scope="project-op"/>
-        <menu id="project-op-add" name="添加项目" href="/project/form" icon="icon-plus" sort="1" isShow="1"
-              scope="project-op"/>
-
-        <menu id="pro-survey-delay" name="项目延期" href="/project/delay"
-              sort="40" isShow="1" scope="pro-surveymenu-op" icon="icon-calendar"/>
-        <menu id="pro-survey-hangUp" name="挂起项目" href="/project/hangUp"
-              sort="30" isShow="1" scope="pro-surveymenu-op" icon="icon-pause"/>
-        <menu id="pro-survey-finish" name="结束项目" href="/project/finish"
-              sort="10" isShow="1" scope="pro-surveymenu-op" icon="icon-off"/>
-        <menu id="pro-survey-doing" name="开始项目" href="/project/start"
-              sort="50" isShow="1" scope="pro-surveymenu-op" icon="icon-play"/>
-        <menu id="pro-survey-active" name="激活项目" href="/project/doing"
-              sort="20" isShow="1" scope="pro-surveymenu-op" icon="icon-play"/>
-
-        <menu id="pro-survey-edit" name="编辑项目" href="/project/edit" icon="icon-pencil" sort="8" isShow="1"
-              scope="pro-surveymenu2-op"/>
-        <menu id="pro-survey-remove" name="删除项目" href="/project/delete" icon="icon-remove" sort="6" isShow="1"
-              scope="pro-surveymenu3-op"/>
+        <!--<menu id="survey-menu" name="任务菜单1" href="/project/task/index.page" icon="" sort="1" isShow="1">-->
+            <menu id="pro-survey-delay" name="项目延期" href="/project/delay"
+                  sort="40" isShow="1" scope="pro-surveymenu-op" icon="icon-calendar"/>
+            <menu id="pro-survey-hangUp" name="挂起项目" href="/project/hangUp"
+                  sort="30" isShow="1" scope="pro-surveymenu-op" icon="icon-pause"/>
+            <menu id="pro-survey-finish" name="结束项目" href="/project/finish"
+                  sort="10" isShow="1" scope="pro-surveymenu-op" icon="icon-off"/>
+            <menu id="pro-survey-doing" name="开始项目" href="/project/start"
+                  sort="50" isShow="1" scope="pro-surveymenu-op" icon="icon-play"/>
+            <menu id="pro-survey-active" name="激活项目" href="/project/doing"
+                  sort="20" isShow="1" scope="pro-surveymenu-op" icon="icon-play"/>
+        <!--</menu>-->
+        <!--<menu id="survey-menu2" name="任务菜单2" href="/project/view" icon="" sort="1" isShow="1">-->
+            <menu id="pro-survey-edit" name="编辑项目" href="/project/edit" icon="icon-pencil" sort="8" isShow="1"
+                  scope="pro-surveymenu2-op"/>
+            <menu id="pro-survey-remove" name="删除项目" href="/project/delete" icon="icon-remove" sort="6" isShow="1"
+                  scope="pro-surveymenu3-op"/>
+        <!--</menu>-->
     </menu>
 </menu>

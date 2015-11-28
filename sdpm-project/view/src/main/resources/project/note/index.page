@@ -14,9 +14,14 @@
 				<table>
                     <tr>
                         <td style="width:360px">
-                            #foreach(m:menuManager.getScopeMenus("noteScope"))
-                                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">${m.name}</a>
-                            #end
+                            <a href="${TINY_CONTEXT_PATH+adminPath}/system/effort">日历</a>
+                            <a href="${TINY_CONTEXT_PATH+adminPath}/system/effort/date/1">今日</a>
+                            <a href="${TINY_CONTEXT_PATH+adminPath}/system/effort/date/2">昨日</a>
+                            <a href="${TINY_CONTEXT_PATH+adminPath}/system/effort/date/3">本周</a>
+                            <a href="${TINY_CONTEXT_PATH+adminPath}/system/effort/date/4">上周</a>
+                            <a href="${TINY_CONTEXT_PATH+adminPath}/system/effort/date/5">本月</a>
+                            <a href="${TINY_CONTEXT_PATH+adminPath}/system/effort/date/6">上月</a>
+                            <a href="${TINY_CONTEXT_PATH+adminPath}/system/effort/date/7">所有日志</a>
                         </td>
                     </tr>
                 </table>
