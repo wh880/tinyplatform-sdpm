@@ -16,9 +16,9 @@
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
     <link rel="shortcut icon" href="${TINY_CONTEXT_PATH}/common/img/logo.ico">
     <title>
-        #if(activeTitle)${activeTitle} #{end}软件开发项目管理
+        #if(activeTitle)${activeTitle} #{end}软件开发过程管理
     </title>
-    <meta name="keywords" content="Tiny SDPM ">
+    <meta name="keywords" content="Tiny,SDPM,软件开发过程管理">
     <meta name="description" content="Tiny,TINY,Software Development Process Management,软件开发项目管理">
     <script>
         var contextPath = "${TINY_CONTEXT_PATH}";
@@ -43,7 +43,7 @@
 <body class="theme-clean main-menu-animated menu-on-top" id="bodyrap">
 <script src="${TINY_CONTEXT_PATH}/common/js/tinyui.js"></script>
     #@mainWrapper()
-        #@mainNavbar("/common/img/main-navbar-logo.png" "Tiny SDPM" TINY_CONTEXT_PATH+adminPath+"/home")
+        #@mainNavbar("/common/img/main-navbar-logo.png" "Tiny SDPM" adminPath+"/home")
 ##            #@navbarNav()
 ##                #navbarNavItem("新增内容" "#")
 ##                #@navbarDropdownMenu("下拉菜单")

@@ -17,7 +17,7 @@
 #end
 
 #macro mulUploadFile(fileList)#set(ItemIdOrder=1,mulUploadFileTableId=fmt("tid%d",rand()))
-    #@hasMenu("upload-file")
+    #if(UserUtils.hasMenu("upload-file"))
 <table class="table itemlist-table " id="${mulUploadFileTableId}">
     <thead>
     <tr>
@@ -112,5 +112,7 @@
         });
     });
 </script>
-   #end
+    #else
+    您没有文件编辑权限。
+    #end
 #end

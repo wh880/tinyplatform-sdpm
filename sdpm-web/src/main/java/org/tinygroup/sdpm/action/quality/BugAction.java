@@ -489,14 +489,12 @@ public class BugAction extends BaseController {
         model.addAttribute("fileList", fileList);
 
         model.addAttribute("bug", bug);
-        return "/testManagement/page/tabledemo/edition.page";
+        return "/testManagement/page/tabledemo/edition";
     }
 
     @RequestMapping("/edit")
     public String edit(QualityBug bug, SystemAction systemAction,
-                       HttpServletRequest request,
-                       String[] title,
-                       String lastAddress,Model model, UploadProfile uploadProfile) throws IOException {
+                       String lastAddress,UploadProfile uploadProfile) throws IOException {
 
         QualityBug qualityBug = bugService.findById(bug.getBugId());
 

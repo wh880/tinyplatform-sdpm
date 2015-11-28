@@ -1,6 +1,7 @@
 package org.tinygroup.sdpm.action;
 
 import com.alibaba.fastjson.JSON;
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -54,34 +55,27 @@ public class DefaultAction extends BaseController {
     /**
      * 图片异步上传
      *
-     * @param upFile
+     * @param uploadFile
      * @param response
      * @return
      * @throws IOException
      */
     @RequestMapping(value = "/ajaxUploadImage")
-    public String ajaxUploadImage(@RequestParam(value = "upfile", required = false) MultipartFile upFile,
+    public String ajaxUploadImage(@RequestParam(value = "upfile", required = false) MultipartFile uploadFile,
                                   HttpServletResponse response) {
         Map<String, String> map = new HashMap<String, String>();
 
-        String origName = upFile.getOriginalFilename();
         try {
-            String fileUrl = fileRepository.storeByExt(UPLOAD_PATH, origName, upFile);
+            String origName = uploadFile.getOriginalFilename();
+            String ext = FilenameUtils.getExtension(origName);
+            String fileUrl = fileRepository.storeByExt(UPLOAD_PATH, ext, uploadFile);
             fileUrl = fileRepository.resolverFilePath(fileUrl, UPLOAD_PATH);
             map.put("url", fileUrl);
             map.put("state", "SUCCESS");
-
         } catch (IOException e) {
             logger.logMessage(LogLevel.ERROR, "文件上传失败", e);
             map.put("state", "n");
         }
-//        StringBuffer buffer = new StringBuffer();
-//        buffer.append("{'url':")
-//                .append("'")
-//                .append(fileUrl).append("'").append(",")
-//                .append("'state':").append("'SUCCESS'").append("}");
-//        webContext.getResponse().setContentType("text/html");
-//        webContext.getResponse().getWriter().write(buffer.toString());
         return renderString(response, map);
     }
 
