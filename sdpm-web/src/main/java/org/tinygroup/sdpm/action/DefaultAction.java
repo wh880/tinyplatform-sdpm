@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.tinygroup.convert.objectjson.fastjson.ObjectToJson;
 import org.tinygroup.logger.LogLevel;
 import org.tinygroup.sdpm.action.system.FileRepository;
 import org.tinygroup.sdpm.common.web.BaseController;
@@ -76,7 +77,8 @@ public class DefaultAction extends BaseController {
             logger.logMessage(LogLevel.ERROR, "文件上传失败", e);
             map.put("state", "n");
         }
-        return renderString(response, map);
+        ObjectToJson objectToJson = new ObjectToJson();
+        return renderString(response, objectToJson.convert(map), "text/html");
     }
 
 }
