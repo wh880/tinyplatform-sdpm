@@ -399,13 +399,13 @@ public class UserAction extends BaseController {
     @RequestMapping("/task/search")
     public String taskSearchAction(String id, Integer start, Integer limit, String choose, String order, Model model) {
         ProjectTask task1 = new ProjectTask();
-        if (choose.equals("7")) {
+        if ("7".equals(choose)) {
             task1.setTaskCanceledBy(id);
-        } else if (choose.equals("4")) {
+        } else if ("4".equals(choose)) {
             task1.setTaskOpenBy(id);
-        } else if (choose.equals("5")) {
+        } else if ("5".equals(choose)) {
             task1.setTaskFinishedBy(id);
-        } else if (choose.equals("6")) {
+        } else if ("6".equals(choose)) {
             task1.setTaskClosedBy(id);
         } else {
             task1.setTaskAssignedTo(id);
@@ -415,7 +415,6 @@ public class UserAction extends BaseController {
         for (ProjectTask project : taskPager.getRecords()) {
             projectIdList.add(project.getTaskProject());
         }
-
         model.addAttribute("taskPager", taskPager);
         return "/organization/user/userTaskTable.pagelet";
     }

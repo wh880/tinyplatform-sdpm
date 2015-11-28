@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<menu id="mysystem" parent-id="0" name="系统" href="/system" icon="icon-cogs" sort="-1"
-      isShow="1">
+<menu id="mysystem" parent-id="0" name="系统" href="/system" icon="icon-cogs" sort="-1" isShow="1">
 
-    <menu id="holiday" parent-id="mysystem" name="节假日管理" href="/system/holiday" icon="" sort="300" isShow="1">
+    <menu id="holiday" name="节假日管理" href="/system/holiday" icon="" sort="300" isShow="1">
         <!-- <menu id="manage" parent-id="holiday" name="管理" href="/system/holiday/manage" icon="" sort="200" isShow="1">-->
         <menu id="myholiday" parent-id="holiday" name="节假日" href="/system/holiday" icon="" sort="100" isShow="1">
             <menu id="myholiday-edit" parent-id="myholiday" name="编辑节假日" href="/system/holiday/find" icon="icon-pencil"
@@ -14,9 +13,7 @@
                isShow="1"></menu> -->
     </menu>
 
-    <menu id="dictionaries" parent-id="mysystem" name="数据字典" href="/system/module/list?moduleType=dict" icon=""
-          sort="200"
-          isShow="1">
+    <menu id="dictionaries" name="数据字典" href="/system/module/list?moduleType=dict" sort="200" isShow="1">
         <menu id="dictionary-type" parent-id="dictionaries" name="字典类型管理" href="/system/module/list?moduleType=dict"
               icon="" sort="200" isShow="1">
             <menu id="dict-view" parent-id="dictionary-type" name="查看字典类型" href="/system/module/view"
@@ -25,7 +22,6 @@
                   sort="200" isShow="1" scope="dict-op"></menu>
             <menu id="dict-del" parent-id="dictionary-type" name="删除字典类型" href="/system/module/delete" icon="icon-trash"
                   sort="100" isShow="1" scope="dict-op"></menu>
-
         </menu>
         <menu id="dictionary-entries" parent-id="dictionaries" name="字典项" href="/system/dict" icon="" sort="100"
               isShow="1">

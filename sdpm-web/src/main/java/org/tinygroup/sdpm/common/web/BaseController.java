@@ -139,7 +139,7 @@ public abstract class BaseController {
      * 不存在异常返回
      */
     public String notFoundView() {
-        return "error/40x";
+        return "error/403";
     }
 
 

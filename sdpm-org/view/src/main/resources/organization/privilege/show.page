@@ -10,7 +10,7 @@
             #@div(divClass="operationbar")
             <span style="float:left">
                 <a href="${TINY_CONTEXT_PATH+adminPath}/org/roleMenu/show?parentId=0&roleId=${roleId}" ${parentId=='0'?" class='active_btn'":""}>所有权限</a>
-                #foreach(root:menuManager.getChildMenus("0"))
+                #foreach(root:menuManager.getChildMenusWithoutPermissionFilter("0"))
                     <a href="${TINY_CONTEXT_PATH+adminPath}/org/roleMenu/show?parentId=${root.id}&roleId=${roleId}" ${parentId=='root.id'?" class='active_btn'":""}>${root.name}</a>
                 #end
             </span>
@@ -49,12 +49,12 @@
 <input type="hidden" name="roleId" value="${roleId}"/>
 <input type="hidden" name="parentId" value="${parentId?:0}"/>
     #@Tcheckboxes("menuId" orgRoleMenuIdList {"nullmsg":"请选择角色应有的菜单！","datatype":""})
-        #foreach(m:menuManager.getChildMenus(parentId))
+        #foreach(m:menuManager.getChildMenusWithoutPermissionFilter(parentId))
         <div class="row group-check-list">
             <div class="col-2">#@Tcheckbox(m.id {"data-targetGroup":"g"+m.id})${m.name}#end</div>
             <div class="col-10">
                 <ul>
-                    #foreach(m2:menuManager.getAllChildMenus(m.id))
+                    #foreach(m2:menuManager.getAllChildMenusWithoutPermissionFilter(m.id))
                         <li>#@Tcheckbox(m2.id {"data-group":"g"+m.id})${m2.name}#end</li>
                     #end
                 </ul>

@@ -24,8 +24,13 @@ public class MenuUtils {
         }
     }
 
+    /**
+     * 获取一级菜单，带权限过滤
+     * @param parentId
+     * @return
+     */
     public List<Menu> getChildMenus(String parentId) {
-        List<Menu> childMenus = menuManager.getChildMenus(parentId);
+        List<Menu> childMenus = getChildMenusWithoutPermissionFilter(parentId);
         filterMenu(childMenus);
         return childMenus;
     }
@@ -36,7 +41,12 @@ public class MenuUtils {
         return allChildMenus;
     }
 
-    public List<Menu> getAllChildMenusWithoutPermisonFilter(String parentId) {
+    public List<Menu> getChildMenusWithoutPermissionFilter(String parentId) {
+        List<Menu> childMenus = menuManager.getChildMenus(parentId);
+        return childMenus;
+    }
+
+    public List<Menu> getAllChildMenusWithoutPermissionFilter(String parentId) {
         List<Menu> allChildMenus = menuManager.getAllChildMenus(parentId);
         return allChildMenus;
     }
