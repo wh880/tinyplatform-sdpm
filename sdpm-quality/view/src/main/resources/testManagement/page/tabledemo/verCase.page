@@ -127,7 +127,7 @@
     ##tabbody end
         #@toggleBox({"class":"open"})
             #@toggleLeft({"class":"aclass"})
-                #@settoggleLeftTitle()#for(product : ProductUtils.getProductList())
+                #@settoggleLeftTitle()#foreach(product : ProductUtils.getProductList())
                     #if(product?.productId == qualityProductId)
                         ${product?.productName}
                         #break

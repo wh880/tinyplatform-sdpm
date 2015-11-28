@@ -21,7 +21,7 @@
             #end
         #end
         #@tbody()
-            #for(p:bugAss)
+            #foreach(p:bugAss)
             #@tr("text-c")
             <td rowspan=${p?.value.size()+1}>${p?.key?.userId?UserUtils.getUserById(p?.key?.userId)?.orgUserRealName:""}</td>
             <td rowspan=${p?.value.size()+1}>${p?.key?.bugNum}</td>
@@ -29,7 +29,7 @@
                    <td></td>
                    <td></td>
                    #else
-                #for(pr:p?.value)
+                #foreach(pr:p?.value)
                     #@tr("text-c")
                    <td>${pr?.productName}</td>
                    <td>${pr?.productBugNum}</td>

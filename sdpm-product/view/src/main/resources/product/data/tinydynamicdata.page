@@ -4,7 +4,7 @@
 	#set(pagesize=records-(page-1)*pagesize)
 #end
 #setTinyItemCount(systemAction?.totalCount)
-#for(a:systemAction?.records)
+#foreach(a:systemAction?.records)
 #@tr()
 
 	#@td()<input type="checkbox" value="1" name="product-dymanic">#end

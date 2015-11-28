@@ -115,7 +115,7 @@
 
 			#@toggleBox({"class":"open"})
 				#@toggleLeft({"class":"aclass"})
-					#@settoggleLeftTitle()#for(product : ProductUtils.getProductList())
+					#@settoggleLeftTitle()#foreach(product : ProductUtils.getProductList())
                                                                         #if(product?.productId == qualityProductId)
                                                                         ${product?.productName}
                                                                         #break
@@ -159,7 +159,7 @@
 									#if(m.id=="tsolution")
 									<a tabindex="-1" href="javascript:void(0);">解决</a>
 									<ul class="dropdown-menu">
-									#for(re : getDict("bugResolution"))
+									#foreach(re : getDict("bugResolution"))
 									<li>
 									    <a href="javascript:;">#@mulOperation("tsolution"+reFor.index TINY_CONTEXT_PATH+adminPath+"/quality/bug/batch/resolve?resolutionType="+re.value)
                                         <div>${re.text}</div>
@@ -176,7 +176,7 @@
 									<a tabindex="-1" href="javascript:void(0);">
 											指派给</a>
 									<ul class="dropdown-menu">
-									#for(user : userList)
+									#foreach(user : userList)
 										<li>
 											<a tabindex="-1" href="javascript:void(0);">
 											#@mulOperation("tassign"+userFor.index TINY_CONTEXT_PATH+adminPath+"/quality/bug/batch/assign?userId="+user.orgUserId)<div>${user.orgUserRealName}</div>#end</a>

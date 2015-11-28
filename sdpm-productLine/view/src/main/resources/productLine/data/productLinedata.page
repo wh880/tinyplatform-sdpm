@@ -1,6 +1,6 @@
 
 #setTinyItemCount(productLine?.totalCount)
-#for(productLine:productLine?.records)
+#foreach(productLine:productLine?.records)
 #@tr()
     #@td()<a class="infoJump" href="${TINY_CONTEXT_PATH +adminPath}/productLine/find/overview?productLineId=${productLine?.productLineId}">${productLine?.productLineId}</a>#end
     #@td()

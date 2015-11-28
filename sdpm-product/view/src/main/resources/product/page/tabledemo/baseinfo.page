@@ -42,7 +42,7 @@
 							#@td()分组白名单#end
 		       				#@td()
 								#if(product?.productWhiteList)
-									#for(role : whiteLists)
+									#foreach(role : whiteLists)
 										#if(roleFor.index!=1)
 											,
 										#end

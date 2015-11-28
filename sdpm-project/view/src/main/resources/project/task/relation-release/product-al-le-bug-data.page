@@ -3,7 +3,7 @@
     #set(pagesize=records-(page-1)*pagesize)
 #end
 #setTinyItemCount(bugList?.totalCount)
-#for(bug:bugList?.getRecords())
+#foreach(bug:bugList?.getRecords())
 #@tr()
     #@td()<input type="checkbox" value="1" name="releaseId">#end
     #@td()${bug?.bugId} #end

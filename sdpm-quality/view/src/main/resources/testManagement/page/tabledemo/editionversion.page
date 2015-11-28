@@ -136,7 +136,7 @@
 					#@div(divClass="col-10")
 	                        #@Tselect2F()
 	                   		 #@Tselect2Body("priority" testTask?.priority {"datatype":"*","nullmsg":"优先级不能为空","class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        #for(pri : getDict("versionPriority"))
+	                        #foreach(pri : getDict("versionPriority"))
 	                             <option value="${pri?.value}">${pri?.text}</option>
 	                        #end
 	                    	#end                	                    
@@ -169,7 +169,7 @@
 				#@formControlDiv("col-4")
 					#@div(divClass="col-10")
 					#@tinySelect("testtaskStatus" testTask?.testtaskStatus {"class":"#####","nullmsg":"请选择"})
-					#for(status : getDict("versionStatus"))
+					#foreach(status : getDict("versionStatus"))
 						#@optionItem(status?.value)${status?.text}#end
 					#end
 					#end

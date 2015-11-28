@@ -56,7 +56,7 @@
                         #end
                         #@validateDiv("col-2")#end
                     #end*#
-                    #for(modules:list)
+                    #foreach(modules:list)
 	                    #@elementItem()
 	                        #@formControlDiv("col-4")
 	                            #tinyInput("text" "product-id" modules.moduleName {"placeholder":"","nullmsg":"代号不能为空！","id":"product-id","class":"input-text"})
@@ -64,7 +64,7 @@
 	                        #@validateDiv("col-2")#end
 	                    #end
 	                #end
-	                 #for(modules:[1..5])
+	                 #foreach(modules:[1..5])
 	                    #@elementItem()
 	                        #@formControlDiv("col-4")
 	                            #tinyInput("text" "product-id" "" {"placeholder":"","nullmsg":"代号不能为空！","id":"product-id","class":"input-text"})

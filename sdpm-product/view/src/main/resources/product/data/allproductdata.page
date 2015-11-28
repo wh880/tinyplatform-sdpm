@@ -1,10 +1,10 @@
 
 ###setTinyItemCount(pagerProduct?.totalCount)
-#for(pro : productMap)
+#foreach(pro : productMap)
 <tr class="show-group" data-tr="data-g-${line?.productLineId}">
 	<td  colspan="13"><span class="glyphicon glyphicon-chevron-down">${pro?.key}</span></td>
 </tr>
-#for(product:pro?.value)
+#foreach(product:pro?.value)
 <tr class="data-g-${line?.productLineId}">
 	#@td()<input type="checkbox" value="1" name="product">#end
 	#@td()<a class="jump" value="${product?.productLineId}" id="${product?.productId}" href="${TINY_CONTEXT_PATH +adminPath}/product/find/overview?productId=${product?.productId}">${product

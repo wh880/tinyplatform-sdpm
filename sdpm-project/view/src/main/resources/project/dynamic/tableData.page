@@ -7,7 +7,7 @@
     #set(pagesize=records-(page-1)*pagesize)
 #end
 #setTinyItemCount(records)
-#for(a:actionPager.getRecords())
+#foreach(a:actionPager.getRecords())
 #@tr()
     #@td()${formatDate(a?.actionDate, "yyyy-MM-dd")}#end
     #@td()${a?.actorName}#end

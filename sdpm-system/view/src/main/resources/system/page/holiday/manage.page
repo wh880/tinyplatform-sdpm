@@ -1,7 +1,7 @@
 #set(threeMenu="manage")
 
 #@workCalendar("") ##传参数二个数date isadd（为1时新境否则为删除）
-#for(h:holiday)
+#foreach(h:holiday)
    setFixEvent("${h?.holidayDate}");
 #end
 ##	setFixEvent("2015-09-04");

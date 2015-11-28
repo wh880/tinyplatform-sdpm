@@ -96,7 +96,7 @@
                         #@Tselect2F()
                             #@Tselect2Body(
                                 "bugType" bug?.bugType {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                                #for(type : getDict("bugType"))
+                                #foreach(type : getDict("bugType"))
                             <option value="${type.value}">${type.text}</option>
                             #end
                         #end
@@ -116,7 +116,7 @@
                     #@Tselect2F()
                         #@Tselect2Body(
                             "priority" bug?.priority {"class":"input-text select2","datatype":"*","nullmsg":"优先级不能为空！"}) ##,"multiple":"multiple"加上为多选项
-                            #for(pri : getDict("bugPriority"))
+                            #foreach(pri : getDict("bugPriority"))
                             #@tinyOptionItem(pri.value)${pri.text}#end
                         #end
                     #end
@@ -132,7 +132,7 @@
                 #@Tselect2F()
                     #@Tselect2Body(
                         "bugStatus" bug?.bugStatus {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                        #for(status : getDict("bugStatus"))
+                        #foreach(status : getDict("bugStatus"))
                         #@tinyOptionItem(status.value)${status.text}#end
                     #end
                 #end
@@ -168,7 +168,7 @@
             #@Tselect2F()
                 #@Tselect2Body("operatingSystem" bug?.operatingSystem {"class":
                     "input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                    #for(os : getDict("bugOS"))
+                    #foreach(os : getDict("bugOS"))
                     #@tinyOptionItem(os.value)${os.text}#end
                 #end
             #end
@@ -182,7 +182,7 @@
     #@formControlDiv("col-8")
         #@Tselect2F()
             #@Tselect2Body("browser" bug?.browser {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                #for(bro : getDict("bugBrowser"))
+                #foreach(bro : getDict("bugBrowser"))
                 #@tinyOptionItem(bro.value)${bro.text}#end
             #end
         #end
@@ -424,7 +424,7 @@
                         #@Tselect2Body("bugResolution" bug?.bugResolution {"class":
                             "input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         <option value=""></option>
-                            #for(re : getDict("bugResolution"))
+                            #foreach(re : getDict("bugResolution"))
                             #@tinyOptionItem(re.value)${re.text}#end
                         #end
                     #end

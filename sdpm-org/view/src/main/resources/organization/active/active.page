@@ -26,7 +26,7 @@
                     #@navSelect2Body()
                         #@navSelect2Data()
                             <option value=null>用户</option>
-                            #for(user : userList)
+                            #foreach(user : userList)
                             <option class="selUser" value="${user?.orgUserId}">${user?.orgUserRealName}</option>
                         #end
 
@@ -44,7 +44,7 @@
                 #@navSelect2Body()
                     #@navSelect2Data()
                         <option value=null>产品</option>
-                        #for(product : productList)
+                        #foreach(product : productList)
                         <option class="selProduct" value="${product?.productId}">${product?.productName}</option>
                     #end
                 #end
@@ -61,7 +61,7 @@
             #@navSelect2Nav()<span>项目</span><span class="caret"></span>#end
             #@navSelect2Body()
                 #@navSelect2Data()
-                    #for(project : projectList)
+                    #foreach(project : projectList)
                     <option class="selProject" value="${project?.projectId}">${project?.projectName}</option>
                 #end
             #end

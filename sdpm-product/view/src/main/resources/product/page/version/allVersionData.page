@@ -5,7 +5,7 @@
     #@td()${story?.storyVersion}#end
     #@td()目前版本#end
 </tr>
-#for(version : versions?.records)
+#foreach(version : versions?.records)
 <tr class="g-row">
     #@td()<span class="glyphicon glyphicon-chevron-right">${story?.no}</span>#end
     #@td()${version?.storyTitle}#end

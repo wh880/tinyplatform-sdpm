@@ -10,7 +10,7 @@
 
 #setTinyItemCount(casePager?.totalCount)
 #set(count=asePager?.totalCount)
-#for(case:casePager?.records)
+#foreach(case:casePager?.records)
 					#@tr()
 						#@td()<input type="checkbox" value="${case?.caseId}" name="idCheck">#end
 						#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/testCase/case/viewInfo?id=${case?.caseId}">${case?.no}</a>#end

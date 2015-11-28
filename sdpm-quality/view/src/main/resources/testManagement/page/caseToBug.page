@@ -25,7 +25,7 @@
                 #end
             #end
             #@tbody()
-                #for(caseStep:stepList)
+                #foreach(caseStep:stepList)
                     #@tr()
                         #@td()<input type="checkbox" value="${caseStep?.caseStepId}" name="ids">#end
                         #@td()${caseStep?.caseStepDesc}#end

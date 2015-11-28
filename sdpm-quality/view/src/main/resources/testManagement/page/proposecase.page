@@ -90,7 +90,7 @@
             	#@div(divClass="col-10")
                      #@Tselect2F()
 	                   		 #@Tselect2Body("caseType" testCase?.caseType {"class":"input-text select2","nullmsg":"请选择用例类型！","datatype":"*"}) ##,"multiple":"multiple"加上为多选项
-	                   		 #for(type : getDict("caseType"))
+	                   		 #foreach(type : getDict("caseType"))
 	                   		    <option value="${type.value}">${type.text}</option>
 	                   		 #end
                      #end
@@ -121,7 +121,7 @@
             #@formControlDiv("col-4")
                 #@div(divClass="col-10")
 					#@tinySelect("priority" testCase?.priority {"class":"select2","datatype":"*","nullmsg":"请选择优先级！"})
-                        #for(stage : getDict("casePriority"))
+                        #foreach(stage : getDict("casePriority"))
                         <option value="${stage.value}">${stage.text}</option>
                     #end
 					#end

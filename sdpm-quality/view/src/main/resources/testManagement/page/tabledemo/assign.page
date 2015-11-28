@@ -53,7 +53,7 @@
             #@Tselect2F()
                 #@Tselect2Body(
                     "bugAssignedTo" bug?.bugAssignedTo?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                    #for(user : userList)
+                    #foreach(user : userList)
                     <option value="${user?.orgUserId}">${user?.orgUserRealName}</option>
                 #end
             #end
@@ -75,7 +75,7 @@
         #@Tselect2F()
             #@Tselect2Body("bugMailto" bug?.bugMailto {"class":"input-text select2","multiple":
                 "multiple"}) ##,"multiple":"multiple"加上为多选项
-                #for(user : userList)
+                #foreach(user : userList)
                 <option value="${user?.orgUserId}">${user?.orgUserRealName}</option>
             #end
         #end

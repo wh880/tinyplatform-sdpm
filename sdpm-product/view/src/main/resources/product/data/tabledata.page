@@ -62,7 +62,7 @@
 
 #@tinyForm("storyform" TINY_CONTEXT_PATH +adminPath+"/product/story/updateBatch" "" {"class":"test"})
 
-    #for(story:storyList?.getRecords())
+    #foreach(story:storyList?.getRecords())
         #@tr()
             #@td()
                 <input type="checkbox" value="${story.storyId}" id="fieldid" name="storyId">

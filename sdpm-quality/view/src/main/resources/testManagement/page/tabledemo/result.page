@@ -5,7 +5,7 @@
     #end
 #@div(divClass="infoContent")
     <p class="titleName">测试结果   共执行${testResults?.size()}次</p>
-    #for(result : testResults)
+    #foreach(result : testResults)
         #@foldMenu("" "Tinyfold3" "" "width:100%")
             #set(color = result?.testResultLastRunner==UserUtils.getUserId()?'c-red':'')
             #@foldItem("#"+result?.testResultId+"   "+formatDate(result?.testResultDate,"yyyy-MM-dd HH:mm:ss")+" 由 "+"<span class='"+color+"'>"+(+result?.testResultLastRunner?UserUtils.getUserById(result?.testResultLastRunner)?.orgUserRealName:"")+"</span>"+"  执行   "+getDict("caseResult",result?.caseResult))
@@ -22,7 +22,7 @@
                         #end
                         #@tbody()
                             #set(sResults = stepResults?.get(result?.testResultId))
-                            #for(caseStep:caseSteps.get(String.valueOf(result?.testResultId)))
+                            #foreach(caseStep:caseSteps.get(String.valueOf(result?.testResultId)))
                                 #@tr()
                                     #@th()${caseStepFor.index}#end
                                     #@td()${caseStep?.caseStepDesc}#end

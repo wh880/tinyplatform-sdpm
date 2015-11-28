@@ -36,7 +36,7 @@
 ##                    ${stepMap.containsKey(i)}
 ##                    ${stepMap.i}
 ##                #end
-                #for(step:stepMap.get(i))
+                #foreach(step:stepMap.get(i))
                     #@tr()
                         #@th()${stepFor.index}#end
                         #@td()${step?.caseStepDesc}#end

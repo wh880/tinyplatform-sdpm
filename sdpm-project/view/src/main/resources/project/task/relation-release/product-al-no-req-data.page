@@ -7,7 +7,7 @@
     #set(pagesize=records-(page-1)*pagesize)
 #end
 #setTinyItemCount(records)
-#for(s:storys.getRecords())
+#foreach(s:storys.getRecords())
 #@tr()
     #@td()<input type="checkbox" value="${s?.storyId}" id="field" name="idCheck">#end
     #@td()<a href="${TINY_CONTEXT_PATH +adminPath}/product/page/project/demdtablehref.page">${s?.storyId}</a>#end

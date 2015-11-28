@@ -47,7 +47,7 @@
                 #@tr()
                     #@td()抄送给#end
                     #@td()
-                        #for(mailto:storyMailTo)
+                        #foreach(mailto:storyMailTo)
                         ${mailto?.orgUserAccount}${mailtoFor.last?"":","}
                 #end
             #end
@@ -112,7 +112,7 @@
                 #@tbody()
                     <th style="width: 35%"> ID </th>
                     #@th() 名称 #end
-                    #for(task:taskList)
+                    #foreach(task:taskList)
                     #@tr()
                         #@td()${task?.taskId}#end #@td()<a href="${TINY_CONTEXT_PATH + adminPath}/project/task/findTask?taskId=1">${task?.taskName}</a>#end
                     #end
@@ -130,7 +130,7 @@
                 #@tr()
                 <td style="width:35%">相关BUG</td>
                     #@td()
-                        #for(bug:bugList)
+                        #foreach(bug:bugList)
                     <a href="${TINY_CONTEXT_PATH + adminPath}/quality/bug/bugInfo?bugId=${bug?.bugId}">${bug?.bugTitle}
                         <a/>${bugFor.last?"":","}
                     #end
@@ -139,7 +139,7 @@
             #@tr()
                 #@td()相关用例#end
                 #@td()
-                    #for(case:caseList)
+                    #foreach(case:caseList)
                     <a href="${TINY_CONTEXT_PATH + adminPath}/quality/testCase/case/viewInfo?id=${case?.bcaseId}">${case?.caseTitle}</a>${caseFor?.index==1?"":","}
                 #end
             #end

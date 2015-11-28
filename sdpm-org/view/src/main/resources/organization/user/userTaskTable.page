@@ -3,7 +3,7 @@
     #set(pagesize=records-(page-1)*pagesize)
 #end
 #setTinyItemCount(records)
-#for(task:taskPager.records)
+#foreach(task:taskPager.records)
 #@tr()
     #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/project/task/findTask?taskId=${task?.taskId}">${task.taskNo}</a>#end
     #@td()${task?.taskPri}#end

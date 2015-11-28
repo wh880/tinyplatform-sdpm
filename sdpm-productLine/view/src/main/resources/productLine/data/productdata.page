@@ -9,7 +9,7 @@
 #set(pagesize=records-(page-1)*pagesize)
 #end
 #setTinyItemCount(52)
-#for(var:[1..pagesize])
+#foreach(var:[1..pagesize])
 #@tr()
 	#@td()<input type="checkbox" value="1" name="idCheck">#end
 	#@td()${var}#end

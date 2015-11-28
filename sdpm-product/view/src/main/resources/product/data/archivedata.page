@@ -3,7 +3,7 @@
 #set(pagesize=records-(page-1)*pagesize)
 #end
 #setTinyItemCount(pager?.totalCount)
-#for(l:pager?.records)
+#foreach(l:pager?.records)
 #@tr()
 
 	#@td()<input type="checkbox" value="${l?.docId}" name="idCheck">#end

@@ -9,7 +9,6 @@
 
 #if(cookieProductId&&ProductUtils.getAllProductListByUser()?.size()>0)
     #set(finded = 0)
-
     #foreach(product : ProductUtils.getAllProductListByUser())
     #if(product?.productId == cookieProductId)
         #set(finded=1,currentProductName=product.productName)
@@ -18,7 +17,6 @@
 #if(finded==0)
 <script type="text/javascript">
     $.removeCookie('cookieProductId', {path: "/"})
-    //window.location.href='http://localhost:8989/sdpm-web/a/project/task/index';
     window.location.reload();
 </script>
 #end
@@ -74,7 +72,6 @@
             #end
         #end
     <script type="text/javascript">
-
         $(function(){
             $("#productSelect").on("setValue",function(o,treeNode){
                 var dataValue = treeNode.id;
@@ -82,7 +79,6 @@
                 window.location.reload();
             });
         });
-
     </script>
     #end
 #end

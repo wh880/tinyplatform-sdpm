@@ -19,7 +19,7 @@
                         #@navSelect2("user" "user")
                             #@navSelect2Nav()
                                 #if(userList)
-                                    #for(user:userList)
+                                    #foreach(user:userList)
                                     #if(user?.orgUserId == id)
                                         ${user?.orgUserRealName}
                                     #end
@@ -33,7 +33,7 @@
                             #@navSelect2Data()
                             <option value=""></option>
                             <optgroup label="用户">
-                                #for(user:userList)
+                                #foreach(user:userList)
                                 <option value="${user?.orgUserId}">${user?.orgUserRealName}</option>
                             #end
                         </optgroup>

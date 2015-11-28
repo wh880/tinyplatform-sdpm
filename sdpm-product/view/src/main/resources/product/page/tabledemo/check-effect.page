@@ -19,7 +19,7 @@
 					    #end
 					    #@tbody()
 					    	
-						    	#for(project:projectList)
+						    	#foreach(project:projectList)
 							    	#@tr()
 							    		#@td()	${project?.projectId}	#end
 							    		#@td()  ${project?.projectName} #end
@@ -47,7 +47,7 @@
 					    #end
 					     #@tbody()
 					    	
-					    		#for(bug:bugList)
+					    		#foreach(bug:bugList)
 						    		#@tr()
 						    			#@td()	${bug?.bugId}	#end
 							    		#@td()  ${bug?.bugTitle} #end
@@ -76,7 +76,7 @@
 					    #end
 					    #@tbody()
 					    	
-					    		#for(testCase:testCaseList)
+					    		#foreach(testCase:testCaseList)
 					    			#@tr()
 						    			#@td()	${testCase?.caseId}	#end
 							    		#@td()  ${testCase?.caseTitle} #end

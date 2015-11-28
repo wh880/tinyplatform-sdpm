@@ -15,7 +15,7 @@
 	 	
 	 	#@tbody()
 	 		
-	 		#for(story:storyList)
+	 		#foreach(story:storyList)
 				#@tr()
 					#@td()	${story?.no}	#end
 		 			#@td()	${story?.storyTitle}	#end

@@ -3,7 +3,7 @@
     #set(pagesize=records-(page-1)*pagesize)
 #end
 #setTinyItemCount(records)
-#for(testCase:testCasePager.records)
+#foreach(testCase:testCasePager.records)
 #@tr()
     #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/testCase">${testCase?.caseId}</a>#end
     #@td()${testCase?.priority}#end

@@ -17,7 +17,7 @@
                     #@tr()
                         #@td()
                             #@Tcheckboxes("array" userIdList)
-                                #for(p : userList)
+                                #foreach(p : userList)
                                 #@gridSysCol(2)
                                     #@Tcheckbox(p.orgUserId)${p.orgUserRealName}#end
                                 #end

@@ -30,7 +30,7 @@
                 #end
             #end
             #@tbody()
-                #for(caseStep:stepList)
+                #foreach(caseStep:stepList)
                     #@tr()
                         #@th()${caseStepFor.index}#end
                         #@td()${caseStep?.caseStepDesc}#end
@@ -38,7 +38,7 @@
                         #@td()
                         #@Tselect2F()
                             #@Tselect2Body("caseStepResultList["+(caseStepFor.index-1)+"].result" "1" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                            #for(step : getDict("caseStepResult"))
+                            #foreach(step : getDict("caseStepResult"))
                             <option value="${step.value}">${step.text}</option>
                             #end
                             #end
@@ -66,7 +66,7 @@
     #end
     #@div(divClass="infoContent")
     <p class="titleName">测试结果   共执行${testResults.size()}次</p>
-    #for(result : testResults)
+    #foreach(result : testResults)
         #@foldMenu("" "Tinyfold3" "" "width:100%")
             #set(color = result?.testResultLastRunner==UserUtils.getUserId()?'c-red':'')
             #@foldItem("#"+result?.testResultId+"   "+formatDate(result?.testResultDate,"yyyy-MM-dd HH:mm:ss")+" 由 "+"<span class='"+color+"'>"+(+result?.testResultLastRunner?UserUtils.getUserById(result?.testResultLastRunner)?.orgUserRealName:"")+"</span>"+"  执行   "+getDict("caseResult",result?.caseResult))
@@ -83,7 +83,7 @@
                         #end
                         #@tbody()
                             #set(sResults = stepResults?.get(String.valueOf(result?.testResultId)))
-                            #for(caseStep:caseSteps.get(String.valueOf(result?.testResultId)))
+                            #foreach(caseStep:caseSteps.get(String.valueOf(result?.testResultId)))
                                 #@tr()
                                     #@th()${caseStepFor.index}#end
                                     #@td()${caseStep?.caseStepDesc}#end

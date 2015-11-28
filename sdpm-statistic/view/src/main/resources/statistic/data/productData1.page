@@ -45,7 +45,7 @@
             #@th()已关闭#end
         #end
         #@tbody()
-            #for(p:product)
+            #foreach(p:product)
             #@tr("text-c")
             <td rowspan=${p?.value.size()+1}> ${p?.key?.productName}</td>
             <td rowspan=${p?.value.size()+1}>${p
@@ -60,7 +60,7 @@
                 <td></td>
                 <td></td>
                 #else
-                    #for(pl:p?.value)
+                    #foreach(pl:p?.value)
                     #@tr("text-c")
                     <td>${pl?.planName}</td>
                     <td>${formatDate(pl?.planBeginDate,"yyyy-MM-dd")}</td>

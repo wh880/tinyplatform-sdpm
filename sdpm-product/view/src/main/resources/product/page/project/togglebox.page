@@ -201,7 +201,7 @@
                                         #@dropdownsLi("dropdown-submenu")
                                             #@dropdownA("firstMenu" "javascript:void(0);")阶段#end
                                             #@dropdownsUl("dropdown-menu" )
-                                            	#for(stage:getDict("storyStage"))
+                                            	#foreach(stage:getDict("storyStage"))
                                             		#@dropdownItem("javascript:void(0);" "" "secondMenu" {"field":"storyStage","value":stage?.value}) ${stage?.text}#end
                                             	#end
                                             #end
@@ -227,7 +227,7 @@
 ##                                                #@dropdownsLi("dropdown-submenu")
 ##                                                    #@dropdownA("secondMenu"　"javascript:void(0);")拒绝#end
 ##                                                    #@dropdownsUl("dropdown-menu")
-##                                                    #for(refese:getDict("storyRefese"))
+##                                                    #foreach(refese:getDict("storyRefese"))
 ##                                                    	#@dropdownItem("javascript:void(0);" "" "secondMenu" {"field":"storyStatus","value":refese?.value}) ${refese?.text} #end
 ##                                                    #end
 ##

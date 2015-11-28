@@ -1,6 +1,6 @@
 
 #setTinyItemCount(runsPager?.totalCount)
-#for(run :runsPager?.records)
+#foreach(run :runsPager?.records)
 					#@tr()
 						#@td()<input type="checkbox" value="${run?.testRunId}" name="idCheck">#end
 						#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/testCase/case/viewInfo?id=${run?.caseId}">${run?.no}</a>#end

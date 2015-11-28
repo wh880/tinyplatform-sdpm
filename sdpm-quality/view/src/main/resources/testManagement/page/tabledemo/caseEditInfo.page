@@ -27,7 +27,7 @@
 	    			#@td()
 	    			#if(testCase?.caseStage)
                         #set(stages = testCase?.caseStage.split(","))
-                        #for(stage : stages)
+                        #foreach(stage : stages)
                         #if(stageFor?.index!=1),#end
                         ${getDict("caseStage",stage)}
                         #end
@@ -71,7 +71,7 @@
 	    		#@tr()
 	    			#@th()生成Bug#end
 	    			#@td()
-						#for(bug : bugFromCase)
+						#foreach(bug : bugFromCase)
 							#if(bugFor.index!=1)
 								,
 							#end

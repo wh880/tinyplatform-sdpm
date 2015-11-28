@@ -46,7 +46,7 @@
 
 </script>
 #setTinyItemCount(storyList.getTotalCount())
-#for(story:storyList.getRecords())
+#foreach(story:storyList.getRecords())
 #@tr()
     #@td()<a
             href="${TINY_CONTEXT_PATH+adminPath}/product/storySpec/find/productDemandDetail?storyId=${story.storyId}">${story.storyId}</a>#end

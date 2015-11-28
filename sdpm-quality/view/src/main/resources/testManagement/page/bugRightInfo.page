@@ -63,7 +63,7 @@
 			       			#@tr()
 								#@td()抄送给#end
 			       				#@td()
-			       				#for(user : assignUsers)
+			       				#foreach(user : assignUsers)
 			       				    #if(userFor.index != 1),#end
 			       				    ${user?.orgUserRealName}
 			       				#end
@@ -115,7 +115,7 @@
 			       			#@tr()
 								#@td()影响版本#end
 			       				#@td()
-									#for(build : openedBuilds)
+									#foreach(build : openedBuilds)
 										#if(buildFor?.index!=1)
 											,
 										#end
@@ -159,7 +159,7 @@
 			       			#@tr()
 								#@td()生成用例#end
 			       				#@td()
-									#for(case : caseFromBug)
+									#foreach(case : caseFromBug)
 										#if(caseFor?.index!=1)
 											,
 										#end

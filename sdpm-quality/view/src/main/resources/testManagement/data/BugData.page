@@ -1,7 +1,7 @@
 
 #setTinyItemCount(bugpager.totalCount)
 
-#for(var:bugpager.records)
+#foreach(var:bugpager.records)
 #@tr()
     #@td()<input type="checkbox" value="${var?.bugId}" name="idCheck">#end
     #@td("nowrap")<a href="${TINY_CONTEXT_PATH+adminPath}/quality/bug/bugInfo?currentPageId=5&bugId=${var?.bugId}">${var?.no}</a>#end

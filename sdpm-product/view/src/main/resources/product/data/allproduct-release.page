@@ -4,7 +4,7 @@
     #set(pagesize=records-(page-1)*pagesize)
 #end
 #setTinyItemCount(productRelease?.totalCount)
-#for(release:productRelease?.records)
+#foreach(release:productRelease?.records)
 #@tr()
     #@td()<input type="checkbox" value="1" name="product-release">#end
     #@td()<a href="${TINY_CONTEXT_PATH +adminPath}/product/release/forword/reRelateStory?releaseId=${release.releaseId}">${release?.no}</a>#end

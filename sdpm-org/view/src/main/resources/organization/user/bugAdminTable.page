@@ -3,7 +3,7 @@
     #set(pagesize=records-(page-1)*pagesize)
 #end
 #setTinyItemCount(records)
-#for(bug:bugPager.records)
+#foreach(bug:bugPager.records)
 #@tr()
     #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/project/task/findTask?taskId=${bug?.bugId}">${bug?.bugId}</a>#end
     #@td()${bug?.bugSeverity}#end

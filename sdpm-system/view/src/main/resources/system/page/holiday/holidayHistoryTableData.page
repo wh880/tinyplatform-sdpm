@@ -1,5 +1,5 @@
 #setTinyItemCount(History?.totalCount)
-#for(h:History?.records)
+#foreach(h:History?.records)
     #@tr()
         #@td()${h?.holidayName}#end
         #@td()${UserUtils.getUserById(h?.actionActor).orgUserRealName}#end

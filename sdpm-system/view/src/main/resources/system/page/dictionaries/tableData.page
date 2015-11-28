@@ -2,7 +2,7 @@
 #set(viewpagePath="/system/page/dictionaries/dictitem_view.pagelet",viewpageModalId="dictitemViewModal",viewpageModal="#"+viewpageModalId)
 #setTinyItemCount(dictPager.totalCount)
 
-#for(d:dictPager.records)
+#foreach(d:dictPager.records)
 #@tr()
     #@td()<input type="checkbox" value="${d?.dictId}" name="idCheck">#end
 	#@td()${d?.dictId}#end

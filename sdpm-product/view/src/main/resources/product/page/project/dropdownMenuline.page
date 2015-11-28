@@ -12,7 +12,7 @@
 
         #if(cookieProductLineId&&ProductUtils.getProductLineListByUser()?.size()>0)
             #set(finded = 0)
-            #for(productLine : ProductUtils.getProductLineListByUser())
+            #foreach(productLine : ProductUtils.getProductLineListByUser())
                 #if(productLine?.productLineId == cookieProductLineId)
                     <span id="productLineNameOnTop" value="${cookieProductLineId}"> ${productLine?.productLineName}</span>
                     #set(finded=1)
@@ -54,7 +54,7 @@
     #@navSelect2Data()
     <option value=""></option>
     <optgroup label="产品线">
-        #for(productLine : ProductUtils.getProductLineListByUser())
+        #foreach(productLine : ProductUtils.getProductLineListByUser())
         <option value="${productLine?.productLineId}">${productLine?.productLineName}</option>
     #end
 </optgroup>

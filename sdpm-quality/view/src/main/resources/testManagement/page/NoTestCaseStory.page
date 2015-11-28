@@ -62,7 +62,7 @@
                                         #@dropdownsLi("dropdown-submenu")
                                             #@dropdownA("firstMenu"　"javascript:void(0);")指派给#end
                                             #@dropdownsUl("dropdown-menu")
-                                            	#for(user:userList)
+                                            	#foreach(user:userList)
                                             		#@dropdownItem("javascript:void(0);" "" "secondMenu" {"field":"storyAssignedTo","value":user?.orgUserId}) ${user?.orgUserRealName} #end
                                             	#end
                                             	
@@ -72,7 +72,7 @@
                                         #@dropdownsLi("dropdown-submenu")
                                             #@dropdownA("firstMenu"　"javascript:void(0);")阶段#end
                                             #@dropdownsUl("dropdown-menu")
-                                            	#for(stage:getDict("storyStage"))
+                                            	#foreach(stage:getDict("storyStage"))
                                             		#@dropdownItem("javascript:void(0);" "" "secondMenu" {"field":"storyStage","value":stage?.value}) ${stage?.text}#end
                                             	#end
 
@@ -83,7 +83,7 @@
                                             #@dropdownA("firstMenu"　"javascript:void(0);")计划#end
                                             #@dropdownsUl("dropdown-menu")
                                             	#@dropdownItem("javascript:void(0);" "" "secondMenu" {"field":"planId","value":""})空#end
-                                            	#for(plan:planList)
+                                            	#foreach(plan:planList)
                                             		#@dropdownItem("javascript:void(0);" "" "secondMenu" {"field":"planId","value":plan?.planId}) ${plan?.planName} #end
                                             	#end
                                                
@@ -100,7 +100,7 @@
                                                 #@dropdownsLi("dropdown-submenu")
                                                     #@dropdownA("secondMenu"　"javascript:void(0);")拒绝#end
                                                     #@dropdownsUl("dropdown-menu")
-                                                    #for(refese:getDict("storyRefese"))
+                                                    #foreach(refese:getDict("storyRefese"))
                                                     	#@dropdownItem("javascript:void(0);" "" "secondMenu" {"field":"storyStatus","value":refese?.value}) ${refese.text} #end
                                                     #end
                                                     	#@dropdownItem("javascript:void(0);" "" "secondMenu" {"field":"storyStatus","value":"no-1"}) 已完成 #end

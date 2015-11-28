@@ -1,5 +1,5 @@
 
-#for(p:projectList)
+#foreach(p:projectList)
 #set(t=teamList.get(pFor.index-1))
 #@tr()
     #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/project/task/index?projectId=${p?.projectId}">${p?.projectId}</a>#end

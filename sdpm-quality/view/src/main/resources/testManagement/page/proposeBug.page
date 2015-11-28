@@ -176,7 +176,7 @@
                     #@div(divClass="col-3")
 
                         #@tinySelect("priority" bug?.priority {"placeholder":"请选择优先级","datatype":"*","nullmsg":"优先级不能为空！","class":"select2"})
-                            #for(pri : getDict("bugPriority"))
+                            #foreach(pri : getDict("bugPriority"))
                             #@tinyOptionItem(pri.value)${pri.text}#end
                         #end
                     #end
@@ -242,7 +242,7 @@
             #@formControlDiv("col-8")
                 #@div(divClass="col-5")
                     #@tinySelect("bugType" bug?.bugType {"class":"select2"})
-                        #for(type : getDict("bugType"))
+                        #foreach(type : getDict("bugType"))
                         #@tinyOptionItem(type.value)${type.text}#end
                     #end
                 #end
@@ -251,7 +251,7 @@
             #@div(divClass="col-3")
                 #@Tselect2F()
                     #@Tselect2Body("bugSeverity" bug?.bugSeverity {"class":"input-text"}) ##,"multiple":"multiple"加上为多选项
-                        #for(se : getDict("bugSeverity"))
+                        #foreach(se : getDict("bugSeverity"))
                         #@tinyOptionItem(se.value)${se.text}#end
                     #end
                 #end
@@ -265,7 +265,7 @@
     #@formControlDiv("col-8")
         #@div(divClass="col-5")
             #@tinySelect("operatingSystem" bug?.operatingSystem {"class":"select2"})
-                #for(os : getDict("bugOS"))
+                #foreach(os : getDict("bugOS"))
                 #@tinyOptionItem(os.value)${os.text}#end
             #end
         #end
@@ -273,7 +273,7 @@
     #@div(divClass="col-0")&nbsp&nbsp#end
     #@div(divClass="col-3")
         #@tinySelect("browser" bug?.browser {"class":"select2"})
-            #for(bro : getDict("bugBrowser"))
+            #foreach(bro : getDict("bugBrowser"))
             #@tinyOptionItem(bro.value)${bro.text}#end
         #end
     #end

@@ -30,7 +30,7 @@
 			#@tbody()
 ##			#set(objs=[["性别","SEX"],["年龄","AGE"],["教育程度","EDUCATION"],["残疾等级","DISABILITYGRADE"],["残疾类别","DISABILITYTYPE"],["角色类型","ROLETYPE"],["用户状态","USERSTATUS"],["岗位任职规则属性","JOBRULE"],["岗位职责规则属性","JOBRESP"],
 ##			["1","2"],["1","2"],["1","2"]])
-			#for(mo:list)
+			#foreach(mo:list)
 				#@tr("text-c")
 					#@td()<input type="checkbox" value="${mo?.moduleId}" name="idCheck">#end
 					#@td()${mo?.moduleName}#end

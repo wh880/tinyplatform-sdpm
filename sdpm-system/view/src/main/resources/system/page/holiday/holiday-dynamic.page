@@ -12,7 +12,7 @@
 
 	<div class="panel-content">
 		<table class="table  table-striped "> 
-			#for(a:action)
+			#foreach(a:action)
 			<tr>
 					<td  width="100%">
 						${formatDate(a?.actionDate,"yyyy-MM-dd HH:mm:ss")},  ${UserUtils.getUserById(a?.actionActor).orgUserRealName}

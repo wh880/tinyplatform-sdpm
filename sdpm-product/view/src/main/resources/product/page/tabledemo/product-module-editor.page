@@ -156,7 +156,7 @@
         #@Tselect2F()
             #@Tselect2Body("productStatus" product?.productStatus {"class":
                 "input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                #for(v:getDict("productStatus"))
+                #foreach(v:getDict("productStatus"))
                 <option value="${v.value}">${v.text}</option>
                 #end
             #end

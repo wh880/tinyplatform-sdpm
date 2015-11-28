@@ -19,7 +19,7 @@
 		#@colLabel()创建者：#end
 		#@formControlDiv("col-8")
 			#@tinySelect("effortAccount" effort?.effortAccount {"class":"input-text select2"})
-			#for(u:users)
+			#foreach(u:users)
 			 #@tinyOptionItem(u?.orgUserAccount)${u?.orgUserAccount}#end
 			#end
 			#end
@@ -32,11 +32,10 @@
 		  #@Tselect2F()
 	                    #@Tselect2Body("effortObjectId" effort?.effortObjectId {"class":
 	                             "input-text select2"}) ##,"multiple":"multiple"加上为多选项
-##	                                  <option value="0">/</option>
-                            #for(t:taskList)
 
+                            #foreach(t:taskList)
 	                                  <option value="${t.taskId}">${t.taskName}</option>
-	                                  #end
+							#end
 	                      #end
 	                   #@Tselect2Fix()
 	                     <a href="#" class="r">增加</a>

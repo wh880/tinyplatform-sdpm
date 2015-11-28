@@ -3,7 +3,7 @@
 #set(pagesize=records-(page-1)*pagesize)
 #end
 #setTinyItemCount(storyList?.totalCount)
-#for(story:storyList?.getRecords())
+#foreach(story:storyList?.getRecords())
 #@tr()
 	#@td()<input type="checkbox" value="${story?.storyId}" id="field" name="storyId">#end
     #@td()<a

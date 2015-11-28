@@ -15,7 +15,7 @@
 							#@Tselect2F()
                     			#@Tselect2Body("cProduct" cProduct?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                                 <option value="">/</option>
-                                    #for(product : ProductUtils.getAllProductListByUser())
+                                    #foreach(product : ProductUtils.getAllProductListByUser())
                                         <option value="${product?.productId}">${product?.productName}</option>
                                     #end
                     			#end               
@@ -28,7 +28,7 @@
 							#@Tselect2F()
                     			#@Tselect2Body("cProject" cProject?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                                     <option value="">/</option>
-                                    #for(project : ProjectUtils.getUserProjectList())
+                                    #foreach(project : ProjectUtils.getUserProjectList())
                         			<option value="${project?.projectId}">${project?.projectName}</option>
                                     #end
                     			#end
@@ -87,7 +87,7 @@
             #end
         #end
         #@tbody()
-            #for(b:bugStas)
+            #foreach(b:bugStas)
             #set(notSolved=(b?.bugNum-
         (b?.designEd+b?.repeatBug+b?.externalCause+b?.solved+b?.notReproduce+b?.delayResolved+b?.notResolved+b?.toStory)))
             #@tr("text-c")

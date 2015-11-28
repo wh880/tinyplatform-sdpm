@@ -8,7 +8,7 @@
 	<!-- Without vertical padding -->
 	<div class="panel-content">
 		<table class="table  table-striped "> 
-			#for(i:[1..5])
+			#foreach(i:[1..5])
 	
 #*				<tr>
 					<td>9月09日 14:39</td> 

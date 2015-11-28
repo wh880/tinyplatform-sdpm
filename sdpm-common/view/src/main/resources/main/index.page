@@ -163,7 +163,7 @@
 											</tr>
 										</thead>
 									<tbody>
-										#for(sum:productSumMap?.get(String.valueOf(product.productId)))
+										#foreach(sum:productSumMap?.get(String.valueOf(product.productId)))
 											<tr>
 												<th>${productSumTitle.get(sum?.key)}</th>
 												<td>${sum?.value}</td>
