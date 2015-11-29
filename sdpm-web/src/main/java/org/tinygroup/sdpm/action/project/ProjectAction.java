@@ -114,7 +114,7 @@ public class ProjectAction extends BaseController {
      * @return
      */
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String save(HttpServletResponse response, HttpServletRequest request, Project project,
+    public String save(HttpServletResponse response, Project project,
                        Integer[] linkProduct, Integer[] whiteList) {
         project.setProjectWhiteList(StringUtil.join(whiteList, ","));
         project = projectService.addProject(project);
