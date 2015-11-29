@@ -191,7 +191,6 @@
                     #@Teditor("docDigest" "docDigest" {"initialFrameHeight":"150"})${doc?.docDigest}#end</div>
             </div>
         #end
-
         #@elementItem()
             <div class="col-12">
                 <div class="col-2 text-r"><label>文档备注：</label></div>
@@ -199,7 +198,6 @@
                     #@Teditor("actionComment" "actionComment" {"initialFrameHeight":"150"})#end</div>
             </div>
         #end
-
         #@elementItem(elementId="fileBox" eleItemClass="hide")
             <div class="col-12">
                 <div class="col-2 text-r"><label>附件：</label></div>
@@ -215,7 +213,6 @@
                 #@Teditor("content" "docContent" {"initialFrameHeight":"200","initialFrameWidth":"800"})${doc?.docContent}#end
             </div>
         </div>
-
         #end
         #@elementItem()
             <div class="col-12">
@@ -236,10 +233,8 @@
     #@dialogHeader()#end
     #@dialogBody()<p></p>#end
 #end
-
 <script type="text/javascript">
     /* Set doc type. */
-
     $(function () {
         $("[name=docType]").each(function(){
             $(this).on("change",function(){

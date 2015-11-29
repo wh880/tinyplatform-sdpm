@@ -36,6 +36,7 @@
                     success:function(data){
                         if(data.status=="y"||data.status=="success"){
                             layer.msg("关闭成功",1, 1);
+                            $("#lineTree").trigger("refresh");
                             $(curform).closest(".modal").trigger("close");
                         }else{
                             layer.msg("关闭失败");

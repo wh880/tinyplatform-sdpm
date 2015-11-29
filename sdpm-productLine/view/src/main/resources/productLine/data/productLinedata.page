@@ -46,6 +46,7 @@
                             setTimeout(function(){
                                 layer.closeAll();
                                 $("#productLinetable").trigger("initnav");
+                                $("#lineTree").trigger("refresh");
                             },300);
                         }else{
                             var msg=data.info?data.info:"系统出错";

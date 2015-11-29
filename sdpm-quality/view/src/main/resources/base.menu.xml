@@ -21,13 +21,13 @@
         <menu id="tproposeBug" name="复制Bug" href="/quality/bug/toCopy" icon="icon-copy" sort="1"
               isShow="1" scope="testbug-op,pro-bug-op,testbuginfo-tab">
         </menu>
-        <menu id="tbuginput" name="导入Bug" href="/testManagement/page/tabledemo/importBug.pagelet"
-              icon="icon-download-alt" sort="4"
-              isShow="1" scope="testbug-tab">
-        </menu>
-        <menu id="tbugoutput" name="导出Bug" href="" icon="icon-upload-alt" sort="3"
-              isShow="1" scope="testbug-tab">
-        </menu>
+        <!--<menu id="tbuginput" name="导入Bug" href="/testManagement/page/tabledemo/importBug.pagelet"-->
+              <!--icon="icon-download-alt" sort="4"-->
+              <!--isShow="1" scope="testbug-tab">-->
+        <!--</menu>-->
+        <!--<menu id="tbugoutput" name="导出Bug" href="" icon="icon-upload-alt" sort="3"-->
+              <!--isShow="1" scope="testbug-tab">-->
+        <!--</menu>-->
         <menu id="tbugreport" name="报表" href="/quality/bug/reportForm" icon="icon-plus-sign" sort="2"
               isShow="1" scope="testbug-tab">
         </menu>
@@ -120,12 +120,12 @@
                 <property key="type" value="icon-href"/>
             </map>
         </menu>
-        <menu id="tcaseinput" name="导入用例" href="/testManagement/page/tabledemo/importBug.pagelet"
-              icon="icon-download-alt" sort="5"
-              isShow="1" scope="testcase-tab"></menu>
-        <menu id="tcaseoutput" name="导出用例" href="/testManagement/page/tabledemo/exportBugData.pagelet"
-              icon="icon-upload-alt" sort="4"
-              isShow="1" scope="testcase-tab"></menu>
+        <!--<menu id="tcaseinput" name="导入用例" href="/testManagement/page/tabledemo/importBug.pagelet"-->
+              <!--icon="icon-download-alt" sort="5"-->
+              <!--isShow="1" scope="testcase-tab"></menu>-->
+        <!--<menu id="tcaseoutput" name="导出用例" href="/testManagement/page/tabledemo/exportBugData.pagelet"-->
+              <!--icon="icon-upload-alt" sort="4"-->
+              <!--isShow="1" scope="testcase-tab"></menu>-->
         <!--<menu id="tcasenote" name="日志" href="/testManagement/page/addLog.pagelet" icon="icon-time" sort="6"-->
         <!--isShow="1" scope="testcaseinfo-tab"></menu>-->
         <menu id="tcaseremark" name="备注" href="" icon="icon-comment-alt" sort="2"
@@ -192,9 +192,9 @@
               <!--isShow="1" scope="version-case"></menu>-->
         <menu id="tverInfo" name="版本概况" href="/quality/version/versionInfo?currentPageId=5" icon="" sort="3"
               isShow="1" scope="version-case"></menu>
-        <menu id="tveroutdata" name="导出数据" href="#" icon="icon-upload-alt" sort="1"
-              isShow="1" scope="version-case-right">
-        </menu>
+        <!--<menu id="tveroutdata" name="导出数据" href="#" icon="icon-upload-alt" sort="1"-->
+              <!--isShow="1" scope="version-case-right">-->
+        <!--</menu>-->
         <menu id="tverremove" name="移除版本" href="#" icon="icon-trash" sort="2"
               isShow="1" scope="version-case-op">
         </menu>
