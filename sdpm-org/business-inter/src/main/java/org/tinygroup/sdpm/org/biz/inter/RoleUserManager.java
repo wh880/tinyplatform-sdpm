@@ -1,6 +1,5 @@
 package org.tinygroup.sdpm.org.biz.inter;
 
-import org.tinygroup.sdpm.org.dao.pojo.OrgRole;
 import org.tinygroup.sdpm.org.dao.pojo.OrgRoleUser;
 
 import java.util.List;
@@ -42,6 +41,13 @@ public interface RoleUserManager {
 
     void addRoleUser(String[] array, Integer roleId);
 
+    /**
+     * 批量添加用户的角色
+     * @param userId
+     * @param roleIds
+     * @return
+     */
+    Integer batchAddRolesToUser(String userId, Integer[] roleIds);
     /**
      * 更新角色菜单
      *

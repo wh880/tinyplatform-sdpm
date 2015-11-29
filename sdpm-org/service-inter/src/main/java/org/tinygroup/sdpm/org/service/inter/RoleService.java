@@ -130,6 +130,13 @@ public interface RoleService {
     void addRoleUser(String[] userIds, Integer roleId);
 
     /**
+     * 批量添加角色成员
+     * @param userId 用户Id
+     * @param roleIds 角色ids
+     */
+    void batchAddRolesToUser(String userId, Integer[] roleIds);
+
+    /**
      * 批量添加用色用户
      *
      * @param orgRoleUserList

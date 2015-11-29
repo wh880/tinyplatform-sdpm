@@ -132,7 +132,7 @@ public class UserAction extends BaseController {
         OrgRole orgRole = new OrgRole();
         orgRole.setOrgRoleType(OrgRole.ROLE_TYPE_SYS);
         List<OrgRole> roleList = roleService.findRoleList(orgRole);
-        model.addAttribute("roleList",  roleList);
+        model.addAttribute("roleList", roleList);
         return "organization/user/userAdd";
     }
 
@@ -147,7 +147,7 @@ public class UserAction extends BaseController {
      */
     @RequiresPermissions("organizationAddUser")
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String save(OrgUser user, Model model, String password1, String password2) {
+    public String save(OrgUser user,Integer[] roleIds, Model model, String password1, String password2) {
         if (StringUtil.isBlank(user.getOrgUserId())) {
             if (password1.equals(password2)) {
                 user.setOrgUserPassword(password1);
@@ -156,12 +156,11 @@ public class UserAction extends BaseController {
                         , LogUtil.LogAction.CREATED
                         , String.valueOf(userTemp.getOrgUserId())
                         , UserUtils.getUserId()
-                        , null
-                        , null
-                        , null
-                        , null
-                        , null);
+                        , null, null, null, null, null);
+
+                roleService.batchAddRolesToUser(userTemp.getOrgUserId(),roleIds);
             } else {
+                addMessage(model,"密码验证不正确");
                 return "organization/user/addUser.page";
             }
         } else {
@@ -170,11 +169,7 @@ public class UserAction extends BaseController {
                     , LogUtil.LogAction.EDITED
                     , String.valueOf(user.getOrgUserId())
                     , UserUtils.getUserId()
-                    , null
-                    , null
-                    , null
-                    , null
-                    , null);
+                    , null, null, null, null, null);
         }
         model.addAttribute("user", user);
         UserUtils.clearCache(user);
@@ -579,8 +574,8 @@ public class UserAction extends BaseController {
 
     @ResponseBody
     @RequestMapping("ajax/userInCondition")
-    public List<OrgUser> userInCondition(String key, String initKey){
-        if(initKey!=null){
+    public List<OrgUser> userInCondition(String key, String initKey) {
+        if (initKey != null) {
             List<OrgUser> result = new ArrayList<OrgUser>();
             result.add(userService.findUser(initKey));
             return result;
@@ -590,34 +585,34 @@ public class UserAction extends BaseController {
 
     @ResponseBody
     @RequestMapping("ajax/userInConditionAndTeam")
-    public List<OrgUser> userInConditionAndTeam(String key, String initKey, Integer productId, Integer projectId){
-        if(initKey!=null){
-            if(initKey.indexOf(",")>0){
+    public List<OrgUser> userInConditionAndTeam(String key, String initKey, Integer productId, Integer projectId) {
+        if (initKey != null) {
+            if (initKey.indexOf(",") > 0) {
                 String[] ids = initKey.split(",");
                 return userService.findUserListByIds(ids);
-            }else{
+            } else {
                 List<OrgUser> result = new ArrayList<OrgUser>();
-                if("0".equals(initKey)){
+                if ("0".equals(initKey)) {
                     result.add(new OrgUser());
-                }else {
+                } else {
                     result.add(userService.findUser(initKey));
                 }
                 return result;
             }
         }
         List<ProjectTeam> teams = null;
-        if(productId!=null){
+        if (productId != null) {
             teams = teamService.findTeamByProductId(productId);
-        }else if(projectId!=null){
+        } else if (projectId != null) {
             teams = teamService.findTeamByProjectId(projectId);
         }
         String[] ids = null;
-        if(teams!=null){
+        if (teams != null) {
             ids = new String[teams.size()];
-            for(int i = 0; i < ids.length; i++){
+            for (int i = 0; i < ids.length; i++) {
                 ids[i] = teams.get(i).getTeamUserId();
             }
         }
-        return userService.userInCondition(key,ids);
+        return userService.userInCondition(key, ids);
     }
 }

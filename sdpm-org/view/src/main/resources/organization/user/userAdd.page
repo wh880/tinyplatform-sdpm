@@ -127,7 +127,7 @@
                             #@colLabel("col-3")<span class="c-red">*</span>角色：#end
                             #@formControlDiv("col-5")
                                 #@Tselect2F()
-                                    #@Tselect2Body("taskMailToArray" "" {"class":"input-text select2","multiple":
+                                    #@Tselect2Body("roleIds" "" {"class":"input-text select2","multiple":
                                         "multiple"}) ##加上为多选项
                                         #foreach(r : roleList)
                                             <option value="${r.orgRoleId}">${r.orgRoleName}</option>
