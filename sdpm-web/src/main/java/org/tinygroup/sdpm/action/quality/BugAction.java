@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.action.product.util.StoryUtil;
 import org.tinygroup.sdpm.action.quality.util.QualityUtil;
@@ -120,24 +121,24 @@ public class BugAction extends BaseController {
     }
 
     @RequestMapping("/bugInfo")
-    public String bugInfo(Integer bugId,Integer no, Model model, HttpServletRequest request) {
+    public String bugInfo(Integer bugId, Integer no, Model model, HttpServletRequest request) {
         QualityBug bug = null;
-        if(no!=null){
-            Integer qualityProductId = Integer.parseInt(CookieUtils.getCookie(request,"qualityProductId"));
-            if(qualityProductId==null){
+        if (no != null) {
+            Integer qualityProductId = Integer.parseInt(CookieUtils.getCookie(request, "qualityProductId"));
+            if (qualityProductId == null) {
                 return notFoundView();
             }
             bug = new QualityBug();
             bug.setProductId(qualityProductId);
             bug.setNo(no);
             List<QualityBug> bugList = bugService.findBugList(bug);
-            if(bugList.size()==0){
+            if (CollectionUtil.isEmpty(bugList)) {
                 return notFoundView();
             }
             bug = bugList.get(0);
             bugId = bug.getBugId();
         }
-        if(bug==null||bug.getBugId()==null){
+        if (bug == null || bug.getBugId() == null) {
             bug = bugService.findById(bugId);
         }
         QualityBug qualityBug = new QualityBug();
@@ -148,7 +149,6 @@ public class BugAction extends BaseController {
         if (bugs.getRecords().size() > 0) {
             nextId = bugs.getRecords().get(0).getBugId();
         }
-
         SystemProfile systemProfile = new SystemProfile();
         systemProfile.setFileObjectType("bug");
         systemProfile.setFileDeleted("0");
@@ -183,7 +183,7 @@ public class BugAction extends BaseController {
     }
 
     @RequestMapping("/findBug")
-    public String findBugPager(@CookieValue(value = "qualityProductId",defaultValue ="0") Integer qualityProductId, Integer start, Integer limit, SearchInfos infos, String groupOperate, String order, String ordertype, String status, QualityBug bug, Model model, HttpServletRequest request) {
+    public String findBugPager(@CookieValue(value = "qualityProductId", defaultValue = "0") Integer qualityProductId, Integer start, Integer limit, SearchInfos infos, String groupOperate, String order, String ordertype, String status, QualityBug bug, Model model, HttpServletRequest request) {
         boolean asc = true;
         if ("desc".equals(ordertype)) {
             asc = false;
@@ -424,7 +424,7 @@ public class BugAction extends BaseController {
     @RequestMapping("/solve")
     public String solve(QualityBug bug, SystemAction systemAction,
                         HttpServletRequest request, @RequestParam(value = "file", required = false) MultipartFile[] file,
-                        String[] title,UploadProfile uploadProfile) throws IOException {
+                        String[] title, UploadProfile uploadProfile) throws IOException {
         QualityBug qualityBug = bugService.findById(bug.getBugId());
         if (qualityBug.getBugAssignedTo() != bug.getBugAssignedTo()) {
             bug.setBugAssignedDate(new Date());
@@ -494,7 +494,7 @@ public class BugAction extends BaseController {
 
     @RequestMapping("/edit")
     public String edit(QualityBug bug, SystemAction systemAction,
-                       String lastAddress,UploadProfile uploadProfile) throws IOException {
+                       String lastAddress, UploadProfile uploadProfile) throws IOException {
 
         QualityBug qualityBug = bugService.findById(bug.getBugId());
 
@@ -513,8 +513,8 @@ public class BugAction extends BaseController {
                 , qualityBug
                 , bug
                 , systemAction.getActionComment());
-        if(!StringUtil.isBlank(lastAddress)){
-            return "redirect:"+lastAddress;
+        if (!StringUtil.isBlank(lastAddress)) {
+            return "redirect:" + lastAddress;
         }
         return "redirect:" + "/a/quality/bug";
     }
@@ -567,7 +567,7 @@ public class BugAction extends BaseController {
     @ResponseBody
     @RequestMapping("/ajax/project")
     public List<Project> getProject(ProjectProduct projectProduct) {
-        if (projectProduct.getProductId()==null/*||projectProduct.getProductId() < 1*/) {
+        if (projectProduct.getProductId() == null/*||projectProduct.getProductId() < 1*/) {
             return new ArrayList<Project>();
         }
         List<ProjectProduct> projectProducts = projectProductService.findProjects(projectProduct.getProductId());
@@ -636,7 +636,7 @@ public class BugAction extends BaseController {
 
     @RequestMapping(value = "/copy", method = RequestMethod.POST)
     public String copySave(QualityBug bug, SystemAction systemAction, HttpServletRequest request, @RequestParam(value = "file", required = false) MultipartFile[] file,
-                           String[] title,UploadProfile uploadProfile) throws IOException {
+                           String[] title, UploadProfile uploadProfile) throws IOException {
         bug.setBugConfirmed(0);
         bug.setBugStatus("1");
         bug.setDeleted(0);
@@ -666,7 +666,7 @@ public class BugAction extends BaseController {
                        @RequestParam(value = "file", required = false) MultipartFile[] file,
                        String[] title,
                        HttpServletRequest request,
-                       String lastAddress,UploadProfile uploadProfile) throws IOException {
+                       String lastAddress, UploadProfile uploadProfile) throws IOException {
 
         if (!StringUtil.isBlank(bug.getBugAssignedTo())) {
             bug.setBugAssignedDate(new Date());
@@ -692,8 +692,8 @@ public class BugAction extends BaseController {
                 , null
                 , null
                 , systemAction.getActionComment());
-        if(!StringUtil.isBlank(lastAddress)){
-            return "redirect:"+lastAddress;
+        if (!StringUtil.isBlank(lastAddress)) {
+            return "redirect:" + lastAddress;
         }
         return "redirect:" + "/a/quality/bug";
     }
