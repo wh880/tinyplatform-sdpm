@@ -135,7 +135,7 @@ public class ProjectTeamAction extends BaseController {
     }
 
     @RequestMapping("team/nextTr")
-    public String getNextTeamTr(Integer a,Model model){
+    public String getNextTeamTr(Integer a, Model model) {
         List<OrgUser> userList = userService.findUserList(null);
         model.addAttribute("userList", userList);
         OrgRole role = new OrgRole();
@@ -143,7 +143,7 @@ public class ProjectTeamAction extends BaseController {
         role.setOrgRoleType(OrgRole.ROLE_TYPE_PROJECT);
         List<OrgRole> roleList = roleService.findRoleList(role);
         model.addAttribute("roleList", roleList);
-        model.addAttribute("a",a+1);
+        model.addAttribute("a", a + 1);
         return "/product/page/team/teamAddTr.pagelet";
     }
 }

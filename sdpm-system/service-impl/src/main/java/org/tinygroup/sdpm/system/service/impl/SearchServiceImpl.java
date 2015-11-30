@@ -11,46 +11,46 @@ import java.util.List;
 
 @Component
 public class SearchServiceImpl implements SearchService {
-	
-	@Autowired
-	private SearchManager searchManager;
-	
-	public SystemSearch addSearch(SystemSearch search) {
-		
-		return searchManager.add(search);
-	}
 
-	public int deleteSearch(Integer searchId) {
-		
-		return searchManager.delete(searchId);
-	}
+    @Autowired
+    private SearchManager searchManager;
 
-	public int updateSearch(SystemSearch search) {
-		
-		return searchManager.update(search);
-	}
+    public SystemSearch addSearch(SystemSearch search) {
 
-	public SystemSearch findSearch(Integer searchId) {
-	
-		return searchManager.find(searchId);
-	}
+        return searchManager.add(search);
+    }
 
-	public List<SystemSearch> findSearchList(SystemSearch search,String columnName,boolean asc) {
-		
-		return searchManager.findList(search, columnName, asc);
-			
-	}
+    public int deleteSearch(Integer searchId) {
 
-	public Pager<SystemSearch> findSearchPager(int start, int limit, SystemSearch search, String columnName,
-			boolean asc) {
+        return searchManager.delete(searchId);
+    }
 
-		return searchManager.findPager(start, limit, search, columnName, asc);
-	}
+    public int updateSearch(SystemSearch search) {
 
-	public int[] updateBatchSearch(List<SystemSearch> searches) {
+        return searchManager.update(search);
+    }
 
-		return searchManager.updateBatch(searches);
-	}
+    public SystemSearch findSearch(Integer searchId) {
+
+        return searchManager.find(searchId);
+    }
+
+    public List<SystemSearch> findSearchList(SystemSearch search, String columnName, boolean asc) {
+
+        return searchManager.findList(search, columnName, asc);
+
+    }
+
+    public Pager<SystemSearch> findSearchPager(int start, int limit, SystemSearch search, String columnName,
+                                               boolean asc) {
+
+        return searchManager.findPager(start, limit, search, columnName, asc);
+    }
+
+    public int[] updateBatchSearch(List<SystemSearch> searches) {
+
+        return searchManager.updateBatch(searches);
+    }
 
 
 }

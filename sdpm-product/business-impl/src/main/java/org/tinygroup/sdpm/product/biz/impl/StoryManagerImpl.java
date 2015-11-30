@@ -40,9 +40,10 @@ public class StoryManagerImpl implements StoryManager {
     private QualityBugDao qualityBugDao;
     @Autowired
     private QualityTestCaseDao qualityTestCaseDao;
+
     public ProductStory add(ProductStory story, ProductStorySpec storySpec) {
         Integer no = productStoryDao.getMaxNo(story.getProductId());
-        story.setNo(no==null?1:no+1);
+        story.setNo(no == null ? 1 : no + 1);
         story.setDeleted(FieldUtil.DELETE_NO);
         story = productStoryDao.add(story);
         storySpec.setStoryId(story.getStoryId());
@@ -109,9 +110,9 @@ public class StoryManagerImpl implements StoryManager {
         return productStoryDao.edit(story);
     }
 
-    public List<ProductStory> findList(boolean storySpec,Integer... storyId) {
-        if(storyId==null||storyId.length==0)return new ArrayList<ProductStory>();
-        return productStoryDao.getByKeys(storySpec,storyId);
+    public List<ProductStory> findList(boolean storySpec, Integer... storyId) {
+        if (storyId == null || storyId.length == 0) return new ArrayList<ProductStory>();
+        return productStoryDao.getByKeys(storySpec, storyId);
     }
 
     public List<StoryCount> productStoryCount(ProductStory story) {
@@ -193,16 +194,16 @@ public class StoryManagerImpl implements StoryManager {
 
     public Pager<ProductStory> findStoryByCondition(int start, int limit, ProductStory story, ConditionCarrier carrier, final String columnName, boolean asc) {
         carrier.completeModuleFunction(new CallBackFunction() {
-            public boolean process(ConditionCarrier carrier, String field,String relation) {
+            public boolean process(ConditionCarrier carrier, String field, String relation) {
                 String result = "";
-                if(ConditionUtils.CommonFieldType.MODULE.getOperate().equals(carrier.getFieldType(field))){
-                    String moduleId = (String)carrier.getValue(field)[0];
-                    if(moduleId.contains("p")){
-                        result = ModuleUtil.getConditionByRoot(Integer.parseInt(moduleId.substring(1)),"story");
-                    }else{
+                if (ConditionUtils.CommonFieldType.MODULE.getOperate().equals(carrier.getFieldType(field))) {
+                    String moduleId = (String) carrier.getValue(field)[0];
+                    if (moduleId.contains("p")) {
+                        result = ModuleUtil.getConditionByRoot(Integer.parseInt(moduleId.substring(1)), "story");
+                    } else {
                         result = ModuleUtil.getCondition(Integer.parseInt(moduleId.substring(1)));
                     }
-                    carrier.setCondition(field,result,carrier.DEFAULT_RELATION);
+                    carrier.setCondition(field, result, carrier.DEFAULT_RELATION);
                     return true;
                 }
                 return false;
@@ -210,18 +211,18 @@ public class StoryManagerImpl implements StoryManager {
         });
         carrier.completeCustomFunction(new CallBackFunction() {
             public boolean process(ConditionCarrier carrier, String field, String relation) {
-                if(ConditionUtils.CommonFieldType.STATUS.getOperate().equals(carrier.getFieldType(field))){
-                    String statusCondition = (String)carrier.getValue(field)[0];
-                    carrier.setCondition(field,statusCondition,carrier.DEFAULT_RELATION);
+                if (ConditionUtils.CommonFieldType.STATUS.getOperate().equals(carrier.getFieldType(field))) {
+                    String statusCondition = (String) carrier.getValue(field)[0];
+                    carrier.setCondition(field, statusCondition, carrier.DEFAULT_RELATION);
                     return true;
                 }
                 return false;
             }
         });
-        return findPager(start,limit,story,carrier.resultCondition(),columnName,asc);
+        return findPager(start, limit, story, carrier.resultCondition(), columnName, asc);
     }
 
-    public List<ProductStory> storyInCondition(String condition, Integer productId, Integer ...ids) {
-        return productStoryDao.storyInCondition(condition,productId,ids);
+    public List<ProductStory> storyInCondition(String condition, Integer productId, Integer... ids) {
+        return productStoryDao.storyInCondition(condition, productId, ids);
     }
 }

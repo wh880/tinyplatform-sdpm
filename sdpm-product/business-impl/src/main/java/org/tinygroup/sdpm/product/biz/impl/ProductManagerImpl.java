@@ -28,156 +28,156 @@ import java.util.List;
 
 @Service
 @Transactional
-public class ProductManagerImpl implements ProductManager{
+public class ProductManagerImpl implements ProductManager {
 
-	@Autowired
-	private ProductDao productDao;
-	@Autowired
-	private OrgRoleUserDao orgRoleUserDao;
-	@Autowired
-	private ProductStoryDao productStoryDao;
-	@Autowired
-	private ProductReleaseDao productReleaseDao;
-	@Autowired
-	private ProductPlanDao productPlanDao;
-	@Autowired
-	private ProjectBuildDaoImpl projectBuildDao;
-	@Autowired
-	private QualityBugDao qualityBugDao;
-	@Autowired
-	private QualityTestCaseDao qualityTestCaseDao;
-	@Autowired
-	private QualityTestTaskDao qualityTestTaskDao;
-	
-	public Product add(Product product) {
-		return productDao.add(product);
-	}
+    @Autowired
+    private ProductDao productDao;
+    @Autowired
+    private OrgRoleUserDao orgRoleUserDao;
+    @Autowired
+    private ProductStoryDao productStoryDao;
+    @Autowired
+    private ProductReleaseDao productReleaseDao;
+    @Autowired
+    private ProductPlanDao productPlanDao;
+    @Autowired
+    private ProjectBuildDaoImpl projectBuildDao;
+    @Autowired
+    private QualityBugDao qualityBugDao;
+    @Autowired
+    private QualityTestCaseDao qualityTestCaseDao;
+    @Autowired
+    private QualityTestTaskDao qualityTestTaskDao;
 
-	public int update(Product product) {
-		if(1!=product.getAcl()){
-			product.setProductWhiteList("");
-		}
+    public Product add(Product product) {
+        return productDao.add(product);
+    }
 
-		return productDao.edit(product);
-	}
+    public int update(Product product) {
+        if (1 != product.getAcl()) {
+            product.setProductWhiteList("");
+        }
 
-	public int delete(Integer productId) {
-		//删计划
-		productPlanDao.deletePlanByProduct(productId);
-		//删需求
-		productStoryDao.deleteStoryByProduct(productId);
-		//删发布
-		productReleaseDao.deleteReleaseByProduct(productId);
-		//删版本
-		projectBuildDao.deleteBuildByProductId(productId);
-		//删bug
-		qualityBugDao.deleteBugsByProduct(productId);
-		//删case
-		qualityTestCaseDao.deleteCaseByProduct(productId);
-		//删testTask
-		qualityTestTaskDao.deleteTestTaskByProduct(productId);
+        return productDao.edit(product);
+    }
 
-		Product product = new Product();
-		product.setProductId(productId);
-		product.setDeleted(FieldUtil.DELETE_YES);
-		return productDao.edit(product);
-	}
+    public int delete(Integer productId) {
+        //删计划
+        productPlanDao.deletePlanByProduct(productId);
+        //删需求
+        productStoryDao.deleteStoryByProduct(productId);
+        //删发布
+        productReleaseDao.deleteReleaseByProduct(productId);
+        //删版本
+        projectBuildDao.deleteBuildByProductId(productId);
+        //删bug
+        qualityBugDao.deleteBugsByProduct(productId);
+        //删case
+        qualityTestCaseDao.deleteCaseByProduct(productId);
+        //删testTask
+        qualityTestTaskDao.deleteTestTaskByProduct(productId);
 
-	public Product find(Integer productId) {
-		return productDao.getByKey(productId);
-	}
+        Product product = new Product();
+        product.setProductId(productId);
+        product.setDeleted(FieldUtil.DELETE_YES);
+        return productDao.edit(product);
+    }
+
+    public Product find(Integer productId) {
+        return productDao.getByKey(productId);
+    }
 
 
-	public int[] updateBatch(List<Product> products) {
-		return productDao.batchUpdate(products);
-	}
-	
-	public List<Product> findList(Product product){
-		return productDao.query(product, null);
-	}
-	
-	public List<Product> findList(Product product, String order,String ordertype) {
-		if(StringUtil.isBlank(order)){
-			return productDao.query(product);
-		}
-		return productDao.query(product,new OrderBy(NameUtil.resolveNameDesc("product."+order), !("desc".equals(ordertype))?true:false));
-	}
+    public int[] updateBatch(List<Product> products) {
+        return productDao.batchUpdate(products);
+    }
 
-	public Pager<Product> findPager(int page, int limit, Product product, String order,String ordertype) {
-		
-		return productDao.queryPager((page-1)*limit, limit, product, (order==null||"".equals(order))?null:new OrderBy(NameUtil.resolveNameDesc("product."+order), !("desc".equals(ordertype))?true:false));
-	}
+    public List<Product> findList(Product product) {
+        return productDao.query(product, null);
+    }
 
-	public List<Product> findList(Integer... productId) {
-		if(productId==null||productId.length==0)return new ArrayList<Product>();
-		return productDao.getByKeys(productId);
-	}
+    public List<Product> findList(Product product, String order, String ordertype) {
+        if (StringUtil.isBlank(order)) {
+            return productDao.query(product);
+        }
+        return productDao.query(product, new OrderBy(NameUtil.resolveNameDesc("product." + order), !("desc".equals(ordertype)) ? true : false));
+    }
 
-	public List<ProductAndLine> getProductAndLine(Product product) {
+    public Pager<Product> findPager(int page, int limit, Product product, String order, String ordertype) {
 
-		return productDao.getProductAndLine(product);
-	}
+        return productDao.queryPager((page - 1) * limit, limit, product, (order == null || "".equals(order)) ? null : new OrderBy(NameUtil.resolveNameDesc("product." + order), !("desc".equals(ordertype)) ? true : false));
+    }
 
-	public List<String> getProductNameByLineId(Integer productLineId) {
+    public List<Product> findList(Integer... productId) {
+        if (productId == null || productId.length == 0) return new ArrayList<Product>();
+        return productDao.getByKeys(productId);
+    }
 
-		return productDao.getProductNameByLineId(productLineId);
-	}
+    public List<ProductAndLine> getProductAndLine(Product product) {
 
-	public List<Product> getProductByUser(String userId,Integer delete,Integer productLineId) {
-		List<Product> productList = productDao.getProductByUser(userId,delete,productLineId);
-		Product product = new Product();
-		product.setDeleted(delete);
-		product.setAcl(product.ACl_TEAM_AND_ROLE);
-		List<Product> products = productDao.query(product);
-		OrgRoleUser role = new OrgRoleUser();
-		role.setOrgUserId(userId);
-		List<OrgRoleUser> orgRoles = orgRoleUserDao.query(role);
-		return mergeUserProducts(productList,products,orgRoles);
-	}
+        return productDao.getProductAndLine(product);
+    }
 
-	public List<Product> getProductByUserWithCount(String userId,Integer delete,boolean noRole) {
-		List<Product> productList = productDao.getProductByUserWithCount(userId,delete,noRole);
-		Product product = new Product();
-		product.setDeleted(delete);
-		product.setAcl(product.ACl_TEAM_AND_ROLE);
-		List<Product> products = productDao.queryWithCount(product);
-		OrgRoleUser role = new OrgRoleUser();
-		role.setOrgUserId(userId);
-		List<OrgRoleUser> orgRoles = orgRoleUserDao.query(role);
-		return mergeUserProducts(productList,products,orgRoles);
-	}
+    public List<String> getProductNameByLineId(Integer productLineId) {
 
-	public List<Product> getProductByUserAndProductLineWithCount(String userId, Integer productLineId,Integer delete) {
-		return productDao.getProductByUserAndProductLineWithCount(userId,productLineId,delete);
-	}
+        return productDao.getProductNameByLineId(productLineId);
+    }
 
-	public List<Integer> getTeamRoleProductLineIds(String userId,Integer delete){
-		List<Integer> pIds = new ArrayList<Integer>();
-		for(Product product : getProductByUser(userId,delete,null)){
-			pIds.add(product.getProductLineId());
-		}
-		return pIds;
-	}
+    public List<Product> getProductByUser(String userId, Integer delete, Integer productLineId) {
+        List<Product> productList = productDao.getProductByUser(userId, delete, productLineId);
+        Product product = new Product();
+        product.setDeleted(delete);
+        product.setAcl(product.ACl_TEAM_AND_ROLE);
+        List<Product> products = productDao.query(product);
+        OrgRoleUser role = new OrgRoleUser();
+        role.setOrgUserId(userId);
+        List<OrgRoleUser> orgRoles = orgRoleUserDao.query(role);
+        return mergeUserProducts(productList, products, orgRoles);
+    }
 
-	public List<Product> productInCondition(String condition,Integer ...ids) {
-		if(ids==null||ids.length==0)return new ArrayList<Product>();
-		return productDao.productInCondition(condition,ids);
-	}
+    public List<Product> getProductByUserWithCount(String userId, Integer delete, boolean noRole) {
+        List<Product> productList = productDao.getProductByUserWithCount(userId, delete, noRole);
+        Product product = new Product();
+        product.setDeleted(delete);
+        product.setAcl(product.ACl_TEAM_AND_ROLE);
+        List<Product> products = productDao.queryWithCount(product);
+        OrgRoleUser role = new OrgRoleUser();
+        role.setOrgUserId(userId);
+        List<OrgRoleUser> orgRoles = orgRoleUserDao.query(role);
+        return mergeUserProducts(productList, products, orgRoles);
+    }
 
-	private List<Product> mergeUserProducts(List<Product> productWithOutRole,List<Product> productWithRole,List<OrgRoleUser> roleUsers){
-		if(productWithRole.size()==0)return productWithOutRole;
-		for(OrgRoleUser orgRoleUser : roleUsers) {
-			for (Product product1:productWithRole) {
-				String whiteList = product1.getProductWhiteList();
-				if (whiteList != null){
-					String[] ids = whiteList.split(",");
-					List<String> idList = Arrays.asList(ids);
-					if(idList.contains(String.valueOf(orgRoleUser.getOrgRoleId()))&&!productWithOutRole.contains(product1)){
-						productWithOutRole.add(product1);
-					}
-				}
-			}
-		}
-		return productWithOutRole;
-	}
+    public List<Product> getProductByUserAndProductLineWithCount(String userId, Integer productLineId, Integer delete) {
+        return productDao.getProductByUserAndProductLineWithCount(userId, productLineId, delete);
+    }
+
+    public List<Integer> getTeamRoleProductLineIds(String userId, Integer delete) {
+        List<Integer> pIds = new ArrayList<Integer>();
+        for (Product product : getProductByUser(userId, delete, null)) {
+            pIds.add(product.getProductLineId());
+        }
+        return pIds;
+    }
+
+    public List<Product> productInCondition(String condition, Integer... ids) {
+        if (ids == null || ids.length == 0) return new ArrayList<Product>();
+        return productDao.productInCondition(condition, ids);
+    }
+
+    private List<Product> mergeUserProducts(List<Product> productWithOutRole, List<Product> productWithRole, List<OrgRoleUser> roleUsers) {
+        if (productWithRole.size() == 0) return productWithOutRole;
+        for (OrgRoleUser orgRoleUser : roleUsers) {
+            for (Product product1 : productWithRole) {
+                String whiteList = product1.getProductWhiteList();
+                if (whiteList != null) {
+                    String[] ids = whiteList.split(",");
+                    List<String> idList = Arrays.asList(ids);
+                    if (idList.contains(String.valueOf(orgRoleUser.getOrgRoleId())) && !productWithOutRole.contains(product1)) {
+                        productWithOutRole.add(product1);
+                    }
+                }
+            }
+        }
+        return productWithOutRole;
+    }
 }

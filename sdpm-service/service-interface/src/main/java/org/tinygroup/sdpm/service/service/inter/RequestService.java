@@ -60,7 +60,6 @@ public interface RequestService {
     Integer deleteRequest(Integer id);
 
 
-
     /**
      * 查找数据库的所有记录
      *
@@ -81,6 +80,7 @@ public interface RequestService {
      * @return
      */
     Integer closeRequest(ServiceRequest clientRequest);
+
     /**
      * 保存回复
      *
@@ -114,6 +114,7 @@ public interface RequestService {
 
     /**
      * 根据查询名称查询
+     *
      * @param key
      * @return
      */

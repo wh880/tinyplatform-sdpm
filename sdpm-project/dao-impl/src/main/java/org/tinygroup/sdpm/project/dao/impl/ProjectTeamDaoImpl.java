@@ -57,7 +57,7 @@ public class ProjectTeamDaoImpl extends TinyDslDaoSupport implements ProjectTeam
     }
 
 
-    public List<String> getMenuByUserId(Integer projectId, Integer productId ,String userId) {
+    public List<String> getMenuByUserId(Integer projectId, Integer productId, String userId) {
         List<Integer> roleIdListByProjectIdAndUserId = getRoleIdListByUserId(projectId, productId, userId);
         Select select = Select.select(ORG_ROLE_MENUTABLE.ORG_ROLE_MENU_ID).from(ORG_ROLE_MENUTABLE).where(ORG_ROLE_MENUTABLE.ORG_ROLE_ID.in(roleIdListByProjectIdAndUserId));
         return getDslSession().fetchList(select, String.class);
@@ -181,8 +181,8 @@ public class ProjectTeamDaoImpl extends TinyDslDaoSupport implements ProjectTeam
         return getDslTemplate().queryPager(start, limit, projectTeam, false, new SelectGenerateCallback<ProjectTeam>() {
 
             public Select generate(ProjectTeam t) {
-                Select select = MysqlSelect.select(PROJECT_TEAMTABLE.ALL,ORG_ROLETABLE.ORG_ROLE_NAME.as("roleName")).from(PROJECT_TEAMTABLE).join(
-                        Join.leftJoin(ORG_ROLETABLE,ORG_ROLETABLE.ORG_ROLE_ID.eq(PROJECT_TEAMTABLE.TEAM_ROLE))
+                Select select = MysqlSelect.select(PROJECT_TEAMTABLE.ALL, ORG_ROLETABLE.ORG_ROLE_NAME.as("roleName")).from(PROJECT_TEAMTABLE).join(
+                        Join.leftJoin(ORG_ROLETABLE, ORG_ROLETABLE.ORG_ROLE_ID.eq(PROJECT_TEAMTABLE.TEAM_ROLE))
                 ).where(
                         and(
                                 PROJECT_TEAMTABLE.PRODUCT_ID.eq(t.getProductId()),

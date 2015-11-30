@@ -11,23 +11,23 @@ import java.util.List;
 @Component
 public class TestResultServiceImpl implements TestResultService {
 
-	@Autowired
-	private TestResultManager testresultmanager;
+    @Autowired
+    private TestResultManager testresultmanager;
 
-	public List<QualityTestResult> findTestResultList(QualityTestResult testresult){
-		return testresultmanager.findList(testresult);
-	}
+    public List<QualityTestResult> findTestResultList(QualityTestResult testresult) {
+        return testresultmanager.findList(testresult);
+    }
 
-	public QualityTestResult findByid(int id){
-		return testresultmanager.find(id);
-	}
+    public QualityTestResult findByid(int id) {
+        return testresultmanager.find(id);
+    }
 
-	public int updateTestResult(QualityTestResult testresult){
-			return testresultmanager.update(testresult);
-		}
+    public int updateTestResult(QualityTestResult testresult) {
+        return testresultmanager.update(testresult);
+    }
 
-	public QualityTestResult add(QualityTestResult qualityTestResult) {
-		return testresultmanager.add(qualityTestResult);
-	}
+    public QualityTestResult add(QualityTestResult qualityTestResult) {
+        return testresultmanager.add(qualityTestResult);
+    }
 
 }

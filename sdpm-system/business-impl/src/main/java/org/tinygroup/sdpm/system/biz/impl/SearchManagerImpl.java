@@ -14,45 +14,45 @@ import java.util.List;
 
 @Service
 @Transactional
-public class SearchManagerImpl implements SearchManager{
+public class SearchManagerImpl implements SearchManager {
     @Autowired
     private SystemSearchDao searchDao;
 
-    public  SystemSearch add(SystemSearch search){
+    public SystemSearch add(SystemSearch search) {
         return searchDao.add(search);
     }
 
-    public  int delete(Integer searchId){
-        SystemSearch search=new SystemSearch();
+    public int delete(Integer searchId) {
+        SystemSearch search = new SystemSearch();
         search.setSearchId(searchId);
         search.setDeleted(SystemSearch.DELETE_YES);
         return searchDao.edit(search);
     }
 
-    public  int update(SystemSearch search){
+    public int update(SystemSearch search) {
         return searchDao.edit(search);
     }
 
-    public SystemSearch find(Integer searchId){
+    public SystemSearch find(Integer searchId) {
         return searchDao.getByKey(searchId);
     }
 
-	public int[] updateBatch(List<SystemSearch> searches) {
-		
-		return searchDao.batchUpdate(searches);
-	}
+    public int[] updateBatch(List<SystemSearch> searches) {
 
-	public List<SystemSearch> findList(SystemSearch search, String columnName, boolean asc) {
-		
-		return searchDao.query(search, new OrderBy(columnName, asc));
-	}
+        return searchDao.batchUpdate(searches);
+    }
 
-	public Pager<SystemSearch> findPager(int start, int limit, SystemSearch search, String columnName,
-			boolean asc) {
-		
-		return searchDao.queryPager(start, limit, search, new OrderBy(columnName, asc));
-	}
+    public List<SystemSearch> findList(SystemSearch search, String columnName, boolean asc) {
 
-   
+        return searchDao.query(search, new OrderBy(columnName, asc));
+    }
+
+    public Pager<SystemSearch> findPager(int start, int limit, SystemSearch search, String columnName,
+                                         boolean asc) {
+
+        return searchDao.queryPager(start, limit, search, new OrderBy(columnName, asc));
+    }
+
+
 }
 

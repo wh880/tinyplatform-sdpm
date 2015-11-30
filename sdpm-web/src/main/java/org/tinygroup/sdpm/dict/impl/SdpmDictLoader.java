@@ -15,17 +15,17 @@ import java.util.Map;
 /**
  * Created by wangll13383 on 2015/10/17.
  */
-public class SdpmDictLoader extends AbstractDictLoader{
+public class SdpmDictLoader extends AbstractDictLoader {
 
     private boolean isInitFromFile = true;
     private DictHandle dictHandle;
-    private Map<String,String> nodeMap = new HashMap<String, String>();
+    private Map<String, String> nodeMap = new HashMap<String, String>();
 
-    public  boolean isInitFromFile() {
+    public boolean isInitFromFile() {
         return isInitFromFile;
     }
 
-    public  void setIsInitFromFile(boolean isInitFromFile) {
+    public void setIsInitFromFile(boolean isInitFromFile) {
         this.isInitFromFile = isInitFromFile;
     }
 
@@ -34,34 +34,34 @@ public class SdpmDictLoader extends AbstractDictLoader{
     }
 
     public void load(DictManager dictManager) {
-        if(isInitFromFile){
+        if (isInitFromFile) {
             loadDictFromFile(dictManager);
-        }else{
+        } else {
             loadDictFromDB(dictManager);
         }
     }
 
-    public void loadDictFromFile(DictManager dictManager){
-        List<Dict> dicts = DictUtil.getDictFromFile(dictHandle.getDictNodeEntries(),nodeMap);
-        for(Dict dict : dicts){
-            this.putDict(dict.getName(),dict,dictManager);
+    public void loadDictFromFile(DictManager dictManager) {
+        List<Dict> dicts = DictUtil.getDictFromFile(dictHandle.getDictNodeEntries(), nodeMap);
+        for (Dict dict : dicts) {
+            this.putDict(dict.getName(), dict, dictManager);
         }
 
     }
 
-    public void loadDictFromDB(DictManager dictManager){
+    public void loadDictFromDB(DictManager dictManager) {
         List<Dict> dicts = DictUtil.mergeDict(nodeMap);
-        for(Dict dict : dicts){
-            this.putDict(dict.getName(),dict,dictManager);
+        for (Dict dict : dicts) {
+            this.putDict(dict.getName(), dict, dictManager);
         }
     }
 
-    public DictItem getDictItem(DictManager manager,String groupType, String key){
-        Dict dict = manager.getDict(nodeMap.get(groupType),null);
-        for(DictGroup group : dict.getDictGroupList()){
-            if(group.getName().equals(groupType)){
-                for(DictItem item : group.getItemList()){
-                    if(item.getValue().equals(key)){
+    public DictItem getDictItem(DictManager manager, String groupType, String key) {
+        Dict dict = manager.getDict(nodeMap.get(groupType), null);
+        for (DictGroup group : dict.getDictGroupList()) {
+            if (group.getName().equals(groupType)) {
+                for (DictItem item : group.getItemList()) {
+                    if (item.getValue().equals(key)) {
                         return item;
                     }
                 }
@@ -71,18 +71,18 @@ public class SdpmDictLoader extends AbstractDictLoader{
         return null;
     }
 
-    public DictGroup getDictGroup(DictManager manager,String groupType){
-        Dict dict = manager.getDict(nodeMap.get(groupType),null);
-        for(DictGroup group : dict.getDictGroupList()){
-            if(group.getName().equals(groupType)){
+    public DictGroup getDictGroup(DictManager manager, String groupType) {
+        Dict dict = manager.getDict(nodeMap.get(groupType), null);
+        for (DictGroup group : dict.getDictGroupList()) {
+            if (group.getName().equals(groupType)) {
                 return group;
             }
         }
         return null;
     }
 
-    public Dict getDict(DictManager manager,String dictType){
-        return manager.getDict(dictType,null);
+    public Dict getDict(DictManager manager, String dictType) {
+        return manager.getDict(dictType, null);
     }
 
 }

@@ -12,23 +12,23 @@ import java.util.List;
 @Service
 @Transactional
 public class TestResultManagerImpl implements TestResultManager {
-	
-	@Autowired
-	private QualityTestResultDao testresultdao;
-	
-	public List<QualityTestResult> findList(QualityTestResult testresult){
-		return testresultdao.query(testresult);
-	}
-	
-	public QualityTestResult find(int id){
-		return testresultdao.getByKey(id);
-	}
-	
-	public int update(QualityTestResult testresult){
-		return testresultdao.edit(testresult);
-	}
 
-	public QualityTestResult add(QualityTestResult qualityTestResult) {
-		return testresultdao.add(qualityTestResult);
-	}
+    @Autowired
+    private QualityTestResultDao testresultdao;
+
+    public List<QualityTestResult> findList(QualityTestResult testresult) {
+        return testresultdao.query(testresult);
+    }
+
+    public QualityTestResult find(int id) {
+        return testresultdao.getByKey(id);
+    }
+
+    public int update(QualityTestResult testresult) {
+        return testresultdao.edit(testresult);
+    }
+
+    public QualityTestResult add(QualityTestResult qualityTestResult) {
+        return testresultdao.add(qualityTestResult);
+    }
 }

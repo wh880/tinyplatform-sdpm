@@ -21,21 +21,23 @@ import javax.servlet.http.HttpServletResponse;
 public class QualityAction extends BaseController {
     @Autowired
     private ProductService productService;
+
     @RequestMapping("")
-    public String qualityAction(@CookieValue(value = "qualityProductId",defaultValue = "0") String qualityProductId,HttpServletRequest request,HttpServletResponse response){
-        if("0".equals(qualityProductId)&&ProductUtils.getAllProductListByUser().size()>0){
-            CookieUtils.setCookie(response,"qualityProductId",String.valueOf(ProductUtils.getAllProductListByUser().get(0).getProductId()));
+    public String qualityAction(@CookieValue(value = "qualityProductId", defaultValue = "0") String qualityProductId, HttpServletRequest request, HttpServletResponse response) {
+        if ("0".equals(qualityProductId) && ProductUtils.getAllProductListByUser().size() > 0) {
+            CookieUtils.setCookie(response, "qualityProductId", String.valueOf(ProductUtils.getAllProductListByUser().get(0).getProductId()));
         }
-        return "redirect:/a/quality/bug?status=tbugstatus"+(request.getQueryString()==null?"":("&"+request.getQueryString()));
+        return "redirect:/a/quality/bug?status=tbugstatus" + (request.getQueryString() == null ? "" : ("&" + request.getQueryString()));
 
     }
+
     @ResponseBody
     @RequestMapping("/changeProduct")
-    public boolean changeProduct(Integer productId,HttpServletRequest request){
-        if(productId!=null){
+    public boolean changeProduct(Integer productId, HttpServletRequest request) {
+        if (productId != null) {
             request.getSession().setAttribute("qualityProductId", productId);
             return true;
-        }else{
+        } else {
             request.getSession().removeAttribute("qualityProductId");
             return false;
         }

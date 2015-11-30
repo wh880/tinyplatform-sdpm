@@ -12,32 +12,32 @@ import java.util.List;
 @Service        //注解，告诉spring创建一个实现类的实例
 @Transactional  //开启事务
 public class CaseStepManagerImpl implements CaseStepManager {
-	@Autowired
-	private QualityCaseStepDao casestepdao;
-	
-	public QualityCaseStep find(Integer id){
-		return casestepdao.getByKey(id);
-	}
-	
-	public QualityCaseStep add(QualityCaseStep casestep){
-		
-		return casestepdao.add(casestep);
-	}
-	
-	public Integer delete(Integer id){
-		
-		return casestepdao.deleteByKeys(id);
-	}
-	
-	public List<QualityCaseStep> findList(QualityCaseStep casestep){
-		return casestepdao.query(casestep);
-	}
+    @Autowired
+    private QualityCaseStepDao casestepdao;
 
-	public int[] batchAdd(List<QualityCaseStep> qualityCaseSteps) {
-		return casestepdao.batchInsert(qualityCaseSteps);
-	}
+    public QualityCaseStep find(Integer id) {
+        return casestepdao.getByKey(id);
+    }
 
-	public Integer getMaxVersion(Integer caseId) {
-		return casestepdao.getMaxVersion(caseId);
-	}
+    public QualityCaseStep add(QualityCaseStep casestep) {
+
+        return casestepdao.add(casestep);
+    }
+
+    public Integer delete(Integer id) {
+
+        return casestepdao.deleteByKeys(id);
+    }
+
+    public List<QualityCaseStep> findList(QualityCaseStep casestep) {
+        return casestepdao.query(casestep);
+    }
+
+    public int[] batchAdd(List<QualityCaseStep> qualityCaseSteps) {
+        return casestepdao.batchInsert(qualityCaseSteps);
+    }
+
+    public Integer getMaxVersion(Integer caseId) {
+        return casestepdao.getMaxVersion(caseId);
+    }
 }

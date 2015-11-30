@@ -26,6 +26,7 @@ public class MenuUtils {
 
     /**
      * 获取一级菜单，带权限过滤
+     *
      * @param parentId
      * @return
      */

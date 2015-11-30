@@ -8,13 +8,14 @@ import java.util.List;
 /**
  * Created by Administrator on 2015-09-18.
  */
-public interface FaqManager { /**
- * 根据主键id查找faq
- *
- * @param id 主键
- * @return
- */
-ServiceFaq find(Integer id);
+public interface FaqManager {
+    /**
+     * 根据主键id查找faq
+     *
+     * @param id 主键
+     * @return
+     */
+    ServiceFaq find(Integer id);
 
     /**
      * 根据条件查询List

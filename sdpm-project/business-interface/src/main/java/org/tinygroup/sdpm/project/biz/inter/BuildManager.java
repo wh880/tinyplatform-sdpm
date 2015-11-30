@@ -19,7 +19,8 @@ public interface BuildManager {
      * @param build
      * @return
      */
-     Integer softDelete(ProjectBuild build);
+    Integer softDelete(ProjectBuild build);
+
     /**
      * 根据产品id进行软删删除
      *
@@ -27,6 +28,7 @@ public interface BuildManager {
      * @return
      */
     Integer deleteBuildByProductId(Integer productId);
+
     /**
      * 根据主键id查找
      *
@@ -53,7 +55,7 @@ public interface BuildManager {
      * @param asc
      * @return
      */
-     Pager<ProjectBuild> findPager(ProjectBuild build, Integer start, Integer limit, String order, boolean asc);
+    Pager<ProjectBuild> findPager(ProjectBuild build, Integer start, Integer limit, String order, boolean asc);
 
     /**
      * 新增有一个版本
@@ -79,56 +81,71 @@ public interface BuildManager {
      */
     Integer delete(int id);
 
-     int[] batchDelBuildByIds(List<ProjectBuild> keys);
-    
+    int[] batchDelBuildByIds(List<ProjectBuild> keys);
+
     /**
      * 需求列表
+     *
      * @param projectBuild
      * @return
      */
-     List<ProjectBuild> findStoryList(ProjectBuild projectBuild);
+    List<ProjectBuild> findStoryList(ProjectBuild projectBuild);
 
-     Pager<ProductStory> findBuildStory(int start, int limit, Integer buildId);
-     Pager<ProductStory> findNoBuildStory(int start, int limit, String condition, Integer buildId) ;
+    Pager<ProductStory> findBuildStory(int start, int limit, Integer buildId);
+
+    Pager<ProductStory> findNoBuildStory(int start, int limit, String condition, Integer buildId);
+
     /**
      * 删除关联
+     *
      * @param storyId，buildId
      * @return
      */
-     Integer deleteBuildStory(Integer storyId, Integer buildId);
+    Integer deleteBuildStory(Integer storyId, Integer buildId);
+
     /**
      * 关联需求
+     *
      * @param storyId，buildId
      * @return
      */
-     Integer linkBuildStory(Integer storyId, Integer buildId);
-     Pager<QualityBug> findNoBuildBug(int start, int limit, String condition, Integer buildId);
-     Pager<QualityBug> findBuildBug(int start, int limit, Integer buildId);
+    Integer linkBuildStory(Integer storyId, Integer buildId);
+
+    Pager<QualityBug> findNoBuildBug(int start, int limit, String condition, Integer buildId);
+
+    Pager<QualityBug> findBuildBug(int start, int limit, Integer buildId);
+
     /**
      * 删除关联
+     *
      * @param storyId，buildId
      * @return
      */
-     Integer deleteBuildBug(Integer storyId, Integer buildId);
+    Integer deleteBuildBug(Integer storyId, Integer buildId);
+
     /**
      * 关联需求
+     *
      * @param storyId，buildId
      * @return
      */
-     Integer linkBuildBug(Integer storyId, Integer buildId);
+    Integer linkBuildBug(Integer storyId, Integer buildId);
+
     /**
      * 关联需求
+     *
      * @param buildId
      * @return
      */
-     Pager<QualityBug> findBuildLegacyBug(int start, int limit, Integer buildId);
+    Pager<QualityBug> findBuildLegacyBug(int start, int limit, Integer buildId);
 
-    List<ProjectBuild> getBuildByIds(String...ids);
+    List<ProjectBuild> getBuildByIds(String... ids);
 
     List<ProjectBuild> getBuildByProducts(Integer... ids);
 
     /**
      * 根据输入名称和产品查询
+     *
      * @param condition
      * @param productId
      * @return

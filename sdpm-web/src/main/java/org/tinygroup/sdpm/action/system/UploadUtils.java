@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
 
 public class UploadUtils {
 
-	 /**
+    /**
      * 日期格式化对象
      */
     public static final DateFormat MONTH_FORMAT = new SimpleDateFormat(
@@ -39,7 +39,7 @@ public class UploadUtils {
 
     /**
      * Sanitizes a filename from certain chars.<br />
-     * <p/>
+     * <p>
      * This method enforces the <code>forceSingleExtension</code> property and
      * then replaces all occurrences of \, /, |, :, ?, *, &quot;, &lt;, &gt;,
      * control chars by _ (underscore).
@@ -60,7 +60,7 @@ public class UploadUtils {
 
     /**
      * Sanitizes a folder name from certain chars.<br />
-     * <p/>
+     * <p>
      * This method replaces all occurrences of \, /, |, :, ?, *, &quot;, &lt;,
      * &gt;, control chars by _ (underscore).
      *
@@ -123,7 +123,7 @@ public class UploadUtils {
      */
     public static boolean checkDirAndCreate(File dir) {
         if (!dir.exists())
-           return dir.mkdirs();
+            return dir.mkdirs();
         return false;
     }
 

@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Created by MCK on 2015/10/23.
  */
-public class QualityBugCall implements Serializable{
+public class QualityBugCall implements Serializable {
     /**
      * 产品名
      */

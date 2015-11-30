@@ -7,7 +7,7 @@ import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
  * Created by wangll13383 on 2015/10/15.
  */
 @XStreamAlias("dictItem")
-public class DictItem{
+public class DictItem {
     @XStreamAsAttribute
     private String key;
     @XStreamAsAttribute

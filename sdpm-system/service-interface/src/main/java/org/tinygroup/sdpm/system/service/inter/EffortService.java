@@ -9,10 +9,12 @@ import java.util.List;
 public interface EffortService {
     /**
      * 批量保存
+     *
      * @param list
      * @return
      */
     Integer batchEffortSave(List<SystemEffort> list);
+
     /**
      * 保存日志
      *
@@ -71,6 +73,7 @@ public interface EffortService {
      * @return
      */
     Integer batchDelete(Integer... ids);
+
     /**
      * @param start
      * @param limit

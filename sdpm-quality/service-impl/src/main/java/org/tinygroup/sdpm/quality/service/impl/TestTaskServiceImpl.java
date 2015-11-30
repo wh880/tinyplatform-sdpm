@@ -11,35 +11,35 @@ import java.util.List;
 
 @Component
 public class TestTaskServiceImpl implements TestTaskService {
-	
-	@Autowired
-	private TestTaskManager testtaskmanager;
-	
-	public List<QualityTestTask> findTestTaskList(QualityTestTask testtask){
-		return testtaskmanager.findList(testtask);
-	}
-	
-	public QualityTestTask findById(Integer id){
-		return testtaskmanager.find(id);
-	}
-	
-	public QualityTestTask addTestTask(QualityTestTask testtask){
-		return testtaskmanager.add(testtask);
-	}
-	
-	public int updateTestTask(QualityTestTask testtask){
-		return testtaskmanager.update(testtask);
-	}
-	
-	public int deleteById(int id){
-		return testtaskmanager.delete(id);
-	}
-	
-	public Pager<QualityTestTask> findTestTaskPager(Integer start,Integer limit,QualityTestTask testtask,String condition,String sortName,boolean asc){
-		return testtaskmanager.findPager(start, limit, testtask, condition, sortName, asc);
-	}
 
-	public Pager<QualityTestTask> findTestTaskPager(Integer start, Integer limit, QualityTestTask testtask, String sortName, boolean asc) {
-		return testtaskmanager.findPager(start,limit,testtask,null,sortName,asc);
-	}
+    @Autowired
+    private TestTaskManager testtaskmanager;
+
+    public List<QualityTestTask> findTestTaskList(QualityTestTask testtask) {
+        return testtaskmanager.findList(testtask);
+    }
+
+    public QualityTestTask findById(Integer id) {
+        return testtaskmanager.find(id);
+    }
+
+    public QualityTestTask addTestTask(QualityTestTask testtask) {
+        return testtaskmanager.add(testtask);
+    }
+
+    public int updateTestTask(QualityTestTask testtask) {
+        return testtaskmanager.update(testtask);
+    }
+
+    public int deleteById(int id) {
+        return testtaskmanager.delete(id);
+    }
+
+    public Pager<QualityTestTask> findTestTaskPager(Integer start, Integer limit, QualityTestTask testtask, String condition, String sortName, boolean asc) {
+        return testtaskmanager.findPager(start, limit, testtask, condition, sortName, asc);
+    }
+
+    public Pager<QualityTestTask> findTestTaskPager(Integer start, Integer limit, QualityTestTask testtask, String sortName, boolean asc) {
+        return testtaskmanager.findPager(start, limit, testtask, null, sortName, asc);
+    }
 }

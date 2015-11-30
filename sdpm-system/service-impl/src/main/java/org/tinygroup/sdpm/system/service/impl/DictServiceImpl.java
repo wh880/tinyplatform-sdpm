@@ -11,56 +11,56 @@ import java.util.List;
 
 @Component
 public class DictServiceImpl implements DictService {
-	
-	@Autowired
-	private DictManager dictManager;
-	
-	public SystemDict addDict(SystemDict dict) {
 
-		return dictManager.add(dict);
-	}
+    @Autowired
+    private DictManager dictManager;
 
-	public int deleteDict(Integer dictId) {
+    public SystemDict addDict(SystemDict dict) {
 
-		return dictManager.delete(dictId);
-	}
+        return dictManager.add(dict);
+    }
 
-	public int updateDict(SystemDict dict) {
+    public int deleteDict(Integer dictId) {
 
-		return dictManager.update(dict);
-	}
+        return dictManager.delete(dictId);
+    }
 
-	public SystemDict findDict(Integer dictId) {
+    public int updateDict(SystemDict dict) {
 
-		return dictManager.find(dictId);
-	}
+        return dictManager.update(dict);
+    }
 
-	public List<SystemDict> findDictList(SystemDict dict) {
+    public SystemDict findDict(Integer dictId) {
 
-		return dictManager.findList(dict);
-	}
+        return dictManager.find(dictId);
+    }
 
-	public Pager<SystemDict> findDictPager(int start, int limit, SystemDict dict, String columnName, boolean asc) {
+    public List<SystemDict> findDictList(SystemDict dict) {
 
-		return dictManager.findPager(start, limit, dict, columnName, asc);
-	}
+        return dictManager.findList(dict);
+    }
 
-	public int[] updateBatchDict(List<SystemDict> dicts) {
+    public Pager<SystemDict> findDictPager(int start, int limit, SystemDict dict, String columnName, boolean asc) {
 
-		return dictManager.updateBatch(dicts);
-	}
+        return dictManager.findPager(start, limit, dict, columnName, asc);
+    }
 
-	public int batchDelete(Integer... ids) {
-		return dictManager.bechDelete(ids);
-	}
+    public int[] updateBatchDict(List<SystemDict> dicts) {
 
-	public void deleteAllDict() {
-		dictManager.deleteAll();
-	}
+        return dictManager.updateBatch(dicts);
+    }
 
-	public List<SystemDict> findDictListByOder(SystemDict dict, String columnName, boolean asc) {
-		return dictManager.findList(dict,columnName,asc);
-	}
+    public int batchDelete(Integer... ids) {
+        return dictManager.bechDelete(ids);
+    }
+
+    public void deleteAllDict() {
+        dictManager.deleteAll();
+    }
+
+    public List<SystemDict> findDictListByOder(SystemDict dict, String columnName, boolean asc) {
+        return dictManager.findList(dict, columnName, asc);
+    }
 
 
 }

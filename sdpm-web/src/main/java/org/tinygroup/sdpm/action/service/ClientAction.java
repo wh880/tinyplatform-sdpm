@@ -55,13 +55,12 @@ public class ClientAction extends BaseController {
     }
 
     /**
-     *
-     * @param limit 分页的记录限制
-     * @param start 分页的当前页
+     * @param limit     分页的记录限制
+     * @param start     分页的当前页
      * @param client
      * @param model
-     * @param treeId 左侧树对应产品的
-     * @param order 排序
+     * @param treeId    左侧树对应产品的
+     * @param order     排序
      * @param ordertype
      * @return
      */
@@ -82,6 +81,7 @@ public class ClientAction extends BaseController {
 
     /**
      * 从表中读取数据跳到新建或编辑页面
+     *
      * @param id
      * @param model
      * @return
@@ -98,6 +98,7 @@ public class ClientAction extends BaseController {
 
     /**
      * 客户信息编辑
+     *
      * @param id
      * @param model
      * @return
@@ -114,6 +115,7 @@ public class ClientAction extends BaseController {
 
     /**
      * 客户信息保存
+     *
      * @param client
      * @param model
      * @return
@@ -139,6 +141,7 @@ public class ClientAction extends BaseController {
 
     /**
      * 删除客户
+     *
      * @param id
      * @return
      */
@@ -153,6 +156,7 @@ public class ClientAction extends BaseController {
 
     /**
      * 批量删除
+     *
      * @param ids
      * @return
      */
@@ -176,6 +180,7 @@ public class ClientAction extends BaseController {
 
     /**
      * 显示客户信息和客户绑定协议的信息
+     *
      * @param id
      * @param model
      * @return
@@ -199,6 +204,7 @@ public class ClientAction extends BaseController {
 
     /**
      * 删除客户绑定的协议
+     *
      * @param id
      * @return
      */
@@ -210,8 +216,10 @@ public class ClientAction extends BaseController {
         return resultMap(true, "删除成功");
     }
 
-    /**协议具体内容
+    /**
+     * 协议具体内容
      * 显示
+     *
      * @param id
      * @param model
      * @return
@@ -226,7 +234,8 @@ public class ClientAction extends BaseController {
     }
 
     /**
-     *删除客户联系人
+     * 删除客户联系人
+     *
      * @param id
      * @return
      */
@@ -240,6 +249,7 @@ public class ClientAction extends BaseController {
 
     /**
      * 客户联系人编辑
+     *
      * @param id
      * @param clientId
      * @param model
@@ -261,6 +271,7 @@ public class ClientAction extends BaseController {
 
     /**
      * 客户联系人编辑
+     *
      * @param clientUser
      * @return
      */
@@ -276,6 +287,7 @@ public class ClientAction extends BaseController {
 
     /**
      * 客户绑定协议
+     *
      * @param id
      * @param model
      * @return
@@ -294,6 +306,7 @@ public class ClientAction extends BaseController {
 
     /**
      * 协议保存
+     *
      * @param sla
      * @return
      */
@@ -328,6 +341,7 @@ public class ClientAction extends BaseController {
 
     /**
      * 实现左树
+     *
      * @return
      */
     @ResponseBody

@@ -8,61 +8,70 @@ import java.util.List;
 import java.util.Map;
 
 public interface BugManager {
-	/**
-	* 根据主键ID查询
-	 * @param id
-	 * @return
-	 */
-	QualityBug find(Integer id);
-	
-	/**
-	 * 根据条件查询d
-	 * @param bug
-	 * @return
-	 */
-	List<QualityBug> findList(QualityBug type);	
-	
-	/**
-	 * 分页查询
-	 * @return
-	 */
-	Pager<QualityBug> findPager(Integer start,Integer limit,String conditions,QualityBug bug,String sortName,boolean asc);
-	
-	/**
-	 * 提Bug
-	 * @param bug
-	 * @return
-	 */
-	QualityBug add(QualityBug bug);
+    /**
+     * 根据主键ID查询
+     *
+     * @param id
+     * @return
+     */
+    QualityBug find(Integer id);
 
-	/**
-	 * 修改
-	 * @param bug
-	 * @return
-	 */
-	Integer update(QualityBug bug);
-	/**
-	 * 批量编辑
-	 * @param bugs
-	 * @return
-	 */
-	int[] batchUpdate(List<QualityBug> bugs);
-	
-	/**
-	 * 批量删除
-	 * @param bugIds
-	 * @return
-	 */
-	int[] batchDelete(List<QualityBug> bugIds);
-	
-	/**
-	 * 删除
-	 * @param bug
-	 * @return
-	 */
-	Integer delete(Integer id);
-	
-	Map<String,List<BugCount>> report(String code,Integer productId);
+    /**
+     * 根据条件查询d
+     *
+     * @param bug
+     * @return
+     */
+    List<QualityBug> findList(QualityBug type);
 
-	Pager<QualityBug> queryStoryChangedBugs(Integer start,Integer limit,String conditions,QualityBug bug,String sortName,boolean asc);
+    /**
+     * 分页查询
+     *
+     * @return
+     */
+    Pager<QualityBug> findPager(Integer start, Integer limit, String conditions, QualityBug bug, String sortName, boolean asc);
+
+    /**
+     * 提Bug
+     *
+     * @param bug
+     * @return
+     */
+    QualityBug add(QualityBug bug);
+
+    /**
+     * 修改
+     *
+     * @param bug
+     * @return
+     */
+    Integer update(QualityBug bug);
+
+    /**
+     * 批量编辑
+     *
+     * @param bugs
+     * @return
+     */
+    int[] batchUpdate(List<QualityBug> bugs);
+
+    /**
+     * 批量删除
+     *
+     * @param bugIds
+     * @return
+     */
+    int[] batchDelete(List<QualityBug> bugIds);
+
+    /**
+     * 删除
+     *
+     * @param bug
+     * @return
+     */
+    Integer delete(Integer id);
+
+    Map<String, List<BugCount>> report(String code, Integer productId);
+
+    Pager<QualityBug> queryStoryChangedBugs(Integer start, Integer limit, String conditions, QualityBug bug, String sortName, boolean asc);
 }

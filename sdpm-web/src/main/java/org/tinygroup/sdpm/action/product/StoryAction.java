@@ -343,7 +343,7 @@ public class StoryAction extends BaseController {
 
         ProductStory productStory = storyService.findStory(storyId);
         List<ServiceRequest> requests = requestService.getRequestList(null);
-        model.addAttribute("requestList",requests);
+        model.addAttribute("requestList", requests);
         model.addAttribute("story", productStory);
         return "/product/page/tabledemo/editbaseinfo.pagelet";
     }
@@ -981,12 +981,12 @@ public class StoryAction extends BaseController {
 
     @ResponseBody
     @RequestMapping("ajax/storyInCondition")
-    public List<ProductStory> userInCondition(String key, Integer initKey, Integer productId, HttpServletRequest request){
-        if(initKey!=null){
+    public List<ProductStory> userInCondition(String key, Integer initKey, Integer productId, HttpServletRequest request) {
+        if (initKey != null) {
             List<ProductStory> result = new ArrayList<ProductStory>();
             result.add(storyService.findStory(initKey));
             return result;
         }
-        return storyService.storyInCondition(key, productId==null?Integer.parseInt(CookieUtils.getCookie(request,ProductUtils.COOKIE_PRODUCT_ID)):productId);
+        return storyService.storyInCondition(key, productId == null ? Integer.parseInt(CookieUtils.getCookie(request, ProductUtils.COOKIE_PRODUCT_ID)) : productId);
     }
 }

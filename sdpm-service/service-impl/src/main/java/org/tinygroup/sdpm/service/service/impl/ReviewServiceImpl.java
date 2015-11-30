@@ -18,6 +18,7 @@ public class ReviewServiceImpl implements ReviewService {
     private ReviewManager reviewManager;
     @Autowired
     private RequestManager requestManager;
+
     public ServiceReview findReview(Integer id) {
         return reviewManager.find(id);
     }

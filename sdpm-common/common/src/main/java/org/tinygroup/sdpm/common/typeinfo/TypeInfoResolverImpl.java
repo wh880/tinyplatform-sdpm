@@ -15,13 +15,13 @@ public class TypeInfoResolverImpl implements TypeInfoResolver {
 
     private static Map<String, TypeInfo> typeDict = new ConcurrentHashMap<String, TypeInfo>();
 
-    private  Map<String,String> pathRecord = new ConcurrentHashMap<String, String>();
+    private Map<String, String> pathRecord = new ConcurrentHashMap<String, String>();
 
-    public void addTypeInfo(TypeInfos typeInfos,String filePath) {
-        if(typeInfos!=null) {
+    public void addTypeInfo(TypeInfos typeInfos, String filePath) {
+        if (typeInfos != null) {
             for (TypeInfo typeinfo : typeInfos.getTypeInfoList()) {
                 typeDict.put(typeinfo.getTypesName(), typeinfo);
-                pathRecord.put(typeinfo.getTypesName(),filePath);
+                pathRecord.put(typeinfo.getTypesName(), filePath);
             }
         }
     }
@@ -31,7 +31,7 @@ public class TypeInfoResolverImpl implements TypeInfoResolver {
     }
 
     public void removeTypeInfo(TypeInfos typeInfos) {
-        if(typeInfos!=null) {
+        if (typeInfos != null) {
             for (TypeInfo typeinfo : typeInfos.getTypeInfoList()) {
                 typeDict.remove(typeinfo.getTypesName());
                 pathRecord.remove(typeinfo.getTypesName());

@@ -9,15 +9,17 @@ import org.tinygroup.sdpm.system.dao.pojo.SystemHistory;
 import org.tinygroup.sdpm.system.service.inter.HistoryService;
 
 import java.util.List;
+
 @Controller
 @RequestMapping("a/system/history")
-public class HistoryAction extends BaseController{
-	@Autowired
-	private HistoryService historyService;
-	@RequestMapping("find")
-	public String find(SystemHistory history,Model model){
-		List<SystemHistory> histories = historyService.findSystemHistory(history);
-		model.addAttribute("history", histories);
-		return "/product/page/tabledemo/historyrecord.pagelet";
-	}
+public class HistoryAction extends BaseController {
+    @Autowired
+    private HistoryService historyService;
+
+    @RequestMapping("find")
+    public String find(SystemHistory history, Model model) {
+        List<SystemHistory> histories = historyService.findSystemHistory(history);
+        model.addAttribute("history", histories);
+        return "/product/page/tabledemo/historyrecord.pagelet";
+    }
 }

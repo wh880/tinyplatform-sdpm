@@ -52,6 +52,7 @@ public class FaqAction extends BaseController {
 
     /**
      * 保存
+     *
      * @param faq
      * @param model
      * @return
@@ -69,6 +70,7 @@ public class FaqAction extends BaseController {
 
     /**
      * 把faqmenu页面的所有问题都查询出来*
+     *
      * @param serviceFaq
      * @param id
      * @param faqQuestion
@@ -96,6 +98,7 @@ public class FaqAction extends BaseController {
 
     /**
      * 删除
+     *
      * @param id
      * @return
      */
@@ -108,6 +111,7 @@ public class FaqAction extends BaseController {
 
     /**
      * 点击问题进去，显示里面的问题和答案。由faqquestion.page跳转过来。
+     *
      * @param id
      * @param model
      * @return
@@ -121,6 +125,7 @@ public class FaqAction extends BaseController {
 
     /**
      * 点击问题进去，显示里面的编辑和删除，2015-10-16,将bese.menu.xml中地址直接跳转到form
+     *
      * @param id
      * @param model
      * @return
@@ -137,6 +142,7 @@ public class FaqAction extends BaseController {
 
     /**
      * 实现faq里面的左侧树,对树的节点进行新增
+     *
      * @param faqParentTypeId
      * @param faqType
      * @return
@@ -171,6 +177,7 @@ public class FaqAction extends BaseController {
 
     /**
      * 树里面的节点的删除
+     *
      * @param faqTypeId
      * @return
      */
@@ -183,6 +190,7 @@ public class FaqAction extends BaseController {
 
     /**
      * faq左侧树的数据来源
+     *
      * @param check
      * @return
      */

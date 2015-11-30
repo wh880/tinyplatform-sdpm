@@ -42,7 +42,7 @@ public class StoryServiceImpl implements StoryService {
     }
 
     public ProductStory findStory(Integer storyId) {
-        if(storyId == null){
+        if (storyId == null) {
             return null;
         }
         return storyManager.find(storyId);
@@ -64,7 +64,7 @@ public class StoryServiceImpl implements StoryService {
 
     public List<ProductStory> findStoryList(Integer... storyId) {
 
-        return storyManager.findList(false,storyId);
+        return storyManager.findList(false, storyId);
     }
 
     public List<ProductStory> findStoryList(ProductStory story) {
@@ -112,22 +112,22 @@ public class StoryServiceImpl implements StoryService {
         return storyManager.findPager(start, limit, story, condition, columnName, asc);
     }
 
-    public Pager<ProductStory> findProjectLinkedStory(int start, int limit,ProductStory story, String condition, String columnName, boolean asc) {
-        return storyManager.findProjectLinkedStory(start,limit,story,condition,columnName,asc);
+    public Pager<ProductStory> findProjectLinkedStory(int start, int limit, ProductStory story, String condition, String columnName, boolean asc) {
+        return storyManager.findProjectLinkedStory(start, limit, story, condition, columnName, asc);
     }
 
     public Pager<ProductStory> findStoryByCondition(int start, int limit, ProductStory story, ConditionCarrier carrier, final String columnName, boolean asc) {
         carrier.completeModuleFunction(new CallBackFunction() {
-            public boolean process(ConditionCarrier carrier, String field,String relation) {
+            public boolean process(ConditionCarrier carrier, String field, String relation) {
                 String result = "";
-                if(ConditionUtils.CommonFieldType.MODULE.getOperate().equals(carrier.getFieldType(field))){
-                    String moduleId = (String)carrier.getValue(field)[0];
-                    if(moduleId.contains("p")){
-                        result = ModuleUtil.getConditionByRoot(Integer.parseInt(moduleId.substring(1)),"story");
-                    }else{
+                if (ConditionUtils.CommonFieldType.MODULE.getOperate().equals(carrier.getFieldType(field))) {
+                    String moduleId = (String) carrier.getValue(field)[0];
+                    if (moduleId.contains("p")) {
+                        result = ModuleUtil.getConditionByRoot(Integer.parseInt(moduleId.substring(1)), "story");
+                    } else {
                         result = ModuleUtil.getCondition(Integer.parseInt(moduleId));
                     }
-                    carrier.setCondition(field,result,carrier.DEFAULT_RELATION);
+                    carrier.setCondition(field, result, carrier.DEFAULT_RELATION);
                     return true;
                 }
                 return false;
@@ -135,19 +135,19 @@ public class StoryServiceImpl implements StoryService {
         });
         carrier.completeCustomFunction(new CallBackFunction() {
             public boolean process(ConditionCarrier carrier, String field, String relation) {
-                if(ConditionUtils.CommonFieldType.STATUS.getOperate().equals(carrier.getFieldType(field))){
-                    String statusCondition = (String)carrier.getValue(field)[0];
-                    carrier.setCondition(field,statusCondition,carrier.DEFAULT_RELATION);
+                if (ConditionUtils.CommonFieldType.STATUS.getOperate().equals(carrier.getFieldType(field))) {
+                    String statusCondition = (String) carrier.getValue(field)[0];
+                    carrier.setCondition(field, statusCondition, carrier.DEFAULT_RELATION);
                     return true;
                 }
                 return false;
             }
         });
-        return storyManager.findPager(start,limit,story,carrier.resultCondition(),columnName,asc);
+        return storyManager.findPager(start, limit, story, carrier.resultCondition(), columnName, asc);
     }
 
     public List<ProductStory> storyInCondition(String condition, Integer productId) {
-        return storyManager.storyInCondition(condition,productId);
+        return storyManager.storyInCondition(condition, productId);
     }
 
 }

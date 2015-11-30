@@ -91,6 +91,7 @@ public interface TeamManager {
 
     /**
      * 根据用户和项目Id获取团队成员拥有的菜单
+     *
      * @param projectId
      * @param userId
      * @return
@@ -99,6 +100,7 @@ public interface TeamManager {
 
     /**
      * 根据用户和产品Id获取团队成员拥有的菜单
+     *
      * @param productId
      * @param userId
      * @return

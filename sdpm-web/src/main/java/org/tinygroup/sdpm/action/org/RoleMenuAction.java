@@ -23,6 +23,7 @@ public class RoleMenuAction extends BaseController {
 
     /**
      * 保存菜单的权限
+     *
      * @param roleId
      * @param menuId
      * @param parentId
@@ -38,6 +39,7 @@ public class RoleMenuAction extends BaseController {
 
     /**
      * 显示角色拥有的权限
+     *
      * @param parentId
      * @param roleId
      * @param model

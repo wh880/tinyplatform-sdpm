@@ -70,7 +70,7 @@ public class TaskManagerImpl implements TaskManager {
         if (maxNo == null) {
             maxNo = 0;
         }
-        task.setTaskNo(maxNo+1);
+        task.setTaskNo(maxNo + 1);
         return taskDao.add(task);
     }
 

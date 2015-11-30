@@ -11,43 +11,43 @@ import java.util.List;
 
 @Component
 public class StorySpecServiceImpl implements StorySpecService {
-	
-	@Autowired
-	private StorySpecManager storySpecManager;
-	
-	public ProductStorySpec findStorySpec(Integer storyId,Integer version) {
 
-		return storySpecManager.find(storyId,version);
-	}
+    @Autowired
+    private StorySpecManager storySpecManager;
 
-	public List<ProductStorySpec> findStorySpecList(ProductStorySpec storySpec,String order,String ordertype) {
-		
-		return storySpecManager.findList(storySpec, order, ordertype);
-	}
+    public ProductStorySpec findStorySpec(Integer storyId, Integer version) {
 
-	public Pager<ProductStorySpec> findStorySpecPager(int page, int limit, ProductStorySpec storySpec,String order,String ordertype) {
-		
-		return storySpecManager.findPager(page, limit, storySpec, order, ordertype);
-	}
+        return storySpecManager.find(storyId, version);
+    }
 
-	public List<ProductStorySpec> findStorySpecList(Integer... storyspecId) {
+    public List<ProductStorySpec> findStorySpecList(ProductStorySpec storySpec, String order, String ordertype) {
 
-		return storySpecManager.findList(storyspecId);
-	}
+        return storySpecManager.findList(storySpec, order, ordertype);
+    }
 
-	public int getNewStoryVersion(Integer storyId) {
+    public Pager<ProductStorySpec> findStorySpecPager(int page, int limit, ProductStorySpec storySpec, String order, String ordertype) {
 
-		return storySpecManager.getNewStoryVersion(storyId);
-	}
+        return storySpecManager.findPager(page, limit, storySpec, order, ordertype);
+    }
 
-	public Integer getMaxVersion(Integer storyId) {
-		return storySpecManager.getMaxVersion(storyId);
-	}
+    public List<ProductStorySpec> findStorySpecList(Integer... storyspecId) {
 
-	public ProductStorySpec add(ProductStorySpec storySpec) {
+        return storySpecManager.findList(storyspecId);
+    }
 
-		return storySpecManager.add(storySpec);
-	}
+    public int getNewStoryVersion(Integer storyId) {
+
+        return storySpecManager.getNewStoryVersion(storyId);
+    }
+
+    public Integer getMaxVersion(Integer storyId) {
+        return storySpecManager.getMaxVersion(storyId);
+    }
+
+    public ProductStorySpec add(ProductStorySpec storySpec) {
+
+        return storySpecManager.add(storySpec);
+    }
 
 
 }

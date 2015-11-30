@@ -26,6 +26,7 @@ public class Obtain {
     @XStreamAsAttribute
     @XStreamAlias("InfoUrl")
     private String url;
+
     public String getPrimaryName() {
         return primaryName;
     }

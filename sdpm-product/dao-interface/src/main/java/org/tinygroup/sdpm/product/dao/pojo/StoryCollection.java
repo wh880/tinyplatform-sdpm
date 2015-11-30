@@ -3,27 +3,26 @@ package org.tinygroup.sdpm.product.dao.pojo;
 import java.io.Serializable;
 import java.util.List;
 
-public class StoryCollection implements Serializable{
-	
-	private List<ProductStory> productStories;
+public class StoryCollection implements Serializable {
 
-	public StoryCollection(List<ProductStory> productStories) {
-		super();
-		this.productStories = productStories;
-	}
+    private List<ProductStory> productStories;
 
-	public StoryCollection() {
-		super();
-	}
+    public StoryCollection(List<ProductStory> productStories) {
+        super();
+        this.productStories = productStories;
+    }
 
-	public List<ProductStory> getProductStories() {
-		return productStories;
-	}
+    public StoryCollection() {
+        super();
+    }
 
-	public void setProductStories(List<ProductStory> productStories) {
-		this.productStories = productStories;
-	}
-	
-	
-	
+    public List<ProductStory> getProductStories() {
+        return productStories;
+    }
+
+    public void setProductStories(List<ProductStory> productStories) {
+        this.productStories = productStories;
+    }
+
+
 }

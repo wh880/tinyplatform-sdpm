@@ -21,79 +21,66 @@ import java.util.Date;
 
 /**
  * 日志表
- *
  */
 public class SystemEffort implements Serializable {
 
     /**
      * 日志编号
-     *
      */
     private Integer effortId;
 
     /**
      * 所属项目
-     *
      */
     private Integer effortProject;
 
     /**
      * 所属产品
-     *
      */
     private String effortProduct;
 
     /**
      * 工作内容
-     *
      */
     private String effortWork;
 
     /**
      * 耗时
-     *
      */
     private Float effortConsumed;
 
     /**
      * 日期
-     *
      */
     private Date effortDate;
 
     /**
      * 剩余
-     *
      */
     private Float effortLeft;
 
     /**
      * 开始
-     *
      */
     private String effortBegin;
 
     /**
      * 已关闭
-     *
      */
     private String effortEnd;
 
     /**
      * 对象ID
-     *
      */
     private Integer effortObjectId;
 
     /**
      * 日志对象
-     *
      */
     private String effortObjectType;
 
     /**
      * 登记人
-     *
      */
     private String effortAccount;
 

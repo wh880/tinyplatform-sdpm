@@ -147,7 +147,7 @@ public class UserAction extends BaseController {
      */
     @RequiresPermissions("organizationAddUser")
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String save(OrgUser user,Integer[] roleIds, Model model, String password1, String password2) {
+    public String save(OrgUser user, Integer[] roleIds, Model model, String password1, String password2) {
         if (StringUtil.isBlank(user.getOrgUserId())) {
             if (password1.equals(password2)) {
                 user.setOrgUserPassword(password1);
@@ -158,9 +158,9 @@ public class UserAction extends BaseController {
                         , UserUtils.getUserId()
                         , null, null, null, null, null);
 
-                roleService.batchAddRolesToUser(userTemp.getOrgUserId(),roleIds);
+                roleService.batchAddRolesToUser(userTemp.getOrgUserId(), roleIds);
             } else {
-                addMessage(model,"密码验证不正确");
+                addMessage(model, "密码验证不正确");
                 return "organization/user/addUser.page";
             }
         } else {

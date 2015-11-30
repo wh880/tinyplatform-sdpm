@@ -19,40 +19,40 @@ import java.util.List;
 @Transactional
 public class TestRunManagerImpl implements TestRunManager {
 
-		@Autowired
-		private QualityTestRunDao testrundao;
-		
-		public List<QualityTestRun> findList(QualityTestRun testrun){
-			return testrundao.query(testrun);
-		}
-		
-		public int update(QualityTestRun testrun){
-			return testrundao.edit(testrun);
-		}
-		
-		public int[] batchUpdate(List<QualityTestRun> testruns){
-			QualityTestRun testrun = new QualityTestRun();
-			testrun.setTestRunLastRunDate(new Date());
-			return testrundao.batchUpdate(testruns);
-		}
+    @Autowired
+    private QualityTestRunDao testrundao;
 
-	public QualityTestRun add(QualityTestRun run) {
-		return testrundao.add(run);
-	}
+    public List<QualityTestRun> findList(QualityTestRun testrun) {
+        return testrundao.query(testrun);
+    }
 
-	public QualityTestRun findRunById(Integer id) {
-		return testrundao.getByKey(id);
-	}
+    public int update(QualityTestRun testrun) {
+        return testrundao.edit(testrun);
+    }
 
-	public int delete(Integer runId) {
-		return testrundao.deleteByKey(runId);
-	}
+    public int[] batchUpdate(List<QualityTestRun> testruns) {
+        QualityTestRun testrun = new QualityTestRun();
+        testrun.setTestRunLastRunDate(new Date());
+        return testrundao.batchUpdate(testruns);
+    }
 
-	public Pager<QualityTestRun> findPager(Integer start, Integer limit, QualityTestRun testRun,String condition, String sortName, boolean asc) {
-		Condition condition1 = StringUtil.isBlank(condition)?null: FragmentSql.fragmentCondition(condition);
-		if(StringUtil.isBlank(sortName)){
-			return testrundao.queryPager(start,limit,testRun,condition1);
-		}
-		return testrundao.queryPager(start,limit,testRun,condition1,new OrderBy(sortName,asc));
-	}
+    public QualityTestRun add(QualityTestRun run) {
+        return testrundao.add(run);
+    }
+
+    public QualityTestRun findRunById(Integer id) {
+        return testrundao.getByKey(id);
+    }
+
+    public int delete(Integer runId) {
+        return testrundao.deleteByKey(runId);
+    }
+
+    public Pager<QualityTestRun> findPager(Integer start, Integer limit, QualityTestRun testRun, String condition, String sortName, boolean asc) {
+        Condition condition1 = StringUtil.isBlank(condition) ? null : FragmentSql.fragmentCondition(condition);
+        if (StringUtil.isBlank(sortName)) {
+            return testrundao.queryPager(start, limit, testRun, condition1);
+        }
+        return testrundao.queryPager(start, limit, testRun, condition1, new OrderBy(sortName, asc));
+    }
 }

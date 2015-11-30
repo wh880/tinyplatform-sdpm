@@ -470,7 +470,7 @@ public class DateUtils extends org.apache.commons.lang.time.DateUtils {
         try {
             date = sdf.parse(formatDate(date, "yyyy-MM-dd") + " 00:00:00");
         } catch (ParseException e) {
-            logger.logMessage(LogLevel.ERROR,"格式化出错",e);
+            logger.logMessage(LogLevel.ERROR, "格式化出错", e);
         }
         return date;
     }
@@ -483,7 +483,7 @@ public class DateUtils extends org.apache.commons.lang.time.DateUtils {
         try {
             date = sdf.parse(formatDate(date, "yyyy-MM-dd") + " 23:59:59");
         } catch (ParseException e) {
-            logger.logMessage(LogLevel.ERROR,"日期解析出错",e);
+            logger.logMessage(LogLevel.ERROR, "日期解析出错", e);
         }
         return date;
     }

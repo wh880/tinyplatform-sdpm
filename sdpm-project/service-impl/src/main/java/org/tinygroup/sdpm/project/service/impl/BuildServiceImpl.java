@@ -103,7 +103,7 @@ public class BuildServiceImpl implements BuildService {
     }
 
     public List<ProjectBuild> buildInCondition(String condition, Integer productId, Integer projectId) {
-        return buildManager.buildInCondition(condition,productId,projectId);
+        return buildManager.buildInCondition(condition, productId, projectId);
     }
 
     public Pager<QualityBug> findNoBuildBug(int start, int limit, int id, String condition, SearchInfos conditions, String groupOperate) {

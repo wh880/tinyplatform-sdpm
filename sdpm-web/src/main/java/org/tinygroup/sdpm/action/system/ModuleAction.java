@@ -42,13 +42,13 @@ public class ModuleAction extends BaseController {
 
     @ResponseBody
     @RequestMapping("tree")
-    public List<Map<String, Object>> ajax(SystemModule systemModule, HttpServletResponse response,@RequestParam(value = "type",defaultValue = "name") String type) {
+    public List<Map<String, Object>> ajax(SystemModule systemModule, HttpServletResponse response, @RequestParam(value = "type", defaultValue = "name") String type) {
         response.setContentType("application/json; charset=UTF-8");
         List<Map<String, Object>> mapList = Lists.newArrayList();
 //		systemModule.setModuleType("dict");
         List<SystemModule> list = moduleService.findModules(systemModule);
         if (list != null && list.size() > 0) {
-            mergeModule(list, mapList, "0",type, true, true);
+            mergeModule(list, mapList, "0", type, true, true);
         }
         return mapList;
     }
@@ -65,10 +65,10 @@ public class ModuleAction extends BaseController {
         }
         Integer[] pIds = new Integer[integers.size()];
         List<Product> products = productService.findProductListByIds(integers.toArray(pIds));
-        mergeProductModule(products, "story", mapList,"name", false, false, "project");
+        mergeProductModule(products, "story", mapList, "name", false, false, "project");
         if (openProject > 0) {
             List<SystemModule> systemModules = moduleService.findModules(systemModule);
-            mergeModule(systemModules, mapList, "0","name", true, true);
+            mergeModule(systemModules, mapList, "0", "name", true, true);
         }
         return mapList;
     }
@@ -81,8 +81,8 @@ public class ModuleAction extends BaseController {
         List<SystemModule> bugModules = moduleService.findModules(systemModule);
         systemModule.setModuleType("story");
         List<SystemModule> productModules = moduleService.findModules(systemModule);
-        mergeModule(productModules, mapList, "0","name", false, false);
-        mergeModule(bugModules, mapList, "0","name", true, true);
+        mergeModule(productModules, mapList, "0", "name", false, false);
+        mergeModule(bugModules, mapList, "0", "name", true, true);
         return mapList;
     }
 
@@ -94,7 +94,7 @@ public class ModuleAction extends BaseController {
         Product product = new Product();
         product.setDeleted(0);
         List<Product> products = productService.findProductList(product);
-        mergeProductModule(products, "productDoc", mapList,"name", true, false, "doc");
+        mergeProductModule(products, "productDoc", mapList, "name", true, false, "doc");
         return mapList;
     }
 
@@ -115,7 +115,7 @@ public class ModuleAction extends BaseController {
             mapTop.put("id", "p" + p.getProjectId());
             mapTop.put("pId", 0);
             mapTop.put("open", true);
-            mergeModule(systemModules, mapList, "p" + p.getProjectId().toString(),"name", true, true);
+            mergeModule(systemModules, mapList, "p" + p.getProjectId().toString(), "name", true, true);
 //            mapTop.put("isParent", true);
             mapTop.put("add", true);
             mapTop.put("edit", false);
@@ -216,14 +216,15 @@ public class ModuleAction extends BaseController {
         }
         return "redirect: list?moduleType=dict";
     }
+
     @ResponseBody
     @RequestMapping("moduleAdd")
-    public Map moduleAdd(SystemModule module){
+    public Map moduleAdd(SystemModule module) {
         SystemModule pModule = moduleService.findById(module.getModuleParent());
-        if(module.getModuleRoot()==null){
+        if (module.getModuleRoot() == null) {
             module.setModuleRoot(pModule.getModuleRoot());
         }
-        if(module.getModuleType()==null){
+        if (module.getModuleType() == null) {
             module.setModuleType(pModule.getModuleType());
         }
         return ajaxSaveModule(module);
@@ -237,10 +238,10 @@ public class ModuleAction extends BaseController {
             systemModule.setModuleGrade(0);
             systemModule.setModuleOrder(0);
             String path = "";
-            if(systemModule.getModuleParent() != 0){
+            if (systemModule.getModuleParent() != 0) {
                 path = moduleService.findById(systemModule.getModuleParent()).getModulePath();
             }
-            systemModule.setModulePath((StringUtil.isBlank(path)?"":path)+systemModule.getModuleParent() + ",");
+            systemModule.setModulePath((StringUtil.isBlank(path) ? "" : path) + systemModule.getModuleParent() + ",");
             if (systemModule.getModuleParent() == null) {
                 systemModule.setModuleParent(0);
             }
@@ -300,13 +301,13 @@ public class ModuleAction extends BaseController {
         return map;
     }
 
-    private void mergeModule(List<SystemModule> systemModules, List<Map<String, Object>> maps, String parent,String nameOrTitle, boolean add, boolean edit) {
+    private void mergeModule(List<SystemModule> systemModules, List<Map<String, Object>> maps, String parent, String nameOrTitle, boolean add, boolean edit) {
         for (SystemModule systemModule : systemModules) {
             if (!parent.contains("p") && systemModule.getModuleParent() == Integer.parseInt(parent)) {
-                mergeSingleModule(systemModules, systemModule, maps, parent,nameOrTitle, add, edit);
+                mergeSingleModule(systemModules, systemModule, maps, parent, nameOrTitle, add, edit);
             }
             if (parent.contains("p") && systemModule.getModuleParent() == 0) {
-                mergeSingleModule(systemModules, systemModule, maps, parent,nameOrTitle, add, edit);
+                mergeSingleModule(systemModules, systemModule, maps, parent, nameOrTitle, add, edit);
             }
         }
     }
@@ -434,7 +435,7 @@ public class ModuleAction extends BaseController {
         return "/product/page/project/product-modular.page";
     }
 
-    private void mergeProductModule(List<Product> products, String moduleType, List<Map<String, Object>> mapList,String nameOrTitle, boolean add, boolean edit, String type) {
+    private void mergeProductModule(List<Product> products, String moduleType, List<Map<String, Object>> mapList, String nameOrTitle, boolean add, boolean edit, String type) {
         for (Product p : products) {
             SystemModule module = new SystemModule();
             module.setModuleRoot(p.getProductId());
@@ -445,9 +446,9 @@ public class ModuleAction extends BaseController {
             mapTop.put("pId", 0);
             mapTop.put("open", true);
             if ("doc".equals(type)) {
-                mergeModule(systemModules, mapList, "p" + p.getProductId().toString(),nameOrTitle, true, true);
+                mergeModule(systemModules, mapList, "p" + p.getProductId().toString(), nameOrTitle, true, true);
             } else {
-                mergeModule(systemModules, mapList, "p" + p.getProductId().toString(),nameOrTitle, false, false);
+                mergeModule(systemModules, mapList, "p" + p.getProductId().toString(), nameOrTitle, false, false);
             }
 //            mapTop.put("isParent", true);
             mapTop.put("add", add);
@@ -462,13 +463,13 @@ public class ModuleAction extends BaseController {
         mapTop.put("id", systemModule.getModuleId());
         mapTop.put("pId", parent);
         mapTop.put("open", true);
-        mergeModule(systemModules, maps, systemModule.getModuleId().toString(),nameOrTitle, add, edit);
+        mergeModule(systemModules, maps, systemModule.getModuleId().toString(), nameOrTitle, add, edit);
 //        mapTop.put("isParent", maps.size() > size ? true : false);
         mapTop.put("add", add);
         mapTop.put("edit", edit);
-        if("title".equals(nameOrTitle)){
+        if ("title".equals(nameOrTitle)) {
             mapTop.put("name", systemModule.getModuleTitle());
-        }else{
+        } else {
             mapTop.put("name", systemModule.getModuleName());
         }
         maps.add(mapTop);

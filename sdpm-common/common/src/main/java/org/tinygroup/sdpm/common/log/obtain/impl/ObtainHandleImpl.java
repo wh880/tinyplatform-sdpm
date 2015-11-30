@@ -23,37 +23,37 @@ public class ObtainHandleImpl implements ObtainHandle {
 
     private static Map<String, Obtain> obtainDict = new ConcurrentHashMap<String, Obtain>();
 
-    private  Map<String,String> pathRecord = new ConcurrentHashMap<String, String>();
+    private Map<String, String> pathRecord = new ConcurrentHashMap<String, String>();
 
     public void addObtain(Obtains obtains, String filePath) {
-        if(obtains!=null) {
+        if (obtains != null) {
             for (Obtain obtain : obtains.getObtainList()) {
                 String key = obtain.getName();
-                if(isRepeat(key,filePath)){
-                    throw new RuntimeException("obtain:["+key+"]已存在.");
+                if (isRepeat(key, filePath)) {
+                    throw new RuntimeException("obtain:[" + key + "]已存在.");
                 }
                 obtainDict.put(obtain.getName(), obtain);
-                pathRecord.put(obtain.getName(),filePath);
+                pathRecord.put(obtain.getName(), filePath);
             }
         }
     }
 
-    public Object getObjectById(int id,String type){
+    public Object getObjectById(int id, String type) {
         Obtain obtain = getDict(type);
-        if(obtain==null)return null;
-        return getValue(id,obtain);
+        if (obtain == null) return null;
+        return getValue(id, obtain);
     }
 
-    public String getInfoUrl(String type){
+    public String getInfoUrl(String type) {
         return getDict(type).getUrl();
     }
 
-    private Object getValue(int id, Obtain obtain){
+    private Object getValue(int id, Obtain obtain) {
         Class[] parameter = new Class[obtain.getParameters().size()];
         Object value = null;
-        for(int i = 0;i<obtain.getParameters().size(); i++){
+        for (int i = 0; i < obtain.getParameters().size(); i++) {
             try {
-                parameter[i]=Class.forName(obtain.getParameters().get(i).getType());
+                parameter[i] = Class.forName(obtain.getParameters().get(i).getType());
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
@@ -62,8 +62,8 @@ public class ObtainHandleImpl implements ObtainHandle {
             Object serviceWapper = BeanContainerFactory
                     .getBeanContainer(ObtainHandleImpl.class.getClassLoader())
                     .getBean(Class.forName(obtain.getType()));
-            Method method = serviceWapper.getClass().getMethod(obtain.getMethod(),parameter);
-            value = method.invoke(serviceWapper,id);
+            Method method = serviceWapper.getClass().getMethod(obtain.getMethod(), parameter);
+            value = method.invoke(serviceWapper, id);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
             throw new RuntimeException("obtain moduleType不存在");
@@ -87,20 +87,20 @@ public class ObtainHandleImpl implements ObtainHandle {
         }
     }
 
-    public boolean isRepeat(String key,String filePath){
-        if (obtainDict.containsKey(key)){
+    public boolean isRepeat(String key, String filePath) {
+        if (obtainDict.containsKey(key)) {
             LOGGER.logMessage(LogLevel.INFO, "正在进行obtain:[{0}]重复判定..", key);
             String path = pathRecord.get(key);
-            if(path.contains(".jar")){
-                if(filePath.contains(".jar")){
+            if (path.contains(".jar")) {
+                if (filePath.contains(".jar")) {
                     return true;
-                }else{
+                } else {
                     return false;
                 }
-            }else{
-                if(filePath.contains(".jar")){
+            } else {
+                if (filePath.contains(".jar")) {
                     return false;
-                }else{
+                } else {
                     return true;
                 }
             }

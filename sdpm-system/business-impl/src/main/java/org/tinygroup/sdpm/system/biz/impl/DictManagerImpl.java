@@ -14,70 +14,70 @@ import java.util.List;
 @Service
 @Transactional
 public class DictManagerImpl implements DictManager {
-	
-	@Autowired
-	private SystemDictDao systemDictDao;
-	
-	public SystemDict add(SystemDict dict) {
 
-		return systemDictDao.add(dict);
-	}
+    @Autowired
+    private SystemDictDao systemDictDao;
 
-	public int delete(Integer dictId) {
+    public SystemDict add(SystemDict dict) {
 
-		SystemDict systemDict = new SystemDict();
-		systemDict.setDictId(dictId);
-		systemDict.setDeleted(SystemDict.DELETE_YES);
-		return systemDictDao.edit(systemDict);
-	}
+        return systemDictDao.add(dict);
+    }
 
-	public int update(SystemDict dict) {
+    public int delete(Integer dictId) {
 
-		return systemDictDao.edit(dict);
-	}
+        SystemDict systemDict = new SystemDict();
+        systemDict.setDictId(dictId);
+        systemDict.setDeleted(SystemDict.DELETE_YES);
+        return systemDictDao.edit(systemDict);
+    }
 
-	public SystemDict find(Integer dictId) {
+    public int update(SystemDict dict) {
 
-		return systemDictDao.getByKey(dictId);
-	}
+        return systemDictDao.edit(dict);
+    }
 
-	public int[] updateBatch(List<SystemDict> dicts) {
-		
-		return systemDictDao.batchUpdate(dicts);
-	}
+    public SystemDict find(Integer dictId) {
 
-	public List<SystemDict> findList(SystemDict dict) {
-		List<SystemDict> list = systemDictDao.query(dict);
-		if(list.size()>0){
-			int size = list.size();
-			for(int i=0;i<size;i++){
-				if(list.get(i).getDeleted()==1){
-					list.remove(i);
-				}
-					
-			}
-		}
-		return list;
-	}
+        return systemDictDao.getByKey(dictId);
+    }
 
-	public Pager<SystemDict> findPager(int start, int limit, SystemDict dict, String columnName,
-			boolean asc) {
-		Pager<SystemDict> pagerDict= systemDictDao.queryPager(start, limit, dict,  new OrderBy(columnName, asc));
-	
-		return pagerDict;
-	}
+    public int[] updateBatch(List<SystemDict> dicts) {
 
-	public List<SystemDict> findList(SystemDict dict, String columnName, boolean asc) {
-		return systemDictDao.query(dict,new OrderBy(columnName,asc));
-	}
+        return systemDictDao.batchUpdate(dicts);
+    }
 
-	public int bechDelete(Integer...ids) {
-		return systemDictDao.deleteByKeys(ids);
-	}
+    public List<SystemDict> findList(SystemDict dict) {
+        List<SystemDict> list = systemDictDao.query(dict);
+        if (list.size() > 0) {
+            int size = list.size();
+            for (int i = 0; i < size; i++) {
+                if (list.get(i).getDeleted() == 1) {
+                    list.remove(i);
+                }
 
-	public void deleteAll() {
-		systemDictDao.deleteAll();
-	}
+            }
+        }
+        return list;
+    }
+
+    public Pager<SystemDict> findPager(int start, int limit, SystemDict dict, String columnName,
+                                       boolean asc) {
+        Pager<SystemDict> pagerDict = systemDictDao.queryPager(start, limit, dict, new OrderBy(columnName, asc));
+
+        return pagerDict;
+    }
+
+    public List<SystemDict> findList(SystemDict dict, String columnName, boolean asc) {
+        return systemDictDao.query(dict, new OrderBy(columnName, asc));
+    }
+
+    public int bechDelete(Integer... ids) {
+        return systemDictDao.deleteByKeys(ids);
+    }
+
+    public void deleteAll() {
+        systemDictDao.deleteAll();
+    }
 
 
 }

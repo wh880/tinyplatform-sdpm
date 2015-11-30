@@ -16,10 +16,10 @@ public class StdFunction extends AbstractTemplateFunction {
     }
 
     public Object execute(Template template, TemplateContext context, Object... parameters) throws TemplateException {
-        if(parameters.length < 2){
-           return null;
+        if (parameters.length < 2) {
+            return null;
         }
-        String field  = StdUtil.getField(parameters[0].toString(),parameters[1].toString());
+        String field = StdUtil.getField(parameters[0].toString(), parameters[1].toString());
 
         return field;
     }

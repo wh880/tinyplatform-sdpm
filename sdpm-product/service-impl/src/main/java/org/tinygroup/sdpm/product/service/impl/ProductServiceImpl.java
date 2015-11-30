@@ -72,28 +72,28 @@ public class ProductServiceImpl implements ProductService {
         return productManager.getProductNameByLineId(productLineId);
     }
 
-    public List<Product> getProductByUser(String userId,Integer delete,Integer productLineId) {
-        return productManager.getProductByUser(userId,delete,productLineId);
+    public List<Product> getProductByUser(String userId, Integer delete, Integer productLineId) {
+        return productManager.getProductByUser(userId, delete, productLineId);
     }
 
-    public List<Product> getProductByUserWithCount(String userId,Integer delete,boolean noRole) {
-        return productManager.getProductByUserWithCount(userId,delete,noRole);
+    public List<Product> getProductByUserWithCount(String userId, Integer delete, boolean noRole) {
+        return productManager.getProductByUserWithCount(userId, delete, noRole);
     }
 
-    public List<Product> getProductByUserAndProductLineWithCount(String userId, Integer productLineId,Integer delete) {
-        return productManager.getProductByUserAndProductLineWithCount(userId,productLineId,delete);
+    public List<Product> getProductByUserAndProductLineWithCount(String userId, Integer productLineId, Integer delete) {
+        return productManager.getProductByUserAndProductLineWithCount(userId, productLineId, delete);
     }
 
 
-    public Integer[] getTeamRoleProductLineIds(String userId,Integer delete) {
-        List<Integer> ids = productManager.getTeamRoleProductLineIds(userId,delete);
+    public Integer[] getTeamRoleProductLineIds(String userId, Integer delete) {
+        List<Integer> ids = productManager.getTeamRoleProductLineIds(userId, delete);
         Integer[] Ids = new Integer[ids.size()];
         return ids.toArray(Ids);
     }
 
     public Map<String, List<Product>> getUserProductsWithCountMap(String userId) {
         Map<String, List<Product>> productMap = new HashMap<String, List<Product>>();
-        List<Product> products = productManager.getProductByUserWithCount(userId,0,true);
+        List<Product> products = productManager.getProductByUserWithCount(userId, 0, true);
         for (Product product1 : products) {
             if (productMap.containsKey(product1.getProductLineName())) {
                 productMap.get(product1.getProductLineName()).add(product1);
@@ -106,13 +106,13 @@ public class ProductServiceImpl implements ProductService {
         return productMap;
     }
 
-    public List<Product> productInCondition(String condition,Integer ...ids) {
-        return productManager.productInCondition(condition,ids);
+    public List<Product> productInCondition(String condition, Integer... ids) {
+        return productManager.productInCondition(condition, ids);
     }
 
     public Map<String, List<Product>> getUserProductsMap(String userId) {
         Map<String, List<Product>> productMap = new HashMap<String, List<Product>>();
-        List<Product> products = productManager.getProductByUser(userId,0,null);
+        List<Product> products = productManager.getProductByUser(userId, 0, null);
         for (Product product1 : products) {
             if (productMap.containsKey(product1.getProductLineName())) {
                 productMap.get(product1.getProductLineName()).add(product1);

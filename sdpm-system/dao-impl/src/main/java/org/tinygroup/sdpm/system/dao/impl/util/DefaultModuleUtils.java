@@ -11,48 +11,48 @@ import java.util.List;
  */
 public class DefaultModuleUtils {
 
-    public static void mergeModuleCondition(StringBuffer condition, int moduleId ,ModuleListCallBackFunction moduleList) {
+    public static void mergeModuleCondition(StringBuffer condition, int moduleId, ModuleListCallBackFunction moduleList) {
         SystemModule systemModule = new SystemModule();
         systemModule.setModuleParent(moduleId);
         List<SystemModule> systemModules = moduleList.getModuleList(systemModule);
-        if(systemModules.size()>0){
-            for(SystemModule module : systemModules){
-                mergeModuleCondition(condition, module.getModuleId(),moduleList);
+        if (systemModules.size() > 0) {
+            for (SystemModule module : systemModules) {
+                mergeModuleCondition(condition, module.getModuleId(), moduleList);
             }
         }
-        if(condition.toString().endsWith("(")){
-            condition.append(" "+moduleId);
-        }else{
-            condition.append(","+moduleId);
+        if (condition.toString().endsWith("(")) {
+            condition.append(" " + moduleId);
+        } else {
+            condition.append("," + moduleId);
         }
     }
 
-    public static StringBuffer getConditionByModule(StringBuffer condition,SystemModule systemModule,ModuleListCallBackFunction moduleList,ModuleCallBackFunction singleModule){
+    public static StringBuffer getConditionByModule(StringBuffer condition, SystemModule systemModule, ModuleListCallBackFunction moduleList, ModuleCallBackFunction singleModule) {
 
-        if(systemModule==null){
+        if (systemModule == null) {
             return null;
         }
-        if(condition==null){
+        if (condition == null) {
             condition = new StringBuffer();
         }
         List<SystemModule> modules = new ArrayList<SystemModule>();
-        if(systemModule.getModuleId()==null){
+        if (systemModule.getModuleId() == null) {
             modules = moduleList.getModuleList(systemModule);
-        }else{
+        } else {
             modules.add(singleModule.getModule(systemModule.getModuleId()));
         }
-        if(modules.size()>0){
+        if (modules.size() > 0) {
             for (SystemModule module : modules) {
 
-                if(condition.toString().endsWith("(")){
-                    condition.append(" "+module.getModuleId());
-                }else{
-                    condition.append(","+module.getModuleId());
+                if (condition.toString().endsWith("(")) {
+                    condition.append(" " + module.getModuleId());
+                } else {
+                    condition.append("," + module.getModuleId());
                 }
                 int i = module.getModuleId();
                 systemModule.setModuleParent(i);
                 systemModule.setModuleId(null);
-                getConditionByModule(condition,systemModule,moduleList,singleModule);
+                getConditionByModule(condition, systemModule, moduleList, singleModule);
             }
         }
 
@@ -60,8 +60,8 @@ public class DefaultModuleUtils {
         return condition;
     }
 
-    public static String getCondition(Integer moduleId,ModuleListCallBackFunction moduleList){
-        if(moduleId==null||moduleId==0)return "";
+    public static String getCondition(Integer moduleId, ModuleListCallBackFunction moduleList) {
+        if (moduleId == null || moduleId == 0) return "";
         StringBuffer stringBuffer = new StringBuffer();
         stringBuffer.append("in (");
         mergeModuleCondition(stringBuffer, moduleId, moduleList);
@@ -69,51 +69,51 @@ public class DefaultModuleUtils {
         return stringBuffer.toString();
     }
 
-    public static String getConditionByRoot(Integer rootId,String moduleType, ModuleListCallBackFunction moduleList){
-        if(rootId==null||rootId==0)return "";
+    public static String getConditionByRoot(Integer rootId, String moduleType, ModuleListCallBackFunction moduleList) {
+        if (rootId == null || rootId == 0) return "";
         StringBuffer stringBuffer = new StringBuffer();
         stringBuffer.append("in (");
         SystemModule systemModule = new SystemModule();
         systemModule.setModuleRoot(rootId);
         systemModule.setModuleType(moduleType);
         List<SystemModule> systemModules = moduleList.getModuleList(systemModule);
-        if(systemModules.size()>0){
-            for(SystemModule module : systemModules){
-                if(!stringBuffer.toString().endsWith("(")){
+        if (systemModules.size() > 0) {
+            for (SystemModule module : systemModules) {
+                if (!stringBuffer.toString().endsWith("(")) {
                     stringBuffer.append(",");
                 }
                 stringBuffer.append(module.getModuleId().toString());
             }
             stringBuffer.append(")");
-        }else{
+        } else {
             return "in (0)";
         }
         return stringBuffer.toString();
     }
 
-    public static String getPath(Integer moduleId, String division, ModuleCallBackFunction singleModule,String root, boolean openRoot){
-        if(moduleId==null||moduleId<1)return "";
+    public static String getPath(Integer moduleId, String division, ModuleCallBackFunction singleModule, String root, boolean openRoot) {
+        if (moduleId == null || moduleId < 1) return "";
         SystemModule module = singleModule.getModule(moduleId);
         if (module == null) {
             return "/";
         }
-        if(StringUtil.isBlank(module.getModulePath())||"0,".equals(module.getModulePath())){
-            return division+module.getModuleName();
+        if (StringUtil.isBlank(module.getModulePath()) || "0,".equals(module.getModulePath())) {
+            return division + module.getModuleName();
         }
-        String path = mergePath(division,module.getModulePath().substring(2),singleModule);
-        if(openRoot){
-            return root+division+(StringUtil.isBlank(path)?"":path+division)+module.getModuleName();
+        String path = mergePath(division, module.getModulePath().substring(2), singleModule);
+        if (openRoot) {
+            return root + division + (StringUtil.isBlank(path) ? "" : path + division) + module.getModuleName();
         }
-        return division+(StringUtil.isBlank(path)?"":path+division)+module.getModuleName();
+        return division + (StringUtil.isBlank(path) ? "" : path + division) + module.getModuleName();
     }
 
-    public static String mergePath(String division, String paths, ModuleCallBackFunction singleModule){
+    public static String mergePath(String division, String paths, ModuleCallBackFunction singleModule) {
         String[] path = paths.split(",");
-        if(path.length>1){
+        if (path.length > 1) {
             return singleModule.getModule(Integer.parseInt(path[0]))
-                    .getModuleName()+division+ mergePath(division,paths.substring(path[0].length()+1),singleModule);
-        }else if(path.length>0){
-            if(StringUtil.isBlank(path[0])){
+                    .getModuleName() + division + mergePath(division, paths.substring(path[0].length() + 1), singleModule);
+        } else if (path.length > 0) {
+            if (StringUtil.isBlank(path[0])) {
                 return "";
             }
             return singleModule.getModule(Integer.parseInt(path[0])).getModuleName();

@@ -42,7 +42,7 @@ public class ProjectStoryAction extends BaseController {
 
     @RequestMapping("/list/data")
     public String listData(HttpServletRequest request, HttpServletResponse response,
-                       Model model, Integer start, Integer limit, String order, String orderType, String moduleId) {
+                           Model model, Integer start, Integer limit, String order, String orderType, String moduleId) {
 
         Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
         if (projectId == null) {
@@ -128,7 +128,7 @@ public class ProjectStoryAction extends BaseController {
         if ((insertResult.length + updateResult.length) > 0) {
             map.put("status", "y");
             map.put("info", "关联成功");
-            map.put("url", adminPath+"/project/demand/index");
+            map.put("url", adminPath + "/project/demand/index");
         } else {
             map.put("status", "n");
             map.put("info", "关联失败");

@@ -33,9 +33,9 @@ public class MenuPermissionSubject {
 
     public boolean isPermitted(String permission) {
         if (!StringUtil.isBlank(permission)) {
-            if (getMenuList().contains(permission)){
+            if (getMenuList().contains(permission)) {
                 return true;
-            }else if (UserUtils.getSubject().isPermitted(permission)){
+            } else if (UserUtils.getSubject().isPermitted(permission)) {
                 return true;
             }
         }

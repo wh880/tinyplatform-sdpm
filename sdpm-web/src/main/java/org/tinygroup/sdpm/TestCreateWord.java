@@ -11,7 +11,7 @@ import java.util.List;
  * Created by wangll13383 on 2015/11/18.
  */
 public class TestCreateWord {
-    public static  void main(String[] args) throws TemplateException, IOException {
+    public static void main(String[] args) throws TemplateException, IOException {
 //        List<QualityBug> bugList = new ArrayList<QualityBug>();
 //        for(int i =0;i<10;i++){
 //            QualityBug bug = new QualityBug();
@@ -39,9 +39,9 @@ public class TestCreateWord {
 //        out.close();
 
         List<Product> products = new ArrayList<Product>();
-        for(int i =0;i<10;i++){
+        for (int i = 0; i < 10; i++) {
             Product product = new Product();
-            product.setProductName("name"+i);
+            product.setProductName("name" + i);
             products.add(product);
         }
 

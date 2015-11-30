@@ -25,10 +25,11 @@ public interface ProjectProductManager {
      * @param projectProduct 主键
      * @return
      */
-     List<ProjectProduct> findList(ProjectProduct projectProduct);
+    List<ProjectProduct> findList(ProjectProduct projectProduct);
 
     /**
      * 新增关联
+     *
      * @param projectProduct
      * @return
      */

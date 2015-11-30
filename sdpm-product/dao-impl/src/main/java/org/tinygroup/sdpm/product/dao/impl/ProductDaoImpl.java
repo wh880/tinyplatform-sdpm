@@ -401,7 +401,7 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
         return getDslSession().fetchList(select, ProductAndLine.class);
 
 		/*select product.product_id,product.product_name,product_line.product_line_id,product_line.product_line_name
-		 * from product left join product_line on product.product_line_id=product_line.product_line_id;*/
+         * from product left join product_line on product.product_line_id=product_line.product_line_id;*/
     }
 
     public List<String> getProductNameByLineId(Integer productLineId) {
@@ -411,24 +411,24 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
         return getDslSession().fetchList(select, String.class);
     }
 
-    public List<Product> getProductByUser(String userId,Integer delete,Integer productLineId) {
+    public List<Product> getProductByUser(String userId, Integer delete, Integer productLineId) {
         Condition condition = null;
-        if(productLineId!=null){
+        if (productLineId != null) {
             condition = PRODUCTTABLE.PRODUCT_LINE_ID.eq(productLineId);
         }
-        Select select = select(PRODUCTTABLE.ALL,PRODUCT_LINETABLE.PRODUCT_LINE_NAME.as("productLineName")).from(PRODUCTTABLE).join(
-                leftJoin(PRODUCT_LINETABLE,PRODUCTTABLE.PRODUCT_LINE_ID.eq(PRODUCT_LINETABLE.PRODUCT_LINE_ID))
+        Select select = select(PRODUCTTABLE.ALL, PRODUCT_LINETABLE.PRODUCT_LINE_NAME.as("productLineName")).from(PRODUCTTABLE).join(
+                leftJoin(PRODUCT_LINETABLE, PRODUCTTABLE.PRODUCT_LINE_ID.eq(PRODUCT_LINETABLE.PRODUCT_LINE_ID))
         ).where(
-                and(PRODUCTTABLE.DELETED.eq(delete),condition,
+                and(PRODUCTTABLE.DELETED.eq(delete), condition,
                         or(PRODUCTTABLE.ACL.eq(Product.ACl_All),
-                                or(PRODUCTTABLE.PRODUCT_CREATED_BY.eq(userId),PRODUCTTABLE.PRODUCT_OWNER.eq(userId),PRODUCTTABLE.PRODUCT_DELIVERY_MANAGER.eq(userId),PRODUCTTABLE.PRODUCT_QUALITY_MANAGER.eq(userId),ExistsExpression.existsCondition(SubSelect.subSelect(selectFrom(PROJECT_TEAMTABLE).
+                                or(PRODUCTTABLE.PRODUCT_CREATED_BY.eq(userId), PRODUCTTABLE.PRODUCT_OWNER.eq(userId), PRODUCTTABLE.PRODUCT_DELIVERY_MANAGER.eq(userId), PRODUCTTABLE.PRODUCT_QUALITY_MANAGER.eq(userId), ExistsExpression.existsCondition(SubSelect.subSelect(selectFrom(PROJECT_TEAMTABLE).
                                         where(and(PRODUCTTABLE.ACL.eq(Product.ACl_TEAM), PROJECT_TEAMTABLE.PRODUCT_ID.eq(PRODUCTTABLE.PRODUCT_ID), PROJECT_TEAMTABLE.TEAM_USER_ID.eq(userId)))))))));
         return getDslSession().fetchList(select, Product.class);
     }
 
-    public List<Product> getProductByUserWithCount(String userId,Integer delete,boolean noRole) {
+    public List<Product> getProductByUserWithCount(String userId, Integer delete, boolean noRole) {
         Condition condition = null;
-        if(noRole){
+        if (noRole) {
             condition = PRODUCTTABLE.ACL.eq(Product.ACl_All);
         }
         Select select = getComplexSelect().where(
@@ -462,22 +462,22 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
         return getDslSession().fetchList(select, Product.class);
     }
 
-    public List<Product> getProductByUserAndProductLineWithCount(String userId, Integer productLineId,Integer delete) {
+    public List<Product> getProductByUserAndProductLineWithCount(String userId, Integer productLineId, Integer delete) {
         Select select = getComplexSelect().where(
                 and(PRODUCTTABLE.DELETED.eq(delete),
                         or(PRODUCTTABLE.ACL.eq(Product.ACl_All),
-                                or(PRODUCTTABLE.PRODUCT_CREATED_BY.eq(userId),PRODUCTTABLE.PRODUCT_OWNER.eq(userId), PRODUCTTABLE.PRODUCT_DELIVERY_MANAGER.eq(userId), PRODUCTTABLE.PRODUCT_QUALITY_MANAGER.eq(userId), ExistsExpression.existsCondition(SubSelect.subSelect(selectFrom(PROJECT_TEAMTABLE).
-                                        where(and(PRODUCTTABLE.ACL.eq(Product.ACl_TEAM), PROJECT_TEAMTABLE.PRODUCT_ID.eq(PRODUCTTABLE.PRODUCT_ID), PROJECT_TEAMTABLE.TEAM_USER_ID.eq(userId))))))),PRODUCTTABLE.PRODUCT_LINE_ID.eq(productLineId))).groupBy(PRODUCTTABLE.PRODUCT_ID);
+                                or(PRODUCTTABLE.PRODUCT_CREATED_BY.eq(userId), PRODUCTTABLE.PRODUCT_OWNER.eq(userId), PRODUCTTABLE.PRODUCT_DELIVERY_MANAGER.eq(userId), PRODUCTTABLE.PRODUCT_QUALITY_MANAGER.eq(userId), ExistsExpression.existsCondition(SubSelect.subSelect(selectFrom(PROJECT_TEAMTABLE).
+                                        where(and(PRODUCTTABLE.ACL.eq(Product.ACl_TEAM), PROJECT_TEAMTABLE.PRODUCT_ID.eq(PRODUCTTABLE.PRODUCT_ID), PROJECT_TEAMTABLE.TEAM_USER_ID.eq(userId))))))), PRODUCTTABLE.PRODUCT_LINE_ID.eq(productLineId))).groupBy(PRODUCTTABLE.PRODUCT_ID);
         return getDslSession().fetchList(select, Product.class);
     }
 
-    public List<Product> productInCondition(String condition,Integer ...ids) {
-        Select select = select(PRODUCTTABLE.PRODUCT_ID,PRODUCTTABLE.PRODUCT_NAME).from(PRODUCTTABLE).where(and(PRODUCTTABLE.PRODUCT_NAME.like(condition),PRODUCTTABLE.DELETED.eq(0),PRODUCTTABLE.PRODUCT_ID.in(ids)));
-        return getDslSession().fetchList(select,Product.class);
+    public List<Product> productInCondition(String condition, Integer... ids) {
+        Select select = select(PRODUCTTABLE.PRODUCT_ID, PRODUCTTABLE.PRODUCT_NAME).from(PRODUCTTABLE).where(and(PRODUCTTABLE.PRODUCT_NAME.like(condition), PRODUCTTABLE.DELETED.eq(0), PRODUCTTABLE.PRODUCT_ID.in(ids)));
+        return getDslSession().fetchList(select, Product.class);
     }
 
     private Select getComplexSelect() {
-        return MysqlSelect.select(PRODUCTTABLE.ALL,PRODUCT_LINETABLE.PRODUCT_LINE_NAME.as("productLineName"), FragmentSql.fragmentSelect(
+        return MysqlSelect.select(PRODUCTTABLE.ALL, PRODUCT_LINETABLE.PRODUCT_LINE_NAME.as("productLineName"), FragmentSql.fragmentSelect(
                 "(SELECT COUNT(story_id)FROM product_story a JOIN product b ON a.`product_id`=b.`product_id` WHERE a.`story_status`=1 AND b.product_id = product.product_id) activeSum,\n" +
                         "(SELECT COUNT(story_id)FROM product_story a JOIN product b ON a.`product_id`=b.`product_id` WHERE a.`story_status`=3 AND b.product_id = product.product_id) changeSum,\n" +
                         "(SELECT COUNT(story_id)FROM product_story a JOIN product b ON a.`product_id`=b.`product_id` WHERE a.`story_status`=0 AND b.product_id = product.product_id) draftSum,\n" +
@@ -491,7 +491,7 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
                         "LEFT JOIN product_plan ON product.`product_id` = product_plan.`product_id` \n" +
                         "LEFT JOIN product_release ON product.`product_id` = product_release.`product_id` \n" +
                         "LEFT JOIN quality_bug ON product.`product_id` = quality_bug.`product_id`")).join(
-                leftJoin(PRODUCT_LINETABLE,PRODUCT_LINETABLE.PRODUCT_LINE_ID.eq(PRODUCTTABLE.PRODUCT_LINE_ID))
+                leftJoin(PRODUCT_LINETABLE, PRODUCT_LINETABLE.PRODUCT_LINE_ID.eq(PRODUCTTABLE.PRODUCT_LINE_ID))
 
         );
     }

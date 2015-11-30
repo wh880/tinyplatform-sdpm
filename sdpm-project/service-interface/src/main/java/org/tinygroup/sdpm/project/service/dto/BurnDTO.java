@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Created by Hulk on 2015/11/1.
  */
-public class BurnDTO implements Serializable{
+public class BurnDTO implements Serializable {
     /**
      * 以“,”分隔
      */

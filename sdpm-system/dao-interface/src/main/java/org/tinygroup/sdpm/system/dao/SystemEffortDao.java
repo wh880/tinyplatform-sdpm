@@ -28,6 +28,7 @@ import java.util.List;
 public interface SystemEffortDao extends BaseDao<SystemEffort, Integer> {
     /**
      * 根据时间段查找列表
+     *
      * @param beginDate
      * @param endDate
      * @return

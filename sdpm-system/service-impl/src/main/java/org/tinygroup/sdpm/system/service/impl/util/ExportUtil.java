@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
  */
 public class ExportUtil {
     private final static String REGXP_FOR_HTML = "<([^>]*)>"; // 过滤所有以<开头以>结尾的标签
+
     public static String filterHtml(String str) {
         Pattern pattern = Pattern.compile(REGXP_FOR_HTML);
         Matcher matcher = pattern.matcher(str);

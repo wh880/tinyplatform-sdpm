@@ -11,9 +11,9 @@ import org.tinygroup.sdpm.common.util.common.NameUtil;
 public class OrderByUtil {
 
     public static OrderBy mergeOrderBy(String orderBy, boolean asc, String table) {
-        if(StringUtil.isBlank(orderBy))return null;
-        if(!StringUtil.isBlank(table))return new OrderBy(table+"."+ NameUtil.resolveNameDesc(orderBy),asc);
-        return new OrderBy(NameUtil.resolveNameDesc(orderBy),asc);
+        if (StringUtil.isBlank(orderBy)) return null;
+        if (!StringUtil.isBlank(table)) return new OrderBy(table + "." + NameUtil.resolveNameDesc(orderBy), asc);
+        return new OrderBy(NameUtil.resolveNameDesc(orderBy), asc);
     }
 
 }

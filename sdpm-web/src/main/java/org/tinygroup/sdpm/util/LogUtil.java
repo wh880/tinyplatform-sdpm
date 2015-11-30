@@ -35,8 +35,8 @@ public class LogUtil {
                                   Object oldObject, Object newObject, String comment) {
         SystemAction systemAction = new SystemAction();
         systemAction.setActionAction(action);
-        systemAction.setActionProduct(String.valueOf(StringUtil.isBlank(product)?"":product));
-        systemAction.setActionProject(String.valueOf(StringUtil.isBlank(project)?"":project));
+        systemAction.setActionProduct(String.valueOf(StringUtil.isBlank(product) ? "" : product));
+        systemAction.setActionProject(String.valueOf(StringUtil.isBlank(project) ? "" : project));
         systemAction.setActionObjectType(objectType);
         systemAction.setActionDate(new Date());
         systemAction.setActionObjectId(String.valueOf(objectId));

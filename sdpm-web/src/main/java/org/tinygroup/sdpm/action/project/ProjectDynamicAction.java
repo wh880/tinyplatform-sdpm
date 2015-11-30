@@ -37,7 +37,7 @@ public class ProjectDynamicAction extends BaseController {
 
     @RequiresPermissions("dynamic")
     @RequestMapping("/index")
-    public String index(HttpServletRequest request,HttpServletResponse response, Model model) {
+    public String index(HttpServletRequest request, HttpServletResponse response, Model model) {
         Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
         if (projectId == null) {
             return redirectProjectForm();

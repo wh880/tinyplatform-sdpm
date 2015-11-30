@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Created by MCK on 2015/10/22.
  */
-public class ProjectTaskSta implements Serializable{
+public class ProjectTaskSta implements Serializable {
     /**
      * 任务Id
      */
@@ -13,7 +13,7 @@ public class ProjectTaskSta implements Serializable{
     /**
      * 项目名
      */
-    private  String projectName;
+    private String projectName;
     /**
      * 任务指派对象
      */
@@ -28,7 +28,6 @@ public class ProjectTaskSta implements Serializable{
     private float estimate;
     /**
      * 总剩余
-
      */
     private float left;
     //后面需求在加字段
@@ -104,7 +103,6 @@ public class ProjectTaskSta implements Serializable{
     public void setEstimate(float estimate) {
         this.estimate = estimate;
     }
-
 
 
 }

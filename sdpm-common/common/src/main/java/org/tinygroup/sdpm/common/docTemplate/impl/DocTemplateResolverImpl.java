@@ -11,7 +11,8 @@ import java.util.Map;
 /**
  * Created by wangll13383 on 2015/11/18.
  */
-public class DocTemplateResolverImpl implements DocTemplateResolver{
+public class DocTemplateResolverImpl implements DocTemplateResolver {
+    private static Map<String, FileObject> docTemplateMap = new HashMap<String, FileObject>();
     private TemplateEngine docTemplateEngine;
 
     public TemplateEngine getDocTemplateEngine() {
@@ -22,12 +23,11 @@ public class DocTemplateResolverImpl implements DocTemplateResolver{
         this.docTemplateEngine = docTemplateEngine;
     }
 
-    private static Map<String,FileObject> docTemplateMap = new HashMap<String, FileObject>();
     public void putDocTemplate(FileObject fileObject) {
-        FileObjectResourceLoader loader = new FileObjectResourceLoader("xml","layout",null,fileObject.getParent().getAbsolutePath());
+        FileObjectResourceLoader loader = new FileObjectResourceLoader("xml", "layout", null, fileObject.getParent().getAbsolutePath());
         docTemplateEngine.addResourceLoader(loader);
         String[] name = fileObject.getFileName().split("\\.");
-        docTemplateMap.put(name[0],fileObject);
+        docTemplateMap.put(name[0], fileObject);
     }
 
     public FileObject getDocTemplate(String type) {

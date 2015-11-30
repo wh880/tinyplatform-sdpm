@@ -14,67 +14,67 @@ import java.util.List;
 
 /**
  * 因为业务需求比较简单，所以分层处理的优势不明显，显得有点多余。但是~
- * @date 2015/09/21
- * @author Alu
  *
+ * @author Alu
+ * @date 2015/09/21
  */
 @Service
 @Transactional
-public class DocServiceImpl implements DocService{
-	@Autowired
-	private DocBiz docbiz;
+public class DocServiceImpl implements DocService {
+    @Autowired
+    private DocBiz docbiz;
 
-	public DocumentDoc createNewDoc(DocumentDoc doc) {
-		return docbiz.addDoc(doc);
-	}
+    public DocumentDoc createNewDoc(DocumentDoc doc) {
+        return docbiz.addDoc(doc);
+    }
 
-	public DocumentDocLib createNewDocLib(DocumentDocLib doclib) {
-		return docbiz.addDocLib(doclib);
-	}
+    public DocumentDocLib createNewDocLib(DocumentDocLib doclib) {
+        return docbiz.addDocLib(doclib);
+    }
 
-	public int editDoc(DocumentDoc doc) {
-		return docbiz.updtDoc(doc);
-	}
+    public int editDoc(DocumentDoc doc) {
+        return docbiz.updtDoc(doc);
+    }
 
-	public int editDocLibName(DocumentDocLib doclib) {
-		return docbiz.updtDocLib(doclib);
-	}
+    public int editDocLibName(DocumentDocLib doclib) {
+        return docbiz.updtDocLib(doclib);
+    }
 
-	public DocumentDoc findDocById(Integer id) {
-		return docbiz.getDocById(id);
-	}
+    public DocumentDoc findDocById(Integer id) {
+        return docbiz.getDocById(id);
+    }
 
-	public DocumentDocLib findDoclibById(Integer id) {
-		return docbiz.getDocLibById(id);
-	}
+    public DocumentDocLib findDoclibById(Integer id) {
+        return docbiz.getDocLibById(id);
+    }
 
-	public List<DocumentDoc> findDocList(DocumentDoc doc) {
-		return docbiz.getDocList(doc);
-	}
+    public List<DocumentDoc> findDocList(DocumentDoc doc) {
+        return docbiz.getDocList(doc);
+    }
 
-	public List<DocumentDocLib> findDoclibList(DocumentDocLib doclib) {
-		return docbiz.getDoclibList(doclib);
-	}
+    public List<DocumentDocLib> findDoclibList(DocumentDocLib doclib) {
+        return docbiz.getDoclibList(doclib);
+    }
 
-	public Pager<DocumentDoc> findDocRetPager(Integer start,Integer limit,DocumentDoc doc, String statusCondition, SearchInfos conditions,String groupOperate, String sortName,boolean asc) {
-		return docbiz.queryItemWithPage(start, limit, doc, statusCondition,conditions, groupOperate, sortName, asc);
-	}
+    public Pager<DocumentDoc> findDocRetPager(Integer start, Integer limit, DocumentDoc doc, String statusCondition, SearchInfos conditions, String groupOperate, String sortName, boolean asc) {
+        return docbiz.queryItemWithPage(start, limit, doc, statusCondition, conditions, groupOperate, sortName, asc);
+    }
 
-	public Pager<DocumentDocLib> findDoclibRetPager(Integer start, Integer limit, DocumentDocLib doclib, String sortName, boolean asc) {
-		return docbiz.queryItemWithPage(start, limit, doclib,sortName, asc);
-	}
+    public Pager<DocumentDocLib> findDoclibRetPager(Integer start, Integer limit, DocumentDocLib doclib, String sortName, boolean asc) {
+        return docbiz.queryItemWithPage(start, limit, doclib, sortName, asc);
+    }
 
-	public int deleteDocById(Integer id) {
-		return docbiz.delDocById(id);
-	}
+    public int deleteDocById(Integer id) {
+        return docbiz.delDocById(id);
+    }
 
-	public int deleteDoclibById(Integer id) {
-		// 
-		return docbiz.delDocLibById(id);
-	}
+    public int deleteDoclibById(Integer id) {
+        //
+        return docbiz.delDocLibById(id);
+    }
 
-	public int[] deleteDocByIds(List<DocumentDoc> ids) {
-		return docbiz.batchDelDocByIds(ids);
-	}
+    public int[] deleteDocByIds(List<DocumentDoc> ids) {
+        return docbiz.batchDelDocByIds(ids);
+    }
 
 }

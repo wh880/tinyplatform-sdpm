@@ -12,7 +12,8 @@ import java.util.List;
 
 /**
  * Created by Administrator on 2015-09-19.
- */@Component("")
+ */
+@Component("")
 public class SlaServiceImpl implements SlaService {
     @Autowired
     private SlaManager slaManager;
@@ -49,9 +50,11 @@ public class SlaServiceImpl implements SlaService {
     public List<ServiceSla> findSlaBySlaId(Integer id) {
         return slaManager.getListByClientId(id);
     }
+
     public ServiceSla judgeClient(String clientName) {
         return slaManager.judgeClient(clientName);
     }
+
     public int[] deleteBatchSla(List<ServiceSla> list) {
         return slaManager.deleteBatch(list);
     }
