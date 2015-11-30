@@ -1,11 +1,9 @@
 package org.tinygroup.sdpm.productLine.biz.inter;
 
-import java.util.List;
-
-import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.tinysqldsl.Pager;
-import org.tinygroup.tinysqldsl.base.Condition;
+
+import java.util.List;
 
 public interface ProductLineManager {
 	

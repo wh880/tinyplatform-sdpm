@@ -1,11 +1,9 @@
 package org.tinygroup.sdpm.product.biz.inter;
 
-import java.util.List;
-
-import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.product.dao.pojo.ProductRelease;
-import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.tinysqldsl.Pager;
+
+import java.util.List;
 
 public interface ReleaseManger{
     /**

@@ -1,17 +1,16 @@
 package org.tinygroup.sdpm.common.util.update;
 
+import org.tinygroup.sdpm.common.util.common.NameUtil;
+import org.tinygroup.sdpm.common.util.std.StdUtil;
+import org.tinygroup.tinysqldsl.Insert;
+import org.tinygroup.tinysqldsl.base.Column;
+import org.tinygroup.tinysqldsl.base.Table;
+import org.tinygroup.tinysqldsl.base.Value;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.tinygroup.sdpm.common.util.common.NameUtil;
-import org.tinygroup.sdpm.common.util.std.StdUtil;
-import org.tinygroup.tinysqldsl.Insert;
-import org.tinygroup.tinysqldsl.Update;
-import org.tinygroup.tinysqldsl.base.Column;
-import org.tinygroup.tinysqldsl.base.Table;
-import org.tinygroup.tinysqldsl.base.Value;
 
 public class InsertUtil {
 	public static Insert getInsert(Table table, Object object) {

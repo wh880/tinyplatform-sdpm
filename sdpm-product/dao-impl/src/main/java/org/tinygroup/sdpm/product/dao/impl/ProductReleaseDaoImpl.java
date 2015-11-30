@@ -16,54 +16,52 @@
 
 package org.tinygroup.sdpm.product.dao.impl;
 
-import static org.tinygroup.sdpm.product.dao.constant.ProductStoryTable.PRODUCT_STORYTABLE;
-import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
-import static org.tinygroup.sdpm.product.dao.constant.ProductPlanTable.PRODUCT_PLANTABLE;
-import static org.tinygroup.sdpm.product.dao.constant.ProductReleaseTable.*;
-import static org.tinygroup.sdpm.product.dao.constant.ProductTable.*;
-import static org.tinygroup.sdpm.product.dao.constant.ProductStorySpecTable.PRODUCT_STORY_SPECTABLE;
-import static org.tinygroup.sdpm.project.dao.constant.ProjectBuildTable.PROJECT_BUILDTABLE;
-import static org.tinygroup.tinysqldsl.Select.*;
-import static org.tinygroup.tinysqldsl.Insert.*;
-import static org.tinygroup.tinysqldsl.Delete.*;
-import static org.tinygroup.tinysqldsl.Update.*;
-
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Repository;
-import org.tinygroup.tinysqldsl.Delete;
-import org.tinygroup.tinysqldsl.Insert;
-import org.tinygroup.tinysqldsl.Select;
-import org.tinygroup.tinysqldsl.Update;
-import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.commons.tools.CollectionUtil;
+import org.tinygroup.jdbctemplatedslsession.callback.*;
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
+import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
+import org.tinygroup.sdpm.common.util.update.InsertUtil;
+import org.tinygroup.sdpm.common.util.update.UpdateUtil;
+import org.tinygroup.sdpm.product.dao.ProductReleaseDao;
+import org.tinygroup.sdpm.product.dao.pojo.ProductRelease;
+import org.tinygroup.tinysqldsl.*;
 import org.tinygroup.tinysqldsl.base.Condition;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 import org.tinygroup.tinysqldsl.select.Join;
 import org.tinygroup.tinysqldsl.select.OrderByElement;
-import org.tinygroup.sdpm.common.util.update.InsertUtil;
-import org.tinygroup.sdpm.common.util.update.UpdateUtil;
-import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
-import org.tinygroup.sdpm.product.dao.pojo.ProductRelease;
-import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
-import org.tinygroup.sdpm.product.dao.ProductReleaseDao;
-import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
-import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
-import org.tinygroup.jdbctemplatedslsession.callback.DeleteGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.InsertGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.NoParamDeleteGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.NoParamInsertGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.tinygroup.sdpm.product.dao.constant.ProductReleaseTable.PRODUCT_RELEASETABLE;
+import static org.tinygroup.sdpm.product.dao.constant.ProductTable.PRODUCTTABLE;
+import static org.tinygroup.sdpm.project.dao.constant.ProjectBuildTable.PROJECT_BUILDTABLE;
+import static org.tinygroup.tinysqldsl.Delete.delete;
+import static org.tinygroup.tinysqldsl.Insert.insertInto;
+import static org.tinygroup.tinysqldsl.Select.select;
+import static org.tinygroup.tinysqldsl.Select.selectFrom;
+import static org.tinygroup.tinysqldsl.Update.update;
+import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 
 @Repository
 public class ProductReleaseDaoImpl extends TinyDslDaoSupport implements
 		ProductReleaseDao {
+
+	public static Condition releasePueryCondition(ProductRelease t) {
+		return t == null ? null : and(
+				PRODUCT_RELEASETABLE.PRODUCT_ID.eq(t.getProductId()),
+				PRODUCT_RELEASETABLE.BUILD_ID.eq(t.getBuildId()),
+				PRODUCT_RELEASETABLE.RELEASE_NAME.eq(t.getReleaseName()),
+				PRODUCT_RELEASETABLE.RELEASE_DATE.eq(t.getReleaseDate()),
+				PRODUCT_RELEASETABLE.RELEASE_STORIES.eq(t.getReleaseStories()),
+				PRODUCT_RELEASETABLE.RELEASE_BUGS.eq(t.getReleaseBugs()),
+				PRODUCT_RELEASETABLE.RELEASE_DESC.eq(t.getReleaseDesc()),
+				PRODUCT_RELEASETABLE.DELETED.eq(t.getDeleted()));
+	}
 
 	public ProductRelease add(final ProductRelease productRelease) {
 		return getDslTemplate().insertAndReturnKey(productRelease,
@@ -416,17 +414,5 @@ public class ProductReleaseDaoImpl extends TinyDslDaoSupport implements
 					}
 				});
 
-	}
-
-	public static Condition releasePueryCondition(ProductRelease t) {
-		return t == null ? null : and(
-				PRODUCT_RELEASETABLE.PRODUCT_ID.eq(t.getProductId()),
-				PRODUCT_RELEASETABLE.BUILD_ID.eq(t.getBuildId()),
-				PRODUCT_RELEASETABLE.RELEASE_NAME.eq(t.getReleaseName()),
-				PRODUCT_RELEASETABLE.RELEASE_DATE.eq(t.getReleaseDate()),
-				PRODUCT_RELEASETABLE.RELEASE_STORIES.eq(t.getReleaseStories()),
-				PRODUCT_RELEASETABLE.RELEASE_BUGS.eq(t.getReleaseBugs()),
-				PRODUCT_RELEASETABLE.RELEASE_DESC.eq(t.getReleaseDesc()),
-				PRODUCT_RELEASETABLE.DELETED.eq(t.getDeleted()));
 	}
 }

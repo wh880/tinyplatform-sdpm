@@ -1,8 +1,8 @@
 package org.tinygroup.sdpm.common.biz.inter;
 
-import java.util.List;
-
 import org.tinygroup.sdpm.common.dao.pojo.Profile;
+
+import java.util.List;
 
 public interface ProfileManager {
 	/**

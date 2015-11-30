@@ -2,7 +2,6 @@ package org.tinygroup.sdpm.system.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.tinygroup.beancontainer.BeanContainerFactory;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.docTemplate.inter.DocTemplateResolver;
 import org.tinygroup.sdpm.org.biz.inter.UserManager;
@@ -15,14 +14,11 @@ import org.tinygroup.sdpm.quality.biz.inter.BugManager;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.sdpm.system.service.impl.util.ExportUtil;
 import org.tinygroup.sdpm.system.service.inter.ExportService;
-import org.tinygroup.template.StaticClassOperator;
 import org.tinygroup.template.TemplateContext;
 import org.tinygroup.template.TemplateEngine;
 import org.tinygroup.template.TemplateException;
 import org.tinygroup.template.application.DefaultStaticClassOperator;
 import org.tinygroup.template.impl.TemplateContextDefault;
-import org.tinygroup.template.impl.TemplateEngineDefault;
-import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.vfs.FileObject;
 
 import javax.servlet.http.HttpServletResponse;
@@ -30,7 +26,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 /**

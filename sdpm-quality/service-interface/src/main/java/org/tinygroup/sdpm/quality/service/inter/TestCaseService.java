@@ -1,10 +1,10 @@
 package org.tinygroup.sdpm.quality.service.inter;
 
-import java.util.List;
-
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityTestCase;
 import org.tinygroup.tinysqldsl.Pager;
+
+import java.util.List;
 
 public interface TestCaseService {
 	/**

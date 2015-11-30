@@ -1,8 +1,8 @@
 package org.tinygroup.sdpm.common.service.inter;
 
-import java.util.List;
-
 import org.tinygroup.sdpm.common.dao.pojo.SysModule;
+
+import java.util.List;
 
 public interface SysModuleService {
 	

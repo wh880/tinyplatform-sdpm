@@ -16,10 +16,10 @@
 
 package org.tinygroup.sdpm.system.dao;
 
-import java.util.List;
-
 import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
 import org.tinygroup.sdpm.system.dao.pojo.Holiday;
+
+import java.util.List;
 
 public interface HolidayDao extends BaseDao<Holiday,Integer> {
 	int softDelete(Holiday holiday);

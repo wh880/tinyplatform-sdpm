@@ -1,13 +1,13 @@
 package org.tinygroup.sdpm.quality.service.impl;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.tinygroup.sdpm.quality.biz.inter.TestRunManager;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityTestRun;
 import org.tinygroup.sdpm.quality.service.inter.TestRunService;
 import org.tinygroup.tinysqldsl.Pager;
+
+import java.util.List;
 
 @Component
 public class TestRunServiceImpl implements TestRunService {

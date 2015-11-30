@@ -1,13 +1,7 @@
 package org.tinygroup.sdpm.system.dao.impl;
 
-import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
-import org.tinygroup.tinysqldsl.base.FragmentSql;
-
 import java.util.HashMap;
 import java.util.Map;
-
-import static org.tinygroup.sdpm.system.dao.constant.SystemActionTable.SYSTEM_ACTIONTABLE;
-import static org.tinygroup.tinysqldsl.Select.select;
 
 /**
  * Created by wangll13383 on 2015/10/14.

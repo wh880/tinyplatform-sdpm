@@ -6,8 +6,8 @@ import org.tinygroup.logger.LogLevel;
 import org.tinygroup.logger.Logger;
 import org.tinygroup.logger.LoggerFactory;
 import org.tinygroup.sdpm.common.log.obtain.inter.Obtain;
-import org.tinygroup.sdpm.common.log.obtain.inter.Obtains;
 import org.tinygroup.sdpm.common.log.obtain.inter.ObtainHandle;
+import org.tinygroup.sdpm.common.log.obtain.inter.Obtains;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

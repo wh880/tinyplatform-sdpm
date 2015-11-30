@@ -1,29 +1,19 @@
 package org.tinygroup.sdpm.productLine.service;
 
 import java.io.Serializable;
-import java.util.List;
 
 public class PagerPojo implements Serializable{
 	
-	private int totalCount;//总记录数
-	
-	private int currentPage;//当前页
-	
-	private int limit;//每页记录数
-	
-	private int start;//开始记录数
-	
-	private int totalPages;//总页数
-	
-	private String field;//排序依据的字段
-	
-	private String sorting;//sorting_desc为逆序，sorting_asc为正序
-	
-	private Object object;//待定
-	
-	private Object[] objects;//待定
-	
 	protected static final int DEFAULT_LIMIT=10;
+	private int totalCount;//总记录数
+	private int currentPage;//当前页
+	private int limit;//每页记录数
+	private int start;//开始记录数
+	private int totalPages;//总页数
+	private String field;//排序依据的字段
+	private String sorting;//sorting_desc为逆序，sorting_asc为正序
+	private Object object;//待定
+	private Object[] objects;//待定
 	
 	public int getTotalCount() {
 		return totalCount;

@@ -1,14 +1,7 @@
 package org.tinygroup.sdpm;
 
 import org.tinygroup.sdpm.product.dao.pojo.Product;
-import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
-import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
-import org.tinygroup.template.TemplateContext;
-import org.tinygroup.template.TemplateEngine;
 import org.tinygroup.template.TemplateException;
-import org.tinygroup.template.impl.TemplateContextDefault;
-import org.tinygroup.template.impl.TemplateEngineDefault;
-import org.tinygroup.template.loader.FileObjectResourceLoader;
 
 import java.io.*;
 import java.util.ArrayList;

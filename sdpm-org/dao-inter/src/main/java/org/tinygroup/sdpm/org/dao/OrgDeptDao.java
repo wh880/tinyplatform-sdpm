@@ -17,7 +17,6 @@
 package org.tinygroup.sdpm.org.dao;
 
 import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
-
 import org.tinygroup.sdpm.org.dao.pojo.OrgDept;
 
 public interface OrgDeptDao extends BaseDao<OrgDept,Integer> {

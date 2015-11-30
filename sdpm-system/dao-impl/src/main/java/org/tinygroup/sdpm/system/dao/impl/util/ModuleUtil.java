@@ -1,13 +1,10 @@
 package org.tinygroup.sdpm.system.dao.impl.util;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.tinygroup.beancontainer.BeanContainerFactory;
-import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.system.dao.SystemModuleDao;
 import org.tinygroup.sdpm.system.dao.impl.SystemModuleDaoImpl;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

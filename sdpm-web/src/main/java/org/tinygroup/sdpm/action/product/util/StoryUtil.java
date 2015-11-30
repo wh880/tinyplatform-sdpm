@@ -1,10 +1,7 @@
 package org.tinygroup.sdpm.action.product.util;
 
 import org.tinygroup.commons.tools.StringUtil;
-import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.util.UserUtils;
-
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by wangll13383 on 2015/9/27.

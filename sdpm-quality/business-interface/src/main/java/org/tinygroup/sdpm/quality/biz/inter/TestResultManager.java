@@ -1,8 +1,8 @@
 package org.tinygroup.sdpm.quality.biz.inter;
 
-import java.util.List;
-
 import org.tinygroup.sdpm.quality.dao.pojo.QualityTestResult;
+
+import java.util.List;
 
 public interface TestResultManager {
 	

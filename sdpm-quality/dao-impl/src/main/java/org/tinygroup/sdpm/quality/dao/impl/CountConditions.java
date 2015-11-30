@@ -1,13 +1,10 @@
 package org.tinygroup.sdpm.quality.dao.impl;
 
-import org.tinygroup.tinysqldsl.Select;
 import org.tinygroup.tinysqldsl.base.Column;
 import org.tinygroup.tinysqldsl.base.Condition;
 import org.tinygroup.tinysqldsl.base.FragmentSql;
 import org.tinygroup.tinysqldsl.base.Table;
-import org.tinygroup.tinysqldsl.formitem.FragmentFromItemSql;
 import org.tinygroup.tinysqldsl.formitem.FromItem;
-import org.tinygroup.tinysqldsl.selectitem.FragmentSelectItemSql;
 import org.tinygroup.tinysqldsl.selectitem.SelectItem;
 
 import java.util.HashMap;

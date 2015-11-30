@@ -1,6 +1,5 @@
 package org.tinygroup.sdpm.action.quality.util;
 
-import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.util.UserUtils;
 
 import javax.servlet.http.HttpServletRequest;

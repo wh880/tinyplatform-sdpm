@@ -1,11 +1,11 @@
 package org.tinygroup.sdpm.quality.service.inter;
 
-import java.util.List;
-import java.util.Map;
-
 import org.tinygroup.sdpm.quality.dao.pojo.BugCount;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.tinysqldsl.Pager;
+
+import java.util.List;
+import java.util.Map;
 
 public interface BugService {
 		

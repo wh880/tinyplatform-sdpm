@@ -1,7 +1,5 @@
 package org.tinygroup.sdpm.common.log.obtain.inter;
 
-import java.util.Map;
-
 /**
  * Created by wangll13383 on 2015/9/16.
  */

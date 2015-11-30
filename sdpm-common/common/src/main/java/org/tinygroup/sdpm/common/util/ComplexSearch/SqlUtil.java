@@ -1,11 +1,11 @@
 package org.tinygroup.sdpm.common.util.ComplexSearch;
 
+import org.tinygroup.commons.tools.StringUtil;
+import org.tinygroup.sdpm.common.util.common.NameUtil;
+
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import org.tinygroup.commons.tools.StringUtil;
-import org.tinygroup.sdpm.common.util.common.NameUtil;
 
 /**
  * Created by wangll13383 on 2015/9/18.

@@ -17,7 +17,6 @@
 package org.tinygroup.sdpm.system.dao;
 
 import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
-
 import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;
 
 public interface SystemProfileDao extends BaseDao<SystemProfile,Integer> {

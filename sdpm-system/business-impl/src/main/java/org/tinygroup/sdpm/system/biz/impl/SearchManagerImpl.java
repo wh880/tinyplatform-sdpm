@@ -1,8 +1,6 @@
 
 package org.tinygroup.sdpm.system.biz.impl;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,6 +9,8 @@ import org.tinygroup.sdpm.system.biz.inter.SearchManager;
 import org.tinygroup.sdpm.system.dao.SystemSearchDao;
 import org.tinygroup.sdpm.system.dao.pojo.SystemSearch;
 import org.tinygroup.tinysqldsl.Pager;
+
+import java.util.List;
 
 @Service
 @Transactional

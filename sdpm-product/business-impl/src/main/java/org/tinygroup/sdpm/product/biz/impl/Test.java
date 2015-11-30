@@ -1,6 +1,5 @@
 package org.tinygroup.sdpm.product.biz.impl;
 
-import com.sun.org.apache.xpath.internal.SourceTree;
 import org.tinygroup.sdpm.common.util.Collections3;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 

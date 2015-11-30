@@ -1,10 +1,9 @@
 package org.tinygroup.sdpm.quality.biz.inter;
 
-import java.util.List;
-
-import org.tinygroup.sdpm.quality.dao.pojo.QualityTestCase;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityTestTask;
 import org.tinygroup.tinysqldsl.Pager;
+
+import java.util.List;
 
 public interface TestTaskManager {
 

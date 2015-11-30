@@ -1,9 +1,6 @@
 package org.tinygroup.sdpm.util;
 
 import org.tinygroup.beancontainer.BeanContainerFactory;
-import org.tinygroup.commons.tools.StringUtil;
-import org.tinygroup.sdpm.system.dao.SystemModuleDao;
-import org.tinygroup.sdpm.system.dao.impl.SystemModuleDaoImpl;
 import org.tinygroup.sdpm.system.dao.impl.util.DefaultModuleUtils;
 import org.tinygroup.sdpm.system.dao.impl.util.ModuleCallBackFunction;
 import org.tinygroup.sdpm.system.dao.impl.util.ModuleListCallBackFunction;
@@ -11,7 +8,6 @@ import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.service.impl.ModuleServiceImpl;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

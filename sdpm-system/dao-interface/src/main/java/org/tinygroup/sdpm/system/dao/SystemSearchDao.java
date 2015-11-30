@@ -17,7 +17,6 @@
 package org.tinygroup.sdpm.system.dao;
 
 import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
-
 import org.tinygroup.sdpm.system.dao.pojo.SystemSearch;
 
 public interface SystemSearchDao extends BaseDao<SystemSearch,Integer> {

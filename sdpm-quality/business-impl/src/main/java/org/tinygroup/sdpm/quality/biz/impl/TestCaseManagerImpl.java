@@ -12,7 +12,6 @@ import org.tinygroup.sdpm.quality.biz.inter.TestCaseManager;
 import org.tinygroup.sdpm.quality.dao.QualityTestCaseDao;
 import org.tinygroup.sdpm.quality.dao.QualityTestRunDao;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityTestCase;
-import org.tinygroup.sdpm.quality.dao.pojo.QualityTestRun;
 import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.tinysqldsl.base.Condition;
 import org.tinygroup.tinysqldsl.base.FragmentSql;

@@ -16,13 +16,13 @@
 
 package org.tinygroup.sdpm.quality.dao;
 
-import java.util.List;
-
 import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityTestCase;
 import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.tinysqldsl.base.Condition;
+
+import java.util.List;
 
 public interface QualityTestCaseDao extends BaseDao<QualityTestCase,Integer> {
 	

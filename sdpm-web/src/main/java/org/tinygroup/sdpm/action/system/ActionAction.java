@@ -67,7 +67,7 @@ public class ActionAction extends BaseController{
 		for(SystemAction action1 : actions){
 			SystemHistory history = new SystemHistory();
 			history.setHistoryAction(action1.getActionId());
-			List<SystemHistory> histories = historyService.find(history);
+			List<SystemHistory> histories = historyService.findSystemHistory(history);
 			map.put(action1,histories);
 		}
 		model.addAttribute("actionMap",map);

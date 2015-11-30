@@ -63,7 +63,7 @@ public class HolidayAction extends BaseController{
 	@RequestMapping("holiday/find")
 	public String find(Holiday holiday,Model model){
 		List<OrgUser> orgUsers=userService.findUserList(new OrgUser());
-		Holiday day = holidayService.findById(holiday.getHolidayId());
+		Holiday day = holidayService.findHolidayById(holiday.getHolidayId());
 		model.addAttribute("users", orgUsers);
 		model.addAttribute("holiday", day);
 		return "/system/page/holiday/edit.page";
@@ -72,7 +72,7 @@ public class HolidayAction extends BaseController{
 	@RequestMapping("holiday/view")
 	public String view(Holiday holiday,Model model){
 		List<OrgUser> orgUsers=userService.findUserList(new OrgUser());
-		Holiday day = holidayService.findById(holiday.getHolidayId());
+		Holiday day = holidayService.findHolidayById(holiday.getHolidayId());
 		model.addAttribute("users", orgUsers);
 		model.addAttribute("holiday", day);
 		return "/system/page/holiday/view.page";
@@ -96,15 +96,15 @@ public class HolidayAction extends BaseController{
 				day.setHolidayType(holiday.getHolidayType());
 				holidayList.add(day);
 			}
-			List<Holiday> holidays=holidayService.batchAdd(holidayList);
+			List<Holiday> holidays=holidayService.batchAddHoliday(holidayList);
 			for(int i=0,n=holidays.size();i<n;i++){
 			LogUtil.logWithComment(LogUtil.LogOperateObject.HOLIDAY,
 					LogUtil.LogAction.OPENED, String.valueOf(holidays.get(i).getHolidayId()),
 					UserUtils.getUserId(), null, null, null, null, null);
 			}
 		}else{
-			Holiday holiday1 = holidayService.findById(holiday.getHolidayId());
-			holidayService.update(holiday);
+			Holiday holiday1 = holidayService.findHolidayById(holiday.getHolidayId());
+			holidayService.updateHoliday(holiday);
 			LogUtil.logWithComment(LogOperateObject.HOLIDAY, LogAction.EDITED, 
 					String.valueOf(holiday.getHolidayId()), 
 					UserUtils.getUserId(), null, null, holiday1, holiday, null);
@@ -119,7 +119,7 @@ public class HolidayAction extends BaseController{
 	   if(id!=null){
 		   Holiday holiday = new Holiday();
 		   holiday.setHolidayId(id);
-		   holidayService.delete(holiday);
+		   holidayService.deleteHoliday(holiday);
 		   map.put("info", "删除成功");
 		   map.put("status", "y");
 		   LogUtil.logWithComment(LogOperateObject.HOLIDAY, LogAction.DELETED, 
@@ -135,7 +135,7 @@ public class HolidayAction extends BaseController{
 
 	@RequestMapping("holiday/manage")
 	public String manage(Holiday holiday,Model model){
-		List<Holiday> holidayList = holidayService.find(holiday);
+		List<Holiday> holidayList = holidayService.findHolidayList(holiday);
 		model.addAttribute("holiday", holidayList);
 		return "/system/page/holiday/manage.page";
 	}
@@ -159,7 +159,7 @@ public class HolidayAction extends BaseController{
 					   String.valueOf(holiday.get(i).getHolidayId()), UserUtils.getUserId(), null,
 					   null, null, null, holiday.get(i).getHoilidayRemark());
 	    }
-		holidayService.batchSofeDelete(holiday);
+		holidayService.batchSoftDeleteHoliday(holiday);
 		return  "/system/page/holiday/holiday.page";
 	}
 	@RequestMapping("holiday/action")

@@ -1,11 +1,9 @@
 package org.tinygroup.sdpm.system.service.inter;
 
-import java.util.List;
-
-import org.tinygroup.sdpm.system.dao.pojo.SystemConfig;
-import org.tinygroup.sdpm.system.dao.pojo.SystemDict;
 import org.tinygroup.sdpm.system.dao.pojo.SystemSearch;
 import org.tinygroup.tinysqldsl.Pager;
+
+import java.util.List;
 
 public interface SearchService {
 	/**

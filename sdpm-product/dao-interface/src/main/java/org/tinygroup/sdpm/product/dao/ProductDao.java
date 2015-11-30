@@ -16,14 +16,11 @@
 
 package org.tinygroup.sdpm.product.dao;
 
-import java.util.List;
-
 import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
-import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
-import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
-import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
+
+import java.util.List;
 
 public interface ProductDao extends BaseDao<Product,Integer> {
 	
