@@ -86,9 +86,8 @@
         <menu id="distribute-task" name="批量分解任务" href="/project/task/batchAdd" icon="icon-paste" sort="80" isShow="1"
               scope="demand-op"/>
         <!--<menu id="demand-menu" name="任务菜单" href="/project/demand/index" icon="" sort="1" isShow="1">-->
-        <!--<menu id="pro-demand-add" name="新增需求" href="/product/story/addstory" icon="icon-plus-sign" sort="6"-->
-        <!--isShow="1"-->
-        <!--scope="pro-demandmenu-op"/>-->
+        <menu id="pro-demand-add" name="新增需求" href="/product/story/addstory" icon="icon-plus-sign" sort="6"
+              isShow="1" scope="pro-demandmenu-op"/>
         <menu id="pro-demand-relation" name="关联需求" href="/project/demand/preLinkStory" icon="icon-plus" sort="4"
               isShow="1"
               scope="pro-demandmenu-op"/>
@@ -121,9 +120,9 @@
         <!--</menu>-->
 
         <!--<menu id="version-bug" name="Bug" href="/project/build/productalbug" icon="" sort="1" isShow="1">-->
-            <menu id="versionbug" name="移除Bug" href="/project/build/deletereleateBug" icon="icon-remove" sort="8"
-                  isShow="1"
-                  scope="version-linkbug"/>
+        <menu id="versionbug" name="移除Bug" href="/project/build/deletereleateBug" icon="icon-remove" sort="8"
+              isShow="1"
+              scope="version-linkbug"/>
         <!--</menu>-->
         <!--<menu id="version-story" name="需求" href="/project/build/productalstory" icon="" sort="1" isShow="1">-->
         <menu id="versionstory" name="移除需求" href="/project/build/deletereleate" icon="icon-remove" sort="8"
@@ -176,8 +175,8 @@
         <menu id="pro-document-delete" name="删除文档" href="/project/doc/del" icon="icon-remove" sort="10" isShow="1"
               scope="pro-document-op"/>
         <!--<menu id="documentmenu" name="任务菜单" href="/project/document/index.page" icon="" sort="1" isShow="1">-->
-            <menu id="pro-document-report" name="创建文档" href="/project/doc/preAdd" icon="icon-plus" sort="8" isShow="1"
-                  scope="pro-documentmenu-op"/>
+        <menu id="pro-document-report" name="创建文档" href="/project/doc/preAdd" icon="icon-plus" sort="8" isShow="1"
+              scope="pro-documentmenu-op"/>
         <!--</menu>-->
     </menu>
 
@@ -186,22 +185,22 @@
     </menu>
     <menu id="survey" parent-id="project" name="概况" href="/project/view" icon="" sort="1" isShow="1">
         <!--<menu id="survey-menu" name="任务菜单1" href="/project/task/index.page" icon="" sort="1" isShow="1">-->
-            <menu id="pro-survey-delay" name="项目延期" href="/project/delay"
-                  sort="40" isShow="1" scope="pro-surveymenu-op" icon="icon-calendar"/>
-            <menu id="pro-survey-hangUp" name="挂起项目" href="/project/hangUp"
-                  sort="30" isShow="1" scope="pro-surveymenu-op" icon="icon-pause"/>
-            <menu id="pro-survey-finish" name="结束项目" href="/project/finish"
-                  sort="10" isShow="1" scope="pro-surveymenu-op" icon="icon-off"/>
-            <menu id="pro-survey-doing" name="开始项目" href="/project/start"
-                  sort="50" isShow="1" scope="pro-surveymenu-op" icon="icon-play"/>
-            <menu id="pro-survey-active" name="激活项目" href="/project/doing"
-                  sort="20" isShow="1" scope="pro-surveymenu-op" icon="icon-play"/>
+        <menu id="pro-survey-delay" name="项目延期" href="/project/delay"
+              sort="40" isShow="1" scope="pro-surveymenu-op" icon="icon-calendar"/>
+        <menu id="pro-survey-hangUp" name="挂起项目" href="/project/hangUp"
+              sort="30" isShow="1" scope="pro-surveymenu-op" icon="icon-pause"/>
+        <menu id="pro-survey-finish" name="结束项目" href="/project/finish"
+              sort="10" isShow="1" scope="pro-surveymenu-op" icon="icon-off"/>
+        <menu id="pro-survey-doing" name="开始项目" href="/project/start"
+              sort="50" isShow="1" scope="pro-surveymenu-op" icon="icon-play"/>
+        <menu id="pro-survey-active" name="激活项目" href="/project/doing"
+              sort="20" isShow="1" scope="pro-surveymenu-op" icon="icon-play"/>
         <!--</menu>-->
         <!--<menu id="survey-menu2" name="任务菜单2" href="/project/view" icon="" sort="1" isShow="1">-->
-            <menu id="pro-survey-edit" name="编辑项目" href="/project/edit" icon="icon-pencil" sort="8" isShow="1"
-                  scope="pro-surveymenu2-op"/>
-            <menu id="pro-survey-remove" name="删除项目" href="/project/delete" icon="icon-remove" sort="6" isShow="1"
-                  scope="pro-surveymenu3-op"/>
+        <menu id="pro-survey-edit" name="编辑项目" href="/project/edit" icon="icon-pencil" sort="8" isShow="1"
+              scope="pro-surveymenu2-op"/>
+        <menu id="pro-survey-remove" name="删除项目" href="/project/delete" icon="icon-remove" sort="6" isShow="1"
+              scope="pro-surveymenu3-op"/>
         <!--</menu>-->
     </menu>
 </menu>
