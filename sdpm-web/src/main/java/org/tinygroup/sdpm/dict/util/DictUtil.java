@@ -10,9 +10,7 @@ import org.tinygroup.dict.impl.DictManagerImpl;
 import org.tinygroup.logger.LogLevel;
 import org.tinygroup.logger.Logger;
 import org.tinygroup.logger.LoggerFactory;
-import org.tinygroup.sdpm.dict.impl.DictHandleImpl;
 import org.tinygroup.sdpm.dict.impl.SdpmDictLoader;
-import org.tinygroup.sdpm.dict.inter.DictHandle;
 import org.tinygroup.sdpm.dict.inter.DictNodeEntries;
 import org.tinygroup.sdpm.dict.inter.DictNodeEntry;
 import org.tinygroup.sdpm.system.dao.pojo.SystemDict;
@@ -22,7 +20,9 @@ import org.tinygroup.sdpm.system.service.impl.ModuleServiceImpl;
 import org.tinygroup.sdpm.system.service.inter.DictService;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by wangll13383 on 2015/10/15.
@@ -43,7 +43,7 @@ public class DictUtil {
 
     public static void insertDict(List<DictNodeEntries> dictNodeEntries){
         moduleService.deleteByType("dict");
-        dictService.deleteAll();
+        dictService.deleteAllDict();
         for(DictNodeEntries entries : dictNodeEntries){
             int parent =0;
             if(entries.getName()!=null){
@@ -142,7 +142,7 @@ public class DictUtil {
 
     private static void assemble(SystemModule systemModule, List<DictGroup> groups,Map<String,String> nodeMap,String dictName){
         SystemDict dict = assembleDict(null,null,-1,systemModule.getModuleId(),0);
-        List<SystemDict> dicts = dictService.findList(dict,"dict_sort",true);
+        List<SystemDict> dicts = dictService.findDictListByOder(dict,"dict_sort",true);
         if(dicts.size()>0){
             DictGroup group = new DictGroup();
             group.setName(systemModule.getModuleName());

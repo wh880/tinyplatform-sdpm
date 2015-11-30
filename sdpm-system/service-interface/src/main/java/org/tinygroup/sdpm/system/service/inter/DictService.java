@@ -1,50 +1,42 @@
 package org.tinygroup.sdpm.system.service.inter;
 
-import java.util.List;
-
-import org.tinygroup.sdpm.system.dao.pojo.SystemConfig;
 import org.tinygroup.sdpm.system.dao.pojo.SystemDict;
 import org.tinygroup.tinysqldsl.Pager;
+
+import java.util.List;
 
 public interface DictService {
 	/**
 	 * 添加字典
-	 * @param config
+	 * @param dict
 	 * @return
 	 */
 	SystemDict addDict(SystemDict dict);
 	
 	/**
 	 * 删除
-	 * @param config
+	 * @param dictId
 	 * @return
 	 */
 	int deleteDict(Integer dictId);
 	
 	/**
 	 * 修改
-	 * @param config
+	 * @param dict
 	 * @return
 	 */
 	int updateDict(SystemDict dict);
 	
 	/**
-	 * 批量编辑
-	 * @param dicts
-	 * @return
-	 */
-	int[] updateBatchDict(List<SystemDict> dicts);
-	
-	/**
 	 * 根据ID查找
-	 * @param configId
+	 * @param dictId
 	 * @return
 	 */
 	SystemDict findDict(Integer dictId);
 	
 	/**
 	 * 根据对象查找
-	 * @param config
+	 * @param dict
 	 * @return
 	 */
 	List<SystemDict> findDictList(SystemDict dict);
@@ -66,8 +58,8 @@ public interface DictService {
 	 */
 	int batchDelete(Integer...ids);
 
-	void deleteAll();
+	void deleteAllDict();
 
-	List<SystemDict> findList(SystemDict dict,String columnName,boolean asc);
+	List<SystemDict> findDictListByOder(SystemDict dict, String columnName, boolean asc);
 
 }
