@@ -116,7 +116,7 @@ public class ModuleAction extends BaseController {
             mapTop.put("pId", 0);
             mapTop.put("open", true);
             mergeModule(systemModules, mapList, "p" + p.getProjectId().toString(),"name", true, true);
-            mapTop.put("isParent", true);
+//            mapTop.put("isParent", true);
             mapTop.put("add", true);
             mapTop.put("edit", false);
             mapTop.put("name", p.getProjectName());
@@ -449,7 +449,7 @@ public class ModuleAction extends BaseController {
             } else {
                 mergeModule(systemModules, mapList, "p" + p.getProductId().toString(),nameOrTitle, false, false);
             }
-            mapTop.put("isParent", true);
+//            mapTop.put("isParent", true);
             mapTop.put("add", add);
             mapTop.put("edit", edit);
             mapTop.put("name", p.getProductName());
@@ -458,13 +458,12 @@ public class ModuleAction extends BaseController {
     }
 
     private void mergeSingleModule(List<SystemModule> systemModules, SystemModule systemModule, List<Map<String, Object>> maps, String parent, String nameOrTitle, boolean add, boolean edit) {
-        int size = maps.size();
         Map<String, Object> mapTop = Maps.newHashMap();
         mapTop.put("id", systemModule.getModuleId());
         mapTop.put("pId", parent);
         mapTop.put("open", true);
         mergeModule(systemModules, maps, systemModule.getModuleId().toString(),nameOrTitle, add, edit);
-        mapTop.put("isParent", maps.size() > size ? true : false);
+//        mapTop.put("isParent", maps.size() > size ? true : false);
         mapTop.put("add", add);
         mapTop.put("edit", edit);
         if("title".equals(nameOrTitle)){
