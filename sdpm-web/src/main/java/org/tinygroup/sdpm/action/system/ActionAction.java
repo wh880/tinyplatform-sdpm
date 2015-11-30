@@ -27,7 +27,7 @@ public class ActionAction extends BaseController{
 	@RequestMapping("find")
 	public String find(SystemAction action,Model model){
 //		action.setActionObjectType("user");
-		List<SystemAction> actions=actionService.find(action,null,false);
+		List<SystemAction> actions=actionService.findAction(action,null,false);
 //		Integer[] ids = new Integer[actions.size()];
 //		for(int i=0,n=actions.size();i<n;i++){
 //			ids[i]=actions.get(i).getActionObjectId();
@@ -52,7 +52,7 @@ public class ActionAction extends BaseController{
 			action.setActionProduct(cookieProductId);
 		}
 		
-		Pager<SystemAction>  pagerSystemAction = actionService.queryPager(start, limit,ActionUtil.getActionDateCondition(choice), action, order, ordertype);
+		Pager<SystemAction>  pagerSystemAction = actionService.queryActionPager(start, limit,ActionUtil.getActionDateCondition(choice), action, order, ordertype);
 
 		model.addAttribute("systemAction",pagerSystemAction);
 		
@@ -62,7 +62,7 @@ public class ActionAction extends BaseController{
 
 	@RequestMapping("ajax/history")
 	public String getHistory(SystemAction action, Model model){
-		List<SystemAction> actions = actionService.find(action,"actionId",true);
+		List<SystemAction> actions = actionService.findAction(action,"actionId",true);
 		Map<SystemAction,List<SystemHistory>> map = new LinkedHashMap<SystemAction, List<SystemHistory>>();
 		for(SystemAction action1 : actions){
 			SystemHistory history = new SystemHistory();

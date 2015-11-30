@@ -95,7 +95,7 @@ public class ActiveAction extends BaseController {
             } else {
                 String startDateStr = DateUtils.formatDate(startDate, "yyyy-MM-dd HH:mm:ss");
                 String endDateStr = DateUtils.formatDate(endDate, "yyyy-MM-dd HH:mm:ss");
-                Pager<SystemAction> actionPager = actionService.queryBetweenDate(start, limit, systemAction, startDateStr, endDateStr, order, "asc".equals(ordertype) ? true : false);
+                Pager<SystemAction> actionPager = actionService.queryActionBetweenDate(start, limit, systemAction, startDateStr, endDateStr, order, "asc".equals(ordertype) ? true : false);
                 model.addAttribute("actionPager", actionPager);
             }
         }
