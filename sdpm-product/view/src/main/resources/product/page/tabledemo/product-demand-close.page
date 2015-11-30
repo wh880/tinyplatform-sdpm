@@ -29,9 +29,9 @@
             if ($(this).val() == '1') {
                 repeat.hide();
                 subdivision.show();
-                $("[name=storyChildStories]").attr("ignore","");
-                $("[name=storyDuplicateStory]").attr("ignore","ignore");
-                $("[name=storyDuplicateStory]").val(0).trigger("change");
+                $("input[name=storyChildStories],input[name=storyChildStories-name]").attr("ignore","");
+                $("input[name=storyDuplicateStory],input[name=storyDuplicateStory-name]").attr("ignore","ignore");
+                $("input[name=storyDuplicateStory]").val("").trigger("change");
                 $(function() {
                     ajaxRead("${sid}", "storyChildStories", "storyId", "storyTitle", "/product/story/storyList?productId=${cookieProductId}&storyId=${story?.storyId}");
                 })
@@ -39,17 +39,16 @@
             } else if ($(this).val() == '2') {
                 subdivision.hide();
                 repeat.show();
-                $("[name=storyDuplicateStory]").attr("ignore","");
-                $("[name=storyChildStories]").attr("ignore","ignore");
-                $("[name=storyChildStories]").val(0).trigger("change");
+                $("input[name=storyDuplicateStory],input[name=storyDuplicateStory-name]").attr("ignore","");
+                $("input[name=storyChildStories],input[name=storyChildStories-name]").attr("ignore","ignore");
+                $("input[name=storyChildStories]").val("").trigger("change");
                 $(function() {
                     ajaxRead("${sid}", "storyDuplicateStory", "storyId", "storyTitle", "/product/story/storyList?productId=${cookieProductId}&storyId=${story?.storyId}");
                 })
             } else {
-                $("[name=storyDuplicateStory]").attr("ignore","ignore");
-                $("[name=storyChildStories]").attr("ignore","ignore");
-                $("[name=storyChildStories]").val(0).trigger("change");
-                $("[name=storyDuplicateStory]").val(0).trigger("change");
+                $("input[name=storyDuplicateStory],input[name=storyDuplicateStory-name]").attr("ignore","ignore");
+                $("input[name=storyChildStories],input[name=storyChildStories-name]").attr("ignore","ignore");
+                $("input[name=storyChildStories],input[name=storyDuplicateStory]").val("").trigger("change");
                 subdivision.hide();
                 repeat.hide();
             }

@@ -30,50 +30,52 @@
 
     $(document).ready(function(){
 
-        var oldvalue = "";
-        $("input[name='planBeginDate']").bind("click",function(){
-            oldvalue = $(this).val();
-
-        });
-
-        $("input[name='planBeginDate']").bind("blur input propertychange",function(){
-
-            var newvalue = $(this).val();
-
-            if(newvalue!=""&&newvalue!=oldvalue){
-                if($("input[name='endTime']:checked")[0]){
-                    $("input[name='endTime']:checked").trigger('click');
-                }
-
-
-
-            }
-        });
-
-        var oldvalueend = "";
-        $("input[name='planEndDate']").bind("click",function(){
-            oldvalueend = $(this).val();
-
-        });
-        $("input[name='planEndDate']").on("blur",function(){
-            var newvalueend = $(this).val();
-            var dateend =new Date(Date.parse(newvalueend.replace(/-/g, "/")));
-            var datestart = new Date(Date.parse($("input[name='planBeginDate']").val().replace(/-/g, "/")));
-
-
-            if(newvalueend!=""&&newvalueend!=oldvalueend){
-
-                if(dateend<=datestart){
-                    $("input[name='planEndDate']").val(oldvalueend);
-/*要更改*/             $("input[name='planEndDate']").addClass("Validform_error");
-                    $("input[name='planEndDate']").closest("formControls").next().html("<span class='Validform_checktip Validform_wrong'>结束日期必须大于开始日期！</span>");
-
-                }else{
-                    $("input[name='endTime']:checked").attr("checked",false);
-                }
-
-            }
-        });
+//        var oldvalue = "";
+//        $("input[name='planBeginDate']").bind("click",function(){
+//            oldvalue = $(this).val();
+//
+//        });
+//
+//        $("input[name='planBeginDate']").bind("blur input propertychange",function(){
+//
+//            var newvalue = $(this).val();
+//
+//            if(newvalue!=""&&newvalue!=oldvalue){
+//                if($("input[name='endTime']:checked")[0]){
+//                    $("input[name='endTime']:checked").trigger('click');
+//                }
+//
+//
+//
+//            }
+//        });
+//
+//        var oldvalueend = "";
+//        $("input[name='planEndDate']").bind("click",function(){
+//            oldvalueend = $(this).val();
+//
+//        });
+//        $("input[name='planEndDate']").on("blur",function(){
+//            var newvalueend = $(this).val();
+//            var dateend =new Date(Date.parse(newvalueend.replace(/-/g, "/")));
+//            var datestart = new Date(Date.parse($("input[name='planBeginDate']").val().replace(/-/g, "/")));
+//
+//
+//            if(newvalueend!=""&&newvalueend!=oldvalueend){
+//
+//                if(dateend<=datestart){
+//                    layer.msg("结束日期必须大于开始日期！",1);
+//                    $("input[name='planEndDate']").val(oldvalueend).trigger("blur");
+//
+///*要更改*/            // $("input[name='planEndDate']").addClass("Validform_error");
+//                    //$("input[name='planEndDate']").closest("formControls").next().html("<span class='Validform_checktip Validform_wrong'>结束日期必须大于开始日期！</span>");
+//
+//                }else{
+//                    $("input[name='endTime']:checked").attr("checked",false);
+//                }
+//
+//            }
+//        });
 
 
 
@@ -158,19 +160,20 @@
         #@validateDiv("col-2")#end
     #end
 
+##    #@elementItem()
+##        #@colLabel("col-1")<span class="c-red">*</span>开始日期:#end
+##        #@formControlDiv("col-3")
+##			#@tinyDateInput(
+##				"planBeginDate" "" "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空","id":"planBeginDate"})#end
+##        #end
+##        #@validateDiv("col-2")#end
+##    #end
     #@elementItem()
-        #@colLabel("col-1")<span class="c-red">*</span>开始日期:#end
-        #@formControlDiv("col-3")
-			#@tinyDateInput(
-				"planBeginDate" "" "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空","id":"planBeginDate"})#end
-        #end
-        #@validateDiv("col-2")#end
-    #end
-    #@elementItem()
-        #@colLabel("col-1")<span class="c-red">*</span>结束日期:#end
+        #@colLabel("col-1")<span class="c-red">*</span>计划日期:#end
         #@formControlDiv("col-9")
 			<div class="col-4">
-			#@tinyDateInput("planEndDate" "" "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空"})#end
+                #dateInputBetween("planBeginDate" "planEndDate" "" "" {"style":"width:135px","datatype":"*","nullmsg":"日期不能为空"})
+			##@tinyDateInput("planEndDate" "" "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空"})#end
 			</div>
             <div  class="col-8">
 
@@ -201,7 +204,7 @@
     #@elementItem()
         #@colLabel("col-1")描述:#end
         #@formControlDiv("col-10")
-           #@Teditor("planSpec" "planSpec" {"initialFrameHeight":"250" ,"placeholder":"","datatype":"*0-500"})#end
+           #@Teditor("planSpec" "planSpec" {"style":"height:200px" ,"placeholder":"","datatype":"*0-500"})#end
         #end
         #@validateDiv("col-2")#end
     #end

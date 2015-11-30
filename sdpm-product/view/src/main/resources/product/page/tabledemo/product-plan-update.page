@@ -57,29 +57,29 @@
             }
         });
 
-        var oldvalueend = "";
-        $("input[name='planEndDate']").bind("click", function () {
-            oldvalueend = $(this).val();
-
-        });
-        $("input[name='planEndDate']").on("blur", function () {
-            var newvalueend = $(this).val();
-            var dateend = new Date(Date.parse(newvalueend.replace(/-/g, "/")));
-            var datestart = new Date(Date.parse($("input[name='planBeginDate']").val().replace(/-/g, "/")));
-
-
-            if (newvalueend != "" && newvalueend != oldvalueend) {
-
-                if (dateend <= datestart) {
-                    $("input[name='planEndDate']").val(oldvalueend);
-                    alert("结束日期必须大于开始日期");
-
-                } else {
-                    $("input[name='endTime']:checked").attr("checked", false);
-                }
-
-            }
-        });
+//        var oldvalueend = "";
+//        $("input[name='planEndDate']").bind("click", function () {
+//            oldvalueend = $(this).val();
+//
+//        });
+//        $("input[name='planEndDate']").on("blur", function () {
+//            var newvalueend = $(this).val();
+//            var dateend = new Date(Date.parse(newvalueend.replace(/-/g, "/")));
+//            var datestart = new Date(Date.parse($("input[name='planBeginDate']").val().replace(/-/g, "/")));
+//
+//
+//            if (newvalueend != "" && newvalueend != oldvalueend) {
+//
+//                if (dateend <= datestart) {
+//                    $("input[name='planEndDate']").val(oldvalueend);
+//                    alert("结束日期必须大于开始日期");
+//
+//                } else {
+//                    $("input[name='endTime']:checked").attr("checked", false);
+//                }
+//
+//            }
+//        });
 
 
         $("input[name='endTime']").each(function () {
@@ -153,7 +153,7 @@
         #@validateDiv("col-2")#end
     #end
     #@elementItem()
-        #@colLabel("col-1")名称:#end
+        #@colLabel("col-1")<span class="c-red">*</span>名称:#end
         #@formControlDiv("col-3")
             #tinyInput("text" "planName" plan?.planName{"datatype":"*","nullmsg":"计划名不能为空！","id":"planName","class":"input-text",
                 "ajaxurl":TINY_CONTEXT_PATH+adminPath+"/product/plan/judgePlanName?planId="+plan?.planId+"&productId="+cookieProductId})
@@ -161,19 +161,20 @@
         #@validateDiv("col-2")#end
     #end
 
+##    #@elementItem()
+##        #@colLabel("col-1")开始日期:#end
+##        #@formControlDiv("col-3")
+##            #@tinyDateInput("planBeginDate" plan?.planBeginDate?formatDate(plan?.planBeginDate,
+##                'yyyy-MM-dd'):"" "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空","readonly":"readonly"})#end
+##        #end
+##        #@validateDiv("col-2")#end
+##    #end
     #@elementItem()
-        #@colLabel("col-1")开始日期:#end
-        #@formControlDiv("col-3")
-            #@tinyDateInput("planBeginDate" plan?.planBeginDate?formatDate(plan?.planBeginDate,
-                'yyyy-MM-dd'):"" "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空","readonly":"readonly"})#end
-        #end
-        #@validateDiv("col-2")#end
-    #end
-    #@elementItem()
-        #@colLabel("col-1")<span class="c-red">*</span>结束日期:#end
+        #@colLabel("col-1")<span class="c-red">*</span>计划日期:#end
         #@formControlDiv("col-9")
             <div class="col-4">
-                #@tinyDateInput("planEndDate" plan?.planEndDate?formatDate(plan?.planEndDate,'yyyy-MM-dd'):"" "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空"})#end
+                #dateInputBetween("planBeginDate" "planEndDate" plan?.planBeginDate?formatDate(plan?.planBeginDate,'yyyy-MM-dd'):"" plan?.planEndDate?formatDate(plan?.planEndDate,'yyyy-MM-dd'):"" {"style":"width:135px","datatype":"*","nullmsg":"日期不能为空"})
+##                #@tinyDateInput("planEndDate" plan?.planEndDate?formatDate(plan?.planEndDate,'yyyy-MM-dd'):"" "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空"})#end
             </div>
             <div  class="col-8">
 
@@ -205,8 +206,7 @@
     #@elementItem()
         #@colLabel("col-1")描述:#end
         #@formControlDiv("col-10")
-            #@Teditor("planSpec" "planSpec" {"initialFrameHeight":"250" ,"placeholder":"说点什么...最少输入10个字符","datatype":
-                "*10-500"})${plan?.planSpec}#end
+            #@Teditor("planSpec" "planSpec" {"initialFrameHeight":"250" ,"placeholder":"说点什么...最少输入10个字符"})${plan?.planSpec}#end
         #end
         #@validateDiv("col-2")#end
     #end

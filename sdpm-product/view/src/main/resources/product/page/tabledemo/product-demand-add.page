@@ -3,14 +3,16 @@
     $(document).ready(function () {
         $("select[name='storySource']").bind('change', function () {
             if (0 == $(this).val()) {
-                $("[name='clientRequestId']").attr("ignore","")
+                $("input[name='clientRequestId'],input[name='clientRequestId-name']").attr("ignore","");
+//                $("[name='clientRequestId-name']").attr("ignore","")
                 $("[name='clientRequestId']").blur();
                 $(".customer-request").show();
                 $("#demand-sources").addClass("col-5");
             } else {
-                $("[name='clientRequestId']").attr("ignore","ignore");
+                $("input[name='clientRequestId'],input[name='clientRequestId-name']").attr("ignore","ignore");
+//                $("[name='clientRequestId-name']").attr("ignore","ignore");
                 $(".customer-request").hide();
-                $("[name='clientRequestId']").val(0).trigger("change");
+                $("[name='clientRequestId']").val("").trigger("change");
                 $("#demand-sources").removeClass("col-5");
             }
         });
@@ -269,7 +271,7 @@
     #@colLabel()关键词：#end
     #@formControlDiv("col-4")
         #tinyInput(
-            "text" "storyKeywords" ""{"datatype":"","id":"text","class":"input-text"})
+            "text" "storyKeywords" ""{"id":"text","class":"input-text"})
     #end
     #@validateDiv("col-2")#end
 #end

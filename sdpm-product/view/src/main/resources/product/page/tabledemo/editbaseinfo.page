@@ -4,12 +4,14 @@
     $(document).ready(function () {
         $("select[name='storySource']").bind('change', function () {
             if (0 == $(this).val()) {
-                $("[name='clientRequestId']").attr("ignore","")
+                $("input[name='clientRequestId'],input[name='clientRequestId-name']").attr("ignore","");
+                $("[name='clientRequestId']").blur();
                 $(".customer-request").show();
+                $("#demand-sources").addClass("col-5");
             } else {
-                $("[name='clientRequestId']").attr("ignore","ignore");
+                $("input[name='clientRequestId'],input[name='clientRequestId-name']").attr("ignore","ignore");
                 $(".customer-request").hide();
-                $("[name='clientRequestId']").val(0).trigger("change");
+                $("[name='clientRequestId']").val("").trigger("change");
             }
         });
 
@@ -108,7 +110,7 @@
             #@colLabel()<span class='c-red'>*</span>客户请求：#end
             #@formControlDiv("col-8")
             #@Tselect2F()
-                #Tselect2Ajax("clientRequestId" story?.clientRequestId TINY_CONTEXT_PATH+adminPath+"/service/request/ajax/requestInCondition"
+                #Tselect2Ajax("clientRequestId" story?.clientRequestId>0?story?.clientRequestId:"" TINY_CONTEXT_PATH+adminPath+"/service/request/ajax/requestInCondition"
                 {"dataId":"clientRequestId","dataText":"requestTitle","placeholder":"查询请求","nullmsg":"请选择请求！","datatype":"*"})
             #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH +adminPath}/service/request/form" class="r">增加</a>#end
             #end
@@ -210,7 +212,7 @@
                 #@formControlDiv("col-8")
                     #@Tselect2F()
                         #Tselect2Ajax("storyAssignedTo" story?.storyAssignedTo TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
-                        {"id":"reviewedSelect","dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询指派人","nullmsg":"请选择指派人！","datatype":"*"})
+                        {"id":"reviewedSelect","dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询指派人"})
                         #@Tselect2Fix()
                             #set(m=menuManager.getMenu("organizationAddUser"))
                             #if(m)
