@@ -109,7 +109,7 @@ public class DocumentAction extends BaseController {
         }
         systemModule.setModuleRoot(projectId);
         systemModule.setModuleType("projectDoc");
-        return moduleService.findModules(systemModule);
+        return moduleService.findModuleList(systemModule);
     }
 
     /**
@@ -127,7 +127,7 @@ public class DocumentAction extends BaseController {
         }
         systemModule.setModuleRoot(productId);
         systemModule.setModuleType("productDoc");
-        return moduleService.findModules(systemModule);
+        return moduleService.findModuleList(systemModule);
     }
 
     /**

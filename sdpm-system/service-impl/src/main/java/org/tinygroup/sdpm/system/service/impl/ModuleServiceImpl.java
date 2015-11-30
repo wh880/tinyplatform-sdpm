@@ -14,31 +14,27 @@ public class ModuleServiceImpl implements ModuleService {
     @Autowired
     private ModuleManager systemModuleManager;
 
-    public SystemModule edit(SystemModule systemModule) {
+    public SystemModule editModule(SystemModule systemModule) {
         return systemModuleManager.edit(systemModule);
     }
 
-    public int deleteById(int id) {
+    public Integer deleteModuleById(Integer id) {
         return systemModuleManager.deleteById(id);
     }
 
-    public int delete(SystemModule systemModule) {
+    public Integer delete(SystemModule systemModule) {
         return systemModuleManager.delete(systemModule);
     }
 
-    public SystemModule findById(int id) {
+    public SystemModule findById(Integer id) {
         return systemModuleManager.findById(id);
-    }
-
-    public List<SystemModule> findModules(SystemModule systemModule) {
-        return systemModuleManager.findByModules(systemModule);
     }
 
     public List<SystemModule> findAllModules(SystemModule systemModule) {
         return systemModuleManager.findModules(systemModule, new ArrayList<SystemModule>());
     }
 
-    public SystemModule add(SystemModule systemModule) {
+    public SystemModule addSystemModule(SystemModule systemModule) {
         return systemModuleManager.add(systemModule);
     }
 
@@ -46,7 +42,7 @@ public class ModuleServiceImpl implements ModuleService {
         return systemModuleManager.editNameAndTitle(systemModule);
     }
 
-    public int batchDelete(Integer... ids) {
+    public Integer batchDeleteSystemModule(Integer... ids) {
         return systemModuleManager.batchDelete(ids);
     }
 
@@ -54,11 +50,7 @@ public class ModuleServiceImpl implements ModuleService {
         return systemModuleManager.findList(systemModule);
     }
 
-    public int deleteAndEdit(Integer id) {
-        return systemModuleManager.deleteAndEdit(id);
-    }
-
-    public int deleteByType(String type) {
+    public Integer deleteSystemModuleByType(String type) {
         return systemModuleManager.deleteByType(type);
     }
 

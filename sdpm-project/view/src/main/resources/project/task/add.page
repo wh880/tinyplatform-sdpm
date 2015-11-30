@@ -60,7 +60,7 @@
             #@sdpmItem("指派给")
                 #@Tselect2F()
                     #Tselect2Ajax("taskAssignedTo" copyTask?.taskAssignedTo TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
-                    {"dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询指派人","nullmsg":"请选择指派人！","datatype":"*"})
+                    {"dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询指派人","nullmsg":"请选择指派人！"})
                     #@Tselect2Fix()
                         #set(m=menuManager.getMenu("organizationAddUser"))
                         #if(m)
@@ -168,7 +168,7 @@
                 #@Tselect2F()
                     #Tselect2Ajax("taskMailToArray" story?.taskMailTo TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
                     {"id":"storyMailtoSelect","dataId":"orgUserId","dataText":"orgUserRealName",
-                        "placeholder":"查询抄送人","nullmsg":"请选择抄送人！","datatype":"*","multiple":"multiple"})
+                        "placeholder":"查询抄送人","nullmsg":"请选择抄送人！","multiple":"multiple"})
                 ##填写任意内容，侦听需重新填加 A侦听已内置
                     #@Tselect2Fix()
                         #set(m=menuManager.getMenu("organizationAddUser"))

@@ -60,8 +60,6 @@ public interface StoryService {
      */
     ProductStory findStory(Integer storyId);
 
-/*	Pager<ProductStory> findUserPaging(Integer start, Integer limit, ProductStory story);
-*/
 
     /**
      * 根据多个ID查找

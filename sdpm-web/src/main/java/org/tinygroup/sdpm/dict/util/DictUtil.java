@@ -42,12 +42,12 @@ public class DictUtil {
     }
 
     public static void insertDict(List<DictNodeEntries> dictNodeEntries) {
-        moduleService.deleteByType("dict");
+        moduleService.deleteSystemModuleByType("dict");
         dictService.deleteAllDict();
         for (DictNodeEntries entries : dictNodeEntries) {
             int parent = 0;
             if (entries.getName() != null) {
-                parent = moduleService.add(assembleModule(entries.getName(), entries.getTitle(), "dict", 0)).getModuleId();
+                parent = moduleService.addSystemModule(assembleModule(entries.getName(), entries.getTitle(), "dict", 0)).getModuleId();
             }
             mergeDictEntry(entries.getDictNodeEntries(), parent);
         }
@@ -57,7 +57,7 @@ public class DictUtil {
         if (dictNodeEntries == null) return;
         for (DictNodeEntry dictNodeEntry : dictNodeEntries) {
             int p = 0;
-            p = moduleService.add(assembleModule(dictNodeEntry.getName(), dictNodeEntry.getTitle(), "dict", parent)).getModuleId();
+            p = moduleService.addSystemModule(assembleModule(dictNodeEntry.getName(), dictNodeEntry.getTitle(), "dict", parent)).getModuleId();
             if (dictNodeEntry.getDictItems() != null) {
                 for (org.tinygroup.sdpm.dict.inter.DictItem dictItem : dictNodeEntry.getDictItems()) {
                     dictService.addDict(assembleDict(dictItem.getKey(), dictItem.getValue(), dictItem.getSort(), p, 0));

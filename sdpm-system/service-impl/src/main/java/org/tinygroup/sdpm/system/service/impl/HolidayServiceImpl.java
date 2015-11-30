@@ -40,7 +40,7 @@ public class HolidayServiceImpl implements HolidayService {
         return holidayManager.findById(id);
     }
 
-    public List<Holiday> findByIds(Integer... ids) {
+    public List<Holiday> findHolidayByIds(Integer... ids) {
         return holidayManager.findByIds(ids);
     }
 

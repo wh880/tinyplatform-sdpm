@@ -65,7 +65,7 @@ public interface HolidayService {
      * @param ids
      * @return
      */
-    List<Holiday> findByIds(Integer... ids);
+    List<Holiday> findHolidayByIds(Integer... ids);
 
     /**
      * 批量软删除
