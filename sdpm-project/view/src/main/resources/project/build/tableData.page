@@ -1,3 +1,7 @@
+#macro tinyTableItemRemove(doActionUrl itemId)
+<a href="javascript:;" class="Item-Remove" data-url="${doActionUrl}" data-id="${itemId}">#bodyContent</a>
+#end
+
 #setTinyItemCount(buildPager.totalCount)
 #foreach(b : buildPager.getRecords())
     #@tr()
@@ -19,8 +23,7 @@
                 <a class="buildJump" value="${b?.buildProject}" href="${TINY_CONTEXT_PATH+adminPath}${m.href}?buildId=${b?.buildId}&projectId=${b?.buildProject}&productId=${b?.buildProduct}"
                    title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
                 #else
-                    #@tinyTableItemRemove(TINY_CONTEXT_PATH+adminPath+m.href b.buildId)
-                    <i class="${m.icon}" title=${m.name}></i>#end
+                <a href="javascript:;" class="build-remove" data-url="${TINY_CONTEXT_PATH+adminPath+m.href}" data-id="${b?.buildId}"><i class="${m.icon}" title=${m.name}></i></a>
                 #end
             #end
         #end
@@ -35,6 +38,35 @@
         $(".buildJump").on("click",function(){
             var projectId = $(this).attr("value");
             $.cookie("currentProjectId",projectId,{path:"/"});
+        });
+
+        $(".build-remove").on("click",function(){
+            var url = $(this).attr("data-url");
+            var that=this;
+            layer.confirm('确定要删除该记录？', function (index) {
+                var id = $(that).attr("data-id");
+                $.ajax({
+                    url:url+"?id="+id,
+                    dataType:"json",
+                    success:function(data){
+                        if(data.status=="success"||data.status=="y"){
+                            layer.msg(data.info, 2, 1);
+                            setTimeout(function(){
+                                layer.closeAll();
+                                $("#productLinetable").trigger("initnav");
+                                $("#lineTree").trigger("refresh");
+                            },300);
+                        }else{
+                            var msg=data.info?data.info:"系统出错";
+                            layer.msg(msg);
+                        }
+                    },
+                    error: function() {
+                        layer.msg("系统出错");
+                    }
+                });
+
+            });
         });
     })
 

@@ -55,7 +55,7 @@
             oldvalueend = $(this).val();
 
         });
-        $("input[name='planEndDate']").bind("blur",function(){
+        $("input[name='planEndDate']").on("blur",function(){
             var newvalueend = $(this).val();
             var dateend =new Date(Date.parse(newvalueend.replace(/-/g, "/")));
             var datestart = new Date(Date.parse($("input[name='planBeginDate']").val().replace(/-/g, "/")));
@@ -65,7 +65,8 @@
 
                 if(dateend<=datestart){
                     $("input[name='planEndDate']").val(oldvalueend);
-                    alert("结束日期必须大于开始日期");
+/*要更改*/             $("input[name='planEndDate']").addClass("Validform_error");
+                    $("input[name='planEndDate']").closest("formControls").next().html("<span class='Validform_checktip Validform_wrong'>结束日期必须大于开始日期！</span>");
 
                 }else{
                     $("input[name='endTime']:checked").attr("checked",false);
@@ -108,6 +109,7 @@
                         end = new Date(start.getFullYear()+1,start.getMonth(),start.getDate());
                     }
                     $("input[name='planEndDate']").val(end.format("yyyy-MM-dd"));
+                    $("input[name='planEndDate']").blur();
                 }else{
                     this.checked=false;
                     alert("请选择开始日期");
