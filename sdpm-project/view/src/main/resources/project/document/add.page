@@ -262,7 +262,7 @@
         #@elementItem()
             <div class="col-12">
                 <div class="col-5">
-                    <button style="float: right" type="submit" id="submit" class="commitBtn">保存</button>
+                    <button style="float: right" type="submit" id="submit2" class="commitBtn">保存</button>
                 </div>
                 <div class="col-1"></div>
                 <div class="col-1">
