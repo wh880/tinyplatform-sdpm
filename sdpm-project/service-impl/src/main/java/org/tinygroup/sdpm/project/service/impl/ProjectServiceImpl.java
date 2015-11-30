@@ -35,8 +35,8 @@ public class ProjectServiceImpl implements ProjectService {
         return projectManager.findListByIds(list);
     }
 
-    public List<Project> findProjects(Project project,Date startDate,Date endDate) {
-        return projectManager.findListProjects(project,startDate,endDate);
+    public List<Project> findProjects(Project project, Date startDate, Date endDate) {
+        return projectManager.findListProjects(project, startDate, endDate);
     }
 
     public Integer batchDeleteProject(Integer[] projectIds) {
@@ -47,11 +47,21 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     public Pager<Project> findProjects(Integer start, Integer limit, String order, String orderType, Integer... ids) {
-        return projectManager.findPagerProjects(start, limit, order, "asc".equals(orderType) ? true : false,ids);
+        return projectManager.findPagerProjects(start, limit, order, "asc".equals(orderType) ? true : false, ids);
     }
 
     public List<Project> findListByTeamUserId(String userId, String acl) {
-        return projectManager.findListByTeamUserId(userId,acl);
+        return projectManager.findListByTeamUserId(userId, acl);
+    }
+
+    public List<Project> findListByRelatedUser(String userId) {
+        Project project = new Project();
+        project.setProjectOpenedBy(userId);
+        project.setProjectPo(userId);
+        project.setProjectPm(userId);
+        project.setProjectQd(userId);
+        project.setProjectRd(userId);
+        return projectManager.findListByRelatedUser(project);
     }
 
     public Project addProject(Project project) {

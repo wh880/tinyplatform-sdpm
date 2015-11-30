@@ -117,7 +117,7 @@ public class StoryAction extends BaseController {
      * @param model
      * @return
      */
-    @RequiresPermissions("pro-demand-add")
+    @RequiresPermissions("product-demand-add")
     @RequestMapping("/addstory")
     public String addStory(HttpServletRequest request, Model model, String lastAddress) {
         List<ServiceRequest> requests = requestService.getRequestList(null);

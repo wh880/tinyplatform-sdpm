@@ -78,19 +78,13 @@
                         #@iconOperations(
                             "#myModal" "" "导出" "700" "80" "/product/page/tabledemo/product-export-template.pagelet"
                             "ml-5") &nbsp;导出模板#end
-
                     #end
                 #end &nbsp;
-	             
-				
+
 					<a href="${TINY_CONTEXT_PATH +adminPath}/product/page/tabledemo/product-report.page">#buttonIcon(iconClass=
                         "icon-bar-chart")报表</a>&nbsp;
                 #@iconOperations("#myModal" "icon-plus-sign" "批量添加" "1300" "500"
                     "/product/page/tabledemo/product-demand-addlist.pagelet" "ml-5")&nbsp;批量添加#end
-
-
-
-
 
                 #@iconOperations(
                     "#myModal" "icon-plus" "提需求" "1000" "400" "/product/story/addstory"

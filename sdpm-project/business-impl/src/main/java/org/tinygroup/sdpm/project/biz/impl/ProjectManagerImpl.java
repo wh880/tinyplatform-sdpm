@@ -34,6 +34,11 @@ public class ProjectManagerImpl implements ProjectManager {
         return projectDao.findListByTeamUserId(userId,acl);
     }
 
+    public List<Project> findListByRelatedUser(Project project) {
+        return projectDao.findListByRelatedUser(project);
+    }
+
+
     public List<Project> findListProjects(Project project,Date startDate,Date endDate) {
         return projectDao.findListWithStatistics(project,startDate,endDate);
     }

@@ -25,6 +25,13 @@ import java.util.Date;
 import java.util.List;
 
 public interface ProjectDao extends BaseDao<Project, Integer> {
+    /**
+     * 查找相关干系人的项目
+     * 查询条件OR
+     * @param project
+     * @return
+     */
+    List<Project> findListByRelatedUser(Project project);
 
     /**
      * 获取项目列表，并附带统计信息

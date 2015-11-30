@@ -16,10 +16,18 @@ public interface ProjectService {
      * 查找用户所在团队所拥有的项目
      *
      * @param userId OrgUser.Id
-     * @param acl 权限控制
+     * @param acl    权限控制
      * @return
      */
     List<Project> findListByTeamUserId(String userId, String acl);
+
+    /**
+     * 查找相关干系人的项目
+     * 查询条件OR
+     * @param userId
+     * @return
+     */
+    List<Project> findListByRelatedUser(String userId);
 
     /**
      * 新增项目，保证项目名称唯一

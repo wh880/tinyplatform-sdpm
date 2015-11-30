@@ -50,6 +50,13 @@ public class ProjectUtils {
                 // 私有项目，根据角色定义
                 userProjectList.addAll(listByTeamUserId);
             }
+            List projectIdList = Collections3.extractToList(userProjectList, "projectId");
+            List<Project> relatedProject = projectService.findListByRelatedUser(UserUtils.getUserId());
+            for (Project project : relatedProject) {
+                if (!projectIdList.contains(project.getProjectId())) {
+                    userProjectList.add(project);
+                }
+            }
             UserUtils.putCache(USER_CACHE_PROJECT_LIST, userProjectList);
         }
         return userProjectList;

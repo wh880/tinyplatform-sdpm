@@ -1,4 +1,4 @@
-#!set(activeTitle="项目管理",activeMenuId=currentPageId)
+#!set(activeTitle="编辑项目",activeMenuId=currentPageId)
 #import("/org/tinygroup/form/components/form.component")
 #import("/org/tinygroup/icon/components/icon.component")
 #import("/org/tinygroup/button/components/button_common.component")
@@ -38,7 +38,7 @@
         #@tabBodyCol("ptop-5")
         ##编辑页面
             #@div(divClass="operationbar")
-            <a href="#">项目名称</a>>编辑项目
+            编辑项目
             #end
         #end
     #end
@@ -65,19 +65,13 @@
     #@elementItem()
         #@sdpmItem("起始日期" "*")
             #@tinyDateInput(
-                "projectBegin" formatDate(project?.projectBegin,
-                "yyyy-MM-dd") "yyyy-MM-dd" {"style":"width:275px","datatype":"*","nullmsg":"结束日期不能为空",
-            "placeholder":
-            "选择日期"})#end
+                "projectBegin" formatDate(project?.projectBegin,"yyyy-MM-dd") "yyyy-MM-dd" {"style":"width:275px","datatype":"*","nullmsg":"结束日期不能为空",            "placeholder":"选择日期"})#end
         #end
     #end
     #@elementItem()
         #@sdpmItem("结束日期" "*")
             #@tinyDateInput(
-                "projectEnd" formatDate(project?.projectEnd,
-                "yyyy-MM-dd") "yyyy-MM-dd" {"style":"width:275px","datatype":"*","nullmsg":"结束日期不能为空",
-            "placeholder":
-            "选择日期"})#end
+                "projectEnd" formatDate(project?.projectEnd,"yyyy-MM-dd") "yyyy-MM-dd" {"style":"width:275px","datatype":"*","nullmsg":"结束日期不能为空","placeholder":"选择日期"})#end
         #end
     #end
     #@elementItem()
@@ -128,8 +122,7 @@
         #@sdpmItem("项目状态")
             #@Tselect2F()
                 #@Tselect2Body(
-                    "projectStatus" project?.projectStatus {"class":"input-text","minimumResultsForSearch":
-                    "Infinity"}) ##,"multiple":"multiple"加上为多选项
+                    "projectStatus" project?.projectStatus {"class":"input-text","minimumResultsForSearch":"Infinity"}) ##,"multiple":"multiple"加上为多选项
                     #foreach(type : getDict("projectStatus"))
                     <option value=${type.value}>${type.text}</option>
                     #end
@@ -160,12 +153,9 @@
             #@Tselect2F()
                 #Tselect2Ajax("projectPm" project?.projectPm TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
                 {"dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询产品负责人","nullmsg":"请选择产品负责人！","datatype":"*"})
-
                 #@Tselect2Fix()
                     #set(m=menuManager.getMenu("organizationAddUser"))
-                    #if(m)
-                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
-                    #end
+                    #if(m)                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>                    #end
                     #set(m=menuManager.getMenu("organizationUser"))
                     #if(m)
                     <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
@@ -276,7 +266,7 @@
             var eTime =$("input[name=projectEnd]").val();
             var $Days=$("input[name=projectDays]");
             if (!bTime||!eTime){
-                    $Days.val("");
+                $Days.val("");
             }
                 $Days.val(getDateDiff(bTime,eTime));
         })

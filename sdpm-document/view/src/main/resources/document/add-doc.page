@@ -38,7 +38,7 @@
     #@elementItem()
         #@colLabel()文档类型#end
         #@skinMinimal("mt-20")
-            #labelRadio1(rId="typefile" rName="docType" rChecked="checked" rValue="1"
+            # labelRadio1(rId="typefile" rName="docType" rChecked="checked" rValue="1"
                 "setType(this.value);" labelText=getDict("docType","1") )
             #labelRadio1(rId="typeurl" rName="docType" rValue="2" labelText=getDict("docType",
                 "2") "setType(this.value);")
