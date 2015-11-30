@@ -147,7 +147,7 @@ public class UserAction extends BaseController {
      */
     @RequiresPermissions("organizationAddUser")
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String save(OrgUser user,Integer[] roleIds, Model model, String password1, String password2) {
+    public String save(OrgUser user, Integer[] roleIds, Model model, String password1, String password2) {
         if (StringUtil.isBlank(user.getOrgUserId())) {
             if (password1.equals(password2)) {
                 user.setOrgUserPassword(password1);
@@ -158,9 +158,9 @@ public class UserAction extends BaseController {
                         , UserUtils.getUserId()
                         , null, null, null, null, null);
 
-                roleService.batchAddRolesToUser(userTemp.getOrgUserId(),roleIds);
+                roleService.batchAddRolesToUser(userTemp.getOrgUserId(), roleIds);
             } else {
-                addMessage(model,"密码验证不正确");
+                addMessage(model, "密码验证不正确");
                 return "organization/user/addUser.page";
             }
         } else {
@@ -531,7 +531,7 @@ public class UserAction extends BaseController {
         } else if (!startDate.equals(endDate)) {
             String startDateStr = DateUtils.formatDate(startDate, "yyyy-MM-dd HH:mm:ss");
             String endDateStr = DateUtils.formatDate(endDate, "yyyy-MM-dd HH:mm:ss");
-            Pager<SystemAction> actionPager = actionService.queryBetweenDate(start, limit, systemAction, startDateStr, endDateStr, null, false);
+            Pager<SystemAction> actionPager = actionService.queryActionBetweenDate(start, limit, systemAction, startDateStr, endDateStr, null, false);
             model.addAttribute("actionPager", actionPager);
         } else {
             Pager<SystemAction> actionPager = actionService.findSystemActionPager(start, limit, systemAction, null, null);

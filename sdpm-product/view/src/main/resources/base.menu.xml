@@ -15,8 +15,7 @@
               sort="49" isShow="1"
               scope="product-io"/>
         <menu id="product-demand-add" name="提需求" href="/product/story/addstory" icon="icon-plus"
-              sort="48" isShow="1"
-              scope="product-io,testbuginfo-tab,pro-demandmenu-op"/>
+              sort="48" isShow="1" scope="product-io,testbuginfo-tab,pro-demandmenu-op"/>
         <menu id="product-demand-operation" name="需求操作" href="" icon="" sort="47" isShow="1" scope="product-oper"/>
         <menu id="product-demand-del" name="批量关闭" href="" icon="" sort="46" isShow="1" scope="product-del"/>
         <menu id="demand-alteration" name="变更需求" href="/product/story/productDemandChange/findPager?storyId="

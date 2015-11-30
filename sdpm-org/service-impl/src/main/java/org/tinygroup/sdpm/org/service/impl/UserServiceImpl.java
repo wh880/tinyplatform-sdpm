@@ -74,6 +74,7 @@ public class UserServiceImpl implements UserService {
 
     /**
      * 根据部门Id查询用户pager
+     *
      * @param deptId
      * @return
      */
@@ -138,6 +139,7 @@ public class UserServiceImpl implements UserService {
 
     /**
      * 根据用户id数组查出用户list
+     *
      * @param userId
      * @return
      */
@@ -149,7 +151,7 @@ public class UserServiceImpl implements UserService {
         return userManager.findTeamUserListByProjectId(projectId);
     }
 
-    public List<OrgUser> userInCondition(String condition, String ...ids) {
-        return userManager.userInCondition(condition,ids);
+    public List<OrgUser> userInCondition(String condition, String... ids) {
+        return userManager.userInCondition(condition, ids);
     }
 }

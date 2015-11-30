@@ -6,41 +6,46 @@ import java.util.Date;
 import java.util.List;
 
 public interface StatisticDao {
-	 List<StatisticOrg> findList(StatisticOrg statisticOrg);
+    List<StatisticOrg> findList(StatisticOrg statisticOrg);
 
-	/**
-	 * 获取项目的任务数
-	 * @param projectTaskSta
-	 * @return
+    /**
+     * 获取项目的任务数
+     *
+     * @param projectTaskSta
+     * @return
      */
-	 List<ProjectTaskSta> findProTasks(ProjectTaskSta projectTaskSta,Date startDate,Date endDate,Integer roleId);
+    List<ProjectTaskSta> findProTasks(ProjectTaskSta projectTaskSta, Date startDate, Date endDate, Integer roleId);
 
-	/**
-	 * Bug创建
-	 * @param qualityBugSta
-	 * @return
+    /**
+     * Bug创建
+     *
+     * @param qualityBugSta
+     * @return
      */
-	 List<QualityBugSta> findBugCreate(QualityBugSta qualityBugSta,Date startDate,Date endDate,Integer cProject,Integer cProduct);
+    List<QualityBugSta> findBugCreate(QualityBugSta qualityBugSta, Date startDate, Date endDate, Integer cProject, Integer cProduct);
 
-	/**
-	 * 获取被指派人和其bug数
-	 * @param assigned
-	 * @return
+    /**
+     * 获取被指派人和其bug数
+     *
+     * @param assigned
+     * @return
      */
-	 List<Assigned> findAssigned(Assigned assigned);
+    List<Assigned> findAssigned(Assigned assigned);
 
-	/**
-	 * 产品Bug数
-	 * @param qualityBugCall
-	 * @return
+    /**
+     * 产品Bug数
+     *
+     * @param qualityBugCall
+     * @return
      */
-	 List<QualityBugCall> findBugCall(QualityBugCall qualityBugCall);
+    List<QualityBugCall> findBugCall(QualityBugCall qualityBugCall);
 
-	/**
-	 * 产品投入表
-	 * @param productProject
-	 * @return
+    /**
+     * 产品投入表
+     *
+     * @param productProject
+     * @return
      */
-	List<ProductProject> productProjects(ProductProject productProject,boolean deleted,String userId);
+    List<ProductProject> productProjects(ProductProject productProject, boolean deleted, String userId);
 
 }

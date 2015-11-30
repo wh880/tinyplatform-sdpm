@@ -3,72 +3,72 @@ package org.tinygroup.sdpm.product.dao.pojo;
 import java.io.Serializable;
 
 public class ProductAndLine implements Serializable {
-	
-	private Integer productId;
-	
-	private String productName;
-	
-	private Integer productLineId;
-	
-	private String productLineName;
 
-	/**
-	 * 版本id
-	 */
-	private Integer buildId;
-	
-	/**
-	 * 版本名称
-	 */
-	private String buildName;
+    private Integer productId;
 
-	public Integer getBuildId() {
-		return buildId;
-	}
+    private String productName;
 
-	public void setBuildId(Integer buildId) {
-		this.buildId = buildId;
-	}
+    private Integer productLineId;
 
-	public String getBuildName() {
-		return buildName;
-	}
+    private String productLineName;
 
-	public void setBuildName(String buildName) {
-		this.buildName = buildName;
-	}
+    /**
+     * 版本id
+     */
+    private Integer buildId;
 
-	public Integer getProductId() {
-		return productId;
-	}
+    /**
+     * 版本名称
+     */
+    private String buildName;
 
-	public void setProductId(Integer productId) {
-		this.productId = productId;
-	}
+    public Integer getBuildId() {
+        return buildId;
+    }
 
-	public String getProductName() {
-		return productName;
-	}
+    public void setBuildId(Integer buildId) {
+        this.buildId = buildId;
+    }
 
-	public void setProductName(String productName) {
-		this.productName = productName;
-	}
+    public String getBuildName() {
+        return buildName;
+    }
 
-	public Integer getProductLineId() {
-		return productLineId;
-	}
+    public void setBuildName(String buildName) {
+        this.buildName = buildName;
+    }
 
-	public void setProductLineId(Integer productLineId) {
-		this.productLineId = productLineId;
-	}
+    public Integer getProductId() {
+        return productId;
+    }
 
-	public String getProductLineName() {
-		return productLineName;
-	}
+    public void setProductId(Integer productId) {
+        this.productId = productId;
+    }
 
-	public void setProductLineName(String productLineName) {
-		this.productLineName = productLineName;
-	}
-	
-	
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public Integer getProductLineId() {
+        return productLineId;
+    }
+
+    public void setProductLineId(Integer productLineId) {
+        this.productLineId = productLineId;
+    }
+
+    public String getProductLineName() {
+        return productLineName;
+    }
+
+    public void setProductLineName(String productLineName) {
+        this.productLineName = productLineName;
+    }
+
+
 }

@@ -104,12 +104,12 @@ public class DocumentAction extends BaseController {
     @ResponseBody
     @RequestMapping("/ajax/module")
     public List<SystemModule> getModule(SystemModule systemModule, Integer projectId) {
-        if (projectId==null) {
+        if (projectId == null) {
             return new ArrayList<SystemModule>();
         }
         systemModule.setModuleRoot(projectId);
         systemModule.setModuleType("projectDoc");
-        return moduleService.findModules(systemModule);
+        return moduleService.findModuleList(systemModule);
     }
 
     /**
@@ -122,12 +122,12 @@ public class DocumentAction extends BaseController {
     @ResponseBody
     @RequestMapping("/ajax/productModule")
     public List<SystemModule> getModule1(SystemModule systemModule, Integer productId) {
-        if (productId==null) {
+        if (productId == null) {
             return new ArrayList<SystemModule>();
         }
         systemModule.setModuleRoot(productId);
         systemModule.setModuleType("productDoc");
-        return moduleService.findModules(systemModule);
+        return moduleService.findModuleList(systemModule);
     }
 
     /**
@@ -166,7 +166,7 @@ public class DocumentAction extends BaseController {
     @ResponseBody
     @RequestMapping("/ajax/moduleByDoclib")
     public List<SystemModule> getModuleByDocLib(Integer libId) {
-        if(libId==null)return new ArrayList<SystemModule>();
+        if (libId == null) return new ArrayList<SystemModule>();
         SystemModule module = new SystemModule();
         module.setModuleRoot(libId);
         module.setModuleType("doc");
@@ -183,7 +183,7 @@ public class DocumentAction extends BaseController {
     @ResponseBody
     @RequestMapping("/ajax/moduleByProject")
     public List<SystemModule> getModuleByProject(Integer projectId) {
-        if(projectId==null)return new ArrayList<SystemModule>();
+        if (projectId == null) return new ArrayList<SystemModule>();
         SystemModule module = new SystemModule();
         module.setModuleType("projectDoc");
         module.setModuleRoot(projectId);
@@ -200,7 +200,7 @@ public class DocumentAction extends BaseController {
     @ResponseBody
     @RequestMapping("/ajax/moduleByProduct")
     public List<SystemModule> getModuleByProduct(Integer productId) {
-        if(productId==null) return new ArrayList<SystemModule>();
+        if (productId == null) return new ArrayList<SystemModule>();
         SystemModule module = new SystemModule();
         module.setModuleType("productDoc");
         module.setModuleRoot(productId);
@@ -259,10 +259,10 @@ public class DocumentAction extends BaseController {
     }
 
     @RequestMapping("/product/{type}/updateDoc")
-    public String saveDocument( DocumentDoc doc,
-                                @PathVariable(value = "type") String type,
-                                String lastAddress,
-                                UploadProfile uploadProfile) throws IOException {
+    public String saveDocument(DocumentDoc doc,
+                               @PathVariable(value = "type") String type,
+                               String lastAddress,
+                               UploadProfile uploadProfile) throws IOException {
         if ("save".equals(type)) {
             doc.setDocAddedBy(UserUtils.getUserId());
             DocumentDoc document = docservice.createNewDoc(doc);
@@ -291,10 +291,10 @@ public class DocumentAction extends BaseController {
                     doc,
                     null);
         }
-        if(!StringUtil.isBlank(lastAddress)){
-            return "redirect:"+ lastAddress;
+        if (!StringUtil.isBlank(lastAddress)) {
+            return "redirect:" + lastAddress;
         }
-        return "redirect:"  + adminPath + "/product/doc/content";
+        return "redirect:" + adminPath + "/product/doc/content";
     }
 
     @ResponseBody
@@ -311,7 +311,7 @@ public class DocumentAction extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "/judgeDocName")
-    public Map judgeProductLineName(String param,Integer docModule, Integer docId) {
+    public Map judgeProductLineName(String param, Integer docModule, Integer docId) {
         if (param != null) {
             String docTitle = param;
             DocumentDoc doc = new DocumentDoc();
@@ -319,11 +319,11 @@ public class DocumentAction extends BaseController {
             doc.setDocModule(docModule);
             List<DocumentDoc> documentDocs = docservice.findDocList(doc);
             if (documentDocs.size() != 0) {
-                if(docId==null){
+                if (docId == null) {
                     return resultMap(false, "该文档已存在");
-                }else if(!docId.equals(documentDocs.get(0).getDocId())){
+                } else if (!docId.equals(documentDocs.get(0).getDocId())) {
                     return resultMap(false, "该文档已存在");
-                }else{
+                } else {
                     return resultMap(true, "");
                 }
             } else {

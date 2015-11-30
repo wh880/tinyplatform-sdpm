@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Created by MCK on 2015/10/26.
  */
-public class ProductProject implements Serializable{
+public class ProductProject implements Serializable {
     /**
      * 产品名
      */

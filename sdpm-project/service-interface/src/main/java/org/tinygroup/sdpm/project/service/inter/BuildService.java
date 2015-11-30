@@ -67,6 +67,7 @@ public interface BuildService {
 
     /**
      * 批量删除
+     *
      * @param ids 版本id
      * @return
      */
@@ -87,7 +88,7 @@ public interface BuildService {
      * @param projectBuild
      * @return
      */
-     Pager<ProjectBuild> findPagerBuild(ProjectBuild projectBuild, Integer start, Integer limit, String order, boolean asc);
+    Pager<ProjectBuild> findPagerBuild(ProjectBuild projectBuild, Integer start, Integer limit, String order, boolean asc);
 
     /**
      * 删除关联
@@ -96,7 +97,7 @@ public interface BuildService {
      * @param buildId
      * @return
      */
-     Integer deleteBuildStory(Integer storyId, Integer buildId);
+    Integer deleteBuildStory(Integer storyId, Integer buildId);
 
     /**
      * 关联需求
@@ -105,7 +106,7 @@ public interface BuildService {
      * @param buildId
      * @return
      */
-     Integer linkBuildStory(Integer storyId, Integer buildId);
+    Integer linkBuildStory(Integer storyId, Integer buildId);
 
     /**
      * 删除关联
@@ -114,7 +115,7 @@ public interface BuildService {
      * @param buildId
      * @return
      */
-     Integer deleteBuildBug(Integer bugId, Integer buildId);
+    Integer deleteBuildBug(Integer bugId, Integer buildId);
 
 
     /**
@@ -127,7 +128,7 @@ public interface BuildService {
      * @param groupOperate
      * @return
      */
-     Pager<QualityBug> findBugPager(int start, int limit, int id, SearchInfos conditions, String groupOperate);
+    Pager<QualityBug> findBugPager(int start, int limit, int id, SearchInfos conditions, String groupOperate);
 
     /**
      * 未关联bug分页
@@ -139,7 +140,7 @@ public interface BuildService {
      * @param groupOperate
      * @return
      */
-     Pager<QualityBug> findNoBuildBug(int start, int limit, int id, String condition, SearchInfos conditions, String groupOperate);
+    Pager<QualityBug> findNoBuildBug(int start, int limit, int id, String condition, SearchInfos conditions, String groupOperate);
 
     /**
      * 未关联bug分页
@@ -151,24 +152,27 @@ public interface BuildService {
      * @param groupOperate
      * @return
      */
-     Pager<QualityBug> findBugLegacyPager(int start, int limit, int id, SearchInfos conditions, String groupOperate);
+    Pager<QualityBug> findBugLegacyPager(int start, int limit, int id, SearchInfos conditions, String groupOperate);
 
     /**
      * 多Id查询
+     *
      * @param ids
      * @return
      */
-     List<ProjectBuild> getBuildByIds(String... ids);
+    List<ProjectBuild> getBuildByIds(String... ids);
 
     /**
      * 根据多产品查询build
+     *
      * @param ids
      * @return
      */
-    List<ProjectBuild> getBuildByProducts(Integer ...ids);
+    List<ProjectBuild> getBuildByProducts(Integer... ids);
 
     /**
      * 根据输入名称和产品查询
+     *
      * @param condition
      * @param productId
      * @return

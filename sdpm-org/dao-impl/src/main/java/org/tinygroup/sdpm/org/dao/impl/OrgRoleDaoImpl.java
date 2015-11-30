@@ -216,6 +216,6 @@ public class OrgRoleDaoImpl extends TinyDslDaoSupport implements OrgRoleDao {
                 return selectFrom(ORG_ROLETABLE).where(ORG_ROLETABLE.ORG_ROLE_ID.in(serializables));
             }
         };
-        return getDslSession().fetchList(callback.generate(ids),OrgRole.class);
+        return getDslSession().fetchList(callback.generate(ids), OrgRole.class);
     }
 }

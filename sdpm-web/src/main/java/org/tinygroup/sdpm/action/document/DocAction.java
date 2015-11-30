@@ -138,7 +138,7 @@ public class DocAction extends BaseController {
             SystemModule module = new SystemModule();
             module.setModuleType("doc");
             module.setModuleRoot(libId);
-            List<SystemModule> moduleList = moduleService.findModules(module);
+            List<SystemModule> moduleList = moduleService.findModuleList(module);
             model.addAttribute("moduleList", moduleList);
             return "/document/add-doc";
         }

@@ -9,7 +9,7 @@
         <p class="titleName">编辑</p>
 
     #*    <div class="RTtitle">
-            <button type="submit" id="submit" class="commitBtn">保存</button>
+            <button type="submit" id="submit2" class="commitBtn">保存</button>
         </div>*#
 
         #@elementItem()
@@ -66,10 +66,10 @@
 
             </div>
             <div class="col-1">
-                <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
+                <button style="float: left" type="submit" id="submit2" class="commitBtn">保存</button>
             </div>
             <div class="col-1">
-                <button style="float: left" type="submit" id="submit" class="backBtn"><a
+                <button style="float: left" type="submit" id="submit2" class="backBtn"><a
                         href="javascript :;" onclick="javascript:history.back(-1);">返回</a></button>
             </div>
             <div class="col-5"></div>

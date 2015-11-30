@@ -1,36 +1,35 @@
 /**
- *  Copyright (c) 1997-2013, www.tinygroup.org (luo_guo@icloud.com).
- *
- *  Licensed under the GPL, Version 3.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *       http://www.gnu.org/licenses/gpl.html
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
+ * Copyright (c) 1997-2013, www.tinygroup.org (luo_guo@icloud.com).
+ * <p>
+ * Licensed under the GPL, Version 3.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.gnu.org/licenses/gpl.html
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 package org.tinygroup.sdpm.product.dao;
 
-import java.util.List;
-
 import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
 import org.tinygroup.sdpm.product.dao.pojo.ProductRelease;
-import org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec;
 
-public interface ProductReleaseDao extends BaseDao<ProductRelease,Integer> {
-	
-	Integer softDelete(Integer id);
-	
-	List<ProductRelease> getByKeys(Integer... id);
+import java.util.List;
 
-	Integer getMaxNo(Integer product);
+public interface ProductReleaseDao extends BaseDao<ProductRelease, Integer> {
 
-	Integer batchDelete(Integer...ids);
+    Integer softDelete(Integer id);
 
-	Integer deleteReleaseByProduct(Integer productId);
+    List<ProductRelease> getByKeys(Integer... id);
+
+    Integer getMaxNo(Integer product);
+
+    Integer batchDelete(Integer... ids);
+
+    Integer deleteReleaseByProduct(Integer productId);
 }

@@ -71,7 +71,8 @@ public interface ProductManager {
      */
     List<Product> findList(Product product, String order, String orderType);
 
-    /**T
+    /**
+     * T
      * 根据对象查找(分页、排序)
      *
      * @param page
@@ -99,19 +100,20 @@ public interface ProductManager {
      */
     List<String> getProductNameByLineId(Integer productLineId);
 
-    List<Product> getProductByUser(String userId,Integer delete,Integer productLineId);
+    List<Product> getProductByUser(String userId, Integer delete, Integer productLineId);
 
-    List<Product> getProductByUserWithCount(String userId,Integer delete,boolean noRole);
+    List<Product> getProductByUserWithCount(String userId, Integer delete, boolean noRole);
 
-    List<Product> getProductByUserAndProductLineWithCount(String userId,Integer productLineId,Integer delete);
+    List<Product> getProductByUserAndProductLineWithCount(String userId, Integer productLineId, Integer delete);
 
-    List<Integer> getTeamRoleProductLineIds(String userId,Integer delete);
+    List<Integer> getTeamRoleProductLineIds(String userId, Integer delete);
 
     /**
      * 根据输入名称查询
+     *
      * @param condition
      * @return
      */
-    List<Product> productInCondition(String condition,Integer ...ids);
+    List<Product> productInCondition(String condition, Integer... ids);
 
 }

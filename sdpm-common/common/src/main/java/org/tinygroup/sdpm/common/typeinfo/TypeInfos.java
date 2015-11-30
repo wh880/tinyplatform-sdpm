@@ -8,26 +8,26 @@ import java.util.List;
 
 @XStreamAlias("type-infos")
 public class TypeInfos {
-	
-	@XStreamAsAttribute
-	@XStreamAlias("types-name")
-	private String typesName;
-	@XStreamImplicit
-	private List<TypeInfo> typeInfoList;
 
-	public String getTypesName() {
-		return typesName;
-	}
+    @XStreamAsAttribute
+    @XStreamAlias("types-name")
+    private String typesName;
+    @XStreamImplicit
+    private List<TypeInfo> typeInfoList;
 
-	public void setTypesName(String typesName) {
-		this.typesName = typesName;
-	}
+    public String getTypesName() {
+        return typesName;
+    }
 
-	public List<TypeInfo> getTypeInfoList() {
-		return typeInfoList;
-	}
+    public void setTypesName(String typesName) {
+        this.typesName = typesName;
+    }
 
-	public void setTypeInfoList(List<TypeInfo> typeInfoList) {
-		this.typeInfoList = typeInfoList;
-	}
+    public List<TypeInfo> getTypeInfoList() {
+        return typeInfoList;
+    }
+
+    public void setTypeInfoList(List<TypeInfo> typeInfoList) {
+        this.typeInfoList = typeInfoList;
+    }
 }

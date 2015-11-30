@@ -17,32 +17,32 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/a/product/project")
 public class ProductProjectAction extends BaseController{
 
-	@Autowired
-	private ProjectService projectService;
+    @Autowired
+    private ProjectService projectService;
 
-	@RequestMapping("/save")
-	public String save(@CookieValue(value = "currentProjectId",defaultValue = "0") String currentProjectId, Project project, Model model, HttpServletRequest request){
+    @RequestMapping("/save")
+    public String save(@CookieValue(value = "currentProjectId",defaultValue = "0") String currentProjectId, Project project, Model model, HttpServletRequest request){
 
-		project.setProjectId(Integer.parseInt(currentProjectId));
-		projectService.addProject(project);
+        project.setProjectId(Integer.parseInt(currentProjectId));
+        projectService.addProject(project);
 
-		return "redirect:" + "/product/page/project/product-project-list.page";
+        return "redirect:" + "/product/page/project/product-project-list.page";
 
-		}
+    }
 
 
-	@RequestMapping("/list")
-	public String list(Project project,
-			@CookieValue("currentProjectId") String currentProjectId,
-			@RequestParam(required = false,defaultValue = "1")int page,
-			@RequestParam(required = false,defaultValue = "10")int pagesize,
-			@RequestParam(required = false,defaultValue = "projectId")String order,
-			@RequestParam(required = false,defaultValue = "asc")String ordertype,Model model){
-		project.setProjectId(Integer.parseInt(currentProjectId));
-		Pager<Project> pagerProject = projectService.findProjectPager(page, pagesize, project, order, ordertype);
-		model.addAttribute("project",pagerProject);
-		return "/product/data/allproduct-project.pagelet";
+    @RequestMapping("/list")
+    public String list(Project project,
+                       @CookieValue("currentProjectId") String currentProjectId,
+                       @RequestParam(required = false,defaultValue = "1")int page,
+                       @RequestParam(required = false,defaultValue = "10")int pagesize,
+                       @RequestParam(required = false,defaultValue = "projectId")String order,
+                       @RequestParam(required = false,defaultValue = "asc")String ordertype,Model model){
+        project.setProjectId(Integer.parseInt(currentProjectId));
+        Pager<Project> pagerProject = projectService.findProjectPager(page, pagesize, project, order, ordertype);
+        model.addAttribute("project",pagerProject);
+        return "/product/data/allproduct-project.pagelet";
 
-	}
+    }
 
 }

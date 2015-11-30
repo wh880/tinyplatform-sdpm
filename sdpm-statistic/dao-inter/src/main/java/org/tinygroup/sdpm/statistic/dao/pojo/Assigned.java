@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Created by MCK on 2015/10/23.
  */
-public class Assigned implements Serializable{
+public class Assigned implements Serializable {
     /**
      * 用户ID
      */

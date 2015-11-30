@@ -59,7 +59,7 @@
 
             </div>
             <div class="col-2">
-                <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
+                <button style="float: left" type="submit" id="submit2" class="commitBtn">保存</button>
             </div>
             <div class="col-2">
                 #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end

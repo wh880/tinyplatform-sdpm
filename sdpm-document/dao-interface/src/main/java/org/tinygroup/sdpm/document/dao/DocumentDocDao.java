@@ -25,10 +25,10 @@ import org.tinygroup.sdpm.document.dao.pojo.DocumentDoc;
 import org.tinygroup.tinysqldsl.Pager;
 
 public interface DocumentDocDao extends BaseDao<DocumentDoc,Integer> {
-	
-	int[] batchUpdateDel(List<DocumentDoc> documentDocs);
-	
-	Pager<DocumentDoc> complexQuery(int start, int limit, DocumentDoc doc, final String condition,SearchInfos conditions,String groupOperate, final OrderBy... orderBys);
 
-	int editDoc(DocumentDoc documentDoc);
+    int[] batchUpdateDel(List<DocumentDoc> documentDocs);
+
+    Pager<DocumentDoc> complexQuery(int start, int limit, DocumentDoc doc, final String condition,SearchInfos conditions,String groupOperate, final OrderBy... orderBys);
+
+    int editDoc(DocumentDoc documentDoc);
 }

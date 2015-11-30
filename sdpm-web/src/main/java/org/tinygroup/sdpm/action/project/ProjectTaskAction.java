@@ -364,11 +364,6 @@ public class ProjectTaskAction extends BaseController {
     @RequestMapping(value = "/start", method = RequestMethod.GET)
     public String start(Integer taskId, Model model) {
         ProjectTask task = taskService.findTask(taskId);
-        if (task.getTaskStory() != null) {
-            ProductStory story = storyService.findStory(task.getTaskStory());
-            story.setStoryStage("4");
-            storyService.updateStory(story);
-        }
         model.addAttribute("task", task);
         return "project/task/start";
     }
@@ -839,7 +834,7 @@ public class ProjectTaskAction extends BaseController {
         if (productStory != null) {
             SystemModule systemModule = new SystemModule();
             systemModule.setModuleRoot(productStory.getProductId());
-            List<SystemModule> moduleList = moduleService.findModules(systemModule);
+            List<SystemModule> moduleList = moduleService.findModuleList(systemModule);
             for (SystemModule module : moduleList) {
                 module.setModuleName(ModuleUtil.getPath(module.getModuleId(), "/", null, false));
             }

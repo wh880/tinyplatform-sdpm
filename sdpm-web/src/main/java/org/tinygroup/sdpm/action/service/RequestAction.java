@@ -164,7 +164,6 @@ public class RequestAction extends BaseController {
     }
 
     /**
-     *
      * @param clientRequest
      * @param status
      * @param operation
@@ -247,7 +246,6 @@ public class RequestAction extends BaseController {
     }
 
     /**
-     *
      * @param review
      * @param status
      * @param operation
@@ -336,15 +334,15 @@ public class RequestAction extends BaseController {
 //    @RequiresPermissions("request-batchdel")
 
     @RequestMapping(value = "/overview")
-    public String overview(Integer id,Model model) {
-        if(id!=null){
+    public String overview(Integer id, Model model) {
+        if (id != null) {
 //             serviceRequest = new ServiceRequest();
-            ServiceRequest serviceRequest=requestService.findRequest(id);
-            if(serviceRequest.getClientId()!=null){
+            ServiceRequest serviceRequest = requestService.findRequest(id);
+            if (serviceRequest.getClientId() != null) {
                 ServiceClient serviceClient = clientService.findClient(serviceRequest.getClientId());
-                model.addAttribute("client",serviceClient);
+                model.addAttribute("client", serviceClient);
             }
-            model.addAttribute("request",serviceRequest);
+            model.addAttribute("request", serviceRequest);
         }
         return "/service/serviceReq/requestView.page";
     }

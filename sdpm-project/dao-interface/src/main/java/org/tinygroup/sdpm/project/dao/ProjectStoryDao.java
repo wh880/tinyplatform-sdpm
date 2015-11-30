@@ -29,6 +29,7 @@ public interface ProjectStoryDao extends BaseDao<ProjectStory, Integer> {
 
     /**
      * 批量硬删除
+     *
      * @param projectId
      * @param storyIds
      * @return

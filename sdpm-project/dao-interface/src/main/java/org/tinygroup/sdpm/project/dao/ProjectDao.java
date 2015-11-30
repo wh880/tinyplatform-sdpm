@@ -25,6 +25,14 @@ import java.util.Date;
 import java.util.List;
 
 public interface ProjectDao extends BaseDao<Project, Integer> {
+    /**
+     * 查找相关干系人的项目
+     * 查询条件OR
+     *
+     * @param project
+     * @return
+     */
+    List<Project> findListByRelatedUser(Project project);
 
     /**
      * 获取项目列表，并附带统计信息
@@ -32,10 +40,11 @@ public interface ProjectDao extends BaseDao<Project, Integer> {
      * @param project
      * @return
      */
-    List<Project> findListWithStatistics(Project project,Date startDate,Date endDate);
+    List<Project> findListWithStatistics(Project project, Date startDate, Date endDate);
 
     /**
      * 获取项目分页，并附带统计信息
+     *
      * @param start
      * @param limit
      * @param project
@@ -56,6 +65,7 @@ public interface ProjectDao extends BaseDao<Project, Integer> {
 
     /**
      * 根据多个主键查找
+     *
      * @param ids
      * @return
      */
@@ -65,10 +75,10 @@ public interface ProjectDao extends BaseDao<Project, Integer> {
      * 查找用户所在团队所拥有的项目
      *
      * @param userId OrgUser.Id
-     * @param acl 权限控制
+     * @param acl    权限控制
      * @return
      */
-    List<Project> findListByTeamUserId(String userId,String acl);
+    List<Project> findListByTeamUserId(String userId, String acl);
     /**
      * 根据输入查询
      * @param condition

@@ -64,9 +64,11 @@ public class SlaManagerImpl implements SlaManager {
         }
         return slaDao.queryPagerTree(start, limit, sla, treeId, condition1, (order == null || "".equals(order)) ? null : new OrderBy(NameUtil.resolveNameDesc(order), !("desc".equals(orderType)) ? true : false));
     }
+
     public ServiceSla judgeClient(String clientName) {
         return slaDao.judge(clientName);
     }
+
     public int[] deleteBatch(List<ServiceSla> list) {
         return slaDao.softDeleteBatch(list);
     }

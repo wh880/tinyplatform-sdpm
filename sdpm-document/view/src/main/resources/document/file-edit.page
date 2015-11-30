@@ -11,7 +11,7 @@
 		.${profile?.fileExtension}
 		</div>
 <div class="col-3">
-<button style="float: right" type="submit" id="submit" class="commitBtn">保存</button>
+<button style="float: right" type="submit" id="submit2" class="commitBtn">保存</button>
 </div>
 </div>
 #end

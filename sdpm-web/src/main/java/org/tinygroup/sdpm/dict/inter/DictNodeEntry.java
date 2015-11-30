@@ -39,6 +39,7 @@ public class DictNodeEntry {
     public List<DictNodeEntry> getChildren() {
         return children;
     }
+
     public void setChildren(List<DictNodeEntry> children) {
         this.children = children;
     }

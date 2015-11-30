@@ -8,7 +8,7 @@
 					<option value="xlsx" selected="selected">xlsx</option>
 					<option value="xls">xls</option>
 				</select>
-		    </td><td> <button type="submit" id="submit" class="btn btn-submit btn-primary">保存</button></td>
+		    </td><td> <button type="submit" id="submit2" class="btn btn-submit btn-primary">保存</button></td>
 	  </tr>
 	
 	</table>

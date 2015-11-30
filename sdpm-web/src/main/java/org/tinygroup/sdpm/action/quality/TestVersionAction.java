@@ -174,21 +174,21 @@ public class TestVersionAction extends BaseController {
                               HttpServletRequest request,
                               Model model) {
         QualityTestTask testTask = null;
-        if(no!=null){
+        if (no != null) {
             Integer qualityProductId = Integer.parseInt(CookieUtils.getCookie(request, "qualityProductId"));
-            if(qualityProductId==null){
+            if (qualityProductId == null) {
                 return notFoundView();
             }
             testTask = new QualityTestTask();
             testTask.setProductId(qualityProductId);
             testTask.setNo(no);
             List<QualityTestTask> testTaskList = testTaskService.findTestTaskList(testTask);
-            if(testTaskList.size()==0){
+            if (testTaskList.size() == 0) {
                 return notFoundView();
             }
             testTask = testTaskList.get(0);
         }
-        if(testTask==null||testTask.getTestversionId()==null) {
+        if (testTask == null || testTask.getTestversionId() == null) {
             testTask = testTaskService.findById(testversionId);
         }
         model.addAttribute("testTask", testTask);
@@ -320,7 +320,7 @@ public class TestVersionAction extends BaseController {
         QualityTestTask testTask = testTaskService.findById(testversionId);
         List<ProjectTeam> projectTeams = teamService.findTeamByProjectId(testTask.getProjectId());
         String[] ids = new String[projectTeams.size()];
-        for(int i =0; i<ids.length; i++){
+        for (int i = 0; i < ids.length; i++) {
             ids[i] = projectTeams.get(i).getTeamUserId();
         }
         List<OrgUser> orgUsers = userService.findUserListByIds(ids);

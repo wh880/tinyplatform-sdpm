@@ -39,7 +39,7 @@ public class UserManagerImpl implements UserManager {
     private OrgUserDao orgUserDao;
 
     public OrgUser find(String id) {
-        if (StringUtil.isBlank(id)){
+        if (StringUtil.isBlank(id)) {
             return null;
         }
         return orgUserDao.getByKey(id);
@@ -120,14 +120,14 @@ public class UserManagerImpl implements UserManager {
     }
 
     public List<OrgUser> findTeamUserListByProjectId(Integer projectId) {
-        if (projectId==null){
+        if (projectId == null) {
             return new ArrayList<OrgUser>();
         }
         return orgUserDao.getTeamUserByProjectId(projectId);
     }
 
-    public List<OrgUser> userInCondition(String condition,String ...ids) {
-        return orgUserDao.userInCondition(condition,ids);
+    public List<OrgUser> userInCondition(String condition, String... ids) {
+        return orgUserDao.userInCondition(condition, ids);
     }
 
 }

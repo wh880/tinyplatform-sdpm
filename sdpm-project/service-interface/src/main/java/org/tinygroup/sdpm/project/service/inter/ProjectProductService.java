@@ -16,14 +16,14 @@ public interface ProjectProductService {
      * @param productIds
      * @param projectId
      */
-     void addProjectLinkToProduct(Integer[] productIds, Integer projectId);
+    void addProjectLinkToProduct(Integer[] productIds, Integer projectId);
 
     /**
      * 查询项目关联的产品
      *
      * @return
      */
-     List<Product> findLinkProductByProjectId(Integer projectId);
+    List<Product> findLinkProductByProjectId(Integer projectId);
 
     /**
      * 通过projectId获得productId列表

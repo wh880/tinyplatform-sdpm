@@ -51,7 +51,7 @@ loadURL('#link(linkUrl)'+treeNode.id, $("#tBox"));
                 ##以下为搜索框及其搜索按钮
                     #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/service/faq/list" "post" {"class":""})
                         #simpleText("请输入要搜索的问题" "faqQuestion" "width:25%")
-                    <button type="submit" id="submit" class="btn btn-success "><i class="icon-search"></i>&nbsp;搜问题
+                    <button type="submit" id="submit2" class="btn btn-success "><i class="icon-search"></i>&nbsp;搜问题
                     </button>
                     <span class="r">
                     #set(m1=menuManager.getMenu("faq-add"))

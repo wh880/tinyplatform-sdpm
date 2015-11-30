@@ -27,11 +27,11 @@ import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.tinysqldsl.base.Condition;
 
 public interface QualityBugDao extends BaseDao<QualityBug,Integer> {
-	
-	Integer softDelete(Integer id);
+
+    Integer softDelete(Integer id);
 
     Pager<QualityBug> queryPager(int start, int limit , final Condition conditions, QualityBug qualityBug , final OrderBy... orderArgs);
-    
+
     int[] batchUpdateDel(List<QualityBug> ids);
 
     List<BugCount> getCount(String code, Integer productId);

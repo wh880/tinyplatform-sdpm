@@ -87,21 +87,22 @@ public interface ProductService {
      * @return
      */
     List<ProductAndLine> getProductAndLine(Product product);
-    
+
     /**
-	 * 根据产品线ID查找产品的名字
-	 * @param productLineId
-	 * @return
-	 */
-	List<String> getProductNameByLineId(Integer productLineId);
+     * 根据产品线ID查找产品的名字
+     *
+     * @param productLineId
+     * @return
+     */
+    List<String> getProductNameByLineId(Integer productLineId);
 
-    List<Product> getProductByUser(String userId,Integer delete,Integer productLineId);
+    List<Product> getProductByUser(String userId, Integer delete, Integer productLineId);
 
-    List<Product> getProductByUserWithCount(String userId,Integer delete,boolean noRole);
+    List<Product> getProductByUserWithCount(String userId, Integer delete, boolean noRole);
 
-    List<Product> getProductByUserAndProductLineWithCount(String userId,Integer productLineId,Integer delete);
+    List<Product> getProductByUserAndProductLineWithCount(String userId, Integer productLineId, Integer delete);
 
-    Integer[] getTeamRoleProductLineIds(String userId,Integer delete);
+    Integer[] getTeamRoleProductLineIds(String userId, Integer delete);
 
     Map<String, List<Product>> getUserProductsMap(String userId);
 
@@ -109,8 +110,9 @@ public interface ProductService {
 
     /**
      * 根据输入名称查询
+     *
      * @param condition
      * @return
      */
-    List<Product> productInCondition(String condition,Integer ...ids);
+    List<Product> productInCondition(String condition, Integer... ids);
 }

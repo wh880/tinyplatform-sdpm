@@ -5,7 +5,6 @@ package org.tinygroup.sdpm.security.filter;
 
 /**
  * 用户和密码（包含验证码）令牌类
- *
  */
 public class UsernamePasswordToken extends org.apache.shiro.authc.UsernamePasswordToken {
 

@@ -89,7 +89,7 @@ public class DocLibAction extends BaseController {
     @ResponseBody
     @RequestMapping(value = "/delete")
     public Map delDocLib(@CookieValue(required = false, value = COOKIE_DOCLIB_ID) String documentLibId, Integer id,
-    					HttpServletRequest request, HttpServletResponse response) {
+                         HttpServletRequest request, HttpServletResponse response) {
         List<DocumentDocLib> list = docservice.findDoclibList(null);
         if (id != list.get(0).getDocLibId() && id != list.get(1).getDocLibId()) {
             docservice.deleteDoclibById(id);

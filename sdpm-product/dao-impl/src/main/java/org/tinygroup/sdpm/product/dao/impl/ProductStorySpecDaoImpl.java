@@ -271,6 +271,6 @@ public class ProductStorySpecDaoImpl extends TinyDslDaoSupport implements Produc
 
     public Integer getMaxVersion(Integer storyId) {
         Select select = select(PRODUCT_STORY_SPECTABLE.STORY_VERSION.max()).from(PRODUCT_STORY_SPECTABLE).where(PRODUCT_STORY_SPECTABLE.STORY_ID.eq(storyId));
-        return getDslSession().fetchOneResult(select,Integer.class);
+        return getDslSession().fetchOneResult(select, Integer.class);
     }
 }

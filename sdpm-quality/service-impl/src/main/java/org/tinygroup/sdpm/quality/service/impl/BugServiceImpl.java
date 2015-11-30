@@ -15,53 +15,53 @@ import org.tinygroup.tinysqldsl.Pager;
 
 @Component
 public class BugServiceImpl implements BugService {
-	@Autowired
-	private BugManager bugmanager;
-	
-	public List<QualityBug> findBugList(QualityBug bug){				
-		return bugmanager.findList(bug);
-	}
-	
-	public QualityBug addBug(QualityBug bug){
-		bug.setBugStatus("1");
-		return bugmanager.add(bug);
-	}
-	
-	public QualityBug findById(Integer id){
-		return bugmanager.find(id);
-	}
-	
-	public int updateBug(QualityBug bug){
-		return bugmanager.update(bug);
-	}
-	
-	public int[] batchUpdateBug(List<QualityBug> bugs){
-		return bugmanager.batchUpdate(bugs);
-	}
-	
-	public Pager<QualityBug> findBugListPager(Integer start,Integer limit,String conditions,QualityBug bug,String sortName,boolean asc){
-		return bugmanager.findPager(start, limit, conditions, bug, sortName, asc);
-	}
+    @Autowired
+    private BugManager bugmanager;
 
-	public Integer deleteBug(Integer bugId) {
-		
-		return bugmanager.delete(bugId);
-	}
+    public List<QualityBug> findBugList(QualityBug bug){
+        return bugmanager.findList(bug);
+    }
 
-	public Map<String, List<BugCount>> report(String code, Integer productId) {
-		return bugmanager.report(code,productId);
-	}
+    public QualityBug addBug(QualityBug bug){
+        bug.setBugStatus("1");
+        return bugmanager.add(bug);
+    }
 
-	public Pager<QualityBug> findStoryChangedBugs(Integer start, Integer limit, ConditionCarrier carrier, QualityBug bug, String sortName, boolean asc) {
-		return bugmanager.queryStoryChangedBugs(start,limit,carrier,bug,sortName,asc);
-	}
+    public QualityBug findById(Integer id){
+        return bugmanager.find(id);
+    }
 
-	public Pager<QualityBug> findBugListPager(Integer start, Integer limit, ConditionCarrier carrier, QualityBug bug, String sortName, boolean asc) {
-		return bugmanager.findBugListPager(start,limit,carrier,bug,sortName,asc);
-	}
+    public int updateBug(QualityBug bug){
+        return bugmanager.update(bug);
+    }
 
-	public int[] batchDeleteBug(List<QualityBug> bugIds) {
-		
-		return bugmanager.batchDelete(bugIds);
-	}
+    public int[] batchUpdateBug(List<QualityBug> bugs){
+        return bugmanager.batchUpdate(bugs);
+    }
+
+    public Pager<QualityBug> findBugListPager(Integer start,Integer limit,String conditions,QualityBug bug,String sortName,boolean asc){
+        return bugmanager.findPager(start, limit, conditions, bug, sortName, asc);
+    }
+
+    public Integer deleteBug(Integer bugId) {
+
+        return bugmanager.delete(bugId);
+    }
+
+    public Map<String, List<BugCount>> report(String code, Integer productId) {
+        return bugmanager.report(code,productId);
+    }
+
+    public Pager<QualityBug> findStoryChangedBugs(Integer start, Integer limit, ConditionCarrier carrier, QualityBug bug, String sortName, boolean asc) {
+        return bugmanager.queryStoryChangedBugs(start,limit,carrier,bug,sortName,asc);
+    }
+
+    public Pager<QualityBug> findBugListPager(Integer start, Integer limit, ConditionCarrier carrier, QualityBug bug, String sortName, boolean asc) {
+        return bugmanager.findBugListPager(start,limit,carrier,bug,sortName,asc);
+    }
+
+    public int[] batchDeleteBug(List<QualityBug> bugIds) {
+
+        return bugmanager.batchDelete(bugIds);
+    }
 }

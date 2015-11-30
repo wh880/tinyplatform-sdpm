@@ -18,6 +18,7 @@ public interface RoleUserManager {
 
     /**
      * 根据用户id，查找先关角色
+     *
      * @param userId
      * @return
      */
@@ -43,11 +44,13 @@ public interface RoleUserManager {
 
     /**
      * 批量添加用户的角色
+     *
      * @param userId
      * @param roleIds
      * @return
      */
     Integer batchAddRolesToUser(String userId, Integer[] roleIds);
+
     /**
      * 更新角色菜单
      *
@@ -67,5 +70,5 @@ public interface RoleUserManager {
 
     void batchAdd(List<OrgRoleUser> orgRoleUserList);
 
-    List<OrgRoleUser> getRolesByIds(String...ids);
+    List<OrgRoleUser> getRolesByIds(String... ids);
 }

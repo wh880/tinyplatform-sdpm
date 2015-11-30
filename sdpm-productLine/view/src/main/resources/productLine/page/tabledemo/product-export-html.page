@@ -16,7 +16,7 @@
 		 </select>
         </div>
       </td>
-      <td> <button type="submit" id="submit" class="btn btn-submit btn-primary">导出</button></td>
+      <td> <button type="submit" id="submit2" class="btn btn-submit btn-primary">导出</button></td>
     </tr>
   </table>
 </form>

@@ -343,10 +343,9 @@ public class Product implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        if(this == object){
+        if (this == object) {
             return true;
-        }
-        else if (object != null) {
+        } else if (object != null) {
             if (this.getProductId() == ((Product) object).getProductId()) {
                 return true;
             }
@@ -355,9 +354,9 @@ public class Product implements Serializable {
     }
 
     @Override
-    public int hashCode(){
+    public int hashCode() {
         int result = 17;
-        return 37*result+productId;
+        return 37 * result + productId;
     }
 
 }

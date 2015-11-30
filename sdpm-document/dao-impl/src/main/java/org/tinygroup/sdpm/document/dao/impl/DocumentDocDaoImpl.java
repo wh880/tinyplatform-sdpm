@@ -59,29 +59,29 @@ import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 @Repository
 @LogClass("doc")
 public class DocumentDocDaoImpl extends TinyDslDaoSupport implements DocumentDocDao {
-	
+
 	public DocumentDoc add(DocumentDoc documentDoc) {
 		return getDslTemplate().insertAndReturnKey(documentDoc, new InsertGenerateCallback<DocumentDoc>() {
 			public Insert generate(DocumentDoc t) {
 				Insert insert = insertInto(DOCUMENT_DOCTABLE).values(
-					DOCUMENT_DOCTABLE.DOC_ID.value(t.getDocId()),
-					DOCUMENT_DOCTABLE.DOC_PRODUCT.value(t.getDocProduct()),
-					DOCUMENT_DOCTABLE.DOC_PROJECT.value(t.getDocProject()),
-					DOCUMENT_DOCTABLE.DOC_LIB_ID.value(t.getDocLibId()),
-					DOCUMENT_DOCTABLE.DOC_MODULE.value(t.getDocModule()),
-					DOCUMENT_DOCTABLE.DOC_TITLE.value(t.getDocTitle()),
-					DOCUMENT_DOCTABLE.DOC_DIGEST.value(t.getDocDigest()),
-					DOCUMENT_DOCTABLE.DOC_KEYWORDS.value(t.getDocKeywords()),
-					DOCUMENT_DOCTABLE.DOC_TYPE.value(t.getDocType()),
-					DOCUMENT_DOCTABLE.DOC_CONTENT.value(t.getDocContent()),
-					DOCUMENT_DOCTABLE.DOC_URL.value(t.getDocUrl()),
-					DOCUMENT_DOCTABLE.DOC_ATTACH.value(t.getDocAttach()),
-					DOCUMENT_DOCTABLE.DOC_VIEWS.value(t.getDocViews()),
-					DOCUMENT_DOCTABLE.DOC_ADDED_BY.value(t.getDocAddedBy()),
-					DOCUMENT_DOCTABLE.DOC_ADDED_DATE.value(t.getDocAddedDate()),
-					DOCUMENT_DOCTABLE.DOC_EDITED_BY.value(t.getDocEditedBy()),
-					DOCUMENT_DOCTABLE.DOC_EDITED_DATE.value(t.getDocEditedDate()),
-					DOCUMENT_DOCTABLE.DOC_DELETED.value(t.getDocDeleted()));
+						DOCUMENT_DOCTABLE.DOC_ID.value(t.getDocId()),
+						DOCUMENT_DOCTABLE.DOC_PRODUCT.value(t.getDocProduct()),
+						DOCUMENT_DOCTABLE.DOC_PROJECT.value(t.getDocProject()),
+						DOCUMENT_DOCTABLE.DOC_LIB_ID.value(t.getDocLibId()),
+						DOCUMENT_DOCTABLE.DOC_MODULE.value(t.getDocModule()),
+						DOCUMENT_DOCTABLE.DOC_TITLE.value(t.getDocTitle()),
+						DOCUMENT_DOCTABLE.DOC_DIGEST.value(t.getDocDigest()),
+						DOCUMENT_DOCTABLE.DOC_KEYWORDS.value(t.getDocKeywords()),
+						DOCUMENT_DOCTABLE.DOC_TYPE.value(t.getDocType()),
+						DOCUMENT_DOCTABLE.DOC_CONTENT.value(t.getDocContent()),
+						DOCUMENT_DOCTABLE.DOC_URL.value(t.getDocUrl()),
+						DOCUMENT_DOCTABLE.DOC_ATTACH.value(t.getDocAttach()),
+						DOCUMENT_DOCTABLE.DOC_VIEWS.value(t.getDocViews()),
+						DOCUMENT_DOCTABLE.DOC_ADDED_BY.value(t.getDocAddedBy()),
+						DOCUMENT_DOCTABLE.DOC_ADDED_DATE.value(t.getDocAddedDate()),
+						DOCUMENT_DOCTABLE.DOC_EDITED_BY.value(t.getDocEditedBy()),
+						DOCUMENT_DOCTABLE.DOC_EDITED_DATE.value(t.getDocEditedDate()),
+						DOCUMENT_DOCTABLE.DOC_DELETED.value(t.getDocDeleted()));
 				return insert;
 			}
 		});
@@ -94,29 +94,29 @@ public class DocumentDocDaoImpl extends TinyDslDaoSupport implements DocumentDoc
 		return getDslTemplate().update(documentDoc, new UpdateGenerateCallback<DocumentDoc>() {
 			public Update generate(DocumentDoc t) {
 				Update update = update(DOCUMENT_DOCTABLE).set(
-					DOCUMENT_DOCTABLE.DOC_PRODUCT.value(t.getDocProduct()),
-					DOCUMENT_DOCTABLE.DOC_PROJECT.value(t.getDocProject()),
-					DOCUMENT_DOCTABLE.DOC_LIB_ID.value(t.getDocLibId()),
-					DOCUMENT_DOCTABLE.DOC_MODULE.value(t.getDocModule()),
-					DOCUMENT_DOCTABLE.DOC_TITLE.value(t.getDocTitle()),
-					DOCUMENT_DOCTABLE.DOC_DIGEST.value(t.getDocDigest()),
-					DOCUMENT_DOCTABLE.DOC_KEYWORDS.value(t.getDocKeywords()),
-					DOCUMENT_DOCTABLE.DOC_TYPE.value(t.getDocType()),
-					DOCUMENT_DOCTABLE.DOC_CONTENT.value(t.getDocContent()),
-					DOCUMENT_DOCTABLE.DOC_URL.value(t.getDocUrl()),
-					DOCUMENT_DOCTABLE.DOC_ATTACH.value(t.getDocAttach()),
-					DOCUMENT_DOCTABLE.DOC_VIEWS.value(t.getDocViews()),
-					DOCUMENT_DOCTABLE.DOC_ADDED_BY.value(t.getDocAddedBy()),
-					DOCUMENT_DOCTABLE.DOC_ADDED_DATE.value(t.getDocAddedDate()),
-					DOCUMENT_DOCTABLE.DOC_EDITED_BY.value(t.getDocEditedBy()),
-					DOCUMENT_DOCTABLE.DOC_EDITED_DATE.value(t.getDocEditedDate()),
-					DOCUMENT_DOCTABLE.DOC_DELETED.value(t.getDocDeleted())).where(
-					DOCUMENT_DOCTABLE.DOC_ID.eq(t.getDocId()));
+						DOCUMENT_DOCTABLE.DOC_PRODUCT.value(t.getDocProduct()),
+						DOCUMENT_DOCTABLE.DOC_PROJECT.value(t.getDocProject()),
+						DOCUMENT_DOCTABLE.DOC_LIB_ID.value(t.getDocLibId()),
+						DOCUMENT_DOCTABLE.DOC_MODULE.value(t.getDocModule()),
+						DOCUMENT_DOCTABLE.DOC_TITLE.value(t.getDocTitle()),
+						DOCUMENT_DOCTABLE.DOC_DIGEST.value(t.getDocDigest()),
+						DOCUMENT_DOCTABLE.DOC_KEYWORDS.value(t.getDocKeywords()),
+						DOCUMENT_DOCTABLE.DOC_TYPE.value(t.getDocType()),
+						DOCUMENT_DOCTABLE.DOC_CONTENT.value(t.getDocContent()),
+						DOCUMENT_DOCTABLE.DOC_URL.value(t.getDocUrl()),
+						DOCUMENT_DOCTABLE.DOC_ATTACH.value(t.getDocAttach()),
+						DOCUMENT_DOCTABLE.DOC_VIEWS.value(t.getDocViews()),
+						DOCUMENT_DOCTABLE.DOC_ADDED_BY.value(t.getDocAddedBy()),
+						DOCUMENT_DOCTABLE.DOC_ADDED_DATE.value(t.getDocAddedDate()),
+						DOCUMENT_DOCTABLE.DOC_EDITED_BY.value(t.getDocEditedBy()),
+						DOCUMENT_DOCTABLE.DOC_EDITED_DATE.value(t.getDocEditedDate()),
+						DOCUMENT_DOCTABLE.DOC_DELETED.value(t.getDocDeleted())).where(
+						DOCUMENT_DOCTABLE.DOC_ID.eq(t.getDocId()));
 				return update;
 			}
 		});
 	}
-	
+
 	public int editDoc(final DocumentDoc documentDoc) {
 		if(documentDoc == null || documentDoc.getDocId() == null){
 			return 0;
@@ -149,15 +149,15 @@ public class DocumentDocDaoImpl extends TinyDslDaoSupport implements DocumentDoc
 		return getDslTemplate().deleteByKeys(new DeleteGenerateCallback<Serializable[]>() {
 			public Delete generate(Serializable[] t) {
 				return delete(DOCUMENT_DOCTABLE).where(DOCUMENT_DOCTABLE.DOC_ID.in(t));
-		}
+			}
 		},pks);
 	}
 
 	public DocumentDoc getByKey(Integer pk) {
 		return getDslTemplate().getByKey(pk, DocumentDoc.class, new SelectGenerateCallback<Serializable>() {
-		@SuppressWarnings("rawtypes")
-		public Select generate(Serializable t) {
-			return selectFrom(DOCUMENT_DOCTABLE).where(DOCUMENT_DOCTABLE.DOC_ID.eq(t));
+			@SuppressWarnings("rawtypes")
+			public Select generate(Serializable t) {
+				return selectFrom(DOCUMENT_DOCTABLE).where(DOCUMENT_DOCTABLE.DOC_ID.eq(t));
 			}
 		});
 	}
@@ -171,25 +171,25 @@ public class DocumentDocDaoImpl extends TinyDslDaoSupport implements DocumentDoc
 			@SuppressWarnings("rawtypes")
 			public Select generate(DocumentDoc t) {
 				Select select = selectFrom(DOCUMENT_DOCTABLE).where(
-				and(
-					DOCUMENT_DOCTABLE.DOC_PRODUCT.eq(t.getDocProduct()),
-					DOCUMENT_DOCTABLE.DOC_PROJECT.eq(t.getDocProject()),
-					DOCUMENT_DOCTABLE.DOC_LIB_ID.eq(t.getDocLibId()),
-					DOCUMENT_DOCTABLE.DOC_MODULE.eq(t.getDocModule()),
-					DOCUMENT_DOCTABLE.DOC_TITLE.eq(t.getDocTitle()),
-					DOCUMENT_DOCTABLE.DOC_DIGEST.eq(t.getDocDigest()),
-					DOCUMENT_DOCTABLE.DOC_KEYWORDS.eq(t.getDocKeywords()),
-					DOCUMENT_DOCTABLE.DOC_TYPE.eq(t.getDocType()),
-					DOCUMENT_DOCTABLE.DOC_CONTENT.eq(t.getDocContent()),
-					DOCUMENT_DOCTABLE.DOC_URL.eq(t.getDocUrl()),
-					DOCUMENT_DOCTABLE.DOC_ATTACH.eq(t.getDocAttach()),
-					DOCUMENT_DOCTABLE.DOC_VIEWS.eq(t.getDocViews()),
-					DOCUMENT_DOCTABLE.DOC_ADDED_BY.eq(t.getDocAddedBy()),
-					DOCUMENT_DOCTABLE.DOC_ADDED_DATE.eq(t.getDocAddedDate()),
-					DOCUMENT_DOCTABLE.DOC_EDITED_BY.eq(t.getDocEditedBy()),
-					DOCUMENT_DOCTABLE.DOC_EDITED_DATE.eq(t.getDocEditedDate()),
-					DOCUMENT_DOCTABLE.DOC_DELETED.eq(t.getDocDeleted())));
-			return addOrderByElements(select, orderArgs);
+						and(
+								DOCUMENT_DOCTABLE.DOC_PRODUCT.eq(t.getDocProduct()),
+								DOCUMENT_DOCTABLE.DOC_PROJECT.eq(t.getDocProject()),
+								DOCUMENT_DOCTABLE.DOC_LIB_ID.eq(t.getDocLibId()),
+								DOCUMENT_DOCTABLE.DOC_MODULE.eq(t.getDocModule()),
+								DOCUMENT_DOCTABLE.DOC_TITLE.eq(t.getDocTitle()),
+								DOCUMENT_DOCTABLE.DOC_DIGEST.eq(t.getDocDigest()),
+								DOCUMENT_DOCTABLE.DOC_KEYWORDS.eq(t.getDocKeywords()),
+								DOCUMENT_DOCTABLE.DOC_TYPE.eq(t.getDocType()),
+								DOCUMENT_DOCTABLE.DOC_CONTENT.eq(t.getDocContent()),
+								DOCUMENT_DOCTABLE.DOC_URL.eq(t.getDocUrl()),
+								DOCUMENT_DOCTABLE.DOC_ATTACH.eq(t.getDocAttach()),
+								DOCUMENT_DOCTABLE.DOC_VIEWS.eq(t.getDocViews()),
+								DOCUMENT_DOCTABLE.DOC_ADDED_BY.eq(t.getDocAddedBy()),
+								DOCUMENT_DOCTABLE.DOC_ADDED_DATE.eq(t.getDocAddedDate()),
+								DOCUMENT_DOCTABLE.DOC_EDITED_BY.eq(t.getDocEditedBy()),
+								DOCUMENT_DOCTABLE.DOC_EDITED_DATE.eq(t.getDocEditedDate()),
+								DOCUMENT_DOCTABLE.DOC_DELETED.eq(t.getDocDeleted())));
+				return addOrderByElements(select, orderArgs);
 			}
 		});
 	}
@@ -202,31 +202,31 @@ public class DocumentDocDaoImpl extends TinyDslDaoSupport implements DocumentDoc
 
 			public Select generate(DocumentDoc t) {
 				Select select = MysqlSelect.selectFrom(DOCUMENT_DOCTABLE).where(
-				and(
-					DOCUMENT_DOCTABLE.DOC_PRODUCT.eq(t.getDocProduct()),
-					DOCUMENT_DOCTABLE.DOC_PROJECT.eq(t.getDocProject()),
-					DOCUMENT_DOCTABLE.DOC_LIB_ID.eq(t.getDocLibId()),
-					DOCUMENT_DOCTABLE.DOC_MODULE.eq(t.getDocModule()),
-					DOCUMENT_DOCTABLE.DOC_TITLE.eq(t.getDocTitle()),
-					DOCUMENT_DOCTABLE.DOC_DIGEST.eq(t.getDocDigest()),
-					DOCUMENT_DOCTABLE.DOC_KEYWORDS.eq(t.getDocKeywords()),
-					DOCUMENT_DOCTABLE.DOC_TYPE.eq(t.getDocType()),
-					DOCUMENT_DOCTABLE.DOC_CONTENT.eq(t.getDocContent()),
-					DOCUMENT_DOCTABLE.DOC_URL.eq(t.getDocUrl()),
-					DOCUMENT_DOCTABLE.DOC_ATTACH.eq(t.getDocAttach()),
-					DOCUMENT_DOCTABLE.DOC_VIEWS.eq(t.getDocViews()),
-					DOCUMENT_DOCTABLE.DOC_ADDED_BY.eq(t.getDocAddedBy()),
-					DOCUMENT_DOCTABLE.DOC_ADDED_DATE.eq(t.getDocAddedDate()),
-					DOCUMENT_DOCTABLE.DOC_EDITED_BY.eq(t.getDocEditedBy()),
-					DOCUMENT_DOCTABLE.DOC_EDITED_DATE.eq(t.getDocEditedDate()),
-					DOCUMENT_DOCTABLE.DOC_DELETED.eq(t.getDocDeleted())));
-			return addOrderByElements(select, orderArgs);
+						and(
+								DOCUMENT_DOCTABLE.DOC_PRODUCT.eq(t.getDocProduct()),
+								DOCUMENT_DOCTABLE.DOC_PROJECT.eq(t.getDocProject()),
+								DOCUMENT_DOCTABLE.DOC_LIB_ID.eq(t.getDocLibId()),
+								DOCUMENT_DOCTABLE.DOC_MODULE.eq(t.getDocModule()),
+								DOCUMENT_DOCTABLE.DOC_TITLE.eq(t.getDocTitle()),
+								DOCUMENT_DOCTABLE.DOC_DIGEST.eq(t.getDocDigest()),
+								DOCUMENT_DOCTABLE.DOC_KEYWORDS.eq(t.getDocKeywords()),
+								DOCUMENT_DOCTABLE.DOC_TYPE.eq(t.getDocType()),
+								DOCUMENT_DOCTABLE.DOC_CONTENT.eq(t.getDocContent()),
+								DOCUMENT_DOCTABLE.DOC_URL.eq(t.getDocUrl()),
+								DOCUMENT_DOCTABLE.DOC_ATTACH.eq(t.getDocAttach()),
+								DOCUMENT_DOCTABLE.DOC_VIEWS.eq(t.getDocViews()),
+								DOCUMENT_DOCTABLE.DOC_ADDED_BY.eq(t.getDocAddedBy()),
+								DOCUMENT_DOCTABLE.DOC_ADDED_DATE.eq(t.getDocAddedDate()),
+								DOCUMENT_DOCTABLE.DOC_EDITED_BY.eq(t.getDocEditedBy()),
+								DOCUMENT_DOCTABLE.DOC_EDITED_DATE.eq(t.getDocEditedDate()),
+								DOCUMENT_DOCTABLE.DOC_DELETED.eq(t.getDocDeleted())));
+				return addOrderByElements(select, orderArgs);
 			}
 		});
 	}
-	
+
 	public Pager<DocumentDoc> complexQueryNoRel(int start, int limit, DocumentDoc doc, final String condition,
-			final OrderBy... orderBys) {
+												final OrderBy... orderBys) {
 		if(doc == null){
 			doc =new DocumentDoc();
 		}
@@ -235,28 +235,28 @@ public class DocumentDocDaoImpl extends TinyDslDaoSupport implements DocumentDoc
 			public Select generate(DocumentDoc t){
 				Select select = MysqlSelect.selectFrom(DOCUMENT_DOCTABLE).where(
 						and(fragmentCondition(condition),
-							DOCUMENT_DOCTABLE.DOC_PRODUCT.eq(t.getDocProduct()),
-							DOCUMENT_DOCTABLE.DOC_PROJECT.eq(t.getDocProject()),
-							DOCUMENT_DOCTABLE.DOC_LIB_ID.eq(t.getDocLibId()),
-							DOCUMENT_DOCTABLE.DOC_MODULE.eq(t.getDocModule()),
-							DOCUMENT_DOCTABLE.DOC_TITLE.eq(t.getDocTitle()),
-							DOCUMENT_DOCTABLE.DOC_DIGEST.eq(t.getDocDigest()),
-							DOCUMENT_DOCTABLE.DOC_KEYWORDS.eq(t.getDocKeywords()),
-							DOCUMENT_DOCTABLE.DOC_TYPE.eq(t.getDocType()),
-							DOCUMENT_DOCTABLE.DOC_CONTENT.eq(t.getDocContent()),
-							DOCUMENT_DOCTABLE.DOC_URL.eq(t.getDocUrl()),
-							DOCUMENT_DOCTABLE.DOC_ATTACH.eq(t.getDocAttach()),
-							DOCUMENT_DOCTABLE.DOC_VIEWS.eq(t.getDocViews()),
-							DOCUMENT_DOCTABLE.DOC_ADDED_BY.eq(t.getDocAddedBy()),
-							DOCUMENT_DOCTABLE.DOC_ADDED_DATE.eq(t.getDocAddedDate()),
-							DOCUMENT_DOCTABLE.DOC_EDITED_BY.eq(t.getDocEditedBy()),
-							DOCUMENT_DOCTABLE.DOC_EDITED_DATE.eq(t.getDocEditedDate()),
-							DOCUMENT_DOCTABLE.DOC_DELETED.eq(t.getDocDeleted())));
-					return addOrderByElements(select, orderBys);
-				}		
-			});
-		}
-	
+								DOCUMENT_DOCTABLE.DOC_PRODUCT.eq(t.getDocProduct()),
+								DOCUMENT_DOCTABLE.DOC_PROJECT.eq(t.getDocProject()),
+								DOCUMENT_DOCTABLE.DOC_LIB_ID.eq(t.getDocLibId()),
+								DOCUMENT_DOCTABLE.DOC_MODULE.eq(t.getDocModule()),
+								DOCUMENT_DOCTABLE.DOC_TITLE.eq(t.getDocTitle()),
+								DOCUMENT_DOCTABLE.DOC_DIGEST.eq(t.getDocDigest()),
+								DOCUMENT_DOCTABLE.DOC_KEYWORDS.eq(t.getDocKeywords()),
+								DOCUMENT_DOCTABLE.DOC_TYPE.eq(t.getDocType()),
+								DOCUMENT_DOCTABLE.DOC_CONTENT.eq(t.getDocContent()),
+								DOCUMENT_DOCTABLE.DOC_URL.eq(t.getDocUrl()),
+								DOCUMENT_DOCTABLE.DOC_ATTACH.eq(t.getDocAttach()),
+								DOCUMENT_DOCTABLE.DOC_VIEWS.eq(t.getDocViews()),
+								DOCUMENT_DOCTABLE.DOC_ADDED_BY.eq(t.getDocAddedBy()),
+								DOCUMENT_DOCTABLE.DOC_ADDED_DATE.eq(t.getDocAddedDate()),
+								DOCUMENT_DOCTABLE.DOC_EDITED_BY.eq(t.getDocEditedBy()),
+								DOCUMENT_DOCTABLE.DOC_EDITED_DATE.eq(t.getDocEditedDate()),
+								DOCUMENT_DOCTABLE.DOC_DELETED.eq(t.getDocDeleted())));
+				return addOrderByElements(select, orderBys);
+			}
+		});
+	}
+
 	public Pager<DocumentDoc> complexQuery(int start, int limit,
 										   DocumentDoc doc,
 										   final String condition,
@@ -315,10 +315,10 @@ public class DocumentDocDaoImpl extends TinyDslDaoSupport implements DocumentDoc
 								DOCUMENT_DOCTABLE.DOC_EDITED_BY.eq(t.getDocEditedBy()),
 								DOCUMENT_DOCTABLE.DOC_EDITED_DATE.eq(t.getDocEditedDate()),
 								DOCUMENT_DOCTABLE.DOC_DELETED.eq(t.getDocDeleted())));
-					return addOrderByElements(select, orderBys);
-				}		
-			});
-		}	
+				return addOrderByElements(select, orderBys);
+			}
+		});
+	}
 
 	public int[] batchInsert(boolean autoGeneratedKeys ,List<DocumentDoc> documentDocs) {
 		if (CollectionUtil.isEmpty(documentDocs)) {
@@ -328,31 +328,31 @@ public class DocumentDocDaoImpl extends TinyDslDaoSupport implements DocumentDoc
 
 			public Insert generate() {
 				return insertInto(DOCUMENT_DOCTABLE).values(
-					DOCUMENT_DOCTABLE.DOC_PRODUCT.value(new JdbcNamedParameter("docProduct")),
-					DOCUMENT_DOCTABLE.DOC_PROJECT.value(new JdbcNamedParameter("docProject")),
-					DOCUMENT_DOCTABLE.DOC_LIB_ID.value(new JdbcNamedParameter("docLibId")),
-					DOCUMENT_DOCTABLE.DOC_MODULE.value(new JdbcNamedParameter("docModule")),
-					DOCUMENT_DOCTABLE.DOC_TITLE.value(new JdbcNamedParameter("docTitle")),
-					DOCUMENT_DOCTABLE.DOC_DIGEST.value(new JdbcNamedParameter("docDigest")),
-					DOCUMENT_DOCTABLE.DOC_KEYWORDS.value(new JdbcNamedParameter("docKeywords")),
-					DOCUMENT_DOCTABLE.DOC_TYPE.value(new JdbcNamedParameter("docType")),
-					DOCUMENT_DOCTABLE.DOC_CONTENT.value(new JdbcNamedParameter("docContent")),
-					DOCUMENT_DOCTABLE.DOC_URL.value(new JdbcNamedParameter("docUrl")),
-					DOCUMENT_DOCTABLE.DOC_ATTACH.value(new JdbcNamedParameter("docAttach")),
-					DOCUMENT_DOCTABLE.DOC_VIEWS.value(new JdbcNamedParameter("docViews")),
-					DOCUMENT_DOCTABLE.DOC_ADDED_BY.value(new JdbcNamedParameter("docAddedBy")),
-					DOCUMENT_DOCTABLE.DOC_ADDED_DATE.value(new JdbcNamedParameter("docAddedDate")),
-					DOCUMENT_DOCTABLE.DOC_EDITED_BY.value(new JdbcNamedParameter("docEditedBy")),
-					DOCUMENT_DOCTABLE.DOC_EDITED_DATE.value(new JdbcNamedParameter("docEditedDate")),
-					DOCUMENT_DOCTABLE.DOC_DELETED.value(new JdbcNamedParameter("docDeleted")));
+						DOCUMENT_DOCTABLE.DOC_PRODUCT.value(new JdbcNamedParameter("docProduct")),
+						DOCUMENT_DOCTABLE.DOC_PROJECT.value(new JdbcNamedParameter("docProject")),
+						DOCUMENT_DOCTABLE.DOC_LIB_ID.value(new JdbcNamedParameter("docLibId")),
+						DOCUMENT_DOCTABLE.DOC_MODULE.value(new JdbcNamedParameter("docModule")),
+						DOCUMENT_DOCTABLE.DOC_TITLE.value(new JdbcNamedParameter("docTitle")),
+						DOCUMENT_DOCTABLE.DOC_DIGEST.value(new JdbcNamedParameter("docDigest")),
+						DOCUMENT_DOCTABLE.DOC_KEYWORDS.value(new JdbcNamedParameter("docKeywords")),
+						DOCUMENT_DOCTABLE.DOC_TYPE.value(new JdbcNamedParameter("docType")),
+						DOCUMENT_DOCTABLE.DOC_CONTENT.value(new JdbcNamedParameter("docContent")),
+						DOCUMENT_DOCTABLE.DOC_URL.value(new JdbcNamedParameter("docUrl")),
+						DOCUMENT_DOCTABLE.DOC_ATTACH.value(new JdbcNamedParameter("docAttach")),
+						DOCUMENT_DOCTABLE.DOC_VIEWS.value(new JdbcNamedParameter("docViews")),
+						DOCUMENT_DOCTABLE.DOC_ADDED_BY.value(new JdbcNamedParameter("docAddedBy")),
+						DOCUMENT_DOCTABLE.DOC_ADDED_DATE.value(new JdbcNamedParameter("docAddedDate")),
+						DOCUMENT_DOCTABLE.DOC_EDITED_BY.value(new JdbcNamedParameter("docEditedBy")),
+						DOCUMENT_DOCTABLE.DOC_EDITED_DATE.value(new JdbcNamedParameter("docEditedDate")),
+						DOCUMENT_DOCTABLE.DOC_DELETED.value(new JdbcNamedParameter("docDeleted")));
 			}
 		});
 	}
 
 	public int[] batchInsert(List<DocumentDoc> documentDocs){
-			return batchInsert(true ,documentDocs);
+		return batchInsert(true ,documentDocs);
 	}
-	
+
 	public int[] batchUpdate(List<DocumentDoc> documentDocs) {
 		if (CollectionUtil.isEmpty(documentDocs)) {
 			return new int[0];
@@ -361,24 +361,24 @@ public class DocumentDocDaoImpl extends TinyDslDaoSupport implements DocumentDoc
 
 			public Update generate() {
 				return update(DOCUMENT_DOCTABLE).set(
-					DOCUMENT_DOCTABLE.DOC_PRODUCT.value(new JdbcNamedParameter("docProduct")),
-					DOCUMENT_DOCTABLE.DOC_PROJECT.value(new JdbcNamedParameter("docProject")),
-					DOCUMENT_DOCTABLE.DOC_LIB_ID.value(new JdbcNamedParameter("docLibId")),
-					DOCUMENT_DOCTABLE.DOC_MODULE.value(new JdbcNamedParameter("docModule")),
-					DOCUMENT_DOCTABLE.DOC_TITLE.value(new JdbcNamedParameter("docTitle")),
-					DOCUMENT_DOCTABLE.DOC_DIGEST.value(new JdbcNamedParameter("docDigest")),
-					DOCUMENT_DOCTABLE.DOC_KEYWORDS.value(new JdbcNamedParameter("docKeywords")),
-					DOCUMENT_DOCTABLE.DOC_TYPE.value(new JdbcNamedParameter("docType")),
-					DOCUMENT_DOCTABLE.DOC_CONTENT.value(new JdbcNamedParameter("docContent")),
-					DOCUMENT_DOCTABLE.DOC_URL.value(new JdbcNamedParameter("docUrl")),
-					DOCUMENT_DOCTABLE.DOC_ATTACH.value(new JdbcNamedParameter("docAttach")),
-					DOCUMENT_DOCTABLE.DOC_VIEWS.value(new JdbcNamedParameter("docViews")),
-					DOCUMENT_DOCTABLE.DOC_ADDED_BY.value(new JdbcNamedParameter("docAddedBy")),
-					DOCUMENT_DOCTABLE.DOC_ADDED_DATE.value(new JdbcNamedParameter("docAddedDate")),
-					DOCUMENT_DOCTABLE.DOC_EDITED_BY.value(new JdbcNamedParameter("docEditedBy")),
-					DOCUMENT_DOCTABLE.DOC_EDITED_DATE.value(new JdbcNamedParameter("docEditedDate")),
-					DOCUMENT_DOCTABLE.DOC_DELETED.value(new JdbcNamedParameter("docDeleted"))).where(
-				DOCUMENT_DOCTABLE.DOC_ID.eq(new JdbcNamedParameter("docId")));
+						DOCUMENT_DOCTABLE.DOC_PRODUCT.value(new JdbcNamedParameter("docProduct")),
+						DOCUMENT_DOCTABLE.DOC_PROJECT.value(new JdbcNamedParameter("docProject")),
+						DOCUMENT_DOCTABLE.DOC_LIB_ID.value(new JdbcNamedParameter("docLibId")),
+						DOCUMENT_DOCTABLE.DOC_MODULE.value(new JdbcNamedParameter("docModule")),
+						DOCUMENT_DOCTABLE.DOC_TITLE.value(new JdbcNamedParameter("docTitle")),
+						DOCUMENT_DOCTABLE.DOC_DIGEST.value(new JdbcNamedParameter("docDigest")),
+						DOCUMENT_DOCTABLE.DOC_KEYWORDS.value(new JdbcNamedParameter("docKeywords")),
+						DOCUMENT_DOCTABLE.DOC_TYPE.value(new JdbcNamedParameter("docType")),
+						DOCUMENT_DOCTABLE.DOC_CONTENT.value(new JdbcNamedParameter("docContent")),
+						DOCUMENT_DOCTABLE.DOC_URL.value(new JdbcNamedParameter("docUrl")),
+						DOCUMENT_DOCTABLE.DOC_ATTACH.value(new JdbcNamedParameter("docAttach")),
+						DOCUMENT_DOCTABLE.DOC_VIEWS.value(new JdbcNamedParameter("docViews")),
+						DOCUMENT_DOCTABLE.DOC_ADDED_BY.value(new JdbcNamedParameter("docAddedBy")),
+						DOCUMENT_DOCTABLE.DOC_ADDED_DATE.value(new JdbcNamedParameter("docAddedDate")),
+						DOCUMENT_DOCTABLE.DOC_EDITED_BY.value(new JdbcNamedParameter("docEditedBy")),
+						DOCUMENT_DOCTABLE.DOC_EDITED_DATE.value(new JdbcNamedParameter("docEditedDate")),
+						DOCUMENT_DOCTABLE.DOC_DELETED.value(new JdbcNamedParameter("docDeleted"))).where(
+						DOCUMENT_DOCTABLE.DOC_ID.eq(new JdbcNamedParameter("docId")));
 			}
 		});
 	}
@@ -391,24 +391,24 @@ public class DocumentDocDaoImpl extends TinyDslDaoSupport implements DocumentDoc
 
 			public Delete generate() {
 				return delete(DOCUMENT_DOCTABLE).where(and(
-				DOCUMENT_DOCTABLE.DOC_ID.eq(new JdbcNamedParameter("docId")),
-				DOCUMENT_DOCTABLE.DOC_PRODUCT.eq(new JdbcNamedParameter("docProduct")),
-				DOCUMENT_DOCTABLE.DOC_PROJECT.eq(new JdbcNamedParameter("docProject")),
-				DOCUMENT_DOCTABLE.DOC_LIB_ID.eq(new JdbcNamedParameter("docLibId")),
-				DOCUMENT_DOCTABLE.DOC_MODULE.eq(new JdbcNamedParameter("docModule")),
-				DOCUMENT_DOCTABLE.DOC_TITLE.eq(new JdbcNamedParameter("docTitle")),
-				DOCUMENT_DOCTABLE.DOC_DIGEST.eq(new JdbcNamedParameter("docDigest")),
-				DOCUMENT_DOCTABLE.DOC_KEYWORDS.eq(new JdbcNamedParameter("docKeywords")),
-				DOCUMENT_DOCTABLE.DOC_TYPE.eq(new JdbcNamedParameter("docType")),
-				DOCUMENT_DOCTABLE.DOC_CONTENT.eq(new JdbcNamedParameter("docContent")),
-				DOCUMENT_DOCTABLE.DOC_URL.eq(new JdbcNamedParameter("docUrl")),
-				DOCUMENT_DOCTABLE.DOC_ATTACH.eq(new JdbcNamedParameter("docAttach")),
-				DOCUMENT_DOCTABLE.DOC_VIEWS.eq(new JdbcNamedParameter("docViews")),
-				DOCUMENT_DOCTABLE.DOC_ADDED_BY.eq(new JdbcNamedParameter("docAddedBy")),
-				DOCUMENT_DOCTABLE.DOC_ADDED_DATE.eq(new JdbcNamedParameter("docAddedDate")),
-				DOCUMENT_DOCTABLE.DOC_EDITED_BY.eq(new JdbcNamedParameter("docEditedBy")),
-				DOCUMENT_DOCTABLE.DOC_EDITED_DATE.eq(new JdbcNamedParameter("docEditedDate")),
-				DOCUMENT_DOCTABLE.DOC_DELETED.eq(new JdbcNamedParameter("docDeleted"))));
+						DOCUMENT_DOCTABLE.DOC_ID.eq(new JdbcNamedParameter("docId")),
+						DOCUMENT_DOCTABLE.DOC_PRODUCT.eq(new JdbcNamedParameter("docProduct")),
+						DOCUMENT_DOCTABLE.DOC_PROJECT.eq(new JdbcNamedParameter("docProject")),
+						DOCUMENT_DOCTABLE.DOC_LIB_ID.eq(new JdbcNamedParameter("docLibId")),
+						DOCUMENT_DOCTABLE.DOC_MODULE.eq(new JdbcNamedParameter("docModule")),
+						DOCUMENT_DOCTABLE.DOC_TITLE.eq(new JdbcNamedParameter("docTitle")),
+						DOCUMENT_DOCTABLE.DOC_DIGEST.eq(new JdbcNamedParameter("docDigest")),
+						DOCUMENT_DOCTABLE.DOC_KEYWORDS.eq(new JdbcNamedParameter("docKeywords")),
+						DOCUMENT_DOCTABLE.DOC_TYPE.eq(new JdbcNamedParameter("docType")),
+						DOCUMENT_DOCTABLE.DOC_CONTENT.eq(new JdbcNamedParameter("docContent")),
+						DOCUMENT_DOCTABLE.DOC_URL.eq(new JdbcNamedParameter("docUrl")),
+						DOCUMENT_DOCTABLE.DOC_ATTACH.eq(new JdbcNamedParameter("docAttach")),
+						DOCUMENT_DOCTABLE.DOC_VIEWS.eq(new JdbcNamedParameter("docViews")),
+						DOCUMENT_DOCTABLE.DOC_ADDED_BY.eq(new JdbcNamedParameter("docAddedBy")),
+						DOCUMENT_DOCTABLE.DOC_ADDED_DATE.eq(new JdbcNamedParameter("docAddedDate")),
+						DOCUMENT_DOCTABLE.DOC_EDITED_BY.eq(new JdbcNamedParameter("docEditedBy")),
+						DOCUMENT_DOCTABLE.DOC_EDITED_DATE.eq(new JdbcNamedParameter("docEditedDate")),
+						DOCUMENT_DOCTABLE.DOC_DELETED.eq(new JdbcNamedParameter("docDeleted"))));
 			}
 		});
 	}
@@ -430,20 +430,20 @@ public class DocumentDocDaoImpl extends TinyDslDaoSupport implements DocumentDoc
 		return select;
 	}
 
-	public int[] batchUpdateDel(List<DocumentDoc> documentDocs){
+	public int[] batchUpdateDel(List<DocumentDoc> documentDocs) {
 		if (CollectionUtil.isEmpty(documentDocs)) {
 			return new int[0];
 		}
 		return getDslTemplate().batchUpdate(documentDocs, new NoParamUpdateGenerateCallback() {
-			
+
 			public Update generate() {
 				return update(DOCUMENT_DOCTABLE).set(
-					DOCUMENT_DOCTABLE.DOC_DELETED.value(new JdbcNamedParameter("docDeleted"))).where(
-				DOCUMENT_DOCTABLE.DOC_ID.eq(new JdbcNamedParameter("docId")));
+						DOCUMENT_DOCTABLE.DOC_DELETED.value(new JdbcNamedParameter("docDeleted"))).where(
+						DOCUMENT_DOCTABLE.DOC_ID.eq(new JdbcNamedParameter("docId")));
 			}
 		});
-		
+
 	}
 
-	
+
 }

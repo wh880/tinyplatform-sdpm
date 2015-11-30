@@ -41,6 +41,7 @@ public class DeptAction extends BaseController {
 
     /**
      * 部门的编辑功能
+     *
      * @param orgDeptParent
      * @param orgDeptId
      * @param orgDeptName
@@ -58,6 +59,7 @@ public class DeptAction extends BaseController {
 
     /**
      * 部门的删除功能
+     *
      * @param orgDeptId
      * @return
      */

@@ -27,7 +27,7 @@ public interface ProjectTeamDao extends BaseDao<ProjectTeam, Integer> {
 
     List<ProjectTeam> findByProductId(Integer productId);
 
-    List<String> getMenuByUserId(Integer projectId, Integer productId ,String userId);
+    List<String> getMenuByUserId(Integer projectId, Integer productId, String userId);
 
     List<Integer> getRoleIdListByUserId(Integer projectId, Integer productId, String userId);
 

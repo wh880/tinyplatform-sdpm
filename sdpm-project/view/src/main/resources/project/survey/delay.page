@@ -44,7 +44,7 @@
         <div class="col-5">
         </div>
         <div class="col-1">
-            <input style="float: left" type="submit" id="submit" class="commitBtn" value="保存">
+            <input style="float: left" type="submit" id="submit2" class="commitBtn" value="保存">
         </div>
         <div class="col-1">
             <input style="float: left" type="button" id="cancel" class="commitBtn" value="取消">

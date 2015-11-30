@@ -15,21 +15,21 @@ import org.tinygroup.weblayer.mvc.annotation.Controller;
 @Controller
 @RequestMapping("/a/quality/caseStep")
 public class CaseStepAction extends BaseController {
-	
-	@Autowired
-	private CaseStepService caseStepService;
-	
-	@RequestMapping("findList")
-	public String findList(Integer id,Model model){
-		QualityCaseStep casestep = new QualityCaseStep();
-		caseStepService.findCaseStepList(casestep);
-		model.addAttribute("caseStepList",casestep);
-		return "";
-	}
-	
-	@RequestMapping("delete")
-	public String delete(Integer id,Model model){
-		caseStepService.deleteById(id);
-		return "";
-	}
+
+    @Autowired
+    private CaseStepService caseStepService;
+
+    @RequestMapping("findList")
+    public String findList(Integer id, Model model) {
+        QualityCaseStep casestep = new QualityCaseStep();
+        caseStepService.findCaseStepList(casestep);
+        model.addAttribute("caseStepList", casestep);
+        return "";
+    }
+
+    @RequestMapping("delete")
+    public String delete(Integer id, Model model) {
+        caseStepService.deleteById(id);
+        return "";
+    }
 }

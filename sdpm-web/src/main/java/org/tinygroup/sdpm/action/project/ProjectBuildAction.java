@@ -237,8 +237,6 @@ public class ProjectBuildAction extends BaseController {
     }
 
 
-
-
     @RequestMapping("/productalbug")
     public String productalbug(Integer buildId, Model model) {
         ProjectBuild build = buildService.findBuild(buildId);
@@ -269,7 +267,7 @@ public class ProjectBuildAction extends BaseController {
         } else if ("alnoReq".equals(forwordPager)) {
             return "project/task/relation-release/product-al-no-req.page";
 
-        } else /* ("alReq".equals(forwordPager)) */{
+        } else /* ("alReq".equals(forwordPager)) */ {
             return "project/task/relation-release/product-al-req.page";
         }
 
@@ -419,9 +417,9 @@ public class ProjectBuildAction extends BaseController {
 
     @ResponseBody
     @RequestMapping("ajax/buildInCondition")
-    public List<ProjectBuild> buildInCondition(String key, String initKey,Integer productId, Integer projectId, HttpServletRequest request){
-        if(initKey!=null){
-            if(initKey.indexOf(",")>0){
+    public List<ProjectBuild> buildInCondition(String key, String initKey, Integer productId, Integer projectId, HttpServletRequest request) {
+        if (initKey != null) {
+            if (initKey.indexOf(",") > 0) {
                 String[] ids = initKey.split(",");
                 return buildService.getBuildByIds(ids);
             }

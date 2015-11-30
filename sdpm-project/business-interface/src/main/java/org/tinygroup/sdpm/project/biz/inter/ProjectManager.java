@@ -20,6 +20,15 @@ public interface ProjectManager {
     List<Project> findListByTeamUserId(String userId, String acl);
 
     /**
+     * 查找相关干系人的项目
+     * 查询条件OR
+     *
+     * @param project
+     * @return
+     */
+    List<Project> findListByRelatedUser(Project project);
+
+    /**
      * 根据项目查，关联查询了总消耗等信息
      *
      * @param project

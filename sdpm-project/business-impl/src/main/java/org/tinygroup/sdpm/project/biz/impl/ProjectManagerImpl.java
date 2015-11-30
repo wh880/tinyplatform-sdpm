@@ -30,16 +30,21 @@ public class ProjectManagerImpl implements ProjectManager {
         return projectDao.query(project);
     }
 
-    public List<Project> findListByTeamUserId(String userId,String acl) {
-        return projectDao.findListByTeamUserId(userId,acl);
+    public List<Project> findListByTeamUserId(String userId, String acl) {
+        return projectDao.findListByTeamUserId(userId, acl);
     }
 
-    public List<Project> findListProjects(Project project,Date startDate,Date endDate) {
-        return projectDao.findListWithStatistics(project,startDate,endDate);
+    public List<Project> findListByRelatedUser(Project project) {
+        return projectDao.findListByRelatedUser(project);
+    }
+
+
+    public List<Project> findListProjects(Project project, Date startDate, Date endDate) {
+        return projectDao.findListWithStatistics(project, startDate, endDate);
     }
 
     public Pager<Project> findPagerProjects(Integer start, Integer limit, String sortName, boolean asc, Integer... ids) {
-        if(ids==null)return new Pager<Project>(0,0,new ArrayList<Project>());
+        if (ids == null) return new Pager<Project>(0, 0, new ArrayList<Project>());
         if (StringUtil.isBlank(sortName)) {
             return projectDao.findPageWithStatistics(start, limit, new Project(), ids);
         } else {

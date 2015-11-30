@@ -1,14 +1,7 @@
 package org.tinygroup.sdpm;
 
 import org.tinygroup.sdpm.product.dao.pojo.Product;
-import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
-import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
-import org.tinygroup.template.TemplateContext;
-import org.tinygroup.template.TemplateEngine;
 import org.tinygroup.template.TemplateException;
-import org.tinygroup.template.impl.TemplateContextDefault;
-import org.tinygroup.template.impl.TemplateEngineDefault;
-import org.tinygroup.template.loader.FileObjectResourceLoader;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -18,7 +11,7 @@ import java.util.List;
  * Created by wangll13383 on 2015/11/18.
  */
 public class TestCreateWord {
-    public static  void main(String[] args) throws TemplateException, IOException {
+    public static void main(String[] args) throws TemplateException, IOException {
 //        List<QualityBug> bugList = new ArrayList<QualityBug>();
 //        for(int i =0;i<10;i++){
 //            QualityBug bug = new QualityBug();
@@ -46,9 +39,9 @@ public class TestCreateWord {
 //        out.close();
 
         List<Product> products = new ArrayList<Product>();
-        for(int i =0;i<10;i++){
+        for (int i = 0; i < 10; i++) {
             Product product = new Product();
-            product.setProductName("name"+i);
+            product.setProductName("name" + i);
             products.add(product);
         }
 

@@ -64,6 +64,7 @@ public class BuildManagerImpl implements BuildManager {
         build.setBuildDeleted(build.DELETE_YES);
         return projectBuildDao.edit(build);
     }
+
     public int[] batchDelBuildByIds(List<ProjectBuild> keys) {
         return projectBuildDao.batchUpdateDel(keys);
     }
@@ -73,15 +74,15 @@ public class BuildManagerImpl implements BuildManager {
     }
 
     public Pager<ProductStory> findBuildStory(int start, int limit, Integer buildId) {
-        return projectBuildDao.findBuildStoryList(start,limit,buildId);
+        return projectBuildDao.findBuildStoryList(start, limit, buildId);
     }
 
     public Pager<QualityBug> findBuildBug(int start, int limit, Integer buildId) {
-        return projectBuildDao.findBuildBugs(start,limit,buildId);
+        return projectBuildDao.findBuildBugs(start, limit, buildId);
     }
 
     public Pager<QualityBug> findBuildLegacyBug(int start, int limit, Integer buildId) {
-        return projectBuildDao.findBuildLegacyBugs(start,limit,buildId);
+        return projectBuildDao.findBuildLegacyBugs(start, limit, buildId);
     }
 
     public List<ProjectBuild> getBuildByIds(String... ids) {
@@ -89,12 +90,12 @@ public class BuildManagerImpl implements BuildManager {
     }
 
     public List<ProjectBuild> getBuildByProducts(Integer... ids) {
-        if(ids==null||ids.length==0)return new ArrayList<ProjectBuild>();
+        if (ids == null || ids.length == 0) return new ArrayList<ProjectBuild>();
         return projectBuildDao.getBuildByProducts(ids);
     }
 
     public List<ProjectBuild> buildInCondition(String condition, Integer productId, Integer projectId) {
-        return projectBuildDao.buildInCondition(condition,productId,projectId);
+        return projectBuildDao.buildInCondition(condition, productId, projectId);
     }
 
     public Pager<ProductStory> findNoBuildStory(int start, int limit, String condition, Integer buildId) {
@@ -102,22 +103,22 @@ public class BuildManagerImpl implements BuildManager {
     }
 
     public Pager<QualityBug> findNoBuildBug(int start, int limit, String condition, Integer buildId) {
-        return projectBuildDao.findNoBuildBugs(start,limit,condition,buildId);
+        return projectBuildDao.findNoBuildBugs(start, limit, condition, buildId);
     }
 
-    public Integer deleteBuildStory(Integer storyId, Integer buildId){
-        return projectBuildDao.deleteBuildStory(storyId,buildId);
+    public Integer deleteBuildStory(Integer storyId, Integer buildId) {
+        return projectBuildDao.deleteBuildStory(storyId, buildId);
     }
 
-    public Integer deleteBuildBug(Integer bugId, Integer buildId){
-        return projectBuildDao.deleteBuildBug(bugId,buildId);
+    public Integer deleteBuildBug(Integer bugId, Integer buildId) {
+        return projectBuildDao.deleteBuildBug(bugId, buildId);
     }
 
-    public Integer linkBuildStory(Integer storyId, Integer buildId){
+    public Integer linkBuildStory(Integer storyId, Integer buildId) {
         return projectBuildDao.linkBuildStory(storyId, buildId);
     }
 
-    public Integer linkBuildBug(Integer bugId, Integer buildId){
+    public Integer linkBuildBug(Integer bugId, Integer buildId) {
         return projectBuildDao.linkBuildBug(bugId, buildId);
     }
 

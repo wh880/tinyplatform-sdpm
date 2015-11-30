@@ -20,7 +20,7 @@
     <p class="titleName">创建新发布</p>
 
 #*    <div class="RTtitle">
-        <button type="submit" id="submit" class="commitBtn">保存</button>
+        <button type="submit" id="submit2" class="commitBtn">保存</button>
     </div>*#
 
     #@elementItem()
@@ -91,7 +91,7 @@
 
         </div>
         <div class="col-1">
-            <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
+            <button style="float: left" type="submit" id="submit2" class="commitBtn">保存</button>
         </div>
         <div class="col-1">
             #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end

@@ -32,6 +32,7 @@ public class ClientManagerImpl implements ClientManager {
     public Pager<ServiceClient> findByProduct(Integer start, Integer limit, Integer treeId, String order, String orderType) {
         return clientDao.findByProduct(start, limit, treeId, (order == null || "".equals(order)) ? null : new OrderBy(NameUtil.resolveNameDesc(order), !("desc".equals(orderType)) ? true : false));
     }
+
     public List<ServiceClient> getList(ServiceClient client) {
         return clientDao.query(client);
     }

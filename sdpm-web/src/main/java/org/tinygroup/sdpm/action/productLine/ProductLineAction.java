@@ -59,7 +59,7 @@ public class ProductLineAction extends BaseController {
     }
 
     @RequestMapping("/save")
-    public String save(ProductLine productLine, SystemAction systemAction,HttpServletRequest request) {
+    public String save(ProductLine productLine, SystemAction systemAction, HttpServletRequest request) {
         productLine.setProductLineCreatedBy(UserUtils.getUserId());
         productLine.setProductLineCreatedDate(new Date());
         productLine.setProductLineStatus("0");
@@ -68,12 +68,12 @@ public class ProductLineAction extends BaseController {
         ProductUtils.removeProductLineListByUser();
         LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCTLINE
                 , LogUtil.LogAction.OPENED
-                ,String.valueOf(productLine1.getProductLineId())
-                ,UserUtils.getUserId()
-                ,null
-                ,null
-                ,null
-                ,null
+                , String.valueOf(productLine1.getProductLineId())
+                , UserUtils.getUserId()
+                , null
+                , null
+                , null
+                , null
                 , systemAction.getActionComment());
 
         return "redirect:" + "/a/productLine/content/all";
@@ -98,9 +98,8 @@ public class ProductLineAction extends BaseController {
     }
 
 
-
     @RequestMapping("/edit")
-    public String edit(ProductLine productLine){
+    public String edit(ProductLine productLine) {
         productLineService.updateProductLine(productLine);
         return "/productLine/page/tabledemo/update.page";
     }
@@ -112,7 +111,7 @@ public class ProductLineAction extends BaseController {
         product.setProductLineId(productLineId);
         product.setDeleted(0);
         List<Product> products = productService.findProductList(product);
-        for(Product product1 : products){
+        for (Product product1 : products) {
             product1.setDeleted(1);
             productService.updateProduct(product1);
             LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCT,
@@ -174,22 +173,22 @@ public class ProductLineAction extends BaseController {
     @RequestMapping("/list")
     public String list(ProductLine productLine, Integer start, Integer pagesize,
                        @RequestParam(required = false, defaultValue = "productLineId") String order,
-                       @RequestParam(required = false, defaultValue = "asc") String ordertype,Integer status, Model model) {
+                       @RequestParam(required = false, defaultValue = "asc") String ordertype, Integer status, Model model) {
         String condition = getStatusCondition(status);
 
         Integer[] ids = productLineService.getUserProductLineIds(UserUtils.getUserId());
-        Pager<ProductLine> pagerProductLine = productLineService.findProductLinePagerInIds(start, pagesize,condition, productLine,ids, order, ordertype);
+        Pager<ProductLine> pagerProductLine = productLineService.findProductLinePagerInIds(start, pagesize, condition, productLine, ids, order, ordertype);
 
         model.addAttribute("productLine", pagerProductLine);
         return "/productLine/data/productLinedata.pagelet";
     }
 
     @RequestMapping("/find/{forword}")
-    public String find(@CookieValue(value = "cookieProductLineId",defaultValue ="0") String cookieProductLineId,
-            @PathVariable(  value = "forword") String forword,Integer productId,Integer productLineId, Model model, HttpServletRequest request) {
+    public String find(@CookieValue(value = "cookieProductLineId", defaultValue = "0") String cookieProductLineId,
+                       @PathVariable(value = "forword") String forword, Integer productId, Integer productLineId, Model model, HttpServletRequest request) {
 
-    	if (productLineId == null) {
-    		productLineId = Integer.parseInt(cookieProductLineId);
+        if (productLineId == null) {
+            productLineId = Integer.parseInt(cookieProductLineId);
         }
 
         ProductLine productLine = productLineService.findProductLine(productLineId);
@@ -201,10 +200,10 @@ public class ProductLineAction extends BaseController {
         if ("overview".equals(forword)) {
             return "/productLine/page/project/overview.page";
         } else if ("productLineDetail".equals(forword)) {
-            if(!StringUtil.isBlank(productLine.getProductLineWhiteList())){
+            if (!StringUtil.isBlank(productLine.getProductLineWhiteList())) {
                 String[] ids = productLine.getProductLineWhiteList().split(",");
                 List<OrgRole> roles = roleService.getRoleByIds(ids);
-                model.addAttribute("whiteLists",roles);
+                model.addAttribute("whiteLists", roles);
             }
             return "/productLine/page/tabledemo/other-information.pagelet";
         }
@@ -217,10 +216,10 @@ public class ProductLineAction extends BaseController {
     }
 
     @RequestMapping("/to")
-    public String to(HttpServletRequest request,Model model) {
+    public String to(HttpServletRequest request, Model model) {
         List<ProductLine> list = ProductUtils.getProductLineList();
         String query = request.getQueryString();
-        if(StringUtil.isBlank(query)||!query.contains("status")){
+        if (StringUtil.isBlank(query) || !query.contains("status")) {
             model.addAttribute("status", 1);
         }
         return "/productLine/page/project/productLine.page";
@@ -246,12 +245,12 @@ public class ProductLineAction extends BaseController {
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
         Product product = new Product();
         product.setDeleted(FieldUtil.DELETE_NO);
-        List<Product> productLists = productService.getProductByUser(UserUtils.getUserId(),0,null);
+        List<Product> productLists = productService.getProductByUser(UserUtils.getUserId(), 0, null);
         ProductLine productLine = new ProductLine();
         productLine.setDeleted(FieldUtil.DELETE_NO);
         List<ProductLine> productLines = productLineService.getUserProductLine(UserUtils.getUserId());
         Integer[] ids = new Integer[productLists.size()];
-        for(int i = 0; i<ids.length; i++){
+        for (int i = 0; i < ids.length; i++) {
             ids[i] = productLists.get(i).getProductId();
         }
         List<ProjectBuild> projectBuilds = buildService.getBuildByProducts(ids);
@@ -285,23 +284,23 @@ public class ProductLineAction extends BaseController {
     }
 
 
-     @RequestMapping("/totree")
-    public String totree(String treeId,Model model){
+    @RequestMapping("/totree")
+    public String totree(String treeId, Model model) {
 
-         if (!("".equals(treeId)||treeId==null)){
-             String prefix = treeId.substring(0,1);
-             if ("p".equals(prefix)){
-                 model.addAttribute("productLineId",treeId.substring(1));
-                 model.addAttribute("type","product");
-             }
-             if ("v".equals(prefix)){
-                 model.addAttribute("buildProduct",treeId.substring(1));
-                 model.addAttribute("type","build");
-             }
-         }
+        if (!("".equals(treeId) || treeId == null)) {
+            String prefix = treeId.substring(0, 1);
+            if ("p".equals(prefix)) {
+                model.addAttribute("productLineId", treeId.substring(1));
+                model.addAttribute("type", "product");
+            }
+            if ("v".equals(prefix)) {
+                model.addAttribute("buildProduct", treeId.substring(1));
+                model.addAttribute("type", "build");
+            }
+        }
 
 
-      return "/productLine/page/project/productLine.page";
+        return "/productLine/page/project/productLine.page";
     }
 
 
@@ -310,11 +309,11 @@ public class ProductLineAction extends BaseController {
     public List overview(Integer productLineId) {
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
         ProductLine productLine = null;
-        if(productLineId!=null&&productLineId>0){
+        if (productLineId != null && productLineId > 0) {
             productLine = productLineService.findProductLine(productLineId);
         }
         List<Product> productList = null;
-        if(productLine!=null){
+        if (productLine != null) {
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("id", "p" + productLine.getProductLineId());
             map.put("pId", 0);
@@ -339,20 +338,24 @@ public class ProductLineAction extends BaseController {
         return list;
     }
 
-    private String getStatusCondition(Integer status){
-        if(status==null||status<1)return "";
-        switch (status){
-            case 1:return "";
-            case 2:return " product_line_owner = '"+UserUtils.getUserId()+"' ";
-            case 3:return " product_line_quality_manager = '"+UserUtils.getUserId()+"' ";
-            case 4:return " product_line_delivery_manager = '"+UserUtils.getUserId()+"' ";
+    private String getStatusCondition(Integer status) {
+        if (status == null || status < 1) return "";
+        switch (status) {
+            case 1:
+                return "";
+            case 2:
+                return " product_line_owner = '" + UserUtils.getUserId() + "' ";
+            case 3:
+                return " product_line_quality_manager = '" + UserUtils.getUserId() + "' ";
+            case 4:
+                return " product_line_delivery_manager = '" + UserUtils.getUserId() + "' ";
         }
         return "";
     }
 
     @ResponseBody
     @RequestMapping(value = "/judgeProductLineName")
-    public Map judgeProductLineName(String param,Integer productLineId) {
+    public Map judgeProductLineName(String param, Integer productLineId) {
         if (param != null) {
             String productLineName = param;
             ProductLine productLine = new ProductLine();
@@ -360,11 +363,11 @@ public class ProductLineAction extends BaseController {
             productLine.setProductLineId(productLineId);
             List<ProductLine> productLines = productLineService.findList(productLine);
             if (productLines.size() != 0) {
-                if(productLineId==null){
+                if (productLineId == null) {
                     return resultMap(false, "该产品线已存在");
-                }else if(!productLineId.equals(productLines.get(0).getProductLineId())){
+                } else if (!productLineId.equals(productLines.get(0).getProductLineId())) {
                     return resultMap(false, "该产品线已存在");
-                }else{
+                } else {
                     return resultMap(true, "");
                 }
             } else {
@@ -376,18 +379,18 @@ public class ProductLineAction extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "/judgeProductLineCode")
-    public Map judgeProductLineCode(String param,Integer productLineId) {
+    public Map judgeProductLineCode(String param, Integer productLineId) {
         if (param != null) {
             String productLineCode = param;
             ProductLine productLine = new ProductLine();
             productLine.setProductLineCode(productLineCode);
             List<ProductLine> productLines = productLineService.findList(productLine);
             if (productLines.size() != 0) {
-                if(productLineId==null){
+                if (productLineId == null) {
                     return resultMap(false, "该产品线编号已存在");
-                }else if(!productLineId.equals(productLines.get(0).getProductLineId())){
+                } else if (!productLineId.equals(productLines.get(0).getProductLineId())) {
                     return resultMap(false, "该产品线编号已存在");
-                }else{
+                } else {
                     return resultMap(true, "");
                 }
             } else {
@@ -399,15 +402,15 @@ public class ProductLineAction extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "/userProductTree")
-    public List<Map<String,Object>> getUserProductTree(){
-        List<Product> products = productService.getProductByUser(UserUtils.getUserId(),0,null);
+    public List<Map<String, Object>> getUserProductTree() {
+        List<Product> products = productService.getProductByUser(UserUtils.getUserId(), 0, null);
         List<Map<String, Object>> mapList = Lists.newArrayList();
         List<Integer> productLineIds = new ArrayList<Integer>();
         for (Product p : products) {
             productLineIds.add(p.getProductLineId());
             Map<String, Object> mapTop = Maps.newHashMap();
             mapTop.put("id", p.getProductId());
-            mapTop.put("pId", "p"+p.getProductLineId());
+            mapTop.put("pId", "p" + p.getProductLineId());
             mapTop.put("open", false);
             mapTop.put("add", true);
             mapTop.put("edit", false);
@@ -420,7 +423,7 @@ public class ProductLineAction extends BaseController {
         for (ProductLine p : productLines) {
             productLineIds.add(p.getProductLineId());
             Map<String, Object> mapTop = Maps.newHashMap();
-            mapTop.put("id", "p"+ p.getProductLineId());
+            mapTop.put("id", "p" + p.getProductLineId());
             mapTop.put("pId", 0);
             mapTop.put("open", true);
             mapTop.put("isParent", true);
@@ -431,27 +434,28 @@ public class ProductLineAction extends BaseController {
         }
         return mapList;
     }
+
     @RequestMapping(value = "/productLineProducts")
-    public String productLineProducts(Integer productLineId,Model model){
-        List<Product> products = productService.getProductByUserAndProductLineWithCount(UserUtils.getUserId(),productLineId,0);
-        model.addAttribute("productList",products);
+    public String productLineProducts(Integer productLineId, Model model) {
+        List<Product> products = productService.getProductByUserAndProductLineWithCount(UserUtils.getUserId(), productLineId, 0);
+        model.addAttribute("productList", products);
         return "/productLine/data/productListData.pagelet";
     }
 
     @ResponseBody
     @RequestMapping("ajax/lineInCondition")
-    public List<ProductLine> lineInCondition(String key, Integer initKey){
-        if(initKey!=null){
+    public List<ProductLine> lineInCondition(String key, Integer initKey) {
+        if (initKey != null) {
             List<ProductLine> result = new ArrayList<ProductLine>();
             result.add(productLineService.findProductLine(initKey));
             return result;
         }
         List<ProductLine> lineList = productLineService.getUserProductLine(UserUtils.getUserId());
         Integer[] ids = new Integer[lineList.size()];
-        for(int i = 0; i<ids.length; i++){
+        for (int i = 0; i < ids.length; i++) {
             ids[i] = lineList.get(i).getProductLineId();
         }
-        return productLineService.lineInCondition(key,ids);
+        return productLineService.lineInCondition(key, ids);
     }
 }
 

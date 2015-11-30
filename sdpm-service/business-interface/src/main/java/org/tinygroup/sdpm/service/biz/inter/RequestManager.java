@@ -73,6 +73,7 @@ public interface RequestManager {
      * @return
      */
     Pager<ServiceRequest> findPager(Integer start, Integer limit, Integer status, ServiceRequest serviceRequest, Integer treeId, String groupOperate, SearchInfos searchInfos, String order, String ordertype);
+
     /**
      * 查找数据库的由我解决或由我回复的记录，区别在于operation
      *
@@ -120,6 +121,7 @@ public interface RequestManager {
 
     /**
      * 根据查询名称查询
+     *
      * @param condition
      * @return
      */

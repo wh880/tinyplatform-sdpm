@@ -21,7 +21,6 @@ import java.util.Date;
 
 /**
  * 附件表
- *
  */
 public class SystemProfile implements Serializable {
 
@@ -33,57 +32,46 @@ public class SystemProfile implements Serializable {
     private Integer fileId;
     /**
      * 附件地址
-     *
      */
     private String filePathname;
     /**
      * 附件名
-     *
      */
     private String fileTitle;
     /**
      * 附件扩展名
-     *
      */
     private String fileExtension;
     /**
      * 附件大小
-     *
      */
     private Integer fileSize;
     /**
      * 附件文件类型
-     *
      */
     private String fileObjectType;
     /**
      * 附件对象ID
-     *
      */
     private Integer fileObjectId;
     /**
      * 由谁添加
-     *
      */
     private String fileAddedBy;
     /**
      * 附件添加日期
-     *
      */
     private Date fileAddedDate;
     /**
      * 下载次数
-     *
      */
     private Integer fileDownloads;
     /**
      * file_extra 无用
-     *
      */
     private String fileExtra;
     /**
      * 是否删除
-     *
      */
     private String fileDeleted;
 

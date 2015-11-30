@@ -63,6 +63,7 @@ public class SlaAction extends BaseController {
 
     /**
      * 新增和修改
+     *
      * @param clientId
      * @param clientName
      * @param sla
@@ -91,6 +92,7 @@ public class SlaAction extends BaseController {
 
     /**
      * 注解的意义是，想根据产品id找到产品名称。"/list"和"/list/data"显示页面表中数据
+     *
      * @return
      */
     @RequestMapping(value = "/list")
@@ -124,6 +126,7 @@ public class SlaAction extends BaseController {
 
     /**
      * 协议里面，点击“详情”进入。注解的意义是，想根据产品id找到产品名称
+     *
      * @param id
      * @param limit
      * @param start
@@ -150,6 +153,7 @@ public class SlaAction extends BaseController {
 
     /**
      * 协议的“协议标题”页面，协议具体内容查找出来。将sla表中数据查询出来，放在对象sla中
+     *
      * @param id
      * @param model
      * @return
@@ -163,6 +167,7 @@ public class SlaAction extends BaseController {
 
     /**
      * sla批量删除
+     *
      * @param ids
      * @return
      */

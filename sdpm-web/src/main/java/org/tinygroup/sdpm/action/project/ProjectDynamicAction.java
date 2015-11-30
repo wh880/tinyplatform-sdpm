@@ -37,7 +37,7 @@ public class ProjectDynamicAction extends BaseController {
 
     @RequiresPermissions("dynamic")
     @RequestMapping("/index")
-    public String index(HttpServletRequest request,HttpServletResponse response, Model model) {
+    public String index(HttpServletRequest request, HttpServletResponse response, Model model) {
         Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
         if (projectId == null) {
             return redirectProjectForm();
@@ -77,7 +77,7 @@ public class ProjectDynamicAction extends BaseController {
             } else {
                 String startDateStr = DateUtils.formatDate(startDate, "yyyy-MM-dd HH:mm:ss");
                 String endDateStr = DateUtils.formatDate(endDate, "yyyy-MM-dd HH:mm:ss");
-                Pager<SystemAction> actionPager = actionService.queryBetweenDate(start, limit, systemAction, startDateStr, endDateStr, order, "asc".equals(ordertype) ? true : false);
+                Pager<SystemAction> actionPager = actionService.queryActionBetweenDate(start, limit, systemAction, startDateStr, endDateStr, order, "asc".equals(ordertype) ? true : false);
                 model.addAttribute("actionPager", actionPager);
             }
         }

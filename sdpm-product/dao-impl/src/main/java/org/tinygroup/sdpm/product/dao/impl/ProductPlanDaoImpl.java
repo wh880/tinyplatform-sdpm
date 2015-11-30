@@ -39,7 +39,6 @@ import java.util.Date;
 import java.util.List;
 
 import static org.tinygroup.sdpm.product.dao.constant.ProductPlanTable.PRODUCT_PLANTABLE;
-import static org.tinygroup.sdpm.product.dao.constant.ProductReleaseTable.PRODUCT_RELEASETABLE;
 import static org.tinygroup.sdpm.product.dao.constant.ProductStoryTable.PRODUCT_STORYTABLE;
 import static org.tinygroup.tinysqldsl.Delete.delete;
 import static org.tinygroup.tinysqldsl.Insert.insertInto;
@@ -112,9 +111,9 @@ public class ProductPlanDaoImpl extends TinyDslDaoSupport implements ProductPlan
         }
         return getDslTemplate().query(productPlan, new SelectGenerateCallback<ProductPlan>() {
             public Select generate(ProductPlan t) {
-                Condition condition =null;
-                if(isOverdue){
-                    condition = and(PRODUCT_PLANTABLE.PLAN_END_DATE.isNotNull(),PRODUCT_PLANTABLE.PLAN_END_DATE.lte(new Date()));
+                Condition condition = null;
+                if (isOverdue) {
+                    condition = and(PRODUCT_PLANTABLE.PLAN_END_DATE.isNotNull(), PRODUCT_PLANTABLE.PLAN_END_DATE.lte(new Date()));
                 }
                 Select select = select(FragmentSql.fragmentSelect("product_plan.*,SUM(CASE WHEN product_story.`story_status`=1 THEN 1 ELSE 0 END) draft," +
                         "SUM(CASE WHEN product_story.`story_status`=2 THEN 1 ELSE 0 END) active," +
@@ -137,7 +136,7 @@ public class ProductPlanDaoImpl extends TinyDslDaoSupport implements ProductPlan
 
     public Integer getMaxNo(Integer productId) {
         Select select = select(PRODUCT_PLANTABLE.NO.max()).from(PRODUCT_PLANTABLE).where(PRODUCT_PLANTABLE.PRODUCT_ID.eq(productId));
-        return getDslSession().fetchOneResult(select,Integer.class);
+        return getDslSession().fetchOneResult(select, Integer.class);
     }
 
     public Integer batchDelete(Integer... ids) {

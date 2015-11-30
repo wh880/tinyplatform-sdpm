@@ -115,7 +115,7 @@ public class ProductUtils {
      * @param productId
      */
     public static Product getProduct(String productId) {
-        if(StringUtil.isBlank(productId)){
+        if (StringUtil.isBlank(productId)) {
             return new Product();
         }
         List<Product> productList = getProductList();
@@ -150,7 +150,7 @@ public class ProductUtils {
             for (List<ProjectTeam> teams : teamsList) {
                 for (ProjectTeam team : teams) {
                     if (!StringUtil.isBlank(team.getTeamUserId()) && !resultBuffer.toString().contains(team.getTeamUserId())) {
-                        if(!resultBuffer.toString().contains(team.getTeamUserId())) {
+                        if (!resultBuffer.toString().contains(team.getTeamUserId())) {
                             if (!StringUtil.isBlank(resultBuffer.toString())) {
                                 resultBuffer.append(",");
                             }
@@ -296,7 +296,7 @@ public class ProductUtils {
 //            UserUtils.putCache(USER_CACHE_ALL_PRODUCT_LIST_BY_USER, result);
 //        }
         if (result == null) {
-            result = productService.getProductByUser(UserUtils.getUserId(),0,null);
+            result = productService.getProductByUser(UserUtils.getUserId(), 0, null);
             UserUtils.putCache(USER_CACHE_ALL_PRODUCT_LIST_BY_USER, result);
         }
         return result;
@@ -323,18 +323,18 @@ public class ProductUtils {
         return null;
     }
 
-    public static void prepareForFirst( HttpServletResponse response){
+    public static void prepareForFirst(HttpServletResponse response) {
         String firstProductLineId = getFirstProductLine();
-        if(!StringUtil.isBlank(firstProductLineId)){
-            CookieUtils.setCookie(response,"cookieProductLineId",firstProductLineId);
-            if(getProductListByProductLineUser(firstProductLineId).size()>0){
-                CookieUtils.setCookie(response,"cookieProductId",String.valueOf(getProductListByProductLineUser(firstProductLineId).get(0).getProductId()));
+        if (!StringUtil.isBlank(firstProductLineId)) {
+            CookieUtils.setCookie(response, "cookieProductLineId", firstProductLineId);
+            if (getProductListByProductLineUser(firstProductLineId).size() > 0) {
+                CookieUtils.setCookie(response, "cookieProductId", String.valueOf(getProductListByProductLineUser(firstProductLineId).get(0).getProductId()));
             }
-        }else if(getProductLineListByUser().size()>0){
+        } else if (getProductLineListByUser().size() > 0) {
             firstProductLineId = String.valueOf(getProductLineListByUser().get(0).getProductLineId());
-            CookieUtils.setCookie(response,"cookieProductLineId",firstProductLineId);
-            if(getProductListByProductLineUser(firstProductLineId).size()>0){
-                CookieUtils.setCookie(response,"cookieProductId",String.valueOf(getProductListByProductLineUser(firstProductLineId).get(0).getProductId()));
+            CookieUtils.setCookie(response, "cookieProductLineId", firstProductLineId);
+            if (getProductListByProductLineUser(firstProductLineId).size() > 0) {
+                CookieUtils.setCookie(response, "cookieProductId", String.valueOf(getProductListByProductLineUser(firstProductLineId).get(0).getProductId()));
             }
         }
     }
@@ -374,7 +374,7 @@ public class ProductUtils {
                 return 2;
             } else {
                 for (OrgRole role : UserUtils.getUserRoleList()) {
-                    if(StringUtil.isBlank(product.getProductWhiteList()))return 3;
+                    if (StringUtil.isBlank(product.getProductWhiteList())) return 3;
                     if (product.getProductWhiteList().contains(String.valueOf(role.getOrgRoleId()))) {
                         return 2;
                     }

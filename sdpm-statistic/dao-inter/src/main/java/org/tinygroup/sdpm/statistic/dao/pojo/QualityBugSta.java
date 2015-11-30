@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Created by MCK on 2015/10/23.
  */
-public class QualityBugSta implements Serializable{
+public class QualityBugSta implements Serializable {
     /**
      * Bug创建用户Id
      */
@@ -76,7 +76,6 @@ public class QualityBugSta implements Serializable{
     }
 
 
-
     public Integer getBugNum() {
         return bugNum;
     }
@@ -84,7 +83,6 @@ public class QualityBugSta implements Serializable{
     public void setBugNum(Integer bugNum) {
         this.bugNum = bugNum;
     }
-
 
 
     public String getBugCreateDate() {

@@ -31,7 +31,8 @@ a:hover{color:#00a4ac;text-decoration:none;}
 .loginbox ul li label input{margin-right:5px;font-weight:bold;}
 .loginuser{font-family:"Microsoft Yahei";width:299px; height:46px; background:url(${TINY_CONTEXT_PATH}/login/images/loginuser.png) no-repeat; border:none; line-height:46px; padding-left:44px; font-size:14px;}
 .loginpwd{font-family:"Microsoft Yahei";width:299px; height:46px; background:url(${TINY_CONTEXT_PATH}/login/images/loginpassword.png) no-repeat; border:none;line-height:46px; padding-left:44px; font-size:14px; color:#90a2bc;}
-.loginbtn{font-family:"Microsoft Yahei";width:111px;height:35px; background:url(${TINY_CONTEXT_PATH}/login/images/buttonbg.png) repeat-x; font-size:14px; font-weight:bold; color:#fff;cursor:pointer; line-height:35px;border:none}
+.loginbtn{font-family:"Microsoft Yahei";width:111px;height:35px; background:#6e3671;border-radius:3px; font-size:14px; font-weight:bold; color:#fff;cursor:pointer; line-height:35px;border:none}
+.loginbtn:hover{background:#77377a;}
 #login_tip{height:5px;padding-top:18px;color:#c00;}
 input:- webkit-autofill { -webkit-box-shadow: 0 0 0 1000px white inset; }
     </style>

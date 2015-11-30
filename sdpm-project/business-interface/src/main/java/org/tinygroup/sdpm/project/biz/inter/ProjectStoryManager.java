@@ -75,7 +75,7 @@ public interface ProjectStoryManager {
      * @param storyId
      * @return
      */
-     Integer deleteByProjectStory(Integer projectId, Integer storyId);
+    Integer deleteByProjectStory(Integer projectId, Integer storyId);
 
     /**
      * 根据项目和需求删除关联
@@ -84,6 +84,6 @@ public interface ProjectStoryManager {
      * @param
      * @return
      */
-     Pager<ProjectStory> findPager(int start, int limit, ProjectStory story, String statusCondition, SearchInfos conditions,
-                                         String groupOperate, String columnName, boolean asc);
+    Pager<ProjectStory> findPager(int start, int limit, ProjectStory story, String statusCondition, SearchInfos conditions,
+                                  String groupOperate, String columnName, boolean asc);
 }

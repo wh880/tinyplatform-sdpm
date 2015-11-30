@@ -125,7 +125,7 @@ public class TestCaseAction extends BaseController {
                        @RequestParam(value = "file", required = false) MultipartFile[] file,
                        String[] title,
                        HttpServletRequest request,
-                       String lastAddress,UploadProfile uploadProfile) throws Exception {
+                       String lastAddress, UploadProfile uploadProfile) throws Exception {
         if (testcase.getCaseId() == null || testcase.getCaseId() < 1) {
             testcase.setCaseOpenedBy(UserUtils.getUserId());
             if (testcase.getStoryId() != null && testcase.getStoryId() > 0) {
@@ -447,7 +447,7 @@ public class TestCaseAction extends BaseController {
     public List<SystemModule> getModule(SystemModule systemModule) {
         if (!(systemModule.getModuleRoot() > 0)) return new ArrayList<SystemModule>();
         systemModule.setModuleType("story");
-        List<SystemModule> result = moduleService.findModules(systemModule);
+        List<SystemModule> result = moduleService.findModuleList(systemModule);
         for (SystemModule module : result) {
             module.setModuleName(ModuleUtil.getPath(module.getModuleId(), "/", null, false));
         }
@@ -552,22 +552,22 @@ public class TestCaseAction extends BaseController {
     @RequestMapping("/case/viewInfo")
     public String viewInfo(Integer id, Integer version, Model model, Integer no, HttpServletRequest request) {
         QualityTestCase testCase = null;
-        if(no!=null){
+        if (no != null) {
             Integer qualityProductId = Integer.parseInt(CookieUtils.getCookie(request, "qualityProductId"));
-            if(qualityProductId==null){
+            if (qualityProductId == null) {
                 return notFoundView();
             }
             testCase = new QualityTestCase();
             testCase.setProductId(qualityProductId);
             testCase.setNo(no);
             List<QualityTestCase> caseList = testCaseService.findTestCaseList(testCase);
-            if(caseList.size()==0){
+            if (caseList.size() == 0) {
                 return notFoundView();
             }
             testCase = caseList.get(0);
             id = testCase.getCaseId();
         }
-        if(testCase==null||testCase.getCaseId()==null) {
+        if (testCase == null || testCase.getCaseId() == null) {
             testCase = testCaseService.findById(id);
         }
         QualityCaseStep step = new QualityCaseStep();

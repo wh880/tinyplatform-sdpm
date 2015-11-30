@@ -21,7 +21,7 @@ public class InfoFunction extends AbstractTemplateFunction {
         if (parameters[0] == null) {
             throw new TemplateException("信息类别不能为空");
         }
-        if (parameters.length > 1 &&parameters[1]!=null&& !StringUtil.isBlank(String.valueOf(parameters[1]))) {
+        if (parameters.length > 1 && parameters[1] != null && !StringUtil.isBlank(String.valueOf(parameters[1]))) {
             id = Integer.valueOf(parameters[1].toString());
         }
         return TypeInfoUtil.getUrlMap(parameters[0].toString(), id);

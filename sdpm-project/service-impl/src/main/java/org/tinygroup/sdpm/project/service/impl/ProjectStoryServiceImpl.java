@@ -82,7 +82,7 @@ public class ProjectStoryServiceImpl implements ProjectStoryService {
             storyList.add(projectStory.getStoryId());
         }
         Integer[] i = new Integer[storyList.size()];
-        List<ProductStory> list = storyManager.findList(false,storyList.toArray(i));
+        List<ProductStory> list = storyManager.findList(false, storyList.toArray(i));
         return list;
     }
 

@@ -12,7 +12,7 @@ import java.util.List;
  *
  */
 public interface DocService {
-	
+
 	DocumentDoc createNewDoc(DocumentDoc doc);
 	//Create a new document library-just a name.
 	DocumentDocLib createNewDocLib(DocumentDocLib doclib);
@@ -40,6 +40,6 @@ public interface DocService {
 	int deleteDocById(Integer id);
 	int deleteDoclibById(Integer id);
 	int[] deleteDocByIds(List<DocumentDoc> ids);
-	
+
 
 }

@@ -55,7 +55,7 @@ public class RoleMenuManagerImpl implements RoleMenuManager {
 
     public Integer batchAdd(List<OrgRoleMenu> orgRoleMenuList) {
         int[] batchInsert = orgRoleMenuDao.batchInsert(orgRoleMenuList);
-        if (ArrayUtil.isEmptyArray(batchInsert)){
+        if (ArrayUtil.isEmptyArray(batchInsert)) {
             return 0;
         }
         return batchInsert.length;

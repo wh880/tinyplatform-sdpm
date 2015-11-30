@@ -25,7 +25,7 @@ public class ProjectProductServiceImpl implements ProjectProductService {
     }
 
     public List<Product> findLinkProductByProjectId(Integer projectId) {
-        return  projectProductManager.findLinkProductByProjectId(projectId);
+        return projectProductManager.findLinkProductByProjectId(projectId);
     }
 
     public List<ProjectProduct> findProducts(Integer projectId) {

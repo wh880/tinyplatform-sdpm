@@ -24,169 +24,169 @@ import org.tinygroup.tinysqldsl.base.Table;
 import java.util.HashMap;
 import java.util.Map;
 
-/** 
+/**
  * 用户表
- * 
+ *
  */
 public class OrgUserTable extends Table {
 
-	public static final OrgUserTable ORG_USERTABLE = new OrgUserTable();
+    public static final OrgUserTable ORG_USERTABLE = new OrgUserTable();
 
-	/**
-	 * 用户编号
-	 */
-	public final Column ORG_USER_ID = new Column(this, "org_user_id");
+    /**
+     * 用户编号
+     */
+    public final Column ORG_USER_ID = new Column(this, "org_user_id");
 
-	/**
-	 * 部门编号
-	 */
-	public final Column ORG_DEPT_ID = new Column(this, "org_dept_id");
+    /**
+     * 部门编号
+     */
+    public final Column ORG_DEPT_ID = new Column(this, "org_dept_id");
 
-	/**
-	 * 用户名
-	 */
-	public final Column ORG_USER_ACCOUNT = new Column(this, "org_user_account");
+    /**
+     * 用户名
+     */
+    public final Column ORG_USER_ACCOUNT = new Column(this, "org_user_account");
 
-	/**
-	 * 密码
-	 */
-	public final Column ORG_USER_PASSWORD = new Column(this, "org_user_password");
+    /**
+     * 密码
+     */
+    public final Column ORG_USER_PASSWORD = new Column(this, "org_user_password");
 
-	/**
-	 * 职位
-	 */
-	public final Column ORG_USER_ROLE = new Column(this, "org_user_role");
+    /**
+     * 职位
+     */
+    public final Column ORG_USER_ROLE = new Column(this, "org_user_role");
 
-	/**
-	 * 真实姓名
-	 */
-	public final Column ORG_USER_REAL_NAME = new Column(this, "org_user_real_name");
+    /**
+     * 真实姓名
+     */
+    public final Column ORG_USER_REAL_NAME = new Column(this, "org_user_real_name");
 
-	/**
-	 * 昵称
-	 */
-	public final Column ORG_USER_NICK_NAME = new Column(this, "org_user_nick_name");
+    /**
+     * 昵称
+     */
+    public final Column ORG_USER_NICK_NAME = new Column(this, "org_user_nick_name");
 
-	/**
-	 * 源代码账号
-	 */
-	public final Column ORG_USER_SUBMITTER = new Column(this, "org_user_submitter");
+    /**
+     * 源代码账号
+     */
+    public final Column ORG_USER_SUBMITTER = new Column(this, "org_user_submitter");
 
-	/**
-	 * 头像
-	 */
-	public final Column ORG_USER_AVATAR = new Column(this, "org_user_avatar");
+    /**
+     * 头像
+     */
+    public final Column ORG_USER_AVATAR = new Column(this, "org_user_avatar");
 
-	/**
-	 * 出生日期
-	 */
-	public final Column ORG_USER_BIRTHDAY = new Column(this, "org_user_birthday");
+    /**
+     * 出生日期
+     */
+    public final Column ORG_USER_BIRTHDAY = new Column(this, "org_user_birthday");
 
-	/**
-	 * 性别
-	 */
-	public final Column ORG_USER_GENDER = new Column(this, "org_user_gender");
+    /**
+     * 性别
+     */
+    public final Column ORG_USER_GENDER = new Column(this, "org_user_gender");
 
-	/**
-	 * 邮箱
-	 */
-	public final Column ORG_USER_EMAIL = new Column(this, "org_user_email");
+    /**
+     * 邮箱
+     */
+    public final Column ORG_USER_EMAIL = new Column(this, "org_user_email");
 
-	/**
-	 * Skype
-	 */
-	public final Column ORG_USER_SKYPE = new Column(this, "org_user_skype");
+    /**
+     * Skype
+     */
+    public final Column ORG_USER_SKYPE = new Column(this, "org_user_skype");
 
-	/**
-	 * QQ
-	 */
-	public final Column ORG_USER_Q_Q = new Column(this, "org_user_q_q");
+    /**
+     * QQ
+     */
+    public final Column ORG_USER_Q_Q = new Column(this, "org_user_q_q");
 
-	/**
-	 * 雅虎通
-	 */
-	public final Column ORG_USER_YAHOO = new Column(this, "org_user_yahoo");
+    /**
+     * 雅虎通
+     */
+    public final Column ORG_USER_YAHOO = new Column(this, "org_user_yahoo");
 
-	/**
-	 * Gtalk
-	 */
-	public final Column ORG_USER_G_TALK = new Column(this, "org_user_g_talk");
+    /**
+     * Gtalk
+     */
+    public final Column ORG_USER_G_TALK = new Column(this, "org_user_g_talk");
 
-	/**
-	 * 旺旺
-	 */
-	public final Column ORG_USER_WANG_WANG = new Column(this, "org_user_wang_wang");
+    /**
+     * 旺旺
+     */
+    public final Column ORG_USER_WANG_WANG = new Column(this, "org_user_wang_wang");
 
-	/**
-	 * 手机
-	 */
-	public final Column ORG_USER_MOBILE = new Column(this, "org_user_mobile");
+    /**
+     * 手机
+     */
+    public final Column ORG_USER_MOBILE = new Column(this, "org_user_mobile");
 
-	/**
-	 * 电话
-	 */
-	public final Column ORG_USER_PHONE = new Column(this, "org_user_phone");
+    /**
+     * 电话
+     */
+    public final Column ORG_USER_PHONE = new Column(this, "org_user_phone");
 
-	/**
-	 * 通讯地址
-	 *
-	 */
-	public final Column ORG_USER_ADDRESS = new Column(this, "org_user_address");
+    /**
+     * 通讯地址
+     *
+     */
+    public final Column ORG_USER_ADDRESS = new Column(this, "org_user_address");
 
-	/**
-	 * 邮编
-	 *
-	 */
-	public final Column ORG_USER_ZIP_CODE = new Column(this, "org_user_zip_code");
+    /**
+     * 邮编
+     *
+     */
+    public final Column ORG_USER_ZIP_CODE = new Column(this, "org_user_zip_code");
 
-	/**
-	 * 加入日期
-	 *
-	 */
-	public final Column ORG_USER_JOIN = new Column(this, "org_user_join");
+    /**
+     * 加入日期
+     *
+     */
+    public final Column ORG_USER_JOIN = new Column(this, "org_user_join");
 
-	/**
-	 * 访问次数
-	 *
-	 */
-	public final Column ORG_USER_VISITS = new Column(this, "org_user_visits");
+    /**
+     * 访问次数
+     *
+     */
+    public final Column ORG_USER_VISITS = new Column(this, "org_user_visits");
 
-	/**
-	 * 最后IP
-	 *
-	 */
-	public final Column ORG_USER_IP = new Column(this, "org_user_ip");
+    /**
+     * 最后IP
+     *
+     */
+    public final Column ORG_USER_IP = new Column(this, "org_user_ip");
 
-	/**
-	 * 最后登录
-	 *
-	 */
-	public final Column ORG_USER_LAST = new Column(this, "org_user_last");
+    /**
+     * 最后登录
+     *
+     */
+    public final Column ORG_USER_LAST = new Column(this, "org_user_last");
 
-	/**
-	 * 失败次数
-	 *
-	 */
-	public final Column ORG_USER_FAILS = new Column(this, "org_user_fails");
+    /**
+     * 失败次数
+     *
+     */
+    public final Column ORG_USER_FAILS = new Column(this, "org_user_fails");
 
-	/**
-	 * 上次锁定时间
-	 *
-	 */
-	public final Column ORG_USER_LOCKED = new Column(this, "org_user_locked");
+    /**
+     * 上次锁定时间
+     *
+     */
+    public final Column ORG_USER_LOCKED = new Column(this, "org_user_locked");
 
-	/**
-	 * 是否删除
-	 *
-	 */
-	public final Column ORG_USER_DELETED = new Column(this, "org_user_deleted");
+    /**
+     * 是否删除
+     *
+     */
+    public final Column ORG_USER_DELETED = new Column(this, "org_user_deleted");
 
 
-	public OrgUserTable() {
-		super("org_user");
-	}
+    public OrgUserTable() {
+        super("org_user");
+    }
 
-	@Override
+    @Override
     public boolean isAutoGeneratedKeys() {
         return false;
     }

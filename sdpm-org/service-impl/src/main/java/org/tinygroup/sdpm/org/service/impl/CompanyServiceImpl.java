@@ -22,6 +22,7 @@ public class CompanyServiceImpl implements CompanyService {
     public List<OrgCompany> findCompanyList() {
         return companyManager.findList();
     }
+
     public OrgCompany addCompany(OrgCompany orgCompany) {
         return companyManager.add(orgCompany);
     }

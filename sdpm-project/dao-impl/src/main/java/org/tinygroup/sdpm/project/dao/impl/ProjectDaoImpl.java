@@ -46,6 +46,7 @@ import static org.tinygroup.tinysqldsl.Select.select;
 import static org.tinygroup.tinysqldsl.Select.selectFrom;
 import static org.tinygroup.tinysqldsl.Update.update;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
+import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.or;
 import static org.tinygroup.tinysqldsl.formitem.SubSelect.subSelect;
 
 @Repository
@@ -72,13 +73,29 @@ public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
         });
     }
 
+    public List<Project> findListByRelatedUser(Project project) {
+        if (project == null) {
+            return new ArrayList<Project>();
+        }
+        Select select = selectFrom(PROJECTTABLE).where(
+                or(
+                        PROJECTTABLE.PROJECT_OPENED_BY.eq(project.getProjectOpenedBy()),
+                        PROJECTTABLE.PROJECT_PO.eq(project.getProjectPo()),
+                        PROJECTTABLE.PROJECT_PM.eq(project.getProjectPm()),
+                        PROJECTTABLE.PROJECT_QD.eq(project.getProjectQd()),
+                        PROJECTTABLE.PROJECT_RD.eq(project.getProjectRd())
+                )
+        );
+        return getDslSession().fetchList(select, Project.class);
+    }
+
     public List<Project> findListWithStatistics(Project project, Date startDate, Date endDate) {
         Condition condition = null;
         if (startDate != null) {
             condition = and(PROJECTTABLE.PROJECT_OPENED_DATE.gte(startDate), PROJECTTABLE.PROJECT_OPENED_DATE.lte(endDate));
         }
-        if(endDate != null){
-            condition = condition==null?PROJECTTABLE.PROJECT_OPENED_DATE.lte(endDate):and(condition,PROJECTTABLE.PROJECT_OPENED_DATE.lte(endDate));
+        if (endDate != null) {
+            condition = condition == null ? PROJECTTABLE.PROJECT_OPENED_DATE.lte(endDate) : and(condition, PROJECTTABLE.PROJECT_OPENED_DATE.lte(endDate));
         }
         if (project == null) {
             project = new Project();
@@ -454,7 +471,7 @@ public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
                 PROJECTTABLE.PROJECT_ID.inExpression(subSelect(select(PROJECT_TEAMTABLE.PROJECT_ID).from(PROJECT_TEAMTABLE).where(PROJECT_TEAMTABLE.TEAM_USER_ID.eq(userId))))
                         .and(PROJECTTABLE.PROJECT_ACL.eq(acl))
                         .and(PROJECTTABLE.PROJECT_DELETED.eq(Project.DELETE_NO))
-                        );
+        );
         return getDslSession().fetchList(select, Project.class);
     }
 

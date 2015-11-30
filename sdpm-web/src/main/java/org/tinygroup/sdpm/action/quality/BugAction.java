@@ -603,7 +603,7 @@ public class BugAction extends BaseController {
             return new ArrayList<SystemModule>();
         }
         systemModule.setModuleType("story");
-        List<SystemModule> moduleList = moduleService.findModules(systemModule);
+        List<SystemModule> moduleList = moduleService.findModuleList(systemModule);
         for (SystemModule module : moduleList) {
             module.setModuleName(ModuleUtil.getPath(module.getModuleId(), "/", null, false));
         }

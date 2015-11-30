@@ -21,7 +21,6 @@ import org.tinygroup.tinysqldsl.base.Table;
 
 /**
  * 角色表
- *
  */
 public class OrgRoleTable extends Table {
 
@@ -29,31 +28,26 @@ public class OrgRoleTable extends Table {
 
     /**
      * 角色ID
-     *
      */
     public final Column ORG_ROLE_ID = new Column(this, "org_role_id");
 
     /**
      * 角色名称
-     *
      */
     public final Column ORG_ROLE_NAME = new Column(this, "org_role_name");
 
     /**
      * 角色备注
-     *
      */
     public final Column ORG_ROLE_REMARKS = new Column(this, "org_role_remarks");
 
     /**
      * 角色类型
-     *
      */
     public final Column ORG_ROLE_TYPE = new Column(this, "org_role_type");
 
     /**
      * 已删除
-     *
      */
     public final Column DELETED = new Column(this, "deleted");
 
