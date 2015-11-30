@@ -153,7 +153,7 @@ public class HolidayAction extends BaseController {
         for (int i = 0; i < sids.length; i++) {
             intIds[i] = Integer.valueOf(sids[i]);
         }
-        List<Holiday> holidayList = holidayService.findByIds(intIds);
+        List<Holiday> holidayList = holidayService.findHolidayByIds(intIds);
         model.addAttribute("holiday", holidayList);
         return "/system/page/holiday/batch-del.pagelet";
     }

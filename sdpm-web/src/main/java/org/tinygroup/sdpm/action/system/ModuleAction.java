@@ -373,7 +373,7 @@ public class ModuleAction extends BaseController {
     public String editModule(Integer moduleId, String moduleName, @PathVariable(value = "forwordPager") String forwordPager) {
         SystemModule module = moduleService.findById(moduleId);
         module.setModuleName(moduleName);
-        moduleService.edit(module);
+        moduleService.editModule(module);
 
         if ("story".equals(forwordPager)) {
             return "/product/page/project/togglebox.page";

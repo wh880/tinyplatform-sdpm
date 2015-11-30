@@ -9,16 +9,10 @@
     </parent>
     <artifactId>sdpm-system-service-wrapper</artifactId>
     <name>sdpm-system-service-wrapper</name>
-
     <dependencies>
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>sdpm-system-service-interface</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.tinygroup</groupId>
-            <artifactId>sdpm-system-business-interface</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>

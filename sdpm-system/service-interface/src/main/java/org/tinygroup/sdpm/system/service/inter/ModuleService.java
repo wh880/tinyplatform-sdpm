@@ -62,6 +62,8 @@ public interface ModuleService {
      */
     SystemModule addSystemModule(SystemModule systemModule);
 
+    SystemModule editNameAndTitle(SystemModule systemModule);
+
     /**
      * 批量删除
      *
