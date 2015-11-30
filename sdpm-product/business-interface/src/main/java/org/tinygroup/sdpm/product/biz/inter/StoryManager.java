@@ -84,7 +84,7 @@ public interface StoryManager {
 	 * @param story
 	 * @return
 	 */
-	Pager<ProductStory> findPager(int start, int limit, ProductStory story, String condition, String columnName, boolean asc);
+	Pager<ProductStory> findPager(int start, int limit, ProductStory story, ConditionCarrier carrier, String columnName, boolean asc);
 	
 	/**
 	 * 产品需求数量分类
@@ -124,7 +124,7 @@ public interface StoryManager {
 
 	List<ProductStory> findProductNameByStoryId(Integer storyId);
 
-	Pager<ProductStory> findProjectLinkedStory(int start, int limit,ProductStory story, String condition, String columnName, boolean asc);
+	Pager<ProductStory> findProjectLinkedStory(int start, int limit,ProductStory story, ConditionCarrier carrier, String columnName, boolean asc);
 
 	Pager<ProductStory> findStoryByCondition(int start, int limit, ProductStory story, ConditionCarrier carrier, final String columnName, boolean asc);
 
@@ -135,4 +135,5 @@ public interface StoryManager {
 	 * @return
 	 */
 	List<ProductStory> storyInCondition(String condition, Integer productId,Integer ...ids);
+
 }

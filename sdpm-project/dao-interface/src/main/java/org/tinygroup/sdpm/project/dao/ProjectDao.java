@@ -69,5 +69,12 @@ public interface ProjectDao extends BaseDao<Project, Integer> {
      * @return
      */
     List<Project> findListByTeamUserId(String userId,String acl);
+    /**
+     * 根据输入查询
+     * @param condition
+     * @param ids
+     * @return
+     */
+    List<Project> projectInCondition(String condition,Integer ...ids);
 
 }

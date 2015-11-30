@@ -46,8 +46,16 @@ public class ModuleUtil{
        return  DefaultModuleUtils.getCondition(moduleId,moduleList);
     }
 
+    public static String getConditionWithoutOperate(Integer moduleId){
+        return  DefaultModuleUtils.getConditionWithoutOperate(moduleId, moduleList);
+    }
+
     public static String getConditionByRoot(Integer rootId,String moduleType ){
        return DefaultModuleUtils.getConditionByRoot(rootId,moduleType,moduleList);
+    }
+
+    public static String getConditionByRootWithoutOperate(Integer rootId,String moduleType){
+        return DefaultModuleUtils.getConditionByRootWithoutOperate(rootId,moduleType,moduleList);
     }
 
     public static String getPath(Integer moduleId, String division,String root, boolean openRoot){

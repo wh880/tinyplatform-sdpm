@@ -472,7 +472,7 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
     }
 
     public List<Product> productInCondition(String condition,Integer ...ids) {
-        Select select = select(PRODUCTTABLE.PRODUCT_ID,PRODUCTTABLE.PRODUCT_NAME).from(PRODUCTTABLE).where(and(PRODUCTTABLE.PRODUCT_NAME.like(condition),PRODUCTTABLE.DELETED.eq(0),PRODUCTTABLE.PRODUCT_ID.in(ids)));
+        Select select = MysqlSelect.select(PRODUCTTABLE.PRODUCT_ID, PRODUCTTABLE.PRODUCT_NAME).from(PRODUCTTABLE).where(and(PRODUCTTABLE.PRODUCT_NAME.like(condition),PRODUCTTABLE.DELETED.eq(0),PRODUCTTABLE.PRODUCT_ID.in(ids))).limit(0,8);
         return getDslSession().fetchList(select,Product.class);
     }
 

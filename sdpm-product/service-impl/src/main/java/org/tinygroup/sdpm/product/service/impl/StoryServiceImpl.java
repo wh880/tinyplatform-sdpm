@@ -15,6 +15,7 @@ import org.tinygroup.sdpm.system.biz.impl.ModuleUtil;
 import org.tinygroup.sdpm.system.biz.inter.ModuleManager;
 import org.tinygroup.tinysqldsl.Pager;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -26,8 +27,24 @@ public class StoryServiceImpl implements StoryService {
     @Autowired
     private ModuleManager moduleManager;
 
-    public ProductStory addStory(ProductStory story, ProductStorySpec storySpec) {
+    public ProductStory addStory(ProductStory story,
+                                 ProductStorySpec storySpec,
+                                 String userId) {
+        if (story.getPlanId() != null && story.getPlanId() > 0) {
+            story.setStoryStage("2");
+        } else {
+            story.setStoryStage("1");
+        }
+        if ("0".equals(story.getStoryReviewedBy())) {
+            story.setStoryStatus("1");
+        } else {
+            story.setStoryStatus("0");
+        }
+        story.setStoryVersion(1);
+        story.setStoryOpenedBy(userId);
+        story.setStoryOpenedDate(new Date());
 
+        storySpec.setStoryVersion(1);
         return storyManager.add(story, storySpec);
     }
 
@@ -106,44 +123,13 @@ public class StoryServiceImpl implements StoryService {
         return storyManager.findProductNameByStoryId(storyId);
     }
 
-    public Pager<ProductStory> findPager(int start, int limit,
-                                         ProductStory story, String condition, String columnName, boolean asc) {
-
-        return storyManager.findPager(start, limit, story, condition, columnName, asc);
-    }
-
-    public Pager<ProductStory> findProjectLinkedStory(int start, int limit,ProductStory story, String condition, String columnName, boolean asc) {
-        return storyManager.findProjectLinkedStory(start,limit,story,condition,columnName,asc);
+    public Pager<ProductStory> findProjectLinkedStory(int start, int limit,ProductStory story, ConditionCarrier carrier, String columnName, boolean asc) {
+        return storyManager.findProjectLinkedStory(start,limit,story,carrier,columnName,asc);
     }
 
     public Pager<ProductStory> findStoryByCondition(int start, int limit, ProductStory story, ConditionCarrier carrier, final String columnName, boolean asc) {
-        carrier.completeModuleFunction(new CallBackFunction() {
-            public boolean process(ConditionCarrier carrier, String field,String relation) {
-                String result = "";
-                if(ConditionUtils.CommonFieldType.MODULE.getOperate().equals(carrier.getFieldType(field))){
-                    String moduleId = (String)carrier.getValue(field)[0];
-                    if(moduleId.contains("p")){
-                        result = ModuleUtil.getConditionByRoot(Integer.parseInt(moduleId.substring(1)),"story");
-                    }else{
-                        result = ModuleUtil.getCondition(Integer.parseInt(moduleId));
-                    }
-                    carrier.setCondition(field,result,carrier.DEFAULT_RELATION);
-                    return true;
-                }
-                return false;
-            }
-        });
-        carrier.completeCustomFunction(new CallBackFunction() {
-            public boolean process(ConditionCarrier carrier, String field, String relation) {
-                if(ConditionUtils.CommonFieldType.STATUS.getOperate().equals(carrier.getFieldType(field))){
-                    String statusCondition = (String)carrier.getValue(field)[0];
-                    carrier.setCondition(field,statusCondition,carrier.DEFAULT_RELATION);
-                    return true;
-                }
-                return false;
-            }
-        });
-        return storyManager.findPager(start,limit,story,carrier.resultCondition(),columnName,asc);
+
+        return storyManager.findPager(start,limit,story,carrier,columnName,asc);
     }
 
     public List<ProductStory> storyInCondition(String condition, Integer productId) {

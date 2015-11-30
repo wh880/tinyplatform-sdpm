@@ -37,7 +37,7 @@ public class ProductProjectAction extends BaseController{
 			@RequestParam(required = false,defaultValue = "1")int page,
 			@RequestParam(required = false,defaultValue = "10")int pagesize,
 			@RequestParam(required = false,defaultValue = "projectId")String order,
-			@RequestParam(required = false,defaultValue = "asc")String ordertype,Model model,HttpServletRequest request){
+			@RequestParam(required = false,defaultValue = "asc")String ordertype,Model model){
 		project.setProjectId(Integer.parseInt(currentProjectId));
 		Pager<Project> pagerProject = projectService.findProjectPager(page, pagesize, project, order, ordertype);
 		model.addAttribute("project",pagerProject);

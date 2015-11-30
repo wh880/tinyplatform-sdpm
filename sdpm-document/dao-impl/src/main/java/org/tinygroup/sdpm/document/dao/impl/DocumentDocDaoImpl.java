@@ -18,17 +18,24 @@ package org.tinygroup.sdpm.document.dao.impl;
 
 import org.springframework.stereotype.Repository;
 import org.tinygroup.commons.tools.CollectionUtil;
+import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.jdbctemplatedslsession.callback.*;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
 import org.tinygroup.sdpm.common.log.annotation.LogClass;
 import org.tinygroup.sdpm.common.log.annotation.LogMethod;
+import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
+import org.tinygroup.sdpm.common.util.ComplexSearch.SqlUtil;
 import org.tinygroup.sdpm.common.util.update.UpdateUtil;
 import org.tinygroup.sdpm.document.dao.DocumentDocDao;
 import org.tinygroup.sdpm.document.dao.pojo.DocumentDoc;
+import org.tinygroup.sdpm.org.dao.constant.OrgUserTable;
 import org.tinygroup.tinysqldsl.*;
+import org.tinygroup.tinysqldsl.base.Condition;
+import org.tinygroup.tinysqldsl.base.FragmentSql;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
+import org.tinygroup.tinysqldsl.select.Join;
 import org.tinygroup.tinysqldsl.select.OrderByElement;
 import org.tinygroup.tinysqldsl.selectitem.FragmentSelectItemSql;
 
@@ -37,6 +44,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.tinygroup.sdpm.document.dao.constant.DocumentDocTable.DOCUMENT_DOCTABLE;
+import static org.tinygroup.sdpm.document.dao.constant.DocumentDoclibTable.DOCUMENT_DOCLIBTABLE;
+import static org.tinygroup.sdpm.product.dao.constant.ProductTable.PRODUCTTABLE;
+import static org.tinygroup.sdpm.project.dao.constant.ProjectTable.PROJECTTABLE;
+import static org.tinygroup.sdpm.system.dao.constant.SystemModuleTable.SYSTEM_MODULETABLE;
+import static org.tinygroup.sdpm.org.dao.constant.OrgUserTable.ORG_USERTABLE;
 import static org.tinygroup.tinysqldsl.Delete.delete;
 import static org.tinygroup.tinysqldsl.Insert.insertInto;
 import static org.tinygroup.tinysqldsl.Select.selectFrom;
@@ -245,35 +257,64 @@ public class DocumentDocDaoImpl extends TinyDslDaoSupport implements DocumentDoc
 			});
 		}
 	
-	public Pager<DocumentDoc> complexQuery(int start, int limit, DocumentDoc doc, final String condition,
-			final OrderBy... orderBys) {
+	public Pager<DocumentDoc> complexQuery(int start, int limit,
+										   DocumentDoc doc,
+										   final String condition,
+										   final SearchInfos searchConditions,
+										   final String groupOperate,
+										   final OrderBy... orderBys) {
+
 		if(doc == null){
 			doc =new DocumentDoc();
 		}
 		return getDslTemplate().queryPager(start, limit, doc, false, new SelectGenerateCallback<DocumentDoc>() {
 
 			public Select generate(DocumentDoc t){
-				Select select = MysqlSelect.select(FragmentSelectItemSql.fragmentSelect("document_doc.*,d.doc_lib_name as docLibName,pd.product_name as productName,pj.project_name as projectName,m.module_name as moduleName,o.org_user_account as docAddName,o1.org_user_account as docEditName"))
-						.from(FragmentSelectItemSql.fragmentFrom("document_doc left join document_doclib d on d.doc_lib_id=document_doc.doc_lib_id left join product pd on pd.product_id=document_doc.doc_product left join project pj on pj.project_id=document_doc.doc_project left join system_module m on m.module_id=document_doc.doc_module left join org_user o on o.org_user_id=document_doc.doc_added_by left join org_user o1 on o1.org_user_id=document_doc.doc_edited_by "))
+
+				Condition con = null;
+				if(!StringUtil.isBlank(condition)){
+					con = FragmentSql.fragmentCondition(condition);
+				}
+				if(searchConditions!=null) {
+					String searchCondition = SqlUtil.toSql(searchConditions.getInfos(), groupOperate);
+					if (!StringUtil.isBlank(searchCondition)) {
+						con = con == null ? FragmentSql.fragmentCondition(searchCondition) : and(con, FragmentSql.fragmentCondition(searchCondition));
+					}
+				}
+				Select select = MysqlSelect.select(DOCUMENT_DOCTABLE.ALL,
+						DOCUMENT_DOCLIBTABLE.DOC_LIB_NAME.as("docLibName"),
+						PRODUCTTABLE.PRODUCT_NAME.as("productName"),
+						PROJECTTABLE.PROJECT_NAME.as("projectName"),
+						SYSTEM_MODULETABLE.MODULE_NAME.as("moduleName"),
+						((OrgUserTable) ORG_USERTABLE.as("docAddUserTable")).ORG_USER_REAL_NAME.as("docAddName"),
+						((OrgUserTable) ORG_USERTABLE.as("docEditUserTable")).ORG_USER_REAL_NAME.as("docEditName"))
+						.from(DOCUMENT_DOCTABLE).join(
+								Join.leftJoin(DOCUMENT_DOCLIBTABLE, DOCUMENT_DOCLIBTABLE.DOC_LIB_ID.eq(DOCUMENT_DOCTABLE.DOC_LIB_ID)),
+								Join.leftJoin(PRODUCTTABLE, PRODUCTTABLE.PRODUCT_ID.eq(DOCUMENT_DOCTABLE.DOC_PRODUCT)),
+								Join.leftJoin(PROJECTTABLE, PROJECTTABLE.PROJECT_ID.eq(DOCUMENT_DOCTABLE.DOC_PROJECT)),
+								Join.leftJoin(SYSTEM_MODULETABLE, SYSTEM_MODULETABLE.MODULE_ID.eq(DOCUMENT_DOCTABLE.DOC_MODULE)),
+								Join.leftJoin(ORG_USERTABLE.as("docAddUserTable"), ((OrgUserTable) ORG_USERTABLE.as("docAddUserTable")).ORG_USER_ID.eq(DOCUMENT_DOCTABLE.DOC_ADDED_BY)),
+								Join.leftJoin(ORG_USERTABLE.as("docEditUserTable"), ((OrgUserTable) ORG_USERTABLE.as("docEditUserTable")).ORG_USER_ID.eq(DOCUMENT_DOCTABLE.DOC_EDITED_BY))
+						)
 						.where(and(
-							condition==null||"".equals(condition.trim())?DOCUMENT_DOCTABLE.DOC_ID.isNotNull():fragmentCondition(condition),
-							DOCUMENT_DOCTABLE.DOC_PRODUCT.eq(t.getDocProduct()),
-							DOCUMENT_DOCTABLE.DOC_PROJECT.eq(t.getDocProject()),
-							DOCUMENT_DOCTABLE.DOC_LIB_ID.eq(t.getDocLibId()),
-							DOCUMENT_DOCTABLE.DOC_MODULE.eq(t.getDocModule()),
-							DOCUMENT_DOCTABLE.DOC_TITLE.eq(t.getDocTitle()),
-							DOCUMENT_DOCTABLE.DOC_DIGEST.eq(t.getDocDigest()),
-							DOCUMENT_DOCTABLE.DOC_KEYWORDS.eq(t.getDocKeywords()),
-							DOCUMENT_DOCTABLE.DOC_TYPE.eq(t.getDocType()),
-							DOCUMENT_DOCTABLE.DOC_CONTENT.eq(t.getDocContent()),
-							DOCUMENT_DOCTABLE.DOC_URL.eq(t.getDocUrl()),
-							DOCUMENT_DOCTABLE.DOC_ATTACH.eq(t.getDocAttach()),
-							DOCUMENT_DOCTABLE.DOC_VIEWS.eq(t.getDocViews()),
-							DOCUMENT_DOCTABLE.DOC_ADDED_BY.eq(t.getDocAddedBy()),
-							DOCUMENT_DOCTABLE.DOC_ADDED_DATE.eq(t.getDocAddedDate()),
-							DOCUMENT_DOCTABLE.DOC_EDITED_BY.eq(t.getDocEditedBy()),
-							DOCUMENT_DOCTABLE.DOC_EDITED_DATE.eq(t.getDocEditedDate()),
-							DOCUMENT_DOCTABLE.DOC_DELETED.eq(t.getDocDeleted())));
+								con,
+								DOCUMENT_DOCTABLE.DOC_PRODUCT.eq(t.getDocProduct()),
+								DOCUMENT_DOCTABLE.DOC_PROJECT.eq(t.getDocProject()),
+								DOCUMENT_DOCTABLE.DOC_LIB_ID.eq(t.getDocLibId()),
+								DOCUMENT_DOCTABLE.DOC_MODULE.eq(t.getDocModule()),
+								DOCUMENT_DOCTABLE.DOC_TITLE.eq(t.getDocTitle()),
+								DOCUMENT_DOCTABLE.DOC_DIGEST.eq(t.getDocDigest()),
+								DOCUMENT_DOCTABLE.DOC_KEYWORDS.eq(t.getDocKeywords()),
+								DOCUMENT_DOCTABLE.DOC_TYPE.eq(t.getDocType()),
+								DOCUMENT_DOCTABLE.DOC_CONTENT.eq(t.getDocContent()),
+								DOCUMENT_DOCTABLE.DOC_URL.eq(t.getDocUrl()),
+								DOCUMENT_DOCTABLE.DOC_ATTACH.eq(t.getDocAttach()),
+								DOCUMENT_DOCTABLE.DOC_VIEWS.eq(t.getDocViews()),
+								DOCUMENT_DOCTABLE.DOC_ADDED_BY.eq(t.getDocAddedBy()),
+								DOCUMENT_DOCTABLE.DOC_ADDED_DATE.eq(t.getDocAddedDate()),
+								DOCUMENT_DOCTABLE.DOC_EDITED_BY.eq(t.getDocEditedBy()),
+								DOCUMENT_DOCTABLE.DOC_EDITED_DATE.eq(t.getDocEditedDate()),
+								DOCUMENT_DOCTABLE.DOC_DELETED.eq(t.getDocDeleted())));
 					return addOrderByElements(select, orderBys);
 				}		
 			});

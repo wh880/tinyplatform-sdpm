@@ -3,147 +3,27 @@ package org.tinygroup.sdpm.common.condition;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SqlUtil;
+import org.tinygroup.sdpm.common.util.common.NameUtil;
+import org.tinygroup.tinysqldsl.base.Column;
+import org.tinygroup.tinysqldsl.base.Condition;
+import org.tinygroup.tinysqldsl.base.FragmentSql;
+import org.tinygroup.tinysqldsl.base.StatementSqlBuilder;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
  * Created by wangll13383 on 2015/11/4.
  */
 public class ConditionUtils {
-    private static final Integer DEFAULT_VALUE = 0;
-    private static Map<String, String> operateBefore = new HashMap<String, String>();
-    private static Map<String, String> operateAfter = new HashMap<String, String>();
-
-    static {
-        operateBefore.put(Operate.IN.getOperate(), "in(");
-        operateAfter.put(Operate.IN.getOperate(), ")");
-
-        operateBefore.put(Operate.NOT_IN.getOperate(), "not in(");
-        operateAfter.put(Operate.NOT_IN.getOperate(), ")");
-
-        operateBefore.put(Operate.NO_OPERATE.getOperate(), "");
-        operateAfter.put(Operate.NO_OPERATE.getOperate(), "");
-    }
-
-    public static boolean isSearch(ConditionCarrier carrier, String field) {
-        if (CommonFieldType.SEARCH.getOperate().equals(carrier.getFieldType(field))) {
-            Object[] values = carrier.getValue(field);
-            SearchInfos searchInfos = null;
-            String groupOperator = null;
-            for (Object value : values) {
-                if (value instanceof SearchInfos) {
-                    searchInfos = (SearchInfos) value;
-                } else if (value instanceof String) {
-                    groupOperator = (String) value;
-                }
-            }
-            if (searchInfos == null) {
-                carrier.setCondition(field, "", carrier.DEFAULT_RELATION);
-            } else {
-                carrier.setCondition(field,
-                        operateBefore.get(carrier.getOperate(field)) + SqlUtil.toSql(searchInfos.getInfos(), groupOperator) + operateAfter.get(carrier.getOperate(field)),
-                        carrier.DEFAULT_RELATION);
-            }
-            return true;
-        }
-        return false;
-    }
-
-    public static boolean isModule(ConditionCarrier carrier, String field, CallBackFunction function) {
-        if (function == null) return false;
-        return function.process(carrier, field, carrier.DEFAULT_RELATION);
-    }
-
-//    public static void mergeConditionWithOperate(ConditionCarrier carrier,String field,String relationOperator, boolean isWithDefault,CallBackFunction function){
-//        StringBuffer result = new StringBuffer("");
-//        String subCondition = function.process(carrier,field);
-//        if(StringUtil.isBlank(subCondition)){
-//            if(isWithDefault){
-//                result.append(operateBefore.get(carrier.getOperate(field))).append(DEFAULT_VALUE).append(operateAfter.get(carrier.getOperate(field)));
-//            }
-//        }else{
-//            result.append(operateBefore.get(carrier.getOperate(field))).append(subCondition).append(operateAfter.get(carrier.getOperate(field)));
-//        }
-//        carrier.setCondition(field,result.toString(),relationOperator);
-//    }
-//
-//    public static void mergeConditionWithOutOperate(ConditionCarrier carrier,String field,String relationOperator,boolean isWithDefault,CallBackFunction function){
-//        String subCondition = function.process(carrier,field);
-//        if(StringUtil.isBlank(subCondition)){
-//            if(isWithDefault){
-//                subCondition = String.valueOf(DEFAULT_VALUE);
-//            }
-//        }
-//        carrier.setCondition(field,StringUtil.isBlank(subCondition)?"":subCondition,relationOperator);
-//    }
-
-    public static boolean isCustom(ConditionCarrier carrier, String field, CallBackFunction function) {
-        if (function == null) return false;
-        return function.process(carrier, field, null);
-    }
-
-    public static boolean isId(ConditionCarrier carrier, String field) {
-        if (CommonFieldType.ID.getOperate().equals(carrier.getFieldType(field))) {
-            String result = "";
-            if (carrier.getValue(field) != null) {
-                String[] value = (String[]) carrier.getValue(field)[0];
-                if (value != null && value.length > 0) {
-                    result = StringUtil.join(value, ",");
-                }
-            }
-            if (StringUtil.isBlank(result.toString())) {
-                carrier.setCondition(field,
-                        operateBefore.get(carrier.getOperate(field)) + DEFAULT_VALUE + operateAfter.get(carrier.getOperate(field)),
-                        carrier.DEFAULT_RELATION);
-            } else {
-                carrier.setCondition(field,
-                        operateBefore.get(carrier.getOperate(field)) + result.toString() + operateAfter.get(carrier.getOperate(field)),
-                        carrier.DEFAULT_RELATION);
-            }
-            return true;
-        }
-        return false;
-    }
-
-    public static ConditionCarrier mergeCarrier(String moduleField, String moduleId) {
-        ConditionCarrier carrier = new ConditionCarrier();
-        carrier.putModuleIn(moduleField, moduleId);
-        return carrier;
-    }
-
-    public static ConditionCarrier mergeCarrier(SearchInfos searchInfos, String groupOperator) {
-        ConditionCarrier carrier = new ConditionCarrier();
-        carrier.putSearch("search", searchInfos, groupOperator);
-        return carrier;
-    }
-
-    public static ConditionCarrier mergeCarrier(String idField, String[] ids) {
-        ConditionCarrier carrier = new ConditionCarrier();
-        carrier.putIdIn(idField, ids);
-        return carrier;
-    }
-
-    public static ConditionCarrier mergeCarrier(SearchInfos searchInfos, String groupOperator, String moduleField, String moduleId, String idField, String[] ids) {
-        ConditionCarrier carrier = mergeCarrier(moduleField, moduleId);
-        carrier.putSearch("search", searchInfos, groupOperator);
-        carrier.putIdIn(idField, ids);
-        return carrier;
-    }
-
-    public static ConditionCarrier mergeCarrier(String moduleField, String moduleId, String idField, String[] ids) {
-        ConditionCarrier carrier = mergeCarrier(moduleField, moduleId);
-        carrier.putIdIn(idField, ids);
-        return carrier;
-    }
-
-    public static ConditionCarrier mergeCarrier(SearchInfos searchInfos, String groupOperator, String moduleField, String moduleId) {
-        ConditionCarrier carrier = mergeCarrier(moduleField, moduleId);
-        carrier.putSearch("search", searchInfos, groupOperator);
-        return carrier;
-    }
 
     public enum Operate {
+        GT("greater_than"),
+        LT("less_than"),
+        EQ("eq"),
+        NEQ("not_eq"),
         IN("in"),
         NOT_IN("not_in"),
         NO_OPERATE("");
@@ -159,6 +39,7 @@ public class ConditionUtils {
     }
 
     public enum CommonFieldType {
+        FIELD_OPERATE("field_operate"),
         SEARCH("search"),
         MODULE("module"),
         STATUS("status"),
@@ -172,6 +53,61 @@ public class ConditionUtils {
         public String getOperate() {
             return this.commonField;
         }
+    }
+
+    public static Condition mergeCondition(ConditionCarrier carrier, CallBackFunction callBackFunction){
+        if(carrier==null)return null;
+        List<Condition> conditions = new ArrayList<Condition>();
+        for(String field : carrier.getFields()){
+            Condition condition = null;
+            Column column = new Column(NameUtil.resolveNameDesc(field));
+            if(carrier.getFieldType(field).equals(ConditionUtils.CommonFieldType.MODULE.getOperate())){
+                condition = callBackFunction.process(carrier,field,column);
+            }else if(carrier.getFieldType(field).equals(ConditionUtils.CommonFieldType.SEARCH.getOperate())){
+                if(carrier.getValue(field)[0]!=null){
+                    String result = SqlUtil.toSql(((SearchInfos) carrier.getValue(field)[0]).getInfos(), (String) carrier.getValue(field)[1]);
+                    if(!StringUtil.isBlank(result)){
+                        condition = FragmentSql.fragmentCondition(result);
+                    }
+                }
+            }else if(carrier.getFieldType(field).equals(ConditionUtils.CommonFieldType.ID.getOperate())){
+                boolean isIn = carrier.getOperate(field).equals(ConditionUtils.Operate.IN.getOperate());
+                String[] result = (String[]) carrier.getValue(field)[0];
+                String[] value = {"0"};
+                result = result!=null&&result.length>0?result:value;
+                if(isIn){
+                    condition = column.in(result);
+                }else{
+                    condition = column.notIn(result);
+                }
+            }else if(carrier.getFieldType(field).equals(ConditionUtils.CommonFieldType.FIELD_OPERATE.getOperate())){
+                String result = (String) carrier.getValue(field)[0];
+                if(!StringUtil.isBlank(result)){
+                    if(carrier.getOperate(field).equals(ConditionUtils.Operate.EQ.getOperate())){
+                        condition = column.eq(result);
+                    }else if(carrier.getOperate(field).equals(ConditionUtils.Operate.NEQ.getOperate())){
+                        condition = column.neq(result);
+                    }else if(carrier.getOperate(field).equals(ConditionUtils.Operate.GT.getOperate())){
+                        condition = column.gt(result);
+                    }else if(carrier.getOperate(field).equals(ConditionUtils.Operate.LT.getOperate())){
+                        condition = column.lt(result);
+                    }
+                }
+            }else if(carrier.getFieldType(field).equals(ConditionUtils.CommonFieldType.STATUS.getOperate())){
+                String result = (String) carrier.getValue(field)[0];
+                if(!StringUtil.isBlank(result)){
+                    condition = FragmentSql.fragmentCondition(result);
+                }
+            }
+            conditions.add(condition);
+        }
+        if(conditions.size()==0){
+            return null;
+        }else if(conditions.size()==1){
+            return conditions.get(0);
+        }
+        Condition[] conditionArray = new Condition[conditions.size()];
+        return StatementSqlBuilder.and(conditions.toArray(conditionArray));
     }
 }
 

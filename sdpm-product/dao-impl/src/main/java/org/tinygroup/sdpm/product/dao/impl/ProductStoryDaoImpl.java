@@ -23,6 +23,7 @@ import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.jdbctemplatedslsession.callback.*;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
+import org.tinygroup.sdpm.common.condition.ConditionCarrier;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.common.util.update.InsertUtil;
 import org.tinygroup.sdpm.common.util.update.UpdateUtil;
@@ -551,15 +552,16 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 		return select;
 	}
 
-	public Pager<ProductStory> complexQuery(int start, int limit, ProductStory productStory, final String condition, final OrderBy... orderBys) {
+	public Pager<ProductStory> complexQuery(int start, int limit, ProductStory productStory, final Condition condition, final OrderBy... orderBys) {
 		if (productStory == null) {
 			productStory = new ProductStory();
 		}
 		return getDslTemplate().queryPager(start>0?start:0, limit, productStory, false, new SelectGenerateCallback<ProductStory>() {
 
 			public Select generate(ProductStory t) {
+
 				Select select = MysqlSelect.select(PRODUCT_STORYTABLE.ALL,PRODUCT_PLANTABLE.PLAN_NAME.as("planName")).from(PRODUCT_STORYTABLE).join(leftJoin(PRODUCT_PLANTABLE, PRODUCT_PLANTABLE.PLAN_ID.eq(PRODUCT_STORYTABLE.PLAN_ID))).where(and(
-						StringUtil.isBlank(condition)?null:fragmentCondition(condition),
+						condition,
 						PRODUCT_STORYTABLE.COMPANY_ID.eq(t.getCompanyId()),
 						PRODUCT_STORYTABLE.PRODUCT_ID.eq(t.getProductId()),
 						PRODUCT_STORYTABLE.STORY_PARENT_ID.eq(t.getStoryParentId()),
@@ -656,11 +658,11 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 
 	}
 
-	public Pager<ProductStory> projectLinkedStory(int start, int limit, ProductStory productStory, String condition, OrderBy... orderBys) {
+	public Pager<ProductStory> projectLinkedStory(int start, int limit, ProductStory productStory, Condition condition, OrderBy... orderBys) {
 		Select select = MysqlSelect.select(PRODUCT_STORYTABLE.ALL).
 				from(PRODUCT_STORYTABLE).join(newJoin(PROJECT_STORYTABLE, PRODUCT_STORYTABLE.STORY_ID.eq(PROJECT_STORYTABLE.STORY_ID)))
 				.where(and(
-						StringUtil.isBlank(condition)?null:fragmentCondition(condition),
+						condition,
 						PRODUCT_STORYTABLE.COMPANY_ID.eq(productStory.getCompanyId()),
 						PRODUCT_STORYTABLE.PRODUCT_ID.eq(productStory.getProductId()),
 						PRODUCT_STORYTABLE.STORY_PARENT_ID.eq(productStory.getStoryParentId()),
@@ -735,7 +737,8 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 		if(ids !=null && ids.length!=0){
 			con = con==null?PRODUCT_STORYTABLE.STORY_ID.in(ids):and(con,PRODUCT_STORYTABLE.STORY_ID.in(ids));
 		}
-		Select select = select(PRODUCT_STORYTABLE.STORY_ID,PRODUCT_STORYTABLE.STORY_TITLE).from(PRODUCT_STORYTABLE).where(and(PRODUCT_STORYTABLE.STORY_TITLE.like(condition),con));
+		Select select = MysqlSelect.select(PRODUCT_STORYTABLE.STORY_ID, PRODUCT_STORYTABLE.STORY_TITLE).from(PRODUCT_STORYTABLE).where(
+				and(PRODUCT_STORYTABLE.DELETED.eq(0),PRODUCT_STORYTABLE.STORY_TITLE.like(condition),con)).limit(0,8);
 		return getDslSession().fetchList(select, ProductStory.class);
 	}
 

@@ -8,6 +8,7 @@ import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.common.condition.CallBackFunction;
 import org.tinygroup.sdpm.common.condition.ConditionCarrier;
 import org.tinygroup.sdpm.common.condition.ConditionUtils;
+import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfo;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SqlUtil;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
@@ -23,8 +24,13 @@ import org.tinygroup.sdpm.quality.dao.QualityTestCaseDao;
 import org.tinygroup.sdpm.system.dao.SystemModuleDao;
 import org.tinygroup.sdpm.system.dao.impl.util.ModuleUtil;
 import org.tinygroup.tinysqldsl.Pager;
+import org.tinygroup.tinysqldsl.base.Column;
+import org.tinygroup.tinysqldsl.base.Condition;
+import org.tinygroup.tinysqldsl.base.FragmentSql;
+import org.tinygroup.tinysqldsl.base.StatementSqlBuilder;
 
 import java.util.*;
+
 
 @Service
 @Transactional
@@ -176,52 +182,51 @@ public class StoryManagerImpl implements StoryManager {
         return productStoryDao.findpNameBysId(storyId);
     }
 
-    public Pager<ProductStory> findProjectLinkedStory(int start, int limit, ProductStory story, String condition, String columnName, boolean asc) {
+    public Pager<ProductStory> findProjectLinkedStory(int start, int limit, ProductStory story, ConditionCarrier carrier, String columnName, boolean asc) {
+
         if (!StringUtil.isBlank(columnName)) {
-            return productStoryDao.projectLinkedStory(start, limit, story, condition, new OrderBy(NameUtil.resolveNameDesc("productStory." + columnName), asc));
+            return productStoryDao.projectLinkedStory(start, limit, story, mergeCondition(carrier), new OrderBy(NameUtil.resolveNameDesc("productStory." + columnName), asc));
         }
-        return productStoryDao.projectLinkedStory(start, limit, story, condition);
+        return productStoryDao.projectLinkedStory(start, limit, story, mergeCondition(carrier));
     }
 
-    public Pager<ProductStory> findPager(int start, int limit, ProductStory story, String condition, String columnName, boolean asc) {
-
+    public Pager<ProductStory> findPager(int start, int limit, ProductStory story, ConditionCarrier carrier, String columnName, boolean asc) {
         if (!StringUtil.isBlank(columnName)) {
-            return productStoryDao.complexQuery(start, limit, story, condition, new OrderBy(NameUtil.resolveNameDesc(columnName), asc));
+            return productStoryDao.complexQuery(start, limit, story, mergeCondition(carrier) , new OrderBy(NameUtil.resolveNameDesc(columnName), asc));
         }
-        return productStoryDao.complexQuery(start, limit, story, condition);
+        return productStoryDao.complexQuery(start, limit, story, mergeCondition(carrier));
     }
 
     public Pager<ProductStory> findStoryByCondition(int start, int limit, ProductStory story, ConditionCarrier carrier, final String columnName, boolean asc) {
-        carrier.completeModuleFunction(new CallBackFunction() {
-            public boolean process(ConditionCarrier carrier, String field,String relation) {
-                String result = "";
-                if(ConditionUtils.CommonFieldType.MODULE.getOperate().equals(carrier.getFieldType(field))){
-                    String moduleId = (String)carrier.getValue(field)[0];
-                    if(moduleId.contains("p")){
-                        result = ModuleUtil.getConditionByRoot(Integer.parseInt(moduleId.substring(1)),"story");
-                    }else{
-                        result = ModuleUtil.getCondition(Integer.parseInt(moduleId.substring(1)));
-                    }
-                    carrier.setCondition(field,result,carrier.DEFAULT_RELATION);
-                    return true;
-                }
-                return false;
-            }
-        });
-        carrier.completeCustomFunction(new CallBackFunction() {
-            public boolean process(ConditionCarrier carrier, String field, String relation) {
-                if(ConditionUtils.CommonFieldType.STATUS.getOperate().equals(carrier.getFieldType(field))){
-                    String statusCondition = (String)carrier.getValue(field)[0];
-                    carrier.setCondition(field,statusCondition,carrier.DEFAULT_RELATION);
-                    return true;
-                }
-                return false;
-            }
-        });
-        return findPager(start,limit,story,carrier.resultCondition(),columnName,asc);
+
+        return findPager(start,limit,story,carrier,columnName,asc);
     }
 
     public List<ProductStory> storyInCondition(String condition, Integer productId, Integer ...ids) {
         return productStoryDao.storyInCondition(condition,productId,ids);
+    }
+
+    private Condition mergeCondition(ConditionCarrier carrier){
+        return ConditionUtils.mergeCondition(carrier, new CallBackFunction() {
+            public Condition process(ConditionCarrier carrier, String field, Column column) {
+                Condition condition = null;
+                boolean isIn = carrier.getOperate(field).equals(ConditionUtils.Operate.IN.getOperate());
+                String moduleId = (String) carrier.getValue(field)[0];
+                if (moduleId.contains("p")) {
+                    if (isIn) {
+                        condition = column.in(ModuleUtil.getConditionByRootWithoutOperate(Integer.parseInt(moduleId.substring(1)), "story"));
+                    } else {
+                        condition = column.notIn(ModuleUtil.getConditionByRootWithoutOperate(Integer.parseInt(moduleId.substring(1)), "story"));
+                    }
+                } else {
+                    if (isIn) {
+                        condition = column.in(ModuleUtil.getConditionWithoutOperate(Integer.parseInt(moduleId)));
+                    } else {
+                        condition = column.notIn(ModuleUtil.getConditionWithoutOperate(Integer.parseInt(moduleId)));
+                    }
+                }
+                return condition;
+            }
+        });
     }
 }

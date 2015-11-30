@@ -505,7 +505,7 @@ public class ProductAction extends BaseController {
 
     @ResponseBody
     @RequestMapping("ajax/productInCondition")
-    public List<Product> userInCondition(String key, String initKey, HttpServletRequest request){
+    public List<Product> productInCondition(String key, String initKey, HttpServletRequest request){
         if(initKey!=null){
             if(initKey.indexOf(",")>0){
                 String[] ids = initKey.split(",");

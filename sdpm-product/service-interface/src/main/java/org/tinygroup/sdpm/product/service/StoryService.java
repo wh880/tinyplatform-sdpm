@@ -17,7 +17,7 @@ public interface StoryService {
 	 * @param story
 	 * @return
 	 */
-	ProductStory addStory(ProductStory story,ProductStorySpec storySpec);
+	ProductStory addStory(ProductStory story,ProductStorySpec storySpec ,String userId);
 	/**
 	 * 根据需求Id删除
 	 * @param storyId
@@ -122,19 +122,8 @@ public interface StoryService {
 	 */
 	List<ProductStory> findProductName(Integer storyId);
 
-	/**
-	 * 有条件page查询
-	 * @param start
-	 * @param limit
-	 * @param story
-	 * @param condition
-	 * @param columnName
-	 * @param asc
-	 * @return
-	 */
-	Pager<ProductStory> findPager(int start, int limit,ProductStory story, String condition, String columnName, boolean asc);
 
-	Pager<ProductStory> findProjectLinkedStory(int start, int limit,ProductStory story, String condition, String columnName, boolean asc);
+	Pager<ProductStory> findProjectLinkedStory(int start, int limit,ProductStory story, ConditionCarrier carrier, String columnName, boolean asc);
 
 	Pager<ProductStory> findStoryByCondition(int start, int limit,ProductStory story, ConditionCarrier carrier, String columnName, boolean asc);
 

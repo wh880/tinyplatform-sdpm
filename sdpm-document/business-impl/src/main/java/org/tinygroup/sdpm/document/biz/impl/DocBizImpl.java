@@ -7,11 +7,14 @@ import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SqlUtil;
+import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.document.biz.inter.DocBiz;
 import org.tinygroup.sdpm.document.dao.DocumentDocDao;
 import org.tinygroup.sdpm.document.dao.DocumentDoclibDao;
 import org.tinygroup.sdpm.document.dao.pojo.DocumentDoc;
 import org.tinygroup.sdpm.document.dao.pojo.DocumentDocLib;
+import org.tinygroup.sdpm.system.dao.SystemModuleDao;
+import org.tinygroup.sdpm.system.dao.impl.util.ModuleUtil;
 import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.Date;
@@ -35,6 +38,8 @@ public class DocBizImpl implements DocBiz {
     private DocumentDocDao docdao;
     @Autowired
     private DocumentDoclibDao doclibdao;
+    @Autowired
+    private SystemModuleDao moduleDao;
 
 
     public DocumentDocLib addDocLib(DocumentDocLib doclib) {
@@ -107,22 +112,35 @@ public class DocBizImpl implements DocBiz {
         return doclibdao.getByKey(key);
     }
 
+    public Pager<DocumentDoc> queryItemWithPage(Integer start, Integer limit, DocumentDoc doc,Integer moduleId, SearchInfos conditions, String groupOperate, String sortName, boolean asc) {
+        String condition = null;
+        if(moduleId!=null){
+            condition = NameUtil.resolveNameDesc("docModule") + " " + ModuleUtil.getCondition(Integer.valueOf(moduleId));
+        }
+        return queryItemWithPage(start,limit,doc,condition,conditions,groupOperate,sortName,asc);
+    }
+
+    public Pager<DocumentDoc> queryProductItemWithPage(Integer start, Integer limit, DocumentDoc doc, Integer moduleId, SearchInfos conditions, String groupOperate, String sortName, boolean asc) {
+        Integer root = moduleDao.getByKey(Integer.valueOf(moduleId)).getModuleRoot();
+        doc.setDocProduct(root);
+        String condition = NameUtil.resolveNameDesc("docModule") + " " + ModuleUtil.getCondition(Integer.valueOf(moduleId));
+        return queryItemWithPage(start,limit,doc,condition,conditions,groupOperate,sortName,asc);
+    }
+
+    public Pager<DocumentDoc> queryProjectItemWithPage(Integer start, Integer limit, DocumentDoc doc, Integer moduleId, SearchInfos conditions, String groupOperate, String sortName, boolean asc) {
+        Integer root = moduleDao.getByKey(Integer.valueOf(moduleId)).getModuleRoot();
+        doc.setDocProject(root);
+        String condition = NameUtil.resolveNameDesc("docModule") + " " + ModuleUtil.getCondition(Integer.valueOf(moduleId));
+        return queryItemWithPage(start,limit,doc,condition,conditions,groupOperate,sortName,asc);
+    }
+
     public Pager<DocumentDoc> queryItemWithPage(Integer start, Integer limit, DocumentDoc doc, String statusCondition, SearchInfos conditions,
                                                 String groupOperate, String sortName, boolean asc) {
-        // 分页
-        String condition = conditions != null ? SqlUtil.toSql(conditions.getInfos(), groupOperate) : "";
-        condition = condition != null && !"".equals(condition) ? (statusCondition != null && !"".equals(statusCondition) ? condition + " and "
-                + statusCondition : condition)
-                : statusCondition;
-        OrderBy orderBy = null;
-        if (sortName != null && !"".equals(sortName)) {
-            orderBy = new OrderBy(sortName, asc);
+
+        if (StringUtil.isBlank(sortName)) {
+            return docdao.complexQuery(start, limit, doc, statusCondition,conditions,groupOperate);
         }
-        if (condition != null && !"".equals(condition)) {
-            return docdao.complexQuery(start, limit, doc, condition,
-                    orderBy);
-        }
-        return docdao.complexQuery(start, limit, doc, null, orderBy);
+        return docdao.complexQuery(start, limit, doc, statusCondition,conditions, groupOperate, new OrderBy(sortName, asc));
     }
 
     public int[] batchDelDocByIds(List<DocumentDoc> keys) {

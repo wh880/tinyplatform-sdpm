@@ -58,8 +58,17 @@ public class DocServiceImpl implements DocService{
 		return docbiz.getDoclibList(doclib);
 	}
 
-	public Pager<DocumentDoc> findDocRetPager(Integer start,Integer limit,DocumentDoc doc, String statusCondition, SearchInfos conditions,String groupOperate, String sortName,boolean asc) {
-		return docbiz.queryItemWithPage(start, limit, doc, statusCondition,conditions, groupOperate, sortName, asc);
+
+	public Pager<DocumentDoc> findDocRetProductPager(Integer start, Integer limit, DocumentDoc doc, Integer moduleId, SearchInfos conditions, String groupOperate, String sortName, boolean asc) {
+		return docbiz.queryProductItemWithPage(start,limit,doc,moduleId,conditions,groupOperate,sortName,asc);
+	}
+
+	public Pager<DocumentDoc> findDocRetProjectPager(Integer start, Integer limit, DocumentDoc doc, Integer moduleId, SearchInfos conditions, String groupOperate, String sortName, boolean asc) {
+		return docbiz.queryProjectItemWithPage(start,limit,doc,moduleId,conditions,groupOperate,sortName,asc);
+	}
+
+	public Pager<DocumentDoc> findDocRetPager(Integer start,Integer limit,DocumentDoc doc,Integer moduleId, SearchInfos conditions,String groupOperate, String sortName,boolean asc) {
+		return docbiz.queryItemWithPage(start, limit, doc,moduleId,conditions, groupOperate, sortName, asc);
 	}
 
 	public Pager<DocumentDocLib> findDoclibRetPager(Integer start, Integer limit, DocumentDocLib doclib, String sortName, boolean asc) {

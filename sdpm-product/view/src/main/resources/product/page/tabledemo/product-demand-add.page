@@ -63,8 +63,10 @@
                                     if(first) {
                                         first=false;
                                     }else{
-                                        $("input[name=storyTitle]").attr("ajaxurl",sUrl+"?productId"+pId);
-                                        $("input[name=storyTitle]").blur();
+                                        var _input=$("input[name=storyTitle]");
+                                        _input.attr("ajaxurl",sUrl+"?productId="+pId);
+                                        var oldV=_input.val();
+                                        _input.val("").blur().val(oldV).blur();
                                     }
 
                                 }

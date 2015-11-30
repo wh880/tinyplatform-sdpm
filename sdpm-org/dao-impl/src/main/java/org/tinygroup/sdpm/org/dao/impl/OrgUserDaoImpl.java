@@ -181,7 +181,7 @@ public class OrgUserDaoImpl extends TinyDslDaoSupport implements OrgUserDao {
         if(ids!=null&&ids.length!=0){
             con = ORG_USERTABLE.ORG_USER_ID.in(ids);
         }
-        Select select = select(ORG_USERTABLE.ORG_USER_ID,ORG_USERTABLE.ORG_USER_REAL_NAME).from(ORG_USERTABLE).where(and(ORG_USERTABLE.ORG_USER_DELETED.eq(0),ORG_USERTABLE.ORG_USER_REAL_NAME.like(condition),con));
+        Select select = MysqlSelect.select(ORG_USERTABLE.ORG_USER_ID,ORG_USERTABLE.ORG_USER_REAL_NAME).from(ORG_USERTABLE).where(and(ORG_USERTABLE.ORG_USER_DELETED.eq(0),ORG_USERTABLE.ORG_USER_REAL_NAME.like(condition),con)).limit(0,8);
         return getDslSession().fetchList(select,OrgUser.class);
     }
 

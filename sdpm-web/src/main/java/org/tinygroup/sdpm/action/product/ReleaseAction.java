@@ -320,17 +320,16 @@ public class ReleaseAction extends BaseController {
             if(release!=null&&!StringUtil.isBlank(release.getReleaseStories())){
                 releaseStories = release.getReleaseStories();
             }
+            List<String> origin = new ArrayList<String>(Arrays.asList(releaseStories.split(",")));
             for (String id : stories) {
                 ProductStory productStory = storyService.findStory(Integer.parseInt(id));
                 productStory.setStoryStage("9");
-                if ("".equals(releaseStories)) {
-                    releaseStories = releaseStories + id;
-                }else{
-                    releaseStories = releaseStories + "," + id;
+                if(!origin.contains(id)){
+                    origin.add(id);
                 }
                 storyService.updateStory(productStory);
             }
-            release.setReleaseStories(releaseStories);
+            release.setReleaseStories(StringUtil.join(origin.toArray(),","));
             releaseService.updateRelease(release);
         }
         Map<String, String> map = new HashMap<String, String>();
@@ -350,17 +349,13 @@ public class ReleaseAction extends BaseController {
             if(release!=null&&!StringUtil.isBlank(release.getReleaseBugs())){
                 releaseBugs = release.getReleaseBugs();
             }
+            List<String> origin = new ArrayList<String>(Arrays.asList(releaseBugs.split(",")));
             for (String bugId : bugs) {
-                if (release != null && releaseBugs != null) {
-                    if ("".equals(releaseBugs)) {
-                        releaseBugs = releaseBugs +bugId;
-                    } else {
-                        releaseBugs = releaseBugs + "," + bugId;
-                    }
-
+                if(!origin.contains(bugId)){
+                    origin.add(bugId);
                 }
             }
-            release.setReleaseBugs(releaseBugs);
+            release.setReleaseBugs(StringUtil.join(origin.toArray(),","));
             releaseService.updateRelease(release);
         }
         Map<String, String> map = new HashMap<String, String>();

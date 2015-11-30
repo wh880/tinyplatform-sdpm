@@ -38,7 +38,7 @@ public interface QualityBugDao extends BaseDao<QualityBug,Integer> {
 
     BugCount getBugsNotInType(String type,Integer productId);
 
-    Pager<QualityBug> queryStoryChangedBugs(int start, int limit , String conditions, QualityBug qualityBug , final OrderBy... orderArgs);
+    Pager<QualityBug> queryStoryChangedBugs(int start, int limit , Condition conditions, QualityBug qualityBug , final OrderBy... orderArgs);
 
     Integer getMaxNo(Integer productId);
 

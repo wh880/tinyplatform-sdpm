@@ -3,6 +3,7 @@ package org.tinygroup.sdpm.quality.service.inter;
 import java.util.List;
 import java.util.Map;
 
+import org.tinygroup.sdpm.common.condition.ConditionCarrier;
 import org.tinygroup.sdpm.quality.dao.pojo.BugCount;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.tinysqldsl.Pager;
@@ -50,16 +51,6 @@ public interface BugService {
 	 * @return
 	 */
 	int[]  batchDeleteBug(List<QualityBug> bugIds);
-	/**
-	 * 分页查询
-	 * @param start
-	 * @param limit
-	 * @param bug
-	 * @param sortName
-	 * @param asc
-	 * @return
-	 */
-	Pager<QualityBug> findBugListPager(Integer start,Integer limit, String conditions, QualityBug bug,String sortName,boolean asc);
 	
 	/**
 	 * 删除
@@ -70,5 +61,7 @@ public interface BugService {
 
 	Map<String,List<BugCount>> report(String code, Integer productId);
 
-	Pager<QualityBug> findStoryChangedBugs(Integer start,Integer limit, String conditions, QualityBug bug,String sortName,boolean asc);
+	Pager<QualityBug> findStoryChangedBugs(Integer start,Integer limit, ConditionCarrier carrier, QualityBug bug,String sortName,boolean asc);
+
+	Pager<QualityBug> findBugListPager(Integer start,Integer limit, ConditionCarrier carrier, QualityBug bug,String sortName,boolean asc);
 }

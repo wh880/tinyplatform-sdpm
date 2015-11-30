@@ -664,12 +664,12 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
 		return getDslSession().fetchOneResult(select,BugCount.class);
 	}
 
-	public Pager<QualityBug> queryStoryChangedBugs(int start, int limit, String conditions, QualityBug qualityBug, OrderBy... orderArgs) {
+	public Pager<QualityBug> queryStoryChangedBugs(int start, int limit, Condition conditions, QualityBug qualityBug, OrderBy... orderArgs) {
 		MysqlSelect select = MysqlSelect.select(QUALITY_BUGTABLE.ALL,ORG_USERTABLE.ORG_USER_REAL_NAME.as("assignedUser")).from(QUALITY_BUGTABLE)
 				.join(Join.leftJoin(ORG_USERTABLE, QUALITY_BUGTABLE.BUG_ASSIGNED_TO.eq(ORG_USERTABLE.ORG_USER_ID)),
 						Join.newJoin(PRODUCT_STORYTABLE, QUALITY_BUGTABLE.STORY_ID.eq(PRODUCT_STORYTABLE.STORY_ID))).where(
 						and(
-								StringUtil.isBlank(conditions)?null:FragmentSql.fragmentCondition(conditions),
+								conditions,
 								QUALITY_BUGTABLE.PRODUCT_ID.eq(qualityBug.getProductId()),
 								QUALITY_BUGTABLE.MODULE_ID.eq(qualityBug.getModuleId()),
 								QUALITY_BUGTABLE.PROJECT_ID.eq(qualityBug.getProjectId()),

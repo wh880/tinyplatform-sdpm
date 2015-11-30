@@ -182,7 +182,7 @@ public class OrgUserTable extends Table {
 	public final Column ORG_USER_DELETED = new Column(this, "org_user_deleted");
 
 
-	private OrgUserTable() {
+	public OrgUserTable() {
 		super("org_user");
 	}
 

@@ -114,4 +114,12 @@ public interface ProjectService {
     Integer updateProject(Project project);
 
     List<Project> getProjectByStoryId(Integer storyId);
+
+    /**
+     * 根据输入查询
+     * @param condition
+     * @param ids
+     * @return
+     */
+    List<Project> projectInCondition(String condition,Integer ...ids);
 }

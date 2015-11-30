@@ -18,6 +18,7 @@ package org.tinygroup.sdpm.product.dao;
 
 import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
+import org.tinygroup.sdpm.common.condition.ConditionCarrier;
 import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.dao.pojo.StoryCount;
@@ -29,7 +30,7 @@ import java.util.List;
 
 public interface ProductStoryDao extends BaseDao<ProductStory,Integer> {
 	
-	Pager<ProductStory> complexQuery(int start, int limit, ProductStory productStory, final String condition, final OrderBy... orderBys);
+	Pager<ProductStory> complexQuery(int start, int limit, ProductStory productStory, final Condition condition, final OrderBy... orderBys);
 	
 	Pager<ProductStory> complexQueryRel(int start, int limit, ProductStory productStory, final String condition, final OrderBy... orderBys);
 
@@ -57,7 +58,7 @@ public interface ProductStoryDao extends BaseDao<ProductStory,Integer> {
 
 	List<ProductStory> findpNameBysId(Integer id);
 
-	Pager<ProductStory> projectLinkedStory(int start, int limit, ProductStory productStory, final String condition, final OrderBy... orderBys);
+	Pager<ProductStory> projectLinkedStory(int start, int limit, ProductStory productStory, final Condition condition, final OrderBy... orderBys);
 
 	Integer getMaxNo(Integer productId);
 

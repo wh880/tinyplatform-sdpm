@@ -116,4 +116,11 @@ public interface ProjectManager {
     Pager<Project> findPager(int start, int limit, Project project, String order, String ordertype);
 
     List<Project> getProjectByStoryId(Integer storyId);
+    /**
+     * 根据输入查询
+     * @param condition
+     * @param ids
+     * @return
+     */
+    List<Project> projectInCondition(String condition,Integer ...ids);
 }

@@ -246,7 +246,7 @@ public class DocumentAction extends BaseController {
         if ("desc".equals(ordertype)) {
             asc = false;
         }
-        Pager<DocumentDoc> docpager = docservice.findDocRetPager(start, limit, doc, null, searchInfos, groupOperate, NameUtil.resolveNameDesc(order), asc);
+        Pager<DocumentDoc> docpager = docservice.findDocRetPager(start, limit, doc, null,searchInfos, groupOperate, NameUtil.resolveNameDesc(order), asc);
         model.addAttribute("pager", docpager);
         return "/product/data/archivedata.pagelet";
     }

@@ -108,11 +108,10 @@ public class ProjectStoryServiceImpl implements ProjectStoryService {
         for (int i = 0; i < storyList.size(); i++) {
             ids[i] = String.valueOf(storyList.get(i).getStoryId());
         }
-        ConditionCarrier carrier;
+        ConditionCarrier carrier = new ConditionCarrier();
+        carrier.putIdIn("productStory.storyId",ids);
         if (!StringUtil.isBlank(moduleId)) {
-            carrier = ConditionUtils.mergeCarrier("productStory.moduleId", moduleId, "productStory.storyId", ids);
-        } else {
-            carrier = ConditionUtils.mergeCarrier("productStory.storyId", ids);
+            carrier.putModuleIn("productStory.moduleId",moduleId);
         }
         ProductStory story = new ProductStory();
         story.setDeleted(0);

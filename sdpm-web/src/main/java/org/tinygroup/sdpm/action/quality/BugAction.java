@@ -10,6 +10,8 @@ import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.action.product.util.StoryUtil;
 import org.tinygroup.sdpm.action.quality.util.QualityUtil;
+import org.tinygroup.sdpm.common.condition.ConditionCarrier;
+import org.tinygroup.sdpm.common.condition.ConditionUtils;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SqlUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
@@ -123,6 +125,7 @@ public class BugAction extends BaseController {
     @RequestMapping("/bugInfo")
     public String bugInfo(Integer bugId, Integer no, Model model, HttpServletRequest request) {
         QualityBug bug = null;
+        ConditionCarrier carrier = new ConditionCarrier();
         if (no != null) {
             Integer qualityProductId = Integer.parseInt(CookieUtils.getCookie(request, "qualityProductId"));
             if (qualityProductId == null) {
@@ -144,7 +147,11 @@ public class BugAction extends BaseController {
         QualityBug qualityBug = new QualityBug();
         qualityBug.setProductId(bug.getProductId());
         qualityBug.setDeleted(0);
-        Pager<QualityBug> bugs = bugService.findBugListPager(0, 1, " no >" + bugId + " ", qualityBug, "no", false);
+        carrier.put("qualityBug.no",
+                ConditionUtils.Operate.GT.getOperate(),
+                ConditionUtils.CommonFieldType.FIELD_OPERATE.getOperate(),
+                bug.getNo());
+        Pager<QualityBug> bugs = bugService.findBugListPager(0, 1, carrier, qualityBug, "qualityBug.no", false);
         int nextId = 0;
         if (bugs.getRecords().size() > 0) {
             nextId = bugs.getRecords().get(0).getBugId();
@@ -188,22 +195,22 @@ public class BugAction extends BaseController {
         if ("desc".equals(ordertype)) {
             asc = false;
         }
-        String conditions = QualityUtil.getCondition(status, request);
-        String result = SqlUtil.toSql(infos.getInfos(), groupOperate);
-        conditions = StringUtil.isBlank(result) ?
-                conditions : (StringUtil.isBlank(conditions) ? result : conditions + " and " + SqlUtil.toSql(infos.getInfos(), groupOperate));
+        ConditionCarrier carrier = new ConditionCarrier();
+        carrier.putStatus("bugStatus",QualityUtil.getCondition(status, request));
+        carrier.putSearch("bugSearch",infos,groupOperate);
+
         bug.setModuleId((Integer) request.getSession().getAttribute("bugModuleId"));
         bug.setProductId(qualityProductId);
         bug.setDeleted(0);
         if (bug.getModuleId() != null) {
-            conditions = ("".equals(conditions) ? " module_id " : conditions + " and module_id ") + ModuleUtil.getCondition(bug.getModuleId());
+            carrier.putModuleIn("moduleId", String.valueOf(bug.getModuleId()));
             bug.setModuleId(null);
         }
         Pager<QualityBug> bugpager = null;
         if ("tbugneedchange".equals(status)) {
-            bugpager = bugService.findStoryChangedBugs(start, limit, conditions, bug, order, asc);
+            bugpager = bugService.findStoryChangedBugs(start, limit, carrier, bug, order, asc);
         } else {
-            bugpager = bugService.findBugListPager(start, limit, conditions, bug, order, asc);
+            bugpager = bugService.findBugListPager(start, limit, carrier, bug, order, asc);
         }
         model.addAttribute("bugpager", bugpager);
         return "/testManagement/data/BugData.pagelet";

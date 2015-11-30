@@ -13,29 +13,33 @@ import java.util.List;
  */
 public interface DocService {
 	
-	public DocumentDoc createNewDoc(DocumentDoc doc);
+	DocumentDoc createNewDoc(DocumentDoc doc);
 	//Create a new document library-just a name.
-	public DocumentDocLib createNewDocLib(DocumentDocLib doclib);
+	DocumentDocLib createNewDocLib(DocumentDocLib doclib);
 	//Edit document
-	public int editDoc(DocumentDoc doc);
+	int editDoc(DocumentDoc doc);
 	//Edit document library name.
-	public int editDocLibName(DocumentDocLib doclib);
+	int editDocLibName(DocumentDocLib doclib);
 	//find
-	public DocumentDoc findDocById(Integer id);
+	DocumentDoc findDocById(Integer id);
 
-	public DocumentDocLib findDoclibById(Integer id);
+	DocumentDocLib findDoclibById(Integer id);
 	//list
-	public List<DocumentDoc> findDocList(DocumentDoc doc);
+	List<DocumentDoc> findDocList(DocumentDoc doc);
 
-	public List<DocumentDocLib> findDoclibList(DocumentDocLib doclib);
+	List<DocumentDocLib> findDoclibList(DocumentDocLib doclib);
 	//page
-	public Pager<DocumentDoc> findDocRetPager(Integer start,Integer limit,DocumentDoc doc, String statusCondition, SearchInfos conditions,String groupOperate, String sortName,boolean asc);
+	Pager<DocumentDoc> findDocRetPager(Integer start,Integer limit,DocumentDoc doc,Integer moduleId, SearchInfos conditions,String groupOperate, String sortName,boolean asc);
 
-	public Pager<DocumentDocLib> findDoclibRetPager(Integer start, Integer limit, DocumentDocLib doclib, String sortName, boolean asc);
+	Pager<DocumentDoc> findDocRetProductPager(Integer start,Integer limit,DocumentDoc doc, Integer moduleId, SearchInfos conditions,String groupOperate, String sortName,boolean asc);
+
+	Pager<DocumentDoc> findDocRetProjectPager(Integer start,Integer limit,DocumentDoc doc, Integer moduleId, SearchInfos conditions,String groupOperate, String sortName,boolean asc);
+
+	Pager<DocumentDocLib> findDoclibRetPager(Integer start, Integer limit, DocumentDocLib doclib, String sortName, boolean asc);
 	//delete
-	public int deleteDocById(Integer id);
-	public int deleteDoclibById(Integer id);
-	public int[] deleteDocByIds(List<DocumentDoc> ids);
+	int deleteDocById(Integer id);
+	int deleteDoclibById(Integer id);
+	int[] deleteDocByIds(List<DocumentDoc> ids);
 	
 
 }

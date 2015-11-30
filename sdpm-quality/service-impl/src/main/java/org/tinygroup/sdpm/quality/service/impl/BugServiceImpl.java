@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.tinygroup.commons.tools.StringUtil;
+import org.tinygroup.sdpm.common.condition.ConditionCarrier;
 import org.tinygroup.sdpm.quality.biz.inter.BugManager;
 import org.tinygroup.sdpm.quality.dao.pojo.BugCount;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
@@ -51,8 +52,12 @@ public class BugServiceImpl implements BugService {
 		return bugmanager.report(code,productId);
 	}
 
-	public Pager<QualityBug> findStoryChangedBugs(Integer start, Integer limit, String conditions, QualityBug bug, String sortName, boolean asc) {
-		return bugmanager.queryStoryChangedBugs(start,limit,conditions,bug,sortName,asc);
+	public Pager<QualityBug> findStoryChangedBugs(Integer start, Integer limit, ConditionCarrier carrier, QualityBug bug, String sortName, boolean asc) {
+		return bugmanager.queryStoryChangedBugs(start,limit,carrier,bug,sortName,asc);
+	}
+
+	public Pager<QualityBug> findBugListPager(Integer start, Integer limit, ConditionCarrier carrier, QualityBug bug, String sortName, boolean asc) {
+		return bugmanager.findBugListPager(start,limit,carrier,bug,sortName,asc);
 	}
 
 	public int[] batchDeleteBug(List<QualityBug> bugIds) {

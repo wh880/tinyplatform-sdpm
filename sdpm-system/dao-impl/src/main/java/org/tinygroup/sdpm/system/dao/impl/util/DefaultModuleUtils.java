@@ -71,6 +71,13 @@ public class DefaultModuleUtils {
         return stringBuffer.toString();
     }
 
+    public static String getConditionWithoutOperate(Integer moduleId,ModuleListCallBackFunction moduleList){
+        if(moduleId==null||moduleId==0)return "";
+        StringBuffer stringBuffer = new StringBuffer();
+        mergeModuleCondition(stringBuffer, moduleId, moduleList);
+        return StringUtil.isBlank(stringBuffer.toString())?"0":stringBuffer.toString();
+    }
+
     public static String getConditionByRoot(Integer rootId,String moduleType, ModuleListCallBackFunction moduleList){
         if(rootId==null||rootId==0)return "";
         StringBuffer stringBuffer = new StringBuffer();
@@ -89,6 +96,26 @@ public class DefaultModuleUtils {
             stringBuffer.append(")");
         }else{
             return "in (0)";
+        }
+        return stringBuffer.toString();
+    }
+
+    public static String getConditionByRootWithoutOperate(Integer rootId,String moduleType, ModuleListCallBackFunction moduleList){
+        if(rootId==null||rootId==0)return "";
+        StringBuffer stringBuffer = new StringBuffer();
+        SystemModule systemModule = new SystemModule();
+        systemModule.setModuleRoot(rootId);
+        systemModule.setModuleType(moduleType);
+        List<SystemModule> systemModules = moduleList.getModuleList(systemModule);
+        if(systemModules.size()>0){
+            for(SystemModule module : systemModules){
+                if(!stringBuffer.toString().endsWith("(")){
+                    stringBuffer.append(",");
+                }
+                stringBuffer.append(module.getModuleId().toString());
+            }
+        }else{
+            return "0";
         }
         return stringBuffer.toString();
     }
