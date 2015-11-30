@@ -28,7 +28,7 @@
         	#@tr("text-c")
         		<td colspan="5" class="col-2">
         			<div class="col-5"></div>
-        			<button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
+        			<button style="float: left" type="submit" id="submit2" class="commitBtn">保存</button>
         			
         			</td>
         	#end        	

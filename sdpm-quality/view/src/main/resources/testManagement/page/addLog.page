@@ -46,7 +46,7 @@
 	#end
 #end
             <div class="col-6">
-                <button style="float: right" type="submit" id="submit" class="commitBtn">
+                <button style="float: right" type="submit" id="submit2" class="commitBtn">
                 	保存</button>
             </div>
             <div class="col-1">

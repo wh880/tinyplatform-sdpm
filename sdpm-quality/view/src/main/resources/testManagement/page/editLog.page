@@ -44,7 +44,7 @@
 		#end
 	#end
 	<center>
-		<button type="submit" id="submit" class="commitBtn">保存</button>	
+		<button type="submit" id="submit2" class="commitBtn">保存</button>
 	</center>
 	
 #end
