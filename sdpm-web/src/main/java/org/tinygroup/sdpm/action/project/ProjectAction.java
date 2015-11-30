@@ -107,7 +107,6 @@ public class ProjectAction extends BaseController {
      * 新增项目表单保存
      *
      * @param response
-     * @param request
      * @param project
      * @param linkProduct
      * @param whiteList
@@ -116,6 +115,7 @@ public class ProjectAction extends BaseController {
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(HttpServletResponse response, Project project,
                        Integer[] linkProduct, Integer[] whiteList) {
+        project.setProjectOpenedBy(UserUtils.getUserId());
         project.setProjectWhiteList(StringUtil.join(whiteList, ","));
         project = projectService.addProject(project);
         projectProductService.addProjectLinkToProduct(linkProduct, project.getProjectId());

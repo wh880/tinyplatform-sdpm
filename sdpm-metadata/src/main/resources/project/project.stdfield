@@ -41,7 +41,7 @@
   <standard-field id="9cf8e03af53c48378961f3f5a84348ae" name="project_pm" title="项目负责人" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
   <standard-field id="05e4444c3a0b40e398fff266f48eba84" name="project_qd" title="测试负责人" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
   <standard-field id="7eff7598a0f14505a4e7a54a8a146a36" name="project_rd" title="项目发布负责人" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
-  <standard-field id="24ab9c69d3f64babbfc9a345d0cac3eb" name="project_team" title="团队成员" business-type-id="a30696c1e44441ecad77a832afd3731d">
+  <standard-field id="24ab9c69d3f64babbfc9a345d0cac3eb" name="project_team" title="团队成员" business-type-id="27ebfcdc558c477da425a46e566d4637" default="">
     <description></description>
   </standard-field>
   <standard-field id="779f3ff51d8444c88cfb9542ad85060a" name="project_acl" title="访问控制" business-type-id="b6a9bc04774b40859a7dd8c6fd52a629" default="0">
