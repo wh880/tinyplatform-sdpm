@@ -37,7 +37,6 @@ public interface StorySpecManager {
      * 根据需求对象查找
      *
      * @param storySpec
-     * @param orderBies
      * @return
      */
     List<ProductStorySpec> findList(ProductStorySpec storySpec, String order, String ordertype);
@@ -48,7 +47,6 @@ public interface StorySpecManager {
      * @param start
      * @param limit
      * @param storySpec
-     * @param orderBies
      * @return
      */
     Pager<ProductStorySpec> findPager(int start, int limit, ProductStorySpec storySpec, String order, String ordertype);

@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.tinygroup.commons.tools.StringUtil;
+import org.tinygroup.sdpm.common.condition.ConditionCarrier;
+import org.tinygroup.sdpm.common.condition.ConditionUtils;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.org.dao.pojo.OrgRole;
 import org.tinygroup.sdpm.org.service.inter.RoleService;
@@ -174,10 +176,11 @@ public class ProductLineAction extends BaseController {
     public String list(ProductLine productLine, Integer start, Integer pagesize,
                        @RequestParam(required = false, defaultValue = "productLineId") String order,
                        @RequestParam(required = false, defaultValue = "asc") String ordertype, Integer status, Model model) {
-        String condition = getStatusCondition(status);
+        ConditionCarrier carrier = new ConditionCarrier();
+        mergeStatusCondition(carrier,status);
 
         Integer[] ids = productLineService.getUserProductLineIds(UserUtils.getUserId());
-        Pager<ProductLine> pagerProductLine = productLineService.findProductLinePagerInIds(start, pagesize, condition, productLine, ids, order, ordertype);
+        Pager<ProductLine> pagerProductLine = productLineService.findProductLinePagerInIds(start, pagesize, carrier, productLine, ids, order, ordertype);
 
         model.addAttribute("productLine", pagerProductLine);
         return "/productLine/data/productLinedata.pagelet";
@@ -217,7 +220,6 @@ public class ProductLineAction extends BaseController {
 
     @RequestMapping("/to")
     public String to(HttpServletRequest request, Model model) {
-        List<ProductLine> list = ProductUtils.getProductLineList();
         String query = request.getQueryString();
         if (StringUtil.isBlank(query) || !query.contains("status")) {
             model.addAttribute("status", 1);
@@ -226,22 +228,14 @@ public class ProductLineAction extends BaseController {
     }
 
     @RequestMapping("/listProduct")
-    public String listProduct(HttpServletRequest request) {
+    public String listProduct() {
         return "/productLine/page/project/productLine.page";
 
     }
 
     @ResponseBody
-    @RequestMapping("/productLineList")
-    public List<ProductLine> findProductLineList(ProductLine productLine) {
-        List<ProductLine> list = productLineService.findList(new ProductLine());
-        return list;
-    }
-
-
-    @ResponseBody
     @RequestMapping("/treeData")
-    public List data(String check) {
+    public List treeData() {
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
         Product product = new Product();
         product.setDeleted(FieldUtil.DELETE_NO);
@@ -338,19 +332,31 @@ public class ProductLineAction extends BaseController {
         return list;
     }
 
-    private String getStatusCondition(Integer status) {
-        if (status == null || status < 1) return "";
+    private void mergeStatusCondition(ConditionCarrier carrier, Integer status) {
+        if (status == null || status < 1) return ;
         switch (status) {
             case 1:
-                return "";
+                return ;
             case 2:
-                return " product_line_owner = '" + UserUtils.getUserId() + "' ";
+                carrier.put("productLine.productLineOwner",
+                        ConditionUtils.Operate.EQ.getOperate(),
+                        ConditionUtils.CommonFieldType.FIELD_OPERATE.getOperate(),
+                        UserUtils.getUserId());
+                break;
             case 3:
-                return " product_line_quality_manager = '" + UserUtils.getUserId() + "' ";
+                carrier.put("productLine.productLineQualityManager",
+                        ConditionUtils.Operate.EQ.getOperate(),
+                        ConditionUtils.CommonFieldType.FIELD_OPERATE.getOperate(),
+                        UserUtils.getUserId());
+                break;
             case 4:
-                return " product_line_delivery_manager = '" + UserUtils.getUserId() + "' ";
+                carrier.put("productLine.productLineDeliveryManager",
+                        ConditionUtils.Operate.EQ.getOperate(),
+                        ConditionUtils.CommonFieldType.FIELD_OPERATE.getOperate(),
+                        UserUtils.getUserId());
+                break;
         }
-        return "";
+        return;
     }
 
     @ResponseBody

@@ -2,6 +2,7 @@ package org.tinygroup.sdpm.productLine.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.tinygroup.sdpm.common.condition.ConditionCarrier;
 import org.tinygroup.sdpm.product.biz.inter.ProductManager;
 import org.tinygroup.sdpm.productLine.biz.inter.ProductLineManager;
 import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
@@ -33,29 +34,14 @@ public class ProductLineServiceImpl implements ProductLineService {
         return productLineManager.find(productLineId);
     }
 
-    public int[] updatebatchProductLine(List<ProductLine> productLine) {
-
-        return productLineManager.updateBatch(productLine);
-    }
 
     public int deleteProductLine(Integer productLineId) {
 
         return productLineManager.delete(productLineId);
     }
 
-    public List<ProductLine> findProductLineList(ProductLine productLine, String order, String ordertype) {
-
-        return productLineManager.findlist(productLine, order, ordertype);
-    }
-
-    public Pager<ProductLine> findProductLinePager(int page, int pagesize, String condition, ProductLine productLine, String order,
-                                                   String ordertype) {
-
-        return productLineManager.findPager(page, pagesize, condition, productLine, order, ordertype);
-    }
-
-    public Pager<ProductLine> findProductLinePagerInIds(int start, int limit, String condition, ProductLine productLine, Integer[] ids, String order, String ordertype) {
-        return productLineManager.findProductLinePagerInIds(start, limit, condition, productLine, ids, order, ordertype);
+    public Pager<ProductLine> findProductLinePagerInIds(int start, int limit, ConditionCarrier carrier, ProductLine productLine, Integer[] ids, String order, String ordertype) {
+        return productLineManager.findProductLinePagerInIds(start, limit, carrier, productLine, ids, order, ordertype);
     }
 
     public List<ProductLine> getProductLineByIds(Integer... ids) {

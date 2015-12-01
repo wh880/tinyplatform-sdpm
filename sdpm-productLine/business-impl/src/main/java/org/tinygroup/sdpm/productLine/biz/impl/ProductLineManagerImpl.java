@@ -5,6 +5,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
+import org.tinygroup.sdpm.common.condition.CallBackFunction;
+import org.tinygroup.sdpm.common.condition.ConditionCarrier;
+import org.tinygroup.sdpm.common.condition.ConditionUtils;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.org.dao.OrgRoleUserDao;
 import org.tinygroup.sdpm.org.dao.pojo.OrgRoleUser;
@@ -12,6 +15,7 @@ import org.tinygroup.sdpm.productLine.biz.inter.ProductLineManager;
 import org.tinygroup.sdpm.productLine.dao.ProductLineDao;
 import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.tinysqldsl.Pager;
+import org.tinygroup.tinysqldsl.base.Column;
 import org.tinygroup.tinysqldsl.base.Condition;
 import org.tinygroup.tinysqldsl.base.FragmentSql;
 
@@ -49,37 +53,14 @@ public class ProductLineManagerImpl implements ProductLineManager {
         return productLineDao.softDelete(productLineId);
     }
 
-    public List<ProductLine> findlist(ProductLine productLine, String order, String ordertype) {
-        if (StringUtil.isBlank(order)) {
-            return productLineDao.query(productLine);
-        }
-        return productLineDao.query(productLine, new OrderBy(NameUtil.resolveNameDesc(order), !("desc".equals(ordertype)) ? true : false));
-    }
-
-    public Pager<ProductLine> findPager(int start, int pagesize, String condition, ProductLine productLine, String order,
-                                        String ordertype) {
-        Condition condition1 = null;
-        if (!StringUtil.isBlank(condition)) {
-            condition1 = FragmentSql.fragmentCondition(condition);
-        }
-        if (!StringUtil.isBlank(order)) {
-            return productLineDao.findList(start, pagesize, condition1, productLine,
-                    new OrderBy("product_line." + NameUtil.resolveNameDesc(order), !("desc".equals(ordertype)) ? true : false));
-        }
-        return productLineDao.findList(start, pagesize, condition1, productLine);
-    }
-
-    public Pager<ProductLine> findProductLinePagerInIds(int start, int limit, String condition, ProductLine productLine, Integer[] ids, String order, String ordertype) {
+    public Pager<ProductLine> findProductLinePagerInIds(int start, int limit, ConditionCarrier carrier, ProductLine productLine, Integer[] ids, String order, String ordertype) {
         if (ids == null || ids.length == 0) return new Pager<ProductLine>(0, 0, new ArrayList<ProductLine>());
-        Condition condition1 = null;
-        if (!StringUtil.isBlank(condition)) {
-            condition1 = FragmentSql.fragmentCondition(condition);
-        }
+
         if (!StringUtil.isBlank(order)) {
-            return productLineDao.findList(start, limit, condition1, productLine, ids,
+            return productLineDao.findList(start, limit, mergeCondition(carrier), productLine, ids,
                     new OrderBy("product_line." + NameUtil.resolveNameDesc(order), !("desc".equals(ordertype)) ? true : false));
         }
-        return productLineDao.findList(start, limit, condition1, productLine, ids);
+        return productLineDao.findList(start, limit, mergeCondition(carrier), productLine, ids);
     }
 
     public List<ProductLine> getProductLineByIds(Integer... ids) {
@@ -136,5 +117,12 @@ public class ProductLineManagerImpl implements ProductLineManager {
         return productLineWithOutRole;
     }
 
+    private Condition mergeCondition(ConditionCarrier carrier){
+        return ConditionUtils.mergeCondition(carrier, new CallBackFunction() {
+            public Condition process(ConditionCarrier carrier, String field, Column column) {
+                return null;
+            }
+        });
+    }
 
 }

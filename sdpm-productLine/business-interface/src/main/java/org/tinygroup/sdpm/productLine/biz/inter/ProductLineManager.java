@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.productLine.biz.inter;
 
+import org.tinygroup.sdpm.common.condition.ConditionCarrier;
 import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -55,29 +56,7 @@ public interface ProductLineManager {
      */
     List<ProductLine> findList(ProductLine productLine);
 
-    /**
-     * 根据对象查找(排序)
-     *
-     * @param productLine
-     * @param order
-     * @param ordertype
-     * @return
-     */
-    List<ProductLine> findlist(ProductLine productLine, String order, String ordertype);
-
-    /**
-     * 对象查找(分页、排序)
-     *
-     * @param page
-     * @param pagesize
-     * @param productLine
-     * @param order
-     * @param ordertype
-     * @return
-     */
-    Pager<ProductLine> findPager(int page, int pagesize, String condition, ProductLine productLine, String order, String ordertype);
-
-    Pager<ProductLine> findProductLinePagerInIds(int start, int limit, String condition, ProductLine productLine, Integer[] ids, String order, String ordertype);
+    Pager<ProductLine> findProductLinePagerInIds(int start, int limit, ConditionCarrier carrier, ProductLine productLine, Integer[] ids, String order, String ordertype);
 
     List<ProductLine> getProductLineByIds(Integer... ids);
 
