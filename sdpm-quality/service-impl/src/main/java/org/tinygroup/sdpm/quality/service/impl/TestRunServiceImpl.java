@@ -2,6 +2,7 @@ package org.tinygroup.sdpm.quality.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.tinygroup.sdpm.common.condition.ConditionCarrier;
 import org.tinygroup.sdpm.quality.biz.inter.TestRunManager;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityTestRun;
 import org.tinygroup.sdpm.quality.service.inter.TestRunService;
@@ -39,8 +40,8 @@ public class TestRunServiceImpl implements TestRunService {
         return testrunmanager.delete(runId);
     }
 
-    public Pager<QualityTestRun> findTestRunPager(Integer start, Integer limit, QualityTestRun testRun, String condition, String sortName, boolean asc) {
-        return testrunmanager.findPager(start, limit, testRun, condition, sortName, asc);
+    public Pager<QualityTestRun> findTestRunPager(Integer start, Integer limit, QualityTestRun testRun, ConditionCarrier carrier, String sortName, boolean asc) {
+        return testrunmanager.findPager(start, limit, testRun, carrier, sortName, asc);
     }
 
 }

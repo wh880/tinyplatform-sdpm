@@ -2,6 +2,7 @@ package org.tinygroup.sdpm.service.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.tinygroup.sdpm.common.condition.ConditionCarrier;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.service.biz.inter.RequestManager;
@@ -44,8 +45,8 @@ public class RequestServiceImpl implements RequestService {
     }
 
 
-    public Pager<ServiceRequest> findRequestPager(Integer start, Integer limit, Integer status, ServiceRequest clientRequest, Integer treeId, String groupOperate, SearchInfos searchInfos, String order, String ordertype) {
-        return requestManager.findPager(start, limit, status, clientRequest, treeId, groupOperate, searchInfos, order, ordertype);
+    public Pager<ServiceRequest> findRequestPager(Integer start, Integer limit, Integer status, ServiceRequest clientRequest, Integer treeId, ConditionCarrier carrier, String order, String ordertype) {
+        return requestManager.findPager(start, limit, status, clientRequest, treeId,carrier , order, ordertype);
     }
 
     public Pager<ServiceRequest> findOperationByMe(Integer start, Integer limit, OrgUser user, ServiceRequest clientRequest, Integer treeId, Integer operation, String order, String ordertype) {

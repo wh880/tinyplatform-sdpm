@@ -26,7 +26,7 @@ import java.util.List;
 
 public interface QualityTestCaseDao extends BaseDao<QualityTestCase, Integer> {
 
-    Pager<QualityTestCase> queryPagerRel(int start, int limit, QualityTestCase qualityTestCase, final String condition, final OrderBy... orderArgs);
+    Pager<QualityTestCase> queryPagerRel(int start, int limit, QualityTestCase qualityTestCase, final Condition condition, final OrderBy... orderArgs);
 
     Pager<QualityTestCase> queryStoryChangedCase(int start, int limit, QualityTestCase qualityTestCase, Condition condition, final OrderBy... orderArgs);
 

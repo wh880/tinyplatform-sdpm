@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.quality.biz.inter;
 
+import org.tinygroup.sdpm.common.condition.ConditionCarrier;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityTestTask;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -57,6 +58,6 @@ public interface TestTaskManager {
      * @param asc
      * @return
      */
-    Pager<QualityTestTask> findPager(Integer start, Integer limit, QualityTestTask testtask, String condition, String sortName, boolean asc);
+    Pager<QualityTestTask> findPager(Integer start, Integer limit, QualityTestTask testtask, ConditionCarrier carrier, String sortName, boolean asc);
 
 }

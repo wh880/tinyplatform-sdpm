@@ -60,8 +60,22 @@ public class ConditionUtils {
             Condition condition = null;
             Column column = new Column(NameUtil.resolveNameDesc(field));
             if(carrier.getFieldType(field).equals(ConditionUtils.CommonFieldType.MODULE.getCommonField())){
-                condition = callBackFunction.process(carrier,field,column);
-            }else if(carrier.getFieldType(field).equals(ConditionUtils.CommonFieldType.SEARCH.getCommonField())){
+                boolean isIn = carrier.getOperate(field).equals(ConditionUtils.Operate.IN.getOperate());
+                String moduleId = (String) carrier.getValue(field)[0];
+                if (moduleId.contains("p")) {
+                    if (isIn) {
+                        condition = column.in(callBackFunction.moduleRoot(moduleId));
+                    } else {
+                        condition = column.notIn(callBackFunction.moduleRoot(moduleId));
+                    }
+                } else {
+                    if (isIn) {
+                        condition = column.in(callBackFunction.module(moduleId));
+                    } else {
+                        condition = column.notIn(callBackFunction.module(moduleId));
+                    }
+                }
+             }else if(carrier.getFieldType(field).equals(ConditionUtils.CommonFieldType.SEARCH.getCommonField())){
                 if(carrier.getValue(field)[0]!=null){
                     String result = SqlUtil.toSql(((SearchInfos) carrier.getValue(field)[0]).getInfos(), (String) carrier.getValue(field)[1]);
                     if(!StringUtil.isBlank(result)){

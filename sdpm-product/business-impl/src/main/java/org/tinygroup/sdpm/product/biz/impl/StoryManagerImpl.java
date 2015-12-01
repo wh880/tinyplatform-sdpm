@@ -198,24 +198,12 @@ public class StoryManagerImpl implements StoryManager {
 
     private Condition mergeCondition(ConditionCarrier carrier){
         return ConditionUtils.mergeCondition(carrier, new CallBackFunction() {
-            public Condition process(ConditionCarrier carrier, String field, Column column) {
-                Condition condition = null;
-                boolean isIn = carrier.getOperate(field).equals(ConditionUtils.Operate.IN.getOperate());
-                String moduleId = (String) carrier.getValue(field)[0];
-                if (moduleId.contains("p")) {
-                    if (isIn) {
-                        condition = column.in(ModuleUtil.getConditionByRootWithoutOperate(Integer.parseInt(moduleId.substring(1)), "story"));
-                    } else {
-                        condition = column.notIn(ModuleUtil.getConditionByRootWithoutOperate(Integer.parseInt(moduleId.substring(1)), "story"));
-                    }
-                } else {
-                    if (isIn) {
-                        condition = column.in(ModuleUtil.getConditionWithoutOperate(Integer.parseInt(moduleId)));
-                    } else {
-                        condition = column.notIn(ModuleUtil.getConditionWithoutOperate(Integer.parseInt(moduleId)));
-                    }
-                }
-                return condition;
+            public String moduleRoot(String moduleId) {
+                return ModuleUtil.getConditionByRootWithoutOperate(Integer.parseInt(moduleId.substring(1)),"story");
+            }
+
+            public String module(String moduleId) {
+                return ModuleUtil.getConditionWithoutOperate(Integer.parseInt(moduleId));
             }
         });
     }

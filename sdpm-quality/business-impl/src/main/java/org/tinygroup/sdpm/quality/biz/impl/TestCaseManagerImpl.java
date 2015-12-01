@@ -5,6 +5,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
+import org.tinygroup.sdpm.common.condition.CallBackFunction;
+import org.tinygroup.sdpm.common.condition.ConditionCarrier;
+import org.tinygroup.sdpm.common.condition.ConditionUtils;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SqlUtil;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
@@ -12,6 +15,7 @@ import org.tinygroup.sdpm.quality.biz.inter.TestCaseManager;
 import org.tinygroup.sdpm.quality.dao.QualityTestCaseDao;
 import org.tinygroup.sdpm.quality.dao.QualityTestRunDao;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityTestCase;
+import org.tinygroup.sdpm.system.dao.impl.util.ModuleUtil;
 import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.tinysqldsl.base.Condition;
 import org.tinygroup.tinysqldsl.base.FragmentSql;
@@ -78,37 +82,42 @@ public class TestCaseManagerImpl implements TestCaseManager {
         return testcasedao.queryPager(start, limit, testcase, order);
     }
 
-    public Pager<QualityTestCase> findPagerRel(Integer start, Integer limit, QualityTestCase testcase, String statusCondition, SearchInfos conditions,
-                                               String groupOperate, String columnName, boolean asc) {
+    public Pager<QualityTestCase> findPagerRel(Integer start, Integer limit, QualityTestCase testcase, ConditionCarrier carrier,String columnName, boolean asc) {
 
-        String condition = conditions != null ? SqlUtil.toSql(conditions.getInfos(), groupOperate) : "";
-        condition = condition != null && !"".equals(condition) ? (statusCondition != null && !"".equals(statusCondition) ? condition + " and "
-                + statusCondition : condition)
-                : statusCondition;
-        Condition condition1 = null;
-        OrderBy orderBy = null;
-        if (columnName != null && !"".equals(columnName)) {
-            orderBy = new OrderBy("quality_test_case." + NameUtil.resolveNameDesc(columnName), asc);
-        }
+        Condition condition = mergeCondition(carrier);
         if (condition != null && !"".equals(condition)) {
-            return testcasedao.queryPagerRel(start, limit, testcase, condition, orderBy);
-        }
-        return testcasedao.queryPager(start, limit, testcase, orderBy);
-    }
-
-    public Pager<QualityTestCase> findStoryChangedCase(Integer start, Integer limit, QualityTestCase testcase, String condition, String columnName, boolean asc) {
-        Condition condition1 = null;
-        if (!StringUtil.isBlank(condition)) {
-            condition1 = FragmentSql.fragmentCondition(condition);
+            if (!StringUtil.isBlank(columnName)) {
+                return testcasedao.queryPagerRel(start, limit, testcase, condition, new OrderBy("quality_test_case." + NameUtil.resolveNameDesc(columnName), asc));
+            }
         }
         if (StringUtil.isBlank(columnName)) {
-            testcasedao.queryStoryChangedCase(start, limit, testcase, condition1);
+            testcasedao.queryPager(start, limit, testcase);
         }
-        return testcasedao.queryStoryChangedCase(start, limit, testcase, condition1, new OrderBy(columnName, asc));
+        return testcasedao.queryPager(start, limit, testcase, new OrderBy("quality_test_case." + NameUtil.resolveNameDesc(columnName), asc));
+    }
+
+    public Pager<QualityTestCase> findStoryChangedCase(Integer start, Integer limit, QualityTestCase testcase, ConditionCarrier carrier, String columnName, boolean asc) {
+
+        if (StringUtil.isBlank(columnName)) {
+            testcasedao.queryStoryChangedCase(start, limit, testcase, mergeCondition(carrier));
+        }
+        return testcasedao.queryStoryChangedCase(start, limit, testcase, mergeCondition(carrier), new OrderBy(columnName, asc));
     }
 
     public List<Integer> getStoryIds(QualityTestCase t) {
 
         return testcasedao.getStoryIds(t);
+    }
+
+    private Condition mergeCondition(ConditionCarrier carrier){
+        return ConditionUtils.mergeCondition(carrier, new CallBackFunction() {
+            public String moduleRoot(String moduleId) {
+                return ModuleUtil.getConditionByRootWithoutOperate(Integer.parseInt(moduleId.substring(1)), "story");
+            }
+
+            public String module(String moduleId) {
+                return ModuleUtil.getConditionWithoutOperate(Integer.parseInt(moduleId));
+            }
+        });
     }
 }

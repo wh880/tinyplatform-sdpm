@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.quality.service.inter;
 
+import org.tinygroup.sdpm.common.condition.ConditionCarrier;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityTestRun;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -37,5 +38,5 @@ public interface TestRunService {
 
     int delete(Integer runId);
 
-    Pager<QualityTestRun> findTestRunPager(Integer start, Integer limit, QualityTestRun testRun, String condition, String sortName, boolean asc);
+    Pager<QualityTestRun> findTestRunPager(Integer start, Integer limit, QualityTestRun testRun, ConditionCarrier carrier, String sortName, boolean asc);
 }

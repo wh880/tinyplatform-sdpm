@@ -190,13 +190,11 @@ public class FaqAction extends BaseController {
 
     /**
      * faq左侧树的数据来源
-     *
-     * @param check
      * @return
      */
     @ResponseBody
     @RequestMapping("/data")
-    public List data(String check) {
+    public List data() {
         ServiceFaqType faq = new ServiceFaqType();
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
         List<ServiceFaqType> faqs = faqTypeService.getFaqTypeList(faq);

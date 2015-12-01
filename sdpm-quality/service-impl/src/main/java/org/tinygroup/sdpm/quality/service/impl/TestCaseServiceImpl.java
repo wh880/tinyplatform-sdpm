@@ -2,6 +2,7 @@ package org.tinygroup.sdpm.quality.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.tinygroup.sdpm.common.condition.ConditionCarrier;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.quality.biz.inter.TestCaseManager;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityTestCase;
@@ -50,13 +51,12 @@ public class TestCaseServiceImpl implements TestCaseService {
         return testcasemanager.findPager(start, limit, testcase, sortName, asc);
     }
 
-    public Pager<QualityTestCase> findTestCasePager(Integer start, Integer limit, QualityTestCase testcase, String statusCondition, SearchInfos conditions,
-                                                    String groupOperate, String columnName, boolean asc) {
-        return testcasemanager.findPagerRel(start, limit, testcase, statusCondition, conditions, groupOperate, columnName, asc);
+    public Pager<QualityTestCase> findTestCasePager(Integer start, Integer limit, QualityTestCase testcase, ConditionCarrier carrier, String columnName, boolean asc) {
+        return testcasemanager.findPagerRel(start, limit, testcase, carrier,columnName, asc);
     }
 
-    public Pager<QualityTestCase> findStoryChangedCase(Integer start, Integer limit, QualityTestCase testcase, String condition, String columnName, boolean asc) {
-        return testcasemanager.findStoryChangedCase(start, limit, testcase, condition, columnName, asc);
+    public Pager<QualityTestCase> findStoryChangedCase(Integer start, Integer limit, QualityTestCase testcase, ConditionCarrier carrier, String columnName, boolean asc) {
+        return testcasemanager.findStoryChangedCase(start, limit, testcase, carrier, columnName, asc);
     }
 
     public List<Integer> getStoryIds(QualityTestCase t) {

@@ -7,5 +7,6 @@ import org.tinygroup.tinysqldsl.base.Condition;
  * Created by wangll13383 on 2015/11/5.
  */
 public interface CallBackFunction {
-    Condition process(ConditionCarrier carrier, String field, Column column);
+    String moduleRoot(String moduleId);
+    String module(String moduleId);
 }

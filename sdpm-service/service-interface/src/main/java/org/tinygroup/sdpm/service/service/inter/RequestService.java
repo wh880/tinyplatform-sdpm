@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.service.service.inter;
 
+import org.tinygroup.sdpm.common.condition.ConditionCarrier;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceRequest;
@@ -65,7 +66,7 @@ public interface RequestService {
      *
      * @return
      */
-    Pager<ServiceRequest> findRequestPager(Integer start, Integer limit, Integer status, ServiceRequest clientRequest, Integer tree, String groupOperate, SearchInfos searchInfos, String order, String ordertype);
+    Pager<ServiceRequest> findRequestPager(Integer start, Integer limit, Integer status, ServiceRequest clientRequest, Integer tree, ConditionCarrier carrier, String order, String ordertype);
 
     /**
      * 查找数据库的由我解决或由我回复的记录，区别在于operation

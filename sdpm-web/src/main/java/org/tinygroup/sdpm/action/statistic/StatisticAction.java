@@ -97,14 +97,6 @@ public class StatisticAction extends BaseController {
 
     @RequestMapping("product/invest")
     public String productInvest(Model model, Integer deleted) {
-//        List<Product> products = productService.findProductList(new Product());
-//        Map<Product,List<ProjectProduct>> map = new HashMap<Product, List<ProjectProduct>>();
-//
-//        for(int i=0,n=products.size();i<n;i++){
-//            List<ProjectProduct> projectProducts=projectProductService.findProjects(products.get(i).getProductId());
-//            map.put(products.get(i),projectProducts);
-//        }
-//        model.addAttribute("productmap",map);
         List<ProductProject> productProjects = statisticService.productProjects(new ProductProject(), deleted != null && deleted == 1 ? true : false, UserUtils.getUserId());
         model.addAttribute("proPros", productProjects);
         model.addAttribute("order", "2");

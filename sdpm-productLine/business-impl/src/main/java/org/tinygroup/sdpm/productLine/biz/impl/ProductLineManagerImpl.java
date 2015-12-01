@@ -118,11 +118,7 @@ public class ProductLineManagerImpl implements ProductLineManager {
     }
 
     private Condition mergeCondition(ConditionCarrier carrier){
-        return ConditionUtils.mergeCondition(carrier, new CallBackFunction() {
-            public Condition process(ConditionCarrier carrier, String field, Column column) {
-                return null;
-            }
-        });
+        return ConditionUtils.mergeCondition(carrier, null);
     }
 
 }

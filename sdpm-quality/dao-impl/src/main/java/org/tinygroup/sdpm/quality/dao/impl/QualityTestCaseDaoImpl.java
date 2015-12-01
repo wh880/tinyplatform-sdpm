@@ -240,7 +240,7 @@ public class QualityTestCaseDaoImpl extends TinyDslDaoSupport implements Quality
         });
     }
 
-    public Pager<QualityTestCase> queryPagerRel(int start, int limit, QualityTestCase qualityTestCase, final String condition, final OrderBy... orderArgs) {
+    public Pager<QualityTestCase> queryPagerRel(int start, int limit, QualityTestCase qualityTestCase, final Condition condition, final OrderBy... orderArgs) {
         if (qualityTestCase == null) {
             qualityTestCase = new QualityTestCase();
         }
@@ -251,7 +251,7 @@ public class QualityTestCaseDaoImpl extends TinyDslDaoSupport implements Quality
                         from(FragmentSelectItemSql.fragmentFrom("quality_test_case left join org_user o on o.org_user_id = quality_test_case.case_opened_by left join org_user o2 on o2.org_user_id = quality_test_case.case_last_runner"))
                         .where(and(
 
-                                fragmentCondition(condition),
+                                condition,
                                 QUALITY_TEST_CASETABLE.PRODUCT_ID.eq(t.getProductId()),
                                 QUALITY_TEST_CASETABLE.MODULE_ID.eq(t.getModuleId()),
                                 QUALITY_TEST_CASETABLE.CASE_PATH.eq(t.getCasePath()),

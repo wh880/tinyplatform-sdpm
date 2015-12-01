@@ -86,7 +86,6 @@ public class HolidayAction extends BaseController {
 
     @RequestMapping(value = "holiday/save", method = RequestMethod.POST)
     public String saveHoliday(@RequestParam(required = false) String selectList, Holiday holiday, Model model) {
-        SystemAction action = new SystemAction();
         if (holiday.getHolidayId() == null) {
             List<Holiday> holidayList = new ArrayList<Holiday>();
             String[] dates = selectList.split(",");
@@ -171,7 +170,7 @@ public class HolidayAction extends BaseController {
     }
 
     @RequestMapping("holiday/action")
-    public String holidayAction(SystemAction action, Model model) {
+    public String holidayAction(Model model) {
         Holiday holiday = new Holiday();
         Pager<Holiday> historyPage = holidayService.findByPage(0, 7, holiday, "systemAction.actionDate", false);
         List<Holiday> histories = historyPage.getRecords();

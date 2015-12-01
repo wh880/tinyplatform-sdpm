@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.tinygroup.sdpm.common.condition.ConditionCarrier;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
@@ -96,13 +97,15 @@ public class RequestAction extends BaseController {
                            @RequestParam(required = false, defaultValue = "clientRequestId") String order,
                            @RequestParam(required = false, defaultValue = "desc", value = "ordertype") String orderType) {
 
+        ConditionCarrier carrier = new ConditionCarrier();
         if (operation != null) {
             OrgUser user = UserUtils.getUser();
             Pager<ServiceRequest> pager = requestService.findOperationByMe(start, limit, user, clientRequest, treeId, operation, order, orderType);
             model.addAttribute("pager", pager);
             return "service/serviceReq/requestTableData.pagelet";
         }
-        Pager<ServiceRequest> pager = requestService.findRequestPager(start, limit, status, clientRequest, treeId, groupOperate, searchInfos, order, orderType);
+        carrier.putSearch("requestSearch", searchInfos, groupOperate);
+        Pager<ServiceRequest> pager = requestService.findRequestPager(start, limit, status, clientRequest, treeId, carrier, order, orderType);
         model.addAttribute("pager", pager);
         return "service/serviceReq/requestTableData.pagelet";
     }
@@ -331,12 +334,9 @@ public class RequestAction extends BaseController {
         return resultMap(true, "删除成功");
     }
 
-//    @RequiresPermissions("request-batchdel")
-
     @RequestMapping(value = "/overview")
     public String overview(Integer id, Model model) {
         if (id != null) {
-//             serviceRequest = new ServiceRequest();
             ServiceRequest serviceRequest = requestService.findRequest(id);
             if (serviceRequest.getClientId() != null) {
                 ServiceClient serviceClient = clientService.findClient(serviceRequest.getClientId());

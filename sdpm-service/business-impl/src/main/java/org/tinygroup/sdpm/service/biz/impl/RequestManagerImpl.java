@@ -5,6 +5,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
+import org.tinygroup.sdpm.common.condition.CallBackFunction;
+import org.tinygroup.sdpm.common.condition.ConditionCarrier;
+import org.tinygroup.sdpm.common.condition.ConditionUtils;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SqlUtil;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
@@ -58,14 +61,12 @@ public class RequestManagerImpl implements RequestManager {
     }
 
     public Pager<ServiceRequest> findPager(Integer start, Integer limit, Integer status, ServiceRequest serviceRequest,
-                                           Integer treeId, String groupOperate, SearchInfos conditions, String order, String ordertype) {
-        String condition = conditions != null ? SqlUtil.toSql(conditions.getInfos(), groupOperate) : "";
-        Condition condition1 = null;
-        if (!StringUtil.isBlank(condition)) {
-            condition1 = fragmentCondition(condition);
-        }
+                                           Integer treeId, ConditionCarrier carrier, String order, String ordertype) {
 
-        return requestDao.queryPagerBy(start, limit, serviceRequest, status, treeId, condition1, (order == null || "".equals(order)) ? null : new OrderBy(NameUtil.resolveNameDesc(order), !("desc".equals(ordertype)) ? true : false));
+        if(StringUtil.isBlank(order)){
+            return requestDao.queryPagerBy(start, limit, serviceRequest, status, treeId, mergeCondition(carrier));
+        }
+        return requestDao.queryPagerBy(start, limit, serviceRequest, status, treeId, mergeCondition(carrier), new OrderBy(NameUtil.resolveNameDesc(order), !("desc".equals(ordertype)) ? true : false));
     }
 
     public Pager<ServiceRequest> findOperationByMe(Integer start, Integer limit, OrgUser user, ServiceRequest serviceRequest, Integer treeId, Integer operation,
@@ -96,5 +97,9 @@ public class RequestManagerImpl implements RequestManager {
 
     public List<ServiceRequest> requestInCondition(String condition) {
         return requestDao.requestInCondition(condition);
+    }
+
+    private Condition mergeCondition(ConditionCarrier carrier) {
+        return ConditionUtils.mergeCondition(carrier, null);
     }
 }

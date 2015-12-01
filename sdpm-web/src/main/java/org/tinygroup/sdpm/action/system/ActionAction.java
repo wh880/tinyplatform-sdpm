@@ -28,14 +28,9 @@ public class ActionAction extends BaseController {
 
     @RequestMapping("find")
     public String find(SystemAction action, Model model) {
-//		action.setActionObjectType("user");
+
         List<SystemAction> actions = actionService.findAction(action, null, false);
-//		Integer[] ids = new Integer[actions.size()];
-//		for(int i=0,n=actions.size();i<n;i++){
-//			ids[i]=actions.get(i).getActionObjectId();
-//		}
-//		List<Holiday> holidays=holidayService.findHolidayByIds(ids);
-//		model.addAttribute("holiday", holidays);
+
         model.addAttribute("action", actions);
         return "/system/page/holiday/holiday-dynamic.pagelet";
     }

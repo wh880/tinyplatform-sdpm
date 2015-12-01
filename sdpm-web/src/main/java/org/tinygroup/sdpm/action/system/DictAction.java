@@ -89,7 +89,6 @@ public class DictAction extends BaseController {
             systemDict = dictService.addDict(systemDict);
             DictUtil.reLoad();
         } else {
-            SystemDict oldDict = dictService.findDict(systemDict.getDictId());
             dictService.updateDict(systemDict);
             DictUtil.reLoad();
         }

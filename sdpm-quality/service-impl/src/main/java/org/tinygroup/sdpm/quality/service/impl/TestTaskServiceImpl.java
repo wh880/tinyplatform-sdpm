@@ -2,6 +2,7 @@ package org.tinygroup.sdpm.quality.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.tinygroup.sdpm.common.condition.ConditionCarrier;
 import org.tinygroup.sdpm.quality.biz.inter.TestTaskManager;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityTestTask;
 import org.tinygroup.sdpm.quality.service.inter.TestTaskService;
@@ -35,8 +36,8 @@ public class TestTaskServiceImpl implements TestTaskService {
         return testtaskmanager.delete(id);
     }
 
-    public Pager<QualityTestTask> findTestTaskPager(Integer start, Integer limit, QualityTestTask testtask, String condition, String sortName, boolean asc) {
-        return testtaskmanager.findPager(start, limit, testtask, condition, sortName, asc);
+    public Pager<QualityTestTask> findTestTaskPager(Integer start, Integer limit, QualityTestTask testtask, ConditionCarrier carrier, String sortName, boolean asc) {
+        return testtaskmanager.findPager(start, limit, testtask, carrier, sortName, asc);
     }
 
     public Pager<QualityTestTask> findTestTaskPager(Integer start, Integer limit, QualityTestTask testtask, String sortName, boolean asc) {

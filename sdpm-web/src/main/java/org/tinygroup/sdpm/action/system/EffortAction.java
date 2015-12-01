@@ -76,18 +76,6 @@ public class EffortAction extends BaseController {
         return "project/task/note";
     }
 
-//    @RequestMapping("save")
-//    public String add(SystemEffort systemEffort, Model model) {
-//        if (systemEffort.getEffortDate() != null) {
-//            if (systemEffort.getEffortId() == null) {
-//                systemEffort.setEffortBegin(new SimpleDateFormat("yyyy-MM-dd").format(systemEffort.getEffortDate()));
-//                systemEffort.setEffortAccount(UserUtils.getUserAccount());
-//            }
-//            effortService.saveSystemEffort(systemEffort);
-//        }
-//        return "project/note/notetable.page";
-//    }
-
     @RequestMapping("findPager")
     public String findPager(Integer start, Integer limit, String order, String ordertype, Integer effortId, Model model) {
         boolean asc = true;

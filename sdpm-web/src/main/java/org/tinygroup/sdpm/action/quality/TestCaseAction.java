@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.action.quality.actionBean.CaseStepResult;
 import org.tinygroup.sdpm.action.quality.actionBean.CaseStepResults;
+import org.tinygroup.sdpm.common.condition.ConditionCarrier;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
@@ -75,7 +76,7 @@ public class TestCaseAction extends BaseController {
     }
 
     @RequestMapping("/findPager")
-    public String findPager(@CookieValue Integer qualityProductId, Integer start, Integer limit, String groupOperate,
+    public String findPager(@CookieValue(value = "qualityProductId",defaultValue = "0") Integer qualityProductId, Integer start, Integer limit, String groupOperate,
                             SearchInfos searchInfos, String status, String order,
                             String ordertype, QualityTestCase testcase, Model model,
                             HttpServletRequest request) {
@@ -84,28 +85,19 @@ public class TestCaseAction extends BaseController {
             asc = false;
         }
         testcase.setProductId(qualityProductId);
-
-        String condition = "";
-        if (testcase.getModuleId() != null && testcase.getModuleId() > 0) {
-
-            SystemModule module = new SystemModule();
-            module.setModuleId(testcase.getModuleId());
-            StringBuffer stringBuffer = new StringBuffer();
-            stringBuffer.append("in (");
-            ModuleUtil.getConditionByModule(stringBuffer, module);
-            stringBuffer.append(")");
-            if (!("".equals(condition.trim()) || condition == null)) {
-                condition += " and ";
-            }
-            condition += NameUtil.resolveNameDesc("moduleId") + " " + stringBuffer.toString();
-        }
-        testcase.setModuleId(null);
         testcase.setDeleted(0);
+        ConditionCarrier carrier = new ConditionCarrier();
+        if (testcase.getModuleId() != null && testcase.getModuleId() > 0) {
+            carrier.putModuleIn("qualityTestCase",String.valueOf(testcase.getModuleId()));
+            testcase.setModuleId(null);
+        }
+
         Pager<QualityTestCase> casepager = null;
         if ("tcaseneedchange".equals(status)) {
-            casepager = testCaseService.findStoryChangedCase(start, limit, testcase, condition, order, "asc".equals(ordertype) ? true : false);
+            casepager = testCaseService.findStoryChangedCase(start, limit, testcase, carrier, order, "asc".equals(ordertype) ? true : false);
         } else if ("tcaseall".equals(status)) {
-            casepager = testCaseService.findTestCasePager(start, limit, testcase, condition, searchInfos, groupOperate, order, asc);
+            carrier.putSearch("caseSearch",searchInfos,groupOperate);
+            casepager = testCaseService.findTestCasePager(start, limit, testcase, carrier, order, asc);
         }
         model.addAttribute("casepager", casepager);
         return "testManagement/data/casesData.pagelet";
@@ -122,10 +114,8 @@ public class TestCaseAction extends BaseController {
                        String comment,
                        String[] step,
                        String[] expect,
-                       @RequestParam(value = "file", required = false) MultipartFile[] file,
-                       String[] title,
-                       HttpServletRequest request,
-                       String lastAddress, UploadProfile uploadProfile) throws Exception {
+                       String lastAddress,
+                       UploadProfile uploadProfile) throws Exception {
         if (testcase.getCaseId() == null || testcase.getCaseId() < 1) {
             testcase.setCaseOpenedBy(UserUtils.getUserId());
             if (testcase.getStoryId() != null && testcase.getStoryId() > 0) {
@@ -171,6 +161,9 @@ public class TestCaseAction extends BaseController {
             );
         }
         processProfile(uploadProfile, testcase.getCaseId(), ProfileType.TESTCASE);
+        if (!StringUtil.isBlank(lastAddress)) {
+            return "redirect:" + lastAddress;
+        }
         return "redirect:" + "/a/quality/testCase";
     }
 
@@ -213,8 +206,11 @@ public class TestCaseAction extends BaseController {
     }
 
     @RequestMapping("/execute")
-    public String execute(Integer caseId, CaseStepResults caseStepResults, String resultType, String from, Integer runId,
-                          HttpServletRequest request) {
+    public String execute(Integer caseId,
+                          CaseStepResults caseStepResults,
+                          String resultType,
+                          String from,
+                          Integer runId) {
         QualityTestRun run = null;
         if (!StringUtil.isBlank(from)) {
             run = testRunService.findRunById(runId);
@@ -413,7 +409,7 @@ public class TestCaseAction extends BaseController {
 
     @ResponseBody
     @RequestMapping("/batchDelete")
-    public Map batchDelete(String ids, Model model) {
+    public Map batchDelete(String ids) {
         String[] cId = ids.split(",");
         for (String id : cId) {
             QualityTestCase testCase = new QualityTestCase();
@@ -470,7 +466,6 @@ public class TestCaseAction extends BaseController {
     @RequiresPermissions("tvertobug")
     @RequestMapping("/chooseToBug")
     public String chooseTobug(Integer runId, Integer caseId, Integer caseVersion, Model model) {
-        QualityTestCase testcase = testCaseService.findById(caseId);
         QualityCaseStep qualityCaseStep = new QualityCaseStep();
         qualityCaseStep.setCaseId(caseId);
         qualityCaseStep.setCaseVersion(caseVersion);
@@ -657,7 +652,10 @@ public class TestCaseAction extends BaseController {
     }
 
     @RequestMapping("caseVersionData")
-    public String caseVersionData(Integer caseId, Model model, Integer start, Integer limit, @RequestParam(defaultValue = "caseVersion") String order, @RequestParam(defaultValue = "asc") String ordertype) {
+    public String caseVersionData(Integer caseId,
+                                  Model model,
+                                  Integer start,
+                                  Integer limit) {
         QualityTestCase testCase = testCaseService.findById(caseId);
         Integer maxCaseVersion = caseStepService.getMaxVersion(caseId);
         Map<String, List<QualityCaseStep>> versionStep = new HashMap<String, List<QualityCaseStep>>();

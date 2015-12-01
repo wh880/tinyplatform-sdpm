@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.quality.biz.inter;
 
+import org.tinygroup.sdpm.common.condition.ConditionCarrier;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityTestCase;
 import org.tinygroup.tinysqldsl.Pager;
@@ -79,10 +80,9 @@ public interface TestCaseManager {
      */
     Pager<QualityTestCase> findPager(Integer start, Integer limit, QualityTestCase testcase, String sortName, boolean asc);
 
-    Pager<QualityTestCase> findPagerRel(Integer start, Integer limit, QualityTestCase testcase, String statusCondition, SearchInfos conditions,
-                                        String groupOperate, String columnName, boolean asc);
+    Pager<QualityTestCase> findPagerRel(Integer start, Integer limit, QualityTestCase testcase, ConditionCarrier carrier, String columnName, boolean asc);
 
-    Pager<QualityTestCase> findStoryChangedCase(Integer start, Integer limit, QualityTestCase testcase, String condition, String columnName, boolean asc);
+    Pager<QualityTestCase> findStoryChangedCase(Integer start, Integer limit, QualityTestCase testcase, ConditionCarrier carrier, String columnName, boolean asc);
 
 
     List<Integer> getStoryIds(QualityTestCase t);
