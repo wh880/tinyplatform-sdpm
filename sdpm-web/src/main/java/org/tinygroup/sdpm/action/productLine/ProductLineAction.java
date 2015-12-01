@@ -214,7 +214,7 @@ public class ProductLineAction extends BaseController {
     }
 
     @RequestMapping("/toProduct")
-    public String productLineAction(HttpServletRequest request) {
+    public String productLineAction() {
         return "redirect:" + adminPath + "/product";
     }
 
@@ -340,19 +340,19 @@ public class ProductLineAction extends BaseController {
             case 2:
                 carrier.put("productLine.productLineOwner",
                         ConditionUtils.Operate.EQ.getOperate(),
-                        ConditionUtils.CommonFieldType.FIELD_OPERATE.getOperate(),
+                        ConditionUtils.CommonFieldType.FIELD_OPERATE.getCommonField(),
                         UserUtils.getUserId());
                 break;
             case 3:
                 carrier.put("productLine.productLineQualityManager",
                         ConditionUtils.Operate.EQ.getOperate(),
-                        ConditionUtils.CommonFieldType.FIELD_OPERATE.getOperate(),
+                        ConditionUtils.CommonFieldType.FIELD_OPERATE.getCommonField(),
                         UserUtils.getUserId());
                 break;
             case 4:
                 carrier.put("productLine.productLineDeliveryManager",
                         ConditionUtils.Operate.EQ.getOperate(),
-                        ConditionUtils.CommonFieldType.FIELD_OPERATE.getOperate(),
+                        ConditionUtils.CommonFieldType.FIELD_OPERATE.getCommonField(),
                         UserUtils.getUserId());
                 break;
         }

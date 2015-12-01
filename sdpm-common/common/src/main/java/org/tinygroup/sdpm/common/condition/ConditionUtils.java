@@ -10,9 +10,7 @@ import org.tinygroup.tinysqldsl.base.FragmentSql;
 import org.tinygroup.tinysqldsl.base.StatementSqlBuilder;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by wangll13383 on 2015/11/4.
@@ -50,7 +48,7 @@ public class ConditionUtils {
             this.commonField = commonField;
         }
 
-        public String getOperate() {
+        public String getCommonField() {
             return this.commonField;
         }
     }
@@ -61,16 +59,16 @@ public class ConditionUtils {
         for(String field : carrier.getFields()){
             Condition condition = null;
             Column column = new Column(NameUtil.resolveNameDesc(field));
-            if(carrier.getFieldType(field).equals(ConditionUtils.CommonFieldType.MODULE.getOperate())){
+            if(carrier.getFieldType(field).equals(ConditionUtils.CommonFieldType.MODULE.getCommonField())){
                 condition = callBackFunction.process(carrier,field,column);
-            }else if(carrier.getFieldType(field).equals(ConditionUtils.CommonFieldType.SEARCH.getOperate())){
+            }else if(carrier.getFieldType(field).equals(ConditionUtils.CommonFieldType.SEARCH.getCommonField())){
                 if(carrier.getValue(field)[0]!=null){
                     String result = SqlUtil.toSql(((SearchInfos) carrier.getValue(field)[0]).getInfos(), (String) carrier.getValue(field)[1]);
                     if(!StringUtil.isBlank(result)){
                         condition = FragmentSql.fragmentCondition(result);
                     }
                 }
-            }else if(carrier.getFieldType(field).equals(ConditionUtils.CommonFieldType.ID.getOperate())){
+            }else if(carrier.getFieldType(field).equals(ConditionUtils.CommonFieldType.ID.getCommonField())){
                 boolean isIn = carrier.getOperate(field).equals(ConditionUtils.Operate.IN.getOperate());
                 String[] result = (String[]) carrier.getValue(field)[0];
                 String[] value = {"0"};
@@ -80,8 +78,8 @@ public class ConditionUtils {
                 }else{
                     condition = column.notIn(result);
                 }
-            }else if(carrier.getFieldType(field).equals(ConditionUtils.CommonFieldType.FIELD_OPERATE.getOperate())){
-                String result = (String) carrier.getValue(field)[0];
+            }else if(carrier.getFieldType(field).equals(ConditionUtils.CommonFieldType.FIELD_OPERATE.getCommonField())){
+                String result = String.valueOf(carrier.getValue(field)[0]);
                 if(!StringUtil.isBlank(result)){
                     if(carrier.getOperate(field).equals(ConditionUtils.Operate.EQ.getOperate())){
                         condition = column.eq(result);
@@ -93,8 +91,8 @@ public class ConditionUtils {
                         condition = column.lt(result);
                     }
                 }
-            }else if(carrier.getFieldType(field).equals(ConditionUtils.CommonFieldType.STATUS.getOperate())){
-                String result = (String) carrier.getValue(field)[0];
+            }else if(carrier.getFieldType(field).equals(ConditionUtils.CommonFieldType.STATUS.getCommonField())){
+                String result = String.valueOf(carrier.getValue(field)[0]);
                 if(!StringUtil.isBlank(result)){
                     condition = FragmentSql.fragmentCondition(result);
                 }

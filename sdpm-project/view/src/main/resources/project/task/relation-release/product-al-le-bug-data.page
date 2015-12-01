@@ -7,8 +7,8 @@
 #@tr()
     #@td()<input type="checkbox" value="1" name="releaseId">#end
     #@td()${bug?.bugId} #end
-    #@td()${bug?.priority} #end
-    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/bug/bugInfo?bugId=${bug?bugId}">${bug?.bugTitle}</a>#end
+    #@td()${getDict("bugPriority",bug?.priority)} #end
+    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/bug/bugInfo?bugId=${bug?.bugId}">${bug?.bugTitle}</a>#end
     #@td()${getDict("bugStatus",bug?.bugStatus)}#end
     #@td()${bug?.bugOpenedBy?UserUtils.getUserById(bug?.bugOpenedBy)?.orgUserRealName:""}#end
     #@td()${bug?.bugOpenedDate?formatDate(bug?.bugOpenedDate,'yyyy-MM-dd'):""}#end

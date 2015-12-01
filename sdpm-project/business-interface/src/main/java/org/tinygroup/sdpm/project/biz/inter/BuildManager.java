@@ -22,14 +22,6 @@ public interface BuildManager {
     Integer softDelete(ProjectBuild build);
 
     /**
-     * 根据产品id进行软删删除
-     *
-     * @param productId
-     * @return
-     */
-    Integer deleteBuildByProductId(Integer productId);
-
-    /**
      * 根据主键id查找
      *
      * @param id 主键
@@ -83,61 +75,9 @@ public interface BuildManager {
 
     int[] batchDelBuildByIds(List<ProjectBuild> keys);
 
-    /**
-     * 需求列表
-     *
-     * @param projectBuild
-     * @return
-     */
-    List<ProjectBuild> findStoryList(ProjectBuild projectBuild);
-
     Pager<ProductStory> findBuildStory(int start, int limit, Integer buildId);
 
     Pager<ProductStory> findNoBuildStory(int start, int limit, String condition, Integer buildId);
-
-    /**
-     * 删除关联
-     *
-     * @param storyId，buildId
-     * @return
-     */
-    Integer deleteBuildStory(Integer storyId, Integer buildId);
-
-    /**
-     * 关联需求
-     *
-     * @param storyId，buildId
-     * @return
-     */
-    Integer linkBuildStory(Integer storyId, Integer buildId);
-
-    Pager<QualityBug> findNoBuildBug(int start, int limit, String condition, Integer buildId);
-
-    Pager<QualityBug> findBuildBug(int start, int limit, Integer buildId);
-
-    /**
-     * 删除关联
-     *
-     * @param storyId，buildId
-     * @return
-     */
-    Integer deleteBuildBug(Integer storyId, Integer buildId);
-
-    /**
-     * 关联需求
-     *
-     * @param storyId，buildId
-     * @return
-     */
-    Integer linkBuildBug(Integer storyId, Integer buildId);
-
-    /**
-     * 关联需求
-     *
-     * @param buildId
-     * @return
-     */
-    Pager<QualityBug> findBuildLegacyBug(int start, int limit, Integer buildId);
 
     List<ProjectBuild> getBuildByIds(String... ids);
 

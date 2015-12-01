@@ -11,7 +11,7 @@
 #@tr()
     #@td()<input type="checkbox" value="${s?.storyId}" id="field" name="idCheck">#end
     #@td()<a href="${TINY_CONTEXT_PATH +adminPath}/product/page/project/demdtablehref.page">${s?.storyId}</a>#end
-    #@td()@#end
+    #@td()${getDict("storyPri",s?.storyPri)}#end
     #@td()<a href="${TINY_CONTEXT_PATH +adminPath}/product/page/project/demdtablehref.page">${s?.storyTitle}</a>#end
     #@td()${s?.storyOpenedBy?UserUtils.getUserById(s?.storyOpenedBy)?.orgUserRealName:""}#end
     #@td()${s?.storyAssignedTo?UserUtils.getUserById(s?.storyAssignedTo)?.orgUserRealName:""}#end

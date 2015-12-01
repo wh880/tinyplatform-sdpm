@@ -15,12 +15,12 @@
             #@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
                 #@tinyTh({"width":"8"})<input type="checkbox" name="bugId" value="">#end
                 #@tinyTh({"class":"sorting","rel":"bugId"})ID#end
-                #@tinyTh({"class":"","rel":"bugTitle"})Bug标题#end
-                #@tinyTh({"class":"","rel":"bugStatus"})Bug状态#end
-                #@tinyTh({"class":"","rel":"bugOpenedBy"})创建#end
-                #@tinyTh({"class":"","rel":"bugOpenedDate"})创建日期#end
+                #@tinyTh({"class":"sorting","rel":"bugTitle"})Bug标题#end
+                #@tinyTh({"class":"sorting","rel":"bugStatus"})Bug状态#end
+                #@tinyTh({"class":"sorting","rel":"bugOpenedBy"})创建#end
+                #@tinyTh({"class":"sorting","rel":"bugOpenedDate"})创建日期#end
                 #@tinyTh({"class":"sorting","rel":"bugResolvedBy"})解决#end
-                #@tinyTh({"class":"","rel":"bugResolvedDate"})解决日期#end
+                #@tinyTh({"class":"sorting","rel":"bugResolvedDate"})解决日期#end
                 #@tinyTh({"class":"","rel":""})操作#end
             #end
         #end

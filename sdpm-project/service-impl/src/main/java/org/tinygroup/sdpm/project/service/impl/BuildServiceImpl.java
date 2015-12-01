@@ -49,9 +49,6 @@ public class BuildServiceImpl implements BuildService {
         return buildManager.update(build);
     }
 
-    public Integer deleteBuildByProductId(Integer productId) {
-        return buildManager.deleteBuildByProductId(productId);
-    }
 
     public ProjectBuild findBuild(Integer id) {
         return buildManager.find(id);
@@ -74,26 +71,6 @@ public class BuildServiceImpl implements BuildService {
         return buildManager.findPager(projectBuild, start, limit, order, asc);
     }
 
-    public Integer deleteBuildStory(Integer storyId, Integer buildId) {
-        return buildManager.deleteBuildStory(storyId, buildId);
-    }
-
-    public Integer linkBuildStory(Integer storyId, Integer buildId) {
-        return buildManager.linkBuildStory(storyId, buildId);
-    }
-
-    public Integer deleteBuildBug(Integer bugId, Integer buildId) {
-        return buildManager.deleteBuildBug(bugId, buildId);
-    }
-
-    public Pager<QualityBug> findBugPager(int start, int limit, int id, SearchInfos conditions, String groupOperate) {
-        return buildManager.findBuildBug(start, limit, id);
-    }
-
-    public Pager<QualityBug> findBugLegacyPager(int start, int limit, int id, SearchInfos conditions, String groupOperate) {
-        return buildManager.findBuildLegacyBug(start, limit, id);
-    }
-
     public List<ProjectBuild> getBuildByIds(String... ids) {
         return buildManager.getBuildByIds(ids);
     }
@@ -104,10 +81,6 @@ public class BuildServiceImpl implements BuildService {
 
     public List<ProjectBuild> buildInCondition(String condition, Integer productId, Integer projectId) {
         return buildManager.buildInCondition(condition, productId, projectId);
-    }
-
-    public Pager<QualityBug> findNoBuildBug(int start, int limit, int id, String condition, SearchInfos conditions, String groupOperate) {
-        return buildManager.findNoBuildBug(start, limit, condition, id);
     }
 
 }

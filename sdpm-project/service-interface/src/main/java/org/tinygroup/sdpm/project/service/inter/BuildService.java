@@ -50,14 +50,6 @@ public interface BuildService {
     Integer updateBuild(ProjectBuild projectBuild);
 
     /**
-     * 根据产品id进行软删删除
-     *
-     * @param productId
-     * @return
-     */
-    Integer deleteBuildByProductId(Integer productId);
-
-    /**
      * 根据id查找
      *
      * @param buildId
@@ -89,70 +81,6 @@ public interface BuildService {
      * @return
      */
     Pager<ProjectBuild> findPagerBuild(ProjectBuild projectBuild, Integer start, Integer limit, String order, boolean asc);
-
-    /**
-     * 删除关联
-     *
-     * @param storyId
-     * @param buildId
-     * @return
-     */
-    Integer deleteBuildStory(Integer storyId, Integer buildId);
-
-    /**
-     * 关联需求
-     *
-     * @param storyId
-     * @param buildId
-     * @return
-     */
-    Integer linkBuildStory(Integer storyId, Integer buildId);
-
-    /**
-     * 删除关联
-     *
-     * @param bugId
-     * @param buildId
-     * @return
-     */
-    Integer deleteBuildBug(Integer bugId, Integer buildId);
-
-
-    /**
-     * bug分页
-     *
-     * @param id
-     * @param start
-     * @param limit
-     * @param conditions
-     * @param groupOperate
-     * @return
-     */
-    Pager<QualityBug> findBugPager(int start, int limit, int id, SearchInfos conditions, String groupOperate);
-
-    /**
-     * 未关联bug分页
-     *
-     * @param id
-     * @param start
-     * @param limit
-     * @param conditions
-     * @param groupOperate
-     * @return
-     */
-    Pager<QualityBug> findNoBuildBug(int start, int limit, int id, String condition, SearchInfos conditions, String groupOperate);
-
-    /**
-     * 未关联bug分页
-     *
-     * @param id
-     * @param start
-     * @param limit
-     * @param conditions
-     * @param groupOperate
-     * @return
-     */
-    Pager<QualityBug> findBugLegacyPager(int start, int limit, int id, SearchInfos conditions, String groupOperate);
 
     /**
      * 多Id查询

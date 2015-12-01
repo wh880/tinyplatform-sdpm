@@ -13,7 +13,6 @@ import org.tinygroup.sdpm.action.quality.util.QualityUtil;
 import org.tinygroup.sdpm.common.condition.ConditionCarrier;
 import org.tinygroup.sdpm.common.condition.ConditionUtils;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
-import org.tinygroup.sdpm.common.util.ComplexSearch.SqlUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.dto.UploadProfile;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
@@ -149,7 +148,7 @@ public class BugAction extends BaseController {
         qualityBug.setDeleted(0);
         carrier.put("qualityBug.no",
                 ConditionUtils.Operate.GT.getOperate(),
-                ConditionUtils.CommonFieldType.FIELD_OPERATE.getOperate(),
+                ConditionUtils.CommonFieldType.FIELD_OPERATE.getCommonField(),
                 bug.getNo());
         Pager<QualityBug> bugs = bugService.findBugListPager(0, 1, carrier, qualityBug, "qualityBug.no", false);
         int nextId = 0;
@@ -796,9 +795,9 @@ public class BugAction extends BaseController {
         story.setProductId(Integer.parseInt(cookieProductId));
         ConditionCarrier carrier = new ConditionCarrier();
         carrier.putSearch("storySearch",searchInfos,groupOperate);
-        carrier.putStatus("storyStatus",StoryUtil.getStatusCondition(choose));
+        StoryUtil.getStatusCondition(choose, carrier);
 
-        Pager<ProductStory> p = storyService.findStoryPagerRel(start,limit,story,carrier,order,"asc".equals(ordertype)?true:false);
+        Pager<ProductStory> p = storyService.findStoryPagerRel(start, limit, story, carrier, order, "asc".equals(ordertype) ? true : false);
         model.addAttribute("storyList", p);
         return "product/data/tabledata.pagelet";
     }

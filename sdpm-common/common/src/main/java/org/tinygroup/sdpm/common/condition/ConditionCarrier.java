@@ -1,9 +1,6 @@
 package org.tinygroup.sdpm.common.condition;
 
-import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
-import org.tinygroup.sdpm.common.util.common.NameUtil;
-import org.tinygroup.tinysqldsl.base.Condition;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -43,37 +40,37 @@ public class ConditionCarrier implements Serializable{
     }
 
     public void putSearch(String field, SearchInfos searchInfos, String groupOperate) {
-        fieldTypeMap.put(field, ConditionUtils.CommonFieldType.SEARCH.getOperate());
+        fieldTypeMap.put(field, ConditionUtils.CommonFieldType.SEARCH.getCommonField());
         operateMap.put(field, ConditionUtils.Operate.NO_OPERATE.getOperate());
         valueMap.put(field, new Object[]{searchInfos, groupOperate});
     }
 
     public void putModuleIn(String field, String moduleId) {
-        fieldTypeMap.put(field, ConditionUtils.CommonFieldType.MODULE.getOperate());
+        fieldTypeMap.put(field, ConditionUtils.CommonFieldType.MODULE.getCommonField());
         operateMap.put(field, ConditionUtils.Operate.IN.getOperate());
         valueMap.put(field, new Object[]{moduleId});
     }
 
     public void putModuleNotIn(String field, String moduleId) {
-        fieldTypeMap.put(field, ConditionUtils.CommonFieldType.MODULE.getOperate());
+        fieldTypeMap.put(field, ConditionUtils.CommonFieldType.MODULE.getCommonField());
         operateMap.put(field, ConditionUtils.Operate.NOT_IN.getOperate());
         valueMap.put(field, new Object[]{moduleId});
     }
 
     public void putIdIn(String field, String[] ids) {
-        fieldTypeMap.put(field, ConditionUtils.CommonFieldType.ID.getOperate());
+        fieldTypeMap.put(field, ConditionUtils.CommonFieldType.ID.getCommonField());
         operateMap.put(field, ConditionUtils.Operate.IN.getOperate());
         valueMap.put(field, new Object[]{ids});
     }
 
     public void putIdNotIn(String field, String[] ids) {
-        fieldTypeMap.put(field, ConditionUtils.CommonFieldType.ID.getOperate());
+        fieldTypeMap.put(field, ConditionUtils.CommonFieldType.ID.getCommonField());
         operateMap.put(field, ConditionUtils.Operate.NOT_IN.getOperate());
         valueMap.put(field, new Object[]{ids});
     }
 
     public void putStatus(String field, String statusCondition) {
-        fieldTypeMap.put(field, ConditionUtils.CommonFieldType.STATUS.getOperate());
+        fieldTypeMap.put(field, ConditionUtils.CommonFieldType.STATUS.getCommonField());
         operateMap.put(field, ConditionUtils.Operate.NO_OPERATE.getOperate());
         valueMap.put(field, new Object[]{statusCondition});
     }

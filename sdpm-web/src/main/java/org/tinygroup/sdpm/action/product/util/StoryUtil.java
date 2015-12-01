@@ -1,40 +1,78 @@
 package org.tinygroup.sdpm.action.product.util;
 
 import org.tinygroup.commons.tools.StringUtil;
+import org.tinygroup.sdpm.common.condition.ConditionCarrier;
+import org.tinygroup.sdpm.common.condition.ConditionUtils;
 import org.tinygroup.sdpm.util.UserUtils;
 
 /**
  * Created by wangll13383 on 2015/9/27.
  */
 public class StoryUtil {
-    public static String getStatusCondition(String choose) {
+    public static void getStatusCondition(String choose, ConditionCarrier carrier) {
         if (StringUtil.isBlank(choose)) {
-            return "";
+            return ;
         }
-        if (choose == null || "".equals(choose)) return null;
+        if (choose == null || "".equals(choose)) return;
         switch (Integer.valueOf(choose)) {
             case 1:
-                return "story_status <> '2'";
+                carrier.put("productStory.storyStatus",
+                        ConditionUtils.Operate.NEQ.getOperate(),
+                        ConditionUtils.CommonFieldType.FIELD_OPERATE.getCommonField(),
+                        "2");
+                break;
             case 2:
-                return "";
+                return ;
             case 3:
-                return "story_assigned_to= '" + UserUtils.getUserId() + "' ";
+                carrier.put("productStory.storyAssignedTo",
+                        ConditionUtils.Operate.EQ.getOperate(),
+                        ConditionUtils.CommonFieldType.FIELD_OPERATE.getCommonField(),
+                        UserUtils.getUserId());
+                break;
             case 4:
-                return "story_opened_by= '" + UserUtils.getUserId() + "' ";
+                carrier.put("productStory.storyOpenedBy",
+                        ConditionUtils.Operate.EQ.getOperate(),
+                        ConditionUtils.CommonFieldType.FIELD_OPERATE.getCommonField(),
+                        UserUtils.getUserId());
+                break;
             case 5:
-                return "story_reviewed_by= '" + UserUtils.getUserId() + "' ";
+                carrier.put("productStory.storyReviewedBy",
+                        ConditionUtils.Operate.EQ.getOperate(),
+                        ConditionUtils.CommonFieldType.FIELD_OPERATE.getCommonField(),
+                        UserUtils.getUserId());
+                break;
             case 6:
-                return "story_closed_by= '" + UserUtils.getUserId() + "' ";
+                carrier.put("productStory.storyClosedBy",
+                        ConditionUtils.Operate.EQ.getOperate(),
+                        ConditionUtils.CommonFieldType.FIELD_OPERATE.getCommonField(),
+                        UserUtils.getUserId());
+                break;
             case 7:
-                return "story_status='0'";
+                carrier.put("productStory.storyStatus",
+                        ConditionUtils.Operate.EQ.getOperate(),
+                        ConditionUtils.CommonFieldType.FIELD_OPERATE.getCommonField(),
+                        "0");
+                break;
             case 8:
-                return "story_status='1'";
+                carrier.put("productStory.storyStatus",
+                        ConditionUtils.Operate.EQ.getOperate(),
+                        ConditionUtils.CommonFieldType.FIELD_OPERATE.getCommonField(),
+                        "1");
+                break;
             case 9:
-                return "story_status='3'";
+                carrier.put("productStory.storyStatus",
+                        ConditionUtils.Operate.EQ.getOperate(),
+                        ConditionUtils.CommonFieldType.FIELD_OPERATE.getCommonField(),
+                        "3");
+                break;
             case 11:
-                return "story_status='2'";
+                carrier.put("productStory.storyStatus",
+                        ConditionUtils.Operate.EQ.getOperate(),
+                        ConditionUtils.CommonFieldType.FIELD_OPERATE.getCommonField(),
+                        "2");
+                break;
         }
-        return "";
+        return ;
     }
 
 

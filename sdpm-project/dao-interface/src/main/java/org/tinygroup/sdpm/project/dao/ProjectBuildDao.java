@@ -43,20 +43,6 @@ public interface ProjectBuildDao extends BaseDao<ProjectBuild, Integer> {
 
     Pager<ProductStory> findNoBuildStoryList(int start, int limit, final String condition, Integer buildId, final OrderBy... orderArgs);
 
-    Integer deleteBuildStory(Integer storyId, Integer buildId);
-
-    Integer linkBuildStory(Integer storyId, Integer buildId);
-
-    Pager<QualityBug> findBuildBugs(int start, int limit, Integer buildId, final OrderBy... orderArgs);
-
-    Pager<QualityBug> findNoBuildBugs(int start, int limit, final String condition, Integer buildId, final OrderBy... orderArgs);
-
-    Integer deleteBuildBug(Integer bugId, Integer buildId);
-
-    Integer linkBuildBug(Integer bugId, Integer buildId);
-
-    Pager<QualityBug> findBuildLegacyBugs(int start, int limit, Integer buildId, final OrderBy... orderArgs);
-
     List<ProjectBuild> getBuildByKeys(String... ids);
 
     List<ProjectBuild> getBuildByProducts(Integer... ids);

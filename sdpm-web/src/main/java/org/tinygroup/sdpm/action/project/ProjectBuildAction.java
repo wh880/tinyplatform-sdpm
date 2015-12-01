@@ -10,20 +10,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.commons.tools.StringUtil;
+import org.tinygroup.sdpm.common.condition.ConditionCarrier;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
-import org.tinygroup.sdpm.common.util.ComplexSearch.SqlUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.dto.UploadProfile;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
+import org.tinygroup.sdpm.product.service.StoryService;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
+import org.tinygroup.sdpm.project.dao.pojo.ProjectBurn;
 import org.tinygroup.sdpm.project.service.inter.BuildService;
 import org.tinygroup.sdpm.project.service.inter.ProjectProductService;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.sdpm.project.service.inter.ProjectStoryService;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
+import org.tinygroup.sdpm.quality.service.inter.BugService;
 import org.tinygroup.sdpm.system.dao.pojo.ProfileType;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;
@@ -36,10 +39,7 @@ import org.tinygroup.tinysqldsl.Pager;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 版本
@@ -60,6 +60,10 @@ public class ProjectBuildAction extends BaseController {
     private ProjectProductService projectProductService;
     @Autowired
     private ProfileService profileService;
+    @Autowired
+    private BugService bugService;
+    @Autowired
+    private StoryService storyService;
 
     @RequiresPermissions("version-menu")
     @RequestMapping("/index")
@@ -75,8 +79,7 @@ public class ProjectBuildAction extends BaseController {
 
     @RequestMapping("/productBuildList")
     public String productBuildList(ProjectBuild build, Model model,
-                                   Integer start, Integer limit, String order, String ordertype,
-                                   HttpServletRequest request) {
+                                   Integer start, Integer limit, String order, String ordertype) {
         boolean asc = "asc".equals(ordertype) ? true : false;
         Pager<ProjectBuild> pager = buildService.findPagerBuild(build, start, limit, order, asc);
         model.addAttribute("buildPager", pager);
@@ -275,31 +278,38 @@ public class ProjectBuildAction extends BaseController {
 
 
     @RequestMapping("/bugSearch/{relate}")
-    public String bugListAction(@PathVariable(value = "relate") String relate, int page, int pagesize, QualityBug bug, int id, String groupOperate, SearchInfos searchInfos,
+    public String bugListAction(@PathVariable(value = "relate") String relate,
+                                int start,
+                                int limit,
+                                QualityBug bug,
+                                int id,
+                                String groupOperate,
+                                SearchInfos searchInfos,
+                                String order,
+                                String ordertype,
                                 Model model) {
 
+        ConditionCarrier carrier = new ConditionCarrier();
+        if (searchInfos != null) {
+            carrier.putSearch("bugSearch",searchInfos,groupOperate);
+        }
+        ProjectBuild build = buildService.findBuild(id);
+        bug.setDeleted(0);
+        bug.setBugStatus("2");
+        bug.setBugOpenedBuild(String.valueOf(id));
         if ("reRelateBug".equals(relate)) {
-            bug.setDeleted(0);
-            bug.setBugStatus("2");
-            Pager<QualityBug> p = buildService.findBugPager(pagesize * (page - 1), pagesize, id, searchInfos, groupOperate);
+            carrier.putIdIn("qualityBug.bugId",build.getBuildBugs().split(","));
+            Pager<QualityBug> p = bugService.findBugListPager(start, limit, carrier, bug,order,"asc".equals(ordertype)?true:false);
             model.addAttribute("bugList", p);
             return "/project/task/relation-release/product-al-bug-data.pagelet";
         } else if ("noRelateBug".equals(relate)) {
-            String condition = "";
-            if (searchInfos != null) {
-                if (searchInfos.getInfos().size() > 0 || searchInfos.getInfos() != null) {
-                    String sql = SqlUtil.toSql(searchInfos.getInfos(), groupOperate);
-                    if (!StringUtil.isBlank(sql)) {
-                        condition += sql;
-                    }
-                }
-            }
-            bug.setProjectId(null);
-            Pager<QualityBug> p = buildService.findNoBuildBug(pagesize * (page - 1), pagesize, id, condition, searchInfos, groupOperate);
+            carrier.putIdNotIn("qualityBug.bugId", build.getBuildBugs().split(","));
+            Pager<QualityBug> p =  bugService.findBugListPager(start, limit, carrier, bug,order,"asc".equals(ordertype)?true:false);
             model.addAttribute("bugList", p);
             return "/project/task/relation-release/product-al-no-bug-data.pagelet";
         } else if ("leRelateBugRelease".equals(relate)) {
-            Pager<QualityBug> p = buildService.findBugLegacyPager(pagesize * (page - 1), pagesize, id, searchInfos, groupOperate);
+            bug.setBugStatus("1");
+            Pager<QualityBug> p = bugService.findBugListPager(start, limit, carrier, bug, order, "asc".equals(ordertype) ? true : false);
             model.addAttribute("bugList", p);
             return "/project/task/relation-release/product-al-le-bug-data.pagelet";
         }
@@ -317,43 +327,61 @@ public class ProjectBuildAction extends BaseController {
     @ResponseBody
     @RequestMapping("/releateReq")
     public Map<String, String> releateReq(String ids, Integer buildId) {
-        for (String storyId : ids.split(",")) {
-            buildService.linkBuildStory(Integer.valueOf(storyId), buildId);
+        if (StringUtil.isBlank(ids)) {
+            return resultMap(false, "请至少选择一条数据");
         }
+        ProjectBuild build = buildService.findBuild(buildId);
+        List<String> origin = new ArrayList<String>(Arrays.asList(build.getBuildStories().split(",")));
+        List<String> add = new ArrayList<String>(Arrays.asList(ids.split(",")));
+        origin.addAll(add);
+        build.setBuildStories(StringUtil.join(origin,","));
+        buildService.updateBuild(build);
         return resultMap(true, "关联成功");
     }
 
     @ResponseBody
     @RequestMapping("/releateBug")
     public Map<String, String> releateBug(String ids, Integer buildId) {
-        for (String bugId : ids.split(",")) {
-            buildService.deleteBuildBug(Integer.valueOf(bugId), buildId);
+        if (StringUtil.isBlank(ids)) {
+            return resultMap(false, "请至少选择一条数据");
         }
+        ProjectBuild build = buildService.findBuild(buildId);
+        List<String> origin = new ArrayList<String>(Arrays.asList(build.getBuildBugs().split(",")));
+        List<String> add = new ArrayList<String>(Arrays.asList(ids.split(",")));
+        origin.addAll(add);
+        build.setBuildBugs(StringUtil.join(origin,","));
+        buildService.updateBuild(build);
         return resultMap(true, "关联成功");
     }
 
     @RequestMapping("/search/reRelateStory")
-    public String storyListAction(int page, int pagesize, int id, String groupOperate, SearchInfos searchInfos,
+    public String storyListAction(int start, int limit, int id, String groupOperate, SearchInfos searchInfos,
                                   Model model) {
-        Pager<ProductStory> p = projectStoryService.findStoryPager(pagesize * (page - 1), pagesize, id, searchInfos, groupOperate);
+        Pager<ProductStory> p = projectStoryService.findStoryPager(start, limit, id, searchInfos, groupOperate);
         model.addAttribute("storys", p);
 
         return "/project/task/relation-release/product-al-req-data.pagelet";
     }
 
     @RequestMapping("/search/noRelateStory")
-    public String storyNoListAction(int page, int pagesize, int id, String groupOperate, SearchInfos searchInfos,
+    public String storyNoListAction(int start,
+                                    int limit,
+                                    int id,
+                                    String groupOperate,
+                                    SearchInfos searchInfos,
+                                    String order,
+                                    String ordertype,
                                     Model model) {
-        String condition = "";
+        ProjectBuild build = buildService.findBuild(id);
+        ConditionCarrier carrier = new ConditionCarrier();
+        ProductStory story = new ProductStory();
+        story.setDeleted(0);
+        story.setProductId(build.getBuildProduct());
         if (searchInfos != null) {
-            if (searchInfos.getInfos().size() > 0 || searchInfos.getInfos() != null) {
-                String sql = SqlUtil.toSql(searchInfos.getInfos(), groupOperate);
-                if (!StringUtil.isBlank(sql)) {
-                    condition += sql;
-                }
-            }
+            carrier.putSearch("storySearch",searchInfos,groupOperate);
         }
-        Pager<ProductStory> p = projectStoryService.findNoStoryPager(pagesize * (page - 1), pagesize, id, condition, searchInfos, groupOperate);
+        carrier.putIdNotIn("productStory.storyId",build.getBuildStories().split(","));
+        Pager<ProductStory> p = storyService.findStoryByCondition(start,limit,story,carrier,order,"asc".equals(ordertype)?true:false);
         model.addAttribute("storys", p);
 
         return "/project/task/relation-release/product-al-no-req-data.pagelet";
@@ -362,7 +390,11 @@ public class ProjectBuildAction extends BaseController {
     @ResponseBody
     @RequestMapping("/deletereleate")
     public Map deleteReleate(Integer storyId, Integer buildId) {
-        buildService.deleteBuildStory(storyId, buildId);
+        ProjectBuild build = buildService.findBuild(buildId);
+        List<String> origin = new ArrayList<String>(Arrays.asList(build.getBuildStories().split(",")));
+        origin.remove(String.valueOf(storyId));
+        build.setBuildStories(StringUtil.join(origin,","));
+        buildService.updateBuild(build);
         return resultMap(true, "解除关联成功");
 
     }
@@ -370,8 +402,11 @@ public class ProjectBuildAction extends BaseController {
     @ResponseBody
     @RequestMapping("/deletereleateBug")
     public Map deletereleateBug(Integer bugId, Integer buildId) {
-        buildService.deleteBuildBug(bugId, buildId);
-        Map<String, String> map = new HashMap<String, String>();
+        ProjectBuild build = buildService.findBuild(buildId);
+        List<String> origin = new ArrayList<String>(Arrays.asList(build.getBuildBugs().split(",")));
+        origin.remove(String.valueOf(bugId));
+        build.setBuildBugs(StringUtil.join(origin,","));
+        buildService.updateBuild(build);
         return resultMap(true, "解除关联成功");
     }
 
@@ -381,11 +416,13 @@ public class ProjectBuildAction extends BaseController {
         if (StringUtil.isBlank(ids)) {
             return resultMap(false, "请至少选择一条数据");
         }
-        for (String s : ids.split(",")) {
-            Integer S = Integer.valueOf(s);
-            buildService.deleteBuildStory(S, buildId);
-        }
-        return resultMap(false, "删除成功");
+        ProjectBuild build = buildService.findBuild(buildId);
+        List<String> origin = new ArrayList<String>(Arrays.asList(build.getBuildStories().split(",")));
+        List<String> remove = new ArrayList<String>(Arrays.asList(ids.split(",")));
+        origin.removeAll(remove);
+        build.setBuildStories(StringUtil.join(origin,","));
+        buildService.updateBuild(build);
+        return resultMap(true, "删除成功");
     }
 
     @ResponseBody
@@ -394,11 +431,13 @@ public class ProjectBuildAction extends BaseController {
         if (StringUtil.isBlank(ids)) {
             return resultMap(false, "请至少选择一条数据");
         }
-        for (String bug : ids.split(",")) {
-            Integer Bug = Integer.valueOf(bug);
-            buildService.deleteBuildBug(Bug, buildId);
-        }
-        return resultMap(false, "删除成功");
+        ProjectBuild build = buildService.findBuild(buildId);
+        List<String> origin = new ArrayList<String>(Arrays.asList(build.getBuildBugs().split(",")));
+        List<String> remove = new ArrayList<String>(Arrays.asList(ids.split(",")));
+        origin.removeAll(remove);
+        build.setBuildBugs(StringUtil.join(origin,","));
+        buildService.updateBuild(build);
+        return resultMap(true, "删除成功");
     }
 
 

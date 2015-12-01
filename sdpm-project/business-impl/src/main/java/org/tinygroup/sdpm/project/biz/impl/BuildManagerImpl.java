@@ -28,10 +28,6 @@ public class BuildManagerImpl implements BuildManager {
         return projectBuildDao.softDelete(build);
     }
 
-    public Integer deleteBuildByProductId(Integer productId) {
-        return projectBuildDao.deleteBuildByProductId(productId);
-    }
-
     public ProjectBuild find(Integer id) {
         return projectBuildDao.getByKey(id);
     }
@@ -69,20 +65,8 @@ public class BuildManagerImpl implements BuildManager {
         return projectBuildDao.batchUpdateDel(keys);
     }
 
-    public List<ProjectBuild> findStoryList(ProjectBuild projectBuild) {
-        return projectBuildDao.query(projectBuild);
-    }
-
     public Pager<ProductStory> findBuildStory(int start, int limit, Integer buildId) {
         return projectBuildDao.findBuildStoryList(start, limit, buildId);
-    }
-
-    public Pager<QualityBug> findBuildBug(int start, int limit, Integer buildId) {
-        return projectBuildDao.findBuildBugs(start, limit, buildId);
-    }
-
-    public Pager<QualityBug> findBuildLegacyBug(int start, int limit, Integer buildId) {
-        return projectBuildDao.findBuildLegacyBugs(start, limit, buildId);
     }
 
     public List<ProjectBuild> getBuildByIds(String... ids) {
@@ -100,26 +84,6 @@ public class BuildManagerImpl implements BuildManager {
 
     public Pager<ProductStory> findNoBuildStory(int start, int limit, String condition, Integer buildId) {
         return projectBuildDao.findNoBuildStoryList(start, limit, condition, buildId);
-    }
-
-    public Pager<QualityBug> findNoBuildBug(int start, int limit, String condition, Integer buildId) {
-        return projectBuildDao.findNoBuildBugs(start, limit, condition, buildId);
-    }
-
-    public Integer deleteBuildStory(Integer storyId, Integer buildId) {
-        return projectBuildDao.deleteBuildStory(storyId, buildId);
-    }
-
-    public Integer deleteBuildBug(Integer bugId, Integer buildId) {
-        return projectBuildDao.deleteBuildBug(bugId, buildId);
-    }
-
-    public Integer linkBuildStory(Integer storyId, Integer buildId) {
-        return projectBuildDao.linkBuildStory(storyId, buildId);
-    }
-
-    public Integer linkBuildBug(Integer bugId, Integer buildId) {
-        return projectBuildDao.linkBuildBug(bugId, buildId);
     }
 
 }

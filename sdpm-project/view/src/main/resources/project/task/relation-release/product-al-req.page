@@ -17,13 +17,13 @@
                 #@tr()
                     #@tinyTh({"width":"8"})<input type="checkbox" name="storyId" value="">#end
                     #@tinyTh({"class":"sorting","rel":"storyId"})ID#end
-                    #@tinyTh({"class":"","rel":"sortname"})P#end
-                    #@tinyTh({"class":"","rel":"storyTitle"})需求名称#end
-                    #@tinyTh({"class":"","rel":"storyOpenedBy"})创建#end
-                    #@tinyTh({"class":"","rel":"storyAssignedTo"})指派#end
+                    #@tinyTh({"class":"sorting","rel":"sortname"})P#end
+                    #@tinyTh({"class":"sorting","rel":"storyTitle"})需求名称#end
+                    #@tinyTh({"class":"sorting","rel":"storyOpenedBy"})创建#end
+                    #@tinyTh({"class":"sorting","rel":"storyAssignedTo"})指派#end
                     #@tinyTh({"class":"sorting","rel":"storyEstimate"})预计#end
                     #@tinyTh({"class":"sorting","rel":"storyStatus"})状态#end
-                    #@tinyTh({"class":"","rel":"storyStage"})阶段#end
+                    #@tinyTh({"class":"sorting","rel":"storyStage"})阶段#end
                     #@tinyTh({"class":"","rel":""})操作#end
 
                 #end

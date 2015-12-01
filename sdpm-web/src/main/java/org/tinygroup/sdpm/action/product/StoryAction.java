@@ -11,7 +11,6 @@ import org.tinygroup.sdpm.action.product.util.StoryUtil;
 import org.tinygroup.sdpm.common.condition.ConditionCarrier;
 import org.tinygroup.sdpm.common.condition.ConditionUtils;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
-import org.tinygroup.sdpm.common.util.ComplexSearch.SqlUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.dto.UploadProfile;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
@@ -21,8 +20,6 @@ import org.tinygroup.sdpm.product.dao.pojo.*;
 import org.tinygroup.sdpm.product.service.*;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
-import org.tinygroup.sdpm.project.service.inter.BuildService;
-import org.tinygroup.sdpm.project.service.inter.ProjectProductService;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.sdpm.project.service.inter.TaskService;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
@@ -521,7 +518,7 @@ public class StoryAction extends BaseController {
             story.setProductId(Integer.parseInt(cookieProductId));
         }
         ConditionCarrier carrier = new ConditionCarrier();
-        carrier.putStatus("storyStatus", StoryUtil.getStatusCondition(choose));
+        StoryUtil.getStatusCondition(choose, carrier);
         if (story.getModuleId() != null && story.getModuleId() > 0) {
             carrier.putModuleIn("productStory.moduleId", String.valueOf(story.getModuleId()));
         }
@@ -587,7 +584,7 @@ public class StoryAction extends BaseController {
         if ("noRelate".equals(type)) {
             carrier.put("productStory.planId",
                     ConditionUtils.Operate.NEQ.getOperate(),
-                    ConditionUtils.CommonFieldType.FIELD_OPERATE.getOperate(),
+                    ConditionUtils.CommonFieldType.FIELD_OPERATE.getCommonField(),
                     story.getPlanId());
             story.setPlanId(null);
         }
@@ -667,7 +664,7 @@ public class StoryAction extends BaseController {
         if ("noRelateBug".equals(relate)) {
             carrier.put("qualityBug.planId",
                     ConditionUtils.Operate.NEQ.getOperate(),
-                    ConditionUtils.CommonFieldType.FIELD_OPERATE.getOperate(),
+                    ConditionUtils.CommonFieldType.FIELD_OPERATE.getCommonField(),
                     bug.getPlanId());
             bug.setPlanId(null);
         }
