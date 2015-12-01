@@ -59,11 +59,11 @@
             <artifactId>sdpm-org-service-impl</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.tinygroup</groupId>
-            <artifactId>sdpm-org-service-wrapper</artifactId>
-            <version>${project.version}</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.tinygroup</groupId>-->
+            <!--<artifactId>sdpm-org-service-wrapper</artifactId>-->
+            <!--<version>${project.version}</version>-->
+        <!--</dependency>-->
 
         <!--service-->
         <dependency>
