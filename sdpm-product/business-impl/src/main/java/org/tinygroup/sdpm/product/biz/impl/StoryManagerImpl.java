@@ -83,22 +83,12 @@ public class StoryManagerImpl implements StoryManager {
         }
     }
 
-    public Pager<ProductStory> findPager(int start, int limit, ProductStory story, String statusCondition, SearchInfos conditions,
-                                         String groupOperate, String columnName, boolean asc) {
-        String condition = conditions != null ? SqlUtil.toSql(conditions.getInfos(), groupOperate) : "";
+    public Pager<ProductStory> findPagerRel(int start, int limit, ProductStory story, ConditionCarrier carrier, String columnName, boolean asc) {
 
-        condition = !StringUtil.isBlank(condition) ? (!StringUtil.isBlank(statusCondition) ? condition + " and "
-                + statusCondition : " " + condition)
-                : statusCondition;
-        OrderBy orderBy = null;
-        if (columnName != null && !"".equals(columnName)) {
-            orderBy = new OrderBy("product_story." + NameUtil.resolveNameDesc(columnName), asc);
+        if (StringUtil.isBlank(columnName)) {
+            return productStoryDao.complexQueryRel(start, limit, story, mergeCondition(carrier));
         }
-        if (condition != null && !"".equals(condition)) {
-            return productStoryDao.complexQueryRel(start, limit, story, condition,
-                    orderBy);
-        }
-        return productStoryDao.queryPager(start, limit, story, orderBy);
+        return productStoryDao.complexQueryRel(start, limit, story, mergeCondition(carrier),new OrderBy("product_story." + NameUtil.resolveNameDesc(columnName), asc));
     }
 
     public List<ProductStory> findList(ProductStory story) {

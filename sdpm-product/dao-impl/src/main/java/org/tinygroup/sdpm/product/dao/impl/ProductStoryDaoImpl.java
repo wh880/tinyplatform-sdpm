@@ -232,12 +232,7 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 		}
 		},pks);
 	}
-	
-	@SuppressWarnings("rawtypes")
-	public <T> T getByKeys(Serializable pk, Class<T> requiredType,SelectGenerateCallback<Serializable> callback) {
-		Select select=callback.generate(pk);
-		return getDslSession().fetchOneResult(select, requiredType);
-	}
+
 
 	public List<ProductStory> getByKeys(final boolean withSpec, Integer... pk){
 
@@ -560,7 +555,8 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 
 			public Select generate(ProductStory t) {
 
-				Select select = MysqlSelect.select(PRODUCT_STORYTABLE.ALL,PRODUCT_PLANTABLE.PLAN_NAME.as("planName")).from(PRODUCT_STORYTABLE).join(leftJoin(PRODUCT_PLANTABLE, PRODUCT_PLANTABLE.PLAN_ID.eq(PRODUCT_STORYTABLE.PLAN_ID))).where(and(
+				Select select = MysqlSelect.select(PRODUCT_STORYTABLE.ALL,PRODUCT_PLANTABLE.PLAN_NAME.as("planName")).
+						from(PRODUCT_STORYTABLE).join(leftJoin(PRODUCT_PLANTABLE, PRODUCT_PLANTABLE.PLAN_ID.eq(PRODUCT_STORYTABLE.PLAN_ID))).where(and(
 						condition,
 						PRODUCT_STORYTABLE.COMPANY_ID.eq(t.getCompanyId()),
 						PRODUCT_STORYTABLE.PRODUCT_ID.eq(t.getProductId()),
@@ -602,7 +598,7 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 		});
 	}
 
-	public Pager<ProductStory> complexQueryRel(int start, int limit, ProductStory productStory, final String condition, final OrderBy... orderBys) {
+	public Pager<ProductStory> complexQueryRel(int start, int limit, ProductStory productStory, final Condition condition, final OrderBy... orderBys) {
 		if (productStory == null) {
 			productStory = new ProductStory();
 		}
@@ -611,7 +607,7 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 				Select select = MysqlSelect.select(PRODUCT_STORYTABLE.ALL,PRODUCT_PLANTABLE.PLAN_NAME.as("planName"),PRODUCTTABLE.PRODUCT_NAME.as("productName")).
 						from(PRODUCT_STORYTABLE).join(leftJoin(PRODUCTTABLE, PRODUCT_STORYTABLE.PRODUCT_ID.eq(PRODUCTTABLE.PRODUCT_ID)), leftJoin(PRODUCT_PLANTABLE, PRODUCT_STORYTABLE.PLAN_ID.eq(PRODUCT_PLANTABLE.PLAN_ID)))
 						.where(and(
-						StringUtil.isBlank(condition)?null:fragmentCondition(condition),
+						condition,
 						PRODUCT_STORYTABLE.COMPANY_ID.eq(t.getCompanyId()),
 						PRODUCT_STORYTABLE.PRODUCT_ID.eq(t.getProductId()),
 						PRODUCT_STORYTABLE.STORY_PARENT_ID.eq(t.getStoryParentId()),

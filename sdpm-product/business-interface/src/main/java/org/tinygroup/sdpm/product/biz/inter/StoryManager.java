@@ -75,7 +75,7 @@ public interface StoryManager {
      * @param story
      * @return
      */
-    Pager<ProductStory> findPager(int start, int limit, ProductStory story, String statusCondition, SearchInfos conditions, String groupOperate, String columnName, boolean asc);
+    Pager<ProductStory> findPagerRel(int start, int limit, ProductStory story, ConditionCarrier carrier,String columnName, boolean asc);
 
     /**
      * 分页查询（排序）

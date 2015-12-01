@@ -77,7 +77,7 @@ public interface StoryService {
      * @param story
      * @return
      */
-    Pager<ProductStory> findStoryPager(int start, int limit, ProductStory story,String statusCondition, SearchInfos searchInfos, String groupOperate, String columnName, boolean asc);
+    Pager<ProductStory> findStoryPagerRel(int start, int limit, ProductStory story,ConditionCarrier carrier,String columnName, boolean asc);
 
     /**
      * 产品需求数量分类

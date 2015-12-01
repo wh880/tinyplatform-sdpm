@@ -351,25 +351,25 @@ public class UserAction extends BaseController {
 
     @RequiresPermissions("org-user-storyAdmin")
     @RequestMapping("/story/search")
-    public String storySearchAction(String id, int page, int pagesize, String choose, ProductStory story, String order, Model model) {
+    public String storySearchAction(String id, int start, int limit, String choose, ProductStory story, String order, Model model) {
         if (choose.equals("6")) {
             story.setStoryClosedBy(id);
-            Pager<ProductStory> p4 = storyService.findStoryPager(pagesize * (page - 1), pagesize, story, null, null, null, order, false);
+            Pager<ProductStory> p4 = storyService.findStoryPagerRel(start, limit, story, null, order, false);
             model.addAttribute("storyList", p4);
 
         } else if (choose.equals("4")) {
             story.setStoryOpenedBy(id);
-            Pager<ProductStory> p2 = storyService.findStoryPager(pagesize * (page - 1), pagesize, story, null, null, null, order, false);
+            Pager<ProductStory> p2 = storyService.findStoryPagerRel(start, limit, story, null, order, false);
             model.addAttribute("storyList", p2);
 
         } else if (choose.equals("5")) {
             story.setStoryReviewedBy(id);
-            Pager<ProductStory> p3 = storyService.findStoryPager(pagesize * (page - 1), pagesize, story, null, null, null, order, false);
+            Pager<ProductStory> p3 = storyService.findStoryPagerRel(start, limit, story, null, order, false);
             model.addAttribute("storyList", p3);
 
         } else {
             story.setStoryAssignedTo(id);
-            Pager<ProductStory> p1 = storyService.findStoryPager(pagesize * (page - 1), pagesize, story, null, null, null, order, false);
+            Pager<ProductStory> p1 = storyService.findStoryPagerRel(start, limit, story, null, order, false);
             model.addAttribute("storyList", p1);
         }
         return "organization/user/userStoryTable.pagelet";

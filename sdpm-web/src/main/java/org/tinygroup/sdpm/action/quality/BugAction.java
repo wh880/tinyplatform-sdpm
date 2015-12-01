@@ -791,14 +791,14 @@ public class BugAction extends BaseController {
     }
 
     @RequestMapping("/searchBug")
-    public String SearchAction(@CookieValue String cookieProductId, int start, int pagesize, ProductStory story, String choose, String groupOperate, SearchInfos searchInfos, String order, String ordertype, Model model, HttpServletRequest request) {
+    public String SearchAction(@CookieValue String cookieProductId, int start, int limit, ProductStory story, String choose, String groupOperate, SearchInfos searchInfos, String order, String ordertype, Model model) {
 
         story.setProductId(Integer.parseInt(cookieProductId));
+        ConditionCarrier carrier = new ConditionCarrier();
+        carrier.putSearch("storySearch",searchInfos,groupOperate);
+        carrier.putStatus("storyStatus",StoryUtil.getStatusCondition(choose));
 
-	    	/*if (story.getModuleId()==-1) {
-                story.setModuleId(null);
-			}*/
-        Pager<ProductStory> p = storyService.findStoryPager(start, pagesize, story, StoryUtil.getStatusCondition(choose), searchInfos, groupOperate, order, "asc".equals(ordertype) ? true : false);
+        Pager<ProductStory> p = storyService.findStoryPagerRel(start,limit,story,carrier,order,"asc".equals(ordertype)?true:false);
         model.addAttribute("storyList", p);
         return "product/data/tabledata.pagelet";
     }
