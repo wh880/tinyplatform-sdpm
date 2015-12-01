@@ -130,7 +130,8 @@
         background: #985813
     }
 }
-
+.main-position-fixed.menu-on-top #demo-settings{top:46px}
+.menu-on-top #demo-settings{margin-top:2px}
 /**select2特有**/
 #bodyrap .select2-results {
     margin: 5px;
