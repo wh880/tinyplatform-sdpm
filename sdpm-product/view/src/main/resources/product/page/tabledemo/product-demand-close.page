@@ -22,7 +22,10 @@
 
         $("#subdivision").hide();
         $("#repeat").hide();
-
+        $("input[name=storyDuplicateStory],input[name=storyDuplicateStory-name]").attr("ignore","ignore");
+        $("input[name=storyChildStories],input[name=storyChildStories-name]").attr("ignore","ignore");
+        $("input[name=storyChildStories],input[name=storyDuplicateStory]").val("").trigger("change");
+        $("input[name=storyDuplicateStory]").val("").trigger("change");
         $("select[name='storyClosedReason']").on("change", function () {
             var subdivision = $("#subdivision");
             var repeat = $("#repeat");
@@ -69,7 +72,7 @@
             #@colLabel()<span class="c-red">*</span>关闭原因：#end
             #@formControlDiv("col-3")
                 #@Tselect2F()
-                    #@Tselect2Body("storyClosedReason" 0 {"class":"input-text","datatype":"*","nullmsg":"关闭原因不能为空！"})
+                    #@Tselect2Body("storyClosedReason" "" {"class":"input-text","datatype":"*","nullmsg":"关闭原因不能为空！"})
                         #foreach(s:getDict("proCloseReason"))
                             <option value="${s?.value}">${s?.text}</option>
                         #end
@@ -85,7 +88,7 @@
                     #Tselect2Ajax("storyChildStories" "" TINY_CONTEXT_PATH+adminPath+"/product/story/ajax/storyInCondition"
                     {"dataId":"storyId","dataText":"storyTitle","placeholder":"查询细分需求","nullmsg":"请选择细分需求！","datatype":"*"})
                     #@Tselect2Fix()
-                        <a href="${TINY_CONTEXT_PATH+adminPath}/product/page/project/togglebox.page">全部</a>#end
+                        <a href="${TINY_CONTEXT_PATH+adminPath}/product/story">全部</a>#end
                 #end
             #end
             #@validateDiv("col-2")#end
@@ -97,7 +100,7 @@
                     #Tselect2Ajax("storyDuplicateStory" "" TINY_CONTEXT_PATH+adminPath+"/product/story/ajax/storyInCondition"
                     {"dataId":"storyId","dataText":"storyTitle","placeholder":"查询重复需求","nullmsg":"请选择重复需求！","datatype":"*"})
                     #@Tselect2Fix()
-                        <a href="${TINY_CONTEXT_PATH+adminPath}/product/page/project/togglebox.page">全部</a>#end
+                        <a href="${TINY_CONTEXT_PATH+adminPath}/product/story">全部</a>#end
                 #end
             #end
             #@validateDiv("col-2")#end

@@ -51,17 +51,24 @@
         	</div>
     #@elementItem()
             #@sdpmItem("指派给")
-	            #@Tselect2F()
-	                #@Tselect2Body("bugAssignedTo" bug?.bugAssignedTo {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-						#foreach(user : userList)
-							<option value="${user?.orgUserId}">${user?.orgUserRealName}</option>
+				#@Tselect2F()
+					#Tselect2Ajax("bugAssignedTo" bug?.bugAssignedTo TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
+					{"id":"","dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询用户"})
+					#@Tselect2Fix()
+						#set(m=menuManager.getMenu("organizationAddUser"))
+						#if(m)
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
 						#end
-	                #end
-                #end
+						#set(m=menuManager.getMenu("organizationUser"))
+						#if(m)
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
+						#end
+					#end
+				#end
         	#end
     #end
     #@elementItem()
-    	#@sdpmItem("优先级")
+    	#@sdpmItem("<span class='c-red'>*</span>优先级")
                #@Tselect2F()
 					 #@Tselect2Body("priority" bug?.priority {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 						 #foreach(pri : getDict("bugPriority"))
@@ -74,13 +81,22 @@
     #@elementItem()
    
         #@sdpmItem("抄送给")
-             #@Tselect2F()
-	               #@Tselect2Body("bugMailto" bug?.bugMailto {"class":"input-text select2","multiple":"multiple"}) ##,"multiple":"multiple"加上为多选项
-						#foreach(user : userList)
-						<option value="${user?.orgUserId}">${user?.orgUserRealName}</option>
-						#end
-	          		#end                
-        	 #end
+			#@Tselect2F()
+				#Tselect2Ajax("bugMailto" bug?.bugMailto TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
+				{"id":"storyMailtoSelect","dataId":"orgUserId","dataText":"orgUserRealName",
+					"placeholder":"查询抄送人","multiple":"multiple"})
+
+				#@Tselect2Fix()
+					#set(m=menuManager.getMenu("organizationAddUser"))
+					#if(m)
+                        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
+					#end
+					#set(m=menuManager.getMenu("organizationUser"))
+					#if(m)
+                        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
+					#end
+				#end
+			#end
     	#end
     #end
     #@elementItem()
@@ -111,3 +127,11 @@
 		#history(adminPath+"/system/action/ajax/history?actionObjectType=bug&actionObjectId="+bug?.bugId)
 	</div>
 #end
+<script type="text/javascript">
+    $(function () {
+        $("form[name=thisform]").Validform({
+            tiptype: 2
+        });
+    });
+
+</script>

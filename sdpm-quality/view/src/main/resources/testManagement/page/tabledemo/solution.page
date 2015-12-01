@@ -33,78 +33,74 @@
             	<button type="submit" id="submit2" class="commitBtn">保存</button>
         	</div>
     #@elementItem()
-        <div class="col-12">
-         	<div class="col-2 text-r"><label><span class="c-red">*</span>解决方案：</label></div>
-         		<div class="col-4">
-            #@tinySelect("bugResolution" bug?.bugResolution {"class":"input-text","rel":"22","onclick":"setType(this.value)"})
-                #foreach(re : getDict("bugResolution"))
-                        #@tinyOptionItem(re.value)${re.text}#end
+        <div class="col-2 text-r"><label><span class="c-red">*</span>解决方案：</label></div>
+        #@formControlDiv("col-4")
+                #@Tselect2F()
+                    #@Tselect2Body("bugResolution" bug?.bugResolution?:2 {"class":"input-text","datatype":"*","nullmsg":"解决方案不能为空！"})
+                        #foreach(s:getDict("bugResolution"))
+                            <option value="${s?.value}">${s?.text}</option>
+                        #end
+                    #end
                 #end
-            #end
-              </div>
-       </div>
+        #end
+        #@validateDiv("col-2")#end
      #end
            ##此处需要一段JS代码,点重复Bug出现。
-    #@elementItem(elementId="idBox" eleItemClass="hidden")
-        <div class="col-12">
-         	<div class="col-2 text-r"><label>重复ID：</label></div>
-         		<div class="col-4">
-                    #@tinySelect("bugDuplicateBug" bug?.bugDuplicateBug {"class":"input-text","rel":"22","onclick":"setType(this.value)"})
-                        #foreach(re : bugList)
-                            #@tinyOptionItem(re.bugId)${re.bugTitle}#end
-                        #end
-                     #end
+    #@elementItem("idBox")
+        <div class="col-2 text-r"><label><span class="c-red">*</span>重复ID：</label></div>
+        #@formControlDiv("col-4")
+                #@Tselect2F()
+                    #Tselect2Ajax("bugDuplicateBug" bug?.bugDuplicateBug TINY_CONTEXT_PATH+adminPath+"/quality/bug/ajax/bugInCondition"
+                    {"dataId":"bugId","dataText":"bugTitle","placeholder":"查询重复bug","nullmsg":"请选择重复bug！","datatype":"*"})
+                    #@Tselect2Fix()
+                        <a href="${TINY_CONTEXT_PATH+adminPath}/quality/bug">全部</a>#end
+                #end
 
-              </div>
-       </div>
+        #end
+        #@validateDiv("col-2")#end
      #end
      #@elementItem()
-        <div class="col-12">
-         	<div class="col-2 text-r"><label>解决版本：</label></div>
-         		<div class="col-4">
+        <div class="col-2 text-r"><label><span class="c-red">*</span>解决版本：</label></div>
+         #@formControlDiv("col-4")
             #@Tselect2F()
-	             #@Tselect2Body("bugResolvedBuild" bug?.bugResolvedBuild {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                    <option value="0">trunk</option>
-                    #foreach(build : buildList)
+             #@Tselect2Body("bugResolvedBuild" bug?.bugResolvedBuild {"class":"input-text select2","datatype":"*","nullmsg":"解决版本不能为空"}) ##,"multiple":"multiple"加上为多选项
+                <option value="0">trunk</option>
+                #foreach(build : buildList)
                     <option value="${build?.buildId}">${build?.buildName}</option>
-                    #end
-	               #end
-              #end
-              </div>
-       </div>
+                #end
+             #end
+            #end
+          #end
+         #@validateDiv("col-2")#end
      #end
 
     #@elementItem()
-        <div class="col-12">
-         	<div class="col-2 text-r"><label>解决日期：</label></div>
-         		<div class="col-4">
-            #@tinyDateInput("bugResolvedDate" formatDate(bug?.bugResolvedDate,"yyyy-MM-dd") "yyyy-MM-dd" {"datatype":"*","nullmsg":"日期不能为空"})#end
-        		</div>
-        </div>
+
+         	<div class="col-2 text-r"><label><span class="c-red">*</span>解决日期：</label></div>
+        #@formControlDiv("col-4")
+                #@tinyDateInput("bugResolvedDate" formatDate(bug?.bugResolvedDate,"yyyy-MM-dd") "yyyy-MM-dd" {"datatype":"*","nullmsg":"日期不能为空"})#end
+        #end
+        #@validateDiv("col-2")#end
     #end
     #@elementItem()
-        <div class="col-12">
          	<div class="col-2 text-r"><label>指派给：</label></div>
-         		<div class="col-4">
-            #@Tselect2F()
-	             #@Tselect2Body("bugAssignedTo" bug?.bugAssignedTo?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                    #foreach(user : userList)
-                    <option value="${user?.orgUserId}">${user?.orgUserRealName}</option>
+        #@formControlDiv("col-4")
+
+                    #@Tselect2F()
+                        #Tselect2Ajax("bugAssignedTo" bug?.bugAssignedTo TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
+                        {"id":"","dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询用户"})
+                        #@Tselect2Fix()
+                            #set(m=menuManager.getMenu("organizationAddUser"))
+                            #if(m)
+                                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
+                            #end
+                            #set(m=menuManager.getMenu("organizationUser"))
+                            #if(m)
+                                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
+                            #end
+                        #end
                     #end
-	               #end
-                #@Tselect2Fix()
-                    #set(m=menuManager.getMenu("organizationAddUser"))
-                    #if(m)
-                        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
-                    #end
-                    #set(m=menuManager.getMenu("organizationUser"))
-                    #if(m)
-                        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
-                    #end
-                #end
-              #end
-              </div>
-       </div>
+         #end
      #end
 #@elementItem()
     <div class="col-12">
@@ -146,12 +142,32 @@
 <script type="text/javascript">
 	
 	/* 重复ID隐藏*/
-	function setType(type){
-		if(type == '1'){
-			$('#idBox').removeClass('hidden');
-		}
-		else{
-			$('#idBox').addClass('hidden');			
-		}				
-	}  
+    $(document).ready(function () {
+
+        $("#idBox").hide();
+        $("input[name=bugDuplicateBug],input[name=bugDuplicateBug-name]").attr("ignore","ignore");
+        $("input[name=bugDuplicateBug],input[name=bugDuplicateBug]").val("").trigger("change");
+        $("select[name='bugResolution']").on("change", function () {
+            var idBox = $("#idBox");
+            if ($(this).val() == '1') {
+                idBox.show();
+                $("input[name=bugDuplicateBug],input[name=bugDuplicateBug-name]").attr("ignore","");
+                $(function() {
+                    ajaxRead("${sid}", "storyChildStories", "storyId", "storyTitle", "/product/story/storyList?productId=${cookieProductId}&storyId=${story?.storyId}");
+                })
+
+            } else {
+                $("input[name=bugDuplicateBug],input[name=bugDuplicateBug-name]").attr("ignore","ignore");
+                $("input[name=bugDuplicateBug],input[name=bugDuplicateBug]").val("").trigger("change");
+                idBox.hide();
+            }
+        });
+
+    });
+    $(function () {
+        $("form[name=thisform]").Validform({
+            tiptype: 2
+        });
+    });
+
 </script>

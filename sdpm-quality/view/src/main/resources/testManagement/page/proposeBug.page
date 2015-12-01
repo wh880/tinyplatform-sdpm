@@ -174,14 +174,16 @@
                         #tinyInput("text" "bugTitle" bug?.bugTitle {"placeholder":"请输入bug名称","datatype":"*","nullmsg":"bug名称不能为空！","id":"版本","class":"input-text"})
                     #end
                     #@div(divClass="col-3")
-
-                        #@tinySelect("priority" bug?.priority {"placeholder":"请选择优先级","datatype":"*","nullmsg":"优先级不能为空！","class":"select2"})
-                            #foreach(pri : getDict("bugPriority"))
-                            #@tinyOptionItem(pri.value)${pri.text}#end
+                        #@Tselect2F()
+                            #@Tselect2Body("priority" bug?.priority {"class":"input-text select2",
+                                "datatype":"*","nullmsg":"优先级不能为空！"}) ##,"multiple":"multiple"加上为多选项
+                                #foreach(pri : getDict("bugPriority"))
+                                    <option value="${pri.value}">${pri.text}</option>
+                                #end
+                            #end
                         #end
                     #end
                 #end
-            #end
             #@validateDiv("col-2")#end
         #end
         #@elementItem()

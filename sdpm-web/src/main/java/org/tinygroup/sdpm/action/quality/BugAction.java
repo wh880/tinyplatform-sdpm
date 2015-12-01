@@ -223,8 +223,7 @@ public class BugAction extends BaseController {
     @RequiresPermissions("tmakesure")
     @RequestMapping("/makesure")
     public String makesure(Integer bugId, Model model) {
-        QualityBug bug = new QualityBug();
-        bug = bugService.findById(bugId);
+        QualityBug bug = bugService.findById(bugId);
         List<OrgUser> orgUsers = userService.findUserList(null);
         model.addAttribute("bug", bug);
         model.addAttribute("userList", orgUsers);
@@ -234,7 +233,7 @@ public class BugAction extends BaseController {
     @RequiresPermissions("tmakesure")
     @ResponseBody
     @RequestMapping("batch/sure")
-    public Map makesure(String ids, Model model) {
+    public Map makesure(String ids) {
         String[] bugIds = ids.split(",");
         if (bugIds.length > 0) {
             for (String id : bugIds) {
@@ -264,7 +263,7 @@ public class BugAction extends BaseController {
     @RequiresPermissions("tsolution")
     @ResponseBody
     @RequestMapping("batch/resolve")
-    public Map resolve(String ids, String resolutionType, Model model) {
+    public Map resolve(String ids, String resolutionType) {
         String[] bugIds = ids.split(",");
         if (bugIds.length > 0) {
             for (String id : bugIds) {
@@ -297,7 +296,7 @@ public class BugAction extends BaseController {
     @RequiresPermissions("tassign")
     @ResponseBody
     @RequestMapping("batch/assign")
-    public Map assign(String ids, String userId, Model model) {
+    public Map assign(String ids, String userId) {
         String[] bugIds = ids.split(",");
         if (bugIds.length > 0) {
             for (String id : bugIds) {
@@ -324,7 +323,7 @@ public class BugAction extends BaseController {
     }
 
     @RequestMapping("/sure")
-    public String makesure(QualityBug bug, SystemAction systemAction, HttpServletRequest request) {
+    public String makesure(QualityBug bug, SystemAction systemAction) {
         QualityBug qualityBug = bugService.findById(bug.getBugId());
         if (qualityBug.getBugAssignedTo() != bug.getBugAssignedTo()) {
             bug.setBugAssignedDate(new Date());
@@ -375,8 +374,7 @@ public class BugAction extends BaseController {
     }
 
     @RequestMapping("/assignTo")
-    public String assign(QualityBug bug, SystemAction systemAction, HttpServletRequest request) {
-        QualityBug qualityBug = bugService.findById(bug.getBugId());
+    public String assign(QualityBug bug, SystemAction systemAction) {
         bug.setBugAssignedDate(new Date());
         bugService.updateBug(bug);
 
@@ -428,8 +426,9 @@ public class BugAction extends BaseController {
     }
 
     @RequestMapping("/solve")
-    public String solve(QualityBug bug, SystemAction systemAction,
-                        HttpServletRequest request, @RequestParam(value = "file", required = false) MultipartFile[] file,
+    public String solve(QualityBug bug,
+                        SystemAction systemAction,
+                        @RequestParam(value = "file", required = false) MultipartFile[] file,
                         String[] title, UploadProfile uploadProfile) throws IOException {
         QualityBug qualityBug = bugService.findById(bug.getBugId());
         if (qualityBug.getBugAssignedTo() != bug.getBugAssignedTo()) {
@@ -877,5 +876,16 @@ public class BugAction extends BaseController {
                 , null
                 , null);
         return "redirect:/a/quality/bug";
+    }
+
+    @ResponseBody
+    @RequestMapping("ajax/bugInCondition")
+    public List<QualityBug> bugInCondition(String key, Integer initKey, Integer productId, HttpServletRequest request) {
+        if (initKey != null) {
+            List<QualityBug> result = new ArrayList<QualityBug>();
+            result.add(bugService.findById(initKey));
+            return result;
+        }
+        return bugService.bugInCondition(key, productId == null ? Integer.parseInt(CookieUtils.getCookie(request, "qualityProductId")) : productId);
     }
 }

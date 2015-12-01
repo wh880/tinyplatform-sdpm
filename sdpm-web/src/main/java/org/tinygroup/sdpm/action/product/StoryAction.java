@@ -940,7 +940,7 @@ public class StoryAction extends BaseController {
 
     @ResponseBody
     @RequestMapping("ajax/storyInCondition")
-    public List<ProductStory> userInCondition(String key, Integer initKey, Integer productId, HttpServletRequest request) {
+    public List<ProductStory> storyInCondition(String key, Integer initKey, Integer productId, HttpServletRequest request) {
         if (initKey != null) {
             List<ProductStory> result = new ArrayList<ProductStory>();
             result.add(storyService.findStory(initKey));
