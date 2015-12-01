@@ -5,6 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.tinygroup.commons.tools.StringUtil;
+import org.tinygroup.sdpm.action.system.ExportUtils;
+import org.tinygroup.sdpm.common.docTemplate.inter.DocTemplateResolver;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.dto.UploadProfile;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
@@ -13,6 +15,8 @@ import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.product.service.ReleaseService;
 import org.tinygroup.sdpm.product.service.StoryService;
+import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
+import org.tinygroup.sdpm.quality.service.inter.BugService;
 import org.tinygroup.sdpm.system.dao.pojo.ProfileType;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;
@@ -22,7 +26,9 @@ import org.tinygroup.sdpm.util.CookieUtils;
 import org.tinygroup.sdpm.util.LogUtil;
 import org.tinygroup.sdpm.util.ProductUtils;
 import org.tinygroup.sdpm.util.UserUtils;
+import org.tinygroup.template.TemplateContext;
 import org.tinygroup.template.TemplateException;
+import org.tinygroup.template.impl.TemplateContextDefault;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -48,7 +54,7 @@ public class ReleaseAction extends BaseController {
     @Autowired
     private StoryService storyService;
     @Autowired
-    private ExportService exportService;
+    private BugService bugService;
 
     @ModelAttribute
     public void init(Model model) {
@@ -389,6 +395,49 @@ public class ReleaseAction extends BaseController {
     }
     @RequestMapping("/exportDoc")
     public void exportDocument(Integer releaseId, HttpServletResponse response) throws IOException, TemplateException {
-        exportService.exportReleaseDoc(response,releaseId);
+        TemplateContext context = new TemplateContextDefault();
+        if (releaseId != null) {
+            ProductRelease release = releaseService.findRelease(releaseId);
+            String releaseStory = release.getReleaseStories();
+            List<Integer> sIds = null;
+            if (!StringUtil.isBlank(releaseStory)) {
+                sIds = new ArrayList<Integer>();
+                String[] ids = releaseStory.split(",");
+                for (String id : ids) {
+                    sIds.add(Integer.parseInt(id));
+                }
+            }
+            List<ProductStory> stories = new ArrayList<ProductStory>();
+            if (sIds != null && sIds.size() > 0) {
+                Integer[] nIds = new Integer[sIds.size()];
+                stories = storyService.getStoryWithSpecInIds(true, sIds.toArray(nIds));
+            }
+            context.put("storyList", stories);
+
+            QualityBug bug = new QualityBug();
+            bug.setBugOpenedBuild(String.valueOf(release.getBuildId()));
+            bug.setDeleted(0);
+            List<QualityBug> bugAllList = bugService.getBugsInReleaseDoc(bug);
+            String releaseBugs = release.getReleaseBugs();
+            String[] bugIds = releaseBugs == null ? null : releaseBugs.split(",");
+            List<QualityBug> inBugList = new ArrayList<QualityBug>();
+            List<QualityBug> notInBugList = new ArrayList<QualityBug>();
+            if (bugIds != null && bugIds.length > 0) {
+                for (String id : bugIds) {
+                    for (QualityBug bug1 : bugAllList) {
+                        if (bug1.getBugId().equals(Integer.parseInt(id))) {
+                            inBugList.add(bug1);
+                        } else {
+                            notInBugList.add(bug1);
+                        }
+                    }
+                }
+            } else {
+                notInBugList = bugAllList;
+            }
+            context.put("bugInList", inBugList);
+            context.put("bugNoInList", notInBugList);
+        }
+        ExportUtils.mergeTemplate(DocTemplateResolver.RELEASE, context, response, "发布文档");
     }
 }

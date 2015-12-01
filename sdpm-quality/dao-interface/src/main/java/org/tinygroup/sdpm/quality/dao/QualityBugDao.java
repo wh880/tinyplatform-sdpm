@@ -47,4 +47,6 @@ public interface QualityBugDao extends BaseDao<QualityBug,Integer> {
     Integer deleteBugsByStory(Integer storyId);
 
     Integer deleteBugsByTask(Integer taskId);
+
+    List<QualityBug> getBugsInReleaseDoc(QualityBug bug);
 }

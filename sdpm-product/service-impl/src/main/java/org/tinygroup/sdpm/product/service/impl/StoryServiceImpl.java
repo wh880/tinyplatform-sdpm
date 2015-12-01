@@ -136,4 +136,8 @@ public class StoryServiceImpl implements StoryService {
         return storyManager.storyInCondition(condition,productId);
     }
 
+    public List<ProductStory> getStoryWithSpecInIds(boolean isWithSpec, Integer... ids) {
+        return storyManager.findList(isWithSpec,ids);
+    }
+
 }

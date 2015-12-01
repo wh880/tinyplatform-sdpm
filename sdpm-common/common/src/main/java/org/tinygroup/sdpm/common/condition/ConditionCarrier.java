@@ -5,6 +5,7 @@ import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.tinysqldsl.base.Condition;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -12,7 +13,7 @@ import java.util.Set;
 /**
  * Created by wangll13383 on 2015/11/4.
  */
-public class ConditionCarrier {
+public class ConditionCarrier implements Serializable{
     public static final String AND = "and";
     private Map<String, String> operateMap;
     private Map<String, Object[]> valueMap;

@@ -240,8 +240,11 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 			@SuppressWarnings("rawtypes")
 			public Select generate(Serializable[] t) {
 				if(withSpec){
-					return select(PRODUCT_STORYTABLE.ALL,PRODUCT_STORY_SPECTABLE.STORY_SPEC.as("storySpec")).from(PRODUCT_STORYTABLE).join(
-							leftJoin(PRODUCT_STORY_SPECTABLE,PRODUCT_STORY_SPECTABLE.STORY_ID.eq(PRODUCT_STORYTABLE.STORY_ID))
+					return select(PRODUCT_STORYTABLE.ALL,
+							PRODUCT_STORY_SPECTABLE.STORY_SPEC.as("storySpec"),
+							PRODUCTTABLE.PRODUCT_NAME.as("productName")).from(PRODUCT_STORYTABLE).join(
+							leftJoin(PRODUCT_STORY_SPECTABLE,PRODUCT_STORY_SPECTABLE.STORY_ID.eq(PRODUCT_STORYTABLE.STORY_ID)),
+							leftJoin(PRODUCTTABLE,PRODUCTTABLE.PRODUCT_ID.eq(PRODUCT_STORYTABLE.PRODUCT_ID))
 					).where(and(PRODUCT_STORYTABLE.STORY_VERSION.eq(PRODUCT_STORY_SPECTABLE.STORY_VERSION),PRODUCT_STORYTABLE.STORY_ID.in(t)));
 				}
 				return selectFrom(PRODUCT_STORYTABLE).where(PRODUCT_STORYTABLE.STORY_ID.in(t));

@@ -175,10 +175,10 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
 					QUALITY_TEST_CASETABLE.CASE_TITLE.as("fromCase"),
 					PRODUCT_STORYTABLE.STORY_TITLE.as("linkStoryName"),
 					PROJECT_TASKTABLE.TASK_NAME.as("toTaskName"),
-					new Column(new Table("linkCaseTable"),"case_title").as("linkCaseTitle"),
-					new Column(new Table("linkBugTable"),"bug_title").as("linkBugTitle"),
-					new Column(new Table("linkTaskTable"),"task_name").as("linkTaskName"),
-					new Column(new Table("toStoryTable"),"story_title").as("toStoryTitle")
+					((QualityTestCaseTable) QUALITY_TEST_CASETABLE.as("linkCaseTable")).CASE_TITLE.as("linkCaseTitle"),
+					((QualityBugTable) QUALITY_BUGTABLE.as("linkBugTable")).BUG_TITLE.as("linkBugTitle"),
+					((ProjectTaskTable) PROJECT_TASKTABLE.as("linkTaskTable")).TASK_NAME.as("linkTaskName"),
+					((ProductStoryTable) PRODUCT_STORYTABLE.as("toStoryTable")).STORY_TITLE.as("toStoryTitle")
 					)
 					.from(QUALITY_BUGTABLE).join(
 							Join.leftJoin(PRODUCTTABLE, PRODUCTTABLE.PRODUCT_ID.eq(QUALITY_BUGTABLE.PRODUCT_ID)),
@@ -745,5 +745,18 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
 	public Integer deleteBugsByTask(Integer taskId) {
 		Update update = update(QUALITY_BUGTABLE).set(QUALITY_BUGTABLE.DELETED.value(1)).where(and(QUALITY_BUGTABLE.TASK_ID.eq(taskId), QUALITY_BUGTABLE.DELETED.eq(0)));
 		return getDslSession().execute(update);
+	}
+
+	public List<QualityBug> getBugsInReleaseDoc(QualityBug bug) {
+		Select select = select(QUALITY_BUGTABLE.ALL,PRODUCTTABLE.PRODUCT_NAME.as("productName")).
+				from(QUALITY_BUGTABLE).join(
+				Join.leftJoin(PRODUCTTABLE, PRODUCTTABLE.PRODUCT_ID.eq(QUALITY_BUGTABLE.PRODUCT_ID))
+		).where(and(
+					QUALITY_BUGTABLE.BUG_OPENED_BUILD.eq(bug.getBugOpenedBuild()),
+					QUALITY_BUGTABLE.DELETED.eq(bug.getDeleted()))
+
+				);
+		return getDslSession().fetchList(select,QualityBug.class);
+
 	}
 }

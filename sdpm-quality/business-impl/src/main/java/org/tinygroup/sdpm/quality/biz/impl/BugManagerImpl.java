@@ -100,6 +100,10 @@ public class BugManagerImpl implements BugManager {
         }
     }
 
+    public List<QualityBug> getBugsInReleaseDoc(QualityBug bug) {
+        return bugdao.getBugsInReleaseDoc(bug);
+    }
+
     public int[] batchDelete(List<QualityBug> bugIds) {
 
         return bugdao.batchUpdateDel(bugIds);

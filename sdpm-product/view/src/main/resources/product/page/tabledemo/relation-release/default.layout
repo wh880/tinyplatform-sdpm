@@ -59,9 +59,9 @@
                         #end
                     </div>
                     #if("no-demand"==cname)
-                        <div style="float:right">
-                            <a href="#" id="showsearchmore-demand">#buttonIcon(iconClass="icon-search")搜索</a>
-                        </div>
+##                        <div style="float:right">
+##                            <a href="#" id="showsearchmore-demand">#buttonIcon(iconClass="icon-search")搜索</a>
+##                        </div>
                     #end
 
                 #end

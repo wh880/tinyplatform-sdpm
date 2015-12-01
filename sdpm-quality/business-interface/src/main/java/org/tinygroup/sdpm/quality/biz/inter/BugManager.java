@@ -68,5 +68,6 @@ public interface BugManager {
 
     Pager<QualityBug> findBugListPager(Integer start, Integer limit, ConditionCarrier carrier, QualityBug bug, String sortName, boolean asc);
 
+    List<QualityBug> getBugsInReleaseDoc(QualityBug bug);
 
 }

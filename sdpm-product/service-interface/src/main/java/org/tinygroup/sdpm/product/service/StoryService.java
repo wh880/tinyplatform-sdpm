@@ -18,11 +18,7 @@ public interface StoryService {
      * @return
      */
     ProductStory addStory(ProductStory story,ProductStorySpec storySpec ,String userId);
-    /**
-     * 根据需求Id删除
-     * @param storyId
-     * @return
-     */
+
     Integer deleteStory(ProductStory story);
 
     /**
@@ -134,4 +130,6 @@ public interface StoryService {
      * @return
      */
     List<ProductStory> storyInCondition(String condition, Integer productId);
+
+    List<ProductStory> getStoryWithSpecInIds(boolean isWithSpec, Integer ...ids);
 }

@@ -60,6 +60,10 @@ public class BugServiceImpl implements BugService {
         return bugmanager.findBugListPager(start,limit,carrier,bug,sortName,asc);
     }
 
+    public List<QualityBug> getBugsInReleaseDoc(QualityBug bug) {
+        return bugmanager.getBugsInReleaseDoc(bug);
+    }
+
     public int[] batchDeleteBug(List<QualityBug> bugIds) {
 
         return bugmanager.batchDelete(bugIds);

@@ -64,4 +64,6 @@ public interface BugService {
     Pager<QualityBug> findStoryChangedBugs(Integer start,Integer limit, ConditionCarrier carrier, QualityBug bug,String sortName,boolean asc);
 
     Pager<QualityBug> findBugListPager(Integer start,Integer limit, ConditionCarrier carrier, QualityBug bug,String sortName,boolean asc);
+
+    List<QualityBug> getBugsInReleaseDoc(QualityBug bug);
 }
