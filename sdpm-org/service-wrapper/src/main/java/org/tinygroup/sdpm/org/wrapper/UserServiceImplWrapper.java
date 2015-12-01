@@ -174,7 +174,7 @@ public class UserServiceImplWrapper implements org.tinygroup.sdpm.org.service.in
 		}
 	}
 
-	public boolean validatePassword(java.lang.String plainPassword ,java.lang.String password) {
+	public Boolean validatePassword(java.lang.String plainPassword ,java.lang.String password) {
 		String serviceId = "validatePassword";
 
 		try{

@@ -133,7 +133,7 @@ public class UserServiceImpl implements UserService {
      * @param password      密文密码
      * @return 验证成功返回true
      */
-    public boolean validatePassword(String plainPassword, String password) {
+    public Boolean validatePassword(String plainPassword, String password) {
         return userManager.validatePassword(plainPassword, password);
     }
 

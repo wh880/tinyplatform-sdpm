@@ -61,7 +61,7 @@ public class ProjectBuildAction extends BaseController {
     @Autowired
     private ProfileService profileService;
 
-    @RequiresPermissions("version-menu")
+    @RequiresPermissions("version")
     @RequestMapping("/index")
     public String index(Model model, HttpServletRequest request, HttpServletResponse response) {
         Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
@@ -140,7 +140,6 @@ public class ProjectBuildAction extends BaseController {
 
 
     @RequestMapping(value = "/addSave", method = RequestMethod.POST)
-
     public String addSave(ProjectBuild build, Model model, UploadProfile uploadProfile) throws IOException {
         ProjectBuild temp;
         if (build.getBuildId() == null) {

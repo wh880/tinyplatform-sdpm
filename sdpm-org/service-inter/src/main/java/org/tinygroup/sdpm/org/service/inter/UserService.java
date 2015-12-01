@@ -101,7 +101,7 @@ public interface UserService {
      * @param password      密文密码
      * @return 验证成功返回true
      */
-    boolean validatePassword(String plainPassword, String password);
+    Boolean validatePassword(String plainPassword, String password);
 
     /**
      * 根据用户id数组查出用户list
