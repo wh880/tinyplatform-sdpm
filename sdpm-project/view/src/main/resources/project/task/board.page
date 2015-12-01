@@ -195,6 +195,7 @@
         $(".btn-info-toggle").on("click", function () {
             $(this).parents(".board").toggleClass("show-info");
         });
+        console.log("test");
         var statarr = ["board-task-closed", "board-task-cancel", "board-task-done", "board-task-doing", "board-task-wait"];
         $(".col-droppable").droppable({
             drop: function (event, ui) {

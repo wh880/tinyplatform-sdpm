@@ -83,7 +83,7 @@
 
 <script type="text/javascript">
     $(function () {
-        $("form[name=thisform").Validform({tiptype: 2});
+        $("form[name=thisform]").Validform({tiptype: 2});
     });
 </script>
 

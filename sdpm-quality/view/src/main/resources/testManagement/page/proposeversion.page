@@ -197,8 +197,8 @@
 
     $(function(){
 
-        $("form[name=thisform").attr("action",'#link(adminPath+"/quality/version/save")');
-        $("form[name=thisform").Validform({
+        $("form[name=thisform]").attr("action",'#link(adminPath+"/quality/version/save")');
+        $("form[name=thisform]").Validform({
             tiptype:2,
             ajaxPost:true,
             beforeSubmit:function(curform){
