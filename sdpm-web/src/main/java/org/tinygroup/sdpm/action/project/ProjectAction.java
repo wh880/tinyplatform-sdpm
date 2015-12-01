@@ -223,7 +223,7 @@ public class ProjectAction extends BaseController {
     @RequestMapping(value = "hangUp", method = RequestMethod.POST)
     public Map<String, String> hangUpSave(Project project, String content) {
         Project oldProject = projectService.findProjectById(project.getProjectId());
-        project.setProjectStatus(project.HANGUP);
+        project.setProjectStatus(Project.HANGUP);
         Integer res = projectService.updateProject(project);
         LogUtil.logWithComment(LogUtil.LogOperateObject.PROJECT, LogUtil.LogAction.SUSPENDED, oldProject.getProjectId().toString(),
                 UserUtils.getUserId(), null, oldProject.getProjectId().toString(), oldProject, project, content);
@@ -242,7 +242,7 @@ public class ProjectAction extends BaseController {
     @RequestMapping(value = "start", method = RequestMethod.POST)
     public Map<String, String> startSave(Project project, String content) {
         Project oldProject = projectService.findProjectById(project.getProjectId());
-        project.setProjectStatus(project.DOING);
+        project.setProjectStatus(Project.DOING);
 
         Integer res = projectService.updateProject(project);
         LogUtil.logWithComment(LogUtil.LogOperateObject.PROJECT, LogUtil.LogAction.STARTED, oldProject.getProjectId().toString(),
@@ -262,7 +262,7 @@ public class ProjectAction extends BaseController {
     @RequestMapping(value = "doing", method = RequestMethod.POST)
     public Map<String, String> doingSave(Project project, String content) {
         Project oldProject = projectService.findProjectById(project.getProjectId());
-        project.setProjectStatus(project.DOING);
+        project.setProjectStatus(Project.DOING);
         Integer res = projectService.updateProject(project);
         LogUtil.logWithComment(LogUtil.LogOperateObject.PROJECT, LogUtil.LogAction.ACTIVATED, oldProject.getProjectId().toString(),
                 UserUtils.getUserId(), null, oldProject.getProjectId().toString(), oldProject, project, content);
@@ -283,7 +283,7 @@ public class ProjectAction extends BaseController {
     @RequestMapping(value = "finish", method = RequestMethod.POST)
     public Map<String, String> finishSave(Project project, String content) {
         Project oldProject = projectService.findProjectById(project.getProjectId());
-        project.setProjectStatus(project.FINISH);
+        project.setProjectStatus(Project.FINISH);
         project.setProjectCloseBy(UserUtils.getUserId());
         project.setProjectCloseDate(new Date());
         Integer res = projectService.updateProject(project);
@@ -366,7 +366,7 @@ public class ProjectAction extends BaseController {
             return resultMap(false, "请选择删除的项目");
         }
         Project project = projectService.findProjectById(id);
-        project.setProjectDeleted(project.DELETE_YES);
+        project.setProjectDeleted(Project.DELETE_YES);
         projectService.updateProject(project);
         ProjectUtils.removeProjectList();
         return resultMap(true, "删除项目成功");

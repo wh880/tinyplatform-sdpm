@@ -7,9 +7,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.tinygroup.sdpm.common.condition.ConditionCarrier;
-import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.web.BaseController;
+import org.tinygroup.sdpm.dao.complexsearch.SearchInfos;
+import org.tinygroup.sdpm.dao.condition.ConditionCarrier;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
@@ -327,7 +327,7 @@ public class RequestAction extends BaseController {
         for (String s : ids.split(",")) {
             ServiceRequest serviceRequest = new ServiceRequest();
             serviceRequest.setClientRequestId(Integer.valueOf(s));
-            serviceRequest.setDeleted(serviceRequest.DELETE_YES);
+            serviceRequest.setDeleted(ServiceRequest.DELETE_YES);
             list.add(serviceRequest);
         }
         requestService.deleteBatchRequest(list);

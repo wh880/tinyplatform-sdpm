@@ -66,7 +66,7 @@ public interface TaskService {
      * @param user
      * @return
      */
-    public Pager<ProjectTask> findPagerTaskByMe(Integer start, Integer limit, ProjectTask task, String sortName, boolean asc, OrgUser user);
+    Pager<ProjectTask> findPagerTaskByMe(Integer start, Integer limit, ProjectTask task, String sortName, boolean asc, OrgUser user);
 
     /**
      * 分页查询

@@ -9,5 +9,5 @@ import org.tinygroup.context.impl.ContextImpl;
 public interface CallBackFunction {
     Context context = new ContextImpl();
 
-    public Context getContext();
+    Context getContext();
 }

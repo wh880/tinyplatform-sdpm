@@ -1,4 +1,4 @@
-package org.tinygroup.sdpm.common.util.ComplexSearch;
+package org.tinygroup.sdpm.dao.complexsearch;
 
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
@@ -120,9 +120,6 @@ public class SqlUtil {
     private static boolean isInt(String param) {
         Pattern pattern = Pattern.compile("[0-9]*");
         Matcher isNum = pattern.matcher(param);
-        if (!isNum.matches()) {
-            return false;
-        }
-        return true;
+        return isNum.matches();
     }
 }

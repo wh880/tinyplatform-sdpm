@@ -22,7 +22,7 @@ public interface RoleUserManager {
      * @param userId
      * @return
      */
-    public List<OrgRoleUser> findListByUserIds(String userId);
+    List<OrgRoleUser> findListByUserIds(String userId);
 
     /**
      * 根据角色Id查询用户list

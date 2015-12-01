@@ -1,9 +1,9 @@
-package org.tinygroup.sdpm.common.condition;
+package org.tinygroup.sdpm.dao.condition;
 
 import org.tinygroup.commons.tools.StringUtil;
-import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
-import org.tinygroup.sdpm.common.util.ComplexSearch.SqlUtil;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
+import org.tinygroup.sdpm.dao.complexsearch.SearchInfos;
+import org.tinygroup.sdpm.dao.complexsearch.SqlUtil;
 import org.tinygroup.tinysqldsl.base.Column;
 import org.tinygroup.tinysqldsl.base.Condition;
 import org.tinygroup.tinysqldsl.base.FragmentSql;
@@ -16,42 +16,6 @@ import java.util.List;
  * Created by wangll13383 on 2015/11/4.
  */
 public class ConditionUtils {
-
-    public enum Operate {
-        GT("greater_than"),
-        LT("less_than"),
-        EQ("eq"),
-        NEQ("not_eq"),
-        IN("in"),
-        NOT_IN("not_in"),
-        NO_OPERATE("");
-        private String operate;
-
-        Operate(String operate) {
-            this.operate = operate;
-        }
-
-        public String getOperate() {
-            return this.operate;
-        }
-    }
-
-    public enum CommonFieldType {
-        FIELD_OPERATE("field_operate"),
-        SEARCH("search"),
-        MODULE("module"),
-        STATUS("status"),
-        ID("id");
-        private String commonField;
-
-        CommonFieldType(String commonField) {
-            this.commonField = commonField;
-        }
-
-        public String getCommonField() {
-            return this.commonField;
-        }
-    }
 
     public static Condition mergeCondition(ConditionCarrier carrier, CallBackFunction callBackFunction){
         if(carrier==null)return null;
@@ -120,6 +84,42 @@ public class ConditionUtils {
         }
         Condition[] conditionArray = new Condition[conditions.size()];
         return StatementSqlBuilder.and(conditions.toArray(conditionArray));
+    }
+
+    public enum Operate {
+        GT("greater_than"),
+        LT("less_than"),
+        EQ("eq"),
+        NEQ("not_eq"),
+        IN("in"),
+        NOT_IN("not_in"),
+        NO_OPERATE("");
+        private String operate;
+
+        Operate(String operate) {
+            this.operate = operate;
+        }
+
+        public String getOperate() {
+            return this.operate;
+        }
+    }
+
+    public enum CommonFieldType {
+        FIELD_OPERATE("field_operate"),
+        SEARCH("search"),
+        MODULE("module"),
+        STATUS("status"),
+        ID("id");
+        private String commonField;
+
+        CommonFieldType(String commonField) {
+            this.commonField = commonField;
+        }
+
+        public String getCommonField() {
+            return this.commonField;
+        }
     }
 }
 

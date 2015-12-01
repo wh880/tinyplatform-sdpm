@@ -1,6 +1,6 @@
 package org.tinygroup.sdpm.common.biz.inter;
 
-import org.tinygroup.sdpm.common.dao.pojo.Profile;
+import org.tinygroup.sdpm.dao.pojo.Profile;
 
 import java.util.List;
 

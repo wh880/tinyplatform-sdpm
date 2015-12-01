@@ -1,4 +1,4 @@
-package org.tinygroup.sdpm.common.dao;
+package org.tinygroup.sdpm.dao;
 
 import org.tinygroup.sdpm.common.util.IdGen;
 import org.tinygroup.tinysqldsl.KeyGenerator;

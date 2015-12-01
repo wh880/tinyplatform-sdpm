@@ -1,8 +1,6 @@
 package org.tinygroup.sdpm.system.dao.impl.util;
 
-import org.codehaus.jackson.map.Module;
 import org.tinygroup.commons.tools.StringUtil;
-import org.tinygroup.sdpm.system.dao.SystemModuleDao;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 
 import java.util.ArrayList;

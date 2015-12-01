@@ -18,7 +18,6 @@ package org.tinygroup.sdpm.product.dao;
 
 import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
-import org.tinygroup.sdpm.common.condition.ConditionCarrier;
 import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.dao.pojo.StoryCount;

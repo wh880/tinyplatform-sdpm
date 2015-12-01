@@ -68,7 +68,7 @@ public class ProjectDocAction extends BaseController {
         for (int i = 0; i < id.length; i++) {
             DocumentDoc doc = new DocumentDoc();
             doc.setDocId(Integer.parseInt(id[i]));
-            doc.setDocDeleted(doc.DELETE_YES);
+            doc.setDocDeleted(DocumentDoc.DELETE_YES);
             docList.add(doc);
         }
         int[] res = docService.deleteDocByIds(docList);

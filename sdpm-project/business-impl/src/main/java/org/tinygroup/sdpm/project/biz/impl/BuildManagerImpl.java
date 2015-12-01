@@ -9,7 +9,6 @@ import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.project.biz.inter.BuildManager;
 import org.tinygroup.sdpm.project.dao.ProjectBuildDao;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
-import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.ArrayList;
@@ -57,7 +56,7 @@ public class BuildManagerImpl implements BuildManager {
     public Integer delete(int id) {
         ProjectBuild build = new ProjectBuild();
         build.setBuildId(id);
-        build.setBuildDeleted(build.DELETE_YES);
+        build.setBuildDeleted(ProjectBuild.DELETE_YES);
         return projectBuildDao.edit(build);
     }
 

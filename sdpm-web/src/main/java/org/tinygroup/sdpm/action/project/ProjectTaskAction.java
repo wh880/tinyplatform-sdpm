@@ -656,23 +656,23 @@ public class ProjectTaskAction extends BaseController {
         ProjectTask projectTask = new ProjectTask();
         projectTask.setTaskProject(projectId);
 
-        projectTask.setTaskStatus(projectTask.WAIT);
+        projectTask.setTaskStatus(ProjectTask.WAIT);
         List<ProjectTask> resList = taskService.findListTask(projectTask);
         model.addAttribute("waitList", resList);
 
-        projectTask.setTaskStatus(projectTask.DOING);
+        projectTask.setTaskStatus(ProjectTask.DOING);
         resList = taskService.findListTask(projectTask);
         model.addAttribute("doingList", resList);
 
-        projectTask.setTaskStatus(projectTask.DONE);
+        projectTask.setTaskStatus(ProjectTask.DONE);
         resList = taskService.findListTask(projectTask);
         model.addAttribute("doneList", resList);
 
-        projectTask.setTaskStatus(projectTask.CANCEL);
+        projectTask.setTaskStatus(ProjectTask.CANCEL);
         resList = taskService.findListTask(projectTask);
         model.addAttribute("cancelList", resList);
 
-        projectTask.setTaskStatus(projectTask.CLOSE);
+        projectTask.setTaskStatus(ProjectTask.CLOSE);
         resList = taskService.findListTask(projectTask);
         model.addAttribute("closeList", resList);
 

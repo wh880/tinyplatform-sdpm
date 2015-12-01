@@ -26,7 +26,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     public Integer updateDoingTask(ProjectTask task) {
-        task.setTaskStatus(task.DOING);
+        task.setTaskStatus(ProjectTask.DOING);
         task.setTaskLastEditedDate(new Date());
         return taskManager.update(task);
     }
@@ -41,7 +41,7 @@ public class TaskServiceImpl implements TaskService {
             task.setTaskLastEditedDate(new Date());
             task.setTaskOpenedDate(new Date());
             task.setTaskStatus("1");
-            task.setTaskDeleted(task.DELETE_NO);
+            task.setTaskDeleted(ProjectTask.DELETE_NO);
             task.setTaskProject(projectId);
         }
         int[] res = taskManager.batchAdd(taskList);
@@ -145,8 +145,8 @@ public class TaskServiceImpl implements TaskService {
         try {
             String firstLetter = fieldName.substring(0, 1).toUpperCase();
             String getter = "get" + firstLetter + fieldName.substring(1);
-            Method method = o.getClass().getMethod(getter, new Class[]{});
-            Object value = method.invoke(o, new Object[]{});
+            Method method = o.getClass().getMethod(getter);
+            Object value = method.invoke(o);
             if (value == null) {
                 value = "";
             }

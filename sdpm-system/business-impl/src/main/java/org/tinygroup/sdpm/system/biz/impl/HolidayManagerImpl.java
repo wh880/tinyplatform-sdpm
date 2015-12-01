@@ -31,7 +31,7 @@ public class HolidayManagerImpl implements HolidayManager {
 
     public Holiday delete(Holiday holiday) {
         // TODO Auto-generated method stub
-        holiday.setHolidayDeleted(holiday.DELETE_YES);
+        holiday.setHolidayDeleted(Holiday.DELETE_YES);
         holidayDao.softDelete(holiday);
         return holiday;
     }

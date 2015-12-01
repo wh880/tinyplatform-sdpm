@@ -21,7 +21,7 @@ import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.jdbctemplatedslsession.callback.*;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
-import org.tinygroup.sdpm.common.util.update.UpdateUtil;
+import org.tinygroup.sdpm.dao.update.UpdateUtil;
 import org.tinygroup.sdpm.quality.dao.QualityTestRunDao;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityTestRun;
 import org.tinygroup.tinysqldsl.*;

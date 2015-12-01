@@ -1,6 +1,6 @@
-package org.tinygroup.sdpm.common.condition;
+package org.tinygroup.sdpm.dao.condition;
 
-import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
+import org.tinygroup.sdpm.dao.complexsearch.SearchInfos;
 
 import java.io.Serializable;
 import java.util.HashMap;

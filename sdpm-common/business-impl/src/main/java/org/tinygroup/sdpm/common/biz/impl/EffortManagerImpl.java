@@ -1,8 +1,8 @@
 package org.tinygroup.sdpm.common.biz.impl;
 
 import org.tinygroup.sdpm.common.biz.inter.EffortManager;
-import org.tinygroup.sdpm.common.dao.EffortDao;
-import org.tinygroup.sdpm.common.dao.pojo.Effort;
+import org.tinygroup.sdpm.dao.EffortDao;
+import org.tinygroup.sdpm.dao.pojo.Effort;
 import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.Date;

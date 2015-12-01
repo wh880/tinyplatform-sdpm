@@ -3,11 +3,9 @@ package org.tinygroup.sdpm.project.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.tinygroup.commons.tools.ArrayUtil;
-import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.project.biz.inter.BuildManager;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
 import org.tinygroup.sdpm.project.service.inter.BuildService;
-import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.List;
@@ -26,7 +24,7 @@ public class BuildServiceImpl implements BuildService {
         } else {
             ProjectBuild build = new ProjectBuild();
             build.setBuildId(buildId);
-            build.setBuildDeleted(build.DELETE_YES);
+            build.setBuildDeleted(ProjectBuild.DELETE_YES);
             return buildManager.softDelete(build);
         }
     }
@@ -34,14 +32,14 @@ public class BuildServiceImpl implements BuildService {
     public ProjectBuild addBuild(ProjectBuild build) {
         build.setBuildStories("");
         build.setBuildBugs("");
-        build.setBuildDeleted(build.DELETE_NO);
+        build.setBuildDeleted(ProjectBuild.DELETE_NO);
         return buildManager.add(build);
     }
 
     public Pager<ProjectBuild> findBuildPagerWithOrder(Integer projectId, Integer start, Integer limit, String order, boolean asc) {
         ProjectBuild build = new ProjectBuild();
         build.setBuildProject(projectId);
-        build.setBuildDeleted(build.DELETE_NO);
+        build.setBuildDeleted(ProjectBuild.DELETE_NO);
         return buildManager.findPager(build, start, limit, order, asc);
     }
 

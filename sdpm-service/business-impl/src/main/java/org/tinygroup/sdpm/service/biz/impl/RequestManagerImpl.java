@@ -5,12 +5,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
-import org.tinygroup.sdpm.common.condition.CallBackFunction;
-import org.tinygroup.sdpm.common.condition.ConditionCarrier;
-import org.tinygroup.sdpm.common.condition.ConditionUtils;
-import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
-import org.tinygroup.sdpm.common.util.ComplexSearch.SqlUtil;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
+import org.tinygroup.sdpm.dao.condition.ConditionCarrier;
+import org.tinygroup.sdpm.dao.condition.ConditionUtils;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.service.biz.inter.RequestManager;
 import org.tinygroup.sdpm.service.dao.ServiceRequestDao;
@@ -19,8 +16,6 @@ import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.tinysqldsl.base.Condition;
 
 import java.util.List;
-
-import static org.tinygroup.tinysqldsl.base.FragmentSql.fragmentCondition;
 
 /**
  * Created by Administrator on 2015-09-18.

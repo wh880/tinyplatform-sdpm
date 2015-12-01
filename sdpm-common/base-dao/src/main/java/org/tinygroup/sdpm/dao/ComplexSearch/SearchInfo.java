@@ -1,4 +1,4 @@
-package org.tinygroup.sdpm.common.util.ComplexSearch;
+package org.tinygroup.sdpm.dao.complexsearch;
 
 /**
  * Created by wangll13383 on 2015/9/18.

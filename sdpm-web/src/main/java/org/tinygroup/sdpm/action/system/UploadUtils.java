@@ -89,10 +89,8 @@ public class UploadUtils {
         if (StringUtils.isBlank(path))
             return false;
 
-        if (ILLEGAL_CURRENT_FOLDER_PATTERN.matcher(path).find())
-            return false;
+        return !ILLEGAL_CURRENT_FOLDER_PATTERN.matcher(path).find();
 
-        return true;
     }
 
     /**

@@ -127,7 +127,7 @@ public class ProductManagerImpl implements ProductManager {
         List<Product> productList = productDao.getProductByUser(userId, delete, productLineId);
         Product product = new Product();
         product.setDeleted(delete);
-        product.setAcl(product.ACl_TEAM_AND_ROLE);
+        product.setAcl(Product.ACl_TEAM_AND_ROLE);
         List<Product> products = productDao.query(product);
         OrgRoleUser role = new OrgRoleUser();
         role.setOrgUserId(userId);
@@ -139,7 +139,7 @@ public class ProductManagerImpl implements ProductManager {
         List<Product> productList = productDao.getProductByUserWithCount(userId, delete, noRole);
         Product product = new Product();
         product.setDeleted(delete);
-        product.setAcl(product.ACl_TEAM_AND_ROLE);
+        product.setAcl(Product.ACl_TEAM_AND_ROLE);
         List<Product> products = productDao.queryWithCount(product);
         OrgRoleUser role = new OrgRoleUser();
         role.setOrgUserId(userId);

@@ -1,6 +1,6 @@
 package org.tinygroup.sdpm.common.service.inter;
 
-import org.tinygroup.sdpm.common.dao.pojo.Effort;
+import org.tinygroup.sdpm.dao.pojo.Effort;
 import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.Date;

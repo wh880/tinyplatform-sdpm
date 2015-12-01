@@ -92,17 +92,9 @@ public class ObtainHandleImpl implements ObtainHandle {
             LOGGER.logMessage(LogLevel.INFO, "正在进行obtain:[{0}]重复判定..", key);
             String path = pathRecord.get(key);
             if (path.contains(".jar")) {
-                if (filePath.contains(".jar")) {
-                    return true;
-                } else {
-                    return false;
-                }
+                return filePath.contains(".jar");
             } else {
-                if (filePath.contains(".jar")) {
-                    return false;
-                } else {
-                    return true;
-                }
+                return !filePath.contains(".jar");
             }
         }
         return false;

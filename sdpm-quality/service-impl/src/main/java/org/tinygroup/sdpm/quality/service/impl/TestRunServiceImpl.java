@@ -2,7 +2,7 @@ package org.tinygroup.sdpm.quality.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.tinygroup.sdpm.common.condition.ConditionCarrier;
+import org.tinygroup.sdpm.dao.condition.ConditionCarrier;
 import org.tinygroup.sdpm.quality.biz.inter.TestRunManager;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityTestRun;
 import org.tinygroup.sdpm.quality.service.inter.TestRunService;

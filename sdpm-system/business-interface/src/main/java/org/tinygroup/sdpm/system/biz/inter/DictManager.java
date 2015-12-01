@@ -7,8 +7,8 @@ import java.util.List;
 
 public interface DictManager {
 
-    public static int DELETE_YES = 1;
-    public static int DELETE_NO = 0;
+    int DELETE_YES = 1;
+    int DELETE_NO = 0;
 
     /**
      * 添加字典

@@ -22,8 +22,8 @@ import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.jdbctemplatedslsession.callback.*;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
-import org.tinygroup.sdpm.common.util.update.InsertUtil;
-import org.tinygroup.sdpm.common.util.update.UpdateUtil;
+import org.tinygroup.sdpm.dao.update.InsertUtil;
+import org.tinygroup.sdpm.dao.update.UpdateUtil;
 import org.tinygroup.sdpm.product.dao.ProductDao;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
@@ -240,7 +240,6 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
                                 PRODUCTTABLE.PRODUCT_CREATED_DATE.eq(t.getProductCreatedDate()),
                                 PRODUCTTABLE.PRODUCT_CREATED_VERSION.eq(t.getProductCreatedVersion()),
                                 PRODUCTTABLE.DELETED.eq(t.getDeleted()))).groupBy(PRODUCTTABLE.PRODUCT_ID);
-                ;
                 return addOrderByElements(select, orderArgs);
             }
         });

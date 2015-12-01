@@ -1,6 +1,6 @@
 package org.tinygroup.sdpm.productLine.service;
 
-import org.tinygroup.sdpm.common.condition.ConditionCarrier;
+import org.tinygroup.sdpm.dao.condition.ConditionCarrier;
 import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.tinysqldsl.Pager;
 

@@ -47,11 +47,6 @@
             <version>${tiny_version}</version>
         </dependency>
         <dependency>
-            <groupId>org.tinygroup</groupId>
-            <artifactId>org.tinygroup.weblayer</artifactId>
-            <version>${tiny_version}</version>
-        </dependency>
-        <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>18.0</version>
@@ -89,6 +84,13 @@
                     <artifactId>commons-codec</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>org.tinygroup.aopcache</artifactId>
+            <version>${tiny_ext_version}</version>
         </dependency>
     </dependencies>
 </project>

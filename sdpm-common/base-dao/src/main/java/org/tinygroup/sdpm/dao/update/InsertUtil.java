@@ -1,4 +1,4 @@
-package org.tinygroup.sdpm.common.util.update;
+package org.tinygroup.sdpm.dao.update;
 
 import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.common.util.std.StdUtil;

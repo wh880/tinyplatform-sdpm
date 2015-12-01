@@ -402,7 +402,7 @@ public class ServiceRequestDaoImpl extends TinyDslDaoSupport implements ServiceR
         return getDslTemplate().update(serviceRequest, new UpdateGenerateCallback<ServiceRequest>() {
             public Update generate(ServiceRequest t) {
                 Update update = update(SERVICE_REQUESTTABLE).set(
-                        SERVICE_REQUESTTABLE.REQUEST_STATUS.value(t.CLOSE),
+                        SERVICE_REQUESTTABLE.REQUEST_STATUS.value(ServiceRequest.CLOSE),
                         SERVICE_REQUESTTABLE.REQUEST_CLOSED_BY.value(t.getRequestClosedBy()),
                         SERVICE_REQUESTTABLE.REQUEST_CLOSE_DATE.value(t.getRequestCloseDate())).where(
                         SERVICE_REQUESTTABLE.CLIENT_REQUEST_ID.eq(t.getClientRequestId()));
@@ -430,7 +430,7 @@ public class ServiceRequestDaoImpl extends TinyDslDaoSupport implements ServiceR
         return getDslTemplate().update(serviceRequest, new UpdateGenerateCallback<ServiceRequest>() {
             public Update generate(ServiceRequest t) {
                 Update update = update(SERVICE_REQUESTTABLE).set(
-                        SERVICE_REQUESTTABLE.REQUEST_STATUS.value(t.FINISHED),
+                        SERVICE_REQUESTTABLE.REQUEST_STATUS.value(ServiceRequest.FINISHED),
                         SERVICE_REQUESTTABLE.REPLY_SPEC.value(t.getReplySpec()),
                         SERVICE_REQUESTTABLE.REPLY_DATE.value(t.getReplyDate()),
                         SERVICE_REQUESTTABLE.REPLIER.value(t.getReplier())).where(
