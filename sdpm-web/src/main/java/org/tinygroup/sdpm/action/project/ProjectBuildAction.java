@@ -92,7 +92,7 @@ public class ProjectBuildAction extends BaseController {
             return redirectProjectForm();
         }
         boolean asc = "asc".equals(ordertype) ? true : false;
-        Pager<ProjectBuild> pager = buildService.findPager(projectId, start, limit, order, asc);
+        Pager<ProjectBuild> pager = buildService.findBuildPagerWithOrder(projectId, start, limit, order, asc);
         model.addAttribute("buildPager", pager);
         return "project/build/tableData.pagelet";
     }

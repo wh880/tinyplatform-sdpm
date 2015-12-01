@@ -68,15 +68,17 @@ public interface RoleService {
 
     /**
      * 保存角色在当前模块的菜单，若数据库已经存在，则清除原有的模块的数据后再新增数据。
+     *
      * @param roleId
      * @param parentMenuId 当前模块的id
-     * @param newMenuIds 当前模块中需要保存的菜单
+     * @param newMenuIds   当前模块中需要保存的菜单
      * @return
      */
     Integer saveRoleMenu(Integer roleId, String parentMenuId, String[] newMenuIds);
 
     /**
      * 找出用户的所有菜单Id
+     *
      * @param userId
      * @return
      */
@@ -125,14 +127,16 @@ public interface RoleService {
 
     /**
      * 批量添加角色成员
+     *
      * @param userIds 用户Ids
-     * @param roleId 角色id
+     * @param roleId  角色id
      */
     void addRoleUser(String[] userIds, Integer roleId);
 
     /**
      * 批量添加角色成员
-     * @param userId 用户Id
+     *
+     * @param userId  用户Id
      * @param roleIds 角色ids
      */
     void batchAddRolesToUser(String userId, Integer[] roleIds);
@@ -152,7 +156,6 @@ public interface RoleService {
      */
     OrgRoleUser updateRoleUser(OrgRoleUser orgRoleUser);
 
-
     /***
      * 根据id删除用户角色
      *
@@ -169,6 +172,6 @@ public interface RoleService {
      */
     void copyRoleUser(Integer orgRoleIdNew, Integer orgRoleId);
 
-    List<OrgRole> getRoleByIds(String... ids);
+    List<OrgRole> getRoleByIds(String[] ids);
 
 }

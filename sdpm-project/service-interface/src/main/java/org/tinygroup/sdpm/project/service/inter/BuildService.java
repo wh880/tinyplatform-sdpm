@@ -38,7 +38,7 @@ public interface BuildService {
      * @param asc
      * @return
      */
-    Pager<ProjectBuild> findPager(Integer projectId, Integer start, Integer limit, String order, boolean asc);
+    Pager<ProjectBuild> findBuildPagerWithOrder(Integer projectId, Integer start, Integer limit, String order, boolean asc);
 
 
     /**
@@ -48,14 +48,6 @@ public interface BuildService {
      * @return
      */
     Integer updateBuild(ProjectBuild projectBuild);
-
-    /**
-     * 根据产品id进行软删删除
-     *
-     * @param productId
-     * @return
-     */
-    Integer deleteBuildByProductId(Integer productId);
 
     /**
      * 根据id查找

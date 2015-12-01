@@ -167,7 +167,7 @@ public class RoleServiceImpl implements RoleService {
         }
     }
 
-    public List<OrgRole> getRoleByIds(String... ids) {
+    public List<OrgRole> getRoleByIds(String[] ids) {
         if (ArrayUtil.isEmptyArray(ids)) {
             return new ArrayList<OrgRole>();
         }

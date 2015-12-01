@@ -143,7 +143,7 @@ public class UserServiceImpl implements UserService {
      * @param userId
      * @return
      */
-    public List<OrgUser> findUserListByIds(String... userId) {
+    public List<OrgUser> findUserListByIds(String[] userId) {
         return userManager.findUserListByIds(userId);
     }
 
@@ -151,7 +151,7 @@ public class UserServiceImpl implements UserService {
         return userManager.findTeamUserListByProjectId(projectId);
     }
 
-    public List<OrgUser> userInCondition(String condition, String... ids) {
+    public List<OrgUser> userInCondition(String condition, String[] ids) {
         return userManager.userInCondition(condition, ids);
     }
 }

@@ -29,7 +29,6 @@ public interface UserService {
      */
     OrgUser findUser(String id);
 
-
     /**
      * 根据用户名刚查找用户
      *
@@ -55,7 +54,6 @@ public interface UserService {
      * @return
      */
     List<OrgUser> findUserList(OrgUser orgUser);
-
 
     /**
      * 根据部门Id查询用户pager
@@ -111,8 +109,7 @@ public interface UserService {
      * @param
      * @return
      */
-    List<OrgUser> findUserListByIds(String... userId);
-
+    List<OrgUser> findUserListByIds(String[] userId);
 
     /**
      * 根据项目id查找团队成员list
@@ -127,6 +124,5 @@ public interface UserService {
      * @param condition
      * @return
      */
-    List<OrgUser> userInCondition(String condition, String... ids);
-
+    List<OrgUser> userInCondition(String condition, String[] ids);
 }

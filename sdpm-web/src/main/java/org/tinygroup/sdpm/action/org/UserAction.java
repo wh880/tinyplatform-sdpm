@@ -580,7 +580,7 @@ public class UserAction extends BaseController {
             result.add(userService.findUser(initKey));
             return result;
         }
-        return userService.userInCondition(key);
+        return userService.userInCondition(key,null);
     }
 
     @ResponseBody
