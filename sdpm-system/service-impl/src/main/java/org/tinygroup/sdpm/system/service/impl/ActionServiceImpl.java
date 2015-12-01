@@ -15,18 +15,6 @@ public class ActionServiceImpl implements ActionService {
     @Autowired
     private ActionManager actionManager;
 
-    public SystemAction add(SystemAction systemAction) {
-        return actionManager.add(systemAction);
-    }
-
-    public SystemAction updata(SystemAction systemAction) {
-
-        return actionManager.updata(systemAction);
-    }
-
-    public Integer delete(SystemAction systemAction) {
-        return actionManager.delete(systemAction);
-    }
 
     public List<SystemAction> findAction(SystemAction systemAction, String orderby, boolean asc) {
         return actionManager.find(systemAction, orderby, asc);

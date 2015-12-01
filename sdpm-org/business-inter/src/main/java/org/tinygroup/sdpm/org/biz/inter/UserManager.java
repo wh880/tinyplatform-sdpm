@@ -137,6 +137,6 @@ public interface UserManager {
      * @param condition
      * @return
      */
-    List<OrgUser> userInCondition(String condition, String... ids);
+    List<OrgUser> userInCondition(String condition, String[] ids);
 
 }

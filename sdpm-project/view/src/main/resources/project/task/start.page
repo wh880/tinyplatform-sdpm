@@ -78,7 +78,7 @@
 </div>
 #end
 <script>
-    $("form[name=thisform").Validform({
+    $("form[name=thisform]").Validform({
         beforeSubmit: function (e) {
             var estimate = $("input[name='taskEstimate']").val();
             if (!estimate || estimate <= "0.01") {

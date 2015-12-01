@@ -31,7 +31,4 @@ public class CompanyServiceImpl implements CompanyService {
         return companyManager.update(orgCompany);
     }
 
-    public Integer deleteCompany(Integer id) {
-        return companyManager.delete(id);
-    }
 }

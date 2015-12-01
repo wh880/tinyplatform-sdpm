@@ -59,11 +59,11 @@
             <artifactId>sdpm-org-service-impl</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.tinygroup</groupId>
-            <artifactId>sdpm-org-service-wrapper</artifactId>
-            <version>${project.version}</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.tinygroup</groupId>-->
+            <!--<artifactId>sdpm-org-service-wrapper</artifactId>-->
+            <!--<version>${project.version}</version>-->
+        <!--</dependency>-->
 
         <!--service-->
         <dependency>
@@ -227,17 +227,20 @@
                 <!--</exclusion>-->
             </exclusions>
         </dependency>
+
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>org.tinygroup.spring305</artifactId>
             <version>${tiny_version}</version>
         </dependency>
+
         <!--引入SpringMVC-->
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>org.tinygroup.springmvc</artifactId>
             <version>${tiny_version}</version>
         </dependency>
+
         <!-- bean validate -->
         <dependency>
             <groupId>org.hibernate</groupId>
@@ -325,12 +328,6 @@
         </dependency>
         <!-- CACHE end -->
 
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>3.8.1</version>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
     <build>
         <finalName>${project.name}</finalName>

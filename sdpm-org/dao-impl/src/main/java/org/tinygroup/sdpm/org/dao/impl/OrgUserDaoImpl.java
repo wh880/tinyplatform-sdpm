@@ -17,6 +17,7 @@
 package org.tinygroup.sdpm.org.dao.impl;
 
 import org.springframework.stereotype.Repository;
+import org.tinygroup.commons.tools.ArrayUtil;
 import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.jdbctemplatedslsession.callback.*;
@@ -178,7 +179,7 @@ public class OrgUserDaoImpl extends TinyDslDaoSupport implements OrgUserDao {
 
     public List<OrgUser> userInCondition(String condition,String ...ids) {
         Condition con = null;
-        if(ids!=null&&ids.length!=0){
+        if(ArrayUtil.isEmptyArray(ids)){
             con = ORG_USERTABLE.ORG_USER_ID.in(ids);
         }
         Select select = MysqlSelect.select(ORG_USERTABLE.ORG_USER_ID,ORG_USERTABLE.ORG_USER_REAL_NAME).

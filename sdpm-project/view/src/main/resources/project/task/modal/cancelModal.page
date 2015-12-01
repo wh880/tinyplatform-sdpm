@@ -33,7 +33,7 @@
 
 <script>
     $(function () {
-        $("form[name=thisform").Validform({
+        $("form[name=thisform]").Validform({
             beforeSubmit: function (curform) {
                 $(curform).ajaxSubmit({
                     dataType: "json",

@@ -38,7 +38,7 @@ public class BuildServiceImpl implements BuildService {
         return buildManager.add(build);
     }
 
-    public Pager<ProjectBuild> findPager(Integer projectId, Integer start, Integer limit, String order, boolean asc) {
+    public Pager<ProjectBuild> findBuildPagerWithOrder(Integer projectId, Integer start, Integer limit, String order, boolean asc) {
         ProjectBuild build = new ProjectBuild();
         build.setBuildProject(projectId);
         build.setBuildDeleted(build.DELETE_NO);

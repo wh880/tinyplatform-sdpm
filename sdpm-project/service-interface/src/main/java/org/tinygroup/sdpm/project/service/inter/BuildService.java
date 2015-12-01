@@ -38,7 +38,7 @@ public interface BuildService {
      * @param asc
      * @return
      */
-    Pager<ProjectBuild> findPager(Integer projectId, Integer start, Integer limit, String order, boolean asc);
+    Pager<ProjectBuild> findBuildPagerWithOrder(Integer projectId, Integer start, Integer limit, String order, boolean asc);
 
 
     /**

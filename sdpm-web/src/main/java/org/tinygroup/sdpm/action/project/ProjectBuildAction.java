@@ -65,7 +65,7 @@ public class ProjectBuildAction extends BaseController {
     @Autowired
     private StoryService storyService;
 
-    @RequiresPermissions("version-menu")
+    @RequiresPermissions("version")
     @RequestMapping("/index")
     public String index(Model model, HttpServletRequest request, HttpServletResponse response) {
         Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
@@ -95,7 +95,7 @@ public class ProjectBuildAction extends BaseController {
             return redirectProjectForm();
         }
         boolean asc = "asc".equals(ordertype) ? true : false;
-        Pager<ProjectBuild> pager = buildService.findPager(projectId, start, limit, order, asc);
+        Pager<ProjectBuild> pager = buildService.findBuildPagerWithOrder(projectId, start, limit, order, asc);
         model.addAttribute("buildPager", pager);
         return "project/build/tableData.pagelet";
     }
@@ -143,7 +143,6 @@ public class ProjectBuildAction extends BaseController {
 
 
     @RequestMapping(value = "/addSave", method = RequestMethod.POST)
-
     public String addSave(ProjectBuild build, Model model, UploadProfile uploadProfile) throws IOException {
         ProjectBuild temp;
         if (build.getBuildId() == null) {

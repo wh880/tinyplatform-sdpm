@@ -31,14 +31,6 @@ public interface CompanyService {
     OrgCompany updateCompany(OrgCompany orgCompany);
 
     /**
-     * 根据id进行软删除公司
-     *
-     * @param id 主键
-     * @return
-     */
-    Integer deleteCompany(Integer id);
-
-    /**
      * 查找表中的公司记录
      *
      * @return

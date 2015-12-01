@@ -113,8 +113,8 @@
 <script type="text/javascript">
 $(function(){
 
-  $("form[name=thisform").attr("action",'#link("/Validform_post.html")');
-  $("form[name=thisform").Validform({
+  $("form[name=thisform]").attr("action",'#link("/Validform_post.html")');
+  $("form[name=thisform]").Validform({
         tiptype:2,
         usePlugin:{
             //datepicker:{},//日期控件校验;

@@ -102,7 +102,7 @@
 #end
 <script type="text/javascript">
     $(function () {
-        $("form[name=thisform").Validform({
+        $("form[name=thisform]").Validform({
             tiptype: 2
 
         });
