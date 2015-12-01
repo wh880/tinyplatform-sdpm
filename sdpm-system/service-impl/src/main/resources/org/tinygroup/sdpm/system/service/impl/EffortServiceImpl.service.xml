@@ -1,0 +1,84 @@
+<service-components>
+  <service-component type="org.tinygroup.sdpm.system.service.impl.EffortServiceImpl" bean="">
+    <service-method local-name="batchEffortSave" service-id="batchEffortSave" method-name="batchEffortSave" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
+      <service-parameters>
+        <service-parameter name="list" type="org.tinygroup.sdpm.system.dao.pojo.SystemEffort" collection-type="java.util.List" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="batchEffortSaveResult" required="false" is-array="false" type="java.lang.Integer"/>
+    </service-method>
+    <service-method local-name="saveSystemEffort" service-id="saveSystemEffort" method-name="saveSystemEffort" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
+      <service-parameters>
+        <service-parameter name="systemEffort" type="org.tinygroup.sdpm.system.dao.pojo.SystemEffort" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="saveSystemEffortResult" required="false" is-array="false" type="org.tinygroup.sdpm.system.dao.pojo.SystemEffort"/>
+    </service-method>
+    <service-method local-name="findSystemEffortByAccount" service-id="findSystemEffortByAccount" method-name="findSystemEffortByAccount" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
+      <service-parameters>
+        <service-parameter name="account" type="java.lang.String" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findSystemEffortByAccountResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.system.dao.pojo.SystemEffort"/>
+    </service-method>
+    <service-method local-name="findSystemEffortList" service-id="findSystemEffortList" method-name="findSystemEffortList" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
+      <service-parameters>
+        <service-parameter name="systemEffort" type="org.tinygroup.sdpm.system.dao.pojo.SystemEffort" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findSystemEffortListResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.system.dao.pojo.SystemEffort"/>
+    </service-method>
+    <service-method local-name="findSystemEffortBetweenDate" service-id="findSystemEffortBetweenDate" method-name="findSystemEffortBetweenDate" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
+      <service-parameters>
+        <service-parameter name="systemEffort" type="org.tinygroup.sdpm.system.dao.pojo.SystemEffort" required="false" is-array="false"/>
+        <service-parameter name="beginDate" type="java.util.Date" required="false" is-array="false"/>
+        <service-parameter name="endDate" type="java.util.Date" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findSystemEffortBetweenDateResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.system.dao.pojo.SystemEffort"/>
+    </service-method>
+    <service-method local-name="findSystemEffortByProjectId" service-id="findSystemEffortByProjectId" method-name="findSystemEffortByProjectId" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
+      <service-parameters>
+        <service-parameter name="projectId" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findSystemEffortByProjectIdResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.system.dao.pojo.SystemEffort"/>
+    </service-method>
+    <service-method local-name="findSystemEffortPage" service-id="findSystemEffortPage" method-name="findSystemEffortPage" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
+      <service-parameters>
+        <service-parameter name="start" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="limit" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="SystemEffort" type="org.tinygroup.sdpm.system.dao.pojo.SystemEffort" required="false" is-array="false"/>
+        <service-parameter name="sortName" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="asc" type="boolean" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findSystemEffortPageResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager"/>
+    </service-method>
+    <service-method local-name="findSystemEffortListByOrder" service-id="findSystemEffortListByOrder" method-name="findSystemEffortListByOrder" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
+      <service-parameters>
+        <service-parameter name="systemEffort" type="org.tinygroup.sdpm.system.dao.pojo.SystemEffort" required="false" is-array="false"/>
+        <service-parameter name="order" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="orderType" type="java.lang.String" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findSystemEffortListByOrderResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.system.dao.pojo.SystemEffort"/>
+    </service-method>
+    <service-method local-name="batchDelete" service-id="batchDelete" method-name="batchDelete" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
+      <service-parameters>
+        <service-parameter name="ids" type="java.lang.Integer" required="false" is-array="true"/>
+      </service-parameters>
+      <service-result name="batchDeleteResult" required="false" is-array="false" type="java.lang.Integer"/>
+    </service-method>
+    <service-method local-name="findSystemEffortPagerByDate" service-id="findSystemEffortPagerByDate" method-name="findSystemEffortPagerByDate" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
+      <service-parameters>
+        <service-parameter name="start" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="limit" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="effort" type="org.tinygroup.sdpm.system.dao.pojo.SystemEffort" required="false" is-array="false"/>
+        <service-parameter name="startDate" type="java.util.Date" required="false" is-array="false"/>
+        <service-parameter name="endDate" type="java.util.Date" required="false" is-array="false"/>
+        <service-parameter name="sortName" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="asc" type="boolean" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findSystemEffortPagerByDateResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager"/>
+    </service-method>
+    <service-method local-name="findSystemEffortById" service-id="findSystemEffortById" method-name="findSystemEffortById" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
+      <service-parameters>
+        <service-parameter name="id" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findSystemEffortByIdResult" required="false" is-array="false" type="org.tinygroup.sdpm.system.dao.pojo.SystemEffort"/>
+    </service-method>
+  </service-component>
+</service-components>
