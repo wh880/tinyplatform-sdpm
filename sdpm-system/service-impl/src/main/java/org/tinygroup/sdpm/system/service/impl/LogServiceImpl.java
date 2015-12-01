@@ -35,10 +35,6 @@ public class LogServiceImpl implements LogService {
         }
     }
 
-    public void log(SystemAction systemAction) {
-        log(null, null, systemAction);
-    }
-
     private void recordEdit(Object oldObject, Object newObject, SystemAction systemAction) {
         Field[] fields = oldObject.getClass().getDeclaredFields();
         for (Field field : fields) {

@@ -29,16 +29,17 @@
                 <ref bean="annotationClassFileProcessor"/>
 
                 <!-- xmlservice -->
-                <ref bean="xmlServiceFileProcessor"/>
-                <ref bean="xmlSysServiceFileProcessor"/>
+                <!--<ref bean="xmlServiceFileProcessor"/>-->
+                <!--<ref bean="xmlSysServiceFileProcessor"/>-->
 
                 <ref bean="tinyMacroFileProcessor"/>
                 <ref bean="fullContextFileFinder"/>
                 <ref bean="uIComponentFileProcessor"/>
                 <!-- context2objects -->
                 <ref bean="generatorFileProcessor"/>
+
                 <!-- serviceMapping -->
-                <ref bean="serviceMappingFileProcessor"/>
+                <!--<ref bean="serviceMappingFileProcessor"/>-->
 
                 <!--菜单加载处理器-->
                 <ref bean="menuFileProcessor"/>

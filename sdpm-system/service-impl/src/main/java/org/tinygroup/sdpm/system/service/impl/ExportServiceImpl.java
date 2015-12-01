@@ -110,7 +110,7 @@ public class ExportServiceImpl implements ExportService {
         out.close();
     }
 
-    public String toUTF8(String s) {
+    private String toUTF8(String s) {
         StringBuffer sb = new StringBuffer();
         for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);
@@ -121,7 +121,6 @@ public class ExportServiceImpl implements ExportService {
                 try {
                     b = Character.toString(c).getBytes("utf-8");
                 } catch (Exception ex) {
-//                    System.out.println(ex);
                     b = new byte[0];
                 }
                 for (int j = 0; j < b.length; j++) {
