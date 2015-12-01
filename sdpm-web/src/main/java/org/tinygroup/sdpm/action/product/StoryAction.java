@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.action.product.util.StoryUtil;
 import org.tinygroup.sdpm.common.condition.ConditionCarrier;
+import org.tinygroup.sdpm.common.condition.ConditionUtils;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SqlUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
@@ -63,13 +64,9 @@ public class StoryAction extends BaseController {
     @Autowired
     private ModuleService moduleService;
     @Autowired
-    private ProductService productService;
-    @Autowired
     private UserService userService;
     @Autowired
-    private PlanService planService;
-    @Autowired
-    private BuildService buildService;
+    private PlanService planService;;
     @Autowired
     private ProjectService projectService;
     @Autowired
@@ -80,8 +77,6 @@ public class StoryAction extends BaseController {
     private ReleaseService releaseService;
     @Autowired
     private RequestService requestService;
-    @Autowired
-    private ProjectProductService projectProductService;
     @Autowired
     private ProfileService profileService;
 
@@ -94,8 +89,10 @@ public class StoryAction extends BaseController {
      * @return
      */
     @RequestMapping("")
-    public String storyAction(ProductStory story, String groupOperate,
-                              Model model, HttpServletRequest request,
+    public String storyAction(ProductStory story,
+                              String groupOperate,
+                              Model model,
+                              HttpServletRequest request,
                               HttpServletResponse response) {
 
         String queryString = request.getQueryString();
@@ -112,14 +109,13 @@ public class StoryAction extends BaseController {
 
     /**
      * 提需求的跳转
-     *
-     * @param request
      * @param model
      * @return
      */
     @RequiresPermissions("product-demand-add")
     @RequestMapping("/addstory")
-    public String addStory(HttpServletRequest request, Model model, String lastAddress) {
+    public String addStory(Model model,
+                           String lastAddress) {
         List<ServiceRequest> requests = requestService.getRequestList(null);
         model.addAttribute("requestList", requests);
         if (!StringUtil.isBlank(lastAddress)) {
@@ -142,29 +138,15 @@ public class StoryAction extends BaseController {
      */
     @RequestMapping("/save")
     public String save(
-            @CookieValue(value = "cookieProductId") String cookieProductId,
-            SystemAction systemAction, String type,
+            SystemAction systemAction,
+            String type,
             ProductStory productStory,
             ProductStorySpec storySpec,
             @RequestParam(value = "file", required = false) MultipartFile[] file,
-            String[] title, HttpServletRequest request, UploadProfile uploadProfile) throws IOException {
-        if (productStory.getPlanId() != null && productStory.getPlanId() > 0) {
-            productStory.setStoryStage("2");
-        } else {
-            productStory.setStoryStage("1");
-        }
-        productStory.setProductId(Integer.parseInt(cookieProductId));
-        if ("0".equals(productStory.getStoryReviewedBy())) {
-            productStory.setStoryStatus("1");
-        } else {
-            productStory.setStoryStatus("0");
-        }
-        productStory.setStoryVersion(1);
-        productStory.setStoryOpenedBy(UserUtils.getUserId());
-        productStory.setStoryOpenedDate(new Date());
-
-        storySpec.setStoryVersion(1);
-        ProductStory story = storyService.addStory(productStory, storySpec);
+            String[] title,
+            HttpServletRequest request,
+            UploadProfile uploadProfile) throws IOException {
+        ProductStory story = storyService.addStory(productStory, storySpec,UserUtils.getUserId());
         processProfile(uploadProfile, story.getStoryId(), ProfileType.STORY);
 
         if ("copy".equals(type)) {
@@ -244,17 +226,6 @@ public class StoryAction extends BaseController {
     @RequestMapping("/list")
     public String list() {
         return "/product/page/project/togglebox.page";
-    }
-
-    @RequestMapping("/list/data")
-    public String listData(Integer moduleId, Integer start, Integer limit,
-                           ProductStory productStory, Model model) {
-        if (moduleId == null || moduleId == -1) {
-
-        } else {
-
-        }
-        return "";
     }
 
     /**
@@ -415,9 +386,9 @@ public class StoryAction extends BaseController {
             model.addAttribute("taskList", taskList);
 
             QualityTestCase testCase1 = new QualityTestCase();
-            testCase.setDeleted(0);
-            testCase.setStoryId(storyId);
-            List<QualityTestCase> testCases = testCaseService.findTestCaseList(testCase);
+            testCase1.setDeleted(0);
+            testCase1.setStoryId(storyId);
+            List<QualityTestCase> testCases = testCaseService.findTestCaseList(testCase1);
             model.addAttribute("caseList", testCases);
             return "/product/page/tabledemo/hrefbaseinfo.pagelet";
         }
@@ -448,7 +419,6 @@ public class StoryAction extends BaseController {
         ProductStory story = storyService.findStory(productStory.getStoryId());
         if (productStory.getStoryReviewedBy().equals("0")) {
             productStory.setStoryStatus("1");
-//            productStory.setStoryReviewedBy(null);
         } else {
             productStory.setStoryStatus("3");
         }
@@ -529,15 +499,21 @@ public class StoryAction extends BaseController {
      * @param order
      * @param ordertype
      * @param model
-     * @param request
      * @return
      */
     @RequestMapping("/search")
 
-    public String storySearchAction(@CookieValue(value = "cookieProductId", defaultValue = "0") String cookieProductId, int start, int pagesize, ProductStory story,
-                                    String type, String choose, String groupOperate,
-                                    SearchInfos searchInfos, String order, String ordertype,
-                                    Model model, HttpServletRequest request) {
+    public String storySearchAction(@CookieValue(value = "cookieProductId", defaultValue = "0") String cookieProductId,
+                                    int start,
+                                    int pagesize,
+                                    ProductStory story,
+                                    String type,
+                                    String choose,
+                                    String groupOperate,
+                                    SearchInfos searchInfos,
+                                    String order,
+                                    String ordertype,
+                                    Model model) {
         if (!"2".equals(choose) && !"11".equals(choose)) {
             story.setDeleted(0);
         }
@@ -545,8 +521,7 @@ public class StoryAction extends BaseController {
             story.setProductId(Integer.parseInt(cookieProductId));
         }
         ConditionCarrier carrier = new ConditionCarrier();
-        String condition = StoryUtil.getStatusCondition(choose);
-        carrier.putStatus("status", condition);
+        carrier.putStatus("storyStatus", StoryUtil.getStatusCondition(choose));
         if (story.getModuleId() != null && story.getModuleId() > 0) {
             carrier.putModuleIn("productStory.moduleId", String.valueOf(story.getModuleId()));
         }
@@ -605,25 +580,19 @@ public class StoryAction extends BaseController {
         story.setProductId(Integer.parseInt(cookieProductId));
 
         String condition = "";
+        ConditionCarrier carrier = new ConditionCarrier();
         if (searchInfos != null) {
-            if (searchInfos.getInfos().size() > 0
-                    || searchInfos.getInfos() != null) {
-                String sql = SqlUtil
-                        .toSql(searchInfos.getInfos(), groupOperate);
-                if (!StringUtil.isBlank(sql)) {
-                    condition += sql;
-                }
-            }
+            carrier.putSearch("storySearch",searchInfos,groupOperate);
         }
         if ("noRelate".equals(type)) {
-            condition = (StringUtil.isBlank(condition.trim()) ? " "
-                    : (condition + " and "))
-                    + " product_story.plan_id <> "
-                    + story.getPlanId();
+            carrier.put("productStory.planId",
+                    ConditionUtils.Operate.NEQ.getOperate(),
+                    ConditionUtils.CommonFieldType.FIELD_OPERATE.getOperate(),
+                    story.getPlanId());
             story.setPlanId(null);
         }
-        Pager<ProductStory> p = storyService.findPager(start,
-                pagesize, story, condition, order,
+        Pager<ProductStory> p = storyService.findStoryByCondition(start,
+                pagesize, story, carrier, order,
                 "asc".equals(ordertype) ? true : false);
         model.addAttribute("storyList", p);
         if (releaseId != null && releaseId > 0) {
@@ -633,18 +602,18 @@ public class StoryAction extends BaseController {
                 String inCondition = StringUtil.isBlank(releaseStories) ? "" : releaseStories;
                 if ("noWork".equals(type)) {
                     if (!StringUtil.isBlank(inCondition)) {
-                        condition = (StringUtil.isBlank(condition.trim()) ? " " : (condition + " and ")) + "product_story.story_id not in (" + inCondition + ") ";
+                        carrier.putIdNotIn("productStory.storyId",inCondition.split(","));
                     }
                     p = storyService.findProjectLinkedStory(start,
-                            pagesize, story, condition, order,
+                            pagesize, story, carrier, order,
                             "asc".equals(ordertype) ? true : false);
                 } else {
                     if (StringUtil.isBlank(inCondition)) {
                         p = new Pager<ProductStory>(0, 0, new ArrayList<ProductStory>());
                     } else {
-                        condition = (StringUtil.isBlank(condition.trim()) ? " " : (condition + " and ")) + "product_story.story_id in (" + inCondition + ")";
-                        p = storyService.findPager(start,
-                                pagesize, story, condition, order,
+                        carrier.putIdIn("productStory.storyId", inCondition.split(","));
+                        p = storyService.findStoryByCondition(start,
+                                pagesize, story, carrier, order,
                                 "asc".equals(ordertype) ? true : false);
                     }
                 }
@@ -687,30 +656,23 @@ public class StoryAction extends BaseController {
                                 @RequestParam(required = false, defaultValue = "bugId") String order,
                                 String type,
                                 @RequestParam(required = false, defaultValue = "asc") String ordertype,
-                                Model model, HttpServletRequest request) {
+                                Model model) {
         if (Integer.parseInt(cookieProductId) > 0) {
             bug.setProductId(Integer.parseInt(cookieProductId));
         }
-        String condition = "";
+        ConditionCarrier carrier = new ConditionCarrier();
         if (searchInfos != null) {
-            if (searchInfos.getInfos().size() > 0
-                    || searchInfos.getInfos() != null) {
-                String sql = SqlUtil
-                        .toSql(searchInfos.getInfos(), groupOperate);
-                if (!StringUtil.isBlank(sql)) {
-                    condition += sql;
-                }
-            }
+            carrier.putSearch("bugSearch",searchInfos,groupOperate);
         }
         if ("noRelateBug".equals(relate)) {
-            condition = (StringUtil.isBlank(condition.trim()) ? " "
-                    : (condition + " and "))
-                    + " quality_bug.plan_id <> "
-                    + bug.getPlanId();
+            carrier.put("qualityBug.planId",
+                    ConditionUtils.Operate.NEQ.getOperate(),
+                    ConditionUtils.CommonFieldType.FIELD_OPERATE.getOperate(),
+                    bug.getPlanId());
             bug.setPlanId(null);
         }
         Pager<QualityBug> p = bugService.findBugListPager(
-                pagesize * (page - 1), pagesize, condition, bug, order,
+                pagesize * (page - 1), pagesize, carrier, bug, order,
                 "asc".equals(ordertype) ? true : false);
         model.addAttribute("bugList", p);
         if (releaseId != null && releaseId > 0) {
@@ -723,23 +685,23 @@ public class StoryAction extends BaseController {
                     if (StringUtil.isBlank(inCondition)) {
                         p = new Pager<QualityBug>(0, 0, new ArrayList<QualityBug>());
                     } else {
-                        condition = (StringUtil.isBlank(condition.trim()) ? " " : (condition + " and ")) + "quality_bug.bug_id in (" + inCondition + ")";
+                        carrier.putIdIn("qualityBug.bugId",inCondition.split(","));
                         p = bugService.findBugListPager(
-                                pagesize * (page - 1), pagesize, condition, bug, order,
+                                pagesize * (page - 1), pagesize, carrier, bug, order,
                                 "asc".equals(ordertype) ? true : false);
                     }
                 } else if ("noRelateBugRelease".equals(relate)) {
                     bug.setBugStatus("2");
                     if (!StringUtil.isBlank(inCondition)) {
-                        condition = (StringUtil.isBlank(condition.trim()) ? " " : (condition + " and ")) + "quality_bug.bug_id not in (" + inCondition + ") ";
+                        carrier.putIdNotIn("qualityBug.bugId",inCondition.split(","));
                     }
                     p = bugService.findBugListPager(
-                            pagesize * (page - 1), pagesize, condition, bug, order,
+                            pagesize * (page - 1), pagesize, carrier, bug, order,
                             "asc".equals(ordertype) ? true : false);
                 } else {
                     bug.setBugStatus("1");
                     p = bugService.findBugListPager(
-                            pagesize * (page - 1), pagesize, condition, bug, order,
+                            pagesize * (page - 1), pagesize, carrier, bug, order,
                             "asc".equals(ordertype) ? true : false);
                 }
                 model.addAttribute("bugList", p);

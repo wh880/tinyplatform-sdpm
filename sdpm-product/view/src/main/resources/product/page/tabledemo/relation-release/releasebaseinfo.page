@@ -12,7 +12,7 @@
 	   <li>
 	    #@elementItem()
 	 
-		<p>&nbsp;&nbsp;&nbsp;产品：<a href="/sdpm-web/a/product/find/overview?productId=${release?.productId}">${release?.productName}</a></p>
+		<p>&nbsp;&nbsp;&nbsp;产品：<a href="${TINY_CONTEXT_PATH+adminPath}/product/find/overview?productId=${release?.productId}">${release?.productName}</a></p>
 	
 		#end
 	   </li>

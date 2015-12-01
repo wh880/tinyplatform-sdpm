@@ -374,4 +374,16 @@ public class ProjectAction extends BaseController {
         return resultMap(true, "删除项目成功");
     }
 
+    @ResponseBody
+    @RequestMapping("ajax/projectInCondition")
+    public List<Project> projectInCondition(String key, String initKey, HttpServletRequest request){
+        if(initKey!=null){
+            List<Project> result = new ArrayList<Project>();
+            result.add(projectService.findProjectById(Integer.parseInt(initKey)));
+            return result;
+        }
+        Integer[] pIds = ProjectUtils.getUserProjectIdList();
+        return projectService.projectInCondition(key,pIds);
+    }
+
 }

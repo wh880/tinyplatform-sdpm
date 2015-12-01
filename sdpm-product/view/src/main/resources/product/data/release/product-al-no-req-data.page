@@ -9,7 +9,7 @@
     #@td()<a
             href="${TINY_CONTEXT_PATH +adminPath}/product/storySpec/find/productDemandDetail?storyId=${story.storyId}">${story?.no}</a>#end
     #@td()${getDict("storyPri",story?.storyPri)}#end
-    #@td()<a href="${TINY_CONTEXT_PATH +adminPath}/product/page/project/demdtablehref.page">${story?.storyTitle}</a>#end
+    #@td()<a href="${TINY_CONTEXT_PATH +adminPath}/product/storySpec/find/productDemandDetail?storyId=${story.storyId}">${story?.storyTitle}</a>#end
     #@td()${story?.storyOpenedBy?UserUtils.getUserById(story?.storyOpenedBy)?.orgUserRealName:""}#end
     #@td()${story?.storyAssignedTo?UserUtils.getUserById(story?.storyAssignedTo)?.orgUserRealName:""}#end
     #@td()${story?.storyEstimate}#end

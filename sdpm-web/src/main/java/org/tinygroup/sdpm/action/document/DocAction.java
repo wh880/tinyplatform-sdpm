@@ -93,27 +93,19 @@ public class DocAction extends BaseController {
         if (!StringUtil.isBlank(moduleId)) {
             if (moduleId.contains("p") && libId == 1) {
                 doc.setDocProduct(Integer.parseInt(moduleId.substring(1)));
-                pager = docservice.findDocRetPager(limit * (page - 1), limit, doc, condition, searchInfos, groupOperate, order, asc);
+                pager = docservice.findDocRetPager(limit * (page - 1), limit, doc, null, searchInfos, groupOperate, order, asc);
             } else if (moduleId.contains("p") && libId == 2) {
                 doc.setDocProject(Integer.parseInt(moduleId.substring(1)));
-                pager = docservice.findDocRetPager(limit * (page - 1), limit, doc, condition, searchInfos, groupOperate, order, asc);
+                pager = docservice.findDocRetPager(limit * (page - 1), limit, doc, null, searchInfos, groupOperate, order, asc);
             } else if ("productDoc".equals(moduleService.findById(Integer.valueOf(moduleId)).getModuleType())) {
-                Integer root = moduleService.findById(Integer.valueOf(moduleId)).getModuleRoot();
-                doc.setDocProduct(Integer.valueOf(root));
-                condition = NameUtil.resolveNameDesc("docModule") + " " + ModuleUtil.getCondition(Integer.valueOf(moduleId));
-                pager = docservice.findDocRetPager(limit * (page - 1), limit, doc, condition, searchInfos, groupOperate, order, asc);
+                pager = docservice.findDocRetProductPager(limit * (page - 1), limit, doc, Integer.parseInt(moduleId), searchInfos, groupOperate, order, asc);
             } else if ("projectDoc".equals(moduleService.findById(Integer.valueOf(moduleId)).getModuleType())) {
-                Integer root = moduleService.findById(Integer.valueOf(moduleId)).getModuleRoot();
-                doc.setDocProject(Integer.valueOf(root));
-                condition = NameUtil.resolveNameDesc("docModule") + " " + ModuleUtil.getCondition(Integer.valueOf(moduleId));
-                pager = docservice.findDocRetPager(limit * (page - 1), limit, doc, condition, searchInfos, groupOperate, order, asc);
+                pager = docservice.findDocRetProjectPager(limit * (page - 1), limit, doc, Integer.parseInt(moduleId),searchInfos, groupOperate, order, asc);
             } else if ("doc".equals(moduleService.findById(Integer.valueOf(moduleId)).getModuleType())) {
-                condition = NameUtil.resolveNameDesc("docModule") + " " + ModuleUtil.getCondition(Integer.valueOf(moduleId));
-                pager = docservice.findDocRetPager(limit * (page - 1), limit, doc, condition, searchInfos, groupOperate, order, asc);
+                pager = docservice.findDocRetPager(limit * (page - 1), limit, doc,Integer.parseInt(moduleId),searchInfos, groupOperate, order, asc);
             }
         } else {
-            //doc.setDocLibId(libId);
-            pager = docservice.findDocRetPager(limit * (page - 1), limit, doc, null, searchInfos, groupOperate, order, asc);
+            pager = docservice.findDocRetPager(limit * (page - 1), limit, doc,null, searchInfos, groupOperate, order, asc);
             model.addAttribute("pager", pager);
         }
         model.addAttribute("pager", pager);

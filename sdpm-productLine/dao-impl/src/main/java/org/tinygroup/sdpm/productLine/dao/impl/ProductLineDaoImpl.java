@@ -1,49 +1,65 @@
 /**
- * Copyright (c) 1997-2013, www.tinygroup.org (luo_guo@icloud.com).
- * <p>
- * Licensed under the GPL, Version 3.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * <p>
- * http://www.gnu.org/licenses/gpl.html
- * <p>
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ *  Copyright (c) 1997-2013, www.tinygroup.org (luo_guo@icloud.com).
+ *
+ *  Licensed under the GPL, Version 3.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *       http://www.gnu.org/licenses/gpl.html
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
  */
 
 package org.tinygroup.sdpm.productLine.dao.impl;
 
+import static org.tinygroup.sdpm.productLine.dao.constant.ProductLineTable.PRODUCT_LINETABLE;
+
+
+import static org.tinygroup.tinysqldsl.Delete.delete;
+import static org.tinygroup.tinysqldsl.Insert.insertInto;
+import static org.tinygroup.tinysqldsl.Select.selectFrom;
+import static org.tinygroup.tinysqldsl.Update.update;
+import static org.tinygroup.tinysqldsl.Select.*;
+import static org.tinygroup.tinysqldsl.select.Join.*;
+import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Repository;
 import org.tinygroup.commons.tools.CollectionUtil;
-import org.tinygroup.jdbctemplatedslsession.callback.*;
+import org.tinygroup.jdbctemplatedslsession.callback.DeleteGenerateCallback;
+import org.tinygroup.jdbctemplatedslsession.callback.InsertGenerateCallback;
+import org.tinygroup.jdbctemplatedslsession.callback.NoParamDeleteGenerateCallback;
+import org.tinygroup.jdbctemplatedslsession.callback.NoParamInsertGenerateCallback;
+import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallback;
+import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
+import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
 import org.tinygroup.sdpm.common.util.update.InsertUtil;
 import org.tinygroup.sdpm.common.util.update.UpdateUtil;
 import org.tinygroup.sdpm.productLine.dao.ProductLineDao;
 import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
-import org.tinygroup.tinysqldsl.*;
+import org.tinygroup.tinysqldsl.Delete;
+import org.tinygroup.tinysqldsl.Insert;
+import org.tinygroup.tinysqldsl.Pager;
+import org.tinygroup.tinysqldsl.Select;
+import org.tinygroup.tinysqldsl.Update;
 import org.tinygroup.tinysqldsl.base.Condition;
+import org.tinygroup.tinysqldsl.base.FragmentSql;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
+import org.tinygroup.tinysqldsl.expression.relational.ExistsExpression;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
+import org.tinygroup.tinysqldsl.formitem.SubSelect;
 import org.tinygroup.tinysqldsl.select.OrderByElement;
 import org.tinygroup.tinysqldsl.selectitem.FragmentSelectItemSql;
-
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.tinygroup.sdpm.productLine.dao.constant.ProductLineTable.PRODUCT_LINETABLE;
-import static org.tinygroup.tinysqldsl.Delete.delete;
-import static org.tinygroup.tinysqldsl.Insert.insertInto;
-import static org.tinygroup.tinysqldsl.Select.*;
-import static org.tinygroup.tinysqldsl.Update.update;
-import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
-
 @Repository
 public class ProductLineDaoImpl extends TinyDslDaoSupport implements ProductLineDao {
 
@@ -51,7 +67,7 @@ public class ProductLineDaoImpl extends TinyDslDaoSupport implements ProductLine
         return getDslTemplate().insertAndReturnKey(productLine, new InsertGenerateCallback<ProductLine>() {
             public Insert generate(ProductLine t) {
                 Insert insert = InsertUtil.getInsert(PRODUCT_LINETABLE, productLine);
-
+						
 						/*insertInto(PRODUCT_LINETABLE).values(
 					PRODUCT_LINETABLE.PRODUCT_LINE_ID.value(t.getProductLineId()),
 					PRODUCT_LINETABLE.COMPANY_ID.value(t.getCompanyId()),
@@ -77,7 +93,7 @@ public class ProductLineDaoImpl extends TinyDslDaoSupport implements ProductLine
     }
 
     public int edit(ProductLine productLine) {
-        if (productLine == null || productLine.getProductLineId() == null) {
+        if(productLine == null || productLine.getProductLineId() == null){
             return 0;
         }
         return getDslTemplate().update(productLine, new UpdateGenerateCallback<ProductLine>() {
@@ -88,8 +104,8 @@ public class ProductLineDaoImpl extends TinyDslDaoSupport implements ProductLine
         });
     }
 
-    public int deleteByKey(Integer pk) {
-        if (pk == null) {
+    public int deleteByKey(Integer pk){
+        if(pk == null){
             return 0;
         }
         return getDslTemplate().deleteByKey(pk, new DeleteGenerateCallback<Serializable>() {
@@ -100,14 +116,14 @@ public class ProductLineDaoImpl extends TinyDslDaoSupport implements ProductLine
     }
 
     public int deleteByKeys(Integer... pks) {
-        if (pks == null || pks.length == 0) {
+        if(pks == null || pks.length == 0){
             return 0;
         }
         return getDslTemplate().deleteByKeys(new DeleteGenerateCallback<Serializable[]>() {
             public Delete generate(Serializable[] t) {
                 return delete(PRODUCT_LINETABLE).where(PRODUCT_LINETABLE.PRODUCT_LINE_ID.in(t));
             }
-        }, pks);
+        },pks);
     }
 
     public ProductLine getByKey(Integer pk) {
@@ -124,9 +140,9 @@ public class ProductLineDaoImpl extends TinyDslDaoSupport implements ProductLine
 
     }
 
-    public List<ProductLine> query(ProductLine productLine, final OrderBy... orderArgs) {
-        if (productLine == null) {
-            productLine = new ProductLine();
+    public List<ProductLine> query(ProductLine productLine ,final OrderBy... orderArgs) {
+        if(productLine==null){
+            productLine=new ProductLine();
         }
         return getDslTemplate().query(productLine, new SelectGenerateCallback<ProductLine>() {
 
@@ -156,9 +172,9 @@ public class ProductLineDaoImpl extends TinyDslDaoSupport implements ProductLine
         });
     }
 
-    public Pager<ProductLine> queryPager(int start, int limit, ProductLine productLine, final OrderBy... orderArgs) {
-        if (productLine == null) {
-            productLine = new ProductLine();
+    public Pager<ProductLine> queryPager(int start,int limit ,ProductLine productLine ,final OrderBy... orderArgs) {
+        if(productLine==null){
+            productLine=new ProductLine();
         }
         return getDslTemplate().queryPager(start, limit, productLine, false, new SelectGenerateCallback<ProductLine>() {
 
@@ -187,9 +203,9 @@ public class ProductLineDaoImpl extends TinyDslDaoSupport implements ProductLine
         });
     }
 
-    public Pager<ProductLine> findList(int start, int limit, final Condition condition, ProductLine productLine, final OrderBy... orderArgs) {
-        if (productLine == null) {
-            productLine = new ProductLine();
+    public Pager<ProductLine> findList(int start, int limit , final Condition condition, ProductLine productLine , final OrderBy... orderArgs) {
+        if(productLine==null){
+            productLine=new ProductLine();
         }
 
         return getDslTemplate().queryPager(start, limit, productLine, false, new SelectGenerateCallback<ProductLine>() {
@@ -223,36 +239,36 @@ public class ProductLineDaoImpl extends TinyDslDaoSupport implements ProductLine
     }
 
     public Pager<ProductLine> findList(int start, int limit, Condition condition, ProductLine productLine, Integer[] ids, OrderBy... orderArgs) {
-        return findList(start, limit, and(condition, PRODUCT_LINETABLE.PRODUCT_LINE_ID.in(ids)), productLine, orderArgs);
+        return findList(start,limit,and(condition,PRODUCT_LINETABLE.PRODUCT_LINE_ID.in(ids)),productLine,orderArgs);
     }
 
     public List<ProductLine> getByKeys(Integer... ids) {
         SelectGenerateCallback<Serializable[]> callback = new SelectGenerateCallback<Serializable[]>() {
             @SuppressWarnings("rawtypes")
             public Select generate(Serializable[] t) {
-                return selectFrom(PRODUCT_LINETABLE).where(and(PRODUCT_LINETABLE.DELETED.eq(0), PRODUCT_LINETABLE.PRODUCT_LINE_ID.in(t)));
+                return selectFrom(PRODUCT_LINETABLE).where(and(PRODUCT_LINETABLE.DELETED.eq(0),PRODUCT_LINETABLE.PRODUCT_LINE_ID.in(t)));
             }
 
         };
         Select select = callback.generate(ids);
-        return getDslSession().fetchList(select, ProductLine.class);
+        return getDslSession().fetchList(select,ProductLine.class);
     }
 
     public List<ProductLine> getUserProductLines(String userId) {
         Select select = selectFrom(PRODUCT_LINETABLE).where(
                 and(PRODUCT_LINETABLE.DELETED.eq(0),
                         or(PRODUCT_LINETABLE.ACL.eq(ProductLine.ACl_All),
-                                or(PRODUCT_LINETABLE.PRODUCT_LINE_CREATED_BY.eq(userId), PRODUCT_LINETABLE.PRODUCT_LINE_OWNER.eq(userId), PRODUCT_LINETABLE.PRODUCT_LINE_DELIVERY_MANAGER.eq(userId), PRODUCT_LINETABLE.PRODUCT_LINE_QUALITY_MANAGER.eq(userId)))));
-        return getDslSession().fetchList(select, ProductLine.class);
+                                or(PRODUCT_LINETABLE.PRODUCT_LINE_CREATED_BY.eq(userId),PRODUCT_LINETABLE.PRODUCT_LINE_OWNER.eq(userId), PRODUCT_LINETABLE.PRODUCT_LINE_DELIVERY_MANAGER.eq(userId), PRODUCT_LINETABLE.PRODUCT_LINE_QUALITY_MANAGER.eq(userId)))));
+        return getDslSession().fetchList(select,ProductLine.class);
     }
 
     public List<ProductLine> lineInCondition(String condition, Integer... ids) {
-        Select select = select(PRODUCT_LINETABLE.PRODUCT_LINE_ID, PRODUCT_LINETABLE.PRODUCT_LINE_NAME).from(PRODUCT_LINETABLE).where(and(PRODUCT_LINETABLE.DELETED.eq(0), PRODUCT_LINETABLE.PRODUCT_LINE_NAME.like(condition), PRODUCT_LINETABLE.PRODUCT_LINE_ID.in(ids)));
-        return getDslSession().fetchList(select, ProductLine.class);
+        Select select = MysqlSelect.select(PRODUCT_LINETABLE.PRODUCT_LINE_ID, PRODUCT_LINETABLE.PRODUCT_LINE_NAME).from(PRODUCT_LINETABLE).where(and(PRODUCT_LINETABLE.DELETED.eq(0),PRODUCT_LINETABLE.PRODUCT_LINE_NAME.like(condition),PRODUCT_LINETABLE.PRODUCT_LINE_ID.in(ids))).limit(0,8);
+        return getDslSession().fetchList(select,ProductLine.class);
     }
 
 
-    public int[] batchInsert(boolean autoGeneratedKeys, List<ProductLine> productLines) {
+    public int[] batchInsert(boolean autoGeneratedKeys ,List<ProductLine> productLines) {
         if (CollectionUtil.isEmpty(productLines)) {
             return new int[0];
         }
@@ -281,8 +297,8 @@ public class ProductLineDaoImpl extends TinyDslDaoSupport implements ProductLine
         });
     }
 
-    public int[] batchInsert(List<ProductLine> productLines) {
-        return batchInsert(true, productLines);
+    public int[] batchInsert(List<ProductLine> productLines){
+        return batchInsert(true ,productLines);
     }
 
     public int[] batchUpdate(List<ProductLine> productLines) {
@@ -345,14 +361,14 @@ public class ProductLineDaoImpl extends TinyDslDaoSupport implements ProductLine
         });
     }
 
-    private Select addOrderByElements(Select select, OrderBy... orderBies) {
-        if (orderBies == null || orderBies.length == 0) {
+    private  Select addOrderByElements(Select select ,OrderBy... orderBies){
+        if (orderBies == null||orderBies.length==0) {
             return select;
         }
         List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
-        for (int i = 0; orderBies != null && i < orderBies.length; i++) {
+        for (int i = 0; orderBies!= null && i < orderBies.length; i++) {
             OrderByElement tempElement = null;
-            if (orderBies[i] != null) {
+            if(orderBies[i]!=null){
                 tempElement = orderBies[i].getOrderByElement();
             }
             if (tempElement != null) {

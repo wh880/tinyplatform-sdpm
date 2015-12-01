@@ -474,4 +474,9 @@ public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
         );
         return getDslSession().fetchList(select, Project.class);
     }
+
+    public List<Project> projectInCondition(String condition, Integer... ids) {
+        Select select = MysqlSelect.selectFrom(PROJECTTABLE).where(and(PROJECTTABLE.PROJECT_DELETED.eq(0),PROJECTTABLE.PROJECT_ID.in(ids),PROJECTTABLE.PROJECT_NAME.like(condition))).limit(0,8);
+        return getDslSession().fetchList(select,Project.class);
+    }
 }

@@ -61,14 +61,14 @@ public class ReleaseAction extends BaseController {
     }
 
     @RequestMapping("/save")
-    public String save(@CookieValue(value = "cookieProductId", defaultValue = "0") String cookieProductId,
+    public String save(@CookieValue(value = "cookieProductId",defaultValue = "0") String cookieProductId,
                        ProductRelease productRelease,
                        SystemAction systemAction,
                        String lastAddress,
                        UploadProfile uploadProfile) throws IOException {
         productRelease.setProductId(Integer.parseInt(cookieProductId));
         ProductRelease release = releaseService.addRelease(productRelease);
-        processProfile(uploadProfile, release.getReleaseId(), ProfileType.RELEASE);
+        processProfile(uploadProfile,release.getReleaseId(), ProfileType.RELEASE);
         LogUtil.logWithComment(LogUtil.LogOperateObject.RELEASE
                 , LogUtil.LogAction.OPENED
                 , String.valueOf(release.getReleaseId())
@@ -78,8 +78,8 @@ public class ReleaseAction extends BaseController {
                 , null
                 , null
                 , systemAction.getActionComment());
-        if (!StringUtil.isBlank(lastAddress)) {
-            return "redirect:" + lastAddress;
+        if(!StringUtil.isBlank(lastAddress)){
+            return "redirect:"+lastAddress;
         }
         return "redirect:" + "/a/product/release/content";
     }
@@ -101,8 +101,8 @@ public class ReleaseAction extends BaseController {
                 , release1
                 , release
                 , systemAction.getActionComment());
-        if (!StringUtil.isBlank(lastAddress)) {
-            return "redirect:" + lastAddress;
+        if(!StringUtil.isBlank(lastAddress)){
+            return "redirect:"+lastAddress;
         }
         return "redirect:" + adminPath + "/product/release/content";
     }
@@ -168,16 +168,16 @@ public class ReleaseAction extends BaseController {
                           Integer no,
                           HttpServletRequest request) {
 
-        if (no != null) {
+        if(no!=null){
             Integer cookieProductId = Integer.parseInt(CookieUtils.getCookie(request, ProductUtils.COOKIE_PRODUCT_ID));
-            if (cookieProductId == null) {
+            if(cookieProductId==null){
                 return notFoundView();
             }
             ProductRelease release = new ProductRelease();
             release.setProductId(cookieProductId);
             release.setNo(no);
             List<ProductRelease> releaseList = releaseService.findReleaseList(release);
-            if (releaseList.size() == 0) {
+            if(releaseList.size()==0){
                 return notFoundView();
             }
             releaseId = releaseList.get(0).getReleaseId();
@@ -223,7 +223,7 @@ public class ReleaseAction extends BaseController {
     }
 
     @RequestMapping("/addRelease")
-    public String addRelease(@CookieValue(value = "cookieProductId", defaultValue = "0") String cookieProductId, HttpServletRequest request, Model model) {
+    public String addRelease(@CookieValue(value = "cookieProductId",defaultValue = "0") String cookieProductId,HttpServletRequest request, Model model) {
         Product product = productService.findProduct(Integer.parseInt(cookieProductId));
         model.addAttribute("product", product);
         return "/product/page/tabledemo/product-addrelease.page";
@@ -237,7 +237,7 @@ public class ReleaseAction extends BaseController {
         if (release != null && !StringUtil.isBlank(release.getReleaseStories())) {
             List<String> origin = new ArrayList<String>(Arrays.asList(release.getReleaseStories().split(",")));
             origin.remove(String.valueOf(storyId));
-            release.setReleaseStories(StringUtil.join(origin.toArray(), ","));
+            release.setReleaseStories(StringUtil.join(origin.toArray(),","));
             releaseService.updateRelease(release);
         }
 
@@ -277,7 +277,7 @@ public class ReleaseAction extends BaseController {
             List<String> origin = new ArrayList<String>(Arrays.asList(release.getReleaseStories().split(",")));
             List<String> remove = new ArrayList<String>(Arrays.asList(ids.split(",")));
             origin.removeAll(remove);
-            release.setReleaseStories(StringUtil.join(origin.toArray(), ","));
+            release.setReleaseStories(StringUtil.join(origin.toArray(),","));
             releaseService.updateRelease(release);
         }
 
@@ -312,25 +312,24 @@ public class ReleaseAction extends BaseController {
 
     @ResponseBody
     @RequestMapping("/ajaxRelateStory")
-    public Map RelateStory(Integer releaseId, String ids) {
+    public Map RelateStory(Integer releaseId,String ids) {
         String[] stories = ids.split(",");
         if (stories.length > 0 && stories != null) {
             ProductRelease release = releaseService.findRelease(releaseId);
             String releaseStories = "";
-            if (release != null && !StringUtil.isBlank(release.getReleaseStories())) {
+            if(release!=null&&!StringUtil.isBlank(release.getReleaseStories())){
                 releaseStories = release.getReleaseStories();
             }
+            List<String> origin = new ArrayList<String>(Arrays.asList(releaseStories.split(",")));
             for (String id : stories) {
                 ProductStory productStory = storyService.findStory(Integer.parseInt(id));
                 productStory.setStoryStage("9");
-                if ("".equals(releaseStories)) {
-                    releaseStories = releaseStories + id;
-                } else {
-                    releaseStories = releaseStories + "," + id;
+                if(!origin.contains(id)){
+                    origin.add(id);
                 }
                 storyService.updateStory(productStory);
             }
-            release.setReleaseStories(releaseStories);
+            release.setReleaseStories(StringUtil.join(origin.toArray(),","));
             releaseService.updateRelease(release);
         }
         Map<String, String> map = new HashMap<String, String>();
@@ -342,25 +341,21 @@ public class ReleaseAction extends BaseController {
 
     @ResponseBody
     @RequestMapping("/ajaxRelateBug")
-    public Map RelateBug(Integer releaseId, String ids) {
+    public Map RelateBug(Integer releaseId,String ids) {
         String[] bugs = ids.split(",");
         if (bugs.length > 0 && bugs != null) {
             ProductRelease release = releaseService.findRelease(releaseId);
             String releaseBugs = "";
-            if (release != null && !StringUtil.isBlank(release.getReleaseBugs())) {
+            if(release!=null&&!StringUtil.isBlank(release.getReleaseBugs())){
                 releaseBugs = release.getReleaseBugs();
             }
+            List<String> origin = new ArrayList<String>(Arrays.asList(releaseBugs.split(",")));
             for (String bugId : bugs) {
-                if (release != null && releaseBugs != null) {
-                    if ("".equals(releaseBugs)) {
-                        releaseBugs = releaseBugs + bugId;
-                    } else {
-                        releaseBugs = releaseBugs + "," + bugId;
-                    }
-
+                if(!origin.contains(bugId)){
+                    origin.add(bugId);
                 }
             }
-            release.setReleaseBugs(releaseBugs);
+            release.setReleaseBugs(StringUtil.join(origin.toArray(),","));
             releaseService.updateRelease(release);
         }
         Map<String, String> map = new HashMap<String, String>();
@@ -371,19 +366,19 @@ public class ReleaseAction extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "/judgeReleaseName")
-    public Map judgeReleaseName(String param, Integer releaseId, Integer productId) {
+    public Map judgeReleaseName(String param,Integer releaseId,Integer productId) {
         if (param != null) {
             String releaseName = param;
             ProductRelease release = new ProductRelease();
             release.setReleaseName(releaseName);
             release.setProductId(productId);
-            List<ProductRelease> releases = releaseService.findReleaseList(release);
+            List<ProductRelease> releases= releaseService.findReleaseList(release);
             if (releases.size() != 0) {
-                if (releaseId == null) {
+                if(releaseId==null){
                     return resultMap(false, "该发布已存在");
-                } else if (!releaseId.equals(releases.get(0).getReleaseId())) {
+                }else if(!releaseId.equals(releases.get(0).getReleaseId())){
                     return resultMap(false, "该发布已存在");
-                } else {
+                }else{
                     return resultMap(true, "");
                 }
             } else {
@@ -392,9 +387,8 @@ public class ReleaseAction extends BaseController {
         }
         return resultMap(false, "请输入发布名称");
     }
-
     @RequestMapping("/exportDoc")
     public void exportDocument(Integer releaseId, HttpServletResponse response) throws IOException, TemplateException {
-        exportService.exportReleaseDoc(response, releaseId);
+        exportService.exportReleaseDoc(response,releaseId);
     }
 }

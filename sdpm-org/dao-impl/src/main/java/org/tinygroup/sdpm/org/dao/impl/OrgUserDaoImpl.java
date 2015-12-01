@@ -176,13 +176,15 @@ public class OrgUserDaoImpl extends TinyDslDaoSupport implements OrgUserDao {
         return getDslSession().fetchList(select, OrgUser.class);
     }
 
-    public List<OrgUser> userInCondition(String condition, String... ids) {
+    public List<OrgUser> userInCondition(String condition,String ...ids) {
         Condition con = null;
-        if (ids != null && ids.length != 0) {
+        if(ids!=null&&ids.length!=0){
             con = ORG_USERTABLE.ORG_USER_ID.in(ids);
         }
-        Select select = select(ORG_USERTABLE.ORG_USER_ID, ORG_USERTABLE.ORG_USER_REAL_NAME).from(ORG_USERTABLE).where(and(ORG_USERTABLE.ORG_USER_DELETED.eq(0), ORG_USERTABLE.ORG_USER_REAL_NAME.like(condition), con));
-        return getDslSession().fetchList(select, OrgUser.class);
+        Select select = MysqlSelect.select(ORG_USERTABLE.ORG_USER_ID,ORG_USERTABLE.ORG_USER_REAL_NAME).
+                from(ORG_USERTABLE).
+                where(and(ORG_USERTABLE.ORG_USER_DELETED.eq(0),ORG_USERTABLE.ORG_USER_REAL_NAME.like(condition),con)).limit(0,8);
+        return getDslSession().fetchList(select,OrgUser.class);
     }
 
     public Pager<OrgUser> getPagerByDeptId(int start, int limit, final Integer deptId, final OrderBy... orderBies) {

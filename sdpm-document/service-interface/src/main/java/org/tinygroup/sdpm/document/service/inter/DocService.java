@@ -6,45 +6,40 @@ import org.tinygroup.sdpm.document.dao.pojo.DocumentDocLib;
 import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.List;
-
 /**
- * @author Alu
  * @date 2015/09/21
+ * @author Alu
+ *
  */
 public interface DocService {
 
-    public DocumentDoc createNewDoc(DocumentDoc doc);
+	DocumentDoc createNewDoc(DocumentDoc doc);
+	//Create a new document library-just a name.
+	DocumentDocLib createNewDocLib(DocumentDocLib doclib);
+	//Edit document
+	int editDoc(DocumentDoc doc);
+	//Edit document library name.
+	int editDocLibName(DocumentDocLib doclib);
+	//find
+	DocumentDoc findDocById(Integer id);
 
-    //Create a new document library-just a name.
-    public DocumentDocLib createNewDocLib(DocumentDocLib doclib);
+	DocumentDocLib findDoclibById(Integer id);
+	//list
+	List<DocumentDoc> findDocList(DocumentDoc doc);
 
-    //Edit document
-    public int editDoc(DocumentDoc doc);
+	List<DocumentDocLib> findDoclibList(DocumentDocLib doclib);
+	//page
+	Pager<DocumentDoc> findDocRetPager(Integer start,Integer limit,DocumentDoc doc,Integer moduleId, SearchInfos conditions,String groupOperate, String sortName,boolean asc);
 
-    //Edit document library name.
-    public int editDocLibName(DocumentDocLib doclib);
+	Pager<DocumentDoc> findDocRetProductPager(Integer start,Integer limit,DocumentDoc doc, Integer moduleId, SearchInfos conditions,String groupOperate, String sortName,boolean asc);
 
-    //find
-    public DocumentDoc findDocById(Integer id);
+	Pager<DocumentDoc> findDocRetProjectPager(Integer start,Integer limit,DocumentDoc doc, Integer moduleId, SearchInfos conditions,String groupOperate, String sortName,boolean asc);
 
-    public DocumentDocLib findDoclibById(Integer id);
-
-    //list
-    public List<DocumentDoc> findDocList(DocumentDoc doc);
-
-    public List<DocumentDocLib> findDoclibList(DocumentDocLib doclib);
-
-    //page
-    public Pager<DocumentDoc> findDocRetPager(Integer start, Integer limit, DocumentDoc doc, String statusCondition, SearchInfos conditions, String groupOperate, String sortName, boolean asc);
-
-    public Pager<DocumentDocLib> findDoclibRetPager(Integer start, Integer limit, DocumentDocLib doclib, String sortName, boolean asc);
-
-    //delete
-    public int deleteDocById(Integer id);
-
-    public int deleteDoclibById(Integer id);
-
-    public int[] deleteDocByIds(List<DocumentDoc> ids);
+	Pager<DocumentDocLib> findDoclibRetPager(Integer start, Integer limit, DocumentDocLib doclib, String sortName, boolean asc);
+	//delete
+	int deleteDocById(Integer id);
+	int deleteDoclibById(Integer id);
+	int[] deleteDocByIds(List<DocumentDoc> ids);
 
 
 }

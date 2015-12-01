@@ -86,4 +86,8 @@ public class ProjectServiceImpl implements ProjectService {
         return projectManager.getProjectByStoryId(storyId);
     }
 
+    public List<Project> projectInCondition(String condition, Integer... ids) {
+        return projectManager.projectInCondition(condition,ids);
+    }
+
 }

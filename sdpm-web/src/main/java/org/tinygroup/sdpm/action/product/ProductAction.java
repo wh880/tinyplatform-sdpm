@@ -15,6 +15,7 @@ import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.RoleService;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
+import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.sdpm.productLine.service.ProductLineService;
@@ -30,6 +31,7 @@ import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.dao.pojo.SystemHistory;
 import org.tinygroup.sdpm.system.service.inter.ActionService;
 import org.tinygroup.sdpm.system.service.inter.HistoryService;
+import org.tinygroup.sdpm.util.CookieUtils;
 import org.tinygroup.sdpm.util.LogUtil;
 import org.tinygroup.sdpm.util.ProductUtils;
 import org.tinygroup.sdpm.util.UserUtils;
@@ -77,7 +79,6 @@ public class ProductAction extends BaseController {
     private ProjectService projectService;
     @Autowired
     private TeamService teamService;
-
     @ModelAttribute
     public void init(Model model) {
         initSearchBar(model, "产品");
@@ -102,7 +103,7 @@ public class ProductAction extends BaseController {
         if ("0".equals(cookieProductLineId)) {
             ProductUtils.prepareForFirst(response);
         }
-        return "redirect:" + adminPath + "/product/story?choose=1" + (request.getQueryString() == null ? "" : ("&" + request.getQueryString()));
+        return "redirect:" + adminPath + "/product/story?choose=1" + (request.getQueryString() == null? "" : ("&" + request.getQueryString()));
     }
 
 
@@ -126,8 +127,8 @@ public class ProductAction extends BaseController {
                 null,
                 null,
                 systemAction.getActionComment());
-        if (!StringUtil.isBlank(lastAddress)) {
-            return "redirect:" + lastAddress;
+        if(!StringUtil.isBlank(lastAddress)){
+            return "redirect:"+lastAddress;
         }
 
         return "redirect:" + adminPath + "/product/allproduct/addition";
@@ -167,8 +168,8 @@ public class ProductAction extends BaseController {
         productService.updateProduct(product);
         ProductUtils.removeProductList();
         ProductUtils.removeProductList(String.valueOf(product.getProductLineId()));
-        if (!StringUtil.isBlank(lastAddress)) {
-            return "redirect:" + lastAddress;
+        if(!StringUtil.isBlank(lastAddress)){
+            return "redirect:"+lastAddress;
         }
         return "redirect:" + adminPath + "/product/find/overview?productId=" + product.getProductId();
     }
@@ -226,7 +227,7 @@ public class ProductAction extends BaseController {
         Product product = new Product();
         if (Integer.parseInt(cookieProductId) > 0) {
             product = productService.findProduct(Integer.parseInt(cookieProductId));
-            if (product.getProductId() == null) {
+            if(product.getProductId()==null){
                 return notFoundView();
             }
         }
@@ -312,7 +313,7 @@ public class ProductAction extends BaseController {
             @PathVariable(value = "forward") String forward, HttpServletRequest request, Model model) {
         if ("addproduct".equals(forward)) {
             List<ProductLine> productLineList = productLineService.getUserProductLine(UserUtils.getUserId());
-            model.addAttribute("productLineList", productLineList);
+            model.addAttribute("productLineList",productLineList);
             return "/product/page/tabledemo/addProduct";
         } else if ("allproduct".equals(forward)) {
             return "/product/page/tabledemo/product-listall.page";
@@ -352,7 +353,7 @@ public class ProductAction extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "/judgeProductName")
-    public Map judgeProductName(String param, Integer productId, Integer productLineId) {
+    public Map judgeProductName(String param,Integer productId,Integer productLineId) {
         if (param != null) {
             String productName = param;
             Product product = new Product();
@@ -360,11 +361,11 @@ public class ProductAction extends BaseController {
             product.setProductLineId(productLineId);
             List<Product> productList = productService.findProductList(product);
             if (productList.size() != 0) {
-                if (productId == null) {
+                if(productId==null){
                     return resultMap(false, "该产品已存在");
-                } else if (!productId.equals(productList.get(0).getProductId())) {
+                }else if(!productId.equals(productList.get(0).getProductId())){
                     return resultMap(false, "该产品已存在");
-                } else {
+                }else{
                     return resultMap(true, "");
                 }
             } else {
@@ -376,7 +377,7 @@ public class ProductAction extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "/judgeProductCode")
-    public Map judgeProductCode(String param, Integer productId, Integer productLineId) {
+    public Map judgeProductCode(String param,Integer productId,Integer productLineId) {
         if (param != null) {
             String productCode = param;
             Product product = new Product();
@@ -384,11 +385,11 @@ public class ProductAction extends BaseController {
             product.setProductLineId(productLineId);
             List<Product> productList = productService.findProductList(product);
             if (productList.size() != 0) {
-                if (productId == null) {
+                if(productId==null){
                     return resultMap(false, "该产品编号已存在");
-                } else if (!productId.equals(productList.get(0).getProductId())) {
+                }else if(!productId.equals(productList.get(0).getProductId())){
                     return resultMap(false, "该产品编号已存在");
-                } else {
+                }else{
                     return resultMap(true, "");
                 }
             } else {
@@ -453,7 +454,7 @@ public class ProductAction extends BaseController {
         List<ProjectTeam> teamList = teams.getTeamList();
         //删选没有账号的team
         for (int i = 0; i < teamList.size(); i++) {
-            if (StringUtil.isBlank(teamList.get(i).getTeamUserId()) || StringUtil.isBlank(teamList.get(i).getTeamRole())) {
+            if (StringUtil.isBlank(teamList.get(i).getTeamUserId())||StringUtil.isBlank(teamList.get(i).getTeamRole())) {
                 teamList.remove(teamList.get(i));
                 i--;
             }
@@ -504,12 +505,12 @@ public class ProductAction extends BaseController {
 
     @ResponseBody
     @RequestMapping("ajax/productInCondition")
-    public List<Product> userInCondition(String key, String initKey, HttpServletRequest request) {
-        if (initKey != null) {
-            if (initKey.indexOf(",") > 0) {
+    public List<Product> productInCondition(String key, String initKey, HttpServletRequest request){
+        if(initKey!=null){
+            if(initKey.indexOf(",")>0){
                 String[] ids = initKey.split(",");
                 Integer[] iIds = new Integer[ids.length];
-                for (int i = 0; i < iIds.length; i++) {
+                for(int i = 0;i<iIds.length; i++){
                     iIds[i] = Integer.parseInt(ids[i]);
                 }
                 return productService.findProductListByIds(iIds);
@@ -518,11 +519,11 @@ public class ProductAction extends BaseController {
             result.add(productService.findProduct(Integer.parseInt(initKey)));
             return result;
         }
-        List<Product> products = productService.getProductByUser(UserUtils.getUserId(), 0, null);
+        List<Product> products = productService.getProductByUser(UserUtils.getUserId(),0,null);
         Integer[] pIds = new Integer[products.size()];
-        for (int i = 0; i < pIds.length; i++) {
+        for(int i =0; i<pIds.length; i++){
             pIds[i] = products.get(i).getProductId();
         }
-        return productService.productInCondition(key, pIds);
+        return productService.productInCondition(key,pIds);
     }
 }
