@@ -1,0 +1,189 @@
+##看板一
+#macro kanbanWait(task)
+<div class="board board-task board-task-wait" data-id="${task.taskId}" id="task-${task.taskId}">
+    <div class="board-title">
+        #@aModal("#myModal" task?.taskName 1200 600 "" editPage+"?taskId="+task?.taskId)${task?.taskName}#end
+        <div class="board-actions">
+            <button type="button" class="btn btn-mini btn-link btn-info-toggle"><i class="icon-angle-down"></i></button>
+            <div class="dropdown">
+                <button type="button" class="btn btn-mini btn-link dropdown-toggle" data-toggle="dropdown">
+                    <span class="icon-reorder"></span>
+                </button>
+                <div class="dropdown-menu pull-right">
+                    #@aModal("#myModal" "指派-"+task?.taskName 1050 540 "assigned" assignedPage+"?taskId="+task?.taskId)指派#end
+                    #@aModal("#myModal" "开始-"+task?.taskName 1050 540 "doing" startPage+"?taskId="+task?.taskId)开始#end
+                    #@aModal("#myModal" "完成-"+task?.taskName 1050 600 "done" finishPage+"?taskId="+task?.taskId)完成#end
+                    #@aModal("#myModal" "取消-"+task?.taskName 1050 450 "cancel" cancelPage+"?taskId="+task?.taskId)取消#end
+                    #@aModal("#myModal" "关闭-"+task?.taskName 1050 460 "boardClose" closePage+"?taskId="+task?.taskId)关闭#end
+                    #@aModal("#myModal" "编辑-"+task?.taskName 1300 600 "edit" editPage+"?taskId="+task?.taskId)编辑#end
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="board-footer clearfix">
+        <span class="task-id board-id" title="编号">${task.taskId}</span>
+        <span class="task-pri pri-${task.taskPri}" title="优先级">${task.taskPri}</span>
+	  <span class="task-assignedTo" title="指派给">
+          #@aModal("#myModal" "指派给-"+task?.taskName 1200 600 "" assignedPage+"?taskId="+task?.taskId)
+              <i class="icon-hand-right"></i>
+          #end
+          <small>${UserUtils.getUserById(task.taskAssignedTo).orgUserRealName}</small>
+	  </span>
+
+        <div class="pull-right">
+            <span class="task-left" title="预计剩余">${task.taskLeft}</span>
+        </div>
+    </div>
+</div>
+#end
+
+##看板二
+#macro kanbanDoing(task)
+<div class="board board-task board-task-doing" data-id="${task.taskId}" id="task-${task.taskId}">
+    <div class="board-title">
+        #@aModal("#myModal" task?.taskName 1200 600 "" editPage+"?taskId="+task?.taskId)${task?.taskName}#end
+
+        <div class="board-actions">
+            <button type="button" class="btn btn-mini btn-link btn-info-toggle"><i class="icon-angle-down"></i></button>
+            <div class="dropdown">
+                <button type="button" class="btn btn-mini btn-link dropdown-toggle" data-toggle="dropdown">
+                    <span class="icon-reorder"></span>
+                </button>
+                <div class="dropdown-menu pull-right">
+                    #@aModal("#myModal" "指派-"+task?.taskName 1050 540 "assigned" assignedPage+"?taskId="+task?.taskId)指派#end
+                    #@aModal("#myModal" "完成-"+task?.taskName 1050 600 "done" finishPage+"?taskId="+task?.taskId)完成#end
+                    #@aModal("#myModal" "取消-"+task?.taskName 1050 450 "cancel" cancelPage+"?taskId="+task?.taskId)取消#end
+                    #@aModal("#myModal" "关闭-"+task?.taskName 1050 460 "boardClose" closePage+"?taskId="+task?.taskId)关闭#end
+                    #@aModal("#myModal" "编辑-"+task?.taskName 1200 600 "edit" editPage+"?taskId="+task?.taskId)编辑#end
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="board-footer clearfix">
+        <span class="task-id board-id" title="编号">${task.taskId}</span>
+        <span class="task-pri pri-${task.taskPri}" title="优先级">${task.taskPri}</span>
+	  <span class="task-assignedTo" title="指派给">
+          #@aModal("#myModal" "指派给-"+task?.taskName 1200 600 "" assignedPage+"?taskId="+task?.taskId)
+              <i class="icon-hand-right"></i>
+          #end
+          <small>${UserUtils.getUserById(task.taskAssignedTo).orgUserRealName}</small>
+	  </span>
+
+        <div class="pull-right">
+            <span class="task-left" title="预计剩余">${task.taskLeft}h</span>
+        </div>
+    </div>
+</div>
+#end
+
+##看板三
+#macro kanbanDone(task)
+<div class="board board-task board-task-done" data-id="${task.taskId}" id="task-${task.taskId}">
+    <div class="board-title">
+        #@aModal("#myModal" task?.taskName 1200 600 "" editPage+"?taskId="+task?.taskId)${task?.taskName}#end
+
+        <div class="board-actions">
+            <button type="button" class="btn btn-mini btn-link btn-info-toggle"><i class="icon-angle-down"></i></button>
+            <div class="dropdown">
+                <button type="button" class="btn btn-mini btn-link dropdown-toggle" data-toggle="dropdown">
+                    <span class="icon-reorder"></span>
+                </button>
+                <div class="dropdown-menu pull-right">
+                    #@aModal("#myModal" "指派-"+task?.taskName 1050 540 "assigned" assignedPage+"?taskId="+task?.taskId)指派#end
+                    #@aModal("#myModal" "取消-"+task?.taskName 1050 450 "cancel" cancelPage+"?taskId="+task?.taskId)取消#end
+                    #@aModal("#myModal" "关闭-"+task?.taskName 1050 460 "boardClose" closePage+"?taskId="+task?.taskId)关闭#end
+                    #@aModal("#myModal" "编辑-"+task?.taskName 1200 600 "edit" editPage+"?taskId="+task?.taskId)编辑#end
+                    #@aModal("#myModal" "激活-"+task?.taskName 1300 600 "doing" doingPage+"?taskId="+task?.taskId)激活#end
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="board-footer clearfix">
+        <span class="task-id board-id" title="编号">${task.taskId}</span>
+        <span class="task-pri pri-${task.taskPri}" title="优先级">${task.taskPri}</span>
+	  <span class="task-assignedTo" title="指派给">
+          #@aModal("#myModal" "指派给-"+task?.taskName 1200 600 "edit" assignedPage+"?taskId="+task?.taskId)
+              <i class="icon-hand-right"></i>
+          #end
+          <small>${UserUtils.getUserById(task.taskAssignedTo).orgUserRealName}</small>
+	  </span>
+
+        <div class="pull-right">
+            <span class="task-left" title="预计剩余">${task.taskLeft}h</span>
+        </div>
+    </div>
+</div>
+#end
+
+
+##看板四
+#macro kanbanCancel(task)
+<div class="board board-task board-task-cancel" data-id="${task.taskId}" id="task-${task.taskId}">
+    <div class="board-title">
+        #@aModal("#myModal" task?.taskName 1200 600 "" editPage+"?taskId="+task?.taskId)${task?.taskName}#end
+
+        <div class="board-actions">
+            <button type="button" class="btn btn-mini btn-link btn-info-toggle"><i class="icon-angle-down"></i></button>
+            <div class="dropdown">
+                <button type="button" class="btn btn-mini btn-link dropdown-toggle" data-toggle="dropdown">
+                    <span class="icon-reorder"></span>
+                </button>
+                <div class="dropdown-menu pull-right">
+                    #@aModal("#myModal" "激活-"+task?.taskName 1300 600 "doing" doingPage+"?taskId="+task?.taskId)激活#end
+                    #@aModal("#myModal" "编辑-"+task?.taskName 1050 600 "edit" editPage+"?taskId="+task?.taskId)编辑#end
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="board-footer clearfix">
+        <span class="task-id board-id" title="编号">${task.taskId}</span>
+        <span class="task-pri pri-${task.taskPri}" title="优先级">${task.taskPri}</span>
+	  <span class="task-assignedTo" title="指派给">
+		 #@aModal("#myModal" "指派给-"+task?.taskName 1200 600 "" assignedPage+"?taskId="+task?.taskId)
+             <i class="icon-hand-right"></i>
+         #end
+          <small>${UserUtils.getUserById(task.taskAssignedTo).orgUserRealName}</small>
+	  </span>
+
+        <div class="pull-right">
+            <span class="task-left" title="预计剩余">${task.taskLeft}h</span>
+        </div>
+    </div>
+</div>
+#end
+
+##看板五
+#macro kanbanClosed(task)
+<div class="board board-task board-task-closed" data-id="${task.taskId}" id="task-${task.taskId}">
+    <div class="board-title">
+        #@aModal("#myModal" task?.taskName 1200 600 "" editPage+"?taskId="+task?.taskId)${task?.taskName}#end
+
+        <div class="board-actions">
+            <button type="button" class="btn btn-mini btn-link btn-info-toggle"><i class="icon-angle-down"></i></button>
+            <div class="dropdown">
+                <button type="button" class="btn btn-mini btn-link dropdown-toggle" data-toggle="dropdown">
+                    <span class="icon-reorder"></span>
+                </button>
+                <div class="dropdown-menu pull-right">
+                    #@aModal("#myModal" "激活-"+task?.taskName 1300 600 "doing" doingPage+"?taskId="+task?.taskId)激活#end
+                    #@aModal("#myModal" "编辑-"+task?.taskName 1050 600 "edit" editPage+"?taskId="+task?.taskId)编辑#end
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="board-footer clearfix">
+      <span class="task-id board-id" title="编号">${task.taskId}</span>
+      <span class="task-pri pri-${task.taskPri}" title="优先级">${task.taskPri}</span>
+	  <span class="task-assignedTo" title="指派给">
+		 #@aModal("#myModal" "指派给-"+task?.taskName 1200 600 "" assignedPage+"?taskId="+task?.taskId)
+             <i class="icon-hand-right"></i>
+         #end
+          <small>${UserUtils.getUserById(task.taskAssignedTo).orgUserRealName}</small>
+	  </span>
+
+        <div class="pull-right">
+            <span class="task-left" title="预计剩余">${task.taskLeft}h</span>
+        </div>
+    </div>
+</div>
+#end

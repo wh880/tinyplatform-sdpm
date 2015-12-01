@@ -62,7 +62,7 @@
 			#end
 			#@tbody()
 			#set(objs=[1..81])
-			#for(obj:objs)
+			#foreach(obj:objs)
 				#@tr("text-c")
 					#@td()<input type="checkbox" value="1" name="idCheck">#end
 					#@td()${objFor.index}#end

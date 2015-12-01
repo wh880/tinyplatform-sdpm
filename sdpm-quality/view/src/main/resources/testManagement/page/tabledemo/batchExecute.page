@@ -1,0 +1,37 @@
+#@tinyForm("bathAddForm" TINY_CONTEXT_PATH+adminPath+"/project/task/batchAdd" "post" {"class":"test"})
+    #@tableBorder("out-border")
+        #@thead()
+            #@tr("text-c")
+                #@thW()ID#end
+                #@thW()P#end
+                #@thW()所属模块#end
+                #@thW()用例标题#end
+                #@thW()测试结果#end
+            #end
+        #end
+        #@tbody()
+        	#foreach(i:[0..8])
+        		#@tr("text-c")
+        			#@td()${i}#end
+        			#@td()#end
+        			#@td()#end
+        			#@td()#end
+        			#@td()
+	        			#@skinMinimal("mt-1")
+	    					#labelRadio(rId="aaa" rName="caseStatus" rChecked="checked" rValue="1" labelText=getDict("caseStatus","1") )
+	    					#labelRadio(rId="bbb" rName="caseStatus" rValue="2" labelText=getDict("caseStatus","2"))   								
+	    					#labelRadio(rId="ccc" rName="caseStatus" rValue="3" labelText=getDict("caseStatus","3"))						
+						#end
+					#end
+        		#end
+        	#end
+        	#@tr("text-c")
+        		<td colspan="5" class="col-2">
+        			<div class="col-5"></div>
+        			<button style="float: left" type="submit" id="submit2" class="commitBtn">保存</button>
+        			
+        			</td>
+        	#end        	
+        #end
+    #end
+#end

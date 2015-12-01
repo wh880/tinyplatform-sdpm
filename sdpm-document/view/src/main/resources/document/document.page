@@ -1,22 +1,12 @@
 #import("/org/tinygroup/button/components/button_smart.component")
 #import("/org/tinygroup/table/components/tinytable.component")
+#import("/org/tinygroup/table/components/togglebox.component")
 #set(docTableId = "docTableId" )
 #!set(activeTitle="产品文档",activeMenuId=currentPageId)
 
-#include("common.page")
-#include("doc-tab.page")
-        ##operationbar start
-            #@div(divClass="operationbar")
-            <span class="f">
-            	<a href="#" class="active_btn">按模块浏览</a>
-            	<a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>            	         	
-            </span>
-            <span class="r">
-            #foreach(addm:menuManager.getScopeMenus("add-doc"))
-            	<a href="${TINY_CONTEXT_PATH+adminPath}${addm.href}">#buttonIcon(iconClass=addm.icon)${addm.name}</a>
-            #end
-            </span>
-            #include("mulsearch.page") 
-            #end          
-#include("treeNew.page")
-	
+#include("/document/doc-tab.page")
+#@div(divClass="operationbar")
+##    #include("/document/mulsearch.page")
+#end
+#include("/document/treeNew.page")
+#include("/document/common.page")

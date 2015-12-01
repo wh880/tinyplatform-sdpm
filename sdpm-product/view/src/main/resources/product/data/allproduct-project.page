@@ -5,13 +5,13 @@
 #set(pagesize=records-(page-1)*pagesize)
 #end
 #setTinyItemCount(project?.totalCount)
-#for(project:project?.records)
+#foreach(project:project?.records)
 #@tr()
 	#@td()<input type="checkbox" value="1" name="product-project">#end
 	#@td()${project?.projectId}#end
 	#@td()<a href="${TINY_CONTEXT_PATH +adminPath}/project/task/index.page">${project?.projectName}</a>#end
 	#@td()${project?.projectCode}#end
-	#@td()${project?.projectEnd}#end
+	#@td()${project?.projectEnd?formatDate(project?.projectEnd,'yyyy-MM-dd'):""}#end
 	#@td()${project?.projectStatus}#end
 	#@td()${project?.projectId}#end
 	#@td()${project?.projectId}#end
@@ -32,7 +32,7 @@
 
 
 #@dialog("myModal")
-	#@dialogHeader()对话框标题#end
+	#@dialogHeader()#end
 	#@dialogBody()<p>对话框内容…</p>#end
 	#@dialogFooter()
 		#@buttonEnsure()确定#end

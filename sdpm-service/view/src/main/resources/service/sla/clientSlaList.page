@@ -8,9 +8,7 @@
 #set(name="sla")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
-    ##tabbody end
     <div style="width:100%;float:left">
-    #* #foreach(var:[1..3])*#
         #foreach(var:slas)
             #@gridSysCol(4)
                 #@div(divClass="infoContent")
@@ -28,7 +26,8 @@
                                 #end
                                 #@tr()
                                     #@th()服务级别#end
-                                    #@td()${var.serviceLevel}#end
+                                    #@td()${getDict("serviceLevel",var?.serviceLevel)}#end
+
                                 #end
                                 #@tr()
                                     #@th()协议内容#end
@@ -49,8 +48,8 @@
                             #end
                     </div>
                     <div style="text-align:right;margin:right">
-                        #foreach(m:menuManager.getScopeMenus("clientSlaContent"))
-                            #if(m.id != "clientSla_deleteContent")
+                        #foreach(m:menuManager.getScopeMenus("service-sla"))
+                            #if(m.id != "sla-del")
                                 #@aExtendButton(
                                     "btn-primary btn-sm" TINY_CONTEXT_PATH+adminPath+m.href+"?id="+var.slaId "" "")
                                     编辑#end
@@ -79,7 +78,7 @@
                 //$.ajax()
                 //console.log(index);
 //                layer.msg($("已删除").attr("deleteList"), 1);
-                layer.msg('已删除', 1);
+                layer.msg('已删除', 1,1);
             })
         });
     });

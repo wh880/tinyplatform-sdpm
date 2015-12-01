@@ -1,45 +1,26 @@
 #import("/org/tinygroup/button/components/button_smart.component")
 #!set(activeTitle="服务管理",activeMenuId=currentPageId)
 #set(name="sla")
+#set(slaTableId = "slaTableId")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
-      #*  #@div(divClass="dropdownBox")
-            #include("/service/serviceCom/dropdownMenu.page")
-        #end*#
         #@tabHead()
             #include("/service/serviceCom/tab.page")
         #end
-
         #@tabBodyCol("ptop-5")
-        ##operationbar star
             #@div(divClass="operationbar")
-            <span class="f">
-					<a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
-				</span>
-            <span class="r">
-                #set(m1=menuManager.getMenu("sla-export"))
-                #if(m1)
-                    #@iconOperations(
-                        "#myModal" m1.icon "导出" "600" "100" m1.href "ml-5")${m1.name}#end
-                #end
-
-                #set(m2=menuManager.getMenu("sla-add"))
-                #if(m2)
-                    <a href="${TINY_CONTEXT_PATH+adminPath}${m2.href}">#buttonIcon(iconClass=m2.icon)${m2.name}</a>
-                #end
-				</span>
                 #div(divClass="clearfix")
                 #include("/service/sla/multiSearch.page")
             #end
         #end
     #*实现左侧树2015-10-12,21:17*#
-        #@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
+        #@toggleBox({"class":"open"})
             #@toggleLeft({"class":"aclass"})
                 #@settoggleLeftTitle()所有产品#end
                 #@settoggleLeftBody("treeLeftbox")
-                    #@zTreeList(call("link",adminPath+"/service/sla/treeData"))
-                        #setzTreeValMap({"id":"treeId","name":"pName","pid":
-                            "pId"}) ##Id中带"p"的为productLine的ID，其余的为productde ID
+                    #@zTreeList(call("link",adminPath+"/service/client/treeData") {"readOnly":true})
+                    ##Id中带"p"的为productLine的ID，其余的为productde ID
+                        #setzTreeValMap({"id":"treeId","name":"pName","pid":"pId"})
                         #zTreeSetLinkUrl(TINY_CONTEXT_PATH+adminPath+"/service/sla/list" )
                     #end
                 #end
@@ -48,8 +29,6 @@
                 #include("/service/sla/slaTable.page")
             #end
         #end
-
-
     #end
 #end
 #@simpleModal("myModal" "导出")#end

@@ -3,6 +3,8 @@ package org.tinygroup.sdpm.project.biz.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.tinygroup.commons.tools.ArrayUtil;
+import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.project.biz.inter.ProjectProductManager;
 import org.tinygroup.sdpm.project.dao.ProjectProductDao;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
@@ -19,18 +21,26 @@ public class ProjectProductManagerImpl implements ProjectProductManager {
     @Autowired
     private ProjectProductDao projectProductDao;
 
-    public void addLink(Integer[] array, Integer projectId) {
-        projectProductDao.deleteByProjectId(projectId);
+    public List<Product> findLinkProductByProjectId(Integer projectId) {
+        if (projectId == null) {
+            return new ArrayList<Product>();
+        }
+        return projectProductDao.findLinkProductByProjectId(projectId);
+    }
+
+    public void addLink(Integer[] productIds, Integer projectId) {
+        if (ArrayUtil.isEmptyArray(productIds) || projectId == null) {
+            return;
+        }
         List<ProjectProduct> list = new ArrayList<ProjectProduct>();
-        for (Integer productId : array) {
+        for (Integer productId : productIds) {
             ProjectProduct t = new ProjectProduct();
             t.setProjectId(projectId);
             t.setProductId(productId);
             list.add(t);
         }
-        if (list != null || !list.isEmpty()) {
-            projectProductDao.batchInsert(list);
-        }
+        projectProductDao.deleteByProjectId(projectId);
+        projectProductDao.batchInsert(list);
     }
 
     public List<ProjectProduct> findList(ProjectProduct projectProduct) {
@@ -43,9 +53,5 @@ public class ProjectProductManagerImpl implements ProjectProductManager {
 
     public Integer update(ProjectProduct projectproduct) {
         return projectProductDao.edit(projectproduct);
-    }
-
-    public Integer delete(int id) {
-        return projectProductDao.deleteByKey(id);
     }
 }

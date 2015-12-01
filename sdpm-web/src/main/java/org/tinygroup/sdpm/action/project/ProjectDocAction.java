@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.action.project;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,15 +8,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.document.dao.pojo.DocumentDoc;
+import org.tinygroup.sdpm.document.dao.pojo.DocumentDocLib;
 import org.tinygroup.sdpm.document.service.inter.DocService;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
-import org.tinygroup.sdpm.util.CookieUtils;
+import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
+import org.tinygroup.sdpm.system.service.inter.ModuleService;
+import org.tinygroup.sdpm.util.ProjectUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -33,12 +38,21 @@ public class ProjectDocAction extends BaseController {
     private ProjectService projectService;
     @Autowired
     private ProductService productService;
+    @Autowired
+    private ModuleService moduleService;
 
+    @RequiresPermissions("document")
+    @RequestMapping("/index")
+    public String jumpDocIndex() {
+        return "project/document/index.page";
+    }
 
     @RequestMapping("/findList")
-    public String findList(Model model, HttpServletRequest request, Integer start, Integer limit, String order, String ordertype) {
-        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, "cookie_projectId"));
-
+    public String findList(Model model, HttpServletRequest request, HttpServletResponse response, Integer start, Integer limit, String order, String ordertype) {
+        Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
+        if (projectId == null) {
+            return redirectProjectForm();
+        }
         DocumentDoc doc = new DocumentDoc();
         doc.setDocProject(projectId);
         Pager<DocumentDoc> docPager = docService.findDocRetPager(start, limit, doc, null, null, null, order, "asc".equals(ordertype) ? true : false);
@@ -69,6 +83,7 @@ public class ProjectDocAction extends BaseController {
         return map;
     }
 
+    @RequiresPermissions("pro-document-delete")
     @ResponseBody
     @RequestMapping("/del")
     public Map<String, String> del(Integer id) {
@@ -84,15 +99,19 @@ public class ProjectDocAction extends BaseController {
         return map;
     }
 
+    @RequiresPermissions("pro-document-report")
     @RequestMapping("/preAdd")
     public String preAdd(Model model) {
-        List<Project> projectList = projectService.findList();
-        List<Product> productList = productService.findProductList(new Product());
-        //所属分类
-
-        model.addAttribute("projectList", projectList);
-        model.addAttribute("productList", productList);
-        return "project/document/add.page";
+        SystemModule module = new SystemModule();
+        List<Product> listProduct = productService.findProductList(new Product());
+        List<Project> listProject = projectService.findList();
+        List<SystemModule> listModule = moduleService.findModuleList(module);
+        List<DocumentDocLib> libList = docService.findDoclibList(null);
+        model.addAttribute("productList", listProduct);
+        model.addAttribute("projectList", listProject);
+        model.addAttribute("listModule", listModule);
+        model.addAttribute("libList", libList);
+        return "project/document/add";
     }
 
     @RequestMapping("/save")

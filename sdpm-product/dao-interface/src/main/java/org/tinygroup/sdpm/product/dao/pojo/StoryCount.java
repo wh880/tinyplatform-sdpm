@@ -2,48 +2,48 @@ package org.tinygroup.sdpm.product.dao.pojo;
 
 import java.io.Serializable;
 
-public class StoryCount implements Serializable{
-	
-	private String name;
-	
-	private int number;
-	
-	private double percent;
-	
-	private String percentToString;
+public class StoryCount implements Serializable {
 
-	public String getPercentToString() {
-		String s = String.valueOf(percent*100);
-		return s.substring(0,s.indexOf("."))+"%";
-	}
+    private String name;
 
-	public void setPercentToString(String percentToString) {
-		this.percentToString = percentToString;
-	}
+    private int number;
 
-	public String getName() {
-		
-		return name;
-	}
+    private double percent;
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    private String percentToString;
 
-	public int getNumber() {
-		return number;
-	}
+    public String getPercentToString() {
+        String s = String.valueOf(percent * 100);
+        return s + "%";
+    }
 
-	public void setNumber(int number) {
-		this.number = number;
-	}
+    public void setPercentToString(String percentToString) {
+        this.percentToString = percentToString;
+    }
 
-	public double getPercent() {
-		return percent;
-	}
+    public String getName() {
 
-	public void setPercent(double percent) {
-		this.percent = percent;
-	}
-	
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
+    }
+
+    public double getPercent() {
+        return percent;
+    }
+
+    public void setPercent(double percent) {
+        this.percent = percent;
+    }
+
 }

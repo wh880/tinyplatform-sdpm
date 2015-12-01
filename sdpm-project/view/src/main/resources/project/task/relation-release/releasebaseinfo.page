@@ -1,77 +1,34 @@
 #@div(divClass="infoContent")
 <p class="titleName">描述</p>
-<div>
-        ${build?.buildDesc}
-</div>
+<div>${build?.buildDesc}</div>
 #end
-
 #@div(divClass="infoContent")
 <p class="titleName">基本信息</p>
+
+
 <ul>
-    <li>
-        #@elementItem()
-
-            <p>
-                    ${build?.buildDesc}
-            </p>
-
-        #end
+    <li class="row">
+        <div class="col-3 text-align-right">名称： </div>
+        <div class="col-8" style="padding-left:10px">${build?.buildName}</div>
     </li>
-
-    <li>
-        #@elementItem()
-
-            <p><b>名称:</b>
-                    ${build?.buildName}
-            </p>
-
-        #end
+    <li class="row">
+        <div class="col-3 text-align-right">打包日期： </div>
+        <div class="col-8" style="padding-left:10px">${formatDate(build?.buildDate,"yyyy-MM-dd hh:mm")}</div>
     </li>
-
-    <li>
-        #@elementItem()
-
-            <p><b>打包日期:</b>
-                    ${build?.buildDate}
-            </p>
-
-        #end
+    <li class="row">
+        <div class="col-3 text-align-right">构建者： </div>
+        <div class="col-8" style="padding-left:10px">${build?.buildBuilder?UserUtils.getUserById(build?.buildBuilder)?.orgUserRealName:""}</div>
     </li>
-
-    <li>
-        #@elementItem()
-
-            <p><b>构建者:</b>
-                    ${build?.buildBuilder}
-            </p>
-
-        #end
+    <li class="row">
+        <div class="col-3 text-align-right">源代码地址： </div>
+        <div class="col-8" style="padding-left:10px">${build?.buildScmPath}</div>
     </li>
-    <li>
-            #@elementItem()
-
-                <p><b>源代码地址:</b>
-                        ${build?.buildScmPath}
-                </p>
-
-            #end
+    <li class="row">
+        <div class="col-3 text-align-right">下载地址： </div>
+        <div class="col-8" style="padding-left:10px">${build?.buildFilePath}</div>
     </li>
-    <li>
-            #@elementItem()
-
-                <p><b>下载地址:</b>
-                        ${build?.buildFilePath}
-                </p>
-
-            #end
-    </li>
-
 </ul>
 #end
+#history(adminPath+
+    "/system/action/ajax/history?actionObjectType=build&actionObjectId="+build?.buildId)
 
-
-
-#@div(divClass="infoContent")
-<p class="titleName">历史记录</p>
-    #include("/project/recordlist.page")
-#end

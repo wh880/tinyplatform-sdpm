@@ -32,23 +32,24 @@ public class ObtainFileProcessor extends AbstractFileProcessor {
         for (FileObject fileObject : deleteList) {
             LOGGER.logMessage(LogLevel.INFO, "正在移除obtain文件[{0}]",
                     fileObject.getAbsolutePath());
-            Obtains obtains = (Obtains)caches.get(fileObject.getAbsolutePath());
-            if(obtains!=null){
+            Obtains obtains = (Obtains) caches.get(fileObject.getAbsolutePath());
+            if (obtains != null) {
                 obtainHandleImpl.removeObtains(obtains);
                 caches.remove(fileObject.getAbsolutePath());
-            }            LOGGER.logMessage(LogLevel.INFO, "移除obtain文件[{0}]结束",
+            }
+            LOGGER.logMessage(LogLevel.INFO, "移除obtain文件[{0}]结束",
                     fileObject.getAbsolutePath());
         }
         for (FileObject fileObject : changeList) {
             LOGGER.logMessage(LogLevel.INFO, "正在加载obtain文件[{0}]",
                     fileObject.getAbsolutePath());
-            Obtains oldObtains = (Obtains)caches.get(fileObject.getAbsolutePath());
-            if(oldObtains!=null){
+            Obtains oldObtains = (Obtains) caches.get(fileObject.getAbsolutePath());
+            if (oldObtains != null) {
                 obtainHandleImpl.removeObtains(oldObtains);
             }
             Obtains obtains = (Obtains) stream
                     .fromXML(fileObject.getInputStream());
-            obtainHandleImpl.addObtain(obtains,fileObject.getAbsolutePath());
+            obtainHandleImpl.addObtain(obtains, fileObject.getAbsolutePath());
             caches.put(fileObject.getAbsolutePath(), obtains);
             LOGGER.logMessage(LogLevel.INFO, "加载obtain文件[{0}]结束",
                     fileObject.getAbsolutePath());

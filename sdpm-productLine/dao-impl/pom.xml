@@ -8,10 +8,16 @@
   <artifactId>sdpm-productLine-dao-impl</artifactId>
   <name>sdpm-productLine-dao-impl</name>
   <dependencies>
+  
   	<dependency>
        <groupId>org.tinygroup</groupId>
        <artifactId>sdpm-productLine-dao-interface</artifactId>
        <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.tinygroup</groupId>
+      <artifactId>sdpm-org-dao-inter</artifactId>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>

@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by wangll13383 on 2015/9/18.
  */
-public class SearchInfos implements Serializable{
+public class SearchInfos implements Serializable {
     private List<SearchInfo> infos = new ArrayList<SearchInfo>();
 
     public List<SearchInfo> getInfos() {

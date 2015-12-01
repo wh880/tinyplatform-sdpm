@@ -1,33 +1,56 @@
 #macro setTinyItemCount(num)
-	<input type="hidden" name="records" value="${num}"/>
+<input type="hidden" name="records" value="${num}"/>
 #end
 
-
-
-#set(records=52,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
+#set(records=versionPager?.getTotalCount(),temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
 #if (pagesize>records-pagesize*(page-1))
-#set(pagesize=records-(page-1)*pagesize)
+    #set(pagesize=records-(page-1)*pagesize)
 #end
-#setTinyItemCount(52)
-#for(var:[1..pagesize])
-	#@tr()
-		#@td()<input type="checkbox" value="1" name="idCheck">#end
-		#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/versionInfo.page">008</a>#end
-		#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/versionInfo.page">1</a> #end
-		#@td()1#end
-		#@td()1#end
-		#@td()2015-8-28#end
-		#@td()2015-8-28#end
-		#@td()完成#end	
-		#@td()
-			#foreach(m:menuManager.getScopeMenus("pro-test-op"))
-				#if(m.id != "pro-test-delete")
-                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
-				#else
-					#@delItemsdpm(m.href 5)#buttonIcon(iconClass=m.icon)#end
-				#end
+#setTinyItemCount(records)
+#foreach(v:versionPager.getRecords())
+    #@tr()
+        #@td()<input type="checkbox" value="${v?.testversionId}" name="idCheck">#end
+        #@td()<a
+                href="${TINY_CONTEXT_PATH+adminPath}/quality/version/taskToCase?testversionId=${v?.testversionId}&currentPageId=5&status=tverallcase">${v
+            ?.testversionId}</a>#end
+        #@td()<a
+                href="${TINY_CONTEXT_PATH+adminPath}/quality/version/taskToCase?testversionId=${v?.testversionId}&currentPageId=5&status=tverallcase">${v
+            ?.testtaskTitle}</a>#end
+        #@td()${v?.searchBuildName}#end
+        #@td("nowrap")${v?.testtaskOwner?UserUtils.getUserById(v?.testtaskOwner)?.orgUserRealName:""}#end
+        #@td("nowrap")${formatDate(v?.testtaskBegin, "yyyy-MM-dd")}#end
+        #@td("nowrap")${formatDate(v?.testtaskEnd, "yyyy-MM-dd")}#end
+        #@td()${getDict("versionStatus",v?.testtaskStatus)}#end
+        #@td("nowrap")
+            #foreach(m:menuManager.getScopeMenus("testversion-op"))
+            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?testversionId=${v?.testversionId}&currentPageId=5"
+               title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+            #end
+            #set(m=menuManager.getMenu("tversiondelete"))
+            #if(m)
+            <a class="versionDelete" href="javascript:void(0)"><i class="${m.icon}" title="删除"></i></a>
+            <script type="text/javascript">
+                $(function () {
+                    var check = $(".versionDelete");
+                    check.on("click", function () {
+                        layer.confirm("是否确认删除?", function () {
+                            $.ajax({
+                                type: "get",
+                                url: "${TINY_CONTEXT_PATH+adminPath+m?.href+'?testversionId ='+v?.testversionId}",
+                                dataType: "json",
+                                success: function (data) {
+                                    if (data.status == "y") {
+                                        window.location.reload();
+                                    }
+                                }
+                            });
+                            return false;
+                        });
+                    });
+                })
 
-			#end
-		#end	
-	#end
+            </script>
+            #end
+        #end
+    #end
 #end

@@ -1,17 +1,17 @@
 /**
- *  Copyright (c) 1997-2013, www.tinygroup.org (luo_guo@icloud.com).
- *
- *  Licensed under the GPL, Version 3.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *       http://www.gnu.org/licenses/gpl.html
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
+ * Copyright (c) 1997-2013, www.tinygroup.org (luo_guo@icloud.com).
+ * <p>
+ * Licensed under the GPL, Version 3.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.gnu.org/licenses/gpl.html
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 package org.tinygroup.sdpm.project.dao.pojo;
@@ -19,108 +19,134 @@ package org.tinygroup.sdpm.project.dao.pojo;
 import java.io.Serializable;
 import java.util.Date;
 
-/** 
+/**
  * 团队
- * 
+ *
  */
 public class ProjectTeam implements Serializable {
 
-	/** 
-	 * 逻辑ID
-	 * 
-	 */
-	private Integer id;
+    /**
+     * 逻辑ID
+     *
+     */
+    private Integer id;
 
-	/** 
-	 * 项目id
-	 * 
-	 */
-	private Integer projectId;
+    /**
+     * 产品id
+     *
+     */
+    private Integer productId;
 
-	/** 
-	 * 用户
-	 * 
-	 */
-	private String teamAccount;
+    /**
+     * 项目id
+     *
+     */
+    private Integer projectId;
 
-	/** 
-	 * 角色
-	 * 
-	 */
-	private String teamRole;
+    /**
+     * 用户
+     *
+     */
+    private String teamUserId;
 
-	/** 
-	 * 加盟日
-	 * 
-	 */
-	private Date teamJoin;
+    /**
+     * 角色
+     *
+     */
+    private String teamRole;
 
-	/** 
-	 * 可用工时
-	 * 
-	 */
-	private Float teamDays;
+    /**
+     * 加盟日
+     *
+     */
+    private Date teamJoin;
 
-	/** 
-	 * 可用工时
-	 * 
-	 */
-	private Float teamHours;
+    /**
+     * 可用工时
+     *
+     */
+    private Float teamDays;
 
-	public Integer getId() {
-		return id;
-	}
+    /**
+     * 可用工时
+     *
+     */
+    private Float teamHours;
+    /**
+     * 成员角色
+     */
+    private String roleName;
 
-	public void setId(Integer id){
-		this. id = id;
-	}
+    public String getRoleName() {
+        return roleName;
+    }
 
-	public Integer getProjectId() {
-		return projectId;
-	}
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
 
-	public void setProjectId(Integer projectId){
-		this. projectId = projectId;
-	}
+    public Integer getProductId() {
+        return productId;
+    }
 
-	public String getTeamAccount() {
-		return teamAccount;
-	}
+    public void setProductId(Integer productId) {
+        this.productId = productId;
+    }
 
-	public void setTeamAccount(String teamAccount){
-		this. teamAccount = teamAccount;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public String getTeamRole() {
-		return teamRole;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public void setTeamRole(String teamRole){
-		this. teamRole = teamRole;
-	}
+    public Integer getProjectId() {
+        return projectId;
+    }
 
-	public Date getTeamJoin() {
-		return teamJoin;
-	}
+    public void setProjectId(Integer projectId) {
+        this.projectId = projectId;
+    }
 
-	public void setTeamJoin(Date teamJoin){
-		this. teamJoin = teamJoin;
-	}
+    public String getTeamUserId() {
+        return teamUserId;
+    }
 
-	public Float getTeamDays() {
-		return teamDays;
-	}
+    public void setTeamUserId(String teamUserId) {
+        this.teamUserId = teamUserId;
+    }
 
-	public void setTeamDays(Float teamDays) {
-		this.teamDays = teamDays;
-	}
+    public String getTeamRole() {
+        return teamRole;
+    }
 
-	public Float getTeamHours() {
-		return teamHours;
-	}
+    public void setTeamRole(String teamRole) {
+        this.teamRole = teamRole;
+    }
 
-	public void setTeamHours(Float teamHours){
-		this. teamHours = teamHours;
-	}
+    public Date getTeamJoin() {
+        return teamJoin;
+    }
+
+    public void setTeamJoin(Date teamJoin) {
+        this.teamJoin = teamJoin;
+    }
+
+    public Float getTeamDays() {
+        return teamDays;
+    }
+
+    public void setTeamDays(Float teamDays) {
+        this.teamDays = teamDays;
+    }
+
+    public Float getTeamHours() {
+        return teamHours;
+    }
+
+    public void setTeamHours(Float teamHours) {
+        this.teamHours = teamHours;
+    }
 
 }

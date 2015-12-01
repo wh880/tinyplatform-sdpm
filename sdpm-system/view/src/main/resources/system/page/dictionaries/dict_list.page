@@ -1,5 +1,5 @@
 #!set(activeTitle="字典类型管理",activeMenuId=currentPageId)
-#!set(page="dict")
+#!set(page="module")
 #set(editpagePath="/system/page/dictionaries/dict_edit.pagelet",editpageModalId="dictEditModal",editpageModal="#"+editpageModalId)
 #set(viewpagePath="/system/page/dictionaries/dict_view.pagelet",viewpageModalId="dictViewModal",viewpageModal="#"+viewpageModalId)
 #include("/system/page/event/common.page")
@@ -30,7 +30,7 @@
 			#@tbody()
 ##			#set(objs=[["性别","SEX"],["年龄","AGE"],["教育程度","EDUCATION"],["残疾等级","DISABILITYGRADE"],["残疾类别","DISABILITYTYPE"],["角色类型","ROLETYPE"],["用户状态","USERSTATUS"],["岗位任职规则属性","JOBRULE"],["岗位职责规则属性","JOBRESP"],
 ##			["1","2"],["1","2"],["1","2"]])
-			#for(mo:list)
+			#foreach(mo:list)
 				#@tr("text-c")
 					#@td()<input type="checkbox" value="${mo?.moduleId}" name="idCheck">#end
 					#@td()${mo?.moduleName}#end
@@ -38,7 +38,7 @@
 					#@td("f-14 user-manage")
 						#foreach(m in menuManager.getScopeMenus("dict-op"))
 							#if(m.id!="dict-del")
-								#iconOperations("icon-eye-open"==m.icon?viewpageModal:editpageModal m.icon m.name "460" "158" adminPath+m.href +"?moduleId="+mo?.moduleId "ml-5")
+								#iconOperations("icon-eye-open"==m.icon?viewpageModal:editpageModal m.icon m.name "460" "260" adminPath+m.href +"?moduleId="+mo?.moduleId "ml-5")
 							#else
 ##								#iconOperation(m.icon m.name "ml-5 delBtn" adminPath+m.href+"?moduleId="+mo?.moduleId)
 								#@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m.href mo?.moduleId)#buttonIcon(iconClass=m.icon)#end

@@ -1,11 +1,13 @@
-#@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/product/delete" "" {"class":"test"})
+
+#@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/product/delete" "" {"id":"closeId"})
+
 	#tinyInput("text" "productId" productId {"class":"input-text hidden"})
     #@elementItem()
         #@colLabel()关闭原因：#end
         #@formControlDiv("col-8")
             #@Teditor(
                 "content" "content" {"initialFrameHeight":"150" ,"placeholder":"说点什么...最少输入10个字符","datatype":"*10-500",
-                "nullmsg":"备注不能为空！"})备注...最少输入10个字符#end
+                "nullmsg":"备注不能为空！"})#end
         #end
         #@validateDiv("col-2")#end
     #end
@@ -13,17 +15,41 @@
     #@elementItem()
         #@colLabel()历史记录：#end
         #@formControlDiv("col-8")
-            #@div(divClass="infoContent")
-            #include("/product/page/tabledemo/historyrecord.page")
-                #end
+            #history(adminPath+"/system/action/ajax/history?actionObjectType=product&actionObjectId="+productId)
         #end
         #@validateDiv("col-2")#end
     #end
     
-     #@elementItem()
-        <div class="text-c">
-				#submitButton("productSubmit","关闭","commitBtn","关闭")
-        </div>
-    #end
+##     #@elementItem()
+##        <div class="text-c">
+##				#submitButton("productSubmit","关闭","commitBtn","关闭")
+##        </div>
+##    #end
 
 #end
+<script>
+    $(function(){
+        $("#closeId").Validform({
+            beforeSubmit:function(curform){
+                $(curform).ajaxSubmit({
+                    dataType:"json",
+                    success:function(data){
+                        if(data.status=="y"||data.status=="success"){
+                            layer.msg("关闭成功",1, 1);
+                            $("#lineTree").trigger("refresh");
+                            $(curform).closest(".modal").trigger("close");
+                        }else{
+                            layer.msg("关闭失败");
+                        }
+                        $(curform).closest(".modal").trigger("close");
+                        $("table.tinytable").trigger("refresh");
+                    },
+                    error:function(){
+                        layer.msg("暂无响应");
+                    }
+                });
+                return false;
+            }
+        })
+    })
+</script>

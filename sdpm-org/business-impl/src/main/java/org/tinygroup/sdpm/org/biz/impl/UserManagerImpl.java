@@ -18,6 +18,7 @@ package org.tinygroup.sdpm.org.biz.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.security.Digests;
 import org.tinygroup.sdpm.common.util.Encodes;
 import org.tinygroup.sdpm.org.biz.inter.UserManager;
@@ -25,6 +26,7 @@ import org.tinygroup.sdpm.org.dao.OrgUserDao;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.tinysqldsl.Pager;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -37,6 +39,9 @@ public class UserManagerImpl implements UserManager {
     private OrgUserDao orgUserDao;
 
     public OrgUser find(String id) {
+        if (StringUtil.isBlank(id)) {
+            return null;
+        }
         return orgUserDao.getByKey(id);
     }
 
@@ -103,6 +108,26 @@ public class UserManagerImpl implements UserManager {
         byte[] salt = Encodes.decodeHex(password.substring(0, 16));
         byte[] hashPassword = Digests.sha1(plainPassword.getBytes(), salt, HASH_INTERATIONS);
         return password.equals(Encodes.encodeHex(salt) + Encodes.encodeHex(hashPassword));
+    }
+
+    public String getNameById(String id) {
+
+        return orgUserDao.getNameById(id);
+    }
+
+    public List<OrgUser> findUserListByIds(String... userId) {
+        return orgUserDao.getByKeys(userId);
+    }
+
+    public List<OrgUser> findTeamUserListByProjectId(Integer projectId) {
+        if (projectId == null) {
+            return new ArrayList<OrgUser>();
+        }
+        return orgUserDao.getTeamUserByProjectId(projectId);
+    }
+
+    public List<OrgUser> userInCondition(String condition, String[] ids) {
+        return orgUserDao.userInCondition(condition, ids);
     }
 
 }

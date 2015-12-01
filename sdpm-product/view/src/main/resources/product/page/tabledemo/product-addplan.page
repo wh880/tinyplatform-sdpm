@@ -7,197 +7,204 @@
 <script>
 
 
-Date.prototype.format =function(format)
-{
-var o = {
-"M+" : this.getMonth()+1, //month
-"d+" : this.getDate(), //day
-"h+" : this.getHours(), //hour
-"m+" : this.getMinutes(), //minute
-"s+" : this.getSeconds(), //second
-"q+" : Math.floor((this.getMonth()+3)/3), //quarter
-"S" : this.getMilliseconds() //millisecond
-}
-if(/(y+)/.test(format)) format=format.replace(RegExp.$1,
-(this.getFullYear()+"").substr(4- RegExp.$1.length));
-for(var k in o)if(new RegExp("("+ k +")").test(format))
-format = format.replace(RegExp.$1,
-RegExp.$1.length==1? o[k] :
-("00"+ o[k]).substr((""+ o[k]).length));
-return format;
-}
+    Date.prototype.format =function(format)
+    {
+        var o = {
+            "M+" : this.getMonth()+1, //month
+            "d+" : this.getDate(), //day
+            "h+" : this.getHours(), //hour
+            "m+" : this.getMinutes(), //minute
+            "s+" : this.getSeconds(), //second
+            "q+" : Math.floor((this.getMonth()+3)/3), //quarter
+            "S" : this.getMilliseconds() //millisecond
+        }
+        if(/(y+)/.test(format)) format=format.replace(RegExp.$1,
+                (this.getFullYear()+"").substr(4- RegExp.$1.length));
+        for(var k in o)if(new RegExp("("+ k +")").test(format))
+            format = format.replace(RegExp.$1,
+                    RegExp.$1.length==1? o[k] :
+                            ("00"+ o[k]).substr((""+ o[k]).length));
+        return format;
+    }
 
 
-	$(document).ready(function(){
-	
-	
-	
-#*	setInterval(function(event){
-		
-		
-		
-	},100);*#
-	
-	var oldvalue = "";
-	$("input[name='planBeginDate']").bind("click",function(){
-		oldvalue = $(this).val();
-		
-	});
-	
-	$("input[name='planBeginDate']").bind("blur input propertychange",function(){
-	
-		var newvalue = $(this).val();
-	
-		if(newvalue!=""&&newvalue!=oldvalue){
-			if($("input[name='endTime']:checked")[0]){
-				$("input[name='endTime']:checked").trigger('click');
-			}
-			
-			
-			
-		}
-	});
-	
-	var oldvalueend = "";
-	$("input[name='planEndDate']").bind("click",function(){
-		oldvalueend = $(this).val();
-		
-	});
-	$("input[name='planEndDate']").bind("blur",function(){
-		var newvalueend = $(this).val();
-		var dateend =new Date(Date.parse(newvalueend.replace(/-/g, "/")));
-		var datestart = new Date(Date.parse($("input[name='planBeginDate']").val().replace(/-/g, "/")));
-		
-		
-		if(newvalueend!=""&&newvalueend!=oldvalueend){
-			
-			if(dateend<=datestart){
-				$("input[name='planEndDate']").val(oldvalueend);
-				alert("结束日期必须大于开始日期");
-				
-			}else{
-				$("input[name='endTime']:checked").attr("checked",false);
-			}
-			
-		}
-	});
+    $(document).ready(function(){
 
-	
-	
-		
-		$("input[name='endTime']").each(function(){
-			
-			$(this).unbind("click").bind("click",function(){
-			
-				var start =	$("input[name='planBeginDate']").val();
-				
-				
-				if(start!=""){
-					start = new Date(Date.parse(start.replace(/-/g, "/")));
-					
-					var time = $(this).val();
-					var end = new Date();
-				    if(time=="one-week"){
-						end = new Date(start.getFullYear(),start.getMonth(),start.getDate()+7);
-					}
-					if(time=="two-week"){
-						end = new Date(start.getFullYear(),start.getMonth(),start.getDate()+14);
-					}
-					if(time=="one-month"){
-						end = new Date(start.getFullYear(),start.getMonth()+1,start.getDate());
-					}
-					if(time=="two-month"){
-						end = new Date(start.getFullYear(),start.getMonth()+2,start.getDate());
-					}
-					if(time=="half-year"){
-						end = new Date(start.getFullYear(),start.getMonth()+6,start.getDate());
-					}
-					if(time=="year"){
-						end = new Date(start.getFullYear()+1,start.getMonth(),start.getDate());
-					}
-					$("input[name='planEndDate']").val(end.format("yyyy-MM-dd"));
-				}else{
-					this.checked=false;
-					alert("请选择开始日期");
-					
-				}
-				
-				
-			});
-		
-		});
-		
-			
-	});
- 
+//        var oldvalue = "";
+//        $("input[name='planBeginDate']").bind("click",function(){
+//            oldvalue = $(this).val();
+//
+//        });
+//
+//        $("input[name='planBeginDate']").bind("blur input propertychange",function(){
+//
+//            var newvalue = $(this).val();
+//
+//            if(newvalue!=""&&newvalue!=oldvalue){
+//                if($("input[name='endTime']:checked")[0]){
+//                    $("input[name='endTime']:checked").trigger('click');
+//                }
+//
+//
+//
+//            }
+//        });
+//
+//        var oldvalueend = "";
+//        $("input[name='planEndDate']").bind("click",function(){
+//            oldvalueend = $(this).val();
+//
+//        });
+//        $("input[name='planEndDate']").on("blur",function(){
+//            var newvalueend = $(this).val();
+//            var dateend =new Date(Date.parse(newvalueend.replace(/-/g, "/")));
+//            var datestart = new Date(Date.parse($("input[name='planBeginDate']").val().replace(/-/g, "/")));
+//
+//
+//            if(newvalueend!=""&&newvalueend!=oldvalueend){
+//
+//                if(dateend<=datestart){
+//                    layer.msg("结束日期必须大于开始日期！",1);
+//                    $("input[name='planEndDate']").val(oldvalueend).trigger("blur");
+//
+///*要更改*/            // $("input[name='planEndDate']").addClass("Validform_error");
+//                    //$("input[name='planEndDate']").closest("formControls").next().html("<span class='Validform_checktip Validform_wrong'>结束日期必须大于开始日期！</span>");
+//
+//                }else{
+//                    $("input[name='endTime']:checked").attr("checked",false);
+//                }
+//
+//            }
+//        });
+
+
+
+
+        $("input[name='endTime']").each(function(){
+
+            $(this).unbind("click").bind("click",function(){
+
+                var start =	$("input[name='planBeginDate']").val();
+
+
+                if(start!=""){
+                    start = new Date(Date.parse(start.replace(/-/g, "/")));
+
+                    var time = $(this).val();
+                    var end = new Date();
+                    if(time=="one-week"){
+                        end = new Date(start.getFullYear(),start.getMonth(),start.getDate()+7);
+                    }
+                    if(time=="two-week"){
+                        end = new Date(start.getFullYear(),start.getMonth(),start.getDate()+14);
+                    }
+                    if(time=="one-month"){
+                        end = new Date(start.getFullYear(),start.getMonth()+1,start.getDate());
+                    }
+                    if(time=="two-month"){
+                        end = new Date(start.getFullYear(),start.getMonth()+2,start.getDate());
+                    }
+                    if(time=="half-year"){
+                        end = new Date(start.getFullYear(),start.getMonth()+6,start.getDate());
+                    }
+                    if(time=="year"){
+                        end = new Date(start.getFullYear()+1,start.getMonth(),start.getDate());
+                    }
+                    $("input[name='planEndDate']").val(end.format("yyyy-MM-dd"));
+                    $("input[name='planEndDate']").blur();
+                }else{
+                    this.checked=false;
+                    alert("请选择开始日期");
+
+                }
+
+
+            });
+
+        });
+
+
+    });
+
 </script>
 
+<script type="text/javascript">
+    $(function () {
+        $("form[name=thisform]").Validform({
+            tiptype: 2
+        });
+		$(".productName").html($("#productNameOnTop").html());
+    });
+
+</script>
 
 #@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/product/plan/save" "post" {"class":""})
-
+<input type="hidden" name="lastAddress" value=""/>
 
 
 <div class="infoContent">
         <p class="titleName">创建新计划</p>
      #@elementItem()
-        #@colLabel()产品:#end
-        #@formControlDiv("col-4")
-        	  ${product?.productName}
+        #@colLabel("col-1")产品:#end
+        #@formControlDiv("col-3" "productName")
+
         #end
         #@validateDiv("col-2")#end
       #end
     #@elementItem()
-        #@colLabel()名称:#end
-        #@formControlDiv("col-4")
-          #tinyInput("text" "planName" ""{"datatype":"*4-16","nullmsg":"用户名不能为空！","id":"username","class":"input-text"})
+        #@colLabel("col-1")<span class="c-red">*</span>名称:#end
+        #@formControlDiv("col-3")
+          #tinyInput("text" "planName" ""{"datatype":"*","nullmsg":"计划名不能为空！","id":"planName","class":"input-text",
+			  "ajaxurl":TINY_CONTEXT_PATH+adminPath+"/product/plan/judgePlanName?productId="+cookieProductId})
         #end
         #@validateDiv("col-2")#end
     #end
 
+##    #@elementItem()
+##        #@colLabel("col-1")<span class="c-red">*</span>开始日期:#end
+##        #@formControlDiv("col-3")
+##			#@tinyDateInput(
+##				"planBeginDate" "" "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空","id":"planBeginDate"})#end
+##        #end
+##        #@validateDiv("col-2")#end
+##    #end
     #@elementItem()
-        #@colLabel()开始日期:#end
-        #@formControlDiv("col-4")
-           #@tinyDateInput("planBeginDate" "" "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空","id":"qwe","readonly":"readonly"})#end
+        #@colLabel("col-1")<span class="c-red">*</span>计划日期:#end
+        #@formControlDiv("col-9")
+			<div class="col-4">
+                #dateInputBetween("planBeginDate" "planEndDate" "" "" {"style":"width:135px","datatype":"*","nullmsg":"日期不能为空"})
+			##@tinyDateInput("planEndDate" "" "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空"})#end
+			</div>
+            <div  class="col-8">
+
+				#@radioBox()
+					#@tinyRadioes("endTime" "one-week" "time")一周#end
+				#end
+				#@radioBox()
+					#@tinyRadioes("endTime" "two-week" "time")两周#end
+				#end
+				#@radioBox()
+					#@tinyRadioes("endTime" "one-month" "time")一个月#end
+				#end
+				#@radioBox()
+					#@tinyRadioes("endTime" "two-month" "time")两个月#end
+				#end
+				#@radioBox()
+					#@tinyRadioes("endTime" "half-year" "time")半年#end
+				#end
+				#@radioBox()
+					#@tinyRadioes("endTime" "year" "time")一年#end
+				#end
+
+
+            </div>
         #end
         #@validateDiv("col-2")#end
     #end
     #@elementItem()
-        #@colLabel()结束日期:#end
-        #@formControlDiv("col-4")
-        	 #@tinyDateInput("planEndDate" "" "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空","readonly":"readonly"})#end
-        #end
-         <div  class="col-6"> 
-         	
-			 #@radioBox()
-	          	#@tinyRadioes("endTime" "one-week" "time")一周#end
-	          #end
-	           #@radioBox()
-	          	#@tinyRadioes("endTime" "two-week" "time")两周#end
-	          #end
-	           #@radioBox()
-	          	#@tinyRadioes("endTime" "one-month" "time")一个月#end
-	          #end
-	           #@radioBox()
-	          	#@tinyRadioes("endTime" "two-month" "time")两个月#end
-	          #end
-	           #@radioBox()
-	          	#@tinyRadioes("endTime" "half-year" "time")半年#end
-	          #end
-	          #@radioBox()
-	          	#@tinyRadioes("endTime" "year" "time")一年#end
-	          #end
-	          
-	          
-        </div>
-          
-           	
-	          
-        #@validateDiv("col-2")#end
-    #end
-    #@elementItem()
-        #@colLabel()描述:#end
+        #@colLabel("col-1")描述:#end
         #@formControlDiv("col-10")
-           #@Teditor("planSpec" "planSpec" {"initialFrameHeight":"250" ,"placeholder":"说点什么...最少输入10个字符","datatype":"*10-500"})备注...最少输入10个字符#end
+           #@Teditor("planSpec" "planSpec" {"style":"height:200px" ,"placeholder":"","datatype":"*0-500"})#end
         #end
         #@validateDiv("col-2")#end
     #end
@@ -208,7 +215,7 @@ return format;
 
             </div>
             <div class="col-1">
-                <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
+                <button style="float: left" type="submit" id="submit2" class="commitBtn">保存</button>
             </div>
             <div class="col-1">
 				#@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end

@@ -15,54 +15,88 @@ import java.util.concurrent.ConcurrentHashMap;
  * Created by wangll13383 on 2015/9/21.
  */
 public class StdUtil {
-    private static Map<String,Map<String,String>> tableStdMap = new ConcurrentHashMap<String, Map<String,String>>();
+    private static Map<String, Map<String, String>> tableStdMap = new ConcurrentHashMap<String, Map<String, String>>();
 
-    private static Map<String,String> tablePrimary = new HashMap<String, String>();
+    private static Map<String, String> tablePrimary = new HashMap<String, String>();
 
-    private static Map<String,String> tableMap = new ConcurrentHashMap<String, String>();
+    private static Map<String, String> tableMap = new ConcurrentHashMap<String, String>();
 
-    public static void stdProcess(List<Table> tables){
-        for(Table table : tables){
+    private static Map<String, String> tableMapping = new HashMap<String, String>();
 
-            tableMap.put(NameUtil.resolveNameAsc(table.getName()),table.getName());
-            Map<String,String> stdMap = new HashMap<String, String>();
-            addStd(table,table,stdMap);
-            tableStdMap.put(table.getName(),stdMap);
+    static {
+        tableMapping.put("user", "org_user");
+        tableMapping.put("story", "product_story");
+        tableMapping.put("plan", "product_plan");
+        tableMapping.put("release", "product_release");
+        tableMapping.put("project", "project");
+        tableMapping.put("product", "product");
+        tableMapping.put("build", "project_build");
+        tableMapping.put("bug", "quality_bug");
+        tableMapping.put("case", "quality_test_case");
+        tableMapping.put("testtask", "quality_test_task");
+        tableMapping.put("doclib", "document_doclib");
+        tableMapping.put("doc", "document_doc");
+        tableMapping.put("sla", "service_sla");
+        tableMapping.put("client", "service_client");
+        tableMapping.put("faq", "service_faq");
+        tableMapping.put("reply", "service_reply");
+        tableMapping.put("review", "service_review");
+        tableMapping.put("request", "service_request");
+        tableMapping.put("task", "project_task");
+        tableMapping.put("plan", "product_plan");
+        tableMapping.put("holiday", "holiday");
+        tableMapping.put("productLine", "product_line");
+    }
+
+    public static void stdProcess(List<Table> tables) {
+        for (Table table : tables) {
+
+            tableMap.put(NameUtil.resolveNameAsc(table.getName()), table.getName());
+            Map<String, String> stdMap = new HashMap<String, String>();
+            addStd(table, table, stdMap);
+            tableStdMap.put(table.getName(), stdMap);
         }
     }
 
     public static String getField(String tableName, String feildName) {
-        return tableStdMap.get(tableMap.get(tableName)).get(feildName);
+        String table = tableMapping.get(tableName);
+        if (table == null) {
+            return null;
+        }
+        return tableStdMap.get(table).get(feildName);
     }
 
     public static Map<String, String> getField(String tableName) {
         return tableStdMap.get(tableName);
     }
 
-    public static String getPrimary(String tableName){
+    public static String getPrimary(String tableName) {
         return tablePrimary.get(tableName);
     }
 
-    private static void addStd(Table t,Object object, Map<String,String> stdMap){
+    private static void addStd(Table t, Object object, Map<String, String> stdMap) {
         Table table = null;
         TableField tableField = null;
-        if(object instanceof Table){
+        if (object instanceof Table) {
             table = (Table) object;
-            for (TableField field : table.getFieldList()){
-                addStd(t,field,stdMap);
+            for (TableField field : table.getFieldList()) {
+                addStd(t, field, stdMap);
             }
-        }else if (object instanceof  TableField){
+        } else if (object instanceof TableField) {
             tableField = (TableField) object;
-            StandardField standardField = MetadataUtil.getStandardField(tableField.getStandardFieldId(),StdUtil.class.getClassLoader());
+            StandardField standardField = MetadataUtil.getStandardField(tableField.getStandardFieldId(), StdUtil.class.getClassLoader());
             try {
                 stdMap.put(NameUtil.resolveNameAsc(standardField.getName()), standardField.getTitle());
-            }catch (Exception e){
+            } catch (Exception e) {
+                e.printStackTrace();
                 throw new RuntimeException("标准字段" + standardField.getId() + "出错");
-            }            if(tableField.getPrimary()){
-                tablePrimary.put(t.getName(),NameUtil.resolveNameAsc(standardField.getName()));
+
+            }
+            if (tableField.getPrimary()) {
+                tablePrimary.put(t.getName(), NameUtil.resolveNameAsc(standardField.getName()));
             }
         }
     }
 
-   
+
 }

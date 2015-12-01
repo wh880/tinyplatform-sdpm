@@ -15,7 +15,7 @@
 					<a href="#">#buttonIcon(iconClass="icon-search")搜索</a>
 				</span>
 				<span class="r">
-					<a href="#">#buttonIcon(iconClass="icon-plus")创建文档 </a>
+					<a href="#">#buttonIcon(iconClass="icon-plus")&nbsp;创建文档 </a>
 				</span>
 				#div(divClass="clearfix")
 			#end

@@ -1,27 +1,16 @@
 #import("/org/tinygroup/button/components/button_smart.component")
 #import("/org/tinygroup/button/components/button_common.component")
-
 #import("/org/tinygroup/button/components/button.component")
-
 #include("/system/page/event/common.page")
-
-
-
 #@div()
 	#@tabWithInit("top_demo" "optionsBox")
-		
 		#@tabHead()
 				#foreach(m in menuManager.getChildMenus("mysystem"))
 					#@aHeadCol(TINY_CONTEXT_PATH+adminPath+m.href m.id==linkName?"Current":"")${m.name}#end
 				#end
+				#@aHeadCol(TINY_CONTEXT_PATH+adminPath+"/system/about")关于我们#end
 		#end
-		
-#*		<span class="r" style="position:relative;top:-28px;height:0">
-			<a href="${TINY_CONTEXT_PATH}/productLine/page/tabledemo/list.page">#buttonIcon(iconClass="icon-globe")所有产品线</a>&nbsp;
-			<!--新增产品-->
-			<a href="${TINY_CONTEXT_PATH}/productLine/page/tabledemo/add.page">#buttonIcon(iconClass="icon-plus-sign")添加产品线</a>&nbsp;
-		</span>*#
-			#pageContent
+		#pageContent
 	#end
 #end
 
@@ -29,6 +18,6 @@
 				#@dialogHeader()对话框标题#end
 				#@dialogBody()<p>对话框内容…</p>#end
 				#@dialogFooter()
-					#@buttonCancel()关闭#end
+##					#@buttonCancel()关闭#end
 				#end
 #end

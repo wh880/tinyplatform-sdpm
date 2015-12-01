@@ -26,7 +26,7 @@
     	<div class="infoContent">
     		<p class="titleName">关闭</p>
     		<div class="RTtitle">
-            	<button type="submit" id="submit" class="commitBtn">保存</button>
+            	<button type="submit" id="submit2" class="commitBtn">保存</button>
         	</div>
      #@elementItem()
             <div class="col-12">
@@ -41,7 +41,7 @@
     #@elementItem()
         <div class="col-12">
             <div class="col-5">
-                <button style="float: right" type="submit" id="submit" class="commitBtn">保存</button>
+                <button style="float: right" type="submit" id="submit2" class="commitBtn">保存</button>
             </div>
             <div class="col-1"></div>
             <div class="col-1">
@@ -53,10 +53,7 @@
     <br >
    </div>
    <div style="width:32%;float:right">
-		#@div(divClass="infoContent")
-      	  <p class="titleName">历史记录</p>
-			#include("/testManagement/page/historyRecord.page")
-		#end
+		#history(adminPath+"/system/action/ajax/history?actionObjectType=bug&actionObjectId="+bug?.bugId)
 	</div>
 #end
 

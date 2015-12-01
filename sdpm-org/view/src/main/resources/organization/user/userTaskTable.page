@@ -3,16 +3,16 @@
     #set(pagesize=records-(page-1)*pagesize)
 #end
 #setTinyItemCount(records)
-#for(task:taskPager.records)
+#foreach(task:taskPager.records)
 #@tr()
-    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/project/task/findTask?taskId=${task.taskId}">${task.taskId}</a>#end
-    #@td()${task.taskPri}#end
-    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/project/task/index?">${task.taskProject}</a>#end
-    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/project/task/findTask?taskId=${task.taskId}">${task.taskName}</a>#end
-    #@td()${task.taskEstimate}#end
-    #@td()${task.taskConsumed}#end
-    #@td()${task.taskLeft}#end
-    #@td()${task.taskDeadLine}#end
-    #@td()${task.taskStatus}#end
+    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/project/task/findTask?taskId=${task?.taskId}">${task.taskNo}</a>#end
+    #@td()${task?.taskPri}#end
+    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/project/task/index?">${task?.projectName}</a>#end
+    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/project/task/findTask?taskId=${task.taskId}">${task?.taskName}</a>#end
+    #@td()${task?.taskEstimate}#end
+    #@td()${task?.taskConsumed}#end
+    #@td()${task?.taskLeft}#end
+    #@td()${formatDate(task?.taskDeadLine,"yyyy-MM-dd")}#end
+    #@td()${getDict("taskStatus",task?.taskStatus)}#end
 #end
 #end

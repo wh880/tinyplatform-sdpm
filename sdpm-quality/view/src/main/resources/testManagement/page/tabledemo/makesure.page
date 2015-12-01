@@ -5,6 +5,27 @@
 #import("/org/tinygroup/fold/components/fold.component")
 #!set(activeTitle="测试管理",activeMenuId=currentPageId)
 
+#macro Tselect2Body(name value mapInfo)
+#set(sid=mapInfo?.id?:sid)
+	<select name="${name}" class="form-control" #getMapInfo(mapInfo) id="${sid}">
+	#bodyContent
+	</select>
+	<script type="text/javascript">
+	$(function(){
+		$("#${sid}").select2();
+		#if(value)
+		var valuestr="${value}";
+		var values=valuestr.split(",");
+		if(values.length>1){
+			$("#${sid}").val(values).trigger("change");
+		}else{
+			$("#${sid}").val(valuestr).trigger("change");
+		}
+		#end
+	});
+	</script>
+#end
+
 #set(name="qualityBug")
 #@div()
 	#@tabWithInit("tab_demo" "optionsBox")
@@ -26,27 +47,33 @@
     	<div class="infoContent">
     		<p class="titleName">确认</p>
     		<div class="RTtitle">
-            	<button type="submit" id="submit" class="commitBtn">保存</button>
+            	<button type="submit" id="submit2" class="commitBtn">保存</button>
         	</div>
     #@elementItem()
             #@sdpmItem("指派给")
-	            #@Tselect2F()
-	                #@Tselect2Body("bugAssignedTo" bug?.bugAssignedTo {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-						<option value="0">/</option>
-						#foreach(user : userList)
-							<option value="${user?.orgUserId}">${user?.orgUserAccount}</option>
+				#@Tselect2F()
+					#Tselect2Ajax("bugAssignedTo" bug?.bugAssignedTo TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
+					{"id":"","dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询用户"})
+					#@Tselect2Fix()
+						#set(m=menuManager.getMenu("organizationAddUser"))
+						#if(m)
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
 						#end
-	                #end
-                #end
+						#set(m=menuManager.getMenu("organizationUser"))
+						#if(m)
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
+						#end
+					#end
+				#end
         	#end
     #end
     #@elementItem()
-    	#@sdpmItem("优先级")
+    	#@sdpmItem("<span class='c-red'>*</span>优先级")
                #@Tselect2F()
 					 #@Tselect2Body("priority" bug?.priority {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-					<option value="1">1</option>
-					<option value="2">2</option>
-					<option value="3">3</option>
+						 #foreach(pri : getDict("bugPriority"))
+						 #@tinyOptionItem(pri.value)${pri.text}#end
+					 #end
 					#end
                 #end
    		#end 
@@ -54,13 +81,22 @@
     #@elementItem()
    
         #@sdpmItem("抄送给")
-             #@Tselect2F()
-	               #@Tselect2Body("bugMailto" bug?.bugMailto {"class":"input-text select2","multiple":"multiple"}) ##,"multiple":"multiple"加上为多选项
-						#foreach(user : userList)
-						<option value="${user?.orgUserId}">${user?.orgUserAccount}</option>
-						#end
-	          		#end                
-        	 #end
+			#@Tselect2F()
+				#Tselect2Ajax("bugMailto" bug?.bugMailto TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
+				{"id":"storyMailtoSelect","dataId":"orgUserId","dataText":"orgUserRealName",
+					"placeholder":"查询抄送人","multiple":"multiple"})
+
+				#@Tselect2Fix()
+					#set(m=menuManager.getMenu("organizationAddUser"))
+					#if(m)
+                        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
+					#end
+					#set(m=menuManager.getMenu("organizationUser"))
+					#if(m)
+                        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
+					#end
+				#end
+			#end
     	#end
     #end
     #@elementItem()
@@ -76,7 +112,7 @@
     #@elementItem()
         <div class="col-12">
             <div class="col-5">
-                <button style="float: right" type="submit" id="submit" class="commitBtn">保存</button>
+                <button style="float: right" type="submit" id="submit2" class="commitBtn">保存</button>
             </div>
             <div class="col-1"></div>
             <div class="col-1">
@@ -88,9 +124,14 @@
     <br>
    </div>
     <div style="width:32%;float:right">
-		#@div(divClass="infoContent")
-      	  <p class="titleName">历史记录</p>
-			#include("/testManagement/page/historyRecord.page")
-		#end
+		#history(adminPath+"/system/action/ajax/history?actionObjectType=bug&actionObjectId="+bug?.bugId)
 	</div>
 #end
+<script type="text/javascript">
+    $(function () {
+        $("form[name=thisform]").Validform({
+            tiptype: 2
+        });
+    });
+
+</script>

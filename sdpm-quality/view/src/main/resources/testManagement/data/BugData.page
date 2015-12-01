@@ -1,35 +1,58 @@
-#macro setTinyItemCount(num)
-<input type="hidden" name="records" value="${num}"/>
-#end
 
-
-
-#set(records=bugpager.totalCount,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
-#if (pagesize>records-pagesize*(page-1))
-    #set(pagesize=records-(page-1)*pagesize)
-#end
 #setTinyItemCount(bugpager.totalCount)
 
-#for(var:bugpager.records)
+#foreach(var:bugpager.records)
 #@tr()
-    #@td()<input type="checkbox" value="${var?.bugId}" name="bugId">#end
-    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/bugInfo.page">${var?.bugId}</a>#end
+    #@td()<input type="checkbox" value="${var?.bugId}" name="idCheck">#end
+    #@td("nowrap")<a href="${TINY_CONTEXT_PATH+adminPath}/quality/bug/bugInfo?currentPageId=5&bugId=${var?.bugId}">${var?.no}</a>#end
     #@td()${var?.bugSeverity}#end
     #@td()${var?.priority}#end
-    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/bugInfo.page">[${var?.bugConfirmed==1?"已确认":"未确认"}]${var?.bugTitle}</a>#end
-    #@td()${getDict("bugStatus",var?.bugStatus)}#end
-    #@td()${var?.bugOpenedBy}#end
-    #@td()${formatDate(var?.bugOpenedDate,"yyyy-MM-dd")}#end
-    #@td()${var?.bugAssignedTo}#end
-    #@td()${var?.bugResolvedBy}#end
-    #@td()${var?.bugResolution}#end
-    #@td()${formatDate(var?.bugResolvedDate,"yyyy-MM-dd")}#end
-    #@td()
+    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/bug/bugInfo?currentPageId=5&bugId=${var?.bugId}">[${var?.bugConfirmed==1?"已确认":"未确认"}]${var?.bugTitle}</a>#end
+    #@td("nowrap")${getDict("bugStatus",var?.bugStatus)}#end
+    #@td("nowrap")<span class="${var?.bugOpenedBy==UserUtils.getUserId()?'c-red':''}">${var?.bugOpenedBy?UserUtils.getUserById(var?.bugOpenedBy)?.orgUserRealName:""} </span>#end
+    #@td("nowrap")${formatDate(var?.bugOpenedDate,"yyyy-MM-dd")}#end
+    #@td("nowrap")<span class="${var?.bugAssignedTo==UserUtils.getUserId()?'c-red':''}">${var?.bugAssignedTo?UserUtils.getUserById(var?.bugAssignedTo)?.orgUserRealName:""} </span>#end
+    #@td("nowrap")<span class="${var?.bugResolvedBy==UserUtils.getUserId()?'c-red':''}">${var?.bugResolvedBy?UserUtils.getUserById(var?.bugResolvedBy)?.orgUserRealName:""} </span>#end
+    #@td()${getDict("bugResolution",var?.bugResolution?:0)}#end
+    #@td("nowrap")${formatDate(var?.bugResolvedDate,"yyyy-MM-dd")}#end
+    #@td("nowrap")
     	#foreach(m:menuManager.getScopeMenus("testbug-op"))
-             	<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${var?.bugId}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>			
+    	        #if(m.sort=="6")
+    	            #if(var?.bugConfirmed==1)
+                        <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>
+    	            #else
+             	        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${var?.bugId}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+		            #end
+		        #end
+		        #if(m.sort=="5")
+                    #if(var?.bugConfirmed==1)
+                        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${var?.bugId}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+                    #else
+                        <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>
+                    #end
+                #end
+                #if(m.sort=="4")
+                    #if(var?.bugStatus=="1"&&var?.bugConfirmed==1)
+                        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${var?.bugId}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+                    #else
+                        <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>
+                    #end
+                #end
+                #if(m.sort=="3")
+                    #if(var?.bugStatus=="2")
+                        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${var?.bugId}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+                    #else
+                        <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>
+                    #end
+                #end
+                #if(m.sort=="2")
+                        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${var?.bugId}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+                #end
+                #if(m.sort=="1")
+                        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${var?.bugId}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+                #end
 		 #end
-    ##"icon-pencil"
-    ##buttonRadiusLink(caption="/testManagement/page/proposeBug")
+
     #end
 #end
 #end

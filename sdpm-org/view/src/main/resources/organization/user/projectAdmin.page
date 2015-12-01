@@ -18,7 +18,7 @@
                         #@navSelect2("user" "user")
                             #@navSelect2Nav()
                                 #if(userList)
-                                    #for(user:userList)
+                                    #foreach(user:userList)
                                     #if(user?.orgUserId == id)
                                         ${user?.orgUserRealName}
                                     #end
@@ -32,12 +32,23 @@
                             #@navSelect2Data()
                             <option value=""></option>
                             <optgroup label="用户">
-                                #for(user:userList)
+                                #foreach(user:userList)
                                 <option value="${user?.orgUserId}">${user?.orgUserRealName}</option>
                             #end
                         </optgroup>
 
                         #end
+                        #@navSelect2Fix()
+                            #set(m=menuManager.getMenu("organizationAddUser"))
+                            #if(m)
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
+                            #end
+                            #set(m=menuManager.getMenu("organizationUser"))
+                            #if(m)
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
+                            #end
+                        #end
+
                     #end
                     #hiddenInput("userIdHidden","orgUserId","","")
 
@@ -53,36 +64,33 @@
                 #end
 
             #end
-                <span style="padding-top: 5px;float: left">
+        <span style="float: left">
                     &nbsp;&gt;
-                    #foreach(m:menuManager.getScopeMenus("org-user-detail"))
-                        #if(m.id=="org-user-projectAdmin")
-                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?choose=3&id=${id}"
-                               class="active_btn">${m.name}</a>
+            #foreach(m:menuManager.getScopeMenus("org-user-detail"))
+                #if(m.id=="org-user-projectAdmin")
+                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?choose=3&id=${id}"
+                       class="active_btn">${m.name}</a>
 
-                        #else
-                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?choose=3&id=${id}">${m.name}</a>
-                        #end
-                    #end
-
-                </span>
-                    #div(divClass="clearfix")
+                #else
+                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?choose=3&id=${id}">${m.name}</a>
                 #end
             #end
+
+                </span>
+            #div(divClass="clearfix")
         #end
     #end
 #end
+#end
+#end
 
 #@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
-    #@div(divClass="tinyheaderTools form-inline")
-        #setTinyTablePageSize([8,10,20,50,100,200])
-    #end
-    #@tinyTableContent(TINY_CONTEXT_PATH+adminPath+"/org/user/project/search?"+tinyRequestQueryString) ##取数据地址 总数据
+    #@tinyTableNonavpage(TINY_CONTEXT_PATH+adminPath+"/org/user/project/search?"+tinyRequestQueryString) ##取数据地址 总数据
         #@thead()
             #@tr()###th  class 为sorting 表票可排序 为sorting_desc 为当前倒序
                 #@tinyTh({"class":"","rel":"project_id"})ID#end
-                #@tinyTh({"class":"","rel":"project_code"})项目代号#end
-                #@tinyTh({"class":"","rel":"project_name"})项目名称#end
+                #@tinyTh({"class":"","rel":"project_code"})迭代代号#end
+                #@tinyTh({"class":"","rel":"project_name"})迭代名称#end
                 #@tinyTh({"class":"","rel":"project_begin"})开始时间#end
                 #@tinyTh({"class":"","rel":"project_end"})结束日期#end
                 #@tinyTh({"class":"","rel":"project_status"})状态#end
@@ -94,5 +102,174 @@
     #end
 #end
 
+
 #simpleModal(editpageModalId)
 
+
+
+###macro tinyTableNonavpage(dataUrl itemNum)
+##<div class="clear"></div>
+##<div class="table-responsive">
+##    <table class="dataTable tinytable table table-hover" id="${tableId}" data-url="${dataUrl}">
+##        #bodyContent
+##        <tbody id="${tableId}-Body">
+##        </tbody>
+##    </table>
+##</div>
+##    #if(showType=="ajax")
+##        #tinyTablePageNonavAjax()
+##    #else
+##        #tinyTablePageNav()
+##    #end
+##<script type="text/javascript">
+##    $(function(){
+##        $("#${tableId} th input:checkbox").on("click" , function(){
+##            var that = this;
+##            $(this).closest("table").find("tr > td:first-child input:checkbox").each(function(){
+##                if (this.disabled){
+##                    return;
+##                }
+##                this.checked = that.checked;
+##            });
+##        });
+##        $("#${tableId}").on("click", ".Item-Remove", function () {
+##            var that = this;
+##            layer.confirm('确定要删除该记录？', function (index) {
+##                $.ajax({
+##                    url:$(that).attr("data-url"),
+##                    data:{id:$(that).attr("data-id")},
+##                    dataType:"json",
+##                    success:function(data){
+##                        if(data.status=="success"||data.status=="y"){
+##                            layer.msg(data.info, 2, 1);
+##                            setTimeout(function(){
+##                                layer.closeAll();
+##                                $("#${tableId}").trigger("initnav");
+##                            },300);
+##                        }else{
+##                            var msg=data.info?data.info:"系统出错";
+##                            layer.msg(msg);
+##                        }
+##                    },
+##                    error: function() {
+##                        layer.msg("系统出错");
+##                    }
+##                });
+##
+##            });
+##        }).on("click",">tbody>tr>td",function(e){
+##            if($(this).find("a,input,button").size()==0){
+##                $(this).parent().find("input[type=checkbox]").trigger("click");
+##            }
+##        });
+##    });
+##</script>
+###end
+##
+###macro tinyTablePageNonavAjax()
+##<script type="text/javascript">
+##    $(function(){
+##        $("#${tableId}").on("initnav refresh init",function(isinit){
+##            var url="${dataUrl}";
+##            $("#${tableId}pageSize").attr("name","");
+##            //var pageSize=$("#${tableId}pageSize").val();
+##            //var data={page: 1,pagesize:pageSize};
+##            if($("#${tableId}form").size()>0){
+##            ##//$(this).trigger("beforeSend");
+##                #tinyTableBeforeSend()
+##                var currenturl=url+(url.indexOf("?")>0?"&":"?")+$("#${tableId}form").formSerialize();
+##                $('#${tableId}').attr("data-url",currenturl);
+##                //console.log(currenturl);
+##            }
+##            getInfo(1,1);
+##        });
+##        function getInfo(page,initnav){
+##            var order;
+##            var ordertype;
+##            var pageSize=$("#${tableId}pageSize").val();
+##            if(!pageSize) pageSize=10;
+##            if($("#${tableId} th.sorting_desc").size()>0){
+##                order=$("#${tableId} th.sorting_desc").eq(0).attr("rel");
+##                ordertype="desc";
+##            }else if($("#${tableId} th.sorting_asc").size()>0){
+##                order=$("#${tableId} th.sorting_asc").eq(0).attr("rel");
+##                ordertype="asc";
+##            }
+##            $.ajax({
+##                type: "GET",
+##                url: $('#${tableId}').attr("data-url"),//"${dataUrl}",
+##                data:{ page: page,pagesize:pageSize,order:order,ordertype:ordertype,limit:pageSize,start:(page-1)*pageSize,tinytableid:"${tableId}"},
+##                dataType: "html",
+##                cache: !0,
+##                beforeSend: function() {
+##                    //$("#${tableId}-Body").html('<tr><td colspan="20" class="tinytableLoading"> 加载...</td></tr>');
+##                },
+##                success: function(a) {
+##                    $("#${tableId} tbody").remove();
+##                    $("#${tableId}").append("<tbody>"+a+"</tbody>");
+##                    //$("#${tableId}-Body").html(a);
+##                    /*css({
+##                             opacity: "0.0"
+##                        }).html(a).delay(50).animate({
+##                             opacity: "1.0"
+##                        },
+##                    300);*/
+##                    if(initnav!=undefined){
+##                        var nums=$("<div></div>").html(a).find("input[name=records]").val();
+##                        $('#${tableId}').attr("data-num",nums);
+##                        $("#${tableId}-allnum").html($('#${tableId}').attr("data-num"));
+##                        setPageList(nums,pageSize)
+##                    }
+##                    var pageMaxNum=page*pageSize;
+##                    if(page*pageSize>parseInt($('#${tableId}').attr("data-num"))){
+##                        pageMaxNum=$('#${tableId}').attr("data-num");
+##                    }
+##                    var pageMinNum=(page-1)*pageSize+1;
+##                    if(nums==0){
+##                        pageMinNum=pageMaxNum=0;
+##                    }
+##                    $("#${tableId}-currentItemInfo").html(pageMinNum+"-"+pageMaxNum);
+##                }
+##            });
+##        }
+##        function setPageList(nums,pageSize){
+##            var showcontent=false;
+##            $('#${tableId}-nav').html("<div></div>");
+##            if(nums==0) return false;
+##            var totalPages=Math.ceil(nums/pageSize);
+##            $('#${tableId}-nav div').twbsPagination({
+##                totalPages: totalPages,
+##                visiblePages: totalPages>7?7:totalPages,
+##                startPage:1,
+##                onPageClick:function(event, page) {
+##                    if(!showcontent){
+##                        showcontent=true;
+##                        return;
+##                    }
+##                    getInfo(page);
+##                },
+##                hrefVariable:"pagenum",
+##                version: '1.1'
+##            });
+##        }
+##        $("#${tableId}").trigger("initnav");
+##        $("#${tableId}pageSize").on("change",function(){
+##            $("#${tableId}").trigger("initnav");
+##            //${tableId}setPageList();
+##        });
+##        $("#${tableId}").on("click","th.sorting",function(){
+##            var hasdesc=false;
+##            if($(this).hasClass("sorting_desc")){
+##                hasdesc=true;
+##            }
+##            $("#${tableId} th").removeClass("sorting_desc sorting_asc");
+##            if(hasdesc){
+##                $(this).addClass("sorting_asc");
+##            }else{
+##                $(this).addClass("sorting_desc");
+##            }
+##            $("#${tableId}").trigger("initnav");
+##        });
+##    });
+##</script>
+###end

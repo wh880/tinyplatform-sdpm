@@ -1,19 +1,16 @@
-###set(temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
-###if (pagesize>records-pagesize*(page-1))
-##    #set(pagesize=records-(page-1)*pagesize)
-###end
-###for(bug:bugPager.records)
-#for(p:projectList)
+
+#foreach(p:projectList)
 #set(t=teamList.get(pFor.index-1))
 #@tr()
-    #@td()${p?.projectId}#end
+    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/project/task/index?projectId=${p?.projectId}">${p?.projectId}</a>#end
     #@td()${p?.projectCode}#end
-    #@td()${p?.projectName}#end
-    #@td()${p?.projectBegin}#end
-    #@td()${p?.projectEnd}#end
-    #@td()${p?.projectStatus}#end
+    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/project/task/index?projectId=${p?.projectId}">${p
+        ?.projectName}</a>#end
+    #@td()${formatDate(p?.projectBegin,"yyyy-MM-dd")}#end
+    #@td()${formatDate(p?.projectEnd,"yyyy-MM-dd")}#end
+    #@td()${getDict("projectStatus",p?.projectStatus)}#end
     #@td()${t?.teamRole}#end
-    #@td()${t?.teamJoin}#end
+    #@td()${formatDate(t?.teamJoin,"yyyy-MM-dd")}#end
     #@td()${t?.teamDays}#end
 #end
 #end

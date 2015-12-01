@@ -10,30 +10,28 @@
 	    		#end
 	    		#@tr()
 	    			#@th()所属分类:#end
-	    			#@td()${doc?.docModule}#end
+	    			#@td()${module?.moduleName}#end
 	    		#end
 	    		#@tr()
 	    			#@th()文档类型:#end
-	    			#@td()${doc?.docType}#end
+	    			#@td()${getDict("docType",doc?.docType)}#end
 	    		#end
 	    		#@tr()
 	    			#@th()由谁添加:#end
-	    			#@td()${doc?.docAddedBy}#end
+	    			#@td()${doc?.docAddedBy?UserUtils.getUserById(doc?.docAddedBy)?.orgUserRealName:""}#end
 	    		#end
 	    		#@tr()
 	    			#@th()添加时间:#end
-	    			#@td()${doc?.docAddedDate}#end
+	    			#@td()${doc?.docAddedDate?formatDate(doc?.docAddedDate,'yyyy-MM-dd'):""}#end
 	    		#end
 	    		#@tr()
 	    			#@th()由谁编辑:#end
-	    			#@td()${doc?.docEditedBy}#end
+	    			#@td()${doc?.docEditedBy?UserUtils.getUserById(doc?.docEditedBy)?.orgUserRealName:""}#end
 	    		#end
 	    		#@tr()
 	    			#@th()编辑时间:#end
-	    			#@td()${doc?.docEditedDate}#end
-	    		#end
-	    		
-	    	#end	
-    	#end   	
-   ## #end
+	    			#@td()${doc?.docEditedDate?formatDate(doc?.docEditedDate,'yyyy-MM-dd'):""}#end
+	    		#end	    		
+	    #end	
+    #end   	
 #end

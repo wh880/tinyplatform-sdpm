@@ -1,7 +1,22 @@
 #@bkGrayDiv("pd-20")
 筛选条件：
 ##加个tinyform 和 一段js 选择后提交
-    #labelCheckbox(ckId="shutdown" labelText="关闭产品")
+<script>
+    $(function(){
+        #if(deleted&&deleted==1)
+            $("#closed").attr("checked","checked");
+        #end
+        $(".check-box .condition").on("click",function(){
+            if($("#closed").is(':checked')){
+                window.location.href="${TINY_CONTEXT_PATH+adminPath}/statistic/product/invest?deleted=1";
+            }else{
+                window.location.href="${TINY_CONTEXT_PATH+adminPath}/statistic/product/invest?deleted=0";
+            }
+        });
+    })
+
+</script>
+    #labelCheckbox(ckId="closed" ckClass="condition" labelText="关闭产品")
 #end
 <div style="height: 10px;"></div>
 #@tableStriped("table-border")
@@ -11,23 +26,19 @@
             产品
             #end
             #@th()
-            计划
+            项目数
+            #end
+            #@th()
+            已消耗工时
             #end
         #end
         #@tbody()
-            #@tr("text-c")
-            <td>计划1</td>
-            <td>
-                #@div(divStyle="background-color:#fff; border:solid 1px #ddd;width: 180px;")10像素填充，来点背景效果更明显#end
-            </td>
-            #end
-            #@tr("text-c")
-            <td>计划2</td>
-            <td></td>
-            #end
-            #@tr("text-c")
-            <td>计划3</td>
-            <td></td>
+            #foreach(p:proPros)
+                #@tr("text-c")
+                <td>${p?.productName}</td>
+                <td>${p?.projectNum}</td>
+                <td>${p?.consumedSum}</td>
+                #end
             #end
         #end
     #end

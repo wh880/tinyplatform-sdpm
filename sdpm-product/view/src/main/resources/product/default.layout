@@ -3,7 +3,11 @@
 #import("/org/tinygroup/button/components/button.component")
 #!set(activeTitle="产品管理",activeMenuId=currentPageId)
 #include("/product/page/event/common.page")
-
+###set(currentPageId=3)
+###set(cookieProductLineIdTemp=cookieProductLineId,cookieProductLineId=cookieProductLineId?:ProductUtils.getProductLineListByUser()?.get(0)?.productLineId,cookieProductLineId=cookieProductLineId?String.valueOf(cookieProductLineId):null)
+###if(cookieProductLineId)
+##    #set(cookieProductIdTemp = cookieProductId,cookieProductId=cookieProductId?:ProductUtils.getProductListByProductLineUser(cookieProductLineId)?.get(0)?.productId)
+###end
 <style>
     .btn-group #Dropdown {
         background: none;
@@ -15,115 +19,101 @@
         min-width: 75px
     }
 </style>
-<script >
-	function ajaxRead(id,toName,opKey,opvalue,url,value){
-		var selectCheck = "select[name="+toName+"]";
-		$(selectCheck).each(function(){
-			var sele = $(this);
-			var s;
-			$.ajax({
-				type: "POST",
-				url: "${TINY_CONTEXT_PATH+adminPath}"+url,
-				data: $(this).attr('data'),
-				dataType:"json",
-				success: function(data){
-					sele.empty();
-					var em = "<option value='0' selected  >/</option>";
-					sele.append(em);
-					for(var i=0,l=data.length;i<l;i++){
-						var em = "<option value='"+data[i][opKey]+"' >"+ data[i][opvalue] +"</option>";
-						sele.append(em);
+<script>
+    function ajaxRead(id, toName, opKey, opvalue, url, value,isBuild) {
+        var selectCheck = "select[name=" + toName + "]";
+        $(selectCheck).each(function () {
+            var sele = $(this);
+            var s;
+            $.ajax({
+                type: "POST",
+                url: "${TINY_CONTEXT_PATH+adminPath}" + url,
+                data: $(this).attr('data'),
+                dataType: "json",
+                success: function (data) {
+                    sele.empty();
+                    var em
+                    if("build"==(isBuild)){
+                        em = "<option value='0' selected  >trunk</option>";
+                    }else if("module"==isBuild||"plan"==isBuild){
+                        em = "<option value='0' selected  >/</option>";
+                    }
+                    sele.append(em);
+                    for (var i = 0, l = data.length; i < l; i++) {
+                        var em = "<option value='" + data[i][opKey] + "' >" + data[i][opvalue] + "</option>";
+                        sele.append(em);
 
-					}
-					if("multiple"!=sele.attr("multiple")){
-						if(value!=null) {
-							sele.val(value).trigger("change");
-						}else {
-							if(data.length>0){
-								sele.val(data[0][opKey]).trigger("change");
-							}else{
-								sele.val(0).trigger("change");
-							}
-							
-						}
-					}
-					
-					
+                    }
+                    if ("multiple" != sele.attr("multiple")) {
+                        if (value != null) {
+                            sele.val(value).trigger("change");
+                        } else {
+                            if (data.length > 0) {
+                                sele.val(data[0][opKey]).trigger("change");
+                            } else {
+                                sele.val(0).trigger("change");
+                            }
+
+                        }
+                    }else{
+                        if (value != null) {
+                            var values = value.split(",");
+                            if(values.length>1){
+                                sele.val(values).trigger("change");
+                            }else{
+                                sele.val(value).trigger("change");
+                            }
+
+                        }
+                    }
+                },
+                error: function (res) {
+//                    alert("失败"+toName);
+                }
+            });
 
 
-				},
-				error: function(res){
-					alert("失败");
-				}
-			});
+        });
 
-
-		});
-
-	}  
-	
-	
-
-
+    }
 
 </script>
-
 
 #@div()
     #@tabWithInit("top_demo" "optionsBox")
 
-        #@div(divClass="dropdownBox")
-            #include("/product/page/project/dropdownMenuline.page")
-        #end
-
-        #@div(divClass="dropdownBox")
+    ##        #@div(divClass="dropdownBox")
+    ##            #include("/product/page/project/dropdownMenuline.page")
+    ##        #end
+		 #@div(divClass="dropdownBox")
             #include("/product/page/project/dropdownMenu.page")
         #end
+
 
         #@tabHead()
 
             #foreach(m in menuManager.getChildMenus("myproduct"))
-            	#set(url=eval(m.href))
+                #set(url=eval(m.href))
                 #if(m.scope!="product-menu")
 
                     #@aHeadCol(TINY_CONTEXT_PATH +adminPath+url linkName==m.id?"Current":"")${m.name}#end
                 #end
             #end
-        #*
-                        #@aHeadCol(TINY_CONTEXT_PATH +adminPath+"/product/page/project/togglebox.page?currentPageId="+currentPageId linkName=="demand"?"Current":"")需求#end
 
-                        #@aHeadCol(TINY_CONTEXT_PATH +adminPath+"/product/page/project/dymanicdata.page?currentPageId="+currentPageId  linkName=="dynamic"?"Current":"")动态#end
-
-                        #@aHeadCol(TINY_CONTEXT_PATH +adminPath+"/product/page/project/product-plan.page?currentPageId="+currentPageId  linkName=="plan"?"Current":"")计划#end
-
-                        #@aHeadCol(TINY_CONTEXT_PATH +adminPath+"/product/page/project/product-release.page?currentPageId="+currentPageId  linkName=="release"?"Current":"")发布#end
-
-                        #@aHeadCol(TINY_CONTEXT_PATH +adminPath+"/product/page/project/product-roadmap.page?currentPageId="+currentPageId  linkName=="roadmap"?"Current":"")路线图#end
-
-                        #@aHeadCol(TINY_CONTEXT_PATH +adminPath+"/product/page/project/archive-list.page?currentPageId="+currentPageId  linkName=="archive"?"Current":"")文档#end
-
-                        #@aHeadCol(TINY_CONTEXT_PATH +adminPath+"/product/page/project/product-project-list.page?currentPageId="+currentPageId  linkName=="project"?"Current":"")项目#end
-
-                        #@aHeadCol(TINY_CONTEXT_PATH +adminPath+"/product/page/project/product-modular.page?currentPageId="+currentPageId  linkName=="modular"?"Current":"")模块#end
-
-                        #@aHeadCol(TINY_CONTEXT_PATH +adminPath+"/product/page/project/overview.page?currentPageId="+currentPageId  linkName=="overview"?"Current":"")概况#end
-                        *#
         #end
 
     <span class="r" style="position:relative;top:-28px;height:0">
         #foreach(m:menuManager.getScopeMenus("product-menu"))
-            <a title="${m.name}" class="ml-5" href="${TINY_CONTEXT_PATH +adminPath}${m.href}"><i
-                    class="${m.icon}">${m.name}</i></a>
+            <a class="ml-5" href="${TINY_CONTEXT_PATH +adminPath}${m?.href}"><i
+                    class="${m?.icon}">&nbsp;${m?.name}</i></a>
         #end
-
-
     </span>
     #pageContent
     #end
 #end
 
 #@dialog("myModal")
-    #@dialogHeader()对话框标题#end
+    #@dialogHeader()#end
     #@dialogBody()<p>对话框内容…</p>#end
     #@dialogFooter()
         #@buttonCancel()关闭#end

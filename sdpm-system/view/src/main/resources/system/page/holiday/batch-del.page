@@ -15,7 +15,7 @@
 	 	
 	 	#@tbody()
 	 		
-	 		#for(i:holiday)
+	 		#foreach(i:holiday)
 				#@tr()
 		 			#@td()	${i?.holidayId}	#end
 		 			<input type="hidden" name="holiday[${iFor.index-1}].holidayId" value="${i?.holidayId}"/>

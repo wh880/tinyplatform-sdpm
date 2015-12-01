@@ -22,6 +22,8 @@ import org.tinygroup.sdpm.org.biz.inter.CompanyManager;
 import org.tinygroup.sdpm.org.dao.OrgCompanyDao;
 import org.tinygroup.sdpm.org.dao.pojo.OrgCompany;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class CompanyManagerImpl implements CompanyManager {
@@ -46,5 +48,10 @@ public class CompanyManagerImpl implements CompanyManager {
         orgCompany.setOrgCompanyId(id);
         orgCompany.setOrgCompanyDeleted("1");
         return orgCompanyDao.edit(orgCompany);
+    }
+
+    public List<OrgCompany> findList() {
+        OrgCompany orgCompany = new OrgCompany();
+        return orgCompanyDao.query(orgCompany);
     }
 }

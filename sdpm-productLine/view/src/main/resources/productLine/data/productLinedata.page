@@ -1,34 +1,66 @@
 
-#set(records=productLine?.totalCount,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)*#
-#if (pagesize>records-pagesize*(page-1))
-#set(pagesize=records-(page-1)*pagesize)
-#end
 #setTinyItemCount(productLine?.totalCount)
-#for(productLine:productLine?.records)
+#foreach(productLine:productLine?.records)
 #@tr()
-	#@td()<input type="checkbox" value="1" name="productLine">#end
-	#@td()${productLine?.productLineId}#end
-	#@td()
-		<a href="${TINY_CONTEXT_PATH +adminPath}/productLine/page/project/overview.page">${productLine?.productLineName}</a>
-	#end
-	#@td()${productLine?.productLineCode}#end
-	#@td()${productLine?.companyId}#end
-	#@td()${productLine?.deptId}#end
-	#@td()${productLine?.productLineRoot}#end
-	#@td()${productLine?.productLineParent}#end
-	#@td()${productLine?.productLineOwner}#end
-	#@td()${productLine?.productLineQualityManager}#end
-	#@td()${productLine?.productLineDeliveryManager}#end
-	#@td()${productLine?.productLineStatus}#end
-	#@td()
-			#foreach(m:menuManager.getScopeMenus("productLine-all"))
-			#set(url=eval(m.href))
-				#if(m.id=="allproductline-edit")
-					<a title="${m.name}" class="ml-5" href=${TINY_CONTEXT_PATH +adminPath}${url}><i class="${m.icon}"></i></a>
-					#else
-					&nbsp;#@tinyTableItemRemove(TINY_CONTEXT_PATH +adminPath+url productLine.productLineId)<i class="${m.icon}"></i>#end
-				#end
-			#end
-	#end
+    #@td()<a class="infoJump" href="${TINY_CONTEXT_PATH +adminPath}/productLine/find/overview?productLineId=${productLine?.productLineId}">${productLine?.productLineId}</a>#end
+    #@td()
+    <a class="infoJump" href="${TINY_CONTEXT_PATH +adminPath}/productLine/find/overview?productLineId=${productLine?.productLineId}">${productLine
+        ?.productLineName}</a>
+    #end
+    #@td()${productLine?.productLineCode}#end
+
+    #@td()<span class="${productLine?.productLineOwner==UserUtils.getUserId()?'c-red':''}">${productLine?.productLineOwner?UserUtils.getUserById(productLine?.productLineOwner)?.orgUserRealName:""}</span>#end
+    #@td()<span class="${productLine?.productLineQualityManager==UserUtils.getUserId()?'c-red':''}">${productLine?.productLineQualityManager?UserUtils.getUserById(productLine?.productLineQualityManager)?.orgUserRealName:""}</span>#end
+    #@td()<span class="${productLine?.productLineDeliveryManager==UserUtils.getUserId()?'c-red':''}">${productLine?.productLineDeliveryManager?UserUtils.getUserById(productLine?.productLineDeliveryManager)?.orgUserRealName:""}</span>#end
+    #@td()
+        #foreach(m:menuManager.getScopeMenus("productLine-overview"))
+            #set(url=eval(m.href))
+            #if(m.id=="productLine-edit")
+            <a title="${m.name}" class="ml-5" href=${TINY_CONTEXT_PATH+adminPath}${url}><i class="${m.icon}"></i></a>
+            #else
+            &nbsp;<a href="javascript:void(0);" id="productLineRemove"><i
+                    class="${m.icon} productLineRemove"></i></a>
+            #end
+        #end
+    #end
 #end
 #end
+<script>
+    $(function(){
+        $(".productLineRemove").on("click", function () {
+            var that=this;
+            layer.confirm('确定要删除该记录？', function (index) {
+                var id = $(that).closest("tr").find("td:first a:first").html();
+                //console.log($(that).closest("tr"),$(that).closest("tr").find("td:first a:first"),id);
+                //alert(id);
+                $.ajax({
+                    url:"${TINY_CONTEXT_PATH+adminPath}"+"/productLine/delete?productLineId="+id,
+                    dataType:"json",
+                    success:function(data){
+                        if(data.status=="success"||data.status=="y"){
+                            if(id=="${cookieProductLineId}")
+                            {
+                                $.removeCookie("cookieProductLineId", {path: "/"});
+                            }
+                            layer.msg(data.info, 2, 1);
+                            setTimeout(function(){
+                                layer.closeAll();
+                                $("#productLinetable").trigger("initnav");
+                                $("#lineTree").trigger("refresh");
+                            },300);
+                        }else{
+                            var msg=data.info?data.info:"系统出错";
+                            layer.msg(msg);
+                        }
+                    },
+                    error: function() {
+                        layer.msg("系统出错");
+                    }
+                });
+
+            });
+        });
+
+    })
+
+</script>

@@ -117,7 +117,7 @@
      #@elementItem()
         #@colLabel()内容：#end
 	#@formControlDiv("col-8")
-		#@tinyueditor("content" "content")说点什么...最少输入10个字符#end
+		#@Teditor("content" "content")#end
 	#end
         #@validateDiv("col-2")#end
     #end
@@ -187,8 +187,8 @@
     });
 $(function(){
 
-  $("form[name=thisform").attr("action",'#link("/Validform_post.html")');
-  $("form[name=thisform").Validform({
+  $("form[name=thisform]").attr("action",'#link("/Validform_post.html")');
+  $("form[name=thisform]").Validform({
         tiptype:2,
         usePlugin:{
             //datepicker:{},//日期控件校验;

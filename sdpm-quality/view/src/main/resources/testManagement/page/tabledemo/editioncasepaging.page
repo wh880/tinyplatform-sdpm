@@ -1,136 +1,201 @@
 
-	#@div(divClass="infoContent")
-        <p class="titleName">基本信息</p>
-	##该样式在comm.css样式中自定义
-		#@table("adjustTable")
-			#@thead()
-			#end
-			#@tbody()
-				#@tr()
-					#@th()所属产品#end
-					#@td()
-					 #@Tselect2F()
-	                   		 #@Tselect2Body("productId" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="CT">产品2</option>
-	                        <option value="DE">产品3</option>
-	                        <option value="FL">产品4</option>
-	                        <option value="GA">产品5</option>
-	                        <option value="IN">产品1</option>
-	                    	#end                  
-	                    	#@Tselect2Fix()
-	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/product/page/tabledemo/addProduct.page" class="r ">增加</a>
-	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/product/page/tabledemo/product-listall.page">全部</a>#end
-                	  #end
-					#end
-				#end
-				#@tr()
-					#@th()所属模块#end
-					#@td()
-						  #@Tselect2F()
-	                   		 #@Tselect2Body("moduleId" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="CT">/1/2</option>
-	                        <option value="DE">/2/3</option>
-	                        <option value="IN">/3/4</option>
-	                    	#end                
-                	  #end
-					#end
 
-				#end
-				
-				#@th()相关需求#end
-				#@td()
-							 #@Tselect2F()
-	                   		 #@Tselect2Body("storyId" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="IN">需求1</option>
-	                        <option value="ME">需求2</option>
-	                        <option value="MD">需求3</option>
-	                    	#end                
-	                      	#@Tselect2Fix()
-	                      	<a href="${TINY_CONTEXT_PATH+adminPath}/product/page/tabledemo/product-demand-add.page" class="r ">增加</a>
-	                      	<a href="${TINY_CONTEXT_PATH+adminPath}/product/page/project/togglebox.page">全部</a>#end
-                			#end
-				#end
+#@div(divClass="infoContent")
+<p class="titleName">基本信息</p>
+##该样式在comm.css样式中自定义
+<ul>
+<li>
+    #@elementItem()
+        #@colLabel()<span class='c-red'>*</span>所属产品：#end
+        #@formControlDiv("col-8")
+                    #@TzTreeSelect(
+                        "productId" testCase?.productId {"class":"input-text","datatype":"*","nullmsg":"所属产品不能为空！",
+                        "data-URL":call("link",adminPath+"/productLine/userProductTree")})
+                    <script>
+                        $(function(){
+                            var mUrl = $("#modelA").attr("href");
+                            $("#${sid}").on("setValue",function(o,treeNode){
+                                var pId = treeNode.id;
+                                var pjId = $("select[name=projectId]").val("");
+                                if(pId>0){
+                                    ajaxRead("${sid}","moduleId","moduleId","moduleName","/quality/testCase/ajax/module?moduleRoot="+pId,${(testCase?.moduleId?:moduleId)?:0},"module");
+                                    $("#modelA").attr("href",mUrl+pId);
+                                }
+                            });
+                        });
+                    </script>
+                    <span>
+                        #set(m=menuManager.getMenu("newproduct"))
+                        #if(m)
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
+                        #end
+                        #set(m=menuManager.getMenu("allproduct"))
+                        #if(m)
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
+                        #end
+                    </span>
+                    #end
 
-			#@tr()
-				#@th()用例类型#end
-				#@td()
-				#@Tselect2F()
-	                   		 #@Tselect2Body("caseType" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="IN">1</option>
-	                        <option value="ME">2</option>
-	                        <option value="MD">3</option>
-	                    	#end                
-                 #end
-               	#end
-			#end
-			#@tr()
-				#@th()试用阶段#end
-				#@td()
-					#@Tselect2F()
-	                   		 #@Tselect2Body("caseStage" "IN" {"class":"input-text select2","multiple":"multiple"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="IN">1</option>
-	                        <option value="ME">2</option>
-	                        <option value="MD">3</option>
-	                    	#end                
-                 	#end
-				#end
-			#end
-			#@tr()
-				#@th()优先级#end
-				#@td() 
-					 #@Tselect2F()
-	                   		 #@Tselect2Body("priority" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="IN">1</option>
-	                        <option value="ME">2</option>
-	                        <option value="MD">3</option>
-	                    	#end                
-             		#end
-                 #end
-			#end
-			#@tr()
-				#@th()用例状态#end
-				#@td()
-				 #@Tselect2F()
-	                   		 #@Tselect2Body("caseStatus" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="IN">1</option>
-	                        <option value="ME">2</option>
-	                        <option value="MD">3</option>
-	                    	#end                
-             		#end
                 #end
-			#end
-			#@tr()
-				#@th()关键词#end
-				#@td()
-					#tinyInput("text" "caseKeywords" ""{"datatype":"","id":"版本","class":"input-text"})
-				#end
-			#end
-			#@tr()
-				#@th()相关用例#end
-				#@td()#tinyInput("text" "linkCase" ""{"datatype":"","id":"抄送给","class":"input-text"})
-				#end
-			#end
-		#end
-		#end
-	#end
-	#@div(divClass="infoContent")
-        <p class="titleName">创建编辑</p>
-	##该样式在comm.css样式中自定义
-		#@table("adjustTable")
-			#@thead()
-			#end
-			#@tbody()
-				#@tr()
-					#@th()由谁创建#end
-					#@td()admin 于 2015-08-31 11:31:51#end
-				#end
-				#@tr()
-					#@th()最后编辑#end
-					#@td()******#end
-				#end
-			#end
-		#end
-	#end
-<script>
-	$('select.select2').select2()
-</script>
+        #@validateDiv("col-2")#end
+            #end
+</li>
+<li>
+#@elementItem()
+    #@colLabel()所属模块：#end
+    #@formControlDiv("col-8")
+                    #@Tselect2F()
+                    <script>
+                        $("#${sid}").on("change", function () {
+                            var pId = $("input[name=productId]").val();
+                            var mId = $("select[name=moduleId]").val();
+                            if (pId > 0 && mId >= 0) {
+                                ajaxRead("${sid}", "storyId", "storyId", "storyTitle", "/product/story/storyList?productId=" + pId + "&moduleId=" + mId, ${testCase?.storyId?:0});
+                            }
+                        });
+                    </script>
+                        #@Tselect2Body(
+                            "moduleId" testCase?.moduleId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+
+                        #end
+                        #@Tselect2Fix()#@aModal("#myModal" "添加模块" "500" "300" "btn-class" adminPath+"/product/addModule?pId=" "modelA")
+                        增加#end
+                        #end
+                    #end
+                #end
+
+            #end
+</li>
+<li>
+#@elementItem()
+    #@colLabel()相关需求：#end
+    #@formControlDiv("col-8")
+                #@Tselect2F()
+                    #@Tselect2Body(
+                        "storyId" testCase?.storyId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+
+                    #end
+                    #@Tselect2Fix()
+                        #set(m=menuManager.getMenu("product-demand-add"))
+                        #if(m)
+                        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
+                        #end
+                        #set(m=menuManager.getMenu("product-demand"))
+                        #if(m)
+                        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
+                        #end
+                    #end
+                #end
+            #end
+    #end
+</li>
+<li>
+
+            #@elementItem()
+                #@colLabel()<span class="c-red">*</span>用例类型#end
+                #@formControlDiv("col-8")
+                    #@Tselect2F()
+                        #@Tselect2Body(
+                            "caseType" testCase?.caseType {"class":"input-text select2","datatype":"*","nullmsg":"用例类型不能为空！"}) ##,"multiple":"multiple"加上为多选项
+                            #foreach(caseType:getDict("caseType"))
+                            <option value="${caseType.value}">${caseType.text}</option>
+                            #end
+
+                        #end
+                    #end
+                #end
+                #@validateDiv("col-2")#end
+            #end
+</li>
+<li>
+            #@elementItem()
+                #@colLabel()<span class="c-red">*</span>试用阶段#end
+                #@formControlDiv("col-8")
+                    #@Tselect2F()
+                        #@Tselect2Body("caseStage" testCase?.caseStage {"class":"input-text select2","multiple":
+                            "multiple","datatype":"*","nullmsg":"试用阶段不能为空！"}) ##,"multiple":"multiple"加上为多选项
+                            #foreach(stage:getDict("caseStage"))
+                            <option value="${stage.value}">${stage.text}</option>
+                            #end
+                        #end
+                    #end
+                #end
+                #@validateDiv("col-2")#end
+            #end
+</li>
+<li>
+            #@elementItem()
+                #@colLabel()<span class="c-red">*</span>优先级#end
+                #@formControlDiv("col-8")
+                    #@Tselect2F()
+                        #@Tselect2Body(
+                            "priority" testCase?.priority {"class":"input-text select2","datatype":"*","nullmsg":"优先级不能为空！"}) ##,"multiple":"multiple"加上为多选项
+                            #foreach(pri:getDict("casePriority"))
+                            <option value="${pri.value}">${pri.text}</option>
+                            #end
+                        #end
+                    #end
+                #end
+                #@validateDiv("col-2")#end
+            #end
+</li>
+<li>
+            #@elementItem()
+                #@colLabel()用例状态#end
+                #@formControlDiv("col-8")
+                    #@Tselect2F()
+                        #@Tselect2Body("caseStatus" testCase?.caseStatus {"class":
+                            "input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                            #foreach(status:getDict("caseStatus"))
+                            <option value="${status.value}">${status.text}</option>
+                            #end
+                        #end
+                    #end
+                #end
+                #@validateDiv("col-2")#end
+            #end
+</li>
+<li>
+            #@elementItem()
+                #@colLabel()关键词#end
+                #@formControlDiv("col-8")
+                    #tinyInput(
+                        "text" "caseKeywords" testCase?.caseKeywords {"id":"版本","class":"input-text"})
+                #end
+                #@validateDiv("col-2")#end
+            #end
+</li>
+<li>
+            #@elementItem()
+                #@colLabel()相关用例#end
+                #@formControlDiv("col-8")
+                    #tinyInput("text" "linkCase" testCase?.linkCase {"id":"抄送给","class":"input-text"})
+                #end
+                #@validateDiv("col-2")#end
+            #end
+</li>
+</ul>
+#end
+#@div(divClass="infoContent")
+<p class="titleName">创建编辑</p>
+##该样式在comm.css样式中自定义
+<ul>
+<li>
+            #@elementItem()
+                #@colLabel()由谁创建#end
+                #@formControlDiv("col-8")
+                    ${testCase?.caseOpenedBy?UserUtils.getUserById(testCase?.caseOpenedBy)?.orgUserRealName:""} ${testCase?.caseOpenedDate?" 于 "+formatDate(testCase?.caseOpenedDate,'yyyy-MM-dd HH:mm:ss'):""}
+                #end
+            #end
+</li>
+    <li>
+            #@elementItem()
+                #@colLabel()最后编辑#end
+                #@formControlDiv("col-8")
+                    ${testCase?.caseLastEditedBy?UserUtils.getUserById(testCase?.caseLastEditedBy)?.orgUserRealName:""} ${testCase?.caseLastEditedDate?" 于 "+formatDate(testCase?.caseLastEditedDate,'yyyy-MM-dd HH:mm:ss'):""}
+                #end
+            #end
+
+</li>
+</ul>
+#end

@@ -1,0 +1,56 @@
+#set(tableId="toBugId")
+#@tinyForm("execution" TINY_CONTEXT_PATH+adminPath+"/quality/bug/toBug?caseId="+caseId "" {"class":"test"})
+
+<script type="text/javascript">
+                $(function(){
+                    $("#pass").on("click",function(){
+                        $("input[name=resultType]").val("pass");
+                        $("form[name=execution]").submit();
+                    });
+                    $("#fault").on("click",function(){
+                        $("input[name=resultType]").val("fault");
+                        $("form[name=execution]").submit();
+                    });
+                })
+            </script>
+    #@div(divClass="infoContent")
+        <table id="toBugId" class="table table-bordered table-striped">
+            #@thead()
+                #@tr()
+                    #@th()#end
+                    #@th()步骤#end
+                    #@th()预期 #end
+                    #@th()测试结果 #end
+                    #@th()实际情况#end
+                #end
+            #end
+            #@tbody()
+                #foreach(caseStep:stepList)
+                    #@tr()
+                        #@td()<input type="checkbox" value="${caseStep?.caseStepId}" name="ids">#end
+                        #@td()${caseStep?.caseStepDesc}#end
+                        #@td()${caseStep?.caseStepExpect}#end
+                        #@td()
+                        ${getDict("caseStepResult",stepResults[(caseStepFor.index-1)]?.result)}
+                        #end
+                        #@td()
+                        ${stepResults[(caseStepFor.index-1)]?.real}
+
+                        #end
+                    #end
+                #end
+            #end
+        </table>
+        <div class="f col-3">
+            <input type="button" value="全选" class="btn btn-default btn-primary col-3"
+            onclick="selectAllNullorReserve('ids','全选');" />
+            <div class="col-0">&nbsp&nbsp</div>
+            <input type="button" value="反选" class="btn btn-default btn-primary col-3"
+             onclick="selectAllNullorReserve('ids','反选');" />
+            <div class="col-0">&nbsp&nbsp</div>
+            <div class="dropdown col-3">
+              <div><input type="submit" value="保存" class="btn btn-default btn-primary" /></div>
+            </div>
+        </div>
+    #end
+#end

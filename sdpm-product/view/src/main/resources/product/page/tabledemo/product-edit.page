@@ -22,7 +22,7 @@
 	 	
 	 	#@tbody()
 	 		
-	 		#for(i:[1..8])
+	 		#foreach(i:[1..8])
 				#@tr()
 		 			
 		 			#@th()	${i}	#end

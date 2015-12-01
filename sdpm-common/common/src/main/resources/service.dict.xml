@@ -1,0 +1,62 @@
+<dictNodeEntries name="service" title="客服">
+    <dictNodeEntry name="client" title="客户">
+        <dictNodeEntry name="clientStatus" title="客户状态">
+            <dictItem key="0" value="停止" sort="1"/>
+            <dictItem key="1" value="活跃" sort="2"/>
+        </dictNodeEntry>
+    </dictNodeEntry>
+
+    <dictNodeEntry name="request" title="需求">
+        <dictNodeEntry name="requestType" title="请求类型">
+            <dictItem key="0" value="缺陷" sort="1"/>
+            <dictItem key="1" value="适应性" sort="2"/>
+            <dictItem key="2" value="完善" sort="3"/>
+            <dictItem key="3" value="个性化" sort="4"/>
+            <dictItem key="4" value="全新" sort="5"/>
+            <dictItem key="5" value="训练" sort="6"/>
+            <dictItem key="6" value="支持" sort="7"/>
+            <dictItem key="7" value="疑惑" sort="8"/>
+        </dictNodeEntry>
+        <dictNodeEntry name="requestPre" title="优先级">
+            <dictItem key="0" value="低" sort="1"/>
+            <dictItem key="1" value="中" sort="2"/>
+            <dictItem key="2" value="高" sort="3"/>
+        </dictNodeEntry>
+        <dictNodeEntry name="requestStatus" title="请求状态">
+            <dictItem key="0" value="新建" sort="1"/>
+            <dictItem key="6" value="待回访" sort="2"/>
+            <dictItem key="8" value="已回访" sort="3"/>
+            <dictItem key="2" value="被拒绝" sort="4"/>
+            <dictItem key="1" value="处理中" sort="5"/>
+            <dictItem key="10" value="关闭" sort="6"/>
+        </dictNodeEntry>
+        <dictNodeEntry name="reviewType" title="回访类型">
+            <dictItem key="0" value="发放回访" sort="1"/>
+            <dictItem key="1" value="拒绝需求回访" sort="2"/>
+            <dictItem key="2" value="无修改需求回访" sort="3"/>
+        </dictNodeEntry>
+        <dictNodeEntry name="reviewScore" title="回访评分">
+            <dictItem key="0" value="很不满意" sort="1"/>
+            <dictItem key="1" value="不满意" sort="2"/>
+            <dictItem key="2" value="一般" sort="3"/>
+            <dictItem key="3" value="满意" sort="4"/>
+            <dictItem key="4" value="非常满意" sort="5"/>
+        </dictNodeEntry>
+    </dictNodeEntry>
+
+    <dictNodeEntry name="sla" title="协议">
+        <dictNodeEntry name="serviceLevel" title="协议级别">
+            <dictItem key="0" value="基础" sort="1"/>
+            <dictItem key="1" value="潜力" sort="2"/>
+            <dictItem key="2" value="核心" sort="3"/>
+            <dictItem key="3" value="vip" sort="4"/>
+        </dictNodeEntry>
+        <dictNodeEntry name="slaStatus" title="协议级别协议">
+            <dictItem key="0" value="新建" sort="1"/>
+            <dictItem key="1" value="生效" sort="2"/>
+            <dictItem key="2" value="到期" sort="3"/>
+            <dictItem key="3" value="作废" sort="4"/>
+            <dictItem key="4" value="关闭" sort="5"/>
+        </dictNodeEntry>
+    </dictNodeEntry>
+</dictNodeEntries>

@@ -1,17 +1,17 @@
 /**
- *  Copyright (c) 1997-2013, www.tinygroup.org (luo_guo@icloud.com).
- *
- *  Licensed under the GPL, Version 3.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *       http://www.gnu.org/licenses/gpl.html
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
+ * Copyright (c) 1997-2013, www.tinygroup.org (luo_guo@icloud.com).
+ * <p>
+ * Licensed under the GPL, Version 3.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.gnu.org/licenses/gpl.html
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 package org.tinygroup.sdpm.product.dao.pojo;
@@ -20,261 +20,343 @@ import java.io.Serializable;
 import java.util.Date;
 
 
-public class Product implements Serializable{
+public class Product implements Serializable {
 
-	/** 
-	 * 产品ID
-	 * 
-	 */
-	
-	private Integer productId;
+    public static final Integer ACl_All = 0;
+    public static final Integer ACl_TEAM = 1;
+    public static final Integer ACl_TEAM_AND_ROLE = 2;
+    public static Integer DELETE_YES = 1;
+    public static Integer DELETE_NO = 0;
+    /**
+     * 产品ID
+     */
 
-	/** 
-	 * 公司ID
-	 * 
-	 */
-	private Integer companyId;
+    private Integer productId;
+    /**
+     * 公司ID
+     */
+    private Integer companyId;
+    /**
+     * 部门ID
+     */
+    private Integer deptId;
+    /**
+     * 产品线ID
+     */
+    private Integer productLineId;
+    /**
+     * 产品名称
+     */
+    private String productName;
+    /**
+     * 产品代号
+     */
+    private String productCode;
+    /**
+     * 产品序号
+     */
+    private Integer productOrder;
+    /**
+     * 产品状态
+     */
+    private String productStatus;
+    /**
+     * 产品描述
+     */
+    private String productDesc;
+    /**
+     * 产品经理
+     */
+    private String productOwner;
+    /**
+     * 产品质量经理
+     */
+    private String productQualityManager;
+    /**
+     * 产品交付经理
+     */
+    private String productDeliveryManager;
+    /**
+     * 权限模式
+     * <p>
+     * 本部门范围：0-open公开；1-custom自定义（产品/项目团队和白名单可访问）；2-private私有（产品/项目团队成员才可访问）
+     */
+    private Integer acl;
+    /**
+     * 白名单
+     */
+    private String productWhiteList;
+    /**
+     * 创建者
+     */
+    private String productCreatedBy;
+    /**
+     * 创建日期
+     */
+    private Date productCreatedDate;
+    /**
+     * 创建版本
+     */
+    private String productCreatedVersion;
+    /**
+     * 已删除
+     */
+    private String productLineName;
+    private Integer deleted;
+    private Integer activeSum;
+    private Integer changeSum;
+    private Integer draftSum;
+    private Integer closeSum;
+    private Integer planCount;
+    private Integer releaseCount;
+    private Integer bugCount;
+    private Integer resolveSum;
+    private Integer assignSum;
 
-	/** 
-	 * 部门ID
-	 * 
-	 */
-	private Integer deptId;
+    public Product() {
+        setDeleted(DELETE_NO);
+    }
 
-	/** 
-	 * 产品线ID
-	 * 
-	 */
-	private Integer productLineId;
+    public String getProductLineName() {
+        return productLineName;
+    }
 
-	/** 
-	 * 产品名称
-	 * 
-	 */
-	private String productName;
+    public void setProductLineName(String productLineName) {
+        this.productLineName = productLineName;
+    }
 
-	/** 
-	 * 产品代号
-	 * 
-	 */
-	private String productCode;
+    public Integer getActiveSum() {
+        return activeSum;
+    }
 
-	/** 
-	 * 产品序号
-	 * 
-	 */
-	private Integer productOrder;
+    public void setActiveSum(Integer activeSum) {
+        this.activeSum = activeSum;
+    }
 
-	/** 
-	 * 产品状态
-	 * 
-	 */
-	private String productStatus;
+    public Integer getChangeSum() {
+        return changeSum;
+    }
 
-	/** 
-	 * 产品描述
-	 * 
-	 */
-	private String productDesc;
+    public void setChangeSum(Integer changeSum) {
+        this.changeSum = changeSum;
+    }
 
-	/** 
-	 * 产品经理
-	 * 
-	 */
-	private String productOwner;
+    public Integer getDraftSum() {
+        return draftSum;
+    }
 
-	/** 
-	 * 产品质量经理
-	 * 
-	 */
-	private String productQualityManager;
+    public void setDraftSum(Integer draftSum) {
+        this.draftSum = draftSum;
+    }
 
-	/** 
-	 * 产品交付经理
-	 * 
-	 */
-	private String productDeliveryManager;
+    public Integer getCloseSum() {
+        return closeSum;
+    }
 
-	/** 
-	 * 权限模式
-	 * 
-	 * 本部门范围：0-open公开；1-custom自定义（产品/项目团队和白名单可访问）；2-private私有（产品/项目团队成员才可访问）
-	 */
-	private Integer acl;
+    public void setCloseSum(Integer closeSum) {
+        this.closeSum = closeSum;
+    }
 
-	/** 
-	 * 白名单
-	 * 
-	 */
-	private String productWhiteList;
+    public Integer getPlanCount() {
+        return planCount;
+    }
 
-	/** 
-	 * 创建者
-	 * 
-	 */
-	private String productCreatedBy;
+    public void setPlanCount(Integer planCount) {
+        this.planCount = planCount;
+    }
 
-	/** 
-	 * 创建日期
-	 * 
-	 */
-	private Date productCreatedDate;
+    public Integer getReleaseCount() {
+        return releaseCount;
+    }
 
-	/** 
-	 * 创建版本
-	 * 
-	 */
-	private String productCreatedVersion;
+    public void setReleaseCount(Integer releaseCount) {
+        this.releaseCount = releaseCount;
+    }
 
-	/** 
-	 * 已删除
-	 * 
-	 */
-	private Integer deleted;
+    public Integer getBugCount() {
+        return bugCount;
+    }
 
+    public void setBugCount(Integer bugCount) {
+        this.bugCount = bugCount;
+    }
 
-	public void setProductId(Integer productId){
-		this. productId = productId;
-	}
+    public Integer getResolveSum() {
+        return resolveSum;
+    }
 
-	public Integer getProductId(){
-		return productId;
-	}
+    public void setResolveSum(Integer resolveSum) {
+        this.resolveSum = resolveSum;
+    }
 
-	public void setCompanyId(Integer companyId){
-		this. companyId = companyId;
-	}
+    public Integer getAssignSum() {
+        return assignSum;
+    }
 
-	public Integer getCompanyId(){
-		return companyId;
-	}
+    public void setAssignSum(Integer assignSum) {
+        this.assignSum = assignSum;
+    }
 
-	public void setDeptId(Integer deptId){
-		this. deptId = deptId;
-	}
+    public Integer getProductId() {
+        return productId;
+    }
 
-	public Integer getDeptId(){
-		return deptId;
-	}
+    public void setProductId(Integer productId) {
+        this.productId = productId;
+    }
 
-	public void setProductLineId(Integer productLineId){
-		this. productLineId = productLineId;
-	}
+    public Integer getCompanyId() {
+        return companyId;
+    }
 
-	public Integer getProductLineId(){
-		return productLineId;
-	}
+    public void setCompanyId(Integer companyId) {
+        this.companyId = companyId;
+    }
 
-	public void setProductName(String productName){
-		this. productName = productName;
-	}
+    public Integer getDeptId() {
+        return deptId;
+    }
 
-	public String getProductName(){
-		return productName;
-	}
+    public void setDeptId(Integer deptId) {
+        this.deptId = deptId;
+    }
 
-	public void setProductCode(String productCode){
-		this. productCode = productCode;
-	}
+    public Integer getProductLineId() {
+        return productLineId;
+    }
 
-	public String getProductCode(){
-		return productCode;
-	}
+    public void setProductLineId(Integer productLineId) {
+        this.productLineId = productLineId;
+    }
 
-	public void setProductOrder(Integer productOrder){
-		this. productOrder = productOrder;
-	}
+    public String getProductName() {
+        return productName;
+    }
 
-	public Integer getProductOrder(){
-		return productOrder;
-	}
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
 
-	public void setProductStatus(String productStatus){
-		this. productStatus = productStatus;
-	}
+    public String getProductCode() {
+        return productCode;
+    }
 
-	public String getProductStatus(){
-		return productStatus;
-	}
+    public void setProductCode(String productCode) {
+        this.productCode = productCode;
+    }
 
-	public void setProductDesc(String productDesc){
-		this. productDesc = productDesc;
-	}
+    public Integer getProductOrder() {
+        return productOrder;
+    }
 
-	public String getProductDesc(){
-		return productDesc;
-	}
+    public void setProductOrder(Integer productOrder) {
+        this.productOrder = productOrder;
+    }
 
-	public void setProductOwner(String productOwner){
-		this. productOwner = productOwner;
-	}
+    public String getProductStatus() {
+        return productStatus;
+    }
 
-	public String getProductOwner(){
-		return productOwner;
-	}
+    public void setProductStatus(String productStatus) {
+        this.productStatus = productStatus;
+    }
 
-	public void setProductQualityManager(String productQualityManager){
-		this. productQualityManager = productQualityManager;
-	}
+    public String getProductDesc() {
+        return productDesc;
+    }
 
-	public String getProductQualityManager(){
-		return productQualityManager;
-	}
+    public void setProductDesc(String productDesc) {
+        this.productDesc = productDesc;
+    }
 
-	public void setProductDeliveryManager(String productDeliveryManager){
-		this. productDeliveryManager = productDeliveryManager;
-	}
+    public String getProductOwner() {
+        return productOwner;
+    }
 
-	public String getProductDeliveryManager(){
-		return productDeliveryManager;
-	}
+    public void setProductOwner(String productOwner) {
+        this.productOwner = productOwner;
+    }
 
-	public void setAcl(Integer acl){
-		this. acl = acl;
-	}
+    public String getProductQualityManager() {
+        return productQualityManager;
+    }
 
-	public Integer getAcl(){
-		return acl;
-	}
+    public void setProductQualityManager(String productQualityManager) {
+        this.productQualityManager = productQualityManager;
+    }
 
-	public void setProductWhiteList(String productWhiteList){
-		this. productWhiteList = productWhiteList;
-	}
+    public String getProductDeliveryManager() {
+        return productDeliveryManager;
+    }
 
-	public String getProductWhiteList(){
-		return productWhiteList;
-	}
+    public void setProductDeliveryManager(String productDeliveryManager) {
+        this.productDeliveryManager = productDeliveryManager;
+    }
 
-	public void setProductCreatedBy(String productCreatedBy){
-		this. productCreatedBy = productCreatedBy;
-	}
+    public Integer getAcl() {
+        return acl;
+    }
 
-	public String getProductCreatedBy(){
-		return productCreatedBy;
-	}
+    public void setAcl(Integer acl) {
+        this.acl = acl;
+    }
 
-	public void setProductCreatedDate(Date productCreatedDate){
-		this. productCreatedDate = productCreatedDate;
-	}
+    public String getProductWhiteList() {
+        return productWhiteList;
+    }
 
-	public Date getProductCreatedDate(){
-		return productCreatedDate;
-	}
+    public void setProductWhiteList(String productWhiteList) {
+        this.productWhiteList = productWhiteList;
+    }
 
-	public void setProductCreatedVersion(String productCreatedVersion){
-		this. productCreatedVersion = productCreatedVersion;
-	}
+    public String getProductCreatedBy() {
+        return productCreatedBy;
+    }
 
-	public String getProductCreatedVersion(){
-		return productCreatedVersion;
-	}
+    public void setProductCreatedBy(String productCreatedBy) {
+        this.productCreatedBy = productCreatedBy;
+    }
 
-	public void setDeleted(Integer deleted){
-		this. deleted = deleted;
-	}
+    public Date getProductCreatedDate() {
+        return productCreatedDate;
+    }
 
-	public Integer getDeleted(){
-		return deleted;
-	}
+    public void setProductCreatedDate(Date productCreatedDate) {
+        this.productCreatedDate = productCreatedDate;
+    }
+
+    public String getProductCreatedVersion() {
+        return productCreatedVersion;
+    }
+
+    public void setProductCreatedVersion(String productCreatedVersion) {
+        this.productCreatedVersion = productCreatedVersion;
+    }
+
+    public Integer getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(Integer deleted) {
+        this.deleted = deleted;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        } else if (object != null) {
+            if (this.getProductId() == ((Product) object).getProductId()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 17;
+        return 37 * result + productId;
+    }
 
 }

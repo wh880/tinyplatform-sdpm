@@ -6,7 +6,7 @@
             }
             else {
                 layer.confirm('确认要删除吗？', function (index) {
-                    layer.msg('已删除!', 1);
+                    layer.msg('已删除!', 1,1);
                 });
             }
         });
@@ -14,4 +14,10 @@
             user_del(this, '1');
         });
     });
+</script>
+
+<script>
+    function resetForm(_this) {
+        $(_this).closest("form").get(0).reset();
+    }
 </script>

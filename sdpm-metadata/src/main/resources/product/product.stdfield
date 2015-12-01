@@ -32,7 +32,7 @@
   <standard-field id="b9c09ba271a74c9d991fbb38373025c2" name="product_created_version" title="创建版本" business-type-id="a2c7afa4de724b0cb8f2f46fd8389a37" default="&apos;0.0.1-SNAPSHOT&apos;"/>
   <standard-field id="c97bbba549674da3bf7688b351ed34b9" name="product_created_date" title="创建日期" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff" default="now()"/>
   <standard-field id="c7e8356f9bea4a26801fcc5bc3eddbff" name="product_created_by" title="创建者" business-type-id="a2c7afa4de724b0cb8f2f46fd8389a37" default=""/>
-  <standard-field id="b9c09ba271a74c9d991fbb38373025c2" name="product_created_version" title="创建版本" business-type-id="a2c7afa4de724b0cb8f2f46fd8389a37" default="&apos;0.0.1-SNAPSHOT&apos;"/>
+  <standard-field id="b9c09ba271a74c9d991fbb38373025c2" name="product_created_version" title="创建版本" business-type-id="a2c7afa4de724b0cb8f2f46fd8389a37" default=""/>
   <standard-field id="c97bbba549674da3bf7688b351ed34b9" name="product_created_date" title="创建日期" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff" default=""/>
   <standard-field id="1ac76197c3214536851e8d3f6d04a619" name="plan_id" title="计划ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" default="">
     <description></description>
@@ -54,7 +54,7 @@
   </standard-field>
   <standard-field id="8296a6e150d147c1a13a8dae13529ca9" name="story_parent_id" title="父需求ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
   <standard-field id="2b324902ce2f41c9b3c1d9ec7003c6eb" name="story_source" title="需求来源" business-type-id="a2c7afa4de724b0cb8f2f46fd8389a37"/>
-  <standard-field id="932480be92ac4aef93efa9aeb3c20cf5" name="story_from_bug" title="来源Bug" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
+  <standard-field id="932480be92ac4aef93efa9aeb3c20cf5" name="story_from_bug" title="来源Bug" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" default="0"/>
   <standard-field id="b82777e73fcd488cb571f5d5671558d4" name="story_title" title="需求标题" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
   <standard-field id="ff1ca1f501f14817abe7e46cdcd7c4de" name="story_keywords" title="需求关键字" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
   <standard-field id="d9063e636acf4e779e74cbf796209228" name="story_type" title="需求类型" business-type-id="a2c7afa4de724b0cb8f2f46fd8389a37"/>
@@ -77,7 +77,7 @@
   <standard-field id="6c5b45393ed74bbcac6e93fe2222cd07" name="story_assigned_date" title="需求指派日期" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff"/>
   <standard-field id="cdd6e68898114847a1e8ed07c5ffa15b" name="story_last_edited_by" title="需求上次编辑者" business-type-id="a2c7afa4de724b0cb8f2f46fd8389a37"/>
   <standard-field id="30b66130305b43e686b4c8ea61d9830f" name="story_last_edited_date" title="需求上次编辑日期" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff"/>
-  <standard-field id="0b92178654624538a181d40993ed25f2" name="story_reviewed_by" title="需求审核人" business-type-id="a2c7afa4de724b0cb8f2f46fd8389a37"/>
+  <standard-field id="0b92178654624538a181d40993ed25f2" name="story_reviewed_by" title="需求审核人" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
   <standard-field id="0d9c365e20af42e990bf826b8936d0fc" name="story_reviewed_date" title="需求审核日期" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff"/>
   <standard-field id="483157638d7b4debba3bb0bec922a422" name="story_closed_by" title="需求关闭者" business-type-id="a2c7afa4de724b0cb8f2f46fd8389a37"/>
   <standard-field id="52df67f6d8a7421ca72f92fcb10f54c2" name="story_closed_date" title="需求关闭日期" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff"/>

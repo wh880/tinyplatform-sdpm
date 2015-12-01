@@ -1,25 +1,4 @@
 #!set(activeTitle="组织管理",activeMenuId=currentPageId)
-<style>
-    .tabLayout .tabBar span a {
-        color: #333
-    }
-
-    .tabLayout .tabBar .Current a {
-        color: #fff
-    }
-
-    .operationbar {
-        border-top: none;
-        background: #f9fafe;
-        padding: 6px 5px 6px 10px;
-    }
-
-    .formText {
-        margin-top: -6px;
-        border: #eee 1px solid;
-        padding: 2px 0 16px
-    }
-</style>
 #set(name="organizationCompany")
 #include("/common/common.page")
 #@div()
@@ -27,81 +6,79 @@
         #@tabHead()
             #include("/organization/common/tab.page")
         #end
-        #@tabBodyCol("ptop-5")
-            #@div(divClass="operationbar")
-            <span style="float: right">
-                #set(m=menuManager.getMenu("org-company-edit"))
-                #if(m)
-                    #@aModal("#myModal" m.name "600" "400" ""
-                    adminPath+m.href)#buttonIcon(iconClass="icon-edit")${m.name}#end
-                #end
-                #@dialog("myModal")
-                    #@dialogHeader()公司#end
-                    #@dialogBody()<p></p>#end
-                #end
-            </span>
-                #div(divClass="clearfix")
-            #end
-        #end
     #end
-
-
     #@noRespsGridSystem()
-    <div class="infoContent">
-        <p class="titleName">公司信息</p>
-        #@gridSysRow()
-            #@colLabel("col-4")公司名称：#end
-            #@gridSysCol(8)
-                <p>${company?.orgCompanyName}</p>
+        #@gridSysCol(3)#end
+        #@gridSysCol(6)
+        <div class="infoContent">
+            <p class="titleName">公司信息</p>
+            #@gridSysRow()
+                <span style="float: right">
+                #set(m=menuManager.getMenu("org-company-edit"))
+                    #if(m)
+                        #@aModal("#myModal" m.name "600" "400" ""
+                        adminPath+m.href)#buttonIcon(iconClass="icon-edit")<b>编辑</b>#end
+                    #end
+                    #@dialog("myModal")
+                        #@dialogHeader()公司#end
+                        #@dialogBody()<p></p>#end
+                    #end
+            </span>
             #end
-        #end
-        #@gridSysRow()
-            #@colLabel("col-4")联系电话：#end
-            #@gridSysCol(8)
-                <p>${company?.orgCompanyPhone}</p>
-            #end
-        #end
-        #@gridSysRow()
-            #@colLabel("col-4")传真：#end
-            #@gridSysCol(8)
-                <p>${company?.orgCompanyFax}</p>
-            #end
-        #end
-        #@gridSysRow()
-            #@colLabel("col-4")通讯地址：#end
-            #@gridSysCol(8)
-                <p>${company?.orgCompanyAddress}</p>
-            #end
-        #end
-        #@gridSysRow()
-            #@colLabel("col-4")邮政编码：#end
-            #@gridSysCol(8)
-                <p>${company?.orgCompanyZipCode}</p>
-            #end
-        #end
-        #@gridSysRow()
-            #@colLabel("col-4")官网：#end
-            #@gridSysCol(8)
-                <p>${company?.orgCompanyWebsite}</p>
-            #end
-        #end
-        #@gridSysRow()
-            #@colLabel("col-4")内网：#end
-            #@gridSysCol(8)
-                <p>${company?.orgCompanyBackyard}</p>
-            #end
-        #end
-        #@gridSysRow()
-            #@colLabel("col-4")匿名登录：#end
-            #@gridSysCol(8)
-                #if(company?.orgCompanyGuest==1)
-                    <p>允许</p>
-                #else
-                    <p>不允许</p>
+            #@gridSysRow()
+                #@colLabel("col-4")公司名称：#end
+                #@gridSysCol(8)
+                    <p>${company?.orgCompanyName}</p>
                 #end
             #end
+            #@gridSysRow()
+                #@colLabel("col-4")联系电话：#end
+                #@gridSysCol(8)
+                    <p>${company?.orgCompanyPhone}</p>
+                #end
+            #end
+            #@gridSysRow()
+                #@colLabel("col-4")传真：#end
+                #@gridSysCol(8)
+                    <p>${company?.orgCompanyFax}</p>
+                #end
+            #end
+            #@gridSysRow()
+                #@colLabel("col-4")通讯地址：#end
+                #@gridSysCol(8)
+                    <p>${company?.orgCompanyAddress}</p>
+                #end
+            #end
+            #@gridSysRow()
+                #@colLabel("col-4")邮政编码：#end
+                #@gridSysCol(8)
+                    <p>${company?.orgCompanyZipCode}</p>
+                #end
+            #end
+            #@gridSysRow()
+                #@colLabel("col-4")官网：#end
+                #@gridSysCol(8)
+                    <p>${company?.orgCompanyWebsite}</p>
+                #end
+            #end
+            #@gridSysRow()
+                #@colLabel("col-4")内网：#end
+                #@gridSysCol(8)
+                    <p>${company?.orgCompanyBackyard}</p>
+                #end
+            #end
+            #@gridSysRow()
+                #@colLabel("col-4")Logo：#end
+                #@gridSysCol(8)
+                    <img src="${TINY_CONTEXT_PATH}${company?.orgCompanyLogo}"  height="80"></img>
+                #end
+            #end
+
+
+            <p style="clear:both"></p>
+        </div>
         #end
-    </div>
+
     #end
 #end
 

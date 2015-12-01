@@ -15,7 +15,7 @@
 	 	
 	 	#@tbody()
 	 		
-	 		#for(i:[1..8])
+	 		#foreach(i:[1..8])
 				#@tr()
 		 			#@td()	${i}	#end
 		 			#@td()	产品${i}	#end

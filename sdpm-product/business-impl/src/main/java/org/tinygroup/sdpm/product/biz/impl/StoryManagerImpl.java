@@ -1,17 +1,14 @@
 package org.tinygroup.sdpm.product.biz.impl;
 
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.Model;
+import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
+import org.tinygroup.sdpm.common.condition.CallBackFunction;
+import org.tinygroup.sdpm.common.condition.ConditionCarrier;
+import org.tinygroup.sdpm.common.condition.ConditionUtils;
+import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfo;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SqlUtil;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
@@ -22,138 +19,192 @@ import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec;
 import org.tinygroup.sdpm.product.dao.pojo.StoryCount;
+import org.tinygroup.sdpm.quality.dao.QualityBugDao;
+import org.tinygroup.sdpm.quality.dao.QualityTestCaseDao;
+import org.tinygroup.sdpm.system.dao.SystemModuleDao;
+import org.tinygroup.sdpm.system.dao.impl.util.ModuleUtil;
 import org.tinygroup.tinysqldsl.Pager;
+import org.tinygroup.tinysqldsl.base.Column;
+import org.tinygroup.tinysqldsl.base.Condition;
+import org.tinygroup.tinysqldsl.base.FragmentSql;
+import org.tinygroup.tinysqldsl.base.StatementSqlBuilder;
+
+import java.util.*;
+
 
 @Service
 @Transactional
 public class StoryManagerImpl implements StoryManager {
 
-	@Autowired(required = false)
-	private ProductStoryDao productStoryDao;
+    @Autowired(required = false)
+    private ProductStoryDao productStoryDao;
+    @Autowired
+    private ProductStorySpecDao storySpecDao;
+    @Autowired
+    private SystemModuleDao systemModuleDao;
+    @Autowired
+    private QualityBugDao qualityBugDao;
+    @Autowired
+    private QualityTestCaseDao qualityTestCaseDao;
+    public ProductStory add(ProductStory story, ProductStorySpec storySpec) {
+        Integer no = productStoryDao.getMaxNo(story.getProductId());
+        story.setNo(no==null?1:no+1);
+        story.setDeleted(FieldUtil.DELETE_NO);
+        story = productStoryDao.add(story);
+        storySpec.setStoryId(story.getStoryId());
+        storySpecDao.add(storySpec);
+        return story;
+    }
 
-	@Autowired
-	private ProductStorySpecDao storySpecDao;
+    public int update(ProductStory story) {
 
-	public ProductStory add(ProductStory story, ProductStorySpec storySpec) {
+        return productStoryDao.edit(story);
+    }
 
-		story.setDeleted(FieldUtil.DELETE_NO);
-		story = productStoryDao.add(story);
-		storySpec.setStoryId(story.getStoryId());
-		storySpecDao.add(storySpec);
-		return story;
-	}
+    public ProductStory find(Integer storyId) {
+        if (null == storyId) {
+            return null;
+        }
+        return productStoryDao.getReleteStoryByKey(storyId);
+    }
 
-	public int update(ProductStory story) {
+    public int[] updateBatch(List<ProductStory> stories) {
 
-		return productStoryDao.edit(story);
-	}
+        return productStoryDao.batchUpdate(stories);
+    }
 
-	public ProductStory find(Integer storyId) {
+    public List<ProductStory> findList(ProductStory story, String order, String ordertype) {
+        if (StringUtil.isBlank(order)) {
+            return productStoryDao.query(story);
+        } else {
+            order = "product_story." + NameUtil.resolveNameDesc(order);
 
-		return productStoryDao.getByKey(storyId);
-	}
+            return productStoryDao.query(story, new OrderBy(order, !("desc".equals(ordertype)) ? true : false));
+        }
+    }
 
-	public int[] updateBatch(List<ProductStory> stories) {
+    public Pager<ProductStory> findPagerRel(int start, int limit, ProductStory story, ConditionCarrier carrier, String columnName, boolean asc) {
 
-		return productStoryDao.batchUpdate(stories);
-	}
+        if (StringUtil.isBlank(columnName)) {
+            return productStoryDao.complexQueryRel(start, limit, story, mergeCondition(carrier));
+        }
+        return productStoryDao.complexQueryRel(start, limit, story, mergeCondition(carrier),new OrderBy("product_story." + NameUtil.resolveNameDesc(columnName), asc));
+    }
 
-	public List<ProductStory> findList(ProductStory story, String order,
-			String ordertype) {
-		return productStoryDao.query(
-				story,
-				(order == null || "".equals(order)) ? null : new OrderBy(
-						NameUtil.resolveNameDesc(order), !("desc"
-								.equals(ordertype)) ? true : false));
-	}
+    public List<ProductStory> findList(ProductStory story) {
 
-	public Pager<ProductStory> findPager(int start, int limit,ProductStory story, String statusCondition, SearchInfos conditions,
-			String groupOperate, String columnName, boolean asc) {
-		String condition = conditions != null ? SqlUtil.toSql(conditions.getInfos(), groupOperate) : "";
-		condition = condition != null && !"".equals(condition) ? (statusCondition != null&& !"".equals(statusCondition) ? condition + " and "
-				+ statusCondition : condition)
-				: statusCondition;
-		OrderBy orderBy = null;
-		if (columnName != null && !"".equals(columnName)) {
-			orderBy = new OrderBy(NameUtil.resolveNameAsc(columnName), asc);
-		}
-		if (condition != null && !"".equals(condition)) {
-			return productStoryDao.complexQuery(start, limit, story, condition,
-					orderBy);
-		}
-		return productStoryDao.queryPager(start, limit, story, orderBy);
-	}
+        return productStoryDao.query(story, null);
+    }
 
-	public List<ProductStory> findList(ProductStory story) {
+    public Integer delete(ProductStory story) {
+        //删bug
+        qualityBugDao.deleteBugsByStory(story.getStoryId());
+        //删case
+        qualityTestCaseDao.deleteCaseByStory(story.getStoryId());
 
-		return productStoryDao.query(story, null);
-	}
+        return productStoryDao.edit(story);
+    }
 
-	public Integer delete(Integer storyId) {
+    public List<ProductStory> findList(boolean storySpec,Integer... storyId) {
+        if(storyId==null||storyId.length==0)return new ArrayList<ProductStory>();
+        return productStoryDao.getByKeys(storySpec,storyId);
+    }
 
-		return productStoryDao.softDelete(storyId);
-	}
+    public List<StoryCount> productStoryCount(ProductStory story) {
 
-	public List<ProductStory> findList(Integer... storyId) {
+        return productStoryDao.productStoryCount(story);
+    }
 
-		return productStoryDao.getByKeys(storyId);
-	}
+    public List<StoryCount> modelStoryCount(ProductStory story) {
 
-	public List<StoryCount> productStoryCount(ProductStory story) {
+        return productStoryDao.modelStoryCount(story);
+    }
 
-		return productStoryDao.productStoryCount(story);
-	}
+    public List<StoryCount> planStoryCount(ProductStory story) {
 
-	public List<StoryCount> modelStoryCount(ProductStory story) {
+        return productStoryDao.planStoryCount(story, null);
+    }
 
-		return productStoryDao.modelStoryCount(story);
-	}
+    /*A_productCount,B_moduleCount,C_planCount,
+     * storySource,storyStatus,storyStage,storyPri,storyEstimate,
+     * storyOpenedBy,storyAssignedTo,storyClosedReason,storyVersion*/
+    public Map<String, List<StoryCount>> report(String fields, ProductStory story) {
+        if (fields.equals("") || fields == null) {
+            return null;
+        }
+        Map<String, List<StoryCount>> map = new TreeMap<String, List<StoryCount>>(
+                new Comparator<String>() {
+                    public int compare(String obj1, String obj2) {
+                        // 降序排序
+                        return obj1.compareTo(obj2);
+                    }
+                });
 
-	public List<StoryCount> planStoryCount(ProductStory story) {
+        String newField = "";
+        for (String field : fields.split(",")) {
+            newField = field.substring(field.indexOf("_") + 1).trim();
 
-		return productStoryDao.planStoryCount(story, null);
-	}
+            if ("A_productCount".equals(field.trim())) {
+                map.put(field, productStoryDao.productStoryCount(story));
+            } else if ("B_moduleCount".equals(field.trim())) {
+                map.put(field, productStoryDao.modelStoryCount(story));
+            } else if ("C_planCount".equals(field.trim())) {
+                map.put(field, productStoryDao.planStoryCount(story, null));
+            } else if ("I_storyOpenedBy".equals(field.trim()) || "G_storyAssignedTo".equals(field.trim())) {
+                map.put(field, productStoryDao.userStoryCount(story, newField));
+            } else {
+                map.put(field, productStoryDao.fieldStoryCount(story, newField));
+            }
+        }
 
-	/*A_productCount,B_moduleCount,C_planCount,
-	 * storySource,storyStatus,storyStage,storyPri,storyEstimate,
-	 * storyOpenedBy,storyAssignedTo,storyClosedReason,storyVersion*/
-	public Map<String, List<StoryCount>> report(String fields,ProductStory story) {
-		if(fields.equals("")||fields==null){
-			return  null;
-		}
-		Map<String, List<StoryCount>> map = new TreeMap<String, List<StoryCount>>(
-				new Comparator<String>() {
-					public int compare(String obj1, String obj2) {
-						// 降序排序
-						return obj1.compareTo(obj2);
-					}
-				});
-		
-		String newField="";
-		for (String field : fields.split(",")) {
-			newField = field.substring(field.indexOf("_")+1).trim();
-			
-			if("A_productCount".equals(field.trim())){
-				map.put(field, productStoryDao.productStoryCount(story));
-			}else if("B_moduleCount".equals(field.trim())){
-				map.put(field, productStoryDao.modelStoryCount(story));
-			}else if("C_planCount".equals(field.trim())){
-				map.put(field, productStoryDao.planStoryCount(story, null));
-			}else if("I_storyOpenedBy".equals(field.trim())||"G_storyAssignedTo".equals(field.trim())){
-				map.put(field, productStoryDao.userStoryCount(story, newField));
-			}else{
-				map.put(field, productStoryDao.fieldStoryCount(story, newField));
-			}
-		}
-		
-		return map;
-	}
+        return map;
+    }
 
-	public int[] deleteBatch(List<ProductStory> ids) {
-		// TODO Auto-generated method stub
-		return productStoryDao.batchUpdateDel(ids);
-	}
+    public int countStatus(int productId, int status) {
+        return productStoryDao.countStatus(productId, status);
+    }
 
-	
+    public int[] deleteBatch(List<ProductStory> ids) {
+        return productStoryDao.batchUpdateDel(ids);
+    }
 
+    public List<ProductStory> findProductNameByStoryId(Integer storyId) {
+        return productStoryDao.findpNameBysId(storyId);
+    }
+
+    public Pager<ProductStory> findProjectLinkedStory(int start, int limit, ProductStory story, ConditionCarrier carrier, String columnName, boolean asc) {
+
+        if (!StringUtil.isBlank(columnName)) {
+            return productStoryDao.projectLinkedStory(start, limit, story, mergeCondition(carrier), new OrderBy(NameUtil.resolveNameDesc("productStory." + columnName), asc));
+        }
+        return productStoryDao.projectLinkedStory(start, limit, story, mergeCondition(carrier));
+    }
+
+    public Pager<ProductStory> findPager(int start, int limit, ProductStory story, ConditionCarrier carrier, String columnName, boolean asc) {
+        if (!StringUtil.isBlank(columnName)) {
+            return productStoryDao.complexQuery(start, limit, story, mergeCondition(carrier) , new OrderBy(NameUtil.resolveNameDesc(columnName), asc));
+        }
+        return productStoryDao.complexQuery(start, limit, story, mergeCondition(carrier));
+    }
+
+    public Pager<ProductStory> findStoryByCondition(int start, int limit, ProductStory story, ConditionCarrier carrier, final String columnName, boolean asc) {
+
+        return findPager(start,limit,story,carrier,columnName,asc);
+    }
+
+    public List<ProductStory> storyInCondition(String condition, Integer productId, Integer ...ids) {
+        return productStoryDao.storyInCondition(condition,productId,ids);
+    }
+
+    private Condition mergeCondition(ConditionCarrier carrier){
+        return ConditionUtils.mergeCondition(carrier, new CallBackFunction() {
+            public String moduleRoot(String moduleId) {
+                return ModuleUtil.getConditionByRootWithoutOperate(Integer.parseInt(moduleId.substring(1)),"story");
+            }
+
+            public String module(String moduleId) {
+                return ModuleUtil.getConditionWithoutOperate(Integer.parseInt(moduleId));
+            }
+        });
+    }
 }

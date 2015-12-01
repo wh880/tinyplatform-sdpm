@@ -2,6 +2,41 @@
 #import("/org/tinygroup/table/components/tinytable.component")
 
 #!set(activeTitle="测试管理",activeMenuId=currentPageId)
+#set(testCaseTableId="testCaseTableId")
+<script>
+        function deleteBatch() {
+
+            var testList = new Array();
+                $("input[type='checkbox']").each(function () {
+
+                    if (this.checked == true && this.id != "checkboxall") {
+                        var caseId = $(this).val();
+                        
+                        testList.push({caseId: caseId});
+                        
+                    }
+
+                });
+                if (testList.length > 0) {
+                    $.ajax({
+                        type: "POST",
+                        url: "${TINY_CONTEXT_PATH +adminPath}/quality/testCase/batchDeleteAjax",
+                        data: JSON.stringify(testList),//将对象序列化成JSON字符串
+                        dataType: "json",
+                        contentType: 'application/json;charset=utf-8', //设置请求头信息
+                        success: function (data) {
+                            window.location.reload();
+                        },
+                        error: function (res) {
+                            alert("失败");
+                        }
+                    });
+                }
+        }
+
+
+
+</script>
 
 
 #set(name="qualityCases")
@@ -19,6 +54,7 @@
         #@div(divClass="operationbar")
         <span class="f">
         		#foreach(m:menuManager.getScopeMenus("testcaseleft-tab"))
+        		#set(url=eval(m.href))
     				#if(m.id=="tcasesee")
     					#@buttonGroup()
 		                    #@buttonDropdown("more" buttonClass="btnDropDown")分组查看 
@@ -26,16 +62,38 @@
 		                    #end
 		                    #@ulDropdownMenu("downMenuSty")                       
 		                         <p>
-		                             <a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/cases.page">需求分组</a>
+		                             <a id="group" href="javascript:void(0)">需求分组</a>
+		                             <script>
+		                                $(function(){
+		                                   $("#group").on("click",function(){
+                                                 $.ajax({
+                                                    type: "get",
+                                                    url: "${TINY_CONTEXT_PATH+adminPath}/quality/testCase/group?productId=${qualityProductId}",
+                                                    dataType:"html",
+                                                    success: function(data){
+                                                        $("#caseGroup").html(data);
+                                                    },
+                                                    error: function(res){
+                                                        alert("失败");
+                                                    }
+                                                });
+		                                   });
+                                            $(".operationbar a").removeClass("active_btn");
+                                            $(this).closest(".btn-group").find("button:first span:first").addClass("active_btn").html($(this).html());
+		                                })
+
+		                             </script>
 		                         </p>	
 		                        #@liDivider()#end
 		                    #end
 		                #end
 		             #else
 		             #if(m.id == "tcaseserach")
-		             	<a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
+		             	#if(type!="story")
+		             		<a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
+		             	#end
 		             #else
-		             	<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="${m.id==status?'active_btn':''}">${m.name}</a>
+		             	<a href="${TINY_CONTEXT_PATH+adminPath}${url}" class="${m.id==status?'active_btn':''}">${m.name}</a>
 		             #end
 		             #end
 		         #end  				
@@ -53,100 +111,20 @@
                         "icon-plus")建用例</a>*#
 				</span>
             #div(divClass="clearfix")
-            #include("/testManagement/page/mulsearch.page")
+            #if(type!="story")
+            	 #include("/testManagement/page/mulsearchTestCase.page")
+            #end
+           
         #end
     ##operationbar end
     #end
-##tabbody end
+    #if(type!="noCase")
+		#include("/testManagement/page/testCase.page")
+	#else
+		#include("/testManagement/page/NoTestCaseStory.page")
+	#end
+#end
 
-#@toggleBox({"class":"open"})
-	#@toggleLeft({"class":"aclass"})
-    	#@settoggleLeftTitle()用例名称#end
-	#@settoggleLeftBody("treeLeftbox")
-    	#include("/testManagement/page/moduleTree.page")
-    #end
-    #end
-
-    #@toggleRight()
-#@tinyTable()
-#@div(divBaseClass="tinyheaderTools form-inline")
-			<div class="f col-3">
-						<input type="button" value="全选" class="btn btn-default btn-primary col-3" 
-						onclick="selectAllNullorReserve('userid','全选');" />											
-						<div class="col-0">&nbsp</div>
-						<input type="button" value="反选" class="btn btn-default btn-primary col-3"
-						 onclick="selectAllNullorReserve('userid','反选');" />	
-						<div class="col-0">&nbsp</div>
-						<div class="dropdown col-3">
-							<a id="" role="button" data-toggle="dropdown" class="btn btn-primary" data-target="#" href="javascript:void(0);">编辑<span class="caret"></span></a>
-							<ul class="dropdown-menu multi-level" role="menu">
-								<li>
-								#foreach(m:menuManager.getScopeMenus("testcase-op"))
-    								#if(m.id=="tcasedelete")
-										<a href="javascript:void(0);">
-											删除</a>
-									#end
-								#end
-								</li>
-								<li>
-								#foreach(m:menuManager.getScopeMenus("testcase-op"))
-    								#if(m.id=="texecution")
-									#@iconOperations("#myModal" "" "执行" "865" "400"
-										 "/testManagement/page/tabledemo/execution.pagelet" "ml-5")执行#end
-									#end
-								#end
-								</li>																
-							</ul>
-						</div>
-						<div class="col-2">
-							#@mulOperation("muldelete" "http://127.0.0.1:8080/sqdm-quality/testManagement/page/Bug.page")
-							<a href="javascript:;" class="btn radius btn-danger "><i class="icon-trash"></i>批量删除</a>#end
-						</div>
-					</div>
-#setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置
-
-
-#end
-#set(requestStatuString = tinyRequestQueryString!=null ?tinyRequestQueryString:"")
-#@tinyTableContent(TINY_CONTEXT_PATH+adminPath+"/quality/testCase/findPager?"+requestStatuString)
-#@thead()
-#@tr()
-#@tinyTh({"width":"6"})<input type="checkbox" name="" value="">#end
-#@tinyTh({"class":"sorting","rel":"sortname"})ID#end
-#@tinyTh({"class":"sorting","rel":"sortname"})P#end
-#@tinyTh({"class":"sorting","rel":"sortname"})用例标题#end
-#@tinyTh({"class":"sorting","rel":"sortname"})类型#end
-#@tinyTh({"class":"sorting","rel":"sortname","style":"color:#333"})创建#end
-#@tinyTh({"class":"sorting","rel":"sortname"})执行人#end
-#@tinyTh({"class":"sorting","rel":"sortname"})执行时间#end
-#@tinyTh({"class":"sorting","rel":"sortname"})结果#end
-#@tinyTh({"class":"sorting","rel":"sortname"})状态#end
-#@tinyTh({"csortinglass":"sorting","rel":"sortname"})操作#end
-#end
-#end
-<script type="text/javascript">
-    $(function(){
-    $('#${tableId}').on('click','.delBtn',function(e){
-user_del(this,'1');
-});
-})
-</script>
-#@dialog("myModal")
-#@dialogHeader()#end
-#@dialogBody()<p>对话框内容…</p>#end
-#@dialogFooter()
-	#@buttonEnsure()确定#end
-	#@buttonCancel()关闭#end
-#end
-#end
-#end
-#end
-##tinyTable end
-#end
-##toggleright end
-#end
-##togglebox end
-#end
 ##tab end
 #end
 <script type="text/javascript">

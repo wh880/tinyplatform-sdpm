@@ -16,7 +16,7 @@
                         #@navSelect2("user" "user")
                             #@navSelect2Nav()
                                 #if(userList)
-                                    #for(user:userList)
+                                    #foreach(user:userList)
                                     #if(user?.orgUserId == id)
                                         ${user?.orgUserRealName}
                                     #end
@@ -30,11 +30,21 @@
                             #@navSelect2Data()
                             <option value=""></option>
                             <optgroup label="用户">
-                                #for(user:userList)
+                                #foreach(user:userList)
                                 <option value="${user?.orgUserId}">${user?.orgUserRealName}</option>
                             #end
                         </optgroup>
 
+                        #end
+                        #@navSelect2Fix()
+                            #set(m=menuManager.getMenu("organizationAddUser"))
+                            #if(m)
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
+                            #end
+                            #set(m=menuManager.getMenu("organizationUser"))
+                            #if(m)
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
+                            #end
                         #end
                     #end
 
@@ -52,7 +62,7 @@
                 #end
 
             #end
-        <span style="padding-top: 5px;float: left">
+        <span style="float: left">
                     &nbsp;&gt;
             #foreach(m:menuManager.getScopeMenus("org-user-detail"))
                 #if(m.id=="org-user-storyAdmin")
@@ -98,7 +108,6 @@
                 #@tinyTh({"class":"","rel":"story_estimate"})预计#end
                 #@tinyTh({"class":"","rel":"story_status"})状态#end
                 #@tinyTh({"class":"","rel":"story_stage"})阶段#end
-
             #end
         #end
     #end

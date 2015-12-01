@@ -1,440 +1,498 @@
-<script type="text/javascript">
 
-
-    function ajaxRead(id,toName,opKey,opvalue,url,value){
-        var selectCheck = "select[name="+toName+"]";
-        $(selectCheck).each(function(){
-            var sele = $(this);
-            var s;
-            $.ajax({
-                type: "POST",
-                url: "${TINY_CONTEXT_PATH+adminPath}"+url,
-                data: $(this).attr('data'),
-                dataType:"json",
-                success: function(data){
-                    sele.empty();
-                    var em = "<option value='0' selected  >/</option>";
-                    sele.append(em);
-                    for(var i=0,l=data.length;i<l;i++){
-                        var em = "<option value='"+data[i][opKey]+"' >"+ data[i][opvalue] +"</option>";
-                        sele.append(em);
-
-                    }
-
-                    if(value!=null) {
-                        sele.val(value).trigger("change");
-                    }else {
-                        sele.val(data[0][opKey]).trigger("change");
-                    }
-
-
-                },
-                error: function(res){
-                    alert("失败");
-                }
-            });
-
-
-        });
-
-    }
-</script>
-    #@div(divClass="infoContent")
-        <p class="titleName">基本信息</p>
-    ##该样式在comm.css样式中自定义
-        #@table("adjustTable")
-            #@thead()
-            #end
-            #@tbody()
-                #@tr()
-                    #@th()所属产品#end
-                    #@td()
+#@div(divClass="infoContent")
+<p class="titleName">基本信息</p>
+##该样式在comm.css样式中自定义
+<ul>
+<li>
+    #@elementItem()
+        #@colLabel()<span class='c-red'>*</span>所属产品：#end
+        #@formControlDiv("col-8")
+                    #@TzTreeSelect(
+                        "productId" bug?.productId {"class":"input-text","datatype":"*","nullmsg":"所属产品不能为空！",
+                        "data-URL":call("link",adminPath+"/productLine/userProductTree")})
+                    <script>
+                        $(function(){
+                            var mUrl = $("#modelA").attr("href");
+                            $("#${sid}").on("setValue",function(o,treeNode){
+                                var pId = treeNode.id;
+                                var pjId = $("select[name=projectId]").val("");
+                                if(pId>0){
+                                    ajaxRead("${sid}","moduleId","moduleId","moduleName","/quality/bug/ajax/module?moduleRoot="+pId,${bug?.moduleId?:"null"},"module");
+                                    ajaxRead("${sid}","projectId","projectId","projectName","/quality/bug/ajax/project?productId="+pId,${bug?.projectId?:"null"});
+                                    ajaxRead("${sid}", "planId", "planId", "planName", "/quality/bug/ajax/plan?deleted=0&productId=" + pId, ${bug?.planId?:"null"},"plan");
+                                    $("#modelA").attr("href",mUrl+pId);
+                                }
+                            });
+                        });
+                    </script>
+                    <span>
+                        #set(m=menuManager.getMenu("newproduct"))
+                        #if(m)
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
+                        #end
+                        #set(m=menuManager.getMenu("allproduct"))
+                        #if(m)
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
+                        #end
+                    </span>
+                    #end
+        #end
+        #@validateDiv("col-2")#end
+        #end
+        </li>
+        <li>
+        #@elementItem()
+            #@colLabel()所属模块：#end
+            #@formControlDiv("col-8")
                         #@Tselect2F()
-    <script type="text/javascript">
-        $(function() {
-            $("#${sid}").on("change", function () {
-                console.log("test")
-                var pId = $("#${sid}  option:selected").val();
-                ajaxRead("${sid}", "moduleId", "moduleId", "moduleName", "/quality/bug/ajax/module?moduleRoot=" + pId, ${bug?.moduleId?:0});
-
-            })
-        });
-    </script>
-                        #@Tselect2Body("productId" bug?.productId?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                            <option value="0">/</option>
-                            #foreach(product : qualityProductList)
-                                #if(product?.deleted==0)
-                                <option value="${product?.productId}">${product?.productName}</option>
-                                #end
+                            #@Tselect2Body("moduleId" bug?.moduleId?:0 {"class":
+                                "input-text select2"}) ##,"multiple":"multiple"加上为多选项
                             #end
-                        #end
-
-                        #@Tselect2Fix()
-                        <a href="${TINY_CONTEXT_PATH+adminPath}/product/page/tabledemo/addProduct.page" class="r ">增加</a>
-                        <a href="${TINY_CONTEXT_PATH+adminPath}/product/page/tabledemo/product-listall.page">全部</a>#end
-                        #end
-                	 #end
-                 #end
-                #@tr()
-                    #@th()所属模块#end
-                    #@td()
-                        #@Tselect2F()
-                        #@Tselect2Body("moduleId" bug?.moduleId?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                        <option value="0">/</option>
-                        #end
                         <script type="text/javascript">
-                            $(function() {
+                            $(function () {
                                 $("#${sid}").on("change", function () {
                                     var mId = $("#${sid}  option:selected").val();
-                                    var pId = $("select[name=productId]  option:selected").val();
-                                    ajaxRead("${sid}", "storyId", "storyId", "storyTitle", "/quality/bug/ajax/story?productId=" + pId + "&moduleId=" + mId, ${bug?.storyId?:0});
+                                    var pId = $("input[name=productId]").val();
+                                    if (mId >= 0) {
+                                        ajaxRead("${sid}", "storyId", "storyId", "storyTitle", "/quality/bug/ajax/story?productId=" + pId + "&moduleId=" + mId, ${bug?.storyId?: 0});
+                                    }
                                 })
                             })
                         </script>
+                            #@Tselect2Fix()#@aModal("#myModal" "" "500" "300" "btn-class" adminPath+"/product/addModule?pId=" "modelA")
+                            增加#end
+                            #end
                         #end
-                	 #end
                 #end
-                #@tr()
-                    #@th()Bug类型#end
-                    #@td()
-                     #@Tselect2F()
-	                   		 #@Tselect2Body("bugType" bug?.bugType {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="IN">代码错误</option>
-	                        <option value="ME">界面优化</option>
-	                        <option value="MD">设计缺陷</option>
-	                        <option value="MD">配置相关</option>
-	                        <option value="MD">安装部署</option>
-	                    	#end                
-	                    	#@Tselect2Fix()
-	                    		<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/proposeBug.page" class="r">增加</a>
-	                    		<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/Bug.page">全部</a>
-	                    	#end
-                	  #end
-#*                    #@selectRadiusBox("select_boxes")
-                        #@select(selectName="demo2" selectClass="select")
-                            #@optionSelected("") #end
-                            #@optionItem("1")代码错误#end
-                            #@optionItem("1")界面优化#end
-                            #@optionItem("1")设计缺陷#end
-                            #@optionItem("1")配置相关#end
-                            #@optionItem("1")安装部署#end
-                            #@optionItem("1")安全相关#end
-                            #@optionItem("1")性能问题#end
-                            #@optionItem("1")标准规范#end
-                            #@optionItem("1")测试脚本#end
-                            #@optionItem("1")代码改进#end
-                            #@optionItem("1")其他#end
-                            #@optionItem("1")同上#end
+
+            #end
+</li>
+                        <li>
+                #@elementItem()
+                    #@colLabel()所属计划：#end
+                    #@formControlDiv("col-8")
+                                #@Tselect2F()
+                                    #@Tselect2Body("planId" bug?.planId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+
+                                    #end
+                                    #@Tselect2Fix()
+                                        #set(m=menuManager.getMenu("product-plan-add"))
+                                        #if(m)
+                                        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
+                                        #end
+                                        #set(m=menuManager.getMenu("product-plan"))
+                                        #if(m)
+                                        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
+                                        #end
+                                    #end
+                                #end
                         #end
-                    #end*#
-                    #end
                 #end
-                #@tr()
-                    #@th()优先级#end
-                    #@td()
-                    	#@Tselect2F()
-	                   		 #@Tselect2Body("priority" bug?.priority {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="1">1</option>
-	                        <option value="2">2</option>
-	                        <option value="3">3</option>
-	                    	#end                
-                	  #end
-                	#end
-                #end
-                #@tr()
-                    #@th()Bug状态#end
-                    #@td()
-                    	#@Tselect2F()
-	                   		 #@Tselect2Body("bugStatus" bug?.bugStatus {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="1">激活</option>
-	                        <option value="2">已解决</option>
-                            <option value="2">已关闭</option>
-	                    	#end                
-                	  	#end
-                    #end
-                #end
-                #@tr()
-                    #@th()指派给#end
-                    #@td()
+        </li>
+        <li>
+        #@elementItem()
+            #@colLabel()Bug类型：#end
+            #@formControlDiv("col-8")
                         #@Tselect2F()
-                        #@Tselect2Body("bugAssignedTo" bug?.bugAssignedTo?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                        <option value="0">/</option>
-                        #foreach(user : userList)
-                        <option value="${user?.orgUserId}">${user?.orgUserAccount}</option>
+                            #@Tselect2Body(
+                                "bugType" bug?.bugType {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                                #foreach(type : getDict("bugType"))
+                            <option value="${type.value}">${type.text}</option>
+                            #end
                         #end
-                        #end
-                        #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
-                        #end
-                        #@validateDiv("col-2")#end
+                    ##	                    	#@Tselect2Fix()
+                    ##	                    		<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/proposeBug.page" class="r">增加</a>
+                    ##	                    		<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/Bug.page">全部</a>
+                    ##	                    	#end
                     #end
+
                 #end
-                #@tr()
-                    #@th()操作系统#end
-                    #@td()
+            #end
+    </li>
+    <li>
+    #@elementItem()
+        #@colLabel()<span class="c-red">*</span>优先级：#end
+        #@formControlDiv("col-8")
                     #@Tselect2F()
-	                   		 #@Tselect2Body("operatingSystem" bug?.operatingSystem {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="A">全部</option>
-	                        <option value="B">Windows</option>
-	                        <option value="C">Windows 8</option>
-	                        <option value="D">Windows 7</option>
-	                        <option value="E">Windows XP</option>
-	                        <option value="F">Android</option>
-	                        <option value="G">WP8</option>
-	                        <option value="H">WP7</option>
-	                        <option value="I">Symbian</option>
-	                        <option value="J">Linux</option>
-	                        <option value="K">OSX</option>
-	                        <option value="L">Unix</option>
-	                        <option value="M">其他</option>
-	                        <option value="N">同上</option>	                        
-	                    	#end 
-	                  #end               
-                	#end
-                #end
-                #@tr()
-                    #@th()浏览器#end
-                    #@td()
-						#@Tselect2F()
-	                   		 #@Tselect2Body("browser" bug?.browser {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="A">全部</option>
-	                        <option value="B">IE系列</option>
-	                        <option value="C">IE11</option>
-	                        <option value="D">IE10</option>
-	                        <option value="E">IE9</option>
-	                        <option value="F">IE8</option>
-	                        <option value="G">IE7</option>
-	                        <option value="H">chrome</option>
-	                        <option value="I">Firefox系列</option>
-	                        <option value="J">Firefox4</option>
-	                        <option value="K">Firefox2</option>
-	                        <option value="L">opera系列</option>
-	                        <option value="M">opera11</option>
-	                        <option value="N">opera10</option>
-	                        <option value="O">Safari</option>
-	                        <option value="P">其他</option>
-	                        <option value="Q">同上</option>	                        
-	                    	#end                
-                		#end
+                        #@Tselect2Body(
+                            "priority" bug?.priority {"class":"input-text select2","datatype":"*","nullmsg":"优先级不能为空！"}) ##,"multiple":"multiple"加上为多选项
+                            #foreach(pri : getDict("bugPriority"))
+                            #@tinyOptionItem(pri.value)${pri.text}#end
+                        #end
                     #end
                 #end
-                #@tr()
-                    #@th()关键词#end
-                    #@td()
-                        #tinyInput("text" "bugKeywords" ""{"datatype":"","id":"版本","class":"input-text"})
-                    #end
-                #end
-                #@tr()
-                    #@th()抄送给#end
-                    	#@td()
-                            #@Tselect2F()
-                            #@Tselect2Body("bugMailto" bug?.bugMailto {"class":"input-text select2","multiple":"multiple"}) ##,"multiple":"multiple"加上为多选项
-                            #foreach(user : userList)
-                            <option value="${user?.orgUserId}">${user?.orgUserAccount}</option>
-                            #end
-                            #end
-                            #end
-                	  	#end
+            #end
+        #@validateDiv("col-2")#end
+        #end
+</li>
+<li>
+#@elementItem()
+    #@colLabel()Bug状态：#end
+    #@formControlDiv("col-8")
+                #@Tselect2F()
+                    #@Tselect2Body(
+                        "bugStatus" bug?.bugStatus {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        #foreach(status : getDict("bugStatus"))
+                        #@tinyOptionItem(status.value)${status.text}#end
                     #end
                 #end
             #end
         #end
-    #@div(divClass="infoContent")
-        <p class="titleName">项目/需求/任务</p>
-    ##该样式在comm.css样式中自定义
-        #@table("adjustTable")
-            #@thead()
+    #end
+    </li>
+<li>
+#@elementItem()
+    #@colLabel()指派给：#end
+    #@formControlDiv("col-8")
+            #@Tselect2F()
+                #Tselect2Ajax("bugAssignedTo" bug?.bugAssignedTo TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
+                {"id":"","dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询用户"})
+                #@Tselect2Fix()
+                    #set(m=menuManager.getMenu("organizationAddUser"))
+                    #if(m)
+                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
+                    #end
+                    #set(m=menuManager.getMenu("organizationUser"))
+                    #if(m)
+                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
+                    #end
+                #end
             #end
-            #@tbody()
-                #@tr()
-                    #@th()所属项目#end
-                    #@td()
-                        #@Tselect2F()
-                            <script type="text/javascript">
-                                $("#${sid}").on("change",function(){
-                                    var pId = $("#${sid}  option:selected").val();
-
-                                    ajaxRead("${sid}","taskId","taskId","taskName","/quality/bug/ajax/task?taskProject="+pId,${bug?.taskId?:0});
-                                    ajaxRead("${sid}","bugOpenedBuild","buildId","buildName","/quality/bug/ajax/build?buildProject="+pId,${bug?.bugOpenedBuild?:0});
-                                    ajaxRead("${sid}","bugResolvedBuild","buildId","buildName","/quality/bug/ajax/build?buildProject="+pId,${bug?.bugResolvedBuild?:0});
-                                })
-                            </script>
-                        #@Tselect2Body("projectId" bug?.projectId?:(projectList.size()>0?projectList.get(0).projectId:0) {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                        <option value="0">/</option>
-                         #foreach(project : projectList)
-                        <option value="${project?.projectId}">${project?.projectName}</option>
-                        #end
+        #end
+    #end
+    </li>
+<li>
+#@elementItem()
+    #@colLabel()操作系统：#end
+    #@formControlDiv("col-8")
+            #@Tselect2F()
+                #@Tselect2Body("operatingSystem" bug?.operatingSystem {"class":
+                    "input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                    #foreach(os : getDict("bugOS"))
+                    #@tinyOptionItem(os.value)${os.text}#end
+                #end
+            #end
+        #end
+    #end
+#end
+    </li>
+<li>
+#@elementItem()
+    #@colLabel()浏览器：#end
+    #@formControlDiv("col-8")
+        #@Tselect2F()
+            #@Tselect2Body("browser" bug?.browser {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                #foreach(bro : getDict("bugBrowser"))
+                #@tinyOptionItem(bro.value)${bro.text}#end
+            #end
+        #end
+    #end
+#end
+#end
+    </li>
+<li>
+#@elementItem()
+    #@colLabel()关键词：#end
+    #@formControlDiv("col-8")
+        #tinyInput("text" "bugKeywords" bug?.bugKeywords {"id":"版本","class":"input-text"})
+    #end
+#end
+    </li>
+<li>
+#@elementItem()
+    #@colLabel()抄送给：#end
+    #@formControlDiv("col-8")
+        #@Tselect2F()
+            #Tselect2Ajax("bugMailto" bug?.bugMailto TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
+            {"id":"storyMailtoSelect","dataId":"orgUserId","dataText":"orgUserRealName",
+                "placeholder":"查询抄送人","multiple":"multiple"})
+            #@Tselect2Fix()
+                #set(m=menuManager.getMenu("organizationAddUser"))
+                #if(m)
+                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
+                #end
+                #set(m=menuManager.getMenu("organizationUser"))
+                #if(m)
+                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
+                #end
+            #end
+        #end
+    #end
+#end
+    </li>
+</ul>
+#end
+#@div(divClass="infoContent")
+<p class="titleName">项目/需求/任务</p>
+##该样式在comm.css样式中自定义
+<ul>
+<li>
+    #@elementItem()
+        #@colLabel()<span class="c-red">*</span>所属项目:#end
+        #@formControlDiv("col-8")
+                    #@Tselect2F()
+                    <script type="text/javascript">
+                        $("#${sid}").on("change", function () {
+                            var pjId = $("#${sid}  option:selected").val();
+                            var pId = $("input[name=productId]").val();
+                            if (pjId > 0) {
+                                ajaxRead("${sid}", "taskId", "taskId", "taskName", "/quality/bug/ajax/task?taskProject=" + pjId, ${bug?.taskId ?: 0});
+                                if(pId>0){
+                                    ajaxRead("${sid}", "bugOpenedBuild", "buildId", "buildName", "/quality/bug/ajax/build?buildProduct=" + pId+"&buildProject="+pjId, "${bug?.bugOpenedBuild?bug.bugOpenedBuild:"0"}","build");
+                                    ajaxRead("${sid}", "bugResolvedBuild", "buildId", "buildName", "/quality/bug/ajax/build?buildProduct=" + pId+"&buildProject="+pjId, "${bug?.bugResolvedBuild?bug.bugResolvedBuild:"0"}","build");
+                                }
+                            }
+                        })
+                    </script>
+                        #@Tselect2Body(
+                            "projectId" bug?.projectId?:(projectList.size()>0?projectList.get(0).projectId:0) {"class":"input-text select2","datatype":"*","nullmsg":"所属项目不能为空！"}) ##,"multiple":"multiple"加上为多选项
+                            #foreach(project : ProjectUtils.getUserProjectList())
+                            <option value="${project?.projectId}">${project?.projectName}</option>
+                            #end
                         #end
 
                         #@Tselect2Fix()
-                        <a href="${TINY_CONTEXT_PATH+adminPath}/project/addProject.page" class="r ">增加</a>
-                        <a href="${TINY_CONTEXT_PATH+adminPath}/project/allProject.page">全部</a>
+                            #set(m=menuManager.getMenu("project-op-add"))
+                            #if(m)
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
+                            #end
+                            #set(m=menuManager.getMenu("project-op-all"))
+                            #if(m)
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
+                            #end
                         #end
-                        #end
-                 #end
+                    #end
                 #end
-                    #@tr()
-                    #@th()相关需求#end
-                    #@td()
-                        #@Tselect2F()
+        #@validateDiv("col-2")#end
+            #end
+    </li>
+    <li>
+    #@elementItem()
+        #@colLabel()相关需求:#end
+        #@formControlDiv("col-8")
+                    #@Tselect2F()
                         #@Tselect2Body("storyId" "" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 
                         #end
                         #@Tselect2Fix()
-                        <a href="${TINY_CONTEXT_PATH+adminPath}/product/page/tabledemo/product-demand-add.page" class="r ">增加</a>
-                        <a href="${TINY_CONTEXT_PATH+adminPath}/product/page/project/togglebox.page">全部</a>#end
+                            #set(m=menuManager.getMenu("product-demand-add"))
+                            #if(m)
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
+                            #end
+                            #set(m=menuManager.getMenu("product-demand"))
+                            #if(m)
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
+                            #end
                         #end
                     #end
-                    #end
-                #@tr()
-                    #@th()相关任务#end
-                    #@td()
-                        #@Tselect2F()
-                        #@Tselect2Body("taskId" bug?.taskId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                #end
+            #end
+    </li>
+    <li>
+    #@elementItem()
+        #@colLabel()相关任务:#end
+        #@formControlDiv("col-8")
+                    #@Tselect2F()
+                        #@Tselect2Body(
+                            "taskId" bug?.taskId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 
                         #end
                         #@Tselect2Fix()
-                        <a href="${TINY_CONTEXT_PATH+adminPath}/project/task/add.page" class="r ">增加</a>
-                        <a href="${TINY_CONTEXT_PATH+adminPath}/project/task/index.page">全部</a>#end
+                            #set(m=menuManager.getMenu("pro-task-proposeversion"))
+                            #if(m)
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
+                            #end
+                            #set(m=menuManager.getMenu("task"))
+                            #if(m)
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
+                            #end
                         #end
                     #end
-                #end
             #end
         #end
+</li>
+</ul>
     #end
-    #@div(divClass="infoContent")
-        <p class="titleName">BUG的一生</p>
-    ##该样式在comm.css样式中自定义
-        #@table("adjustTable")
-            #@thead()
-            #end
-            #@tbody()
-                #@tr()
-                    #@th()由谁创建#end
-                    #@td()
-                        #@Tselect2F()
-                        #@Tselect2Body("bugOpenedBy" bug?.bugOpenedBy?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                        <option value="0">/</option>
-                        #foreach(user : userList)
-                        <option value="${user?.orgUserId}">${user?.orgUserAccount}</option>
-                        #end
-                        #end
-                        #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
-                        #end
-                    #end
-                #end
-                #@tr()
-                    #@th()影响版本#end
-                    #@td()
-                   #@Tselect2F()
-	                   		 #@Tselect2Body("bugOpenedBuild" bug?.bugOpenedBuild {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-
-	                    	#end                
-                	  #end
-                    #end
-                #end
-                #@tr()
-                    #@th()解决者#end
-                    #@td()
-                            #@Tselect2F()
-                            #@Tselect2Body("bugResolvedBy" bug?.bugResolvedBy?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                            <option value="0">/</option>
-                            #foreach(user : userList)
-                            <option value="${user?.orgUserId}">${user?.orgUserAccount}</option>
-                            #end
-                            #end
-                            #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
-                            #end
-                        #@validateDiv("col-2")#end
-                    #end
-                #end
-                #@tr()
-                    #@th()解决日期#end
-                    #@td()
-                        #@tinyDateInput("bugResolvedDate" formatDate(bug?.bugResolvedDate,"yyyy-MM-dd") "yyyy-MM-dd" {"datatype":"*","nullmsg":"日期不能为空"})#end
-                    #end
-                #end
-                #@tr()
-                    #@th()解决版本#end
-                    #@td()
-                        #@Tselect2F()
-	                   		 #@Tselect2Body("bugResolvedBuild" bug?.bugResolvedBuild?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-
-	                    	#end                
-                	  #end
-                        #@validateDiv("col-2")#end
-                    #end
-                #end
-                #@tr()
-                    #@th()解决方案#end
-                    #@td()
+#@div(divClass="infoContent")
+<p class="titleName">BUG的一生</p>
+##该样式在comm.css样式中自定义
+<ul>
+    <li>
+        #@elementItem()
+            #@colLabel()由谁创建:#end
+            #@formControlDiv("col-8")
                     #@Tselect2F()
-	                   		 #@Tselect2Body("bugResolution" bug?.bugResolution {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="1">方案1</option>
-	                        <option value="2">方案2</option>
-	                        <option value="3">方案3</option>
-	                    	#end                
-                	  #end
-                	  #end
-                #end
-                #@tr()
-                    #@th()由谁关闭#end
-                    #@td()
-                            #@Tselect2F()
-                            #@Tselect2Body("bugClosedBy" bug?.bugClosedBy?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                            <option value="0">/</option>
-                            #foreach(user : userList)
-                            <option value="${user?.orgUserId}">${user?.orgUserAccount}</option>
+                        #Tselect2Ajax("bugOpenedBy" bug?.bugOpenedBy TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
+                        {"id":"","dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询用户"})
+                        #@Tselect2Fix()
+                            #set(m=menuManager.getMenu("organizationAddUser"))
+                            #if(m)
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
                             #end
+                            #set(m=menuManager.getMenu("organizationUser"))
+                            #if(m)
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
                             #end
-                            #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
-                            #end
-                        #@validateDiv("col-2")#end
-                    #end
-                #end
-                #@tr()
-                    #@th()重复ID#end
-                    #@td()
-                    	#tinyInput("text" "bugDuplicateBug" bug?.bugDuplicateBug {"datatype":"","id":"抄送给","class":"input-text"})
-                    #end
-                #end
-                #@tr()
-                    #@th()关闭日期#end
-                    #@td()
-                        #@tinyDateInput("bugClosedDate" formatDate(bug?.bugClosedDate,"yyyy-MM-dd") "yyyy-MM-dd" {"datatype":"*","nullmsg":"日期不能为空"})#end
-                    #end
-                #end               
-            #end
-        #end
-    #end
-    #@div(divClass="infoContent")
-    <p class="titleName">其他相关</p>
-    ##该样式在comm.css样式中自定义
-        #@table("adjustTable")
-            #@thead()
-            #end
-            #@tbody()
-                #@tr()
-                    #@th()相关Bug#end
-                    #@td()#tinyInput("text" "linkBug" bug?.linkBug {"datatype":"","id":"抄送给","class":"input-text"})
-                    #end
-                #end
-                #@tr()
-                    #@th()相关用例#end
-                    #@td()#tinyInput("text" "linkCase" bug?.linkCase {"datatype":"","id":"抄送给","class":"input-text"})
+                        #end
                     #end
                 #end
             #end
-        #end
-    #end
+    </li>
+    <li>
+    #@elementItem()
+        #@colLabel()<span class="c-red">*</span>影响版本:#end
+        #@formControlDiv("col-8")
+                    #@Tselect2F()
+                        #@Tselect2Body("bugOpenedBuild" bug?.bugOpenedBuild {"class":"input-text select2","multiple":
+                            "multiple","datatype":"*","nullmsg":"影响版本不能为空！"}) ##,"multiple":"multiple"加上为多选项
+                        #end
+                        #@Tselect2Fix()
+                            #set(m=menuManager.getMenu("pro-version-add"))
+                            #if(m)
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
+                            #end
+                            #set(m=menuManager.getMenu("version"))
+                            #if(m)
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
+                            #end
+                        #end
+                    #end
+                #end
+        #@validateDiv("col-2")#end
+            #end
+    </li>
+<li>
+    #@elementItem()
+        #@colLabel()解决者:#end
+        #@formControlDiv("col-8")
+                    #@Tselect2F()
+                        #Tselect2Ajax("bugResolvedBy" bug?.bugResolvedBy TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
+                        {"id":"","dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询用户"})
 
-					#@dialog("myModal")
-						#@dialogHeader()对话框标题#end
-						#@dialogBody()<p>对话框内容…</p>#end
-						#@dialogFooter()
-							#@buttonEnsure()确定#end
-							#@buttonCancel()关闭#end
-                		#end	  
-                	#end
-<script>
-	$('select.select2').select2()
-</script>
+                        #@Tselect2Fix()
+                            #set(m=menuManager.getMenu("organizationAddUser"))
+                            #if(m)
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
+                            #end
+                            #set(m=menuManager.getMenu("organizationUser"))
+                            #if(m)
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
+                            #end
+                        #end
+                    #end
+                #end
+            #end
+</li>
+<li>
+    #@elementItem()
+        #@colLabel()解决日期:#end
+        #@formControlDiv("col-8")
+
+                    ${bug?.bugResolvedDate?formatDate(bug?.bugResolvedDate,"yyyy-MM-dd hh-mm-ss"):""}
+                #end
+            #end
+</li>
+    <li>
+    #@elementItem()
+        #@colLabel()解决版本:#end
+        #@formControlDiv("col-8")
+                    #@Tselect2F()
+                        #@Tselect2Body("bugResolvedBuild" bug?.bugResolvedBuild?:0 {"class":
+                            "input-text select2"}) ##,"multiple":"multiple"加上为多选项
+
+
+                        #end
+                        #@Tselect2Fix()
+                            #set(m=menuManager.getMenu("pro-version-add"))
+                            #if(m)
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
+                            #end
+                            #set(m=menuManager.getMenu("version"))
+                            #if(m)
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
+                            #end
+                        #end
+                    #end
+                #end
+            #end
+</li>
+<li>
+    #@elementItem()
+        #@colLabel()解决方案:#end
+        #@formControlDiv("col-8")
+                    #@Tselect2F()
+                        #@Tselect2Body("bugResolution" bug?.bugResolution {"class":
+                            "input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        <option value=""></option>
+                            #foreach(re : getDict("bugResolution"))
+                            #@tinyOptionItem(re.value)${re.text}#end
+                        #end
+                    #end
+                #end
+            #end
+        #end
+</li>
+    <li>
+#@elementItem()
+    #@colLabel()由谁关闭:#end
+    #@formControlDiv("col-8")
+                #@Tselect2F()
+                    #Tselect2Ajax("bugClosedBy" bug?.bugClosedBy TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
+                    {"id":"","dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询用户"})
+
+                    #@Tselect2Fix()
+                        #set(m=menuManager.getMenu("organizationAddUser"))
+                        #if(m)
+                        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
+                        #end
+                        #set(m=menuManager.getMenu("organizationUser"))
+                        #if(m)
+                        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
+                        #end
+                    #end
+                #end
+            #end
+        #end
+    </li>
+    <li>
+#@elementItem()
+    #@colLabel()重复ID:#end
+    #@formControlDiv("col-8")
+                #tinyInput(
+                    "text" "bugDuplicateBug" bug?.bugDuplicateBug {"id":"抄送给","class":"input-text"})
+            #end
+        #end
+    </li>
+    <li>
+#@elementItem()
+    #@colLabel()关闭日期:#end
+    #@formControlDiv("col-8")
+                ${bug?.bugClosedDate?formatDate(bug?.bugClosedDate,"yyyy-MM-dd hh-mm-ss"):""}
+            #end
+    #end
+</li>
+</ul>
+#end
+#@div(divClass="infoContent")
+<p class="titleName">其他相关:</p>
+##该样式在comm.css样式中自定义
+<ul>
+    <li>
+#@elementItem()
+    #@colLabel()相关Bug:#end
+    #@formControlDiv("col-8")
+        #tinyInput("text" "linkBug" bug?.linkBug {"id":"抄送给","class":"input-text"})
+                #end
+            #end
+    </li>
+    <li>
+#@elementItem()
+    #@colLabel()相关用例:#end
+    #@formControlDiv("col-8")
+         #tinyInput("text" "linkCase" bug?.linkCase {"id":"抄送给","class":"input-text"})
+
+            #end
+        #end
+</li>
+</ul>
+#end

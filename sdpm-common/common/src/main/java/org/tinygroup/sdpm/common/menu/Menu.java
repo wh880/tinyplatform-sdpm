@@ -146,9 +146,25 @@ public class Menu implements Serializable, Comparable<Menu> {
     }
 
     public int compareTo(Menu o) {
-        if (o != null && o.getSort() != null) {
+        if (o != null && o.getSort() != null && sort != null) {
             return o.getSort() - sort;
         }
         return 0;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj != null) {
+            Menu menu = (Menu) obj;
+            if (menu.getId() != null) {
+                return menu.getId().equals(getId());
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
     }
 }

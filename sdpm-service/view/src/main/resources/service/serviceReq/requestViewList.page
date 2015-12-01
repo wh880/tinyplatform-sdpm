@@ -13,10 +13,22 @@
     <input type="hidden" name="clientRequestId" value="${request?.clientRequestId}"/>
     <input type="hidden" name="requester" value="${request?.requester}"/>
     <input type="hidden" name="reviewId" value="${review?.reviewId}"/>
+    <input type="hidden" name="treeId" value="${treeId}"/>
+    <input type="hidden" name="status" value="${status}"/>
+    <input type="hidden" name="operation" value="${operation}"/>
     <div style="width:70%;margin-left: 200px" class="pageleftpart">
     <div class="infoContent">
         <p class="titleName">回访</p>
 
+        #@elementItem()
+        <div class="col-12">
+            <div class="col-2 text-r"><label>请求标题：</label></div>
+
+            <div class="col-9">
+                <td>${request?.requestTitle}</td>
+            </div>
+            #@validateDiv("col-2")#end
+        #end
         #@elementItem()
         <div class="col-12">
             <div class="col-2 text-r"><label>请求描述：</label></div>
@@ -40,7 +52,8 @@
         #@elementItem()
             #@sdpmItem("回访者" "*")
                 #tinyInput(
-                    "text" "reviewer" review?.reviewer {"datatype":"*","nullmsg":"回访者不能为空","id":"回复人员","class":
+                    "text" "reviewer" review?.reviewer?:currentReviewer {"datatype":"*","nullmsg":"回访者不能为空","id":"回复人员",
+                    "class":
                     "input-text"})
             #end
         #end
@@ -51,9 +64,9 @@
                     #@Tselect2Body(
                         "reviewType" review?.reviewType{"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         #@tinyOptionItem("")请选择#end
-                        #@tinyOptionItem("0")发放回访#end
-                        #@tinyOptionItem("1")拒绝需求回访#end
-                        #@tinyOptionItem("2")无修改需求回访#end
+                        #foreach(item : getDict("reviewType"))
+                            #@tinyOptionItem(item.value)${item.text}#end
+                        #end
                     #end
                 #end
             #end
@@ -66,11 +79,9 @@
                         "回访评分不能为空！","id":
                         "request_title", "class":"input-text select2"})
                         #@tinyOptionItem("")请选择#end
-                        #@tinyOptionItem("0")很不满意#end
-                        #@tinyOptionItem("1")不满意#end
-                        #@tinyOptionItem("2")一般#end
-                        #@tinyOptionItem("3")满意#end
-                        #@tinyOptionItem("4")非常满意#end
+                        #foreach(item : getDict("reviewScore"))
+                            #@tinyOptionItem(item.value)${item.text}#end
+                        #end
                     #end
                 #end
             #end
@@ -78,25 +89,33 @@
         #@elementItem()
             #@sdpmItem("回访时间" "*")
                 #@tinyDateInput(
-                    "reviewDate" formatDate(review?.reviewDate,
-                    "yyyy-MM-dd") "YYYY-MM-DD" {"style":"width:200px","datatype":"*","nullmsg":"日期不能为空"})#end
+                    "reviewDate" formatDate(review?.reviewDate?:now(),
+                "yyyy-MM-dd") "YYYY-MM-DD" {"style":"width:120px","datatype":"*","nullmsg":"日期不能为空"})#end
             #end
             #@validateDiv("col-2")#end
         #end
         #@elementItem()
-            <div class="col-2 text-r"><label><span class="c-red">*</span>回访描述：</label></div>
-            #@formControlDiv("col-8")
-                #@tinyTextarea(
-                    "reviewSpec" {"placeholder":"说点什么...最少输入10个字符","datatype":"*10-500","nullmsg":"描述不能为空！"})${review
-                    ?.reviewSpec}#end
-            #end
+            <div class="col-12">
+                <div class="col-2 text-r"><label>回访描述：</label></div>
+                <div class="col-9">
+                    #@Teditor("content" "reviewSpec" {"initialFrameHeight":"300"})${review?.reviewSpec}#end</div>
+            </div>
             #@validateDiv("col-2")#end
         #end
+    ##        #@elementItem()
+    ##            <div class="col-2 text-r"><label><span class="c-red">*</span>回访描述：</label></div>
+    ##            #@formControlDiv("col-8")
+    ##                #@tinyTextarea(
+    ##                    "reviewSpec" {"datatype":"*","nullmsg":"描述不能为空！"})${review
+    ##                    ?.reviewSpec}#end
+    ##            #end
+    ##            #@validateDiv("col-2")#end
+    ##        #end
 
         #@elementItem()
             #@colLabel()是否通过：#end
             #@formControlDiv("col-8")
-                #Tswitcher("reviewResult" ["0","1"] review?.reviewResult) ##第二个为选中状态 第三参数为数据库返回时的数据
+                #Tswitcher("reviewResult" ["0","1"] review?.reviewResult?:1) ##第二个为选中状态 第三参数为数据库返回时的数据
             #end
         #end
 
@@ -107,7 +126,7 @@
 
                 </div>
                 <div class="col-1">
-                    <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
+                    <button style="float: left" type="submit" id="submit2" class="commitBtn">保存</button>
                 </div>
                 <div class="col-1">
                     #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end
@@ -120,14 +139,20 @@
 #end
 
     <script type="text/javascript">
-        $(".select2").select2();
+        $("select.select2").select2();
     </script>
+
     <script type="text/javascript">
         $(function () {
-            $("form[name=thisform").Validform({
-                tiptype: 2
-
+            $("form[name=thisform]").Validform({
+                tiptype: 2,
+                beforeSubmit: function () {
+                    var replySpecText = $("textarea[name=reviewSpec]").val();
+                    if (!replySpecText) {
+                        layer.msg("回访描述不能为空");
+                        return false;
+                    }
+                }
             });
         });
     </script>
-

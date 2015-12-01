@@ -1,0 +1,29 @@
+#!set(activeTitle="项目管理",activeMenuId=currentPageId)
+#set(name="version")
+#@div()
+    #@tabWithInit("tab_demo" "optionsBox")
+        #@div(divClass="dropdownBox")
+            #include("/project/dropdownMenu.page")
+        #end
+        #@tabHead()
+            #include("/project/protab.page")
+        #end
+        #@tabBodyCol("ptop-5")
+
+        ##operationbar start1
+            #@div(divClass="operationbar")
+            <span class="f">
+					版本列表
+				</span>
+            <span class="r c">
+                    #foreach(m:menuManager.getScopeMenus("pro-versionmenu-op"))
+                       <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
+                    #end
+				</span>
+                #div(divClass="clearfix")
+            #end
+        ##operationbar end
+            #include("/project/build/togglebox.page")
+        #end
+    #end
+#end

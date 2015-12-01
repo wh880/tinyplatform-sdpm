@@ -1,12 +1,12 @@
 /**
  * Copyright (c) 1997-2013, www.tinygroup.org (luo_guo@icloud.com).
- * <p/>
+ * <p>
  * Licensed under the GPL, Version 3.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p/>
+ * <p>
  * http://www.gnu.org/licenses/gpl.html
- * <p/>
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -24,23 +24,31 @@ public interface UserService {
     /**
      * 根据主键id查找用户
      *
-     * @param id 主键
+     * @param id
      * @return
      */
     OrgUser findUser(String id);
 
     /**
-     * 根据主键id查找用户
+     * 根据用户名刚查找用户
      *
      * @param account 用户名
      * @return
      */
     OrgUser findUserByAccount(String account);
 
+    /**
+     * 对象查询用户pager
+     *
+     * @param start
+     * @param limit
+     * @param orgUser
+     * @return
+     */
     Pager<OrgUser> findUserPager(Integer start, Integer limit, OrgUser orgUser);
 
     /**
-     * 根据条件查询List
+     * 根据条件查询用户List
      *
      * @param orgUser 用于查询条件
      * @return
@@ -48,7 +56,7 @@ public interface UserService {
     List<OrgUser> findUserList(OrgUser orgUser);
 
     /**
-     * 根据部门Id查询list
+     * 根据部门Id查询用户pager
      * @param deptId
      * @return
      */
@@ -85,6 +93,7 @@ public interface UserService {
      * @return
      */
     int[] deleteBatchUser(List<OrgUser> list);
+
     /**
      * 验证密码
      *
@@ -92,6 +101,28 @@ public interface UserService {
      * @param password      密文密码
      * @return 验证成功返回true
      */
-    boolean validatePassword(String plainPassword, String password);
+    Boolean validatePassword(String plainPassword, String password);
 
+    /**
+     * 根据用户id数组查出用户list
+     *
+     * @param
+     * @return
+     */
+    List<OrgUser> findUserListByIds(String[] userId);
+
+    /**
+     * 根据项目id查找团队成员list
+     *
+     * @param
+     * @return
+     */
+    List<OrgUser> findTeamUserListByProjectId(Integer projectId);
+
+    /**
+     * 根据名称条件查询
+     * @param condition
+     * @return
+     */
+    List<OrgUser> userInCondition(String condition, String[] ids);
 }

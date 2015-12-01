@@ -2,27 +2,64 @@
 <input type="hidden" name="records" value="${num}"/>
 #end
 
-
-
 #set(records=bugPage.getTotalCount(),temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
 #if (pagesize>records-pagesize*(page-1))
     #set(pagesize=records-(page-1)*pagesize)
 #end
 #setTinyItemCount(records)
-#for(b : bugPage.getRecords())
+#foreach(b : bugPage.getRecords())
 #@tr()
     #@td()<input type="checkbox" value="1" name="idCheck">#end
-    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/bugInfo.page">${b?.bugId}</a>#end
+    #@td()${b?.no}#end
     #@td()${b?.bugSeverity}#end
     #@td()${b?.priority}#end
-    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/bugInfo.page">${b?.bugTitle}#end
-    #@td()${b?.bugOpenedBy}#end
-    #@td()${b?.bugAssignedTo}#end
-    #@td()${b?.bugResolvedBy}#end
+    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/bug/bugInfo?bugId=${b?.bugId}">${"["+(bug?.bugConfirmed==0?"未确认":"已确认")+"]"+b?.bugTitle}#end
+    #@td("nowrap")${b?.bugOpenedBy?UserUtils.getUserById(b?.bugOpenedBy)?.orgUserRealName:""}#end
+    #@td("nowrap")${b?.bugAssignedTo?UserUtils.getUserById(b?.bugAssignedTo)?.orgUserRealName:""}#end
+    #@td("nowrap")${b?.bugResolvedBy?UserUtils.getUserById(b?.bugResolvedBy)?.orgUserRealName:""}#end
     #@td()${b?.bugResolution}#end
-    #@td()
-        #foreach(m:menuManager.getScopeMenus("pro-bug-op"))
-            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+    #@td("nowrap")
+        #foreach(m:menuManager.getScopeMenus("testbug-op"))
+            #if(m.sort=="6")
+                #if(b?.bugConfirmed==1)
+                    <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>
+                #else
+                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${b?.bugId}"
+                       title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+                #end
+            #end
+            #if(m.sort=="5")
+                #if(b?.bugConfirmed==1)
+                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${b?.bugId}"
+                       title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+                #else
+                    <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>
+                #end
+            #end
+            #if(m.sort=="4")
+                #if(b?.bugStatus=="1"&&b?.bugConfirmed==1)
+                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${b?.bugId}"
+                       title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+                #else
+                    <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>
+                #end
+            #end
+            #if(m.sort=="3")
+                #if(b?.bugStatus=="2")
+                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${b?.bugId}"
+                       title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+                #else
+                    <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>
+                #end
+            #end
+            #if(m.sort=="2")
+                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${b?.bugId}"
+                   title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+            #end
+            #if(m.sort=="1")
+                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${b?.bugId}"
+                   title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+            #end
         #end
     #end
 #end

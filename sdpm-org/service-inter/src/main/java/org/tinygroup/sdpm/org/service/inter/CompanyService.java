@@ -3,6 +3,8 @@ package org.tinygroup.sdpm.org.service.inter;
 
 import org.tinygroup.sdpm.org.dao.pojo.OrgCompany;
 
+import java.util.List;
+
 public interface CompanyService {
     /**
      * 根据主键id查找公司
@@ -29,11 +31,10 @@ public interface CompanyService {
     OrgCompany updateCompany(OrgCompany orgCompany);
 
     /**
-     * 根据id进行软删除公司
+     * 查找表中的公司记录
      *
-     * @param id 主键
      * @return
      */
-    Integer deleteCompany(Integer id);
+    List<OrgCompany> findCompanyList();
 
 }

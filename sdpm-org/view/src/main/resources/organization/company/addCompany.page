@@ -1,0 +1,120 @@
+#set(name="organizationCompany")
+#include("/common/common.page")
+#@div()
+    #@tabWithInit("tab_demo" "optionsBox")
+        #@tabHead()
+            #include("/organization/common/tab.page")
+        #end
+    #end
+
+    #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/org/company/add" "post" {"class":"test","enctype":
+        "multipart/form-data"})
+        #@noRespsGridSystem()
+        <div class="infoContent">
+            <p class="titleName">添加公司信息</p>
+            #@gridSysRow()
+                #@elementItem()
+                    #@colLabel("col-3")<span class="c-red">*</span>公司名称：#end
+                    #@formControlDiv("col-6")
+                        #tinyInput(
+                            "text" "orgCompanyName" company?.orgCompanyName{"placeholder":"输入公司名称","datatype":"*",
+                            "nullmsg":
+                            "请输入公司名称！","id":"name","class":
+                            "input-text"})
+                    #end
+                    #@validateDiv("col-2")#end
+                #end
+                #@elementItem()
+                    #@colLabel("col-3")联系电话：#end
+                    #@formControlDiv("col-6")
+                        #tinyInput(
+                            "text" "orgCompanyPhone" company?.orgCompanyPhone {"placeholder":"请输入联系电话",
+                            "id":"phone",
+                            "class":
+                            "input-text"})
+                    #end
+                    #@validateDiv("col-3")#end
+                #end
+                #@elementItem()
+                    #@colLabel("col-3")传真：#end
+                    #@formControlDiv("col-6")
+                        #tinyInput(
+                            "text" "orgCompanyFax" company?.orgCompanyFax {"placeholder":"请输入传真",
+                            "id":"org_user_real_name","class":
+                            "input-text"})
+                    #end
+                    #@validateDiv("col-3")#end
+                #end
+                #@elementItem()
+                    #@colLabel("col-3")通讯地址：#end
+                    #@formControlDiv("col-6")
+                        #tinyInput(
+                            "text" "orgCompanyAddress" company?.orgCompanyAddress{"placeholder":"请输入通讯地址",
+                            "id":"phone",
+                            "class":
+                            "input-text"})
+                    #end
+                    #@validateDiv("col-3")#end
+                #end
+                #@elementItem()
+                    #@colLabel("col-3")邮政编码：#end
+                    #@formControlDiv("col-6")
+                        #tinyInput(
+                            "text" "orgCompanyZipCode" company?.orgCompanyZipCode{"placeholder":"请输入邮政编码",
+                            "id":"phone",
+                            "class":
+                            "input-text"})
+                    #end
+                    #@validateDiv("col-3")#end
+                #end
+                #@elementItem()
+                    #@colLabel("col-3")官网：#end
+                    #@formControlDiv("col-6")
+                        #tinyInput(
+                            "text" "orgCompanyWebsite" company?.orgCompanyWebsite{"placeholder":"请输入官网",
+                            "id":"phone",
+                            "class":
+                            "input-text"})
+                    #end
+                    #@validateDiv("col-3")#end
+                #end
+                #@elementItem()
+                    #@colLabel("col-3")内网：#end
+                    #@formControlDiv("col-6")
+                        #tinyInput(
+                            "text" "orgCompanyBackyard" company?.orgCompanyBackyard{"placeholder":"请输入内网",
+                            "id":"phone",
+                            "class":
+                            "input-text"})
+                    #end
+                    #@validateDiv("col-3")#end
+                #end
+                #@elementItem()
+                    #@colLabel("col-3")公司LOGO：
+                    #end
+                    #@formControlDiv("col-6")
+                        #tinyUploadInputMini("orgCompanyLogo",company?.orgCompanyLogo)
+                    #end
+                    #@validateDiv("col-2")#end
+                #end
+            </div>
+            #end
+            #@gridSysRow()
+
+                #@gridSysCol(7)
+                    #@div(divClass="col-7 col-offset-5 form-inline")
+                        #tinyInput("submit" "submitbtn" " 提交 " {"class":"btn btn-primary"})
+                    #end
+                #end
+            #end
+        #end
+    #end
+<script type="text/javascript">
+    $(function () {
+        $("form[name=thisform]").Validform({
+            tiptype: 2
+        });
+    });
+</script>
+
+#end

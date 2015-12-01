@@ -15,8 +15,11 @@
     <properties>
         <validator.version>5.1.1.Final</validator.version>
         <shiro.version>1.2.3</shiro.version>
+        <ehcache.version>2.10.1</ehcache.version>
+        <jackson.version>2.2.3</jackson.version>
     </properties>
     <dependencies>
+
         <!--session存储-->
         <dependency>
             <groupId>org.tinygroup</groupId>
@@ -56,11 +59,11 @@
             <artifactId>sdpm-org-service-impl</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.tinygroup</groupId>
-            <artifactId>sdpm-org-service-wrapper</artifactId>
-            <version>${project.version}</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.tinygroup</groupId>-->
+            <!--<artifactId>sdpm-org-service-wrapper</artifactId>-->
+            <!--<version>${project.version}</version>-->
+        <!--</dependency>-->
 
         <!--service-->
         <dependency>
@@ -101,12 +104,7 @@
             <artifactId>sdpm-common-view</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <!--<dependency>-->
-        <!--<groupId>org.tinygroup</groupId>-->
-        <!--<artifactId>sdpm-service-view</artifactId>-->
-        <!--<version>${project.version}</version>-->
-        <!--</dependency>-->
-        
+
         <!-- quality -->
         <dependency>
             <groupId>org.tinygroup</groupId>
@@ -123,8 +121,9 @@
             <artifactId>sdpm-quality-service-wrapper</artifactId>
             <version>${project.version}</version>
         </dependency>
-       <!-- quality end -->
-              	
+        <!-- quality end -->
+
+        <!--document start-->
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>sdpm-document-view</artifactId>
@@ -140,8 +139,8 @@
             <artifactId>sdpm-document-service-wrapper</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <!--document end-->
 
-      	
         <!-- product -->
         <dependency>
             <groupId>org.tinygroup</groupId>
@@ -159,7 +158,7 @@
             <version>${project.version}</version>
         </dependency>
         <!-- product end -->
-        	
+
         <!-- productLine -->
         <dependency>
             <groupId>org.tinygroup</groupId>
@@ -177,7 +176,7 @@
             <version>${project.version}</version>
         </dependency>
         <!-- productLine end -->
-        
+
         <!-- project -->
         <dependency>
             <groupId>org.tinygroup</groupId>
@@ -194,12 +193,23 @@
             <artifactId>sdpm-project-service-wrapper</artifactId>
             <version>${project.version}</version>
         </dependency>
-
+        <!-- statistic -->
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>sdpm-statistic-view</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>sdpm-statistic-service-impl</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>sdpm-statistic-service-wrapper</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <!-- statistic end -->
 
         <!--spring版本-->
         <dependency>
@@ -217,17 +227,20 @@
                 <!--</exclusion>-->
             </exclusions>
         </dependency>
+
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>org.tinygroup.spring305</artifactId>
             <version>${tiny_version}</version>
         </dependency>
+
         <!--引入SpringMVC-->
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>org.tinygroup.springmvc</artifactId>
             <version>${tiny_version}</version>
         </dependency>
+
         <!-- bean validate -->
         <dependency>
             <groupId>org.hibernate</groupId>
@@ -248,21 +261,23 @@
             <version>${tiny_version}</version>
         </dependency>
 
-
         <dependency>
             <groupId>org.tinygroup</groupId>
-            <artifactId>org.tinygroup.templateweblayer</artifactId>
+            <artifactId>org.tinygroup.weblayer</artifactId>
             <version>${tiny_version}</version>
             <exclusions>
                 <exclusion>
-                    <artifactId>servlet-api-2.5</artifactId>
-                    <groupId>org.mortbay.jetty</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>servlet-api</artifactId>
                     <groupId>javax.servlet</groupId>
+                    <artifactId>servlet-api</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
@@ -273,25 +288,7 @@
 
         <dependency>
             <groupId>org.tinygroup</groupId>
-            <artifactId>org.tinygroup.flowprocessor</artifactId>
-            <version>${tiny_version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.tinygroup</groupId>
             <artifactId>org.tinygroup.cepcoreimpl</artifactId>
-            <version>${tiny_version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.tinygroup</groupId>
-            <artifactId>org.tinygroup.flowservicecomponent</artifactId>
-            <version>${tiny_version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.tinygroup</groupId>
-            <artifactId>org.tinygroup.flowbasiccomponent</artifactId>
             <version>${tiny_version}</version>
         </dependency>
 
@@ -323,12 +320,14 @@
         </dependency>
         <!-- SECURITY end -->
 
+        <!-- CACHE begin -->
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>3.8.1</version>
-            <scope>test</scope>
+            <groupId>net.sf.ehcache</groupId>
+            <artifactId>ehcache</artifactId>
+            <version>${ehcache.version}</version>
         </dependency>
+        <!-- CACHE end -->
+
     </dependencies>
     <build>
         <finalName>${project.name}</finalName>
@@ -341,24 +340,23 @@
             <plugin>
                 <groupId>org.mortbay.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
-                <version>7.6.16.v20140903</version>
+                <version>8.1.16.v20140903</version>
                 <configuration>
+                    <webApp>
+                        <contextPath>/${project.name}</contextPath>
+                    </webApp>
+                    <!--<httpConnector>-->
+                    <!--<port>8989</port>-->
+                    <!--</httpConnector>-->
                     <connectors>
                         <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
                             <port>8989</port>
+                            <maxIdleTime>60000</maxIdleTime>
                         </connector>
                     </connectors>
-                    <webAppConfig>
-                        <contextPath>/${project.name}</contextPath>
-                    </webAppConfig>
-                    <systemProperties>
-                        <systemProperty>
-                            <name>org.mortbay.util.URI.charset</name>
-                            <value>${project.build.sourceEncoding}</value>
-                        </systemProperty>
-                    </systemProperties>
-                    <stopKey/>
-                    <stopPort/>
+                    <scanIntervalSeconds>10</scanIntervalSeconds>
+                    <stopKey>foo</stopKey>
+                    <stopPort>9999</stopPort>
                 </configuration>
             </plugin>
         </plugins>

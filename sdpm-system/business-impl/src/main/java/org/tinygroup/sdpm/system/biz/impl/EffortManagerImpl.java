@@ -1,112 +1,103 @@
 package org.tinygroup.sdpm.system.biz.impl;
 
-import java.util.Date;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.tinygroup.commons.tools.ArrayUtil;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.system.biz.inter.EffortManager;
 import org.tinygroup.sdpm.system.dao.SystemEffortDao;
 import org.tinygroup.sdpm.system.dao.pojo.SystemEffort;
 import org.tinygroup.tinysqldsl.Pager;
+
+import java.util.Date;
+import java.util.List;
+
 @Service
 @Transactional
 public class EffortManagerImpl implements EffortManager {
-	@Autowired
+    @Autowired
     private SystemEffortDao systemEffortDao;
-	
-	
-	public SystemEffort add(SystemEffort systemEffort) {
-		// TODO Auto-generated method stub
-		return systemEffortDao.add(systemEffort);
-	}
 
-	public SystemEffort updata(SystemEffort systemEffort) {
-		// TODO Auto-generated method stub
-		systemEffortDao.edit(systemEffort);
-		return systemEffort;
-	}
+    public SystemEffort add(SystemEffort systemEffort) {
+        return systemEffortDao.add(systemEffort);
+    }
 
-	public Integer delete(SystemEffort SystemEffort) {
-		// TODO Auto-generated method stub
-		int pk=SystemEffort.getEffortId();
-		return systemEffortDao.deleteByKey(pk);
-	}
+    public Integer batchAdd(List<SystemEffort> list) {
+        int[] result = systemEffortDao.batchInsert(list);
+        if (ArrayUtil.isEmptyArray(result)) {
+            return 0;
+        }
+        return result.length;
+    }
 
-	public List<SystemEffort> findByAccount(String effortAccount) {
-		// TODO Auto-generated method stub
-		SystemEffort systemEffort= new SystemEffort();
-		systemEffort.setEffortAccount(effortAccount);
-		return systemEffortDao.query(systemEffort);
-	}
+    public SystemEffort update(SystemEffort systemEffort) {
+        systemEffortDao.edit(systemEffort);
+        return systemEffort;
+    }
 
-	public List<SystemEffort> findByProject(int project) {
-		// TODO Auto-generated method stub
-		SystemEffort systemEffort = new SystemEffort();
-		systemEffort.setEffortProject(project);
-		return systemEffortDao.query(systemEffort);
-	}
+    public Integer delete(SystemEffort SystemEffort) {
+        int pk = SystemEffort.getEffortId();
+        return systemEffortDao.deleteByKey(pk);
+    }
 
-	public Pager<SystemEffort> findByPage(int start, int limit, SystemEffort SystemEffort,String sortName, boolean asc) {
-		// TODO Auto-generated method stub
-		if (StringUtil.isBlank(sortName)) {
-		return systemEffortDao.queryPager(start, limit, SystemEffort);
-		 }
-		OrderBy orderBy = new OrderBy(sortName, asc);
-		return systemEffortDao.queryPager(start, limit, SystemEffort, orderBy);
-	}
+    public List<SystemEffort> findByAccount(String effortAccount) {
+        SystemEffort systemEffort = new SystemEffort();
+        systemEffort.setEffortAccount(effortAccount);
+        return systemEffortDao.query(systemEffort);
+    }
 
-	public List<SystemEffort> findByDate(Date date) {
-		// TODO Auto-generated method stub
-		SystemEffort systemEffort = new SystemEffort();
-		systemEffort.setEffortDate(date);
-		return systemEffortDao.query(systemEffort);
-	}
+    public List<SystemEffort> findByProject(int project) {
+        SystemEffort systemEffort = new SystemEffort();
+        systemEffort.setEffortProject(project);
+        return systemEffortDao.query(systemEffort);
+    }
 
-	public List<SystemEffort> find(SystemEffort systemEffort) {
-		// TODO Auto-generated method stub
-		return systemEffortDao.query(systemEffort);
-	}
+    public Pager<SystemEffort> findByPage(int start, int limit, SystemEffort SystemEffort, String sortName, boolean asc) {
+        if (StringUtil.isBlank(sortName)) {
+            return systemEffortDao.queryPager(start, limit, SystemEffort);
+        }
+        OrderBy orderBy = new OrderBy(sortName, asc);
+        return systemEffortDao.queryPager(start, limit, SystemEffort, orderBy);
+    }
 
-	public List<SystemEffort> findBetweenDate(Date begindate, Date enddate) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public List<SystemEffort> findByDate(Date date) {
+        SystemEffort systemEffort = new SystemEffort();
+        systemEffort.setEffortDate(date);
+        return systemEffortDao.query(systemEffort);
+    }
 
-	public List<SystemEffort> findList(SystemEffort systemEffort, String order,
-			String orderType) {
-		// TODO Auto-generated method stub
-		return systemEffortDao.query(systemEffort, new OrderBy(order, !("desc".equals(orderType))?true:false));
-	}
+    public List<SystemEffort> find(SystemEffort systemEffort) {
+        return systemEffortDao.query(systemEffort);
+    }
 
-	public int batchDelete(Integer... ids) {
-		// TODO Auto-generated method stub
-		return systemEffortDao.deleteByKeys(ids);
-	}
+    public List<SystemEffort> findBetweenDate(SystemEffort t, Date beginDate, Date endDate) {
+        return systemEffortDao.findBetweenDate(t, beginDate, endDate);
+    }
 
-	public Pager<SystemEffort> findByDate(int start, int limit,
-			SystemEffort effort, Date startDate, Date endDate, String sortName,
-			boolean asc) {
-		// TODO Auto-generated method stub
-		if (StringUtil.isBlank(sortName)) {
-			return systemEffortDao.findByDate(start, limit, effort, startDate, endDate);
-		}
-		OrderBy orderBy = new OrderBy(sortName, asc);
-		return systemEffortDao.findByDate(start, limit, effort, startDate, endDate, orderBy);
-	}
+    public List<SystemEffort> findList(SystemEffort systemEffort, String order,
+                                       String orderType) {
+        return systemEffortDao.query(systemEffort, new OrderBy(order, !("desc".equals(orderType)) ? true : false));
+    }
 
-	public SystemEffort findById(int id) {
-		// TODO Auto-generated method stub
-		return systemEffortDao.getByKey(id);
-	}
+    public int batchDelete(Integer... ids) {
+        return systemEffortDao.deleteByKeys(ids);
+    }
 
-	
-//public List<SystemEffort> findBetweenDate(Date begindate, Date enddate) {
-//		// TODO Auto-generated method stub
-////		return SystemEffortDao.findBetweenDate(begindate, enddate);
-//	}
+    public Pager<SystemEffort> findByDate(int start, int limit,
+                                          SystemEffort effort, Date startDate, Date endDate, String sortName,
+                                          boolean asc) {
+        if (StringUtil.isBlank(sortName)) {
+            return systemEffortDao.findByDate(start, limit, effort, startDate, endDate);
+        }
+        OrderBy orderBy = new OrderBy(sortName, asc);
+        return systemEffortDao.findByDate(start, limit, effort, startDate, endDate, orderBy);
+    }
+
+    public SystemEffort findById(Integer id) {
+        return systemEffortDao.getByKey(id);
+    }
+
 
 }

@@ -1,49 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <menu id="productLine" parent-id="0" name="产品线" href="/productLine/to" icon="icon-th-large"
-	sort="900" isShow="1">
+      sort="900" isShow="1">
 
-	<menu id="line-product" parent-id="productLine" name="产品" href="/productLine/page/project/productLine.page" icon="" sort="200"
-		isShow="1" scope="productLine-left"></menu>
-	<menu id="overview" parent-id="productLine" name="概况" href="/productLine/find/overview?productLineId=${sessionProductLineId}" icon="" sort="100"
-		isShow="1" scope="productLine-left">
-
-        <menu id="productLine-close" parent-id="overview" name="关闭" href="/productLine/page/tabledemo/close.pagelet"
-              icon="icon-off"
-              sort="99" isShow="1" scope="productLine-overview">
-            <map>
-                <property key="type" value="aModal"/>
-            </map>
-        </menu>
-		<menu id="productLine-edit" parent-id="overview" name="编辑" href="/productLine/page/tabledemo/add.page" icon="icon-pencil"
+    <!--<menu id="line-product" parent-id="productLine" name="产品线"-->
+    <!--href="/productLine/listProduct?productLineId=${sessionProductLineId}" icon="" sort="200"-->
+    <!--isShow="1" scope="productLine-left">-->
+    <!--</menu>-->
+    <menu id="overview" parent-id="productLine" name="操作产品线"
+          href="/productLine/find/overview" icon="" sort="100"
+          isShow="1" scope="productLine-left">
+        <menu id="productLine-edit" parent-id="overview" name="编辑产品线"
+              href="/productLine/find?productLineId=${productLine.productLineId}"
+              icon="icon-pencil"
               sort="98" isShow="1" scope="productLine-overview">
             <map>
-                <property key="type" value="editor"/>
+                <property key="type" value="update"/>
             </map>
         </menu>
-        <menu id="productLine-del" parent-id="overview" name="删除" href="/tinyuiweb/action/del.pagelet"
+        <menu id="productLine-del" parent-id="overview" name="删除产品线"
+              href="/productLine/delete?productLineId=${productLine.productLineId}"
               icon="icon-remove"
               sort="97" isShow="1" scope="productLine-overview">
             <map>
                 <property key="type" value="delete"/>
             </map>
         </menu>
-        <menu id="productLine-back" parent-id="overview" name="返回" href="" icon="icon-reply"
-              sort="96" isShow="1" scope="productLine-overview">
-            <map>
-                <property key="type" value="back"/>
-            </map>
+        <!--<menu id="newpro" parent-id="line-product" name="添加产品" href="/product/addproduct/addition" sort="199"-->
+        <!--isShow="1" scope="product-new" icon="icon-plus-sign">-->
+        <!--</menu>-->
+        <menu id="productLine-add" parent-id="overview" name="添加产品线" href="/productLine/content/add"
+              icon="icon-plus-sign"
+              sort="200" isShow="1" scope="productLine-right">
         </menu>
-		
-		</menu>
+    </menu>
 
-    <menu id="productLine-list" parent-id="productLine" name="所有产品线" href="/productLine/page/tabledemo/list.page"
-          icon="icon-globe" sort="400"
-          isShow="1" scope="productLine-right">
-		<menu id="allproductline-edit" name="产品线编辑" href="/productLine/find?productLineId=${productLine.productLineId}"
-			icon="icon-pencil" sort="100" isShow="1" scope="productLine-all" />
-		<menu id="allproductline-remove" name="删除" href="/productLine/delete?productLineId=${productLine.productLineId}"
-			icon="icon-remove" sort="99" isShow="1" scope="productLine-all" />
-	</menu>
-	<menu id="productLine-add" parent-id="productLine" name="添加产品线" href="/productLine/page/tabledemo/add.page" icon="icon-plus-sign"
-		sort="200" isShow="1" scope="productLine-right"></menu>
+    <!--<menu id="productLine-list" parent-id="productLine" name="所有产品线" href="/productLine/content/all"-->
+    <!--icon="icon-globe" sort="400"-->
+    <!--isShow="1" scope="productLine-right">
+</menu>-->
+    <menu id="productLine-view" parent-id="productLine" name="浏览产品线">
+        <menu id="productLine-view-all" parent-id="productLine-view" name="全部产品线" href="/productLine/to?status=1"
+              sort="103"
+              isShow="1" scope="productLineView,productLine-right" icon="icon-plus-sign">
+        </menu>
+        <menu id="productLine-belongMe" parent-id="productLine-view" name="归我所属" href="/productLine/to?status=2"
+        sort="102"
+        isShow="1" scope="productLineView">
+        </menu>
+        <menu id="productLine-chargeMe" parent-id="productLine-view" name="由我负责" href="/productLine/to?status=3"
+        sort="101"
+        isShow="1" scope="productLineView">
+        </menu>
+        <menu id="productLine-deliveryMe" parent-id="productLine-view" name="由我交付" href="/productLine/to?status=4"
+        sort="100"
+        isShow="1" scope="productLineView">
+        </menu>
+    </menu>
 </menu>

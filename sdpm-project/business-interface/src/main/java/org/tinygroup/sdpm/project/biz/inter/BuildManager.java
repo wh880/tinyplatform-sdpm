@@ -1,7 +1,9 @@
 package org.tinygroup.sdpm.project.biz.inter;
 
 
+import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
+import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.List;
@@ -17,10 +19,10 @@ public interface BuildManager {
      * @param build
      * @return
      */
-    public Integer softDelete(ProjectBuild build);
+    Integer softDelete(ProjectBuild build);
 
     /**
-     * 根据主键id查找用户
+     * 根据主键id查找
      *
      * @param id 主键
      * @return
@@ -45,7 +47,7 @@ public interface BuildManager {
      * @param asc
      * @return
      */
-    public Pager<ProjectBuild> findPager(ProjectBuild build, Integer start, Integer limit, String order, boolean asc);
+    Pager<ProjectBuild> findPager(ProjectBuild build, Integer start, Integer limit, String order, boolean asc);
 
     /**
      * 新增有一个版本
@@ -71,5 +73,22 @@ public interface BuildManager {
      */
     Integer delete(int id);
 
-    public int[] batchDelBuildByIds(List<ProjectBuild> keys);
+    int[] batchDelBuildByIds(List<ProjectBuild> keys);
+
+    Pager<ProductStory> findBuildStory(int start, int limit, Integer buildId);
+
+    Pager<ProductStory> findNoBuildStory(int start, int limit, String condition, Integer buildId);
+
+    List<ProjectBuild> getBuildByIds(String... ids);
+
+    List<ProjectBuild> getBuildByProducts(Integer... ids);
+
+    /**
+     * 根据输入名称和产品查询
+     *
+     * @param condition
+     * @param productId
+     * @return
+     */
+    List<ProjectBuild> buildInCondition(String condition, Integer productId, Integer projectId);
 }

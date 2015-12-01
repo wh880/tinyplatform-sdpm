@@ -3,6 +3,7 @@ package org.tinygroup.sdpm.common.menu;
 import java.util.List;
 
 /**
+ * 菜单管理
  * Created by Hulk on 2015/8/27.
  */
 public interface MenuManager {
@@ -25,12 +26,20 @@ public interface MenuManager {
     List<Menu> getChildMenus(String parentId);
 
     /**
-     * 获取所有子菜单
+     * 获取所有子菜单（包含父节点）
      *
      * @param parentId
      * @return
      */
     List<Menu> getAllChildMenus(String parentId);
+
+    /**
+     * 获取所有子菜单（不含父节点）
+     *
+     * @param parentId
+     * @return
+     */
+    List<Menu> getAllChildMenusWithoutParent(String parentId);
 
     List<Menu> getScopeMenus(String scope);
 

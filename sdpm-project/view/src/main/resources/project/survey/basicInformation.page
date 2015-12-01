@@ -1,3 +1,4 @@
+
 <div>
     #@div(divClass="infoContent")
         <p class="titleName">基本信息</p>
@@ -7,57 +8,67 @@
             #@tbody()
                 #@tr()
                     #@td()项目名称#end
-                    #@td()${selProject?.projectName}#end
+                    #@td()${project?.projectName}#end
                 #end
                 #@tr()
                     #@td()项目代号#end
-                    #@td()${selProject?.projectCode}#end
+                    #@td()${project?.projectCode}#end
                 #end
                 #@tr()
                     #@td()起止时间#end
-                    #@td()${selProject?.projectBegin}~${selProject?.projectEnd}#end
-                ##                #formatDate(selProject?.projectBegin, "yyyy-MM-dd")~#formatDate(selProject?.projectEnd, "yyyy-MM-dd")
+                    #@td()${formatDate(project?.projectBegin, "yyyy-MM-dd")}~<br/>
+                        ${formatDate(project?.projectEnd, "yyyy-MM-dd")}
+                    #end
+                ##
                 #end
                 #@tr()
                     #@td()可用工作日#end
-                    #@td()${selProject?.projectDays}#end
+                    #@td()${project?.projectDays}#end
                 #end
                 #@tr()
                     #@td()项目类型#end
-                    #@td()${selProject?.projectType}#end
+                    #@td()${getDict("projectType",project?.projectType)}#end
                 #end
                 #@tr()
                     #@td()项目状态#end
-                    #@td()${selProject?.projectStatus}#end
+                    #@td()${getDict("projectStatus",project?.projectStatus)}#end
                 #end
                 #@tr()
                     #@td()项目负责人#end
-                    #@td()${selProject?.projectPm}#end
+                    #@td()
+                        ${project?.projectPm==null?"":UserUtils.getUserById(project?.projectPm)?.orgUserRealName}
+                    #end
                 #end
                 #@tr()
                     #@td()产品负责人#end
-                    #@td()${selProject?.projectPo}#end
+                    #@td()
+                        ${project?.projectPo==null?"":UserUtils.getUserById(project?.projectPo)?.orgUserRealName}
+                    #end
                 #end
                 #@tr()
                     #@td()测试负责人#end
-                    #@td()${selProject?.projectQd}#end
+                    #@td()
+                        ${project?.projectQd==null?"":UserUtils.getUserById(project?.projectQd)?.orgUserRealName}
+                    #end
                 #end
                 #@tr()
                     #@td()发布负责人#end
-                    #@td()${selProject?.projectRd}#end
+                    #@td()
+                        ${project?.projectRd==null?"":UserUtils.getUserById(project?.projectRd)?.orgUserRealName}
+                    #end
                 #end
                 #@tr()
                     #@td()相关产品#end
-                    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/product/page/project/overview.page">${selProduct
-                        ?.productName}#end
+                    #@td()
+                        #foreach(p : productList)
+                            <a href="${TINY_CONTEXT_PATH+adminPath}/product/find/overview?productId=${p.productId}">${p.productName}
+                                、</a>
+                        #end
+                    #end
                 #end
                 #@tr()
                     #@td()访问控制#end
-                    #@td()${selProject?.projectAcl}(有项目视图权限，即可访问)#end
-                #end
-                #@tr()
-                    #@td()分组白名单#end
-                    #@td()${selProject?.projectWhiteList}#end
+                    #@td()${getDict("projectAcl", project?.projectAcl)}#end
                 #end
             #end
         #end
@@ -67,16 +78,16 @@
         <table>
             <tr>
                 <td rowspan="4">工时统计</td>
-                <td>总共预计${selProject?.projectDays}工时</td>
+                <td>总共预计${project?.projectDays}工时</td>
             </tr>
             <tr>
-                <td>可用工时${selProject?.projectDays}工时</td>
+                <td>可用工时${project?.projectDays}工时</td>
             </tr>
             <tr>
-                <td>已经消耗${selProject?.projectDays}工时</td>
+                <td>已经消耗${project?.projectDays}工时</td>
             </tr>
             <tr>
-                <td>预计剩余${selProject?.projectDays}工时</td>
+                <td>预计剩余${project?.projectDays}工时</td>
             </tr>
         </table>
     #end

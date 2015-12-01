@@ -7,6 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.tinygroup.sdpm.common.condition.ConditionCarrier;
+import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.UserService;
@@ -18,16 +20,17 @@ import org.tinygroup.sdpm.service.dao.pojo.ServiceReview;
 import org.tinygroup.sdpm.service.service.inter.ClientService;
 import org.tinygroup.sdpm.service.service.inter.RequestService;
 import org.tinygroup.sdpm.service.service.inter.ReviewService;
+import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
+import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 /**
- * Created by Administrator on 2015-09-28.
+ * Created by xudy on 2015-09-28.
  */
 @Controller
 @RequestMapping("/a/service/request")
@@ -42,39 +45,78 @@ public class RequestAction extends BaseController {
     private ProductService productService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private ModuleService moduleService;
 
+    /**
+     * 根据不同条件显示请求表格内容
+     *
+     * @param operation 用于由我回复和由我解决
+     * @param status    请求的不同的状态
+     * @param model
+     * @return
+     */
     @RequiresPermissions("request")
     @RequestMapping(value = "/list")
-    public String list(Integer operation, Integer status, Model model) {
+    public String list(Integer operation, Integer status, Integer treeId, Model model) {
         model.addAttribute("status", status);
         model.addAttribute("operation", operation);
         List<OrgUser> userList = userService.findUserList(new OrgUser());
+        List<ServiceClient> serviceClients = clientService.getClientList(new ServiceClient());
+        if (treeId != null) {
+            SystemModule module = new SystemModule();
+            module.setModuleType("productDoc");
+            module.setModuleRoot(treeId);
+            List<SystemModule> moduleList = moduleService.findModuleList(module);
+            model.addAttribute("moduleList", moduleList);
+        }
+        model.addAttribute("serviceClients", serviceClients);
         model.addAttribute("userList", userList);
         return "service/serviceReq/request.page";
     }
 
+    /**
+     * 显示请求表格内容
+     *
+     * @param limit         分页的记录限制
+     * @param start         分页的当前页
+     * @param clientRequest
+     * @param operation     用于由我回复和由我解决
+     * @param status        请求的不同的状态
+     * @param treeId        左侧树对应产品的id
+     * @param model
+     * @param groupOperate  搜索功能的条件
+     * @param searchInfos   搜索功能需要搜索的信息
+     * @param order         排序
+     * @param orderType
+     * @return
+     */
     @RequestMapping(value = "/list/data")
     public String listData(Integer limit, Integer start, ServiceRequest clientRequest, Integer status, Integer operation, Integer treeId, Model model,
+                           String groupOperate, SearchInfos searchInfos,
                            @RequestParam(required = false, defaultValue = "clientRequestId") String order,
-                           @RequestParam(required = false, defaultValue = "desc") String ordertype) {
+                           @RequestParam(required = false, defaultValue = "desc", value = "ordertype") String orderType) {
 
+        ConditionCarrier carrier = new ConditionCarrier();
         if (operation != null) {
             OrgUser user = UserUtils.getUser();
-            Pager<ServiceRequest> pager = requestService.findOperationByMe(start, limit, user, clientRequest, treeId, operation, order, ordertype);
+            Pager<ServiceRequest> pager = requestService.findOperationByMe(start, limit, user, clientRequest, treeId, operation, order, orderType);
             model.addAttribute("pager", pager);
             return "service/serviceReq/requestTableData.pagelet";
         }
-//        if (operation != null && operation == 2) {
-//            OrgUser user = UserUtils.getUser();
-//            Pager<ServiceRequest> pager = requestService.findReviewByMe(start, limit, user, clientRequest,treeId, order, ordertype);
-//            model.addAttribute("pager", pager);
-//            return "service/serviceReq/requestTableData.pagelet";
-//        }
-        Pager<ServiceRequest> pager = requestService.findRequestPager(start, limit, status, clientRequest, treeId, order, ordertype);
+        carrier.putSearch("requestSearch", searchInfos, groupOperate);
+        Pager<ServiceRequest> pager = requestService.findRequestPager(start, limit, status, clientRequest, treeId, carrier, order, orderType);
         model.addAttribute("pager", pager);
         return "service/serviceReq/requestTableData.pagelet";
     }
 
+    /**
+     * 从表中读取数据跳到新建或编辑页面
+     *
+     * @param id
+     * @param model
+     * @return
+     */
     @RequiresPermissions("request-add")
     @RequestMapping("/form")
     public String form(Integer id, Model model) {
@@ -90,6 +132,13 @@ public class RequestAction extends BaseController {
         return "service/serviceReq/add.page";
     }
 
+    /**
+     * 保存
+     *
+     * @param clientRequest
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/save")
     public String save(ServiceRequest clientRequest, Model model) {
         if (clientRequest.getClientRequestId() == null) {
@@ -101,31 +150,57 @@ public class RequestAction extends BaseController {
         return "redirect:" + adminPath + "/service/request/list";
     }
 
+    /**
+     * 关闭请求
+     *
+     * @param id
+     * @param model
+     * @return
+     */
     @RequiresPermissions("request-close")
-    @RequestMapping(value = "/close")//关闭请求
+    @RequestMapping(value = "/close")
     public String close(Integer id, Model model) {
         model.addAttribute("clientRequestId", id);
+        ServiceRequest requests = requestService.findRequest(id);
+        model.addAttribute("requests", requests);
         return "service/serviceReq/closeRequest.pagelet";
     }
 
+    /**
+     * @param clientRequest
+     * @param status
+     * @param operation
+     * @param treeId
+     * @return
+     */
     @RequestMapping(value = "/close/date")
-    public String closed(ServiceRequest clientRequest, Model model) {
+    public String closed(ServiceRequest clientRequest, Integer status, Integer operation, Integer treeId) {
         if (clientRequest.getClientRequestId() != null)
             requestService.closeRequest(clientRequest);
-        return "redirect:" + adminPath + "/service/request/list";
+        return "redirect:" + adminPath + "/service/request/list?status=" + status + "&operation=" + operation + "&treeId=" + treeId;
     }
 
+    /**
+     * 删除请求
+     *
+     * @param id
+     * @return
+     */
     @RequiresPermissions("request-delete")
     @ResponseBody
     @RequestMapping(value = "/delete")
     public Map delete(Integer id) {
         requestService.deleteRequest(id);
-        Map<String, String> map = new HashMap<String, String>();
-        map.put("status", "y");
-        map.put("info", "删除成功");
-        return map;
+        return resultMap(true, "删除成功");
     }
 
+    /**
+     * 恢复请求
+     *
+     * @param id
+     * @param model
+     * @return
+     */
     @RequiresPermissions("request-solve")
     @RequestMapping(value = "/reply")
     public String reply(Integer id, Model model) {
@@ -136,46 +211,73 @@ public class RequestAction extends BaseController {
         return "/service/serviceReq/requestsolve.page";
     }
 
+    /**
+     * 恢复保存
+     *
+     * @param clientRequest
+     * @return
+     */
     @RequestMapping(value = "/replySave")
-    public String replySave(ServiceRequest clientRequest) {
+    public String replySave(ServiceRequest clientRequest, Integer status, Integer operation, Integer treeId) {
         if (clientRequest != null) {
             requestService.saveReply(clientRequest);
         }
-        return "redirect:" + adminPath + "/service/request/list";
+        return "redirect:" + adminPath + "/service/request/list?status=" + status + "&operation=" + operation + "&treeId=" + treeId;
     }
 
+    /**
+     * 回访
+     *
+     * @param id
+     * @param model
+     * @return
+     */
     @RequiresPermissions("request-back")
     @RequestMapping(value = "/review")
     public String review(Integer id, Model model) {
         if (id != null) {
+            OrgUser user = UserUtils.getUser();
             ServiceRequest clientRequest = requestService.findRequest(id);
             model.addAttribute("request", clientRequest);
+            model.addAttribute("currentReviewer", user.getOrgUserAccount());
             if (clientRequest.getRequestStatus() == ServiceRequest.RETURNVISIT) {
                 ServiceReview review = reviewService.findReviewByRequestId(id);
                 model.addAttribute("review", review);
             }
         }
-        return "service/serviceReq/requestViewList.page";
+        return "/service/serviceReq/requestViewList.page";
     }
 
+    /**
+     * @param review
+     * @param status
+     * @param operation
+     * @param treeId
+     * @return
+     */
     @RequestMapping(value = "/reviewSave")
-    public String reviewSave(ServiceReview review, Model model) {
+    public String reviewSave(ServiceReview review, Integer status, Integer operation, Integer treeId) {
         if (review.getReviewId() == null) {
             reviewService.addReview(review);
         } else {
             reviewService.updateReview(review);
         }
         reviewService.changeStatus(review.getClientRequestId());
-//        model.addAttribute("review", review);
-        return "redirect:" + adminPath + "/service/request/list";
+        return "redirect:" + adminPath + "/service/request/list?status=" + status + "&operation=" + operation + "&treeId=" + treeId;
     }
 
+    /**
+     * 指派回复
+     *
+     * @param ids
+     * @param name
+     * @return
+     */
     @RequiresPermissions("request-tome")
     @ResponseBody
     @RequestMapping(value = "/solveBy")
     public Map solveBy(Integer[] ids, String name) {
         List<ServiceRequest> list = new ArrayList<ServiceRequest>();
-        Map<String, String> map = new HashMap<String, String>();
         for (Integer id : ids) {
             ServiceRequest serviceRequest = new ServiceRequest();
             serviceRequest.setClientRequestId(id);
@@ -183,17 +285,21 @@ public class RequestAction extends BaseController {
             list.add(serviceRequest);
         }
         requestService.updateReply(list);
-        map.put("status", "y");
-        map.put("info", "操作成功");
-        return map;
+        return resultMap(true, "操作成功");
     }
 
+    /**
+     * 指派回访
+     *
+     * @param ids
+     * @param name
+     * @return
+     */
     @RequiresPermissions("request-review-byme")
     @ResponseBody
     @RequestMapping(value = "/reviewBy")
     public Map reviewBy(Integer[] ids, String name) {
         List<ServiceRequest> list = new ArrayList<ServiceRequest>();
-        Map<String, String> map = new HashMap<String, String>();
         for (Integer id : ids) {
             ServiceRequest serviceRequest = new ServiceRequest();
             serviceRequest.setClientRequestId(id);
@@ -201,20 +307,21 @@ public class RequestAction extends BaseController {
             list.add(serviceRequest);
         }
         requestService.updateReview(list);
-        map.put("status", "y");
-        map.put("info", "操作成功");
-        return map;
+        return resultMap(true, "操作成功");
     }
 
+    /**
+     * 批量删除
+     *
+     * @param ids
+     * @return
+     */
     @RequiresPermissions("request-batchdel")
     @ResponseBody
     @RequestMapping(value = "/batchDelete")
     public Map batchDelete(String ids) {
-        Map<String, String> map = new HashMap<String, String>();
         if (ids == null) {
-            map.put("status", "n");
-            map.put("info", "删除失败");
-            return map;
+            return resultMap(false, "删除失败");
         }
         List<ServiceRequest> list = new ArrayList<ServiceRequest>();
         for (String s : ids.split(",")) {
@@ -224,8 +331,30 @@ public class RequestAction extends BaseController {
             list.add(serviceRequest);
         }
         requestService.deleteBatchRequest(list);
-        map.put("status", "y");
-        map.put("info", "删除成功");
-        return map;
+        return resultMap(true, "删除成功");
+    }
+
+    @RequestMapping(value = "/overview")
+    public String overview(Integer id, Model model) {
+        if (id != null) {
+            ServiceRequest serviceRequest = requestService.findRequest(id);
+            if (serviceRequest.getClientId() != null) {
+                ServiceClient serviceClient = clientService.findClient(serviceRequest.getClientId());
+                model.addAttribute("client", serviceClient);
+            }
+            model.addAttribute("request", serviceRequest);
+        }
+        return "/service/serviceReq/requestView.page";
+    }
+
+    @ResponseBody
+    @RequestMapping("ajax/requestInCondition")
+    public List<ServiceRequest> requestInCondition(String key, Integer initKey) {
+        if (initKey != null) {
+            List<ServiceRequest> result = new ArrayList<ServiceRequest>();
+            result.add(requestService.findRequest(initKey));
+            return result;
+        }
+        return requestService.requestInCondition(key);
     }
 }

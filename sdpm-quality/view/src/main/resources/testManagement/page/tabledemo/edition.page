@@ -17,21 +17,29 @@
 		#@tabHead()
 			#include("/testManagement/page/Tab.page")
 		#end
-	
+
 		#@tabBodyCol("ptop-5")
 		#end
 	#end
 #end
-			
-#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/quality/bug/edit" "post" {"class":"test"})
+
+#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/quality/bug/edit" "post" {"class":"test","enctype":"multipart/form-data"})
+<input type="hidden" name="lastAddress" value=""/>
 #hiddenInput(hiddenInputName="bugId" hiddenInputValue=bug?.bugId)
 	<div style="width:70%;float:left" class="pageleftpart">
     	<div class="infoContent">
     		<p class="titleName">编辑</p>
     		<div class="RTtitle">
-            	<button type="submit" id="submit" class="commitBtn">保存</button>
+            	<button type="submit" id="submit2" class="commitBtn">保存</button>
         	</div>
-        	        
+        #@elementItem()
+            <div class="col-12">
+                #@colLabel("col-2 text-r")<span class="c-red">*</span>bug名称：#end
+                <div class="col-9">
+                    #tinyInput("text" "bugTitle" bug?.bugTitle {"datatype":"*","nullmsg":"bug标题不能为空！","id":"111","class":"input-text","placeholder":""})
+                </div>
+            </div>
+        #end
    		#@elementItem()
             <div class="col-12">
                 <div class="col-2 text-r"><label>重现步骤：&nbsp</label></div>
@@ -51,10 +59,10 @@
         #end
         <br/>
         #@elementItem()
-       		 <div class="col-12">
+            <div class="col-12">
                 <div class="col-2 text-r"><label>附件：</label></div>
                 <div class="col-9">
-                    #include("/testManagement/page/fileupload.page")  
+                    #mulUploadFile(fileList)
                 </div>
             </div>
         #end
@@ -62,7 +70,7 @@
         #@elementItem()
         <div class="col-12">
             <div class="col-5">
-                <button style="float: right" type="submit" id="submit" class="commitBtn">保存</button>
+                <button style="float: right" type="submit" id="submit2" class="commitBtn">保存</button>
             </div>
             <div class="col-1"></div>
             <div class="col-1">
@@ -72,12 +80,7 @@
         </div>
 		#end
     	<br >
-   
-        #@div(divClass="infoContent")
-            <p class="titleName">历史记录</p>
-        ##加入后，js代码会导致页面排版混乱
-            #include("/testManagement/page/historyRecord.page")
-        #end
+        #history(adminPath+"/system/action/ajax/history?actionObjectType=bug&actionObjectId="+bug?.bugId)
         </div>
         <div style="width: 30%;float: right">
        #TypeInfo("qualityBugEdition" bug?.bugId)
@@ -85,11 +88,13 @@
     </div>
 #end
 
-    
-    
+
 <script type="text/javascript">
-    $("select.select2").select2();
+    $(function () {
+        $("form[name=thisform]").Validform({
+            tiptype: 1
+        });
+    });
+
 </script>
-
-
 

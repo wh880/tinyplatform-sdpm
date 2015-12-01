@@ -1,20 +1,20 @@
-#setTinyItemCount(pager.totalCount)
-#foreach(var:pager.records)
+#setTinyItemCount(pager?.totalCount)
+#foreach(var:pager?.records)
     #@tr()
         #@td()<input type="checkbox" value="${var.clientRequestId}" name="idCheck">#end
-    ##        #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/service/serviceReq/add.page">${var.clientRequestId}</a>#end
         #@td()<a
-                href="${TINY_CONTEXT_PATH+adminPath}/service/client/clientDetail?id=${var.clientId}">${var.clientName}</a>#end
-        #@td()${var.requestTitle}#end
-        #@td()${var.requestPre}#end
-        #@td()${var.requestStatus}#end
-        #@td()${formatDate(var.requestCommitmentDate,"yyyy-MM-dd")}#end
-        #@td()${var.replier}#end
-        #@td()${var.requestReviewer}#end
-        #@td()
+                href="${TINY_CONTEXT_PATH+adminPath}/service/client/clientSla?id=${var.clientId}">${var.clientName}</a>#end
+        #@td()<a
+                href="${TINY_CONTEXT_PATH+adminPath}/service/request/overview?id=${var.clientRequestId}">${var.requestTitle}</a>#end
+        #@td("nowrap")${getDict("requestPre",var.requestPre)}#end
+        #@td("nowrap")${getDict("requestStatus",var.requestStatus)}#end
+        #@td("nowrap")${formatDate(var.requestCommitmentDate,"yyyy-MM-dd")}#end
+        #@td("nowrap")${var.replier}#end
+        #@td("nowrap")${var.requestReviewer}#end
+        #@td("nowrap")
             #foreach(m:menuManager.getScopeMenus("service-request"))
                 #if(m)
-                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?id=${var.clientRequestId}"
+                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?id=${var.clientRequestId}&treeId=${treeId}&status=${status}"
                    title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
                 #end
             #end
@@ -22,14 +22,15 @@
             #set(m1=menuManager.getMenu("request-close"))
             #if(m1)
                 #@aModal(
-                    "#myModal" m1.name "500" "200" m1.icon m1.href+"?id="+var?.clientRequestId)
+                    "#myModal" aModalTitle="关闭" "500" "200" m1.icon adminPath+m1.href+"?id="+var?.clientRequestId+
+                    "&treeId="+treeId+"&status="+status+"&operation="+operation titleName="关闭")
                 #end
             #end
 
             #set(m2=menuManager.getMenu("request-delete"))
             #if(m2)
                 #@tinyTableItemRemove(TINY_CONTEXT_PATH+adminPath+m2.href var?.clientRequestId)<i
-                        class=${m2.icon}></i>#end
+                        class="${m2.icon}" title="删除"></i>#end
             #end
 
         #end

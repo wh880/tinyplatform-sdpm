@@ -1,0 +1,39 @@
+#!set(activeTitle="查入行",activeMenuId=currentPageId)
+#@table("itemlist-table")
+    #@tbody("databody")
+        #include("teamAddTr.page")
+    #end
+#end
+<script>
+    $(function(){
+        function updateUserID(){
+            $('.itemlist-table>.databody .userID').each(function(index){
+                $(this).html(index+1);
+            });
+        }
+        $(".itemlist-table").on("click",".addnext",function(){
+            var $thisTr=$(this).closest("tr");
+            var a = $thisTr.attr("class");
+            var no = a.substr(3);
+            $.ajax({
+                type: 'POST',
+                url: "${TINY_CONTEXT_PATH+adminPath}/product/team/nextTr?a="+no ,
+                dataType: "html",
+                success: function(data){
+                        $thisTr.after(data);
+                },
+            });
+                $thisTr.find(".addnext").css("display","none");
+//            updateUserID();
+            return false;
+        }).on("click",".delbutton",function(){
+            if($('.databody .userID').size() == 1) return;
+            var that=this;
+            layer.confirm('确定删除?', function(){
+                $(that).closest("tr").remove();
+                updateUserID();
+                layer.msg('删除成功！',1,1)
+            })
+        });
+    });
+</script>

@@ -31,41 +31,15 @@ public class FaqAction extends BaseController {
     @Autowired
     private ProductService productService;
 
-    /*新增问题*/
+    /**
+     * 新增问题
+     *
+     * @param id
+     * @param model
+     * @return
+     */
     @RequestMapping("/form")
     public String form(Integer id, Model model) {
-        if (id != null)
-        {
-            ServiceFaq faq = faqService.findFaq(id);
-            model.addAttribute("faq",faq);
-        }
-       /* faq中查询产品名称*/
-         /*调用product的服务，查询出产品表的对象*/
-        Product product = new Product();
-        List<Product> slas = productService.findProductList(product);
-        model.addAttribute("slas", slas);
-        return "/service/faq/addquestion.page";
-    }
-
-    /* 保存*/
-    @RequestMapping("/save")
-    public String save(ServiceFaq faq ,Model model)
-    {
-        if (faq.getFaqId()==null)
-        {
-            faq = faqService.addFaq(faq);
-        }
-        else
-        {
-            faq = faqService.updateFaq(faq);
-        }
-        model.addAttribute("faq", faq);
-        return "redirect:" + adminPath + "/service/faq/list";
-    }
-
-    /*对问题进行“编辑”*/
-    @RequestMapping("/edit")
-    public String edit(Integer id, Model model) {
         if (id != null) {
             ServiceFaq faq = faqService.findFaq(id);
             model.addAttribute("faq", faq);
@@ -76,34 +50,72 @@ public class FaqAction extends BaseController {
         return "/service/faq/addquestion.page";
     }
 
-    /*把faqmenu页面的所有问题都查询出来*/
+    /**
+     * 保存
+     *
+     * @param faq
+     * @param model
+     * @return
+     */
+    @RequestMapping("/save")
+    public String save(ServiceFaq faq, Model model) {
+        if (faq.getFaqId() == null) {
+            faq = faqService.addFaq(faq);
+        } else {
+            faq = faqService.updateFaq(faq);
+        }
+        model.addAttribute("faq", faq);
+        return "redirect:" + adminPath + "/service/faq/list";
+    }
+
+    /**
+     * 把faqmenu页面的所有问题都查询出来*
+     *
+     * @param serviceFaq
+     * @param id
+     * @param faqQuestion
+     * @param page
+     * @param pageSize
+     * @param model
+     * @return
+     */
     @RequestMapping("/list")
-    public String list(ServiceFaq serviceFaq, Integer id, Integer start, Integer limit,
+    public String list(ServiceFaq serviceFaq, Integer id, String faqQuestion,
                        @RequestParam(required = false, defaultValue = "1") int page,
                        @RequestParam(required = false, defaultValue = "10") int pageSize,
-                       @RequestParam(required = false, defaultValue = "faqId") String order,
-                       @RequestParam(required = false, defaultValue = "asc") String ordertype,
-                       Model model)
-    {
-        start = (page - 1) * pageSize;
-        limit = pageSize;
-        Pager<ServiceFaq> list = faqService.getFaqpage(start, limit, serviceFaq);
+                       Model model) {
+        Integer start = (page - 1) * pageSize;
+        Integer limit = pageSize;
+        Pager<ServiceFaq> list;
+        if (faqQuestion != null) {
+            list = faqService.searchFaq(start, limit, serviceFaq, faqQuestion);
+        } else {
+            list = faqService.getFaqpage(start, limit, serviceFaq);
+        }
         model.addAttribute("pager", list);//list.CurrentPage
         return "/service/faq/faqmenu.page";
     }
-    /*删除*/
+
+    /**
+     * 删除
+     *
+     * @param id
+     * @return
+     */
     @ResponseBody
     @RequestMapping("/delete")
-    public Map delete(Integer id)
-    {
+    public Map delete(Integer id) {
         faqService.deleteFaq(id);
-        Map<String, String> map = new HashMap<String, String>();
-        map.put("status", "success");
-        map.put("info", "删除成功");
-        return map;
+        return resultMap(true, "删除成功");
     }
 
-    /*点击问题进去，显示里面的问题和答案。由faqquestion.page跳转过来。*/
+    /**
+     * 点击问题进去，显示里面的问题和答案。由faqquestion.page跳转过来。
+     *
+     * @param id
+     * @param model
+     * @return
+     */
     @RequestMapping("/questionAnswer")
     public String questionAnswer(Integer id, Model model) {
         ServiceFaq faqs = faqService.findFaq(id);
@@ -111,7 +123,13 @@ public class FaqAction extends BaseController {
         return "/service/faq/questionAnswer.page";
     }
 
-    /*点击问题进去，显示里面的编辑和删除，2015-10-16,将bese.menu.xml中地址直接跳转到form*/
+    /**
+     * 点击问题进去，显示里面的编辑和删除，2015-10-16,将bese.menu.xml中地址直接跳转到form
+     *
+     * @param id
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/faqContentEdit")
     public String slaContentEdit(Integer id, Model model) {
         if (id != null) {
@@ -122,78 +140,64 @@ public class FaqAction extends BaseController {
         return "/service/faq/addquestion.page";
     }
 
+    /**
+     * 实现faq里面的左侧树,对树的节点进行新增
+     *
+     * @param faqParentTypeId
+     * @param faqType
+     * @return
+     */
     @ResponseBody
-    @RequestMapping(value = "/faqContentDelete")
-    public Map faqTitleDelete(Integer id) {
-        faqService.deleteFaq(id);
-        Map<String, String> map = new HashMap<String, String>();
-        map.put("status", "y");
-        map.put("info", "删除成功");
-        return map;
-    }
-
-    /*实现faq里面的左侧树*/
     @RequestMapping("/addTree")
-    public String addDept(Integer faqParentTypeId, String faqType) {
+    public Map addDept(Integer faqParentTypeId, String faqType) {
         ServiceFaqType serviceFaqType = new ServiceFaqType();
         serviceFaqType.setFaqParentTypeId(faqParentTypeId);
         serviceFaqType.setFaqType(faqType);
         faqTypeService.addFaqType(serviceFaqType);
-        return "/service/faq/faqmenu.page";
+        return resultMap(true, "新增成功");
     }
 
+    /**
+     * 对树的节点进行编辑
+     *
+     * @param faqParentTypeId
+     * @param faqTypeId
+     * @param faqType
+     * @return
+     */
+    @ResponseBody
     @RequestMapping("/editTree")
-    public String editDept(Integer faqTypeId, String faqType) {
+    public Map editDept(Integer faqParentTypeId, Integer faqTypeId, String faqType) {
         ServiceFaqType type = faqTypeService.findFaqType(faqTypeId);
         type.setFaqType(faqType);
+        type.setFaqParentTypeId(faqParentTypeId);
         faqTypeService.updateFaqType(type);
-        return "/service/faq/faqmenu.page";
+        return resultMap(true, "编辑成功");
     }
 
+    /**
+     * 树里面的节点的删除
+     *
+     * @param faqTypeId
+     * @return
+     */
+    @ResponseBody
     @RequestMapping("/deleteTree")
-    public String deleteDept(Integer faqTypeId) {
+    public Map deleteDept(Integer faqTypeId) {
         faqTypeService.deleteDept(faqTypeId);
-        //return 1;
-        return "/service/faq/faqmenu.page";
+        return resultMap(true, "删除成功");
     }
 
-    @RequestMapping("/listTree")
-    public String listTree(ServiceFaq serviceFaq, Integer id, Integer start, Integer limit, Integer faqTypeId,
-                           @RequestParam(required = false, defaultValue = "1") int page,
-                           @RequestParam(required = false, defaultValue = "10") int pageSize,
-                           @RequestParam(required = false, defaultValue = "faqId") String order,
-                           @RequestParam(required = false, defaultValue = "asc") String ordertype,
-                           Model model) {
-        start = (page - 1) * pageSize;
-        limit = pageSize;
-        if (faqTypeId == null || faqTypeId == -1) {
-            serviceFaq.setFaqTypeId(null);
-            Pager<ServiceFaq> list = faqService.getFaqpage(start, limit, serviceFaq);
-            model.addAttribute("pager", list);
-        } else {
-            Pager<ServiceFaq> list = faqService.findUserByDeptId(start, limit, faqTypeId);
-            model.addAttribute("pager", list);
-        }
-        return "/service/faq/faqmenu.page";
-    }
-
-    /*faq左侧树的数据来源*/
+    /**
+     * faq左侧树的数据来源
+     * @return
+     */
     @ResponseBody
     @RequestMapping("/data")
-    public List data(String check) {
+    public List data() {
         ServiceFaqType faq = new ServiceFaqType();
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
         List<ServiceFaqType> faqs = faqTypeService.getFaqTypeList(faq);
-        if (check == null || !check.equals("n")) {
-            Map<String, Object> map1 = new HashMap<String, Object>();
-            map1.put("id", -1);
-            map1.put("pId", 0);
-            map1.put("open", true);
-            map1.put("add", true);
-            map1.put("edit", true);
-            map1.put("name", "所有问题");
-            list.add(map1);
-        }
 
         for (ServiceFaqType d : faqs) {
             Map<String, Object> map = new HashMap<String, Object>();

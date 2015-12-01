@@ -1,0 +1,78 @@
+<style>
+    .titleNamesty {
+        background: #f9f9f8;
+        border: #eee 1px solid;
+        padding: 3px 8px;
+        font-size: 15px;
+    }
+
+    .titleBarsty {
+        margin-top: -10px;
+    }
+</style>
+#set(name="organizationPrivilege")
+#@div()
+    #@tabWithInit("tab_demo" "optionsBox")
+        #@tabHead()
+            #include("/organization/common/tab.page")
+        #end
+        #@tabBodyCol("ptop-5")
+            #@div(divClass="operationbar")
+            <span>添加角色</span>
+            #end
+        #end
+    #end
+#end
+
+#@noRespsGridSystem()
+    #@gridSysCol(3)#end
+    #@gridSysCol(6)
+        #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/org/privilege/save" "post" {"class":"test"})
+        <input type="hidden" name="copyRoleId" value="${copyRoleId}"/>
+        <input type="hidden" name="orgRoleId" value="${role?.orgRoleId}"/>
+            #@gridSysRow()
+                #@colLabel("col-2")<span class="c-red">*</span>角色名称：#end
+                #@gridSysCol(7)
+                    #tinyInput(
+                        "text" "orgRoleName" role?.orgRoleName {"placeholder":"","datatype":"*","nullmsg":"角色名不能为空！",
+                        "id":"username",
+                        "class":
+                        "input-text"})
+                #end
+            #end
+            #@gridSysRow()
+                #@colLabel("col-2")角色类型：#end
+                #@gridSysCol(7)
+                        #@Tselect("orgRoleType" role?.orgRoleType {"class":"input-text"}) ##,"multiple":"multiple"加上为多选项
+                            #foreach(type : getDict("roleType"))
+                                #@ToptionItem(type.value)${type.text}#end
+                            #end
+                        #end
+                #end
+            #end
+
+            #@gridSysRow()
+                #@colLabel("col-2")角色描述：#end
+                #@gridSysCol(7)
+                    #tinyInput("text" "orgRoleRemarks" role?.orgRoleRemarks{"class":"input-text"})
+                #end
+            #end
+            #@gridSysRow()
+                #@div(divClass="col-7 col-offset-5 form-inline")
+                    #tinyInput("submit" "submitbtn" " 保存 " {"class":"btn btn-primary"})
+                <a href="javascript:history.go(-1)" class="btn radius btn-default">返回</a>
+                #end
+            #end
+        #end
+    #end
+    #@gridSysCol(3)#end
+#end
+
+<script type="text/javascript">
+    $(function () {
+        $("form[name=thisform]").Validform({
+            tiptype: 2
+
+        });
+    });
+</script>

@@ -1,31 +1,53 @@
 /**
- *  Copyright (c) 1997-2013, www.tinygroup.org (luo_guo@icloud.com).
- *
- *  Licensed under the GPL, Version 3.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *       http://www.gnu.org/licenses/gpl.html
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
+ * Copyright (c) 1997-2013, www.tinygroup.org (luo_guo@icloud.com).
+ * <p>
+ * Licensed under the GPL, Version 3.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.gnu.org/licenses/gpl.html
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 package org.tinygroup.sdpm.project.dao;
 
 import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
+import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
+import org.tinygroup.sdpm.project.dao.pojo.TaskChartBean;
 import org.tinygroup.tinysqldsl.Pager;
+
+import java.util.List;
 
 public interface ProjectTaskDao extends BaseDao<ProjectTask, Integer> {
 
-    public Integer batchSoftDel(String condition);
+    /**
+     * 获取项目最大编号
+     *
+     * @param projectId
+     * @return
+     */
+    Integer getMaxNo(Integer projectId);
 
-    public Pager<ProjectTask> queryPagerByStuta(int start, int limit, ProjectTask projectTask, final String condition, final OrderBy... orderBies);
+    Pager<ProjectTask> queryPagerByStatus(int start, int limit, ProjectTask projectTask, final String condition, final OrderBy... orderBies);
+
+    /**
+     * 由我解决
+     *
+     * @param start
+     * @param limit
+     * @param projectTask
+     * @param user
+     * @param orderBies
+     * @return
+     */
+    Pager<ProjectTask> queryPagerByMe(int start, int limit, ProjectTask projectTask, final OrgUser user, final OrderBy... orderBies);
 
     /**
      * 根据storyid相关任务数量
@@ -33,19 +55,64 @@ public interface ProjectTaskDao extends BaseDao<ProjectTask, Integer> {
      * @param storyId
      * @return
      */
-    public Integer getSumByStory(Integer storyId);
+    Integer getSumByStory(Integer storyId);
 
-    Integer editTask(ProjectTask task);
-
-    Integer editcall(ProjectTask task);
-
-    Integer editfinish(ProjectTask task);
-
-    Integer editstart(ProjectTask task);
-
-    Integer editclose(ProjectTask task);
 
     ProjectTask findTaskStory(Integer taskId);
 
-    public Integer updateColum(ProjectTask projectTask);
+    /**
+     * 根据指派进行分类
+     *
+     * @return
+     */
+    List<TaskChartBean> queryChartAssigned();
+
+    /**
+     * 根据任务状态进行分类
+     *
+     * @return
+     */
+    List<TaskChartBean> queryChartStatus();
+
+    /**
+     * 根据优先级进行分类
+     *
+     * @return
+     */
+    List<TaskChartBean> queryChartPri();
+
+    /**
+     * 根据截至日期进行分类
+     *
+     * @return
+     */
+    List<TaskChartBean> queryChartDeadLine();
+
+    /**
+     * 根据模块进行分类
+     *
+     * @return
+     */
+    List<TaskChartBean> queryChartModule();
+
+    /**
+     * 根据项目进行分类
+     *
+     * @return
+     */
+    List<TaskChartBean> queryChartProject();
+
+    /**
+     * 根据任务类型进行分类
+     *
+     * @return
+     */
+    List<TaskChartBean> queryChartType();
+
+    /**
+     * 根据完成者分类
+     *
+     * @return
+     */
+    List<TaskChartBean> queryChartFinishedBy();
 }

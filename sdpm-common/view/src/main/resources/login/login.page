@@ -1,262 +1,85 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="renderer" content="webkit|ie-comp|ie-stand">
-    <link rel="shortcut icon" href="${TINY_CONTEXT_PATH}/common/img/tiny32.png">
+    <link rel="shortcut icon" href="${TINY_CONTEXT_PATH}/common/img/logo.ico">
     <meta name="keywords" content="Tiny SDPM ">
     <meta name="description" content="Tiny,TINY,Software Development Process Management">
     <title>Tiny SDPM登陆</title>
     <style>
-        body {
-            background: #ebebeb;
-            font-family: "Helvetica Neue", "Hiragino Sans GB", "Microsoft YaHei", "\9ED1\4F53", Arial, sans-serif;
-            color: #222;
-            font-size: 12px;
-        }
+body{font-family:'Microsoft Yahei'; margin:0 auto;background:#6d2a7f; background-image:url(${TINY_CONTEXT_PATH}/login/images/light.png) no-repeat center top;}
+ul,li{display:block;margin:0;padding:0;list-style:none;height:100%;}
+a,a:focus{text-decoration:none;color:#000;outline:none;blr:expression(this.onFocus=this.blur());}
+a:hover{color:#00a4ac;text-decoration:none;}
 
-        * {
-            padding: 0px;
-            margin: 0px;
-        }
+/*cloud*/
+#mainBody {width:100%;position:absolute;z-index:-1;}
+.cloud {position:absolute;top:-100px;left:0px;width:100%;height:100%;background:url(${TINY_CONTEXT_PATH}/login/images/cloud.png) no-repeat;z-index:1;opacity:0.5;}
+#cloud2 {z-index:2;}
 
-        .top_div {
-            background: #008ead;
-            width: 100%;
-            height: 336px;
-        }
-
-        .ipt {
-            border: 1px solid #d3d3d3;
-            padding: 10px 10px;
-            width: 290px;
-            border-radius: 4px;
-            padding-left: 35px;
-            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-            box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-            -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
-            -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-            transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s
-        }
-
-        .ipt:focus {
-            border-color: #66afe9;
-            outline: 0;
-            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
-            box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6)
-        }
-
-        .u_logo {
-            background: url("${TINY_CONTEXT_PATH}/login/images/username.png") no-repeat;
-            padding: 10px 10px;
-            position: absolute;
-            top: 43px;
-            left: 40px;
-
-        }
-
-        .p_logo {
-            background: url("${TINY_CONTEXT_PATH}/login/images/password.png") no-repeat;
-            padding: 10px 10px;
-            position: absolute;
-            top: 12px;
-            left: 40px;
-        }
-
-        a {
-            text-decoration: none;
-        }
-
-        .tou {
-            background: url("${TINY_CONTEXT_PATH}/login/images/tou.png") no-repeat;
-            width: 97px;
-            height: 92px;
-            position: absolute;
-            top: -87px;
-            left: 140px;
-        }
-
-        .left_hand {
-            background: url("${TINY_CONTEXT_PATH}/login/images/left_hand.png") no-repeat;
-            width: 32px;
-            height: 37px;
-            position: absolute;
-            top: -38px;
-            left: 150px;
-        }
-
-        .right_hand {
-            background: url("${TINY_CONTEXT_PATH}/login/images/right_hand.png") no-repeat;
-            width: 32px;
-            height: 37px;
-            position: absolute;
-            top: -38px;
-            right: -64px;
-        }
-
-        .initial_left_hand {
-            background: url("${TINY_CONTEXT_PATH}/login/images/hand.png") no-repeat;
-            width: 30px;
-            height: 20px;
-            position: absolute;
-            top: -12px;
-            left: 100px;
-        }
-
-        .initial_right_hand {
-            background: url("${TINY_CONTEXT_PATH}/login/images/hand.png") no-repeat;
-            width: 30px;
-            height: 20px;
-            position: absolute;
-            top: -12px;
-            right: -112px;
-        }
-
-        .left_handing {
-            background: url("${TINY_CONTEXT_PATH}/login/images/left-handing.png") no-repeat;
-            width: 30px;
-            height: 20px;
-            position: absolute;
-            top: -24px;
-            left: 139px;
-        }
-
-        .right_handinging {
-            background: url("${TINY_CONTEXT_PATH}/login/images/right_handing.png") no-repeat;
-            width: 30px;
-            height: 20px;
-            position: absolute;
-            top: -21px;
-            left: 210px;
-        }
-
-        .login-container {
-            background: rgb(255, 255, 255);
-            margin: -100px auto auto;
-            border: 1px solid rgb(231, 231, 231);
-            border-image: none;
-            width: 400px;
-            height: 200px;
-            text-align: center;
-            box-shadow: 2px 2px 8px #aaa;
-        }
-
-        .specialPic {
-            width: 165px;
-            height: 96px;
-            position: absolute;
-        }
-
-        .loginForm .userName {
-            padding: 30px 0px 10px;
-            position: relative;
-        }
-
-        .loginForm .loginPassword {
-            position: relative;
-        }
-
-        .loginBtn .buttonBox {
-            margin: 0px 35px 20px 45px;
-        }
-
-        .buttonBox .leftBtn {
-            float: left
-        }
-
-        .buttonBox .rightBtn {
-            float: right
-        }
-
-        .rightBtn .regBtn {
-            color: rgb(204, 204, 204);
-            margin-right: 10px;
-        }
-
-        .buttonBox .leftBtn a {
-            color: rgb(204, 204, 204);
-        }
-
-        .buttonBox .loginBtn {
-            background: rgb(0, 142, 173);
-            padding: 7px 12px;
-            border-radius: 4px;
-            border: 1px solid rgb(26, 117, 152);
-            border-image: none;
-            color: rgb(255, 255, 255);
-            font-weight: bold;
-        }
+/*login*/
+.loginbody{font-size:9pt;background:url(${TINY_CONTEXT_PATH}/login/images/loginbg3.png) no-repeat center center; width:100%;position:absolute;height:96%}
+.loginbox{width:692px; height:336px;background:url(${TINY_CONTEXT_PATH}/login/images/logininfo.png) no-repeat; overflow:auto;position:absolute;margin-top:-168px;top:50%;left:50%;margin-left:-346px;}
+.loginbox ul{margin-top:69px; margin-left:285px;}
+.loginbox ul li{margin-bottom:25px;width:299px;}
+.loginbox ul li label{color:#687f92; padding-left:25px;}
+.loginbox ul li label a{color:#687f92;}
+.loginbox ul li label a:hover{color:#3d96c9;}
+.loginbox ul li label input{margin-right:5px;font-weight:bold;}
+.loginuser{font-family:"Microsoft Yahei";width:299px; height:46px; background:url(${TINY_CONTEXT_PATH}/login/images/loginuser.png) no-repeat; border:none; line-height:46px; padding-left:44px; font-size:14px;}
+.loginpwd{font-family:"Microsoft Yahei";width:299px; height:46px; background:url(${TINY_CONTEXT_PATH}/login/images/loginpassword.png) no-repeat; border:none;line-height:46px; padding-left:44px; font-size:14px; color:#90a2bc;}
+.loginbtn{font-family:"Microsoft Yahei";width:111px;height:35px; background:#6e3671;border-radius:3px; font-size:14px; font-weight:bold; color:#fff;cursor:pointer; line-height:35px;border:none}
+.loginbtn:hover{background:#77377a;}
+#login_tip{height:5px;padding-top:18px;color:#c00;}
+input:- webkit-autofill { -webkit-box-shadow: 0 0 0 1000px white inset; }
     </style>
+    <script>var contextPath = "${TINY_CONTEXT_PATH}";</script>
+    <script src="${TINY_CONTEXT_PATH}/uiengine.uijs"></script>
 </head>
 <body>
-<div class="top_div"></div>
-<div class="login-container">
-    <div class="specialPic">
-        <div class="tou"></div>
-        <div class="initial_left_hand" id="left_hand"></div>
-        <div class="initial_right_hand" id="right_hand"></div>
-    </div>
-    <form class="loginForm" method="post" role="form" action="${TINY_CONTEXT_PATH}/login">
-        <div class="userName">
-            <span class="u_logo"></span>
-            <input class="ipt" type="text" name="username" placeholder="请输入用户名"/>
-        </div>
-        <div class="loginPassword">
-            <span class="p_logo"></span>
-            <input class="ipt" id="password" type="password" name="password" placeholder="请输入密码"/>
-        </div>
-        <div class="loginBtn">
-            <p class="buttonBox">
-                <span class="leftBtn"><a href="#"></a></span>
-					<span class="rightBtn">
-						<a class="regBtn" href="#"></a>
-						<input class="loginBtn" type="submit" value="登录"/>
-					</span>
-            </p>
-        </div>
-    </form>
+
+<div id="mainBody">
+    <div id="cloud1" class="cloud"></div>
+    <div id="cloud2" class="cloud"></div>
 </div>
-<script src="${TINY_CONTEXT_PATH}/login/js/jquery-1.9.1.min.js"></script>
-<script type="text/javascript">
-    if (window != top) {
-        top.location.href = location.href;
-    }
-    $(function () {
-        //得到焦点
-        $("#password").focus(function () {
-            $("#left_hand").animate({
-                left: "150",
-                top: " -38"
-            }, {
-                step: function () {
-                    if (parseInt($("#left_hand").css("left")) > 140) {
-                        $("#left_hand").attr("class", "left_hand");
-                    }
-                }
-            }, 2000);
-            $("#right_hand").animate({
-                right: "-64",
-                top: "-38px"
-            }, {
-                step: function () {
-                    if (parseInt($("#right_hand").css("right")) > -70) {
-                        $("#right_hand").attr("class", "right_hand");
-                    }
-                }
-            }, 2000);
-        });
-        //失去焦点
-        $("#password").blur(function () {
-            $("#left_hand").attr("class", "initial_left_hand");
-            $("#left_hand").attr("style", "left:100px;top:-12px;");
-            $("#right_hand").attr("class", "initial_right_hand");
-            $("#right_hand").attr("style", "right:-112px;top:-12px");
-        });
-    });
-</script>
+<div class="loginbody">
+    <div class="loginbox">
+        <form class="loginForm" method="post" role="form" action="${TINY_CONTEXT_PATH}/login">
+            <ul>
+                <li><p id="login_tip">${msg}</p></li>
+                <li id="login_input1"><input name="username"  type="text" class="loginuser" id="loginuser" placeholder="请输入用户名" value="${username?username:"admin"}" autocomplete="off"/></li>
+                <li id="login_input2"><input name="password" type="password" class="loginpwd" id="loginpwd" placeholder="请输入密码" value="123" autocomplete="off"/></li>
+                <li id="login_btn">
+                    <input type="submit" class="loginbtn" value="登录"/>
+                    <label><input name="rememberMe" type="checkbox"/>记住我</label>
+                ##                    <label><a href="#">忘记密码？</a></label>
+                </li>
+            </ul>
+        </form>
+    </div>
+</div>
 </body>
+<script type="text/javascript">
+    // 登录验证
+    $("form.loginForm").on('submit', function () {//登陆按钮
+        var user = $("#loginuser").val();
+        var loginpwd = $("#loginpwd").val();
+        if (user == '') {
+            $("#login_tip").html("用户名不能为空");
+            $("#loginuser").focus();
+            return false;
+        }
+        if (loginpwd == '') {
+            $("#login_tip").html("密码不能为空");
+            $("#loginpwd").focus();
+            return false;
+        }
+    });
+
+</script>
 </html>
 
 

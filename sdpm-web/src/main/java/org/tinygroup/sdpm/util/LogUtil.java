@@ -1,7 +1,6 @@
 package org.tinygroup.sdpm.util;
 
-import org.tinygroup.sdpm.common.log.obtain.impl.ObtainHandleImpl;
-import org.tinygroup.sdpm.common.log.obtain.inter.ObtainHandle;
+import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.service.impl.LogServiceImpl;
 import org.tinygroup.sdpm.system.service.inter.LogService;
@@ -12,9 +11,8 @@ import java.util.Date;
  * Created by wangll13383 on 2015/10/13.
  */
 public class LogUtil {
-    //之后要换成服务包装类型
+
     public final static LogService logService = SpringContextHolder.getBean(LogServiceImpl.class);
-    public final static ObtainHandle obtainHandle = SpringContextHolder.getBean(ObtainHandleImpl.class);
 
     public static void log(LogOperateObject objectType, LogAction action, String objectId, String userId) {
         saveLog(objectType.getOperateObject(), action.getAction(), objectId, userId, null, null, null, null, null);
@@ -23,13 +21,13 @@ public class LogUtil {
     public static void logWithComment(LogOperateObject objectType, LogAction action, String objectId, String userId,
                                       String productId, String projectId,
                                       Object oldObject, Object newObject, String comment) {
-        saveLog(objectType.getOperateObject(), action.getAction(), objectId, userId, productId, projectId, oldObject, newObject, comment);
+        saveLog(objectType.getOperateObject(), action.getAction(), objectId, userId, projectId, productId, oldObject, newObject, comment);
     }
 
     public static void changeLog(LogOperateObject objectType, LogAction action, String objectId, String userId,
                                  String productId, String projectId,
                                  Object oldObject, Object newObject) {
-        saveLog(objectType.getOperateObject(), action.getAction(), objectId, userId, productId, projectId, oldObject, newObject, null);
+        saveLog(objectType.getOperateObject(), action.getAction(), objectId, userId, projectId, productId, oldObject, newObject, null);
     }
 
     protected static void saveLog(String objectType, String action, String objectId, String userId,
@@ -37,8 +35,8 @@ public class LogUtil {
                                   Object oldObject, Object newObject, String comment) {
         SystemAction systemAction = new SystemAction();
         systemAction.setActionAction(action);
-        systemAction.setActionProduct(String.valueOf(product));
-        systemAction.setActionProject(String.valueOf(project));
+        systemAction.setActionProduct(String.valueOf(StringUtil.isBlank(product) ? "" : product));
+        systemAction.setActionProject(String.valueOf(StringUtil.isBlank(project) ? "" : project));
         systemAction.setActionObjectType(objectType);
         systemAction.setActionDate(new Date());
         systemAction.setActionObjectId(String.valueOf(objectId));
@@ -88,8 +86,10 @@ public class LogUtil {
         SUSPENDED("suspended"),          //挂起
         LOGIN("login"),              //登录系统
         LOGOUT("logout"),             //退出登录
-        DELETEESTIMATE("deleteestimate");     //删除了工时
-
+        DELETEESTIMATE("deleteestimate"), //删除了工时
+        REMARK("remark"), //添加备注
+        RUN("run"),  ///执行
+        COPY("copy"); //复制了
         private final String action;
 
         LogAction(String value) {
@@ -105,7 +105,7 @@ public class LogUtil {
         USER("user"),
         STORY("story"),
         TASK("task"),
-        PRODUCTPLAN("productplan"),
+        PRODUCTPLAN("plan"),
         RELEASE("release"),
         PROJECT("project"),
         PRODUCT("product"),
@@ -115,7 +115,15 @@ public class LogUtil {
         TESTTASK("testtask"),
         TODO("todo"),
         DOCLIB("doclib"),
-        DOC("doc");
+        DOC("doc"),
+        SLA("sla"),
+        CLIENT("client"),
+        FAQ("faq"),
+        REPLY("reply"),
+        REVIEW("review"),
+        HOLIDAY("holiday"),
+        REQUEST("request"),
+        PRODUCTLINE("productLine");
         private final String operateObject;
 
         LogOperateObject(String value) {

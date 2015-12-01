@@ -9,7 +9,7 @@
         <p class="titleName">编辑</p>
 
     #*    <div class="RTtitle">
-            <button type="submit" id="submit" class="commitBtn">保存</button>
+            <button type="submit" id="submit2" class="commitBtn">保存</button>
         </div>*#
 
         #@elementItem()
@@ -54,11 +54,8 @@
         #@elementItem()
             <div class="col-12">
                 <div class="col-2 text-r"><label>附件：</label></div>
-
                 <div class="col-9">
-                    #@formControlDiv("col-12")
-		   				#include("/product/page/event/fileupload.page")
-      				 		#end
+                    #@formControlDiv("col-12")#mulUploadFile()#end
                 </div>
             </div>
         #end
@@ -69,11 +66,11 @@
 
             </div>
             <div class="col-1">
-                <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
+                <button style="float: left" type="submit" id="submit2" class="commitBtn">保存</button>
             </div>
             <div class="col-1">
-                <button style="float: left" type="submit" id="submit" class="backBtn"><a
-                        href="${TINY_CONTEXT_PATH+adminPath}/product/page/project/product-release.page">返回</a></button>
+                <button style="float: left" type="submit" id="submit2" class="backBtn"><a
+                        href="javascript :;" onclick="javascript:history.back(-1);">返回</a></button>
             </div>
             <div class="col-5"></div>
         </div>

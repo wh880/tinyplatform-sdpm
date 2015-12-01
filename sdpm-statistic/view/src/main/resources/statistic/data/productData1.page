@@ -1,72 +1,79 @@
 #@bkGrayDiv("pd-20")
 筛选条件：
-    #labelCheckbox(ckId="shutdown" labelText="关闭产品")
-    #labelCheckbox(ckId="overdate" labelText="过期计划")
+<script>
+    $(function(){
+        #if(deleted&&deleted==1)
+            $("#closed").attr("checked","checked");
+        #end
+        #if(overdue&&overdue==1)
+            $("#overdue").attr("checked","checked");
+        #end
+        $(".check-box .condition").on("click",function(){
+            if($("#closed").is(':checked')&&$("#overdue").is(':checked')){
+                window.location.href="${TINY_CONTEXT_PATH+adminPath}/statistic/product/all?deleted=1&overdue=1";
+            }else if($("#closed").is(':checked')){
+                window.location.href="${TINY_CONTEXT_PATH+adminPath}/statistic/product/all?deleted=1&overdue=0";
+            }else if($("#overdue").is(':checked')){
+                window.location.href="${TINY_CONTEXT_PATH+adminPath}/statistic/product/all?deleted=0&overdue=1";
+            }else{
+                window.location.href="${TINY_CONTEXT_PATH+adminPath}/statistic/product/all?deleted=0&overdue=0";
+            }
+        });
+    })
+
+</script>
+    #labelCheckbox(ckId="closed" ckClass="condition" labelText="关闭产品")
+    #labelCheckbox(ckId="overdue" ckClass="condition" labelText="过期计划")
 #end
 <div style="height: 10px;"></div>
-#@tableStriped("table-border")
+<style>
+    .multable tbody tr td {
+        vertical-align: middle
+    }
+</style>
+#@tableStriped("table-border multable ")
     #@thead()
         #@tr("text-c")
-            #@th()
-            产品名称
-            #end
-            #@th()
-            产品负责人
-            #end
-            #@th()
-            产品计划
-            #end
-            #@th()
-            开始日期
-            #end
-            #@th()
-            结束日期
-            #end
-            #@th()
-            草稿
-            #end
-            #@th()
-            激活
-            #end
-            #@th()
-            已变更
-            #end
-            #@th()
-            已关闭
-            #end
+            #@th()产品名称#end
+            #@th()产品负责人#end
+            #@th()产品计划#end
+            #@th()开始日期#end
+            #@th()结束日期#end
+            #@th()草稿#end
+            #@th()激活 #end
+            #@th()已变更#end
+            #@th()已关闭#end
         #end
         #@tbody()
+            #foreach(p:product)
             #@tr("text-c")
-            <td rowspan="2">测试产品</td>
-            <td rowspan="2">admin</td>
-            <td>计划</td>
-            <td>2015-08-25</td>
-            <td>2015-08-25</td>
-            <td>2</td>
-            <td>4</td>
-            <td>1</td>
-            <td>1</td>
-            #end
-            #@tr("text-c")
-            <td>计划2</td>
-            <td>2015-09-25</td>
-            <td>2015-09-25</td>
-            <td>2</td>
-            <td>4</td>
-            <td>1</td>
-            <td>1</td>
-            #end
-            #@tr("text-c")
-            <td rowspan="1">测试产品3</td>
-            <td rowspan="1">admin</td>
-            <td>计划</td>
-            <td>2015-08-25</td>
-            <td>2015-08-25</td>
-            <td>2</td>
-            <td>4</td>
-            <td>1</td>
-            <td>1</td>
+            <td rowspan=${p?.value.size()+1}> ${p?.key?.productName}</td>
+            <td rowspan=${p?.value.size()+1}>${p
+                ?.key?.productCreatedBy?UserUtils.getUserById(p?.key?.productCreatedBy)?.orgUserRealName:""}
+            </td>
+                #if(!p.value)
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                #else
+                    #foreach(pl:p?.value)
+                    #@tr("text-c")
+                    <td>${pl?.planName}</td>
+                    <td>${formatDate(pl?.planBeginDate,"yyyy-MM-dd")}</td>
+                    <td>${formatDate(pl?.planEndDate,"yyyy-MM-dd")}</td>
+                    <td>${pl?.draft}</td>
+                    <td>${pl?.active}</td>
+                    <td>${pl?.change}</td>
+                    <td>${pl?.close}</td>
+                    #end
+                #end
             #end
         #end
     #end
+#end
+#end
 #end

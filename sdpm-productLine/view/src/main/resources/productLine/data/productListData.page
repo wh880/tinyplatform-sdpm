@@ -1,0 +1,42 @@
+#foreach(product:productList)
+#@tr()
+    #@td()<input type="checkbox" value="1" name="product">#end
+    #@td()<a class="jump" value="${product?.productLineId}" id="${product?.productId}"
+             href="${TINY_CONTEXT_PATH +adminPath}/product/find/overview?productId=${product?.productId}">${product
+        ?.productId}</a>#end
+    #@td()<a class="jump" href="${TINY_CONTEXT_PATH +adminPath}/product/find/overview?productId=${product?.productId}">${product
+        ?.productName}</a>#end
+    #@td()${product?.activeSum}#end
+    #@td()${product?.changeSum}#end
+    #@td()${product?.draftSum}#end
+    #@td()${product?.closeSum}#end
+    #@td()${product?.planCount}#end
+    #@td()${product?.releaseCount}#end
+    #@td()${product?.bugCount}#end
+    #@td()${product?.resolveSum}#end
+    #@td()${product?.assignSum}#end
+    #@td("nowrap")
+        #foreach(m:menuManager.getScopeMenus("allproduct-op"))
+            #set(url=eval(m?.href))
+            #if(m.map.type=="close")
+                #iconOperations("#myModal" m?.icon m?.name "865" "500" adminPath+url "ml-5")&nbsp;
+            #elseif(m.map.type=="editor")
+            <a class="jump" href="${TINY_CONTEXT_PATH +adminPath}${eval(url)}"
+               title="${m?.name}">#buttonIcon(iconClass=m?.icon)</a>&nbsp;
+            #end
+        #end
+    #end
+#end
+#end
+<script>
+    $(function(){
+        $(".jump").on("click",function(){
+            var lineId = $(this).closest("tr").find("a:first").attr("value");
+            var id = $(this).closest("tr").find("a:first").attr("id");
+            $.cookie("cookieProductLineId",lineId,{path:"/"});
+            $.cookie("cookieProductId",id,{path:"/"});
+        });
+
+    })
+</script>
+

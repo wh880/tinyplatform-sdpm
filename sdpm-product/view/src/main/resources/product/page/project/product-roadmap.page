@@ -33,12 +33,12 @@
 			            #dateHead(formatDate(compTime,'yyyy') formatDate(compTime,'MM') formatDate(compTime,'dd'))
 			
 			            #if(road?.planEndDate)
-							#@dateBody(road?.planName) 
-								[${formatDate(road?.planBeginDate,"yyyy.MM.dd")}--${formatDate(road?.planBeginDate,"yyyy.MM.dd")}] <br/>
+							#@dateBody("计划："+road?.planName) 
+								[${formatDate(road?.planBeginDate,"yyyy.MM.dd")}--${formatDate(road?.planEndDate,"yyyy.MM.dd")}] <br/>
 								${road?.planSpec} 
 							#end
 						#else
-							#@dateBody(road?.releaseName) ${road?.releaseDesc}  #end	
+							#@dateBody("发布："+road?.releaseName) ${road?.releaseDesc}  #end	
 						#end
 			
 			        #end

@@ -1,108 +1,84 @@
 #import("/org/tinygroup/button/components/button_smart.component")
-
 #@div(divClass="operationbar")
 ##左侧按钮
 <span class="f">
-    <a href="${TINY_CONTEXT_PATH+adminPath}/project/task/index?choose=1" "ml-5" class=${choose
-    =="1"?"active_btn":""}>未关闭</a>
-    <a href="${TINY_CONTEXT_PATH+adminPath}/project/task/index?choose=2" "ml-5" class=${choose
-    =="2"?"active_btn":""}>所有</a>
-    <a href="${TINY_CONTEXT_PATH+adminPath}/project/task/index.page?choose=3" "ml-5" class=${choose
-    =="3"?"active_btn":""}>看板</a>
-    <a href="${TINY_CONTEXT_PATH+adminPath}/project/task/gantt.page?choose=4" "ml-5" class=${choose
-    =="4"?"active_btn":""}>甘特图</a>
-    <a href="${TINY_CONTEXT_PATH+adminPath}/project/task/calendar.page?choose=5" "ml-5" class=${choose
-    =="5"?"active_btn":""}>日历</a>
-    <a href="${TINY_CONTEXT_PATH+adminPath}/project/burn/init?choose=6" "ml-5" class=${choose
-    =="6"?"active_btn":""}>燃尽图</a>
-    <a href="${TINY_CONTEXT_PATH+adminPath}/project/task/index?choose=7" "ml-5" class=${choose
-    =="7"?"active_btn":""}>指派给我</a>
+    <a val="1" "ml-5" class="selChoose ${choose=="1"?"active_btn":""}">未关闭</a>
+    <a val="2" "ml-5" class="selChoose ${choose=="2"?"active_btn":""}">所有</a>
+    <a href="${TINY_CONTEXT_PATH+adminPath}/project/task/board?choose=3" "ml-5" class=${choose=="3"?"active_btn":""}>看板</a>
+    <a href="${TINY_CONTEXT_PATH+adminPath}/project/task/gantt?choose=4" "ml-5" class=${choose=="4"?"active_btn":""}>甘特图</a>
+    <a href="${TINY_CONTEXT_PATH+adminPath}/project/burn/init?choose=6" "ml-5" class=${choose=="6"?"active_btn":""}>燃尽图</a>
+    <a val="7" "ml-5" class="selChoose ${choose=="7"?"active_btn":""}">指派给我</a>
+    <script>
+        $(function () {
+            var actionUrl = $("#taskTable").attr("data-url");
+            $(".selChoose").on("click",function () {
+                if (actionUrl) {
+                    $("#taskTable").attr("data-url", actionUrl + "&choose=" + $(this).attr("val"));
+                    $(".selChoose").removeClass("active_btn");
+                    $(this).addClass("active_btn");
+                    $("#taskTable").trigger("refresh");
+                    $("#dLabel>span:first").removeClass("active_btn").text("更多");
+                } else {
+                    window.location.href = "../task/index?choose=" + $(this).attr("val");
+                }
+            });
+        });
+    </script>
 ##更多
-
     #include("/project/task/maplist.page")
 <div class="btn-group btnDropDown">
-    <a id="dLabel" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-        ${statuMap.get(statu==null?"0":statu)}
+    <a id="dLabel" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" class="${choose=="8"?"active_btn":""}">
+        <span>${statu?statuMap.get(statu):"更多"}</span>
         <span class="caret"></span>
     </a>
-<ul class="dropdown-menu" aria-labelledby="dLabel">
-    #for(var : statuMap.keySet() )
-    #if(var != 0)
-        <li><a href="${TINY_CONTEXT_PATH+adminPath}/project/task/index.page?statu=${var}">${statuMap.get(var)}</a></li>
-    #end
-#end
-</ul>
+    <ul class="dropdown-menu" aria-labelledby="dLabel">
+        #foreach(var : statuMap.keySet() )
+            #if(var != 0)
+                <li><a class="projectMore" val="${var}">${statuMap.get(var)}</a></li>
+            #end
+        #end
+    </ul>
 </div>
-
+    <script>
+        $(function () {
+            var actionUrl = $("#taskTable").attr("data-url");
+            $(".projectMore").click(function (e) {
+                if(actionUrl) {
+                    $("#taskTable").attr("data-url", actionUrl + "&statu=" + $(this).attr("val"));
+                    $("#taskTable").trigger("refresh");
+                    $(".selChoose").removeClass("active_btn");
+                    $(this).closest("div").find("a span:first").text($(this).text()).addClass("active_btn");
+                }else{
+                    window.location.href = "../task/index?choose=8&statu=" + $(this).attr("val");
+                }
+            });
+        });
+    </script>
 ##分组查看
     <div class="btn-group btnDropDown">
-        <a id="dLabel" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-            分组查看
+        <a id="dLabel" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"  class="${choose=="9"?"active_btn":""}">
+            #if(menuId)
+                ${menuManager.getMenu(menuId).name}
+            #else
+                    分组查看
+            #end
             <span class="caret"></span>
         </a>
         <ul class="dropdown-menu" aria-labelledby="dLabel">
-            <li><a href="${TINY_CONTEXT_PATH+adminPath}/project/task/index.page">需求分组</a></li>
-            <li><a href="${TINY_CONTEXT_PATH+adminPath}/project/task/index.page">状态分组</a></li>
-            <li><a href="${TINY_CONTEXT_PATH+adminPath}/project/task/index.page">优先分组</a></li>
-            <li><a href="${TINY_CONTEXT_liATH}/liroject/task/index.liage">创建者分组</a></li>
-            <li><a href="${TINY_CONTEXT_liATH}/liroject/task/index.liage">指派给分组</a></li>
-            <li><a href="${TINY_CONTEXT_liATH}/liroject/task/index.liage">完成者分组</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="${TINY_CONTEXT_liATH}/liroject/task/index.liage">关闭者组</a></li>
-            <li><a href="${TINY_CONTEXT_liATH}/liroject/task/index.liage">预计分组</a></li>
-            <li><a href="${TINY_CONTEXT_liATH}/liroject/task/index.liage">已消耗分组</a></li>
+            #foreach(m:menuManager.getScopeMenus("task-group-menu"))
+                <li><a href="${TINY_CONTEXT_PATH+adminPath+m.href}&choose=9&menuId=${m.id}">${m.name}</a></li>
+            #end
         </ul>
     </div>
-    <a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
 </span>
 
 ##右侧按钮
 <span class="r">
-    #set(m1=menuManager.getMenu("pro-task-input"))
-    #if(m1)
-        <div class="btn-group btnDropDown">
-            <a id="dLabel" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true"
-               aria-expanded="false">
-                导入
-                <span class="caret"></span>
-            </a>
-
-            <ul class="dropdown-menu" aria-labelledby="dLabel">
-                <li><a href="${TINY_CONTEXT_PATH+adminPath}/project/task/inputBug.page">导入bug</a></li>
-                <li><a href="${TINY_CONTEXT_PATH+adminPath}/project/task/inputTask.page">导入任务</a></li>
-            </ul>
-
-
-        </div>
-    #end
-    #set(m2=menuManager.getMenu("pro-task-input"))
-    #if(m2)
-        <div class="btn-group btnDropDown">
-            <a id="dLabel" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true"
-               aria-expanded="false">
-                导出
-                <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="dLabel">
-                <li>#@iconOperations("#myModal" "" "导出数据" "700" "100"  "/project/task/outputData.pagelet" "ml-5")
-                    导出数据#end</li>
-                <li>#@iconOperations("#myModal" "" "导出数据" "550" "100" "/project/task/outputModal.pagelet" "ml-5")
-                    导出模板#end</li>
-            </ul>
-        </div>
-    #end
-
-##    <a href="${TINY_CONTEXT_PATH+adminPath}/project/task/reportform.page">#buttonIcon(iconClass="icon-bar-chart")
-##        报表</a>&nbsp;
-##    <a href="${TINY_CONTEXT_PATH+adminPath}/project/task/batchAdd.page">#buttonIcon(iconClass="icon-plus-sign")
-##        批量增加</a>&nbsp;
-##    <a href="${TINY_CONTEXT_PATH+adminPath}/project/task/add.page">#buttonIcon(iconClass="icon-plus")建任务</a>&nbsp;
-
-    #foreach(m:menuManager.getScopeMenus("pro-taskmenu2-op"))
-        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
-    #end
+          #foreach(m:menuManager.getScopeMenus("pro-taskmenu2-op"))
+              <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}"
+                 title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
+          #end
 </span>
-
-#div(divClass="clearfix")
-#include("/project/mulsearch.page")
+    #div(divClass="clearfix")
+##    #include("/project/mulsearch.page")
 #end

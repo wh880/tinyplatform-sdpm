@@ -15,10 +15,11 @@
         #end
     #end
     #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/service/sla/save" "post" {"class":""})
+    <input type="hidden" name="clientName" value="${clientName}"/>
     <input type="hidden" name="slaId" value="${sla?.slaId}"/>
     <div style="width:100%;float:left" class="pageleftpart">
         <div class="infoContent">
-        ##            <p class="titleName">编辑协议</p>
+            <p class="titleName">新建/编辑协议</p>
             #@elementItem()
                 #@sdpmItem("客户名称" "*")
                     #@Tselect2F()
@@ -30,24 +31,53 @@
                                 #@tinyOptionItem(l.clientId)${l?.clientName}#end
                             #end
                         #end
-                        #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH+adminPath}/service/client/form"
-                                          class="r ">增加</a>#end
-                    #end
-                #end
-            #end
-            #@elementItem()
-                #@sdpmItem("产品名称" "*")
-                    #@Tselect2F()
-                        #@Tselect2Body(
-                            "productId" sla?.productId{"datatype":"*","id":"productId",
-                            "nullmsg":"产品名称不能为空","class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                            #@tinyOptionItem("")请选择#end
-                            #foreach(l:slas)
-                                #@tinyOptionItem(l.productId)${l?.productName}#end
+                        #@Tselect2Fix()
+                            #set(m=menuManager.getMenu("client-add"))
+                            #if(m)
+                                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
+                            #end
+                            #set(m=menuManager.getMenu("client"))
+                            #if(m)
+                                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
                             #end
                         #end
                     #end
                 #end
+            #end
+            #@elementItem()
+                #@colLabel("col-2")<span class="c-red">*</span>所属产品：#end
+                #@formControlDiv("col-4")
+                    #@TzTreeSelect("productId" cookieProductId {"class":"input-text",
+                        "datatype":"*","nullmsg":"所属产品不能为空！","data-URL":call("link",adminPath+
+                        "/productLine/userProductTree")})
+                        <span>
+                            #@hasMenu("newproduct")
+                                <a href="${TINY_CONTEXT_PATH +adminPath}/product/addproduct/addition "
+                                   class="r ">增加</a>
+                            #end
+                            #@hasMenu("allproduct")
+                                <a href=" ${TINY_CONTEXT_PATH +adminPath}/product/allproduct/addition">全部</a>
+                            #end
+                        </span>
+                        <script>
+                            $("#${sid}-input").on("change", function () {
+                                var pId = $(this).val();
+                                if (pId > 0) {
+                                    ajaxRead("${sid}", "moduleId", "moduleId", "moduleName", "/quality/bug/ajax/module?moduleRoot=" + pId, "0", "module");
+                                    ajaxRead("${sid}", "planId", "planId", "planName", "/product/plan/planList?productId=" + pId, "0", "plan");
+                                    var url = $("#modelA").attr("href");
+                                    if (!url.endsWith("=")) {
+                                        url = url.substring(0, url.indexOf("=") + 1);
+                                    }
+                                    $("#modelA").attr("href", url + pId)
+                                    $("input[name=storyTitle]").blur();
+                                }
+                            })
+
+                        </script>
+                    #end
+                #end
+                #@validateDiv("col-2")#end
             #end
 
             #@elementItem()
@@ -57,28 +87,17 @@
                         "nullmsg":"产品版本不能为空","class":"input-text"})
                 #end
             #end
-        #* #@elementItem()
-             #@sdpmItem("服务级别" "*")
-                     #@tinySelect("serviceLevel" sla?.serviceLevel{"datatype":"*","id":"serviceLevel","nullmsg":"产品版本不能为空","class":"input-text select2"})
-                         #@tinyOptionItem("")请选择#end
-                         #@tinyOptionItem("0")基础#end
-                         #@tinyOptionItem("1")潜力#end
-                         #@tinyOptionItem("2")核心#end
-                         #@tinyOptionItem("3")vip#end
-                     #end
-             #end
-         #end*#
+
             #@elementItem()
                 #@sdpmItem("服务级别" "*")
                     #@Tselect2F()
                         #@Tselect2Body(
                             "serviceLevel" sla?.serviceLevel{"datatype":"*","id":"serviceLevel",
-                            "nullmsg":"产品名称不能为空","class":"input-text select2"})
+                            "nullmsg":"服务级别不能为空","class":"input-text select2"})
                             #@tinyOptionItem("")请选择#end
-                            #@tinyOptionItem("0")基础#end
-                            #@tinyOptionItem("1")潜力#end
-                            #@tinyOptionItem("2")核心#end
-                            #@tinyOptionItem("3")vip#end
+                            #foreach(item : getDict("serviceLevel"))
+                                #@tinyOptionItem(item.value)${item.text}#end
+                            #end
                         #end
                     #end
                 #end
@@ -92,24 +111,34 @@
             #end
             #@elementItem()
                 #@sdpmItem("服务工时上限")
+                <div class="input-group">
                     #tinyInput(
                         "text" "serviceEffortLimit" sla?.serviceEffortLimit{"id":"serviceEffortLimit",
-                        "class":"input-text select2"})
+                        "class":"input-text"})
+                    <span class="input-group-addon" id="basic-addon2">小时</span>
+                </div>
+
                 #end
             #end
             #@elementItem()
                 #@sdpmItem("服务响应时限")
+                <div class="input-group">
                     #tinyInput(
                         "text" "serviceReplyTimeLimit" sla?.serviceReplyTimeLimit{"id":
                         "serviceReplyTimeLimit","class":
                         "input-text select2"})
+                    <span class="input-group-addon" id="basic-addon2">小时</span>
+                    </div>
                 #end
             #end
             #@elementItem()
                 #@sdpmItem("需求回访时限")
-                    #tinyInput(
+                    <div class="input-group">
+                        #tinyInput(
                         "text" "serviceReviewTimeLimit" sla?.serviceReviewTimeLimit{"id":
-                        "serviceReviewTimeLimit","class":"input-text select2"})
+                            "serviceReviewTimeLimit","class":"input-text select2"})
+                        <span class="input-group-addon" id="basic-addon2">小时</span>
+                    </div>
                 #end
             #end
             #@elementItem()
@@ -134,13 +163,11 @@
             #@elementItem()
                 #@sdpmItem("服务级别协议" "*")
                     #@tinySelect(
-                        "slaStatus" sla?.slaStatus {"class":"input-text select2","nullmsg":"请选择","datatype":"*"})
+                        "slaStatus" sla?.slaStatus {"class":"input-text select2","nullmsg":"请选择服务级别协议","datatype":"*"})
                         #@tinyOptionItem("")请选择#end
-                        #@tinyOptionItem("0")新建#end
-                        #@tinyOptionItem("1")生效#end
-                        #@tinyOptionItem("2")到期#end
-                        #@tinyOptionItem("3")作废#end
-                        #@tinyOptionItem("4")关闭#end
+                        #foreach(item : getDict("slaStatus"))
+                            #@tinyOptionItem(item.value)${item.text}#end
+                        #end
                     #end
                 #end
             #end
@@ -148,7 +175,7 @@
                 #@sdpmItem("服务期限" "*")
                     #@tinyDateInput(
                         "serviceDeadline" formatDate(sla?.serviceDeadline,
-                        "yyyy-MM-dd") "YYYY-MM-DD" {"style":"width:200px","datatype":"*",
+                        "yyyy-MM-dd") "YYYY-MM-DD" {"style":"width:120px","datatype":"*",
                     "nullmsg":"日期不能为空","placeholder":"请输入日期"})#end
                 #end
             #end
@@ -161,8 +188,8 @@
             #@elementItem()
                 #@sdpmItem("创建时间")
                     #@tinyDateInput(
-                        "slaCreateDate" formatDate(sla?.slaCreateDate,
-                        "yyyy-MM-dd") "YYYY-MM-DD" {"style":"width:200px","id":"slaCreateDate","placeholder":""})#end
+                        "slaCreateDate" formatDate(sla?.slaCreateDate?:now(),
+                    "yyyy-MM-dd") "YYYY-MM-DD" {"style":"width:120px","id":"slaCreateDate","placeholder":""})#end
                 #end
             #end
             #@elementItem()
@@ -172,13 +199,11 @@
                 #end
             #end
             #@elementItem()
-                #@sdpmItem("批准时间")
+                #@sdpmItem("批准时间","*")
                     #@tinyDateInput(
                         "slaReviewDate" formatDate(sla?.slaReviewDate,
-                        "yyyy-MM-dd") "YYYY-MM-DD" {"style":"width:200px","id":"slaReviewDate",
-                    "datatype":
-                    "*","nullmsg":
-                    "日期不能为空","placeholder":""})#end
+                        "yyyy-MM-dd") "YYYY-MM-DD" {"style":"width:120px","id":"slaReviewDate",
+                    "datatype":"*","nullmsg":"日期不能为空","placeholder":""})#end
                 #end
             #end
             #@elementItem()
@@ -196,7 +221,7 @@
 
                 </div>
                 <div class="col-1">
-                    <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
+                    <button style="float: left" type="submit" id="submit2" class="commitBtn">保存</button>
                 </div>
                 <div class="col-1">
                     #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")取消#end
@@ -211,11 +236,11 @@
 
 
 <script type="text/javascript">
-    $(".select2").select2();
+    $("select.select2").select2();
 </script>
 <script type="text/javascript">
     $(function () {
-        $("form[name=thisform").Validform({
+        $("form[name=thisform]").Validform({
             tiptype: 2
         });
     });

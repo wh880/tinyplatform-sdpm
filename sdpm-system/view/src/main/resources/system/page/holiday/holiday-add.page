@@ -1,38 +1,14 @@
 
-#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/system/holiday/save" "post" {"class":"test"})
+#@tinyForm("holidayForm" TINY_CONTEXT_PATH+adminPath+"/system/holiday/save" "post" {"class":"test"})
     <input type="hidden" name="dictId" value="${holiday?.holidayId}"/>
     <input type="hidden" name="holidayDeleted" value="0"/>
     #@elementItem()
         #@colLabel()名称：#end
         #@formControlDiv("col-6")
-          #tinyInput("text" "holidayName" holiday?.holidayName{"id":"username","class":"input-text"})
+          #tinyInput("text" "holidayName" holiday?.holidayName{"datatype":"*","id":"holidayName","class":"input-text","nullmsg":"假期名不为空"})
         #end
         #@validateDiv("col-2")#end
     #end
-    #@elementItem()
-			        #@colLabel()创建者：#end
-				        #@formControlDiv("col-6")
-	
-				        	 #@Tselect2F()
-			                    #@Tselect2Body("holidayAccount" holiday?.holidayAccount {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-			                        <option value="Mck">Mck</option>
-			                        <option value="wll">wll</option>
-			                        <option value="zch">zch</option>
-			                        <option value="gzc">gzc</option>
-			                        <option value="cp">cp</option>
-			                        <option value="xbb">xbb</option>
-			                        <option value="wj">wj</option>
-			                    #end
-			                
-			                    #@Tselect2Fix()<a href="#" class="r ">增加</a><a href="#">全部</a>#end
-			                #end
-				        	 
-				        	 
-				        #end
-			        #@validateDiv("col-2")#end
-			      #end
-			 
-			
    #@elementItem()
         #@colLabel()类型：#end
          #@formControlDiv("col-6")
@@ -44,24 +20,12 @@
         #@validateDiv("col-2")#end
     #end
 
-##    #@elementItem()
-##    #@daterangepickerPosition()
-##        #@colLabel()日期：#end
-##        #@formControlDiv("col-6")
-####        	 #@dateMultipleSelect()
-####        	 #end
-##           #@tinyDateInput("holidayDate" holiday?.holidayDate "YYYY-MM-DD" {"style":"width:100%","datatype":"*","nullmsg":"日期不能为空"})#end
-##        #end
-##        #@validateDiv("col-2")#end
-##    #end
-##    #end
   #@elementItem()
     #@daterangepickerPosition()
         #@colLabel()日期：#end
         #@formControlDiv("col-6")
         	 #@dateMultipleSelect("selectList" holiday?.holidayDate)
         	 #end
-#*           #@tinyDateInput("birthday" "" "YYYY-MM-DD" {"style":"width:100%","datatype":"*","nullmsg":"日期不能为空"})#end*#
         #end
         #@validateDiv("col-2")#end
     #end
@@ -70,13 +34,21 @@
      #@elementItem()
         #@colLabel()描述：#end
 	#@formControlDiv("col-8")
-		#@tinyTextarea("holidayDetail" {"placeholder":"说点什么...最少输入10个字符","datatype":"*10-500","nullmsg":"备注不能为空！"})${holiday?.holidayDetail}#end
+        #@tinyTextarea("holidayDetail" {"placeholder":"请输入该假期的描述","datatype":"*0-500","nullmsg":
+            ""})${holiday?.holidayDetail}#end
 	#end
         #@validateDiv("col-2")#end
     #end
     #@elementItem()
-    #@div(divClass="col-8 col-offset-2 form-inline")
-      #tinyInput("submit" "submitbtn" " 提交 " {"class":"btn btn-primary"})
-    #end
+        #@div(divClass="col-8 col-offset-2 form-inline")
+          #tinyInput("submit" "submitbtn" " 提交 " {"class":"btn btn-primary"})
+        #end
 	#end
 #end
+<script type="text/javascript">
+    $(function () {
+        $("form[name=holidayForm]").Validform({
+            tiptype: 2
+        });
+    });
+</script>

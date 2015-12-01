@@ -3,11 +3,17 @@ package org.tinygroup.sdpm.project.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.tinygroup.commons.tools.StringUtil;
+import org.tinygroup.sdpm.common.condition.ConditionCarrier;
+import org.tinygroup.sdpm.common.condition.ConditionUtils;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.product.biz.inter.StoryManager;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
+import org.tinygroup.sdpm.project.biz.inter.BuildManager;
+import org.tinygroup.sdpm.project.biz.inter.ProjectManager;
 import org.tinygroup.sdpm.project.biz.inter.ProjectStoryManager;
 import org.tinygroup.sdpm.project.biz.inter.TaskManager;
+import org.tinygroup.sdpm.project.dao.ProjectBuildDao;
+import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectStory;
 import org.tinygroup.sdpm.project.service.inter.ProjectStoryService;
 import org.tinygroup.tinysqldsl.Pager;
@@ -26,29 +32,57 @@ public class ProjectStoryServiceImpl implements ProjectStoryService {
     private StoryManager storyManager;
     @Autowired
     private TaskManager taskManager;
+    @Autowired
+    private ProjectManager projectManager;
+    @Autowired
+    private ProjectBuildDao projectBuildDao;
+    @Autowired
+    private BuildManager buildManager;
 
+    public int[] updateLink(List<ProjectStory> projectStoryList) {
+        return projectStoryManager.updateLink(projectStoryList);
+    }
+
+    public List<Project> findProjectsByStory(Integer storyId) {
+        if (storyId == null) {
+            return null;
+        }
+        ProjectStory projectStory = new ProjectStory();
+        projectStory.setStoryId(storyId);
+        List<ProjectStory> projectStoryList = projectStoryManager.findList(projectStory);
+        if (projectStoryList.isEmpty() || projectStoryList == null) {
+            return null;
+        }
+        List<Integer> ids = new ArrayList<Integer>();
+        for (ProjectStory t : projectStoryList) {
+            ids.add(t.getStoryId());
+        }
+        return projectManager.findListByIds(ids);
+    }
 
     public List<ProjectStory> findByProjectStory(ProjectStory projectStory) {
         return projectStoryManager.findList(projectStory);
     }
 
-    public Integer batchtDel(String condition) {
-        return projectStoryManager.batchtDel(condition);
+    public Integer batchDel(Integer projectId, Integer[] storyIds) {
+        return projectStoryManager.batchDel(storyIds, projectId);
     }
 
     public int[] addLink(List<ProjectStory> projectStoryList) {
         return projectStoryManager.linkStory(projectStoryList);
     }
 
-
     public List<ProductStory> findStoryByProject(Integer projectId) {
-        List<ProjectStory> projectStoryList = projectStoryManager.findSrotys(projectId);
+        List<ProjectStory> projectStoryList = projectStoryManager.findStoryList(projectId);
+        if (projectStoryList == null || projectStoryList.isEmpty()) {
+            return new ArrayList<ProductStory>();
+        }
         List<Integer> storyList = new ArrayList<Integer>();
         for (ProjectStory projectStory : projectStoryList) {
             storyList.add(projectStory.getStoryId());
         }
         Integer[] i = new Integer[storyList.size()];
-        List<ProductStory> list = storyManager.findList(storyList.toArray(i));
+        List<ProductStory> list = storyManager.findList(false, storyList.toArray(i));
         return list;
     }
 
@@ -60,35 +94,31 @@ public class ProjectStoryServiceImpl implements ProjectStoryService {
         return projectStoryManager.findStoryToLink(projectId, start, limit, order, ordertype);
     }
 
-    public Pager<ProductStory> findStoryByProject(Integer projectId, Integer start, Integer limit, String order, String ordertype) {
+    public Pager<ProductStory> findStoryPager(int start, int limit, int id, SearchInfos conditions, String groupOperate) {
+        return buildManager.findBuildStory(start, limit, id);
+    }
 
-        List<ProjectStory> storyList = projectStoryManager.findSrotys(projectId);
-        String condition = "";
-        if (storyList == null || storyList.isEmpty()) {
-            condition = null;
-        } else {
-            condition = " story_id in (";
-            String storys = "";
-            for (ProjectStory story : storyList) {
-                if (StringUtil.isBlank(storys)) {
-                    storys = storys + story.getStoryId().toString();
-                } else {
-                    storys = storys + "," + story.getStoryId().toString();
-                }
-            }
-            condition = condition + storys + ")";
+    public Pager<ProductStory> findNoStoryPager(int start, int limit, int id, String condition, SearchInfos conditions, String groupOperate) {
+        return buildManager.findNoBuildStory(start, limit, condition, id);
+    }
+
+    public Pager<ProductStory> findStoryByProject(Integer projectId, Integer start, Integer limit, String order, String ordertype, String moduleId) {
+        List<ProjectStory> storyList = projectStoryManager.findStoryList(projectId);
+        String[] ids = new String[storyList.size()];
+        for (int i = 0; i < storyList.size(); i++) {
+            ids[i] = String.valueOf(storyList.get(i).getStoryId());
         }
-
-        boolean asc = "asc".equals(ordertype) ? true : false;
-        Pager<ProductStory> pager = storyManager.findPager(start, limit, null, condition, null, null, order, asc);
+        ConditionCarrier carrier = new ConditionCarrier();
+        carrier.putIdIn("productStory.storyId",ids);
+        if (!StringUtil.isBlank(moduleId)) {
+            carrier.putModuleIn("productStory.moduleId",moduleId);
+        }
+        ProductStory story = new ProductStory();
+        story.setDeleted(0);
+        Pager<ProductStory> pager = storyManager.findStoryByCondition(start, limit, story, carrier, order, "asc".equals(ordertype) ? true : false);
         for (ProductStory s : pager.getRecords()) {
             s.setTaskNumber(taskManager.getTaskSumByStory(s.getStoryId()));
         }
         return pager;
-    }
-
-    public Pager<ProductStory> findStoryPager(int start, int limit, ProductStory story, String statusCondition, SearchInfos conditions, String groupOperate, String columnName, boolean asc) {
-
-        return storyManager.findPager(start, limit, story,statusCondition, conditions, groupOperate, columnName, asc);
     }
 }

@@ -1,65 +1,83 @@
-#import("/org/tinygroup/publicComponent/macro/navselect.component")
-#@navSelect2("product" "product")
-#@navSelect2Nav()
-#if(qualityProductId)
-#for(product : qualityProductList)
-#if(product?.productId == qualityProductId)
-${product?.productName}
-#set(qualityProduct = product)
-#break
+#set(qualityProductIdTemp = qualityProductId,qualityProductId=qualityProductId?:ProductUtils.getAllProductListByUser()?.get(0)?.productId)
+#if(!qualityProductIdTemp&&qualityProductId)
+<script type="text/javascript">
+    $(function(){
+        $.cookie('qualityProductId', "${qualityProductId}", {path: "/"});
+    })
+</script>
 #end
+
+#if(qualityProductId&&ProductUtils.getAllProductListByUser()?.size()>0)
+    #set(finded = 0)
+    #foreach(product : ProductUtils.getAllProductListByUser())
+    #if(product?.productId == qualityProductId)
+        #set(finded=1,currentProductName=product.productName)
+    #end
+#end
+#if(finded==0)
+<script type="text/javascript">
+    $.removeCookie('qualityProductId',{path:"/"})
+    //window.location.href='http://localhost:8989/sdpm-web/a/project/task/index';
+    window.location.reload();
+</script>
 #end
 #else
-无产品
+    #if(ProductUtils.getAllProductListByUser()?.size()==0)
+    <script type="text/javascript">
+            #set(msg="目前没有产品，现在将前往添加。")
+            #if(ProductUtils.getProductList().size()>0)
+                #set(msg="目前没有你可访问的产品，现在将前往添加。")
+            #end
+        $(function(){
+            var url = window.location.pathname;
+            if(url.indexOf("addproduct")<0){
+                layer.msg('${msg}<div style="text-align:center"><a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition"><span id="showTime">5</span>秒后前往</a></div>',5,-1,function(){
+                    window.location.href = "${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition";
+                });
+                var timeVal=5;
+                function changeTimeVal(){
+                    $("#showTime").html(--timeVal);
+                    window.setTimeout(function(){
+                        changeTimeVal();
+                    },1000);
+                }
+                changeTimeVal();
+            }
+        })
+    </script>
+    #end
 #end
 
-<span class="caret"></span>#end
-#@navSelect2Body()
-#@navSelect2Data()
-<option value=""></option>
-<optgroup label="产品">
-	#for(product : qualityProductList)
-		#if(product?.deleted==0)
-		<option value="${product?.productId}">${product?.productName}</option>
-		#end
-	#end
-</optgroup>
+#@navZtree("product" "product")
+    #@navZtreeNav()
+        <span id="productNameOnTop" value="${qualityProductId}">${currentProductName}</span><span class="caret"></span>
+    #end
 
-#end
-#@navSelect2Fix()
+    #@navZtreeBody({"style":"left:-18px;top:26px"})
+        #@TzTreeSelect("aaaa" "" {"class":"input-text blueline search-ico-bg","data-URL":call("link",adminPath+"/productLine/userProductTree"),"id":"productSelect"})
+            #set(m=menuManager.getMenu("newproduct"))
+            #if(m)
+            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
+            #end
+            #set(m=menuManager.getMenu("allproduct"))
+            #if(m)
+            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
+            #end
+        #end
 
-<a href="${TINY_CONTEXT_PATH+adminPath}/product/page/tabledemo/product-listall.page" class="r">所有产品</a>&nbsp;
-<!--新增产品-->
-<a href="${TINY_CONTEXT_PATH+adminPath}/product/page/tabledemo/addProduct.page">添加产品</a>&nbsp;
+    ##hiddenInput("productIdHidden","productId","","")
 
+    <script type="text/javascript">
 
-#end
-#end
+        $(function(){
+            $("#productSelect").on("setValue",function(o,treeNode){
+                var dataValue = treeNode.id;
+                $.cookie('qualityProductId',dataValue,{path:"/"});
+                window.location.reload();
+            });
+        });
 
-#hiddenInput("productIdHidden","productId","","")
-
-<script type="text/javascript">
-
-	$(function(){
-		$("#product-select").on("change",function(){
-			var dateValue = $(this).val();
-			$.post("${TINY_CONTEXT_PATH+adminPath}/quality/changeProduct",{productId:dateValue},function(result){
-				if(true==result){
-					window.location.reload();
-				}else{
-					alert("产品ID值为空");
-				}
-
-			});
-	##				$("#productIdHidden").val($(this).val());
-	##				$(".switchClass").each(function(){
-				##					var hrefnew = this.href + "&productId=" + $("#productIdHidden").val();
-	##					this.href = hrefnew;
-	##				});
-	##				window.location.href='${TINY_CONTEXT_PATH+adminPath}/product/story?currentPageId=3&productId='+$(this).find("option:selected").val();
-		});
-	});
-
-</script>
+    </script>
+    #end
 #end
 

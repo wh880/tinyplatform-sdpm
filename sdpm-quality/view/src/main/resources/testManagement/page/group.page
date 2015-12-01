@@ -1,0 +1,125 @@
+<table class="table tinytable table table-hover" id="group-Table">
+    #@thead()
+        #@tr()
+            #@tinyTh()#end
+            #@tinyTh()ID#end
+            #@tinyTh()P#end
+            #@tinyTh()用例标题#end
+            #@tinyTh()类型#end
+            #@tinyTh()创建#end
+            #@tinyTh()执行人#end
+            #@tinyTh()执行时间#end
+            #@tinyTh()结果#end
+            #@tinyTh()状态#end
+            #@tinyTh()操作#end
+        #end
+    #end
+    #@tbody()
+        #foreach(story : storyMap)
+            <tr class="show-group" data-tr="data-g-${story?.key}">
+                <td>
+                    <span class="glyphicon glyphicon-chevron-right glyphicon-chevron-down">
+                        ${story?.value?.storyTitle}
+                    </span>
+                </td>
+                <td colspan="11"></td>
+            </tr>
+            #foreach(run : runsMap?.get(story?.key))
+                <tr class="data-g-${story?.key}">
+                    #@td()#end
+                    #@td()<a
+                            href="${TINY_CONTEXT_PATH+adminPath}/quality/testCase/case/viewInfo?id=${run?.caseId}">${run
+                        ?.no}</a>#end
+                    #@td()${getDict("casePriority",run?.priority)}#end
+                    #@td()<a
+                            href="${TINY_CONTEXT_PATH+adminPath}/quality/testCase/case/viewInfo?id=${run?.caseId}">${run
+                        ?.caseTitle}</a>#end
+                    #@td()${getDict("caseType",run?.caseType)}#end
+                    #@td()${run
+                        ?.testRunAssignedTo?UserUtils.getUserById(run?.testRunAssignedTo)?.orgUserRealName:""}#end
+                    #@td()${run
+                        ?.testRunLastRunner?UserUtils.getUserById(run?.testRunLastRunner)?.orgUserRealName:""}#end
+                    #@td()${run?.testRunLastRunDate?formatDate(run?.testRunLastRunDate,'yyyy-MM-dd HH:mm:ss'):""}#end
+                    #@td()${getDict("caseResult",run?.testRunLastRunResult)}#end
+                    #@td()${getDict("caseStatus",run?.testRunStatus)}#end
+                    #@td()
+                        #foreach(m:menuManager.getScopeMenus("version-case-op"))
+                            #if(m.id=="tverremove")
+                                <a class="deleteRun" href="javascript:void(0)"
+                                   title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+                            #elseif(m.id=="tvertobug")
+                                #if("2".equals(run?.testRunLastRunResult))
+                                    #iconOperations(
+                                        "#myModal" m.icon m.name "865" "400" adminPath+m.href+"?caseId="+run?.caseId+
+                                        "&caseVersion="+run?.caseVersion+"&runId="+run?.testRunId "ml-1")
+                                #else
+                                    <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>
+                                #end
+                            #else
+                                #if(m.id=="texecution")
+                                    #if(run?.testRunAssignedTo == UserUtils.getUserId())
+                                        #iconOperations("#myModal" m.icon m.name "865" "400" adminPath+m.href+
+                                            "?caseId="+run?.caseId+"&from=task&runId="+run?.testRunId+
+                                            "&caseVersion="+run?.caseVersion "ml-1")
+                                    #else
+                                        <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>
+                                    #end
+                                #else
+                                    #iconOperations(
+                                        "#myModal" m.icon m.name "865" "400" adminPath+m.href+"?caseId="+run?.caseId+
+                                        "&from=task&runId="+run?.testRunId+"&caseVersion="+run?.caseVersion "ml-1")
+                                #end
+                            #end
+                        #end
+
+                    #end
+                </tr>
+            #end
+            #foreach(c : casesMap?.get(story?.key))
+                <tr class="data-g-${story?.key}">
+                    #@td()#end
+                    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/testCase/case/viewInfo?id=${c?.caseId}">${c
+                        ?.no}</a>#end
+                    #@td()${getDict("casePriority",c?.priority)}#end
+                    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/testCase/case/viewInfo?id=${c?.caseId}">${c
+                        ?.caseTitle}</a>#end
+                    #@td()${getDict("caseType",c?.caseType)}#end
+                    #@td()${c?.caseOpenedBy?UserUtils.getUserById(c?.caseOpenedBy)?.orgUserRealName:""}#end
+                    #@td()${c?.caseLastRunner?UserUtils.getUserById(c?.caseLastRunner)?.orgUserRealName:""}#end
+                    #@td()${c?.caseLastRunDate?formatDate(c?.caseLastRunDate,'yyyy-MM-dd HH:mm:ss'):""}#end
+                    #@td()${getDict("caseResult",c?.caseLastRunResult)}#end
+                    #@td()${getDict("caseStatus",c?.caseStatus)}#end
+                    #@td()
+                        #foreach(m:menuManager.getScopeMenus("testcase-op"))
+
+                            #if(m.id=="teditioncase"||m.id=="tproposecase")
+                                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?caseId=${c?.caseId}"
+                                   title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+                            #else
+                                #iconOperations(
+                                    "#myModal" m.icon m.name "865" "400" adminPath + m.href+"?caseId="+c?.caseId+
+                                    "&caseVersion="+c?.caseVersion "ml-1")
+
+                            #end
+                        #end
+                        #set(m=menuManager.getMenu("tcaseinfodelete"))
+                        #if(m)
+                            #@tinyTableItemRemove(TINY_CONTEXT_PATH +adminPath+m.href  c?.caseId)<i
+                                    class="${m.icon}"></i>
+                            #end
+                        #end
+                    #end
+                </tr>
+            #end
+        #end
+    #end
+</table>
+
+<script>
+    $(function () {
+        $("#group-Table").off("click", ">tbody>tr>td").on("click", ".show-group", function (e) {
+            $(this).find(".glyphicon").toggleClass("glyphicon-chevron-down");
+            $("#group-Table>tbody").children("tr." + $(this).attr("data-tr")).toggle();
+        });
+    })
+</script>

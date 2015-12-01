@@ -1,10 +1,9 @@
-#!set(activeTitle="查入行",activeMenuId=currentPageId)
 #@table("itemlist-table")
 	#@thead()
 	  #@tr()
 		#@th("text-c w-50px")编号#end
-		#@th("text-c")步骤#end
-		#@th("text-c")预期#end
+		  #@th("text-c")文件#end
+		  #@th("text-c")标题#end
 		#@th("text-c w-125px")操作#end
 	  #end
 	#end
@@ -43,23 +42,23 @@
 #end
 <script>
 $(function(){
-	function updateStepID(){    
-		$('.itemlist-table>.databody .stepID').each(function(index){	
-			$(this).html(index+1);		
+    function updateStepID() {
+		$('.itemlist-table>.databody .stepID').each(function(index){
+			$(this).html(index+1);
 		});
 	}
 	$(".itemlist-table").on("click",".addpre",function(){
 		$(this).parents("tr:first").before($("tbody.tpl").html());
-		updateStepID();		
+		updateStepID();
 	}).on("click",".addnext",function(){
 		$(this).parents("tr:first").after($("tbody.tpl").html());
-		updateStepID();		
+		updateStepID();
 	}).on("click",".delbutton",function(){
 		if($('.databody .stepID').size() == 1) return;
 		layer.confirm('确定删除?', function(){
 			$('.databody .stepID').parents("tr:first").remove();
-			updateStepID();	
-			layer.msg('删除成功！') 
+			updateStepID();
+			layer.msg('删除成功！',1,1)
 		})
 	});
 });

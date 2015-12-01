@@ -1,5 +1,7 @@
 package org.tinygroup.sdpm.service.service.inter;
 
+import org.tinygroup.sdpm.common.condition.ConditionCarrier;
+import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceRequest;
 import org.tinygroup.tinysqldsl.Pager;
@@ -59,13 +61,12 @@ public interface RequestService {
     Integer deleteRequest(Integer id);
 
 
-
     /**
      * 查找数据库的所有记录
      *
      * @return
      */
-    Pager<ServiceRequest> findRequestPager(Integer start, Integer limit, Integer status, ServiceRequest clientRequest, Integer tree, String order, String ordertype);
+    Pager<ServiceRequest> findRequestPager(Integer start, Integer limit, Integer status, ServiceRequest clientRequest, Integer tree, ConditionCarrier carrier, String order, String ordertype);
 
     /**
      * 查找数据库的由我解决或由我回复的记录，区别在于operation
@@ -80,6 +81,7 @@ public interface RequestService {
      * @return
      */
     Integer closeRequest(ServiceRequest clientRequest);
+
     /**
      * 保存回复
      *
@@ -110,5 +112,13 @@ public interface RequestService {
      * @return
      */
     int[] deleteBatchRequest(List<ServiceRequest> list);
+
+    /**
+     * 根据查询名称查询
+     *
+     * @param key
+     * @return
+     */
+    List<ServiceRequest> requestInCondition(String condition);
 }
 

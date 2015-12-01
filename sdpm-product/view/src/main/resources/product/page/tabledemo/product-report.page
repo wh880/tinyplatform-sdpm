@@ -4,6 +4,9 @@
 #import("/org/tinygroup/button/components/button_common.component")
 #import("/org/tinygroup/button/components/button.component")
 #!set(linkName="product-demand",sonitem="<li>"+"需求"+"</li>")
+#set(titleLabel = {"A_productCount":"产品需求数量","B_moduleCount":"模块需求数量","D_storySource":"需求来源统计","C_planCount":"计划进行统计",
+	"E_storyStatus":"状态进行统计","F_storyStage":"所处阶段进行统计","G_storyPri":"优先级进行统计","H_storyEstimate":"预计工时进行统计",
+	"I_storyOpenedBy":"由谁创建来进行统计","G_storyAssignedTo":"当前指派来进行统计","K_storyClosedReason":"关闭原因来进行统计","L_storyVersion":"变更次数来进行统计"})
 
 <style>
     .togglebox.open .tableBoxessty{margin-left:262px}
@@ -44,14 +47,7 @@
 				
 			  $(".navbody input[type='checkbox']").each(function () {
 			  		this.checked=!this.checked;
-			  		
-			  		/*console.log(this.checked)
-			  		var ischecked = $(this).is(":checked");//("checked");
-			  		if(ischecked){
-			  			$(this).removeAttr("checked");
-			  		}else{
-                   	 	$(this).attr("checked","checked");
-                    }*/
+
                 });
 			
 			
@@ -72,45 +68,20 @@
 		<a href="#" class="active_btn">报表</a>
 	</span>
     <span class="r">
-    	#@aModal("#myModal" "导出HTML" "500" "130" "btn-class" "/product/page/tabledemo/product-export-demand.pagelet")#buttonIcon(iconClass="icon-download-alt")导出#end
 
-        <a href="${TINY_CONTEXT_PATH +adminPath}/product/page/project/togglebox.page">#buttonIcon(iconClass=
-			"icon-goback icon-level-up icon-large icon-rotate-270")返回</a>&nbsp;
 	</span>
         #div(divClass="clearfix")
     #end
-##operationbar end
+
         #end
     #@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
         #@toggleLeft({"class":"aclass","style":"width:250px;height:450px;overflow:auto"})
             #@settoggleLeftTitle()请选择报表类型#end
             #@settoggleLeftBody()
 				#@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/product/story/report" "post" {"class":"test"})
-                    #@skinMinimal()
-#*                    	#@Tcheckboxes("productWhiteList" product?.productWhiteList)
-							#@Tcheckbox("admin")产品需求数量#end<br/>
-							#@Tcheckbox("admin")模块需求数量#end<br/>
-							#@Tcheckbox("admin")需求来源统计#end<br/>
-							#@Tcheckbox("admin")计划进行统计#end<br/>
-							#@Tcheckbox("admin")状态进行统计#end<br/>
-							#@Tcheckbox("admin")所处阶段进行统计#end<br/>
-							#@Tcheckbox("admin")优先级进行统计#end<br/>
-							#@Tcheckbox("admin")预计工时进行统计#end<br/>
-							#@Tcheckbox("admin")由谁创建来进行统计#end<br/>
-							#@Tcheckbox("admin")由谁指派来进行统计#end<br/>
-							#@Tcheckbox("admin")当前指派来进行统计#end<br/>
-							#@Tcheckbox("admin")关闭原因来进行统计#end<br/>
-							#@Tcheckbox("admin")变更次数来进行统计#end<br/>
-							
-						#end*#
+                    #@skinMinimal("check-box")
 						
 						#hiddenInput("hiddenFields","","",fields)
-#*						#@tinyCheckbox("chexkitem","A_productCount","")
-							oooo
-						#end<br/>
-						#@tinyCheckbox("chexkitem","A_productCount","")
-							sdfsd
-						#end*#
                         #labelCheckbox(ckId="check1" ckName="chexkitem" ckValue="A_productCount"  labelText="产品需求数量")
                         #labelCheckbox(ckId="chec2" ckName="chexkitem" ckValue="B_moduleCount" labelText="模块需求数量")
                         #labelCheckbox(ckId="check3" ckName="chexkitem" ckValue="D_storySource" labelText="需求来源统计")
@@ -146,11 +117,11 @@
 	            		 #@th("text-r" "vertical-align:middle;width:20%")
 	            			#@pieChart(pieChartStyle="width:600px;margin:0 auto;")
 	            				 <table id='${roadMap?.key}'>
-									<caption name="${roadMap?.key}"></caption>
+									<caption name="${roadMap?.key}">${titleLabel.get(roadMap?.key)}</caption>
 									<thead>
 										<tr>
 											<th></th>
-											#for(road:roadMap?.value)
+											#foreach(road:roadMap?.value)
 												<th>${road?.name}</th>
 											#end
 										</tr>
@@ -159,7 +130,7 @@
 									<tbody>
 										<tr>
 											<th></th>
-											#for(road:roadMap?.value)
+											#foreach(road:roadMap?.value)
 												<td>${road?.number}</td>
 											#end
 										</tr>
@@ -177,10 +148,27 @@
 	            			 <table class="table table-border table-bordered" cellspacing="0">
 	            			 	 #@theadCenterMenu()   #@th() 分类#end        #@th()需求数#end  #@th()百分比#end #end
 	            			 	 
-	            			 	 #for(road:roadMap?.value)
+	            			 	 #foreach(road:roadMap?.value)
 									#@centerAlignTr()        
-		            			 	 	
-		            			 	 	#@td()${road?.name}#end  
+		            			 	 	#if(roadMap?.key=="B_moduleCount")
+											#@td()${road?.name?:"无模块"}#end
+										#elseif(roadMap?.key=="D_storySource")
+											#@td()${getDict("storySource",road?.name)}#end
+										#elseif(roadMap?.key=="C_planCount")
+											#@td()${road?.name?:"无计划"}#end
+										#elseif(roadMap?.key=="E_storyStatus")
+											#@td()${getDict("storyStatus",road?.name)}#end
+										#elseif(roadMap?.key=="F_storyStage")
+											#@td()${getDict("storyStage",road?.name)}#end
+										#elseif(roadMap?.key=="G_storyPri")
+											#@td()${getDict("storyPri",road?.name)}#end
+										#elseif(roadMap?.key=="G_storyAssignedTo")
+											#@td()${road?.name?:"无指派"}#end
+										#elseif(roadMap?.key=="K_storyClosedReason")
+											#@td()${getDict("proCloseReason",road?.name)}#end
+										#else
+											#@td()${road?.name}#end
+										#end
 		            			 	 	#@td()${road?.number}#end      
 		            			 	 	#@td()${road?.percentToString}#end     
 		            			 	 #end

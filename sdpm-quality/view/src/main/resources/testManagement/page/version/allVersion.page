@@ -1,0 +1,37 @@
+#import("/org/tinygroup/table/components/table.component")
+<style>
+    #gtbl tr,#gtbl tr:hover{background:#fff}
+</style>
+#@tinyTable("gtbl") ##ID为空则系统自动生成 带入参数则取该参数为IDend
+    #@div(divBaseClass="tinyheaderTools form-inline")
+        #setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置
+    #end
+    #@tinyTableContent(TINY_CONTEXT_PATH+adminPath+"/quality/testCase/caseVersionData?caseId="+caseId) ##取数据地址 总数据
+        #@thead()
+            #@tr()
+                #@tinyTh({"class":"sorting sorting_asc","rel":"storyId"})用例ID#end
+                #@tinyTh({"class":"sorting","rel":"storyTitle"})用例名称#end
+                #@tinyTh({"class":"sorting","rel":"storyVersion"})用例版本#end
+                #@tinyTh({"class":"sorting","rel":""})操作#end
+            #end
+        #end
+    #end
+<script>
+    $(function(){
+        $("#${tableId}").on("click","tr.g-row",function(){
+            $(this).find(".glyphicon").toggleClass("glyphicon-chevron-right glyphicon-chevron-down");
+            var $next= $(this).next();
+            if($next.hasClass("hide")){
+
+                $next.removeClass("hide").find("div.infoContentRap").slideDown();
+            }else{
+                $next.find("div.infoContentRap").slideUp("normal",function(){
+                    $next.addClass("hide");
+                });
+            }
+        }).on("click","a",function(e){
+            e.stopPropagation();
+        })
+    })
+</script>
+#end

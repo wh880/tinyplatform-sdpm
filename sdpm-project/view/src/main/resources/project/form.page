@@ -1,0 +1,246 @@
+#import("/org/tinygroup/form/components/form.component")
+#import("/org/tinygroup/bootstrapDate/components/bootstrapDate.component")
+#import("/org/tinygroup/button/components/button_common.component")
+#import("/org/tinygroup/button/components/button.component")
+#import("/org/tinygroup/fold/components/fold.component")
+#macro sdpmItem(title star)
+<div class="col-2 text-r">
+    <span class="c-red">${star}</span>
+    <label>${title}：&nbsp;</label>
+</div>
+<div class="col-6 form-item-body">
+    #bodyContent
+</div>
+    #@validateDiv("col-3 validmsg")#end
+#end
+
+#macro labelRadio1(rId rName rValue rClass radioOther labelText)
+    #@radioBox()
+        #radio1(rId=rId rName=rName rValue=rValue rClass=rClass radioOthe=radioOther)
+        #@label(ckId)${labelText}#end
+    #end
+#end
+#macro radio1(rId rName rChecked rValue rClass rIsDisabled radioOther)
+<input#if(rId) id="$!{rId}"#{end}#if(rName) name="$!{rName}"#end#if(rChecked && rChecked=="checked")
+               checked#{end}#if(rValue) value="$!{rValue}"#end#if(rClass)
+               class="$!{rClass}"#end#if(rIsDisabled && rIsDisabled=="disabled") disabled#end type="radio"
+               onclick="${radioOther}"/>
+#end
+#set(name="task")
+#@div()
+    #@tabWithInit("tab_demo" "optionsBox")
+        #@div(divClass="dropdownBox")
+            #include("/project/dropdownMenu.page")
+        #end
+        #@tabHead()
+            #include("/project/protab.page")
+        #end
+    <br/>
+    #end
+#end
+
+#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/project/save" "post" {"class":"test"})
+<div style="width:100%;float:left" class="pageleftpart">
+    <div class="infoContent">
+        <p class="titleName">添加项目</p>
+        <input type="hidden" name="projectOpenedDate" value="${formatDate(now()," yyyy-MM-dd")}"/>
+        <input type="hidden" name="projectOpenedBy" value="${UserUtils.getUser().orgUserId}"/>
+        #@elementItem()
+            #@sdpmItem("项目名称" "*")
+                #tinyInput("text" "projectName" "" {"placeholder":"请输入项目名称","datatype":"*","nullmsg":"项目名称不能为空！",
+                    "class":"input-text","ajaxurl":TINY_CONTEXT_PATH+adminPath+"/project/validProjectName"})
+            #end
+        #end
+        #@elementItem()
+            #@sdpmItem("项目代号" "*")
+                #tinyInput("text" "projectCode" "" {"placeholder":"请输入项目代号","datatype":"*","nullmsg":"项目代号不能为空！",
+                    "class":"input-text"})
+            #end
+        #end
+        #@elementItem()
+            <div class="col-2 text-r">
+                <span class="c-red">*</span>
+                <label>起始日期：&nbsp;</label>
+            </div>
+            <div class="col-10 form-item-body">
+                <div class="col-2">
+                    #@tinyDateInput(
+                        "projectBegin" formatDate(now(),"YYYY-MM-dd") "YYYY-MM-DD" {"datatype":"*","nullmsg":"开始日期不能为空","placeholder":"请选择开始日期"})#end
+                </div>
+                <div class="col-1" style="width:auto;padding:0 10px">至</div>
+                <div class="col-2">
+                    #@tinyDateInput(
+                    "projectEnd" "" "YYYY-MM-DD" {"class":"input-text","datatype":"*","nullmsg":"结束日期不能为空",
+                        "placeholder":"请选择结束日期","id":"projectEnd"})#end
+                </div>
+                <label class='radio-inline'><input type='radio' name='delta' value='7'
+                                                   onclick='computeEndDate(this.value)' id='delta7'/> 一星期</label>
+                <label class='radio-inline'><input type='radio' name='delta' value='14'
+                                                   onclick='computeEndDate(this.value)' id='delta14'/> 两星期</label>
+                <label class='radio-inline'><input type='radio' name='delta' value='31'
+                                                   onclick='computeEndDate(this.value)' id='delta31'/> 一个月</label>
+                <label class='radio-inline'><input type='radio' name='delta' value='62'
+                                                   onclick='computeEndDate(this.value)' id='delta62'/> 两个月</label>
+                <label class='radio-inline'><input type='radio' name='delta' value='93'
+                                                   onclick='computeEndDate(this.value)' id='delta93'/> 三个月</label>
+                <label class='radio-inline'><input type='radio' name='delta' value='186'
+                                                   onclick='computeEndDate(this.value)' id='delta186'/> 半年</label>
+                <label class='radio-inline'><input type='radio' name='delta' value='365'
+                                                   onclick='computeEndDate(this.value)' id='delta365'/> 一年</label>
+            </div>
+            <div class="col-2"></div>
+            #@validateDiv("col-4 validmsg")#end
+
+        #end
+        #@elementItem()
+            #@sdpmItem("可用工作日")
+                <div class="input-group">
+                    <input name="projectDays" type="text" class="form-control" placeholder=""
+                           aria-describedby="basic-addon2" datatype="n">
+                    <span class="input-group-addon" id="basic-addon2">天</span>
+                </div>
+            #end
+        #end
+
+        #@elementItem()
+            #@sdpmItem("项目类型")
+                #@Tselect2F()
+                    #@Tselect2Body("projectType" "" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        #foreach(type : getDict("projectType"))
+                            <option value=${type.value}>${type.text}</option>
+                        #end
+                    #end
+                #end
+            #end
+        #end
+
+        #@elementItem()
+            #@sdpmItem("团队名称" "*")
+                #tinyInput("text" "projectTeam" "" {"placeholder":"请输入团队名称","datatype":"*","nullmsg":
+                    "团队名称不能为空","class":"input-text"})
+            #end
+        #end
+        #@elementItem()
+            #@sdpmItem("关联产品")
+                #@Tselect2F()
+                    #Tselect2Ajax("linkProduct" "" TINY_CONTEXT_PATH+adminPath+"/product/ajax/productInCondition"
+                    {"id":"linkProductSelect","dataId":"productId","dataText":"productName",
+                        "placeholder":"关联产品","multiple":"multiple"})
+                    #@Tselect2Fix()
+                        #set(m=menuManager.getMenu("newproduct"))
+                        #if(m)
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
+                        #end
+                        #set(m=menuManager.getMenu("allproduct"))
+                        #if(m)
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
+                        #end
+                    #end
+                #end
+            #end
+        #end
+        #@elementItem()
+            #@sdpmItem("项目描述")
+                #@Teditor("projectDesc" "projectDesc" {"initialFrameHeight":"200","initialFrameWidth":"702"})#end
+            #end
+        #end
+        #@elementItem()
+            #@sdpmItem("访问控制")
+                #@skinMinimal("col-10")
+                    #@Tradioes("projectAcl" "1")
+                        #foreach(source:getDict("projectAcl"))
+                            <div>#@Tradio(source?.value)${source?.text}#end</div>
+                        #end
+                    #end
+                #end
+##                #@formControlDiv("skin-minimal col-10")
+##                    #foreach(acl : getDict("projectAcl"))
+##                        #@tinyRadio("projectAcl" acl.value "")${acl.text}#end
+##                    #end
+##                #end
+            #end
+        #end
+        #@elementItem(elementId="whitelistBox" eleItemClass="hidden hidden_namesty")
+            #@colLabel()#end
+            #@skinMinimal("col-8")
+                #@Tcheckboxes("whiteList" "")
+                    #foreach(role : UserUtils.getAllRoleList())
+                        #@gridSysCol(2)
+                            #@Tcheckbox(role.orgRoleId)${role.orgRoleName}#end
+                        #end
+                    #end
+                #end
+                #@validateDiv("col-2")#end
+            #end
+        #end
+    </div>
+    #@elementItem()
+        <div class="col-12">
+            <div class="col-5">
+
+            </div>
+            <div class="col-1">
+                <button style="float: left" type="submit" id="submit2" class="commitBtn">保存</button>
+            </div>
+            <div class="col-1">
+                #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")取消#end
+            </div>
+            <div class="col-5"></div>
+        </div>
+    #end
+    <br>
+</div>
+#end
+
+<script type="text/javascript">
+
+    $(function () {
+        $("form").Validform({
+            tiptype: function (msg, o, cssctl) {
+                var objtip = $(o.obj).closest(".form-item-body").parent().find(".validmsg");
+                cssctl(objtip, o.type);
+                objtip.text(msg);
+            }
+
+        });
+        $("input[name='projectAcl']").change(function (e) {
+            $(this).attr("value") == "2" ? $("#whitelistBox").removeClass("hidden") : $("#whitelistBox").addClass("hidden");
+        });
+        $("[name=projectEnd]").on("change", function () {
+            console.log("sfsdf");
+            var edate = $(this).val();
+            var bdate = $("[name=projectBegin]").val();
+            $("[name=projectDays]").val(getDateDiff(bdate, edate))
+        });
+        function getDateDiff(date1, date2) {
+            var arr1 = date1.split('-');
+            var arr2 = date2.split('-');
+            var d1 = new Date(arr1[0], arr1[1], arr1[2]);
+            var d2 = new Date(arr2[0], arr2[1], arr2[2]);
+            return (d2.getTime() - d1.getTime()) / (1000 * 3600 * 24);
+        }
+
+        $("input[name=projectEnd],input[name=projectBegin]").on("blur", function () {
+            var bTime = $("input[name=projectBegin]").val();
+            var eTime = $("input[name=projectEnd]").val();
+            var $Days =
+            $("input[name=projectDays]");
+            if (!bTime || !eTime) {
+                    $Days.val("");
+            }
+                $Days.val(getDateDiff(bTime,eTime));
+        })
+    });
+    function convertStringToDate(dateString) {
+        dateString = dateString.split('-');
+        return new Date(dateString[0], dateString[1] - 1, dateString[2]);
+    }
+    function computeEndDate(delta) {
+        var $bTime =
+        $("input[name=projectBegin]");
+        if (!$bTime.val()) return false;
+        $("input[name=projectEnd]").val(moment($bTime.val(), "YYYY-MM-DD").add('days', delta).format('YYYY-MM-DD')).trigger("blur");
+
+    }
+    console.log("testterfsfdsfds")
+</script>

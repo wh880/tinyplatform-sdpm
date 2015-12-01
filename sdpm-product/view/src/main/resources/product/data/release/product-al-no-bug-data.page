@@ -3,18 +3,16 @@
 #set(pagesize=records-(page-1)*pagesize)
 #end
 #setTinyItemCount(bugList?.totalCount)
-#for(bug:bugList?.getRecords())
+#foreach(bug:bugList?.getRecords())
 #@tr()
 	#@td()<input type="checkbox" value="${bug?.bugId}" name="bugId">#end
 	#@td()${bug?.bugId}#end
-	#@td()@#end
+	#@td()${getDict("bugPriority",bug?.priority)}#end
 	#@td()
-    <a href="${TINY_CONTEXT_PATH +adminPath}/testManagement/page/bugInfo.page"> ${bug?.bugTitle} </a>
+    <a href="${TINY_CONTEXT_PATH +adminPath}/quality/bug/bugInfo?bugId=${bug?.bugId}"> ${bug?.bugTitle} </a>
 	#end
-	#@td()${bug?.bugOpenedBy} #end
-	#@td()${bug?.bugAssignedTo} #end
-	#@td()${bug?.bugStatus} #end
-	
-	
+	#@td()${bug?.bugOpenedBy?UserUtils.getUserById(bug?.bugOpenedBy)?.orgUserRealName:""}#end
+	#@td()${bug?.bugAssignedTo?UserUtils.getUserById(bug?.bugAssignedTo)?.orgUserRealName:""}#end
+	#@td()${getDict("bugStatus",bug?.bugStatus)}#end
 #end
 #end

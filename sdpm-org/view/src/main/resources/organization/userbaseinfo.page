@@ -2,9 +2,9 @@
 
     #@tabWithInit("tab_info01")
         #@tabHead()
-            #@tabHeadCol()产品负责人#end
-            #@tabHeadCol()测试负责人#end
-            #@tabHeadCol()发布负责人#end
+            #if(productOwner)#@tabHeadCol()产品负责人#end#end
+            #if(productQualityManager)#@tabHeadCol()测试负责人#end#end
+            #if(productDeliveryManager)#@tabHeadCol()发布负责人#end#end
         #end
 
         #@tabBodyCol("tabBorder")
@@ -12,10 +12,6 @@
                 #@thead()
                 #end
                 #@tbody()
-                    #@tr()
-                        #@td()<b>ID</b>#end
-                        #@td()<b>${productOwner?.orgUserId}</b>#end
-                    #end
                     #@tr()
                         #@td()真实姓名#end
                         #@td()${productOwner?.orgUserRealName}#end
@@ -66,10 +62,6 @@
                 #end
                 #@tbody()
                     #@tr()
-                        #@td()<b>ID</b>#end
-                        #@td()<b>${productOwner?.orgUserId}</b>#end
-                    #end
-                    #@tr()
                         #@td()真实姓名#end
                         #@td()${productOwner?.orgUserRealName}#end
                     #end
@@ -117,10 +109,6 @@
                 #@thead()
                 #end
                 #@tbody()
-                    #@tr()
-                        #@td()<b>ID</b>#end
-                        #@td()<b>${productOwner?.orgUserId}</b>#end
-                    #end
                     #@tr()
                         #@td()真实姓名#end
                         #@td()${productOwner?.orgUserRealName}#end

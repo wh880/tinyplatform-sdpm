@@ -1,104 +1,114 @@
+<script>
 
+    $(document).ready(function () {
 
+        $(".secondMenu").each(function () {
 
-<script >
-	
-	$(document).ready(function(){
-	
-		$(".secondMenu").each(function(){
-			
-			$(this).on("click",function(){
-				var inputname = $(this).attr("tabindex");
-				var inputvalue = $(this).html().trim();
-				var storyList = new Array();
-				$("input[type='checkbox']").each(function(){
-					
-					if(this.checked==true&&this.id!="checkboxall"){
-						var storyid = $(this).val();
-						if("storyAssignedTo"==inputname){
-							storyList.push({storyId:storyid,storyAssignedTo:inputvalue});
-						}
-					}
-					
-				});
-	
-				if(storyList.length>0){
-					$.ajax({
-						type: "POST",
+            $(this).on("click", function () {
+            		
+                var inputname = $(this).attr("field");
+                var inputvalue = $(this).attr("value");
+                var storyList = new Array();
+                $("input[type='checkbox']").each(function () {
+
+                    if (this.checked == true && this.id != "checkboxall") {
+                        var storyid = $(this).val();
+                        if ("orgUserId" == inputname) {
+                            storyList.push({storyId: storyid, storyAssignedTo: inputvalue,storyAssignedDate:new Date()});
+                        }
+                        if ("storyStage" == inputname) {
+                            storyList.push({storyId: storyid, storyStage: inputvalue});
+                        }
+                        if ("planId" == inputname) {
+                            storyList.push({storyId: storyid, planId: inputvalue});
+                        }
+                        if ("storyStatus" == inputname) {
+                            storyList.push({storyId: storyid, storyStatus: inputvalue,storyReviewedDate:new Date()});
+                        }
+                    }
+
+                });
+
+                if (storyList.length > 0) {
+                    $.ajax({
+                        type: "POST",
                         url: "${TINY_CONTEXT_PATH +adminPath}/product/story/updateBatch",
-					   	data: JSON.stringify(storyList),//将对象序列化成JSON字符串
-					   	dataType:"json",
-					   	contentType : 'application/json;charset=utf-8', //设置请求头信息
-						success: function(data){
-							
-							alert('success');
-							window.location.reload(); 
-						},
-						error: function(res){
-							alert("失败");
-						}
-					});
-				}
-				
-																		
-								
-				
-				
-				
-#*				var i = 0;
-				$("input[type='checkbox']").each(function(){
-					
-					if(this.checked==true){
-						var hm = "<input type='hidden' name='productStories"+"[" +i+"]." +inputname + "' value='" + inputvalue + "'/>";
-						this.name = "productStories" +　"[" + i +"]." + this.name;
-						
-						$(this).parent().append(hm);
-			  		
-			  			++i;
-					}
-				
-				});
-				
-				$("form[name='storyform']").trigger("submit");
-				*#
-		
-				
-			});
-			
-		});
-	
-	});
-	
+                        data: JSON.stringify(storyList),//将对象序列化成JSON字符串
+                        dataType: "json",
+                        contentType: 'application/json;charset=utf-8', //设置请求头信息
+                        success: function (data) {
+                        	if(data==true){
+                        		window.location.reload();
+                        	}
+                            
+                        },
+                        error: function (res) {
+                            layer.msg("系统出错，请确认你的请求地址");
+                        }
+                    });
+                }else{
+                	layer.msg("请选择记录");
+                }
+
+            });
+
+        });
+
+    });
+
 </script>
 
-#setTinyItemCount(storyList.getTotalCount())
+#setTinyItemCount(storyList?.getTotalCount())
 
 #@tinyForm("storyform" TINY_CONTEXT_PATH +adminPath+"/product/story/updateBatch" "" {"class":"test"})
 
-#for(story:storyList.getRecords())
-#@tr()
-    #@td()
-    	<input type="checkbox" value="${story.storyId}" id="fieldid" name="storyId">
-    #end
-	#@td()<a
-            href="${TINY_CONTEXT_PATH +adminPath}/product/storySpec/find/productDemandDetail?storyId=${story.storyId}">${story.storyId}</a>#end
-    #@td()${story.storyPri}#end
-	#@td()<a
-            href="${TINY_CONTEXT_PATH +adminPath}/product/storySpec/find/productDemandDetail?storyId=${story.storyId}">${story.storyTitle}</a>#end
-    #@td()${story.planId}#end
-    #@td()${story.storySource}#end
-    #@td()${story.storyOpenedBy}#end
-    #@td()${story.storyAssignedTo}#end
-    #@td()${story.storyEstimate}#end
-    #@td()${story.storyStatus}#end
-    #@td()${story.storyStage}#end
-    #@td()
-     #foreach(m:menuManager.getScopeMenus("product-de"))
-     #set(url=eval(m.href))
-     <a title="${m.name}" class="ml-5" href="${TINY_CONTEXT_PATH +adminPath}${url}"><i class="${m.icon}"></i></a>
+    #foreach(story:storyList?.getRecords())
+        #@tr()
+            #@td()
+                <input type="checkbox" value="${story.storyId}" id="fieldid" name="storyId">
+            #end
+            #@td()<a href="${TINY_CONTEXT_PATH +adminPath}/product/storySpec/find/productDemandDetail?storyId=${story.storyId}">${story.no}</a>#end
+            #@td()${getDict("storyPri",story?.storyPri)}#end
+            #@td()<a href="${TINY_CONTEXT_PATH +adminPath}/product/storySpec/find/productDemandDetail?storyId=${story.storyId}">${story.storyTitle}</a>#end
+            #@td()${story?.planName}#end
+            #@td()${getDict("storySource",story?.storySource)}#end
+            #@td("nowrap")<span class="${story?.storyOpenedBy==UserUtils.getUserId()?'c-red':''}">${story?.storyOpenedBy?UserUtils.getUserById(story?.storyOpenedBy).orgUserRealName:""}</span>#end
+            #@td("nowrap")<span class="${story?.storyAssignedTo==UserUtils.getUserId()?'c-red':''}">${story?.storyAssignedTo?UserUtils.getUserById(story?.storyAssignedTo).orgUserRealName:""}</span>#end
+            #@td()${story?.storyEstimate}#end
+            #@td()${getDict("storyStatus",story?.storyStatus)}#end
+            #@td("nowrap")${getDict("storyStage",story?.storyStage)}#end
+            #@td("nowrap")
+                #foreach(m:menuManager?.getScopeMenus("pro_demand_log"))
+                    #if(m?.id=="demand-overview")
+                         #if(Integer.parseInt(story?.storyStatus)==0||Integer.parseInt(story?.storyStatus)==3)
+                         <a title="${m?.name}" class="ml-5"
+                            href="${TINY_CONTEXT_PATH +adminPath}${m.href}${story?.storyId}"><i class="${m?.icon}"></i></a>
+                         #else
+                         <span class="ml-5" style="color:grey"><i class="${m?.icon}" /></span>
+                         #end
+                    #elseif(m?.id=="demand_close")
+                         #if(Integer.parseInt(story?.storyStatus)!=2)
+                         <a title="${m?.name}" class="ml-5"
+                            href="${TINY_CONTEXT_PATH +adminPath}${m.href}${story?.storyId}"><i class="${m?.icon}"></i></a>
+                         #else
+                         <span class="ml-5" style="color:grey"><i class="${m?.icon}" /></span>
+                         #end
+                    #elseif(m?.id=="add-case")
+                        #set(url=eval(m?.href))
+                     <a title="${m?.name}" class="caseAdd ml-5" href="${TINY_CONTEXT_PATH +adminPath}${url}?storyId=${story?.storyId}${story?.moduleId?'&moduleId='+story?.moduleId:''}"><i class="${m?.icon}"></i></a>
+                     #else
+                     <a title="${m?.name}" class="ml-5"
+                        href="${TINY_CONTEXT_PATH +adminPath}${m.href}${story?.storyId}"><i class="${m?.icon}"></i></a>
+                     #end
+                 #end
+            #end
         #end
     #end
 #end
-#end
-#end
-
+<script>
+    $(function(){
+        $(".caseAdd").on("click",function(){
+            $.cookie('qualityProductId', "${cookieProductId}", {path: "/"});
+        });
+    })
+</script>

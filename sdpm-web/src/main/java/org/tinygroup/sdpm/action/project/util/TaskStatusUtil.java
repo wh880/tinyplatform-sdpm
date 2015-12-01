@@ -3,7 +3,6 @@ package org.tinygroup.sdpm.action.project.util;
 
 import org.tinygroup.commons.tools.StringUtil;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,19 +15,20 @@ public class TaskStatusUtil {
     private static Map<String, String> status = new HashMap<String, String>();
 
     static {
-        //status.put("1","statu = 2");
+        status.put("1", "completeByMe");
         status.put("2", "task_status = 1");
         status.put("3", "task_status = 2");
         status.put("4", "task_status != 3 ");
         status.put("5", "task_status = 3");
         status.put("6", "task_status = 6");
-        status.put("7", "");//已延期
+        status.put("7", "overTime");//已延期
         status.put("8", "");//需求变动
         status.put("9", "task_status = 5");
+        status.put("0", "task_status !=6");
     }
 
-    public static String getCondition(String statu, String choose, HttpServletRequest request, String moduleIds) {
-        String condition = "";
+    public static String getCondition(String statu, String choose, String userId, String moduleIds) {
+        String condition;
         if (statu != null && choose == null) {
             condition = status.get(statu);
         } else if (statu == null && choose != null) {
@@ -37,24 +37,26 @@ public class TaskStatusUtil {
              * choose = 2 所有
              * choose = 7 指派给我
              */
-
             if ("1".equals(choose)) {
                 condition = "task_status != 6";
             } else if ("2".equals(choose)) {
                 condition = "";
             } else if ("7".equals(choose)) {
-                //condition = "task_assigned_to = '"+request.getSession().getAttribute("userId")+"'";
-            } else condition = "";
-        } else condition = "";
+                condition = "task_assigned_to = '" + userId + "'";
+            } else {
+                condition = "";
+            }
+        } else {
+            condition = "";
+        }
 
         if (!StringUtil.isBlank(moduleIds)) {
             if (StringUtil.isBlank(condition)) {
                 condition = "task_module " + moduleIds;
             } else {
-                condition = "and task_module " + moduleIds;
+                condition = condition + " and task_module " + moduleIds;
             }
         }
-//task_model
         return condition;
     }
 }

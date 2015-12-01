@@ -46,6 +46,7 @@ public interface RoleManager {
      * @return
      */
     List<OrgRole> findList(OrgRole orgRole);
+
     /**
      * 新增有一Role
      *
@@ -70,4 +71,5 @@ public interface RoleManager {
      */
     Integer delete(Integer id);
 
+    List<OrgRole> getRolesByIds(String... ids);
 }

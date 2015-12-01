@@ -1,20 +1,20 @@
 
-#set(records=systemAction.totalCount,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
+#set(records=systemAction?.totalCount,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
 #if (pagesize>records-pagesize*(page-1))
-#set(pagesize=records-(page-1)*pagesize)
+	#set(pagesize=records-(page-1)*pagesize)
 #end
 #setTinyItemCount(systemAction?.totalCount)
-#for(a:systemAction?.records)
+#foreach(a:systemAction?.records)
 #@tr()
 
 	#@td()<input type="checkbox" value="1" name="product-dymanic">#end
-	#@td()${a?.actionDate}#end
-	#@td()${a?.actionActor}#end
-	#@td()${a?.actionAction}#end
-	#@td()${a?.actionObjectType}#end
-	#@td()${a?.actionObjectId}#end
+	#@td()${a?.actionDate?formatDate(a?.actionDate,'yyyy-MM-dd'):""}#end
+	#@td()${UserUtils.getUserById(a?.actionActor).orgUserRealName} #end
+	#@td()${getDict("actionOperate",a?.actionAction)}#end
+	#@td()${getDict("actionObject",a?.actionObjectType)}#end
+##	#@td()${a?.actionObjectId}#end
 	#@td()
-    <a href="${TINY_CONTEXT_PATH +adminPath}/product/page/project/demdtablehref.page">请稍等CAD</a>
+    <a href="${TINY_CONTEXT_PATH +adminPath+a?.url}">${a?.objectName}</a>
 	#end
 #end
 #end

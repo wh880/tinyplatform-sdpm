@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.multipart.MultipartFile;
+import org.tinygroup.commons.tools.StringUtil;
 
 import javax.servlet.ServletContext;
 import java.io.File;
@@ -13,12 +14,16 @@ import java.io.IOException;
 
 /**
  * 文件存储
- *
  */
 @Service
 public class FileRepository implements ServletContextAware {
     private Logger log = LoggerFactory.getLogger(FileRepository.class);
     private ServletContext ctx;
+
+    public String resolverFilePath(String filePath, String separator) {
+        String path = StringUtil.substringAfterLast(filePath, separator);
+        return StringUtil.replace(path, "\\", "/");
+    }
 
     public String storeByExt(String path, String ext, MultipartFile file)
             throws IOException {
@@ -77,11 +82,11 @@ public class FileRepository implements ServletContextAware {
     }
 
     private String getRealPath(String name) {
-        String realpath = ctx.getRealPath(name);
-        if (realpath == null) {
-            realpath = ctx.getRealPath("/") + name;
+        String realPath = ctx.getRealPath(name);
+        if (realPath == null) {
+            realPath = ctx.getRealPath("/") + name;
         }
-        return realpath;
+        return realPath;
     }
 
     public void setServletContext(ServletContext servletContext) {

@@ -20,13 +20,15 @@ import java.util.List;
 
 import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
+import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.document.dao.pojo.DocumentDoc;
 import org.tinygroup.tinysqldsl.Pager;
 
 public interface DocumentDocDao extends BaseDao<DocumentDoc,Integer> {
-	
-	int[] batchUpdateDel(List<DocumentDoc> documentDocs);
-	
-	Pager<DocumentDoc> complexQuery(int start, int limit, DocumentDoc doc, final String condition, final OrderBy... orderBys);
 
+    int[] batchUpdateDel(List<DocumentDoc> documentDocs);
+
+    Pager<DocumentDoc> complexQuery(int start, int limit, DocumentDoc doc, final String condition,SearchInfos conditions,String groupOperate, final OrderBy... orderBys);
+
+    int editDoc(DocumentDoc documentDoc);
 }

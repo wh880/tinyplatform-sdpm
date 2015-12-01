@@ -1,4 +1,7 @@
-#set(pagePostionTitle='<li><a href="'+TINY_CONTEXT_PATH+'">首页</a></li>',activeMenuId=activeMenuId?:currentPageId)
+#macro getMenuId()
+    #foreach(var:menuList)#if(tinyRequestRequestURI.startsWith(var?.url))#set(activeMenuId=var.id)#break#end#end
+#end
+#set(pagePostionTitle='<li><a href="'+TINY_CONTEXT_PATH+'">首页</a></li>',activeMenuId="1",topMenuId="0",c=call("getMenuId"),c=call("getTopMenuId"))
 <!DOCTYPE html>
 <!--[if IE 7 ]>		 <html class="no-js ie ie7 lte7 lte8 lte9" lang="zh-cmn-Hans-CN"> <![endif]-->
 <!--[if IE 8 ]>		 <html class="no-js ie ie8 lte8 lte9" lang="zh-cmn-Hans-CN"> <![endif]-->
@@ -10,125 +13,88 @@
     <meta charset="utf-8"/>
     <meta name="renderer" content="webkit|ie-comp|ie-stand">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
-    <!--<meta name="apple-mobile-web-app-capable" content="yes" />--><!-- home screen app 全屏 -->
-    <!--<meta name="apple-mobile-web-app-status-bar-style" content="black" />--><!-- 状态栏 -->
+    <link rel="shortcut icon" href="${TINY_CONTEXT_PATH}/common/img/logo.ico">
     <title>
-        #if(activeTitle)${activeTitle} #{end}软件开发项目管理
+        #if(activeTitle)${activeTitle} #{end}软件开发过程管理
     </title>
-    <meta name="keywords" content="Tiny SDPM ">
-    <meta name="description" content="Tiny,TINY,Software Development Process Management">
+    <meta name="keywords" content="Tiny,SDPM,软件开发过程管理">
+    <meta name="description" content="Tiny,TINY,Software Development Process Management,软件开发项目管理">
     <script>
         var contextPath = "${TINY_CONTEXT_PATH}";
-        var CKEDITOR_BASEPATH = contextPath + '/';
-        var pathname = location.pathname;
-        var relativeurl = pathname.substring(CKEDITOR_BASEPATH.length);
         var pomlist = new Array()
     </script>
-    <!--[if lt ie 9]>
-    <script>
-        document.createElement("article");
-        document.createElement("section");
-        document.createElement("aside");
-        document.createElement("footer");
-        document.createElement("header");
-        document.createElement("nav");
-        document.createElement("button");
-    </script>
-    <![endif]-->
-    <link rel="shortcut icon" href="${TINY_CONTEXT_PATH}/common/img/tiny32.png">
-    #if(DEBUG_MODE && DEBUG_MODE=="true")
-        #foreach(component in uiengine.getHealthUiComponents())
-            #if(component.cssResource)
-                #set(resources=component.cssResource.split(","))
-                #foreach(path in resources)
-                    #set(path=path.trim())
-                    #set(newPath=path.replaceAll("[$][{]TINY_THEME[}]","${TINY_THEME}"))
-                    <link href="${TINY_CONTEXT_PATH}${newPath}" rel="stylesheet"/>
-                #end
-            #end
-            #if(component.jsResource)
-                #set(resources=component.jsResource.split(","))
-                #foreach(path in resources)
-                    #set(path=path.trim())
-                    <script src="${TINY_CONTEXT_PATH}${path}"></script>
-                #end
-            #end
-            #if(component.jsCodelet)
-                <script>$!{component.jsCodelet}</script>#end
-            #if(component.cssCodelet)
-                <style>$!{component.cssCodelet}</style>#end
-        #end
-    #else
         <!--[if lt ie 9]>
             #foreach(component in uiengine.getHealthUiComponents())
-                #if(component.cssResource)
-                    #set(resources=component.cssResource.split(","))
+                #if(component.cssResource)#set(resources=component.cssResource.split(","))
                     #foreach(path in resources)
-                        #set(path=path.trim())
-                        #set(newPath=path.replaceAll("[$][{]TINY_THEME[}]","${TINY_THEME}"))
-                    <link href="${TINY_CONTEXT_PATH}${newPath}" rel="stylesheet"/>
+                        #set(path=path.trim())#set(newPath=path.replaceAll("[$][{]TINY_THEME[}]","${TINY_THEME}"))<link href="${TINY_CONTEXT_PATH}${newPath}" rel="stylesheet" />
                     #end
                 #end
-                #if(component.cssCodelet)
-                <style>$!{component . cssCodelet}/style>
-                #end
+                #if(component.cssCodelet)<style>$!{component.cssCodelet}</style>#end
             #end
         <![endif]-->
-        <!--[if (gt IE 9)|!(IE)]><!-->
-        <link href="${TINY_CONTEXT_PATH}/uiengine.uicss" rel="stylesheet"/>
+        <!--[if (gte IE 9)|!(IE)]><!-->
+        <link href="${TINY_CONTEXT_PATH}/uiengine.uicss" rel="stylesheet" />
         <!--<![endif]-->
         <script src="${TINY_CONTEXT_PATH}/uiengine.uijs"></script>
-    #end
+##    #end
 </head>
 <body class="theme-clean main-menu-animated menu-on-top" id="bodyrap">
 <script src="${TINY_CONTEXT_PATH}/common/js/tinyui.js"></script>
     #@mainWrapper()
-        #@mainNavbar("/common/img/main-navbar-logo.png" "Tinyframework")
-            #@navbarNav()
-                #navbarNavItem("新增内容" "#")
-
-                #@navbarDropdownMenu("下拉菜单")
-                    #navbarNavItem("第一项" "#")
-                    #navbarNavItem("第二项" "#")
-                    #divider()##分割线
-                    #navbarNavItem("第三项" "#")
-                #end
-            #end
+        #@mainNavbar("/common/img/main-navbar-logo.png" "Tiny SDPM" adminPath+"/home")
+##            #@navbarNav()
+##                #navbarNavItem("新增内容" "#")
+##                #@navbarDropdownMenu("下拉菜单")
+##                    #navbarNaadfasdfvItem("第一项" "#")
+##                    #navbarNavItem("第二项" "#")
+##                    #divider()##分割线
+##                    #navbarNavItem("第三项" "#")
+##                #end
+##            #end
             #@rightNavBar()
-            <li class="nav-icon-btn nav-icon-btn-danger dropdown">
-                #@notifyDropdown(5 "fa-bullhorn" "通知" "更多的通知")
-					#include("/common/notify.page")
-				#end
-            </li>
-            <li class="nav-icon-btn nav-icon-btn-success dropdown">
-                #@messagesDropdown(12 "fa-envelope" "所得的消息" "更多的信息")
-						#include("/common/messages.page")
-				#end
-            </li>
+##            <li class="nav-icon-btn nav-icon-btn-danger dropdown">
+##                #@notifyDropdown(5 "fa-bullhorn" "通知" "更多的通知")
+##					#include("/common/notify.page")
+##				#end
+##            </li>
+##            <li class="nav-icon-btn nav-icon-btn-success dropdown">
+##                #@messagesDropdown(12 "fa-envelope" "所得的消息" "更多的信息")
+##						#include("/common/messages.page")
+##				#end
+##            </li>
             <li class="fullscreen">
-                <a href="javascript:void(0);" onclick="launchFullScreen(document.documentElement);" title="全屏"><i
-                        class="fa fa-fullscreen"></i></a>
+                <a href="javascript:void(0);" onclick="launchFullScreen(document.documentElement);" title="全屏">
+                    <i class="fa fa-fullscreen"></i></a>
             </li>
             <li>
-                <form class="navbar-form pull-left">
-                    <input type="text" class="form-control" placeholder="查找更多...">
-                    <span style="left:-27px;top:3px; position:relative;"><i class="fa fa-search"></i></span>
-                </form>
+                #set(searchCurrentName=searchCurrentName?:getDict("searchType").get(0).value)
+                #@mulSearchBox(searchCurrentName)
+                    #foreach(item : getDict("searchType"))
+                        #menusInfo(item.value item.text)
+                    #end
+                #end
             </li>
             <li class="dropdown">
                 <a href="javascript:void(0);" class="dropdown-toggle user-menu" data-toggle="dropdown">
-                    <img src="${TINY_CONTEXT_PATH}/common/img/avatars/1.jpg" alt="">
-                    <span>密缘之友</span>
+                    <img src="${TINY_CONTEXT_PATH}/common/img/avatars/1.jpg"
+                         alt="${UserUtils.getUser().orgUserRealName}">
+                    <span>${UserUtils.getUser().orgUserRealName}</span>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a href="javascript:void(0);"><span class="label label-warning pull-right">新的</span>资料文件</a>
-                    </li>
-                    <li><a href="javascript:void(0);">修改密码</a></li>
-                    <li><a href="javascript:void(0);"><i class="dropdown-icon fa fa-cog"></i>&nbsp;&nbsp;设置</a></li>
-                    <li class="divider"></li>
+##                    <li><a href="javascript:void(0);"><span class="label label-warning pull-right">新的</span>资料文件</a>
+##                    </li>
+
+    #@hasMenu("org-user-profileAdmin")
+        <li><a href="${TINY_CONTEXT_PATH+adminPath}/org/user/show/profile?id=${UserUtils.getUserId()}"><i class="dropdown-icon fa icon-user"></i>&nbsp;&nbsp;个人档案</li>
+    #end
+    #@hasMenu("org-user-password")
+        <li><a href="${TINY_CONTEXT_PATH+adminPath}/org/user/passwordForm"><i class="dropdown-icon fa icon-key"></i>&nbsp;&nbsp;修改密码</li>
+        <li class="divider"></li>
+    #end
+##                    <li><a href="javascript:void(0);"><i class="dropdown-icon fa fa-cog"></i>&nbsp;&nbsp;修改个人资料</a></li>
+
                     <li><a href="${TINY_CONTEXT_PATH}/logout"><i class="dropdown-icon fa fa-power-off"></i>&nbsp;&nbsp;退出</a>
                     </li>
                 </ul>
@@ -146,9 +112,6 @@
         #end
     <div class="content-wrapper-bg"></div>
         #@div("content-wrapper")
-        #*		#@contentWrapper()
-                        ${pagePostionTitle}
-                #end*#
         <!-- 主体 start -->
             #@rowFrame()
             <div id="tinypagecontent" style="min-height:490px">${pageContent}</div>
@@ -159,22 +122,67 @@
 					浙ICP备14043110号-1
 			</span>
                 TinyGroup &copy; 2013-${formatDate(now(),"yyyy")}
+                如有问题欢迎咨询，点击链接加入
+                <a href="http://shang.qq.com/wpa/qunwpa?idkey=5e6ef409eec4046b4aa0273c0359920bd875b87f834bee175917f96e8b216489" target="_blank" title="Tiny群">
+                    【Tiny】官方群
+                </a>
             </div>
         </div>
         #end
     #end
 <script type="text/javascript">
-    function setPostiionNav() {
-        var currenttxt = $(".navigation ul>li.active>a:first>span:first").html();
-        $(document).attr("title", currenttxt + "--" + "TinyUiEnterprise展示");
-        if (currenttxt == undefined) {
-            $('.postion-nav .active').css("display", "inline")
-            return;
+    init.push(function () {
+        #if(!menuList)
+            var menuList=[];
+            $(".navigation:first a.navitem").each(function(){
+                var href=$(this).attr("href");
+                var path=contextPath+"/a/";
+                href=href.replace(path,"");
+                var nextPart=href.indexOf("/");
+                if(nextPart>0){
+                    href=href.substring(0,nextPart+1);
+                }
+                href=path+href;
+                var treeid=$(this).attr("data-treeid");
+                menuList.push({id:treeid,url:href});
+            });
+            $.ajax({
+                url:"#link("/saveTree")",
+                type:"post",
+                data:{treeString:JSON.stringify(menuList)},
+                success:function(data){
+                    if(window.location.pathname!=contextPath+"/a/home")
+                        window.location.reload();
+                }
+            })
+        #end
+        var globalMessage="${globalMessage}";
+        if(globalMessage){
+            var timeCount=setTimeout(function(){
+                layer.closeAll();
+            },5000);
+            layer.alert(globalMessage, -1, '提示', function() {
+                layer.closeAll();
+                clearTimeout(timeCount);
+            });
         }
-        var reg = /[0-9]|\./g;
-        currenttxt = currenttxt.replace(reg, "");
-        $('.postion-nav .active').css("display", "inline")
-    }
+    })
+    $(document).ready(function(){
+        var referrer = document.referrer;
+        var classPath = "${TINY_CONTEXT_PATH}";
+        var oldUrl = referrer.substring(referrer.indexOf(classPath)+classPath.length);
+        if(oldUrl.indexOf("login")<0&&referrer!=window.location.href)
+            $("input[name=lastAddress]").attr("value",oldUrl);
+    });
 </script>
 </body>
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?395d226c122589122e4f6654a6990984";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
 </html>

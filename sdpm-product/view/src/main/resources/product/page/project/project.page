@@ -15,7 +15,7 @@
 			#@tabHeadCol()产品#end
 			#@tabHeadCol()概况#end
 		#end
-		<span class="r" style="position:relative;top:-28px;height:0">
+		<span class="r" style="position:relative;top:-30px;height:0;color:#337ab7;font-family:"Microsoft Yahei";">
 			<a href="#">#buttonIcon(iconClass="icon-globe")&nbsp;所有产品</a>&nbsp;
 			<a href="#">#buttonIcon(iconClass="icon-plus-sign")添加项目</a>
 		</span>
@@ -132,7 +132,7 @@
 				#div(divClass="clearfix")
 			#end
 			##operationbar end
-			#include("/page/project/calendar.page")
+##			#include("/page/project/calendar.page")
 		#end
 		#@tabBodyCol("ptop-5")
 			##operationbar start7
@@ -160,7 +160,7 @@
 					<span class="active_btn">文档列表</span>
 				</span>
 				<span class="r">
-					<a href="#">#buttonIcon(iconClass="icon-off")创建文档</a>
+					<a href="#">#buttonIcon(iconClass="icon-off")&nbsp;创建文档</a>
 				</span>
 				#div(divClass="clearfix")
 			#end

@@ -1,9 +1,4 @@
 #!set(activeTitle="项目管理",activeMenuId=currentPageId)
-#*<style>
-.tabLayout .tabBar span a{color:#333}
-.tabLayout .tabBar .Current a{color:#fff}
-.operationbar{border-top:none;background:#f9fafe;padding:6px 5px 6px 10px;}
-</style>*#
 #set(name="test")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
@@ -19,15 +14,17 @@
 					测试列表
 				</span>
             <span class="r c">
-##					<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/proposeversion.page">#buttonIcon(iconClass="icon-plus")提交测试</a>
-    #foreach(m:menuManager.getScopeMenus("pro-testmenu-op"))
-        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
-    #end
+                #set(m=menuManager.getMenu("tproposeversion"))
+                #if(m)
+                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}"
+                       title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
+                #end
 				</span>
                 #div(divClass="clearfix")
             #end
         ##operationbar end
-            #include("/project/test/table.page")
+
         #end
     #end
 #end
+#include("/project/test/table.page")

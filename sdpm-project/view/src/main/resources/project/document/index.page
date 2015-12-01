@@ -14,8 +14,7 @@
             <span class="f">文档列表</span>
             <span class="r">
                 #foreach(m:menuManager.getScopeMenus("pro-documentmenu-op"))
-                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}"
-                       title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
+                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="docJump" value="2" title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
                 #end
             </span>
                 #div(divClass="clearfix")
@@ -25,3 +24,11 @@
     #end
 #end
 #include("/project/document/table.page")
+<script>
+    $(function(){
+        $(".docJump").on("click",function(){
+            var libId = $(this).attr("value");
+            $.cookie("documentLibId",libId,{path:"/"});
+        });
+    })
+</script>

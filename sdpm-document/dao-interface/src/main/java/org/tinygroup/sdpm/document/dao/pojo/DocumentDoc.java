@@ -1,17 +1,17 @@
 /**
- *  Copyright (c) 1997-2013, www.tinygroup.org (luo_guo@icloud.com).
- *
- *  Licensed under the GPL, Version 3.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *       http://www.gnu.org/licenses/gpl.html
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
+ * Copyright (c) 1997-2013, www.tinygroup.org (luo_guo@icloud.com).
+ * <p>
+ * Licensed under the GPL, Version 3.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.gnu.org/licenses/gpl.html
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 package org.tinygroup.sdpm.document.dao.pojo;
@@ -19,285 +19,328 @@ package org.tinygroup.sdpm.document.dao.pojo;
 import java.io.Serializable;
 import java.util.Date;
 
-/** 
+/**
  * 文档表
- * 
+ *
  * wendang
  */
 public class DocumentDoc implements Serializable {
-	
-	public static String DELETE_YES = "1";
-	public static String DELETE_NO = "0";
 
-	/** 
-	 * 文档ID
-	 * 
-	 * 文档ID，主键，唯一标示
-	 */
-	private Integer docId;
+    public static String DELETE_YES = "1";
+    public static String DELETE_NO = "0";
 
-	/** 
-	 * 所属产品
-	 * 
-	 * 所属产品，存放产品ID作为索引
-	 */
-	private Integer docProduct;
+    /*
+     * 文档关联查询的字段
+     */
+    private String projectName;
+    private String docLibName;
+    private String productName;
+    private String moduleName;
+    private String docAddName;
+    private String docEditName;
+    /**
+     * 文档ID
+     *
+     * 文档ID，主键，唯一标示
+     */
+    private Integer docId;
+    /**
+     * 所属产品
+     *
+     * 所属产品，存放产品ID作为索引
+     */
+    private Integer docProduct;
+    /**
+     * 所属项目
+     *
+     * 所属项目，存储项目ID作为索引
+     */
+    private Integer docProject;
+    /**
+     * 文档库ID
+     *
+     * 文档库ID
+     */
+    private Integer docLibId;
+    /**
+     * 所属分类
+     *
+     * 所属分类
+     */
+    private Integer docModule;
+    /**
+     * 文档标题
+     *
+     * 文档标题
+     */
+    private String docTitle;
+    /**
+     * 摘要
+     *
+     * 摘要
+     */
+    private String docDigest;
+    /**
+     * 关键字
+     *
+     * 关键字
+     */
+    private String docKeywords;
+    /**
+     * 文档类型
+     *
+     * 文档类型
+     */
+    private String docType;
+    /**
+     * 文档正文
+     *
+     * 文档正文
+     */
+    private String docContent;
+    /**
+     * 文档url
+     *
+     * 文档url
+     */
+    private String docUrl;
+    /**
+     * 附件
+     *
+     * 放文档附件路径吧，标准字段类型根本没有存储二进制文件的类型。有点遗憾。
+     */
+    private String docAttach;
+    /**
+     * DOC查阅次数
+     *
+     * 查阅次数
+     */
+    private Integer docViews;
+    /**
+     * DOC由谁添加
+     *
+     * 由谁添加
+     */
+    private String docAddedBy;
+    /**
+     * DOC添加时间
+     *
+     * 添加时间
+     */
+    private Date docAddedDate;
+    /**
+     * 由谁编辑
+     *
+     * 由谁编辑
+     */
+    private String docEditedBy;
+    /**
+     * 文档编辑时间
+     *
+     * 编辑时间
+     */
+    private Date docEditedDate;
+    /**
+     * 文档删除标志
+     *
+     * 已删除
+     */
+    private String docDeleted;
 
-	/** 
-	 * 所属项目
-	 * 
-	 * 所属项目，存储项目ID作为索引
-	 */
-	private Integer docProject;
+    public DocumentDoc() {
+        setDocDeleted(DELETE_NO);
+    }
 
-	/** 
-	 * 文档库ID
-	 * 
-	 * 文档库ID
-	 */
-	private Integer docLibId;
+    public String getProjectName() {
+        return projectName;
+    }
 
-	/** 
-	 * 所属分类
-	 * 
-	 * 所属分类
-	 */
-	private Integer docModule;
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
 
-	/** 
-	 * 文档标题
-	 * 
-	 * 文档标题
-	 */
-	private String docTitle;
+    public String getDocLibName() {
+        return docLibName;
+    }
 
-	/** 
-	 * 摘要
-	 * 
-	 * 摘要
-	 */
-	private String docDigest;
+    public void setDocLibName(String docLibName) {
+        this.docLibName = docLibName;
+    }
 
-	/** 
-	 * 关键字
-	 * 
-	 * 关键字
-	 */
-	private String docKeywords;
+    public String getProductName() {
+        return productName;
+    }
 
-	/** 
-	 * 文档类型
-	 * 
-	 * 文档类型
-	 */
-	private String docType;
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
 
-	/** 
-	 * 文档正文
-	 * 
-	 * 文档正文
-	 */
-	private String docContent;
+    public String getModuleName() {
+        return moduleName;
+    }
 
-	/** 
-	 * 文档url
-	 * 
-	 * 文档url
-	 */
-	private String docUrl;
+    public void setModuleName(String moduleName) {
+        this.moduleName = moduleName;
+    }
 
-	/** 
-	 * 附件
-	 * 
-	 * 放文档附件路径吧，标准字段类型根本没有存储二进制文件的类型。有点遗憾。
-	 */
-	private String docAttach;
+    public String getDocAddName() {
+        return docAddName;
+    }
 
-	/** 
-	 * DOC查阅次数
-	 * 
-	 * 查阅次数
-	 */
-	private Integer docViews;
+    public void setDocAddName(String docAddName) {
+        this.docAddName = docAddName;
+    }
 
-	/** 
-	 * DOC由谁添加
-	 * 
-	 * 由谁添加
-	 */
-	private String docAddedBy;
+    public String getDocEditName() {
+        return docAddName;
+    }
 
-	/** 
-	 * DOC添加时间
-	 * 
-	 * 添加时间
-	 */
-	private Date docAddedDate;
+    public void setDocEditName(String docEditName) {
+        this.docEditName = docEditName;
+    }
 
-	/** 
-	 * 由谁编辑
-	 * 
-	 * 由谁编辑
-	 */
-	private String docEditedBy;
+    public Integer getDocId() {
+        return docId;
+    }
 
-	/** 
-	 * 文档编辑时间
-	 * 
-	 * 编辑时间
-	 */
-	private Date docEditedDate;
+    public void setDocId(Integer docId) {
+        this.docId = docId;
+    }
 
-	/** 
-	 * 文档删除标志
-	 * 
-	 * 已删除
-	 */
-	private String docDeleted;
+    public Integer getDocProduct() {
+        return docProduct;
+    }
 
+    public void setDocProduct(Integer docProduct) {
+        this.docProduct = docProduct;
+    }
 
-	public void setDocId(Integer docId){
-		this. docId = docId;
-	}
+    public Integer getDocProject() {
+        return docProject;
+    }
 
-	public Integer getDocId(){
-		return docId;
-	}
+    public void setDocProject(Integer docProject) {
+        this.docProject = docProject;
+    }
 
-	public void setDocProduct(Integer docProduct){
-		this. docProduct = docProduct;
-	}
+    public Integer getDocLibId() {
+        return docLibId;
+    }
 
-	public Integer getDocProduct(){
-		return docProduct;
-	}
+    public void setDocLibId(Integer docLibId) {
+        this.docLibId = docLibId;
+    }
 
-	public void setDocProject(Integer docProject){
-		this. docProject = docProject;
-	}
+    public Integer getDocModule() {
+        return docModule;
+    }
 
-	public Integer getDocProject(){
-		return docProject;
-	}
+    public void setDocModule(Integer docModule) {
+        this.docModule = docModule;
+    }
 
-	public void setDocLibId(Integer docLibId){
-		this. docLibId = docLibId;
-	}
+    public String getDocTitle() {
+        return docTitle;
+    }
 
-	public Integer getDocLibId(){
-		return docLibId;
-	}
+    public void setDocTitle(String docTitle) {
+        this.docTitle = docTitle;
+    }
 
-	public void setDocModule(Integer docModule){
-		this. docModule = docModule;
-	}
+    public String getDocDigest() {
+        return docDigest;
+    }
 
-	public Integer getDocModule(){
-		return docModule;
-	}
+    public void setDocDigest(String docDigest) {
+        this.docDigest = docDigest;
+    }
 
-	public void setDocTitle(String docTitle){
-		this. docTitle = docTitle;
-	}
+    public String getDocKeywords() {
+        return docKeywords;
+    }
 
-	public String getDocTitle(){
-		return docTitle;
-	}
+    public void setDocKeywords(String docKeywords) {
+        this.docKeywords = docKeywords;
+    }
 
-	public void setDocDigest(String docDigest){
-		this. docDigest = docDigest;
-	}
+    public String getDocType() {
+        return docType;
+    }
 
-	public String getDocDigest(){
-		return docDigest;
-	}
+    public void setDocType(String docType) {
+        this.docType = docType;
+    }
 
-	public void setDocKeywords(String docKeywords){
-		this. docKeywords = docKeywords;
-	}
+    public String getDocContent() {
+        return docContent;
+    }
 
-	public String getDocKeywords(){
-		return docKeywords;
-	}
+    public void setDocContent(String docContent) {
+        this.docContent = docContent;
+    }
 
-	public void setDocType(String docType){
-		this. docType = docType;
-	}
+    public String getDocUrl() {
+        return docUrl;
+    }
 
-	public String getDocType(){
-		return docType;
-	}
+    public void setDocUrl(String docUrl) {
+        this.docUrl = docUrl;
+    }
 
-	public void setDocContent(String docContent){
-		this. docContent = docContent;
-	}
+    public String getDocAttach() {
+        return docAttach;
+    }
 
-	public String getDocContent(){
-		return docContent;
-	}
+    public void setDocAttach(String docAttach) {
+        this.docAttach = docAttach;
+    }
 
-	public void setDocUrl(String docUrl){
-		this. docUrl = docUrl;
-	}
+    public Integer getDocViews() {
+        return docViews;
+    }
 
-	public String getDocUrl(){
-		return docUrl;
-	}
+    public void setDocViews(Integer docViews) {
+        this.docViews = docViews;
+    }
 
-	public void setDocAttach(String docAttach){
-		this. docAttach = docAttach;
-	}
+    public String getDocAddedBy() {
+        return docAddedBy;
+    }
 
-	public String getDocAttach(){
-		return docAttach;
-	}
+    public void setDocAddedBy(String docAddedBy) {
+        this.docAddedBy = docAddedBy;
+    }
 
-	public void setDocViews(Integer docViews){
-		this. docViews = docViews;
-	}
+    public Date getDocAddedDate() {
+        return docAddedDate;
+    }
 
-	public Integer getDocViews(){
-		return docViews;
-	}
+    public void setDocAddedDate(Date docAddedDate) {
+        this.docAddedDate = docAddedDate;
+    }
 
-	public void setDocAddedBy(String docAddedBy){
-		this. docAddedBy = docAddedBy;
-	}
+    public String getDocEditedBy() {
+        return docEditedBy;
+    }
 
-	public String getDocAddedBy(){
-		return docAddedBy;
-	}
+    public void setDocEditedBy(String docEditedBy) {
+        this.docEditedBy = docEditedBy;
+    }
 
-	public void setDocAddedDate(Date docAddedDate){
-		this. docAddedDate = docAddedDate;
-	}
+    public Date getDocEditedDate() {
+        return docEditedDate;
+    }
 
-	public Date getDocAddedDate(){
-		return docAddedDate;
-	}
+    public void setDocEditedDate(Date docEditedDate) {
+        this.docEditedDate = docEditedDate;
+    }
 
-	public void setDocEditedBy(String docEditedBy){
-		this. docEditedBy = docEditedBy;
-	}
+    public String getDocDeleted() {
+        return docDeleted;
+    }
 
-	public String getDocEditedBy(){
-		return docEditedBy;
-	}
-
-	public void setDocEditedDate(Date docEditedDate){
-		this. docEditedDate = docEditedDate;
-	}
-
-	public Date getDocEditedDate(){
-		return docEditedDate;
-	}
-
-	public void setDocDeleted(String docDeleted){
-		this. docDeleted = docDeleted;
-	}
-
-	public String getDocDeleted(){
-		return docDeleted;
-	}
+    public void setDocDeleted(String docDeleted) {
+        this.docDeleted = docDeleted;
+    }
 
 }

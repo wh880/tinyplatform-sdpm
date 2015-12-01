@@ -1,33 +1,29 @@
-<div class="panel">
+
+##	#set(viewpagePath="/system/page/holidayHistory.page",viewpageModalId="holidayHistoryModal",viewpageModal="#holidayHistory")
+    <div class="panel">
 	<div class="panel-heading panelNobr">
 		<span class="panel-title"><i class="panel-title-icon fa fa-tasks"></i>最新动态</span>
 		<div class="panel-heading-controls">
-			<a href="${TINY_CONTEXT_PATH}/organization/active.page">更多&gt&gt</a>
+
+	       #@aModal("#myModal" "假期操作历史记录" "900" "620" "" adminPath+"/system/holiday/history/more")更多#end
+
 		</div>
 	</div>
-	<!-- Without vertical padding -->
+
 	<div class="panel-content">
 		<table class="table  table-striped "> 
-			#for(a:action)
-	
-#*				<tr>
-					<td>9月09日 14:39</td> 
-					<td>admin </td>
-					<td>添加假期</td>
-					<td>
-						<a href="#"> 国庆节</a>
-					</td>
-	            </tr>*#
-	            <tr>
+			#foreach(a:action)
+			<tr>
 					<td  width="100%">
-						${a?.actionDate}, ${a?.actionActor} 
-						<em>删除了</em> 假期   
-						
-						<a href="${TINY_CONTEXT_PATH}/system/page/holiday/edit.page">${a?.actionObjectId}</a>。
+						${formatDate(a?.actionDate,"yyyy-MM-dd HH:mm:ss")},  ${UserUtils.getUserById(a?.actionActor).orgUserRealName}
+                        <em> ${getDict("actionOperate",a?.actionAction)} </em>       ${a?.holidayType}       ${a?.holidayName}
+
 					</td> 
 					
 				</tr>
 	            #end
+
+
         </table>
 	</div>
 </div>

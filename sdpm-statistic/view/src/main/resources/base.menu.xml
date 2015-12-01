@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<menu id="statistic" parent-id="0" name="统计" href="/statistic/page/product.page" icon="icon-tasks" sort="400"
+<menu id="statistic" parent-id="0" name="统计" href="/statistic/product/all" icon="icon-tasks" sort="400"
       isShow="1"
 >
-    <menu id="statisticProduct" parent-id="statistic" name="产品" href="/statistic/page/product.page" icon="" sort="1"
+    <menu id="statisticProduct" parent-id="statistic" name="产品" href="/statistic/product/all" icon="" sort="1"
           isShow="1"
     >
     </menu>
-    <menu id="statisticProject" parent-id="statistic" name="项目" href="/statistic/page/project.page" icon="" sort="1"
+    <menu id="statisticProject" parent-id="statistic" name="项目" href="/statistic/project/all" icon="" sort="1"
           isShow="1"
     >
     </menu>
-    <menu id="statisticTest" parent-id="statistic" name="测试" href="/statistic/page/test.page" icon="" sort="1"
+    <menu id="statisticTest" parent-id="statistic" name="测试" href="/statistic/quality/bugCreate" icon="" sort="1"
           isShow="1"
     >
     </menu>
-    <menu id="statisticOrg" parent-id="statistic" name="组织" href="/statistic/page/org.page" icon="" sort="1" isShow="1"
+    <menu id="statisticOrg" parent-id="statistic" name="组织" href="/statistic/org/all" icon="" sort="1" isShow="1"
     >
     </menu>
 </menu>

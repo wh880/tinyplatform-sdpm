@@ -1,7 +1,7 @@
 #import("/org/tinygroup/table/components/togglebox.component")
 #import("/org/tinygroup/compose/components/compose_typography.component")
 
-#include("/product/page/event/mulsearch-bug.page")	
+###include("/product/page/event/mulsearch-bug.page")
 
 		#@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
 			#@div(divBaseClass="tinyheaderTools form-inline")
@@ -35,7 +35,7 @@
 			*#
 			
 			#@dialog("myModal")
-				#@dialogHeader()对话框标题#end
+				#@dialogHeader()#end
 				#@dialogBody()<p>对话框内容…</p>#end
 				#@dialogFooter()
 					#@buttonEnsure()确定#end

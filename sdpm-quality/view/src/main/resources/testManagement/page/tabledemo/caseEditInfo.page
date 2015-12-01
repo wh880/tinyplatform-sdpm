@@ -8,47 +8,54 @@
 	    		#@tr()
 	    			#@th()所属产品#end
 	    			#@td()
-	    			<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/cases.page">产品1#end
+                    <a href="${TINY_CONTEXT_PATH+adminPath}/product/find/overview?productId=${testCase?.productId}">${testCase?.productId?ProductUtils.getProduct(String.valueOf(testCase?.productId))?.productName:""}#end
 	    		#end
 	    		#@tr()
 	    			#@th()所属模块#end
-	    			#@td()/#end
+	    			#@td()${testCase?.moduleName}#end
 	    		#end
 	    		#@tr()
 	    			#@th()相关需求#end
-	    			#@td()/#end
+	    			#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/product/storySpec/find/productDemandDetail?storyId=${testCase?.storyId}">${testCase?.storyTitle}</a>#end
 	    		#end
 	    		#@tr()
 	    			#@th()用例类型#end
-	    			#@td()性能测试#end
+	    			#@td()${getDict("caseType",testCase?.caseType)}#end
 	    		#end
 	    		#@tr()
 	    			#@th()适用阶段#end
-	    			#@td()/#end
+	    			#@td()
+	    			#if(testCase?.caseStage)
+                        #set(stages = testCase?.caseStage.split(","))
+                        #foreach(stage : stages)
+                        #if(stageFor?.index!=1),#end
+                        ${getDict("caseStage",stage)}
+                        #end
+                    #end#end
 	    		#end
 	    		#@tr()
 	    			#@th()优先级#end
-	    			#@td()3#end
+	    			#@td()${getDict("casePriority",testCase?.priority)}#end
 	    		#end
 	    		#@tr()
 	    			#@th()用例状态#end
-	    			#@td()正常#end
+	    			#@td()${getDict("caseStatus",testCase?.caseStatus)}#end
 	    		#end
 	    		#@tr()
 	    			#@th()执行时间#end
-	    			#@td()/#end
+	    			#@td()${formatDate(testCase?.caseLastRunDate,"yyyy-MM-dd HH:mm:ss")}#end
 	    		#end
 	    		#@tr()
 	    			#@th()结果#end
-	    			#@td()/#end
+	    			#@td()${getDict("caseResult",testCase?.caseLastRunResult)}#end
 	    		#end
 	    		#@tr()
 	    			#@th()关键词#end
-	    			#@td()/#end
+	    			#@td()${testCase?.caseKeywords}#end
 	    		#end
 	    		#@tr()
 	    			#@th()相关用例#end
-	    			#@td()/#end
+	    			#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/testCase/case/viewInfo?id=${testCase?.linkCase}">${testCase?.linkCaseTile}</a>#end
 	    		#end
 	    	#end	
     	#end   	
@@ -59,11 +66,18 @@
 			#@tbody()
 	    		#@tr()
 	    			#@th()来源Bug#end
-	    			#@td()#end
+	    			#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/bug/bugInfo?bugId=${testCase?.caseFromBug}">${testCase?.caseFromBugTitle}</a>#end
 	    		#end
 	    		#@tr()
 	    			#@th()生成Bug#end
-	    			#@td()/#end
+	    			#@td()
+						#foreach(bug : bugFromCase)
+							#if(bugFor.index!=1)
+								,
+							#end
+                    <a href="${TINY_CONTEXT_PATH+adminPath}/quality/bug/bugInfo?bugId=${bug?.bugId}">${bug?.bugTitle}</a>
+						#end
+					#end
 	    		#end
 	    	#end
 	    #end
@@ -74,11 +88,11 @@
 			#@tbody()
 	    		#@tr()
 	    			#@th()由谁创建#end
-	    			#@td()admin 于 2015-09-09 19:28:45#end
+	    			#@td()${testCase?.caseOpenedBy?UserUtils.getUserById(testCase?.caseOpenedBy)?.orgUserRealName:""} ${testCase?.caseOpenedDate?" 于  "+formatDate(testCase?.caseOpenedDate,"yyyy-MM-dd HH:mm:ss"):""}#end
 	    		#end
 	    		#@tr()
 	    			#@th()最后编辑#end
-	    			#@td()#end
+	    			#@td()${testCase?.caseLastEditedBy?UserUtils.getUserById(testCase?.caseLastEditedBy)?.orgUserRealName:""} ${testCase?.caseLastEditedDate?" 于  "+formatDate(testCase?.caseLastEditedDate,"yyyy-MM-dd HH:mm:ss"):""}#end
 	    		#end
 	    	#end
 	    #end

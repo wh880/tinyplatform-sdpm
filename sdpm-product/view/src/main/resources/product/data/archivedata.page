@@ -1,25 +1,25 @@
-
 #set(records=pager.totalCount,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
 #if (pagesize>records-pagesize*(page-1))
 #set(pagesize=records-(page-1)*pagesize)
 #end
 #setTinyItemCount(pager?.totalCount)
-#for(l:pager?.records)
+#foreach(l:pager?.records)
 #@tr()
 
 	#@td()<input type="checkbox" value="${l?.docId}" name="idCheck">#end
-	#@td()<a href="${TINY_CONTEXT_PATH +adminPath}/document/doc/view?docid=${l?.docId}">${l?.docId}</a>#end
-	#@td()<a href="${TINY_CONTEXT_PATH +adminPath}/document/doc/view?docid=${l?.docId}">${l?.docModule}</a>#end
-	#@td()${l?.docTitle}#end
-	#@td()${l?.docAddedBy}#end
-	#@td()${l?.docAddedDate?formatDate(l?.docAddedDate,'yyyy年MM月dd日'):""}#end
-	#@td()
-	
-	
+	#@td()<a class="docJump" value="${l?.docLibId}" href="${TINY_CONTEXT_PATH +adminPath}/document/doc/view?docid=${l?.docId}&type=1">${l?.docId}#end
+	#@td()${l?.moduleName}</a>#end
+	#@td()<a class="docJump" value="${l?.docLibId}" href="${TINY_CONTEXT_PATH +adminPath}/document/doc/view?docid=${l?.docId}&type=1">${l?.docTitle}</a>#end
+	#@td("nowrap")  ${l?.docAddedBy?UserUtils.getUserById(l?.docAddedBy).orgUserRealName:""}
+	#end
+	#@td("nowrap")${l?.docAddedDate?formatDate(l?.docAddedDate,'yyyy-MM-dd'):""}#end
+	#@td("nowrap")
+
+
 		#foreach(m:menuManager.getScopeMenus("archive-oper"))
 		 #set(url=eval(m.href))
 			#if(m.id=="product-archive-edit")
-            <a title="${m.name}" class="ml-5" href="${TINY_CONTEXT_PATH +adminPath}${url}"><i class="${m.icon}"></i></a>
+            <a title="${m.name}" value="${l?.docLibId}" class="docJump ml-5" href="${TINY_CONTEXT_PATH +adminPath}${url}"><i class="${m.icon}"></i></a>
 			#else
             &nbsp;#@tinyTableItemRemove(TINY_CONTEXT_PATH +adminPath+url l.docId)<i class="${m.icon}"></i>#end
 			#end
@@ -29,12 +29,11 @@
 	#end
 #end
 #end
-
-#@dialog("myModal")
-	#@dialogHeader()对话框标题#end
-	#@dialogBody()<p>对话框内容…</p>#end
-	#@dialogFooter()
-		#@buttonEnsure()确定#end
-		#@buttonCancel()关闭#end
-	#end
-#end
+<script>
+	$(function(){
+		$(".docJump").on("click",function(){
+			var libId = $(this).attr("value");
+			$.cookie("documentLibId",libId,{path:"/"});
+		});
+	})
+</script>

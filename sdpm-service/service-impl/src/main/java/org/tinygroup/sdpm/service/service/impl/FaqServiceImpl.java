@@ -13,7 +13,7 @@ import java.util.List;
  * Created by Administrator on 2015-09-18.
  */
 @Component
-public class FaqServiceImpl implements FaqService{
+public class FaqServiceImpl implements FaqService {
     @Autowired
     private FaqManager faqManager;
 
@@ -29,6 +29,7 @@ public class FaqServiceImpl implements FaqService{
     public Pager<ServiceFaq> getFaqpage(Integer start, Integer limit, ServiceFaq faq) {
         return faqManager.getpage(start, limit, faq);
     }
+
     public ServiceFaq addFaq(ServiceFaq faq) {
         return faqManager.add(faq);
     }
@@ -43,5 +44,9 @@ public class FaqServiceImpl implements FaqService{
 
     public Pager<ServiceFaq> findUserByDeptId(Integer start, Integer limit, Integer deptId) {
         return faqManager.findUserListByDeptId(start, limit, deptId);
+    }
+
+    public Pager<ServiceFaq> searchFaq(Integer start, Integer limit, ServiceFaq faq, String faqQuestion) {
+        return faqManager.search(start, limit, faq, faqQuestion);
     }
 }

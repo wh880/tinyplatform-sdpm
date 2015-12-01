@@ -1,343 +1,369 @@
 package org.tinygroup.sdpm.action.document;
 
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-
+import org.apache.shiro.authz.annotation.Logical;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.HttpRequestHandler;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-import org.tinygroup.sdpm.action.system.ProfileUtil;
+import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
+import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.document.dao.pojo.DocumentDoc;
-import org.tinygroup.sdpm.document.dao.pojo.DocumentDoclib;
+import org.tinygroup.sdpm.document.dao.pojo.DocumentDocLib;
 import org.tinygroup.sdpm.document.service.inter.DocService;
+import org.tinygroup.sdpm.dto.UploadProfile;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
-import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
-import org.tinygroup.sdpm.project.service.inter.ProjectProductService;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
+import org.tinygroup.sdpm.system.dao.pojo.ProfileType;
+import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.sdpm.system.service.inter.ProfileService;
+import org.tinygroup.sdpm.util.*;
 import org.tinygroup.tinysqldsl.Pager;
 
-@Controller
-@RequestMapping(value="/a/document")
-public class DocAction {
-	@Autowired
-	private DocService docservice;
-	@Autowired
-	private ProductService productService;
-	@Autowired
-	private ProjectService projectService;
-	@Autowired
-	private ModuleService moduleService;
-	@Autowired
-	private ProjectProductService projectProductService;
-	@Autowired
-	private ProfileService profileService;
-	
-	@RequestMapping("")
-	public String docIndex(DocumentDoclib doclib,HttpServletRequest request,Model model,String change,String docChange,String tree)
-	{	
-		List<DocumentDoclib> list=docservice.findDoclibList(new DocumentDoclib());				
-		if(list.size()>0&&!("true".equals(change))&&!("true".equals(docChange))&&!("true".equals(tree))){
-			if(null==request.getSession().getAttribute("documentLibId")||doclib.getDocLibId()==null){
-				request.getSession().setAttribute("documentLibId",list.get(0).getDocLibId());
-			}else {
-				request.getSession().setAttribute("documentLibId",doclib.getDocLibId());
-			}
-		}
-		request.getSession().setAttribute("libList",list);	
-		return "/document/document.page";
-	}
-	
-	@RequestMapping(value="/doc/list")
-	public String docList(HttpServletRequest request,Integer page,Integer limit,String order,String ordertype,DocumentDoc doc,Model model ,String groupOperate, SearchInfos searchInfos)
-	{
-		doc.setDocDeleted("0");
-		boolean asc = true;		
-		if("desc".equals(ordertype)){
-			asc = false;
-		}
-		doc.setDocLibId(Integer.valueOf((Integer)request.getSession().getAttribute("documentLibId")));
-		if(doc.getDocModule() != null && doc.getDocModule() > 0){
-			
-		}
-		Pager<DocumentDoc> docpager = docservice.findDocRetPager(limit*(page-1), limit, doc, null,searchInfos,groupOperate, order, asc);
-		model.addAttribute("docpager", docpager);
-		return "/data/datalist.pagelet";
-	}
-	
-	//@RequiresPermissions("add-doc")
-	@RequestMapping(value="/doc/add")
-	public String createDoc(HttpServletRequest request ,Model model)
-	{		
-		Integer libid = (Integer) request.getSession().getAttribute("documentLibId");
-		if(libid == 1){
-			Product product = new Product();
-			List<Product> list = productService.findProductList(product);
-			model.addAttribute("productList", list);
-			return "/document/add-doc-product.page";
-		}else if(libid == 2){	
-			List<Project> list = projectService.findList();
-			Product product = new Product();
-			List<Product> list1 = productService.findProductList(product);
-			model.addAttribute("productList", list1);
-			model.addAttribute("projectList", list);
-			return "/document/add-doc-project.page";
-		}else{
-		return "/document/add-doc.page";	
-		}
-	}
-	
-	@RequestMapping(value="/doc/addSave",method=RequestMethod.POST)
-	public String addSave(HttpServletRequest request,DocumentDoc doc,@RequestParam(value = "file", required = false)MultipartFile[] file,String[] title,Model model) throws IOException{	
-		List<Product> product = productService.findProductList(new Product());
-		doc.setDocLibId(Integer.valueOf((Integer)request.getSession().getAttribute("documentLibId")));
-		DocumentDoc document = docservice.createNewDoc(doc);
-		
-		ProfileUtil profileUtil = new ProfileUtil();		
-        profileUtil.uploads(file, document.getDocId(), "document", title);
-        
-		model.addAttribute("productList", product);
-		return "redirect:"+"/a/document?docChange=true";
-	}
-	
-	@RequestMapping(value="/doc/edit")
-	public String editDoc(HttpServletRequest request,Model model,Integer docId)
-	{	
-		DocumentDoc doc = new DocumentDoc();
-		doc.setDocLibId((Integer) request.getSession().getAttribute("documentLibId"));
-		doc = docservice.findDocById(docId);
-		model.addAttribute("doc", doc);
-		return "/document/doc-edit.page";
-	}
-	
-	@RequestMapping(value="/doc/editSave",method=RequestMethod.POST)
-	public String editSave(DocumentDoc doc,Model model){			
-		docservice.editDoc(doc);
-		return "redirect:"+"/a/document?docChange=true";
-	}
-	
-	@RequestMapping("/doc/view")
-	public String docView(HttpServletRequest request,DocumentDoc doc,SystemProfile systemProfile,Model model,Integer docid){
-		
-		doc.setDocLibId(Integer.valueOf((Integer)request.getSession().getAttribute("documentLibId")));
-		doc = docservice.findDocById(docid);		
-		DocumentDoclib docLib = docservice.findDoclibById(doc.getDocLibId());
-		systemProfile.setFileObjectType("document");
-		systemProfile.setFileObjectId(docid);
-		List<SystemProfile> list = profileService.find(systemProfile);
-		model.addAttribute("file",list);
-		model.addAttribute("doc",doc);
-		model.addAttribute("docLib",docLib);
-		return "/document/doc-view.page";
-	}
-	
-	@RequestMapping("/doc/viewInfo")
-	public String viewInfo(HttpServletRequest request, Integer docId, Model model){
-		DocumentDoc doc = new DocumentDoc();
-		DocumentDoclib docLib = new DocumentDoclib();
-		doc.setDocLibId(Integer.valueOf((Integer)request.getSession().getAttribute("documentLibId")));
-		doc = docservice.findDocById(docId);
-		docLib = docservice.findDoclibById(doc.getDocLibId());
-		model.addAttribute("doc",doc);
-		model.addAttribute("docLib",docLib);
-		return "/document/basic-info.pagelet";
-	}
-	
-	@RequestMapping(value="/doc/save",method=RequestMethod.POST)
-	public String saveDoc(HttpServletRequest request,DocumentDoc doc,Model model)
-	{
-		if(doc.getDocId()==null||doc.getDocId()==0){
-			doc = docservice.createNewDoc(doc);			
-		}
-		else{
-			docservice.editDoc(doc);
-		}
-		return "redirect:"+"/a/document";
-	}
-	
-	@ResponseBody
-	@RequestMapping(value="/doc/delete")
-	public Map delDoc(Integer id)
-	{
-		docservice.deleteDocById(id);
-		Map<String,String> map = new HashMap<String,String>();
-		map.put("status", "success");
-	    map.put("info", "删除成功");
-	    return map;
-	}
-	
-	@ResponseBody
-	@RequestMapping(value="/doc/batchDelete")
-	public Map bctchDelDoc(String ids)
-	{		
-		Map<String,String> map = new HashMap<String,String>();
-		if(ids == null || ids == ""){
-			map.put("status", "fail");
-		    map.put("info", "请至少选择一条数据");
-			return map;
-		}
-		 List<DocumentDoc> list = new ArrayList<DocumentDoc>();
-		for(String s : ids.split(",")){			
-			DocumentDoc doc= new DocumentDoc();
-			doc.setDocId(Integer.valueOf(s));
-			doc.setDocDeleted("1");
-			list.add(doc);
-		}	
-		docservice.deleteDocByIds(list);
-		map.put("status", "success");
-	    map.put("info", "删除成功");
-	    return map;
-	}
-	
-	@RequestMapping(value="/doclib/toAdd")
-	public String addDocLib()
-	{
-		return "/document/add-doclib.pagelet";
-	}
-	
-	@RequestMapping(value="/doclib/edit")
-	public String editDoclib(HttpServletRequest request,DocumentDoclib doclib,Model model)
-	{		
-		doclib = docservice.findDoclibById((Integer) request.getSession().getAttribute("documentLibId"));
-		model.addAttribute("doclib", doclib);
-		if((Integer) request.getSession().getAttribute("documentLibId") == 1 || (Integer) request.getSession().getAttribute("documentLibId") == 2){
-			return "/document/doclib-no-edit.pagelet";
-		}
-		return "/document/doclib-edit.pagelet";
-	}
-	
-	@RequestMapping(value="/doclib/save")
-	public String saveDoclib(HttpServletRequest request,DocumentDoclib doclib)
-	{
-		if(doclib.getDocLibId()==null||doclib.getDocLibId()==0){
-			doclib = docservice.createNewDocLib(doclib);
-			request.getSession().setAttribute("documentLibId", doclib.getDocLibId());
-		}else {
-			docservice.editDocLibName(doclib);
-		}	
-		return "redirect:"+"/a/document?change=true";
-	}
-	
-	@ResponseBody
-	@RequestMapping(value="/doclib/delete")
-	public Map delDocLib(Integer id)
-	{
-		DocumentDoclib doclib = new DocumentDoclib();
-		List<DocumentDoclib> list = docservice.findDoclibList(doclib);
-		if(id != list.get(0).getDocLibId() && id != list.get(1).getDocLibId()){
-		docservice.deleteDoclibById(id);
-		Map<String,String> map = new HashMap<String,String>();
-		map.put("status", "success");
-	    map.put("info", "删除成功");
-	    return map;
-		}
-		return null;
-	}
-	
-	@ResponseBody
-	@RequestMapping("/ajax/module")
-	public List<SystemModule> getModule(SystemModule systemModule){
-		systemModule.setModuleType("document");
-		return moduleService.findModules(systemModule);
-	}
-	
-	@ResponseBody
-	@RequestMapping("/ajax/product")
-	public List<Product> getproduct(Product product,Integer projectId){
-		
-		if(projectId == 0){			
-			return projectProductService.findLinkProduct();
-		}
-		List<ProjectProduct> list = projectProductService.findProducts(projectId);
-		Integer[] i = new Integer[list.size()];
-		List<Integer> list1 = new ArrayList<Integer>();
-		for(int j=0;j<list.size();j++){
-			list1.add(list.get(j).getProductId());
-		}
-		List<Product> productList = productService.findProductList(list1.toArray(i));
-		
-		//查出删除标志位为0的数据,暂未实现功能，故注释
-		
-		/*for(int m=0;m<list.size();m++){
-			productList.get(m).setDeleted(0);
-		}*/
-		return productList;
-	}
-	
-	//产品文档
-		@RequestMapping("/product/doc")
-	public String product(HttpServletRequest request,Model model){
-		Product product = new Product();
-		List<Product> list = productService.findProductList(new Product());
-		if(list.size() > 0){
-			if(null==request.getSession().getAttribute("sessionProductId")||product.getProductId()==null){
-				request.getSession().setAttribute("sessionProductId",list.get(0).getProductId());
-			}else {
-				request.getSession().setAttribute("sessionProductId",product.getProductId());
-			}
-		}
-		model.addAttribute("productList", list);
-		return "/product/page/project/archive-list.page";
-	}
-	
-	@RequestMapping("/product/doc/list")
-	public String productList(DocumentDoc doc,HttpServletRequest request,Integer page,Integer limit,String order,String ordertype,String groupOperate, SearchInfos searchInfos, Model model){
-		
-		doc.setDocProduct((Integer) request.getSession().getAttribute("sessionProductId"));
-		boolean asc = true;		
-		if("desc".equals(ordertype)){
-			asc = false;
-		}
-		Pager<DocumentDoc> docpager = docservice.findDocRetPager(limit*(page-1), limit, doc, null, searchInfos,groupOperate, NameUtil.resolveNameDesc(order), asc);
-		model.addAttribute("pager", docpager);
-		return "/product/data/archivedata.pagelet";
-	}
-	
-	@RequestMapping("/product/findDoc")
-	public String findDocument(Integer docId,Model model){
-		
-		DocumentDoc doc = docservice.findDocById(docId);
-		model.addAttribute("doc", doc);
-		return "/document/doc-edit.page";
-	}
-	
-	@RequestMapping("/product/{type}/updateDoc")
-	public String saveDocument(DocumentDoc doc,@PathVariable(value="type")String type){
-		if("save".equals(type)){
-			docservice.createNewDoc(doc);
-			return "redirect:"+"/product/page/project/archive-list.page";
-		}else if ("update".equals(type)) {
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
-			docservice.editDoc(doc);
-			return "redirect:"+"/a/document/product/doc";
-		}
-		return "";
-	}
-	
-	//项目文档
-	@RequestMapping("/project/doc")
-	public String prodject(HttpServletRequest request){		
-		return "";
-	}
-	
+/**
+ * 单个文档
+ */
+@Controller
+@RequestMapping(value = "/a/document/doc")
+public class DocAction extends BaseController {
+    public static final String COOKIE_DOC_LIB_ID = "documentLibId";
+
+    @Autowired
+    private DocService docservice;
+    @Autowired
+    private ProductService productService;
+    @Autowired
+    private ProjectService projectService;
+    @Autowired
+    private ModuleService moduleService;
+    @Autowired
+    private ProfileService profileService;
+
+    @ModelAttribute
+    public void init(Model model) {
+        initSearchBar(model, "文档");
+    }
+
+    /**
+     * 首页查出数据
+     *
+     * @param moduleId
+     * @param request
+     * @param page
+     * @param limit
+     * @param order
+     * @param ordertype
+     * @param doc
+     * @param model
+     * @param groupOperate
+     * @param searchInfos
+     * @return
+     */
+    @RequestMapping(value = "/list")
+    public String docList(String moduleId, HttpServletRequest request,
+                          Integer page, Integer limit, String order, String ordertype,
+                          DocumentDoc doc, Model model, String groupOperate, SearchInfos searchInfos) {
+        doc.setDocDeleted("0");
+        boolean asc = true;
+        if ("desc".equals(ordertype)) {
+            asc = false;
+        }
+        String cookieDocLib = CookieUtils.getCookie(request, DocAction.COOKIE_DOC_LIB_ID);
+        Integer libId = Integer.valueOf(StringUtil.isBlank(cookieDocLib) ? 0 : Integer.parseInt(cookieDocLib));
+        doc.setDocLibId(libId);
+        String condition = null;
+        Pager<DocumentDoc> pager = null;
+        if (!StringUtil.isBlank(moduleId)) {
+            if (moduleId.contains("p") && libId == 1) {
+                doc.setDocProduct(Integer.parseInt(moduleId.substring(1)));
+                pager = docservice.findDocRetPager(limit * (page - 1), limit, doc, null, searchInfos, groupOperate, order, asc);
+            } else if (moduleId.contains("p") && libId == 2) {
+                doc.setDocProject(Integer.parseInt(moduleId.substring(1)));
+                pager = docservice.findDocRetPager(limit * (page - 1), limit, doc, null, searchInfos, groupOperate, order, asc);
+            } else if ("productDoc".equals(moduleService.findById(Integer.valueOf(moduleId)).getModuleType())) {
+                pager = docservice.findDocRetProductPager(limit * (page - 1), limit, doc, Integer.parseInt(moduleId), searchInfos, groupOperate, order, asc);
+            } else if ("projectDoc".equals(moduleService.findById(Integer.valueOf(moduleId)).getModuleType())) {
+                pager = docservice.findDocRetProjectPager(limit * (page - 1), limit, doc, Integer.parseInt(moduleId),searchInfos, groupOperate, order, asc);
+            } else if ("doc".equals(moduleService.findById(Integer.valueOf(moduleId)).getModuleType())) {
+                pager = docservice.findDocRetPager(limit * (page - 1), limit, doc,Integer.parseInt(moduleId),searchInfos, groupOperate, order, asc);
+            }
+        } else {
+            pager = docservice.findDocRetPager(limit * (page - 1), limit, doc,null, searchInfos, groupOperate, order, asc);
+            model.addAttribute("pager", pager);
+        }
+        model.addAttribute("pager", pager);
+        return "/data/datalist.pagelet";
+    }
+
+    /**
+     * 添加文档的跳转
+     *
+     * @param request
+     * @param model
+     * @return
+     */
+    @RequiresPermissions(value = {"add-doc"})
+    @RequestMapping(value = "/add")
+    public String createDoc(Integer libId, HttpServletRequest request, Model model) {
+        if (libId == null) {
+            libId = Integer.parseInt(CookieUtils.getCookie(request, DocAction.COOKIE_DOC_LIB_ID));
+        }
+        if (libId == 1) {
+            Product product = new Product();
+            List<Product> list = productService.findProductList(product);
+            model.addAttribute("productList", list);
+            return "/document/add-doc-product";
+        } else if (libId == 2) {
+            List<Project> list = ProjectUtils.getUserProjectList();
+            model.addAttribute("projectList", list);
+            return "/document/add-doc-project";
+        } else {
+            SystemModule module = new SystemModule();
+            module.setModuleType("doc");
+            module.setModuleRoot(libId);
+            List<SystemModule> moduleList = moduleService.findModuleList(module);
+            model.addAttribute("moduleList", moduleList);
+            return "/document/add-doc";
+        }
+    }
+
+    /**
+     * 保存文档
+     *
+     * @param request
+     * @param systemAction
+     * @param doc
+     * @param model
+     * @return
+     * @throws IOException
+     */
+    @RequestMapping(value = "/addSave", method = RequestMethod.POST)
+    public String addSave(HttpServletRequest request, SystemAction systemAction,
+                          DocumentDoc doc, Model model,
+                          String lastAddress, UploadProfile uploadProfile) throws IOException {
+        List<Product> product = productService.findProductList(new Product());
+        doc.setDocLibId(Integer.parseInt(CookieUtils.getCookie(request, DocAction.COOKIE_DOC_LIB_ID)));
+        doc.setDocDeleted("0");
+        doc.setDocAddedBy(UserUtils.getUser().getOrgUserId());
+        DocumentDoc document = docservice.createNewDoc(doc);
+        processProfile(uploadProfile, document.getDocId(), ProfileType.DOCUMENT);
+
+        model.addAttribute("productList", product);
+
+        LogUtil.logWithComment(LogUtil.LogOperateObject.DOC,
+                LogUtil.LogAction.OPENED,
+                String.valueOf(document.getDocId()),
+                UserUtils.getUserId(),
+                String.valueOf(doc.getDocProduct()),
+                String.valueOf(doc.getDocProject()),
+                null,
+                null,
+                systemAction.getActionComment());
+
+        if (!StringUtil.isBlank(lastAddress)) {
+            return "redirect:" + lastAddress;
+        }
+        if (request.getSession().getAttribute("moduleId") == null) {
+            return "redirect:" + adminPath + "/document?docChange=true";
+        }
+        return "redirect:" + adminPath + "/document?docChange=true&moduleId=" + request.getSession().getAttribute("moduleId");
+    }
+
+    /**
+     * 编辑文档的跳转
+     *
+     * @param model
+     * @param docId
+     * @return
+     */
+    @RequiresPermissions(value = {"docedit"})
+    @RequestMapping(value = "/edit")
+    public String editDoc(Model model, Integer docId) {
+        SystemModule module = new SystemModule();
+        module.setModuleType("doc");
+        DocumentDoc doc = docservice.findDocById(docId);
+        List<Product> list1 = productService.findProductList(new Product());
+        List<Project> list2 = projectService.findList();
+        List<SystemModule> listModule = moduleService.findModuleList(module);
+        List<DocumentDocLib> libList = docservice.findDoclibList(null);
+
+        SystemProfile systemProfile = new SystemProfile();
+        systemProfile.setFileObjectId(docId);
+        systemProfile.setFileObjectType(ProfileType.DOCUMENT.getType());
+        List<SystemProfile> fileList = profileService.findSystemProfile(systemProfile);
+        model.addAttribute("fileList", fileList);
+
+        model.addAttribute("doc", doc);
+        model.addAttribute("productList", list1);
+        model.addAttribute("projectList", list2);
+        model.addAttribute("listModule", listModule);
+        model.addAttribute("libList", libList);
+        return "/document/doc-edit.page";
+    }
+
+    /**
+     * 编辑文档的保存
+     *
+     * @param doc
+     * @param systemAction
+     * @return
+     */
+    @RequestMapping(value = "/editSave", method = RequestMethod.POST)
+    public String editSave(DocumentDoc doc,
+                           String lastAddress,
+                           SystemAction systemAction,
+                           UploadProfile uploadProfile) throws IOException {
+        DocumentDoc documentDoc = docservice.findDocById(doc.getDocId());
+        doc.setDocEditedBy(UserUtils.getUser().getOrgUserId());
+        docservice.editDoc(doc);
+
+        processProfile(uploadProfile, doc.getDocId(), ProfileType.DOCUMENT);
+
+        LogUtil.logWithComment(LogUtil.LogOperateObject.DOC,
+                LogUtil.LogAction.EDITED,
+                String.valueOf(doc.getDocId()),
+                UserUtils.getUserId(),
+                String.valueOf(doc.getDocProduct()),
+                String.valueOf(doc.getDocProject()),
+                documentDoc,
+                doc,
+                systemAction.getActionComment());
+        if (!StringUtil.isBlank(lastAddress)) {
+            return "redirect:" + lastAddress;
+        }
+        return "redirect:" + adminPath + "/document?docChange=true";
+    }
+
+    /**
+     * 文档信息页面
+     *
+     * @param model
+     * @param docid
+     * @return
+     */
+    @RequestMapping("/view")
+    public String docView(Model model, Integer docid) {
+        DocumentDoc doc = docservice.findDocById(docid);
+        if (doc == null) {
+            return notFoundView();
+        }
+        if (doc.getDocLibId() != null) {
+            DocumentDocLib docLib = docservice.findDoclibById(doc.getDocLibId());
+            model.addAttribute("docLib", docLib);
+        }
+        SystemProfile systemProfile = new SystemProfile();
+        systemProfile.setFileObjectType(ProfileType.DOCUMENT.getType());
+        systemProfile.setFileObjectId(docid);
+        List<SystemProfile> list = profileService.findSystemProfile(systemProfile);
+        model.addAttribute("fileList", list);
+        model.addAttribute("doc", doc);
+        return "/document/doc-view.page";
+    }
+
+    /**
+     * 文档信息的基本信息页面
+     *
+     * @param request
+     * @param docId
+     * @param model
+     * @return
+     */
+    @RequestMapping("/viewInfo")
+    public String viewInfo(HttpServletRequest request, Integer docId, Model model) {
+        DocumentDoc doc = docservice.findDocById(docId);
+        DocumentDocLib docLib = docservice.findDoclibById(doc.getDocLibId());
+        System.out.println(doc.getDocModule() != 0 && doc.getDocModule() != null);
+        if (doc.getDocModule() != 0 && doc.getDocModule() != null) {
+            SystemModule module = moduleService.findById(doc.getDocModule());
+            model.addAttribute("module", module);
+        } else {
+            model.addAttribute("module", null);
+        }
+        model.addAttribute("doc", doc);
+        model.addAttribute("docLib", docLib);
+        return "/document/basic-info.pagelet";
+    }
+
+    /**
+     * 添加文档和编辑文档的保存
+     *
+     * @param request
+     * @param doc
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    public String saveDoc(HttpServletRequest request, DocumentDoc doc, Model model) {
+        if (doc.getDocId() == null || doc.getDocId() == 0) {
+            doc = docservice.createNewDoc(doc);
+            LogUtil.logWithComment(LogUtil.LogOperateObject.DOC,
+                    LogUtil.LogAction.CREATED,
+                    String.valueOf(doc.getDocId()),
+                    UserUtils.getUserId(),
+                    String.valueOf(doc.getDocProduct()),
+                    String.valueOf(doc.getDocProject()),
+                    null,
+                    null,
+                    null);
+        } else {
+            docservice.editDoc(doc);
+        }
+        return "redirect:" + adminPath + "/document";
+    }
+
+    /**
+     * 删除单条文档
+     *
+     * @param id
+     * @return
+     */
+    @RequiresPermissions(value = {"docdelete", "doc-view-delete"}, logical = Logical.OR)
+    @ResponseBody
+    @RequestMapping(value = "/delete")
+    public Map delDoc(Integer id) {
+        docservice.deleteDocById(id);
+        return resultMap(true, "删除成功");
+    }
+
+    /**
+     * 批量删除文档
+     *
+     * @param ids
+     * @return
+     */
+    @RequiresPermissions(value = {"batch-delete"})
+    @ResponseBody
+    @RequestMapping(value = "/batchDelete")
+    public Map batchDelDoc(String ids) {
+        if (StringUtil.isBlank(ids)) {
+            return resultMap(false, "请至少选择一条数据");
+        }
+        List<DocumentDoc> list = new ArrayList<DocumentDoc>();
+        for (String s : ids.split(",")) {
+            DocumentDoc doc = new DocumentDoc();
+            doc.setDocId(Integer.valueOf(s));
+            doc.setDocDeleted("1");
+            list.add(doc);
+        }
+        docservice.deleteDocByIds(list);
+        return resultMap(true, "删除成功");
+    }
+
 }

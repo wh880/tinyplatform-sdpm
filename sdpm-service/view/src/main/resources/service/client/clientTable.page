@@ -17,19 +17,10 @@
             #@aExtendButton("btn radius btn-primary btn-sm" TINY_CONTEXT_PATH+adminPath+
                 "/service/client/form")#buttonIcon(iconClass=m2.icon)新建客户#end
         #end
-
-        #set(m3=menuManager.getMenu("client-export"))
-        #if(m3)
-            #@aModal("#myModal" "" "600" "150" "btn radius btn-primary btn-sm"
-                "/service/serviceCom/serviceExport.pagelet")#buttonIcon(iconClass=
-                "icon-download-alt")导出#end
-        #end
-
-
     #end
-    #@tinyTableContent(TINY_CONTEXT_PATH+adminPath+"/service/client/list/data?treeId="+treeId) ##取数据地址 总数据
+    #@tinyTableContent(TINY_CONTEXT_PATH+adminPath+"/service/client/list/data?treeId="+treeId)
         #@thead()
-            #@tr()###th  class 为sorting 表票可排序 为sorting_desc 为当前倒序
+            #@tr()
                 #@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
                 #@tinyTh({"class":"sorting","rel":"clientName"})客户名称#end
                 #@tinyTh({"class":"sorting","rel":"clientNO"})客户编号#end
@@ -40,6 +31,5 @@
             #end
         #end
     #end
-
 #end
 #@simpleModal("myModal")#end

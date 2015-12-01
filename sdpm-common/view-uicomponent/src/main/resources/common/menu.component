@@ -1,0 +1,58 @@
+#macro hasMenu(menuId)
+    #if(menuId!=null && UserUtils.hasMenu(menuId))
+        #bodyContent
+    #end
+#end
+
+#macro menusInfo(menusInfoName menusInfoHref menuType)
+<li><a href="${TINY_CONTEXT_PATH+menusInfoHref}" data-value="${menusInfoValue}" data-type="${menuType?:"form"}">${menusInfoName}</a></li>
+#end
+
+#macro mulSearchBox(searchCurrentName searchCurrentAction)
+<form action="${searchCurrentAction}" method="get" id="msb-box">
+    <div class="input-groups " style="width:269px;padding-top:9px">
+        <div class="input-group-btns" >
+            <button type="button" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                <span id="msb-currentName">${searchCurrentName}</span>
+                <span class="carets"></span>
+            </button>
+            <ul class="dropdown-menus msb-item-list" style="margin-top:-1px;width: 212px;">
+                #bodyContent
+            </ul>
+        </div>
+        <input type="text" name="key" id="msb-box-input" value="" class="form-controls " placeholder="请输入ID" datatype="n" nullmsg="请输入ID" ignore="ignore">
+        <div id="objectSwitcher" class="input-group-btns ">
+            <button class="searchBtn"><i class="fa fa-search"></i> 搜索</button>
+        </div>
+    </div>
+</form>
+<script type="text/javascript">
+    $(function(){
+        $("#msb-box .msb-item-list a").each(function(){
+            var $this = $(this);
+            $this.click(function() {
+        if($this.attr("data-type")=="form"){
+            $("#msb-box li.active").removeClass("active");
+            $this.closest("li").addClass("active");
+            $("#msb-box").attr("action",$this.attr("href"));
+            $("#msb-currentName").text($this.text());
+            $("#msb-box .dropdown-toggle").dropdown('toggle');
+            return false;
+            }
+            });
+            if($this.text()=="${searchCurrentName}"){
+                    $this.closest("li").addClass("active");
+                $("#msb-box").attr("action",$this.attr("href"));
+            }
+        });
+        $("#msb-box").Validform({
+            beforeSubmit:function(curform){
+                var Id=$("#msb-box-input").val();
+                if(!Id) return false;
+                window.location.href=$(curform).attr("action")+Id;
+                return false;
+            }
+        })
+    });
+</script>
+#end

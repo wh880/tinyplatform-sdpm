@@ -2,13 +2,14 @@ package org.tinygroup.sdpm.project.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.tinygroup.commons.tools.ArrayUtil;
+import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.project.biz.inter.BuildManager;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
 import org.tinygroup.sdpm.project.service.inter.BuildService;
+import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.tinysqldsl.Pager;
 
-
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -29,36 +30,57 @@ public class BuildServiceImpl implements BuildService {
             return buildManager.softDelete(build);
         }
     }
-    public ProjectBuild add(ProjectBuild build) {
+
+    public ProjectBuild addBuild(ProjectBuild build) {
         build.setBuildStories("");
         build.setBuildBugs("");
         build.setBuildDeleted(build.DELETE_NO);
         return buildManager.add(build);
     }
 
-    public Pager<ProjectBuild> findPager(Integer projectId, Integer start, Integer limit, String order, boolean asc) {
+    public Pager<ProjectBuild> findBuildPagerWithOrder(Integer projectId, Integer start, Integer limit, String order, boolean asc) {
         ProjectBuild build = new ProjectBuild();
         build.setBuildProject(projectId);
         build.setBuildDeleted(build.DELETE_NO);
         return buildManager.findPager(build, start, limit, order, asc);
     }
 
-    public int updateBuild(ProjectBuild build) {
+    public Integer updateBuild(ProjectBuild build) {
         return buildManager.update(build);
     }
 
-    public Integer deleteBuild(Integer buildId) {
-        return null;
-    }
 
     public ProjectBuild findBuild(Integer id) {
         return buildManager.find(id);
     }
-    public int[] deleteBuildByIds(List<ProjectBuild> ids) {
-        //
-        return buildManager.batchDelBuildByIds(ids);
+
+    public Integer deleteBuildByIds(List<ProjectBuild> ids) {
+
+        int[] del = buildManager.batchDelBuildByIds(ids);
+        if (ArrayUtil.isEmptyArray(del)) {
+            return 0;
+        }
+        return del.length;
     }
-    public List<ProjectBuild> findListBuild(ProjectBuild projectBuild){
+
+    public List<ProjectBuild> findListBuild(ProjectBuild projectBuild) {
         return buildManager.findList(projectBuild);
     }
+
+    public Pager<ProjectBuild> findPagerBuild(ProjectBuild projectBuild, Integer start, Integer limit, String order, boolean asc) {
+        return buildManager.findPager(projectBuild, start, limit, order, asc);
+    }
+
+    public List<ProjectBuild> getBuildByIds(String... ids) {
+        return buildManager.getBuildByIds(ids);
+    }
+
+    public List<ProjectBuild> getBuildByProducts(Integer... ids) {
+        return buildManager.getBuildByProducts(ids);
+    }
+
+    public List<ProjectBuild> buildInCondition(String condition, Integer productId, Integer projectId) {
+        return buildManager.buildInCondition(condition, productId, projectId);
+    }
+
 }

@@ -1,94 +1,111 @@
 #import("/org/tinygroup/form/components/form.component")
 #import("/org/tinygroup/button/components/button_common.component")
 #import("/org/tinygroup/button/components/button.component")
-#!set(linkName="product-release",sonitem="<li>"+"发布"+"</li>")
+#!set(linkName="product-release",sonitem="
+<li>"+"发布"+"</li>")
 
 <script>
-    $(document).ready(function(){
+    $(document).ready(function () {
 
-        ajaxRead("addrel","moduleId","moduleName");
+        ajaxRead("addrel", "moduleId", "moduleName");
 
     });
 </script>
 
-#@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/product/release/save" "post" {"class":""})
-#*<div style="width:70%;float:left" class="pageleftpart">*#
-    <div class="infoContent">
-        <p class="titleName">创建新发布</p>
- 
+#@tinyForm(
+    "thisform" TINY_CONTEXT_PATH +adminPath+"/product/release/save" "post" {"class":"","enctype":"multipart/form-data"})
+##    #hiddenInput("productId","productId","",cookieProductId)
+<input type="hidden" name="lastAddress" value=""/>
+<div class="infoContent">
+    <p class="titleName">创建新发布</p>
+
 #*    <div class="RTtitle">
-        <button type="submit" id="submit" class="commitBtn">保存</button>
+        <button type="submit" id="submit2" class="commitBtn">保存</button>
     </div>*#
 
-     #@elementItem()
-        #@colLabel()发布名称:#end
-        #@formControlDiv("col-4")
-        	#tinyInput("text" "releaseName" ""{"datatype":"*4-16","nullmsg":"用户名不能为空！","id":"username","class":"input-text"})
-       #end
-        #@validateDiv("col-2")#end
-      #end
     #@elementItem()
-        #@colLabel()版本:#end
-       #@formControlDiv("col-4")
-			#@Tselect2F()
-                #@Tselect2Body("buildId" "IN" {"class":"input-text select2","url":"/system/module/moduleList","ajaxType":"addrel","data":""}) ##,"multiple":"multiple"加上为多选项
+        #@colLabel("col-1")<span class="c-red">*</span>发布名称:#end
+        #@formControlDiv("col-4")
+            #tinyInput(
+                "text" "releaseName" ""{"datatype":"*","nullmsg":"发布名称不能为空！","id":"releaseName","class":"input-text",
+                "ajaxurl":TINY_CONTEXT_PATH+adminPath+"/product/release/judgeReleaseName?productId="+cookieProductId})
 
+        #end
+        #@validateDiv("col-2")#end
+    #end
+    #@elementItem()
+        #@colLabel("col-1")<span class="c-red">*</span>版本:#end
+        #@formControlDiv("col-4")
+            #@Tselect2F()
+                #Tselect2Ajax("buildId" "" TINY_CONTEXT_PATH+adminPath+"/project/build/ajax/buildInCondition?productId="+cookieProductId
+                {"id":"","dataId":"buildId","dataText":"buildName","placeholder":"查询版本","datatype":"*","nullmsg":"版本不能为空！"})
+                #@Tselect2Fix()
+                    #@hasMenu("pro-version-add")
+                        <a href="${TINY_CONTEXT_PATH +adminPath}/project/build/edit"
+                           class="r ">增加</a>
+                    #end
+                    #@hasMenu("version")
+                        <a href="${TINY_CONTEXT_PATH +adminPath}/project/build/index">全部</a>
+                    #end
                 #end
-            
-                #@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
             #end
-		#end
+        #end
         #@validateDiv("col-2")#end
     #end
 
     #@elementItem()
-        #@colLabel()发布日期:#end
+        #@colLabel("col-1")<span class="c-red">*</span>发布日期:#end
         #@formControlDiv("col-4")
-           #@tinyDateInput("releaseDate" "" "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空"})#end
+            #@tinyDateInput("releaseDate" "" "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空"})#end
         #end
         #@validateDiv("col-2")#end
     #end
-   
+
     #@elementItem()
-        #@colLabel()描述:#end
-        #@formControlDiv("col-8")
-           #@Teditor("releaseDesc" "releaseDesc" {"initialFrameHeight":"250" ,"placeholder":"说点什么...最少输入10个字符","datatype":"*10-500"})备注...最少输入10个字符#end
+        #@colLabel("col-1")描述:#end
+        #@formControlDiv("col-9")
+            #@Teditor(
+                "releaseDesc" "releaseDesc" {"initialFrameHeight":"250" ,"placeholder":"说点什么...最少输入10个字符","datatype":
+                ""})#end
         #end
-        #@validateDiv("col-2")#end
     #end
-    
-   #@elementItem()
-        <div class="col-12">
-                <div class="col-2 text-r"><label>附件：</label></div>
-
-                <div class="col-9">
-                  #@formControlDiv("col-12")
-		   				#include("/product/page/event/fileupload.page")
-      				 		#end
-       				</div>
-            </div>
-   		 #end
-   </div>
     #@elementItem()
-        <div class="col-12">
-            <div class="col-5">
+        #@colLabel("col-1")附件:#end
+        #@formControlDiv("col-9")
+            #mulUploadFile()
+        #end
+    #end
 
-            </div>
-            <div class="col-1">
-                <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
-            </div>
-            <div class="col-1">
-                #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end
-            </div>
-            <div class="col-5"></div>
+##    #@elementItem()
+##        <div class="col-12">
+##            <div class="col-2 text-r"><label>附件：</label></div>
+##            <div class="col-7">
+##
+##            </div>
+##        </div>
+##    #end
+</div>
+    #@elementItem()
+    <div class="col-12">
+        <div class="col-5">
+
         </div>
+        <div class="col-1">
+            <button style="float: left" type="submit" id="submit2" class="commitBtn">保存</button>
+        </div>
+        <div class="col-1">
+            #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end
+        </div>
+        <div class="col-5"></div>
+    </div>
     #end
-#*   </div>*#
 #end
-#*
-<div style="width:30%;float:right">
-    #@div(divClass="infoContent")
-        <p class="titleName">历史记录</p>
-        #include("/product/page/tabledemo/historyrecord.page")
-    #end
-</div>*#
+
+
+<script type="text/javascript">
+    $(function () {
+        $("form[name=thisform]").Validform({
+            tiptype: 2
+        });
+    });
+</script>

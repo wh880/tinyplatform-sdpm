@@ -15,7 +15,7 @@ import java.util.List;
  */
 @Service
 @Transactional
-public class FaqManagerImpl implements FaqManager{
+public class FaqManagerImpl implements FaqManager {
     @Autowired
     private ServiceFaqDao faqDao;
 
@@ -26,18 +26,19 @@ public class FaqManagerImpl implements FaqManager{
     public List<ServiceFaq> getList(ServiceFaq faq) {
         return faqDao.query(faq);
     }
-     /*分页显示调用的方法 */
-     public Pager<ServiceFaq> getpage(Integer start, Integer limit, ServiceFaq serviceFaq) {
+
+    /*分页显示调用的方法 */
+    public Pager<ServiceFaq> getpage(Integer start, Integer limit, ServiceFaq serviceFaq) {
         /*ServiceFaq faq = new ServiceFaq();*/
-         return faqDao.queryPager(start, limit, serviceFaq);
-     }
+        return faqDao.queryPager(start, limit, serviceFaq);
+    }
 
     public ServiceFaq add(ServiceFaq faq) {
         return faqDao.add(faq);
     }
 
     public ServiceFaq update(ServiceFaq faq) {
-         faqDao.edit(faq);
+        faqDao.edit(faq);
         return faq;
     }
 
@@ -53,6 +54,10 @@ public class FaqManagerImpl implements FaqManager{
 
     public Pager<ServiceFaq> findUserListByDeptId(Integer start, Integer limit, Integer deptId) {
         return faqDao.getPagerByDeptId(start, limit, deptId);
+    }
+
+    public Pager<ServiceFaq> search(Integer start, Integer limit, ServiceFaq faq, String faqQuestion) {
+        return faqDao.searchPager(start, limit, faq, faqQuestion);
     }
 
 }

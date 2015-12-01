@@ -5,11 +5,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
+import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.project.biz.inter.BuildManager;
 import org.tinygroup.sdpm.project.dao.ProjectBuildDao;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
+import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.tinysqldsl.Pager;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -48,7 +51,7 @@ public class BuildManagerImpl implements BuildManager {
     }
 
     public int update(ProjectBuild build) {
-        return projectBuildDao.edits(build);
+        return projectBuildDao.edit(build);
     }
 
     public Integer delete(int id) {
@@ -57,8 +60,30 @@ public class BuildManagerImpl implements BuildManager {
         build.setBuildDeleted(build.DELETE_YES);
         return projectBuildDao.edit(build);
     }
+
     public int[] batchDelBuildByIds(List<ProjectBuild> keys) {
-        //
         return projectBuildDao.batchUpdateDel(keys);
     }
+
+    public Pager<ProductStory> findBuildStory(int start, int limit, Integer buildId) {
+        return projectBuildDao.findBuildStoryList(start, limit, buildId);
+    }
+
+    public List<ProjectBuild> getBuildByIds(String... ids) {
+        return projectBuildDao.getBuildByKeys(ids);
+    }
+
+    public List<ProjectBuild> getBuildByProducts(Integer... ids) {
+        if (ids == null || ids.length == 0) return new ArrayList<ProjectBuild>();
+        return projectBuildDao.getBuildByProducts(ids);
+    }
+
+    public List<ProjectBuild> buildInCondition(String condition, Integer productId, Integer projectId) {
+        return projectBuildDao.buildInCondition(condition, productId, projectId);
+    }
+
+    public Pager<ProductStory> findNoBuildStory(int start, int limit, String condition, Integer buildId) {
+        return projectBuildDao.findNoBuildStoryList(start, limit, condition, buildId);
+    }
+
 }

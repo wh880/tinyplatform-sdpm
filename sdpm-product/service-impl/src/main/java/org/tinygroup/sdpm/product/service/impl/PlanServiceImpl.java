@@ -11,59 +11,61 @@ import java.util.List;
 
 @Component
 public class PlanServiceImpl implements PlanService {
-	@Autowired
-	private PlanManager planManager;
-	
-	public ProductPlan addPlan(ProductPlan plan) {
+    @Autowired
+    private PlanManager planManager;
 
-		return planManager.add(plan);
-	}
+    public ProductPlan addPlan(ProductPlan plan) {
 
-	public int updatePlan(ProductPlan plan) {
+        return planManager.add(plan);
+    }
 
-		return planManager.update(plan);
-	}
+    public int updatePlan(ProductPlan plan) {
 
-	public ProductPlan findPlan(Integer planId) {
+        return planManager.update(plan);
+    }
 
-		return planManager.find(planId);
-	}
+    public ProductPlan findPlan(Integer planId) {
 
-	public int[] updateBatchPlan(List<ProductPlan> plan) {
-		
-		return planManager.updateBatch(plan);
-	}
-	
-	public List<ProductPlan> findPlanList(ProductPlan productPlan) {
-		
-		return planManager.findList(productPlan);
-	}
-	
-	public List<ProductPlan> findPlanList(ProductPlan productPlan,String order,String ordertype) {
-	
-		return planManager.findList(productPlan, order, ordertype);
-	}
+        return planManager.find(planId);
+    }
 
-	public Pager<ProductPlan> findProductPlanPager(int page, int limit, ProductPlan productPlan, String order,
-			String ordertype) {
-		
-		return planManager.findPager(page, limit, productPlan, order, ordertype);
-	}
+    public int[] updateBatchPlan(List<ProductPlan> plan) {
 
-	public Integer deletePlan(Integer planId) {
-		
-		return planManager.delete(planId);
-	}
+        return planManager.updateBatch(plan);
+    }
 
-	public List<ProductPlan> findPlanList(Integer... planId) {
+    public List<ProductPlan> findPlanList(ProductPlan productPlan) {
 
-		return planManager.findList(planId);
-	}
+        return planManager.findList(productPlan);
+    }
 
-	public int[] deleteBatchPlan(List<ProductPlan> ids) {
-		
-		return planManager.deleteBatch(ids);
-	}
+    public List<ProductPlan> findPlanList(ProductPlan productPlan, String order, String ordertype) {
 
+        return planManager.findList(productPlan, order, ordertype);
+    }
+
+    public Pager<ProductPlan> findProductPlanPager(int page, int limit, ProductPlan productPlan, String order,
+                                                   String ordertype) {
+        return planManager.findPager(page, limit, productPlan, order, ordertype);
+    }
+
+    public List<ProductPlan> statisticfind(ProductPlan productPlan, boolean isOverdue) {
+        return planManager.statisticFind(productPlan, isOverdue);
+    }
+
+    public Integer deletePlan(Integer planId) {
+
+        return planManager.delete(planId);
+    }
+
+    public List<ProductPlan> findPlanList(Integer... planId) {
+
+        return planManager.findList(planId);
+    }
+
+    public int[] deleteBatchPlan(List<ProductPlan> ids) {
+
+        return planManager.deleteBatch(ids);
+    }
 
 }

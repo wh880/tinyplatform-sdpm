@@ -5,9 +5,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
+import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.project.biz.inter.TaskManager;
 import org.tinygroup.sdpm.project.dao.ProjectTaskDao;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
+import org.tinygroup.sdpm.project.dao.pojo.TaskChartBean;
 import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.List;
@@ -21,15 +23,15 @@ public class TaskManagerImpl implements TaskManager {
     @Autowired
     private ProjectTaskDao taskDao;
 
-    public Integer batchSoftDel(String condition) {
-        return taskDao.batchSoftDel(condition);
+    public Integer getMaxNo(Integer projectId) {
+        return taskDao.getMaxNo(projectId);
     }
 
     public int[] batchAdd(List<ProjectTask> taskList) {
         return taskDao.batchInsert(taskList);
     }
 
-    public ProjectTask find(int id) {
+    public ProjectTask find(Integer id) {
         return taskDao.findTaskStory(id);
     }
 
@@ -49,19 +51,26 @@ public class TaskManagerImpl implements TaskManager {
         return taskDao.queryPager(start, limit, task, orderBy);
     }
 
-    public Pager<ProjectTask> findPagerByStatu(Integer start, Integer limit, ProjectTask task, String sortName, boolean asc, String conditon) {
+    public Pager<ProjectTask> findPagerByStatus(Integer start, Integer limit, ProjectTask task, String sortName, boolean asc, String condition) {
         if (StringUtil.isBlank(sortName)) {
-            return taskDao.queryPagerByStuta(start, limit, task, conditon);
-            //return taskDao.queryPager(start, limit, task);
+            return taskDao.queryPagerByStatus(start, limit, task, condition);
         }
         OrderBy orderBy = new OrderBy(sortName, asc);
-        return taskDao.queryPagerByStuta(start, limit, task, conditon, orderBy);
-        //return taskDao.queryPager(start, limit, task, orderBy);
+        return taskDao.queryPagerByStatus(start, limit, task, condition, orderBy);
+    }
 
+    public Pager<ProjectTask> findPagerByMe(Integer start, Integer limit, ProjectTask task, String sortName, boolean asc, OrgUser user) {
+        OrderBy orderBy = new OrderBy(sortName, asc);
+        return taskDao.queryPagerByMe(start, limit, task, user, orderBy);
     }
 
 
     public ProjectTask add(ProjectTask task) {
+        Integer maxNo = getMaxNo(task.getTaskProject());
+        if (maxNo == null) {
+            maxNo = 0;
+        }
+        task.setTaskNo(maxNo + 1);
         return taskDao.add(task);
     }
 
@@ -69,34 +78,34 @@ public class TaskManagerImpl implements TaskManager {
         return taskDao.edit(task);
     }
 
-    public Integer updateTask(ProjectTask task) {
-        return taskDao.edit(task);
+
+    public List<TaskChartBean> findByGroup(String id) {
+        if ("1".equals(id)) {
+            return taskDao.queryChartProject();
+        } else if ("2".equals(id)) {
+            return taskDao.queryChartModule();
+        } else if ("3".equals(id)) {
+            return taskDao.queryChartType();
+        } else if ("4".equals(id)) {
+            return taskDao.queryChartPri();
+        } else if ("5".equals(id)) {
+            return taskDao.queryChartStatus();
+        } else if ("6".equals(id)) {
+            return taskDao.queryChartDeadLine();
+        } else if ("10".equals(id)) {
+            return taskDao.queryChartFinishedBy();
+        } else if ("15".equals(id)) {
+            return taskDao.queryChartAssigned();
+        } else {
+            return null;
+        }
     }
 
-    public Integer updateEditTask(ProjectTask task) {
-        return taskDao.updateColum(task);
-    }
-
-    public Integer updateCallTask(ProjectTask task) {
-        return taskDao.editcall(task);
-    }
-
-    public Integer updateFinishTask(ProjectTask task) {
-        return taskDao.updateColum(task);
-    }
-
-    public Integer updateStartTask(ProjectTask task) {
-        return taskDao.editstart(task);
-    }
-    public Integer updateCloseTask(ProjectTask task) {
-        return taskDao.updateColum(task);
-    }
-
-    public Integer delete(int id) {
+    public Integer delete(Integer id) {
         ProjectTask task = new ProjectTask();
         task.setTaskId(id);
         task.setTaskDeleted(task.DELETE_YES);
-
         return taskDao.edit(task);
     }
+
 }

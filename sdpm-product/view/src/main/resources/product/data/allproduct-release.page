@@ -4,23 +4,22 @@
     #set(pagesize=records-(page-1)*pagesize)
 #end
 #setTinyItemCount(productRelease?.totalCount)
-#for(release:productRelease?.records)
+#foreach(release:productRelease?.records)
 #@tr()
     #@td()<input type="checkbox" value="1" name="product-release">#end
-    #@td()${release?.releaseId}#end
-    #@td()<a
-            href="${TINY_CONTEXT_PATH +adminPath}/product/release/forword/reRelateStory?releaseId=${release.releaseId}">${release
+    #@td()<a href="${TINY_CONTEXT_PATH +adminPath}/product/release/forword/reRelateStory?releaseId=${release.releaseId}">${release?.no}</a>#end
+    #@td()<a href="${TINY_CONTEXT_PATH +adminPath}/product/release/forword/reRelateStory?releaseId=${release.releaseId}">${release
         ?.releaseName}</a>#end
-    #@td()${release?.buildId}#end
-    #@td()${release?.releaseDate?formatDate(release?.releaseDate,'yyyy年MM月dd日'):""}#end
-    #@td()
+    #@td("nowrap")${release?.buildName}#end
+    #@td("nowrap")${release?.releaseDate?formatDate(release?.releaseDate,'yyyy-MM-dd'):""}#end
+    #@td("nowrap")
 			#foreach(m:menuManager.getScopeMenus("product-re"))
-			#set(url=eval(m.href))
+            ##			#set(url=eval(m.href))
 			  #if(m.id!="product-release-remove")
-              <a title="${m.name}" class="ml-5" href="${TINY_CONTEXT_PATH +adminPath}${url}"><i
+              <a title="${m.name}" class="ml-5" href="${TINY_CONTEXT_PATH +adminPath}${m.href}${release.releaseId}"><i
                       class="${m.icon}"></i></a>
 			      #else
-                  &nbsp;#@tinyTableItemRemove(TINY_CONTEXT_PATH +adminPath+url release.releaseId)<i
+                  &nbsp;#@tinyTableItemRemove(TINY_CONTEXT_PATH +adminPath+m.href+release?.releaseId)<i
                           class="${m.icon}"></i>#end
 			       #end
 			#end

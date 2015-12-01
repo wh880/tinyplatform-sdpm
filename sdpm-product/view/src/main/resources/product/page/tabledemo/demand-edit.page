@@ -5,19 +5,27 @@
 #import("/org/tinygroup/fold/components/fold.component")
 #!set(linkName="product-demand",sonitem="<li>"+"需求"+"</li>")
 
-#@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/product/story/update" "" {"class":"test"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/product/story/update" "" {"class":"test","enctype":"multipart/form-data"})
 #hiddenInput(hiddenInputName="storyId",hiddenInputValue=storySpec.storyId)
-
+<input type="hidden" name="lastAddress" value=""/>
 <div style="width:70%;float:left" class="pageleftpart">
     <div class="infoContent">
         <p class="titleName">编辑</p>
 
         #*<div class="RTtitle">
-            <button type="submit" id="submit" class="commitBtn">保存</button>
+            <button type="submit" id="submit2" class="commitBtn">保存</button>
         </div>*#
 
         #@div(divClass="infoContent")
-            <p class="titleName">描述需求</p>
+            <p class="titleName">需求标题</p>
+
+            <div>
+                ${storySpec?.storyTitle}
+            </div>
+        #end
+
+        #@div(divClass="infoContent")
+            <p class="titleName">需求描述</p>
 
             <div>
              	${storySpec?.storySpec}
@@ -32,11 +40,24 @@
             </div>
         #end
 
+        #@div(divClass="infoContent")
+            <p class="titleName">附件</p>
+            #mulUploadFile(fileList)
+        #end
+
+##        #@elementItem()
+##            <div class="col-12">
+##                <div class="col-2 text-r"><label>附件：</label></div>
+##                <div class="col-9">
+##                    #mulUploadFile(fileList)
+##                </div>
+##            </div>
+##        #end
 
         #@elementItem("" "edui-Box")
             <b class="titleNames">备注</b>
             #@formControlDiv("col-12")
-                #@Teditor("content2" "content2" {"initialFrameHeight":"300" ,"datatype":"*10-300"})#end
+                #@Teditor("content2" "content2" {"initialFrameHeight":"300"})#end
             #end
             #@validateDiv("col-4")#end
         #end
@@ -50,7 +71,7 @@
 
             </div>
             <div class="col-1">
-                <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
+                <button style="float: left" type="submit" id="submit2" class="commitBtn">保存</button>
             </div>
             <div class="col-1">
                 #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end
@@ -59,10 +80,7 @@
         </div>
     #end
 
-    #@div(divClass="infoContent")
-        <p class="titleName">历史记录</p>
-        #include("/product/page/tabledemo/historyrecord.page")
-    #end
+    #history(adminPath+"/system/action/ajax/history?actionObjectType=story&actionObjectId="+storySpec?.storyId)
 
 </div>
 
@@ -73,6 +91,12 @@
 
 
 #end
-
+<script type="text/javascript">
+    $(function () {
+        $("form[name=thisform]").Validform({
+            tiptype: 1
+        });
+    });
+</script>
 
 

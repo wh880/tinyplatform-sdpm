@@ -2,8 +2,6 @@
 
     var storageSupported = (typeof(window.Storage) !== "undefined");
 
-// Functions
-//
 
     var reloadPage = function () {
         location.reload();
@@ -333,7 +331,7 @@
         ' padding-right: 11px;',
         ' position: absolute;',
         ' left: -40px;',
-        ' top: 0;',
+        ' top:0px;',
         ' background: #444;',
         ' text-align: center;',
         ' line-height: 40px;',

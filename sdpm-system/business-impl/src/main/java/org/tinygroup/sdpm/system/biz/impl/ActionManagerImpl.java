@@ -8,11 +8,12 @@ import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.system.biz.inter.ActionManager;
 import org.tinygroup.sdpm.system.dao.SystemActionDao;
+import org.tinygroup.sdpm.system.dao.impl.ActionEnum;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.tinysqldsl.base.Condition;
 
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -35,53 +36,74 @@ public class ActionManagerImpl implements ActionManager {
         return systemActionDao.deleteByKey(pk);
     }
 
-    public List<SystemAction> find(SystemAction SystemAction) {
-        List<SystemAction> actions = systemActionDao.query(SystemAction);
+    public List<SystemAction> find(SystemAction SystemAction, String orderBy, boolean asc) {
+        List<SystemAction> actions;
+        if (StringUtil.isBlank(orderBy)) {
+            actions = systemActionDao.query(SystemAction);
+        } else {
+            actions = systemActionDao.query(SystemAction, new OrderBy(NameUtil.resolveNameDesc(orderBy), asc));
+        }
+        List<SystemAction> systemActions = new ArrayList<SystemAction>();
         if (actions.size() > 0) {
+
             for (SystemAction s : actions) {
-                s = systemActionDao.getActionAndObject(s);
-                //s.setUrl(ActionEnum.getUrl(s.getActionObjectType()));
+                SystemAction action = systemActionDao.getActionAndObject(s);
+                action.setActorName(s.getActorName());
+                action.setUrl(ActionEnum.getUrl(s.getActionObjectType()) + s.getActionObjectId());
+                systemActions.add(action);
             }
         }
-        return actions;
+        return systemActions;
     }
 
     public Pager<SystemAction> findByPage(int start, int limit, SystemAction systemAction, String order,
                                           String ordertype) {
-
-        Pager<SystemAction> pager = systemActionDao.queryPager((start - 1) * limit, limit, systemAction, (order == null || "".equals(order)) ? null : new OrderBy(NameUtil.resolveNameDesc(order), !("desc".equals(ordertype)) ? true : false));
-        if (pager.getRecords().size() > 0) {
-            for (SystemAction s : pager.getRecords()) {
-                s = systemActionDao.getActionAndObject(s);
-                //s.setUrl(ActionEnum.getUrl(s.getActionObjectType()));
-            }
+        Pager<SystemAction> pager;
+        if (order == null) {
+            pager = systemActionDao.queryPager(start, limit, systemAction);
+        } else {
+            pager = systemActionDao.queryPager(start, limit, systemAction, new OrderBy(NameUtil.resolveNameDesc(order), !("desc".equals(ordertype)) ? true : false));
         }
-        return pager;
+        return mergePager(pager);
     }
 
-    public Pager<SystemAction> queryPager(int start,int limit ,Condition condition,SystemAction systemAction , String order,String ordertype){
-
-        Pager<SystemAction> pager = systemActionDao.queryPager((start-1)*limit, limit,condition, systemAction, (order==null||"".equals(order))?null:new OrderBy(NameUtil.resolveNameDesc(order), !("desc".equals(ordertype))?true:false));
-        if(pager.getRecords().size()>0){
-            for(SystemAction s : pager.getRecords()){
-                s = systemActionDao.getActionAndObject(s);
-                //s.setUrl(ActionEnum.getUrl(s.getActionObjectType()));
-            }
+    public Pager<SystemAction> queryPager(int start, int limit, Condition condition, SystemAction systemAction, String order, String ordertype) {
+        Pager<SystemAction> pager;
+        if (order == null) {
+            pager = systemActionDao.queryPager(start, limit, condition, systemAction);
+        } else {
+            pager = systemActionDao.queryPager(start, limit, condition, systemAction, new OrderBy(NameUtil.resolveNameDesc(order), !("desc".equals(ordertype)) ? true : false));
         }
-        return pager;
+        return mergePager(pager);
     }
 
-	public Pager<SystemAction> queryBetweenDate(int start, int limit,
-			SystemAction action, Date startDate, Date endDate, String sortName,
-			boolean asc) {
-		// TODO Auto-generated method stub
-		if (StringUtil.isBlank(sortName)) {
-			return systemActionDao.findByDate(start, limit, action, startDate, endDate);
-		}
-		OrderBy orderBy = new OrderBy(sortName, asc);
-		return systemActionDao.findByDate(start, limit, action, startDate, endDate, orderBy);
-	}
+    public Pager<SystemAction> queryBetweenDate(int start, int limit,
+                                                SystemAction action, String startDate, String endDate, String sortName,
+                                                boolean asc) {
+        Pager<SystemAction> pager;
+        if (StringUtil.isBlank(sortName)) {
+            pager = systemActionDao.findByDate(start, limit, action, startDate, endDate);
+            return mergePager(pager);
+        }
+        OrderBy orderBy = new OrderBy(sortName, asc);
+        pager = systemActionDao.findByDate(start, limit, action, startDate, endDate, orderBy);
+        return mergePager(pager);
+    }
 
-	
+    private Pager<SystemAction> mergePager(Pager<SystemAction> systemActionPager) {
+        List<SystemAction> actions = new ArrayList<SystemAction>();
+        if (systemActionPager.getRecords().size() > 0) {
+            for (SystemAction s : systemActionPager.getRecords()) {
+                SystemAction action = systemActionDao.getActionAndObject(s);
+                if (action != null) {
+                    action.setActorName(s.getActorName());
+                    action.setUrl(ActionEnum.getUrl(s.getActionObjectType()) + s.getActionObjectId());
+                    actions.add(action);
+                }
+            }
+        }
+        systemActionPager.setRecords(actions);
+        return systemActionPager;
+    }
 
 }

@@ -57,7 +57,7 @@ function tLoadContent(link, contain, className) {
 		<div class="widget-body">
 			<div class="tabs-right nav-tabsty">
 				<ul class="nav nav-tabs">
-				#for(name : urlMap.keySet())
+				#foreach(name : urlMap.keySet())
 				    #set(liActive = nameFor.index==1?"active":"")
 				    <li class="tab${nameFor.index} ${liActive}">
                         <a href="#tab${nameFor.index}" data-toggle="tab">${name}</a>
@@ -65,7 +65,7 @@ function tLoadContent(link, contain, className) {
 				#end
 				</ul>
 				<div class="tab-content tab-content02">
-				#for(name : urlMap.keySet())
+				#foreach(name : urlMap.keySet())
 				    #contentDiv("tab"+nameFor.index adminPath+urlMap.get(name) nameFor.index==1?"active":"")
 				#end
 				</div>

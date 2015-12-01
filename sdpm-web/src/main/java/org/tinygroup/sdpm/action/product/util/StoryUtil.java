@@ -1,33 +1,79 @@
 package org.tinygroup.sdpm.action.product.util;
 
-import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
-
-import javax.servlet.http.HttpServletRequest;
+import org.tinygroup.commons.tools.StringUtil;
+import org.tinygroup.sdpm.common.condition.ConditionCarrier;
+import org.tinygroup.sdpm.common.condition.ConditionUtils;
+import org.tinygroup.sdpm.util.UserUtils;
 
 /**
  * Created by wangll13383 on 2015/9/27.
  */
 public class StoryUtil {
-    public static String getStatusCondition(String choose, HttpServletRequest request){
-        OrgUser user = (OrgUser) request.getSession().getAttribute("orgUser");
-        if(choose == null||"".equals(choose))return null;
-        switch (Integer.valueOf(choose)){
-            case 1:return "story_status <> 'closed'";
-            case 2:return "";
-            case 3:return user != null?"story_assignedTo="+user.getOrgUserId():"";
-            case 4:return user != null?"story_openedBy="+user.getOrgUserId():"";
-            case 5:return user != null?"story_reviewedBy="+user.getOrgUserId():"";
-            case 6:return user != null?"story_closedBy="+user.getOrgUserId():"";
-            case 7:return "story_status='Draft'";
-            case 8:return "story_status='Active'";
-            case 9:return "story_status='changed'";
-            case 10:return "story_status='Acceptance'";
-            case 11:return "story_status='closed'";
+    public static void getStatusCondition(String choose, ConditionCarrier carrier) {
+        if (StringUtil.isBlank(choose)) {
+            return ;
         }
-        return null;
+        if (choose == null || "".equals(choose)) return;
+        switch (Integer.valueOf(choose)) {
+            case 1:
+                carrier.put("productStory.storyStatus",
+                        ConditionUtils.Operate.NEQ.getOperate(),
+                        ConditionUtils.CommonFieldType.FIELD_OPERATE.getCommonField(),
+                        "2");
+                break;
+            case 2:
+                return ;
+            case 3:
+                carrier.put("productStory.storyAssignedTo",
+                        ConditionUtils.Operate.EQ.getOperate(),
+                        ConditionUtils.CommonFieldType.FIELD_OPERATE.getCommonField(),
+                        UserUtils.getUserId());
+                break;
+            case 4:
+                carrier.put("productStory.storyOpenedBy",
+                        ConditionUtils.Operate.EQ.getOperate(),
+                        ConditionUtils.CommonFieldType.FIELD_OPERATE.getCommonField(),
+                        UserUtils.getUserId());
+                break;
+            case 5:
+                carrier.put("productStory.storyReviewedBy",
+                        ConditionUtils.Operate.EQ.getOperate(),
+                        ConditionUtils.CommonFieldType.FIELD_OPERATE.getCommonField(),
+                        UserUtils.getUserId());
+                break;
+            case 6:
+                carrier.put("productStory.storyClosedBy",
+                        ConditionUtils.Operate.EQ.getOperate(),
+                        ConditionUtils.CommonFieldType.FIELD_OPERATE.getCommonField(),
+                        UserUtils.getUserId());
+                break;
+            case 7:
+                carrier.put("productStory.storyStatus",
+                        ConditionUtils.Operate.EQ.getOperate(),
+                        ConditionUtils.CommonFieldType.FIELD_OPERATE.getCommonField(),
+                        "0");
+                break;
+            case 8:
+                carrier.put("productStory.storyStatus",
+                        ConditionUtils.Operate.EQ.getOperate(),
+                        ConditionUtils.CommonFieldType.FIELD_OPERATE.getCommonField(),
+                        "1");
+                break;
+            case 9:
+                carrier.put("productStory.storyStatus",
+                        ConditionUtils.Operate.EQ.getOperate(),
+                        ConditionUtils.CommonFieldType.FIELD_OPERATE.getCommonField(),
+                        "3");
+                break;
+            case 11:
+                carrier.put("productStory.storyStatus",
+                        ConditionUtils.Operate.EQ.getOperate(),
+                        ConditionUtils.CommonFieldType.FIELD_OPERATE.getCommonField(),
+                        "2");
+                break;
+        }
+        return ;
     }
-    
 
-    
 
 }

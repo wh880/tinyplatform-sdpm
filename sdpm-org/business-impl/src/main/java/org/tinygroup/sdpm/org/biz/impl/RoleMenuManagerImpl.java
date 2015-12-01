@@ -1,12 +1,12 @@
 /**
  * Copyright (c) 1997-2013, www.tinygroup.org (luo_guo@icloud.com).
- * <p/>
+ * <p>
  * Licensed under the GPL, Version 3.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p/>
+ * <p>
  * http://www.gnu.org/licenses/gpl.html
- * <p/>
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -18,6 +18,7 @@ package org.tinygroup.sdpm.org.biz.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.tinygroup.commons.tools.ArrayUtil;
 import org.tinygroup.sdpm.org.biz.inter.RoleMenuManager;
 import org.tinygroup.sdpm.org.dao.OrgRoleMenuDao;
 import org.tinygroup.sdpm.org.dao.pojo.OrgRoleMenu;
@@ -52,8 +53,12 @@ public class RoleMenuManagerImpl implements RoleMenuManager {
         return orgRoleMenuDao.add(orgRoleMenu);
     }
 
-    public void batchAdd(List<OrgRoleMenu> orgRoleMenuList) {
-        orgRoleMenuDao.batchInsert(orgRoleMenuList);
+    public Integer batchAdd(List<OrgRoleMenu> orgRoleMenuList) {
+        int[] batchInsert = orgRoleMenuDao.batchInsert(orgRoleMenuList);
+        if (ArrayUtil.isEmptyArray(batchInsert)) {
+            return 0;
+        }
+        return batchInsert.length;
     }
 
     public OrgRoleMenu update(OrgRoleMenu orgRoleMenu) {
@@ -61,9 +66,6 @@ public class RoleMenuManagerImpl implements RoleMenuManager {
         return orgRoleMenu;
     }
 
-    public Integer delete(Integer id) {
-        return 0;
-    }
 
     public void batchDelete(List<OrgRoleMenu> orgRoleMenuList) {
         orgRoleMenuDao.batchDelete(orgRoleMenuList);

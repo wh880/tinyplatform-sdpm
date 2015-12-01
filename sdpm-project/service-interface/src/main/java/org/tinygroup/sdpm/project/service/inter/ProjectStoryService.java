@@ -2,6 +2,7 @@ package org.tinygroup.sdpm.project.service.inter;
 
 import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
+import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectStory;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -13,19 +14,97 @@ import java.util.List;
  */
 public interface ProjectStoryService {
 
-    public List<ProjectStory> findByProjectStory(ProjectStory projectStory);
+    /**
+     * 批量更新关联
+     *
+     * @param projectStoryList
+     * @return
+     */
+    int[] updateLink(List<ProjectStory> projectStoryList);
 
-    public Integer batchtDel(String condition);
+    List<Project> findProjectsByStory(Integer storyId);
 
-    public int[] addLink(List<ProjectStory> projectStoryList);
+    /**
+     * 通用查询
+     *
+     * @param projectStory
+     * @return
+     */
+    List<ProjectStory> findByProjectStory(ProjectStory projectStory);
 
-    public List<ProductStory> findStoryByProject(Integer projectId);
+    /**
+     * 批量删除关联
+     *
+     * @param projectId
+     * @param storyIds
+     * @return
+     */
+    Integer batchDel(Integer projectId, Integer[] storyIds);
 
-    public Pager<ProductStory> findStoryByProject(Integer projectId, Integer start, Integer limit, String order, String ordertype);
+    /**
+     * 批量添加
+     *
+     * @param projectStoryList
+     * @return
+     */
+    int[] addLink(List<ProjectStory> projectStoryList);
 
-    public Integer deleteProjectStory(Integer projectId, Integer storyId);
+    /**
+     * 根据projectId查询story
+     *
+     * @param projectId
+     * @return
+     */
+    List<ProductStory> findStoryByProject(Integer projectId);
 
-    public Pager<ProductStory> findStoryToLink(Integer projectId, Integer start, Integer limit, String order, String ordertype);
+    /**
+     * 查询需求 分页
+     *
+     * @param projectId
+     * @param start
+     * @param limit
+     * @param order
+     * @param ordertype
+     * @return
+     */
+    Pager<ProductStory> findStoryByProject(Integer projectId, Integer start, Integer limit, String order, String ordertype, String moduleId);
 
-    public Pager<ProductStory> findStoryPager(int start, int limit, ProductStory story, String statusCondition, SearchInfos conditions, String groupOperate, String columnName, boolean asc);
+    /**
+     * 删除
+     *
+     * @param projectId
+     * @param storyId
+     * @return
+     */
+    Integer deleteProjectStory(Integer projectId, Integer storyId);
+
+    /**
+     * 查找待关联需求
+     *
+     * @param projectId
+     * @param start
+     * @param limit
+     * @param order
+     * @param ordertype
+     * @return
+     */
+    Pager<ProductStory> findStoryToLink(Integer projectId, Integer start, Integer limit, String order, String ordertype);
+
+    /**
+     * 查询所有需求
+     *
+     * @param story
+     * @param statusCondition
+     * @param columnName
+     * @param asc
+     * @param start
+     * @param limit
+     * @param conditions
+     * @param groupOperate
+     * @return
+     */
+    Pager<ProductStory> findStoryPager(int start, int limit, int id, SearchInfos conditions, String groupOperate);
+
+
+    Pager<ProductStory> findNoStoryPager(int start, int limit, int id, String condition, SearchInfos conditions, String groupOperate);
 }

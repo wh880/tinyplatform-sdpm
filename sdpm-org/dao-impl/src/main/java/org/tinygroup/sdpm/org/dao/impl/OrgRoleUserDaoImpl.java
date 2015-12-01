@@ -1,12 +1,12 @@
 /**
  * Copyright (c) 1997-2013, www.tinygroup.org (luo_guo@icloud.com).
- * <p/>
+ * <p>
  * Licensed under the GPL, Version 3.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p/>
+ * <p>
  * http://www.gnu.org/licenses/gpl.html
- * <p/>
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -96,6 +96,16 @@ public class OrgRoleUserDaoImpl extends TinyDslDaoSupport implements OrgRoleUser
     public int deleteByRoleId(Integer roleId) {
         Delete delete = delete(ORG_ROLE_USERTABLE).where(ORG_ROLE_USERTABLE.ORG_ROLE_ID.eq(roleId));
         return getDslSession().execute(delete);
+    }
+
+    public List<OrgRoleUser> getRolesByIds(String... ids) {
+        SelectGenerateCallback<Serializable[]> callback = new SelectGenerateCallback<Serializable[]>() {
+
+            public Select generate(Serializable[] serializables) {
+                return selectFrom(ORG_ROLE_USERTABLE).where(ORG_ROLE_USERTABLE.ORG_ROLE_ID.in(serializables));
+            }
+        };
+        return getDslSession().fetchList(callback.generate(ids), OrgRoleUser.class);
     }
 
     public OrgRoleUser getByKey(Integer pk) {

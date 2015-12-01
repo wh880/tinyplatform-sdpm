@@ -18,7 +18,7 @@ public class DateUtils extends org.apache.commons.lang.time.DateUtils {
     protected static final Logger logger = LoggerFactory.getLogger(DateUtils.class);
 
     private static String[] parsePatterns = {"yyyy-MM-dd", "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd HH:mm",
-            "yyyy/MM/dd", "yyyy/MM/dd HH:mm:ss", "yyyy/MM/dd HH:mm"};
+            "yyyy-MM-dd", "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd HH:mm"};
 
     /**
      * 得到当前日期字符串 格式（yyyy-MM-dd）
@@ -99,7 +99,7 @@ public class DateUtils extends org.apache.commons.lang.time.DateUtils {
     /**
      * 日期型字符串转化为日期 格式
      * { "yyyy-MM-dd", "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd HH:mm",
-     * "yyyy/MM/dd", "yyyy/MM/dd HH:mm:ss", "yyyy/MM/dd HH:mm" }
+     * "yyyy-MM-dd", "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd HH:mm" }
      */
     public static Date parseDate(Object str) {
         if (str == null) {
@@ -360,7 +360,7 @@ public class DateUtils extends org.apache.commons.lang.time.DateUtils {
      */
     public static Date getFirstDayOfQuarter(Integer year, Integer quarter) {
         Calendar calendar = Calendar.getInstance();
-        Integer month = new Integer(0);
+        Integer month;
         if (quarter == 1) {
             month = 1 - 1;
         } else if (quarter == 2) {
@@ -397,7 +397,7 @@ public class DateUtils extends org.apache.commons.lang.time.DateUtils {
      */
     public static Date getLastDayOfQuarter(Integer year, Integer quarter) {
         Calendar calendar = Calendar.getInstance();
-        Integer month = new Integer(0);
+        Integer month;
         if (quarter == 1) {
             month = 3 - 1;
         } else if (quarter == 2) {
@@ -470,7 +470,7 @@ public class DateUtils extends org.apache.commons.lang.time.DateUtils {
         try {
             date = sdf.parse(formatDate(date, "yyyy-MM-dd") + " 00:00:00");
         } catch (ParseException e) {
-            logger.logMessage(LogLevel.ERROR,"格式化出错",e);
+            logger.logMessage(LogLevel.ERROR, "格式化出错", e);
         }
         return date;
     }
@@ -483,7 +483,7 @@ public class DateUtils extends org.apache.commons.lang.time.DateUtils {
         try {
             date = sdf.parse(formatDate(date, "yyyy-MM-dd") + " 23:59:59");
         } catch (ParseException e) {
-            logger.logMessage(LogLevel.ERROR,"日期解析出错",e);
+            logger.logMessage(LogLevel.ERROR, "日期解析出错", e);
         }
         return date;
     }

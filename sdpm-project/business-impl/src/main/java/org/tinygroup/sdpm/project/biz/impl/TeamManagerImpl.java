@@ -37,14 +37,12 @@ public class TeamManagerImpl implements TeamManager {
         return teamDao.getByKey(id);
     }
 
-    public List<ProjectTeam> findListAccount(int projectId) {
-        ProjectTeam team = new ProjectTeam();
-        team.setProjectId(projectId);
-        return teamDao.query(team);
-    }
-
     public List<ProjectTeam> findByProjectId(Integer projectId) {
         return teamDao.findByProjectId(projectId);
+    }
+
+    public List<ProjectTeam> findByProductId(Integer productId) {
+        return teamDao.findByProductId(productId);
     }
 
     public ProjectTeam add(ProjectTeam team) {
@@ -67,6 +65,14 @@ public class TeamManagerImpl implements TeamManager {
             return teamDao.queryPager(start, limit, team, orderBy);
         }
 
+    }
+
+    public List<String> getMenuIdListByProjectAndUser(Integer projectId, String userId) {
+        return teamDao.getMenuByUserId(projectId, null, userId);
+    }
+
+    public List<String> getMenuIdListByProductAndUser(Integer productId, String userId) {
+        return teamDao.getMenuByUserId(null, productId, userId);
     }
 
 }

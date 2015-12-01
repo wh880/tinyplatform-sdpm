@@ -1,3 +1,36 @@
+<script type="text/javascript">
+    function ajaxRead(id, toName, opKey, opvalue, url, value) {
+        var selectCheck = "select[name=" + toName + "]";
+        $(selectCheck).each(function () {
+            var sele = $(this);
+            var s;
+            $.ajax({
+                type: "POST",
+                url: "${TINY_CONTEXT_PATH+adminPath}" + url,
+                data: $(this).attr('data'),
+                dataType: "json",
+                success: function (data) {
+                    sele.empty();
+                    var em = "<option value='0'>/</option>";
+                    sele.append(em);
+                    var isInit = false;
+                    for (var i = 0, l = data.length; i < l; i++) {
+                        if (data[i][opKey] == value) isInit = true;
+                        var em = "<option value='" + data[i][opKey] + "' >" + data[i][opvalue] + "</option>";
+                        sele.append(em);
+                    }
+                    //console.log(sele.html(),value,opKey);
+                    if (isInit) {
+                        sele.val(value).trigger("change");
+                    } else {
+                        sele.val("0").trigger("change");
+                    }
+                },
+            });
+        });
+    }
+</script>
+
 #import("/org/tinygroup/button/components/button_common.component")
 #import("/org/tinygroup/button/components/button.component")
 #import("/org/tinygroup/table/components/table.component")
@@ -17,22 +50,52 @@
     #end
 #end
 #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/service/request/save" "post" {"class":""})
-<div style="width:80%;margin-left: 20px;" class="pageleftpart">
+<div style="width:100%;margin-left: 20px;" class="pageleftpart">
     <div class="infoContent">
         <p class="titleName">请求</p>
         <input type="hidden" name="clientRequestId" value="${request?.clientRequestId}"/>
         #@elementItem()
-            #@sdpmItem("产品名称","*")
-                #@Tselect2F()
-                    #@Tselect2Body(
-                        "productId" request?.productId {"placeholder":"产品名称","datatype":"*","nullmsg":"产品名称不能为空！",
-                        "class":"input-text select2"})  ##,"multiple":"multiple"加上为多选项
-                        #@tinyOptionItem("")请选择#end
-                        #foreach(l:productList)
-                            #@tinyOptionItem(l.productId)${l?.productName}#end
-                        #end
+            #@colLabel()<span class="c-red">*</span>所属产品：#end
+            #@formControlDiv("col-4")
+                <div class="col-5">
+                    #@TzTreeSelect(
+                        "productId" cookieProductId {"class":"input-text","datatype":"*","nullmsg":"所属产品不能为空",
+                        "data-URL":call("link",adminPath+"/productLine/userProductTree")})
+                        <script>
+                            $("#${sid}-input").on("change", function () {
+                                var pId = $(this).val();
+                                if (pId > 0) {
+                                    ajaxRead("${sid}", "moduleId", "moduleId", "moduleName", "/quality/bug/ajax/module?moduleRoot=" + pId, "0", "module");
+                                ##                                    ajaxRead("${sid}", "planId", "planId", "planName", "/product/plan/planList?productId=" + pId,"0","plan");
+                                    var url = $("#modelA").attr("href");
+                                    if (!url.endsWith("=")) {
+                                        url = url.substring(0, url.indexOf("=") + 1);
+                                    }
+                                    $("#modelA").attr("href", url + pId)
+                                    $("input[name=storyTitle]").blur();
+                                }
+                            })
+                        </script>
+                        <span><a href="${TINY_CONTEXT_PATH +adminPath}/product/addproduct/addition"
+                                 class="r">增加</a></span>
                     #end
-                #end
+                </div>
+                <div class="col-7">
+                    <div class="col-4 text-c">所属模块：</div>
+                    <div class="col-8">
+                        #@Tselect2F()
+                            #@Tselect2Body("moduleId" request?.moduleId {"class":"input-text select2","url":
+                                "/system/module/moduleList","ajaxType":
+                                "systemModel","data":"moduleType=product","relateElem":
+                                "relateModelTwo"}) ##,"multiple":"multiple"加上为多选项
+                            #end
+                            #@Tselect2Fix()#@aModal(
+                                "#myModal" "" "500" "300" "btn-class" adminPath+"/product/addModule?pId=" "modelA")
+                                增加#end
+                            #end
+                        #end
+                    </div>
+                </div>
             #end
         #end
         #@elementItem()
@@ -42,14 +105,9 @@
                         "requestType" request?.requestType {"placeholder":"请求类型","datatype":"*","nullmsg":"请求类型不能为空！",
                         "class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         #@tinyOptionItem("")请选择#end
-                        #@tinyOptionItem("0")缺陷#end
-                        #@tinyOptionItem("1")适应性#end
-                        #@tinyOptionItem("2")完善#end
-                        #@tinyOptionItem("3")个性化#end
-                        #@tinyOptionItem("4")全新#end
-                        #@tinyOptionItem("5")训练#end
-                        #@tinyOptionItem("6")支持#end
-                        #@tinyOptionItem("7")疑惑#end
+                        #foreach(item : getDict("requestType"))
+                            #@tinyOptionItem(item.value)${item.text}#end
+                        #end
                     #end
                 #end
             #end
@@ -61,22 +119,9 @@
                         "requestPre" request?.requestPre {"placeholder":"请求优先级","datatype":"*","nullmsg":"请求优先级不能为空！",
                         "class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         #@tinyOptionItem("")请选择#end
-                        #@tinyOptionItem("0")低#end
-                        #@tinyOptionItem("1")中#end
-                        #@tinyOptionItem("2")高#end
-                    #end
-                #end
-            #end
-        #end
-        #@elementItem()
-            #@sdpmItem("请求模块")
-                #@Tselect2F()
-                    #@Tselect2Body(
-                        "moduleId" request?.moduleId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                        #@tinyOptionItem("")请选择#end
-                        #@tinyOptionItem("2")模块一#end
-                        #@tinyOptionItem("3")模块二#end
-                        #@tinyOptionItem("4")模块三#end
+                        #foreach(item : getDict("requestPre"))
+                            #@tinyOptionItem(item.value)${item.text}#end
+                        #end
                     #end
                 #end
             #end
@@ -91,6 +136,16 @@
                         #@tinyOptionItem("")请选择#end
                         #foreach(l:clientList)
                             #@tinyOptionItem(l.clientId)${l?.clientName}#end
+                        #end
+                    #end
+                    #@Tselect2Fix()
+                        #set(m=menuManager.getMenu("client-add"))
+                        #if(m)
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
+                        #end
+                        #set(m=menuManager.getMenu("client"))
+                        #if(m)
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
                         #end
                     #end
                 #end
@@ -126,11 +181,9 @@
                         "requestStatus" request?.requestStatus {"placeholder":"请求状态","datatype":"*","nullmsg":
                         "请求状态不能为空！","class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         #@tinyOptionItem("")请选择#end
-                        #@tinyOptionItem("0")新建#end
-                        #@tinyOptionItem("6")待回访#end
-                        #@tinyOptionItem("8")已回访#end
-                        #@tinyOptionItem("2")被拒绝#end
-                        #@tinyOptionItem("1")处理中#end
+                        #foreach(item : getDict("requestStatus"))
+                            #@tinyOptionItem(item.value)${item.text}#end
+                        #end
                     #end
                 #end
             #end
@@ -138,15 +191,15 @@
         #@elementItem()
             #@sdpmItem("请求提交时间" "*")
                 #@tinyDateInput(
-                    "requestSubmitDate" formatDate(request?.requestSubmitDate,
-                    "yyyy-MM-dd") "YYYY-MM-DD" {"style":"width:200px","datatype":"*",
+                    "requestSubmitDate" formatDate(request?.requestSubmitDate?:now(),
+                "yyyy-MM-dd") "YYYY-MM-DD" {"style":"width:120px","datatype":"*",
                 "nullmsg":"日期不能为空","placeholder":"请输入日期"})#end
             #end
         #end
         #@elementItem()
             #@sdpmItem("请求承诺回复时间")
                 #@tinyDateInput("requestCommitmentDate" formatDate(request?.requestCommitmentDate,
-                    "yyyy-MM-dd") "YYYY-MM-DD" {"style":"width:200px"})#end
+                    "yyyy-MM-dd") "YYYY-MM-DD" {"style":"width:120px"})#end
             #end
         #end
 
@@ -160,7 +213,7 @@
 
             </div>
             <div class="col-1">
-                <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
+                <button style="float: left" type="submit" id="submit2" class="commitBtn">保存</button>
             </div>
             <div class="col-1">
                 #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end
@@ -178,7 +231,7 @@
 </script>
 <script type="text/javascript">
     $(function () {
-        $("form[name=thisform").Validform({
+        $("form[name=thisform]").Validform({
             tiptype: 2
 
         });

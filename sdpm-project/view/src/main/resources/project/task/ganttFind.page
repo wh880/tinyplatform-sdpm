@@ -1,0 +1,22 @@
+<div style="width:70%;float:left">
+    #@div(divClass="infoContent")
+        <p class="titleName">任务描述</p>
+        <div>${task.taskDesc}</div>
+    #end
+    #@div(divClass="infoContent")
+        <p class="titleName">需求描述</p>
+        <div>
+            #if(task.storySpec)
+                ${task.storySpec}
+            #end
+        </div>
+    #end
+    #@div(divClass="infoContent")
+        <p class="titleName">附件</p>
+        <div>#uploadFileList(fileList)</div>
+    #end
+    #history(adminPath+"/system/action/ajax/history?actionObjectType=task&actionObjectId="+task?.taskId)
+</div>
+<div style="width:30%;float:right">
+    #TypeInfo("information", task.taskId)
+</div>

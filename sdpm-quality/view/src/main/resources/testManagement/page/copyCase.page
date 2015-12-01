@@ -7,7 +7,6 @@
     .tableBoxes tbody tr td{padding:10px 7px;vertical-align:middle}
 </style>
 
-
 #set(name="qualityCases")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
@@ -22,62 +21,70 @@
 ##operationbar start1
 
 #end
-
-    #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/quality/testcase/copySave" "post" {"class":""})
+#end
+    #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/quality/testCase/save" "post" {"class":"","enctype":"multipart/form-data"})
 	<div style="width:100%">
     	<div class="infoContent">
     		<p class="titleName">建用例</p>
         #@elementItem()
             #@colLabel()产品模块：#end
             #@formControlDiv("col-8")
-            #@div(divClass="col-5")
+                #@div(divClass="col-5")
 					 #@Tselect2F()
-	                   		 #@Tselect2Body("productId" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="CT">产品2</option>
-	                        <option value="DE">产品3</option>
-	                        <option value="FL">产品4</option>
-	                        <option value="GA">产品5</option>
-	                        <option value="IN">产品1</option>
-	                    	#end                  
-	                    	#@Tselect2Fix()
-	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/product/page/tabledemo/addProduct.page" class="r ">增加</a>
-	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/product/page/tabledemo/product-listall.page">全部</a>#end
-                	  #end
-#*					#@tinySelect("lang" "1" {"class":"select2"})
-							#@tinyOptionItem("1")日本三菱#end
-							#@tinyOptionItem("2")销售系统#end
-							#@tinyOptionItem("3")国产需求#end
-					#end*#
-					#end
-					#@div(divClass="col-0")&nbsp;&nbsp#end
+	                   		 #@Tselect2Body("productId" testCase?.productId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                       
+	                    	#end    
+	                    	<script>
+							
+		                        ajaxRead("${sid}", "productId", "productId", "productName", "/product/productList",${testCase?.productId?:0});
+								
+								 $("#${sid}").on("change", function () {
+		                            var pId = $("#${sid}  option:selected").val();
+		                            if(pId>0){
+                                        ajaxRead("${sid}", "moduleId", "moduleId", "moduleName", "/quality/bug/ajax/module?moduleRoot=" + pId,${testCase?.moduleId?:0},"module");
+                                    }
+		                        });
+		                    </script>
+                         #@Tselect2Fix()
+                             #set(m=menuManager.getMenu("newproduct"))
+                             #if(m)
+                                 <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
+                             #end
+                             #set(m=menuManager.getMenu("allproduct"))
+                             #if(m)
+                                 <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
+                             #end
+                	    #end
+                    #end
+                    #end
 					#@div(divClass="col-3")
 					 #@Tselect2F()
-	                   		 #@Tselect2Body("moduleId" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="CT">/1/2</option>
-	                        <option value="DE">/2/3</option>
-	                        <option value="IN">/3/4</option>
-	                    	#end                
+	                   		 #@Tselect2Body("moduleId" testCase?.moduleId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                    	#end
+                         <script type="text/javascript">
+                             $("#${sid}").on("change",function(){
+                                 var pId = $("select[name=productId] option:selected").val();
+                                 var mId = $("#${sid}  option:selected").val();
+                                 if(pId>0&&mId>0){
+                                     ajaxRead("${sid}","storyId","storyId","storyTitle","/quality/testCase/ajax/story?productId="+pId+"&moduleId="+mId,${(testCase?.storyId?:storyId)?:0});
+                                 }
+                             });
+                         </script>
                 	  #end
-#*					#@tinySelect("lang" "zh" {"class":"select2"})
-							#@tinyOptionItem("zh")/首页#end
-							#@tinyOptionItem("en")/轮播图#end
-							#@tinyOptionItem("ta")/导航#end
-					#end*#
 					#end
-#*					#buttonRadiusDefault(caption="维护模板")
-					#buttonRadiusDefault(caption="刷新")*#
 				#end
+
         #end
         #@elementItem()
-            #@colLabel()用例类型：#end
+            #@colLabel()<span class="c-red">*</span>用例类型：#end
             #@formControlDiv("col-8")
             	#@div(divClass="col-5")
                      #@Tselect2F()
-	                   		 #@Tselect2Body("caseType" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="IN">1</option>
-	                        <option value="ME">2</option>
-	                        <option value="MD">3</option>
-	                    	#end                
+	                   		#@Tselect2Body("caseType" testCase?.caseType {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                   		 	#foreach(caseType:getDict("caseType"))
+	                   		 		<option value="${caseType.value}">${caseType.text}</option>
+	                   		 	#end
+	                    	#end              
                 	  #end
                 #end
                     #@validateDiv("col-2")#end
@@ -85,64 +92,62 @@
             #@validateDiv("col-2")#end
         #end
         #@elementItem()
-            #@colLabel()试用阶段：#end
+            #@colLabel()<span class="c-red">*</span>试用阶段：#end
             #@formControlDiv("col-8")
                #@div(divClass="col-5")
-					 #@Tselect2F()
-	                   		 #@Tselect2Body("caseStage" "IN" {"class":"input-text select2","multiple":"multiple"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="IN">版本1</option>
-	                        <option value="ME">版本2</option>
-	                        <option value="MD">版本3</option>
+					#@Tselect2F()
+	                   		 #@Tselect2Body("caseStage" testCase?.caseStage {"class":"input-text select2","multiple":"multiple"}) ##,"multiple":"multiple"加上为多选项
+		                        #foreach(stage:getDict("caseStage"))
+	                   		 		<option value="${stage.value}">${stage.text}</option>
+	                   		 	#end
 	                    	#end                
-#*	                    	#@Tselect2Fix()
-	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/addProject.page" class="r ">增加</a>
-	                    	<a href="${TINY_CONTEXT_PATH+adminPath}/project/allProject.page">全部</a>
-	                    	#end*#
-                	  #end
+                 	#end
                 #end
             #end
             #@validateDiv("col-2")#end
         #end
 
         #@elementItem()
-            #@colLabel()优先级：#end
+            #@colLabel()<span class="c-red">*</span>优先级：#end
             #@formControlDiv("col-8")
                 #@div(divClass="col-5")
-					#@selectRadiusBox("select_boxes")
-	                        #@select(selectName="priority" selectClass="select")
-	                            #@optionSelected("") #end
-	                            #@optionItem("")1#end
-	                            #@optionItem("")2#end
-	                            #@optionItem("")3#end
-	                        #end
-	                    #end
+					#@Tselect2F()
+	                   		 #@Tselect2Body("priority" testCase?.priority {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+		                        #foreach(pri:getDict("casePriority"))
+	                   		 		<option value="${pri.value}">${pri.text}</option>
+	                   		 	#end
+	                    	#end                
+             		#end
                 #end
             #end
             #@validateDiv("col-2")#end
         #end
 
         #@elementItem()
-            #@colLabel()相关需求：#end
+            #@colLabel()<span class="c-red">*</span>相关需求：#end
             #@formControlDiv("col-8")
 					#@div(divClass="col-5")
 							 #@Tselect2F()
-	                   		 #@Tselect2Body("storyId" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-	                        <option value="IN">需求1</option>
-	                        <option value="ME">需求2</option>
-	                        <option value="MD">需求3</option>
-	                    	#end                
-	                      	#@Tselect2Fix()
-	                      	<a href="${TINY_CONTEXT_PATH+adminPath}/product/page/tabledemo/product-demand-add.page" class="r ">增加</a>
-	                      	<a href="${TINY_CONTEXT_PATH+adminPath}/product/page/project/togglebox.page">全部</a>#end
+	                   		 #@Tselect2Body("storyId" testCase?.storyId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                    	#end
+                                 #@Tselect2Fix()
+                                     #@hasMenu("product-demand-add")
+                                         <a href="${TINY_CONTEXT_PATH+adminPath}/product/story/addstory"
+                                            class="r ">增加</a>
+                                     #end
+                                     #@hasMenu("product-demand")
+                                         <a href="${TINY_CONTEXT_PATH+adminPath}/product/story?choose=1">全部</a>
+                                     #end
+                                 #end
                 			#end
 					#end
 			#end
         #end
         #@elementItem()
-            #@colLabel()用例标题：#end
+            #@colLabel()<span class="c-red">*</span>用例标题：#end
             #@formControlDiv("col-8")
             #@div(divClass="col-5")
-                #tinyInput("text" "caseTitle" ""{"datatype":"*10-500","id":"版本","class":"input-text"})
+                #tinyInput("text" "caseTitle" testCase?.caseTitle {"datatype":"*10-500","id":"版本","class":"input-text"})
             #end
             #end
             #@validateDiv("col-2")#end
@@ -150,55 +155,34 @@
         #@elementItem()
             #@colLabel()前置条件：#end
             #@formControlDiv("col-8")
-                #@tinyTextarea("casePrecondition" {"placeholder":"说点什么...最少输入10个字符"})请输入内容#end          
+                #@tinyTextarea("casePrecondition" {"placeholder":"说点什么...最少输入10个字符"})${testCase?.casePrecondition}#end
             #end
             #@validateDiv("col-2")#end
         #end
         ##暂留、、、、、、、、、、、、、、、、、
         #@elementItem()
             #@colLabel()用例步骤：#end
-            #@table("tableBoxes col-8")
-                #@thead()
-                    #@tr()
-                        #@th()编号#end
-                        #@th()步骤#end
-                        #@th()预期#end
-                        #@th()操作#end
-                    #end
-                #end
-                #@tbody()
-                    #for(i:[1..3])
-                    #@tr()
-                        #@td()${i}#end
-                        #@td()#inputRadiusDefaultText()#end
-                        #@td()#inputRadiusDefaultText()#end
-                        #@td()#@div()
-                            #buttonRadiusPrimary(btClass="btn-small" caption="之前添加")
-                            #buttonRadiusPrimary(btClass="btn-small" caption="之后添加")
-                            #buttonRadiusPrimary(btClass="btn-small" caption="删除")
-                            #end
-                        #end
-                    #end
-                    #end
-                #end
-            #end
+          	 	<div class="col-8">
+	      		   #include("/testManagement/page/caseStepAdd.page") 
+	            </div>
             #@validateDiv("col-2")#end
         #end
         #@elementItem()
             #@colLabel()关键词：#end
             #@formControlDiv("col-8")
             	#@div(divClass="col-5")
-                	#tinyInput("text" "caseKeywords" ""{"datatype":"","id":"关键词","class":"input-text"})
+                	#tinyInput("text" "caseKeywords" testCase?.caseKeywords {"datatype":"","id":"","class":"input-text"})
             	#end
             #end
             #@validateDiv("col-2")#end
         #end
         #@elementItem()
-            #@colLabel()附件：#end
-            #@formControlDiv("col-8")
-                #include("/testManagement/page/fileupload.page")
-            #end
-            #@validateDiv("col-2")#end
+            <div class="col-12">
+                <div class="col-2 text-r"><label>附件：</label></div>
+                <div class="col-7">
+                    #mulUploadFile()
+                </div>
+            </div>
         #end
        #@elementItem()
         <div class="col-12">
@@ -206,7 +190,7 @@
 
             </div>
             <div class="col-1">
-                <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
+                <button style="float: left" type="submit" id="submit2" class="commitBtn">保存</button>
             </div>
             <div class="col-1">
 #*            <a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/cases.page">
@@ -221,9 +205,8 @@
     </div>
    </div>
 <script type="text/javascript">
-    $(".select2").select2();
+    $("select.select2").select2();
 </script>
 
 
-#end
 #end

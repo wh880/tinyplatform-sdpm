@@ -1,51 +1,262 @@
-#import("/org/tinygroup/compose/components/compose_typography.component")
-
-<style>.panel, .panel-default{margin-bottom:10px;}.widget-profile .widget-profile-counters > div + div{border:none;border-top:#ddd 1px solid;}.dashboard-header .stat-cell{padding:18px 20px;}.dynamicBox{padding:10px 12px 0; border:#d0e6ee 1px solid;}.list-group .list-group-item,.widget-profile-counters a{color:#333}</style>
-#@div(divClass="row dashboard-header")
-    #@div(divClass="col-sm-3")
-    	#@div(divClass="dynamicBox")
-	        <h2>Hello,Beaut-liyl</h2>
-	        <small>您有32条消息和6个待处理事项</small>
-			 #@OlTopList()
-			    #topItem(1 "#" "最新动态列表" "18:12")
-			    #normalLiItems(2 "#" "最新动态列表" "14:12" "green")
-			    #normalLiItems(3 "#" "最新动态列表" "13:12" "darkGreen")
-			    #normalLiItems(4 "#" "最新动态列表" "11:12" "grey")
-			    #normalLiItems(5 "#" "最新动态列表" "09:12")
-			#end
-		#end
-    #end
-    #@div(divClass="col-sm-6")
-		#@div(divClass="col-sm-4")
-		#@numberBox("bg-pa-purple" "fa-clock-o")
-			#numList("col-xs-12" "436" "项目名称")
-			#numList("col-xs-12" "436" "产品名称")
-		#end
-		#end
-		#@div(divClass="col-sm-4")
-		
-			#@numberBox("bg-warning" "icon-flag")
-				#numList("col-xs-12" "161" "我的待办")
-				#numList("col-xs-12" "161" "我的任务")
-			#end
-		#end
-		#@div(divClass="col-sm-4")
-			#@numberBox("bg-primary" "icon-plane")
-				#numList("col-xs-12" "168" "我的BUG")
-				#numList("col-xs-12" "168" "我的测试")
-			#end
-		#end
-    #end
-    #@div(divClass="col-sm-3")
-       <!-- statisticalBox start-->
-		#@statisticalBox("panel-success" "fa-flask" "项目的进度" "label-warning" "66%")
-			#@groupList()
-				 #itemNumber("icon-desktop" "OA" "50%")
-				 #itemNumber("icon-tasks" "官网" "54%")
-				 #itemNumber("icon-tasks" "P2P" "64%")
-				 #itemNumber("icon-tasks" "B2B" "84%")
-			#end
-		#end
-		<!-- statisticalBox end-->
-   #end
+#set(productSumTitle={"resolvedSum":"未解决bug数","closeSum":"已关闭需求数","changedSum":"已变更需求数","assignSum":"未指派bug数","activeSum":"激活需求数","bugCount":"相关bug数","planCount":"计划数","draftSum":"草稿需求数","releaseCount":"发布数"})
+<style>
+	table.table.sdpm-table tr>td,table.table.sdpm-table tr>th{vertical-align: middle}
+    table.table.sdpm-table tr>th{border-bottom:2px solid #ddd}
+</style>
+#macro ticketBoxAdmin(labelBg labelInfo ticketBoxHref ticketBoxNum ticketInfo ticketBoxMap)
+<div class="ticket" #mapToHtml(ticketBoxMap)>
+    <span class="label ${labelBg} ticket-label">${labelInfo}</span>
+    <a href="${ticketBoxHref}" title="" class="ticket-title">#bodyContent<span>[${ticketBoxNum}]</span></a>
+	<span class="ticket-info">
+		${ticketInfo}
+	</span>
+</div>
 #end
+#pageSetUp()
+#@section("widget-grid")
+
+	#@simpleDiv("row")
+		#@simpleArticle("col-lg-12")
+        <!-- new widget -->
+			#@widgetDiv("padding-clear" "wid-id-1" {"data-widget-editbutton":"false","data-widget-fullscreenbutton":"true"})
+
+				#headerBox(" icon-bar-chart" "项目统计")
+
+            <!-- widget div-->
+            <div class="no-padding">
+				#@dragBox("widgetDrag" "widgetchar1" "220")
+                    <!-- content -->
+					#@Div("tab-content" "myTabContent")
+                        <!-- start s1 -->
+						#@tabInfos("active in" "s")
+                            <script type="text/javascript">
+                                var isIE = $.zui.browser.isIE();
+                                jQuery.fn.projectLine = function (setting) {
+                                    var lines = $(this);
+                                    if (isIE && $.zui.browser.ie < 9 && lines.length > 10) return;
+                                    lines.each(function () {
+                                        var e = $(this);
+                                        var options = $.extend({values: e.attr('values')}, e.data(), setting),
+                                                height = e.height() - 4,
+                                                values = [],
+                                                maxWidth = e.width() - 4;
+                                        var strValues = options.values.split(',');
+                                        for (var i in strValues) {
+                                            var v = parseFloat(strValues[i]);
+                                            if (v != NaN) values.push(v);
+                                        }
+                                        var width = Math.min(maxWidth, Math.max(10, values.length * maxWidth / 30));
+                                        var canvas = e.children('canvas');
+                                        if (!canvas.length) {
+                                            e.append('<canvas class="projectline-canvas"></canvas>');
+                                            canvas = e.children('canvas');
+                                            if (navigator.userAgent.indexOf("MSIE 8.0") > 0) G_vmlCanvasManager.initElement(canvas[0]);
+                                        }
+                                        canvas.attr('width', width).attr('height', height);
+                                        e.data('projectLineChart', new Chart(canvas[0].getContext("2d")).Line({
+                                            labels: values,
+                                            datasets: [{
+                                                fillColor: "rgba(0,0,255,0.25)",
+                                                strokeColor: "rgba(0,0,255,1)",
+                                                pointColor: "rgba(255,136,0,1)",
+                                                pointStrokeColor: "#fff",
+                                                data: values
+                                            }]
+                                        }, {animation: !isIE}));
+                                    });
+                                }
+                                $(function () {
+                                    $('.projectline').each(function(){
+										var v=$(this).attr("values");
+										v= v.replace(/[0\,\.]/ig,"");
+										if(v){
+											$(this).projectLine();
+										}else{
+											$(this).prop('outerHTML',"暂无数据")
+										}
+									})
+                                });
+                            </script>
+							<div style="margin:10px 10px">
+							<table class="table table-condensed sdpm-table">
+								#@thead()
+									<tr style="background:none">  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
+                                        <th style="width: 16%">项目名称</th>
+                                        <th style="width: 16%">项目代号</th>
+                                        <th style="width: 16%">结束日期</th>
+                                        <th style="width: 11%">项目状态</th>
+                                        <th style="width: 10%">总预计</th>
+                                        <th style="width: 11%">总消耗</th>
+                                        <th style="width: 16%">总剩余</th>
+                                        <th style="width: 10%">进度</th>
+									</tr>
+								#end
+							#foreach(p:myProjectList)
+								#@tr()
+									<td style="width: 15%"><a href="${TINY_CONTEXT_PATH+adminPath}/project/view?projectId=${p.projectId}">${p.projectName}</a></td>
+                            		<td style="width: 15%">${p.projectCode}</td>
+									<td style="width: 15%">
+										#if(p.projectEnd)
+											${formatdate(p.projectEnd,"yyyy-MM-dd")}
+										#end
+                                    </td>
+                    				<td style="min-width: 10%">
+										${getDict("projectStatus", p.projectStatus)}
+                                    </td>
+									<td style="width: 10%">${format("%.2f",p.estimate)}</td>
+            						<td style="width: 10%">${format("%.2f",p.consumed)}</td>
+       								<td style="width: 15%">
+                                        <div class="progress-bars text-l" style="width:110px">
+                                            format("%.2f",d)p.percent
+                                            <span class="sr-modern" style="width:${format(" %.2f%%",p.percent*100)}"></span>
+                                        </div>
+										<span style="left:115px; float:left;height: 0; position: relative;top: -14px">${format("%.2f%%",p.percent*100)}</span>
+                                    </td>
+    								<td style="width: 10%">
+                                        <p class='projectline text-left' values='${p.burnValue}' style="width:90px;height:30px;"></p>
+									</td>
+								#end
+							#end
+							</table>
+							</div>
+						#end
+					#end
+					<!-- end content -->
+				#end
+            <!-- end widgetDrag -->
+			</div>
+        <!-- end widget -->
+		#end
+	#end
+#end
+
+	#@simpleDiv("row")
+		#@simpleArticle("col-lg-12")
+        <!-- new widget -->
+			#@widgetDiv("padding-clear" "wid-id-1" {"data-widget-editbutton":"false","data-widget-fullscreenbutton":"true"})
+				#@headerBox(" icon-bar-chart" "产品统计")
+					#@navTab("pull-right")
+						#foreach(product : productList)
+							#break(productFor.index>7)
+							#set(active = productFor.index==1?"active":"")
+							#@liTab("s"+productFor.index "fa-clock-o" active)${product.productName}#end
+						#end
+					#end
+				#end
+
+            <!-- widget div-->
+            <div class="no-padding">
+				#@dragBox("widgetDrag" "widgetchar1" "220")
+                    <!-- content -->
+					#@Div("tab-content" "myTabContent")
+							<!-- start s1 -->
+						#foreach(product : productList)
+							#break(productFor.index>7)
+							#set(active = productFor.index==1?"active":"")
+							#@tabInfos(active+" in" "s"+productFor.index)
+								<table id="${product?.productId}" class="table table-bordered hide">
+									<caption>${product?.productName}</caption>
+										<thead>
+											<tr>
+												<th></th>
+												<th>数量</th>
+											</tr>
+										</thead>
+									<tbody>
+										#foreach(sum:productSumMap?.get(String.valueOf(product.productId)))
+											<tr>
+												<th>${productSumTitle.get(sum?.key)}</th>
+												<td>${sum?.value}</td>
+											</tr>
+										#end
+									</tbody>
+								</table>
+								#setColumnHighChart("#"+product?.productId {"min-width":"100%","height":"200px","padding":"18px 0 0"})
+							#end
+						#end
+
+					#end
+                    <!-- end content -->
+				#end
+                <!-- end widgetDrag -->
+            </div>
+            <!-- end widget -->
+			#end
+		#end
+	#end
+<!-- end row -->
+	#@simpleDiv("row")
+	##start
+		#@simpleArticle("col-lg-4")
+        <!-- start widget -->
+			#@widgetDiv("jarviswidget-color-teal" "wid-id-3" {"data-widget-editbutton":"false","data-widget-fullscreenbutton":"true"})
+				#@headerBox("txt-color-white fa-comments" "指派给我的任务")
+					#@toolbarA("toolbarMore" TINY_CONTEXT_PATH+adminPath+"/project/task/index" "fa-location-arrow")更多#end
+				#end
+
+				#@dragBox("widgetDrag" "infoent" "264")
+				##start
+					#@dynamicInfo()
+						#foreach(task : myTaskList)
+							#set(taskStatus = Integer.parseInt(task?.taskStatus))
+							#set(status = (taskStatus/3)>1?"label-danger":(taskStatus==1?"label-warning":"label-success"))
+							#set(info = (task?.taskAssignedDate?"于&nbsp;"+formatDate(task?.taskAssignedDate,"yyyy-MM-dd hh:mm:ss")+"被指派":""))
+							#@ticketBoxAdmin(status getDict("taskStatus",task.taskStatus) TINY_CONTEXT_PATH+adminPath+"/project/task/findTask?taskId="+task?.taskId "#"+task.taskId info)#if((taskStatus/3)>1)#faIcon("fa-warning text-danger")#end ${task.taskName}#end
+						#end
+					#end
+				##end
+				#end
+			#end
+        <!-- end widget -->
+		#end
+	##end
+	##start
+		#@simpleArticle("col-lg-4")
+        <!-- start widget -->
+			#@widgetDiv("jarviswidget-color-teal" "wid-id-4" {"data-widget-editbutton":"false"})
+				#@headerBox("fa-map-marker" "指派给我的bug")
+					#@toolbarA("toolbarMore" TINY_CONTEXT_PATH+adminPath+"/quality/bug" "fa-location-arrow")更多#end
+				#end
+
+				#@dragBox("widgetDrag" "infoContent1" "264")
+				##start
+					#@dynamicInfo()
+						#foreach(bug : myBugList)
+							#set(bugStatus = Integer.parseInt(bug?.bugStatus))
+							#set(status = bugStatus==1?"label-warning":(bugStatus==2?"label-success":"label-danger"))
+							#set(info = (bug?.bugAssignedDate?"于&nbsp;"+formatDate(bug?.bugAssignedDate,"yyyy-MM-dd hh:mm:ss")+"被指派":""))
+							#@ticketBoxAdmin(status getDict("bugStatus",bug.bugStatus) TINY_CONTEXT_PATH+adminPath+"/quality/bug/bugInfo?bugId="+bug?.bugId "#"+bug.bugId info)#if(bugStatus==3)#faIcon("fa-warning text-danger")#end ${bug.bugTitle}#end
+						#end
+					#end
+				##end
+				#end
+			#end
+		#end
+	##end
+	##start
+		#@simpleArticle("col-lg-4")
+        <!-- start widget -->
+			#@widgetDiv("jarviswidget-color-teal" "wid-id-5" {"data-widget-editbutton":"false"})
+				#@headerBox("fa-map-marker" "指派给我的测试")
+##					#@toolbarA("toolbarMore" "#" "fa-location-arrow")更多#end
+				#end
+
+				#@dragBox("widgetDrag" "infoConten2" "264")
+				##start
+					#@dynamicInfo()
+						#foreach(run : runList)
+							#set(result = run?.testRunLastRunResult?Integer.parseInt(run?.testRunLastRunResult):0)
+							#set(status = result==1?"label-success":(result==2?"label-danger":"label-warning"))
+							#set(info = result!=0?("由&nbsp;"+UserUtils.getUserById(run?.testRunLastRunner).orgUserRealName+"&nbsp;于"+(run?.testRunLastRunDate?formatDate(run?.testRunLastRunDate,"yyyy-MM-dd hh:mm:ss"):"")+"&nbsp;执行"):"")
+							#@ticketBoxAdmin(status getDict("caseResult",run?.testRunLastRunResult)+(result==0?"未执行":"") TINY_CONTEXT_PATH+adminPath+"/quality/version/taskToCase?status=tverallcase&testversionId="+run?.taskId "#"+run.caseId info)#if(result==2||result==0)#faIcon("fa-warning text-danger")#end ${run.caseTitle}#end
+						#end
+					#end
+				##end
+				#end
+			#end
+		#end
+	##end
+	#end
+<!-- end row -->
+#end
+

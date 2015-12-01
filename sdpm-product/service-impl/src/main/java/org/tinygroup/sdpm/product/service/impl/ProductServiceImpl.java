@@ -1,73 +1,129 @@
 package org.tinygroup.sdpm.product.service.impl;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
+import org.tinygroup.commons.tools.ArrayUtil;
 import org.tinygroup.sdpm.product.biz.inter.ProductManager;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
 import org.tinygroup.sdpm.product.service.ProductService;
+import org.tinygroup.sdpm.productLine.biz.inter.ProductLineManager;
 import org.tinygroup.tinysqldsl.Pager;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Component
 public class ProductServiceImpl implements ProductService {
-	
-	@Autowired
-	private ProductManager productManager;
-	
-	public Product addProduct(Product product) {
 
-		return productManager.add(product);
-	}
+    @Autowired
+    private ProductManager productManager;
+    @Autowired
+    private ProductLineManager productLineManager;
 
-	public int updateProduct(Product product) {
+    public Product addProduct(Product product) {
+        return productManager.add(product);
+    }
 
-		return productManager.update(product);
-	}
+    public int updateProduct(Product product) {
+        return productManager.update(product);
+    }
 
-	public int deleteProduct(Integer productId) {
+    public int deleteProduct(Integer productId) {
 
-		return productManager.delete(productId);
-	}
+        return productManager.delete(productId);
+    }
 
-	public Product findProduct(Integer productId) {
+    public Product findProduct(Integer productId) {
+        return productManager.find(productId);
+    }
 
-		return productManager.find(productId);
-	}
+    public List<Product> findProductList(Product product, String order, String ordertype) {
+        return productManager.findList(product, order, ordertype);
+    }
+
+    public Pager<Product> findProductPager(int page, int limit, Product product, String order, String orderType) {
+        return productManager.findPager(page, limit, product, order, orderType);
+    }
+
+    public int[] updateBatchProduct(List<Product> products) {
+        return productManager.updateBatch(products);
+    }
+
+    public List<Product> findProductListByIds(Integer... productId) {
+        if (ArrayUtil.isEmptyArray(productId)) {
+            return new ArrayList<Product>();
+        }
+        return productManager.findList(productId);
+    }
+
+    public List<Product> findProductList(Product product) {
+        return productManager.findList(product);
+    }
+
+    public List<ProductAndLine> getProductAndLine(Product product) {
+        return productManager.getProductAndLine(product);
+    }
+
+    public List<String> getProductNameByLineId(Integer productLineId) {
+
+        return productManager.getProductNameByLineId(productLineId);
+    }
+
+    public List<Product> getProductByUser(String userId, Integer delete, Integer productLineId) {
+        return productManager.getProductByUser(userId, delete, productLineId);
+    }
+
+    public List<Product> getProductByUserWithCount(String userId, Integer delete, boolean noRole) {
+        return productManager.getProductByUserWithCount(userId, delete, noRole);
+    }
+
+    public List<Product> getProductByUserAndProductLineWithCount(String userId, Integer productLineId, Integer delete) {
+        return productManager.getProductByUserAndProductLineWithCount(userId, productLineId, delete);
+    }
 
 
-	public List<Product> findProductList(Product product, String order,String ordertype) {
+    public Integer[] getTeamRoleProductLineIds(String userId, Integer delete) {
+        List<Integer> ids = productManager.getTeamRoleProductLineIds(userId, delete);
+        Integer[] Ids = new Integer[ids.size()];
+        return ids.toArray(Ids);
+    }
 
-		return productManager.findList(product, order, ordertype);
-	}
+    public Map<String, List<Product>> getUserProductsWithCountMap(String userId) {
+        Map<String, List<Product>> productMap = new HashMap<String, List<Product>>();
+        List<Product> products = productManager.getProductByUserWithCount(userId, 0, true);
+        for (Product product1 : products) {
+            if (productMap.containsKey(product1.getProductLineName())) {
+                productMap.get(product1.getProductLineName()).add(product1);
+            } else {
+                List<Product> ps = new ArrayList<Product>();
+                ps.add(product1);
+                productMap.put(product1.getProductLineName(), ps);
+            }
+        }
+        return productMap;
+    }
 
-	public Pager<Product> findProductPager(int page, int limit,
-			Product product, String order,String ordertype) {
-		
-		
-		return productManager.findPager(page, limit, product, order, ordertype);
-	}
+    public List<Product> productInCondition(String condition, Integer... ids) {
+        return productManager.productInCondition(condition, ids);
+    }
 
-	public int[] updateBatchProduct(List<Product> products) {
+    public Map<String, List<Product>> getUserProductsMap(String userId) {
+        Map<String, List<Product>> productMap = new HashMap<String, List<Product>>();
+        List<Product> products = productManager.getProductByUser(userId, 0, null);
+        for (Product product1 : products) {
+            if (productMap.containsKey(product1.getProductLineName())) {
+                productMap.get(product1.getProductLineName()).add(product1);
+            } else {
+                List<Product> ps = new ArrayList<Product>();
+                ps.add(product1);
+                productMap.put(product1.getProductLineName(), ps);
+            }
+        }
+        return productMap;
+    }
 
-		return productManager.updateBatch(products);
-	}
-
-	public List<Product> findProductList(Integer... productId) {
-
-		return productManager.findList(productId);
-	}
-
-	public List<Product> findProductList(Product product) {
-
-		return productManager.findList(product);
-	}
-
-	public List<ProductAndLine> getProductAndLine(Product product) {
-
-		return productManager.getProductAndLine(product);
-	}
 
 }

@@ -17,7 +17,7 @@
     ##body end
     #end
 #end
-#@tinyForm("closeForm" TINY_CONTEXT_PATH+adminPath+"/project/task/closesave" "post" {"class":"test"})
+#@tinyForm("closeForm" TINY_CONTEXT_PATH+adminPath+"/project/task/close" "post" {"class":"test"})
     #hiddenInput(hiddenInputName="taskId" hiddenInputValue=task?.taskId)
     #hiddenInput(hiddenInputName="taskProject" hiddenInputValue=task?.taskProject)
 <div style="width:70%;float:left" class="pageleftpart">
@@ -26,7 +26,7 @@
         #@elementItem()
             #@colLabel()备注&nbsp#end
             #@formControlDiv("col-8")
-                #@Teditor("content" "actionComment" {"initialFrameHeight":"150"})#end
+                #@Teditor("content" "content" {"initialFrameHeight":"150"})#end
             #end
             #@validateDiv("col-2")#end
         #end
@@ -38,7 +38,7 @@
 
             </div>
             <div class="col-1">
-                <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
+                <button style="float: left" type="submit" id="submit2" class="commitBtn">保存</button>
             </div>
             <div class="col-1">
                 #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")取消#end
@@ -50,8 +50,5 @@
 </div>
 #end
 <div style="width:30%;float:right">
-    #@div(divClass="infoContent")
-        <p class="titleName">历史记录</p>
-        #include("/project/recordlist.page")
-    #end
+    #history(adminPath+"/system/action/ajax/history?actionObjectType=task&actionObjectId="+task?.taskId)
 </div>

@@ -29,20 +29,29 @@ public class TeamServiceImpl implements TeamService {
         return teamManager.batchUpdate(list);
     }
 
-    public int save(ProjectTeam team) {
-        return 0;
-    }
 
-    public int delete(int id) {
-        return 0;
+    public Integer delete(int id) {
+        return teamManager.delete(id);
     }
 
     public List<ProjectTeam> findTeamByProjectId(Integer projectId) {
         return teamManager.findByProjectId(projectId);
     }
 
+    public List<ProjectTeam> findTeamByProductId(Integer productId) {
+        return teamManager.findByProductId(productId);
+    }
+
     public Pager<ProjectTeam> findPager(ProjectTeam team, Integer start, Integer limit, String order, String ordertype) {
         boolean asc = "asc".equals(ordertype) ? true : false;
         return teamManager.findPager(team, start, limit, order, asc);
+    }
+
+    public List<String> getMenuIdListByProjectAndUser(Integer projectId, String userId) {
+        return teamManager.getMenuIdListByProjectAndUser(projectId, userId);
+    }
+
+    public List<String> getMenuIdListByProductAndUser(Integer productId, String userId) {
+        return teamManager.getMenuIdListByProductAndUser(productId, userId);
     }
 }

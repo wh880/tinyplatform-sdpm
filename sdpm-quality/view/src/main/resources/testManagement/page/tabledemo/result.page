@@ -5,28 +5,31 @@
     #end
 #@div(divClass="infoContent")
     <p class="titleName">测试结果   共执行${testResults?.size()}次</p>
-    #for(result : testResults)
+    #foreach(result : testResults)
         #@foldMenu("" "Tinyfold3" "" "width:100%")
-            #@foldItem("#"+result?.testResultId+"   "+result?.testResultDate+" 由 "+result?.testResultLastRunner+"执行   "+result?.caseResult)
-                #@tableStriped()
-                    #@thead()
-                        #@tr()
-                            #@th()编号#end
-                            #@th()步骤#end
-                            #@th()预期 #end
-                            #@th()测试结果 #end
-                            #@th()实际情况#end
-                        #end
-                    #end
-                    #@tbody()
-                        #set(sResults = stepResults?.get(result?.testResultId))
-                        #for(caseStep:caseSteps)
+            #set(color = result?.testResultLastRunner==UserUtils.getUserId()?'c-red':'')
+            #@foldItem("#"+result?.testResultId+"   "+formatDate(result?.testResultDate,"yyyy-MM-dd HH:mm:ss")+" 由 "+"<span class='"+color+"'>"+(+result?.testResultLastRunner?UserUtils.getUserById(result?.testResultLastRunner)?.orgUserRealName:"")+"</span>"+"  执行   "+getDict("caseResult",result?.caseResult))
+                #if(caseSteps.get(String.valueOf(result?.testResultId)))
+                    #@tableStriped()
+                        #@thead()
                             #@tr()
-                                #@th()${caseStepFor.index}#end
-                                #@td()${caseStep?.caseStepDesc}#end
-                                #@td()${caseStep?.caseStepExpect}#end
-                                #@td()${sResults?.get(caseStepFor.index-1)?.result}#end
-                                #@td()${sResults?.get(caseStepFor.index-1)?.real}#end
+                                #@th()编号#end
+                                #@th()步骤#end
+                                #@th()预期 #end
+                                #@th()测试结果 #end
+                                #@th()实际情况#end
+                            #end
+                        #end
+                        #@tbody()
+                            #set(sResults = stepResults?.get(result?.testResultId))
+                            #foreach(caseStep:caseSteps.get(String.valueOf(result?.testResultId)))
+                                #@tr()
+                                    #@th()${caseStepFor.index}#end
+                                    #@td()${caseStep?.caseStepDesc}#end
+                                    #@td()${caseStep?.caseStepExpect}#end
+                                    #@td()${getDict("caseStepResult",sResults?.get(caseStepFor.index-1)?.result)}#end
+                                    #@td()${sResults?.get(caseStepFor.index-1)?.real}#end
+                                #end
                             #end
                         #end
                     #end

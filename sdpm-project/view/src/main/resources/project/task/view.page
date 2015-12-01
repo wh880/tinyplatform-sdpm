@@ -1,0 +1,95 @@
+#!set(activeTitle="任务信息",activeMenuId=currentPageId)
+#import("/org/tinygroup/form/components/form.component")
+#import("/org/tinygroup/button/components/button_common.component")
+#import("/org/tinygroup/button/components/button.component")
+#import("/org/tinygroup/table/components/table.component")
+
+#@div()
+    #@tabWithInit("tab_demo" "optionsBox")
+        #@div(divClass="dropdownBox")
+            #include("/project/dropdownMenu.page")
+        #end
+        #@tabHead()
+            #include("/project/protab.page")
+        #end
+        #@tabBodyCol("ptop-5")
+            #@div(divClass="operationbar")
+            <span class="f">ID:${task.taskNo}&nbsp${task.taskName}
+            </span>
+            <span class="r">
+                #foreach(m:menuManager.getScopeMenus("pro-task-op"))
+                    #if(m.id!="pro-task-close")
+                        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?taskId=${task.taskId}"
+                           title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
+                    #end
+                #end
+
+                #foreach(m:menuManager.getScopeMenus("pro-taskInfo2-op"))
+                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?taskId=${task.taskId}"
+                       title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+                #end
+                <a href="javascript :;" onclick="javascript:history.back(-1);" title="返回">#buttonIcon(iconClass=
+                    "icon-reply")</a>
+                #set(m1=menuManager.getMenu("pro-Info-close"))
+            </span>
+                #div(divClass="clearfix")
+            #end
+        #end
+    #end
+#end
+
+<div style="width:70%;float:left">
+    #@div(divClass="infoContent")
+        <p class="titleName">任务描述</p>
+        <div>
+            ${task.taskDesc}
+        </div>
+    #end
+    #@div(divClass="infoContent")
+        <p class="titleName">需求描述</p>
+
+        <div>
+            #if(task.storySpec)
+                ${task.storySpec}
+            #end
+
+        </div>
+    #end
+    #@div(divClass="infoContent")
+        <p class="titleName">附件</p>
+        <div>#uploadFileList(profileList)</div>
+    #end
+    #history(adminPath+"/system/action/ajax/history?actionObjectType=task&actionObjectId="+task?.taskId)
+    <center>
+        #foreach(m:menuManager.getScopeMenus("pro-task-op"))
+            #if(m.id!="pro-task-close")
+                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?taskId=${task.taskId}"
+                   title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
+            #end
+        #end
+        #foreach(m:menuManager.getScopeMenus("pro-taskInfo2-op"))
+            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?taskId=${task.taskId}"
+               title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+        #end
+        <a href="javascript :;" onclick="javascript:history.back(-1);" title="返回">#buttonIcon(iconClass=
+            "icon-reply")</a>
+    </center>
+</div>
+<div style="width:30%;float:right">
+    #TypeInfo("information", task.taskId)
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

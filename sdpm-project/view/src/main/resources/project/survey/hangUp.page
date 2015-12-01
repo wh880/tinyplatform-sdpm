@@ -1,0 +1,52 @@
+#@tinyForm("thisform"  TINY_CONTEXT_PATH+adminPath+"/project/hangUp" "post" {"class":""})
+    #hiddenInput(hiddenInputName="projectId" hiddenInputValue=project?.projectId)
+    #hiddenInput(hiddenInputName="projectName" hiddenInputValue=project?.projectName)
+    #@elementItem()
+        #@colLabel()备注：#end
+        #@formControlDiv("col-8")
+            #@Teditor("content" "content" {"initialFrameHeight":"150","initialFrameWidth":"550"})#end
+        #end
+        #@validateDiv("col-2")#end
+    #end
+    #@elementItem()
+    <div class="col-12">
+        <div class="col-5">
+        </div>
+        <div class="col-1">
+            <input style="float: left" type="submit" id="submit2" class="commitBtn" value="保存">
+        </div>
+        <div class="col-1">
+            <input style="float: left" type="button" id="cancel" class="commitBtn" value="取消">
+        </div>
+        <div class="col-5"></div>
+    </div>
+    #end
+#end
+
+<script>
+    $(function () {
+        $("form[name=thisform]").Validform({
+            beforeSubmit: function (curform) {
+                $(curform).ajaxSubmit({
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.status == "y" || data.status == "success") {
+                            layer.msg(data.info, 2, 1, function () {
+                                $(curform).closest(".modal").trigger("close");
+                            });
+                        } else {
+                            layer.msg(data.info, 1);
+                        }
+                    },
+                    error: function () {
+                        layer.msg(data.info);
+                    }
+                });
+                return false;
+            }
+        });
+        $("#cancel").click(function () {
+            $(this).closest(".modal").trigger("close");
+        });
+    });
+</script>

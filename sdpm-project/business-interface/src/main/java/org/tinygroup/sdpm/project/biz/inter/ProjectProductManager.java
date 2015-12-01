@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.project.biz.inter;
 
+import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
 
 import java.util.List;
@@ -9,8 +10,14 @@ import java.util.List;
  */
 public interface ProjectProductManager {
 
+    /**
+     * 查询项目关联的产品
+     *
+     * @return
+     */
+    List<Product> findLinkProductByProjectId(Integer projectId);
 
-    public void addLink(Integer[] array, Integer projectId);
+    void addLink(Integer[] productArray, Integer projectId);
 
     /**
      * 根据projectId查找关联产品
@@ -18,10 +25,11 @@ public interface ProjectProductManager {
      * @param projectProduct 主键
      * @return
      */
-    public List<ProjectProduct> findList(ProjectProduct projectProduct);
+    List<ProjectProduct> findList(ProjectProduct projectProduct);
 
     /**
      * 新增关联
+     *
      * @param projectProduct
      * @return
      */
@@ -30,16 +38,9 @@ public interface ProjectProductManager {
     /**
      * 更新用户
      *
-     * @param projectproduct 需要更新的实体类
+     * @param projectProduct 需要更新的实体类
      * @return
      */
-    Integer update(ProjectProduct projectproduct);
+    Integer update(ProjectProduct projectProduct);
 
-    /**
-     * 根据id进行删除
-     *
-     * @param id 主键
-     * @return
-     */
-    Integer delete(int id);
 }

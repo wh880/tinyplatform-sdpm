@@ -1,0 +1,40 @@
+#setTinyItemCount(versions?.totalCount)
+<tr class="">
+    #@td()${story?.no}#end
+    #@td()${story?.storyTitle}#end
+    #@td()${story?.storyVersion}#end
+    #@td()目前版本#end
+</tr>
+#foreach(version : versions?.records)
+<tr class="g-row">
+    #@td()<span class="glyphicon glyphicon-chevron-right">${story?.no}</span>#end
+    #@td()${version?.storyTitle}#end
+    #@td()${version?.storyVersion}#end
+    #@td()
+        #if(story?.storyVersion==version?.storyVersion)
+            回滚到此版本
+        #else
+            <a href="${TINY_CONTEXT_PATH+adminPath}/product/storySpec/versionRollback?storyId=${version?.storyId}&storyVersion=${version?.storyVersion}">回滚到此版本</a>
+        #end
+        #end
+</tr>
+<tr class="hide" ><td colspan="20">
+    <div class="infoContentRap hide">
+    #@div(divClass="infoContent")
+        <p class="titleName">需求描述</p>
+
+        <div>
+            ${version?.storySpec}
+        </div>
+    #end
+
+    #@div(divClass="infoContent")
+        <p class="titleName">验收标准</p>
+
+        <div>
+            ${version?.storyVerification}
+        </div>
+    #end
+    </div>
+</td></tr>
+#end

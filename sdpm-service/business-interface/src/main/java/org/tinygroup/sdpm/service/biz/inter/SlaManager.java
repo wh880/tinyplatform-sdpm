@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.service.biz.inter;
 
+import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceSla;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -65,8 +66,10 @@ public interface SlaManager {
      */
     List<ServiceSla> getListByClientId(Integer clientId);
 
-    Pager<ServiceSla> findPager(Integer start, Integer limit, ServiceSla serviceClient, Integer treeId, String order, String ordertype);
+    Pager<ServiceSla> findPager(Integer start, Integer limit, ServiceSla serviceClient, Integer treeId, String groupOperate, SearchInfos searchInfos, String order, String orderType);
+
     ServiceSla judgeClient(String clientName);
+
     int[] deleteBatch(List<ServiceSla> list);
 }
 

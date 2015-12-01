@@ -1,122 +1,110 @@
-
-#@tinyForm("thisform" "url" "post" {"class":""})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/statistic/quality/bugCreate" "post" {"class":""})
 				#@elementItem()
 					#@colLabel("col-1")Bug创建：#end
 					#@formControlDiv("col-11")
 						#@div(divClass="col-2")
-							#@tinyDateInput("birthday" "" "YYYY-MM-DD" {})#end
+							#@tinyDateInput("startDate" startDate?formatDate(startDate,"yyyy-MM-dd"):"" "yyyy-MM-dd" {})#end
 						#end
 						#@div(divClass="col-0")&nbsp&nbsp至&nbsp&nbsp#end
 						#@div(divClass="col-2")
-							#@tinyDateInput("birthday" "" "YYYY-MM-DD" {})#end
+							#@tinyDateInput("endDate" endDate?formatDate(endDate,"yyyy-MM-dd"):"" "yyyy-MM-dd" {})#end
 						#end
 						#@div(divClass="col-3")
 							#@colLabel("col-3")产品：#end
 							#@div(divClass="col-9")
 							#@Tselect2F()
-                    			#@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                        			<option value="CT">请选择产品</option>
-                        			<option value="DE">产品1</option>
-                        			<option value="FL">产品2</option>
-                        			<option value="GA">产品3</option>   
+                    			#@Tselect2Body("cProduct" cProduct?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                                <option value="">/</option>
+                                    #foreach(product : ProductUtils.getAllProductListByUser())
+                                        <option value="${product?.productId}">${product?.productName}</option>
+                                    #end
                     			#end               
-                    			#@Tselect2Fix()
-                    				<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/addProduct.page" class="r ">增加</a>
-	                    			<a href="${TINY_CONTEXT_PATH}/product/page/tabledemo/product-listall.page">全部</a>#end                			#end
+                    			#end
                 			#end
 						#end
 						#@div(divClass="col-3")
 							#@colLabel("col-3")项目：#end
 							#@div(divClass="col-9")
 							#@Tselect2F()
-                    			#@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                        			<option value="CT">请选择项目</option>
-                        			<option value="DE">项目1</option>
-                        			<option value="FL">项目2</option>
-                        			<option value="GA">项目3</option>   
-                    			#end               
-                    			#@Tselect2Fix()
-                    				<a href="${TINY_CONTEXT_PATH}/project/addProject.page" class="r ">增加</a>
-	                    			<a href="${TINY_CONTEXT_PATH}/project/allProject.page">全部</a>
+                    			#@Tselect2Body("cProject" cProject?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                                    <option value="">/</option>
+                                    #foreach(project : ProjectUtils.getUserProjectList())
+                        			<option value="${project?.projectId}">${project?.projectName}</option>
+                                    #end
                     			#end
                 			#end
                 			#end
 						#end
 						<div class="col-1">
-							<a href="${TINY_CONTEXT_PATH}/statistic/page/org.page">
-						<input style="float:right" type="button" class="commitBtn" value="保存" /></a>
+						<input style="float:right" type="submit" class="commitBtn" value="保存" />
 				</div>						
 					#end					
 				#end																				
 #end
 
 <script type="text/javascript">
-    $(".select2").select2();
+    $("select.select2").select2();
 </script>
 <div style="height: 10px;"></div>
 #@tableStriped("table-border")
     #@thead()
         #@tr("text-c")
             #@th()
-            产品名称
+            有谁创建
             #end
             #@th()
-            产品负责人
+            未解决
             #end
             #@th()
-            产品计划
+            设计如此
             #end
             #@th()
-            开始日期
+            重复Bug
             #end
             #@th()
-            结束日期
+            外部原因
             #end
             #@th()
-            草稿
+            已解决
             #end
             #@th()
-            激活
+            无法重现
             #end
             #@th()
-            已变更
+            延期处理
             #end
             #@th()
-            已关闭
+            不予解决
+            #end
+            #@th()
+            转为需求
+            #end
+            #@th()
+            有效率
+            #end
+            #@th()
+            总计
             #end
         #end
         #@tbody()
+            #foreach(b:bugStas)
+            #set(notSolved=(b?.bugNum-
+        (b?.designEd+b?.repeatBug+b?.externalCause+b?.solved+b?.notReproduce+b?.delayResolved+b?.notResolved+b?.toStory)))
             #@tr("text-c")
-            <td rowspan="2">测试产品</td>
-            <td rowspan="2">admin</td>
-            <td>计划</td>
-            <td>2015-08-25</td>
-            <td>2015-08-25</td>
-            <td>2</td>
-            <td>4</td>
-            <td>1</td>
-            <td>1</td>
+            <td >${b?.userId?UserUtils.getUserById(b?.userId)?.orgUserRealName:""}</td>
+            <td>${notSolved}</td>
+            <td >${b?.designEd}</td>
+            <td>${b?.repeatBug}</td>
+            <td>${b?.externalCause}</td>
+            <td>${b?.solved}</td>
+            <td>${b?.notReproduce}</td>
+            <td>${b?.delayResolved}</td>
+            <td>${b?.notResolved}</td>
+            <td>${b?.toStory}</td>
+            <td>${((b?.solved)/(b?.bugNum-notSolved))*100}%</td>
+            <td>${b?.bugNum}</td>
             #end
-            #@tr("text-c")
-            <td>计划2</td>
-            <td>2015-09-25</td>
-            <td>2015-09-25</td>
-            <td>2</td>
-            <td>4</td>
-            <td>1</td>
-            <td>1</td>
-            #end
-            #@tr("text-c")
-            <td rowspan="1">测试产品3</td>
-            <td rowspan="1">admin</td>
-            <td>计划</td>
-            <td>2015-08-25</td>
-            <td>2015-08-25</td>
-            <td>2</td>
-            <td>4</td>
-            <td>1</td>
-            <td>1</td>
-            #end
+        #end
         #end
     #end
 #end

@@ -1,7 +1,23 @@
-#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/quality/testCase/execute" "" {"class":"test"})
+#set(mark = "")
+#if(from)
+#set(mark = "?from="+from+"&runId="+runId)
+#end
+#@tinyForm("execution" TINY_CONTEXT_PATH+adminPath+"/quality/testCase/execute"+mark "" {"class":"test"})
 #hiddenInput(hiddenInputName="caseId" hiddenInputValue=testcase?.caseId)
+<script type="text/javascript">
+                $(function(){
+                    $("#pass").on("click",function(){
+                        $("input[name=resultType]").val("pass");
+                        $("form[name=execution]").submit();
+                    });
+                    $("#fault").on("click",function(){
+                        $("input[name=resultType]").val("fault");
+                        $("form[name=execution]").submit();
+                    });
+                })
+            </script>
     #@div(divClass="infoContent")
-   <p><b>前置条件&nbsp</b>${testcase?.casePrecondition}</p>
+   <p class="titleName"><b>前置条件&nbsp</b>(${testcase?.casePrecondition})</p>
   		
         #@tableStriped()
             #@thead()
@@ -14,7 +30,7 @@
                 #end
             #end
             #@tbody()
-                #for(caseStep:caseSteps)
+                #foreach(caseStep:stepList)
                     #@tr()
                         #@th()${caseStepFor.index}#end
                         #@td()${caseStep?.caseStepDesc}#end
@@ -22,9 +38,9 @@
                         #@td()
                         #@Tselect2F()
                             #@Tselect2Body("caseStepResultList["+(caseStepFor.index-1)+"].result" "1" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                            <option value="1">通过</option>
-                            <option value="0">失败</option>
-                            <option value="2">阻塞</option>
+                            #foreach(step : getDict("caseStepResult"))
+                            <option value="${step.value}">${step.text}</option>
+                            #end
                             #end
                         #end
                         #end
@@ -38,35 +54,43 @@
         #end
         <center>
 	        <button type="button" id="back" class="btn">上一个</button>
-			<button type="submit" id="" class="btn btn-success">通过</button>
-			<button type="submit" id="" class="btn btn-danger">失败</button>
+			#if(stepList?.size()<1)
+			<button type="button" id="pass" class="btn btn-success">通过</button>
+			<button type="button" id="fault" class="btn btn-danger">失败</button>
+			#hiddenInput(hiddenInputName="resultType")
+			#else
+			<button type="submit" id="" class="btn btn-success">执行</button>
+			#end
 			<button type="button" id="back" class="btn">下一个</button>
 		</center>
     #end
     #@div(divClass="infoContent")
     <p class="titleName">测试结果   共执行${testResults.size()}次</p>
-    #for(result : testResults)
+    #foreach(result : testResults)
         #@foldMenu("" "Tinyfold3" "" "width:100%")
-            #@foldItem("#"+result?.testResultId+"   "+result?.testResultDate+" 由 "+result?.testResultLastRunner+"执行   "+result?.caseResult)
-                #@tableStriped()
-                    #@thead()
-                    #@tr()
-                        #@th()编号#end
-                        #@th()步骤#end
-                        #@th()预期 #end
-                        #@th()测试结果 #end
-                        #@th()实际情况#end
-                    #end
-                    #end
-                    #@tbody()
-                        #set(sResults = stepResults?.get(result?.testResultId))
-                        #for(caseStep:caseSteps)
-                            #@tr()
-                                #@th()${caseStepFor.index}#end
-                                #@td()${caseStep?.caseStepDesc}#end
-                                #@td()${caseStep?.caseStepExpect}#end
-                                #@td()${sResults?.get(caseStepFor.index-1)?.result}#end
-                                #@td()${sResults?.get(caseStepFor.index-1)?.real}#end
+            #set(color = result?.testResultLastRunner==UserUtils.getUserId()?'c-red':'')
+            #@foldItem("#"+result?.testResultId+"   "+formatDate(result?.testResultDate,"yyyy-MM-dd HH:mm:ss")+" 由 "+"<span class='"+color+"'>"+(+result?.testResultLastRunner?UserUtils.getUserById(result?.testResultLastRunner)?.orgUserRealName:"")+"</span>"+"  执行   "+getDict("caseResult",result?.caseResult))
+                #if(caseSteps.get(String.valueOf(result?.testResultId)))
+                    #@tableStriped()
+                        #@thead()
+                        #@tr()
+                            #@th()编号#end
+                            #@th()步骤#end
+                            #@th()预期 #end
+                            #@th()测试结果 #end
+                            #@th()实际情况#end
+                        #end
+                        #end
+                        #@tbody()
+                            #set(sResults = stepResults?.get(String.valueOf(result?.testResultId)))
+                            #foreach(caseStep:caseSteps.get(String.valueOf(result?.testResultId)))
+                                #@tr()
+                                    #@th()${caseStepFor.index}#end
+                                    #@td()${caseStep?.caseStepDesc}#end
+                                    #@td()${caseStep?.caseStepExpect}#end
+                                    #@td()${getDict("caseStepResult",sResults?.size()>0?sResults?.get(caseStepFor.index-1)?.result:"-1")}#end
+                                    #@td()${sResults?.size()>0?sResults?.get(caseStepFor.index-1)?.real:""}#end
+                                #end
                             #end
                         #end
                     #end

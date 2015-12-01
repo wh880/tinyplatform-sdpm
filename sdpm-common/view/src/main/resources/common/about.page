@@ -1,0 +1,182 @@
+#include("/system/page/event/common.page")
+#@div()
+    #@tabWithInit("top_demo" "optionsBox")
+        #@tabHead()
+            #foreach(m in menuManager.getChildMenus("mysystem"))
+                #@aHeadCol(TINY_CONTEXT_PATH+adminPath+m.href m.id==linkName?"Current":"")${m.name}#end
+            #end
+            #@aHeadCol(TINY_CONTEXT_PATH+adminPath+"/system/about" "Current")程序员秀场#end
+        #end
+    <div class="row">
+##        <div class="col-xs-6 col-md-3 col-2 whoInfo-box">
+##            <div class="who-info">
+##                <div class="thumbnail pic-avatar">
+##                    <a target="_blank" href="http://my.oschina.net/u/2010061"><img
+##                            src="${TINY_CONTEXT_PATH}/img/about/hulk.png" alt="Hulk"></a>
+##                </div>
+##                <div class="caption">
+##                    <h4>
+##                        <a target="_blank" href="http://my.oschina.net/u/2010061">悠然</a>
+##                    </h4>
+##                    <h5 class="positionInfos">架构师</h5>
+##
+##                    <p>
+##                        设计一千种方式遇见你，不如设计一千个坑，等你。
+##                    </p>
+##                </div>
+##            </div>
+##        </div>
+        <div class="col-xs-6 col-md-3 col-2 whoInfo-box">
+            <div class="who-info">
+                <div class="thumbnail pic-avatar">
+                    <a target="_blank" href="http://my.oschina.net/u/2010061"><img
+                            src="${TINY_CONTEXT_PATH}/img/about/hulk.png" alt="Hulk"></a>
+                </div>
+                <div class="caption">
+                    <h4>
+                        <a target="_blank" href="http://my.oschina.net/u/2010061">Hulk</a>
+                    </h4>
+                    <h5 class="positionInfos">专业补坑</h5>
+
+                    <p>
+                        设计一千种方式遇见你，不如设计一千个坑，等你。
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-6 col-md-3 col-2 whoInfo-box">
+            <div class="who-info">
+                <div class="thumbnail pic-avatar">
+                    <img src="${TINY_CONTEXT_PATH}/img/about/wll.png" alt="玲珑">
+                </div>
+                <div class="caption">
+                    <h4>玲珑 </h4>
+                    <h5 class="positionInfos">专业填坑</h5>
+
+                    <p> 再好一点。 </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6 col-md-3 col-2 whoInfo-box">
+            <div class="who-info">
+                <div class="thumbnail pic-avatar">
+                    <a href="http://www.cnblogs.com/hot-ice/" target="_blank"><img
+                            src="${TINY_CONTEXT_PATH}/img/about/gzc.png" alt="高志超"></a>
+                </div>
+                <div class="caption">
+                    <a href="http://www.cnblogs.com/hot-ice/" target="_blank"><h4>高志超 </h4></a>
+                    <h5 class="positionInfos"></h5>
+                    <p> 代码改变生活。 </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6 col-md-3 col-2 whoInfo-box">
+            <div class="who-info">
+                <div class="thumbnail pic-avatar">
+                    <img src="${TINY_CONTEXT_PATH}/img/about/xdy.png" alt="徐丹洋">
+                </div>
+                <div class="caption">
+                    <h4>徐丹洋 </h4>
+                    <h5 class="positionInfos">Young</h5>
+                    <p>谁都不是生来强大，但只要你肯努力去做。</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6 col-md-3 col-2 whoInfo-box">
+            <div class="who-info">
+                <div class="thumbnail pic-avatar">
+                    <img src="${TINY_CONTEXT_PATH}/img/about/sly.png" alt="沈立宇">
+                </div>
+                <div class="caption">
+                    <h4>沈立宇 </h4>
+                    <h5 class="positionInfos"></h5>
+
+                    <p>借你的爱，让我成长。</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-6 col-md-3 col-2 whoInfo-box">
+            <div class="who-info">
+                <div class="thumbnail pic-avatar">
+                    <img src="${TINY_CONTEXT_PATH}/img/about/xb.png" alt="许斌">
+                </div>
+                <div class="caption">
+                    <h4>许斌 </h4>
+                    <h5 class="positionInfos">专业挖坑</h5>
+
+                    <p>做好最坏的打算，哪怕从头再写。</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-6 col-md-3 col-2 whoInfo-box">
+            <div class="who-info">
+                <div class="thumbnail pic-avatar">
+                    <img src="${TINY_CONTEXT_PATH}/img/about/wj.png" alt="汪杰">
+                </div>
+                <div class="caption">
+                    <h4>汪杰 </h4>
+                    <h5 class="positionInfos">协助挖坑</h5>
+
+                    <p>昨天你是谁不重要，因为都会越来越好。</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-6 col-md-3 col-2 whoInfo-box">
+            <div class="who-info">
+                <div class="thumbnail pic-avatar">
+                    <img src="${TINY_CONTEXT_PATH}/img/about/mck.png" alt="蒙初开">
+                </div>
+                <div class="caption">
+                    <h4>蒙初开 </h4>
+                    <h5 class="positionInfos"></h5>
+
+                    <p> 踩坑，爬出来，再掉下去，再爬出来，然后成长。 </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6 col-md-3 col-2 whoInfo-box">
+            <div class="who-info">
+                <div class="thumbnail pic-avatar">
+                    <img src="${TINY_CONTEXT_PATH}/img/about/mm.png" alt="明明">
+                </div>
+                <div class="caption">
+                    <h4>明明 </h4>
+                    <h5 class="positionInfos"></h5>
+
+                    <p>参入和欣赏了最优秀的产品，心中自然无码。</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6 col-md-3 col-2 whoInfo-box">
+            <div class="who-info">
+                <div class="thumbnail pic-avatar">
+                    <img src="${TINY_CONTEXT_PATH}/img/about/wy.png" alt="王莹">
+                </div>
+                <div class="caption">
+                    <h4>王莹 </h4>
+                    <h5 class="positionInfos"></h5>
+
+                    <p>最美好的时刻，不是那些风平浪静的日子，而是在逆境中奋进的过程。</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6 col-md-3 col-2 whoInfo-box">
+            <div class="who-info">
+                <div class="thumbnail pic-avatar">
+                    <img src="${TINY_CONTEXT_PATH}/img/about/cp.png" alt="陈朋">
+                </div>
+                <div class="caption">
+                    <h4>陈朋 </h4>
+                    <h5 class="positionInfos"></h5>
+
+                    <p> 多学多做多想多实践。 </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    #end
+#end

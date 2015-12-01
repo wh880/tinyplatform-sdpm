@@ -1,12 +1,12 @@
 /**
  * Copyright (c) 1997-2013, www.tinygroup.org (luo_guo@icloud.com).
- * <p/>
+ * <p>
  * Licensed under the GPL, Version 3.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p/>
+ * <p>
  * http://www.gnu.org/licenses/gpl.html
- * <p/>
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -21,23 +21,19 @@ import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.jdbctemplatedslsession.callback.*;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
-import org.tinygroup.sdpm.common.log.annotation.LogClass;
-import org.tinygroup.sdpm.common.log.annotation.LogMethod;
-import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
+import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.project.dao.ProjectProductDao;
+import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
 import org.tinygroup.tinysqldsl.*;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
-import org.tinygroup.tinysqldsl.select.Join;
 import org.tinygroup.tinysqldsl.select.OrderByElement;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.tinygroup.sdpm.product.dao.constant.ProductPlanTable.PRODUCT_PLANTABLE;
-import static org.tinygroup.sdpm.product.dao.constant.ProductStoryTable.PRODUCT_STORYTABLE;
 import static org.tinygroup.sdpm.product.dao.constant.ProductTable.PRODUCTTABLE;
 import static org.tinygroup.sdpm.project.dao.constant.ProjectProductTable.PROJECT_PRODUCTTABLE;
 import static org.tinygroup.tinysqldsl.Delete.delete;
@@ -45,8 +41,8 @@ import static org.tinygroup.tinysqldsl.Insert.insertInto;
 import static org.tinygroup.tinysqldsl.Select.selectFrom;
 import static org.tinygroup.tinysqldsl.Update.update;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
+import static org.tinygroup.tinysqldsl.formitem.SubSelect.subSelect;
 
-@LogClass("projectproduct")
 @Repository
 public class ProjectProductDaoImpl extends TinyDslDaoSupport implements ProjectProductDao {
 
@@ -55,17 +51,18 @@ public class ProjectProductDaoImpl extends TinyDslDaoSupport implements ProjectP
         return getDslSession().execute(delete);
     }
 
-    public Pager<ProductStory> findStory(Integer projectId, Integer start, Integer limit, final OrderBy... orderBies) {
-        Select select = MysqlSelect.select(PRODUCT_STORYTABLE.ALL, PRODUCT_PLANTABLE.PLAN_NAME, PRODUCTTABLE.PRODUCT_NAME)
-                .from(PROJECT_PRODUCTTABLE)
-                .join(Join.newJoin(PRODUCT_STORYTABLE, PRODUCT_STORYTABLE.PRODUCT_ID.eq(PROJECT_PRODUCTTABLE.PRODUCT_ID)))
-                .join(Join.leftJoin(PRODUCTTABLE, PRODUCTTABLE.PRODUCT_ID.eq(PRODUCT_STORYTABLE.PRODUCT_ID)))
-                .join(Join.leftJoin(PRODUCT_PLANTABLE, PRODUCT_PLANTABLE.PLAN_ID.eq(PRODUCT_STORYTABLE.PLAN_ID)))
+    public List<Product> findLinkProductByProjectId(Integer projectId) {
+        Select subSelect = Select.select(PROJECT_PRODUCTTABLE.PRODUCT_ID).from(PROJECT_PRODUCTTABLE)
                 .where(PROJECT_PRODUCTTABLE.PROJECT_ID.eq(projectId));
-        return getDslSession().fetchPage(select, start, limit, false, ProductStory.class);
+        Select select = selectFrom(PRODUCTTABLE)
+                .where(and(
+                        PRODUCTTABLE.PRODUCT_ID.inExpression(subSelect(subSelect)),
+                        PRODUCTTABLE.DELETED.eq(Project.DELETE_NO)
+                ));
+        return getDslSession().fetchList(select, Product.class);
     }
 
-    @LogMethod("add")
+
     public ProjectProduct add(ProjectProduct projectProduct) {
         return getDslTemplate().insertAndReturnKey(projectProduct, new InsertGenerateCallback<ProjectProduct>() {
             public Insert generate(ProjectProduct t) {
@@ -78,7 +75,6 @@ public class ProjectProductDaoImpl extends TinyDslDaoSupport implements ProjectP
         });
     }
 
-    @LogMethod("edit")
     public int edit(ProjectProduct projectProduct) {
         if (projectProduct == null || projectProduct.getId() == null) {
             return 0;
@@ -94,7 +90,6 @@ public class ProjectProductDaoImpl extends TinyDslDaoSupport implements ProjectP
         });
     }
 
-    @LogMethod("deleteByKey")
     public int deleteByKey(Integer pk) {
         if (pk == null) {
             return 0;
@@ -106,7 +101,6 @@ public class ProjectProductDaoImpl extends TinyDslDaoSupport implements ProjectP
         });
     }
 
-    @LogMethod("deleteByKeys")
     public int deleteByKeys(Integer... pks) {
         if (pks == null || pks.length == 0) {
             return 0;
@@ -178,7 +172,6 @@ public class ProjectProductDaoImpl extends TinyDslDaoSupport implements ProjectP
         return batchInsert(true, projectProducts);
     }
 
-    @LogMethod("batchUpdate")
     public int[] batchUpdate(List<ProjectProduct> projectProducts) {
         if (CollectionUtil.isEmpty(projectProducts)) {
             return new int[0];
@@ -194,7 +187,6 @@ public class ProjectProductDaoImpl extends TinyDslDaoSupport implements ProjectP
         });
     }
 
-    @LogMethod("batchDelete")
     public int[] batchDelete(List<ProjectProduct> projectProducts) {
         if (CollectionUtil.isEmpty(projectProducts)) {
             return new int[0];
@@ -210,11 +202,10 @@ public class ProjectProductDaoImpl extends TinyDslDaoSupport implements ProjectP
         });
     }
 
-    @LogMethod("addOrderByElements")
-    private Select addOrderByElements(Select select, OrderBy... orderBies) {
+    private Select addOrderByElements(Select select, OrderBy... orderByArgs) {
         List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
-        for (int i = 0; orderBies != null && i < orderBies.length; i++) {
-            OrderByElement tempElement = orderBies[i].getOrderByElement();
+        for (int i = 0; orderByArgs != null && i < orderByArgs.length; i++) {
+            OrderByElement tempElement = orderByArgs[i].getOrderByElement();
             if (tempElement != null) {
                 orderByElements.add(tempElement);
             }

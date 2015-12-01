@@ -1,6 +1,3 @@
-/**
- * Copyright &copy; 2012-2014 <a href="https://github.com/thinkgem/jeesite">JeeSite</a> All rights reserved.
- */
 package org.tinygroup.sdpm.util;
 
 import org.apache.shiro.SecurityUtils;
@@ -8,16 +5,20 @@ import org.apache.shiro.UnavailableSecurityManagerException;
 import org.apache.shiro.session.InvalidSessionException;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.menu.Menu;
 import org.tinygroup.sdpm.common.menu.MenuManager;
 import org.tinygroup.sdpm.common.menu.impl.MenuManagerImpl;
+import org.tinygroup.sdpm.org.dao.pojo.OrgRole;
 import org.tinygroup.sdpm.org.dao.pojo.OrgRoleMenu;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.impl.RoleServiceImpl;
 import org.tinygroup.sdpm.org.service.impl.UserServiceImpl;
 import org.tinygroup.sdpm.org.service.inter.RoleService;
 import org.tinygroup.sdpm.org.service.inter.UserService;
+import org.tinygroup.sdpm.project.service.impl.TeamServiceImpl;
+import org.tinygroup.sdpm.project.service.inter.TeamService;
 import org.tinygroup.sdpm.security.Principal;
 
 import java.util.ArrayList;
@@ -30,31 +31,39 @@ public class UserUtils {
     public static final String USER_CACHE = "userCache";
     public static final String USER_CACHE_ID_ = "id_";
     public static final String USER_CACHE_LOGIN_NAME_ = "ln";
-    public static final String USER_CACHE_LIST_BY_OFFICE_ID_ = "oid_";
     public static final String CACHE_ROLE_LIST = "roleList";
     public static final String CACHE_MENU_LIST = "menuList";
-    public static final String CACHE_AREA_LIST = "areaList";
-    public static final String CACHE_OFFICE_LIST = "officeList";
-    public static final String CACHE_OFFICE_ALL_LIST = "officeAllList";
+    public static final String CACHE_MENU_LIST_IN_PROJECT_ = "menuProject_";
+    public static final String CACHE_MENU_LIST_IN_PRODUCT_ = "menuProduct_";
+    @Autowired
     private static RoleService roleService = SpringContextHolder.getBean(RoleServiceImpl.class);
+    @Autowired
     private static UserService userService = SpringContextHolder.getBean(UserServiceImpl.class);
+    @Autowired
     private static MenuManager menuManager = SpringContextHolder.getBean(MenuManagerImpl.class);
-
+    @Autowired
+    private static TeamService teamService = SpringContextHolder.getBean(TeamServiceImpl.class);
 
     /**
      * 根据ID获取用户
+     * 当id为空或者为null返回新对象
      *
      * @param id
-     * @return 取不到返回null
+     * @return 取不到返回new OrgUser();
      */
-    public static OrgUser get(String id) {
+    public static OrgUser getUserById(String id) {
+        if (StringUtil.isBlank(id)) {
+            return new OrgUser();
+        }
         OrgUser user = (OrgUser) CacheUtils.get(USER_CACHE, USER_CACHE_ID_ + id);
         if (user == null) {
-            user = userService.findUser(id);
-            if (user == null) {
-                return null;
+            try {
+                user = userService.findUser(id);
+            } catch (Exception e) {
             }
-//			user.setRoleList(roleDao.findList(new Role(user)));
+            if (user == null) {
+                return new OrgUser();
+            }
             CacheUtils.put(USER_CACHE, USER_CACHE_ID_ + user.getOrgUserId(), user);
             CacheUtils.put(USER_CACHE, USER_CACHE_LOGIN_NAME_ + user.getOrgUserAccount(), user);
         }
@@ -74,7 +83,6 @@ public class UserUtils {
             if (user == null) {
                 return null;
             }
-//			user.setRoleList(roleDao.findList(new Role(user)));
             CacheUtils.put(USER_CACHE, USER_CACHE_ID_ + user.getOrgUserId(), user);
             CacheUtils.put(USER_CACHE, USER_CACHE_LOGIN_NAME_ + user.getOrgUserAccount(), user);
         }
@@ -87,9 +95,6 @@ public class UserUtils {
     public static void clearCache() {
         removeCache(CACHE_ROLE_LIST);
         removeCache(CACHE_MENU_LIST);
-        removeCache(CACHE_AREA_LIST);
-        removeCache(CACHE_OFFICE_LIST);
-        removeCache(CACHE_OFFICE_ALL_LIST);
         UserUtils.clearCache(getUser());
     }
 
@@ -101,9 +106,6 @@ public class UserUtils {
     public static void clearCache(OrgUser user) {
         CacheUtils.remove(USER_CACHE, USER_CACHE_ID_ + user.getOrgUserId());
         CacheUtils.remove(USER_CACHE, USER_CACHE_LOGIN_NAME_ + user.getOrgUserAccount());
-//		if (user.getOffice() != null && user.getOffice().getId() != null){
-//			CacheUtils.remove(USER_CACHE, USER_CACHE_LIST_BY_OFFICE_ID_ + user.getOffice().getId());
-//		}
     }
 
     /**
@@ -114,10 +116,8 @@ public class UserUtils {
     public static OrgUser getUser() {
         Principal principal = getPrincipal();
         if (principal != null) {
-            OrgUser user = get(principal.getId());
-            if (user != null) {
-                return user;
-            }
+            OrgUser user = getUserById(principal.getId());
+            return user;
         }
         // 如果没有登录，则返回实例化空的User对象。
         return new OrgUser();
@@ -149,27 +149,71 @@ public class UserUtils {
         return null;
     }
 
-//    /**
-//     * 获取当前用户角色列表
-//     *
-//     * @return
-//     */
-//    public static List<Role> getRoleList() {
-//        @SuppressWarnings("unchecked")
-//        List<Role> roleList = (List<Role>) getCache(CACHE_ROLE_LIST);
-//        if (roleList == null) {
-//            User user = getUser();
-//            if (user.isAdmin()) {
-//                roleList = roleDao.findAllList(new Role());
-//            } else {
-//                Role role = new Role();
-//                role.getSqlMap().put("dsf", BaseService.dataScopeFilter(user.getCurrentUser(), "o", "u"));
-//                roleList = roleDao.findList(role);
-//            }
-//            putCache(CACHE_ROLE_LIST, roleList);
-//        }
-//        return roleList;
-//    }
+    /**
+     * 获取所有角色列表
+     *
+     * @return
+     */
+    public static List<OrgRole> getAllRoleList() {
+        List<OrgRole> roleList = (List<OrgRole>) CacheUtils.get(USER_CACHE, CACHE_ROLE_LIST);
+        if (roleList == null) {
+            roleList = roleService.findRoleList(null);
+            CacheUtils.put(USER_CACHE, CACHE_ROLE_LIST, roleList);
+        }
+        return roleList;
+    }
+
+    /**
+     * 获取当前用户项目角色列表
+     *
+     * @return
+     */
+    public static List<String> getUserMenuByProject(Integer projectId) {
+        if (projectId == null || StringUtil.isBlank(getUserId())) {
+            return new ArrayList<String>();
+        }
+        List<String> menuList = (List<String>) getCache(CACHE_MENU_LIST_IN_PROJECT_ + projectId);
+        if (menuList == null) {
+            menuList = teamService.getMenuIdListByProjectAndUser(projectId, getUserId());
+            putCache(CACHE_MENU_LIST_IN_PROJECT_ + projectId, menuList);
+        }
+        return menuList;
+    }
+
+    /**
+     * 获取当前用户产品角色列表
+     *
+     * @return
+     */
+    public static List<String> getUserMenuByProduct(Integer productId) {
+        if (productId == null || StringUtil.isBlank(getUserId())) {
+            return new ArrayList<String>();
+        }
+        List<String> menuList = (List<String>) getCache(CACHE_MENU_LIST_IN_PRODUCT_ + productId);
+        if (menuList == null) {
+            menuList = teamService.getMenuIdListByProductAndUser(productId, getUserId());
+            putCache(CACHE_MENU_LIST_IN_PRODUCT_ + productId, menuList);
+        }
+        return menuList;
+    }
+
+    /**
+     * 获取当前用户角色列表
+     *
+     * @return
+     */
+    public static List<OrgRole> getUserRoleList() {
+        List<OrgRole> roleList = (List<OrgRole>) getCache(CACHE_ROLE_LIST);
+        if (roleList == null) {
+            Principal principal = getPrincipal();
+            if (principal == null) {
+                return null;
+            }
+            roleList = roleService.findRoleByUserId(principal.getId());
+            putCache(CACHE_ROLE_LIST, roleList);
+        }
+        return roleList;
+    }
 
     /**
      * 获取当前用户授权菜单

@@ -1,0 +1,167 @@
+
+       
+
+<script>
+	
+	$(document).ready(function(){
+	
+		$(".batchCloseFormsSubmit").on("click",function(){
+			$("form[name='batchCloseForm']").trigger("submit");
+		
+		});
+	
+		
+		$("#betchClose").on("mousedown",function(){
+			
+			
+			var href = $(this).attr("href");
+			if(href.indexOf('?')>0){
+				href = href.substring(0,href.indexOf('?'));
+			}
+			
+			var checklist=[];
+			$("input:checked").each(function(){
+				if("checkboxall"!=$(this).attr("id")){
+					checklist.push($(this).val());
+				}
+				
+			});	
+			if(checklist.length==0){
+				alert("请选择数据");
+			}
+			var data = ""
+			for(var i=0;i<checklist.length;i++){
+				if(i==0){
+					data = data + "?storyId=" + checklist[i];
+				}else{
+					data = data + "&storyId=" + checklist[i];
+				}
+			}
+			$(this).attr("href",href+data);
+		});
+		
+		
+	});
+	
+</script>
+<div id="caseGroup">
+
+            #@tinyTable(storyTableId) ##ID为空则系统自动生成 带入参数则取该参数为ID
+                #@div(divBaseClass="tinyheaderTools form-inline")
+                    #setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置
+               
+
+
+                    #foreach(m:menuManager.getScopeMenus("product-oper"))
+                        #if(m.id=="product-demand-operation")
+                            #@buttonGroup()
+
+                                #@dropdownItempatent("dropdownSm" "btn-primary" "操作" "#")
+
+                                    #@ulDropdownMenu(dropdownMenuClass="multi-level")
+                                        #@dropdownsLi("dropdown-submenu")
+                                            #@dropdownA("firstMenu"　"javascript:void(0);")指派给#end
+                                            #@dropdownsUl("dropdown-menu")
+                                            	#foreach(user:userList)
+                                            		#@dropdownItem("javascript:void(0);" "" "secondMenu" {"field":"storyAssignedTo","value":user?.orgUserId}) ${user?.orgUserRealName} #end
+                                            	#end
+                                            	
+                                            #end
+                                        #end
+
+                                        #@dropdownsLi("dropdown-submenu")
+                                            #@dropdownA("firstMenu"　"javascript:void(0);")阶段#end
+                                            #@dropdownsUl("dropdown-menu")
+                                            	#foreach(stage:getDict("storyStage"))
+                                            		#@dropdownItem("javascript:void(0);" "" "secondMenu" {"field":"storyStage","value":stage?.value}) ${stage?.text}#end
+                                            	#end
+
+                                            #end
+                                        #end
+
+                                        #@dropdownsLi("dropdown-submenu")
+                                            #@dropdownA("firstMenu"　"javascript:void(0);")计划#end
+                                            #@dropdownsUl("dropdown-menu")
+                                            	#@dropdownItem("javascript:void(0);" "" "secondMenu" {"field":"planId","value":""})空#end
+                                            	#foreach(plan:planList)
+                                            		#@dropdownItem("javascript:void(0);" "" "secondMenu" {"field":"planId","value":plan?.planId}) ${plan?.planName} #end
+                                            	#end
+                                               
+                                            #end
+                                        #end
+
+                                        #@dropdownsLi("dropdown-submenu")
+                                            #@dropdownA("firstMenu"　"javascript:void(0);")评审#end
+                                            #@dropdownsUl("dropdown-menu dropdown-show")
+                                            	#@dropdownItem("javascript:void(0);" "" "secondMenu" {"field":"storyStatus","value":getDict("storyStatus","")}) 确认通过 #end
+                                            	#@dropdownItem("javascript:void(0);" "" "secondMenu" {"field":"storyStatus","value":"no"}) 有待明确 #end
+                                               
+                                            #*		                		#@liDivider()<hr/>#end*#
+                                                #@dropdownsLi("dropdown-submenu")
+                                                    #@dropdownA("secondMenu"　"javascript:void(0);")拒绝#end
+                                                    #@dropdownsUl("dropdown-menu")
+                                                    #foreach(refese:getDict("storyRefese"))
+                                                    	#@dropdownItem("javascript:void(0);" "" "secondMenu" {"field":"storyStatus","value":refese?.value}) ${refese.text} #end
+                                                    #end
+                                                    	#@dropdownItem("javascript:void(0);" "" "secondMenu" {"field":"storyStatus","value":"no-1"}) 已完成 #end
+                                                    	#@dropdownItem("javascript:void(0);" "" "secondMenu" {"field":"storyStatus","value":"no-2"}) 延期 #end
+                                                    	#@dropdownItem("javascript:void(0);" "" "secondMenu" {"field":"storyStatus","value":"no-3"}) 不做 #end
+                                                    	#@dropdownItem("javascript:void(0);" "" "secondMenu" {"field":"storyStatus","value":"no-4"}) 已取消 #end
+                                                    	#@dropdownItem("javascript:void(0);" "" "secondMenu" {"field":"storyStatus","value":"no-5"}) 计划如此 #end
+                                                        
+                                                    #end
+                                                #end
+                                            #end
+                                        #end
+                                    #end
+                                #end
+                            #end
+                        #end
+                    #end
+
+
+
+                    #foreach(m:menuManager?.getScopeMenus("product-del"))
+                        #if(m?.id=="product-demand-del")
+                        #set(dae=[34,36])
+                            #@btnModal("#myModal" "关闭" "1000" "400" "btn radius btn-danger" adminPath+"/product/story/findByKeys" "betchClose")批量关闭#end
+                        #end
+                    #end
+                #end
+                #@tinyTableContent(TINY_CONTEXT_PATH +adminPath+"/product/story/search?"+tinyRequestQueryString) ##取数据地址 总数据
+                    #@thead()
+                        #@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
+                            #@tinyTh({"width":"6"})<input type="checkbox" value="" name="storyId" id="checkboxall">#end
+                            #@tinyTh({"class":"sorting sorting_desc","rel":"story_id"})ID#end
+                            #@tinyTh({"class":"sorting","rel":"story_pri"})P#end
+                            #@tinyTh({"class":"sorting","rel":"story_title"})需求名称#end
+                            #@tinyTh({"class":"sorting","rel":"plan_id"})计划#end
+                            #@tinyTh({"class":"sorting","rel":"story_source"})来源#end
+                            #@tinyTh({"class":"sorting","rel":"story_opened_by"})创建#end
+                            #@tinyTh({"class":"sorting","rel":"story_assigned_to"})指派#end
+                            #@tinyTh({"class":"sorting","rel":"story_estimate"})预计#end
+                            #@tinyTh({"class":"sorting","rel":"story_status"})状态#end
+                            #@tinyTh({"class":"sorting","rel":"story_stage"})阶段#end
+                            #@tinyTh({"class":"","rel":"sortname"})操作#end
+                        #end
+                    #end
+                #end
+            ##以下部分为对删除和修改的影响 因为存在不同的信息故放在外面自行更改 #dialog 配合修改使用
+                #@dialog("myModal")
+                    #@dialogHeader()对话框标题#end
+                    #@dialogBody()< p> 对话框内容…</p>#end
+                    #@dialogFooter()
+                        #@buttonEnsure("batchCloseFormsSubmit")确定#end
+                        #@buttonCancel()关闭#end
+                    #end
+                #end
+            <script type="text/javascript">
+                $(function () {
+                    $('#${tableId}').on('click', '.delBtn', function (e) {
+                        user_del(this, '1');
+                    });
+                })
+            </script>
+
+            #end
+</div>

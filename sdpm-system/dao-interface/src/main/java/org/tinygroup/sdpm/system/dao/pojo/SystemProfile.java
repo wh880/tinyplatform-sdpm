@@ -1,17 +1,17 @@
 /**
- *  Copyright (c) 1997-2013, www.tinygroup.org (luo_guo@icloud.com).
- *
- *  Licensed under the GPL, Version 3.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *       http://www.gnu.org/licenses/gpl.html
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
+ * Copyright (c) 1997-2013, www.tinygroup.org (luo_guo@icloud.com).
+ * <p>
+ * Licensed under the GPL, Version 3.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.gnu.org/licenses/gpl.html
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 package org.tinygroup.sdpm.system.dao.pojo;
@@ -19,179 +19,174 @@ package org.tinygroup.sdpm.system.dao.pojo;
 import java.io.Serializable;
 import java.util.Date;
 
-/** 
+/**
  * 附件表
- * 
  */
-public class SystemProfile implements Serializable{
+public class SystemProfile implements Serializable {
 
-	/** 
-	 * 附件ID
-	 * 
-	 */
-	private Integer fileId;
+    public static String DELETE_YES = "1";
+    public static String DELETE_NO = "0";
+    /**
+     * 附件ID
+     */
+    private Integer fileId;
+    /**
+     * 附件地址
+     */
+    private String filePathname;
+    /**
+     * 附件名
+     */
+    private String fileTitle;
+    /**
+     * 附件扩展名
+     */
+    private String fileExtension;
+    /**
+     * 附件大小
+     */
+    private Integer fileSize;
+    /**
+     * 附件文件类型
+     */
+    private String fileObjectType;
+    /**
+     * 附件对象ID
+     */
+    private Integer fileObjectId;
+    /**
+     * 由谁添加
+     */
+    private String fileAddedBy;
+    /**
+     * 附件添加日期
+     */
+    private Date fileAddedDate;
+    /**
+     * 下载次数
+     */
+    private Integer fileDownloads;
+    /**
+     * file_extra 无用
+     */
+    private String fileExtra;
+    /**
+     * 是否删除
+     */
+    private String fileDeleted;
 
-	/** 
-	 * 附件地址
-	 * 
-	 */
-	private String filePathname;
+    public SystemProfile() {
+        this.fileDeleted = DELETE_NO;
+    }
 
-	/** 
-	 * 附件名
-	 * 
-	 */
-	private String fileTitle;
+    public SystemProfile(String filePathname, String fileTitle, String fileExtension,
+                         Integer fileSize, String fileObjectType, Integer fileObjectId,
+                         String fileAddedBy, Date fileAddedDate) {
+        this.filePathname = filePathname;
+        this.fileTitle = fileTitle;
+        this.fileExtension = fileExtension;
+        this.fileSize = fileSize;
+        this.fileObjectType = fileObjectType;
+        this.fileObjectId = fileObjectId;
+        this.fileAddedBy = fileAddedBy;
+        this.fileAddedDate = fileAddedDate;
+        this.fileDeleted = DELETE_NO;
+    }
 
-	/** 
-	 * 附件扩展名
-	 * 
-	 */
-	private String fileExtension;
+    public Integer getFileId() {
+        return fileId;
+    }
 
-	/** 
-	 * 附件大小
-	 * 
-	 */
-	private Integer fileSize;
+    public void setFileId(Integer fileId) {
+        this.fileId = fileId;
+    }
 
-	/** 
-	 * 附件文件类型
-	 * 
-	 */
-	private String fileObjectType;
+    public String getFilePathname() {
+        return filePathname;
+    }
 
-	/** 
-	 * 附件对象ID
-	 * 
-	 */
-	private Integer fileObjectId;
+    public void setFilePathname(String filePathname) {
+        this.filePathname = filePathname;
+    }
 
-	/** 
-	 * 由谁添加
-	 * 
-	 */
-	private String fileAddedBy;
+    public String getFileTitle() {
+        return fileTitle;
+    }
 
-	/** 
-	 * 附件添加日期
-	 * 
-	 */
-	private Date fileAddedDate;
+    public void setFileTitle(String fileTitle) {
+        this.fileTitle = fileTitle;
+    }
 
-	/** 
-	 * 下载次数
-	 * 
-	 */
-	private Integer fileDownloads;
+    public String getFileExtension() {
+        return fileExtension;
+    }
 
-	/** 
-	 * file_extra
-	 * 
-	 */
-	private String fileExtra;
+    public void setFileExtension(String fileExtension) {
+        this.fileExtension = fileExtension;
+    }
 
-	/** 
-	 * 是否删除
-	 * 
-	 */
-	private String fileDeleted;
+    public Integer getFileSize() {
+        return fileSize;
+    }
 
+    public void setFileSize(Integer fileSize) {
+        this.fileSize = fileSize;
+    }
 
-	public void setFileId(Integer fileId){
-		this. fileId = fileId;
-	}
+    public String getFileObjectType() {
+        return fileObjectType;
+    }
 
-	public Integer getFileId(){
-		return fileId;
-	}
+    public void setFileObjectType(String fileObjectType) {
+        this.fileObjectType = fileObjectType;
+    }
 
-	public void setFilePathname(String filePathname){
-		this. filePathname = filePathname;
-	}
+    public Integer getFileObjectId() {
+        return fileObjectId;
+    }
 
-	public String getFilePathname(){
-		return filePathname;
-	}
+    public void setFileObjectId(Integer fileObjectId) {
+        this.fileObjectId = fileObjectId;
+    }
 
-	public void setFileTitle(String fileTitle){
-		this. fileTitle = fileTitle;
-	}
+    public String getFileAddedBy() {
+        return fileAddedBy;
+    }
 
-	public String getFileTitle(){
-		return fileTitle;
-	}
+    public void setFileAddedBy(String fileAddedBy) {
+        this.fileAddedBy = fileAddedBy;
+    }
 
-	public void setFileExtension(String fileExtension){
-		this. fileExtension = fileExtension;
-	}
+    public Date getFileAddedDate() {
+        return fileAddedDate;
+    }
 
-	public String getFileExtension(){
-		return fileExtension;
-	}
+    public void setFileAddedDate(Date fileAddedDate) {
+        this.fileAddedDate = fileAddedDate;
+    }
 
-	public void setFileSize(Integer fileSize){
-		this. fileSize = fileSize;
-	}
+    public Integer getFileDownloads() {
+        return fileDownloads;
+    }
 
-	public Integer getFileSize(){
-		return fileSize;
-	}
+    public void setFileDownloads(Integer fileDownloads) {
+        this.fileDownloads = fileDownloads;
+    }
 
-	public void setFileObjectType(String fileObjectType){
-		this. fileObjectType = fileObjectType;
-	}
+    public String getFileExtra() {
+        return fileExtra;
+    }
 
-	public String getFileObjectType(){
-		return fileObjectType;
-	}
+    public void setFileExtra(String fileExtra) {
+        this.fileExtra = fileExtra;
+    }
 
-	public void setFileObjectId(Integer fileObjectId){
-		this. fileObjectId = fileObjectId;
-	}
+    public String getFileDeleted() {
+        return fileDeleted;
+    }
 
-	public Integer getFileObjectId(){
-		return fileObjectId;
-	}
-
-	public void setFileAddedBy(String fileAddedBy){
-		this. fileAddedBy = fileAddedBy;
-	}
-
-	public String getFileAddedBy(){
-		return fileAddedBy;
-	}
-
-	public void setFileAddedDate(Date fileAddedDate){
-		this. fileAddedDate = fileAddedDate;
-	}
-
-	public Date getFileAddedDate(){
-		return fileAddedDate;
-	}
-
-	public void setFileDownloads(Integer fileDownloads){
-		this. fileDownloads = fileDownloads;
-	}
-
-	public Integer getFileDownloads(){
-		return fileDownloads;
-	}
-
-	public void setFileExtra(String fileExtra){
-		this. fileExtra = fileExtra;
-	}
-
-	public String getFileExtra(){
-		return fileExtra;
-	}
-
-	public void setFileDeleted(String fileDeleted){
-		this. fileDeleted = fileDeleted;
-	}
-
-	public String getFileDeleted(){
-		return fileDeleted;
-	}
+    public void setFileDeleted(String fileDeleted) {
+        this.fileDeleted = fileDeleted;
+    }
 
 }

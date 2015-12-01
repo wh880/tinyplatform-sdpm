@@ -29,7 +29,7 @@
 	#@elementItem()
 		#@colLabel()备注：#end
 		#@formControlDiv("col-8")
-			#@Teditor("contentId" "contentName" {"initialFrameHeight":"700"})最后一个MAP参数为Ueditor的初始化参数 会自动带入 #end
+			#@Teditor("contentId" "contentName" {"initialFrameHeight":"702"})最后一个MAP参数为Ueditor的初始化参数 会自动带入 #end
 		#end
 		#@validateDiv("col-2")#end
 	#end
@@ -39,14 +39,14 @@
 <script type="text/javascript">
 
 $(function(){
-  $("form[name=thisform").Validform({
+  $("form[name=thisform]").Validform({
 	tiptype:2,
 	beforeSubmit:function(curform){
 		$(curform).ajaxSubmit({
 			dataType:"json",
 			success:function(data){
 				if(data.status=="y"){
-					layer.msg(data.info,2, -1);
+					layer.msg(data.info,2, 1);
 				}else{
 					layer.msg(data.info);
 				}

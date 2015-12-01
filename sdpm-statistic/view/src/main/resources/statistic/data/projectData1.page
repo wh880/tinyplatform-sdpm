@@ -1,18 +1,28 @@
-## #import("/org/tinygroup/bootstrapDate/components/bootstrapDate.component")
-
-#@tinyForm("thisform" "url" "post" {"class":""})
-				#@elementItem()
-					#@colLabel("col-1")日期：#end
-					#@formControlDiv("col-8")
-						#@div(divClass="col-3")
-							#@tinyDateInput("birthday" "" "YYYY-MM-DD" {})#end
-						#end						
-						#@div(divClass="col-0")&nbsp&nbsp至&nbsp&nbsp#end
-						#@div(divClass="col-3")
-							#@tinyDateInput("birthday" "" "YYYY-MM-DD" {})#end
-						#end
-					#end					
-				#end																		
+<script>
+//    $(function(){
+//        $("input[name=endDate]").on("blur",function(){
+//            if($("input[name=startDate]").val()!=""){
+//                $("form[name=thisForm]").submit();
+//            }
+//        });
+//    })
+</script>
+#@tinyForm("thisForm" TINY_CONTEXT_PATH+adminPath+"/statistic/project/all" "post" {"class":""})
+    #@elementItem()
+        #@colLabel("l")日期：#end
+        #@formControlDiv("col-8")
+            #@div(divClass="col-3")
+                #@tinyDateInput("startDate" startDate?formatDate(startDate,"yyyy-MM-dd"):"" "yyyy-MM-dd" {})#end
+            #end
+            #@div(divClass="col-0")&nbsp&nbsp至&nbsp&nbsp#end
+            #@div(divClass="col-3")
+                #@tinyDateInput("endDate" endDate?formatDate(endDate,"yyyy-MM-dd"):"" "yyyy-MM-dd" {})#end
+            #end
+        <div class="col-1">
+            <input style="float:right" type="submit" class="commitBtn" value="保存" />
+        </div>
+        #end
+    #end
 #end
 
 <div style="height: 10px;"></div>
@@ -20,64 +30,34 @@
     #@thead()
         #@tr("text-c")
             #@th()
-            产品名称
+            编号
             #end
             #@th()
-            产品负责人
+            项目
             #end
             #@th()
-            产品计划
+            总预计
             #end
             #@th()
-            开始日期
+            总消耗
             #end
             #@th()
-            结束日期
+            偏差
             #end
             #@th()
-            草稿
-            #end
-            #@th()
-            激活
-            #end
-            #@th()
-            已变更
-            #end
-            #@th()
-            已关闭
+            偏差率
             #end
         #end
         #@tbody()
-            #@tr("text-c")
-            <td rowspan="2">测试产品</td>
-            <td rowspan="2">admin</td>
-            <td>计划</td>
-            <td>2015-08-25</td>
-            <td>2015-08-25</td>
-            <td>2</td>
-            <td>4</td>
-            <td>1</td>
-            <td>1</td>
-            #end
-            #@tr("text-c")
-            <td>计划2</td>
-            <td>2015-09-25</td>
-            <td>2015-09-25</td>
-            <td>2</td>
-            <td>4</td>
-            <td>1</td>
-            <td>1</td>
-            #end
-            #@tr("text-c")
-            <td rowspan="1">测试产品3</td>
-            <td rowspan="1">admin</td>
-            <td>计划</td>
-            <td>2015-08-25</td>
-            <td>2015-08-25</td>
-            <td>2</td>
-            <td>4</td>
-            <td>1</td>
-            <td>1</td>
+            #foreach(p:projects)
+                #@tr("text-c")
+                <td>${p?.projectId}</td>
+                <td>${p?.projectName}</td>
+                <td>${p?.estimate}</td>
+                <td>${p?.consumed}</td>
+                <td>${p?.estimate-p?.consumed}</td>
+                <td>${(p?.estimate-p?.consumed)==0?0:(((p?.estimate-p?.consumed)/p?.estimate)*100)}%</td>
+                #end
             #end
         #end
     #end

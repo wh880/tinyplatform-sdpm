@@ -7,6 +7,7 @@ import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.tinysqldsl.Pager;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -19,47 +20,74 @@ public class ProjectServiceImpl implements ProjectService {
     @Autowired
     private ProjectManager projectManager;
 
-   
-
     public List<Project> findList() {
         return projectManager.findList();
     }
 
-    public Project findByName(String projectName) {
-        return null;
-    }
-
-    public Project findById(int projectId) {
+    public Project findProjectById(Integer projectId) {
+        if (projectId == null) {
+            return null;
+        }
         return projectManager.find(projectId);
     }
 
     public List<Project> findByProjectList(List<Integer> list) {
-        return null;
+        return projectManager.findListByIds(list);
     }
 
-    public Pager<Project> findProjects(Integer start, Integer limit, String order, String ordertype) {
-
-        return projectManager.findPagerProjects(start, limit, order, "asc".equals(ordertype) ? true : false);
+    public List<Project> findProjects(Project project, Date startDate, Date endDate) {
+        return projectManager.findListProjects(project, startDate, endDate);
     }
 
-	public Project addProject(Project project) {
-        //设置其他初始值
+    public Integer batchDeleteProject(Integer[] projectIds) {
+        if (projectIds == null || projectIds.length == 0) {
+            return 0;
+        }
+        return projectManager.batchDelete(projectIds);
+    }
 
-		return projectManager.add(project);
-	}
+    public Pager<Project> findProjects(Integer start, Integer limit, String order, String orderType, Integer... ids) {
+        return projectManager.findPagerProjects(start, limit, order, "asc".equals(orderType) ? true : false, ids);
+    }
 
-	public List<Project> findProjectList(Project project, String order, String ordertype) {
-		
-		return projectManager.findList(project, order, ordertype);
-	}
+    public List<Project> findListByTeamUserId(String userId, String acl) {
+        return projectManager.findListByTeamUserId(userId, acl);
+    }
 
-	public Pager<Project> findProjectPager(int page, int pagesize, Project project, String order, String ordertype) {
-		
-		return projectManager.findPager(page, pagesize, project, order, ordertype);
-	}
+    public List<Project> findListByRelatedUser(String userId) {
+        Project project = new Project();
+        project.setProjectOpenedBy(userId);
+        project.setProjectPo(userId);
+        project.setProjectPm(userId);
+        project.setProjectQd(userId);
+        project.setProjectRd(userId);
+        return projectManager.findListByRelatedUser(project);
+    }
+
+    public Project addProject(Project project) {
+        project.setProjectStatus(project.WAIT);
+        project.setProjectDeleted(project.DELETE_NO);
+        return projectManager.add(project);
+    }
+
+    public List<Project> findProjectList(Project project, String order, String orderType) {
+        return projectManager.findList(project, order, orderType);
+    }
+
+    public Pager<Project> findProjectPager(int page, int pageSize, Project project, String order, String orderType) {
+        return projectManager.findPager(page, pageSize, project, order, orderType);
+    }
+
     public Integer updateProject(Project project) {
         return projectManager.update(project);
     }
 
+    public List<Project> getProjectByStoryId(Integer storyId) {
+        return projectManager.getProjectByStoryId(storyId);
+    }
+
+    public List<Project> projectInCondition(String condition, Integer... ids) {
+        return projectManager.projectInCondition(condition,ids);
+    }
 
 }

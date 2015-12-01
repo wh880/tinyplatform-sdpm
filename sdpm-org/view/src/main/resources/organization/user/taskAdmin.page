@@ -18,7 +18,7 @@
                         #@navSelect2("user" "user")
                             #@navSelect2Nav()
                                 #if(userList)
-                                    #for(user:userList)
+                                    #foreach(user:userList)
                                     #if(user?.orgUserId == id)
                                         ${user?.orgUserRealName}
                                     #end
@@ -32,11 +32,21 @@
                             #@navSelect2Data()
                             <option value=""></option>
                             <optgroup label="用户">
-                                #for(user:userList)
+                                #foreach(user:userList)
                                 <option value="${user?.orgUserId}">${user?.orgUserRealName}</option>
                             #end
                         </optgroup>
 
+                        #end
+                        #@navSelect2Fix()
+                            #set(m=menuManager.getMenu("organizationAddUser"))
+                            #if(m)
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
+                            #end
+                            #set(m=menuManager.getMenu("organizationUser"))
+                            #if(m)
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
+                            #end
                         #end
                     #end
                     #hiddenInput("userIdHidden","orgUserId","","")
@@ -52,7 +62,7 @@
                 #end
 
             #end
-                <span style="padding-top: 5px;float: left">
+        <span style="float: left">
                     &nbsp;&gt;
                     #foreach(m:menuManager.getScopeMenus("org-user-detail"))
                         #if(m.id=="org-user-taskAdmin")
@@ -90,7 +100,6 @@
     #@tinyTableContent(TINY_CONTEXT_PATH+adminPath+"/org/user/task/search?"+tinyRequestQueryString) ##取数据地址 总数据
         #@thead()
             #@tr()###th  class 为sorting 表票可排序 为sorting_desc 为当前倒序
-
                 #@tinyTh({"class":"","rel":"task_id"})ID#end
                 #@tinyTh({"class":"","rel":"task_pri"})P#end
                 #@tinyTh({"class":"","rel":"task_project"})所属项目#end
@@ -99,8 +108,7 @@
                 #@tinyTh({"class":"","rel":"task_consumed"})消耗时间#end
                 #@tinyTh({"class":"","rel":"task_left"})剩余时间#end
                 #@tinyTh({"class":"","rel":"taskDeadLine"})截止#end
-                #@tinyTh({"class":"","rel":"task_statu","style":"color:#f00"})状态#end
-
+                #@tinyTh({"class":"","rel":"task_statu"})状态#end
             #end
         #end
     #end

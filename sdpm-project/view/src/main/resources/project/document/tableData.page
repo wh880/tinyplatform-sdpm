@@ -2,30 +2,36 @@
 <input type="hidden" name="records" value="${num}"/>
 #end
 
-
-
 #set(records=docPager.getTotalCount(),temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
 #if (pagesize>records-pagesize*(page-1))
     #set(pagesize=records-(page-1)*pagesize)
 #end
 #setTinyItemCount(records)
-#for(d:docPager.getRecords())
+#foreach(d:docPager.getRecords())
 #@tr()
     #@td()<input type="checkbox" value="${d?.docId}" name="idCheck">#end
-    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/document/doc/viewInfo?docId=${d?.docId}">${d?.docId}</a>#end
+    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/document/doc/view?docid=${d?.docId}">${d?.docId}</a>#end
     #@td()${d?.docModule}#end
-    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/document/doc/viewInfo?docId=${d?.docId}"></a>${d?.docTitle}#end
-    #@td()${d?.docAddedBy}#end
-    #@td()${d?.docAddedDate}#end
-    #@td()
+    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/document/doc/view?docid=${d?.docId}">${d?.docTitle}</a>#end
+    #@td("nowrap")${d?.docAddedBy==null?"":UserUtils.getUserById(d?.docAddedBy)?.orgUserRealName}#end
+    #@td("nowrap")${formatDate(d?.docAddedDate, "yyyy-MM-dd")}#end
+    #@td("nowrap")
         #foreach(m:menuManager.getScopeMenus("pro-document-op"))
             #if(m.id == "pro-document-delete")
                 #@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m.href d?.docId)#buttonIcon(iconClass=m.icon)#end
             #else
-            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?docId=${d?.docId}"
+            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?docId=${d?.docId}" class="docJump" value="${d?.docLibId}"
                title="编辑">#buttonIcon(iconClass=m.icon)</a>
             #end
         #end
     #end
 #end
 #end
+<script>
+    $(function(){
+        $(".docJump").on("click",function(){
+            var libId = $(this).attr("value");
+            $.cookie("documentLibId",libId,{path:"/"});
+        });
+    })
+</script>

@@ -1,8 +1,5 @@
 #import("/org/tinygroup/button/components/button_smart.component")
 #!set(activeTitle="项目管理",activeMenuId=currentPageId)
-
-###@delItemsdpm("/sdpm-web/project/task/index.pagelet" 5 "/sdpm-web/project/task/index.pagelet")delete#end
-
 #set(name="task")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
@@ -25,21 +22,33 @@
     <div class='clearfix'>
         <div class='actions r'>
             <div class='input-group l w-100px'>
+                #if(!interval)
+                    #set(interval=3)
+                #end
                 <select name='interval' id='interval' class='form-control'>
-                    <option value='1'>间隔1天</option>
-                    <option value='1'>间隔2天</option>
-                    <option value='1' selected='selected'>间隔3天</option>
-                    <option value='1'>间隔4天</option>
-                    <option value='1'>间隔5天</option>
-                    <option value='1'>间隔6天</option>
-                    <option value='1'>间隔7天</option>
-                    <option value='1'>间隔8天</option>
+                    <option value='1' ${interval
+                    ==1?"selected":""}>间隔1天</option>
+                    <option value='2' ${interval
+                    ==2?"selected":""}>间隔2天</option>
+                    <option value='3' ${interval
+                    ==3?"selected":""}>间隔3天</option>
+                    <option value='4' ${interval
+                    ==4?"selected":""}>间隔4天</option>
+                    <option value='5' ${interval
+                    ==5?"selected":""}>间隔5天</option>
+                    <option value='6' ${interval
+                    ==6?"selected":""}>间隔6天</option>
+                    <option value='7' ${interval
+                    ==7?"selected":""}>间隔7天</option>
+                    <option value='8' ${interval
+                    ==8?"selected":""}>间隔8天</option>
                 </select>
             </div>
             <div class='input-group l w-100px'>
-                <span class='input-infobtn'><a href='#' target='' class='btn'>显示周末</a></span>
-                <span class='input-group-btn'><a href='#' target='hiddenwin' title='更新燃尽图' class='btn btn-primary'
-                                                 id='computeBurn'>更新</a></span>
+            ##                <span class='input-infobtn'><a href='#' target='' class='btn'>显示周末</a></span>
+                <span class='input-group-btn'>
+                    <a target='hiddenwin' title='更新燃尽图' class='btn btn-primary' id='updateBurn'>更新</a>
+                </span>
             </div>
         </div>
     </div>
@@ -50,46 +59,60 @@
     </div>
 </div>
 <script>
+    $(function () {
+        $("#updateBurn").click(function () {
+            $.ajax({
+                url: "${TINY_CONTEXT_PATH+adminPath}/project/burn/update",
+                type: "POST",
+                success: function (data) {
+                    if (data.status == "y" || data.status == "success") {
+                        layer.msg(data.info, 2, 1);
+                    }
+                },
+                error: function (data) {
+                    layer.msg(data.info);
+                }
+            });
+            return false;
+        });
+
+
+    });
+</script>
+<script>
     function initBurnChar() {
         var data =
         {
-            labels: [${days}],
+            labels: [${burn?.dayValues}],
             datasets: [
                 {
                     label: "基准线",
                     color: "#CCC",
                     fillColor: "rgba(0,0,0,0)",
                     showTooltips: false,
-                    data: [${average}]
+                    data: [${burn?.averageValues}]
                 },
                 {
                     label: "剩余",
                     color: "#0033CC",
-                    data: [${left}]
+                    data:[${burn?.leftValues}]
                 }]
         };
-
         var burnChart = $("#burnChart").lineChart(data, {animation: !($.zui.browser && $.zui.browser.ie === 8)});
     }
 </script>
 <script>
-
-    /**
-     * Compute the end date for project.
-     *
-     * @param  int
-     * @access public
-     * @return void
-     */
-
     /* Auto compute the work days. */
     $(function () {
         initBurnChar();
-
         $('#burnTab').addClass('active');
-
         $('#interval').change(function () {
-            location.href = createLink('project', 'burn', 'projectID=' + projectID + '&type=' + type + '&interval=' + $(this).val());
+            var projectID = ${projectId};
+            $("#tinypagecontent").load('${TINY_CONTEXT_PATH+adminPath}/project/burn/init.pagelet', {
+                projectID: projectID,
+                choose: 6,
+                interval: $(this).val(),
+            })
         });
     })
 

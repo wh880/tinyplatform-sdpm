@@ -11,6 +11,8 @@ import org.tinygroup.sdpm.project.dao.impl.FieldUtil;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.tinysqldsl.Pager;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -22,31 +24,40 @@ public class ProjectManagerImpl implements ProjectManager {
     @Autowired
     private ProjectDao projectDao;
 
-    public Project find(int projectId) {
-        return projectDao.getByKey(projectId);
-    }
-
     public List<Project> findList() {
         Project project = new Project();
+        project.setProjectDeleted(Project.DELETE_NO);
         return projectDao.query(project);
     }
 
-    public Pager<Project> findPagerProjects(Integer start, Integer limit, String sortName, boolean asc) {
-        Project project = new Project();
-        Pager<Project> projectPager = null;
-        if (StringUtil.isBlank(sortName)) {
-            projectPager = projectDao.queryPager(start, limit, project);
-        } else {
-            OrderBy orderBy = new OrderBy(sortName, asc);
-            projectPager = projectDao.queryPager(start, limit, project, orderBy);
-        }
+    public List<Project> findListByTeamUserId(String userId, String acl) {
+        return projectDao.findListByTeamUserId(userId, acl);
+    }
 
-        for (Project p : projectPager.getRecords()) {
-            p.setPercent(projectDao.getTime(p).getPercent());
+    public List<Project> findListByRelatedUser(Project project) {
+        return projectDao.findListByRelatedUser(project);
+    }
+
+
+    public List<Project> findListProjects(Project project, Date startDate, Date endDate) {
+        return projectDao.findListWithStatistics(project, startDate, endDate);
+    }
+
+    public Pager<Project> findPagerProjects(Integer start, Integer limit, String sortName, boolean asc, Integer... ids) {
+        if (ids == null) return new Pager<Project>(0, 0, new ArrayList<Project>());
+        if (StringUtil.isBlank(sortName)) {
+            return projectDao.findPageWithStatistics(start, limit, new Project(), ids);
+        } else {
+            OrderBy orderBy;
+            if ("project_left".equals(sortName)) {
+                orderBy = new OrderBy("estimate", asc);
+            } else if ("project_consume".equals(sortName)) {
+                orderBy = new OrderBy("consumed", asc);
+            } else {
+                orderBy = new OrderBy(sortName, asc);
+            }
+            return projectDao.findPageWithStatistics(start, limit, new Project(), ids, orderBy);
         }
-        return projectPager;
-        //用于重现错误
-        //return projectDao.tquerytAll(start, limit, new Project());
     }
 
     public Project add(Project project) {
@@ -64,22 +75,55 @@ public class ProjectManagerImpl implements ProjectManager {
         return projectDao.edit(project);
     }
 
-	public Project find(Integer projectId) {
-		
-		return projectDao.getByKey(projectId);
-	}
+    public Integer batchDelete(Integer[] projectIds) {
+        ArrayList<Project> list = new ArrayList<Project>();
+        for (Integer projectId : projectIds) {
+            Project project = new Project();
+            project.setProjectId(projectId);
+            project.setProjectDeleted(Project.DELETE_YES);
+            list.add(project);
+        }
+        int[] effective = projectDao.batchUpdate(list);
+        if (effective == null) {
+            return 0;
+        }
+        return effective.length;
+    }
 
-	public List<Project> findList(Project project, String order, String ordertype) {
+    public List<Project> findListByIds(List<Integer> ids) {
+        if (ids.isEmpty()) {
+            return null;
+        } else {
+            return projectDao.findByIds(ids.toArray(new Integer[0]));
+        }
+    }
+
+    public Project find(Integer projectId) {
+        try {
+            return projectDao.getByKey(projectId);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public List<Project> findList(Project project, String order, String orderType) {
         if (order != null) {
-            return projectDao.query(project, new OrderBy(FieldUtil.stringFormat(order), !("desc".equals(ordertype)) ? true : false));
+            return projectDao.query(project, new OrderBy(FieldUtil.stringFormat(order), !("desc".equals(orderType)) ? true : false));
         } else {
             return projectDao.query(project);
         }
 
-	}
+    }
 
-	public Pager<Project> findPager(int start, int limit, Project project, String order, String ordertype) {
-		
-		return projectDao.queryPager((start-1)*limit, limit, project, new OrderBy(FieldUtil.stringFormat(order), !("desc".equals(ordertype))?true:false));
-	}
+    public Pager<Project> findPager(int start, int limit, Project project, String order, String orderType) {
+        return projectDao.queryPager((start - 1) * limit, limit, project, new OrderBy(FieldUtil.stringFormat(order), !("desc".equals(orderType)) ? true : false));
+    }
+
+    public List<Project> getProjectByStoryId(Integer storyId) {
+        return projectDao.getProjectByStoryId(storyId);
+    }
+
+    public List<Project> projectInCondition(String condition, Integer... ids) {
+        return projectDao.projectInCondition(condition,ids);
+    }
 }

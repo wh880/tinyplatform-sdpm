@@ -1,0 +1,46 @@
+#macro history(link)
+<script type="text/javascript">
+<!--
+function tLoadContent(link, contain, className) {
+	var $b=$(contain);
+	 $.ajax({
+		  type: "get",
+		  url: link,
+		  dataType: "html",
+		  cache: !0,
+		  beforeSend: function() {
+				$b.html('<h1 class="ajax-loading-animation"><i class="fa fa-cog fa-spin"></i> 加载...</h1>'),
+				$b.animate({
+					 scrollTop: 0
+				},
+				"fast")
+		  },
+		  success: function(a) {
+				$b.css({
+					 opacity: "1.0"
+				}).html(a).delay(50).animate({
+					 opacity: "1.0"
+				},
+				300)
+		  },
+		  error: function(a) {
+		        $(className).hide();
+		        $b.html("");
+		  },
+		  async: !0
+	 })
+}
+</script>
+#historyDiv(link)
+#end
+
+#macro historyDiv(contentUrl)
+	#set(historyId=fmt("hid%d",rand()))
+    #@div(divClass="infoContent")
+    <p class="titleName">历史记录</p>
+    <div id="${historyId}"></div>
+    #end
+<script type="text/javascript">
+    tLoadContent("${TINY_CONTEXT_PATH+contentUrl}", "#${historyId}", ".histories")
+</script>
+#end

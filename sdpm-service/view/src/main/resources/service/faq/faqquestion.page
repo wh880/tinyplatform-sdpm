@@ -1,21 +1,16 @@
 #@OlTopList()
 
     #foreach(l:pager.records)
-    #*#@normalLiItemsconment(1 "../faq/questionAnswer.page" l.faqQuestion "")*#
-        #@normalLiItemsconment(1 "../faq/questionAnswer?id="+l.faqId l.faqQuestion "")
-
-
+        #@normalLiItemsconment(pager.limit*(pager.currentPage-1)+lFor.index "../faq/questionAnswer?id="+l.faqId l.faqQuestion liClass="")
         #*faqmenu问题后面的编辑和删除*#
             #set(m1=menuManager.getMenu("faq-edit"))
             #if(m1)
-            #*<a href="${TINY_CONTEXT_PATH+adminPath}${m1.href}?id=${var}">#buttonIcon(iconClass="icon-pencil")${m1.name}</a>*#
             <a href="${TINY_CONTEXT_PATH+adminPath}${m1.href}?id=${l.faqId}">#buttonIcon(iconClass=
-                "icon-pencil")${m1.name}</a>
+                "icon-pencil")编辑</a>
             #end
             #set(m2=menuManager.getMenu("faq-del"))
             #if(m2)
-            #*#@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m2.href l.faqId m2.href {"class":m2.icon})${m2.name}#end*#
-                #@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m2.href l.faqId "../faq/list"{"class":m2.icon})${m2.name}#end
+                #@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m2.href l.faqId "../faq/list"{"class":m2.icon})删除#end
             #end
             #@dialog("myModal")
                 #@dialogHeader()对话框标题#end
@@ -27,6 +22,4 @@
             #end
         #end
     #end
-#####最后一行为问题前面的颜色   #@normalLiItemsconment(2 "../page/questiondb.page" "项目里面的版本和测试的版本有什么区别？" "green")
-
 #end

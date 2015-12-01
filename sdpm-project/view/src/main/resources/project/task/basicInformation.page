@@ -3,19 +3,17 @@
     #@div(divClass="infoContent")
         <p class="titleName">基本信息</p>
         #@table()
-            #@thead()
-            #end
             #@tbody()
                 #@tr()
-                    #@th()项目名称#end
+                    #@thW("100")项目名称#end
                     #@td()${project?.projectName}#end
                 #end
                 #@tr()
-                    #@td()所属模块#end
-                    #@td()#end
+                    #@thW("100")所属模块#end
+                    #@td()${(modulPath==null || modulPath == "")?"/":modulPath}#end
                 #end
                 #@tr()
-                    #@td()相关需求#end
+                    #@thW("100")相关需求#end
                     #@td()
                         #if(storyTitle)
                             ${storyTitle}
@@ -23,25 +21,25 @@
                     #end
                 #end
                 #@tr()
-                    #@td()指派给#end
-                    #@td()${task?.taskAssignedTo}#end
+                    #@thW("100")指派给#end
+                    #@td()${task?.taskAssignedTo==null?"":UserUtils.getUserById(task?.taskAssignedTo)?.orgUserRealName}#end
                 #end
                 #@tr()
-                    #@td()任务类型#end
-                    #@td()${task?.taskType}#end
+                    #@thW("100")任务类型#end
+                    #@td()${getDict("taskType",task?.taskType)}#end
                 #end
                 #@tr()
-                    #@td()任务状态#end
-                    #@td()${showStatuMap.get(task?.taskType)}#end
+                    #@thW("100")任务状态#end
+                    #@td()${getDict("taskStatus", task?.taskStatus)}#end
                 #end
                 #@tr()
-                    #@td()优先级#end
+                    #@thW("100")优先级#end
                     #@td()${task?.taskPri}#end
                 #end
-                #@tr()
-                    #@td()抄送人#end
-                    #@td()${task?.taskMailTo}#end
-                #end
+            ##                #@tr()
+            ##                    #@td()抄送人#end
+            ##                    #@td()${task?.taskMailTo}#end
+            ##                #end
             #end
         #end
     #end
@@ -52,28 +50,28 @@
             #end
             #@tbody()
                 #@tr()
-                    #@td()预计开始#end
-                    #@td()${task?.taskEstStared}#end
+                    #@thW("100")预计开始#end
+                    #@td()${formatDate(task?.taskEstStared,"yyyy-MM-dd")}#end
                 #end
                 #@tr()
-                    #@td()实际开始#end
-                    #@td()${task?.taskRealStarted}#end
+                    #@thW("100")实际开始#end
+                    #@td()${formatDate(task?.taskRealStarted,"yyyy-MM-dd")}#end
                 #end
                 #@tr()
-                    #@td()截止日期#end
-                    #@td()${task?.taskDeadLine}#end
+                    #@thW("100")截止日期#end
+                    #@td()${formatDate(task?.taskDeadLine,"yyyy-MM-dd")}#end
                 #end
                 #@tr()
-                    #@td()最初预计#end
-                    #@td()${task?.taskEstimate}#end
+                    #@thW("100")最初预计#end
+                    #@td()${task?.taskEstimate} 小时#end
                 #end
                 #@tr()
-                    #@td()总消耗#end
-                    #@td()${task?.taskConsumed}#end
+                    #@thW("100")总消耗#end
+                    #@td()${task?.taskConsumed}小时#end
                 #end
                 #@tr()
-                    #@td()预计剩余#end
-                    #@td()${task?.taskLeft}#end
+                    #@thW("100")预计剩余#end
+                    #@td()${task?.taskLeft}小时#end
                 #end
             #end
         #end
@@ -81,35 +79,52 @@
     #@div(divClass="infoContent")
         <p class="titleName">任务的一生</p>
         #@table()
-            #@thead()
-            #end
             #@tbody()
                 #@tr()
-                    #@td()由谁创建#end
-                    #@td()${task?.taskLeft} 在 ${task?.taskOpenedDate}#end
+                    #@thW("70")由谁创建#end
+                    #@td()
+                    #if(task.taskOpenBy)
+                        ${UserUtils.getUserById(task.taskOpenBy).orgUserRealName} 于 ${formatDate(task.taskOpenedDate,"yyyy-MM-dd HH:mm:ss")}
+                    #end
                 #end
                 #@tr()
-                    #@td()由谁完成 #end
-                    #@td()${task?.taskFinishedBy} 在 ${task?.taskFinishedDate}#end
+                    #@thW("70")由谁完成 #end
+                    #@td()
+                        #if(task.taskFinishedBy)
+                            ${UserUtils.getUserById(task.taskFinishedBy).orgUserRealName} 于 ${formatDate(task.taskFinishedDate,"yyyy-MM-dd HH:mm:ss")}
+                        #end
+                    #end
                 #end
                 #@tr()
-                    #@td()由谁取消#end
-                    #@td()${task?.taskCanceledBy} 在 ${task?.taskCanceledDate}#end
+                    #@thW("70")由谁取消#end
+                    #@td()
+                        #if(task.taskCanceledBy)
+                            ${UserUtils.getUserById(task.taskCanceledBy).orgUserRealName} 于 ${formatDate(task.taskCanceledDate,"yyyy-MM-dd HH:mm:ss")}
+                        #end
+                    #end
                 #end
                 #@tr()
-                    #@td()由谁关闭#end
-                    #@td()${task?.taskClosedBy} 在 ${task?.taskCloseDate}#end
+                    #@thW("70")由谁关闭#end
+                    #@td()
+                        #if(task.taskClosedBy)
+                            ${UserUtils.getUserById(task.taskClosedBy).orgUserRealName} 于 ${formatDate(task.taskCloseDate,"yyyy-MM-dd HH:mm:ss")}
+                        #end
+                    #end
                 #end
+            ##                #@tr()
+            ##                    #@td()关闭原因#end
+            ##                    #@td()${task?.taskClosedReason}#end
+            ##                #end
                 #@tr()
-                    #@td()关闭原因#end
-                    #@td()${task?.taskClosedReason}#end
-                #end
-                #@tr()
-                    #@td()最后编辑#end
-                    #@td()${task?.taskLastEditedBy} 在 ${task?.taskLastEditedDate}#end
+                    #@thW("70")最后编辑#end
+                    #@td()
+                        #if(task.taskLastEditedBy)
+                            ${UserUtils.getUserById(task.taskLastEditedBy).orgUserRealName} 于 ${formatDate(task.taskLastEditedDate,"yyyy-MM-dd HH:mm:ss")}
+                        #end
+                    #end
                 #end
             #end
         #end
     #end
-
+#end
 </div>

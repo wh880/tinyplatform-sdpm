@@ -8,13 +8,14 @@ import java.util.List;
 /**
  * Created by Administrator on 2015-09-18.
  */
-public interface FaqManager { /**
- * 根据主键id查找faq
- *
- * @param id 主键
- * @return
- */
-ServiceFaq find(Integer id);
+public interface FaqManager {
+    /**
+     * 根据主键id查找faq
+     *
+     * @param id 主键
+     * @return
+     */
+    ServiceFaq find(Integer id);
 
     /**
      * 根据条件查询List
@@ -57,4 +58,12 @@ ServiceFaq find(Integer id);
     Integer delete(Integer id);
 
     Pager<ServiceFaq> findUserListByDeptId(Integer start, Integer limit, Integer deptId);
+
+    /**
+     * 搜索Faq
+     *
+     * @param id 主键
+     * @return
+     */
+    Pager<ServiceFaq> search(Integer start, Integer limit, ServiceFaq faq, String faqQuestion);
 }

@@ -1,36 +1,48 @@
 
-
-#set(records=pagerProduct.totalCount,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
-#if (pagesize>records-pagesize*(page-1))
-#set(pagesize=records-(page-1)*pagesize)
-#end
-#setTinyItemCount(pagerProduct.totalCount)
-#for(product:pagerProduct.records)
-#@tr()
+###setTinyItemCount(pagerProduct?.totalCount)
+#foreach(pro : productMap)
+<tr class="show-group" data-tr="data-g-${line?.productLineId}">
+	<td  colspan="13"><span class="glyphicon glyphicon-chevron-down">${pro?.key}</span></td>
+</tr>
+#foreach(product:pro?.value)
+<tr class="data-g-${line?.productLineId}">
 	#@td()<input type="checkbox" value="1" name="product">#end
-	#@td()<a href="${TINY_CONTEXT_PATH +adminPath}/product/page/project/overview.page">${product.productId}</a>#end
-	#@td()<a href="${TINY_CONTEXT_PATH +adminPath}/product/page/project/overview.page">${product.productName}</a>#end
-	#@td()1#end
-	#@td()0#end
-	#@td()0#end
-	#@td()1#end
-	#@td()3#end
-	#@td()5#end
-	#@td()8#end
-	#@td()0#end
-	#@td()1#end
+	#@td()<a class="jump" value="${product?.productLineId}" id="${product?.productId}" href="${TINY_CONTEXT_PATH +adminPath}/product/find/overview?productId=${product?.productId}">${product
+        ?.productId}</a>#end
+	#@td()<a class="jump" href="${TINY_CONTEXT_PATH +adminPath}/product/find/overview?productId=${product?.productId}">${product
+        ?.productName}</a>#end
+	#@td()${product?.activeSum}#end
+	#@td()${product?.changeSum}#end
+	#@td()${product?.draftSum}#end
+	#@td()${product?.closeSum}#end
+	#@td()${product?.planCount}#end
+	#@td()${product?.releaseCount}#end
+	#@td()${product?.bugCount}#end
+	#@td()${product?.resolveSum}#end
+	#@td()${product?.assignSum}#end
 	#@td()
 		#foreach(m:menuManager.getScopeMenus("allproduct-op"))
-		#set(url=eval(m.href))
+		#set(url=eval(m?.href))
 			#if(m.map.type=="close")
-				#iconOperations("#myModal" m.icon m.name "865" "500" url "ml-5")&nbsp;
-				#elseif(m.map.type=="editor")
-                <a href="${TINY_CONTEXT_PATH +adminPath}${eval(m.href)}"
-                   title="${m.name}">#buttonIcon(iconClass=m.icon)</a>&nbsp;
+				#iconOperations("#myModal" m?.icon m?.name "865" "500" adminPath+url "ml-5")&nbsp;
+			#elseif(m.map.type=="editor")
+			<a class="jump" href="${TINY_CONTEXT_PATH +adminPath}${eval(url)}"
+			   title="${m?.name}">#buttonIcon(iconClass=m?.icon)</a>&nbsp;
 			#end
 		#end
 	#end
+</tr>
 #end
 #end
+<script>
+	$(function(){
+		$(".jump").on("click",function(){
+			var lineId = $(this).closest("tr").find("a:first").attr("value");
+			var id = $(this).closest("tr").find("a:first").attr("id");
+			$.cookie("cookieProductLineId",lineId,{path:"/"});
+            $.cookie("cookieProductId",id,{path:"/"});
+		});
 
+	})
+</script>
 

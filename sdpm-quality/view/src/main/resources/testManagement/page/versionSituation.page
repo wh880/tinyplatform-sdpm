@@ -17,30 +17,55 @@
 		##operationbar
 		#@div(divClass="operationbar")
 			<span class="f active_btn">
-					我是项目名称哦
+					${testTask?.testtaskTitle}
 			</span>
 			<span class="r">
 				<div style="text-align:center;margin:auto">
-				#@aModal("#noteModal" "日志" "800" "400" "" "/testManagement/page/addLog.pagelet" "ml-5")
-				#buttonIcon(iconClass="icon-time")日志#end
-#*				#@iconOperations("#LogModal" "icon-time" "新增日志" "800" "400" "/testManagement/page/addLog.pagelet" "ml-5")&nbsp日志#end*#
-				###@iconOperations("#beginModal" "icon-play" "项目名称>开始" "900" "400" "/testManagement/page/versionBegin.pagelet" "ml-5")&nbsp开始#end
-				<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/versionEnd.page">
-					#buttonIcon(iconClass="icon-off")关闭</a>
-				<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/cases.page">#buttonIcon(iconClass="icon-dashboard")用例</a>
-				<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/versionLink.page">#buttonIcon(iconClass="icon-link	")关联用例</a>
-				<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/tabledemo/editionversion.page" title="编辑版本">#buttonIcon(iconClass="icon-pencil")</a>
-				#@delItemsdpm("/sdpm-web/testManagement/page/cases.page" 3 "/sdpm-web/testManagement/page/cases.page")#buttonIcon(iconClass="icon-remove")#end&nbsp 
-#*				#@iconOperations("#deleteModal" "icon-remove" "删除版本" "250" "60" "/testManagement/page/tabledemo/delete.pagelet" "ml-5")&nbsp#end
-					#@dialog("deleteModal")
-						#@dialogHeader()对话框标题#end
-						#@dialogBody()<p>对话框内容…</p>#end
-						#@dialogFooter()
-							#@buttonEnsure()确定#end
-					  		#@buttonCancel()关闭#end
+					#foreach(m:menuManager.getScopeMenus("testverinfo-tab"))
+						#if(m.id=="tverclose")
+							#@aModal("#closeModal" m.name "800" "600" "" adminPath+m.href+"?testversionId="+testTask?.testversionId "ml-5")
+								#buttonIcon(iconClass=m.icon)${m.name}#end&nbsp;&nbsp;
+						##							<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?testversionId=${testTask?.testversionId}">#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp;&nbsp;
+						#elseif(m.id=="tvercase")
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?testversionId=${testTask?.testversionId}&status=tverallcase&currentPageId=5">
+								#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp;&nbsp;
+						#elseif(m.id=="tversionLink")
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?testversionId=${testTask?.testversionId}&currentPageId=5">
+								#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp;&nbsp;
+						#else
+							#if(m.id=="tversionedit")
+                                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?testversionId=${testTask?.testversionId}&currentPageId=5"
+                                   title="${m.name}">
+									#buttonIcon(iconClass=m.icon)</a>&nbsp;&nbsp;
+							#elseif(m.id=="tverdelete")
+                                <a class="versionDelete" href="javascript:void(0);" title="${m.name}">
+									#buttonIcon(iconClass=m.icon)</a>&nbsp;&nbsp;
+                                <script type="text/javascript">
+                                    $(function () {
+                                        var check = $(".versionDelete");
+                                        check.on("click", function () {
+                                            layer.confirm("是否确认删除?", function () {
+                                                $.ajax({
+                                                    type: "get",
+                                                    url: "${TINY_CONTEXT_PATH+adminPath+m?.href+'?testversionId ='+testTask?.testversionId}",
+                                                    dataType: "json",
+                                                    success: function (data) {
+                                                        if (data.status == "y") {
+                                                            window.location.href = "${TINY_CONTEXT_PATH+adminPath}/quality/version?status=tvernotest&currentPageId=5";
+                                                        }
+                                                    }
+                                                });
+                                                return false;
+                                            });
+                                        });
+                                    })
+
+                                </script>
+							#end
 						#end
-					#end*#
-				<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/version.page" title="返回">#buttonIcon(iconClass="icon-reply")</a>
+					#end
+                    <a href="javascript :;" onClick="javascript :history.back(-1);" title="返回">#buttonIcon(iconClass=
+						"icon-reply")</a>
 			</span>
 		#end
 		##operationbar end
@@ -50,46 +75,71 @@
 		#@div(divClass="infoContent")
 	        <p class="titleName">版本描述</p>
 	       	<div>
-	       		456789
+	       		${testTask?.testtaskDesc}
 	       	</div>
 		#end
 		#@div(divClass="infoContent")
 	        <p class="titleName">测试总结</p>
 	       	<div>
-	       		456789
+	       		${testTask?.testtaskReport}
 	       	</div>
 		#end
-		#@div(divClass="infoContent")
-	        <p class="titleName">历史记录</p>
-	       	#include("/testManagement/page/historyRecord.page")
-		#end
+		#history(adminPath+"/system/action/ajax/history?actionObjectType=testtask&actionObjectId="+testTask?.testversionId)
 		<div style="text-align:center;margin:auto">
-				#@aModal("#noteModal" "日志" "800" "400" "" "/testManagement/page/addLog.pagelet" "ml-5")
-				#buttonIcon(iconClass="icon-time")日志#end&nbsp;&nbsp;
-				<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/versionEnd.page">
-					#buttonIcon(iconClass="icon-off")关闭</a>&nbsp&nbsp;
-				<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/cases.page">#buttonIcon(iconClass="icon-dashboard")用例</a>&nbsp&nbsp;
-				<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/versionLink.page">#buttonIcon(iconClass="icon-link	")关联用例</a>&nbsp&nbsp;			
-				<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/tabledemo/editionversion.page" class="margin-left" title="编辑版本">#buttonIcon(iconClass="icon-pencil")</a>&nbsp;&nbsp
-				#@delItemsdpm("/sdpm-web/testManagement/page/cases.page" 3 "/sdpm-web/testManagement/page/cases.page")#buttonIcon(iconClass="icon-remove")#end&nbsp &nbsp; 
-#*				#@iconOperations("#deleteModal" "icon-remove" "删除版本" "250" "60" "/testManagement/page/tabledemo/delete.pagelet" "ml-5")&nbsp#end
-					#@dialog("deleteModal")
-						#@dialogHeader()对话框标题#end
-						#@dialogBody()<p>对话框内容…</p>#end
-						#@dialogFooter()
-							#@buttonEnsure()确定#end
-					  		#@buttonCancel()关闭#end
-						#end
-					#end*#
-				<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/version.page" class="margin-left" title="返回">#buttonIcon(iconClass="icon-reply")</a>
+
+			#foreach(m:menuManager.getScopeMenus("testverinfo-tab"))
+
+				#if(m.id=="tverclose")
+					#@aModal("#closeModal" m.name "800" "600" "" adminPath+m.href+"?testversionId="+testTask?.testversionId "ml-5")
+						#buttonIcon(iconClass=m.icon)${m.name}#end&nbsp;&nbsp;
+				##							<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?testversionId=${testTask?.testversionId}">#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp;&nbsp;
+				#elseif(m.id=="tvercase")
+                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?testversionId=${testTask?.testversionId}&status=tverallcase&currentPageId=5">
+						#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp;&nbsp;
+				#elseif(m.id=="tversionLink")
+                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?testversionId=${testTask?.testversionId}&currentPageId=5">
+						#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp;&nbsp;
+				#else
+					#if(m.id=="tversionedit")
+                        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?testversionId=${testTask?.testversionId}&currentPageId=5" title="${m.name}">
+							#buttonIcon(iconClass=m.icon)</a>&nbsp;&nbsp;
+					#elseif(m.id=="tverdelete")
+                        <a class="versionDelete" href="javascript:void(0);" title="${m.name}">
+							#buttonIcon(iconClass=m.icon)</a>&nbsp;&nbsp;
+                        <script type="text/javascript">
+                            $(function () {
+                                var check = $(".versionDelete");
+                                check.on("click", function () {
+                                    layer.confirm("是否确认删除?", function () {
+                                        $.ajax({
+                                            type: "get",
+                                            url: "${TINY_CONTEXT_PATH+adminPath+m?.href+'?testversionId ='+testTask?.testversionId}",
+                                            dataType: "json",
+                                            success: function (data) {
+                                                if (data.status == "y") {
+                                                    window.location.href = "${TINY_CONTEXT_PATH+adminPath}/quality/version?status=tvernotest&currentPageId=5";
+                                                }
+                                            }
+                                        });
+                                        return false;
+                                    });
+                                });
+                            })
+
+                        </script>
+					#end
+				#end
+			#end
+            <a href="javascript :;" onClick="javascript :history.back(-1);" title="返回">#buttonIcon(iconClass=
+				"icon-reply")</a>
 	</div>
 	</div>
 
 <div style="width:30%;float:right">
 ##	#include("/testManagement/page/versionSituationpaging.page")
-	#TypeInfo("qualityVersionSituation")
+	#TypeInfo("qualityVersionSituation",testTask?.testversionId)
 </div>
-				#@dialog("noteModal")
+				#@dialog("closeModal")
 					#@dialogHeader()对话框标题#end
 					#@dialogBody()<p>对话框内容…</p>#end
 					#@dialogFooter()						

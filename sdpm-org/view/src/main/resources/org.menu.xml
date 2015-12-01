@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menu id="organization" parent-id="0" name="组织" href="/org/user/list" icon="icon-sitemap" sort="200"
+      isShow="1">
+    <menu id="organizationUser" name="用户" href="/org/user/list" icon="" sort="1" isShow="1">
+        <menu id="organizationAddUser" name="添加用户" href="/org/user/form" icon="icon-plus" sort="1"
+              isShow="1" scope="org-menu"/>
+        <menu id="org-user-edit" name="编辑用户" href="/org/user/editForm" icon="icon-pencil" sort="1"
+              isShow="1" scope="org-user">
+            <map>
+                <property key="width" value="665"/>
+                <property key="height" value="448"/>
+            </map>
+        </menu>
+
+        <menu id="org-user-delete" name="删除用户" href="/org/user/delete/page" icon="icon-remove" sort="1"
+              isShow="1" scope="org-user">
+            <map>
+                <property key="width" value="550"/>
+                <property key="height" value="150"/>
+            </map>
+        </menu>
+
+        <menu id="org-user-batchdel" name="批量删除" href="#" icon="icon-trash" sort="1" isShow="1"
+              scope="org-user-batchdel"/>
+
+        <menu id="org-user-password" name="修改密码" icon="icon-key" isShow="0"/>
+
+        <menu id="org-user-storyAdmin" name="所属需求" href="/org/user/story" icon="" sort="1"
+              isShow="1" scope="org-user-detail"/>
+        <menu id="org-user-taskAdmin" name="所属任务" href="/org/user/task" icon="" sort="1"
+              isShow="1" scope="org-user-detail"/>
+        <menu id="org-user-bugAdmin" name="所属缺陷" href="/org/user/bug" icon="" sort="1"
+              isShow="1" scope="org-user-detail"/>
+        <menu id="org-user-testtaskAdmin" name="所属测试" href="/org/user/testtask" icon="" sort="1"
+              isShow="1" scope="org-user-detail"/>
+        <menu id="org-user-activeAdmin" name="所属动态" href="/org/user/active" icon="" sort="1"
+              isShow="1" scope="org-user-detail"/>
+        <menu id="org-user-projectAdmin" name="所属项目" href="/org/user/project" icon="" sort="1"
+              isShow="1" scope="org-user-detail"/>
+        <menu id="org-user-profileAdmin" name="所属档案" href="/org/user/show/profile" icon="" sort="1"
+              isShow="1" scope="org-user-detail"/>
+        <menu id="org-user-editprofile" name="修改档案" href="/org/user/form" icon="icon-edit"
+              sort="1" isShow="1" scope="org-user-editprofile"/>
+
+    </menu>
+    <menu id="organizationActive" name="动态" href="/org/active/show" icon="" sort="1" isShow="1">
+    </menu>
+    <menu id="organizationPrivilege" name="角色" href="/org/privilege/list" icon="" sort="1" isShow="1">
+        <menu id="org-privilege-maintain" name="权限维护" href="/org/roleMenu/show"
+              icon="icon-lock" sort="1" isShow="1" scope="org-privilege"/>
+        <menu id="org-privilege-user" name="成员维护" href="/org/roleUser/show"
+              icon="icon-sitemap" sort="1" isShow="1" scope="org-privilege"/>
+
+        <menu id="org-privilege-copy" name="复制角色" href="/org/privilege/copyRole.pagelet" icon="icon-copy"
+              sort="1" isShow="1"
+              scope="org-privilege">
+            <map>
+                <property key="width" value="700"/>
+                <property key="height" value="300"/>
+            </map>
+        </menu>
+
+        <menu id="org-privilege-edit" name="编辑角色" href="/org/privilege/form" icon="icon-pencil"
+              sort="1" isShow="1"
+              scope="org-privilege"/>
+
+        <menu id="org-privilege-delete" name="删除角色" href="/org/privilege/delete" icon="icon-remove" sort="1" isShow="1"
+              scope="org-privilege"/>
+
+        <menu id="organizationAddGroup" name="添加角色 " href="/org/privilege/form" icon="icon-group" sort="1"
+              isShow="1" scope="org-menu"/>
+    </menu>
+
+    <menu id="organizationCompany" name="公司" href="/org/company/show" sort="1" isShow="1">
+        <menu id="org-company-edit" name="编辑公司" href="/org/company/edit" icon="icon-edit"
+              sort="1" isShow="1" scope="org-company-edit"/>
+    </menu>
+</menu>

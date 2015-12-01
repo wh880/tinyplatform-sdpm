@@ -7,31 +7,31 @@
     			#@tr()
     				#@th()所属项目#end
     				#@td()
-    				<a href="${TINY_CONTEXT_PATH+adminPath}/project/demand/index.page">第20周工作项目#end
+    				<a href="${TINY_CONTEXT_PATH+adminPath}/project/view?projectId=${testTask?.projectId}">${testTask?.projectName}#end
     			#end
     			#@tr()
     				#@th()版本#end
-    				#@td()Trunk#end
+    				#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/project/build/productalbug?buildId=${testTask?.buildName}">${testTask?.searchBuildName}</a>#end
     			#end
     			#@tr()
     				#@th()负责人#end
-    				#@td()admin#end
+    				#@td()${testTask?.testtaskOwner?(UserUtils.getUserById(testTask?.testtaskOwner)?.orgUserRealName):""}#end
     			#end
     			#@tr()
     				#@th()优先级#end
-    				#@td()0#end
+    				#@td()${getDict("versionPriority",testTask?.priority)}#end
     			#end
     			#@tr()
     				#@th()开始日期#end
-    				#@td()2015-1-1#end
+    				#@td()${testTask?.testtaskBegin}#end
     			#end
     			#@tr()
     				#@th()结束日期#end
-    				#@td()2015-9-9#end
+    				#@td()${testTask?.testtaskEnd}#end
     			#end
     			#@tr()
     				#@th()当前状态#end
-    				#@td()未开始#end
+    				#@td()${getDict("versionStatus",testTask?.testtaskStatus)}#end
     			#end
     		#end
     	#end

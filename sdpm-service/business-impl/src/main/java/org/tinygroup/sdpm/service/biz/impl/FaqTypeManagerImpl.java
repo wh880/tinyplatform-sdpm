@@ -14,7 +14,7 @@ import java.util.List;
  */
 @Service
 @Transactional
-public class FaqTypeManagerImpl implements FaqTypeManager{
+public class FaqTypeManagerImpl implements FaqTypeManager {
     @Autowired
     private ServiceFaqTypeDao faqTypeDao;
 
@@ -31,7 +31,7 @@ public class FaqTypeManagerImpl implements FaqTypeManager{
     }
 
     public ServiceFaqType update(ServiceFaqType faqType) {
-         faqTypeDao.edit(faqType);
+        faqTypeDao.edit(faqType);
         return faqType;
     }
 

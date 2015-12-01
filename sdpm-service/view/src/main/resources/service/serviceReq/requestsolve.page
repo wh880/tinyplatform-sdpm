@@ -11,7 +11,9 @@
         #end
         #@div()
             #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/service/request/replySave" "post" {"class":""})
-
+            <input type="hidden" name="treeId" value="${treeId}"/>
+            <input type="hidden" name="status" value="${status}"/>
+            <input type="hidden" name="operation" value="${operation}"/>
             <div style="width:70%;margin-left: 200px" class="pageleftpart">
             <div class="infoContent">
                 <p class="titleName">回复</p>
@@ -34,27 +36,35 @@
                     #@validateDiv("col-2")#end
                 #end
 
-                #@elementItem()
-                    <div class="col-2 text-r"><label><span class="c-red">*</span>回复描述：</label></div>
-                    #@formControlDiv("col-8")
-                        #@tinyTextarea("replySpec" {"placeholder":"说点什么...最少输入10个字符","datatype":"*10-500","nullmsg":
-                            "描述不能为空！"})${request?.replySpec}#end
-                    #end
-                    #@validateDiv("col-2")#end
-                #end
+            ##                #@elementItem()
+            ##                    <div class="col-2 text-r"><label><span class="c-red">*</span>回复描述：</label></div>
+            ##                    #@formControlDiv("col-8")
+            ##                        #@tinyTextarea("replySpec" {"datatype":"*","nullmsg":
+            ##                            "描述不能为空！"})${request?.replySpec}#end
+            ##                    #end
+            ##                    #@validateDiv("col-2")#end
+            ##                #end
 
                 #@elementItem()
                     #@sdpmItem("回复人")
-                        #tinyInput("text" "replier" request?.replier{"id":"解决人员","class":"input-text"})
+                        #tinyInput("text" "replier" request?.replier {"id":"解决人员","class":"input-text"})
                     #end
                 #end
                 #@elementItem()
                     #@sdpmItem("回复处理时间" "*")
                         #@tinyDateInput(
-                            "replyDate" formatDate(request?.replyDate,
-                            "yyyy-MM-dd") "YYYY-MM-DD" {"style":"width:200px","datatype":"*",
+                            "replyDate" formatDate(request?.replyDate?:now(),
+                            "yyyy-MM-dd") "YYYY-MM-DD" {"style":"width:120px","datatype":"*",
                         "nullmsg":"日期不能为空","placeholder":"请输入日期"})#end
                     #end
+                #end
+                #@elementItem()
+                    <div class="col-12">
+                        <div class="col-2 text-r"><label>回复描述：</label></div>
+                        <div class="col-9">
+                            #@Teditor("content" "replySpec" {"initialFrameHeight":"300"})${request?.replySpec}#end</div>
+                    </div>
+                    #@validateDiv("col-2")#end
                 #end
             </div>
                 #@elementItem()
@@ -63,7 +73,7 @@
 
                         </div>
                         <div class="col-1">
-                            <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
+                            <button style="float: left" type="submit" id="submit2" class="commitBtn">保存</button>
                         </div>
                         <div class="col-1">
                             #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end
@@ -80,8 +90,15 @@
 #@simpleModal("myModal2" "新建产品")#end
     <script type="text/javascript">
         $(function () {
-            $("form[name=thisform").Validform({
-                tiptype: 2
+            $("form[name=thisform]").Validform({
+                tiptype: 2,
+                beforeSubmit: function () {
+                    var replySpecText = $("textarea[name=replySpec]").val();
+                    if (!replySpecText) {
+                        layer.msg("回复描述不能为空");
+                        return false;
+                    }
+                }
             });
         });
     </script>

@@ -1,5 +1,4 @@
 //配合sdpmItem校验
-
 $(function () {
     $("#tinypagecontent").on("click", "[data-removeid]", function (e) {
         var url = $(this).attr("href") ? $(this).attr("href") : window.location.href;
@@ -27,4 +26,41 @@ $(function () {
         });
         return false;
     });
+
 });
+
+function selectAllNullorReserve(obj, type) {
+    if (obj != null && obj != "") {
+        if (document.getElementsByName(obj) != undefined && document.getElementsByName(obj).length > 0) {	//getElementsByName函数的作用按名字查找对象，返回一个数组。
+            var ids = document.getElementsByName(obj);
+            if (type == "全选") {
+                for (var i = 0; i < ids.length; i++) {
+                    if (ids[i].checked == false) {
+                        ids[i].checked = true;
+                    }
+                }
+            } else if (type == "全不选") {
+                for (var i = 0; i < ids.length; i++) {
+                    if (ids[i].checked == true) {
+                        ids[i].checked = false;
+                    }
+                }
+            } else if (type == "反选") {
+                for (var i = 0; i < ids.length; i++) {
+                    if (ids[i].checked == true) {
+                        ids[i].checked = false;
+                    } else {
+                        ids[i].checked = true;
+                    }
+                }
+            }
+        }
+    }
+}
+var _hmt = _hmt || [];
+(function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?1b088a6c902e538dc40b10cb508e20f2";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+})();

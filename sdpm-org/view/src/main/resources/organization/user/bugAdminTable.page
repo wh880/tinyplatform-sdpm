@@ -3,14 +3,14 @@
     #set(pagesize=records-(page-1)*pagesize)
 #end
 #setTinyItemCount(records)
-#for(bug:bugPager.records)
+#foreach(bug:bugPager.records)
 #@tr()
     #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/project/task/findTask?taskId=${bug?.bugId}">${bug?.bugId}</a>#end
     #@td()${bug?.bugSeverity}#end
     #@td()${bug?.priority}#end
     #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/project/task/findTask?taskId=${bug?.bugId}">${bug?.bugTitle}</a>#end
-    #@td()${bug?.bugOpenedBy}#end
-    #@td()${bug?.bugResolvedBy}#end
+    #@td()${bug?.bugOpenedBy?UserUtils.getUserById(bug?.bugOpenedBy)?.orgUserRealName:""}#end
+    #@td()${bug?.bugResolvedBy?UserUtils.getUserById(bug?.bugResolvedBy)?.orgUserRealName:""}#end
     #@td()${bug?.bugResolution}#end
 #end
 #end

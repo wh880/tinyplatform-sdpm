@@ -17,6 +17,14 @@ public interface RoleUserManager {
     OrgRoleUser find(Integer id);
 
     /**
+     * 根据用户id，查找先关角色
+     *
+     * @param userId
+     * @return
+     */
+    public List<OrgRoleUser> findListByUserIds(String userId);
+
+    /**
      * 根据角色Id查询用户list
      *
      * @param id
@@ -33,6 +41,15 @@ public interface RoleUserManager {
     OrgRoleUser add(OrgRoleUser orgRoleUser);
 
     void addRoleUser(String[] array, Integer roleId);
+
+    /**
+     * 批量添加用户的角色
+     *
+     * @param userId
+     * @param roleIds
+     * @return
+     */
+    Integer batchAddRolesToUser(String userId, Integer[] roleIds);
 
     /**
      * 更新角色菜单
@@ -52,4 +69,6 @@ public interface RoleUserManager {
 
 
     void batchAdd(List<OrgRoleUser> orgRoleUserList);
+
+    List<OrgRoleUser> getRolesByIds(String... ids);
 }

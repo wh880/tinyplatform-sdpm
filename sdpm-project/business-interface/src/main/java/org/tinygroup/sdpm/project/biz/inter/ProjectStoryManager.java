@@ -1,7 +1,7 @@
 package org.tinygroup.sdpm.project.biz.inter;
 
+import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
-import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectStory;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -12,7 +12,14 @@ import java.util.List;
  */
 public interface ProjectStoryManager {
 
-    public Integer batchtDel(String condition);
+    /**
+     * 批量硬删除
+     *
+     * @param storyIds
+     * @param projectId
+     * @return
+     */
+    Integer batchDel(Integer[] storyIds, Integer projectId);
 
     /**
      * 批量关联
@@ -20,7 +27,9 @@ public interface ProjectStoryManager {
      * @param projectStoryList
      * @return
      */
-    public int[] linkStory(List<ProjectStory> projectStoryList);
+    int[] linkStory(List<ProjectStory> projectStoryList);
+
+    int[] updateLink(List<ProjectStory> projectStoryList);
 
     /**
      * 查找用于关联的需求
@@ -29,17 +38,18 @@ public interface ProjectStoryManager {
      * @param start
      * @param limit
      * @param order
-     * @param oredertype
+     * @param orderType
      * @return
      */
-    public Pager<ProductStory> findStoryToLink(Integer projectId, Integer start, Integer limit, String order, String oredertype);
+    Pager<ProductStory> findStoryToLink(Integer projectId, Integer start, Integer limit, String order, String orderType);
+
     /**
      * 根据projectId查找关联产品
      *
      * @param projectId 对象
      * @return
      */
-    public List<ProjectStory> findSrotys(Integer projectId);
+    List<ProjectStory> findStoryList(Integer projectId);
 
     /**
      * 根据条件查询List
@@ -49,21 +59,6 @@ public interface ProjectStoryManager {
      */
     List<ProjectStory> findList(ProjectStory projectStory);
 
-    /**
-     * 新增关联
-     *
-     * @param projectProduct
-     * @return
-     */
-    ProjectProduct add(ProjectProduct projectProduct);
-
-    /**
-     * 更新用户
-     *
-     * @param projectproduct 需要更新的实体类
-     * @return
-     */
-    Integer update(ProjectProduct projectproduct);
 
     /**
      * 根据id进行删除
@@ -80,5 +75,15 @@ public interface ProjectStoryManager {
      * @param storyId
      * @return
      */
-    public Integer deleteByProjectStory(Integer projectId, Integer storyId);
+    Integer deleteByProjectStory(Integer projectId, Integer storyId);
+
+    /**
+     * 根据项目和需求删除关联
+     *
+     * @param
+     * @param
+     * @return
+     */
+    Pager<ProjectStory> findPager(int start, int limit, ProjectStory story, String statusCondition, SearchInfos conditions,
+                                  String groupOperate, String columnName, boolean asc);
 }

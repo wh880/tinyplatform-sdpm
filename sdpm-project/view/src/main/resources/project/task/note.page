@@ -2,8 +2,6 @@
 #import("/org/tinygroup/button/components/button.component")
 #!set(activeTitle="日志",activeMenuId=currentPageId)
 #set(name="task")
-
-
 #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/system/effort/save" "post" {"class":"test"})
     #hiddenInput(hiddenInputName="taskStatus" hiddenInputValue=task?.taskStatus)
     #hiddenInput(hiddenInputName="effortId" hiddenInputValue=effort?.effortId)
@@ -24,7 +22,7 @@
             #foreach(l:list)
                 #@tr()
                     #@td()${l?.effortId}#end
-                    #@td()${l?.effortDate}#end
+                    #@td()${formatDate(l?.effortDate,"yyyy-MM-dd")}#end
                     #@td()${l?.effortConsumed}#end
                     #@td()${l?.effortWork}#end
                     #@td()
@@ -53,12 +51,10 @@
                 #end
             #end
         ##每次输出日志后 再新增3个新框框
-            
                 #@tr()
-                    #@td()ID#end
+                    #@td()${lFor.index+1}#end
                     #@td()
-                        #@tinyDateInput(
-                            "effortDate" effort?.effortDate "YYYY-MM-DD" {"style":"width:100%","datatype":"*","nullmsg":
+                        #@tinyDateInput("effortDate" effort?.effortDate "YYYY-MM-DD" {"style":"width:100%","datatype":"*","nullmsg":
                             "日期不能为空"})#end
                     #end
                     #@td()#tinyInput("text" "effortConsumed" effort?.effortConsumed {"datatype":"","id":"关键词","class":"input-text"})#end
@@ -66,7 +62,6 @@
                     #@td()
                     #end
                 #end
-           
         #end
     #end
 
@@ -76,7 +71,7 @@
 
     </div>
     <div class="col-1">
-        <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
+        <button style="float: left" type="submit" id="submit2" class="commitBtn">保存</button>
     </div>
     <div class="col-1">
         #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")取消#end
@@ -86,5 +81,9 @@
 #end
 
 
+<script type="text/javascript">
+    $(function () {
+        $("form[name=thisform]").Validform({tiptype: 2});
+    });
+</script>
 
-			

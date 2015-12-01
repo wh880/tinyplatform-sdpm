@@ -1,8 +1,11 @@
 package org.tinygroup.sdpm.org.biz.impl;
 
+import org.apache.commons.lang.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.tinygroup.commons.tools.StringUtil;
+import org.tinygroup.sdpm.common.util.Collections3;
 import org.tinygroup.sdpm.org.biz.inter.RoleUserManager;
 import org.tinygroup.sdpm.org.dao.OrgRoleUserDao;
 import org.tinygroup.sdpm.org.dao.pojo.OrgRoleUser;
@@ -27,14 +30,20 @@ public class RoleUserManagerImpl implements RoleUserManager {
         return orgRoleUserDao.getByRoleId(id);
     }
 
+    public List<OrgRoleUser> findListByUserIds(String userId) {
+        OrgRoleUser orgRoleUser = new OrgRoleUser();
+        orgRoleUser.setOrgUserId(userId);
+        return orgRoleUserDao.query(orgRoleUser);
+    }
+
     public OrgRoleUser add(OrgRoleUser orgRoleUser) {
         return orgRoleUserDao.add(orgRoleUser);
     }
 
-    public void addRoleUser(String[] array, Integer roleId) {
+    public void addRoleUser(String[] userIds, Integer roleId) {
         orgRoleUserDao.deleteByRoleId(roleId);
         List<OrgRoleUser> list = new ArrayList<OrgRoleUser>();
-        for (String userId : array) {
+        for (String userId : userIds) {
             OrgRoleUser t = new OrgRoleUser();
             t.setOrgUserId(userId);
             t.setOrgRoleId(roleId);
@@ -43,6 +52,34 @@ public class RoleUserManagerImpl implements RoleUserManager {
         if (list != null || !list.isEmpty()) {
             orgRoleUserDao.batchInsert(list);
         }
+    }
+
+    public Integer batchAddRolesToUser(String userId, Integer[] roleIds) {
+        if (StringUtil.isBlank(userId) || ArrayUtils.isEmpty(roleIds)) {
+            return 0;
+        }
+        OrgRoleUser orgRoleUser = new OrgRoleUser();
+        orgRoleUser.setOrgUserId(userId);
+        List<OrgRoleUser> roleUserList = orgRoleUserDao.query(orgRoleUser);
+        List roleIdList = Collections3.extractToList(roleUserList, "roleId");
+        List<OrgRoleUser> list = new ArrayList<OrgRoleUser>();
+        for (Integer roleId : roleIds) {
+            if (roleIdList.contains(roleId)) {
+                continue;
+            }
+            OrgRoleUser t = new OrgRoleUser();
+            t.setOrgUserId(userId);
+            t.setOrgRoleId(roleId);
+            list.add(t);
+        }
+        Integer len = 0;
+        if (list != null || !list.isEmpty()) {
+            int[] batchInsert = orgRoleUserDao.batchInsert(list);
+            if (!ArrayUtils.isEmpty(batchInsert)) {
+                len = batchInsert.length;
+            }
+        }
+        return len;
     }
 
     public OrgRoleUser update(OrgRoleUser orgRoleUser) {
@@ -56,5 +93,9 @@ public class RoleUserManagerImpl implements RoleUserManager {
 
     public void batchAdd(List<OrgRoleUser> orgRoleUserList) {
         orgRoleUserDao.batchInsert(orgRoleUserList);
+    }
+
+    public List<OrgRoleUser> getRolesByIds(String... ids) {
+        return orgRoleUserDao.getRolesByIds(ids);
     }
 }

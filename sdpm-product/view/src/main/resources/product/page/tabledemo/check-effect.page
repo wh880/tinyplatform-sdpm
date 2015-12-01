@@ -18,13 +18,17 @@
 					      #end
 					    #end
 					    #@tbody()
-					    	#@tr()
-					    		#@td()	1	#end
-					    		#@td()  项目1 #end
-					    		#@td()  正常#end
-					    		#@td()  admin#end
-					    		#@td()  admin#end
-					    	#end
+					    	
+						    	#foreach(project:projectList)
+							    	#@tr()
+							    		#@td()	${project?.projectId}	#end
+							    		#@td()  ${project?.projectName} #end
+							    		#@td()  ${getDict("projectStatus",project?.projectStatus)} #end
+							    		#@td()  ${project?.projectOpenedBy?UserUtils.getUserById(project?.projectOpenedBy).orgUserRealName:""} #end
+							    		#@td()  ${project?.projectCloseBy?UserUtils.getUserById(project?.projectCloseBy).orgUserRealName:"" }#end
+						    		#end
+						    	#end
+					    	
 					    #end
 					  #end
 					#end
@@ -42,15 +46,19 @@
 					      #end
 					    #end
 					     #@tbody()
-					    	#@tr()
-					    		#@td()	1	#end
-					    		#@td()  bug1 #end
-					    		#@td()  正常#end
-					    		#@td()  admin#end
-					    		#@td()  admin#end
-					    		#@td()  方案XXX#end
-					    		#@td()  admin#end
-					    	#end
+					    	
+					    		#foreach(bug:bugList)
+						    		#@tr()
+						    			#@td()	${bug?.bugId}	#end
+							    		#@td()  ${bug?.bugTitle} #end
+							    		#@td()  ${getDict("bugStatus",bug?.bugStatus)} #end
+							    		#@td()  ${bug?.bugOpenedBy?UserUtils.getUserById(bug?.bugOpenedBy).orgUserRealName:"" } #end
+							    		#@td() ${bug?.bugResolvedBy?UserUtils.getUserById(bug?.bugResolvedBy).orgUserRealName:"" } #end
+							    		#@td() ${getDict("bugResolution",bug?.bugResolution)} #end
+							    		#@td() ${bug?.bugLastEditedBy?UserUtils.getUserById(bug?.bugLastEditedBy).orgUserRealName:"" } #end
+						    		#end
+					    		#end
+					    	
 					    #end
 					  #end
 					#end
@@ -67,13 +75,18 @@
 					      #end
 					    #end
 					    #@tbody()
-					    	#@tr()
-					    		#@td()	1	#end
-					    		#@td()  用例1#end
-					    		#@td()  正常#end
-					    		#@td()  admin#end
-					    		#@td()  admin#end
-					    	#end
+					    	
+					    		#foreach(testCase:testCaseList)
+					    			#@tr()
+						    			#@td()	${testCase?.caseId}	#end
+							    		#@td()  ${testCase?.caseTitle} #end
+							    		#@td() ${getDict("caseStatus",testCase?.caseStatus)} #end
+							    		#@td()  ${testCase?.caseOpenedBy?UserUtils.getUserById(testCase?.caseOpenedBy).orgUserRealName:"" } #end
+							    		#@td() ${testCase?.caseLastEditedBy?UserUtils.getUserById(testCase?.caseLastEditedBy).orgUserRealName:"" } #end
+						    		#end
+					    		#end
+					    		
+					    	
 					    #end
 					  #end
 					#end

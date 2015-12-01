@@ -17,6 +17,26 @@
 		</dependency>
 		<dependency>
 			<groupId>org.tinygroup</groupId>
+			<artifactId>sdpm-product-dao-interface</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.tinygroup</groupId>
+			<artifactId>sdpm-project-dao-interface</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.tinygroup</groupId>
+			<artifactId>sdpm-org-dao-inter</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.tinygroup</groupId>
+			<artifactId>sdpm-system-dao-interface</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.tinygroup</groupId>
 			<artifactId>org.tinygroup.tinysqldsl</artifactId>
 			<version>${tiny_version}</version>
 		</dependency>

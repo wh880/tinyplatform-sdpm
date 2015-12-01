@@ -16,33 +16,54 @@
 
 package org.tinygroup.sdpm.quality.dao.impl;
 
+
 import org.springframework.stereotype.Repository;
 import org.tinygroup.commons.tools.CollectionUtil;
+import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.jdbctemplatedslsession.callback.*;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
 import org.tinygroup.sdpm.common.util.update.UpdateUtil;
+import org.tinygroup.sdpm.product.dao.constant.ProductStoryTable;
+import org.tinygroup.sdpm.project.dao.constant.ProjectTaskTable;
 import org.tinygroup.sdpm.quality.dao.QualityBugDao;
+import org.tinygroup.sdpm.quality.dao.constant.QualityBugTable;
+import org.tinygroup.sdpm.quality.dao.constant.QualityTestCaseTable;
+import org.tinygroup.sdpm.quality.dao.pojo.BugCount;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.tinysqldsl.*;
+import org.tinygroup.tinysqldsl.base.Column;
 import org.tinygroup.tinysqldsl.base.Condition;
 import org.tinygroup.tinysqldsl.base.FragmentSql;
-import org.tinygroup.tinysqldsl.expression.FragmentExpressionSql;
+import org.tinygroup.tinysqldsl.base.Table;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
-import org.tinygroup.tinysqldsl.formitem.FragmentFromItemSql;
+import org.tinygroup.tinysqldsl.formitem.SubSelect;
+import org.tinygroup.tinysqldsl.select.Join;
 import org.tinygroup.tinysqldsl.select.OrderByElement;
+import sun.swing.StringUIClientPropertyKey;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.tinygroup.sdpm.org.dao.constant.OrgUserTable.ORG_USERTABLE;
+import static org.tinygroup.sdpm.product.dao.constant.ProductReleaseTable.PRODUCT_RELEASETABLE;
 import static org.tinygroup.sdpm.quality.dao.constant.QualityBugTable.QUALITY_BUGTABLE;
+import static org.tinygroup.sdpm.product.dao.constant.ProductStoryTable.PRODUCT_STORYTABLE;
+import static org.tinygroup.sdpm.product.dao.constant.ProductPlanTable.PRODUCT_PLANTABLE;
+import static org.tinygroup.sdpm.product.dao.constant.ProductTable.PRODUCTTABLE;
+import static org.tinygroup.sdpm.system.dao.constant.SystemModuleTable.SYSTEM_MODULETABLE;
+import static org.tinygroup.sdpm.quality.dao.constant.QualityTestCaseTable.QUALITY_TEST_CASETABLE;
+import static org.tinygroup.sdpm.project.dao.constant.ProjectBuildTable.PROJECT_BUILDTABLE;
+import static org.tinygroup.sdpm.project.dao.constant.ProjectTaskTable.PROJECT_TASKTABLE;
+import static org.tinygroup.sdpm.project.dao.constant.ProjectTable.PROJECTTABLE;
 import static org.tinygroup.tinysqldsl.Delete.delete;
 import static org.tinygroup.tinysqldsl.Insert.insertInto;
-import static org.tinygroup.tinysqldsl.Select.selectFrom;
+import static org.tinygroup.tinysqldsl.Select.select;
 import static org.tinygroup.tinysqldsl.Update.update;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
+import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.or;
 
 @Repository
 public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDao {
@@ -101,7 +122,8 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
 					QUALITY_BUGTABLE.TESTTASK.value(t.getTesttask()),
 					QUALITY_BUGTABLE.BUG_LAST_EDITED_BY.value(t.getBugLastEditedBy()),
 					QUALITY_BUGTABLE.BUG_LAST_EDITED_DATE.value(t.getBugLastEditedDate()),
-					QUALITY_BUGTABLE.DELETED.value(t.getDeleted()));
+					QUALITY_BUGTABLE.DELETED.value(t.getDeleted()),
+						QUALITY_BUGTABLE.NO.value(t.getNo()));
 				return insert;
 			}
 		});
@@ -145,7 +167,33 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
 		return getDslTemplate().getByKey(pk, QualityBug.class, new SelectGenerateCallback<Serializable>() {
 		@SuppressWarnings("rawtypes")
 		public Select generate(Serializable t) {
-			return selectFrom(QUALITY_BUGTABLE).where(QUALITY_BUGTABLE.BUG_ID.eq(t));
+			return select(QUALITY_BUGTABLE.ALL,PRODUCTTABLE.PRODUCT_NAME.as("productName"),
+					PROJECTTABLE.PROJECT_NAME.as("projectName"),
+					SYSTEM_MODULETABLE.MODULE_NAME.as("moduleName"),
+					PRODUCT_PLANTABLE.PLAN_NAME.as("planName"),
+					PROJECT_BUILDTABLE.BUILD_NAME.as("resolveBuild"),
+					QUALITY_TEST_CASETABLE.CASE_TITLE.as("fromCase"),
+					PRODUCT_STORYTABLE.STORY_TITLE.as("linkStoryName"),
+					PROJECT_TASKTABLE.TASK_NAME.as("toTaskName"),
+					((QualityTestCaseTable) QUALITY_TEST_CASETABLE.as("linkCaseTable")).CASE_TITLE.as("linkCaseTitle"),
+					((QualityBugTable) QUALITY_BUGTABLE.as("linkBugTable")).BUG_TITLE.as("linkBugTitle"),
+					((ProjectTaskTable) PROJECT_TASKTABLE.as("linkTaskTable")).TASK_NAME.as("linkTaskName"),
+					((ProductStoryTable) PRODUCT_STORYTABLE.as("toStoryTable")).STORY_TITLE.as("toStoryTitle")
+					)
+					.from(QUALITY_BUGTABLE).join(
+							Join.leftJoin(PRODUCTTABLE, PRODUCTTABLE.PRODUCT_ID.eq(QUALITY_BUGTABLE.PRODUCT_ID)),
+							Join.leftJoin(PROJECTTABLE, PROJECTTABLE.PROJECT_ID.eq(QUALITY_BUGTABLE.PROJECT_ID)),
+							Join.leftJoin(SYSTEM_MODULETABLE, SYSTEM_MODULETABLE.MODULE_ID.eq(QUALITY_BUGTABLE.MODULE_ID)),
+							Join.leftJoin(PRODUCT_PLANTABLE, PRODUCT_PLANTABLE.PLAN_ID.eq(QUALITY_BUGTABLE.PLAN_ID)),
+							Join.leftJoin(PROJECT_BUILDTABLE, PROJECT_BUILDTABLE.BUILD_ID.eq(QUALITY_BUGTABLE.BUG_RESOLVED_BUILD)),
+							Join.leftJoin(QUALITY_TEST_CASETABLE, QUALITY_BUGTABLE.BUG_FROM_CASE.eq(QUALITY_TEST_CASETABLE.CASE_ID)),
+							Join.leftJoin(PRODUCT_STORYTABLE, PRODUCT_STORYTABLE.STORY_ID.eq(QUALITY_BUGTABLE.STORY_ID)),
+							Join.leftJoin(PROJECT_TASKTABLE, PROJECT_TASKTABLE.TASK_ID.eq(QUALITY_BUGTABLE.TO_TASK_ID)),
+							Join.leftJoin(QUALITY_TEST_CASETABLE.as("linkCaseTable"), QUALITY_BUGTABLE.LINK_CASE.eq(((QualityTestCaseTable) QUALITY_TEST_CASETABLE.as("linkCaseTable")).CASE_ID)),
+							Join.leftJoin(QUALITY_BUGTABLE.as("linkBugTable"), QUALITY_BUGTABLE.LINK_BUG.eq(((QualityBugTable) QUALITY_BUGTABLE.as("linkBugTable")).BUG_ID)),
+							Join.leftJoin(PROJECT_TASKTABLE.as("linkTaskTable"), QUALITY_BUGTABLE.TASK_ID.eq(((ProjectTaskTable) PROJECT_TASKTABLE.as("linkTaskTable")).TASK_ID)),
+							Join.leftJoin(PRODUCT_STORYTABLE.as("toStoryTable"), QUALITY_BUGTABLE.TO_STORY_ID.eq(((ProductStoryTable) PRODUCT_STORYTABLE.as("toStoryTable")).STORY_ID))
+					).where(QUALITY_BUGTABLE.BUG_ID.eq(t));
 			}
 		});
 	}
@@ -158,7 +206,7 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
 
 			@SuppressWarnings("rawtypes")
 			public Select generate(QualityBug t) {
-				Select select = selectFrom(QUALITY_BUGTABLE).where(
+				MysqlSelect select = MysqlSelect.select(QUALITY_BUGTABLE.ALL).from(QUALITY_BUGTABLE).where(
 				and(
 					QUALITY_BUGTABLE.PRODUCT_ID.eq(t.getProductId()),
 					QUALITY_BUGTABLE.MODULE_ID.eq(t.getModuleId()),
@@ -209,7 +257,8 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
 					QUALITY_BUGTABLE.TESTTASK.eq(t.getTesttask()),
 					QUALITY_BUGTABLE.BUG_LAST_EDITED_BY.eq(t.getBugLastEditedBy()),
 					QUALITY_BUGTABLE.BUG_LAST_EDITED_DATE.eq(t.getBugLastEditedDate()),
-					QUALITY_BUGTABLE.DELETED.eq(t.getDeleted())));
+					QUALITY_BUGTABLE.DELETED.eq(t.getDeleted()),
+						QUALITY_BUGTABLE.NO.eq(t.getNo())));
 			return addOrderByElements(select, orderArgs);
 			}
 		});
@@ -222,7 +271,8 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
 		return getDslTemplate().queryPager(start, limit, qualityBug, false, new SelectGenerateCallback<QualityBug>() {
 
 			public Select generate(QualityBug t) {
-				Select select = MysqlSelect.selectFrom(QUALITY_BUGTABLE).where(
+				MysqlSelect select = MysqlSelect.select(QUALITY_BUGTABLE.ALL,ORG_USERTABLE.ORG_USER_REAL_NAME.as("assignedUser")).from(QUALITY_BUGTABLE)
+						.join(Join.leftJoin(ORG_USERTABLE,QUALITY_BUGTABLE.BUG_ASSIGNED_TO.eq(ORG_USERTABLE.ORG_USER_ID))).where(
 				and(
 					QUALITY_BUGTABLE.PRODUCT_ID.eq(t.getProductId()),
 					QUALITY_BUGTABLE.MODULE_ID.eq(t.getModuleId()),
@@ -283,12 +333,21 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
 		if(qualityBug==null){
 			qualityBug=new QualityBug();
 		}
-		return getDslTemplate().queryPager(start, limit, qualityBug, false, new SelectGenerateCallback<QualityBug>() {
+		return getDslTemplate().queryPager(start>0?start:0, limit, qualityBug, false, new SelectGenerateCallback<QualityBug>() {
 
 			public Select generate(QualityBug t) {
-				Select select = MysqlSelect.selectFrom(QUALITY_BUGTABLE).where(
+				Condition condition =null;
+				if(t.getBugOpenedBuild()!=null){
+					condition = or(QUALITY_BUGTABLE.BUG_OPENED_BUILD.like("%," + t.getBugOpenedBuild()),
+							QUALITY_BUGTABLE.BUG_OPENED_BUILD.like("%," + t.getBugOpenedBuild()+",%"),
+							QUALITY_BUGTABLE.BUG_OPENED_BUILD.like(t.getBugOpenedBuild()+",%"),
+							QUALITY_BUGTABLE.BUG_OPENED_BUILD.eq(t.getBugOpenedBuild()));
+				}
+				MysqlSelect select = MysqlSelect.select(QUALITY_BUGTABLE.ALL,ORG_USERTABLE.ORG_USER_REAL_NAME.as("assignedUser")).from(QUALITY_BUGTABLE)
+						.join(Join.leftJoin(ORG_USERTABLE,QUALITY_BUGTABLE.BUG_ASSIGNED_TO.eq(ORG_USERTABLE.ORG_USER_ID))).where(
 						and(
 								conditions,
+								condition,
 								QUALITY_BUGTABLE.PRODUCT_ID.eq(t.getProductId()),
 								QUALITY_BUGTABLE.MODULE_ID.eq(t.getModuleId()),
 								QUALITY_BUGTABLE.PROJECT_ID.eq(t.getProjectId()),
@@ -579,5 +638,133 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
 								QUALITY_BUGTABLE.BUG_ID.eq(new JdbcNamedParameter("bugId")));
 			}
 		});
+	}
+
+	public List<BugCount> getCount(String code, Integer productId) {
+		Select select = select(CountConditions.getSelectItem(code,productId)).
+				from(CountConditions.getFromItem(code)).where(QUALITY_BUGTABLE.PRODUCT_ID.eq(productId)).
+				groupBy(CountConditions.getGroupByColumn(code)).
+				having(CountConditions.getHavingCondition(code));
+		return getDslSession().fetchList(select,BugCount.class);
+	}
+
+	public BugCount getBugsNotInType(String type,Integer productId) {
+		Select select = select(
+				QUALITY_BUGTABLE.BUG_ID.count().as("number"),
+				FragmentSql.fragmentSelect("COUNT(quality_bug.bug_id)/" +
+						"(SELECT COUNT(0) FROM product LEFT JOIN quality_bug ON product.`product_id` = quality_bug.`product_id` WHERE product.product_id="+productId+") AS percent")).
+				from(QUALITY_BUGTABLE);
+		if("project".equals(type)){
+			select.where(or(QUALITY_BUGTABLE.PROJECT_ID.isNull(),QUALITY_BUGTABLE.PROJECT_ID.eq(0)));
+		}else if("build".equals(type)){
+			select.where(or(QUALITY_BUGTABLE.BUG_OPENED_BUILD.isNull(),QUALITY_BUGTABLE.BUG_OPENED_BUILD.eq(0)));
+		}else if("module".equals(type)){
+			select.where(or(QUALITY_BUGTABLE.MODULE_ID.isNull(),QUALITY_BUGTABLE.MODULE_ID.eq(0)));
+		}
+		return getDslSession().fetchOneResult(select,BugCount.class);
+	}
+
+	public Pager<QualityBug> queryStoryChangedBugs(int start, int limit, Condition conditions, QualityBug qualityBug, OrderBy... orderArgs) {
+		MysqlSelect select = MysqlSelect.select(QUALITY_BUGTABLE.ALL,ORG_USERTABLE.ORG_USER_REAL_NAME.as("assignedUser")).from(QUALITY_BUGTABLE)
+				.join(Join.leftJoin(ORG_USERTABLE, QUALITY_BUGTABLE.BUG_ASSIGNED_TO.eq(ORG_USERTABLE.ORG_USER_ID)),
+						Join.newJoin(PRODUCT_STORYTABLE, QUALITY_BUGTABLE.STORY_ID.eq(PRODUCT_STORYTABLE.STORY_ID))).where(
+						and(
+								conditions,
+								QUALITY_BUGTABLE.PRODUCT_ID.eq(qualityBug.getProductId()),
+								QUALITY_BUGTABLE.MODULE_ID.eq(qualityBug.getModuleId()),
+								QUALITY_BUGTABLE.PROJECT_ID.eq(qualityBug.getProjectId()),
+								QUALITY_BUGTABLE.PLAN_ID.eq(qualityBug.getPlanId()),
+								QUALITY_BUGTABLE.STORY_ID.eq(qualityBug.getStoryId()),
+								QUALITY_BUGTABLE.STORY_VERSION.eq(qualityBug.getStoryVersion()),
+								QUALITY_BUGTABLE.TASK_ID.eq(qualityBug.getTaskId()),
+								QUALITY_BUGTABLE.TO_TASK_ID.eq(qualityBug.getToTaskId()),
+								QUALITY_BUGTABLE.TO_STORY_ID.eq(qualityBug.getToStoryId()),
+								QUALITY_BUGTABLE.BUG_TITLE.eq(qualityBug.getBugTitle()),
+								QUALITY_BUGTABLE.BUG_KEYWORDS.eq(qualityBug.getBugKeywords()),
+								QUALITY_BUGTABLE.BUG_SEVERITY.eq(qualityBug.getBugSeverity()),
+								QUALITY_BUGTABLE.PRIORITY.eq(qualityBug.getPriority()),
+								QUALITY_BUGTABLE.BUG_TYPE.eq(qualityBug.getBugType()),
+								QUALITY_BUGTABLE.OPERATING_SYSTEM.eq(qualityBug.getOperatingSystem()),
+								QUALITY_BUGTABLE.BROWSER.eq(qualityBug.getBrowser()),
+								QUALITY_BUGTABLE.HARDWARE.eq(qualityBug.getHardware()),
+								QUALITY_BUGTABLE.BUG_FOUND.eq(qualityBug.getBugFound()),
+								QUALITY_BUGTABLE.BUG_STEPS.eq(qualityBug.getBugSteps()),
+								QUALITY_BUGTABLE.BUG_STATUS.eq(qualityBug.getBugStatus()),
+								QUALITY_BUGTABLE.BUG_CONFIRMED.eq(qualityBug.getBugConfirmed()),
+								QUALITY_BUGTABLE.BUG_ACTIVATED_COUNT.eq(qualityBug.getBugActivatedCount()),
+								QUALITY_BUGTABLE.BUG_MAILTO.eq(qualityBug.getBugMailto()),
+								QUALITY_BUGTABLE.BUG_OPENED_BY.eq(qualityBug.getBugOpenedBy()),
+								QUALITY_BUGTABLE.BUG_OPENED_DATE.eq(qualityBug.getBugOpenedDate()),
+								QUALITY_BUGTABLE.BUG_OPENED_BUILD.eq(qualityBug.getBugOpenedBuild()),
+								QUALITY_BUGTABLE.BUG_ASSIGNED_TO.eq(qualityBug.getBugAssignedTo()),
+								QUALITY_BUGTABLE.BUG_ASSIGNED_DATE.eq(qualityBug.getBugAssignedDate()),
+								QUALITY_BUGTABLE.BUG_RESOLVED_BY.eq(qualityBug.getBugResolvedBy()),
+								QUALITY_BUGTABLE.BUG_RESOLUTION.eq(qualityBug.getBugResolution()),
+								QUALITY_BUGTABLE.BUG_RESOLVED_BUILD.eq(qualityBug.getBugResolvedBuild()),
+								QUALITY_BUGTABLE.BUG_RESOLVED_DATE.eq(qualityBug.getBugResolvedDate()),
+								QUALITY_BUGTABLE.BUG_CLOSED_BY.eq(qualityBug.getBugClosedBy()),
+								QUALITY_BUGTABLE.BUG_CLOSED_DATE.eq(qualityBug.getBugClosedDate()),
+								QUALITY_BUGTABLE.BUG_DUPLICATE_BUG.eq(qualityBug.getBugDuplicateBug()),
+								QUALITY_BUGTABLE.LINK_BUG.eq(qualityBug.getLinkBug()),
+								QUALITY_BUGTABLE.LINK_CASE.eq(qualityBug.getLinkCase()),
+								QUALITY_BUGTABLE.CASE_VERSION.eq(qualityBug.getCaseVersion()),
+								QUALITY_BUGTABLE.BUG_RESULT.eq(qualityBug.getBugResult()),
+								QUALITY_BUGTABLE.BUG_REPO.eq(qualityBug.getBugRepo()),
+								QUALITY_BUGTABLE.BUG_ENTRY.eq(qualityBug.getBugEntry()),
+								QUALITY_BUGTABLE.BUG_FROM_CASE.eq(qualityBug.getBugFromCase()),
+								QUALITY_BUGTABLE.BUG_LINES.eq(qualityBug.getBugLines()),
+								QUALITY_BUGTABLE.BUG_V1.eq(qualityBug.getBugV1()),
+								QUALITY_BUGTABLE.BUG_V2.eq(qualityBug.getBugV2()),
+								QUALITY_BUGTABLE.BUG_REPO_TYPE.eq(qualityBug.getBugRepoType()),
+								QUALITY_BUGTABLE.TESTTASK.eq(qualityBug.getTesttask()),
+								QUALITY_BUGTABLE.BUG_LAST_EDITED_BY.eq(qualityBug.getBugLastEditedBy()),
+								QUALITY_BUGTABLE.BUG_LAST_EDITED_DATE.eq(qualityBug.getBugLastEditedDate()),
+								QUALITY_BUGTABLE.DELETED.eq(qualityBug.getDeleted()),
+								PRODUCT_STORYTABLE.STORY_STATUS.neq("0"),
+								PRODUCT_STORYTABLE.STORY_STATUS.neq("3"),
+								QUALITY_BUGTABLE.STORY_VERSION.neq(PRODUCT_STORYTABLE.STORY_VERSION)
+						));
+			return getDslSession().fetchPage(addOrderByElements(select, orderArgs),start,limit,false,QualityBug.class);
+	}
+
+	public Integer getMaxNo(Integer productId) {
+		Select select = select(QUALITY_BUGTABLE.NO.max()).from(QUALITY_BUGTABLE).where(QUALITY_BUGTABLE.PRODUCT_ID.eq(productId));
+		return getDslSession().fetchOneResult(select,Integer.class);
+	}
+
+	public Integer deleteBugsByProduct(Integer product) {
+		Update update = update(QUALITY_BUGTABLE).set(QUALITY_BUGTABLE.DELETED.value(1)).where(and(QUALITY_BUGTABLE.PRODUCT_ID.eq(product), QUALITY_BUGTABLE.DELETED.eq(0)));
+		return getDslSession().execute(update);
+	}
+
+	public Integer deleteBugsByStory(Integer storyId) {
+		Update update = update(QUALITY_BUGTABLE).set(QUALITY_BUGTABLE.DELETED.value(1)).where(and(QUALITY_BUGTABLE.STORY_ID.eq(storyId), QUALITY_BUGTABLE.DELETED.eq(0)));
+		return getDslSession().execute(update);
+	}
+
+	public Integer deleteBugsByTask(Integer taskId) {
+		Update update = update(QUALITY_BUGTABLE).set(QUALITY_BUGTABLE.DELETED.value(1)).where(and(QUALITY_BUGTABLE.TASK_ID.eq(taskId), QUALITY_BUGTABLE.DELETED.eq(0)));
+		return getDslSession().execute(update);
+	}
+
+	public List<QualityBug> getBugsInReleaseDoc(QualityBug bug) {
+		Select select = select(QUALITY_BUGTABLE.ALL,PRODUCTTABLE.PRODUCT_NAME.as("productName")).
+				from(QUALITY_BUGTABLE).join(
+				Join.leftJoin(PRODUCTTABLE, PRODUCTTABLE.PRODUCT_ID.eq(QUALITY_BUGTABLE.PRODUCT_ID))
+		).where(and(
+					QUALITY_BUGTABLE.BUG_OPENED_BUILD.eq(bug.getBugOpenedBuild()),
+					QUALITY_BUGTABLE.DELETED.eq(bug.getDeleted()))
+
+				);
+		return getDslSession().fetchList(select,QualityBug.class);
+
+	}
+
+	public List<QualityBug> bugInCondition(String condition, Integer productId) {
+		Select select = MysqlSelect.select(QUALITY_BUGTABLE.BUG_ID,QUALITY_BUGTABLE.BUG_TITLE).from(QUALITY_BUGTABLE).where(
+				and(
+						QUALITY_BUGTABLE.DELETED.eq(0),QUALITY_BUGTABLE.PRODUCT_ID.eq(productId),QUALITY_BUGTABLE.BUG_TITLE.like(condition)
+				)).limit(0,8);
+		return getDslSession().fetchList(select,QualityBug.class);
 	}
 }

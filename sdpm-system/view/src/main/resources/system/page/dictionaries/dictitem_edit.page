@@ -1,45 +1,58 @@
-
 #@tinyForm("dictitemEditForm" TINY_CONTEXT_PATH+adminPath+"/system/dict/save" "post" {"class":""})
 <input type="hidden" name="dictId" value="${dict?.dictId}"/>
 <input type="hidden" name="deleted" value="0"/>
-#@gridSysRow()
-#@colLabel("col-4")<span class="c-red">*</span>代码：#end
-#@gridSysCol(6)
-#tinyInput("text" "dictKey" dict?.dictKey {"datatype":"","id":"请求标题","class":"input-text"})
-#end
-#end
-#@gridSysRow()
-#@colLabel("col-4")<span class="c-red">*</span>中文名：#end
-#@gridSysCol(6)
-#tinyInput("text" "dictValue"dict?.dictValue {"datatype":"","id":"请求标题","class":"input-text"})
-#end
-#end
-#@gridSysRow()
-#@colLabel("col-4")<span class="c-red">*</span>排序：#end
-#@gridSysCol(6)
-#tinyInput("text" "dictSort" dict?.dictSort {"datatype":"","id":"请求标题","class":"input-text"})
-#end
-#end
-#@gridSysRow()
-#@colLabel("col-4")<span class="c-red">*</span>字典类型：#end
-#@gridSysCol(6)
-#if(moduleList)
-#@Tselect2F()
+    #@gridSysRow()
+        #@colLabel("col-4")<span class="c-red">*</span>代码：#end
+        #@gridSysCol(6)
+            #tinyInput(
+                "text" "dictKey" dict?.dictKey {"datatype":"*","id":"请求标题","class":"input-text","nullmsg":"代码不为空"})
+        #end
+    #end
+    #@gridSysRow()
+        #@colLabel("col-4")<span class="c-red">*</span>中文名：#end
+        #@gridSysCol(6)
+            #tinyInput(
+                "text" "dictValue"dict?.dictValue {"datatype":"*","id":"请求标题","class":"input-text","nullmsg":"中文名不为空"})
+        #end
+    #end
+    #@gridSysRow()
+        #@colLabel("col-4")<span class="c-red">*</span>排序：#end
+        #@gridSysCol(6)
+            #tinyInput(
+                "text" "dictSort" dict?.dictSort {"datatype":"*","id":"请求标题","class":"input-text","nullmsg":"排序代码不为空"})
+        #end
+    #end
+    #@gridSysRow()
+        #@colLabel("col-4")<span class="c-red">*</span>字典类型：#end
+        #@gridSysCol(6)
+            #if(moduleList)
+                #@Tselect2F()
 
-#@Tselect2Body("moduleId" module?.moduleId?:dictModule?.moduleId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-#for(m:moduleList)
-<option value="${m.moduleId}">${m.moduleName}</option>
+                    #@Tselect2Body("moduleId" module?.moduleId?:dictModule?.moduleId {"class":
+                        "input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        #foreach(m:moduleList)
+                        <option value="${m.moduleId}">${m.moduleName}</option>
+                        #end
+                    #end
+                #end
+                #@Tselect2Fix()
+                <a href="#" class="r">增加</a>
+                <a href="#">全部</a>
+                #end
+
+            #else
+                ${module?.moduleName}
+            <input type="hidden" name="moduleId" value="${module?.moduleId}"/>
+            #end
+        #end
+    #end
 #end
-#end
-#@Tselect2Fix()
-<a href="#" class="r">增加</a>
-<a href="#">全部</a>
-#end
-#end
-#else
-${module?.moduleName}
-<input type="hidden" name="moduleId" value="${module?.moduleId}"/>
-#end
-#end
-#end
-#end
+
+
+<script type="text/javascript">
+    $(function () {
+        $("form[name=dictitemEditForm]").Validform({
+            tiptype: 2
+        });
+    });
+</script>

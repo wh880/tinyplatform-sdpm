@@ -2,22 +2,25 @@
 <input type="hidden" name="records" value="${num}"/>
 #end
 
-
-
-#set(records=teamPager.getTotalCount(),temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
+#set(records=teamPager?.getTotalCount(),temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
 #if (pagesize>records-pagesize*(page-1))
     #set(pagesize=records-(page-1)*pagesize)
 #end
 #setTinyItemCount(records)
-#for(t:teamPager.getRecords())
+#foreach(t:teamPager?.getRecords())
 #@tr()
-    #@td()<input type="checkbox" value="1" name="idCheck">#end
-    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}//org/user/story?account=${t?.teamAccount}">${t?.teamAccount}</a> #end
-    #@td()${t?.teamRole}#end
-    #@td()${t?.teamJoin}#end
+    #@td()<input type="checkbox" value="1"
+                 name="idCheck">#end
+    #@td()
+    <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/story?id=${t?.teamUserId}&choose=3">
+        ${t?.teamUserId==null?"":UserUtils.getUserById(t?.teamUserId)?.orgUserRealName}
+    </a>
+    #end
+    #@td()${t?.roleName}#end
+    #@td()${formatDate(t?.teamJoin,"yyyy-MM-dd")}#end
     #@td()${t?.teamDays}#end
     #@td()${t?.teamHours}#end
-    #@td()48#end
+    #@td()${t?.teamDays*t?.teamHours}#end
     #@td()
         #foreach(m:menuManager.getScopeMenus("pro-team-op"))
             #@tinyTableItemRemove(TINY_CONTEXT_PATH+adminPath+m.href t.id)<i class=${m.icon}></i>#end

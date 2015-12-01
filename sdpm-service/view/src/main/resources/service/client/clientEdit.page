@@ -61,7 +61,7 @@
             #@sdpmItem("客户登记时间" "*")
                 #@tinyDateInput(
                     "clientCreateDate" formatDate(client?.clientCreateDate,
-                    "yyyy-MM-dd") "YYYY-MM-DD" {"style":"width:200px","datatype":"*",
+                    "yyyy-MM-dd") "YYYY-MM-DD" {"style":"width:120px","datatype":"*",
                 "nullmsg":"日期不能为空","placeholder":"请输入日期"})#end
             #end
         #end
@@ -87,10 +87,10 @@
 
             </div>
             <div class="col-1">
-                <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
+                <button style="float: left" type="submit" id="submit2" class="commitBtn">保存</button>
             </div>
             <div class="col-1">
-            #* <button style="float: left" type="submit" id="submit" class="backBtn">返回</button>*#
+            #* <button style="float: left" type="submit" id="submit2" class="backBtn">返回</button>*#
                 #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end
             </div>
             <div class="col-5"></div>
@@ -102,7 +102,7 @@
 #end
 <script type="text/javascript">
     $(function () {
-        $("form[name=thisform").Validform({
+        $("form[name=thisform]").Validform({
             tiptype: 2
 
         });

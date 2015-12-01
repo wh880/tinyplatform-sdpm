@@ -12,18 +12,31 @@
 
     #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/service/faq/save" "post" {"class":""})
     <input type="hidden" name="faqId" value="${faq?.faqId}"/>
- #*   #@tinyForm("thisform" "" "" {"class":"test"})*#
-
         #@elementItem()
             #@sdpmItem("产品名称" "*")
-                #@tinySelect("productId" faq?.productId {"class":"input-text select2","rel":"22","id":"productId"})
-                    #@tinyOptionItem("")请选择#end
-                    #foreach(l:slas)
-                        #@tinyOptionItem(l.productId)${l?.productName}#end
+                #@Tselect2F()
+                    #@Tselect2Body(
+                        "productId" faq?.productId{"datatype":"*","id":"productId",
+                        "nullmsg":"产品名称不能为空","class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        #@tinyOptionItem("")请选择#end
+                        #foreach(l:slas)
+                            #@tinyOptionItem(l.productId)${l?.productName}#end
+                        #end
+                    #end
+                    #@Tselect2Fix()
+                        #set(m=menuManager.getMenu("newproduct"))
+                        #if(m)
+                        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
+                        #end
+                        #set(m=menuManager.getMenu("allproduct"))
+                        #if(m)
+                        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
+                        #end
                     #end
                 #end
             #end
         #end
+
 
         #@elementItem()
             #@sdpmItem("创建人")
@@ -34,31 +47,22 @@
         #@elementItem()
             #@sdpmItem("创建时间")
                 #@tinyDateInput(
-                    "faqCreateDate" formatDate(faq?.faqCreateDate,
+                    "faqCreateDate" formatDate(faq?.faqCreateDate?:now(),
                     "yyyy-MM-dd") "YYYY-MM-DD" {"style":"width:200px","datatype":"*",
-                "nullmsg":"日期不能为空","placeholder":"请输入日期"})#end
+                "nullmsg":"日期不能为空","placeholder":"请选择创建日期"})#end
             #end
         #end
         #@elementItem()
-            #@sdpmItem("问题" "*")
-                #tinyInput("text" "faqQuestion" faq?.faqQuestion{"placeholder":"","datatype":"*4-16","nullmsg":
+            #@sdpmItem("问题标题" "*")
+                #tinyInput("text" "faqQuestion" faq?.faqQuestion{"placeholder":"","datatype":"*","nullmsg":
                     "问题不能为空！","id":"faqQuestion","class":"input-text"})
             #end
         #end
-    #*#@elementItem()
-        #@sdpmItem("问题类型" "*")
-            #@tinySelect("faqType" faq?.faqType{"class":"input-text select2","rel":"22","id":"productId"})
-                #@tinyOptionItem("ch")请选择#end
-                #@tinyOptionItem("00")第一类问题#end
-                #@tinyOptionItem("01")第二类问题#end
-                #@tinyOptionItem("02")第三类问题#end
-            #end
-        #end
-    #end*#
         #@elementItem()
             #@sdpmItem("问题类型" "*")
                 #TzTreeSelect(
-                    "faqTypeId" faq?.faqTypeId{"class":"input-text","data-URL":TINY_CONTEXT_PATH+adminPath+
+                    "faqTypeId" faq?.faqTypeId{"class":"input-text","datatype":"*","nullmsg":"问题类型不能为空",
+                    "data-URL":TINY_CONTEXT_PATH+adminPath+
                     "/service/faq/data?check=n"} )
             #end
         #end
@@ -77,7 +81,7 @@
 
             </div>
             <div class="col-1">
-                <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
+                <button style="float: left" type="submit" id="submit2" class="commitBtn">保存</button>
             </div>
             <div class="col-1">
                 #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end
@@ -89,7 +93,7 @@
     #end
 <script type="text/javascript">
     $(function () {
-        $("form[name=thisform").Validform({
+        $("form[name=thisform]").Validform({
             tiptype: 2
         });
     });

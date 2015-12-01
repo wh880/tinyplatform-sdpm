@@ -13,13 +13,8 @@
 				 #@aModal(editpageModal "添加" "500" "200" "btn radius btn-primary" adminPath+"/system/dict/find")
 						#@simpleI("icon-plus")添加#end
 				 #end
-				#*<a href="#" class="btn btn-default btn-sm">产品</a>
-				<a href="#" class="btn btn-success btn-sm">Bug</a>
-				<a href="#" class="btn btn-primary btn-sm">工程</a>
-				<a href="#" class="btn btn-info btn-sm">历史</a>
-				<a href="#" class="btn btn-warning btn-sm">相关</a>*#
 			#end
-			#@tinyTableContent(TINY_CONTEXT_PATH+"/a/system/dict/findPager?moduleId="+dictModule?.moduleId) ##取数据地址 总数据
+			#@tinyTableContent(TINY_CONTEXT_PATH+adminPath+"/system/dict/findPager?moduleId="+dictModule?.moduleId) ##取数据地址 总数据
 				#@thead()
 					#@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
 						#@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end

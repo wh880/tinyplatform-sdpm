@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.action.system;
 
+import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.util.DateUtils;
 import org.tinygroup.tinysqldsl.base.Condition;
 
@@ -11,70 +12,70 @@ import static org.tinygroup.sdpm.system.dao.constant.SystemActionTable.SYSTEM_AC
 
 
 enum DateChoice {
-	today, yesterday, beforeYesterday, thisWeek, lastWeek, thisMonth, lastMonth, all
+    today, yesterday, beforeYesterday, thisWeek, lastWeek, thisMonth, lastMonth, all
 }
 
 public class ActionUtil {
 
-	public static Condition getActionDateCondition(String choice){
-		if(choice==null||"".equals(choice)){
-			return  null;
-		}
-		Calendar calendarBegin = Calendar.getInstance();
-		calendarBegin.setTime(new Date());
-		calendarBegin.set(calendarBegin.get(Calendar.YEAR), calendarBegin.get(Calendar.MONTH), calendarBegin.get(Calendar.DATE));
+    public static Condition getActionDateCondition(String choice) {
+        if (StringUtil.isBlank(choice)) {
+            return null;
+        }
+        Calendar calendarBegin = Calendar.getInstance();
+        calendarBegin.setTime(new Date());
+        calendarBegin.set(calendarBegin.get(Calendar.YEAR), calendarBegin.get(Calendar.MONTH), calendarBegin.get(Calendar.DATE), 0, 0, 0);
 
-		Calendar calendarEnd =  Calendar.getInstance();
-		calendarEnd.setTime(new Date());
-		calendarEnd.set(calendarEnd.get(Calendar.YEAR), calendarEnd.get(Calendar.MONTH), calendarEnd.get(Calendar.DATE));
+        Calendar calendarEnd = Calendar.getInstance();
+        calendarEnd.setTime(new Date());
+        calendarEnd.set(calendarEnd.get(Calendar.YEAR), calendarEnd.get(Calendar.MONTH), calendarEnd.get(Calendar.DATE), 0, 0, 0);
 
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		Condition dateCon = null;
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Condition dateCon;
 
 
-		switch (DateChoice.valueOf(DateChoice.class, choice)) {
-		case today:
-			calendarEnd.add(Calendar.DATE, 1);
-			dateCon = SYSTEM_ACTIONTABLE.ACTION_DATE.between(format.format(calendarBegin.getTime()), format.format(calendarEnd.getTime()));
-			break;
-		case yesterday:
-			calendarEnd.roll(Calendar.DATE, -1);
-			dateCon = SYSTEM_ACTIONTABLE.ACTION_DATE.between(format.format(calendarEnd.getTime()), format.format(calendarBegin.getTime()));
-			break;
-		case beforeYesterday:
-			calendarBegin.roll(Calendar.DATE, -2);
-			calendarEnd.roll(Calendar.DATE, -1);
-			dateCon = SYSTEM_ACTIONTABLE.ACTION_DATE.between(format.format(calendarBegin.getTime()), format.format(calendarEnd.getTime()));
-			break;
-		case thisWeek:
-			calendarEnd.add(Calendar.DATE, 1);
-			dateCon = SYSTEM_ACTIONTABLE.ACTION_DATE.between(format.format(DateUtils.getFirstDayOfWeek(calendarBegin.getTime())), format.format(calendarEnd.getTime()));
-			break;
-		case lastWeek:
-			calendarBegin.setTime(DateUtils.getFirstDayOfWeek(calendarBegin.getTime()));
-			calendarBegin.roll(Calendar.DATE, -7);
-			dateCon = SYSTEM_ACTIONTABLE.ACTION_DATE.between(format.format(calendarBegin.getTime()), format.format(DateUtils.getFirstDayOfWeek(calendarEnd.getTime())));
-			break;
-		case thisMonth:
-			calendarBegin.setTime(DateUtils.getFirstDayOfMonth(calendarBegin.getTime()));
-			calendarEnd.add(Calendar.DATE, 1);
-			dateCon = SYSTEM_ACTIONTABLE.ACTION_DATE.between(format.format(calendarBegin.getTime()),format.format(calendarEnd.getTime()));
-			break;
-		case lastMonth:
-			calendarBegin.setTime(DateUtils.getFirstDayOfMonth(calendarBegin.getTime()));
-			calendarBegin.roll(Calendar.MONTH, -1);
-			calendarEnd.setTime(DateUtils.getFirstDayOfMonth(calendarEnd.getTime()));
+        switch (DateChoice.valueOf(DateChoice.class, choice)) {
+            case today:
+                calendarEnd.add(Calendar.DATE, 1);
+                dateCon = SYSTEM_ACTIONTABLE.ACTION_DATE.between(format.format(calendarBegin.getTime()), format.format(calendarEnd.getTime()));
+                break;
+            case yesterday:
+                calendarBegin.roll(Calendar.DATE, -1);
 
-			dateCon = SYSTEM_ACTIONTABLE.ACTION_DATE.between(format.format(calendarBegin.getTime()),format.format(calendarEnd.getTime()));
-			break;
-		default:
-			dateCon = null;
-			break;
-		}
+                dateCon = SYSTEM_ACTIONTABLE.ACTION_DATE.between(format.format(calendarBegin.getTime()), format.format(calendarEnd.getTime()));
+                break;
+            case beforeYesterday:
+                calendarBegin.roll(Calendar.DATE, -2);
+                calendarEnd.roll(Calendar.DATE, -1);
+                dateCon = SYSTEM_ACTIONTABLE.ACTION_DATE.between(format.format(calendarBegin.getTime()), format.format(calendarEnd.getTime()));
+                break;
+            case thisWeek:
+                calendarEnd.add(Calendar.DATE, 1);
+                dateCon = SYSTEM_ACTIONTABLE.ACTION_DATE.between(format.format(DateUtils.getFirstDayOfWeek(calendarBegin.getTime())), format.format(calendarEnd.getTime()));
+                break;
+            case lastWeek:
+                calendarBegin.setTime(DateUtils.getFirstDayOfWeek(calendarBegin.getTime()));
+                calendarBegin.roll(Calendar.DATE, -7);
+                dateCon = SYSTEM_ACTIONTABLE.ACTION_DATE.between(format.format(calendarBegin.getTime()), format.format(DateUtils.getFirstDayOfWeek(calendarEnd.getTime())));
+                break;
+            case thisMonth:
+                calendarBegin.setTime(DateUtils.getFirstDayOfMonth(calendarBegin.getTime()));
+                calendarEnd.add(Calendar.DATE, 1);
+                dateCon = SYSTEM_ACTIONTABLE.ACTION_DATE.between(format.format(calendarBegin.getTime()), format.format(calendarEnd.getTime()));
+                break;
+            case lastMonth:
+                calendarBegin.setTime(DateUtils.getFirstDayOfMonth(calendarBegin.getTime()));
+                calendarBegin.roll(Calendar.MONTH, -1);
+                calendarEnd.setTime(DateUtils.getFirstDayOfMonth(calendarEnd.getTime()));
 
-		return dateCon;
-	}
+                dateCon = SYSTEM_ACTIONTABLE.ACTION_DATE.between(format.format(calendarBegin.getTime()), format.format(calendarEnd.getTime()));
+                break;
+            default:
+                dateCon = null;
+                break;
+        }
 
+        return dateCon;
+    }
 
 }
 

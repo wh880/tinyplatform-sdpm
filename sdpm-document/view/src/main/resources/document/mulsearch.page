@@ -1,5 +1,3 @@
-
-##<span id="showsearchmore">搜索</span>
 <form method="get" action="${TINY_CONTEXT_PATH+adminPath}/document" id="${docTableId}form" class="form-condensed searchform">
 	<div class="hide">
 		<select id="operatortemp">
@@ -16,41 +14,47 @@
 		</select>
 		<select id="usertemp">
 			<option value="" selected="selected"></option>
-			<option value="admin">A:admin</option>
-			<option value="demo">D:Demo</option>
-			<option value="dev1">D:开发甲</option>
-			<option value="dev2">D:开发乙</option>
-			<option value="dev3">D:开发丙</option>
-			<option value="productManager">P:产品经理</option>
-			<option value="projectManager">P:项目经理</option>
-			<option value="tester1">T:测试甲</option>
-			<option value="tester2">T:测试乙</option>
-			<option value="tester3">T:测试丙</option>
-			<option value="testManager">T:测试经理</option>
-			<option value="closed">Closed</option>
-			<option value="$@me">自己</option>
+			#foreach(u : userList)
+				<option value="${u?.orgUserId}">${u?.orgUserRealName}</option>
+			#end
 			<option value="null">空</option>
 		</select>
-		<select id="pritemp">
+		<select id="producttemp">
 			<option value=""></option>
-			<option value="3">3</option>
-			<option value="1">1</option>
-			<option value="44">44</option>
-			<option value="2">2</option>
-			<option value="4">4</option>
+			#foreach(pd : productList)
+				<option value="${pd?.productId}">${pd?.productName}</option>
+			#end
 			<option value="null">空</option>
 		</select>
-		<select id="statustemp">
-			<option value="" selected="selected"></option>
-			<option value="wait">未开始</option>
-			<option value="doing">进行中</option>
-			<option value="done">已完成</option>
-			<option value="pause">已暂停</option>
-			<option value="cancel">已取消</option>
-			<option value="closed">已关闭</option>
+		<select id="projecttemp">
+			<option value=""></option>
+			#foreach(pj : projectList)
+				<option value="${pj?.projectId}">${pj?.projectName}</option>
+			#end
 			<option value="null">空</option>
 		</select>
-
+		<select id="moduletemp">
+			<option value=""></option>
+			#foreach(m : moduleList)
+				<option value="${m?.moduleId}">${m?.moduleName}</option>
+			#end
+			<option value="null">空</option>
+		</select>
+		<select id="doclibtemp">
+			<option value=""></option>
+			#foreach(l : libList)
+				<option value="${l?.docLibId}">${l?.docLibName}</option>
+			#end
+			<option value="null">空</option>
+		</select>
+		<select id="typetemp">
+			<option value=""></option>
+			#foreach(t : getDict("docType"))
+				<option value="${t?.value}">${t?.text}</option>
+			#end
+			<option value="null">空</option>
+		</select>
+		
 	</div>
 	<table class="table-condensed table-form" id="task-search">
 		<tbody><tr>
@@ -171,9 +175,7 @@
 <script type="text/javascript">
 	<!--
 	$(function(){
-		$("#showsearchmore").click(function(){
 			$(".searchform").toggleClass("showmore");
-		});
 		$("#searchmore").click(function(){
 			$("#searchlite").css("display","block");
 			$(this).hide();
@@ -207,31 +209,31 @@
 			"name":"doc_product",
 			"title":"所属产品",
 			"operator":"=",
-			"value":"user"
+			"value":"product"
 		});
 		itemlist.push({
 			"name":"doc_project",
 			"title":"所属项目",
 			"operator":"=",
-			"value":"user"
+			"value":"project"
 		});
 		itemlist.push({
 			"name":"doc_type",
 			"title":"文档类型",
 			"operator":"=",
-			"value":"user"
+			"value":"type"
 		});
 		itemlist.push({
 			"name":"doc_module",
 			"title":"所属分类",
 			"operator":"=",
-			"value":"user"
+			"value":"module"
 		});
 		itemlist.push({
 			"name":"doc_lib_id",
 			"title":"所属文档库",
 			"operator":"=",
-			"value":"user"
+			"value":"doclib"
 		});
 		itemlist.push({
 			"name":"doc_digest",
@@ -286,12 +288,21 @@
 				case "user":
 					$("#valueBox"+itemIndex).html($('<select name="infos['+sIndex+'].value" id="value'+itemIndex+'" class="form-control">').html($("#usertemp").html()));
 					break;
-				case "pri":
-					$("#valueBox"+itemIndex).html($('<select name="infos['+sIndex+'].value" id="value'+itemIndex+'" class="form-control">').html($("#pritemp").html()));
+				case "product":
+					$("#valueBox"+itemIndex).html($('<select name="infos['+sIndex+'].value" id="value'+itemIndex+'" class="form-control">').html($("#producttemp").html()));
 					break;
-				case "status":
-					$("#valueBox"+itemIndex).html($('<select name="infos['+sIndex+'].value" id="value'+itemIndex+'" class="form-control">').html($("#statustemp").html()));
+				case "project":
+					$("#valueBox"+itemIndex).html($('<select name="infos['+sIndex+'].value" id="value'+itemIndex+'" class="form-control">').html($("#projecttemp").html()));
 					break;
+				case "module":
+					$("#valueBox"+itemIndex).html($('<select name="infos['+sIndex+'].value" id="value'+itemIndex+'" class="form-control">').html($("#moduletemp").html()));
+					break;
+				case "doclib":
+					$("#valueBox"+itemIndex).html($('<select name="infos['+sIndex+'].value" id="value'+itemIndex+'" class="form-control">').html($("#doclibtemp").html()));
+					break;	
+				case "type":
+					$("#valueBox"+itemIndex).html($('<select name="infos['+sIndex+'].value" id="value'+itemIndex+'" class="form-control">').html($("#typetemp").html()));
+					break;			
 				case "date":
 					$("#valueBox"+itemIndex).html('<input type="text" name="infos['+sIndex+'].value" id="value'+itemIndex+'" value="" class="form-control dateinput">');
 					break;

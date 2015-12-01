@@ -1,6 +1,4 @@
 #!set(activeTitle="团队管理",activeMenuId=currentPageId)
-
-#set(name="team")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
         #@div(divClass="dropdownBox")
@@ -19,16 +17,20 @@
 #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/project/team/teamManageSave" "post" {"class":"test"})
     #@table()
     <tr>
-        <td>
+        <td width="20%">
             用户
         </td>
-        <td>
+        <td width="20%">
+            <span class="c-red">*</span>
             角色
         </td>
-        <td>
+        <td width="20%">
+            加盟日
+        </td>
+        <td width="20%">
             可用工日
         </td>
-        <td>
+        <td width="20%">
             可用工时/天
         </td>
     </tr>
@@ -36,12 +38,33 @@
         #foreach(t : teamList)
         <tr>
             #@thW("250px")
-                ${t.teamAccount}
-                <input name="teamList[${a}].teamAccount" value="${t.teamAccount}" type="hidden">
+                ${t?.teamUserId==null?"":UserUtils.getUserById(t?.teamUserId)?.orgUserRealName}
+                <input name="teamList[${a}].teamUserId" value="${t?.teamUserId}" type="hidden">
                 <input name="teamList[${a}].id" value="${t.id}" type="hidden">
             #end
             <td>
-                #tinyInput("text" "teamList["+a+"].teamRole" t.teamRole {"datatype":"","class":"input-text"})
+                #@Tselect2F()
+                    #@Tselect2Body(
+                        "teamList["+a+"].teamRole" t.teamRole {"class":"input-text select2","multiple":"multiple"})
+                        #foreach(r : roleList)
+                            <option value="${r.orgRoleId}">${r.orgRoleName}</option>
+                        #end
+                    #end
+                    #@Tselect2Fix()
+                        #set(m=menuManager.getMenu("organizationAddGroup"))
+                        #if(m)
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
+                        #end
+                        #set(m=menuManager.getMenu("organizationPrivilege"))
+                        #if(m)
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
+                        #end
+                    #end
+                #end
+            ##                #tinyInput("text" "teamList["+a+"].teamRole" t.teamRole {"datatype":"","class":"input-text"})
+            </td>
+            <td>
+                #@tinyDateInput("teamList["+a+"].teamJoin" formatDate(now(),"yyyy-MM-dd") "YYYY-MM-DD" )#end
             </td>
             <td>
                 #tinyInput("text" "teamList["+a+"].teamDays" t.teamDays {"datatype":"","class":"input-text"})
@@ -52,37 +75,50 @@
         </tr>
             #set(a = a + 1)
         #end
-        #foreach(i : userList)
-        <tr>
-            <td>
-                #@Tselect2F()
-                    #@Tselect2Body("teamList["+a+"].teamAccount" "" {"class":"input-text select2"})
-                        <option value=""></option>
-                        #foreach(u : userList)
-                            <option value="${u.orgUserAccount}">${u.orgUserAccount}</option>
-                        #end
-                    #end
-                    #@Tselect2Fix()
-                        <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/form">增加</a>
-                        <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/list" class="r">全部</a>
-                    #end
-                #end
-            </td>
-            <td>
-                #tinyInput("text" "teamList["+a+"].teamRole" "" {"datatype":"","class":"input-text"})
-            </td>
-            <td>
-                #tinyInput("text" "teamList["+a+"].teamDays" "" {"datatype":"","class":"input-text"})
-            </td>
-            <td>
-                #tinyInput("text" "teamList["+a+"].teamHours" "" {"datatype":"","class":"input-text"})
-            </td>
-        </tr>
-            #set(a = a + 1)
+        #@table("itemlist-table")
+            #@tbody("databody")
+                #include("addTr.page")
+            #end
         #end
+    <script>
+        $(function () {
+            function updateUserID() {
+                $('.itemlist-table>.databody .userID').each(function (index) {
+                    $(this).html(index + 1);
+                });
+            }
+
+            $(".itemlist-table").on("click", ".addnext", function () {
+                var $thisTr =
+                $(this).closest("tr");
+                var a = $thisTr.attr("class");
+                var no = a.substr(3);
+                $.ajax({
+                    type: 'POST',
+                    url: "${TINY_CONTEXT_PATH+adminPath}/product/team/nextTr?a=" + no,
+                    dataType: "html",
+                    success: function (data) {
+                            $thisTr.after(data);
+                    },
+                });
+                    $thisTr.find(".addnext").css("display","none");
+//            updateUserID();
+                return false;
+            }).on("click", ".delbutton", function () {
+                if ($('.databody .userID').size() == 1) return;
+                var that = this;
+                layer.confirm('确定删除?', function () {
+                    $(that).closest("tr").remove();
+                    updateUserID();
+                    layer.msg('删除成功！', 1, 1)
+                })
+            });
+        });
+    </script>
     #end
-    #@div(divClass="col-10 col-offset-2 form-inline")
+    #@div(divClass="col-7 col-offset-5 form-inline")
         #tinyInput("submit" "submitbtn" " 保存 " {"class":"btn btn-primary"})
+    <a href="javascript:history.go(-1)" class="btn radius btn-default">返回</a>
     #end
 
 #end

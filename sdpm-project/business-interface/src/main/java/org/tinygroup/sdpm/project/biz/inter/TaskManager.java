@@ -1,6 +1,8 @@
 package org.tinygroup.sdpm.project.biz.inter;
 
+import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
+import org.tinygroup.sdpm.project.dao.pojo.TaskChartBean;
 import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.List;
@@ -10,9 +12,15 @@ import java.util.List;
  */
 public interface TaskManager {
 
-    public Integer batchSoftDel(String condition);
+    /**
+     * 获取项目最大编号
+     *
+     * @param projectId
+     * @return
+     */
+    Integer getMaxNo(Integer projectId);
 
-    public int[] batchAdd(List<ProjectTask> taskList);
+    int[] batchAdd(List<ProjectTask> taskList);
 
     /**
      * 根据主键id查找用户
@@ -20,7 +28,7 @@ public interface TaskManager {
      * @param taskId 主键
      * @return
      */
-    ProjectTask find(int taskId);
+    ProjectTask find(Integer taskId);
 
     /**
      * 根据条件查询List
@@ -36,7 +44,7 @@ public interface TaskManager {
      * @param storyId
      * @return
      */
-    public Integer getTaskSumByStory(Integer storyId);
+    Integer getTaskSumByStory(Integer storyId);
 
     /**
      * 无状态查询
@@ -52,76 +60,41 @@ public interface TaskManager {
 
     /**
      * 加入状态
+     *
      * @param start
      * @param limit
      * @param task
      * @param sortName
      * @param asc
-     * @param conditon
+     * @param condition
      * @return
      */
-    public Pager<ProjectTask> findPagerByStatu(Integer start, Integer limit, ProjectTask task, String sortName, boolean asc, String conditon);
+    Pager<ProjectTask> findPagerByStatus(Integer start, Integer limit, ProjectTask task, String sortName, boolean asc, String condition);
 
     /**
-     * 新增有一个用户
+     * 由我完成
      *
-     * @param task 新增实体类
+     * @param start
+     * @param limit
+     * @param task
+     * @param sortName
+     * @param asc
+     * @param user
      * @return
      */
+    Pager<ProjectTask> findPagerByMe(Integer start, Integer limit, ProjectTask task, String sortName, boolean asc, OrgUser user);
+
     ProjectTask add(ProjectTask task);
 
-    /**
-     * 更新用户
-     *
-     * @param task 需要更新的实体类
-     * @return
-     */
     Integer update(ProjectTask task);
 
     /**
-     * 更新用户
-     *
-     * @param task 需要更新的实体类
-     * @return
-     */
-    Integer updateTask(ProjectTask task);
-    /**
-     * 更新用户
-     *
-     * @param task 需要更新的实体类
-     * @return
-     */
-    Integer updateEditTask(ProjectTask task);
-    /**
-     * 更新用户
-     *
-     * @param task 需要更新的实体类
-     * @return
-     */
-    Integer updateCallTask(ProjectTask task);
-    /**
-     * 更新用户
-     *
-     * @param task 需要更新的实体类
-     * @return
-     */
-    Integer updateFinishTask(ProjectTask task);
-    /**
-     * 更新用户
-     *
-     * @param task 需要更新的实体类
-     * @return
-     */
-    Integer updateStartTask(ProjectTask task);
-
-
-    /**
-     * 根据id进行软删除用户
+     * 根据id进行软删除
      *
      * @param id 主键
      * @return
      */
-    Integer delete(int id);
+    Integer delete(Integer id);
 
-    Integer updateCloseTask(ProjectTask task);
+    List<TaskChartBean> findByGroup(String id);
 }

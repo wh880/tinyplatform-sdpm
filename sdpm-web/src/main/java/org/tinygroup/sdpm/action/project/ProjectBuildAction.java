@@ -1,0 +1,470 @@
+package org.tinygroup.sdpm.action.project;
+
+import org.apache.shiro.authz.annotation.Logical;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.tinygroup.commons.tools.StringUtil;
+import org.tinygroup.sdpm.common.condition.ConditionCarrier;
+import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
+import org.tinygroup.sdpm.common.web.BaseController;
+import org.tinygroup.sdpm.dto.UploadProfile;
+import org.tinygroup.sdpm.org.service.inter.UserService;
+import org.tinygroup.sdpm.product.dao.pojo.Product;
+import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
+import org.tinygroup.sdpm.product.service.StoryService;
+import org.tinygroup.sdpm.project.dao.pojo.Project;
+import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
+import org.tinygroup.sdpm.project.dao.pojo.ProjectBurn;
+import org.tinygroup.sdpm.project.service.inter.BuildService;
+import org.tinygroup.sdpm.project.service.inter.ProjectProductService;
+import org.tinygroup.sdpm.project.service.inter.ProjectService;
+import org.tinygroup.sdpm.project.service.inter.ProjectStoryService;
+import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
+import org.tinygroup.sdpm.quality.service.inter.BugService;
+import org.tinygroup.sdpm.system.dao.pojo.ProfileType;
+import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
+import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;
+import org.tinygroup.sdpm.system.service.inter.ProfileService;
+import org.tinygroup.sdpm.util.LogUtil;
+import org.tinygroup.sdpm.util.ProjectUtils;
+import org.tinygroup.sdpm.util.UserUtils;
+import org.tinygroup.tinysqldsl.Pager;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.*;
+
+/**
+ * 版本
+ * Created by wangying14938 on 2015-09-22.
+ */
+@Controller
+@RequestMapping("/a/project/build")
+public class ProjectBuildAction extends BaseController {
+    @Autowired
+    UserService userService;
+    @Autowired
+    private BuildService buildService;
+    @Autowired
+    private ProjectService projectService;
+    @Autowired
+    private ProjectStoryService projectStoryService;
+    @Autowired
+    private ProjectProductService projectProductService;
+    @Autowired
+    private ProfileService profileService;
+    @Autowired
+    private BugService bugService;
+    @Autowired
+    private StoryService storyService;
+
+    @RequiresPermissions("version")
+    @RequestMapping("/index")
+    public String index(Model model, HttpServletRequest request, HttpServletResponse response) {
+        Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
+        if (projectId == null) {
+            return redirectProjectForm();
+        }
+        Project project = projectService.findProjectById(projectId);
+        model.addAttribute("project", project);
+        return "project/build/index";
+    }
+
+    @RequestMapping("/productBuildList")
+    public String productBuildList(ProjectBuild build, Model model,
+                                   Integer start, Integer limit, String order, String ordertype) {
+        boolean asc = "asc".equals(ordertype) ? true : false;
+        Pager<ProjectBuild> pager = buildService.findPagerBuild(build, start, limit, order, asc);
+        model.addAttribute("buildPager", pager);
+        return "project/build/tableData.pagelet";
+    }
+
+
+    @RequestMapping("/find")
+    public String find(Model model, Integer start, Integer limit, String order, String ordertype,
+                       HttpServletRequest request, HttpServletResponse response) {
+        Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
+        if (projectId == null) {
+            return redirectProjectForm();
+        }
+        boolean asc = "asc".equals(ordertype) ? true : false;
+        Pager<ProjectBuild> pager = buildService.findBuildPagerWithOrder(projectId, start, limit, order, asc);
+        model.addAttribute("buildPager", pager);
+        return "project/build/tableData.pagelet";
+    }
+
+    /**
+     * 查看当前版本对应的bug
+     *
+     * @return
+     */
+    @RequiresPermissions("pro-version-look")
+    @RequestMapping("/look")
+    public String look() {
+        return "project/bug/index";
+    }
+
+    @RequiresPermissions(value = {"pro-version-edit", "pro-version-add"}, logical = Logical.OR)
+    @RequestMapping("/edit")
+    public String edit(HttpServletRequest request, HttpServletResponse response,
+                       Integer buildId, Model model) {
+        Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
+        if (projectId == null) {
+            return redirectProjectForm();
+        }
+        if (buildId != null) {
+            SystemProfile systemProfile = new SystemProfile();
+            systemProfile.setFileObjectId(buildId);
+            systemProfile.setFileObjectType(ProfileType.BUILD.getType());
+            List<SystemProfile> fileList = profileService.findSystemProfile(systemProfile);
+            model.addAttribute("fileList", fileList);
+        }
+
+        List<Product> linkProductByProjectId = projectProductService.findLinkProductByProjectId(projectId);
+        model.addAttribute("productList", linkProductByProjectId);
+
+        SystemModule module = new SystemModule();
+        module.setModuleType("project");
+        module.setModuleRoot(projectId);
+        model.addAttribute("teamList", userService.findTeamUserListByProjectId(projectId));
+        if (buildId != null && buildId != 0) {
+            ProjectBuild build = buildService.findBuild(buildId);
+            model.addAttribute("build", build);
+        }
+        return "project/build/edit";
+    }
+
+
+    @RequestMapping(value = "/addSave", method = RequestMethod.POST)
+    public String addSave(ProjectBuild build, Model model, UploadProfile uploadProfile) throws IOException {
+        ProjectBuild temp;
+        if (build.getBuildId() == null) {
+            build.setBuildBuilder(UserUtils.getUserId());
+            temp = buildService.addBuild(build);
+            processProfile(uploadProfile, temp.getBuildId(), ProfileType.BUILD);
+            LogUtil.logWithComment(LogUtil.LogOperateObject.BUILD,
+                    LogUtil.LogAction.OPENED,
+                    String.valueOf(temp.getBuildId()),
+                    UserUtils.getUserId(),
+                    String.valueOf(temp.getBuildProduct()),
+                    String.valueOf(temp.getBuildProject()),
+                    null,
+                    null,
+                    null);
+        } else {
+            buildService.updateBuild(build);
+            processProfile(uploadProfile, build.getBuildId(), ProfileType.BUILD);
+            LogUtil.logWithComment(LogUtil.LogOperateObject.BUILD,
+                    LogUtil.LogAction.EDITED,
+                    String.valueOf(build.getBuildId()),
+                    UserUtils.getUserId(),
+                    String.valueOf(build.getBuildProduct()),
+                    String.valueOf(build.getBuildProject()),
+                    null,
+                    null,
+                    null);
+        }
+        model.addAttribute("build", build);
+        return "project/build/index.page";
+    }
+
+    @RequiresPermissions("pro-version-delete")
+    @ResponseBody
+    @RequestMapping(value = "/delete")
+    public Map<String, String> delete(Integer id) {
+        buildService.softDeleteBuild(id);
+        ProjectBuild temp = buildService.findBuild(id);
+        LogUtil.logWithComment(LogUtil.LogOperateObject.BUILD,
+                LogUtil.LogAction.OPENED,
+                String.valueOf(temp.getBuildId()),
+                UserUtils.getUserId(),
+                String.valueOf(temp.getBuildProduct()),
+                String.valueOf(temp.getBuildProject()),
+                null,
+                null,
+                null);
+        return resultMap(true, "删除成功");
+    }
+
+    @RequestMapping("/product-al-bug")
+    public String jumpalBug() {
+        return "/project/task/relation-release/product-al-bug.page";
+    }
+
+    @RequestMapping("/product-al-le-bug")
+    public String jumpleBug() {
+        return "/project/task/relation-release/product-al-le-bug.page";
+    }
+
+    @RequestMapping("/product-al-no-bug")
+    public String jumpanoBug() {
+        return "/project/task/relation-release/product-al-no-bug.page";
+    }
+
+    @RequiresPermissions("pro-version-delete")
+    @ResponseBody
+    @RequestMapping(value = "/batchDelete")
+    public Map batchDelDoc(String ids) {
+        if (StringUtil.isBlank(ids)) {
+            return resultMap(false, "请至少选择一条数据");
+        }
+        List<ProjectBuild> list = new ArrayList<ProjectBuild>();
+        for (String s : ids.split(",")) {
+            ProjectBuild build = new ProjectBuild();
+            build.setBuildId(Integer.valueOf(s));
+            build.setBuildDeleted("1");
+            list.add(build);
+        }
+        for (int i = 0, n = list.size(); i < n; i++) {
+            LogUtil.logWithComment(LogUtil.LogOperateObject.BUILD,
+                    LogUtil.LogAction.DELETED,
+                    String.valueOf(list.get(i).getBuildId()),
+                    UserUtils.getUserId(),
+                    String.valueOf(list.get(i).getBuildProduct()),
+                    String.valueOf(list.get(i).getBuildProject()),
+                    null,
+                    null,
+                    null);
+        }
+
+        buildService.deleteBuildByIds(list);
+        return resultMap(true, "删除成功");
+    }
+
+
+    @RequestMapping("/productalbug")
+    public String productalbug(Integer buildId, Model model) {
+        ProjectBuild build = buildService.findBuild(buildId);
+        model.addAttribute("build", build);
+        //还需要查询其他相关任务剩余时间的信息
+        return "/project/task/relation-release/product-al-bug.page";
+    }
+
+    @RequestMapping("/releasebaseinfo")
+    public String releasebaseinfo(Integer buildId, Model model) {
+        ProjectBuild build = buildService.findBuild(buildId);
+        model.addAttribute("build", build);
+        //还需要查询其他相关任务剩余时间的信息
+        return "/project/task/relation-release/releasebaseinfo.pagelet";
+    }
+
+    //    @RequiresPermissions("projectBuild-forword")
+    @RequestMapping("/forword/{forwordPager}")
+    public String forword(@PathVariable(value = "forwordPager") String forwordPager, Integer buildId, Model model) {
+        ProjectBuild build = buildService.findBuild(buildId);
+        model.addAttribute("build", build);
+        if ("alBug".equals(forwordPager)) {
+            return "project/task/relation-release/product-al-bug.page";
+        } else if ("alnoBug".equals(forwordPager)) {
+            return "project/task/relation-release/product-al-no-bug.page";
+        } else if ("alleBug".equals(forwordPager)) {
+            return "project/task/relation-release/product-al-le-bug.page";
+        } else if ("alnoReq".equals(forwordPager)) {
+            return "project/task/relation-release/product-al-no-req.page";
+
+        } else /* ("alReq".equals(forwordPager)) */ {
+            return "project/task/relation-release/product-al-req.page";
+        }
+
+    }
+
+
+    @RequestMapping("/bugSearch/{relate}")
+    public String bugListAction(@PathVariable(value = "relate") String relate,
+                                int start,
+                                int limit,
+                                QualityBug bug,
+                                int id,
+                                String groupOperate,
+                                SearchInfos searchInfos,
+                                String order,
+                                String ordertype,
+                                Model model) {
+
+        ConditionCarrier carrier = new ConditionCarrier();
+        if (searchInfos != null) {
+            carrier.putSearch("bugSearch",searchInfos,groupOperate);
+        }
+        ProjectBuild build = buildService.findBuild(id);
+        bug.setDeleted(0);
+        bug.setBugStatus("2");
+        bug.setBugOpenedBuild(String.valueOf(id));
+        if ("reRelateBug".equals(relate)) {
+            carrier.putIdIn("qualityBug.bugId",build.getBuildBugs().split(","));
+            Pager<QualityBug> p = bugService.findBugListPager(start, limit, carrier, bug,order,"asc".equals(ordertype)?true:false);
+            model.addAttribute("bugList", p);
+            return "/project/task/relation-release/product-al-bug-data.pagelet";
+        } else if ("noRelateBug".equals(relate)) {
+            carrier.putIdNotIn("qualityBug.bugId", build.getBuildBugs().split(","));
+            Pager<QualityBug> p =  bugService.findBugListPager(start, limit, carrier, bug,order,"asc".equals(ordertype)?true:false);
+            model.addAttribute("bugList", p);
+            return "/project/task/relation-release/product-al-no-bug-data.pagelet";
+        } else if ("leRelateBugRelease".equals(relate)) {
+            bug.setBugStatus("1");
+            Pager<QualityBug> p = bugService.findBugListPager(start, limit, carrier, bug, order, "asc".equals(ordertype) ? true : false);
+            model.addAttribute("bugList", p);
+            return "/project/task/relation-release/product-al-le-bug-data.pagelet";
+        }
+
+        return "";
+    }
+
+    /**
+     * 关联需求
+     *
+     * @param ids
+     * @param buildId
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/releateReq")
+    public Map<String, String> releateReq(String ids, Integer buildId) {
+        if (StringUtil.isBlank(ids)) {
+            return resultMap(false, "请至少选择一条数据");
+        }
+        ProjectBuild build = buildService.findBuild(buildId);
+        List<String> origin = new ArrayList<String>(Arrays.asList(build.getBuildStories().split(",")));
+        List<String> add = new ArrayList<String>(Arrays.asList(ids.split(",")));
+        origin.addAll(add);
+        build.setBuildStories(StringUtil.join(origin,","));
+        buildService.updateBuild(build);
+        return resultMap(true, "关联成功");
+    }
+
+    @ResponseBody
+    @RequestMapping("/releateBug")
+    public Map<String, String> releateBug(String ids, Integer buildId) {
+        if (StringUtil.isBlank(ids)) {
+            return resultMap(false, "请至少选择一条数据");
+        }
+        ProjectBuild build = buildService.findBuild(buildId);
+        List<String> origin = new ArrayList<String>(Arrays.asList(build.getBuildBugs().split(",")));
+        List<String> add = new ArrayList<String>(Arrays.asList(ids.split(",")));
+        origin.addAll(add);
+        build.setBuildBugs(StringUtil.join(origin,","));
+        buildService.updateBuild(build);
+        return resultMap(true, "关联成功");
+    }
+
+    @RequestMapping("/search/reRelateStory")
+    public String storyListAction(int start, int limit, int id, String groupOperate, SearchInfos searchInfos,
+                                  Model model) {
+        Pager<ProductStory> p = projectStoryService.findStoryPager(start, limit, id, searchInfos, groupOperate);
+        model.addAttribute("storys", p);
+
+        return "/project/task/relation-release/product-al-req-data.pagelet";
+    }
+
+    @RequestMapping("/search/noRelateStory")
+    public String storyNoListAction(int start,
+                                    int limit,
+                                    int id,
+                                    String groupOperate,
+                                    SearchInfos searchInfos,
+                                    String order,
+                                    String ordertype,
+                                    Model model) {
+        ProjectBuild build = buildService.findBuild(id);
+        ConditionCarrier carrier = new ConditionCarrier();
+        ProductStory story = new ProductStory();
+        story.setDeleted(0);
+        story.setProductId(build.getBuildProduct());
+        if (searchInfos != null) {
+            carrier.putSearch("storySearch",searchInfos,groupOperate);
+        }
+        carrier.putIdNotIn("productStory.storyId",build.getBuildStories().split(","));
+        Pager<ProductStory> p = storyService.findStoryByCondition(start,limit,story,carrier,order,"asc".equals(ordertype)?true:false);
+        model.addAttribute("storys", p);
+
+        return "/project/task/relation-release/product-al-no-req-data.pagelet";
+    }
+
+    @ResponseBody
+    @RequestMapping("/deletereleate")
+    public Map deleteReleate(Integer storyId, Integer buildId) {
+        ProjectBuild build = buildService.findBuild(buildId);
+        List<String> origin = new ArrayList<String>(Arrays.asList(build.getBuildStories().split(",")));
+        origin.remove(String.valueOf(storyId));
+        build.setBuildStories(StringUtil.join(origin,","));
+        buildService.updateBuild(build);
+        return resultMap(true, "解除关联成功");
+
+    }
+
+    @ResponseBody
+    @RequestMapping("/deletereleateBug")
+    public Map deletereleateBug(Integer bugId, Integer buildId) {
+        ProjectBuild build = buildService.findBuild(buildId);
+        List<String> origin = new ArrayList<String>(Arrays.asList(build.getBuildBugs().split(",")));
+        origin.remove(String.valueOf(bugId));
+        build.setBuildBugs(StringUtil.join(origin,","));
+        buildService.updateBuild(build);
+        return resultMap(true, "解除关联成功");
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/batchDeleteReq")
+    public Map batchDelReq(String ids, Integer buildId) {
+        if (StringUtil.isBlank(ids)) {
+            return resultMap(false, "请至少选择一条数据");
+        }
+        ProjectBuild build = buildService.findBuild(buildId);
+        List<String> origin = new ArrayList<String>(Arrays.asList(build.getBuildStories().split(",")));
+        List<String> remove = new ArrayList<String>(Arrays.asList(ids.split(",")));
+        origin.removeAll(remove);
+        build.setBuildStories(StringUtil.join(origin,","));
+        buildService.updateBuild(build);
+        return resultMap(true, "删除成功");
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/batchDeleteBug")
+    public Map batchDeleteBug(String ids, Integer buildId) {
+        if (StringUtil.isBlank(ids)) {
+            return resultMap(false, "请至少选择一条数据");
+        }
+        ProjectBuild build = buildService.findBuild(buildId);
+        List<String> origin = new ArrayList<String>(Arrays.asList(build.getBuildBugs().split(",")));
+        List<String> remove = new ArrayList<String>(Arrays.asList(ids.split(",")));
+        origin.removeAll(remove);
+        build.setBuildBugs(StringUtil.join(origin,","));
+        buildService.updateBuild(build);
+        return resultMap(true, "删除成功");
+    }
+
+
+    @ResponseBody
+    @RequestMapping("/buildList")
+    public List<ProjectBuild> findProjectBuild(ProjectBuild build, String from) {
+        if ("product".equals(from)) {
+            if (build.getBuildProduct() == null && build.getBuildProduct() < 1) {
+                return new ArrayList<ProjectBuild>();
+            } else {
+                build.setBuildDeleted("0");
+            }
+        }
+        return buildService.findListBuild(build);
+    }
+
+    @ResponseBody
+    @RequestMapping("ajax/buildInCondition")
+    public List<ProjectBuild> buildInCondition(String key, String initKey, Integer productId, Integer projectId, HttpServletRequest request) {
+        if (initKey != null) {
+            if (initKey.indexOf(",") > 0) {
+                String[] ids = initKey.split(",");
+                return buildService.getBuildByIds(ids);
+            }
+            List<ProjectBuild> result = new ArrayList<ProjectBuild>();
+            result.add(buildService.findBuild(Integer.parseInt(initKey)));
+            return result;
+        }
+        return buildService.buildInCondition(key, productId, projectId);
+    }
+}

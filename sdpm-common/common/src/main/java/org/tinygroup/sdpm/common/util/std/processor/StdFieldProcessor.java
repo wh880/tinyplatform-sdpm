@@ -11,7 +11,7 @@ import org.tinygroup.xmlparser.node.XmlNode;
 /**
  * Created by wangll13383 on 2015/9/21.
  */
-public class StdFieldProcessor implements ApplicationProcessor{
+public class StdFieldProcessor implements ApplicationProcessor {
     public void start() {
         TableProcessor tp = BeanContainerFactory.getBeanContainer(this.getClass().getClassLoader()).getBean(TableProcessorImpl.class);
         StdUtil.stdProcess(tp.getTables());

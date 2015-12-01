@@ -1,6 +1,7 @@
 #import("/org/tinygroup/button/components/button_smart.component")
 #import("/org/tinygroup/button/components/button_common.component")
 #import("/org/tinygroup/button/components/button.component")
+#set(bugTableId = "bugTableId")
 #macro initBatchAction()
 <script>
 	$(function () {
@@ -27,7 +28,7 @@
 					success: function (data) {
 						// alert('success');
 						if(data.status=="y") {
-							layer.msg(data.info, 3, 1);
+							layer.msg(data.info, 2, 1);
 							$("#${tableId}").trigger("refresh");
 						}else{
 							layer.msg(data.info)
@@ -56,14 +57,14 @@
 			#@tabHead()
 				#include("/testManagement/page/Tab.page")
 			#end
-			
+
 			#@tabBodyCol("ptop-5")
 			##operationbar star
 			#@div(divClass="operationbar")
 				<span class="f">
 					#foreach(m:menuManager.getScopeMenus("testbugleft-tab"))
 						#if(m.id != "tsearch")
-							<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="${m.id==status?'active_btn':''}">${m.name}</a>
+							<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}&currentPageId=5" class="${m.id==status?'active_btn':''}">${m.name}</a>
 						#else
 							<a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
 						#end
@@ -72,30 +73,30 @@
 				<span class="r">
 					#foreach(m:menuManager.getScopeMenus("testbug-tab"))
     				#if(m.id=="tbugoutput")
-    					#@buttonGroup()
-							#@buttonDropdown("more" buttonClass="btnDropDown")#buttonIcon(iconClass="icon-upload-alt")导出
-								#@spanCaret()#end
-							#end
-							#@ulDropdownMenu("downMenuSty")
-								<p>
-									#@aModal("#myModal" "导出数据" "550" "100" "" "/testManagement/page/tabledemo/exportBugTemplet.pagelet")导出数据#end
-								</p>
-								<p>
-									#@aModal("#myModal" "导出模板" "550" "100" "" "/testManagement/page/tabledemo/exportBugTemplet.pagelet")导出模版#end		                         </p>
-								</p>
-								 #@liDivider()#end
-							#end
-		                #end&nbsp;
+##    					#@buttonGroup()
+##							#@buttonDropdown("more" buttonClass="btnDropDown")#buttonIcon(iconClass="icon-upload-alt")导出
+##								#@spanCaret()#end
+##							#end
+##							#@ulDropdownMenu("downMenuSty")
+##								<p>
+##									#@aModal("#myModal" "导出数据" "550" "100" "" "/testManagement/page/tabledemo/exportBugTemplet.pagelet")导出数据#end
+##								</p>
+##								<p>
+##									#@aModal("#myModal" "导出模板" "550" "100" "" "/testManagement/page/tabledemo/exportBugTemplet.pagelet")导出模版#end		                         </p>
+##								</p>
+##								 #@liDivider()#end
+##							#end
+##		                #end&nbsp;
     				#else
     					#if(m.id=="tbuginput")
-    						#@aModal("#myModal" m.name "400" "80" "" m.href "ml-5")
-								#buttonIcon(iconClass=m.icon)${m.name}#end&nbsp;
+##    						#@aModal("#myModal" m.name "400" "80" "" m.href+"?currentPageId=5" "ml-5")
+##								#buttonIcon(iconClass=m.icon)${m.name}#end&nbsp;
 						#else
-							<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp
+							<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?currentPageId=5">#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp
     					#end
     				#end
     				#end
-    									
+
 		                #@dialog("myModal")
 								#@dialogHeader()#end
 								#@dialogBody()<p></p>#end
@@ -104,37 +105,42 @@
 								    #@buttonCancel()关闭#end
 							  	#end
 						#end
-                    
+
 				</span>
 				#div(divClass="clearfix")
-				#include("/testManagement/page/mulsearch.page")
+##				#include("/testManagement/page/mulsearch.page")
 			#end
 			##operationbar end
 			#end
 
 			#@toggleBox({"class":"open"})
 				#@toggleLeft({"class":"aclass"})
-					#@settoggleLeftTitle()${qualityProduct?.productName}#end
+					#@settoggleLeftTitle()#foreach(product : ProductUtils.getProductList())
+                                                                        #if(product?.productId == qualityProductId)
+                                                                        ${product?.productName}
+                                                                        #break
+                                                                        #end
+                                                                        #end#end
 						#@settoggleLeftBody("treeLeftbox")
-							#@zTreeList(call("link","/system/module/tree?moduleType=story&moduleRoot="+qualityProduct?.productId))
+							#@zTreeList(call("link",adminPath+"/system/module/bugTree?moduleType=bug&moduleRoot="+qualityProductId))
 								#setzTreeValMap({"id":"moduleId","name":"moduleName","pid":"moduleParent"}) ##key值为固定
 								#zTreeSetLinkUrl(TINY_CONTEXT_PATH+adminPath+"/quality/bug?status="+status+"&currentPageId=5")
-								#zTreeSetAddUrl(TINY_CONTEXT_PATH+adminPath+"/system/module/ajax/save?moduleType=story&moduleRoot="+qualityProduct?.productId)
+								#zTreeSetAddUrl(TINY_CONTEXT_PATH+adminPath+"/system/module/ajax/save?moduleType=bug&moduleRoot="+qualityProductId)
 								#zTreeSetEditUrl(TINY_CONTEXT_PATH+adminPath+"/system/module/ajax/save")
 								#zTreeSetDelUrl(TINY_CONTEXT_PATH+adminPath+"/system/module/ajax/delete")
 							#end
 						#end
 				#end
-			
+
 			#@toggleRight()
-			#@tinyTable()
+			#@tinyTable(bugTableId)
 				#@div(divBaseClass="tinyheaderTools form-inline")
 					<div class="f col-3">
-						<input type="button" value="全选" class="btn btn-default btn-primary col-3" 
-						onclick="selectAllNullorReserve('userid','全选');" />											
+						<input type="button" value="全选" class="btn btn-default btn-primary col-3"
+						onclick="selectAllNullorReserve('idCheck','全选');" />
 						<div class="col-0">&nbsp&nbsp</div>
 						<input type="button" value="反选" class="btn btn-default btn-primary col-3"
-						 onclick="selectAllNullorReserve('userid','反选');" />						
+						 onclick="selectAllNullorReserve('idCheck','反选');" />
 						<div class="col-0">&nbsp&nbsp</div>
 						<div class="dropdown col-3">
 							<a id="" role="button" data-toggle="dropdown" class="btn btn-primary" data-target="#" href="javascript:void(0);">编辑<span class="caret"></span></a>
@@ -142,16 +148,9 @@
 								<li>
 									#foreach(m:menuManager.getScopeMenus("testbug-op"))
 										#if(m.id=="tmakesure")
-											<a href="${TINY_CONTEXT_PATH+adminPath}/quality/bug/batch/sure">
-												${m.name}</a>
-										#end
-									#end
-								</li>
-								<li>
-									#foreach(m:menuManager.getScopeMenus("testbug-op"))
-										#if(m.id=="tversiondelete")
-											<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">
-												${m.name}</a>
+										<a tabindex="-1" href="javascript:;">#@mulOperation("tmakesure" TINY_CONTEXT_PATH+adminPath+"/quality/bug/batch/sure")
+                                        <div>${m.name}</div>
+                                        #end</a>
 										#end
 									#end
 								</li>
@@ -160,27 +159,13 @@
 									#if(m.id=="tsolution")
 									<a tabindex="-1" href="javascript:void(0);">解决</a>
 									<ul class="dropdown-menu">
-										<li>
-											<a tabindex="-1" href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/tabledemo/solution.page">设计如此</a>
-										</li>
-										<li>
-											<a tabindex="-1" href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/tabledemo/solution.page">外部原因</a>
-										</li>
-										<li class="dropdown-submenu">
-											<a href="javascript:void(0);">
-												已解决</a>
-											<ul class="dropdown-menu">
-												<li>
-													<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/tabledemo/solution.page">Admin</a>
-												</li>
-												<li>
-													<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/tabledemo/solution.page">Trunk</a>
-												</li>
-											</ul>
-										</li>
-										<li>
-											<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/tabledemo/solution.page">延期解决</a>
-										</li>
+									#foreach(re : getDict("bugResolution"))
+									<li>
+									    <a href="javascript:;">#@mulOperation("tsolution"+reFor.index TINY_CONTEXT_PATH+adminPath+"/quality/bug/batch/resolve?resolutionType="+re.value)
+                                        <div>${re.text}</div>
+                                        #end</a>
+                                    </li>
+									#end
 									</ul>
 									#end
 									#end
@@ -191,14 +176,12 @@
 									<a tabindex="-1" href="javascript:void(0);">
 											指派给</a>
 									<ul class="dropdown-menu">
+									#foreach(user : userList)
 										<li>
-											<a tabindex="-1" href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/tabledemo/assign.page">
-											admin</a>
+											<a tabindex="-1" href="javascript:void(0);">
+											#@mulOperation("tassign"+userFor.index TINY_CONTEXT_PATH+adminPath+"/quality/bug/batch/assign?userId="+user.orgUserId)<div>${user.orgUserRealName}</div>#end</a>
 										</li>
-										<li>
-											<a tabindex="-1" href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/tabledemo/assign.page">
-											admin1</a>
-										</li>										
+									#end
 									</ul>
 									#end
 									#end
@@ -209,7 +192,7 @@
 							#@mulOperation("muldelete" "http://127.0.0.1:8080/sqdm-quality/testManagement/page/Bug.page")
 							<a href="javascript:;" class="btn radius btn-danger "><i class="icon-trash"></i>批量删除</a>#end
 						</div>*#
-					</div>					
+					</div>
 					#setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置
 				#end
 			#@tinyTableContent(TINY_CONTEXT_PATH+adminPath+"/quality/bug/findBug?"+requestStatuString)
@@ -276,6 +259,6 @@ function selectAllNullorReserve(obj,type){
       }
      }
     }
-   }  
+   }
 }
 </script>

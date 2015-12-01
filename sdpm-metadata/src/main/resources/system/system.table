@@ -35,7 +35,7 @@
     <table-field standard-field-id="6f1762dbb20842088ba9937040172363" primary="false" unique="false" not-null="false" id="file_size" auto-increase="false"/>
     <table-field standard-field-id="f9bbeaa3639e436e9c44f51a7ae07841" primary="false" unique="false" not-null="false" id="file_objectType" auto-increase="false"/>
     <table-field standard-field-id="1ff783ff38614285b46eee52e8db309d" primary="false" unique="false" not-null="false" id="file_objectID" auto-increase="false"/>
-    <table-field standard-field-id="188c4e45cb244c1188d491a80870f265" primary="false" unique="false" not-null="false" id="file_addedBy" auto-increase="false"/>
+    <table-field standard-field-id="188c4e45cb244c1188d491a80870f265" primary="false" unique="false" not-null="false" id="file_added_by" auto-increase="false"/>
     <table-field standard-field-id="54931073c3dd432b9d20c1fa3aa50b0d" primary="false" unique="false" not-null="false" id="file_addedDate" auto-increase="false"/>
     <table-field standard-field-id="94269caa7a0948339ef8bf1f42168870" primary="false" unique="false" not-null="false" id="file_downloads" auto-increase="false"/>
     <table-field standard-field-id="93eb49b6ef0a434d9b2b9f177b2bc2cb" primary="false" unique="false" not-null="false" id="file_extra" auto-increase="false"/>
@@ -54,16 +54,20 @@
     <table-field standard-field-id="d73b76d0dbeb413097168d488ac4d433" primary="false" unique="false" not-null="true" id="mailqueue_failReason" auto-increase="false"/>
   </table>
   <table id="c363d485f21f48908797a82cd98069de" name="system_module" title="系统模块表">
+    <table-field standard-field-id="32fc494251074a329bdfa8b6600ce738" primary="true" unique="true" not-null="true" id="module_id" auto-increase="true"/>
+    <table-field standard-field-id="80805605c5b54d3c9d6894d1d6086b65" primary="false" unique="false" not-null="true" id="sys_module_parent" auto-increase="false"/>
+    <table-field standard-field-id="5d794a1e323844e991dcfcb834dfd0aa" primary="false" unique="false" not-null="true" id="module_type" auto-increase="false"/>
+    <table-field standard-field-id="958e740f99614e509772e09a3889cfb5" primary="false" unique="false" not-null="false" id="module_title" auto-increase="false"/>
     <table-field standard-field-id="a8b7ed7bee72419997a08ab782097fc0" primary="false" unique="false" not-null="false" id="sys_module_root" auto-increase="false"/>
     <table-field standard-field-id="130ca8fdee194bfc9f97ff107e561595" primary="false" unique="false" not-null="false" id="sys_module_name" auto-increase="false"/>
-    <table-field standard-field-id="1518400fe07c4cc3a78bd5c6023f9edb" primary="false" unique="false" not-null="false" id="sys_module_path" auto-increase="false"/>
-    <table-field standard-field-id="80805605c5b54d3c9d6894d1d6086b65" primary="false" unique="false" not-null="true" id="sys_module_parent" auto-increase="false"/>
-    <table-field standard-field-id="fee93cf9df864ba4a711d096598cd343" primary="false" unique="false" not-null="false" id="sys_module_grade" auto-increase="false"/>
-    <table-field standard-field-id="a5526dab212f42e6b680bafef91b87d5" primary="false" unique="true" not-null="false" id="sys_module_order" auto-increase="false"/>
-    <table-field standard-field-id="5d794a1e323844e991dcfcb834dfd0aa" primary="false" unique="false" not-null="true" id="sys_module_type" auto-increase="false"/>
-    <table-field standard-field-id="9164a45fb4cc4abc98dacebd2bfcde85" primary="false" unique="false" not-null="false" id="sys_module_owner" auto-increase="false"/>
-    <table-field standard-field-id="32fc494251074a329bdfa8b6600ce738" primary="true" unique="true" not-null="true" id="module_id" auto-increase="true"/>
-    <table-field standard-field-id="958e740f99614e509772e09a3889cfb5" primary="false" unique="false" not-null="false" id="module_title" auto-increase="false"/>
+    <table-field standard-field-id="1518400fe07c4cc3a78bd5c6023f9edb" primary="false" unique="false" not-null="false" id="module_path" auto-increase="false"/>
+    <table-field standard-field-id="fee93cf9df864ba4a711d096598cd343" primary="false" unique="false" not-null="false" id="module_grade" auto-increase="false"/>
+    <table-field standard-field-id="a5526dab212f42e6b680bafef91b87d5" primary="false" unique="false" not-null="false" id="module_order" auto-increase="false"/>
+    <table-field standard-field-id="9164a45fb4cc4abc98dacebd2bfcde85" primary="false" unique="false" not-null="false" id="module_owner" auto-increase="false"/>
+    <index name="module_type_id" unique="false">
+      <index-field field="module_id" direction="asc"/>
+      <index-field field="module_type" direction="asc"/>
+    </index>
   </table>
   <table id="fca559f6b24f4216bdd0af4a88aa1a6a" name="system_history" title="操作历史表">
     <table-field standard-field-id="a3c0dbee7bda4ec990d8bcfcbee2ee1f" primary="true" unique="true" not-null="true" id="history_id" auto-increase="true"/>
@@ -75,7 +79,7 @@
   </table>
   <table id="7b3d0ef2306749a79a47e07dd0e3d435" name="system_action" title="系统日志表">
     <table-field standard-field-id="51b35d0098cc46e4ae14e922f78269f6" primary="true" unique="true" not-null="true" id="action_id" auto-increase="true"/>
-    <table-field standard-field-id="19f5ad5730c0424fa5ebe12f141aba90" primary="false" unique="false" not-null="false" id="action_objectType" auto-increase="false"/>
+    <table-field standard-field-id="19f5ad5730c0424fa5ebe12f141aba90" primary="false" unique="false" not-null="true" id="action_objectType" auto-increase="false"/>
     <table-field standard-field-id="d5e3e1f45ae34d569cf8ecd010ec4437" primary="false" unique="false" not-null="false" id="action_objectID" auto-increase="false"/>
     <table-field standard-field-id="6185f7b6c38f499e8870b6247a464bb0" primary="false" unique="false" not-null="false" id="action_project" auto-increase="false"/>
     <table-field standard-field-id="f74f8eb053ef448a8903f8ab823d7950" primary="false" unique="false" not-null="false" id="action_product" auto-increase="false"/>
@@ -85,6 +89,6 @@
     <table-field standard-field-id="aa3abd25422e48fd92ace02365b2ec4b" primary="false" unique="false" not-null="false" id="action_extra" auto-increase="false"/>
     <table-field standard-field-id="ed0fdaa8df4b424999ddc2a33aeb1154" primary="false" unique="false" not-null="false" id="action_read" auto-increase="false"/>
     <table-field standard-field-id="db74df04c6164a6db9a0f5af85dd58f9" primary="false" unique="false" not-null="false" id="action_efforted" auto-increase="false"/>
-    <table-field standard-field-id="81872ca2ef8c4eb186888e9900f7e04c" primary="false" unique="false" not-null="false" id="action_action" auto-increase="false"/>
+    <table-field standard-field-id="81872ca2ef8c4eb186888e9900f7e04c" primary="false" unique="false" not-null="true" id="action_action" auto-increase="false"/>
   </table>
 </tables>

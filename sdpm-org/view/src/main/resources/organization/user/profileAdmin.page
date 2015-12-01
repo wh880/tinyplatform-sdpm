@@ -7,26 +7,7 @@
 #set(editpagePath1=
     "/organization/common/fileOutput.pagelet",editpageModalId1="userEditModal",editpageModal1="#"+editpageModalId1)
 #include("/common/common.page")
-<style>
-    .tabLayout .tabBar span a {
-        color: #333
-    }
 
-    .tabLayout .tabBar .Current a {
-        color: #fff
-    }
-
-    .operationbar {
-        border-top: none;
-        background: #f9fafe;
-        padding: 6px 5px 6px 10px;
-    }
-
-    .operationbarsty {
-        margin-top: -5px;
-        padding: 0 12px 5px;
-    }
-</style>
 #set(name="organizationUser")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
@@ -40,7 +21,7 @@
                         #@navSelect2("user" "user")
                             #@navSelect2Nav()
                                 #if(userList)
-                                    #for(user:userList)
+                                    #foreach(user:userList)
                                     #if(user?.orgUserId == id)
                                         ${user?.orgUserRealName}
                                     #end
@@ -54,11 +35,21 @@
                             #@navSelect2Data()
                             <option value=""></option>
                             <optgroup label="用户">
-                                #for(user:userList)
+                                #foreach(user:userList)
                                 <option value="${user?.orgUserId}">${user?.orgUserRealName}</option>
                             #end
                         </optgroup>
 
+                        #end
+                        #@navSelect2Fix()
+                            #set(m=menuManager.getMenu("organizationAddUser"))
+                            #if(m)
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
+                            #end
+                            #set(m=menuManager.getMenu("organizationUser"))
+                            #if(m)
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
+                            #end
                         #end
                     #end
 
@@ -76,7 +67,7 @@
                 #end
 
             #end
-                <span style="padding-top: 5px;float: left">
+        <span style="float: left">
                     &nbsp;&gt;
                     #foreach(m:menuManager.getScopeMenus("org-user-detail"))
                         #if(m.id=="org-user-profileAdmin")
@@ -89,7 +80,7 @@
                     #end
                 </span>
 
-                <span style="padding-top: 5px;float: right">
+        <span style="float: right">
                     #set(m=menuManager.getMenu("org-user-editprofile"))
                     #if(m)
                         <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?id=${id}"
@@ -147,7 +138,11 @@
                 #@gridSysRow()
                     #@colLabel("col-4")性别：#end
                     #@gridSysCol(8)
-                        <p>${user?.orgUserGender}</p>
+                        #if(user?.orgUserGender==0)
+                            <p>男</p>
+                        #else
+                            <p>女</p>
+                        #end
                     #end
                 #end
                 #@gridSysRow()
@@ -162,12 +157,6 @@
                         <p>${user?.orgUserRole}</p>
                     #end
                 #end
-            ##                #@gridSysRow()
-            ##                    #@colLabel("col-4")权限：#end
-            ##                    #@gridSysCol(8)
-            ##                        <p>${user?.orgUserSubmitter}</p>
-            ##                    #end
-            ##                #end
                 #@gridSysRow()
                     #@colLabel("col-4")加入日期：#end
                     #@gridSysCol(8)
@@ -196,12 +185,6 @@
                         <p>${user?.orgUserYahoo}</p>
                     #end
                 #end
-            ##                #@gridSysRow()
-            ##                    #@colLabel("col-4")职位：#end
-            ##                    #@gridSysCol(8)
-            ##                        <p>${user?.orgUserGTalk}</p>
-            ##                    #end
-            ##                #end
                 #@gridSysRow()
                     #@colLabel("col-4")Gtalk：#end
                     #@gridSysCol(8)

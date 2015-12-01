@@ -1,0 +1,59 @@
+#set(itemList={"任务状态统计":["状态","任务数","百分比"],"项目任务统计":["项目","任务数","百分比"],"模块任务数统计":["模块","任务数","百分比"],"指派给统计":["用户","任务数",
+    "百分比"],"任务类型统计":["类型","任务数","百分比"],"优先级统计":["优先级","任务数","百分比"],"由谁完成统计":["用户","任务数","百分比"]})
+#macro getPieTableHead(index)
+    #foreach(var:itemList.get(index))
+    #@th()${var}#end
+#end
+#end
+
+<table class="table table-border table-bordered" cellspacing="0">
+    #foreach(key:map?.keySet())
+        #@centerAlignTr()
+            #@th("text-r" "vertical-align:middle;width:20%")
+                #@pieChart(pieChartStyle="width:600px;margin:0 auto;")
+                    <table id="myTable${keyFor?.index}">
+                        <caption>${key}</caption>
+                        <thead>
+                        <tr>
+                            <th></th>
+                            #foreach(list : map.get(key))
+                                <th>${list?.title}</th>
+                            #end
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th></th>
+                            #foreach(list : map.get(key))
+                                <td>${list?.taskCount}</td>
+                            #end
+                        </tr>
+                        </tbody>
+                    </table>
+                #end
+                #pieChartInit("#myTable"+keyFor.index "PieChart" "No of players" "Month",600,350)
+            #end
+            #@td()
+                <table class="table table-border table-bordered" cellspacing="0">
+                    <caption>${key}</caption>
+                    #set(sum=0)
+                    #foreach(list : map.get(key))
+                        #set(sum=sum+list?.taskCount)
+                    #end
+                    #@theadCenterMenu()
+                        #getPieTableHead(key)
+                    #end
+                    #foreach(list : map.get(key))
+                        #@centerAlignTr()
+                            #@td()${list.title?list.title:"（未指定）"}#end
+                            #@td()${list?.taskCount}#end
+                            #@td()
+                                ${fmt("%1.1f",1.0*list?.taskCount*100/sum)}%
+                            #end
+                        #end
+                    #end
+                </table>
+            #end
+        #end
+    #end
+</table>

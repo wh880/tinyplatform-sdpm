@@ -35,19 +35,22 @@
 #end
     ##tabbody end
 <br>
-#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/quality/testcase/save" "post" {"class":"test"})
-#hiddenInput(hiddenInputName="caseId" hiddenInputValue=testcase?.caseId)
+
+
+#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/quality/testCase/save" "post" {"class":"test","enctype":"multipart/form-data"})
+<input type="hidden" name="lastAddress" value=""/>
+    #hiddenInput(hiddenInputName="caseId" hiddenInputValue=testCase?.caseId)
 	<div style="width:70%;float:left" class="pageleftpart">
     	<div class="infoContent">
     		<p class="titleName">编辑</p>
     		<div class="RTtitle">
-            	<button type="submit" id="submit" class="commitBtn">保存</button>
+            	<button type="submit" id="submit2" class="commitBtn">保存</button>
         	</div>
         #@elementItem()
         	<div class="col-10">
-        	#@colLabel("col-2")用例名称：#end
+        	#@colLabel("col-2")<span class="c-red">*</span>用例名称：#end
         	<div class="col-4">
-           		#tinyInput("text" "caseTitle" casepager?.caseTitle {"datatype":"","id":"111","class":"input-text","placeholder":""})
+           		#tinyInput("text" "caseTitle" testCase?.caseTitle {"datatype":"*","nullmsg":"用例标题不能为空！","id":"111","class":"input-text","placeholder":""})
            </div>
            </div>
         #end
@@ -56,7 +59,7 @@
         	<div class="col-10">
 			#@colLabel("col-2")前置条件：#end
         	#@formControlDiv("col-10")
-                	#@tinyTextarea("casePrecondition" {"placeholder":"说点什么...最少输入10个字符"})请输入内容#end          
+                	#@tinyTextarea("casePrecondition" {"placeholder":"说点什么...最少输入10个字符"})${testCase?.casePrecondition}#end          
             #end
             </div>
         #end
@@ -64,58 +67,32 @@
        	 <div class="col-10">
         	#@colLabel("col-2")用例步骤：#end
         	<div class="col-10">
-          #@table("tableBoxes")
-                    #@thead()
-                        #@tr()
-                            #@th()编号#end
-                            #@th()步骤#end
-                            #@th()预期#end
-                            #@th()操作#end
-                        #end
-                    #end
-
-                    #@tbody()
-                        #for(i:[1..3])
-                        #@tr()
-                            #@td()${i}#end
-                            #@td()#inputRadiusDefaultText()#end
-                            #@td()#inputRadiusDefaultText()#end
-                            #@td()#@div()
-                                #buttonRadiusPrimary(btClass="btn-small" caption="之前添加")
-                                #buttonRadiusPrimary(btClass="btn-small" caption="之后添加")
-                                #buttonRadiusPrimary(btClass="btn-small" caption="删除")
-                            #end
-                            #end
-                        #end
-
-                        #end
-                    #end
-                #end
-                </div>
+      		   #include("/testManagement/page/caseStepAdd.page") 
             </div>
+         </div>
         #end
         #@elementItem()
             <div class="col-10">
                 <div class="col-2 text-r"><label>备注：&nbsp</label></div>
 
                 <div class="col-10">
-                    #@Teditor("content1" "content1" {"initialFrameHeight":"150"})#end</div>
+                    #@Teditor("content1" "comment" {"initialFrameHeight":"150"})#end</div>
             </div>
         #end
-        #@elementItem()
-       		 <div class="col-10">
-                <div class="col-2 text-r"><label>附件：</label></div>
+            #@elementItem()
                 <div class="col-10">
-                    #include("/testManagement/page/fileupload.page")  
+                    <div class="col-2 text-r"><label>附件：</label></div>
+                    <div class="col-10">
+                        #mulUploadFile(fileList)
+                    </div>
                 </div>
-            </div>
-        #end
+            #end
         </div>
 	<br>
             #@elementItem()
         		<div class="col-12">
             	<div class="col-5">
-                <button style="float: right" type="submit" id="submit" class="commitBtn">保存</button>
+                <button style="float: right" type="submit" id="submit2" class="commitBtn">保存</button>
            		 </div>
             <div class="col-1"></div>
             <div class="col-1">
@@ -125,14 +102,19 @@
         	</div>
 			#end
             <p style="clear:both"></p>
-            #@div(divClass="infoContent")
-                <p class="titleName">历史记录</p>
-            ##加入后，js代码会导致页面排版混乱
-                #include("/testManagement/page/historyRecord.page")
-            #end
+            #history(adminPath+"/system/action/ajax/history?actionObjectType=case&actionObjectId="+testCase?.caseId)
             </div>
- #end      
-    <div style="width:30%;float:right">
-        #TypeInfo("qualityCaseEdition")
+             <div style="width:30%;float:right">
+        #TypeInfo("qualityCaseEdition" caseId)
         ###include("/testManagement/page/tabledemo/editioncasepaging.page")
     </div>
+            
+ #end
+
+<script type="text/javascript">
+    $(function () {
+        $("form[name=thisform]").Validform({
+            tiptype: 1
+        });
+    });
+</script>

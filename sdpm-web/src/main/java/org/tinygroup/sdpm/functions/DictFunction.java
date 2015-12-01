@@ -1,6 +1,7 @@
 package org.tinygroup.sdpm.functions;
 
-import org.tinygroup.sdpm.system.dictinit.DictUtil;
+
+import org.tinygroup.sdpm.dict.util.DictUtil;
 import org.tinygroup.template.Template;
 import org.tinygroup.template.TemplateContext;
 import org.tinygroup.template.TemplateException;
@@ -17,12 +18,17 @@ public class DictFunction extends AbstractTemplateFunction {
 
     public Object execute(Template template, TemplateContext context, Object... parameters) throws TemplateException {
 
-        if(parameters.length == 0){
-            throw new RuntimeException("字典项名称不能为空");
+        if (parameters.length == 0) {
+            return null;
+        } else if (parameters.length <= 1) {
+            return DictUtil.getItemList(parameters[0].toString());
+        } else if (parameters.length <= 2) {
+            try {
+                return DictUtil.getValue(parameters[0].toString(), parameters[1].toString());
+            } catch (NullPointerException np) {
+                return "";
+            }
         }
-        if(parameters.length>1){
-            return DictUtil.getDict(parameters[0].toString(),parameters[1].toString());
-        }
-        return DictUtil.getDict(parameters[0].toString());
+        return null;
     }
 }

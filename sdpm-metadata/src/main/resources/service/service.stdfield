@@ -174,7 +174,9 @@ Event type:0-bug(缺陷/纠错,1-req1（适应性）,2-req2（完善或增强）
   </standard-field>
   <standard-field id="2cca0dec07cc49859fceac7289b6d0df" name="user_phone" title="客户联系电话" business-type-id="095e594e1550424b9643c7e2279e85be"/>
   <standard-field id="398e31c8923d47868aa9e180fa975d11" name="user_post" title="联系人职务" business-type-id="095e594e1550424b9643c7e2279e85be"/>
-  <standard-field id="4a0f195409da4cb681d4e4891c4b02f6" name="cilent_product_vision" title="产品版本" business-type-id="286a6bca92b34779bcb6fc8809f0a666"/>
+  <standard-field id="4a0f195409da4cb681d4e4891c4b02f6" name="cilent_product_vision" title="产品版本" business-type-id="a2c7afa4de724b0cb8f2f46fd8389a37" default="">
+    <description></description>
+  </standard-field>
   <standard-field id="c83a241663e541c6b5cbea631a848388" name="faq_type_id" title="问题类型id" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" default="">
     <description></description>
   </standard-field>

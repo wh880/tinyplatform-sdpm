@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by Administrator on 2015-09-22.
+ * Created by xudy on 2015-09-22.
  */
 @Controller
 @RequestMapping("/a/service/client")
@@ -43,15 +43,30 @@ public class ClientAction extends BaseController {
     @Autowired
     private ProductLineService productLineService;
 
+    /**
+     * 显示请求表格内容
+     *
+     * @return
+     */
     @RequiresPermissions("service")
     @RequestMapping(value = "/list")
-    public String list(ServiceClient client, Model model) {
+    public String list() {
         return "service/client/clientUser.page";
     }
 
+    /**
+     * @param limit     分页的记录限制
+     * @param start     分页的当前页
+     * @param client
+     * @param model
+     * @param treeId    左侧树对应产品的
+     * @param order     排序
+     * @param ordertype
+     * @return
+     */
     @RequestMapping(value = "/list/data")
     public String listData(Integer limit, Integer start, ServiceClient client, Model model, Integer treeId,
-                           @RequestParam(required = false, defaultValue = "clientId") String order,
+                           @RequestParam(required = false, defaultValue = "serviceClient.clientId") String order,
                            @RequestParam(required = false, defaultValue = "desc") String ordertype) {
 
         if (treeId != null) {
@@ -64,6 +79,13 @@ public class ClientAction extends BaseController {
         return "service/client/clientTableData.pagelet";
     }
 
+    /**
+     * 从表中读取数据跳到新建或编辑页面
+     *
+     * @param id
+     * @param model
+     * @return
+     */
     @RequiresPermissions("client-add")
     @RequestMapping("/form")
     public String form(Integer id, Model model) {
@@ -74,6 +96,13 @@ public class ClientAction extends BaseController {
         return "service/client/clientAdd.page";
     }
 
+    /**
+     * 客户信息编辑
+     *
+     * @param id
+     * @param model
+     * @return
+     */
     @RequiresPermissions("client-edit")
     @RequestMapping("/edit")
     public String edit(Integer id, Model model) {
@@ -84,17 +113,25 @@ public class ClientAction extends BaseController {
         return "service/client/clientEdit.page";
     }
 
+    /**
+     * 客户信息保存
+     *
+     * @param client
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/save")
     public String save(ServiceClient client, Model model) {
         ServiceClientUser serviceClientUser = new ServiceClientUser();
         if (client.getClientId() == null) {
             client = clientService.addClient(client);
-            //新建用户联系人表
-            serviceClientUser.setUserPhone(client.getUserPhone());
-            serviceClientUser.setUserAccount(client.getUserAccount());
-            serviceClientUser.setClientId(client.getClientId());
-            serviceClientUser.setUserPost(client.getUserPost());
-            clientService.addClientUser(serviceClientUser);
+            if (!client.getUserAccount().isEmpty()) {
+                serviceClientUser.setUserPhone(client.getUserPhone());
+                serviceClientUser.setUserAccount(client.getUserAccount());
+                serviceClientUser.setClientId(client.getClientId());
+                serviceClientUser.setUserPost(client.getUserPost());
+                clientService.addClientUser(serviceClientUser);
+            }
         } else {
             clientService.updateClient(client);
             model.addAttribute("client", client);
@@ -102,27 +139,33 @@ public class ClientAction extends BaseController {
         return "redirect:" + adminPath + "/service/client/list";
     }
 
+    /**
+     * 删除客户
+     *
+     * @param id
+     * @return
+     */
     @RequiresPermissions("client-del")
     @ResponseBody
     @RequestMapping(value = "/delete")
     public Map delete(Integer id) {
         clientService.deleteClient(id);
         clientUserService.deleteAllClientUser(id);
-        Map<String, String> map = new HashMap<String, String>();
-        map.put("status", "y");
-        map.put("info", "删除成功");
-        return map;
+        return resultMap(true, "删除成功");
     }
 
+    /**
+     * 批量删除
+     *
+     * @param ids
+     * @return
+     */
     @RequiresPermissions("client-batchdel")
     @ResponseBody
     @RequestMapping(value = "/batchDelete")
     public Map batchDelete(String ids) {
-        Map<String, String> map = new HashMap<String, String>();
         if (ids == null) {
-            map.put("status", "n");
-            map.put("info", "删除失败");
-            return map;
+            return resultMap(false, "删除失败");
         }
         List<ServiceClient> list = new ArrayList<ServiceClient>();
         for (String s : ids.split(",")) {
@@ -132,32 +175,55 @@ public class ClientAction extends BaseController {
             list.add(serviceClient);
         }
         clientService.deleteBatchClient(list);
-        map.put("status", "y");
-        map.put("info", "删除成功");
-        return map;
+        return resultMap(true, "删除成功");
     }
 
+    /**
+     * 显示客户信息和客户绑定协议的信息
+     *
+     * @param id
+     * @param model
+     * @return
+     */
     @RequiresPermissions("client-sla")
     @RequestMapping(value = "/clientSla")
     public String showSla(Integer id, Model model) {
-        List<ServiceSla> slas = clientService.findSlaByClientId(id);
-        ServiceClient client = clientService.findClient(id);
-        model.addAttribute("client", client);
-        model.addAttribute("slas", slas);
+        if (id != null) {
+            ServiceClientUser clientUser = new ServiceClientUser();
+            clientUser.setClientId(id);
+            List<ServiceClientUser> clientUsers = clientService.getAllClientUser(clientUser);
+            model.addAttribute("clientUsers", clientUsers);
+
+            List<ServiceSla> slas = clientService.findSlaByClientId(id);
+            ServiceClient client = clientService.findClient(id);
+            model.addAttribute("client", client);
+            model.addAttribute("slas", slas);
+        }
         return "service/client/clientProduct.page";
     }
 
+    /**
+     * 删除客户绑定的协议
+     *
+     * @param id
+     * @return
+     */
     @RequiresPermissions("clientSla_delete")
     @ResponseBody
     @RequestMapping(value = "/slaDelete")
     public Map slaDelete(Integer id) {
         slaService.deleteSla(id);
-        Map<String, String> map = new HashMap<String, String>();
-        map.put("status", "y");
-        map.put("info", "删除成功");
-        return map;
+        return resultMap(true, "删除成功");
     }
 
+    /**
+     * 协议具体内容
+     * 显示
+     *
+     * @param id
+     * @param model
+     * @return
+     */
     @RequestMapping("/slaDetail")
     public String slaDetail(Integer id, Model model) {
         if (id != null) {
@@ -167,30 +233,28 @@ public class ClientAction extends BaseController {
         return "service/sla/slaContent.page";
     }
 
-    @RequestMapping("/clientDetail")
-    public String clientDetail(Integer id, Model model) {
-        if (id != null) {
-            ServiceClient client = clientService.findClient(id);
-            model.addAttribute("client", client);
-            ServiceClientUser clientUser = new ServiceClientUser();
-            clientUser.setClientId(id);
-            List<ServiceClientUser> clientUsers = clientService.getAllClientUser(clientUser);
-            model.addAttribute("clientUsers", clientUsers);
-        }
-        return "service/client/clientInfo.page";
-    }
-
+    /**
+     * 删除客户联系人
+     *
+     * @param id
+     * @return
+     */
     @RequiresPermissions("linkman-del")
     @ResponseBody
     @RequestMapping(value = "/deleteClientUser")
     public Map deleteClientUser(Integer id) {
         clientService.deleteClientUser(id);
-        Map<String, String> map = new HashMap<String, String>();
-        map.put("status", "y");
-        map.put("info", "删除成功");
-        return map;
+        return resultMap(true, "删除成功");
     }
 
+    /**
+     * 客户联系人编辑
+     *
+     * @param id
+     * @param clientId
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/clientUserUpdate/date")
     public String clientUserUpdate(Integer id, Integer clientId, Model model) {
         if (id != null) {
@@ -205,6 +269,12 @@ public class ClientAction extends BaseController {
         return "service/client/companyInfoEdit.pagelet";
     }
 
+    /**
+     * 客户联系人编辑
+     *
+     * @param clientUser
+     * @return
+     */
     @RequiresPermissions("linkman-new")
     @RequestMapping(value = "/clientUserUpdate")
     public String updateClientUser(ServiceClientUser clientUser) {
@@ -212,37 +282,74 @@ public class ClientAction extends BaseController {
             clientUserService.updateClientUser(clientUser);
         } else
             clientUser = clientUserService.addClientUser(clientUser);
-        return "redirect:" + adminPath + "/service/client/clientDetail?id=" + clientUser.getClientId();
+        return "redirect:" + adminPath + "/service/client/clientSla?id=" + clientUser.getClientId();
     }
 
+    /**
+     * 客户绑定协议
+     *
+     * @param id
+     * @param model
+     * @return
+     */
+    @RequestMapping("/slaAdd")
+    public String slaAdd(Integer id, Model model) {
+        if (id != null) {
+            ServiceClient client = clientService.findClient(id);
+            model.addAttribute("client", client);
+            Product product = new Product();
+            List<Product> slas = productService.findProductList(product);
+            model.addAttribute("slas", slas);
+        }
+        return "/service/client/clientSlaAdd.page";
+    }
+
+    /**
+     * 协议保存
+     *
+     * @param sla
+     * @return
+     */
+    @RequestMapping("/slaSave")
+    public String slaSave(ServiceSla sla) {
+        if (sla.getSlaId() == null) {
+            sla = slaService.addSla(sla);
+        }
+        return "redirect:" + adminPath + "/service/client/clientSla?id=" + sla.getClientId();
+    }
+
+    /**
+     * 新建客户时判断客户是否存在
+     *
+     * @param param
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = "/judgeClient")
-    public Map judgeClient(String name, String param) {
-        Map<String, String> map = new HashMap<String, String>();
+    public Map judgeClient(String param) {
         if (param != null) {
             String clientName = param;
             ServiceClient serviceClient = clientService.judgeClient(clientName);
             if (serviceClient != null) {
-                map.put("status", "n");
-                map.put("info", "该客户已存在");
-                return map;
+                return resultMap(false, "该客户已存在");
             } else {
-                map.put("status", "y");
-                map.put("info", "");
-                return map;
+                return resultMap(true, "");
             }
         }
-        map.put("status", "n");
-        map.put("info", "请输入客户名称");
-        return map;
+        return resultMap(false, "请输入客户名称");
     }
 
+    /**
+     * 实现左树
+     *
+     * @return
+     */
     @ResponseBody
     @RequestMapping("/treeData")
-    public List data(String check) {
+    public List data() {
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
         List<ProductAndLine> productLists = productService.getProductAndLine(new Product());
-        List<ProductLine> productLines = productLineService.findlist(new ProductLine());
+        List<ProductLine> productLines = productLineService.findList(new ProductLine());
 
         for (ProductLine d : productLines) {
             Map<String, Object> map = new HashMap<String, Object>();

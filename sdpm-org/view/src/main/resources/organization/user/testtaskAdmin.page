@@ -5,22 +5,6 @@
     "/organization/common/fileOutput.pagelet",editpageModalId="userEditModal",editpageModal="#"+editpageModalId)
 
 #include("/common/common.page")
-<style>
-    .tabLayout .tabBar span a {
-        color: #333
-    }
-
-    .tabLayout .tabBar .Current a {
-        color: #fff
-    }
-
-    .operationbar {
-        border-top: none;
-        background: #f9fafe;
-        padding: 6px 5px 6px 10px;
-    }
-
-</style>
 #set(name="organizationUser")
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
@@ -34,7 +18,7 @@
                         #@navSelect2("user" "user")
                             #@navSelect2Nav()
                                 #if(userList)
-                                    #for(user:userList)
+                                    #foreach(user:userList)
                                     #if(user?.orgUserId == id)
                                         ${user?.orgUserRealName}
                                     #end
@@ -48,11 +32,21 @@
                             #@navSelect2Data()
                             <option value=""></option>
                             <optgroup label="用户">
-                                #for(user:userList)
+                                #foreach(user:userList)
                                 <option value="${user?.orgUserId}">${user?.orgUserRealName}</option>
                             #end
                         </optgroup>
 
+                        #end
+                        #@navSelect2Fix()
+                            #set(m=menuManager.getMenu("organizationAddUser"))
+                            #if(m)
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
+                            #end
+                            #set(m=menuManager.getMenu("organizationUser"))
+                            #if(m)
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
+                            #end
                         #end
                     #end
                     #hiddenInput("userIdHidden","orgUserId","","")
@@ -69,7 +63,7 @@
                 #end
 
             #end
-                <span style="padding-top: 5px;float: left">
+        <span style="float: left">
                     &nbsp;&gt;
                     #foreach(m:menuManager.getScopeMenus("org-user-detail"))
                         #if(m.id=="org-user-testtaskAdmin")
@@ -86,7 +80,7 @@
 
             <span class="barBoxs">
                 <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/testtask?choose=3&id=${id}"
-                   class="${choose == 3?'active_btn':''}">他的任务</a>
+                   class="${choose == 3?'active_btn':''}">负责版本 </a>
                 <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/testtask1?choose=4&id=${id}"
                    class="${choose == 4?'active_btn':''}">给他的用例</a>
                 <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/testtask1?choose=5&id=${id}"
@@ -104,8 +98,6 @@
     #@tinyTableContent(TINY_CONTEXT_PATH+adminPath+"/org/user/testtask/search?"+tinyRequestQueryString) ##取数据地址 总数据
         #@thead()
             #@tr()###th  class 为sorting 表票可排序 为sorting_desc 为当前倒序
-
-                #@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
                 #@tinyTh({"class":"","rel":"sortname"})ID#end
                 #@tinyTh({"class":"","rel":"sortname"})任务名称#end
                 #@tinyTh({"class":"","rel":"sortname"})所属项目#end

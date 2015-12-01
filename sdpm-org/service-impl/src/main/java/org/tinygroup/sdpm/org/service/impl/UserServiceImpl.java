@@ -30,49 +30,128 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserManager userManager;
 
+    /**
+     * 根据主键id查找用户
+     *
+     * @param id
+     * @return
+     */
     public OrgUser findUser(String id) {
         return userManager.find(id);
     }
 
+    /**
+     * 根据用户名刚查找用户
+     *
+     * @param account 用户名
+     * @return
+     */
     public OrgUser findUserByAccount(String account) {
         return userManager.findUserByAccount(account);
     }
 
+    /**
+     * 对象查询用户pager
+     *
+     * @param start
+     * @param limit
+     * @param orgUser
+     * @return
+     */
     public Pager<OrgUser> findUserPager(Integer start, Integer limit, OrgUser orgUser) {
         return userManager.findPager(start, limit, orgUser);
     }
 
+    /**
+     * 根据条件查询用户List
+     *
+     * @param orgUser 用于查询条件
+     * @return
+     */
     public List<OrgUser> findUserList(OrgUser orgUser) {
         return userManager.findList(orgUser);
     }
 
+    /**
+     * 根据部门Id查询用户pager
+     *
+     * @param deptId
+     * @return
+     */
     public Pager<OrgUser> findUserByDeptId(Integer start, Integer limit, Integer deptId) {
         return userManager.findUserListByDeptId(start, limit, deptId);
     }
 
+    /**
+     * 新增有一个用户
+     *
+     * @param orgUser 新增实体类
+     * @return
+     */
     public OrgUser addUser(OrgUser orgUser) {
         String password = orgUser.getOrgUserPassword();
         orgUser.setOrgUserPassword(userManager.encryptPassword(password));
         return userManager.add(orgUser);
     }
 
+    /**
+     * 更新用户
+     *
+     * @param orgUser 需要更新的实体类
+     * @return
+     */
     public OrgUser updateUser(OrgUser orgUser) {
-//        String password=orgUser.getOrgUserPassword();
+//        String password = orgUser.getOrgUserPassword();
 //        orgUser.setOrgUserPassword(userManager.encryptPassword(password));
         return userManager.update(orgUser);
     }
 
+    /**
+     * 根据id进行软删除用户
+     *
+     * @param id 主键
+     * @return
+     */
     public Integer deleteUser(String id) {
         return userManager.delete(id);
     }
 
+    /**
+     * 批量删除用户
+     *
+     * @param list
+     * @return
+     */
     public int[] deleteBatchUser(List<OrgUser> list) {
         return userManager.deleteBatch(list);
     }
 
-    public boolean validatePassword(String plainPassword, String password) {
+    /**
+     * 验证密码
+     *
+     * @param plainPassword 明文密码
+     * @param password      密文密码
+     * @return 验证成功返回true
+     */
+    public Boolean validatePassword(String plainPassword, String password) {
         return userManager.validatePassword(plainPassword, password);
     }
 
+    /**
+     * 根据用户id数组查出用户list
+     *
+     * @param userId
+     * @return
+     */
+    public List<OrgUser> findUserListByIds(String[] userId) {
+        return userManager.findUserListByIds(userId);
+    }
 
+    public List<OrgUser> findTeamUserListByProjectId(Integer projectId) {
+        return userManager.findTeamUserListByProjectId(projectId);
+    }
+
+    public List<OrgUser> userInCondition(String condition, String[] ids) {
+        return userManager.userInCondition(condition, ids);
+    }
 }

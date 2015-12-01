@@ -1,3 +1,4 @@
+#!set(activeTitle="建任务",activeMenuId=currentPageId)
 #import("/org/tinygroup/form/components/form.component")
 #import("/org/tinygroup/bootstrapDate/components/bootstrapDate.component")
 #import("/org/tinygroup/button/components/button_common.component")
@@ -12,54 +13,45 @@
         #@tabHead()
             #include("/project/protab.page")
         #end
-    ##head end
-    <br/>
-    ##body end
     #end
 #end
 #@tinyForm(
-    "addTaskForm" TINY_CONTEXT_PATH+adminPath+"/project/task/save" "" {"class":"test","enctype":"multipart/form-data"})
-<div style="width:70%;float:left" class="pageleftpart">
+    "addTaskForm" TINY_CONTEXT_PATH+adminPath+"/project/task/save" "post" {"class":"test","enctype":
+    "multipart/form-data"})
+<input type="hidden" name="lastAddress" value=""/>
+<div class="pageleftpart">
     <div class="infoContent">
+        <input type="hidden" name="taskOpenBy" value="${UserUtils.getUserId()}"/>
+
         <p class="titleName">建任务</p>
         #@elementItem()
             #@sdpmItem("所属项目")
-                <input type="hidden" name="taskProject" value="${selProject.projectId}"/>
-                ${selProject.projectName}
+                #tinyInput("hidden" "taskProject" currentProjectId)
+                ${ProjectUtils.getProject(currentProjectId).projectName}
             #end
         #end
         #@elementItem()
             #@sdpmItem("所属模块")
                 #@Tselect2F()
-                    #@Tselect2Body("moduleId" story.moduleId==null?"":story.moduleId {"class":
-                        "input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                        <option value=""></option>
+                    #@Tselect2Body("taskModule" moduleId {"class":"input-text select2"})
+                        <option value="">/</option>
                         #foreach(m : moduleList)
                             <option value=${m.moduleId}>${m.moduleName}</option>
                         #end
-                    #end
-                ##填写任意内容，侦听需重新填加 A侦听已内置
-                    #@Tselect2Fix()
-                        <a href="${TINY_CONTEXT_PATH+adminPath}/product/page/project/product-modular.page">全部</a>
                     #end
                 #end
             #end
         #end
         #@elementItem()
-            #@sdpmItem("任务类型")
+            #@sdpmItem("任务类型" "*")
                 #@Tselect2F()
                     #@Tselect2Body(
-                        "taskType" "" {"class":"input-text select2","placeholder":"任务类型","datatype":"*4-16","nullmsg":
-                        "任务类型不能为空！"}) ##,"multiple":"multiple"加上为多选项
+                        "taskType" copyTask?.taskType {"class":"input-text select2","placeholder":"请选择任务类型","datatype":"*",
+                        "nullmsg":"任务类型不能为空！"})
                         <option value=""></option>
-                        <option value="1">设计</option>
-                        <option value="2">开发</option>
-                        <option value="3">测试</option>
-                        <option value="4">研究</option>
-                        <option value="5">讨论</option>
-                        <option value="6">界面</option>
-                        <option value="7">事物</option>
-                        <option value="8">其他</option>
+                        #foreach(item : getDict("taskType"))
+                            <option value="${item?.value}">${item?.text}</option>
+                        #end
                     #end
                 #end
             #end
@@ -67,116 +59,145 @@
         #@elementItem()
             #@sdpmItem("指派给")
                 #@Tselect2F()
-                    #@Tselect2Body("taskAssignedTo" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                        #foreach(t : team)
-                            <option value="${t.teamAccount}">${t.teamAccount}</option>
-                        #end
-                    #end
-                ##填写任意内容，侦听需重新填加 A侦听已内置
+                    #Tselect2Ajax("taskAssignedTo" copyTask?.taskAssignedTo TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
+                    {"dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询指派人","nullmsg":"请选择指派人！"})
                     #@Tselect2Fix()
-                        <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/form">增加</a>
-                        <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/list" class="r">全部</a>
+                        #set(m=menuManager.getMenu("organizationAddUser"))
+                        #if(m)
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
+                        #end
+                        #set(m=menuManager.getMenu("organizationUser"))
+                        #if(m)
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
+                        #end
                     #end
                 #end
             #end
         #end
+        <script type="text/javascript">
+            $(function () {
+                $("select[name=taskAssignedTo]").on("change", function () {
+                    $("input[name=taskAssignedDate]").val(moment().format('YYYY-MM-DD'));
+                });
+            });
+        </script>
+        <input type="hidden" name="taskAssignedDate">
         #@elementItem()
             #@sdpmItem("相关需求")
-                #@Tselect2F()
-                    #@Tselect2Body("taskStory" story.storyId==null?"":story.storyId {"class":
-                        "input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                        <option value=""></option>
-                        #foreach(s : storyList)
-                            <option value=${s.storyId}>${s.storyTitle}</option>
+                #if(storyList)
+                    #@Tselect2F()
+                        #@Tselect2Body("taskStory" storyId==null?"":storyId {"class":"input-text select2"})
+                            #foreach(s:storyList)
+                                <option value="${s.storyId}">${s.storyId}
+                                    ：${s.storyTitle}（优先级：${s.storyPri}，预计工时:${s.storyEstimate}）
+                                </option>
+                            #end
+                        #end
+                        #@Tselect2Fix()
+                            <a href="${TINY_CONTEXT_PATH+adminPath}/product/story/addstory">新增</a>
+                            <a href="${TINY_CONTEXT_PATH+adminPath}/product/story/search" class="r">全部</a>
                         #end
                     #end
-                    #@Tselect2Fix()
-                        <a href="${TINY_CONTEXT_PATH+adminPath}/product/story/addstory">新增</a>
-                        <a href="${TINY_CONTEXT_PATH+adminPath}/product/story/search">全部</a>
-                    #end
                 #end
             #end
         #end
         #@elementItem()
-            #@sdpmItem("任务名称")
-                #@formControlDiv("col-8")
+            #@sdpmItem("任务名称" "*")
+                #@formControlDiv()
                     #tinyInput(
-                        "text" "taskName" "abcdefg"{"placeholder":"任务名称","datatype":"*4-16","nullmsg":"任务名称不能为空！",
-                        "id":
-                        "username","class":
-                        "input-text"})
-                #end
-            #end
-        #end
-        #@elementItem()
-            #@sdpmItem("任务描述")
-                #@formControlDiv("col-8")
-                    #tinyInput(
-                        "text" "taskDesc" "任务描述"{"placeholder":"任务描述","datatype":"*4-16","id":
-                        "username",
+                        "text" "taskName" "" {"placeholder":"任务名称","datatype":"*","nullmsg":"任务名称不能为空！",
                         "class":"input-text"})
                 #end
             #end
         #end
         #@elementItem()
+            <div class="col-12">
+                <div class="col-2 text-r"><label>任务描述：</label></div>
+                <div class="col-7">
+                    #@Teditor("taskDesc" "taskDesc")${copyTask?.taskDesc}#end
+                </div>
+            </div>
+        #end
+
+        #@elementItem()
             #@sdpmItem("优先级")
                 #@Tselect2F()
-                    #@Tselect2Body("taskPri" "" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
+                    #@Tselect2Body(
+                        "taskPri" copyTask?.taskPri {"class":"input-text","minimumResultsForSearch":"Infinity"})
+                        #foreach(item : getDict("taskPri"))
+                            <option value="${item?.value}">${item?.text}</option>
+                        #end
                     #end
                 ##填写任意内容，侦听需重新填加 A侦听已内置
-
                 #end
             #end
         #end
         #@elementItem()
-            #@sdpmItem("最初预计")
-                #@formControlDiv("col-8")
-                    #tinyInput("text" "taskEstimate" "1.1"{"placeholder":"最初预计","datatype":"*4-16","id":
-                        "username","class":"input-text"})
+            #@sdpmItem("预计开始")
+                #@formControlDiv()
+                    <div class="input-group">
+                        #@tinyDateInput(
+                    "taskEstStared" formatDate(copyTask?.taskEstStared,"yyyy-MM-dd") "YYYY-MM-DD" )#end
+                    </div>
+                #end
+            #end
+        #end
+        #@elementItem()
+            #@sdpmItem("截止日期")
+                #@formControlDiv()
+                    <div class="input-group">
+                        #@tinyDateInput(
+                            "taskDeadLine" formatDate(copyTask?.taskDeadLine,"yyyy-MM-dd") "YYYY-MM-DD" )#end
+                    </div>
+                #end
+            #end
+        #end
+        #@elementItem()
+            #@sdpmItem("最初预计" "*")
+                #@formControlDiv()
+                    <div class="input-group">
+                        #tinyInput("text" "taskEstimate" copyTask?.taskEstimate {"placeholder":"最初预计","datatype":
+                            "/^[0-9]+(\.[0-9]{1,2})?$/","nullmsg":"请输入最初预计", "aria-describedby":"basic-addon2"})
+                        <span class="input-group-addon" id="basic-addon2">小时</span>
+                    </div>
                 #end
             #end
         #end
         #@elementItem()
             #@sdpmItem("抄送给")
                 #@Tselect2F()
-                    #@Tselect2Body("taskMailto" "" {"class":"input-text select2","multiple":"multiple"}) ##加上为多选项
-                        #foreach(t : team)
-                            <option value="${t.teamAccount}">${t.teamAccount}</option>
-                        #end
-                    #end
+                    #Tselect2Ajax("taskMailToArray" story?.taskMailTo TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
+                    {"id":"storyMailtoSelect","dataId":"orgUserId","dataText":"orgUserRealName",
+                        "placeholder":"查询抄送人","nullmsg":"请选择抄送人！","multiple":"multiple"})
                 ##填写任意内容，侦听需重新填加 A侦听已内置
                     #@Tselect2Fix()
-                        <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/form">增加</a>
-                        <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/list" class="r">全部</a>
+                        #set(m=menuManager.getMenu("organizationAddUser"))
+                        #if(m)
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
+                        #end
+                        #set(m=menuManager.getMenu("organizationUser"))
+                        #if(m)
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
+                        #end
                     #end
-                #end
-            #end
-        #end
-        #@elementItem()
-            #@sdpmItem("附件")
-                #fileWithInput("file")
-            #end
-        #end
-        #@elementItem()
-            #@sdpmItem("添加之后")
-                #@formControlDiv("skin-minimal col-9")
-                    #@tinyRadio("sex" "man" "man" {"nullmsg":"请选择性别！","datatype":"*"})继续为需求添加任务#end
-                    #@tinyRadio("sex" "women" "man")返回任务列表#end
-                    #@tinyRadio("sex" "secret" "man")返回需求列表#end
                 #end
             #end
         #end
         #@elementItem()
             <div class="col-12">
-                <div class="col-2 text-r"><label>备注：</label></div>
+                <div class="col-2 text-r"><label>附件：</label></div>
+                <div class="col-7">
+                    #mulUploadFile()
+                </div>
+            </div>
+        #end
 
-                <div class="col-9">
-                    #@Teditor("content" "content" {"initialFrameHeight":"150"})#end</div>
+        #@elementItem()
+            <div class="col-12">
+                <div class="col-2 text-r"><label>备注：</label></div>
+                <div class="col-7">
+                    #@Teditor("comment" "comment" {"initialFrameHeight":"150"})#end
+                </div>
             </div>
         #end
         <br/>
@@ -187,7 +208,7 @@
 
             </div>
             <div class="col-1">
-                <button style="float: left" type="submit" id="submit" class="commitBtn">保存</button>
+                <button style="float: left" type="submit" id="submit2" class="commitBtn">保存</button>
             </div>
             <div class="col-1">
                 #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")取消#end
@@ -199,9 +220,134 @@
 </div>
 #end
 
-<div style="width:30%;float:right">
-    #@div(divClass="infoContent")
-        <p class="titleName">历史记录</p>
-        #include("/project/recordlist.page")
-    #end
-</div>
+
+<script type="text/javascript">
+    $(function () {
+        $("form[name=addTaskForm]").Validform({
+            tiptype: function (msg, o, cssctl) {
+                var objtip = $(o.obj).closest(".form-item-body").next(".validmsg");
+                cssctl(objtip, o.type);
+                objtip.text(msg);
+            }
+        });
+    });
+</script>
+<script>
+
+
+    Date.prototype.format =function(format)
+    {
+        var o = {
+            "M+" : this.getMonth()+1, //month
+            "d+" : this.getDate(), //day
+            "h+" : this.getHours(), //hour
+            "m+" : this.getMinutes(), //minute
+            "s+" : this.getSeconds(), //second
+            "q+" : Math.floor((this.getMonth()+3)/3), //quarter
+            "S" : this.getMilliseconds() //millisecond
+        }
+        if(/(y+)/.test(format)) format=format.replace(RegExp.$1,
+                (this.getFullYear()+"").substr(4- RegExp.$1.length));
+        for(var k in o)if(new RegExp("("+ k +")").test(format))
+            format = format.replace(RegExp.$1,
+                    RegExp.$1.length==1? o[k] :
+                            ("00"+ o[k]).substr((""+ o[k]).length));
+        return format;
+    }
+
+
+    $(document).ready(function(){
+
+        var oldvalue = "";
+        $("input[name='taskEstStared']").bind("click",function(){
+            oldvalue = $(this).val();
+
+        });
+
+        $("input[name='taskEstStared']").bind("blur input propertychange",function(){
+
+            var newvalue = $(this).val();
+
+            if(newvalue!=""&&newvalue!=oldvalue){
+                if($("input[name='endTime']:checked")[0]){
+                    $("input[name='endTime']:checked").trigger('click');
+                }
+
+
+
+            }
+        });
+
+        var oldvalueend = "";
+        $("input[name='taskDeadLine']").bind("click",function(){
+            oldvalueend = $(this).val();
+
+        });
+        $("input[name='taskDeadLine']").bind("blur",function(){
+            var newvalueend = $(this).val();
+            var dateend =new Date(Date.parse(newvalueend.replace(/-/g, "/")));
+            var datestart = new Date(Date.parse($("input[name='taskEstStared']").val().replace(/-/g, "/")));
+
+
+            if(newvalueend!=""&&newvalueend!=oldvalueend){
+
+                if(dateend<=datestart){
+                    $("input[name='taskDeadLine']").val(oldvalueend);
+                    alert("截止日期必须大于开始日期");
+
+                }else{
+                    $("input[name='endTime']:checked").attr("checked",false);
+                }
+
+            }
+        });
+
+
+
+
+        $("input[name='endTime']").each(function(){
+
+            $(this).unbind("click").bind("click",function(){
+
+                var start =	$("input[name='taskEstStared']").val();
+
+
+                if(start!=""){
+                    start = new Date(Date.parse(start.replace(/-/g, "/")));
+
+                    var time = $(this).val();
+                    var end = new Date();
+                    if(time=="one-week"){
+                        end = new Date(start.getFullYear(),start.getMonth(),start.getDate()+7);
+                    }
+                    if(time=="two-week"){
+                        end = new Date(start.getFullYear(),start.getMonth(),start.getDate()+14);
+                    }
+                    if(time=="one-month"){
+                        end = new Date(start.getFullYear(),start.getMonth()+1,start.getDate());
+                    }
+                    if(time=="two-month"){
+                        end = new Date(start.getFullYear(),start.getMonth()+2,start.getDate());
+                    }
+                    if(time=="half-year"){
+                        end = new Date(start.getFullYear(),start.getMonth()+6,start.getDate());
+                    }
+                    if(time=="year"){
+                        end = new Date(start.getFullYear()+1,start.getMonth(),start.getDate());
+                    }
+                    $("input[name='taskDeadLine']").val(end.format("yyyy-MM-dd"));
+                }else{
+                    this.checked=false;
+                    alert("请选择开始日期");
+
+                }
+
+
+            });
+
+        });
+
+
+    });
+
+</script>

@@ -1,12 +1,12 @@
 /**
  * Copyright (c) 1997-2013, www.tinygroup.org (luo_guo@icloud.com).
- * <p/>
+ * <p>
  * Licensed under the GPL, Version 3.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p/>
+ * <p>
  * http://www.gnu.org/licenses/gpl.html
- * <p/>
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -66,17 +66,19 @@ public interface RoleService {
      */
     Integer deleteRole(Integer id);
 
-
     /**
-     * 根据主键id查找角色菜单
+     * 保存角色在当前模块的菜单，若数据库已经存在，则清除原有的模块的数据后再新增数据。
      *
-     * @param id 主键
+     * @param roleId
+     * @param parentMenuId 当前模块的id
+     * @param newMenuIds   当前模块中需要保存的菜单
      * @return
      */
-    OrgRoleMenu findRoleMenu(Integer id);
+    Integer saveRoleMenu(Integer roleId, String parentMenuId, String[] newMenuIds);
 
     /**
      * 找出用户的所有菜单Id
+     *
      * @param userId
      * @return
      */
@@ -91,33 +93,7 @@ public interface RoleService {
     List<OrgRoleMenu> findMenuByRoleId(Integer roleId);
 
 
-    OrgRoleMenu findRoleMenuId(String id);
-
-    /**
-     * 新增有一个角色菜单
-     *
-     * @param orgRoleMenu 新增实体类
-     * @return
-     */
-    OrgRoleMenu addRoleMenu(OrgRoleMenu orgRoleMenu);
-
-    /**
-     * 更新角色
-     *
-     * @param orgRoleMenu 需要更新的实体类
-     * @return
-     */
-    OrgRoleMenu updateRoleMenu(OrgRoleMenu orgRoleMenu);
-
-    /**
-     * 根据id进行软删除角色菜单
-     *
-     * @param id 主键
-     * @return
-     */
-    Integer deleteRoleMenu(Integer id);
-
-    void batchAddRoleMenu(List<OrgRoleMenu> orgRoleMenuList);
+    Integer batchAddRoleMenu(List<OrgRoleMenu> orgRoleMenuList);
 
     /**
      * 根据角色Id删除该角色的权限
@@ -134,12 +110,12 @@ public interface RoleService {
 
 
     /**
-     * 根据Id查找角色用户
+     * 根据用户Id查找角色
      *
-     * @param id
+     * @param userId
      * @return
      */
-    OrgRoleUser findRoleUser(Integer id);
+    List<OrgRole> findRoleByUserId(String userId);
 
     /**
      * 根据角色id查找用户列表
@@ -150,12 +126,20 @@ public interface RoleService {
     List<OrgRoleUser> findUserByRoleId(Integer roleId);
 
     /**
-     * 添加角色用户
+     * 批量添加角色成员
      *
-     * @param
-     * @return
+     * @param userIds 用户Ids
+     * @param roleId  角色id
      */
-    void addRoleUser(String[] array, Integer roleId);
+    void addRoleUser(String[] userIds, Integer roleId);
+
+    /**
+     * 批量添加角色成员
+     *
+     * @param userId  用户Id
+     * @param roleIds 角色ids
+     */
+    void batchAddRolesToUser(String userId, Integer[] roleIds);
 
     /**
      * 批量添加用色用户
@@ -172,7 +156,6 @@ public interface RoleService {
      */
     OrgRoleUser updateRoleUser(OrgRoleUser orgRoleUser);
 
-
     /***
      * 根据id删除用户角色
      *
@@ -188,5 +171,7 @@ public interface RoleService {
      * @param orgRoleId
      */
     void copyRoleUser(Integer orgRoleIdNew, Integer orgRoleId);
+
+    List<OrgRole> getRoleByIds(String[] ids);
 
 }
