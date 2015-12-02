@@ -46,7 +46,7 @@ public class DocAction extends BaseController {
     public static final String COOKIE_DOC_LIB_ID = "documentLibId";
 
     @Autowired
-    private DocService docservice;
+    private DocService docService;
     @Autowired
     private ProductService productService;
     @Autowired
