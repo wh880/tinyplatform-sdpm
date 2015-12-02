@@ -7,6 +7,7 @@ import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.system.biz.inter.ActionManager;
+import org.tinygroup.sdpm.system.biz.util.ActionUtil;
 import org.tinygroup.sdpm.system.dao.SystemActionDao;
 import org.tinygroup.sdpm.system.dao.impl.ActionEnum;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
@@ -67,7 +68,8 @@ public class ActionManagerImpl implements ActionManager {
         return mergePager(pager);
     }
 
-    public Pager<SystemAction> queryPager(int start, int limit, Condition condition, SystemAction systemAction, String order, String ordertype) {
+    public Pager<SystemAction> queryPager(int start, int limit, String chooseDate, SystemAction systemAction, String order, String ordertype) {
+        Condition condition = ActionUtil.getActionDateCondition(chooseDate);
         Pager<SystemAction> pager;
         if (order == null) {
             pager = systemActionDao.queryPager(start, limit, condition, systemAction);

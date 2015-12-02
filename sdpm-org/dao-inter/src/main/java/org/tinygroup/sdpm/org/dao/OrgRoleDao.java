@@ -23,4 +23,6 @@ import java.util.List;
 
 public interface OrgRoleDao extends BaseDao<OrgRole, Integer> {
     List<OrgRole> getRolesByIds(String... ids);
+
+    List<OrgRole> findRoleByUserId(String userId);
 }

@@ -16,7 +16,7 @@ public interface ProjectService {
     /**
      * 获得用户所能见的项目列表
      */
-//    List<Project> getUserProjectList(String userId);
+    List<Project> getUserProjectList(String userId);
 
     /**
      * 查找用户所在团队所拥有的项目

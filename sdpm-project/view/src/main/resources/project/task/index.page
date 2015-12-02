@@ -23,7 +23,7 @@
     #@toggleLeft({"class":"aclass"})
         #@settoggleLeftTitle()
             #if(currentProjectId)
-                ${ProjectUtils.getProject(currentProjectId).projectName}
+                ${projectOperate.getProject(currentProjectId).projectName}
             #end
         #end
         #@settoggleLeftBody("treeLeftbox")

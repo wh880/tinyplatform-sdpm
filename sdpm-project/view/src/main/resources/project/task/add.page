@@ -27,7 +27,7 @@
         #@elementItem()
             #@sdpmItem("所属项目")
                 #tinyInput("hidden" "taskProject" currentProjectId)
-                ${ProjectUtils.getProject(currentProjectId).projectName}
+                ${projectOperate.getProject(currentProjectId).projectName}
             #end
         #end
         #@elementItem()

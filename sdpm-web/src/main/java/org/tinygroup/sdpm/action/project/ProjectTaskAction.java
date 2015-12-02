@@ -78,14 +78,14 @@ public class ProjectTaskAction extends BaseController {
 
     @RequiresPermissions(value = {"project", "task"}, logical = Logical.OR)
     @RequestMapping("index")
-    public String index(@CookieValue(required = false, value = ProjectUtils.COOKIE_PROJECT_ID) String currentProjectId,
+    public String index(@CookieValue(required = false, value = ProjectOperate.COOKIE_PROJECT_ID) String currentProjectId,
                         HttpServletResponse response, String moduleId, String choose, Model model) {
         if (StringUtil.isBlank(currentProjectId)) {
-            Project project = ProjectUtils.getDefaultProject();
+            Project project = projectOperate.getDefaultProject();
             if (null != project) {
                 currentProjectId = String.valueOf(project.getProjectId());
-                CookieUtils.setCookie(response, ProjectUtils.COOKIE_PROJECT_ID, currentProjectId);
-                model.addAttribute(ProjectUtils.COOKIE_PROJECT_ID, currentProjectId);
+                CookieUtils.setCookie(response, projectOperate.COOKIE_PROJECT_ID, currentProjectId);
+                model.addAttribute(projectOperate.COOKIE_PROJECT_ID, currentProjectId);
             } else {
                 return "redirect:" + adminPath + "/project/form";
             }
@@ -114,7 +114,7 @@ public class ProjectTaskAction extends BaseController {
                        Integer storyId,
                        String taskId,
                        Integer moduleId) {
-        String cookie = CookieUtils.getCookie(request, ProjectUtils.COOKIE_PROJECT_ID);
+        String cookie = CookieUtils.getCookie(request, projectOperate.COOKIE_PROJECT_ID);
         if (StringUtil.isBlank(cookie)) {
             addMessage(model, "请选择项目");
         }
@@ -146,7 +146,7 @@ public class ProjectTaskAction extends BaseController {
     public String save(ProjectTask task,
                        String[] taskMailToArray, HttpServletRequest request, String comment, String lastAddress,
                        UploadProfile uploadProfile) throws IOException {
-        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, ProjectUtils.COOKIE_PROJECT_ID));
+        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, ProjectOperate.COOKIE_PROJECT_ID));
         task.setTaskProject(projectId);
         String taskMailTo = StringUtil.join(taskMailToArray, ",");
         task.setTaskMailto(taskMailTo);
@@ -297,7 +297,7 @@ public class ProjectTaskAction extends BaseController {
     @RequiresPermissions("pro-task-finish")
     @RequestMapping(value = "/finish", method = RequestMethod.GET)
     public String finish(Integer taskId, Model model, HttpServletRequest request) {
-        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, ProjectUtils.COOKIE_PROJECT_ID));
+        Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, projectOperate.COOKIE_PROJECT_ID));
         ProjectTask task = taskService.findTask(taskId);
         model.addAttribute("task", task);
         model.addAttribute("teamList", userService.findTeamUserListByProjectId(projectId));
@@ -420,7 +420,7 @@ public class ProjectTaskAction extends BaseController {
             HttpServletRequest request, HttpServletResponse response, String moduleId,
             @RequestParam(required = false, defaultValue = "task_id") String order,
             String orderType, Integer key) {
-        Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
+        Integer projectId = projectOperate.getCurrentProjectId(request, response);
         if (projectId == null) {
             return redirectProjectForm();
         }
@@ -462,7 +462,7 @@ public class ProjectTaskAction extends BaseController {
     @RequiresPermissions(value = {"pro-task-batchadd", "distribute-task"}, logical = Logical.OR)
     @RequestMapping("/batchAdd")
     public String batchAddForm(Integer storyId, Model model, HttpServletRequest request, HttpServletResponse response, Integer moduleId) {
-        Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
+        Integer projectId = projectOperate.getCurrentProjectId(request, response);
         if (projectId == null) {
             return redirectProjectForm();
         }
@@ -489,7 +489,7 @@ public class ProjectTaskAction extends BaseController {
         if (taskList.isEmpty()) {
             return "project/task/index.page";
         } else {
-            Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, ProjectUtils.COOKIE_PROJECT_ID));
+            Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, projectOperate.COOKIE_PROJECT_ID));
             taskService.batchAdd(taskList, projectId);
             return "project/task/index.page";
         }
@@ -498,7 +498,7 @@ public class ProjectTaskAction extends BaseController {
     @RequestMapping("/findTask")
     public String findTask(Model model, Integer taskId, HttpServletRequest request, Integer no) {
         if (no != null) {
-            Integer currentProjectId = ProjectUtils.getCurrentProjectId(request);
+            Integer currentProjectId = projectOperate.getCurrentProjectId(request);
             if (currentProjectId != null) {
                 ProjectTask projectTask = new ProjectTask();
                 projectTask.setTaskNo(no);
@@ -584,11 +584,11 @@ public class ProjectTaskAction extends BaseController {
     @ResponseBody
     @RequestMapping("/gantt/init")
     public List<Map<String, Object>> ganttInit(HttpServletRequest request, HttpServletResponse response) {
-        Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
+        Integer projectId = projectOperate.getCurrentProjectId(request, response);
         if (projectId == null) {
             return null;
         }
-        Project project = ProjectUtils.getProject(projectId.toString());
+        Project project = projectOperate.getProject(projectId.toString());
         ProjectTask task = new ProjectTask();
         task.setTaskProject(projectId);
         List<ProjectTask> taskList = taskService.findListTask(task);
@@ -651,7 +651,7 @@ public class ProjectTaskAction extends BaseController {
 
     @RequestMapping("/board")
     public String board(Model model, HttpServletRequest request, HttpServletResponse response) {
-        Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
+        Integer projectId = projectOperate.getCurrentProjectId(request, response);
 
         ProjectTask projectTask = new ProjectTask();
         projectTask.setTaskProject(projectId);
@@ -691,7 +691,7 @@ public class ProjectTaskAction extends BaseController {
     @RequestMapping("/grouping")
     public String grouping(HttpServletRequest request, HttpServletResponse response,
                            String type, String menuId, Model model) {
-        Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
+        Integer projectId = projectOperate.getCurrentProjectId(request, response);
         if (projectId == null) {
             return redirectProjectForm();
         }

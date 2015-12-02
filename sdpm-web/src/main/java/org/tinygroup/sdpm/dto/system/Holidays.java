@@ -1,4 +1,4 @@
-package org.tinygroup.sdpm.action.system;
+package org.tinygroup.sdpm.dto.system;
 
 import org.tinygroup.sdpm.system.dao.pojo.Holiday;
 
@@ -14,6 +14,4 @@ public class Holidays {
     public void setHoliday(List<Holiday> holiday) {
         this.holiday = holiday;
     }
-
-
 }

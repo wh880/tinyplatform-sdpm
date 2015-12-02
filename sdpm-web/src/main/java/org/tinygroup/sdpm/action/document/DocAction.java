@@ -29,7 +29,6 @@ import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.sdpm.system.service.inter.ProfileService;
 import org.tinygroup.sdpm.util.CookieUtils;
 import org.tinygroup.sdpm.util.LogUtil;
-import org.tinygroup.sdpm.util.ProjectUtils;
 import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -133,7 +132,7 @@ public class DocAction extends BaseController {
             model.addAttribute("productList", list);
             return "/document/add-doc-product";
         } else if (libId == 2) {
-            List<Project> list = ProjectUtils.getUserProjectList();
+            List<Project> list = projectOperate.getUserProjectList();
             model.addAttribute("projectList", list);
             return "/document/add-doc-project";
         } else {

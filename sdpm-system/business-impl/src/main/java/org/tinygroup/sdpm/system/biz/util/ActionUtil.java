@@ -1,4 +1,4 @@
-package org.tinygroup.sdpm.action.system;
+package org.tinygroup.sdpm.system.biz.util;
 
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.util.DateUtils;
@@ -11,9 +11,6 @@ import java.util.Date;
 import static org.tinygroup.sdpm.system.dao.constant.SystemActionTable.SYSTEM_ACTIONTABLE;
 
 
-enum DateChoice {
-    today, yesterday, beforeYesterday, thisWeek, lastWeek, thisMonth, lastMonth, all
-}
 
 public class ActionUtil {
 
@@ -32,7 +29,6 @@ public class ActionUtil {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Condition dateCon;
 
-
         switch (DateChoice.valueOf(DateChoice.class, choice)) {
             case today:
                 calendarEnd.add(Calendar.DATE, 1);
@@ -40,7 +36,6 @@ public class ActionUtil {
                 break;
             case yesterday:
                 calendarBegin.roll(Calendar.DATE, -1);
-
                 dateCon = SYSTEM_ACTIONTABLE.ACTION_DATE.between(format.format(calendarBegin.getTime()), format.format(calendarEnd.getTime()));
                 break;
             case beforeYesterday:
@@ -66,15 +61,17 @@ public class ActionUtil {
                 calendarBegin.setTime(DateUtils.getFirstDayOfMonth(calendarBegin.getTime()));
                 calendarBegin.roll(Calendar.MONTH, -1);
                 calendarEnd.setTime(DateUtils.getFirstDayOfMonth(calendarEnd.getTime()));
-
                 dateCon = SYSTEM_ACTIONTABLE.ACTION_DATE.between(format.format(calendarBegin.getTime()), format.format(calendarEnd.getTime()));
                 break;
             default:
                 dateCon = null;
                 break;
         }
-
         return dateCon;
+    }
+
+    enum DateChoice {
+        today, yesterday, beforeYesterday, thisWeek, lastWeek, thisMonth, lastMonth, all
     }
 
 }

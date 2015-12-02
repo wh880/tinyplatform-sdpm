@@ -22,10 +22,10 @@
       <service-parameters>
         <service-parameter name="start" type="int" required="false" is-array="false"/>
         <service-parameter name="limit" type="int" required="false" is-array="false"/>
-        <service-parameter name="condition" type="org.tinygroup.tinysqldsl.base.Condition" required="false" is-array="false"/>
+        <service-parameter name="chooseDate" type="java.lang.String" required="false" is-array="false"/>
         <service-parameter name="systemAction" type="org.tinygroup.sdpm.system.dao.pojo.SystemAction" required="false" is-array="false"/>
         <service-parameter name="order" type="java.lang.String" required="false" is-array="false"/>
-        <service-parameter name="ordertype" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="orderType" type="java.lang.String" required="false" is-array="false"/>
       </service-parameters>
       <service-result name="queryActionPagerResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager"/>
     </service-method>

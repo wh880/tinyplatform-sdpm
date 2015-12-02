@@ -29,7 +29,6 @@ import org.tinygroup.sdpm.quality.service.inter.TestRunService;
 import org.tinygroup.sdpm.quality.service.inter.TestTaskService;
 import org.tinygroup.sdpm.util.CookieUtils;
 import org.tinygroup.sdpm.util.LogUtil;
-import org.tinygroup.sdpm.util.ProjectUtils;
 import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -110,7 +109,7 @@ public class TestVersionAction extends BaseController {
     @RequestMapping("/project/findPager")
     public String findPager(HttpServletResponse response, HttpServletRequest request,
                             Integer start, Integer limit, String order, String ordertype, Model model) {
-        Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
+        Integer projectId = projectOperate.getCurrentProjectId(request, response);
         if (projectId == null) {
             return redirectProjectForm();
         }

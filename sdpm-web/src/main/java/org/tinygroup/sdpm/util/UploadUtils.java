@@ -1,4 +1,4 @@
-package org.tinygroup.sdpm.action.system;
+package org.tinygroup.sdpm.util;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang.RandomStringUtils;

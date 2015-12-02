@@ -192,9 +192,10 @@
     #@colLabel()<span class="c-red">*</span>分组白名单#end
     #@skinMinimal()
         #@Tcheckboxes("productWhiteList" product?.productWhiteList)
-            #foreach(role : UserUtils.getAllRoleList())
-                #@Tcheckbox(role?.orgRoleId)${role?.orgRoleName}#end
-            #end
+##            待王玲珑改
+##            #foreach(role : UserUtils.getAllRoleList())
+##                #@Tcheckbox(role?.orgRoleId)${role?.orgRoleName}#end
+##            #end
         #end
 
 

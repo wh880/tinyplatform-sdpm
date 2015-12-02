@@ -85,14 +85,14 @@ public class ActionServiceImplWrapper implements org.tinygroup.sdpm.system.servi
 		}
 	}
 
-	public org.tinygroup.tinysqldsl.Pager queryActionPager(int start ,int limit ,org.tinygroup.tinysqldsl.base.Condition condition ,org.tinygroup.sdpm.system.dao.pojo.SystemAction systemAction ,java.lang.String order ,java.lang.String ordertype) {
+	public org.tinygroup.tinysqldsl.Pager queryActionPager(int start ,int limit ,String chooseDate ,org.tinygroup.sdpm.system.dao.pojo.SystemAction systemAction ,java.lang.String order ,java.lang.String ordertype) {
 		String serviceId = "queryActionPager";
 
 		try{
 			Context context = new ContextImpl();
 			context.put("start" ,start);
 			context.put("limit" ,limit);
-			context.put("condition" ,condition);
+			context.put("chooseDate" ,chooseDate);
 			context.put("systemAction" ,systemAction);
 			context.put("order" ,order);
 			context.put("ordertype" ,ordertype);

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
@@ -16,7 +17,6 @@ import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityTestRun;
 import org.tinygroup.sdpm.quality.service.inter.BugService;
 import org.tinygroup.sdpm.quality.service.inter.TestRunService;
-import org.tinygroup.sdpm.util.ProjectUtils;
 import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -28,7 +28,7 @@ import java.util.Map;
  * Created by wangll13383 on 2015/11/16.
  */
 @Controller
-public class HomeAction {
+public class HomeAction extends BaseController{
     @Autowired
     private ProductService productService;
     @Autowired
@@ -70,7 +70,7 @@ public class HomeAction {
         List<ProjectTask> tasks = taskService.findListTask(task);
         model.addAttribute("myTaskList", tasks);
         //首页项目统计
-        Integer[] userProjectIds = ProjectUtils.getUserProjectIdList();
+        Integer[] userProjectIds = projectOperate.getUserProjectIdList();
         Pager<Project> projectPager = projectService.findProjects(0, userProjectIds != null ? userProjectIds.length : 0, null, null, userProjectIds);
         Integer interval = 2;
         if (projectPager.getRecords().size() > 0) {

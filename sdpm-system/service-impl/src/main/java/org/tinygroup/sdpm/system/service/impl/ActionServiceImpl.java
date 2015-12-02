@@ -6,7 +6,6 @@ import org.tinygroup.sdpm.system.biz.inter.ActionManager;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.service.inter.ActionService;
 import org.tinygroup.tinysqldsl.Pager;
-import org.tinygroup.tinysqldsl.base.Condition;
 
 import java.util.List;
 
@@ -26,16 +25,14 @@ public class ActionServiceImpl implements ActionService {
         return actionManager.findByPage(page, pageSize, action, order, ordertype);
     }
 
-    public Pager<SystemAction> queryActionPager(int start, int limit, Condition condition, SystemAction systemAction, String order,
-                                                String ordertype) {
-
-        return actionManager.queryPager(start, limit, condition, systemAction, order, ordertype);
+    public Pager<SystemAction> queryActionPager(int start, int limit, String chooseDate, SystemAction systemAction, String order,
+                                                String orderType) {
+        return actionManager.queryPager(start, limit, chooseDate, systemAction, order, orderType);
     }
 
     public Pager<SystemAction> queryActionBetweenDate(int start, int limit,
                                                       SystemAction action, String startDate, String endDate, String sortName,
                                                       boolean asc) {
-        // TODO Auto-generated method stub
         return actionManager.queryBetweenDate(start, limit, action, startDate, endDate, sortName, asc);
     }
 

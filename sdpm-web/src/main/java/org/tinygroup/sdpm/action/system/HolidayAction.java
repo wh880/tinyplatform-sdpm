@@ -12,8 +12,6 @@ import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.system.dao.pojo.Holiday;
-import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
-import org.tinygroup.sdpm.system.service.inter.ActionService;
 import org.tinygroup.sdpm.system.service.inter.HolidayService;
 import org.tinygroup.sdpm.util.LogUtil;
 import org.tinygroup.sdpm.util.LogUtil.LogAction;
@@ -32,12 +30,9 @@ public class HolidayAction extends BaseController {
     private HolidayService holidayService;
     @Autowired
     private UserService userService;
-    @Autowired
-    private ActionService actionService;
 
     @RequestMapping("")
     public String index() {
-
         return "/system/page/holiday/holiday.page";
     }
 

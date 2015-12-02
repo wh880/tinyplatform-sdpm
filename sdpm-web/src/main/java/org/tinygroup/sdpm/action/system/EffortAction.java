@@ -20,7 +20,6 @@ import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
 import org.tinygroup.sdpm.project.service.inter.TaskService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemEffort;
 import org.tinygroup.sdpm.system.service.inter.EffortService;
-import org.tinygroup.sdpm.util.ProjectUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -48,7 +47,7 @@ public class EffortAction extends BaseController {
     @RequestMapping("date/{type}")
     public String date(@PathVariable(value = "type") String type, HttpServletRequest request,
                        HttpServletResponse response, Model model) {
-        Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
+        Integer projectId = projectOperate.getCurrentProjectId(request, response);
         if ("1".equals(type)) {
             return "/project/note/notetable.page";
         }
@@ -93,7 +92,7 @@ public class EffortAction extends BaseController {
     @RequestMapping("event")
     public List<Map<String, Object>> effortEvent(SystemEffort systemEffort, HttpServletRequest request, HttpServletResponse response, Date start, Date end) {
         response.setContentType("application/json; charset=UTF-8");
-        Integer currentProjectId = ProjectUtils.getCurrentProjectId(request, response);
+        Integer currentProjectId = projectOperate.getCurrentProjectId(request, response);
         if (currentProjectId != null) {
             systemEffort.setEffortProject(currentProjectId);
         }

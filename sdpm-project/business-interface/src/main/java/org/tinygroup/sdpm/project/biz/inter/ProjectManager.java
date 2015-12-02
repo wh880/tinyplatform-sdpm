@@ -10,6 +10,8 @@ import java.util.List;
  * Created by shenly13343 on 2015-09-18.
  */
 public interface ProjectManager {
+
+
     /**
      * 查找用户所在团队所拥有的项目
      *

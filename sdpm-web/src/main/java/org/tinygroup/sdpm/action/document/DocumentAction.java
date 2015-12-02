@@ -86,7 +86,7 @@ public class DocumentAction extends BaseController {
 
         model.addAttribute("userList", userList);
         model.addAttribute("productList", ProductUtils.getProductList());
-        model.addAttribute("projectList", ProjectUtils.getUserProjectList());
+        model.addAttribute("projectList", projectOperate.getUserProjectList());
         model.addAttribute("moduleList", moduleList);
         model.addAttribute("libList", CmsUtils.getDocLibList());
         request.getSession().setAttribute("moduleId", moduleId);
