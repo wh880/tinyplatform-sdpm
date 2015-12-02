@@ -52,6 +52,8 @@ public class DocumentAction extends BaseController {
     private ProjectProductService projectProductService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private ProductUtils productUtils;
 
     /**
      * 主页
@@ -236,7 +238,7 @@ public class DocumentAction extends BaseController {
             }
         }
         model.addAttribute("productList", list);
-        return "/product/page/project/archive-list.page";
+        return "/product/page/list/doc/archive-list.page";
     }
 
     @RequestMapping("/product/doc/list")
@@ -250,7 +252,7 @@ public class DocumentAction extends BaseController {
         }
         Pager<DocumentDoc> docpager = docservice.findDocRetPager(start, limit, doc, null,searchInfos, groupOperate, NameUtil.resolveNameDesc(order), asc);
         model.addAttribute("pager", docpager);
-        return "/product/data/archivedata.pagelet";
+        return "/product/data/doc/archivedata.pagelet";
     }
 
     @RequestMapping("/product/findDoc")

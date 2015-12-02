@@ -800,7 +800,7 @@ public class BugAction extends BaseController {
 
         Pager<ProductStory> p = storyService.findStoryPagerRel(start, limit, story, carrier, order, "asc".equals(ordertype) ? true : false);
         model.addAttribute("storyList", p);
-        return "product/data/tabledata.pagelet";
+        return "product/data/story/tabledata.pagelet";
     }
 
     @RequiresPermissions("linkbug")

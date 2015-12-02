@@ -1,0 +1,71 @@
+#set(linkName="line-product")
+#@tabBodyCol("ptop-5")
+    #@div(divClass="operationbar")
+    <span class="f">
+##            #foreach(m:menuManager.getScopeMenus("productLineView"))
+##                <a title="${m.name}" class="ml-5" href="${TINY_CONTEXT_PATH +adminPath}${m.href}">${m.name}</a>
+##            #end
+    #foreach(m:menuManager.getScopeMenus("productLineView"))
+        <a title="${m.name}"  href="${TINY_CONTEXT_PATH +adminPath}${m.href}" class="ml-5 ${status==mFor.index?"active_btn":""}">${m.name}</a>
+    #end
+##    #set(m=menuManager.getMenu("productLine-view-all"))
+##    #if(m)
+##        <a val="all" href="${TINY_CONTEXT_PATH+adminPath}/productLine/to?status=1" class="${status=="1"?"active_btn":""}">全部</a>
+##    #end
+##    <a href="${TINY_CONTEXT_PATH+adminPath}/productLine/to?status=2" class="${status=="2"?"active_btn":""}">归我所属</a>
+##    <a href="${TINY_CONTEXT_PATH+adminPath}/productLine/to?status=3" class="${status=="3"?"active_btn":""}">由我负责</a>
+##    <a href="${TINY_CONTEXT_PATH+adminPath}/productLine/to?status=4" class="${status=="4"?"active_btn":""}">由我交付</a>
+    </span>
+    <span class="r">
+				<!--导入导出修改-->
+    ##        #@aModal("#myModal" "导入" "600" "65" "btn-class"
+    ##            "/productLine/page/tabledemo/product-import.pagelet")#buttonIcon(iconClass="icon-download-alt")导入#end
+    ##
+    ##        #@buttonGroup()
+    ##            #@buttonDropdown("Dropdown") #buttonIcon(iconClass="icon-upload-alt")导出#end
+    ##            #@ulDropdownMenu("downMenuSty")
+    ##
+    ##                #@iconOperations(
+    ##                    "#myModal" "" "导出" "500" "254"  "/productLine/page/tabledemo/product-export-data.pagelet" "ml-5")
+    ##                    &nbsp;导出数据#end
+    ##
+    ##
+    ##                #@iconOperations(
+    ##                    "#myModal" "" "导出" "700" "80" "/productLine/page/tabledemo/product-export-template.pagelet" "ml-5")
+    ##                    &nbsp;导出模板#end
+    ##
+    ##            #end
+    ##        #end &nbsp;
+        #set(m=menuManager.getMenu("newproduct"))
+        #if(m)
+            #set(url=eval(m.href))
+            <a title="${m.name}" class="ml-5" href="${TINY_CONTEXT_PATH +adminPath}${url}">#buttonIcon(iconClass=m.icon)${m.name}</a>
+        #end
+        #set(m=menuManager.getMenu("productLine-add"))
+        #if(m)
+            <a href="${TINY_CONTEXT_PATH +adminPath}${m.href} ">#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp;
+        #end
+    </span>
+        #div(divClass="clearfix")
+    #end
+    #@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
+        #@toggleLeft({"class":"aclass"})
+            #@settoggleLeftTitle()
+            产品线
+            #end
+            #@settoggleLeftBody("treeLeftbox")
+                #@zTreeList(call("link",adminPath+"/productLine/treeData") {"id":"lineTree","readOnly":true})
+                    #setzTreeValMap({"id":"treeId","name":"pName","pid":"pId"})
+                    #zTreeSetLinkUrl(TINY_CONTEXT_PATH+adminPath+"/productLine/totree" )
+                #end
+            #end
+        #end
+        #@toggleRight()
+            #pageContent
+        #end
+
+    #end
+
+#end
+
+

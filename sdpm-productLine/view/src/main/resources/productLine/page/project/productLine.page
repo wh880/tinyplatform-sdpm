@@ -63,13 +63,13 @@
         #@toggleRight()
             #if(type=="product")
 
-                #include("/productLine/page/tabledemo/productlist.page")
+                #include("/productLine/page/list/product/productlist.page")
             #elseif(type=="build")
 
-                #include("/productLine/page/tabledemo/buildlist.page")
+                #include("/productLine/page/list/build/buildlist.page")
             #else
 
-                #include("/productLine/page/tabledemo/list.page")
+                #include("/productLine/page/list/productline/list.page")
             #end
         #end
 

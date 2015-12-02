@@ -2,8 +2,7 @@
     <type-info name="project">
         <info name="projectInfo" title="项目信息" infoParameter="projectId" url="/project/basicInformation"
               resource="project"/>
-        <!--<info name="productInfo" title="产品信息" infoParameter="productId" url="/product/find/baseinfo"-->
-        <!--resource="product"/>-->
+
         <info name="userbasrinfo" title="负责人信息" infoParameter="projectId" url="/project/findManager"
               resource="userInfo"/>
     </type-info>

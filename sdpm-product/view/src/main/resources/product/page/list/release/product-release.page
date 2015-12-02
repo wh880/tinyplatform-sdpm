@@ -1,0 +1,67 @@
+#import("/org/tinygroup/table/components/togglebox.component")
+#import("/org/tinygroup/compose/components/compose_typography.component")
+#!set(activeMenuId=currentPageId)
+#!set(linkName="product-release",sonitem="<li>"+"发布"+"</li>")
+
+
+#@tabBodyCol("ptop-5")
+			##operationbar start3
+			#@div(divClass="operationbar")
+				<span class="f">
+					<span class="active_btn">浏览发布</span>
+				</span>
+
+				#foreach(m:menuManager.getScopeMenus("product-addre"))
+					#if(m.id=="product-release-add")
+				<span class="r">
+					<a title="创建发布" class="ml-5" href="${TINY_CONTEXT_PATH +adminPath}/product/release/addRelease"><i
+                            class="icon-plus"></i>创建发布</a>
+				</span>
+						#end
+					#end
+				#div(divClass="clearfix")
+			#end
+			##operationbar end
+			#@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
+			#@div(divBaseClass="tinyheaderTools form-inline")
+				#setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置
+##			<input type="button" value="全选"  class="btn btn-default btn-primary "  onclick="selectAllNullorReserve('product-release','全选');" />
+##            <input type="button" value="反选"   class="btn btn-default btn-primary"  onclick="selectAllNullorReserve('product-release','反选');" />
+
+			#end
+				#@tinyTableContent(TINY_CONTEXT_PATH +adminPath+"/product/release/list?deleted=0") ##取数据地址 总数据
+				#@thead()
+					#@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
+						#@tinyTh({"width":"8"})<input type="checkbox" name="allck" value="">#end
+						#@tinyTh({"class":"sorting","rel":"releaseId"})ID#end
+						#@tinyTh({"class":"sorting","rel":"releaseName"})发布名称#end
+						#@tinyTh({"class":"sorting","rel":"buildId"})版本#end
+						#@tinyTh({"class":"sorting","rel":"releaseDate"})发布日期#end
+						#@tinyTh({"class":"","rel":"sortname"})操作#end
+					#end
+				#end
+			#end
+            #*
+                        ##以下部分为对删除和修改的影响 因为存在不同的信息故放在外面自行更改 #dialog 配合修改使用
+                        <script type="text/javascript">
+                            $(function(){
+                                $('#${tableId}').on('click','.delBtn',function(e){
+                                    user_del(this,'1');
+                                });
+                            })
+                        </script>
+                        *#
+
+                #@dialog("myModal")
+				#@dialogHeader()#end
+				#@dialogBody()<p>对话框内容…</p>#end
+				#@dialogFooter()
+					#@buttonEnsure()确定#end
+					#@buttonCancel()关闭#end
+				#end
+			#end
+		#end
+
+#end
+
+		

@@ -26,7 +26,7 @@ public class ProductProjectAction extends BaseController{
         project.setProjectId(Integer.parseInt(currentProjectId));
         projectService.addProject(project);
 
-        return "redirect:" + "/product/page/project/product-project-list.page";
+        return "/product/page/list/project/product-project-list.page";
 
     }
 
@@ -41,7 +41,7 @@ public class ProductProjectAction extends BaseController{
         project.setProjectId(Integer.parseInt(currentProjectId));
         Pager<Project> pagerProject = projectService.findProjectPager(page, pagesize, project, order, ordertype);
         model.addAttribute("project",pagerProject);
-        return "/product/data/allproduct-project.pagelet";
+        return "/product/data/project/allproduct-project.pagelet";
 
     }
 

@@ -28,6 +28,7 @@ import org.tinygroup.sdpm.quality.dao.pojo.QualityTestCase;
 import org.tinygroup.sdpm.quality.service.inter.TestCaseService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.dao.pojo.SystemHistory;
+import org.tinygroup.sdpm.util.CookieUtils;
 import org.tinygroup.sdpm.util.LogUtil;
 import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
@@ -77,11 +78,11 @@ public class ProductAction extends BaseController {
     public String doc(@PathVariable(value = "forward") String forward, HttpServletRequest request, Model model) {
 
         if ("doc".equals(forward)) {
-            return "/product/page/project/archive-list.page";
+            return "/product/page/list/doc/archive-list.page";
         } else if ("project".equals(forward)) {
-            return "/product/page/project/product-project-list.page";
+            return "/product/page/list/project/product-project-list.page";
         } else if ("dynamic".equals(forward)) {
-            return "/product/page/project/dymanicdata.page";
+            return "/product/page/list/dynamic/dymanicdata.page";
         }
         return "";
     }
@@ -90,7 +91,10 @@ public class ProductAction extends BaseController {
     @RequestMapping("")
     public String productAction(@CookieValue(value = "cookieProductLineId", defaultValue = "0") String cookieProductLineId, HttpServletResponse response, HttpServletRequest request) {
         if ("0".equals(cookieProductLineId)) {
-            productUtils.prepareForFirst(response);
+            List<Product> products = productService.getProductByUser(UserUtils.getUserId(),0,null);
+            if(products.size()>0){
+                CookieUtils.setCookie(response, "cookieProductLineId", String.valueOf(products.get(0).getProductId()));
+            }
         }
         return "redirect:" + adminPath + "/product/story?choose=1" + (request.getQueryString() == null? "" : ("&" + request.getQueryString()));
     }
@@ -105,8 +109,6 @@ public class ProductAction extends BaseController {
         product.setProductStatus("0");
 
         product = productService.addProduct(product);
-        productUtils.removeProductList();
-        productUtils.removeAllProductListByUser();
         LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCT,
                 LogUtil.LogAction.OPENED,
                 String.valueOf(product.getProductId()),
@@ -128,16 +130,6 @@ public class ProductAction extends BaseController {
     public String update(Product product, HttpServletRequest request, SystemAction systemAction) throws IOException {
         Product product1 = productService.findProduct(product.getProductId());
         productService.updateProduct(product);
-        productUtils.removeProductList();
-        productUtils.removeProductList(String.valueOf(
-                product.getProductLineId().equals(product1.getProductId()) ?
-                        product1.getProductLineId() : product.getProductLineId()
-        ));
-        productUtils.removeAllProductListByUser();
-        productUtils.removeProductListByProductLineUser(String.valueOf(
-                product.getProductLineId().equals(product1.getProductId()) ?
-                        product1.getProductLineId() : product.getProductLineId()
-        ));
         LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCT,
                 LogUtil.LogAction.EDITED,
                 String.valueOf(product.getProductId()),
@@ -148,18 +140,13 @@ public class ProductAction extends BaseController {
                 product,
                 systemAction.getActionComment());
 
-        return "redirect:" + "/product/page/tabledemo/product-listall.page";
+        return "/product/page/list/product/product-listall.page";
     }
 
     @RequestMapping("/edit")
     public String edit(Product product, HttpServletRequest request, String lastAddress) {
 
         productService.updateProduct(product);
-        productUtils.removeProductList();
-        productUtils.removeProductList(String.valueOf(product.getProductLineId()));
-        if(!StringUtil.isBlank(lastAddress)){
-            return "redirect:"+lastAddress;
-        }
         return "redirect:" + adminPath + "/product/find/overview?productId=" + product.getProductId();
     }
 
@@ -207,13 +194,13 @@ public class ProductAction extends BaseController {
 
         Product product = productService.findProduct(productId);
         model.addAttribute("product", product);
-        return "/product/page/tabledemo/product-module-editor.page";
+        return "/product/page/update/module/product-module-editor.page";
     }
 
     @RequestMapping("/find/{forward}")
     public String find(@CookieValue(value = "cookieProductId", defaultValue = "0") String cookieProductId,
                        @PathVariable(value = "forward") String forward, Integer productId, Model model, HttpServletRequest request) {
-        if ("close".equals(forward)) return "/product/page/tabledemo/overview-close.pagelet";
+        if ("close".equals(forward)) return "/product/page/operate/product/overview-close.pagelet";
         if (productId != null) cookieProductId = String.valueOf(productId);
         Product product = new Product();
         if (Integer.parseInt(cookieProductId) > 0) {
@@ -228,7 +215,7 @@ public class ProductAction extends BaseController {
 
         if ("overview".equals(forward)) {
 
-            return "/product/page/project/overview.page";
+            return "/product/page/view/product/overview.page";
         } else if ("baseinfo".equals(forward)) {
             List<ProjectProduct> projectProducts = projectProductService.findProjects(Integer.parseInt(cookieProductId));
             ProjectBuild build = new ProjectBuild();
@@ -252,7 +239,7 @@ public class ProductAction extends BaseController {
                 List<OrgRole> roles = roleService.getRoleByIds(ids);
                 model.addAttribute("whiteLists", roles);
             }
-            return "/product/page/tabledemo/baseinfo.pagelet";
+            return "/product/page/view/product/baseinfo.pagelet";
         }
         return "";
     }
@@ -266,7 +253,7 @@ public class ProductAction extends BaseController {
             deleted=1;
         }
         model.addAttribute("productMap", productService.getUserProductsWithCountMap(UserUtils.getUserId(),deleted));
-        return "/product/data/allproductdata.pagelet";
+        return "/product/data/product/allproductdata.pagelet";
     }
 
     @RequestMapping("/findManager")
@@ -290,7 +277,7 @@ public class ProductAction extends BaseController {
     @ResponseBody
     @RequestMapping("/productList")
     public List<Product> findProduct(Product product, String type, String productLineId) {
-        if ("user".equals(type)) return productUtils.getProductListByProductLineUser(productLineId);
+        if ("user".equals(type)) return productService.getProductByUser(UserUtils.getUserId(),0,Integer.parseInt(productLineId));
 
         List<Product> list = productService.findProductList(product);
 
@@ -304,16 +291,16 @@ public class ProductAction extends BaseController {
         if ("addproduct".equals(forward)) {
             List<ProductLine> productLineList = productLineService.getUserProductLine(userUtils.getUserId());
             model.addAttribute("productLineList",productLineList);
-            return "/product/page/tabledemo/addProduct";
+            return "/product/page/add/product/addProduct";
         } else if ("allproduct".equals(forward)) {
-            return "/product/page/tabledemo/product-listall.page";
+            return "/product/page/list/product/product-listall.page";
         }
         return "";
     }
 
     @RequestMapping("/addDoc")
     public String addDoc(HttpServletRequest request, Model model) {
-        return "/product/page/tabledemo/add-doc";
+        return "/product/page/add/add-doc";
     }
 
     @RequestMapping("project/listData")
@@ -392,7 +379,7 @@ public class ProductAction extends BaseController {
     @RequestMapping("addModule")
     public String toAddModule(Integer pId, Model model) {
         model.addAttribute("pId", pId);
-        return "/product/page/tabledemo/addModule.pagelet";
+        return "/product/page/add/module/addModule.pagelet";
     }
 
     @RequestMapping("team")

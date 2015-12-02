@@ -45,7 +45,7 @@ public class ActionAction extends BaseController {
         }
         Pager<SystemAction> pagerSystemAction = actionService.queryActionPager(start, limit, choice, action, order, orderType);
         model.addAttribute("systemAction", pagerSystemAction);
-        return "/product/data/tinydynamicdata.pagelet";
+        return "/product/data/dynamic/tinydynamicdata.pagelet";
     }
 
     @RequestMapping("ajax/history")

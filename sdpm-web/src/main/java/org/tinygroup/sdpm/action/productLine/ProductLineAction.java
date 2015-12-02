@@ -50,10 +50,10 @@ public class ProductLineAction extends BaseController {
     public String productLine(@PathVariable(value = "type") String type) {
         if ("add".equals(type)) {
 
-            return "productLine/page/tabledemo/add.page";
+            return "productLine/page/add/add.page";
         }
         if ("all".equals(type)) {
-            return "productLine/page/tabledemo/list.page";
+            return "productLine/page/list/productline/list.page";
         }
         return null;
 
@@ -65,8 +65,6 @@ public class ProductLineAction extends BaseController {
         productLine.setProductLineCreatedDate(new Date());
         productLine.setProductLineStatus("0");
         ProductLine productLine1 = productLineService.addProductLine(productLine);
-        productUtils.removeProductLineList();
-        productUtils.removeProductLineListByUser();
         LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCTLINE
                 , LogUtil.LogAction.OPENED
                 , String.valueOf(productLine1.getProductLineId())
@@ -84,8 +82,6 @@ public class ProductLineAction extends BaseController {
     public String update(ProductLine productLine) {
         ProductLine productLineOld = productLineService.findProductLine(productLine.getProductLineId());
         productLineService.updateProductLine(productLine);
-        productUtils.removeProductLineList();
-        productUtils.removeProductLineListByUser();
         LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCTLINE,
                 LogUtil.LogAction.EDITED,
                 String.valueOf(productLine.getProductLineId()),
@@ -102,7 +98,7 @@ public class ProductLineAction extends BaseController {
     @RequestMapping("/edit")
     public String edit(ProductLine productLine) {
         productLineService.updateProductLine(productLine);
-        return "/productLine/page/tabledemo/update.page";
+        return "/productLine/page/update/update.page";
     }
 
     @ResponseBody
@@ -125,9 +121,6 @@ public class ProductLineAction extends BaseController {
                     systemAction.getActionComment());
         }
         productLineService.deleteProductLine(productLineId);
-        productUtils.removeProductLineList();
-        productUtils.removeProductList(String.valueOf(productLineId));
-        productUtils.removeProductLineListByUser();
         Map<String, String> map = new HashMap<String, String>();
         LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCTLINE,
                 LogUtil.LogAction.DELETED,
@@ -147,7 +140,7 @@ public class ProductLineAction extends BaseController {
     public String find(Integer productLineId, Model model) {
         ProductLine productLine = productLineService.findProductLine(productLineId);
         model.addAttribute("productLine", productLine);
-        return "/productLine/page/tabledemo/update.page";
+        return "/productLine/page/update/update.page";
     }
 
 
@@ -156,8 +149,6 @@ public class ProductLineAction extends BaseController {
         ProductLine productLine1 = productLineService.findProductLine(productLine.getProductLineId());
         productLine.setDeleted(FieldUtil.DELETE_YES);
         productLineService.updateProductLine(productLine);
-        productUtils.removeProductLineList();
-        productUtils.removeProductLineListByUser();
         LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCTLINE,
                 LogUtil.LogAction.CLOSED,
                 String.valueOf(productLine.getProductLineId()),
@@ -167,7 +158,7 @@ public class ProductLineAction extends BaseController {
                 productLine1,
                 productLine,
                 systemAction.getActionComment());
-        return "redirect:" + "/productLine/page/tabledemo/list.page";
+        return "redirect:" + "/productLine/page/list/productline/list.page";
     }
 
     @RequestMapping("/list")
@@ -181,7 +172,7 @@ public class ProductLineAction extends BaseController {
         Pager<ProductLine> pagerProductLine = productLineService.findProductLinePagerInIds(start, pagesize, carrier, productLine, ids, order, ordertype);
 
         model.addAttribute("productLine", pagerProductLine);
-        return "/productLine/data/productLinedata.pagelet";
+        return "/productLine/data/productline/productLinedata.pagelet";
     }
 
     @RequestMapping("/find/{forword}")
@@ -199,14 +190,14 @@ public class ProductLineAction extends BaseController {
         model.addAttribute("lineNameList", lineNameList);
 
         if ("overview".equals(forword)) {
-            return "/productLine/page/project/overview.page";
+            return "/productLine/page/view/overview.page";
         } else if ("productLineDetail".equals(forword)) {
             if (!StringUtil.isBlank(productLine.getProductLineWhiteList())) {
                 String[] ids = productLine.getProductLineWhiteList().split(",");
                 List<OrgRole> roles = roleService.getRoleByIds(ids);
                 model.addAttribute("whiteLists", roles);
             }
-            return "/productLine/page/tabledemo/other-information.pagelet";
+            return "/productLine/page/view/other-information.pagelet";
         }
         return "";
     }
@@ -222,12 +213,12 @@ public class ProductLineAction extends BaseController {
         if (StringUtil.isBlank(query) || !query.contains("status")) {
             model.addAttribute("status", 1);
         }
-        return "/productLine/page/project/productLine.page";
+        return "/productLine/page/list/productline/list.page";
     }
 
     @RequestMapping("/listProduct")
     public String listProduct() {
-        return "/productLine/page/project/productLine.page";
+        return "/productLine/page/list/productline/list.page";
 
     }
 
@@ -283,16 +274,16 @@ public class ProductLineAction extends BaseController {
             String prefix = treeId.substring(0, 1);
             if ("p".equals(prefix)) {
                 model.addAttribute("productLineId", treeId.substring(1));
-                model.addAttribute("type", "product");
+                return "/productLine/page/list/product/productlist.page";
             }
             if ("v".equals(prefix)) {
                 model.addAttribute("buildProduct", treeId.substring(1));
-                model.addAttribute("type", "build");
+                return "/productLine/page/list/build/buildlist.page";
             }
         }
 
 
-        return "/productLine/page/project/productLine.page";
+        return "/productLine/page/list/productline/list.page";
     }
 
 
@@ -315,7 +306,7 @@ public class ProductLineAction extends BaseController {
             list.add(map);
             Product product = new Product();
             product.setProductLineId(productLine.getProductLineId());
-            productList = productUtils.getProductListByProductLineUser(String.valueOf(productLine.getProductLineId()));
+            productList = productService.getProductByUser(UserUtils.getUserId(),0,productLine.getProductLineId());
         }
         for (Product d : productList) {
             Map<String, Object> map = new HashMap<String, Object>();
@@ -449,7 +440,7 @@ public class ProductLineAction extends BaseController {
         }
         List<Product> products = productService.getProductByUserAndProductLineWithCount(UserUtils.getUserId(), productLineId, delete);
         model.addAttribute("productList", products);
-        return "/productLine/data/productListData.pagelet";
+        return "/productLine/data/product/productListData.pagelet";
     }
 
     @ResponseBody
