@@ -3,6 +3,7 @@ package org.tinygroup.sdpm.document.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.tinygroup.commons.tools.ArrayUtil;
 import org.tinygroup.sdpm.dao.complexsearch.SearchInfos;
 import org.tinygroup.sdpm.document.biz.inter.DocBiz;
 import org.tinygroup.sdpm.document.dao.pojo.DocumentDoc;
@@ -15,75 +16,76 @@ import java.util.List;
 
 /**
  * 文档
- * @date 2015/09/21
- * @author Alu
  *
+ * @author Alu
+ * @date 2015/09/21
  */
 @Service
 @Transactional
-public class DocServiceImpl implements DocService{
-	@Autowired
-	private DocBiz docbiz;
+public class DocServiceImpl implements DocService {
+    @Autowired
+    private DocBiz docbiz;
 
-	public DocumentDoc createNewDoc(DocumentDoc doc) {
-		return docbiz.addDoc(doc);
-	}
+    public DocumentDoc createNewDoc(DocumentDoc doc) {
+        return docbiz.addDoc(doc);
+    }
 
-	public DocumentDocLib createNewDocLib(DocumentDocLib docLib) {
-		return docbiz.addDocLib(docLib);
-	}
+    public DocumentDocLib createNewDocLib(DocumentDocLib docLib) {
+        return docbiz.addDocLib(docLib);
+    }
 
-	public int editDoc(DocumentDoc doc) {
-		return docbiz.updtDoc(doc);
-	}
+    public Integer editDoc(DocumentDoc doc) {
+        return docbiz.updtDoc(doc);
+    }
 
-	public int editDocLibName(DocumentDocLib docLib) {
-		return docbiz.updtDocLib(docLib);
-	}
+    public Integer editDocLibName(DocumentDocLib docLib) {
+        return docbiz.updtDocLib(docLib);
+    }
 
-	public DocumentDoc findDocById(Integer id) {
-		return docbiz.getDocById(id);
-	}
+    public DocumentDoc findDocById(Integer id) {
+        return docbiz.getDocById(id);
+    }
 
-	public DocumentDocLib findDocLibById(Integer id) {
-		return docbiz.getDocLibById(id);
-	}
+    public DocumentDocLib findDocLibById(Integer id) {
+        return docbiz.getDocLibById(id);
+    }
 
-	public List<DocumentDoc> findDocList(DocumentDoc doc) {
-		return docbiz.getDocList(doc);
-	}
+    public List<DocumentDoc> findDocList(DocumentDoc doc) {
+        return docbiz.getDocList(doc);
+    }
 
-	public List<DocumentDocLib> findDocLibList(DocumentDocLib docLib) {
-		return docbiz.getDoclibList(docLib);
-	}
+    public List<DocumentDocLib> findDocLibList(DocumentDocLib docLib) {
+        return docbiz.getDoclibList(docLib);
+    }
 
 
-	public Pager<DocumentDoc> findDocRetProductPager(Integer start, Integer limit, DocumentDoc doc, Integer moduleId, SearchInfos conditions, String groupOperate, String sortName, boolean asc) {
-		return docbiz.queryProductItemWithPage(start,limit,doc,moduleId,conditions,groupOperate,sortName,asc);
-	}
+    public Pager<DocumentDoc> findDocRetProductPager(Integer start, Integer limit, DocumentDoc doc, Integer moduleId, SearchInfos conditions, String groupOperate, String sortName, boolean asc) {
+        return docbiz.queryProductItemWithPage(start, limit, doc, moduleId, conditions, groupOperate, sortName, asc);
+    }
 
-	public Pager<DocumentDoc> findDocRetProjectPager(Integer start, Integer limit, DocumentDoc doc, Integer moduleId, SearchInfos conditions, String groupOperate, String sortName, boolean asc) {
-		return docbiz.queryProjectItemWithPage(start,limit,doc,moduleId,conditions,groupOperate,sortName,asc);
-	}
+    public Pager<DocumentDoc> findDocRetProjectPager(Integer start, Integer limit, DocumentDoc doc, Integer moduleId, SearchInfos conditions, String groupOperate, String sortName, boolean asc) {
+        return docbiz.queryProjectItemWithPage(start, limit, doc, moduleId, conditions, groupOperate, sortName, asc);
+    }
 
-	public Pager<DocumentDoc> findDocRetPager(Integer start,Integer limit,DocumentDoc doc,Integer moduleId, SearchInfos conditions,String groupOperate, String sortName,boolean asc) {
-		return docbiz.queryItemWithPage(start, limit, doc,moduleId,conditions, groupOperate, sortName, asc);
-	}
+    public Pager<DocumentDoc> findDocRetPager(Integer start, Integer limit, DocumentDoc doc, Integer moduleId, SearchInfos conditions, String groupOperate, String sortName, boolean asc) {
+        return docbiz.queryItemWithPage(start, limit, doc, moduleId, conditions, groupOperate, sortName, asc);
+    }
 
-	public Pager<DocumentDocLib> findDocLibRetPager(Integer start, Integer limit, DocumentDocLib docLib, String sortName, boolean asc) {
-		return docbiz.queryItemWithPage(start, limit, docLib,sortName, asc);
-	}
 
-	public int deleteDocById(Integer id) {
-		return docbiz.delDocById(id);
-	}
+    public Integer deleteDocById(Integer id) {
+        return docbiz.delDocById(id);
+    }
 
-	public int deleteDocLibById(Integer id) {
-		return docbiz.delDocLibById(id);
-	}
+    public Integer deleteDocLibById(Integer id) {
+        return docbiz.delDocLibById(id);
+    }
 
-	public int[] deleteDocByIds(List<DocumentDoc> ids) {
-		return docbiz.batchDelDocByIds(ids);
-	}
+    public Integer deleteDocByIds(List<DocumentDoc> ids) {
+        int[] len = docbiz.batchDelDocByIds(ids);
+        if (ArrayUtil.isEmptyArray(len)) {
+            return 0;
+        }
+        return len.length;
+    }
 
 }

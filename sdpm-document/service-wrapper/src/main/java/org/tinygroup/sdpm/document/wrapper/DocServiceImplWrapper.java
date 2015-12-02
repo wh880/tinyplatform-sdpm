@@ -28,7 +28,6 @@ import org.tinygroup.event.ServiceRequest;
 
 import java.util.List;
 import java.util.UUID;
-
 @Service("docService")
 public class DocServiceImplWrapper implements org.tinygroup.sdpm.document.service.inter.DocService {
 
@@ -79,7 +78,7 @@ public class DocServiceImplWrapper implements org.tinygroup.sdpm.document.servic
 		}
 	}
 
-	public int editDoc(org.tinygroup.sdpm.document.dao.pojo.DocumentDoc doc) {
+	public java.lang.Integer editDoc(org.tinygroup.sdpm.document.dao.pojo.DocumentDoc doc) {
 		String serviceId = "editDoc";
 
 		try{
@@ -92,7 +91,7 @@ public class DocServiceImplWrapper implements org.tinygroup.sdpm.document.servic
 		}
 	}
 
-	public int editDocLibName(org.tinygroup.sdpm.document.dao.pojo.DocumentDocLib docLib) {
+	public java.lang.Integer editDocLibName(org.tinygroup.sdpm.document.dao.pojo.DocumentDocLib docLib) {
 		String serviceId = "editDocLibName";
 
 		try{
@@ -105,7 +104,7 @@ public class DocServiceImplWrapper implements org.tinygroup.sdpm.document.servic
 		}
 	}
 
-	public org.tinygroup.sdpm.document.dao.pojo.DocumentDoc findDocById(Integer id) {
+	public org.tinygroup.sdpm.document.dao.pojo.DocumentDoc findDocById(java.lang.Integer id) {
 		String serviceId = "findDocById";
 
 		try{
@@ -118,7 +117,7 @@ public class DocServiceImplWrapper implements org.tinygroup.sdpm.document.servic
 		}
 	}
 
-	public org.tinygroup.sdpm.document.dao.pojo.DocumentDocLib findDocLibById(Integer id) {
+	public org.tinygroup.sdpm.document.dao.pojo.DocumentDocLib findDocLibById(java.lang.Integer id) {
 		String serviceId = "findDocLibById";
 
 		try{
@@ -157,7 +156,7 @@ public class DocServiceImplWrapper implements org.tinygroup.sdpm.document.servic
 		}
 	}
 
-	public org.tinygroup.tinysqldsl.Pager findDocRetProductPager(Integer start ,Integer limit ,org.tinygroup.sdpm.document.dao.pojo.DocumentDoc doc ,Integer moduleId ,org.tinygroup.sdpm.dao.complexsearch.SearchInfos conditions ,String groupOperate ,String sortName ,boolean asc) {
+	public org.tinygroup.tinysqldsl.Pager findDocRetProductPager(java.lang.Integer start ,java.lang.Integer limit ,org.tinygroup.sdpm.document.dao.pojo.DocumentDoc doc ,java.lang.Integer moduleId ,org.tinygroup.sdpm.dao.complexsearch.SearchInfos conditions ,java.lang.String groupOperate ,java.lang.String sortName ,boolean asc) {
 		String serviceId = "findDocRetProductPager";
 
 		try{
@@ -177,7 +176,7 @@ public class DocServiceImplWrapper implements org.tinygroup.sdpm.document.servic
 		}
 	}
 
-	public org.tinygroup.tinysqldsl.Pager findDocRetProjectPager(Integer start ,Integer limit ,org.tinygroup.sdpm.document.dao.pojo.DocumentDoc doc ,Integer moduleId ,org.tinygroup.sdpm.dao.complexsearch.SearchInfos conditions ,String groupOperate ,String sortName ,boolean asc) {
+	public org.tinygroup.tinysqldsl.Pager findDocRetProjectPager(java.lang.Integer start ,java.lang.Integer limit ,org.tinygroup.sdpm.document.dao.pojo.DocumentDoc doc ,java.lang.Integer moduleId ,org.tinygroup.sdpm.dao.complexsearch.SearchInfos conditions ,java.lang.String groupOperate ,java.lang.String sortName ,boolean asc) {
 		String serviceId = "findDocRetProjectPager";
 
 		try{
@@ -197,7 +196,7 @@ public class DocServiceImplWrapper implements org.tinygroup.sdpm.document.servic
 		}
 	}
 
-	public org.tinygroup.tinysqldsl.Pager findDocRetPager(Integer start ,Integer limit ,org.tinygroup.sdpm.document.dao.pojo.DocumentDoc doc ,Integer moduleId ,org.tinygroup.sdpm.dao.complexsearch.SearchInfos conditions ,String groupOperate ,String sortName ,boolean asc) {
+	public org.tinygroup.tinysqldsl.Pager findDocRetPager(java.lang.Integer start ,java.lang.Integer limit ,org.tinygroup.sdpm.document.dao.pojo.DocumentDoc doc ,java.lang.Integer moduleId ,org.tinygroup.sdpm.dao.complexsearch.SearchInfos conditions ,java.lang.String groupOperate ,java.lang.String sortName ,boolean asc) {
 		String serviceId = "findDocRetPager";
 
 		try{
@@ -217,24 +216,7 @@ public class DocServiceImplWrapper implements org.tinygroup.sdpm.document.servic
 		}
 	}
 
-	public org.tinygroup.tinysqldsl.Pager findDocLibRetPager(Integer start ,Integer limit ,org.tinygroup.sdpm.document.dao.pojo.DocumentDocLib docLib ,String sortName ,boolean asc) {
-		String serviceId = "findDocLibRetPager";
-
-		try{
-			Context context = new ContextImpl();
-			context.put("start" ,start);
-			context.put("limit" ,limit);
-			context.put("docLib" ,docLib);
-			context.put("sortName" ,sortName);
-			context.put("asc" ,asc);
-
-			return callServiceAndCallBack(serviceId,context);
-		}catch(Exception e){
-			throw new RuntimeException(String.format("服务[%s]发生异常",serviceId),e);
-		}
-	}
-
-	public int deleteDocById(Integer id) {
+	public java.lang.Integer deleteDocById(java.lang.Integer id) {
 		String serviceId = "deleteDocById";
 
 		try{
@@ -247,7 +229,7 @@ public class DocServiceImplWrapper implements org.tinygroup.sdpm.document.servic
 		}
 	}
 
-	public int deleteDocLibById(Integer id) {
+	public java.lang.Integer deleteDocLibById(java.lang.Integer id) {
 		String serviceId = "deleteDocLibById";
 
 		try{
@@ -260,7 +242,7 @@ public class DocServiceImplWrapper implements org.tinygroup.sdpm.document.servic
 		}
 	}
 
-	public int[] deleteDocByIds(java.util.List<org.tinygroup.sdpm.document.dao.pojo.DocumentDoc> ids) {
+	public java.lang.Integer deleteDocByIds(java.util.List<org.tinygroup.sdpm.document.dao.pojo.DocumentDoc> ids) {
 		String serviceId = "deleteDocByIds";
 
 		try{

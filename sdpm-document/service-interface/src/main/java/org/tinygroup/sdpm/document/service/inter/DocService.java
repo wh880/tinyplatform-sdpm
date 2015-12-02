@@ -6,40 +6,40 @@ import org.tinygroup.sdpm.document.dao.pojo.DocumentDocLib;
 import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.List;
+
 /**
- * @date 2015/09/21
  * @author Alu
- *
+ * @date 2015/09/21
  */
 public interface DocService {
 
-	DocumentDoc createNewDoc(DocumentDoc doc);
-	//Create a new document library-just a name.
-	DocumentDocLib createNewDocLib(DocumentDocLib doclib);
-	//Edit document
-	int editDoc(DocumentDoc doc);
-	//Edit document library name.
-	int editDocLibName(DocumentDocLib doclib);
-	//find
-	DocumentDoc findDocById(Integer id);
+    DocumentDoc createNewDoc(DocumentDoc doc);
 
-	DocumentDocLib findDocLibById(Integer id);
-	//list
-	List<DocumentDoc> findDocList(DocumentDoc doc);
+    DocumentDocLib createNewDocLib(DocumentDocLib docLib);
 
-	List<DocumentDocLib> findDocLibList(DocumentDocLib doclib);
-	//page
-	Pager<DocumentDoc> findDocRetPager(Integer start,Integer limit,DocumentDoc doc,Integer moduleId, SearchInfos conditions,String groupOperate, String sortName,boolean asc);
+    Integer editDoc(DocumentDoc doc);
 
-	Pager<DocumentDoc> findDocRetProductPager(Integer start,Integer limit,DocumentDoc doc, Integer moduleId, SearchInfos conditions,String groupOperate, String sortName,boolean asc);
+    Integer editDocLibName(DocumentDocLib docLib);
 
-	Pager<DocumentDoc> findDocRetProjectPager(Integer start,Integer limit,DocumentDoc doc, Integer moduleId, SearchInfos conditions,String groupOperate, String sortName,boolean asc);
+    DocumentDoc findDocById(Integer id);
 
-	Pager<DocumentDocLib> findDocLibRetPager(Integer start, Integer limit, DocumentDocLib doclib, String sortName, boolean asc);
-	//delete
-	int deleteDocById(Integer id);
-	int deleteDocLibById(Integer id);
-	int[] deleteDocByIds(List<DocumentDoc> ids);
+    DocumentDocLib findDocLibById(Integer id);
+
+    List<DocumentDoc> findDocList(DocumentDoc doc);
+
+    List<DocumentDocLib> findDocLibList(DocumentDocLib docLib);
+
+    Pager<DocumentDoc> findDocRetPager(Integer start, Integer limit, DocumentDoc doc, Integer moduleId, SearchInfos conditions, String groupOperate, String sortName, boolean asc);
+
+    Pager<DocumentDoc> findDocRetProductPager(Integer start, Integer limit, DocumentDoc doc, Integer moduleId, SearchInfos conditions, String groupOperate, String sortName, boolean asc);
+
+    Pager<DocumentDoc> findDocRetProjectPager(Integer start, Integer limit, DocumentDoc doc, Integer moduleId, SearchInfos conditions, String groupOperate, String sortName, boolean asc);
+
+    Integer deleteDocById(Integer id);
+
+    Integer deleteDocLibById(Integer id);
+
+    Integer deleteDocByIds(List<DocumentDoc> ids);
 
 
 }

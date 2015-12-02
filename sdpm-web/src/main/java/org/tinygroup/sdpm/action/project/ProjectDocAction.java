@@ -61,7 +61,7 @@ public class ProjectDocAction extends BaseController {
 
     @ResponseBody
     @RequestMapping("/batchDel")
-    public Map<String, String> batcheDel(String ids) {
+    public Map<String, String> batchDel(String ids) {
         String[] id = ids.split(",");
         List<DocumentDoc> docList = new ArrayList<DocumentDoc>();
         for (int i = 0; i < id.length; i++) {
@@ -70,16 +70,12 @@ public class ProjectDocAction extends BaseController {
             doc.setDocDeleted(DocumentDoc.DELETE_YES);
             docList.add(doc);
         }
-        int[] res = docService.deleteDocByIds(docList);
-        Map<String, String> map = new HashMap<String, String>();
-        if (res.length > 0) {
-            map.put("status", "y");
-            map.put("info", "删除成功");
+        Integer res = docService.deleteDocByIds(docList);
+        if (res > 0) {
+            return resultMap(true, "删除成功");
         } else {
-            map.put("status", "n");
-            map.put("info", "删除失败");
+            return resultMap(false, "删除失败");
         }
-        return map;
     }
 
     @RequiresPermissions("pro-document-delete")
