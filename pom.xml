@@ -49,7 +49,6 @@
         <module>sdpm-product</module>
         <module>sdpm-project</module>
         <module>sdpm-quality</module>
-        <module>sdpm-report</module>
         <module>sdpm-web</module>
         <module>sdpm-statistic</module>
         <module>sdpm-org</module>
