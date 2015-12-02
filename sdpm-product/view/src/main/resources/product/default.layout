@@ -2,7 +2,6 @@
 #import("/org/tinygroup/button/components/button_common.component")
 #import("/org/tinygroup/button/components/button.component")
 #!set(activeTitle="产品管理",activeMenuId=currentPageId)
-#include("/product/page/event/common.page")
 ###set(currentPageId=3)
 ###set(cookieProductLineIdTemp=cookieProductLineId,cookieProductLineId=cookieProductLineId?:ProductUtils.getProductLineListByUser()?.get(0)?.productLineId,cookieProductLineId=cookieProductLineId?String.valueOf(cookieProductLineId):null)
 ###if(cookieProductLineId)
@@ -20,6 +19,21 @@
     }
 </style>
 <script>
+    $(function () {
+        $("#deleteBatch").click(function () {
+            if ($("input[name='idCheck']:checked").size() <= 0) {
+                layer.alert('至少要选择一条！');
+            }
+            else {
+                layer.confirm('确认要删除吗？', function (index) {
+                    layer.msg('已删除!', 1,1);
+                });
+            }
+        });
+        $(".delBtn").click(function () {
+            user_del(this, '1');
+        });
+    });
     function ajaxRead(id, toName, opKey, opvalue, url, value,isBuild) {
         var selectCheck = "select[name=" + toName + "]";
         $(selectCheck).each(function () {
@@ -85,8 +99,8 @@
     ##        #@div(divClass="dropdownBox")
     ##            #include("/product/page/project/dropdownMenuline.page")
     ##        #end
-		 #@div(divClass="dropdownBox")
-            #include("/product/page/project/dropdownMenu.page")
+        #@div(divClass="dropdownBox")
+            #include("/product/page/dropdown/dropdownMenu.page")
         #end
 
 

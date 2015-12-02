@@ -339,9 +339,9 @@ public class ModuleAction extends BaseController {
         moduleService.addSystemModule(module);
 
         if ("story".equals(forwordPager)) {
-            return "/product/page/project/togglebox.page";
+            return "/product/page/list/story/story.page";
         } else if ("promodule".equals(forwordPager)) {
-            return "/product/page/project/product-modular.page";
+            return "/product/page/list/module/product-modular.page";
         } else if ("doc".equals(forwordPager)) {
             return "/document/treeNew.page";
         }
@@ -357,9 +357,9 @@ public class ModuleAction extends BaseController {
         moduleService.editModule(module);
 
         if ("story".equals(forwordPager)) {
-            return "/product/page/project/togglebox.page";
+            return "/product/page/list/story/story.page";
         } else if ("promodule".equals(forwordPager)) {
-            return "/product/page/project/product-modular.page";
+            return "/product/page/list/module/product-modular.page";
         } else if ("doc".equals(forwordPager)) {
             return "/document/treeNew.page";
         }
@@ -371,9 +371,9 @@ public class ModuleAction extends BaseController {
     public String deleteSystemModule(Integer moduleId, @PathVariable(value = "forwordPager") String forwordPager) {
         moduleService.deleteModuleById(moduleId);
         if ("story".equals(forwordPager)) {
-            return "/product/page/project/togglebox.page";
+            return "/product/page/list/story/story.page";
         } else if ("promodule".equals(forwordPager)) {
-            return "/product/page/project/product-modular.page";
+            return "/product/page/list/module/product-modular.page";
         } else if ("doc".equals(forwordPager)) {
             return "/document/treeNew.page";
         }
@@ -413,7 +413,7 @@ public class ModuleAction extends BaseController {
         String modulePath = ModuleUtil.getPath(module.getModuleParent(), ">", null, false);
         model.addAttribute("list", list);
         model.addAttribute("modulePath", modulePath);
-        return "/product/page/project/product-modular.page";
+        return "/product/page/list/module/product-modular.page";
     }
 
     private void mergeProductModule(List<Product> products, String moduleType, List<Map<String, Object>> mapList, String nameOrTitle, boolean add, boolean edit, String type) {

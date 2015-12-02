@@ -104,7 +104,7 @@ public class StoryAction extends BaseController {
             return "redirect:" + adminPath + "/product/story?choose=1";
         }
 
-        return "/product/page/project/togglebox.page";
+        return "/product/page/list/story/story.page";
     }
 
     /**
@@ -121,7 +121,7 @@ public class StoryAction extends BaseController {
         if (!StringUtil.isBlank(lastAddress)) {
             return "redirect:" + lastAddress;
         }
-        return "/product/page/tabledemo/product-demand-add.page";
+        return "/product/page/add/story/product-demand-add.page";
     }
 
     /**
@@ -225,7 +225,7 @@ public class StoryAction extends BaseController {
      */
     @RequestMapping("/list")
     public String list() {
-        return "/product/page/project/togglebox.page";
+        return "/product/page/list/story/story.page";
     }
 
     /**
@@ -316,7 +316,7 @@ public class StoryAction extends BaseController {
         List<ServiceRequest> requests = requestService.getRequestList(null);
         model.addAttribute("requestList", requests);
         model.addAttribute("story", productStory);
-        return "/product/page/tabledemo/editbaseinfo.pagelet";
+        return "/product/page/update/story/editbaseinfo.pagelet";
     }
 
     /**
@@ -367,17 +367,17 @@ public class StoryAction extends BaseController {
         model.addAttribute("stories", stories);
 
         if ("productDemandClose".equals(forwordPager)) {
-            return "/product/page/tabledemo/product-demand-close.page";
+            return "/product/page/operate/story/product-demand-close.page";
         } else if ("productDemandReview".equals(forwordPager)) {
 
-            return "/product/page/tabledemo/product-demand-review.page";
+            return "/product/page/operate/story/product-demand-review.page";
         } else if ("productDemandChange".equals(forwordPager)) {
             SystemProfile systemProfile = new SystemProfile();
             systemProfile.setFileObjectId(storyId);
             systemProfile.setFileObjectType(ProfileType.STORY.getType());
             List<SystemProfile> fileList = profileService.findSystemProfile(systemProfile);
             model.addAttribute("fileList", fileList);
-            return "/product/page/tabledemo/product-demand-change.page";
+            return "/product/page/operate/story/product-demand-change.page";
         } else if ("productDemandDetail".equals(forwordPager)) {
 
             ProjectTask task = new ProjectTask();
@@ -390,7 +390,7 @@ public class StoryAction extends BaseController {
             testCase1.setStoryId(storyId);
             List<QualityTestCase> testCases = testCaseService.findTestCaseList(testCase1);
             model.addAttribute("caseList", testCases);
-            return "/product/page/tabledemo/hrefbaseinfo.pagelet";
+            return "/product/page/view/story/hrefbaseinfo.pagelet";
         }
 
         return "";
@@ -542,7 +542,7 @@ public class StoryAction extends BaseController {
         Pager<ProductStory> p = storyService.findStoryByCondition(start, pagesize, story, carrier, order, "asc".equals(ordertype) ? true : false);
         model.addAttribute("storyList", p);
 
-        return "product/data/tabledata.pagelet";
+        return "product/data/story/tabledata.pagelet";
     }
 
     /**
@@ -801,7 +801,7 @@ public class StoryAction extends BaseController {
         Map<String, List<StoryCount>> map = storyService.report(chexkitem, story);
         model.addAttribute("map", map);
         model.addAttribute("fields", chexkitem);
-        return "/product/page/tabledemo/product-report.page";
+        return "/product/page/report/product-report.page";
     }
 
     /**
@@ -875,7 +875,7 @@ public class StoryAction extends BaseController {
             @PathVariable(value = "forwordPager") String forwordPager) {
 
         if ("storyReport".equals(forwordPager)) {
-            return "product/page/tabledemo/product-report.page";
+            return "product/page/report/product-report.page";
         }
         return "";
     }
@@ -914,7 +914,7 @@ public class StoryAction extends BaseController {
         model.addAttribute("requestList", requests);
         model.addAttribute("story", productStory);
         model.addAttribute("storySpec", storySpec);
-        return "/product/page/tabledemo/product-demand-copy.page";
+        return "/product/page/operate/story/product-demand-copy.page";
     }
 
     @ResponseBody

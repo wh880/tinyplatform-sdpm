@@ -72,7 +72,7 @@ public class ProductCommonAction extends BaseController {
         }
 
         model.addAttribute("list", list);
-        return "/product/page/project/product-roadmap.page";
+        return "/product/page/roadmap/product-roadmap.page";
     }
 
 }

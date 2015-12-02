@@ -15,7 +15,6 @@ import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.RoleService;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
-import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.sdpm.productLine.service.ProductLineService;
@@ -29,9 +28,6 @@ import org.tinygroup.sdpm.quality.dao.pojo.QualityTestCase;
 import org.tinygroup.sdpm.quality.service.inter.TestCaseService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.dao.pojo.SystemHistory;
-import org.tinygroup.sdpm.system.service.inter.ActionService;
-import org.tinygroup.sdpm.system.service.inter.HistoryService;
-import org.tinygroup.sdpm.util.CookieUtils;
 import org.tinygroup.sdpm.util.LogUtil;
 import org.tinygroup.sdpm.util.ProductUtils;
 import org.tinygroup.sdpm.util.UserUtils;
@@ -82,11 +78,11 @@ public class ProductAction extends BaseController {
     public String doc(@PathVariable(value = "forward") String forward, HttpServletRequest request, Model model) {
 
         if ("doc".equals(forward)) {
-            return "/product/page/project/archive-list.page";
+            return "/product/page/list/doc/archive-list.page";
         } else if ("project".equals(forward)) {
-            return "/product/page/project/product-project-list.page";
+            return "/product/page/list/project/product-project-list.page";
         } else if ("dynamic".equals(forward)) {
-            return "/product/page/project/dymanicdata.page";
+            return "/product/page/list/dynamic/dymanicdata.page";
         }
         return "";
     }
@@ -153,7 +149,7 @@ public class ProductAction extends BaseController {
                 product,
                 systemAction.getActionComment());
 
-        return "redirect:" + "/product/page/tabledemo/product-listall.page";
+        return "/product/page/list/product/product-listall.page";
     }
 
     @RequestMapping("/edit")
@@ -210,13 +206,13 @@ public class ProductAction extends BaseController {
 
         Product product = productService.findProduct(productId);
         model.addAttribute("product", product);
-        return "/product/page/tabledemo/product-module-editor.page";
+        return "/product/page/update/module/product-module-editor.page";
     }
 
     @RequestMapping("/find/{forward}")
     public String find(@CookieValue(value = "cookieProductId", defaultValue = "0") String cookieProductId,
                        @PathVariable(value = "forward") String forward, Integer productId, Model model, HttpServletRequest request) {
-        if ("close".equals(forward)) return "/product/page/tabledemo/overview-close.pagelet";
+        if ("close".equals(forward)) return "/product/page/operate/product/overview-close.pagelet";
         if (productId != null) cookieProductId = String.valueOf(productId);
         Product product = new Product();
         if (Integer.parseInt(cookieProductId) > 0) {
@@ -231,7 +227,7 @@ public class ProductAction extends BaseController {
 
         if ("overview".equals(forward)) {
 
-            return "/product/page/project/overview.page";
+            return "/product/page/view/product/overview.page";
         } else if ("baseinfo".equals(forward)) {
             List<ProjectProduct> projectProducts = projectProductService.findProjects(Integer.parseInt(cookieProductId));
             ProjectBuild build = new ProjectBuild();
@@ -255,7 +251,7 @@ public class ProductAction extends BaseController {
                 List<OrgRole> roles = roleService.getRoleByIds(ids);
                 model.addAttribute("whiteLists", roles);
             }
-            return "/product/page/tabledemo/baseinfo.pagelet";
+            return "/product/page/view/product/baseinfo.pagelet";
         }
         return "";
     }
@@ -269,7 +265,7 @@ public class ProductAction extends BaseController {
             deleted=1;
         }
         model.addAttribute("productMap", productService.getUserProductsWithCountMap(UserUtils.getUserId(),deleted));
-        return "/product/data/allproductdata.pagelet";
+        return "/product/data/product/allproductdata.pagelet";
     }
 
     @RequestMapping("/findManager")
@@ -307,16 +303,16 @@ public class ProductAction extends BaseController {
         if ("addproduct".equals(forward)) {
             List<ProductLine> productLineList = productLineService.getUserProductLine(UserUtils.getUserId());
             model.addAttribute("productLineList",productLineList);
-            return "/product/page/tabledemo/addProduct";
+            return "/product/page/add/product/addProduct";
         } else if ("allproduct".equals(forward)) {
-            return "/product/page/tabledemo/product-listall.page";
+            return "/product/page/list/product/product-listall.page";
         }
         return "";
     }
 
     @RequestMapping("/addDoc")
     public String addDoc(HttpServletRequest request, Model model) {
-        return "/product/page/tabledemo/add-doc";
+        return "/product/page/add/add-doc";
     }
 
     @RequestMapping("project/listData")
@@ -395,7 +391,7 @@ public class ProductAction extends BaseController {
     @RequestMapping("addModule")
     public String toAddModule(Integer pId, Model model) {
         model.addAttribute("pId", pId);
-        return "/product/page/tabledemo/addModule.pagelet";
+        return "/product/page/add/module/addModule.pagelet";
     }
 
     @RequestMapping("team")

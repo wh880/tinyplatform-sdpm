@@ -11,16 +11,22 @@ import java.util.List;
  */
 public class DefaultModuleUtils {
 
-    public static void mergeModuleCondition(StringBuffer condition, int moduleId ,ModuleListCallBackFunction moduleList) {
+    public static void mergeModuleCondition(StringBuffer condition, int moduleId, boolean withOperate ,ModuleListCallBackFunction moduleList) {
         SystemModule systemModule = new SystemModule();
         systemModule.setModuleParent(moduleId);
         List<SystemModule> systemModules = moduleList.getModuleList(systemModule);
         if(systemModules.size()>0){
             for(SystemModule module : systemModules){
-                mergeModuleCondition(condition, module.getModuleId(),moduleList);
+                mergeModuleCondition(condition, module.getModuleId(),withOperate,moduleList);
             }
         }
-        if(condition.toString().endsWith("(")){
+
+        boolean judge = condition.toString().endsWith("(");
+        if(!withOperate){
+            judge = StringUtil.isBlank(condition.toString());
+        }
+
+        if(judge){
             condition.append(" "+moduleId);
         }else{
             condition.append(","+moduleId);
@@ -64,7 +70,7 @@ public class DefaultModuleUtils {
         if(moduleId==null||moduleId==0)return "";
         StringBuffer stringBuffer = new StringBuffer();
         stringBuffer.append("in (");
-        mergeModuleCondition(stringBuffer, moduleId, moduleList);
+        mergeModuleCondition(stringBuffer, moduleId,true, moduleList);
         stringBuffer.append(")");
         return stringBuffer.toString();
     }
@@ -72,7 +78,7 @@ public class DefaultModuleUtils {
     public static String getConditionWithoutOperate(Integer moduleId,ModuleListCallBackFunction moduleList){
         if(moduleId==null||moduleId==0)return "";
         StringBuffer stringBuffer = new StringBuffer();
-        mergeModuleCondition(stringBuffer, moduleId, moduleList);
+        mergeModuleCondition(stringBuffer, moduleId,false, moduleList);
         return StringUtil.isBlank(stringBuffer.toString())?"0":stringBuffer.toString();
     }
 
@@ -107,7 +113,7 @@ public class DefaultModuleUtils {
         List<SystemModule> systemModules = moduleList.getModuleList(systemModule);
         if(systemModules.size()>0){
             for(SystemModule module : systemModules){
-                if(!stringBuffer.toString().endsWith("(")){
+                if (!StringUtil.isBlank(stringBuffer.toString())){
                     stringBuffer.append(",");
                 }
                 stringBuffer.append(module.getModuleId().toString());

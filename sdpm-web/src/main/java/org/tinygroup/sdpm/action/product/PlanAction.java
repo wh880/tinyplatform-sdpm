@@ -45,7 +45,7 @@ public class PlanAction extends BaseController {
 
     @RequestMapping("/content")
     public String release(HttpServletRequest request, Model model) {
-        return "/product/page/project/product-plan.page";
+        return "/product/page/list/plan/product-plan.page";
     }
 
     @RequestMapping("/save")
@@ -101,7 +101,7 @@ public class PlanAction extends BaseController {
             Product product = productService.findProduct(Integer.parseInt(cookieProductId));
             model.addAttribute("product", product);
         }
-        return "/product/page/tabledemo/product-addplan.page";
+        return "/product/page/add/plan/product-addplan.page";
 
     }
 
@@ -133,7 +133,7 @@ public class PlanAction extends BaseController {
         model.addAttribute("product", product);
         ProductPlan plan = planService.findPlan(planId);
         model.addAttribute("plan", plan);
-        return "/product/page/tabledemo/product-plan-update";
+        return "/product/page/update/plan/product-plan-update";
     }
 
     @RequestMapping("/find/{forwordPager}")
@@ -141,9 +141,9 @@ public class PlanAction extends BaseController {
         ProductPlan plan = planService.findPlan(planId);
         model.addAttribute("plan", plan);
         if ("relateStory".equals(forwordPager)) {
-            return "/product/page/tabledemo/relation-plan/planbaseinfo.pagelet";
+            return "/product/page/relation/plan/planbaseinfo.pagelet";
         }
-        return "/product/page/tabledemo/relation-plan/planbaseinfo.pagelet";
+        return "/product/page/relation/plan/planbaseinfo.pagelet";
     }
 
     @RequestMapping("/forword/{forwordPager}")
@@ -172,16 +172,16 @@ public class PlanAction extends BaseController {
         }
         model.addAttribute("plan", plan);
         if ("reRelateStory".equals(forwordPager)) {
-            return "/product/page/tabledemo/relation-plan/product-al-req.page";
+            return "/product/page/relation/plan/product-al-req.page";
         } else if ("noRelateStory".equals(forwordPager)) {
-            return "/product/page/tabledemo/relation-plan/product-al-no-req.page";
+            return "/product/page/relation/plan/product-al-no-req.page";
         } else if ("reRelateBug".equals(forwordPager)) {
-            return "product/page/tabledemo/relation-plan/product-al-bug.page";
+            return "product/page/relation/plan/product-al-bug.page";
         } else if ("noRelateBug".equals(forwordPager)) {
-            return "product/page/tabledemo/relation-plan/product-al-no-bug.page";
+            return "product/page/relation/plan/product-al-no-bug.page";
         }
 
-        return "/product/page/tabledemo/relation-plan/planbaseinfo.pagelet";
+        return "/product/page/relation/plan/planbaseinfo.pagelet";
     }
 
     @RequestMapping("/list")
@@ -198,7 +198,7 @@ public class PlanAction extends BaseController {
         pagerProductPlan = planService.findProductPlanPager(page, pagesize, plan, order, ordertype);
 
         model.addAttribute("productPlan", pagerProductPlan);
-        return "/product/data/allproduct-plan.pagelet";
+        return "/product/data/plan/allproduct-plan.pagelet";
     }
 
     @ResponseBody

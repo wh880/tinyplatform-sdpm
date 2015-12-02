@@ -34,14 +34,6 @@ public class ModuleUtil{
         };
     }
 
-    private static void mergeModuleCondition(StringBuffer condition, int moduleId) {
-        DefaultModuleUtils.mergeModuleCondition(condition,moduleId,moduleList);
-    }
-
-    public static StringBuffer getConditionByModule(StringBuffer condition,SystemModule systemModule){
-        return DefaultModuleUtils.getConditionByModule(condition,systemModule,moduleList,singleModule);
-    }
-
     public static String getCondition(Integer moduleId){
         return  DefaultModuleUtils.getCondition(moduleId,moduleList);
     }

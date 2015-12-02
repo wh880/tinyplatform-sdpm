@@ -1,0 +1,55 @@
+
+#set(addArchivePagePath="/product/page/tabledemo/addArchive.pagelet",editpageModalId="myModal",editpageModal="#"+editpageModalId)
+#!set(linkName="product-archive",sonitem="
+<li>"+"文档"+"</li>")
+
+#@tabBodyCol("ptop-5")
+    #@div(divClass="operationbar")
+    <span class="f">
+				<span class="active_btn">文档列表</span>
+			</span>
+    <span class="r">
+        #foreach(m:menuManager.getScopeMenus("archive-add"))
+            #if(m.id=="product-archive-add")
+                <a href="${TINY_CONTEXT_PATH +adminPath}/product/addDoc" title="创建文档">#buttonIcon(iconClass="icon-plus")创建文档</a>
+            #end
+        #end
+			</span>
+        #div(divClass="clearfix")
+    #end
+
+            #@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
+                #@div(divClass="tinyheaderTools form-inline")
+                    #setTinyTablePageSize([8,10,20,50,100,200])
+                <input type="button" value="全选" class="btn btn-default btn-primary "
+                       onclick="selectAllNullorReserve('idCheck','全选');"/>
+                <input type="button" value="反选" class="btn btn-default btn-primary"
+                       onclick="selectAllNullorReserve('idCheck','反选');"/>
+
+                    #foreach(m:menuManager.getScopeMenus("archive-badel"))
+                        #if(m.id=="product-archive-badel")
+                            #@mulOperation("muldelete" TINY_CONTEXT_PATH +adminPath+"/document/doc/batchDelete")
+            					<a class="btn radius btn-danger btn-sm "><i class="icon-trash"></i> 批量删除</a>
+            			  #end
+                        #end
+                    #end
+                #end
+                #@tinyTableContent(TINY_CONTEXT_PATH +adminPath+"/document/product/doc/list?from=product&docProduct="+cookieProductId) ##取数据地址 总数据
+                    #@thead()
+                        #@tr()###th  class 为sorting 表票可排序 为sorting_desc 为当前倒序
+                            #@tinyTh({"width":"6"})<input type="checkbox" name="idCheck" value="">#end
+                            #@tinyTh({"class":"sorting","rel":"docId"})ID#end
+                            #@tinyTh({"class":"sorting","rel":"docModule"})所属分类#end
+                            #@tinyTh({"class":"sorting","rel":"docTitle"})文档标题#end
+                            #@tinyTh({"class":"sorting","rel":"docAddedBy"})由谁添加#end
+                            #@tinyTh({"class":"sorting","rel":"docAddedDate"})添加日期#end
+                            #@tinyTh({"class":"","rel":"sortname"})操作#end
+                        #end
+                    #end
+                #end
+            #end
+#end
+
+
+
+

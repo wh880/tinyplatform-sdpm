@@ -1,0 +1,108 @@
+#import("/org/tinygroup/button/components/button_smart.component")
+#import("/org/tinygroup/button/components/button_common.component")
+#import("/org/tinygroup/button/components/button.component")
+#!set(activeTitle="产品管理",activeMenuId=currentPageId)
+#set(planbugTableId = "planbugTableId" )
+#!set(activeMenuId=currentPageId)
+#!set(linkName="product-plan",sonitem="
+<li>"+"计划"+"</li>")
+
+
+#@div(divClass="operationbar")
+<span class="r">
+
+    #foreach(m:menuManager.getScopeMenus("product-pl"))
+        #if(m.id!="product-plan-remove")
+            <a title="${m.name}" class="ml-5" href="${TINY_CONTEXT_PATH +adminPath}${m.href}${planId}"><i
+                    class="${m.icon}"></i></a>
+        #else
+            #@delItemsdpm(TINY_CONTEXT_PATH +adminPath+m.href+planId "" TINY_CONTEXT_PATH +adminPath+
+                "/product/plan/content")<i class="${m.icon}" title="删除"></i>#end
+        #end
+    #end
+    <a href="javascript :;" onClick="javascript :history.back(-1);" title="返回">#buttonIcon(iconClass="icon-reply")</a>				</span>#div(divClass=
+    "clearfix")
+#end
+
+#@tabWithInit("tab_demo" "optionsBox")
+<div style="width:70%;float:left;padding-top:18px;">
+    #@div()
+        #@tabWithInit("tab_demo" "optionsBox")
+
+            #@tabHead()
+
+                #if("demand"==type)
+                    #@aHeadCol(TINY_CONTEXT_PATH +adminPath+
+                        "/product/plan/forword/reRelateStory?planId="+planId cname=="demand"?"Current":"")
+                        #@buttons("","icon-lightbulb")
+                            已关联需求
+                        #end
+                    #end
+                    #@aHeadCol(TINY_CONTEXT_PATH +adminPath+
+                        "/product/plan/forword/noRelateStory?planId="+planId cname=="no-demand"?"Current":"")
+                        #@buttons("","icon-unlink")
+                            未关联需求
+                        #end
+                    #end
+
+                    <div class="r">
+                        #set(m=menuManager.getMenu("product-plan-bug"))
+                        #if(m)
+                            #@aHeadCol(TINY_CONTEXT_PATH +adminPath+m.href+planId cname=="link-bug"?"Current":"")
+                                #@buttons("","icon-bug")关联BUG
+                                #end
+                            #end
+                        #end
+                    </div>
+                    #if("no-demand"==cname)
+                        <div style="float:right">
+                            <a href="#" id="showsearchmore-demand">#buttonIcon(iconClass="icon-search")搜索</a>
+                        </div>
+                    #end
+
+                #end
+                #if("bug"==type)
+                    #@aHeadCol(TINY_CONTEXT_PATH +adminPath+
+                        "/product/plan/forword/reRelateBug?planId="+planId cname=="bug"?"Current":"")
+                        #@buttons("","icon-bug green")
+                            已关联Bug
+                        #end
+                    #end
+                    #@aHeadCol(TINY_CONTEXT_PATH +adminPath+
+                        "/product/plan/forword/noRelateBug?planId="+planId cname=="no-bug"?"Current":"")
+                        #@buttons("","icon-unlink")
+                            未关联Bug
+                        #end
+                    #end
+                    <div class="r">
+                        #set(m=menuManager.getMenu("product-plan-demand"))
+                        #if(m)
+                            #@aHeadCol(TINY_CONTEXT_PATH +adminPath+m.href+planId cname=="link-demand"?"Current":"")
+                                #@buttons("","icon-link")
+                                    关联需求
+                                #end
+                            #end
+                        #end
+                    </div>
+                    #if("no-bug"==cname)
+                        <div style="float:right">
+                            <a href="javascript:void(0);" id="showsearchmore-bug">#buttonIcon(iconClass="icon-search")
+                                搜索</a>
+                        </div>
+                    #end
+                #end
+            #end
+            #@tabBodyCol("ptop-5")
+                #pageContent
+            #end
+        #end
+    #end
+</div>
+
+
+<div style="width:30%;float:right">
+    #TypeInfo("productPlan" planId)
+</div>
+#end
+
+

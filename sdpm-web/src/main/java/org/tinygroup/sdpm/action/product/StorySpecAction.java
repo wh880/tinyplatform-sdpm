@@ -48,7 +48,7 @@ public class StorySpecAction extends BaseController {
         systemProfile.setFileObjectType(ProfileType.STORY.getType());
         List<SystemProfile> fileList = profileService.findSystemProfile(systemProfile);
         model.addAttribute("fileList", fileList);
-        return "/product/page/tabledemo/demand-edit.page";
+        return "/product/page/update/story/demand-edit.page";
     }
 
     @RequestMapping("/find/{forward}")
@@ -84,7 +84,7 @@ public class StorySpecAction extends BaseController {
         List<SystemProfile> list = profileService.findSystemProfile(systemProfile);
         model.addAttribute("file", list);
         if ("productDemandDetail".equals(forward)) {
-            return "/product/page/project/demdtablehref.page";
+            return "/product/page/view/story/demdtablehref.page";
         }
         return "";
     }

@@ -58,7 +58,7 @@ public class ReleaseAction extends BaseController {
 
     @RequestMapping("/content")
     public String release() {
-        return "/product/page/project/product-release.page";
+        return "/product/page/list/release/product-release.page";
     }
 
     @RequestMapping("/save")
@@ -142,7 +142,7 @@ public class ReleaseAction extends BaseController {
         systemProfile.setFileObjectType(ProfileType.RELEASE.getType());
         List<SystemProfile> fileList = profileService.findSystemProfile(systemProfile);
         model.addAttribute("fileList", fileList);
-        return "/product/page/tabledemo/product-release-update";
+        return "/product/page/update/release/product-release-update";
     }
 
     @RequestMapping("/find/{forwordPager}")
@@ -156,7 +156,7 @@ public class ReleaseAction extends BaseController {
         model.addAttribute("release", release);
         model.addAttribute("file", systemProfiles);
         if ("relateStory".equals(forwordPager)) {
-            return "/product/page/tabledemo/relation-release/releasebaseinfo.pagelet";
+            return "/product/page/relation/release/releasebaseinfo.pagelet";
         }
 
         return "";
@@ -186,19 +186,19 @@ public class ReleaseAction extends BaseController {
         model.addAttribute("releaseId", releaseId);
 
         if ("reRelateStory".equals(forwordPager)) {
-            return "/product/page/tabledemo/relation-release/product-al-req.page";
+            return "/product/page/relation/release/product-al-req.page";
         } else if ("noRelateStory".equals(forwordPager)) {
-            return "/product/page/tabledemo/relation-release/product-al-no-req.page";
+            return "/product/page/relation/release/product-al-no-req.page";
         } else if ("reRelateBug".equals(forwordPager)) {
-            return "/product/page/tabledemo/relation-release/product-al-bug.page";
+            return "/product/page/relation/release/product-al-bug.page";
         } else if ("noRelateBug".equals(forwordPager)) {
-            return "/product/page/tabledemo/relation-release/product-al-no-bug.page";
+            return "/product/page/relation/release/product-al-no-bug.page";
         } else if ("leRelateBug".equals(forwordPager)) {
-            return "product/page/tabledemo/relation-release/product-al-le-bug.page";
+            return "product/page/relation/release/product-al-le-bug.page";
         }
 
 
-        return "/product/page/tabledemo/relation-plan/planbaseinfo.pagelet";
+        return "/product/page/relation/plan/planbaseinfo.pagelet";
     }
 
     @RequestMapping("list")
@@ -213,7 +213,7 @@ public class ReleaseAction extends BaseController {
         Pager<ProductRelease> pagerProductRelease = releaseService.findReleasePager(page, pagesize, release, order, ordertype);
 
         model.addAttribute("productRelease", pagerProductRelease);
-        return "/product/data/allproduct-release.pagelet";
+        return "/product/data/release/allproduct-release.pagelet";
     }
 
     @ResponseBody
@@ -227,7 +227,7 @@ public class ReleaseAction extends BaseController {
     public String addRelease(@CookieValue(value = "cookieProductId",defaultValue = "0") String cookieProductId,HttpServletRequest request, Model model) {
         Product product = productService.findProduct(Integer.parseInt(cookieProductId));
         model.addAttribute("product", product);
-        return "/product/page/tabledemo/product-addrelease.page";
+        return "/product/page/add/release/product-addrelease.page";
     }
 
     @ResponseBody

@@ -1,0 +1,154 @@
+#import("/org/tinygroup/form/components/form.component")
+#import("/org/tinygroup/bootstrapDate/components/bootstrapDate.component")
+#import("/org/tinygroup/button/components/button_common.component")
+#import("/org/tinygroup/button/components/button.component")
+#import("/org/tinygroup/fold/components/fold.component")
+
+#!set(linkName="product-demand",sonitem="
+<li>"+"需求"+"</li>")
+
+<script>
+    $(document).ready(function () {
+
+        $("#story_reviewed").on("click", function () {
+            var vm = this.checked;
+            $("[name='storyReviewedBy']").closest(".formControls").next("div[class=col-2]").toggle();//hide();            }
+            $("[name='storyReviewedBy']").trigger("disable");
+        });
+    });
+</script>
+
+
+
+#@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/product/story/changed" "" {"class":"test","enctype":
+    "multipart/form-data"})
+    #hiddenInput("","storyId","",story.storyId)
+<div style="width:70%;float:left" class="pageleftpart">
+    <div class="infoContent">
+        <p class="titleName">变更</p>
+        #@elementItem()
+            #@colLabel()<span class='c-red'>*</span>由谁评审:#end
+            #@formControlDiv("col-4")
+                <div class="col-6">
+                    #@Tselect2F()
+                        #Tselect2Ajax("storyReviewedBy" story?.storyReviewedBy TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
+                        {"id":"reviewedSelect","dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询评审人","nullmsg":"请选择评审人！","datatype":"*"})
+                        #@Tselect2Fix()
+                            #set(m=menuManager.getMenu("organizationAddUser"))
+                            #if(m)
+                                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
+                            #end
+                            #set(m=menuManager.getMenu("organizationUser"))
+                            #if(m)
+                                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
+                            #end
+                        #end
+
+                    #end
+                </div>
+                <div class="col-6">
+                    #@checkboxBox()
+                        #@label(labelFor="checkbox-6")
+                            #input(inputId="story_reviewed" inputName="storyReviewedBy" inputValue="0" inputType="checkbox" )
+                            不需要评审
+                        #end
+                    #end
+                </div>
+            #end
+            #@validateDiv("col-2")#end
+        #end
+
+        #@elementItem()
+            #@colLabel()<span class="c-red">*</span>需求名称：#end
+            #@formControlDiv("col-4")
+                #tinyInput(
+                    "text" "storyTitle" story?.storyTitle{"placeholder":"请输入需求名称","datatype":"*","nullmsg":"需求名称不能为空！","id":"storyTitle",
+                    "class":"input-text",
+                    "ajaxurl":TINY_CONTEXT_PATH+adminPath+"/product/story/judgeStoryName?storyId="+story?.storyId+"&productId="+story?.productId})
+
+            #end
+            #@validateDiv("col-2")#end
+        #end
+
+        #@elementItem()
+            <div class="col-12">
+                <div class="col-2 text-r"><label>需求描述：</label></div>
+
+                <div class="col-9">
+                    #@Teditor("content1" "storySpec" {"initialFrameHeight":"150"})${storySpec?.storySpec}#end</div>
+            </div>
+        #end
+
+        #@elementItem()
+            <div class="col-12">
+                <div class="col-2 text-r"><label>验收标准：</label></div>
+                <div class="col-9">
+                    #@Teditor("content2" "storyVerification" {"initialFrameHeight":"150"})${storySpec?.storyVerification}#end</div>
+            </div>
+        #end
+
+
+
+        #@elementItem()
+            <div class="col-12">
+                <div class="col-2 text-r"><label>备注：</label></div>
+                <div class="col-9">
+                    #@Teditor("actionComment" "actionComment" {"initialFrameHeight":"150"})#end</div>
+            </div>
+        #end
+
+        #@elementItem()
+            <div class="col-12">
+                <div class="col-2 text-r"><label>附件：</label></div>
+                <div class="col-9">
+                    #mulUploadFile(fileList)
+                </div>
+            </div>
+        #end
+
+        #@elementItem()
+            <div class="col-12">
+                <div class="col-2 text-r"><label>检查影响：</label></div>
+
+                <div class="col-9  tabInfocontents">
+                    #@formControlDiv("col-12")
+	    				#include("/product/page/operate/story/check-effect.page")
+ 	    			#end
+                </div>
+            </div>
+        #end
+
+    </div>
+    #@elementItem()
+        <div class="col-12">
+            <div class="col-5">
+
+            </div>
+            <div class="col-1">
+                <button style="float: left" type="submit" id="submit2" class="commitBtn">保存</button>
+            </div>
+            <div class="col-1">
+                #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end
+            </div>
+            <div class="col-5"></div>
+        </div>
+    #end
+    <br>
+</div>
+#end
+
+
+<div style="width:30%;float:right">
+    #history(adminPath+"/system/action/ajax/history?actionObjectType=story&actionObjectId="+story?.storyId)
+</div>
+<script type="text/javascript">
+    $(function () {
+        $("form[name=thisform]").Validform({
+            tiptype: 2
+        });
+        #if(story?.storyReviewedBy=="0")
+            $("#story_reviewed").click();
+
+        #end
+    });
+</script>

@@ -1,0 +1,83 @@
+#import("/org/tinygroup/button/components/button_common.component")
+#import("/org/tinygroup/button/components/button.component")
+#import("/org/tinygroup/table/components/table.component")
+#include("/productLine/page/event/mytree.page")
+#set(linkName="overview")
+#set(name="version")
+<style>
+    .treeLeftbox .leftztree > li:first-child {
+        display: none
+    }
+</style>
+#@tabWithInit("tab_demo" "optionsBox")
+
+    #@tabBodyCol("ptop-5")
+        #@div(divClass="operationbar")
+        <span class="f">
+					<a href="#" class="active_btn">产品线概况</a>
+			</span>
+        <span class="r">
+            #foreach(m:menuManager.getScopeMenus("productLine-overview"))
+                #set(url=eval(m?.href))
+                #if(m.map.type=="delete")
+                    <a id="lineDelete" title="${m?.name}" value="${productLineId}" class="ml-5" href="javascript:void(0);"><i
+                            class="${m?.icon}"></i></a>
+                #elseif(m.map.type=="update")
+                    <a href="${TINY_CONTEXT_PATH +adminPath}${url}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+                #end
+            #end
+            <a href="javascript :;" onClick="javascript :history.back(-1);" title="返回">#buttonIcon(iconClass=
+                "icon-reply")</a>
+    </span>
+        #end
+    #end
+
+<div style="width:70%;float:left">
+    #@div(divClass="infoContent")
+        <p class="titleName">描述</p>
+
+        <div>
+            ${productLine.productLineSpec}
+        </div>
+    #end
+
+    #@div(divClass="infoContent")
+        <p class="titleName">产品列表</p>
+        <ul class="treeList">
+            #@settoggleLeftBody("treeLeftbox")
+                #@zTreeList(call("link",adminPath+"/productLine/overviewTree?productLineId="+productLineId))
+                #setzTreeValMap({"id":"treeId","name":"pName","pid":"pId"})
+            #end
+            #end
+        </ul>
+
+    #end
+
+    #history(adminPath+
+        "/system/action/ajax/history?actionObjectType=productLine&actionObjectId="+productLine?.productLineId)
+
+
+</div>
+<div style="width:30%;float:right">
+    #TypeInfo("productLine" productLine.productLineId)
+</div>
+#end
+<script>
+    $(function(){
+        $("#lineDelete").on("click",function(){
+            var id = $(this).attr("value");
+            layer.confirm('确定删除？', function(){
+                $.ajax({
+                    url:"${TINY_CONTEXT_PATH+adminPath}/productLine/delete?productLineId="+id,
+                    dataType:"JSON",
+                    type:"POST",
+                    success:function(data){
+                        if(data.status=="success"){
+                            window.location.href = "${TINY_CONTEXT_PATH+adminPath}/productLine/to";
+                        }
+                     }
+                });
+            });
+        })
+    })
+</script>

@@ -50,16 +50,16 @@ public class HomeAction extends BaseController{
         Map<String, Map<String, String>> productSum = new HashMap<String, Map<String, String>>();
         for (Product product : products) {
             Map<String, String> sumMap = new HashMap<String, String>();
-            sumMap.put("activeSum", product.getActiveSum().toString());
-            sumMap.put("assignSum", product.getAssignSum().toString());
-            sumMap.put("changedSum", product.getChangeSum().toString());
-            sumMap.put("bugCount", product.getBugCount().toString());
-            sumMap.put("closeSum", product.getCloseSum().toString());
-            sumMap.put("draftSum", product.getDraftSum().toString());
-            sumMap.put("planCount", product.getPlanCount().toString());
-            sumMap.put("releaseCount", product.getReleaseCount().toString());
-            sumMap.put("resolvedSum", product.getResolveSum().toString());
-            productSum.put(product.getProductId().toString(), sumMap);
+            sumMap.put("activeSum", String.valueOf(product.getActiveSum()==null?0:product.getActiveSum()));
+            sumMap.put("assignSum", String.valueOf(product.getAssignSum()==null?0:product.getAssignSum()));
+            sumMap.put("changedSum", String.valueOf(product.getChangeSum()==null?0:product.getChangeSum()));
+            sumMap.put("bugCount", String.valueOf(product.getBugCount()==null?0:product.getBugCount()));
+            sumMap.put("closeSum", String.valueOf(product.getCloseSum()==null?0:product.getCloseSum()));
+            sumMap.put("draftSum", String.valueOf(product.getDraftSum()==null?0:product.getDraftSum()));
+            sumMap.put("planCount", String.valueOf(product.getPlanCount()==null?0:product.getPlanCount()));
+            sumMap.put("releaseCount", String.valueOf(product.getReleaseCount()==null?0:product.getReleaseCount()));
+            sumMap.put("resolvedSum", String.valueOf(product.getResolveSum()==null?0:product.getResolveSum()));
+            productSum.put(String.valueOf(product.getProductId()==null?0:product.getProductId()), sumMap);
         }
         model.addAttribute("productList", products);
         model.addAttribute("productSumMap", productSum);
