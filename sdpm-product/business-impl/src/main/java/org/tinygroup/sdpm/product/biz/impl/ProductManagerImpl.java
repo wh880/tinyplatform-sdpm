@@ -135,7 +135,7 @@ public class ProductManagerImpl implements ProductManager {
         return mergeUserProducts(productList, products, orgRoles);
     }
 
-    public List<Product> getProductByUserWithCount(String userId, Integer delete, boolean noRole) {
+    public List<Product> getProductByUserWithCount(String userId, Integer delete, boolean noRole ) {
         List<Product> productList = productDao.getProductByUserWithCount(userId, delete, noRole);
         Product product = new Product();
         product.setDeleted(delete);
@@ -154,7 +154,9 @@ public class ProductManagerImpl implements ProductManager {
     public List<Integer> getTeamRoleProductLineIds(String userId, Integer delete) {
         List<Integer> pIds = new ArrayList<Integer>();
         for (Product product : getProductByUser(userId, delete, null)) {
-            pIds.add(product.getProductLineId());
+            if(!pIds.contains(product.getProductLineId())){
+                pIds.add(product.getProductLineId());
+            }
         }
         return pIds;
     }

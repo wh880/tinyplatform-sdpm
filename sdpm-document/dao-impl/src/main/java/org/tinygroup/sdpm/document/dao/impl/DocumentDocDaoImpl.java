@@ -37,7 +37,7 @@ import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 import org.tinygroup.tinysqldsl.select.Join;
 import org.tinygroup.tinysqldsl.select.OrderByElement;
-import org.tinygroup.tinysqldsl.selectitem.FragmentSelectItemSql;
+
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -53,7 +53,6 @@ import static org.tinygroup.tinysqldsl.Delete.delete;
 import static org.tinygroup.tinysqldsl.Insert.insertInto;
 import static org.tinygroup.tinysqldsl.Select.selectFrom;
 import static org.tinygroup.tinysqldsl.Update.update;
-import static org.tinygroup.tinysqldsl.base.FragmentSql.fragmentCondition;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 
 @Repository
@@ -221,38 +220,6 @@ public class DocumentDocDaoImpl extends TinyDslDaoSupport implements DocumentDoc
 								DOCUMENT_DOCTABLE.DOC_EDITED_DATE.eq(t.getDocEditedDate()),
 								DOCUMENT_DOCTABLE.DOC_DELETED.eq(t.getDocDeleted())));
 				return addOrderByElements(select, orderArgs);
-			}
-		});
-	}
-
-	public Pager<DocumentDoc> complexQueryNoRel(int start, int limit, DocumentDoc doc, final String condition,
-												final OrderBy... orderBys) {
-		if(doc == null){
-			doc =new DocumentDoc();
-		}
-		return getDslTemplate().queryPager(start, limit, doc, false, new SelectGenerateCallback<DocumentDoc>() {
-
-			public Select generate(DocumentDoc t){
-				Select select = MysqlSelect.selectFrom(DOCUMENT_DOCTABLE).where(
-						and(fragmentCondition(condition),
-								DOCUMENT_DOCTABLE.DOC_PRODUCT.eq(t.getDocProduct()),
-								DOCUMENT_DOCTABLE.DOC_PROJECT.eq(t.getDocProject()),
-								DOCUMENT_DOCTABLE.DOC_LIB_ID.eq(t.getDocLibId()),
-								DOCUMENT_DOCTABLE.DOC_MODULE.eq(t.getDocModule()),
-								DOCUMENT_DOCTABLE.DOC_TITLE.eq(t.getDocTitle()),
-								DOCUMENT_DOCTABLE.DOC_DIGEST.eq(t.getDocDigest()),
-								DOCUMENT_DOCTABLE.DOC_KEYWORDS.eq(t.getDocKeywords()),
-								DOCUMENT_DOCTABLE.DOC_TYPE.eq(t.getDocType()),
-								DOCUMENT_DOCTABLE.DOC_CONTENT.eq(t.getDocContent()),
-								DOCUMENT_DOCTABLE.DOC_URL.eq(t.getDocUrl()),
-								DOCUMENT_DOCTABLE.DOC_ATTACH.eq(t.getDocAttach()),
-								DOCUMENT_DOCTABLE.DOC_VIEWS.eq(t.getDocViews()),
-								DOCUMENT_DOCTABLE.DOC_ADDED_BY.eq(t.getDocAddedBy()),
-								DOCUMENT_DOCTABLE.DOC_ADDED_DATE.eq(t.getDocAddedDate()),
-								DOCUMENT_DOCTABLE.DOC_EDITED_BY.eq(t.getDocEditedBy()),
-								DOCUMENT_DOCTABLE.DOC_EDITED_DATE.eq(t.getDocEditedDate()),
-								DOCUMENT_DOCTABLE.DOC_DELETED.eq(t.getDocDeleted())));
-				return addOrderByElements(select, orderBys);
 			}
 		});
 	}

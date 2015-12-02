@@ -98,10 +98,6 @@ public class ProjectStoryServiceImpl implements ProjectStoryService {
         return buildManager.findBuildStory(start, limit, id);
     }
 
-    public Pager<ProductStory> findNoStoryPager(int start, int limit, int id, String condition, SearchInfos conditions, String groupOperate) {
-        return buildManager.findNoBuildStory(start, limit, condition, id);
-    }
-
     public Pager<ProductStory> findStoryByProject(Integer projectId, Integer start, Integer limit, String order, String ordertype, String moduleId) {
         List<ProjectStory> storyList = projectStoryManager.findStoryList(projectId);
         String[] ids = new String[storyList.size()];

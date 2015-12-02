@@ -114,8 +114,7 @@ public class ProductLineAction extends BaseController {
         product.setDeleted(0);
         List<Product> products = productService.findProductList(product);
         for (Product product1 : products) {
-            product1.setDeleted(1);
-            productService.updateProduct(product1);
+            productService.deleteProduct(product1.getProductId());
             LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCT,
                     LogUtil.LogAction.DELETED,
                     String.valueOf(product1.getProductId()),
@@ -442,8 +441,14 @@ public class ProductLineAction extends BaseController {
     }
 
     @RequestMapping(value = "/productLineProducts")
-    public String productLineProducts(Integer productLineId, Model model) {
-        List<Product> products = productService.getProductByUserAndProductLineWithCount(UserUtils.getUserId(), productLineId, 0);
+    public String productLineProducts(String choose,Integer productLineId, Model model) {
+        Integer delete = null;
+        if("open".equals(choose)){
+           delete=0;
+        }else if("deleted".equals(choose)){
+            delete=1;
+        }
+        List<Product> products = productService.getProductByUserAndProductLineWithCount(UserUtils.getUserId(), productLineId, delete);
         model.addAttribute("productList", products);
         return "/productLine/data/productListData.pagelet";
     }

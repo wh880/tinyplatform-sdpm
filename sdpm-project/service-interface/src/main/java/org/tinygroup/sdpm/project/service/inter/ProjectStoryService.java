@@ -106,5 +106,4 @@ public interface ProjectStoryService {
     Pager<ProductStory> findStoryPager(int start, int limit, int id, SearchInfos conditions, String groupOperate);
 
 
-    Pager<ProductStory> findNoStoryPager(int start, int limit, int id, String condition, SearchInfos conditions, String groupOperate);
 }

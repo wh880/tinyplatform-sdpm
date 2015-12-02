@@ -38,10 +38,7 @@ public interface ProjectBuildDao extends BaseDao<ProjectBuild, Integer> {
 
     int[] batchUpdateDel(List<ProjectBuild> builds);
 
-
     Pager<ProductStory> findBuildStoryList(int start, int limit, Integer buildId, OrderBy... orderArgs);
-
-    Pager<ProductStory> findNoBuildStoryList(int start, int limit, final String condition, Integer buildId, final OrderBy... orderArgs);
 
     List<ProjectBuild> getBuildByKeys(String... ids);
 

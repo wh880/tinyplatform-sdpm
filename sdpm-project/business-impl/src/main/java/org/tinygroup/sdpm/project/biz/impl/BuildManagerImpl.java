@@ -82,8 +82,5 @@ public class BuildManagerImpl implements BuildManager {
         return projectBuildDao.buildInCondition(condition, productId, projectId);
     }
 
-    public Pager<ProductStory> findNoBuildStory(int start, int limit, String condition, Integer buildId) {
-        return projectBuildDao.findNoBuildStoryList(start, limit, condition, buildId);
-    }
 
 }

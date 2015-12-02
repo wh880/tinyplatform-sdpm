@@ -98,7 +98,7 @@ public interface ProductService {
 
     List<Product> getProductByUser(String userId, Integer delete, Integer productLineId);
 
-    List<Product> getProductByUserWithCount(String userId, Integer delete, boolean noRole);
+    List<Product> getProductByUserWithCount(String userId, Integer delete, boolean noRole );
 
     List<Product> getProductByUserAndProductLineWithCount(String userId, Integer productLineId, Integer delete);
 
@@ -106,7 +106,7 @@ public interface ProductService {
 
     Map<String, List<Product>> getUserProductsMap(String userId);
 
-    Map<String, List<Product>> getUserProductsWithCountMap(String userId);
+    Map<String, List<Product>> getUserProductsWithCountMap(String userId, Integer delete);
 
     /**
      * 根据输入名称查询

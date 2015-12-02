@@ -91,9 +91,9 @@ public class ProductServiceImpl implements ProductService {
         return ids.toArray(Ids);
     }
 
-    public Map<String, List<Product>> getUserProductsWithCountMap(String userId) {
+    public Map<String, List<Product>> getUserProductsWithCountMap(String userId, Integer delete) {
         Map<String, List<Product>> productMap = new HashMap<String, List<Product>>();
-        List<Product> products = productManager.getProductByUserWithCount(userId, 0, true);
+        List<Product> products = productManager.getProductByUserWithCount(userId, delete, true);
         for (Product product1 : products) {
             if (productMap.containsKey(product1.getProductLineName())) {
                 productMap.get(product1.getProductLineName()).add(product1);

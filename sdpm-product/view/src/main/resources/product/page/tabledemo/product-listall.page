@@ -1,18 +1,28 @@
 #set(pltype="addProduct")
-		#@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
-			#@div(divBaseClass="tinyheaderTools form-inline")
-				#setTinyTablePageSize([5,10,20,50,100,200]) ##每页数据条数设置
+		#@tinyTable("productListTable") ##ID为空则系统自动生成 带入参数则取该参数为ID
+        	<div class="operationbar" style="height:36px">
+				 <span class="f">
+					<a href="javascript:void(0);" value="all" name="productList" ${choice=="all"?'class="active_btn"':""}>全部产品</a>
+                     <a href="javascript:void(0);" value="open" name="productList" ${choice=="today"?'class="active_btn"':""}>未关闭</a>
+                     <a href="javascript:void(0);" value="deleted" name="productList" ${choice=="yesterday"?'class="active_btn"':""}>已关闭</a>
+				</span>
+
+
+			</div>
+##			#@div(divBaseClass="tinyheaderTools form-inline")
+##								<a href="javascript:void(0);" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
+##				#setTinyTablePageSize([5,10,20,50,100,200]) ##每页数据条数设置
 ##			<input type="button" value="全选"  class="btn btn-default btn-primary "  onclick="selectAllNullorReserve('product','全选');" />
 ##            <input type="button" value="反选"   class="btn btn-default btn-primary"  onclick="selectAllNullorReserve('product','反选');" />
-           
-				
-			#end
+##
+##
+##			#end
 			#@tinyTableContent(TINY_CONTEXT_PATH +adminPath+"/product/list") ##取数据地址 总数据
 				#@thead()
 					#@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
 						#@tinyTh({"width":"8"})<input type="checkbox"  value="">#end
 						#@tinyTh({"class":""})ID#end
-						#@tinyTh({"class":""})产品名称#end
+						#@tinyTh({"class":"","style":"width:15%"})产品名称#end
 						#@tinyTh({"class":""})激活需求#end
 						#@tinyTh({"class":""})已变更需求#end
 						#@tinyTh({"class":""})草稿需求#end
@@ -26,6 +36,22 @@
 					#end
 				#end
             <script>
+                $(function(){
+                    var dataUrl = $("#productListTable").attr("data-url");
+                    if(dataUrl.indexOf("choose")<0){
+                        $("#productListTable").attr("data-url",dataUrl+"?choose=all");
+                        $("#productListTable").trigger("refresh");
+                        $("a[value=all]").addClass("active_btn");
+                    }
+                    $("a[name=productList]").on("click",function(){
+                        var choose = $(this).attr("value");
+                        $("#productListTable").attr("data-url",dataUrl+"?choose="+choose);
+                        $("#productListTable").trigger("refresh");
+                        $("a[class=active_btn]").removeClass("active_btn");
+                        $(this).addClass("active_btn");
+
+                    });
+                })
                 $(function () {
                     $("#${tableId}").off("click", ">tbody>tr>td").on("click", ".show-group", function (e) {
                         $(this).find(".glyphicon").toggleClass("glyphicon-chevron-right glyphicon-chevron-down");

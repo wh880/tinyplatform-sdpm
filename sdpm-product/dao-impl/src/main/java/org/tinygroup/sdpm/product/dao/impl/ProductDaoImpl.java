@@ -25,11 +25,20 @@ import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
 import org.tinygroup.sdpm.common.util.update.InsertUtil;
 import org.tinygroup.sdpm.common.util.update.UpdateUtil;
 import org.tinygroup.sdpm.product.dao.ProductDao;
+import org.tinygroup.sdpm.product.dao.constant.ProductPlanTable;
+import org.tinygroup.sdpm.product.dao.constant.ProductReleaseTable;
+import org.tinygroup.sdpm.product.dao.constant.ProductStoryTable;
+import org.tinygroup.sdpm.product.dao.constant.ProductTable;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
 import org.tinygroup.tinysqldsl.*;
+import org.tinygroup.tinysqldsl.base.Column;
 import org.tinygroup.tinysqldsl.base.Condition;
 import org.tinygroup.tinysqldsl.base.FragmentSql;
+import org.tinygroup.tinysqldsl.base.Table;
+import org.tinygroup.tinysqldsl.expression.CaseExpression;
+import org.tinygroup.tinysqldsl.expression.Expression;
+import org.tinygroup.tinysqldsl.expression.Function;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.expression.relational.ExistsExpression;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
@@ -41,6 +50,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.tinygroup.sdpm.product.dao.constant.ProductTable.PRODUCTTABLE;
+import static org.tinygroup.sdpm.product.dao.constant.ProductStoryTable.PRODUCT_STORYTABLE;
+import static org.tinygroup.sdpm.product.dao.constant.ProductPlanTable.PRODUCT_PLANTABLE;
+import static org.tinygroup.sdpm.product.dao.constant.ProductReleaseTable.PRODUCT_RELEASETABLE;
+import static org.tinygroup.sdpm.quality.dao.constant.QualityBugTable.QUALITY_BUGTABLE;
 import static org.tinygroup.sdpm.productLine.dao.constant.ProductLineTable.PRODUCT_LINETABLE;
 import static org.tinygroup.sdpm.project.dao.constant.ProjectTeamTable.PROJECT_TEAMTABLE;
 import static org.tinygroup.tinysqldsl.Delete.delete;
@@ -51,6 +64,7 @@ import static org.tinygroup.tinysqldsl.Update.update;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.or;
 import static org.tinygroup.tinysqldsl.select.Join.leftJoin;
+import static org.tinygroup.tinysqldsl.select.Join.newJoin;
 
 @Repository
 public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
@@ -158,22 +172,7 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
             return getDslTemplate().getByKey(pk, Product.class, new SelectGenerateCallback<Serializable>() {
                 @SuppressWarnings("rawtypes")
                 public Select generate(Serializable t) {
-                    return MysqlSelect.select(PRODUCTTABLE.ALL, PRODUCT_LINETABLE.PRODUCT_LINE_NAME.as("productLineName"), FragmentSql.fragmentSelect(
-                            "(SELECT COUNT(story_id)FROM product_story a JOIN product b ON a.`product_id`=b.`product_id` WHERE a.`story_status`=1 AND b.product_id = product.product_id) activeSum,\n" +
-                                    "(SELECT COUNT(story_id)FROM product_story a JOIN product b ON a.`product_id`=b.`product_id` WHERE a.`story_status`=3 AND b.product_id = product.product_id) changeSum,\n" +
-                                    "(SELECT COUNT(story_id)FROM product_story a JOIN product b ON a.`product_id`=b.`product_id` WHERE a.`story_status`=0 AND b.product_id = product.product_id) draftSum,\n" +
-                                    "(SELECT COUNT(story_id)FROM product_story a JOIN product b ON a.`product_id`=b.`product_id` WHERE a.`story_status`=2 AND b.product_id = product.product_id) closeSum,\n" +
-                                    "COUNT(DISTINCT(product_plan.plan_id)) planCount,\n" +
-                                    "COUNT(DISTINCT(product_release.release_id)) releaseCount,\n" +
-                                    "COUNT(DISTINCT(quality_bug.bug_id)) bugCount,\n" +
-                                    "(SELECT COUNT(bug_id)FROM quality_bug a JOIN product b ON a.`product_id`=b.`product_id` WHERE a.`bug_status`<2 AND b.product_id = product.product_id) resolveSum,\n" +
-                                    "(SELECT COUNT(bug_id)FROM quality_bug a JOIN product b ON a.`product_id`=b.`product_id` WHERE a.`bug_assigned_to` IS NULL AND b.product_id = product.product_id) assignSum")).
-                            from(FragmentSql.fragmentFrom(" product \n" +
-                                    "LEFT JOIN product_plan ON product.`product_id` = product_plan.`product_id` \n" +
-                                    "LEFT JOIN product_release ON product.`product_id` = product_release.`product_id` \n" +
-                                    "LEFT JOIN quality_bug ON product.`product_id` = quality_bug.`product_id`")).join(
-                            leftJoin(PRODUCT_LINETABLE, PRODUCTTABLE.PRODUCT_LINE_ID.eq(PRODUCT_LINETABLE.PRODUCT_LINE_ID))
-                    ).where(PRODUCTTABLE.PRODUCT_ID.eq(t));
+                    return getComplexSelect().where(PRODUCTTABLE.PRODUCT_ID.eq(t));
                 }
             });
         } catch (EmptyResultDataAccessException e) {
@@ -400,8 +399,6 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
                                 PRODUCTTABLE.DELETED.eq(t.getDeleted())));
         return getDslSession().fetchList(select, ProductAndLine.class);
 
-		/*select product.product_id,product.product_name,product_line.product_line_id,product_line.product_line_name
-		 * from product left join product_line on product.product_line_id=product_line.product_line_id;*/
     }
 
     public List<String> getProductNameByLineId(Integer productLineId) {
@@ -426,7 +423,7 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
         return getDslSession().fetchList(select, Product.class);
     }
 
-    public List<Product> getProductByUserWithCount(String userId,Integer delete,boolean noRole) {
+    public List<Product> getProductByUserWithCount(String userId,Integer delete,boolean noRole ) {
         Condition condition = null;
         if(noRole){
             condition = PRODUCTTABLE.ACL.eq(Product.ACl_All);
@@ -477,22 +474,51 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
     }
 
     private Select getComplexSelect() {
-        return MysqlSelect.select(PRODUCTTABLE.ALL,PRODUCT_LINETABLE.PRODUCT_LINE_NAME.as("productLineName"), FragmentSql.fragmentSelect(
-                "(SELECT COUNT(story_id)FROM product_story a JOIN product b ON a.`product_id`=b.`product_id` WHERE a.`story_status`=1 AND b.product_id = product.product_id) activeSum,\n" +
-                        "(SELECT COUNT(story_id)FROM product_story a JOIN product b ON a.`product_id`=b.`product_id` WHERE a.`story_status`=3 AND b.product_id = product.product_id) changeSum,\n" +
-                        "(SELECT COUNT(story_id)FROM product_story a JOIN product b ON a.`product_id`=b.`product_id` WHERE a.`story_status`=0 AND b.product_id = product.product_id) draftSum,\n" +
-                        "(SELECT COUNT(story_id)FROM product_story a JOIN product b ON a.`product_id`=b.`product_id` WHERE a.`story_status`=2 AND b.product_id = product.product_id) closeSum,\n" +
-                        "COUNT(DISTINCT(product_plan.plan_id)) planCount,\n" +
-                        "COUNT(DISTINCT(product_release.release_id)) releaseCount,\n" +
-                        "COUNT(DISTINCT(quality_bug.bug_id)) bugCount,\n" +
-                        "(SELECT COUNT(bug_id)FROM quality_bug a JOIN product b ON a.`product_id`=b.`product_id` WHERE a.`bug_status`<2 AND b.product_id = product.product_id) resolveSum,\n" +
-                        "(SELECT COUNT(bug_id)FROM quality_bug a JOIN product b ON a.`product_id`=b.`product_id` WHERE a.`bug_assigned_to` IS NULL AND b.product_id = product.product_id) assignSum")).
-                from(FragmentSql.fragmentFrom(" product \n" +
-                        "LEFT JOIN product_plan ON product.`product_id` = product_plan.`product_id` \n" +
-                        "LEFT JOIN product_release ON product.`product_id` = product_release.`product_id` \n" +
-                        "LEFT JOIN quality_bug ON product.`product_id` = quality_bug.`product_id`")).join(
-                leftJoin(PRODUCT_LINETABLE,PRODUCT_LINETABLE.PRODUCT_LINE_ID.eq(PRODUCTTABLE.PRODUCT_LINE_ID))
 
+        ProductTable subProduct = (ProductTable)PRODUCTTABLE.as("subProduct");
+        Function planFunction = PRODUCT_PLANTABLE.PLAN_ID.count();
+        Function releaseFunction = PRODUCT_RELEASETABLE.RELEASE_ID.count();
+        planFunction.setDistinct(true);
+        releaseFunction.setDistinct(true);
+        //查询product基本数据
+        SubSelect product = SubSelect.subSelect(select(new Column("subProduct.*"),
+                PRODUCT_LINETABLE.PRODUCT_LINE_NAME.as("productLineName"),
+                planFunction.as("planCount"),
+                releaseFunction.as("releaseCount")).from(subProduct).join(
+                leftJoin(PRODUCT_PLANTABLE, subProduct.PRODUCT_ID.eq(PRODUCT_PLANTABLE.PRODUCT_ID)),
+                leftJoin(PRODUCT_RELEASETABLE, subProduct.PRODUCT_ID.eq(PRODUCT_RELEASETABLE.PRODUCT_ID)),
+                leftJoin(PRODUCT_LINETABLE, subProduct.PRODUCT_LINE_ID.eq(PRODUCT_LINETABLE.PRODUCT_LINE_ID))
+        ).groupBy(subProduct.PRODUCT_ID), "product", true);
+        //统计各类story总数
+        SubSelect subStorySelect = SubSelect.subSelect(select(PRODUCT_STORYTABLE.PRODUCT_ID,
+                FragmentSql.fragmentSelect("SUM(CASE WHEN product_story.`story_status`=1 THEN 1 ELSE 0 END) activeSum"),
+                FragmentSql.fragmentSelect("SUM(CASE WHEN product_story.`story_status`=3 THEN 1 ELSE 0 END) changeSum"),
+                FragmentSql.fragmentSelect("SUM(CASE WHEN product_story.`story_status`=0 THEN 1 ELSE 0 END) draftSum"),
+                FragmentSql.fragmentSelect("SUM(CASE WHEN product_story.`story_status`=2 THEN 1 ELSE 0 END) closeSum")).
+                from(PRODUCT_STORYTABLE).
+                where(PRODUCT_STORYTABLE.DELETED.eq(0)).
+                groupBy(PRODUCT_STORYTABLE.PRODUCT_ID),"subStorySelect",true);
+        //统计分类bug总数
+        SubSelect subBugSelect = SubSelect.subSelect(select(QUALITY_BUGTABLE.PRODUCT_ID, QUALITY_BUGTABLE.BUG_ID.count().as("bugCount"),
+                FragmentSql.fragmentSelect("SUM(CASE WHEN quality_bug.`bug_status`=1 THEN 1 ELSE 0 END) resolveSum"),
+                FragmentSql.fragmentSelect("SUM(CASE WHEN quality_bug.`bug_assigned_to` IS NULL THEN 1 ELSE 0 END) assignSum")).
+                from(QUALITY_BUGTABLE).
+                where(QUALITY_BUGTABLE.DELETED.eq(0)).
+                groupBy(QUALITY_BUGTABLE.PRODUCT_ID), "subBugSelect", true);
+
+        return MysqlSelect.select(new Table("product").ALL,
+                new Column("activeSum"),
+                new Column("changeSum"),
+                new Column("draftSum"),
+                new Column("closeSum"),
+                new Column("resolveSum"),
+                new Column("assignSum"),
+                new Column("bugCount")
+        ).from(product
+        ).join(
+                leftJoin(subStorySelect,new Column(new Table("subStorySelect"),"product_id").eq(new Column(new Table("product"),"product_id"))),
+                leftJoin(subBugSelect,new Column(new Table("subBugSelect"),"product_id").eq(new Column(new Table("product"),"product_id")))
         );
+
     }
 }

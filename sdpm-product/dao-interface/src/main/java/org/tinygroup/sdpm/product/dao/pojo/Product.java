@@ -103,15 +103,15 @@ public class Product implements Serializable {
      */
     private String productLineName;
     private Integer deleted;
-    private Integer activeSum;
-    private Integer changeSum;
-    private Integer draftSum;
-    private Integer closeSum;
-    private Integer planCount;
-    private Integer releaseCount;
-    private Integer bugCount;
-    private Integer resolveSum;
-    private Integer assignSum;
+    private Integer activeSum =0 ;
+    private Integer changeSum =0;
+    private Integer draftSum =0;
+    private Integer closeSum =0;
+    private Integer planCount =0;
+    private Integer releaseCount =0;
+    private Integer bugCount =0;
+    private Integer resolveSum =0;
+    private Integer assignSum =0;
 
     public Product() {
         setDeleted(DELETE_NO);

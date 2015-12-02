@@ -77,8 +77,6 @@ public interface BuildManager {
 
     Pager<ProductStory> findBuildStory(int start, int limit, Integer buildId);
 
-    Pager<ProductStory> findNoBuildStory(int start, int limit, String condition, Integer buildId);
-
     List<ProjectBuild> getBuildByIds(String... ids);
 
     List<ProjectBuild> getBuildByProducts(Integer... ids);

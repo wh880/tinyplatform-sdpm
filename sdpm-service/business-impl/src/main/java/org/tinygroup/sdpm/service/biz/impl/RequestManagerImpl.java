@@ -20,8 +20,6 @@ import org.tinygroup.tinysqldsl.base.Condition;
 
 import java.util.List;
 
-import static org.tinygroup.tinysqldsl.base.FragmentSql.fragmentCondition;
-
 /**
  * Created by Administrator on 2015-09-18.
  */

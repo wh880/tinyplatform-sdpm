@@ -56,10 +56,6 @@ public class ProductAction extends BaseController {
     @Autowired
     private UserService userService;
     @Autowired
-    private HistoryService historyService;
-    @Autowired
-    private ActionService actionService;
-    @Autowired
     private ProductLineService productLineService;
     @Autowired
     private RoleService roleService;
@@ -67,8 +63,6 @@ public class ProductAction extends BaseController {
     private BuildService buildService;
     @Autowired
     private TestCaseService testCaseService;
-    @Autowired
-    private ProjectService productProject;
     @Autowired
     private BurnService burnService;
     @Autowired
@@ -267,15 +261,14 @@ public class ProductAction extends BaseController {
     }
 
     @RequestMapping("/list")
-    public String list(Product product, String treeId, Integer productLineId,
-//                       @CookieValue(value = "cookieProductLineId",defaultValue = "0") String cookieProductLineId,
-                       @RequestParam(required = false, defaultValue = "1") int page,
-                       @RequestParam(required = false, defaultValue = "10") int pagesize,
-                       @RequestParam(required = false, defaultValue = "productId") String order,
-                       @RequestParam(required = false, defaultValue = "asc") String ordertype, Model model) {
-
-
-        model.addAttribute("productMap", productService.getUserProductsWithCountMap(UserUtils.getUserId()));
+    public String list(String choose,Model model) {
+        Integer deleted = null;
+        if("open".equals(choose)){
+            deleted=0;
+        }else if("deleted".equals(choose)){
+            deleted=1;
+        }
+        model.addAttribute("productMap", productService.getUserProductsWithCountMap(UserUtils.getUserId(),deleted));
         return "/product/data/allproductdata.pagelet";
     }
 

@@ -328,23 +328,4 @@ public class ProjectBuildDaoImpl extends TinyDslDaoSupport implements ProjectBui
     }
 
 
-    public Pager<ProductStory> findNoBuildStoryList(int start, int limit, final String condition, Integer buildId, final OrderBy... orderBies) {
-        Select select = select(PROJECT_BUILDTABLE.BUILD_STORIES).from(PROJECT_BUILDTABLE)
-                .where(PROJECT_BUILDTABLE.BUILD_ID.eq(buildId));
-        ProjectBuild test = getDslSession().fetchOneResult(select, ProjectBuild.class);
-        final String[] storys = test.getBuildStories().split(",");
-
-        ProductStory productStory = new ProductStory();
-        return getDslTemplate().queryPager(start, limit, productStory, false, new SelectGenerateCallback<ProductStory>() {
-
-            public Select generate(ProductStory t) {
-                Select select = MysqlSelect.selectFrom(PRODUCT_STORYTABLE).where(
-                        and(
-                                PRODUCT_STORYTABLE.STORY_ID.notIn(storys),
-                                StringUtil.isBlank(condition) ? PRODUCT_STORYTABLE.STORY_ID.isNotNull() : FragmentSql.fragmentCondition(condition)));
-                return addOrderByElements(select, orderBies);
-            }
-        });
-    }
-
 }
