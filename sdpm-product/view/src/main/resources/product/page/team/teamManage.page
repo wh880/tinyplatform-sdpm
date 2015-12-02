@@ -35,7 +35,7 @@
         <tr>
             <td style="width: 2%"></td>
             #@thW()
-                ${t?.teamUserId==null?"":UserUtils.getUserById(t?.teamUserId)?.orgUserRealName}
+                ${t?.teamUserId==null?"":userUtils.getUserById(t?.teamUserId)?.orgUserRealName}
                 <input name="teamList[${a}].teamUserId" value="${t?.teamUserId}" type="hidden">
                 <input name="teamList[${a}].id" value="${t?.id}" type="hidden">
                 <input name="teamList[${a}].productId" value="${t?.productId}" type="hidden">

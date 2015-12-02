@@ -287,13 +287,13 @@ public class ProductUtils {
 //        if (result == null) {
 //            List<Product> products = getProductList();
 //            result = new ArrayList<Product>();
-//            String loginId = UserUtils.getUserId();
+//            String loginId = userUtils.getUserId();
 //            for (Product product : products) {
 //                if (validateProduct(loginId, product) < 3) {
 //                    result.add(product);
 //                }
 //            }
-//            UserUtils.putCache(USER_CACHE_ALL_PRODUCT_LIST_BY_USER, result);
+//            userUtils.putCache(USER_CACHE_ALL_PRODUCT_LIST_BY_USER, result);
 //        }
         if (result == null) {
             result = productService.getProductByUser(UserUtils.getUserId(), 0, null);

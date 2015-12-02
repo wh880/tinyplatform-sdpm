@@ -22,7 +22,7 @@
                 #end
                 #@tr()
                     #@thW("100")指派给#end
-                    #@td()${task?.taskAssignedTo==null?"":UserUtils.getUserById(task?.taskAssignedTo)?.orgUserRealName}#end
+                    #@td()${task?.taskAssignedTo==null?"":userUtils.getUserById(task?.taskAssignedTo)?.orgUserRealName}#end
                 #end
                 #@tr()
                     #@thW("100")任务类型#end
@@ -84,14 +84,14 @@
                     #@thW("70")由谁创建#end
                     #@td()
                     #if(task.taskOpenBy)
-                        ${UserUtils.getUserById(task.taskOpenBy).orgUserRealName} 于 ${formatDate(task.taskOpenedDate,"yyyy-MM-dd HH:mm:ss")}
+                        ${userUtils.getUserById(task.taskOpenBy).orgUserRealName} 于 ${formatDate(task.taskOpenedDate,"yyyy-MM-dd HH:mm:ss")}
                     #end
                 #end
                 #@tr()
                     #@thW("70")由谁完成 #end
                     #@td()
                         #if(task.taskFinishedBy)
-                            ${UserUtils.getUserById(task.taskFinishedBy).orgUserRealName} 于 ${formatDate(task.taskFinishedDate,"yyyy-MM-dd HH:mm:ss")}
+                            ${userUtils.getUserById(task.taskFinishedBy).orgUserRealName} 于 ${formatDate(task.taskFinishedDate,"yyyy-MM-dd HH:mm:ss")}
                         #end
                     #end
                 #end
@@ -99,7 +99,7 @@
                     #@thW("70")由谁取消#end
                     #@td()
                         #if(task.taskCanceledBy)
-                            ${UserUtils.getUserById(task.taskCanceledBy).orgUserRealName} 于 ${formatDate(task.taskCanceledDate,"yyyy-MM-dd HH:mm:ss")}
+                            ${userUtils.getUserById(task.taskCanceledBy).orgUserRealName} 于 ${formatDate(task.taskCanceledDate,"yyyy-MM-dd HH:mm:ss")}
                         #end
                     #end
                 #end
@@ -107,7 +107,7 @@
                     #@thW("70")由谁关闭#end
                     #@td()
                         #if(task.taskClosedBy)
-                            ${UserUtils.getUserById(task.taskClosedBy).orgUserRealName} 于 ${formatDate(task.taskCloseDate,"yyyy-MM-dd HH:mm:ss")}
+                            ${userUtils.getUserById(task.taskClosedBy).orgUserRealName} 于 ${formatDate(task.taskCloseDate,"yyyy-MM-dd HH:mm:ss")}
                         #end
                     #end
                 #end
@@ -119,7 +119,7 @@
                     #@thW("70")最后编辑#end
                     #@td()
                         #if(task.taskLastEditedBy)
-                            ${UserUtils.getUserById(task.taskLastEditedBy).orgUserRealName} 于 ${formatDate(task.taskLastEditedDate,"yyyy-MM-dd HH:mm:ss")}
+                            ${userUtils.getUserById(task.taskLastEditedBy).orgUserRealName} 于 ${formatDate(task.taskLastEditedDate,"yyyy-MM-dd HH:mm:ss")}
                         #end
                     #end
                 #end

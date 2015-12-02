@@ -11,7 +11,7 @@
             ?.testtaskTitle}</a>#end
         #@td("nowrap")<a href="${TINY_CONTEXT_PATH+adminPath}/project/demand/index.page">${v?.projectName}</a>#end
         #@td("nowrap")${v?.searchBuildName?:(v?.buildName=="0"?"trunk":"")}#end
-        #@td("nowrap")<span class="${v?.testtaskOwner==UserUtils.getUserId()?'c-red':''}">${v?.testtaskOwner?UserUtils.getUserById(v?.testtaskOwner)?.orgUserRealName:""}</span>#end
+        #@td("nowrap")<span class="${v?.testtaskOwner==userUtils.getUserId()?'c-red':''}">${v?.testtaskOwner?userUtils.getUserById(v?.testtaskOwner)?.orgUserRealName:""}</span>#end
         #@td("nowrap")${v?.testtaskBegin?formatDate(v?.testtaskBegin,"yyyy-MM-dd"):""}#end
         #@td("nowrap")${v?.testtaskEnd?formatDate(v?.testtaskEnd,"yyyy-MM-dd"):""}#end
         #@td("nowrap")${getDict("versionStatus",v?.testtaskStatus)}#end

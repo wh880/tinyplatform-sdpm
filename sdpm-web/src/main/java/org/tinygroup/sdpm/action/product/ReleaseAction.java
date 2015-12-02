@@ -20,7 +20,10 @@ import org.tinygroup.sdpm.system.dao.pojo.ProfileType;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;
 import org.tinygroup.sdpm.system.service.inter.ProfileService;
-import org.tinygroup.sdpm.util.*;
+import org.tinygroup.sdpm.util.CookieUtils;
+import org.tinygroup.sdpm.util.ExportUtils;
+import org.tinygroup.sdpm.util.LogUtil;
+import org.tinygroup.sdpm.util.ProductUtils;
 import org.tinygroup.template.TemplateContext;
 import org.tinygroup.template.TemplateException;
 import org.tinygroup.template.impl.TemplateContextDefault;
@@ -73,7 +76,7 @@ public class ReleaseAction extends BaseController {
         LogUtil.logWithComment(LogUtil.LogOperateObject.RELEASE
                 , LogUtil.LogAction.OPENED
                 , String.valueOf(release.getReleaseId())
-                , UserUtils.getUserId()
+                , userUtils.getUserId()
                 , String.valueOf(release.getProductId())
                 , null
                 , null
@@ -96,7 +99,7 @@ public class ReleaseAction extends BaseController {
         LogUtil.logWithComment(LogUtil.LogOperateObject.RELEASE
                 , LogUtil.LogAction.EDITED
                 , String.valueOf(release.getReleaseId())
-                , UserUtils.getUserId()
+                , userUtils.getUserId()
                 , String.valueOf(release1.getProductId())
                 , null
                 , release1
@@ -120,7 +123,7 @@ public class ReleaseAction extends BaseController {
         LogUtil.logWithComment(LogUtil.LogOperateObject.RELEASE
                 , LogUtil.LogAction.DELETED
                 , String.valueOf(releaseId)
-                , UserUtils.getUserId()
+                , userUtils.getUserId()
                 , String.valueOf(release1.getProductId())
                 , null
                 , release1

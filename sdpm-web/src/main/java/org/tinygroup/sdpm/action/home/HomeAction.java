@@ -17,7 +17,6 @@ import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityTestRun;
 import org.tinygroup.sdpm.quality.service.inter.BugService;
 import org.tinygroup.sdpm.quality.service.inter.TestRunService;
-import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.HashMap;
@@ -45,7 +44,7 @@ public class HomeAction extends BaseController{
     @RequestMapping(value = {"a", "a/home"})
     public String index(Model model) {
         //首页产品统计展示
-        List<Product> products = productService.getProductByUserWithCount(UserUtils.getUserId(), 0, false);
+        List<Product> products = productService.getProductByUserWithCount(userUtils.getUserId(), 0, false);
 
         Map<String, Map<String, String>> productSum = new HashMap<String, Map<String, String>>();
         for (Product product : products) {
@@ -65,7 +64,7 @@ public class HomeAction extends BaseController{
         model.addAttribute("productSumMap", productSum);
         //首页指派给我的任务
         ProjectTask task = new ProjectTask();
-        task.setTaskAssignedTo(UserUtils.getUserId());
+        task.setTaskAssignedTo(userUtils.getUserId());
         task.setTaskDeleted(ProjectTask.DELETE_NO);
         List<ProjectTask> tasks = taskService.findListTask(task);
         model.addAttribute("myTaskList", tasks);
@@ -83,12 +82,12 @@ public class HomeAction extends BaseController{
         //首页指派给我的bug
         QualityBug bug = new QualityBug();
         bug.setDeleted(0);
-        bug.setBugAssignedTo(UserUtils.getUserId());
+        bug.setBugAssignedTo(userUtils.getUserId());
         List<QualityBug> bugList = bugService.findBugList(bug);
         model.addAttribute("myBugList", bugList);
         //首页指派给我的用例
         QualityTestRun run = new QualityTestRun();
-        run.setTestRunAssignedTo(UserUtils.getUserId());
+        run.setTestRunAssignedTo(userUtils.getUserId());
         List<QualityTestRun> testRuns = testRunService.findTestRunList(run);
         model.addAttribute("runList", testRuns);
         return "main/index.page";

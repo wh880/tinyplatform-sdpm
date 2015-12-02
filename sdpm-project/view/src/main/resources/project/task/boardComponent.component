@@ -27,7 +27,7 @@
           #@aModal("#myModal" "指派给-"+task?.taskName 1200 600 "" assignedPage+"?taskId="+task?.taskId)
               <i class="icon-hand-right"></i>
           #end
-          <small>${UserUtils.getUserById(task.taskAssignedTo).orgUserRealName}</small>
+          <small>${userUtils.getUserById(task.taskAssignedTo).orgUserRealName}</small>
 	  </span>
 
         <div class="pull-right">
@@ -66,7 +66,7 @@
           #@aModal("#myModal" "指派给-"+task?.taskName 1200 600 "" assignedPage+"?taskId="+task?.taskId)
               <i class="icon-hand-right"></i>
           #end
-          <small>${UserUtils.getUserById(task.taskAssignedTo).orgUserRealName}</small>
+          <small>${userUtils.getUserById(task.taskAssignedTo).orgUserRealName}</small>
 	  </span>
 
         <div class="pull-right">
@@ -105,7 +105,7 @@
           #@aModal("#myModal" "指派给-"+task?.taskName 1200 600 "edit" assignedPage+"?taskId="+task?.taskId)
               <i class="icon-hand-right"></i>
           #end
-          <small>${UserUtils.getUserById(task.taskAssignedTo).orgUserRealName}</small>
+          <small>${userUtils.getUserById(task.taskAssignedTo).orgUserRealName}</small>
 	  </span>
 
         <div class="pull-right">
@@ -142,7 +142,7 @@
 		 #@aModal("#myModal" "指派给-"+task?.taskName 1200 600 "" assignedPage+"?taskId="+task?.taskId)
              <i class="icon-hand-right"></i>
          #end
-          <small>${UserUtils.getUserById(task.taskAssignedTo).orgUserRealName}</small>
+          <small>${userUtils.getUserById(task.taskAssignedTo).orgUserRealName}</small>
 	  </span>
 
         <div class="pull-right">
@@ -178,7 +178,7 @@
 		 #@aModal("#myModal" "指派给-"+task?.taskName 1200 600 "" assignedPage+"?taskId="+task?.taskId)
              <i class="icon-hand-right"></i>
          #end
-          <small>${UserUtils.getUserById(task.taskAssignedTo).orgUserRealName}</small>
+          <small>${userUtils.getUserById(task.taskAssignedTo).orgUserRealName}</small>
 	  </span>
 
         <div class="pull-right">

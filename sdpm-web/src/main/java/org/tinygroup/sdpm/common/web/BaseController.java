@@ -38,6 +38,8 @@ public abstract class BaseController {
 
     @Autowired
     protected ProjectOperate projectOperate;
+    @Autowired
+    protected UserUtils userUtils;
 
     /**
      * 管理基础路径
@@ -287,7 +289,7 @@ public abstract class BaseController {
         fileUrl = fileRepository.resolverFilePath(fileUrl, UPLOAD_PATH);
         int size = (int) uploadFile.getSize();
         return new SystemProfile(fileUrl, title, ext, size,
-                type.getType(), objectId, UserUtils.getUserAccount(), new Date());
+                type.getType(), objectId, userUtils.getUserAccount(), new Date());
 
     }
 

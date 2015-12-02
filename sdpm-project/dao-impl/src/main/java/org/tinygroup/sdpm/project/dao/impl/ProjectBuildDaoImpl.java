@@ -18,7 +18,6 @@ package org.tinygroup.sdpm.project.dao.impl;
 
 import org.springframework.stereotype.Repository;
 import org.tinygroup.commons.tools.CollectionUtil;
-import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.jdbctemplatedslsession.callback.*;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
@@ -28,7 +27,6 @@ import org.tinygroup.sdpm.project.dao.ProjectBuildDao;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
 import org.tinygroup.tinysqldsl.*;
 import org.tinygroup.tinysqldsl.base.Condition;
-import org.tinygroup.tinysqldsl.base.FragmentSql;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 import org.tinygroup.tinysqldsl.select.Join;

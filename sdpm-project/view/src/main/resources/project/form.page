@@ -44,7 +44,7 @@
     <div class="infoContent">
         <p class="titleName">添加项目</p>
         <input type="hidden" name="projectOpenedDate" value="${formatDate(now()," yyyy-MM-dd")}"/>
-        <input type="hidden" name="projectOpenedBy" value="${UserUtils.getUser().orgUserId}"/>
+        <input type="hidden" name="projectOpenedBy" value="${userUtils.getUser().orgUserId}"/>
         #@elementItem()
             #@sdpmItem("项目名称" "*")
                 #tinyInput("text" "projectName" "" {"placeholder":"请输入项目名称","datatype":"*","nullmsg":"项目名称不能为空！",

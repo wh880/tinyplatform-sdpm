@@ -62,7 +62,7 @@ public class ProductLineAction extends BaseController {
 
     @RequestMapping("/save")
     public String save(ProductLine productLine, SystemAction systemAction, HttpServletRequest request) {
-        productLine.setProductLineCreatedBy(UserUtils.getUserId());
+        productLine.setProductLineCreatedBy(userUtils.getUserId());
         productLine.setProductLineCreatedDate(new Date());
         productLine.setProductLineStatus("0");
         ProductLine productLine1 = productLineService.addProductLine(productLine);
@@ -71,7 +71,7 @@ public class ProductLineAction extends BaseController {
         LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCTLINE
                 , LogUtil.LogAction.OPENED
                 , String.valueOf(productLine1.getProductLineId())
-                , UserUtils.getUserId()
+                , userUtils.getUserId()
                 , null
                 , null
                 , null
@@ -90,7 +90,7 @@ public class ProductLineAction extends BaseController {
         LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCTLINE,
                 LogUtil.LogAction.EDITED,
                 String.valueOf(productLine.getProductLineId()),
-                UserUtils.getUserId(),
+                userUtils.getUserId(),
                 null,
                 null,
                 productLineOld,
@@ -118,7 +118,7 @@ public class ProductLineAction extends BaseController {
             LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCT,
                     LogUtil.LogAction.DELETED,
                     String.valueOf(product1.getProductId()),
-                    UserUtils.getUserId(),
+                    userUtils.getUserId(),
                     null,
                     null,
                     null,
@@ -133,7 +133,7 @@ public class ProductLineAction extends BaseController {
         LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCTLINE,
                 LogUtil.LogAction.DELETED,
                 String.valueOf(productLineId),
-                UserUtils.getUserId(),
+                userUtils.getUserId(),
                 null,
                 null,
                 null,
@@ -162,7 +162,7 @@ public class ProductLineAction extends BaseController {
         LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCTLINE,
                 LogUtil.LogAction.CLOSED,
                 String.valueOf(productLine.getProductLineId()),
-                UserUtils.getUserId(),
+                userUtils.getUserId(),
                 String.valueOf(productLine.getProductLineId()),
                 null,
                 productLine1,
@@ -178,7 +178,7 @@ public class ProductLineAction extends BaseController {
         ConditionCarrier carrier = new ConditionCarrier();
         mergeStatusCondition(carrier,status);
 
-        Integer[] ids = productLineService.getUserProductLineIds(UserUtils.getUserId());
+        Integer[] ids = productLineService.getUserProductLineIds(userUtils.getUserId());
         Pager<ProductLine> pagerProductLine = productLineService.findProductLinePagerInIds(start, pagesize, carrier, productLine, ids, order, ordertype);
 
         model.addAttribute("productLine", pagerProductLine);
@@ -238,10 +238,10 @@ public class ProductLineAction extends BaseController {
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
         Product product = new Product();
         product.setDeleted(FieldUtil.DELETE_NO);
-        List<Product> productLists = productService.getProductByUser(UserUtils.getUserId(), 0, null);
+        List<Product> productLists = productService.getProductByUser(userUtils.getUserId(), 0, null);
         ProductLine productLine = new ProductLine();
         productLine.setDeleted(FieldUtil.DELETE_NO);
-        List<ProductLine> productLines = productLineService.getUserProductLine(UserUtils.getUserId());
+        List<ProductLine> productLines = productLineService.getUserProductLine(userUtils.getUserId());
         Integer[] ids = new Integer[productLists.size()];
         for (int i = 0; i < ids.length; i++) {
             ids[i] = productLists.get(i).getProductId();
@@ -340,19 +340,19 @@ public class ProductLineAction extends BaseController {
                 carrier.put("productLine.productLineOwner",
                         ConditionUtils.Operate.EQ.getOperate(),
                         ConditionUtils.CommonFieldType.FIELD_OPERATE.getCommonField(),
-                        UserUtils.getUserId());
+                        userUtils.getUserId());
                 break;
             case 3:
                 carrier.put("productLine.productLineQualityManager",
                         ConditionUtils.Operate.EQ.getOperate(),
                         ConditionUtils.CommonFieldType.FIELD_OPERATE.getCommonField(),
-                        UserUtils.getUserId());
+                        userUtils.getUserId());
                 break;
             case 4:
                 carrier.put("productLine.productLineDeliveryManager",
                         ConditionUtils.Operate.EQ.getOperate(),
                         ConditionUtils.CommonFieldType.FIELD_OPERATE.getCommonField(),
-                        UserUtils.getUserId());
+                        userUtils.getUserId());
                 break;
         }
         return;
@@ -408,7 +408,7 @@ public class ProductLineAction extends BaseController {
     @ResponseBody
     @RequestMapping(value = "/userProductTree")
     public List<Map<String, Object>> getUserProductTree() {
-        List<Product> products = productService.getProductByUser(UserUtils.getUserId(), 0, null);
+        List<Product> products = productService.getProductByUser(userUtils.getUserId(), 0, null);
         List<Map<String, Object>> mapList = Lists.newArrayList();
         List<Integer> productLineIds = new ArrayList<Integer>();
         for (Product p : products) {
@@ -461,7 +461,7 @@ public class ProductLineAction extends BaseController {
             result.add(productLineService.findProductLine(initKey));
             return result;
         }
-        List<ProductLine> lineList = productLineService.getUserProductLine(UserUtils.getUserId());
+        List<ProductLine> lineList = productLineService.getUserProductLine(userUtils.getUserId());
         Integer[] ids = new Integer[lineList.size()];
         for (int i = 0; i < ids.length; i++) {
             ids[i] = lineList.get(i).getProductLineId();

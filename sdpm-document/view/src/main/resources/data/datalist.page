@@ -5,7 +5,7 @@
 	#@td("nowrap")<a href="${TINY_CONTEXT_PATH+adminPath}/document/doc/view?docid=${l?.docId}">${l?.docId}</a>#end
 	#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/document/doc/view?docid=${l?.docId}">${l?.docTitle}</a>#end
 	#@td("nowrap")${getDict("docType",l?.getDocType())}#end
-	#@td("nowrap")${UserUtils.getUserById(l?.docAddedBy).orgUserRealName?:""}#end
+	#@td("nowrap")${userUtils.getUserById(l?.docAddedBy).orgUserRealName?:""}#end
 	#@td("nowrap")${l?.docAddedDate?formatDate(l?.docAddedDate,'yyyy-MM-dd'):""}#end
 	 #@td("nowrap")
 	 	#foreach(m:menuManager.getScopeMenus("doc-op"))

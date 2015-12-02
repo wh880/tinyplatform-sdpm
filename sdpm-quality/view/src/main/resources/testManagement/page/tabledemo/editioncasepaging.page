@@ -184,7 +184,7 @@
             #@elementItem()
                 #@colLabel()由谁创建#end
                 #@formControlDiv("col-8")
-                    ${testCase?.caseOpenedBy?UserUtils.getUserById(testCase?.caseOpenedBy)?.orgUserRealName:""} ${testCase?.caseOpenedDate?" 于 "+formatDate(testCase?.caseOpenedDate,'yyyy-MM-dd HH:mm:ss'):""}
+                    ${testCase?.caseOpenedBy?userUtils.getUserById(testCase?.caseOpenedBy)?.orgUserRealName:""} ${testCase?.caseOpenedDate?" 于 "+formatDate(testCase?.caseOpenedDate,'yyyy-MM-dd HH:mm:ss'):""}
                 #end
             #end
 </li>
@@ -192,7 +192,7 @@
             #@elementItem()
                 #@colLabel()最后编辑#end
                 #@formControlDiv("col-8")
-                    ${testCase?.caseLastEditedBy?UserUtils.getUserById(testCase?.caseLastEditedBy)?.orgUserRealName:""} ${testCase?.caseLastEditedDate?" 于 "+formatDate(testCase?.caseLastEditedDate,'yyyy-MM-dd HH:mm:ss'):""}
+                    ${testCase?.caseLastEditedBy?userUtils.getUserById(testCase?.caseLastEditedBy)?.orgUserRealName:""} ${testCase?.caseLastEditedDate?" 于 "+formatDate(testCase?.caseLastEditedDate,'yyyy-MM-dd HH:mm:ss'):""}
                 #end
             #end
 

@@ -3,7 +3,6 @@ package org.tinygroup.sdpm.project.biz.inter;
 
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
-import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.List;

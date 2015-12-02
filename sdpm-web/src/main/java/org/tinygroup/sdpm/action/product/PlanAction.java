@@ -15,7 +15,6 @@ import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.util.CookieUtils;
 import org.tinygroup.sdpm.util.LogUtil;
 import org.tinygroup.sdpm.util.ProductUtils;
-import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -61,7 +60,7 @@ public class PlanAction extends BaseController {
         LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCTPLAN
                 , LogUtil.LogAction.OPENED
                 , String.valueOf(productPlan1.getPlanId())
-                , UserUtils.getUserId()
+                , userUtils.getUserId()
                 , String.valueOf(productPlan1.getProductId())
                 , null
                 , null
@@ -83,7 +82,7 @@ public class PlanAction extends BaseController {
         LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCTPLAN
                 , LogUtil.LogAction.EDITED
                 , String.valueOf(plan.getPlanId())
-                , UserUtils.getUserId()
+                , userUtils.getUserId()
                 , String.valueOf(plan.getProductId())
                 , null
                 , productPlan
@@ -115,7 +114,7 @@ public class PlanAction extends BaseController {
         LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCTPLAN
                 , LogUtil.LogAction.DELETED
                 , String.valueOf(planId)
-                , UserUtils.getUserId()
+                , userUtils.getUserId()
                 , String.valueOf(plan.getProductId())
                 , null
                 , plan1
@@ -255,7 +254,7 @@ public class PlanAction extends BaseController {
             LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCTPLAN
                     , LogUtil.LogAction.DELETED
                     , String.valueOf(plan.getProductId())
-                    , UserUtils.getUserId()
+                    , userUtils.getUserId()
                     , String.valueOf(plan.getProductId())
                     , null
                     , null

@@ -17,7 +17,7 @@
     </li>
     <li class="row">
         <div class="col-3 text-align-right">构建者： </div>
-        <div class="col-8" style="padding-left:10px">${build?.buildBuilder?UserUtils.getUserById(build?.buildBuilder)?.orgUserRealName:""}</div>
+        <div class="col-8" style="padding-left:10px">${build?.buildBuilder?userUtils.getUserById(build?.buildBuilder)?.orgUserRealName:""}</div>
     </li>
     <li class="row">
         <div class="col-3 text-align-right">源代码地址： </div>

@@ -26,7 +26,6 @@ import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.sdpm.util.CookieUtils;
 import org.tinygroup.sdpm.util.LogUtil;
 import org.tinygroup.sdpm.util.ProductUtils;
-import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -124,7 +123,7 @@ public class ProjectAction extends BaseController {
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(HttpServletResponse response, Project project,
                        Integer[] linkProduct, Integer[] whiteList) {
-        project.setProjectOpenedBy(UserUtils.getUserId());
+        project.setProjectOpenedBy(userUtils.getUserId());
         project.setProjectWhiteList(StringUtil.join(whiteList, ","));
         project = projectService.addProject(project);
         projectProductService.addProjectLinkToProduct(linkProduct, project.getProjectId());
@@ -218,7 +217,7 @@ public class ProjectAction extends BaseController {
         Project oldProject = projectService.findProjectById(project.getProjectId());
         Integer res = projectService.updateProject(project);
         LogUtil.logWithComment(LogUtil.LogOperateObject.PROJECT, LogUtil.LogAction.DELAYED, oldProject.getProjectId().toString(),
-                UserUtils.getUserId(), null, oldProject.getProjectId().toString(), oldProject, project, content);
+                userUtils.getUserId(), null, oldProject.getProjectId().toString(), oldProject, project, content);
         return resultMap(res > 0 ? true : false, res > 0 ? "延期成功" : "延期失败");
     }
 
@@ -237,7 +236,7 @@ public class ProjectAction extends BaseController {
         project.setProjectStatus(Project.HANGUP);
         Integer res = projectService.updateProject(project);
         LogUtil.logWithComment(LogUtil.LogOperateObject.PROJECT, LogUtil.LogAction.SUSPENDED, oldProject.getProjectId().toString(),
-                UserUtils.getUserId(), null, oldProject.getProjectId().toString(), oldProject, project, content);
+                userUtils.getUserId(), null, oldProject.getProjectId().toString(), oldProject, project, content);
         return resultMap(res > 0 ? true : false, res > 0 ? "挂起成功" : "挂起失败");
     }
 
@@ -257,7 +256,7 @@ public class ProjectAction extends BaseController {
 
         Integer res = projectService.updateProject(project);
         LogUtil.logWithComment(LogUtil.LogOperateObject.PROJECT, LogUtil.LogAction.STARTED, oldProject.getProjectId().toString(),
-                UserUtils.getUserId(), null, oldProject.getProjectId().toString(), oldProject, project, content);
+                userUtils.getUserId(), null, oldProject.getProjectId().toString(), oldProject, project, content);
         return resultMap(res > 0 ? true : false, res > 0 ? "开始成功" : "开始失败");
     }
 
@@ -276,7 +275,7 @@ public class ProjectAction extends BaseController {
         project.setProjectStatus(Project.DOING);
         Integer res = projectService.updateProject(project);
         LogUtil.logWithComment(LogUtil.LogOperateObject.PROJECT, LogUtil.LogAction.ACTIVATED, oldProject.getProjectId().toString(),
-                UserUtils.getUserId(), null, oldProject.getProjectId().toString(), oldProject, project, content);
+                userUtils.getUserId(), null, oldProject.getProjectId().toString(), oldProject, project, content);
         return resultMap(res > 0 ? true : false, res > 0 ? "激活成功" : "激活失败");
     }
 
@@ -295,11 +294,11 @@ public class ProjectAction extends BaseController {
     public Map<String, String> finishSave(Project project, String content) {
         Project oldProject = projectService.findProjectById(project.getProjectId());
         project.setProjectStatus(Project.FINISH);
-        project.setProjectCloseBy(UserUtils.getUserId());
+        project.setProjectCloseBy(userUtils.getUserId());
         project.setProjectCloseDate(new Date());
         Integer res = projectService.updateProject(project);
         LogUtil.logWithComment(LogUtil.LogOperateObject.PROJECT, LogUtil.LogAction.FINISHED, oldProject.getProjectId().toString(),
-                UserUtils.getUserId(), null, oldProject.getProjectId().toString(), oldProject, project, content);
+                userUtils.getUserId(), null, oldProject.getProjectId().toString(), oldProject, project, content);
         return resultMap(res > 0 ? true : false, res > 0 ? "结束成功" : "结束失败");
     }
 

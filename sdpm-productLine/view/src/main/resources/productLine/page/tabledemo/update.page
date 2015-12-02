@@ -127,7 +127,7 @@
             #@skinMinimal("col-8")
                 #@Tcheckboxes("productLineWhiteList" productLine?.productLineWhiteList)
                 ##            待王玲珑改
-##                    #foreach(role : UserUtils.getAllRoleList())
+##                    #foreach(role : userUtils.getAllRoleList())
 ##                        #@Tcheckbox(role?.orgRoleId)${role?.orgRoleName}#end
 ##                    #end
                 #end

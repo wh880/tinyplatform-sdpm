@@ -29,7 +29,6 @@ import org.tinygroup.sdpm.quality.service.inter.TestRunService;
 import org.tinygroup.sdpm.quality.service.inter.TestTaskService;
 import org.tinygroup.sdpm.util.CookieUtils;
 import org.tinygroup.sdpm.util.LogUtil;
-import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -134,7 +133,7 @@ public class TestVersionAction extends BaseController {
             LogUtil.logWithComment(LogUtil.LogOperateObject.TESTTASK,
                     LogUtil.LogAction.OPENED,
                     String.valueOf(testtask.getTestversionId()),
-                    UserUtils.getUserId(),
+                    userUtils.getUserId(),
                     String.valueOf(testtask.getProductId()),
                     String.valueOf(testtask.getProjectId()),
                     null,
@@ -147,7 +146,7 @@ public class TestVersionAction extends BaseController {
             LogUtil.logWithComment(LogUtil.LogOperateObject.TESTTASK,
                     LogUtil.LogAction.EDITED,
                     String.valueOf(testtask.getTestversionId()),
-                    UserUtils.getUserId(),
+                    userUtils.getUserId(),
                     String.valueOf(testtask.getProductId()),
                     String.valueOf(testtask.getProjectId()),
                     testTask,
@@ -408,7 +407,7 @@ public class TestVersionAction extends BaseController {
         LogUtil.logWithComment(LogUtil.LogOperateObject.TESTTASK,
                 LogUtil.LogAction.CLOSED,
                 String.valueOf(qualityTestTask.getTestversionId()),
-                UserUtils.getUserId(),
+                userUtils.getUserId(),
                 String.valueOf(qualityTestTask.getProductId()),
                 String.valueOf(qualityTestTask.getProjectId()),
                 qualityTestTask,
@@ -457,7 +456,7 @@ public class TestVersionAction extends BaseController {
             carrier.put("qualityTestTask.testRunAssignedTo",
                     ConditionUtils.Operate.EQ.getOperate(),
                     ConditionUtils.CommonFieldType.FIELD_OPERATE.getCommonField(),
-                    UserUtils.getUserId());
+                    userUtils.getUserId());
         }
     }
 

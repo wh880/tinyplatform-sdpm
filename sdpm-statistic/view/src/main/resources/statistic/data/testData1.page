@@ -91,7 +91,7 @@
             #set(notSolved=(b?.bugNum-
         (b?.designEd+b?.repeatBug+b?.externalCause+b?.solved+b?.notReproduce+b?.delayResolved+b?.notResolved+b?.toStory)))
             #@tr("text-c")
-            <td >${b?.userId?UserUtils.getUserById(b?.userId)?.orgUserRealName:""}</td>
+            <td >${b?.userId?userUtils.getUserById(b?.userId)?.orgUserRealName:""}</td>
             <td>${notSolved}</td>
             <td >${b?.designEd}</td>
             <td>${b?.repeatBug}</td>

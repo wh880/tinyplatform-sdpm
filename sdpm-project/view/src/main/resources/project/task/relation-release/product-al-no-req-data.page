@@ -13,8 +13,8 @@
     #@td()<a href="${TINY_CONTEXT_PATH +adminPath}/product/page/project/demdtablehref.page">${s?.storyId}</a>#end
     #@td()${getDict("storyPri",s?.storyPri)}#end
     #@td()<a href="${TINY_CONTEXT_PATH +adminPath}/product/page/project/demdtablehref.page">${s?.storyTitle}</a>#end
-    #@td()${s?.storyOpenedBy?UserUtils.getUserById(s?.storyOpenedBy)?.orgUserRealName:""}#end
-    #@td()${s?.storyAssignedTo?UserUtils.getUserById(s?.storyAssignedTo)?.orgUserRealName:""}#end
+    #@td()${s?.storyOpenedBy?userUtils.getUserById(s?.storyOpenedBy)?.orgUserRealName:""}#end
+    #@td()${s?.storyAssignedTo?userUtils.getUserById(s?.storyAssignedTo)?.orgUserRealName:""}#end
     #@td()${s?.storyEstimate}#end
     #@td()${getDict("storyStatus",s?.storyStatus)}#end
     #@td()${getDict("storyStage",s?.storyStage)}#end

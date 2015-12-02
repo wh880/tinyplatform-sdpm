@@ -31,7 +31,6 @@ import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;
 import org.tinygroup.sdpm.system.service.inter.ProfileService;
 import org.tinygroup.sdpm.util.LogUtil;
-import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -147,13 +146,13 @@ public class ProjectBuildAction extends BaseController {
     public String addSave(ProjectBuild build, Model model, UploadProfile uploadProfile) throws IOException {
         ProjectBuild temp;
         if (build.getBuildId() == null) {
-            build.setBuildBuilder(UserUtils.getUserId());
+            build.setBuildBuilder(userUtils.getUserId());
             temp = buildService.addBuild(build);
             processProfile(uploadProfile, temp.getBuildId(), ProfileType.BUILD);
             LogUtil.logWithComment(LogUtil.LogOperateObject.BUILD,
                     LogUtil.LogAction.OPENED,
                     String.valueOf(temp.getBuildId()),
-                    UserUtils.getUserId(),
+                    userUtils.getUserId(),
                     String.valueOf(temp.getBuildProduct()),
                     String.valueOf(temp.getBuildProject()),
                     null,
@@ -165,7 +164,7 @@ public class ProjectBuildAction extends BaseController {
             LogUtil.logWithComment(LogUtil.LogOperateObject.BUILD,
                     LogUtil.LogAction.EDITED,
                     String.valueOf(build.getBuildId()),
-                    UserUtils.getUserId(),
+                    userUtils.getUserId(),
                     String.valueOf(build.getBuildProduct()),
                     String.valueOf(build.getBuildProject()),
                     null,
@@ -185,7 +184,7 @@ public class ProjectBuildAction extends BaseController {
         LogUtil.logWithComment(LogUtil.LogOperateObject.BUILD,
                 LogUtil.LogAction.OPENED,
                 String.valueOf(temp.getBuildId()),
-                UserUtils.getUserId(),
+                userUtils.getUserId(),
                 String.valueOf(temp.getBuildProduct()),
                 String.valueOf(temp.getBuildProject()),
                 null,
@@ -227,7 +226,7 @@ public class ProjectBuildAction extends BaseController {
             LogUtil.logWithComment(LogUtil.LogOperateObject.BUILD,
                     LogUtil.LogAction.DELETED,
                     String.valueOf(list.get(i).getBuildId()),
-                    UserUtils.getUserId(),
+                    userUtils.getUserId(),
                     String.valueOf(list.get(i).getBuildProduct()),
                     String.valueOf(list.get(i).getBuildProject()),
                     null,

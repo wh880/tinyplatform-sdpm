@@ -202,7 +202,7 @@
     <li>
         #@elementItem()
             #@colLabel()由谁创建：#end
-            <p> ${UserUtils.getUserById(story?.storyOpenedBy).orgUserRealName}</p>
+            <p> ${userUtils.getUserById(story?.storyOpenedBy).orgUserRealName}</p>
         #end
     </li>
 

@@ -47,7 +47,6 @@ import org.tinygroup.sdpm.system.service.inter.ProfileService;
 import org.tinygroup.sdpm.util.CookieUtils;
 import org.tinygroup.sdpm.util.LogUtil;
 import org.tinygroup.sdpm.util.ModuleUtil;
-import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -247,7 +246,7 @@ public class BugAction extends BaseController {
                     LogUtil.logWithComment(LogUtil.LogOperateObject.BUG
                             , LogUtil.LogAction.BUGCONFIRMED
                             , String.valueOf(bug.getBugId())
-                            , UserUtils.getUserId()
+                            , userUtils.getUserId()
                             , String.valueOf(bug.getProductId())
                             , String.valueOf(bug.getProjectId())
                             , null
@@ -276,12 +275,12 @@ public class BugAction extends BaseController {
                     bug.setBugStatus("2");
                     bug.setBugResolution(resolutionType);
                     bug.setBugResolvedDate(new Date());
-                    bug.setBugResolvedBy(UserUtils.getUserId());
+                    bug.setBugResolvedBy(userUtils.getUserId());
                     bugService.updateBug(bug);
                     LogUtil.logWithComment(LogUtil.LogOperateObject.BUG
                             , LogUtil.LogAction.RESOLVED
                             , String.valueOf(bug.getBugId())
-                            , UserUtils.getUserId()
+                            , userUtils.getUserId()
                             , String.valueOf(bug.getProductId())
                             , String.valueOf(bug.getProjectId())
                             , null
@@ -311,7 +310,7 @@ public class BugAction extends BaseController {
                 LogUtil.logWithComment(LogUtil.LogOperateObject.BUG
                         , LogUtil.LogAction.ASSIGNED
                         , String.valueOf(bug.getBugId())
-                        , UserUtils.getUserId()
+                        , userUtils.getUserId()
                         , String.valueOf(bug.getProductId())
                         , String.valueOf(bug.getProjectId())
                         , null
@@ -338,7 +337,7 @@ public class BugAction extends BaseController {
         LogUtil.logWithComment(LogUtil.LogOperateObject.BUG
                 , LogUtil.LogAction.BUGCONFIRMED
                 , String.valueOf(bug.getBugId())
-                , UserUtils.getUserId()
+                , userUtils.getUserId()
                 , String.valueOf(bug.getProductId())
                 , String.valueOf(bug.getProjectId())
                 , null
@@ -355,7 +354,7 @@ public class BugAction extends BaseController {
         LogUtil.logWithComment(LogUtil.LogOperateObject.BUG
                 , LogUtil.LogAction.COMMENTED
                 , String.valueOf(bugId)
-                , UserUtils.getUserId()
+                , userUtils.getUserId()
                 , String.valueOf(bug.getProductId())
                 , String.valueOf(bug.getProjectId())
                 , null
@@ -385,7 +384,7 @@ public class BugAction extends BaseController {
         LogUtil.logWithComment(LogUtil.LogOperateObject.BUG
                 , LogUtil.LogAction.ASSIGNED
                 , String.valueOf(bug.getBugId())
-                , UserUtils.getUserId()
+                , userUtils.getUserId()
                 , String.valueOf(bug.getProductId())
                 , String.valueOf(bug.getProjectId())
                 , null
@@ -437,7 +436,7 @@ public class BugAction extends BaseController {
         if (qualityBug.getBugAssignedTo() != bug.getBugAssignedTo()) {
             bug.setBugAssignedDate(new Date());
         }
-        bug.setBugResolvedBy(UserUtils.getUserId() != null ? UserUtils.getUserId() : "0");
+        bug.setBugResolvedBy(userUtils.getUserId() != null ? userUtils.getUserId() : "0");
         bug.setBugStatus("2");
         bugService.updateBug(bug);
         processProfile(uploadProfile, bug.getBugId(), ProfileType.BUG);
@@ -445,7 +444,7 @@ public class BugAction extends BaseController {
         LogUtil.logWithComment(LogUtil.LogOperateObject.BUG
                 , LogUtil.LogAction.RESOLVED
                 , String.valueOf(bug.getBugId())
-                , UserUtils.getUserId()
+                , userUtils.getUserId()
                 , String.valueOf(bug.getProductId())
                 , String.valueOf(bug.getProjectId())
                 , null
@@ -467,7 +466,7 @@ public class BugAction extends BaseController {
     @RequestMapping("/close")
     public String close(QualityBug bug, SystemAction systemAction, HttpServletRequest request) {
 
-        bug.setBugClosedBy(UserUtils.getUserId() != null ? UserUtils.getUserId() : "0");
+        bug.setBugClosedBy(userUtils.getUserId() != null ? userUtils.getUserId() : "0");
         bug.setBugClosedDate(new Date());
         bug.setBugStatus("3");
         bugService.updateBug(bug);
@@ -476,7 +475,7 @@ public class BugAction extends BaseController {
         LogUtil.logWithComment(LogUtil.LogOperateObject.BUG
                 , LogUtil.LogAction.CLOSED
                 , String.valueOf(bug.getBugId())
-                , UserUtils.getUserId()
+                , userUtils.getUserId()
                 , String.valueOf(bug.getProductId())
                 , String.valueOf(bug.getProjectId())
                 , null
@@ -506,7 +505,7 @@ public class BugAction extends BaseController {
 
         QualityBug qualityBug = bugService.findById(bug.getBugId());
 
-        bug.setBugLastEditedBy(UserUtils.getUserId() != null ? UserUtils.getUserId() : "0");
+        bug.setBugLastEditedBy(userUtils.getUserId() != null ? userUtils.getUserId() : "0");
         bug.setBugLastEditedDate(new Date());
         bugService.updateBug(bug);
 
@@ -515,7 +514,7 @@ public class BugAction extends BaseController {
         LogUtil.logWithComment(LogUtil.LogOperateObject.BUG
                 , LogUtil.LogAction.EDITED
                 , String.valueOf(bug.getBugId())
-                , UserUtils.getUserId()
+                , userUtils.getUserId()
                 , String.valueOf(bug.getProductId())
                 , String.valueOf(bug.getProjectId())
                 , qualityBug
@@ -653,13 +652,13 @@ public class BugAction extends BaseController {
         if (bug.getStoryId() != null) {
             bug.setStoryVersion(storyService.findStory(bug.getStoryId()).getStoryVersion());
         }
-        bug.setBugOpenedBy(UserUtils.getUserId() != null ? UserUtils.getUserId() : "0");
+        bug.setBugOpenedBy(userUtils.getUserId() != null ? userUtils.getUserId() : "0");
         bug = bugService.addBug(bug);
         processProfile(uploadProfile, bug.getBugId(), ProfileType.BUG);
         LogUtil.logWithComment(LogUtil.LogOperateObject.BUG
                 , LogUtil.LogAction.OPENED
                 , String.valueOf(bug.getBugId())
-                , UserUtils.getUserId()
+                , userUtils.getUserId()
 
                 , String.valueOf(bug.getProductId())
                 , String.valueOf(bug.getProjectId())
@@ -683,7 +682,7 @@ public class BugAction extends BaseController {
         bug.setDeleted(0);
         bug.setBugOpenedDate(new Date());
         bug.setBugActivatedCount(0);
-        bug.setBugOpenedBy(UserUtils.getUserId() != null ? UserUtils.getUserId() : "0");
+        bug.setBugOpenedBy(userUtils.getUserId() != null ? userUtils.getUserId() : "0");
         if (bug.getStoryId() != null) {
             bug.setStoryVersion(storyService.findStory(bug.getStoryId()).getStoryVersion());
         }
@@ -694,7 +693,7 @@ public class BugAction extends BaseController {
         LogUtil.logWithComment(LogUtil.LogOperateObject.BUG
                 , LogUtil.LogAction.OPENED
                 , String.valueOf(qbug.getBugId())
-                , UserUtils.getUserId()
+                , userUtils.getUserId()
                 , String.valueOf(bug.getProductId())
                 , String.valueOf(bug.getProjectId())
                 , null
@@ -746,7 +745,7 @@ public class BugAction extends BaseController {
             LogUtil.logWithComment(LogUtil.LogOperateObject.BUG
                     , LogUtil.LogAction.DELETED
                     , String.valueOf(bug.getBugId())
-                    , UserUtils.getUserId()
+                    , userUtils.getUserId()
                     , String.valueOf(bug.getProductId())
                     , String.valueOf(bug.getProjectId())
                     , null
@@ -872,7 +871,7 @@ public class BugAction extends BaseController {
         LogUtil.logWithComment(LogUtil.LogOperateObject.BUG
                 , LogUtil.LogAction.ACTIVATED
                 , String.valueOf(bug.getBugId())
-                , UserUtils.getUserId()
+                , userUtils.getUserId()
                 , String.valueOf(bug.getProductId())
                 , String.valueOf(bug.getProjectId())
                 , null

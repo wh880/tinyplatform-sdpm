@@ -21,7 +21,7 @@
 <input type="hidden" name="lastAddress" value=""/>
 <div class="pageleftpart">
     <div class="infoContent">
-        <input type="hidden" name="taskOpenBy" value="${UserUtils.getUserId()}"/>
+        <input type="hidden" name="taskOpenBy" value="${userUtils.getUserId()}"/>
 
         <p class="titleName">建任务</p>
         #@elementItem()

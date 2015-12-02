@@ -23,7 +23,7 @@
         #@tbody()
             #foreach(p:bugAss)
             #@tr("text-c")
-            <td rowspan=${p?.value.size()+1}>${p?.key?.userId?UserUtils.getUserById(p?.key?.userId)?.orgUserRealName:""}</td>
+            <td rowspan=${p?.value.size()+1}>${p?.key?.userId?userUtils.getUserById(p?.key?.userId)?.orgUserRealName:""}</td>
             <td rowspan=${p?.value.size()+1}>${p?.key?.bugNum}</td>
                #if(!p.value)
                    <td></td>

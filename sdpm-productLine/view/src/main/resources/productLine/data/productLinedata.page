@@ -9,9 +9,9 @@
     #end
     #@td()${productLine?.productLineCode}#end
 
-    #@td()<span class="${productLine?.productLineOwner==UserUtils.getUserId()?'c-red':''}">${productLine?.productLineOwner?UserUtils.getUserById(productLine?.productLineOwner)?.orgUserRealName:""}</span>#end
-    #@td()<span class="${productLine?.productLineQualityManager==UserUtils.getUserId()?'c-red':''}">${productLine?.productLineQualityManager?UserUtils.getUserById(productLine?.productLineQualityManager)?.orgUserRealName:""}</span>#end
-    #@td()<span class="${productLine?.productLineDeliveryManager==UserUtils.getUserId()?'c-red':''}">${productLine?.productLineDeliveryManager?UserUtils.getUserById(productLine?.productLineDeliveryManager)?.orgUserRealName:""}</span>#end
+    #@td()<span class="${productLine?.productLineOwner==userUtils.getUserId()?'c-red':''}">${productLine?.productLineOwner?userUtils.getUserById(productLine?.productLineOwner)?.orgUserRealName:""}</span>#end
+    #@td()<span class="${productLine?.productLineQualityManager==userUtils.getUserId()?'c-red':''}">${productLine?.productLineQualityManager?userUtils.getUserById(productLine?.productLineQualityManager)?.orgUserRealName:""}</span>#end
+    #@td()<span class="${productLine?.productLineDeliveryManager==userUtils.getUserId()?'c-red':''}">${productLine?.productLineDeliveryManager?userUtils.getUserById(productLine?.productLineDeliveryManager)?.orgUserRealName:""}</span>#end
     #@td()
         #foreach(m:menuManager.getScopeMenus("productLine-overview"))
             #set(url=eval(m.href))

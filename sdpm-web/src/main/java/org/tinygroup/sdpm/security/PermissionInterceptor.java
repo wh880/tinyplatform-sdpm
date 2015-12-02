@@ -7,6 +7,7 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.web.Servlets;
@@ -24,6 +25,8 @@ import java.lang.reflect.Method;
 @Aspect
 @Service
 public class PermissionInterceptor {
+    @Autowired
+    MenuPermissionSubject subject;
 
     @Before("execution(* org.tinygroup.sdpm.action.project.*.*(..))")
     public void projectInterceptor(JoinPoint joinPoint) {
@@ -32,7 +35,7 @@ public class PermissionInterceptor {
         if (StringUtil.isBlank(projectId)) {
             return;
         }
-        MenuPermissionSubject subject = MenuPermissionSubject.projectBuilder(Integer.valueOf(projectId));
+        subject.setProjectId(Integer.valueOf(projectId));
         interceptor(joinPoint, subject);
     }
 
@@ -43,7 +46,7 @@ public class PermissionInterceptor {
         if (StringUtil.isBlank(projectId)) {
             return;
         }
-        MenuPermissionSubject subject = MenuPermissionSubject.productBuilder(Integer.valueOf(projectId));
+        subject.setProductId(Integer.valueOf(projectId));
         interceptor(joinPoint, subject);
     }
 

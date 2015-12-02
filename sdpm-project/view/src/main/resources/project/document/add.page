@@ -41,7 +41,7 @@
 #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/project/doc/save" "post" {"class":"edit","enctype":
     "multipart/form-data"})
 <input name="docId" type="hidden" value="${doc?.docId}"/>
-<input type="hidden" name="docAddedBy" value="${UserUtils.getUserId()}"/>
+<input type="hidden" name="docAddedBy" value="${userUtils.getUserId()}"/>
 <div style="width:100%">
     <div class="infoContent">
         <p class="titleName">新建文档</p>

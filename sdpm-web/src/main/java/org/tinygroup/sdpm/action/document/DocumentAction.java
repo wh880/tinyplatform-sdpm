@@ -25,7 +25,10 @@ import org.tinygroup.sdpm.project.service.inter.ProjectProductService;
 import org.tinygroup.sdpm.system.dao.pojo.ProfileType;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
-import org.tinygroup.sdpm.util.*;
+import org.tinygroup.sdpm.util.CmsUtils;
+import org.tinygroup.sdpm.util.CookieUtils;
+import org.tinygroup.sdpm.util.LogUtil;
+import org.tinygroup.sdpm.util.ProductUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -264,7 +267,7 @@ public class DocumentAction extends BaseController {
                                String lastAddress,
                                UploadProfile uploadProfile) throws IOException {
         if ("save".equals(type)) {
-            doc.setDocAddedBy(UserUtils.getUserId());
+            doc.setDocAddedBy(userUtils.getUserId());
             DocumentDoc document = docservice.createNewDoc(doc);
 
             processProfile(uploadProfile, doc.getDocId(), ProfileType.DOCUMENT);
@@ -272,7 +275,7 @@ public class DocumentAction extends BaseController {
             LogUtil.logWithComment(LogUtil.LogOperateObject.DOC,
                     LogUtil.LogAction.CREATED,
                     String.valueOf(document.getDocId()),
-                    UserUtils.getUserId(),
+                    userUtils.getUserId(),
                     String.valueOf(document.getDocProduct()),
                     String.valueOf(document.getDocProject()),
                     null,
@@ -284,7 +287,7 @@ public class DocumentAction extends BaseController {
             LogUtil.logWithComment(LogUtil.LogOperateObject.DOC,
                     LogUtil.LogAction.EDITED,
                     String.valueOf(document.getDocId()),
-                    UserUtils.getUserId(),
+                    userUtils.getUserId(),
                     String.valueOf(document.getDocProduct()),
                     String.valueOf(document.getDocProject()),
                     document,

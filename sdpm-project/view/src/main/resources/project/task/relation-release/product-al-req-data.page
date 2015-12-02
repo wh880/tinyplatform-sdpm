@@ -17,8 +17,8 @@
         #@td()<a
                 href="${TINY_CONTEXT_PATH+adminPath}/product/storySpec/find/productDemandDetail?storyId=${s?.storyId}">${s
             ?.storyTitle}#end
-        #@td()${s?.storyOpenedBy?UserUtils.getUserById(s?.storyOpenedBy)?.orgUserRealName:""}#end
-        #@td()${s?.storyAssignedTo?UserUtils.getUserById(s?.storyAssignedTo)?.orgUserRealName:""}#end
+        #@td()${s?.storyOpenedBy?userUtils.getUserById(s?.storyOpenedBy)?.orgUserRealName:""}#end
+        #@td()${s?.storyAssignedTo?userUtils.getUserById(s?.storyAssignedTo)?.orgUserRealName:""}#end
         #@td()${s?.storyEstimate}#end
         #@td()${getDict("storyStatus",s?.storyStatus)}#end
         #@td()${getDict("storyStage",s?.storyStage)}#end

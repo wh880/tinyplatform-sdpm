@@ -24,8 +24,8 @@
 							    		#@td()	${project?.projectId}	#end
 							    		#@td()  ${project?.projectName} #end
 							    		#@td()  ${getDict("projectStatus",project?.projectStatus)} #end
-							    		#@td()  ${project?.projectOpenedBy?UserUtils.getUserById(project?.projectOpenedBy).orgUserRealName:""} #end
-							    		#@td()  ${project?.projectCloseBy?UserUtils.getUserById(project?.projectCloseBy).orgUserRealName:"" }#end
+							    		#@td()  ${project?.projectOpenedBy?userUtils.getUserById(project?.projectOpenedBy).orgUserRealName:""} #end
+							    		#@td()  ${project?.projectCloseBy?userUtils.getUserById(project?.projectCloseBy).orgUserRealName:"" }#end
 						    		#end
 						    	#end
 					    	
@@ -52,10 +52,10 @@
 						    			#@td()	${bug?.bugId}	#end
 							    		#@td()  ${bug?.bugTitle} #end
 							    		#@td()  ${getDict("bugStatus",bug?.bugStatus)} #end
-							    		#@td()  ${bug?.bugOpenedBy?UserUtils.getUserById(bug?.bugOpenedBy).orgUserRealName:"" } #end
-							    		#@td() ${bug?.bugResolvedBy?UserUtils.getUserById(bug?.bugResolvedBy).orgUserRealName:"" } #end
+							    		#@td()  ${bug?.bugOpenedBy?userUtils.getUserById(bug?.bugOpenedBy).orgUserRealName:"" } #end
+							    		#@td() ${bug?.bugResolvedBy?userUtils.getUserById(bug?.bugResolvedBy).orgUserRealName:"" } #end
 							    		#@td() ${getDict("bugResolution",bug?.bugResolution)} #end
-							    		#@td() ${bug?.bugLastEditedBy?UserUtils.getUserById(bug?.bugLastEditedBy).orgUserRealName:"" } #end
+							    		#@td() ${bug?.bugLastEditedBy?userUtils.getUserById(bug?.bugLastEditedBy).orgUserRealName:"" } #end
 						    		#end
 					    		#end
 					    	
@@ -81,8 +81,8 @@
 						    			#@td()	${testCase?.caseId}	#end
 							    		#@td()  ${testCase?.caseTitle} #end
 							    		#@td() ${getDict("caseStatus",testCase?.caseStatus)} #end
-							    		#@td()  ${testCase?.caseOpenedBy?UserUtils.getUserById(testCase?.caseOpenedBy).orgUserRealName:"" } #end
-							    		#@td() ${testCase?.caseLastEditedBy?UserUtils.getUserById(testCase?.caseLastEditedBy).orgUserRealName:"" } #end
+							    		#@td()  ${testCase?.caseOpenedBy?userUtils.getUserById(testCase?.caseOpenedBy).orgUserRealName:"" } #end
+							    		#@td() ${testCase?.caseLastEditedBy?userUtils.getUserById(testCase?.caseLastEditedBy).orgUserRealName:"" } #end
 						    		#end
 					    		#end
 					    		

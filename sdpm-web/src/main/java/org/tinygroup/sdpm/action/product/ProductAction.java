@@ -15,7 +15,6 @@ import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.RoleService;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
-import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.sdpm.productLine.service.ProductLineService;
@@ -29,9 +28,6 @@ import org.tinygroup.sdpm.quality.dao.pojo.QualityTestCase;
 import org.tinygroup.sdpm.quality.service.inter.TestCaseService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.dao.pojo.SystemHistory;
-import org.tinygroup.sdpm.system.service.inter.ActionService;
-import org.tinygroup.sdpm.system.service.inter.HistoryService;
-import org.tinygroup.sdpm.util.CookieUtils;
 import org.tinygroup.sdpm.util.LogUtil;
 import org.tinygroup.sdpm.util.ProductUtils;
 import org.tinygroup.sdpm.util.UserUtils;
@@ -105,7 +101,7 @@ public class ProductAction extends BaseController {
     public String save(Product product, SystemAction systemAction, HttpServletRequest request, String lastAddress) {
 
 
-        product.setProductCreatedBy(UserUtils.getUserId());
+        product.setProductCreatedBy(userUtils.getUserId());
         product.setProductCreatedDate(new Date());
         product.setProductStatus("0");
 
@@ -115,7 +111,7 @@ public class ProductAction extends BaseController {
         LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCT,
                 LogUtil.LogAction.OPENED,
                 String.valueOf(product.getProductId()),
-                UserUtils.getUserId(),
+                userUtils.getUserId(),
                 String.valueOf(product.getProductId()),
                 null,
                 null,
@@ -146,7 +142,7 @@ public class ProductAction extends BaseController {
         LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCT,
                 LogUtil.LogAction.EDITED,
                 String.valueOf(product.getProductId()),
-                UserUtils.getUserId(),
+                userUtils.getUserId(),
                 String.valueOf(product1.getProductId()),
                 null,
                 product1,
@@ -193,7 +189,7 @@ public class ProductAction extends BaseController {
         LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCT,
                 LogUtil.LogAction.DELETED,
                 String.valueOf(productId),
-                UserUtils.getUserId(),
+                userUtils.getUserId(),
                 String.valueOf(product1.getProductId()),
                 null,
                 product1,
@@ -305,7 +301,7 @@ public class ProductAction extends BaseController {
     public String addpro(
             @PathVariable(value = "forward") String forward, HttpServletRequest request, Model model) {
         if ("addproduct".equals(forward)) {
-            List<ProductLine> productLineList = productLineService.getUserProductLine(UserUtils.getUserId());
+            List<ProductLine> productLineList = productLineService.getUserProductLine(userUtils.getUserId());
             model.addAttribute("productLineList",productLineList);
             return "/product/page/tabledemo/addProduct";
         } else if ("allproduct".equals(forward)) {
@@ -512,7 +508,7 @@ public class ProductAction extends BaseController {
             result.add(productService.findProduct(Integer.parseInt(initKey)));
             return result;
         }
-        List<Product> products = productService.getProductByUser(UserUtils.getUserId(),0,null);
+        List<Product> products = productService.getProductByUser(userUtils.getUserId(),0,null);
         Integer[] pIds = new Integer[products.size()];
         for(int i =0; i<pIds.length; i++){
             pIds[i] = products.get(i).getProductId();

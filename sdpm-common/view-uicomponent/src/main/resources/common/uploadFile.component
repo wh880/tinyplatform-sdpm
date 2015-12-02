@@ -17,7 +17,7 @@
 #end
 
 #macro mulUploadFile(fileList)#set(ItemIdOrder=1,mulUploadFileTableId=fmt("tid%d",rand()))
-    #if(UserUtils.hasMenu("upload-file"))
+    #if(userUtils.hasMenu("upload-file"))
 <table class="table itemlist-table " id="${mulUploadFileTableId}">
     <thead>
     <tr>

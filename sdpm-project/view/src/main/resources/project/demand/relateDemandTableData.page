@@ -15,7 +15,7 @@
 	#@td()${s?.productName}#end
 	#@td()${s?.storyTitle}#end
 	#@td()${s?.planName}#end
-	#@td()${UserUtils.getUserById(s?.storyOpenedBy).orgUserRealName}#end
+	#@td()${userUtils.getUserById(s?.storyOpenedBy).orgUserRealName}#end
 	#@td()${s?.storyEstimate}#end
 #end
 #end

@@ -49,7 +49,7 @@
             #@tr("text-c")
             <td rowspan=${p?.value.size()+1}> ${p?.key?.productName}</td>
             <td rowspan=${p?.value.size()+1}>${p
-                ?.key?.productCreatedBy?UserUtils.getUserById(p?.key?.productCreatedBy)?.orgUserRealName:""}
+                ?.key?.productCreatedBy?userUtils.getUserById(p?.key?.productCreatedBy)?.orgUserRealName:""}
             </td>
                 #if(!p.value)
                 <td></td>

@@ -216,7 +216,7 @@
     #@formControlDiv("col-4")
         <div class="col-7">
         #@Tselect2F()
-            #Tselect2Ajax("storyReviewedBy" UserUtils.getUserId() TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
+            #Tselect2Ajax("storyReviewedBy" userUtils.getUserId() TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
             {"dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询评审人","nullmsg":"请选择评审人！","datatype":"*"})
             #@Tselect2Fix()
                 #set(m=menuManager.getMenu("organizationAddUser"))

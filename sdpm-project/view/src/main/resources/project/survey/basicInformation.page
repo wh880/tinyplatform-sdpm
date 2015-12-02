@@ -36,25 +36,25 @@
                 #@tr()
                     #@td()项目负责人#end
                     #@td()
-                        ${project?.projectPm==null?"":UserUtils.getUserById(project?.projectPm)?.orgUserRealName}
+                        ${project?.projectPm==null?"":userUtils.getUserById(project?.projectPm)?.orgUserRealName}
                     #end
                 #end
                 #@tr()
                     #@td()产品负责人#end
                     #@td()
-                        ${project?.projectPo==null?"":UserUtils.getUserById(project?.projectPo)?.orgUserRealName}
+                        ${project?.projectPo==null?"":userUtils.getUserById(project?.projectPo)?.orgUserRealName}
                     #end
                 #end
                 #@tr()
                     #@td()测试负责人#end
                     #@td()
-                        ${project?.projectQd==null?"":UserUtils.getUserById(project?.projectQd)?.orgUserRealName}
+                        ${project?.projectQd==null?"":userUtils.getUserById(project?.projectQd)?.orgUserRealName}
                     #end
                 #end
                 #@tr()
                     #@td()发布负责人#end
                     #@td()
-                        ${project?.projectRd==null?"":UserUtils.getUserById(project?.projectRd)?.orgUserRealName}
+                        ${project?.projectRd==null?"":userUtils.getUserById(project?.projectRd)?.orgUserRealName}
                     #end
                 #end
                 #@tr()

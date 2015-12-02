@@ -29,16 +29,16 @@
             #@td("nowrap")${formatdate(t?.taskDeadLine,"yyyy-MM-dd")}#end
 
             #@td("nowrap")
-                #if(t?.taskAssignedTo ==UserUtils.getUserId())
+                #if(t?.taskAssignedTo ==userUtils.getUserId())
                     <span class="c-red">
-                    ${t?.taskAssignedTo==null?"":UserUtils.getUserById(t.taskAssignedTo).orgUserRealName}
+                    ${t?.taskAssignedTo==null?"":userUtils.getUserById(t.taskAssignedTo).orgUserRealName}
                     </span>
                 #else
-                    ${t?.taskAssignedTo==null?"":UserUtils.getUserById(t.taskAssignedTo).orgUserRealName}
+                    ${t?.taskAssignedTo==null?"":userUtils.getUserById(t.taskAssignedTo).orgUserRealName}
                 #end
             #end
 
-            #@td("nowrap")${t?.taskFinishedBy==null?"":UserUtils.getUserById(t.taskFinishedBy).orgUserRealName}#end
+            #@td("nowrap")${t?.taskFinishedBy==null?"":userUtils.getUserById(t.taskFinishedBy).orgUserRealName}#end
 
             #@td()${t.taskEstimate}#end
 
