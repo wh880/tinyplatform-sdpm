@@ -39,7 +39,6 @@ import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.sdpm.system.service.inter.ProfileService;
 import org.tinygroup.sdpm.util.CookieUtils;
 import org.tinygroup.sdpm.util.LogUtil;
-import org.tinygroup.sdpm.util.ProductUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -948,6 +947,6 @@ public class StoryAction extends BaseController {
             result.add(storyService.findStory(initKey));
             return result;
         }
-        return storyService.storyInCondition(key, productId == null ? Integer.parseInt(CookieUtils.getCookie(request, ProductUtils.COOKIE_PRODUCT_ID)) : productId);
+        return storyService.storyInCondition(key, productId == null ? Integer.parseInt(CookieUtils.getCookie(request, productUtils.COOKIE_PRODUCT_ID)) : productId);
     }
 }

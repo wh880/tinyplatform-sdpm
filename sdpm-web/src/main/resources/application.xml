@@ -480,8 +480,8 @@
         <template-function name="typeInfoFunction"></template-function>
         <template-function name="dictFunction"></template-function>
         <template-function name="stdFunction"></template-function>
-        <!--用户信息工具-->
-        <static-class name="UserUtils" class="org.tinygroup.sdpm.util.UserUtils"></static-class>
+        <!--&lt;!&ndash;用户信息工具&ndash;&gt;-->
+        <!--<static-class name="UserUtils" class="org.tinygroup.sdpm.util.UserUtils"></static-class>-->
         <!--数据信息获取工具-->
         <static-class name="CmsUtils" class="org.tinygroup.sdpm.util.CmsUtils"></static-class>
         <static-class name="ProjectUtils" class="org.tinygroup.sdpm.util.ProjectOperate"></static-class>

@@ -29,7 +29,6 @@ import org.tinygroup.sdpm.quality.service.inter.TestCaseService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.dao.pojo.SystemHistory;
 import org.tinygroup.sdpm.util.LogUtil;
-import org.tinygroup.sdpm.util.ProductUtils;
 import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -91,7 +90,7 @@ public class ProductAction extends BaseController {
     @RequestMapping("")
     public String productAction(@CookieValue(value = "cookieProductLineId", defaultValue = "0") String cookieProductLineId, HttpServletResponse response, HttpServletRequest request) {
         if ("0".equals(cookieProductLineId)) {
-            ProductUtils.prepareForFirst(response);
+            productUtils.prepareForFirst(response);
         }
         return "redirect:" + adminPath + "/product/story?choose=1" + (request.getQueryString() == null? "" : ("&" + request.getQueryString()));
     }
@@ -106,8 +105,8 @@ public class ProductAction extends BaseController {
         product.setProductStatus("0");
 
         product = productService.addProduct(product);
-        ProductUtils.removeProductList();
-        ProductUtils.removeAllProductListByUser();
+        productUtils.removeProductList();
+        productUtils.removeAllProductListByUser();
         LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCT,
                 LogUtil.LogAction.OPENED,
                 String.valueOf(product.getProductId()),
@@ -129,13 +128,13 @@ public class ProductAction extends BaseController {
     public String update(Product product, HttpServletRequest request, SystemAction systemAction) throws IOException {
         Product product1 = productService.findProduct(product.getProductId());
         productService.updateProduct(product);
-        ProductUtils.removeProductList();
-        ProductUtils.removeProductList(String.valueOf(
+        productUtils.removeProductList();
+        productUtils.removeProductList(String.valueOf(
                 product.getProductLineId().equals(product1.getProductId()) ?
                         product1.getProductLineId() : product.getProductLineId()
         ));
-        ProductUtils.removeAllProductListByUser();
-        ProductUtils.removeProductListByProductLineUser(String.valueOf(
+        productUtils.removeAllProductListByUser();
+        productUtils.removeProductListByProductLineUser(String.valueOf(
                 product.getProductLineId().equals(product1.getProductId()) ?
                         product1.getProductLineId() : product.getProductLineId()
         ));
@@ -156,8 +155,8 @@ public class ProductAction extends BaseController {
     public String edit(Product product, HttpServletRequest request, String lastAddress) {
 
         productService.updateProduct(product);
-        ProductUtils.removeProductList();
-        ProductUtils.removeProductList(String.valueOf(product.getProductLineId()));
+        productUtils.removeProductList();
+        productUtils.removeProductList(String.valueOf(product.getProductLineId()));
         if(!StringUtil.isBlank(lastAddress)){
             return "redirect:"+lastAddress;
         }
@@ -182,10 +181,12 @@ public class ProductAction extends BaseController {
         Product product1 = productService.findProduct(productId);
         productService.deleteProduct(productId);
         Product product = productService.findProduct(productId);
-        ProductUtils.removeProductList();
-        ProductUtils.removeProductList(String.valueOf(product.getProductLineId()));
-        ProductUtils.removeAllProductListByUser();
-        ProductUtils.removeProductListByProductLineUser(String.valueOf(product1.getProductLineId()));
+/*
+        productUtils.removeProductList();
+        productUtils.removeProductList(String.valueOf(product.getProductLineId()));
+        productUtils.removeAllProductListByUser();
+        productUtils.removeProductListByProductLineUser(String.valueOf(product1.getProductLineId()));
+*/
         LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCT,
                 LogUtil.LogAction.DELETED,
                 String.valueOf(productId),
@@ -289,7 +290,7 @@ public class ProductAction extends BaseController {
     @ResponseBody
     @RequestMapping("/productList")
     public List<Product> findProduct(Product product, String type, String productLineId) {
-        if ("user".equals(type)) return ProductUtils.getProductListByProductLineUser(productLineId);
+        if ("user".equals(type)) return productUtils.getProductListByProductLineUser(productLineId);
 
         List<Product> list = productService.findProductList(product);
 

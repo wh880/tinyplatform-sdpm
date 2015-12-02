@@ -14,7 +14,6 @@ import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.util.CookieUtils;
 import org.tinygroup.sdpm.util.LogUtil;
-import org.tinygroup.sdpm.util.ProductUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -153,7 +152,7 @@ public class PlanAction extends BaseController {
                           HttpServletRequest request) {
         ProductPlan plan = null;
         if (no != null) {
-            Integer cookieProductId = Integer.parseInt(CookieUtils.getCookie(request, ProductUtils.COOKIE_PRODUCT_ID));
+            Integer cookieProductId = Integer.parseInt(CookieUtils.getCookie(request, productUtils.COOKIE_PRODUCT_ID));
             if (cookieProductId == null) {
                 return notFoundView();
             }

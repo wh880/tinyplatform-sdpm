@@ -39,7 +39,7 @@ public class CmsUtils {
     public static List<DocumentDocLib> getDocLibList() {
         List<DocumentDocLib> libList = (List<DocumentDocLib>) CacheUtils.get(CMS_CACHE, CMS_CACHE_DOC_LIB_LIST);
         if (libList == null) {
-            libList = docService.findDoclibList(null);
+            libList = docService.findDocLibList(null);
             CacheUtils.put(CMS_CACHE, CMS_CACHE_DOC_LIB_LIST, libList);
         }
         return libList;

@@ -20,6 +20,7 @@ import org.tinygroup.sdpm.system.dao.pojo.ProfileType;
 import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;
 import org.tinygroup.sdpm.system.service.inter.LogService;
 import org.tinygroup.sdpm.system.service.inter.ProfileService;
+import org.tinygroup.sdpm.util.ProductUtils;
 import org.tinygroup.sdpm.util.ProjectOperate;
 import org.tinygroup.sdpm.util.UserUtils;
 
@@ -40,6 +41,8 @@ public abstract class BaseController {
     protected ProjectOperate projectOperate;
     @Autowired
     protected UserUtils userUtils;
+    @Autowired
+    protected ProductUtils productUtils;
 
     /**
      * 管理基础路径

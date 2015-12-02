@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.util.CookieUtils;
-import org.tinygroup.sdpm.util.ProductUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,8 +23,8 @@ public class QualityAction extends BaseController {
 
     @RequestMapping("")
     public String qualityAction(@CookieValue(value = "qualityProductId", defaultValue = "0") String qualityProductId, HttpServletRequest request, HttpServletResponse response) {
-        if ("0".equals(qualityProductId) && ProductUtils.getAllProductListByUser().size() > 0) {
-            CookieUtils.setCookie(response, "qualityProductId", String.valueOf(ProductUtils.getAllProductListByUser().get(0).getProductId()));
+        if ("0".equals(qualityProductId) && productUtils.getAllProductListByUser().size() > 0) {
+            CookieUtils.setCookie(response, "qualityProductId", String.valueOf(productUtils.getAllProductListByUser().get(0).getProductId()));
         }
         return "redirect:/a/quality/bug?status=tbugstatus" + (request.getQueryString() == null ? "" : ("&" + request.getQueryString()));
 

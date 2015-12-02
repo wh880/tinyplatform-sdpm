@@ -23,7 +23,6 @@ import org.tinygroup.sdpm.system.service.inter.ProfileService;
 import org.tinygroup.sdpm.util.CookieUtils;
 import org.tinygroup.sdpm.util.ExportUtils;
 import org.tinygroup.sdpm.util.LogUtil;
-import org.tinygroup.sdpm.util.ProductUtils;
 import org.tinygroup.template.TemplateContext;
 import org.tinygroup.template.TemplateException;
 import org.tinygroup.template.impl.TemplateContextDefault;
@@ -173,7 +172,7 @@ public class ReleaseAction extends BaseController {
                           HttpServletRequest request) {
 
         if(no!=null){
-            Integer cookieProductId = Integer.parseInt(CookieUtils.getCookie(request, ProductUtils.COOKIE_PRODUCT_ID));
+            Integer cookieProductId = Integer.parseInt(CookieUtils.getCookie(request, productUtils.COOKIE_PRODUCT_ID));
             if(cookieProductId==null){
                 return notFoundView();
             }

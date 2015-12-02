@@ -25,7 +25,6 @@ import org.tinygroup.sdpm.project.service.inter.ProjectProductService;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.sdpm.util.CookieUtils;
 import org.tinygroup.sdpm.util.LogUtil;
-import org.tinygroup.sdpm.util.ProductUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -180,7 +179,7 @@ public class ProjectAction extends BaseController {
         String productIds = Collections3.extractToString(projectProductList, "productId", ",");
         model.addAttribute("productIds", productIds);
         model.addAttribute("teamList", userService.findTeamUserListByProjectId(projectId));
-        model.addAttribute("productList", ProductUtils.getAllProductListByUser());
+        model.addAttribute("productList", productUtils.getAllProductListByUser());
         return "project/survey/edit";
     }
 

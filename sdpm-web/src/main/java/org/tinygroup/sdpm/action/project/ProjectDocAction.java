@@ -105,7 +105,7 @@ public class ProjectDocAction extends BaseController {
         List<Product> listProduct = productService.findProductList(new Product());
         List<Project> listProject = projectService.findList();
         List<SystemModule> listModule = moduleService.findModuleList(module);
-        List<DocumentDocLib> libList = docService.findDoclibList(null);
+        List<DocumentDocLib> libList = docService.findDocLibList(null);
         model.addAttribute("productList", listProduct);
         model.addAttribute("projectList", listProject);
         model.addAttribute("listModule", listModule);

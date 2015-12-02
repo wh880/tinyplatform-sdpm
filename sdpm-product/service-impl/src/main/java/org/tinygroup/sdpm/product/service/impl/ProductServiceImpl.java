@@ -7,7 +7,6 @@ import org.tinygroup.sdpm.product.biz.inter.ProductManager;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
 import org.tinygroup.sdpm.product.service.ProductService;
-import org.tinygroup.sdpm.productLine.biz.inter.ProductLineManager;
 import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.ArrayList;
@@ -20,8 +19,6 @@ public class ProductServiceImpl implements ProductService {
 
     @Autowired
     private ProductManager productManager;
-    @Autowired
-    private ProductLineManager productLineManager;
 
     public Product addProduct(Product product) {
         return productManager.add(product);
