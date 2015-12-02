@@ -30,7 +30,7 @@ public class DocLibAction extends BaseController {
     public static final String COOKIE_DOCLIB_ID = "documentLibId";
 
     @Autowired
-    private DocService docservice;
+    private DocService docService;
 
     /**
      * 添加文档库的跳转
@@ -53,7 +53,7 @@ public class DocLibAction extends BaseController {
     @RequiresPermissions("doc-file-edit")
     @RequestMapping(value = "/edit")
     public String editDocLib(@CookieValue(value = DocLibAction.COOKIE_DOCLIB_ID) Integer documentLibId, DocumentDocLib docLib, Model model) {
-        docLib = docservice.findDocLibById(documentLibId);
+        docLib = docService.findDocLibById(documentLibId);
         model.addAttribute("doclib", docLib);
         if (documentLibId == 1 || documentLibId == 2) {
             return "/document/doclib-no-edit.pagelet";
@@ -70,9 +70,9 @@ public class DocLibAction extends BaseController {
     @RequestMapping(value = "/save")
     public String saveDocLib(DocumentDocLib docLib, HttpServletResponse response) {
         if (docLib.getDocLibId() == null) {
-            docLib = docservice.createNewDocLib(docLib);
+            docLib = docService.createNewDocLib(docLib);
         } else {
-            docservice.editDocLibName(docLib);
+            docService.editDocLibName(docLib);
         }
         CookieUtils.setCookie(response, DocLibAction.COOKIE_DOCLIB_ID, docLib.getDocLibId().toString());
         CmsUtils.removeDocLibList();
@@ -90,9 +90,9 @@ public class DocLibAction extends BaseController {
     @RequestMapping(value = "/delete")
     public Map delDocLib(@CookieValue(required = false, value = COOKIE_DOCLIB_ID) String documentLibId, Integer id,
                          HttpServletRequest request, HttpServletResponse response) {
-        List<DocumentDocLib> list = docservice.findDocLibList(null);
+        List<DocumentDocLib> list = docService.findDocLibList(null);
         if (id != list.get(0).getDocLibId() && id != list.get(1).getDocLibId()) {
-            docservice.deleteDocLibById(id);
+            docService.deleteDocLibById(id);
             CmsUtils.removeDocLibList();
             documentLibId = "1";
             CookieUtils.setCookie(response, COOKIE_DOCLIB_ID, documentLibId.toString(), -1);
