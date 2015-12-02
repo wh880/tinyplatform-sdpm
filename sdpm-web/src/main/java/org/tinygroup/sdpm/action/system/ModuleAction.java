@@ -157,7 +157,6 @@ public class ModuleAction extends BaseController {
     public Map<String, String> ajaxDeleteModule(Integer moduleId) {
         if (moduleId != null) {
             delteModule(moduleId);
-            ;
         }
         Map<String, String> map = new HashMap<String, String>();
         map.put("status", "success");

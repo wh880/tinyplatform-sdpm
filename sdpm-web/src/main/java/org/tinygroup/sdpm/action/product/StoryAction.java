@@ -8,16 +8,19 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.action.product.util.StoryUtil;
-import org.tinygroup.sdpm.common.condition.ConditionCarrier;
-import org.tinygroup.sdpm.common.condition.ConditionUtils;
-import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.web.BaseController;
+import org.tinygroup.sdpm.dao.complexsearch.SearchInfos;
+import org.tinygroup.sdpm.dao.condition.ConditionCarrier;
+import org.tinygroup.sdpm.dao.condition.ConditionUtils;
 import org.tinygroup.sdpm.dto.UploadProfile;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
 import org.tinygroup.sdpm.product.dao.pojo.*;
-import org.tinygroup.sdpm.product.service.*;
+import org.tinygroup.sdpm.product.service.PlanService;
+import org.tinygroup.sdpm.product.service.ReleaseService;
+import org.tinygroup.sdpm.product.service.StoryService;
+import org.tinygroup.sdpm.product.service.StorySpecService;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
@@ -63,7 +66,7 @@ public class StoryAction extends BaseController {
     @Autowired
     private UserService userService;
     @Autowired
-    private PlanService planService;;
+    private PlanService planService;
     @Autowired
     private ProjectService projectService;
     @Autowired

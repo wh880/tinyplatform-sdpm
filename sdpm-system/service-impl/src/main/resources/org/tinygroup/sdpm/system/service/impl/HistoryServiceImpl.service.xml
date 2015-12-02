@@ -1,0 +1,10 @@
+<service-components>
+  <service-component type="org.tinygroup.sdpm.system.service.impl.HistoryServiceImpl" bean="">
+    <service-method local-name="findSystemHistory" service-id="findSystemHistory" method-name="findSystemHistory" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
+      <service-parameters>
+        <service-parameter name="systemHistory" type="org.tinygroup.sdpm.system.dao.pojo.SystemHistory" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findSystemHistoryResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.system.dao.pojo.SystemHistory"/>
+    </service-method>
+  </service-component>
+</service-components>

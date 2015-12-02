@@ -1,7 +1,7 @@
 package org.tinygroup.sdpm.common.service.impl;
 
 import org.tinygroup.sdpm.common.biz.inter.EffortManager;
-import org.tinygroup.sdpm.common.dao.pojo.Effort;
+import org.tinygroup.sdpm.dao.pojo.Effort;
 import org.tinygroup.sdpm.common.service.inter.EffortService;
 import org.tinygroup.tinysqldsl.Pager;
 

@@ -9,7 +9,7 @@
                     #@Tselect2F()
                         #@Tselect2Body("roleId" roleId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                             <option value=""></option>
-                            #foreach(role : UserUtils.getAllRoleList())
+                            #foreach(role : roleService.findRoleList(null))
                             <option value="${role?.orgRoleId}">${role?.orgRoleName}</option>
                             #end
                         #end

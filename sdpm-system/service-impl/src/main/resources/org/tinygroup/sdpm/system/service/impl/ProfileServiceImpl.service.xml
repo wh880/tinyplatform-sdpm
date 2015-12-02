@@ -1,0 +1,58 @@
+<service-components>
+  <service-component type="org.tinygroup.sdpm.system.service.impl.ProfileServiceImpl" bean="">
+    <service-method local-name="addSystemProfile" service-id="addSystemProfile" method-name="addSystemProfile" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
+      <service-parameters>
+        <service-parameter name="systemProfile" type="org.tinygroup.sdpm.system.dao.pojo.SystemProfile" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="addSystemProfileResult" required="false" is-array="false" type="org.tinygroup.sdpm.system.dao.pojo.SystemProfile"/>
+    </service-method>
+    <service-method local-name="batchAddSystemProfile" service-id="batchAddSystemProfile" method-name="batchAddSystemProfile" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
+      <service-parameters>
+        <service-parameter name="systemProfiles" type="org.tinygroup.sdpm.system.dao.pojo.SystemProfile" collection-type="java.util.List" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="batchAddSystemProfileResult" required="false" is-array="false" type="java.lang.Integer"/>
+    </service-method>
+    <service-method local-name="batchUpdateSystemProfile" service-id="batchUpdateSystemProfile" method-name="batchUpdateSystemProfile" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
+      <service-parameters>
+        <service-parameter name="list" type="org.tinygroup.sdpm.system.dao.pojo.SystemProfile" collection-type="java.util.List" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="batchUpdateSystemProfileResult" required="false" is-array="false" type="java.lang.Integer"/>
+    </service-method>
+    <service-method local-name="findSystemProfile" service-id="findSystemProfile" method-name="findSystemProfile" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
+      <service-parameters>
+        <service-parameter name="systemProfile" type="org.tinygroup.sdpm.system.dao.pojo.SystemProfile" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findSystemProfileResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.system.dao.pojo.SystemProfile"/>
+    </service-method>
+    <service-method local-name="deleteSystemProfile" service-id="deleteSystemProfile" method-name="deleteSystemProfile" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
+      <service-parameters>
+        <service-parameter name="systemProfile" type="org.tinygroup.sdpm.system.dao.pojo.SystemProfile" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="deleteSystemProfileResult" required="false" is-array="false" type="java.lang.Integer"/>
+    </service-method>
+    <service-method local-name="editSystemProfile" service-id="editSystemProfile" method-name="editSystemProfile" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
+      <service-parameters>
+        <service-parameter name="systemProfile" type="org.tinygroup.sdpm.system.dao.pojo.SystemProfile" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="editSystemProfileResult" required="false" is-array="false" type="org.tinygroup.sdpm.system.dao.pojo.SystemProfile"/>
+    </service-method>
+    <service-method local-name="editSystemProfileTitle" service-id="editSystemProfileTitle" method-name="editSystemProfileTitle" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
+      <service-parameters>
+        <service-parameter name="systemProfile" type="org.tinygroup.sdpm.system.dao.pojo.SystemProfile" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="editSystemProfileTitleResult" required="false" is-array="false" type="org.tinygroup.sdpm.system.dao.pojo.SystemProfile"/>
+    </service-method>
+    <service-method local-name="softDeleteSystemProfile" service-id="softDeleteSystemProfile" method-name="softDeleteSystemProfile" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
+      <service-parameters>
+        <service-parameter name="id" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="softDeleteSystemProfileResult" required="false" is-array="false" type="java.lang.Integer"/>
+    </service-method>
+    <service-method local-name="findSystemProfileById" service-id="findSystemProfileById" method-name="findSystemProfileById" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
+      <service-parameters>
+        <service-parameter name="id" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findSystemProfileByIdResult" required="false" is-array="false" type="org.tinygroup.sdpm.system.dao.pojo.SystemProfile"/>
+    </service-method>
+  </service-component>
+</service-components>

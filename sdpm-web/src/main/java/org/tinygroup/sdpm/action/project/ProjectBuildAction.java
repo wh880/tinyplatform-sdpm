@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.commons.tools.StringUtil;
-import org.tinygroup.sdpm.common.condition.ConditionCarrier;
-import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.web.BaseController;
+import org.tinygroup.sdpm.dao.complexsearch.SearchInfos;
+import org.tinygroup.sdpm.dao.condition.ConditionCarrier;
 import org.tinygroup.sdpm.dto.UploadProfile;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
@@ -20,7 +20,6 @@ import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.service.StoryService;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
-import org.tinygroup.sdpm.project.dao.pojo.ProjectBurn;
 import org.tinygroup.sdpm.project.service.inter.BuildService;
 import org.tinygroup.sdpm.project.service.inter.ProjectProductService;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
@@ -32,14 +31,16 @@ import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;
 import org.tinygroup.sdpm.system.service.inter.ProfileService;
 import org.tinygroup.sdpm.util.LogUtil;
-import org.tinygroup.sdpm.util.ProjectUtils;
 import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 版本
@@ -68,7 +69,7 @@ public class ProjectBuildAction extends BaseController {
     @RequiresPermissions("version")
     @RequestMapping("/index")
     public String index(Model model, HttpServletRequest request, HttpServletResponse response) {
-        Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
+        Integer projectId = projectOperate.getCurrentProjectId(request, response);
         if (projectId == null) {
             return redirectProjectForm();
         }
@@ -90,7 +91,7 @@ public class ProjectBuildAction extends BaseController {
     @RequestMapping("/find")
     public String find(Model model, Integer start, Integer limit, String order, String ordertype,
                        HttpServletRequest request, HttpServletResponse response) {
-        Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
+        Integer projectId = projectOperate.getCurrentProjectId(request, response);
         if (projectId == null) {
             return redirectProjectForm();
         }
@@ -115,7 +116,7 @@ public class ProjectBuildAction extends BaseController {
     @RequestMapping("/edit")
     public String edit(HttpServletRequest request, HttpServletResponse response,
                        Integer buildId, Model model) {
-        Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
+        Integer projectId = projectOperate.getCurrentProjectId(request, response);
         if (projectId == null) {
             return redirectProjectForm();
         }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.multipart.MultipartFile;
 import org.tinygroup.commons.tools.StringUtil;
+import org.tinygroup.sdpm.util.UploadUtils;
 
 import javax.servlet.ServletContext;
 import java.io.File;

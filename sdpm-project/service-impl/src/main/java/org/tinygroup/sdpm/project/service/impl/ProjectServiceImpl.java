@@ -2,11 +2,18 @@ package org.tinygroup.sdpm.project.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.tinygroup.commons.tools.ArrayUtil;
+import org.tinygroup.commons.tools.CollectionUtil;
+import org.tinygroup.commons.tools.StringUtil;
+import org.tinygroup.sdpm.common.util.Collections3;
+import org.tinygroup.sdpm.org.biz.inter.RoleManager;
+import org.tinygroup.sdpm.org.dao.pojo.OrgRole;
 import org.tinygroup.sdpm.project.biz.inter.ProjectManager;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.tinysqldsl.Pager;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -19,6 +26,33 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Autowired
     private ProjectManager projectManager;
+    @Autowired
+    private RoleManager roleManager;
+
+    /**
+     * 判断当前用户是否属于项目白名单成员
+     *
+     * @param whiteList
+     * @return
+     */
+    protected Boolean hasProjectByRole(String userId, String whiteList) {
+        if (StringUtil.isBlank(whiteList)) {
+            return false;
+        }
+        String[] split = whiteList.split(",");
+        if (ArrayUtil.isEmptyArray(split)) {
+            return false;
+        }
+        List<OrgRole> userRoleList = roleManager.findRoleByUserId(userId);
+        if (CollectionUtil.isEmpty(userRoleList)) {
+            return false;
+        }
+        List<String> orgRoleId = Collections3.extractToList(userRoleList, "orgRoleId");
+        for (String s : split) {
+            return orgRoleId.contains(s);
+        }
+        return false;
+    }
 
     public List<Project> findList() {
         return projectManager.findList();
@@ -50,6 +84,34 @@ public class ProjectServiceImpl implements ProjectService {
         return projectManager.findPagerProjects(start, limit, order, "asc".equals(orderType) ? true : false, ids);
     }
 
+    public List<Project> getUserProjectList(String userId) {
+        List<Project> userProjectList = new ArrayList<Project>();
+        List<Project> projectList = findList();
+        for (Project project : projectList) {
+            String projectAcl = project.getProjectAcl();
+            if (Project.ACL_OPEN.equals(projectAcl)) {
+                // 开放项目
+                userProjectList.add(project);
+            } else if (Project.ACL_CUSTOM.equals(projectAcl) && hasProjectByRole(userId,project.getProjectWhiteList())) {
+                // 自定义白名单
+                userProjectList.add(project);
+            }
+        }
+        List<Project> listByTeamUserId = findListByTeamUserId(userId, Project.ACL_PRIVATE);
+        if (listByTeamUserId != null) {
+            // 私有项目，根据角色定义
+            userProjectList.addAll(listByTeamUserId);
+        }
+        List projectIdList = Collections3.extractToList(userProjectList, "projectId");
+        List<Project> relatedProject = findListByRelatedUser(userId);
+        for (Project project : relatedProject) {
+            if (!projectIdList.contains(project.getProjectId())) {
+                userProjectList.add(project);
+            }
+        }
+        return userProjectList;
+    }
+
     public List<Project> findListByTeamUserId(String userId, String acl) {
         return projectManager.findListByTeamUserId(userId, acl);
     }
@@ -65,8 +127,8 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     public Project addProject(Project project) {
-        project.setProjectStatus(project.WAIT);
-        project.setProjectDeleted(project.DELETE_NO);
+        project.setProjectStatus(Project.WAIT);
+        project.setProjectDeleted(Project.DELETE_NO);
         return projectManager.add(project);
     }
 
@@ -87,7 +149,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     public List<Project> projectInCondition(String condition, Integer... ids) {
-        return projectManager.projectInCondition(condition,ids);
+        return projectManager.projectInCondition(condition, ids);
     }
 
 }

@@ -14,7 +14,7 @@ public interface TaskRelationService {
      * @param taskRelationService
      * @return
      */
-    public ProjectTaskrelation add(TaskRelationService taskRelationService);
+    ProjectTaskrelation add(TaskRelationService taskRelationService);
 
     /**
      * 根据项目id查找相关任务关系
@@ -22,7 +22,7 @@ public interface TaskRelationService {
      * @param projectId
      * @return
      */
-    public List<TaskRelationService> findByProjectId(int projectId);
+    List<TaskRelationService> findByProjectId(int projectId);
 
     /**
      * 根据逻辑id删除关系
@@ -30,5 +30,5 @@ public interface TaskRelationService {
      * @param id
      * @return
      */
-    public int deleteById(int id);
+    int deleteById(int id);
 }

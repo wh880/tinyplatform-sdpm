@@ -16,7 +16,6 @@ import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
-import org.tinygroup.sdpm.util.ProjectUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -49,7 +48,7 @@ public class ProjectDocAction extends BaseController {
 
     @RequestMapping("/findList")
     public String findList(Model model, HttpServletRequest request, HttpServletResponse response, Integer start, Integer limit, String order, String ordertype) {
-        Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
+        Integer projectId = projectOperate.getCurrentProjectId(request, response);
         if (projectId == null) {
             return redirectProjectForm();
         }
@@ -68,7 +67,7 @@ public class ProjectDocAction extends BaseController {
         for (int i = 0; i < id.length; i++) {
             DocumentDoc doc = new DocumentDoc();
             doc.setDocId(Integer.parseInt(id[i]));
-            doc.setDocDeleted(doc.DELETE_YES);
+            doc.setDocDeleted(DocumentDoc.DELETE_YES);
             docList.add(doc);
         }
         int[] res = docService.deleteDocByIds(docList);

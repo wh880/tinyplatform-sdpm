@@ -12,7 +12,7 @@ import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.web.Servlets;
 import org.tinygroup.sdpm.util.CookieUtils;
 import org.tinygroup.sdpm.util.ProductUtils;
-import org.tinygroup.sdpm.util.ProjectUtils;
+import org.tinygroup.sdpm.util.ProjectOperate;
 
 import javax.servlet.http.HttpServletRequest;
 import java.lang.annotation.Annotation;
@@ -28,7 +28,7 @@ public class PermissionInterceptor {
     @Before("execution(* org.tinygroup.sdpm.action.project.*.*(..))")
     public void projectInterceptor(JoinPoint joinPoint) {
         HttpServletRequest request = Servlets.getRequest();
-        String projectId = CookieUtils.getCookie(request, ProjectUtils.COOKIE_PROJECT_ID);
+        String projectId = CookieUtils.getCookie(request, ProjectOperate.COOKIE_PROJECT_ID);
         if (StringUtil.isBlank(projectId)) {
             return;
         }

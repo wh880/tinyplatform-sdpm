@@ -177,15 +177,15 @@ public class OrgUserDaoImpl extends TinyDslDaoSupport implements OrgUserDao {
         return getDslSession().fetchList(select, OrgUser.class);
     }
 
-    public List<OrgUser> userInCondition(String condition,String ...ids) {
+    public List<OrgUser> userInCondition(String condition, String... ids) {
         Condition con = null;
-        if(ArrayUtil.isEmptyArray(ids)){
+        if (ArrayUtil.isEmptyArray(ids)) {
             con = ORG_USERTABLE.ORG_USER_ID.in(ids);
         }
-        Select select = MysqlSelect.select(ORG_USERTABLE.ORG_USER_ID,ORG_USERTABLE.ORG_USER_REAL_NAME).
+        Select select = MysqlSelect.select(ORG_USERTABLE.ORG_USER_ID, ORG_USERTABLE.ORG_USER_REAL_NAME).
                 from(ORG_USERTABLE).
-                where(and(ORG_USERTABLE.ORG_USER_DELETED.eq(0),ORG_USERTABLE.ORG_USER_REAL_NAME.like(condition),con)).limit(0,8);
-        return getDslSession().fetchList(select,OrgUser.class);
+                where(and(ORG_USERTABLE.ORG_USER_DELETED.eq(0), ORG_USERTABLE.ORG_USER_REAL_NAME.like(condition), con)).limit(0, 8);
+        return getDslSession().fetchList(select, OrgUser.class);
     }
 
     public Pager<OrgUser> getPagerByDeptId(int start, int limit, final Integer deptId, final OrderBy... orderBies) {
@@ -436,7 +436,7 @@ public class OrgUserDaoImpl extends TinyDslDaoSupport implements OrgUserDao {
 
     public String getNameById(String id) {
         if (StringUtil.isBlank(id)) {
-            return null;
+            return "";
         }
         try {
             Select select = select(ORG_USERTABLE.ORG_USER_ACCOUNT).from(ORG_USERTABLE).where(ORG_USERTABLE.ORG_USER_ID.eq(id));
@@ -444,7 +444,5 @@ public class OrgUserDaoImpl extends TinyDslDaoSupport implements OrgUserDao {
         } catch (Exception e) {
             return "";
         }
-
-
     }
 }

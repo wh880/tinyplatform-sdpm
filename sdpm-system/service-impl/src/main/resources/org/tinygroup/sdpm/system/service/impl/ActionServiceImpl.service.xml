@@ -1,0 +1,45 @@
+<service-components>
+  <service-component type="org.tinygroup.sdpm.system.service.impl.ActionServiceImpl" bean="">
+    <service-method local-name="findAction" service-id="findAction" method-name="findAction" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
+      <service-parameters>
+        <service-parameter name="systemAction" type="org.tinygroup.sdpm.system.dao.pojo.SystemAction" required="false" is-array="false"/>
+        <service-parameter name="orderby" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="asc" type="boolean" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findActionResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.system.dao.pojo.SystemAction"/>
+    </service-method>
+    <service-method local-name="findSystemActionPager" service-id="findSystemActionPager" method-name="findSystemActionPager" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
+      <service-parameters>
+        <service-parameter name="page" type="int" required="false" is-array="false"/>
+        <service-parameter name="pageSize" type="int" required="false" is-array="false"/>
+        <service-parameter name="action" type="org.tinygroup.sdpm.system.dao.pojo.SystemAction" required="false" is-array="false"/>
+        <service-parameter name="order" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="ordertype" type="java.lang.String" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findSystemActionPagerResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager"/>
+    </service-method>
+    <service-method local-name="queryActionPager" service-id="queryActionPager" method-name="queryActionPager" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
+      <service-parameters>
+        <service-parameter name="start" type="int" required="false" is-array="false"/>
+        <service-parameter name="limit" type="int" required="false" is-array="false"/>
+        <service-parameter name="chooseDate" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="systemAction" type="org.tinygroup.sdpm.system.dao.pojo.SystemAction" required="false" is-array="false"/>
+        <service-parameter name="order" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="orderType" type="java.lang.String" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="queryActionPagerResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager"/>
+    </service-method>
+    <service-method local-name="queryActionBetweenDate" service-id="queryActionBetweenDate" method-name="queryActionBetweenDate" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
+      <service-parameters>
+        <service-parameter name="start" type="int" required="false" is-array="false"/>
+        <service-parameter name="limit" type="int" required="false" is-array="false"/>
+        <service-parameter name="action" type="org.tinygroup.sdpm.system.dao.pojo.SystemAction" required="false" is-array="false"/>
+        <service-parameter name="startDate" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="endDate" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="sortName" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="asc" type="boolean" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="queryActionBetweenDateResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager"/>
+    </service-method>
+  </service-component>
+</service-components>

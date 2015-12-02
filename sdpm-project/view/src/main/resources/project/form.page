@@ -164,7 +164,7 @@
             #@colLabel()#end
             #@skinMinimal("col-8")
                 #@Tcheckboxes("whiteList" "")
-                    #foreach(role : UserUtils.getAllRoleList())
+                    #foreach(role : roleList)
                         #@gridSysCol(2)
                             #@Tcheckbox(role.orgRoleId)${role.orgRoleName}#end
                         #end

@@ -1,0 +1,12 @@
+<service-components>
+  <service-component type="org.tinygroup.sdpm.system.service.impl.LogServiceImpl" bean="">
+    <service-method local-name="log" service-id="log" method-name="log" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
+      <service-parameters>
+        <service-parameter name="oldObject" type="java.lang.Object" required="false" is-array="false"/>
+        <service-parameter name="newObject" type="java.lang.Object" required="false" is-array="false"/>
+        <service-parameter name="systemAction" type="org.tinygroup.sdpm.system.dao.pojo.SystemAction" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="logResult" required="false" is-array="false" type="void"/>
+    </service-method>
+  </service-component>
+</service-components>

@@ -1,6 +1,6 @@
 package org.tinygroup.sdpm.service.service.inter;
 
-import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
+import org.tinygroup.sdpm.dao.complexsearch.SearchInfos;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceSla;
 import org.tinygroup.tinysqldsl.Pager;
 

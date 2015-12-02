@@ -7,11 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.tinygroup.commons.tools.StringUtil;
-import org.tinygroup.sdpm.common.condition.ConditionCarrier;
-import org.tinygroup.sdpm.common.condition.ConditionUtils;
-import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
-import org.tinygroup.sdpm.common.util.ComplexSearch.SqlUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
+import org.tinygroup.sdpm.dao.complexsearch.SearchInfos;
+import org.tinygroup.sdpm.dao.condition.ConditionCarrier;
+import org.tinygroup.sdpm.dao.condition.ConditionUtils;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
@@ -28,7 +27,9 @@ import org.tinygroup.sdpm.quality.dao.pojo.QualityTestTask;
 import org.tinygroup.sdpm.quality.service.inter.TestCaseService;
 import org.tinygroup.sdpm.quality.service.inter.TestRunService;
 import org.tinygroup.sdpm.quality.service.inter.TestTaskService;
-import org.tinygroup.sdpm.util.*;
+import org.tinygroup.sdpm.util.CookieUtils;
+import org.tinygroup.sdpm.util.LogUtil;
+import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -108,7 +109,7 @@ public class TestVersionAction extends BaseController {
     @RequestMapping("/project/findPager")
     public String findPager(HttpServletResponse response, HttpServletRequest request,
                             Integer start, Integer limit, String order, String ordertype, Model model) {
-        Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
+        Integer projectId = projectOperate.getCurrentProjectId(request, response);
         if (projectId == null) {
             return redirectProjectForm();
         }

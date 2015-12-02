@@ -21,8 +21,17 @@ import org.tinygroup.tinysqldsl.Pager;
 import java.util.List;
 
 public interface RoleManager {
+
     /**
-     * 根据主键id查找Rold
+     * 根据用户Id查找角色
+     *
+     * @param userId
+     * @return
+     */
+    List<OrgRole> findRoleByUserId(String userId);
+
+    /**
+     * 根据主键id查找Role
      *
      * @param id 主键
      * @return

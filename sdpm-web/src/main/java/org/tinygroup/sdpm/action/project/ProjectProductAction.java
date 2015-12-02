@@ -11,7 +11,6 @@ import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
 import org.tinygroup.sdpm.project.service.inter.ProjectProductService;
-import org.tinygroup.sdpm.util.ProjectUtils;
 import org.tinygroup.sdpm.util.UserUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -35,7 +34,7 @@ public class ProjectProductAction extends BaseController {
     @RequiresPermissions("product")
     @RequestMapping("/findLinkProduct")
     public String findLinkProduct(Model model, HttpServletResponse response, HttpServletRequest request) {
-        Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
+        Integer projectId = projectOperate.getCurrentProjectId(request, response);
         if (projectId == null) {
             return redirectProjectForm();
         }
@@ -53,7 +52,7 @@ public class ProjectProductAction extends BaseController {
     @ResponseBody
     @RequestMapping("/save")
     public Map<String, String> save(Integer[] productIds, HttpServletResponse response, HttpServletRequest request) {
-        Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
+        Integer projectId = projectOperate.getCurrentProjectId(request, response);
         if (projectId == null) {
             return resultMap(false, "请选择所在项目");
         }

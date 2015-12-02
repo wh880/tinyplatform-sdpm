@@ -23,9 +23,11 @@ import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
 import org.tinygroup.sdpm.org.dao.OrgRoleDao;
 import org.tinygroup.sdpm.org.dao.pojo.OrgRole;
+import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.tinysqldsl.*;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
+import org.tinygroup.tinysqldsl.formitem.SubSelect;
 import org.tinygroup.tinysqldsl.select.OrderByElement;
 
 import java.io.Serializable;
@@ -33,6 +35,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.tinygroup.sdpm.org.dao.constant.OrgRoleTable.ORG_ROLETABLE;
+import static org.tinygroup.sdpm.org.dao.constant.OrgRoleUserTable.ORG_ROLE_USERTABLE;
 import static org.tinygroup.tinysqldsl.Delete.delete;
 import static org.tinygroup.tinysqldsl.Insert.insertInto;
 import static org.tinygroup.tinysqldsl.Select.selectFrom;
@@ -217,5 +220,16 @@ public class OrgRoleDaoImpl extends TinyDslDaoSupport implements OrgRoleDao {
             }
         };
         return getDslSession().fetchList(callback.generate(ids), OrgRole.class);
+    }
+
+    public List<OrgRole> findRoleByUserId(String userId) {
+        Select subSelect = Select.select(ORG_ROLE_USERTABLE.ORG_ROLE_ID).from(ORG_ROLE_USERTABLE)
+                .where(ORG_ROLE_USERTABLE.ORG_USER_ID.eq(userId));
+        Select select = selectFrom(ORG_ROLETABLE)
+                .where(and(
+                        ORG_ROLETABLE.ORG_ROLE_ID.inExpression(SubSelect.subSelect(subSelect)),
+                        ORG_ROLETABLE.DELETED.eq(Project.DELETE_NO)
+                ));
+        return getDslSession().fetchList(select,OrgRole.class);
     }
 }

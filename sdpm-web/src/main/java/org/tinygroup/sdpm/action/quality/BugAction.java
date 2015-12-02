@@ -10,10 +10,10 @@ import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.action.product.util.StoryUtil;
 import org.tinygroup.sdpm.action.quality.util.QualityUtil;
-import org.tinygroup.sdpm.common.condition.ConditionCarrier;
-import org.tinygroup.sdpm.common.condition.ConditionUtils;
-import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.web.BaseController;
+import org.tinygroup.sdpm.dao.complexsearch.SearchInfos;
+import org.tinygroup.sdpm.dao.condition.ConditionCarrier;
+import org.tinygroup.sdpm.dao.condition.ConditionUtils;
 import org.tinygroup.sdpm.dto.UploadProfile;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.UserService;
@@ -44,7 +44,10 @@ import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.sdpm.system.service.inter.ProfileService;
-import org.tinygroup.sdpm.util.*;
+import org.tinygroup.sdpm.util.CookieUtils;
+import org.tinygroup.sdpm.util.LogUtil;
+import org.tinygroup.sdpm.util.ModuleUtil;
+import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -707,7 +710,7 @@ public class BugAction extends BaseController {
     public String projectFindList(Model model, Integer projectId, Integer start, Integer limit, String order, String ordertype,
                                   HttpServletRequest request, HttpServletResponse response) {
         if (projectId == null) {
-            projectId = ProjectUtils.getCurrentProjectId(request, response);
+            projectId = projectOperate.getCurrentProjectId(request, response);
         }
         if (projectId == null) {
             return redirectProjectForm();

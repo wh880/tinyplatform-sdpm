@@ -171,7 +171,7 @@ public class ClientAction extends BaseController {
         for (String s : ids.split(",")) {
             ServiceClient serviceClient = new ServiceClient();
             serviceClient.setClientId(Integer.valueOf(s));
-            serviceClient.setDeleted(serviceClient.DELETE_YES);
+            serviceClient.setDeleted(ServiceClient.DELETE_YES);
             list.add(serviceClient);
         }
         clientService.deleteBatchClient(list);

@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.commons.tools.StringUtil;
-import org.tinygroup.sdpm.common.util.ComplexSearch.SearchInfos;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
+import org.tinygroup.sdpm.dao.complexsearch.SearchInfos;
 import org.tinygroup.sdpm.document.dao.pojo.DocumentDoc;
 import org.tinygroup.sdpm.document.dao.pojo.DocumentDocLib;
 import org.tinygroup.sdpm.document.service.inter.DocService;
@@ -86,7 +86,7 @@ public class DocumentAction extends BaseController {
 
         model.addAttribute("userList", userList);
         model.addAttribute("productList", ProductUtils.getProductList());
-        model.addAttribute("projectList", ProjectUtils.getUserProjectList());
+        model.addAttribute("projectList", projectOperate.getUserProjectList());
         model.addAttribute("moduleList", moduleList);
         model.addAttribute("libList", CmsUtils.getDocLibList());
         request.getSession().setAttribute("moduleId", moduleId);

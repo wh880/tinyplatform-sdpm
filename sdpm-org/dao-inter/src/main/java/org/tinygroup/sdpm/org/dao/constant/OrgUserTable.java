@@ -16,7 +16,7 @@
 
 package org.tinygroup.sdpm.org.dao.constant;
 
-import org.tinygroup.sdpm.common.dao.StringIdGenerator;
+import org.tinygroup.sdpm.dao.StringIdGenerator;
 import org.tinygroup.tinysqldsl.KeyGenerator;
 import org.tinygroup.tinysqldsl.base.Column;
 import org.tinygroup.tinysqldsl.base.Table;

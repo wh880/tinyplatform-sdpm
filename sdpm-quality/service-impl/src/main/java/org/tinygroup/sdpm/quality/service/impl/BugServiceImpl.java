@@ -1,17 +1,16 @@
 package org.tinygroup.sdpm.quality.service.impl;
 
-import java.util.List;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.tinygroup.commons.tools.StringUtil;
-import org.tinygroup.sdpm.common.condition.ConditionCarrier;
+import org.tinygroup.sdpm.dao.condition.ConditionCarrier;
 import org.tinygroup.sdpm.quality.biz.inter.BugManager;
 import org.tinygroup.sdpm.quality.dao.pojo.BugCount;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.sdpm.quality.service.inter.BugService;
 import org.tinygroup.tinysqldsl.Pager;
+
+import java.util.List;
+import java.util.Map;
 
 @Component
 public class BugServiceImpl implements BugService {

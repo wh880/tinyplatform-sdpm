@@ -5,7 +5,7 @@
 
     var reloadPage = function () {
         location.reload();
-    }
+    };
 
     var testTheme = function (name) {
 		var themeid=0;
@@ -16,7 +16,7 @@
 			}
 		}
 		return tinyTplList[themeid].name;
-	}
+	};
 
     var loadDemoSettings = function () {
         var result = {
@@ -93,7 +93,7 @@
         }
 
         return result;
-    }
+    };
 
     var saveDemoSettings = function () {
         if (storageSupported) {
@@ -123,7 +123,7 @@
         document.cookie = 'demo_no_menu=' + escape(demo_settings.no_menu);
         document.cookie = 'demo_tinycontainer=' + escape(demo_settings.tinycontainer);
         document.cookie = 'demo_menupos=' + demo_settings.menupos;
-    }
+    };
 
     var getThemesTemplate = function () {
         result = '';
@@ -140,7 +140,7 @@
             }
         }
         return result;
-    }
+    };
 
     var activateTheme = function (btns) {
         document.body.className = document.body.className.replace(/theme\-[a-z0-9\-\_]+/ig, 'theme-' + demo_settings.theme);
@@ -150,7 +150,7 @@
         if (demo_settings.theme != 'clean' && demo_settings.theme != 'white') {
             btns.addClass('dark');
         }
-    }
+    };
 
 
 // Load and apply settings
@@ -580,7 +580,7 @@
             //reloadPage();
         });
         $('#demo-footer-fixed').on($('html').hasClass('ie8') ? "propertychange" : "change", function () {
-            demo_settings.footer_fixed = $(this).is(':checked')
+            demo_settings.footer_fixed = $(this).is(':checked');
             //if(){
             //demo_settings.fixed_navbar=demo_settings.position_fixed;
             //$('#demo-fixed-navbar').switcher('on');

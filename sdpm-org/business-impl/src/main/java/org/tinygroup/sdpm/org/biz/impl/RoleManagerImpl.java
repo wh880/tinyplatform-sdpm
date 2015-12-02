@@ -33,6 +33,10 @@ public class RoleManagerImpl implements RoleManager {
     @Autowired
     private OrgRoleDao orgRoleDao;
 
+    public List<OrgRole> findRoleByUserId(String userId) {
+        return orgRoleDao.findRoleByUserId(userId);
+    }
+
     public OrgRole find(Integer id) {
         return orgRoleDao.getByKey(id);
     }

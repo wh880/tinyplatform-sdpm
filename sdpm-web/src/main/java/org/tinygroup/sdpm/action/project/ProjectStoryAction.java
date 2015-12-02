@@ -12,7 +12,6 @@ import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.service.StoryService;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectStory;
 import org.tinygroup.sdpm.project.service.inter.ProjectStoryService;
-import org.tinygroup.sdpm.util.ProjectUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -44,7 +43,7 @@ public class ProjectStoryAction extends BaseController {
     public String listData(HttpServletRequest request, HttpServletResponse response,
                            Model model, Integer start, Integer limit, String order, String orderType, String moduleId) {
 
-        Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
+        Integer projectId = projectOperate.getCurrentProjectId(request, response);
         if (projectId == null) {
             return null;
         }
@@ -57,7 +56,7 @@ public class ProjectStoryAction extends BaseController {
     @ResponseBody
     @RequestMapping("/delete")
     public Map<String, String> delete(Integer id, HttpServletRequest request, HttpServletResponse response) {
-        Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
+        Integer projectId = projectOperate.getCurrentProjectId(request, response);
         if (projectId == null) {
             return resultMap(false, "删除失败");
         }        //根据id进行软删
@@ -78,7 +77,7 @@ public class ProjectStoryAction extends BaseController {
     @RequestMapping("/findStory")
     public String findStory(Model model, Integer start, Integer limit, String order, String ordertype,
                             HttpServletRequest request, HttpServletResponse response) {
-        Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
+        Integer projectId = projectOperate.getCurrentProjectId(request, response);
         if (projectId == null) {
             return redirectProjectForm();
         }
@@ -94,7 +93,7 @@ public class ProjectStoryAction extends BaseController {
         Map<String, String> map = new HashMap<String, String>();
         String[] id = ids.split(",");
         List<ProjectStory> projectStoryList = new ArrayList<ProjectStory>();
-        Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
+        Integer projectId = projectOperate.getCurrentProjectId(request, response);
         if (projectId == null) {
             return resultMap(false, "请选择项目");
         }
@@ -140,7 +139,7 @@ public class ProjectStoryAction extends BaseController {
     @RequestMapping("/batchDel")
     public Map<String, String> batchDel(Integer itemId[], HttpServletRequest request, HttpServletResponse response) {
         if (!ArrayUtil.isEmptyArray(itemId)) {
-            Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
+            Integer projectId = projectOperate.getCurrentProjectId(request, response);
             if (projectId == null) {
                 return resultMap(false, "未选择项目");
             }

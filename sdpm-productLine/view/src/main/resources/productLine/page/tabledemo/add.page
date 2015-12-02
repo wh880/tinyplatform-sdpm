@@ -129,9 +129,10 @@
         #@colLabel()<span class="c-red">*</span>分组白名单#end
         #@skinMinimal("col-8")
             #@Tcheckboxes("productLineWhiteList" productLine?.productLineWhiteList)
-                #foreach(role : UserUtils.getAllRoleList())
-                    #@Tcheckbox(role?.orgRoleId)${role?.orgRoleName}#end
-                #end
+            ##            待王玲珑改
+##                #foreach(role : UserUtils.getAllRoleList())
+##                    #@Tcheckbox(role?.orgRoleId)${role?.orgRoleName}#end
+##                #end
             #end
         #end
         #@validateDiv("col-2")#end

@@ -9,7 +9,6 @@ import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.project.service.dto.BurnDTO;
 import org.tinygroup.sdpm.project.service.inter.BurnService;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
-import org.tinygroup.sdpm.util.ProjectUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -49,7 +48,7 @@ public class ProjectBurnAction extends BaseController {
     @RequestMapping("/init")
     public String initBurn(Integer choose, Integer interval, Model model,
                            HttpServletRequest request, HttpServletResponse response) {
-        Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
+        Integer projectId = projectOperate.getCurrentProjectId(request, response);
         if (projectId == null) {
             return redirectProjectForm();
         }
@@ -68,7 +67,7 @@ public class ProjectBurnAction extends BaseController {
     @ResponseBody
     @RequestMapping("/update")
     public Map<String, String> update(HttpServletRequest request, HttpServletResponse response) {
-        Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
+        Integer projectId = projectOperate.getCurrentProjectId(request, response);
         if (projectId == null) {
             return resultMap(false, "更新失败，请选择更新项目");
         }

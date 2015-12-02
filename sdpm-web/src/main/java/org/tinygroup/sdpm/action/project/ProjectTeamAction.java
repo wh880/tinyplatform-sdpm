@@ -15,7 +15,6 @@ import org.tinygroup.sdpm.org.service.inter.RoleService;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTeam;
 import org.tinygroup.sdpm.project.service.inter.TeamService;
-import org.tinygroup.sdpm.util.ProjectUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -47,7 +46,7 @@ public class ProjectTeamAction extends BaseController {
     @RequestMapping("find")
     public String find(Model model, HttpServletRequest request, HttpServletResponse response,
                        Integer start, Integer limit, String order, String ordertype) {
-        Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
+        Integer projectId = projectOperate.getCurrentProjectId(request, response);
         if (projectId == null) {
             return redirectProjectForm();
         }
@@ -61,7 +60,7 @@ public class ProjectTeamAction extends BaseController {
     @RequiresPermissions("pro-team-report")
     @RequestMapping("/preTeamManage")
     public String preTeamManage(Model model, HttpServletRequest request, HttpServletResponse response) {
-        Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
+        Integer projectId = projectOperate.getCurrentProjectId(request, response);
         if (projectId == null) {
             return redirectProjectForm();
         }
@@ -89,7 +88,7 @@ public class ProjectTeamAction extends BaseController {
 
     @RequestMapping("/teamManageSave")
     public String teamManageSave(Teams teams, HttpServletRequest request, HttpServletResponse response) {
-        Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
+        Integer projectId = projectOperate.getCurrentProjectId(request, response);
         if (projectId == null) {
             return redirectProjectForm();
         }
@@ -122,7 +121,8 @@ public class ProjectTeamAction extends BaseController {
         }
         teamService.batchAdd(addList);
         teamService.batchUpdate(updateList);
-        ProjectUtils.removeUserProjectList();
+        //TODO: 删除用户项目列表
+//        ProjectUtils.removeUserProjectList();
         return "redirect:" + adminPath + "/project/team/index";
     }
 

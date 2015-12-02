@@ -14,7 +14,6 @@ import org.tinygroup.sdpm.project.service.inter.TeamService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.service.inter.ActionService;
 import org.tinygroup.sdpm.util.LogUtil;
-import org.tinygroup.sdpm.util.ProjectUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -38,7 +37,7 @@ public class ProjectDynamicAction extends BaseController {
     @RequiresPermissions("dynamic")
     @RequestMapping("/index")
     public String index(HttpServletRequest request, HttpServletResponse response, Model model) {
-        Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
+        Integer projectId = projectOperate.getCurrentProjectId(request, response);
         if (projectId == null) {
             return redirectProjectForm();
         }
@@ -50,7 +49,7 @@ public class ProjectDynamicAction extends BaseController {
     @RequestMapping("/find")
     public String find(Integer start, Integer limit, String order, String ordertype,
                        HttpServletRequest request, HttpServletResponse response, Model model, String selDate, String teamUserId) {
-        Integer projectId = ProjectUtils.getCurrentProjectId(request, response);
+        Integer projectId = projectOperate.getCurrentProjectId(request, response);
         if (projectId == null) {
             return redirectProjectForm();
         }

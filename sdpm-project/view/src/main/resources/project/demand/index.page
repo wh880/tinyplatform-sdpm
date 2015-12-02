@@ -23,7 +23,7 @@
             #end
             #@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
                 #@toggleLeft({"class":"aclass"})
-                    #@settoggleLeftTitle()${currentProjectId?ProjectUtils.getProject(currentProjectId).projectName:"请选择项目"}#end
+                    #@settoggleLeftTitle()${currentProjectId?projectOperate.getProject(currentProjectId).projectName:"请选择项目"}#end
                     #@settoggleLeftBody("treeLeftbox")
                         #include("/project/demand/moduleTree.page")
                     #end

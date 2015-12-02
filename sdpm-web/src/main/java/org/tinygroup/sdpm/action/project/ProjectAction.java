@@ -11,7 +11,9 @@ import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.util.Collections3;
 import org.tinygroup.sdpm.common.web.BaseController;
+import org.tinygroup.sdpm.org.dao.pojo.OrgRole;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
+import org.tinygroup.sdpm.org.service.inter.RoleService;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.service.ProductService;
@@ -21,7 +23,10 @@ import org.tinygroup.sdpm.project.service.dto.BurnDTO;
 import org.tinygroup.sdpm.project.service.inter.BurnService;
 import org.tinygroup.sdpm.project.service.inter.ProjectProductService;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
-import org.tinygroup.sdpm.util.*;
+import org.tinygroup.sdpm.util.CookieUtils;
+import org.tinygroup.sdpm.util.LogUtil;
+import org.tinygroup.sdpm.util.ProductUtils;
+import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -47,6 +52,8 @@ public class ProjectAction extends BaseController {
     private BurnService burnService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private RoleService roleService;
 
     @ModelAttribute
     public void init(Model model) {
@@ -58,7 +65,7 @@ public class ProjectAction extends BaseController {
     public String view(Model model, HttpServletRequest request, HttpServletResponse response,
                        Integer projectId) {
         if (null == projectId) {
-            projectId = ProjectUtils.getCurrentProjectId(request, response);
+            projectId = projectOperate.getCurrentProjectId(request, response);
             if (projectId == null) {
                 return redirectProjectForm();
             }
@@ -67,7 +74,7 @@ public class ProjectAction extends BaseController {
         if (project == null) {
             return notFoundView();
         }
-        CookieUtils.setCookie(response, ProjectUtils.COOKIE_PROJECT_ID, projectId.toString());
+        CookieUtils.setCookie(response, projectOperate.COOKIE_PROJECT_ID, projectId.toString());
         model.addAttribute("project", project);
         return "/project/survey/index";
     }
@@ -78,7 +85,11 @@ public class ProjectAction extends BaseController {
      */
     @RequiresPermissions(value = {"project-op-add", "batch-distribute-task", "pro-Info2-copy", "pro-task-proposeversion"}, logical = Logical.OR)
     @RequestMapping("/form")
-    public String form() {
+    public String form(Model model) {
+        OrgRole orgRole = new OrgRole();
+        orgRole.setOrgRoleType(OrgRole.ROLE_TYPE_PROJECT);
+        List<OrgRole> roleList = roleService.findRoleList(orgRole);
+        model.addAttribute("roleList",roleList);
         return "project/form";
     }
 
@@ -117,8 +128,8 @@ public class ProjectAction extends BaseController {
         project.setProjectWhiteList(StringUtil.join(whiteList, ","));
         project = projectService.addProject(project);
         projectProductService.addProjectLinkToProduct(linkProduct, project.getProjectId());
-        CookieUtils.setCookie(response, ProjectUtils.COOKIE_PROJECT_ID, project.getProjectId().toString());
-        ProjectUtils.removeProjectList();
+        CookieUtils.setCookie(response, projectOperate.COOKIE_PROJECT_ID, project.getProjectId().toString());
+        //TODO:ProjectUtils.removeProjectList();
         return "redirect:" + adminPath + "/project/list";
     }
 
@@ -145,7 +156,7 @@ public class ProjectAction extends BaseController {
      */
     @RequestMapping("/list/data")
     public String listData(Integer start, Integer limit, String order, String orderType, Integer key, Model model) {
-        Integer[] userProjectIds = ProjectUtils.getUserProjectIdList();
+        Integer[] userProjectIds = projectOperate.getUserProjectIdList();
         if (key != null && !ArrayUtil.isEmptyArray(userProjectIds)) {//用于搜索
             userProjectIds = new Integer[]{key};
         }
@@ -188,7 +199,7 @@ public class ProjectAction extends BaseController {
         project.setProjectWhiteList(StringUtil.join(whiteList, ","));
         projectProductService.addProjectLinkToProduct(productIds, project.getProjectId());
         projectService.updateProject(project);
-        ProjectUtils.removeProjectList();
+        //TODO:ProjectUtils.removeProjectList(); ProjectUtils.removeProjectList();
         model.addAttribute("project", project);
         return "redirect:" + adminPath + "/project/view?projectId=" + project.getProjectId();
     }
@@ -223,7 +234,7 @@ public class ProjectAction extends BaseController {
     @RequestMapping(value = "hangUp", method = RequestMethod.POST)
     public Map<String, String> hangUpSave(Project project, String content) {
         Project oldProject = projectService.findProjectById(project.getProjectId());
-        project.setProjectStatus(project.HANGUP);
+        project.setProjectStatus(Project.HANGUP);
         Integer res = projectService.updateProject(project);
         LogUtil.logWithComment(LogUtil.LogOperateObject.PROJECT, LogUtil.LogAction.SUSPENDED, oldProject.getProjectId().toString(),
                 UserUtils.getUserId(), null, oldProject.getProjectId().toString(), oldProject, project, content);
@@ -242,7 +253,7 @@ public class ProjectAction extends BaseController {
     @RequestMapping(value = "start", method = RequestMethod.POST)
     public Map<String, String> startSave(Project project, String content) {
         Project oldProject = projectService.findProjectById(project.getProjectId());
-        project.setProjectStatus(project.DOING);
+        project.setProjectStatus(Project.DOING);
 
         Integer res = projectService.updateProject(project);
         LogUtil.logWithComment(LogUtil.LogOperateObject.PROJECT, LogUtil.LogAction.STARTED, oldProject.getProjectId().toString(),
@@ -262,7 +273,7 @@ public class ProjectAction extends BaseController {
     @RequestMapping(value = "doing", method = RequestMethod.POST)
     public Map<String, String> doingSave(Project project, String content) {
         Project oldProject = projectService.findProjectById(project.getProjectId());
-        project.setProjectStatus(project.DOING);
+        project.setProjectStatus(Project.DOING);
         Integer res = projectService.updateProject(project);
         LogUtil.logWithComment(LogUtil.LogOperateObject.PROJECT, LogUtil.LogAction.ACTIVATED, oldProject.getProjectId().toString(),
                 UserUtils.getUserId(), null, oldProject.getProjectId().toString(), oldProject, project, content);
@@ -283,7 +294,7 @@ public class ProjectAction extends BaseController {
     @RequestMapping(value = "finish", method = RequestMethod.POST)
     public Map<String, String> finishSave(Project project, String content) {
         Project oldProject = projectService.findProjectById(project.getProjectId());
-        project.setProjectStatus(project.FINISH);
+        project.setProjectStatus(Project.FINISH);
         project.setProjectCloseBy(UserUtils.getUserId());
         project.setProjectCloseDate(new Date());
         Integer res = projectService.updateProject(project);
@@ -348,7 +359,7 @@ public class ProjectAction extends BaseController {
         }
         Integer[] integers = new Integer[ids.size()];
         projectService.batchDeleteProject(ids.toArray(integers));
-        ProjectUtils.removeProjectList();
+        //TODO:ProjectUtils.removeProjectList();
         return resultMap(true, "删除项目成功");
     }
 
@@ -366,9 +377,9 @@ public class ProjectAction extends BaseController {
             return resultMap(false, "请选择删除的项目");
         }
         Project project = projectService.findProjectById(id);
-        project.setProjectDeleted(project.DELETE_YES);
+        project.setProjectDeleted(Project.DELETE_YES);
         projectService.updateProject(project);
-        ProjectUtils.removeProjectList();
+        //TODO:ProjectUtils.removeProjectList();
         return resultMap(true, "删除项目成功");
     }
 
@@ -380,7 +391,7 @@ public class ProjectAction extends BaseController {
             result.add(projectService.findProjectById(Integer.parseInt(initKey)));
             return result;
         }
-        Integer[] pIds = ProjectUtils.getUserProjectIdList();
+        Integer[] pIds = projectOperate.getUserProjectIdList();
         return projectService.projectInCondition(key,pIds);
     }
 

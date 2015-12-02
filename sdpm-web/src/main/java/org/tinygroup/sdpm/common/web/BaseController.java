@@ -20,6 +20,7 @@ import org.tinygroup.sdpm.system.dao.pojo.ProfileType;
 import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;
 import org.tinygroup.sdpm.system.service.inter.LogService;
 import org.tinygroup.sdpm.system.service.inter.ProfileService;
+import org.tinygroup.sdpm.util.ProjectOperate;
 import org.tinygroup.sdpm.util.UserUtils;
 
 import javax.servlet.http.HttpServletResponse;
@@ -34,6 +35,10 @@ import java.util.*;
  * Created by Hulk on 2015/9/20.
  */
 public abstract class BaseController {
+
+    @Autowired
+    protected ProjectOperate projectOperate;
+
     /**
      * 管理基础路径
      */

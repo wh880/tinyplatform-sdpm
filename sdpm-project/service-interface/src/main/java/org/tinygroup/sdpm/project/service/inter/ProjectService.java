@@ -11,6 +11,12 @@ import java.util.List;
  * Created by shenly13343 on 2015-09-17.
  */
 public interface ProjectService {
+    String USER_CACHE_PROJECT_LIST = "userProjectList";
+
+    /**
+     * 获得用户所能见的项目列表
+     */
+    List<Project> getUserProjectList(String userId);
 
     /**
      * 查找用户所在团队所拥有的项目
@@ -126,9 +132,10 @@ public interface ProjectService {
 
     /**
      * 根据输入查询
+     *
      * @param condition
      * @param ids
      * @return
      */
-    List<Project> projectInCondition(String condition,Integer ...ids);
+    List<Project> projectInCondition(String condition, Integer... ids);
 }

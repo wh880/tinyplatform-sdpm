@@ -104,7 +104,7 @@ public class TaskManagerImpl implements TaskManager {
     public Integer delete(Integer id) {
         ProjectTask task = new ProjectTask();
         task.setTaskId(id);
-        task.setTaskDeleted(task.DELETE_YES);
+        task.setTaskDeleted(ProjectTask.DELETE_YES);
         return taskDao.edit(task);
     }
 

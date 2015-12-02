@@ -1,12 +1,12 @@
 #@navSelect2("sleProject" "sleProject")
     #@navSelect2Nav()
-        ${currentProjectId?ProjectUtils.getProject(currentProjectId).projectName:"请选择项目"}
+        ${currentProjectId?projectOperate.getProject(currentProjectId).projectName:"请选择项目"}
     <span class="caret"></span>
     #end
     #@navSelect2Body({"style":"left:-18px;top:26px"})
         #@navSelect2Data()
         <optgroup label="请选择项目">
-            #foreach(p:ProjectUtils.getUserProjectList())
+            #foreach(p:projectOperate.getUserProjectList())
                 <option value="${p.projectId}"${currentProjectId==p.projectId?" selected":""}>${p.projectName}</option>
             #end
         </optgroup>

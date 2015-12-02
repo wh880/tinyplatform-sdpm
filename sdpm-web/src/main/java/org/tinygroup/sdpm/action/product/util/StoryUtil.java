@@ -1,8 +1,8 @@
 package org.tinygroup.sdpm.action.product.util;
 
 import org.tinygroup.commons.tools.StringUtil;
-import org.tinygroup.sdpm.common.condition.ConditionCarrier;
-import org.tinygroup.sdpm.common.condition.ConditionUtils;
+import org.tinygroup.sdpm.dao.condition.ConditionCarrier;
+import org.tinygroup.sdpm.dao.condition.ConditionUtils;
 import org.tinygroup.sdpm.util.UserUtils;
 
 /**

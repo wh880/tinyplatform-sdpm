@@ -8,4 +8,4 @@
 		{ id: 15, pId: 0, name: "用户状态", open: true, nocheck: true },
 		{ id: 15, pId: 0, name: "岗位任职规则属性", open: true, nocheck: true },
 		{ id: 15, pId: 0, name: "岗位职责规则属性", open: true, nocheck: true }
-]
+];

@@ -2,7 +2,6 @@ package org.tinygroup.sdpm.system.service.inter;
 
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.tinysqldsl.Pager;
-import org.tinygroup.tinysqldsl.base.Condition;
 
 import java.util.List;
 
@@ -34,14 +33,14 @@ public interface ActionService {
      *
      * @param start
      * @param limit
-     * @param condition
+     * @param chooseDate
      * @param systemAction
      * @param order
      * @param orderType
      * @return
      */
     Pager<SystemAction> queryActionPager(int start, int limit,
-                                         Condition condition, SystemAction systemAction, String order,
+                                         String chooseDate, SystemAction systemAction, String order,
                                          String orderType);
 
     /**

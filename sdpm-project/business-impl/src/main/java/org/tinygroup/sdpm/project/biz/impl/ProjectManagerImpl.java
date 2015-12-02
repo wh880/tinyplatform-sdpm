@@ -71,7 +71,7 @@ public class ProjectManagerImpl implements ProjectManager {
     public Integer delete(int projectId) {
         Project project = new Project();
         project.setProjectId(projectId);
-        project.setProjectDeleted(project.DELETE_YES);
+        project.setProjectDeleted(Project.DELETE_YES);
         return projectDao.edit(project);
     }
 
