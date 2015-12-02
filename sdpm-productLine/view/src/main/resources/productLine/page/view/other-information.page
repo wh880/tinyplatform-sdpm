@@ -22,15 +22,15 @@
             #end
             #@tr()
                 #@td()产品线经理#end
-                #@td()${productLine?.productLineOwner?UserUtils.getUserById(productLine?.productLineOwner)?.orgUserRealName:""}#end
+                #@td()${productLine?.productLineOwner?userUtils.getUserById(productLine?.productLineOwner)?.orgUserRealName:""}#end
             #end
             #@tr()
                 #@td()产品线质量经理#end
-                #@td()${productLine?.productLineQualityManager?UserUtils.getUserById(productLine?.productLineQualityManager)?.orgUserRealName:""}#end
+                #@td()${productLine?.productLineQualityManager?userUtils.getUserById(productLine?.productLineQualityManager)?.orgUserRealName:""}#end
             #end
             #@tr()
                 #@td()产品交付经理#end
-                #@td()${productLine?.productLineDeliveryManager?UserUtils.getUserById(productLine?.productLineDeliveryManager)?.orgUserRealName:""}#end
+                #@td()${productLine?.productLineDeliveryManager?userUtils.getUserById(productLine?.productLineDeliveryManager)?.orgUserRealName:""}#end
             #end
             #@tr()
                 #@td()访问控制#end
@@ -52,7 +52,7 @@
             #end
             #@tr()
                 #@td()由谁创建#end
-                #@td()${productLine?.productLineCreatedBy?UserUtils.getUserById(productLine?.productLineCreatedBy)?.orgUserRealName:""}#end
+                #@td()${productLine?.productLineCreatedBy?userUtils.getUserById(productLine?.productLineCreatedBy)?.orgUserRealName:""}#end
             #end
             #@tr()
                 #@td()创建日期#end

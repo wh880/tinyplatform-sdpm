@@ -29,7 +29,6 @@ import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.sdpm.system.service.inter.ProfileService;
 import org.tinygroup.sdpm.util.CookieUtils;
 import org.tinygroup.sdpm.util.LogUtil;
-import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -162,7 +161,7 @@ public class DocAction extends BaseController {
         List<Product> product = productService.findProductList(new Product());
         doc.setDocLibId(Integer.parseInt(CookieUtils.getCookie(request, DocAction.COOKIE_DOC_LIB_ID)));
         doc.setDocDeleted("0");
-        doc.setDocAddedBy(UserUtils.getUser().getOrgUserId());
+        doc.setDocAddedBy(userUtils.getUser().getOrgUserId());
         DocumentDoc document = docservice.createNewDoc(doc);
         processProfile(uploadProfile, document.getDocId(), ProfileType.DOCUMENT);
 
@@ -171,7 +170,7 @@ public class DocAction extends BaseController {
         LogUtil.logWithComment(LogUtil.LogOperateObject.DOC,
                 LogUtil.LogAction.OPENED,
                 String.valueOf(document.getDocId()),
-                UserUtils.getUserId(),
+                userUtils.getUserId(),
                 String.valueOf(doc.getDocProduct()),
                 String.valueOf(doc.getDocProject()),
                 null,
@@ -232,7 +231,7 @@ public class DocAction extends BaseController {
                            SystemAction systemAction,
                            UploadProfile uploadProfile) throws IOException {
         DocumentDoc documentDoc = docservice.findDocById(doc.getDocId());
-        doc.setDocEditedBy(UserUtils.getUser().getOrgUserId());
+        doc.setDocEditedBy(userUtils.getUser().getOrgUserId());
         docservice.editDoc(doc);
 
         processProfile(uploadProfile, doc.getDocId(), ProfileType.DOCUMENT);
@@ -240,7 +239,7 @@ public class DocAction extends BaseController {
         LogUtil.logWithComment(LogUtil.LogOperateObject.DOC,
                 LogUtil.LogAction.EDITED,
                 String.valueOf(doc.getDocId()),
-                UserUtils.getUserId(),
+                userUtils.getUserId(),
                 String.valueOf(doc.getDocProduct()),
                 String.valueOf(doc.getDocProject()),
                 documentDoc,
@@ -317,7 +316,7 @@ public class DocAction extends BaseController {
             LogUtil.logWithComment(LogUtil.LogOperateObject.DOC,
                     LogUtil.LogAction.CREATED,
                     String.valueOf(doc.getDocId()),
-                    UserUtils.getUserId(),
+                    userUtils.getUserId(),
                     String.valueOf(doc.getDocProduct()),
                     String.valueOf(doc.getDocProject()),
                     null,

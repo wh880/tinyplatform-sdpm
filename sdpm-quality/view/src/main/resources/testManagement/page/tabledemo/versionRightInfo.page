@@ -15,7 +15,7 @@
     			#end
     			#@tr()
     				#@th()负责人#end
-    				#@td()${testTask?.testtaskOwner?(UserUtils.getUserById(testTask?.testtaskOwner)?.orgUserRealName):""}#end
+    				#@td()${testTask?.testtaskOwner?(userUtils.getUserById(testTask?.testtaskOwner)?.orgUserRealName):""}#end
     			#end
     			#@tr()
     				#@th()优先级#end

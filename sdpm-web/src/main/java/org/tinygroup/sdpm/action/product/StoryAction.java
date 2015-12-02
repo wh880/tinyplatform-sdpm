@@ -39,8 +39,6 @@ import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.sdpm.system.service.inter.ProfileService;
 import org.tinygroup.sdpm.util.CookieUtils;
 import org.tinygroup.sdpm.util.LogUtil;
-import org.tinygroup.sdpm.util.ProductUtils;
-import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -146,14 +144,14 @@ public class StoryAction extends BaseController {
             String[] title,
             HttpServletRequest request,
             UploadProfile uploadProfile) throws IOException {
-        ProductStory story = storyService.addStory(productStory, storySpec,UserUtils.getUserId());
+        ProductStory story = storyService.addStory(productStory, storySpec,userUtils.getUserId());
         processProfile(uploadProfile, story.getStoryId(), ProfileType.STORY);
 
         if ("copy".equals(type)) {
             LogUtil.logWithComment(LogUtil.LogOperateObject.STORY,
                     LogUtil.LogAction.COPY,
                     String.valueOf(story.getStoryId()),
-                    UserUtils.getUserId(),
+                    userUtils.getUserId(),
                     String.valueOf(story.getProductId()),
                     null,
                     null,
@@ -163,7 +161,7 @@ public class StoryAction extends BaseController {
         } else {
             LogUtil.logWithComment(LogUtil.LogOperateObject.STORY,
                     LogUtil.LogAction.OPENED, String.valueOf(story.getStoryId()),
-                    UserUtils.getUserId(), String.valueOf(story.getProductId()),
+                    userUtils.getUserId(), String.valueOf(story.getProductId()),
                     null, null, null, systemAction.getActionComment());
             return "redirect:" + adminPath + "/product/story?choose=1&currentPageId=3";
         }
@@ -197,7 +195,7 @@ public class StoryAction extends BaseController {
     public String update(SystemAction systemAction, ProductStory productStory,
                          String lastAddress, UploadProfile uploadProfile) throws IOException {
         ProductStory story = storyService.findStory(productStory.getStoryId());
-        productStory.setStoryLastEditedBy(UserUtils.getUser().getOrgUserId());
+        productStory.setStoryLastEditedBy(userUtils.getUser().getOrgUserId());
         productStory.setStoryLastEditedDate(new Date());
         if (story.getStoryStatus() == "1") {
             if (productStory.getPlanId() != null && productStory.getPlanId() > 0) {
@@ -210,7 +208,7 @@ public class StoryAction extends BaseController {
         LogUtil.logWithComment(LogUtil.LogOperateObject.STORY,
                 LogUtil.LogAction.EDITED,
                 String.valueOf(productStory.getStoryId()),
-                UserUtils.getUserId(), String.valueOf(story.getProductId()),
+                userUtils.getUserId(), String.valueOf(story.getProductId()),
                 null, story, productStory, systemAction.getActionComment());
         if (!StringUtil.isBlank(lastAddress)) {
             return "redirect:" + lastAddress;
@@ -270,7 +268,7 @@ public class StoryAction extends BaseController {
     @RequestMapping("/delete")
     public Map delete(ProductStory story) {
         story.setDeleted(FieldUtil.DELETE_YES);
-        story.setStoryClosedBy(UserUtils.getUserId());
+        story.setStoryClosedBy(userUtils.getUserId());
         story.setStoryClosedDate(new Date());
         storyService.deleteStory(story);
         Map<String, String> map = new HashMap<String, String>();
@@ -279,7 +277,7 @@ public class StoryAction extends BaseController {
 
         LogUtil.logWithComment(LogUtil.LogOperateObject.STORY,
                 LogUtil.LogAction.DELETED, String.valueOf(story.getStoryId()),
-                UserUtils.getUserId(), String.valueOf(story.getProductId()),
+                userUtils.getUserId(), String.valueOf(story.getProductId()),
                 null, null, null, null);
 
         return map;
@@ -296,7 +294,7 @@ public class StoryAction extends BaseController {
 
         LogUtil.logWithComment(LogUtil.LogOperateObject.STORY,
                 LogUtil.LogAction.DELETED, String.valueOf(story.getStoryId()),
-                UserUtils.getUserId(), String.valueOf(story.getProductId()),
+                userUtils.getUserId(), String.valueOf(story.getProductId()),
                 null, null, null, null);
 
         return map;
@@ -431,7 +429,7 @@ public class StoryAction extends BaseController {
         LogUtil.logWithComment(LogUtil.LogOperateObject.STORY,
                 LogUtil.LogAction.CHANGED,
                 String.valueOf(story.getStoryId()),
-                UserUtils.getUserId(),
+                userUtils.getUserId(),
                 String.valueOf(story.getProductId()), null, story,
                 productStory, systemAction.getActionComment());
         return "redirect:" + "/a/product/story";
@@ -458,7 +456,7 @@ public class StoryAction extends BaseController {
         LogUtil.logWithComment(LogUtil.LogOperateObject.STORY,
                 LogUtil.LogAction.REVIEWED,
                 String.valueOf(productStory.getStoryId()),
-                UserUtils.getUserId(),
+                userUtils.getUserId(),
                 String.valueOf(story.getProductId()), null, story,
                 productStory, systemAction.getActionComment());
         return "redirect:" + "/a/product/story";
@@ -474,7 +472,7 @@ public class StoryAction extends BaseController {
     @RequestMapping("/close")
     public String close(SystemAction systemAction, ProductStory productStory) {
         ProductStory story = storyService.findStory(productStory.getStoryId());
-        productStory.setStoryClosedBy(UserUtils.getUserId());
+        productStory.setStoryClosedBy(userUtils.getUserId());
         productStory.setStoryClosedDate(new Date());
         productStory.setDeleted(FieldUtil.DELETE_YES);
         productStory.setStoryStatus("2");
@@ -482,7 +480,7 @@ public class StoryAction extends BaseController {
         LogUtil.logWithComment(LogUtil.LogOperateObject.STORY,
                 LogUtil.LogAction.CLOSED,
                 String.valueOf(productStory.getStoryId()),
-                UserUtils.getUserId(), String.valueOf(story.getProductId()),
+                userUtils.getUserId(), String.valueOf(story.getProductId()),
                 null, story, productStory, systemAction.getActionComment());
         return "redirect:" + "/a/product/story";
     }
@@ -831,7 +829,7 @@ public class StoryAction extends BaseController {
             LogUtil.logWithComment(LogUtil.LogOperateObject.STORY
                     , LogUtil.LogAction.DELETED
                     , String.valueOf(story.getProductId())
-                    , UserUtils.getUserId()
+                    , userUtils.getUserId()
                     , String.valueOf(story.getProductId())
                     , null
                     , null
@@ -891,7 +889,7 @@ public class StoryAction extends BaseController {
     public String remark(ProductStory story, SystemAction systemAction) {
         LogUtil.logWithComment(LogUtil.LogOperateObject.STORY,
                 LogUtil.LogAction.REMARK, String.valueOf(story.getStoryId()),
-                UserUtils.getUserId(), String.valueOf(story.getProductId()),
+                userUtils.getUserId(), String.valueOf(story.getProductId()),
                 null, null, null, systemAction.getActionComment());
         return "redirect:" + adminPath
                 + "/product/storySpec/find/productDemandDetail?storyId="
@@ -949,6 +947,6 @@ public class StoryAction extends BaseController {
             result.add(storyService.findStory(initKey));
             return result;
         }
-        return storyService.storyInCondition(key, productId == null ? Integer.parseInt(CookieUtils.getCookie(request, ProductUtils.COOKIE_PRODUCT_ID)) : productId);
+        return storyService.storyInCondition(key, productId == null ? Integer.parseInt(CookieUtils.getCookie(request, productUtils.COOKIE_PRODUCT_ID)) : productId);
     }
 }

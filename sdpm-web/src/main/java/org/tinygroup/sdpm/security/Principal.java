@@ -36,7 +36,7 @@ public class Principal implements Serializable {
      */
 //    public String getSessionid() {
 //        try{
-//            return (String) UserUtils.getSession().getId();
+//            return (String) userUtils.getSession().getId();
 //        }catch (Exception e) {
 //            return "";
 //        }

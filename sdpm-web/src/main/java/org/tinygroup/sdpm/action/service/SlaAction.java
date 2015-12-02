@@ -16,7 +16,6 @@ import org.tinygroup.sdpm.service.dao.pojo.ServiceSla;
 import org.tinygroup.sdpm.service.service.inter.ClientService;
 import org.tinygroup.sdpm.service.service.inter.SlaService;
 import org.tinygroup.sdpm.util.LogUtil;
-import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.ArrayList;
@@ -74,13 +73,13 @@ public class SlaAction extends BaseController {
     public String save(Integer clientId, String clientName, ServiceSla sla, Model model) {
         if (sla.getSlaId() == null) {
             sla = slaService.addSla(sla);
-            LogUtil.logWithComment(LogUtil.LogOperateObject.SLA, LogUtil.LogAction.OPENED, String.valueOf(sla.getSlaId()), UserUtils.getUserId(),
+            LogUtil.logWithComment(LogUtil.LogOperateObject.SLA, LogUtil.LogAction.OPENED, String.valueOf(sla.getSlaId()), userUtils.getUserId(),
                     null, null, null, sla, null);
 
         } else {
             ServiceSla qualitySla = slaService.findSla(sla.getSlaId());
             slaService.updateSla(sla);
-            LogUtil.logWithComment(LogUtil.LogOperateObject.SLA, LogUtil.LogAction.EDITED, String.valueOf(sla.getSlaId()), UserUtils.getUserId(),
+            LogUtil.logWithComment(LogUtil.LogOperateObject.SLA, LogUtil.LogAction.EDITED, String.valueOf(sla.getSlaId()), userUtils.getUserId(),
                     null, null, qualitySla, sla, null);
         }
         model.addAttribute("sla", sla);

@@ -35,7 +35,6 @@ import org.tinygroup.sdpm.quality.service.inter.TestTaskService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.service.inter.ActionService;
 import org.tinygroup.sdpm.util.LogUtil;
-import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -88,7 +87,7 @@ public class UserAction extends BaseController {
      */
     @RequestMapping("/passwordSave")
     public String passwordSave(String oldPassword, String newPassword, Model model) {
-        OrgUser user = UserUtils.getUser();
+        OrgUser user = userUtils.getUser();
         if (userService.validatePassword(oldPassword, user.getOrgUserPassword())) {
             OrgUser newUser = new OrgUser();
             newUser.setOrgUserId(user.getOrgUserId());
@@ -155,7 +154,7 @@ public class UserAction extends BaseController {
                 LogUtil.logWithComment(LogUtil.LogOperateObject.USER
                         , LogUtil.LogAction.CREATED
                         , String.valueOf(userTemp.getOrgUserId())
-                        , UserUtils.getUserId()
+                        , userUtils.getUserId()
                         , null, null, null, null, null);
 
                 roleService.batchAddRolesToUser(userTemp.getOrgUserId(), roleIds);
@@ -168,11 +167,11 @@ public class UserAction extends BaseController {
             LogUtil.logWithComment(LogUtil.LogOperateObject.USER
                     , LogUtil.LogAction.EDITED
                     , String.valueOf(user.getOrgUserId())
-                    , UserUtils.getUserId()
+                    , userUtils.getUserId()
                     , null, null, null, null, null);
         }
         model.addAttribute("user", user);
-        UserUtils.clearCache(user);
+        userUtils.clearCache(user);
         return "redirect:" + adminPath + "/org/user/list/";
     }
 
@@ -237,13 +236,13 @@ public class UserAction extends BaseController {
     @RequiresPermissions("org-user-delete")
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public Map delete(String id, String password) {
-        String userPassword = UserUtils.getUser().getOrgUserPassword();
+        String userPassword = userUtils.getUser().getOrgUserPassword();
         if (userService.validatePassword(password, userPassword)) {
             userService.deleteUser(id);
             LogUtil.logWithComment(LogUtil.LogOperateObject.USER
                     , LogUtil.LogAction.DELETED
                     , String.valueOf(id)
-                    , UserUtils.getUserId()
+                    , userUtils.getUserId()
                     , null
                     , null
                     , null

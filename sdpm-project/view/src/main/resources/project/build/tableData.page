@@ -12,7 +12,7 @@
         #@td()${b?.buildScmPath}</a>#end
         #@td()${b?.buildFilePath}#end
         #@td("nowrap")${formatDate(b?.buildDate,"yyyy-MM-dd")}#end
-        #@td("nowrap")${b?.buildBuilder?UserUtils.getUserById(b?.buildBuilder)?.orgUserRealName:""}#end
+        #@td("nowrap")${b?.buildBuilder?userUtils.getUserById(b?.buildBuilder)?.orgUserRealName:""}#end
         #@td("nowrap")
             #set(m=menuManager.getMenu("tversionpro"))
             #if(m)

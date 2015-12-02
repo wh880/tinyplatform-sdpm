@@ -15,6 +15,8 @@ import java.util.List;
 public class MenuUtils {
     @Autowired
     private MenuManager menuManager;
+    @Autowired
+    private UserUtils userUtils;
 
     public Menu getMenu(String menuId) {
         if (UserUtils.hasMenu(menuId)) {

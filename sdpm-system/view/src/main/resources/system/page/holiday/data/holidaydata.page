@@ -9,7 +9,7 @@
 		<a title="国庆节"  href="${TINY_CONTEXT_PATH+adminPath}/system/holiday/view?holidayId=${h?.holidayId}">${h?.holidayName}</a>
 	#end
 	#@td()${h?.holidayDate}#end
-	#@td()${UserUtils.getUserById(h?.holidayAccount).orgUserRealName}#end
+	#@td()${userUtils.getUserById(h?.holidayAccount).orgUserRealName}#end
 	#@td()${h?.holidayType}#end
 	#@td()${h?.holidayDetail}#end
 	

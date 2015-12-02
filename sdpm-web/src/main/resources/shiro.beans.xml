@@ -111,5 +111,5 @@
 
     <bean class="org.tinygroup.sdpm.security.SystemRealm" id="systemRealm"/>
 
-
+    <bean class="org.tinygroup.sdpm.security.MenuPermissionSubject" />
 </beans>

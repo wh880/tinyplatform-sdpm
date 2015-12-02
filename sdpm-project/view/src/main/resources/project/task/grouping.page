@@ -41,7 +41,7 @@
                 <td>
                     <span class="glyphicon glyphicon-chevron-down">
                         #if(key&&(type =="4"||type =="5"||type =="6"||type =="7"))
-                            ${UserUtils.getUserById(key).orgUserRealName}
+                            ${userUtils.getUserById(key).orgUserRealName}
                         #elseif(key&&(type=="2"))
                             ${getDict("taskStatus",key)}
                         #else
@@ -56,9 +56,9 @@
                     <td></td>
                     <td>${task?.taskName}</td>
                     <td>${task?.taskPri}</td>
-                    <td>${task?.taskAssignedTo==null?"":UserUtils.getUserById(task?.taskAssignedTo)?.orgUserRealName}
+                    <td>${task?.taskAssignedTo==null?"":userUtils.getUserById(task?.taskAssignedTo)?.orgUserRealName}
                     </td>
-                    <td>${task?.taskFinishedBy==null?"":UserUtils.getUserById(task?.taskFinishedBy)?.orgUserRealName}
+                    <td>${task?.taskFinishedBy==null?"":userUtils.getUserById(task?.taskFinishedBy)?.orgUserRealName}
                     </td>
                     <td>${task?.taskEstimate}</td>
                     <td ${task?.taskConsumed}

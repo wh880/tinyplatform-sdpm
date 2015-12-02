@@ -14,8 +14,8 @@ ${casepager?.totalCount+1}
     #@td()${getDict("casePriority",c?.priority)}#end
     #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/testCase/case/viewInfo?id=${c?.caseId}">${c?.caseTitle}</a>#end
     #@td("nowrap")${getDict("caseType",c?.caseType)}#end
-    #@td("nowrap")<span class="${c?.caseOpenedBy==UserUtils.getUserId()?'c-red':''}">${c?.caseOpenedBy?UserUtils.getUserById(c?.caseOpenedBy)?.orgUserRealName:""}</span>#end
-    #@td("nowrap")<span class="${c?.caseLastRunner==UserUtils.getUserId()?'c-red':''}">${c?.caseLastRunner?UserUtils.getUserById(c?.caseLastRunner)?.orgUserRealName:""}</span>#end
+    #@td("nowrap")<span class="${c?.caseOpenedBy==userUtils.getUserId()?'c-red':''}">${c?.caseOpenedBy?userUtils.getUserById(c?.caseOpenedBy)?.orgUserRealName:""}</span>#end
+    #@td("nowrap")<span class="${c?.caseLastRunner==userUtils.getUserId()?'c-red':''}">${c?.caseLastRunner?userUtils.getUserById(c?.caseLastRunner)?.orgUserRealName:""}</span>#end
     #@td("nowrap")${c?.caseLastRunDate?formatDate(c?.caseLastRunDate,'yyyy-MM-dd'):""}#end
     #@td("nowrap")${getDict("caseResult",c?.caseLastRunResult)}#end
     #@td("nowrap")${getDict("caseStatus",c?.caseStatus)}#end

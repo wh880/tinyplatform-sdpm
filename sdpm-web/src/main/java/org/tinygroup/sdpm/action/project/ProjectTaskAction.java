@@ -31,7 +31,10 @@ import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;
 import org.tinygroup.sdpm.system.service.inter.EffortService;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.sdpm.system.service.inter.ProfileService;
-import org.tinygroup.sdpm.util.*;
+import org.tinygroup.sdpm.util.CookieUtils;
+import org.tinygroup.sdpm.util.LogUtil;
+import org.tinygroup.sdpm.util.ModuleUtil;
+import org.tinygroup.sdpm.util.ProjectOperate;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -154,7 +157,7 @@ public class ProjectTaskAction extends BaseController {
         task = taskService.addTask(task);
 
         LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, LogUtil.LogAction.OPENED,
-                task.getTaskId().toString(), UserUtils.getUserId(),
+                task.getTaskId().toString(), userUtils.getUserId(),
                 null, task.getTaskProject().toString(), null, null, comment);
         try {
             processProfile(uploadProfile, task.getTaskId(), ProfileType.TASK);
@@ -207,7 +210,7 @@ public class ProjectTaskAction extends BaseController {
         processProfile(uploadProfile, task.getTaskId(), ProfileType.TASK);
 
         LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, LogUtil.LogAction.EDITED, oldTask.getTaskId().toString(),
-                UserUtils.getUserId(), null, oldTask.getTaskProject().toString(), oldTask, task, contents);
+                userUtils.getUserId(), null, oldTask.getTaskProject().toString(), oldTask, task, contents);
         model.addAttribute("task", task);
         return "redirect:" + adminPath + "/project/task/index";
     }
@@ -242,7 +245,7 @@ public class ProjectTaskAction extends BaseController {
             } else {
                 systemEffort.setEffortObjectType("task");
                 systemEffort.setEffortObjectId(taskId);
-                systemEffort.setEffortAccount(UserUtils.getUserAccount());
+                systemEffort.setEffortAccount(userUtils.getUserAccount());
                 systemEffort.setEffortProject(task.getTaskProject());
             }
         }
@@ -289,7 +292,7 @@ public class ProjectTaskAction extends BaseController {
         if (!task.getTaskLeft().equals(oldTask.getTaskLeft())) {
             burnService.updateBurnByProjectId(oldTask.getTaskProject());
         }
-        LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, LogUtil.LogAction.ASSIGNED, task.getTaskId().toString(), UserUtils.getUserId(),
+        LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, LogUtil.LogAction.ASSIGNED, task.getTaskId().toString(), userUtils.getUserId(),
                 null, oldTask.getTaskProject().toString(), oldTask, task, comment);
         return "redirect:" + adminPath + "/project/task/index";
     }
@@ -308,7 +311,7 @@ public class ProjectTaskAction extends BaseController {
     @RequestMapping(value = "/finish", method = RequestMethod.POST)
     public String finishSave(ProjectTask task, String comment) {
         ProjectTask oldTask = taskService.findTask(task.getTaskId());
-        task.setTaskFinishedBy(UserUtils.getUserId());
+        task.setTaskFinishedBy(userUtils.getUserId());
         task.setTaskFinishedDate(new Date());
         task.setTaskStatus(ProjectTask.DONE);
         taskService.updateFinishTask(task);
@@ -332,7 +335,7 @@ public class ProjectTaskAction extends BaseController {
             burnService.updateBurnByProjectId(oldTask.getTaskProject());
         }
         LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, LogUtil.LogAction.ASSIGNED, task.getTaskId().toString(),
-                UserUtils.getUserId(),
+                userUtils.getUserId(),
                 null, oldTask.getTaskProject().toString(),
                 oldTask, task, comment);
         return "redirect:" + adminPath + "/project/task/index";
@@ -351,10 +354,10 @@ public class ProjectTaskAction extends BaseController {
     @RequestMapping(value = "/close", method = RequestMethod.POST)
     public String closeSave(ProjectTask task, String content) {
         task.setTaskCloseDate(new Date());
-        task.setTaskClosedBy(UserUtils.getUserId());
+        task.setTaskClosedBy(userUtils.getUserId());
         taskService.updateCloseTask(task);
         LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, LogUtil.LogAction.CLOSED, task.getTaskId().toString(),
-                UserUtils.getUserId(), null, taskService.findTask(task.getTaskId()).getTaskProject().toString(),
+                userUtils.getUserId(), null, taskService.findTask(task.getTaskId()).getTaskProject().toString(),
                 null, null, content);
         return "project/task/index.page";
     }
@@ -371,11 +374,11 @@ public class ProjectTaskAction extends BaseController {
     @RequestMapping(value = "/start", method = RequestMethod.POST)
     public String startSave(ProjectTask task, String content) {
         ProjectTask projectTask = taskService.findTask(task.getTaskId());
-        task.setTaskOpenBy(UserUtils.getUserId());
+        task.setTaskOpenBy(userUtils.getUserId());
         task.setTaskOpenedDate(new Date());
         taskService.updateStartTask(task);
         LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, LogUtil.LogAction.STARTED, task.getTaskId().toString(),
-                UserUtils.getUserId(), null, projectTask.getTaskProject().toString(),
+                userUtils.getUserId(), null, projectTask.getTaskProject().toString(),
                 taskService.findTask(task.getTaskId()), task, content);
         if (!projectTask.getTaskConsumed().equals(task.getTaskConsumed()) ||
                 !projectTask.getTaskLeft().equals(task.getTaskLeft())) {
@@ -393,12 +396,12 @@ public class ProjectTaskAction extends BaseController {
 
     @RequestMapping(value = "/cancel", method = RequestMethod.POST)
     public String cancelSave(ProjectTask task, String content) {
-        task.setTaskCanceledBy(UserUtils.getUserId());
+        task.setTaskCanceledBy(userUtils.getUserId());
         task.setTaskCanceledDate(new Date());
         ProjectTask old = taskService.findTask(task.getTaskId());
         taskService.updateCancelTask(task);
         LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, LogUtil.LogAction.CANCELED, task.getTaskId().toString(),
-                UserUtils.getUserId(), null, old.getTaskProject().toString(),
+                userUtils.getUserId(), null, old.getTaskProject().toString(),
                 old, task, content);
         return "redirect:" + adminPath + "/project/task/index";
     }
@@ -444,10 +447,10 @@ public class ProjectTaskAction extends BaseController {
             statu = "0";
         }
 
-        String condition = TaskStatusUtil.getCondition(statu, choose, UserUtils.getUserId(), moduleIds);
+        String condition = TaskStatusUtil.getCondition(statu, choose, userUtils.getUserId(), moduleIds);
         Pager<ProjectTask> taskPager;
         if (condition.equals("completeByMe")) {
-            OrgUser user = UserUtils.getUser();
+            OrgUser user = userUtils.getUser();
             taskPager = taskService.findPagerTaskByMe(start, limit, task, order, asc, user);
         } else {
             taskPager = taskService.findTaskPager(start, limit, task, order, asc, condition);
@@ -615,7 +618,7 @@ public class ProjectTaskAction extends BaseController {
             }
 
             map.put("pColor", t.getTaskPri().toString());
-            map.put("pRes", UserUtils.getUserById(t.getTaskAssignedTo()).getOrgUserRealName());
+            map.put("pRes", userService.findUser(t.getTaskAssignedTo()).getOrgUserRealName());
             //进度
             float comp;
             if ((t.getTaskConsumed() == null || t.getTaskLeft() == null) || (t.getTaskConsumed() + t.getTaskLeft() == 0)) {
@@ -730,7 +733,7 @@ public class ProjectTaskAction extends BaseController {
     @RequestMapping("/changeStatus")
     public Map<String, String> changeStatus(ProjectTask task, String content, String taskStatus) {
         Map<String, String> map;
-        task.setTaskLastEditedBy(UserUtils.getUserId());
+        task.setTaskLastEditedBy(userUtils.getUserId());
         Integer res;
         LogUtil.LogAction logAction;
         if ("doing".equals(taskStatus)) {
@@ -759,7 +762,7 @@ public class ProjectTaskAction extends BaseController {
             map = generateResultMap(res, "编辑成功", "编辑失败");
         }
         LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, logAction, task.getTaskId().toString(),
-                UserUtils.getUserId(), null, taskService.findTask(task.getTaskId()).getTaskProject().toString(),
+                userUtils.getUserId(), null, taskService.findTask(task.getTaskId()).getTaskProject().toString(),
                 taskService.findTask(task.getTaskId()), task, content);
         return map;
     }

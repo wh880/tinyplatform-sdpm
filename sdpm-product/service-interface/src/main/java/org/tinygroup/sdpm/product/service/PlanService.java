@@ -98,6 +98,6 @@ public interface PlanService {
      * @param productPlan
      * @return
      */
-    List<ProductPlan> statisticfind(ProductPlan productPlan, boolean isOverdue);
+    List<ProductPlan> statisticFind(ProductPlan productPlan, boolean isOverdue);
 
 }

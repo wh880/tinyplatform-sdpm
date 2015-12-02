@@ -17,7 +17,6 @@ import org.tinygroup.sdpm.system.service.inter.HolidayService;
 import org.tinygroup.sdpm.util.LogUtil;
 import org.tinygroup.sdpm.util.LogUtil.LogAction;
 import org.tinygroup.sdpm.util.LogUtil.LogOperateObject;
-import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.ArrayList;
@@ -89,7 +88,7 @@ public class HolidayAction extends BaseController {
                 Holiday day = new Holiday();
                 day.setCompanyId(holiday.getCompanyId());
                 day.setHoilidayRemark(holiday.getHoilidayRemark());
-                day.setHolidayAccount(UserUtils.getUserId());
+                day.setHolidayAccount(userUtils.getUserId());
                 day.setHolidayDate(dates[i]);
                 day.setHolidayDeleted(holiday.getHolidayDeleted());
                 day.setHolidayDetail(holiday.getHolidayDetail());
@@ -101,14 +100,14 @@ public class HolidayAction extends BaseController {
             for (int i = 0, n = holidays.size(); i < n; i++) {
                 LogUtil.logWithComment(LogUtil.LogOperateObject.HOLIDAY,
                         LogUtil.LogAction.OPENED, String.valueOf(holidays.get(i).getHolidayId()),
-                        UserUtils.getUserId(), null, null, null, null, null);
+                        userUtils.getUserId(), null, null, null, null, null);
             }
         } else {
             Holiday holiday1 = holidayService.findHolidayById(holiday.getHolidayId());
             holidayService.updateHoliday(holiday);
             LogUtil.logWithComment(LogOperateObject.HOLIDAY, LogAction.EDITED,
                     String.valueOf(holiday.getHolidayId()),
-                    UserUtils.getUserId(), null, null, holiday1, holiday, null);
+                    userUtils.getUserId(), null, null, holiday1, holiday, null);
         }
         model.addAttribute("holiday", holiday);
         return "redirect:/a/system";
@@ -125,7 +124,7 @@ public class HolidayAction extends BaseController {
             map.put("info", "删除成功");
             map.put("status", "y");
             LogUtil.logWithComment(LogOperateObject.HOLIDAY, LogAction.DELETED,
-                    String.valueOf(id), UserUtils.getUserId(), null,
+                    String.valueOf(id), userUtils.getUserId(), null,
                     null, null, null, null);
         } else {
             map.put("info", "删除失败");
@@ -158,7 +157,7 @@ public class HolidayAction extends BaseController {
         List<Holiday> holiday = holidays.getHoliday();
         for (int i = 0, n = holiday.size(); i < n; i++) {
             LogUtil.logWithComment(LogOperateObject.HOLIDAY, LogAction.DELETED,
-                    String.valueOf(holiday.get(i).getHolidayId()), UserUtils.getUserId(), null,
+                    String.valueOf(holiday.get(i).getHolidayId()), userUtils.getUserId(), null,
                     null, null, null, holiday.get(i).getHoilidayRemark());
         }
         holidayService.batchSoftDeleteHoliday(holiday);

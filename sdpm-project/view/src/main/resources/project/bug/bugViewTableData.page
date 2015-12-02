@@ -14,9 +14,9 @@
     #@td()${b?.bugSeverity}#end
     #@td()${b?.priority}#end
     #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/bug/bugInfo?bugId=${b?.bugId}">${"["+(bug?.bugConfirmed==0?"未确认":"已确认")+"]"+b?.bugTitle}#end
-    #@td("nowrap")${b?.bugOpenedBy?UserUtils.getUserById(b?.bugOpenedBy)?.orgUserRealName:""}#end
-    #@td("nowrap")${b?.bugAssignedTo?UserUtils.getUserById(b?.bugAssignedTo)?.orgUserRealName:""}#end
-    #@td("nowrap")${b?.bugResolvedBy?UserUtils.getUserById(b?.bugResolvedBy)?.orgUserRealName:""}#end
+    #@td("nowrap")${b?.bugOpenedBy?userUtils.getUserById(b?.bugOpenedBy)?.orgUserRealName:""}#end
+    #@td("nowrap")${b?.bugAssignedTo?userUtils.getUserById(b?.bugAssignedTo)?.orgUserRealName:""}#end
+    #@td("nowrap")${b?.bugResolvedBy?userUtils.getUserById(b?.bugResolvedBy)?.orgUserRealName:""}#end
     #@td()${b?.bugResolution}#end
     #@td("nowrap")
         #foreach(m:menuManager.getScopeMenus("testbug-op"))

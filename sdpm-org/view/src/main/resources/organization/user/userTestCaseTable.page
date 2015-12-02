@@ -9,8 +9,8 @@
     #@td()${testCase?.priority}#end
     #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/testCase">${testCase?.caseTitle}</a>#end
     #@td()${getDict("caseType",testCase?.caseType)}#end
-    #@td()${testCase?.caseOpenedBy?UserUtils.getUserById(testCase?.caseOpenedBy)?.orgUserRealName:""}#end
-    #@td()${testCase?.caseLastRunner?UserUtils.getUserById(testCase?.caseLastRunner)?.orgUserRealName:""}#end
+    #@td()${testCase?.caseOpenedBy?userUtils.getUserById(testCase?.caseOpenedBy)?.orgUserRealName:""}#end
+    #@td()${testCase?.caseLastRunner?userUtils.getUserById(testCase?.caseLastRunner)?.orgUserRealName:""}#end
     #@td()${testCase?.caseLastRunDate}#end
     #@td()${getDict("caseResult",testCase?.caseLastRunResult)}#end
     #@td()${getDict("caseStatus",testCase?.caseStatus)}#end

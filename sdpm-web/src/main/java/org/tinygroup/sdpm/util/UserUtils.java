@@ -6,19 +6,15 @@ import org.apache.shiro.session.InvalidSessionException;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.menu.Menu;
 import org.tinygroup.sdpm.common.menu.MenuManager;
-import org.tinygroup.sdpm.common.menu.impl.MenuManagerImpl;
 import org.tinygroup.sdpm.org.dao.pojo.OrgRole;
 import org.tinygroup.sdpm.org.dao.pojo.OrgRoleMenu;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
-import org.tinygroup.sdpm.org.service.impl.RoleServiceImpl;
-import org.tinygroup.sdpm.org.service.impl.UserServiceImpl;
 import org.tinygroup.sdpm.org.service.inter.RoleService;
 import org.tinygroup.sdpm.org.service.inter.UserService;
-import org.tinygroup.sdpm.project.service.impl.TeamServiceImpl;
-import org.tinygroup.sdpm.project.service.inter.TeamService;
 import org.tinygroup.sdpm.security.Principal;
 
 import java.util.ArrayList;
@@ -27,101 +23,19 @@ import java.util.List;
 /**
  * 用户工具类
  */
+@Service
 public class UserUtils {
     public static final String USER_CACHE = "userCache";
     public static final String USER_CACHE_ID_ = "id_";
     public static final String USER_CACHE_LOGIN_NAME_ = "ln";
     public static final String CACHE_ROLE_LIST = "roleList";
     public static final String CACHE_MENU_LIST = "menuList";
-    public static final String CACHE_MENU_LIST_IN_PROJECT_ = "menuProject_";
-    public static final String CACHE_MENU_LIST_IN_PRODUCT_ = "menuProduct_";
     @Autowired
-    private static RoleService roleService = SpringContextHolder.getBean(RoleServiceImpl.class);
+    private RoleService roleService;
     @Autowired
-    private static UserService userService = SpringContextHolder.getBean(UserServiceImpl.class);
+    private UserService userService;
     @Autowired
-    private static MenuManager menuManager = SpringContextHolder.getBean(MenuManagerImpl.class);
-    @Autowired
-    private static TeamService teamService = SpringContextHolder.getBean(TeamServiceImpl.class);
-
-    /**
-     * 根据ID获取用户
-     * 当id为空或者为null返回新对象
-     *
-     * @param id
-     * @return 取不到返回new OrgUser();
-     */
-    public static OrgUser getUserById(String id) {
-        if (StringUtil.isBlank(id)) {
-            return new OrgUser();
-        }
-        OrgUser user = (OrgUser) CacheUtils.get(USER_CACHE, USER_CACHE_ID_ + id);
-        if (user == null) {
-            try {
-                user = userService.findUser(id);
-            } catch (Exception e) {
-            }
-            if (user == null) {
-                return new OrgUser();
-            }
-            CacheUtils.put(USER_CACHE, USER_CACHE_ID_ + user.getOrgUserId(), user);
-            CacheUtils.put(USER_CACHE, USER_CACHE_LOGIN_NAME_ + user.getOrgUserAccount(), user);
-        }
-        return user;
-    }
-
-    /**
-     * 根据登录名获取用户
-     *
-     * @param account
-     * @return 取不到返回null
-     */
-    public static OrgUser getUserByAccount(String account) {
-        OrgUser user = (OrgUser) CacheUtils.get(USER_CACHE, USER_CACHE_LOGIN_NAME_ + account);
-        if (user == null) {
-            user = userService.findUserByAccount(account);
-            if (user == null) {
-                return null;
-            }
-            CacheUtils.put(USER_CACHE, USER_CACHE_ID_ + user.getOrgUserId(), user);
-            CacheUtils.put(USER_CACHE, USER_CACHE_LOGIN_NAME_ + user.getOrgUserAccount(), user);
-        }
-        return user;
-    }
-
-    /**
-     * 清除当前用户缓存
-     */
-    public static void clearCache() {
-        removeCache(CACHE_ROLE_LIST);
-        removeCache(CACHE_MENU_LIST);
-        UserUtils.clearCache(getUser());
-    }
-
-    /**
-     * 清除指定用户缓存
-     *
-     * @param user
-     */
-    public static void clearCache(OrgUser user) {
-        CacheUtils.remove(USER_CACHE, USER_CACHE_ID_ + user.getOrgUserId());
-        CacheUtils.remove(USER_CACHE, USER_CACHE_LOGIN_NAME_ + user.getOrgUserAccount());
-    }
-
-    /**
-     * 获取当前用户
-     *
-     * @return 取不到返回 new OrgUser()
-     */
-    public static OrgUser getUser() {
-        Principal principal = getPrincipal();
-        if (principal != null) {
-            OrgUser user = getUserById(principal.getId());
-            return user;
-        }
-        // 如果没有登录，则返回实例化空的User对象。
-        return new OrgUser();
-    }
+    private MenuManager menuManager;
 
     /**
      * 获取当前用户账号
@@ -147,91 +61,6 @@ public class UserUtils {
             return principal.getId();
         }
         return null;
-    }
-
-    /**
-     * 获取所有角色列表
-     *
-     * @return
-     */
-    public static List<OrgRole> getAllRoleList() {
-        List<OrgRole> roleList = (List<OrgRole>) CacheUtils.get(USER_CACHE, CACHE_ROLE_LIST);
-        if (roleList == null) {
-            roleList = roleService.findRoleList(null);
-            CacheUtils.put(USER_CACHE, CACHE_ROLE_LIST, roleList);
-        }
-        return roleList;
-    }
-
-    /**
-     * 获取当前用户项目角色列表
-     *
-     * @return
-     */
-    public static List<String> getUserMenuByProject(Integer projectId) {
-        if (projectId == null || StringUtil.isBlank(getUserId())) {
-            return new ArrayList<String>();
-        }
-        List<String> menuList = (List<String>) getCache(CACHE_MENU_LIST_IN_PROJECT_ + projectId);
-        if (menuList == null) {
-            menuList = teamService.getMenuIdListByProjectAndUser(projectId, getUserId());
-            putCache(CACHE_MENU_LIST_IN_PROJECT_ + projectId, menuList);
-        }
-        return menuList;
-    }
-
-    /**
-     * 获取当前用户产品角色列表
-     *
-     * @return
-     */
-    public static List<String> getUserMenuByProduct(Integer productId) {
-        if (productId == null || StringUtil.isBlank(getUserId())) {
-            return new ArrayList<String>();
-        }
-        List<String> menuList = (List<String>) getCache(CACHE_MENU_LIST_IN_PRODUCT_ + productId);
-        if (menuList == null) {
-            menuList = teamService.getMenuIdListByProductAndUser(productId, getUserId());
-            putCache(CACHE_MENU_LIST_IN_PRODUCT_ + productId, menuList);
-        }
-        return menuList;
-    }
-
-    /**
-     * 获取当前用户角色列表
-     *
-     * @return
-     */
-    public static List<OrgRole> getUserRoleList() {
-        List<OrgRole> roleList = (List<OrgRole>) getCache(CACHE_ROLE_LIST);
-        if (roleList == null) {
-            Principal principal = getPrincipal();
-            if (principal == null) {
-                return null;
-            }
-            roleList = roleService.findRoleByUserId(principal.getId());
-            putCache(CACHE_ROLE_LIST, roleList);
-        }
-        return roleList;
-    }
-
-    /**
-     * 获取当前用户授权菜单
-     *
-     * @return
-     */
-    public static List<Menu> getMenuList() {
-        List<Menu> menuList = (List<Menu>) getCache(CACHE_MENU_LIST);
-        if (menuList == null) {
-            List<OrgRoleMenu> roleMenuListByUser = roleService.findRoleMenuListByUser(getUserId());
-            menuList = new ArrayList<Menu>();
-            for (OrgRoleMenu menu : roleMenuListByUser) {
-                Menu m = menuManager.getMenu(menu.getOrgRoleMenuId());
-                menuList.add(m);
-            }
-            putCache(CACHE_MENU_LIST, menuList);
-        }
-        return menuList;
     }
 
     /**
@@ -305,6 +134,99 @@ public class UserUtils {
 
     public static void removeCache(String key) {
         getSession().removeAttribute(key);
+    }
+
+    /**
+     * 获取当前用户角色列表
+     *
+     * @return
+     */
+    public  List<OrgRole> getUserRoleList() {
+        List<OrgRole> roleList = (List<OrgRole>) getCache(CACHE_ROLE_LIST);
+        if (roleList == null) {
+            Principal principal = getPrincipal();
+            if (principal == null) {
+                return null;
+            }
+            roleList = roleService.findRoleByUserId(principal.getId());
+            putCache(CACHE_ROLE_LIST, roleList);
+        }
+        return roleList;
+    }
+
+    /**
+     * 获取当前用户授权菜单
+     *
+     * @return
+     */
+    public  List<Menu> getMenuList() {
+        List<Menu> menuList = (List<Menu>) getCache(CACHE_MENU_LIST);
+        if (menuList == null) {
+            List<OrgRoleMenu> roleMenuListByUser = roleService.findRoleMenuListByUser(getUserId());
+            menuList = new ArrayList<Menu>();
+            for (OrgRoleMenu menu : roleMenuListByUser) {
+                Menu m = menuManager.getMenu(menu.getOrgRoleMenuId());
+                menuList.add(m);
+            }
+            putCache(CACHE_MENU_LIST, menuList);
+        }
+        return menuList;
+    }
+
+    /**
+     * 清除当前用户缓存
+     */
+    public void clearCache() {
+        removeCache(CACHE_ROLE_LIST);
+        removeCache(CACHE_MENU_LIST);
+//        userUtils.clearCache(getUser());
+    }
+
+    /**
+     * 清除指定用户缓存
+     *
+     * @param user
+     */
+    public void clearCache(OrgUser user) {
+        CacheUtils.remove(USER_CACHE, USER_CACHE_ID_ + user.getOrgUserId());
+        CacheUtils.remove(USER_CACHE, USER_CACHE_LOGIN_NAME_ + user.getOrgUserAccount());
+    }
+
+    /**
+     * 获取当前用户
+     *
+     * @return 取不到返回 new OrgUser()
+     */
+    public OrgUser getUser() {
+        Principal principal = getPrincipal();
+        if (principal != null) {
+            OrgUser user = getUserById(principal.getId());
+            return user;
+        }
+        // 如果没有登录，则返回实例化空的User对象。
+        return new OrgUser();
+    }
+
+    /**
+     * 根据ID获取用户
+     * 当id为空或者为null返回新对象
+     *
+     * @param id
+     * @return 取不到返回new OrgUser();
+     */
+    public OrgUser getUserById(String id) {
+        OrgUser user = null;
+        if (StringUtil.isBlank(id)) {
+            return new OrgUser();
+        }
+        try {
+            user = userService.findUser(id);
+        } catch (Exception e) {
+        }
+        if (user == null) {
+            return new OrgUser();
+        }
+        return user;
     }
 
 }

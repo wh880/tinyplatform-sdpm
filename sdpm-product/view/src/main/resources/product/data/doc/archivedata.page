@@ -10,7 +10,7 @@
 	#@td()<a class="docJump" value="${l?.docLibId}" href="${TINY_CONTEXT_PATH +adminPath}/document/doc/view?docid=${l?.docId}&type=1">${l?.docId}#end
 	#@td()${l?.moduleName}</a>#end
 	#@td()<a class="docJump" value="${l?.docLibId}" href="${TINY_CONTEXT_PATH +adminPath}/document/doc/view?docid=${l?.docId}&type=1">${l?.docTitle}</a>#end
-	#@td("nowrap")  ${l?.docAddedBy?UserUtils.getUserById(l?.docAddedBy).orgUserRealName:""}
+	#@td("nowrap")  ${l?.docAddedBy?userUtils.getUserById(l?.docAddedBy).orgUserRealName:""}
 	#end
 	#@td("nowrap")${l?.docAddedDate?formatDate(l?.docAddedDate,'yyyy-MM-dd'):""}#end
 	#@td("nowrap")

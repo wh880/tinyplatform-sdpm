@@ -2,7 +2,7 @@
 #foreach(h:History?.records)
     #@tr()
         #@td()${h?.holidayName}#end
-        #@td()${UserUtils.getUserById(h?.actionActor).orgUserRealName}#end
+        #@td()${userUtils.getUserById(h?.actionActor).orgUserRealName}#end
         #@td()${getDict("actionOperate",h?.actionAction)}#end
         #@td()${formatDate(h?.actionDate,"yyyy-MM-dd HH:mm:ss")}#end
     #end

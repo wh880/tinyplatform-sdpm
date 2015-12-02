@@ -11,7 +11,6 @@ import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
 import org.tinygroup.sdpm.project.service.inter.ProjectProductService;
-import org.tinygroup.sdpm.util.UserUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -38,7 +37,7 @@ public class ProjectProductAction extends BaseController {
         if (projectId == null) {
             return redirectProjectForm();
         }
-        Map<String, List<Product>> userProductsMap = productService.getUserProductsMap(UserUtils.getUserId());
+        Map<String, List<Product>> userProductsMap = productService.getUserProductsMap(userUtils.getUserId());
         List<ProjectProduct> linkList = projectProductService.findProducts(projectId);
         List<String> linkIdList = new ArrayList<String>();
         for (ProjectProduct p : linkList) {

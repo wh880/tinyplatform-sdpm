@@ -1,5 +1,5 @@
 #macro hasMenu(menuId)
-    #if(menuId!=null && UserUtils.hasMenu(menuId))
+    #if(menuId!=null && userUtils.hasMenu(menuId))
         #bodyContent
     #end
 #end

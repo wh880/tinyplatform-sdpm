@@ -36,9 +36,9 @@
                         ?.caseTitle}</a>#end
                     #@td()${getDict("caseType",run?.caseType)}#end
                     #@td()${run
-                        ?.testRunAssignedTo?UserUtils.getUserById(run?.testRunAssignedTo)?.orgUserRealName:""}#end
+                        ?.testRunAssignedTo?userUtils.getUserById(run?.testRunAssignedTo)?.orgUserRealName:""}#end
                     #@td()${run
-                        ?.testRunLastRunner?UserUtils.getUserById(run?.testRunLastRunner)?.orgUserRealName:""}#end
+                        ?.testRunLastRunner?userUtils.getUserById(run?.testRunLastRunner)?.orgUserRealName:""}#end
                     #@td()${run?.testRunLastRunDate?formatDate(run?.testRunLastRunDate,'yyyy-MM-dd HH:mm:ss'):""}#end
                     #@td()${getDict("caseResult",run?.testRunLastRunResult)}#end
                     #@td()${getDict("caseStatus",run?.testRunStatus)}#end
@@ -57,7 +57,7 @@
                                 #end
                             #else
                                 #if(m.id=="texecution")
-                                    #if(run?.testRunAssignedTo == UserUtils.getUserId())
+                                    #if(run?.testRunAssignedTo == userUtils.getUserId())
                                         #iconOperations("#myModal" m.icon m.name "865" "400" adminPath+m.href+
                                             "?caseId="+run?.caseId+"&from=task&runId="+run?.testRunId+
                                             "&caseVersion="+run?.caseVersion "ml-1")
@@ -84,8 +84,8 @@
                     #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/testCase/case/viewInfo?id=${c?.caseId}">${c
                         ?.caseTitle}</a>#end
                     #@td()${getDict("caseType",c?.caseType)}#end
-                    #@td()${c?.caseOpenedBy?UserUtils.getUserById(c?.caseOpenedBy)?.orgUserRealName:""}#end
-                    #@td()${c?.caseLastRunner?UserUtils.getUserById(c?.caseLastRunner)?.orgUserRealName:""}#end
+                    #@td()${c?.caseOpenedBy?userUtils.getUserById(c?.caseOpenedBy)?.orgUserRealName:""}#end
+                    #@td()${c?.caseLastRunner?userUtils.getUserById(c?.caseLastRunner)?.orgUserRealName:""}#end
                     #@td()${c?.caseLastRunDate?formatDate(c?.caseLastRunDate,'yyyy-MM-dd HH:mm:ss'):""}#end
                     #@td()${getDict("caseResult",c?.caseLastRunResult)}#end
                     #@td()${getDict("caseStatus",c?.caseStatus)}#end

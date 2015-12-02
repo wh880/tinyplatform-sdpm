@@ -35,7 +35,7 @@
 
 						)#end
 						#@td()${getDict("caseType",case?.caseType)}#end
-						#@td()<span class="${case?.caseOpenedBy==UserUtils.getUserId()?'c-red':''}">${case?.caseOpenedBy?UserUtils.getUserById(case?.caseOpenedBy)?.orgUserRealName:""}</span>#end
+						#@td()<span class="${case?.caseOpenedBy==userUtils.getUserId()?'c-red':''}">${case?.caseOpenedBy?userUtils.getUserById(case?.caseOpenedBy)?.orgUserRealName:""}</span>#end
 						#@td()${getDict("caseStatus",case?.caseStatus)}#end
 					#end
 				#end

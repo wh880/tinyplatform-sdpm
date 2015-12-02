@@ -25,7 +25,6 @@ import org.tinygroup.sdpm.system.service.inter.ProfileService;
 import org.tinygroup.sdpm.util.CookieUtils;
 import org.tinygroup.sdpm.util.LogUtil;
 import org.tinygroup.sdpm.util.ModuleUtil;
-import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -115,7 +114,7 @@ public class TestCaseAction extends BaseController {
                        String lastAddress,
                        UploadProfile uploadProfile) throws Exception {
         if (testcase.getCaseId() == null || testcase.getCaseId() < 1) {
-            testcase.setCaseOpenedBy(UserUtils.getUserId());
+            testcase.setCaseOpenedBy(userUtils.getUserId());
             if (testcase.getStoryId() != null && testcase.getStoryId() > 0) {
                 testcase.setStoryVersion(storyService.findStory(testcase.getStoryId()).getStoryVersion());
             }
@@ -128,7 +127,7 @@ public class TestCaseAction extends BaseController {
             LogUtil.logWithComment(LogUtil.LogOperateObject.CASE,
                     LogUtil.LogAction.OPENED,
                     String.valueOf(testcase.getCaseId()),
-                    UserUtils.getUserId(),
+                    userUtils.getUserId(),
                     String.valueOf(testcase.getProductId()),
                     null,
                     null,
@@ -145,12 +144,12 @@ public class TestCaseAction extends BaseController {
                 testcase.setCaseVersion(maxVersion == null ? 1 : maxVersion + 1);
                 insertStep(step, expect, testcase);
             }
-            testcase.setCaseLastEditedBy(UserUtils.getUserId());
+            testcase.setCaseLastEditedBy(userUtils.getUserId());
             testCaseService.updateTestCase(testcase);
             LogUtil.logWithComment(LogUtil.LogOperateObject.CASE,
                     LogUtil.LogAction.EDITED,
                     String.valueOf(testcase.getCaseId()),
-                    UserUtils.getUserId(),
+                    userUtils.getUserId(),
                     String.valueOf(testcase.getProductId()),
                     null,
                     testCase,
@@ -219,7 +218,7 @@ public class TestCaseAction extends BaseController {
         QualityTestResult qualityTestResult = new QualityTestResult();
         qualityTestResult.setLinkCase(caseId);
         qualityTestResult.setTestResultDate(new Date());
-        qualityTestResult.setTestResultLastRunner(UserUtils.getUserId());
+        qualityTestResult.setTestResultLastRunner(userUtils.getUserId());
         qualityTestResult.setCaseVersion(old.getCaseVersion());
         if (caseStepResults != null && caseStepResults.getCaseStepResultList() != null && caseStepResults.getCaseStepResultList().size() > 0) {
             qualityTestResult.setCaseStepresults(mergeResult(caseStepResults
@@ -249,17 +248,17 @@ public class TestCaseAction extends BaseController {
         }
         testCase.setCaseLastRunDate(new Date());
         if (run != null) {
-            run.setTestRunLastRunner(UserUtils.getUserId());
+            run.setTestRunLastRunner(userUtils.getUserId());
             qualityTestResult.setTestresultRun(run.getTestRunId());
             testRunService.updateTestRun(run);
         }
-        testCase.setCaseLastRunner(UserUtils.getUserId());
+        testCase.setCaseLastRunner(userUtils.getUserId());
         testCaseService.updateTestCase(testCase);
         testResultService.add(qualityTestResult);
         LogUtil.logWithComment(LogUtil.LogOperateObject.CASE,
                 LogUtil.LogAction.RUN,
                 String.valueOf(old.getCaseId()),
-                UserUtils.getUserId(),
+                userUtils.getUserId(),
                 String.valueOf(old.getProductId()),
                 null,
                 old,
@@ -338,7 +337,7 @@ public class TestCaseAction extends BaseController {
         LogUtil.logWithComment(LogUtil.LogOperateObject.CASE
                 , LogUtil.LogAction.COMMENTED
                 , String.valueOf(caseId)
-                , UserUtils.getUserId()
+                , userUtils.getUserId()
                 , String.valueOf(testCase.getProductId())
                 , null
                 , null

@@ -11,8 +11,8 @@
 	#@td()
     <a href="${TINY_CONTEXT_PATH +adminPath}/quality/bug/bugInfo?bugId=${bug?.bugId}"> ${bug?.bugTitle} </a>
 	#end
-	#@td()${bug?.bugOpenedBy?UserUtils.getUserById(bug?.bugOpenedBy)?.orgUserRealName:""}#end
-	#@td()${bug?.bugAssignedTo?UserUtils.getUserById(bug?.bugAssignedTo)?.orgUserRealName:""}#end
+	#@td()${bug?.bugOpenedBy?userUtils.getUserById(bug?.bugOpenedBy)?.orgUserRealName:""}#end
+	#@td()${bug?.bugAssignedTo?userUtils.getUserById(bug?.bugAssignedTo)?.orgUserRealName:""}#end
 	#@td()${getDict("bugStatus",bug?.bugStatus)}#end
 #end
 #end

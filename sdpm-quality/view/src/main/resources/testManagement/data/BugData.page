@@ -9,10 +9,10 @@
     #@td()${var?.priority}#end
     #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/bug/bugInfo?currentPageId=5&bugId=${var?.bugId}">[${var?.bugConfirmed==1?"已确认":"未确认"}]${var?.bugTitle}</a>#end
     #@td("nowrap")${getDict("bugStatus",var?.bugStatus)}#end
-    #@td("nowrap")<span class="${var?.bugOpenedBy==UserUtils.getUserId()?'c-red':''}">${var?.bugOpenedBy?UserUtils.getUserById(var?.bugOpenedBy)?.orgUserRealName:""} </span>#end
+    #@td("nowrap")<span class="${var?.bugOpenedBy==userUtils.getUserId()?'c-red':''}">${var?.bugOpenedBy?userUtils.getUserById(var?.bugOpenedBy)?.orgUserRealName:""} </span>#end
     #@td("nowrap")${formatDate(var?.bugOpenedDate,"yyyy-MM-dd")}#end
-    #@td("nowrap")<span class="${var?.bugAssignedTo==UserUtils.getUserId()?'c-red':''}">${var?.bugAssignedTo?UserUtils.getUserById(var?.bugAssignedTo)?.orgUserRealName:""} </span>#end
-    #@td("nowrap")<span class="${var?.bugResolvedBy==UserUtils.getUserId()?'c-red':''}">${var?.bugResolvedBy?UserUtils.getUserById(var?.bugResolvedBy)?.orgUserRealName:""} </span>#end
+    #@td("nowrap")<span class="${var?.bugAssignedTo==userUtils.getUserId()?'c-red':''}">${var?.bugAssignedTo?userUtils.getUserById(var?.bugAssignedTo)?.orgUserRealName:""} </span>#end
+    #@td("nowrap")<span class="${var?.bugResolvedBy==userUtils.getUserId()?'c-red':''}">${var?.bugResolvedBy?userUtils.getUserById(var?.bugResolvedBy)?.orgUserRealName:""} </span>#end
     #@td()${getDict("bugResolution",var?.bugResolution?:0)}#end
     #@td("nowrap")${formatDate(var?.bugResolvedDate,"yyyy-MM-dd")}#end
     #@td("nowrap")

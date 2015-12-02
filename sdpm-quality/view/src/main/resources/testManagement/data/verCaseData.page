@@ -7,8 +7,8 @@
 						#@td()${getDict("casePriority",run?.priority)}#end
 						#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/testCase/case/viewInfo?id=${run?.caseId}">${run?.caseTitle}</a>#end
 						#@td()${getDict("caseType",run?.caseType)}#end
-						#@td()<span class="${run?.testRunAssignedTo==UserUtils.getUserId()?'c-red':''}">${run?.testRunAssignedTo?UserUtils.getUserById(run?.testRunAssignedTo)?.orgUserRealName:""}</span>#end
-						#@td()${run?.testRunLastRunner?UserUtils.getUserById(run?.testRunLastRunner)?.orgUserRealName:""}#end
+						#@td()<span class="${run?.testRunAssignedTo==userUtils.getUserId()?'c-red':''}">${run?.testRunAssignedTo?userUtils.getUserById(run?.testRunAssignedTo)?.orgUserRealName:""}</span>#end
+						#@td()${run?.testRunLastRunner?userUtils.getUserById(run?.testRunLastRunner)?.orgUserRealName:""}#end
 						#@td()${run?.testRunLastRunDate?formatDate(run?.testRunLastRunDate,'yyyy-MM-dd HH:mm:ss'):""}#end
 						#@td()${getDict("caseResult",run?.testRunLastRunResult)}#end
 						#@td()${getDict("caseStatus",run?.testRunStatus)}#end
@@ -24,7 +24,7 @@
                                     #end
             					#else
             					    #if(m.id=="tvergo")
-            					        #if(run?.testRunAssignedTo == UserUtils.getUserId())
+            					        #if(run?.testRunAssignedTo == userUtils.getUserId())
             					            #iconOperations("#myModal" m.icon m.name "865" "400" adminPath+m.href+"?caseId="+run?.caseId+"&from=task&runId="+run?.testRunId+"&caseVersion="+run?.caseVersion "ml-1")
             					        #else
             					            <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>

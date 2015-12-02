@@ -22,7 +22,6 @@ import org.tinygroup.sdpm.service.service.inter.RequestService;
 import org.tinygroup.sdpm.service.service.inter.ReviewService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
-import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.ArrayList;
@@ -99,7 +98,7 @@ public class RequestAction extends BaseController {
 
         ConditionCarrier carrier = new ConditionCarrier();
         if (operation != null) {
-            OrgUser user = UserUtils.getUser();
+            OrgUser user = userUtils.getUser();
             Pager<ServiceRequest> pager = requestService.findOperationByMe(start, limit, user, clientRequest, treeId, operation, order, orderType);
             model.addAttribute("pager", pager);
             return "service/serviceReq/requestTableData.pagelet";
@@ -236,7 +235,7 @@ public class RequestAction extends BaseController {
     @RequestMapping(value = "/review")
     public String review(Integer id, Model model) {
         if (id != null) {
-            OrgUser user = UserUtils.getUser();
+            OrgUser user = userUtils.getUser();
             ServiceRequest clientRequest = requestService.findRequest(id);
             model.addAttribute("request", clientRequest);
             model.addAttribute("currentReviewer", user.getOrgUserAccount());

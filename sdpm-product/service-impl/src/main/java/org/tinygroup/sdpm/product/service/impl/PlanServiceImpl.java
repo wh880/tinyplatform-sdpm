@@ -49,7 +49,7 @@ public class PlanServiceImpl implements PlanService {
         return planManager.findPager(page, limit, productPlan, order, ordertype);
     }
 
-    public List<ProductPlan> statisticfind(ProductPlan productPlan, boolean isOverdue) {
+    public List<ProductPlan> statisticFind(ProductPlan productPlan, boolean isOverdue) {
         return planManager.statisticFind(productPlan, isOverdue);
     }
 

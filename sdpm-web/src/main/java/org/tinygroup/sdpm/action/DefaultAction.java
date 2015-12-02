@@ -13,7 +13,6 @@ import org.tinygroup.convert.objectjson.fastjson.ObjectToJson;
 import org.tinygroup.logger.LogLevel;
 import org.tinygroup.sdpm.action.system.FileRepository;
 import org.tinygroup.sdpm.common.web.BaseController;
-import org.tinygroup.sdpm.util.UserUtils;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -28,7 +27,7 @@ public class DefaultAction extends BaseController {
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginForm() {
-        if (UserUtils.getPrincipal() != null) {
+        if (userUtils.getPrincipal() != null) {
             return "redirect:" + adminPath + "/home";
         }
         return "login/login.pagelet";
@@ -36,7 +35,7 @@ public class DefaultAction extends BaseController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login() {        // 如果已经登录，则跳转到管理首页
-        if (UserUtils.getPrincipal() != null) {
+        if (userUtils.getPrincipal() != null) {
             return "redirect:" + adminPath;
         }
         return "login/login.pagelet";

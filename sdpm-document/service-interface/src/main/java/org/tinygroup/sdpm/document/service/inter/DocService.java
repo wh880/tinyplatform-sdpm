@@ -23,11 +23,11 @@ public interface DocService {
 	//find
 	DocumentDoc findDocById(Integer id);
 
-	DocumentDocLib findDoclibById(Integer id);
+	DocumentDocLib findDocLibById(Integer id);
 	//list
 	List<DocumentDoc> findDocList(DocumentDoc doc);
 
-	List<DocumentDocLib> findDoclibList(DocumentDocLib doclib);
+	List<DocumentDocLib> findDocLibList(DocumentDocLib doclib);
 	//page
 	Pager<DocumentDoc> findDocRetPager(Integer start,Integer limit,DocumentDoc doc,Integer moduleId, SearchInfos conditions,String groupOperate, String sortName,boolean asc);
 
@@ -35,10 +35,10 @@ public interface DocService {
 
 	Pager<DocumentDoc> findDocRetProjectPager(Integer start,Integer limit,DocumentDoc doc, Integer moduleId, SearchInfos conditions,String groupOperate, String sortName,boolean asc);
 
-	Pager<DocumentDocLib> findDoclibRetPager(Integer start, Integer limit, DocumentDocLib doclib, String sortName, boolean asc);
+	Pager<DocumentDocLib> findDocLibRetPager(Integer start, Integer limit, DocumentDocLib doclib, String sortName, boolean asc);
 	//delete
 	int deleteDocById(Integer id);
-	int deleteDoclibById(Integer id);
+	int deleteDocLibById(Integer id);
 	int[] deleteDocByIds(List<DocumentDoc> ids);
 
 

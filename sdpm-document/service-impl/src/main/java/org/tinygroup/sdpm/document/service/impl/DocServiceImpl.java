@@ -30,23 +30,23 @@ public class DocServiceImpl implements DocService{
 		return docbiz.addDoc(doc);
 	}
 
-	public DocumentDocLib createNewDocLib(DocumentDocLib doclib) {
-		return docbiz.addDocLib(doclib);
+	public DocumentDocLib createNewDocLib(DocumentDocLib docLib) {
+		return docbiz.addDocLib(docLib);
 	}
 
 	public int editDoc(DocumentDoc doc) {
 		return docbiz.updtDoc(doc);
 	}
 
-	public int editDocLibName(DocumentDocLib doclib) {
-		return docbiz.updtDocLib(doclib);
+	public int editDocLibName(DocumentDocLib docLib) {
+		return docbiz.updtDocLib(docLib);
 	}
 
 	public DocumentDoc findDocById(Integer id) {
 		return docbiz.getDocById(id);
 	}
 
-	public DocumentDocLib findDoclibById(Integer id) {
+	public DocumentDocLib findDocLibById(Integer id) {
 		return docbiz.getDocLibById(id);
 	}
 
@@ -54,8 +54,8 @@ public class DocServiceImpl implements DocService{
 		return docbiz.getDocList(doc);
 	}
 
-	public List<DocumentDocLib> findDoclibList(DocumentDocLib doclib) {
-		return docbiz.getDoclibList(doclib);
+	public List<DocumentDocLib> findDocLibList(DocumentDocLib docLib) {
+		return docbiz.getDoclibList(docLib);
 	}
 
 
@@ -71,16 +71,15 @@ public class DocServiceImpl implements DocService{
 		return docbiz.queryItemWithPage(start, limit, doc,moduleId,conditions, groupOperate, sortName, asc);
 	}
 
-	public Pager<DocumentDocLib> findDoclibRetPager(Integer start, Integer limit, DocumentDocLib doclib, String sortName, boolean asc) {
-		return docbiz.queryItemWithPage(start, limit, doclib,sortName, asc);
+	public Pager<DocumentDocLib> findDocLibRetPager(Integer start, Integer limit, DocumentDocLib docLib, String sortName, boolean asc) {
+		return docbiz.queryItemWithPage(start, limit, docLib,sortName, asc);
 	}
 
 	public int deleteDocById(Integer id) {
 		return docbiz.delDocById(id);
 	}
 
-	public int deleteDoclibById(Integer id) {
-		// 
+	public int deleteDocLibById(Integer id) {
 		return docbiz.delDocLibById(id);
 	}
 

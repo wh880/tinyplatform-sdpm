@@ -14,8 +14,6 @@ import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.util.CookieUtils;
 import org.tinygroup.sdpm.util.LogUtil;
-import org.tinygroup.sdpm.util.ProductUtils;
-import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -61,7 +59,7 @@ public class PlanAction extends BaseController {
         LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCTPLAN
                 , LogUtil.LogAction.OPENED
                 , String.valueOf(productPlan1.getPlanId())
-                , UserUtils.getUserId()
+                , userUtils.getUserId()
                 , String.valueOf(productPlan1.getProductId())
                 , null
                 , null
@@ -83,7 +81,7 @@ public class PlanAction extends BaseController {
         LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCTPLAN
                 , LogUtil.LogAction.EDITED
                 , String.valueOf(plan.getPlanId())
-                , UserUtils.getUserId()
+                , userUtils.getUserId()
                 , String.valueOf(plan.getProductId())
                 , null
                 , productPlan
@@ -115,7 +113,7 @@ public class PlanAction extends BaseController {
         LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCTPLAN
                 , LogUtil.LogAction.DELETED
                 , String.valueOf(planId)
-                , UserUtils.getUserId()
+                , userUtils.getUserId()
                 , String.valueOf(plan.getProductId())
                 , null
                 , plan1
@@ -154,7 +152,7 @@ public class PlanAction extends BaseController {
                           HttpServletRequest request) {
         ProductPlan plan = null;
         if (no != null) {
-            Integer cookieProductId = Integer.parseInt(CookieUtils.getCookie(request, ProductUtils.COOKIE_PRODUCT_ID));
+            Integer cookieProductId = Integer.parseInt(CookieUtils.getCookie(request, productUtils.COOKIE_PRODUCT_ID));
             if (cookieProductId == null) {
                 return notFoundView();
             }
@@ -255,7 +253,7 @@ public class PlanAction extends BaseController {
             LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCTPLAN
                     , LogUtil.LogAction.DELETED
                     , String.valueOf(plan.getProductId())
-                    , UserUtils.getUserId()
+                    , userUtils.getUserId()
                     , String.valueOf(plan.getProductId())
                     , null
                     , null
