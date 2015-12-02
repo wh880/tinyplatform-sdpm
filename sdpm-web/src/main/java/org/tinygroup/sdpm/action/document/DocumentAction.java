@@ -53,6 +53,8 @@ public class DocumentAction extends BaseController {
     private ProjectProductService projectProductService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private ProductUtils productUtils;
 
     /**
      * 主页
@@ -74,7 +76,7 @@ public class DocumentAction extends BaseController {
             CookieUtils.setCookie(response, COOKIE_DOCLIB_ID, documentLibId.toString());
         } else {
             if (null == documentLibId) {
-                List<DocumentDocLib> list = docservice.findDoclibList(null);
+                List<DocumentDocLib> list = docservice.findDocLibList(null);
                 if (list != null && !list.isEmpty()) {
                     documentLibId = list.get(0).getDocLibId().toString();
                     CookieUtils.setCookie(response, COOKIE_DOCLIB_ID, documentLibId.toString());
@@ -88,7 +90,7 @@ public class DocumentAction extends BaseController {
         List<SystemModule> moduleList = moduleService.findModuleList(new SystemModule());
 
         model.addAttribute("userList", userList);
-        model.addAttribute("productList", ProductUtils.getProductList());
+        model.addAttribute("productList", productUtils.getProductList());
         model.addAttribute("projectList", projectOperate.getUserProjectList());
         model.addAttribute("moduleList", moduleList);
         model.addAttribute("libList", CmsUtils.getDocLibList());

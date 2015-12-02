@@ -202,7 +202,7 @@ public class DocAction extends BaseController {
         List<Product> list1 = productService.findProductList(new Product());
         List<Project> list2 = projectService.findList();
         List<SystemModule> listModule = moduleService.findModuleList(module);
-        List<DocumentDocLib> libList = docservice.findDoclibList(null);
+        List<DocumentDocLib> libList = docservice.findDocLibList(null);
 
         SystemProfile systemProfile = new SystemProfile();
         systemProfile.setFileObjectId(docId);
@@ -265,7 +265,7 @@ public class DocAction extends BaseController {
             return notFoundView();
         }
         if (doc.getDocLibId() != null) {
-            DocumentDocLib docLib = docservice.findDoclibById(doc.getDocLibId());
+            DocumentDocLib docLib = docservice.findDocLibById(doc.getDocLibId());
             model.addAttribute("docLib", docLib);
         }
         SystemProfile systemProfile = new SystemProfile();
@@ -288,7 +288,7 @@ public class DocAction extends BaseController {
     @RequestMapping("/viewInfo")
     public String viewInfo(HttpServletRequest request, Integer docId, Model model) {
         DocumentDoc doc = docservice.findDocById(docId);
-        DocumentDocLib docLib = docservice.findDoclibById(doc.getDocLibId());
+        DocumentDocLib docLib = docservice.findDocLibById(doc.getDocLibId());
         System.out.println(doc.getDocModule() != 0 && doc.getDocModule() != null);
         if (doc.getDocModule() != 0 && doc.getDocModule() != null) {
             SystemModule module = moduleService.findById(doc.getDocModule());

@@ -1,4 +1,4 @@
-#set(cookieProductIdTemp = cookieProductId,cookieProductId=cookieProductId?:ProductUtils.getAllProductListByUser()?.get(0)?.productId)
+#set(cookieProductIdTemp = cookieProductId,cookieProductId=cookieProductId?:productUtils.getAllProductListByUser()?.get(0)?.productId)
 #if(!cookieProductIdTemp&&cookieProductId)
 <script type="text/javascript">
     $(function () {
@@ -7,9 +7,9 @@
 </script>
 #end
 
-#if(cookieProductId&&ProductUtils.getAllProductListByUser()?.size()>0)
+#if(cookieProductId&&productUtils.getAllProductListByUser()?.size()>0)
     #set(finded = 0)
-    #foreach(product : ProductUtils.getAllProductListByUser())
+    #foreach(product : productUtils.getAllProductListByUser())
     #if(product?.productId == cookieProductId)
         #set(finded=1,currentProductName=product.productName)
     #end
@@ -21,12 +21,12 @@
 </script>
 #end
     #else
-#if(ProductUtils.getAllProductListByUser()?.size()==0)
+#if(productUtils.getAllProductListByUser()?.size()==0)
 
 <script type="text/javascript">
         #set(msg="目前没有产品，现在将前往添加。")
 
-        #if(ProductUtils.getProductList().size()>0)
+        #if(productUtils.getProductList().size()>0)
             #set(msg="目前没有你可访问的产品，现在将前往添加。")
         #end
     $(function () {

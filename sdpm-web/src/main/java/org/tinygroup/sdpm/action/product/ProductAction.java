@@ -28,6 +28,7 @@ import org.tinygroup.sdpm.quality.dao.pojo.QualityTestCase;
 import org.tinygroup.sdpm.quality.service.inter.TestCaseService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.dao.pojo.SystemHistory;
+import org.tinygroup.sdpm.util.CookieUtils;
 import org.tinygroup.sdpm.util.LogUtil;
 import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
@@ -90,7 +91,10 @@ public class ProductAction extends BaseController {
     @RequestMapping("")
     public String productAction(@CookieValue(value = "cookieProductLineId", defaultValue = "0") String cookieProductLineId, HttpServletResponse response, HttpServletRequest request) {
         if ("0".equals(cookieProductLineId)) {
-            productUtils.prepareForFirst(response);
+            List<Product> products = productService.getProductByUser(UserUtils.getUserId(),0,null);
+            if(products.size()>0){
+                CookieUtils.setCookie(response, "cookieProductLineId", String.valueOf(products.get(0).getProductId()));
+            }
         }
         return "redirect:" + adminPath + "/product/story?choose=1" + (request.getQueryString() == null? "" : ("&" + request.getQueryString()));
     }
@@ -105,8 +109,6 @@ public class ProductAction extends BaseController {
         product.setProductStatus("0");
 
         product = productService.addProduct(product);
-        productUtils.removeProductList();
-        productUtils.removeAllProductListByUser();
         LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCT,
                 LogUtil.LogAction.OPENED,
                 String.valueOf(product.getProductId()),
@@ -128,16 +130,6 @@ public class ProductAction extends BaseController {
     public String update(Product product, HttpServletRequest request, SystemAction systemAction) throws IOException {
         Product product1 = productService.findProduct(product.getProductId());
         productService.updateProduct(product);
-        productUtils.removeProductList();
-        productUtils.removeProductList(String.valueOf(
-                product.getProductLineId().equals(product1.getProductId()) ?
-                        product1.getProductLineId() : product.getProductLineId()
-        ));
-        productUtils.removeAllProductListByUser();
-        productUtils.removeProductListByProductLineUser(String.valueOf(
-                product.getProductLineId().equals(product1.getProductId()) ?
-                        product1.getProductLineId() : product.getProductLineId()
-        ));
         LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCT,
                 LogUtil.LogAction.EDITED,
                 String.valueOf(product.getProductId()),
@@ -155,11 +147,6 @@ public class ProductAction extends BaseController {
     public String edit(Product product, HttpServletRequest request, String lastAddress) {
 
         productService.updateProduct(product);
-        productUtils.removeProductList();
-        productUtils.removeProductList(String.valueOf(product.getProductLineId()));
-        if(!StringUtil.isBlank(lastAddress)){
-            return "redirect:"+lastAddress;
-        }
         return "redirect:" + adminPath + "/product/find/overview?productId=" + product.getProductId();
     }
 
@@ -290,7 +277,7 @@ public class ProductAction extends BaseController {
     @ResponseBody
     @RequestMapping("/productList")
     public List<Product> findProduct(Product product, String type, String productLineId) {
-        if ("user".equals(type)) return productUtils.getProductListByProductLineUser(productLineId);
+        if ("user".equals(type)) return productService.getProductByUser(UserUtils.getUserId(),0,Integer.parseInt(productLineId));
 
         List<Product> list = productService.findProductList(product);
 

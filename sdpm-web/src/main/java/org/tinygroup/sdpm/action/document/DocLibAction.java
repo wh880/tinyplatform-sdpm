@@ -53,7 +53,7 @@ public class DocLibAction extends BaseController {
     @RequiresPermissions("doc-file-edit")
     @RequestMapping(value = "/edit")
     public String editDocLib(@CookieValue(value = DocLibAction.COOKIE_DOCLIB_ID) Integer documentLibId, DocumentDocLib docLib, Model model) {
-        docLib = docservice.findDoclibById(documentLibId);
+        docLib = docservice.findDocLibById(documentLibId);
         model.addAttribute("doclib", docLib);
         if (documentLibId == 1 || documentLibId == 2) {
             return "/document/doclib-no-edit.pagelet";
@@ -90,9 +90,9 @@ public class DocLibAction extends BaseController {
     @RequestMapping(value = "/delete")
     public Map delDocLib(@CookieValue(required = false, value = COOKIE_DOCLIB_ID) String documentLibId, Integer id,
                          HttpServletRequest request, HttpServletResponse response) {
-        List<DocumentDocLib> list = docservice.findDoclibList(null);
+        List<DocumentDocLib> list = docservice.findDocLibList(null);
         if (id != list.get(0).getDocLibId() && id != list.get(1).getDocLibId()) {
-            docservice.deleteDoclibById(id);
+            docservice.deleteDocLibById(id);
             CmsUtils.removeDocLibList();
             documentLibId = "1";
             CookieUtils.setCookie(response, COOKIE_DOCLIB_ID, documentLibId.toString(), -1);
