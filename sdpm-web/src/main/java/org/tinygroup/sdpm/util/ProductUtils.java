@@ -1,7 +1,6 @@
 package org.tinygroup.sdpm.util;
 
 import org.tinygroup.commons.tools.StringUtil;
-import org.tinygroup.sdpm.org.dao.pojo.OrgRole;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.product.service.impl.ProductServiceImpl;
@@ -351,11 +350,12 @@ public class ProductUtils {
             if (getUserListByProductLine(String.valueOf(productLine.getProductLineId())).contains(loginId)) {
                 return 2;
             } else {
-                for (OrgRole role : UserUtils.getUserRoleList()) {
-                    if (productLine.getProductLineWhiteList().contains(String.valueOf(role.getOrgRoleId()))) {
-                        return 2;
-                    }
-                }
+                //TODO:FIX
+//                for (OrgRole role : UserUtils.getUserRoleList()) {
+//                    if (productLine.getProductLineWhiteList().contains(String.valueOf(role.getOrgRoleId()))) {
+//                        return 2;
+//                    }
+//                }
             }
         }
         return 3;
@@ -373,12 +373,14 @@ public class ProductUtils {
             if (getUserListByProduct(String.valueOf(product.getProductId())).contains(loginId)) {
                 return 2;
             } else {
-                for (OrgRole role : UserUtils.getUserRoleList()) {
-                    if (StringUtil.isBlank(product.getProductWhiteList())) return 3;
-                    if (product.getProductWhiteList().contains(String.valueOf(role.getOrgRoleId()))) {
-                        return 2;
-                    }
-                }
+                //TODO:FIX
+
+//                for (OrgRole role : UserUtils.getUserRoleList()) {
+//                    if (StringUtil.isBlank(product.getProductWhiteList())) return 3;
+//                    if (product.getProductWhiteList().contains(String.valueOf(role.getOrgRoleId()))) {
+//                        return 2;
+//                    }
+//                }
             }
         }
         return 3;

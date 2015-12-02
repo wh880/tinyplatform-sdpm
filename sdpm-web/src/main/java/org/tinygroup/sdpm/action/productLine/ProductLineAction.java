@@ -48,7 +48,7 @@ public class ProductLineAction extends BaseController {
     private RoleService roleService;
 
     @RequestMapping("/content/{type}")
-    public String productline(@PathVariable(value = "type") String type) {
+    public String productLine(@PathVariable(value = "type") String type) {
         if ("add".equals(type)) {
 
             return "productLine/page/tabledemo/add.page";

@@ -10,12 +10,9 @@ import org.springframework.stereotype.Service;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.menu.Menu;
 import org.tinygroup.sdpm.common.menu.MenuManager;
-import org.tinygroup.sdpm.common.menu.impl.MenuManagerImpl;
 import org.tinygroup.sdpm.org.dao.pojo.OrgRole;
 import org.tinygroup.sdpm.org.dao.pojo.OrgRoleMenu;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
-import org.tinygroup.sdpm.org.service.impl.RoleServiceImpl;
-import org.tinygroup.sdpm.org.service.impl.UserServiceImpl;
 import org.tinygroup.sdpm.org.service.inter.RoleService;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.security.Principal;
@@ -34,11 +31,11 @@ public class UserUtils {
     public static final String CACHE_ROLE_LIST = "roleList";
     public static final String CACHE_MENU_LIST = "menuList";
     @Autowired
-    private static RoleService roleService = SpringContextHolder.getBean(RoleServiceImpl.class);
+    private RoleService roleService;
     @Autowired
-    private static UserService userService = SpringContextHolder.getBean(UserServiceImpl.class);
+    private UserService userService;
     @Autowired
-    private static MenuManager menuManager = SpringContextHolder.getBean(MenuManagerImpl.class);
+    private MenuManager menuManager;
 
     /**
      * 获取当前用户账号
@@ -64,43 +61,6 @@ public class UserUtils {
             return principal.getId();
         }
         return null;
-    }
-
-    /**
-     * 获取当前用户角色列表
-     *
-     * @return
-     */
-    public static List<OrgRole> getUserRoleList() {
-        List<OrgRole> roleList = (List<OrgRole>) getCache(CACHE_ROLE_LIST);
-        if (roleList == null) {
-            Principal principal = getPrincipal();
-            if (principal == null) {
-                return null;
-            }
-            roleList = roleService.findRoleByUserId(principal.getId());
-            putCache(CACHE_ROLE_LIST, roleList);
-        }
-        return roleList;
-    }
-
-    /**
-     * 获取当前用户授权菜单
-     *
-     * @return
-     */
-    public static List<Menu> getMenuList() {
-        List<Menu> menuList = (List<Menu>) getCache(CACHE_MENU_LIST);
-        if (menuList == null) {
-            List<OrgRoleMenu> roleMenuListByUser = roleService.findRoleMenuListByUser(getUserId());
-            menuList = new ArrayList<Menu>();
-            for (OrgRoleMenu menu : roleMenuListByUser) {
-                Menu m = menuManager.getMenu(menu.getOrgRoleMenuId());
-                menuList.add(m);
-            }
-            putCache(CACHE_MENU_LIST, menuList);
-        }
-        return menuList;
     }
 
     /**
@@ -177,9 +137,46 @@ public class UserUtils {
     }
 
     /**
+     * 获取当前用户角色列表
+     *
+     * @return
+     */
+    public  List<OrgRole> getUserRoleList() {
+        List<OrgRole> roleList = (List<OrgRole>) getCache(CACHE_ROLE_LIST);
+        if (roleList == null) {
+            Principal principal = getPrincipal();
+            if (principal == null) {
+                return null;
+            }
+            roleList = roleService.findRoleByUserId(principal.getId());
+            putCache(CACHE_ROLE_LIST, roleList);
+        }
+        return roleList;
+    }
+
+    /**
+     * 获取当前用户授权菜单
+     *
+     * @return
+     */
+    public  List<Menu> getMenuList() {
+        List<Menu> menuList = (List<Menu>) getCache(CACHE_MENU_LIST);
+        if (menuList == null) {
+            List<OrgRoleMenu> roleMenuListByUser = roleService.findRoleMenuListByUser(getUserId());
+            menuList = new ArrayList<Menu>();
+            for (OrgRoleMenu menu : roleMenuListByUser) {
+                Menu m = menuManager.getMenu(menu.getOrgRoleMenuId());
+                menuList.add(m);
+            }
+            putCache(CACHE_MENU_LIST, menuList);
+        }
+        return menuList;
+    }
+
+    /**
      * 清除当前用户缓存
      */
-    public  void clearCache() {
+    public void clearCache() {
         removeCache(CACHE_ROLE_LIST);
         removeCache(CACHE_MENU_LIST);
 //        userUtils.clearCache(getUser());
@@ -190,7 +187,7 @@ public class UserUtils {
      *
      * @param user
      */
-    public  void clearCache(OrgUser user) {
+    public void clearCache(OrgUser user) {
         CacheUtils.remove(USER_CACHE, USER_CACHE_ID_ + user.getOrgUserId());
         CacheUtils.remove(USER_CACHE, USER_CACHE_LOGIN_NAME_ + user.getOrgUserAccount());
     }
@@ -200,7 +197,7 @@ public class UserUtils {
      *
      * @return 取不到返回 new OrgUser()
      */
-    public  OrgUser getUser() {
+    public OrgUser getUser() {
         Principal principal = getPrincipal();
         if (principal != null) {
             OrgUser user = getUserById(principal.getId());

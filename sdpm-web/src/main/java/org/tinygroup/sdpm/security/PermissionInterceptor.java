@@ -8,25 +8,27 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.web.Servlets;
+import org.tinygroup.sdpm.project.service.inter.TeamService;
 import org.tinygroup.sdpm.util.CookieUtils;
 import org.tinygroup.sdpm.util.ProductUtils;
 import org.tinygroup.sdpm.util.ProjectOperate;
+import org.tinygroup.sdpm.util.UserUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
+import java.util.List;
 
 /**
  * Created by Hulk on 2015/11/13.
  */
 @Aspect
-@Service
 public class PermissionInterceptor {
+
     @Autowired
-    MenuPermissionSubject subject;
+    TeamService teamService;
 
     @Before("execution(* org.tinygroup.sdpm.action.project.*.*(..))")
     public void projectInterceptor(JoinPoint joinPoint) {
@@ -35,7 +37,9 @@ public class PermissionInterceptor {
         if (StringUtil.isBlank(projectId)) {
             return;
         }
-        subject.setProjectId(Integer.valueOf(projectId));
+        List<String> menuList = teamService.getMenuIdListByProductAndUser(Integer.valueOf(projectId), UserUtils.getUserId());
+        MenuPermissionSubject subject = new MenuPermissionSubject();
+        subject.setMenuList(menuList);
         interceptor(joinPoint, subject);
     }
 
@@ -46,7 +50,9 @@ public class PermissionInterceptor {
         if (StringUtil.isBlank(projectId)) {
             return;
         }
-        subject.setProductId(Integer.valueOf(projectId));
+        List<String> menuList = teamService.getMenuIdListByProductAndUser(Integer.valueOf(projectId), UserUtils.getUserId());
+        MenuPermissionSubject subject = new MenuPermissionSubject();
+        subject.setMenuList(menuList);
         interceptor(joinPoint, subject);
     }
 

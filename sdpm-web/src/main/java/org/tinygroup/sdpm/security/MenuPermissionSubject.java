@@ -1,13 +1,10 @@
 package org.tinygroup.sdpm.security;
 
 import org.apache.shiro.authz.AuthorizationException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.tinygroup.commons.tools.ArrayUtil;
 import org.tinygroup.commons.tools.StringUtil;
-import org.tinygroup.sdpm.project.service.inter.TeamService;
 import org.tinygroup.sdpm.util.UserUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,14 +12,6 @@ import java.util.List;
  */
 public class MenuPermissionSubject {
     List<String> menuList;
-    Integer projectId;
-    Integer productId;
-
-    @Autowired
-    TeamService teamService;
-
-    private MenuPermissionSubject() {
-    }
 
     public boolean isPermitted(String permission) {
         if (!StringUtil.isBlank(permission)) {
@@ -63,23 +52,10 @@ public class MenuPermissionSubject {
     }
 
     public List<String> getMenuList() {
-        if (menuList == null) {
-            if (productId != null) {
-                menuList = teamService.getMenuIdListByProductAndUser(productId, UserUtils.getUserId());
-            } else if (productId != null) {
-                menuList = teamService.getMenuIdListByProjectAndUser(projectId, UserUtils.getUserId());
-            } else {
-                menuList = new ArrayList<String>();
-            }
-        }
         return menuList;
     }
 
-    public void setProductId(Integer productId) {
-        this.productId = productId;
-    }
-
-    public void setProjectId(Integer projectId) {
-        this.projectId = projectId;
+    public void setMenuList(List<String> menuList) {
+        this.menuList = menuList;
     }
 }
