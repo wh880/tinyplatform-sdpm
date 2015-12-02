@@ -1,0 +1,73 @@
+#import("/org/tinygroup/button/components/button_common.component")
+#import("/org/tinygroup/button/components/button.component")
+#import("/org/tinygroup/table/components/table.component")
+#!set(activeTitle="产品概况",activeMenuId=currentPageId)
+#!set(linkName="product-overview",sonitem="
+<li>"+"概况"+"</li>")
+
+#set(name="version")
+#@tabWithInit("tab_demo" "optionsBox")
+
+    #@tabBodyCol("ptop-5")
+        #@div(divClass="operationbar")
+        <span class="f">
+					<a href="#" class="active_btn">产品概况</a>
+			</span>
+        <span class="r">
+
+            #foreach(m:menuManager.getScopeMenus("allproduct-op"))
+                #set(url=eval(m?.href))
+                #if(m.map.type=="close")
+                    #iconOperations("#myModal" m?.icon "关闭" "865" "500" adminPath+url "ml-5")&nbsp;
+                #elseif(m.map.type=="editor")
+                    <a class="jump" href="${TINY_CONTEXT_PATH +adminPath}${eval(url)}"
+                       title="编辑">#buttonIcon(iconClass=m?.icon)</a>&nbsp;
+                #end
+            #end
+            <a href="javascript :;" onclick="javascript:history.back(-1);" title="返回">#buttonIcon(iconClass=
+                "icon-reply")</a>
+        </span>
+        #end
+    #end
+
+<div style="width:70%;float:left">
+    #@div(divClass="infoContent")
+        <p class="titleName">产品描述</p>
+
+        <div>
+            ${product?.productDesc}
+        </div>
+    #end
+
+
+
+    #history(adminPath+"/system/action/ajax/history?actionObjectType=product&actionObjectId="+product?.productId)
+
+
+
+
+    <div style="text-align:center;margin:auto">
+	        <span class="c">
+                #foreach(m:menuManager.getScopeMenus("allproduct-op"))
+                    #set(url=eval(m?.href))
+                    #if(m.map.type=="close")
+                        #iconOperations("#myModal" m?.icon "关闭" "865" "500" adminPath+url "ml-5")&nbsp;
+                    #elseif(m.map.type=="editor")
+                        <a class="jump" href="${TINY_CONTEXT_PATH +adminPath}${eval(url)}"
+                           title="编辑">#buttonIcon(iconClass=m?.icon)</a>&nbsp;
+                    #end
+                #end
+                <a href="javascript :;" onclick="javascript:history.back(-1);" title="返回">#buttonIcon(iconClass=
+                    "icon-reply")</a>
+            </span>
+    </div>
+
+
+</div>
+
+<div style="width:30%;float:right">
+    #TypeInfo("product" product?.productId?:0)
+</div>
+
+
+#end
