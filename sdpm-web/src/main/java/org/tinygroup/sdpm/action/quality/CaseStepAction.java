@@ -29,7 +29,7 @@ public class CaseStepAction extends BaseController {
 
     @RequestMapping("delete")
     public String delete(Integer id, Model model) {
-        caseStepService.deleteById(id);
+        caseStepService.deleteCaseStepById(id);
         return "";
     }
 }

@@ -28,7 +28,6 @@ import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.sdpm.util.CmsUtils;
 import org.tinygroup.sdpm.util.CookieUtils;
 import org.tinygroup.sdpm.util.LogUtil;
-import org.tinygroup.sdpm.util.ProductUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -74,7 +73,7 @@ public class DocumentAction extends BaseController {
             CookieUtils.setCookie(response, COOKIE_DOCLIB_ID, documentLibId.toString());
         } else {
             if (null == documentLibId) {
-                List<DocumentDocLib> list = docservice.findDoclibList(null);
+                List<DocumentDocLib> list = docservice.findDocLibList(null);
                 if (list != null && !list.isEmpty()) {
                     documentLibId = list.get(0).getDocLibId().toString();
                     CookieUtils.setCookie(response, COOKIE_DOCLIB_ID, documentLibId.toString());
@@ -88,7 +87,7 @@ public class DocumentAction extends BaseController {
         List<SystemModule> moduleList = moduleService.findModuleList(new SystemModule());
 
         model.addAttribute("userList", userList);
-        model.addAttribute("productList", ProductUtils.getProductList());
+        model.addAttribute("productList", productUtils.getProductList());
         model.addAttribute("projectList", projectOperate.getUserProjectList());
         model.addAttribute("moduleList", moduleList);
         model.addAttribute("libList", CmsUtils.getDocLibList());

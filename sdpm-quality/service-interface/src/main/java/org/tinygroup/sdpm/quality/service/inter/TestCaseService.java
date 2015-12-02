@@ -21,7 +21,7 @@ public interface TestCaseService {
      * @param story
      * @return
      */
-    QualityTestCase findById(int id);
+    QualityTestCase testCase(int id);
 
     /**
      * 建用例

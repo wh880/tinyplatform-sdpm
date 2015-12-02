@@ -19,7 +19,7 @@ public interface TestResultService {
      * @param id
      * @return
      */
-    QualityTestResult findByid(int id);
+    QualityTestResult findTestResultById(int id);
 
     /**
      * 编辑
@@ -29,5 +29,5 @@ public interface TestResultService {
      */
     int updateTestResult(QualityTestResult testresult);
 
-    QualityTestResult add(QualityTestResult qualityTestResult);
+    QualityTestResult addTestResult(QualityTestResult qualityTestResult);
 }

@@ -1,0 +1,28 @@
+<service-components>
+  <service-component type="org.tinygroup.sdpm.quality.service.impl.TestResultServiceImpl" bean="">
+    <service-method local-name="findTestResultList" service-id="findTestResultList" method-name="findTestResultList" cacheable="false" category="org.tinygroup.sdpm.quality.service.impl">
+      <service-parameters>
+        <service-parameter name="testResult" type="org.tinygroup.sdpm.quality.dao.pojo.QualityTestResult" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findTestResultListResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.quality.dao.pojo.QualityTestResult"/>
+    </service-method>
+    <service-method local-name="findTestResultById" service-id="findTestResultById" method-name="findTestResultById" cacheable="false" category="org.tinygroup.sdpm.quality.service.impl">
+      <service-parameters>
+        <service-parameter name="id" type="int" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findTestResultByIdResult" required="false" is-array="false" type="org.tinygroup.sdpm.quality.dao.pojo.QualityTestResult"/>
+    </service-method>
+    <service-method local-name="updateTestResult" service-id="updateTestResult" method-name="updateTestResult" cacheable="false" category="org.tinygroup.sdpm.quality.service.impl">
+      <service-parameters>
+        <service-parameter name="testResult" type="org.tinygroup.sdpm.quality.dao.pojo.QualityTestResult" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="updateTestResultResult" required="false" is-array="false" type="int"/>
+    </service-method>
+    <service-method local-name="addTestResult" service-id="addTestResult" method-name="addTestResult" cacheable="false" category="org.tinygroup.sdpm.quality.service.impl">
+      <service-parameters>
+        <service-parameter name="qualityTestResult" type="org.tinygroup.sdpm.quality.dao.pojo.QualityTestResult" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="addTestResultResult" required="false" is-array="false" type="org.tinygroup.sdpm.quality.dao.pojo.QualityTestResult"/>
+    </service-method>
+  </service-component>
+</service-components>

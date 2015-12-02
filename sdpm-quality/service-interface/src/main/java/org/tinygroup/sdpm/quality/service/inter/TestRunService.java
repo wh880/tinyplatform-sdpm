@@ -32,11 +32,11 @@ public interface TestRunService {
      */
     int[] batchUpdateTestRun(List<QualityTestRun> testruns);
 
-    QualityTestRun add(QualityTestRun run);
+    QualityTestRun addTestRun(QualityTestRun run);
 
-    QualityTestRun findRunById(Integer id);
+    QualityTestRun findTestRunById(Integer id);
 
-    int delete(Integer runId);
+    int deleteTestRun(Integer runId);
 
     Pager<QualityTestRun> findTestRunPager(Integer start, Integer limit, QualityTestRun testRun, ConditionCarrier carrier, String sortName, boolean asc);
 }

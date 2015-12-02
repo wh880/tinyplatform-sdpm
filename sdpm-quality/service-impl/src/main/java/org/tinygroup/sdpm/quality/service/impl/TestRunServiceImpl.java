@@ -14,34 +14,34 @@ import java.util.List;
 public class TestRunServiceImpl implements TestRunService {
 
     @Autowired
-    private TestRunManager testrunmanager;
+    private TestRunManager testRunManager;
 
-    public List<QualityTestRun> findTestRunList(QualityTestRun testrun) {
-        return testrunmanager.findList(testrun);
+    public List<QualityTestRun> findTestRunList(QualityTestRun testRun) {
+        return testRunManager.findList(testRun);
     }
 
-    public int updateTestRun(QualityTestRun testrun) {
-        return testrunmanager.update(testrun);
+    public int updateTestRun(QualityTestRun testRun) {
+        return testRunManager.update(testRun);
     }
 
-    public int[] batchUpdateTestRun(List<QualityTestRun> testruns) {
-        return testrunmanager.batchUpdate(testruns);
+    public int[] batchUpdateTestRun(List<QualityTestRun> testRuns) {
+        return testRunManager.batchUpdate(testRuns);
     }
 
-    public QualityTestRun add(QualityTestRun run) {
-        return testrunmanager.add(run);
+    public QualityTestRun addTestRun(QualityTestRun run) {
+        return testRunManager.add(run);
     }
 
-    public QualityTestRun findRunById(Integer id) {
-        return testrunmanager.findRunById(id);
+    public QualityTestRun findTestRunById(Integer id) {
+        return testRunManager.findRunById(id);
     }
 
-    public int delete(Integer runId) {
-        return testrunmanager.delete(runId);
+    public int deleteTestRun(Integer runId) {
+        return testRunManager.delete(runId);
     }
 
     public Pager<QualityTestRun> findTestRunPager(Integer start, Integer limit, QualityTestRun testRun, ConditionCarrier carrier, String sortName, boolean asc) {
-        return testrunmanager.findPager(start, limit, testRun, carrier, sortName, asc);
+        return testRunManager.findPager(start, limit, testRun, carrier, sortName, asc);
     }
 
 }

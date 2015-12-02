@@ -26,7 +26,7 @@ public class BugServiceImpl implements BugService {
         return bugmanager.add(bug);
     }
 
-    public QualityBug findById(Integer id){
+    public QualityBug findQualityBugById(Integer id){
         return bugmanager.find(id);
     }
 
@@ -38,16 +38,12 @@ public class BugServiceImpl implements BugService {
         return bugmanager.batchUpdate(bugs);
     }
 
-    public Pager<QualityBug> findBugListPager(Integer start,Integer limit,String conditions,QualityBug bug,String sortName,boolean asc){
-        return bugmanager.findPager(start, limit, conditions, bug, sortName, asc);
-    }
-
     public Integer deleteBug(Integer bugId) {
 
         return bugmanager.delete(bugId);
     }
 
-    public Map<String, List<BugCount>> report(String code, Integer productId) {
+    public Map<String, List<BugCount>> bugReport(String code, Integer productId) {
         return bugmanager.report(code,productId);
     }
 
@@ -68,7 +64,6 @@ public class BugServiceImpl implements BugService {
     }
 
     public int[] batchDeleteBug(List<QualityBug> bugIds) {
-
         return bugmanager.batchDelete(bugIds);
     }
 }

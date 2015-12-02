@@ -9,35 +9,35 @@ import org.tinygroup.sdpm.quality.dao.pojo.QualityCaseStep;
 
 import java.util.List;
 
-@Service        //注解，告诉spring创建一个实现类的实例
-@Transactional  //开启事务
+@Service
+@Transactional
 public class CaseStepManagerImpl implements CaseStepManager {
     @Autowired
-    private QualityCaseStepDao casestepdao;
+    private QualityCaseStepDao qualityCaseStepDao;
 
     public QualityCaseStep find(Integer id) {
-        return casestepdao.getByKey(id);
+        return qualityCaseStepDao.getByKey(id);
     }
 
-    public QualityCaseStep add(QualityCaseStep casestep) {
+    public QualityCaseStep add(QualityCaseStep caseStep) {
 
-        return casestepdao.add(casestep);
+        return qualityCaseStepDao.add(caseStep);
     }
 
     public Integer delete(Integer id) {
 
-        return casestepdao.deleteByKeys(id);
+        return qualityCaseStepDao.deleteByKeys(id);
     }
 
-    public List<QualityCaseStep> findList(QualityCaseStep casestep) {
-        return casestepdao.query(casestep);
+    public List<QualityCaseStep> findList(QualityCaseStep caseStep) {
+        return qualityCaseStepDao.query(caseStep);
     }
 
     public int[] batchAdd(List<QualityCaseStep> qualityCaseSteps) {
-        return casestepdao.batchInsert(qualityCaseSteps);
+        return qualityCaseStepDao.batchInsert(qualityCaseSteps);
     }
 
     public Integer getMaxVersion(Integer caseId) {
-        return casestepdao.getMaxVersion(caseId);
+        return qualityCaseStepDao.getMaxVersion(caseId);
     }
 }

@@ -143,7 +143,7 @@ public class BugAction extends BaseController {
             bugId = bug.getBugId();
         }
         if (bug == null || bug.getBugId() == null) {
-            bug = bugService.findById(bugId);
+            bug = bugService.findQualityBugById(bugId);
         }
         QualityBug qualityBug = new QualityBug();
         qualityBug.setProductId(bug.getProductId());
@@ -170,7 +170,7 @@ public class BugAction extends BaseController {
 
     @RequestMapping("/bugBasicInfo")
     public String bugBasicInfo(Integer bugId, Model model) {
-        QualityBug bug = bugService.findById(bugId);
+        QualityBug bug = bugService.findQualityBugById(bugId);
         QualityTestCase qualityTestCase = new QualityTestCase();
         qualityTestCase.setCaseFromBug(bugId);
         qualityTestCase.setDeleted(0);
@@ -225,7 +225,7 @@ public class BugAction extends BaseController {
     @RequiresPermissions("tmakesure")
     @RequestMapping("/makesure")
     public String makesure(Integer bugId, Model model) {
-        QualityBug bug = bugService.findById(bugId);
+        QualityBug bug = bugService.findQualityBugById(bugId);
         List<OrgUser> orgUsers = userService.findUserList(null);
         model.addAttribute("bug", bug);
         model.addAttribute("userList", orgUsers);
@@ -239,7 +239,7 @@ public class BugAction extends BaseController {
         String[] bugIds = ids.split(",");
         if (bugIds.length > 0) {
             for (String id : bugIds) {
-                QualityBug bug = bugService.findById(Integer.valueOf(id));
+                QualityBug bug = bugService.findQualityBugById(Integer.valueOf(id));
                 if (bug.getBugConfirmed() != null && bug.getBugConfirmed() < 1) {
                     bug.setBugConfirmed(1);
                     bugService.updateBug(bug);
@@ -269,7 +269,7 @@ public class BugAction extends BaseController {
         String[] bugIds = ids.split(",");
         if (bugIds.length > 0) {
             for (String id : bugIds) {
-                QualityBug bug = bugService.findById(Integer.valueOf(id));
+                QualityBug bug = bugService.findQualityBugById(Integer.valueOf(id));
                 if (bug.getBugStatus() != null && Integer.parseInt(bug.getBugStatus()) < 2) {
                     bug.setBugConfirmed(1);
                     bug.setBugStatus("2");
@@ -302,7 +302,7 @@ public class BugAction extends BaseController {
         String[] bugIds = ids.split(",");
         if (bugIds.length > 0) {
             for (String id : bugIds) {
-                QualityBug bug = bugService.findById(Integer.valueOf(id));
+                QualityBug bug = bugService.findQualityBugById(Integer.valueOf(id));
                 bug.setBugConfirmed(1);
                 bug.setBugAssignedDate(new Date());
                 bug.setBugAssignedTo(userId);
@@ -326,7 +326,7 @@ public class BugAction extends BaseController {
 
     @RequestMapping("/sure")
     public String makesure(QualityBug bug, SystemAction systemAction) {
-        QualityBug qualityBug = bugService.findById(bug.getBugId());
+        QualityBug qualityBug = bugService.findQualityBugById(bug.getBugId());
         if (qualityBug.getBugAssignedTo() != bug.getBugAssignedTo()) {
             bug.setBugAssignedDate(new Date());
         }
@@ -350,7 +350,7 @@ public class BugAction extends BaseController {
     @ResponseBody
     @RequestMapping("addComment")
     public Map recordComment(String comment, int bugId) {
-        QualityBug bug = bugService.findById(bugId);
+        QualityBug bug = bugService.findQualityBugById(bugId);
         LogUtil.logWithComment(LogUtil.LogOperateObject.BUG
                 , LogUtil.LogAction.COMMENTED
                 , String.valueOf(bugId)
@@ -368,7 +368,7 @@ public class BugAction extends BaseController {
     @RequiresPermissions("tassign")
     @RequestMapping("/assign")
     public String assign(Integer bugId, Model model) {
-        QualityBug bug = bugService.findById(bugId);
+        QualityBug bug = bugService.findQualityBugById(bugId);
         List<OrgUser> users = userService.findUserList(null);
         model.addAttribute("bug", bug);
         model.addAttribute("userList", users);
@@ -404,7 +404,7 @@ public class BugAction extends BaseController {
     @RequiresPermissions("tsolution")
     @RequestMapping("/toSolve")
     public String solve(Integer bugId, Model model) {
-        QualityBug bug = bugService.findById(bugId);
+        QualityBug bug = bugService.findQualityBugById(bugId);
         bug.setBugResolvedDate(new Date());
         List<OrgUser> orgUsers = userService.findUserList(null);
         ProjectBuild build = new ProjectBuild();
@@ -432,7 +432,7 @@ public class BugAction extends BaseController {
                         SystemAction systemAction,
                         @RequestParam(value = "file", required = false) MultipartFile[] file,
                         String[] title, UploadProfile uploadProfile) throws IOException {
-        QualityBug qualityBug = bugService.findById(bug.getBugId());
+        QualityBug qualityBug = bugService.findQualityBugById(bug.getBugId());
         if (qualityBug.getBugAssignedTo() != bug.getBugAssignedTo()) {
             bug.setBugAssignedDate(new Date());
         }
@@ -457,7 +457,7 @@ public class BugAction extends BaseController {
     @RequestMapping("/toClose")
     public String close(Integer bugId, Model model) {
         QualityBug bug = new QualityBug();
-        bug = bugService.findById(bugId);
+        bug = bugService.findQualityBugById(bugId);
         bug.setBugClosedDate(new Date());
         model.addAttribute("bug", bug);
         return "/testManagement/page/tabledemo/shutdown.page";
@@ -487,7 +487,7 @@ public class BugAction extends BaseController {
     @RequiresPermissions("tedition")
     @RequestMapping("/toEdit")
     public String edit(Integer bugId, Model model) {
-        QualityBug bug = bugService.findById(bugId);
+        QualityBug bug = bugService.findQualityBugById(bugId);
 
         SystemProfile systemProfile = new SystemProfile();
         systemProfile.setFileObjectId(bug.getBugId());
@@ -503,7 +503,7 @@ public class BugAction extends BaseController {
     public String edit(QualityBug bug, SystemAction systemAction,
                        String lastAddress, UploadProfile uploadProfile) throws IOException {
 
-        QualityBug qualityBug = bugService.findById(bug.getBugId());
+        QualityBug qualityBug = bugService.findQualityBugById(bug.getBugId());
 
         bug.setBugLastEditedBy(userUtils.getUserId() != null ? userUtils.getUserId() : "0");
         bug.setBugLastEditedDate(new Date());
@@ -531,7 +531,7 @@ public class BugAction extends BaseController {
         Product product = new Product();
         product.setProductId(bugId);
         List<Product> products = productService.findProductList(product);
-        QualityBug bug = bugService.findById(bugId);
+        QualityBug bug = bugService.findQualityBugById(bugId);
         Project p = new Project();
         p.setProjectDeleted("0");
         List<Project> projects = projectService.findProjectList(p, null, null);
@@ -556,7 +556,7 @@ public class BugAction extends BaseController {
     @RequiresPermissions("bug-add")
     @RequestMapping("/toCopy")
     public String copy(Integer bugId, Model model) {
-        QualityBug bug = bugService.findById(bugId);
+        QualityBug bug = bugService.findQualityBugById(bugId);
         List<Project> projects = projectService.findProjectList(null, null, null);
         List<OrgUser> orgUsers = userService.findUserList(null);
         model.addAttribute("userList", orgUsers);
@@ -831,7 +831,7 @@ public class BugAction extends BaseController {
     public String toBug(Integer[] ids, Integer caseId, Model model) {
         StringBuffer bugStep = new StringBuffer("");
         for (Integer id : ids) {
-            QualityCaseStep step = caseStepService.findById(id);
+            QualityCaseStep step = caseStepService.findCaseStepById(id);
             bugStep.append("[步骤]<br>");
             bugStep.append(step.getCaseStepDesc() + "<br>");
             bugStep.append("[期望]<br>");
@@ -852,7 +852,7 @@ public class BugAction extends BaseController {
             @CookieValue("qualityProductId") String qualityProductId,
             String checkItem, Model model, HttpServletRequest request) {
 
-        Map<String, List<BugCount>> map = bugService.report(checkItem, Integer.parseInt(qualityProductId));
+        Map<String, List<BugCount>> map = bugService.bugReport(checkItem, Integer.parseInt(qualityProductId));
         model.addAttribute("map", map);
         model.addAttribute("fields", checkItem);
         return "/testManagement/page/reportform.page";
@@ -860,7 +860,7 @@ public class BugAction extends BaseController {
 
     @RequestMapping("/reactive")
     public String reactive(Integer bugId) {
-        QualityBug bug = bugService.findById(bugId);
+        QualityBug bug = bugService.findQualityBugById(bugId);
         if (bug.getBugActivatedCount() != null) {
             bug.setBugActivatedCount(bug.getBugActivatedCount() + 1);
         } else {
@@ -885,7 +885,7 @@ public class BugAction extends BaseController {
     public List<QualityBug> bugInCondition(String key, Integer initKey, Integer productId, HttpServletRequest request) {
         if (initKey != null) {
             List<QualityBug> result = new ArrayList<QualityBug>();
-            result.add(bugService.findById(initKey));
+            result.add(bugService.findQualityBugById(initKey));
             return result;
         }
         return bugService.bugInCondition(key, productId == null ? Integer.parseInt(CookieUtils.getCookie(request, "qualityProductId")) : productId);

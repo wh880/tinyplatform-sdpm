@@ -12,22 +12,22 @@ import java.util.List;
 public class TestResultServiceImpl implements TestResultService {
 
     @Autowired
-    private TestResultManager testresultmanager;
+    private TestResultManager testResultManager;
 
-    public List<QualityTestResult> findTestResultList(QualityTestResult testresult) {
-        return testresultmanager.findList(testresult);
+    public List<QualityTestResult> findTestResultList(QualityTestResult testResult) {
+        return testResultManager.findList(testResult);
     }
 
-    public QualityTestResult findByid(int id) {
-        return testresultmanager.find(id);
+    public QualityTestResult findTestResultById(int id) {
+        return testResultManager.find(id);
     }
 
-    public int updateTestResult(QualityTestResult testresult) {
-        return testresultmanager.update(testresult);
+    public int updateTestResult(QualityTestResult testResult) {
+        return testResultManager.update(testResult);
     }
 
-    public QualityTestResult add(QualityTestResult qualityTestResult) {
-        return testresultmanager.add(qualityTestResult);
+    public QualityTestResult addTestResult(QualityTestResult qualityTestResult) {
+        return testResultManager.add(qualityTestResult);
     }
 
 }

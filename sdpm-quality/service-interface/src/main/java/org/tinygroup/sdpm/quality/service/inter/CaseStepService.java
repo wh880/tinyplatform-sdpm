@@ -12,15 +12,15 @@ public interface CaseStepService {
      * @param id
      * @return
      */
-    QualityCaseStep findById(int id);
+    QualityCaseStep findCaseStepById(int id);
 
     /**
      * 添加用例步骤
      *
-     * @param casestep
+     * @param caseStep
      * @return
      */
-    QualityCaseStep addCaseStep(QualityCaseStep casestep);
+    QualityCaseStep addCaseStep(QualityCaseStep caseStep);
 
     /**
      * 删除步骤
@@ -28,17 +28,15 @@ public interface CaseStepService {
      * @param id
      * @return
      */
-    int deleteById(int id);
+    int deleteCaseStepById(int id);
 
     /**
      * 通过条件查询步骤
      *
-     * @param casestep
+     * @param caseStep
      * @return
      */
-    List<QualityCaseStep> findCaseStepList(QualityCaseStep casestep);
-
-    int[] batchAdd(List<QualityCaseStep> qualityCaseSteps);
+    List<QualityCaseStep> findCaseStepList(QualityCaseStep caseStep);
 
     Integer getMaxVersion(Integer caseId);
 }

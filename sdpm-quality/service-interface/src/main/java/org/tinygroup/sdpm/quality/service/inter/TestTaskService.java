@@ -21,7 +21,7 @@ public interface TestTaskService {
      * @param id
      * @return
      */
-    QualityTestTask findById(Integer id);
+    QualityTestTask findTestTaskById(Integer id);
 
     /**
      * 提交测试
@@ -45,9 +45,9 @@ public interface TestTaskService {
      * @param id
      * @return
      */
-    int deleteById(int id);
+    int deleteTestTaskById(int id);
 
-    Pager<QualityTestTask> findTestTaskPager(Integer start, Integer limit, QualityTestTask testtask, ConditionCarrier carrier, String sortName, boolean asc);
+    Pager<QualityTestTask> findTestTaskPagerWithConditionCarrier(Integer start, Integer limit, QualityTestTask testtask, ConditionCarrier carrier, String sortName, boolean asc);
 
     Pager<QualityTestTask> findTestTaskPager(Integer start, Integer limit, QualityTestTask testtask, String sortName, boolean asc);
 }

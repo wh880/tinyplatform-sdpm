@@ -15,7 +15,7 @@ public interface BugService {
      * @param id
      * @return
      */
-    QualityBug findById(Integer id);
+    QualityBug findQualityBugById(Integer id);
 
     /**
      * 根据条件查询d
@@ -59,7 +59,7 @@ public interface BugService {
      */
     Integer deleteBug(Integer bugId);
 
-    Map<String,List<BugCount>> report(String code, Integer productId);
+    Map<String,List<BugCount>> bugReport(String code, Integer productId);
 
     Pager<QualityBug> findStoryChangedBugs(Integer start,Integer limit, ConditionCarrier carrier, QualityBug bug,String sortName,boolean asc);
 

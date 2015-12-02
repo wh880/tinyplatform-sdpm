@@ -12,30 +12,26 @@ import java.util.List;
 public class CaseStepServiceImpl implements CaseStepService {
 
     @Autowired
-    private CaseStepManager casestepmanager;
+    private CaseStepManager caseStepManager;
 
-    public QualityCaseStep findById(int id) {
-        return casestepmanager.find(id);
+    public QualityCaseStep findCaseStepById(int id) {
+        return caseStepManager.find(id);
     }
 
-    public QualityCaseStep addCaseStep(QualityCaseStep casestep) {
+    public QualityCaseStep addCaseStep(QualityCaseStep caseStep) {
 
-        return casestepmanager.add(casestep);
+        return caseStepManager.add(caseStep);
     }
 
-    public int deleteById(int id) {
-        return casestepmanager.delete(id);
+    public int deleteCaseStepById(int id) {
+        return caseStepManager.delete(id);
     }
 
-    public List<QualityCaseStep> findCaseStepList(QualityCaseStep casestep) {
-        return casestepmanager.findList(casestep);
-    }
-
-    public int[] batchAdd(List<QualityCaseStep> qualityCaseSteps) {
-        return casestepmanager.batchAdd(qualityCaseSteps);
+    public List<QualityCaseStep> findCaseStepList(QualityCaseStep caseStep) {
+        return caseStepManager.findList(caseStep);
     }
 
     public Integer getMaxVersion(Integer caseId) {
-        return casestepmanager.getMaxVersion(caseId);
+        return caseStepManager.getMaxVersion(caseId);
     }
 }

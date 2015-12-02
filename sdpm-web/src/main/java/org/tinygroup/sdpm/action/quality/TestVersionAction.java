@@ -100,7 +100,7 @@ public class TestVersionAction extends BaseController {
         getStatusCondition(status,carrier);
         carrier.putSearch("testTaskSearch",infos,groupOperate);
         testtask.setProductId(qualityProductId);
-        Pager<QualityTestTask> verpager = testTaskService.findTestTaskPager(start, limit, testtask, carrier, order, asc);
+        Pager<QualityTestTask> verpager = testTaskService.findTestTaskPagerWithConditionCarrier(start, limit, testtask, carrier, order, asc);
         model.addAttribute("verPager", verpager);
         return "/testManagement/data/versionData.pagelet";
     }
@@ -119,7 +119,7 @@ public class TestVersionAction extends BaseController {
         if ("desc".equals(ordertype)) {
             asc = false;
         }
-        Pager<QualityTestTask> versionPager = testTaskService.findTestTaskPager(start, limit, testTask, null, order, asc);
+        Pager<QualityTestTask> versionPager = testTaskService.findTestTaskPagerWithConditionCarrier(start, limit, testTask, null, order, asc);
         model.addAttribute("versionPager", versionPager);
         return "project/test/tableData.pagelet";
     }
@@ -141,7 +141,7 @@ public class TestVersionAction extends BaseController {
                     null
             );
         } else {
-            QualityTestTask testTask = testTaskService.findById(testtask.getTestversionId());
+            QualityTestTask testTask = testTaskService.findTestTaskById(testtask.getTestversionId());
             testTaskService.updateTestTask(testtask);
             LogUtil.logWithComment(LogUtil.LogOperateObject.TESTTASK,
                     LogUtil.LogAction.EDITED,
@@ -205,7 +205,7 @@ public class TestVersionAction extends BaseController {
             testTask = testTaskList.get(0);
         }
         if (testTask == null || testTask.getTestversionId() == null) {
-            testTask = testTaskService.findById(testversionId);
+            testTask = testTaskService.findTestTaskById(testversionId);
         }
         model.addAttribute("testTask", testTask);
         return "/testManagement/page/versionSituation.page";
@@ -214,7 +214,7 @@ public class TestVersionAction extends BaseController {
     @RequiresPermissions(value = {"tversionSituation", "tverInfo"}, logical = Logical.OR)
     @RequestMapping("/versionRightInfo")
     public String versionRightInfo(Integer testversionId, Model model) {
-        QualityTestTask testTask = testTaskService.findById(testversionId);
+        QualityTestTask testTask = testTaskService.findTestTaskById(testversionId);
         model.addAttribute("testTask", testTask);
         return "/testManagement/page/tabledemo/versionRightInfo.pagelet";
     }
@@ -229,7 +229,7 @@ public class TestVersionAction extends BaseController {
             run.setCaseVersion(ves[i]);
             run.setTestRunStatus("1");
             run.setTaskId(testversionId);
-            testRunService.add(run);
+            testRunService.addTestRun(run);
         }
         Map<String, String> result = new HashMap<String, String>();
         result.put("status", "y");
@@ -272,7 +272,7 @@ public class TestVersionAction extends BaseController {
     @RequestMapping("/toEdit")
     public String edit(@CookieValue Integer qualityProductId,
                        Integer testversionId, Model model) {
-        QualityTestTask testTask = testTaskService.findById(testversionId);
+        QualityTestTask testTask = testTaskService.findTestTaskById(testversionId);
         List<ProjectProduct> projectProducts = projectProductService.findProjects(qualityProductId);
         List<Integer> ids = new ArrayList<Integer>();
         for (ProjectProduct projectProduct : projectProducts) {
@@ -315,7 +315,7 @@ public class TestVersionAction extends BaseController {
     @ResponseBody
     @RequestMapping("/ajax/deleteRun")
     public Map deleteRun(Integer runId) {
-        testRunService.delete(runId);
+        testRunService.deleteTestRun(runId);
         Map<String, String> result = new HashMap<String, String>();
         result.put("status", "success");
         return result;
@@ -344,7 +344,7 @@ public class TestVersionAction extends BaseController {
     @RequiresPermissions(value = {"tvercase", "tverallcase", "tverassign"}, logical = Logical.OR)
     @RequestMapping("/taskToCase")
     public String taskToCase(Integer testversionId, String moduleId, Model model, HttpServletRequest request) {
-        QualityTestTask testTask = testTaskService.findById(testversionId);
+        QualityTestTask testTask = testTaskService.findTestTaskById(testversionId);
         List<ProjectTeam> projectTeams = teamService.findTeamByProjectId(testTask.getProjectId());
         String[] ids = new String[projectTeams.size()];
         for (int i = 0; i < ids.length; i++) {
@@ -401,7 +401,7 @@ public class TestVersionAction extends BaseController {
     @ResponseBody
     @RequestMapping("/taskEnd")
     public Map taskEnd(QualityTestTask testTask, String actionComment) {
-        QualityTestTask qualityTestTask = testTaskService.findById(testTask.getTestversionId());
+        QualityTestTask qualityTestTask = testTaskService.findTestTaskById(testTask.getTestversionId());
         testTask.setTesttaskStatus("3");
         testTaskService.updateTestTask(testTask);
         LogUtil.logWithComment(LogUtil.LogOperateObject.TESTTASK,

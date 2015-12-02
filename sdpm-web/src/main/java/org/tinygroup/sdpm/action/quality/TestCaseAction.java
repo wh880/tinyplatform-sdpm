@@ -135,7 +135,7 @@ public class TestCaseAction extends BaseController {
                     null
             );
         } else {
-            QualityTestCase testCase = testCaseService.findById(testcase.getCaseId());
+            QualityTestCase testCase = testCaseService.testCase(testcase.getCaseId());
             QualityCaseStep step1 = new QualityCaseStep();
             step1.setCaseId(testcase.getCaseId());
             List<QualityCaseStep> steps = caseStepService.findCaseStepList(step1);
@@ -174,7 +174,7 @@ public class TestCaseAction extends BaseController {
     @RequiresPermissions("texecution")
     @RequestMapping("/execution")
     public String execution(Integer caseId, String caseVersion, Model model) {
-        QualityTestCase testcase = testCaseService.findById(caseId);
+        QualityTestCase testcase = testCaseService.testCase(caseId);
         QualityCaseStep qualityCaseStep = new QualityCaseStep();
         qualityCaseStep.setCaseId(caseId);
         qualityCaseStep.setCaseVersion(StringUtil.isBlank(caseVersion) ? testcase.getCaseVersion() : Integer.parseInt(caseVersion));
@@ -210,9 +210,9 @@ public class TestCaseAction extends BaseController {
                           Integer runId) {
         QualityTestRun run = null;
         if (!StringUtil.isBlank(from)) {
-            run = testRunService.findRunById(runId);
+            run = testRunService.findTestRunById(runId);
         }
-        QualityTestCase old = testCaseService.findById(caseId);
+        QualityTestCase old = testCaseService.testCase(caseId);
         QualityTestCase testCase = new QualityTestCase();
         testCase.setCaseId(caseId);
         QualityTestResult qualityTestResult = new QualityTestResult();
@@ -254,7 +254,7 @@ public class TestCaseAction extends BaseController {
         }
         testCase.setCaseLastRunner(userUtils.getUserId());
         testCaseService.updateTestCase(testCase);
-        testResultService.add(qualityTestResult);
+        testResultService.addTestResult(qualityTestResult);
         LogUtil.logWithComment(LogUtil.LogOperateObject.CASE,
                 LogUtil.LogAction.RUN,
                 String.valueOf(old.getCaseId()),
@@ -333,7 +333,7 @@ public class TestCaseAction extends BaseController {
     @ResponseBody
     @RequestMapping("addComment")
     public Map recordComment(String comment, int caseId) {
-        QualityTestCase testCase = testCaseService.findById(caseId);
+        QualityTestCase testCase = testCaseService.testCase(caseId);
         LogUtil.logWithComment(LogUtil.LogOperateObject.CASE
                 , LogUtil.LogAction.COMMENTED
                 , String.valueOf(caseId)
@@ -351,7 +351,7 @@ public class TestCaseAction extends BaseController {
     @RequiresPermissions("teditioncase")
     @RequestMapping("/edit")
     public String edit(Integer caseId, Model model) {
-        QualityTestCase testCase = testCaseService.findById(caseId);
+        QualityTestCase testCase = testCaseService.testCase(caseId);
         QualityCaseStep step = new QualityCaseStep();
         step.setCaseId(caseId);
         step.setCaseVersion(testCase.getCaseVersion());
@@ -371,7 +371,7 @@ public class TestCaseAction extends BaseController {
 
     @RequestMapping("/find/{forward}")
     public String findById(@PathVariable(value = "forward") String forward, Integer caseId, Model model) {
-        QualityTestCase testCase = testCaseService.findById(caseId);
+        QualityTestCase testCase = testCaseService.testCase(caseId);
         model.addAttribute("testCase", testCase);
         if ("editRight".equals(forward)) {
             return "/testManagement/page/tabledemo/editioncasepaging.pagelet";
@@ -382,7 +382,7 @@ public class TestCaseAction extends BaseController {
     @RequiresPermissions("tproposecase")
     @RequestMapping("/copy")
     public String copy(Integer caseId, Model model) {
-        QualityTestCase testCase = testCaseService.findById(caseId);
+        QualityTestCase testCase = testCaseService.testCase(caseId);
         QualityCaseStep step = new QualityCaseStep();
         step.setCaseId(caseId);
         step.setCaseVersion(testCase.getCaseVersion());
@@ -560,7 +560,7 @@ public class TestCaseAction extends BaseController {
             id = testCase.getCaseId();
         }
         if (testCase == null || testCase.getCaseId() == null) {
-            testCase = testCaseService.findById(id);
+            testCase = testCaseService.testCase(id);
         }
         QualityCaseStep step = new QualityCaseStep();
         step.setCaseId(id);
@@ -583,7 +583,7 @@ public class TestCaseAction extends BaseController {
 
     @RequestMapping("/case/rightInfo")
     public String rightInfo(Integer caseId, Model model) {
-        QualityTestCase testCase = testCaseService.findById(caseId);
+        QualityTestCase testCase = testCaseService.testCase(caseId);
         QualityBug bug = new QualityBug();
         bug.setDeleted(0);
         bug.setBugFromCase(caseId);
@@ -629,7 +629,7 @@ public class TestCaseAction extends BaseController {
                 }
             }
             isHaveBlock = "3".equals(run.getTestRunLastRunResult());
-            QualityTestTask testTask = testTaskService.findById(run.getTaskId());
+            QualityTestTask testTask = testTaskService.findTestTaskById(run.getTaskId());
             if (haveNull) {
                 testTask.setTesttaskStatus("2");
             } else {
@@ -653,7 +653,7 @@ public class TestCaseAction extends BaseController {
                                   Model model,
                                   Integer start,
                                   Integer limit) {
-        QualityTestCase testCase = testCaseService.findById(caseId);
+        QualityTestCase testCase = testCaseService.testCase(caseId);
         Integer maxCaseVersion = caseStepService.getMaxVersion(caseId);
         Map<String, List<QualityCaseStep>> versionStep = new HashMap<String, List<QualityCaseStep>>();
         for (Integer i = maxCaseVersion > (start + limit) ? (start + limit) : maxCaseVersion; i > start; i--) {
@@ -673,7 +673,7 @@ public class TestCaseAction extends BaseController {
 
     @RequestMapping("versionRollback")
     public String caseVersionRollBack(Integer caseId, Integer caseVersion) {
-        QualityTestCase testCase = testCaseService.findById(caseId);
+        QualityTestCase testCase = testCaseService.testCase(caseId);
         testCase.setCaseVersion(caseVersion);
         testCaseService.updateTestCase(testCase);
         return "redirect:/a/quality/testCase/case/viewInfo?id=" + caseId;

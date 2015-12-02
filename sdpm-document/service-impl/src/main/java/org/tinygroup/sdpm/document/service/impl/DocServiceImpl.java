@@ -12,10 +12,9 @@ import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.List;
 
-//import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 
 /**
- * 因为业务需求比较简单，所以分层处理的优势不明显，显得有点多余。但是~
+ * 文档
  * @date 2015/09/21
  * @author Alu
  *
