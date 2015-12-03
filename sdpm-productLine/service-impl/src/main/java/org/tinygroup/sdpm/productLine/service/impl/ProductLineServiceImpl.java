@@ -20,23 +20,18 @@ public class ProductLineServiceImpl implements ProductLineService {
     private ProductManager productManager;
 
     public ProductLine addProductLine(ProductLine productLine) {
-
         return productLineManager.add(productLine);
     }
 
     public int updateProductLine(ProductLine productLine) {
-
         return productLineManager.update(productLine);
     }
 
     public ProductLine findProductLine(Integer productLineId) {
-
         return productLineManager.find(productLineId);
     }
 
-
     public int deleteProductLine(Integer productLineId) {
-
         return productLineManager.delete(productLineId);
     }
 
@@ -75,9 +70,6 @@ public class ProductLineServiceImpl implements ProductLineService {
     }
 
     public List<ProductLine> findList(ProductLine productLine) {
-
         return productLineManager.findList(productLine);
     }
-
-
 }

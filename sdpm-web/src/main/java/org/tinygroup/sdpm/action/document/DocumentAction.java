@@ -25,7 +25,6 @@ import org.tinygroup.sdpm.project.service.inter.ProjectProductService;
 import org.tinygroup.sdpm.system.dao.pojo.ProfileType;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
-import org.tinygroup.sdpm.util.CmsUtils;
 import org.tinygroup.sdpm.util.CookieUtils;
 import org.tinygroup.sdpm.util.LogUtil;
 import org.tinygroup.sdpm.util.ProductUtils;
@@ -93,7 +92,7 @@ public class DocumentAction extends BaseController {
         model.addAttribute("productList", productUtils.getProductList());
         model.addAttribute("projectList", projectOperate.getUserProjectList());
         model.addAttribute("moduleList", moduleList);
-        model.addAttribute("libList", CmsUtils.getDocLibList());
+        model.addAttribute("libList", docService.findDocLibList(null));
         request.getSession().setAttribute("moduleId", moduleId);
         return "/document/document.page";
     }

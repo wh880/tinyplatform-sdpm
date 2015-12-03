@@ -25,7 +25,6 @@
 
 <script type="text/javascript">
         #set(msg="目前没有产品，现在将前往添加。")
-
         #if(productUtils.getProductList().size()>0)
             #set(msg="目前没有你可访问的产品，现在将前往添加。")
         #end

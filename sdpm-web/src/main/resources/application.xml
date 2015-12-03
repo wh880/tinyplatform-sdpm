@@ -485,10 +485,6 @@
         <template-function name="stdFunction"></template-function>
         <!--&lt;!&ndash;用户信息工具&ndash;&gt;-->
         <!--<static-class name="UserUtils" class="org.tinygroup.sdpm.util.UserUtils"></static-class>-->
-        <!--数据信息获取工具-->
-        <static-class name="CmsUtils" class="org.tinygroup.sdpm.util.CmsUtils"></static-class>
-        <static-class name="ProjectUtils" class="org.tinygroup.sdpm.util.ProjectOperate"></static-class>
-        <static-class name="ProductUtils" class="org.tinygroup.sdpm.util.ProductUtils"></static-class>
     </template-config>
 
     <dict-load-config bean_name="ehCache"></dict-load-config>

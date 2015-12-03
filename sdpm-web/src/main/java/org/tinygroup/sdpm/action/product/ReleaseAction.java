@@ -227,7 +227,7 @@ public class ReleaseAction extends BaseController {
 
     @RequestMapping("/addRelease")
     public String addRelease(@CookieValue(value = "cookieProductId",defaultValue = "0") String cookieProductId,HttpServletRequest request, Model model) {
-        Product product = productService.findProduct(Integer.parseInt(cookieProductId));
+        Product product = productService.findProductById(Integer.parseInt(cookieProductId));
         model.addAttribute("product", product);
         return "/product/page/add/release/product-addrelease.page";
     }

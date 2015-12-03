@@ -128,7 +128,7 @@ public class ProductAction extends BaseController {
 
     @RequestMapping("/update")
     public String update(Product product, HttpServletRequest request, SystemAction systemAction) throws IOException {
-        Product product1 = productService.findProduct(product.getProductId());
+        Product product1 = productService.findProductById(product.getProductId());
         productService.updateProduct(product);
         LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCT,
                 LogUtil.LogAction.EDITED,
@@ -165,9 +165,9 @@ public class ProductAction extends BaseController {
     @ResponseBody
     @RequestMapping("/delete")
     public Map delete(Integer productId, HttpServletRequest request, SystemAction systemAction) {
-        Product product1 = productService.findProduct(productId);
+        Product product1 = productService.findProductById(productId);
         productService.deleteProduct(productId);
-        Product product = productService.findProduct(productId);
+        Product product = productService.findProductById(productId);
 /*
         productUtils.removeProductList();
         productUtils.removeProductList(String.valueOf(product.getProductLineId()));
@@ -192,7 +192,7 @@ public class ProductAction extends BaseController {
     @RequestMapping("/find")
     public String find(Integer productId, Model model) {
 
-        Product product = productService.findProduct(productId);
+        Product product = productService.findProductById(productId);
         model.addAttribute("product", product);
         return "/product/page/update/module/product-module-editor.page";
     }
@@ -204,7 +204,7 @@ public class ProductAction extends BaseController {
         if (productId != null) cookieProductId = String.valueOf(productId);
         Product product = new Product();
         if (Integer.parseInt(cookieProductId) > 0) {
-            product = productService.findProduct(Integer.parseInt(cookieProductId));
+            product = productService.findProductById(Integer.parseInt(cookieProductId));
             if(product.getProductId()==null){
                 return notFoundView();
             }
@@ -259,16 +259,16 @@ public class ProductAction extends BaseController {
     @RequestMapping("/findManager")
     public String findManager(Integer productId, Model model) {
 
-        if (!StringUtil.isBlank(productService.findProduct(productId).getProductOwner())) {
-            OrgUser productOwner = userService.findUser(productService.findProduct(productId).getProductOwner());
+        if (!StringUtil.isBlank(productService.findProductById(productId).getProductOwner())) {
+            OrgUser productOwner = userService.findUser(productService.findProductById(productId).getProductOwner());
             model.addAttribute("productOwner", productOwner);
         }
-        if (!StringUtil.isBlank(productService.findProduct(productId).getProductQualityManager())) {
-            OrgUser productQualityManager = userService.findUser(productService.findProduct(productId).getProductQualityManager());
+        if (!StringUtil.isBlank(productService.findProductById(productId).getProductQualityManager())) {
+            OrgUser productQualityManager = userService.findUser(productService.findProductById(productId).getProductQualityManager());
             model.addAttribute("productQualityManager", productQualityManager);
         }
-        if (!StringUtil.isBlank(productService.findProduct(productId).getProductDeliveryManager())) {
-            OrgUser productDeliveryManager = userService.findUser(productService.findProduct(productId).getProductDeliveryManager());
+        if (!StringUtil.isBlank(productService.findProductById(productId).getProductDeliveryManager())) {
+            OrgUser productDeliveryManager = userService.findUser(productService.findProductById(productId).getProductDeliveryManager());
             model.addAttribute("productDeliveryManager", productDeliveryManager);
         }
         return "/organization/userbaseinfo.pagelet";
@@ -493,7 +493,7 @@ public class ProductAction extends BaseController {
                 return productService.findProductListByIds(iIds);
             }
             List<Product> result = new ArrayList<Product>();
-            result.add(productService.findProduct(Integer.parseInt(initKey)));
+            result.add(productService.findProductById(Integer.parseInt(initKey)));
             return result;
         }
         List<Product> products = productService.getProductByUser(userUtils.getUserId(),0,null);
