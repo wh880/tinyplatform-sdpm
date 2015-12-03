@@ -1,0 +1,158 @@
+#import("/org/tinygroup/form/components/form.component")
+#import("/org/tinygroup/button/components/button_smart.component")
+#import("/org/tinygroup/button/components/button_common.component")
+#import("/org/tinygroup/button/components/button.component")
+#import("/org/tinygroup/fold/components/fold.component")
+<style>
+    .select_boxes{margin-top:0}
+</style>
+#set(name="qualityBug")
+#@layout(operate)#end
+			
+#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/quality/bug/solve" "post" {"class":"test","enctype":"multipart/form-data"})
+#hiddenInput(hiddenInputName="bugId" hiddenInputValue=bug?.bugId)
+	<div style="width:70%;float:left" class="pageleftpart">
+    	<div class="infoContent">
+    		<p class="titleName">解决</p>
+    		<div class="RTtitle">
+            	<button type="submit" id="submit2" class="commitBtn">保存</button>
+        	</div>
+    #@elementItem()
+        <div class="col-2 text-r"><label><span class="c-red">*</span>解决方案：</label></div>
+        #@formControlDiv("col-4")
+                #@Tselect2F()
+                    #@Tselect2Body("bugResolution" bug?.bugResolution?:2 {"class":"input-text","datatype":"*","nullmsg":"解决方案不能为空！"})
+                        #foreach(s:getDict("bugResolution"))
+                            <option value="${s?.value}">${s?.text}</option>
+                        #end
+                    #end
+                #end
+        #end
+        #@validateDiv("col-2")#end
+     #end
+           ##此处需要一段JS代码,点重复Bug出现。
+    #@elementItem("idBox")
+        <div class="col-2 text-r"><label><span class="c-red">*</span>重复ID：</label></div>
+        #@formControlDiv("col-4")
+                #@Tselect2F()
+                    #Tselect2Ajax("bugDuplicateBug" bug?.bugDuplicateBug TINY_CONTEXT_PATH+adminPath+"/quality/bug/ajax/bugInCondition"
+                    {"dataId":"bugId","dataText":"bugTitle","placeholder":"查询重复bug","nullmsg":"请选择重复bug！","datatype":"*"})
+                    #@Tselect2Fix()
+                        <a href="${TINY_CONTEXT_PATH+adminPath}/quality/bug">全部</a>#end
+                #end
+
+        #end
+        #@validateDiv("col-2")#end
+     #end
+     #@elementItem()
+        <div class="col-2 text-r"><label><span class="c-red">*</span>解决版本：</label></div>
+         #@formControlDiv("col-4")
+            #@Tselect2F()
+             #@Tselect2Body("bugResolvedBuild" bug?.bugResolvedBuild {"class":"input-text select2","datatype":"*","nullmsg":"解决版本不能为空"}) ##,"multiple":"multiple"加上为多选项
+                <option value="0">trunk</option>
+                #foreach(build : buildList)
+                    <option value="${build?.buildId}">${build?.buildName}</option>
+                #end
+             #end
+            #end
+          #end
+         #@validateDiv("col-2")#end
+     #end
+
+    #@elementItem()
+
+         	<div class="col-2 text-r"><label><span class="c-red">*</span>解决日期：</label></div>
+        #@formControlDiv("col-4")
+                #@tinyDateInput("bugResolvedDate" formatDate(bug?.bugResolvedDate,"yyyy-MM-dd") "yyyy-MM-dd" {"datatype":"*","nullmsg":"日期不能为空"})#end
+        #end
+        #@validateDiv("col-2")#end
+    #end
+    #@elementItem()
+         	<div class="col-2 text-r"><label>指派给：</label></div>
+        #@formControlDiv("col-4")
+
+                    #@Tselect2F()
+                        #Tselect2Ajax("bugAssignedTo" bug?.bugAssignedTo TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
+                        {"id":"","dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询用户"})
+                        #@Tselect2Fix()
+                            #set(m=menuManager.getMenu("organizationAddUser"))
+                            #if(m)
+                                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
+                            #end
+                            #set(m=menuManager.getMenu("organizationUser"))
+                            #if(m)
+                                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
+                            #end
+                        #end
+                    #end
+         #end
+     #end
+#@elementItem()
+    <div class="col-12">
+        <div class="col-2 text-r"><label>附件：</label></div>
+        <div class="col-9">
+            #mulUploadFile(fileList)
+        </div>
+    </div>
+#end
+    #@elementItem()
+            <div class="col-12">
+                <div class="col-2 text-r"><label>备注：</label></div>
+
+                <div class="col-9">
+                    #@Teditor("actionComment" "actionComment" {"initialFrameHeight":"150"})#end</div>
+            </div>
+        #end
+        <br/>
+       </div>
+    #@elementItem()
+        <div class="col-12">
+            <div class="col-5">
+                <button style="float: right" type="submit" id="submit2" class="commitBtn">保存</button>
+            </div>
+            <div class="col-1"></div>
+            <div class="col-1">
+               #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end
+            </div>
+            <div class="col-5"></div>
+        </div>
+	#end
+    <br >
+   </div>
+   <div style="width:30%;float:right">
+		#history(adminPath+"/system/action/ajax/history?actionObjectType=bug&actionObjectId="+bug?.bugId)
+	</div>
+#end
+
+<script type="text/javascript">
+	
+	/* 重复ID隐藏*/
+    $(document).ready(function () {
+
+        $("#idBox").hide();
+        $("input[name=bugDuplicateBug],input[name=bugDuplicateBug-name]").attr("ignore","ignore");
+        $("input[name=bugDuplicateBug],input[name=bugDuplicateBug]").val("").trigger("change");
+        $("select[name='bugResolution']").on("change", function () {
+            var idBox = $("#idBox");
+            if ($(this).val() == '1') {
+                idBox.show();
+                $("input[name=bugDuplicateBug],input[name=bugDuplicateBug-name]").attr("ignore","");
+                $(function() {
+                    ajaxRead("${sid}", "storyChildStories", "storyId", "storyTitle", "/product/story/storyList?productId=${cookieProductId}&storyId=${story?.storyId}");
+                })
+
+            } else {
+                $("input[name=bugDuplicateBug],input[name=bugDuplicateBug-name]").attr("ignore","ignore");
+                $("input[name=bugDuplicateBug],input[name=bugDuplicateBug]").val("").trigger("change");
+                idBox.hide();
+            }
+        });
+
+    });
+    $(function () {
+        $("form[name=thisform]").Validform({
+            tiptype: 2
+        });
+    });
+
+</script>

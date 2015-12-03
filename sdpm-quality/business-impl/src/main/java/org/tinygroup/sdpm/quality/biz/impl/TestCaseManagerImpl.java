@@ -88,7 +88,7 @@ public class TestCaseManagerImpl implements TestCaseManager {
             }
         }
         if (StringUtil.isBlank(columnName)) {
-            testcasedao.queryPager(start, limit, testcase);
+            return testcasedao.queryPager(start, limit, testcase);
         }
         return testcasedao.queryPager(start, limit, testcase, new OrderBy("quality_test_case." + NameUtil.resolveNameDesc(columnName), asc));
     }

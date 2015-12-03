@@ -1,0 +1,87 @@
+#import("/org/tinygroup/button/components/button_common.component")
+#import("/org/tinygroup/button/components/button.component")
+#import("/org/tinygroup/table/components/table.component")
+#import("/org/tinygroup/button/components/button_smart.component")
+
+<style>
+    .select_boxes{margin-top:0}
+</style>
+
+#set(name="qualityBug")
+#@layout(operate)#end
+
+#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/quality/bug/edit" "post" {"class":"test","enctype":"multipart/form-data"})
+<input type="hidden" name="lastAddress" value=""/>
+#hiddenInput(hiddenInputName="bugId" hiddenInputValue=bug?.bugId)
+	<div style="width:70%;float:left" class="pageleftpart">
+    	<div class="infoContent">
+    		<p class="titleName">编辑</p>
+    		<div class="RTtitle">
+            	<button type="submit" id="submit2" class="commitBtn">保存</button>
+        	</div>
+        #@elementItem()
+            <div class="col-12">
+                #@colLabel("col-2 text-r")<span class="c-red">*</span>bug名称：#end
+                <div class="col-9">
+                    #tinyInput("text" "bugTitle" bug?.bugTitle {"datatype":"*","nullmsg":"bug标题不能为空！","id":"111","class":"input-text","placeholder":""})
+                </div>
+            </div>
+        #end
+   		#@elementItem()
+            <div class="col-12">
+                <div class="col-2 text-r"><label>重现步骤：&nbsp</label></div>
+
+                <div class="col-9">
+                    #@Teditor("bugSteps" "bugSteps" {"initialFrameHeight":"150"})${bug?.bugSteps}#end</div>
+            </div>
+        #end
+        <br/>
+        #@elementItem()
+            <div class="col-12">
+                <div class="col-2 text-r"><label>备注：&nbsp</label></div>
+
+                <div class="col-9">
+                    #@Teditor("actionComment" "actionComment" {"initialFrameHeight":"150"})#end</div>
+            </div>
+        #end
+        <br/>
+        #@elementItem()
+            <div class="col-12">
+                <div class="col-2 text-r"><label>附件：</label></div>
+                <div class="col-9">
+                    #mulUploadFile(fileList)
+                </div>
+            </div>
+        #end
+        </div>
+        #@elementItem()
+        <div class="col-12">
+            <div class="col-5">
+                <button style="float: right" type="submit" id="submit2" class="commitBtn">保存</button>
+            </div>
+            <div class="col-1"></div>
+            <div class="col-1">
+                #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end
+            </div>
+            <div class="col-5"></div>
+        </div>
+		#end
+    	<br >
+        #history(adminPath+"/system/action/ajax/history?actionObjectType=bug&actionObjectId="+bug?.bugId)
+        </div>
+        <div style="width: 30%;float: right">
+       #TypeInfo("qualityBugEdition" bug?.bugId)
+##       #include("/testManagement/page/tabledemo/editionpaging.page")
+    </div>
+#end
+
+
+<script type="text/javascript">
+    $(function () {
+        $("form[name=thisform]").Validform({
+            tiptype: 1
+        });
+    });
+
+</script>
+

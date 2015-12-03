@@ -111,7 +111,7 @@ public class BugAction extends BaseController {
             return "redirect:/a/quality/bug?status=tbugstatus";
         }
         model.addAttribute("userList", users);
-        return "/testManagement/page/Bug.page";
+        return "/quality/index/bug/Bug.page";
     }
 
     @RequestMapping("/findList")
@@ -165,7 +165,7 @@ public class BugAction extends BaseController {
         model.addAttribute("file", list);
         model.addAttribute("qualityBug", bug);
         model.addAttribute("nextId", nextId);
-        return "/testManagement/page/bugInfo.page";
+        return "/quality/operate/bug/bugInfo.page";
     }
 
     @RequestMapping("/bugBasicInfo")
@@ -187,7 +187,7 @@ public class BugAction extends BaseController {
         }
         model.addAttribute("caseFromBug", cases);
         model.addAttribute("qualityBug", bug);
-        return "/testManagement/page/bugRightInfo.pagelet";
+        return "/quality/rightinfo/bug/bugRightInfo.pagelet";
     }
 
     @RequestMapping("/findBug")
@@ -214,12 +214,12 @@ public class BugAction extends BaseController {
             bugpager = bugService.findBugListPager(start, limit, carrier, bug, order, asc);
         }
         model.addAttribute("bugpager", bugpager);
-        return "/testManagement/data/BugData.pagelet";
+        return "/quality/data/bug/BugData.pagelet";
     }
 
     @RequestMapping("/reportForm")
     public String reportForm() {
-        return "/testManagement/page/reportform.page";
+        return "/quality/operate/bug/reportform.page";
     }
 
     @RequiresPermissions("tmakesure")
@@ -229,7 +229,7 @@ public class BugAction extends BaseController {
         List<OrgUser> orgUsers = userService.findUserList(null);
         model.addAttribute("bug", bug);
         model.addAttribute("userList", orgUsers);
-        return "/testManagement/page/tabledemo/makesure.page";
+        return "/quality/operate/bug/makesure.page";
     }
 
     @RequiresPermissions("tmakesure")
@@ -372,7 +372,7 @@ public class BugAction extends BaseController {
         List<OrgUser> users = userService.findUserList(null);
         model.addAttribute("bug", bug);
         model.addAttribute("userList", users);
-        return "/testManagement/page/tabledemo/assign.page";
+        return "/quality/operate/bug/assign.page";
     }
 
     @RequestMapping("/assignTo")
@@ -424,7 +424,7 @@ public class BugAction extends BaseController {
         model.addAttribute("userList", orgUsers);
         model.addAttribute("bug", bug);
         model.addAttribute("bugList", bugList);
-        return "/testManagement/page/tabledemo/solution.page";
+        return "/quality/operate/bug/solution.page";
     }
 
     @RequestMapping("/solve")
@@ -460,7 +460,7 @@ public class BugAction extends BaseController {
         bug = bugService.findQualityBugById(bugId);
         bug.setBugClosedDate(new Date());
         model.addAttribute("bug", bug);
-        return "/testManagement/page/tabledemo/shutdown.page";
+        return "/quality/operate/bug/shutdown.page";
     }
 
     @RequestMapping("/close")
@@ -496,7 +496,7 @@ public class BugAction extends BaseController {
         model.addAttribute("fileList", fileList);
 
         model.addAttribute("bug", bug);
-        return "/testManagement/page/tabledemo/edition";
+        return "/quality/operate/bug/edition";
     }
 
     @RequestMapping("/edit")
@@ -540,7 +540,7 @@ public class BugAction extends BaseController {
         model.addAttribute("projectList", projects);
         model.addAttribute("userList", orgUsers);
         model.addAttribute("bug", bug);
-        return "/testManagement/page/tabledemo/editionpaging.pagelet";
+        return "/quality/rightinfo/bug/editionpaging.pagelet";
     }
 
     @RequiresPermissions("bug-add")
@@ -550,7 +550,7 @@ public class BugAction extends BaseController {
         List<OrgUser> orgUsers = userService.findUserList(null);
         model.addAttribute("projectList", projects);
         model.addAttribute("userList", orgUsers);
-        return "/testManagement/page/proposeBug.page";
+        return "/quality/operate/bug/proposeBug.page";
     }
 
     @RequiresPermissions("bug-add")
@@ -568,7 +568,7 @@ public class BugAction extends BaseController {
         systemProfile.setFileObjectType(ProfileType.BUG.getType());
         List<SystemProfile> fileList = profileService.findSystemProfile(systemProfile);
         model.addAttribute("fileList", fileList);
-        return "/testManagement/page/copyBug.page";
+        return "/quality/operate/bug/copyBug.page";
     }
 
     @ResponseBody
@@ -843,7 +843,7 @@ public class BugAction extends BaseController {
         model.addAttribute("projectList", projects);
         model.addAttribute("userList", orgUsers);
         model.addAttribute("fromCase", caseId);
-        return "/testManagement/page/proposeBug.page";
+        return "/quality/operate/bug/proposeBug.page";
     }
 
 
@@ -855,7 +855,7 @@ public class BugAction extends BaseController {
         Map<String, List<BugCount>> map = bugService.bugReport(checkItem, Integer.parseInt(qualityProductId));
         model.addAttribute("map", map);
         model.addAttribute("fields", checkItem);
-        return "/testManagement/page/reportform.page";
+        return "/quality/operate/bug/reportform.page";
     }
 
     @RequestMapping("/reactive")

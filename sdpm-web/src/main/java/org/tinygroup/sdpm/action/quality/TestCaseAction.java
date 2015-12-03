@@ -63,13 +63,16 @@ public class TestCaseAction extends BaseController {
     }
 
     @RequestMapping("")
-    public String form(QualityTestCase testCase, HttpServletRequest request, Model model) {
+    public String form(String type, HttpServletRequest request, Model model) {
         String queryString = request.getQueryString();
         if (queryString == null || !queryString.contains("status")) {
             return "redirect:/a/quality/testCase?currentPageId=5&status=tcaseall"
                     + (queryString == null ? "" : "&" + queryString);
         }
-        return "testManagement/page/cases.page";
+        if("noCase".equals(type)){
+            return "quality/index/case/NoTestCaseStory.page"
+        }
+        return "quality/index/case/testCase.page";
     }
 
     @RequestMapping("/findPager")
@@ -97,13 +100,13 @@ public class TestCaseAction extends BaseController {
             casepager = testCaseService.findTestCasePager(start, limit, testcase, carrier, order, asc);
         }
         model.addAttribute("casepager", casepager);
-        return "testManagement/data/casesData.pagelet";
+        return "quality/data/case/casesData.pagelet";
     }
 
     @RequiresPermissions("add-case")
     @RequestMapping("/add")
     public String add() {
-        return "testManagement/page/proposecase.page";
+        return "quality/operate/case/proposecase.page";
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
@@ -161,7 +164,7 @@ public class TestCaseAction extends BaseController {
         if (!StringUtil.isBlank(lastAddress)) {
             return "redirect:" + lastAddress;
         }
-        return "redirect:" + "/a/quality/testCase";
+        return "redirect:/a/quality/testCase";
     }
 
     @RequestMapping(value = "/batchSave", method = RequestMethod.POST)
@@ -199,7 +202,7 @@ public class TestCaseAction extends BaseController {
         model.addAttribute("caseSteps", caseSteps);
         model.addAttribute("testResults", qualityTestResults);
         model.addAttribute("stepResults", caseStepResults);
-        return "/testManagement/page/tabledemo/execution.pagelet";
+        return "/quality/modal/case/execution.pagelet";
     }
 
     @RequestMapping("/execute")
@@ -314,7 +317,7 @@ public class TestCaseAction extends BaseController {
         }
 
         model.addAttribute("storyMap", storyMap);
-        return "/testManagement/page/group.pagelet";
+        return "/quality/ajax/case/group.pagelet";
     }
 
     // 预留，需要新增一个页面
@@ -327,7 +330,7 @@ public class TestCaseAction extends BaseController {
     @RequestMapping("/result")
     public String result(Integer caseId, Model model) {
         execution(caseId, null, model);
-        return "/testManagement/page/tabledemo/result.pagelet";
+        return "/quality/modal/case/result.pagelet";
     }
 
     @ResponseBody
@@ -366,7 +369,7 @@ public class TestCaseAction extends BaseController {
         List<SystemProfile> fileList = profileService.findSystemProfile(systemProfile);
         model.addAttribute("fileList", fileList);
 
-        return "/testManagement/page/tabledemo/editioncase.page";
+        return "/quality/operate/case/editioncase.page";
     }
 
     @RequestMapping("/find/{forward}")
@@ -374,7 +377,7 @@ public class TestCaseAction extends BaseController {
         QualityTestCase testCase = testCaseService.testCase(caseId);
         model.addAttribute("testCase", testCase);
         if ("editRight".equals(forward)) {
-            return "/testManagement/page/tabledemo/editioncasepaging.pagelet";
+            return "/quality/rightinfo/case/editioncasepaging.pagelet";
         }
         return "";
     }
@@ -390,7 +393,7 @@ public class TestCaseAction extends BaseController {
 
         model.addAttribute("stepList", stepList);
         model.addAttribute("testCase", testCase);
-        return "/testManagement/page/copyCase.page";
+        return "/quality/operate/case/copyCase.page";
     }
 
     @RequiresPermissions("tcaseinfodelete")
@@ -483,7 +486,7 @@ public class TestCaseAction extends BaseController {
         model.addAttribute("stepList", stepList);
         model.addAttribute("caseSteps", caseSteps);
         model.addAttribute("stepResults", caseStepResults);
-        return "/testManagement/page/caseToBug.pagelet";
+        return "/quality/modal/case/caseToBug.pagelet";
     }
 
     private String testResult(List<CaseStepResult> caseStepResults) {
@@ -578,7 +581,7 @@ public class TestCaseAction extends BaseController {
         model.addAttribute("file", list);
         model.addAttribute("testCase", testCase);
         model.addAttribute("stepList", stepList);
-        return "/testManagement/page/caseInfo.page";
+        return "/quality/operate/case/caseInfo.page";
     }
 
     @RequestMapping("/case/rightInfo")
@@ -590,7 +593,7 @@ public class TestCaseAction extends BaseController {
         List<QualityBug> bugList = bugService.findBugList(bug);
         model.addAttribute("bugFromCase", bugList);
         model.addAttribute("testCase", testCase);
-        return "/testManagement/page/tabledemo/caseEditInfo.pagelet";
+        return "/quality/rightinfo/case/caseEditInfo.pagelet";
     }
 
     public boolean isCaseModify(String[] step, String[] expect, List<QualityCaseStep> steps) {
@@ -645,7 +648,7 @@ public class TestCaseAction extends BaseController {
 
     @RequestMapping("caseVersion")
     public String caseVersion() {
-        return "/testManagement/page/version/allVersion.pagelet";
+        return "/quality/modal/case/allVersion.pagelet";
     }
 
     @RequestMapping("caseVersionData")
@@ -668,7 +671,7 @@ public class TestCaseAction extends BaseController {
         model.addAttribute("start", start);
         model.addAttribute("maxVersion", maxCaseVersion);
         model.addAttribute("end", maxCaseVersion > (start + limit) ? (start + limit) : maxCaseVersion);
-        return "/testManagement/page/version/allVersionData.pagelet";
+        return "/quality/data/case/allVersionData.pagelet";
     }
 
     @RequestMapping("versionRollback")

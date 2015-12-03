@@ -75,3 +75,84 @@
         #@label(ckId)${labelText}#end
     #end
 #end
+
+
+#macro assignOperation(operation doActionUrl map)<span id="${operation}-${tableId}">#bodyContent</span>
+<script type="text/javascript">
+    $(function () {
+        $("#${operation}-${tableId}").on("click", function () {
+            layer.confirm("请确认?", function () {
+                var checklist = [];
+                var userId = $("select[name=assignTo] option:selected").val();
+                if (userId == 0) {
+                    layer.msg("请选择指派对象")
+                    return false;
+                }
+                $("#${tableId} input[name=idCheck]:checked").each(function (e) {
+                    checklist.push($(this).val());
+                });
+                if (checklist.length == 0) {
+                    layer.msg("请选择记录")
+                    return false;
+                }
+                $.ajax({
+                    url: "${doActionUrl}",
+                    data: {ids: checklist, userId: userId, action: "${operation}"#mapToJson(map)},
+                    dataType: "json",
+                    traditional: true,
+                    success: function (data) {
+                        if (data.status == "success" || data.status == "y") {
+                            location.href = "${TINY_CONTEXT_PATH+adminPath+" / quality / version / taskToCase ? testversionId = "+testversionId+" & currentPageId = 5 & status = tverallcase"}";
+                        } else {
+                            layer.msg(data.info);
+                        }
+                    },
+                    error: function () {
+                        layer.msg("系统出错，请确认你的请求地址");
+                    }
+                })
+            });
+            //return false;
+        })
+    });
+</script>
+#end
+
+#macro linkOperation(operation doActionUrl map)<span id="${operation}-${tableId}">#bodyContent</span><script type="text/javascript">
+ $(function(){
+  $("#${operation}-${tableId}").on("click",function() {
+		layer.confirm("请确认?",function() {
+			 var checklist = [];
+			 var versions = [];
+			 $("#${tableId} input[name=idCheck]:checked").each(function (e) {
+			   // var str = $(this).val().split(",");
+				  checklist.push($(this).val());
+				  var v_val=$(this).closest("tr").find("select:first").val();
+				  versions.push(v_val);
+			 });
+			 if(checklist.length==0){
+				layer.msg("请选择记录")
+				 return false;
+			 }
+			 $.ajax({
+				  url: "${doActionUrl}",
+				  data: {ids: checklist,ves:versions, action: "${operation}"#mapToJson(map)},
+				  dataType: "json",
+				  traditional:true,
+				  success: function (data) {
+						if (data.status=="success"||data.status=="y") {
+							  location.href = "${TINY_CONTEXT_PATH+adminPath+"/quality/version/taskToCase?testversionId="+testversionId+"&currentPageId=5&status=tverallcase"}";
+						}else{
+							 layer.msg(data.info);
+						}
+				  },
+				  error:function(){
+					  layer.msg("系统出错，请确认你的请求地址");
+				  }
+			 })
+		});
+		//return false;
+  })
+ });
+</script>
+#end

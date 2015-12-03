@@ -1,0 +1,220 @@
+#import("/org/tinygroup/button/components/button_common.component")
+#import("/org/tinygroup/button/components/button.component")
+#import("/org/tinygroup/table/components/table.component")
+
+#!set(activeTitle="测试管理",activeMenuId=currentPageId)
+<style>
+    .select_boxes{margin-top:0}
+</style>
+
+#set(name="qualityVersion")
+#@layout(operate)#end
+		#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/quality/version/save" "post" {"class":"test"})
+		<script type="text/javascript">
+            $(function(){
+                var form = $("#${fromId}");
+                var action = form.attr("action");
+				var oldUrl = $("input[name=lastAddress]").attr("value");
+                form.submit(function(){
+                    $.ajax({
+                         type: "post",
+                         url: action,
+                         data: form.serialize(),
+                         dataType: "json",
+                         success: function(data){
+                                if(data.status == "y"){
+                                window.location.href=oldUrl;
+                                }
+                            }
+                             });
+                             return false;
+                });
+            })
+
+        </script>
+        <input type="hidden" name="lastAddress" value=""/>
+		#hiddenInput(hiddenInputName="testversionId" hiddenInputValue=testTask?.testversionId)
+			<div style="width:100%">
+    			<div class="infoContent">
+    				<p class="titleName">编辑版本</p>
+			#@elementItem()
+				#@colLabel()<span class="c-red">*</span>所属项目：#end
+				#@formControlDiv("col-4")
+					#@div(divClass="col-10")
+					 #@Tselect2F()
+	                   		 #@Tselect2Body("projectId" testTask?.projectId?:0 {"datatype":"*","nullmsg":"所属项目不能为空","class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+
+	                    	#end
+                           <script type="text/javascript">
+                               ajaxRead("${sid}", "projectId", "projectId", "projectName", "/quality/bug/ajax/project?productId=${qualityProductId}", "${testTask?.projectId?:(projectId?:0)}");
+                                $("#${sid}").on("change",function(){
+                                    var pId = $("#${sid}  option:selected").val();
+									if(pId>0){
+										ajaxRead("${sid}","buildName","buildId","buildName","/quality/version/ajax/build?buildProject="+pId+"&buildProduct=${qualityProductId?:0}",${testTask?.buildName?:0},"build");
+										ajaxRead("${sid}","testtaskOwner","orgUserId","orgUserRealName","/quality/version/ajax/user?projectId="+pId,"${testTask?.testtaskOwner?:0}");
+									}
+                                })
+                            </script>
+						#@Tselect2Fix()
+							#set(m=menuManager.getMenu("project-op-add"))
+							#if(m)
+                                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
+							#end
+							#set(m=menuManager.getMenu("project-op-all"))
+							#if(m)
+                                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
+							#end
+						#end
+                	  #end
+                	 #end
+					#end
+				#@validateDiv("col-2")#end
+			#end
+			#@elementItem()
+				#@colLabel()<span class="c-red">*</span>版本：#end
+				#@formControlDiv("col-4")
+					#@div(divClass="col-10")
+					 #@Tselect2F()
+	                   		 #@Tselect2Body("buildName" testTask?.buildName?:0 {"datatype":"*","nullmsg":"版本不能为空","class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+
+	                    	#end
+						 #@Tselect2Fix()
+							 #set(m=menuManager.getMenu("pro-version-add"))
+							 #if(m)
+                                 <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
+							 #end
+							 #set(m=menuManager.getMenu("version"))
+							 #if(m)
+                                 <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
+							 #end
+						 #end
+                	  #end
+                	 #end
+					#end
+				#@validateDiv("col-2")#end
+			#end
+
+			#@elementItem()
+				#@colLabel()负责人：#end
+				#@formControlDiv("col-4")
+					#@div(divClass="col-10")
+					 #@Tselect2F()
+	                   		 #@Tselect2Body("testtaskOwner" testTask?.testtaskOwner?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+
+	                    	#end
+						 #@Tselect2Fix()
+							 #set(m=menuManager.getMenu("organizationAddUser"))
+							 #if(m)
+                                 <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
+							 #end
+							 #set(m=menuManager.getMenu("organizationUser"))
+							 #if(m)
+                                 <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
+							 #end
+						 #end
+                	  #end
+                	 #end
+				#end
+				#@validateDiv("col-2")#end
+			#end
+
+			#@elementItem()
+				#@colLabel()<span class="c-red">*</span>优先级：#end
+				#@formControlDiv("col-4")
+					#@div(divClass="col-10")
+	                        #@Tselect2F()
+	                   		 #@Tselect2Body("priority" testTask?.priority {"datatype":"*","nullmsg":"优先级不能为空","class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+	                        #foreach(pri : getDict("versionPriority"))
+	                             <option value="${pri?.value}">${pri?.text}</option>
+	                        #end
+	                    	#end                	                    
+                	  #end
+	                #end
+	              #end
+				#@validateDiv("col-2")#end
+			#end
+				#@elementItem()
+					#@colLabel()<span class="c-red">*</span>开始日期：#end
+					#@formControlDiv("col-4")
+						#@div(divClass="col-10")
+						#@tinyDateInput("testtaskBegin" testTask?.testtaskBegin?formatDate(testTask?.testtaskBegin,"yyyy-MM-dd"):"" "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空"})#end
+						#end
+					#end
+					#@validateDiv("col-2")#end
+				#end
+				#@elementItem()
+					#@colLabel()<span class="c-red">*</span>结束日期：#end
+					#@formControlDiv("col-4")
+						#@div(divClass="col-10")
+						#@tinyDateInput("testtaskEnd" testTask?.testtaskEnd?formatDate(testTask?.testtaskEnd,"yyyy-MM-dd"):"" "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空"})#end
+						#end
+					#end
+					#@validateDiv("col-2")#end
+				#end
+
+			#@elementItem()
+				#@colLabel()当前状态：#end
+				#@formControlDiv("col-4")
+					#@div(divClass="col-10")
+					#@tinySelect("testtaskStatus" testTask?.testtaskStatus {"class":"#####","nullmsg":"请选择"})
+					#foreach(status : getDict("versionStatus"))
+						#@optionItem(status?.value)${status?.text}#end
+					#end
+					#end
+					#end
+				#end
+				#@validateDiv("col-2")#end
+			#end
+			#@elementItem()
+				#@colLabel()<span class="c-red">*</span>测试名称：#end
+				#@formControlDiv("col-4")
+					#@div(divClass="col-10")
+						#tinyInput("text" "testtaskTitle" testTask?.testtaskTitle {"datatype":"*","nullmsg":"测试名称不能为空","id":"抄送给","class":"input-text"})
+					#end					
+				#end
+				#@validateDiv("col-2")#end
+			#end
+
+			#@elementItem()
+				#@colLabel()描述：#end
+				#@formControlDiv("col-8")
+					#@Teditor("content" "testtaskDesc" {"initialFrameHeight":"150"})${testTask?.testtaskDesc}#end
+
+				#end
+				#@validateDiv("col-2")#end
+			#end
+			#@elementItem()
+				#@colLabel()测试总结：#end
+				#@formControlDiv("col-8")
+					#@Teditor("content1" "testtaskReport" {"initialFrameHeight":"150"})${testTask?.testtaskReport}#end
+
+				#end
+				#@validateDiv("col-2")#end
+			#end
+			<br>
+			#@elementItem()
+		        <div class="col-12">
+		            <div class="col-5">
+		
+		            </div>
+		            <div class="col-1">
+		                <button style="float: left" type="submit" id="submit2" class="commitBtn">保存</button>
+		            </div>
+		            <div class="col-1">
+		                #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end
+		            </div>
+		            <div class="col-5"></div>
+		        </div>
+    		#end
+    	</div>
+    </div>
+	#end
+
+
+<script type="text/javascript">
+    $(function () {
+        $("form[name=thisform]").Validform({
+            tiptype: 2
+        });
+    });
+</script>

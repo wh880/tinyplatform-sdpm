@@ -77,7 +77,7 @@ public class TestVersionAction extends BaseController {
         if (StringUtil.isBlank(queryString)) {
             return "redirect:/a/quality/version?status=tvernotest&currentPageId=5";
         }
-        return "/testManagement/page/version.page";
+        return "/quality/index/version/version.page";
     }
 
     @RequestMapping("/findPager")
@@ -102,7 +102,7 @@ public class TestVersionAction extends BaseController {
         testtask.setProductId(qualityProductId);
         Pager<QualityTestTask> verpager = testTaskService.findTestTaskPagerWithConditionCarrier(start, limit, testtask, carrier, order, asc);
         model.addAttribute("verPager", verpager);
-        return "/testManagement/data/versionData.pagelet";
+        return "/quality/data/version/versionData.pagelet";
     }
 
     @RequestMapping("/project/findPager")
@@ -181,7 +181,7 @@ public class TestVersionAction extends BaseController {
         model.addAttribute("projectList", projects);
         model.addAttribute("buildList", builds);
         model.addAttribute("userList", users);
-        return "/testManagement/page/proposeversion.page";
+        return "/quality/operate/version/proposeversion.page";
     }
 
     @RequestMapping("/versionInfo")
@@ -208,7 +208,7 @@ public class TestVersionAction extends BaseController {
             testTask = testTaskService.findTestTaskById(testversionId);
         }
         model.addAttribute("testTask", testTask);
-        return "/testManagement/page/versionSituation.page";
+        return "/quality/operate/version/versionSituation.page";
     }
 
     @RequiresPermissions(value = {"tversionSituation", "tverInfo"}, logical = Logical.OR)
@@ -216,7 +216,7 @@ public class TestVersionAction extends BaseController {
     public String versionRightInfo(Integer testversionId, Model model) {
         QualityTestTask testTask = testTaskService.findTestTaskById(testversionId);
         model.addAttribute("testTask", testTask);
-        return "/testManagement/page/tabledemo/versionRightInfo.pagelet";
+        return "/quality/rightinfo/version/versionRightInfo.pagelet";
     }
 
     @ResponseBody
@@ -239,7 +239,7 @@ public class TestVersionAction extends BaseController {
     @RequiresPermissions("tversionLink")
     @RequestMapping("/linkCase")
     public String linkCase() {
-        return "/testManagement/page/versionLink.page";
+        return "/quality/operate/version/versionLink.page";
     }
 
     @RequestMapping("/link")
@@ -265,7 +265,7 @@ public class TestVersionAction extends BaseController {
         testCase.setDeleted(0);
         Pager<QualityTestCase> casePager = testCaseService.findTestCasePager(start, limit, testCase, carrier, order, "asc".equals(ordertype) ? true : false);
         model.addAttribute("casePager", casePager);
-        return "/testManagement/data/link.pagelet";
+        return "/quality/data/version/link.pagelet";
     }
 
     @RequiresPermissions("tversionedit")
@@ -281,7 +281,7 @@ public class TestVersionAction extends BaseController {
         List<Project> projects = ids.size() > 0 ? projectService.findByProjectList(ids) : new ArrayList<Project>();
         model.addAttribute("testTask", testTask);
         model.addAttribute("projectList", projects);
-        return "/testManagement/page/tabledemo/editionversion.page";
+        return "/quality/operate/version/editionversion.page";
     }
 
     @ResponseBody
@@ -359,7 +359,7 @@ public class TestVersionAction extends BaseController {
 
         model.addAttribute("testTask", testTask);
         model.addAttribute("userList", orgUsers);
-        return "/testManagement/page/tabledemo/verCase.page";
+        return "/quality/operate/version/verCase.page";
     }
 
     @RequestMapping("/taskToCaseData")
@@ -375,7 +375,7 @@ public class TestVersionAction extends BaseController {
         Pager<QualityTestRun> runsPager = testRunService.findTestRunPager(start, limit, run, carrier, order, "asc".equals(ordertype) ? true : false);
         //增加case删除位判断
         model.addAttribute("runsPager", runsPager);
-        return "/testManagement/data/verCaseData.pagelet";
+        return "/quality/data/version/verCaseData.pagelet";
     }
 
     @ResponseBody
@@ -395,7 +395,7 @@ public class TestVersionAction extends BaseController {
     @RequiresPermissions("tverclose")
     @RequestMapping("/toTaskEnd")
     public String toTaskEnd() {
-        return "/testManagement/page/versionEnd.pagelet";
+        return "/quality/modal/version/versionEnd.pagelet";
     }
 
     @ResponseBody

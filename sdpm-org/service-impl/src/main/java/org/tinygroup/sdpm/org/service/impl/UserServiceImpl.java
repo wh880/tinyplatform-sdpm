@@ -17,6 +17,7 @@ package org.tinygroup.sdpm.org.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.org.biz.inter.UserManager;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.UserService;
@@ -37,6 +38,7 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     public OrgUser findUser(String id) {
+        if(StringUtil.isBlank(id))return new OrgUser();
         return userManager.find(id);
     }
 
