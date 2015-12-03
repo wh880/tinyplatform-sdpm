@@ -479,3 +479,6 @@ table.table.filelist-table{border:#ddd 1px solid;}
 .who-info{background:#fcfcfc;border:#f1f1f1 1px solid;padding:4px 5px;height:325px;overflow:hidden;margin-bottom:10px}
 .who-info .caption a{color:#333;}
 .who_info .caption a:hover{color:#f90;}
+/*底部*/
+.tinyfooterrap a,.tinyfooterrap a:link,.tinyfooterrap a:visited{color:#ccb}
+.tinyfooterrap a:hover{text-decoration:underline;color:#ffe}
