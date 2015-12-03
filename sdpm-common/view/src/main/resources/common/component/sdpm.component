@@ -61,3 +61,17 @@
     });
 </script>
 #end
+
+#macro radio1(rId rName rChecked rValue rClass rIsDisabled radioOther)
+<input#if(rId) id="$!{rId}"#{end}#if(rName) name="$!{rName}"#end#if(rChecked && rChecked=="checked")
+               checked#{end}#if(rValue) value="$!{rValue}"#end#if(rClass)
+               class="$!{rClass}"#end#if(rIsDisabled && rIsDisabled=="disabled") disabled#end type="radio"
+               onclick="${radioOther}"/>
+#end
+
+#macro labelRadio1(rId rName rValue rClass radioOther labelText)
+    #@radioBox()
+        #radio1(rId=rId rName=rName rValue=rValue rClass=rClass radioOthe=radioOther)
+        #@label(ckId)${labelText}#end
+    #end
+#end

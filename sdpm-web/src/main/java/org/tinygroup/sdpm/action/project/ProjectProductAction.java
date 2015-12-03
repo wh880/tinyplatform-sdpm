@@ -45,7 +45,7 @@ public class ProjectProductAction extends BaseController {
         }
         model.addAttribute("linkIdList", linkIdList);
         model.addAttribute("userProductsMap", userProductsMap);
-        return "project/product/view";
+        return "project/index/product/view";
     }
 
     @ResponseBody

@@ -121,7 +121,7 @@ public class TestVersionAction extends BaseController {
         }
         Pager<QualityTestTask> versionPager = testTaskService.findTestTaskPagerWithConditionCarrier(start, limit, testTask, null, order, asc);
         model.addAttribute("versionPager", versionPager);
-        return "project/test/tableData.pagelet";
+        return "project/data/test/tableData.pagelet";
     }
 
     @ResponseBody

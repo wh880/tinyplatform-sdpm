@@ -12,7 +12,6 @@
 	#@td()${userUtils.getUserById(a?.actionActor).orgUserRealName} #end
 	#@td()${getDict("actionOperate",a?.actionAction)}#end
 	#@td()${getDict("actionObject",a?.actionObjectType)}#end
-##	#@td()${a?.actionObjectId}#end
 	#@td()
     <a href="${TINY_CONTEXT_PATH +adminPath+a?.url}">${a?.objectName}</a>
 	#end

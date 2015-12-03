@@ -53,15 +53,6 @@
     </div>
 #end
 
-###@dialog("myModal")
-##	#@dialogHeader()对话框标题#end
-##	#@dialogBody()<p>对话框内容…</p>#end
-##	#@dialogFooter()
-##		#@buttonEnsure() <a href="${TINY_CONTEXT_PATH+adminPath}/system/holiday/save">确定</a>#end
-##		#@buttonCancel()关闭#end
-##	#end
-###end
-
 <script>
 	$(function(){
 		var href=$(".hidenmuldel").attr("href");

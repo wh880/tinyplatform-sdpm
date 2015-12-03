@@ -1,9 +1,0 @@
-#@zTreeList(call("link",adminPath+"/system/module/projectTree?moduleType=task&moduleRoot="+currentProjectId+
-    "&openProject=0"))
-    #setzTreeValMap({"id":"moduleId","name":"moduleName","pid":"moduleParent"}) ##key值为固定
-    #zTreeSetLinkUrl(TINY_CONTEXT_PATH+adminPath+"/project/manage/selModelDemand")
-    #zTreeSetAddUrl(TINY_CONTEXT_PATH+adminPath+
-        "/system/module/ajax/save?moduleType=task&moduleRoot="+currentProjectId)
-    #zTreeSetEditUrl(TINY_CONTEXT_PATH+adminPath+"/system/module/ajax/save")
-    #zTreeSetDelUrl(TINY_CONTEXT_PATH+adminPath+"/system/module/ajax/delete")
-#end

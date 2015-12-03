@@ -325,7 +325,7 @@ public class ProductAction extends BaseController {
             }
         }
         model.addAttribute("projectPager", pagerProject);
-        return "/project/listData.pagelet";
+        return "/project/data/project/listData.pagelet";
     }
 
     @ResponseBody

@@ -74,7 +74,7 @@ public class ProjectBuildAction extends BaseController {
         }
         Project project = projectService.findProjectById(projectId);
         model.addAttribute("project", project);
-        return "project/build/index";
+        return "project/index/build/index";
     }
 
     @RequestMapping("/productBuildList")
@@ -83,7 +83,7 @@ public class ProjectBuildAction extends BaseController {
         boolean asc = "asc".equals(ordertype) ? true : false;
         Pager<ProjectBuild> pager = buildService.findPagerBuild(build, start, limit, order, asc);
         model.addAttribute("buildPager", pager);
-        return "project/build/tableData.pagelet";
+        return "project/data/build/tableData.pagelet";
     }
 
 
@@ -97,7 +97,7 @@ public class ProjectBuildAction extends BaseController {
         boolean asc = "asc".equals(ordertype) ? true : false;
         Pager<ProjectBuild> pager = buildService.findBuildPagerWithOrder(projectId, start, limit, order, asc);
         model.addAttribute("buildPager", pager);
-        return "project/build/tableData.pagelet";
+        return "project/data/build/tableData.pagelet";
     }
 
     /**
@@ -108,7 +108,7 @@ public class ProjectBuildAction extends BaseController {
     @RequiresPermissions("pro-version-look")
     @RequestMapping("/look")
     public String look() {
-        return "project/bug/index";
+        return "project/index/bug/index";
     }
 
     @RequiresPermissions(value = {"pro-version-edit", "pro-version-add"}, logical = Logical.OR)
@@ -138,7 +138,7 @@ public class ProjectBuildAction extends BaseController {
             ProjectBuild build = buildService.findBuild(buildId);
             model.addAttribute("build", build);
         }
-        return "project/build/edit";
+        return "project/operate/build/edit";
     }
 
 
@@ -172,7 +172,7 @@ public class ProjectBuildAction extends BaseController {
                     null);
         }
         model.addAttribute("build", build);
-        return "project/build/index.page";
+        return "project/index/build/index.page";
     }
 
     @RequiresPermissions("pro-version-delete")
@@ -195,17 +195,17 @@ public class ProjectBuildAction extends BaseController {
 
     @RequestMapping("/product-al-bug")
     public String jumpalBug() {
-        return "/project/task/relation-release/product-al-bug.page";
+        return "/project/operate/build/relation/product-al-bug.page";
     }
 
     @RequestMapping("/product-al-le-bug")
     public String jumpleBug() {
-        return "/project/task/relation-release/product-al-le-bug.page";
+        return "/project/operate/build/relation/product-al-le-bug.page";
     }
 
     @RequestMapping("/product-al-no-bug")
     public String jumpanoBug() {
-        return "/project/task/relation-release/product-al-no-bug.page";
+        return "/project/operate/build/relation/product-al-no-bug.page";
     }
 
     @RequiresPermissions("pro-version-delete")
@@ -244,7 +244,7 @@ public class ProjectBuildAction extends BaseController {
         ProjectBuild build = buildService.findBuild(buildId);
         model.addAttribute("build", build);
         //还需要查询其他相关任务剩余时间的信息
-        return "/project/task/relation-release/product-al-bug.page";
+        return "/project/operate/build/relation/product-al-bug.page";
     }
 
     @RequestMapping("/releasebaseinfo")
@@ -261,16 +261,16 @@ public class ProjectBuildAction extends BaseController {
         ProjectBuild build = buildService.findBuild(buildId);
         model.addAttribute("build", build);
         if ("alBug".equals(forwordPager)) {
-            return "project/task/relation-release/product-al-bug.page";
+            return "project/operate/build/relation/product-al-bug.page";
         } else if ("alnoBug".equals(forwordPager)) {
-            return "project/task/relation-release/product-al-no-bug.page";
+            return "project/operate/build/relation/product-al-no-bug.page";
         } else if ("alleBug".equals(forwordPager)) {
-            return "project/task/relation-release/product-al-le-bug.page";
+            return "project/operate/build/relation/product-al-le-bug.page";
         } else if ("alnoReq".equals(forwordPager)) {
-            return "project/task/relation-release/product-al-no-req.page";
+            return "project/operate/build/relation/product-al-no-req.page";
 
         } else /* ("alReq".equals(forwordPager)) */ {
-            return "project/task/relation-release/product-al-req.page";
+            return "project/operate/build/relation/product-al-req.page";
         }
 
     }
@@ -300,17 +300,17 @@ public class ProjectBuildAction extends BaseController {
             carrier.putIdIn("qualityBug.bugId",build.getBuildBugs().split(","));
             Pager<QualityBug> p = bugService.findBugListPager(start, limit, carrier, bug,order,"asc".equals(ordertype)?true:false);
             model.addAttribute("bugList", p);
-            return "/project/task/relation-release/product-al-bug-data.pagelet";
+            return "/project/data/build/relation/product-al-bug-data.pagelet";
         } else if ("noRelateBug".equals(relate)) {
             carrier.putIdNotIn("qualityBug.bugId", build.getBuildBugs().split(","));
             Pager<QualityBug> p =  bugService.findBugListPager(start, limit, carrier, bug,order,"asc".equals(ordertype)?true:false);
             model.addAttribute("bugList", p);
-            return "/project/task/relation-release/product-al-no-bug-data.pagelet";
+            return "/project/data/build/relation/product-al-no-bug-data.pagelet";
         } else if ("leRelateBugRelease".equals(relate)) {
             bug.setBugStatus("1");
             Pager<QualityBug> p = bugService.findBugListPager(start, limit, carrier, bug, order, "asc".equals(ordertype) ? true : false);
             model.addAttribute("bugList", p);
-            return "/project/task/relation-release/product-al-le-bug-data.pagelet";
+            return "/project/data/build/relation/product-al-le-bug-data.pagelet";
         }
 
         return "";
@@ -359,7 +359,7 @@ public class ProjectBuildAction extends BaseController {
         Pager<ProductStory> p = projectStoryService.findStoryPager(start, limit, id, searchInfos, groupOperate);
         model.addAttribute("storys", p);
 
-        return "/project/task/relation-release/product-al-req-data.pagelet";
+        return "/project/data/build/relation/product-al-req-data.pagelet";
     }
 
     @RequestMapping("/search/noRelateStory")
@@ -383,7 +383,7 @@ public class ProjectBuildAction extends BaseController {
         Pager<ProductStory> p = storyService.findStoryByCondition(start,limit,story,carrier,order,"asc".equals(ordertype)?true:false);
         model.addAttribute("storys", p);
 
-        return "/project/task/relation-release/product-al-no-req-data.pagelet";
+        return "/project/data/build/relation/product-al-no-req-data.pagelet";
     }
 
     @ResponseBody

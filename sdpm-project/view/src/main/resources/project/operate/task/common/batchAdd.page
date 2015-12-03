@@ -1,0 +1,178 @@
+#!set(activeTitle="项目管理",activeMenuId=currentPageId)
+#set(name="task")
+<style>
+    .open #downMenuSty {
+        min-width: 75px
+    }
+</style>
+#@layout(operate)
+    #@tabBodyCol("ptop-5")
+    ##operationbar start
+        #@div(divClass="operationbar")
+        批量增加
+        #end
+    ##operationbay end
+    #end
+#end
+##operationbar end
+#@tinyForm("bathAddForm" TINY_CONTEXT_PATH+adminPath+"/project/task/batchAdd" "post" {"class":"test"})
+    #@tableBorder("out-border")
+        #@thead()
+            #@tr("text-c")
+                #@thW("50px")ID#end
+                #@thW("150px")所属模块#end
+                #@thW("150px")相关需求#end
+                #@thW("150px")<span class="c-red">*</span>任务名称#end
+                #@thW("150px")类型#end
+                #@thW("150px")指派给#end
+                #@thW("150px")<span class="c-red">*</span>预计剩余#end
+                #@thW("150px")任务描述#end
+                #@thW("100px")优先级#end
+            #end
+        #end
+        #@tbody()
+            #foreach(i:[0..8])
+                #@tr("text-c")
+                    #@td()${i}#end
+                    #@td()
+                        #@Tselect2F()
+                            #@Tselect2Body("taskList["+i+"].moduleId" moduleId {"class":
+                                "input-text select2"})
+                            <option value="">/</option>
+                                #foreach(m : moduleList)
+                                <option value=${m.moduleId}>${m.moduleName}</option>
+                                #end
+                            #end
+                        #end
+                    #end
+                    #@td()
+                    ##                        #@td()
+                    ##                            #tinyInput("text" "taskList["+i+"].taskStory" story?.storyId)
+                    ##                        #end
+                        #@Tselect2F()
+                            #@Tselect2Body(
+                                "taskList["+i+"].taskStory" story?.storyId {"class":
+                                "input-text select2"})
+                            <option value=${story?.storyId}>${story?.storyTitle}</option>
+                            <option value="">同上</option>
+                            #end
+                        #end
+
+                    #end
+                    #@td()
+                        #tinyInput(
+                            "text" "taskList["+i+"].taskName"""{"placeholder":"","groupName":"taskName"})
+                    #end
+                    #@td()
+                        #@formControlDiv( )
+                            #@Tselect2F()
+                                #@Tselect2Body(
+                                    "taskList["+i+"].taskType" "" {"class":"input-text",
+                                    "datatype":"*",
+                                    "nullmsg":"不能为空"})
+                                    #foreach(item : getDict("taskType"))
+                                        #@tinyOptionItem(item.value)${item.text}#end
+                                    #end
+                                #end
+                            #end
+                        #end
+
+                    #end
+                    #@td()
+                        #@formControlDiv()
+                            #@Tselect2F()
+                                #@Tselect2Body(
+                                    "taskList["+i+"].taskAssignedTo" "" {"class":
+                                    "input-text select2"})
+                                <option value=""></option>
+                                    #foreach(t : teamList)
+                                    <option value="${t.orgUserId}">${t.orgUserRealName}</option>
+                                    #end
+                                #end
+                                #@Tselect2Fix()
+                                    #set(m=menuManager.getMenu("organizationAddUser"))
+                                    #if(m)
+                                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
+                                    #end
+                                    #set(m=menuManager.getMenu("organizationUser"))
+                                    #if(m)
+                                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
+                                    #end
+                                #end
+                            #end
+                        #end
+
+                    #end
+                    #@td()
+                        #tinyInput("text" "taskList["+i+"].taskEstimate" "" {"groupName":"etime","datatype":"n","ignore":"ignore"})
+                    #end
+                    #@td()
+                        #tinyInput("text" "taskList["+i+"].taskDesc" "")
+                    #end
+                    #@td()
+                        #@Tselect2F()
+                            #@Tselect2Body(
+                                "taskList["+i+"].taskPri" "" {"class":"input-text select2","minimumResultsForSearch":"Infinity"})
+                                #foreach(item : getDict("taskPri"))
+                                    #@tinyOptionItem(item.value)${item.text}#end
+                                #end
+                            #end
+                        #end
+
+                    #end
+                #end
+
+            #end
+        <tr>
+            <td class="text-c" colspan="20">
+                <input type="submit" class="radius btn-primary btn" value="保存">
+                <a href="javascript:history.go(-1)" class="radius btn-primary btn">返回</a>
+            </td>
+        </tr>
+        #end
+
+    #end
+#end
+
+<script type="text/javascript">
+    $(function () {
+        $('form[name=bathAddForm]').Validform({
+            beforeSubmit:function(form){
+                var etimes=$(form).find("input[groupName=etime]");
+                var thisetime;
+                var showBreak=false;
+                $(form).find("input[groupName=taskName]").each(function(index){
+                    thisetime=etimes.eq(index).val()
+                    if($(this).val()){
+                        if(!thisetime){
+                            etimes.eq(index).addClass("Validform_error").get(0).focus();
+                            layer.msg("预计时间不能为空");
+                            showBreak=true;
+                            return false;
+                        }
+                    }else{
+                        if(thisetime){
+                            $(this).addClass("Validform_error").get(0).focus();
+                            layer.msg("任务名称不能为空");
+                            showBreak=true;
+                            return false;
+                        }
+                    }
+                    etimes.eq(index).blur();
+                    $(this).blur();
+                });
+                if(showBreak){
+                    return false;
+                }
+            }
+        });
+    })
+</script>
+#@dialog("myModal")
+    #@dialogHeader()对话框标题#end
+    #@dialogBody()<p>对话框内容…</p>#end
+    #@dialogFooter()
+        #@buttonEnsure()确定#end
+        #@buttonCancel()关闭#end
+    #end
+#end
