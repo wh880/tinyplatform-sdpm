@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.document.dao.pojo.DocumentDocLib;
 import org.tinygroup.sdpm.document.service.inter.DocService;
-import org.tinygroup.sdpm.util.CmsUtils;
 import org.tinygroup.sdpm.util.CookieUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -75,7 +74,6 @@ public class DocLibAction extends BaseController {
             docService.editDocLibName(docLib);
         }
         CookieUtils.setCookie(response, DocLibAction.COOKIE_DOCLIB_ID, docLib.getDocLibId().toString());
-        CmsUtils.removeDocLibList();
         return "redirect:" + adminPath + "/document?change=true";
     }
 
@@ -93,7 +91,6 @@ public class DocLibAction extends BaseController {
         List<DocumentDocLib> list = docService.findDocLibList(null);
         if (id != list.get(0).getDocLibId() && id != list.get(1).getDocLibId()) {
             docService.deleteDocLibById(id);
-            CmsUtils.removeDocLibList();
             documentLibId = "1";
             CookieUtils.setCookie(response, COOKIE_DOCLIB_ID, documentLibId.toString(), -1);
             Map<String, String> map = new HashMap<String, String>();

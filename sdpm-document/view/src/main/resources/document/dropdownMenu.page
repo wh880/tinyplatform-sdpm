@@ -11,7 +11,7 @@
         #@navSelect2Data()
         <option value=""></option>
         <optgroup label="文档库">
-            #foreach(d:CmsUtils.getDocLibList())
+            #foreach(d:docService.findDocLibList(null))
                 #if(d?.docLibDeleted != "1")
                     <option value="${d?.docLibId}">${d?.docLibName}</option>
                 #end

@@ -14,16 +14,11 @@ public class StatisticServiceImpl implements StatisticService {
     @Autowired
     private StatisticManager statisticManager;
 
-    public List<StatisticOrg> findOrgList(StatisticOrg statisticOrg) {
-        // TODO Auto-generated method stub
-        return statisticManager.findList(statisticOrg);
-    }
-
-    public List<ProjectTaskSta> findProTasks(ProjectTaskSta projectTaskSta, Date startDate, Date endDate, Integer roleId) {
+    public List<ProjectTaskSta> findProjectTaskStaList(ProjectTaskSta projectTaskSta, Date startDate, Date endDate, Integer roleId) {
         return statisticManager.findListProTask(projectTaskSta, startDate, endDate, roleId);
     }
 
-    public List<QualityBugSta> findBugCreate(QualityBugSta qualityBugSta, Date startDate, Date endDate, Integer cProject, Integer cProduct) {
+    public List<QualityBugSta> findQualityBugSta(QualityBugSta qualityBugSta, Date startDate, Date endDate, Integer cProject, Integer cProduct) {
         return statisticManager.findBugCreate(qualityBugSta, startDate, endDate, cProject, cProduct);
     }
 
@@ -35,7 +30,7 @@ public class StatisticServiceImpl implements StatisticService {
         return statisticManager.findBugCall(qualityBugCall);
     }
 
-    public List<ProductProject> productProjects(ProductProject productProject, boolean deleted, String userId) {
+    public List<ProductProject> getProductInvest(ProductProject productProject, boolean deleted, String userId) {
         return statisticManager.productProjects(productProject, deleted, userId);
     }
 

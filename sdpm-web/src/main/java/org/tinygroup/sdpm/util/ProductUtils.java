@@ -18,7 +18,6 @@ import java.util.List;
 @Service
 public class ProductUtils {
     public static final String COOKIE_PRODUCT_ID = "cookieProductId";
-
     @Autowired
     private ProductService productService;
     @Autowired
@@ -55,28 +54,6 @@ public class ProductUtils {
         product.setProductLineId(Integer.valueOf(productLineId));
         product.setDeleted(0);
         return productService.findProductList(product);
-    }
-
-
-    /**
-     * 获得产品
-     *
-     * @param productId
-     */
-    public Product getProduct(String productId) {
-        if (StringUtil.isBlank(productId)) {
-            return new Product();
-        }
-        List<Product> productList = getProductList();
-        if (productId == null && productList != null && !productList.isEmpty()) {
-            return productList.get(0);
-        }
-        for (Product product : productList) {
-            if (product.getProductId().toString().equals(productId)) {
-                return product;
-            }
-        }
-        return new Product();
     }
 
     /**

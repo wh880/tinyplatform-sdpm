@@ -18,7 +18,6 @@ package org.tinygroup.sdpm.org.wrapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.tinygroup.aopcache.annotation.CacheGet;
 import org.tinygroup.cepcore.CEPCore;
 import org.tinygroup.context.Context;
 import org.tinygroup.context.impl.ContextImpl;
@@ -54,7 +53,7 @@ public class UserServiceImplWrapper implements org.tinygroup.sdpm.org.service.in
         return event;
     }
 
-    @CacheGet(key = "${id}", group = CACHE_USER_ID)
+//    @CacheGet(key = "${id}", group = CACHE_USER_ID)
     public org.tinygroup.sdpm.org.dao.pojo.OrgUser findUser(java.lang.String id) {
         String serviceId = "findUser";
 
@@ -67,7 +66,7 @@ public class UserServiceImplWrapper implements org.tinygroup.sdpm.org.service.in
             throw new RuntimeException(String.format("服务[%s]发生异常", serviceId), e);
         }
     }
-    @CacheGet(key = "${account}", group = CACHE_USER_ACCOUNT)
+//    @CacheGet(key = "${account}", group = CACHE_USER_ACCOUNT)
     public org.tinygroup.sdpm.org.dao.pojo.OrgUser findUserByAccount(java.lang.String account) {
         String serviceId = "findUserByAccount";
 

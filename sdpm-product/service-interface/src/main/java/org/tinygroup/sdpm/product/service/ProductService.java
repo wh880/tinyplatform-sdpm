@@ -1,13 +1,18 @@
 package org.tinygroup.sdpm.product.service;
 
+import org.tinygroup.aopcache.annotation.CacheGet;
+import org.tinygroup.aopcache.annotation.CachePut;
+import org.tinygroup.aopcache.annotation.CacheRemove;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
-import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.List;
 import java.util.Map;
 
 public interface ProductService {
+    String CACHE_USER_PRODUCTS_MAP = "UserProductsMap";
+    String CACHE_PRODUCT_ID = "productId";
+
     /**
      * 添加产品
      *
@@ -22,15 +27,8 @@ public interface ProductService {
      * @param product
      * @return
      */
+    @CachePut(keys = "${product.productId}",parameterNames = "product",group = CACHE_PRODUCT_ID)
     int updateProduct(Product product);
-
-    /**
-     * 批量修改
-     *
-     * @param products
-     * @return
-     */
-    int[] updateBatchProduct(List<Product> products);
 
     /**
      * 根据产品ID删除
@@ -38,6 +36,7 @@ public interface ProductService {
      * @param productId
      * @return
      */
+    @CacheRemove(removeKeys = "${productId}", group = CACHE_PRODUCT_ID)
     int deleteProduct(Integer productId);
 
     /**
@@ -46,10 +45,11 @@ public interface ProductService {
      * @param productId
      * @return
      */
-    Product findProduct(Integer productId);
+    @CacheGet(key = "${productId}", group = CACHE_PRODUCT_ID)
+    Product findProductById(Integer productId);
 
     /**
-     * 根据产品ID查找
+     * 根据条件查找列表
      *
      * @param product
      * @return
@@ -63,22 +63,6 @@ public interface ProductService {
      * @return
      */
     List<Product> findProductListByIds(Integer... productId);
-
-    /**
-     * 根据对象查找(排序)
-     *
-     * @param product
-     * @return
-     */
-    List<Product> findProductList(Product product, String order, String orderType);
-
-    /**
-     * 根据对象查找(排序、分页)
-     *
-     * @param product
-     * @return
-     */
-    Pager<Product> findProductPager(int page, int limit, Product product, String order, String ordertype);
 
     /**
      * 根据对象查找(包含产品线的部分信息)
@@ -98,12 +82,11 @@ public interface ProductService {
 
     List<Product> getProductByUser(String userId, Integer delete, Integer productLineId);
 
-    List<Product> getProductByUserWithCount(String userId, Integer delete, boolean noRole );
+    List<Product> getProductByUserWithCount(String userId, Integer delete, boolean noRole);
 
     List<Product> getProductByUserAndProductLineWithCount(String userId, Integer productLineId, Integer delete);
 
-    Integer[] getTeamRoleProductLineIds(String userId, Integer delete);
-
+    @CacheGet(key = "${userId}", group = CACHE_USER_PRODUCTS_MAP)
     Map<String, List<Product>> getUserProductsMap(String userId);
 
     Map<String, List<Product>> getUserProductsWithCountMap(String userId, Integer delete);

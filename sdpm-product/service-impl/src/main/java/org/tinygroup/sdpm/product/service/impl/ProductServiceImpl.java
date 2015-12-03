@@ -33,7 +33,7 @@ public class ProductServiceImpl implements ProductService {
         return productManager.delete(productId);
     }
 
-    public Product findProduct(Integer productId) {
+    public Product findProductById(Integer productId) {
         return productManager.find(productId);
     }
 
@@ -81,12 +81,6 @@ public class ProductServiceImpl implements ProductService {
         return productManager.getProductByUserAndProductLineWithCount(userId, productLineId, delete);
     }
 
-
-    public Integer[] getTeamRoleProductLineIds(String userId, Integer delete) {
-        List<Integer> ids = productManager.getTeamRoleProductLineIds(userId, delete);
-        Integer[] Ids = new Integer[ids.size()];
-        return ids.toArray(Ids);
-    }
 
     public Map<String, List<Product>> getUserProductsWithCountMap(String userId, Integer delete) {
         Map<String, List<Product>> productMap = new HashMap<String, List<Product>>();

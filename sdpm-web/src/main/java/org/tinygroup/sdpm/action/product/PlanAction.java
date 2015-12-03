@@ -96,7 +96,7 @@ public class PlanAction extends BaseController {
     @RequestMapping("/addplan")
     public String addplan(@CookieValue(value = "cookieProductId", defaultValue = "0") String cookieProductId, HttpServletRequest request, Model model) {
         if (Integer.parseInt(cookieProductId) > 0) {
-            Product product = productService.findProduct(Integer.parseInt(cookieProductId));
+            Product product = productService.findProductById(Integer.parseInt(cookieProductId));
             model.addAttribute("product", product);
         }
         return "/product/page/add/plan/product-addplan.page";
@@ -127,7 +127,7 @@ public class PlanAction extends BaseController {
 
     @RequestMapping("/find")
     public String find(@CookieValue("cookieProductId") String cookieProductId, HttpServletRequest request, Integer planId, Model model) {
-        Product product = productService.findProduct(Integer.parseInt(cookieProductId));
+        Product product = productService.findProductById(Integer.parseInt(cookieProductId));
         model.addAttribute("product", product);
         ProductPlan plan = planService.findPlan(planId);
         model.addAttribute("plan", plan);

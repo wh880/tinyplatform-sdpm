@@ -83,7 +83,7 @@ public class StatisticAction extends BaseController {
             for (int i = 0, n = orgUsers.size(); i < n; i++) {
                 ProjectTaskSta projectTaskSta = new ProjectTaskSta();
                 projectTaskSta.setAssignedTo(orgUsers.get(i).getOrgUserId());
-                List<ProjectTaskSta> projectTaskStas = statisticService.findProTasks(projectTaskSta, startDate, endDate, roleId);
+                List<ProjectTaskSta> projectTaskStas = statisticService.findProjectTaskStaList(projectTaskSta, startDate, endDate, roleId);
                 if (projectTaskStas.size() > 0) {
                     map.put(orgUsers.get(i), projectTaskStas);
                 }
@@ -96,7 +96,7 @@ public class StatisticAction extends BaseController {
 
     @RequestMapping("product/invest")
     public String productInvest(Model model, Integer deleted) {
-        List<ProductProject> productProjects = statisticService.productProjects(new ProductProject(), deleted != null && deleted == 1 ? true : false, userUtils.getUserId());
+        List<ProductProject> productProjects = statisticService.getProductInvest(new ProductProject(), deleted != null && deleted == 1 ? true : false, userUtils.getUserId());
         model.addAttribute("proPros", productProjects);
         model.addAttribute("order", "2");
         return "/statistic/page/product.page";
@@ -105,7 +105,7 @@ public class StatisticAction extends BaseController {
     @RequestMapping("quality/bugCreate")
     public String qualityBugCreate(Model model, Date startDate, Date endDate, Integer cProject, Integer cProduct) {
         model.addAttribute("order", "1");
-        List<QualityBugSta> bugStas = statisticService.findBugCreate(new QualityBugSta(), startDate, endDate, cProject, cProduct);
+        List<QualityBugSta> bugStas = statisticService.findQualityBugSta(new QualityBugSta(), startDate, endDate, cProject, cProduct);
         model.addAttribute("startDate", startDate);
         model.addAttribute("endDate", endDate);
         model.addAttribute("bugStas", bugStas);

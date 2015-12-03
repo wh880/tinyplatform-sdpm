@@ -6,13 +6,6 @@ import java.util.Date;
 import java.util.List;
 
 public interface StatisticService {
-    /**
-     * 用户负载表
-     *
-     * @param statisticOrg
-     * @return
-     */
-    List<StatisticOrg> findOrgList(StatisticOrg statisticOrg);
 
     /**
      * 查询project的任务数，消耗
@@ -20,7 +13,7 @@ public interface StatisticService {
      * @param projectTaskSta
      * @return
      */
-    List<ProjectTaskSta> findProTasks(ProjectTaskSta projectTaskSta, Date startDate, Date endDate, Integer roleId);
+    List<ProjectTaskSta> findProjectTaskStaList(ProjectTaskSta projectTaskSta, Date startDate, Date endDate, Integer roleId);
 
     /**
      * Bug创建
@@ -28,7 +21,7 @@ public interface StatisticService {
      * @param qualityBugSta
      * @return
      */
-    List<QualityBugSta> findBugCreate(QualityBugSta qualityBugSta, Date startDate, Date endDate, Integer cProject, Integer cProduct);
+    List<QualityBugSta> findQualityBugSta(QualityBugSta qualityBugSta, Date startDate, Date endDate, Integer cProject, Integer cProduct);
 
     /**
      * 获取被指派人和其bug数
@@ -52,5 +45,5 @@ public interface StatisticService {
      * @param productProject
      * @return
      */
-    List<ProductProject> productProjects(ProductProject productProject, boolean deleted, String usrId);
+    List<ProductProject> getProductInvest(ProductProject productProject, boolean deleted, String usrId);
 }
