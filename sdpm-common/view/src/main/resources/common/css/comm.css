@@ -46,10 +46,10 @@
     }
 
     .menu-on-top #main-menu .navigation > li {
-        width:auto;
-        white-space:nowrap;
-        border-left:0;
-        border-bottom:0;
+        width:auto !important;
+        white-space:nowrap !important;
+        border-left:0 !important;
+        border-bottom:0 !important;
     }
     .menu-on-top #main-menu .navigation > li>a{padding:13px 20px}
     .menu-on-top #main-menu .navigation > li:last-child{border-bottom-right-radius: 5px}

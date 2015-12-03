@@ -40,3 +40,7 @@
 #macro numList(colWidth nNumbers nTitle numHref)
 <div class="${colWidth}"><span>${nNumbers}</span><br><a href="${numHref}">${nTitle}</a></div>
 #end
+
+#macro sdpmgGtMenuId()
+    #foreach(var:menuList)#if(tinyRequestRequestURI.startsWith(var?.url))#set(activeMenuId=var.id)#break#end#end
+#end
