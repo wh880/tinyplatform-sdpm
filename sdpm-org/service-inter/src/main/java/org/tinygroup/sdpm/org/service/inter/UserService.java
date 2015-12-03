@@ -21,6 +21,8 @@ import org.tinygroup.tinysqldsl.Pager;
 import java.util.List;
 
 public interface UserService {
+    String CACHE_USER_ID = "userId";
+
     /**
      * 根据主键id查找用户
      *
@@ -57,6 +59,7 @@ public interface UserService {
 
     /**
      * 根据部门Id查询用户pager
+     *
      * @param deptId
      * @return
      */
@@ -121,6 +124,7 @@ public interface UserService {
 
     /**
      * 根据名称条件查询
+     *
      * @param condition
      * @return
      */
