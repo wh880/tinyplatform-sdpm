@@ -17,6 +17,7 @@ package org.tinygroup.sdpm.org.service.inter;
 
 import org.tinygroup.aopcache.annotation.CacheGet;
 import org.tinygroup.aopcache.annotation.CachePut;
+import org.tinygroup.aopcache.annotation.CacheRemove;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -95,6 +96,7 @@ public interface UserService {
      * @param id 主键
      * @return
      */
+    @CacheRemove(removeKeys = "${id}",group = CACHE_USER_ID,removeGroups=CACHE_USER_LIST)
     Integer deleteUser(String id);
 
     /**
