@@ -36,7 +36,7 @@ public class ProjectStoryAction extends BaseController {
     @RequiresPermissions("demand")
     @RequestMapping("/index")
     public String index() {
-        return "project/demand/index";
+        return "project/index/demand/index";
     }
 
     @RequestMapping("/list/data")
@@ -49,7 +49,7 @@ public class ProjectStoryAction extends BaseController {
         }
         Pager<ProductStory> storyPager = projectStoryService.findStoryByProject(projectId, start, limit, order, orderType, moduleId);
         model.addAttribute("storyPager", storyPager);
-        return "project/demand/demandTableData.pagelet";
+        return "project/data/demand/demandTableData.pagelet";
     }
 
     @RequiresPermissions("rm-demand")
@@ -71,7 +71,7 @@ public class ProjectStoryAction extends BaseController {
     @RequiresPermissions("pro-demand-relation")
     @RequestMapping("/preLinkStory")
     public String preLinkStory() {
-        return "project/demand/relateDemand.page";
+        return "project/operate/demand/relation/relateDemand.page";
     }
 
     @RequestMapping("/findStory")
@@ -83,7 +83,7 @@ public class ProjectStoryAction extends BaseController {
         }
         Pager<ProductStory> storyList = projectStoryService.findStoryToLink(projectId, start, limit, order, ordertype);
         model.addAttribute("storyList", storyList);
-        return "project/demand/relateDemandTableData.pagelet";
+        return "project/data/demand/relation/relateDemandTableData.pagelet";
     }
 
 

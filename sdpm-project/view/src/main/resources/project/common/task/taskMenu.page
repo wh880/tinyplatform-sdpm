@@ -1,0 +1,84 @@
+#import("/org/tinygroup/button/components/button_smart.component")
+#@div(divClass="operationbar")
+##左侧按钮
+<span class="f">
+    <a val="1" "ml-5" class="selChoose ${choose=="1"?"active_btn":""}">未关闭</a>
+    <a val="2" "ml-5" class="selChoose ${choose=="2"?"active_btn":""}">所有</a>
+    <a href="${TINY_CONTEXT_PATH+adminPath}/project/task/board?choose=3" "ml-5" class=${choose=="3"?"active_btn":""}>看板</a>
+    <a href="${TINY_CONTEXT_PATH+adminPath}/project/task/gantt?choose=4" "ml-5" class=${choose=="4"?"active_btn":""}>甘特图</a>
+    <a href="${TINY_CONTEXT_PATH+adminPath}/project/burn/init?choose=6" "ml-5" class=${choose=="6"?"active_btn":""}>燃尽图</a>
+    <a val="7" "ml-5" class="selChoose ${choose=="7"?"active_btn":""}">指派给我</a>
+    <script>
+        $(function () {
+            var actionUrl = $("#taskTable").attr("data-url");
+            $(".selChoose").on("click",function () {
+                if (actionUrl) {
+                    $("#taskTable").attr("data-url", actionUrl + "&choose=" + $(this).attr("val"));
+                    $(".selChoose").removeClass("active_btn");
+                    $(this).addClass("active_btn");
+                    $("#taskTable").trigger("refresh");
+                    $("#dLabel>span:first").removeClass("active_btn").text("更多");
+                } else {
+                    window.location.href = "../task/index?choose=" + $(this).attr("val");
+                }
+            });
+        });
+    </script>
+##更多
+    #include("/project/common/task/maplist.page")
+<div class="btn-group btnDropDown">
+    <a id="dLabel" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" class="${choose=="8"?"active_btn":""}">
+        <span>${statu?statuMap.get(statu):"更多"}</span>
+        <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="dLabel">
+        #foreach(var : statuMap.keySet() )
+            #if(var != 0)
+                <li><a class="projectMore" val="${var}">${statuMap.get(var)}</a></li>
+            #end
+        #end
+    </ul>
+</div>
+    <script>
+        $(function () {
+            var actionUrl = $("#taskTable").attr("data-url");
+            $(".projectMore").click(function (e) {
+                if(actionUrl) {
+                    $("#taskTable").attr("data-url", actionUrl + "&statu=" + $(this).attr("val"));
+                    $("#taskTable").trigger("refresh");
+                    $(".selChoose").removeClass("active_btn");
+                    $(this).closest("div").find("a span:first").text($(this).text()).addClass("active_btn");
+                }else{
+                    window.location.href = "../task/index?choose=8&statu=" + $(this).attr("val");
+                }
+            });
+        });
+    </script>
+##分组查看
+    <div class="btn-group btnDropDown">
+        <a id="dLabel" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"  class="${choose=="9"?"active_btn":""}">
+            #if(menuId)
+                ${menuManager.getMenu(menuId).name}
+            #else
+                    分组查看
+            #end
+            <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="dLabel">
+            #foreach(m:menuManager.getScopeMenus("task-group-menu"))
+                <li><a href="${TINY_CONTEXT_PATH+adminPath+m.href}&choose=9&menuId=${m.id}">${m.name}</a></li>
+            #end
+        </ul>
+    </div>
+</span>
+
+##右侧按钮
+<span class="r">
+          #foreach(m:menuManager.getScopeMenus("pro-taskmenu2-op"))
+              <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}"
+                 title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
+          #end
+</span>
+    #div(divClass="clearfix")
+##    #include("/project/mulsearch.page")
+#end

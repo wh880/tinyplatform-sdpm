@@ -74,7 +74,7 @@ public class ActionEnum {
         urlMap.put("task", "/project/task/findTask?taskId=");
         urlMap.put("plan", "/product/plan/forword/reRelateStory?planId=");
         urlMap.put("release", "/product/release/forword/reRelateStory?releaseId=");
-        urlMap.put("project", "/project/manage/survey/index?projectId=");
+        urlMap.put("project", "/project/view?projectId=");
         urlMap.put("product", "/product/find/overview?productId=");
         urlMap.put("build", "/project/build/productalbug?buildId=");
         urlMap.put("bug", "/quality/bug/bugInfo?bugId=");

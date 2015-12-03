@@ -74,7 +74,7 @@ public class ProjectAction extends BaseController {
         }
         CookieUtils.setCookie(response, projectOperate.COOKIE_PROJECT_ID, projectId.toString());
         model.addAttribute("project", project);
-        return "/project/survey/index";
+        return "/project/view/info/project/index";
     }
 
     /**
@@ -88,7 +88,7 @@ public class ProjectAction extends BaseController {
         orgRole.setOrgRoleType(OrgRole.ROLE_TYPE_PROJECT);
         List<OrgRole> roleList = roleService.findRoleList(orgRole);
         model.addAttribute("roleList",roleList);
-        return "project/form";
+        return "project/operate/project/form";
     }
 
     /**
@@ -139,7 +139,7 @@ public class ProjectAction extends BaseController {
     @RequiresPermissions("project-op-all")
     @RequestMapping("/list")
     public String list() {
-        return "project/list";
+        return "project/index/project/list";
     }
 
     /**
@@ -167,7 +167,7 @@ public class ProjectAction extends BaseController {
             }
         }
         model.addAttribute("projectPager", projectPager);
-        return "project/listData.pagelet";
+        return "project/data/project/listData.pagelet";
     }
 
     @RequiresPermissions("pro-survey-edit")
@@ -180,7 +180,7 @@ public class ProjectAction extends BaseController {
         model.addAttribute("productIds", productIds);
         model.addAttribute("teamList", userService.findTeamUserListByProjectId(projectId));
         model.addAttribute("productList", productUtils.getAllProductListByUser());
-        return "project/survey/edit";
+        return "project/operate/project/edit";
     }
 
     /**
@@ -207,7 +207,7 @@ public class ProjectAction extends BaseController {
     public String delay(Integer projectId, Model model) {
         Project project = projectService.findProjectById(projectId);
         model.addAttribute("project", project);
-        return "/project/survey/delay.pagelet";
+        return "/project/modal/project/delay.pagelet";
     }
 
     @ResponseBody
@@ -225,7 +225,7 @@ public class ProjectAction extends BaseController {
     public String hangUp(Integer projectId, Model model) {
         Project project = projectService.findProjectById(projectId);
         model.addAttribute("project", project);
-        return "/project/survey/hangUp.pagelet";
+        return "/project/modal/project/hangUp.pagelet";
     }
 
     @ResponseBody
@@ -244,7 +244,7 @@ public class ProjectAction extends BaseController {
     public String start(Integer projectId, Model model) {
         Project project = projectService.findProjectById(projectId);
         model.addAttribute("project", project);
-        return "/project/survey/start.pagelet";
+        return "/project/modal/project/start.pagelet";
     }
 
     @ResponseBody
@@ -264,7 +264,7 @@ public class ProjectAction extends BaseController {
     public String doing(Integer projectId, Model model) {
         Project project = projectService.findProjectById(projectId);
         model.addAttribute("project", project);
-        return "/project/survey/doing.pagelet";
+        return "/project/modal/project/doing.pagelet";
     }
 
     @ResponseBody
@@ -285,7 +285,7 @@ public class ProjectAction extends BaseController {
 
         Project project = projectService.findProjectById(projectId);
         model.addAttribute("project", project);
-        return "/project/survey/finish.pagelet";
+        return "/project/modal/project/finish.pagelet";
     }
 
     @ResponseBody
@@ -316,7 +316,7 @@ public class ProjectAction extends BaseController {
         List<Product> productList = productService.findProductListByIds(productIds.toArray(new Integer[0]));
         model.addAttribute("project", project);
         model.addAttribute("productList", productList);
-        return "project/survey/basicInformation.pagelet";
+        return "project/view/rightinfo/project/basicInformation.pagelet";
     }
 
     @RequestMapping("/findManager")

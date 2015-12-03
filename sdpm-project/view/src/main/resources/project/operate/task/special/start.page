@@ -1,0 +1,85 @@
+#import("/org/tinygroup/form/components/form.component")
+#import("/org/tinygroup/bootstrapDate/components/bootstrapDate.component")
+#import("/org/tinygroup/button/components/button_common.component")
+#import("/org/tinygroup/button/components/button.component")
+#import("/org/tinygroup/fold/components/fold.component")
+#set(name="task")
+
+#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/project/task/start" "post" {"class":"test"})
+    #hiddenInput(hiddenInputName="taskId" hiddenInputValue=task?.taskId)
+<div style="width:70%;float:left" class="pageleftpart">
+    <div class="infoContent">
+        <p class="titleName">${task?.taskName}>开始</p>
+        #@elementItem()
+            #@sdpmItem("实际开始")
+                #@tinyDateInput(
+                    "taskRealStarted" formatDate(now(),"yyyy-MM-dd") "YYYY-MM-DD" {"datatype":"*","placeholder":"选择日期"})
+                #end
+            #end
+        #end
+        #@elementItem()
+            #@sdpmItem("总消耗")
+                <div class="input-group">
+                    <input name="taskConsumed" type="text" class="form-control" placeholder=""
+                           aria-describedby="basic-addon2" value="${task?.taskConsumed ? task.taskConsumed : 0}"
+                           datatype="/^[0-9]+(\.[0-9]{1,2})?$/" nullmsg="请输入最初预计">
+                    <span class="input-group-addon" id="all-time">小时</span>
+                </div>
+            #end
+        #end
+        #@elementItem()
+            #@sdpmItem("预计剩余") ##预计剩余需要判断，当为0时，标识为完成
+                <div class="input-group">
+                    #tinyInput(
+                        "text" "taskEstimate" copyTask?.taskEstimate?copyTask?.taskEstimate:'0' {"placeholder":"最初预计",
+                        "datatype":
+                        "/^[0-9]+(\.[0-9]{1,2})?$/","nullmsg":"请输入最初预计", "aria-describedby":"basic-addon2"})
+                    <span class="input-group-addon" id="basic-addon2">小时</span>
+                </div>
+            #end
+        #end
+
+        #@elementItem()
+            <div class="col-12">
+                <div class="col-2 text-r"><label>备注：</label></div>
+                <div class="col-9">
+                    #@Teditor("content" "content" {"initialFrameHeight":"150"})#end</div>
+            </div>
+        #end
+        <br/>
+    </div>
+    #@elementItem()
+        <div class="col-12">
+            <div class="col-5">
+
+            </div>
+            <div class="col-1">
+                <button style="float: left" type="submit" id="submit2" class="commitBtn">保存</button>
+            </div>
+            <div class="col-1">
+                #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")取消#end
+            </div>
+            <div class="col-5"></div>
+        </div>
+    #end
+    <br>
+</div>
+#end
+<script>
+    $("form[name=thisform]").Validform({
+        beforeSubmit: function (e) {
+            var estimate = $("input[name='taskEstimate']").val();
+            if (!estimate || estimate <= "0.01") {
+                layer.confirm("消耗为0，是否标记任务为完成？", function () {
+                    layer.closeAll();
+                    $(e).attr("action", "${TINY_CONTEXT_PATH+adminPath}/project/task/finishsave");
+                })
+
+            }
+            //return false;
+        }
+    });
+</script>
+<div style="width:30%;float:right">
+    #history(adminPath+"/system/action/ajax/history?actionObjectType=task&actionObjectId="+task?.taskId)
+</div>

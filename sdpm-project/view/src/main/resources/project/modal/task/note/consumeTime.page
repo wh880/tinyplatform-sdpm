@@ -1,0 +1,59 @@
+#import("/org/tinygroup/button/components/button_common.component")
+#import("/org/tinygroup/button/components/button.component")
+#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/project/task/consumeTime" "post" {"class":"test"})
+    <input type="hidden" name="taskId" value="${task?.taskId}"/>
+    #@tableBorder()
+        #@thead()
+            #@tr()
+                #@thW("60")ID#end
+                #@thW("40")日期#end
+                #@thW("100")耗时#end
+                #@thW("100")剩余#end
+                #@thW("300")工作内容#end
+            #end
+        #end
+        #@tbody()
+            #set(count=systemEffortList.size())
+            #foreach(s:systemEffortList)
+                #@tr()
+                    #@td()${sFor.index}#end
+                    #@td()${formatDate(s.effortDate,"yyyy-MM-dd")}#end
+                    #@td()${s.effortConsumed}小时#end
+                    #@td()${s.effortLeft}小时#end
+                    #@td()${s.effortWork}#end
+                #end
+            #end
+            #set(nowDate=now())
+            #foreach(i:[0..4])
+                #@tr()
+                    #@td()    ${count+i+1}    #end
+                    #@td()
+                        #@tinyDateInput("list["+i+"].effortDate" formatDate(nowDate,"yyyy-MM-dd")  "YYYY-MM-DD" {"style":"width:150px","datatype":"*","placeholder": "选择日期"})#end
+##                        #@validateDiv("col-2")#end
+                    #end
+                    #@td()
+                        #tinyInput("text" "list["+i+"].effortConsumed")
+                    #end
+                    #@td()
+                        #tinyInput("text" "list["+i+"].effortLeft")
+                    #end
+                    #@td()
+                        #tinyInput("text" "list["+i+"].effortWork")
+                    #end
+                #end
+            #end
+        #end
+    #end
+    #@td()
+    <div class="col-12">
+        <div class="col-5"></div>
+        <div class="col-1">
+            <button style="float: left" type="submit" id="submit2" class="commitBtn">保存</button>
+        </div>
+        <div class="col-1">
+            #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")取消#end
+        </div>
+        <div class="col-5"></div>
+    </div>
+    #end
+#end

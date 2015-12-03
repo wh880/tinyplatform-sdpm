@@ -720,7 +720,7 @@ public class BugAction extends BaseController {
         bug.setDeleted(0);
         Pager<QualityBug> bugPage = bugService.findBugListPager(start, limit, null, bug, order, asc);
         model.addAttribute("bugPage", bugPage);
-        return "project/bug/bugViewTableData.pagelet";
+        return "project/data/bug/bugViewTableData.pagelet";
     }
 
     //批量删除（软） 产品下面的计划、发布关联BUG表上使用的

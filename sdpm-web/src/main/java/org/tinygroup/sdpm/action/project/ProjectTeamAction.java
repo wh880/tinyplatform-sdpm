@@ -40,7 +40,7 @@ public class ProjectTeamAction extends BaseController {
     @RequiresPermissions("team")
     @RequestMapping("/index")
     public String index() {
-        return "project/team/index";
+        return "project/index/team/index";
     }
 
     @RequestMapping("find")
@@ -54,7 +54,7 @@ public class ProjectTeamAction extends BaseController {
         team.setProjectId(projectId);
         Pager<ProjectTeam> pager = teamService.findPager(team, start, limit, order, ordertype);
         model.addAttribute("teamPager", pager);
-        return "project/team/manageTableData.pagelet";
+        return "project/data/team/manageTableData.pagelet";
     }
 
     @RequiresPermissions("pro-team-report")

@@ -99,7 +99,7 @@ public class ProjectTaskAction extends BaseController {
         if (StringUtil.isBlank(choose)) {
             model.addAttribute("choose", choose);
         }
-        return "project/task/index";
+        return "project/index/task/index";
     }
 
     /**
@@ -133,7 +133,7 @@ public class ProjectTaskAction extends BaseController {
         model.addAttribute("moduleId", moduleId);
         model.addAttribute("storyId", storyId);
         model.addAttribute("storyList", storyList);
-        return "project/task/add";
+        return "project/operate/task/common/add";
     }
 
     /**
@@ -191,7 +191,7 @@ public class ProjectTaskAction extends BaseController {
         model.addAttribute("fileList", fileList);
 
 
-        return "project/task/edit";
+        return "project/operate/task/common/edit";
     }
 
     /**
@@ -224,7 +224,7 @@ public class ProjectTaskAction extends BaseController {
         List<SystemEffort> systemEffortList = effortService.findSystemEffortList(systemEffort);
         model.addAttribute("task", task);
         model.addAttribute("systemEffortList", systemEffortList);
-        return "project/task/consumeTime";
+        return "project/modal/task/note/consumeTime";
     }
 
     /**
@@ -274,7 +274,7 @@ public class ProjectTaskAction extends BaseController {
         ProjectTask task = taskService.findTask(taskId);
         model.addAttribute("teamList", userService.findTeamUserListByProjectId(task.getTaskProject()));
         model.addAttribute("task", task);
-        return "project/task/call";
+        return "project/operate/task/special/call";
     }
 
     /**
@@ -304,7 +304,7 @@ public class ProjectTaskAction extends BaseController {
         ProjectTask task = taskService.findTask(taskId);
         model.addAttribute("task", task);
         model.addAttribute("teamList", userService.findTeamUserListByProjectId(projectId));
-        return "project/task/finish";
+        return "project/operate/task/special/finish";
     }
 
     @RequiresPermissions("pro-task-finish")
@@ -347,7 +347,7 @@ public class ProjectTaskAction extends BaseController {
     public String close(Integer taskId, Model model) {
         ProjectTask task = taskService.findTask(taskId);
         model.addAttribute("task", task);
-        return "project/task/close";
+        return "project/operate/task/special/close";
     }
 
     @RequiresPermissions("pro-task-close")
@@ -359,7 +359,7 @@ public class ProjectTaskAction extends BaseController {
         LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, LogUtil.LogAction.CLOSED, task.getTaskId().toString(),
                 userUtils.getUserId(), null, taskService.findTask(task.getTaskId()).getTaskProject().toString(),
                 null, null, content);
-        return "project/task/index.page";
+        return "project/index/task/index.page";
     }
 
     @RequiresPermissions("pro-task-start")
@@ -367,7 +367,7 @@ public class ProjectTaskAction extends BaseController {
     public String start(Integer taskId, Model model) {
         ProjectTask task = taskService.findTask(taskId);
         model.addAttribute("task", task);
-        return "project/task/start";
+        return "project/operate/task/special/start";
     }
 
     @RequiresPermissions("pro-task-start")
@@ -391,7 +391,7 @@ public class ProjectTaskAction extends BaseController {
     public String cancel(Integer taskId, Model model) {
         ProjectTask task = taskService.findTask(taskId);
         model.addAttribute("task", task);
-        return "project/task/cancel";
+        return "project/operate/task/special/cancel";
     }
 
     @RequestMapping(value = "/cancel", method = RequestMethod.POST)
@@ -414,7 +414,7 @@ public class ProjectTaskAction extends BaseController {
             List<ProjectTask> list = taskService.findListTask(task);
             model.addAttribute("tasksList", list);
         }
-        return "project/task/datalist.pagelet";
+        return "project/data/task/datalist.pagelet";
     }
 
     @RequestMapping("/findPager")
@@ -458,7 +458,7 @@ public class ProjectTaskAction extends BaseController {
         model.addAttribute("taskPager", taskPager);
         model.addAttribute("statu", statu);
         model.addAttribute("choose", choose);
-        return "project/task/datalist.pagelet";
+        return "project/data/task/datalist.pagelet";
     }
 
 
@@ -474,7 +474,7 @@ public class ProjectTaskAction extends BaseController {
         model.addAttribute("teamList", userService.findTeamUserListByProjectId(projectId));
         ProductStory story = productStoryService.findStory(storyId);
         model.addAttribute("story", story);
-        return "project/task/batchAdd.page";
+        return "project/operate/task/common/batchAdd.page";
     }
 
     @RequestMapping(value = "/batchAdd", method = RequestMethod.POST)
@@ -490,11 +490,11 @@ public class ProjectTaskAction extends BaseController {
             }
         }
         if (taskList.isEmpty()) {
-            return "project/task/index.page";
+            return "project/index/task/index.page";
         } else {
             Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, projectOperate.COOKIE_PROJECT_ID));
             taskService.batchAdd(taskList, projectId);
-            return "project/task/index.page";
+            return "project/index/task/index.page";
         }
     }
 
@@ -523,7 +523,7 @@ public class ProjectTaskAction extends BaseController {
         List<SystemProfile> profileList = profileService.findSystemProfile(systemProfile);
         model.addAttribute("profileList", profileList);
 
-        return "project/task/view";
+        return "project/view/info/task/view";
     }
 
     /**
@@ -544,7 +544,7 @@ public class ProjectTaskAction extends BaseController {
         model.addAttribute("teamList", userService.findTeamUserListByProjectId(task.getTaskProject()));
         model.addAttribute("moduleList", generateModuleList(task.getTaskProject()));
         model.addAttribute("storyList", storyList);
-        return "project/task/basicInfoEdit.pagelet";
+        return "project/edit/rightinfo/task/basicInfoEdit.pagelet";
     }
 
     /**
@@ -573,7 +573,7 @@ public class ProjectTaskAction extends BaseController {
         ProductStory productStory = productStoryService.findStory(task.getTaskStory());
         String storyTitle = productStory == null ? "" : productStory.getStoryTitle();
         model.addAttribute("storyTitle", storyTitle);
-        return "project/task/basicInformation.pagelet";
+        return "project/view/rightinfo/task/basicInformation.pagelet";
     }
 
 
@@ -581,7 +581,7 @@ public class ProjectTaskAction extends BaseController {
     @RequestMapping("/gantt")
     public String gantt(Model model, String choose) {
         model.addAttribute("choose", choose);
-        return "project/task/gantt.page";
+        return "project/operate/task/special/gantt.page";
     }
 
     @ResponseBody
@@ -649,7 +649,7 @@ public class ProjectTaskAction extends BaseController {
         model.addAttribute("fileList", fileList);
 
         model.addAttribute("task", task);
-        return "project/task/ganttFind.pagelet";
+        return "project/data/task/gantt/ganttFind.pagelet";
     }
 
     @RequestMapping("/board")
@@ -679,7 +679,7 @@ public class ProjectTaskAction extends BaseController {
         resList = taskService.findListTask(projectTask);
         model.addAttribute("closeList", resList);
 
-        return "project/task/board";
+        return "project/operate/task/special/board";
     }
 
     @RequestMapping("/modal/{forward}")
@@ -718,7 +718,7 @@ public class ProjectTaskAction extends BaseController {
         model.addAttribute("map", map);
         model.addAttribute("type", type);
         model.addAttribute("menuId", menuId);
-        return "project/task/grouping";
+        return "project/operate/task/special/grouping";
     }
 
     /**
@@ -775,7 +775,7 @@ public class ProjectTaskAction extends BaseController {
     @RequiresPermissions("pro-task-report")
     @RequestMapping("/reportform")
     public String reportForm() {
-        return "project/task/reportform";
+        return "project/operate/task/common/reportform";
     }
 
     @RequestMapping("/buildChart")
@@ -799,7 +799,7 @@ public class ProjectTaskAction extends BaseController {
             }
         }
         model.addAttribute("map", map);
-        return "project/task/reportFormDate.pagelet";
+        return "project/data/task/report/task/reportFormDate.pagelet";
     }
 
     private Map<String, String> generateResultMap(Integer res, String successMsg, String falseMsg) {

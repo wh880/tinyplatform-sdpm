@@ -2,10 +2,10 @@
 #@div()
     #@tabWithInit("tab_demo" "optionsBox")
         #@div(divClass="dropdownBox")
-            #include("/project/dropdownMenu.page")
+            #include("/project/common/dropdownMenu.page")
         #end
         #@tabHead()
-            #include("/project/protab.page")
+            #include("/project/common/protab.page")
         #end
         #@tabBodyCol("ptop-5")
             #@div(divClass="operationbar")

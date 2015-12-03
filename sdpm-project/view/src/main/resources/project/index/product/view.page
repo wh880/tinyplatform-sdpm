@@ -1,0 +1,101 @@
+#@layout(index)
+#end
+#import("/common/component/form.component")
+#set(name="product")
+<style>
+    .group-check-list li {
+        width: 160px;
+        float: left
+    }
+
+    .group-check-list {
+        border-top: 1px solid #eee;
+    }
+
+    .form .row.group-check-list {
+        margin: 0
+    }
+
+    .group-check-list > div {
+        padding: 15px;
+    }
+
+    .group-check-list > div:first-child {
+        text-align: left;
+    }
+
+    .group-check-list > div:last-child {
+        border-left: 1px solid #eee;
+    }
+</style>
+#@tinyForm("thisform" call("link",adminPath+"/project/product/save") "post")
+
+
+                #@Tcheckboxes("productIds" linkIdList)
+                <div class="row group-check-list">
+                    <div class="col-2">产品线</div>
+                    <div class="col-10">产品名称
+                        <div class="clear"></div>
+                    </div>
+                </div>
+
+                    #foreach(productLine:userProductsMap.keySet())#set(tid=fmt("tid%d",rand()))
+                    <div class="row group-check-list">
+                        <div class="col-2">
+##                            #@Tcheckbox("" {"data-targetGroup":"g"+tid} )${productLine}#end
+                            #set(checkId=(mapInfo?.id)?:fmt("check%d",rand()))
+                            <div class="radio-box"><input type="checkbox"  class="icheckbox icheckbox-blue " data-targetGroup="${"g"+tid}" id="${checkId}" /><label for="${checkId}" class="cursor-hand">${productLine}</label></div>
+                        </div>
+                        <div class="col-10">
+                            <ul>
+                                #foreach(p:userProductsMap.get(productLine))
+                                    <li>#@Tcheckbox(p.productId {"data-group":"g"+tid})${p.productName}#end</li>
+                                #end
+                            </ul>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                    #end
+                #end
+                #@gridSysRow()
+                    #@div(divClass="col-7 col-offset-5 form-inline")
+                        #tinyInput("submit" "submitbtn" " 保存 " {"class":"btn btn-primary"})
+                    <a href="javascript:history.go(-1)" class="btn radius btn-default">返回</a>
+                    #end
+                #end
+
+        #end
+<script type="text/javascript">
+    $(function () {
+        $("input[data-targetgroup]").click(function () {
+            var check = "uncheck";
+            var gid = $(this).attr("data-targetgroup");
+            if (this.checked) {
+                check = "check";
+            }
+            $("input[data-group=" + gid + "]").iCheck(check);
+        })
+        $("form[name=thisform]").Validform({
+            beforeSubmit: function (curform) {
+                $(curform).ajaxSubmit({
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.status == "y") {
+                            layer.msg(data.info, 2, 1);
+                            $(curform).closest(".modal").trigger("close");
+                        } else {
+                            layer.msg(data.info);
+                        }
+                    },
+                    error: function () {
+                        layer.msg(data.info);
+                    }
+                });
+                return false;
+            }
+        });
+        $("#cancel").click(function () {
+            $(this).closest(".modal").trigger("close");
+        });
+    });
+</script>

@@ -41,7 +41,7 @@ public class EffortAction extends BaseController {
     public String note(Model model) {
         Date date = new Date();
         model.addAttribute("date", date);
-        return "/project/note/index";
+        return "/project/index/note/index";
     }
 
     @RequestMapping("date/{type}")
@@ -49,11 +49,11 @@ public class EffortAction extends BaseController {
                        HttpServletResponse response, Model model) {
         Integer projectId = projectOperate.getCurrentProjectId(request, response);
         if ("1".equals(type)) {
-            return "/project/note/notetable.page";
+            return "/project/index/note/notetable.page";
         }
         List<OrgUser> user = userService.findTeamUserListByProjectId(projectId);
         model.addAttribute("user", user);
-        return "/project/note/notetable.page";
+        return "/project/index/note/notetable.page";
     }
 
     @RequestMapping("list")
@@ -72,7 +72,7 @@ public class EffortAction extends BaseController {
         }
         model.addAttribute("taskId", taskId);
         model.addAttribute("list", effortList);
-        return "project/task/note";
+        return "project/operate/task/note/note";
     }
 
     @RequestMapping("findPager")
@@ -85,7 +85,7 @@ public class EffortAction extends BaseController {
         effort.setEffortId(effortId);
         Pager<SystemEffort> effortPager = effortService.findSystemEffortPage(start, limit, effort, order, asc);
         model.addAttribute("effortPager", effortPager);
-        return "project/note/tableData.pagelet";
+        return "project/data/note/tableData.pagelet";
     }
 
     @ResponseBody
@@ -176,7 +176,7 @@ public class EffortAction extends BaseController {
             pager = effortService.findSystemEffortPage(start, limit, systemEffort, order, asc);
         }
         model.addAttribute("effortPager", pager);
-        return "project/note/tableData.pagelet";
+        return "project/data/note/tableData.pagelet";
     }
 
     @RequestMapping("calendar")
@@ -195,7 +195,7 @@ public class EffortAction extends BaseController {
             SystemEffort effort = effortService.findSystemEffortById(id);
             model.addAttribute("effort", effort);
         }
-        return "project/note/calendarEvent.pagelet";
+        return "project/modal/note/calendarEvent.pagelet";
     }
 
     @Deprecated

@@ -3,19 +3,6 @@
 #include("/productLine/page/event/mytree.page")
 #set(linkName="overview")
 
-#macro radio1(rId rName rChecked rValue rClass rIsDisabled radioOther)
-<input#if(rId) id="$!{rId}"#{end}#if(rName) name="$!{rName}"#end#if(rChecked && rChecked=="checked")
-               checked#{end}#if(rValue) value="$!{rValue}"#end#if(rClass)
-               class="$!{rClass}"#end#if(rIsDisabled && rIsDisabled=="disabled") disabled#end type="radio"
-               onclick="${radioOther}"/>
-#end
-#macro labelRadio1(rId rName rChecked rValue rClass radioOther labelText)
-    #@radioBox()
-        #radio1(rId=rId rName=rName rChecked=rChecked rValue=rValue rClass=rClass radioOthe=radioOther)
-        #@label(ckId)${labelText}#end
-    #end
-#end
-
 #@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/productLine/save" "post" {"class":""})
 <div class="infoContent">
     <p class="titleName">添加产品线</p>

@@ -43,7 +43,7 @@ public class ProjectDynamicAction extends BaseController {
         }
         List<OrgUser> teamList = userService.findTeamUserListByProjectId(projectId);
         model.addAttribute("teamList", teamList);
-        return "project/dynamic/index.page";
+        return "project/index/dynamic/index.page";
     }
 
     @RequestMapping("/find")
@@ -92,7 +92,7 @@ public class ProjectDynamicAction extends BaseController {
         }
         model.addAttribute("selDate", selDate);
 
-        return "project/dynamic/tableData.pagelet";
+        return "project/data/dynamic/tableData.pagelet";
     }
 
 

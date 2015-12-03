@@ -18,13 +18,13 @@ public class ProjectCommonAction extends BaseController {
 
     @RequestMapping("/bug/index")
     public String jumpBugIndex() {
-        return "project/bug/index";
+        return "project/index/bug/index";
     }
 
     @RequiresPermissions("test")
     @RequestMapping("/test/index")
     public String jumpTestIndex() {
-        return "project/test/index.page";
+        return "project/index/test/index.page";
     }
 
 

@@ -1,0 +1,10 @@
+#@tabWithInit("tab_demo" "optionsBox")
+    #@div(divClass="dropdownBox")
+        #include("/project/common/dropdownMenu.page")
+    #end
+    #@tabHead()
+        #include("/project/common/protab.page")
+    #end
+    #layout(index)#end
+#end
+#pageContent

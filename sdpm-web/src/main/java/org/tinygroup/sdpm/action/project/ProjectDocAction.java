@@ -43,7 +43,7 @@ public class ProjectDocAction extends BaseController {
     @RequiresPermissions("document")
     @RequestMapping("/index")
     public String jumpDocIndex() {
-        return "project/document/index.page";
+        return "project/index/document/index.page";
     }
 
     @RequestMapping("/findList")
@@ -56,7 +56,7 @@ public class ProjectDocAction extends BaseController {
         doc.setDocProject(projectId);
         Pager<DocumentDoc> docPager = docService.findDocRetPager(start, limit, doc, null, null, null, order, "asc".equals(ordertype) ? true : false);
         model.addAttribute("docPager", docPager);
-        return "project/document/tableData.pagelet";
+        return "project/data/doc/tableData.pagelet";
     }
 
     @ResponseBody
@@ -106,12 +106,12 @@ public class ProjectDocAction extends BaseController {
         model.addAttribute("projectList", listProject);
         model.addAttribute("listModule", listModule);
         model.addAttribute("libList", libList);
-        return "project/document/add";
+        return "project/operate/doc/add";
     }
 
     @RequestMapping("/save")
     public String save(DocumentDoc doc) {
         DocumentDoc resDoc = docService.createNewDoc(doc);
-        return "project/document/index.page";
+        return "project/index/document/index.page";
     }
 }

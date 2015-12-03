@@ -1,0 +1,74 @@
+#@layout(index)
+    #@tabBodyCol("ptop-5")
+        #include("/project/common/task/taskMenu.page")
+    #end
+#end
+#import("/org/tinygroup/button/components/button_smart.component")
+#set(name="task")
+#@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
+    #@toggleLeft({"class":"aclass"})
+        #@settoggleLeftTitle()
+            #if(currentProjectId)
+                ${projectOperate.getProject(currentProjectId).projectName}
+            #end
+        #end
+        #@settoggleLeftBody("treeLeftbox")
+            #@zTreeList(call("link",adminPath+"/system/module/projectTree?moduleType=task&moduleRoot="+currentProjectId+"&openProject=1"))
+                #setzTreeValMap({"id":"moduleId","name":"moduleName","pid":"moduleParent"}) ##key值为固定
+                #zTreeSetLinkUrl(TINY_CONTEXT_PATH+adminPath+"/project/manage/selModelTask")
+                #zTreeSetAddUrl(TINY_CONTEXT_PATH+adminPath+"/system/module/ajax/save?moduleType=task&moduleRoot="+currentProjectId)
+                #zTreeSetEditUrl(TINY_CONTEXT_PATH+adminPath+"/system/module/ajax/save")
+                #zTreeSetDelUrl(TINY_CONTEXT_PATH+adminPath+"/system/module/ajax/delete")
+            #end
+        #end
+    #end
+    #@toggleRight()
+        #@tinyTable("taskTable") ##ID为空则系统自动生成 带入参数则取该参数为ID
+            #@div(divBaseClass="tinyheaderTools form-inline")
+                #setTinyTablePageSize([10,20,50,100,200,35])
+            <input type="button" value="全选" class="btn btn-default btn-primary "
+                   onclick="selectAllNullorReserve('idCheck','全选');"/>
+            <input type="button" value="反选" class="btn btn-default btn-primary"
+                   onclick="selectAllNullorReserve('idCheck','反选');"/>
+            <a class="btn btn-success" href="${TINY_CONTEXT_PATH+adminPath}/project/task/form">建任务</a>
+            #end
+            #@tinyTableContent(TINY_CONTEXT_PATH+adminPath+
+                "/project/task/findPager?moduleId="+moduleId+"&key="+key) ##取数据地址 总数据
+                #@thead()
+                    #@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
+                        #@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
+                        #@tinyTh({"class":"sorting","rel":"task_id"})ID#end
+                        #@tinyTh({"class":"sorting","rel":"task_pri"})P#end
+                        #@tinyTh({"class":"sorting","rel":"task_name"})任务名称#end
+                        #@tinyTh({"class":"sorting","rel":"task_status"})状态#end
+                        #@tinyTh({"class":"sorting","rel":"task_dead_line"})截止#end
+                        #@tinyTh({"class":"sorting","rel":"task_assigned_to"})指派给#end
+                        #@tinyTh({"class":"sorting","rel":"task_finished_by"})完成者#end
+                        #@tinyTh({"class":"sorting","rel":"task_dead_line"})预计#end
+                        #@tinyTh({"class":"sorting","rel":"task_dead_line"})消耗#end
+                        #@tinyTh({"class":"sorting","rel":"task_dead_line"})剩余#end
+                        #@tinyTh()操作#end
+                    #end
+                #end
+
+            #end
+        ##以下部分为对删除和修改的影响 因为存在不同的信息故放在外面自行更改 #dialog 配合修改使用
+        ##个人认为下面的js及dialog无用，先完成页面效果。2015年9月8日 10:09:33
+        <script type="text/javascript">
+            $(function () {
+                $('#${tableId}').on('click', '.delBtn', function (e) {
+                    user_del(this, '1');
+                });
+            })
+        </script>
+            #@dialog("myModal")
+                #@dialogHeader()对话框标题#end
+                #@dialogBody()<p>对话框内容…</p>#end
+                #@dialogFooter()
+                    #@buttonEnsure()确定#end
+                    #@buttonCancel()关闭#end
+                #end
+            #end
+        #end
+    #end
+#end
