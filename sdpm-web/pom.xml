@@ -59,11 +59,11 @@
             <artifactId>sdpm-org-service-impl</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>org.tinygroup</groupId>-->
-            <!--<artifactId>sdpm-org-service-wrapper</artifactId>-->
-            <!--<version>${project.version}</version>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>sdpm-org-service-wrapper</artifactId>
+            <version>${project.version}</version>
+        </dependency>
 
         <!--service-->
         <dependency>
@@ -342,6 +342,8 @@
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>8.1.16.v20140903</version>
                 <configuration>
+                    <jvmArgs>-XX:PermSize=256M -XX:MaxPermSize=1024M</jvmArgs>
+
                     <webApp>
                         <contextPath>/${project.name}</contextPath>
                     </webApp>
@@ -354,7 +356,6 @@
                             <maxIdleTime>60000</maxIdleTime>
                         </connector>
                     </connectors>
-                    <scanIntervalSeconds>10</scanIntervalSeconds>
                     <stopKey>foo</stopKey>
                     <stopPort>9999</stopPort>
                 </configuration>

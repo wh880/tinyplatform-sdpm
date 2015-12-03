@@ -1,23 +1,24 @@
 /**
- *  Copyright (c) 1997-2013, www.tinygroup.org (luo_guo@icloud.com).
- *
- *  Licensed under the GPL, Version 3.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *       http://www.gnu.org/licenses/gpl.html
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
+ * Copyright (c) 1997-2013, www.tinygroup.org (luo_guo@icloud.com).
+ * <p>
+ * Licensed under the GPL, Version 3.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.gnu.org/licenses/gpl.html
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 package org.tinygroup.sdpm.org.wrapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.tinygroup.aopcache.annotation.CacheGet;
 import org.tinygroup.cepcore.CEPCore;
 import org.tinygroup.context.Context;
 import org.tinygroup.context.impl.ContextImpl;
@@ -32,212 +33,212 @@ import java.util.UUID;
 @Service("userService")
 public class UserServiceImplWrapper implements org.tinygroup.sdpm.org.service.inter.UserService {
 
-	@Autowired
-	CEPCore cepcore;
+    @Autowired
+    CEPCore cepcore;
 
-	public CEPCore getCore() {
-		return cepcore;
-	}
+    public CEPCore getCore() {
+        return cepcore;
+    }
 
-	public void setCore(CEPCore cepcore) {
-		this.cepcore = cepcore;
-	}
+    public void setCore(CEPCore cepcore) {
+        this.cepcore = cepcore;
+    }
 
-	private Event getEvent(String serviceId,Context context) throws Exception{
-		Event event = new Event();
-		event.setEventId(UUID.randomUUID().toString());
-		ServiceRequest serviceRequest = new ServiceRequest();
-		serviceRequest.setContext(context);
-		serviceRequest.setServiceId(serviceId);
-		event.setServiceRequest(serviceRequest);
-		return event;
-	}
+    private Event getEvent(String serviceId, Context context) throws Exception {
+        Event event = new Event();
+        event.setEventId(UUID.randomUUID().toString());
+        ServiceRequest serviceRequest = new ServiceRequest();
+        serviceRequest.setContext(context);
+        serviceRequest.setServiceId(serviceId);
+        event.setServiceRequest(serviceRequest);
+        return event;
+    }
 
-	public org.tinygroup.sdpm.org.dao.pojo.OrgUser findUser(java.lang.String id) {
-		String serviceId = "findUser";
+    @CacheGet(key = "${id}", group = CACHE_USER_ID)
+    public org.tinygroup.sdpm.org.dao.pojo.OrgUser findUser(java.lang.String id) {
+        String serviceId = "findUser";
 
-		try{
-			Context context = new ContextImpl();
-			context.put("id" ,id);
+        try {
+            Context context = new ContextImpl();
+            context.put("id", id);
 
-			return callServiceAndCallBack(serviceId,context);
-		}catch(Exception e){
-			throw new RuntimeException(String.format("服务[%s]发生异常",serviceId),e);
-		}
-	}
+            return callServiceAndCallBack(serviceId, context);
+        } catch (Exception e) {
+            throw new RuntimeException(String.format("服务[%s]发生异常", serviceId), e);
+        }
+    }
+    @CacheGet(key = "${account}", group = CACHE_USER_ACCOUNT)
+    public org.tinygroup.sdpm.org.dao.pojo.OrgUser findUserByAccount(java.lang.String account) {
+        String serviceId = "findUserByAccount";
 
-	public org.tinygroup.sdpm.org.dao.pojo.OrgUser findUserByAccount(java.lang.String account) {
-		String serviceId = "findUserByAccount";
+        try {
+            Context context = new ContextImpl();
+            context.put("account", account);
+            return callServiceAndCallBack(serviceId, context);
+        } catch (Exception e) {
+            throw new RuntimeException(String.format("服务[%s]发生异常", serviceId), e);
+        }
+    }
 
-		try{
-			Context context = new ContextImpl();
-			context.put("account" ,account);
+    public org.tinygroup.tinysqldsl.Pager findUserPager(java.lang.Integer start, java.lang.Integer limit, org.tinygroup.sdpm.org.dao.pojo.OrgUser orgUser) {
+        String serviceId = "findUserPager";
 
-			return callServiceAndCallBack(serviceId,context);
-		}catch(Exception e){
-			throw new RuntimeException(String.format("服务[%s]发生异常",serviceId),e);
-		}
-	}
+        try {
+            Context context = new ContextImpl();
+            context.put("start", start);
+            context.put("limit", limit);
+            context.put("orgUser", orgUser);
 
-	public org.tinygroup.tinysqldsl.Pager findUserPager(java.lang.Integer start ,java.lang.Integer limit ,org.tinygroup.sdpm.org.dao.pojo.OrgUser orgUser) {
-		String serviceId = "findUserPager";
+            return callServiceAndCallBack(serviceId, context);
+        } catch (Exception e) {
+            throw new RuntimeException(String.format("服务[%s]发生异常", serviceId), e);
+        }
+    }
 
-		try{
-			Context context = new ContextImpl();
-			context.put("start" ,start);
-			context.put("limit" ,limit);
-			context.put("orgUser" ,orgUser);
+    public java.util.List<org.tinygroup.sdpm.org.dao.pojo.OrgUser> findUserList(org.tinygroup.sdpm.org.dao.pojo.OrgUser orgUser) {
+        String serviceId = "findUserList";
 
-			return callServiceAndCallBack(serviceId,context);
-		}catch(Exception e){
-			throw new RuntimeException(String.format("服务[%s]发生异常",serviceId),e);
-		}
-	}
+        try {
+            Context context = new ContextImpl();
+            context.put("orgUser", orgUser);
 
-	public java.util.List<org.tinygroup.sdpm.org.dao.pojo.OrgUser> findUserList(org.tinygroup.sdpm.org.dao.pojo.OrgUser orgUser) {
-		String serviceId = "findUserList";
+            return callServiceAndCallBack(serviceId, context);
+        } catch (Exception e) {
+            throw new RuntimeException(String.format("服务[%s]发生异常", serviceId), e);
+        }
+    }
 
-		try{
-			Context context = new ContextImpl();
-			context.put("orgUser" ,orgUser);
+    public org.tinygroup.tinysqldsl.Pager findUserByDeptId(java.lang.Integer start, java.lang.Integer limit, java.lang.Integer deptId) {
+        String serviceId = "findUserByDeptId";
 
-			return callServiceAndCallBack(serviceId,context);
-		}catch(Exception e){
-			throw new RuntimeException(String.format("服务[%s]发生异常",serviceId),e);
-		}
-	}
+        try {
+            Context context = new ContextImpl();
+            context.put("start", start);
+            context.put("limit", limit);
+            context.put("deptId", deptId);
 
-	public org.tinygroup.tinysqldsl.Pager findUserByDeptId(java.lang.Integer start ,java.lang.Integer limit ,java.lang.Integer deptId) {
-		String serviceId = "findUserByDeptId";
+            return callServiceAndCallBack(serviceId, context);
+        } catch (Exception e) {
+            throw new RuntimeException(String.format("服务[%s]发生异常", serviceId), e);
+        }
+    }
 
-		try{
-			Context context = new ContextImpl();
-			context.put("start" ,start);
-			context.put("limit" ,limit);
-			context.put("deptId" ,deptId);
+    public org.tinygroup.sdpm.org.dao.pojo.OrgUser addUser(org.tinygroup.sdpm.org.dao.pojo.OrgUser orgUser) {
+        String serviceId = "addUser";
 
-			return callServiceAndCallBack(serviceId,context);
-		}catch(Exception e){
-			throw new RuntimeException(String.format("服务[%s]发生异常",serviceId),e);
-		}
-	}
+        try {
+            Context context = new ContextImpl();
+            context.put("orgUser", orgUser);
 
-	public org.tinygroup.sdpm.org.dao.pojo.OrgUser addUser(org.tinygroup.sdpm.org.dao.pojo.OrgUser orgUser) {
-		String serviceId = "addUser";
+            return callServiceAndCallBack(serviceId, context);
+        } catch (Exception e) {
+            throw new RuntimeException(String.format("服务[%s]发生异常", serviceId), e);
+        }
+    }
 
-		try{
-			Context context = new ContextImpl();
-			context.put("orgUser" ,orgUser);
+    public org.tinygroup.sdpm.org.dao.pojo.OrgUser updateUser(org.tinygroup.sdpm.org.dao.pojo.OrgUser orgUser) {
+        String serviceId = "updateUser";
 
-			return callServiceAndCallBack(serviceId,context);
-		}catch(Exception e){
-			throw new RuntimeException(String.format("服务[%s]发生异常",serviceId),e);
-		}
-	}
+        try {
+            Context context = new ContextImpl();
+            context.put("orgUser", orgUser);
 
-	public org.tinygroup.sdpm.org.dao.pojo.OrgUser updateUser(org.tinygroup.sdpm.org.dao.pojo.OrgUser orgUser) {
-		String serviceId = "updateUser";
+            return callServiceAndCallBack(serviceId, context);
+        } catch (Exception e) {
+            throw new RuntimeException(String.format("服务[%s]发生异常", serviceId), e);
+        }
+    }
 
-		try{
-			Context context = new ContextImpl();
-			context.put("orgUser" ,orgUser);
+    public java.lang.Integer deleteUser(java.lang.String id) {
+        String serviceId = "deleteUser";
 
-			return callServiceAndCallBack(serviceId,context);
-		}catch(Exception e){
-			throw new RuntimeException(String.format("服务[%s]发生异常",serviceId),e);
-		}
-	}
+        try {
+            Context context = new ContextImpl();
+            context.put("id", id);
 
-	public java.lang.Integer deleteUser(java.lang.String id) {
-		String serviceId = "deleteUser";
+            return callServiceAndCallBack(serviceId, context);
+        } catch (Exception e) {
+            throw new RuntimeException(String.format("服务[%s]发生异常", serviceId), e);
+        }
+    }
 
-		try{
-			Context context = new ContextImpl();
-			context.put("id" ,id);
+    public int[] deleteBatchUser(java.util.List<org.tinygroup.sdpm.org.dao.pojo.OrgUser> list) {
+        String serviceId = "deleteBatchUser";
 
-			return callServiceAndCallBack(serviceId,context);
-		}catch(Exception e){
-			throw new RuntimeException(String.format("服务[%s]发生异常",serviceId),e);
-		}
-	}
+        try {
+            Context context = new ContextImpl();
+            context.put("list", list);
 
-	public int[] deleteBatchUser(java.util.List<org.tinygroup.sdpm.org.dao.pojo.OrgUser> list) {
-		String serviceId = "deleteBatchUser";
+            return callServiceAndCallBack(serviceId, context);
+        } catch (Exception e) {
+            throw new RuntimeException(String.format("服务[%s]发生异常", serviceId), e);
+        }
+    }
 
-		try{
-			Context context = new ContextImpl();
-			context.put("list" ,list);
+    public Boolean validatePassword(java.lang.String plainPassword, java.lang.String password) {
+        String serviceId = "validatePassword";
 
-			return callServiceAndCallBack(serviceId,context);
-		}catch(Exception e){
-			throw new RuntimeException(String.format("服务[%s]发生异常",serviceId),e);
-		}
-	}
+        try {
+            Context context = new ContextImpl();
+            context.put("plainPassword", plainPassword);
+            context.put("password", password);
 
-	public Boolean validatePassword(java.lang.String plainPassword ,java.lang.String password) {
-		String serviceId = "validatePassword";
+            return callServiceAndCallBack(serviceId, context);
+        } catch (Exception e) {
+            throw new RuntimeException(String.format("服务[%s]发生异常", serviceId), e);
+        }
+    }
 
-		try{
-			Context context = new ContextImpl();
-			context.put("plainPassword" ,plainPassword);
-			context.put("password" ,password);
+    public java.util.List<org.tinygroup.sdpm.org.dao.pojo.OrgUser> findUserListByIds(java.lang.String[] userId) {
+        String serviceId = "findUserListByIds";
 
-			return callServiceAndCallBack(serviceId,context);
-		}catch(Exception e){
-			throw new RuntimeException(String.format("服务[%s]发生异常",serviceId),e);
-		}
-	}
+        try {
+            Context context = new ContextImpl();
+            context.put("userId", userId);
 
-	public java.util.List<org.tinygroup.sdpm.org.dao.pojo.OrgUser> findUserListByIds(java.lang.String[] userId) {
-		String serviceId = "findUserListByIds";
+            return callServiceAndCallBack(serviceId, context);
+        } catch (Exception e) {
+            throw new RuntimeException(String.format("服务[%s]发生异常", serviceId), e);
+        }
+    }
 
-		try{
-			Context context = new ContextImpl();
-			context.put("userId" ,userId);
+    public java.util.List<org.tinygroup.sdpm.org.dao.pojo.OrgUser> findTeamUserListByProjectId(java.lang.Integer projectId) {
+        String serviceId = "findTeamUserListByProjectId";
 
-			return callServiceAndCallBack(serviceId,context);
-		}catch(Exception e){
-			throw new RuntimeException(String.format("服务[%s]发生异常",serviceId),e);
-		}
-	}
+        try {
+            Context context = new ContextImpl();
+            context.put("projectId", projectId);
 
-	public java.util.List<org.tinygroup.sdpm.org.dao.pojo.OrgUser> findTeamUserListByProjectId(java.lang.Integer projectId) {
-		String serviceId = "findTeamUserListByProjectId";
+            return callServiceAndCallBack(serviceId, context);
+        } catch (Exception e) {
+            throw new RuntimeException(String.format("服务[%s]发生异常", serviceId), e);
+        }
+    }
 
-		try{
-			Context context = new ContextImpl();
-			context.put("projectId" ,projectId);
+    public java.util.List<org.tinygroup.sdpm.org.dao.pojo.OrgUser> userInCondition(java.lang.String condition, java.lang.String[] ids) {
+        String serviceId = "userInCondition";
 
-			return callServiceAndCallBack(serviceId,context);
-		}catch(Exception e){
-			throw new RuntimeException(String.format("服务[%s]发生异常",serviceId),e);
-		}
-	}
+        try {
+            Context context = new ContextImpl();
+            context.put("condition", condition);
+            context.put("ids", ids);
 
-	public java.util.List<org.tinygroup.sdpm.org.dao.pojo.OrgUser> userInCondition(java.lang.String condition ,java.lang.String[] ids) {
-		String serviceId = "userInCondition";
+            return callServiceAndCallBack(serviceId, context);
+        } catch (Exception e) {
+            throw new RuntimeException(String.format("服务[%s]发生异常", serviceId), e);
+        }
+    }
 
-		try{
-			Context context = new ContextImpl();
-			context.put("condition" ,condition);
-			context.put("ids" ,ids);
-
-			return callServiceAndCallBack(serviceId,context);
-		}catch(Exception e){
-			throw new RuntimeException(String.format("服务[%s]发生异常",serviceId),e);
-		}
-	}
-
-	private <T> T callServiceAndCallBack(String serviceId,Context context) throws Exception{
-		Event event = getEvent(serviceId,context);
-		cepcore.process(event);
-		ServiceInfo info = cepcore.getServiceInfo(serviceId);
-		List<Parameter> resultsParam = info.getResults();
-		if (resultsParam==null||resultsParam.size() == 0) {
-			return null;
-	}
-		return event.getServiceRequest().getContext()
-			.get(resultsParam.get(0).getName());
-	}
+    private <T> T callServiceAndCallBack(String serviceId, Context context) throws Exception {
+        Event event = getEvent(serviceId, context);
+        cepcore.process(event);
+        ServiceInfo info = cepcore.getServiceInfo(serviceId);
+        List<Parameter> resultsParam = info.getResults();
+        if (resultsParam == null || resultsParam.size() == 0) {
+            return null;
+        }
+        return event.getServiceRequest().getContext()
+                .get(resultsParam.get(0).getName());
+    }
 
 }

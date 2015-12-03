@@ -1,3 +1,4 @@
+#!set(activeTitle="编辑用户",activeMenuId=currentPageId)
 <style>
     .titleNamesty {
         background: #f9f9f8;
@@ -18,13 +19,11 @@
         #end
     #end
 #end
-
-
 #@noRespsGridSystem()
     #@gridSysRow()
         #@gridSysCol(3)#end
         #@gridSysCol(6)
-            #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/org/user/save" "post" {"class":""})
+            #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/org/user/save" "post")
             <input type="hidden" name="orgUserId" value="${user?.orgUserId}"/>
                 #@noRespsGridSystem()
                     #@gridSysRow()

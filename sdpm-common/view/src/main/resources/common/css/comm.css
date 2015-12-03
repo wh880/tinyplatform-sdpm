@@ -46,10 +46,13 @@
     }
 
     .menu-on-top #main-menu .navigation > li {
-        width:111px;
-        white-space:nowrap;
+        width:auto !important;
+        white-space:nowrap !important;
+        border-left:0 !important;
+        border-bottom:0 !important;
     }
-
+    .menu-on-top #main-menu .navigation > li>a{padding:12px 20px}
+    .menu-on-top #main-menu .navigation > li:last-child{border-bottom-right-radius: 5px}
     .menu-on-top #main-menu .navigation > li.mm-dropdown > a:after {
         top: 28px !important
     }
@@ -426,8 +429,8 @@ a.btn.btn-sm.backBtn, .backBtn {
     width: 200px;
 }
 /*左侧树 控制max*/
-.togglebox .togglenavpart .treeLeftbox ul.ztree{max-height:394px;}
-
+.togglebox .togglenavpart .treeLeftbox ul.ztree{background:#fff;}
+.togglebox .togglenavpart{min-height: 100%}
 .dropdown .dropdown-submenu .dropdown-menu{overflow-y: auto;overflow-x: hidden;max-height: 280px;}
 .dropdown .dropdown-submenu .dropdown-show{overflow:visible}
 
@@ -476,3 +479,6 @@ table.table.filelist-table{border:#ddd 1px solid;}
 .who-info{background:#fcfcfc;border:#f1f1f1 1px solid;padding:4px 5px;height:325px;overflow:hidden;margin-bottom:10px}
 .who-info .caption a{color:#333;}
 .who_info .caption a:hover{color:#f90;}
+/*底部*/
+.tinyfooterrap a,.tinyfooterrap a:link,.tinyfooterrap a:visited{color:#ccb}
+.tinyfooterrap a:hover{text-decoration:underline;color:#ffe}

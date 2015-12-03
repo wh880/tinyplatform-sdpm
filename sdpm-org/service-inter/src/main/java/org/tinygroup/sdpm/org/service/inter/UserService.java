@@ -15,18 +15,25 @@
  */
 package org.tinygroup.sdpm.org.service.inter;
 
+import org.tinygroup.aopcache.annotation.CacheGet;
+import org.tinygroup.aopcache.annotation.CachePut;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.List;
 
 public interface UserService {
+    String CACHE_USER_ID = "userId";
+    String CACHE_USER_ACCOUNT = "userAccount";
+    String CACHE_USER_LIST = "userList";
+
     /**
      * 根据主键id查找用户
      *
      * @param id
      * @return
      */
+    @CacheGet(key = "${id}", group = CACHE_USER_ID)
     OrgUser findUser(String id);
 
     /**
@@ -35,6 +42,7 @@ public interface UserService {
      * @param account 用户名
      * @return
      */
+    @CacheGet(key = "${account}", group = CACHE_USER_ACCOUNT)
     OrgUser findUserByAccount(String account);
 
     /**
@@ -53,10 +61,12 @@ public interface UserService {
      * @param orgUser 用于查询条件
      * @return
      */
+    @CacheGet(key = "list${orgUser.orgUserId}", group = CACHE_USER_LIST)
     List<OrgUser> findUserList(OrgUser orgUser);
 
     /**
      * 根据部门Id查询用户pager
+     *
      * @param deptId
      * @return
      */
@@ -76,6 +86,7 @@ public interface UserService {
      * @param orgUser 需要更新的实体类
      * @return
      */
+    @CachePut(keys = "list${orgUser.orgUserId}",parameterNames = "orgUser",group = CACHE_USER_LIST,removeGroups="CACHE_USER_LIST")
     OrgUser updateUser(OrgUser orgUser);
 
     /**
@@ -121,6 +132,7 @@ public interface UserService {
 
     /**
      * 根据名称条件查询
+     *
      * @param condition
      * @return
      */

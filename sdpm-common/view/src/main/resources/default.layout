@@ -1,7 +1,4 @@
-#macro getMenuId()
-    #foreach(var:menuList)#if(tinyRequestRequestURI.startsWith(var?.url))#set(activeMenuId=var.id)#break#end#end
-#end
-#set(pagePostionTitle='<li><a href="'+TINY_CONTEXT_PATH+'">首页</a></li>',activeMenuId="1",topMenuId="0",c=call("getMenuId"),c=call("getTopMenuId"))
+#set(pagePostionTitle='<li><a href="'+TINY_CONTEXT_PATH+'">首页</a></li>',activeMenuId="1",topMenuId="0",c=call("getMenuId"),c=call("sdpmgGtMenuId"))
 <!DOCTYPE html>
 <!--[if IE 7 ]>		 <html class="no-js ie ie7 lte7 lte8 lte9" lang="zh-cmn-Hans-CN"> <![endif]-->
 <!--[if IE 8 ]>		 <html class="no-js ie ie8 lte8 lte9" lang="zh-cmn-Hans-CN"> <![endif]-->
@@ -24,110 +21,70 @@
         var contextPath = "${TINY_CONTEXT_PATH}";
         var pomlist = new Array()
     </script>
-        <!--[if lt ie 9]>
-            #foreach(component in uiengine.getHealthUiComponents())
-                #if(component.cssResource)#set(resources=component.cssResource.split(","))
-                    #foreach(path in resources)
-                        #set(path=path.trim())#set(newPath=path.replaceAll("[$][{]TINY_THEME[}]","${TINY_THEME}"))<link href="${TINY_CONTEXT_PATH}${newPath}" rel="stylesheet" />
-                    #end
-                #end
-                #if(component.cssCodelet)<style>$!{component.cssCodelet}</style>#end
-            #end
-        <![endif]-->
-        <!--[if (gte IE 9)|!(IE)]><!-->
-        <link href="${TINY_CONTEXT_PATH}/uiengine.uicss" rel="stylesheet" />
-        <!--<![endif]-->
-        <script src="${TINY_CONTEXT_PATH}/uiengine.uijs"></script>
-##    #end
+    <link href="${TINY_CONTEXT_PATH}/uiengine.uicss" rel="stylesheet" />
+    <script src="${TINY_CONTEXT_PATH}/uiengine.uijs"></script>
 </head>
 <body class="theme-clean main-menu-animated menu-on-top" id="bodyrap">
 <script src="${TINY_CONTEXT_PATH}/common/js/tinyui.js"></script>
     #@mainWrapper()
         #@mainNavbar("/common/img/main-navbar-logo.png" "Tiny SDPM" adminPath+"/home")
-##            #@navbarNav()
-##                #navbarNavItem("新增内容" "#")
-##                #@navbarDropdownMenu("下拉菜单")
-##                    #navbarNaadfasdfvItem("第一项" "#")
-##                    #navbarNavItem("第二项" "#")
-##                    #divider()##分割线
-##                    #navbarNavItem("第三项" "#")
-##                #end
-##            #end
             #@rightNavBar()
-##            <li class="nav-icon-btn nav-icon-btn-danger dropdown">
-##                #@notifyDropdown(5 "fa-bullhorn" "通知" "更多的通知")
-##					#include("/common/notify.page")
-##				#end
-##            </li>
-##            <li class="nav-icon-btn nav-icon-btn-success dropdown">
-##                #@messagesDropdown(12 "fa-envelope" "所得的消息" "更多的信息")
-##						#include("/common/messages.page")
-##				#end
-##            </li>
-            <li class="fullscreen">
-                <a href="javascript:void(0);" onclick="launchFullScreen(document.documentElement);" title="全屏">
-                    <i class="fa fa-fullscreen"></i></a>
-            </li>
-            <li>
-                #set(searchCurrentName=searchCurrentName?:getDict("searchType").get(0).value)
-                #@mulSearchBox(searchCurrentName)
-                    #foreach(item : getDict("searchType"))
-                        #menusInfo(item.value item.text)
+                <li class="fullscreen">
+                    <a href="javascript:void(0);" onclick="launchFullScreen(document.documentElement);" title="全屏">
+                        <i class="fa fa-fullscreen"></i></a>
+                </li>
+                <li>
+                    #set(searchCurrentName=searchCurrentName?:getDict("searchType").get(0).value)
+                    #@mulSearchBox(searchCurrentName)
+                        #foreach(item : getDict("searchType"))
+                            #menusInfo(item.value item.text)
+                        #end
                     #end
-                #end
-            </li>
-            <li class="dropdown">
-                <a href="javascript:void(0);" class="dropdown-toggle user-menu" data-toggle="dropdown">
-                    <img src="${TINY_CONTEXT_PATH}/common/img/avatars/1.jpg"
-                         alt="${userUtils.getUser().orgUserRealName}">
-                    <span>${userUtils.getUser().orgUserRealName}</span>
-                </a>
-                <ul class="dropdown-menu">
-##                    <li><a href="javascript:void(0);"><span class="label label-warning pull-right">新的</span>资料文件</a>
-##                    </li>
-
-    #@hasMenu("org-user-profileAdmin")
-        <li><a href="${TINY_CONTEXT_PATH+adminPath}/org/user/show/profile?id=${userUtils.getUserId()}"><i class="dropdown-icon fa icon-user"></i>&nbsp;&nbsp;个人档案</li>
-    #end
-    #@hasMenu("org-user-password")
-        <li><a href="${TINY_CONTEXT_PATH+adminPath}/org/user/passwordForm"><i class="dropdown-icon fa icon-key"></i>&nbsp;&nbsp;修改密码</li>
-        <li class="divider"></li>
-    #end
-##                    <li><a href="javascript:void(0);"><i class="dropdown-icon fa fa-cog"></i>&nbsp;&nbsp;修改个人资料</a></li>
-
-                    <li><a href="${TINY_CONTEXT_PATH}/logout"><i class="dropdown-icon fa fa-power-off"></i>&nbsp;&nbsp;退出</a>
-                    </li>
-                </ul>
-            </li>
+                </li>
+                <li class="dropdown">
+                    <a href="javascript:void(0);" class="dropdown-toggle user-menu" data-toggle="dropdown">
+                        <img src="${TINY_CONTEXT_PATH}/common/img/avatars/1.jpg"
+                             alt="${userUtils.getUser().orgUserRealName}">
+                        <span>${userUtils.getUser().orgUserRealName}</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        #@hasMenu("org-user-profileAdmin")
+                            <li><a href="${TINY_CONTEXT_PATH+adminPath}/org/user/show/profile?id=${userUtils.getUserId()}"><i class="dropdown-icon fa icon-user"></i>&nbsp;&nbsp;个人档案</li>
+                        #end
+                        #@hasMenu("org-user-password")
+                            <li><a href="${TINY_CONTEXT_PATH+adminPath}/org/user/passwordForm"><i class="dropdown-icon fa icon-key"></i>&nbsp;&nbsp;修改密码</li>
+                            <li class="divider"></li>
+                        #end
+                        <li><a href="${TINY_CONTEXT_PATH}/logout"><i class="dropdown-icon fa fa-power-off"></i>&nbsp;&nbsp;退出</a>
+                        </li>
+                    </ul>
+                </li>
             #end
         #end
-
         #@mainMenu()
             #@navigationMenu()
                 #foreach(m in menuManager.getChildMenus("0"))
                     #TnavItem(mFor.index m.name adminPath+m.href m.icon)
                 #end
-
-            #end <!-- navigation end -->
+            #end
         #end
-    <div class="content-wrapper-bg"></div>
+        <div class="content-wrapper-bg"></div>
         #@div("content-wrapper")
-        <!-- 主体 start -->
             #@rowFrame()
             <div id="tinypagecontent" style="min-height:490px">${pageContent}</div>
             #end
-        <div id="tinyfooter">
-            <div class="tinyfooterrap">
-			<span class="right">
-					浙ICP备14043110号-1
-			</span>
-                TinyGroup &copy; 2013-${formatDate(now(),"yyyy")}
-                如有问题欢迎咨询，点击链接加入
-                <a href="http://shang.qq.com/wpa/qunwpa?idkey=5e6ef409eec4046b4aa0273c0359920bd875b87f834bee175917f96e8b216489" target="_blank" title="Tiny群">
-                    【Tiny】官方群
-                </a>
+            <div id="tinyfooter">
+                <div class="tinyfooterrap">
+                <span class="right">
+                        浙ICP备14043110号-1
+                </span>
+                    TinyGroup &copy; 2013-${formatDate(now(),"yyyy")}
+                    如有问题欢迎咨询，点击链接加入
+                    <a href="http://shang.qq.com/wpa/qunwpa?idkey=5e6ef409eec4046b4aa0273c0359920bd875b87f834bee175917f96e8b216489" target="_blank" title="Tiny群">
+                        【Tiny】官方群
+                    </a>
+                </div>
             </div>
-        </div>
         #end
     #end
 <script type="text/javascript">

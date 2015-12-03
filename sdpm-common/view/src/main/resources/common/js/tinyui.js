@@ -28,7 +28,7 @@
             footer_fixed: false,
             no_menu: false,
             tinycontainer: false,
-            menupos: "left",
+            menupos: "top",
             mmstate: "expanded",
             theme: tinyTplList[0].name,//'clean',
             tiny_FullScreen: false,
@@ -184,9 +184,6 @@
     }
 
 
-    if (demo_settings.menupos == "right") {
-        $("body").addClass("main-menu-right")
-    }
     if (demo_settings.position_fixed) {
         $("body").addClass("main-position-fixed")
     }
@@ -496,25 +493,7 @@
             // reloadPage();
             // }
         });
-        $('input[name="navposition"]').on($('html').hasClass('ie8') ? "propertychange" : "change", function (e) {
-            demo_settings.menupos = $(this).val();
-            saveDemoSettings();
-            $("body").removeClass("main-menu-right menu-on-top");
 
-            if (demo_settings.menupos == "top") {
-                $("body").removeClass("mmc");
-                $("body").addClass("menu-on-top");
-                $("#main-menu #topmenurap").css("display", "block");
-                $("#main-menu>.slimScrollDiv").css("display", "none")
-            } else {
-                if (demo_settings.menupos == "right") {
-                    $("body").addClass("main-menu-right");
-                }
-                $("#main-menu #topmenurap").css("display", "none");
-                $("#main-menu>.slimScrollDiv").css("display", "block");
-            }
-            //reloadPage();
-        });
         // Fix/unfix main menu
         $('#demo-fixed-menu').on($('html').hasClass('ie8') ? "propertychange" : "change", function () {
             var check_navbar_chk = ($(this).is(':checked') && !$('#demo-fixed-navbar').is(':checked')) ? true : false;

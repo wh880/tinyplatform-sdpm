@@ -90,7 +90,7 @@
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>org.tinygroup.aopcache</artifactId>
-            <version>${tiny_ext_version}</version>
+            <version>${tiny_version}</version>
         </dependency>
     </dependencies>
 </project>

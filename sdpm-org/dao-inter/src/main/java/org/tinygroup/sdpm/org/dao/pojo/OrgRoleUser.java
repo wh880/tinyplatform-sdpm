@@ -16,11 +16,13 @@
 
 package org.tinygroup.sdpm.org.dao.pojo;
 
+import java.io.Serializable;
+
 /**
  * 角色用户分配
  *
  */
-public class OrgRoleUser {
+public class OrgRoleUser implements Serializable{
 
     /**
      * 逻辑ID
