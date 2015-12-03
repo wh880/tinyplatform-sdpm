@@ -1,0 +1,34 @@
+<service-components>
+  <service-component type="org.tinygroup.sdpm.org.service.impl.DeptServiceImpl" >
+    <service-method local-name="findDept" service-id="findDept" method-name="findDept" cacheable="false" category="org.tinygroup.sdpm.org.service.impl">
+      <service-parameters>
+        <service-parameter name="id" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findDeptResult" required="false" is-array="false" type="org.tinygroup.sdpm.org.dao.pojo.OrgDept"/>
+    </service-method>
+    <service-method local-name="findDeptList" service-id="findDeptList" method-name="findDeptList" cacheable="false" category="org.tinygroup.sdpm.org.service.impl">
+      <service-parameters>
+        <service-parameter name="orgDept" type="org.tinygroup.sdpm.org.dao.pojo.OrgDept" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findDeptListResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.org.dao.pojo.OrgDept"/>
+    </service-method>
+    <service-method local-name="addDept" service-id="addDept" method-name="addDept" cacheable="false" category="org.tinygroup.sdpm.org.service.impl">
+      <service-parameters>
+        <service-parameter name="orgDept" type="org.tinygroup.sdpm.org.dao.pojo.OrgDept" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="addDeptResult" required="false" is-array="false" type="org.tinygroup.sdpm.org.dao.pojo.OrgDept"/>
+    </service-method>
+    <service-method local-name="updateDept" service-id="updateDept" method-name="updateDept" cacheable="false" category="org.tinygroup.sdpm.org.service.impl">
+      <service-parameters>
+        <service-parameter name="orgDept" type="org.tinygroup.sdpm.org.dao.pojo.OrgDept" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="updateDeptResult" required="false" is-array="false" type="org.tinygroup.sdpm.org.dao.pojo.OrgDept"/>
+    </service-method>
+    <service-method local-name="deleteDept" service-id="deleteDept" method-name="deleteDept" cacheable="false" category="org.tinygroup.sdpm.org.service.impl">
+      <service-parameters>
+        <service-parameter name="id" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="deleteDeptResult" required="false" is-array="false" type="java.lang.Integer"/>
+    </service-method>
+  </service-component>
+</service-components>

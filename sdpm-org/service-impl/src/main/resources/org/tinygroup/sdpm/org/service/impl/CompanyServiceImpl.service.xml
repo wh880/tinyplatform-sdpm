@@ -1,0 +1,26 @@
+<service-components>
+  <service-component type="org.tinygroup.sdpm.org.service.impl.CompanyServiceImpl">
+    <service-method local-name="findCompany" service-id="findCompany" method-name="findCompany" cacheable="false" category="org.tinygroup.sdpm.org.service.impl">
+      <service-parameters>
+        <service-parameter name="id" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findCompanyResult" required="false" is-array="false" type="org.tinygroup.sdpm.org.dao.pojo.OrgCompany"/>
+    </service-method>
+    <service-method local-name="findCompanyList" service-id="findCompanyList" method-name="findCompanyList" cacheable="false" category="org.tinygroup.sdpm.org.service.impl">
+      <service-parameters/>
+      <service-result name="findCompanyListResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.org.dao.pojo.OrgCompany"/>
+    </service-method>
+    <service-method local-name="addCompany" service-id="addCompany" method-name="addCompany" cacheable="false" category="org.tinygroup.sdpm.org.service.impl">
+      <service-parameters>
+        <service-parameter name="orgCompany" type="org.tinygroup.sdpm.org.dao.pojo.OrgCompany" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="addCompanyResult" required="false" is-array="false" type="org.tinygroup.sdpm.org.dao.pojo.OrgCompany"/>
+    </service-method>
+    <service-method local-name="updateCompany" service-id="updateCompany" method-name="updateCompany" cacheable="false" category="org.tinygroup.sdpm.org.service.impl">
+      <service-parameters>
+        <service-parameter name="orgCompany" type="org.tinygroup.sdpm.org.dao.pojo.OrgCompany" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="updateCompanyResult" required="false" is-array="false" type="org.tinygroup.sdpm.org.dao.pojo.OrgCompany"/>
+    </service-method>
+  </service-component>
+</service-components>

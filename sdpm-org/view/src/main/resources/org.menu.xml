@@ -39,7 +39,7 @@
               isShow="1" scope="org-user-detail"/>
         <menu id="org-user-profileAdmin" name="所属档案" href="/org/user/show/profile" icon="" sort="1"
               isShow="1" scope="org-user-detail"/>
-        <menu id="org-user-editprofile" name="修改档案" href="/org/user/form" icon="icon-edit"
+        <menu id="org-user-editprofile" name="修改档案" href="/org/user/editForm" icon="icon-edit"
               sort="1" isShow="1" scope="org-user-editprofile"/>
 
     </menu>

@@ -67,14 +67,13 @@ public class UserServiceImplWrapper implements org.tinygroup.sdpm.org.service.in
             throw new RuntimeException(String.format("服务[%s]发生异常", serviceId), e);
         }
     }
-
+    @CacheGet(key = "${account}", group = CACHE_USER_ACCOUNT)
     public org.tinygroup.sdpm.org.dao.pojo.OrgUser findUserByAccount(java.lang.String account) {
         String serviceId = "findUserByAccount";
 
         try {
             Context context = new ContextImpl();
             context.put("account", account);
-
             return callServiceAndCallBack(serviceId, context);
         } catch (Exception e) {
             throw new RuntimeException(String.format("服务[%s]发生异常", serviceId), e);
