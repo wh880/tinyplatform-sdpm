@@ -27,8 +27,10 @@ import org.tinygroup.sdpm.org.dao.OrgUserDao;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.tinysqldsl.*;
 import org.tinygroup.tinysqldsl.base.Condition;
+import org.tinygroup.tinysqldsl.base.FragmentSql;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
+import org.tinygroup.tinysqldsl.select.Join;
 import org.tinygroup.tinysqldsl.select.OrderByElement;
 
 import java.io.Serializable;
@@ -36,6 +38,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.tinygroup.sdpm.org.dao.constant.OrgUserTable.ORG_USERTABLE;
+import static org.tinygroup.sdpm.org.dao.constant.OrgDeptTable.ORG_DEPTTABLE;
 import static org.tinygroup.sdpm.project.dao.constant.ProjectTeamTable.PROJECT_TEAMTABLE;
 import static org.tinygroup.tinysqldsl.Delete.delete;
 import static org.tinygroup.tinysqldsl.Insert.insertInto;
@@ -43,6 +46,7 @@ import static org.tinygroup.tinysqldsl.Select.select;
 import static org.tinygroup.tinysqldsl.Select.selectFrom;
 import static org.tinygroup.tinysqldsl.Update.update;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
+import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.or;
 import static org.tinygroup.tinysqldsl.formitem.SubSelect.subSelect;
 
 @Repository
@@ -179,12 +183,17 @@ public class OrgUserDaoImpl extends TinyDslDaoSupport implements OrgUserDao {
 
     public List<OrgUser> userInCondition(String condition, String... ids) {
         Condition con = null;
-        if (ArrayUtil.isEmptyArray(ids)) {
-            con = ORG_USERTABLE.ORG_USER_ID.in(ids);
+        if (ids!=null) {
+            con = ORG_USERTABLE.ORG_USER_ID.in(ids.length==0?0:ids);
         }
-        Select select = MysqlSelect.select(ORG_USERTABLE.ORG_USER_ID, ORG_USERTABLE.ORG_USER_REAL_NAME).
-                from(ORG_USERTABLE).
-                where(and(ORG_USERTABLE.ORG_USER_DELETED.eq(0), ORG_USERTABLE.ORG_USER_REAL_NAME.like(condition), con)).limit(0, 8);
+        Select select = MysqlSelect.select(ORG_USERTABLE.ORG_USER_ID,
+                FragmentSql.fragmentSelect("CONCAT (org_dept_name,CASE WHEN org_dept_name IS NOT NULL THEN '-' ELSE ''END,org_user_real_name,'-',org_user_account) as orgUserRealName")).
+                from(ORG_USERTABLE).join(
+                Join.leftJoin(ORG_DEPTTABLE, ORG_DEPTTABLE.ORG_DEPT_ID.eq(ORG_USERTABLE.ORG_DEPT_ID))
+        ).where(and(ORG_USERTABLE.ORG_USER_DELETED.eq(0),
+                or(ORG_USERTABLE.ORG_USER_REAL_NAME.like(condition),
+                        ORG_USERTABLE.ORG_USER_ACCOUNT.like(condition),
+                        ORG_DEPTTABLE.ORG_DEPT_NAME.like(condition)), con)).limit(0, 8);
         return getDslSession().fetchList(select, OrgUser.class);
     }
 
