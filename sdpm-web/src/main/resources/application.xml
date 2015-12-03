@@ -13,6 +13,8 @@
         <!--缓存配置-->
         <property name="cache_region" value="sessionCache"></property>
         <property name="cache_manager" value="ehCacheManager"></property>
+        <!--aop 缓存配置-->
+        <property name="aop_cache_region" value="aopCache"></property>
 
         <!-- 如果没有指定语言或指定语言的内容找不到，则从默认语言查找 -->
         <property name="TINY_DEFAULT_LOCALE" value="zh_CN"/>

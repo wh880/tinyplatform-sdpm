@@ -16,23 +16,23 @@
       <service-parameters>
         <service-parameter name="doc" type="org.tinygroup.sdpm.document.dao.pojo.DocumentDoc" required="false" is-array="false"/>
       </service-parameters>
-      <service-result name="editDocResult" required="false" is-array="false" type="int"/>
+      <service-result name="editDocResult" required="false" is-array="false" type="java.lang.Integer"/>
     </service-method>
     <service-method local-name="editDocLibName" service-id="editDocLibName" method-name="editDocLibName" cacheable="false" category="org.tinygroup.sdpm.document.service.impl">
       <service-parameters>
         <service-parameter name="docLib" type="org.tinygroup.sdpm.document.dao.pojo.DocumentDocLib" required="false" is-array="false"/>
       </service-parameters>
-      <service-result name="editDocLibNameResult" required="false" is-array="false" type="int"/>
+      <service-result name="editDocLibNameResult" required="false" is-array="false" type="java.lang.Integer"/>
     </service-method>
     <service-method local-name="findDocById" service-id="findDocById" method-name="findDocById" cacheable="false" category="org.tinygroup.sdpm.document.service.impl">
       <service-parameters>
-        <service-parameter name="id" type="Integer" required="false" is-array="false"/>
+        <service-parameter name="id" type="java.lang.Integer" required="false" is-array="false"/>
       </service-parameters>
       <service-result name="findDocByIdResult" required="false" is-array="false" type="org.tinygroup.sdpm.document.dao.pojo.DocumentDoc"/>
     </service-method>
     <service-method local-name="findDocLibById" service-id="findDocLibById" method-name="findDocLibById" cacheable="false" category="org.tinygroup.sdpm.document.service.impl">
       <service-parameters>
-        <service-parameter name="id" type="Integer" required="false" is-array="false"/>
+        <service-parameter name="id" type="java.lang.Integer" required="false" is-array="false"/>
       </service-parameters>
       <service-result name="findDocLibByIdResult" required="false" is-array="false" type="org.tinygroup.sdpm.document.dao.pojo.DocumentDocLib"/>
     </service-method>
@@ -50,70 +50,60 @@
     </service-method>
     <service-method local-name="findDocRetProductPager" service-id="findDocRetProductPager" method-name="findDocRetProductPager" cacheable="false" category="org.tinygroup.sdpm.document.service.impl">
       <service-parameters>
-        <service-parameter name="start" type="Integer" required="false" is-array="false"/>
-        <service-parameter name="limit" type="Integer" required="false" is-array="false"/>
+        <service-parameter name="start" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="limit" type="java.lang.Integer" required="false" is-array="false"/>
         <service-parameter name="doc" type="org.tinygroup.sdpm.document.dao.pojo.DocumentDoc" required="false" is-array="false"/>
-        <service-parameter name="moduleId" type="Integer" required="false" is-array="false"/>
+        <service-parameter name="moduleId" type="java.lang.Integer" required="false" is-array="false"/>
         <service-parameter name="conditions" type="org.tinygroup.sdpm.dao.complexsearch.SearchInfos" required="false" is-array="false"/>
-        <service-parameter name="groupOperate" type="String" required="false" is-array="false"/>
-        <service-parameter name="sortName" type="String" required="false" is-array="false"/>
+        <service-parameter name="groupOperate" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="sortName" type="java.lang.String" required="false" is-array="false"/>
         <service-parameter name="asc" type="boolean" required="false" is-array="false"/>
       </service-parameters>
       <service-result name="findDocRetProductPagerResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager"/>
     </service-method>
     <service-method local-name="findDocRetProjectPager" service-id="findDocRetProjectPager" method-name="findDocRetProjectPager" cacheable="false" category="org.tinygroup.sdpm.document.service.impl">
       <service-parameters>
-        <service-parameter name="start" type="Integer" required="false" is-array="false"/>
-        <service-parameter name="limit" type="Integer" required="false" is-array="false"/>
+        <service-parameter name="start" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="limit" type="java.lang.Integer" required="false" is-array="false"/>
         <service-parameter name="doc" type="org.tinygroup.sdpm.document.dao.pojo.DocumentDoc" required="false" is-array="false"/>
-        <service-parameter name="moduleId" type="Integer" required="false" is-array="false"/>
+        <service-parameter name="moduleId" type="java.lang.Integer" required="false" is-array="false"/>
         <service-parameter name="conditions" type="org.tinygroup.sdpm.dao.complexsearch.SearchInfos" required="false" is-array="false"/>
-        <service-parameter name="groupOperate" type="String" required="false" is-array="false"/>
-        <service-parameter name="sortName" type="String" required="false" is-array="false"/>
+        <service-parameter name="groupOperate" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="sortName" type="java.lang.String" required="false" is-array="false"/>
         <service-parameter name="asc" type="boolean" required="false" is-array="false"/>
       </service-parameters>
       <service-result name="findDocRetProjectPagerResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager"/>
     </service-method>
     <service-method local-name="findDocRetPager" service-id="findDocRetPager" method-name="findDocRetPager" cacheable="false" category="org.tinygroup.sdpm.document.service.impl">
       <service-parameters>
-        <service-parameter name="start" type="Integer" required="false" is-array="false"/>
-        <service-parameter name="limit" type="Integer" required="false" is-array="false"/>
+        <service-parameter name="start" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="limit" type="java.lang.Integer" required="false" is-array="false"/>
         <service-parameter name="doc" type="org.tinygroup.sdpm.document.dao.pojo.DocumentDoc" required="false" is-array="false"/>
-        <service-parameter name="moduleId" type="Integer" required="false" is-array="false"/>
+        <service-parameter name="moduleId" type="java.lang.Integer" required="false" is-array="false"/>
         <service-parameter name="conditions" type="org.tinygroup.sdpm.dao.complexsearch.SearchInfos" required="false" is-array="false"/>
-        <service-parameter name="groupOperate" type="String" required="false" is-array="false"/>
-        <service-parameter name="sortName" type="String" required="false" is-array="false"/>
+        <service-parameter name="groupOperate" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="sortName" type="java.lang.String" required="false" is-array="false"/>
         <service-parameter name="asc" type="boolean" required="false" is-array="false"/>
       </service-parameters>
       <service-result name="findDocRetPagerResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager"/>
     </service-method>
-    <service-method local-name="findDocLibRetPager" service-id="findDocLibRetPager" method-name="findDocLibRetPager" cacheable="false" category="org.tinygroup.sdpm.document.service.impl">
-      <service-parameters>
-        <service-parameter name="start" type="Integer" required="false" is-array="false"/>
-        <service-parameter name="limit" type="Integer" required="false" is-array="false"/>
-        <service-parameter name="docLib" type="org.tinygroup.sdpm.document.dao.pojo.DocumentDocLib" required="false" is-array="false"/>
-        <service-parameter name="sortName" type="String" required="false" is-array="false"/>
-        <service-parameter name="asc" type="boolean" required="false" is-array="false"/>
-      </service-parameters>
-      <service-result name="findDocLibRetPagerResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager"/>
-    </service-method>
     <service-method local-name="deleteDocById" service-id="deleteDocById" method-name="deleteDocById" cacheable="false" category="org.tinygroup.sdpm.document.service.impl">
       <service-parameters>
-        <service-parameter name="id" type="Integer" required="false" is-array="false"/>
+        <service-parameter name="id" type="java.lang.Integer" required="false" is-array="false"/>
       </service-parameters>
-      <service-result name="deleteDocByIdResult" required="false" is-array="false" type="int"/>
+      <service-result name="deleteDocByIdResult" required="false" is-array="false" type="java.lang.Integer"/>
     </service-method>
     <service-method local-name="deleteDocLibById" service-id="deleteDocLibById" method-name="deleteDocLibById" cacheable="false" category="org.tinygroup.sdpm.document.service.impl">
       <service-parameters>
-        <service-parameter name="id" type="Integer" required="false" is-array="false"/>
+        <service-parameter name="id" type="java.lang.Integer" required="false" is-array="false"/>
       </service-parameters>
-      <service-result name="deleteDocLibByIdResult" required="false" is-array="false" type="int"/>
+      <service-result name="deleteDocLibByIdResult" required="false" is-array="false" type="java.lang.Integer"/>
     </service-method>
     <service-method local-name="deleteDocByIds" service-id="deleteDocByIds" method-name="deleteDocByIds" cacheable="false" category="org.tinygroup.sdpm.document.service.impl">
       <service-parameters>
         <service-parameter name="ids" type="org.tinygroup.sdpm.document.dao.pojo.DocumentDoc" collection-type="java.util.List" required="false" is-array="false"/>
       </service-parameters>
-      <service-result name="deleteDocByIdsResult" required="false" is-array="true" type="int"/>
+      <service-result name="deleteDocByIdsResult" required="false" is-array="false" type="java.lang.Integer"/>
     </service-method>
   </service-component>
 </service-components>

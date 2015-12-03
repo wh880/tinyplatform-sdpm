@@ -44,7 +44,7 @@ public class DocumentAction extends BaseController {
 
     public static final String COOKIE_DOCLIB_ID = "documentLibId";
     @Autowired
-    private DocService docservice;
+    private DocService docService;
     @Autowired
     private ProductService productService;
     @Autowired
@@ -76,7 +76,7 @@ public class DocumentAction extends BaseController {
             CookieUtils.setCookie(response, COOKIE_DOCLIB_ID, documentLibId.toString());
         } else {
             if (null == documentLibId) {
-                List<DocumentDocLib> list = docservice.findDocLibList(null);
+                List<DocumentDocLib> list = docService.findDocLibList(null);
                 if (list != null && !list.isEmpty()) {
                     documentLibId = list.get(0).getDocLibId().toString();
                     CookieUtils.setCookie(response, COOKIE_DOCLIB_ID, documentLibId.toString());
@@ -251,14 +251,14 @@ public class DocumentAction extends BaseController {
         if ("desc".equals(ordertype)) {
             asc = false;
         }
-        Pager<DocumentDoc> docpager = docservice.findDocRetPager(start, limit, doc, null,searchInfos, groupOperate, NameUtil.resolveNameDesc(order), asc);
+        Pager<DocumentDoc> docpager = docService.findDocRetPager(start, limit, doc, null,searchInfos, groupOperate, NameUtil.resolveNameDesc(order), asc);
         model.addAttribute("pager", docpager);
         return "/product/data/doc/archivedata.pagelet";
     }
 
     @RequestMapping("/product/findDoc")
     public String findDocument(Integer docId, Model model) {
-        DocumentDoc doc = docservice.findDocById(docId);
+        DocumentDoc doc = docService.findDocById(docId);
         model.addAttribute("doc", doc);
         return "/document/doc-edit.page";
     }
@@ -270,7 +270,7 @@ public class DocumentAction extends BaseController {
                                UploadProfile uploadProfile) throws IOException {
         if ("save".equals(type)) {
             doc.setDocAddedBy(userUtils.getUserId());
-            DocumentDoc document = docservice.createNewDoc(doc);
+            DocumentDoc document = docService.createNewDoc(doc);
 
             processProfile(uploadProfile, doc.getDocId(), ProfileType.DOCUMENT);
 
@@ -284,8 +284,8 @@ public class DocumentAction extends BaseController {
                     null,
                     null);
         } else {
-            DocumentDoc document = docservice.findDocById(doc.getDocId());
-            docservice.editDoc(doc);
+            DocumentDoc document = docService.findDocById(doc.getDocId());
+            docService.editDoc(doc);
             LogUtil.logWithComment(LogUtil.LogOperateObject.DOC,
                     LogUtil.LogAction.EDITED,
                     String.valueOf(document.getDocId()),
@@ -305,7 +305,7 @@ public class DocumentAction extends BaseController {
     @ResponseBody
     @RequestMapping("/docList")
     public List<DocumentDoc> findDocumentDoc(DocumentDoc doc) {
-        return docservice.findDocList(doc);
+        return docService.findDocList(doc);
     }
 
     //测试页面专用
@@ -322,7 +322,7 @@ public class DocumentAction extends BaseController {
             DocumentDoc doc = new DocumentDoc();
             doc.setDocTitle(docTitle);
             doc.setDocModule(docModule);
-            List<DocumentDoc> documentDocs = docservice.findDocList(doc);
+            List<DocumentDoc> documentDocs = docService.findDocList(doc);
             if (documentDocs.size() != 0) {
                 if (docId == null) {
                     return resultMap(false, "该文档已存在");

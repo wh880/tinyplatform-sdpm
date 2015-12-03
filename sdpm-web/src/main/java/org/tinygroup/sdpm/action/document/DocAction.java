@@ -46,7 +46,7 @@ public class DocAction extends BaseController {
     public static final String COOKIE_DOC_LIB_ID = "documentLibId";
 
     @Autowired
-    private DocService docservice;
+    private DocService docService;
     @Autowired
     private ProductService productService;
     @Autowired
@@ -93,19 +93,19 @@ public class DocAction extends BaseController {
         if (!StringUtil.isBlank(moduleId)) {
             if (moduleId.contains("p") && libId == 1) {
                 doc.setDocProduct(Integer.parseInt(moduleId.substring(1)));
-                pager = docservice.findDocRetPager(limit * (page - 1), limit, doc, null, searchInfos, groupOperate, order, asc);
+                pager = docService.findDocRetPager(limit * (page - 1), limit, doc, null, searchInfos, groupOperate, order, asc);
             } else if (moduleId.contains("p") && libId == 2) {
                 doc.setDocProject(Integer.parseInt(moduleId.substring(1)));
-                pager = docservice.findDocRetPager(limit * (page - 1), limit, doc, null, searchInfos, groupOperate, order, asc);
+                pager = docService.findDocRetPager(limit * (page - 1), limit, doc, null, searchInfos, groupOperate, order, asc);
             } else if ("productDoc".equals(moduleService.findById(Integer.valueOf(moduleId)).getModuleType())) {
-                pager = docservice.findDocRetProductPager(limit * (page - 1), limit, doc, Integer.parseInt(moduleId), searchInfos, groupOperate, order, asc);
+                pager = docService.findDocRetProductPager(limit * (page - 1), limit, doc, Integer.parseInt(moduleId), searchInfos, groupOperate, order, asc);
             } else if ("projectDoc".equals(moduleService.findById(Integer.valueOf(moduleId)).getModuleType())) {
-                pager = docservice.findDocRetProjectPager(limit * (page - 1), limit, doc, Integer.parseInt(moduleId),searchInfos, groupOperate, order, asc);
+                pager = docService.findDocRetProjectPager(limit * (page - 1), limit, doc, Integer.parseInt(moduleId),searchInfos, groupOperate, order, asc);
             } else if ("doc".equals(moduleService.findById(Integer.valueOf(moduleId)).getModuleType())) {
-                pager = docservice.findDocRetPager(limit * (page - 1), limit, doc,Integer.parseInt(moduleId),searchInfos, groupOperate, order, asc);
+                pager = docService.findDocRetPager(limit * (page - 1), limit, doc,Integer.parseInt(moduleId),searchInfos, groupOperate, order, asc);
             }
         } else {
-            pager = docservice.findDocRetPager(limit * (page - 1), limit, doc,null, searchInfos, groupOperate, order, asc);
+            pager = docService.findDocRetPager(limit * (page - 1), limit, doc,null, searchInfos, groupOperate, order, asc);
             model.addAttribute("pager", pager);
         }
         model.addAttribute("pager", pager);
@@ -162,7 +162,7 @@ public class DocAction extends BaseController {
         doc.setDocLibId(Integer.parseInt(CookieUtils.getCookie(request, DocAction.COOKIE_DOC_LIB_ID)));
         doc.setDocDeleted("0");
         doc.setDocAddedBy(userUtils.getUser().getOrgUserId());
-        DocumentDoc document = docservice.createNewDoc(doc);
+        DocumentDoc document = docService.createNewDoc(doc);
         processProfile(uploadProfile, document.getDocId(), ProfileType.DOCUMENT);
 
         model.addAttribute("productList", product);
@@ -198,11 +198,11 @@ public class DocAction extends BaseController {
     public String editDoc(Model model, Integer docId) {
         SystemModule module = new SystemModule();
         module.setModuleType("doc");
-        DocumentDoc doc = docservice.findDocById(docId);
+        DocumentDoc doc = docService.findDocById(docId);
         List<Product> list1 = productService.findProductList(new Product());
         List<Project> list2 = projectService.findList();
         List<SystemModule> listModule = moduleService.findModuleList(module);
-        List<DocumentDocLib> libList = docservice.findDocLibList(null);
+        List<DocumentDocLib> libList = docService.findDocLibList(null);
 
         SystemProfile systemProfile = new SystemProfile();
         systemProfile.setFileObjectId(docId);
@@ -230,9 +230,9 @@ public class DocAction extends BaseController {
                            String lastAddress,
                            SystemAction systemAction,
                            UploadProfile uploadProfile) throws IOException {
-        DocumentDoc documentDoc = docservice.findDocById(doc.getDocId());
+        DocumentDoc documentDoc = docService.findDocById(doc.getDocId());
         doc.setDocEditedBy(userUtils.getUser().getOrgUserId());
-        docservice.editDoc(doc);
+        docService.editDoc(doc);
 
         processProfile(uploadProfile, doc.getDocId(), ProfileType.DOCUMENT);
 
@@ -260,12 +260,12 @@ public class DocAction extends BaseController {
      */
     @RequestMapping("/view")
     public String docView(Model model, Integer docid) {
-        DocumentDoc doc = docservice.findDocById(docid);
+        DocumentDoc doc = docService.findDocById(docid);
         if (doc == null) {
             return notFoundView();
         }
         if (doc.getDocLibId() != null) {
-            DocumentDocLib docLib = docservice.findDocLibById(doc.getDocLibId());
+            DocumentDocLib docLib = docService.findDocLibById(doc.getDocLibId());
             model.addAttribute("docLib", docLib);
         }
         SystemProfile systemProfile = new SystemProfile();
@@ -287,8 +287,8 @@ public class DocAction extends BaseController {
      */
     @RequestMapping("/viewInfo")
     public String viewInfo(HttpServletRequest request, Integer docId, Model model) {
-        DocumentDoc doc = docservice.findDocById(docId);
-        DocumentDocLib docLib = docservice.findDocLibById(doc.getDocLibId());
+        DocumentDoc doc = docService.findDocById(docId);
+        DocumentDocLib docLib = docService.findDocLibById(doc.getDocLibId());
         System.out.println(doc.getDocModule() != 0 && doc.getDocModule() != null);
         if (doc.getDocModule() != 0 && doc.getDocModule() != null) {
             SystemModule module = moduleService.findById(doc.getDocModule());
@@ -312,7 +312,7 @@ public class DocAction extends BaseController {
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String saveDoc(HttpServletRequest request, DocumentDoc doc, Model model) {
         if (doc.getDocId() == null || doc.getDocId() == 0) {
-            doc = docservice.createNewDoc(doc);
+            doc = docService.createNewDoc(doc);
             LogUtil.logWithComment(LogUtil.LogOperateObject.DOC,
                     LogUtil.LogAction.CREATED,
                     String.valueOf(doc.getDocId()),
@@ -323,7 +323,7 @@ public class DocAction extends BaseController {
                     null,
                     null);
         } else {
-            docservice.editDoc(doc);
+            docService.editDoc(doc);
         }
         return "redirect:" + adminPath + "/document";
     }
@@ -338,7 +338,7 @@ public class DocAction extends BaseController {
     @ResponseBody
     @RequestMapping(value = "/delete")
     public Map delDoc(Integer id) {
-        docservice.deleteDocById(id);
+        docService.deleteDocById(id);
         return resultMap(true, "删除成功");
     }
 
@@ -362,7 +362,7 @@ public class DocAction extends BaseController {
             doc.setDocDeleted("1");
             list.add(doc);
         }
-        docservice.deleteDocByIds(list);
+        docService.deleteDocByIds(list);
         return resultMap(true, "删除成功");
     }
 

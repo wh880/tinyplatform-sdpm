@@ -107,6 +107,7 @@
     <!-- 缓存配置 -->
     <bean id="ecacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
         <property name="configLocation" value="classpath:ehcache.xml"/>
+        <property name="shared" value="true"/>
     </bean>
 
     <bean class="org.tinygroup.sdpm.security.SystemRealm" id="systemRealm"/>

@@ -1,7 +1,7 @@
 #sdpm
 
 warpper工程的包名：
-org.tinygroup.sdpm.${模块}.wrapper
+org.tinygroup.sdpm..wrapper
 
 biz接口类包名：
 org.tinygroup.sdpm.${模块}.biz.inter
