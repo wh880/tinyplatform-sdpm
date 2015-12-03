@@ -47,6 +47,11 @@
             <artifactId>sdpm-common-common</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>sdpm-common-view</artifactId>
+            <version>${project.version}</version>
+        </dependency>
 
         <!--org-->
         <dependency>
@@ -99,11 +104,7 @@
             <artifactId>sdpm-system-service-wrapper</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.tinygroup</groupId>
-            <artifactId>sdpm-common-view</artifactId>
-            <version>${project.version}</version>
-        </dependency>
+
 
         <!-- quality -->
         <dependency>

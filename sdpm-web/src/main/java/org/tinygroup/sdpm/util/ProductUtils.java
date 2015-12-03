@@ -7,12 +7,7 @@ import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.sdpm.productLine.service.ProductLineService;
-import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
-import org.tinygroup.sdpm.project.dao.pojo.ProjectTeam;
-import org.tinygroup.sdpm.project.service.inter.ProjectProductService;
-import org.tinygroup.sdpm.project.service.inter.TeamService;
 
-import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,10 +23,6 @@ public class ProductUtils {
     private ProductService productService;
     @Autowired
     private ProductLineService productLineService;
-    @Autowired
-    private ProjectProductService projectProductService;
-    @Autowired
-    private TeamService teamService;
 
     /**
      * 获得产品线列表
