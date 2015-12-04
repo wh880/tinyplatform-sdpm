@@ -31,7 +31,7 @@ public class CaseStepServiceImpl implements CaseStepService {
         return caseStepManager.findList(caseStep);
     }
 
-    public Integer getMaxVersion(Integer caseId) {
+    public Integer getCaseMaxVersion(Integer caseId) {
         return caseStepManager.getMaxVersion(caseId);
     }
 }

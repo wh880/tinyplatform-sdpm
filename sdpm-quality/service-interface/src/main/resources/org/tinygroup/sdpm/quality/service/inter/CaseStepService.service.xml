@@ -24,11 +24,11 @@
       </service-parameters>
       <service-result name="findCaseStepListResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.quality.dao.pojo.QualityCaseStep"/>
     </service-method>
-    <service-method local-name="getMaxVersion" service-id="getMaxVersion" method-name="getMaxVersion" cacheable="false" category="org.tinygroup.sdpm.quality.service.inter">
+    <service-method local-name="getCaseMaxVersion" service-id="getCaseMaxVersion" method-name="getCaseMaxVersion" cacheable="false" category="org.tinygroup.sdpm.quality.service.inter">
       <service-parameters>
         <service-parameter name="caseId" type="java.lang.Integer" required="false" is-array="false"/>
       </service-parameters>
-      <service-result name="getMaxVersionResult" required="false" is-array="false" type="java.lang.Integer"/>
+      <service-result name="getCaseMaxVersionResult" required="false" is-array="false" type="java.lang.Integer"/>
     </service-method>
   </service-component>
 </service-components>

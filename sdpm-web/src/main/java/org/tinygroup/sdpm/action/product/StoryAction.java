@@ -413,7 +413,7 @@ public class StoryAction extends BaseController {
             @RequestParam(value = "file", required = false) MultipartFile[] file,
             String[] title,
             UploadProfile uploadProfile) throws IOException {
-        Integer maxVersion = storySpecService.getMaxVersion(productStory.getStoryId());
+        Integer maxVersion = storySpecService.getStoryMaxVersion(productStory.getStoryId());
         ProductStory story = storyService.findStory(productStory.getStoryId());
         if (productStory.getStoryReviewedBy().equals("0")) {
             productStory.setStoryStatus("1");

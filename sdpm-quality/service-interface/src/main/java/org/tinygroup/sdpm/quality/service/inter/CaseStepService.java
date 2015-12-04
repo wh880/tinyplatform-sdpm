@@ -39,5 +39,5 @@ public interface CaseStepService {
      * @param caseId
      * @return
      */
-    Integer getMaxVersion(Integer caseId);
+    Integer getCaseMaxVersion(Integer caseId);
 }

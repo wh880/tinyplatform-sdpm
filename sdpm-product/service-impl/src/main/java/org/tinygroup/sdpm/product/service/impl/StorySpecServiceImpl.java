@@ -30,7 +30,7 @@ public class StorySpecServiceImpl implements StorySpecService {
         return storySpecManager.findPager(page, limit, storySpec, order, ordertype);
     }
 
-    public Integer getMaxVersion(Integer storyId) {
+    public Integer getStoryMaxVersion(Integer storyId) {
         return storySpecManager.getMaxVersion(storyId);
     }
 
