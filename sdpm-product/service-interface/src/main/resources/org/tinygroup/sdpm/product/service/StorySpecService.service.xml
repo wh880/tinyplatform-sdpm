@@ -31,11 +31,11 @@
       </service-parameters>
       <service-result name="findStorySpecPagerResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager"/>
     </service-method>
-    <service-method local-name="getMaxVersion" service-id="getMaxVersion" method-name="getMaxVersion" cacheable="false" category="org.tinygroup.sdpm.product.service">
+    <service-method local-name="getStoryMaxVersion" service-id="getStoryMaxVersion" method-name="getStoryMaxVersion" cacheable="false" category="org.tinygroup.sdpm.product.service">
       <service-parameters>
         <service-parameter name="storyId" type="java.lang.Integer" required="false" is-array="false"/>
       </service-parameters>
-      <service-result name="getMaxVersionResult" required="false" is-array="false" type="java.lang.Integer"/>
+      <service-result name="getStoryMaxVersionResult" required="false" is-array="false" type="java.lang.Integer"/>
     </service-method>
   </service-component>
 </service-components>
