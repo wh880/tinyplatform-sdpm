@@ -547,7 +547,7 @@ public class BugAction extends BaseController {
     @RequiresPermissions("bug-add")
     @RequestMapping("/add")
     public String add(Model model) {
-        List<Project> projects = projectService.findListByRelatedUser(UserUtils.getUserId());
+        List<Project> projects = projectService.getUserProjectList(UserUtils.getUserId());
         List<OrgUser> orgUsers = userService.findUserList(null);
         model.addAttribute("projectList", projects);
         model.addAttribute("userList", orgUsers);

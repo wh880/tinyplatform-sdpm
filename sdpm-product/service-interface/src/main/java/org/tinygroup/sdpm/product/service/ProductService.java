@@ -16,8 +16,6 @@ public interface ProductService {
     String CACHE_USER_PRODUCTS_LIST_WITH_COUNT = "userProductListWithCount";
     String CACHE_USER_PRODUCTS_LIST_WITH_LINE_COUNT = "userProductListWithLineCount";
     String CACHE_PRODUCT_NAME_BY_LINE_ID = "productNameListByLine";
-    static String[] REMOVE_GROUP = {};
-
 
     /**
      * 添加产品
