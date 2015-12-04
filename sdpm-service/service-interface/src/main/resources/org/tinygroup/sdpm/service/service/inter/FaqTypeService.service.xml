@@ -1,0 +1,34 @@
+<service-components>
+  <service-component type="org.tinygroup.sdpm.service.service.inter.FaqTypeService" bean="faqTypeServiceImpl">
+    <service-method local-name="findFaqType" service-id="findFaqType" method-name="findFaqType" cacheable="false" category="org.tinygroup.sdpm.service.service.inter">
+      <service-parameters>
+        <service-parameter name="id" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findFaqTypeResult" required="false" is-array="false" type="org.tinygroup.sdpm.service.dao.pojo.ServiceFaqType"/>
+    </service-method>
+    <service-method local-name="getFaqTypeList" service-id="getFaqTypeList" method-name="getFaqTypeList" cacheable="false" category="org.tinygroup.sdpm.service.service.inter">
+      <service-parameters>
+        <service-parameter name="faqType" type="org.tinygroup.sdpm.service.dao.pojo.ServiceFaqType" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="getFaqTypeListResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.service.dao.pojo.ServiceFaqType"/>
+    </service-method>
+    <service-method local-name="addFaqType" service-id="addFaqType" method-name="addFaqType" cacheable="false" category="org.tinygroup.sdpm.service.service.inter">
+      <service-parameters>
+        <service-parameter name="faqType" type="org.tinygroup.sdpm.service.dao.pojo.ServiceFaqType" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="addFaqTypeResult" required="false" is-array="false" type="org.tinygroup.sdpm.service.dao.pojo.ServiceFaqType"/>
+    </service-method>
+    <service-method local-name="updateFaqType" service-id="updateFaqType" method-name="updateFaqType" cacheable="false" category="org.tinygroup.sdpm.service.service.inter">
+      <service-parameters>
+        <service-parameter name="faqType" type="org.tinygroup.sdpm.service.dao.pojo.ServiceFaqType" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="updateFaqTypeResult" required="false" is-array="false" type="org.tinygroup.sdpm.service.dao.pojo.ServiceFaqType"/>
+    </service-method>
+    <service-method local-name="deleteFaqType" service-id="deleteFaqType" method-name="deleteFaqType" cacheable="false" category="org.tinygroup.sdpm.service.service.inter">
+      <service-parameters>
+        <service-parameter name="id" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="deleteFaqTypeResult" required="false" is-array="false" type="java.lang.Integer"/>
+    </service-method>
+  </service-component>
+</service-components>

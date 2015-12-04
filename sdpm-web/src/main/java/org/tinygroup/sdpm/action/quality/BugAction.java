@@ -547,7 +547,7 @@ public class BugAction extends BaseController {
     @RequiresPermissions("bug-add")
     @RequestMapping("/add")
     public String add(Model model) {
-        List<Project> projects = projectService.findListByRelatedUser(UserUtils.getUserId());
+        List<Project> projects = projectService.getUserProjectList(UserUtils.getUserId());
         List<OrgUser> orgUsers = userService.findUserList(null);
         model.addAttribute("projectList", projects);
         model.addAttribute("userList", orgUsers);
@@ -578,7 +578,7 @@ public class BugAction extends BaseController {
         if (projectProduct.getProductId() == null/*||projectProduct.getProductId() < 1*/) {
             return new ArrayList<Project>();
         }
-        List<ProjectProduct> projectProducts = projectProductService.findProjects(projectProduct.getProductId());
+        List<ProjectProduct> projectProducts = projectProductService.findProjectByProductId(projectProduct.getProductId());
         List<Integer> ids = new ArrayList<Integer>();
         for (ProjectProduct projectProduct1 : projectProducts) {
             ids.add(projectProduct1.getProjectId());

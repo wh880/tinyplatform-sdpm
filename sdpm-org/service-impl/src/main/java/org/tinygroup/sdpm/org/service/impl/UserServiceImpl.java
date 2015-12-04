@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     public OrgUser findUser(String id) {
-        if(StringUtil.isBlank(id))return new OrgUser();
+        if (StringUtil.isBlank(id)) return new OrgUser();
         return userManager.find(id);
     }
 
@@ -103,8 +103,10 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     public OrgUser updateUser(OrgUser orgUser) {
-//        String password = orgUser.getOrgUserPassword();
-//        orgUser.setOrgUserPassword(userManager.encryptPassword(password));
+        if (!StringUtil.isBlank(orgUser.getOrgUserPassword())) {
+            String password = orgUser.getOrgUserPassword();
+            orgUser.setOrgUserPassword(userManager.encryptPassword(password));
+        }
         return userManager.update(orgUser);
     }
 

@@ -28,7 +28,6 @@ public class ProductServiceImpl implements ProductService {
     }
 
     public int deleteProduct(Integer productId) {
-
         return productManager.delete(productId);
     }
 
@@ -52,7 +51,6 @@ public class ProductServiceImpl implements ProductService {
     }
 
     public List<String> getProductNameByLineId(Integer productLineId) {
-
         return productManager.getProductNameByLineId(productLineId);
     }
 

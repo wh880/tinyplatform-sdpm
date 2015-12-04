@@ -818,7 +818,7 @@ public class ProjectTaskAction extends BaseController {
         for (SystemModule m : moduleList) {
             m.setModuleName(ModuleUtil.getPath(m.getModuleId(), "/", "", false));
         }
-        List<ProjectProduct> projectProductList = projectProductService.findProducts(projectId);
+        List<ProjectProduct> projectProductList = projectProductService.findProductListByProjectId(projectId);
         for (ProjectProduct pp : projectProductList) {
             module.setModuleType("story");
             module.setModuleRoot(pp.getProductId());

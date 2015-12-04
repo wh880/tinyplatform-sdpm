@@ -16,6 +16,7 @@ import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.service.inter.ActionService;
+import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -50,10 +51,10 @@ public class ActiveAction extends BaseController {
      */
     @RequiresPermissions("organizationActive")
     @RequestMapping("/show")
-    public String show(HttpServletRequest request, Model model) {
+    public String show(Model model) {
         List<OrgUser> userList = userService.findUserList(new OrgUser());
-        List<Product> productList = productService.findProductList(new Product());
-        List<Project> projectList = projectService.findAllProjectList();
+        List<Product> productList = productService.getProductByUser(UserUtils.getUserId(),Product.DELETE_NO,null);
+        List<Project> projectList = projectService.getUserProjectList(UserUtils.getUserId());
         model.addAttribute("userList", userList);
         model.addAttribute("productList", productList);
         model.addAttribute("projectList", projectList);

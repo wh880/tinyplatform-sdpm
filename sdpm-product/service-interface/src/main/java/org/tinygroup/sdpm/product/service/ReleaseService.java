@@ -23,14 +23,6 @@ public interface ReleaseService {
     int updateRelease(ProductRelease release);
 
     /**
-     * 批量编辑
-     *
-     * @param releases
-     * @return
-     */
-    int[] updateBatchRelease(List<ProductRelease> releases);
-
-    /**
      * 根据id进行软删除用户
      *
      * @param releaseId 主键
@@ -54,23 +46,15 @@ public interface ReleaseService {
      */
     List<ProductRelease> findReleaseList(ProductRelease release);
 
-    /**
-     * 根据多个ID查找
-     *
-     * @param releaseId
-     * @return
-     */
-    List<ProductRelease> findReleaseList(Integer... releaseId);
-
 
     /**
-     * 查找发布
+     * 查找发布,根据排序
      * @param productRelease
      * @param order
-     * @param ordertype
+     * @param orderType
      * @return
      */
-    List<ProductRelease> findReleaseList(ProductRelease productRelease, String order, String ordertype);
+    List<ProductRelease> findReleaseListByOrder(ProductRelease productRelease, String order, String orderType);
 
     /**
      * 分页查询
@@ -78,8 +62,8 @@ public interface ReleaseService {
      * @param limit
      * @param productRelease
      * @param order
-     * @param ordertype
+     * @param orderType
      * @return
      */
-    Pager<ProductRelease> findReleasePager(int page, int limit, ProductRelease productRelease, String order, String ordertype);
+    Pager<ProductRelease> findReleasePager(int page, int limit, ProductRelease productRelease, String order, String orderType);
 }

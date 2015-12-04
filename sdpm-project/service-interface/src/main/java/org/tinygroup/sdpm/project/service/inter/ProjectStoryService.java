@@ -2,7 +2,6 @@ package org.tinygroup.sdpm.project.service.inter;
 
 import org.tinygroup.sdpm.dao.complexsearch.SearchInfos;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
-import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectStory;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -21,8 +20,6 @@ public interface ProjectStoryService {
      * @return
      */
     int[] updateProjectStoryLink(List<ProjectStory> projectStoryList);
-
-    List<Project> findProjectsByStory(Integer storyId);
 
     /**
      * 通用查询
@@ -92,13 +89,9 @@ public interface ProjectStoryService {
 
     /**
      * 查询所有需求
-     *
-     * @param story
-     * @param statusCondition
-     * @param columnName
-     * @param asc
      * @param start
      * @param limit
+     * @param id
      * @param conditions
      * @param groupOperate
      * @return

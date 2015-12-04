@@ -10,10 +10,10 @@ public interface TestTaskService {
     /**
      * 通过条件查询
      *
-     * @param testtask
+     * @param qualityTestTask
      * @return
      */
-    List<QualityTestTask> findTestTaskList(QualityTestTask testtask);
+    List<QualityTestTask> findTestTaskList(QualityTestTask qualityTestTask);
 
     /**
      * 通过Id查询
@@ -26,47 +26,40 @@ public interface TestTaskService {
     /**
      * 提交测试
      *
-     * @param testtask
+     * @param qualityTestTask
      * @return
      */
-    QualityTestTask addTestTask(QualityTestTask testtask);
+    QualityTestTask addTestTask(QualityTestTask qualityTestTask);
 
     /**
      * 编辑测试
      *
-     * @param testtask
+     * @param qualityTestTask
      * @return
      */
-    int updateTestTask(QualityTestTask testtask);
+    int updateTestTask(QualityTestTask qualityTestTask);
 
-    /**
-     * 删除测试
-     *
-     * @param id
-     * @return
-     */
-    int deleteTestTaskById(int id);
 
     /**
      * 复合条件-排序-分页查询测试版本
      * @param start
      * @param limit
-     * @param testtask
+     * @param qualityTestTask
      * @param carrier
      * @param sortName
      * @param asc
      * @return
      */
-    Pager<QualityTestTask> findTestTaskPagerWithConditionCarrier(Integer start, Integer limit, QualityTestTask testtask, ConditionCarrier carrier, String sortName, boolean asc);
+    Pager<QualityTestTask> findTestTaskPagerWithConditionCarrier(Integer start, Integer limit, QualityTestTask qualityTestTask, ConditionCarrier carrier, String sortName, boolean asc);
 
     /**
      * 简单-排序-分页查询测试版本
      * @param start
      * @param limit
-     * @param testtask
+     * @param qualityTestTask
      * @param sortName
      * @param asc
      * @return
      */
-    Pager<QualityTestTask> findTestTaskPager(Integer start, Integer limit, QualityTestTask testtask, String sortName, boolean asc);
+    Pager<QualityTestTask> findTestTaskPager(Integer start, Integer limit, QualityTestTask qualityTestTask, String sortName, boolean asc);
 }

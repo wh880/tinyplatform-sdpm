@@ -56,10 +56,10 @@ public interface ProductLineService {
      * @param productLine
      * @param ids
      * @param order
-     * @param ordertype
+     * @param orderType
      * @return
      */
-    Pager<ProductLine> findProductLinePagerInIds(int start, int limit, ConditionCarrier carrier, ProductLine productLine, Integer[] ids, String order, String ordertype);
+    Pager<ProductLine> findProductLinePagerInIds(int start, int limit, ConditionCarrier carrier, ProductLine productLine, Integer[] ids, String order, String orderType);
 
     /**
      * 根据ids查询产品线

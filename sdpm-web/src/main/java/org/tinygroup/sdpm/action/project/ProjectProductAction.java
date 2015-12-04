@@ -38,7 +38,7 @@ public class ProjectProductAction extends BaseController {
             return redirectProjectForm();
         }
         Map<String, List<Product>> userProductsMap = productService.getUserProductsMap(userUtils.getUserId());
-        List<ProjectProduct> linkList = projectProductService.findProducts(projectId);
+        List<ProjectProduct> linkList = projectProductService.findProductListByProjectId(projectId);
         List<String> linkIdList = new ArrayList<String>();
         for (ProjectProduct p : linkList) {
             linkIdList.add(p.getProductId().toString());

@@ -19,10 +19,10 @@ public interface BugService {
 
     /**
      * 根据条件查询d
-     * @param bug
+     * @param qualityBug
      * @return
      */
-    List<QualityBug> findBugList(QualityBug bug);
+    List<QualityBug> findBugList(QualityBug qualityBug);
 
     /**
      * 提Bug
@@ -37,13 +37,6 @@ public interface BugService {
      * @return
      */
     int updateBug(QualityBug bug);
-
-    /**
-     * 批量修改
-     * @param bugs
-     * @return
-     */
-    int[] batchUpdateBug(List<QualityBug> bugs);
 
     /**
      * 批量删除

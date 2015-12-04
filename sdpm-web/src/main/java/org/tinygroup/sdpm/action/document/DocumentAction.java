@@ -147,7 +147,7 @@ public class DocumentAction extends BaseController {
         if (projectId == null) {
             return new ArrayList<Product>();
         }
-        List<ProjectProduct> projectProductList = projectProductService.findProducts(projectId);
+        List<ProjectProduct> projectProductList = projectProductService.findProductListByProjectId(projectId);
 
         List<Product> list2 = productService.findProductList(product);
         Integer[] i = new Integer[projectProductList.size()];

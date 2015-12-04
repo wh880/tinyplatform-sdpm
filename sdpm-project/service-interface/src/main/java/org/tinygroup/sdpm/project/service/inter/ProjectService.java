@@ -1,6 +1,9 @@
 package org.tinygroup.sdpm.project.service.inter;
 
 
+import org.tinygroup.aopcache.annotation.CacheGet;
+import org.tinygroup.aopcache.annotation.CachePut;
+import org.tinygroup.aopcache.annotation.CacheRemove;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -11,30 +14,14 @@ import java.util.List;
  * Created by shenly13343 on 2015-09-17.
  */
 public interface ProjectService {
-    String USER_CACHE_PROJECT_LIST = "userProjectList";
+    String CACHE_USER_PROJECT_LIST = "userProjectList";
+    String CACHE_PROJECT_ID = "projectId";
 
     /**
      * 获得用户所能见的项目列表
      */
-    List<Project> getUserProjectList(String userId);
-
-    /**
-     * 查找用户所在团队所拥有的项目
-     *
-     * @param userId OrgUser.Id
-     * @param acl    权限控制
-     * @return
-     */
-    List<Project> findListByTeamUserId(String userId, String acl);
-
-    /**
-     * 查找相关干系人的项目
-     * 查询条件OR
-     *
-     * @param userId
-     * @return
-     */
-    List<Project> findListByRelatedUser(String userId);
+    @CacheGet(key = "${userId}", group = CACHE_USER_PROJECT_LIST)
+    List<Project> getUserProjectList(String user111Id);
 
     /**
      * 新增项目，保证项目名称唯一
@@ -44,12 +31,6 @@ public interface ProjectService {
      */
     Project addProject(Project project);
 
-    /**
-     * 查找所有项目
-     *
-     * @return
-     */
-    List<Project> findAllProjectList();
 
     /**
      * 查询项目，包括统计总消耗等数据
@@ -65,6 +46,7 @@ public interface ProjectService {
      * @param projectIds
      * @return
      */
+    @CacheRemove(removeGroups = {CACHE_USER_PROJECT_LIST, CACHE_PROJECT_ID})
     Integer batchDeleteProject(Integer... projectIds);
 
     /**
@@ -84,6 +66,7 @@ public interface ProjectService {
      * @param projectId
      * @return
      */
+    @CacheGet(group = CACHE_PROJECT_ID, key = "${projectId}")
     Project findProjectById(Integer projectId);
 
     /**
@@ -100,23 +83,22 @@ public interface ProjectService {
      *
      * @param project
      * @param order
-     * @param ordertype
+     * @param orderType
      * @return
      */
-    List<Project> findProjectList(Project project, String order, String ordertype);
+    List<Project> findProjectList(Project project, String order, String orderType);
 
 
     /**
-     * 分页查询(排序)
-     *
+     *  分页查询(排序)
      * @param page
-     * @param pagesize
+     * @param pageSize
      * @param project
      * @param order
-     * @param ordertype
+     * @param orderType
      * @return
      */
-    Pager<Project> findProjectPager(int page, int pagesize, Project project, String order, String ordertype);
+    Pager<Project> findProjectPager(int page, int pageSize, Project project, String order, String orderType);
 
 
     /**
@@ -126,6 +108,7 @@ public interface ProjectService {
      * @param project
      * @return
      */
+    @CachePut(keys = "${project.projectId}", group = CACHE_PROJECT_ID, removeGroups = CACHE_USER_PROJECT_LIST)
     Integer updateProject(Project project);
 
     List<Project> getProjectByStoryId(Integer storyId);

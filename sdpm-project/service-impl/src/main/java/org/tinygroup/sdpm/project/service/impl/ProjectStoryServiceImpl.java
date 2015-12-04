@@ -11,7 +11,6 @@ import org.tinygroup.sdpm.project.biz.inter.BuildManager;
 import org.tinygroup.sdpm.project.biz.inter.ProjectManager;
 import org.tinygroup.sdpm.project.biz.inter.ProjectStoryManager;
 import org.tinygroup.sdpm.project.biz.inter.TaskManager;
-import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectStory;
 import org.tinygroup.sdpm.project.service.inter.ProjectStoryService;
 import org.tinygroup.tinysqldsl.Pager;
@@ -37,23 +36,6 @@ public class ProjectStoryServiceImpl implements ProjectStoryService {
 
     public int[] updateProjectStoryLink(List<ProjectStory> projectStoryList) {
         return projectStoryManager.updateLink(projectStoryList);
-    }
-
-    public List<Project> findProjectsByStory(Integer storyId) {
-        if (storyId == null) {
-            return null;
-        }
-        ProjectStory projectStory = new ProjectStory();
-        projectStory.setStoryId(storyId);
-        List<ProjectStory> projectStoryList = projectStoryManager.findList(projectStory);
-        if (projectStoryList.isEmpty() || projectStoryList == null) {
-            return null;
-        }
-        List<Integer> ids = new ArrayList<Integer>();
-        for (ProjectStory t : projectStoryList) {
-            ids.add(t.getStoryId());
-        }
-        return projectManager.findListByIds(ids);
     }
 
     public List<ProjectStory> findByProjectStory(ProjectStory projectStory) {

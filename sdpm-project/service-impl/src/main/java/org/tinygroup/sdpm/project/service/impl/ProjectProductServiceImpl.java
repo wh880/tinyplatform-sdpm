@@ -25,13 +25,13 @@ public class ProjectProductServiceImpl implements ProjectProductService {
         return projectProductManager.findLinkProductByProjectId(projectId);
     }
 
-    public List<ProjectProduct> findProducts(Integer projectId) {
+    public List<ProjectProduct> findProductListByProjectId(Integer projectId) {
         ProjectProduct projectProduct = new ProjectProduct();
         projectProduct.setProjectId(projectId);
         return projectProductManager.findList(projectProduct);
     }
 
-    public List<ProjectProduct> findProjects(Integer productId) {
+    public List<ProjectProduct> findProjectByProductId(Integer productId) {
         ProjectProduct projectProduct = new ProjectProduct();
         projectProduct.setProductId(productId);
         return projectProductManager.findList(projectProduct);

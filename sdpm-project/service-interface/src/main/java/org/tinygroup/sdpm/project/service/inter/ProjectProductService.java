@@ -31,7 +31,7 @@ public interface ProjectProductService {
      * @param projectId
      * @return
      */
-    List<ProjectProduct> findProducts(Integer projectId);
+    List<ProjectProduct> findProductListByProjectId(Integer projectId);
 
     /**
      * 通过prodcutId获得projectId列表
@@ -39,6 +39,6 @@ public interface ProjectProductService {
      * @param productId
      * @return
      */
-    List<ProjectProduct> findProjects(Integer productId);
+    List<ProjectProduct> findProjectByProductId(Integer productId);
 
 }

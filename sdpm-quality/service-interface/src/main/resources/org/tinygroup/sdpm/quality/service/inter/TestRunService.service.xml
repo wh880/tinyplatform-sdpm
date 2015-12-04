@@ -1,0 +1,45 @@
+<service-components>
+  <service-component type="org.tinygroup.sdpm.quality.service.inter.TestRunService" bean="testRunServiceImpl">
+    <service-method local-name="findTestRunList" service-id="findTestRunList" method-name="findTestRunList" cacheable="false" category="org.tinygroup.sdpm.quality.service.inter">
+      <service-parameters>
+        <service-parameter name="testRun" type="org.tinygroup.sdpm.quality.dao.pojo.QualityTestRun" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findTestRunListResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.quality.dao.pojo.QualityTestRun"/>
+    </service-method>
+    <service-method local-name="updateTestRun" service-id="updateTestRun" method-name="updateTestRun" cacheable="false" category="org.tinygroup.sdpm.quality.service.inter">
+      <service-parameters>
+        <service-parameter name="testrun" type="org.tinygroup.sdpm.quality.dao.pojo.QualityTestRun" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="updateTestRunResult" required="false" is-array="false" type="int"/>
+    </service-method>
+    <service-method local-name="addTestRun" service-id="addTestRun" method-name="addTestRun" cacheable="false" category="org.tinygroup.sdpm.quality.service.inter">
+      <service-parameters>
+        <service-parameter name="run" type="org.tinygroup.sdpm.quality.dao.pojo.QualityTestRun" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="addTestRunResult" required="false" is-array="false" type="org.tinygroup.sdpm.quality.dao.pojo.QualityTestRun"/>
+    </service-method>
+    <service-method local-name="findTestRunById" service-id="findTestRunById" method-name="findTestRunById" cacheable="false" category="org.tinygroup.sdpm.quality.service.inter">
+      <service-parameters>
+        <service-parameter name="id" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findTestRunByIdResult" required="false" is-array="false" type="org.tinygroup.sdpm.quality.dao.pojo.QualityTestRun"/>
+    </service-method>
+    <service-method local-name="deleteTestRun" service-id="deleteTestRun" method-name="deleteTestRun" cacheable="false" category="org.tinygroup.sdpm.quality.service.inter">
+      <service-parameters>
+        <service-parameter name="runId" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="deleteTestRunResult" required="false" is-array="false" type="int"/>
+    </service-method>
+    <service-method local-name="findTestRunPager" service-id="findTestRunPager" method-name="findTestRunPager" cacheable="false" category="org.tinygroup.sdpm.quality.service.inter">
+      <service-parameters>
+        <service-parameter name="start" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="limit" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="testRun" type="org.tinygroup.sdpm.quality.dao.pojo.QualityTestRun" required="false" is-array="false"/>
+        <service-parameter name="carrier" type="org.tinygroup.sdpm.dao.condition.ConditionCarrier" required="false" is-array="false"/>
+        <service-parameter name="sortName" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="asc" type="boolean" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findTestRunPagerResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager"/>
+    </service-method>
+  </service-component>
+</service-components>

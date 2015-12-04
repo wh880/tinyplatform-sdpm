@@ -17,8 +17,8 @@ public class BugServiceImpl implements BugService {
     @Autowired
     private BugManager bugmanager;
 
-    public List<QualityBug> findBugList(QualityBug bug){
-        return bugmanager.findList(bug);
+    public List<QualityBug> findBugList(QualityBug qualityBug){
+        return bugmanager.findList(qualityBug);
     }
 
     public QualityBug addBug(QualityBug bug){
@@ -32,10 +32,6 @@ public class BugServiceImpl implements BugService {
 
     public int updateBug(QualityBug bug){
         return bugmanager.update(bug);
-    }
-
-    public int[] batchUpdateBug(List<QualityBug> bugs){
-        return bugmanager.batchUpdate(bugs);
     }
 
     public Integer deleteBug(Integer bugId) {

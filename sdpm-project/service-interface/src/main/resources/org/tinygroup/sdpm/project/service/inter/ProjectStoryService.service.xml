@@ -1,0 +1,73 @@
+<service-components>
+  <service-component type="org.tinygroup.sdpm.project.service.inter.ProjectStoryService" bean="projectStoryServiceImpl">
+    <service-method local-name="updateProjectStoryLink" service-id="updateProjectStoryLink" method-name="updateProjectStoryLink" cacheable="false" category="org.tinygroup.sdpm.project.service.inter">
+      <service-parameters>
+        <service-parameter name="projectStoryList" type="org.tinygroup.sdpm.project.dao.pojo.ProjectStory" collection-type="java.util.List" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="updateProjectStoryLinkResult" required="false" is-array="true" type="int"/>
+    </service-method>
+    <service-method local-name="findByProjectStory" service-id="findByProjectStory" method-name="findByProjectStory" cacheable="false" category="org.tinygroup.sdpm.project.service.inter">
+      <service-parameters>
+        <service-parameter name="projectStory" type="org.tinygroup.sdpm.project.dao.pojo.ProjectStory" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findByProjectStoryResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.project.dao.pojo.ProjectStory"/>
+    </service-method>
+    <service-method local-name="batchDelStory" service-id="batchDelStory" method-name="batchDelStory" cacheable="false" category="org.tinygroup.sdpm.project.service.inter">
+      <service-parameters>
+        <service-parameter name="projectId" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="storyIds" type="java.lang.Integer" required="false" is-array="true"/>
+      </service-parameters>
+      <service-result name="batchDelStoryResult" required="false" is-array="false" type="java.lang.Integer"/>
+    </service-method>
+    <service-method local-name="addProjectStoryLink" service-id="addProjectStoryLink" method-name="addProjectStoryLink" cacheable="false" category="org.tinygroup.sdpm.project.service.inter">
+      <service-parameters>
+        <service-parameter name="projectStoryList" type="org.tinygroup.sdpm.project.dao.pojo.ProjectStory" collection-type="java.util.List" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="addProjectStoryLinkResult" required="false" is-array="true" type="int"/>
+    </service-method>
+    <service-method local-name="findStoryByProject" service-id="findStoryByProject" method-name="findStoryByProject" cacheable="false" category="org.tinygroup.sdpm.project.service.inter">
+      <service-parameters>
+        <service-parameter name="projectId" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findStoryByProjectResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.product.dao.pojo.ProductStory"/>
+    </service-method>
+    <service-method local-name="findStoryByProject" service-id="findStoryByProject_1" method-name="findStoryByProject" cacheable="false" category="org.tinygroup.sdpm.project.service.inter">
+      <service-parameters>
+        <service-parameter name="projectId" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="start" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="limit" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="order" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="ordertype" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="moduleId" type="java.lang.String" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findStoryByProjectResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager"/>
+    </service-method>
+    <service-method local-name="deleteProjectStory" service-id="deleteProjectStory" method-name="deleteProjectStory" cacheable="false" category="org.tinygroup.sdpm.project.service.inter">
+      <service-parameters>
+        <service-parameter name="projectId" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="storyId" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="deleteProjectStoryResult" required="false" is-array="false" type="java.lang.Integer"/>
+    </service-method>
+    <service-method local-name="findStoryToLink" service-id="findStoryToLink" method-name="findStoryToLink" cacheable="false" category="org.tinygroup.sdpm.project.service.inter">
+      <service-parameters>
+        <service-parameter name="projectId" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="start" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="limit" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="order" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="ordertype" type="java.lang.String" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findStoryToLinkResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager"/>
+    </service-method>
+    <service-method local-name="findStoryPager" service-id="findStoryPager" method-name="findStoryPager" cacheable="false" category="org.tinygroup.sdpm.project.service.inter">
+      <service-parameters>
+        <service-parameter name="start" type="int" required="false" is-array="false"/>
+        <service-parameter name="limit" type="int" required="false" is-array="false"/>
+        <service-parameter name="id" type="int" required="false" is-array="false"/>
+        <service-parameter name="conditions" type="org.tinygroup.sdpm.dao.complexsearch.SearchInfos" required="false" is-array="false"/>
+        <service-parameter name="groupOperate" type="java.lang.String" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findStoryPagerResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager"/>
+    </service-method>
+  </service-component>
+</service-components>

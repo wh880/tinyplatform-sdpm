@@ -25,15 +25,10 @@ public class ReleaseServiceImpl implements ReleaseService {
         return releaseManger.update(release);
     }
 
-    public int[] updateBatchRelease(List<ProductRelease> releases) {
 
-        return releaseManger.updateBatch(releases);
-    }
+    public List<ProductRelease> findReleaseListByOrder(ProductRelease productRelease, String order, String orderType) {
 
-
-    public List<ProductRelease> findReleaseList(ProductRelease productRelease, String order, String ordertype) {
-
-        return releaseManger.findList(productRelease, order, ordertype);
+        return releaseManger.findList(productRelease, order, orderType);
     }
 
 
@@ -50,11 +45,6 @@ public class ReleaseServiceImpl implements ReleaseService {
     public ProductRelease findRelease(Integer releaseId) {
 
         return releaseManger.find(releaseId);
-    }
-
-    public List<ProductRelease> findReleaseList(Integer... releaseId) {
-
-        return releaseManger.findList(releaseId);
     }
 
     public List<ProductRelease> findReleaseList(ProductRelease release) {

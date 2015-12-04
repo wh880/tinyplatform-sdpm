@@ -423,7 +423,7 @@ public class StoryAction extends BaseController {
         productStory.setStoryVersion(maxVersion == null ? 1 : maxVersion + 1);
         storyService.updateStory(productStory);
         storySpec.setStoryVersion(productStory.getStoryVersion());
-        storySpecService.add(storySpec);
+        storySpecService.addProductStorySpec(storySpec);
         processProfile(uploadProfile, productStory.getStoryId(), ProfileType.STORY);
 
         LogUtil.logWithComment(LogUtil.LogOperateObject.STORY,

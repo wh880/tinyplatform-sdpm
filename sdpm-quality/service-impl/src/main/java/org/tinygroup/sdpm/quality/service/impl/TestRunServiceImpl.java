@@ -24,10 +24,6 @@ public class TestRunServiceImpl implements TestRunService {
         return testRunManager.update(testRun);
     }
 
-    public int[] batchUpdateTestRun(List<QualityTestRun> testRuns) {
-        return testRunManager.batchUpdate(testRuns);
-    }
-
     public QualityTestRun addTestRun(QualityTestRun run) {
         return testRunManager.add(run);
     }

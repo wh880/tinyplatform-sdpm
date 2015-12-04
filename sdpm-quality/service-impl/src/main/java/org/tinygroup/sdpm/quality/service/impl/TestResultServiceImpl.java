@@ -14,16 +14,8 @@ public class TestResultServiceImpl implements TestResultService {
     @Autowired
     private TestResultManager testResultManager;
 
-    public List<QualityTestResult> findTestResultList(QualityTestResult testResult) {
-        return testResultManager.findList(testResult);
-    }
-
-    public QualityTestResult findTestResultById(int id) {
-        return testResultManager.find(id);
-    }
-
-    public int updateTestResult(QualityTestResult testResult) {
-        return testResultManager.update(testResult);
+    public List<QualityTestResult> findTestResultList(QualityTestResult qualityTestResult) {
+        return testResultManager.findList(qualityTestResult);
     }
 
     public QualityTestResult addTestResult(QualityTestResult qualityTestResult) {

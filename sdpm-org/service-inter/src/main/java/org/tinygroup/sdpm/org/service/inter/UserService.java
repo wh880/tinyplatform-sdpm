@@ -62,7 +62,7 @@ public interface UserService {
      * @param orgUser 用于查询条件
      * @return
      */
-    @CacheGet(key = "list${orgUser.orgUserId}", group = CACHE_USER_LIST)
+    @CacheGet(key = "list${orgUser?.orgUserId}", group = CACHE_USER_LIST)
     List<OrgUser> findUserList(OrgUser orgUser);
 
     /**
@@ -87,7 +87,7 @@ public interface UserService {
      * @param orgUser 需要更新的实体类
      * @return
      */
-    @CachePut(keys = "list${orgUser.orgUserId}",parameterNames = "orgUser",group = CACHE_USER_LIST,removeGroups="CACHE_USER_LIST")
+    @CachePut(keys = "list${orgUser?.orgUserId}", parameterNames = "orgUser", group = CACHE_USER_LIST, removeGroups = "CACHE_USER_LIST")
     OrgUser updateUser(OrgUser orgUser);
 
     /**
@@ -96,7 +96,7 @@ public interface UserService {
      * @param id 主键
      * @return
      */
-    @CacheRemove(removeKeys = "${id}",group = CACHE_USER_ID,removeGroups=CACHE_USER_LIST)
+    @CacheRemove(removeKeys = "${id}", group = CACHE_USER_ID, removeGroups = CACHE_USER_LIST)
     Integer deleteUser(String id);
 
     /**

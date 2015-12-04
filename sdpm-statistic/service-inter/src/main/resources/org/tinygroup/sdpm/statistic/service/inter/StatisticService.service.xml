@@ -1,0 +1,43 @@
+<service-components>
+  <service-component type="org.tinygroup.sdpm.statistic.service.inter.StatisticService" bean="statisticServiceImpl">
+    <service-method local-name="findProjectTaskStaList" service-id="findProjectTaskStaList" method-name="findProjectTaskStaList" cacheable="false" category="org.tinygroup.sdpm.statistic.service.inter">
+      <service-parameters>
+        <service-parameter name="projectTaskSta" type="org.tinygroup.sdpm.statistic.dao.pojo.ProjectTaskSta" required="false" is-array="false"/>
+        <service-parameter name="startDate" type="java.util.Date" required="false" is-array="false"/>
+        <service-parameter name="endDate" type="java.util.Date" required="false" is-array="false"/>
+        <service-parameter name="roleId" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findProjectTaskStaListResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.statistic.dao.pojo.ProjectTaskSta"/>
+    </service-method>
+    <service-method local-name="findQualityBugSta" service-id="findQualityBugSta" method-name="findQualityBugSta" cacheable="false" category="org.tinygroup.sdpm.statistic.service.inter">
+      <service-parameters>
+        <service-parameter name="qualityBugSta" type="org.tinygroup.sdpm.statistic.dao.pojo.QualityBugSta" required="false" is-array="false"/>
+        <service-parameter name="startDate" type="java.util.Date" required="false" is-array="false"/>
+        <service-parameter name="endDate" type="java.util.Date" required="false" is-array="false"/>
+        <service-parameter name="cProject" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="cProduct" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findQualityBugStaResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.statistic.dao.pojo.QualityBugSta"/>
+    </service-method>
+    <service-method local-name="findAssigned" service-id="findAssigned" method-name="findAssigned" cacheable="false" category="org.tinygroup.sdpm.statistic.service.inter">
+      <service-parameters>
+        <service-parameter name="assigned" type="org.tinygroup.sdpm.statistic.dao.pojo.Assigned" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findAssignedResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.statistic.dao.pojo.Assigned"/>
+    </service-method>
+    <service-method local-name="findBugCall" service-id="findBugCall" method-name="findBugCall" cacheable="false" category="org.tinygroup.sdpm.statistic.service.inter">
+      <service-parameters>
+        <service-parameter name="qualityBugCall" type="org.tinygroup.sdpm.statistic.dao.pojo.QualityBugCall" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findBugCallResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.statistic.dao.pojo.QualityBugCall"/>
+    </service-method>
+    <service-method local-name="getProductInvest" service-id="getProductInvest" method-name="getProductInvest" cacheable="false" category="org.tinygroup.sdpm.statistic.service.inter">
+      <service-parameters>
+        <service-parameter name="productProject" type="org.tinygroup.sdpm.statistic.dao.pojo.ProductProject" required="false" is-array="false"/>
+        <service-parameter name="deleted" type="boolean" required="false" is-array="false"/>
+        <service-parameter name="usrId" type="java.lang.String" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="getProductInvestResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.statistic.dao.pojo.ProductProject"/>
+    </service-method>
+  </service-component>
+</service-components>

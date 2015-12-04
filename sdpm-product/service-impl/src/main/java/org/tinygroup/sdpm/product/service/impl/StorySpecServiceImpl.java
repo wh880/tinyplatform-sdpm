@@ -20,9 +20,9 @@ public class StorySpecServiceImpl implements StorySpecService {
         return storySpecManager.find(storyId, version);
     }
 
-    public List<ProductStorySpec> findStorySpecList(ProductStorySpec storySpec, String order, String ordertype) {
+    public List<ProductStorySpec> findStorySpecList(ProductStorySpec storySpec, String order, String orderType) {
 
-        return storySpecManager.findList(storySpec, order, ordertype);
+        return storySpecManager.findList(storySpec, order, orderType);
     }
 
     public Pager<ProductStorySpec> findStorySpecPager(int page, int limit, ProductStorySpec storySpec, String order, String ordertype) {
@@ -30,21 +30,11 @@ public class StorySpecServiceImpl implements StorySpecService {
         return storySpecManager.findPager(page, limit, storySpec, order, ordertype);
     }
 
-    public List<ProductStorySpec> findStorySpecList(Integer... storyspecId) {
-
-        return storySpecManager.findList(storyspecId);
-    }
-
-    public int getNewStoryVersion(Integer storyId) {
-
-        return storySpecManager.getNewStoryVersion(storyId);
-    }
-
     public Integer getMaxVersion(Integer storyId) {
         return storySpecManager.getMaxVersion(storyId);
     }
 
-    public ProductStorySpec add(ProductStorySpec storySpec) {
+    public ProductStorySpec addProductStorySpec(ProductStorySpec storySpec) {
 
         return storySpecManager.add(storySpec);
     }
