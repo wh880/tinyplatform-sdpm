@@ -32,11 +32,36 @@ public interface TestRunService {
      */
     int[] batchUpdateTestRun(List<QualityTestRun> testruns);
 
+    /**
+     * 新增测试运行
+     * @param run
+     * @return
+     */
     QualityTestRun addTestRun(QualityTestRun run);
 
+    /**
+     * 根据id获取运行
+     * @param id
+     * @return
+     */
     QualityTestRun findTestRunById(Integer id);
 
+    /**
+     * 根据id删除运行
+     * @param runId
+     * @return
+     */
     int deleteTestRun(Integer runId);
 
+    /**
+     * 复合条件-排序-分页查询运行
+     * @param start
+     * @param limit
+     * @param testRun
+     * @param carrier
+     * @param sortName
+     * @param asc
+     * @return
+     */
     Pager<QualityTestRun> findTestRunPager(Integer start, Integer limit, QualityTestRun testRun, ConditionCarrier carrier, String sortName, boolean asc);
 }

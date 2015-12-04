@@ -11,7 +11,6 @@ public interface StorySpecService {
 
     /**
      * 根据需求Id查找
-     *
      * @param storyId
      * @return
      */
@@ -19,7 +18,6 @@ public interface StorySpecService {
 
     /**
      * 根据多个ID查找
-     *
      * @param storyspecId
      * @return
      */
@@ -28,30 +26,35 @@ public interface StorySpecService {
 
     /**
      * 根据需求对象查找
-     *
-     * @param storyId
+     * @param storySpec
+     * @param order
+     * @param ordertype
      * @return
      */
     List<ProductStorySpec> findStorySpecList(ProductStorySpec storySpec, String order, String ordertype);
 
     /**
      * 分页查询（排序）
-     *
-     * @param start
+     * @param page
      * @param limit
      * @param storySpec
-     * @param orderBies
+     * @param order
+     * @param ordertype
      * @return
      */
     Pager<ProductStorySpec> findStorySpecPager(int page, int limit, ProductStorySpec storySpec, String order, String ordertype);
 
     /**
      * 查找最新版本
-     *
      * @param storyId
      * @return
      */
     int getNewStoryVersion(Integer storyId);
 
+    /**
+     * 获取需求最大版本
+     * @param storyId
+     * @return
+     */
     Integer getMaxVersion(Integer storyId);
 }

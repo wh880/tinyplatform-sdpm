@@ -66,8 +66,19 @@ public interface DictService {
      */
     int batchDelete(Integer... ids);
 
+    /**
+     * 删除所有字典项
+     */
+
     void deleteAllDict();
 
-    List<SystemDict> findDictListByOder(SystemDict dict, String columnName, boolean asc);
+    /**
+     * 有序查询字典项
+     * @param dict
+     * @param columnName
+     * @param asc
+     * @return
+     */
+    List<SystemDict> findDictListByOrder(SystemDict dict, String columnName, boolean asc);
 
 }

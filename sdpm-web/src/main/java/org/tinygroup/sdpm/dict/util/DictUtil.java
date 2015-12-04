@@ -142,7 +142,7 @@ public class DictUtil {
 
     private static void assemble(SystemModule systemModule, List<DictGroup> groups, Map<String, String> nodeMap, String dictName) {
         SystemDict dict = assembleDict(null, null, -1, systemModule.getModuleId(), 0);
-        List<SystemDict> dicts = dictService.findDictListByOder(dict, "dict_sort", true);
+        List<SystemDict> dicts = dictService.findDictListByOrder(dict, "dict_sort", true);
         if (dicts.size() > 0) {
             DictGroup group = new DictGroup();
             group.setName(systemModule.getModuleName());

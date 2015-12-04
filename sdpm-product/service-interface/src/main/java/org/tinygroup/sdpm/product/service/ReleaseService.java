@@ -33,7 +33,7 @@ public interface ReleaseService {
     /**
      * 根据id进行软删除用户
      *
-     * @param id 主键
+     * @param releaseId 主键
      * @return
      */
     Integer deleteRelease(Integer releaseId);
@@ -41,7 +41,7 @@ public interface ReleaseService {
     /**
      * 根据Id查找
      *
-     * @param planId
+     * @param releaseId
      * @return
      */
     ProductRelease findRelease(Integer releaseId);
@@ -65,19 +65,20 @@ public interface ReleaseService {
 
     /**
      * 查找发布
-     *
-     * @param release
+     * @param productRelease
+     * @param order
+     * @param ordertype
      * @return
      */
     List<ProductRelease> findReleaseList(ProductRelease productRelease, String order, String ordertype);
 
     /**
      * 分页查询
-     *
-     * @param start
+     * @param page
      * @param limit
-     * @param release
-     * @param orderBies
+     * @param productRelease
+     * @param order
+     * @param ordertype
      * @return
      */
     Pager<ProductRelease> findReleasePager(int page, int limit, ProductRelease productRelease, String order, String ordertype);

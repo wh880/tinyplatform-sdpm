@@ -19,7 +19,7 @@ public interface StoryManager {
     ProductStory add(ProductStory story,ProductStorySpec storySpec);
     /**
      * 根据需求Id删除
-     * @param storyId
+     * @param story
      * @return
      */
     Integer delete(ProductStory story);

@@ -58,7 +58,7 @@ public class DictServiceImpl implements DictService {
         dictManager.deleteAll();
     }
 
-    public List<SystemDict> findDictListByOder(SystemDict dict, String columnName, boolean asc) {
+    public List<SystemDict> findDictListByOrder(SystemDict dict, String columnName, boolean asc) {
         return dictManager.findList(dict, columnName, asc);
     }
 

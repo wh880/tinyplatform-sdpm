@@ -19,6 +19,11 @@ public interface StoryService {
      */
     ProductStory addStory(ProductStory story, ProductStorySpec storySpec, String userId);
 
+    /**
+     * 删除需求及相关
+     * @param story
+     * @return
+     */
     Integer deleteStory(ProductStory story);
 
     /**
@@ -102,18 +107,43 @@ public interface StoryService {
      */
     List<ProductStory> findProductName(Integer storyId);
 
+    /**
+     * 复合条件-排序-分页查询项目关联需求
+     * @param start
+     * @param limit
+     * @param story
+     * @param carrier
+     * @param columnName
+     * @param asc
+     * @return
+     */
     Pager<ProductStory> findProjectLinkedStory(int start, int limit, ProductStory story, ConditionCarrier carrier, String columnName, boolean asc);
 
+    /**
+     * 复合条件-排序-分页查询需求
+     * @param start
+     * @param limit
+     * @param story
+     * @param carrier
+     * @param columnName
+     * @param asc
+     * @return
+     */
     Pager<ProductStory> findStoryByCondition(int start, int limit, ProductStory story, ConditionCarrier carrier, String columnName, boolean asc);
 
     /**
      * 根据输入名称查询
-     *
      * @param condition
      * @param productId
      * @return
      */
     List<ProductStory> storyInCondition(String condition, Integer productId);
 
+    /**
+     * 根据ids查询需求-可选是否携带描述
+     * @param isWithSpec
+     * @param ids
+     * @return
+     */
     List<ProductStory> getStoryWithSpecInIds(boolean isWithSpec, Integer... ids);
 }

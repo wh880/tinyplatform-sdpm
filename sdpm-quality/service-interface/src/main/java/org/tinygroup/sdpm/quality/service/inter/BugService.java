@@ -22,7 +22,7 @@ public interface BugService {
      * @param bug
      * @return
      */
-    List<QualityBug> findBugList(QualityBug type);
+    List<QualityBug> findBugList(QualityBug bug);
 
     /**
      * 提Bug
@@ -59,13 +59,50 @@ public interface BugService {
      */
     Integer deleteBug(Integer bugId);
 
+    /**
+     * bug报表
+     * @param code
+     * @param productId
+     * @return
+     */
     Map<String,List<BugCount>> bugReport(String code, Integer productId);
 
+    /**
+     * 获取需求变更的bug
+     * @param start
+     * @param limit
+     * @param carrier
+     * @param bug
+     * @param sortName
+     * @param asc
+     * @return
+     */
     Pager<QualityBug> findStoryChangedBugs(Integer start,Integer limit, ConditionCarrier carrier, QualityBug bug,String sortName,boolean asc);
 
+    /**
+     * 复合条件-排序-分页查询bug
+     * @param start
+     * @param limit
+     * @param carrier
+     * @param bug
+     * @param sortName
+     * @param asc
+     * @return
+     */
     Pager<QualityBug> findBugListPager(Integer start,Integer limit, ConditionCarrier carrier, QualityBug bug,String sortName,boolean asc);
 
+    /**
+     *发布文档中，获取已解决且关联的bug
+     * @param bug
+     * @return
+     */
     List<QualityBug> getBugsInReleaseDoc(QualityBug bug);
 
+    /**
+     * 根据输入名称获取bug
+     * @param condition
+     * @param productId
+     * @return
+     */
     List<QualityBug> bugInCondition(String condition, Integer productId);
 }

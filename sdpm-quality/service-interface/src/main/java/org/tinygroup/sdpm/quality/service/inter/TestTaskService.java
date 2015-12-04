@@ -47,7 +47,26 @@ public interface TestTaskService {
      */
     int deleteTestTaskById(int id);
 
+    /**
+     * 复合条件-排序-分页查询测试版本
+     * @param start
+     * @param limit
+     * @param testtask
+     * @param carrier
+     * @param sortName
+     * @param asc
+     * @return
+     */
     Pager<QualityTestTask> findTestTaskPagerWithConditionCarrier(Integer start, Integer limit, QualityTestTask testtask, ConditionCarrier carrier, String sortName, boolean asc);
 
+    /**
+     * 简单-排序-分页查询测试版本
+     * @param start
+     * @param limit
+     * @param testtask
+     * @param sortName
+     * @param asc
+     * @return
+     */
     Pager<QualityTestTask> findTestTaskPager(Integer start, Integer limit, QualityTestTask testtask, String sortName, boolean asc);
 }
