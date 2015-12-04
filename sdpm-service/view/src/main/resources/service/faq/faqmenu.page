@@ -1,6 +1,6 @@
 #import("/org/tinygroup/zTree/components/zTree.component")
 #import("/common/component/project.component")
-#!set(activeTitle="服务管理",activeMenuId=currentPageId)
+
 <style>
     .faqSty {
         margin: 5px;
@@ -19,19 +19,10 @@
         margin-right: 30px;
     }
 </style>
-#macro ztreeClick()
-if(!treeNode.isParent){
-loadURL('#link(linkUrl)'+treeNode.id, $("#tBox"));
-}
-#end
+
 
 #set(name="faq")
-#@div()
-    #@tabWithInit("tab_demo" "optionsBox")
-        #@tabHead()
-            #include("/service/serviceCom/tab.page")
-        #end
-    #end
+#@layout(service)#end
     #@toggleBox({"class":"open"})
         #@toggleLeft({"class":"aclass"})
             #@settoggleLeftTitle()FAQ分类#end
@@ -68,7 +59,7 @@ loadURL('#link(linkUrl)'+treeNode.id, $("#tBox"));
         <div class="btnsty-page">#tinyPageNav("bodyconentrap" pager.currentPage pager.totalPages "")</div>
         #end
     #end
-#end
+
 <script type="text/javascript">
     $("#tBox").on("click", ".treeview", function () {
         loadURL($(this).attr("href"), $("#tBox"));

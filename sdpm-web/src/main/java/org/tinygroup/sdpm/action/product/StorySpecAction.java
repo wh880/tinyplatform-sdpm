@@ -101,7 +101,7 @@ public class StorySpecAction extends BaseController {
         Pager<ProductStorySpec> specs = specService.findStorySpecPager(start, limit, spec, order, ordertype);
         model.addAttribute("story", story);
         model.addAttribute("versions", specs);
-        return "/product/page/version/allVersionData.pagelet";
+        return "/product/data/story/version/allVersionData.pagelet";
     }
 
     @RequestMapping("versionRollback")

@@ -4,6 +4,6 @@
             var init = [];
         </js-codelet>
         <js-resource>/common/js/sdpm.js</js-resource>        
-        <css-resource>/common/css/comm.css</css-resource>   
+        <css-resource>/common/css/comm.css,/common/css/organization.css</css-resource>   
     </ui-component>
 </ui-components>

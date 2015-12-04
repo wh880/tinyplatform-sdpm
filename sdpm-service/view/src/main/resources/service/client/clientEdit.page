@@ -1,33 +1,14 @@
 #import("/org/tinygroup/button/components/button_common.component")
 #import("/org/tinygroup/button/components/button.component")
 #import("/org/tinygroup/table/components/table.component")
-##用于类似编辑页面的条目排版
 
-##
-#macro delItemsdpm(doAction delId backUrl mapInfo)
-<a href="${backUrl}" data-removeid="${delId}" data-action="${doAction}" #getMapInfo(mapInfo)>#bodyContent</a>
-#end
-
-
-
-#!set(activeTitle="服务管理",activeMenuId=currentPageId)
 <style>
     .select_boxes {
         margin-top: 0
     }
 </style>
 #set(name="client")
-#@div()
-    #@tabWithInit("tab_demo" "optionsBox")
-    #*  #@div(divClass="dropdownBox")
-          #include("/service/serviceCom/dropdownMenu.page")
-      #end*#
-        #@tabHead()
-            #include("/service/serviceCom/tab.page")
-        #end
-    <br>
-    #end
-#end
+#@layout(service)#end
 #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/service/client/save" "post" {"class":""})
 <div style="width:80%;margin-left: 20px;" class="pageleftpart">
     <div class="infoContent">

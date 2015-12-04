@@ -1,14 +1,12 @@
-#!set(activeTitle="字典类型管理",activeMenuId=currentPageId)
-#!set(page="module")
+
 #set(editpagePath="/system/page/dictionaries/dict_edit.pagelet",editpageModalId="dictEditModal",editpageModal="#"+editpageModalId)
 #set(viewpagePath="/system/page/dictionaries/dict_view.pagelet",viewpageModalId="dictViewModal",viewpageModal="#"+viewpageModalId)
-#include("/system/page/event/common.page")
 #datatablesInitSimple("#dictListTb" )
 #import("/org/tinygroup/table/components/table.component")
 #set(threeMenu="dictionary-type")
 	
 #@divDataTablebox()
-	    #@tableHeaderBar()${activeTitle}#end
+
 #@tableBox()
 	#@datatable("dictListTb")
 		#@tableToolbar()

@@ -658,6 +658,9 @@ public class TestCaseAction extends BaseController {
                                   Integer limit) {
         QualityTestCase testCase = testCaseService.testCase(caseId);
         Integer maxCaseVersion = caseStepService.getMaxVersion(caseId);
+        if(maxCaseVersion==null){
+            maxCaseVersion=1;
+        }
         Map<String, List<QualityCaseStep>> versionStep = new HashMap<String, List<QualityCaseStep>>();
         for (Integer i = maxCaseVersion > (start + limit) ? (start + limit) : maxCaseVersion; i > start; i--) {
             QualityCaseStep step = new QualityCaseStep();

@@ -1,16 +1,6 @@
 #import("/org/tinygroup/button/components/button_smart.component")
-#!set(activeTitle="客户管理",activeMenuId=currentPageId)
 #set(name="request")
-#@div()
-    #@tabWithInit("tab_demo" "optionsBox")
-    #*  #@div(divClass="dropdownBox dropdownBoxes")
-          #include("/service/serviceCom/dropdownMenu.page")
-      #end*#
-        #@tabHead()
-            #include("/service/serviceCom/tab.page")
-        #end
-    #end
-#end
+#@layout(service)#end
 
 #@div()
     #@p(pClass="title_sty")
@@ -26,8 +16,7 @@
 
         #set(m1=menuManager.getMenu("request-close"))
         #if(m1)
-            #@aModal(
-                "#myModal" aModalTitle="关闭" "500" "200" m1.icon adminPath+m1.href+"?id="+request?.clientRequestId titleName="关闭")
+            #@aModal("#myModal" aModalTitle="关闭" "500" "200" m1.icon adminPath+m1.href+"?id="+request?.clientRequestId titleName="关闭")
             #end
         #end
 

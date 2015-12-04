@@ -1,39 +1,35 @@
 #import("/org/tinygroup/button/components/button_smart.component")
-#!set(activeTitle="客服管理",activeMenuId=currentPageId)
 
 #set(name="request")
-###set(requestTableId = "requestTableId")
-#@div()
-    #@tabWithInit("tab_demo" "optionsBox")
-        #@tabHead()
-            #include("/service/serviceCom/tab.page")
-        #end
-        #@tabBodyCol("ptop-5")
-            #@div(divClass="operationbar")
-            <span class="f">
+#@layout(service)
+    #@tabBodyCol("ptop-5")
+        #@div(divClass="operationbar")
+        <span class="f">
                #set(m=menuManager.getMenu("request-all"))
-                #if(m)
-                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">${m.name}</a>
-                #end
-                #foreach(m:menuManager.getScopeMenus("service-request-list"))
-                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}&treeId=${treeId}">${m.name}</a>
-                #end
-                <a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
+            #if(m)
+                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">${m.name}</a>
+            #end
+            #foreach(m:menuManager.getScopeMenus("service-request-list"))
+                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}&treeId=${treeId}">${m.name}</a>
+            #end
+            <a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
 				</span>
 
-            <span class="r">
+        <span class="r">
                 #set(m3=menuManager.getMenu("request-add"))
-                #if(m3)
-                    <a href="${TINY_CONTEXT_PATH+adminPath}${m3.href}">#buttonIcon(iconClass="icon-plus")${m3.name}</a>
-                #end
-
-				</span>
-                #div(divClass="clearfix")
-                #include("/service/serviceReq/multiSearch.page")
+            #if(m3)
+                <a href="${TINY_CONTEXT_PATH+adminPath}${m3.href}">#buttonIcon(iconClass="icon-plus")${m3.name}</a>
             #end
 
+				</span>
+            #div(divClass="clearfix")
+            #include("/service/serviceReq/multiSearch.page")
         #end
+
     #end
+#end
+
+
     #@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
         #@toggleLeft({"class":"aclass"})
             #@settoggleLeftTitle()所有产品#end
@@ -49,7 +45,7 @@
             #include("/service/serviceReq/requestTable.page")
         #end
     #end
-#end
+
 
 
 

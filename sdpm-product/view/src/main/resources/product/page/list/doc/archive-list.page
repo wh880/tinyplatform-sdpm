@@ -1,8 +1,6 @@
 
 #set(addArchivePagePath="/product/page/tabledemo/addArchive.pagelet",editpageModalId="myModal",editpageModal="#"+editpageModalId)
-#!set(linkName="product-archive",sonitem="
-<li>"+"文档"+"</li>")
-
+#set(linkName = "product-archive")
 #@tabBodyCol("ptop-5")
     #@div(divClass="operationbar")
     <span class="f">

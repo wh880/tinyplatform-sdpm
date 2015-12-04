@@ -1,6 +1,6 @@
-#!set(activeTitle="表格",activeMenuId=currentPageId)
+
 ##import("/org/tinygroup/table/components/tinytable.component")
-#include("/common/common.page")
+
 
 #@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
     #@div(divBaseClass="tinyheaderTools form-inline")

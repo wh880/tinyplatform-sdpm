@@ -1,14 +1,8 @@
 #import("/org/tinygroup/button/components/button_smart.component")
 #!set(activeTitle="客户管理",activeMenuId=currentPageId)
 #set(name="request")
-#@div()
-    #@tabWithInit("tab_demo" "optionsBox")
-    #*  #@div(divClass="dropdownBox dropdownBoxes")
-          #include("/service/serviceCom/dropdownMenu.page")
-      #end*#
-        #@tabHead()
-            #include("/service/serviceCom/tab.page")
-        #end
+#@layout(service)
+#end
         #@div()
             #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/service/request/replySave" "post" {"class":""})
             <input type="hidden" name="treeId" value="${treeId}"/>
@@ -36,14 +30,6 @@
                     #@validateDiv("col-2")#end
                 #end
 
-            ##                #@elementItem()
-            ##                    <div class="col-2 text-r"><label><span class="c-red">*</span>回复描述：</label></div>
-            ##                    #@formControlDiv("col-8")
-            ##                        #@tinyTextarea("replySpec" {"datatype":"*","nullmsg":
-            ##                            "描述不能为空！"})${request?.replySpec}#end
-            ##                    #end
-            ##                    #@validateDiv("col-2")#end
-            ##                #end
 
                 #@elementItem()
                     #@sdpmItem("回复人")
@@ -84,8 +70,8 @@
             </div>
             #end
         #end
-    #end
-#end
+
+
 #@simpleModal("myModal1" "导出")#end
 #@simpleModal("myModal2" "新建产品")#end
     <script type="text/javascript">

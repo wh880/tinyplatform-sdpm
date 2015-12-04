@@ -59,7 +59,7 @@
                                 })
                             })
                         </script>
-                            #@Tselect2Fix()#@aModal("#myModal" "" "500" "300" "btn-class" adminPath+"/product/addModule?pId=" "modelA")
+                            #@Tselect2Fix()#@aModal("#myModal" "添加模板" "500" "300" "btn-class" adminPath+"/product/addModule?pId=" "modelA")
                             增加#end
                             #end
                         #end

@@ -1,81 +1,74 @@
 #!set(activeTitle="组织管理",activeMenuId=currentPageId)
 #import("/common/component/form.component")
-#set(editpagePath=
-    "/organization/user/fileOutput.pagelet",editpageModalId="userEditModal",editpageModal="#"+editpageModalId)
-
-#include("/common/common.page")
+#set(editpagePath="/organization/user/fileOutput.pagelet",editpageModalId="userEditModal",editpageModal="#"+editpageModalId)
 #set(name="organizationUser")
-#@div()
-    #@tabWithInit("tab_demo" "optionsBox")
-        #@tabHead()
-            #include("/organization/common/tab.page")
-        #end
-        #@tabBodyCol("ptop-5")
-            #@div(divClass="operationbar")
-                #@tinyForm("thisform" "" "" {"class":"test"})
-                    #@formControlDiv("col-1")
-                        #@navSelect2("user" "user")
-                            #@navSelect2Nav()
-                                #if(userList)
-                                    #foreach(user:userList)
+#@layout(org)
+    #@tabBodyCol("ptop-5")
+        #@div(divClass="operationbar")
+            #@tinyForm("thisform" "" "" {"class":"test"})
+                #@formControlDiv("col-1")
+                    #@navSelect2("user" "user")
+                        #@navSelect2Nav()
+                            #if(userList)
+                                #foreach(user:userList)
                                     #if(user?.orgUserId == id)
                                         ${user?.orgUserRealName}
                                     #end
                                 #end
                             #else
                             用户
-                                #end
+                            #end
                         <span class="caret"></span>#end
                         #@navSelect2Body()
                             #@navSelect2Data()
                             <option value=""></option>
                             <optgroup label="用户">
                                 #foreach(user:userList)
-                                <option value="${user?.orgUserId}">${user?.orgUserRealName}</option>
-                            #end
-                        </optgroup>
+                                    <option value="${user?.orgUserId}">${user?.orgUserRealName}</option>
+                                #end
+                            </optgroup>
 
-                        #end
-                        #@navSelect2Fix()
-                            #set(m=menuManager.getMenu("organizationAddUser"))
-                            #if(m)
-                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
                             #end
-                            #set(m=menuManager.getMenu("organizationUser"))
-                            #if(m)
-                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
+                            #@navSelect2Fix()
+                                #set(m=menuManager.getMenu("organizationAddUser"))
+                                #if(m)
+                                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
+                                #end
+                                #set(m=menuManager.getMenu("organizationUser"))
+                                #if(m)
+                                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
+                                #end
                             #end
                         #end
-                        #end
-                    #hiddenInput("userIdHidden","orgUserId","","")
+                        #hiddenInput("userIdHidden","orgUserId","","")
 
-                <script type="text/javascript">
+                    <script type="text/javascript">
 
-                    $(function () {
-                        $("#user-select").on("change", function () {
-                            window.location.href = "${TINY_CONTEXT_PATH +adminPath}/org/user/active?choose=3&id=" + $(this).val();
+                        $(function () {
+                            $("#user-select").on("change", function () {
+                                window.location.href = "${TINY_CONTEXT_PATH +adminPath}/org/user/active?choose=3&id=" + $(this).val();
+                            });
                         });
-                    });
 
-                </script>
-                #end
-            #end
-        <span style="float: left;">
-                    &nbsp;&gt;
-                    #foreach(m:menuManager.getScopeMenus("org-user-detail"))
-                        #if(m.id=="org-user-activeAdmin")
-                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?choose=3&id=${id}"
-                               class="active_btn">${m.name}</a>
-                        #else
-                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?choose=3&id=${id}">${m.name}</a>
-                        #end
+                    </script>
                     #end
+                #end
+            <span style="float: left;">
+                    &nbsp;&gt;
+                #foreach(m:menuManager.getScopeMenus("org-user-detail"))
+                    #if(m.id=="org-user-activeAdmin")
+                        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?choose=3&id=${id}"
+                           class="active_btn">${m.name}</a>
+                    #else
+                        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?choose=3&id=${id}">${m.name}</a>
+                    #end
+                #end
 
                 </span>
-            #div(divClass="clearfix")
-                #end
+                #div(divClass="clearfix")
+            #end
 
-            <span class="barBoxs">
+        <span class="barBoxs">
                 <a val="1" class="selDate">今天</a>
                 <a val="2" class="selDate">昨天</a>
                 <a val="3" class="selDate">前天</a>
@@ -85,12 +78,14 @@
                 <a val="7" class="selDate">上月</a>
                 <a val="0" class="selDate">所有</a>
         </span>
-            #end
         #end
-
     #end
-
 #end
+
+
+
+
+
 #@tinyTable("userDynamicTable") ##ID为空则系统自动生成 带入参数则取该参数为ID
     #@div(divClass="tinyheaderTools form-inline")
         #setTinyTablePageSize([8,10,20,50,100,200])

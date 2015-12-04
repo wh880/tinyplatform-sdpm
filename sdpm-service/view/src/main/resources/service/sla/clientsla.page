@@ -1,29 +1,105 @@
 #import("/org/tinygroup/button/components/button_smart.component")
-#!set(activeTitle="客户管理",activeMenuId=currentPageId)
+#import("/org/tinygroup/button/components/button_common.component")
+#import("/org/tinygroup/button/components/button.component")
+#import("/org/tinygroup/table/components/table.component")
 #set(name="sla")
-#@div()
-    #@tabWithInit("tab_demo" "optionsBox")
-        #@tabHead()
-            #include("/service/serviceCom/tab.page")
-        #end
-        #@tabBodyCol("ptop-5")
-            #@div(divClass="operationbar")
-            <span class="f">
+#@layout(service)
+    #@tabBodyCol("ptop-5")
+        #@div(divClass="operationbar")
+        <span class="f">
 					<a href="#" class="active_btn">${client.clientName}</a>
             </span>
-            <span class="r">
+        <span class="r">
                 #set(m1=menuManager.getMenu("sla-add"))
-                #if(m1)
-                    <a href="${TINY_CONTEXT_PATH+adminPath}${m1.href}">#buttonIcon(iconClass=m1.icon)${m1.name}</a>
-                #end
-                <a href="${TINY_CONTEXT_PATH}/service/sla/sla.page"
-                   title="返回">#buttonIcon(iconClass="icon-reply")返回</a>
-            </span>
+            #if(m1)
+                <a href="${TINY_CONTEXT_PATH+adminPath}${m1.href}">#buttonIcon(iconClass=m1.icon)${m1.name}</a>
             #end
+            <a href="${TINY_CONTEXT_PATH}/service/sla/sla.page"
+               title="返回">#buttonIcon(iconClass="icon-reply")返回</a>
+            </span>
         #end
-        #include("/service/sla/clientSlaList.page")
     #end
 #end
+#@div()
+    #@tabWithInit("tab_demo" "optionsBox")
+    <div style="width:100%;float:left">
+        #foreach(var:slas)
+            #@gridSysCol(4)
+                #@div(divClass="infoContent")
+                    <p class="titleName">${var.slaTitle}</p>
+                    <div>
+                        #@table("")
+                            #@tbody()
+                                #@tr()
+                                    #@th()产品名称#end
+                                    #@td()${var.productName}#end
+                                #end
+                                #@tr()
+                                    #@th()产品版本#end
+                                    #@td()${var.cilentProductVision}#end
+                                #end
+                                #@tr()
+                                    #@th()服务级别#end
+                                    #@td()${getDict("serviceLevel",var?.serviceLevel)}#end
+
+                                #end
+                                #@tr()
+                                    #@th()协议内容#end
+                                    #@td()<a
+                                            href="${TINY_CONTEXT_PATH+adminPath}/service/sla/slaContent?id=${var.slaId}">
+                                        详情#end
+                                #end
+                                #@tr()
+                                    #@th()创建人#end
+                                    #@td()${var.slaCreatedBy}#end
+                                #end
+                                #@tr()
+                                    #@th()创建时间#end
+                                    #@td()  #if(var.serviceDeadline)${formatDate(var.serviceDeadline,"yyyy-MM-dd")}#end
+                                    #end
+                                #end
+                            #end
+                        #end
+                    </div>
+                    <div style="text-align:right;margin:right">
+                        #foreach(m:menuManager.getScopeMenus("service-sla"))
+                            #if(m.id != "sla-del")
+                                #@aExtendButton(
+                                    "btn-primary btn-sm" TINY_CONTEXT_PATH+adminPath+m.href+"?id="+var.slaId "" "")
+                                    编辑#end
+                            #else
+                                #@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m.href var?.slaId TINY_CONTEXT_PATH+adminPath+
+                                    "/service/sla/list" {"class":"btn radius btn-danger btn-sm"}) 删除#end
+                            #end
+                        #end
+                    </div>
+                #end
+            #end
+        #end
+
+    </div>
+    #end
+#end
+#@simpleModal("myModal3" "编辑")#end
+
+<script>
+    $(function () {
+        $(".infoContent").on("click", ".clientDelete", function () {
+            //console.log($(this).attr("itemId"))
+//            var that = this;
+            layer.confirm('确定要删除该记录？', function (index) {
+                //window.location.href='dddddd.page?action=del&id='+fdsfdsf;
+                //$.ajax()
+                //console.log(index);
+//                layer.msg($("已删除").attr("deleteList"), 1);
+                layer.msg('已删除', 1,1);
+            })
+        });
+    });
+</script>
+
+
+
 #@simpleModal("myModal1" "导出")#end
 #@simpleModal("myModal2" "新建产品")#end
 

@@ -4,21 +4,16 @@
 #set(editpagePath=
     "/organization/common/fileOutput.pagelet",editpageModalId="userEditModal",editpageModal="#"+editpageModalId)
 
-#include("/common/common.page")
 #set(name="organizationUser")
-#@div()
-    #@tabWithInit("tab_demo" "optionsBox")
-        #@tabHead()
-            #include("/organization/common/tab.page")
-        #end
-        #@tabBodyCol("ptop-5")
-            #@div(divClass="operationbar")
-                #@tinyForm("thisform" "" "" {"class":"test"})
-                    #@formControlDiv("col-1")
-                        #@navSelect2("user" "user")
-                            #@navSelect2Nav()
-                                #if(userList)
-                                    #foreach(user:userList)
+#@layout(org)
+    #@tabBodyCol("ptop-5")
+        #@div(divClass="operationbar")
+            #@tinyForm("thisform" "" "" {"class":"test"})
+                #@formControlDiv("col-1")
+                    #@navSelect2("user" "user")
+                        #@navSelect2Nav()
+                            #if(userList)
+                                #foreach(user:userList)
                                     #if(user?.orgUserId == id)
                                         ${user?.orgUserRealName}
                                     #end
@@ -33,51 +28,51 @@
                             <option value=""></option>
                             <optgroup label="用户">
                                 #foreach(user:userList)
-                                <option value="${user?.orgUserId}">${user?.orgUserRealName}</option>
-                            #end
-                        </optgroup>
+                                    <option value="${user?.orgUserId}">${user?.orgUserRealName}</option>
+                                #end
+                            </optgroup>
 
+                            #end
+                            #@navSelect2Fix()
+                                #set(m=menuManager.getMenu("organizationAddUser"))
+                                #if(m)
+                                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
+                                #end
+                                #set(m=menuManager.getMenu("organizationUser"))
+                                #if(m)
+                                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
+                                #end
+                            #end
                         #end
-                        #@navSelect2Fix()
-                            #set(m=menuManager.getMenu("organizationAddUser"))
-                            #if(m)
-                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
-                            #end
-                            #set(m=menuManager.getMenu("organizationUser"))
-                            #if(m)
-                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
-                            #end
-                        #end
-                    #end
-                    #hiddenInput("userIdHidden","orgUserId","","")
+                        #hiddenInput("userIdHidden","orgUserId","","")
 
-                <script type="text/javascript">
+                    <script type="text/javascript">
 
-                    $(function () {
-                        $("#user-select").on("change", function () {
-                            window.location.href = "${TINY_CONTEXT_PATH +adminPath}/org/user/testtask?choose=3&id=" + $(this).val();
+                        $(function () {
+                            $("#user-select").on("change", function () {
+                                window.location.href = "${TINY_CONTEXT_PATH +adminPath}/org/user/testtask?choose=3&id=" + $(this).val();
+                            });
                         });
-                    });
 
-                </script>
-                #end
-            #end
-        <span style="float: left">
-                    &nbsp;&gt;
-                    #foreach(m:menuManager.getScopeMenus("org-user-detail"))
-                        #if(m.id=="org-user-testtaskAdmin")
-                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?choose=3&id=${id}"
-                               class="active_btn">${m.name}</a>
-                        #else
-                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?choose=3&id=${id}">${m.name}</a>
-                        #end
+                    </script>
                     #end
+                #end
+            <span style="float: left">
+                    &nbsp;&gt;
+                #foreach(m:menuManager.getScopeMenus("org-user-detail"))
+                    #if(m.id=="org-user-testtaskAdmin")
+                        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?choose=3&id=${id}"
+                           class="active_btn">${m.name}</a>
+                    #else
+                        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?choose=3&id=${id}">${m.name}</a>
+                    #end
+                #end
 
                 </span>
-                    #div(divClass="clearfix")
-                #end
+                #div(divClass="clearfix")
+            #end
 
-            <span class="barBoxs">
+        <span class="barBoxs">
                 <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/testtask?choose=3&id=${id}"
                    class="${choose == 3?'active_btn':''}">负责版本</a>
                 <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/testtask1?choose=4&id=${id}"
@@ -85,10 +80,11 @@
                 <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/testtask1?choose=5&id=${id}"
                    class="${choose == 5?'active_btn':''}">他建的用例</a>
         </span>
-            #end
         #end
     #end
 #end
+
+
 
 #@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
     #@div(divClass="tinyheaderTools form-inline")

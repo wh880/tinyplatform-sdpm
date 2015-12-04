@@ -4,7 +4,6 @@
       <input type="hidden" name="moduleId" value="${module?.moduleId}"/>
        <input type="hidden" name="moduleType" value="dict"/>
        #@gridSysRow()
-        
 	     #@colLabel("col-4")父节点：#end
 	           #@gridSysCol(6)
 	               #@Tselect2F()

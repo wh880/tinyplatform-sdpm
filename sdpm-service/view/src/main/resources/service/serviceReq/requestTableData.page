@@ -21,9 +21,7 @@
 
             #set(m1=menuManager.getMenu("request-close"))
             #if(m1)
-                #@aModal(
-                    "#myModal" aModalTitle="关闭" "500" "200" m1.icon adminPath+m1.href+"?id="+var?.clientRequestId+
-                    "&treeId="+treeId+"&status="+status+"&operation="+operation titleName="关闭")
+                #@aModal("#myModal" aModalTitle="关闭" "500" "200" m1.icon adminPath+m1.href+"?id="+var?.clientRequestId+"&treeId="+treeId+"&status="+status+"&operation="+operation titleName="关闭")
                 #end
             #end
 

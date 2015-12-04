@@ -1,14 +1,9 @@
 #!set(activeTitle="组织管理",activeMenuId=currentPageId)
 #import("/org/tinygroup/zTree/components/zTree.component")
 #import("/common/component/form.component")
-#include("/common/common.page")
 #set(name="organizationUser")
-#@div()
-    #@tabWithInit("tab_demo" "optionsBox")
-        #@tabHead()
-            #include("/organization/common/tab.page")
-        #end
-    #end
+
+#@layout(org)#end
     #@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
         #@toggleLeft({"class":"aclass"})
             #@settoggleLeftTitle()部门结构#end
@@ -26,4 +21,3 @@
             #include("/organization/user/userRightTable.page")
         #end
     #end
-#end

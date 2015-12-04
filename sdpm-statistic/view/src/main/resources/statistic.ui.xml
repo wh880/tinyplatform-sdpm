@@ -2,6 +2,6 @@
     <ui-component name="statistic" dependencies="base">
         
         <js-resource><!--/common/js/sdpm.js--></js-resource>        
-        <css-resource>/statistic/data/stati.css</css-resource>   
+        <css-resource>/statistic/css/stati.css</css-resource>   
     </ui-component>
 </ui-components>

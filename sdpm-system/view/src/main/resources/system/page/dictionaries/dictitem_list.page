@@ -1,5 +1,3 @@
-#include("/system/page/event/common.page")
-
 
 #set(editpagePath="/system/page/dictionaries/dictitem_edit.pagelet",editpageModalId="dictitemEditModal",editpageModal="#"+editpageModalId)
 <style>.dataTablebox .tablebox{margin-left:200px;margin-top:4px;}</style>

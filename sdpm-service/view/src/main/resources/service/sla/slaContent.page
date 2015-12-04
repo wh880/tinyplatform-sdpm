@@ -1,29 +1,16 @@
 #import("/org/tinygroup/button/components/button_common.component")
 #import("/org/tinygroup/button/components/button.component")
 #import("/org/tinygroup/table/components/table.component")
-#!set(activeTitle="服务管理",activeMenuId=currentPageId)
 
 #set(name="sla")
-#@div()
-    #@tabWithInit("tab_demo" "optionsBox")
-    #* #@div(divClass="dropdownBox")
-         #include("/service/serviceCom/dropdownMenu.page")
-     #end*#
-        #@tabHead()
-            #include("/service/serviceCom/tab.page")
-        #end
-    <br/>
-    #end
+#@layout(service)
 #end
 #@tabWithInit("tab_demo" "optionsBox")
-##tabbody end
 <p style="width:100%;float:left">
-##        #@gridSysCol(8)
     #@div(divClass="infoContent")
     <p class="titleName">${sla.slaTitle}</p>
         #@tbody()
             #@tr()
-            #* <div class="text-c"><h4>支付宝出售协议</h4></div>*#
             #end
             #@noRespsGridSystem()
                 #@gridSysRow()

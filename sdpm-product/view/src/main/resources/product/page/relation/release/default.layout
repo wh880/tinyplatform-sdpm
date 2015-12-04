@@ -1,14 +1,8 @@
 #import("/org/tinygroup/button/components/button_smart.component")
 #import("/org/tinygroup/button/components/button_common.component")
-
 #import("/org/tinygroup/button/components/button.component")
-
-#!set(activeTitle="产品管理",activeMenuId=currentPageId)
 #include("/product/page/event/common.page")
 
-#!set(activeMenuId=currentPageId)
-#!set(linkName="product-release",sonitem="
-<li>"+"发布"+"</li>")
 #@div(divClass="operationbar")
 <span class="r">
 

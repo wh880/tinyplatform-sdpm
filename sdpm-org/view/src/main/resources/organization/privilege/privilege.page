@@ -2,13 +2,8 @@
 #set(editpagePath=
     "/organization/privilege/groupAdd.pagelet",editpageModalId="userEditModal",editpageModal="#"+editpageModalId)
 #set(name="organizationPrivilege")
-#include("/common/common.page")
-#@div()
-    #@tabWithInit("tab_demo" "optionsBox")
-        #@tabHead()
-            #include("/organization/common/tab.page")
-        #end
-    #end
+
+#@layout(org)#end
     #@tinyTable("org-role-list") ##ID为空则系统自动生成 带入参数则取该参数为ID
         #@div(divBaseClass="tinyheaderTools form-inline")
             #@hasMenu("organizationAddGroup")
@@ -28,7 +23,7 @@
             #end
         #end
     #end
-#end
+
 #simpleModal(editpageModalId)
 #@simpleModal("myModal" )#end
 <script>

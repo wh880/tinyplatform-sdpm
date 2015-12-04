@@ -1,14 +1,13 @@
 #import("/org/tinygroup/button/components/button_smart.component")
 #import("/org/tinygroup/button/components/button_common.component")
 #import("/org/tinygroup/button/components/button.component")
-#include("/system/page/event/common.page")
 #@div()
 	#@tabWithInit("top_demo" "optionsBox")
 		#@tabHead()
 				#foreach(m in menuManager.getChildMenus("mysystem"))
 					#@aHeadCol(TINY_CONTEXT_PATH+adminPath+m.href m.id==linkName?"Current":"")${m.name}#end
 				#end
-				#@aHeadCol(TINY_CONTEXT_PATH+adminPath+"/system/about")关于我们#end
+				#@aHeadCol(TINY_CONTEXT_PATH+adminPath+"/system/about")程序员秀场#end
 		#end
 		#pageContent
 	#end

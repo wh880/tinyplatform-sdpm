@@ -2,31 +2,28 @@
 #import("/org/tinygroup/button/components/button_common.component")
 #import("/org/tinygroup/button/components/button.component")
 #import("/org/tinygroup/table/components/table.component")
-#!set(activeTitle="客户管理",activeMenuId=currentPageId)
 #set(name="client")
-#@div()
-    #@tabWithInit("tab_demo" "optionsBox")
-        #@tabHead()
-            #include("/service/serviceCom/tab.page")
-        #end
-        #@tabBodyCol("ptop-5")
-            #@div(divClass="operationbar")
-            <span class="f">
+#@layout(service)
+    #@tabBodyCol("ptop-5")
+        #@div(divClass="operationbar")
+        <span class="f">
 					<a href="${TINY_CONTEXT_PATH}${adminPath}/service/client/clientDetail?id=${client.clientId}"
                        class="active_btn">${client.clientName}</a>
             </span>
-            <span class="r">
+        <span class="r">
                 #set(m2=menuManager.getMenu("clientSla-add"))
-                #if(m2)
-                    <a href="${TINY_CONTEXT_PATH}${adminPath}${m2.href}?id=${client.clientId}"
-                       title="绑定产品">#buttonIcon(iconClass="icon-plus")${m2.name}</a>
-                #end
-
-                <a href="${TINY_CONTEXT_PATH}${adminPath}/service/client/list"
-                   title="返回">#buttonIcon(iconClass="icon-reply")返回</a>
-            </span>
+            #if(m2)
+                <a href="${TINY_CONTEXT_PATH}${adminPath}${m2.href}?id=${client.clientId}"
+                   title="绑定产品">#buttonIcon(iconClass="icon-plus")${m2.name}</a>
             #end
+
+            <a href="${TINY_CONTEXT_PATH}${adminPath}/service/client/list"
+               title="返回">#buttonIcon(iconClass="icon-reply")返回</a>
+            </span>
         #end
+    #end
+#end
+
 
         #@tabWithInit("tab_demo" "optionsBox")
             #if(slas.isEmpty())
@@ -154,9 +151,7 @@
             #@div(divClass="infoContent")
                 <p class="titleName">客户联系人信息</p>
                 <span style="float:right;margin-bottom:3px;margin-top: -7px">
-                    #@aModal(
-                        "#myModal1" "新建联系人" "580" "300" "btn radius btn-primary btn-sm" adminPath+
-                        "/service/client/clientUserUpdate/date"+"?clientId="+client?.clientId)新建
+                    #@aModal("#myModal1" "新建联系人" "580" "300" "btn radius btn-primary btn-sm" adminPath+"/service/client/clientUserUpdate/date"+"?clientId="+client?.clientId)新建
                     #end
                 </span>
                 #@tableBordered()
@@ -176,16 +171,13 @@
                             <td>
                                 #set(m=menuManager.getMenu("linkman-edit"))
                                 #if(m)
-                                    #@aModal(
-                                        "#myModal1" m.name "580" "300" m.icon adminPath+m.href+"?id="+var?.id)
+                                    #@aModal("#myModal1" m.name "580" "300" m.icon adminPath+m.href+"?id="+var?.id)
                                     #end
                                 #end
 
                                 #set(m1=menuManager.getMenu("linkman-new"))
                                 #if(m1)
-                                    #@aModal(
-                                        "#myModal1" m1.name "580" "300" m1.icon adminPath+m1.href+
-                                        "?clientId="+var?.clientId)
+                                    #@aModal("#myModal1" m1.name "580" "300" m1.icon adminPath+m1.href+"?clientId="+var?.clientId)
                                     #end
                                 #end
 
@@ -201,7 +193,5 @@
             #end
         </div>
         #end
-    #end
 
-#end
 #@simpleModal("myModal1" "")#end

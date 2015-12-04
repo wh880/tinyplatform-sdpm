@@ -44,3 +44,9 @@
 #macro sdpmgGtMenuId()
     #foreach(var:menuList)#if(tinyRequestRequestURI.startsWith(var?.url))#set(activeMenuId=var.id)#break#end#end
 #end
+#macro getSubMenu()
+    #set(subMenuName=tinyRequestRequestURI.replace(TINY_CONTEXT_PATH+adminPath+"/",""),subMenuName=subMenuName.substring(subMenuName.indexOf("/")+1),tempMenu=subMenuName.indexOf("/"))
+    #if(tempMenu!=-1)
+        #set(subMenuName = subMenuName.substring(0,subMenuName.indexOf("/")))
+    #end
+#end

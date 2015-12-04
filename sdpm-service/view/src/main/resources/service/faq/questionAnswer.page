@@ -5,12 +5,7 @@
 #import("/org/tinygroup/form/components/form.component")
 #import("/org/tinygroup/bootstrapDate/components/bootstrapDate.component")
 #set(name="faq")
-#@div()
-    #@tabWithInit("tab_demo" "optionsBox")
-        #@tabHead()
-            #include("/service/serviceCom/tab.page")
-        #end
-    #end
+#@layout(service)#end
 <div class="questionBox">
     <div class="questionInfo">
         <p class="Nametitle">问答页面</p>
@@ -43,7 +38,7 @@
         #end
     </div>
 </div>
-#end
+
 #@simpleModal("myModal3" "编辑")#end
 #@simpleModal("myModal4" "删除")#end
 <script>
