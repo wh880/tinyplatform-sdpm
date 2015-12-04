@@ -9,7 +9,7 @@
 
 #set(name="qualityCases")
 
-#@layout(operate)#end
+#@layout(quality)#end
     #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/quality/testCase/save" "post" {"class":"","enctype":"multipart/form-data"})
 	<div style="width:100%">
     	<div class="infoContent">

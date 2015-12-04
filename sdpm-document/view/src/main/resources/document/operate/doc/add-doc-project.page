@@ -2,8 +2,7 @@
 #import("/org/tinygroup/icon/components/icon.component")
 #import("/org/tinygroup/button/components/button_common.component")
 #import("/org/tinygroup/button/components/button.component")
-
-#include("doc-tab.page")
+#@layout(document)#end
 #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/document/doc/addSave" "post" {"class":"add","enctype":
     "multipart/form-data"})
 <input type="hidden" name="lastAddress" value=""/>

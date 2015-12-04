@@ -7,7 +7,7 @@
     .select_boxes{margin-top:0}
 </style>
 #set(name="qualityBug")
-#@layout(operate)#end
+#@layout(quality)#end
 			
 #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/quality/bug/solve" "post" {"class":"test","enctype":"multipart/form-data"})
 #hiddenInput(hiddenInputName="bugId" hiddenInputValue=bug?.bugId)

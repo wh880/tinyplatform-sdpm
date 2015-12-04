@@ -5,7 +5,7 @@
 #import("/org/tinygroup/fold/components/fold.component")
 
 #set(name="qualityBug")
-#@layout(operate)#end
+#@layout(quality)#end
 			
 #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/quality/bug/sure" "post" {"class":"test"})
 	#hiddenInput(hiddenInputName="bugId" hiddenInputValue=bug?.bugId)

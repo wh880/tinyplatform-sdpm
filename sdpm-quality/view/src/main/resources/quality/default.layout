@@ -60,6 +60,16 @@
 
 
 </script>
+#@tabWithInit("tab_demo" "optionsBox")
+    #@div(divClass="dropdownBox")
+        #include("/quality/common/dropdownMenu.page")
+    #end
+    #@tabHead()
+        #include("/quality/common/Tab.page")
+    #end
+
+    #layout(quality)#end
+#end
 #pageContent
 #@dialog("myModal")
     #@dialogHeader()#end

@@ -1,4 +1,4 @@
-#@layout(index)
+#@layout(project)
     #@tabBodyCol("ptop-5")
         #include("/project/common/task/taskMenu.page")
     #end

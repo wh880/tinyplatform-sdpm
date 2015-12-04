@@ -9,7 +9,7 @@
 
 
 #set(name="qualityCases")
-#@layout(operate)#end
+#@layout(quality)#end
 
     #@tinyForm("addCaseForm" TINY_CONTEXT_PATH+adminPath+"/quality/testCase/save" "post" {"class":"","enctype":"multipart/form-data"})
     <input type="hidden" name="lastAddress" value=""/>

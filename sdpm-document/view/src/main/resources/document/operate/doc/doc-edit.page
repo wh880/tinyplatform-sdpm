@@ -4,9 +4,8 @@
 #import("/org/tinygroup/button/components/button_common.component")
 #import("/org/tinygroup/button/components/button.component")
 #import("/org/tinygroup/button/components/button_smart.component")
-#!set(activeTitle="产品文档库",activeMenuId=currentPageId)
-#include("/document/common.page")
-#include("doc-tab.page")
+
+#@layout(document)#end
 #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/document/doc/editSave" "post" {"class":"edit","enctype":
     "multipart/form-data"})
 <input name="docId" type="hidden" value="${doc?.docId}"/>

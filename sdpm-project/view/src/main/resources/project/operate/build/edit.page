@@ -3,7 +3,7 @@
 #import("/org/tinygroup/button/components/button_common.component")
 #import("/org/tinygroup/button/components/button.component")
 #import("/org/tinygroup/fold/components/fold.component")
-#@layout(operate) #end
+#@layout(project) #end
 #set(name="version")
 #@tinyForm("addform" TINY_CONTEXT_PATH+adminPath+"/project/build/addSave" post {"class":"test","enctype":
     "multipart/form-data"})

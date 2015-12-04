@@ -11,7 +11,7 @@
 
 
 #set(name="qualityCases")
-#@layout(operate)
+#@layout(quality)
     #@tabBodyCol("ptop-5")
     #@p(pClass="title_sty")
     <span class="f">

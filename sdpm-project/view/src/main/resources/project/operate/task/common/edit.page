@@ -6,7 +6,7 @@
 #import("/org/tinygroup/icon/components/icon.component")
 
 #set(name="task")
-#@layout(operate)
+#@layout(project)
 
 #end
 

@@ -12,7 +12,7 @@
 
 
 #set(name="qualityBug")
-#@layout(operate)#end
+#@layout(quality)#end
 ##operationbar start1
 #@div()
     #@p(pClass="title_sty")

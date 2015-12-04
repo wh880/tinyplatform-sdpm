@@ -4,26 +4,29 @@
 #import("/org/tinygroup/button/components/button.component")
 #import("/org/tinygroup/fold/components/fold.component")
 #set(name="documentDocu")
-#include("doc-tab.page")
-#@div()
-    #@p(pClass="title_sty")
-    <span class="f"> ${doc?.docTitle}</span>
-    <span class="r">
-       #foreach(m:menuManager.getScopeMenus("doc-op"))
-           #if(m.id == "docdelete")
-               #@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m.href doc?.docId TINY_CONTEXT_PATH+adminPath+"/document")
-                   #buttonIcon(iconClass=m.icon)
-               #end&nbsp
-               #if(m.id == "docedit")
-                   <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?docId=${doc?.docId}" title="${m.name}">
-                       #buttonIcon(iconClass=m.icon)</a>&nbsp
+#@layout(document)
+    #@tabBodyCol("ptop-5")
+        #@p(pClass="title_sty")
+        <span class="f"> ${doc?.docTitle}</span>
+        <span class="r">
+           #foreach(m:menuManager.getScopeMenus("doc-op"))
+               #if(m.id == "docdelete")
+                   #@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m.href doc?.docId TINY_CONTEXT_PATH+adminPath+"/document")
+                       #buttonIcon(iconClass=m.icon)
+                   #end&nbsp
+                   #if(m.id == "docedit")
+                       <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?docId=${doc?.docId}" title="${m.name}">
+                           #buttonIcon(iconClass=m.icon)</a>&nbsp
+                   #end
                #end
            #end
-       #end
-        <a href="javascript :;" onClick="javascript :history.back(-1);" title="返回">#buttonIcon(iconClass=
-            "icon-reply")</a>
-		</span>
+            <a href="javascript :;" onClick="javascript :history.back(-1);" title="返回">#buttonIcon(iconClass=
+                "icon-reply")</a>
+            </span>
+        #end
     #end
+#end
+#@div()
 <div style="width:70%;float:left" class="pageleftpart">
     #@div(divClass="infoContent")
         <p class="titleName">文档摘要</p>

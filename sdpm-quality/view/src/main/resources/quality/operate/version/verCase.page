@@ -9,7 +9,7 @@
 
 
 #set(name="qualityVersion")
-#@layout(operate)
+#@layout(quality)
     #@tabBodyCol("ptop-5")
         #set(testversionId = testversionId)
     ##operationbar start1

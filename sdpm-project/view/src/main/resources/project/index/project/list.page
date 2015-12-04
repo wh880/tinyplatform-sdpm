@@ -1,4 +1,4 @@
-#@layout(index)#end
+#@layout(project)#end
 #set(name="task")
 #@tinyTable()
     #@div(divBaseClass="tinyheaderTools form-inline")

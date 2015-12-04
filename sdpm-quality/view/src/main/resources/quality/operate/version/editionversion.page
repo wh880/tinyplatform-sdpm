@@ -8,7 +8,7 @@
 </style>
 
 #set(name="qualityVersion")
-#@layout(operate)#end
+#@layout(quality)#end
 		#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/quality/version/save" "post" {"class":"test"})
 		<script type="text/javascript">
             $(function(){

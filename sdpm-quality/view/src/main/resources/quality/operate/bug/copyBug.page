@@ -7,7 +7,7 @@
         margin-top: 0
     }
 </style>
-#@layout(operate)#end
+#@layout(quality)#end
 #set(name="qualityBug")
 		#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/quality/bug/copy" "post" {"class":"","enctype":
 			"multipart/form-data"})

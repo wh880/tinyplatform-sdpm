@@ -1,3 +1,0 @@
-#foreach(m in menuManager.getChildMenus("idocument"))
-    #@aHeadCol(TINY_CONTEXT_PATH+adminPath+m.href "Current")${m.name}#end
-#end

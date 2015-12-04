@@ -70,7 +70,7 @@ public class TestCaseAction extends BaseController {
                     + (queryString == null ? "" : "&" + queryString);
         }
         if("noCase".equals(type)){
-            return "quality/index/case/NoTestCaseStory.page"
+            return "quality/index/case/NoTestCaseStory.page";
         }
         return "quality/index/case/testCase.page";
     }

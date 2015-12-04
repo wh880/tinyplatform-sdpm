@@ -5,7 +5,7 @@
         min-width: 75px
     }
 </style>
-#@layout(operate)
+#@layout(project)
     #@tabBodyCol("ptop-5")
     ##operationbar start
         #@div(divClass="operationbar")

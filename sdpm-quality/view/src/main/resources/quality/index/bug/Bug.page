@@ -50,7 +50,7 @@
 #set(qualityProduct = "")
 #set(name="qualityBug")
 
-#@layout(index)
+#@layout(quality)
 	#@tabBodyCol("ptop-5")
 	##operationbar star
 		#@div(divClass="operationbar")

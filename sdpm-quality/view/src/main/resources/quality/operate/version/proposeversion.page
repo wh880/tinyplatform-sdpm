@@ -7,7 +7,7 @@
 
 
 #set(name="qualityVersion")
-#@layout(operate)#end
+#@layout(quality)#end
     #@tinyForm("thisform" "" "post" {"class":"test"})
     <input type="hidden" name="lastAddress" value=""/>
     #hiddenInput(hiddenInputName="testversionId" hiddenInputValue=testTask?.testversionId)

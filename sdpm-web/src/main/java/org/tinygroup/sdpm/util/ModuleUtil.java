@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class ModuleUtil {
 
-    private static ModuleService moduleService = BeanContainerFactory.getBeanContainer(ModuleUtil.class.getClassLoader()).getBean("moduleService");
+    private static ModuleService moduleService = BeanContainerFactory.getBeanContainer(ModuleUtil.class.getClassLoader()).getBean(ModuleServiceImpl.class);
 
     private static ModuleListCallBackFunction moduleList;
 

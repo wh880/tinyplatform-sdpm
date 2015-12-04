@@ -19,7 +19,7 @@
 </style>
 
 #set(name="qualityCases")
-#@layout(operate)#end
+#@layout(quality)#end
     ##tabbody end
 <br>
 

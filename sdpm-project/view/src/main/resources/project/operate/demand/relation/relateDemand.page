@@ -2,7 +2,7 @@
 #import("/org/tinygroup/button/components/button.component")
 
 #set(name="demand")
-#@layout(operate)
+#@layout(project)
     #@tabBodyCol("ptop-5")
         #@div(divClass="operationbar")
         <span class="f">

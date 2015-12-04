@@ -5,7 +5,7 @@
 #import("/org/tinygroup/fold/components/fold.component")
 #!set(activeTitle="测试管理",activeMenuId=currentPageId)
 #set(name="qualityBug")
-#@layout(operate)
+#@layout(quality)
 
 #end
 

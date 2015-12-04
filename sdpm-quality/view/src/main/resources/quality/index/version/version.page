@@ -1,7 +1,7 @@
 #!set(activeTitle="测试管理",activeMenuId=currentPageId)
 
 #set(name="qualityVersion")
-#@layout(index)
+#@layout(quality)
     #@tabBodyCol("ptop-5")
     ##operationbar start1
         #@div(divClass="operationbar")

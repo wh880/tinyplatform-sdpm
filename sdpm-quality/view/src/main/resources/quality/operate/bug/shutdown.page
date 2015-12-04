@@ -6,7 +6,7 @@
 #!set(activeTitle="测试管理",activeMenuId=currentPageId)
 
 #set(name="qualityBug")
-#@layout(operate)#end
+#@layout(quality)#end
 #set(requestStatuString = tinyRequestQueryString!=null ?tinyRequestQueryString:"")			
 #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/quality/bug/close?"+requestStatuString "" {"class":"test"})
 ##hiddenInput(hiddenInputName="bugId" hiddenInputValue=bug?.bugId)

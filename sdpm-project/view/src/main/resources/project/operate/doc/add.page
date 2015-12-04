@@ -3,7 +3,7 @@
 #import("/org/tinygroup/button/components/button_common.component")
 #import("/org/tinygroup/button/components/button.component")
 #import("/org/tinygroup/button/components/button_smart.component")
-#@layout(operate) #end
+#@layout(project) #end
 #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/project/doc/save" "post" {"class":"edit","enctype":
     "multipart/form-data"})
 <input name="docId" type="hidden" value="${doc?.docId}"/>

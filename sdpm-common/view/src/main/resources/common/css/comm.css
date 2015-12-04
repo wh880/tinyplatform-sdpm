@@ -483,7 +483,7 @@ table.table.filelist-table{border:#ddd 1px solid;}
 .tinyfooterrap a,.tinyfooterrap a:link,.tinyfooterrap a:visited{color:#ccb}
 .tinyfooterrap a:hover{text-decoration:underline;color:#ffe}
 
-/*quality*/
+/*/!*quality*!/
 
 .operationbar .active_btn:hover{background:none;}
 .btn-group #Dropdown{background:none;border:none;padding:0 3px}
@@ -503,4 +503,4 @@ table.table.filelist-table{border:#ddd 1px solid;}
 .shrinkage .edui-Box{margin-left:6px;}
 .shrinkage .edui-Box .titleNames{display:block;margin-bottom:6px;margin-left:8px;}
 
-.adjustTable tbody tr th{width:40%;text-align:right;}
+.adjustTable tbody tr th{width:40%;text-align:right;}*/

@@ -5,7 +5,7 @@
 #import("/org/tinygroup/button/components/button.component")
 #import("/org/tinygroup/fold/components/fold.component")
 #set(name="task")
-#@layout(operate)
+#@layout(project)
 #end
 #@tinyForm(
     "addTaskForm" TINY_CONTEXT_PATH+adminPath+"/project/task/save" "post" {"class":"test","enctype":

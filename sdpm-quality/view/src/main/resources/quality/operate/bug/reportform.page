@@ -58,7 +58,7 @@
 
 
 #set(name="qualityBug")
-#@layout(operate)
+#@layout(quality)
     #@tabBodyCol("ptop-5")
     ##operationbar start1
         #@div(divClass="operationbar")

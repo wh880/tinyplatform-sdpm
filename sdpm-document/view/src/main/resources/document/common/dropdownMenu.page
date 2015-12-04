@@ -2,7 +2,7 @@
 #@navSelect2("docLibName" "lib-id")
     #@navSelect2Nav()
         #if(documentLibId)
-            ${CmsUtils.getDocLib(documentLibId).docLibName}
+            ${docService.findDocLibById(Integer.parseInt(documentLibId)).docLibName}
         #else
         无文档库
         #end

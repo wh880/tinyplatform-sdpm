@@ -3,7 +3,7 @@
 #import("/org/tinygroup/table/components/table.component")
 #set(name="qualityVersion")
 
-#@layout(operate)
+#@layout(quality)
 	#@tabBodyCol("ptop-5")
 	##operationbar
 		#@div(divClass="operationbar")
