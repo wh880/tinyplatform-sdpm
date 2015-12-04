@@ -38,7 +38,9 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     public OrgUser findUser(String id) {
-        if (StringUtil.isBlank(id)) return new OrgUser();
+        if (StringUtil.isBlank(id)) {
+            return null;
+        }
         return userManager.find(id);
     }
 

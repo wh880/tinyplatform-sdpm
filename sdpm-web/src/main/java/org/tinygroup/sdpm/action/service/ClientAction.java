@@ -130,7 +130,7 @@ public class ClientAction extends BaseController {
                 serviceClientUser.setUserAccount(client.getUserAccount());
                 serviceClientUser.setClientId(client.getClientId());
                 serviceClientUser.setUserPost(client.getUserPost());
-                clientService.addServiceClientUser(serviceClientUser);
+                clientUserService.addServiceClientUser(serviceClientUser);
             }
         } else {
             clientService.updateClient(client);

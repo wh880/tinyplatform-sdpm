@@ -61,10 +61,10 @@ public interface ProjectStoryService {
      * @param start
      * @param limit
      * @param order
-     * @param ordertype
+     * @param orderType
      * @return
      */
-    Pager<ProductStory> findStoryByProject(Integer projectId, Integer start, Integer limit, String order, String ordertype, String moduleId);
+    Pager<ProductStory> findStoryPagerByProject(Integer projectId, Integer start, Integer limit, String order, String orderType, String moduleId);
 
     /**
      * 删除

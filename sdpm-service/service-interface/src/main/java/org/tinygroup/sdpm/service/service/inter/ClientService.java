@@ -83,14 +83,6 @@ public interface ClientService {
     List<ServiceSla> findSlaByClientId(Integer id);
 
     /**
-     * 新增一个客户联系人
-     *
-     * @param clientUser 新增实体类
-     * @return
-     */
-    ServiceClientUser addServiceClientUser(ServiceClientUser clientUser);
-
-    /**
      * 查找一个客户的所有联系人
      *
      * @param clientUser 编辑实体类

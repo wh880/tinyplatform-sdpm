@@ -600,7 +600,7 @@ public class ProjectTaskAction extends BaseController {
         for (ProjectTask t : taskList) {
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             Map<String, Object> map = new HashMap<String, Object>();
-            map.put("pID", t.getTaskId().toString());
+            map.put("pID", t.getTaskId());
             map.put("pName", StringUtil.abbreviate(t.getTaskName(), 10));
             if (t.getTaskRealStarted() != null) {
                 map.put("pStart", format.format(t.getTaskRealStarted()));
@@ -610,15 +610,17 @@ public class ProjectTaskAction extends BaseController {
                 map.put("pStart", format.format(project.getProjectBegin()));
             }
 
-
             if (t.getTaskDeadLine() != null) {
                 map.put("pEnd", format.format(t.getTaskDeadLine()));
             } else {
                 map.put("pEnd", format.format(project.getProjectEnd()));
             }
 
-            map.put("pColor", t.getTaskPri().toString());
-            map.put("pRes", userService.findUser(t.getTaskAssignedTo()).getOrgUserRealName());
+            map.put("pColor", t.getTaskPri());
+            OrgUser user = userService.findUser(t.getTaskAssignedTo());
+            if (user != null) {
+                map.put("pRes", user.getOrgUserRealName());
+            }
             //进度
             float comp;
             if ((t.getTaskConsumed() == null || t.getTaskLeft() == null) || (t.getTaskConsumed() + t.getTaskLeft() == 0)) {
@@ -632,7 +634,6 @@ public class ProjectTaskAction extends BaseController {
             map.put("pOpen", "1");
             map.put("pDepend", "0");
             map.put("pCaption", "");
-//            map.put("idName", "taskId");
             resultList.add(map);
         }
         return resultList;

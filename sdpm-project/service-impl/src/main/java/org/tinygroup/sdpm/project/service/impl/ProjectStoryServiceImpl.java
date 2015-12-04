@@ -76,7 +76,7 @@ public class ProjectStoryServiceImpl implements ProjectStoryService {
         return buildManager.findBuildStory(start, limit, id);
     }
 
-    public Pager<ProductStory> findStoryByProject(Integer projectId, Integer start, Integer limit, String order, String ordertype, String moduleId) {
+    public Pager<ProductStory> findStoryPagerByProject(Integer projectId, Integer start, Integer limit, String order, String orderType, String moduleId) {
         List<ProjectStory> storyList = projectStoryManager.findStoryList(projectId);
         String[] ids = new String[storyList.size()];
         for (int i = 0; i < storyList.size(); i++) {
@@ -89,7 +89,7 @@ public class ProjectStoryServiceImpl implements ProjectStoryService {
         }
         ProductStory story = new ProductStory();
         story.setDeleted(0);
-        Pager<ProductStory> pager = storyManager.findStoryByCondition(start, limit, story, carrier, order, "asc".equals(ordertype) ? true : false);
+        Pager<ProductStory> pager = storyManager.findStoryByCondition(start, limit, story, carrier, order, "asc".equals(orderType) ? true : false);
         for (ProductStory s : pager.getRecords()) {
             s.setTaskNumber(taskManager.getTaskSumByStory(s.getStoryId()));
         }

@@ -47,7 +47,7 @@ public class ProjectStoryAction extends BaseController {
         if (projectId == null) {
             return null;
         }
-        Pager<ProductStory> storyPager = projectStoryService.findStoryByProject(projectId, start, limit, order, orderType, moduleId);
+        Pager<ProductStory> storyPager = projectStoryService.findStoryPagerByProject(projectId, start, limit, order, orderType, moduleId);
         model.addAttribute("storyPager", storyPager);
         return "project/data/demand/demandTableData.pagelet";
     }
