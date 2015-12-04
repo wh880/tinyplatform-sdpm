@@ -43,5 +43,5 @@ public interface StorySpecService {
      * @param storyId
      * @return
      */
-    Integer getMaxVersion(Integer storyId);
+    Integer getStoryMaxVersion(Integer storyId);
 }

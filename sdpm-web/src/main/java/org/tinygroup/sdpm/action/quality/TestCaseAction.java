@@ -143,7 +143,7 @@ public class TestCaseAction extends BaseController {
             step1.setCaseId(testcase.getCaseId());
             List<QualityCaseStep> steps = caseStepService.findCaseStepList(step1);
             if (isCaseModify(step, expect, steps)) {
-                Integer maxVersion = caseStepService.getMaxVersion(testCase.getCaseId());
+                Integer maxVersion = caseStepService.getCaseMaxVersion(testCase.getCaseId());
                 testcase.setCaseVersion(maxVersion == null ? 1 : maxVersion + 1);
                 insertStep(step, expect, testcase);
             }
@@ -657,7 +657,7 @@ public class TestCaseAction extends BaseController {
                                   Integer start,
                                   Integer limit) {
         QualityTestCase testCase = testCaseService.testCase(caseId);
-        Integer maxCaseVersion = caseStepService.getMaxVersion(caseId);
+        Integer maxCaseVersion = caseStepService.getCaseMaxVersion(caseId);
         if(maxCaseVersion==null){
             maxCaseVersion=1;
         }
