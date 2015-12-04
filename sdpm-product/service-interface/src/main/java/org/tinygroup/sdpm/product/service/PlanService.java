@@ -23,14 +23,6 @@ public interface PlanService {
     int updatePlan(ProductPlan plan);
 
     /**
-     * 批量编辑
-     *
-     * @param plan
-     * @return
-     */
-    int[] updateBatchPlan(List<ProductPlan> plan);
-
-    /**
      * 根据id批量删除
      *
      * @param ids
@@ -41,7 +33,7 @@ public interface PlanService {
     /**
      * 根据id进行软删除用户
      *
-     * @param id 主键
+     * @param planId 主键
      * @return
      */
     Integer deletePlan(Integer planId);
@@ -54,43 +46,34 @@ public interface PlanService {
      */
     ProductPlan findPlan(Integer planId);
 
-    /**
-     * 根据多个ID查找
-     *
-     * @param planId
-     * @return
-     */
-    List<ProductPlan> findPlanList(Integer... planId);
-
 
     /**
      * 根据对象查找
      *
-     * @param plan
+     * @param productPlan
      * @return
      */
     List<ProductPlan> findPlanList(ProductPlan productPlan);
 
     /**
      * 根据对象查找(排序)
-     *
-     * @param plan
-     * @param columnName
-     * @param asc
+     * @param productPlan
+     * @param order
+     * @param orderType
      * @return
      */
-    List<ProductPlan> findPlanList(ProductPlan productPlan, String order, String ordertype);
+    List<ProductPlan> findPlanListByOrder(ProductPlan productPlan, String order, String orderType);
 
     /**
      * 分页查询（排序）
-     *
-     * @param start
+     * @param page
      * @param limit
-     * @param plan
-     * @param ordertype
+     * @param productPlan
+     * @param order
+     * @param orderType
      * @return
      */
-    Pager<ProductPlan> findProductPlanPager(int page, int limit, ProductPlan productPlan, String order, String ordertype);
+    Pager<ProductPlan> findProductPlanPager(int page, int limit, ProductPlan productPlan, String order, String orderType);
 
     /**
      * 统计plan
@@ -98,6 +81,6 @@ public interface PlanService {
      * @param productPlan
      * @return
      */
-    List<ProductPlan> statisticFind(ProductPlan productPlan, boolean isOverdue);
+    List<ProductPlan> statisticProductPlan(ProductPlan productPlan, boolean isOverdue);
 
 }

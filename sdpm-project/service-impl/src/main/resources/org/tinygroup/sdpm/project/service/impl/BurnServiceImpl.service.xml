@@ -1,0 +1,29 @@
+<service-components>
+  <service-component type="org.tinygroup.sdpm.project.service.impl.BurnServiceImpl" bean="">
+    <service-method local-name="updateBurnByProjectId" service-id="updateBurnByProjectId" method-name="updateBurnByProjectId" cacheable="false" category="org.tinygroup.sdpm.project.service.impl">
+      <service-parameters>
+        <service-parameter name="projectId" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="updateBurnByProjectIdResult" required="false" is-array="false" type="void"/>
+    </service-method>
+    <service-method local-name="updateDateTaskId" service-id="updateDateTaskId" method-name="updateDateTaskId" cacheable="false" category="org.tinygroup.sdpm.project.service.impl">
+      <service-parameters>
+        <service-parameter name="taskId" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="updateDateTaskIdResult" required="false" is-array="false" type="void"/>
+    </service-method>
+    <service-method local-name="initBurn" service-id="initBurn" method-name="initBurn" cacheable="false" category="org.tinygroup.sdpm.project.service.impl">
+      <service-parameters>
+        <service-parameter name="projectId" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="interval" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="initBurnResult" required="false" is-array="false" type="org.tinygroup.sdpm.project.service.dto.BurnDTO"/>
+    </service-method>
+    <service-method local-name="findBurnByProjectId" service-id="findBurnByProjectId" method-name="findBurnByProjectId" cacheable="false" category="org.tinygroup.sdpm.project.service.impl">
+      <service-parameters>
+        <service-parameter name="projectId" type="int" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findBurnByProjectIdResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.project.dao.pojo.ProjectBurn"/>
+    </service-method>
+  </service-component>
+</service-components>

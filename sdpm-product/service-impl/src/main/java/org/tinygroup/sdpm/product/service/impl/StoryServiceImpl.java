@@ -8,7 +8,6 @@ import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec;
 import org.tinygroup.sdpm.product.dao.pojo.StoryCount;
 import org.tinygroup.sdpm.product.service.StoryService;
-import org.tinygroup.sdpm.system.biz.inter.ModuleManager;
 import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.Date;
@@ -20,8 +19,6 @@ public class StoryServiceImpl implements StoryService {
 
     @Autowired
     private StoryManager storyManager;
-    @Autowired
-    private ModuleManager moduleManager;
 
     public ProductStory addStory(ProductStory story,
                                  ProductStorySpec storySpec,
@@ -45,12 +42,10 @@ public class StoryServiceImpl implements StoryService {
     }
 
     public Integer deleteStory(ProductStory story) {
-
         return storyManager.delete(story);
     }
 
     public int updateStory(ProductStory story) {
-
         return storyManager.update(story);
     }
 
@@ -65,9 +60,9 @@ public class StoryServiceImpl implements StoryService {
         return storyManager.updateBatch(stories);
     }
 
-    public List<ProductStory> findStoryList(ProductStory story, String order, String ordertype) {
+    public List<ProductStory> findStoryListByOrder(ProductStory story, String order, String orderType) {
 
-        return storyManager.findList(story, order, ordertype);
+        return storyManager.findList(story, order, orderType);
     }
 
     public Pager<ProductStory> findStoryPagerRel(int start, int limit, ProductStory story, ConditionCarrier carrier, String columnName, boolean asc) {
@@ -75,8 +70,7 @@ public class StoryServiceImpl implements StoryService {
         return storyManager.findPagerRel(start, limit, story, carrier, columnName, asc);
     }
 
-    public List<ProductStory> findStoryList(Integer... storyId) {
-
+    public List<ProductStory> findStoryListByIds(Integer... storyId) {
         return storyManager.findList(false,storyId);
     }
 
@@ -85,29 +79,10 @@ public class StoryServiceImpl implements StoryService {
         return storyManager.findList(story);
     }
 
-    public List<StoryCount> productStoryCount(ProductStory story) {
-
-        return storyManager.productStoryCount(story);
-    }
-
-    public List<StoryCount> modelStoryCount(ProductStory story) {
-
-        return storyManager.modelStoryCount(story);
-    }
-
-    public List<StoryCount> planStoryCount(ProductStory story) {
-
-        return storyManager.planStoryCount(story);
-    }
-
-    public Map<String, List<StoryCount>> report(String fields,
-                                                ProductStory story) {
+    public Map<String, List<StoryCount>> StoryCountReport(String fields,
+                                                          ProductStory story) {
 
         return storyManager.report(fields, story);
-    }
-
-    public int countStatus(int productId, int status) {
-        return storyManager.countStatus(productId, status);
     }
 
     public int[] deleteBatchStory(List<ProductStory> ids) {

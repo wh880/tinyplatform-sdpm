@@ -20,7 +20,7 @@ public interface ProjectStoryService {
      * @param projectStoryList
      * @return
      */
-    int[] updateLink(List<ProjectStory> projectStoryList);
+    int[] updateProjectStoryLink(List<ProjectStory> projectStoryList);
 
     List<Project> findProjectsByStory(Integer storyId);
 
@@ -39,7 +39,7 @@ public interface ProjectStoryService {
      * @param storyIds
      * @return
      */
-    Integer batchDel(Integer projectId, Integer[] storyIds);
+    Integer batchDelStory(Integer projectId, Integer[] storyIds);
 
     /**
      * 批量添加
@@ -47,7 +47,7 @@ public interface ProjectStoryService {
      * @param projectStoryList
      * @return
      */
-    int[] addLink(List<ProjectStory> projectStoryList);
+    int[] addProjectStoryLink(List<ProjectStory> projectStoryList);
 
     /**
      * 根据projectId查询story

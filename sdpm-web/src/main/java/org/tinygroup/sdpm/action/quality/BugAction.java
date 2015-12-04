@@ -619,7 +619,7 @@ public class BugAction extends BaseController {
         if (productStory.getModuleId() == 0) {
             productStory.setModuleId(null);
         }
-        return storyService.findStoryList(productStory, null, null);
+        return storyService.findStoryListByOrder(productStory, null, null);
     }
 
     @ResponseBody

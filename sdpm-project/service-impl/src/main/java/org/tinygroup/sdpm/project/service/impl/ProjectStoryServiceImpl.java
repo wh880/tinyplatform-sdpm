@@ -11,7 +11,6 @@ import org.tinygroup.sdpm.project.biz.inter.BuildManager;
 import org.tinygroup.sdpm.project.biz.inter.ProjectManager;
 import org.tinygroup.sdpm.project.biz.inter.ProjectStoryManager;
 import org.tinygroup.sdpm.project.biz.inter.TaskManager;
-import org.tinygroup.sdpm.project.dao.ProjectBuildDao;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectStory;
 import org.tinygroup.sdpm.project.service.inter.ProjectStoryService;
@@ -34,11 +33,9 @@ public class ProjectStoryServiceImpl implements ProjectStoryService {
     @Autowired
     private ProjectManager projectManager;
     @Autowired
-    private ProjectBuildDao projectBuildDao;
-    @Autowired
     private BuildManager buildManager;
 
-    public int[] updateLink(List<ProjectStory> projectStoryList) {
+    public int[] updateProjectStoryLink(List<ProjectStory> projectStoryList) {
         return projectStoryManager.updateLink(projectStoryList);
     }
 
@@ -63,11 +60,11 @@ public class ProjectStoryServiceImpl implements ProjectStoryService {
         return projectStoryManager.findList(projectStory);
     }
 
-    public Integer batchDel(Integer projectId, Integer[] storyIds) {
+    public Integer batchDelStory(Integer projectId, Integer[] storyIds) {
         return projectStoryManager.batchDel(storyIds, projectId);
     }
 
-    public int[] addLink(List<ProjectStory> projectStoryList) {
+    public int[] addProjectStoryLink(List<ProjectStory> projectStoryList) {
         return projectStoryManager.linkStory(projectStoryList);
     }
 

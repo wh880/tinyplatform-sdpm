@@ -52,7 +52,7 @@ public class ProjectTeamAction extends BaseController {
         }
         ProjectTeam team = new ProjectTeam();
         team.setProjectId(projectId);
-        Pager<ProjectTeam> pager = teamService.findPager(team, start, limit, order, ordertype);
+        Pager<ProjectTeam> pager = teamService.findProjectTeamPager(team, start, limit, order, ordertype);
         model.addAttribute("teamPager", pager);
         return "project/data/team/manageTableData.pagelet";
     }
@@ -119,8 +119,8 @@ public class ProjectTeamAction extends BaseController {
                 addList.add(team);
             }
         }
-        teamService.batchAdd(addList);
-        teamService.batchUpdate(updateList);
+        teamService.batchAddTeam(addList);
+        teamService.batchUpdateTeam(updateList);
         //TODO: 删除用户项目列表
 //        ProjectUtils.removeUserProjectList();
         return "redirect:" + adminPath + "/project/team/index";
@@ -130,7 +130,7 @@ public class ProjectTeamAction extends BaseController {
     @ResponseBody
     @RequestMapping("/del")
     public Map<String, String> del(Integer id) {
-        Integer res = teamService.delete(id);
+        Integer res = teamService.deleteTeam(id);
         return resultMap(res > 0 ? true : false, res > 0 ? "删除成功" : "删除失败");
     }
 

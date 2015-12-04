@@ -21,17 +21,13 @@ public class TaskServiceImpl implements TaskService {
     @Autowired
     private TaskManager taskManager;
 
-    public Integer getMaxNo(Integer projectId) {
-        return taskManager.getMaxNo(projectId);
-    }
-
     public Integer updateDoingTask(ProjectTask task) {
         task.setTaskStatus(ProjectTask.DOING);
         task.setTaskLastEditedDate(new Date());
         return taskManager.update(task);
     }
 
-    public Integer batchAdd(List<ProjectTask> taskList, Integer projectId) {
+    public Integer batchAddTask(List<ProjectTask> taskList, Integer projectId) {
         Integer maxNo = taskManager.getMaxNo(projectId);
         if (maxNo == null) {
             maxNo = 0;
@@ -69,7 +65,7 @@ public class TaskServiceImpl implements TaskService {
         return taskManager.findPager(start, limit, task, sortName, asc);
     }
 
-    public ProjectTask findTask(Integer taskId) {
+    public ProjectTask findTaskById(Integer taskId) {
         return taskManager.find(taskId);
     }
 
@@ -135,10 +131,6 @@ public class TaskServiceImpl implements TaskService {
 
     public List<TaskChartBean> buildChart(String id) {
         return taskManager.findByGroup(id);
-    }
-
-    public Map<String, List<ProjectTask>> findTaskByGroup(int projectId, String colum) {
-        return null;
     }
 
     private Object getFieldValueByName(String fieldName, Object o) {

@@ -13,13 +13,6 @@ import java.util.Map;
  * Created by shenly13343 on 2015-09-20.
  */
 public interface TaskService {
-    /**
-     * 获取项目最大编号
-     *
-     * @param projectId
-     * @return
-     */
-    Integer getMaxNo(Integer projectId);
 
     /**
      * 激活项目
@@ -28,7 +21,7 @@ public interface TaskService {
      */
     Integer updateDoingTask(ProjectTask task);
 
-    Integer batchAdd(List<ProjectTask> taskList, Integer projectId);
+    Integer batchAddTask(List<ProjectTask> taskList, Integer projectId);
 
     /**
      * 新建任务
@@ -37,15 +30,6 @@ public interface TaskService {
      * @return
      */
     ProjectTask addTask(ProjectTask Task);
-
-    /**
-     * 分组看任务
-     *
-     * @param colum
-     * @param projectId
-     * @return
-     */
-    Map<String, List<ProjectTask>> findTaskByGroup(int projectId, String colum);
 
     /**
      * 根据任务状态进行查询
@@ -85,7 +69,7 @@ public interface TaskService {
      * @param taskId
      * @return
      */
-    ProjectTask findTask(Integer taskId);
+    ProjectTask findTaskById(Integer taskId);
 
     /**
      * 跟新任务，包括指派，开始，完成，关闭，编辑

@@ -37,7 +37,7 @@ public class PermissionInterceptor {
         if (StringUtil.isBlank(projectId)) {
             return;
         }
-        List<String> menuList = teamService.getMenuIdListByProductAndUser(Integer.valueOf(projectId), UserUtils.getUserId());
+        List<String> menuList = teamService.getMenuIdListByProjectAndUser(Integer.valueOf(projectId), UserUtils.getUserId());
         MenuPermissionSubject subject = new MenuPermissionSubject();
         subject.setMenuList(menuList);
         interceptor(joinPoint, subject);

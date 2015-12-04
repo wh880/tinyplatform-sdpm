@@ -1,0 +1,96 @@
+<service-components>
+  <service-component type="org.tinygroup.sdpm.product.service.impl.ProductServiceImpl" bean="">
+    <service-method local-name="addProduct" service-id="addProduct" method-name="addProduct" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
+      <service-parameters>
+        <service-parameter name="product" type="org.tinygroup.sdpm.product.dao.pojo.Product" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="addProductResult" required="false" is-array="false" type="org.tinygroup.sdpm.product.dao.pojo.Product"/>
+    </service-method>
+    <service-method local-name="updateProduct" service-id="updateProduct" method-name="updateProduct" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
+      <service-parameters>
+        <service-parameter name="product" type="org.tinygroup.sdpm.product.dao.pojo.Product" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="updateProductResult" required="false" is-array="false" type="int"/>
+    </service-method>
+    <service-method local-name="deleteProduct" service-id="deleteProduct" method-name="deleteProduct" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
+      <service-parameters>
+        <service-parameter name="productId" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="deleteProductResult" required="false" is-array="false" type="int"/>
+    </service-method>
+    <service-method local-name="findProductById" service-id="findProductById" method-name="findProductById" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
+      <service-parameters>
+        <service-parameter name="productId" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findProductByIdResult" required="false" is-array="false" type="org.tinygroup.sdpm.product.dao.pojo.Product"/>
+    </service-method>
+    <service-method local-name="findProductListByIds" service-id="findProductListByIds" method-name="findProductListByIds" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
+      <service-parameters>
+        <service-parameter name="productId" type="java.lang.Integer" required="false" is-array="true"/>
+      </service-parameters>
+      <service-result name="findProductListByIdsResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.product.dao.pojo.Product"/>
+    </service-method>
+    <service-method local-name="findProductList" service-id="findProductList" method-name="findProductList" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
+      <service-parameters>
+        <service-parameter name="product" type="org.tinygroup.sdpm.product.dao.pojo.Product" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findProductListResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.product.dao.pojo.Product"/>
+    </service-method>
+    <service-method local-name="getProductAndLine" service-id="getProductAndLine" method-name="getProductAndLine" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
+      <service-parameters>
+        <service-parameter name="product" type="org.tinygroup.sdpm.product.dao.pojo.Product" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="getProductAndLineResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.product.dao.pojo.ProductAndLine"/>
+    </service-method>
+    <service-method local-name="getProductNameByLineId" service-id="getProductNameByLineId" method-name="getProductNameByLineId" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
+      <service-parameters>
+        <service-parameter name="productLineId" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="getProductNameByLineIdResult" required="false" is-array="false" collection-type="java.util.List" type="java.lang.String"/>
+    </service-method>
+    <service-method local-name="getProductByUser" service-id="getProductByUser" method-name="getProductByUser" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
+      <service-parameters>
+        <service-parameter name="userId" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="delete" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="productLineId" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="getProductByUserResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.product.dao.pojo.Product"/>
+    </service-method>
+    <service-method local-name="getProductByUserWithCount" service-id="getProductByUserWithCount" method-name="getProductByUserWithCount" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
+      <service-parameters>
+        <service-parameter name="userId" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="delete" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="noRole" type="boolean" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="getProductByUserWithCountResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.product.dao.pojo.Product"/>
+    </service-method>
+    <service-method local-name="getProductByUserAndProductLineWithCount" service-id="getProductByUserAndProductLineWithCount" method-name="getProductByUserAndProductLineWithCount" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
+      <service-parameters>
+        <service-parameter name="userId" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="productLineId" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="delete" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="getProductByUserAndProductLineWithCountResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.product.dao.pojo.Product"/>
+    </service-method>
+    <service-method local-name="getUserProductsWithCountMap" service-id="getUserProductsWithCountMap" method-name="getUserProductsWithCountMap" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
+      <service-parameters>
+        <service-parameter name="userId" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="delete" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="getUserProductsWithCountMapResult" required="false" is-array="false" type="java.util.Map"/>
+    </service-method>
+    <service-method local-name="productInCondition" service-id="productInCondition" method-name="productInCondition" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
+      <service-parameters>
+        <service-parameter name="condition" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="ids" type="java.lang.Integer" required="false" is-array="true"/>
+      </service-parameters>
+      <service-result name="productInConditionResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.product.dao.pojo.Product"/>
+    </service-method>
+    <service-method local-name="getUserProductsMap" service-id="getUserProductsMap" method-name="getUserProductsMap" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
+      <service-parameters>
+        <service-parameter name="userId" type="java.lang.String" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="getUserProductsMapResult" required="false" is-array="false" type="java.util.Map"/>
+    </service-method>
+  </service-component>
+</service-components>
