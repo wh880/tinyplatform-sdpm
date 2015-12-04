@@ -5,10 +5,6 @@
         <property name="BASE_PACKAGE" value="org.tinygroup"/>
         <property name="DEBUG_MODE" value="true"/>
         <property name="TINY_THEME" value="default"/>
-        <property name="wholeWidth" value="200pt"/>
-        <property name="labelWidth" value="80pt"/>
-        <property name="fieldWidth" value="120pt"/>
-        <property name="cardWidth" value="200pt"/>
         <property name="UPLOAD_ACTION_URL" value="/ajaxUploadImage"/>
         <!--缓存配置-->
         <property name="cache_region" value="sessionCache"></property>

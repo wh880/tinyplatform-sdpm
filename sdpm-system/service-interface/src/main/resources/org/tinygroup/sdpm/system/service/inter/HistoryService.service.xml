@@ -1,6 +1,6 @@
 <service-components>
-  <service-component type="org.tinygroup.sdpm.system.service.impl.HistoryServiceImpl" bean="">
-    <service-method local-name="findSystemHistory" service-id="findSystemHistory" method-name="findSystemHistory" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
+  <service-component type="org.tinygroup.sdpm.system.service.inter.HistoryService" bean="historyServiceImpl">
+    <service-method local-name="findSystemHistory" service-id="findSystemHistory" method-name="findSystemHistory" cacheable="false" category="org.tinygroup.sdpm.system.service.inter">
       <service-parameters>
         <service-parameter name="systemHistory" type="org.tinygroup.sdpm.system.dao.pojo.SystemHistory" required="false" is-array="false"/>
       </service-parameters>

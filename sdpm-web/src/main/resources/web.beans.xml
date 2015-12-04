@@ -7,7 +7,7 @@
 
     <!--数据字典-->
     <bean id="dictHandle" class="org.tinygroup.sdpm.dict.impl.DictHandleImpl" scope="singleton"></bean>
-    <bean id="dictFileProcessor" class="org.tinygroup.sdpm.dict.processor.DictFileProcessor" ></bean>
+    <bean id="dictFileProcessor" class="org.tinygroup.sdpm.dict.processor.DictFileProcessor"></bean>
     <bean id="sdpmDictLoader" class="org.tinygroup.sdpm.dict.impl.SdpmDictLoader" scope="singleton">
         <property name="dictHandle" ref="dictHandle"></property>
         <property name="isInitFromFile" value="true"></property>
@@ -17,7 +17,7 @@
 
 
     <!--<bean id="customerAdvisor" class="org.tinygroup.sdpm.aop.AopCacheMatcherPointcutAdvisor">-->
-        <!--<property name="advice" ref="aopCacheInterceptor" />-->
+    <!--<property name="advice" ref="aopCacheInterceptor" />-->
     <!--</bean>-->
 
     <!--<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"></bean>-->
@@ -27,9 +27,14 @@
         <property name="pkgPatterns" value="**.service.inter"/>
     </bean>
 
-    <bean id="conventionFactoryBeanDefinitionRegistryPostProcessor" scope="singleton"
+    <bean id="conventionFactoryBeanDefinitionRegistryPostProcessor"
           class="org.tinygroup.custombeandefine.convention.ConventionCustomBeanDefinitionRegistryPostProcessor">
         <property name="beanDefineCreate" ref="proxyFactoryBeanDefineCreate"></property>
+        <property name="beanNameGenerator" ref="proxyFactoryBeanNameGenerator"></property>
+    </bean>
+
+    <bean id="proxyFactoryBeanNameGenerator" scope="singleton"
+          class="org.tinygroup.custombeandefine.namegenerator.ProxyFactoryBeanNameGenerator">
     </bean>
 
     <bean id="proxyFactoryBeanDefineCreate" scope="singleton"
@@ -41,7 +46,5 @@
             </list>
         </property>
     </bean>
-
-
 
 </beans>

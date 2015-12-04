@@ -21,6 +21,7 @@ public interface ProductService {
 
     /**
      * 添加产品
+     *
      * @param product
      * @return
      */
@@ -28,22 +29,25 @@ public interface ProductService {
 
     /**
      * 修改
+     *
      * @param product
      * @return
      */
-    @CachePut(keys = "${product.productId}", parameterNames = "product", group = CACHE_PRODUCT_ID,removeGroups = {CACHE_USER_PRODUCTS_MAP,CACHE_USER_PRODUCTS_LIST,CACHE_PRODUCT_ID,CACHE_USER_PRODUCTS_LIST_WITH_COUNT,CACHE_USER_PRODUCTS_LIST_WITH_LINE_COUNT,CACHE_PRODUCT_NAME_BY_LINE_ID})
+    @CachePut(keys = "${product.productId}", parameterNames = "product", group = CACHE_PRODUCT_ID, removeGroups = {CACHE_USER_PRODUCTS_MAP, CACHE_USER_PRODUCTS_LIST, CACHE_PRODUCT_ID, CACHE_USER_PRODUCTS_LIST_WITH_COUNT, CACHE_USER_PRODUCTS_LIST_WITH_LINE_COUNT, CACHE_PRODUCT_NAME_BY_LINE_ID})
     int updateProduct(Product product);
 
     /**
      * 根据产品ID删除
+     *
      * @param productId
      * @return
      */
-    @CacheRemove(removeKeys = "${productId}", group = CACHE_PRODUCT_ID, removeGroups = {CACHE_USER_PRODUCTS_MAP,CACHE_USER_PRODUCTS_LIST,CACHE_PRODUCT_ID,CACHE_USER_PRODUCTS_LIST_WITH_COUNT,CACHE_USER_PRODUCTS_LIST_WITH_LINE_COUNT,CACHE_PRODUCT_NAME_BY_LINE_ID})
+    @CacheRemove(removeKeys = "${productId}", group = CACHE_PRODUCT_ID, removeGroups = {CACHE_USER_PRODUCTS_MAP, CACHE_USER_PRODUCTS_LIST, CACHE_PRODUCT_ID, CACHE_USER_PRODUCTS_LIST_WITH_COUNT, CACHE_USER_PRODUCTS_LIST_WITH_LINE_COUNT, CACHE_PRODUCT_NAME_BY_LINE_ID})
     int deleteProduct(Integer productId);
 
     /**
      * 根据产品ID查找
+     *
      * @param productId
      * @return
      */
@@ -52,6 +56,7 @@ public interface ProductService {
 
     /**
      * 根据条件查找列表
+     *
      * @param product
      * @return
      */
@@ -59,6 +64,7 @@ public interface ProductService {
 
     /**
      * 根据多个ID查找
+     *
      * @param productId
      * @return
      */
@@ -66,6 +72,7 @@ public interface ProductService {
 
     /**
      * 根据对象查找(包含产品线的部分信息)
+     *
      * @param product
      * @return
      */
@@ -73,14 +80,16 @@ public interface ProductService {
 
     /**
      * 根据产品线ID查找产品的名字
+     *
      * @param productLineId
      * @return
      */
-    @CacheGet(key = "${productLineId}",group = CACHE_PRODUCT_NAME_BY_LINE_ID)
+    @CacheGet(key = "${productLineId}", group = CACHE_PRODUCT_NAME_BY_LINE_ID)
     List<String> getProductNameByLineId(Integer productLineId);
 
     /**
      * 获取当前用户可游览产品
+     *
      * @param userId
      * @param delete
      * @param productLineId
@@ -91,6 +100,7 @@ public interface ProductService {
 
     /**
      * 获取当前用户可游览产品-附带统计数据
+     *
      * @param userId
      * @param delete
      * @param noRole
@@ -101,6 +111,7 @@ public interface ProductService {
 
     /**
      * 获取当前用户在某产品线下可游览产品-附带统计数据
+     *
      * @param userId
      * @param productLineId
      * @param delete
@@ -111,6 +122,7 @@ public interface ProductService {
 
     /**
      * 获取当前用户可游览产品-以‘产品线-产品’的形式展示
+     *
      * @param userId
      * @return
      */
@@ -118,6 +130,7 @@ public interface ProductService {
 
     /**
      * 获取当前用户可游览产品-以‘产品线-产品’的形式展示-附带统计数据
+     *
      * @param userId
      * @param delete
      * @return
@@ -127,6 +140,7 @@ public interface ProductService {
 
     /**
      * 根据输入名称查询
+     *
      * @param condition
      * @return
      */

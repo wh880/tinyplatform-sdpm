@@ -1,24 +1,24 @@
 <service-components>
-  <service-component type="org.tinygroup.sdpm.system.service.impl.HolidayServiceImpl" bean="">
-    <service-method local-name="updateHoliday" service-id="updateHoliday" method-name="updateHoliday" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
+  <service-component type="org.tinygroup.sdpm.system.service.inter.HolidayService" bean="holidayServiceImpl">
+    <service-method local-name="updateHoliday" service-id="updateHoliday" method-name="updateHoliday" cacheable="false" category="org.tinygroup.sdpm.system.service.inter">
       <service-parameters>
         <service-parameter name="holiday" type="org.tinygroup.sdpm.system.dao.pojo.Holiday" required="false" is-array="false"/>
       </service-parameters>
       <service-result name="updateHolidayResult" required="false" is-array="false" type="org.tinygroup.sdpm.system.dao.pojo.Holiday"/>
     </service-method>
-    <service-method local-name="deleteHoliday" service-id="deleteHoliday" method-name="deleteHoliday" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
+    <service-method local-name="deleteHoliday" service-id="deleteHoliday" method-name="deleteHoliday" cacheable="false" category="org.tinygroup.sdpm.system.service.inter">
       <service-parameters>
         <service-parameter name="holiday" type="org.tinygroup.sdpm.system.dao.pojo.Holiday" required="false" is-array="false"/>
       </service-parameters>
       <service-result name="deleteHolidayResult" required="false" is-array="false" type="org.tinygroup.sdpm.system.dao.pojo.Holiday"/>
     </service-method>
-    <service-method local-name="findHolidayList" service-id="findHolidayList" method-name="findHolidayList" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
+    <service-method local-name="findHolidayList" service-id="findHolidayList" method-name="findHolidayList" cacheable="false" category="org.tinygroup.sdpm.system.service.inter">
       <service-parameters>
         <service-parameter name="holiday" type="org.tinygroup.sdpm.system.dao.pojo.Holiday" required="false" is-array="false"/>
       </service-parameters>
       <service-result name="findHolidayListResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.system.dao.pojo.Holiday"/>
     </service-method>
-    <service-method local-name="findByPage" service-id="findByPage" method-name="findByPage" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
+    <service-method local-name="findByPage" service-id="findByPage" method-name="findByPage" cacheable="false" category="org.tinygroup.sdpm.system.service.inter">
       <service-parameters>
         <service-parameter name="start" type="java.lang.Integer" required="false" is-array="false"/>
         <service-parameter name="limit" type="java.lang.Integer" required="false" is-array="false"/>
@@ -28,25 +28,25 @@
       </service-parameters>
       <service-result name="findByPageResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager"/>
     </service-method>
-    <service-method local-name="batchAddHoliday" service-id="batchAddHoliday" method-name="batchAddHoliday" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
+    <service-method local-name="batchAddHoliday" service-id="batchAddHoliday" method-name="batchAddHoliday" cacheable="false" category="org.tinygroup.sdpm.system.service.inter">
       <service-parameters>
         <service-parameter name="holidayList" type="org.tinygroup.sdpm.system.dao.pojo.Holiday" collection-type="java.util.List" required="false" is-array="false"/>
       </service-parameters>
       <service-result name="batchAddHolidayResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.system.dao.pojo.Holiday"/>
     </service-method>
-    <service-method local-name="findHolidayById" service-id="findHolidayById" method-name="findHolidayById" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
+    <service-method local-name="findHolidayById" service-id="findHolidayById" method-name="findHolidayById" cacheable="false" category="org.tinygroup.sdpm.system.service.inter">
       <service-parameters>
         <service-parameter name="id" type="java.lang.Integer" required="false" is-array="false"/>
       </service-parameters>
       <service-result name="findHolidayByIdResult" required="false" is-array="false" type="org.tinygroup.sdpm.system.dao.pojo.Holiday"/>
     </service-method>
-    <service-method local-name="findHolidayByIds" service-id="findHolidayByIds" method-name="findHolidayByIds" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
+    <service-method local-name="findHolidayByIds" service-id="findHolidayByIds" method-name="findHolidayByIds" cacheable="false" category="org.tinygroup.sdpm.system.service.inter">
       <service-parameters>
         <service-parameter name="ids" type="java.lang.Integer" required="false" is-array="true"/>
       </service-parameters>
       <service-result name="findHolidayByIdsResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.system.dao.pojo.Holiday"/>
     </service-method>
-    <service-method local-name="batchSoftDeleteHoliday" service-id="batchSoftDeleteHoliday" method-name="batchSoftDeleteHoliday" cacheable="false" category="org.tinygroup.sdpm.system.service.impl">
+    <service-method local-name="batchSoftDeleteHoliday" service-id="batchSoftDeleteHoliday" method-name="batchSoftDeleteHoliday" cacheable="false" category="org.tinygroup.sdpm.system.service.inter">
       <service-parameters>
         <service-parameter name="list" type="org.tinygroup.sdpm.system.dao.pojo.Holiday" collection-type="java.util.List" required="false" is-array="false"/>
       </service-parameters>
