@@ -16,27 +16,27 @@
 
 package org.tinygroup.sdpm.service.dao.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * 服务级别协议表
- *
  */
-public class ServiceSla {
+public class ServiceSla implements Serializable {
 
-    //	public static Integer DELETE_YES=1;
-//	public static Integer DELETE_NO=0;
+    public static final Integer DELETE_YES = 1;
+    public static final Integer DELETE_NO = 0;
+
     /*在faq的pojo中，添加客户名称*/
     private String clientName;
     private String productName;
     /**
      * 服务协议ID
-     *
      */
     private Integer slaId;
     /**
      * 服务级别
-     *
+     * <p>
      * 服务级别Service
      * Level，保留字段，未今后分级服务提供信息；
      * 0基础
@@ -47,114 +47,99 @@ public class ServiceSla {
     private Integer serviceLevel;
     /**
      * 服务期限
-     *
+     * <p>
      * 服务有效期Service
      * Deadline
      */
     private Date serviceDeadline;
     /**
      * 客户ID
-     *
      */
     private Integer clientId;
     /**
      * 产品ID
-     *
      */
     private Integer productId;
     /**
      * 服务协议标题
-     *
      */
     private String slaTitle;
     /**
      * 服务协议表述
-     *
      */
     private String slaSpec;
     /**
      * 服务响应时限
-     *
+     * <p>
      * 单位为小时（不含节假日）
      */
     private Integer serviceReplyTimeLimit;
     /**
      * 需求回访时限
-     *
+     * <p>
      * 单位工作日
      */
     private Integer serviceReviewTimeLimit;
     /**
      * 服务工时上限
-     *
      */
     private Float serviceEffortLimit;
     /**
      * 服务请求数上限
-     *
      */
     private Integer serviceRequestLimit;
     /**
      * 现场服务次数上限
-     *
      */
     private Integer serviceTsOnsiteLimit;
     /**
      * 服务专员
-     *
+     * <p>
      * 可以多人，间隔符英文,
      */
     private String serviceSpecialist;
     /**
      * 服务级别协议
-     *
+     * <p>
      * 0新建，1生效，2到期，3作废，4关闭
      */
     private Integer slaStatus;
     /**
      * 创建人
-     *
      */
     private String slaCreatedBy;
     /**
      * 创建时间
-     *
      */
     private Date slaCreateDate;
     /**
      * 批准人
-     *
      */
     private String slaReviewedBy;
     /**
      * 批准时间
-     *
      */
     private Date slaReviewDate;
     /**
      * 关闭人
-     *
      */
     private String slaClosedBy;
     /**
      * 关闭时间
-     *
      */
     private Date slaCloseDate;
     /**
      * 打开次数
-     *
+     * <p>
      * 默认0，审核通过后编辑再审核+1
      */
     private Integer slaOpenCount;
     /**
      * 已删除
-     *
      */
     private Integer deleted;
     /**
      * 产品版本
-     *
      */
     private String cilentProductVision;
 

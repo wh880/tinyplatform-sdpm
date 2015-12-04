@@ -16,13 +16,14 @@
 
 package org.tinygroup.sdpm.service.dao.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * 客户信息表
  *
  */
-public class ServiceClient {
+public class ServiceClient implements Serializable{
     public static Integer DELETE_YES = 1;
     public static Integer DELETE_NO = 0;
 

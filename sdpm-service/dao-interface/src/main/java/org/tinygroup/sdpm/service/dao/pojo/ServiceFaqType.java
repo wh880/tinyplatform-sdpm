@@ -16,13 +16,14 @@
 
 package org.tinygroup.sdpm.service.dao.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * faq分类
  *
  */
-public class ServiceFaqType {
+public class ServiceFaqType implements Serializable{
     public static Integer DELETE_YES = 1;
     public static Integer DELETE_NO = 0;
 
