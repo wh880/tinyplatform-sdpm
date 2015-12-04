@@ -2,8 +2,6 @@ package org.tinygroup.sdpm.service.service.inter;
 
 import org.tinygroup.sdpm.service.dao.pojo.ServiceClientUser;
 
-import java.util.List;
-
 /**
  * Created by Administrator on 2015-09-17.
  */
@@ -15,14 +13,6 @@ public interface ClientUserService {
      * @return
      */
     ServiceClientUser findClientUser(Integer id);
-
-    /**
-     * 根据条件查询List
-     *
-     * @param clientUser 用于查询条件
-     * @return
-     */
-    List<ServiceClientUser> getClientUserList(ServiceClientUser clientUser);
 
     /**
      * 新增一个客户联系人
@@ -39,14 +29,6 @@ public interface ClientUserService {
      * @return
      */
     ServiceClientUser updateClientUser(ServiceClientUser clientUser);
-
-    /**
-     * 根据id进行批量软删除客户
-     *
-     * @param id 主键
-     * @return
-     */
-    Integer deleteClientUser(Integer id);
 
     /**
      * 根据客户id进行全部客户联系人的删除

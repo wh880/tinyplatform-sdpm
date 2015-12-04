@@ -20,14 +20,6 @@ public interface RequestService {
     ServiceRequest findRequest(Integer id);
 
     /**
-     * 根据产品模块id查找请求
-     *
-     * @param moldeId 主键
-     * @return
-     */
-    ServiceRequest findRequestByMolde(String moldeId);
-
-    /**
      * 根据条件查询List
      *
      * @param request 用于查询条件
@@ -115,7 +107,7 @@ public interface RequestService {
     /**
      * 根据查询名称查询
      *
-     * @param key
+     * @param condition
      * @return
      */
     List<ServiceRequest> requestInCondition(String condition);

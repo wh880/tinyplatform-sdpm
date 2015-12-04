@@ -7,8 +7,6 @@ import org.tinygroup.sdpm.service.biz.inter.ReviewManager;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceReview;
 import org.tinygroup.sdpm.service.service.inter.ReviewService;
 
-import java.util.List;
-
 /**
  * Created by Administrator on 2015-09-19.
  */
@@ -18,18 +16,6 @@ public class ReviewServiceImpl implements ReviewService {
     private ReviewManager reviewManager;
     @Autowired
     private RequestManager requestManager;
-
-    public ServiceReview findReview(Integer id) {
-        return reviewManager.find(id);
-    }
-
-    public ServiceReview findReviewByMolde(String moldeId) {
-        return reviewManager.findByMolde(moldeId);
-    }
-
-    public List<ServiceReview> getReviewList(ServiceReview review) {
-        return reviewManager.getList(review);
-    }
 
     public ServiceReview addReview(ServiceReview review) {
         return reviewManager.add(review);

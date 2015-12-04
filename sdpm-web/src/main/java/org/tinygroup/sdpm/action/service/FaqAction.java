@@ -184,7 +184,7 @@ public class FaqAction extends BaseController {
     @ResponseBody
     @RequestMapping("/deleteTree")
     public Map deleteDept(Integer faqTypeId) {
-        faqTypeService.deleteDept(faqTypeId);
+        faqTypeService.deleteFaqType(faqTypeId);
         return resultMap(true, "删除成功");
     }
 

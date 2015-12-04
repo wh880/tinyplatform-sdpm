@@ -1,0 +1,45 @@
+<service-components>
+  <service-component type="org.tinygroup.sdpm.service.service.impl.FaqServiceImpl" bean="">
+    <service-method local-name="findFaq" service-id="findFaq" method-name="findFaq" cacheable="false" category="org.tinygroup.sdpm.service.service.impl">
+      <service-parameters>
+        <service-parameter name="id" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findFaqResult" required="false" is-array="false" type="org.tinygroup.sdpm.service.dao.pojo.ServiceFaq"/>
+    </service-method>
+    <service-method local-name="getFaqpage" service-id="getFaqpage" method-name="getFaqpage" cacheable="false" category="org.tinygroup.sdpm.service.service.impl">
+      <service-parameters>
+        <service-parameter name="start" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="limit" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="faq" type="org.tinygroup.sdpm.service.dao.pojo.ServiceFaq" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="getFaqpageResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager"/>
+    </service-method>
+    <service-method local-name="addFaq" service-id="addFaq" method-name="addFaq" cacheable="false" category="org.tinygroup.sdpm.service.service.impl">
+      <service-parameters>
+        <service-parameter name="faq" type="org.tinygroup.sdpm.service.dao.pojo.ServiceFaq" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="addFaqResult" required="false" is-array="false" type="org.tinygroup.sdpm.service.dao.pojo.ServiceFaq"/>
+    </service-method>
+    <service-method local-name="updateFaq" service-id="updateFaq" method-name="updateFaq" cacheable="false" category="org.tinygroup.sdpm.service.service.impl">
+      <service-parameters>
+        <service-parameter name="faq" type="org.tinygroup.sdpm.service.dao.pojo.ServiceFaq" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="updateFaqResult" required="false" is-array="false" type="org.tinygroup.sdpm.service.dao.pojo.ServiceFaq"/>
+    </service-method>
+    <service-method local-name="deleteFaq" service-id="deleteFaq" method-name="deleteFaq" cacheable="false" category="org.tinygroup.sdpm.service.service.impl">
+      <service-parameters>
+        <service-parameter name="id" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="deleteFaqResult" required="false" is-array="false" type="java.lang.Integer"/>
+    </service-method>
+    <service-method local-name="searchFaq" service-id="searchFaq" method-name="searchFaq" cacheable="false" category="org.tinygroup.sdpm.service.service.impl">
+      <service-parameters>
+        <service-parameter name="start" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="limit" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="faq" type="org.tinygroup.sdpm.service.dao.pojo.ServiceFaq" required="false" is-array="false"/>
+        <service-parameter name="faqQuestion" type="java.lang.String" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="searchFaqResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager"/>
+    </service-method>
+  </service-component>
+</service-components>

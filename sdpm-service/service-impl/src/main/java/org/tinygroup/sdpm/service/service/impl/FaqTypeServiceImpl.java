@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by Administrator on 2015-09-19.
  */
-@Component("")
+@Component
 public class FaqTypeServiceImpl implements FaqTypeService {
     @Autowired
     private FaqTypeManager faqTypeManager;
@@ -32,11 +32,7 @@ public class FaqTypeServiceImpl implements FaqTypeService {
         return faqTypeManager.update(faqType);
     }
 
-    public List<ServiceFaqType> deleteFaqType(Integer id) {
-        return faqTypeManager.delete(id);
-    }
-
-    public Integer deleteDept(Integer id) {
+    public Integer deleteFaqType(Integer id) {
         return faqTypeManager.deleteTree(id);
     }
 }

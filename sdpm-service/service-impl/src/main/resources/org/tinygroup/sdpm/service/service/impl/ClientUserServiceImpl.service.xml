@@ -1,0 +1,28 @@
+<service-components>
+  <service-component type="org.tinygroup.sdpm.service.service.impl.ClientUserServiceImpl" bean="">
+    <service-method local-name="findClientUser" service-id="findClientUser" method-name="findClientUser" cacheable="false" category="org.tinygroup.sdpm.service.service.impl">
+      <service-parameters>
+        <service-parameter name="id" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findClientUserResult" required="false" is-array="false" type="org.tinygroup.sdpm.service.dao.pojo.ServiceClientUser"/>
+    </service-method>
+    <service-method local-name="addClientUser" service-id="addClientUser" method-name="addClientUser" cacheable="false" category="org.tinygroup.sdpm.service.service.impl">
+      <service-parameters>
+        <service-parameter name="clientUser" type="org.tinygroup.sdpm.service.dao.pojo.ServiceClientUser" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="addClientUserResult" required="false" is-array="false" type="org.tinygroup.sdpm.service.dao.pojo.ServiceClientUser"/>
+    </service-method>
+    <service-method local-name="updateClientUser" service-id="updateClientUser" method-name="updateClientUser" cacheable="false" category="org.tinygroup.sdpm.service.service.impl">
+      <service-parameters>
+        <service-parameter name="clientUser" type="org.tinygroup.sdpm.service.dao.pojo.ServiceClientUser" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="updateClientUserResult" required="false" is-array="false" type="org.tinygroup.sdpm.service.dao.pojo.ServiceClientUser"/>
+    </service-method>
+    <service-method local-name="deleteAllClientUser" service-id="deleteAllClientUser" method-name="deleteAllClientUser" cacheable="false" category="org.tinygroup.sdpm.service.service.impl">
+      <service-parameters>
+        <service-parameter name="id" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="deleteAllClientUserResult" required="false" is-array="false" type="java.lang.Integer"/>
+    </service-method>
+  </service-component>
+</service-components>

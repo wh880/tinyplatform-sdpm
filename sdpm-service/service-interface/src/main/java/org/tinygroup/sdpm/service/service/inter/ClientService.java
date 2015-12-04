@@ -75,17 +75,9 @@ public interface ClientService {
 
 
     /**
-     * 根据id进行批量软删除客户
-     *
-     * @param productId 主键
-     * @return
-     */
-    List<ServiceClient> findClientByProduct(Integer productId);
-
-    /**
      * 根据客户id查找客户签订的协议
      *
-     * @param d 主键
+     * @param id 主键
      * @return
      */
     List<ServiceSla> findSlaByClientId(Integer id);
@@ -97,14 +89,6 @@ public interface ClientService {
      * @return
      */
     ServiceClientUser addClientUser(ServiceClientUser clientUser);
-
-    /**
-     * 编辑一个客户联系人
-     *
-     * @param clientUser 编辑实体类
-     * @return
-     */
-    ServiceClientUser updateClientUser(ServiceClientUser clientUser);
 
     /**
      * 查找一个客户的所有联系人

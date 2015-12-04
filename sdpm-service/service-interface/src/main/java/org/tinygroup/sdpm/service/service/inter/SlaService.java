@@ -19,14 +19,6 @@ public interface SlaService {
     ServiceSla findSla(Integer id);
 
     /**
-     * 根据条件查询List
-     *
-     * @param sla 用于查询条件
-     * @return
-     */
-    List<ServiceSla> getSlaList(ServiceSla sla);
-
-    /**
      * 新增一个用户
      *
      * @param sla 新增实体类
@@ -51,14 +43,6 @@ public interface SlaService {
     Integer deleteSla(Integer id);
 
     /**
-     * 根据id进行批量软删除用户
-     *
-     * @param id 主键
-     * @return
-     */
-    Integer deleteSlaBatch(Integer id);
-
-    /**
      * 查找数据库的所有记录
      *
      * @return
@@ -66,13 +50,11 @@ public interface SlaService {
     Pager<ServiceSla> findSlaPager(Integer start, Integer limit, ServiceSla sla, Integer treeId, String groupOperate, SearchInfos searchInfos, String order, String orderType);
 
     /**
-     * 2015/9/29,实现协议里面，点击客户ID，页面数据显示，新增的方法
+     * 实现协议里面，点击客户ID，页面数据显示，新增的方法
      *
      * @return
      */
     List<ServiceSla> findSlaBySlaId(Integer id);
-
-    ServiceSla judgeClient(String clientName);
 
     int[] deleteBatchSla(List<ServiceSla> list);
 }

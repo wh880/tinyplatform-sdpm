@@ -69,7 +69,7 @@ public class ProductLineServiceImpl implements ProductLineService {
         return productLineManager.lineInCondition(condition, ids);
     }
 
-    public List<ProductLine> findList(ProductLine productLine) {
+    public List<ProductLine> findProductLineList(ProductLine productLine) {
         return productLineManager.findList(productLine);
     }
 }

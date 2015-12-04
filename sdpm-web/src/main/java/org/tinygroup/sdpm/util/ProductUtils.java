@@ -29,7 +29,7 @@ public class ProductUtils {
     public List<ProductLine> getProductLineList() {
         ProductLine productLine = new ProductLine();
         productLine.setDeleted(0);
-        List<ProductLine> productLineList = productLineService.findList(productLine);
+        List<ProductLine> productLineList = productLineService.findProductLineList(productLine);
         return productLineList;
     }
 

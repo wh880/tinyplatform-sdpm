@@ -25,7 +25,7 @@ public interface FaqTypeService {
     List<ServiceFaqType> getFaqTypeList(ServiceFaqType faqType);
 
     /**
-     * 新增有一faqtype
+     * 新增有一faqType
      *
      * @param faqType 新增实体类
      * @return
@@ -33,20 +33,12 @@ public interface FaqTypeService {
     ServiceFaqType addFaqType(ServiceFaqType faqType);
 
     /**
-     * 更新faqtype
+     * 更新faqType
      *
      * @param faqType 需要更新的实体类
      * @return
      */
     ServiceFaqType updateFaqType(ServiceFaqType faqType);
 
-    /**
-     * 根据id进行删除faqtype
-     *
-     * @param id 主键
-     * @return
-     */
-    List<ServiceFaqType> deleteFaqType(Integer id);
-
-    Integer deleteDept(Integer id);
+    Integer deleteFaqType(Integer id);
 }
