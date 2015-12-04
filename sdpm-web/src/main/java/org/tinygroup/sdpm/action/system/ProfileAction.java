@@ -26,12 +26,12 @@ public class ProfileAction extends BaseController {
         if ("doc".equals(type)) {
             SystemProfile profile = profileService.findSystemProfileById(fileId);
             model.addAttribute("profile", profile);
-            return "/document/file-edit.pagelet";
+            return "/document/modal/doc/file-edit.pagelet";
         }
         if ("story".equals(type)) {
             SystemProfile profile = profileService.findSystemProfileById(fileId);
             model.addAttribute("profile", profile);
-            return "/product/page/tabledemo/file-edit.pagelet";
+            return "/product/page/profile/file-edit.pagelet";
         }
         return null;
     }

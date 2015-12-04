@@ -130,18 +130,18 @@ public class DocAction extends BaseController {
             Product product = new Product();
             List<Product> list = productService.findProductList(product);
             model.addAttribute("productList", list);
-            return "/document/add-doc-product";
+            return "/document/operate/doc/add-doc-product";
         } else if (libId == 2) {
             List<Project> list = projectOperate.getUserProjectList();
             model.addAttribute("projectList", list);
-            return "/document/add-doc-project";
+            return "/document/operate/doc/add-doc-project";
         } else {
             SystemModule module = new SystemModule();
             module.setModuleType("doc");
             module.setModuleRoot(libId);
             List<SystemModule> moduleList = moduleService.findModuleList(module);
             model.addAttribute("moduleList", moduleList);
-            return "/document/add-doc";
+            return "/document/operate/doc/add-doc";
         }
     }
 
@@ -216,7 +216,7 @@ public class DocAction extends BaseController {
         model.addAttribute("projectList", projectList);
         model.addAttribute("listModule", listModule);
         model.addAttribute("libList", libList);
-        return "/document/doc-edit.page";
+        return "/document/operate/doc/doc-edit.page";
     }
 
     /**
@@ -275,7 +275,7 @@ public class DocAction extends BaseController {
         List<SystemProfile> list = profileService.findSystemProfile(systemProfile);
         model.addAttribute("fileList", list);
         model.addAttribute("doc", doc);
-        return "/document/doc-view.page";
+        return "/document/operate/doc/doc-view.page";
     }
 
     /**
@@ -299,7 +299,7 @@ public class DocAction extends BaseController {
         }
         model.addAttribute("doc", doc);
         model.addAttribute("docLib", docLib);
-        return "/document/basic-info.pagelet";
+        return "/document/rightinfo/doc/basic-info.pagelet";
     }
 
     /**

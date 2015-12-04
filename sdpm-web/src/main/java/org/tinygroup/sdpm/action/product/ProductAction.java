@@ -271,7 +271,7 @@ public class ProductAction extends BaseController {
             OrgUser productDeliveryManager = userService.findUser(productService.findProductById(productId).getProductDeliveryManager());
             model.addAttribute("productDeliveryManager", productDeliveryManager);
         }
-        return "/organization/userbaseinfo.pagelet";
+        return "/organization/others/userbaseinfo.pagelet";
     }
 
     @ResponseBody

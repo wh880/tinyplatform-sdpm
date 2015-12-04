@@ -1,19 +1,13 @@
 #import("/org/tinygroup/button/components/button_common.component")
 #import("/org/tinygroup/button/components/button.component")
 #import("/org/tinygroup/table/components/table.component")
-#!set(activeTitle="服务管理",activeMenuId=currentPageId)
 <style>
     .select_boxes {
         margin-top: 0
     }
 </style>
 #set(name="sla")
-#@div()
-    #@tabWithInit("tab_demo" "optionsBox")
-        #@tabHead()
-            #include("/service/serviceCom/tab.page")
-        #end
-    #end
+#@layout(service)#end
     #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/service/client/slaSave" "post" {"class":""})
 
     <div style="width:100%;float:left" class="pageleftpart">
@@ -184,7 +178,7 @@
     </div>
     #end
 
-#end
+
 
 
 <script type="text/javascript">

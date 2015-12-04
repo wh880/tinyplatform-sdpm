@@ -1,0 +1,39 @@
+#import("/org/tinygroup/button/components/button_smart.component")
+#!set(activeTitle="统计",activeMenuId=currentPageId)
+#set(name="statisticOrg")
+#@layout(statistic)#end
+    <div style="float: left;width: 15%;">
+
+        #@tableHover("table-border top")
+            #@thead()
+                #@tr()
+                    #@td()
+                        统计报表
+                    #end
+                #end
+            #end
+
+            #@tbody()
+                #@tr()
+                    #@td()
+                        <a href="${TINY_CONTEXT_PATH+adminPath}/statistic/org/all">员工负载表</a>
+                    #end
+                #end
+            ##        #@tr()
+            ##            #@td()
+            ##            <a href="${TINY_CONTEXT_PATH}/statistic/page/org/orgDataTwo.page">产品投入表</a>
+            ##            #end
+            ##        #end
+            ##        #@tr()
+            ##            #@td()
+            ##            <a href="${TINY_CONTEXT_PATH}/statistic/page/org/orgDataThree.page">产品完成度统计报表</a>
+            ##            #end
+            ##        #end
+
+            #end
+        #end
+    </div>
+    <div style="float: right;width: 83%;">
+        #pageContent
+    </div>
+

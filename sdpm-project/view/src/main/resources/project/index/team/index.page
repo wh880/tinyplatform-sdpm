@@ -1,4 +1,4 @@
-#@layout(index)
+#@layout(project)
     #@tabBodyCol("ptop-5")
         #@div(divClass="operationbar")
         <span class="f">

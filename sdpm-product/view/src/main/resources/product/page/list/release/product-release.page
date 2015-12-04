@@ -1,7 +1,5 @@
 #import("/org/tinygroup/table/components/togglebox.component")
 #import("/org/tinygroup/compose/components/compose_typography.component")
-#!set(activeMenuId=currentPageId)
-#!set(linkName="product-release",sonitem="<li>"+"发布"+"</li>")
 
 
 #@tabBodyCol("ptop-5")

@@ -1,0 +1,103 @@
+#import("/org/tinygroup/form/components/form.component")
+#import("/org/tinygroup/button/components/button_smart.component")
+#import("/org/tinygroup/button/components/button_common.component")
+#import("/org/tinygroup/button/components/button.component")
+#import("/org/tinygroup/fold/components/fold.component")
+
+#set(name="qualityBug")
+#@layout(quality)#end
+			
+#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/quality/bug/sure" "post" {"class":"test"})
+	#hiddenInput(hiddenInputName="bugId" hiddenInputValue=bug?.bugId)
+	<div style="width:67%;float:left">
+    	<div class="infoContent">
+    		<p class="titleName">确认</p>
+    		<div class="RTtitle">
+            	<button type="submit" id="submit2" class="commitBtn">保存</button>
+        	</div>
+    #@elementItem()
+            #@sdpmItem("指派给")
+				#@Tselect2F()
+					#Tselect2Ajax("bugAssignedTo" bug?.bugAssignedTo TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
+					{"id":"","dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询用户"})
+					#@Tselect2Fix()
+						#set(m=menuManager.getMenu("organizationAddUser"))
+						#if(m)
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
+						#end
+						#set(m=menuManager.getMenu("organizationUser"))
+						#if(m)
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
+						#end
+					#end
+				#end
+        	#end
+    #end
+    #@elementItem()
+    	#@sdpmItem("<span class='c-red'>*</span>优先级")
+               #@Tselect2F()
+					 #@Tselect2Body("priority" bug?.priority {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+						 #foreach(pri : getDict("bugPriority"))
+						 #@tinyOptionItem(pri.value)${pri.text}#end
+					 #end
+					#end
+                #end
+   		#end 
+    #end
+    #@elementItem()
+   
+        #@sdpmItem("抄送给")
+			#@Tselect2F()
+				#Tselect2Ajax("bugMailto" bug?.bugMailto TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
+				{"id":"storyMailtoSelect","dataId":"orgUserId","dataText":"orgUserRealName",
+					"placeholder":"查询抄送人","multiple":"multiple"})
+
+				#@Tselect2Fix()
+					#set(m=menuManager.getMenu("organizationAddUser"))
+					#if(m)
+                        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
+					#end
+					#set(m=menuManager.getMenu("organizationUser"))
+					#if(m)
+                        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
+					#end
+				#end
+			#end
+    	#end
+    #end
+    #@elementItem()
+            <div class="col-12">
+                <div class="col-2 text-r"><label>备注：</label></div>
+
+                <div class="col-9">
+					#@Teditor("actionComment" "actionComment" {"initialFrameHeight":"150"})#end</div>
+            </div>
+        #end
+        <br/>
+       </div>
+    #@elementItem()
+        <div class="col-12">
+            <div class="col-5">
+                <button style="float: right" type="submit" id="submit2" class="commitBtn">保存</button>
+            </div>
+            <div class="col-1"></div>
+            <div class="col-1">
+                #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end
+            </div>
+            <div class="col-5"></div>
+        </div>
+	#end
+    <br>
+   </div>
+    <div style="width:32%;float:right">
+		#history(adminPath+"/system/action/ajax/history?actionObjectType=bug&actionObjectId="+bug?.bugId)
+	</div>
+#end
+<script type="text/javascript">
+    $(function () {
+        $("form[name=thisform]").Validform({
+            tiptype: 2
+        });
+    });
+
+</script>

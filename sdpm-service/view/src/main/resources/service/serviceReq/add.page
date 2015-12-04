@@ -41,14 +41,7 @@
     }
 </style>
 #set(name="request")
-#@div()
-    #@tabWithInit("tab_demo" "optionsBox")
-        #@tabHead()
-            #include("/service/serviceCom/tab.page")
-        #end
-    <br>
-    #end
-#end
+#@layout(service)#end
 #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/service/request/save" "post" {"class":""})
 <div style="width:100%;margin-left: 20px;" class="pageleftpart">
     <div class="infoContent">
@@ -89,8 +82,7 @@
                                 "systemModel","data":"moduleType=product","relateElem":
                                 "relateModelTwo"}) ##,"multiple":"multiple"加上为多选项
                             #end
-                            #@Tselect2Fix()#@aModal(
-                                "#myModal" "" "500" "300" "btn-class" adminPath+"/product/addModule?pId=" "modelA")
+                            #@Tselect2Fix()#@aModal("#myModal" "添加模块" "500" "300" "btn-class" adminPath+"/product/addModule?pId=" "modelA")
                                 增加#end
                             #end
                         #end

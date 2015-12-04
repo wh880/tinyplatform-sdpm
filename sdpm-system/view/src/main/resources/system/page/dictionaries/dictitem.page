@@ -1,5 +1,4 @@
-#!set(activeTitle="字典项管理",activeMenuId=currentPageId)
-#!set(page="dict")
+
 #import("/org/tinygroup/zTree/components/zTree.component")
 #set(threeMenu="dictionary-entries")
 #set(editpagePath="/system/page/dictionaries/dictitem_edit.pagelet",editpageModalId="dictitemEditModal",editpageModal="#"+editpageModalId)
@@ -12,10 +11,9 @@ var id = treeNode.id;
 }
 #end
 
-###@h2()${activeTitle}#end
 
 #@divDataTablebox()
-#@tableHeaderBar()字典项#end
+
 #@leftTreeCol()
 #@searchZtreeWithInit("treeDemo" "height:454px;" adminPath+"/system/module/tree?moduleType=dict&type=title")
 #end

@@ -1,11 +1,6 @@
 #set(name="organizationCompany")
-#include("/common/common.page")
-#@div()
-    #@tabWithInit("tab_demo" "optionsBox")
-        #@tabHead()
-            #include("/organization/common/tab.page")
-        #end
-    #end
+
+    #@layout(org)#end
 
     #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/org/company/add" "post" {"class":"test","enctype":
         "multipart/form-data"})
@@ -117,4 +112,3 @@
     });
 </script>
 
-#end

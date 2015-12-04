@@ -1,0 +1,142 @@
+#import("/org/tinygroup/button/components/button_common.component")
+#import("/org/tinygroup/button/components/button.component")
+#import("/org/tinygroup/table/components/table.component")
+#set(name="qualityVersion")
+
+#@layout(quality)
+	#@tabBodyCol("ptop-5")
+	##operationbar
+		#@div(divClass="operationbar")
+        <span class="f active_btn">
+					${testTask?.testtaskTitle}
+			</span>
+        <span class="r">
+				<div style="text-align:center;margin:auto">
+					#foreach(m:menuManager.getScopeMenus("testverinfo-tab"))
+						#if(m.id=="tverclose")
+							#@aModal("#closeModal" m.name "800" "600" "" adminPath+m.href+"?testversionId="+testTask?.testversionId "ml-5")
+								#buttonIcon(iconClass=m.icon)${m.name}#end&nbsp;&nbsp;
+						##							<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?testversionId=${testTask?.testversionId}">#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp;&nbsp;
+						#elseif(m.id=="tvercase")
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?testversionId=${testTask?.testversionId}&status=tverallcase&currentPageId=5">
+								#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp;&nbsp;
+						#elseif(m.id=="tversionLink")
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?testversionId=${testTask?.testversionId}&currentPageId=5">
+								#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp;&nbsp;
+						#else
+							#if(m.id=="tversionedit")
+                                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?testversionId=${testTask?.testversionId}&currentPageId=5"
+                                   title="${m.name}">
+									#buttonIcon(iconClass=m.icon)</a>&nbsp;&nbsp;
+							#elseif(m.id=="tverdelete")
+                                <a class="versionDelete" href="javascript:void(0);" title="${m.name}">
+									#buttonIcon(iconClass=m.icon)</a>&nbsp;&nbsp;
+                                <script type="text/javascript">
+                                    $(function () {
+                                        var check = $(".versionDelete");
+                                        check.on("click", function () {
+                                            layer.confirm("是否确认删除?", function () {
+                                                $.ajax({
+                                                    type: "get",
+                                                    url: "${TINY_CONTEXT_PATH+adminPath+m?.href+'?testversionId ='+testTask?.testversionId}",
+                                                    dataType: "json",
+                                                    success: function (data) {
+                                                        if (data.status == "y") {
+                                                            window.location.href = "${TINY_CONTEXT_PATH+adminPath}/quality/version?status=tvernotest&currentPageId=5";
+                                                        }
+                                                    }
+                                                });
+                                                return false;
+                                            });
+                                        });
+                                    })
+
+                                </script>
+							#end
+						#end
+					#end
+                    <a href="javascript :;" onClick="javascript :history.back(-1);" title="返回">#buttonIcon(iconClass=
+						"icon-reply")</a>
+			</span>
+		#end
+	##operationbar end
+	#end
+##tabbody end
+#end
+
+
+<div style="width:70%;float:left">
+		#@div(divClass="infoContent")
+	        <p class="titleName">版本描述</p>
+	       	<div>
+	       		${testTask?.testtaskDesc}
+	       	</div>
+		#end
+		#@div(divClass="infoContent")
+	        <p class="titleName">测试总结</p>
+	       	<div>
+	       		${testTask?.testtaskReport}
+	       	</div>
+		#end
+		#history(adminPath+"/system/action/ajax/history?actionObjectType=testtask&actionObjectId="+testTask?.testversionId)
+		<div style="text-align:center;margin:auto">
+
+			#foreach(m:menuManager.getScopeMenus("testverinfo-tab"))
+
+				#if(m.id=="tverclose")
+					#@aModal("#closeModal" m.name "800" "600" "" adminPath+m.href+"?testversionId="+testTask?.testversionId "ml-5")
+						#buttonIcon(iconClass=m.icon)${m.name}#end&nbsp;&nbsp;
+				##							<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?testversionId=${testTask?.testversionId}">#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp;&nbsp;
+				#elseif(m.id=="tvercase")
+                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?testversionId=${testTask?.testversionId}&status=tverallcase&currentPageId=5">
+						#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp;&nbsp;
+				#elseif(m.id=="tversionLink")
+                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?testversionId=${testTask?.testversionId}&currentPageId=5">
+						#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp;&nbsp;
+				#else
+					#if(m.id=="tversionedit")
+                        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?testversionId=${testTask?.testversionId}&currentPageId=5" title="${m.name}">
+							#buttonIcon(iconClass=m.icon)</a>&nbsp;&nbsp;
+					#elseif(m.id=="tverdelete")
+                        <a class="versionDelete" href="javascript:void(0);" title="${m.name}">
+							#buttonIcon(iconClass=m.icon)</a>&nbsp;&nbsp;
+                        <script type="text/javascript">
+                            $(function () {
+                                var check = $(".versionDelete");
+                                check.on("click", function () {
+                                    layer.confirm("是否确认删除?", function () {
+                                        $.ajax({
+                                            type: "get",
+                                            url: "${TINY_CONTEXT_PATH+adminPath+m?.href+'?testversionId ='+testTask?.testversionId}",
+                                            dataType: "json",
+                                            success: function (data) {
+                                                if (data.status == "y") {
+                                                    window.location.href = "${TINY_CONTEXT_PATH+adminPath}/quality/version?status=tvernotest&currentPageId=5";
+                                                }
+                                            }
+                                        });
+                                        return false;
+                                    });
+                                });
+                            })
+
+                        </script>
+					#end
+				#end
+			#end
+            <a href="javascript :;" onClick="javascript :history.back(-1);" title="返回">#buttonIcon(iconClass=
+				"icon-reply")</a>
+	</div>
+	</div>
+
+<div style="width:30%;float:right">
+##	#include("/testManagement/page/versionSituationpaging.page")
+	#TypeInfo("qualityVersionSituation",testTask?.testversionId)
+</div>
+				#@dialog("closeModal")
+					#@dialogHeader()对话框标题#end
+					#@dialogBody()<p>对话框内容…</p>#end
+					#@dialogFooter()						
+					#end
+				#end
+

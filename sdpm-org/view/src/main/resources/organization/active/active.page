@@ -3,15 +3,11 @@
 #set(editpagePath=
     "/organization/common/fileOutput.pagelet",editpageModalId="userEditModal",editpageModal="#"+editpageModalId)
 #set(name="organizationActive")
-#include("/common/common.page")
-#@div()
-    #@tabWithInit("tab_demo" "optionsBox")
-        #@tabHead()
-            #include("/organization/common/tab.page")
-        #end
-        #@tabBodyCol("ptop-5")
-            #@div(divClass="operationbar")
-            <span class="f">
+
+#@layout(org)
+    #@tabBodyCol("ptop-5")
+        #@div(divClass="operationbar")
+        <span class="f">
                 <a val="1" class="selDate">今天</a>
                 <a val="2" class="selDate">昨天</a>
                 <a val="3" class="selDate">前天</a>
@@ -21,12 +17,12 @@
                 <a val="7" class="selDate">上月</a>
                 <a val="0" class="selDate">所有</a>
 
-                #@navSelect2("navUser")
-                    #@navSelect2Nav()<span>用户</span><span class="caret"></span>#end
-                    #@navSelect2Body()
-                        #@navSelect2Data()
-                            <option value=null>用户</option>
-                            #foreach(user : userList)
+            #@navSelect2("navUser")
+                #@navSelect2Nav()<span>用户</span><span class="caret"></span>#end
+                #@navSelect2Body()
+                    #@navSelect2Data()
+                        <option value=null>用户</option>
+                        #foreach(user : userList)
                             <option class="selUser" value="${user?.orgUserId}">${user?.orgUserRealName}</option>
                         #end
 
@@ -45,40 +41,41 @@
                     #@navSelect2Data()
                         <option value=null>产品</option>
                         #foreach(product : productList)
-                        <option class="selProduct" value="${product?.productId}">${product?.productName}</option>
+                            <option class="selProduct" value="${product?.productId}">${product?.productName}</option>
+                        #end
+                    #end
+                    #@navSelect2Fix()
+                        <a href="${TINY_CONTEXT_PATH +adminPath}/product/allproduct/addition"
+                           class="r">所有产品</a>&nbsp;
+                    <a href="${TINY_CONTEXT_PATH +adminPath}/product/addproduct/addition">添加产品</a>&nbsp;
                     #end
                 #end
-                #@navSelect2Fix()
-                    <a href="${TINY_CONTEXT_PATH +adminPath}/product/allproduct/addition"
-                       class="r">所有产品</a>&nbsp;
-                    <a href="${TINY_CONTEXT_PATH +adminPath}/product/addproduct/addition">添加产品</a>&nbsp;
-                #end
+                #hiddenInput("productIdHidden","productId","","")
             #end
-            #hiddenInput("productIdHidden","productId","","")
-        #end
-        &nbsp;
-        #@navSelect2("navProject")
-            #@navSelect2Nav()<span>项目</span><span class="caret"></span>#end
-            #@navSelect2Body()
-                #@navSelect2Data()
-                    #foreach(project : projectList)
-                    <option class="selProject" value="${project?.projectId}">${project?.projectName}</option>
-                #end
-            #end
-            #@navSelect2Fix()
-                <a href="${TINY_CONTEXT_PATH +adminPath}/project/list" class="r">所有项目</a>
+            &nbsp;
+            #@navSelect2("navProject")
+                #@navSelect2Nav()<span>项目</span><span class="caret"></span>#end
+                #@navSelect2Body()
+                    #@navSelect2Data()
+                        #foreach(project : projectList)
+                            <option class="selProject" value="${project?.projectId}">${project?.projectName}</option>
+                        #end
+                    #end
+                    #@navSelect2Fix()
+                        <a href="${TINY_CONTEXT_PATH +adminPath}/project/list" class="r">所有项目</a>
                 &nbsp;
                 <a href="${TINY_CONTEXT_PATH +adminPath}/project/form">添加项目</a>&nbsp;
+                    #end
+                #end
+                #hiddenInput("projectIdHidden","projectId","","")
             #end
-        #end
-        #hiddenInput("projectIdHidden","projectId","","")
-    #end
 </span>
-    #div(divClass="clearfix")
+            #div(divClass="clearfix")
+        #end
+    #end
 #end
-#end
-#end
-#end
+
+
 
 <script>
     $(function () {

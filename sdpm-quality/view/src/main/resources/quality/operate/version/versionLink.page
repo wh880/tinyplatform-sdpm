@@ -1,0 +1,118 @@
+#!set(activeTitle="测试管理",activeMenuId=currentPageId)
+#set(count="")
+#set(name="qualityVersion")
+#@layout(quality)
+	#@tabBodyCol("ptop-5")
+	##operationbar start1
+		#@div(divClass="operationbar")
+        <span class="f">
+					<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/versionSituation.page" class="active_btn">版本名称</a> >关联用例
+					<a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
+				</span>
+        <span class="r">
+
+##					<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/versionLink.page">#buttonIcon(iconClass="icon-link")按需求关联</a>&nbsp;
+##					<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/versionLink.page">#buttonIcon(iconClass="icon-link")按Bug关联</a>&nbsp;
+    <a href="javascript :;" onClick="javascript :history.back(-1);" title="返回">#buttonIcon(iconClass=
+		"icon-reply")</a>
+					<script type="text/javascript">
+                        $(function(){
+                            $("#back").on("click",function(){
+                                window.location.href=document.referrer;
+                            });
+                        })
+                    </script>
+    </a>
+					</span>
+			#div(divClass="clearfix")
+		##				#include("/quality/common/mulsearch.page")
+		#end
+	##operationbar end
+	#end
+##tabbody end
+#end
+
+			
+
+			#@tinyTable()
+				#@div(divBaseClass="tinyheaderTools form-inline")
+					#setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置
+					<div class="f col-2">
+						<input type="button" value="全选" class="btn btn-default btn-primary col-3" 
+						onclick="selectAllNullorReserve('idCheck','全选');" />
+						<div class="col-0">&nbsp&nbsp</div>
+						<input type="button" value="反选" class="btn btn-default btn-primary col-3"
+						 onclick="selectAllNullorReserve('idCheck','反选');" />
+						<div class="col-0">&nbsp&nbsp</div>
+						<div class="dropdown col-3">
+							#@linkOperation("link" TINY_CONTEXT_PATH+adminPath+"/quality/version/makeLink?testversionId="+testversionId)
+							<div><input type="button" value="保存" class="btn btn-default btn-primary" /></div>
+							#end
+						</div>
+					</div>
+				#end
+				<div class="infoContent">
+				    <p class="titleName"><</p>
+			#set(requestStatusString = tinyRequestQueryString!=null ?"?"+tinyRequestQueryString:"")
+			#@tinyTableContent(TINY_CONTEXT_PATH+adminPath+"/quality/version/link"+requestStatusString)
+				#@thead()
+					#@tr()
+						#@tinyTh({"width":"6"})<input type="checkbox" name="userid" value="">#end
+						#@tinyTh({"class":"sorting","rel":"caseId"})ID#end
+						#@tinyTh({"class":"sorting","rel":"caseVersion"})版本#end
+						#@tinyTh({"class":"sorting","rel":"priority"})P#end
+						#@tinyTh({"class":"sorting","rel":"caseTitle"})用例标题#end
+						#@tinyTh({"class":"sorting","rel":"caseType","style":"color:#333"})用例类型#end
+						#@tinyTh({"class":"sorting","rel":"caseOpenedBy"})创建#end
+						#@tinyTh({"class":"sorting","rel":"caseStatus"})状态#end
+					#end
+				#end
+				<script type="text/javascript">
+				$(function(){
+					$('#${tableId}').on('click','.delBtn',function(e){
+						user_del(this,'1');
+					});
+				})
+			</script>
+				#@dialog("myModal")
+					#@dialogHeader()对话框标题#end
+					#@dialogBody()<p>对话框内容…</p>#end
+					#@dialogFooter()
+						#@buttonEnsure()确定#end
+						#@buttonCancel()关闭#end
+					#end
+				#end
+			#end
+			#end
+		</div>
+
+<script type="text/javascript">
+function selectAllNullorReserve(obj,type){
+   if(obj!=null&&obj!=""){
+    if(document.getElementsByName(obj)!=undefined&&document.getElementsByName(obj).length>0){	//getElementsByName函数的作用按名字查找对象，返回一个数组。
+     var userids = document.getElementsByName(obj);
+     if(type=="全选"){
+      for(var i=0;i<userids.length;i++){
+       if(userids[i].checked == false){
+        userids[i].checked = true;
+       }
+      }
+     }else if(type=="全不选"){
+      for(var i=0;i<userids.length;i++){
+       if(userids[i].checked == true){
+        userids[i].checked = false;
+       }
+      }
+     }else if(type=="反选"){
+      for(var i=0;i<userids.length;i++){
+       if(userids[i].checked == true){
+        userids[i].checked = false;
+       }else{
+        userids[i].checked = true;
+       }
+      }
+     }
+    }
+   }  
+}
+</script>

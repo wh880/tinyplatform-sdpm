@@ -94,7 +94,7 @@ public class DocumentAction extends BaseController {
         model.addAttribute("moduleList", moduleList);
         model.addAttribute("libList", docService.findDocLibList(null));
         request.getSession().setAttribute("moduleId", moduleId);
-        return "/document/document.page";
+        return "/document/index/document.page";
     }
 
 
@@ -259,7 +259,7 @@ public class DocumentAction extends BaseController {
     public String findDocument(Integer docId, Model model) {
         DocumentDoc doc = docService.findDocById(docId);
         model.addAttribute("doc", doc);
-        return "/document/doc-edit.page";
+        return "/document/operate/doc/doc-edit.page";
     }
 
     @RequestMapping("/product/{type}/updateDoc")

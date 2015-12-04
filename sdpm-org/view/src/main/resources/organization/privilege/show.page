@@ -1,24 +1,22 @@
 #!set(activeTitle="角色管理",activeMenuId=currentPageId,parentId=parentId?:"0")
 #import("/common/component/form.component")
 #set(name="organizationPrivilege")
-#@div()
-    #@tabWithInit("tab_demo" "optionsBox")
-        #@tabHead()
-            #include("/organization/common/tab.page")
-        #end
-        #@tabBodyCol("ptop-5")
-            #@div(divClass="operationbar")
-            <span style="float:left">
+#@layout(org)
+    #@tabBodyCol("ptop-5")
+        #@div(divClass="operationbar")
+        <span style="float:left">
                 <a href="${TINY_CONTEXT_PATH+adminPath}/org/roleMenu/show?parentId=0&roleId=${roleId}" ${parentId=='0'?" class='active_btn'":""}>所有权限</a>
-                #foreach(root:menuManager.getChildMenusWithoutPermissionFilter("0"))
-                    <a href="${TINY_CONTEXT_PATH+adminPath}/org/roleMenu/show?parentId=${root.id}&roleId=${roleId}" ${parentId=='root.id'?" class='active_btn'":""}>${root.name}</a>
-                #end
-            </span>
-                #div(divClass="clearfix")
+            #foreach(root:menuManager.getChildMenusWithoutPermissionFilter("0"))
+                <a href="${TINY_CONTEXT_PATH+adminPath}/org/roleMenu/show?parentId=${root.id}&roleId=${roleId}" ${parentId=='root.id'?" class='active_btn'":""}>${root.name}</a>
             #end
+            </span>
+            #div(divClass="clearfix")
         #end
     #end
 #end
+
+
+
 <style>
     .group-check-list li {
         width: 160px;

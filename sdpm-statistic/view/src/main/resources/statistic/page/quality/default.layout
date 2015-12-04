@@ -1,0 +1,53 @@
+#import("/org/tinygroup/button/components/button_smart.component")
+#!set(activeTitle="统计",activeMenuId=currentPageId)
+#set(name="statisticTest")
+#@layout(statistic)
+    #@tabBodyCol("ptop-5")
+    ##operationbar star
+    #*            #@div(divClass="operationbar")
+                <span class="f">
+                    </span>
+                <span class="r">
+                        <a href="#">#buttonIcon(iconClass="icon-plus-sign")批量添加，暂时放着</a>&nbsp;
+                    </span>
+                    #div(divClass="clearfix")
+                #end*#
+    ##operationbar end
+    #end
+#end
+
+
+    <div style="float: left;width: 15%;">
+        #@tableHover("table-border top")
+            #@thead()
+                #@tr()
+                    #@td()
+                        统计报表
+                    #end
+                #end
+            #end
+
+            #@tbody()
+                #@tr()
+                    #@td()
+                        <a href="${TINY_CONTEXT_PATH+adminPath }/statistic/quality/bugCreate">Bug创建</a>
+                    #end
+                #end
+                #@tr()
+                    #@td()
+                        <a href="${TINY_CONTEXT_PATH+adminPath }/statistic/quality/bugAssigned">Bug指派</a>
+                    #end
+                #end
+            ##        #@tr()
+            ##            #@td()
+            ##            <a href="${TINY_CONTEXT_PATH}/statistic/page/quality/qualityDataThree.page">版本统计</a>
+            ##            #end
+            ##        #end
+
+            #end
+        #end
+    </div>
+    <div style="float: right;width: 83%;">
+        #pageContent
+    </div>
+

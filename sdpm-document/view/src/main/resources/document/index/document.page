@@ -1,0 +1,91 @@
+#import("/org/tinygroup/button/components/button_smart.component")
+#import("/org/tinygroup/table/components/tinytable.component")
+#import("/org/tinygroup/table/components/togglebox.component")
+#import("/org/tinygroup/compose/components/compose_typography.component")
+#set(docTableId = "docTableId" )
+#@layout(document)#end
+
+#@div(divClass="operationbar")
+##    #include("/document/mulsearch.page")
+#end
+
+#@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
+    #@toggleLeft({"class":"aclass"})
+        #@settoggleLeftTitle()
+            #if(documentLibId)
+                #foreach(lib : libList)
+                    #if(lib?.docLibId == documentLibId)
+                        #if(lib?.docLibId==1||lib?.docLibId==2)
+                            ${lib?.docLibName}
+                        #else
+                        自建文档库：${lib?.docLibName}
+                        #end
+                    #end
+                #end
+            #else
+            #end
+        #end
+        #set(dataUrl = "/system/module/tree?moduleType=doc&moduleRoot="+documentLibId)
+        #set(saveUrl = "/system/module/ajax/save?moduleType=doc&moduleRoot="+documentLibId)
+        #if(documentLibId==1)
+            #set(dataUrl = "/system/module/docProductTree")
+            #set(saveUrl = "/system/module/ajax/docTreeSave?moduleType=productDoc")
+        #elseif(documentLibId==2)
+            #set(dataUrl = "/system/module/docProjectTree")
+            #set(saveUrl = "/system/module/ajax/docTreeSave?moduleType=projectDoc")
+        #end
+        #@settoggleLeftBody("treeLeftbox")
+            #@zTreeList(call("link",adminPath+dataUrl) )
+                #setzTreeValMap({"id":"moduleId","name":"moduleName","pid":"moduleParent"}) ##key值为固定
+                #zTreeSetLinkUrl(TINY_CONTEXT_PATH+adminPath+"/document?tree=true")
+                #zTreeSetAddUrl(TINY_CONTEXT_PATH+adminPath+saveUrl)
+                #zTreeSetEditUrl(TINY_CONTEXT_PATH+adminPath+"/system/module/doc/edit")
+                #zTreeSetDelUrl(TINY_CONTEXT_PATH+adminPath+"/system/module/doc/deleteTree")
+            #end
+        #end
+    #end
+    #@toggleRight()
+        #@tinyTable(docTableId) ##ID为空则系统自动生成 带入参数则取该参数为ID
+            #@div(divBaseClass="tinyheaderTools form-inline")
+                #setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置
+            ##批量删除
+                #foreach(m:menuManager.getScopeMenus("docdelete-op"))
+                    #if(m.id == "batch-delete")
+                        #@mulOperation("muldelete" TINY_CONTEXT_PATH+adminPath+"/document/doc/batchDelete")
+                        <a class="btn radius btn-danger btn-sm "><i class="icon-trash"></i> 批量删除</a>
+                        #end
+                    #else
+                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="btn radius btn-success btn-sm">
+                        <i class="icon-plus">&nbsp;创建文档</i></a>
+                    #end
+                #end
+
+            #end
+
+            #@tinyTableContent(TINY_CONTEXT_PATH+adminPath+"/document/doc/list?"+tinyRequestQueryString) ##取数据地址 总数据
+                #@thead()
+                    #@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
+                        #@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
+                        #@tinyTh({"class":"sorting","rel":"doc_id"})ID#end
+                        #@tinyTh({"class":"sorting","rel":"doc_title"})文档标题#end
+                        #@tinyTh({"class":"sorting","rel":"doc_type"})文档类型#end
+                        #@tinyTh({"class":"sorting","rel":"doc_added_by"})由谁添加#end
+                        #@tinyTh({"class":"sorting","rel":"doc_added_date"})添加时间#end
+                        #@tinyTh({"class":"","rel":""})操作#end
+                    #end
+                #end
+            #end
+        ##以下部分为对删除和修改的影响 因为存在不同的信息故放在外面自行更改 #dialog 配合修改使用
+        <script type="text/javascript">
+            $(function () {
+                $('#${tableId}').on('click', '.delBtn', function (e) {
+                    user_del(this, '1');
+                });
+            })
+        </script>
+
+        #end
+    #end
+#end
+
+

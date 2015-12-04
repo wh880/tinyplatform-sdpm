@@ -1,14 +1,6 @@
 ##有一个#end在最下面
 #set(name="faq")
-#@div()
-    #@tabWithInit("tab_demo" "optionsBox")
-       #* #@div(divClass="dropdownBox")
-            #include("/service/serviceCom/dropdownMenu.page")
-        #end*#
-        #@tabHead()
-            #include("/service/serviceCom/tab.page")
-        #end
-    #end
+#@layout(service)#end
 
     #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/service/faq/save" "post" {"class":""})
     <input type="hidden" name="faqId" value="${faq?.faqId}"/>
@@ -90,7 +82,7 @@
         </div>
         #end
     #end
-    #end
+
 <script type="text/javascript">
     $(function () {
         $("form[name=thisform]").Validform({

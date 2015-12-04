@@ -168,7 +168,7 @@
         </menu>
         <menu id="tversionpro" name="提交测试 " href="/quality/version/add" icon="icon-plus" sort="1"
               isShow="1" scope="testversion-tab"></menu>
-        <menu id="tverclose" name="关闭用例" href="/quality/version/toTaskEnd" icon="icon-off" sort="4"
+        <menu id="tverclose" name="关闭测试" href="/quality/version/toTaskEnd" icon="icon-off" sort="4"
               isShow="1" scope="testverinfo-tab"></menu>
         <menu id="tvercase" name="查看用例" href="/quality/version/taskToCase" icon="icon-smile" sort="4"
               isShow="1" scope="testverinfo-tab"></menu>

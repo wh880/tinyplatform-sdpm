@@ -5,19 +5,13 @@
 #import("/org/tinygroup/table/components/table.component")
 #set(name="survey")
     #hiddenInput(hiddenInputName="projectId" hiddenInputValue=project?.projectId)
-    #@tabWithInit("tab_demo" "optionsBox")
-        #@div(divClass="dropdownBox")
-            #include("/project/common/dropdownMenu.page")
-        #end
-        #@tabHead()
-            #include("/project/common/protab.page")
-        #end
-        #@tabBodyCol("ptop-5")
-            #@div(divClass="operationbar")
-            <span class="f">
-                ${project.projectName}
-            </span>
-            <span class="r">
+#@layout(project)
+    #@tabBodyCol("ptop-5")
+        #@div(divClass="operationbar")
+        <span class="f">
+            ${project.projectName}
+        </span>
+        <span class="r">
                 ##判断状态 进行中 3个按钮，挂起只是修改起止时间 3个按钮，挂起 则可以激活和结束，结束 可以激活
                 ##                    ${project?.projectStatus}
                     #foreach(m:menuManager.getScopeMenus("pro-surveymenu-op"))
@@ -65,7 +59,7 @@
                     #if(m)
                         <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?projectId=${project?.projectId}"
                            title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
-                        #end
+                    #end
                     <a href="javascript :;" onClick="javascript :history.back(-1);" title="返回">#buttonIcon(iconClass=
                         "icon-reply")</a>
                     #set(m4=menuManager.getMenu("pro-survey-remove"))
@@ -75,10 +69,12 @@
                             #buttonIcon(iconClass=m4.icon)#end
                     #end
 				</span>
-                #div(divClass="clearfix")
-            #end
+            #div(divClass="clearfix")
         #end
     #end
+#end
+
+
 <div class="infoPage-left">
     #@div(divClass="infoContent")
         <p class="titleName"> 项目描述 </p>

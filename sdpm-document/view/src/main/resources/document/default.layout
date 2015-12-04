@@ -50,4 +50,42 @@
         });
     }
 </script>
+
+    #@tabWithInit("tab_demo" "optionsBox")
+        #@div(divClass="dropdownBox")
+            #include("/document/common/dropdownMenu.page")
+        #end
+        #@tabHead()
+            #foreach(m in menuManager.getChildMenus("idocument"))
+                #@aHeadCol(TINY_CONTEXT_PATH+adminPath+m.href "Current")${m.name}#end
+            #end
+        <span class="r" style="position:relative;top:2px;height:0">
+            #foreach(m:menuManager.getScopeMenus("file-op"))
+                #if(m.id == "doc-file-edit"&&Integer.parseInt(documentLibId)>2)
+                    #@aModal("#myModal" m.name "400" "160" "class-m" adminPath+m.href)
+                        #buttonIcon(iconClass=m.icon)${m.name}#end&nbsp
+                #elseif(Integer.parseInt(documentLibId)>2)
+                    #@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m.href documentLibId TINY_CONTEXT_PATH+adminPath+
+                        "/document")
+                        #buttonIcon(iconClass=m.icon)${m.name}#end&nbsp
+                #end
+            #end
+            #set(m=menuManager.getMenu("doclib-add"))
+            #if(m)
+                #@aModal("#myModal" m.name "400" "160" "class-m" adminPath+m.href)
+                    #buttonIcon(iconClass=m.icon)${m.name}#end
+            #end
+        </span>
+        #end
+        #layout(document)#end
+    #end
+
+
 #pageContent
+
+#@dialog("myModal")
+    #@dialogHeader()#end
+    #@dialogBody()<p></p>#end
+    #@dialogFooter()
+    #end
+#end

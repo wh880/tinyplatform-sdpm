@@ -1,0 +1,8 @@
+#@tabWithInit("tab_demo" "optionsBox")
+    #@tabHead()
+        #foreach(m in menuManager.getChildMenus("statistic"))
+            #@aHeadCol(TINY_CONTEXT_PATH+adminPath+m.href m.id==name?"Current":"")${m.name}#end
+        #end
+    #end
+    #layout(statistic)#end
+#end

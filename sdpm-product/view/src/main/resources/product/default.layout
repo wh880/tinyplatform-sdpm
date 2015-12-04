@@ -1,7 +1,9 @@
 #import("/org/tinygroup/button/components/button_smart.component")
 #import("/org/tinygroup/button/components/button_common.component")
 #import("/org/tinygroup/button/components/button.component")
-#!set(activeTitle="产品管理",activeMenuId=currentPageId)
+
+#set(subMenuName="",c=call("getSubMenu"),subMenuName=linkName?:"product-"+subMenuName)
+
 ###set(currentPageId=3)
 ###set(cookieProductLineIdTemp=cookieProductLineId,cookieProductLineId=cookieProductLineId?:ProductUtils.getProductLineListByUser()?.get(0)?.productLineId,cookieProductLineId=cookieProductLineId?String.valueOf(cookieProductLineId):null)
 ###if(cookieProductLineId)
@@ -110,7 +112,7 @@
                 #set(url=eval(m.href))
                 #if(m.scope!="product-menu")
 
-                    #@aHeadCol(TINY_CONTEXT_PATH +adminPath+url linkName==m.id?"Current":"")${m.name}#end
+                    #@aHeadCol(TINY_CONTEXT_PATH +adminPath+url subMenuName==m.id?"Current":"")${m.name}#end
                 #end
             #end
 

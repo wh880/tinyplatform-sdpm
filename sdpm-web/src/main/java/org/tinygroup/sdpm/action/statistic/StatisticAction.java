@@ -60,14 +60,14 @@ public class StatisticAction extends BaseController {
                 map.put(products.get(i), productPlans);
             }
             model.addAttribute("product", map);
-            return "/statistic/page/product.page";
+            return "/statistic/page/product/productDataOne.page";
         }
         if ("project".equals(type)) {
             model.addAttribute("startDate", startDate);
             model.addAttribute("endDate", endDate);
             List<Project> projects = projectService.findProjectBetween(null, startDate, endDate);
             model.addAttribute("projects", projects);
-            return "/statistic/page/project.page";
+            return "/statistic/page/project/projectDataOne.page";
         }
         if ("org".equals(type)) {
             model.addAttribute("startDate", startDate);
@@ -89,7 +89,7 @@ public class StatisticAction extends BaseController {
                 }
             }
             model.addAttribute("orgsmap", map);
-            return "/statistic/page/org.page";
+            return "/statistic/page/org/orgDataOne.page";
         }
         return null;
     }
@@ -98,25 +98,22 @@ public class StatisticAction extends BaseController {
     public String productInvest(Model model, Integer deleted) {
         List<ProductProject> productProjects = statisticService.getProductInvest(new ProductProject(), deleted != null && deleted == 1 ? true : false, userUtils.getUserId());
         model.addAttribute("proPros", productProjects);
-        model.addAttribute("order", "2");
-        return "/statistic/page/product.page";
+        return "/statistic/page/product/productDataTwo.page";
     }
 
     @RequestMapping("quality/bugCreate")
     public String qualityBugCreate(Model model, Date startDate, Date endDate, Integer cProject, Integer cProduct) {
-        model.addAttribute("order", "1");
         List<QualityBugSta> bugStas = statisticService.findQualityBugSta(new QualityBugSta(), startDate, endDate, cProject, cProduct);
         model.addAttribute("startDate", startDate);
         model.addAttribute("endDate", endDate);
         model.addAttribute("bugStas", bugStas);
         model.addAttribute("cProject", cProject);
         model.addAttribute("cProduct", cProduct);
-        return "/statistic/page/test.page";
+        return "/statistic/page/quality/qualityDataOne.page";
     }
 
     @RequestMapping("quality/bugAssigned")
     public String qualityBugAssigned(Model model) {
-        model.addAttribute("order", "2");
         List<Assigned> assigneds = statisticService.findAssigned(new Assigned());
         Map<Assigned, List<QualityBugCall>> map = new HashMap<Assigned, List<QualityBugCall>>();
         for (int i = 0, n = assigneds.size(); i < n; i++) {
@@ -127,6 +124,6 @@ public class StatisticAction extends BaseController {
             map.put(assigneds.get(i), qualityBugCalls);
         }
         model.addAttribute("bugAss", map);
-        return "/statistic/page/test.page";
+        return "/statistic/page/quality/qualityDataTwo.page";
     }
 }

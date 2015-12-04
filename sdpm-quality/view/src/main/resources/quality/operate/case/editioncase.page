@@ -1,0 +1,107 @@
+#import("/org/tinygroup/button/components/button_common.component")
+#import("/org/tinygroup/button/components/button.component")
+#import("/org/tinygroup/table/components/table.component")
+#!set(activeTitle="测试管理",activeMenuId=currentPageId)
+
+<style>
+    .select_boxes {
+        margin-top: 0
+    }
+
+    .tableBoxes tbody tr {
+        height: 30px;
+    }
+
+    .tableBoxes tbody tr td {
+        padding: 10px 7px;
+        vertical-align: middle
+    }
+</style>
+
+#set(name="qualityCases")
+#@layout(quality)#end
+    ##tabbody end
+<br>
+
+
+#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/quality/testCase/save" "post" {"class":"test","enctype":"multipart/form-data"})
+<input type="hidden" name="lastAddress" value=""/>
+    #hiddenInput(hiddenInputName="caseId" hiddenInputValue=testCase?.caseId)
+	<div style="width:70%;float:left" class="pageleftpart">
+    	<div class="infoContent">
+    		<p class="titleName">编辑</p>
+    		<div class="RTtitle">
+            	<button type="submit" id="submit2" class="commitBtn">保存</button>
+        	</div>
+        #@elementItem()
+        	<div class="col-10">
+        	#@colLabel("col-2")<span class="c-red">*</span>用例名称：#end
+        	<div class="col-4">
+           		#tinyInput("text" "caseTitle" testCase?.caseTitle {"datatype":"*","nullmsg":"用例标题不能为空！","id":"111","class":"input-text","placeholder":""})
+           </div>
+           </div>
+        #end
+		
+        #@elementItem()
+        	<div class="col-10">
+			#@colLabel("col-2")前置条件：#end
+        	#@formControlDiv("col-10")
+                	#@tinyTextarea("casePrecondition" {"placeholder":"说点什么...最少输入10个字符"})${testCase?.casePrecondition}#end          
+            #end
+            </div>
+        #end
+        #@elementItem()
+       	 <div class="col-10">
+        	#@colLabel("col-2")用例步骤：#end
+        	<div class="col-10">
+      		   #include("/quality/common/caseStepAdd.page")
+            </div>
+         </div>
+        #end
+        #@elementItem()
+            <div class="col-10">
+                <div class="col-2 text-r"><label>备注：&nbsp</label></div>
+
+                <div class="col-10">
+                    #@Teditor("content1" "comment" {"initialFrameHeight":"150"})#end</div>
+            </div>
+        #end
+            #@elementItem()
+                <div class="col-10">
+                    <div class="col-2 text-r"><label>附件：</label></div>
+                    <div class="col-10">
+                        #mulUploadFile(fileList)
+                    </div>
+                </div>
+            #end
+        </div>
+	<br>
+            #@elementItem()
+        		<div class="col-12">
+            	<div class="col-5">
+                <button style="float: right" type="submit" id="submit2" class="commitBtn">保存</button>
+           		 </div>
+            <div class="col-1"></div>
+            <div class="col-1">
+               #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end
+            </div>
+            <div class="col-5"></div>
+        	</div>
+			#end
+            <p style="clear:both"></p>
+            #history(adminPath+"/system/action/ajax/history?actionObjectType=case&actionObjectId="+testCase?.caseId)
+            </div>
+             <div style="width:30%;float:right">
+        #TypeInfo("qualityCaseEdition" caseId)
+        ###include("/testManagement/page/tabledemo/editioncasepaging.page")
+    </div>
+            
+ #end
+
+<script type="text/javascript">
+    $(function () {
+        $("form[name=thisform]").Validform({
+            tiptype: 1
+        });
+    });
+</script>

@@ -1,0 +1,241 @@
+#import("/org/tinygroup/button/components/button_smart.component")
+#import("/org/tinygroup/button/components/button_common.component")
+#import("/org/tinygroup/button/components/button.component")
+#set(bugTableId = "bugTableId")
+#macro initBatchAction()
+<script>
+	$(function () {
+		$("#${tableId} .secondMenu").on("click", function () {
+			var inputname = $(this).attr("tabindex");
+			var inputvalue = $(this).html().trim();
+			var ids = [];
+			var href = $(this).attr("href");
+			$("#${tableId} input[type='checkbox']").each(function () {
+				if (this.checked == true && this.id != "checkboxall") {
+					var clientId = $(this).val();
+					//if ("records" == inputname) {
+					ids.push(clientId);
+					// }
+				}
+			});
+			if (ids.length > 0) {
+				$.ajax({
+					url: href,
+					type: "post",
+					traditional: true,
+					data: {ids: ids, name: inputvalue},
+					dataType: "json",
+					success: function (data) {
+						// alert('success');
+						if(data.status=="y") {
+							layer.msg(data.info, 2, 1);
+							$("#${tableId}").trigger("refresh");
+						}else{
+							layer.msg(data.info)
+						}
+					},
+					error: function (res) {
+						layer.msg("失败")
+						//alert("失败");
+					}
+				});
+			}
+			return false;
+		});
+	});
+</script>
+#end
+
+#set(requestStatuString = tinyRequestQueryString!=null ?tinyRequestQueryString:"")
+#set(qualityProduct = "")
+#set(name="qualityBug")
+
+#@layout(quality)
+	#@tabBodyCol("ptop-5")
+	##operationbar star
+		#@div(divClass="operationbar")
+        <span class="f">
+			#foreach(m:menuManager.getScopeMenus("testbugleft-tab"))
+				#if(m.id != "tsearch")
+                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}&currentPageId=5" class="${m.id==status?'active_btn':''}">${m.name}</a>
+				#else
+                    <a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
+				#end
+			#end
+        </span>
+        <span class="r">
+					#foreach(m:menuManager.getScopeMenus("testbug-tab"))
+						#if(m.id=="tbugoutput")
+
+						#else
+							#if(m.id=="tbuginput")
+							#else
+                                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?currentPageId=5">#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp
+							#end
+						#end
+					#end
+
+				</span>
+			#div(divClass="clearfix")
+		##				#include("/quality/common/mulsearch.page")
+		#end
+	##operationbar end
+	#end
+#end
+
+
+
+			#@toggleBox({"class":"open"})
+				#@toggleLeft({"class":"aclass"})
+					#@settoggleLeftTitle()#foreach(product : productUtils.getAllProductListByUser())
+                                                                        #if(product?.productId == qualityProductId)
+                                                                        ${product?.productName}
+                                                                        #break
+                                                                        #end
+                                                                        #end#end
+						#@settoggleLeftBody("treeLeftbox")
+							#@zTreeList(call("link",adminPath+"/system/module/bugTree?moduleType=bug&moduleRoot="+qualityProductId))
+								#setzTreeValMap({"id":"moduleId","name":"moduleName","pid":"moduleParent"}) ##key值为固定
+								#zTreeSetLinkUrl(TINY_CONTEXT_PATH+adminPath+"/quality/bug?status="+status+"&currentPageId=5")
+								#zTreeSetAddUrl(TINY_CONTEXT_PATH+adminPath+"/system/module/ajax/save?moduleType=bug&moduleRoot="+qualityProductId)
+								#zTreeSetEditUrl(TINY_CONTEXT_PATH+adminPath+"/system/module/ajax/save")
+								#zTreeSetDelUrl(TINY_CONTEXT_PATH+adminPath+"/system/module/ajax/delete")
+							#end
+						#end
+				#end
+
+			#@toggleRight()
+			#@tinyTable(bugTableId)
+				#@div(divBaseClass="tinyheaderTools form-inline")
+					<div class="f col-3">
+						<input type="button" value="全选" class="btn btn-default btn-primary col-3"
+						onclick="selectAllNullorReserve('idCheck','全选');" />
+						<div class="col-0">&nbsp&nbsp</div>
+						<input type="button" value="反选" class="btn btn-default btn-primary col-3"
+						 onclick="selectAllNullorReserve('idCheck','反选');" />
+						<div class="col-0">&nbsp&nbsp</div>
+						<div class="dropdown col-3">
+							<a id="" role="button" data-toggle="dropdown" class="btn btn-primary" data-target="#" href="javascript:void(0);">编辑<span class="caret"></span></a>
+							<ul class="dropdown-menu multi-level" role="menu">
+								<li>
+									#foreach(m:menuManager.getScopeMenus("testbug-op"))
+										#if(m.id=="tmakesure")
+										<a tabindex="-1" href="javascript:;">#@mulOperation("tmakesure" TINY_CONTEXT_PATH+adminPath+"/quality/bug/batch/sure")
+                                        <div>${m.name}</div>
+                                        #end</a>
+										#end
+									#end
+								</li>
+								<li class="dropdown-submenu">
+									#foreach(m:menuManager.getScopeMenus("testbug-op"))
+									#if(m.id=="tsolution")
+									<a tabindex="-1" href="javascript:void(0);">解决</a>
+									<ul class="dropdown-menu">
+									#foreach(re : getDict("bugResolution"))
+									<li>
+									    <a href="javascript:;">#@mulOperation("tsolution"+reFor.index TINY_CONTEXT_PATH+adminPath+"/quality/bug/batch/resolve?resolutionType="+re.value)
+                                        <div>${re.text}</div>
+                                        #end</a>
+                                    </li>
+									#end
+									</ul>
+									#end
+									#end
+								</li>
+								<li class="dropdown-submenu">
+								#foreach(m:menuManager.getScopeMenus("testbug-op"))
+									#if(m.id=="tassign")
+									<a tabindex="-1" href="javascript:void(0);">
+											指派给</a>
+									<ul class="dropdown-menu">
+									#foreach(user : userList)
+										<li>
+											<a tabindex="-1" href="javascript:void(0);">
+											#@mulOperation("tassign"+userFor.index TINY_CONTEXT_PATH+adminPath+"/quality/bug/batch/assign?userId="+user.orgUserId)<div>${user.orgUserRealName}</div>#end</a>
+										</li>
+									#end
+									</ul>
+									#end
+									#end
+								</li>
+							</ul>
+						</div>
+#*						<div class="col-2">
+							#@mulOperation("muldelete" "http://127.0.0.1:8080/sqdm-quality/testManagement/page/Bug.page")
+							<a href="javascript:;" class="btn radius btn-danger "><i class="icon-trash"></i>批量删除</a>#end
+						</div>*#
+					</div>
+					#setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置
+				#end
+			#@tinyTableContent(TINY_CONTEXT_PATH+adminPath+"/quality/bug/findBug?"+requestStatuString)
+				#@thead()
+					#@tr()
+						#@tinyTh({"width":"6"})<input type="checkbox" name="bugId" value="" />#end
+						#@tinyTh({"class":"sorting","rel":"bug_id"})ID#end
+						#@tinyTh({"class":"sorting","rel":"bug_severity"})级别#end
+						#@tinyTh({"class":"sorting","rel":"priority"})P#end
+						#@tinyTh({"class":"sorting","rel":"bug_title"})Bug标题#end
+						#@tinyTh({"class":"sorting","rel":"bug_status","style":"color:#333"})状态#end
+						#@tinyTh({"class":"sorting","rel":"bug_opened_by"})创建#end
+						#@tinyTh({"class":"sorting","rel":"bug_opened_date"})创建日期#end
+						#@tinyTh({"class":"sorting","rel":"bug_assigned_to"})指派给#end
+						#@tinyTh({"class":"sorting","rel":"bug_resolved_by"})解决#end
+						#@tinyTh({"class":"sorting","rel":"bug_resolution"})方案#end
+						#@tinyTh({"class":"sorting","rel":"bug_resolved_date"})解决日期#end
+						#@tinyTh({"class":"","rel":""})操作#end
+					#end
+				#end
+				<script type="text/javascript">
+					$(function(){
+						$('#${tableId}').on('click','.delBtn',function(e){
+							user_del(this,'1');
+						});
+					})
+				</script>
+			#initBatchAction()
+			#end
+			#end
+			##tinytable end
+			#end
+			##toggle rigth end
+		#end
+		##toggle end
+#@dialog("myModal")
+	#@dialogHeader()#end
+	#@dialogBody()<p></p>#end
+	#@dialogFooter()
+		#@buttonEnsure()确定#end
+		#@buttonCancel()关闭#end
+	#end
+#end
+##全选和反选的JS
+<script type="text/javascript">
+function selectAllNullorReserve(obj,type){
+   if(obj!=null&&obj!=""){
+    if(document.getElementsByName(obj)!=undefined&&document.getElementsByName(obj).length>0){	//getElementsByName函数的作用按名字查找对象，返回一个数组。
+     var userids = document.getElementsByName(obj);
+     if(type=="全选"){
+      for(var i=0;i<userids.length;i++){
+       if(userids[i].checked == false){
+        userids[i].checked = true;
+       }
+      }
+     }else if(type=="全不选"){
+      for(var i=0;i<userids.length;i++){
+       if(userids[i].checked == true){
+        userids[i].checked = false;
+       }
+      }
+     }else if(type=="反选"){
+      for(var i=0;i<userids.length;i++){
+       if(userids[i].checked == true){
+        userids[i].checked = false;
+       }else{
+        userids[i].checked = true;
+       }
+      }
+     }
+    }
+   }
+}
+</script>

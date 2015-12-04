@@ -8,14 +8,7 @@
     }
 </style>
 #set(name="client")
-#@div()
-    #@tabWithInit("tab_demo" "optionsBox")
-        #@tabHead()
-            #include("/service/serviceCom/tab.page")
-        #end
-    <br>
-    #end
-#end
+#@layout(service)#end
 #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/service/client/save" "post" {"class":""})
 <div style="width:80%;margin-left: 20px;" class="pageleftpart">
     <div class="infoContent">

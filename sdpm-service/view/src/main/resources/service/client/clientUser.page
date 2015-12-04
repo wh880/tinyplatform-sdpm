@@ -1,14 +1,8 @@
 #import("/org/tinygroup/button/components/button_smart.component")
-#!set(activeTitle="客户管理",activeMenuId=currentPageId)
+
 #set(name="client")
-#@div()
-    #@tabWithInit("tab_demo" "optionsBox")
-    #*       #@div(divClass="dropdownBox dropdownBoxes")
-               #include("/service/serviceCom/dropdownMenu.page")
-           #end*#
-        #@tabHead()
-            #include("/service/serviceCom/tab.page")
-        #end
+
+#@layout(service)#end
 
     ##这里是动态的模块布局
         #@tabBodyCol("ptop-5")
@@ -27,5 +21,5 @@
                 #include("/service/client/clientTable.page")
             #end
         #end
-    #end
-#end
+
+

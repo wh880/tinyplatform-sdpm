@@ -38,7 +38,7 @@
 
     });
 </script>
-#@layout(operate)
+#@layout(project)
     #@tabBodyCol("ptop-5")
     ##operationbar start1
         #@div(divClass="operationbar")

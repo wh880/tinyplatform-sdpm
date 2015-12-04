@@ -1,4 +1,3 @@
-#include("/system/page/event/common.page")
 
 #setTinyItemCount(holiday.totalCount)
 #foreach(h:holiday.records)

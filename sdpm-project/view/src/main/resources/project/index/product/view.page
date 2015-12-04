@@ -1,4 +1,4 @@
-#@layout(index)
+#@layout(project)
 #end
 #import("/common/component/form.component")
 #set(name="product")

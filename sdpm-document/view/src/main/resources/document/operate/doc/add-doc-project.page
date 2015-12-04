@@ -1,0 +1,197 @@
+#import("/org/tinygroup/form/components/form.component")
+#import("/org/tinygroup/icon/components/icon.component")
+#import("/org/tinygroup/button/components/button_common.component")
+#import("/org/tinygroup/button/components/button.component")
+#@layout(document)#end
+#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/document/doc/addSave" "post" {"class":"add","enctype":
+    "multipart/form-data"})
+<input type="hidden" name="lastAddress" value=""/>
+<div style="width:100%">
+<div class="infoContent">
+    <p class="titleName">创建文档</p>
+    #@elementItem()
+        #@colLabel()所属项目#end
+        #@formControlDiv("col-8")
+            #@div(divClass="col-6")
+
+                #@Tselect2F()
+                    #@Tselect2Body(
+                        "docProject" doc?.docProject?doc.docProject:currentProjectId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        <option></option>
+                        #foreach(project : projectList)
+                            <option value="${project?.projectId}">${project?.projectName}</option>
+                        #end
+                    #end
+                    #@Tselect2Fix()
+                        #set(m=menuManager.getMenu("project-op-add"))
+                        #if(m)
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
+                        #end
+                        #set(m=menuManager.getMenu("project-op-all"))
+                        #if(m)
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
+                        #end
+                    #end
+                    <script type="text/javascript">
+                        $("#${sid}").on("change", function () {
+                            var pId = $("#${sid}  option:selected").val();
+                            if(pId>0){
+                                ajaxRead("${sid}", "docProduct", "productId", "productName", "/document/ajax/product?projectId=" + pId, ${doc?.docProduct?doc.docProduct: 0});
+                                ajaxRead("${sid}", "docModule", "moduleId", "moduleName", "/document/ajax/module?projectId=" + pId, ${doc?.docModule?doc.docModule: 0},"module");
+                            }
+                        })
+                    </script>
+                #end
+            #end
+        #end
+    #end
+
+    #@elementItem()
+        #@colLabel()所属产品#end
+        #@formControlDiv("col-8")
+            #@div(divClass="col-6")
+                #@Tselect2F()
+                    #@Tselect2Body("docProduct" doc?.docProduct {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        <option></option>
+                    #end
+                    #@Tselect2Fix()
+                        #set(m=menuManager.getMenu("newproduct"))
+                        #if(m)
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
+                        #end
+                        #set(m=menuManager.getMenu("allproduct"))
+                        #if(m)
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
+                        #end
+                    #end
+                #end
+            #end
+        #end
+    #end
+
+    #@elementItem()
+        #@colLabel()所属分类#end
+        #@formControlDiv("col-8")
+            #@div(divClass="col-6")
+                #@Tselect2F()
+                    #@Tselect2Body("docModule" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                    #end
+                #end
+            #end
+        #end
+    #end
+
+    #@elementItem()
+        #@colLabel()文档类型#end
+        #@skinMinimal("mt-20")
+            #@Tradioes("docType" "1")
+                #@Tradio("1")${getDict("docType","1")} #end
+                #@Tradio("2")${getDict("docType","2")} #end
+                #@Tradio("3")${getDict("docType","3")} #end
+            #end
+
+        #end
+        #@validateDiv("col-2")#end
+    #end
+
+    #@elementItem()
+        #@colLabel()<span class="c-red">*</span>文档标题#end
+        #@formControlDiv("col-4")
+            #@div(divClass="col-12")
+                #tinyInput(
+                    "text" "docTitle" ""{"placeholder":"1~16个字符，字母/中文/数字/下划线","datatype":"*1-16","nullmsg":"标题不能为空！",
+                    "class":"input-text"})
+            #end
+        #end
+        #@validateDiv("col-2")#end
+    #end
+
+    #@elementItem(elementId="urlBox" eleItemClass="hidden")
+        #@colLabel()文档URL#end
+        #@formControlDiv("col-8")
+            #@div(divClass="col-6")
+                #tinyInput(
+                    "text" "docUrl" ""{"placeholder":"相应的链接地址","nullmsg":"链接不能为空！","id":"docUrl","class":"input-text"})
+            #end
+        #end
+        #@validateDiv("col-2")#end
+    #end
+
+    #@elementItem()
+        #@colLabel()关键字#end
+        #@formControlDiv("col-8")
+            #@div(divClass="col-6")
+                #tinyInput("text" "docKeywords" ""{"placeholder":"","id":"docKeywords","class":"input-text"})
+            #end
+        #end
+    #end
+    #@validateDiv("col-2")#end
+
+    #@elementItem()
+        #@colLabel()文档摘要#end
+        #@formControlDiv("col-8")
+            #@Teditor("docDigest" "docDigest" {"initialFrameHeight":"200"})#end
+        #end
+        #@validateDiv("col-2")#end
+    #end
+
+    #@elementItem(elementId="fileBox" eleItemClass="hidden")
+        #@colLabel()附件：#end
+        #@formControlDiv("col-8")
+            #mulUploadFile()
+        #end
+    #end
+    #@elementItem(elementId="contentBox" eleItemClass="hidden")
+        #@colLabel()文档正文#end
+        #@formControlDiv("col-8")
+            #@Teditor("docContent" "docContent")#end
+        #end
+        #@validateDiv("col-2")#end
+    #end
+    #@elementItem()
+        <div class="col-12">
+            <div class="col-2">
+            </div>
+            <div class="col-1">
+                <button style="float: left" type="submit" id="submit2" class="commitBtn">保存</button>
+            </div>
+            <div class="col-1">
+                #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end
+            </div>
+            <div class="col-5"></div>
+        </div>
+    #end
+#end
+    <script type="text/javascript">
+        /* Set doc type. */
+
+        $(function () {
+            $("[name=docType]").each(function(){
+                $(this).on("change",function(){
+                    var type=$(this).val();
+                    if (type == '2') {
+                        $('#urlBox').removeClass('hidden');
+                        $('#fileBox').addClass('hidden');
+                        $('#contentBox').addClass('hidden');
+                    }
+                    else if (type == '3') {
+                        $('#urlBox').addClass('hidden');
+                        $('#fileBox').addClass('hidden');
+                        $('#contentBox').removeClass('hidden');
+                    }
+                    else {
+                        $('#urlBox').addClass('hidden');
+                        $('#fileBox').removeClass('hidden');
+                        $('#contentBox').addClass('hidden');
+                    }
+                });
+                if(this.checked){
+                    $(this).trigger("change");
+                }
+            })
+
+            $("form[name=thisform]").Validform({
+                tiptype: 2
+            });
+        });
+    </script>

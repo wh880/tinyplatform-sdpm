@@ -1,4 +1,4 @@
-#@layout(index) #end
+#@layout(project) #end
 #set(name="bug")
     #@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
         #@div(divBaseClass="tinyheaderTools form-inline")

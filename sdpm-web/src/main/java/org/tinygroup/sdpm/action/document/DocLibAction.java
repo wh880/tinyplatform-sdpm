@@ -39,7 +39,7 @@ public class DocLibAction extends BaseController {
     @RequiresPermissions("doclib-add")
     @RequestMapping(value = "/toAdd")
     public String addDocLib() {
-        return "/document/add-doclib.pagelet";
+        return "/document/modal/doclib/add-doclib.pagelet";
     }
 
     /**
@@ -55,9 +55,9 @@ public class DocLibAction extends BaseController {
         docLib = docService.findDocLibById(documentLibId);
         model.addAttribute("doclib", docLib);
         if (documentLibId == 1 || documentLibId == 2) {
-            return "/document/doclib-no-edit.pagelet";
+            return "/document/modal/doclib/doclib-no-edit.pagelet";
         }
-        return "/document/doclib-edit.pagelet";
+        return "/document/modal/doclib/doclib-edit.pagelet";
     }
 
     /**

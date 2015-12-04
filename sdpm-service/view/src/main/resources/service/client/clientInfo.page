@@ -1,15 +1,9 @@
 #import("/org/tinygroup/button/components/button_common.component")
 #import("/org/tinygroup/button/components/button.component")
 #import("/org/tinygroup/table/components/table.component")
-#!set(activeTitle="服务管理",activeMenuId=currentPageId)
-
 
 #set(name="client")
-#@div()
-    #@tabWithInit("tab_demo" "optionsBox")
-        #@tabHead()
-            #include("/service/serviceCom/tab.page")
-        #end
+#@layout(service)#end
     <div style="width:80%;float:left">
         #@div(divClass="infoContent")
             <p class="titleName">客户信息</p>
@@ -90,16 +84,13 @@
                         <td>
                             #set(m=menuManager.getMenu("linkman-edit"))
                             #if(m)
-                                #@aModal(
-                                    "#myModal1" m.name "580" "300" m.icon adminPath+m.href+"?id="+var?.id)
+                                #@aModal("#myModal1" m.name "580" "300" m.icon adminPath+m.href+"?id="+var?.id)
                                 #end
                             #end
 
                             #set(m1=menuManager.getMenu("linkman-new"))
                             #if(m1)
-                                #@aModal(
-                                    "#myModal1" m1.name "580" "300" m1.icon adminPath+m1.href+
-                                    "?clientId="+var?.clientId)
+                                #@aModal("#myModal1" m1.name "580" "300" m1.icon adminPath+m1.href+"?clientId="+var?.clientId)
                                 #end
                             #end
 
@@ -114,8 +105,8 @@
             #end
         #end
     </div>
-    #end
-#end
+
+
 #@simpleModal("myModal1" "")#end
 
 <script>

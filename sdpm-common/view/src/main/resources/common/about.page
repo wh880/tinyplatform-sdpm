@@ -1,4 +1,4 @@
-#include("/system/page/event/common.page")
+
 #@div()
     #@tabWithInit("top_demo" "optionsBox")
         #@tabHead()

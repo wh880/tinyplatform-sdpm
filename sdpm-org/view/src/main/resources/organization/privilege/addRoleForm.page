@@ -11,19 +11,13 @@
     }
 </style>
 #set(name="organizationPrivilege")
-#@div()
-    #@tabWithInit("tab_demo" "optionsBox")
-        #@tabHead()
-            #include("/organization/common/tab.page")
-        #end
-        #@tabBodyCol("ptop-5")
-            #@div(divClass="operationbar")
-            <span>添加角色</span>
-            #end
+#@layout(org)
+    #@tabBodyCol("ptop-5")
+        #@div(divClass="operationbar")
+        <span>添加角色</span>
         #end
     #end
 #end
-
 #@noRespsGridSystem()
     #@gridSysCol(3)#end
     #@gridSysCol(6)

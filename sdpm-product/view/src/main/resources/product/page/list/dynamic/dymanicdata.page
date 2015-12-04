@@ -1,8 +1,6 @@
 
 #set(addArchivePagePath=
     "/product/page/tabledemo/addArchive.pagelet",editpageModalId="myModal",editpageModal="#"+editpageModalId)
-#!set(linkName="product-dynamic",sonitem="
-<li>"+"动态"+"</li>")
 
 
 #@tabBodyCol("ptop-5")

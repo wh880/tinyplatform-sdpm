@@ -21,7 +21,6 @@ public interface ProductService {
 
     /**
      * 添加产品
-     *
      * @param product
      * @return
      */
@@ -29,7 +28,6 @@ public interface ProductService {
 
     /**
      * 修改
-     *
      * @param product
      * @return
      */
@@ -38,7 +36,6 @@ public interface ProductService {
 
     /**
      * 根据产品ID删除
-     *
      * @param productId
      * @return
      */
@@ -47,7 +44,6 @@ public interface ProductService {
 
     /**
      * 根据产品ID查找
-     *
      * @param productId
      * @return
      */
@@ -56,7 +52,6 @@ public interface ProductService {
 
     /**
      * 根据条件查找列表
-     *
      * @param product
      * @return
      */
@@ -64,7 +59,6 @@ public interface ProductService {
 
     /**
      * 根据多个ID查找
-     *
      * @param productId
      * @return
      */
@@ -72,7 +66,6 @@ public interface ProductService {
 
     /**
      * 根据对象查找(包含产品线的部分信息)
-     *
      * @param product
      * @return
      */
@@ -80,28 +73,60 @@ public interface ProductService {
 
     /**
      * 根据产品线ID查找产品的名字
-     *
      * @param productLineId
      * @return
      */
     @CacheGet(key = "${productLineId}",group = CACHE_PRODUCT_NAME_BY_LINE_ID)
     List<String> getProductNameByLineId(Integer productLineId);
 
+    /**
+     * 获取当前用户可游览产品
+     * @param userId
+     * @param delete
+     * @param productLineId
+     * @return
+     */
     @CacheGet(key = "${userId}-${delete}-${productLineId}", group = CACHE_USER_PRODUCTS_LIST)
     List<Product> getProductByUser(String userId, Integer delete, Integer productLineId);
+
+    /**
+     * 获取当前用户可游览产品-附带统计数据
+     * @param userId
+     * @param delete
+     * @param noRole
+     * @return
+     */
     @CacheGet(key = "${userId}-${delete}-${noRole}", group = CACHE_USER_PRODUCTS_LIST_WITH_COUNT)
     List<Product> getProductByUserWithCount(String userId, Integer delete, boolean noRole);
+
+    /**
+     * 获取当前用户在某产品线下可游览产品-附带统计数据
+     * @param userId
+     * @param productLineId
+     * @param delete
+     * @return
+     */
     @CacheGet(key = "${userId}-${delete}-${productLineId}", group = CACHE_USER_PRODUCTS_LIST_WITH_LINE_COUNT)
     List<Product> getProductByUserAndProductLineWithCount(String userId, Integer productLineId, Integer delete);
 
-    @CacheGet(key = "${userId}", group = CACHE_USER_PRODUCTS_MAP)
+    /**
+     * 获取当前用户可游览产品-以‘产品线-产品’的形式展示
+     * @param userId
+     * @return
+     */
     Map<String, List<Product>> getUserProductsMap(String userId);
 
+    /**
+     * 获取当前用户可游览产品-以‘产品线-产品’的形式展示-附带统计数据
+     * @param userId
+     * @param delete
+     * @return
+     */
+    @CacheGet(key = "${userId}", group = CACHE_USER_PRODUCTS_MAP)
     Map<String, List<Product>> getUserProductsWithCountMap(String userId, Integer delete);
 
     /**
      * 根据输入名称查询
-     *
      * @param condition
      * @return
      */

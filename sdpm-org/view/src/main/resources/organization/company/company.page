@@ -1,12 +1,7 @@
 #!set(activeTitle="组织管理",activeMenuId=currentPageId)
 #set(name="organizationCompany")
-#include("/common/common.page")
-#@div()
-    #@tabWithInit("tab_demo" "optionsBox")
-        #@tabHead()
-            #include("/organization/common/tab.page")
-        #end
-    #end
+
+    #@layout(org)#end
     #@noRespsGridSystem()
         #@gridSysCol(3)#end
         #@gridSysCol(6)
@@ -80,6 +75,6 @@
         #end
 
     #end
-#end
+
 
 
