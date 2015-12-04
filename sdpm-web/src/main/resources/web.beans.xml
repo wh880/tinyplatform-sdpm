@@ -22,23 +22,25 @@
 
     <!--<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"></bean>-->
 
-    <bean id="conventionServiceIdentifier" scope="singleton"
+    <!-- 服务的约定类,定义服务接口包名模式,类名以Service结尾的类 -->
+    <bean id="conventionServiceIdentifier"
           class="org.tinygroup.custombeandefine.identifier.impl.ConventionServiceIdentifier">
         <property name="pkgPatterns" value="**.service.inter"/>
     </bean>
 
+    <!-- 服务的约定类,定义服务接口包名模式,类名以Service结尾的类 -->
     <bean id="conventionFactoryBeanDefinitionRegistryPostProcessor"
           class="org.tinygroup.custombeandefine.convention.ConventionCustomBeanDefinitionRegistryPostProcessor">
         <property name="beanDefineCreate" ref="proxyFactoryBeanDefineCreate"></property>
         <property name="beanNameGenerator" ref="proxyFactoryBeanNameGenerator"></property>
     </bean>
 
-    <bean id="proxyFactoryBeanNameGenerator" scope="singleton"
-          class="org.tinygroup.custombeandefine.namegenerator.ProxyFactoryBeanNameGenerator">
-    </bean>
+    <!-- 设定代理生成的服务接口类的bean名称 -->
+    <bean id="proxyFactoryBeanNameGenerator"
+          class="org.tinygroup.custombeandefine.namegenerator.ProxyFactoryBeanNameGenerator"/>
 
-    <bean id="proxyFactoryBeanDefineCreate" scope="singleton"
-          class="org.tinygroup.custombeandefine.impl.ProxyFactoryBeanDefineCreate">
+    <!-- 生成代理bean -->
+    <bean id="proxyFactoryBeanDefineCreate" class="org.tinygroup.custombeandefine.impl.ProxyFactoryBeanDefineCreate">
         <property name="interceptorNames">
             <list>
                 <value>aopCacheInterceptor</value>
