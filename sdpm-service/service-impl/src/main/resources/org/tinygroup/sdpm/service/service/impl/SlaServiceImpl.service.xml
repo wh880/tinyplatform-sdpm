@@ -1,5 +1,5 @@
 <service-components>
-  <service-component type="org.tinygroup.sdpm.service.service.impl.SlaServiceImpl" bean="">
+  <service-component type="org.tinygroup.sdpm.service.service.impl.SlaServiceImpl" bean="SlaServiceImpl">
     <service-method local-name="findSla" service-id="findSla" method-name="findSla" cacheable="false" category="org.tinygroup.sdpm.service.service.impl">
       <service-parameters>
         <service-parameter name="id" type="java.lang.Integer" required="false" is-array="false"/>

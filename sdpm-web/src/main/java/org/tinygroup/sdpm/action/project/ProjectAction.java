@@ -175,7 +175,7 @@ public class ProjectAction extends BaseController {
     public String editForm(Integer projectId, Model model) {
         Project project = projectService.findProjectById(projectId);
         model.addAttribute("project", project);
-        List<ProjectProduct> projectProductList = projectProductService.findProducts(projectId);
+        List<ProjectProduct> projectProductList = projectProductService.findProductListByProjectId(projectId);
         String productIds = Collections3.extractToString(projectProductList, "productId", ",");
         model.addAttribute("productIds", productIds);
         model.addAttribute("teamList", userService.findTeamUserListByProjectId(projectId));
@@ -311,7 +311,7 @@ public class ProjectAction extends BaseController {
     @RequestMapping("/basicInformation")
     public String basicInformation(Integer projectID, Model model) {
         Project project = projectService.findProjectById(projectID);
-        List<ProjectProduct> projectProduct = projectProductService.findProducts(projectID);
+        List<ProjectProduct> projectProduct = projectProductService.findProductListByProjectId(projectID);
         List<Integer> productIds = Collections3.extractToList(projectProduct, "productId");
         List<Product> productList = productService.findProductListByIds(productIds.toArray(new Integer[0]));
         model.addAttribute("project", project);

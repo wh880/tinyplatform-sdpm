@@ -16,10 +16,32 @@
     <bean id="commonFilter" class="org.tinygroup.sdpm.common.web.CommonFilter"/>
 
 
-    <bean id="customerAdvisor" class="org.tinygroup.sdpm.aop.AopCacheMatcherPointcutAdvisor">
-        <property name="advice" ref="aopCacheInterceptor" />
+    <!--<bean id="customerAdvisor" class="org.tinygroup.sdpm.aop.AopCacheMatcherPointcutAdvisor">-->
+        <!--<property name="advice" ref="aopCacheInterceptor" />-->
+    <!--</bean>-->
+
+    <!--<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"></bean>-->
+
+    <bean id="conventionServiceIdentifier" scope="singleton"
+          class="org.tinygroup.custombeandefine.identifier.impl.ConventionServiceIdentifier">
+        <property name="pkgPatterns" value="**.service.inter"/>
     </bean>
 
-    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"></bean>
+    <bean id="conventionFactoryBeanDefinitionRegistryPostProcessor" scope="singleton"
+          class="org.tinygroup.custombeandefine.convention.ConventionCustomBeanDefinitionRegistryPostProcessor">
+        <property name="beanDefineCreate" ref="proxyFactoryBeanDefineCreate"></property>
+    </bean>
+
+    <bean id="proxyFactoryBeanDefineCreate" scope="singleton"
+          class="org.tinygroup.custombeandefine.impl.ProxyFactoryBeanDefineCreate">
+        <property name="interceptorNames">
+            <list>
+                <value>aopCacheInterceptor</value>
+                <value>serviceWrapperInterceptor</value>
+            </list>
+        </property>
+    </bean>
+
+
 
 </beans>

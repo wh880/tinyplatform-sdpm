@@ -217,7 +217,7 @@ public class ProductAction extends BaseController {
 
             return "/product/page/view/product/overview.page";
         } else if ("baseinfo".equals(forward)) {
-            List<ProjectProduct> projectProducts = projectProductService.findProjects(Integer.parseInt(cookieProductId));
+            List<ProjectProduct> projectProducts = projectProductService.findProjectByProductId(Integer.parseInt(cookieProductId));
             ProjectBuild build = new ProjectBuild();
             build.setBuildProduct(Integer.parseInt(cookieProductId));
             build.setBuildDeleted("0");
@@ -311,7 +311,7 @@ public class ProductAction extends BaseController {
                        @RequestParam(required = false, defaultValue = "projectId") String order,
                        @RequestParam(required = false, defaultValue = "asc") String ordertype, Model model, HttpServletRequest request) {
 
-        List<ProjectProduct> projects = projectProductService.findProjects(Integer.parseInt(cookieProductId));
+        List<ProjectProduct> projects = projectProductService.findProjectByProductId(Integer.parseInt(cookieProductId));
         Integer[] ids = new Integer[projects.size()];
         for (int i = 0; i < projects.size(); i++) {
             ids[i] = projects.get(i).getProjectId();

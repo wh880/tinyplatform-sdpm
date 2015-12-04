@@ -9,7 +9,6 @@ import org.tinygroup.sdpm.project.biz.inter.ProjectManager;
 import org.tinygroup.sdpm.project.biz.inter.TaskManager;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBurn;
-import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
 import org.tinygroup.sdpm.project.service.dto.BurnDTO;
 import org.tinygroup.sdpm.project.service.inter.BurnService;
 
@@ -47,46 +46,6 @@ public class BurnServiceImpl implements BurnService {
         } else {
             burn.setId(burnList.get(0).getId());
             burnManager.update(burn);
-        }
-    }
-
-    public void updateDateTaskId(Integer taskId) {
-        //当任务修改以后 根据跟新的任务刷新燃尽图，统计项目
-        if (taskId == null) {
-            List<Project> projectList = projectManager.findListProjects(null, null, null);
-            if (!projectList.isEmpty()) {
-                for (Project p : projectList) {
-                    ProjectBurn burn = new ProjectBurn();
-                    burn.setProjectId(p.getProjectId());
-                    burn.setBurnDate(DateUtils.getDateStart(new Date()));
-                    List<ProjectBurn> res = burnManager.findList(burn);
-                    burn.setBurnConsumed(p.getConsumed());
-                    burn.setBurnLeft(p.getAllLeft());
-                    if (res.isEmpty()) {
-                        burnManager.add(burn);
-                    } else {
-                        burn.setId(res.get(0).getId());
-                        burnManager.update(burn);
-                    }
-                }
-            }
-        } else {
-            ProjectTask task = taskManager.find(taskId);
-            Project project = new Project();
-            project.setProjectId(task.getTaskProject());
-            project = projectManager.findListProjects(project, null, null).get(0);
-            ProjectBurn burn = new ProjectBurn();
-            burn.setProjectId(project.getProjectId());
-            burn.setBurnDate(DateUtils.getDateStart(new Date()));
-            List<ProjectBurn> burnList = burnManager.findList(burn);
-            burn.setBurnConsumed(project.getConsumed());
-            burn.setBurnLeft(project.getAllLeft());
-            if (burnList.isEmpty()) {
-                burnManager.add(burn);
-            } else {
-                burn.setId(burnList.get(0).getId());
-                burnManager.update(burn);
-            }
         }
     }
 
@@ -140,12 +99,6 @@ public class BurnServiceImpl implements BurnService {
         return burnDTO;
     }
 
-
-    public List<ProjectBurn> findBurnByProjectId(int projectId) {
-        ProjectBurn projectBurn = new ProjectBurn();
-        projectBurn.setProjectId(projectId);
-        return burnManager.findList(projectBurn);
-    }
 
     /**
      * 获取列表中最大剩余工作时长

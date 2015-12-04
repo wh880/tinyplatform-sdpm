@@ -1,0 +1,112 @@
+<service-components>
+  <service-component type="org.tinygroup.sdpm.project.service.inter.TaskService" bean="taskServiceImpl">
+    <service-method local-name="updateDoingTask" service-id="updateDoingTask" method-name="updateDoingTask" cacheable="false" category="org.tinygroup.sdpm.project.service.inter">
+      <service-parameters>
+        <service-parameter name="task" type="org.tinygroup.sdpm.project.dao.pojo.ProjectTask" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="updateDoingTaskResult" required="false" is-array="false" type="java.lang.Integer"/>
+    </service-method>
+    <service-method local-name="batchAddTask" service-id="batchAddTask" method-name="batchAddTask" cacheable="false" category="org.tinygroup.sdpm.project.service.inter">
+      <service-parameters>
+        <service-parameter name="taskList" type="org.tinygroup.sdpm.project.dao.pojo.ProjectTask" collection-type="java.util.List" required="false" is-array="false"/>
+        <service-parameter name="projectId" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="batchAddTaskResult" required="false" is-array="false" type="java.lang.Integer"/>
+    </service-method>
+    <service-method local-name="addTask" service-id="addTask" method-name="addTask" cacheable="false" category="org.tinygroup.sdpm.project.service.inter">
+      <service-parameters>
+        <service-parameter name="Task" type="org.tinygroup.sdpm.project.dao.pojo.ProjectTask" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="addTaskResult" required="false" is-array="false" type="org.tinygroup.sdpm.project.dao.pojo.ProjectTask"/>
+    </service-method>
+    <service-method local-name="findListTask" service-id="findListTask" method-name="findListTask" cacheable="false" category="org.tinygroup.sdpm.project.service.inter">
+      <service-parameters>
+        <service-parameter name="task" type="org.tinygroup.sdpm.project.dao.pojo.ProjectTask" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findListTaskResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.project.dao.pojo.ProjectTask"/>
+    </service-method>
+    <service-method local-name="findPagerTaskByMe" service-id="findPagerTaskByMe" method-name="findPagerTaskByMe" cacheable="false" category="org.tinygroup.sdpm.project.service.inter">
+      <service-parameters>
+        <service-parameter name="start" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="limit" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="task" type="org.tinygroup.sdpm.project.dao.pojo.ProjectTask" required="false" is-array="false"/>
+        <service-parameter name="sortName" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="asc" type="boolean" required="false" is-array="false"/>
+        <service-parameter name="user" type="org.tinygroup.sdpm.org.dao.pojo.OrgUser" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findPagerTaskByMeResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager"/>
+    </service-method>
+    <service-method local-name="findTaskPager" service-id="findTaskPager" method-name="findTaskPager" cacheable="false" category="org.tinygroup.sdpm.project.service.inter">
+      <service-parameters>
+        <service-parameter name="start" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="limit" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="task" type="org.tinygroup.sdpm.project.dao.pojo.ProjectTask" required="false" is-array="false"/>
+        <service-parameter name="sortName" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="asc" type="boolean" required="false" is-array="false"/>
+        <service-parameter name="condition" type="java.lang.String" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findTaskPagerResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager"/>
+    </service-method>
+    <service-method local-name="findTaskById" service-id="findTaskById" method-name="findTaskById" cacheable="false" category="org.tinygroup.sdpm.project.service.inter">
+      <service-parameters>
+        <service-parameter name="taskId" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findTaskByIdResult" required="false" is-array="false" type="org.tinygroup.sdpm.project.dao.pojo.ProjectTask"/>
+    </service-method>
+    <service-method local-name="updateTask" service-id="updateTask" method-name="updateTask" cacheable="false" category="org.tinygroup.sdpm.project.service.inter">
+      <service-parameters>
+        <service-parameter name="projectTask" type="org.tinygroup.sdpm.project.dao.pojo.ProjectTask" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="updateTaskResult" required="false" is-array="false" type="java.lang.Integer"/>
+    </service-method>
+    <service-method local-name="updateEditTask" service-id="updateEditTask" method-name="updateEditTask" cacheable="false" category="org.tinygroup.sdpm.project.service.inter">
+      <service-parameters>
+        <service-parameter name="projectTask" type="org.tinygroup.sdpm.project.dao.pojo.ProjectTask" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="updateEditTaskResult" required="false" is-array="false" type="java.lang.Integer"/>
+    </service-method>
+    <service-method local-name="updateCallTask" service-id="updateCallTask" method-name="updateCallTask" cacheable="false" category="org.tinygroup.sdpm.project.service.inter">
+      <service-parameters>
+        <service-parameter name="projectTask" type="org.tinygroup.sdpm.project.dao.pojo.ProjectTask" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="updateCallTaskResult" required="false" is-array="false" type="java.lang.Integer"/>
+    </service-method>
+    <service-method local-name="updateCloseTask" service-id="updateCloseTask" method-name="updateCloseTask" cacheable="false" category="org.tinygroup.sdpm.project.service.inter">
+      <service-parameters>
+        <service-parameter name="projectTask" type="org.tinygroup.sdpm.project.dao.pojo.ProjectTask" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="updateCloseTaskResult" required="false" is-array="false" type="java.lang.Integer"/>
+    </service-method>
+    <service-method local-name="updateStartTask" service-id="updateStartTask" method-name="updateStartTask" cacheable="false" category="org.tinygroup.sdpm.project.service.inter">
+      <service-parameters>
+        <service-parameter name="projectTask" type="org.tinygroup.sdpm.project.dao.pojo.ProjectTask" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="updateStartTaskResult" required="false" is-array="false" type="java.lang.Integer"/>
+    </service-method>
+    <service-method local-name="updateFinishTask" service-id="updateFinishTask" method-name="updateFinishTask" cacheable="false" category="org.tinygroup.sdpm.project.service.inter">
+      <service-parameters>
+        <service-parameter name="projectTask" type="org.tinygroup.sdpm.project.dao.pojo.ProjectTask" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="updateFinishTaskResult" required="false" is-array="false" type="java.lang.Integer"/>
+    </service-method>
+    <service-method local-name="updateCancelTask" service-id="updateCancelTask" method-name="updateCancelTask" cacheable="false" category="org.tinygroup.sdpm.project.service.inter">
+      <service-parameters>
+        <service-parameter name="task" type="org.tinygroup.sdpm.project.dao.pojo.ProjectTask" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="updateCancelTaskResult" required="false" is-array="false" type="java.lang.Integer"/>
+    </service-method>
+    <service-method local-name="findGroup" service-id="findGroup" method-name="findGroup" cacheable="false" category="org.tinygroup.sdpm.project.service.inter">
+      <service-parameters>
+        <service-parameter name="type" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="projectId" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findGroupResult" required="false" is-array="false" type="java.util.Map"/>
+    </service-method>
+    <service-method local-name="buildChart" service-id="buildChart" method-name="buildChart" cacheable="false" category="org.tinygroup.sdpm.project.service.inter">
+      <service-parameters>
+        <service-parameter name="id" type="java.lang.String" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="buildChartResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.project.dao.pojo.TaskChartBean"/>
+    </service-method>
+  </service-component>
+</service-components>

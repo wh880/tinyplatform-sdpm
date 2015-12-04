@@ -82,7 +82,7 @@ public class ProjectOperate {
      * 获得当前用户项目列表
      */
     public List<Project> getUserProjectList() {
-        return projectService.findListByRelatedUser(UserUtils.getUserId());
+        return projectService.getUserProjectList(UserUtils.getUserId());
     }
 
     /**

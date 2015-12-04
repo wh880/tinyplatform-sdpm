@@ -577,7 +577,7 @@ public class BugAction extends BaseController {
         if (projectProduct.getProductId() == null/*||projectProduct.getProductId() < 1*/) {
             return new ArrayList<Project>();
         }
-        List<ProjectProduct> projectProducts = projectProductService.findProjects(projectProduct.getProductId());
+        List<ProjectProduct> projectProducts = projectProductService.findProjectByProductId(projectProduct.getProductId());
         List<Integer> ids = new ArrayList<Integer>();
         for (ProjectProduct projectProduct1 : projectProducts) {
             ids.add(projectProduct1.getProjectId());

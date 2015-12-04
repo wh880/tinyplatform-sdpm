@@ -21,6 +21,7 @@ import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.sdpm.util.ModuleUtil;
+import org.tinygroup.sdpm.util.UserUtils;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
@@ -57,7 +58,7 @@ public class ModuleAction extends BaseController {
     public List<Map<String, Object>> projectTree(SystemModule systemModule, HttpServletResponse response, int openProject) {
         response.setContentType("application/json; charset=UTF-8");
         List<Map<String, Object>> mapList = Lists.newArrayList();
-        List<ProjectProduct> projectProducts = projectProductService.findProducts(systemModule.getModuleRoot());
+        List<ProjectProduct> projectProducts = projectProductService.findProductListByProjectId(systemModule.getModuleRoot());
         List<Integer> integers = new ArrayList<Integer>();
         for (ProjectProduct p : projectProducts) {
             integers.add(p.getProductId());
@@ -103,7 +104,7 @@ public class ModuleAction extends BaseController {
         List<Map<String, Object>> mapList = Lists.newArrayList();
         Project project = new Project();
         project.setProjectDeleted("0");
-        List<Project> projects = projectService.findProjectList(project, null, null);
+        List<Project> projects = projectService.getUserProjectList(UserUtils.getUserId());
         for (Project p : projects) {
             SystemModule module = new SystemModule();
             module.setModuleRoot(p.getProjectId());

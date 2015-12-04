@@ -53,8 +53,12 @@ public class ProjectServiceImpl implements ProjectService {
         }
         return false;
     }
-
-    public List<Project> findAllProjectList() {
+    /**
+     * 查找所有项目
+     *
+     * @return
+     */
+    private List<Project> findAllProjectList() {
         return projectManager.findList();
     }
 
@@ -112,11 +116,18 @@ public class ProjectServiceImpl implements ProjectService {
         return userProjectList;
     }
 
-    public List<Project> findListByTeamUserId(String userId, String acl) {
+    private List<Project> findListByTeamUserId(String userId, String acl) {
         return projectManager.findListByTeamUserId(userId, acl);
     }
 
-    public List<Project> findListByRelatedUser(String userId) {
+    /**
+     * 查找相关干系人的项目
+     * 查询条件OR
+     *
+     * @param userId
+     * @return
+     */
+    private List<Project> findListByRelatedUser(String userId) {
         Project project = new Project();
         project.setProjectOpenedBy(userId);
         project.setProjectPo(userId);

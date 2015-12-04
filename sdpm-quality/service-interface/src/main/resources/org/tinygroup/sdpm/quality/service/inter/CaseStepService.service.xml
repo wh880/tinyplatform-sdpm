@@ -1,0 +1,34 @@
+<service-components>
+  <service-component type="org.tinygroup.sdpm.quality.service.inter.CaseStepService" bean="caseStepServiceImpl">
+    <service-method local-name="findCaseStepById" service-id="findCaseStepById" method-name="findCaseStepById" cacheable="false" category="org.tinygroup.sdpm.quality.service.inter">
+      <service-parameters>
+        <service-parameter name="id" type="int" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findCaseStepByIdResult" required="false" is-array="false" type="org.tinygroup.sdpm.quality.dao.pojo.QualityCaseStep"/>
+    </service-method>
+    <service-method local-name="addCaseStep" service-id="addCaseStep" method-name="addCaseStep" cacheable="false" category="org.tinygroup.sdpm.quality.service.inter">
+      <service-parameters>
+        <service-parameter name="caseStep" type="org.tinygroup.sdpm.quality.dao.pojo.QualityCaseStep" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="addCaseStepResult" required="false" is-array="false" type="org.tinygroup.sdpm.quality.dao.pojo.QualityCaseStep"/>
+    </service-method>
+    <service-method local-name="deleteCaseStepById" service-id="deleteCaseStepById" method-name="deleteCaseStepById" cacheable="false" category="org.tinygroup.sdpm.quality.service.inter">
+      <service-parameters>
+        <service-parameter name="id" type="int" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="deleteCaseStepByIdResult" required="false" is-array="false" type="int"/>
+    </service-method>
+    <service-method local-name="findCaseStepList" service-id="findCaseStepList" method-name="findCaseStepList" cacheable="false" category="org.tinygroup.sdpm.quality.service.inter">
+      <service-parameters>
+        <service-parameter name="caseStep" type="org.tinygroup.sdpm.quality.dao.pojo.QualityCaseStep" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findCaseStepListResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.quality.dao.pojo.QualityCaseStep"/>
+    </service-method>
+    <service-method local-name="getMaxVersion" service-id="getMaxVersion" method-name="getMaxVersion" cacheable="false" category="org.tinygroup.sdpm.quality.service.inter">
+      <service-parameters>
+        <service-parameter name="caseId" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="getMaxVersionResult" required="false" is-array="false" type="java.lang.Integer"/>
+    </service-method>
+  </service-component>
+</service-components>

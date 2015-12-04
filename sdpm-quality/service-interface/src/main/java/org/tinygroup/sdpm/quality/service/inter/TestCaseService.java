@@ -26,26 +26,26 @@ public interface TestCaseService {
     /**
      * 建用例
      *
-     * @param testcase
+     * @param testCase
      * @return
      */
-    QualityTestCase addTestCase(QualityTestCase testcase);
+    QualityTestCase addTestCase(QualityTestCase testCase);
 
     /**
      * 用例修改
      *
-     * @param testcase
+     * @param testCase
      * @return
      */
-    int updateTestCase(QualityTestCase testcase);
+    int updateTestCase(QualityTestCase testCase);
 
     /**
      * 批量修改
      *
-     * @param testcases
+     * @param testCases
      * @return
      */
-    int[] batchUpdateTestCase(List<QualityTestCase> testcases);
+    int[] batchUpdateTestCase(List<QualityTestCase> testCases);
 
     /**
      * 删除用例
@@ -58,27 +58,27 @@ public interface TestCaseService {
     /**
      * 批量删除
      *
-     * @param id
+     * @param testCases
      * @return
      */
-    int[] batchDeleteTestCase(List<QualityTestCase> testcases);
+    int[] batchDeleteTestCase(List<QualityTestCase> testCases);
 
     /**
      * 分页查询
      *
      * @param start
      * @param limit
-     * @param testcase
+     * @param testCase
      * @param sortName
      * @param asc
      * @return
      */
-    Pager<QualityTestCase> findTestCasePager(Integer start, Integer limit, QualityTestCase testcase, String sortName, boolean asc);
+    Pager<QualityTestCase> findTestCasePager(Integer start, Integer limit, QualityTestCase testCase, String sortName, boolean asc);
 
-    Pager<QualityTestCase> findTestCasePager(Integer start, Integer limit, QualityTestCase testcase, ConditionCarrier carrier, String columnName, boolean asc);
+    Pager<QualityTestCase> findTestCasePager(Integer start, Integer limit, QualityTestCase testCase, ConditionCarrier carrier, String columnName, boolean asc);
 
 
-    Pager<QualityTestCase> findStoryChangedCase(Integer start, Integer limit, QualityTestCase testcase, ConditionCarrier carrier, String columnName, boolean asc);
+    Pager<QualityTestCase> findStoryChangedCase(Integer start, Integer limit, QualityTestCase testCase, ConditionCarrier carrier, String columnName, boolean asc);
 
     List<Integer> getStoryIds(QualityTestCase t);
 }

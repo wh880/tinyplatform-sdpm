@@ -48,7 +48,7 @@ public interface ProductLineService {
      */
     ProductLine findProductLine(Integer productLineId);
 
-    Pager<ProductLine> findProductLinePagerInIds(int start, int limit, ConditionCarrier carrier, ProductLine productLine, Integer[] ids, String order, String ordertype);
+    Pager<ProductLine> findProductLinePagerInIds(int start, int limit, ConditionCarrier carrier, ProductLine productLine, Integer[] ids, String order, String orderType);
 
     List<ProductLine> getProductLineByIds(Integer... ids);
 

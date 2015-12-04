@@ -1,0 +1,88 @@
+<service-components>
+  <service-component type="org.tinygroup.sdpm.org.service.inter.UserService" bean="userServiceImpl">
+    <service-method local-name="findUser" service-id="findUser" method-name="findUser" cacheable="false" category="org.tinygroup.sdpm.org.service.inter">
+      <service-parameters>
+        <service-parameter name="id" type="java.lang.String" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findUserResult" required="false" is-array="false" type="org.tinygroup.sdpm.org.dao.pojo.OrgUser"/>
+    </service-method>
+    <service-method local-name="findUserByAccount" service-id="findUserByAccount" method-name="findUserByAccount" cacheable="false" category="org.tinygroup.sdpm.org.service.inter">
+      <service-parameters>
+        <service-parameter name="account" type="java.lang.String" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findUserByAccountResult" required="false" is-array="false" type="org.tinygroup.sdpm.org.dao.pojo.OrgUser"/>
+    </service-method>
+    <service-method local-name="findUserPager" service-id="findUserPager" method-name="findUserPager" cacheable="false" category="org.tinygroup.sdpm.org.service.inter">
+      <service-parameters>
+        <service-parameter name="start" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="limit" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="orgUser" type="org.tinygroup.sdpm.org.dao.pojo.OrgUser" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findUserPagerResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager"/>
+    </service-method>
+    <service-method local-name="findUserList" service-id="findUserList" method-name="findUserList" cacheable="false" category="org.tinygroup.sdpm.org.service.inter">
+      <service-parameters>
+        <service-parameter name="orgUser" type="org.tinygroup.sdpm.org.dao.pojo.OrgUser" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findUserListResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.org.dao.pojo.OrgUser"/>
+    </service-method>
+    <service-method local-name="findUserByDeptId" service-id="findUserByDeptId" method-name="findUserByDeptId" cacheable="false" category="org.tinygroup.sdpm.org.service.inter">
+      <service-parameters>
+        <service-parameter name="start" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="limit" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="deptId" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findUserByDeptIdResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager"/>
+    </service-method>
+    <service-method local-name="addUser" service-id="addUser" method-name="addUser" cacheable="false" category="org.tinygroup.sdpm.org.service.inter">
+      <service-parameters>
+        <service-parameter name="orgUser" type="org.tinygroup.sdpm.org.dao.pojo.OrgUser" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="addUserResult" required="false" is-array="false" type="org.tinygroup.sdpm.org.dao.pojo.OrgUser"/>
+    </service-method>
+    <service-method local-name="updateUser" service-id="updateUser" method-name="updateUser" cacheable="false" category="org.tinygroup.sdpm.org.service.inter">
+      <service-parameters>
+        <service-parameter name="orgUser" type="org.tinygroup.sdpm.org.dao.pojo.OrgUser" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="updateUserResult" required="false" is-array="false" type="org.tinygroup.sdpm.org.dao.pojo.OrgUser"/>
+    </service-method>
+    <service-method local-name="deleteUser" service-id="deleteUser" method-name="deleteUser" cacheable="false" category="org.tinygroup.sdpm.org.service.inter">
+      <service-parameters>
+        <service-parameter name="id" type="java.lang.String" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="deleteUserResult" required="false" is-array="false" type="java.lang.Integer"/>
+    </service-method>
+    <service-method local-name="deleteBatchUser" service-id="deleteBatchUser" method-name="deleteBatchUser" cacheable="false" category="org.tinygroup.sdpm.org.service.inter">
+      <service-parameters>
+        <service-parameter name="list" type="org.tinygroup.sdpm.org.dao.pojo.OrgUser" collection-type="java.util.List" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="deleteBatchUserResult" required="false" is-array="true" type="int"/>
+    </service-method>
+    <service-method local-name="validatePassword" service-id="validatePassword" method-name="validatePassword" cacheable="false" category="org.tinygroup.sdpm.org.service.inter">
+      <service-parameters>
+        <service-parameter name="plainPassword" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="password" type="java.lang.String" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="validatePasswordResult" required="false" is-array="false" type="java.lang.Boolean"/>
+    </service-method>
+    <service-method local-name="findUserListByIds" service-id="findUserListByIds" method-name="findUserListByIds" cacheable="false" category="org.tinygroup.sdpm.org.service.inter">
+      <service-parameters>
+        <service-parameter name="userId" type="java.lang.String" required="false" is-array="true"/>
+      </service-parameters>
+      <service-result name="findUserListByIdsResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.org.dao.pojo.OrgUser"/>
+    </service-method>
+    <service-method local-name="findTeamUserListByProjectId" service-id="findTeamUserListByProjectId" method-name="findTeamUserListByProjectId" cacheable="false" category="org.tinygroup.sdpm.org.service.inter">
+      <service-parameters>
+        <service-parameter name="projectId" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findTeamUserListByProjectIdResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.org.dao.pojo.OrgUser"/>
+    </service-method>
+    <service-method local-name="userInCondition" service-id="userInCondition" method-name="userInCondition" cacheable="false" category="org.tinygroup.sdpm.org.service.inter">
+      <service-parameters>
+        <service-parameter name="condition" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="ids" type="java.lang.String" required="false" is-array="true"/>
+      </service-parameters>
+      <service-result name="userInConditionResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.org.dao.pojo.OrgUser"/>
+    </service-method>
+  </service-component>
+</service-components>

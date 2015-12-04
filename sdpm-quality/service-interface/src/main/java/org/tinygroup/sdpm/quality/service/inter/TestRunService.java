@@ -11,10 +11,10 @@ public interface TestRunService {
     /**
      * 条件查询
      *
-     * @param testrun
+     * @param testRun
      * @return
      */
-    List<QualityTestRun> findTestRunList(QualityTestRun testrun);
+    List<QualityTestRun> findTestRunList(QualityTestRun testRun);
 
     /**
      * 编辑
@@ -23,14 +23,6 @@ public interface TestRunService {
      * @return
      */
     int updateTestRun(QualityTestRun testrun);
-
-    /**
-     * 批量编辑
-     *
-     * @param testruns
-     * @return
-     */
-    int[] batchUpdateTestRun(List<QualityTestRun> testruns);
 
     QualityTestRun addTestRun(QualityTestRun run);
 

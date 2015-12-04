@@ -29,6 +29,7 @@ import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.sdpm.system.service.inter.ProfileService;
 import org.tinygroup.sdpm.util.CookieUtils;
 import org.tinygroup.sdpm.util.LogUtil;
+import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -199,8 +200,8 @@ public class DocAction extends BaseController {
         SystemModule module = new SystemModule();
         module.setModuleType("doc");
         DocumentDoc doc = docService.findDocById(docId);
-        List<Product> list1 = productService.findProductList(new Product());
-        List<Project> list2 = projectService.findAllProjectList();
+        List<Product> productList = productService.getProductByUser(UserUtils.getUserId(),0,null);
+        List<Project> projectList = projectService.getUserProjectList(UserUtils.getUserId());
         List<SystemModule> listModule = moduleService.findModuleList(module);
         List<DocumentDocLib> libList = docService.findDocLibList(null);
 
@@ -211,8 +212,8 @@ public class DocAction extends BaseController {
         model.addAttribute("fileList", fileList);
 
         model.addAttribute("doc", doc);
-        model.addAttribute("productList", list1);
-        model.addAttribute("projectList", list2);
+        model.addAttribute("productList", productList);
+        model.addAttribute("projectList", projectList);
         model.addAttribute("listModule", listModule);
         model.addAttribute("libList", libList);
         return "/document/doc-edit.page";

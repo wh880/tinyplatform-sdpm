@@ -2,6 +2,7 @@ package org.tinygroup.sdpm.product.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.tinygroup.aopcache.annotation.CachePut;
 import org.tinygroup.commons.tools.ArrayUtil;
 import org.tinygroup.sdpm.product.biz.inter.ProductManager;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
@@ -23,6 +24,7 @@ public class ProductServiceImpl implements ProductService {
         return productManager.add(product);
     }
 
+    @CachePut(keys = "${product.productId}", parameterNames = "product", group = CACHE_PRODUCT_ID, removeGroups = REMOVE_GROUP)
     public int updateProduct(Product product) {
         return productManager.update(product);
     }

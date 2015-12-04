@@ -1,0 +1,96 @@
+<service-components>
+  <service-component type="org.tinygroup.sdpm.service.service.inter.RequestService" bean="requestServiceImpl">
+    <service-method local-name="findRequest" service-id="findRequest" method-name="findRequest" cacheable="false" category="org.tinygroup.sdpm.service.service.inter">
+      <service-parameters>
+        <service-parameter name="id" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findRequestResult" required="false" is-array="false" type="org.tinygroup.sdpm.service.dao.pojo.ServiceRequest"/>
+    </service-method>
+    <service-method local-name="getRequestList" service-id="getRequestList" method-name="getRequestList" cacheable="false" category="org.tinygroup.sdpm.service.service.inter">
+      <service-parameters>
+        <service-parameter name="request" type="org.tinygroup.sdpm.service.dao.pojo.ServiceRequest" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="getRequestListResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.service.dao.pojo.ServiceRequest"/>
+    </service-method>
+    <service-method local-name="addRequest" service-id="addRequest" method-name="addRequest" cacheable="false" category="org.tinygroup.sdpm.service.service.inter">
+      <service-parameters>
+        <service-parameter name="request" type="org.tinygroup.sdpm.service.dao.pojo.ServiceRequest" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="addRequestResult" required="false" is-array="false" type="org.tinygroup.sdpm.service.dao.pojo.ServiceRequest"/>
+    </service-method>
+    <service-method local-name="updateRequest" service-id="updateRequest" method-name="updateRequest" cacheable="false" category="org.tinygroup.sdpm.service.service.inter">
+      <service-parameters>
+        <service-parameter name="request" type="org.tinygroup.sdpm.service.dao.pojo.ServiceRequest" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="updateRequestResult" required="false" is-array="false" type="org.tinygroup.sdpm.service.dao.pojo.ServiceRequest"/>
+    </service-method>
+    <service-method local-name="deleteRequest" service-id="deleteRequest" method-name="deleteRequest" cacheable="false" category="org.tinygroup.sdpm.service.service.inter">
+      <service-parameters>
+        <service-parameter name="id" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="deleteRequestResult" required="false" is-array="false" type="java.lang.Integer"/>
+    </service-method>
+    <service-method local-name="findRequestPager" service-id="findRequestPager" method-name="findRequestPager" cacheable="false" category="org.tinygroup.sdpm.service.service.inter">
+      <service-parameters>
+        <service-parameter name="start" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="limit" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="status" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="clientRequest" type="org.tinygroup.sdpm.service.dao.pojo.ServiceRequest" required="false" is-array="false"/>
+        <service-parameter name="tree" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="carrier" type="org.tinygroup.sdpm.dao.condition.ConditionCarrier" required="false" is-array="false"/>
+        <service-parameter name="order" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="ordertype" type="java.lang.String" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findRequestPagerResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager"/>
+    </service-method>
+    <service-method local-name="findOperationByMe" service-id="findOperationByMe" method-name="findOperationByMe" cacheable="false" category="org.tinygroup.sdpm.service.service.inter">
+      <service-parameters>
+        <service-parameter name="start" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="limit" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="user" type="org.tinygroup.sdpm.org.dao.pojo.OrgUser" required="false" is-array="false"/>
+        <service-parameter name="clientRequest" type="org.tinygroup.sdpm.service.dao.pojo.ServiceRequest" required="false" is-array="false"/>
+        <service-parameter name="tree" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="operation" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="order" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="ordertype" type="java.lang.String" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findOperationByMeResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager"/>
+    </service-method>
+    <service-method local-name="closeRequest" service-id="closeRequest" method-name="closeRequest" cacheable="false" category="org.tinygroup.sdpm.service.service.inter">
+      <service-parameters>
+        <service-parameter name="clientRequest" type="org.tinygroup.sdpm.service.dao.pojo.ServiceRequest" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="closeRequestResult" required="false" is-array="false" type="java.lang.Integer"/>
+    </service-method>
+    <service-method local-name="saveReply" service-id="saveReply" method-name="saveReply" cacheable="false" category="org.tinygroup.sdpm.service.service.inter">
+      <service-parameters>
+        <service-parameter name="clientRequest" type="org.tinygroup.sdpm.service.dao.pojo.ServiceRequest" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="saveReplyResult" required="false" is-array="false" type="java.lang.Integer"/>
+    </service-method>
+    <service-method local-name="updateReply" service-id="updateReply" method-name="updateReply" cacheable="false" category="org.tinygroup.sdpm.service.service.inter">
+      <service-parameters>
+        <service-parameter name="list" type="org.tinygroup.sdpm.service.dao.pojo.ServiceRequest" collection-type="java.util.List" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="updateReplyResult" required="false" is-array="true" type="int"/>
+    </service-method>
+    <service-method local-name="updateReview" service-id="updateReview" method-name="updateReview" cacheable="false" category="org.tinygroup.sdpm.service.service.inter">
+      <service-parameters>
+        <service-parameter name="list" type="org.tinygroup.sdpm.service.dao.pojo.ServiceRequest" collection-type="java.util.List" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="updateReviewResult" required="false" is-array="true" type="int"/>
+    </service-method>
+    <service-method local-name="deleteBatchRequest" service-id="deleteBatchRequest" method-name="deleteBatchRequest" cacheable="false" category="org.tinygroup.sdpm.service.service.inter">
+      <service-parameters>
+        <service-parameter name="list" type="org.tinygroup.sdpm.service.dao.pojo.ServiceRequest" collection-type="java.util.List" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="deleteBatchRequestResult" required="false" is-array="true" type="int"/>
+    </service-method>
+    <service-method local-name="requestInCondition" service-id="requestInCondition" method-name="requestInCondition" cacheable="false" category="org.tinygroup.sdpm.service.service.inter">
+      <service-parameters>
+        <service-parameter name="condition" type="java.lang.String" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="requestInConditionResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.service.dao.pojo.ServiceRequest"/>
+    </service-method>
+  </service-component>
+</service-components>

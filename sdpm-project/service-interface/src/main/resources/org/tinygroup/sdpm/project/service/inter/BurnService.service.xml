@@ -1,0 +1,17 @@
+<service-components>
+  <service-component type="org.tinygroup.sdpm.project.service.inter.BurnService" bean="burnServiceImpl">
+    <service-method local-name="updateBurnByProjectId" service-id="updateBurnByProjectId" method-name="updateBurnByProjectId" cacheable="false" category="org.tinygroup.sdpm.project.service.inter">
+      <service-parameters>
+        <service-parameter name="projectId" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="updateBurnByProjectIdResult" required="false" is-array="false" type="void"/>
+    </service-method>
+    <service-method local-name="initBurn" service-id="initBurn" method-name="initBurn" cacheable="false" category="org.tinygroup.sdpm.project.service.inter">
+      <service-parameters>
+        <service-parameter name="projectId" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="interval" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="initBurnResult" required="false" is-array="false" type="org.tinygroup.sdpm.project.service.dto.BurnDTO"/>
+    </service-method>
+  </service-component>
+</service-components>

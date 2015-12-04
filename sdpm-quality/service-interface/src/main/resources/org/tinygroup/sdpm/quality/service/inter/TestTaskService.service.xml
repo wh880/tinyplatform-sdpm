@@ -1,0 +1,49 @@
+<service-components>
+  <service-component type="org.tinygroup.sdpm.quality.service.inter.TestTaskService" bean="testTaskServiceImpl">
+    <service-method local-name="findTestTaskList" service-id="findTestTaskList" method-name="findTestTaskList" cacheable="false" category="org.tinygroup.sdpm.quality.service.inter">
+      <service-parameters>
+        <service-parameter name="qualityTestTask" type="org.tinygroup.sdpm.quality.dao.pojo.QualityTestTask" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findTestTaskListResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.quality.dao.pojo.QualityTestTask"/>
+    </service-method>
+    <service-method local-name="findTestTaskById" service-id="findTestTaskById" method-name="findTestTaskById" cacheable="false" category="org.tinygroup.sdpm.quality.service.inter">
+      <service-parameters>
+        <service-parameter name="id" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findTestTaskByIdResult" required="false" is-array="false" type="org.tinygroup.sdpm.quality.dao.pojo.QualityTestTask"/>
+    </service-method>
+    <service-method local-name="addTestTask" service-id="addTestTask" method-name="addTestTask" cacheable="false" category="org.tinygroup.sdpm.quality.service.inter">
+      <service-parameters>
+        <service-parameter name="qualityTestTask" type="org.tinygroup.sdpm.quality.dao.pojo.QualityTestTask" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="addTestTaskResult" required="false" is-array="false" type="org.tinygroup.sdpm.quality.dao.pojo.QualityTestTask"/>
+    </service-method>
+    <service-method local-name="updateTestTask" service-id="updateTestTask" method-name="updateTestTask" cacheable="false" category="org.tinygroup.sdpm.quality.service.inter">
+      <service-parameters>
+        <service-parameter name="qualityTestTask" type="org.tinygroup.sdpm.quality.dao.pojo.QualityTestTask" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="updateTestTaskResult" required="false" is-array="false" type="int"/>
+    </service-method>
+    <service-method local-name="findTestTaskPagerWithConditionCarrier" service-id="findTestTaskPagerWithConditionCarrier" method-name="findTestTaskPagerWithConditionCarrier" cacheable="false" category="org.tinygroup.sdpm.quality.service.inter">
+      <service-parameters>
+        <service-parameter name="start" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="limit" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="testtask" type="org.tinygroup.sdpm.quality.dao.pojo.QualityTestTask" required="false" is-array="false"/>
+        <service-parameter name="carrier" type="org.tinygroup.sdpm.dao.condition.ConditionCarrier" required="false" is-array="false"/>
+        <service-parameter name="sortName" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="asc" type="boolean" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findTestTaskPagerWithConditionCarrierResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager"/>
+    </service-method>
+    <service-method local-name="findTestTaskPager" service-id="findTestTaskPager" method-name="findTestTaskPager" cacheable="false" category="org.tinygroup.sdpm.quality.service.inter">
+      <service-parameters>
+        <service-parameter name="start" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="limit" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="qualityTestTask" type="org.tinygroup.sdpm.quality.dao.pojo.QualityTestTask" required="false" is-array="false"/>
+        <service-parameter name="sortName" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="asc" type="boolean" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findTestTaskPagerResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager"/>
+    </service-method>
+  </service-component>
+</service-components>

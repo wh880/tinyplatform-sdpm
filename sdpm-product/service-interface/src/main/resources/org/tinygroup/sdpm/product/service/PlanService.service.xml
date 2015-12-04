@@ -1,0 +1,65 @@
+<service-components>
+  <service-component type="org.tinygroup.sdpm.product.service.PlanService" bean="planServiceImpl">
+    <service-method local-name="addPlan" service-id="addPlan" method-name="addPlan" cacheable="false" category="org.tinygroup.sdpm.product.service">
+      <service-parameters>
+        <service-parameter name="plan" type="org.tinygroup.sdpm.product.dao.pojo.ProductPlan" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="addPlanResult" required="false" is-array="false" type="org.tinygroup.sdpm.product.dao.pojo.ProductPlan"/>
+    </service-method>
+    <service-method local-name="updatePlan" service-id="updatePlan" method-name="updatePlan" cacheable="false" category="org.tinygroup.sdpm.product.service">
+      <service-parameters>
+        <service-parameter name="plan" type="org.tinygroup.sdpm.product.dao.pojo.ProductPlan" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="updatePlanResult" required="false" is-array="false" type="int"/>
+    </service-method>
+    <service-method local-name="deleteBatchPlan" service-id="deleteBatchPlan" method-name="deleteBatchPlan" cacheable="false" category="org.tinygroup.sdpm.product.service">
+      <service-parameters>
+        <service-parameter name="ids" type="org.tinygroup.sdpm.product.dao.pojo.ProductPlan" collection-type="java.util.List" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="deleteBatchPlanResult" required="false" is-array="true" type="int"/>
+    </service-method>
+    <service-method local-name="deletePlan" service-id="deletePlan" method-name="deletePlan" cacheable="false" category="org.tinygroup.sdpm.product.service">
+      <service-parameters>
+        <service-parameter name="planId" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="deletePlanResult" required="false" is-array="false" type="java.lang.Integer"/>
+    </service-method>
+    <service-method local-name="findPlan" service-id="findPlan" method-name="findPlan" cacheable="false" category="org.tinygroup.sdpm.product.service">
+      <service-parameters>
+        <service-parameter name="planId" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findPlanResult" required="false" is-array="false" type="org.tinygroup.sdpm.product.dao.pojo.ProductPlan"/>
+    </service-method>
+    <service-method local-name="findPlanList" service-id="findPlanList" method-name="findPlanList" cacheable="false" category="org.tinygroup.sdpm.product.service">
+      <service-parameters>
+        <service-parameter name="productPlan" type="org.tinygroup.sdpm.product.dao.pojo.ProductPlan" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findPlanListResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.product.dao.pojo.ProductPlan"/>
+    </service-method>
+    <service-method local-name="findPlanListByOrder" service-id="findPlanListByOrder" method-name="findPlanListByOrder" cacheable="false" category="org.tinygroup.sdpm.product.service">
+      <service-parameters>
+        <service-parameter name="productPlan" type="org.tinygroup.sdpm.product.dao.pojo.ProductPlan" required="false" is-array="false"/>
+        <service-parameter name="order" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="orderType" type="java.lang.String" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findPlanListByOrderResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.product.dao.pojo.ProductPlan"/>
+    </service-method>
+    <service-method local-name="findProductPlanPager" service-id="findProductPlanPager" method-name="findProductPlanPager" cacheable="false" category="org.tinygroup.sdpm.product.service">
+      <service-parameters>
+        <service-parameter name="page" type="int" required="false" is-array="false"/>
+        <service-parameter name="limit" type="int" required="false" is-array="false"/>
+        <service-parameter name="productPlan" type="org.tinygroup.sdpm.product.dao.pojo.ProductPlan" required="false" is-array="false"/>
+        <service-parameter name="order" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="orderType" type="java.lang.String" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findProductPlanPagerResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager"/>
+    </service-method>
+    <service-method local-name="statisticProductPlan" service-id="statisticProductPlan" method-name="statisticProductPlan" cacheable="false" category="org.tinygroup.sdpm.product.service">
+      <service-parameters>
+        <service-parameter name="productPlan" type="org.tinygroup.sdpm.product.dao.pojo.ProductPlan" required="false" is-array="false"/>
+        <service-parameter name="isOverdue" type="boolean" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="statisticProductPlanResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.product.dao.pojo.ProductPlan"/>
+    </service-method>
+  </service-component>
+</service-components>

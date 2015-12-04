@@ -11,7 +11,13 @@ import java.util.Map;
 
 public interface ProductService {
     String CACHE_USER_PRODUCTS_MAP = "UserProductsMap";
+    String CACHE_USER_PRODUCTS_LIST = "userProductList";
     String CACHE_PRODUCT_ID = "productId";
+    String CACHE_USER_PRODUCTS_LIST_WITH_COUNT = "userProductListWithCount";
+    String CACHE_USER_PRODUCTS_LIST_WITH_LINE_COUNT = "userProductListWithLineCount";
+    String CACHE_PRODUCT_NAME_BY_LINE_ID = "productNameListByLine";
+    static String[] REMOVE_GROUP = {};
+
 
     /**
      * 添加产品
@@ -27,7 +33,7 @@ public interface ProductService {
      * @param product
      * @return
      */
-    @CachePut(keys = "${product.productId}",parameterNames = "product",group = CACHE_PRODUCT_ID)
+    @CachePut(keys = "${product.productId}", parameterNames = "product", group = CACHE_PRODUCT_ID,removeGroups = {CACHE_USER_PRODUCTS_MAP,CACHE_USER_PRODUCTS_LIST,CACHE_PRODUCT_ID,CACHE_USER_PRODUCTS_LIST_WITH_COUNT,CACHE_USER_PRODUCTS_LIST_WITH_LINE_COUNT,CACHE_PRODUCT_NAME_BY_LINE_ID})
     int updateProduct(Product product);
 
     /**
@@ -36,7 +42,7 @@ public interface ProductService {
      * @param productId
      * @return
      */
-    @CacheRemove(removeKeys = "${productId}", group = CACHE_PRODUCT_ID)
+    @CacheRemove(removeKeys = "${productId}", group = CACHE_PRODUCT_ID, removeGroups = {CACHE_USER_PRODUCTS_MAP,CACHE_USER_PRODUCTS_LIST,CACHE_PRODUCT_ID,CACHE_USER_PRODUCTS_LIST_WITH_COUNT,CACHE_USER_PRODUCTS_LIST_WITH_LINE_COUNT,CACHE_PRODUCT_NAME_BY_LINE_ID})
     int deleteProduct(Integer productId);
 
     /**
@@ -78,12 +84,14 @@ public interface ProductService {
      * @param productLineId
      * @return
      */
+    @CacheGet(key = "${productLineId}",group = CACHE_PRODUCT_NAME_BY_LINE_ID)
     List<String> getProductNameByLineId(Integer productLineId);
 
+    @CacheGet(key = "${userId}-${delete}-${productLineId}", group = CACHE_USER_PRODUCTS_LIST)
     List<Product> getProductByUser(String userId, Integer delete, Integer productLineId);
-
+    @CacheGet(key = "${userId}-${delete}-${noRole}", group = CACHE_USER_PRODUCTS_LIST_WITH_COUNT)
     List<Product> getProductByUserWithCount(String userId, Integer delete, boolean noRole);
-
+    @CacheGet(key = "${userId}-${delete}-${productLineId}", group = CACHE_USER_PRODUCTS_LIST_WITH_LINE_COUNT)
     List<Product> getProductByUserAndProductLineWithCount(String userId, Integer productLineId, Integer delete);
 
     @CacheGet(key = "${userId}", group = CACHE_USER_PRODUCTS_MAP)
