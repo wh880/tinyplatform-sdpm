@@ -50,7 +50,7 @@ public class DictServiceImpl implements DictService {
         return dictManager.updateBatch(dicts);
     }
 
-    public int batchDelete(Integer... ids) {
+    public int batchDeleteDict(Integer... ids) {
         return dictManager.bechDelete(ids);
     }
 

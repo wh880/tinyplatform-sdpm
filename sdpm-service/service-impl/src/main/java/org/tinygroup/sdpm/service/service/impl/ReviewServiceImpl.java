@@ -21,7 +21,7 @@ public class ReviewServiceImpl implements ReviewService {
         return reviewManager.add(review);
     }
 
-    public ServiceReview updateReview(ServiceReview review) {
+    public ServiceReview updateServiceReview(ServiceReview review) {
         return reviewManager.update(review);
     }
 

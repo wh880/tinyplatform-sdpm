@@ -61,7 +61,7 @@ public class ClientServiceImpl implements ClientService {
         return slaManager.getListByClientId(id);
     }
 
-    public ServiceClientUser addClientUser(ServiceClientUser clientUser) {
+    public ServiceClientUser addServiceClientUser(ServiceClientUser clientUser) {
         return clientUserManager.add(clientUser);
     }
 

@@ -72,7 +72,7 @@ public interface EffortService {
      * @param ids
      * @return
      */
-    Integer batchDelete(Integer... ids);
+    Integer batchDeleteEffort(Integer... ids);
 
     /**
      * @param start

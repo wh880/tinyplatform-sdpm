@@ -121,7 +121,7 @@ public class DictAction extends BaseController {
         for (int i = 0; i < sids.length; i++) {
             intIds[i] = Integer.valueOf(sids[i]);
         }
-        dictService.batchDelete(intIds);
+        dictService.batchDeleteDict(intIds);
         DictUtil.reLoad();
         Map<String, String> map = new HashedMap();
         map.put("info", "success");

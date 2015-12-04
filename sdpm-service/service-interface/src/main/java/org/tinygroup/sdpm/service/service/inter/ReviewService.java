@@ -21,7 +21,7 @@ public interface ReviewService {
      * @param review 需要更新的实体类
      * @return
      */
-    ServiceReview updateReview(ServiceReview review);
+    ServiceReview updateServiceReview(ServiceReview review);
 
     /**
      * 根据请求ID找到回访记录

@@ -130,7 +130,7 @@ public class ClientAction extends BaseController {
                 serviceClientUser.setUserAccount(client.getUserAccount());
                 serviceClientUser.setClientId(client.getClientId());
                 serviceClientUser.setUserPost(client.getUserPost());
-                clientService.addClientUser(serviceClientUser);
+                clientService.addServiceClientUser(serviceClientUser);
             }
         } else {
             clientService.updateClient(client);
@@ -281,7 +281,7 @@ public class ClientAction extends BaseController {
         if (clientUser.getId() != null) {
             clientUserService.updateClientUser(clientUser);
         } else
-            clientUser = clientUserService.addClientUser(clientUser);
+            clientUser = clientUserService.addServiceClientUser(clientUser);
         return "redirect:" + adminPath + "/service/client/clientSla?id=" + clientUser.getClientId();
     }
 

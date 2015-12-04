@@ -94,7 +94,7 @@ public interface RequestService {
      * @param
      * @return
      */
-    int[] updateReview(List<ServiceRequest> list);
+    int[] updateServiceRequest(List<ServiceRequest> list);
 
     /**
      * 根据id进行批量软删除请求

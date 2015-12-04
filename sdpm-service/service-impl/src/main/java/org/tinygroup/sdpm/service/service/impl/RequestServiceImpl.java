@@ -60,7 +60,7 @@ public class RequestServiceImpl implements RequestService {
         return requestManager.updateReply(list);
     }
 
-    public int[] updateReview(List<ServiceRequest> list) {
+    public int[] updateServiceRequest(List<ServiceRequest> list) {
         return requestManager.updateReview(list);
     }
 

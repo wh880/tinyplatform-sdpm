@@ -64,7 +64,7 @@ public interface DictService {
      * @param ids
      * @return
      */
-    int batchDelete(Integer... ids);
+    int batchDeleteDict(Integer... ids);
 
     /**
      * 删除所有字典项

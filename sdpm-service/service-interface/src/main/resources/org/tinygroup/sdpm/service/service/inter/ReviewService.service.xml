@@ -6,11 +6,11 @@
       </service-parameters>
       <service-result name="addReviewResult" required="false" is-array="false" type="org.tinygroup.sdpm.service.dao.pojo.ServiceReview"/>
     </service-method>
-    <service-method local-name="updateReview" service-id="updateReview" method-name="updateReview" cacheable="false" category="org.tinygroup.sdpm.service.service.inter">
+    <service-method local-name="updateServiceReview" service-id="updateServiceReview" method-name="updateServiceReview" cacheable="false" category="org.tinygroup.sdpm.service.service.inter">
       <service-parameters>
         <service-parameter name="review" type="org.tinygroup.sdpm.service.dao.pojo.ServiceReview" required="false" is-array="false"/>
       </service-parameters>
-      <service-result name="updateReviewResult" required="false" is-array="false" type="org.tinygroup.sdpm.service.dao.pojo.ServiceReview"/>
+      <service-result name="updateServiceReviewResult" required="false" is-array="false" type="org.tinygroup.sdpm.service.dao.pojo.ServiceReview"/>
     </service-method>
     <service-method local-name="findReviewByRequestId" service-id="findReviewByRequestId" method-name="findReviewByRequestId" cacheable="false" category="org.tinygroup.sdpm.service.service.inter">
       <service-parameters>

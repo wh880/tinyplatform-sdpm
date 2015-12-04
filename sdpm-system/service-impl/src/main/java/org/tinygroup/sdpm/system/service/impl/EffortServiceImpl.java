@@ -72,7 +72,7 @@ public class EffortServiceImpl implements EffortService {
         return effortManager.findList(systemEffort, order, orderType);
     }
 
-    public Integer batchDelete(Integer... ids) {
+    public Integer batchDeleteEffort(Integer... ids) {
         return effortManager.batchDelete(ids);
     }
 

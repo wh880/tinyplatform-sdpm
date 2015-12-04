@@ -74,11 +74,11 @@
       </service-parameters>
       <service-result name="updateReplyResult" required="false" is-array="true" type="int"/>
     </service-method>
-    <service-method local-name="updateReview" service-id="updateReview" method-name="updateReview" cacheable="false" category="org.tinygroup.sdpm.service.service.inter">
+    <service-method local-name="updateServiceRequest" service-id="updateServiceRequest" method-name="updateServiceRequest" cacheable="false" category="org.tinygroup.sdpm.service.service.inter">
       <service-parameters>
         <service-parameter name="list" type="org.tinygroup.sdpm.service.dao.pojo.ServiceRequest" collection-type="java.util.List" required="false" is-array="false"/>
       </service-parameters>
-      <service-result name="updateReviewResult" required="false" is-array="true" type="int"/>
+      <service-result name="updateServiceRequestResult" required="false" is-array="true" type="int"/>
     </service-method>
     <service-method local-name="deleteBatchRequest" service-id="deleteBatchRequest" method-name="deleteBatchRequest" cacheable="false" category="org.tinygroup.sdpm.service.service.inter">
       <service-parameters>

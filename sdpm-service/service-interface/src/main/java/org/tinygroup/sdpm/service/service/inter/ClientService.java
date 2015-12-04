@@ -88,7 +88,7 @@ public interface ClientService {
      * @param clientUser 新增实体类
      * @return
      */
-    ServiceClientUser addClientUser(ServiceClientUser clientUser);
+    ServiceClientUser addServiceClientUser(ServiceClientUser clientUser);
 
     /**
      * 查找一个客户的所有联系人

@@ -20,7 +20,7 @@ public interface ClientUserService {
      * @param clientUser 新增实体类
      * @return
      */
-    ServiceClientUser addClientUser(ServiceClientUser clientUser);
+    ServiceClientUser addServiceClientUser(ServiceClientUser clientUser);
 
     /**
      * 更新客户联系人

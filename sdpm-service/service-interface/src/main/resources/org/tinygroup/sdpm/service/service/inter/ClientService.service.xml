@@ -62,11 +62,11 @@
       </service-parameters>
       <service-result name="findSlaByClientIdResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.service.dao.pojo.ServiceSla"/>
     </service-method>
-    <service-method local-name="addClientUser" service-id="addClientUser" method-name="addClientUser" cacheable="false" category="org.tinygroup.sdpm.service.service.inter">
+    <service-method local-name="addServiceClientUser" service-id="addServiceClientUser" method-name="addServiceClientUser" cacheable="false" category="org.tinygroup.sdpm.service.service.inter">
       <service-parameters>
         <service-parameter name="clientUser" type="org.tinygroup.sdpm.service.dao.pojo.ServiceClientUser" required="false" is-array="false"/>
       </service-parameters>
-      <service-result name="addClientUserResult" required="false" is-array="false" type="org.tinygroup.sdpm.service.dao.pojo.ServiceClientUser"/>
+      <service-result name="addServiceClientUserResult" required="false" is-array="false" type="org.tinygroup.sdpm.service.dao.pojo.ServiceClientUser"/>
     </service-method>
     <service-method local-name="getAllClientUser" service-id="getAllClientUser" method-name="getAllClientUser" cacheable="false" category="org.tinygroup.sdpm.service.service.inter">
       <service-parameters>

@@ -18,7 +18,7 @@ public class ClientUserServiceImpl implements ClientUserService {
         return clientUserManager.find(id);
     }
 
-    public ServiceClientUser addClientUser(ServiceClientUser clientUser) {
+    public ServiceClientUser addServiceClientUser(ServiceClientUser clientUser) {
         return clientUserManager.add(clientUser);
     }
 

@@ -120,7 +120,7 @@ public class EffortAction extends BaseController {
         for (int i = 0; i < sids.length; i++) {
             intIds[i] = Integer.valueOf(sids[i]);
         }
-        effortService.batchDelete(intIds);
+        effortService.batchDeleteEffort(intIds);
         return resultMap(true, "删除成功");
     }
 
@@ -204,7 +204,7 @@ public class EffortAction extends BaseController {
     public Map<String, String> operate(SystemEffort effort, String date, String isvip, Model model) {
         Map<String, String> map = new HashedMap();
         if (isvip.equals("y")) {
-            effortService.batchDelete(effort.getEffortId());
+            effortService.batchDeleteEffort(effort.getEffortId());
             map.put("status", "y");
             map.put("info", "1");
 

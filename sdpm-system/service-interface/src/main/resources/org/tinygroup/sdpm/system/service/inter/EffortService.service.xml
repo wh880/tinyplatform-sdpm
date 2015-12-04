@@ -46,11 +46,11 @@
       </service-parameters>
       <service-result name="findSystemEffortListByOrderResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.system.dao.pojo.SystemEffort"/>
     </service-method>
-    <service-method local-name="batchDelete" service-id="batchDelete" method-name="batchDelete" cacheable="false" category="org.tinygroup.sdpm.system.service.inter">
+    <service-method local-name="batchDeleteEffort" service-id="batchDeleteEffort" method-name="batchDeleteEffort" cacheable="false" category="org.tinygroup.sdpm.system.service.inter">
       <service-parameters>
         <service-parameter name="ids" type="java.lang.Integer" required="false" is-array="true"/>
       </service-parameters>
-      <service-result name="batchDeleteResult" required="false" is-array="false" type="java.lang.Integer"/>
+      <service-result name="batchDeleteEffortResult" required="false" is-array="false" type="java.lang.Integer"/>
     </service-method>
     <service-method local-name="findSystemEffortPage" service-id="findSystemEffortPage" method-name="findSystemEffortPage" cacheable="false" category="org.tinygroup.sdpm.system.service.inter">
       <service-parameters>

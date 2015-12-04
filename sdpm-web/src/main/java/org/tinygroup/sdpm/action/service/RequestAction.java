@@ -259,7 +259,7 @@ public class RequestAction extends BaseController {
         if (review.getReviewId() == null) {
             reviewService.addReview(review);
         } else {
-            reviewService.updateReview(review);
+            reviewService.updateServiceReview(review);
         }
         reviewService.changeStatus(review.getClientRequestId());
         return "redirect:" + adminPath + "/service/request/list?status=" + status + "&operation=" + operation + "&treeId=" + treeId;
@@ -305,7 +305,7 @@ public class RequestAction extends BaseController {
             serviceRequest.setRequestReviewer(name);
             list.add(serviceRequest);
         }
-        requestService.updateReview(list);
+        requestService.updateServiceRequest(list);
         return resultMap(true, "操作成功");
     }
 
