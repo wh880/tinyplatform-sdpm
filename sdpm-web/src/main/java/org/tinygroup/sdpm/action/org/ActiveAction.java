@@ -53,7 +53,7 @@ public class ActiveAction extends BaseController {
     public String show(HttpServletRequest request, Model model) {
         List<OrgUser> userList = userService.findUserList(new OrgUser());
         List<Product> productList = productService.findProductList(new Product());
-        List<Project> projectList = projectService.findList();
+        List<Project> projectList = projectService.findAllProjectList();
         model.addAttribute("userList", userList);
         model.addAttribute("productList", productList);
         model.addAttribute("projectList", projectList);

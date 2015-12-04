@@ -200,7 +200,7 @@ public class DocAction extends BaseController {
         module.setModuleType("doc");
         DocumentDoc doc = docService.findDocById(docId);
         List<Product> list1 = productService.findProductList(new Product());
-        List<Project> list2 = projectService.findList();
+        List<Project> list2 = projectService.findAllProjectList();
         List<SystemModule> listModule = moduleService.findModuleList(module);
         List<DocumentDocLib> libList = docService.findDocLibList(null);
 

@@ -65,7 +65,7 @@ public class StatisticAction extends BaseController {
         if ("project".equals(type)) {
             model.addAttribute("startDate", startDate);
             model.addAttribute("endDate", endDate);
-            List<Project> projects = projectService.findProjects(null, startDate, endDate);
+            List<Project> projects = projectService.findProjectBetween(null, startDate, endDate);
             model.addAttribute("projects", projects);
             return "/statistic/page/project.page";
         }
