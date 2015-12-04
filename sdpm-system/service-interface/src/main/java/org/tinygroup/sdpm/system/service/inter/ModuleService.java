@@ -62,6 +62,12 @@ public interface ModuleService {
      */
     SystemModule addSystemModule(SystemModule systemModule);
 
+    /**
+     * 编辑模块内容
+     *
+     * @param systemModule
+     * @return
+     */
     SystemModule editNameAndTitle(SystemModule systemModule);
 
     /**
@@ -72,5 +78,10 @@ public interface ModuleService {
      */
     Integer batchDeleteSystemModule(Integer... ids);
 
+    /**
+     * 根据类型删除模块-主要用于字典初始化
+     * @param type
+     * @return
+     */
     Integer deleteSystemModuleByType(String type);
 }

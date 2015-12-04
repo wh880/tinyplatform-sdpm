@@ -16,8 +16,7 @@ public interface StorySpecService {
      * @return
      */
     ProductStorySpec findStorySpec(Integer storyId, Integer version);
-
-
+    
     /**
      * 根据需求对象查找
      *
@@ -30,7 +29,6 @@ public interface StorySpecService {
 
     /**
      * 分页查询（排序）
-     *
      * @param page
      * @param limit
      * @param storySpec

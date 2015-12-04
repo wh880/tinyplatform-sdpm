@@ -332,9 +332,9 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
 			public Select generate(QualityBug t) {
 				Condition condition =null;
 				if(t.getBugOpenedBuild()!=null){
-					condition = or(QUALITY_BUGTABLE.BUG_OPENED_BUILD.like("%," + t.getBugOpenedBuild()),
-							QUALITY_BUGTABLE.BUG_OPENED_BUILD.like("%," + t.getBugOpenedBuild()+",%"),
-							QUALITY_BUGTABLE.BUG_OPENED_BUILD.like(t.getBugOpenedBuild()+",%"),
+					condition = or(QUALITY_BUGTABLE.BUG_OPENED_BUILD.rightLike("," + t.getBugOpenedBuild()),
+							QUALITY_BUGTABLE.BUG_OPENED_BUILD.like("," + t.getBugOpenedBuild()+","),
+							QUALITY_BUGTABLE.BUG_OPENED_BUILD.leftLike(t.getBugOpenedBuild()+","),
 							QUALITY_BUGTABLE.BUG_OPENED_BUILD.eq(t.getBugOpenedBuild()));
 				}
 				MysqlSelect select = MysqlSelect.select(QUALITY_BUGTABLE.ALL,ORG_USERTABLE.ORG_USER_REAL_NAME.as("assignedUser")).from(QUALITY_BUGTABLE)
@@ -746,7 +746,9 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
 				from(QUALITY_BUGTABLE).join(
 				Join.leftJoin(PRODUCTTABLE, PRODUCTTABLE.PRODUCT_ID.eq(QUALITY_BUGTABLE.PRODUCT_ID))
 		).where(and(
-					QUALITY_BUGTABLE.BUG_OPENED_BUILD.eq(bug.getBugOpenedBuild()),
+					or(QUALITY_BUGTABLE.BUG_OPENED_BUILD.leftLike(bug.getBugOpenedBuild()+","),
+							QUALITY_BUGTABLE.BUG_OPENED_BUILD.like(","+bug.getBugOpenedBuild()+","),
+							QUALITY_BUGTABLE.BUG_OPENED_BUILD.rightLike("," + bug.getBugOpenedBuild())),
 					QUALITY_BUGTABLE.DELETED.eq(bug.getDeleted()))
 
 				);

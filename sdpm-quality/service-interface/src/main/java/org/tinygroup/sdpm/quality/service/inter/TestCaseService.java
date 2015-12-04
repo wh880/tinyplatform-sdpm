@@ -9,7 +9,6 @@ import java.util.List;
 public interface TestCaseService {
     /**
      * 通过对象查询
-     *
      * @param festcase
      * @return
      */
@@ -17,8 +16,7 @@ public interface TestCaseService {
 
     /**
      * 通过主键id查询
-     *
-     * @param story
+     * @param id
      * @return
      */
     QualityTestCase testCase(int id);
@@ -49,7 +47,6 @@ public interface TestCaseService {
 
     /**
      * 删除用例
-     *
      * @param id
      * @return
      */
@@ -64,8 +61,7 @@ public interface TestCaseService {
     int[] batchDeleteTestCase(List<QualityTestCase> testCases);
 
     /**
-     * 分页查询
-     *
+     * 简单-排序-分页查询
      * @param start
      * @param limit
      * @param testCase
@@ -75,10 +71,34 @@ public interface TestCaseService {
      */
     Pager<QualityTestCase> findTestCasePager(Integer start, Integer limit, QualityTestCase testCase, String sortName, boolean asc);
 
+    /**
+     * 复合条件-排序-分页查询
+     * @param start
+     * @param limit
+     * @param testCase
+     * @param carrier
+     * @param columnName
+     * @param asc
+     * @return
+     */
     Pager<QualityTestCase> findTestCasePager(Integer start, Integer limit, QualityTestCase testCase, ConditionCarrier carrier, String columnName, boolean asc);
 
-
+    /**
+     * 复合条件-排序-分页查询需求变更用例
+     * @param start
+     * @param limit
+     * @param testCase
+     * @param carrier
+     * @param columnName
+     * @param asc
+     * @return
+     */
     Pager<QualityTestCase> findStoryChangedCase(Integer start, Integer limit, QualityTestCase testCase, ConditionCarrier carrier, String columnName, boolean asc);
 
+    /**
+     * 获取存在用例的需求ids
+     * @param t
+     * @return
+     */
     List<Integer> getStoryIds(QualityTestCase t);
 }
