@@ -47,6 +47,7 @@ import org.tinygroup.sdpm.system.service.inter.ProfileService;
 import org.tinygroup.sdpm.util.CookieUtils;
 import org.tinygroup.sdpm.util.LogUtil;
 import org.tinygroup.sdpm.util.ModuleUtil;
+import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -546,7 +547,7 @@ public class BugAction extends BaseController {
     @RequiresPermissions("bug-add")
     @RequestMapping("/add")
     public String add(Model model) {
-        List<Project> projects = projectService.findProjectList(null, null, null);
+        List<Project> projects = projectService.findListByRelatedUser(UserUtils.getUserId());
         List<OrgUser> orgUsers = userService.findUserList(null);
         model.addAttribute("projectList", projects);
         model.addAttribute("userList", orgUsers);

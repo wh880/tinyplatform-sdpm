@@ -48,14 +48,46 @@ public interface ProductLineService {
      */
     ProductLine findProductLine(Integer productLineId);
 
+    /**
+     * 复合条件-根据ids分页查询产品线
+     * @param start
+     * @param limit
+     * @param carrier
+     * @param productLine
+     * @param ids
+     * @param order
+     * @param ordertype
+     * @return
+     */
     Pager<ProductLine> findProductLinePagerInIds(int start, int limit, ConditionCarrier carrier, ProductLine productLine, Integer[] ids, String order, String ordertype);
 
+    /**
+     * 根据ids查询产品线
+     * @param ids
+     * @return
+     */
     List<ProductLine> getProductLineByIds(Integer... ids);
 
+    /**
+     * 获取用户可游览产品线
+     * @param userId
+     * @return
+     */
     List<ProductLine> getUserProductLine(String userId);
 
+    /**
+     * 获取用户可游览产品线id
+     * @param userId
+     * @return
+     */
     Integer[] getUserProductLineIds(String userId);
 
+    /**
+     * 根据输入名称查询产品线
+     * @param condition
+     * @param ids
+     * @return
+     */
     List<ProductLine> lineInCondition(String condition, Integer... ids);
 
 }
