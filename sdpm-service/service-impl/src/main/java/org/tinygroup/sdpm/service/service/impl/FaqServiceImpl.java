@@ -7,8 +7,6 @@ import org.tinygroup.sdpm.service.dao.pojo.ServiceFaq;
 import org.tinygroup.sdpm.service.service.inter.FaqService;
 import org.tinygroup.tinysqldsl.Pager;
 
-import java.util.List;
-
 /**
  * Created by Administrator on 2015-09-18.
  */
@@ -19,10 +17,6 @@ public class FaqServiceImpl implements FaqService {
 
     public ServiceFaq findFaq(Integer id) {
         return faqManager.find(id);
-    }
-
-    public List<ServiceFaq> getFaqList(ServiceFaq faq) {
-        return faqManager.getList(faq);
     }
 
     /*分页*/
@@ -40,10 +34,6 @@ public class FaqServiceImpl implements FaqService {
 
     public Integer deleteFaq(Integer id) {
         return faqManager.delete(id);
-    }
-
-    public Pager<ServiceFaq> findUserByDeptId(Integer start, Integer limit, Integer deptId) {
-        return faqManager.findUserListByDeptId(start, limit, deptId);
     }
 
     public Pager<ServiceFaq> searchFaq(Integer start, Integer limit, ServiceFaq faq, String faqQuestion) {

@@ -3,8 +3,6 @@ package org.tinygroup.sdpm.service.service.inter;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceFaq;
 import org.tinygroup.tinysqldsl.Pager;
 
-import java.util.List;
-
 /**
  * Created by Administrator on 2015-09-17.
  */
@@ -16,14 +14,6 @@ public interface FaqService {
      * @return
      */
     ServiceFaq findFaq(Integer id);
-
-    /**
-     * 根据条件查询List
-     *
-     * @param faq 用于查询条件
-     * @return
-     */
-    List<ServiceFaq> getFaqList(ServiceFaq faq);
 
     /**
      * 分页
@@ -56,15 +46,6 @@ public interface FaqService {
      * @return
      */
     Integer deleteFaq(Integer id);
-
-    /**
-     * 查询faq中问题的数目
-     *
-     * @param id 主键
-     * @return
-     */
-   /* Integer selectcount(Integer id);*/
-    Pager<ServiceFaq> findUserByDeptId(Integer start, Integer limit, Integer deptId);
 
     /**
      * 搜索Faq

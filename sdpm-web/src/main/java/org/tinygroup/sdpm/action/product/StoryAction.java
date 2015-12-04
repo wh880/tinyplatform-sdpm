@@ -326,7 +326,7 @@ public class StoryAction extends BaseController {
      */
     @RequestMapping("/findByKeys")
     public String findByKeys(Integer[] storyId, Model model) {
-        List<ProductStory> storyList = storyService.findStoryList(storyId);
+        List<ProductStory> storyList = storyService.findStoryListByIds(storyId);
         model.addAttribute("storyList", storyList);
         return "/product/page/tabledemo/product-demand-del.pagelet";
     }
@@ -796,7 +796,7 @@ public class StoryAction extends BaseController {
             ProductStory story, String chexkitem, Model model, HttpServletRequest request) {
 
         story.setProductId(Integer.parseInt(cookieProductId));
-        Map<String, List<StoryCount>> map = storyService.report(chexkitem, story);
+        Map<String, List<StoryCount>> map = storyService.StoryCountReport(chexkitem, story);
         model.addAttribute("map", map);
         model.addAttribute("fields", chexkitem);
         return "/product/page/report/product-report.page";

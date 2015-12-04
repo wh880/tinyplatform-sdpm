@@ -414,7 +414,7 @@ public class ProductAction extends BaseController {
         if (pId != 0) {
             ProjectTeam team = new ProjectTeam();
             team.setProductId(pId);
-            Pager<ProjectTeam> pager = teamService.findPager(team, start, limit, order, ordertype);
+            Pager<ProjectTeam> pager = teamService.findProjectTeamPager(team, start, limit, order, ordertype);
             model.addAttribute("teamPager", pager);
         }
         return "/product/page/team/teamData.pagelet";
@@ -453,8 +453,8 @@ public class ProductAction extends BaseController {
                 addList.add(team);
             }
         }
-        teamService.batchAdd(addList);
-        teamService.batchUpdate(updateList);
+        teamService.batchAddTeam(addList);
+        teamService.batchUpdateTeam(updateList);
         return "redirect:" + adminPath + "/product/team";
     }
 
@@ -474,7 +474,7 @@ public class ProductAction extends BaseController {
     @ResponseBody
     @RequestMapping("team/del")
     public Map deleteTeamMember(Integer id) {
-        teamService.delete(id);
+        teamService.deleteTeam(id);
         Map<String, String> result = new HashMap<String, String>();
         result.put("status", "success");
         return result;

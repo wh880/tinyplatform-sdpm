@@ -23,10 +23,6 @@ public class RequestServiceImpl implements RequestService {
         return requestManager.find(id);
     }
 
-    public ServiceRequest findRequestByMolde(String moldeId) {
-        return requestManager.findByMolde(moldeId);
-    }
-
     public List<ServiceRequest> getRequestList(ServiceRequest request) {
         return requestManager.getList(request);
     }

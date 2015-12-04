@@ -1,0 +1,3 @@
+<service-components>
+  <service-component type="org.tinygroup.sdpm.project.service.impl.ProjectStoryServiceImpl" bean=""/>
+</service-components>

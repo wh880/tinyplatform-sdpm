@@ -356,7 +356,7 @@ public class ProductLineAction extends BaseController {
             ProductLine productLine = new ProductLine();
             productLine.setProductLineName(productLineName);
             productLine.setProductLineId(productLineId);
-            List<ProductLine> productLines = productLineService.findList(productLine);
+            List<ProductLine> productLines = productLineService.findProductLineList(productLine);
             if (productLines.size() != 0) {
                 if (productLineId == null) {
                     return resultMap(false, "该产品线已存在");
@@ -379,7 +379,7 @@ public class ProductLineAction extends BaseController {
             String productLineCode = param;
             ProductLine productLine = new ProductLine();
             productLine.setProductLineCode(productLineCode);
-            List<ProductLine> productLines = productLineService.findList(productLine);
+            List<ProductLine> productLines = productLineService.findProductLineList(productLine);
             if (productLines.size() != 0) {
                 if (productLineId == null) {
                     return resultMap(false, "该产品线编号已存在");

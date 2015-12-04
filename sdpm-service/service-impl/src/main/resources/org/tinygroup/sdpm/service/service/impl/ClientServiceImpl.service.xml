@@ -1,0 +1,90 @@
+<service-components>
+  <service-component type="org.tinygroup.sdpm.service.service.impl.ClientServiceImpl" bean="">
+    <service-method local-name="findClient" service-id="findClient" method-name="findClient" cacheable="false" category="org.tinygroup.sdpm.service.service.impl">
+      <service-parameters>
+        <service-parameter name="id" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findClientResult" required="false" is-array="false" type="org.tinygroup.sdpm.service.dao.pojo.ServiceClient"/>
+    </service-method>
+    <service-method local-name="findClientPager" service-id="findClientPager" method-name="findClientPager" cacheable="false" category="org.tinygroup.sdpm.service.service.impl">
+      <service-parameters>
+        <service-parameter name="start" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="limit" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="client" type="org.tinygroup.sdpm.service.dao.pojo.ServiceClient" required="false" is-array="false"/>
+        <service-parameter name="order" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="orderType" type="java.lang.String" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findClientPagerResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager"/>
+    </service-method>
+    <service-method local-name="findClientPagerByPid" service-id="findClientPagerByPid" method-name="findClientPagerByPid" cacheable="false" category="org.tinygroup.sdpm.service.service.impl">
+      <service-parameters>
+        <service-parameter name="start" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="limit" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="treeId" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="order" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="orderType" type="java.lang.String" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findClientPagerByPidResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager"/>
+    </service-method>
+    <service-method local-name="getClientList" service-id="getClientList" method-name="getClientList" cacheable="false" category="org.tinygroup.sdpm.service.service.impl">
+      <service-parameters>
+        <service-parameter name="client" type="org.tinygroup.sdpm.service.dao.pojo.ServiceClient" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="getClientListResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.service.dao.pojo.ServiceClient"/>
+    </service-method>
+    <service-method local-name="addClient" service-id="addClient" method-name="addClient" cacheable="false" category="org.tinygroup.sdpm.service.service.impl">
+      <service-parameters>
+        <service-parameter name="client" type="org.tinygroup.sdpm.service.dao.pojo.ServiceClient" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="addClientResult" required="false" is-array="false" type="org.tinygroup.sdpm.service.dao.pojo.ServiceClient"/>
+    </service-method>
+    <service-method local-name="updateClient" service-id="updateClient" method-name="updateClient" cacheable="false" category="org.tinygroup.sdpm.service.service.impl">
+      <service-parameters>
+        <service-parameter name="client" type="org.tinygroup.sdpm.service.dao.pojo.ServiceClient" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="updateClientResult" required="false" is-array="false" type="org.tinygroup.sdpm.service.dao.pojo.ServiceClient"/>
+    </service-method>
+    <service-method local-name="deleteClient" service-id="deleteClient" method-name="deleteClient" cacheable="false" category="org.tinygroup.sdpm.service.service.impl">
+      <service-parameters>
+        <service-parameter name="id" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="deleteClientResult" required="false" is-array="false" type="java.lang.Integer"/>
+    </service-method>
+    <service-method local-name="deleteBatchClient" service-id="deleteBatchClient" method-name="deleteBatchClient" cacheable="false" category="org.tinygroup.sdpm.service.service.impl">
+      <service-parameters>
+        <service-parameter name="list" type="org.tinygroup.sdpm.service.dao.pojo.ServiceClient" collection-type="java.util.List" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="deleteBatchClientResult" required="false" is-array="true" type="int"/>
+    </service-method>
+    <service-method local-name="findSlaByClientId" service-id="findSlaByClientId" method-name="findSlaByClientId" cacheable="false" category="org.tinygroup.sdpm.service.service.impl">
+      <service-parameters>
+        <service-parameter name="id" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findSlaByClientIdResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.service.dao.pojo.ServiceSla"/>
+    </service-method>
+    <service-method local-name="addClientUser" service-id="addClientUser" method-name="addClientUser" cacheable="false" category="org.tinygroup.sdpm.service.service.impl">
+      <service-parameters>
+        <service-parameter name="clientUser" type="org.tinygroup.sdpm.service.dao.pojo.ServiceClientUser" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="addClientUserResult" required="false" is-array="false" type="org.tinygroup.sdpm.service.dao.pojo.ServiceClientUser"/>
+    </service-method>
+    <service-method local-name="getAllClientUser" service-id="getAllClientUser" method-name="getAllClientUser" cacheable="false" category="org.tinygroup.sdpm.service.service.impl">
+      <service-parameters>
+        <service-parameter name="clientUser" type="org.tinygroup.sdpm.service.dao.pojo.ServiceClientUser" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="getAllClientUserResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.service.dao.pojo.ServiceClientUser"/>
+    </service-method>
+    <service-method local-name="deleteClientUser" service-id="deleteClientUser" method-name="deleteClientUser" cacheable="false" category="org.tinygroup.sdpm.service.service.impl">
+      <service-parameters>
+        <service-parameter name="id" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="deleteClientUserResult" required="false" is-array="false" type="java.lang.Integer"/>
+    </service-method>
+    <service-method local-name="judgeClient" service-id="judgeClient" method-name="judgeClient" cacheable="false" category="org.tinygroup.sdpm.service.service.impl">
+      <service-parameters>
+        <service-parameter name="clientName" type="java.lang.String" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="judgeClientResult" required="false" is-array="false" type="org.tinygroup.sdpm.service.dao.pojo.ServiceClient"/>
+    </service-method>
+  </service-component>
+</service-components>

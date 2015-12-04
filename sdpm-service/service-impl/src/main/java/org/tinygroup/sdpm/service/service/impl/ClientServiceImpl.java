@@ -57,20 +57,12 @@ public class ClientServiceImpl implements ClientService {
         return clientManager.deleteBatch(list);
     }
 
-    public List<ServiceClient> findClientByProduct(Integer productId) {
-        return null;
-    }
-
     public List<ServiceSla> findSlaByClientId(Integer id) {
         return slaManager.getListByClientId(id);
     }
 
     public ServiceClientUser addClientUser(ServiceClientUser clientUser) {
         return clientUserManager.add(clientUser);
-    }
-
-    public ServiceClientUser updateClientUser(ServiceClientUser clientUser) {
-        return clientUserManager.update(clientUser);
     }
 
     public List<ServiceClientUser> getAllClientUser(ServiceClientUser clientUser) {

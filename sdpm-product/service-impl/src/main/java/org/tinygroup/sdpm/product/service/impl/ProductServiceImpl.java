@@ -7,7 +7,6 @@ import org.tinygroup.sdpm.product.biz.inter.ProductManager;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
 import org.tinygroup.sdpm.product.service.ProductService;
-import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,18 +34,6 @@ public class ProductServiceImpl implements ProductService {
 
     public Product findProductById(Integer productId) {
         return productManager.find(productId);
-    }
-
-    public List<Product> findProductList(Product product, String order, String ordertype) {
-        return productManager.findList(product, order, ordertype);
-    }
-
-    public Pager<Product> findProductPager(int page, int limit, Product product, String order, String orderType) {
-        return productManager.findPager(page, limit, product, order, orderType);
-    }
-
-    public int[] updateBatchProduct(List<Product> products) {
-        return productManager.updateBatch(products);
     }
 
     public List<Product> findProductListByIds(Integer... productId) {
@@ -80,7 +67,6 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> getProductByUserAndProductLineWithCount(String userId, Integer productLineId, Integer delete) {
         return productManager.getProductByUserAndProductLineWithCount(userId, productLineId, delete);
     }
-
 
     public Map<String, List<Product>> getUserProductsWithCountMap(String userId, Integer delete) {
         Map<String, List<Product>> productMap = new HashMap<String, List<Product>>();

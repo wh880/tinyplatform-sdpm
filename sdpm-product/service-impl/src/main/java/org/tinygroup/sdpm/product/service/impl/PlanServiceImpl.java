@@ -15,56 +15,40 @@ public class PlanServiceImpl implements PlanService {
     private PlanManager planManager;
 
     public ProductPlan addPlan(ProductPlan plan) {
-
         return planManager.add(plan);
     }
 
     public int updatePlan(ProductPlan plan) {
-
         return planManager.update(plan);
     }
 
     public ProductPlan findPlan(Integer planId) {
-
         return planManager.find(planId);
     }
 
-    public int[] updateBatchPlan(List<ProductPlan> plan) {
-
-        return planManager.updateBatch(plan);
-    }
-
     public List<ProductPlan> findPlanList(ProductPlan productPlan) {
-
         return planManager.findList(productPlan);
     }
 
-    public List<ProductPlan> findPlanList(ProductPlan productPlan, String order, String ordertype) {
+    public List<ProductPlan> findPlanListByOrder(ProductPlan productPlan, String order, String orderType) {
 
-        return planManager.findList(productPlan, order, ordertype);
+        return planManager.findList(productPlan, order, orderType);
     }
 
     public Pager<ProductPlan> findProductPlanPager(int page, int limit, ProductPlan productPlan, String order,
-                                                   String ordertype) {
-        return planManager.findPager(page, limit, productPlan, order, ordertype);
+                                                   String orderType) {
+        return planManager.findPager(page, limit, productPlan, order, orderType);
     }
 
-    public List<ProductPlan> statisticFind(ProductPlan productPlan, boolean isOverdue) {
+    public List<ProductPlan> statisticProductPlan(ProductPlan productPlan, boolean isOverdue) {
         return planManager.statisticFind(productPlan, isOverdue);
     }
 
     public Integer deletePlan(Integer planId) {
-
         return planManager.delete(planId);
     }
 
-    public List<ProductPlan> findPlanList(Integer... planId) {
-
-        return planManager.findList(planId);
-    }
-
     public int[] deleteBatchPlan(List<ProductPlan> ids) {
-
         return planManager.deleteBatch(ids);
     }
 

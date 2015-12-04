@@ -1,0 +1,28 @@
+<service-components>
+  <service-component type="org.tinygroup.sdpm.service.service.impl.ReviewServiceImpl" bean="">
+    <service-method local-name="addReview" service-id="addReview" method-name="addReview" cacheable="false" category="org.tinygroup.sdpm.service.service.impl">
+      <service-parameters>
+        <service-parameter name="review" type="org.tinygroup.sdpm.service.dao.pojo.ServiceReview" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="addReviewResult" required="false" is-array="false" type="org.tinygroup.sdpm.service.dao.pojo.ServiceReview"/>
+    </service-method>
+    <service-method local-name="updateReview" service-id="updateReview" method-name="updateReview" cacheable="false" category="org.tinygroup.sdpm.service.service.impl">
+      <service-parameters>
+        <service-parameter name="review" type="org.tinygroup.sdpm.service.dao.pojo.ServiceReview" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="updateReviewResult" required="false" is-array="false" type="org.tinygroup.sdpm.service.dao.pojo.ServiceReview"/>
+    </service-method>
+    <service-method local-name="findReviewByRequestId" service-id="findReviewByRequestId" method-name="findReviewByRequestId" cacheable="false" category="org.tinygroup.sdpm.service.service.impl">
+      <service-parameters>
+        <service-parameter name="id" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findReviewByRequestIdResult" required="false" is-array="false" type="org.tinygroup.sdpm.service.dao.pojo.ServiceReview"/>
+    </service-method>
+    <service-method local-name="changeStatus" service-id="changeStatus" method-name="changeStatus" cacheable="false" category="org.tinygroup.sdpm.service.service.impl">
+      <service-parameters>
+        <service-parameter name="requestId" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="changeStatusResult" required="false" is-array="false" type="java.lang.Integer"/>
+    </service-method>
+  </service-component>
+</service-components>

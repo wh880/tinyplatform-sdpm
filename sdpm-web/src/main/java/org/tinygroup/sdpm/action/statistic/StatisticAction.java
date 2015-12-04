@@ -56,7 +56,7 @@ public class StatisticAction extends BaseController {
                 ProductPlan plan = new ProductPlan();
                 plan.setDeleted(0);
                 plan.setProductId(products.get(i).getProductId());
-                List<ProductPlan> productPlans = planService.statisticFind(plan, overdue != null && overdue == 1 ? true : false);
+                List<ProductPlan> productPlans = planService.statisticProductPlan(plan, overdue != null && overdue == 1 ? true : false);
                 map.put(products.get(i), productPlans);
             }
             model.addAttribute("product", map);

@@ -2,35 +2,10 @@ package org.tinygroup.sdpm.service.service.inter;
 
 import org.tinygroup.sdpm.service.dao.pojo.ServiceReview;
 
-import java.util.List;
-
 /**
  * Created by Administrator on 2015-09-17.
  */
 public interface ReviewService {
-    /**
-     * 根据主键id查找回访中的请求
-     *
-     * @param id 主键
-     * @return
-     */
-    ServiceReview findReview(Integer id);
-
-    /**
-     * 根据产品模块id回访中的请求
-     *
-     * @param moldeId 主键
-     * @return
-     */
-    ServiceReview findReviewByMolde(String moldeId);
-
-    /**
-     * 根据条件查询List
-     *
-     * @param review 用于查询条件
-     * @return
-     */
-    List<ServiceReview> getReviewList(ServiceReview review);
 
     /**
      * 将请求指派成员进行回访

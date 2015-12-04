@@ -22,7 +22,7 @@
         </div>
         <input type="text" name="key" id="msb-box-input" value="" class="form-controls " placeholder="请输入ID" datatype="n" nullmsg="请输入ID" ignore="ignore">
         <div id="objectSwitcher" class="input-group-btns ">
-            <button class="searchBtn"><i class="fa fa-search"></i> 搜索</button>
+            <button class="searchBtn"><i class="fa fa-search"></i></button>
         </div>
     </div>
 </form>

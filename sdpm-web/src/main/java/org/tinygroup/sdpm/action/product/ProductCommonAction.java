@@ -37,7 +37,7 @@ public class ProductCommonAction extends BaseController {
         }
         plan.setDeleted(0);
         release.setDeleted(0);
-        List<ProductPlan> plans = planService.findPlanList(plan, "planEndDate", "desc");
+        List<ProductPlan> plans = planService.findPlanListByOrder(plan, "planEndDate", "desc");
         List<ProductRelease> releases = releaseService.findReleaseList(release, "releaseDate", "desc");
 
         List<Object> list = new ArrayList<Object>();

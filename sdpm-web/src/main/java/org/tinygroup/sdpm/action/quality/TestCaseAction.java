@@ -435,7 +435,7 @@ public class TestCaseAction extends BaseController {
     @RequestMapping("/ajax/story")
     public List<ProductStory> getStory(ProductStory productStory) {
         if (!(productStory.getProductId() > 0)) return new ArrayList<ProductStory>();
-        return storyService.findStoryList(productStory, null, null);
+        return storyService.findStoryListByOrder(productStory, null, null);
     }
 
     @ResponseBody

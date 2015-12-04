@@ -122,8 +122,8 @@ public class ProjectStoryAction extends BaseController {
                 updateList.add(t);
             }
         }
-        int[] insertResult = projectStoryService.addLink(insertList);
-        int[] updateResult = projectStoryService.updateLink(updateList);
+        int[] insertResult = projectStoryService.addProjectStoryLink(insertList);
+        int[] updateResult = projectStoryService.updateProjectStoryLink(updateList);
         if ((insertResult.length + updateResult.length) > 0) {
             map.put("status", "y");
             map.put("info", "关联成功");
@@ -143,7 +143,7 @@ public class ProjectStoryAction extends BaseController {
             if (projectId == null) {
                 return resultMap(false, "未选择项目");
             }
-            Integer count = projectStoryService.batchDel(projectId, itemId);
+            Integer count = projectStoryService.batchDelStory(projectId, itemId);
             if (count > 0) {
                 return resultMap(true, "删除成功");
             } else {

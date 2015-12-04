@@ -21,16 +21,15 @@ public class TeamServiceImpl implements TeamService {
         return teamManager.find(team);
     }
 
-    public Integer batchAdd(List<ProjectTeam> list) {
+    public Integer batchAddTeam(List<ProjectTeam> list) {
         return teamManager.batchAdd(list);
     }
 
-    public Integer batchUpdate(List<ProjectTeam> list) {
+    public Integer batchUpdateTeam(List<ProjectTeam> list) {
         return teamManager.batchUpdate(list);
     }
 
-
-    public Integer delete(int id) {
+    public Integer deleteTeam(int id) {
         return teamManager.delete(id);
     }
 
@@ -42,7 +41,7 @@ public class TeamServiceImpl implements TeamService {
         return teamManager.findByProductId(productId);
     }
 
-    public Pager<ProjectTeam> findPager(ProjectTeam team, Integer start, Integer limit, String order, String ordertype) {
+    public Pager<ProjectTeam> findProjectTeamPager(ProjectTeam team, Integer start, Integer limit, String order, String ordertype) {
         boolean asc = "asc".equals(ordertype) ? true : false;
         return teamManager.findPager(team, start, limit, order, asc);
     }

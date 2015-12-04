@@ -125,7 +125,7 @@ public class ProjectTaskAction extends BaseController {
         model.addAttribute("teamList", userService.findTeamUserListByProjectId(projectId));
 
         if (taskId != null) {
-            ProjectTask task = taskService.findTask(Integer.parseInt(taskId));
+            ProjectTask task = taskService.findTaskById(Integer.parseInt(taskId));
             model.addAttribute("copyTask", task);
         }
         List<ProductStory> storyList = projectStoryService.findStoryByProject(projectId);
@@ -180,7 +180,7 @@ public class ProjectTaskAction extends BaseController {
     @RequiresPermissions(value = {"pro-task-edit", "pro-Info2-edit"}, logical = Logical.OR)
     @RequestMapping("/edit")
     public String editForm(Integer taskId, Model model) {
-        ProjectTask task = taskService.findTask(taskId);
+        ProjectTask task = taskService.findTaskById(taskId);
         model.addAttribute("task", task);
 
 
@@ -205,7 +205,7 @@ public class ProjectTaskAction extends BaseController {
     @RequestMapping(value = "/editsave", method = RequestMethod.POST)
     public String editSave(ProjectTask task, Model model, String contents,
                            UploadProfile uploadProfile) throws IOException {
-        ProjectTask oldTask = taskService.findTask(task.getTaskId());
+        ProjectTask oldTask = taskService.findTaskById(task.getTaskId());
         taskService.updateEditTask(task);
         processProfile(uploadProfile, task.getTaskId(), ProfileType.TASK);
 
@@ -217,7 +217,7 @@ public class ProjectTaskAction extends BaseController {
 
     @RequestMapping("/consumeTime")
     public String consumeTime(Integer taskId, Model model) {
-        ProjectTask task = taskService.findTask(taskId);
+        ProjectTask task = taskService.findTaskById(taskId);
         SystemEffort systemEffort = new SystemEffort();
         systemEffort.setEffortObjectId(taskId);
         systemEffort.setEffortObjectType("task");
@@ -236,7 +236,7 @@ public class ProjectTaskAction extends BaseController {
     @RequestMapping(value = "/consumeTime", method = RequestMethod.POST)
     public String consumeTimeSave(EffortList effortList, Integer taskId) {
         List<SystemEffort> list = effortList.getList();
-        ProjectTask task = taskService.findTask(taskId);
+        ProjectTask task = taskService.findTaskById(taskId);
         for (int i = 0; i < list.size(); i++) {
             SystemEffort systemEffort = list.get(i);
             if (systemEffort.getEffortLeft() == null || systemEffort.getEffortConsumed() == null) {
@@ -271,7 +271,7 @@ public class ProjectTaskAction extends BaseController {
     @RequiresPermissions("pro-task-call")
     @RequestMapping(value = "/call", method = RequestMethod.GET)
     public String call(Integer taskId, Model model) {
-        ProjectTask task = taskService.findTask(taskId);
+        ProjectTask task = taskService.findTaskById(taskId);
         model.addAttribute("teamList", userService.findTeamUserListByProjectId(task.getTaskProject()));
         model.addAttribute("task", task);
         return "project/operate/task/special/call";
@@ -287,7 +287,7 @@ public class ProjectTaskAction extends BaseController {
     @RequiresPermissions("pro-task-call")
     @RequestMapping(value = "/call", method = RequestMethod.POST)
     public String callSave(ProjectTask task, String comment) {
-        ProjectTask oldTask = taskService.findTask(task.getTaskId());
+        ProjectTask oldTask = taskService.findTaskById(task.getTaskId());
         taskService.updateCallTask(task);
         if (!task.getTaskLeft().equals(oldTask.getTaskLeft())) {
             burnService.updateBurnByProjectId(oldTask.getTaskProject());
@@ -301,7 +301,7 @@ public class ProjectTaskAction extends BaseController {
     @RequestMapping(value = "/finish", method = RequestMethod.GET)
     public String finish(Integer taskId, Model model, HttpServletRequest request) {
         Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, projectOperate.COOKIE_PROJECT_ID));
-        ProjectTask task = taskService.findTask(taskId);
+        ProjectTask task = taskService.findTaskById(taskId);
         model.addAttribute("task", task);
         model.addAttribute("teamList", userService.findTeamUserListByProjectId(projectId));
         return "project/operate/task/special/finish";
@@ -310,7 +310,7 @@ public class ProjectTaskAction extends BaseController {
     @RequiresPermissions("pro-task-finish")
     @RequestMapping(value = "/finish", method = RequestMethod.POST)
     public String finishSave(ProjectTask task, String comment) {
-        ProjectTask oldTask = taskService.findTask(task.getTaskId());
+        ProjectTask oldTask = taskService.findTaskById(task.getTaskId());
         task.setTaskFinishedBy(userUtils.getUserId());
         task.setTaskFinishedDate(new Date());
         task.setTaskStatus(ProjectTask.DONE);
@@ -345,7 +345,7 @@ public class ProjectTaskAction extends BaseController {
     @RequiresPermissions("pro-task-close")
     @RequestMapping(value = "/close", method = RequestMethod.GET)
     public String close(Integer taskId, Model model) {
-        ProjectTask task = taskService.findTask(taskId);
+        ProjectTask task = taskService.findTaskById(taskId);
         model.addAttribute("task", task);
         return "project/operate/task/special/close";
     }
@@ -357,7 +357,7 @@ public class ProjectTaskAction extends BaseController {
         task.setTaskClosedBy(userUtils.getUserId());
         taskService.updateCloseTask(task);
         LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, LogUtil.LogAction.CLOSED, task.getTaskId().toString(),
-                userUtils.getUserId(), null, taskService.findTask(task.getTaskId()).getTaskProject().toString(),
+                userUtils.getUserId(), null, taskService.findTaskById(task.getTaskId()).getTaskProject().toString(),
                 null, null, content);
         return "project/index/task/index.page";
     }
@@ -365,7 +365,7 @@ public class ProjectTaskAction extends BaseController {
     @RequiresPermissions("pro-task-start")
     @RequestMapping(value = "/start", method = RequestMethod.GET)
     public String start(Integer taskId, Model model) {
-        ProjectTask task = taskService.findTask(taskId);
+        ProjectTask task = taskService.findTaskById(taskId);
         model.addAttribute("task", task);
         return "project/operate/task/special/start";
     }
@@ -373,13 +373,13 @@ public class ProjectTaskAction extends BaseController {
     @RequiresPermissions("pro-task-start")
     @RequestMapping(value = "/start", method = RequestMethod.POST)
     public String startSave(ProjectTask task, String content) {
-        ProjectTask projectTask = taskService.findTask(task.getTaskId());
+        ProjectTask projectTask = taskService.findTaskById(task.getTaskId());
         task.setTaskOpenBy(userUtils.getUserId());
         task.setTaskOpenedDate(new Date());
         taskService.updateStartTask(task);
         LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, LogUtil.LogAction.STARTED, task.getTaskId().toString(),
                 userUtils.getUserId(), null, projectTask.getTaskProject().toString(),
-                taskService.findTask(task.getTaskId()), task, content);
+                taskService.findTaskById(task.getTaskId()), task, content);
         if (!projectTask.getTaskConsumed().equals(task.getTaskConsumed()) ||
                 !projectTask.getTaskLeft().equals(task.getTaskLeft())) {
             burnService.updateBurnByProjectId(projectTask.getTaskProject());
@@ -389,7 +389,7 @@ public class ProjectTaskAction extends BaseController {
 
     @RequestMapping("/cancel")
     public String cancel(Integer taskId, Model model) {
-        ProjectTask task = taskService.findTask(taskId);
+        ProjectTask task = taskService.findTaskById(taskId);
         model.addAttribute("task", task);
         return "project/operate/task/special/cancel";
     }
@@ -398,7 +398,7 @@ public class ProjectTaskAction extends BaseController {
     public String cancelSave(ProjectTask task, String content) {
         task.setTaskCanceledBy(userUtils.getUserId());
         task.setTaskCanceledDate(new Date());
-        ProjectTask old = taskService.findTask(task.getTaskId());
+        ProjectTask old = taskService.findTaskById(task.getTaskId());
         taskService.updateCancelTask(task);
         LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, LogUtil.LogAction.CANCELED, task.getTaskId().toString(),
                 userUtils.getUserId(), null, old.getTaskProject().toString(),
@@ -493,7 +493,7 @@ public class ProjectTaskAction extends BaseController {
             return "project/index/task/index.page";
         } else {
             Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, projectOperate.COOKIE_PROJECT_ID));
-            taskService.batchAdd(taskList, projectId);
+            taskService.batchAddTask(taskList, projectId);
             return "project/index/task/index.page";
         }
     }
@@ -514,7 +514,7 @@ public class ProjectTaskAction extends BaseController {
                 }
             }
         } else {
-            ProjectTask task = taskService.findTask(taskId);
+            ProjectTask task = taskService.findTaskById(taskId);
             model.addAttribute("task", task);
         }
         SystemProfile systemProfile = new SystemProfile();
@@ -535,7 +535,7 @@ public class ProjectTaskAction extends BaseController {
      */
     @RequestMapping("/basicInfoEdit")
     public String basicInfoEdit(Integer taskId, Model model) {
-        ProjectTask task = taskService.findTask(taskId);
+        ProjectTask task = taskService.findTaskById(taskId);
         String projectName = projectService.findProjectById(task.getTaskProject()).getProjectName();
 
         List<ProductStory> storyList = projectStoryService.findStoryByProject(task.getTaskProject());
@@ -556,7 +556,7 @@ public class ProjectTaskAction extends BaseController {
      */
     @RequestMapping("/basicInformation")
     public String basicInformation(Integer taskId, Model model) {
-        ProjectTask task = taskService.findTask(taskId);
+        ProjectTask task = taskService.findTaskById(taskId);
         Project project = projectService.findProjectById(task.getTaskProject());
         model.addAttribute("task", task);
         model.addAttribute("project", project);
@@ -640,7 +640,7 @@ public class ProjectTaskAction extends BaseController {
 
     @RequestMapping("/gantt/find")
     public String ganttFind(Integer id, Model model) {
-        ProjectTask task = taskService.findTask(id);
+        ProjectTask task = taskService.findTaskById(id);
 
         SystemProfile systemProfile = new SystemProfile();
         systemProfile.setFileObjectId(id);
@@ -684,7 +684,7 @@ public class ProjectTaskAction extends BaseController {
 
     @RequestMapping("/modal/{forward}")
     public String doc(@PathVariable(value = "forward") String forward, Model model, Integer taskId) {
-        ProjectTask task = taskService.findTask(taskId);
+        ProjectTask task = taskService.findTaskById(taskId);
         model.addAttribute("teamList", userService.findTeamUserListByProjectId(task.getTaskProject()));
         model.addAttribute("task", task);
         return "project/task/modal/" + forward + ".pagelet";
@@ -762,8 +762,8 @@ public class ProjectTaskAction extends BaseController {
             map = generateResultMap(res, "编辑成功", "编辑失败");
         }
         LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, logAction, task.getTaskId().toString(),
-                userUtils.getUserId(), null, taskService.findTask(task.getTaskId()).getTaskProject().toString(),
-                taskService.findTask(task.getTaskId()), task, content);
+                userUtils.getUserId(), null, taskService.findTaskById(task.getTaskId()).getTaskProject().toString(),
+                taskService.findTaskById(task.getTaskId()), task, content);
         return map;
     }
 

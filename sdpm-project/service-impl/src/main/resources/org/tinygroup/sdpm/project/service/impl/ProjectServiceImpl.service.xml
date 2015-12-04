@@ -1,0 +1,106 @@
+<service-components>
+  <service-component type="org.tinygroup.sdpm.project.service.impl.ProjectServiceImpl" bean="">
+    <service-method local-name="findAllProjectList" service-id="findAllProjectList" method-name="findAllProjectList" cacheable="false" category="org.tinygroup.sdpm.project.service.impl">
+      <service-parameters/>
+      <service-result name="findAllProjectListResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.project.dao.pojo.Project"/>
+    </service-method>
+    <service-method local-name="findProjectById" service-id="findProjectById" method-name="findProjectById" cacheable="false" category="org.tinygroup.sdpm.project.service.impl">
+      <service-parameters>
+        <service-parameter name="projectId" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findProjectByIdResult" required="false" is-array="false" type="org.tinygroup.sdpm.project.dao.pojo.Project"/>
+    </service-method>
+    <service-method local-name="findByProjectList" service-id="findByProjectList" method-name="findByProjectList" cacheable="false" category="org.tinygroup.sdpm.project.service.impl">
+      <service-parameters>
+        <service-parameter name="list" type="java.lang.Integer" collection-type="java.util.List" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findByProjectListResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.project.dao.pojo.Project"/>
+    </service-method>
+    <service-method local-name="findProjectBetween" service-id="findProjectBetween" method-name="findProjectBetween" cacheable="false" category="org.tinygroup.sdpm.project.service.impl">
+      <service-parameters>
+        <service-parameter name="project" type="org.tinygroup.sdpm.project.dao.pojo.Project" required="false" is-array="false"/>
+        <service-parameter name="startDate" type="java.util.Date" required="false" is-array="false"/>
+        <service-parameter name="endDate" type="java.util.Date" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findProjectBetweenResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.project.dao.pojo.Project"/>
+    </service-method>
+    <service-method local-name="batchDeleteProject" service-id="batchDeleteProject" method-name="batchDeleteProject" cacheable="false" category="org.tinygroup.sdpm.project.service.impl">
+      <service-parameters>
+        <service-parameter name="projectIds" type="java.lang.Integer" required="false" is-array="true"/>
+      </service-parameters>
+      <service-result name="batchDeleteProjectResult" required="false" is-array="false" type="java.lang.Integer"/>
+    </service-method>
+    <service-method local-name="findProjects" service-id="findProjects" method-name="findProjects" cacheable="false" category="org.tinygroup.sdpm.project.service.impl">
+      <service-parameters>
+        <service-parameter name="start" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="limit" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="order" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="orderType" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="ids" type="java.lang.Integer" required="false" is-array="true"/>
+      </service-parameters>
+      <service-result name="findProjectsResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager"/>
+    </service-method>
+    <service-method local-name="getUserProjectList" service-id="getUserProjectList" method-name="getUserProjectList" cacheable="false" category="org.tinygroup.sdpm.project.service.impl">
+      <service-parameters>
+        <service-parameter name="userId" type="java.lang.String" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="getUserProjectListResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.project.dao.pojo.Project"/>
+    </service-method>
+    <service-method local-name="findListByTeamUserId" service-id="findListByTeamUserId" method-name="findListByTeamUserId" cacheable="false" category="org.tinygroup.sdpm.project.service.impl">
+      <service-parameters>
+        <service-parameter name="userId" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="acl" type="java.lang.String" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findListByTeamUserIdResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.project.dao.pojo.Project"/>
+    </service-method>
+    <service-method local-name="findListByRelatedUser" service-id="findListByRelatedUser" method-name="findListByRelatedUser" cacheable="false" category="org.tinygroup.sdpm.project.service.impl">
+      <service-parameters>
+        <service-parameter name="userId" type="java.lang.String" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findListByRelatedUserResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.project.dao.pojo.Project"/>
+    </service-method>
+    <service-method local-name="addProject" service-id="addProject" method-name="addProject" cacheable="false" category="org.tinygroup.sdpm.project.service.impl">
+      <service-parameters>
+        <service-parameter name="project" type="org.tinygroup.sdpm.project.dao.pojo.Project" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="addProjectResult" required="false" is-array="false" type="org.tinygroup.sdpm.project.dao.pojo.Project"/>
+    </service-method>
+    <service-method local-name="findProjectList" service-id="findProjectList" method-name="findProjectList" cacheable="false" category="org.tinygroup.sdpm.project.service.impl">
+      <service-parameters>
+        <service-parameter name="project" type="org.tinygroup.sdpm.project.dao.pojo.Project" required="false" is-array="false"/>
+        <service-parameter name="order" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="orderType" type="java.lang.String" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findProjectListResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.project.dao.pojo.Project"/>
+    </service-method>
+    <service-method local-name="findProjectPager" service-id="findProjectPager" method-name="findProjectPager" cacheable="false" category="org.tinygroup.sdpm.project.service.impl">
+      <service-parameters>
+        <service-parameter name="page" type="int" required="false" is-array="false"/>
+        <service-parameter name="pageSize" type="int" required="false" is-array="false"/>
+        <service-parameter name="project" type="org.tinygroup.sdpm.project.dao.pojo.Project" required="false" is-array="false"/>
+        <service-parameter name="order" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="orderType" type="java.lang.String" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findProjectPagerResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager"/>
+    </service-method>
+    <service-method local-name="updateProject" service-id="updateProject" method-name="updateProject" cacheable="false" category="org.tinygroup.sdpm.project.service.impl">
+      <service-parameters>
+        <service-parameter name="project" type="org.tinygroup.sdpm.project.dao.pojo.Project" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="updateProjectResult" required="false" is-array="false" type="java.lang.Integer"/>
+    </service-method>
+    <service-method local-name="getProjectByStoryId" service-id="getProjectByStoryId" method-name="getProjectByStoryId" cacheable="false" category="org.tinygroup.sdpm.project.service.impl">
+      <service-parameters>
+        <service-parameter name="storyId" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="getProjectByStoryIdResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.project.dao.pojo.Project"/>
+    </service-method>
+    <service-method local-name="projectInCondition" service-id="projectInCondition" method-name="projectInCondition" cacheable="false" category="org.tinygroup.sdpm.project.service.impl">
+      <service-parameters>
+        <service-parameter name="condition" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="ids" type="java.lang.Integer" required="false" is-array="true"/>
+      </service-parameters>
+      <service-result name="projectInConditionResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.project.dao.pojo.Project"/>
+    </service-method>
+  </service-component>
+</service-components>

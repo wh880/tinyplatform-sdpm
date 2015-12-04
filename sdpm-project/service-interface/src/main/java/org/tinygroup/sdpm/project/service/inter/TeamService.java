@@ -18,7 +18,7 @@ public interface TeamService {
      * @param list
      * @return
      */
-    Integer batchAdd(List<ProjectTeam> list);
+    Integer batchAddTeam(List<ProjectTeam> list);
 
     /**
      * 批量更新
@@ -26,12 +26,12 @@ public interface TeamService {
      * @param list
      * @return
      */
-    Integer batchUpdate(List<ProjectTeam> list);
+    Integer batchUpdateTeam(List<ProjectTeam> list);
 
     /**
      * 移除项目下的成员,根据逻辑id
      */
-    Integer delete(int id);
+    Integer deleteTeam(int id);
 
     /**
      * 查询项目下的所有成员
@@ -53,7 +53,7 @@ public interface TeamService {
      * @param ordertype
      * @return
      */
-    Pager<ProjectTeam> findPager(ProjectTeam team, Integer start, Integer limit, String order, String ordertype);
+    Pager<ProjectTeam> findProjectTeamPager(ProjectTeam team, Integer start, Integer limit, String order, String ordertype);
 
     /**
      * 根据用户和项目Id获取团队成员拥有的菜单

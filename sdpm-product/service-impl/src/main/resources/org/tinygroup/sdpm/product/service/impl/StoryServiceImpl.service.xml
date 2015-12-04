@@ -1,0 +1,122 @@
+<service-components>
+  <service-component type="org.tinygroup.sdpm.product.service.impl.StoryServiceImpl" bean="">
+    <service-method local-name="addStory" service-id="addStory" method-name="addStory" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
+      <service-parameters>
+        <service-parameter name="story" type="org.tinygroup.sdpm.product.dao.pojo.ProductStory" required="false" is-array="false"/>
+        <service-parameter name="storySpec" type="org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec" required="false" is-array="false"/>
+        <service-parameter name="userId" type="java.lang.String" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="addStoryResult" required="false" is-array="false" type="org.tinygroup.sdpm.product.dao.pojo.ProductStory"/>
+    </service-method>
+    <service-method local-name="deleteStory" service-id="deleteStory" method-name="deleteStory" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
+      <service-parameters>
+        <service-parameter name="story" type="org.tinygroup.sdpm.product.dao.pojo.ProductStory" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="deleteStoryResult" required="false" is-array="false" type="java.lang.Integer"/>
+    </service-method>
+    <service-method local-name="updateStory" service-id="updateStory" method-name="updateStory" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
+      <service-parameters>
+        <service-parameter name="story" type="org.tinygroup.sdpm.product.dao.pojo.ProductStory" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="updateStoryResult" required="false" is-array="false" type="int"/>
+    </service-method>
+    <service-method local-name="findStory" service-id="findStory" method-name="findStory" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
+      <service-parameters>
+        <service-parameter name="storyId" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findStoryResult" required="false" is-array="false" type="org.tinygroup.sdpm.product.dao.pojo.ProductStory"/>
+    </service-method>
+    <service-method local-name="updateBatchStory" service-id="updateBatchStory" method-name="updateBatchStory" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
+      <service-parameters>
+        <service-parameter name="stories" type="org.tinygroup.sdpm.product.dao.pojo.ProductStory" collection-type="java.util.List" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="updateBatchStoryResult" required="false" is-array="true" type="int"/>
+    </service-method>
+    <service-method local-name="findStoryListByOrder" service-id="findStoryListByOrder" method-name="findStoryListByOrder" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
+      <service-parameters>
+        <service-parameter name="story" type="org.tinygroup.sdpm.product.dao.pojo.ProductStory" required="false" is-array="false"/>
+        <service-parameter name="order" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="orderType" type="java.lang.String" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findStoryListByOrderResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.product.dao.pojo.ProductStory"/>
+    </service-method>
+    <service-method local-name="findStoryPagerRel" service-id="findStoryPagerRel" method-name="findStoryPagerRel" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
+      <service-parameters>
+        <service-parameter name="start" type="int" required="false" is-array="false"/>
+        <service-parameter name="limit" type="int" required="false" is-array="false"/>
+        <service-parameter name="story" type="org.tinygroup.sdpm.product.dao.pojo.ProductStory" required="false" is-array="false"/>
+        <service-parameter name="carrier" type="org.tinygroup.sdpm.dao.condition.ConditionCarrier" required="false" is-array="false"/>
+        <service-parameter name="columnName" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="asc" type="boolean" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findStoryPagerRelResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager"/>
+    </service-method>
+    <service-method local-name="findStoryListByIds" service-id="findStoryListByIds" method-name="findStoryListByIds" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
+      <service-parameters>
+        <service-parameter name="storyId" type="java.lang.Integer" required="false" is-array="true"/>
+      </service-parameters>
+      <service-result name="findStoryListByIdsResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.product.dao.pojo.ProductStory"/>
+    </service-method>
+    <service-method local-name="findStoryList" service-id="findStoryList" method-name="findStoryList" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
+      <service-parameters>
+        <service-parameter name="story" type="org.tinygroup.sdpm.product.dao.pojo.ProductStory" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findStoryListResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.product.dao.pojo.ProductStory"/>
+    </service-method>
+    <service-method local-name="StoryCountReport" service-id="StoryCountReport" method-name="StoryCountReport" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
+      <service-parameters>
+        <service-parameter name="fields" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="story" type="org.tinygroup.sdpm.product.dao.pojo.ProductStory" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="StoryCountReportResult" required="false" is-array="false" type="java.util.Map"/>
+    </service-method>
+    <service-method local-name="deleteBatchStory" service-id="deleteBatchStory" method-name="deleteBatchStory" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
+      <service-parameters>
+        <service-parameter name="ids" type="org.tinygroup.sdpm.product.dao.pojo.ProductStory" collection-type="java.util.List" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="deleteBatchStoryResult" required="false" is-array="true" type="int"/>
+    </service-method>
+    <service-method local-name="findProductName" service-id="findProductName" method-name="findProductName" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
+      <service-parameters>
+        <service-parameter name="storyId" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findProductNameResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.product.dao.pojo.ProductStory"/>
+    </service-method>
+    <service-method local-name="findProjectLinkedStory" service-id="findProjectLinkedStory" method-name="findProjectLinkedStory" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
+      <service-parameters>
+        <service-parameter name="start" type="int" required="false" is-array="false"/>
+        <service-parameter name="limit" type="int" required="false" is-array="false"/>
+        <service-parameter name="story" type="org.tinygroup.sdpm.product.dao.pojo.ProductStory" required="false" is-array="false"/>
+        <service-parameter name="carrier" type="org.tinygroup.sdpm.dao.condition.ConditionCarrier" required="false" is-array="false"/>
+        <service-parameter name="columnName" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="asc" type="boolean" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findProjectLinkedStoryResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager"/>
+    </service-method>
+    <service-method local-name="findStoryByCondition" service-id="findStoryByCondition" method-name="findStoryByCondition" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
+      <service-parameters>
+        <service-parameter name="start" type="int" required="false" is-array="false"/>
+        <service-parameter name="limit" type="int" required="false" is-array="false"/>
+        <service-parameter name="story" type="org.tinygroup.sdpm.product.dao.pojo.ProductStory" required="false" is-array="false"/>
+        <service-parameter name="carrier" type="org.tinygroup.sdpm.dao.condition.ConditionCarrier" required="false" is-array="false"/>
+        <service-parameter name="columnName" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="asc" type="boolean" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findStoryByConditionResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager"/>
+    </service-method>
+    <service-method local-name="storyInCondition" service-id="storyInCondition" method-name="storyInCondition" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
+      <service-parameters>
+        <service-parameter name="condition" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="productId" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="storyInConditionResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.product.dao.pojo.ProductStory"/>
+    </service-method>
+    <service-method local-name="getStoryWithSpecInIds" service-id="getStoryWithSpecInIds" method-name="getStoryWithSpecInIds" cacheable="false" category="org.tinygroup.sdpm.product.service.impl">
+      <service-parameters>
+        <service-parameter name="isWithSpec" type="boolean" required="false" is-array="false"/>
+        <service-parameter name="ids" type="java.lang.Integer" required="false" is-array="true"/>
+      </service-parameters>
+      <service-result name="getStoryWithSpecInIdsResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.product.dao.pojo.ProductStory"/>
+    </service-method>
+  </service-component>
+</service-components>

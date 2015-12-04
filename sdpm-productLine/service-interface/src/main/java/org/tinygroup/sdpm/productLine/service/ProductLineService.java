@@ -22,7 +22,7 @@ public interface ProductLineService {
      * @param productLine
      * @return
      */
-    List<ProductLine> findList(ProductLine productLine);
+    List<ProductLine> findProductLineList(ProductLine productLine);
 
     /**
      * 编辑产品线
