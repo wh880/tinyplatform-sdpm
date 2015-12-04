@@ -19,7 +19,7 @@ public interface BurnService {
     /**
      * 根据数据库数据跟新燃尽图表
      */
-    void updateDate(Integer taskId);
+    void updateDateTaskId(Integer taskId);
 
     /**
      * 生成项目的燃尽图数据

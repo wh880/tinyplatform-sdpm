@@ -106,7 +106,7 @@ public class ProjectOperate {
 //    public List<Project> getProjectList() {
 //        List<Project> projectList = (List<Project>) CacheUtils.get(CMS_CACHE, CMS_CACHE_PROJECT_LIST);
 //        if (projectList == null) {
-//            projectList = projectService.findList();
+//            projectList = projectService.findAllProjectList();
 //            CacheUtils.put(CMS_CACHE, CMS_CACHE_PROJECT_LIST, projectList);
 //        }
 //        return projectList;

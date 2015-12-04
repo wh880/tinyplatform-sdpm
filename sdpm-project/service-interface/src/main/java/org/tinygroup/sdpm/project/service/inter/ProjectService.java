@@ -49,7 +49,7 @@ public interface ProjectService {
      *
      * @return
      */
-    List<Project> findList();
+    List<Project> findAllProjectList();
 
     /**
      * 查询项目，包括统计总消耗等数据
@@ -57,7 +57,7 @@ public interface ProjectService {
      * @param project
      * @return
      */
-    List<Project> findProjects(Project project, Date startDate, Date endDate);
+    List<Project> findProjectBetween(Project project, Date startDate, Date endDate);
 
     /**
      * 批量删除项目

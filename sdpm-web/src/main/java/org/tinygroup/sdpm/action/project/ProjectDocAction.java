@@ -99,7 +99,7 @@ public class ProjectDocAction extends BaseController {
     public String preAdd(Model model) {
         SystemModule module = new SystemModule();
         List<Product> listProduct = productService.findProductList(new Product());
-        List<Project> listProject = projectService.findList();
+        List<Project> listProject = projectService.findAllProjectList();
         List<SystemModule> listModule = moduleService.findModuleList(module);
         List<DocumentDocLib> libList = docService.findDocLibList(null);
         model.addAttribute("productList", listProduct);

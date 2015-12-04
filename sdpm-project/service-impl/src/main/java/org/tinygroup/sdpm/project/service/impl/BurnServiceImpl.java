@@ -50,7 +50,7 @@ public class BurnServiceImpl implements BurnService {
         }
     }
 
-    public void updateDate(Integer taskId) {
+    public void updateDateTaskId(Integer taskId) {
         //当任务修改以后 根据跟新的任务刷新燃尽图，统计项目
         if (taskId == null) {
             List<Project> projectList = projectManager.findListProjects(null, null, null);

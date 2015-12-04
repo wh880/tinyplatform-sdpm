@@ -54,7 +54,7 @@ public class ProjectServiceImpl implements ProjectService {
         return false;
     }
 
-    public List<Project> findList() {
+    public List<Project> findAllProjectList() {
         return projectManager.findList();
     }
 
@@ -69,7 +69,7 @@ public class ProjectServiceImpl implements ProjectService {
         return projectManager.findListByIds(list);
     }
 
-    public List<Project> findProjects(Project project, Date startDate, Date endDate) {
+    public List<Project> findProjectBetween(Project project, Date startDate, Date endDate) {
         return projectManager.findListProjects(project, startDate, endDate);
     }
 
@@ -86,7 +86,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     public List<Project> getUserProjectList(String userId) {
         List<Project> userProjectList = new ArrayList<Project>();
-        List<Project> projectList = findList();
+        List<Project> projectList = findAllProjectList();
         for (Project project : projectList) {
             String projectAcl = project.getProjectAcl();
             if (Project.ACL_OPEN.equals(projectAcl)) {
