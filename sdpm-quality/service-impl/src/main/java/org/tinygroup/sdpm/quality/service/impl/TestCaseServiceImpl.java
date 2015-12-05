@@ -49,7 +49,7 @@ public class TestCaseServiceImpl implements TestCaseService {
         return testCaseManager.findPager(start, limit, testCase, sortName, asc);
     }
 
-    public Pager<QualityTestCase> findTestCasePager(Integer start, Integer limit, QualityTestCase testCase, ConditionCarrier carrier, String columnName, boolean asc) {
+    public Pager<QualityTestCase> findTestCasePagerByConditionCarrier(Integer start, Integer limit, QualityTestCase testCase, ConditionCarrier carrier, String columnName, boolean asc) {
         return testCaseManager.findPagerRel(start, limit, testCase, carrier,columnName, asc);
     }
 

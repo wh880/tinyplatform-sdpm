@@ -52,7 +52,7 @@
       </service-parameters>
       <service-result name="findTestCasePagerResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager"/>
     </service-method>
-    <service-method local-name="findTestCasePager" service-id="findTestCasePager_1" method-name="findTestCasePager" cacheable="false" category="org.tinygroup.sdpm.quality.service.inter">
+    <service-method local-name="findTestCasePagerByConditionCarrier" service-id="findTestCasePagerByConditionCarrier" method-name="findTestCasePagerByConditionCarrier" cacheable="false" category="org.tinygroup.sdpm.quality.service.inter">
       <service-parameters>
         <service-parameter name="start" type="java.lang.Integer" required="false" is-array="false"/>
         <service-parameter name="limit" type="java.lang.Integer" required="false" is-array="false"/>
@@ -61,7 +61,7 @@
         <service-parameter name="columnName" type="java.lang.String" required="false" is-array="false"/>
         <service-parameter name="asc" type="boolean" required="false" is-array="false"/>
       </service-parameters>
-      <service-result name="findTestCasePagerResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager"/>
+      <service-result name="findTestCasePagerByConditionCarrierResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager"/>
     </service-method>
     <service-method local-name="findStoryChangedCase" service-id="findStoryChangedCase" method-name="findStoryChangedCase" cacheable="false" category="org.tinygroup.sdpm.quality.service.inter">
       <service-parameters>

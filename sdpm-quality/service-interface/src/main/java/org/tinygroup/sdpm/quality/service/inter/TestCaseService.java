@@ -81,7 +81,7 @@ public interface TestCaseService {
      * @param asc
      * @return
      */
-    Pager<QualityTestCase> findTestCasePager(Integer start, Integer limit, QualityTestCase testCase, ConditionCarrier carrier, String columnName, boolean asc);
+    Pager<QualityTestCase> findTestCasePagerByConditionCarrier(Integer start, Integer limit, QualityTestCase testCase, ConditionCarrier carrier, String columnName, boolean asc);
 
     /**
      * 复合条件-排序-分页查询需求变更用例

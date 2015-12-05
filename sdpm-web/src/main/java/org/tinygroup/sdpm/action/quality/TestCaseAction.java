@@ -97,7 +97,7 @@ public class TestCaseAction extends BaseController {
             casepager = testCaseService.findStoryChangedCase(start, limit, testcase, carrier, order, "asc".equals(ordertype) ? true : false);
         } else if ("tcaseall".equals(status)) {
             carrier.putSearch("caseSearch",searchInfos,groupOperate);
-            casepager = testCaseService.findTestCasePager(start, limit, testcase, carrier, order, asc);
+            casepager = testCaseService.findTestCasePagerByConditionCarrier(start, limit, testcase, carrier, order, asc);
         }
         model.addAttribute("casepager", casepager);
         return "quality/data/case/casesData.pagelet";

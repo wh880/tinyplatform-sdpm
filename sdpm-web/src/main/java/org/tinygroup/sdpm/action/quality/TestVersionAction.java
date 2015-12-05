@@ -261,7 +261,7 @@ public class TestVersionAction extends BaseController {
             testCase.setProductId(Integer.parseInt(cookieProductId));
         }
         testCase.setDeleted(0);
-        Pager<QualityTestCase> casePager = testCaseService.findTestCasePager(start, limit, testCase, carrier, order, "asc".equals(ordertype) ? true : false);
+        Pager<QualityTestCase> casePager = testCaseService.findTestCasePagerByConditionCarrier(start, limit, testCase, carrier, order, "asc".equals(ordertype) ? true : false);
         model.addAttribute("casePager", casePager);
         return "/quality/data/version/link.pagelet";
     }
