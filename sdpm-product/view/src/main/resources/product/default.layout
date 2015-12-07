@@ -121,7 +121,7 @@
     <span class="r" style="position:relative;top:-28px;height:0">
         #foreach(m:menuManager.getScopeMenus("product-menu"))
             <a class="ml-5" href="${TINY_CONTEXT_PATH +adminPath}${m?.href}"><i
-                    class="${m?.icon}">&nbsp;${m?.name}</i></a>
+                    class="${m?.icon}"></i>&nbsp;${m?.name}</a>
         #end
     </span>
     #pageContent

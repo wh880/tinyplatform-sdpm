@@ -482,7 +482,7 @@ table.table.filelist-table{border:#ddd 1px solid;}
 /*底部*/
 .tinyfooterrap a,.tinyfooterrap a:link,.tinyfooterrap a:visited{color:#ccb}
 .tinyfooterrap a:hover{text-decoration:underline;color:#ffe}
-
+.tinytable td{white-space: nowrap}
 /*/!*quality*!/
 
 .operationbar .active_btn:hover{background:none;}
