@@ -800,7 +800,7 @@ public class ProjectTaskAction extends BaseController {
             }
         }
         model.addAttribute("map", map);
-        return "project/data/task/report/task/reportFormDate.pagelet";
+        return "project/data/task/report/reportFormDate.pagelet";
     }
 
     private Map<String, String> generateResultMap(Integer res, String successMsg, String falseMsg) {
