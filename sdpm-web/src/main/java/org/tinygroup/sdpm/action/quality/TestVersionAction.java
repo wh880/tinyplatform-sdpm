@@ -175,10 +175,8 @@ public class TestVersionAction extends BaseController {
         }
 
         List<ProjectBuild> builds = buildService.findListBuild(build);
-        List<OrgUser> users = userService.findUserList(null);
         model.addAttribute("projectList", projects);
         model.addAttribute("buildList", builds);
-        model.addAttribute("userList", users);
         return "/quality/operate/version/proposeversion.page";
     }
 

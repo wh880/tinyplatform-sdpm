@@ -23,8 +23,10 @@ import org.tinygroup.sdpm.product.service.StoryService;
 import org.tinygroup.sdpm.product.service.StorySpecService;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
+import org.tinygroup.sdpm.project.dao.pojo.ProjectTeam;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.sdpm.project.service.inter.TaskService;
+import org.tinygroup.sdpm.project.service.inter.TeamService;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityTestCase;
 import org.tinygroup.sdpm.quality.service.inter.BugService;
@@ -77,6 +79,8 @@ public class StoryAction extends BaseController {
     private RequestService requestService;
     @Autowired
     private ProfileService profileService;
+    @Autowired
+    private TeamService teamService;
 
     /**
      * @param story
@@ -169,8 +173,13 @@ public class StoryAction extends BaseController {
 
     @ResponseBody
     @RequestMapping("/ajax/user")
-    public List<OrgUser> getUser(OrgUser orgUser) {
-        List<OrgUser> orgUsers = userService.findUserList(orgUser);
+    public List<OrgUser> getUser(@CookieValue(value = "cookieProductId",defaultValue = "0") String cookieProductId) {
+        List<ProjectTeam> teams = teamService.findTeamByProductId(Integer.parseInt(cookieProductId));
+        String[] ids = new String[teams.size()];
+        for(int i=0;i<ids.length;i++){
+            ids[i] = teams.get(i).getTeamUserId();
+        }
+        List<OrgUser> orgUsers = userService.findUserListByIds(ids);
         return orgUsers;
     }
 

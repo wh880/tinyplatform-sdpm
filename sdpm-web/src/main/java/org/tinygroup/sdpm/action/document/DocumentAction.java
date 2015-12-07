@@ -84,15 +84,6 @@ public class DocumentAction extends BaseController {
         }
         model.addAttribute(COOKIE_DOCLIB_ID, documentLibId);
 
-        List<OrgUser> userList = userService.findUserList(null);
-
-        List<SystemModule> moduleList = moduleService.findModuleList(new SystemModule());
-
-        model.addAttribute("userList", userList);
-        model.addAttribute("productList", productUtils.getProductList());
-        model.addAttribute("projectList", projectOperate.getUserProjectList());
-        model.addAttribute("moduleList", moduleList);
-        model.addAttribute("libList", docService.findDocLibList(null));
         request.getSession().setAttribute("moduleId", moduleId);
         return "/document/index/document.page";
     }

@@ -23,7 +23,7 @@
 
 				</span>
             #div(divClass="clearfix")
-            #include("/service/serviceReq/multiSearch.page")
+##            #include("/service/serviceReq/multiSearch.page")
         #end
 
     #end

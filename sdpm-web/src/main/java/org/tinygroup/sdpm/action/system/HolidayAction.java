@@ -42,9 +42,7 @@ public class HolidayAction extends BaseController {
     }
 
     @RequestMapping("holiday/add")
-    public String holidayAdd(Model model) {
-        List<OrgUser> orgUsers = userService.findUserList(new OrgUser());
-        model.addAttribute("users", orgUsers);
+    public String holidayAdd() {
         return "/system/page/holiday/holiday-add.pagelet";
     }
 
@@ -63,18 +61,14 @@ public class HolidayAction extends BaseController {
 
     @RequestMapping("holiday/find")
     public String find(Holiday holiday, Model model) {
-        List<OrgUser> orgUsers = userService.findUserList(new OrgUser());
         Holiday day = holidayService.findHolidayById(holiday.getHolidayId());
-        model.addAttribute("users", orgUsers);
         model.addAttribute("holiday", day);
         return "/system/page/holiday/edit.page";
     }
 
     @RequestMapping("holiday/view")
     public String view(Holiday holiday, Model model) {
-        List<OrgUser> orgUsers = userService.findUserList(new OrgUser());
         Holiday day = holidayService.findHolidayById(holiday.getHolidayId());
-        model.addAttribute("users", orgUsers);
         model.addAttribute("holiday", day);
         return "/system/page/holiday/view.page";
     }

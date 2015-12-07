@@ -1,37 +1,35 @@
 #!set(activeTitle="角色用户管理",activeMenuId=currentPageId)
 #import("/common/component/form.component")
 #set(name="organizationPrivilege")
+#@layout(org)
+#@tabBodyCol("ptop-5")
+    #@div(divClass="operationbar")
+    <span class="f">角色【${role.orgRoleName}】成员维护</span>
+        #div(divClass="clearfix")
+    #end
+#end
+#end
 #@tinyForm("roleUserManager" TINY_CONTEXT_PATH+adminPath+"/org/roleUser/save" "post")
 <input type="hidden" name="roleId" value="${roleId}"/>
-    #@div()
-        #@tabWithInit("tab_demo" "optionsBox")
-            #@tabHead()
-                #include("/organization/common/tab.page")
-            #end
-            #@tabBodyCol("ptop-5")
-                #@div(divClass="operationbar")
-                <span class="f">角色【${role.orgRoleName}】成员维护</span>
-                    #div(divClass="clearfix")
-                #end
-                #@table()
-                    #@tr()
-                        #@td()
-                            #@Tcheckboxes("array" userIdList)
-                                #foreach(p : userList)
-                                #@gridSysCol(2)
-                                    #@Tcheckbox(p.orgUserId)${p.orgUserRealName}#end
-                                #end
-                            #end
-                        #end
+
+#@table()
+    #@tr()
+        #@td()
+            #@Tcheckboxes("array" userIdList)
+                #foreach(p : userList)
+                    #@gridSysCol(2)
+                        #@Tcheckbox(p.orgUserId)${p.orgUserRealName}#end
                     #end
                 #end
             #end
         #end
     #end
+#end
+
+
 <center>
     <input type="submit" class="radius btn-primary btn" value="保存">
 </center>
-#end
 #end
 
 

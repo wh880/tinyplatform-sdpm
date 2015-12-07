@@ -8,89 +8,19 @@
     "/organization/common/fileOutput.pagelet",editpageModalId1="userEditModal",editpageModal1="#"+editpageModalId1)
 
 #set(name="organizationUser")
-#@layout(org)
-    #@tabBodyCol("ptop-5")
-        #@div(divClass="operationbar")
-            #@tinyForm("thisform" "" "" {"class":"test"})
-                #@formControlDiv("col-1")
-                    #@navSelect2("user" "user")
-                        #@navSelect2Nav()
-                            #if(userList)
-                                #foreach(user:userList)
-                                    #if(user?.orgUserId == id)
-                                        ${user?.orgUserRealName}
-                                    #end
-                                #end
-                            #else
-                            用户
-                            #end
+#@layout(admin)
 
-                        <span class="caret"></span>#end
-                        #@navSelect2Body()
-                            #@navSelect2Data()
-                            <option value=""></option>
-                            <optgroup label="用户">
-                                #foreach(user:userList)
-                                    <option value="${user?.orgUserId}">${user?.orgUserRealName}</option>
-                                #end
-                            </optgroup>
-
-                            #end
-                            #@navSelect2Fix()
-                                #set(m=menuManager.getMenu("organizationAddUser"))
-                                #if(m)
-                                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
-                                #end
-                                #set(m=menuManager.getMenu("organizationUser"))
-                                #if(m)
-                                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
-                                #end
-                            #end
-                        #end
-
-                        #hiddenInput("userIdHidden","orgUserId","","")
-
-                    <script type="text/javascript">
-
-                        $(function () {
-                            $("#user-select").on("change", function () {
-                                window.location.href = "${TINY_CONTEXT_PATH +adminPath}/org/user/show/profile?choose=3&id=" + $(this).val();
-                            });
-                        });
-
-                    </script>
-                    #end
-
-                #end
-            <span style="float: left">
-                    &nbsp;&gt;
-                #foreach(m:menuManager.getScopeMenus("org-user-detail"))
-                    #if(m.id=="org-user-profileAdmin")
-                        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?id=${id}"
-                           class="active_btn">${m.name}</a>
-                    #else
-                        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?id=${id}">${m.name}</a>
-
-                    #end
-                #end
-                </span>
-
-            <span style="float: right">
-                    #set(m=menuManager.getMenu("org-user-editprofile"))
-                #if(m)
-                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?id=${id}"
-                       title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
-
-                #end
-
-            </span>
-                #div(divClass="clearfix")
-            #end
-        #end
-        #div(divClass="clearfix")
-    #end
 #end
+#@layout(right)
+<span style="float: right">
+    #set(m=menuManager.getMenu("org-user-editprofile"))
+    #if(m)
+        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?id=${id}"
+           title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
 
+    #end
+</span>
+#end
 
 
     #@noRespsGridSystem()

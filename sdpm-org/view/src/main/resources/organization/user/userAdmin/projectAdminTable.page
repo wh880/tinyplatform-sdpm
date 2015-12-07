@@ -9,7 +9,7 @@
     #@td()${formatDate(p?.projectBegin,"yyyy-MM-dd")}#end
     #@td()${formatDate(p?.projectEnd,"yyyy-MM-dd")}#end
     #@td()${getDict("projectStatus",p?.projectStatus)}#end
-    #@td()${t?.teamRole}#end
+    #@td()${t?.teamRole?roleService.findRole(Integer.parseInt(t?.teamRole)).orgRoleName:""}#end
     #@td()${formatDate(t?.teamJoin,"yyyy-MM-dd")}#end
     #@td()${t?.teamDays}#end
 #end
