@@ -78,7 +78,7 @@
                                     "text" "orgUserAccount" user?.orgUserAccount {"datatype":"*","nullmsg":"请输入用户名！",
                                     "id":"请求标题","class":
                                     "input-text","ajaxurl":TINY_CONTEXT_PATH+adminPath+
-                                    "/org/user/usercheck?orgUserId="+user?.orgUserId})
+                                    "/org/user/userNameCheck?orgUserId="+user?.orgUserId})
                             #end
                             #@validateDiv("col-3")#end
                         #end

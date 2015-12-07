@@ -185,8 +185,8 @@ public class UserAction extends BaseController {
      */
     @RequiresPermissions("organizationAddUser")
     @ResponseBody
-    @RequestMapping(value = "/usercheck")
-    public Map userCheck(@RequestParam("param") String account, String orgUserId) {
+    @RequestMapping(value = "/userNameCheck")
+    public Map userNameCheck(@RequestParam("param") String account, String orgUserId) {
         OrgUser user = new OrgUser();
         user.setOrgUserAccount(account);
         List<OrgUser> userList = userService.findUserList(user);
