@@ -190,10 +190,10 @@ public class OrgUserDaoImpl extends TinyDslDaoSupport implements OrgUserDao {
                 FragmentSql.fragmentSelect("CONCAT (org_dept_name,CASE WHEN org_dept_name IS NOT NULL THEN '-' ELSE ''END,org_user_real_name,'-',org_user_account) as orgUserRealName")).
                 from(ORG_USERTABLE).join(
                 Join.leftJoin(ORG_DEPTTABLE, ORG_DEPTTABLE.ORG_DEPT_ID.eq(ORG_USERTABLE.ORG_DEPT_ID))
-        ).where(and(ORG_USERTABLE.ORG_USER_DELETED.eq(0),
+        ).where(and(ORG_USERTABLE.ORG_USER_DELETED.eq(0), con,
                 or(ORG_USERTABLE.ORG_USER_REAL_NAME.like(condition),
                         ORG_USERTABLE.ORG_USER_ACCOUNT.like(condition),
-                        ORG_DEPTTABLE.ORG_DEPT_NAME.like(condition)), con)).limit(0, 8);
+                        ORG_DEPTTABLE.ORG_DEPT_NAME.like(condition)))).limit(0, 8);
         return getDslSession().fetchList(select, OrgUser.class);
     }
 

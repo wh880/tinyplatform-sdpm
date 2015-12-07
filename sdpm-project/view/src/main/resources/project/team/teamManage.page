@@ -1,16 +1,8 @@
-#!set(activeTitle="团队管理",activeMenuId=currentPageId)
-#@div()
-    #@tabWithInit("tab_demo" "optionsBox")
-        #@div(divClass="dropdownBox")
-            #include("/project/common/dropdownMenu.page")
-        #end
-        #@tabHead()
-            #include("/project/common/protab.page")
-        #end
-        #@tabBodyCol("ptop-5")
-            #@div(divClass="operationbar")
-            团队管理
-            #end
+
+#@layout(project)
+    #@tabBodyCol("ptop-5")
+        #@div(divClass="operationbar")
+        团队管理
         #end
     #end
 #end
