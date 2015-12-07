@@ -86,7 +86,7 @@ public class ProjectAction extends BaseController {
     public String form(Model model) {
         OrgRole orgRole = new OrgRole();
         orgRole.setOrgRoleType(OrgRole.ROLE_TYPE_PROJECT);
-        List<OrgRole> roleList = roleService.findRoleList(orgRole);
+        List<OrgRole> roleList = roleService.findSystemRoles();
         model.addAttribute("roleList",roleList);
         return "project/operate/project/form";
     }

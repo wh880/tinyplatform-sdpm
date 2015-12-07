@@ -15,6 +15,8 @@
  */
 package org.tinygroup.sdpm.org.service.inter;
 
+import org.tinygroup.aopcache.annotation.CachePut;
+import org.tinygroup.aopcache.annotation.CacheRemove;
 import org.tinygroup.sdpm.org.dao.pojo.OrgRole;
 import org.tinygroup.sdpm.org.dao.pojo.OrgRoleMenu;
 import org.tinygroup.sdpm.org.dao.pojo.OrgRoleUser;
@@ -24,6 +26,9 @@ import java.util.List;
 
 
 public interface RoleService {
+    String CACHE_ROLE_LIST = "roleList";
+    String CACHE_ROLE_ID = "roleId";
+
     /**
      * 根据主键id查找Role
      *
@@ -32,6 +37,13 @@ public interface RoleService {
      */
     OrgRole findRole(Integer id);
 
+    /**
+     * 分页查询
+     * @param start
+     * @param limit
+     * @param orgRole
+     * @return
+     */
     Pager<OrgRole> findRolePager(Integer start, Integer limit, OrgRole orgRole);
 
     /**
@@ -48,6 +60,7 @@ public interface RoleService {
      * @param orgRole 新增实体类
      * @return
      */
+    @CachePut(keys = "${orgRole?.orgRoleId}", parameterNames = "orgRole", group = CACHE_ROLE_ID, removeGroups = {CACHE_ROLE_ID,CACHE_ROLE_LIST})
     OrgRole addRole(OrgRole orgRole);
 
     /**
@@ -56,6 +69,7 @@ public interface RoleService {
      * @param orgRole 需要更新的实体类
      * @return
      */
+    @CachePut(keys = "${orgRole?.orgRoleId}", parameterNames = "orgRole", group = CACHE_ROLE_ID, removeGroups = {CACHE_ROLE_ID, CACHE_ROLE_LIST})
     OrgRole updateRole(OrgRole orgRole);
 
     /**
@@ -64,6 +78,7 @@ public interface RoleService {
      * @param id 主键
      * @return
      */
+    @CacheRemove(removeKeys = "${id}", group = CACHE_ROLE_ID, removeGroups = {CACHE_ROLE_ID, CACHE_ROLE_LIST})
     Integer deleteRole(Integer id);
 
     /**
@@ -172,6 +187,18 @@ public interface RoleService {
      */
     void copyRoleUser(Integer orgRoleIdNew, Integer orgRoleId);
 
+    /**
+     * 根据ids查询
+     * @param ids
+     * @return
+     */
     List<OrgRole> getRoleByIds(String[] ids);
+
+    /**
+     * 查询系统角色
+     * @return
+     */
+    @CachePut(keys = "systemRoleList", group = CACHE_ROLE_LIST)
+    List<OrgRole> findSystemRoles();
 
 }

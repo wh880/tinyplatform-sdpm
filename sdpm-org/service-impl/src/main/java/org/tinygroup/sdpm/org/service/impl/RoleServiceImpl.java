@@ -174,4 +174,11 @@ public class RoleServiceImpl implements RoleService {
         return roleManager.getRolesByIds(ids);
     }
 
+    public List<OrgRole> findSystemRoles() {
+        OrgRole role = new OrgRole();
+        role.setDeleted(0);
+        role.setOrgRoleType(OrgRole.ROLE_TYPE_SYS);
+        return findRoleList(role);
+    }
+
 }
