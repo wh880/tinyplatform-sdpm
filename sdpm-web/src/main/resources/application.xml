@@ -3,7 +3,7 @@
     <application-properties>
         <file path="/sdpm.properties"></file>
         <property name="BASE_PACKAGE" value="org.tinygroup"/>
-        <property name="DEBUG_MODE" value="true"/>
+        <property name="DEBUG_MODE" value="false"/>
         <property name="TINY_THEME" value="default"/>
         <property name="UPLOAD_ACTION_URL" value="/ajaxUploadImage"/>
         <!--缓存配置-->
@@ -28,16 +28,17 @@
     </greetings>
 
     <application-processors>
-        <application-processor bean="fileResolverProcessor"></application-processor>
-        <!--<application-processor bean="bundleApplicationProcessor"></application-processor>-->
-        <application-processor bean="serviceApplicationProcessor"></application-processor>
-        <application-processor bean="tinyListenerProcessor"></application-processor>
-        <application-processor bean="fileMonitorProcessor"></application-processor>
-        <application-processor bean="tinyTemplateConfigProcessor"></application-processor>
+        <application-processor bean="fileResolverProcessor"/>
+        <application-processor bean="serviceApplicationProcessor"/>
+        <application-processor bean="tinyListenerProcessor"/>
+        <!--<application-processor bean="fileMonitorProcessor"></application-processor>-->
+        <application-processor bean="tinyTemplateConfigProcessor"/>
         <!--数据库安装-->
-        <!--<application-processor bean="databaseInstallerProcessor"></application-processor>-->
-        <application-processor bean="stdProcessor"></application-processor>
-        <application-processor bean="dictLoadProcessor"></application-processor>
+        <application-processor bean="databaseInstallerProcessor"/>
+        <!-- 系统数据初始化 -->
+        <!--<application-processor bean="initDataApplicationProcessor"/>-->
+        <application-processor bean="stdProcessor"/>
+        <application-processor bean="dictLoadProcessor"/>
     </application-processors>
 
     <!-- 这里是文件搜索器相关配置，如果配置请参考file-resolver-configuration配置手册 -->
@@ -63,7 +64,7 @@
             <class-path path="D:\javaworkspace\sdpm\sdpm-document\view\src\main\resources"/>
             <class-path path="D:\javaworkspace\sdpm\sdpm-productLine\view\src\main\resources"/>
             <class-path path="D:\javaworkspace\sdpm\sdpm-org\view\src\main\resources"/>
-			<class-path path="D:\javaworkspace\sdpm\sdpm-common\view\src\main\resources"/>
+            <class-path path="D:\javaworkspace\sdpm\sdpm-common\view\src\main\resources"/>
             <class-path path="D:\javaworkspace\sdpm\sdpm-common\view-uicomponent\src\main\resources"/>
             <!--wll -->
             <class-path path="D:\java\eclipseworkspace\sdpm\sdpm-product\view\src\main\resources"/>
@@ -99,14 +100,14 @@
     </plugin-management>
     <!-- cep远程调用配置 -->
     <!--<cep-node-config>-->
-        <!--<node-config ip="192.168.84.73" port="8888" name="chenjiaopmclient"-->
-                     <!--enable-remote="false"></node-config>-->
-        <!--<node-sc-breath interval="4000"/>-->
-        <!--<node-sc-check interval="2000"/>-->
-        <!--<remote-bean bean="CEPCoreRMIRemoteImpl"/>-->
-        <!--&lt;!&ndash; mananger-bean="cepCoreManagerCentral" &ndash;&gt;-->
-        <!--<node-strategy bean="nodeWeightPloyStrategy"/>-->
-        <!--<sc ip="192.168.84.57" port="8808" name="chenjiaocentral"/>-->
+    <!--<node-config ip="192.168.84.73" port="8888" name="chenjiaopmclient"-->
+    <!--enable-remote="false"></node-config>-->
+    <!--<node-sc-breath interval="4000"/>-->
+    <!--<node-sc-check interval="2000"/>-->
+    <!--<remote-bean bean="CEPCoreRMIRemoteImpl"/>-->
+    <!--&lt;!&ndash; mananger-bean="cepCoreManagerCentral" &ndash;&gt;-->
+    <!--<node-strategy bean="nodeWeightPloyStrategy"/>-->
+    <!--<sc ip="192.168.84.57" port="8808" name="chenjiaocentral"/>-->
     <!--</cep-node-config>-->
 
     <!-- aop配置 -->
@@ -485,13 +486,5 @@
     </template-config>
 
     <dict-load-config bean_name="ehCache"></dict-load-config>
-
-    <datasource id="aaaa" type="org.apache.commons.dbcp.BasicDataSource">
-        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <property name="url"
-                  value="jdbc:mysql://192.168.51.28/sdpm?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=utf-8"/>
-        <property name="username" value="root"/>
-        <property name="password" value="123456"/>
-    </datasource>
 
 </application>

@@ -87,7 +87,7 @@
   <standard-field id="6733cc238cea46378fa1eb9c6d03be56" name="org_dept_name" title="部门名称" business-type-id="a30696c1e44441ecad77a832afd3731d">
     <description></description>
   </standard-field>
-  <standard-field id="9ba50db58dad450fad33c88ab44967f9" name="org_dept_parent" title="上级部门" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd">
+  <standard-field id="9ba50db58dad450fad33c88ab44967f9" name="org_dept_parent" title="上级部门" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" default="0">
     <description></description>
   </standard-field>
   <standard-field id="1b27dc18ebce48b68616feb689ae7744" name="org_dept_path" title="部门层次路径" business-type-id="27ebfcdc558c477da425a46e566d4637">
@@ -138,10 +138,12 @@
   <standard-field id="8e8078a1954e464cb4d5f280b5d463b3" name="org_company_deleted" title="删除标志 " business-type-id="b6a9bc04774b40859a7dd8c6fd52a629" default="0">
     <description></description>
   </standard-field>
-  <standard-field id="b1125fb09e5546f783309448d5bd0499" name="org_company_logo" title="公司logo" business-type-id="27ebfcdc558c477da425a46e566d4637">
+  <standard-field id="b1125fb09e5546f783309448d5bd0499" name="org_company_logo" title="公司logo" business-type-id="27ebfcdc558c477da425a46e566d4637" default="">
     <description>公司logo存放地址</description>
   </standard-field>
-  <standard-field id="9d637734f8044ad789dbc9e2c5193c32" name="org_role_id" title="角色ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
+  <standard-field id="9d637734f8044ad789dbc9e2c5193c32" name="org_role_id" title="角色ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd">
+    <description></description>
+  </standard-field>
   <standard-field id="f83ce375673546bdb35a8fcb6d751332" name="org_role_name" title="角色名称" business-type-id="095e594e1550424b9643c7e2279e85be"/>
   <standard-field id="2c70414be6154f128898e5ebb03e137d" name="org_role_remarks" title="角色备注" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
   <standard-field id="40cf45e575c0442e83c7fe2da3119b5e" name="org_role_menu_id" title="角色菜单id" business-type-id="095e594e1550424b9643c7e2279e85be"/>

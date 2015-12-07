@@ -29,6 +29,7 @@ public interface ProjectService {
      * @param project
      * @return
      */
+    @CacheRemove(removeGroups = {CACHE_USER_PROJECT_LIST})
     Project addProject(Project project);
 
 
@@ -90,7 +91,8 @@ public interface ProjectService {
 
 
     /**
-     *  分页查询(排序)
+     * 分页查询(排序)
+     *
      * @param page
      * @param pageSize
      * @param project

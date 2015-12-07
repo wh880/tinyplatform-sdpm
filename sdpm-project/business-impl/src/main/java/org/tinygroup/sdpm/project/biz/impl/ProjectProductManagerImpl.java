@@ -34,6 +34,9 @@ public class ProjectProductManagerImpl implements ProjectProductManager {
         }
         List<ProjectProduct> list = new ArrayList<ProjectProduct>();
         for (Integer productId : productIds) {
+            if (productId == null) {
+                continue;
+            }
             ProjectProduct t = new ProjectProduct();
             t.setProjectId(projectId);
             t.setProductId(productId);

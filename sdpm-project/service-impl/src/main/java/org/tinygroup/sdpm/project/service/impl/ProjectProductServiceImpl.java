@@ -2,6 +2,7 @@ package org.tinygroup.sdpm.project.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.tinygroup.commons.tools.ArrayUtil;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.project.biz.inter.ProjectProductManager;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
@@ -18,6 +19,9 @@ public class ProjectProductServiceImpl implements ProjectProductService {
     private ProjectProductManager projectProductManager;
 
     public void addProjectLinkToProduct(Integer[] productIds, Integer projectId) {
+        if (ArrayUtil.isEmptyArray(productIds)){
+            return;
+        }
         projectProductManager.addLink(productIds, projectId);
     }
 

@@ -79,6 +79,7 @@ public class ProjectAction extends BaseController {
 
     /**
      * 新增项目表单
+     *
      * @return
      */
     @RequiresPermissions(value = {"project-op-add", "batch-distribute-task", "pro-Info2-copy", "pro-task-proposeversion"}, logical = Logical.OR)
