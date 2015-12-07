@@ -1,0 +1,45 @@
+#!set(activeTitle="组织管理",activeMenuId=currentPageId,choose=choose?:"0")
+#import("/common/component/form.component")
+#set(editpagePath=
+    "/organization/common/fileOutput.pagelet",editpageModalId="userEditModal",editpageModal="#"+editpageModalId)
+#set(name="organizationUser")
+
+#@layout(admin)
+<span class="barBoxs">
+                <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/story?choose=3&id=${id}"
+                   class="${choose == 3?'active_btn':''}">指派给我</a>
+                <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/story?choose=4&id=${id}"
+                   class="${choose == 4?'active_btn':''}">由我创建</a>
+                <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/story?choose=5&id=${id}"
+                   class="${choose == 5?'active_btn':''}">由我评审</a>
+                <a href="${TINY_CONTEXT_PATH+adminPath}/org/user/story?choose=6&id=${id}"
+                   class="${choose == 6?'active_btn':''}">由我关闭</a>
+        </span>
+#end
+
+
+
+
+#@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
+    #@div(divClass="tinyheaderTools form-inline")
+        #setTinyTablePageSize([8,10,20,50,100,200])
+    #end
+    #@tinyTableContent(TINY_CONTEXT_PATH+adminPath+"/org/user/story/search?"+tinyRequestQueryString) ##取数据地址 总数据
+        #@thead()
+            #@tr()###th  class 为sorting 表票可排序 为sorting_desc 为当前倒序
+                #@tinyTh({"class":"","rel":"project_id"})ID#end
+                #@tinyTh({"class":"","rel":"project_pri"})P#end
+                #@tinyTh({"class":"","rel":"product_id"})所属产品#end
+                #@tinyTh({"class":"","rel":"story_title"})需求名称#end
+                #@tinyTh({"class":"","rel":"plan_id"})所属计划#end
+                #@tinyTh({"class":"","rel":"story_opened_by"})创建#end
+                #@tinyTh({"class":"","rel":"story_estimate"})预计#end
+                #@tinyTh({"class":"","rel":"story_status"})状态#end
+                #@tinyTh({"class":"","rel":"story_stage"})阶段#end
+            #end
+        #end
+    #end
+#end
+
+#simpleModal(editpageModalId)
+

@@ -56,6 +56,9 @@
                 #@Tselect2F()
                     #@Tselect2Body("docModule" "" {"id":"docModule","class":"input-text","datatype":"*","nullmsg":"分类不能为空！"}) ##,"multiple":"multiple"加上为多选项
                     #end
+##                    #@Tselect2Fix()#@aModal("#myModal" "添加分类" "500" "300" "btn-class" adminPath+"/product/addModule?pId=" "")
+##                        增加#end
+##                    #end
                 #end
             #end
         #end

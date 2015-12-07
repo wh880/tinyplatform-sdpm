@@ -1,0 +1,40 @@
+
+#@tinyForm("moduleForm" TINY_CONTEXT_PATH+adminPath+"/system/module/docTreeSave?moduleParent=p"+cookieProductId "post" {"class":"test"})
+<input type="hidden" name="moduleType" value="productDoc"/>
+##<input type="hidden" name="moduleRoot" value="${pId}"/>
+    #@elementItem()
+        #@colLabel("col-4")分类名称：#end
+        #@formControlDiv("col-5")
+            #tinyInput("moduleName" "moduleName" "" {"datatype":"*","id":"moduleName","class":"input-text","nullmsg":"模块名不为空"})
+        #end
+        #@validateDiv("col-2")#end
+    #end
+    #@elementItem()
+        #@colLabel("col-4")#end
+        #@div(divClass="col-4 col-offset-2 form-inline")
+            #tinyInput("submit" "submitbtn" " 提交 " {"class":"btn btn-primary"})
+        #end
+    #end
+#end
+<script type="text/javascript">
+    $(function () {
+        $("form[name=moduleForm]").Validform({
+            tiptype: 2
+        });
+        $("form[name=moduleForm]").on("submit",function(){
+            $.ajax({
+                url:$(this).attr("action"),
+                data:$(this).serialize(),
+                type:"POST",
+                success:function(data){
+                    if(data.status=="success"){
+                        console.log($("#myModel"));
+                        $("#myModal").trigger("close");
+                        $("input[name=productId]").change();
+                    }
+                }
+            });
+            return false;
+        });
+    });
+</script>

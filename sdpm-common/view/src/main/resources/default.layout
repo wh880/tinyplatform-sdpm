@@ -24,7 +24,7 @@
     <link href="${TINY_CONTEXT_PATH}/uiengine.uicss" rel="stylesheet" />
     <script src="${TINY_CONTEXT_PATH}/uiengine.uijs"></script>
 </head>
-<body class="theme-clean main-menu-animated menu-on-top" id="bodyrap">
+<body class="theme-purple-hills main-menu-animated menu-on-top" id="bodyrap">
 <script src="${TINY_CONTEXT_PATH}/common/js/tinyui.js"></script>
     #@mainWrapper()
         #@mainNavbar("/common/img/main-navbar-logo.png" "Tiny SDPM" adminPath+"/home")

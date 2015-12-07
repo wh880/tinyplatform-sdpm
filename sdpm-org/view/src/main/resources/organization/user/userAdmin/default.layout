@@ -1,10 +1,3 @@
-#!set(activeTitle="组织管理",activeMenuId=currentPageId)
-
-#import("/common/component/form.component")
-#set(editpagePath=
-    "/organization/common/fileOutput.pagelet",editpageModalId="userEditModal",editpageModal="#"+editpageModalId)
-
-#set(name="organizationUser")
 #@layout(org)
     #@tabBodyCol("ptop-5")
         #@div(divClass="operationbar")
@@ -21,7 +14,6 @@
                             #else
                             用户
                             #end
-
                         <span class="caret"></span>#end
                         #@navSelect2Body()
                             #@navSelect2Data()
@@ -43,7 +35,6 @@
                                 <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
                                 #end
                             #end
-
                         #end
                         #hiddenInput("userIdHidden","orgUserId","","")
 
@@ -51,52 +42,27 @@
 
                         $(function () {
                             $("#user-select").on("change", function () {
-                                window.location.href = "${TINY_CONTEXT_PATH +adminPath}/org/user/project?choose=3&id=" + $(this).val();
+                                window.location.href = "${TINY_CONTEXT_PATH +adminPath}/org/user/active?choose=3&id=" + $(this).val();
                             });
                         });
 
                     </script>
                     #end
-
                 #end
-            <span style="float: left">
+            <span style="float: left;">
                     &nbsp;&gt;
                 #foreach(m:menuManager.getScopeMenus("org-user-detail"))
-                    #if(m.id=="org-user-projectAdmin")
-                        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?choose=3&id=${id}"
-                           class="active_btn">${m.name}</a>
-
-                    #else
-                        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?choose=3&id=${id}">${m.name}</a>
-                    #end
+                        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?choose=3&status=${m.id}&id=${id}"
+                           class="${status==m.id?'active_btn':''}">${m.name}</a>
                 #end
 
                 </span>
-                #div(divClass="clearfix")
+                #layout(right)#end
+            #div(divClass="clearfix")
             #end
+
+        #layout(admin)#end
         #end
     #end
 #end
-
-
-
-#@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
-    #@tinyTableNonavpage(TINY_CONTEXT_PATH+adminPath+"/org/user/project/search?"+tinyRequestQueryString) ##取数据地址 总数据
-        #@thead()
-            #@tr()###th  class 为sorting 表票可排序 为sorting_desc 为当前倒序
-                #@tinyTh({"class":"","rel":"project_id"})ID#end
-                #@tinyTh({"class":"","rel":"project_code"})迭代代号#end
-                #@tinyTh({"class":"","rel":"project_name"})迭代名称#end
-                #@tinyTh({"class":"","rel":"project_begin"})开始时间#end
-                #@tinyTh({"class":"","rel":"project_end"})结束日期#end
-                #@tinyTh({"class":"","rel":"project_status"})状态#end
-                #@tinyTh({"class":"","rel":"team_role"})角色#end
-                #@tinyTh({"class":"","rel":"team_join"})加盟日#end
-                #@tinyTh({"class":"","rel":"team_days"})可用时间/天#end
-            #end
-        #end
-    #end
-#end
-
-
-#simpleModal(editpageModalId)
+#pageContent

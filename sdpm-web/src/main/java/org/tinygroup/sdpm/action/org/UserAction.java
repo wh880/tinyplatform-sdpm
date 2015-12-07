@@ -317,7 +317,7 @@ public class UserAction extends BaseController {
         List<OrgUser> userList = userService.findUserList(orgUser);
         model.addAttribute("userList", userList);
         model.addAttribute("user", user);
-        return "organization/user/profileAdmin.page";
+        return "organization/user/userAdmin/profileAdmin.page";
     }
 
     /**
@@ -345,7 +345,7 @@ public class UserAction extends BaseController {
     public String storyJump(OrgUser orgUser, Model model) {
         List<OrgUser> userList = userService.findUserList(orgUser);
         model.addAttribute("userList", userList);
-        return "/organization/user/storyAdmin.page";
+        return "/organization/user/userAdmin/storyAdmin.page";
     }
 
     @RequiresPermissions("org-user-storyAdmin")
@@ -386,7 +386,7 @@ public class UserAction extends BaseController {
     public String taskJump(OrgUser orgUser, Model model) {
         List<OrgUser> userList = userService.findUserList(orgUser);
         model.addAttribute("userList", userList);
-        return "/organization/user/taskAdmin.page";
+        return "/organization/user/userAdmin/taskAdmin.page";
     }
 
     @RequiresPermissions("org-user-taskAdmin")
@@ -425,7 +425,7 @@ public class UserAction extends BaseController {
     public String bugJump(OrgUser orgUser, Model model) {
         List<OrgUser> userList = userService.findUserList(orgUser);
         model.addAttribute("userList", userList);
-        return "/organization/user/bugAdmin.page";
+        return "/organization/user/userAdmin/bugAdmin.page";
     }
 
     @RequiresPermissions("org-user-bugAdmin")
@@ -443,7 +443,7 @@ public class UserAction extends BaseController {
         }
         Pager<QualityBug> bugPager = bugService.findBugListPager(limit * (page - 1), limit, null, bug, order, false);
         model.addAttribute("bugPager", bugPager);
-        return "/organization/user/bugAdminTable.pagelet";
+        return "/organization/user/userAdmin/bugAdminTable.pagelet";
     }
 
     /**
@@ -458,7 +458,7 @@ public class UserAction extends BaseController {
     public String testTaskJump(OrgUser orgUser, Model model) {
         List<OrgUser> userList = userService.findUserList(orgUser);
         model.addAttribute("userList", userList);
-        return "/organization/user/testtaskAdmin.page";
+        return "/organization/user/userAdmin/testtaskAdmin.page";
     }
 
     @RequiresPermissions("org-user-testtaskAdmin")
@@ -477,7 +477,7 @@ public class UserAction extends BaseController {
     public String testTaskJump2(OrgUser orgUser, Model model) {
         List<OrgUser> userList = userService.findUserList(orgUser);
         model.addAttribute("userList", userList);
-        return "/organization/user/testtaskAdmin1.page";
+        return "/organization/user/userAdmin/testtaskAdmin1.page";
     }
 
     @RequiresPermissions("org-user-testtaskAdmin")
@@ -507,7 +507,7 @@ public class UserAction extends BaseController {
     public String activeJump(OrgUser orgUser, Model model) {
         List<OrgUser> userList = userService.findUserList(orgUser);
         model.addAttribute("userList", userList);
-        return "/organization/user/activeAdmin.page";
+        return "/organization/user/userAdmin/activeAdmin.page";
     }
 
     @RequiresPermissions("org-user-activeAdmin")
@@ -551,7 +551,7 @@ public class UserAction extends BaseController {
     public String projectJump(OrgUser orgUser, Model model) {
         List<OrgUser> userList = userService.findUserList(orgUser);
         model.addAttribute("userList", userList);
-        return "/organization/user/projectAdmin.page";
+        return "/organization/user/userAdmin/projectAdmin.page";
     }
 
     @RequiresPermissions("org-user-projectAdmin")
@@ -568,7 +568,7 @@ public class UserAction extends BaseController {
         Integer size = projectList.size();
         model.addAttribute("size", size);
         model.addAttribute("teamList", teamList);
-        return "/organization/user/projectAdminTable.pagelet";
+        return "/organization/user/userAdmin/projectAdminTable.pagelet";
     }
 
     @ResponseBody

@@ -99,7 +99,9 @@ public class BugAction extends BaseController {
     @RequestMapping("")
     public String form(QualityBug bug, Model model, HttpServletRequest request) {
         String queryString = request.getQueryString();
-        List<OrgUser> users = userService.findUserList(null);
+        OrgUser user = new OrgUser();
+        user.setOrgUserDeleted("0");
+        List<OrgUser> users = userService.findUserList(user);
         if (bug != null && bug.getModuleId() != null) {
             request.getSession().setAttribute("bugModuleId", bug.getModuleId());
         } else {
