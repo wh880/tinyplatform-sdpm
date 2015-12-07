@@ -63,7 +63,7 @@
                 #end
             </td>
             <td>
-                #@tinyDateInput("teamList["+a+"].teamJoin" formatDate(now(),"yyyy-MM-dd") "YYYY-MM-DD" )#end
+                #@tinyDateInput("teamList["+a+"].teamJoin" t?.teamJoin?formatDate(t?.teamJoin,"yyyy-MM-dd"):"" "YYYY-MM-DD" )#end
             </td>
             <td>
                 #tinyInput("text" "teamList["+a+"].teamDays" t.teamDays {"datatype":"","class":"input-text"})

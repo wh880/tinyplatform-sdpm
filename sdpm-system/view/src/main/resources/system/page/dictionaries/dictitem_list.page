@@ -8,7 +8,7 @@
 				 #@mulOperation("muldelete" call("link",adminPath+"/system/dict/batchDelete"))            
 				 	#@radiusBtn("btn-danger" "icon-trash" "javascript:") 批量删除#end
 				 #end
-				 #@aModal(editpageModal "添加" "500" "200" "btn radius btn-primary" adminPath+"/system/dict/find")
+				 #@aModal(editpageModal "添加" "500" "300" "btn radius btn-primary" adminPath+"/system/dict/find")
 						#@simpleI("icon-plus")添加#end
 				 #end
 			#end

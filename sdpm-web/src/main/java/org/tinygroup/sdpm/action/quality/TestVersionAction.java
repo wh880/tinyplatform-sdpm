@@ -366,7 +366,7 @@ public class TestVersionAction extends BaseController {
         getTaskToCaseCondition(status, carrier);
         carrier.putSearch("caseSearch", infos, groupOperate);
         if (moduleId != null) {
-            carrier.putModuleIn("noduleId", String.valueOf(moduleId));
+            carrier.putModuleIn("moduleId", String.valueOf(moduleId));
         }
         Pager<QualityTestRun> runsPager = testRunService.findTestRunPager(start, limit, run, carrier, order, "asc".equals(ordertype) ? true : false);
         //增加case删除位判断

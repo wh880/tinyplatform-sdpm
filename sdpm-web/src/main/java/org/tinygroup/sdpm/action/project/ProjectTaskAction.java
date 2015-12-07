@@ -688,7 +688,7 @@ public class ProjectTaskAction extends BaseController {
         ProjectTask task = taskService.findTaskById(taskId);
         model.addAttribute("teamList", userService.findTeamUserListByProjectId(task.getTaskProject()));
         model.addAttribute("task", task);
-        return "project/task/modal/" + forward + ".pagelet";
+        return "project/modal/task/" + forward + ".pagelet";
     }
 
     @RequiresPermissions("task-group")
