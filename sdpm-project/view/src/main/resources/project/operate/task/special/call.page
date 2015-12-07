@@ -14,13 +14,8 @@
         #@elementItem()
             #@sdpmItem("指派给")
                 #@Tselect2F()
-                    #@Tselect2Body("taskAssignedTo" task.taskAssignedTo {"datatype":"*","class":"input-text select2"})
-                        #foreach(t : teamList)
-                            <option value="${t.orgUserId}">
-                                ${t.orgUserRealName}
-                            </option>
-                        #end
-                    #end
+                    #Tselect2Ajax("taskAssignedTo" task.taskAssignedTo TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam?projectId="+task?.taskProject
+                    {"id":"assignedToSelect","dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询指派人"})
                     #@Tselect2Fix()
                         #set(m=menuManager.getMenu("organizationAddUser"))
                         #if(m)

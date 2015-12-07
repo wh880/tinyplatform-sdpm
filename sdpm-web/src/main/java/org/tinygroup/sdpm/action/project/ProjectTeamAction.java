@@ -134,7 +134,7 @@ public class ProjectTeamAction extends BaseController {
         return resultMap(res > 0 ? true : false, res > 0 ? "删除成功" : "删除失败");
     }
 
-    @RequestMapping("team/nextTr")
+    @RequestMapping("nextTr")
     public String getNextTeamTr(Integer a, Model model) {
         List<OrgUser> userList = userService.findUserList(null);
         model.addAttribute("userList", userList);

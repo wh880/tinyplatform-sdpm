@@ -7,11 +7,11 @@
               resource="userInfo"/>
     </type-info>
     <type-info name="projectEdit">
-        <info name="projectInfo" title="项目信息" infoParameter="taskId" url="/project/task/basicInfoEdit"
+        <info name="projectInfo" title="任务信息" infoParameter="taskId" url="/project/task/basicInfoEdit"
               resource="projectEdit"/>
     </type-info>
     <type-info name="projectView">
-        <info name="projectInfo" title="项目信息" infoParameter="" url="/project/task/basicInfoView.pagelet"
+        <info name="projectInfo" title="任务信息" infoParameter="" url="/project/task/basicInfoView.pagelet"
               resource="projectView"/>
     </type-info>
     <type-info name="information">
