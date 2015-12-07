@@ -1,13 +1,9 @@
 #!set(linkName="product-archive",sonitem="
 <li>"+"文档"+"</li>")
-
-
 #import("/org/tinygroup/form/components/form.component")
 #import("/org/tinygroup/icon/components/icon.component")
 #import("/org/tinygroup/button/components/button_common.component")
 #import("/org/tinygroup/button/components/button.component")
-
-
 #@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/document/product/save/updateDoc?docProduct="+cookieProductId+
     "&docLibId=1&docDeleted=0" "post" {"class":"test","enctype":
     "multipart/form-data"})

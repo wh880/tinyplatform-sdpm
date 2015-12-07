@@ -79,6 +79,7 @@ public class ProjectAction extends BaseController {
 
     /**
      * 新增项目表单
+     *
      * @return
      */
     @RequiresPermissions(value = {"project-op-add", "batch-distribute-task", "pro-Info2-copy", "pro-task-proposeversion"}, logical = Logical.OR)
@@ -87,7 +88,7 @@ public class ProjectAction extends BaseController {
         OrgRole orgRole = new OrgRole();
         orgRole.setOrgRoleType(OrgRole.ROLE_TYPE_PROJECT);
         List<OrgRole> roleList = roleService.findRoleList(orgRole);
-        model.addAttribute("roleList",roleList);
+        model.addAttribute("roleList", roleList);
         return "project/operate/project/form";
     }
 
@@ -195,7 +196,9 @@ public class ProjectAction extends BaseController {
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     public String editPost(Project project, Model model, Integer[] whiteList, Integer[] productIds) {
         project.setProjectWhiteList(StringUtil.join(whiteList, ","));
-        projectProductService.addProjectLinkToProduct(productIds, project.getProjectId());
+        if (!ArrayUtil.isEmptyArray(productIds)) {
+            projectProductService.addProjectLinkToProduct(productIds, project.getProjectId());
+        }
         projectService.updateProject(project);
         //TODO:ProjectUtils.removeProjectList(); ProjectUtils.removeProjectList();
         model.addAttribute("project", project);
@@ -383,14 +386,14 @@ public class ProjectAction extends BaseController {
 
     @ResponseBody
     @RequestMapping("ajax/projectInCondition")
-    public List<Project> projectInCondition(String key, String initKey, HttpServletRequest request){
-        if(initKey!=null){
+    public List<Project> projectInCondition(String key, String initKey, HttpServletRequest request) {
+        if (initKey != null) {
             List<Project> result = new ArrayList<Project>();
             result.add(projectService.findProjectById(Integer.parseInt(initKey)));
             return result;
         }
         Integer[] pIds = projectOperate.getUserProjectIdList();
-        return projectService.projectInCondition(key,pIds);
+        return projectService.projectInCondition(key, pIds);
     }
 
 }

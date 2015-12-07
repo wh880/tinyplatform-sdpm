@@ -79,6 +79,7 @@ public interface UserService {
      * @param orgUser 新增实体类
      * @return
      */
+    @CacheRemove(removeGroups = {CACHE_USER_LIST})
     OrgUser addUser(OrgUser orgUser);
 
     /**
@@ -87,7 +88,7 @@ public interface UserService {
      * @param orgUser 需要更新的实体类
      * @return
      */
-    @CachePut(keys = "list${orgUser?.orgUserId}", parameterNames = "orgUser", group = CACHE_USER_LIST, removeGroups = {CACHE_USER_ID,CACHE_USER_ACCOUNT,CACHE_USER_LIST})
+    @CachePut(keys = "{orgUser?.orgUserId}", parameterNames = "orgUser", group = CACHE_USER_ID, removeGroups = {CACHE_USER_ACCOUNT, CACHE_USER_LIST})
     OrgUser updateUser(OrgUser orgUser);
 
     /**
@@ -96,7 +97,7 @@ public interface UserService {
      * @param id 主键
      * @return
      */
-    @CacheRemove(removeKeys = "${id}", group = CACHE_USER_ID, removeGroups = {CACHE_USER_ID,CACHE_USER_ACCOUNT,CACHE_USER_LIST})
+    @CacheRemove(removeKeys = "${id}", group = CACHE_USER_ID, removeGroups = {CACHE_USER_ID, CACHE_USER_ACCOUNT, CACHE_USER_LIST})
     Integer deleteUser(String id);
 
     /**

@@ -58,12 +58,12 @@ public class StdUtil {
         }
     }
 
-    public static String getField(String tableName, String feildName) {
+    public static String getField(String tableName, String fieldName) {
         String table = tableMapping.get(tableName);
         if (table == null) {
             return null;
         }
-        return tableStdMap.get(table).get(feildName);
+        return tableStdMap.get(table).get(fieldName);
     }
 
     public static Map<String, String> getField(String tableName) {
@@ -75,8 +75,8 @@ public class StdUtil {
     }
 
     private static void addStd(Table t, Object object, Map<String, String> stdMap) {
-        Table table = null;
-        TableField tableField = null;
+        Table table;
+        TableField tableField;
         if (object instanceof Table) {
             table = (Table) object;
             for (TableField field : table.getFieldList()) {
