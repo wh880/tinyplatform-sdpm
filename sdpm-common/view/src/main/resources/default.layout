@@ -71,7 +71,7 @@
         <div class="content-wrapper-bg"></div>
         #@div("content-wrapper")
             #@rowFrame()
-            <div id="tinypagecontent" style="min-height:490px">${pageContent}</div>
+            <div id="tinypagecontent" style="min-height:530px">${pageContent}</div>
             #end
             <div id="tinyfooter">
                 <div class="tinyfooterrap">
