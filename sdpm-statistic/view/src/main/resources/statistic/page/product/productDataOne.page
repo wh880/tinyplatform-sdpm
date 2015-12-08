@@ -1,5 +1,5 @@
-#@bkGrayDiv("pd-20")
-筛选条件：
+#@bkGrayDiv("pd-5")
+<span style="margin-right:-8px;">筛选条件：</span>
 <script>
     $(function(){
         #if(deleted&&deleted==1)
