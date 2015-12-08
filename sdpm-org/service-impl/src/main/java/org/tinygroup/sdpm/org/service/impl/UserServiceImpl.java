@@ -140,6 +140,9 @@ public class UserServiceImpl implements UserService {
      * @return 验证成功返回true
      */
     public Boolean validatePassword(String plainPassword, String password) {
+        if (StringUtil.isBlank(plainPassword)||StringUtil.isBlank(password)){
+            return false;
+        }
         return userManager.validatePassword(plainPassword, password);
     }
 

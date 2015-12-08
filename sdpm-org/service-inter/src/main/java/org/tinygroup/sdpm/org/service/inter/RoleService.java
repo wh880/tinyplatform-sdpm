@@ -16,7 +16,6 @@
 package org.tinygroup.sdpm.org.service.inter;
 
 import org.tinygroup.aopcache.annotation.CacheGet;
-import org.tinygroup.aopcache.annotation.CachePut;
 import org.tinygroup.aopcache.annotation.CacheRemove;
 import org.tinygroup.sdpm.org.dao.pojo.OrgRole;
 import org.tinygroup.sdpm.org.dao.pojo.OrgRoleMenu;
@@ -40,6 +39,7 @@ public interface RoleService {
 
     /**
      * 分页查询
+     *
      * @param start
      * @param limit
      * @param orgRole
@@ -61,7 +61,6 @@ public interface RoleService {
      * @param orgRole 新增实体类
      * @return
      */
-    @CachePut(keys = "${orgRole?.orgRoleId}", parameterNames = "orgRole", group = CACHE_ROLE_ID, removeGroups = {CACHE_ROLE_ID,CACHE_ROLE_LIST})
     OrgRole addRole(OrgRole orgRole);
 
     /**
@@ -70,7 +69,7 @@ public interface RoleService {
      * @param orgRole 需要更新的实体类
      * @return
      */
-    @CachePut(keys = "${orgRole?.orgRoleId}", parameterNames = "orgRole", group = CACHE_ROLE_ID, removeGroups = {CACHE_ROLE_ID, CACHE_ROLE_LIST})
+    @CacheRemove(removeKeys = "${orgRole?.orgRoleId}", group = CACHE_ROLE_ID, removeGroups = {CACHE_ROLE_ID, CACHE_ROLE_LIST})
     OrgRole updateRole(OrgRole orgRole);
 
     /**
@@ -190,6 +189,7 @@ public interface RoleService {
 
     /**
      * 根据ids查询
+     *
      * @param ids
      * @return
      */
@@ -197,6 +197,7 @@ public interface RoleService {
 
     /**
      * 查询系统角色
+     *
      * @return
      */
     @CacheGet(key = "systemRoleList", group = CACHE_ROLE_LIST)
@@ -204,6 +205,7 @@ public interface RoleService {
 
     /**
      * 根据输入查询角色-可分类型
+     *
      * @param condition
      * @param type
      * @return
