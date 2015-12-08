@@ -13,8 +13,11 @@
         <p class="titleName">${task?.taskName}>编辑</p>
         #@elementItem()
             <div class="col-12">
-                #tinyInput("text" "taskName" task?.taskName {"placeholder":"任务名称","datatype":"*","nullmsg":"任务名称不能为空！",
-                    "class":"input-text"})
+                <div class="col-2 text-r"><label>任务名称：</label></div>
+                <div class="col-9">
+                    #tinyInput("text" "taskName" task?.taskName {"placeholder":"任务名称","datatype":"*","nullmsg":"任务名称不能为空！",
+                        "class":"input-text"})
+                </div>
             </div>
         #end
         #@elementItem()
