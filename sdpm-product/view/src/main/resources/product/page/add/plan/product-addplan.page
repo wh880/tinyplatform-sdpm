@@ -77,16 +77,9 @@
 //            }
 //        });
 
-
-
-
         $("input[name='endTime']").each(function(){
-
             $(this).unbind("click").bind("click",function(){
-
                 var start =	$("input[name='planBeginDate']").val();
-
-
                 if(start!=""){
                     start = new Date(Date.parse(start.replace(/-/g, "/")));
 
@@ -195,8 +188,6 @@
 				#@radioBox()
 					#@tinyRadioes("endTime" "year" "time")一年#end
 				#end
-
-
             </div>
         #end
         #@validateDiv("col-2")#end
@@ -208,7 +199,6 @@
         #end
         #@validateDiv("col-2")#end
     #end
-</div>   
   #@elementItem()
         <div class="col-12">
             <div class="col-5">
@@ -224,3 +214,4 @@
         </div>
     #end
 #end
+</div>

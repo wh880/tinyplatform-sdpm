@@ -29,9 +29,6 @@
     #end
 #end
 
-
-
-
 <div style="width:70%;float:left">
     #@div(divClass="infoContent")
         <p class="titleName">任务描述</p>
@@ -72,18 +69,3 @@
 <div style="width:30%;float:right">
     #TypeInfo("information", task.taskId)
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

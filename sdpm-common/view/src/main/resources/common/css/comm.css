@@ -18,7 +18,7 @@
 }
 
 .optionsBox .tabBar {
-    margin-bottom: 5px;
+    margin-bottom:-1px;
 	padding-right:6px;
 }
 
@@ -51,7 +51,7 @@
         border-left:0 !important;
         border-bottom:0 !important;
     }
-    .menu-on-top #main-menu .navigation > li>a{line-height:45px;padding: 0 20px;border-bottom:#ddd 1px solid !important;}
+    .menu-on-top #main-menu .navigation > li>a{line-height:45px;padding: 0 20px;border-bottom:#eed 1px solid !important;}
     .menu-on-top #main-menu .navigation > li:last-child{border-bottom-right-radius: 5px}
     .menu-on-top #main-menu .navigation > li.mm-dropdown > a:after {
         top: 28px !important
@@ -118,11 +118,11 @@
     }
 
     #bodyrap.theme-fresh .optionsBox .tabBar .switchClass.Current {
-        background: #50b5d3
+        background: #83ab36
     }
 
     #bodyrap.theme-fresh .optionsBox .tabBar .switchClass:hover {
-        background: #64bed8
+        background: #79a02d
     }
 
     #bodyrap.theme-white .optionsBox .tabBar .switchClass.Current {
@@ -316,7 +316,6 @@ a.btn.btn-sm.backBtn, .backBtn {
 
 .tabInfocontents .HuiTab .tabBar span:hover {
     background: #f9fafe;
-    border-bottom: #ddd 1px solid;
     color: #369
 }
 
@@ -483,6 +482,9 @@ table.table.filelist-table{border:#ddd 1px solid;}
 .tinyfooterrap a,.tinyfooterrap a:link,.tinyfooterrap a:visited{color:#ccb}
 .tinyfooterrap a:hover{text-decoration:underline;color:#ffe}
 .tinytable td{white-space: nowrap}
+
+/*选择类型*/
+.skin-minimal .check-box{padding-left:6px;}
 /*/!*quality*!/
 
 .operationbar .active_btn:hover{background:none;}

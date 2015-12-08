@@ -28,10 +28,7 @@
                 #@colLabel("col-2")<span class="c-red">*</span>角色名称：#end
                 #@gridSysCol(7)
                     #tinyInput(
-                        "text" "orgRoleName" role?.orgRoleName {"placeholder":"","datatype":"*","nullmsg":"角色名不能为空！",
-                        "id":"username",
-                        "class":
-                        "input-text"})
+                        "text" "orgRoleName" role?.orgRoleName {"placeholder":"","datatype":"*1-20","nullmsg":"角色名不能为空！"})
                 #end
             #end
             #@gridSysRow()

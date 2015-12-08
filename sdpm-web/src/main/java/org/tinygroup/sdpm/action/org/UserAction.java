@@ -116,7 +116,8 @@ public class UserAction extends BaseController {
             OrgDept dept = deptService.findDept(user.getOrgDeptId());
             List<OrgRole> roleList = roleService.findRoleByUserId(id);
             List orgRoleIdList = Collections3.extractToList(roleList, "orgRoleId");
-            model.addAttribute("orgRoleIdList", orgRoleIdList);
+            String roleIds = Collections3.convertToString(orgRoleIdList, ",");
+            model.addAttribute("roleIds", roleIds);
             model.addAttribute("user", user);
             model.addAttribute("dept", dept);
         }
@@ -150,18 +151,18 @@ public class UserAction extends BaseController {
      */
     @RequiresPermissions("organizationAddUser")
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String save(OrgUser user, Integer[] roleIds, Model model, String password1, String password2) {
+    public String save(OrgUser user, String roleIds, Model model, String password1, String password2) {
         if (StringUtil.isBlank(user.getOrgUserId())) {
             if (password1.equals(password2)) {
                 user.setOrgUserPassword(password1);
                 OrgUser userTemp = userService.addUser(user);
+                user.setOrgUserId(userTemp.getOrgUserId());
                 LogUtil.logWithComment(LogUtil.LogOperateObject.USER
                         , LogUtil.LogAction.CREATED
                         , String.valueOf(userTemp.getOrgUserId())
                         , userUtils.getUserId()
                         , null, null, null, null, null);
-
-                roleService.batchAddRolesToUser(userTemp.getOrgUserId(), roleIds);
+                roleService.batchAddRolesToUser(userTemp.getOrgUserId(), roleIds.split(","));
             } else {
                 addMessage(model, "密码验证不正确");
                 return "organization/user/addUser.page";
@@ -174,6 +175,7 @@ public class UserAction extends BaseController {
                     , userUtils.getUserId()
                     , null, null, null, null, null);
         }
+        roleService.batchAddRolesToUser(user.getOrgUserId(), roleIds.split(","));
         model.addAttribute("user", user);
         userUtils.clearCache(user);
         return "redirect:" + adminPath + "/org/user/list/";

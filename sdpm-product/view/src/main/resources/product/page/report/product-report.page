@@ -9,8 +9,10 @@
 	"I_storyOpenedBy":"由谁创建来进行统计","G_storyAssignedTo":"当前指派来进行统计","K_storyClosedReason":"关闭原因来进行统计","L_storyVersion":"变更次数来进行统计"})
 <style>
     .togglebox.open .tableBoxessty{margin-left:262px}
-    .togglebox.open .togglenavico{left:218px}
+    .togglebox.open .togglenavico{left:239px}
     .togglebox .togglenavpart{left:-260px;}
+	.togglebox .togglenavpart .skin-minimal {margin-boottom:5px;}
+	.togglebox .togglenavpart .navtitle{height:34px;}
 </style>
 
 <script>

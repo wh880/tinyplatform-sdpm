@@ -108,13 +108,13 @@
 			#@tinyTable(bugTableId)
 				#@div(divBaseClass="tinyheaderTools form-inline")
 					<div class="f col-3">
-						<input type="button" value="全选" class="btn btn-default btn-primary col-3"
+						<input type="button" value="全选" class="btn btn-default btn-primary"
 						onclick="selectAllNullorReserve('idCheck','全选');" />
 						<div class="col-0">&nbsp&nbsp</div>
-						<input type="button" value="反选" class="btn btn-default btn-primary col-3"
+						<input type="button" value="反选" class="btn btn-default btn-primary"
 						 onclick="selectAllNullorReserve('idCheck','反选');" />
 						<div class="col-0">&nbsp&nbsp</div>
-						<div class="dropdown col-3">
+						<div class="dropdown" style="display:inline-block">
 							<a id="" role="button" data-toggle="dropdown" class="btn btn-primary" data-target="#" href="javascript:void(0);">编辑<span class="caret"></span></a>
 							<ul class="dropdown-menu multi-level" role="menu">
 								<li>

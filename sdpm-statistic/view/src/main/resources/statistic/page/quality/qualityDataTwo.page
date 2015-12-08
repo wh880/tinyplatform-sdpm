@@ -1,5 +1,5 @@
-###@bkGrayDiv("pd-20")
-##筛选条件：
+###@bkGrayDiv("pd-5")
+##<span style="margin-right:-8px;">筛选条件：</span>
 ####加个tinyform 和 一段js 选择后提交
 ##    #labelCheckbox(ckId="shutdown" labelText="关闭产品")
 ###end

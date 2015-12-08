@@ -16,7 +16,6 @@
 package org.tinygroup.sdpm.org.service.inter;
 
 import org.tinygroup.aopcache.annotation.CacheGet;
-import org.tinygroup.aopcache.annotation.CachePut;
 import org.tinygroup.aopcache.annotation.CacheRemove;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.tinysqldsl.Pager;
@@ -88,7 +87,7 @@ public interface UserService {
      * @param orgUser 需要更新的实体类
      * @return
      */
-    @CachePut(keys = "{orgUser?.orgUserId}", parameterNames = "orgUser", group = CACHE_USER_ID, removeGroups = {CACHE_USER_ACCOUNT, CACHE_USER_LIST})
+    @CacheRemove(removeKeys = "${orgUser?.orgUserId}", group = CACHE_USER_ID, removeGroups = {CACHE_USER_ACCOUNT, CACHE_USER_LIST})
     OrgUser updateUser(OrgUser orgUser);
 
     /**

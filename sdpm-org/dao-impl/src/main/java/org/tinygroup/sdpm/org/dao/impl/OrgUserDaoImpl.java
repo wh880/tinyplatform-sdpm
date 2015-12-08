@@ -17,7 +17,6 @@
 package org.tinygroup.sdpm.org.dao.impl;
 
 import org.springframework.stereotype.Repository;
-import org.tinygroup.commons.tools.ArrayUtil;
 import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.jdbctemplatedslsession.callback.*;
@@ -37,8 +36,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.tinygroup.sdpm.org.dao.constant.OrgUserTable.ORG_USERTABLE;
 import static org.tinygroup.sdpm.org.dao.constant.OrgDeptTable.ORG_DEPTTABLE;
+import static org.tinygroup.sdpm.org.dao.constant.OrgUserTable.ORG_USERTABLE;
 import static org.tinygroup.sdpm.project.dao.constant.ProjectTeamTable.PROJECT_TEAMTABLE;
 import static org.tinygroup.tinysqldsl.Delete.delete;
 import static org.tinygroup.tinysqldsl.Insert.insertInto;
@@ -154,7 +153,7 @@ public class OrgUserDaoImpl extends TinyDslDaoSupport implements OrgUserDao {
         return getDslTemplate().getByKey(pk, OrgUser.class, new SelectGenerateCallback<Serializable>() {
             @SuppressWarnings("rawtypes")
             public Select generate(Serializable t) {
-                return selectFrom(ORG_USERTABLE).where(ORG_USERTABLE.ORG_USER_ID.eq(t));
+                return selectFrom(ORG_USERTABLE).where(and(ORG_USERTABLE.ORG_USER_ID.eq(t), ORG_USERTABLE.ORG_USER_DELETED.eq(OrgUser.DELETE_NO)));
             }
         });
     }
@@ -163,7 +162,7 @@ public class OrgUserDaoImpl extends TinyDslDaoSupport implements OrgUserDao {
         SelectGenerateCallback<Serializable[]> callback = new SelectGenerateCallback<Serializable[]>() {
             @SuppressWarnings("rawtypes")
             public Select generate(Serializable[] t) {
-                return selectFrom(ORG_USERTABLE).where(ORG_USERTABLE.ORG_USER_ID.in(t));
+                return selectFrom(ORG_USERTABLE).where(and(ORG_USERTABLE.ORG_USER_ID.in(t), ORG_USERTABLE.ORG_USER_DELETED.eq(OrgUser.DELETE_NO)));
             }
 
         };
@@ -172,26 +171,27 @@ public class OrgUserDaoImpl extends TinyDslDaoSupport implements OrgUserDao {
     }
 
     public List<OrgUser> getTeamUserByProjectId(Integer projectId) {
-        Select select = selectFrom(ORG_USERTABLE).where(ORG_USERTABLE.ORG_USER_ID.inExpression(
-                subSelect(
-                        select(PROJECT_TEAMTABLE.TEAM_USER_ID).from(PROJECT_TEAMTABLE)
-                                .where(PROJECT_TEAMTABLE.PROJECT_ID.eq(projectId))
-                )
-        ));
+        Select select = selectFrom(ORG_USERTABLE).where(
+                and(ORG_USERTABLE.ORG_USER_ID.inExpression(
+                        subSelect(
+                                select(PROJECT_TEAMTABLE.TEAM_USER_ID).from(PROJECT_TEAMTABLE)
+                                        .where(PROJECT_TEAMTABLE.PROJECT_ID.eq(projectId))
+                        )
+                ), ORG_USERTABLE.ORG_USER_DELETED.eq(OrgUser.DELETE_NO)));
         return getDslSession().fetchList(select, OrgUser.class);
     }
 
     public List<OrgUser> userInCondition(String condition, String... ids) {
         Condition con = null;
-        if (ids!=null) {
-            String[] sId = ids.length==0?new String[]{"0"}:ids;
+        if (ids != null) {
+            String[] sId = ids.length == 0 ? new String[]{"0"} : ids;
             con = ORG_USERTABLE.ORG_USER_ID.in(sId);
         }
         Select select = MysqlSelect.select(ORG_USERTABLE.ORG_USER_ID,
                 FragmentSql.fragmentSelect("CONCAT (org_dept_name,CASE WHEN org_dept_name IS NOT NULL THEN '-' ELSE ''END,org_user_real_name,'-',org_user_account) as orgUserRealName")).
                 from(ORG_USERTABLE).join(
                 Join.leftJoin(ORG_DEPTTABLE, ORG_DEPTTABLE.ORG_DEPT_ID.eq(ORG_USERTABLE.ORG_DEPT_ID))
-        ).where(and(ORG_USERTABLE.ORG_USER_DELETED.eq(0), con,
+        ).where(and(ORG_USERTABLE.ORG_USER_DELETED.eq(OrgUser.DELETE_NO), con,
                 or(ORG_USERTABLE.ORG_USER_REAL_NAME.like(condition),
                         ORG_USERTABLE.ORG_USER_ACCOUNT.like(condition),
                         ORG_DEPTTABLE.ORG_DEPT_NAME.like(condition)))).limit(0, 8);
@@ -203,7 +203,7 @@ public class OrgUserDaoImpl extends TinyDslDaoSupport implements OrgUserDao {
         Select select = MysqlSelect.selectFrom(ORG_USERTABLE).where(
                 and(
                         ORG_USERTABLE.ORG_DEPT_ID.eq(deptId),
-                        ORG_USERTABLE.ORG_USER_DELETED.eq(0)));
+                        ORG_USERTABLE.ORG_USER_DELETED.eq(OrgUser.DELETE_NO)));
         return getDslSession().fetchPage(select, start, limit, false, OrgUser.class);
     }
 

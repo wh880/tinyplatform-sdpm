@@ -1,7 +1,6 @@
 package org.tinygroup.sdpm.product.service;
 
 import org.tinygroup.aopcache.annotation.CacheGet;
-import org.tinygroup.aopcache.annotation.CachePut;
 import org.tinygroup.aopcache.annotation.CacheRemove;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
@@ -31,7 +30,7 @@ public interface ProductService {
      * @param product
      * @return
      */
-    @CachePut(keys = "${product.productId}", parameterNames = "product", group = CACHE_PRODUCT_ID, removeGroups = {CACHE_USER_PRODUCTS_MAP, CACHE_USER_PRODUCTS_LIST, CACHE_PRODUCT_ID, CACHE_USER_PRODUCTS_LIST_WITH_COUNT, CACHE_USER_PRODUCTS_LIST_WITH_LINE_COUNT, CACHE_PRODUCT_NAME_BY_LINE_ID})
+    @CacheRemove(removeKeys = "${product.productId}",  group = CACHE_PRODUCT_ID, removeGroups = {CACHE_USER_PRODUCTS_MAP, CACHE_USER_PRODUCTS_LIST, CACHE_PRODUCT_ID, CACHE_USER_PRODUCTS_LIST_WITH_COUNT, CACHE_USER_PRODUCTS_LIST_WITH_LINE_COUNT, CACHE_PRODUCT_NAME_BY_LINE_ID})
     int updateProduct(Product product);
 
     /**

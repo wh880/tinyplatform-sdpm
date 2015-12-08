@@ -1,13 +1,6 @@
 #!set(activeTitle="任务编辑",activeMenuId=currentPageId)
-#import("/org/tinygroup/button/components/button_smart.component")
-#import("/org/tinygroup/button/components/button_common.component")
-#import("/org/tinygroup/button/components/button.component")
-#import("/org/tinygroup/table/components/table.component")
-#import("/org/tinygroup/icon/components/icon.component")
-
 #set(name="task")
 #@layout(project)
-
 #end
 
 #@tinyForm(
@@ -18,6 +11,12 @@
 <div class="infoPage-left">
     <div class="infoContent">
         <p class="titleName">${task?.taskName}>编辑</p>
+        #@elementItem()
+            <div class="col-12">
+                #tinyInput("text" "taskName" task?.taskName {"placeholder":"任务名称","datatype":"*","nullmsg":"任务名称不能为空！",
+                    "class":"input-text"})
+            </div>
+        #end
         #@elementItem()
             <div class="col-12">
                 <div class="col-2 text-r"><label>任务描述：</label></div>

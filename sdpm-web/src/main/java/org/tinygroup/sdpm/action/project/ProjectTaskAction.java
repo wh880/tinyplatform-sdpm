@@ -628,7 +628,7 @@ public class ProjectTaskAction extends BaseController {
             } else {
                 comp = t.getTaskConsumed() / (t.getTaskConsumed() + t.getTaskLeft());
             }
-            map.put("pComp", comp * 100);
+            map.put("pComp", String.format("%.2f",comp * 100));
             map.put("pGroup", "0");
             map.put("pParent", "0");
             map.put("pOpen", "1");

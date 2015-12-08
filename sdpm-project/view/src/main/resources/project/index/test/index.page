@@ -19,16 +19,14 @@
 #@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
     #@div(divBaseClass="tinyheaderTools form-inline")
     <div class="f col-3">
-        <input type="button" value="全选" class="btn btn-default btn-primary col-2"
+        <input type="button" value="全选" class="btn btn-default btn-primary"
                onclick="selectAllNullorReserve('idCheck','全选');"/>
 
         <div class="col-0">&nbsp&nbsp</div>
-        <input type="button" value="反选" class="btn btn-default btn-primary col-2"
+        <input type="button" value="反选" class="btn btn-default btn-primary"
                onclick="selectAllNullorReserve('idCheck','反选');"/>
-
         <div class="col-0">&nbsp&nbsp</div>
-
-        <div class="col-2">
+        <div style="display:inline-block">
             #@mulOperation("batchDelete" TINY_CONTEXT_PATH+adminPath+"/quality/version/ajax/batchDelete")
                 <a href="javascript:;" class="btn radius btn-danger "><i class="icon-trash"></i>批量删除</a>#end
         </div>

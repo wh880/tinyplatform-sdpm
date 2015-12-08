@@ -53,7 +53,7 @@
                             #@colLabel("col-3")角色：#end
                             #@formControlDiv("col-5")
                                 #@Tselect2F()
-                                    #Tselect2Ajax("roleIds" orgRoleIdList TINY_CONTEXT_PATH+adminPath+"/org/privilege/ajax/roleInCondition"
+                                    #Tselect2Ajax("roleIds" roleIds TINY_CONTEXT_PATH+adminPath+"/org/privilege/ajax/roleInCondition"
                                     {"id":"roleIds","dataId":"orgRoleId","dataText":"orgRoleName",
                                         "placeholder":"查询角色","multiple":"multiple"})
                                 ##填写任意内容，侦听需重新填加 A侦听已内置
@@ -98,7 +98,7 @@
                             #@colLabel("col-3")<span class="c-red">*</span>用户名：#end
                             #@formControlDiv("col-6")
                                 #tinyInput(
-                                    "text" "orgUserAccount" user?.orgUserAccount {"datatype":"*","nullmsg":"请输入用户名！",
+                                    "text" "orgUserAccount" user?.orgUserAccount {"datatype":"/^([a-z]|[A-Z]|[0-9]){1,20}$/","nullmsg":"请输入用户名！",
                                     "id":"请求标题","class":
                                     "input-text","ajaxurl":TINY_CONTEXT_PATH+adminPath+
                                     "/org/user/userNameCheck?orgUserId="+user?.orgUserId})
@@ -109,8 +109,7 @@
                             #@colLabel("col-3")<span class="c-red">*</span>邮箱：#end
                             #@formControlDiv("col-6")
                                 #tinyInput(
-                                    "text" "orgUserEmail" user?.orgUserEmail {"placeholder":"@","datatype":"e","id":
-                                    "name",
+                                    "text" "orgUserEmail" user?.orgUserEmail {"placeholder":"@","datatype":"e",
                                     "nullmsg":"请输入邮箱！",
                                     "class":
                                     "input-text"})
@@ -148,11 +147,7 @@
                         #@elementItem()
                             #@colLabel("col-3")源代码账号：#end
                             #@formControlDiv("col-6")
-                                #tinyInput(
-                                    "text" "orgUserSubmitter" user?.orgUserSubmitter{"placeholder":""
-                                ,"id":"name",
-                                    "class":
-                                    "input-text"})
+                                #tinyInput("text" "orgUserSubmitter" user?.orgUserSubmitter{"class":"input-text"})
                             #end
                             #@validateDiv("col-3")#end
                         #end
@@ -163,9 +158,7 @@
                             #@colLabel("col-3")Skype：#end
                             #@formControlDiv("col-6")
                                 #tinyInput(
-                                    "text" "orgUserSkype" user?.orgUserSkype{"placeholder":"",
-                                    "id":"name","class":
-                                    "input-text"})
+                                    "text" "orgUserSkype" user?.orgUserSkype{"class":"input-text"})
                             #end
                             #@validateDiv("col-3")#end
                         #end
@@ -173,10 +166,7 @@
                             #@colLabel("col-3")QQ：#end
                             #@formControlDiv("col-6")
                                 #tinyInput(
-                                    "text" "orgUserQQ" user?.orgUserQQ {"placeholder":"",
-                                    "id":
-                                    "name","class":
-                                    "input-text"})
+                                    "text" "orgUserQQ" user?.orgUserQQ {"class": "input-text"})
                             #end
                             #@validateDiv("col-3")#end
                         #end

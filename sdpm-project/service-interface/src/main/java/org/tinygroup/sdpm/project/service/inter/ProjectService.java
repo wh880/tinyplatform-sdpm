@@ -2,7 +2,6 @@ package org.tinygroup.sdpm.project.service.inter;
 
 
 import org.tinygroup.aopcache.annotation.CacheGet;
-import org.tinygroup.aopcache.annotation.CachePut;
 import org.tinygroup.aopcache.annotation.CacheRemove;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.tinysqldsl.Pager;
@@ -110,7 +109,7 @@ public interface ProjectService {
      * @param project
      * @return
      */
-    @CachePut(keys = "${project.projectId}", group = CACHE_PROJECT_ID, removeGroups = CACHE_USER_PROJECT_LIST)
+    @CacheRemove(removeKeys = "${project.projectId}", group = CACHE_PROJECT_ID, removeGroups = CACHE_USER_PROJECT_LIST)
     Integer updateProject(Project project);
 
     List<Project> getProjectByStoryId(Integer storyId);

@@ -225,8 +225,6 @@
     });
 </script>
 <script>
-
-
     Date.prototype.format =function(format)
     {
         var o = {
@@ -264,9 +262,6 @@
                 if($("input[name='endTime']:checked")[0]){
                     $("input[name='endTime']:checked").trigger('click');
                 }
-
-
-
             }
         });
 
@@ -279,11 +274,8 @@
             var newvalueend = $(this).val();
             var dateend =new Date(Date.parse(newvalueend.replace(/-/g, "/")));
             var datestart = new Date(Date.parse($("input[name='taskEstStared']").val().replace(/-/g, "/")));
-
-
             if(newvalueend!=""&&newvalueend!=oldvalueend){
-
-                if(dateend<=datestart){
+                if(dateend<datestart){
                     $("input[name='taskDeadLine']").val(oldvalueend);
                     alert("截止日期必须大于开始日期");
 
