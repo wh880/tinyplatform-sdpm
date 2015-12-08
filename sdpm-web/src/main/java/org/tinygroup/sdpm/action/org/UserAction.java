@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.commons.tools.StringUtil;
+import org.tinygroup.sdpm.common.util.Collections3;
 import org.tinygroup.sdpm.common.util.DateUtils;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.org.dao.pojo.OrgDept;
@@ -113,6 +114,9 @@ public class UserAction extends BaseController {
         if (id != null) {
             OrgUser user = userService.findUser(id);
             OrgDept dept = deptService.findDept(user.getOrgDeptId());
+            List<OrgRole> roleList = roleService.findRoleByUserId(id);
+            List orgRoleIdList = Collections3.extractToList(roleList, "orgRoleId");
+            model.addAttribute("orgRoleIdList", orgRoleIdList);
             model.addAttribute("user", user);
             model.addAttribute("dept", dept);
         }

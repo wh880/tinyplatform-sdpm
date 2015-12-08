@@ -50,6 +50,31 @@
                             #@validateDiv("col-3")#end
                         #end
                         #@elementItem()
+                            #@colLabel("col-3")角色：#end
+                            #@formControlDiv("col-5")
+                                #@Tselect2F()
+                                    #@Tselect2Body("roleIds" orgRoleIdList {"class":"input-text select2","multiple":"multiple"}) ##加上为多选项
+##                                       待王玲珑修改 #foreach(r : roleList)
+##                                            <option value="${r.orgRoleId}">${r.orgRoleName}</option>
+##                                        #end
+                                    #end
+                                ##填写任意内容，侦听需重新填加 A侦听已内置
+                                    #@Tselect2Fix()
+                                        #set(m=menuManager.getMenu("organizationAddGroup"))
+                                        #if(m)
+                                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
+                                        #end
+                                        #set(m=menuManager.getMenu("organizationPrivilege"))
+                                        #if(m)
+                                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
+                                        #end
+                                    #end
+                                #end
+                            #end
+                            #@validateDiv("col-4")#end
+                        #end
+
+                        #@elementItem()
                             #@colLabel("col-3")加入日期：#end
                             #@formControlDiv("col-6")
                                 #@tinyDateInput(
