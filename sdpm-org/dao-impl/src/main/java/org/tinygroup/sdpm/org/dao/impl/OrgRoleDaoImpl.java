@@ -244,7 +244,7 @@ public class OrgRoleDaoImpl extends TinyDslDaoSupport implements OrgRoleDao {
         Select select = MysqlSelect.select(ORG_ROLETABLE.ORG_ROLE_ID,
                 FragmentSql.fragmentSelect("CONCAT (CASE org_role_type WHEN 0 THEN '系统角色' WHEN 1 THEN '产品角色' ELSE '项目角色' END,'-',org_role_name) AS orgRoleName")).from(
                 ORG_ROLETABLE
-        ).where(and(ORG_ROLETABLE.ORG_ROLE_NAME.eq(condition),ORG_ROLETABLE.DELETED.eq(0),con));
+        ).where(and(ORG_ROLETABLE.ORG_ROLE_NAME.eq(condition),ORG_ROLETABLE.DELETED.eq(0),con)).limit(0,8);
         return getDslSession().fetchList(select,OrgRole.class);
     }
 }

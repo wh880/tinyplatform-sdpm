@@ -93,7 +93,7 @@
                         <td>${s.left}</td>
                         <td>${s.taskNum}</td>
                         <td>${s.estimate}</td>
-                        <td>${(s.estimate/workHours)*100+"%"}</td>
+                        <td>${(workHours)==0?0:format("%.2f",(s.estimate/workHours)*100)}%</td>
                      #end
                    #end
                 #end

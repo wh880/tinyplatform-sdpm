@@ -22,7 +22,7 @@
             #@colLabel()<span class="c-red">*</span>产品线编号：#end
             #@formControlDiv("col-4")
                 #tinyInput(
-                    "text" "productLineCode" productLine?.productLineCode {"placeholder":"产品编号","nullmsg":"请输入产品编号！","datatype":"n","id":
+                    "text" "productLineCode" productLine?.productLineCode {"placeholder":"产品编号","nullmsg":"请输入产品编号！","datatype":"*","id":
                     "product-code","class":"input-text","ajaxurl":TINY_CONTEXT_PATH+adminPath+
                     "/productLine/judgeProductLineCode?productLineId="+productLine?.productLineId})
             #end
