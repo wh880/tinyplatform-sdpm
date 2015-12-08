@@ -1,6 +1,7 @@
 package org.tinygroup.sdpm.product.dao.pojo;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 
 public class StoryCount implements Serializable {
 
@@ -13,7 +14,8 @@ public class StoryCount implements Serializable {
     private String percentToString;
 
     public String getPercentToString() {
-        String s = String.valueOf(percent * 100);
+        DecimalFormat df   =new DecimalFormat("#.00");
+        String s = df.format(percent*100);
         return s + "%";
     }
 

@@ -150,7 +150,7 @@
 	            			 	 #foreach(road:roadMap?.value)
 									#@centerAlignTr()        
 		            			 	 	#if(roadMap?.key=="B_moduleCount")
-											#@td()${road?.name?:"无模块"}#end
+											#@td()${road?.name==null||road?.name==""?:"无模块"}#end
 										#elseif(roadMap?.key=="D_storySource")
 											#@td()${getDict("storySource",road?.name)}#end
 										#elseif(roadMap?.key=="C_planCount")

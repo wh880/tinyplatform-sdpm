@@ -1,6 +1,7 @@
 package org.tinygroup.sdpm.quality.dao.pojo;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 
 /**
  * Created by wangll13383 on 2015/10/30.
@@ -15,8 +16,9 @@ public class BugCount implements Serializable {
     private String percentToString;
 
     public String getPercentToString() {
-        String s = String.valueOf(percent * 100);
-        return s.substring(0, s.indexOf("\\.") + 3) + "%";
+        DecimalFormat df   =new DecimalFormat("#.00");
+        String s = df.format(percent * 100);
+        return s+ "%";
     }
 
     public void setPercentToString(String percentToString) {

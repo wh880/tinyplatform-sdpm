@@ -146,7 +146,7 @@
     #@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
 
         #@toggleLeft({"class":"aclass"})
-            #@settoggleLeftTitle()产品需求#end
+            #@settoggleLeftTitle()产品模块#end
             #@settoggleLeftBody("treeLeftbox")
                 #@zTreeList(call("link",adminPath+"/system/module/tree?moduleType=story&moduleRoot="+cookieProductId))
                     #setzTreeValMap({"id":"moduleId","name":"moduleName","pid":"moduleParent"}) ##key值为固定
