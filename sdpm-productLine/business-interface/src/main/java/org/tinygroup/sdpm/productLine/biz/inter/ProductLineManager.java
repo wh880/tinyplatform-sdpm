@@ -63,4 +63,6 @@ public interface ProductLineManager {
     List<ProductLine> getUserProductLine(String userId);
 
     List<ProductLine> lineInCondition(String condition, Integer... ids);
+
+    Pager<ProductLine> findProductLineInPage(Integer start, Integer limit, ProductLine productLine, String order, String orderType);
 }

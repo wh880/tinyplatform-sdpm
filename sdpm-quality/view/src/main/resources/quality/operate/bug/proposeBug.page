@@ -177,7 +177,7 @@
         #@elementItem()
             #@colLabel()重现步骤：#end
             #@formControlDiv("col-8")
-                #@Teditor("bugSteps" "bugSteps" {"initialFrameHeight":"150"})<p>[步骤]</p><p>[结果]</p><p>[期望]</p>${bugStep?:bug?.bugSteps}#end
+                #@Teditor("bugSteps" "bugSteps" {"initialFrameHeight":"250"})${(bugStep?:bug?.bugSteps)?:"<p><b>[步骤]</b></p><p><b>[结果]</b></p><p><b>[期望]<b></p>"}#end
             #end
             #@validateDiv("col-2")#end
         #end
@@ -233,23 +233,24 @@
                 #@div(divClass="col-5")
                     #@tinySelect("bugType" bug?.bugType {"class":"select2"})
                         #foreach(type : getDict("bugType"))
-                        #@tinyOptionItem(type.value)${type.text}#end
+                            #@tinyOptionItem(type.value)${type.text}#end
+                        #end
                     #end
                 #end
-            #end
-            #@div(divClass="col-0")&nbsp&nbsp#end
-            #@div(divClass="col-3")
-                #@Tselect2F()
-                    #@Tselect2Body("bugSeverity" bug?.bugSeverity {"class":"input-text"}) ##,"multiple":"multiple"加上为多选项
-                        #foreach(se : getDict("bugSeverity"))
-                        #@tinyOptionItem(se.value)${se.text}#end
+                #@div(divClass="col-0")&nbsp&nbsp#end
+                #@div(divClass="col-3")
+                    #@Tselect2F()
+                        #@Tselect2Body("bugSeverity" bug?.bugSeverity {"class":"input-text","datatype":"*","nullmsg":"严重程度不能为空！"}) ##,"multiple":"multiple"加上为多选项
+                            #foreach(se : getDict("bugSeverity"))
+                                #@tinyOptionItem(se.value)${se.text}#end
+                            #end
+                        #end
+                ###@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
                     #end
                 #end
-            ###@Tselect2Fix()<a href="http://www.baidu.com" class="r ">增加</a><a href="#">全部</a>#end
-            #end
         #end
+            #@validateDiv("col-2")#end
     #end
-#end
 #@elementItem()
     #@colLabel()系统/浏览器：#end
     #@formControlDiv("col-8")

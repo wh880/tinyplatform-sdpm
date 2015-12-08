@@ -95,6 +95,19 @@
             #@validateDiv("col-2")#end
         #end
         #@elementItem()
+            #@colLabel()<span class="c-red">*</span>产品线状态：#end
+            #@formControlDiv("col-4")
+                #@Tselect2F()
+                    #@Tselect2Body("productLineStatus" productLine?.productLineStatus {"class":"input-text","datatype":"*","nullmsg":"状态不能为空！"}) ##,"multiple":"multiple"加上为多选项
+                        #foreach(ps : getDict("productLineStatus"))
+                            #@tinyOptionItem(ps.value)${ps.text}#end
+                        #end
+                    #end
+                #end
+            #end
+            #@validateDiv("col-2")#end
+        #end
+        #@elementItem()
             #@colLabel()产品线描述：#end
             #@formControlDiv("col-8")
                 #@Teditor(

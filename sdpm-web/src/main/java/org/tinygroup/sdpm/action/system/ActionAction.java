@@ -50,7 +50,7 @@ public class ActionAction extends BaseController {
 
     @RequestMapping("ajax/history")
     public String getHistory(SystemAction action, Model model) {
-        List<SystemAction> actions = actionService.findAction(action, "actionId", true);
+        List<SystemAction> actions = actionService.findAction(action, "actionId", false);
         Map<SystemAction, List<SystemHistory>> map = new LinkedHashMap<SystemAction, List<SystemHistory>>();
         for (SystemAction action1 : actions) {
             SystemHistory history = new SystemHistory();

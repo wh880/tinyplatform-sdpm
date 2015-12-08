@@ -689,13 +689,13 @@ public class BugAction extends BaseController {
         if (bug.getStoryId() != null) {
             bug.setStoryVersion(storyService.findStory(bug.getStoryId()).getStoryVersion());
         }
-        QualityBug qbug = bugService.addBug(bug);
+        QualityBug qBug = bugService.addBug(bug);
 
-        processProfile(uploadProfile, bug.getBugId(), ProfileType.BUG);
+        processProfile(uploadProfile, qBug.getBugId(), ProfileType.BUG);
 
         LogUtil.logWithComment(LogUtil.LogOperateObject.BUG
                 , LogUtil.LogAction.OPENED
-                , String.valueOf(qbug.getBugId())
+                , String.valueOf(qBug.getBugId())
                 , userUtils.getUserId()
                 , String.valueOf(bug.getProductId())
                 , String.valueOf(bug.getProjectId())
@@ -835,9 +835,9 @@ public class BugAction extends BaseController {
         StringBuffer bugStep = new StringBuffer("");
         for (Integer id : ids) {
             QualityCaseStep step = caseStepService.findCaseStepById(id);
-            bugStep.append("[步骤]<br>");
+            bugStep.append("<b>[步骤]</b><br>");
             bugStep.append(step.getCaseStepDesc() + "<br>");
-            bugStep.append("[期望]<br>");
+            bugStep.append("<b>[期望]</b><br>");
             bugStep.append(step.getCaseStepExpect() + "<br>");
         }
         List<Project> projects = projectService.findProjectList(null, null, null);

@@ -5,7 +5,7 @@
             <dictItem key="2" value="已解决" sort="2"/>
             <dictItem key="3" value="已关闭" sort="3"/>
         </dictNodeEntry>
-        <dictNodeEntry name="bugType" title="类型/严重程度">
+        <dictNodeEntry name="bugType" title="bug类型">
           <dictItem key="1" value="代码错误" sort="1"/>
           <dictItem key="2" value="界面优化" sort="2"/>
           <dictItem key="3" value="设计缺陷" sort="3"/>
@@ -16,8 +16,12 @@
           <dictItem key="8" value="标准规范" sort="8"/>
           <dictItem key="9" value="测试脚本" sort="9"/>
           <dictItem key="10" value="代码改进" sort="10"/>
-          <dictItem key="11" value="其他" sort="11"/>
-          <dictItem key="12" value="同上" sort="12"/>
+          <dictItem key="10" value="功能错误" sort="11"/>
+          <dictItem key="10" value="需求变动" sort="12"/>
+          <dictItem key="10" value="新增需求" sort="13"/>
+          <dictItem key="10" value="建议" sort="14"/>
+          <dictItem key="11" value="其他" sort="15"/>
+          <dictItem key="12" value="同上" sort="16"/>
           </dictNodeEntry>
 
         <dictNodeEntry name="bugResolution" title="解决方案">
@@ -31,9 +35,11 @@
           </dictNodeEntry>
           
           <dictNodeEntry name="bugSeverity" title="严重程度">
-          <dictItem key="1" value="1" sort="1"/>
-          <dictItem key="2" value="2" sort="2"/>
-          <dictItem key="3" value="3" sort="3"/>
+          <dictItem key="1" value="致命" sort="1"/>
+          <dictItem key="2" value="严重" sort="2"/>
+          <dictItem key="3" value="较重" sort="3"/>
+          <dictItem key="3" value="一般" sort="4"/>
+          <dictItem key="3" value="建议" sort="5"/>
           </dictNodeEntry>
      
          <dictNodeEntry name="bugOS" title="系统/浏览器">
@@ -75,10 +81,10 @@
           </dictNodeEntry>
 
         <dictNodeEntry name="bugPriority" title="优先级">
-            <dictItem key="1" value="1" sort="1"/>
-            <dictItem key="2" value="2" sort="2"/>
-            <dictItem key="3" value="3" sort="3"/>
-            <dictItem key="4" value="4" sort="4"/>
+            <dictItem key="1" value="重要且紧急" sort="1"/>
+            <dictItem key="2" value="重要不紧急" sort="2"/>
+            <dictItem key="3" value="紧急不重要" sort="3"/>
+            <dictItem key="4" value="不紧急不重要" sort="4"/>
         </dictNodeEntry>	
     </dictNodeEntry>
     <dictNodeEntry name="case" title="测试用例">
@@ -88,11 +94,19 @@
             <dictItem key="3" value="研究中" sort="3"/>
         </dictNodeEntry>
         <dictNodeEntry name="caseResult" title="用例结果">
-            <dictItem key="1" value="通过" sort="1"/>
-            <dictItem key="2" value="失败" sort="2"/>
-            <dictItem key="3" value="阻塞" sort="3"/>
+            <dictItem key="0" value="N/A" sort="1"/>
+            <dictItem key="1" value="通过" sort="2"/>
+            <dictItem key="2" value="失败" sort="3"/>
+            <dictItem key="3" value="阻塞" sort="4"/>
         </dictNodeEntry>
         <dictNodeEntry name="caseStepResult" title="用例步骤结果">
+            <dictItem key="0" value="N/A" sort="1"/>
+            <dictItem key="1" value="通过" sort="2"/>
+            <dictItem key="2" value="失败" sort="3"/>
+            <dictItem key="3" value="阻塞" sort="4"/>
+        </dictNodeEntry>
+
+        <dictNodeEntry name="caseLastRunResult" title="用例步骤结果">
             <dictItem key="0" value="N/A" sort="1"/>
             <dictItem key="1" value="通过" sort="2"/>
             <dictItem key="2" value="失败" sort="3"/>

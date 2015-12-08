@@ -369,7 +369,7 @@ public class ProductLineDaoImpl extends TinyDslDaoSupport implements ProductLine
         return getDslTemplate().update(id, new UpdateGenerateCallback<Integer>() {
             public Update generate(Integer id) {
                 Update update = update(PRODUCT_LINETABLE).set(
-                        PRODUCT_LINETABLE.DELETED.value(FieldUtil.DELETE_YES)).where(
+                        PRODUCT_LINETABLE.DELETED.value(FieldUtil.DELETE_YES),PRODUCT_LINETABLE.PRODUCT_LINE_STATUS.value(ProductLine.STATUS_DELETED)).where(
                         PRODUCT_LINETABLE.PRODUCT_LINE_ID.eq(id));
                 return update;
             }

@@ -127,8 +127,16 @@ public class ProductAction extends BaseController {
     }
 
     @RequestMapping("/update")
-    public String update(Product product, HttpServletRequest request, SystemAction systemAction) throws IOException {
+    public String update(Product product, SystemAction systemAction){
         Product product1 = productService.findProductById(product.getProductId());
+        if(Product.STATUS_DELETED.equals(product.getProductStatus())){
+            product.setDeleted(Product.DELETE_YES);
+        }else{
+            if(Product.DELETE_YES.equals(product1.getDeleted())&&
+                    !Product.STATUS_DELETED.equals(product.getProductStatus())){
+                product.setDeleted(Product.DELETE_NO);
+            }
+        }
         productService.updateProduct(product);
         LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCT,
                 LogUtil.LogAction.EDITED,
@@ -164,16 +172,11 @@ public class ProductAction extends BaseController {
 
     @ResponseBody
     @RequestMapping("/delete")
-    public Map delete(Integer productId, HttpServletRequest request, SystemAction systemAction) {
+    public Map delete(Integer productId, SystemAction systemAction) {
         Product product1 = productService.findProductById(productId);
         productService.deleteProduct(productId);
         Product product = productService.findProductById(productId);
-/*
-        productUtils.removeProductList();
-        productUtils.removeProductList(String.valueOf(product.getProductLineId()));
-        productUtils.removeAllProductListByUser();
-        productUtils.removeProductListByProductLineUser(String.valueOf(product1.getProductLineId()));
-*/
+
         LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCT,
                 LogUtil.LogAction.DELETED,
                 String.valueOf(productId),

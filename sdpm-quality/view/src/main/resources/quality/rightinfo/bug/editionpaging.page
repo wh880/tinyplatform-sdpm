@@ -125,6 +125,21 @@
         #@validateDiv("col-2")#end
         #end
 </li>
+    <li>
+        #@elementItem()
+            #@colLabel()<span class="c-red">*</span>严重级别#end
+            #@formControlDiv("col-8")
+                #@Tselect2F()
+                    #@Tselect2Body("bugSeverity" bug?.bugSeverity {"class":"input-text","datatype":"*","nullmsg":"严重程度不能为空！"}) ##,"multiple":"multiple"加上为多选项
+                        #foreach(se : getDict("bugSeverity"))
+                            #@tinyOptionItem(se.value)${se.text}#end
+                        #end
+                    #end
+                #end
+            #end
+            #@validateDiv("col-2")#end
+        #end
+    </li>
 <li>
 #@elementItem()
     #@colLabel()Bug状态：#end

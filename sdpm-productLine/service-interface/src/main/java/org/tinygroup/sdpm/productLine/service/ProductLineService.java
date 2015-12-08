@@ -90,4 +90,15 @@ public interface ProductLineService {
      */
     List<ProductLine> lineInCondition(String condition, Integer... ids);
 
+    /**
+     * 分页查询productLine
+     * @param start
+     * @param limit
+     * @param productLine
+     * @param order
+     * @param orderType
+     * @return
+     */
+    Pager<ProductLine> findProductLineInPage(Integer start, Integer limit, ProductLine productLine, String order, String orderType);
+
 }

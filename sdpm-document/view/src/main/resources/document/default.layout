@@ -13,9 +13,9 @@
                     sele.empty();
                     var em
                     if("build"==(isBuild)){
-                        em = "<option value='0' selected  >trunk</option>";
+                        em = "<option value='0'   >trunk</option>";
                     }else if("module"==isBuild||"plan"==isBuild){
-                        em = "<option value='0' selected  >/</option>";
+                        em = "<option value='0'   >/</option>";
                     }
                     sele.append(em);
                     for (var i = 0, l = data.length; i < l; i++) {

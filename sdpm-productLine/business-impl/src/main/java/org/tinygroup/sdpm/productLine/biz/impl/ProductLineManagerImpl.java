@@ -87,6 +87,13 @@ public class ProductLineManagerImpl implements ProductLineManager {
         return productLineDao.lineInCondition(condition, ids);
     }
 
+    public Pager<ProductLine> findProductLineInPage(Integer start, Integer limit, ProductLine productLine, String order, String orderType) {
+        if(StringUtil.isBlank(order)){
+            return productLineDao.queryPager(start,limit,productLine);
+        }
+        return productLineDao.queryPager(start,limit,productLine,new OrderBy(NameUtil.resolveNameDesc(order),"asc".equals(orderType)));
+    }
+
     public int[] updateBatch(List<ProductLine> productLine) {
 
         return productLineDao.batchUpdate(productLine);

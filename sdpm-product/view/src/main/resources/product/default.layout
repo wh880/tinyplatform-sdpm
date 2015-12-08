@@ -61,15 +61,12 @@
 
                     }
                     if ("multiple" != sele.attr("multiple")) {
-                        if (value != null) {
-                            sele.val(value).trigger("change");
-                        } else {
+                        if (value||value===0) {
+                            sele.select2("val",value).trigger("change");
+                        }else {
                             if (data.length > 0) {
-                                sele.val(data[0][opKey]).trigger("change");
-                            } else {
-                                sele.val(0).trigger("change");
+                                sele.select2("val",data[0][opKey]).trigger("change");
                             }
-
                         }
                     }else{
                         if (value != null) {

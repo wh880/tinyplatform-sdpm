@@ -53,7 +53,7 @@
             #end
         #end
         <center>
-	        <button type="button" id="back" class="btn">上一个</button>
+##	        <button type="button" id="back" class="btn">上一个</button>
 			#if(stepList?.size()<1)
 			<button type="button" id="pass" class="btn btn-success">通过</button>
 			<button type="button" id="fault" class="btn btn-danger">失败</button>
@@ -61,7 +61,7 @@
 			#else
 			<button type="submit" id="" class="btn btn-success">执行</button>
 			#end
-			<button type="button" id="back" class="btn">下一个</button>
+##			<button type="button" id="back" class="btn">下一个</button>
 		</center>
     #end
     #@div(divClass="infoContent")

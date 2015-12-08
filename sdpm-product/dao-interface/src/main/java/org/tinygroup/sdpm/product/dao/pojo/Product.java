@@ -25,8 +25,11 @@ public class Product implements Serializable {
     public static final Integer ACl_All = 0;
     public static final Integer ACl_TEAM = 1;
     public static final Integer ACl_TEAM_AND_ROLE = 2;
-    public static Integer DELETE_YES = 1;
-    public static Integer DELETE_NO = 0;
+    public static final Integer DELETE_YES = 1;
+    public static final Integer DELETE_NO = 0;
+    public static final String STATUS_NEW = "1";
+    public static final String STATUS_ACTIVE = "3";
+    public static final String STATUS_DELETED = "9";
     /**
      * 产品ID
      */

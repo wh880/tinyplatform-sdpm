@@ -67,5 +67,15 @@
       </service-parameters>
       <service-result name="lineInConditionResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.productLine.dao.pojo.ProductLine"/>
     </service-method>
+    <service-method local-name="findProductLineInPage" service-id="findProductLineInPage" method-name="findProductLineInPage" cacheable="false" category="org.tinygroup.sdpm.productLine.service">
+      <service-parameters>
+        <service-parameter name="start" type="int" required="false" is-array="false"/>
+        <service-parameter name="limit" type="int" required="false" is-array="false"/>
+        <service-parameter name="productLine" type="org.tinygroup.sdpm.productLine.dao.pojo.ProductLine" required="false" is-array="false"/>
+        <service-parameter name="order" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="orderType" type="java.lang.String" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findProductLineInPageResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager"/>
+    </service-method>
   </service-component>
 </service-components>

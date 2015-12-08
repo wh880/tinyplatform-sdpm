@@ -218,7 +218,7 @@ public class TestVersionAction extends BaseController {
     @ResponseBody
     @RequestMapping("/makeLink")
     public Map makeLink(Integer testversionId, Integer[] ids, Integer[] ves) {
-
+        QualityTestTask testTask = testTaskService.findTestTaskById(testversionId);
         for (int i = 0; i < ids.length; i++) {
             QualityTestRun run = new QualityTestRun();
             run.setCaseId(ids[i]);
@@ -226,6 +226,9 @@ public class TestVersionAction extends BaseController {
             run.setTestRunStatus("1");
             run.setTaskId(testversionId);
             testRunService.addTestRun(run);
+        }
+        if("3".equals(testTask.getTesttaskStatus())){
+            testTask.setTesttaskStatus("1");
         }
         Map<String, String> result = new HashMap<String, String>();
         result.put("status", "y");

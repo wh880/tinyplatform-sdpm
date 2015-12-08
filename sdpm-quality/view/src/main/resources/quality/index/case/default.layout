@@ -40,7 +40,7 @@
 
 #set(name="qualityCases")
 
-  #@layout(index)
+  #@layout(quality)
       #@tabBodyCol("ptop-5")
       ##operationbar start1
           #@div(divClass="operationbar")
@@ -49,7 +49,7 @@
                   #set(url=eval(m.href))
                   #if(m.id=="tcasesee")
                       #@buttonGroup()
-                          #@buttonDropdown("more" buttonClass="btnDropDown")分组查看
+                          #@buttonDropdown("more" buttonClass="btnDropDown")<span>分组查看</span>
                               #@spanCaret()#end
                           #end
                           #@ulDropdownMenu("downMenuSty")
@@ -63,15 +63,18 @@
                                                   url: "${TINY_CONTEXT_PATH+adminPath}/quality/testCase/group?productId=${qualityProductId}",
                                                   dataType:"html",
                                                   success: function(data){
+                                                      $(".operationbar a").removeClass("active_btn");
                                                       $("#caseGroup").html(data);
                                                   },
                                                   error: function(res){
                                                       alert("失败");
                                                   }
                                               });
+                                              $(this).parent().children(".active_btn").removeClass("active_btn");
+                                              $(this).closest(".btn-group").find("button:first span:first").addClass("active_btn").html($(this).html());
                                           });
-                                          $(".operationbar a").removeClass("active_btn");
-                                          $(this).closest(".btn-group").find("button:first span:first").addClass("active_btn").html($(this).html());
+//                                          $(".operationbar a").removeClass("active_btn");
+
                                       })
 
                                   </script>

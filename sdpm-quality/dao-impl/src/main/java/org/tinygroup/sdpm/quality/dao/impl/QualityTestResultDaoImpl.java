@@ -21,6 +21,7 @@ import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.jdbctemplatedslsession.callback.*;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
+import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.quality.dao.QualityTestResultDao;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityTestResult;
 import org.tinygroup.tinysqldsl.*;
@@ -127,7 +128,7 @@ public class QualityTestResultDaoImpl extends TinyDslDaoSupport implements Quali
                                 QUALITY_TEST_RESULTTABLE.CASE_STEPRESULTS.eq(t.getCaseStepresults()),
                                 QUALITY_TEST_RESULTTABLE.TEST_RESULT_LAST_RUNNER.eq(t.getTestResultLastRunner()),
                                 QUALITY_TEST_RESULTTABLE.TEST_RESULT_DATE.eq(t.getTestResultDate())));
-                return addOrderByElements(select, orderArgs);
+                return addOrderByElements(select,new OrderBy(NameUtil.resolveNameDesc("testResultDate"),false));
             }
         });
     }

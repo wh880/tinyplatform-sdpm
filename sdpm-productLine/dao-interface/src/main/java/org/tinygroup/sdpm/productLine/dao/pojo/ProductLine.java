@@ -27,6 +27,9 @@ public class ProductLine implements Serializable {
     public static final Integer ACl_All = 0;
     public static final Integer ACl_TEAM = 0;
     public static final Integer ACl_TEAM_AND_ROLE = 0;
+    public static final String STATUS_ACTIVE = "1";
+    public static final String STATUS_DELETED = "2";
+
     /**
      * 经理名称
      */

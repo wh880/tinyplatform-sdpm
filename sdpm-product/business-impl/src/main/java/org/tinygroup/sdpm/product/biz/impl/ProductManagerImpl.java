@@ -80,6 +80,7 @@ public class ProductManagerImpl implements ProductManager {
         Product product = new Product();
         product.setProductId(productId);
         product.setDeleted(FieldUtil.DELETE_YES);
+        product.setProductStatus(Product.STATUS_DELETED);
         return productDao.edit(product);
     }
 

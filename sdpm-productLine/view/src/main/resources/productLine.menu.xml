@@ -55,5 +55,9 @@
         sort="100"
         isShow="1" scope="productLineView">
         </menu>
+        <menu id="productLine-deleted" parent-id="productLine-view" name="已关闭" href="/productLine/to?status=5"
+          sort="99"
+          isShow="1" scope="productLineView">
+        </menu>
     </menu>
 </menu>

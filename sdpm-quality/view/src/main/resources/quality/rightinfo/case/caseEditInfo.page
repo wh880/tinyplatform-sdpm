@@ -1,5 +1,4 @@
 
-
 #@tinyForm("thisform" "" "" {"class":"test"})
     #@div(divClass="infoContent")
     	<p class="titleName">基本信息</p>
@@ -8,7 +7,7 @@
 	    		#@tr()
 	    			#@th()所属产品#end
 	    			#@td()
-                    <a href="${TINY_CONTEXT_PATH+adminPath}/product/find/overview?productId=${testCase?.productId}">${testCase?.productId?productService.findProductById(testCase?.productId)?.productName:""}#end
+                    <a href="${TINY_CONTEXT_PATH+adminPath}/product/find/overview?productId=${testCase?.productId}">${testCase?.productId?productServiceImpl.findProductById(testCase?.productId)?.productName:""}#end
 	    		#end
 	    		#@tr()
 	    			#@th()所属模块#end
@@ -43,7 +42,7 @@
 	    		#end
 	    		#@tr()
 	    			#@th()执行时间#end
-	    			#@td()${formatDate(testCase?.caseLastRunDate,"yyyy-MM-dd HH:mm:ss")}#end
+	    			#@td()${testCase?.caseLastRunDate?formatDate(testCase?.caseLastRunDate,"yyyy-MM-dd HH:mm:ss"):""}#end
 	    		#end
 	    		#@tr()
 	    			#@th()结果#end
@@ -57,8 +56,8 @@
 	    			#@th()相关用例#end
 	    			#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/testCase/case/viewInfo?id=${testCase?.linkCase}">${testCase?.linkCaseTile}</a>#end
 	    		#end
-	    	#end	
-    	#end   	
+	    	#end
+    	#end
     #end
     #@div(divClass="infoContent")
     	<p class="titleName">相关Bug</p>

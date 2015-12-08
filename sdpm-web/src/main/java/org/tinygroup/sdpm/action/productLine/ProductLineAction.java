@@ -60,10 +60,10 @@ public class ProductLineAction extends BaseController {
     }
 
     @RequestMapping("/save")
-    public String save(ProductLine productLine, SystemAction systemAction, HttpServletRequest request) {
+    public String save(ProductLine productLine, SystemAction systemAction) {
         productLine.setProductLineCreatedBy(userUtils.getUserId());
         productLine.setProductLineCreatedDate(new Date());
-        productLine.setProductLineStatus("0");
+        productLine.setProductLineStatus(ProductLine.STATUS_ACTIVE);
         ProductLine productLine1 = productLineService.addProductLine(productLine);
         LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCTLINE
                 , LogUtil.LogAction.OPENED
@@ -81,6 +81,14 @@ public class ProductLineAction extends BaseController {
     @RequestMapping("/update")
     public String update(ProductLine productLine) {
         ProductLine productLineOld = productLineService.findProductLine(productLine.getProductLineId());
+        if(ProductLine.STATUS_DELETED.equals(productLine.getProductLineStatus())){
+            productLine.setDeleted(1);
+        }else{
+            if(FieldUtil.DELETE_YES==(productLineOld.getDeleted())&&
+            !ProductLine.STATUS_DELETED.equals(productLine.getProductLineStatus())){
+                productLine.setDeleted(0);
+            }
+        }
         productLineService.updateProductLine(productLine);
         LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCTLINE,
                 LogUtil.LogAction.EDITED,
@@ -166,10 +174,16 @@ public class ProductLineAction extends BaseController {
                        @RequestParam(required = false, defaultValue = "productLineId") String order,
                        @RequestParam(required = false, defaultValue = "asc") String ordertype, Integer status, Model model) {
         ConditionCarrier carrier = new ConditionCarrier();
-        mergeStatusCondition(carrier,status);
-
-        Integer[] ids = productLineService.getUserProductLineIds(userUtils.getUserId());
-        Pager<ProductLine> pagerProductLine = productLineService.findProductLinePagerInIds(start, pagesize, carrier, productLine, ids, order, ordertype);
+        Pager<ProductLine> pagerProductLine = null;
+        if(status!=null&&status!=5) {
+            mergeStatusCondition(carrier,status);
+            Integer[] ids = productLineService.getUserProductLineIds(userUtils.getUserId());
+            pagerProductLine = productLineService.findProductLinePagerInIds(start, pagesize, carrier, productLine, ids, order, ordertype);
+        }else{
+            ProductLine productLine1 = new ProductLine();
+            productLine1.setDeleted(1);
+            pagerProductLine = productLineService.findProductLineInPage(start,pagesize,productLine1,order,ordertype);
+        }
 
         model.addAttribute("productLine", pagerProductLine);
         return "/productLine/data/productline/productLinedata.pagelet";
@@ -211,7 +225,7 @@ public class ProductLineAction extends BaseController {
     public String to(HttpServletRequest request, Model model) {
         String query = request.getQueryString();
         if (StringUtil.isBlank(query) || !query.contains("status")) {
-            model.addAttribute("status", 1);
+            return "redirect:"+adminPath+"/productLine/to?status=1";
         }
         return "/productLine/page/list/productline/list.page";
     }

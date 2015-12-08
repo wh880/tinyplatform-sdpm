@@ -116,7 +116,7 @@ public class TestCaseAction extends BaseController {
                        String[] expect,
                        String lastAddress,
                        UploadProfile uploadProfile) throws Exception {
-        if (testcase.getCaseId() == null || testcase.getCaseId() < 1) {
+        if (testcase.getCaseId() == null || testcase.getCaseId() ==0) {
             testcase.setCaseOpenedBy(userUtils.getUserId());
             if (testcase.getStoryId() != null && testcase.getStoryId() > 0) {
                 testcase.setStoryVersion(storyService.findStory(testcase.getStoryId()).getStoryVersion());
@@ -144,7 +144,8 @@ public class TestCaseAction extends BaseController {
             List<QualityCaseStep> steps = caseStepService.findCaseStepList(step1);
             if (isCaseModify(step, expect, steps)) {
                 Integer maxVersion = caseStepService.getCaseMaxVersion(testCase.getCaseId());
-                testcase.setCaseVersion(maxVersion == null ? 1 : maxVersion + 1);
+                maxVersion = maxVersion==null?testCase.getCaseVersion():maxVersion;
+                testcase.setCaseVersion(maxVersion+1);
                 insertStep(step, expect, testcase);
             }
             testcase.setCaseLastEditedBy(userUtils.getUserId());
@@ -490,13 +491,15 @@ public class TestCaseAction extends BaseController {
     }
 
     private String testResult(List<CaseStepResult> caseStepResults) {
-        if (caseStepResults == null || caseStepResults.size() < 1) return "0";
+        if (caseStepResults == null || caseStepResults.size() == 0) return "1";
         String result = "1";
         for (CaseStepResult c : caseStepResults) {
             if ("2".equals(c.getResult())) {
                 result = c.getResult();
             } else if ("3".equals(c.getResult())) {
-                result = "2".equals(result) ? "2" : "3";
+                result = "2".equals(result)? "2" : "3";
+            }else if("0".equals(c.getResult())){
+                result = "1".equals(result)?"0":result;
             }
         }
         return result;
