@@ -181,4 +181,8 @@ public class RoleServiceImpl implements RoleService {
         return findRoleList(role);
     }
 
+    public List<OrgRole> roleInCondition(String condition, String type) {
+        return roleManager.roleInCondition(condition,type);
+    }
+
 }

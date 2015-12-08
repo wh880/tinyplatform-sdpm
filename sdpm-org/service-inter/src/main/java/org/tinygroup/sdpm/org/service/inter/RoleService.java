@@ -201,4 +201,11 @@ public interface RoleService {
     @CachePut(keys = "systemRoleList", group = CACHE_ROLE_LIST)
     List<OrgRole> findSystemRoles();
 
+    /**
+     * 根据输入查询角色-可分类型
+     * @param condition
+     * @param type
+     * @return
+     */
+    List<OrgRole> roleInCondition(String condition, String type);
 }

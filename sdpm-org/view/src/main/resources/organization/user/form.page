@@ -53,11 +53,9 @@
                             #@colLabel("col-3")角色：#end
                             #@formControlDiv("col-5")
                                 #@Tselect2F()
-                                    #@Tselect2Body("roleIds" orgRoleIdList {"class":"input-text select2","multiple":"multiple"}) ##加上为多选项
-##                                       待王玲珑修改 #foreach(r : roleList)
-##                                            <option value="${r.orgRoleId}">${r.orgRoleName}</option>
-##                                        #end
-                                    #end
+                                    #Tselect2Ajax("roleIds" orgRoleIdList TINY_CONTEXT_PATH+adminPath+"/org/privilege/ajax/roleInCondition"
+                                    {"id":"roleIds","dataId":"orgRoleId","dataText":"orgRoleName",
+                                        "placeholder":"查询角色","multiple":"multiple"})
                                 ##填写任意内容，侦听需重新填加 A侦听已内置
                                     #@Tselect2Fix()
                                         #set(m=menuManager.getMenu("organizationAddGroup"))

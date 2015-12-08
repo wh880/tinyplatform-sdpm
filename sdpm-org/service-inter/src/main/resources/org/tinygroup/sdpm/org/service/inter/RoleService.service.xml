@@ -137,5 +137,12 @@
     <service-method local-name="findSystemRoles" service-id="findSystemRoles" method-name="findSystemRoles" cacheable="false" category="org.tinygroup.sdpm.org.service.inter">
       <service-result name="findSystemRolesResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.org.dao.pojo.OrgRole"/>
     </service-method>
+    <service-method local-name="roleInCondition" service-id="roleInCondition" method-name="roleInCondition" cacheable="false" category="org.tinygroup.sdpm.org.service.inter">
+      <service-parameters>
+        <service-parameter name="condition" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="type" type="java.lang.String" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="roleInConditionResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.org.dao.pojo.OrgRole"/>
+    </service-method>
   </service-component>
 </service-components>

@@ -3,4 +3,6 @@
         #include("/project/common/task/taskMenu.page")
     #end
 #end
+<div id="board-operate">
 #pageContent
+</div>

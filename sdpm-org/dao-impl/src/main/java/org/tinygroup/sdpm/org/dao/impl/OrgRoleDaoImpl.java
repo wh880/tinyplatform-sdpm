@@ -18,6 +18,7 @@ package org.tinygroup.sdpm.org.dao.impl;
 
 import org.springframework.stereotype.Repository;
 import org.tinygroup.commons.tools.CollectionUtil;
+import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.jdbctemplatedslsession.callback.*;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
@@ -25,6 +26,8 @@ import org.tinygroup.sdpm.org.dao.OrgRoleDao;
 import org.tinygroup.sdpm.org.dao.pojo.OrgRole;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.tinysqldsl.*;
+import org.tinygroup.tinysqldsl.base.Condition;
+import org.tinygroup.tinysqldsl.base.FragmentSql;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 import org.tinygroup.tinysqldsl.formitem.SubSelect;
@@ -230,6 +233,18 @@ public class OrgRoleDaoImpl extends TinyDslDaoSupport implements OrgRoleDao {
                         ORG_ROLETABLE.ORG_ROLE_ID.inExpression(SubSelect.subSelect(subSelect)),
                         ORG_ROLETABLE.DELETED.eq(Project.DELETE_NO)
                 ));
+        return getDslSession().fetchList(select,OrgRole.class);
+    }
+
+    public List<OrgRole> roleInCondition(String condition, String type) {
+        Condition con = null;
+        if(!StringUtil.isBlank(type)){
+          con = ORG_ROLETABLE.ORG_ROLE_TYPE.eq(type);
+        }
+        Select select = MysqlSelect.select(ORG_ROLETABLE.ORG_ROLE_ID,
+                FragmentSql.fragmentSelect("CONCAT (CASE org_role_type WHEN 0 THEN '系统角色' WHEN 1 THEN '产品角色' ELSE '项目角色' END,'-',org_role_name) AS orgRoleName")).from(
+                ORG_ROLETABLE
+        ).where(and(ORG_ROLETABLE.ORG_ROLE_NAME.eq(condition),ORG_ROLETABLE.DELETED.eq(0),con));
         return getDslSession().fetchList(select,OrgRole.class);
     }
 }

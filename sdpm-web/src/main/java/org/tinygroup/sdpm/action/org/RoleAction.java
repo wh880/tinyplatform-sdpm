@@ -11,8 +11,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.org.dao.pojo.OrgRole;
 import org.tinygroup.sdpm.org.service.inter.RoleService;
+import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
+import org.tinygroup.sdpm.util.CookieUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -148,6 +152,14 @@ public class RoleAction extends BaseController {
         Pager<OrgRole> pager = roleService.findRolePager(start, limit, orgRole);
         model.addAttribute("pager", pager);
         return "organization/privilege/privilegeTable.pagelet";
+    }
+    @ResponseBody
+    @RequestMapping("ajax/roleInCondition")
+    public List<OrgRole> roleInCondition(String key, String initKey, String type ) {
+        if (initKey != null) {
+            return roleService.getRoleByIds(initKey.split(","));
+        }
+        return roleService.roleInCondition(key, type);
     }
 
 }

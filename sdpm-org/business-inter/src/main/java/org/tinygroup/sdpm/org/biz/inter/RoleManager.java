@@ -81,4 +81,6 @@ public interface RoleManager {
     Integer delete(Integer id);
 
     List<OrgRole> getRolesByIds(String... ids);
+
+    List<OrgRole> roleInCondition(String condition, String type);
 }

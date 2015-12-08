@@ -25,4 +25,6 @@ public interface OrgRoleDao extends BaseDao<OrgRole, Integer> {
     List<OrgRole> getRolesByIds(String... ids);
 
     List<OrgRole> findRoleByUserId(String userId);
+
+    List<OrgRole> roleInCondition(String condition, String type);
 }
