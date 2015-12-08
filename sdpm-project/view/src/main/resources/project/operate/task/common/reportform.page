@@ -10,17 +10,10 @@
 #end
 
 <style>
-    .togglebox.open .tableBoxessty {
-        margin-left: 262px
-    }
-
-    .togglebox.open .togglenavico {
-        left: 218px
-    }
-
-    .togglebox .togglenavpart {
-        left: -260px;
-    }
+    .togglebox.open .tableBoxessty{margin-left:262px}
+    .togglebox.open .togglenavico{left:239px}
+    .togglebox .togglenavpart{left:-260px;}
+	.togglebox .togglenavpart .skin-minimal {margin-boottom:5px;}
 </style>
 <script>
     $(document).ready(function () {
