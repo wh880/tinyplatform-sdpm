@@ -99,7 +99,7 @@
     <service-method local-name="batchAddRolesToUser" service-id="batchAddRolesToUser" method-name="batchAddRolesToUser" cacheable="false" category="org.tinygroup.sdpm.org.service.inter">
       <service-parameters>
         <service-parameter name="userId" type="java.lang.String" required="false" is-array="false"/>
-        <service-parameter name="roleIds" type="java.lang.Integer" required="false" is-array="true"/>
+        <service-parameter name="roleIds" type="java.lang.String" required="false" is-array="true"/>
       </service-parameters>
       <service-result name="batchAddRolesToUserResult" required="false" is-array="false" type="void"/>
     </service-method>

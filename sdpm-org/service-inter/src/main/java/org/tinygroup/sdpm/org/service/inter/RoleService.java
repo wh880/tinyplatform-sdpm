@@ -15,6 +15,7 @@
  */
 package org.tinygroup.sdpm.org.service.inter;
 
+import org.tinygroup.aopcache.annotation.CacheGet;
 import org.tinygroup.aopcache.annotation.CachePut;
 import org.tinygroup.aopcache.annotation.CacheRemove;
 import org.tinygroup.sdpm.org.dao.pojo.OrgRole;
@@ -154,7 +155,7 @@ public interface RoleService {
      * @param userId  用户Id
      * @param roleIds 角色ids
      */
-    void batchAddRolesToUser(String userId, Integer[] roleIds);
+    void batchAddRolesToUser(String userId, String[] roleIds);
 
     /**
      * 批量添加用色用户
@@ -198,7 +199,7 @@ public interface RoleService {
      * 查询系统角色
      * @return
      */
-    @CachePut(keys = "systemRoleList", group = CACHE_ROLE_LIST)
+    @CacheGet(key = "systemRoleList", group = CACHE_ROLE_LIST)
     List<OrgRole> findSystemRoles();
 
     /**

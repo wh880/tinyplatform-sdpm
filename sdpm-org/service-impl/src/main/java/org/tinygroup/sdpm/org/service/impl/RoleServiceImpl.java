@@ -136,7 +136,7 @@ public class RoleServiceImpl implements RoleService {
         roleUserManager.addRoleUser(userIds, roleId);
     }
 
-    public void batchAddRolesToUser(String userId, Integer[] roleIds) {
+    public void batchAddRolesToUser(String userId, String[] roleIds) {
         if (ArrayUtil.isEmptyArray(roleIds)) {
             return;
         }

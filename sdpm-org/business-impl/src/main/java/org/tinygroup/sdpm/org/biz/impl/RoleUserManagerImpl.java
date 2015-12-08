@@ -54,7 +54,7 @@ public class RoleUserManagerImpl implements RoleUserManager {
         }
     }
 
-    public Integer batchAddRolesToUser(String userId, Integer[] roleIds) {
+    public Integer batchAddRolesToUser(String userId, String[] roleIds) {
         if (StringUtil.isBlank(userId) || ArrayUtils.isEmpty(roleIds)) {
             return 0;
         }
@@ -63,13 +63,17 @@ public class RoleUserManagerImpl implements RoleUserManager {
         List<OrgRoleUser> roleUserList = orgRoleUserDao.query(orgRoleUser);
         List roleIdList = Collections3.extractToList(roleUserList, "roleId");
         List<OrgRoleUser> list = new ArrayList<OrgRoleUser>();
-        for (Integer roleId : roleIds) {
-            if (roleIdList.contains(roleId)) {
+        for (String roleId : roleIds) {
+            if (StringUtil.isBlank(roleId)){
+                continue;
+            }
+            Integer role = Integer.valueOf(roleId);
+            if (roleIdList.contains(role)) {
                 continue;
             }
             OrgRoleUser t = new OrgRoleUser();
             t.setOrgUserId(userId);
-            t.setOrgRoleId(roleId);
+            t.setOrgRoleId(role);
             list.add(t);
         }
         Integer len = 0;

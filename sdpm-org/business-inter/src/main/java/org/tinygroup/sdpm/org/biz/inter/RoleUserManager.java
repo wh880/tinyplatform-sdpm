@@ -49,7 +49,7 @@ public interface RoleUserManager {
      * @param roleIds
      * @return
      */
-    Integer batchAddRolesToUser(String userId, Integer[] roleIds);
+    Integer batchAddRolesToUser(String userId, String[] roleIds);
 
     /**
      * 更新角色菜单

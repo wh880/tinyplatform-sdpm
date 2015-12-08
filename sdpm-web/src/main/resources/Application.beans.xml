@@ -21,9 +21,6 @@
                 <ref bean="tinyFilterFileProcessor"/>
                 <ref bean="tinyProcessorFileProcessor"/>
 
-                <!-- validate -->
-                <ref bean="validateMapFileProcessor"/>
-                <ref bean="validateFileProcessor"/>
                 <!-- annotation -->
                 <ref bean="annotationFileProcessor"/>
                 <ref bean="annotationClassFileProcessor"/>
@@ -80,6 +77,7 @@
         <property name="driverClassName">
             <value>${jdbc.driver}</value>
         </property>
+        <property name="testOnBorrow" value="true"/>
         <property name="url" value="${jdbc.url}"/>
         <property name="username" value="${jdbc.username}"/>
         <property name="password" value="${jdbc.password}"/>

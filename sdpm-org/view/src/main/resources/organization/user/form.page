@@ -53,7 +53,7 @@
                             #@colLabel("col-3")角色：#end
                             #@formControlDiv("col-5")
                                 #@Tselect2F()
-                                    #Tselect2Ajax("roleIds" orgRoleIdList TINY_CONTEXT_PATH+adminPath+"/org/privilege/ajax/roleInCondition"
+                                    #Tselect2Ajax("roleIds" roleIds TINY_CONTEXT_PATH+adminPath+"/org/privilege/ajax/roleInCondition"
                                     {"id":"roleIds","dataId":"orgRoleId","dataText":"orgRoleName",
                                         "placeholder":"查询角色","multiple":"multiple"})
                                 ##填写任意内容，侦听需重新填加 A侦听已内置
@@ -109,8 +109,7 @@
                             #@colLabel("col-3")<span class="c-red">*</span>邮箱：#end
                             #@formControlDiv("col-6")
                                 #tinyInput(
-                                    "text" "orgUserEmail" user?.orgUserEmail {"placeholder":"@","datatype":"e","id":
-                                    "name",
+                                    "text" "orgUserEmail" user?.orgUserEmail {"placeholder":"@","datatype":"e",
                                     "nullmsg":"请输入邮箱！",
                                     "class":
                                     "input-text"})

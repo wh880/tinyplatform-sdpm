@@ -110,7 +110,7 @@ public interface ProjectService {
      * @param project
      * @return
      */
-    @CachePut(keys = "${project.projectId}", group = CACHE_PROJECT_ID, removeGroups = CACHE_USER_PROJECT_LIST)
+    @CachePut(keys = "${project.projectId}", parameterNames = "project", group = CACHE_PROJECT_ID, removeGroups = CACHE_USER_PROJECT_LIST)
     Integer updateProject(Project project);
 
     List<Project> getProjectByStoryId(Integer storyId);

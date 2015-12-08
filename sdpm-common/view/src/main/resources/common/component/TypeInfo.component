@@ -1,6 +1,5 @@
 #macro TypeInfo(type id)
 <script type="text/javascript">
-<!--
 function tLoadContent(link, contain, className) {
 	var $b=$(contain);
 	 $.ajax({

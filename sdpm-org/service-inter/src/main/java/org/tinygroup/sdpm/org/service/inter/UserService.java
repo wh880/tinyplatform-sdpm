@@ -88,7 +88,7 @@ public interface UserService {
      * @param orgUser 需要更新的实体类
      * @return
      */
-    @CachePut(keys = "{orgUser?.orgUserId}", parameterNames = "orgUser", group = CACHE_USER_ID, removeGroups = {CACHE_USER_ACCOUNT, CACHE_USER_LIST})
+    @CachePut(keys = "${orgUser?.orgUserId}", parameterNames = "orgUser", group = CACHE_USER_ID, removeGroups = {CACHE_USER_ACCOUNT, CACHE_USER_LIST})
     OrgUser updateUser(OrgUser orgUser);
 
     /**
