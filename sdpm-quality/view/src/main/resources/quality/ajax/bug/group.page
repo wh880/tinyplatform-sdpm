@@ -18,7 +18,7 @@
         #foreach(story : storyMap)
             <tr class="show-group" data-tr="data-g-${story?.key}">
                 <td>
-                    <span class="glyphicon glyphicon-chevron-right glyphicon-chevron-down">
+                    <span class="icon-chevron-right glyphicon-chevron-down">
                         ${story?.value?.storyTitle}
                     </span>
                 </td>
