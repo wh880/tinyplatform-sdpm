@@ -7,7 +7,7 @@
 </tr>
 #foreach(version : versions?.records)
 <tr class="g-row">
-    #@td()<span class="glyphicon glyphicon-chevron-right">${story?.no}</span>#end
+    #@td()<span class="icon-chevron-right">${story?.no}</span>#end
     #@td()${version?.storyTitle}#end
     #@td()${version?.storyVersion}#end
     #@td()
