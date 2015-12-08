@@ -12,6 +12,7 @@
     .togglebox.open .togglenavico{left:239px}
     .togglebox .togglenavpart{left:-260px;}
 	.togglebox .togglenavpart .skin-minimal {margin-boottom:5px;}
+	.togglebox .togglenavpart .navtitle{height:34px;}
 </style>
 
 <script>
