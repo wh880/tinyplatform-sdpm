@@ -101,7 +101,7 @@
             <td>${b?.delayResolved}</td>
             <td>${b?.notResolved}</td>
             <td>${b?.toStory}</td>
-            <td>${((b?.solved)/(b?.bugNum-notSolved))*100}%</td>
+            <td>${(b?.bugNum-notSolved)==0?0:format("%.2f",1.0f*((b?.solved)/(b?.bugNum-notSolved))*100)}%</td>
             <td>${b?.bugNum}</td>
             #end
         #end
