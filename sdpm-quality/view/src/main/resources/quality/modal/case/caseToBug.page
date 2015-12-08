@@ -42,13 +42,13 @@
             #end
         </table>
         <div class="f col-3">
-            <input type="button" value="全选" class="btn btn-default btn-primary col-3"
+            <input type="button" value="全选" class="btn btn-default btn-primary"
             onclick="selectAllNullorReserve('ids','全选');" />
             <div class="col-0">&nbsp&nbsp</div>
-            <input type="button" value="反选" class="btn btn-default btn-primary col-3"
+            <input type="button" value="反选" class="btn btn-default btn-primary"
              onclick="selectAllNullorReserve('ids','反选');" />
             <div class="col-0">&nbsp&nbsp</div>
-            <div class="dropdown col-3">
+            <div class="dropdown" style="display:inline-block">
               <div><input type="submit" value="保存" class="btn btn-default btn-primary" /></div>
             </div>
         </div>
