@@ -18,7 +18,7 @@
 }
 
 .optionsBox .tabBar {
-    margin-bottom: 5px;
+    margin-bottom:-1px;
 	padding-right:6px;
 }
 
@@ -316,7 +316,6 @@ a.btn.btn-sm.backBtn, .backBtn {
 
 .tabInfocontents .HuiTab .tabBar span:hover {
     background: #f9fafe;
-    border-bottom: #ddd 1px solid;
     color: #369
 }
 

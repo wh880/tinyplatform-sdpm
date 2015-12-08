@@ -56,7 +56,7 @@
                         #end
                     #else
                     <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="btn radius btn-success btn-sm">
-                        <i class="icon-plus">&nbsp;创建文档</i></a>
+                        <i class="icon-plus"></i>&nbsp;创建文档</a>
                     #end
                 #end
 
