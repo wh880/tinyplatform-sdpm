@@ -9,7 +9,7 @@
 #@tinyForm("thisform" "" "post" {"class":"test"})
     #@tinyTable(storyTableId) ##ID为空则系统自动生成 带入参数则取该参数为ID
         #@div(divBaseClass="tinyheaderTools form-inline")
-            #setTinyTablePageSize([10,20,50,100,200,35]) ##每页数据条数设置
+            #setTinyTablePageSize([8,10,20,35,50,100,200])
 ##            #submitButton("submit","关联需求","btn btn-submit btn-primary","关联需求")
             #@mulOperation("submit" TINY_CONTEXT_PATH+adminPath+"/project/build/releateReq?buildId="+build.buildId)
             <a class="btn btn-submit btn-primary">关联需求</a>

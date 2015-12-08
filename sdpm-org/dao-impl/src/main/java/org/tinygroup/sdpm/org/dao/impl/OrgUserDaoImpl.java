@@ -183,8 +183,8 @@ public class OrgUserDaoImpl extends TinyDslDaoSupport implements OrgUserDao {
 
     public List<OrgUser> userInCondition(String condition, String... ids) {
         Condition con = null;
-        String[] sId = ids.length==0?new String[]{"0"}:ids;
         if (ids!=null) {
+            String[] sId = ids.length==0?new String[]{"0"}:ids;
             con = ORG_USERTABLE.ORG_USER_ID.in(sId);
         }
         Select select = MysqlSelect.select(ORG_USERTABLE.ORG_USER_ID,
