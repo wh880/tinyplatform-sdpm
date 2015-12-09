@@ -18,6 +18,7 @@ import org.tinygroup.sdpm.document.service.inter.DocService;
 import org.tinygroup.sdpm.dto.UploadProfile;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.UserService;
+import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
@@ -312,6 +313,7 @@ public class DocumentAction extends BaseController {
             DocumentDoc doc = new DocumentDoc();
             doc.setDocTitle(docTitle);
             doc.setDocModule(docModule);
+            doc.setDocDeleted(FieldUtil.DELETE_NO_S);
             List<DocumentDoc> documentDocs = docService.findDocList(doc);
             if (documentDocs.size() != 0) {
                 if (docId == null) {

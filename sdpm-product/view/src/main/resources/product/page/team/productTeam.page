@@ -24,7 +24,7 @@
                     #@thead()
                         #@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
                             #@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
-                            #@tinyTh({"class":"sorting","rel":"team_account"})用户#end
+                            #@tinyTh({"class":"","rel":""})用户#end
                             #@tinyTh({"class":"sorting","rel":"team_role"})成员角色#end
                             #@tinyTh({"class":"sorting","rel":"team_join"})加盟日#end
                             #@tinyTh({"class":"sorting","rel":"team_days"})可用工日/天#end

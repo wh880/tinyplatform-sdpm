@@ -1,6 +1,7 @@
 package org.tinygroup.sdpm.util;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.tinygroup.beancontainer.BeanContainerFactory;
 import org.tinygroup.sdpm.common.docTemplate.impl.DocTemplateResolverImpl;
 import org.tinygroup.sdpm.common.docTemplate.inter.DocTemplateResolver;
@@ -20,14 +21,15 @@ import java.util.regex.Pattern;
 /**
  * Created by wangll13383 on 2015/12/1.
  */
+@Component()
 public class ExportUtils {
-    private final static String REGXP_FOR_HTML = "<([^>]*)>"; // 过滤所有以<开头以>结尾的标签
+    private final  String REGXP_FOR_HTML = "<([^>]*)>"; // 过滤所有以<开头以>结尾的标签
 
-    private static DocTemplateResolver docTemplateResolver = BeanContainerFactory.getBeanContainer(ExportUtils.class.getClassLoader()).getBean(DocTemplateResolverImpl.class);
+    private DocTemplateResolver docTemplateResolver = BeanContainerFactory.getBeanContainer(ExportUtils.class.getClassLoader()).getBean(DocTemplateResolverImpl.class);
     @Autowired
-    private static TemplateEngine docTemplateEngine = BeanContainerFactory.getBeanContainer(ExportUtils.class.getClassLoader()).getBean("docTemplateEngine");
+    private  TemplateEngine docTemplateEngine = BeanContainerFactory.getBeanContainer(ExportUtils.class.getClassLoader()).getBean("docTemplateEngine");
 
-    public static void mergeTemplate(String type, TemplateContext context, HttpServletResponse response, String name) throws IOException, TemplateException {
+    public void mergeTemplate(String type, TemplateContext context, HttpServletResponse response, String name) throws IOException, TemplateException {
         Calendar today = Calendar.getInstance();
         FileObject fileObject = docTemplateResolver.getDocTemplate(type);
         response.reset();
@@ -40,7 +42,7 @@ public class ExportUtils {
         out.close();
     }
 
-    public static String filterHtml(String str) {
+    public String filterHtml(String str) {
         Pattern pattern = Pattern.compile(REGXP_FOR_HTML);
         Matcher matcher = pattern.matcher(str);
         StringBuffer sb = new StringBuffer();
@@ -53,7 +55,7 @@ public class ExportUtils {
         return sb.toString();
     }
 
-    private static String toUTF8(String s) {
+    private  String toUTF8(String s) {
         StringBuffer sb = new StringBuffer();
         for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);

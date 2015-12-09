@@ -76,7 +76,7 @@
                 #@formControlDiv("col-4")
                     #@Tselect2F()
                         #Tselect2Ajax("storyAssignedTo" story?.storyAssignedTo TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam?productId="+story?.productId
-                        {"id":"assignedToSelect","dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询指派人","nullmsg":"请选择指派人！","datatype":"*"})
+                        {"id":"assignedToSelect","dataId":"orgUserId","dataText":"orgUserRealName"})
                         #@Tselect2Fix()
                             #set(m=menuManager.getMenu("organizationAddUser"))
                             #if(m)
@@ -97,7 +97,7 @@
                 #@Tselect2F()
                     #Tselect2Ajax("storyReviewedBy" story?.storyReviewedBy TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
                     {"id":"reviewedBySelect","dataId":"orgUserId","dataText":"orgUserRealName",
-                        "placeholder":"查询评审人","nullmsg":"请选择评审人！","datatype":"*","multiple":"multiple"})
+                        "placeholder":"查询评审人","multiple":"multiple"})
 
                     #@Tselect2Fix()
                         #set(m=menuManager.getMenu("organizationAddUser"))

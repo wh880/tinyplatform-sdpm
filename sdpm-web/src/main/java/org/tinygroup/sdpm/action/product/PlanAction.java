@@ -216,6 +216,7 @@ public class PlanAction extends BaseController {
             ProductPlan productPlan = new ProductPlan();
             productPlan.setPlanName(planName);
             productPlan.setProductId(productId);
+            productPlan.setDeleted(FieldUtil.DELETE_NO);
             List<ProductPlan> plans = planService.findPlanList(productPlan);
             if (plans.size() != 0) {
                 if (planId == null) {

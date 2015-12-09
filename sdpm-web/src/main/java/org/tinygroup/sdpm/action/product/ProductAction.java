@@ -14,6 +14,7 @@ import org.tinygroup.sdpm.org.dao.pojo.OrgRole;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.RoleService;
 import org.tinygroup.sdpm.org.service.inter.UserService;
+import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
@@ -340,6 +341,7 @@ public class ProductAction extends BaseController {
             Product product = new Product();
             product.setProductName(productName);
             product.setProductLineId(productLineId);
+            product.setDeleted(FieldUtil.DELETE_NO);
             List<Product> productList = productService.findProductList(product);
             if (productList.size() != 0) {
                 if(productId==null){
@@ -364,6 +366,7 @@ public class ProductAction extends BaseController {
             Product product = new Product();
             product.setProductCode(productCode);
             product.setProductLineId(productLineId);
+            product.setDeleted(FieldUtil.DELETE_NO);
             List<Product> productList = productService.findProductList(product);
             if (productList.size() != 0) {
                 if(productId==null){

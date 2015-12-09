@@ -90,8 +90,7 @@
     #@elementItem()
         #@colLabel()产品线描述：#end
         #@formControlDiv("col-8")
-            #@Teditor("productLineSpec" "productLineSpec" {"initialFrameHeight":"200" ,"placeholder":"",
-                "datatype":"*0-500"})#end
+            #@Teditor("productLineSpec" "productLineSpec" {"initialFrameHeight":"200" ,"placeholder":""})#end
         #end
         #@validateDiv("col-2")#end
     #end

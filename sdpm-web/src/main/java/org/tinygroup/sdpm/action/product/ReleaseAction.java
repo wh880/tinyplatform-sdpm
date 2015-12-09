@@ -8,6 +8,7 @@ import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.docTemplate.inter.DocTemplateResolver;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.dto.UploadProfile;
+import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductRelease;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
@@ -52,6 +53,8 @@ public class ReleaseAction extends BaseController {
     private StoryService storyService;
     @Autowired
     private BugService bugService;
+    @Autowired
+    private ExportUtils exportUtils;
 
     @ModelAttribute
     public void init(Model model) {
@@ -375,6 +378,7 @@ public class ReleaseAction extends BaseController {
             ProductRelease release = new ProductRelease();
             release.setReleaseName(releaseName);
             release.setProductId(productId);
+            release.setDeleted(FieldUtil.DELETE_NO);
             List<ProductRelease> releases= releaseService.findReleaseList(release);
             if (releases.size() != 0) {
                 if(releaseId==null){
@@ -434,7 +438,8 @@ public class ReleaseAction extends BaseController {
             }
             context.put("bugInList", inBugList);
             context.put("bugNoInList", notInBugList);
+            context.put("ExportUtils",exportUtils);
         }
-        ExportUtils.mergeTemplate(DocTemplateResolver.RELEASE, context, response, "发布文档");
+        exportUtils.mergeTemplate(DocTemplateResolver.RELEASE, context, response, "发布文档");
     }
 }

@@ -75,7 +75,7 @@ public class ProductLineAction extends BaseController {
                 , null
                 , systemAction.getActionComment());
 
-        return "redirect:" + "/a/productLine/content/all";
+        return "redirect:" + "/a/productLine/to";
     }
 
     @RequestMapping("/update")
@@ -370,6 +370,7 @@ public class ProductLineAction extends BaseController {
             ProductLine productLine = new ProductLine();
             productLine.setProductLineName(productLineName);
             productLine.setProductLineId(productLineId);
+            productLine.setDeleted(FieldUtil.DELETE_NO);
             List<ProductLine> productLines = productLineService.findProductLineList(productLine);
             if (productLines.size() != 0) {
                 if (productLineId == null) {
@@ -393,6 +394,7 @@ public class ProductLineAction extends BaseController {
             String productLineCode = param;
             ProductLine productLine = new ProductLine();
             productLine.setProductLineCode(productLineCode);
+            productLine.setDeleted(FieldUtil.DELETE_NO);
             List<ProductLine> productLines = productLineService.findProductLineList(productLine);
             if (productLines.size() != 0) {
                 if (productLineId == null) {

@@ -923,6 +923,7 @@ public class StoryAction extends BaseController {
             ProductStory story = new ProductStory();
             story.setStoryTitle(storyName);
             story.setProductId(productId);
+            story.setDeleted(FieldUtil.DELETE_NO);
             List<ProductStory> stories = storyService.findStoryList(story);
             if (stories.size() != 0) {
                 if (storyId == null) {
