@@ -428,7 +428,7 @@ public class ProjectTaskAction extends BaseController {
             Integer start, Integer limit, String statu, String choose, Model model,
             HttpServletRequest request, HttpServletResponse response, String moduleId,
             @RequestParam(required = false, defaultValue = "task_id") String order,
-            String orderType, Integer key) {
+            @RequestParam(defaultValue = "desc")String orderType, Integer key) {
         Integer projectId = projectOperate.getCurrentProjectId(request, response);
         if (projectId == null) {
             return redirectProjectForm();

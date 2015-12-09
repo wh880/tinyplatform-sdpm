@@ -107,7 +107,8 @@ public class TestVersionAction extends BaseController {
 
     @RequestMapping("/project/findPager")
     public String findPager(HttpServletResponse response, HttpServletRequest request,
-                            Integer start, Integer limit, String order, String ordertype, Model model) {
+                            Integer start, Integer limit, @RequestParam(required = false,defaultValue = "testversionId")String order,
+                            @RequestParam(required = false,defaultValue = "desc")String ordertype, Model model) {
         Integer projectId = projectOperate.getCurrentProjectId(request, response);
         if (projectId == null) {
             return redirectProjectForm();

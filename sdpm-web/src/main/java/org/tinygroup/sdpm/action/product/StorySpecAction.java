@@ -94,7 +94,7 @@ public class StorySpecAction extends BaseController {
     }
 
     @RequestMapping("storyVersionData")
-    public String storyHistoryVersion(Integer storyId, Model model, Integer start, Integer limit, @RequestParam(defaultValue = "storyVersion") String order, @RequestParam(defaultValue = "asc") String ordertype) {
+    public String storyHistoryVersion(Integer storyId, Model model, Integer start, Integer limit, @RequestParam(defaultValue = "storyVersion") String order, @RequestParam(defaultValue = "desc") String ordertype) {
         ProductStory story = storyService.findStory(storyId);
         ProductStorySpec spec = new ProductStorySpec();
         spec.setStoryId(storyId);

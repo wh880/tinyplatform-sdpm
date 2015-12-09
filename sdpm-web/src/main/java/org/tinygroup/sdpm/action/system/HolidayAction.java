@@ -48,7 +48,8 @@ public class HolidayAction extends BaseController {
 
     @RequestMapping("holiday/findPager")
     public String fingPage(Integer start, Integer limit,
-                           String order, String ordertype, Holiday holiday, Model model) {
+                           @RequestParam(required = false,defaultValue = "holidayId")String order,
+                           @RequestParam(required = false,defaultValue = "desc")String ordertype, Holiday holiday, Model model) {
         boolean asc = true;
         if ("desc".equals(ordertype)) {
             asc = false;

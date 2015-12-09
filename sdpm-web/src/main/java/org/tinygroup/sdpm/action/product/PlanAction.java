@@ -188,7 +188,7 @@ public class PlanAction extends BaseController {
                        @RequestParam(required = false, defaultValue = "1") int page,
                        @RequestParam(required = false, defaultValue = "10") int pagesize,
                        @RequestParam(required = false, defaultValue = "planId") String order,
-                       @RequestParam(required = false, defaultValue = "asc") String ordertype, Model model, HttpServletRequest request) {
+                       @RequestParam(required = false, defaultValue = "desc") String ordertype, Model model, HttpServletRequest request) {
 
         Pager<ProductPlan> pagerProductPlan = null;
         plan.setProductId(Integer.parseInt(cookieProductId));

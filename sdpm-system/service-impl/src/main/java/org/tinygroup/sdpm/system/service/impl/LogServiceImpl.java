@@ -3,6 +3,7 @@ package org.tinygroup.sdpm.system.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
+import org.tinygroup.sdpm.common.util.std.StdUtil;
 import org.tinygroup.sdpm.org.biz.inter.UserManager;
 import org.tinygroup.sdpm.system.biz.inter.ActionManager;
 import org.tinygroup.sdpm.system.biz.inter.HistoryManager;
@@ -38,6 +39,7 @@ public class LogServiceImpl implements LogService {
     private void recordEdit(Object oldObject, Object newObject, SystemAction systemAction) {
         Field[] fields = oldObject.getClass().getDeclaredFields();
         for (Field field : fields) {
+            if(!StdUtil.containsField(field.getName())) continue;
             Object oldValue;
             Object newValue;
             try {

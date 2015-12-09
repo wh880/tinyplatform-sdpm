@@ -83,19 +83,12 @@ public class StoryAction extends BaseController {
     private TeamService teamService;
 
     /**
-     * @param story
-     * @param groupOperate
-     * @param model
      * @param request
-     * @param response
      * @return
      */
     @RequestMapping("")
-    public String storyAction(ProductStory story,
-                              String groupOperate,
-                              Model model,
-                              HttpServletRequest request,
-                              HttpServletResponse response) {
+    public String storyAction(
+            HttpServletRequest request) {
 
         String queryString = request.getQueryString();
         if (queryString != null && !queryString.contains("choose")) {
@@ -343,7 +336,7 @@ public class StoryAction extends BaseController {
     @RequestMapping("/{forwordPager}/findPager")
     public String find(Integer storyId,
                        @PathVariable(value = "forwordPager") String forwordPager,
-                       Model model, SystemAction systemAction) {
+                       Model model) {
         ProductStory productStory = storyService.findStory(storyId);
         ProductStorySpec storySpec = new ProductStorySpec();
         storySpec.setStoryId(storyId);
@@ -518,8 +511,8 @@ public class StoryAction extends BaseController {
                                     String choose,
                                     String groupOperate,
                                     SearchInfos searchInfos,
-                                    String order,
-                                    String ordertype,
+                                    @RequestParam(required = false,defaultValue = "storyId")String order,
+                                    @RequestParam(required = false,defaultValue = "desc")String ordertype,
                                     Model model) {
         if (!"2".equals(choose) && !"11".equals(choose)) {
             story.setDeleted(0);
@@ -576,12 +569,11 @@ public class StoryAction extends BaseController {
                                   String type,
                                   Integer releaseId,
                                   ProductStory story,
-                                  String choose,
                                   String groupOperate,
                                   SearchInfos searchInfos,
                                   @RequestParam(required = false, defaultValue = "storyId") String order,
-                                  @RequestParam(required = false, defaultValue = "asc") String ordertype,
-                                  Model model, HttpServletRequest request) {
+                                  @RequestParam(required = false, defaultValue = "desc") String ordertype,
+                                  Model model) {
 
 
         story.setProductId(Integer.parseInt(cookieProductId));
@@ -661,8 +653,7 @@ public class StoryAction extends BaseController {
                                 SearchInfos searchInfos,
                                 String groupOperate,
                                 @RequestParam(required = false, defaultValue = "bugId") String order,
-                                String type,
-                                @RequestParam(required = false, defaultValue = "asc") String ordertype,
+                                @RequestParam(required = false, defaultValue = "desc") String ordertype,
                                 Model model) {
         if (Integer.parseInt(cookieProductId) > 0) {
             bug.setProductId(Integer.parseInt(cookieProductId));

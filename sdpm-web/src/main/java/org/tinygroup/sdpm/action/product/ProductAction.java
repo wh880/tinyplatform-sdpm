@@ -35,7 +35,6 @@ import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.*;
 
 /**
@@ -127,7 +126,7 @@ public class ProductAction extends BaseController {
     }
 
     @RequestMapping("/update")
-    public String update(Product product, SystemAction systemAction){
+    public String update(Product product, SystemAction systemAction, String lastAddress){
         Product product1 = productService.findProductById(product.getProductId());
         if(Product.STATUS_DELETED.equals(product.getProductStatus())){
             product.setDeleted(Product.DELETE_YES);
@@ -147,7 +146,9 @@ public class ProductAction extends BaseController {
                 product1,
                 product,
                 systemAction.getActionComment());
-
+        if (!StringUtil.isBlank(lastAddress)) {
+            return "redirect:" + lastAddress;
+        }
         return "/product/page/list/product/product-listall.page";
     }
 
@@ -197,7 +198,7 @@ public class ProductAction extends BaseController {
 
         Product product = productService.findProductById(productId);
         model.addAttribute("product", product);
-        return "/product/page/update/module/product-module-editor.page";
+        return "/product/page/update/product/product-editor.page";
     }
 
     @RequestMapping("/find/{forward}")

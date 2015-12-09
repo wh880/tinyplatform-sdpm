@@ -77,8 +77,8 @@ public class TestCaseAction extends BaseController {
 
     @RequestMapping("/findPager")
     public String findPager(@CookieValue(value = "qualityProductId",defaultValue = "0") Integer qualityProductId, Integer start, Integer limit, String groupOperate,
-                            SearchInfos searchInfos, String status, String order,
-                            String ordertype, QualityTestCase testcase, Model model,
+                            SearchInfos searchInfos, String status, @RequestParam(required = false,defaultValue = "caseId")String order,
+                            @RequestParam(required = false,defaultValue = "desc")String ordertype, QualityTestCase testcase, Model model,
                             HttpServletRequest request) {
         boolean asc = true;
         if ("desc".equals(ordertype)) {

@@ -209,7 +209,7 @@ public class ReleaseAction extends BaseController {
                        @RequestParam(required = false, defaultValue = "1") int page,
                        @RequestParam(required = false, defaultValue = "10") int pagesize,
                        @RequestParam(required = false, defaultValue = "releaseId") String order,
-                       @RequestParam(required = false, defaultValue = "asc") String ordertype, Model model, HttpServletRequest request) {
+                       @RequestParam(required = false, defaultValue = "desc") String ordertype, Model model, HttpServletRequest request) {
 
         release.setProductId(Integer.parseInt(cookieProductId));
         Pager<ProductRelease> pagerProductRelease = releaseService.findReleasePager(page, pagesize, release, order, ordertype);
