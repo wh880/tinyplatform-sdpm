@@ -215,6 +215,21 @@ public class ProjectTaskAction extends BaseController {
         return "redirect:" + adminPath + "/project/task/index";
     }
 
+    /**
+     * 删除任务
+     * @param task
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/delete")
+    public Map delete(ProjectTask task)  {
+        task = taskService.findTaskById(task.getTaskId());
+        taskService.deleteTask(task.getTaskId());
+        LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, LogUtil.LogAction.DELETED, task.getTaskId().toString(),
+                userUtils.getUserId(), null, task.getTaskProject().toString(), null, null, null);
+        return resultMap(true,"删除成功");
+    }
+
     @RequestMapping("/consumeTime")
     public String consumeTime(Integer taskId, Model model) {
         ProjectTask task = taskService.findTaskById(taskId);

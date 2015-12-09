@@ -61,7 +61,7 @@
                 <a title="备注" onclick="toggle()">
                     #buttonIcon(iconClass="icon-comment-alt")</a>&nbsp;&nbsp;
             #elseif(m.id=="tbugdelete")
-                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${qualityBug?.bugId}" title="${m.name}">
+                <a class="bugDelete" href="javascript:void(0);" value="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${qualityBug?.bugId}" title="${m.name}">
                     #buttonIcon(iconClass=m.icon)</a>&nbsp;&nbsp;
             #elseif(m.id=="tbugnext")
                 #if(nextId<1)
@@ -111,22 +111,6 @@
             <div class="infoContent">
                 <p class="titleName">附件</p>
                 <div>#uploadFileList(file) </div>
-##                #foreach(f:file)
-##                    #set(path=f?.filePathname)
-##                    <a href="${TINY_CONTEXT_PATH+path}">${f?.fileTitle}.${f?.fileExtension}</a>&nbsp&nbsp&nbsp&nbsp
-##                    #foreach(m:menuManager.getScopeMenus("product-file-op"))
-##                        #if(m.id == "story-file-edit")
-##                            #@aModal("#myModal" m.name "400" "120" "class-m" adminPath+m.href+"?fileId="+f?.fileId)
-##                                #buttonIcon(iconClass=m.icon)#end&nbsp&nbsp&nbsp
-##
-##                        #else
-##                            #@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m.href f?.fileId )
-##                                #buttonIcon(iconClass=m.icon)
-##                            #end
-##                        #end
-##                    #end
-##                <br>
-##                #end
 
             </div>
             #history(adminPath+"/system/action/ajax/history?actionObjectType=bug&actionObjectId="+qualityBug?.bugId)
@@ -177,7 +161,7 @@
                         <a title="备注" onclick="toggle()">
                             #buttonIcon(iconClass="icon-comment-alt")</a>&nbsp;&nbsp;
                     #elseif(m.id=="tbugdelete")
-                        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${qualityBug?.bugId}" title="${m.name}">
+                        <a class="bugDelete" href="javascript:void(0);" value="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${qualityBug?.bugId}" title="${m.name}">
                             #buttonIcon(iconClass=m.icon)</a>&nbsp;&nbsp;
                     #elseif(m.id=="tbugnext")
                         #if(nextId<1)
@@ -202,7 +186,6 @@
                         <div class="col-1"></div>
                         <div class="col-1">
                             #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end
-
                         </div>
                         <div class="col-5"></div>
                     </div>
@@ -223,6 +206,27 @@
     #end
 #end
     <script type="text/javascript">
+        $(function(){
+            $(".bugDelete").on("click",function(){
+                var url = $(this).attr("value");
+                layer.confirm("是否确认",function(){
+                    $.ajax({
+                        url:url,
+                        type:"post",
+                        dataType:"JSON",
+                        success:function(data){
+                            if(data.status=="y"){
+                                window.location.href = "${TINY_CONTEXT_PATH+adminPath}/quality/bug";
+                            }
+                        }
+                    });
+                    return false;
+                });
+
+            })
+        })
+
+
         function toggle() {
             var comment = document.getElementById("comment");
             if (comment.style.display == 'none')
@@ -230,6 +234,5 @@
             else
                 comment.style.display = 'none';
         }
-
     </script>
 

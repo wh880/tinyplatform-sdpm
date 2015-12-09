@@ -6,15 +6,16 @@
             </span>
         <span class="r">
                 #foreach(m:menuManager.getScopeMenus("pro-task-op"))
-                    #if(m.id!="pro-task-close")
+                    #if(m.id=="pro-Info-delete")
+                        <a class="taskDelete" href="javascript:void(0);" value="${TINY_CONTEXT_PATH+adminPath}${m.href}?taskId=${task.taskId}"
+                           title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
+                    #else
                         <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?taskId=${task.taskId}"
                            title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
                     #end
                 #end
 
-            #foreach(m:menuManager.getScopeMenus("pro-taskInfo2-op"))
-                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?taskId=${task.taskId}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
-            #end
+
             <a href="javascript:;" onclick="javascript:history.back(-1);" title="返回">#buttonIcon(iconClass="icon-reply")</a>
             #set(m1=menuManager.getMenu("pro-Info-close"))
             </span>
@@ -47,14 +48,13 @@
     #history(adminPath+"/system/action/ajax/history?actionObjectType=task&actionObjectId="+task?.taskId)
     <center>
         #foreach(m:menuManager.getScopeMenus("pro-task-op"))
-            #if(m.id!="pro-task-close")
+            #if(m.id=="pro-Info-delete")
+                <a class="taskDelete" href="javascript:void(0);" value="${TINY_CONTEXT_PATH+adminPath}${m.href}?taskId=${task.taskId}"
+                   title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
+            #else
                 <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?taskId=${task.taskId}"
                    title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
             #end
-        #end
-        #foreach(m:menuManager.getScopeMenus("pro-taskInfo2-op"))
-            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?taskId=${task.taskId}"
-               title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
         #end
         <a href="javascript :;" onclick="javascript:history.back(-1);" title="返回">#buttonIcon(iconClass=
             "icon-reply")</a>
@@ -63,3 +63,24 @@
 <div style="width:30%;float:right">
     #TypeInfo("information", task.taskId)
 </div>
+<script>
+    $(function(){
+        $(".taskDelete").on("click",function(){
+            var url = $(this).attr("value");
+            layer.confirm("是否确认",function(){
+                $.ajax({
+                    url:url,
+                    type:"post",
+                    dataType:"JSON",
+                    success:function(data){
+                        if(data.status=="y"){
+                            window.location.href = "${TINY_CONTEXT_PATH+adminPath}/project/task/index";
+                        }
+                    }
+                });
+                return false;
+            });
+
+        })
+    })
+</script>

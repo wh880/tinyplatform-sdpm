@@ -408,11 +408,21 @@ public class BugAction extends BaseController {
     }
 
     @RequiresPermissions("tbugdelete")
+    @ResponseBody
     @RequestMapping("/delete")
-    public String delete(Integer bugId) {
+    public Map delete(Integer bugId) {
+        QualityBug bug = bugService.findQualityBugById(bugId);
         bugService.deleteBug(bugId);
-
-        return "redirect:" + "/a/quality/bug";
+        LogUtil.logWithComment(LogUtil.LogOperateObject.BUG
+                , LogUtil.LogAction.DELETED
+                , String.valueOf(bugId)
+                , userUtils.getUserId()
+                , String.valueOf(bug.getProductId())
+                , String.valueOf(bug.getProjectId())
+                , null
+                , null
+                , null);
+        return resultMap(true,"删除成功");
     }
 
     @RequiresPermissions("tsolution")
@@ -478,13 +488,12 @@ public class BugAction extends BaseController {
     }
 
     @RequestMapping("/close")
-    public String close(QualityBug bug, SystemAction systemAction, HttpServletRequest request) {
+    public String close(QualityBug bug, SystemAction systemAction) {
 
         bug.setBugClosedBy(userUtils.getUserId() != null ? userUtils.getUserId() : "0");
         bug.setBugClosedDate(new Date());
         bug.setBugStatus("3");
         bugService.updateBug(bug);
-
 
         LogUtil.logWithComment(LogUtil.LogOperateObject.BUG
                 , LogUtil.LogAction.CLOSED
