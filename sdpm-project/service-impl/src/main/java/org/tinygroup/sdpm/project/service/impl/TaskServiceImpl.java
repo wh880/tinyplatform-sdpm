@@ -133,6 +133,16 @@ public class TaskServiceImpl implements TaskService {
         return taskManager.findByGroup(id);
     }
 
+    public Integer deleteTask(Integer taskId) {
+        if (id == null) {
+            return 0;
+        }
+        ProjectTask projectTask = new ProjectTask();
+        projectTask.setTaskId(id);
+        projectTask.setTaskDeleted(ProjectTask.DELETE_YES);
+        return taskManager.update(projectTask);
+    }
+
     private Object getFieldValueByName(String fieldName, Object o) {
         try {
             String firstLetter = fieldName.substring(0, 1).toUpperCase();

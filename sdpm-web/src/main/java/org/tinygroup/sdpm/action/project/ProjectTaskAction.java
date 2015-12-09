@@ -215,6 +215,17 @@ public class ProjectTaskAction extends BaseController {
         return "redirect:" + adminPath + "/project/task/index";
     }
 
+    /**
+     * 删除任务
+     * @param task
+     * @return
+     */
+    @RequestMapping(value = "/delete")
+    public String delete(ProjectTask task)  {
+        taskService.deleteTask(task.getTaskId());
+        return "redirect:" + adminPath + "/project/task/index";
+    }
+
     @RequestMapping("/consumeTime")
     public String consumeTime(Integer taskId, Model model) {
         ProjectTask task = taskService.findTaskById(taskId);

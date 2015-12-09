@@ -142,4 +142,6 @@ public interface TaskService {
      * @return
      */
     List<TaskChartBean> buildChart(String id);
+
+    Integer deleteTask(Integer taskId);
 }
