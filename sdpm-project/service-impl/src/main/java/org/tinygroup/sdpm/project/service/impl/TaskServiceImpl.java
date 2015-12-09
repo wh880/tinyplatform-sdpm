@@ -134,11 +134,11 @@ public class TaskServiceImpl implements TaskService {
     }
 
     public Integer deleteTask(Integer taskId) {
-        if (id == null) {
+        if (taskId == null) {
             return 0;
         }
         ProjectTask projectTask = new ProjectTask();
-        projectTask.setTaskId(id);
+        projectTask.setTaskId(taskId);
         projectTask.setTaskDeleted(ProjectTask.DELETE_YES);
         return taskManager.update(projectTask);
     }

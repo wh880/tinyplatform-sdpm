@@ -1,6 +1,6 @@
 #@layout(project) #end
 #set(name="version")
-#@tinyForm("addform" TINY_CONTEXT_PATH+adminPath+"/project/build/addSave" post {"class":"test","enctype":
+#@tinyForm("addform" TINY_CONTEXT_PATH+adminPath+"/project/build/addSave" "post" {"class":"test","enctype":
     "multipart/form-data"})
     #hiddenInput(hiddenInputName="buildId" hiddenInputValue=build?.buildId)
     <input type="hidden" name="buildProject" value="${build?.buildProject?:currentProjectId}">
