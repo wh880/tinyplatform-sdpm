@@ -68,7 +68,7 @@
   <standard-field id="b7e01baa07d1416e8d62dfe05e7e9976" name="org_user_ip" title="最后IP" business-type-id="095e594e1550424b9643c7e2279e85be">
     <description></description>
   </standard-field>
-  <standard-field id="8ef1bd3aecaa4e049827b68e39f26f30" name="org_user_last" title="最后登录" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd">
+  <standard-field id="8ef1bd3aecaa4e049827b68e39f26f30" name="org_user_last" title="最后登录" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff">
     <description></description>
   </standard-field>
   <standard-field id="7cf911e409d347e78682b8c733c14591" name="org_user_fails" title="失败次数" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd">
