@@ -1,5 +1,6 @@
 #!set(activeTitle="项目管理",activeMenuId=currentPageId)
 #set(name="task")
+<div id="burnContent">
 <div class='container text-center bd-0'>
     <div class='clearfix'>
         <div class='actions r'>
@@ -90,7 +91,7 @@
         $('#burnTab').addClass('active');
         $('#interval').change(function () {
             var projectID = ${projectId};
-            $("#tinypagecontent").load('${TINY_CONTEXT_PATH+adminPath}/project/burn/init.pagelet', {
+            $("#burnContent").load('${TINY_CONTEXT_PATH+adminPath}/project/burn/init.pagelet', {
                 projectID: projectID,
                 choose: 6,
                 interval: $(this).val(),
@@ -99,3 +100,4 @@
     })
 
 </script>
+<div>
