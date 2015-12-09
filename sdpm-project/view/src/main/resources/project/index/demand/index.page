@@ -34,7 +34,7 @@
                 #@toggleRight()
                     #@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
                         #@div(divBaseClass="tinyheaderTools form-inline")
-                            #setTinyTablePageSize([8,10,20,35,50,100,200])
+                            #setTinyTablePageSize([10,20,30,50,100,200])
                             #@mulOperation("muldelete" TINY_CONTEXT_PATH+adminPath+"/project/demand/batchDel")
                             <a href="javascript:;" class="btn radius btn-danger btn-sm "><i class="icon-trash"></i>&nbsp;批量删除</a>
                             #end

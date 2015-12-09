@@ -29,7 +29,7 @@
 
 
 
-#@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/product/edit" "post" {"class":"test"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/product/update" "post" {"class":"test"})
 <input type="hidden" name="lastAddress" value=""/>
 <div style="width:100%;float:center" class="pageleftpart">
 <div class="infoContent">
@@ -168,8 +168,7 @@
 #@elementItem()
     #@colLabel()产品描述：#end
     #@formControlDiv("col-8")
-        #@Teditor("productDesc" "productDesc" {"initialFrameHeight":"250" ,"placeholder":"说点什么...最少输入10个字符",
-            "datatype":"*10-500"})${product?.productDesc}#end
+        #@Teditor("productDesc" "productDesc" {"initialFrameHeight":"250"})${product?.productDesc}#end
     #end
     #@validateDiv("col-2")#end
 #end

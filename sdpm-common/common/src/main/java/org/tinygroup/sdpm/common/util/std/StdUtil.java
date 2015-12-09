@@ -58,6 +58,15 @@ public class StdUtil {
         }
     }
 
+    public static boolean containsField(String fieldName){
+        for(String key:tableStdMap.keySet()){
+            if(tableStdMap.get(key).containsKey(fieldName)){
+                return true;
+            };
+        };
+        return false;
+    }
+
     public static String getField(String tableName, String fieldName) {
         String table = tableMapping.get(tableName);
         if (table == null) {

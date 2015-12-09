@@ -4,7 +4,7 @@
 </style>
 #@tinyTable("gtbl") ##ID为空则系统自动生成 带入参数则取该参数为IDend
     #@div(divBaseClass="tinyheaderTools form-inline")
-        #setTinyTablePageSize([8,10,20,35,50,100,200])
+        #setTinyTablePageSize([10,20,30,50,100,200])
     #end
     #@tinyTableContent(TINY_CONTEXT_PATH+adminPath+"/quality/testCase/caseVersionData?caseId="+caseId) ##取数据地址 总数据
         #@thead()

@@ -154,7 +154,8 @@ public class ProjectAction extends BaseController {
      * @return
      */
     @RequestMapping("/list/data")
-    public String listData(Integer start, Integer limit, String order, String orderType, Integer key, Model model) {
+    public String listData(Integer start, Integer limit,
+                           String order, String orderType, Integer key, Model model) {
         Integer[] userProjectIds = projectOperate.getUserProjectIdList();
         if (key != null && !ArrayUtil.isEmptyArray(userProjectIds)) {//用于搜索
             userProjectIds = new Integer[]{key};

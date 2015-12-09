@@ -5,10 +5,7 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.dao.complexsearch.SearchInfos;
@@ -79,7 +76,8 @@ public class ProjectBuildAction extends BaseController {
 
     @RequestMapping("/productBuildList")
     public String productBuildList(ProjectBuild build, Model model,
-                                   Integer start, Integer limit, String order, String ordertype) {
+                                   Integer start, Integer limit,@RequestParam(required = false,defaultValue = "buildId") String order,
+                                   @RequestParam(required = false,defaultValue = "desc")String ordertype) {
         boolean asc = "asc".equals(ordertype) ? true : false;
         Pager<ProjectBuild> pager = buildService.findPagerBuild(build, start, limit, order, asc);
         model.addAttribute("buildPager", pager);
@@ -88,7 +86,8 @@ public class ProjectBuildAction extends BaseController {
 
 
     @RequestMapping("/find")
-    public String find(Model model, Integer start, Integer limit, String order, String ordertype,
+    public String find(Model model, Integer start, Integer limit, @RequestParam(required = false,defaultValue = "buildId")String order,
+                       @RequestParam(required = false,defaultValue = "desc")String ordertype,
                        HttpServletRequest request, HttpServletResponse response) {
         Integer projectId = projectOperate.getCurrentProjectId(request, response);
         if (projectId == null) {
@@ -284,8 +283,8 @@ public class ProjectBuildAction extends BaseController {
                                 int id,
                                 String groupOperate,
                                 SearchInfos searchInfos,
-                                String order,
-                                String ordertype,
+                                @RequestParam(required = false,defaultValue = "bugId")String order,
+                                @RequestParam(required = false,defaultValue = "desc")String ordertype,
                                 Model model) {
 
         ConditionCarrier carrier = new ConditionCarrier();

@@ -47,7 +47,7 @@
     #@toggleRight()
         #@tinyTable(docTableId) ##ID为空则系统自动生成 带入参数则取该参数为ID
             #@div(divBaseClass="tinyheaderTools form-inline")
-                #setTinyTablePageSize([8,10,20,35,50,100,200])
+                #setTinyTablePageSize([10,20,30,50,100,200])
             ##批量删除
                 #foreach(m:menuManager.getScopeMenus("docdelete-op"))
                     #if(m.id == "batch-delete")
