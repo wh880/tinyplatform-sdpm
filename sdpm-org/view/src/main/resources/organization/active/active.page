@@ -1,5 +1,4 @@
 #!set(activeTitle="组织-动态" ,activeMenuId=currentPageId)
-#import("/common/component/form.component")
 #set(editpagePath=
     "/organization/common/fileOutput.pagelet",editpageModalId="userEditModal",editpageModal="#"+editpageModalId)
 #set(name="organizationActive")

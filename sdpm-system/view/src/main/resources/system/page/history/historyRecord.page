@@ -1,4 +1,3 @@
-#import("/org/tinygroup/fold/components/fold.component")
 #@foldMenu("" "Tinyfold3" "" "width:100%")
     #foreach(a : actionMap)
         #@foldItem( formatDate(a?.key?.actionDate,"yyyy-MM-dd HH:mm:ss")+" 由 "+a?.key?.actorName+" "+getDict("actionOperate",a?.key?.actionAction)+" " )

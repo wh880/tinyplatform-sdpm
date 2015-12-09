@@ -1,4 +1,4 @@
-#import("/org/tinygroup/publicComponent/macro/navselect.component")
+
 #@navSelect2("docLibName" "lib-id")
     #@navSelect2Nav()
         #if(documentLibId)

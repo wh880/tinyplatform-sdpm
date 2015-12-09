@@ -1,5 +1,3 @@
-#import("/org/tinygroup/table/components/togglebox.component")
-#import("/org/tinygroup/compose/components/compose_typography.component")
 #!set(activeMenuId=currentPageId)
 #!set(cname="demand",type="demand")
 

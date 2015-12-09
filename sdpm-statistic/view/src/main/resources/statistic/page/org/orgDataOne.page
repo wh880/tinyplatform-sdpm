@@ -1,4 +1,3 @@
-#import("/org/tinygroup/bootstrapDate/components/bootstrapDate.component")
 <div style="padding-bottom:10px">
 #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/statistic/org/all" "post" {"class":""})
 		#@elementItem()

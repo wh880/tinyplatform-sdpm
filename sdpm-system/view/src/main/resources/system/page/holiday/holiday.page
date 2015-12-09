@@ -1,6 +1,3 @@
-#import("/org/tinygroup/table/components/togglebox.component")
-#import("/org/tinygroup/compose/components/compose_typography.component")
-#import("/org/tinygroup/button/components/button_smart.component")
 #set(threeMenu="myholiday")
 
 #@tabWithInit("tab_demo" "optionsBox")

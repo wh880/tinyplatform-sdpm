@@ -1,4 +1,3 @@
-#import("/org/tinygroup/button/components/button_smart.component")
 #@div(divClass="operationbar")
 ##左侧按钮
 <span class="f">

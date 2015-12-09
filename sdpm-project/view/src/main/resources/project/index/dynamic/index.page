@@ -30,7 +30,6 @@
             #div(divClass="clearfix")#end
     #end
 #end
-#import("/org/tinygroup/dropDown/components/dropDown.component")
 #set(name="dynamic")
 <script>
     $(function () {

@@ -1,3 +1,2 @@
-#import("/org/tinygroup/button/components/button_smart.component")
 #set(name="task")
 #gantt("GanttChartDIV" TINY_CONTEXT_PATH+adminPath+"/project/task/gantt/init" TINY_CONTEXT_PATH+adminPath+"/project/task/gantt/find" {"width":"1050","height":"540"})

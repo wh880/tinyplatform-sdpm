@@ -1,20 +1,13 @@
-#import("/org/tinygroup/button/components/button_smart.component")
-#import("/org/tinygroup/table/components/tinytable.component")
 
 #set(testCaseTableId="testCaseTableId")
 <script>
     function deleteBatch() {
-
         var testList = new Array();
         $("input[type='checkbox']").each(function () {
-
             if (this.checked == true && this.id != "checkboxall") {
                 var caseId = $(this).val();
-
                 testList.push({caseId: caseId});
-
             }
-
         });
         if (testList.length > 0) {
             $.ajax({
@@ -32,14 +25,8 @@
             });
         }
     }
-
-
-
 </script>
-
-
 #set(name="qualityCases")
-
   #@layout(quality)
       #@tabBodyCol("ptop-5")
       ##operationbar start1
@@ -73,8 +60,6 @@
                                               $(this).parent().children(".active_btn").removeClass("active_btn");
                                               $(this).closest(".btn-group").find("button:first span:first").addClass("active_btn").html($(this).html());
                                           });
-//                                          $(".operationbar a").removeClass("active_btn");
-
                                       })
 
                                   </script>

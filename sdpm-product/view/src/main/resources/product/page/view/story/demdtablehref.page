@@ -1,6 +1,3 @@
-#import("/org/tinygroup/button/components/button_common.component")
-#import("/org/tinygroup/button/components/button.component")
-#import("/org/tinygroup/table/components/table.component")
 #!set(activeTitle="产品概况",activeMenuId=currentPageId)
 #!set(linkName="product-demand",sonitem="
 <li>"+"需求"+"</li>")

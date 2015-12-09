@@ -1,4 +1,3 @@
-#import("/org/tinygroup/button/components/button_smart.component")
 
 #set(name="client")
 

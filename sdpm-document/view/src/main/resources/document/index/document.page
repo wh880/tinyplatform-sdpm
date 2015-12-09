@@ -1,7 +1,4 @@
-#import("/org/tinygroup/button/components/button_smart.component")
-#import("/org/tinygroup/table/components/tinytable.component")
-#import("/org/tinygroup/table/components/togglebox.component")
-#import("/org/tinygroup/compose/components/compose_typography.component")
+
 #set(docTableId = "docTableId" )
 #@layout(document)#end
 

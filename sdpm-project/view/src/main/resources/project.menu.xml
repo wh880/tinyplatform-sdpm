@@ -18,19 +18,19 @@
               scope="pro-task-op"/>
 
         <!--<menu id="task-group" name="分组查询" icon="" sort="10">-->
-        <menu id="task-group-story" icon="" href="/project/task/grouping?type=1" sort="100" name="需求分组"
+        <menu id="task-group-story" href="/project/task/grouping?type=1" sort="100" name="需求分组"
               scope="task-group-menu"/>
-        <menu id="task-group-status" icon="" href="/project/task/grouping?type=2" sort="90" name="状态分组"
+        <menu id="task-group-status" href="/project/task/grouping?type=2" sort="90" name="状态分组"
               scope="task-group-menu"/>
-        <menu id="task-group-pri" icon="" href="/project/task/grouping?type=3" sort="80" name="优先级分组"
+        <menu id="task-group-pri" href="/project/task/grouping?type=3" sort="80" name="优先级分组"
               scope="task-group-menu"/>
-        <menu id="task-group-openedBy" icon="" href="/project/task/grouping?type=4" sort="70" name="创建者分组"
+        <menu id="task-group-openedBy" href="/project/task/grouping?type=4" sort="70" name="创建者分组"
               scope="task-group-menu"/>
-        <menu id="task-group-assignedTo" icon="" href="/project/task/grouping?type=5" sort="60" name="指派人分组"
+        <menu id="task-group-assignedTo" href="/project/task/grouping?type=5" sort="60" name="指派人分组"
               scope="task-group-menu"/>
-        <menu id="task-group-finishedBy" icon="" href="/project/task/grouping?type=6" sort="50" name="完成者分组"
+        <menu id="task-group-finishedBy" href="/project/task/grouping?type=6" sort="50" name="完成者分组"
               scope="task-group-menu"/>
-        <menu id="task-group-closedBy" icon="" href="/project/task/grouping?type=7" sort="40" name="关闭者分组"
+        <menu id="task-group-closedBy" href="/project/task/grouping?type=7" sort="40" name="关闭者分组"
               scope="task-group-menu"/>
         <!--</menu>-->
 

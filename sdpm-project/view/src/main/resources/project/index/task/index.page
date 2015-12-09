@@ -3,7 +3,6 @@
         #include("/project/common/task/taskMenu.page")
     #end
 #end
-#import("/org/tinygroup/button/components/button_smart.component")
 #set(name="task")
 #@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
     #@toggleLeft({"class":"aclass"})

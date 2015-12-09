@@ -2,7 +2,6 @@
 #set(editpagePath="/system/page/dictionaries/dict_edit.pagelet",editpageModalId="dictEditModal",editpageModal="#"+editpageModalId)
 #set(viewpagePath="/system/page/dictionaries/dict_view.pagelet",viewpageModalId="dictViewModal",viewpageModal="#"+viewpageModalId)
 #datatablesInitSimple("#dictListTb" )
-#import("/org/tinygroup/table/components/table.component")
 #set(threeMenu="dictionary-type")
 	
 #@divDataTablebox()

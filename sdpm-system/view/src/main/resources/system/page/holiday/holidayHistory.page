@@ -1,4 +1,3 @@
-#import("/org/tinygroup/table/components/table.component")
 #@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为IDend
     #@div(divBaseClass="tinyheaderTools form-inline")
         #setTinyTablePageSize([8,10,20,35,50,100,200])

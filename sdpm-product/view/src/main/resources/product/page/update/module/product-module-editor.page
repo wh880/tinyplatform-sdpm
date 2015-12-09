@@ -1,5 +1,3 @@
-#import("/org/tinygroup/button/components/button_common.component")
-#import("/org/tinygroup/button/components/button.component")
 #!set(linkName="product-overview",sonitem="
 <li>"+"概况"+"</li>")
 

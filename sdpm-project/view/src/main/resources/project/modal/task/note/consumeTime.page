@@ -1,5 +1,3 @@
-#import("/org/tinygroup/button/components/button_common.component")
-#import("/org/tinygroup/button/components/button.component")
 #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/project/task/consumeTime" "post" {"class":"test"})
     <input type="hidden" name="taskId" value="${task?.taskId}"/>
     #@tableBorder()

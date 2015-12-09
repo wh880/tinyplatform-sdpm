@@ -1,5 +1,3 @@
-#import("/org/tinygroup/table/components/togglebox.component")
-#import("/org/tinygroup/compose/components/compose_typography.component")
 
 #@tabBodyCol("ptop-5")
 ##operationbar start2

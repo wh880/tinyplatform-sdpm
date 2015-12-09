@@ -1,6 +1,3 @@
-#import("/org/tinygroup/button/components/button_smart.component")
-#import("/org/tinygroup/button/components/button_common.component")
-#import("/org/tinygroup/button/components/button.component")
 #@div()
 	#@tabWithInit("top_demo" "optionsBox")
 		#@tabHead()

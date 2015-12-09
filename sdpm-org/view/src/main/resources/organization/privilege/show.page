@@ -1,5 +1,4 @@
 #!set(activeTitle="角色管理",activeMenuId=currentPageId,parentId=parentId?:"0")
-#import("/common/component/form.component")
 #set(name="organizationPrivilege")
 #@layout(org)
     #@tabBodyCol("ptop-5")

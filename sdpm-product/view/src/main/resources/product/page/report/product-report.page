@@ -1,8 +1,3 @@
-#import("/org/tinygroup/form/components/form.component")
-#import("/org/tinygroup/pieCharts/components/pieCharts.component")
-#import("/org/tinygroup/icon/components/icon.component")
-#import("/org/tinygroup/button/components/button_common.component")
-#import("/org/tinygroup/button/components/button.component")
 #!set(linkName="product-demand",sonitem="<li>"+"需求"+"</li>")
 #set(titleLabel = {"A_productCount":"产品需求数量","B_moduleCount":"模块需求数量","D_storySource":"需求来源统计","C_planCount":"计划进行统计",
 	"E_storyStatus":"状态进行统计","F_storyStage":"所处阶段进行统计","G_storyPri":"优先级进行统计","H_storyEstimate":"预计工时进行统计",

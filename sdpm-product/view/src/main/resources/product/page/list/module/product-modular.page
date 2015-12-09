@@ -1,7 +1,3 @@
-#import("/org/tinygroup/form/components/form.component")
-#import("/org/tinygroup/table/components/table.component")
-#import("/org/tinygroup/button/components/button.component")
-#import("/org/tinygroup/Smart-treeview/components/treeview_smart.component")
 #!set(linkName="product-modular")
 
 
@@ -25,7 +21,6 @@
 
     #@toggleRight()
 
-        #import("/org/tinygroup/table/components/table.component")
 
     <table class="table " cellspacing="0">
 

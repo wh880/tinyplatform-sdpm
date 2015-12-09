@@ -1,5 +1,3 @@
-#import("/org/tinygroup/table/components/togglebox.component")
-#import("/org/tinygroup/compose/components/compose_typography.component")
 
 
 		#@tinyTable("productLinetable") ##ID为空则系统自动生成 带入参数则取该参数为ID

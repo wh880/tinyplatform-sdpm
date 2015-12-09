@@ -1,6 +1,3 @@
-#import("/org/tinygroup/button/components/button_common.component")
-#import("/org/tinygroup/button/components/button.component")
-#import("/org/tinygroup/table/components/table.component")
 #set(linkName="product-overview")
 
 #set(name="version")

@@ -1,7 +1,3 @@
-#import("/org/tinygroup/table/components/togglebox.component")
-#import("/org/tinygroup/compose/components/compose_typography.component")
-#import("/common/component/linkage.component")
-#import("/org/tinygroup/button/components/button_smart.component")
 #set(storyTableId = "storyTableId" )
 #set(linkName = "product-demand")
 <script>

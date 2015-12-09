@@ -1,7 +1,6 @@
 
 #set(editpagePath="/system/page/dictionaries/dictitem_edit.pagelet",editpageModalId="dictitemEditModal",editpageModal="#"+editpageModalId)
 <style>.dataTablebox .tablebox{margin-left:200px;margin-top:4px;}</style>
-#import("/org/tinygroup/table/components/table.component")
  #@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
 			#@div(divBaseClass="tinyheaderTools form-inline")
 				#setTinyTablePageSize([8,10,20,35,50,100,200])

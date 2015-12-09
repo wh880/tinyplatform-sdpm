@@ -1,5 +1,3 @@
-#import("/org/tinygroup/zTree/components/zTree.component")
-#import("/common/component/project.component")
 
 <style>
     .faqSty {

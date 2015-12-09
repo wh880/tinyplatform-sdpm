@@ -1,9 +1,3 @@
-#import("/org/tinygroup/table/components/tinytable.component")
-#import("/org/tinygroup/form/components/form.component")
-#import("/org/tinygroup/icon/components/icon.component")
-#import("/org/tinygroup/button/components/button_common.component")
-#import("/org/tinygroup/button/components/button.component")
-#import("/org/tinygroup/button/components/button_smart.component")
 
 #set(testCaseTableId="testCaseTableId")
 

@@ -1,6 +1,3 @@
-#import("/org/tinygroup/button/components/button_smart.component")
-#import("/org/tinygroup/button/components/button_common.component")
-#import("/org/tinygroup/button/components/button.component")
 
 #set(subMenuName="",c=call("getSubMenu"),subMenuName=linkName?:"product-"+subMenuName)
 

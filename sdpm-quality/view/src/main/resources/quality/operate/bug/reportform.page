@@ -1,8 +1,3 @@
-#import("/org/tinygroup/form/components/form.component")
-#import("/org/tinygroup/icon/components/icon.component")
-#import("/org/tinygroup/button/components/button_common.component")
-#import("/org/tinygroup/button/components/button.component")
-#import("/common/component/form.component")
 #set(titleLabel = {"A_projectBugCount":"项目Bug数量","B_buildBugCount":"版本Bug数量","C_moduleBugCount":"模块Bug数量","D_bugIncreaseByDay":"每天新增Bug数",
                         "E_bugResolveByDay":"每天解决Bug数","F_bugCloseByDay":"每天关闭的Bug数","G_bugCommitByPerson":"每人提交的Bug数","H_bugResolveByPerson":"每人解决的Bug数",
                         "I_bugCloseByPerson":"每人关闭的Bug数","J_bugSeverity":"Bug严重程度统计","K_bugSolution":"Bug解决方案统计","L_bugStatus":"Bug状态统计","M_bugReactive":"Bug激活次数统计",

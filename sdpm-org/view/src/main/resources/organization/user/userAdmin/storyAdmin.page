@@ -1,5 +1,4 @@
 #!set(activeTitle="组织管理",activeMenuId=currentPageId,choose=choose?:"0")
-#import("/common/component/form.component")
 #set(editpagePath=
     "/organization/common/fileOutput.pagelet",editpageModalId="userEditModal",editpageModal="#"+editpageModalId)
 #set(name="organizationUser")

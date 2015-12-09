@@ -3,8 +3,6 @@
 *#
 #set(pltype="addProduct")
 
-#import("/org/tinygroup/button/components/button_common.component")
-#import("/org/tinygroup/button/components/button.component")
 
 #@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/product/save" "post" {"class":""})
 <input type="hidden" name="lastAddress" value=""/>

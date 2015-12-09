@@ -1,8 +1,4 @@
 #!set(activeTitle="编辑项目",activeMenuId=currentPageId)
-#import("/org/tinygroup/form/components/form.component")
-#import("/org/tinygroup/icon/components/icon.component")
-#import("/org/tinygroup/button/components/button_common.component")
-#import("/org/tinygroup/button/components/button.component")
 
 <style>
     .hidden_namesty {

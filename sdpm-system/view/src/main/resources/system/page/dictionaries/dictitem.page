@@ -1,5 +1,4 @@
 
-#import("/org/tinygroup/zTree/components/zTree.component")
 #set(threeMenu="dictionary-entries")
 #set(editpagePath="/system/page/dictionaries/dictitem_edit.pagelet",editpageModalId="dictitemEditModal",editpageModal="#"+editpageModalId)
 #set(viewpagePath="/system/page/dictionaries/dictitem_view.pagelet",viewpageModalId="dictitemViewModal",viewpageModal="#"+viewpageModalId)

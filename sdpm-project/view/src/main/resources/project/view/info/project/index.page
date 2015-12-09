@@ -1,8 +1,4 @@
 
-#import("/org/tinygroup/form/components/form.component")
-#import("/org/tinygroup/button/components/button_common.component")
-#import("/org/tinygroup/button/components/button.component")
-#import("/org/tinygroup/table/components/table.component")
 #set(name="survey")
     #hiddenInput(hiddenInputName="projectId" hiddenInputValue=project?.projectId)
 #@layout(project)

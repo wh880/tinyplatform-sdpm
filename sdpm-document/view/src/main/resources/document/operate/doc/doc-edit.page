@@ -1,9 +1,4 @@
 
-#import("/org/tinygroup/form/components/form.component")
-#import("/org/tinygroup/icon/components/icon.component")
-#import("/org/tinygroup/button/components/button_common.component")
-#import("/org/tinygroup/button/components/button.component")
-#import("/org/tinygroup/button/components/button_smart.component")
 
 #@layout(document)#end
 #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/document/doc/editSave" "post" {"class":"edit","enctype":
