@@ -50,8 +50,8 @@ input:- webkit-autofill { -webkit-box-shadow: 0 0 0 1000px white inset; }
         <form class="loginForm" method="post" role="form" action="${TINY_CONTEXT_PATH}/login">
             <ul>
                 <li><p id="login_tip">${msg}</p></li>
-                <li id="login_input1"><input name="username"  type="text" class="loginuser" id="loginuser" placeholder="请输入用户名" value="${username?username:""}" autocomplete="off"/></li>
-                <li id="login_input2"><input name="password" type="password" class="loginpwd" id="loginpwd" placeholder="请输入密码"  autocomplete="off"/></li>
+                <li id="login_input1"><input name="username"  type="text" class="loginuser" id="loginuser" placeholder="请输入用户名" value="${username?username:testuser}" autocomplete="off"/></li>
+                <li id="login_input2"><input name="password" type="password" class="loginpwd" id="loginpwd" placeholder="请输入密码" value="${testpwd}" autocomplete="off"/></li>
                 <li id="login_btn">
                     <input type="submit" class="loginbtn" value="登录"/>
                     <label><input name="rememberMe" type="checkbox"/>记住我</label>

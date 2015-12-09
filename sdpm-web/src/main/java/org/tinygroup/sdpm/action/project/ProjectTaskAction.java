@@ -146,7 +146,7 @@ public class ProjectTaskAction extends BaseController {
      * @return
      */
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String save(ProjectTask task,
+    public String save(ProjectTask task, Integer direction,
                        String[] taskMailToArray, HttpServletRequest request, String comment, String lastAddress,
                        UploadProfile uploadProfile) throws IOException {
         Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, ProjectOperate.COOKIE_PROJECT_ID));
@@ -164,8 +164,13 @@ public class ProjectTaskAction extends BaseController {
         } catch (IOException e) {
             logger.logMessage(LogLevel.ERROR, "上传文件文件出错，请求路径{}", e, request.getRequestURI());
         }
-        if (!StringUtil.isBlank(lastAddress)) {
-            return "redirect:" + lastAddress;
+        switch (direction) {
+            case 1:
+                return "redirect:" + adminPath + "/project/task/form";
+            case 2:
+                return "redirect:" + adminPath + "/project/task/index";
+            case 3:
+                return "redirect:" + adminPath + "/project/demand/index";
         }
         return "redirect:" + adminPath + "/project/task/index";
     }
@@ -217,17 +222,18 @@ public class ProjectTaskAction extends BaseController {
 
     /**
      * 删除任务
+     *
      * @param task
      * @return
      */
     @ResponseBody
     @RequestMapping(value = "/delete")
-    public Map delete(ProjectTask task)  {
+    public Map delete(ProjectTask task) {
         task = taskService.findTaskById(task.getTaskId());
         taskService.deleteTask(task.getTaskId());
         LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, LogUtil.LogAction.DELETED, task.getTaskId().toString(),
                 userUtils.getUserId(), null, task.getTaskProject().toString(), null, null, null);
-        return resultMap(true,"删除成功");
+        return resultMap(true, "删除成功");
     }
 
     @RequestMapping("/consumeTime")
@@ -443,7 +449,7 @@ public class ProjectTaskAction extends BaseController {
             Integer start, Integer limit, String statu, String choose, Model model,
             HttpServletRequest request, HttpServletResponse response, String moduleId,
             @RequestParam(required = false, defaultValue = "task_id") String order,
-            @RequestParam(defaultValue = "desc")String orderType, Integer key) {
+            @RequestParam(defaultValue = "desc") String orderType, Integer key) {
         Integer projectId = projectOperate.getCurrentProjectId(request, response);
         if (projectId == null) {
             return redirectProjectForm();

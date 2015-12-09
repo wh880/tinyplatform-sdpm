@@ -33,7 +33,7 @@ public class RoleMenuAction extends BaseController {
     public String save(Integer roleId, String[] menuId, String parentId) {
         roleService.saveRoleMenu(roleId, parentId, menuId);
         userUtils.clearCache();
-        return "redirect:" + adminPath + "/org/roleMenu/show?roleId=" + roleId;
+        return "redirect:" + adminPath + "/org/privilege/list/";
     }
 
     /**
@@ -51,7 +51,7 @@ public class RoleMenuAction extends BaseController {
         List<String> orgRoleMenuIdList = Collections3.extractToList(orgRoleMenus, "orgRoleMenuId");
         model.addAttribute("orgRoleMenuIdList", orgRoleMenuIdList);
         model.addAttribute("parentId", parentId);
-        return "redirect:" + adminPath + "/org/privilege/list/";
+        return "organization/privilege/show";
     }
 
 }
