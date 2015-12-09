@@ -86,7 +86,7 @@ public class UserAction extends BaseController {
      *
      * @return
      */
-    @RequestMapping("/passwordSave")
+    @RequestMapping(value = "/passwordSave",method = RequestMethod.POST)
     public String passwordSave(String oldPassword, String newPassword, Model model) {
         OrgUser user = userUtils.getUser();
         if (userService.validatePassword(oldPassword, user.getOrgUserPassword())) {
@@ -98,7 +98,7 @@ public class UserAction extends BaseController {
         } else {
             addMessage(model, "修改密码失败，原始密码错误！");
         }
-        return "organization/user/updatePassword";
+        return "redirect:"+adminPath+"/home";
     }
 
     /**

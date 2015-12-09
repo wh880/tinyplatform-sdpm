@@ -1,15 +1,18 @@
 package org.tinygroup.sdpm.action.system;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;
 import org.tinygroup.sdpm.system.service.inter.ProfileService;
 
+import java.io.File;
 import java.util.Map;
 
 /**
@@ -53,7 +56,20 @@ public class ProfileAction extends BaseController {
     @ResponseBody
     @RequestMapping("delete")
     public Map delete(Integer id) {
-        profileService.softDeleteSystemProfile(id);
-        return resultMap(true, "删除成功");
+        SystemProfile systemProfile = profileService.findSystemProfileById(id);
+        if (systemProfile != null) {
+            String filePathname = systemProfile.getFilePathname();
+            if (!StringUtil.isBlank(filePathname)) {
+                File file = new File(UPLOAD_PATH + filePathname);
+                boolean b = FileUtils.deleteQuietly(file);
+                if (b) {
+                    profileService.softDeleteSystemProfile(id);
+                    return resultMap(true, "删除成功");
+                } else {
+                    return resultMap(false, "删除失败");
+                }
+            }
+        }
+        return resultMap(false, "删除失败");
     }
 }
