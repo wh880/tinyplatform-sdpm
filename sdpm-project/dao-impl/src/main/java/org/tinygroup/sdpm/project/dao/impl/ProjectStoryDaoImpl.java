@@ -59,8 +59,9 @@ public class ProjectStoryDaoImpl extends TinyDslDaoSupport implements ProjectSto
         SubSelect subSelect = SubSelect.subSelect(selectFrom(PROJECT_STORYTABLE).where(
                 and(
                         PROJECT_STORYTABLE.STORY_ID.eq(PRODUCT_STORYTABLE.STORY_ID),
-                        PROJECT_STORYTABLE.STORY_VERSION.eq(PRODUCT_STORYTABLE.STORY_VERSION))
-        ));
+                        PROJECT_STORYTABLE.STORY_VERSION.eq(PRODUCT_STORYTABLE.STORY_VERSION),
+                        PROJECT_STORYTABLE.PROJECT_ID.eq(projectId)
+        )));
         Condition existsCondition = new Condition(new ExistsExpression(subSelect, true));
         Select select = MysqlSelect.select(PRODUCT_STORYTABLE.ALL, PRODUCT_PLANTABLE.PLAN_NAME, PRODUCTTABLE.PRODUCT_NAME)
                 .from(PROJECT_PRODUCTTABLE)
