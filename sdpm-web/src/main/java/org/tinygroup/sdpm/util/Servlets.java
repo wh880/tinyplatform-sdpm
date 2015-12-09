@@ -1,9 +1,10 @@
-package org.tinygroup.sdpm.common.web;
+package org.tinygroup.sdpm.util;
 
 import com.google.common.net.HttpHeaders;
 import org.apache.commons.lang.Validate;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.tinygroup.commons.tools.StringUtil;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
@@ -183,4 +184,22 @@ public class Servlets {
             return null;
         }
     }
+
+
+    /**
+     * 获得用户远程地址
+     */
+    public static String getRemoteAddr() {
+        HttpServletRequest request = getRequest();
+        String remoteAddr = request.getHeader("X-Real-IP");
+        if (StringUtil.isBlank(remoteAddr)) {
+            remoteAddr = request.getHeader("X-Forwarded-For");
+        } else if (StringUtil.isBlank(remoteAddr)) {
+            remoteAddr = request.getHeader("Proxy-Client-IP");
+        } else if (StringUtil.isBlank(remoteAddr)) {
+            remoteAddr = request.getHeader("WL-Proxy-Client-IP");
+        }
+        return remoteAddr != null ? remoteAddr : request.getRemoteAddr();
+    }
+
 }

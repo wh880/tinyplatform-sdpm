@@ -147,6 +147,7 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
                         PROJECT_TASKTABLE.TASK_MOMODULE.value(t.getTaskModule()),
                         PROJECT_TASKTABLE.TASK_PRI.value(t.getTaskPri()),
                         PROJECT_TASKTABLE.TASK_ESTIMATE.value(t.getTaskEstimate()),
+                        PROJECT_TASKTABLE.TASK_LEFT.value(t.getTaskLeft()),
                         PROJECT_TASKTABLE.TASK_CONSUMED.value(t.getTaskConsumed()),
                         PROJECT_TASKTABLE.TASK_DEAD_LINE.value(t.getTaskDeadLine()),
                         PROJECT_TASKTABLE.TASK_STATUS.value(t.getTaskStatus()),

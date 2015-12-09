@@ -17,11 +17,9 @@
                 #end
 
             #foreach(m:menuManager.getScopeMenus("pro-taskInfo2-op"))
-                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?taskId=${task.taskId}"
-                   title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?taskId=${task.taskId}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
             #end
-            <a href="javascript :;" onclick="javascript:history.back(-1);" title="返回">#buttonIcon(iconClass=
-                "icon-reply")</a>
+            <a href="javascript:;" onclick="javascript:history.back(-1);" title="返回">#buttonIcon(iconClass="icon-reply")</a>
             #set(m1=menuManager.getMenu("pro-Info-close"))
             </span>
             #div(divClass="clearfix")

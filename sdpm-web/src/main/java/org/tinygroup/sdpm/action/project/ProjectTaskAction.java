@@ -237,6 +237,7 @@ public class ProjectTaskAction extends BaseController {
     public String consumeTimeSave(EffortList effortList, Integer taskId) {
         List<SystemEffort> list = effortList.getList();
         ProjectTask task = taskService.findTaskById(taskId);
+        Float taskConsumed = task.getTaskConsumed();
         for (int i = 0; i < list.size(); i++) {
             SystemEffort systemEffort = list.get(i);
             if (systemEffort.getEffortLeft() == null || systemEffort.getEffortConsumed() == null) {
@@ -247,6 +248,10 @@ public class ProjectTaskAction extends BaseController {
                 systemEffort.setEffortObjectId(taskId);
                 systemEffort.setEffortAccount(userUtils.getUserAccount());
                 systemEffort.setEffortProject(task.getTaskProject());
+                Float effortConsumed = systemEffort.getEffortConsumed();
+                if (effortConsumed != null) {
+                    taskConsumed += effortConsumed;
+                }
             }
         }
         if (!CollectionUtil.isEmpty(list)) {
@@ -254,6 +259,7 @@ public class ProjectTaskAction extends BaseController {
             task.setTaskLeft(systemEffort.getEffortLeft());
             task.setTaskConsumed(systemEffort.getEffortConsumed());
             task.setTaskId(taskId);
+            task.setTaskConsumed(taskConsumed);
             taskService.updateTask(task);
             burnService.updateBurnByProjectId(task.getTaskProject());
         }
@@ -628,7 +634,7 @@ public class ProjectTaskAction extends BaseController {
             } else {
                 comp = t.getTaskConsumed() / (t.getTaskConsumed() + t.getTaskLeft());
             }
-            map.put("pComp", String.format("%.2f",comp * 100));
+            map.put("pComp", String.format("%.2f", comp * 100));
             map.put("pGroup", "0");
             map.put("pParent", "0");
             map.put("pOpen", "1");

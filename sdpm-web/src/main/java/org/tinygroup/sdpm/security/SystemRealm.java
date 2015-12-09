@@ -18,8 +18,10 @@ import org.tinygroup.sdpm.org.service.inter.RoleService;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.security.filter.UsernamePasswordToken;
 import org.tinygroup.sdpm.util.LogUtil;
+import org.tinygroup.sdpm.util.Servlets;
 
 import javax.annotation.PostConstruct;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -50,6 +52,10 @@ public class SystemRealm extends AuthorizingRealm {
                     info.addStringPermission(menu.getOrgRoleMenuId());
                 }
             }
+            user.setOrgUserLast(new Date());
+            user.setOrgUserIp(Servlets.getRemoteAddr());
+            user.setOrgUserPassword(null);
+            userService.updateUser(user);
             // 记录登录日志
             LogUtil.log(LogUtil.LogOperateObject.USER, LogUtil.LogAction.LOGIN, user.getOrgUserId(), user.getOrgUserId());
             return info;

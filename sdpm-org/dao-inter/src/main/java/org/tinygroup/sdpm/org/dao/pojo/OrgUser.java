@@ -17,6 +17,7 @@
 package org.tinygroup.sdpm.org.dao.pojo;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 用户表
@@ -150,7 +151,7 @@ public class OrgUser implements Serializable {
      * 最后登录
      *
      */
-    private Integer orgUserLast;
+    private Date orgUserLast;
     /**
      * 失败次数
      *
@@ -363,11 +364,11 @@ public class OrgUser implements Serializable {
         this.orgUserIp = orgUserIp;
     }
 
-    public Integer getOrgUserLast() {
+    public Date getOrgUserLast() {
         return orgUserLast;
     }
 
-    public void setOrgUserLast(Integer orgUserLast) {
+    public void setOrgUserLast(Date orgUserLast) {
         this.orgUserLast = orgUserLast;
     }
 
