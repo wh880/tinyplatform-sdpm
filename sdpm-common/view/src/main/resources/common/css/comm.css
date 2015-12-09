@@ -83,7 +83,8 @@
     }
 	    .menu-on-top #main-menu .navigation > li.active > a {
         background:#fff !important;
-		color:#f58447!important
+		color:#f58447!important;
+		height:47px;
     }
 
     #bodyrap.theme-clean.menu-on-top #main-menu .mmc-dropdown-open-ul a:after, .theme-default #main-menu .navigation a:after {

@@ -21,15 +21,11 @@
 </span>
 #end
 
-
     #@noRespsGridSystem()
-
         #@gridSysCol(3)
         #end
-
         #@gridSysCol(6)
             #@tinyForm("thisform" "" "" {"class":"formText"})
-
             <div class="infoContent">
                 <p class="titleName">账号信息</p>
                 #@gridSysRow()
@@ -74,7 +70,7 @@
                 #@gridSysRow()
                     #@colLabel("col-4")所属部门：#end
                     #@gridSysCol(8)
-                        <p>${user?.orgDeptId}</p>
+                        <p>${deptService.findDept(user?.orgDeptId).orgDeptName}</p>
                     #end
                 #end
                 #@gridSysRow()

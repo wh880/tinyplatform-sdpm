@@ -51,7 +51,7 @@ public class RoleMenuAction extends BaseController {
         List<String> orgRoleMenuIdList = Collections3.extractToList(orgRoleMenus, "orgRoleMenuId");
         model.addAttribute("orgRoleMenuIdList", orgRoleMenuIdList);
         model.addAttribute("parentId", parentId);
-        return "organization/privilege/show";
+        return "redirect:" + adminPath + "/org/privilege/list/";
     }
 
 }

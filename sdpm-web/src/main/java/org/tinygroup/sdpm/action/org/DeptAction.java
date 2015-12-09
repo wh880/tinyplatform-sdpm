@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.org.dao.pojo.OrgDept;
 import org.tinygroup.sdpm.org.service.inter.DeptService;
-import org.tinygroup.sdpm.org.service.inter.UserService;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,8 +18,6 @@ import java.util.Map;
 public class DeptAction extends BaseController {
     @Autowired
     private DeptService deptService;
-    @Autowired
-    private UserService userService;
 
     /**
      * 部门的增加功能

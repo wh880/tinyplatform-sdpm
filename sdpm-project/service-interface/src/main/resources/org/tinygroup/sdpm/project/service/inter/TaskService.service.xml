@@ -108,5 +108,11 @@
       </service-parameters>
       <service-result name="buildChartResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.project.dao.pojo.TaskChartBean"/>
     </service-method>
+    <service-method local-name="deleteTask" service-id="deleteTask" method-name="deleteTask" cacheable="false" category="org.tinygroup.sdpm.project.service.inter">
+      <service-parameters>
+        <service-parameter name="taskId" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="deleteTaskResult" required="false" is-array="false" type="java.lang.Integer"/>
+    </service-method>
   </service-component>
 </service-components>

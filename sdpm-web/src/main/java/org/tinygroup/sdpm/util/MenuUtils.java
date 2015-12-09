@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.tinygroup.sdpm.common.menu.Menu;
 import org.tinygroup.sdpm.common.menu.MenuManager;
+import org.tinygroup.sdpm.common.util.Collections3;
 
 import java.util.List;
 
@@ -67,6 +68,9 @@ public class MenuUtils {
     }
 
     private void filterMenu(final List<Menu> menuList) {
+        if (Collections3.isEmpty(menuList)){
+            return;
+        }
         for (int i = 0; i < menuList.size(); i++) {
             Menu menu = menuList.get(i);
             if (!UserUtils.hasMenu(menu.getId())) {
