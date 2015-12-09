@@ -20,10 +20,6 @@ import java.util.List;
 public class ProjectOperate {
     public static final String COOKIE_PROJECT_ID = "currentProjectId";
 
-//    private static final String CMS_CACHE = "cmsCache";
-//    private static final String CMS_CACHE_PROJECT_LIST = "projectList";
-//    private static final String CMS_CACHE_PROJECT_ID_ = "project_id_";
-//    private static final String USER_CACHE_PROJECT_LIST = "userProjectList";
     @Autowired
     private ProjectService projectService;
 
@@ -99,18 +95,6 @@ public class ProjectOperate {
         }
         return ids.toArray(new Integer[0]);
     }
-
-//    /**
-//     * 获得项目列表
-//     */
-//    public List<Project> getProjectList() {
-//        List<Project> projectList = (List<Project>) CacheUtils.get(CMS_CACHE, CMS_CACHE_PROJECT_LIST);
-//        if (projectList == null) {
-//            projectList = projectService.findAllProjectList();
-//            CacheUtils.put(CMS_CACHE, CMS_CACHE_PROJECT_LIST, projectList);
-//        }
-//        return projectList;
-//    }
 
     /**
      * 获得项目列表
