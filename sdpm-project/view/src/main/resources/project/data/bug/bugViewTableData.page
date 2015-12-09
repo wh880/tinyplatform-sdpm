@@ -11,13 +11,13 @@
 #@tr()
     #@td()<input type="checkbox" value="1" name="idCheck">#end
     #@td()${b?.no}#end
-    #@td()${getDict("bugSeverity",var?.bugSeverity)}#end
-    #@td()${getDict("bugPriority",var?.priority)}#end
+    #@td()${getDict("bugSeverity",b?.bugSeverity)}#end
+    #@td()${getDict("bugPriority",b?.priority)}#end
     #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/bug/bugInfo?bugId=${b?.bugId}">${"["+(bug?.bugConfirmed==0?"未确认":"已确认")+"]"+b?.bugTitle}#end
     #@td("nowrap")${b?.bugOpenedBy?userUtils.getUserById(b?.bugOpenedBy)?.orgUserRealName:""}#end
     #@td("nowrap")${b?.bugAssignedTo?userUtils.getUserById(b?.bugAssignedTo)?.orgUserRealName:""}#end
     #@td("nowrap")${b?.bugResolvedBy?userUtils.getUserById(b?.bugResolvedBy)?.orgUserRealName:""}#end
-    #@td()${getDict("bugResolution",var?.bugResolution?:0)}#end
+    #@td()${getDict("bugResolution",b?.bugResolution?:0)}#end
     #@td("nowrap")
         #foreach(m:menuManager.getScopeMenus("testbug-op"))
             #if(m.sort=="6")
