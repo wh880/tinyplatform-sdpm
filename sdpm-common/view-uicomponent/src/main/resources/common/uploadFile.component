@@ -1,7 +1,7 @@
 #macro uploadFileList(profileList)
 #foreach(p:profileList)
 	<div class="files-box">
-		<a href="${TINY_CONTEXT_PATH+p.filePathname}">${p.fileTitle+"."+p.fileExtension}</a>
+		<a target="_blank" href="${TINY_CONTEXT_PATH+p.filePathname}">${p.fileTitle+"."+p.fileExtension}</a>
 	</div>
 #end
 #end
@@ -55,7 +55,7 @@
 </table>
 <script type="text/javascript">
     $(function(){
-        var allowFileExt=["jpg","png","git","doc","rar","docx","xls","xlsx"];
+        var allowFileExt=["jpg","png","git","doc","rar","docx","xls","xlsx","txt"];
         function updateStepID(){
             $('#${mulUploadFileTableId}>.databody .stepID').each(function(index){
                 $(this).html(index+1);

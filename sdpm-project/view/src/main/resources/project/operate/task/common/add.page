@@ -180,6 +180,19 @@
         #end
 
         #@elementItem()
+            #@colLabel()添加之后：#end
+            #@formControlDiv("skin-minimal col-5")
+                #@Tradioes("direction" "2" )
+                    #@Tradio("1")继续为该需求添加任务#end
+                    #@Tradio("2")返回任务列表#end
+                    #@Tradio("3")返回需求列表#end
+                #end
+            #end
+            #@validateDiv("col-2")#end
+        #end
+
+
+        #@elementItem()
             <div class="col-12">
                 <div class="col-2 text-r"><label>备注：</label></div>
                 <div class="col-7">
@@ -188,7 +201,6 @@
             </div>
         #end
         <br/>
-    </div>
     #@elementItem()
         <div class="col-12">
             <div class="col-5">
@@ -203,6 +215,8 @@
             <div class="col-5"></div>
         </div>
     #end
+    </div>
+
     <br>
 </div>
 #end
