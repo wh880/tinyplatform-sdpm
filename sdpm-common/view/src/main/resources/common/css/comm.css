@@ -85,9 +85,6 @@
         background:#fff !important;
 		color:#f58447!important
     }
-    #main-navbar .navbar-nav.pull-right {
-        margin-right: 21px;
-    }
 
     #bodyrap.theme-clean.menu-on-top #main-menu .mmc-dropdown-open-ul a:after, .theme-default #main-menu .navigation a:after {
         background: none
