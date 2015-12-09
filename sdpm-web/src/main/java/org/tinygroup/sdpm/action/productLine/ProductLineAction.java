@@ -436,6 +436,7 @@ public class ProductLineAction extends BaseController {
             mapTop.put("pId", 0);
             mapTop.put("open", true);
             mapTop.put("isParent", true);
+            mapTop.put("clickAble", false);
             mapTop.put("add", true);
             mapTop.put("edit", false);
             mapTop.put("name", p.getProductLineName());
