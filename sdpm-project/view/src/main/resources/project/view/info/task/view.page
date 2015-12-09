@@ -6,15 +6,20 @@
             </span>
         <span class="r">
                 #foreach(m:menuManager.getScopeMenus("pro-task-op"))
-                    #if(m.id=="pro-Info-delete")
-                        <a class="taskDelete" href="javascript:void(0);" value="${TINY_CONTEXT_PATH+adminPath}${m.href}?taskId=${task.taskId}"
-                           title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
-                    #else
+                    #if(m.id!="pro-task-close")
                         <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?taskId=${task.taskId}"
                            title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
                     #end
                 #end
-
+            #foreach(m:menuManager.getScopeMenus("pro-taskInfo2-op"))
+                #if(m.id=="pro-Info-delete")
+                    <a class="taskDelete" href="javascript:void(0);" value="${TINY_CONTEXT_PATH+adminPath}${m.href}?taskId=${task.taskId}"
+                       title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
+                #else
+                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?taskId=${task.taskId}"
+                       title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+                #end
+            #end
 
             <a href="javascript:;" onclick="javascript:history.back(-1);" title="返回">#buttonIcon(iconClass="icon-reply")</a>
             #set(m1=menuManager.getMenu("pro-Info-close"))
@@ -48,12 +53,18 @@
     #history(adminPath+"/system/action/ajax/history?actionObjectType=task&actionObjectId="+task?.taskId)
     <center>
         #foreach(m:menuManager.getScopeMenus("pro-task-op"))
+            #if(m.id!="pro-task-close")
+                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?taskId=${task.taskId}"
+                   title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
+            #end
+        #end
+        #foreach(m:menuManager.getScopeMenus("pro-taskInfo2-op"))
             #if(m.id=="pro-Info-delete")
                 <a class="taskDelete" href="javascript:void(0);" value="${TINY_CONTEXT_PATH+adminPath}${m.href}?taskId=${task.taskId}"
                    title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
             #else
-                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?taskId=${task.taskId}"
-                   title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
+            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?taskId=${task.taskId}"
+               title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
             #end
         #end
         <a href="javascript :;" onclick="javascript:history.back(-1);" title="返回">#buttonIcon(iconClass=
