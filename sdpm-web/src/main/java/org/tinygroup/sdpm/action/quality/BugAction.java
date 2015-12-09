@@ -284,7 +284,7 @@ public class BugAction extends BaseController {
         if (bugIds.length > 0) {
             for (String id : bugIds) {
                 QualityBug bug = bugService.findQualityBugById(Integer.valueOf(id));
-                if (bug.getBugStatus() != null && Integer.parseInt(bug.getBugStatus()) < 2) {
+                if (bug.getBugStatus() != null && Integer.parseInt(bug.getBugStatus()) ==1) {
                     bug.setBugConfirmed(1);
                     bug.setBugStatus("2");
                     bug.setBugResolution(resolutionType);
