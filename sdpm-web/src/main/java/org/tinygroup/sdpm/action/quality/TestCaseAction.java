@@ -88,7 +88,7 @@ public class TestCaseAction extends BaseController {
         testcase.setDeleted(0);
         ConditionCarrier carrier = new ConditionCarrier();
         if (testcase.getModuleId() != null && testcase.getModuleId() > 0) {
-            carrier.putModuleIn("qualityTestCase",String.valueOf(testcase.getModuleId()));
+            carrier.putModuleIn("qualityTestCase.caseId",String.valueOf(testcase.getModuleId()));
             testcase.setModuleId(null);
         }
 

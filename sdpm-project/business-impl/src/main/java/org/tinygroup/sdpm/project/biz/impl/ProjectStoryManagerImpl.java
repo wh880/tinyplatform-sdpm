@@ -40,7 +40,7 @@ public class ProjectStoryManagerImpl implements ProjectStoryManager {
         if (order == null) {
             return projectStoryDao.findStory(projectId, start, limit);
         } else {
-            OrderBy orderBy = new OrderBy(order, "asc".equals(oredertype) ? true : false);
+            OrderBy orderBy = new OrderBy(NameUtil.resolveNameDesc(order), "asc".equals(oredertype) ? true : false);
             return projectStoryDao.findStory(projectId, start, limit, orderBy);
         }
     }

@@ -139,7 +139,7 @@ public class DocBizImpl implements DocBiz {
         if (StringUtil.isBlank(sortName)) {
             return docdao.complexQuery(start, limit, doc, statusCondition,conditions,groupOperate);
         }
-        return docdao.complexQuery(start, limit, doc, statusCondition,conditions, groupOperate, new OrderBy(sortName, asc));
+        return docdao.complexQuery(start, limit, doc, statusCondition,conditions, groupOperate, new OrderBy(NameUtil.resolveNameDesc(sortName), asc));
     }
 
     public int[] batchDelDocByIds(List<DocumentDoc> keys) {
@@ -152,7 +152,7 @@ public class DocBizImpl implements DocBiz {
         if (StringUtil.isBlank(sortName)) {
             return doclibdao.queryPager(start, limit, doclib);
         } else {
-            OrderBy orderby = new OrderBy(sortName, asc);
+            OrderBy orderby = new OrderBy(NameUtil.resolveNameDesc(sortName), asc);
             return doclibdao.queryPager(start, limit, doclib, orderby);
         }
     }

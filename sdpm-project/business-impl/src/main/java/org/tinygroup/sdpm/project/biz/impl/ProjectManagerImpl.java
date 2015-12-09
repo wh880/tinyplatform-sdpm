@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
+import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.project.biz.inter.ProjectManager;
 import org.tinygroup.sdpm.project.dao.ProjectDao;
 import org.tinygroup.sdpm.project.dao.impl.FieldUtil;
@@ -108,7 +109,7 @@ public class ProjectManagerImpl implements ProjectManager {
 
     public List<Project> findList(Project project, String order, String orderType) {
         if (order != null) {
-            return projectDao.query(project, new OrderBy(FieldUtil.stringFormat(order), !("desc".equals(orderType)) ? true : false));
+            return projectDao.query(project, new OrderBy(NameUtil.resolveNameDesc(order), !("desc".equals(orderType)) ? true : false));
         } else {
             return projectDao.query(project);
         }
@@ -116,7 +117,7 @@ public class ProjectManagerImpl implements ProjectManager {
     }
 
     public Pager<Project> findPager(int start, int limit, Project project, String order, String orderType) {
-        return projectDao.queryPager((start - 1) * limit, limit, project, new OrderBy(FieldUtil.stringFormat(order), !("desc".equals(orderType)) ? true : false));
+        return projectDao.queryPager((start - 1) * limit, limit, project, new OrderBy(NameUtil.resolveNameDesc(order), !("desc".equals(orderType)) ? true : false));
     }
 
     public List<Project> getProjectByStoryId(Integer storyId) {

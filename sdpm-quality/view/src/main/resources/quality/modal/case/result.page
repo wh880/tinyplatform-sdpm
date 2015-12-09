@@ -21,7 +21,7 @@
                             #end
                         #end
                         #@tbody()
-                            #set(sResults = stepResults?.get(result?.testResultId))
+                            #set(sResults = stepResults?.get(String.valueOf(result?.testResultId)))
                             #foreach(caseStep:caseSteps.get(String.valueOf(result?.testResultId)))
                                 #@tr()
                                     #@th()${caseStepFor.index}#end

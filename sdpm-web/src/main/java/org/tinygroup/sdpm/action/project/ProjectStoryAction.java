@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.commons.tools.ArrayUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
@@ -41,7 +42,9 @@ public class ProjectStoryAction extends BaseController {
 
     @RequestMapping("/list/data")
     public String listData(HttpServletRequest request, HttpServletResponse response,
-                           Model model, Integer start, Integer limit, String order, String orderType, String moduleId) {
+                           Model model, Integer start, Integer limit,
+                           @RequestParam(required = false,defaultValue="storyId")String order,
+                           @RequestParam(required = false,defaultValue = "desc")String orderType, String moduleId) {
 
         Integer projectId = projectOperate.getCurrentProjectId(request, response);
         if (projectId == null) {

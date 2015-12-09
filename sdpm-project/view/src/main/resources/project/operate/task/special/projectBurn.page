@@ -6,7 +6,7 @@
         <div class='actions r'>
             <div class='input-group l w-100px'>
                 #if(!interval)
-                    #set(interval=3)
+                    #set(interval=1)
                 #end
                 <select name='interval' id='interval' class='form-control'>
                     <option value='1' ${interval

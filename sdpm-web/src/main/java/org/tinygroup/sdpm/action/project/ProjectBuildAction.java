@@ -76,7 +76,7 @@ public class ProjectBuildAction extends BaseController {
 
     @RequestMapping("/productBuildList")
     public String productBuildList(ProjectBuild build, Model model,
-                                   Integer start, Integer limit,@RequestParam(required = false,defaultValue = "buildId") String order,
+                                   Integer start, Integer limit,@RequestParam(required = false,defaultValue = "build_id") String order,
                                    @RequestParam(required = false,defaultValue = "desc")String ordertype) {
         boolean asc = "asc".equals(ordertype) ? true : false;
         Pager<ProjectBuild> pager = buildService.findPagerBuild(build, start, limit, order, asc);
@@ -86,7 +86,7 @@ public class ProjectBuildAction extends BaseController {
 
 
     @RequestMapping("/find")
-    public String find(Model model, Integer start, Integer limit, @RequestParam(required = false,defaultValue = "buildId")String order,
+    public String find(Model model, Integer start, Integer limit, @RequestParam(required = false,defaultValue = "build_id")String order,
                        @RequestParam(required = false,defaultValue = "desc")String ordertype,
                        HttpServletRequest request, HttpServletResponse response) {
         Integer projectId = projectOperate.getCurrentProjectId(request, response);

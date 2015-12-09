@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
+import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.project.biz.inter.BuildManager;
 import org.tinygroup.sdpm.project.dao.ProjectBuildDao;
@@ -35,7 +36,7 @@ public class BuildManagerImpl implements BuildManager {
         if (StringUtil.isBlank(order)) {
             return projectBuildDao.queryPager(start, limit, build);
         } else {
-            OrderBy orderBy = new OrderBy(order, asc);
+            OrderBy orderBy = new OrderBy(NameUtil.resolveNameDesc(order), asc);
             return projectBuildDao.queryPager(start, limit, build, orderBy);
         }
 

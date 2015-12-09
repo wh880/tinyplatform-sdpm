@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
+import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.project.biz.inter.TeamManager;
 import org.tinygroup.sdpm.project.dao.ProjectTeamDao;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTeam;
@@ -61,7 +62,7 @@ public class TeamManagerImpl implements TeamManager {
         if (StringUtil.isBlank(order)) {
             return teamDao.queryPager(start, limit, team);
         } else {
-            OrderBy orderBy = new OrderBy(order, asc);
+            OrderBy orderBy = new OrderBy(NameUtil.resolveNameDesc(order), asc);
             return teamDao.queryPager(start, limit, team, orderBy);
         }
 

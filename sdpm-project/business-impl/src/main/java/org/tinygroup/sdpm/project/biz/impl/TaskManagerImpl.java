@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
+import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.project.biz.inter.TaskManager;
 import org.tinygroup.sdpm.project.dao.ProjectTaskDao;
@@ -12,6 +13,7 @@ import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
 import org.tinygroup.sdpm.project.dao.pojo.TaskChartBean;
 import org.tinygroup.tinysqldsl.Pager;
 
+import javax.lang.model.element.Name;
 import java.util.List;
 
 /**
@@ -47,7 +49,7 @@ public class TaskManagerImpl implements TaskManager {
         if (StringUtil.isBlank(sortName)) {
             return taskDao.queryPager(start, limit, task);
         }
-        OrderBy orderBy = new OrderBy(sortName, asc);
+        OrderBy orderBy = new OrderBy(NameUtil.resolveNameDesc(sortName), asc);
         return taskDao.queryPager(start, limit, task, orderBy);
     }
 
@@ -55,12 +57,12 @@ public class TaskManagerImpl implements TaskManager {
         if (StringUtil.isBlank(sortName)) {
             return taskDao.queryPagerByStatus(start, limit, task, condition);
         }
-        OrderBy orderBy = new OrderBy(sortName, asc);
+        OrderBy orderBy = new OrderBy(NameUtil.resolveNameDesc(sortName), asc);
         return taskDao.queryPagerByStatus(start, limit, task, condition, orderBy);
     }
 
     public Pager<ProjectTask> findPagerByMe(Integer start, Integer limit, ProjectTask task, String sortName, boolean asc, OrgUser user) {
-        OrderBy orderBy = new OrderBy(sortName, asc);
+        OrderBy orderBy = new OrderBy(NameUtil.resolveNameDesc(sortName), asc);
         return taskDao.queryPagerByMe(start, limit, task, user, orderBy);
     }
 

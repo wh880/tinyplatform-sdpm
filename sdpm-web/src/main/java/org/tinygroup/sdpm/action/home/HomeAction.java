@@ -71,10 +71,9 @@ public class HomeAction extends BaseController{
         //首页项目统计
         Integer[] userProjectIds = projectOperate.getUserProjectIdList();
         Pager<Project> projectPager = projectService.findProjects(0, userProjectIds != null ? userProjectIds.length : 0, null, null, userProjectIds);
-        Integer interval = 2;
         if (projectPager.getRecords().size() > 0) {
             for (Project project : projectPager.getRecords()) {
-                BurnDTO burnDTO = burnService.initBurn(project.getProjectId(), interval);
+                BurnDTO burnDTO = burnService.initBurn(project.getProjectId(), null);
                 project.setBurnValue(burnDTO.getLeftValues());
             }
         }
