@@ -160,7 +160,7 @@
                     #end
                     #@div(divClass="col-3")
                         #@Tselect2F()
-                            #@Tselect2Body("priority" bug?.priority {"class":"input-text select2",
+                            #@Tselect2Body("priority" bug?.priority?:2 {"class":"input-text select2",
                                 "datatype":"*","nullmsg":"优先级不能为空！"}) ##,"multiple":"multiple"加上为多选项
                                 #foreach(pri : getDict("bugPriority"))
                                     <option value="${pri.value}">${pri.text}</option>
@@ -237,7 +237,7 @@
                 #@div(divClass="col-0")&nbsp&nbsp#end
                 #@div(divClass="col-3")
                     #@Tselect2F()
-                        #@Tselect2Body("bugSeverity" bug?.bugSeverity {"class":"input-text","datatype":"*","nullmsg":"严重程度不能为空！"}) ##,"multiple":"multiple"加上为多选项
+                        #@Tselect2Body("bugSeverity" bug?.bugSeverity?:3 {"class":"input-text","datatype":"*","nullmsg":"严重程度不能为空！"}) ##,"multiple":"multiple"加上为多选项
                             #foreach(se : getDict("bugSeverity"))
                                 #@tinyOptionItem(se.value)${se.text}#end
                             #end

@@ -34,11 +34,16 @@
           </dictNodeEntry>
           
           <dictNodeEntry name="bugSeverity" title="严重程度">
-          <dictItem key="1" value="NiceToHave" sort="1"/>
-          <dictItem key="2" value="Trivial" sort="2"/>
-          <dictItem key="3" value="Minor" sort="3"/>
-          <dictItem key="4" value="Major" sort="4"/>
-          <dictItem key="5" value="Crash" sort="5"/>
+              <!--建设性的意见或建议-->
+          <dictItem key="1" value="Suggestion" sort="1"/>
+              <!--错误是表面化或微小的（提示信息不太准确友好、错别字、UI布局或罕见故障等），对功能几乎没有影响，产品及属性仍可使用；-->
+          <dictItem key="2" value="Minor " sort="2"/>
+              <!--normal 进入软件需要一步操作才能发现的文字、颜色、图形错误 提示信息不正确 ,必填信息无提示 , 随机产生的软件功能性bug，很难重现-->　
+              <dictItem key="3" value="Major" sort="3"/>
+              <!--功能未实现或导致一个特性不能运行并且不可能有替代方案；-->
+          <dictItem key="4" value="Critical" sort="4"/>
+              <!--错误导致了死机、产品失败（“崩溃”）、系统悬挂无法操作；-->
+          <dictItem key="5" value="Blocker" sort="5"/>　
           </dictNodeEntry>
      
          <dictNodeEntry name="bugOS" title="系统/浏览器">
@@ -80,11 +85,16 @@
           </dictNodeEntry>
 
         <dictNodeEntry name="bugPriority" title="优先级">
+            <!--即”低优先级”，即问题在系统发布以前必须确认解决或确认可以不予解决。-->
             <dictItem key="1" value="Low" sort="1"/>
-            <dictItem key="2" value="Medium" sort="2"/>
+            <!--即“正常处理”，进入个人计划解决，表示问题不影响需求的实现，但是影响其他使用方面，比如页面调用出错，调用了错误的等。-->
+            <dictItem key="2" value="Normal" sort="2"/>
+            <!--即“高度重视”，表示有时间就要马上解决，否则系统偏离需求较大或预定功能不能正常实现。-->
             <dictItem key="3" value="High" sort="3"/>
-            <dictItem key="4" value="Very High" sort="4"/>
-            <dictItem key="5" value="Urgent" sort="5"/>
+            <!--即“急需解决”，表示问题的修复很紧要，很急迫，关系到系统的主要功能模块能否正常-->
+            <dictItem key="4" value="Urgent" sort="4"/>
+            <!--即“马上解决”，表示问题必须马上解决，否则系统根本无法达到预定的需求-->
+            <dictItem key="5" value="Immediate" sort="5"/>
         </dictNodeEntry>	
     </dictNodeEntry>
     <dictNodeEntry name="case" title="测试用例">
