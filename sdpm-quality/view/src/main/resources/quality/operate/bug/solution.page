@@ -16,7 +16,7 @@
         <div class="col-2 text-r"><label><span class="c-red">*</span>解决方案：</label></div>
         #@formControlDiv("col-4")
                 #@Tselect2F()
-                    #@Tselect2Body("bugResolution" bug?.bugResolution?:2 {"class":"input-text","datatype":"*","nullmsg":"解决方案不能为空！"})
+                    #@Tselect2Body("bugResolution" bug?.bugResolution?:4 {"class":"input-text","datatype":"*","nullmsg":"解决方案不能为空！"})
                         #foreach(s:getDict("bugResolution"))
                             <option value="${s?.value}">${s?.text}</option>
                         #end
