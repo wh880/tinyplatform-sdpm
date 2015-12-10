@@ -1,0 +1,74 @@
+#*<style>
+.title-name{border-bottom:#eed 1px solid;padding:18px 0 14px;font-size:25px;margin-bottom:12px;}
+.us-info{border:#ddd 1px solid;border-left:#1b809e 2px solid;background:#f5fafd;color:#555;padding:16px 12px;font-size:14px;}
+.pic-info{margin-top:12px;}
+.pic-info .info-item{float:left;list-style:none;border:#ddd 1px solid; margin:0 8px 16px 8px;}
+.pic-info .info-item a,.pic-info .info-item a:link,.info-item a:visited{ text-decoration:none;display:block;width:202px;height:50px;line-height:30px;background:#f9f9fc;color:#333;padding:12px;font-size:14px;}
+.pic-info .info-item:hover,.pic-info .info-item:hover a{background:#6e3671; color:#fff}
+.pic-info .title-info{font-size:20px;color:#666;width:100%; text-align:center;margin:18px 0 16px;}
+.pic-info .icon-pic{float:right;font-size:19px;color:#999;margin-top:2px;}
+.pic-info .info-item a:hover .icon-pic{color:#fff;}
+</style>*#
+
+<h2 class="title-name">关于我们</h2>
+<div class="us-info">
+Tiny拥有的企业级j2ee应用开发框架套件，专业团队开发，完整的生态体系，活跃的社区氛围，无限的水平扩展能力，7*24不间断运维能力。<span style="color:#999;">SDPM同时也声明，获得禅道的同意，大部分功能参造禅道实现的。</span>
+</div>
+<div class="pic-info">
+	<p class="title-info">常用链接</p>
+	<div class="info-item" title="Tiny社区">
+		<a href="http://bbs.tinygroup.org" target="_blank">Tiny社区
+		<i class="icon-globe icon-pic"></i>
+		</a>
+	</div>
+	<div class="info-item" title="Tiny框架源码">
+		<a href="http://git.oschina.net/tinyframework/tiny" target="_blank">Tiny框架源码
+		<span class="icon-paste icon-pic"></span>
+		</a>
+	</div>
+	<div class="info-item" title="TinyMaven私服">
+		<a href="http://git.oschina.net/tinyframework/tiny" target="_blank">TinyMaven私服
+		<span class="icon-user-md icon-pic"></span>
+		</a>
+	</div>
+	<div class="info-item" title="Tiny博客">
+		<a href="http://my.oschina.net/tinyframework" target="_blank">Tiny博客
+		<span class="icon-book icon-pic"></span>
+		</a>
+	</div>
+	<div class="info-item" title="Tiny文档">
+		<a href="http://www.tinygroup.org/confluence/pages/viewpage.action?pageId=557323" target="_blank">Tiny文档
+		<span class="icon-user icon-pic"></span>
+		</a>
+	</div>
+	<div class="info-item" title="TinyEclipse插件">
+		<a href="http://www.tinygroup.org/tinystudio" target="_blank">TinyEclipse插件
+		<span class="icon-download icon-pic"></span>
+		</a>
+	</div>
+	<div class="info-item" title="TinyAdmin展示">
+		<a href="http://www.tinygroup.org/tinyadmin" target="_blank">TinyAdmin展示
+		<span class="icon-desktop icon-pic"></span>
+		</a>
+	</div>
+	<div class="info-item" title="缺陷报告">
+		<a href="http://git.oschina.net/tinyframework/tiny/issues" target="_blank">缺陷报告
+		<span class="icon-columns icon-pic"></span>
+		</a>
+	</div>
+	<div class="info-item" title="权限框架展示(dsl实现)">
+		<a href="http://www.tinygroup.org/bizframedsl" target="_blank">权限框架展示(dsl实现)
+		<span class="icon-sitemap icon-pic"></span>
+		</a>
+	</div>
+	<div class="info-item" title="TinyUiEnterprise展示">
+		<a href="http://www.tinygroup.org/tinyuiweb" target="_blank">TinyUiEnterprise展示
+		<span class="icon-eye-open icon-pic"></span>
+		</a>
+	</div>
+	<div class="info-item" title="SDPM软件开发过程管理">
+		<a href="http://www.tinygroup.org/tinyuiweb" target="_blank">SDPM软件开发过程管理
+		<span class="icon-magnet icon-pic"></span>
+		</a>
+	</div>
+</div>
