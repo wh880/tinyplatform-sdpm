@@ -284,7 +284,7 @@ public class ProductLineAction extends BaseController {
     @RequestMapping("/totree")
     public String totree(String treeId, Model model) {
 
-        if (!("".equals(treeId) || treeId == null)) {
+        if (!StringUtil.isBlank(treeId)) {
             String prefix = treeId.substring(0, 1);
             if ("p".equals(prefix)) {
                 model.addAttribute("productLineId", treeId.substring(1));
@@ -295,9 +295,7 @@ public class ProductLineAction extends BaseController {
                 return "/productLine/page/list/build/buildlist.page";
             }
         }
-
-
-        return "/productLine/page/list/productline/list.page";
+        return "redirect:"+adminPath+"/productLine/to";
     }
 
 
