@@ -11,7 +11,6 @@ import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.logger.LogLevel;
 import org.tinygroup.sdpm.action.project.util.TaskStatusUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
-import org.tinygroup.sdpm.dict.util.DictUtil;
 import org.tinygroup.sdpm.dto.UploadProfile;
 import org.tinygroup.sdpm.dto.project.EffortList;
 import org.tinygroup.sdpm.dto.project.Tasks;
@@ -22,7 +21,6 @@ import org.tinygroup.sdpm.product.service.StoryService;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
-import org.tinygroup.sdpm.project.dao.pojo.TaskChartBean;
 import org.tinygroup.sdpm.project.service.inter.*;
 import org.tinygroup.sdpm.system.dao.pojo.ProfileType;
 import org.tinygroup.sdpm.system.dao.pojo.SystemEffort;
@@ -40,11 +38,12 @@ import org.tinygroup.tinysqldsl.Pager;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 /**
- * 任务
+ * 处理任务的控制器
  * Created by wangying14938 on 2015-09-22.
  */
 @Controller
@@ -389,6 +388,13 @@ public class ProjectTaskAction extends BaseController {
         return "project/index/task/index.page";
     }
 
+    /**
+     * 开始任务
+     *
+     * @param taskId
+     * @param model
+     * @return
+     */
     @RequiresPermissions("pro-task-start")
     @RequestMapping(value = "/start", method = RequestMethod.GET)
     public String start(Integer taskId, Model model) {
@@ -403,6 +409,10 @@ public class ProjectTaskAction extends BaseController {
         ProjectTask projectTask = taskService.findTaskById(task.getTaskId());
         task.setTaskOpenBy(userUtils.getUserId());
         task.setTaskOpenedDate(new Date());
+        Float taskEstimate = task.getTaskEstimate();
+        if (taskEstimate != null) {
+            task.setTaskLeft(taskEstimate);
+        }
         taskService.updateStartTask(task);
         LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, LogUtil.LogAction.STARTED, task.getTaskId().toString(),
                 userUtils.getUserId(), null, projectTask.getTaskProject().toString(),
@@ -448,14 +458,14 @@ public class ProjectTaskAction extends BaseController {
     public String findPager(
             Integer start, Integer limit, String statu, String choose, Model model,
             HttpServletRequest request, HttpServletResponse response, String moduleId,
-            @RequestParam(required = false, defaultValue = "task_id") String order,
+            @RequestParam(required = false, defaultValue = "task_no") String order,
             @RequestParam(defaultValue = "desc") String orderType, Integer key) {
         Integer projectId = projectOperate.getCurrentProjectId(request, response);
         if (projectId == null) {
             return redirectProjectForm();
         }
         boolean asc = false;
-        if ("desc".equals(orderType)) {
+        if ("asc".equals(orderType)) {
             asc = true;
         }
         ProjectTask task = new ProjectTask();
@@ -604,151 +614,6 @@ public class ProjectTaskAction extends BaseController {
     }
 
 
-    @RequiresPermissions("gantt")
-    @RequestMapping("/gantt")
-    public String gantt(Model model, String choose) {
-        model.addAttribute("choose", choose);
-        return "project/operate/task/special/gantt.page";
-    }
-
-    @ResponseBody
-    @RequestMapping("/gantt/init")
-    public List<Map<String, Object>> ganttInit(HttpServletRequest request, HttpServletResponse response) {
-        Integer projectId = projectOperate.getCurrentProjectId(request, response);
-        if (projectId == null) {
-            return null;
-        }
-        Project project = projectOperate.getProject(projectId.toString());
-        ProjectTask task = new ProjectTask();
-        task.setTaskProject(projectId);
-        List<ProjectTask> taskList = taskService.findListTask(task);
-        List<Map<String, Object>> resultList = new ArrayList<Map<String, Object>>();
-
-        for (ProjectTask t : taskList) {
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-            Map<String, Object> map = new HashMap<String, Object>();
-            map.put("pID", t.getTaskId());
-            map.put("pName", StringUtil.abbreviate(t.getTaskName(), 10));
-            if (t.getTaskRealStarted() != null) {
-                map.put("pStart", format.format(t.getTaskRealStarted()));
-            } else if (t.getTaskEstStared() != null) {
-                map.put("pStart", format.format(t.getTaskEstStared()));
-            } else {
-                map.put("pStart", format.format(project.getProjectBegin()));
-            }
-
-            if (t.getTaskDeadLine() != null) {
-                map.put("pEnd", format.format(t.getTaskDeadLine()));
-            } else {
-                map.put("pEnd", format.format(project.getProjectEnd()));
-            }
-
-            map.put("pColor", t.getTaskPri());
-            OrgUser user = userService.findUser(t.getTaskAssignedTo());
-            if (user != null) {
-                map.put("pRes", user.getOrgUserRealName());
-            }
-            //进度
-            float comp;
-            if ((t.getTaskConsumed() == null || t.getTaskLeft() == null) || (t.getTaskConsumed() + t.getTaskLeft() == 0)) {
-                comp = 0f;
-            } else {
-                comp = t.getTaskConsumed() / (t.getTaskConsumed() + t.getTaskLeft());
-            }
-            map.put("pComp", String.format("%.2f", comp * 100));
-            map.put("pGroup", "0");
-            map.put("pParent", "0");
-            map.put("pOpen", "1");
-            map.put("pDepend", "0");
-            map.put("pCaption", "");
-            resultList.add(map);
-        }
-        return resultList;
-    }
-
-    @RequestMapping("/gantt/find")
-    public String ganttFind(Integer id, Model model) {
-        ProjectTask task = taskService.findTaskById(id);
-
-        SystemProfile systemProfile = new SystemProfile();
-        systemProfile.setFileObjectId(id);
-        systemProfile.setFileObjectType(ProfileType.TASK.getType());
-        List<SystemProfile> fileList = profileService.findSystemProfile(systemProfile);
-        model.addAttribute("fileList", fileList);
-
-        model.addAttribute("task", task);
-        return "project/data/task/gantt/ganttFind.pagelet";
-    }
-
-    @RequestMapping("/board")
-    public String board(Model model, HttpServletRequest request, HttpServletResponse response) {
-        Integer projectId = projectOperate.getCurrentProjectId(request, response);
-
-        ProjectTask projectTask = new ProjectTask();
-        projectTask.setTaskProject(projectId);
-
-        projectTask.setTaskStatus(ProjectTask.WAIT);
-        List<ProjectTask> resList = taskService.findListTask(projectTask);
-        model.addAttribute("waitList", resList);
-
-        projectTask.setTaskStatus(ProjectTask.DOING);
-        resList = taskService.findListTask(projectTask);
-        model.addAttribute("doingList", resList);
-
-        projectTask.setTaskStatus(ProjectTask.DONE);
-        resList = taskService.findListTask(projectTask);
-        model.addAttribute("doneList", resList);
-
-        projectTask.setTaskStatus(ProjectTask.CANCEL);
-        resList = taskService.findListTask(projectTask);
-        model.addAttribute("cancelList", resList);
-
-        projectTask.setTaskStatus(ProjectTask.CLOSE);
-        resList = taskService.findListTask(projectTask);
-        model.addAttribute("closeList", resList);
-
-        return "project/operate/task/special/board";
-    }
-
-    @RequestMapping("/modal/{forward}")
-    public String doc(@PathVariable(value = "forward") String forward, Model model, Integer taskId) {
-        ProjectTask task = taskService.findTaskById(taskId);
-        model.addAttribute("teamList", userService.findTeamUserListByProjectId(task.getTaskProject()));
-        model.addAttribute("task", task);
-        return "project/modal/task/" + forward + ".pagelet";
-    }
-
-    @RequiresPermissions("task-group")
-    @RequestMapping("/grouping")
-    public String grouping(HttpServletRequest request, HttpServletResponse response,
-                           String type, String menuId, Model model) {
-        Integer projectId = projectOperate.getCurrentProjectId(request, response);
-        if (projectId == null) {
-            return redirectProjectForm();
-        }
-
-        Map<String, List<ProjectTask>> map = taskService.findGroup(DictUtil.getValue("groupType", type), projectId);
-        Map<String, List<ProjectTask>> mapDocument = new HashMap<String, List<ProjectTask>>();
-        if (type.equals("1")) {
-            for (String key : map.keySet()) {
-                if (key.isEmpty()) {
-                    mapDocument.put("未关联需求", map.get(key));
-                } else {
-                    ProductStory story = productStoryService.findStory(Integer.valueOf(key));
-                    if (story != null) {
-                        String title = story.getStoryTitle();
-                        mapDocument.put(title, map.get(key));
-                    }
-                }
-            }
-        }
-        model.addAttribute("mapDocument", mapDocument);
-        model.addAttribute("map", map);
-        model.addAttribute("type", type);
-        model.addAttribute("menuId", menuId);
-        return "project/operate/task/special/grouping";
-    }
-
     /**
      * 改变任务状态 用于Ajax请求
      *
@@ -795,39 +660,20 @@ public class ProjectTaskAction extends BaseController {
         return map;
     }
 
-    /**
-     * 报表
-     *
-     * @return
-     */
-    @RequiresPermissions("pro-task-report")
-    @RequestMapping("/reportform")
-    public String reportForm() {
-        return "project/operate/task/common/reportform";
-    }
 
-    @RequestMapping("/buildChart")
-    public String buildChart(String ids, Model model) {
-        Map<String, List> map = new HashMap<String, List>();
-        String[] idArray = ids.split(",");
-        if (idArray.length > 0) {
-            for (String id : idArray) {
-                List<TaskChartBean> list = taskService.buildChart(id);
-                //部分内容需要格式化内容
-                if ("3".equals(id)) {
-                    for (TaskChartBean bean : list) {
-                        bean.setTitle(DictUtil.getValue("taskType", bean.getTitle()));
-                    }
-                } else if ("5".equals(id)) {
-                    for (TaskChartBean bean : list) {
-                        bean.setTitle(DictUtil.getValue("taskStatus", bean.getTitle()));
-                    }
-                }
-                map.put(DictUtil.getValue("chartType", id), list);
+    private List<SystemModule> findModuleList(Integer storyId, Integer projectId) {
+        ProductStory productStory = storyService.findStory(storyId);
+        if (productStory != null) {
+            SystemModule systemModule = new SystemModule();
+            systemModule.setModuleRoot(productStory.getProductId());
+            List<SystemModule> moduleList = moduleService.findModuleList(systemModule);
+            for (SystemModule module : moduleList) {
+                module.setModuleName(ModuleUtil.getPath(module.getModuleId(), "/", null, false));
             }
+            return moduleList;
+        } else {
+            return generateModuleList(projectId);
         }
-        model.addAttribute("map", map);
-        return "project/data/task/report/reportFormDate.pagelet";
     }
 
     private Map<String, String> generateResultMap(Integer res, String successMsg, String falseMsg) {
@@ -857,21 +703,6 @@ public class ProjectTaskAction extends BaseController {
             moduleList.addAll(tModuleList);
         }
         return moduleList;
-    }
-
-    private List<SystemModule> findModuleList(Integer storyId, Integer projectId) {
-        ProductStory productStory = storyService.findStory(storyId);
-        if (productStory != null) {
-            SystemModule systemModule = new SystemModule();
-            systemModule.setModuleRoot(productStory.getProductId());
-            List<SystemModule> moduleList = moduleService.findModuleList(systemModule);
-            for (SystemModule module : moduleList) {
-                module.setModuleName(ModuleUtil.getPath(module.getModuleId(), "/", null, false));
-            }
-            return moduleList;
-        } else {
-            return generateModuleList(projectId);
-        }
     }
 
 }

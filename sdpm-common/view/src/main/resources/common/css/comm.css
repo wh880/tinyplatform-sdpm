@@ -504,3 +504,4 @@ table.table.filelist-table{border:#ddd 1px solid;}
 .shrinkage .edui-Box .titleNames{display:block;margin-bottom:6px;margin-left:8px;}
 
 .adjustTable tbody tr th{width:40%;text-align:right;}*/
+.tinytable td i[class^="icon-"],.tinytable td i[class*=" icon-"]{font-size:16px;margin-right:5px}

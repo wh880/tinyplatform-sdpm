@@ -88,7 +88,7 @@ public class ProjectAction extends BaseController {
         OrgRole orgRole = new OrgRole();
         orgRole.setOrgRoleType(OrgRole.ROLE_TYPE_PROJECT);
         List<OrgRole> roleList = roleService.findSystemRoles();
-        model.addAttribute("roleList",roleList);
+        model.addAttribute("roleList", roleList);
         return "project/operate/project/form";
     }
 
@@ -195,11 +195,17 @@ public class ProjectAction extends BaseController {
      * @return
      */
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    public String editPost(Project project, Model model, Integer[] whiteList, Integer[] productIds) {
+    public String editPost(Project project, Model model, Integer[] whiteList, String productIds) {
         project.setProjectWhiteList(StringUtil.join(whiteList, ","));
-        projectProductService.addProjectLinkToProduct(productIds, project.getProjectId());
+        String[] pIds = productIds.split(",");
+        if (!ArrayUtil.isEmptyArray(pIds)) {
+            Integer[] productId = new Integer[pIds.length];
+            for (int i = 0; i < pIds.length; i++) {
+                productId[i] = Integer.valueOf(pIds[i]);
+            }
+            projectProductService.addProjectLinkToProduct(productId, project.getProjectId());
+        }
         projectService.updateProject(project);
-        //TODO:ProjectUtils.removeProjectList(); ProjectUtils.removeProjectList();
         model.addAttribute("project", project);
         return "redirect:" + adminPath + "/project/view?projectId=" + project.getProjectId();
     }
@@ -385,14 +391,14 @@ public class ProjectAction extends BaseController {
 
     @ResponseBody
     @RequestMapping("ajax/projectInCondition")
-    public List<Project> projectInCondition(String key, String initKey, HttpServletRequest request){
-        if(initKey!=null){
+    public List<Project> projectInCondition(String key, String initKey, HttpServletRequest request) {
+        if (initKey != null) {
             List<Project> result = new ArrayList<Project>();
             result.add(projectService.findProjectById(Integer.parseInt(initKey)));
             return result;
         }
         Integer[] pIds = projectOperate.getUserProjectIdList();
-        return projectService.projectInCondition(key,pIds);
+        return projectService.projectInCondition(key, pIds);
     }
 
 }

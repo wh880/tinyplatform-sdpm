@@ -36,16 +36,16 @@
                 #@thead()
                     #@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
                         #@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
-                        #@tinyTh({"class":"sorting","rel":"task_id"})ID#end
+                        #@tinyTh({"class":"sorting","rel":"task_no"})ID#end
                         #@tinyTh({"class":"sorting","rel":"task_pri"})P#end
                         #@tinyTh({"class":"sorting","rel":"task_name"})任务名称#end
                         #@tinyTh({"class":"sorting","rel":"task_status"})状态#end
                         #@tinyTh({"class":"sorting","rel":"task_dead_line"})截止#end
                         #@tinyTh({"class":"sorting","rel":"task_assigned_to"})指派给#end
                         #@tinyTh({"class":"sorting","rel":"task_finished_by"})完成者#end
-                        #@tinyTh({"class":"sorting","rel":"task_dead_line"})预计#end
-                        #@tinyTh({"class":"sorting","rel":"task_dead_line"})消耗#end
-                        #@tinyTh({"class":"sorting","rel":"task_dead_line"})剩余#end
+                        #@tinyTh({"class":"sorting","rel":"task_estimate"})预计#end
+                        #@tinyTh({"class":"sorting","rel":"task_consumed"})消耗#end
+                        #@tinyTh({"class":"sorting","rel":"task_left"})剩余#end
                         #@tinyTh()操作#end
                     #end
                 #end

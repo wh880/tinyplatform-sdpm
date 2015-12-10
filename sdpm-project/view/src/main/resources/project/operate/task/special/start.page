@@ -15,9 +15,9 @@
         #@elementItem()
             #@sdpmItem("总消耗")
                 <div class="input-group">
-                    <input name="taskConsumed" type="text" class="form-control" placeholder=""
+                    <input name="taskConsumed" type="text" class="form-control"
                            aria-describedby="basic-addon2" value="${task?.taskConsumed ? task.taskConsumed : 0}"
-                           datatype="/^[0-9]+(\.[0-9]{1,2})?$/" nullmsg="请输入最初预计">
+                           datatype="/^[0-9]+(\.[0-9]{0,2})?$/" nullmsg="请输入最初预计">
                     <span class="input-group-addon" id="all-time">小时</span>
                 </div>
             #end
@@ -26,9 +26,9 @@
             #@sdpmItem("预计剩余") ##预计剩余需要判断，当为0时，标识为完成
                 <div class="input-group">
                     #tinyInput(
-                        "text" "taskEstimate" copyTask?.taskEstimate?copyTask?.taskEstimate:'0' {"placeholder":"最初预计",
+                        "text" "taskEstimate" task?.taskEstimate?task?.taskEstimate:'0' {"placeholder":"最初预计",
                         "datatype":
-                        "/^[0-9]+(\.[0-9]{1,2})?$/","nullmsg":"请输入最初预计", "aria-describedby":"basic-addon2"})
+                        "/^[0-9]+(\.[0-9]{0,2})?$/","nullmsg":"请输入最初预计", "aria-describedby":"basic-addon2"})
                     <span class="input-group-addon" id="basic-addon2">小时</span>
                 </div>
             #end
@@ -64,7 +64,7 @@
     $("form[name=thisform]").Validform({
         beforeSubmit: function (e) {
             var estimate = $("input[name='taskEstimate']").val();
-            if (!estimate || estimate <= "0.01") {
+            if (!estimate || estimate < "0.01") {
                 layer.confirm("消耗为0，是否标记任务为完成？", function () {
                     layer.closeAll();
                     $(e).attr("action", "${TINY_CONTEXT_PATH+adminPath}/project/task/finishsave");

@@ -2,7 +2,6 @@
 #setTinyItemCount(taskPager.totalCount)
 #foreach(t:taskPager?.records)
 #@tr()
-
             #@td()<input type="checkbox" value="${t?.taskId}" name="idCheck">#end
 
             #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/project/task/findTask?taskId=${t?.taskId}">${t?.taskNo}</a> #end
