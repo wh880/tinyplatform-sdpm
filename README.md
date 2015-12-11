@@ -1,4 +1,6 @@
 #本项目此版本的实现参考了禅道的许多功能，在此特表感谢。
+#初次运行请将application.xml中的databaseInstallerProcessor、initDataApplicationProcessor注释打开，以便进行数据库表结构安装及初始化。
+#此外还需将web.beans.xml中bean[sdpmDictLoader]的property[isInitFromFile]置为true，以便进行数据字典初始化。
 #sdpm
 Software Development Process Management
 
