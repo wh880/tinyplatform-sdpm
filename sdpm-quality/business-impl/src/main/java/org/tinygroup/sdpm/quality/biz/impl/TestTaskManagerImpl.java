@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
+import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.dao.condition.ConditionCarrier;
 import org.tinygroup.sdpm.dao.condition.ConditionUtils;
 import org.tinygroup.sdpm.quality.biz.inter.TestTaskManager;
@@ -47,7 +48,7 @@ public class TestTaskManagerImpl implements TestTaskManager {
         if (StringUtil.isBlank(sortName)) {
             return testtaskdao.queryPager(start, limit, testtask, mergeCondition(carrier));
         }
-        OrderBy order = new OrderBy(sortName, asc);
+        OrderBy order = new OrderBy(NameUtil.resolveNameDesc(sortName), asc);
         return testtaskdao.queryPager(start, limit, testtask, mergeCondition(carrier), order);
     }
 
