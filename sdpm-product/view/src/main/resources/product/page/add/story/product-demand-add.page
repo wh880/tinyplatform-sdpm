@@ -32,7 +32,6 @@
 #@tinyForm(
     "thisform" TINY_CONTEXT_PATH +adminPath+"/product/story/save" "" {"class":"test","enctype":"multipart/form-data"})
 <input type="hidden" name="lastAddress" value=""/>
-
 <div style="width:100%;" class="pageleftpart">
 <div class="infoContent">
     <p class="titleName">提需求</p>
@@ -286,21 +285,20 @@
         </div>
     </div>
 #end
+    #@elementItem()
+    <div class="col-12">
+        <div class="col-5">
+        </div>
+        <div class="col-1">
+            <button style="float: left" type="submit" id="submit2" class="commitBtn">保存</button>
+        </div>
+        <div class="col-1">
+            #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end
+        </div>
+        <div class="col-5"></div>
+
+    #end
 </div>
-#@elementItem()
-<div class="col-12">
-    <div class="col-5">
-
-    </div>
-    <div class="col-1">
-        <button style="float: left" type="submit" id="submit2" class="commitBtn">保存</button>
-    </div>
-    <div class="col-1">
-        #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end
-    </div>
-    <div class="col-5"></div>
-
-#end
 </div>
 #end
 
