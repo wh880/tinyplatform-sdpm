@@ -51,8 +51,7 @@
         border-left:0 !important;
         border-bottom:0 !important;
     }
-    .menu-on-top #main-menu .navigation > li>a{line-height:45px;padding: 0 20px;border-bottom:#eed 1px solid !important;}
-	.menu-on-top #main-menu .navigation > li>a:hover,.menu-on-top #main-menu .navigation > li>a:visited{border-bottom:none!important;}
+    .menu-on-top #main-menu .navigation > li>a{line-height:46px;padding: 0 20px;border-bottom:#eed 1px solid !important;}
     .menu-on-top #main-menu .navigation > li:last-child{border-bottom-right-radius: 5px}
     .menu-on-top #main-menu .navigation > li.mm-dropdown > a:after {
         top: 28px !important
