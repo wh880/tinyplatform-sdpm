@@ -8,24 +8,6 @@
             #@aHeadCol(TINY_CONTEXT_PATH+adminPath+"/system/about" "Current")程序员秀场#end
         #end
     <div class="row">
-##        <div class="col-xs-6 col-md-3 col-2 whoInfo-box">
-##            <div class="who-info">
-##                <div class="thumbnail pic-avatar">
-##                    <a target="_blank" href="http://my.oschina.net/u/2010061"><img
-##                            src="${TINY_CONTEXT_PATH}/img/about/hulk.png" alt="Hulk"></a>
-##                </div>
-##                <div class="caption">
-##                    <h4>
-##                        <a target="_blank" href="http://my.oschina.net/u/2010061">悠然</a>
-##                    </h4>
-##                    <h5 class="positionInfos">架构师</h5>
-##
-##                    <p>
-##                        设计一千种方式遇见你，不如设计一千个坑，等你。
-##                    </p>
-##                </div>
-##            </div>
-##        </div>
         <div class="col-xs-6 col-md-3 col-2 whoInfo-box">
             <div class="who-info">
                 <div class="thumbnail pic-avatar">

@@ -95,10 +95,11 @@ public class UserAction extends BaseController {
             newUser.setOrgUserPassword(newPassword);
             userService.updateUser(newUser);
             addMessage(model, "修改密码成功！");
+            return "redirect:"+adminPath+"/home";
         } else {
             addMessage(model, "修改密码失败，原始密码错误！");
+            return "redirect:"+adminPath+"/org/user/passwordForm";
         }
-        return "redirect:"+adminPath+"/home";
     }
 
     /**
