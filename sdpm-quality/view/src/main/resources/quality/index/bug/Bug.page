@@ -1,3 +1,4 @@
+#set(qualityProductId=qualityProductId?:productUtils.getAllProductListByUser()?.get(0)?.productId)
 #set(bugTableId = "bugTableId")
 #macro initBatchAction()
 <script>

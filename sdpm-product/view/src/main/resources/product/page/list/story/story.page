@@ -1,3 +1,4 @@
+#set(cookieProductId=cookieProductId?:productUtils.getAllProductListByUser()?.get(0)?.productId)
 #set(storyTableId = "storyTableId" )
 #set(linkName = "product-demand")
 <script>
