@@ -13,7 +13,7 @@
               isShow="1" scope="testbug-op,testbuginfo-tab">
         </menu>
         <menu id="tshutdown" name="关闭Bug" href="/quality/bug/toClose" icon="icon-off" sort="3"
-              isShow="1" scope="testbug-op">
+              isShow="1" scope="testbug-op,testbuginfo-tab">
         </menu>
         <menu id="tedition" name="编辑Bug" href="/quality/bug/toEdit" icon="icon-pencil" sort="2"
               isShow="1" scope="testbug-op,pro-bug-op,testbuginfo-tab">

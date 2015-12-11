@@ -43,13 +43,20 @@
                        title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp;&nbsp;
                 #end
             #elseif(m.id=="reActive")
-                #if(qualityBug?.bugStatus=="3")
+                #if(qualityBug?.bugStatus!="1")
                     <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${qualityBug?.bugId}"
                        title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp;&nbsp;
                 #end
             #elseif(m.id=="add-case")
                 <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${qualityBug?.bugId}"
                    title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp;&nbsp;
+            #elseif(m.id=="tshutdown")
+                #if(qualityBug?.bugStatus=="2")
+                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${qualityBug?.bugId}"
+                       title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp;&nbsp;
+                #else
+                    <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")${m.name}</span>&nbsp;&nbsp;
+                #end
             #end
         #end
         #foreach(m:menuManager.getScopeMenus("testbuginfo-tab"))

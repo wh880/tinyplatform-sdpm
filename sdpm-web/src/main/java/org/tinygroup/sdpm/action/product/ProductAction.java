@@ -305,7 +305,7 @@ public class ProductAction extends BaseController {
 
     @RequestMapping("/addDoc")
     public String addDoc(HttpServletRequest request, Model model) {
-        return "/product/page/add/add-doc";
+        return "/product/page/add/doc/add-doc";
     }
 
     @RequestMapping("project/listData")
