@@ -73,7 +73,7 @@
         <property name="fileResolver" ref="fileResolver"/>
     </bean>
 
-    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+    <bean id="dynamicDataSource" class="org.apache.commons.dbcp.BasicDataSource">
         <property name="driverClassName">
             <value>${jdbc.driver}</value>
         </property>
@@ -83,12 +83,12 @@
     </bean>
 
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="dataSource"/>
+        <property name="dataSource" ref="dynamicDataSource"/>
     </bean>
 
     <bean id="dslSession" name="dslSession" class="org.tinygroup.jdbctemplatedslsession.SimpleDslSession">
         <constructor-arg>
-            <ref bean="dataSource"/>
+            <ref bean="dynamicDataSource"/>
         </constructor-arg>
     </bean>
 
