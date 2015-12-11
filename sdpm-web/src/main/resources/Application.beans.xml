@@ -73,23 +73,22 @@
         <property name="fileResolver" ref="fileResolver"/>
     </bean>
 
-    <bean id="dynamicDataSource" class="org.apache.commons.dbcp.BasicDataSource">
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
         <property name="driverClassName">
             <value>${jdbc.driver}</value>
         </property>
-        <property name="testOnBorrow" value="true"/>
         <property name="url" value="${jdbc.url}"/>
         <property name="username" value="${jdbc.username}"/>
         <property name="password" value="${jdbc.password}"/>
     </bean>
 
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="dynamicDataSource"/>
+        <property name="dataSource" ref="dataSource"/>
     </bean>
 
     <bean id="dslSession" name="dslSession" class="org.tinygroup.jdbctemplatedslsession.SimpleDslSession">
         <constructor-arg>
-            <ref bean="dynamicDataSource"/>
+            <ref bean="dataSource"/>
         </constructor-arg>
     </bean>
 

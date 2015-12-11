@@ -24,6 +24,13 @@ import java.util.List;
 public interface OrgRoleUserDao extends BaseDao<OrgRoleUser, Integer> {
     List<OrgRoleUser> getByRoleId(Integer roleId);
 
+    /**
+     * 删除用户的角色
+     * @param userId
+     * @return
+     */
+    int deleteByUserId(String userId);
+
     int deleteByRoleId(Integer roleId);
 
     List<OrgRoleUser> getRolesByIds(String... ids);

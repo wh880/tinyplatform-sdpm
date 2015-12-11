@@ -51,6 +51,10 @@ public class DefaultAction extends BaseController {
     public String about() {
         return "common/about";
     }
+    @RequestMapping("a/system/us")
+    public String us() {
+        return "common/us";
+    }
 
     /**
      * 图片异步上传

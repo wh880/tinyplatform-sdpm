@@ -89,7 +89,6 @@ public class DocAction extends BaseController {
         String cookieDocLib = CookieUtils.getCookie(request, DocAction.COOKIE_DOC_LIB_ID);
         Integer libId = Integer.valueOf(StringUtil.isBlank(cookieDocLib) ? 0 : Integer.parseInt(cookieDocLib));
         doc.setDocLibId(libId);
-        String condition = null;
         Pager<DocumentDoc> pager = null;
         if (!StringUtil.isBlank(moduleId)) {
             if (moduleId.contains("p") && libId == 1) {

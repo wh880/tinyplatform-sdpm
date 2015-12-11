@@ -98,6 +98,11 @@ public class OrgRoleUserDaoImpl extends TinyDslDaoSupport implements OrgRoleUser
         return getDslSession().execute(delete);
     }
 
+    public int deleteByUserId(String userId) {
+        Delete delete = delete(ORG_ROLE_USERTABLE).where(ORG_ROLE_USERTABLE.ORG_USER_ID.eq(userId));
+        return getDslSession().execute(delete);
+    }
+
     public List<OrgRoleUser> getRolesByIds(String... ids) {
         SelectGenerateCallback<Serializable[]> callback = new SelectGenerateCallback<Serializable[]>() {
 

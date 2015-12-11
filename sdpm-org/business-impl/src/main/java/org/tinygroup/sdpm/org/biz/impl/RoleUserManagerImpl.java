@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.commons.tools.StringUtil;
-import org.tinygroup.sdpm.common.util.Collections3;
 import org.tinygroup.sdpm.org.biz.inter.RoleUserManager;
 import org.tinygroup.sdpm.org.dao.OrgRoleUserDao;
 import org.tinygroup.sdpm.org.dao.pojo.OrgRoleUser;
@@ -55,22 +54,18 @@ public class RoleUserManagerImpl implements RoleUserManager {
     }
 
     public Integer batchAddRolesToUser(String userId, String[] roleIds) {
+        orgRoleUserDao.deleteByUserId(userId);
         if (StringUtil.isBlank(userId) || ArrayUtils.isEmpty(roleIds)) {
             return 0;
         }
         OrgRoleUser orgRoleUser = new OrgRoleUser();
         orgRoleUser.setOrgUserId(userId);
-        List<OrgRoleUser> roleUserList = orgRoleUserDao.query(orgRoleUser);
-        List roleIdList = Collections3.extractToList(roleUserList, "roleId");
         List<OrgRoleUser> list = new ArrayList<OrgRoleUser>();
         for (String roleId : roleIds) {
             if (StringUtil.isBlank(roleId)){
                 continue;
             }
             Integer role = Integer.valueOf(roleId);
-            if (roleIdList.contains(role)) {
-                continue;
-            }
             OrgRoleUser t = new OrgRoleUser();
             t.setOrgUserId(userId);
             t.setOrgRoleId(role);
