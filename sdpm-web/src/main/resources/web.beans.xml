@@ -10,7 +10,8 @@
     <bean id="dictFileProcessor" class="org.tinygroup.sdpm.dict.processor.DictFileProcessor"></bean>
     <bean id="sdpmDictLoader" class="org.tinygroup.sdpm.dict.impl.SdpmDictLoader" scope="singleton">
         <property name="dictHandle" ref="dictHandle"></property>
-        <property name="isInitFromFile" value="true"></property>
+        <!--数据字典文件启动开关。 true：从文件启动，false:从数据库启动-->
+        <property name="isInitFromFile" value="false"></property>
     </bean>
 
     <bean id="commonFilter" class="org.tinygroup.sdpm.common.web.CommonFilter"/>
