@@ -119,7 +119,7 @@
         #@formControlDiv("col-4")
             <div id="demand-sources">
                 #@Tselect2F()
-                    #@Tselect2Body("storySource" "0" {"class":
+                    #@Tselect2Body("storySource" "1" {"class":
                         "input-text select2","nullmsg":"请选择来源！","datatype":"*"})
 
                         #foreach(source:getDict("storySource"))
