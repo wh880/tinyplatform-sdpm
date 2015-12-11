@@ -4,7 +4,8 @@
 				#foreach(m in menuManager.getChildMenus("mysystem"))
 					#@aHeadCol(TINY_CONTEXT_PATH+adminPath+m.href m.id==linkName?"Current":"")${m.name}#end
 				#end
-				#@aHeadCol(TINY_CONTEXT_PATH+adminPath+"/system/about")程序员秀场#end
+			#@aHeadCol(TINY_CONTEXT_PATH+adminPath+"/system/about")程序员秀场#end
+			#@aHeadCol(TINY_CONTEXT_PATH+adminPath+"/system/us")关于#end
 		#end
 		#pageContent
 	#end

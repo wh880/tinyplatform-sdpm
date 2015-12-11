@@ -1,15 +1,11 @@
-#*<style>
-.title-name{border-bottom:#eed 1px solid;padding:18px 0 14px;font-size:25px;margin-bottom:12px;}
-.us-info{border:#ddd 1px solid;border-left:#1b809e 2px solid;background:#f5fafd;color:#555;padding:16px 12px;font-size:14px;}
-.pic-info{margin-top:12px;}
-.pic-info .info-item{float:left;list-style:none;border:#ddd 1px solid; margin:0 8px 16px 8px;}
-.pic-info .info-item a,.pic-info .info-item a:link,.info-item a:visited{ text-decoration:none;display:block;width:202px;height:50px;line-height:30px;background:#f9f9fc;color:#333;padding:12px;font-size:14px;}
-.pic-info .info-item:hover,.pic-info .info-item:hover a{background:#6e3671; color:#fff}
-.pic-info .title-info{font-size:20px;color:#666;width:100%; text-align:center;margin:18px 0 16px;}
-.pic-info .icon-pic{float:right;font-size:19px;color:#999;margin-top:2px;}
-.pic-info .info-item a:hover .icon-pic{color:#fff;}
-</style>*#
-
+#@div()
+#@tabWithInit("top_demo" "optionsBox")
+	#@tabHead()
+		#foreach(m in menuManager.getChildMenus("mysystem"))
+			#@aHeadCol(TINY_CONTEXT_PATH+adminPath+m.href m.id==linkName?"Current":"")${m.name}#end
+		#end
+		#@aHeadCol(TINY_CONTEXT_PATH+adminPath+"/system/about" "Current")程序员秀场#end
+	#end
 <h2 class="title-name">关于我们</h2>
 <div class="us-info">
 Tiny拥有的企业级j2ee应用开发框架套件，专业团队开发，完整的生态体系，活跃的社区氛围，无限的水平扩展能力，7*24不间断运维能力。<span style="color:#999;">SDPM同时也声明，获得禅道的同意，大部分功能参造禅道实现的。</span>
@@ -72,3 +68,5 @@ Tiny拥有的企业级j2ee应用开发框架套件，专业团队开发，完整
 		</a>
 	</div>
 </div>
+#end
+#end
