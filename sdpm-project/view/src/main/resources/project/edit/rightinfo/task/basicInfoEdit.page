@@ -202,7 +202,7 @@
                         #@simpleModal("myModal" "新增日志")#end
                         ${task.taskConsumed}小时
                         #@iconOperations("#myModal" "icon-time" "新增日志" "900" "400"
-                            "/project/task/consumeTime.pagelet" "ml-5")
+                            adminPath+"/project/task/consumeTime.pagelet" "ml-5")
                         #end
                     #end
                 #end
