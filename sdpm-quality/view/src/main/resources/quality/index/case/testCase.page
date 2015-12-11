@@ -1,4 +1,4 @@
-
+#set(qualityProductId=qualityProductId?:productUtils.getAllProductListByUser()?.get(0)?.productId)
 #@toggleBox({"class":"open"})
 	#@toggleLeft({"class":"aclass"})
 		#@settoggleLeftTitle()#foreach(product : productUtils.getAllProductListByUser())
