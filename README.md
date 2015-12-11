@@ -1,8 +1,8 @@
 #本项目此版本的实现参考了禅道的许多功能，在此特表感谢。
 #sdpm
+Software Development Process Management
 
-warpper工程的包名：
-org.tinygroup.sdpm..wrapper
+相关工程包名约束
 
 biz接口类包名：
 org.tinygroup.sdpm.${模块}.biz.inter
