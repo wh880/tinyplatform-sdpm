@@ -21,7 +21,6 @@ import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.jdbctemplatedslsession.callback.*;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
-import org.tinygroup.sdpm.common.log.annotation.LogClass;
 import org.tinygroup.sdpm.common.log.annotation.LogMethod;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.project.dao.ProjectStoryDao;
@@ -51,7 +50,6 @@ import static org.tinygroup.tinysqldsl.Update.update;
 import static org.tinygroup.tinysqldsl.base.FragmentSql.fragmentCondition;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 
-@LogClass("story")
 @Repository
 public class ProjectStoryDaoImpl extends TinyDslDaoSupport implements ProjectStoryDao {
 

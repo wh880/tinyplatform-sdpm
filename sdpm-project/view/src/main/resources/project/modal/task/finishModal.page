@@ -60,7 +60,7 @@
         #@elementItem()
             #@colLabel()备注#end
             #@formControlDiv("col-8")
-                #@Teditor("content" "content" {"initialFrameHeight":"110","initialFrameWidth":"540"})#end
+                #@Teditor("content" "comment" {"initialFrameHeight":"110","initialFrameWidth":"540"})#end
             #end
             #@validateDiv("col-2")#end
         #end

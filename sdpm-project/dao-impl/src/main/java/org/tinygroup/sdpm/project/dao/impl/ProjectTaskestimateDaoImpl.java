@@ -21,7 +21,6 @@ import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.jdbctemplatedslsession.callback.*;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
-import org.tinygroup.sdpm.common.log.annotation.LogClass;
 import org.tinygroup.sdpm.common.log.annotation.LogMethod;
 import org.tinygroup.sdpm.project.dao.ProjectTaskestimateDao;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTaskestimate;
@@ -41,7 +40,6 @@ import static org.tinygroup.tinysqldsl.Select.selectFrom;
 import static org.tinygroup.tinysqldsl.Update.update;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 
-@LogClass("taskestimate")
 @Repository
 public class ProjectTaskestimateDaoImpl extends TinyDslDaoSupport implements ProjectTaskestimateDao {
     @LogMethod("add")

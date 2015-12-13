@@ -4,7 +4,7 @@
     #@elementItem()
         #@colLabel()备注：#end
         #@formControlDiv("col-8")
-            #@Teditor("content" "content" {"initialFrameHeight":"150","initialFrameWidth":"550"})#end
+            #@Teditor("content" "comment" {"initialFrameHeight":"150","initialFrameWidth":"550"})#end
         #end
         #@validateDiv("col-2")#end
     #end

@@ -203,18 +203,18 @@ public class ProjectTaskAction extends BaseController {
      *
      * @param task
      * @param model
-     * @param contents
+     * @param comment
      * @return
      */
     @RequestMapping(value = "/editsave", method = RequestMethod.POST)
-    public String editSave(ProjectTask task, Model model, String contents,
+    public String editSave(ProjectTask task, Model model, String comment,
                            UploadProfile uploadProfile) throws IOException {
         ProjectTask oldTask = taskService.findTaskById(task.getTaskId());
         taskService.updateEditTask(task);
         processProfile(uploadProfile, task.getTaskId(), ProfileType.TASK);
 
         LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, LogUtil.LogAction.EDITED, oldTask.getTaskId().toString(),
-                userUtils.getUserId(), null, oldTask.getTaskProject().toString(), oldTask, task, contents);
+                userUtils.getUserId(), null, oldTask.getTaskProject().toString(), oldTask, task, comment);
         model.addAttribute("task", task);
         return "redirect:" + adminPath + "/project/task/index";
     }
@@ -378,13 +378,13 @@ public class ProjectTaskAction extends BaseController {
 
     @RequiresPermissions("pro-task-close")
     @RequestMapping(value = "/close", method = RequestMethod.POST)
-    public String closeSave(ProjectTask task, String content) {
+    public String closeSave(ProjectTask task, String comment) {
         task.setTaskCloseDate(new Date());
         task.setTaskClosedBy(userUtils.getUserId());
         taskService.updateCloseTask(task);
         LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, LogUtil.LogAction.CLOSED, task.getTaskId().toString(),
                 userUtils.getUserId(), null, taskService.findTaskById(task.getTaskId()).getTaskProject().toString(),
-                null, null, content);
+                null, null, comment);
         return "project/index/task/index.page";
     }
 
@@ -405,7 +405,7 @@ public class ProjectTaskAction extends BaseController {
 
     @RequiresPermissions("pro-task-start")
     @RequestMapping(value = "/start", method = RequestMethod.POST)
-    public String startSave(ProjectTask task, String content) {
+    public String startSave(ProjectTask task, String comment) {
         ProjectTask projectTask = taskService.findTaskById(task.getTaskId());
         task.setTaskOpenBy(userUtils.getUserId());
         task.setTaskOpenedDate(new Date());
@@ -416,7 +416,7 @@ public class ProjectTaskAction extends BaseController {
         taskService.updateStartTask(task);
         LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, LogUtil.LogAction.STARTED, task.getTaskId().toString(),
                 userUtils.getUserId(), null, projectTask.getTaskProject().toString(),
-                taskService.findTaskById(task.getTaskId()), task, content);
+                taskService.findTaskById(task.getTaskId()), task, comment);
         if (!projectTask.getTaskConsumed().equals(task.getTaskConsumed()) ||
                 !projectTask.getTaskLeft().equals(task.getTaskLeft())) {
             burnService.updateBurnByProjectId(projectTask.getTaskProject());
@@ -432,14 +432,14 @@ public class ProjectTaskAction extends BaseController {
     }
 
     @RequestMapping(value = "/cancel", method = RequestMethod.POST)
-    public String cancelSave(ProjectTask task, String content) {
+    public String cancelSave(ProjectTask task, String comment) {
         task.setTaskCanceledBy(userUtils.getUserId());
         task.setTaskCanceledDate(new Date());
         ProjectTask old = taskService.findTaskById(task.getTaskId());
         taskService.updateCancelTask(task);
         LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, LogUtil.LogAction.CANCELED, task.getTaskId().toString(),
                 userUtils.getUserId(), null, old.getTaskProject().toString(),
-                old, task, content);
+                old, task, comment);
         return "redirect:" + adminPath + "/project/task/index";
     }
 
@@ -624,7 +624,7 @@ public class ProjectTaskAction extends BaseController {
      */
     @ResponseBody
     @RequestMapping("/changeStatus")
-    public Map<String, String> changeStatus(ProjectTask task, String content, String taskStatus) {
+    public Map<String, String> changeStatus(ProjectTask task, String comment, String taskStatus) {
         Map<String, String> map;
         task.setTaskLastEditedBy(userUtils.getUserId());
         Integer res;
@@ -656,7 +656,7 @@ public class ProjectTaskAction extends BaseController {
         }
         LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, logAction, task.getTaskId().toString(),
                 userUtils.getUserId(), null, taskService.findTaskById(task.getTaskId()).getTaskProject().toString(),
-                taskService.findTaskById(task.getTaskId()), task, content);
+                taskService.findTaskById(task.getTaskId()), task, comment);
         return map;
     }
 

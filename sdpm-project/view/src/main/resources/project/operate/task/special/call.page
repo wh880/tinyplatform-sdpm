@@ -39,7 +39,7 @@
             <div class="col-12">
                 <div class="col-2 text-r"><label>备注：</label></div>
                 <div class="col-9">
-                    #@Teditor("comment" "" {"initialFrameHeight":"150","initialFrameWidth":"702"})#end</div>
+                    #@Teditor("comment" "comment" {"initialFrameHeight":"150","initialFrameWidth":"702"})#end</div>
             </div>
         #end
         <br/>
