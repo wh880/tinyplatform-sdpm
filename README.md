@@ -1,4 +1,5 @@
 #Software Development Process Management
+在线演示地址[http://sdpm.tinygroup.org](http://sdpm.tinygroup.org)
 
 本项目此版本的实现参考了禅道的许多功能，在此特表感谢。
 #数据库设置
