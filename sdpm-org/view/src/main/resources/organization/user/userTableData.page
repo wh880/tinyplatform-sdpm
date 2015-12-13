@@ -16,8 +16,10 @@
     #@td()
         #if(var?.orgUserGender=="0")
         男
-        #else
+        #elseif(var?.orgUserGender=="1")
         女
+        #else
+        未知
         #end
     #end
     #@td("nowrap")${var?.orgUserPhone}#end
