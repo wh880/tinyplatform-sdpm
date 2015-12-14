@@ -73,7 +73,7 @@ public class InitDataApplicationProcessor implements ApplicationProcessor {
             orgUser.setOrgDeptId(1);
             orgUser.setOrgUserAccount("admin");
             orgUser.setOrgUserRealName("管理员");
-            orgUser.setOrgUserPassword("admin");
+            orgUser.setOrgUserPassword("123");
             OrgUser orgUser1 = userService.addUser(orgUser);
             roleService.batchAddRolesToUser(orgUser1.getOrgUserId(), new String[]{"1"});
         }

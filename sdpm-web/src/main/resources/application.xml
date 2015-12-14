@@ -3,7 +3,7 @@
     <application-properties>
         <file path="/sdpm.properties"></file>
         <property name="BASE_PACKAGE" value="org.tinygroup"/>
-        <property name="DEBUG_MODE" value="true"/>
+        <property name="DEBUG_MODE" value="false"/>
         <property name="TINY_THEME" value="default"/>
         <property name="UPLOAD_ACTION_URL" value="/ajaxUploadImage"/>
         <!--缓存配置-->
@@ -34,9 +34,9 @@
         <!--<application-processor bean="fileMonitorProcessor"/>-->
         <application-processor bean="tinyTemplateConfigProcessor"/>
         <!--数据库安装-->
-        <!--<application-processor bean="databaseInstallerProcessor"/>-->
+        <application-processor bean="databaseInstallerProcessor"/>
         <!-- 系统数据初始化 -->
-        <!--<application-processor bean="initDataApplicationProcessor"/>-->
+        <application-processor bean="initDataApplicationProcessor"/>
         <application-processor bean="stdProcessor"/>
         <application-processor bean="dictLoadProcessor"/>
     </application-processors>
