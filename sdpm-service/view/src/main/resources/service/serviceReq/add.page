@@ -19,7 +19,6 @@
                         var em = "<option value='" + data[i][opKey] + "' >" + data[i][opvalue] + "</option>";
                         sele.append(em);
                     }
-                    //console.log(sele.html(),value,opKey);
                     if (isInit) {
                         sele.val(value).trigger("change");
                     } else {
@@ -39,7 +38,7 @@
 </style>
 #set(name="request")
 #@layout(service)#end
-#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/service/request/save" "post" {"class":""})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/service/request/save" "post")
 <div style="width:100%;margin-left: 20px;" class="pageleftpart">
     <div class="infoContent">
         <p class="titleName">请求</p>
@@ -142,8 +141,7 @@
         #end
         #@elementItem()
             #@sdpmItem("客户联系人" "*")
-                #tinyInput(
-                    "text" "requester" request?.requester{"placeholder":"请输入客户联系人","datatype":"*","nullmsg":
+                #tinyInput("text" "requester" request?.requester?request.requester:userUtils.getUser().orgUserRealName {"placeholder":"请输入客户联系人","datatype":"*","nullmsg":
                     "客户联系人不能为空！","class":"input-text"})
             #end
         #end

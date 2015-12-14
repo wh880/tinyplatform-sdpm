@@ -17,6 +17,7 @@
         <name>TinyGroup</name>
         <url>http://www.tinygroup.org</url>
     </organization>
+
     <repositories>
         <repository>
             <id>oschina-repos</id>
@@ -35,7 +36,6 @@
             <name>Central Repository</name>
             <url>http://repo.maven.apache.org/maven2</url>
         </repository>
-
     </repositories>
     <licenses>
         <license>

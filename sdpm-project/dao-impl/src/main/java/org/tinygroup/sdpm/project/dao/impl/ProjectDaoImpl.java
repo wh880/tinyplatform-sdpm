@@ -219,8 +219,7 @@ public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
             @SuppressWarnings("rawtypes")
             public Select generate(Serializable t) {
                 return selectFrom(PROJECTTABLE).where(and(
-                        PROJECTTABLE.PROJECT_ID.eq(t),
-                        PROJECTTABLE.PROJECT_DELETED.eq(Project.DELETE_NO)
+                        PROJECTTABLE.PROJECT_ID.eq(t)
                 ));
             }
         });
@@ -461,16 +460,20 @@ public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
     }
 
     public List<Project> findByIds(Integer... ids) {
-        Select select = selectFrom(PROJECTTABLE).where(
-                PROJECTTABLE.PROJECT_DELETED.eq(Project.DELETE_NO).and(PROJECTTABLE.PROJECT_ID.in(ids)));
+        Select select = selectFrom(PROJECTTABLE).where(PROJECTTABLE.PROJECT_ID.in(ids));
         return getDslSession().fetchList(select, Project.class);
     }
 
     public List<Project> findListByTeamUserId(String userId, String acl) {
         Select select = selectFrom(PROJECTTABLE).where(
-                PROJECTTABLE.PROJECT_ID.inExpression(subSelect(select(PROJECT_TEAMTABLE.PROJECT_ID).from(PROJECT_TEAMTABLE).where(PROJECT_TEAMTABLE.TEAM_USER_ID.eq(userId))))
-                        .and(PROJECTTABLE.PROJECT_ACL.eq(acl))
-                        .and(PROJECTTABLE.PROJECT_DELETED.eq(Project.DELETE_NO))
+                and(
+                        PROJECTTABLE.PROJECT_ID.inExpression(subSelect(select(PROJECT_TEAMTABLE.PROJECT_ID).from(PROJECT_TEAMTABLE).where(PROJECT_TEAMTABLE.TEAM_USER_ID.eq(userId))))
+                                .and(PROJECTTABLE.PROJECT_ACL.eq(acl))
+                                .and(PROJECTTABLE.PROJECT_DELETED.eq(Project.DELETE_NO)
+                                ),
+                        PROJECTTABLE.PROJECT_STATGE.neq("3")
+                )
+
         );
         return getDslSession().fetchList(select, Project.class);
     }

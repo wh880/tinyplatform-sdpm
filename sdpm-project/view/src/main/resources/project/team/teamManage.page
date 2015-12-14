@@ -14,7 +14,7 @@
         </td>
         <td width="20%">
             <span class="c-red">*</span>
-            角色
+            项目角色
         </td>
         <td width="20%">
             加盟日
@@ -53,7 +53,6 @@
                         #end
                     #end
                 #end
-            ##                #tinyInput("text" "teamList["+a+"].teamRole" t.teamRole {"datatype":"","class":"input-text"})
             </td>
             <td>
                 #@tinyDateInput("teamList["+a+"].teamJoin" formatDate(now(),"yyyy-MM-dd") "YYYY-MM-DD" )#end

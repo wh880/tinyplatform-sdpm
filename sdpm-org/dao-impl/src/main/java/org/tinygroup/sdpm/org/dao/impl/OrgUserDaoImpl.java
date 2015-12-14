@@ -153,7 +153,7 @@ public class OrgUserDaoImpl extends TinyDslDaoSupport implements OrgUserDao {
         return getDslTemplate().getByKey(pk, OrgUser.class, new SelectGenerateCallback<Serializable>() {
             @SuppressWarnings("rawtypes")
             public Select generate(Serializable t) {
-                return selectFrom(ORG_USERTABLE).where(and(ORG_USERTABLE.ORG_USER_ID.eq(t), ORG_USERTABLE.ORG_USER_DELETED.eq(OrgUser.DELETE_NO)));
+                return selectFrom(ORG_USERTABLE).where(ORG_USERTABLE.ORG_USER_ID.eq(t));
             }
         });
     }
@@ -162,7 +162,7 @@ public class OrgUserDaoImpl extends TinyDslDaoSupport implements OrgUserDao {
         SelectGenerateCallback<Serializable[]> callback = new SelectGenerateCallback<Serializable[]>() {
             @SuppressWarnings("rawtypes")
             public Select generate(Serializable[] t) {
-                return selectFrom(ORG_USERTABLE).where(and(ORG_USERTABLE.ORG_USER_ID.in(t), ORG_USERTABLE.ORG_USER_DELETED.eq(OrgUser.DELETE_NO)));
+                return selectFrom(ORG_USERTABLE).where(ORG_USERTABLE.ORG_USER_ID.in(t));
             }
 
         };

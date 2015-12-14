@@ -21,7 +21,6 @@ import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.jdbctemplatedslsession.callback.*;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
-import org.tinygroup.sdpm.common.log.annotation.LogMethod;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.project.dao.ProjectStoryDao;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectStory;
@@ -95,8 +94,6 @@ public class ProjectStoryDaoImpl extends TinyDslDaoSupport implements ProjectSto
         return getDslSession().execute(delete);
     }
 
-
-    @LogMethod("add")
     public ProjectStory add(ProjectStory projectStory) {
         return getDslTemplate().insertAndReturnKey(projectStory, new InsertGenerateCallback<ProjectStory>() {
             public Insert generate(ProjectStory t) {
@@ -111,7 +108,6 @@ public class ProjectStoryDaoImpl extends TinyDslDaoSupport implements ProjectSto
         });
     }
 
-    @LogMethod("edit")
     public int edit(ProjectStory projectStory) {
         if (projectStory == null || projectStory.getId() == null) {
             return 0;
@@ -129,7 +125,6 @@ public class ProjectStoryDaoImpl extends TinyDslDaoSupport implements ProjectSto
         });
     }
 
-    @LogMethod("deleteByKey")
     public int deleteByKey(Integer pk) {
         if (pk == null) {
             return 0;
@@ -141,7 +136,6 @@ public class ProjectStoryDaoImpl extends TinyDslDaoSupport implements ProjectSto
         });
     }
 
-    @LogMethod("deleteByKeys")
     public int deleteByKeys(Integer... pks) {
         if (pks == null || pks.length == 0) {
             return 0;
@@ -219,7 +213,6 @@ public class ProjectStoryDaoImpl extends TinyDslDaoSupport implements ProjectSto
         return batchInsert(true, projectStorys);
     }
 
-    @LogMethod("batchUpdate")
     public int[] batchUpdate(List<ProjectStory> projectStorys) {
         if (CollectionUtil.isEmpty(projectStorys)) {
             return new int[0];
@@ -237,7 +230,6 @@ public class ProjectStoryDaoImpl extends TinyDslDaoSupport implements ProjectSto
         });
     }
 
-    @LogMethod("batchDelete")
     public int[] batchDelete(List<ProjectStory> projectStorys) {
         if (CollectionUtil.isEmpty(projectStorys)) {
             return new int[0];
@@ -255,7 +247,6 @@ public class ProjectStoryDaoImpl extends TinyDslDaoSupport implements ProjectSto
         });
     }
 
-    @LogMethod("addOrderByElements")
     private Select addOrderByElements(Select select, OrderBy... orderBies) {
         List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
         for (int i = 0; orderBies != null && i < orderBies.length; i++) {

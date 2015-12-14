@@ -47,4 +47,11 @@ public interface MenuManager {
 
     List<Menu> getMenus();
 
+    /**
+     * 过滤去除show=0的菜单
+     * @param list
+     * @return
+     */
+    List<Menu> findShow(List<Menu> list);
+
 }

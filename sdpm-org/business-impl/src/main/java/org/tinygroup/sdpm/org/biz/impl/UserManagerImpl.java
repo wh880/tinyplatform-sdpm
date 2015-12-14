@@ -42,7 +42,11 @@ public class UserManagerImpl implements UserManager {
         if (StringUtil.isBlank(id)) {
             return null;
         }
-        return orgUserDao.getByKey(id);
+        try {
+            return orgUserDao.getByKey(id);
+        }catch (Exception e){
+            return null;
+        }
     }
 
     public OrgUser findUserByAccount(String account) {
@@ -111,7 +115,6 @@ public class UserManagerImpl implements UserManager {
     }
 
     public String getNameById(String id) {
-
         return orgUserDao.getNameById(id);
     }
 
