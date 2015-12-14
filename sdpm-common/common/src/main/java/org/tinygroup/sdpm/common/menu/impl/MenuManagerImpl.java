@@ -3,6 +3,7 @@ package org.tinygroup.sdpm.common.menu.impl;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
 import org.tinygroup.commons.tools.CollectionUtil;
+import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.logger.LogLevel;
 import org.tinygroup.logger.Logger;
 import org.tinygroup.logger.LoggerFactory;
@@ -108,7 +109,7 @@ public class MenuManagerImpl implements MenuManager {
     }
 
     public List<Menu> getScopeMenus(String scope) {
-        if (scope == null || scope.isEmpty()) {
+        if (StringUtil.isBlank(scope)) {
             logger.logMessage(LogLevel.ERROR, "获取聚合菜单名称为空");
             return null;
         }
@@ -193,12 +194,15 @@ public class MenuManagerImpl implements MenuManager {
     }
 
 
-    private List<Menu> findShow(List<Menu> list) {
+    public List<Menu> findShow(List<Menu> list) {
         if (CollectionUtil.isEmpty(list)) {
             return new ArrayList<Menu>();
         }
         Predicate<Menu> predicate = new Predicate<Menu>() {
             public boolean apply(Menu menu) {
+                if (StringUtil.isBlank(menu.getIsShow())){
+                    return true;
+                }
                 return Menu.IS_SHOW_YES.equals(menu.getIsShow());
             }
         };

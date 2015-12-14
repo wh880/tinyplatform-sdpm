@@ -4,9 +4,9 @@
 		#foreach(m in menuManager.getChildMenus("mysystem"))
 			#@aHeadCol(TINY_CONTEXT_PATH+adminPath+m.href m.id==linkName?"Current":"")${m.name}#end
 		#end
-		#@aHeadCol(TINY_CONTEXT_PATH+adminPath+"/system/about" "Current")程序员秀场#end
+		#@aHeadCol(TINY_CONTEXT_PATH+adminPath+"/system/about")程序员秀场#end
+		#@aHeadCol(TINY_CONTEXT_PATH+adminPath+"/system/us" "Current")关于#end
 	#end
-<h2 class="title-name">关于我们</h2>
 <div class="us-info">
 Tiny拥有的企业级j2ee应用开发框架套件，专业团队开发，完整的生态体系，活跃的社区氛围，无限的水平扩展能力，7*24不间断运维能力。<span style="color:#999;">SDPM同时也声明，获得禅道的同意，大部分功能参造禅道实现的。</span>
 </div>

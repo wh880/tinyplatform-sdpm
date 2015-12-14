@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.common.util.std.StdUtil;
 import org.tinygroup.sdpm.org.biz.inter.UserManager;
+import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.system.biz.inter.ActionManager;
 import org.tinygroup.sdpm.system.biz.inter.HistoryManager;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
@@ -39,7 +40,7 @@ public class LogServiceImpl implements LogService {
     private void recordEdit(Object oldObject, Object newObject, SystemAction systemAction) {
         Field[] fields = oldObject.getClass().getDeclaredFields();
         for (Field field : fields) {
-            if(!StdUtil.containsField(field.getName())) continue;
+            if (!StdUtil.containsField(field.getName())) continue;
             Object oldValue;
             Object newValue;
             try {
@@ -94,11 +95,16 @@ public class LogServiceImpl implements LogService {
 
     private Object dataChange(Object object) {
         if (object instanceof Date) {
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             Date date = (Date) object;
             return format.format(date);
         } else if (validateUserId(object)) {
-            return userManager.find((String) object).getOrgUserRealName();
+            OrgUser orgUser = userManager.find((String) object);
+            if (orgUser != null) {
+                return orgUser.getOrgUserRealName();
+            }else {
+                return "";
+            }
         }
         return object;
     }

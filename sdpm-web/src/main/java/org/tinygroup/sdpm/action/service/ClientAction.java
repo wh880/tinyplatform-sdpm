@@ -185,7 +185,7 @@ public class ClientAction extends BaseController {
      * @param model
      * @return
      */
-    @RequiresPermissions("client-sla")
+    @RequiresPermissions("client")
     @RequestMapping(value = "/clientSla")
     public String showSla(Integer id, Model model) {
         if (id != null) {
@@ -199,7 +199,7 @@ public class ClientAction extends BaseController {
             model.addAttribute("client", client);
             model.addAttribute("slas", slas);
         }
-        return "service/client/clientProduct.page";
+        return "service/client/clientProduct";
     }
 
     /**
@@ -224,6 +224,7 @@ public class ClientAction extends BaseController {
      * @param model
      * @return
      */
+    @RequiresPermissions("client")
     @RequestMapping("/slaDetail")
     public String slaDetail(Integer id, Model model) {
         if (id != null) {

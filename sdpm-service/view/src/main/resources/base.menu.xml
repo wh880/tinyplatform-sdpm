@@ -34,7 +34,7 @@
         <!--</menu>-->
     </menu>
 
-    <menu id="request" name="需求" href="/service/request/list" sort="100" isShow="1">
+    <menu id="request" name="请求" href="/service/request/list" sort="100" isShow="1">
         <menu id="request-batchdel" name="批量删除" href="#" icon="icon-trash" sort="1" isShow="1"
               scope="service-req-batchdel"/>
         <menu id="request-solve" name="回复请求" href="/service/request/reply" icon="icon-wrench " sort="1"

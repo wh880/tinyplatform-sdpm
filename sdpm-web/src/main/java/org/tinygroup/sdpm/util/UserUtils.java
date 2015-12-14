@@ -179,7 +179,6 @@ public class UserUtils {
     public void clearCache() {
         removeCache(CACHE_ROLE_LIST);
         removeCache(CACHE_MENU_LIST);
-//        userUtils.clearCache(getUser());
     }
 
     /**

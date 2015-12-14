@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.action.project;
 
+import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -182,7 +183,7 @@ public class ProjectTaskCommonAction extends BaseController {
         return "project/modal/task/" + forward + ".pagelet";
     }
 
-    @RequiresPermissions("task-group")
+    @RequiresPermissions(value = {"task-group"},logical = Logical.OR)
     @RequestMapping("/grouping")
     public String grouping(HttpServletRequest request, HttpServletResponse response,
                            String type, String menuId, Model model) {
