@@ -13,10 +13,18 @@ public interface ProjectProductService {
     /**
      * 添加关联,并将原存在的关联删除
      *
-     * @param productIds
+     * @param productIds String类型
      * @param projectId
      */
-    void addProjectLinkToProduct(Integer[] productIds, Integer projectId);
+    void addProjectLinkToProduct(String[] productIds, Integer projectId);
+
+    /**
+     * 添加关联,并将原存在的关联删除
+     *
+     * @param productIds Integer 类型
+     * @param projectId
+     */
+    void addProductLinkToProject(Integer[] productIds, Integer projectId);
 
     /**
      * 查询项目关联的产品

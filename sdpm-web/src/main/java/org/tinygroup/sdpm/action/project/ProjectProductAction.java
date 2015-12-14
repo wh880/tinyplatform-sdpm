@@ -55,7 +55,7 @@ public class ProjectProductAction extends BaseController {
         if (projectId == null) {
             return resultMap(false, "请选择所在项目");
         }
-        projectProductService.addProjectLinkToProduct(productIds, projectId);
+        projectProductService.addProductLinkToProject(productIds, projectId);
         return resultMap(true, "保存成功");
     }
 }

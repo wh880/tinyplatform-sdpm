@@ -122,11 +122,12 @@ public class ProjectAction extends BaseController {
      */
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(HttpServletResponse response, Project project,
-                       Integer[] linkProduct, Integer[] whiteList) {
+                       String linkProduct, Integer[] whiteList) {
         project.setProjectOpenedBy(userUtils.getUserId());
         project.setProjectWhiteList(StringUtil.join(whiteList, ","));
         project = projectService.addProject(project);
-        projectProductService.addProjectLinkToProduct(linkProduct, project.getProjectId());
+        String[] productIds = linkProduct.split(",");
+        projectProductService.addProjectLinkToProduct(productIds, project.getProjectId());
         CookieUtils.setCookie(response, projectOperate.COOKIE_PROJECT_ID, project.getProjectId().toString());
         //TODO:ProjectUtils.removeProjectList();
         return "redirect:" + adminPath + "/project/list";
@@ -199,11 +200,7 @@ public class ProjectAction extends BaseController {
         project.setProjectWhiteList(StringUtil.join(whiteList, ","));
         String[] pIds = productIds.split(",");
         if (!ArrayUtil.isEmptyArray(pIds)) {
-            Integer[] productId = new Integer[pIds.length];
-            for (int i = 0; i < pIds.length; i++) {
-                productId[i] = Integer.valueOf(pIds[i]);
-            }
-            projectProductService.addProjectLinkToProduct(productId, project.getProjectId());
+            projectProductService.addProjectLinkToProduct(pIds, project.getProjectId());
         }
         projectService.updateProject(project);
         model.addAttribute("project", project);

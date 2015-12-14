@@ -17,7 +17,8 @@ public interface ProjectProductManager {
      */
     List<Product> findLinkProductByProjectId(Integer projectId);
 
-    void addLink(Integer[] productArray, Integer projectId);
+    void addLink(String[] productArray, Integer projectId);
+    void addProductLinkToProject(Integer[] productArray, Integer projectId);
 
     /**
      * 根据projectId查找关联产品

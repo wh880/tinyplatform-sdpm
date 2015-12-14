@@ -5,6 +5,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
+import org.tinygroup.logger.LogLevel;
+import org.tinygroup.logger.Logger;
+import org.tinygroup.logger.LoggerFactory;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.project.biz.inter.ProjectManager;
 import org.tinygroup.sdpm.project.dao.ProjectDao;
@@ -21,6 +24,7 @@ import java.util.List;
 @Service
 @Transactional
 public class ProjectManagerImpl implements ProjectManager {
+    private static final Logger logger = LoggerFactory.getLogger(ProjectManagerImpl.class);
     @Autowired
     private ProjectDao projectDao;
 
@@ -102,6 +106,7 @@ public class ProjectManagerImpl implements ProjectManager {
         try {
             return projectDao.getByKey(projectId);
         } catch (Exception e) {
+            logger.logMessage(LogLevel.ERROR, "查询项目出错", e);
             return null;
         }
     }
@@ -124,6 +129,6 @@ public class ProjectManagerImpl implements ProjectManager {
     }
 
     public List<Project> projectInCondition(String condition, Integer... ids) {
-        return projectDao.projectInCondition(condition,ids);
+        return projectDao.projectInCondition(condition, ids);
     }
 }

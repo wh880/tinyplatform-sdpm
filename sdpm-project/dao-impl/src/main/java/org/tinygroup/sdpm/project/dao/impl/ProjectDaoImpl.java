@@ -218,9 +218,7 @@ public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
         return getDslTemplate().getByKey(pk, Project.class, new SelectGenerateCallback<Serializable>() {
             @SuppressWarnings("rawtypes")
             public Select generate(Serializable t) {
-                return selectFrom(PROJECTTABLE).where(and(
-                        PROJECTTABLE.PROJECT_ID.eq(t)
-                ));
+                return selectFrom(PROJECTTABLE).where(PROJECTTABLE.PROJECT_ID.eq(t));
             }
         });
     }
@@ -479,7 +477,7 @@ public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
     }
 
     public List<Project> projectInCondition(String condition, Integer... ids) {
-        Select select = MysqlSelect.selectFrom(PROJECTTABLE).where(and(PROJECTTABLE.PROJECT_DELETED.eq(0),PROJECTTABLE.PROJECT_ID.in(ids),PROJECTTABLE.PROJECT_NAME.like(condition))).limit(0,8);
-        return getDslSession().fetchList(select,Project.class);
+        Select select = MysqlSelect.selectFrom(PROJECTTABLE).where(and(PROJECTTABLE.PROJECT_DELETED.eq(0), PROJECTTABLE.PROJECT_ID.in(ids), PROJECTTABLE.PROJECT_NAME.like(condition))).limit(0, 8);
+        return getDslSession().fetchList(select, Project.class);
     }
 }

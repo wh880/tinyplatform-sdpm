@@ -66,7 +66,9 @@ public class ProjectStoryDaoImpl extends TinyDslDaoSupport implements ProjectSto
                 .join(Join.leftJoin(PRODUCTTABLE, PRODUCTTABLE.PRODUCT_ID.eq(PRODUCT_STORYTABLE.PRODUCT_ID)))
                 .join(Join.leftJoin(PRODUCT_PLANTABLE, PRODUCT_PLANTABLE.PLAN_ID.eq(PRODUCT_STORYTABLE.PLAN_ID)))
                 .where(
-                        and(PROJECT_PRODUCTTABLE.PROJECT_ID.eq(projectId), existsCondition)
+                        and(
+                                PROJECT_PRODUCTTABLE.PROJECT_ID.eq(projectId),
+                                existsCondition)
                 );
         select = addOrderByElements(select, orderByArgs);
         return getDslSession().fetchPage(select, start, limit, false, ProductStory.class);

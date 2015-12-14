@@ -18,11 +18,19 @@ public class ProjectProductServiceImpl implements ProjectProductService {
     @Autowired
     private ProjectProductManager projectProductManager;
 
-    public void addProjectLinkToProduct(Integer[] productIds, Integer projectId) {
+    public void addProjectLinkToProduct(String[] productIds, Integer projectId) {
         if (ArrayUtil.isEmptyArray(productIds)){
             return;
         }
         projectProductManager.addLink(productIds, projectId);
+    }
+
+    public void addProductLinkToProject(Integer[] productIds, Integer projectId) {
+        if (ArrayUtil.isEmptyArray(productIds)){
+            return;
+        }
+        projectProductManager.addProductLinkToProject(productIds, projectId);
+
     }
 
     public List<Product> findLinkProductByProjectId(Integer projectId) {

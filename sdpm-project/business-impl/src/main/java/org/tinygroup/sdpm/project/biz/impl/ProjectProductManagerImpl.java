@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.commons.tools.ArrayUtil;
+import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.project.biz.inter.ProjectProductManager;
 import org.tinygroup.sdpm.project.dao.ProjectProductDao;
@@ -28,13 +29,31 @@ public class ProjectProductManagerImpl implements ProjectProductManager {
         return projectProductDao.findLinkProductByProjectId(projectId);
     }
 
-    public void addLink(Integer[] productIds, Integer projectId) {
+    public void addLink(String[] productIds, Integer projectId) {
         if (ArrayUtil.isEmptyArray(productIds) || projectId == null) {
             return;
         }
         List<ProjectProduct> list = new ArrayList<ProjectProduct>();
-        for (Integer productId : productIds) {
-            if (productId == null) {
+        for (String productId : productIds) {
+            if (StringUtil.isBlank(productId)) {
+                continue;
+            }
+            ProjectProduct t = new ProjectProduct();
+            t.setProjectId(projectId);
+            t.setProductId(Integer.valueOf(productId));
+            list.add(t);
+        }
+        projectProductDao.deleteByProjectId(projectId);
+        projectProductDao.batchInsert(list);
+    }
+
+    public void addProductLinkToProject(Integer[] productArray, Integer projectId) {
+        if (ArrayUtil.isEmptyArray(productArray) || projectId == null) {
+            return;
+        }
+        List<ProjectProduct> list = new ArrayList<ProjectProduct>();
+        for (Integer productId : productArray) {
+            if (null == productId) {
                 continue;
             }
             ProjectProduct t = new ProjectProduct();

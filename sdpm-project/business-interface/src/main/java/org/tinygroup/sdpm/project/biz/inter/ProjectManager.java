@@ -11,7 +11,6 @@ import java.util.List;
  */
 public interface ProjectManager {
 
-
     /**
      * 查找用户所在团队所拥有的项目
      *
