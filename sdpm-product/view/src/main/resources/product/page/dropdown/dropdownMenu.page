@@ -28,11 +28,16 @@
         #if(productUtils.getProductList().size()>0)
             #set(msg="目前没有你可访问的产品，现在将前往添加。")
         #end
+        #set(href = TINY_CONTEXT_PATH+adminPath+"/product/addproduct/addition")
+        #if(!userUtils.hasMenu("newproduct"))
+            #set(msg="目前没有你可访问的产品，现在将前往首页。")
+            #set(href = TINY_CONTEXT_PATH+adminPath+"/home")
+        #end
     $(function () {
         var url = window.location.pathname;
         if (url.indexOf("addproduct") < 0) {
-            layer.msg('${msg}<div style="text-align:center"><a href="${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition"><span id="showTime">5</span>秒后前往</a></div>', 5, -1, function () {
-                window.location.href = "${TINY_CONTEXT_PATH+adminPath}/product/addproduct/addition";
+            layer.msg('${msg}<div style="text-align:center"><a href="${href}"><span id="showTime">5</span>秒后前往</a></div>', 5, -1, function () {
+                window.location.href = "${href}";
             });
             var timeVal = 5;
 

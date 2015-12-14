@@ -21,7 +21,6 @@ import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.jdbctemplatedslsession.callback.*;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
-import org.tinygroup.sdpm.dao.update.UpdateUtil;
 import org.tinygroup.sdpm.org.dao.constant.OrgUserTable;
 import org.tinygroup.sdpm.quality.dao.QualityTestCaseDao;
 import org.tinygroup.sdpm.quality.dao.constant.QualityTestCaseTable;
@@ -59,7 +58,6 @@ public class QualityTestCaseDaoImpl extends TinyDslDaoSupport implements Quality
         return getDslTemplate().insertAndReturnKey(qualityTestCase, new InsertGenerateCallback<QualityTestCase>() {
             public Insert generate(QualityTestCase t) {
                 Insert insert = insertInto(QUALITY_TEST_CASETABLE).values(
-                        QUALITY_TEST_CASETABLE.CASE_ID.value(t.getCaseId()),
                         QUALITY_TEST_CASETABLE.PRODUCT_ID.value(t.getProductId()),
                         QUALITY_TEST_CASETABLE.MODULE_ID.value(t.getModuleId()),
                         QUALITY_TEST_CASETABLE.CASE_PATH.value(t.getCasePath()),
@@ -102,7 +100,38 @@ public class QualityTestCaseDaoImpl extends TinyDslDaoSupport implements Quality
         }
         return getDslTemplate().update(qualityTestCase, new UpdateGenerateCallback<QualityTestCase>() {
             public Update generate(QualityTestCase t) {
-                Update update = UpdateUtil.getUpdate(QUALITY_TEST_CASETABLE, qualityTestCase);
+                Update update = update(QUALITY_TEST_CASETABLE).set(
+                        QUALITY_TEST_CASETABLE.PRODUCT_ID.value(t.getProductId()),
+                        QUALITY_TEST_CASETABLE.MODULE_ID.value(t.getModuleId()),
+                        QUALITY_TEST_CASETABLE.CASE_PATH.value(t.getCasePath()),
+                        QUALITY_TEST_CASETABLE.STORY_ID.value(t.getStoryId()),
+                        QUALITY_TEST_CASETABLE.STORY_VERSION.value(t.getStoryVersion()),
+                        QUALITY_TEST_CASETABLE.CASE_TITLE.value(t.getCaseTitle()),
+                        QUALITY_TEST_CASETABLE.CASE_PRECONDITION.value(t.getCasePrecondition()),
+                        QUALITY_TEST_CASETABLE.CASE_KEYWORDS.value(t.getCaseKeywords()),
+                        QUALITY_TEST_CASETABLE.PRIORITY.value(t.getPriority()),
+                        QUALITY_TEST_CASETABLE.CASE_TYPE.value(t.getCaseType()),
+                        QUALITY_TEST_CASETABLE.CASE_STAGE.value(t.getCaseStage()),
+                        QUALITY_TEST_CASETABLE.CASE_RUNWAY.value(t.getCaseRunway()),
+                        QUALITY_TEST_CASETABLE.CASE_SCRIPTED_BY.value(t.getCaseScriptedBy()),
+                        QUALITY_TEST_CASETABLE.CASE_SCRIPTED_DATE.value(t.getCaseScriptedDate()),
+                        QUALITY_TEST_CASETABLE.SCRIPT_STATUS.value(t.getScriptStatus()),
+                        QUALITY_TEST_CASETABLE.SCRIPT_LOCATION.value(t.getScriptLocation()),
+                        QUALITY_TEST_CASETABLE.CASE_STATUS.value(t.getCaseStatus()),
+                        QUALITY_TEST_CASETABLE.CASE_FREQUENCY.value(t.getCaseFrequency()),
+                        QUALITY_TEST_CASETABLE.CASE_ORDER.value(t.getCaseOrder()),
+                        QUALITY_TEST_CASETABLE.CASE_OPENED_BY.value(t.getCaseOpenedBy()),
+                        QUALITY_TEST_CASETABLE.CASE_OPENED_DATE.value(t.getCaseOpenedDate()),
+                        QUALITY_TEST_CASETABLE.CASE_LAST_EDITED_BY.value(t.getCaseLastEditedBy()),
+                        QUALITY_TEST_CASETABLE.CASE_LAST_EDITED_DATE.value(t.getCaseLastEditedDate()),
+                        QUALITY_TEST_CASETABLE.CASE_VERSION.value(t.getCaseVersion()),
+                        QUALITY_TEST_CASETABLE.LINK_CASE.value(t.getLinkCase()),
+                        QUALITY_TEST_CASETABLE.CASE_FROM_BUG.value(t.getCaseFromBug()),
+                        QUALITY_TEST_CASETABLE.DELETED.value(t.getDeleted()),
+                        QUALITY_TEST_CASETABLE.CASE_LAST_RUNNER.value(t.getCaseLastRunner()),
+                        QUALITY_TEST_CASETABLE.CASE_LAST_RUN_DATE.value(t.getCaseLastRunDate()),
+                        QUALITY_TEST_CASETABLE.CASE_LAST_RUN_RESULT.value(t.getCaseLastRunResult()),
+                        QUALITY_TEST_CASETABLE.NO.value(t.getNo())).where(QUALITY_TEST_CASETABLE.CASE_ID.eq(t.getCaseId()));
                 return update;
             }
         });

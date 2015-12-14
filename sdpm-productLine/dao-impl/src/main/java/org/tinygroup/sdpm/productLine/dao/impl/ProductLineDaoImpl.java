@@ -22,8 +22,6 @@ import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.jdbctemplatedslsession.callback.*;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
-import org.tinygroup.sdpm.dao.update.InsertUtil;
-import org.tinygroup.sdpm.dao.update.UpdateUtil;
 import org.tinygroup.sdpm.productLine.dao.ProductLineDao;
 import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.tinysqldsl.*;
@@ -50,10 +48,7 @@ public class ProductLineDaoImpl extends TinyDslDaoSupport implements ProductLine
     public ProductLine add(final ProductLine productLine) {
         return getDslTemplate().insertAndReturnKey(productLine, new InsertGenerateCallback<ProductLine>() {
             public Insert generate(ProductLine t) {
-                Insert insert = InsertUtil.getInsert(PRODUCT_LINETABLE, productLine);
-						
-						/*insertInto(PRODUCT_LINETABLE).values(
-					PRODUCT_LINETABLE.PRODUCT_LINE_ID.value(t.getProductLineId()),
+                Insert insert = insertInto(PRODUCT_LINETABLE).values(
 					PRODUCT_LINETABLE.COMPANY_ID.value(t.getCompanyId()),
 					PRODUCT_LINETABLE.DEPT_ID.value(t.getDeptId()),
 					PRODUCT_LINETABLE.PRODUCT_LINE_ROOT.value(t.getProductLineRoot()),
@@ -70,7 +65,7 @@ public class ProductLineDaoImpl extends TinyDslDaoSupport implements ProductLine
 					PRODUCT_LINETABLE.PRODUCT_LINE_WHITE_LIST.value(t.getProductLineWhiteList()),
 					PRODUCT_LINETABLE.PRODUCT_LINE_CREATED_BY.value(t.getProductLineCreatedBy()),
 					PRODUCT_LINETABLE.PRODUCT_LINE_CREATED_DATE.value(t.getProductLineCreatedDate()),
-					PRODUCT_LINETABLE.DELETED.value(t.getDeleted()));*/
+					PRODUCT_LINETABLE.DELETED.value(t.getDeleted()));
                 return insert;
             }
         });
@@ -82,7 +77,24 @@ public class ProductLineDaoImpl extends TinyDslDaoSupport implements ProductLine
         }
         return getDslTemplate().update(productLine, new UpdateGenerateCallback<ProductLine>() {
             public Update generate(ProductLine t) {
-                Update update = UpdateUtil.getUpdate(PRODUCT_LINETABLE, t);
+                Update update = update(PRODUCT_LINETABLE).set(
+                        PRODUCT_LINETABLE.COMPANY_ID.value(t.getCompanyId()),
+                        PRODUCT_LINETABLE.DEPT_ID.value(t.getDeptId()),
+                        PRODUCT_LINETABLE.PRODUCT_LINE_ROOT.value(t.getProductLineRoot()),
+                        PRODUCT_LINETABLE.PRODUCT_LINE_PARENT.value(t.getProductLineParent()),
+                        PRODUCT_LINETABLE.PRODUCT_LINE_NAME.value(t.getProductLineName()),
+                        PRODUCT_LINETABLE.PRODUCT_LINE_CODE.value(t.getProductLineCode()),
+                        PRODUCT_LINETABLE.PRODUCT_LINE_ORDER.value(t.getProductLineOrder()),
+                        PRODUCT_LINETABLE.PRODUCT_LINE_SPEC.value(t.getProductLineSpec()),
+                        PRODUCT_LINETABLE.PRODUCT_LINE_STATUS.value(t.getProductLineStatus()),
+                        PRODUCT_LINETABLE.PRODUCT_LINE_OWNER.value(t.getProductLineOwner()),
+                        PRODUCT_LINETABLE.PRODUCT_LINE_QUALITY_MANAGER.value(t.getProductLineQualityManager()),
+                        PRODUCT_LINETABLE.PRODUCT_LINE_DELIVERY_MANAGER.value(t.getProductLineDeliveryManager()),
+                        PRODUCT_LINETABLE.ACL.value(t.getAcl()),
+                        PRODUCT_LINETABLE.PRODUCT_LINE_WHITE_LIST.value(t.getProductLineWhiteList()),
+                        PRODUCT_LINETABLE.PRODUCT_LINE_CREATED_BY.value(t.getProductLineCreatedBy()),
+                        PRODUCT_LINETABLE.PRODUCT_LINE_CREATED_DATE.value(t.getProductLineCreatedDate()),
+                        PRODUCT_LINETABLE.DELETED.value(t.getDeleted())).where(PRODUCT_LINETABLE.PRODUCT_LINE_ID.eq(t.getProductLineId()));
                 return update;
             }
         });

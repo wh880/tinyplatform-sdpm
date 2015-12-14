@@ -22,8 +22,6 @@ import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.jdbctemplatedslsession.callback.*;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
-import org.tinygroup.sdpm.dao.update.InsertUtil;
-import org.tinygroup.sdpm.dao.update.UpdateUtil;
 import org.tinygroup.sdpm.product.dao.ProductStorySpecDao;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec;
 import org.tinygroup.tinysqldsl.*;
@@ -60,14 +58,13 @@ public class ProductStorySpecDaoImpl extends TinyDslDaoSupport implements Produc
     public ProductStorySpec add(final ProductStorySpec productStorySpec) {
         return getDslTemplate().insertAndReturnKey(productStorySpec, new InsertGenerateCallback<ProductStorySpec>() {
             public Insert generate(ProductStorySpec t) {
-                Insert insert = InsertUtil.getInsert(PRODUCT_STORY_SPECTABLE, productStorySpec);/*insertInto(PRODUCT_STORY_SPECTABLE).values(
-                    PRODUCT_STORY_SPECTABLE.STORYSPEC_ID.value(t.getStoryspecId()),
+                Insert insert = insertInto(PRODUCT_STORY_SPECTABLE).values(
 					PRODUCT_STORY_SPECTABLE.COMPANY_ID.value(t.getCompanyId()),
 					PRODUCT_STORY_SPECTABLE.STORY_ID.value(t.getStoryId()),
 					PRODUCT_STORY_SPECTABLE.STORY_VERSION.value(t.getStoryVersion()),
 					PRODUCT_STORY_SPECTABLE.STORY_TITLE.value(t.getStoryTitle()),
 					PRODUCT_STORY_SPECTABLE.STORY_SPEC.value(t.getStorySpec()),
-					PRODUCT_STORY_SPECTABLE.STORY_VERIFICATION.value(t.getStoryVerification()));*/
+					PRODUCT_STORY_SPECTABLE.STORY_VERIFICATION.value(t.getStoryVerification()));
                 return insert;
             }
         });
@@ -79,7 +76,13 @@ public class ProductStorySpecDaoImpl extends TinyDslDaoSupport implements Produc
         }
         return getDslTemplate().update(productStorySpec, new UpdateGenerateCallback<ProductStorySpec>() {
             public Update generate(ProductStorySpec t) {
-                Update update = UpdateUtil.getUpdate(PRODUCT_STORY_SPECTABLE, t);
+                Update update = update(PRODUCT_STORY_SPECTABLE).set(
+                        PRODUCT_STORY_SPECTABLE.COMPANY_ID.value(t.getCompanyId()),
+                        PRODUCT_STORY_SPECTABLE.STORY_ID.value(t.getStoryId()),
+                        PRODUCT_STORY_SPECTABLE.STORY_VERSION.value(t.getStoryVersion()),
+                        PRODUCT_STORY_SPECTABLE.STORY_TITLE.value(t.getStoryTitle()),
+                        PRODUCT_STORY_SPECTABLE.STORY_SPEC.value(t.getStorySpec()),
+                        PRODUCT_STORY_SPECTABLE.STORY_VERIFICATION.value(t.getStoryVerification())).where(PRODUCT_STORY_SPECTABLE.STORYSPEC_ID.eq(t.getStoryspecId()));
                 return update;
             }
         });

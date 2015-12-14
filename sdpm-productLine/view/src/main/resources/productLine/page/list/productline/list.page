@@ -13,7 +13,7 @@
 						#@tinyTh({"class":"sorting","rel":"productLineOwner"})经理#end
 						#@tinyTh({"class":"sorting","rel":"productLineQualityManager"})质量经理#end
 						#@tinyTh({"class":"sorting","rel":"productLineDeliveryManager"})交付经理#end
-						#@tinyTh({"class":"sorting","rel":"sortname"})操作#end
+						#@tinyTh({"class":"","rel":""})操作#end
 					#end
 				#end
 			#end

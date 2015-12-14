@@ -22,8 +22,6 @@ import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.jdbctemplatedslsession.callback.*;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
-import org.tinygroup.sdpm.dao.update.InsertUtil;
-import org.tinygroup.sdpm.dao.update.UpdateUtil;
 import org.tinygroup.sdpm.product.dao.ProductPlanDao;
 import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
 import org.tinygroup.tinysqldsl.*;
@@ -51,7 +49,7 @@ import static org.tinygroup.tinysqldsl.select.Join.leftJoin;
 @Repository
 public class ProductPlanDaoImpl extends TinyDslDaoSupport implements ProductPlanDao {
 
-    public static Condition planPueryCondition(ProductPlan t) {
+    public static Condition planQueryCondition(ProductPlan t) {
         return t == null ? null : and(
                 PRODUCT_PLANTABLE.COMPANY_ID.eq(t.getCompanyId()),
                 PRODUCT_PLANTABLE.PRODUCT_ID.eq(t.getProductId()),
@@ -65,15 +63,15 @@ public class ProductPlanDaoImpl extends TinyDslDaoSupport implements ProductPlan
     public ProductPlan add(final ProductPlan productPlan) {
         return getDslTemplate().insertAndReturnKey(productPlan, new InsertGenerateCallback<ProductPlan>() {
             public Insert generate(ProductPlan t) {
-                Insert insert = InsertUtil.getInsert(PRODUCT_PLANTABLE, productPlan);  /*insertInto(PRODUCT_PLANTABLE).values(
-                    PRODUCT_PLANTABLE.PLAN_ID.value(t.getPlanId()),
+                Insert insert = insertInto(PRODUCT_PLANTABLE).values(
 					PRODUCT_PLANTABLE.COMPANY_ID.value(t.getCompanyId()),
 					PRODUCT_PLANTABLE.PRODUCT_ID.value(t.getProductId()),
 					PRODUCT_PLANTABLE.PLAN_NAME.value(t.getPlanName()),
 					PRODUCT_PLANTABLE.PLAN_SPEC.value(t.getPlanSpec()),
 					PRODUCT_PLANTABLE.PLAN_BEGIN_DATE.value(t.getPlanBeginDate()),
 					PRODUCT_PLANTABLE.PLAN_END_DATE.value(t.getPlanEndDate()),
-					PRODUCT_PLANTABLE.DELETED.value(t.getDeleted()));*/
+                    PRODUCT_PLANTABLE.NO.value(t.getNo()),
+					PRODUCT_PLANTABLE.DELETED.value(t.getDeleted()));
                 return insert;
             }
         });
@@ -85,8 +83,15 @@ public class ProductPlanDaoImpl extends TinyDslDaoSupport implements ProductPlan
         }
         return getDslTemplate().update(productPlan, new UpdateGenerateCallback<ProductPlan>() {
             public Update generate(ProductPlan t) {
-                Update update = UpdateUtil.getUpdate(PRODUCT_PLANTABLE, t);
-                return update;
+                return update(PRODUCT_PLANTABLE).set(
+                        PRODUCT_PLANTABLE.COMPANY_ID.value(t.getCompanyId()),
+                        PRODUCT_PLANTABLE.PRODUCT_ID.value(t.getProductId()),
+                        PRODUCT_PLANTABLE.PLAN_NAME.value(t.getPlanName()),
+                        PRODUCT_PLANTABLE.PLAN_SPEC.value(t.getPlanSpec()),
+                        PRODUCT_PLANTABLE.PLAN_BEGIN_DATE.value(t.getPlanBeginDate()),
+                        PRODUCT_PLANTABLE.PLAN_END_DATE.value(t.getPlanEndDate()),
+                        PRODUCT_PLANTABLE.NO.value(t.getNo()),
+                        PRODUCT_PLANTABLE.DELETED.value(t.getDeleted())).where(PRODUCT_PLANTABLE.PLAN_ID.eq(t.getPlanId()));
             }
         });
     }
@@ -266,7 +271,8 @@ public class ProductPlanDaoImpl extends TinyDslDaoSupport implements ProductPlan
                         PRODUCT_PLANTABLE.PLAN_SPEC.value(new JdbcNamedParameter("planSpec")),
                         PRODUCT_PLANTABLE.PLAN_BEGIN_DATE.value(new JdbcNamedParameter("planBeginDate")),
                         PRODUCT_PLANTABLE.PLAN_END_DATE.value(new JdbcNamedParameter("planEndDate")),
-                        PRODUCT_PLANTABLE.DELETED.value(new JdbcNamedParameter("deleted")));
+                        PRODUCT_PLANTABLE.DELETED.value(new JdbcNamedParameter("deleted")),
+                        PRODUCT_PLANTABLE.NO.value(new JdbcNamedParameter("no")));
             }
         });
     }
@@ -289,7 +295,8 @@ public class ProductPlanDaoImpl extends TinyDslDaoSupport implements ProductPlan
                         PRODUCT_PLANTABLE.PLAN_SPEC.value(new JdbcNamedParameter("planSpec")),
                         PRODUCT_PLANTABLE.PLAN_BEGIN_DATE.value(new JdbcNamedParameter("planBeginDate")),
                         PRODUCT_PLANTABLE.PLAN_END_DATE.value(new JdbcNamedParameter("planEndDate")),
-                        PRODUCT_PLANTABLE.DELETED.value(new JdbcNamedParameter("deleted"))).where(
+                        PRODUCT_PLANTABLE.DELETED.value(new JdbcNamedParameter("deleted")),
+                        PRODUCT_PLANTABLE.NO.value(new JdbcNamedParameter("no"))).where(
                         PRODUCT_PLANTABLE.PLAN_ID.eq(new JdbcNamedParameter("planId")));
             }
         });
@@ -303,14 +310,14 @@ public class ProductPlanDaoImpl extends TinyDslDaoSupport implements ProductPlan
 
             public Delete generate() {
                 return delete(PRODUCT_PLANTABLE).where(and(
-                        PRODUCT_PLANTABLE.PLAN_ID.eq(new JdbcNamedParameter("planId")),
                         PRODUCT_PLANTABLE.COMPANY_ID.eq(new JdbcNamedParameter("companyId")),
                         PRODUCT_PLANTABLE.PRODUCT_ID.eq(new JdbcNamedParameter("productId")),
                         PRODUCT_PLANTABLE.PLAN_NAME.eq(new JdbcNamedParameter("planName")),
                         PRODUCT_PLANTABLE.PLAN_SPEC.eq(new JdbcNamedParameter("planSpec")),
                         PRODUCT_PLANTABLE.PLAN_BEGIN_DATE.eq(new JdbcNamedParameter("planBeginDate")),
                         PRODUCT_PLANTABLE.PLAN_END_DATE.eq(new JdbcNamedParameter("planEndDate")),
-                        PRODUCT_PLANTABLE.DELETED.eq(new JdbcNamedParameter("deleted"))));
+                        PRODUCT_PLANTABLE.DELETED.eq(new JdbcNamedParameter("deleted")),
+                        PRODUCT_PLANTABLE.NO.eq(new JdbcNamedParameter("no"))));
             }
         });
     }

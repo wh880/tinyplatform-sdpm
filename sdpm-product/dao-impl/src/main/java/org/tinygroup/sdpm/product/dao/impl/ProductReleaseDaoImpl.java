@@ -22,8 +22,6 @@ import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.jdbctemplatedslsession.callback.*;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
-import org.tinygroup.sdpm.dao.update.InsertUtil;
-import org.tinygroup.sdpm.dao.update.UpdateUtil;
 import org.tinygroup.sdpm.product.dao.ProductReleaseDao;
 import org.tinygroup.sdpm.product.dao.pojo.ProductRelease;
 import org.tinygroup.tinysqldsl.*;
@@ -51,7 +49,7 @@ import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 public class ProductReleaseDaoImpl extends TinyDslDaoSupport implements
         ProductReleaseDao {
 
-    public static Condition releasePueryCondition(ProductRelease t) {
+    public static Condition releaseQueryCondition(ProductRelease t) {
         return t == null ? null : and(
                 PRODUCT_RELEASETABLE.PRODUCT_ID.eq(t.getProductId()),
                 PRODUCT_RELEASETABLE.BUILD_ID.eq(t.getBuildId()),
@@ -67,9 +65,8 @@ public class ProductReleaseDaoImpl extends TinyDslDaoSupport implements
         return getDslTemplate().insertAndReturnKey(productRelease,
                 new InsertGenerateCallback<ProductRelease>() {
                     public Insert generate(ProductRelease t) {
-                        Insert insert = InsertUtil.getInsert(PRODUCT_RELEASETABLE, productRelease);/*insertInto(PRODUCT_RELEASETABLE)
-                                .values(PRODUCT_RELEASETABLE.RELEASE_ID.value(t
-										.getReleaseId()),
+                        Insert insert = insertInto(PRODUCT_RELEASETABLE)
+                                .values(
 										PRODUCT_RELEASETABLE.PRODUCT_ID.value(t
 												.getProductId()),
 										PRODUCT_RELEASETABLE.BUILD_ID.value(t
@@ -84,8 +81,10 @@ public class ProductReleaseDaoImpl extends TinyDslDaoSupport implements
 												.value(t.getReleaseBugs()),
 										PRODUCT_RELEASETABLE.RELEASE_DESC
 												.value(t.getReleaseDesc()),
+                                        PRODUCT_RELEASETABLE.NO
+                                                .value(t.getNo()),
 										PRODUCT_RELEASETABLE.DELETED.value(t
-												.getDeleted()));*/
+												.getDeleted()));
                         return insert;
                     }
                 });
@@ -98,9 +97,27 @@ public class ProductReleaseDaoImpl extends TinyDslDaoSupport implements
         return getDslTemplate().update(productRelease,
                 new UpdateGenerateCallback<ProductRelease>() {
                     public Update generate(ProductRelease t) {
-                        Update update = UpdateUtil.getUpdate(
-                                PRODUCT_RELEASETABLE, t);
-                        return update;
+                        return update(PRODUCT_RELEASETABLE).set(
+                                PRODUCT_RELEASETABLE.PRODUCT_ID.value(t
+                                        .getProductId()),
+                                PRODUCT_RELEASETABLE.BUILD_ID.value(t
+                                        .getBuildId()),
+                                PRODUCT_RELEASETABLE.RELEASE_NAME
+                                        .value(t.getReleaseName()),
+                                PRODUCT_RELEASETABLE.RELEASE_DATE
+                                        .value(t.getReleaseDate()),
+                                PRODUCT_RELEASETABLE.RELEASE_STORIES
+                                        .value(t.getReleaseStories()),
+                                PRODUCT_RELEASETABLE.RELEASE_BUGS
+                                        .value(t.getReleaseBugs()),
+                                PRODUCT_RELEASETABLE.RELEASE_DESC
+                                        .value(t.getReleaseDesc()),
+                                PRODUCT_RELEASETABLE.NO
+                                        .value(t.getNo()),
+                                PRODUCT_RELEASETABLE.DELETED.value(t
+                                        .getDeleted())
+                        ).where(PRODUCT_RELEASETABLE.RELEASE_ID.eq(t.getReleaseId()));
+
                     }
                 });
     }

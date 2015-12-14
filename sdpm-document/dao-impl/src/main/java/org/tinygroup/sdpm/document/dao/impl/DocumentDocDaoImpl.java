@@ -26,7 +26,6 @@ import org.tinygroup.sdpm.common.log.annotation.LogClass;
 import org.tinygroup.sdpm.common.log.annotation.LogMethod;
 import org.tinygroup.sdpm.dao.complexsearch.SearchInfos;
 import org.tinygroup.sdpm.dao.complexsearch.SqlUtil;
-import org.tinygroup.sdpm.dao.update.UpdateUtil;
 import org.tinygroup.sdpm.document.dao.DocumentDocDao;
 import org.tinygroup.sdpm.document.dao.pojo.DocumentDoc;
 import org.tinygroup.sdpm.org.dao.constant.OrgUserTable;
@@ -121,7 +120,25 @@ public class DocumentDocDaoImpl extends TinyDslDaoSupport implements DocumentDoc
 		}
 		return getDslTemplate().update(documentDoc, new UpdateGenerateCallback<DocumentDoc>() {
 			public Update generate(DocumentDoc t) {
-				Update update = UpdateUtil.getUpdate(DOCUMENT_DOCTABLE,documentDoc);
+				Update update = update(DOCUMENT_DOCTABLE).set(
+						DOCUMENT_DOCTABLE.DOC_PRODUCT.value(t.getDocProduct()),
+						DOCUMENT_DOCTABLE.DOC_PROJECT.value(t.getDocProject()),
+						DOCUMENT_DOCTABLE.DOC_LIB_ID.value(t.getDocLibId()),
+						DOCUMENT_DOCTABLE.DOC_MODULE.value(t.getDocModule()),
+						DOCUMENT_DOCTABLE.DOC_TITLE.value(t.getDocTitle()),
+						DOCUMENT_DOCTABLE.DOC_DIGEST.value(t.getDocDigest()),
+						DOCUMENT_DOCTABLE.DOC_KEYWORDS.value(t.getDocKeywords()),
+						DOCUMENT_DOCTABLE.DOC_TYPE.value(t.getDocType()),
+						DOCUMENT_DOCTABLE.DOC_CONTENT.value(t.getDocContent()),
+						DOCUMENT_DOCTABLE.DOC_URL.value(t.getDocUrl()),
+						DOCUMENT_DOCTABLE.DOC_ATTACH.value(t.getDocAttach()),
+						DOCUMENT_DOCTABLE.DOC_VIEWS.value(t.getDocViews()),
+						DOCUMENT_DOCTABLE.DOC_ADDED_BY.value(t.getDocAddedBy()),
+						DOCUMENT_DOCTABLE.DOC_ADDED_DATE.value(t.getDocAddedDate()),
+						DOCUMENT_DOCTABLE.DOC_EDITED_BY.value(t.getDocEditedBy()),
+						DOCUMENT_DOCTABLE.DOC_EDITED_DATE.value(t.getDocEditedDate()),
+						DOCUMENT_DOCTABLE.DOC_DELETED.value(t.getDocDeleted())).where(
+						DOCUMENT_DOCTABLE.DOC_ID.eq(t.getDocId()));
 				return update;
 			}
 		});
