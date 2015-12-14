@@ -55,3 +55,55 @@
     </div>
     #end
 #end
+
+
+<script type="text/javascript">
+    $(function () {
+        $('form[name=batchAddForm]').Validform({
+            beforeSubmit: function (form) {
+                var showBreak = false;
+                $(form).find("tr.this-data-row").each(function (index) {
+                    var that = this;
+                    var dateInput=$(that).find("input:first");
+                    var dateVal = Boolean(dateInput.val());
+                    var hasVal = false;
+                    $(that).find("input[type=text]:not(:first)").each(function (index1) {
+                        var thisVal = Boolean($(this).val());
+                        $(this).removeClass("Validform_error");
+                        dateInput.removeClass("Validform_error");
+                        if(thisVal&&dateVal==false) {
+                            showBreak = true;
+                            dateInput.addClass("Validform_error");
+                            dateInput.get(0).focus();
+                            layer.msg("日期不能为空");
+                            return false;
+                        }
+                        if (index1 == 0) {
+                            hasVal = thisVal;
+                        } else {
+                            if (thisVal != hasVal) {
+                                showBreak = true;
+                                var focus=this;
+                                var focusIndex=index1+2;
+                               if(thisVal){
+                                   focus=$(this).closest("td").prev("td").find("input").get(0);
+                                   focusIndex--;
+                               }
+                                $(focus).addClass("Validform_error");
+                                focus.focus();
+                                layer.msg($(form).find("th").eq(focusIndex).html()+"不能为空");
+                                return false;
+                            }
+                        }
+                    });
+                    if (showBreak) {
+                        return false;
+                    }
+                });
+                if (showBreak) {
+                    return false;
+                }
+            }
+        });
+    })
+</script>
