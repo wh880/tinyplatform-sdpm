@@ -416,14 +416,14 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
         return getDslSession().fetchList(select, Product.class);
     }
 
-    public List<Product> getProductByUserWithCount(String userId,Integer delete,boolean noRole ) {
-        Condition condition = null;
+    public List<Product> getProductByUserWithCount(String userId,Integer delete,boolean noRole,Condition condition) {
+        Condition con = null;
         if(noRole){
-            condition = PRODUCTTABLE.ACL.eq(Product.ACl_All);
+            con =PRODUCTTABLE.ACL.eq(Product.ACl_All);
         }
         Select select = getComplexSelect().where(
-                and(PRODUCTTABLE.DELETED.eq(delete),
-                        or(condition,
+                and(PRODUCTTABLE.DELETED.eq(delete),condition,
+                        or(con,
                                 or(PRODUCTTABLE.PRODUCT_CREATED_BY.eq(userId), PRODUCTTABLE.PRODUCT_OWNER.eq(userId), PRODUCTTABLE.PRODUCT_DELIVERY_MANAGER.eq(userId), PRODUCTTABLE.PRODUCT_QUALITY_MANAGER.eq(userId), ExistsExpression.existsCondition(SubSelect.subSelect(selectFrom(PROJECT_TEAMTABLE).
                                         where(and(PRODUCTTABLE.ACL.eq(Product.ACl_TEAM), PROJECT_TEAMTABLE.PRODUCT_ID.eq(PRODUCTTABLE.PRODUCT_ID), PROJECT_TEAMTABLE.TEAM_USER_ID.eq(userId))))))))).groupBy(PRODUCTTABLE.PRODUCT_ID);
         return getDslSession().fetchList(select, Product.class);
@@ -452,9 +452,9 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
         return getDslSession().fetchList(select, Product.class);
     }
 
-    public List<Product> getProductByUserAndProductLineWithCount(String userId, Integer productLineId,Integer delete) {
+    public List<Product> getProductByUserAndProductLineWithCount(String userId, Integer productLineId,Integer delete,Condition condition) {
         Select select = getComplexSelect().where(
-                and(PRODUCTTABLE.DELETED.eq(delete),
+                and(PRODUCTTABLE.DELETED.eq(delete),condition,
                         or(PRODUCTTABLE.ACL.eq(Product.ACl_All),
                                 or(PRODUCTTABLE.PRODUCT_CREATED_BY.eq(userId),PRODUCTTABLE.PRODUCT_OWNER.eq(userId), PRODUCTTABLE.PRODUCT_DELIVERY_MANAGER.eq(userId), PRODUCTTABLE.PRODUCT_QUALITY_MANAGER.eq(userId), ExistsExpression.existsCondition(SubSelect.subSelect(selectFrom(PROJECT_TEAMTABLE).
                                         where(and(PRODUCTTABLE.ACL.eq(Product.ACl_TEAM), PROJECT_TEAMTABLE.PRODUCT_ID.eq(PRODUCTTABLE.PRODUCT_ID), PROJECT_TEAMTABLE.TEAM_USER_ID.eq(userId))))))),PRODUCTTABLE.PRODUCT_LINE_ID.eq(productLineId))).groupBy(PRODUCTTABLE.PRODUCT_ID);

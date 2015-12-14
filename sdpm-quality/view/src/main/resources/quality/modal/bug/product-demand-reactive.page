@@ -1,0 +1,47 @@
+#set(linkName = "product-demand")
+
+
+<script type="text/javascript">
+    $(function () {
+        $("form[name=thisform]").Validform({
+            tiptype: 2
+        });
+    });
+</script>
+
+#@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/quality/bug/reactive" "" {"class":"test"})
+    #hiddenInput("","bugId","",bugId)
+<div style="width:70%;float:left" class="pageleftpart">
+    <div class="infoContent">
+        <p class="titleName">激活</p>
+        #@elementItem()
+            #@colLabel()备注：#end
+            #@formControlDiv("col-8")
+                #@Teditor("actionComment" "actionComment" {"initialFrameHeight":"200" })#end
+            #end
+        #end
+    </div>
+
+    #@elementItem()
+        <div class="col-12">
+            <div class="col-5">
+
+            </div>
+            <div class="col-1">
+                <button style="float: left" type="submit" id="submit2" class="commitBtn">保存</button>
+            </div>
+            <div class="col-1">
+                #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end
+            </div>
+            <div class="col-5"></div>
+        </div>
+    #end
+
+    <br>
+</div>
+#end
+
+
+<div style="width:30%;float:right">
+    #history(adminPath+"/system/action/ajax/history?actionObjectType=Story&actionObjectId="+story?.storyId)
+</div>

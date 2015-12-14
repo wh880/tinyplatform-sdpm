@@ -13,10 +13,17 @@
             #foreach(m:menuManager.getScopeMenus("allproduct-op"))
                 #set(url=eval(m?.href))
                 #if(m.map.type=="close")
-                    #iconOperations("#myModal" m?.icon "关闭" "865" "500" adminPath+url "ml-5")&nbsp;
+                    #if(product?.productStatus==8)
+                        <span class="ml-5" style="color:grey"><i class="${m?.icon}" /></span>&nbsp;
+                    #else
+                        #iconOperations("#myModal" m?.icon m?.name "865" "500" adminPath+url "ml-5")&nbsp;
+                    #end
                 #elseif(m.map.type=="editor")
                     <a class="jump" href="${TINY_CONTEXT_PATH +adminPath}${eval(url)}"
                        title="编辑">#buttonIcon(iconClass=m?.icon)</a>&nbsp;
+                #elseif(m.map.type=="delete")
+                    <a class="delete" href="${TINY_CONTEXT_PATH +adminPath}${eval(url)}"
+                       title="删除">#buttonIcon(iconClass=m?.icon)</a>&nbsp;
                 #end
             #end
             <a href="javascript :;" onclick="javascript:history.back(-1);" title="返回">#buttonIcon(iconClass=
@@ -46,10 +53,17 @@
                 #foreach(m:menuManager.getScopeMenus("allproduct-op"))
                     #set(url=eval(m?.href))
                     #if(m.map.type=="close")
-                        #iconOperations("#myModal" m?.icon "关闭" "865" "500" adminPath+url "ml-5")&nbsp;
+                        #if(product?.productStatus==8)
+                            <span class="ml-5" style="color:grey"><i class="${m?.icon}" /></span>&nbsp;
+                        #else
+                            #iconOperations("#myModal" m?.icon m?.name "865" "500" adminPath+url "ml-5")&nbsp;
+                        #end
                     #elseif(m.map.type=="editor")
                         <a class="jump" href="${TINY_CONTEXT_PATH +adminPath}${eval(url)}"
                            title="编辑">#buttonIcon(iconClass=m?.icon)</a>&nbsp;
+                    #elseif(m.map.type=="delete")
+                        <a class="delete" href="${TINY_CONTEXT_PATH +adminPath}${eval(url)}"
+                           title="删除">#buttonIcon(iconClass=m?.icon)</a>&nbsp;
                     #end
                 #end
                 <a href="javascript :;" onclick="javascript:history.back(-1);" title="返回">#buttonIcon(iconClass=
@@ -63,6 +77,5 @@
 <div style="width:30%;float:right">
     #TypeInfo("product" product?.productId?:0)
 </div>
-
-
+    #simpleModal("myModal")
 #end

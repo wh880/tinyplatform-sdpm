@@ -3,6 +3,7 @@ package org.tinygroup.sdpm.product.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.tinygroup.commons.tools.ArrayUtil;
+import org.tinygroup.sdpm.dao.condition.ConditionCarrier;
 import org.tinygroup.sdpm.product.biz.inter.ProductManager;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
@@ -58,17 +59,17 @@ public class ProductServiceImpl implements ProductService {
         return productManager.getProductByUser(userId, delete, productLineId);
     }
 
-    public List<Product> getProductByUserWithCount(String userId, Integer delete, boolean noRole) {
-        return productManager.getProductByUserWithCount(userId, delete, noRole);
+    public List<Product> getProductByUserWithCount(String userId, Integer delete, boolean noRole,ConditionCarrier carrier) {
+        return productManager.getProductByUserWithCount(userId, delete, noRole,carrier);
     }
 
-    public List<Product> getProductByUserAndProductLineWithCount(String userId, Integer productLineId, Integer delete) {
-        return productManager.getProductByUserAndProductLineWithCount(userId, productLineId, delete);
+    public List<Product> getProductByUserAndProductLineWithCount(String userId, Integer productLineId, Integer delete,ConditionCarrier carrier) {
+        return productManager.getProductByUserAndProductLineWithCount(userId, productLineId, delete,carrier);
     }
 
-    public Map<String, List<Product>> getUserProductsWithCountMap(String userId, Integer delete) {
+    public Map<String, List<Product>> getUserProductsWithCountMap(String userId, Integer delete,ConditionCarrier carrier) {
         Map<String, List<Product>> productMap = new HashMap<String, List<Product>>();
-        List<Product> products = productManager.getProductByUserWithCount(userId, delete, true);
+        List<Product> products = productManager.getProductByUserWithCount(userId, delete, true,carrier);
         for (Product product1 : products) {
             if (productMap.containsKey(product1.getProductLineName())) {
                 productMap.get(product1.getProductLineName()).add(product1);

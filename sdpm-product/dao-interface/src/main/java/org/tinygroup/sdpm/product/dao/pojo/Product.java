@@ -29,7 +29,7 @@ public class Product implements Serializable {
     public static final Integer DELETE_NO = 0;
     public static final String STATUS_NEW = "0";
     public static final String STATUS_ACTIVE = "2";
-    public static final String STATUS_DELETED = "8";
+    public static final String STATUS_CLOSED = "8";
     /**
      * 产品ID
      */

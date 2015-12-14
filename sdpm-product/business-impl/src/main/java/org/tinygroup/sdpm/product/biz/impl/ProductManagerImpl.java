@@ -6,6 +6,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
+import org.tinygroup.sdpm.dao.condition.CallBackFunction;
+import org.tinygroup.sdpm.dao.condition.ConditionCarrier;
+import org.tinygroup.sdpm.dao.condition.ConditionUtils;
 import org.tinygroup.sdpm.org.dao.OrgRoleUserDao;
 import org.tinygroup.sdpm.org.dao.pojo.OrgRoleUser;
 import org.tinygroup.sdpm.product.biz.inter.ProductManager;
@@ -20,7 +23,9 @@ import org.tinygroup.sdpm.project.dao.impl.ProjectBuildDaoImpl;
 import org.tinygroup.sdpm.quality.dao.QualityBugDao;
 import org.tinygroup.sdpm.quality.dao.QualityTestCaseDao;
 import org.tinygroup.sdpm.quality.dao.QualityTestTaskDao;
+import org.tinygroup.sdpm.system.dao.impl.util.ModuleUtil;
 import org.tinygroup.tinysqldsl.Pager;
+import org.tinygroup.tinysqldsl.base.Condition;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -80,7 +85,7 @@ public class ProductManagerImpl implements ProductManager {
         Product product = new Product();
         product.setProductId(productId);
         product.setDeleted(FieldUtil.DELETE_YES);
-        product.setProductStatus(Product.STATUS_DELETED);
+        product.setProductStatus(Product.STATUS_CLOSED);
         return productDao.edit(product);
     }
 
@@ -136,8 +141,8 @@ public class ProductManagerImpl implements ProductManager {
         return mergeUserProducts(productList, products, orgRoles);
     }
 
-    public List<Product> getProductByUserWithCount(String userId, Integer delete, boolean noRole ) {
-        List<Product> productList = productDao.getProductByUserWithCount(userId, delete, noRole);
+    public List<Product> getProductByUserWithCount(String userId, Integer delete, boolean noRole,ConditionCarrier carrier) {
+        List<Product> productList = productDao.getProductByUserWithCount(userId, delete, noRole,mergeCondition(carrier));
         Product product = new Product();
         product.setDeleted(delete);
         product.setAcl(Product.ACl_TEAM_AND_ROLE);
@@ -148,8 +153,8 @@ public class ProductManagerImpl implements ProductManager {
         return mergeUserProducts(productList, products, orgRoles);
     }
 
-    public List<Product> getProductByUserAndProductLineWithCount(String userId, Integer productLineId, Integer delete) {
-        return productDao.getProductByUserAndProductLineWithCount(userId, productLineId, delete);
+    public List<Product> getProductByUserAndProductLineWithCount(String userId, Integer productLineId, Integer delete,ConditionCarrier carrier) {
+        return productDao.getProductByUserAndProductLineWithCount(userId, productLineId, delete,mergeCondition(carrier));
     }
 
     public List<Integer> getTeamRoleProductLineIds(String userId, Integer delete) {
@@ -182,5 +187,9 @@ public class ProductManagerImpl implements ProductManager {
             }
         }
         return productWithOutRole;
+    }
+
+    private Condition mergeCondition(ConditionCarrier carrier){
+        return ConditionUtils.mergeCondition(carrier, null);
     }
 }

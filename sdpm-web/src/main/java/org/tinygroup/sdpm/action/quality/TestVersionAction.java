@@ -188,10 +188,11 @@ public class TestVersionAction extends BaseController {
                               Model model) {
         QualityTestTask testTask = null;
         if (no != null) {
-            Integer qualityProductId = Integer.parseInt(CookieUtils.getCookie(request, "qualityProductId"));
-            if (qualityProductId == null) {
+            String result = CookieUtils.getCookie(request, "qualityProductId");
+            if(StringUtil.isBlank(result)){
                 return notFoundView();
             }
+            Integer qualityProductId = Integer.parseInt(result);
             testTask = new QualityTestTask();
             testTask.setProductId(qualityProductId);
             testTask.setNo(no);

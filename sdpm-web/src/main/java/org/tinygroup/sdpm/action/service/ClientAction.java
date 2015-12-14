@@ -348,7 +348,10 @@ public class ClientAction extends BaseController {
     @RequestMapping("/treeData")
     public List data() {
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
-        List<ProductAndLine> productLists = productService.getProductAndLine(new Product());
+        Product product = new Product();
+        product.setDeleted(0);
+        List<ProductAndLine> productLists = productService.getProductAndLine(product);
+
         List<ProductLine> productLines = productLineService.findProductLineList(new ProductLine());
 
         for (ProductLine d : productLines) {

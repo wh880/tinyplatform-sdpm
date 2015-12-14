@@ -880,9 +880,12 @@ public class BugAction extends BaseController {
         model.addAttribute("fields", checkItem);
         return "/quality/operate/bug/reportform.page";
     }
-
+    @RequestMapping("toReactive")
+    public String toReactive(){
+        return "/quality/modal/bug/product-demand-reactive.page";
+    }
     @RequestMapping("/reactive")
-    public String reactive(Integer bugId) {
+    public String reactive(Integer bugId,String actionComment) {
         QualityBug bug = bugService.findQualityBugById(bugId);
         if (bug.getBugActivatedCount() != null) {
             bug.setBugActivatedCount(bug.getBugActivatedCount() + 1);
@@ -899,7 +902,7 @@ public class BugAction extends BaseController {
                 , String.valueOf(bug.getProjectId())
                 , null
                 , null
-                , null);
+                , actionComment);
         return "redirect:/a/quality/bug";
     }
 
@@ -911,6 +914,6 @@ public class BugAction extends BaseController {
             result.add(bugService.findQualityBugById(initKey));
             return result;
         }
-        return bugService.bugInCondition(key, productId == null ? Integer.parseInt(CookieUtils.getCookie(request, "qualityProductId")) : productId);
+        return bugService.bugInCondition(key, productId);
     }
 }

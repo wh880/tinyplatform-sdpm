@@ -75,7 +75,7 @@
 
 				</span>
 			#div(divClass="clearfix")
-		##				#include("/quality/common/mulsearch.page")
+						#include("/quality/common/mulsearch.page")
 		#end
 	##operationbar end
 	#end

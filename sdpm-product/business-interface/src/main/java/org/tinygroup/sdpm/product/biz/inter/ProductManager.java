@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.product.biz.inter;
 
+import org.tinygroup.sdpm.dao.condition.ConditionCarrier;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
 import org.tinygroup.tinysqldsl.Pager;
@@ -102,9 +103,9 @@ public interface ProductManager {
 
     List<Product> getProductByUser(String userId, Integer delete, Integer productLineId);
 
-    List<Product> getProductByUserWithCount(String userId, Integer delete, boolean noRole );
+    List<Product> getProductByUserWithCount(String userId, Integer delete, boolean noRole ,ConditionCarrier carrier);
 
-    List<Product> getProductByUserAndProductLineWithCount(String userId, Integer productLineId, Integer delete);
+    List<Product> getProductByUserAndProductLineWithCount(String userId, Integer productLineId, Integer delete,ConditionCarrier carrier);
 
     List<Integer> getTeamRoleProductLineIds(String userId, Integer delete);
 

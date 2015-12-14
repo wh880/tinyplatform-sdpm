@@ -41,6 +41,7 @@ public class ModuleAction extends BaseController {
     @Autowired
     private ProjectService projectService;
 
+
     @ResponseBody
     @RequestMapping("tree")
     public List<Map<String, Object>> ajax(SystemModule systemModule, HttpServletResponse response, @RequestParam(value = "type", defaultValue = "name") String type) {
@@ -90,9 +91,7 @@ public class ModuleAction extends BaseController {
     @RequestMapping("docProductTree")
     public List<Map<String, Object>> productDocTree() {
         List<Map<String, Object>> mapList = Lists.newArrayList();
-        Product product = new Product();
-        product.setDeleted(0);
-        List<Product> products = productService.findProductList(product);
+        List<Product> products = productService.getProductByUser(UserUtils.getUserId(),0,null);
         mergeProductModule(products, "productDoc", mapList, "name", true, false, "doc");
         return mapList;
     }
@@ -102,8 +101,6 @@ public class ModuleAction extends BaseController {
     public List<Map<String, Object>> projectDocTree(HttpServletResponse response) {
         response.setContentType("application/json; charset=UTF-8");
         List<Map<String, Object>> mapList = Lists.newArrayList();
-        Project project = new Project();
-        project.setProjectDeleted("0");
         List<Project> projects = projectService.getUserProjectList(UserUtils.getUserId());
         for (Project p : projects) {
             SystemModule module = new SystemModule();

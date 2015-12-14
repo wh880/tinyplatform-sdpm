@@ -552,13 +552,11 @@ public class StoryAction extends BaseController {
      * @param start
      * @param pagesize
      * @param story
-     * @param choose
      * @param groupOperate
      * @param searchInfos
      * @param order
      * @param ordertype
      * @param model
-     * @param request
      * @return
      */
     @RequestMapping("/search/{relate}")
@@ -948,6 +946,6 @@ public class StoryAction extends BaseController {
             result.add(storyService.findStory(initKey));
             return result;
         }
-        return storyService.storyInCondition(key, productId == null ? Integer.parseInt(CookieUtils.getCookie(request, productUtils.COOKIE_PRODUCT_ID)) : productId);
+        return storyService.storyInCondition(key, productId);
     }
 }

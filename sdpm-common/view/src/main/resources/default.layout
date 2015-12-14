@@ -19,6 +19,7 @@
     <meta name="description" content="Tiny,TINY,Software Development Process Management,软件开发项目管理">
     <script>
         var contextPath = "${TINY_CONTEXT_PATH}";
+        var adminPath="${adminPath}";
         var pomlist = new Array()
     </script>
     <link href="${TINY_CONTEXT_PATH}/uiengine.uicss" rel="stylesheet" />
@@ -26,6 +27,7 @@
 </head>
 <body class="theme-purple-hills main-menu-animated menu-on-top" id="bodyrap">
 <script src="${TINY_CONTEXT_PATH}/common/js/tinyui.js"></script>
+
     #@mainWrapper()
         #@mainNavbar("/common/img/main-navbar-logo.png" "Tiny SDPM" adminPath+"/home")
             #@rightNavBar()
@@ -131,60 +133,6 @@
         if(oldUrl.indexOf("login")<0&&referrer!=window.location.href)
             $("input[name=lastAddress]").attr("value",oldUrl);
     });
-
-    function ajaxRead(id, toName, opKey, opvalue, url, value,isBuild) {
-        var selectCheck = "select[name=" + toName + "]";
-        $(selectCheck).each(function () {
-            var sele = $(this);
-            var s;
-            $.ajax({
-                type: "POST",
-                url: "${TINY_CONTEXT_PATH+adminPath}" + url,
-                data: $(this).attr('data'),
-                dataType: "json",
-                success: function (data) {
-                    sele.empty();
-                    var em
-                    if("build"==(isBuild)){
-                        em = "<option value='0' selected  >trunk</option>";
-                    }else if("module"==isBuild||"plan"==isBuild){
-                        em = "<option value='0' selected  >/</option>";
-                    }
-                    sele.append(em);
-                    for (var i = 0, l = data.length; i < l; i++) {
-                        var em = "<option value='" + data[i][opKey] + "' >" + data[i][opvalue] + "</option>";
-                        sele.append(em);
-
-                    }
-                    if ("multiple" != sele.attr("multiple")) {
-                        if (value||value===0) {
-                            sele.select2("val",value).trigger("change");
-                        }else {
-                            if (data.length > 0) {
-                                sele.select2("val",data[0][opKey]).trigger("change");
-                            }
-                        }
-                    }else{
-                        if (value != null) {
-                            var values = value.split(",");
-                            if(values.length>1){
-                                sele.val(values).trigger("change");
-                            }else{
-                                sele.val(value).trigger("change");
-                            }
-
-                        }
-                    }
-                },
-                error: function (res) {
-//                    alert("失败"+toName);
-                }
-            });
-
-
-        });
-
-    }
 
     $(function () {
         $("#deleteBatch").click(function () {

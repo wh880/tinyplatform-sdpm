@@ -551,10 +551,11 @@ public class TestCaseAction extends BaseController {
     public String viewInfo(Integer id, Integer version, Model model, Integer no, HttpServletRequest request) {
         QualityTestCase testCase = null;
         if (no != null) {
-            Integer qualityProductId = Integer.parseInt(CookieUtils.getCookie(request, "qualityProductId"));
-            if (qualityProductId == null) {
+            String result=CookieUtils.getCookie(request, "qualityProductId");
+            if(result==null){
                 return notFoundView();
             }
+            Integer qualityProductId = Integer.parseInt(result);
             testCase = new QualityTestCase();
             testCase.setProductId(qualityProductId);
             testCase.setNo(no);

@@ -152,10 +152,11 @@ public class PlanAction extends BaseController {
                           HttpServletRequest request) {
         ProductPlan plan = null;
         if (no != null) {
-            Integer cookieProductId = Integer.parseInt(CookieUtils.getCookie(request, productUtils.COOKIE_PRODUCT_ID));
-            if (cookieProductId == null) {
+            String result = CookieUtils.getCookie(request, productUtils.COOKIE_PRODUCT_ID);
+            if(StringUtil.isBlank(result)){
                 return notFoundView();
             }
+            Integer cookieProductId = Integer.parseInt(result);
             plan = new ProductPlan();
             plan.setProductId(cookieProductId);
             plan.setNo(no);

@@ -19,7 +19,11 @@
         #foreach(m:menuManager.getScopeMenus("allproduct-op"))
             #set(url=eval(m?.href))
             #if(m.map.type=="close")
-                #iconOperations("#myModal" m?.icon m?.name "865" "500" adminPath+url "ml-5")&nbsp;
+                #if(product?.productStatus==8)
+                <span class="ml-5" style="color:grey"><i class="${m?.icon}" /></span>&nbsp;
+                #else
+                    #iconOperations("#myModal" m?.icon m?.name "865" "500" adminPath+url "ml-5")&nbsp;
+                #end
             #elseif(m.map.type=="editor")
             <a class="jump" href="${TINY_CONTEXT_PATH +adminPath}${eval(url)}"
                title="${m?.name}">#buttonIcon(iconClass=m?.icon)</a>&nbsp;

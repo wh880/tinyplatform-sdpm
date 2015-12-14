@@ -2,6 +2,7 @@ package org.tinygroup.sdpm.product.service;
 
 import org.tinygroup.aopcache.annotation.CacheGet;
 import org.tinygroup.aopcache.annotation.CacheRemove;
+import org.tinygroup.sdpm.dao.condition.ConditionCarrier;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
 
@@ -104,7 +105,7 @@ public interface ProductService {
      * @return
      */
     @CacheGet(key = "${userId}-${delete}-${noRole}", group = CACHE_USER_PRODUCTS_LIST_WITH_COUNT)
-    List<Product> getProductByUserWithCount(String userId, Integer delete, boolean noRole);
+    List<Product> getProductByUserWithCount(String userId, Integer delete, boolean noRole,ConditionCarrier carrier);
 
     /**
      * 获取当前用户在某产品线下可游览产品-附带统计数据
@@ -115,7 +116,7 @@ public interface ProductService {
      * @return
      */
     @CacheGet(key = "${userId}-${delete}-${productLineId}", group = CACHE_USER_PRODUCTS_LIST_WITH_LINE_COUNT)
-    List<Product> getProductByUserAndProductLineWithCount(String userId, Integer productLineId, Integer delete);
+    List<Product> getProductByUserAndProductLineWithCount(String userId, Integer productLineId, Integer delete,ConditionCarrier carrier);
 
     /**
      * 获取当前用户可游览产品-以‘产品线-产品’的形式展示
@@ -133,7 +134,7 @@ public interface ProductService {
      * @return
      */
     @CacheGet(key = "${userId}", group = CACHE_USER_PRODUCTS_MAP)
-    Map<String, List<Product>> getUserProductsWithCountMap(String userId, Integer delete);
+    Map<String, List<Product>> getUserProductsWithCountMap(String userId, Integer delete,ConditionCarrier carrier);
 
     /**
      * 根据输入名称查询

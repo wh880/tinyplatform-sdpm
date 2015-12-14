@@ -175,10 +175,11 @@ public class ReleaseAction extends BaseController {
                           HttpServletRequest request) {
 
         if(no!=null){
-            Integer cookieProductId = Integer.parseInt(CookieUtils.getCookie(request, productUtils.COOKIE_PRODUCT_ID));
-            if(cookieProductId==null){
+            String result = CookieUtils.getCookie(request, productUtils.COOKIE_PRODUCT_ID);
+            if(StringUtil.isBlank(result)){
                 return notFoundView();
             }
+            Integer cookieProductId = Integer.parseInt( result);
             ProductRelease release = new ProductRelease();
             release.setProductId(cookieProductId);
             release.setNo(no);

@@ -151,8 +151,7 @@
                         #end
                     #elseif(m.id=="reActive")
                         #if(qualityBug?.bugStatus=="3")
-                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${qualityBug?.bugId}"
-                               title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp;&nbsp;
+                            #iconOperations("#myModal" m?.icon m?.name "865" "500" adminPath+url+"?bugId="+bug?.bugId "ml-5")&nbsp;
                         #end
                     #elseif(m.id=="add-case")
                         <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${qualityBug?.bugId}"

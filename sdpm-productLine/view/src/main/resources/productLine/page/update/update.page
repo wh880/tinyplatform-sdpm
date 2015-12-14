@@ -109,7 +109,7 @@
             #@colLabel()产品线描述：#end
             #@formControlDiv("col-8")
                 #@Teditor(
-                    "productLineSpec" "productLineSpec" {"initialFrameHeight":"200" ,"placeholder":"说点什么...最少输入10个字符"})${productLine?.productLineSpec}#end
+                    "productLineSpec" "productLineSpec" {"initialFrameHeight":"200"})${productLine?.productLineSpec}#end
             #end
             #@validateDiv("col-2")#end
         #end

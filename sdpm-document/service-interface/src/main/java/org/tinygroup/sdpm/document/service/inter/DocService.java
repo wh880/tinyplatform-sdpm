@@ -23,6 +23,7 @@ public interface DocService {
 
     Integer editDoc(DocumentDoc doc);
 
+    @CacheRemove(removeGroups = CACHE_DOC_LIB_LIST)
     Integer editDocLibName(DocumentDocLib docLib);
 
     DocumentDoc findDocById(Integer id);

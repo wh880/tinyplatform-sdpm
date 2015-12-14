@@ -170,7 +170,7 @@
 #@elementItem()
     #@colLabel()需求描述：#end
     #@formControlDiv("col-8")
-        #@tinyTextarea("storySpec" {"datatype":""})${storySpec?.storySpec}#end
+        #@tinyTextarea("storySpec" )${storySpec?.storySpec}#end
     #end
     #@validateDiv("col-2")#end
 #end

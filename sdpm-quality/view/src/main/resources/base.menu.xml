@@ -40,7 +40,7 @@
         <!--<menu id="tbugadddemand" name="提需求" href="/product/story/addstory" icon="icon-lightbulb" sort="3"-->
         <!--isShow="1" scope="testbuginfo-tab">-->
         <!--</menu>-->
-        <menu id="reActive" name="激活Bug" href="/quality/bug/reactive" icon="icon-lightbulb" sort="3"
+        <menu id="reActive" name="激活Bug" href="/quality/bug/toReactive" icon="icon-lightbulb" sort="3"
               isShow="1" scope="testbuginfo-tab">
         </menu>
         <menu id="tbugremark" name="备注" href="" icon="icon-comment-alt" sort="2"
@@ -97,10 +97,10 @@
               isShow="1" scope="testbugleft-tab">
 
         </menu>
-        <!--<menu id="tsearch" name="搜索Bug" href="#" icon="" sort="1"-->
-        <!--isShow="1" scope="testbugleft-tab">-->
+        <menu id="tsearch" name="搜索Bug" href="#" icon="" sort="1"
+        isShow="1" scope="testbugleft-tab">
 
-        <!--</menu>-->
+        </menu>
     </menu>
     <menu id="qualityCases" parent-id="quality" name="用例" href="/quality/testCase?currentPageId=5" icon="" sort="1"
           isShow="1">

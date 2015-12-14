@@ -447,13 +447,19 @@ public class ProductLineAction extends BaseController {
 
     @RequestMapping(value = "/productLineProducts")
     public String productLineProducts(String choose,Integer productLineId, Model model) {
-        Integer delete = null;
+        ConditionCarrier carrier = new ConditionCarrier();
         if("open".equals(choose)){
-           delete=0;
-        }else if("deleted".equals(choose)){
-            delete=1;
+            carrier.put("productStatus",
+                    ConditionUtils.Operate.NEQ.getOperate(),
+                    ConditionUtils.CommonFieldType.FIELD_OPERATE.getCommonField(),
+                    Product.STATUS_CLOSED);
+        }else if("closed".equals(choose)){
+            carrier.put("productStatus",
+                    ConditionUtils.Operate.EQ.getOperate(),
+                    ConditionUtils.CommonFieldType.FIELD_OPERATE.getCommonField(),
+                    Product.STATUS_CLOSED);
         }
-        List<Product> products = productService.getProductByUserAndProductLineWithCount(UserUtils.getUserId(), productLineId, delete);
+        List<Product> products = productService.getProductByUserAndProductLineWithCount(UserUtils.getUserId(), productLineId, 0,carrier);
         model.addAttribute("productList", products);
         return "/productLine/data/product/productListData.pagelet";
     }

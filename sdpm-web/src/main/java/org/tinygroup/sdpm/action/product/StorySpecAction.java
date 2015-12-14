@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec;
@@ -58,10 +59,12 @@ public class StorySpecAction extends BaseController {
                        HttpServletRequest request) {
         ProductStory productStory = null;
         if (story.getNo() != null) {
-            Integer cookieProductId = Integer.parseInt(CookieUtils.getCookie(request, productUtils.COOKIE_PRODUCT_ID));
-            if (cookieProductId == null) {
+            String result = CookieUtils.getCookie(request, productUtils.COOKIE_PRODUCT_ID);
+            if(StringUtil.isBlank(result)){
                 return notFoundView();
             }
+            Integer cookieProductId = Integer.parseInt(result);
+
             productStory = new ProductStory();
             productStory.setProductId(cookieProductId);
             productStory.setNo(story.getNo());

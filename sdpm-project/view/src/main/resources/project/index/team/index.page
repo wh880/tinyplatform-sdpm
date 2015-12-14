@@ -25,8 +25,8 @@
                     #@tinyTh()用户#end
                     #@tinyTh({"class":"sorting","rel":"team_role"})成员角色#end
                     #@tinyTh({"class":"sorting","rel":"team_join"})加盟日#end
-                    #@tinyTh({"class":"sorting","rel":"team_days"})可用工日#end
-                    #@tinyTh({"class":"sorting","rel":"team_hours"})可用工日/天#end
+                    #@tinyTh({"class":"sorting","rel":"team_days"})可用工日(天)#end
+                    #@tinyTh({"class":"sorting","rel":"team_hours"})可用工日(小时/天)#end
                     #@tinyTh()总计#end
                     #@tinyTh()操作#end
                 #end

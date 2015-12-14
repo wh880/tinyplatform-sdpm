@@ -14,41 +14,29 @@
             <option value="notinclude">不包含</option>
             <option value="belong">从属于</option>
         </select>
-        <select id="usertemp">
-            <option value="" selected="selected"></option>
-            <option value="admin">A:admin</option>
-            <option value="demo">D:Demo</option>
-            <option value="dev1">D:开发甲</option>
-            <option value="dev2">D:开发乙</option>
-            <option value="dev3">D:开发丙</option>
-            <option value="productManager">P:产品经理</option>
-            <option value="projectManager">P:项目经理</option>
-            <option value="tester1">T:测试甲</option>
-            <option value="tester2">T:测试乙</option>
-            <option value="tester3">T:测试丙</option>
-            <option value="testManager">T:测试经理</option>
-            <option value="closed">Closed</option>
-            <option value="$@me">自己</option>
-            <option value="null">空</option>
-        </select>
-        <select id="pritemp">
+        <select id="bugPrioritymp">
             <option value=""></option>
-            <option value="3">3</option>
-            <option value="1">1</option>
-            <option value="44">44</option>
-            <option value="2">2</option>
-            <option value="4">4</option>
-            <option value="null">空</option>
+            #for(p : getDict("bugPriority"))
+            <option value="${p.value}">${p.text}</option>
+            #end
         </select>
-        <select id="statustemp">
-            <option value="" selected="selected"></option>
-            <option value="wait">未开始</option>
-            <option value="doing">进行中</option>
-            <option value="done">已完成</option>
-            <option value="pause">已暂停</option>
-            <option value="cancel">已取消</option>
-            <option value="closed">已关闭</option>
-            <option value="null">空</option>
+        <select id="bugSeveritymp">
+            <option value=""></option>
+            #for(p : getDict("bugSeverity"))
+            <option value="${p.value}">${p.text}</option>
+        #end
+        </select>
+        <select id="bugTypemp">
+            <option value=""></option>
+            #for(p : getDict("bugType"))
+            <option value="${p.value}">${p.text}</option>
+        #end
+        </select>
+        <select id="bugStatusmp">
+            <option value=""></option>
+            #for(p : getDict("bugStatus"))
+            <option value="${p.value}">${p.text}</option>
+        #end
         </select>
 
     </div>
@@ -163,22 +151,22 @@
             <td class="w-180px">
                 <div class="btn-group">
                     <button type="submit" class="btn btn-submit btn-primary btn-sm">搜索</button>
-                    <button type="button" onclick="resetForm(this)" class="btn btn-sm">重置</button>
-                    <button type="button" onclick="resetForm(this)" class="btn btn-sm">保存</button>
+##                    <button type="button" onclick="resetForm(this)" class="btn btn-sm">重置</button>
+##                    <button type="button" onclick="resetForm(this)" class="btn btn-sm">保存</button>
                 </div>
             </td>
             <td>
-                <div style="width:105px;margin-top:3px;">
-                    #@Tselect2F()
-                        #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                            <option value="CRM">我的查询</option>
-                            <option value="P2P">P2P系统</option>
-                            <option value="o2o">o2o系统</option>
-                        #end
-                    ##填写任意内容，侦听需重新填加 A侦听已内置
-                        #@Tselect2Fix()<a href="#" class="r ">增加</a><a href="#">全部</a>#end
-                    #end
-                </div>
+##                <div style="width:105px;margin-top:3px;">
+##                    #@Tselect2F()
+##                        #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+##                            <option value="CRM">我的查询</option>
+##                            <option value="P2P">P2P系统</option>
+##                            <option value="o2o">o2o系统</option>
+##                        #end
+##                    ##填写任意内容，侦听需重新填加 A侦听已内置
+##                        #@Tselect2Fix()<a href="#" class="r ">增加</a><a href="#">全部</a>#end
+##                    #end
+##                </div>
             </td>
         </tr>
         </tbody>
@@ -211,109 +199,156 @@
             "name": "bugTitle",
             "title": "bug标题",
             "operator": "include",
+            "operatorList":[
+                {key:"include",val:"包含"},
+                {key:"notinclude",val:"不包含"},
+                {key:"=",val:"="},
+                {key:"!=",val:"!="}
+            ],
             "value": "text"
         });
         itemlist.push({
             "name": "bugKeywords",
             "title": "关键词",
-            "operator": "=",
+            "operator": "include",
+            "operatorList":[
+                {key:"include",val:"包含"},
+                {key:"notinclude",val:"不包含"},
+                {key:"=",val:"="},
+                {key:"!=",val:"!="}
+            ],
             "value": "text"
         });
         itemlist.push({
             "name": "bugSeverity",
             "title": "严重程度",
             "operator": "=",
-            "value": "status"
+            "operatorList":[
+                {key:"=",val:"="},
+                {key:"!=",val:"!="}
+            ],
+            "value": "bugSeverity"
         });
         itemlist.push({
             "name": "priority",
             "title": "优先级",
-            "operator": "include",
-            "value": "text"
+            "operator": "=",
+            "operatorList":[
+                {key:"=",val:"="},
+                {key:"!=",val:"!="}
+            ],
+            "value": "bugPriority"
         });
         itemlist.push({
             "name": "bugType",
             "title": "类型",
             "operator": "=",
-            "value": "user"
-        });
-        itemlist.push({
-            "name": "operatingSystem",
-            "title": "操作系统",
-            "operator": "=",
-            "value": "pri"
-        });
-        itemlist.push({
-            "name": "browser",
-            "title": "操作系统",
-            "operator": "=",
-            "value": "text"
-        });
-        itemlist.push({
-            "name": "hardware",
-            "title": "硬件",
-            "operator": "=",
-            "value": "text"
+            "operatorList":[
+                {key:"=",val:"="},
+                {key:"!=",val:"!="}
+            ],
+            "value": "bugType"
         });
         itemlist.push({
             "name": "bugStatus",
             "title": "状态",
             "operator": "=",
-            "value": "text"
+            "operatorList":[
+                {key:"=",val:"="},
+                {key:"!=",val:"!="}
+            ],
+            "value": "bugStatus"
         });
         itemlist.push({
             "name": "bugOpenedBy",
             "title": "创建人",
-            "operator": "=",
+            "operator": "include",
+            "operatorList":[
+                {key:"include",val:"包含"},
+                {key:"notinclude",val:"不包含"},
+                {key:"=",val:"="},
+                {key:"!=",val:"!="}
+            ],
             "value": "text"
         });
         itemlist.push({
             "name": "bugOpenedDate",
             "title": "预计工时",
             "operator": "=",
+            "operatorList":[
+                {key:"&gt;",val:"&gt;"},
+                {key:"&gt;=",val:"&gt;="},
+                {key:"&lt;",val:"&lt;"},
+                {key:"&lt;=",val:"&lt;="},
+                {key:"=",val:"="},
+                {key:"!=",val:"!="}
+            ],
             "value": "text"
         });
         itemlist.push({
             "name": "bugAssignedTo",
             "title": "指派",
-            "operator": "=",
-            "value": "text"
-        });
-        itemlist.push({
-            "name": "bugAssignedDate",
-            "title": "邮件列表",
-            "operator": "belong",
+            "operator": "include",
+            "operatorList":[
+                {key:"include",val:"包含"},
+                {key:"notinclude",val:"不包含"},
+                {key:"=",val:"="},
+                {key:"!=",val:"!="}
+            ],
             "value": "text"
         });
         itemlist.push({
             "name": "bugClosedBy",
             "title": "关闭人",
-            "operator": "=",
+            "operator": "include",
+            "operatorList":[
+                {key:"include",val:"包含"},
+                {key:"notinclude",val:"不包含"},
+                {key:"=",val:"="},
+                {key:"!=",val:"!="}
+            ],
             "value": "text"
         });
         itemlist.push({
             "name": "bugClosedDate",
             "title": "关闭日期",
             "operator": "=",
-            "value": "user"
+            "operatorList":[
+                {key:"&gt;",val:"&gt;"},
+                {key:"&gt;=",val:"&gt;="},
+                {key:"&lt;",val:"&lt;"},
+                {key:"&lt;=",val:"&lt;="},
+                {key:"=",val:"="},
+                {key:"!=",val:"!="}
+            ],
+            "value": "date"
         });
 
 
         function setValueBox(index, itemIndex) {
+
+            $("#operator" + itemIndex).empty();
+            for(var i= 0,l=itemlist[index]["operatorList"].length;i<l;i++){
+
+                $("#operator" + itemIndex).append("<option value='"+itemlist[index]["operatorList"][i].key+"'>"+itemlist[index]["operatorList"][i].val+"</option>")
+            }
             $("#operator" + itemIndex).val(itemlist[index]["operator"]);
             var sIndex = itemIndex - 1;
             switch (itemlist[index]["value"]) {
                 case "text":
                     $("#valueBox" + itemIndex).html('<input type="text" name="infos[' + sIndex + '].value" id="value' + itemIndex + '" value="" class="form-control">');
                     break;
-                case "user":
-                    $("#valueBox" + itemIndex).html($('<select name="infos[' + sIndex + '].value" id="value' + itemIndex + '" class="form-control">').html($("#usertemp").html()));
+                case "bugPriority":
+                    $("#valueBox" + itemIndex).html($('<select name="infos[' + sIndex + '].value" id="value' + itemIndex + '" class="form-control">').html($("#bugPrioritymp").html()));
                     break;
-                case "pri":
-                    $("#valueBox" + itemIndex).html($('<select name="infos[' + sIndex + '].value" id="value' + itemIndex + '" class="form-control">').html($("#pritemp").html()));
+                case "bugSeverity":
+                    $("#valueBox" + itemIndex).html($('<select name="infos[' + sIndex + '].value" id="value' + itemIndex + '" class="form-control">').html($("#bugSeveritymp").html()));
                     break;
-                case "status":
-                    $("#valueBox" + itemIndex).html($('<select name="infos[' + sIndex + '].value" id="value' + itemIndex + '" class="form-control">').html($("#statustemp").html()));
+                case "bugType":
+                    $("#valueBox" + itemIndex).html($('<select name="infos[' + sIndex + '].value" id="value' + itemIndex + '" class="form-control">').html($("#bugTypemp").html()));
+                    break;
+                case "bugStatus":
+                    $("#valueBox" + itemIndex).html($('<select name="infos[' + sIndex + '].value" id="value' + itemIndex + '" class="form-control">').html($("#bugStatusmp").html()));
                     break;
                 case "date":
                     $("#valueBox" + itemIndex).html('<input type="text" name="infos[' + sIndex + '].value" id="value' + itemIndex + '" value="" class="form-control dateinput">');

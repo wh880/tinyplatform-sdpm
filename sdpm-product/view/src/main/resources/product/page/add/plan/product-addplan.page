@@ -192,7 +192,7 @@
     #@elementItem()
         #@colLabel("col-1")描述:#end
         #@formControlDiv("col-10")
-           #@Teditor("planSpec" "planSpec" {"style":"height:200px" ,"placeholder":"","datatype":"*0-500"})#end
+           #@Teditor("planSpec" "planSpec" {"style":"height:200px"})#end
         #end
         #@validateDiv("col-2")#end
     #end

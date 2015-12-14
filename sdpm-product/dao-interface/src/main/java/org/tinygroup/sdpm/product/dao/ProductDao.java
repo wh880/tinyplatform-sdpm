@@ -19,6 +19,7 @@ package org.tinygroup.sdpm.product.dao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
+import org.tinygroup.tinysqldsl.base.Condition;
 
 import java.util.List;
 
@@ -34,11 +35,11 @@ public interface ProductDao extends BaseDao<Product, Integer> {
 
     List<Product> getProductByUser(String userId, Integer delete, Integer productLineId);
 
-    List<Product> getProductByUserWithCount(String userId, Integer delete, boolean noRole );
+    List<Product> getProductByUserWithCount(String userId, Integer delete, boolean noRole ,Condition condition);
 
     List<Product> queryWithCount(Product product);
 
-    List<Product> getProductByUserAndProductLineWithCount(String userId, Integer productLineId, Integer delete);
+    List<Product> getProductByUserAndProductLineWithCount(String userId, Integer productLineId, Integer delete,Condition condition);
 
     /**
      * 根据输入名称查询

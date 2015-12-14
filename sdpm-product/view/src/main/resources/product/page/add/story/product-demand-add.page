@@ -164,7 +164,7 @@
 #@elementItem()
     #@colLabel()需求描述：#end
     #@formControlDiv("col-8")
-        #@Teditor("storySpec" "storySpec" {"initialFrameHeight":"150"})#end
+        #@Teditor("storySpec" "storySpec" {"initialFrameHeight":"200"})#end
     #end
     #@validateDiv("col-2")#end
 #end

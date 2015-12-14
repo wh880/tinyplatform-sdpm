@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
+import org.tinygroup.sdpm.dao.condition.ConditionCarrier;
+import org.tinygroup.sdpm.dao.condition.ConditionUtils;
 import org.tinygroup.sdpm.document.dao.pojo.DocumentDoc;
 import org.tinygroup.sdpm.document.service.inter.DocService;
 import org.tinygroup.sdpm.dto.project.Teams;
@@ -129,14 +131,6 @@ public class ProductAction extends BaseController {
     @RequestMapping("/update")
     public String update(Product product, SystemAction systemAction, String lastAddress){
         Product product1 = productService.findProductById(product.getProductId());
-        if(Product.STATUS_DELETED.equals(product.getProductStatus())){
-            product.setDeleted(Product.DELETE_YES);
-        }else{
-            if(Product.DELETE_YES.equals(product1.getDeleted())&&
-                    !Product.STATUS_DELETED.equals(product.getProductStatus())){
-                product.setDeleted(Product.DELETE_NO);
-            }
-        }
         productService.updateProduct(product);
         LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCT,
                 LogUtil.LogAction.EDITED,
@@ -173,8 +167,30 @@ public class ProductAction extends BaseController {
     }
 
     @ResponseBody
+    @RequestMapping("/close")
+    public Map close(Integer productId, SystemAction systemAction) {
+        Product product1 = productService.findProductById(productId);
+        product1.setProductStatus(Product.STATUS_CLOSED);
+        productService.updateProduct(product1);
+        Product product = productService.findProductById(productId);
+
+        LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCT,
+                LogUtil.LogAction.CLOSED,
+                String.valueOf(productId),
+                userUtils.getUserId(),
+                String.valueOf(product1.getProductId()),
+                null,
+                product1,
+                product,
+                systemAction.getActionComment());
+
+        Map<String, String> result = new HashMap<String, String>();
+        result.put("status", "y");
+        return result;
+    }
+
     @RequestMapping("/delete")
-    public Map delete(Integer productId, SystemAction systemAction) {
+    public String delete(Integer productId, SystemAction systemAction) {
         Product product1 = productService.findProductById(productId);
         productService.deleteProduct(productId);
         Product product = productService.findProductById(productId);
@@ -188,10 +204,7 @@ public class ProductAction extends BaseController {
                 product1,
                 product,
                 systemAction.getActionComment());
-
-        Map<String, String> result = new HashMap<String, String>();
-        result.put("status", "y");
-        return result;
+        return "/product/page/list/product/product-listall.page";
     }
 
     @RequestMapping("/find")
@@ -251,13 +264,20 @@ public class ProductAction extends BaseController {
 
     @RequestMapping("/list")
     public String list(String choose,Model model) {
-        Integer deleted = null;
+        Integer deleted = 0;
+        ConditionCarrier carrier = new ConditionCarrier();
         if("open".equals(choose)){
-            deleted=0;
-        }else if("deleted".equals(choose)){
-            deleted=1;
+            carrier.put("productStatus",
+                    ConditionUtils.Operate.NEQ.getOperate(),
+                    ConditionUtils.CommonFieldType.FIELD_OPERATE.getCommonField(),
+                    Product.STATUS_CLOSED);
+        }else if("closed".equals(choose)){
+            carrier.put("productStatus",
+                    ConditionUtils.Operate.EQ.getOperate(),
+                    ConditionUtils.CommonFieldType.FIELD_OPERATE.getCommonField(),
+                    Product.STATUS_CLOSED);
         }
-        model.addAttribute("productMap", productService.getUserProductsWithCountMap(UserUtils.getUserId(),deleted));
+        model.addAttribute("productMap", productService.getUserProductsWithCountMap(UserUtils.getUserId(),deleted,carrier));
         return "/product/data/product/allproductdata.pagelet";
     }
 

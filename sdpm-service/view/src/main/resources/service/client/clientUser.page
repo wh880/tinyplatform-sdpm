@@ -10,7 +10,7 @@
             #@toggleLeft({"class":"aclass"})
                 #@settoggleLeftTitle()产品#end
                 #@settoggleLeftBody("treeLeftbox")
-                    #@zTreeList(call("link",adminPath+"/service/client/treeData") {"readOnly":true})
+                    #@zTreeList(call("link",adminPath+"/productLine/userProductTree") {"readOnly":true})
                         #setzTreeValMap({"id":"treeId","name":"pName","pid":"pId"})
                         #zTreeSetLinkUrl(TINY_CONTEXT_PATH+adminPath+"/service/client/list" )
                     #end

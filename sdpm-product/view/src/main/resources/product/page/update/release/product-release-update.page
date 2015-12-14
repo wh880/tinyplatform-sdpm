@@ -28,14 +28,11 @@
         #@validateDiv("col-2 validmsg")#end
       #end
     #@elementItem()
-        #@colLabel("col-1")版本:#end
+        #@colLabel("col-1")<span class="c-red">*</span>版本:#end
         #@formControlDiv("col-4")
 			#@Tselect2F()
-                #@Tselect2Body("buildId" release?.buildId {"class":"input-text"}) ##,"multiple":"multiple"加上为多选项
-                #end
-                <script>
-                   ajaxRead("${sid}", "buildId", "buildId", "buildName", "/project/build/buildList?buildProduct=${cookieProductId}&from=product");
-                </script>
+                #Tselect2Ajax("buildId" release?.buildId TINY_CONTEXT_PATH+adminPath+"/project/build/ajax/buildInCondition?productId="+cookieProductId
+                {"id":"","dataId":"buildId","dataText":"buildName","placeholder":"查询版本","datatype":"*","nullmsg":"版本不能为空！"})
                 #@Tselect2Fix()
                     #set(m=menuManager.getMenu("organizationAddUser"))
                     #if(m)

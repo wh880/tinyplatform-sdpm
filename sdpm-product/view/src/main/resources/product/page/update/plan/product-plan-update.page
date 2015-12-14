@@ -203,7 +203,7 @@
     #@elementItem()
         #@colLabel("col-1")描述:#end
         #@formControlDiv("col-10")
-            #@Teditor("planSpec" "planSpec" {"initialFrameHeight":"250" ,"placeholder":"说点什么...最少输入10个字符"})${plan?.planSpec}#end
+            #@Teditor("planSpec" "planSpec" {"initialFrameHeight":"250"})${plan?.planSpec}#end
         #end
         #@validateDiv("col-2")#end
     #end

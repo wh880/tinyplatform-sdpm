@@ -97,6 +97,12 @@
                 <property key="type" value="editor"/>
             </map>
         </menu>
+        <menu id="allproduct-delete" name="删除产品" href="/product/delete?productId=${product.productId}"
+              icon="icon-remove" sort="20" isShow="1" scope="allproduct-op">
+            <map>
+                <property key="type" value="delete"/>
+            </map>
+        </menu>
 
     </menu>
 
