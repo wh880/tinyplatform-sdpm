@@ -1,7 +1,7 @@
 #Software Development Process Management
 在线演示地址[http://sdpm.tinygroup.org](http://sdpm.tinygroup.org)
 
-本项目此版本的实现参考了禅道的许多功能，在此特表感谢。
+本项目经过禅道作者王春生同意后，许多功能来自禅道，在此对禅道表示衷心感谢！
 #数据库设置
 数据库的配置文件在sdpm-web工程中resource中的sdpm.properties
 #首次运行
