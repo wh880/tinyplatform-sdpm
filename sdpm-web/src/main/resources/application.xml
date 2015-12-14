@@ -55,17 +55,6 @@
             <class-path path="E:\workcode\sdpm\sdpm-common\view-uicomponent\src\main\resources"/>
             <class-path path="E:\workcode\sdpm\sdpm-project\view\src\main\resources"/>
             <class-path path="E:\workcode\sdpm\sdpm-document\view\src\main\resources\"/>
-            <!-- 徐丹洋-->
-            <class-path path="D:\javaworkspace\sdpm\sdpm-service\view\src\main\resources"/>
-            <class-path path="D:\javaworkspace\sdpm\sdpm-product\view\src\main\resources"/>
-            <class-path path="D:\javaworkspace\sdpm\sdpm-quality\view\src\main\resources"/>
-            <class-path path="D:\javaworkspace\sdpm\sdpm-project\view\src\main\resources"/>
-            <class-path path="D:\javaworkspace\sdpm\sdpm-system\view\src\main\resources"/>
-            <class-path path="D:\javaworkspace\sdpm\sdpm-document\view\src\main\resources"/>
-            <class-path path="D:\javaworkspace\sdpm\sdpm-productLine\view\src\main\resources"/>
-            <class-path path="D:\javaworkspace\sdpm\sdpm-org\view\src\main\resources"/>
-            <class-path path="D:\javaworkspace\sdpm\sdpm-common\view\src\main\resources"/>
-            <class-path path="D:\javaworkspace\sdpm\sdpm-common\view-uicomponent\src\main\resources"/>
             <!--wll -->
             <class-path path="D:\java\eclipseworkspace\sdpm\sdpm-product\view\src\main\resources"/>
             <class-path path="D:\java\eclipseworkspace\sdpm\sdpm-quality\view\src\main\resources"/>

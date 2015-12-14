@@ -486,9 +486,9 @@ table.table.filelist-table{border:#ddd 1px solid;}
 
 /*关于我们*/
 .title-name{border-bottom:#eed 1px solid;padding:18px 0 14px;font-size:25px;margin-bottom:12px;}
-.us-info{border:#ddd 1px solid;border-left:#1b809e 2px solid;background:#f5fafd;color:#555;padding:16px 12px;font-size:14px;}
+.us-info{border:#ddd 1px solid;border-left:#1b809e 2px solid;background:#f9f9fc;color:#555;padding:16px 12px;font-size:14px;}
 .pic-info{margin-top:12px;}
-.pic-info .info-item{float:left;list-style:none;border:#ddd 1px solid; margin:0 8px 16px 8px;}
+.pic-info .info-item{float:left;list-style:none;border:#eee 1px solid; margin:0 8px 16px 8px;}
 .pic-info .info-item a,.pic-info .info-item a:link,.info-item a:visited{ text-decoration:none;display:block;width:202px;height:50px;line-height:30px;background:#f9f9fc;color:#869;padding:12px;font-size:14px;}
 .pic-info .info-item:hover,.pic-info .info-item:hover a{background:#6e3671; color:#fff}
 .pic-info .title-info{font-size:20px;color:#666;width:100%; text-align:center;margin:18px 0 16px;}

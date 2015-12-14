@@ -16,13 +16,6 @@
 
     <bean id="commonFilter" class="org.tinygroup.sdpm.common.web.CommonFilter"/>
 
-
-    <!--<bean id="customerAdvisor" class="org.tinygroup.sdpm.aop.AopCacheMatcherPointcutAdvisor">-->
-    <!--<property name="advice" ref="aopCacheInterceptor" />-->
-    <!--</bean>-->
-
-    <!--<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"></bean>-->
-
     <!-- 服务的约定类,定义服务接口包名模式,类名以Service结尾的类 -->
     <bean id="conventionServiceIdentifier"
           class="org.tinygroup.custombeandefine.identifier.impl.ConventionServiceIdentifier">
