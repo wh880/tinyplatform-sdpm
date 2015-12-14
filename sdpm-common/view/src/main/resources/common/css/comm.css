@@ -474,6 +474,7 @@ table.table.filelist-table{border:#ddd 1px solid;}
 .pic-avatar{border:none;background:none;padding:0;margin-bottom:10px}
 .who-info .caption{padding:5px}
 .who-info{background:#fcfcfc;border:#f1f1f1 1px solid;padding:4px 5px;height:325px;overflow:hidden;margin-bottom:10px}
+.who-info:hover{background:#f8f4f9;}
 .who-info .caption a{color:#333;}
 .who_info .caption a:hover{color:#f90;}
 /*底部*/
