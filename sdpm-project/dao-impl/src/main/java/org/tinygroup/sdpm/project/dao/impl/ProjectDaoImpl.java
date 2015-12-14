@@ -469,9 +469,9 @@ public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
                                 .and(PROJECTTABLE.PROJECT_ACL.eq(acl))
                                 .and(PROJECTTABLE.PROJECT_DELETED.eq(Project.DELETE_NO)
                                 ),
-                        PROJECTTABLE.PROJECT_STATGE.neq("3")
+                        PROJECTTABLE.PROJECT_STATGE.neq("3"),
+                        PROJECTTABLE.PROJECT_DELETED.eq(Project.DELETE_NO)
                 )
-
         );
         return getDslSession().fetchList(select, Project.class);
     }
