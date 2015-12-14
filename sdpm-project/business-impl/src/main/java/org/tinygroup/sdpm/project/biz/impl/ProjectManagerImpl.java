@@ -8,7 +8,6 @@ import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.project.biz.inter.ProjectManager;
 import org.tinygroup.sdpm.project.dao.ProjectDao;
-import org.tinygroup.sdpm.project.dao.impl.FieldUtil;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.tinysqldsl.Pager;
 

@@ -219,8 +219,7 @@ public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
             @SuppressWarnings("rawtypes")
             public Select generate(Serializable t) {
                 return selectFrom(PROJECTTABLE).where(and(
-                        PROJECTTABLE.PROJECT_ID.eq(t),
-                        PROJECTTABLE.PROJECT_DELETED.eq(Project.DELETE_NO)
+                        PROJECTTABLE.PROJECT_ID.eq(t)
                 ));
             }
         });
@@ -461,8 +460,7 @@ public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
     }
 
     public List<Project> findByIds(Integer... ids) {
-        Select select = selectFrom(PROJECTTABLE).where(
-                PROJECTTABLE.PROJECT_DELETED.eq(Project.DELETE_NO).and(PROJECTTABLE.PROJECT_ID.in(ids)));
+        Select select = selectFrom(PROJECTTABLE).where(PROJECTTABLE.PROJECT_ID.in(ids));
         return getDslSession().fetchList(select, Project.class);
     }
 
