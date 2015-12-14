@@ -263,7 +263,7 @@ public class DocumentAction extends BaseController {
             doc.setDocAddedBy(userUtils.getUserId());
             DocumentDoc document = docService.createNewDoc(doc);
 
-            processProfile(uploadProfile, doc.getDocId(), ProfileType.DOCUMENT);
+            processProfile(uploadProfile, document.getDocId(), ProfileType.DOCUMENT);
 
             LogUtil.logWithComment(LogUtil.LogOperateObject.DOC,
                     LogUtil.LogAction.CREATED,

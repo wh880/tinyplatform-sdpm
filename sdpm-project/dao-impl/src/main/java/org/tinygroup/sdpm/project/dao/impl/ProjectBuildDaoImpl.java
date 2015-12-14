@@ -21,7 +21,6 @@ import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.jdbctemplatedslsession.callback.*;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
-import org.tinygroup.sdpm.dao.update.UpdateUtil;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.project.dao.ProjectBuildDao;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
@@ -53,7 +52,6 @@ public class ProjectBuildDaoImpl extends TinyDslDaoSupport implements ProjectBui
         return getDslTemplate().insertAndReturnKey(projectBuild, new InsertGenerateCallback<ProjectBuild>() {
             public Insert generate(ProjectBuild t) {
                 Insert insert = insertInto(PROJECT_BUILDTABLE).values(
-                        PROJECT_BUILDTABLE.BUILD_ID.value(t.getBuildId()),
                         PROJECT_BUILDTABLE.BUILD_PRODUCT.value(t.getBuildProduct()),
                         PROJECT_BUILDTABLE.BUILD_PROJECT.value(t.getBuildProject()),
                         PROJECT_BUILDTABLE.BUILD_NAME.value(t.getBuildName()),
@@ -74,7 +72,18 @@ public class ProjectBuildDaoImpl extends TinyDslDaoSupport implements ProjectBui
         if (projectBuild == null || projectBuild.getBuildId() == null) {
             return 0;
         }
-        Update update = UpdateUtil.getUpdate(PROJECT_BUILDTABLE, projectBuild);
+        Update update = update(PROJECT_BUILDTABLE).set(
+                PROJECT_BUILDTABLE.BUILD_PRODUCT.value(projectBuild.getBuildProduct()),
+                PROJECT_BUILDTABLE.BUILD_PROJECT.value(projectBuild.getBuildProject()),
+                PROJECT_BUILDTABLE.BUILD_NAME.value(projectBuild.getBuildName()),
+                PROJECT_BUILDTABLE.BUILD_SCM_PATH.value(projectBuild.getBuildScmPath()),
+                PROJECT_BUILDTABLE.BUILD_FILE_PATH.value(projectBuild.getBuildFilePath()),
+                PROJECT_BUILDTABLE.BUILD_DATE.value(projectBuild.getBuildDate()),
+                PROJECT_BUILDTABLE.BUILD_STORIES.value(projectBuild.getBuildStories()),
+                PROJECT_BUILDTABLE.BUILD_BUGS.value(projectBuild.getBuildBugs()),
+                PROJECT_BUILDTABLE.BUILD_BUILDER.value(projectBuild.getBuildBuilder()),
+                PROJECT_BUILDTABLE.BUILD_DESC.value(projectBuild.getBuildDesc()),
+                PROJECT_BUILDTABLE.BUILD_DELETED.value(projectBuild.getBuildDeleted())).where(PROJECT_BUILDTABLE.BUILD_ID.eq(projectBuild.getBuildId()));
         return getDslSession().execute(update);
     }
 
