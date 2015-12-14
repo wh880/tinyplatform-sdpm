@@ -45,8 +45,8 @@
             #@colLabel()所属模块：#end
             #@formControlDiv("col-8")
                         #@Tselect2F()
-                            #@Tselect2Body("moduleId" bug?.moduleId?:0 {"class":
-                                "input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                            #@Tselect2Body("moduleId" bug?.moduleId?:0 {"class":"input-text select2"})
+                            ##,"multiple":"multiple"加上为多选项
                             #end
                         <script type="text/javascript">
                             $(function () {
