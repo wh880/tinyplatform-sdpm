@@ -60,7 +60,7 @@
             #@formHorizontal()
                 #@tinyDateInput(
                     "buildDate" formatDate(build?.buildDate,
-                    "yyyy-MM-dd") "YYYY-MM-DD" {"style":"width:80%","placeholder":"选择日期"})
+                    "yyyy-MM-dd") "yyyy-MM-dd" {"style":"width:80%","placeholder":"选择日期"})
                 #end
             #end
         #end

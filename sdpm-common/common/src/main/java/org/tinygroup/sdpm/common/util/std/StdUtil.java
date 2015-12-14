@@ -62,8 +62,8 @@ public class StdUtil {
         for(String key:tableStdMap.keySet()){
             if(tableStdMap.get(key).containsKey(fieldName)){
                 return true;
-            };
-        };
+            }
+        }
         return false;
     }
 

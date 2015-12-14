@@ -18,7 +18,7 @@ public interface DocService {
     String CACHE_DOC_LIB_LIST = "docLibList";
 
     DocumentDoc createNewDoc(DocumentDoc doc);
-
+    @CacheRemove(removeGroups = CACHE_DOC_LIB_LIST)
     DocumentDocLib createNewDocLib(DocumentDocLib docLib);
 
     Integer editDoc(DocumentDoc doc);

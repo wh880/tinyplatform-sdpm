@@ -84,11 +84,11 @@
                                         <th style="width: 16%">项目名称</th>
                                         <th style="width: 16%">项目代号</th>
                                         <th style="width: 16%">结束日期</th>
-                                        <th style="width: 11%">项目状态</th>
-                                        <th style="width: 10%">总预计</th>
-                                        <th style="width: 11%">总消耗</th>
+                                        <th style="width: 15%">项目状态</th>
+                                        <th style="width: 6%">总预计</th>
+                                        <th style="width: 6%">总消耗</th>
                                         <th style="width: 16%">总剩余</th>
-                                        <th style="width: 10%">进度</th>
+                                        <th style="width: 15%">进度</th>
 									</tr>
 								#end
 							#foreach(p:myProjectList)

@@ -5,7 +5,7 @@
         #@formControlDiv("col-8")
             #@tinyDateInput(
                 "projectBegin" formatDate(project?.projectBegin,
-                "YYYY-MM-dd") "YYYY-MM-dd" {"style":"width:140px","datatype":"*","nullmsg":
+                "yyyy-MM-dd") "yyyy-MM-dd" {"style":"width:140px","datatype":"*","nullmsg":
             "日期不能为空","placeholder":"选择日期"})#end
         #end
         #@validateDiv("col-2")#end
@@ -15,7 +15,7 @@
         #@formControlDiv("col-8")
             #@tinyDateInput(
                 "projectEnd" formatDate(project?.projectEnd,
-                "YYYY-MM-dd") "YYYY-MM-dd" {"style":"width:140px","datatype":"*","nullmsg":"日期不能为空",
+                "yyyy-MM-dd") "yyyy-MM-dd" {"style":"width:140px","datatype":"*","nullmsg":"日期不能为空",
             "placeholder":"选择日期"})#end
         #end
         #@validateDiv("col-2")#end

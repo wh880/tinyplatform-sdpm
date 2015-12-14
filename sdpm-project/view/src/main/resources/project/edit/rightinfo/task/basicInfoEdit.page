@@ -177,7 +177,7 @@
                     #@td()
                         #@formControlDiv("col-10")
                             #@tinyDateInput(
-                                "taskDeadLine" formatDate(task?.taskDeadLine,"YYYY-MM-dd")
+                                "taskDeadLine" formatDate(task?.taskDeadLine,"yyyy-MM-dd")
                             "YYYY-MM-dd" {"placeholder":"选择日期"})
                             #end
                         #end#end

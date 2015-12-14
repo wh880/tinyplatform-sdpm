@@ -128,7 +128,7 @@
                 #@formControlDiv()
                     <div class="input-group">
                         #@tinyDateInput(
-                    "taskEstStared" formatDate(copyTask?.taskEstStared,"yyyy-MM-dd") "YYYY-MM-DD" )#end
+                    "taskEstStared" formatDate(copyTask?.taskEstStared,"yyyy-MM-dd") "yyyy-MM-dd" )#end
                     </div>
                 #end
             #end
@@ -138,7 +138,7 @@
                 #@formControlDiv()
                     <div class="input-group">
                         #@tinyDateInput(
-                            "taskDeadLine" formatDate(copyTask?.taskDeadLine,"yyyy-MM-dd") "YYYY-MM-DD" )#end
+                            "taskDeadLine" formatDate(copyTask?.taskDeadLine,"yyyy-MM-dd") "yyyy-MM-dd" )#end
                     </div>
                 #end
             #end
