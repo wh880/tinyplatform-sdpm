@@ -490,7 +490,7 @@ public class BugAction extends BaseController {
     @RequestMapping("/close")
     public String close(QualityBug bug, SystemAction systemAction) {
 
-        bug.setBugClosedBy(userUtils.getUserId() != null ? userUtils.getUserId() : "0");
+        bug.setBugClosedBy(userUtils.getUserId());
         bug.setBugClosedDate(new Date());
         bug.setBugStatus("3");
         bugService.updateBug(bug);
