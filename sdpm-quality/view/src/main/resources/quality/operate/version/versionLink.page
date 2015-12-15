@@ -52,7 +52,7 @@
 					</div>
 				#end
 				<div class="infoContent">
-				    <p class="titleName"><</p>
+				    <p class="titleName"></p>
 			#set(requestStatusString = tinyRequestQueryString!=null ?"?"+tinyRequestQueryString:"")
 			#@tinyTableContent(TINY_CONTEXT_PATH+adminPath+"/quality/version/link"+requestStatusString)
 				#@thead()

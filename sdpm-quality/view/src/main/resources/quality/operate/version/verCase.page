@@ -9,8 +9,7 @@
     ##operationbar start1
         #@div(divClass="operationbar")
         <span class="f">
-        	<a href="${TINY_CONTEXT_PATH+adminPath}/quality/version/versionInfo?testversionId=${testversionId}&currentPageId=5">${testTask
-                ?.testtaskTitle}</a>>
+        	<a href="${TINY_CONTEXT_PATH+adminPath}/quality/version/versionInfo?testversionId=${testversionId}&currentPageId=5">${testTask?.testtaskTitle}</a>
             #foreach(m:menuManager.getScopeMenus("version-case"))
                 #if(m.id=="tversee")
                     #@buttonGroup()

@@ -75,8 +75,7 @@
                     #@Tselect2F()
                         #@Tselect2Body("taskStory" storyId==null?"":storyId {"class":"input-text select2"})
                             #foreach(s:storyList)
-                                <option value="${s.storyId}">${s.storyId}
-                                    ：${s.storyTitle}（优先级：${s.storyPri}，预计工时:${s.storyEstimate}）
+                                <option value="${s.storyId}">${s.storyId}：${s.storyTitle}（优先级：${s.storyPri}，预计工时:${s.storyEstimate}）
                                 </option>
                             #end
                         #end
