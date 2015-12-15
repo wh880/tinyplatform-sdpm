@@ -9,7 +9,7 @@
 	#end
 <div class="us-info">
     Tiny是值得拥有的企业级J2EE应用开发框架套件，专业团队开发，完整的生态体系，活跃的社区氛围，无限的水平扩展能力，7*24不间断运维能力。
-	<br><span style="color:#999;">本项目经过<a href="http://www.zentao.net/" target="_blank">禅道</a>作者王春生同意后，参考禅道现有功能模块并进行优化原有功能，提升用户体验，打造以Java为技术体系的项目管理工具，在此对禅道表示衷心感谢！</span>
+	<br><span style="color:red;">本项目经过<a href="http://www.zentao.net/" target="_blank">禅道</a>作者王春生同意后，参考禅道现有功能模块并进行优化原有功能，提升用户体验，打造以Java为技术体系的项目管理工具，在此对禅道表示衷心感谢！</span>
 </div>
 <div class="pic-info">
 	<p class="title-info">常用链接</p>

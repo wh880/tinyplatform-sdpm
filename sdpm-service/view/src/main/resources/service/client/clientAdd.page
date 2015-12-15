@@ -27,8 +27,8 @@
         #@elementItem()
             #@sdpmItem("客户登记人" "*")
                 #tinyInput(
-                    "text" "clientCreatedBy" client?.clientCreatedBy {"datatype":"*","nullmsg":"登记人不能为空！","id":
-                    "client_created_by","class":""})
+                    "text" "clientCreatedBy" client?.clientCreatedBy?client.clientCreatedBy:userUtils.getUser().orgUserRealName {"datatype":"*","nullmsg":"登记人不能为空！","id":
+                    "client_created_by"})
             #end
         #end
         #@elementItem()
