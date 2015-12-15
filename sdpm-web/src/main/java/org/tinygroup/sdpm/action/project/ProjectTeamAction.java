@@ -98,7 +98,9 @@ public class ProjectTeamAction extends BaseController {
         List<ProjectTeam> teamList = teams.getTeamList();
         //删选没有账号的team
         for (int i = 0; i < teamList.size(); i++) {
-            if (StringUtil.isBlank(teamList.get(i).getTeamUserId())) {
+            if (teamList.get(i) == null
+                    || StringUtil.isBlank(teamList.get(i).getTeamUserId())
+                    || StringUtil.isBlank(teamList.get(i).getTeamRole())) {
                 teamList.remove(teamList.get(i));
                 i--;
             }
@@ -121,8 +123,6 @@ public class ProjectTeamAction extends BaseController {
         }
         teamService.batchAddTeam(addList);
         teamService.batchUpdateTeam(updateList);
-        //TODO: 删除用户项目列表
-//        ProjectUtils.removeUserProjectList();
         return "redirect:" + adminPath + "/project/team/index";
     }
 

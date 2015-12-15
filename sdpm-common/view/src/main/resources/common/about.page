@@ -82,10 +82,10 @@
         <div class="col-xs-6 col-md-3 col-2 whoInfo-box">
             <div class="who-info">
                 <div class="thumbnail pic-avatar">
-                    <img src="${TINY_CONTEXT_PATH}/img/about/xb.png" alt="啊斌">
+                    <img src="${TINY_CONTEXT_PATH}/img/about/xb.png" alt="阿斌">
                 </div>
                 <div class="caption">
-                    <h4>啊斌 </h4>
+                    <h4>阿斌 </h4>
 
                     <p>做好最坏的打算，哪怕从头再写。</p>
                 </div>
@@ -95,10 +95,10 @@
         <div class="col-xs-6 col-md-3 col-2 whoInfo-box">
             <div class="who-info">
                 <div class="thumbnail pic-avatar">
-                    <img src="${TINY_CONTEXT_PATH}/img/about/wj.png" alt="啊杰">
+                    <img src="${TINY_CONTEXT_PATH}/img/about/wj.png" alt="阿杰">
                 </div>
                 <div class="caption">
-                    <h4>啊杰 </h4>
+                    <h4>阿杰 </h4>
 
                     <p>昨天你是谁不重要，因为都会越来越好。</p>
                 </div>
@@ -134,10 +134,10 @@
         <div class="col-xs-6 col-md-3 col-2 whoInfo-box">
             <div class="who-info">
                 <div class="thumbnail pic-avatar">
-                    <img src="${TINY_CONTEXT_PATH}/img/about/wy.png" alt="啊莹">
+                    <img src="${TINY_CONTEXT_PATH}/img/about/wy.png" alt="阿莹">
                 </div>
                 <div class="caption">
-                    <h4>啊莹 </h4>
+                    <h4>阿莹 </h4>
                     <h5 class="positionInfos"></h5>
 
                     <p>最美好的时刻，不是那些风平浪静的日子，而是在逆境中奋进的过程。</p>
@@ -147,10 +147,10 @@
         <div class="col-xs-6 col-md-3 col-2 whoInfo-box">
             <div class="who-info">
                 <div class="thumbnail pic-avatar">
-                    <img src="${TINY_CONTEXT_PATH}/img/about/cp.png" alt="啊朋">
+                    <img src="${TINY_CONTEXT_PATH}/img/about/cp.png" alt="阿朋">
                 </div>
                 <div class="caption">
-                    <h4>啊朋 </h4>
+                    <h4>阿朋 </h4>
                     <h5 class="positionInfos"></h5>
 
                     <p> 多学多做多想多实践。 </p>

@@ -199,7 +199,6 @@ public class OrgUserDaoImpl extends TinyDslDaoSupport implements OrgUserDao {
     }
 
     public Pager<OrgUser> getPagerByDeptId(int start, int limit, final Integer deptId, final OrderBy... orderBies) {
-
         Select select = MysqlSelect.selectFrom(ORG_USERTABLE).where(
                 and(
                         ORG_USERTABLE.ORG_DEPT_ID.eq(deptId),

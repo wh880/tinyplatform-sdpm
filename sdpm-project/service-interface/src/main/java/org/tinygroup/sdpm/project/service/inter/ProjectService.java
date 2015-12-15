@@ -20,7 +20,7 @@ public interface ProjectService {
      * 获得用户所能见的项目列表
      */
     @CacheGet(key = "${userId}", group = CACHE_USER_PROJECT_LIST)
-    List<Project> getUserProjectList(String user111Id);
+    List<Project> getUserProjectList(String userId);
 
     /**
      * 新增项目，保证项目名称唯一

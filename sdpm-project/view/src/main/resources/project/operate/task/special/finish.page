@@ -50,9 +50,9 @@
             #@validateDiv("col-2")#end
         #end
         #@elementItem()
-            #@colLabel()附件(50M)#end
+            #@colLabel()附件#end
             #@formControlDiv("col-8")
-                #fileWithInput("file-1")
+                #mulUploadFile()
             #end
             #@validateDiv("col-2")#end
         #end

@@ -2,7 +2,7 @@
   <service-component type="org.tinygroup.sdpm.project.service.inter.ProjectService" bean="projectServiceImpl">
     <service-method local-name="getUserProjectList" service-id="getUserProjectList" method-name="getUserProjectList" cacheable="false" category="org.tinygroup.sdpm.project.service.inter">
       <service-parameters>
-        <service-parameter name="user111Id" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="userId" type="java.lang.String" required="false" is-array="false"/>
       </service-parameters>
       <service-result name="getUserProjectListResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.project.dao.pojo.Project"/>
     </service-method>
