@@ -60,7 +60,7 @@ public class ProductLineAction extends BaseController {
     }
 
     @RequestMapping("/save")
-    public String save(ProductLine productLine, SystemAction systemAction) {
+    public String save(ProductLine productLine, SystemAction systemAction, String lastAddress) {
         productLine.setProductLineCreatedBy(userUtils.getUserId());
         productLine.setProductLineCreatedDate(new Date());
         productLine.setProductLineStatus(ProductLine.STATUS_ACTIVE);
@@ -74,7 +74,12 @@ public class ProductLineAction extends BaseController {
                 , null
                 , null
                 , systemAction.getActionComment());
-
+        if(!StringUtil.isBlank(lastAddress)){
+            if(lastAddress.contains("?")){
+                return "redirect:" + lastAddress+"&backProductLine="+productLine1.getProductLineId();
+            }
+            return "redirect:" + lastAddress+"?backProductLine="+productLine1.getProductLineId();
+        }
         return "redirect:" + "/a/productLine/to";
     }
 

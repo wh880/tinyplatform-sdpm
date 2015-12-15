@@ -51,8 +51,8 @@
                                 console.log("test222");
                                 var pId = treeNode.id;
                                 if (pId > 0) {
-                                    ajaxRead("${sid}", "moduleId", "moduleId", "moduleName", "/quality/bug/ajax/module?moduleRoot=" + pId,"0","module");
-                                    ajaxRead("${sid}", "planId", "planId", "planName", "/product/plan/planList?productId=" + pId,"0","plan");
+                                    ajaxRead("${sid}", "moduleId", "moduleId", "moduleName", "/quality/bug/ajax/module?moduleRoot=" + pId,"","module");
+                                    ajaxRead("${sid}", "planId", "planId", "planName", "/product/plan/planList?productId=" + pId,"${backPlan}","plan");
                                     var url = $("#modelA").attr("href");
                                     if(!url.endsWith("=")){
                                         url = url.substring(0,url.indexOf("=")+1);
@@ -103,7 +103,7 @@
         #@colLabel()所属计划：#end
         #@formControlDiv("col-4")
             #@Tselect2F()
-                #@Tselect2Body("planId" 0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                #@Tselect2Body("planId" backPlan {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                 #end
 
                 #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH +adminPath}/product/plan/addplan"

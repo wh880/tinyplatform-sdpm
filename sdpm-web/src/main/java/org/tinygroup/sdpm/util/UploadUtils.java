@@ -150,8 +150,5 @@ public class UploadUtils {
         return tmpFile;
     }
 
-    public static void main(String[] args) {
-        System.out.println(generateFilename("/base", "gif"));
-    }
 
 }

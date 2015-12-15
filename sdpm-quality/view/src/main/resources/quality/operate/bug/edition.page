@@ -28,7 +28,7 @@
                 <div class="col-2 text-r"><label>重现步骤：&nbsp</label></div>
 
                 <div class="col-9">
-                    #@Teditor("bugSteps" "bugSteps" {"initialFrameHeight":"150"})${bug?.bugSteps}#end</div>
+                    #@Teditor("bugSteps" "bugSteps" {"initialFrameHeight":"150"})${bug?.bugSteps?:"<p>【步骤】</p><p>【结果】</p><p>【期望】</p>"}#end</div>
             </div>
         #end
         <br/>

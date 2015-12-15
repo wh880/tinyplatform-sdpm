@@ -142,7 +142,7 @@ public class ProjectBuildAction extends BaseController {
 
 
     @RequestMapping(value = "/addSave", method = RequestMethod.POST)
-    public String addSave(ProjectBuild build, Model model, UploadProfile uploadProfile) throws IOException {
+    public String addSave(ProjectBuild build, Model model, UploadProfile uploadProfile,String lastAddress) throws IOException {
         ProjectBuild temp;
         if (build.getBuildId() == null) {
             build.setBuildBuilder(userUtils.getUserId());
@@ -157,6 +157,9 @@ public class ProjectBuildAction extends BaseController {
                     null,
                     null,
                     null);
+            if(!StringUtil.isBlank(lastAddress)){
+                return "redirect:" + lastAddress;
+            }
         } else {
             buildService.updateBuild(build);
             processProfile(uploadProfile, build.getBuildId(), ProfileType.BUILD);

@@ -25,7 +25,7 @@
                 })
             </script>
 
-        #Tselect2Ajax("productLineId" cookieProductId TINY_CONTEXT_PATH+adminPath+"/productLine/ajax/lineInCondition"
+        #Tselect2Ajax("productLineId" backProductLine?:cookieProductId TINY_CONTEXT_PATH+adminPath+"/productLine/ajax/lineInCondition"
         {"dataId":"productLineId","dataText":"productLineName","placeholder":"查询产品线","nullmsg":"请选择产品线！","datatype":"*"})
         #@Tselect2Fix()
                 #set(m=menuManager.getMenu("productLine-add"))

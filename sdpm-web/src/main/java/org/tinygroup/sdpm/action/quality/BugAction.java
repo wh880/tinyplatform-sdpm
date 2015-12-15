@@ -855,9 +855,9 @@ public class BugAction extends BaseController {
         StringBuffer bugStep = new StringBuffer("");
         for (Integer id : ids) {
             QualityCaseStep step = caseStepService.findCaseStepById(id);
-            bugStep.append("<b>[步骤]</b><br>");
+            bugStep.append("【步骤】<br>");
             bugStep.append(step.getCaseStepDesc() + "<br>");
-            bugStep.append("<b>[期望]</b><br>");
+            bugStep.append("【期望】<br>");
             bugStep.append(step.getCaseStepExpect() + "<br>");
         }
         List<Project> projects = projectService.findProjectList(null, null, null);

@@ -289,7 +289,6 @@ public class DocAction extends BaseController {
     public String viewInfo(HttpServletRequest request, Integer docId, Model model) {
         DocumentDoc doc = docService.findDocById(docId);
         DocumentDocLib docLib = docService.findDocLibById(doc.getDocLibId());
-        System.out.println(doc.getDocModule() != 0 && doc.getDocModule() != null);
         if (doc.getDocModule() != 0 && doc.getDocModule() != null) {
             SystemModule module = moduleService.findById(doc.getDocModule());
             model.addAttribute("module", module);

@@ -41,60 +41,71 @@ public class QualityUtil {
                         ConditionUtils.Operate.NEQ.getOperate(),
                         ConditionUtils.CommonFieldType.FIELD_OPERATE.getCommonField(),
                         "3");
+                break;
             case 2:
-                return;
+                break;
             case 3:
                 carrier.put("bugAssignedTo",
                         ConditionUtils.Operate.EQ.getOperate(),
                         ConditionUtils.CommonFieldType.FIELD_OPERATE.getCommonField(),
                         UserUtils.getUserId());
+                break;
             case 4:
                 carrier.put("bugOpenedBy",
                         ConditionUtils.Operate.EQ.getOperate(),
                         ConditionUtils.CommonFieldType.FIELD_OPERATE.getCommonField(),
                         UserUtils.getUserId());
+                break;
             case 5:
                 carrier.put("bugResolvedBy",
                         ConditionUtils.Operate.EQ.getOperate(),
                         ConditionUtils.CommonFieldType.FIELD_OPERATE.getCommonField(),
                         UserUtils.getUserId());
+                break;
             case 6:
                 carrier.putStatus("status"," (bug_confirmed <> 1 or bug_confirmed is null)");
+                break;
             case 7:
                 carrier.putStatus("status"," bug_assigned_to is null or bug_assigned_to= ''");
+                break;
             case 8:
                 carrier.put("bugStatus",
                         ConditionUtils.Operate.EQ.getOperate(),
                         ConditionUtils.CommonFieldType.FIELD_OPERATE.getCommonField(),
                         "1");
+                break;
             case 9:
                 carrier.put("bugStatus",
                         ConditionUtils.Operate.EQ.getOperate(),
                         ConditionUtils.CommonFieldType.FIELD_OPERATE.getCommonField(),
                         "1");
+                break;
             case 10:
                 carrier.put("bugResolution",
                         ConditionUtils.Operate.EQ.getOperate(),
                         ConditionUtils.CommonFieldType.FIELD_OPERATE.getCommonField(),
                         "6");
+                break;
             case 11:
-                return;
+                break;
             case 12:
                 carrier.put("bugStatus",
                         ConditionUtils.Operate.EQ.getOperate(),
                         ConditionUtils.CommonFieldType.FIELD_OPERATE.getCommonField(),
                         QualityBug.STATUS_CLOSED);
+                break;
             case 13:
                 carrier.put("bugStatus",
                         ConditionUtils.Operate.EQ.getOperate(),
                         ConditionUtils.CommonFieldType.FIELD_OPERATE.getCommonField(),
                         QualityBug.STATUS_RESOLVED);
+                break;
             case 14:
                 carrier.put("bugActivatedCount",
                         ConditionUtils.Operate.GT.getOperate(),
                         ConditionUtils.CommonFieldType.FIELD_OPERATE.getCommonField(),
                         0);
-
+                break;
         }
         return;
     }

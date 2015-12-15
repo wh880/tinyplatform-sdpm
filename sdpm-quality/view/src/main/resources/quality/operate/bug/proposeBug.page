@@ -174,7 +174,7 @@
         #@elementItem()
             #@colLabel()重现步骤：#end
             #@formControlDiv("col-8")
-                #@Teditor("bugSteps" "bugSteps" {"initialFrameHeight":"250"})${(bugStep?:bug?.bugSteps)?:"<p><b>[步骤]</b></p><p><b>[结果]</b></p><p><b>[期望]<b></p>"}#end
+                #@Teditor("bugSteps" "bugSteps" {"initialFrameHeight":"250"})${(bugStep?:bug?.bugSteps)?:"<p>【步骤】</p><p>【结果】</p><p>【期望】</p>"}#end
             #end
             #@validateDiv("col-2")#end
         #end

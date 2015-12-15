@@ -49,7 +49,7 @@ public class PlanAction extends BaseController {
     @RequestMapping("/save")
     public String save(
             @CookieValue("cookieProductId") String cookieProductId,
-            ProductPlan productPlan, HttpServletRequest request,
+            ProductPlan productPlan,
             SystemAction systemAction,
             String lastAddress) throws IOException {
 
@@ -66,7 +66,10 @@ public class PlanAction extends BaseController {
                 , null
                 , systemAction.getActionComment());
         if (!StringUtil.isBlank(lastAddress)) {
-            return "redirect:" + lastAddress;
+            if(lastAddress.contains("?")){
+                return "redirect:" + lastAddress+"&backPlan="+productPlan1.getPlanId();
+            }
+            return "redirect:" + lastAddress+"?backPlan="+productPlan1.getPlanId();
         }
         return "redirect:" + "/a/product/plan/content";
     }

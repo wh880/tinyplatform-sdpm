@@ -125,9 +125,6 @@ public class StoryAction extends BaseController {
      * @param systemAction
      * @param productStory
      * @param storySpec
-     * @param file
-     * @param title
-     * @param request
      * @return
      * @throws IOException
      */
@@ -137,10 +134,8 @@ public class StoryAction extends BaseController {
             String type,
             ProductStory productStory,
             ProductStorySpec storySpec,
-            @RequestParam(value = "file", required = false) MultipartFile[] file,
-            String[] title,
-            HttpServletRequest request,
-            UploadProfile uploadProfile) throws IOException {
+            UploadProfile uploadProfile,
+            String lastAddress) throws IOException {
         ProductStory story = storyService.addStory(productStory, storySpec,userUtils.getUserId());
         processProfile(uploadProfile, story.getStoryId(), ProfileType.STORY);
 
@@ -154,6 +149,9 @@ public class StoryAction extends BaseController {
                     null,
                     null,
                     systemAction.getActionComment());
+            if(!StringUtil.isBlank(lastAddress)){
+                return "redirect:" + lastAddress;
+            }
             return "redirect:" + adminPath + "/product/storySpec/find/productDemandDetail?storyId=" + story.getStoryId();
         } else {
             LogUtil.logWithComment(LogUtil.LogOperateObject.STORY,
