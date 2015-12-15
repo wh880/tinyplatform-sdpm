@@ -1,5 +1,7 @@
 package org.tinygroup.sdpm.action.quality.util;
 
+import org.tinygroup.sdpm.dao.condition.ConditionCarrier;
+import org.tinygroup.sdpm.dao.condition.ConditionUtils;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.sdpm.util.UserUtils;
 
@@ -26,38 +28,74 @@ public class QualityUtil {
         statusMap.put("tbugtimeup", 10);
         statusMap.put("tbugneedchange", 11);
         statusMap.put("tBugDeleted", 12);
+        statusMap.put("tbugsolved", 13);
+        statusMap.put("tbugReActived", 14);
     }
 
-    public static String getCondition(String status, HttpServletRequest request) {
-        if ("".equals(status) || status == null) return "";
-        if (status == null || "".equals(status)) return null;
+    public static void getCondition(String status, ConditionCarrier carrier) {
+        if ("".equals(status) || status == null) return;
+        if (status == null || "".equals(status)) return;
         switch (statusMap.get(status)) {
             case 1:
-                return " bug_status <> '3'";
+                carrier.put("bugStatus",
+                        ConditionUtils.Operate.NEQ.getOperate(),
+                        ConditionUtils.CommonFieldType.FIELD_OPERATE.getCommonField(),
+                        "3");
             case 2:
-                return "";
+                return;
             case 3:
-                return " bug_assigned_to = '" + (UserUtils.getUserId()) + "' ";
+                carrier.put("bugAssignedTo",
+                        ConditionUtils.Operate.EQ.getOperate(),
+                        ConditionUtils.CommonFieldType.FIELD_OPERATE.getCommonField(),
+                        UserUtils.getUserId());
             case 4:
-                return " bug_opened_by = '" + (UserUtils.getUserId()) + "' ";
+                carrier.put("bugOpenedBy",
+                        ConditionUtils.Operate.EQ.getOperate(),
+                        ConditionUtils.CommonFieldType.FIELD_OPERATE.getCommonField(),
+                        UserUtils.getUserId());
             case 5:
-                return " bug_resolved_by = '" + (UserUtils.getUserId()) + "' ";
+                carrier.put("bugResolvedBy",
+                        ConditionUtils.Operate.EQ.getOperate(),
+                        ConditionUtils.CommonFieldType.FIELD_OPERATE.getCommonField(),
+                        UserUtils.getUserId());
             case 6:
-                return " (bug_confirmed <> 1 or bug_confirmed is null)";
+                carrier.putStatus("status"," (bug_confirmed <> 1 or bug_confirmed is null)");
             case 7:
-                return " bug_assigned_to is null or bug_assigned_to= ''";
+                carrier.putStatus("status"," bug_assigned_to is null or bug_assigned_to= ''");
             case 8:
-                return " bug_status = '1'";
+                carrier.put("bugStatus",
+                        ConditionUtils.Operate.EQ.getOperate(),
+                        ConditionUtils.CommonFieldType.FIELD_OPERATE.getCommonField(),
+                        "1");
             case 9:
-                return " bug_status = '1'";
+                carrier.put("bugStatus",
+                        ConditionUtils.Operate.EQ.getOperate(),
+                        ConditionUtils.CommonFieldType.FIELD_OPERATE.getCommonField(),
+                        "1");
             case 10:
-                return " bug_resolution = '6'";
+                carrier.put("bugResolution",
+                        ConditionUtils.Operate.EQ.getOperate(),
+                        ConditionUtils.CommonFieldType.FIELD_OPERATE.getCommonField(),
+                        "6");
             case 11:
-                return "";
+                return;
             case 12:
-                return "bug_status = '"+ QualityBug.STATUS_CLOSED+"'";
+                carrier.put("bugStatus",
+                        ConditionUtils.Operate.EQ.getOperate(),
+                        ConditionUtils.CommonFieldType.FIELD_OPERATE.getCommonField(),
+                        QualityBug.STATUS_CLOSED);
+            case 13:
+                carrier.put("bugStatus",
+                        ConditionUtils.Operate.EQ.getOperate(),
+                        ConditionUtils.CommonFieldType.FIELD_OPERATE.getCommonField(),
+                        QualityBug.STATUS_RESOLVED);
+            case 14:
+                carrier.put("bugActivatedCount",
+                        ConditionUtils.Operate.GT.getOperate(),
+                        ConditionUtils.CommonFieldType.FIELD_OPERATE.getCommonField(),
+                        0);
 
         }
-        return "";
+        return;
     }
 }

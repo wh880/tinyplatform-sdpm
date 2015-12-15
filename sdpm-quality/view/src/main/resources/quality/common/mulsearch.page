@@ -38,6 +38,12 @@
             <option value="${p.value}">${p.text}</option>
         #end
         </select>
+        <select id="usermp">
+            <option value=""></option>
+            #for(u : userList)
+            <option value="${u?.orgUserId}">${u?.orgUserRealName}</option>
+        #end
+        </select>
 
     </div>
     <table class="table-condensed table-form" id="task-search">
@@ -151,7 +157,7 @@
             <td class="w-180px">
                 <div class="btn-group">
                     <button type="submit" class="btn btn-submit btn-primary btn-sm">搜索</button>
-##                    <button type="button" onclick="resetForm(this)" class="btn btn-sm">重置</button>
+                    <button type="button" id="resetForm" class="btn btn-sm">重置</button>
 ##                    <button type="button" onclick="resetForm(this)" class="btn btn-sm">保存</button>
                 </div>
             </td>
@@ -262,14 +268,12 @@
         itemlist.push({
             "name": "bugOpenedBy",
             "title": "创建人",
-            "operator": "include",
+            "operator": "=",
             "operatorList":[
-                {key:"include",val:"包含"},
-                {key:"notinclude",val:"不包含"},
                 {key:"=",val:"="},
                 {key:"!=",val:"!="}
             ],
-            "value": "text"
+            "value": "user"
         });
         itemlist.push({
             "name": "bugOpenedDate",
@@ -288,26 +292,22 @@
         itemlist.push({
             "name": "bugAssignedTo",
             "title": "指派",
-            "operator": "include",
+            "operator": "=",
             "operatorList":[
-                {key:"include",val:"包含"},
-                {key:"notinclude",val:"不包含"},
                 {key:"=",val:"="},
                 {key:"!=",val:"!="}
             ],
-            "value": "text"
+            "value": "user"
         });
         itemlist.push({
             "name": "bugClosedBy",
             "title": "关闭人",
-            "operator": "include",
+            "operator": "=",
             "operatorList":[
-                {key:"include",val:"包含"},
-                {key:"notinclude",val:"不包含"},
                 {key:"=",val:"="},
                 {key:"!=",val:"!="}
             ],
-            "value": "text"
+            "value": "user"
         });
         itemlist.push({
             "name": "bugClosedDate",
@@ -350,6 +350,9 @@
                 case "bugStatus":
                     $("#valueBox" + itemIndex).html($('<select name="infos[' + sIndex + '].value" id="value' + itemIndex + '" class="form-control">').html($("#bugStatusmp").html()));
                     break;
+                case "user":
+                    $("#valueBox" + itemIndex).html($('<select name="infos[' + sIndex + '].value" id="value' + itemIndex + '" class="form-control">').html($("#usermp").html()));
+                    break;
                 case "date":
                     $("#valueBox" + itemIndex).html('<input type="text" name="infos[' + sIndex + '].value" id="value' + itemIndex + '" value="" class="form-control dateinput">');
                     break;
@@ -385,9 +388,12 @@
         $("#${bugTableId}form").on("submit", function () {
             $("#${bugTableId}").trigger("initnav");
             return false;
-
         });
 
+        $("#resetForm").on("click",function(){
+            $("#${bugTableId}form")[0].reset();
+            $("#${bugTableId}form").submit();
+        });
     });
     //-->
 </script>

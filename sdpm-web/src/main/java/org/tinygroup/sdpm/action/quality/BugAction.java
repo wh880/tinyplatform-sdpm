@@ -211,7 +211,7 @@ public class BugAction extends BaseController {
             asc = false;
         }
         ConditionCarrier carrier = new ConditionCarrier();
-        carrier.putStatus("bugStatus",QualityUtil.getCondition(status, request));
+        QualityUtil.getCondition(status,carrier);
         carrier.putSearch("bugSearch",infos,groupOperate);
 
         bug.setModuleId((Integer) request.getSession().getAttribute("bugModuleId"));
@@ -784,7 +784,7 @@ public class BugAction extends BaseController {
     //批量删除（软） 产品下面的计划、发布关联BUG表上使用的
     @ResponseBody
     @RequestMapping(value = "/batchDelBugStory")
-    public Map bctchBugDelStory(String ids) {
+    public Map batchBugDelStory(String ids) {
         Map<String, String> map = new HashMap<String, String>();
         if (ids == null) {
             map.put("status", "fail");

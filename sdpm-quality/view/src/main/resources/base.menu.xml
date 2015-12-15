@@ -52,36 +52,45 @@
         <menu id="tbugnext" name="下一个Bug" href="/quality/bug/next" icon="icon-chevron-right" sort="1"
               isShow="1" scope="testbuginfo-tab">
         </menu>
-        <menu id="tbugstatus" name="未关闭的Bug" href="/quality/bug?status=tbugstatus" icon="" sort="13"
+        <menu id="tbugstatus" name="未关闭的Bug" href="/quality/bug?status=tbugstatus" icon="" sort="15"
               isShow="1" scope="testbugleft-tab">
         </menu>
-        <menu id="tBugDeleted" name="已关闭Bug" href="/quality/bug?status=tBugDeleted" icon="" sort="12"
-              isShow="1" scope="testbugleft-tab">
-
-        </menu>
-        <menu id="tbugall" name="所有Bug" href="/quality/bug?status=tbugall" icon="" sort="11"
+        <menu id="tBugDeleted" name="已关闭Bug" href="/quality/bug?status=tBugDeleted" icon="" sort="14"
               isShow="1" scope="testbugleft-tab">
 
         </menu>
-        <menu id="tbugassigntome" name="指派给我 " href="/quality/bug?status=tbugassigntome" icon="" sort="10"
+        <menu id="tbugall" name="所有Bug" href="/quality/bug?status=tbugall" icon="" sort="13"
               isShow="1" scope="testbugleft-tab">
 
         </menu>
-        <menu id="tbugbuildbyme" name="由我创建" href="/quality/bug?status=tbugbuildbyme" icon="" sort="9"
+        <menu id="tbugassigntome" name="指派给我 " href="/quality/bug?status=tbugassigntome" icon="" sort="12"
               isShow="1" scope="testbugleft-tab">
 
         </menu>
-        <menu id="tbugsolvebyme" name="由我解决" href="/quality/bug?status=tbugsolvebyme" icon="" sort="8"
+        <menu id="tbugbuildbyme" name="由我创建" href="/quality/bug?status=tbugbuildbyme" icon="" sort="11"
+              isShow="1" scope="testbugleft-tab">
+
+        </menu>
+        <menu id="tbugsolvebyme" name="由我解决" href="/quality/bug?status=tbugsolvebyme" icon="" sort="10"
               isShow="1" scope="testbugleft-tab"></menu>
-        <menu id="tbugnotsure" name="未确认" href="/quality/bug?status=tbugnotsure" icon="" sort="7"
+
+        <menu id="tbugnotsure" name="未确认" href="/quality/bug?status=tbugnotsure" icon="" sort="9"
               isShow="1" scope="testbugleft-tab">
 
         </menu>
-        <menu id="tbugnotassign" name="未指派" href="/quality/bug?status=tbugnotassign" icon="" sort="6"
+        <menu id="tbugnotassign" name="未指派" href="/quality/bug?status=tbugnotassign" icon="" sort="8"
               isShow="1" scope="testbugleft-tab">
 
         </menu>
-        <menu id="tbugnotsolve" name="未解决" href="/quality/bug?status=tbugnotsolve" icon="" sort="5"
+        <menu id="tbugnotsolve" name="未解决" href="/quality/bug?status=tbugnotsolve" icon="" sort="7"
+              isShow="1" scope="testbugleft-tab">
+
+        </menu>
+        <menu id="tbugsolved" name="已解决" href="/quality/bug?status=tbugsolved" icon="" sort="6"
+              isShow="1" scope="testbugleft-tab">
+
+        </menu>
+        <menu id="tbugReActived" name="激活的bug" href="/quality/bug?status=tbugReActived" icon="" sort="5"
               isShow="1" scope="testbugleft-tab">
 
         </menu>

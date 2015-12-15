@@ -63,14 +63,7 @@
         </span>
         <span class="r">
 					#foreach(m:menuManager.getScopeMenus("testbug-tab"))
-						#if(m.id=="tbugoutput")
-
-						#else
-							#if(m.id=="tbuginput")
-							#else
-                                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?currentPageId=5">#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp
-							#end
-						#end
+						<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?currentPageId=5">#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp
 					#end
 
 				</span>

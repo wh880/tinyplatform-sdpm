@@ -8,7 +8,7 @@
     #@td()${getDict("bugSeverity",var?.bugSeverity)}#end
     #@td()${getDict("bugPriority",var?.priority)}#end
     #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/bug/bugInfo?currentPageId=5&bugId=${var?.bugId}">[${var?.bugConfirmed==1?"已确认":"未确认"}]${var?.bugTitle}</a>#end
-    #@td("nowrap")${getDict("bugStatus",var?.bugStatus)}${var?.bugActivatedCount>0?"[曾重新激活]":""}#end
+    #@td("nowrap")${getDict("bugStatus",var?.bugStatus)}#if(var?.bugActivatedCount>0)[<i class="icon-lightbulb" style="color: gold;"></i>]#end#end
     #@td("nowrap")<span class="${var?.bugOpenedBy==userUtils.getUserId()?'c-red':''}">${var?.bugOpenedBy?userUtils.getUserById(var?.bugOpenedBy)?.orgUserRealName:""} </span>#end
     #@td("nowrap")${formatDate(var?.bugOpenedDate,"yyyy-MM-dd")}#end
     #@td("nowrap")<span class="${var?.bugAssignedTo==userUtils.getUserId()?'c-red':''}">${var?.bugAssignedTo?userUtils.getUserById(var?.bugAssignedTo)?.orgUserRealName:""} </span>#end
