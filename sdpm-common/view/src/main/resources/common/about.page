@@ -33,7 +33,7 @@
                     <img src="${TINY_CONTEXT_PATH}/img/about/wll.png" alt="玲珑">
                 </div>
                 <div class="caption">
-                    <h4>玲珑 </h4>
+                    <h4>玲珑</h4>
                     <h5 class="positionInfos">专业填坑</h5>
 
                     <p> 再好一点。 </p>
@@ -47,7 +47,7 @@
                             src="${TINY_CONTEXT_PATH}/img/about/gzc.png" alt="高志超"></a>
                 </div>
                 <div class="caption">
-                    <a href="http://www.cnblogs.com/hot-ice/" target="_blank"><h4>高志超 </h4></a>
+                    <a href="http://www.cnblogs.com/hot-ice/" target="_blank"><h4>志超 </h4></a>
                     <h5 class="positionInfos"></h5>
                     <p> 代码改变生活。 </p>
                 </div>
@@ -56,10 +56,10 @@
         <div class="col-xs-6 col-md-3 col-2 whoInfo-box">
             <div class="who-info">
                 <div class="thumbnail pic-avatar">
-                    <img src="${TINY_CONTEXT_PATH}/img/about/xdy.png" alt="徐丹洋">
+                    <img src="${TINY_CONTEXT_PATH}/img/about/xdy.png" alt="丹洋">
                 </div>
                 <div class="caption">
-                    <h4>徐丹洋 </h4>
+                    <h4>丹洋 </h4>
                     <h5 class="positionInfos">Young</h5>
                     <p>谁都不是生来强大，但只要你肯努力去做。</p>
                 </div>
@@ -68,10 +68,10 @@
         <div class="col-xs-6 col-md-3 col-2 whoInfo-box">
             <div class="who-info">
                 <div class="thumbnail pic-avatar">
-                    <img src="${TINY_CONTEXT_PATH}/img/about/sly.png" alt="沈立宇">
+                    <img src="${TINY_CONTEXT_PATH}/img/about/sly.png" alt="立宇">
                 </div>
                 <div class="caption">
-                    <h4>沈立宇 </h4>
+                    <h4>立宇 </h4>
                     <h5 class="positionInfos"></h5>
 
                     <p>借你的爱，让我成长。</p>
@@ -82,11 +82,10 @@
         <div class="col-xs-6 col-md-3 col-2 whoInfo-box">
             <div class="who-info">
                 <div class="thumbnail pic-avatar">
-                    <img src="${TINY_CONTEXT_PATH}/img/about/xb.png" alt="许斌">
+                    <img src="${TINY_CONTEXT_PATH}/img/about/xb.png" alt="啊斌">
                 </div>
                 <div class="caption">
-                    <h4>许斌 </h4>
-                    <h5 class="positionInfos">专业挖坑</h5>
+                    <h4>啊斌 </h4>
 
                     <p>做好最坏的打算，哪怕从头再写。</p>
                 </div>
@@ -96,11 +95,10 @@
         <div class="col-xs-6 col-md-3 col-2 whoInfo-box">
             <div class="who-info">
                 <div class="thumbnail pic-avatar">
-                    <img src="${TINY_CONTEXT_PATH}/img/about/wj.png" alt="汪杰">
+                    <img src="${TINY_CONTEXT_PATH}/img/about/wj.png" alt="啊杰">
                 </div>
                 <div class="caption">
-                    <h4>汪杰 </h4>
-                    <h5 class="positionInfos">协助挖坑</h5>
+                    <h4>啊杰 </h4>
 
                     <p>昨天你是谁不重要，因为都会越来越好。</p>
                 </div>
@@ -110,10 +108,10 @@
         <div class="col-xs-6 col-md-3 col-2 whoInfo-box">
             <div class="who-info">
                 <div class="thumbnail pic-avatar">
-                    <img src="${TINY_CONTEXT_PATH}/img/about/mck.png" alt="蒙初开">
+                    <img src="${TINY_CONTEXT_PATH}/img/about/mck.png" alt="初开">
                 </div>
                 <div class="caption">
-                    <h4>蒙初开 </h4>
+                    <h4>初开 </h4>
                     <h5 class="positionInfos"></h5>
 
                     <p> 踩坑，爬出来，再掉下去，再爬出来，然后成长。 </p>
@@ -136,10 +134,10 @@
         <div class="col-xs-6 col-md-3 col-2 whoInfo-box">
             <div class="who-info">
                 <div class="thumbnail pic-avatar">
-                    <img src="${TINY_CONTEXT_PATH}/img/about/wy.png" alt="王莹">
+                    <img src="${TINY_CONTEXT_PATH}/img/about/wy.png" alt="啊莹">
                 </div>
                 <div class="caption">
-                    <h4>王莹 </h4>
+                    <h4>啊莹 </h4>
                     <h5 class="positionInfos"></h5>
 
                     <p>最美好的时刻，不是那些风平浪静的日子，而是在逆境中奋进的过程。</p>
@@ -149,10 +147,10 @@
         <div class="col-xs-6 col-md-3 col-2 whoInfo-box">
             <div class="who-info">
                 <div class="thumbnail pic-avatar">
-                    <img src="${TINY_CONTEXT_PATH}/img/about/cp.png" alt="陈朋">
+                    <img src="${TINY_CONTEXT_PATH}/img/about/cp.png" alt="啊朋">
                 </div>
                 <div class="caption">
-                    <h4>陈朋 </h4>
+                    <h4>啊朋 </h4>
                     <h5 class="positionInfos"></h5>
 
                     <p> 多学多做多想多实践。 </p>
