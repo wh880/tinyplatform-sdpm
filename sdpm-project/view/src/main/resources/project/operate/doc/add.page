@@ -144,11 +144,11 @@
             </div>
         #end
         #@elementItem(elementId="fileBox" eleItemClass="hide")
-            #@sdpmItem("附件")
-                #@formControlDiv("col-8")
-                    #fileWithInput("file-1")
-                #end
-            #end
+            <div class="col-12">
+                <div class="col-2 text-r"><label>附件：</label></div>
+                <div class="col-6">
+                    #mulUploadFile()
+            </div>
         #end
         #@elementItem(elementId="contentBox" eleItemClass="hide")
             #@sdpmItem("文档正文")

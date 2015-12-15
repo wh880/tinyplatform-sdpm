@@ -219,7 +219,11 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
     public ProjectTask findTaskStory(Integer taskId) {
         Select select = select(PROJECT_TASKTABLE.ALL, PRODUCT_STORY_SPECTABLE.STORY_SPEC).from(PROJECT_TASKTABLE)
                 .join(Join.leftJoin(
-                        PROJECT_STORYTABLE, PROJECT_TASKTABLE.TASK_ID.eq(PROJECT_STORYTABLE.STORY_ID)
+                        PROJECT_STORYTABLE,
+                        and(
+                                PROJECT_TASKTABLE.TASK_ID.eq(PROJECT_STORYTABLE.STORY_ID),
+                                PROJECT_TASKTABLE.TASK_PROJECT.eq(PROJECT_STORYTABLE.PROJECT_ID)
+                        )
                         )
                 )
                 .join(Join.leftJoin(

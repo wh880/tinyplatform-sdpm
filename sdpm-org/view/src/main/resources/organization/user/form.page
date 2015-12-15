@@ -1,5 +1,5 @@
 #!set(activeTitle="编辑用户",activeMenuId=currentPageId)
-<style>
+<style type="text/css">
     .titleNamesty {
         background: #f9f9f8;
         border: #eee 1px solid;
@@ -26,8 +26,7 @@
                         #@elementItem()
                             #@colLabel("col-3")<span class="c-red">*</span>真实姓名：#end
                             #@formControlDiv("col-6")
-                                #tinyInput(
-                                    "text" "orgUserRealName" user?.orgUserRealName {"datatype":"*","nullmsg":
+                                #tinyInput("text" "orgUserRealName" user?.orgUserRealName {"datatype":"*1-20","nullmsg":
                                     "用户真实姓名不能为空！","id":"org_user_real_name","class":
                                     "input-text"})
                             #end
@@ -36,8 +35,7 @@
                         #@elementItem()
                             #@colLabel("col-3")所属部门：#end
                             #@formControlDiv("col-6")
-                                #TzTreeSelect(
-                                    "orgDeptId" dept?.orgDeptId {"datatype":"*","class":"input-text",
+                                #TzTreeSelect("orgDeptId" dept?.orgDeptId {"datatype":"*","class":"input-text",
                                     "data-URL":TINY_CONTEXT_PATH+adminPath+"/org/dept/data?check=n"} )
                             #end
                             #@validateDiv("col-3")#end
@@ -76,8 +74,7 @@
                             #@colLabel("col-3")加入日期：#end
                             #@formControlDiv("col-6")
                                 #@tinyDateInput(
-                                    "orgUserJoin" user?.orgUserJoin  "YYYY-MM-DD" {"style":"width:200px",
-                                    "placeholder":""})#end
+                                    "orgUserJoin" user?.orgUserJoin  "YYYY-MM-DD" {"style":"width:200px"})#end
                             #end
                             #@validateDiv("col-3")#end
                         #end
@@ -99,9 +96,7 @@
                             #@formControlDiv("col-6")
                                 #tinyInput(
                                     "text" "orgUserAccount" user?.orgUserAccount {"datatype":"/^([a-z]|[A-Z]|[0-9]){1,20}$/","nullmsg":"请输入用户名！",
-                                    "id":"请求标题","class":
-                                    "input-text","ajaxurl":TINY_CONTEXT_PATH+adminPath+
-                                    "/org/user/userNameCheck?orgUserId="+user?.orgUserId})
+                                    "id":"请求标题","class":"input-text","ajaxurl":TINY_CONTEXT_PATH+adminPath+"/org/user/userNameCheck?orgUserId="+user?.orgUserId})
                             #end
                             #@validateDiv("col-3")#end
                         #end
@@ -110,9 +105,7 @@
                             #@formControlDiv("col-6")
                                 #tinyInput(
                                     "text" "orgUserEmail" user?.orgUserEmail {"placeholder":"@","datatype":"e",
-                                    "nullmsg":"请输入邮箱！",
-                                    "class":
-                                    "input-text"})
+                                    "nullmsg":"请输入邮箱！", "class": "input-text"})
                             #end
                             #@validateDiv("col-3")#end
                         #end
@@ -147,7 +140,7 @@
                         #@elementItem()
                             #@colLabel("col-3")源代码账号：#end
                             #@formControlDiv("col-6")
-                                #tinyInput("text" "orgUserSubmitter" user?.orgUserSubmitter{"class":"input-text"})
+                                #tinyInput("text" "orgUserSubmitter" user?.orgUserSubmitter {"datatype":"*1-20","ignore":"ignore"})
                             #end
                             #@validateDiv("col-3")#end
                         #end
@@ -158,7 +151,7 @@
                             #@colLabel("col-3")Skype：#end
                             #@formControlDiv("col-6")
                                 #tinyInput(
-                                    "text" "orgUserSkype" user?.orgUserSkype{"class":"input-text"})
+                                    "text" "orgUserSkype" user?.orgUserSkype {"datatype":"*1-20","ignore":"ignore"})
                             #end
                             #@validateDiv("col-3")#end
                         #end
@@ -166,7 +159,7 @@
                             #@colLabel("col-3")QQ：#end
                             #@formControlDiv("col-6")
                                 #tinyInput(
-                                    "text" "orgUserQQ" user?.orgUserQQ {"class": "input-text"})
+                                    "text" "orgUserQQ" user?.orgUserQQ {"datatype":"*1-20","ignore":"ignore"})
                             #end
                             #@validateDiv("col-3")#end
                         #end
@@ -174,9 +167,7 @@
                             #@colLabel("col-3")微信：#end
                             #@formControlDiv("col-6")
                                 #tinyInput(
-                                    "text" "orgUserYahoo" user?.orgUserYahoo {"placeholder":"",
-                                    "id":"name","class":
-                                    "input-text"})
+                                    "text" "orgUserYahoo" user?.orgUserYahoo {"datatype":"*1-20","ignore":"ignore"})
                             #end
                             #@validateDiv("col-3")#end
                         #end
@@ -184,9 +175,7 @@
                             #@colLabel("col-3")Gtalk：#end
                             #@formControlDiv("col-6")
                                 #tinyInput(
-                                    "text" "orgUserGTalk" user?.orgUserGTalk {"placeholder":"",
-                                    "id":"name","class":
-                                    "input-text"})
+                                    "text" "orgUserGTalk" user?.orgUserGTalk {"datatype":"*1-20","ignore":"ignore","id":"name","class":"input-text"})
                             #end
                             #@validateDiv("col-3")#end
                         #end
@@ -194,9 +183,7 @@
                             #@colLabel("col-3")旺旺：#end
                             #@formControlDiv("col-6")
                                 #tinyInput(
-                                    "text" "orgUserWangWang" user?.orgUserWangWang {"placeholder":"",
-                                    "id":"name","class":
-                                    "input-text"})
+                                    "text" "orgUserWangWang" user?.orgUserWangWang {"datatype":"*1-20","ignore":"ignore"})
                             #end
                             #@validateDiv("col-3")#end
                         #end
@@ -204,7 +191,7 @@
                             #@colLabel("col-3")手机：#end
                             #@formControlDiv("col-6")
                                 #tinyInput(
-                                    "text" "orgUserMobile" user?.orgUserMobile {"placeholder":"","class":"input-text"})
+                                    "text" "orgUserMobile" user?.orgUserMobile {"datatype":"*1-20","ignore":"ignore"})
                             #end
                             #@validateDiv("col-3")#end
                         #end
@@ -212,9 +199,7 @@
                             #@colLabel("col-3")电话：#end
                             #@formControlDiv("col-6")
                                 #tinyInput(
-                                    "text" "orgUserPhone" user?.orgUserPhone{"placeholder":"",
-                                    "id":"name","class":
-                                    "input-text"})
+                                    "text" "orgUserPhone" user?.orgUserPhone {"datatype":"*1-20","ignore":"ignore"})
                             #end
                             #@validateDiv("col-3")#end
                         #end
@@ -222,9 +207,7 @@
                             #@colLabel("col-3")通讯地址：#end
                             #@formControlDiv("col-6")
                                 #tinyInput(
-                                    "text" "orgUserAddress" user?.orgUserAddress{"placeholder":"",
-                                    "id":"name","class":
-                                    "input-text"})
+                                    "text" "orgUserAddress" user?.orgUserAddress {"datatype":"*1-20","ignore":"ignore"})
                             #end
                             #@validateDiv("col-3")#end
                         #end
@@ -232,9 +215,7 @@
                             #@colLabel("col-3")邮编：#end
                             #@formControlDiv("col-6")
                                 #tinyInput(
-                                    "text" "orgUserZipCode" user?.orgUserZipCode{"placeholder":"",
-                                    "id":"name","class":
-                                    "input-text"})
+                                    "text" "orgUserZipCode" user?.orgUserZipCode {"datatype":"*1-20","ignore":"ignore"})
                             #end
                             #@validateDiv("col-3")#end
                         #end

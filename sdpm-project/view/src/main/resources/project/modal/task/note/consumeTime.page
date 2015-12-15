@@ -1,346 +1,109 @@
-#!set(activeTitle="建任务",activeMenuId=currentPageId)
-#set(name="task")
-#@layout(project)
-#end
-#@tinyForm(
-    "addTaskForm" TINY_CONTEXT_PATH+adminPath+"/project/task/save" "post" {"class":"test","enctype":
-    "multipart/form-data"})
-<input type="hidden" name="lastAddress" value=""/>
-<div class="pageleftpart">
-    <div class="infoContent">
-        <input type="hidden" name="taskOpenBy" value="${userUtils.getUserId()}"/>
-
-        <p class="titleName">建任务</p>
-        #@elementItem()
-            #@sdpmItem("所属项目")
-                #tinyInput("hidden" "taskProject" currentProjectId)
-                ${projectOperate.getProject(currentProjectId).projectName}
+#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/project/task/consumeTime" "post" {"class":"test"})
+    <input type="hidden" name="taskId" value="${task?.taskId}"/>
+    #@tableBorder()
+        #@thead()
+            #@tr()
+                #@thW("60")ID#end
+                #@thW("160")日期#end
+                #@thW("100")耗时#end
+                #@thW("100")剩余#end
+                #@thW()工作内容#end
             #end
         #end
-        #@elementItem()
-            #@sdpmItem("所属模块")
-                #@Tselect2F()
-                    #@Tselect2Body("taskModule" moduleId {"class":"input-text select2"})
-                        <option value="">/</option>
-                        #foreach(m : moduleList)
-                            <option value=${m.moduleId}>${m.moduleName}</option>
-                        #end
+        #@tbody()
+            #set(count=systemEffortList.size())
+            #foreach(s:systemEffortList)
+                #@tr()
+                    #@td()${sFor.index}#end
+                    #@td()${formatDate(s.effortDate,"yyyy-MM-dd")}#end
+                    #@td()${s.effortConsumed}小时#end
+                    #@td()${s.effortLeft}小时#end
+                    #@td()${s.effortWork}#end
+                #end
+            #end
+            #set(nowDate=now())
+            #foreach(i:[0..4])
+                #@tr()
+                    #@td()    ${count+i+1}    #end
+                    #@td()
+                        #@tinyDateInput("list["+i+"].effortDate" formatDate(nowDate,"yyyy-MM-dd")  "YYYY-MM-DD" {"style":"width:150px","datatype":"*","placeholder": "选择日期"})#end
+##                        #@validateDiv("col-2")#end
+                    #end
+                    #@td()
+                        #tinyInput("text" "list["+i+"].effortConsumed")
+                    #end
+                    #@td()
+                        #tinyInput("text" "list["+i+"].effortLeft")
+                    #end
+                    #@td()
+                        #tinyInput("text" "list["+i+"].effortWork")
                     #end
                 #end
             #end
         #end
-        #@elementItem()
-            #@sdpmItem("任务类型" "*")
-                #@Tselect2F()
-                    #@Tselect2Body(
-                        "taskType" copyTask?.taskType {"class":"input-text select2","placeholder":"请选择任务类型","datatype":"*",
-                        "nullmsg":"任务类型不能为空！"})
-                        <option value=""></option>
-                        #foreach(item : getDict("taskType"))
-                            <option value="${item?.value}">${item?.text}</option>
-                        #end
-                    #end
-                #end
-            #end
-        #end
-        #@elementItem()
-            #@sdpmItem("指派给")
-                #@Tselect2F()
-                    #Tselect2Ajax("taskAssignedTo" copyTask?.taskAssignedTo TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam?projectId="+currentProjectId
-                    {"dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询指派人","nullmsg":"请选择指派人！"})
-                    #@Tselect2Fix()
-                        #set(m=menuManager.getMenu("organizationAddUser"))
-                        #if(m)
-                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
-                        #end
-                        #set(m=menuManager.getMenu("organizationUser"))
-                        #if(m)
-                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
-                        #end
-                    #end
-                #end
-            #end
-        #end
-        <script type="text/javascript">
-            $(function () {
-                $("select[name=taskAssignedTo]").on("change", function () {
-                    $("input[name=taskAssignedDate]").val(moment().format('YYYY-MM-DD'));
-                });
-            });
-        </script>
-        <input type="hidden" name="taskAssignedDate">
-        #@elementItem()
-            #@sdpmItem("相关需求")
-                #if(storyList)
-                    #@Tselect2F()
-                        #@Tselect2Body("taskStory" storyId==null?"":storyId {"class":"input-text select2"})
-                            #foreach(s:storyList)
-                                <option value="${s.storyId}">${s.storyId}
-                                    ：${s.storyTitle}（优先级：${s.storyPri}，预计工时:${s.storyEstimate}）
-                                </option>
-                            #end
-                        #end
-                        #@Tselect2Fix()
-                            <a href="${TINY_CONTEXT_PATH+adminPath}/product/story/addstory">新增</a>
-                            <a href="${TINY_CONTEXT_PATH+adminPath}/product/story/search" class="r">全部</a>
-                        #end
-                    #end
-                #end
-            #end
-        #end
-        #@elementItem()
-            #@sdpmItem("任务名称" "*")
-                #@formControlDiv()
-                    #tinyInput(
-                        "text" "taskName" "" {"placeholder":"任务名称","datatype":"*","nullmsg":"任务名称不能为空！",
-                        "class":"input-text"})
-                #end
-            #end
-        #end
-        #@elementItem()
-            <div class="col-12">
-                <div class="col-2 text-r"><label>任务描述：</label></div>
-                <div class="col-7">
-                    #@Teditor("taskDesc" "taskDesc")${copyTask?.taskDesc}#end
-                </div>
-            </div>
-        #end
-
-        #@elementItem()
-            #@sdpmItem("优先级")
-                #@Tselect2F()
-                    #@Tselect2Body(
-                        "taskPri" copyTask?.taskPri {"class":"input-text","minimumResultsForSearch":"Infinity"})
-                        #foreach(item : getDict("taskPri"))
-                            <option value="${item?.value}">${item?.text}</option>
-                        #end
-                    #end
-                ##填写任意内容，侦听需重新填加 A侦听已内置
-                #end
-            #end
-        #end
-        #@elementItem()
-            #@sdpmItem("预计开始")
-                #@formControlDiv()
-                    <div class="input-group">
-                        #@tinyDateInput(
-                    "taskEstStared" formatDate(copyTask?.taskEstStared,"yyyy-MM-dd") "YYYY-MM-DD" )#end
-                    </div>
-                #end
-            #end
-        #end
-        #@elementItem()
-            #@sdpmItem("截止日期")
-                #@formControlDiv()
-                    <div class="input-group">
-                        #@tinyDateInput(
-                            "taskDeadLine" formatDate(copyTask?.taskDeadLine,"yyyy-MM-dd") "YYYY-MM-DD" )#end
-                    </div>
-                #end
-            #end
-        #end
-        #@elementItem()
-            #@sdpmItem("最初预计" "*")
-                #@formControlDiv()
-                    <div class="input-group">
-                        #tinyInput("text" "taskEstimate" copyTask?.taskEstimate {"placeholder":"最初预计","datatype":
-                            "/^[0-9]+(\.[0-9]{1,2})?$/","nullmsg":"请输入最初预计", "aria-describedby":"basic-addon2"})
-                        <span class="input-group-addon" id="basic-addon2">小时</span>
-                    </div>
-                #end
-            #end
-        #end
-        #@elementItem()
-            #@sdpmItem("抄送给")
-                #@Tselect2F()
-                    #Tselect2Ajax("taskMailToArray" story?.taskMailTo TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
-                    {"id":"storyMailtoSelect","dataId":"orgUserId","dataText":"orgUserRealName",
-                        "placeholder":"查询抄送人","nullmsg":"请选择抄送人！","multiple":"multiple"})
-                ##填写任意内容，侦听需重新填加 A侦听已内置
-                    #@Tselect2Fix()
-                        #set(m=menuManager.getMenu("organizationAddUser"))
-                        #if(m)
-                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
-                        #end
-                        #set(m=menuManager.getMenu("organizationUser"))
-                        #if(m)
-                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
-                        #end
-                    #end
-                #end
-            #end
-        #end
-        #@elementItem()
-            <div class="col-12">
-                <div class="col-2 text-r"><label>附件：</label></div>
-                <div class="col-7">
-                    #mulUploadFile()
-                </div>
-            </div>
-        #end
-
-        #@elementItem()
-            #@colLabel()添加之后：#end
-            #@formControlDiv("skin-minimal col-5")
-                #@Tradioes("direction" "2" )
-                    #@Tradio("1")继续为该需求添加任务#end
-                    #@Tradio("2")返回任务列表#end
-                    #@Tradio("3")返回需求列表#end
-                #end
-            #end
-            #@validateDiv("col-2")#end
-        #end
-
-
-        #@elementItem()
-            <div class="col-12">
-                <div class="col-2 text-r"><label>备注：</label></div>
-                <div class="col-7">
-                    #@Teditor("comment" "comment" {"initialFrameHeight":"150"})#end
-                </div>
-            </div>
-        #end
-        <br/>
-        #@elementItem()
-            <div class="col-12">
-                <div class="col-5">
-
-                </div>
-                <div class="col-1">
-                    <button style="float: left" type="submit" id="submit2" class="commitBtn">保存</button>
-                </div>
-                <div class="col-1">
-                    #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")取消#end
-                </div>
-                <div class="col-5"></div>
-            </div>
-        #end
+    #end
+    #@td()
+    <div class="col-12">
+        <div class="col-5"></div>
+        <div class="col-1">
+            <button style="float: left" type="submit" id="submit2" class="commitBtn">保存</button>
+        </div>
+        <div class="col-1">
+            #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")取消#end
+        </div>
+        <div class="col-5"></div>
     </div>
-
-    <br>
-</div>
+    #end
 #end
 
 
 <script type="text/javascript">
     $(function () {
-        $("form[name=addTaskForm]").Validform({
-            tiptype: function (msg, o, cssctl) {
-                var objtip = $(o.obj).closest(".form-item-body").next(".validmsg");
-                cssctl(objtip, o.type);
-                objtip.text(msg);
-            }
-        });
-    });
-</script>
-<script>
-    Date.prototype.format =function(format)
-    {
-        var o = {
-            "M+" : this.getMonth()+1, //month
-            "d+" : this.getDate(), //day
-            "h+" : this.getHours(), //hour
-            "m+" : this.getMinutes(), //minute
-            "s+" : this.getSeconds(), //second
-            "q+" : Math.floor((this.getMonth()+3)/3), //quarter
-            "S" : this.getMilliseconds() //millisecond
-        }
-        if(/(y+)/.test(format)) format=format.replace(RegExp.$1,
-                (this.getFullYear()+"").substr(4- RegExp.$1.length));
-        for(var k in o)if(new RegExp("("+ k +")").test(format))
-            format = format.replace(RegExp.$1,
-                    RegExp.$1.length==1? o[k] :
-                            ("00"+ o[k]).substr((""+ o[k]).length));
-        return format;
-    }
-
-
-    $(document).ready(function(){
-
-        var oldvalue = "";
-        $("input[name='taskEstStared']").bind("click",function(){
-            oldvalue = $(this).val();
-
-        });
-
-        $("input[name='taskEstStared']").bind("blur input propertychange",function(){
-
-            var newvalue = $(this).val();
-
-            if(newvalue!=""&&newvalue!=oldvalue){
-                if($("input[name='endTime']:checked")[0]){
-                    $("input[name='endTime']:checked").trigger('click');
+        $('form[name=batchAddForm]').Validform({
+            beforeSubmit: function (form) {
+                var showBreak = false;
+                $(form).find("tr.this-data-row").each(function (index) {
+                    var that = this;
+                    var dateInput=$(that).find("input:first");
+                    var dateVal = Boolean(dateInput.val());
+                    var hasVal = false;
+                    $(that).find("input[type=text]:not(:first)").each(function (index1) {
+                        var thisVal = Boolean($(this).val());
+                        $(this).removeClass("Validform_error");
+                        dateInput.removeClass("Validform_error");
+                        if(thisVal&&dateVal==false) {
+                            showBreak = true;
+                            dateInput.addClass("Validform_error");
+                            dateInput.get(0).focus();
+                            layer.msg("日期不能为空");
+                            return false;
+                        }
+                        if (index1 == 0) {
+                            hasVal = thisVal;
+                        } else {
+                            if (thisVal != hasVal) {
+                                showBreak = true;
+                                var focus=this;
+                                var focusIndex=index1+2;
+                               if(thisVal){
+                                   focus=$(this).closest("td").prev("td").find("input").get(0);
+                                   focusIndex--;
+                               }
+                                $(focus).addClass("Validform_error");
+                                focus.focus();
+                                layer.msg($(form).find("th").eq(focusIndex).html()+"不能为空");
+                                return false;
+                            }
+                        }
+                    });
+                    if (showBreak) {
+                        return false;
+                    }
+                });
+                if (showBreak) {
+                    return false;
                 }
             }
         });
-
-        var oldvalueend = "";
-        $("input[name='taskDeadLine']").bind("click",function(){
-            oldvalueend = $(this).val();
-
-        });
-        $("input[name='taskDeadLine']").bind("blur",function(){
-            var newvalueend = $(this).val();
-            var dateend =new Date(Date.parse(newvalueend.replace(/-/g, "/")));
-            var datestart = new Date(Date.parse($("input[name='taskEstStared']").val().replace(/-/g, "/")));
-            if(newvalueend!=""&&newvalueend!=oldvalueend){
-                if(dateend<datestart){
-                    $("input[name='taskDeadLine']").val(oldvalueend);
-                    alert("截止日期必须大于开始日期");
-
-                }else{
-                    $("input[name='endTime']:checked").attr("checked",false);
-                }
-
-            }
-        });
-
-
-
-
-        $("input[name='endTime']").each(function(){
-
-            $(this).unbind("click").bind("click",function(){
-
-                var start =	$("input[name='taskEstStared']").val();
-
-
-                if(start!=""){
-                    start = new Date(Date.parse(start.replace(/-/g, "/")));
-
-                    var time = $(this).val();
-                    var end = new Date();
-                    if(time=="one-week"){
-                        end = new Date(start.getFullYear(),start.getMonth(),start.getDate()+7);
-                    }
-                    if(time=="two-week"){
-                        end = new Date(start.getFullYear(),start.getMonth(),start.getDate()+14);
-                    }
-                    if(time=="one-month"){
-                        end = new Date(start.getFullYear(),start.getMonth()+1,start.getDate());
-                    }
-                    if(time=="two-month"){
-                        end = new Date(start.getFullYear(),start.getMonth()+2,start.getDate());
-                    }
-                    if(time=="half-year"){
-                        end = new Date(start.getFullYear(),start.getMonth()+6,start.getDate());
-                    }
-                    if(time=="year"){
-                        end = new Date(start.getFullYear()+1,start.getMonth(),start.getDate());
-                    }
-                    $("input[name='taskDeadLine']").val(end.format("yyyy-MM-dd"));
-                }else{
-                    this.checked=false;
-                    alert("请选择开始日期");
-
-                }
-
-
-            });
-
-        });
-
-
-    });
-
+    })
 </script>
