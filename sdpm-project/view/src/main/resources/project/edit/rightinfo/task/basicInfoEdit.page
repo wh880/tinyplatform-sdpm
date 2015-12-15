@@ -9,8 +9,13 @@
                     #@th()所属项目#end
                     #@td()
                         #@formControlDiv("col-10")
-                            #if(projectName)
-                                ${projectName}
+                            #@Tselect2F()
+                                #@Tselect2Body("taskProject" task.taskProject {"class":"input-text select2"})
+                                    <option value=""></option>
+                                    #foreach(m : projectList)
+                                        <option value="${m.projectId}">${m.projectName}</option>
+                                    #end
+                                #end
                             #end
                         #end
                     #end

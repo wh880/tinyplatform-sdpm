@@ -573,11 +573,12 @@ public class ProjectTaskAction extends BaseController {
     @RequestMapping("/basicInfoEdit")
     public String basicInfoEdit(Integer taskId, Model model) {
         ProjectTask task = taskService.findTaskById(taskId);
-        String projectName = projectService.findProjectById(task.getTaskProject()).getProjectName();
-
+//        String projectName = projectService.findProjectById(task.getTaskProject()).getProjectName();
+        List<Project>  projectList = projectService.getUserProjectList(userUtils.getUserId());
         List<ProductStory> storyList = projectStoryService.findStoryByProject(task.getTaskProject());
         model.addAttribute("task", task);
-        model.addAttribute("projectName", projectName);
+        model.addAttribute("projectList", projectList);
+//        model.addAttribute("projectName", projectName);
         model.addAttribute("teamList", userService.findTeamUserListByProjectId(task.getTaskProject()));
         model.addAttribute("moduleList", generateModuleList(task.getTaskProject()));
         model.addAttribute("storyList", storyList);
@@ -618,7 +619,7 @@ public class ProjectTaskAction extends BaseController {
      * 改变任务状态 用于Ajax请求
      *
      * @param task
-     * @param content    备注内容
+     * @param comment    备注内容
      * @param taskStatus 改变的状态
      * @return
      */
