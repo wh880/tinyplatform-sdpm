@@ -30,7 +30,6 @@
                                                     $("#caseGroup").html(data);
                                                 },
                                                 error: function (res) {
-                                                    alert("失败");
                                                 }
                                             });
                                             $(".operationbar a").removeClass("active_btn");

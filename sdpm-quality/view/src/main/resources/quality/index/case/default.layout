@@ -20,7 +20,6 @@
                     window.location.reload();
                 },
                 error: function (res) {
-                    alert("失败");
                 }
             });
         }
@@ -54,7 +53,6 @@
                                                       $("#caseGroup").html(data);
                                                   },
                                                   error: function(res){
-                                                      alert("失败");
                                                   }
                                               });
                                               $(this).parent().children(".active_btn").removeClass("active_btn");
