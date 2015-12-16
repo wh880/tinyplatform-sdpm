@@ -5,8 +5,4 @@
 
     <bean id="stdProcessor" class="org.tinygroup.sdpm.common.util.std.processor.StdFieldProcessor"></bean>
 
-    <bean id="obtainProcessor" class="org.tinygroup.sdpm.common.log.obtain.processor.ObtainFileProcessor"></bean>
-
-    <bean id="obtainHandleImpl" class="org.tinygroup.sdpm.common.log.obtain.impl.ObtainHandleImpl"></bean>
-
 </beans>
