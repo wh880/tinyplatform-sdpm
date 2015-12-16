@@ -519,3 +519,7 @@ table.table.filelist-table{border:#ddd 1px solid;}
 
 .adjustTable tbody tr th{width:40%;text-align:right;}*/
 .table th{white-space: nowrap}
+.ztree li{overflow: auto;}
+.navtitle{white-space: nowrap}
+.can-edit .ztree li a{padding-right:60px}
+.can-edit .ztree li a:hover{padding-right:0;}

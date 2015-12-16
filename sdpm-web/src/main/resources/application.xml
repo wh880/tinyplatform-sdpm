@@ -3,7 +3,7 @@
     <application-properties>
         <file path="/sdpm.properties"></file>
         <property name="BASE_PACKAGE" value="org.tinygroup"/>
-        <property name="DEBUG_MODE" value="false"/>
+        <property name="DEBUG_MODE" value="true"/>
         <property name="TINY_THEME" value="default"/>
         <property name="UPLOAD_ACTION_URL" value="/ajaxUploadImage"/>
         <!--缓存配置-->
@@ -33,10 +33,10 @@
         <application-processor bean="tinyListenerProcessor"/>
         <!--<application-processor bean="fileMonitorProcessor"/>-->
         <application-processor bean="tinyTemplateConfigProcessor"/>
-        <!--数据库安装-->
-        <application-processor bean="databaseInstallerProcessor"/>
-        <!-- 系统数据初始化 -->
-        <application-processor bean="initDataApplicationProcessor"/>
+        <!--&lt;!&ndash;数据库安装&ndash;&gt;-->
+        <!--<application-processor bean="databaseInstallerProcessor"/>-->
+        <!--&lt;!&ndash; 系统数据初始化 &ndash;&gt;-->
+        <!--<application-processor bean="initDataApplicationProcessor"/>-->
         <application-processor bean="stdProcessor"/>
         <application-processor bean="dictLoadProcessor"/>
     </application-processors>
@@ -66,6 +66,18 @@
             <class-path path="D:\java\eclipseworkspace\sdpm\sdpm-common\view\src\main\resources"/>
             <class-path path="D:\java\eclipseworkspace\sdpm\sdpm-project\view\src\main\resources"/>
             <class-path path="D:\java\eclipseworkspace\sdpm\sdpm-org\view\src\main\resources"/>
+
+            <!--ajian -->
+            <class-path path="D:\javaworkspace\sdpm\sdpm-product\view\src\main\resources"/>
+            <class-path path="D:\javaworkspace\sdpm\sdpm-quality\view\src\main\resources"/>
+            <class-path path="D:\javaworkspace\sdpm\sdpm-project\view\src\main\resources"/>
+            <class-path path="D:\javaworkspace\sdpm\sdpm-system\view\src\main\resources"/>
+            <class-path path="D:\javaworkspace\sdpm\sdpm-document\view\src\main\resources"/>
+            <class-path path="D:\javaworkspace\sdpm\sdpm-productLine\view\src\main\resources"/>
+            <class-path path="D:\javaworkspace\sdpm\sdpm-statistic\view\src\main\resources"/>
+            <class-path path="D:\javaworkspace\sdpm\sdpm-common\view\src\main\resources"/>
+            <class-path path="D:\javaworkspace\sdpm\sdpm-project\view\src\main\resources"/>
+            <class-path path="D:\javaworkspace\sdpm\sdpm-org\view\src\main\resources"/>
         </class-paths>
         <include-patterns>
             <include-pattern pattern="org\.tinygroup\.(.)*\.jar"/>
