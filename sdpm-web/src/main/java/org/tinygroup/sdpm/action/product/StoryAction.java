@@ -240,9 +240,12 @@ public class StoryAction extends BaseController {
         }
         List<ProductStory> storyList = new ArrayList<ProductStory>();
         if(stories[0].getStoryStatus()!=null){
+            String status = stories[0].getStoryStatus();
             for(int i =0; i<stories.length; i++){
-                if(Integer.parseInt(stories[i].getStoryStatus())!=0&&Integer.parseInt(stories[i].getStoryStatus())!=3){
-                    storyList.add(stories[i]);
+                ProductStory story = storyService.findStory(stories[i].getStoryId());
+                if(Integer.parseInt(story.getStoryStatus())==0||Integer.parseInt(story.getStoryStatus())==3){
+                    story.setStoryStatus(status);
+                    storyList.add(story);
                 }
             }
         }else{
