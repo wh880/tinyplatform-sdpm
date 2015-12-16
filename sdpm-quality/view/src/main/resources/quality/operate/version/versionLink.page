@@ -40,10 +40,8 @@
 					<div class="f col-2">
 						<input type="button" value="全选" class="btn btn-default btn-primary" 
 						onclick="selectAllNullorReserve('idCheck','全选');" />
-						<div class="col-0">&nbsp&nbsp</div>
 						<input type="button" value="反选" class="btn btn-default btn-primary"
 						 onclick="selectAllNullorReserve('idCheck','反选');" />
-						<div class="col-0">&nbsp&nbsp</div>
 						<div class="dropdown" style="display:inline-block">
 							#@linkOperation("link" TINY_CONTEXT_PATH+adminPath+"/quality/version/makeLink?testversionId="+testversionId)
 							<div><input type="button" value="保存" class="btn btn-default btn-primary" /></div>

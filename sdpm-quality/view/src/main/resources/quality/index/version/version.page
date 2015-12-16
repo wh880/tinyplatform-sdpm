@@ -31,12 +31,8 @@
             <div class="f col-3">
                 <input type="button" value="全选" class="btn btn-default btn-primary col-2"
                        onclick="selectAllNullorReserve('idCheck','全选');"/>
-
-                <div class="col-0">&nbsp&nbsp</div>
                 <input type="button" value="反选" class="btn btn-default btn-primary col-2"
                        onclick="selectAllNullorReserve('idCheck','反选');"/>
-
-                <div class="col-0">&nbsp&nbsp</div>
 
                 <div class="col-2">
                     #@mulOperation("batchDelete" TINY_CONTEXT_PATH+adminPath+"/quality/version/ajax/batchDelete")

@@ -27,10 +27,8 @@
 			<div class="f col-3">
 						<input type="button" value="全选" class="btn btn-default btn-primary" 
 						onclick="selectAllNullorReserve('idCheck','全选');" />
-						<div class="col-0">&nbsp</div>
 						<input type="button" value="反选" class="btn btn-default btn-primary"
 						 onclick="selectAllNullorReserve('idCheck','反选');" />
-						<div class="col-0">&nbsp</div>
 						<div style="display:inline-block">
 							#@mulOperation("muldelete" TINY_CONTEXT_PATH+adminPath+"/quality/testCase/batchDelete")
 							<a href="javascript:;" class="btn radius btn-danger "><i class="icon-trash"></i>&nbsp;批量删除</a>#end
