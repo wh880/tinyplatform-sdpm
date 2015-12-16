@@ -235,11 +235,21 @@ public class StoryAction extends BaseController {
     @ResponseBody
     @RequestMapping("/updateBatch")
     public boolean updateBatch(@RequestBody ProductStory[] stories) {
-
         if (stories.length == 0 || stories == null) {
             return false;
         }
-        for (ProductStory story : stories) {
+        List<ProductStory> storyList = new ArrayList<ProductStory>();
+        if(stories[0].getStoryStatus()!=null){
+            for(int i =0; i<stories.length; i++){
+                if(Integer.parseInt(stories[i].getStoryStatus())!=0&&Integer.parseInt(stories[i].getStoryStatus())!=3){
+                    storyList.add(stories[i]);
+                }
+            }
+        }else{
+            storyList = Arrays.asList(stories);
+        }
+
+        for (ProductStory story : storyList) {
             storyService.updateStory(story);
         }
         return true;
@@ -507,6 +517,7 @@ public class StoryAction extends BaseController {
                                     ProductStory story,
                                     String type,
                                     String choose,
+                                    String moduleId,
                                     String groupOperate,
                                     SearchInfos searchInfos,
                                     @RequestParam(required = false,defaultValue = "storyId")String order,
@@ -521,6 +532,9 @@ public class StoryAction extends BaseController {
         ConditionCarrier carrier = new ConditionCarrier();
         StoryUtil.getStatusCondition(choose, carrier);
         if (story.getModuleId() != null && story.getModuleId() > 0) {
+            carrier.putModuleIn("productStory.moduleId", String.valueOf(story.getModuleId()));
+        }
+        if(!StringUtil.isBlank(moduleId)){
             carrier.putModuleIn("productStory.moduleId", String.valueOf(story.getModuleId()));
         }
         story.setModuleId(null);

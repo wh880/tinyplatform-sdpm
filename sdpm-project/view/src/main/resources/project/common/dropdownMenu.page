@@ -31,7 +31,7 @@
                 layer.msg("请选择项目");
                 return false;
             }
-            $.cookie("currentProjectId",projectId,{path:"/"});
+            $.cookie("currentProjectId",projectId,{path:"/",expires：365});
             window.location.reload();
         });
     });

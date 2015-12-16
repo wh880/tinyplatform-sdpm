@@ -29,6 +29,7 @@ import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.sdpm.system.service.inter.ProfileService;
 import org.tinygroup.sdpm.util.CookieUtils;
 import org.tinygroup.sdpm.util.LogUtil;
+import org.tinygroup.sdpm.util.ProductUtils;
 import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -199,7 +200,7 @@ public class DocAction extends BaseController {
         SystemModule module = new SystemModule();
         module.setModuleType("doc");
         DocumentDoc doc = docService.findDocById(docId);
-        List<Product> productList = productService.getProductByUser(UserUtils.getUserId(),0,null);
+        List<Product> productList = productService.getProductByUser(UserUtils.getUserId(),0,null,Product.CHOOSE_OPENED);
         List<Project> projectList = projectService.getUserProjectList(UserUtils.getUserId());
         List<SystemModule> listModule = moduleService.findModuleList(module);
         List<DocumentDocLib> libList = docService.findDocLibList(null);

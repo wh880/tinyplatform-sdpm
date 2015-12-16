@@ -6,7 +6,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
-import org.tinygroup.sdpm.dao.condition.CallBackFunction;
 import org.tinygroup.sdpm.dao.condition.ConditionCarrier;
 import org.tinygroup.sdpm.dao.condition.ConditionUtils;
 import org.tinygroup.sdpm.org.dao.OrgRoleUserDao;
@@ -23,7 +22,6 @@ import org.tinygroup.sdpm.project.dao.impl.ProjectBuildDaoImpl;
 import org.tinygroup.sdpm.quality.dao.QualityBugDao;
 import org.tinygroup.sdpm.quality.dao.QualityTestCaseDao;
 import org.tinygroup.sdpm.quality.dao.QualityTestTaskDao;
-import org.tinygroup.sdpm.system.dao.impl.util.ModuleUtil;
 import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.tinysqldsl.base.Condition;
 
@@ -59,7 +57,7 @@ public class ProductManagerImpl implements ProductManager {
     }
 
     public int update(Product product) {
-        if (1 != product.getAcl()) {
+        if (product.getAcl()!=null&&1 != product.getAcl()) {
             product.setProductWhiteList("");
         }
 
@@ -129,8 +127,8 @@ public class ProductManagerImpl implements ProductManager {
         return productDao.getProductNameByLineId(productLineId);
     }
 
-    public List<Product> getProductByUser(String userId, Integer delete, Integer productLineId) {
-        List<Product> productList = productDao.getProductByUser(userId, delete, productLineId);
+    public List<Product> getProductByUser(String userId, Integer delete, Integer productLineId,ConditionCarrier carrier) {
+        List<Product> productList = productDao.getProductByUser(userId, delete, productLineId,mergeCondition(carrier));
         Product product = new Product();
         product.setDeleted(delete);
         product.setAcl(Product.ACl_TEAM_AND_ROLE);
@@ -157,9 +155,9 @@ public class ProductManagerImpl implements ProductManager {
         return productDao.getProductByUserAndProductLineWithCount(userId, productLineId, delete,mergeCondition(carrier));
     }
 
-    public List<Integer> getTeamRoleProductLineIds(String userId, Integer delete) {
+    public List<Integer> getTeamRoleProductLineIds(String userId, Integer delete,ConditionCarrier carrier) {
         List<Integer> pIds = new ArrayList<Integer>();
-        for (Product product : getProductByUser(userId, delete, null)) {
+        for (Product product : getProductByUser(userId, delete, null,carrier)) {
             if(!pIds.contains(product.getProductLineId())){
                 pIds.add(product.getProductLineId());
             }

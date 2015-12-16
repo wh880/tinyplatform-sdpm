@@ -136,7 +136,7 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
                         PRODUCTTABLE.PRODUCT_CREATED_DATE.value(t.getProductCreatedDate()),
                         PRODUCTTABLE.PRODUCT_CREATED_VERSION.value(t.getProductCreatedVersion()),
                         PRODUCTTABLE.DELETED.value(t.getDeleted())).where(
-                        PRODUCTTABLE.PRODUCT_ID.eq(PRODUCTTABLE.PRODUCT_ID.equals(t.getProductId())));
+                        PRODUCTTABLE.PRODUCT_ID.eq(t.getProductId()));
             }
         });
     }
@@ -417,10 +417,9 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
         return getDslSession().fetchList(select, String.class);
     }
 
-    public List<Product> getProductByUser(String userId,Integer delete,Integer productLineId) {
-        Condition condition = null;
+    public List<Product> getProductByUser(String userId,Integer delete,Integer productLineId,Condition condition) {
         if(productLineId!=null){
-            condition = PRODUCTTABLE.PRODUCT_LINE_ID.eq(productLineId);
+            condition = condition==null?PRODUCTTABLE.PRODUCT_LINE_ID.eq(productLineId):and(condition,PRODUCTTABLE.PRODUCT_LINE_ID.eq(productLineId));
         }
         Select select = select(PRODUCTTABLE.ALL,PRODUCT_LINETABLE.PRODUCT_LINE_NAME.as("productLineName")).from(PRODUCTTABLE).join(
                 leftJoin(PRODUCT_LINETABLE,PRODUCTTABLE.PRODUCT_LINE_ID.eq(PRODUCT_LINETABLE.PRODUCT_LINE_ID))

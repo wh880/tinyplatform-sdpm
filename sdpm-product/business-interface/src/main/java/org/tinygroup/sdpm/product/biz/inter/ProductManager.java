@@ -101,13 +101,13 @@ public interface ProductManager {
      */
     List<String> getProductNameByLineId(Integer productLineId);
 
-    List<Product> getProductByUser(String userId, Integer delete, Integer productLineId);
+    List<Product> getProductByUser(String userId, Integer delete, Integer productLineId,ConditionCarrier carrier);
 
     List<Product> getProductByUserWithCount(String userId, Integer delete, boolean noRole ,ConditionCarrier carrier);
 
     List<Product> getProductByUserAndProductLineWithCount(String userId, Integer productLineId, Integer delete,ConditionCarrier carrier);
 
-    List<Integer> getTeamRoleProductLineIds(String userId, Integer delete);
+    List<Integer> getTeamRoleProductLineIds(String userId, Integer delete,ConditionCarrier carrier);
 
     /**
      * 根据输入名称查询

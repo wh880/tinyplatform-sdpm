@@ -38,9 +38,8 @@
                         contentType: 'application/json;charset=utf-8', //设置请求头信息
                         success: function (data) {
                         	if(data==true){
-                        		window.location.reload();
+                        		 $("#${tinytableid}").trigger("refresh");
                         	}
-                            
                         },
                         error: function (res) {
                             layer.msg("系统出错，请确认你的请求地址");
@@ -108,7 +107,7 @@
 <script>
     $(function(){
         $(".caseAdd").on("click",function(){
-            $.cookie('qualityProductId', "${cookieProductId}", {path: "/"});
+            $.cookie('qualityProductId', "${cookieProductId}", {path: "/",expires：365});
         });
     })
 </script>

@@ -17,6 +17,7 @@ import org.tinygroup.sdpm.project.service.inter.ProjectProductService;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.sdpm.statistic.dao.pojo.*;
 import org.tinygroup.sdpm.statistic.service.inter.StatisticService;
+import org.tinygroup.sdpm.util.ProductUtils;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -50,7 +51,7 @@ public class StatisticAction extends BaseController {
             if (deleted != null && deleted == 1) {
                 delete = deleted;
             }
-            List<Product> products = productService.getProductByUser(userUtils.getUserId(), delete, null);
+            List<Product> products = productService.getProductByUser(userUtils.getUserId(), delete, null, "");
             Map<Product, List<ProductPlan>> map = new HashMap<Product, List<ProductPlan>>();
             for (int i = 0, n = products.size(); i < n; i++) {
                 ProductPlan plan = new ProductPlan();

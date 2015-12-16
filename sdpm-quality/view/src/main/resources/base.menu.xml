@@ -90,7 +90,7 @@
               isShow="1" scope="testbugleft-tab">
 
         </menu>
-        <menu id="tbugReActived" name="激活的bug" href="/quality/bug?status=tbugReActived" icon="" sort="5"
+        <menu id="tbugReActived" name="重新激活" href="/quality/bug?status=tbugReActived" icon="" sort="5"
               isShow="1" scope="testbugleft-tab">
 
         </menu>

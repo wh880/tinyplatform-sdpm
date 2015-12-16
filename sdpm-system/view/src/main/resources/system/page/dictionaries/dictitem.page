@@ -31,11 +31,6 @@ var id = treeNode.id;
 		var treeObj=$.fn.zTree.getZTreeObj("treeDemo"),
 				nodes=treeObj.getCheckedNodes(true),
 		var v=nodes[0];
-		alert(v);
-##            for(var i=0;i<nodes.length;i++){
-		##            v+=nodes[i].name + ",";
-####            alert(nodes[i].id); //获取选中节点的值
-		##            }
 
 	}
 </script>

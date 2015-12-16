@@ -21,6 +21,7 @@ import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.sdpm.util.ModuleUtil;
+import org.tinygroup.sdpm.util.ProductUtils;
 import org.tinygroup.sdpm.util.UserUtils;
 
 import javax.servlet.http.HttpServletResponse;
@@ -91,7 +92,7 @@ public class ModuleAction extends BaseController {
     @RequestMapping("docProductTree")
     public List<Map<String, Object>> productDocTree() {
         List<Map<String, Object>> mapList = Lists.newArrayList();
-        List<Product> products = productService.getProductByUser(UserUtils.getUserId(),0,null);
+        List<Product> products = productService.getProductByUser(UserUtils.getUserId(),0,null, "");
         mergeProductModule(products, "productDoc", mapList, "name", true, false, "doc");
         return mapList;
     }
@@ -330,52 +331,30 @@ public class ModuleAction extends BaseController {
 
     }
 
-
+    @ResponseBody
     @RequestMapping("/{forwordPager}/add")
-    public String addModule(SystemModule module, @PathVariable(value = "forwordPager") String forwordPager) {
+    public Map addModule(SystemModule module, @PathVariable(value = "forwordPager") String forwordPager) {
 
         moduleService.addSystemModule(module);
-
-        if ("story".equals(forwordPager)) {
-            return "/product/page/list/story/story.page";
-        } else if ("promodule".equals(forwordPager)) {
-            return "/product/page/list/module/product-modular.page";
-        } else if ("doc".equals(forwordPager)) {
-            return "/document/treeNew.page";
-        }
-        return "";
+        return resultMap(true,"添加成功");
 
     }
 
-
+    @ResponseBody
     @RequestMapping("/{forwordPager}/edit")
-    public String editModule(Integer moduleId, String moduleName, @PathVariable(value = "forwordPager") String forwordPager) {
+    public Map editModule(Integer moduleId, String moduleName, @PathVariable(value = "forwordPager") String forwordPager) {
         SystemModule module = moduleService.findById(moduleId);
         module.setModuleName(moduleName);
         moduleService.editModule(module);
 
-        if ("story".equals(forwordPager)) {
-            return "/product/page/list/story/story.page";
-        } else if ("promodule".equals(forwordPager)) {
-            return "/product/page/list/module/product-modular.page";
-        } else if ("doc".equals(forwordPager)) {
-            return "/document/treeNew.page";
-        }
-        return "";
+        return resultMap(true,"修改成功");
     }
 
-
+    @ResponseBody
     @RequestMapping("/{forwordPager}/deleteTree")
-    public String deleteSystemModule(Integer moduleId, @PathVariable(value = "forwordPager") String forwordPager) {
+    public Map deleteSystemModule(Integer moduleId, @PathVariable(value = "forwordPager") String forwordPager) {
         moduleService.deleteModuleById(moduleId);
-        if ("story".equals(forwordPager)) {
-            return "/product/page/list/story/story.page";
-        } else if ("promodule".equals(forwordPager)) {
-            return "/product/page/list/module/product-modular.page";
-        } else if ("doc".equals(forwordPager)) {
-            return "/document/treeNew.page";
-        }
-        return "";
+        return resultMap(true,"删除成功");
     }
 
     @ResponseBody

@@ -18,6 +18,8 @@ import java.util.List;
 @Service
 public class ProductUtils {
     public static final String COOKIE_PRODUCT_ID = "cookieProductId";
+    public static final String STATUS_CLOSED = "closed";
+    public static final String STATUS_OPENED = "open";
     @Autowired
     private ProductService productService;
     @Autowired
@@ -60,7 +62,7 @@ public class ProductUtils {
      * 获取所有产品中用户可访问的产品
      */
     public List<Product> getAllProductListByUser() {
-        return productService.getProductByUser(UserUtils.getUserId(), 0, null);
+        return productService.getProductByUser(UserUtils.getUserId(), 0, null,Product.CHOOSE_OPENED);
     }
 
 }

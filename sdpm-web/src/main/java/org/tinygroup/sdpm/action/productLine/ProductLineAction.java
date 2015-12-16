@@ -22,6 +22,7 @@ import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
 import org.tinygroup.sdpm.project.service.inter.BuildService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.util.LogUtil;
+import org.tinygroup.sdpm.util.ProductUtils;
 import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -247,7 +248,7 @@ public class ProductLineAction extends BaseController {
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
         Product product = new Product();
         product.setDeleted(FieldUtil.DELETE_NO);
-        List<Product> productLists = productService.getProductByUser(userUtils.getUserId(), 0, null);
+        List<Product> productLists = productService.getProductByUser(userUtils.getUserId(), 0, null,Product.CHOOSE_OPENED);
         ProductLine productLine = new ProductLine();
         productLine.setDeleted(FieldUtil.DELETE_NO);
         List<ProductLine> productLines = productLineService.getUserProductLine(userUtils.getUserId());
@@ -323,7 +324,7 @@ public class ProductLineAction extends BaseController {
             list.add(map);
             Product product = new Product();
             product.setProductLineId(productLine.getProductLineId());
-            productList = productService.getProductByUser(UserUtils.getUserId(),0,productLine.getProductLineId());
+            productList = productService.getProductByUser(UserUtils.getUserId(),0,productLine.getProductLineId(),"");
         }
         for (Product d : productList) {
             Map<String, Object> map = new HashMap<String, Object>();
@@ -417,7 +418,7 @@ public class ProductLineAction extends BaseController {
     @ResponseBody
     @RequestMapping(value = "/userProductTree")
     public List<Map<String, Object>> getUserProductTree() {
-        List<Product> products = productService.getProductByUser(userUtils.getUserId(), 0, null);
+        List<Product> products = productService.getProductByUser(userUtils.getUserId(), 0, null, Product.CHOOSE_OPENED);
         List<Map<String, Object>> mapList = Lists.newArrayList();
         List<Integer> productLineIds = new ArrayList<Integer>();
         for (Product p : products) {
@@ -452,19 +453,7 @@ public class ProductLineAction extends BaseController {
 
     @RequestMapping(value = "/productLineProducts")
     public String productLineProducts(String choose,Integer productLineId, Model model) {
-        ConditionCarrier carrier = new ConditionCarrier();
-        if("open".equals(choose)){
-            carrier.put("productStatus",
-                    ConditionUtils.Operate.NEQ.getOperate(),
-                    ConditionUtils.CommonFieldType.FIELD_OPERATE.getCommonField(),
-                    Product.STATUS_CLOSED);
-        }else if("closed".equals(choose)){
-            carrier.put("productStatus",
-                    ConditionUtils.Operate.EQ.getOperate(),
-                    ConditionUtils.CommonFieldType.FIELD_OPERATE.getCommonField(),
-                    Product.STATUS_CLOSED);
-        }
-        List<Product> products = productService.getProductByUserAndProductLineWithCount(UserUtils.getUserId(), productLineId, 0,carrier);
+        List<Product> products = productService.getProductByUserAndProductLineWithCount(UserUtils.getUserId(), productLineId, 0,choose);
         model.addAttribute("productList", products);
         return "/productLine/data/product/productListData.pagelet";
     }

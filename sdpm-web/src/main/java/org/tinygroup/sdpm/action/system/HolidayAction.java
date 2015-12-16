@@ -1,6 +1,7 @@
 package org.tinygroup.sdpm.action.system;
 
 import org.apache.commons.collections.map.HashedMap;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -78,18 +79,20 @@ public class HolidayAction extends BaseController {
     public String saveHoliday(@RequestParam(required = false) String selectList, Holiday holiday, Model model) {
         if (holiday.getHolidayId() == null) {
             List<Holiday> holidayList = new ArrayList<Holiday>();
-            String[] dates = selectList.split(",");
-            for (int i = 0, n = dates.length; i < n; i++) {
-                Holiday day = new Holiday();
-                day.setCompanyId(holiday.getCompanyId());
-                day.setHoilidayRemark(holiday.getHoilidayRemark());
-                day.setHolidayAccount(userUtils.getUserId());
-                day.setHolidayDate(dates[i]);
-                day.setHolidayDeleted(holiday.getHolidayDeleted());
-                day.setHolidayDetail(holiday.getHolidayDetail());
-                day.setHolidayName(holiday.getHolidayName());
-                day.setHolidayType(holiday.getHolidayType());
-                holidayList.add(day);
+            if(!StringUtils.isBlank(selectList)) {
+                String[] dates = selectList.split(",");
+                for (int i = 0, n = dates.length; i < n; i++) {
+                    Holiday day = new Holiday();
+                    day.setCompanyId(holiday.getCompanyId());
+                    day.setHoilidayRemark(holiday.getHoilidayRemark());
+                    day.setHolidayAccount(userUtils.getUserId());
+                    day.setHolidayDate(dates[i]);
+                    day.setHolidayDeleted(holiday.getHolidayDeleted());
+                    day.setHolidayDetail(holiday.getHolidayDetail());
+                    day.setHolidayName(holiday.getHolidayName());
+                    day.setHolidayType(holiday.getHolidayType());
+                    holidayList.add(day);
+                }
             }
             List<Holiday> holidays = holidayService.batchAddHoliday(holidayList);
             for (int i = 0, n = holidays.size(); i < n; i++) {

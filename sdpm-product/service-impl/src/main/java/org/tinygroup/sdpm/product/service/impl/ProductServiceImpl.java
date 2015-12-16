@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.tinygroup.commons.tools.ArrayUtil;
 import org.tinygroup.sdpm.dao.condition.ConditionCarrier;
+import org.tinygroup.sdpm.dao.condition.ConditionUtils;
 import org.tinygroup.sdpm.product.biz.inter.ProductManager;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
@@ -55,19 +56,23 @@ public class ProductServiceImpl implements ProductService {
         return productManager.getProductNameByLineId(productLineId);
     }
 
-    public List<Product> getProductByUser(String userId, Integer delete, Integer productLineId) {
-        return productManager.getProductByUser(userId, delete, productLineId);
+    public List<Product> getProductByUser(String userId, Integer delete, Integer productLineId, String status) {
+        ConditionCarrier carrier = mergeCarrier(status);
+        return productManager.getProductByUser(userId, delete, productLineId,carrier);
     }
 
-    public List<Product> getProductByUserWithCount(String userId, Integer delete, boolean noRole,ConditionCarrier carrier) {
+    public List<Product> getProductByUserWithCount(String userId, Integer delete, boolean noRole,String status) {
+        ConditionCarrier carrier = mergeCarrier(status);
         return productManager.getProductByUserWithCount(userId, delete, noRole,carrier);
     }
 
-    public List<Product> getProductByUserAndProductLineWithCount(String userId, Integer productLineId, Integer delete,ConditionCarrier carrier) {
+    public List<Product> getProductByUserAndProductLineWithCount(String userId, Integer productLineId, Integer delete,String status) {
+        ConditionCarrier carrier = mergeCarrier(status);
         return productManager.getProductByUserAndProductLineWithCount(userId, productLineId, delete,carrier);
     }
 
-    public Map<String, List<Product>> getUserProductsWithCountMap(String userId, Integer delete,ConditionCarrier carrier) {
+    public Map<String, List<Product>> getUserProductsWithCountMap(String userId, Integer delete,String status) {
+        ConditionCarrier carrier = mergeCarrier(status);
         Map<String, List<Product>> productMap = new HashMap<String, List<Product>>();
         List<Product> products = productManager.getProductByUserWithCount(userId, delete, true,carrier);
         for (Product product1 : products) {
@@ -88,7 +93,7 @@ public class ProductServiceImpl implements ProductService {
 
     public Map<String, List<Product>> getUserProductsMap(String userId) {
         Map<String, List<Product>> productMap = new HashMap<String, List<Product>>();
-        List<Product> products = productManager.getProductByUser(userId, 0, null);
+        List<Product> products = productManager.getProductByUser(userId, 0, null,mergeCarrier(Product.CHOOSE_OPENED));
         for (Product product1 : products) {
             if (productMap.containsKey(product1.getProductLineName())) {
                 productMap.get(product1.getProductLineName()).add(product1);
@@ -101,5 +106,19 @@ public class ProductServiceImpl implements ProductService {
         return productMap;
     }
 
-
+    private ConditionCarrier mergeCarrier(String status){
+        ConditionCarrier carrier = new ConditionCarrier();
+        if("open".equals(status)){
+            carrier.put("productStatus",
+                    ConditionUtils.Operate.NEQ.getOperate(),
+                    ConditionUtils.CommonFieldType.FIELD_OPERATE.getCommonField(),
+                    Product.STATUS_CLOSED);
+        }else if("closed".equals(status)){
+            carrier.put("productStatus",
+                    ConditionUtils.Operate.EQ.getOperate(),
+                    ConditionUtils.CommonFieldType.FIELD_OPERATE.getCommonField(),
+                    Product.STATUS_CLOSED);
+        }
+        return carrier;
+    }
 }

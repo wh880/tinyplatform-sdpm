@@ -53,6 +53,7 @@
         <service-parameter name="userId" type="java.lang.String" required="false" is-array="false"/>
         <service-parameter name="delete" type="java.lang.Integer" required="false" is-array="false"/>
         <service-parameter name="productLineId" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="status" type="java.lang.Integer" required="false" is-array="false"/>
       </service-parameters>
       <service-result name="getProductByUserResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.product.dao.pojo.Product"/>
     </service-method>
@@ -61,6 +62,7 @@
         <service-parameter name="userId" type="java.lang.String" required="false" is-array="false"/>
         <service-parameter name="delete" type="java.lang.Integer" required="false" is-array="false"/>
         <service-parameter name="noRole" type="boolean" required="false" is-array="false"/>
+        <service-parameter name="status" type="java.lang.String" required="false" is-array="false"/>
       </service-parameters>
       <service-result name="getProductByUserWithCountResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.product.dao.pojo.Product"/>
     </service-method>
@@ -69,7 +71,7 @@
         <service-parameter name="userId" type="java.lang.String" required="false" is-array="false"/>
         <service-parameter name="productLineId" type="java.lang.Integer" required="false" is-array="false"/>
         <service-parameter name="delete" type="java.lang.Integer" required="false" is-array="false"/>
-        <service-parameter name="carrier" type="org.tinygroup.sdpm.dao.condition.ConditionCarrier" required="false" is-array="false"/>
+        <service-parameter name="status" type="java.lang.String" required="false" is-array="false"/>
       </service-parameters>
       <service-result name="getProductByUserAndProductLineWithCountResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.product.dao.pojo.Product"/>
     </service-method>
@@ -83,7 +85,7 @@
       <service-parameters>
         <service-parameter name="userId" type="java.lang.String" required="false" is-array="false"/>
         <service-parameter name="delete" type="java.lang.Integer" required="false" is-array="false"/>
-        <service-parameter name="carrier" type="org.tinygroup.sdpm.dao.condition.ConditionCarrier" required="false" is-array="false"/>
+        <service-parameter name="status" type="java.lang.String" required="false" is-array="false"/>
       </service-parameters>
       <service-result name="getUserProductsWithCountMapResult" required="false" is-array="false" type="java.util.Map"/>
     </service-method>

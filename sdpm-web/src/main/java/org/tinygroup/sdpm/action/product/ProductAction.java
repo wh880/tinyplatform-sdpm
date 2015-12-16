@@ -33,6 +33,7 @@ import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.dao.pojo.SystemHistory;
 import org.tinygroup.sdpm.util.CookieUtils;
 import org.tinygroup.sdpm.util.LogUtil;
+import org.tinygroup.sdpm.util.ProductUtils;
 import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -93,7 +94,7 @@ public class ProductAction extends BaseController {
     @RequestMapping("")
     public String productAction(@CookieValue(value = "cookieProductLineId", defaultValue = "0") String cookieProductLineId, HttpServletResponse response, HttpServletRequest request) {
         if ("0".equals(cookieProductLineId)) {
-            List<Product> products = productService.getProductByUser(UserUtils.getUserId(),0,null);
+            List<Product> products = productService.getProductByUser(UserUtils.getUserId(),0,null,Product.CHOOSE_OPENED);
             if(products.size()>0){
                 CookieUtils.setCookie(response, "cookieProductLineId", String.valueOf(products.get(0).getProductId()));
             }
@@ -170,9 +171,10 @@ public class ProductAction extends BaseController {
     @RequestMapping("/close")
     public Map close(Integer productId, SystemAction systemAction) {
         Product product1 = productService.findProductById(productId);
-        product1.setProductStatus(Product.STATUS_CLOSED);
-        productService.updateProduct(product1);
-        Product product = productService.findProductById(productId);
+        Product product = new Product();
+        product.setProductId(productId);
+        product.setProductStatus(Product.STATUS_CLOSED);
+        productService.updateProduct(product);
 
         LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCT,
                 LogUtil.LogAction.CLOSED,
@@ -264,20 +266,7 @@ public class ProductAction extends BaseController {
 
     @RequestMapping("/list")
     public String list(String choose,Model model) {
-        Integer deleted = 0;
-        ConditionCarrier carrier = new ConditionCarrier();
-        if("open".equals(choose)){
-            carrier.put("productStatus",
-                    ConditionUtils.Operate.NEQ.getOperate(),
-                    ConditionUtils.CommonFieldType.FIELD_OPERATE.getCommonField(),
-                    Product.STATUS_CLOSED);
-        }else if("closed".equals(choose)){
-            carrier.put("productStatus",
-                    ConditionUtils.Operate.EQ.getOperate(),
-                    ConditionUtils.CommonFieldType.FIELD_OPERATE.getCommonField(),
-                    Product.STATUS_CLOSED);
-        }
-        model.addAttribute("productMap", productService.getUserProductsWithCountMap(UserUtils.getUserId(),deleted,carrier));
+        model.addAttribute("productMap", productService.getUserProductsWithCountMap(UserUtils.getUserId(),0,choose));
         return "/product/data/product/allproductdata.pagelet";
     }
 
@@ -302,7 +291,7 @@ public class ProductAction extends BaseController {
     @ResponseBody
     @RequestMapping("/productList")
     public List<Product> findProduct(Product product, String type, String productLineId) {
-        if ("user".equals(type)) return productService.getProductByUser(UserUtils.getUserId(),0,Integer.parseInt(productLineId));
+        if ("user".equals(type)) return productService.getProductByUser(UserUtils.getUserId(),0,Integer.parseInt(productLineId), Product.CHOOSE_OPENED);
 
         List<Product> list = productService.findProductList(product);
 
@@ -523,7 +512,7 @@ public class ProductAction extends BaseController {
             result.add(productService.findProductById(Integer.parseInt(initKey)));
             return result;
         }
-        List<Product> products = productService.getProductByUser(userUtils.getUserId(),0,null);
+        List<Product> products = productService.getProductByUser(userUtils.getUserId(),0,null,Product.CHOOSE_OPENED);
         Integer[] pIds = new Integer[products.size()];
         for(int i =0; i<pIds.length; i++){
             pIds[i] = products.get(i).getProductId();

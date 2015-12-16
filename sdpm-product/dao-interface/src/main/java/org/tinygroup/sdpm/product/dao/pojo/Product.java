@@ -30,6 +30,8 @@ public class Product implements Serializable {
     public static final String STATUS_NEW = "0";
     public static final String STATUS_ACTIVE = "2";
     public static final String STATUS_CLOSED = "8";
+    public static final String CHOOSE_CLOSED = "closed";
+    public static final String CHOOSE_OPENED = "open";
     /**
      * 产品ID
      */
@@ -117,7 +119,6 @@ public class Product implements Serializable {
     private Integer assignSum =0;
 
     public Product() {
-        setDeleted(DELETE_NO);
     }
 
     public String getProductLineName() {

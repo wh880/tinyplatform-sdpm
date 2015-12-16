@@ -16,6 +16,7 @@ import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
+import org.tinygroup.sdpm.util.ProductUtils;
 import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -99,7 +100,7 @@ public class ProjectDocAction extends BaseController {
     @RequestMapping("/preAdd")
     public String preAdd(Model model) {
         SystemModule module = new SystemModule();
-        List<Product> productList = productService.getProductByUser(UserUtils.getUserId(),0,null);
+        List<Product> productList = productService.getProductByUser(UserUtils.getUserId(),0,null, "");
         List<Project> projectList = projectService.getUserProjectList(UserUtils.getUserId());
         List<SystemModule> listModule = moduleService.findModuleList(module);
         List<DocumentDocLib> libList = docService.findDocLibList(null);
