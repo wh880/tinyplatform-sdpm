@@ -10,16 +10,7 @@
     <artifactId>sdpm-common-view</artifactId>
     <name>sdpm-common-view</name>
     <dependencies>
-        <dependency>
-            <groupId>org.tinygroup</groupId>
-            <artifactId>org.tinygroup.jquery</artifactId>
-            <version>${tiny_ui_version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.tinygroup</groupId>
-            <artifactId>org.tinygroup.bootstrap</artifactId>
-            <version>${tiny_ui_version}</version>
-        </dependency>
+
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>org.tinygroup.publicComponent</artifactId>
