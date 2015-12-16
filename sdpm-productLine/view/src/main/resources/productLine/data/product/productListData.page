@@ -37,8 +37,8 @@
         $(".jump").on("click",function(){
             var lineId = $(this).closest("tr").find("a:first").attr("value");
             var id = $(this).closest("tr").find("a:first").attr("id");
-            $.cookie("cookieProductLineId",lineId,{path:"/",expires：365});
-            $.cookie("cookieProductId",id,{path:"/",expires：365});
+            $.cookie("cookieProductLineId",lineId,{path:"/",expires:365});
+            $.cookie("cookieProductId",id,{path:"/",expires:365});
         });
 
     })

@@ -228,7 +228,7 @@
 <script>
     $(function(){
         $(".addCase").on("click",function(){
-            $.cookie("qualityProductId",${cookieProductId},{path:"/",expires：365});
+            $.cookie("qualityProductId",${cookieProductId},{path:"/",expires:365});
         })
     })
 </script>

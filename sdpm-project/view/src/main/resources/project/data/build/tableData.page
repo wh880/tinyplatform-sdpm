@@ -33,11 +33,11 @@
     $(function(){
         $(".testTaskJump").on("click",function(){
             var productId = $(this).attr("value");
-            $.cookie("qualityProductId",productId,{path:"/",expires：365});
+            $.cookie("qualityProductId",productId,{path:"/",expires:365});
         });
         $(".buildJump").on("click",function(){
             var projectId = $(this).attr("value");
-            $.cookie("currentProjectId",projectId,{path:"/",expires：365});
+            $.cookie("currentProjectId",projectId,{path:"/",expires:365});
         });
 
         $(".build-remove").on("click",function(){

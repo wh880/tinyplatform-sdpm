@@ -57,7 +57,7 @@
     $(function(){
         $(".docJump").on("click",function(){
             var libId = $(this).attr("value");
-            $.cookie("documentLibId",libId,{path:"/",expires：365});
+            $.cookie("documentLibId",libId,{path:"/",expires:365});
         });
     })
 </script>

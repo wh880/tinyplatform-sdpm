@@ -2,7 +2,7 @@
 #if(!qualityProductIdTemp&&qualityProductId)
 <script type="text/javascript">
     $(function(){
-        $.cookie('qualityProductId', "${qualityProductId}", {path: "/",expires：365});
+        $.cookie('qualityProductId', "${qualityProductId}", {path: "/",expires:365});
     })
 </script>
 #end
@@ -77,7 +77,7 @@
         $(function(){
             $("#productSelect").on("setValue",function(o,treeNode){
                 var dataValue = treeNode.id;
-                $.cookie('qualityProductId',dataValue,{path:"/",expires：365});
+                $.cookie('qualityProductId',dataValue,{path:"/",expires:365});
                 window.location.reload();
             });
         });

@@ -12,7 +12,7 @@
    #@elementItem()
         #@colLabel()类型：#end
          #@formControlDiv("col-6")
-	       #@tinySelect("holidayType"  holiday?.holidayType{"class":"input-text","rel":"22"})
+	       #@tinySelect("holidayType"  holiday?.holidayType{"class":"input-text"})
 				#@tinyOptionItem("放假")放假#end
 				#@tinyOptionItem("工作")工作#end
 			#end
@@ -24,8 +24,11 @@
     #@daterangepickerPosition()
         #@colLabel()日期：#end
         #@formControlDiv("col-6")
-        	 #@dateMultipleSelect("selectList" holiday?.holidayDate)
-        	 #end
+        	 #@dateMultipleSelect("selectList" {"datatype":"*","nullmsg":"假期名不为空"})
+                 #if(holiday?.holidayDate)
+                     #setDateMultiple(holiday?.holidayDate)
+                 #end
+             #end
         #end
         #@validateDiv("col-2")#end
     #end
