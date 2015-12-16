@@ -1,8 +1,4 @@
-<script>
 
-
-
-</script>
 #@tabWithInit("tab_demo" "optionsBox")
     #@div(divClass="dropdownBox")
         #include("/quality/common/dropdownMenu.page")

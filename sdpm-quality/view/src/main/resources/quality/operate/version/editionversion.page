@@ -43,11 +43,11 @@
 
 	                    	#end
                            <script type="text/javascript">
-                               ajaxRead("${sid}", "projectId", "projectId", "projectName", "/quality/bug/ajax/project?productId=${qualityProductId}", "${testTask?.projectId?:(projectId?:0)}");
+                               ajaxRead("${sid}", "projectId", "projectId", "projectName", "/quality/bug/ajax/project?productId=${cookieProductId}", "${testTask?.projectId?:(projectId?:0)}");
                                 $("#${sid}").on("change",function(){
                                     var pId = $("#${sid}  option:selected").val();
 									if(pId>0){
-										ajaxRead("${sid}","buildName","buildId","buildName","/quality/version/ajax/build?buildProject="+pId+"&buildProduct=${qualityProductId?:0}",${testTask?.buildName?:0},"build");
+										ajaxRead("${sid}","buildName","buildId","buildName","/quality/version/ajax/build?buildProject="+pId+"&buildProduct=${cookieProductId?:0}",${testTask?.buildName?:0},"build");
 										ajaxRead("${sid}","testtaskOwner","orgUserId","orgUserRealName","/quality/version/ajax/user?projectId="+pId,"${testTask?.testtaskOwner?:0}");
 									}
                                 })

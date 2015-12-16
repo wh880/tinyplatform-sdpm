@@ -171,7 +171,7 @@ public class StoryAction extends BaseController {
             ids[i] = teams.get(i).getTeamUserId();
         }
         List<OrgUser> orgUsers = userService.findUserListByIds(ids);
-        return orgUsers;
+        return orgUsers==null?new ArrayList<OrgUser>():orgUsers;
     }
 
     @ResponseBody
@@ -180,7 +180,7 @@ public class StoryAction extends BaseController {
         if (productPlan.getProductId() == null || productPlan.getProductId() < 1) return new ArrayList<ProductPlan>();
         productPlan.setDeleted(0);
         List<ProductPlan> productPlans = planService.findPlanList(productPlan);
-        return productPlans;
+        return productPlans==null?new ArrayList<ProductPlan>():productPlans;
     }
 
     /**

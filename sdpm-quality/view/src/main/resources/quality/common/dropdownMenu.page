@@ -1,22 +1,22 @@
-#set(qualityProductIdTemp = qualityProductId,qualityProductId=qualityProductId?:productUtils.getAllProductListByUser()?.get(0)?.productId)
-#if(!qualityProductIdTemp&&qualityProductId)
+#set(cookieProductIdTemp = cookieProductId,cookieProductId=cookieProductId?:productUtils.getAllProductListByUser()?.get(0)?.productId)
+#if(!cookieProductIdTemp&&cookieProductId)
 <script type="text/javascript">
     $(function(){
-        $.cookie('qualityProductId', "${qualityProductId}", {path: "/",expires:365});
+        $.cookie('cookieProductId', "${cookieProductId}", {path: "/",expires:365});
     })
 </script>
 #end
 
-#if(qualityProductId&&productUtils.getAllProductListByUser()?.size()>0)
+#if(cookieProductId&&productUtils.getAllProductListByUser()?.size()>0)
     #set(finded = 0)
     #foreach(product : productUtils.getAllProductListByUser())
-    #if(product?.productId == qualityProductId)
+    #if(product?.productId == cookieProductId)
         #set(finded=1,currentProductName=product.productName)
     #end
 #end
 #if(finded==0)
 <script type="text/javascript">
-    $.removeCookie('qualityProductId',{path:"/"})
+    $.removeCookie('cookieProductId',{path:"/"})
     //window.location.href='http://localhost:8989/sdpm-web/a/project/task/index';
     window.location.reload();
 </script>
@@ -55,7 +55,7 @@
 
 #@navZtree("product" "product")
     #@navZtreeNav()
-        <span id="productNameOnTop" value="${qualityProductId}">${currentProductName}</span><span class="caret"></span>
+        <span id="productNameOnTop" value="${cookieProductId}">${currentProductName}</span><span class="caret"></span>
     #end
 
     #@navZtreeBody({"style":"left:-18px;top:26px"})
@@ -77,7 +77,7 @@
         $(function(){
             $("#productSelect").on("setValue",function(o,treeNode){
                 var dataValue = treeNode.id;
-                $.cookie('qualityProductId',dataValue,{path:"/",expires:365});
+                $.cookie('cookieProductId',dataValue,{path:"/",expires:365});
                 window.location.reload();
             });
         });

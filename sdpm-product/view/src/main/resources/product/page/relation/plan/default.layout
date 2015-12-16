@@ -13,7 +13,7 @@
                 "/product/plan/content")<i class="${m.icon}" title="删除"></i>#end
         #end
     #end
-    <a href="javascript :;" onClick="javascript :history.back(-1);" title="返回">#buttonIcon(iconClass="icon-reply")</a>				</span>#div(divClass=
+    <a href="javascript:void(0);" onClick="javascript :history.back(-1);" title="返回">#buttonIcon(iconClass="icon-reply")</a>				</span>#div(divClass=
     "clearfix")
 #end
 

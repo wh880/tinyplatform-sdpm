@@ -14,7 +14,7 @@
 		#@formControlDiv("col-8")
 			#@div(divClass="col-5")
 				#@TzTreeSelect(
-					"productId" bug?.productId?:qualityProductId {"class":"input-text","datatype":"*","nullmsg":"所属产品不能为空！",
+					"productId" bug?.productId?:cookieProductId {"class":"input-text","datatype":"*","nullmsg":"所属产品不能为空！",
 					"data-URL":call("link",adminPath+"/productLine/userProductTree")})
                     <script>
                         $(function(){

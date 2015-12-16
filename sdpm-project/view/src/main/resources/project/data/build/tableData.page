@@ -1,5 +1,5 @@
 #macro tinyTableItemRemove(doActionUrl itemId)
-<a href="javascript:;" class="Item-Remove" data-url="${doActionUrl}" data-id="${itemId}">#bodyContent</a>
+<a href="javascript:void(0);" class="Item-Remove" data-url="${doActionUrl}" data-id="${itemId}">#bodyContent</a>
 #end
 
 #setTinyItemCount(buildPager.totalCount)
@@ -23,7 +23,7 @@
                 <a class="buildJump" value="${b?.buildProject}" href="${TINY_CONTEXT_PATH+adminPath}${m.href}?buildId=${b?.buildId}&projectId=${b?.buildProject}&productId=${b?.buildProduct}"
                    title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
                 #else
-                <a href="javascript:;" class="build-remove" data-url="${TINY_CONTEXT_PATH+adminPath+m.href}" data-id="${b?.buildId}"><i class="${m.icon}" title=${m.name}></i></a>
+                <a href="javascript:void(0);" class="build-remove" data-url="${TINY_CONTEXT_PATH+adminPath+m.href}" data-id="${b?.buildId}"><i class="${m.icon}" title=${m.name}></i></a>
                 #end
             #end
         #end
@@ -33,7 +33,7 @@
     $(function(){
         $(".testTaskJump").on("click",function(){
             var productId = $(this).attr("value");
-            $.cookie("qualityProductId",productId,{path:"/",expires:365});
+            $.cookie("cookieProductId",productId,{path:"/",expires:365});
         });
         $(".buildJump").on("click",function(){
             var projectId = $(this).attr("value");

@@ -46,8 +46,8 @@
 </script>
 <script type="text/javascript">
     function ajaxUl(id,opKey,opvalue,url){
-        var $ul = $("#"+id) ;
-        $ul.each(function(){
+        var ul = $("#"+id) ;
+        ul.each(function(){
             $.ajax({
                 type: "POST",
                 url: "${TINY_CONTEXT_PATH+adminPath}"+url,
@@ -56,7 +56,7 @@
                 success: function(data){
                     for(var i=0,l=data.length;i<l;i++){
                     var em = "<li><a class='secondMenu'' href='javascript:void(0);'' field='"+opKey+"' value='"+data[i][opKey]+"'>"+data[i][opvalue]+"</a></li>";
-                        $ul.append(em);
+                        ul.append(em);
                     }
                 },
                 error: function(res){

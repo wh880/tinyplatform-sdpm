@@ -30,7 +30,7 @@
         <div class="col-2 text-r"><label><span class="c-red">*</span>重复ID：</label></div>
         #@formControlDiv("col-4")
                 #@Tselect2F()
-                    #Tselect2Ajax("bugDuplicateBug" bug?.bugDuplicateBug TINY_CONTEXT_PATH+adminPath+"/quality/bug/ajax/bugInCondition?productId="+qualityProductId
+                    #Tselect2Ajax("bugDuplicateBug" bug?.bugDuplicateBug TINY_CONTEXT_PATH+adminPath+"/quality/bug/ajax/bugInCondition?productId="+cookieProductId
                     {"dataId":"bugId","dataText":"bugTitle","placeholder":"查询重复bug","nullmsg":"请选择重复bug！","datatype":"*"})
                     #@Tselect2Fix()
                         <a href="${TINY_CONTEXT_PATH+adminPath}/quality/bug">全部</a>#end

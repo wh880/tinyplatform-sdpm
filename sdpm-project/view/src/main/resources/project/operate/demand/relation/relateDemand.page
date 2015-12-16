@@ -20,7 +20,7 @@
         <input type="button" value="反选" class="btn btn-primary"
                onclick="selectAllNullorReserve('idCheck','反选');"/>
             #@mulOperation("mulLink" TINY_CONTEXT_PATH+adminPath+"/project/demand/linkStory")
-            <a href="javascript:;" class="btn btn-primary"><i class="icon-link"></i>关联</a>
+            <a href="javascript:void(0);" class="btn btn-primary"><i class="icon-link"></i>关联</a>
             #end
         #end
         #@tinyTableContent(TINY_CONTEXT_PATH+adminPath+"/project/demand/findStory") ##取数据地址 总数据

@@ -1,6 +1,6 @@
 #macro radiusBtn(radiusBtnCls radiusBtnIcon radiusBtnLink radiusBtnId radiusOnclick)
 <a data-toggle="modal" #if(radiusBtnId) id="$!{radiusBtnId}"#end
-   href="#if(radiusBtnLink)#link(radiusBtnLink)#{else}javascript:;#end" #if(radiusOnclick)
+   href="#if(radiusBtnLink)#link(radiusBtnLink)#{else}javascript:void(0);#end" #if(radiusOnclick)
    onclick="$!{radiusOnclick}();"#end class="btn $!{radiusBtnCls} radius">
     <i class="$!{radiusBtnIcon}"></i>#bodyContent</a>
 #end

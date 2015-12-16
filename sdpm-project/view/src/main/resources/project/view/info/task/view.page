@@ -21,7 +21,7 @@
                 #end
             #end
 
-            <a href="javascript:;" onclick="javascript:history.back(-1);" title="返回">#buttonIcon(iconClass="icon-reply")</a>
+            <a href="javascript:void(0);" onclick="javascript:history.back(-1);" title="返回">#buttonIcon(iconClass="icon-reply")</a>
             #set(m1=menuManager.getMenu("pro-Info-close"))
             </span>
             #div(divClass="clearfix")
@@ -67,7 +67,7 @@
                title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
             #end
         #end
-        <a href="javascript :;" onclick="javascript:history.back(-1);" title="返回">#buttonIcon(iconClass=
+        <a href="javascript:void(0);" onclick="javascript:history.back(-1);" title="返回">#buttonIcon(iconClass=
             "icon-reply")</a>
     </center>
 </div>

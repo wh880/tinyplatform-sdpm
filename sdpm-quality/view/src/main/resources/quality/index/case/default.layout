@@ -46,7 +46,7 @@
                                           $("#group").on("click",function(){
                                               $.ajax({
                                                   type: "get",
-                                                  url: "${TINY_CONTEXT_PATH+adminPath}/quality/testCase/group?productId=${qualityProductId}",
+                                                  url: "${TINY_CONTEXT_PATH+adminPath}/quality/testCase/group?productId=${cookieProductId}",
                                                   dataType:"html",
                                                   success: function(data){
                                                       $(".operationbar a").removeClass("active_btn");

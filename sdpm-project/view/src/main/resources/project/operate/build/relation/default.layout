@@ -10,7 +10,7 @@
         <a href="${TINY_CONTEXT_PATH+adminPath}/project/build/edit?buildId=${build.buildId}">#buttonIcon(iconClass="icon-pencil")编辑发布</a>&nbsp;
     #end
 
-    <a href="javascript :;" onclick="javascript:history.back(-1);" title="返回">#buttonIcon(iconClass=
+    <a href="javascript:void(0);" onclick="javascript:history.back(-1);" title="返回">#buttonIcon(iconClass=
         "icon-reply")</a>
 				</span>#div(divClass="clearfix")
 

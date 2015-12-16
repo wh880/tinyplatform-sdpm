@@ -179,8 +179,8 @@
     </table>
 
     <div id="moreOrLite">
-        <a id="searchmore" href="javascript:;"><i class="icon-double-angle-down icon-2x"></i></a>
-        <a id="searchlite" href="javascript:;"><i class="icon-double-angle-up icon-2x"></i></a>
+        <a id="searchmore" href="javascript:void(0);"><i class="icon-double-angle-down icon-2x"></i></a>
+        <a id="searchlite" href="javascript:void(0);"><i class="icon-double-angle-up icon-2x"></i></a>
     </div>
 </form>
 

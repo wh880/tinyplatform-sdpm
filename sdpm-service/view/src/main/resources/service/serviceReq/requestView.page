@@ -24,7 +24,7 @@
             #@tinyTableItemRemove(TINY_CONTEXT_PATH+adminPath+m2.href request?.clientRequestId)<i
                     class="${m2.icon}" title="删除"></i>#end
         #end
-        <a href="javascript :;" onClick="javascript :history.back(-1);" title="返回">#buttonIcon(iconClass=
+        <a href="javascript:void(0);" onClick="javascript :history.back(-1);" title="返回">#buttonIcon(iconClass=
             "icon-reply")</a>
     #end
 ##    <div style="width:100%" class="pageleftpart">

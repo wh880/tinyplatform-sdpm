@@ -29,6 +29,7 @@ import org.tinygroup.sdpm.quality.service.inter.TestRunService;
 import org.tinygroup.sdpm.quality.service.inter.TestTaskService;
 import org.tinygroup.sdpm.util.CookieUtils;
 import org.tinygroup.sdpm.util.LogUtil;
+import org.tinygroup.sdpm.util.ProductUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -81,7 +82,7 @@ public class TestVersionAction extends BaseController {
     }
 
     @RequestMapping("/findPager")
-    public String findPager(@CookieValue Integer qualityProductId,
+    public String findPager(@CookieValue(ProductUtils.COOKIE_PRODUCT_ID) Integer cookieProductId,
                             Integer start,
                             Integer limit,
                             SearchInfos infos,
@@ -99,7 +100,7 @@ public class TestVersionAction extends BaseController {
         }
         getStatusCondition(status, carrier);
         carrier.putSearch("testTaskSearch", infos, groupOperate);
-        testtask.setProductId(qualityProductId);
+        testtask.setProductId(cookieProductId);
         Pager<QualityTestTask> verpager = testTaskService.findTestTaskPagerWithConditionCarrier(start, limit, testtask, carrier, order, asc);
         model.addAttribute("verPager", verpager);
         return "/quality/data/version/versionData.pagelet";
@@ -163,16 +164,16 @@ public class TestVersionAction extends BaseController {
 
     @RequiresPermissions("tproposeversion")
     @RequestMapping("/add")
-    public String add(@CookieValue(value = "qualityProductId", defaultValue = "0") Integer qualityProductId,
+    public String add(@CookieValue(value = ProductUtils.COOKIE_PRODUCT_ID, defaultValue = "0") Integer cookieProductId,
                       Integer buildId, Model model, HttpServletResponse response) {
         List<Project> projects = projectService.findProjectList(null, null, null);
         ProjectBuild build = new ProjectBuild();
         if (buildId != null && buildId > 0) {
             int productId = buildService.findBuild(buildId).getBuildProduct();
             build.setBuildProduct(productId);
-            CookieUtils.setCookie(response, "qualityProductId", String.valueOf(productId));
+            CookieUtils.setCookie(response, ProductUtils.COOKIE_PRODUCT_ID, String.valueOf(productId));
         } else {
-            build.setBuildProduct(qualityProductId);
+            build.setBuildProduct(cookieProductId);
         }
 
         List<ProjectBuild> builds = buildService.findListBuild(build);
@@ -188,13 +189,13 @@ public class TestVersionAction extends BaseController {
                               Model model) {
         QualityTestTask testTask = null;
         if (no != null) {
-            String result = CookieUtils.getCookie(request, "qualityProductId");
+            String result = CookieUtils.getCookie(request, ProductUtils.COOKIE_PRODUCT_ID);
             if(StringUtil.isBlank(result)){
                 return notFoundView();
             }
-            Integer qualityProductId = Integer.parseInt(result);
+            Integer cookieProductId = Integer.parseInt(result);
             testTask = new QualityTestTask();
-            testTask.setProductId(qualityProductId);
+            testTask.setProductId(cookieProductId);
             testTask.setNo(no);
             List<QualityTestTask> testTaskList = testTaskService.findTestTaskList(testTask);
             if (testTaskList.size() == 0) {
@@ -244,7 +245,7 @@ public class TestVersionAction extends BaseController {
     }
 
     @RequestMapping("/link")
-    public String link(@CookieValue(value = "qualityProductId", defaultValue = "0") String cookieProductId,
+    public String link(@CookieValue(value = ProductUtils.COOKIE_PRODUCT_ID, defaultValue = "0") String cookieProductId,
                        Integer testversionId,
                        Integer start,
                        Integer limit,
@@ -271,10 +272,10 @@ public class TestVersionAction extends BaseController {
 
     @RequiresPermissions("tversionedit")
     @RequestMapping("/toEdit")
-    public String edit(@CookieValue Integer qualityProductId,
+    public String edit(@CookieValue(ProductUtils.COOKIE_PRODUCT_ID) Integer cookieProductId,
                        Integer testversionId, Model model) {
         QualityTestTask testTask = testTaskService.findTestTaskById(testversionId);
-        List<ProjectProduct> projectProducts = projectProductService.findProjectByProductId(qualityProductId);
+        List<ProjectProduct> projectProducts = projectProductService.findProjectByProductId(cookieProductId);
         List<Integer> ids = new ArrayList<Integer>();
         for (ProjectProduct projectProduct : projectProducts) {
             ids.add(projectProduct.getProjectId());

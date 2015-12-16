@@ -25,6 +25,7 @@ import org.tinygroup.sdpm.system.service.inter.ProfileService;
 import org.tinygroup.sdpm.util.CookieUtils;
 import org.tinygroup.sdpm.util.LogUtil;
 import org.tinygroup.sdpm.util.ModuleUtil;
+import org.tinygroup.sdpm.util.ProductUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -76,7 +77,7 @@ public class TestCaseAction extends BaseController {
     }
 
     @RequestMapping("/findPager")
-    public String findPager(@CookieValue(value = "qualityProductId",defaultValue = "0") Integer qualityProductId, Integer start, Integer limit, String groupOperate,
+    public String findPager(@CookieValue(value = ProductUtils.COOKIE_PRODUCT_ID,defaultValue = "0") Integer cookieProductId, Integer start, Integer limit, String groupOperate,
                             SearchInfos searchInfos, String status, @RequestParam(required = false,defaultValue = "caseId")String order,
                             @RequestParam(required = false,defaultValue = "desc")String ordertype, QualityTestCase testcase, Model model,
                             HttpServletRequest request) {
@@ -84,7 +85,7 @@ public class TestCaseAction extends BaseController {
         if ("desc".equals(ordertype)) {
             asc = false;
         }
-        testcase.setProductId(qualityProductId);
+        testcase.setProductId(cookieProductId);
         testcase.setDeleted(0);
         ConditionCarrier carrier = new ConditionCarrier();
         if (testcase.getModuleId() != null && testcase.getModuleId() > 0) {
@@ -551,13 +552,13 @@ public class TestCaseAction extends BaseController {
     public String viewInfo(Integer id, Integer version, Model model, Integer no, HttpServletRequest request) {
         QualityTestCase testCase = null;
         if (no != null) {
-            String result=CookieUtils.getCookie(request, "qualityProductId");
+            String result=CookieUtils.getCookie(request, ProductUtils.COOKIE_PRODUCT_ID);
             if(result==null){
                 return notFoundView();
             }
-            Integer qualityProductId = Integer.parseInt(result);
+            Integer cookieProductId = Integer.parseInt(result);
             testCase = new QualityTestCase();
-            testCase.setProductId(qualityProductId);
+            testCase.setProductId(cookieProductId);
             testCase.setNo(no);
             List<QualityTestCase> caseList = testCaseService.findTestCaseList(testCase);
             if (caseList.size() == 0) {

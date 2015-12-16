@@ -1,4 +1,4 @@
-#set(qualityProductId=qualityProductId?:productUtils.getAllProductListByUser()?.get(0)?.productId)
+#set(cookieProductId=cookieProductId?:productUtils.getAllProductListByUser()?.get(0)?.productId)
 #set(bugTableId = "bugTableId")
 #macro initBatchAction()
 <script>
@@ -79,16 +79,16 @@
 			#@toggleBox({"class":"open"})
 				#@toggleLeft({"class":"aclass"})
 					#@settoggleLeftTitle()#foreach(product : productUtils.getAllProductListByUser())
-                                                                        #if(product?.productId == qualityProductId)
+                                                                        #if(product?.productId == cookieProductId)
                                                                         ${product?.productName}
                                                                         #break
                                                                         #end
                                                                         #end#end
 						#@settoggleLeftBody("treeLeftbox")
-							#@zTreeList(call("link",adminPath+"/system/module/bugTree?moduleType=bug&moduleRoot="+qualityProductId))
+							#@zTreeList(call("link",adminPath+"/system/module/bugTree?moduleType=bug&moduleRoot="+cookieProductId))
 								#setzTreeValMap({"id":"moduleId","name":"moduleName","pid":"moduleParent"}) ##key值为固定
 								#zTreeSetLinkUrl(TINY_CONTEXT_PATH+adminPath+"/quality/bug?status="+status+"&currentPageId=5")
-								#zTreeSetAddUrl(TINY_CONTEXT_PATH+adminPath+"/system/module/ajax/save?moduleType=bug&moduleRoot="+qualityProductId)
+								#zTreeSetAddUrl(TINY_CONTEXT_PATH+adminPath+"/system/module/ajax/save?moduleType=bug&moduleRoot="+cookieProductId)
 								#zTreeSetEditUrl(TINY_CONTEXT_PATH+adminPath+"/system/module/ajax/save")
 								#zTreeSetDelUrl(TINY_CONTEXT_PATH+adminPath+"/system/module/ajax/delete")
 							#end
@@ -110,7 +110,7 @@
 									#foreach(m:menuManager.getScopeMenus("testbug-op"))
 										#if(m.id=="tmakesure")
 											#@hasMenu("tmakesure")
-												<a tabindex="-1" href="javascript:;">#@mulOperation("tmakesure" TINY_CONTEXT_PATH+adminPath+"/quality/bug/batch/sure")
+												<a tabindex="-1" href="javascript:void(0);">#@mulOperation("tmakesure" TINY_CONTEXT_PATH+adminPath+"/quality/bug/batch/sure")
 												<div>${m.name}</div>
 												#end</a>
 											#end
@@ -125,7 +125,7 @@
 												<ul class="dropdown-menu">
 													#foreach(re : getDict("bugResolution"))
 													<li>
-														<a href="javascript:;">#@mulOperation("tsolution"+reFor.index TINY_CONTEXT_PATH+adminPath+"/quality/bug/batch/resolve?resolutionType="+re.value)
+														<a href="javascript:void(0);">#@mulOperation("tsolution"+reFor.index TINY_CONTEXT_PATH+adminPath+"/quality/bug/batch/resolve?resolutionType="+re.value)
 														<div>${re.text}</div>
 														#end</a>
 													</li>

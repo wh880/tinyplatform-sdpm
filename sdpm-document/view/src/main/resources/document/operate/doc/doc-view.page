@@ -15,7 +15,7 @@
                    #end
                #end
            #end
-            <a href="javascript :;" onClick="javascript :history.back(-1);" title="返回">#buttonIcon(iconClass=
+            <a href="javascript:void(0);" onClick="javascript :history.back(-1);" title="返回">#buttonIcon(iconClass=
                 "icon-reply")</a>
             </span>
         #end
@@ -69,7 +69,7 @@
                 #end
             #end
         #end
-        <a href="javascript :;" onClick="javascript :history.back(-1);" title="返回">#buttonIcon(iconClass=
+        <a href="javascript:void(0);" onClick="javascript :history.back(-1);" title="返回">#buttonIcon(iconClass=
             "icon-reply")</a>
     </center>
 </div>

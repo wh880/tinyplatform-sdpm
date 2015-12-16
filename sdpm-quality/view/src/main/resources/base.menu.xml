@@ -3,7 +3,7 @@
       isShow="1">
     <menu id="qualityBug" parent-id="quality" name="Bug" href="/quality/bug?currentPageId=5" icon="" sort="1"
           isShow="1">
-        <menu id="tmakesure" name="确认Bug" href="/quality/bug/makesure" icon="icon-search" sort="6"
+        <menu id="tmakesure" name="确认Bug" href="/quality/bug/makesure" icon="iconfont iconfont-jihuo" sort="6"
               isShow="1" scope="testbug-op,testbuginfo-tab">
         </menu>
         <menu id="tassign" name="Bug指派" href="/quality/bug/assign" icon=" icon-hand-right" sort="5"
@@ -160,7 +160,7 @@
               isShow="1" scope="testcaseleft-tab">
         </menu>
         <menu id="tcasenodemand" name="零用例需求"
-              href="/quality/testCase?status=tcasenodemand&amp;type=noCase&amp;productId=${qualityProductId}&amp;currentPageId=5"
+              href="/quality/testCase?status=tcasenodemand&amp;type=noCase&amp;productId=${cookieProductId}"
               icon="" sort="2"
               isShow="1" scope="testcaseleft-tab">
         </menu>

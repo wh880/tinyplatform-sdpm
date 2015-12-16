@@ -24,7 +24,7 @@
                                         $("#group").on("click", function () {
                                             $.ajax({
                                                 type: "get",
-                                                url: "${TINY_CONTEXT_PATH+adminPath}/quality/testCase/group?productId=${qualityProductId}&testtaskId=${testversionId}",
+                                                url: "${TINY_CONTEXT_PATH+adminPath}/quality/testCase/group?productId=${cookieProductId}&testtaskId=${testversionId}",
                                                 dataType: "html",
                                                 success: function (data) {
                                                     $("#caseGroup").html(data);
@@ -75,18 +75,18 @@
         #@toggleBox({"class":"open"})
             #@toggleLeft({"class":"aclass"})
                 #@settoggleLeftTitle()#foreach(product : productUtils.getAllProductListByUser())
-                    #if(product?.productId == qualityProductId)
+                    #if(product?.productId == cookieProductId)
                         ${product?.productName}
                         #break
                     #end
                 #end#end
             #@settoggleLeftBody("treeLeftbox")
-                #@zTreeList(call("link",adminPath+"/system/module/bugTree?moduleType=bug&moduleRoot="+qualityProductId))
+                #@zTreeList(call("link",adminPath+"/system/module/bugTree?moduleType=bug&moduleRoot="+cookieProductId))
                     #setzTreeValMap({"id":"moduleId","name":"moduleName","pid":"moduleParent"}) ##key值为固定
                     #zTreeSetLinkUrl(TINY_CONTEXT_PATH+adminPath+"/quality/version/taskToCase?status="+status+
                         "&currentPageId=5&testversionId="+testversionId)
                     #zTreeSetAddUrl(TINY_CONTEXT_PATH+adminPath+
-                        "/system/module/ajax/save?moduleType=bug&moduleRoot="+qualityProductId)
+                        "/system/module/ajax/save?moduleType=bug&moduleRoot="+cookieProductId)
                     #zTreeSetEditUrl(TINY_CONTEXT_PATH+adminPath+"/system/module/ajax/save")
                     #zTreeSetDelUrl(TINY_CONTEXT_PATH+adminPath+"/system/module/ajax/delete")
                 #end

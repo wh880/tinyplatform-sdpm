@@ -9,7 +9,7 @@
     #@tinyForm("thisform" "" "post" {"class":"test"})
     <input type="hidden" name="lastAddress" value=""/>
     #hiddenInput(hiddenInputName="testversionId" hiddenInputValue=testTask?.testversionId)
-    #hiddenInput(hiddenInputName="productId" hiddenInputValue=qualityProductId)
+    #hiddenInput(hiddenInputName="productId" hiddenInputValue=cookieProductId)
     <div style="width:100%">
     	<div class="infoContent">
     		<p class="titleName">提交测试</p>
@@ -20,11 +20,11 @@
 					 #@Tselect2F()
 					 <script type="text/javascript">
 					 $(function(){
-                         ajaxRead("${sid}", "projectId", "projectId", "projectName", "/quality/bug/ajax/project?productId=${qualityProductId}", ${testTask?.projectId?:(projectId?:0)});
+                         ajaxRead("${sid}", "projectId", "projectId", "projectName", "/quality/bug/ajax/project?productId=${cookieProductId}", ${testTask?.projectId?:(projectId?:0)});
 					    $("#${sid}").on("change",function(){
                              var pId = $("#${sid}  option:selected").val();
                             if(pId>0){
-                                ajaxRead("${sid}", "buildName", "buildId", "buildName", "/quality/bug/ajax/build?buildProduct=${qualityProductId}&buildProject="+pId, "${testTask?.buildName?:(buildId?:0)}","build");
+                                ajaxRead("${sid}", "buildName", "buildId", "buildName", "/quality/bug/ajax/build?buildProduct=${cookieProductId}&buildProject="+pId, "${testTask?.buildName?:(buildId?:0)}","build");
                                 ajaxRead("${sid}","testtaskOwner","orgUserId","orgUserRealName","/quality/version/ajax/user?projectId="+pId,"${testTask?.testtaskOwner?:0}");
                             }
                         });

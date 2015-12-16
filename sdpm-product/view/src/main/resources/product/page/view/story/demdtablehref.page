@@ -82,7 +82,7 @@
             <a href="${TINY_CONTEXT_PATH +adminPath}${m.href}${storyId}"
                title="${m?.name}">#buttonIcon(iconClass=m?.icon)</a>
         #end
-        <a href="javascript :;" onClick="javascript :history.back(-1);" title="返回">#buttonIcon(iconClass=
+        <a href="javascript:void(0);" onClick="javascript :history.back(-1);" title="返回">#buttonIcon(iconClass=
             "icon-reply")</a>
     </span>
     #end
@@ -183,7 +183,7 @@
         <a href="${TINY_CONTEXT_PATH +adminPath}${m.href}${storyId}"
            title="${m?.name}">#buttonIcon(iconClass=m?.icon)</a>
     #end
-    <a href="javascript :;" onClick="javascript :history.back(-1);" title="返回">#buttonIcon(iconClass=
+    <a href="javascript:void(0);" onClick="javascript :history.back(-1);" title="返回">#buttonIcon(iconClass=
         "icon-reply")</a>
     </span>
     </div>
@@ -228,7 +228,7 @@
 <script>
     $(function(){
         $(".addCase").on("click",function(){
-            $.cookie("qualityProductId",${cookieProductId},{path:"/",expires:365});
+            $.cookie("cookieProductId",${cookieProductId},{path:"/",expires:365});
         })
     })
 </script>

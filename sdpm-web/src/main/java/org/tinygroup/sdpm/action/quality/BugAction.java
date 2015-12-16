@@ -45,10 +45,7 @@ import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.sdpm.system.service.inter.ProfileService;
-import org.tinygroup.sdpm.util.CookieUtils;
-import org.tinygroup.sdpm.util.LogUtil;
-import org.tinygroup.sdpm.util.ModuleUtil;
-import org.tinygroup.sdpm.util.UserUtils;
+import org.tinygroup.sdpm.util.*;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -132,12 +129,12 @@ public class BugAction extends BaseController {
         QualityBug bug = null;
         ConditionCarrier carrier = new ConditionCarrier();
         if (no != null) {
-            Integer qualityProductId = Integer.parseInt(CookieUtils.getCookie(request, "qualityProductId"));
-            if (qualityProductId == null) {
+            Integer cookieProductId = Integer.parseInt(CookieUtils.getCookie(request, ProductUtils.COOKIE_PRODUCT_ID));
+            if (cookieProductId == null) {
                 return notFoundView();
             }
             bug = new QualityBug();
-            bug.setProductId(qualityProductId);
+            bug.setProductId(cookieProductId);
             bug.setNo(no);
             List<QualityBug> bugList = bugService.findBugList(bug);
             if (CollectionUtil.isEmpty(bugList)) {
@@ -195,7 +192,7 @@ public class BugAction extends BaseController {
     }
 
     @RequestMapping("/findBug")
-    public String findBugPager(@CookieValue(value = "qualityProductId", defaultValue = "0") Integer qualityProductId,
+    public String findBugPager(@CookieValue(value = ProductUtils.COOKIE_PRODUCT_ID, defaultValue = "0") Integer cookieProductId,
                                Integer start,
                                Integer limit,
                                SearchInfos infos,
@@ -215,7 +212,7 @@ public class BugAction extends BaseController {
         carrier.putSearch("bugSearch",infos,groupOperate);
 
         bug.setModuleId((Integer) request.getSession().getAttribute("bugModuleId"));
-        bug.setProductId(qualityProductId);
+        bug.setProductId(cookieProductId);
         bug.setDeleted(0);
         if (bug.getModuleId() != null) {
             carrier.putModuleIn("moduleId", String.valueOf(bug.getModuleId()));
@@ -872,10 +869,10 @@ public class BugAction extends BaseController {
 
     @RequestMapping("/getReport")
     public String report(
-            @CookieValue("qualityProductId") String qualityProductId,
+            @CookieValue(ProductUtils.COOKIE_PRODUCT_ID) String cookieProductId,
             String checkItem, Model model, HttpServletRequest request) {
 
-        Map<String, List<BugCount>> map = bugService.bugReport(checkItem, Integer.parseInt(qualityProductId));
+        Map<String, List<BugCount>> map = bugService.bugReport(checkItem, Integer.parseInt(cookieProductId));
         model.addAttribute("map", map);
         model.addAttribute("fields", checkItem);
         return "/quality/operate/bug/reportform.page";

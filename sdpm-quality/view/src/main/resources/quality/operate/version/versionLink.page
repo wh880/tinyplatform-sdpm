@@ -13,7 +13,7 @@
 
 ##					<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/versionLink.page">#buttonIcon(iconClass="icon-link")按需求关联</a>&nbsp;
 ##					<a href="${TINY_CONTEXT_PATH+adminPath}/testManagement/page/versionLink.page">#buttonIcon(iconClass="icon-link")按Bug关联</a>&nbsp;
-    <a href="javascript :;" onClick="javascript :history.back(-1);" title="返回">#buttonIcon(iconClass=
+    <a href="javascript:void(0);" onClick="javascript :history.back(-1);" title="返回">#buttonIcon(iconClass=
 		"icon-reply")</a>
 					<script type="text/javascript">
                         $(function(){
