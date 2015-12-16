@@ -29,9 +29,9 @@ public class TaskStatusUtil {
 
     public static String getCondition(String statu, String choose, String userId, String moduleIds) {
         String condition;
-        if (statu != null && choose == null) {
+        if (!StringUtil.isBlank(statu)) {//&& StringUtil.isBlank(choose)
             condition = status.get(statu);
-        } else if (statu == null && choose != null) {
+        } else if (!StringUtil.isBlank(choose)) {
             /**
              * choose = 1 未关闭
              * choose = 2 所有

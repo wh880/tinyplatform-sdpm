@@ -12,7 +12,7 @@
             var actionUrl = $("#taskTable").attr("data-url");
             $(".selChoose").on("click",function () {
                 if (actionUrl) {
-                    $("#taskTable").attr("data-url", actionUrl + "&choose=" + $(this).attr("val"));
+                    $("#taskTable").attr("data-url", "${TINY_CONTEXT_PATH+adminPath}/project/task/findPager?&moduleId=${moduleId}&key=${key}&choose=" + $(this).attr("val"));
                     $(".selChoose").removeClass("active_btn");
                     $(this).addClass("active_btn");
                     $("#taskTable").trigger("refresh");
@@ -43,7 +43,7 @@
             var actionUrl = $("#taskTable").attr("data-url");
             $(".projectMore").click(function (e) {
                 if(actionUrl) {
-                    $("#taskTable").attr("data-url", actionUrl + "&statu=" + $(this).attr("val"));
+                    $("#taskTable").attr("data-url", "${TINY_CONTEXT_PATH+adminPath}/project/task/findPager?&moduleId=${moduleId}&key=${key}&statu=" + $(this).attr("val"));
                     $("#taskTable").trigger("refresh");
                     $(".selChoose").removeClass("active_btn");
                     $(this).closest("div").find("a span:first").text($(this).text()).addClass("active_btn");
