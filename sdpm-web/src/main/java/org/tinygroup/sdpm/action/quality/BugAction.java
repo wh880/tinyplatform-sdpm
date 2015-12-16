@@ -254,7 +254,7 @@ public class BugAction extends BaseController {
         if (bugIds.length > 0) {
             for (String id : bugIds) {
                 QualityBug bug = bugService.findQualityBugById(Integer.valueOf(id));
-                if (bug.getBugConfirmed() != null && bug.getBugConfirmed() < 1) {
+                if (bug.getBugConfirmed() != null && bug.getBugConfirmed() ==0) {
                     bug.setBugConfirmed(1);
                     bugService.updateBug(bug);
                     LogUtil.logWithComment(LogUtil.LogOperateObject.BUG

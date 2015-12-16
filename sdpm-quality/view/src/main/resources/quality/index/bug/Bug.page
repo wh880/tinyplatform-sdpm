@@ -109,41 +109,47 @@
 								<li>
 									#foreach(m:menuManager.getScopeMenus("testbug-op"))
 										#if(m.id=="tmakesure")
-										<a tabindex="-1" href="javascript:;">#@mulOperation("tmakesure" TINY_CONTEXT_PATH+adminPath+"/quality/bug/batch/sure")
-                                        <div>${m.name}</div>
-                                        #end</a>
+											#@hasMenu("tmakesure")
+												<a tabindex="-1" href="javascript:;">#@mulOperation("tmakesure" TINY_CONTEXT_PATH+adminPath+"/quality/bug/batch/sure")
+												<div>${m.name}</div>
+												#end</a>
+											#end
 										#end
 									#end
 								</li>
 								<li class="dropdown-submenu">
 									#foreach(m:menuManager.getScopeMenus("testbug-op"))
-									#if(m.id=="tsolution")
-									<a tabindex="-1" href="javascript:void(0);">解决</a>
-									<ul class="dropdown-menu">
-									#foreach(re : getDict("bugResolution"))
-									<li>
-									    <a href="javascript:;">#@mulOperation("tsolution"+reFor.index TINY_CONTEXT_PATH+adminPath+"/quality/bug/batch/resolve?resolutionType="+re.value)
-                                        <div>${re.text}</div>
-                                        #end</a>
-                                    </li>
-									#end
-									</ul>
-									#end
+										#if(m.id=="tsolution")
+											#@hasMenu("tsolution")
+												<a tabindex="-1" href="javascript:void(0);">解决</a>
+												<ul class="dropdown-menu">
+													#foreach(re : getDict("bugResolution"))
+													<li>
+														<a href="javascript:;">#@mulOperation("tsolution"+reFor.index TINY_CONTEXT_PATH+adminPath+"/quality/bug/batch/resolve?resolutionType="+re.value)
+														<div>${re.text}</div>
+														#end</a>
+													</li>
+													#end
+												</ul>
+											#end
+										#end
 									#end
 								</li>
 								<li class="dropdown-submenu">
 								#foreach(m:menuManager.getScopeMenus("testbug-op"))
 									#if(m.id=="tassign")
-									<a tabindex="-1" href="javascript:void(0);">
-											指派给</a>
-									<ul class="dropdown-menu">
-									#foreach(user : userList)
-										<li>
+										#@hasMenu("tassign")
 											<a tabindex="-1" href="javascript:void(0);">
-											#@mulOperation("tassign"+userFor.index TINY_CONTEXT_PATH+adminPath+"/quality/bug/batch/assign?userId="+user.orgUserId)<div>${user.orgUserRealName}</div>#end</a>
-										</li>
-									#end
-									</ul>
+												指派给</a>
+											<ul class="dropdown-menu">
+											#foreach(user : userList)
+												<li>
+													<a tabindex="-1" href="javascript:void(0);">
+													#@mulOperation("tassign"+userFor.index TINY_CONTEXT_PATH+adminPath+"/quality/bug/batch/assign?userId="+user.orgUserId)<div>${user.orgUserRealName}</div>#end</a>
+												</li>
+											#end
+											</ul>
+										#end
 									#end
 									#end
 								</li>
