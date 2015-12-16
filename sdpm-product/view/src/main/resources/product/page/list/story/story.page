@@ -142,7 +142,7 @@
 
     #@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
 
-        #@toggleLeft({"class":"aclass"})
+        #@toggleLeft({"class":"aclass can-edit"})
             #@settoggleLeftTitle()产品模块#end
             #@settoggleLeftBody("treeLeftbox")
                 #@zTreeList(call("link",adminPath+"/system/module/tree?moduleType=story&moduleRoot="+cookieProductId))

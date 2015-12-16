@@ -1,4 +1,29 @@
 
+#macro Teditor(sstid textareaEditorName tbMap)#set(tid=tbMap?.id?:fmt("tid%d",rand()))
+<textarea id="${tid}" name="${textareaEditorName}" #mapToHtml(tbMap)>#bodyContent</textarea>
+<script type="text/javascript">
+    $(function(){
+        $('#${tid}').trumbowyg({
+            lang:"zh_cn",
+            closable: false,
+            mobile: true,
+            fixedBtnPane: false,
+            fixedFullWidth: true,
+            btnsDef: {
+                align: {
+                    dropdown: ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
+                    ico: 'justifyLeft'
+                },
+            },
+            btns: ['viewHTML','bold','|', 'italic','|', "link" ,'|','formatting','|', 'align','|', 'btnGrp-lists','|', 'foreColor', 'backColor','|', 'horizontalRule'],
+            autoAjustHeight: false,
+            height:300,
+
+        });
+    })
+</script>
+#end
+
 #set(name="task")
 #@tinyForm(
     "thisform" TINY_CONTEXT_PATH+adminPath+"/project/task/finish" "post" {"class":"test","enctype":"multipart/form-data"})
@@ -61,7 +86,7 @@
         #@elementItem()
             #@colLabel()备注#end
             #@formControlDiv("col-8")
-                #@Teditor("content" "comment" {"initialFrameHeight":"200"})#end
+                #@Teditor("content" "comment22" {"initialFrameHeight":"200"})#end
             #end
             #@validateDiv("col-2")#end
         #end
@@ -84,3 +109,14 @@
 <div style="width:30%;float:right">
     #history(adminPath+"/system/action/ajax/history?actionObjectType=task&actionObjectId="+task.taskId)
 </div>
+<script>
+    $(function(){
+        $("form[name=thisform]").Validform({
+            beforeSubmit:function(){
+                console.log($("[name=comment22]").val());
+                return false;
+            }
+
+        })
+    })
+</script>
