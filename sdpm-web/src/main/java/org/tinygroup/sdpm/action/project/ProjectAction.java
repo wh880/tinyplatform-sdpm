@@ -26,6 +26,8 @@ import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.sdpm.util.CookieUtils;
 import org.tinygroup.sdpm.util.LogUtil;
 import org.tinygroup.tinysqldsl.Pager;
+import org.tinygroup.weblayer.WebContext;
+import org.tinygroup.weblayer.mvc.WebContextAware;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -39,7 +41,7 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/a/project")
-public class ProjectAction extends BaseController {
+public class ProjectAction extends BaseController implements WebContextAware {
     @Autowired
     private ProjectService projectService;
     @Autowired
@@ -398,4 +400,7 @@ public class ProjectAction extends BaseController {
         return projectService.projectInCondition(key, pIds);
     }
 
+    public void setContext(WebContext webContext) {
+
+    }
 }

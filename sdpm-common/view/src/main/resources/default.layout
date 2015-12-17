@@ -20,7 +20,8 @@
     <script>
         var contextPath = "${TINY_CONTEXT_PATH}";
         var adminPath="${adminPath}";
-        var pomlist = new Array()
+        var pomlist = new Array();
+        var UPLOAD_ACTION_URL = '${TINY_CONTEXT_PATH}${UPLOAD_ACTION_URL}';
     </script>
     <link href="${TINY_CONTEXT_PATH}/uiengine.uicss" rel="stylesheet" />
     <script src="${TINY_CONTEXT_PATH}/uiengine.uijs"></script>
