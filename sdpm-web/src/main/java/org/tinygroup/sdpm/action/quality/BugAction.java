@@ -693,7 +693,9 @@ public class BugAction extends BaseController {
                        @RequestParam(value = "file", required = false) MultipartFile[] file,
                        String[] title,
                        HttpServletRequest request,
-                       String lastAddress, UploadProfile uploadProfile) throws IOException {
+                       String lastAddress,
+                       String currentAddress,
+                       UploadProfile uploadProfile) throws IOException {
 
         if (!StringUtil.isBlank(bug.getBugAssignedTo())) {
             bug.setBugAssignedDate(new Date());
@@ -719,8 +721,12 @@ public class BugAction extends BaseController {
                 , null
                 , null
                 , systemAction.getActionComment());
-        if (!StringUtil.isBlank(lastAddress)) {
-            return "redirect:" + lastAddress;
+        if(!StringUtil.isBlank(currentAddress)){
+            return "redirect:" + currentAddress;
+        }else{
+            if (!StringUtil.isBlank(lastAddress)) {
+                return "redirect:" + lastAddress;
+            }
         }
         return "redirect:" + "/a/quality/bug";
     }

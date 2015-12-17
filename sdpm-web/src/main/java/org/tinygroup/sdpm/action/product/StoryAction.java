@@ -135,7 +135,8 @@ public class StoryAction extends BaseController {
             ProductStory productStory,
             ProductStorySpec storySpec,
             UploadProfile uploadProfile,
-            String lastAddress) throws IOException {
+            String lastAddress,
+            String currentAddress) throws IOException {
         ProductStory story = storyService.addStory(productStory, storySpec,userUtils.getUserId());
         processProfile(uploadProfile, story.getStoryId(), ProfileType.STORY);
 
@@ -149,15 +150,24 @@ public class StoryAction extends BaseController {
                     null,
                     null,
                     systemAction.getActionComment());
-            if(!StringUtil.isBlank(lastAddress)){
+
+            if (!StringUtil.isBlank(lastAddress)) {
                 return "redirect:" + lastAddress;
             }
+
             return "redirect:" + adminPath + "/product/storySpec/find/productDemandDetail?storyId=" + story.getStoryId();
         } else {
             LogUtil.logWithComment(LogUtil.LogOperateObject.STORY,
                     LogUtil.LogAction.OPENED, String.valueOf(story.getStoryId()),
                     userUtils.getUserId(), String.valueOf(story.getProductId()),
                     null, null, null, systemAction.getActionComment());
+            if(!StringUtil.isBlank(currentAddress)){
+                return "redirect:" + currentAddress;
+            }else{
+                if (!StringUtil.isBlank(lastAddress)) {
+                    return "redirect:" + lastAddress;
+                }
+            }
             return "redirect:" + adminPath + "/product/story?choose=1&currentPageId=3";
         }
     }

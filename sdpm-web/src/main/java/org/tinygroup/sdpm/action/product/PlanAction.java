@@ -51,7 +51,8 @@ public class PlanAction extends BaseController {
             @CookieValue("cookieProductId") String cookieProductId,
             ProductPlan productPlan,
             SystemAction systemAction,
-            String lastAddress) throws IOException {
+            String lastAddress,
+            String currentAddress) throws IOException {
 
         productPlan.setProductId(Integer.parseInt(cookieProductId));
         productPlan.setDeleted(FieldUtil.DELETE_NO);
@@ -65,11 +66,15 @@ public class PlanAction extends BaseController {
                 , null
                 , null
                 , systemAction.getActionComment());
-        if (!StringUtil.isBlank(lastAddress)) {
-            if(lastAddress.contains("?")){
-                return "redirect:" + lastAddress+"&backPlan="+productPlan1.getPlanId();
+        if(!StringUtil.isBlank(currentAddress)){
+            return "redirect:" + currentAddress;
+        }else{
+            if (!StringUtil.isBlank(lastAddress)) {
+                if(lastAddress.contains("?")){
+                    return "redirect:" + lastAddress+"&backPlan="+productPlan1.getPlanId();
+                }
+                return "redirect:" + lastAddress+"?backPlan="+productPlan1.getPlanId();
             }
-            return "redirect:" + lastAddress+"?backPlan="+productPlan1.getPlanId();
         }
         return "redirect:" + "/a/product/plan/content";
     }

@@ -8,6 +8,7 @@
 #@layout(quality)#end
     #@tinyForm("thisform" "" "post" {"class":"test"})
     <input type="hidden" name="lastAddress" value=""/>
+    <input type="hidden" name="currentAddress" value=""/>
     #hiddenInput(hiddenInputName="testversionId" hiddenInputValue=testTask?.testversionId)
     #hiddenInput(hiddenInputName="productId" hiddenInputValue=cookieProductId)
     <div style="width:100%">
@@ -163,18 +164,17 @@
         #end
 
         #@elementItem()
-        <div class="col-12">
-            <div class="col-5">
-
+            <div class="col-12">
+                <div class="col-4">
+                    <button style="float: right" type="submit" id="submit2" class="commitBtn">保存</button>
+                </div>
+                <div class="col-1"><button name="saveAndContinue" style="float: right" type="submit" id="submit2" class="commitBtn">保存并继续</button></div>
+                <div class="col-1"></div>
+                <div class="col-1">
+                    #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end
+                </div>
+                <div class="col-5"></div>
             </div>
-            <div class="col-1">
-                <button style="float: left" type="submit" id="submit2" class="commitBtn">保存</button>
-            </div>
-            <div class="col-1">
-            #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end
-            </div>
-            <div class="col-5"></div>
-        </div>
     	#end
     </div>
     </div>
@@ -193,9 +193,19 @@
             },
             callback:function(data){
                 if(data.status=="y"){
-                    var olUrl = $("input[name=lastAddress]").attr("value");
-                    if(!olUrl) olUrl="/a/quality/version?status=tvernotest&currentPageId=5"
-                    window.location.href="${TINY_CONTEXT_PATH}"+olUrl;
+                    var oldUrl = $("input[name=lastAddress]").attr("value");
+                    var currentAddress = $("input[name=currentAddress]").attr("value");
+                    var jumpUrl;
+                    if(currentAddress) {
+                        jumpUrl = currentAddress;
+                    }else{
+                        if(!oldUrl) {
+                            olUrl = "/a/quality/version?status=tvernotest&currentPageId=5"
+                        }
+                        jumpUrl = oldUrl
+                    }
+
+                    window.location.href="${TINY_CONTEXT_PATH}"+jumpUrl;
                 }
 
             }

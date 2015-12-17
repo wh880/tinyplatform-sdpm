@@ -116,6 +116,7 @@ public class TestCaseAction extends BaseController {
                        String[] step,
                        String[] expect,
                        String lastAddress,
+                       String currentAddress,
                        UploadProfile uploadProfile) throws Exception {
         if (testcase.getCaseId() == null || testcase.getCaseId() ==0) {
             testcase.setCaseOpenedBy(userUtils.getUserId());
@@ -163,8 +164,12 @@ public class TestCaseAction extends BaseController {
             );
         }
         processProfile(uploadProfile, testcase.getCaseId(), ProfileType.TESTCASE);
-        if (!StringUtil.isBlank(lastAddress)) {
-            return "redirect:" + lastAddress;
+        if(!StringUtil.isBlank(currentAddress)){
+            return "redirect:" + currentAddress;
+        }else{
+            if (!StringUtil.isBlank(lastAddress)) {
+                return "redirect:" + lastAddress;
+            }
         }
         return "redirect:/a/quality/testCase";
     }

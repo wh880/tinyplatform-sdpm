@@ -11,6 +11,7 @@
 
     #@tinyForm("addCaseForm" TINY_CONTEXT_PATH+adminPath+"/quality/testCase/save" "post" {"class":"","enctype":"multipart/form-data"})
     <input type="hidden" name="lastAddress" value=""/>
+    <input type="hidden" name="currentAddress" value=""/>
     #hiddenInput(hiddenInputName="caseId" hiddenInputValue=testCase?.caseId)
     #hiddenInput(hiddenInputName="caseFromBug" hiddenInputValue=bugId)
 	<div style="width:100%">
@@ -187,18 +188,17 @@
             </div>
         #end
        #@elementItem()
-        <div class="col-12">
-            <div class="col-5">
-
-            </div>
-            <div class="col-1">
-                <button style="float: left" type="submit" id="submit2" class="commitBtn">保存</button>
-            </div>
-            <div class="col-1">
-                #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end
-            </div>
-            <div class="col-5"></div>
-        </div>
+           <div class="col-12">
+               <div class="col-4">
+                   <button style="float: right" type="submit" id="submit2" class="commitBtn">保存</button>
+               </div>
+               <div class="col-1"><button name="saveAndContinue" style="float: right" type="submit" id="submit2" class="commitBtn">保存并继续</button></div>
+               <div class="col-1"></div>
+               <div class="col-1">
+                   #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end
+               </div>
+               <div class="col-5"></div>
+           </div>
     #end
     <br>
     #end

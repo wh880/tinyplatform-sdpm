@@ -84,7 +84,7 @@
 
 #@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/product/plan/save" "post" {"class":""})
 <input type="hidden" name="lastAddress" value=""/>
-
+<input type="hidden" name="currentAddress" value=""/>
 
 <div class="infoContent">
         <p class="titleName">创建新计划</p>
@@ -142,18 +142,18 @@
         #@validateDiv("col-2")#end
     #end
   #@elementItem()
-        <div class="col-12">
-            <div class="col-5">
+      <div class="col-12">
+          <div class="col-4">
+              <button style="float: right" type="submit" id="submit2" class="commitBtn">保存</button>
+          </div>
+          <div class="col-1"><button name="saveAndContinue" style="float: right" type="submit" id="submit2" class="commitBtn">保存并继续</button></div>
+          <div class="col-1"></div>
+          <div class="col-1">
 
-            </div>
-            <div class="col-1">
-                <button style="float: left" type="submit" id="submit2" class="commitBtn">保存</button>
-            </div>
-            <div class="col-1">
-				#@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end
-            </div>
-            <div class="col-5"></div>
-        </div>
+              #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end
+          </div>
+          <div class="col-5"></div>
+      </div>
     #end
 #end
 </div>

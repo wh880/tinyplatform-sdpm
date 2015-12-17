@@ -71,6 +71,7 @@ public class ReleaseAction extends BaseController {
                        ProductRelease productRelease,
                        SystemAction systemAction,
                        String lastAddress,
+                       String currentAddress,
                        UploadProfile uploadProfile) throws IOException {
         productRelease.setProductId(Integer.parseInt(cookieProductId));
         ProductRelease release = releaseService.addRelease(productRelease);
@@ -84,10 +85,14 @@ public class ReleaseAction extends BaseController {
                 , null
                 , null
                 , systemAction.getActionComment());
-        if(!StringUtil.isBlank(lastAddress)){
-            return "redirect:"+lastAddress;
+        if(!StringUtil.isBlank(currentAddress)){
+            return "redirect:" + currentAddress;
+        }else{
+            if (!StringUtil.isBlank(lastAddress)) {
+                return "redirect:" + lastAddress;
+            }
         }
-        return "redirect:" + "/a/product/release/content";
+        return "redirect:" +adminPath+ "/product/release/content";
     }
 
     @RequestMapping("/update")

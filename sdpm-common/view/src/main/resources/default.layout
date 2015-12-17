@@ -132,6 +132,17 @@
         var oldUrl = referrer.substring(referrer.indexOf(classPath)+classPath.length);
         if(oldUrl.indexOf("login")<0&&referrer!=window.location.href)
             $("input[name=lastAddress]").attr("value",oldUrl);
+
+    });
+
+    $("button[name=saveAndContinue]").on("click",function(){
+        var hre = window.location.href;
+        var classPath = "${TINY_CONTEXT_PATH}";
+        var currentUrl = hre.substring(hre.indexOf(classPath)+classPath.length);
+        if(currentUrl.indexOf("?")>0){
+            currentUrl=currentUrl.substring(0,currentUrl.indexOf("?"));
+        }
+        $("input[name=currentAddress]").attr("value",currentUrl);
     });
 
     $(function () {

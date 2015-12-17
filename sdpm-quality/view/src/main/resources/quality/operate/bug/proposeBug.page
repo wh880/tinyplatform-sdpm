@@ -2,11 +2,11 @@
     .select_boxes{margin-top:0}
 </style>
 
-
 #set(name="qualityBug")
 
         #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/quality/bug/save?bugConfirmed=0" "post" {"class":"test","enctype":"multipart/form-data"})
             <input type="hidden" name="lastAddress" value=""/>
+            <input type="hidden" name="currentAddress" value=""/>
             #hiddenInput(hiddenInputName="bugId" hiddenInputValue=bug?.bugId)
             #hiddenInput(hiddenInputName="bugFromCase" hiddenInputValue=caseId)
         <div style="width:100%">
@@ -312,9 +312,10 @@
 #end
 #@elementItem()
     <div class="col-12">
-        <div class="col-5">
+        <div class="col-4">
             <button style="float: right" type="submit" id="submit2" class="commitBtn">保存</button>
         </div>
+        <div class="col-1"><button name="saveAndContinue" style="float: right" type="submit" id="submit2" class="commitBtn">保存并继续</button></div>
         <div class="col-1"></div>
         <div class="col-1">
 
