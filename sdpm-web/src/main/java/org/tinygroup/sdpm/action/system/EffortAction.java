@@ -207,7 +207,6 @@ public class EffortAction extends BaseController {
             effortService.batchDeleteEffort(effort.getEffortId());
             map.put("status", "y");
             map.put("info", "1");
-
             return map;
         } else if (isvip.equals("n")) {
             effortService.saveSystemEffort(effort);

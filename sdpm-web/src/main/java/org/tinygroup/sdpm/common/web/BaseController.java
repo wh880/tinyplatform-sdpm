@@ -24,6 +24,7 @@ import org.tinygroup.sdpm.system.service.inter.ProfileService;
 import org.tinygroup.sdpm.util.ProductUtils;
 import org.tinygroup.sdpm.util.ProjectOperate;
 import org.tinygroup.sdpm.util.UserUtils;
+import org.tinygroup.weblayer.WebContext;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.ConstraintViolationException;
@@ -80,6 +81,8 @@ public abstract class BaseController {
     private FileRepository fileRepository;
     @Autowired
     private ProfileService profileService;
+
+    private WebContext webContext;
 
     protected BaseController() {
     }
@@ -152,7 +155,7 @@ public abstract class BaseController {
      * 不存在异常返回
      */
     public String notFoundView() {
-        return "error/404";
+        return "error/notFound";
     }
 
 
@@ -456,4 +459,9 @@ public abstract class BaseController {
     public String redirectProjectForm() {
         return "redirect:" + adminPath + "/project/form";
     }
+
+    public void setContext(WebContext webContext) {
+        this.webContext = webContext;
+    }
+
 }

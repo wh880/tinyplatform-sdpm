@@ -19,10 +19,10 @@
 
 
     <!-- 支持Shiro对Controller的方法级AOP安全控制 begin-->
-    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
-          depends-on="lifecycleBeanPostProcessor">
-        <property name="proxyTargetClass" value="true"/>
-    </bean>
+    <!--<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"-->
+          <!--depends-on="lifecycleBeanPostProcessor">-->
+        <!--<property name="proxyTargetClass" value="true"/>-->
+    <!--</bean>-->
 
     <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
         <property name="exceptionMappings">
@@ -41,5 +41,5 @@
     <mvc:default-servlet-handler/>
 
     <!-- 启动aop的注解解析器-->
-    <aop:aspectj-autoproxy/>
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
 </beans>

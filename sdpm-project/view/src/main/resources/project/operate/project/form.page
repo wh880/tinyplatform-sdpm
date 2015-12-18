@@ -102,9 +102,12 @@
             #end
         #end
         #@elementItem()
-            #@sdpmItem("项目描述")
-                #@Teditor("projectDesc" "projectDesc" {"initialFrameHeight":"200","initialFrameWidth":"702"})#end
-            #end
+            <div class="col-12">
+                <div class="col-2 text-r"><label>项目描述：</label></div>
+                <div class="col-9">
+                    #@Teditor("projectDesc" "projectDesc")#end
+                </div>
+            </div>
         #end
         #@elementItem()
             #@sdpmItem("访问控制")

@@ -8,6 +8,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.project.service.inter.TeamService;
 import org.tinygroup.sdpm.util.*;
@@ -21,6 +22,7 @@ import java.util.List;
  * Created by Hulk on 2015/11/13.
  */
 @Aspect
+@Service
 public class PermissionInterceptor {
 
     @Autowired
