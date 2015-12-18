@@ -3,6 +3,7 @@ package org.tinygroup.sdpm.util;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang.RandomStringUtils;
 import org.apache.commons.lang.StringUtils;
+import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.util.Num62;
 
 import java.io.File;
@@ -150,5 +151,10 @@ public class UploadUtils {
         return tmpFile;
     }
 
+    public static String resolverFilePath(String filePath, String separator) {
+        separator = StringUtil.replace(separator, "\\", "/");
+        filePath = StringUtil.replace(filePath, "\\", "/");
+        return StringUtil.substringAfterLast(filePath, separator);
+    }
 
 }

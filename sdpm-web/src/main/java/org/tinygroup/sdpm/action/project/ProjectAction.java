@@ -328,15 +328,17 @@ public class ProjectAction extends BaseController implements WebContextAware {
     @RequestMapping("/findManager")
     public String findManager(String projectId, Model model) {
         Project project = projectService.findProjectById(Integer.parseInt(projectId));
-        //项目负责人
-        OrgUser projectPm = userService.findUser(project.getProjectPm());
-        //测试负责人
-        OrgUser productQd = userService.findUser(project.getProjectQd());
-        //发布负责人
-        OrgUser productRd = userService.findUser(project.getProjectRd());
-        model.addAttribute("projectPm", projectPm);
-        model.addAttribute("productQd", productQd);
-        model.addAttribute("productRd", productRd);
+        if (project != null) {
+            //项目负责人
+            OrgUser projectPm = userService.findUser(project.getProjectPm());
+            //测试负责人
+            OrgUser productQd = userService.findUser(project.getProjectQd());
+            //发布负责人
+            OrgUser productRd = userService.findUser(project.getProjectRd());
+            model.addAttribute("projectPm", projectPm);
+            model.addAttribute("productQd", productQd);
+            model.addAttribute("productRd", productRd);
+        }
         return "organization/others/projectUserBaseInfo.pagelet";
     }
 

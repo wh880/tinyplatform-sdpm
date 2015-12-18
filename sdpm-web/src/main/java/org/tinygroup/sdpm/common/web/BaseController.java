@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.multipart.MultipartFile;
 import org.tinygroup.commons.tools.ArrayUtil;
 import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.convert.objectjson.fastjson.ObjectToJson;
@@ -22,7 +21,9 @@ import org.tinygroup.sdpm.system.service.inter.LogService;
 import org.tinygroup.sdpm.system.service.inter.ProfileService;
 import org.tinygroup.sdpm.util.ProductUtils;
 import org.tinygroup.sdpm.util.ProjectOperate;
+import org.tinygroup.sdpm.util.UploadUtils;
 import org.tinygroup.sdpm.util.UserUtils;
+import org.tinygroup.springmvc.multipart.TinyMultipartFile;
 import org.tinygroup.weblayer.WebContext;
 
 import javax.servlet.http.HttpServletResponse;
@@ -245,14 +246,14 @@ public abstract class BaseController {
      */
     public void updateUploadFile(UploadProfile uploadProfile, Integer objectId, ProfileType type) throws IOException {
         List<SystemProfile> updateProfileList = uploadProfile.getUpdateProfileList();
-        List<MultipartFile> updateFileList = uploadProfile.getUpdateFileList();
+        List<TinyMultipartFile> updateFileList = uploadProfile.getUpdateFileList();
         List<SystemProfile> updateList = new ArrayList<SystemProfile>();
         if (CollectionUtil.isEmpty(updateFileList) || CollectionUtil.isEmpty(updateProfileList) ||
                 updateProfileList.size() != updateFileList.size()) {
             return;
         }
         for (int i = 0, n = updateFileList.size(); i < n; i++) {
-            MultipartFile multipartFile = updateFileList.get(i);
+            TinyMultipartFile multipartFile = updateFileList.get(i);
             SystemProfile profile = updateProfileList.get(i);
             if (profile.getFileId() == null) {
                 continue;
@@ -280,19 +281,19 @@ public abstract class BaseController {
      * @param title
      * @throws IOException
      */
-    public void upload(MultipartFile uploadFile, Integer objectId, ProfileType type, String title) throws IOException {
+    public void upload(TinyMultipartFile uploadFile, Integer objectId, ProfileType type, String title) throws IOException {
         SystemProfile systemProfile = saveProfile(uploadFile, objectId, type, title);
         profileService.addSystemProfile(systemProfile);
     }
 
-    protected SystemProfile saveProfile(MultipartFile uploadFile, Integer objectId, ProfileType type, String title) throws IOException {
+    protected SystemProfile saveProfile(TinyMultipartFile uploadFile, Integer objectId, ProfileType type, String title) throws IOException {
         if (uploadFile == null || uploadFile.isEmpty()) {
             return null;
         }
         String origName = uploadFile.getOriginalFilename();
         String ext = FilenameUtils.getExtension(origName);
-        String fileUrl = fileRepository.storeByExt(UPLOAD_PATH, ext, uploadFile);
-        fileUrl = fileRepository.resolverFilePath(fileUrl, UPLOAD_PATH);
+        String fileUrl = uploadFile.toFileObject().getAbsolutePath();
+        fileUrl = UploadUtils.resolverFilePath(fileUrl, UPLOAD_PATH);
         int size = (int) uploadFile.getSize();
         return new SystemProfile(fileUrl, title, ext, size,
                 type.getType(), objectId, userUtils.getUserAccount(), new Date());
@@ -308,7 +309,7 @@ public abstract class BaseController {
      * @throws IOException
      */
     public void uploadMultiFiles(UploadProfile uploadProfile, Integer objectId, ProfileType type) throws IOException {
-        MultipartFile[] uploadFiles = uploadProfile.getNewUploadFile();
+        TinyMultipartFile[] uploadFiles = uploadProfile.getNewUploadFile();
         String[] title = uploadProfile.getNewUploadFileTitle();
         if (ArrayUtil.isEmptyArray(uploadFiles)) {
             return;
@@ -334,7 +335,7 @@ public abstract class BaseController {
      * @param title
      * @throws IOException
      */
-    public void uploadMultiFiles(MultipartFile[] uploadFiles, Integer objectId, ProfileType type, String[] title) throws IOException {
+    public void uploadMultiFiles(TinyMultipartFile[] uploadFiles, Integer objectId, ProfileType type, String[] title) throws IOException {
 
         if (ArrayUtil.isEmptyArray(uploadFiles)) {
             return;
@@ -360,7 +361,7 @@ public abstract class BaseController {
      * @throws IOException
      */
 
-    public void uploadNoTitle(MultipartFile uploadFile, Integer objectId, ProfileType type) throws IOException {
+    public void uploadNoTitle(TinyMultipartFile uploadFile, Integer objectId, ProfileType type) throws IOException {
         SystemProfile profile = saveProfile(uploadFile, objectId, type, null);
         profileService.addSystemProfile(profile);
     }
@@ -373,7 +374,7 @@ public abstract class BaseController {
      * @param objectId
      * @param type
      */
-    public void uploadNoTitles(MultipartFile[] uploadFiles, Integer objectId, ProfileType type) throws IOException {
+    public void uploadNoTitles(TinyMultipartFile[] uploadFiles, Integer objectId, ProfileType type) throws IOException {
         if (ArrayUtil.isEmptyArray(uploadFiles)) {
             return;
         }

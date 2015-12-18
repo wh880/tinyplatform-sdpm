@@ -428,23 +428,23 @@
             <!-- <param-parser-filter bean-name="paramValueEncryptFilter"></param-parser-filter> -->
         </param-parser-filters>
 
-        <!--<upload-service bean-name="sdpmUploadService">-->
-            <!--&lt;!&ndash;所有文件大小&ndash;&gt;-->
-            <!--<property name="sizeMax" value="-1"></property>-->
-            <!--&lt;!&ndash;单个文件允许的最大尺寸&ndash;&gt;-->
-            <!--<property name="fileSizeMax" value="-1"></property>-->
-            <!--&lt;!&ndash;上传文件的目录&ndash;&gt;-->
-            <!--<property name="repository" value="{userfiles.basedir}"/>-->
-            <!--&lt;!&ndash;文件是否会被垃圾回收&ndash;&gt;-->
-            <!--<property name="temporary" value="false"/>-->
-            <!--&lt;!&ndash;true为直接将上传的内容直接保存到文件目录中，false则根据sizeThreshold判断是否存到目录中&ndash;&gt;-->
-            <!--<property name="saveInFile" value="true"></property>-->
+        <upload-service bean-name="sdpmUploadService">
+            <!--所有文件大小-->
+            <property name="sizeMax" value="-1"></property>
+            <!--单个文件允许的最大尺寸-->
+            <property name="fileSizeMax" value="-1"></property>
+            <!--上传文件的目录-->
+            <property name="repository" value="{userfiles.basedir}"/>
+            <!--文件是否会被垃圾回收-->
+            <property name="temporary" value="false"/>
+            <!--true为直接将上传的内容直接保存到文件目录中，false则根据sizeThreshold判断是否存到目录中-->
+            <property name="saveInFile" value="true"></property>
 
-            <!--&lt;!&ndash;将文件放在内存中的阈值（字节，支持K/M/G），小于此值的文件被保存在内存中。默认值为10240字节&ndash;&gt;-->
-            <!--<property name="sizeThreshold" value="0"></property>-->
-            <!--&lt;!&ndash;是否将普通的form field保持在内存里？ 默认为false，但当sizeThreshold为0时，默认为true。&ndash;&gt;-->
-            <!--<property name="keepFormFieldInMemory" value="true"></property>-->
-        <!--</upload-service>-->
+            <!--将文件放在内存中的阈值（字节，支持K/M/G），小于此值的文件被保存在内存中。默认值为10240字节-->
+            <property name="sizeThreshold" value="0"></property>
+            <!--是否将普通的form field保持在内存里？ 默认为false，但当sizeThreshold为0时，默认为true。-->
+            <property name="keepFormFieldInMemory" value="true"></property>
+        </upload-service>
     </parser>
     <rewrite>
         <!-- <rule pattern="/hello/(\w+)\.page"> <condition test="%{QUERY:name}"

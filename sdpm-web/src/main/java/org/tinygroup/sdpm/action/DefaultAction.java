@@ -1,18 +1,18 @@
 package org.tinygroup.sdpm.action;
 
 import com.alibaba.fastjson.JSON;
-import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
+import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.convert.objectjson.fastjson.ObjectToJson;
-import org.tinygroup.logger.LogLevel;
 import org.tinygroup.sdpm.action.system.FileRepository;
 import org.tinygroup.sdpm.common.web.BaseController;
+import org.tinygroup.sdpm.util.UploadUtils;
+import org.tinygroup.springmvc.multipart.TinyMultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -51,6 +51,7 @@ public class DefaultAction extends BaseController {
     public String about() {
         return "common/about";
     }
+
     @RequestMapping("a/system/us")
     public String us() {
         return "common/us";
@@ -65,20 +66,16 @@ public class DefaultAction extends BaseController {
      * @throws IOException
      */
     @RequestMapping(value = "/ajaxUploadImage")
-    public String ajaxUploadImage(@RequestParam(value = "upfile", required = false) MultipartFile uploadFile,
+    public String ajaxUploadImage(@RequestParam(value = "upfile", required = false) TinyMultipartFile uploadFile,
                                   HttpServletResponse response) {
         Map<String, String> map = new HashMap<String, String>();
-
-        try {
-            String origName = uploadFile.getOriginalFilename();
-            String ext = FilenameUtils.getExtension(origName);
-            String fileUrl = fileRepository.storeByExt(UPLOAD_PATH, ext, uploadFile);
-            fileUrl = fileRepository.resolverFilePath(fileUrl, UPLOAD_PATH);
+        if (uploadFile.toFileObject() == null || StringUtil.isBlank(uploadFile.toFileObject().getAbsolutePath())) {
+            map.put("state", "n");
+        } else {
+            String fileUrl = uploadFile.toFileObject().getAbsolutePath();
+            fileUrl = UploadUtils.resolverFilePath(fileUrl, UPLOAD_PATH);
             map.put("url", fileUrl);
             map.put("state", "SUCCESS");
-        } catch (IOException e) {
-            logger.logMessage(LogLevel.ERROR, "文件上传失败", e);
-            map.put("state", "n");
         }
         ObjectToJson objectToJson = new ObjectToJson();
         return renderString(response, objectToJson.convert(map), "text/html");
