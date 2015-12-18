@@ -1,11 +1,8 @@
-
 #set(editpagePath="/system/page/dictionaries/dict_edit.pagelet",editpageModalId="dictEditModal",editpageModal="#"+editpageModalId)
 #set(viewpagePath="/system/page/dictionaries/dict_view.pagelet",viewpageModalId="dictViewModal",viewpageModal="#"+viewpageModalId)
 #datatablesInitSimple("#dictListTb" )
 #set(threeMenu="dictionary-type")
-	
 #@divDataTablebox()
-
 #@tableBox()
 	#@datatable("dictListTb")
 		#@tableToolbar()
@@ -25,8 +22,7 @@
 				#end
 			#end
 			#@tbody()
-##			#set(objs=[["性别","SEX"],["年龄","AGE"],["教育程度","EDUCATION"],["残疾等级","DISABILITYGRADE"],["残疾类别","DISABILITYTYPE"],["角色类型","ROLETYPE"],["用户状态","USERSTATUS"],["岗位任职规则属性","JOBRULE"],["岗位职责规则属性","JOBRESP"],
-##			["1","2"],["1","2"],["1","2"]])
+
 			#foreach(mo:list)
 				#@tr("text-c")
 					#@td()<input type="checkbox" value="${mo?.moduleId}" name="idCheck">#end
@@ -40,7 +36,7 @@
 ##								#iconOperation(m.icon m.name "ml-5 delBtn" adminPath+m.href+"?moduleId="+mo?.moduleId)
 								#@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m.href mo?.moduleId)#buttonIcon(iconClass=m.icon)#end
 							#end
-							
+
 						#end
 					#end
 				#end

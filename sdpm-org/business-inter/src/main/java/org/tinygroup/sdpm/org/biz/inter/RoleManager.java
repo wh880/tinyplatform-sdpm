@@ -82,5 +82,5 @@ public interface RoleManager {
 
     List<OrgRole> getRolesByIds(String... ids);
 
-    List<OrgRole> roleInCondition(String condition, String type);
+    List<OrgRole> roleInCondition(String condition, String type, Integer limit);
 }

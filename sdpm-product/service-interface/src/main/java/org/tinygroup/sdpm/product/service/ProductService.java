@@ -142,5 +142,5 @@ public interface ProductService {
      * @param condition
      * @return
      */
-    List<Product> productInCondition(String condition, Integer... ids);
+    List<Product> productInCondition(String condition, Integer limit, Integer... ids);
 }

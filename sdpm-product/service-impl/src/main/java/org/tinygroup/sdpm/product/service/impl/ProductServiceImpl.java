@@ -87,8 +87,8 @@ public class ProductServiceImpl implements ProductService {
         return productMap;
     }
 
-    public List<Product> productInCondition(String condition, Integer... ids) {
-        return productManager.productInCondition(condition, ids);
+    public List<Product> productInCondition(String condition, Integer limit, Integer... ids) {
+        return productManager.productInCondition(condition, limit, ids);
     }
 
     public Map<String, List<Product>> getUserProductsMap(String userId) {

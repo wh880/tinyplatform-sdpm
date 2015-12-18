@@ -21,4 +21,5 @@ import org.tinygroup.sdpm.system.dao.pojo.SystemConfig;
 
 public interface SystemConfigDao extends BaseDao<SystemConfig, Integer> {
 
+    SystemConfig getConfigBySection(String section);
 }

@@ -103,5 +103,5 @@ public interface BuildService {
      * @param productId
      * @return
      */
-    List<ProjectBuild> buildInCondition(String condition, Integer productId, Integer projectId);
+    List<ProjectBuild> buildInCondition(String condition, Integer limit, Integer productId, Integer projectId);
 }

@@ -70,6 +70,6 @@ public interface BugManager {
 
     List<QualityBug> getBugsInReleaseDoc(QualityBug bug);
 
-    List<QualityBug> bugInCondition(String condition, Integer productId);
+    List<QualityBug> bugInCondition(String condition, Integer limit, Integer productId);
 
 }

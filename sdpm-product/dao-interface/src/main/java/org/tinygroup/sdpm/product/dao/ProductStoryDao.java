@@ -73,5 +73,5 @@ public interface ProductStoryDao extends BaseDao<ProductStory,Integer> {
      * @param productId
      * @return
      */
-    List<ProductStory> storyInCondition(String condition, Integer productId, Integer...ids);
+    List<ProductStory> storyInCondition(String condition, Integer limit, Integer productId, Integer...ids);
 }

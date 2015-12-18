@@ -33,7 +33,10 @@
                   icon="icon-trash" sort="100" isShow="1" scope="dictitem-op"></menu>
         </menu>
     </menu>
-
+    <menu id="config" name="系统配置" href="/system/config" isShow="1" sort="300">
+        <menu id="config-edit" parent-id="system-config" name="编辑系统配置" href="/system/config/toUpdate" icon="icon-edit"
+              sort="200" isShow="1" scope="config-op"></menu>
+    </menu>
     <menu id="about-us" name="关于我们" href="/system/about" isShow="0" sort="400"/>
     <menu id="upload-file" name="文件上传" sort="1000" isShow="0"/>
 

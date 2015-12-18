@@ -110,6 +110,6 @@ public interface RequestService {
      * @param condition
      * @return
      */
-    List<ServiceRequest> requestInCondition(String condition);
+    List<ServiceRequest> requestInCondition(String condition, Integer limit);
 }
 

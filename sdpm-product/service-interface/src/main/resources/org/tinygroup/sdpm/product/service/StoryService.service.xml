@@ -107,6 +107,7 @@
     <service-method local-name="storyInCondition" service-id="storyInCondition" method-name="storyInCondition" cacheable="false" category="org.tinygroup.sdpm.product.service">
       <service-parameters>
         <service-parameter name="condition" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="limit" type="java.lang.Integer" required="false" is-array="false"/>
         <service-parameter name="productId" type="java.lang.Integer" required="false" is-array="false"/>
       </service-parameters>
       <service-result name="storyInConditionResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.product.dao.pojo.ProductStory"/>

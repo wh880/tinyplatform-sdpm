@@ -37,7 +37,7 @@
            #@colLabel("col-4")<span class="c-red">*</span>中文名：#end
                #@gridSysCol(6)
                   #tinyInput(
-                         "text" "moduleTitle" module?.moduleTitle {"datatype":"","id":"请求标题","class":
+                         "text" "moduleTitle" module?.moduleTitle {"datatype":"*","id":"请求标题","class":
                              "input-text","nullmsg":"name不为空"})
                          #end
 

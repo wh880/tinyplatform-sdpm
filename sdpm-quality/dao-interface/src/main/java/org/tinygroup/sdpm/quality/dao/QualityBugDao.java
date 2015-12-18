@@ -49,5 +49,5 @@ public interface QualityBugDao extends BaseDao<QualityBug,Integer> {
 
     List<QualityBug> getBugsInReleaseDoc(QualityBug bug);
 
-    List<QualityBug> bugInCondition(String condition, Integer productId);
+    List<QualityBug> bugInCondition(String condition, Integer limit, Integer productId);
 }

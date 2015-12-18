@@ -25,7 +25,7 @@
                                 $("#${sid}").on("setValue",function(o,treeNode){
                                     var pId = treeNode.id;
                                     if(pId>0){
-                                        ajaxRead("${sid}","moduleId","moduleId","moduleName","/quality/bug/ajax/module?moduleRoot="+pId,${bug?.moduleId?:0},"module");
+                                        ajaxRead("${sid}","moduleId","moduleId","moduleName","/quality/bug/ajax/module?moduleRoot="+pId,${bug?.moduleId?:(moduleId?:0)},"module");
                                         ajaxRead("${sid}","projectId","projectId","projectName","/quality/bug/ajax/project?productId="+pId,${bug?.projectId?:0});
                                         $("#modelBug").attr("href",mUrl+pId);
                                     }
@@ -46,7 +46,7 @@
                     #end
                     #@div(divClass="col-3")
                         #@Tselect2F()
-                            #@Tselect2Body("moduleId" "" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                            #@Tselect2Body("moduleId" moduleId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                                 <option value="0">/</option>
                             #end
                             #@Tselect2Fix()#@aModal("#myModal" "添加模块" "500" "300" "btn-class" adminPath+"/product/addModule?pId=" "modelBug")

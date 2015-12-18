@@ -140,8 +140,19 @@
         var hre = window.location.href;
         var classPath = "${TINY_CONTEXT_PATH}";
         var currentUrl = hre.substring(hre.indexOf(classPath)+classPath.length);
+        var mId;
+        if(currentUrl.indexOf("moduleId")>0){
+            mId = currentUrl.substring(currentUrl.indexOf("moduleId")+"moduleId".length+1);
+            if(mId.indexOf("&")>0){
+                mId = mId.substring(0,mId.indexOf("&"));
+            }
+        }
         if(currentUrl.indexOf("?")>0){
-            currentUrl=currentUrl.substring(0,currentUrl.indexOf("?"));
+            if(mId){
+                currentUrl =  currentUrl.substring(0,currentUrl.indexOf("?"))+"?moduleId="+mId;
+            }else{
+                currentUrl=currentUrl.substring(0,currentUrl.indexOf("?"));
+            }
         }
         $("input[name=currentAddress]").attr("value",currentUrl);
     });

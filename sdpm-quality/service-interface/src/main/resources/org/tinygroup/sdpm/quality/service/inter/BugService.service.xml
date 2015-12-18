@@ -74,6 +74,7 @@
     <service-method local-name="bugInCondition" service-id="bugInCondition" method-name="bugInCondition" cacheable="false" category="org.tinygroup.sdpm.quality.service.inter">
       <service-parameters>
         <service-parameter name="condition" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="limit" type="java.lang.Integer" required="false" is-array="false"/>
         <service-parameter name="productId" type="java.lang.Integer" required="false" is-array="false"/>
       </service-parameters>
       <service-result name="bugInConditionResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.quality.dao.pojo.QualityBug"/>

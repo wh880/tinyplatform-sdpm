@@ -129,8 +129,8 @@ public class UserManagerImpl implements UserManager {
         return orgUserDao.getTeamUserByProjectId(projectId);
     }
 
-    public List<OrgUser> userInCondition(String condition, String[] ids) {
-        return orgUserDao.userInCondition(condition, ids);
+    public List<OrgUser> userInCondition(String condition, Integer limit, String[] ids) {
+        return orgUserDao.userInCondition(condition, limit, ids);
     }
 
 }

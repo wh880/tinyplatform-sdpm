@@ -47,5 +47,5 @@ public interface ProductDao extends BaseDao<Product, Integer> {
      * @param condition
      * @return
      */
-    List<Product> productInCondition(String condition, Integer... ids);
+    List<Product> productInCondition(String condition, Integer limit, Integer... ids);
 }

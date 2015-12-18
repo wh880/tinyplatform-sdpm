@@ -11,12 +11,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.org.dao.pojo.OrgRole;
 import org.tinygroup.sdpm.org.service.inter.RoleService;
-import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
-import org.tinygroup.sdpm.util.CookieUtils;
+import org.tinygroup.sdpm.system.dao.pojo.SystemConfig;
 import org.tinygroup.tinysqldsl.Pager;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -87,7 +84,6 @@ public class RoleAction extends BaseController {
     /**
      * 角色的复制表单提交（弹出框中提交）
      *
-     * @param orgRoleId
      * @param role
      * @param copyPart
      * @return
@@ -159,7 +155,7 @@ public class RoleAction extends BaseController {
         if (initKey != null) {
             return roleService.getRoleByIds(initKey.split(","));
         }
-        return roleService.roleInCondition(key, type);
+        return roleService.roleInCondition(key, type, Integer.parseInt(configService.getConfigBySection(SystemConfig.SEARCH_CONFIG).getConfigKey()));
     }
 
 }

@@ -805,11 +805,11 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
 
 	}
 
-	public List<QualityBug> bugInCondition(String condition, Integer productId) {
+	public List<QualityBug> bugInCondition(String condition, Integer limit, Integer productId) {
 		Select select = MysqlSelect.select(QUALITY_BUGTABLE.BUG_ID,QUALITY_BUGTABLE.BUG_TITLE).from(QUALITY_BUGTABLE).where(
 				and(
 						QUALITY_BUGTABLE.DELETED.eq(0),QUALITY_BUGTABLE.PRODUCT_ID.eq(productId),QUALITY_BUGTABLE.BUG_TITLE.like(condition)
-				)).limit(0,8);
+				)).limit(0,limit);
 		return getDslSession().fetchList(select,QualityBug.class);
 	}
 }

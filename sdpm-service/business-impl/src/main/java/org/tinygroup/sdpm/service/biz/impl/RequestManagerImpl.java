@@ -90,8 +90,8 @@ public class RequestManagerImpl implements RequestManager {
         return requestDao.batchUpdateReview(list);
     }
 
-    public List<ServiceRequest> requestInCondition(String condition) {
-        return requestDao.requestInCondition(condition);
+    public List<ServiceRequest> requestInCondition(String condition, Integer limit) {
+        return requestDao.requestInCondition(condition, limit);
     }
 
     private Condition mergeCondition(ConditionCarrier carrier) {

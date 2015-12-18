@@ -80,6 +80,7 @@
     <service-method local-name="userInCondition" service-id="userInCondition" method-name="userInCondition" cacheable="false" category="org.tinygroup.sdpm.org.service.inter">
       <service-parameters>
         <service-parameter name="condition" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="limit" type="java.lang.Integer" required="false" is-array="false"/>
         <service-parameter name="ids" type="java.lang.String" required="false" is-array="true"/>
       </service-parameters>
       <service-result name="userInConditionResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.org.dao.pojo.OrgUser"/>

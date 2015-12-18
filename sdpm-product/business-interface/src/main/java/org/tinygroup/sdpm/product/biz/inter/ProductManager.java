@@ -115,6 +115,6 @@ public interface ProductManager {
      * @param condition
      * @return
      */
-    List<Product> productInCondition(String condition, Integer... ids);
+    List<Product> productInCondition(String condition, Integer limit, Integer... ids);
 
 }

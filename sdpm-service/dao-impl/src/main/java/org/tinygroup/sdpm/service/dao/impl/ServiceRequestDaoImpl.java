@@ -581,9 +581,9 @@ public class ServiceRequestDaoImpl extends TinyDslDaoSupport implements ServiceR
         });
     }
 
-    public List<ServiceRequest> requestInCondition(String condition) {
+    public List<ServiceRequest> requestInCondition(String condition, Integer limit) {
         Select select = MysqlSelect.selectFrom(SERVICE_REQUESTTABLE).where(
-                and(SERVICE_REQUESTTABLE.REQUEST_TITLE.like(condition), SERVICE_REQUESTTABLE.DELETED.eq(0))).limit(0,8);
+                and(SERVICE_REQUESTTABLE.REQUEST_TITLE.like(condition), SERVICE_REQUESTTABLE.DELETED.eq(0))).limit(0,limit);
         return getDslSession().fetchList(select,ServiceRequest.class);
     }
 

@@ -35,7 +35,12 @@
                     success:function(data){
                         if(data.status=="y"||data.status=="success"){
                             layer.msg("关闭成功",1, 1);
-                            $("#lineTree").trigger("refresh");
+                            #if(productId==cookieProductId)
+                                $.cookie("cookieProductId","",{path:"/"});
+                                window.location.reload();
+                            #else
+                                $("#lineTree").trigger("refresh");
+                            #end
                             $(curform).closest(".modal").trigger("close");
                         }else{
                             layer.msg("关闭失败");

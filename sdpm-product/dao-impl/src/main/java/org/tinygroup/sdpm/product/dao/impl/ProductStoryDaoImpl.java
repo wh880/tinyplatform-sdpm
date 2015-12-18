@@ -722,7 +722,7 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 		return getDslSession().execute(update);
 	}
 
-	public List<ProductStory> storyInCondition(String condition, Integer productId, Integer ...ids) {
+	public List<ProductStory> storyInCondition(String condition, Integer limit, Integer productId, Integer ...ids) {
 		Condition con = null;
 		if(productId!=null){
 			con = PRODUCT_STORYTABLE.PRODUCT_ID.eq(productId);
@@ -731,7 +731,7 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 			con = con==null?PRODUCT_STORYTABLE.STORY_ID.in(ids):and(con,PRODUCT_STORYTABLE.STORY_ID.in(ids));
 		}
 		Select select = MysqlSelect.select(PRODUCT_STORYTABLE.STORY_ID, PRODUCT_STORYTABLE.STORY_TITLE).from(PRODUCT_STORYTABLE).where(
-				and(PRODUCT_STORYTABLE.DELETED.eq(0),PRODUCT_STORYTABLE.STORY_TITLE.like(condition),con)).limit(0,8);
+				and(PRODUCT_STORYTABLE.DELETED.eq(0),PRODUCT_STORYTABLE.STORY_TITLE.like(condition),con)).limit(0,limit);
 		return getDslSession().fetchList(select, ProductStory.class);
 	}
 

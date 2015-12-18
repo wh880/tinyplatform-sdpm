@@ -23,6 +23,7 @@ import org.tinygroup.sdpm.project.service.dto.BurnDTO;
 import org.tinygroup.sdpm.project.service.inter.BurnService;
 import org.tinygroup.sdpm.project.service.inter.ProjectProductService;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
+import org.tinygroup.sdpm.system.dao.pojo.SystemConfig;
 import org.tinygroup.sdpm.util.CookieUtils;
 import org.tinygroup.sdpm.util.LogUtil;
 import org.tinygroup.tinysqldsl.Pager;
@@ -397,7 +398,7 @@ public class ProjectAction extends BaseController implements WebContextAware {
             return result;
         }
         Integer[] pIds = projectOperate.getUserProjectIdList();
-        return projectService.projectInCondition(key, pIds);
+        return projectService.projectInCondition(key,Integer.parseInt(configService.getConfigBySection(SystemConfig.SEARCH_CONFIG).getConfigKey()), pIds);
     }
 
     public void setContext(WebContext webContext) {

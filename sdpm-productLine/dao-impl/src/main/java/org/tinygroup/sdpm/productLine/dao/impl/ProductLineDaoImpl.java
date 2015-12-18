@@ -258,8 +258,8 @@ public class ProductLineDaoImpl extends TinyDslDaoSupport implements ProductLine
         return getDslSession().fetchList(select,ProductLine.class);
     }
 
-    public List<ProductLine> lineInCondition(String condition, Integer... ids) {
-        Select select = MysqlSelect.select(PRODUCT_LINETABLE.PRODUCT_LINE_ID, PRODUCT_LINETABLE.PRODUCT_LINE_NAME).from(PRODUCT_LINETABLE).where(and(PRODUCT_LINETABLE.DELETED.eq(0),PRODUCT_LINETABLE.PRODUCT_LINE_NAME.like(condition),PRODUCT_LINETABLE.PRODUCT_LINE_ID.in(ids))).limit(0,8);
+    public List<ProductLine> lineInCondition(String condition, Integer limit, Integer... ids) {
+        Select select = MysqlSelect.select(PRODUCT_LINETABLE.PRODUCT_LINE_ID, PRODUCT_LINETABLE.PRODUCT_LINE_NAME).from(PRODUCT_LINETABLE).where(and(PRODUCT_LINETABLE.DELETED.eq(0),PRODUCT_LINETABLE.PRODUCT_LINE_NAME.like(condition),PRODUCT_LINETABLE.PRODUCT_LINE_ID.in(ids))).limit(0,limit);
         return getDslSession().fetchList(select,ProductLine.class);
     }
 

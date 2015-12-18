@@ -1,4 +1,4 @@
-#@foldMenu("" "history" "" "width:100%")
+#@foldMenu("" "Tinyfold3" "" "width:100%")
     #foreach(a : actionMap)
         #@foldItem( formatDate(a?.key?.actionDate,"yyyy-MM-dd HH:mm:ss")+" 由 "+a?.key?.actorName+" "+getDict("actionOperate",a?.key?.actionAction)+" " )
             #if(a?.value?.size()>0)
@@ -8,7 +8,9 @@
             <p>修改了<b>${getStd(a?.key?.actionObjectType,h?.historyField)}</b>旧值为 ${getDict(h?.historyField,h?.historyOld)?:h?.historyOld}，新值为 ${getDict(h?.historyField,h?.historyNew)?:h?.historyNew}。</p>
             #end
             <br>
+            #if(a?.key?.actionComment)
             备注<br>
+            #end
             ${a?.key?.actionComment}
         #end
     #end
@@ -19,6 +21,6 @@ $(function(){
 	$(".Hui_aside").scrollTop(380);
 	/*折叠*/
 	/*5个参数顺序不可打乱，分别是：相应区,隐藏显示的内容,速度,类型,事件*/
-	$.Tinyfold("#Tinyfold3 .item h4","#history .item .info","",3,"click");
+	$.Tinyfold("#Tinyfold3 .item h4","#Tinyfold3 .item .info","",3,"click");
 });
 </script>

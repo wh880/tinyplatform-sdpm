@@ -186,8 +186,8 @@ public class StoryManagerImpl implements StoryManager {
         return findPager(start,limit,story,carrier,columnName,asc);
     }
 
-    public List<ProductStory> storyInCondition(String condition, Integer productId, Integer ...ids) {
-        return productStoryDao.storyInCondition(condition,productId,ids);
+    public List<ProductStory> storyInCondition(String condition, Integer limit, Integer productId, Integer ...ids) {
+        return productStoryDao.storyInCondition(condition, limit, productId, ids);
     }
 
     private Condition mergeCondition(ConditionCarrier carrier){

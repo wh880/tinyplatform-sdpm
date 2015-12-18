@@ -34,6 +34,7 @@ import org.tinygroup.sdpm.quality.service.inter.BugService;
 import org.tinygroup.sdpm.quality.service.inter.TestCaseService;
 import org.tinygroup.sdpm.quality.service.inter.TestTaskService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
+import org.tinygroup.sdpm.system.dao.pojo.SystemConfig;
 import org.tinygroup.sdpm.system.service.inter.ActionService;
 import org.tinygroup.sdpm.util.LogUtil;
 import org.tinygroup.tinysqldsl.Pager;
@@ -589,7 +590,7 @@ public class UserAction extends BaseController {
             result.add(userService.findUser(initKey));
             return result;
         }
-        return userService.userInCondition(key,null);
+        return userService.userInCondition(key,Integer.parseInt(configService.getConfigBySection(SystemConfig.SEARCH_CONFIG).getConfigKey()),null);
     }
 
     @ResponseBody
@@ -622,6 +623,6 @@ public class UserAction extends BaseController {
                 ids[i] = teams.get(i).getTeamUserId();
             }
         }
-        return userService.userInCondition(key, ids);
+        return userService.userInCondition(key, Integer.parseInt(configService.getConfigBySection(SystemConfig.SEARCH_CONFIG).getConfigKey()), ids);
     }
 }

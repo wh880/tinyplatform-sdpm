@@ -137,7 +137,7 @@ public interface StoryService {
      * @param productId
      * @return
      */
-    List<ProductStory> storyInCondition(String condition, Integer productId);
+    List<ProductStory> storyInCondition(String condition, Integer limit, Integer productId);
 
     /**
      * 根据ids查询需求-可选是否携带描述

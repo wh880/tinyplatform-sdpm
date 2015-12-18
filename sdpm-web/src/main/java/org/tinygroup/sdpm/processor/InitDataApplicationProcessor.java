@@ -12,6 +12,8 @@ import org.tinygroup.sdpm.org.service.inter.CompanyService;
 import org.tinygroup.sdpm.org.service.inter.DeptService;
 import org.tinygroup.sdpm.org.service.inter.RoleService;
 import org.tinygroup.sdpm.org.service.inter.UserService;
+import org.tinygroup.sdpm.system.dao.pojo.SystemConfig;
+import org.tinygroup.sdpm.system.service.inter.ConfigService;
 import org.tinygroup.xmlparser.node.XmlNode;
 
 import java.util.ArrayList;
@@ -33,6 +35,8 @@ public class InitDataApplicationProcessor implements ApplicationProcessor {
     private DocService docService;
     @Autowired
     private MenuManager menuManager;
+    @Autowired
+    private ConfigService configService;
 
     private void initRole() {
         List<OrgRole> roles = roleService.findRoleList(null);
@@ -102,12 +106,24 @@ public class InitDataApplicationProcessor implements ApplicationProcessor {
         }
     }
 
+    private void initConfig() {
+        List<SystemConfig> configs = configService.findConfigList();
+        if (configs.isEmpty()) {
+            SystemConfig systemConfig = new SystemConfig();
+            systemConfig.setConfigSection("searchConfig");
+            systemConfig.setConfigKey("8");
+            systemConfig.setConfigValue("异步下拉框显示个数配置");
+            configService.addConfig(systemConfig);
+        }
+    }
+
     public void start() {
         initRole();
         initDept();
         initUser();
         initDoc();
         initCompany();
+        initConfig();
     }
 
     public void init() {

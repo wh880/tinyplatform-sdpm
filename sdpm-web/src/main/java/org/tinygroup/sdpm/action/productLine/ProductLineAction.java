@@ -21,8 +21,8 @@ import org.tinygroup.sdpm.productLine.service.ProductLineService;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
 import org.tinygroup.sdpm.project.service.inter.BuildService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
+import org.tinygroup.sdpm.system.dao.pojo.SystemConfig;
 import org.tinygroup.sdpm.util.LogUtil;
-import org.tinygroup.sdpm.util.ProductUtils;
 import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -471,7 +471,7 @@ public class ProductLineAction extends BaseController {
         for (int i = 0; i < ids.length; i++) {
             ids[i] = lineList.get(i).getProductLineId();
         }
-        return productLineService.lineInCondition(key, ids);
+        return productLineService.lineInCondition(key,Integer.parseInt(configService.getConfigBySection(SystemConfig.SEARCH_CONFIG).getConfigKey()), ids);
     }
 }
 

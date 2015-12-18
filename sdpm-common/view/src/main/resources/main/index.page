@@ -200,7 +200,7 @@
 						#foreach(task : myTaskList)
 							#set(taskStatus = Integer.parseInt(task?.taskStatus))
 							#set(status = (taskStatus/3)>1?"label-danger":(taskStatus==1?"label-warning":"label-success"))
-							#set(info = (task?.taskAssignedDate?"于&nbsp;"+formatDate(task?.taskAssignedDate,"yyyy-MM-dd hh:mm:ss")+"被指派":""))
+							#set(info = (task?.taskAssignedDate?"于&nbsp;"+formatDate(task?.taskAssignedDate,"yyyy-MM-dd HH:mm:ss")+"被指派":""))
 							#@ticketBoxAdmin(status getDict("taskStatus",task.taskStatus) TINY_CONTEXT_PATH+adminPath+"/project/task/findTask?taskId="+task?.taskId "#"+task.taskId info)#if((taskStatus/3)>1)#faIcon("fa-warning text-danger")#end ${task.taskName}#end
 						#end
 					#end
@@ -224,7 +224,7 @@
 						#foreach(bug : myBugList)
 							#set(bugStatus = Integer.parseInt(bug?.bugStatus))
 							#set(status = bugStatus==1?"label-warning":(bugStatus==2?"label-success":"label-danger"))
-							#set(info = (bug?.bugAssignedDate?"于&nbsp;"+formatDate(bug?.bugAssignedDate,"yyyy-MM-dd hh:mm:ss")+"被指派":""))
+							#set(info = (bug?.bugAssignedDate?"于&nbsp;"+formatDate(bug?.bugAssignedDate,"yyyy-MM-dd HH:mm:ss")+"被指派":""))
 							#@ticketBoxAdmin(status getDict("bugStatus",bug.bugStatus) TINY_CONTEXT_PATH+adminPath+"/quality/bug/bugInfo?bugId="+bug?.bugId "#"+bug.bugId info)#if(bugStatus==3)#faIcon("fa-warning text-danger")#end ${bug.bugTitle}#end
 						#end
 					#end
@@ -247,7 +247,7 @@
 						#foreach(run : runList)
 							#set(result = run?.testRunLastRunResult?Integer.parseInt(run?.testRunLastRunResult):0)
 							#set(status = result==1?"label-success":(result==2?"label-danger":"label-warning"))
-							#set(info = result!=0?("由&nbsp;"+userUtils.getUserById(run?.testRunLastRunner).orgUserRealName+"&nbsp;于"+(run?.testRunLastRunDate?formatDate(run?.testRunLastRunDate,"yyyy-MM-dd hh:mm:ss"):"")+"&nbsp;执行"):"")
+							#set(info = result!=0?("由&nbsp;"+userUtils.getUserById(run?.testRunLastRunner).orgUserRealName+"&nbsp;于"+(run?.testRunLastRunDate?formatDate(run?.testRunLastRunDate,"yyyy-MM-dd HH:mm:ss"):"")+"&nbsp;执行"):"")
 							#@ticketBoxAdmin(status getDict("caseResult",run?.testRunLastRunResult)+(result==0?"未执行":"") TINY_CONTEXT_PATH+adminPath+"/quality/version/taskToCase?status=tverallcase&testversionId="+run?.taskId "#"+run.caseId info)#if(result==2||result==0)#faIcon("fa-warning text-danger")#end ${run.caseTitle}#end
 						#end
 					#end

@@ -63,6 +63,7 @@
     <service-method local-name="lineInCondition" service-id="lineInCondition" method-name="lineInCondition" cacheable="false" category="org.tinygroup.sdpm.productLine.service">
       <service-parameters>
         <service-parameter name="condition" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="limit" type="java.lang.Integer" required="false" is-array="false"/>
         <service-parameter name="ids" type="java.lang.Integer" required="false" is-array="true"/>
       </service-parameters>
       <service-result name="lineInConditionResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.productLine.dao.pojo.ProductLine"/>

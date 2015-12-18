@@ -88,7 +88,7 @@
                 <div class="col-4 text-c">所属模块：</div>
                 <div class="col-8">
                     #@Tselect2F()
-                        #@Tselect2Body("moduleId" 0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        #@Tselect2Body("moduleId" moduleId?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         #end
                         #@Tselect2Fix()#@aModal("#myModal" "添加模块" "500" "300" "btn-class" adminPath+"/product/addModule?pId=" "modelA")
                             增加#end

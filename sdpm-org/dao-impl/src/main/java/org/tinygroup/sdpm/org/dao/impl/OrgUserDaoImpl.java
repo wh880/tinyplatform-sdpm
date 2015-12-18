@@ -181,7 +181,7 @@ public class OrgUserDaoImpl extends TinyDslDaoSupport implements OrgUserDao {
         return getDslSession().fetchList(select, OrgUser.class);
     }
 
-    public List<OrgUser> userInCondition(String condition, String... ids) {
+    public List<OrgUser> userInCondition(String condition, Integer limit, String... ids) {
         Condition con = null;
         if (ids != null) {
             String[] sId = ids.length == 0 ? new String[]{"0"} : ids;
@@ -194,7 +194,7 @@ public class OrgUserDaoImpl extends TinyDslDaoSupport implements OrgUserDao {
         ).where(and(ORG_USERTABLE.ORG_USER_DELETED.eq(OrgUser.DELETE_NO), con,
                 or(ORG_USERTABLE.ORG_USER_REAL_NAME.like(condition),
                         ORG_USERTABLE.ORG_USER_ACCOUNT.like(condition),
-                        ORG_DEPTTABLE.ORG_DEPT_NAME.like(condition)))).limit(0, 8);
+                        ORG_DEPTTABLE.ORG_DEPT_NAME.like(condition)))).limit(0, limit);
         return getDslSession().fetchList(select, OrgUser.class);
     }
 

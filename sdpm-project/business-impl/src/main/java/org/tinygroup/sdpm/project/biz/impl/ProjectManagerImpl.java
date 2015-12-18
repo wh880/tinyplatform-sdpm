@@ -128,7 +128,7 @@ public class ProjectManagerImpl implements ProjectManager {
         return projectDao.getProjectByStoryId(storyId);
     }
 
-    public List<Project> projectInCondition(String condition, Integer... ids) {
-        return projectDao.projectInCondition(condition, ids);
+    public List<Project> projectInCondition(String condition, Integer limit, Integer... ids) {
+        return projectDao.projectInCondition(condition, limit, ids);
     }
 }
