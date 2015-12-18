@@ -26,7 +26,6 @@ import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.sdpm.util.CookieUtils;
 import org.tinygroup.sdpm.util.LogUtil;
 import org.tinygroup.tinysqldsl.Pager;
-import org.tinygroup.weblayer.WebContext;
 import org.tinygroup.weblayer.mvc.WebContextAware;
 
 import javax.servlet.http.HttpServletRequest;
@@ -347,10 +346,10 @@ public class ProjectAction extends BaseController implements WebContextAware {
      * @param projectIds
      * @return
      */
-    @RequiresPermissions("project-batchDel")
+    @RequiresPermissions("pro-survey-remove")
     @ResponseBody
     @RequestMapping("/batchDelete")
-    public Map batchDelete(@RequestParam(value = "ids") String projectIds) {
+    public Map batchDelete(@RequestParam(value = "ids") String projectIds, HttpServletRequest request, HttpServletResponse response) {
         if (StringUtil.isBlank(projectIds)) {
             return resultMap(false, "请选择删除的项目");
         }
@@ -358,13 +357,20 @@ public class ProjectAction extends BaseController implements WebContextAware {
         if (split == null || split.length == 0) {
             return resultMap(false, "请选择删除的项目");
         }
+        Integer currentProjectId = projectOperate.getCurrentProjectId(request, response);
+        boolean isCurrent = false;//判断当前cookies中保存的是否为删除值
         ArrayList<Integer> ids = new ArrayList<Integer>();
         for (String id : split) {
+            if (id.equals(currentProjectId)) {
+                isCurrent = true;
+            }
             ids.add(Integer.valueOf(id));
         }
         Integer[] integers = new Integer[ids.size()];
         projectService.batchDeleteProject(ids.toArray(integers));
-        //TODO:ProjectUtils.removeProjectList();
+        if (isCurrent) {
+            projectOperate.initCurrentProjectId(null, response);
+        }
         return resultMap(true, "删除项目成功");
     }
 
@@ -377,14 +383,14 @@ public class ProjectAction extends BaseController implements WebContextAware {
     @RequiresPermissions("pro-survey-remove")
     @ResponseBody
     @RequestMapping("/delete")
-    public Map delete(Integer id) {
+    public Map delete(Integer id, HttpServletResponse response) {
         if (id == null) {
             return resultMap(false, "请选择删除的项目");
         }
         Project project = projectService.findProjectById(id);
         project.setProjectDeleted(Project.DELETE_YES);
         projectService.updateProject(project);
-        //TODO:ProjectUtils.removeProjectList();
+        projectOperate.initCurrentProjectId(null, response);
         return resultMap(true, "删除项目成功");
     }
 
@@ -400,7 +406,4 @@ public class ProjectAction extends BaseController implements WebContextAware {
         return projectService.projectInCondition(key, pIds);
     }
 
-    public void setContext(WebContext webContext) {
-
-    }
 }

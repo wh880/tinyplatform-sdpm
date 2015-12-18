@@ -171,8 +171,7 @@
                     #@th()实际开始#end
                     #@td()
                         #@formControlDiv("col-10")
-                                #@tinyDateInput("taskRealStarted" formatDate(task.taskRealStarted,
-                                    "YYYY-MM-dd") "YYYY-MM-dd" {"placeholder":"选择日期"})
+                                #@tinyDateInput("taskRealStarted" formatDate(task.taskRealStarted,"YYYY-MM-dd") "YYYY-MM-dd" {"placeholder":"选择日期"})
                                 #end
                         #end
                     #end
@@ -181,9 +180,7 @@
                     #@th()截止日期#end
                     #@td()
                         #@formControlDiv("col-10")
-                            #@tinyDateInput(
-                                "taskDeadLine" formatDate(task?.taskDeadLine,"yyyy-MM-dd")
-                            "YYYY-MM-dd" {"placeholder":"选择日期"})
+                            #@tinyDateInput("taskDeadLine" formatDate(task?.taskDeadLine,"yyyy-MM-dd") "YYYY-MM-dd" {"placeholder":"选择日期"})
                             #end
                         #end#end
                 #end
@@ -207,7 +204,7 @@
                         #@simpleModal("myModal" "新增日志")#end
                         ${task.taskConsumed}小时
                         #@iconOperations("#myModal" "icon-time" "新增日志" "900" "400"
-                            adminPath+"/project/task/consumeTime.pagelet" "ml-5")
+                            adminPath+"/project/task/consumeTime.pagelet?taskId="+task.taskId "ml-5")
                         #end
                     #end
                 #end
@@ -216,8 +213,7 @@
                     #@td()
                         #@formControlDiv("col-10")
                             <div class="input-group">
-                                #tinyInput("text" "taskLeft" task.taskLeft {"placeholder":"预计剩余",
-                                    "class":"","aria-describedby":"basic-addon2"})
+                                #tinyInput("text" "taskLeft" task.taskLeft {"placeholder":"预计剩余","aria-describedby":"basic-addon2"})
                                 <span class="input-group-addon" id="basic-addon2">小时</span>
                             </div>
                         #end
@@ -319,8 +315,7 @@
                     #@td()
                         #@formControlDiv("col-10")
                             #@Tselect2F()
-                                #@Tselect2Body("taskClosedBy" task?.taskClosedBy==null?"":task?.taskClosedBy {"class":
-                                    "input-text select2"})
+                                #@Tselect2Body("taskClosedBy" task?.taskClosedBy==null?"":task?.taskClosedBy {"class":"input-text select2"})
                                     <option></option>
                                     #foreach(t : teamList)
                                         <option value="${t.orgUserId}">${t.orgUserRealName}</option>

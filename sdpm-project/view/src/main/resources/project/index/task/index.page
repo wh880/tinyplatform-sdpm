@@ -29,7 +29,9 @@
                    onclick="selectAllNullorReserve('idCheck','全选');"/>
             <input type="button" value="反选" class="btn btn-default btn-primary"
                    onclick="selectAllNullorReserve('idCheck','反选');"/>
-            <a class="btn btn-success" href="${TINY_CONTEXT_PATH+adminPath}/project/task/form">建任务</a>
+                #@hasMenu("pro-task-proposeversion")
+            <a class="btn btn-success" href="${TINY_CONTEXT_PATH+adminPath}/project/task/form?moduleId=${moduleId}">建任务</a>
+                #end
             #end
             #@tinyTableContent(TINY_CONTEXT_PATH+adminPath+
                 "/project/task/findPager?moduleId="+moduleId+"&key="+key+"&choose="+choose+"&statu="+statu) ##取数据地址 总数据

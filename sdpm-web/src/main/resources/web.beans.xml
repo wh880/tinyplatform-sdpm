@@ -43,4 +43,17 @@
         </property>
     </bean>
 
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator">
+
+    </bean>
+
+    <!--文件上传重命名-->
+    <bean id="umRename" class="org.tinygroup.sdpm.common.web.FileUploadRename">
+    </bean>
+    <!--文件上传tiny服务-->
+    <bean id="sdpmUploadService" class="org.tinygroup.weblayer.webcontext.parser.impl.UploadServiceImpl">
+        <property name="rename" ref="umRename"></property>
+    </bean>
+
+
 </beans>

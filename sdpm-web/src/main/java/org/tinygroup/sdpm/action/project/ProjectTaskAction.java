@@ -136,7 +136,7 @@ public class ProjectTaskAction extends BaseController {
     }
 
     /**
-     * 新增任务报存
+     * 新增任务保存
      *
      * @param task
      * @param taskMailToArray
@@ -144,6 +144,7 @@ public class ProjectTaskAction extends BaseController {
      * @param comment
      * @return
      */
+    @RequiresPermissions(value = {"pro-task-proposeversion", "pro-Info2-copy", "batch-distribute-task"}, logical = Logical.OR)
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(ProjectTask task, Integer direction,
                        String[] taskMailToArray, HttpServletRequest request, String comment, String lastAddress,

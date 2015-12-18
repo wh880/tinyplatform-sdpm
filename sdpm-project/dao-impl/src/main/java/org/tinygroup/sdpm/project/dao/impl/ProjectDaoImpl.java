@@ -80,6 +80,7 @@ public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
         Select select = selectFrom(PROJECTTABLE).where(
                 or(
                         PROJECTTABLE.PROJECT_OPENED_BY.eq(project.getProjectOpenedBy()),
+                        PROJECTTABLE.PROJECT_DELETED.eq(Project.DELETE_NO),
                         PROJECTTABLE.PROJECT_PO.eq(project.getProjectPo()),
                         PROJECTTABLE.PROJECT_PM.eq(project.getProjectPm()),
                         PROJECTTABLE.PROJECT_QD.eq(project.getProjectQd()),

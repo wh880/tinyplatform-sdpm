@@ -6,7 +6,6 @@
 #@tinyForm(
     "thisform" TINY_CONTEXT_PATH+adminPath+"/project/task/editsave" "post" {"class":"test","enctype":"multipart/form-data"})
     #hiddenInput(hiddenInputName="taskId" hiddenInputValue=task?.taskId)
-    #hiddenInput(hiddenInputName="taskProject" hiddenInputValue=task?.taskProject)
     #hiddenInput(hiddenInputName="taskLastEditedBy" hiddenInputValue=userUtils.getUserId())
 <div class="infoPage-left">
     <div class="infoContent">
