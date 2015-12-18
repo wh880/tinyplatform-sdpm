@@ -1,0 +1,37 @@
+
+#@tinyForm("configEditForm" TINY_CONTEXT_PATH+adminPath+"/system/config/update" "post" )
+<input type="hidden" name="configId" value="${config?.configId}"/>
+    #@gridSysRow()
+        #@colLabel("col-4")<span class="c-red">*</span>代码：#end
+        #@gridSysCol(6)
+            #tinyInput(
+                "text" "configSection" config?.configSection {"datatype":"*","class":
+                "input-text","nullmsg":"代码不为空","readOnly":"readOnly"})
+        #end
+    #end
+    #@gridSysRow()
+        #@colLabel("col-4")<span class="c-red">*</span>值：#end
+        #@gridSysCol(6)
+            #tinyInput(
+                "text" "configKey" config?.configKey {"datatype":"*","class":
+                "input-text","nullmsg":"值不为空"})
+
+        #end
+    #end
+    #@gridSysRow()
+        #@colLabel("col-4")<span class="c-red">*</span>说明：#end
+        #@gridSysCol(6)
+            #tinyInput(
+                "text" "configValue" config?.configValue {"datatype":"*","class":
+                "input-text","nullmsg":"说明不为空"})
+        #end
+    #end
+#end
+
+<script type="text/javascript">
+    $(function () {
+        $("form[name=configEditForm]").Validform({
+            tiptype: 2
+        });
+    });
+</script>

@@ -35,6 +35,7 @@ import java.util.List;
 import static org.tinygroup.sdpm.system.dao.constant.SystemConfigTable.SYSTEM_CONFIGTABLE;
 import static org.tinygroup.tinysqldsl.Delete.delete;
 import static org.tinygroup.tinysqldsl.Insert.insertInto;
+import static org.tinygroup.tinysqldsl.Select.select;
 import static org.tinygroup.tinysqldsl.Select.selectFrom;
 import static org.tinygroup.tinysqldsl.Update.update;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
@@ -46,7 +47,6 @@ public class SystemConfigDaoImpl extends TinyDslDaoSupport implements SystemConf
         return getDslTemplate().insertAndReturnKey(systemConfig, new InsertGenerateCallback<SystemConfig>() {
             public Insert generate(SystemConfig t) {
                 Insert insert = insertInto(SYSTEM_CONFIGTABLE).values(
-                        SYSTEM_CONFIGTABLE.CONFIG_ID.value(t.getConfigId()),
                         SYSTEM_CONFIGTABLE.CONFIG_OWNER.value(t.getConfigOwner()),
                         SYSTEM_CONFIGTABLE.CONFIG_MODULE.value(t.getConfigModule()),
                         SYSTEM_CONFIGTABLE.CONFIG_SECTION.value(t.getConfigSection()),
@@ -221,5 +221,10 @@ public class SystemConfigDaoImpl extends TinyDslDaoSupport implements SystemConf
             select.orderBy(orderByElements.toArray(new OrderByElement[0]));
         }
         return select;
+    }
+
+    public SystemConfig getConfigBySection(String section) {
+        Select select = selectFrom(SYSTEM_CONFIGTABLE).where(SYSTEM_CONFIGTABLE.CONFIG_SECTION.eq(section));
+        return getDslSession().fetchOneResult(select,SystemConfig.class);
     }
 }

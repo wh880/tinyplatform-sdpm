@@ -85,6 +85,6 @@ public interface ProjectDao extends BaseDao<Project, Integer> {
      * @param ids
      * @return
      */
-    List<Project> projectInCondition(String condition,Integer ...ids);
+    List<Project> projectInCondition(String condition, Integer limit,Integer ...ids);
 
 }

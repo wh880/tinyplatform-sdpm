@@ -89,6 +89,7 @@
     <service-method local-name="requestInCondition" service-id="requestInCondition" method-name="requestInCondition" cacheable="false" category="org.tinygroup.sdpm.service.service.inter">
       <service-parameters>
         <service-parameter name="condition" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="limit" type="java.lang.Integer" required="false" is-array="false"/>
       </service-parameters>
       <service-result name="requestInConditionResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.service.dao.pojo.ServiceRequest"/>
     </service-method>

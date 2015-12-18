@@ -68,8 +68,8 @@ public class RequestServiceImpl implements RequestService {
         return requestManager.deleteBatch(list);
     }
 
-    public List<ServiceRequest> requestInCondition(String condition) {
-        return requestManager.requestInCondition(condition);
+    public List<ServiceRequest> requestInCondition(String condition, Integer limit) {
+        return requestManager.requestInCondition(condition, limit);
     }
 
 }

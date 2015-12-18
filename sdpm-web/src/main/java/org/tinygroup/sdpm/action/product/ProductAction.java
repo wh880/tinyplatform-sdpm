@@ -7,8 +7,6 @@ import org.springframework.web.bind.annotation.*;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
-import org.tinygroup.sdpm.dao.condition.ConditionCarrier;
-import org.tinygroup.sdpm.dao.condition.ConditionUtils;
 import org.tinygroup.sdpm.document.dao.pojo.DocumentDoc;
 import org.tinygroup.sdpm.document.service.inter.DocService;
 import org.tinygroup.sdpm.dto.project.Teams;
@@ -30,10 +28,10 @@ import org.tinygroup.sdpm.project.service.inter.*;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityTestCase;
 import org.tinygroup.sdpm.quality.service.inter.TestCaseService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
+import org.tinygroup.sdpm.system.dao.pojo.SystemConfig;
 import org.tinygroup.sdpm.system.dao.pojo.SystemHistory;
 import org.tinygroup.sdpm.util.CookieUtils;
 import org.tinygroup.sdpm.util.LogUtil;
-import org.tinygroup.sdpm.util.ProductUtils;
 import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -517,6 +515,6 @@ public class ProductAction extends BaseController {
         for(int i =0; i<pIds.length; i++){
             pIds[i] = products.get(i).getProductId();
         }
-        return productService.productInCondition(key,pIds);
+        return productService.productInCondition(key,Integer.parseInt(configService.getConfigBySection(SystemConfig.SEARCH_CONFIG).getConfigKey()),pIds);
     }
 }

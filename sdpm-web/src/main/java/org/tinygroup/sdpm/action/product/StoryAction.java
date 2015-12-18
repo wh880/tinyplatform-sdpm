@@ -33,18 +33,13 @@ import org.tinygroup.sdpm.quality.service.inter.BugService;
 import org.tinygroup.sdpm.quality.service.inter.TestCaseService;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceRequest;
 import org.tinygroup.sdpm.service.service.inter.RequestService;
-import org.tinygroup.sdpm.system.dao.pojo.ProfileType;
-import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
-import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
-import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;
+import org.tinygroup.sdpm.system.dao.pojo.*;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.sdpm.system.service.inter.ProfileService;
-import org.tinygroup.sdpm.util.CookieUtils;
 import org.tinygroup.sdpm.util.LogUtil;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.*;
 
@@ -971,6 +966,6 @@ public class StoryAction extends BaseController {
             result.add(storyService.findStory(initKey));
             return result;
         }
-        return storyService.storyInCondition(key, productId);
+        return storyService.storyInCondition(key,Integer.parseInt(configService.getConfigBySection(SystemConfig.SEARCH_CONFIG).getConfigKey()), productId);
     }
 }

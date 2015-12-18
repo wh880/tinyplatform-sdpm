@@ -20,6 +20,7 @@ import org.tinygroup.sdpm.service.dao.pojo.ServiceReview;
 import org.tinygroup.sdpm.service.service.inter.ClientService;
 import org.tinygroup.sdpm.service.service.inter.RequestService;
 import org.tinygroup.sdpm.service.service.inter.ReviewService;
+import org.tinygroup.sdpm.system.dao.pojo.SystemConfig;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.tinysqldsl.Pager;
@@ -354,6 +355,6 @@ public class RequestAction extends BaseController {
             result.add(requestService.findRequest(initKey));
             return result;
         }
-        return requestService.requestInCondition(key);
+        return requestService.requestInCondition(key,Integer.parseInt(configService.getConfigBySection(SystemConfig.SEARCH_CONFIG).getConfigKey()));
     }
 }

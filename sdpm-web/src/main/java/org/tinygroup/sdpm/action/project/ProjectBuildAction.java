@@ -24,6 +24,7 @@ import org.tinygroup.sdpm.project.service.inter.ProjectStoryService;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.sdpm.quality.service.inter.BugService;
 import org.tinygroup.sdpm.system.dao.pojo.ProfileType;
+import org.tinygroup.sdpm.system.dao.pojo.SystemConfig;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;
 import org.tinygroup.sdpm.system.service.inter.ProfileService;
@@ -467,6 +468,6 @@ public class ProjectBuildAction extends BaseController {
             result.add(buildService.findBuild(Integer.parseInt(initKey)));
             return result;
         }
-        return buildService.buildInCondition(key, productId, projectId);
+        return buildService.buildInCondition(key,Integer.parseInt(configService.getConfigBySection(SystemConfig.SEARCH_CONFIG).getConfigKey()), productId, projectId);
     }
 }

@@ -78,8 +78,8 @@ public class BuildManagerImpl implements BuildManager {
         return projectBuildDao.getBuildByProducts(ids);
     }
 
-    public List<ProjectBuild> buildInCondition(String condition, Integer productId, Integer projectId) {
-        return projectBuildDao.buildInCondition(condition, productId, projectId);
+    public List<ProjectBuild> buildInCondition(String condition, Integer limit, Integer productId, Integer projectId) {
+        return projectBuildDao.buildInCondition(condition, limit, productId, projectId);
     }
 
 

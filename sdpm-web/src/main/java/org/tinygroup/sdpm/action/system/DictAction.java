@@ -1,6 +1,7 @@
 package org.tinygroup.sdpm.action.system;
 
 import org.apache.commons.collections.map.HashedMap;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -66,7 +67,7 @@ public class DictAction extends BaseController {
         model.addAttribute("dict", dict);
         return "system/page/dictionaries/dictitem_view.pagelet";
     }
-
+    @RequiresPermissions("dictitem-del")
     @ResponseBody
     @RequestMapping("delete")
     public Map<String, String> deleteDict(Integer dictId) {
@@ -82,7 +83,7 @@ public class DictAction extends BaseController {
         }
         return map;
     }
-
+    @RequiresPermissions("dictitem-edit")
     @RequestMapping(value = "save", method = RequestMethod.POST)
     public String saveDict(SystemDict systemDict, Model model) {
         if (systemDict.getDictId() == null) {
@@ -112,7 +113,7 @@ public class DictAction extends BaseController {
         }
         return "/system/page/dictionaries/dictitem_edit.pagelet";
     }
-
+    @RequiresPermissions("dictitem-del")
     @ResponseBody
     @RequestMapping("batchDelete")
     public Map<String, String> bechDelete(String ids) {

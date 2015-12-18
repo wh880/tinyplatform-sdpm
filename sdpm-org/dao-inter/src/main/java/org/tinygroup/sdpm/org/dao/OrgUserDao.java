@@ -45,5 +45,5 @@ public interface OrgUserDao extends BaseDao<OrgUser, String> {
      * @param condition
      * @return
      */
-    List<OrgUser> userInCondition(String condition, String... ids);
+    List<OrgUser> userInCondition(String condition, Integer limit, String... ids);
 }

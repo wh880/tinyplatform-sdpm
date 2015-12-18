@@ -1,0 +1,34 @@
+#set(linkName = "config")
+#set(editpageModalId="configEditModal",editpageModal="#"+editpageModalId)
+#datatablesInitSimple("#dictListTb" )
+#set(threeMenu="dictionary-type")
+#@divDataTablebox()
+    #@tableBox()
+        #@datatable("dictListTb")
+            #@thead()
+                #@tr("text-c")
+                    #@thW("96")代码#end
+                    #@thW("50")值#end
+                    #@thW("60")说明#end
+                    #@thW("60")操作#end
+                #end
+            #end
+            #@tbody()
+                #foreach(con:list)
+                    #@tr("text-c")
+                        #@td()${con?.configSection}#end
+                        #@td()${con?.configKey}#end
+                        #@td()${con?.configValue}#end
+                        #@td("f-14 user-manage")
+                            #foreach(m in menuManager.getScopeMenus("config-op"))
+                                #iconOperations(editpageModal m.icon m.name "460" "260" adminPath+m.href +"?moduleId="+mo?.moduleId "ml-5")
+                            #end
+                        #end
+                    #end
+                #end
+            #end
+        #end
+    #end
+#end
+#simpleModal(editpageModalId)
+#simpleViewModal(viewpageModalId)

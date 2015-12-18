@@ -92,6 +92,7 @@
     <service-method local-name="productInCondition" service-id="productInCondition" method-name="productInCondition" cacheable="false" category="org.tinygroup.sdpm.product.service">
       <service-parameters>
         <service-parameter name="condition" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="limit" type="java.lang.Integer" required="false" is-array="false"/>
         <service-parameter name="ids" type="java.lang.Integer" required="false" is-array="true"/>
       </service-parameters>
       <service-result name="productInConditionResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.product.dao.pojo.Product"/>

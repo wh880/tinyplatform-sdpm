@@ -17,6 +17,7 @@ import org.tinygroup.sdpm.common.util.DateUtils;
 import org.tinygroup.sdpm.dto.UploadProfile;
 import org.tinygroup.sdpm.system.dao.pojo.ProfileType;
 import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;
+import org.tinygroup.sdpm.system.service.inter.ConfigService;
 import org.tinygroup.sdpm.system.service.inter.LogService;
 import org.tinygroup.sdpm.system.service.inter.ProfileService;
 import org.tinygroup.sdpm.util.ProductUtils;
@@ -45,6 +46,8 @@ public abstract class BaseController {
     protected UserUtils userUtils;
     @Autowired
     protected ProductUtils productUtils;
+    @Autowired
+    protected ConfigService configService;
 
     /**
      * 管理基础路径

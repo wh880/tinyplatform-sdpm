@@ -101,8 +101,8 @@ public class BugManagerImpl implements BugManager {
         return bugdao.getBugsInReleaseDoc(bug);
     }
 
-    public List<QualityBug> bugInCondition(String condition, Integer productId) {
-        return bugdao.bugInCondition(condition,productId);
+    public List<QualityBug> bugInCondition(String condition, Integer limit, Integer productId) {
+        return bugdao.bugInCondition(condition, limit, productId);
     }
 
     public int[] batchDelete(List<QualityBug> bugIds) {

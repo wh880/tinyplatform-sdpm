@@ -77,8 +77,8 @@ public class BuildServiceImpl implements BuildService {
         return buildManager.getBuildByProducts(ids);
     }
 
-    public List<ProjectBuild> buildInCondition(String condition, Integer productId, Integer projectId) {
-        return buildManager.buildInCondition(condition, productId, projectId);
+    public List<ProjectBuild> buildInCondition(String condition, Integer limit, Integer productId, Integer projectId) {
+        return buildManager.buildInCondition(condition, limit, productId, projectId);
     }
 
 }

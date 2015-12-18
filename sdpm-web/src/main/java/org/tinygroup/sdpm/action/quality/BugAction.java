@@ -2,7 +2,6 @@ package org.tinygroup.sdpm.action.quality;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -39,10 +38,7 @@ import org.tinygroup.sdpm.quality.dao.pojo.QualityTestCase;
 import org.tinygroup.sdpm.quality.service.inter.BugService;
 import org.tinygroup.sdpm.quality.service.inter.CaseStepService;
 import org.tinygroup.sdpm.quality.service.inter.TestCaseService;
-import org.tinygroup.sdpm.system.dao.pojo.ProfileType;
-import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
-import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
-import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;
+import org.tinygroup.sdpm.system.dao.pojo.*;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.sdpm.system.service.inter.ProfileService;
 import org.tinygroup.sdpm.util.*;
@@ -917,6 +913,6 @@ public class BugAction extends BaseController {
             result.add(bugService.findQualityBugById(initKey));
             return result;
         }
-        return bugService.bugInCondition(key, productId);
+        return bugService.bugInCondition(key,Integer.parseInt(configService.getConfigBySection(SystemConfig.SEARCH_CONFIG).getConfigKey()), productId);
     }
 }

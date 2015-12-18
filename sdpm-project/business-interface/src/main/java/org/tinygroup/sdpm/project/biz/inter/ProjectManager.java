@@ -132,5 +132,5 @@ public interface ProjectManager {
      * @param ids
      * @return
      */
-    List<Project> projectInCondition(String condition,Integer ...ids);
+    List<Project> projectInCondition(String condition, Integer limit,Integer ...ids);
 }

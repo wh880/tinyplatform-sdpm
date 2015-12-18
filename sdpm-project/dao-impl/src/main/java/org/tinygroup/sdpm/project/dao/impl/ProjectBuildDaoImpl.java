@@ -318,7 +318,7 @@ public class ProjectBuildDaoImpl extends TinyDslDaoSupport implements ProjectBui
         return getDslSession().fetchList(select,ProjectBuild.class);
     }
 
-    public List<ProjectBuild> buildInCondition(String condition, Integer productId, Integer projectId) {
+    public List<ProjectBuild> buildInCondition(String condition, Integer limit, Integer productId, Integer projectId) {
         Condition con = null;
         if(productId!=null){
             con = PROJECT_BUILDTABLE.BUILD_PRODUCT.eq(productId);
@@ -328,7 +328,7 @@ public class ProjectBuildDaoImpl extends TinyDslDaoSupport implements ProjectBui
         }
         Select select = MysqlSelect.select(PROJECT_BUILDTABLE.BUILD_NAME, PROJECT_BUILDTABLE.BUILD_ID).from(PROJECT_BUILDTABLE).where(
                 and(PROJECT_BUILDTABLE.BUILD_NAME.like(condition),con,PROJECT_BUILDTABLE.BUILD_DELETED.eq(0))
-        ).limit(0,8);
+        ).limit(0,limit);
         return getDslSession().fetchList(select,ProjectBuild.class);
     }
 

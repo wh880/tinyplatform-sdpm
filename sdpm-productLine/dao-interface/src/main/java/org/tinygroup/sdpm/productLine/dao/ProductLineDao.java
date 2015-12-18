@@ -36,5 +36,5 @@ public interface ProductLineDao extends BaseDao<ProductLine, Integer> {
 
     List<ProductLine> getUserProductLines(String userId);
 
-    List<ProductLine> lineInCondition(String condition, Integer... ids);
+    List<ProductLine> lineInCondition(String condition, Integer limit, Integer... ids);
 }

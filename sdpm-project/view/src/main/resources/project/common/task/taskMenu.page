@@ -74,8 +74,13 @@
 ##右侧按钮
 <span class="r">
           #foreach(m:menuManager.getScopeMenus("pro-taskmenu2-op"))
-              <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}"
-                 title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
+              #if(m?.id=="pro-task-proposeversion")
+                  <a href="${TINY_CONTEXT_PATH+adminPath}${m.href+(moduleId?('?moduleId='+moduleId):'')}"
+                     title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
+              #else
+                  <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}"
+                     title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
+              #end
           #end
 </span>
     #div(divClass="clearfix")

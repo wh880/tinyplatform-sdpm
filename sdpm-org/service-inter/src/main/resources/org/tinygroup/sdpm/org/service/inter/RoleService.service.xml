@@ -141,6 +141,7 @@
       <service-parameters>
         <service-parameter name="condition" type="java.lang.String" required="false" is-array="false"/>
         <service-parameter name="type" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="limit" type="java.lang.Integer" required="false" is-array="false"/>
       </service-parameters>
       <service-result name="roleInConditionResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.org.dao.pojo.OrgRole"/>
     </service-method>

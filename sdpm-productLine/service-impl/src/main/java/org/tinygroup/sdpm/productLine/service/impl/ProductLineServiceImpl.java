@@ -65,8 +65,8 @@ public class ProductLineServiceImpl implements ProductLineService {
         return ids;
     }
 
-    public List<ProductLine> lineInCondition(String condition, Integer... ids) {
-        return productLineManager.lineInCondition(condition, ids);
+    public List<ProductLine> lineInCondition(String condition, Integer limit, Integer... ids) {
+        return productLineManager.lineInCondition(condition, limit, ids);
     }
 
     public Pager<ProductLine> findProductLineInPage(Integer start, Integer limit, ProductLine productLine, String order, String orderType) {

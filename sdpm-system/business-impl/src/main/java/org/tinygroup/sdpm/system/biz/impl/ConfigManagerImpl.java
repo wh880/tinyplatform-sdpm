@@ -5,6 +5,7 @@ package org.tinygroup.sdpm.system.biz.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.system.biz.inter.ConfigManager;
 import org.tinygroup.sdpm.system.dao.SystemConfigDao;
@@ -44,15 +45,23 @@ public class ConfigManagerImpl implements ConfigManager {
         return configDao.batchUpdate(configs);
     }
 
-    public List<SystemConfig> findList(SystemConfig config, String columnName, boolean asc) {
-
+    public List<SystemConfig> findList(SystemConfig config, String columnName, Boolean asc) {
+        if(StringUtil.isBlank(columnName)){
+            return configDao.query(config);
+        }
         return configDao.query(config, new OrderBy(columnName, asc));
     }
 
     public Pager<SystemConfig> findPager(int start, int limit, SystemConfig config, String columnName,
                                          boolean asc) {
-
+        if(StringUtil.isBlank(columnName)){
+            return configDao.queryPager(start,limit,config);
+        }
         return configDao.queryPager(start, limit, config, new OrderBy(columnName, asc));
+    }
+
+    public SystemConfig getConfigBySection(String section) {
+        return configDao.getConfigBySection(section);
     }
 
 

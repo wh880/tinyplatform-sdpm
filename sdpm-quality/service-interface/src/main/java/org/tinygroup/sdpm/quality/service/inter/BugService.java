@@ -97,5 +97,5 @@ public interface BugService {
      * @param productId
      * @return
      */
-    List<QualityBug> bugInCondition(String condition, Integer productId);
+    List<QualityBug> bugInCondition(String condition, Integer limit, Integer productId);
 }

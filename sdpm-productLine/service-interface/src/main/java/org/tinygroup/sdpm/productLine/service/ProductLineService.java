@@ -88,7 +88,7 @@ public interface ProductLineService {
      * @param ids
      * @return
      */
-    List<ProductLine> lineInCondition(String condition, Integer... ids);
+    List<ProductLine> lineInCondition(String condition, Integer limit, Integer... ids);
 
     /**
      * 分页查询productLine

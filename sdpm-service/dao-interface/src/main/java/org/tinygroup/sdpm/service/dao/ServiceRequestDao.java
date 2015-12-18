@@ -50,5 +50,5 @@ public interface ServiceRequestDao extends BaseDao<ServiceRequest, Integer> {
      * @param condition
      * @return
      */
-    List<ServiceRequest> requestInCondition(String condition);
+    List<ServiceRequest> requestInCondition(String condition, Integer limit);
 }

@@ -55,7 +55,7 @@ public interface ConfigManager {
      * @param asc
      * @return
      */
-    List<SystemConfig> findList(SystemConfig config, String columnName, boolean asc);
+    List<SystemConfig> findList(SystemConfig config, String columnName, Boolean asc);
 
     /**
      * 根据对象查找(分页、排序)
@@ -68,4 +68,6 @@ public interface ConfigManager {
      * @return
      */
     Pager<SystemConfig> findPager(int start, int limit, SystemConfig config, String columnName, boolean asc);
+
+    SystemConfig getConfigBySection(String section);
 }

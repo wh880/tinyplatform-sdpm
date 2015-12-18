@@ -63,7 +63,27 @@
         </span>
         <span class="r">
 					#foreach(m:menuManager.getScopeMenus("testbug-tab"))
-						<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?currentPageId=5">#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp
+						#if(m?.id=="bug-add")
+							#set(mId = "")
+							#if(tinyRequestQueryString&&tinyRequestQueryString.indexOf("moduleId")>0)
+								#set(mStr = tinyRequestQueryString.substring(tinyRequestQueryString.indexOf("moduleId")+"moduleId".length()+1))
+								#if(mStr.indexOf("&")>0)
+									#set(mId = tinyRequestQueryString.substring(0,mStr.indexOf("&")))
+								#else
+									#set(mId=mStr)
+								#end
+							#else
+								#set(mId=null)
+							#end
+							#if(m?.href.indexOf("?")>0)
+								#set(h = m?.href+(mId?("&moduleId="+mId):""))
+							#else
+								#set(h = m?.href+(mId?("?moduleId="+mId):""))
+							#end
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${h}">#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp
+						#else
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp
+						#end
 					#end
 
 				</span>

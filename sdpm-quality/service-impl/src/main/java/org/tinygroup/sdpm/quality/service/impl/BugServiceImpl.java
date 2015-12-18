@@ -55,8 +55,8 @@ public class BugServiceImpl implements BugService {
         return bugmanager.getBugsInReleaseDoc(bug);
     }
 
-    public List<QualityBug> bugInCondition(String condition, Integer productId) {
-        return bugmanager.bugInCondition(condition,productId);
+    public List<QualityBug> bugInCondition(String condition, Integer limit, Integer productId) {
+        return bugmanager.bugInCondition(condition, limit, productId);
     }
 
     public int[] batchDeleteBug(List<QualityBug> bugIds) {

@@ -72,7 +72,7 @@ public class RoleManagerImpl implements RoleManager {
         return orgRoleDao.getRolesByIds(ids);
     }
 
-    public List<OrgRole> roleInCondition(String condition, String type) {
-        return orgRoleDao.roleInCondition(condition,type);
+    public List<OrgRole> roleInCondition(String condition, String type, Integer limit) {
+        return orgRoleDao.roleInCondition(condition,type,limit);
     }
 }
