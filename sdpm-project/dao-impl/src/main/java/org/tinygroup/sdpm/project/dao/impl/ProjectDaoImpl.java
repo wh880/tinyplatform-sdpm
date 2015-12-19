@@ -395,6 +395,21 @@ public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
         });
     }
 
+    public int[] batchSoftDelete(List<Project> projects) {
+        if (CollectionUtil.isEmpty(projects)) {
+            return new int[0];
+        }
+        return getDslTemplate().batchUpdate(projects, new NoParamUpdateGenerateCallback() {
+
+            public Update generate() {
+                return update(PROJECTTABLE).set(
+                        PROJECTTABLE.PROJECT_DELETED.value(new JdbcNamedParameter("projectDeleted"))).where(
+                        PROJECTTABLE.PROJECT_ID.eq(new JdbcNamedParameter("projectId")));
+            }
+        });
+    }
+
+
     public int[] batchDelete(List<Project> projects) {
         if (CollectionUtil.isEmpty(projects)) {
             return new int[0];

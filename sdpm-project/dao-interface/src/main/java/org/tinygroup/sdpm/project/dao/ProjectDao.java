@@ -25,6 +25,8 @@ import java.util.Date;
 import java.util.List;
 
 public interface ProjectDao extends BaseDao<Project, Integer> {
+    int[] batchSoftDelete(List<Project> projects);
+
     /**
      * 查找相关干系人的项目
      * 查询条件OR
@@ -79,12 +81,14 @@ public interface ProjectDao extends BaseDao<Project, Integer> {
      * @return
      */
     List<Project> findListByTeamUserId(String userId, String acl);
+
     /**
      * 根据输入查询
+     *
      * @param condition
      * @param ids
      * @return
      */
-    List<Project> projectInCondition(String condition, Integer limit,Integer ...ids);
+    List<Project> projectInCondition(String condition, Integer limit, Integer... ids);
 
 }
