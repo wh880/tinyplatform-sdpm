@@ -44,7 +44,7 @@ public class UserManagerImpl implements UserManager {
         }
         try {
             return orgUserDao.getByKey(id);
-        }catch (Exception e){
+        } catch (Exception e) {
             return null;
         }
     }
@@ -131,6 +131,29 @@ public class UserManagerImpl implements UserManager {
 
     public List<OrgUser> userInCondition(String condition, Integer limit, String[] ids) {
         return orgUserDao.userInCondition(condition, limit, ids);
+    }
+
+    public List<OrgUser> getDirectStaffByLeader(String leaderUserId) {
+        return orgUserDao.getDirectStaffByLeader(leaderUserId);
+    }
+
+    public List<OrgUser> getAllStaffByLeader(String leaderUserId) {
+        List<OrgUser> staffList = new ArrayList<OrgUser>();
+        getAllStaffByLeader(staffList, leaderUserId);
+        return staffList;
+    }
+
+    private void getAllStaffByLeader(List<OrgUser> staffList, String leaderUserId) {
+        if (staffList == null) {
+            staffList = new ArrayList<OrgUser>();
+        }
+        List<OrgUser> directStaffByLeader = getDirectStaffByLeader(leaderUserId);
+        if (directStaffByLeader != null) {
+            staffList.addAll(directStaffByLeader);
+            for (OrgUser orgUser : directStaffByLeader) {
+                getAllStaffByLeader(staffList, orgUser.getOrgUserId());
+            }
+        }
     }
 
 }

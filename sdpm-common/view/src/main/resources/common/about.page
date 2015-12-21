@@ -1,4 +1,3 @@
-
 #@div()
     #@tabWithInit("top_demo" "optionsBox")
         #@tabHead()
@@ -6,6 +5,7 @@
                 #@aHeadCol(TINY_CONTEXT_PATH+adminPath+m.href m.id==linkName?"Current":"")${m.name}#end
             #end
             #@aHeadCol(TINY_CONTEXT_PATH+adminPath+"/system/about" "Current")程序员秀场#end
+            #@aHeadCol(TINY_CONTEXT_PATH+adminPath+"/system/us")关于#end
         #end
     <div class="row">
         <div class="col-xs-6 col-md-3 col-2 whoInfo-box">

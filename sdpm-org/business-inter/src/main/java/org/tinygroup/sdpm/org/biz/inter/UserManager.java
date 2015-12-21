@@ -139,4 +139,20 @@ public interface UserManager {
      */
     List<OrgUser> userInCondition(String condition, Integer limit, String[] ids);
 
+    /**
+     * 查找领导的直接下属
+     *
+     * @param
+     * @return
+     */
+    List<OrgUser> getDirectStaffByLeader(String leaderUserId);
+
+    /**
+     * 查找领导的所有下属（递归）
+     *
+     * @param
+     * @return
+     */
+    List<OrgUser> getAllStaffByLeader(String leaderUserId);
+
 }

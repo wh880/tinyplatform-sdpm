@@ -63,6 +63,11 @@ public class OrgUser implements Serializable {
      */
     private String orgUserNickName;
     /**
+     * 直接上级
+     *
+     */
+    private String orgUserLeader;
+    /**
      * 源代码账号
      *
      */
@@ -396,4 +401,11 @@ public class OrgUser implements Serializable {
         this.orgUserDeleted = orgUserDeleted;
     }
 
+    public String getOrgUserLeader() {
+        return orgUserLeader;
+    }
+
+    public void setOrgUserLeader(String orgUserLeader) {
+        this.orgUserLeader = orgUserLeader;
+    }
 }
