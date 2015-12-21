@@ -78,13 +78,15 @@ public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
             return new ArrayList<Project>();
         }
         Select select = selectFrom(PROJECTTABLE).where(
-                or(
-                        PROJECTTABLE.PROJECT_OPENED_BY.eq(project.getProjectOpenedBy()),
+                and(
                         PROJECTTABLE.PROJECT_DELETED.eq(Project.DELETE_NO),
-                        PROJECTTABLE.PROJECT_PO.eq(project.getProjectPo()),
-                        PROJECTTABLE.PROJECT_PM.eq(project.getProjectPm()),
-                        PROJECTTABLE.PROJECT_QD.eq(project.getProjectQd()),
-                        PROJECTTABLE.PROJECT_RD.eq(project.getProjectRd())
+                        or(
+                                PROJECTTABLE.PROJECT_OPENED_BY.eq(project.getProjectOpenedBy()),
+                                PROJECTTABLE.PROJECT_PO.eq(project.getProjectPo()),
+                                PROJECTTABLE.PROJECT_PM.eq(project.getProjectPm()),
+                                PROJECTTABLE.PROJECT_QD.eq(project.getProjectQd()),
+                                PROJECTTABLE.PROJECT_RD.eq(project.getProjectRd())
+                        )
                 )
         );
         return getDslSession().fetchList(select, Project.class);
