@@ -1,9 +1,11 @@
 package org.tinygroup.sdpm.dao.complexsearch;
 
+import java.io.Serializable;
+
 /**
  * Created by wangll13383 on 2015/9/18.
  */
-public class SearchInfo {
+public class SearchInfo implements Serializable{
     private String relation;
 
     private String field;

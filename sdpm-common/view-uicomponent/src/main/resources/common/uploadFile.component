@@ -55,7 +55,7 @@
 </table>
 <script type="text/javascript">
     $(function(){
-        var allowFileExt=["jpg","png","git","doc","rar","docx","xls","xlsx","txt"];
+        var allowFileExt=["jpg","png","git","doc","rar","docx","xls","xlsx","txt","pdf"];
         function updateStepID(){
             $('#${mulUploadFileTableId}>.databody .stepID').each(function(index){
                 $(this).html(index+1);

@@ -33,6 +33,14 @@ public interface OrgUserDao extends BaseDao<OrgUser, String> {
     List<OrgUser> getByKeys(String... pk);
 
     /**
+     * 查找领导的直接下属
+     *
+     * @param
+     * @return
+     */
+    List<OrgUser> getDirectStaffByLeader(String leaderUserId);
+
+    /**
      * 根据项目id查找团队成员list
      *
      * @param

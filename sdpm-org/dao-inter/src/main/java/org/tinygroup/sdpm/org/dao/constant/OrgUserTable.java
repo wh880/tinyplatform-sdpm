@@ -56,6 +56,10 @@ public class OrgUserTable extends Table {
      * 职位
      */
     public final Column ORG_USER_ROLE = new Column(this, "org_user_role");
+    /**
+     * 直接上级
+     */
+    public final Column ORG_USER_LEADER = new Column(this, "org_user_leader");
 
     /**
      * 真实姓名

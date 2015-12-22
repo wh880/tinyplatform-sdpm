@@ -6,7 +6,7 @@
         <span style="float:left">
                 <a href="${TINY_CONTEXT_PATH+adminPath}/org/roleMenu/show?parentId=0&roleId=${roleId}" ${parentId=='0'?" class='active_btn'":""}>所有权限</a>
             #foreach(root:menuManager.getChildMenusWithoutPermissionFilter("0"))
-                <a href="${TINY_CONTEXT_PATH+adminPath}/org/roleMenu/show?parentId=${root.id}&roleId=${roleId}" ${parentId=='root.id'?" class='active_btn'":""}>${root.name}</a>
+                <a href="${TINY_CONTEXT_PATH+adminPath}/org/roleMenu/show?parentId=${root.id}&roleId=${roleId}" ${parentId==root.id?" class='active_btn'":""}>${root.name}</a>
             #end
             </span>
             #div(divClass="clearfix")

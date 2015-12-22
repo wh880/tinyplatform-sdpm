@@ -187,6 +187,10 @@ public class ProjectTask implements Serializable {
      */
     private String taskDeleted;
 
+    public ProjectTask() {
+        this.taskDeleted = DELETE_NO;
+    }
+
     public String getProjectName() {
         return projectName;
     }

@@ -22,6 +22,7 @@ public class FileRepository implements ServletContextAware {
     private ServletContext ctx;
 
     public String resolverFilePath(String filePath, String separator) {
+        separator = StringUtil.replace(separator, "\\", "/");
         String path = StringUtil.substringAfterLast(filePath, separator);
         return StringUtil.replace(path, "\\", "/");
     }

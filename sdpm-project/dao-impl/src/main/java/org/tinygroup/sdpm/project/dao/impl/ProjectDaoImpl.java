@@ -78,13 +78,15 @@ public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
             return new ArrayList<Project>();
         }
         Select select = selectFrom(PROJECTTABLE).where(
-                or(
-                        PROJECTTABLE.PROJECT_OPENED_BY.eq(project.getProjectOpenedBy()),
+                and(
                         PROJECTTABLE.PROJECT_DELETED.eq(Project.DELETE_NO),
-                        PROJECTTABLE.PROJECT_PO.eq(project.getProjectPo()),
-                        PROJECTTABLE.PROJECT_PM.eq(project.getProjectPm()),
-                        PROJECTTABLE.PROJECT_QD.eq(project.getProjectQd()),
-                        PROJECTTABLE.PROJECT_RD.eq(project.getProjectRd())
+                        or(
+                                PROJECTTABLE.PROJECT_OPENED_BY.eq(project.getProjectOpenedBy()),
+                                PROJECTTABLE.PROJECT_PO.eq(project.getProjectPo()),
+                                PROJECTTABLE.PROJECT_PM.eq(project.getProjectPm()),
+                                PROJECTTABLE.PROJECT_QD.eq(project.getProjectQd()),
+                                PROJECTTABLE.PROJECT_RD.eq(project.getProjectRd())
+                        )
                 )
         );
         return getDslSession().fetchList(select, Project.class);
@@ -394,6 +396,21 @@ public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
             }
         });
     }
+
+    public int[] batchSoftDelete(List<Project> projects) {
+        if (CollectionUtil.isEmpty(projects)) {
+            return new int[0];
+        }
+        return getDslTemplate().batchUpdate(projects, new NoParamUpdateGenerateCallback() {
+
+            public Update generate() {
+                return update(PROJECTTABLE).set(
+                        PROJECTTABLE.PROJECT_DELETED.value(new JdbcNamedParameter("projectDeleted"))).where(
+                        PROJECTTABLE.PROJECT_ID.eq(new JdbcNamedParameter("projectId")));
+            }
+        });
+    }
+
 
     public int[] batchDelete(List<Project> projects) {
         if (CollectionUtil.isEmpty(projects)) {

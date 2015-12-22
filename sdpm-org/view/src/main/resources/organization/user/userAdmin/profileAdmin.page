@@ -1,6 +1,4 @@
 #!set(activeTitle="组织管理",activeMenuId=currentPageId)
-
-
 #set(editpagePath=
     "/organization/updateCompany.pagelet",editpageModalId="userEditModal",editpageModal="#"+editpageModalId)
 #set(editpagePath1=
@@ -8,7 +6,6 @@
 
 #set(name="organizationUser")
 #@layout(admin)
-
 #end
 #@layout(right)
 <span style="float: right">
@@ -16,11 +13,9 @@
     #if(m)
         <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?id=${id}"
            title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
-
     #end
 </span>
 #end
-
     #@noRespsGridSystem()
         #@gridSysCol(3)
         #end
@@ -48,7 +43,6 @@
                 #end
             </div>
 
-
             <div class="infoContent">
                 <p class="titleName">基本信息</p>
                 #@gridSysRow()
@@ -65,6 +59,12 @@
                         #else
                             <p>女</p>
                         #end
+                    #end
+                #end
+                #@gridSysRow()
+                    #@colLabel("col-4")直接上级：#end
+                    #@gridSysCol(8)
+                        ${userService.findUser(user?.orgUserLeader).orgUserRealName}
                     #end
                 #end
                 #@gridSysRow()

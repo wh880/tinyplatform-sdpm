@@ -1,7 +1,7 @@
 package org.tinygroup.sdpm.dto;
 
-import org.springframework.web.multipart.MultipartFile;
 import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;
+import org.tinygroup.springmvc.multipart.TinyMultipartFile;
 
 import java.util.List;
 
@@ -10,18 +10,18 @@ import java.util.List;
  */
 public class UploadProfile {
 
-    MultipartFile[] newUploadFile;
+    TinyMultipartFile[] newUploadFile;
     String[] newUploadFileTitle;
 
-    List<MultipartFile> updateFileList;
+    List<TinyMultipartFile> updateFileList;
     List<SystemProfile> updateProfileList;
 
 
-    public MultipartFile[] getNewUploadFile() {
+    public TinyMultipartFile[] getNewUploadFile() {
         return newUploadFile;
     }
 
-    public void setNewUploadFile(MultipartFile[] newUploadFile) {
+    public void setNewUploadFile(TinyMultipartFile[] newUploadFile) {
         this.newUploadFile = newUploadFile;
     }
 
@@ -41,11 +41,11 @@ public class UploadProfile {
         this.updateProfileList = updateProfileList;
     }
 
-    public List<MultipartFile> getUpdateFileList() {
+    public List<TinyMultipartFile> getUpdateFileList() {
         return updateFileList;
     }
 
-    public void setUpdateFileList(List<MultipartFile> updateFileList) {
+    public void setUpdateFileList(List<TinyMultipartFile> updateFileList) {
         this.updateFileList = updateFileList;
     }
 }

@@ -131,8 +131,16 @@ public class ProjectAction extends BaseController implements WebContextAware {
         String[] productIds = linkProduct.split(",");
         projectProductService.addProjectLinkToProduct(productIds, project.getProjectId());
         CookieUtils.setCookie(response, projectOperate.COOKIE_PROJECT_ID, project.getProjectId().toString());
-        //TODO:ProjectUtils.removeProjectList();
-        return "redirect:" + adminPath + "/project/list";
+        return "redirect:" + adminPath + "/project/guide";
+    }
+
+    /**
+     * 添加项目后的导向
+     * @return
+     */
+    @RequestMapping(value = "/guide")
+    public String guide() {
+        return "project/index/project/guide";
     }
 
     /**
@@ -329,15 +337,17 @@ public class ProjectAction extends BaseController implements WebContextAware {
     @RequestMapping("/findManager")
     public String findManager(String projectId, Model model) {
         Project project = projectService.findProjectById(Integer.parseInt(projectId));
-        //项目负责人
-        OrgUser projectPm = userService.findUser(project.getProjectPm());
-        //测试负责人
-        OrgUser productQd = userService.findUser(project.getProjectQd());
-        //发布负责人
-        OrgUser productRd = userService.findUser(project.getProjectRd());
-        model.addAttribute("projectPm", projectPm);
-        model.addAttribute("productQd", productQd);
-        model.addAttribute("productRd", productRd);
+        if (project != null) {
+            //项目负责人
+            OrgUser projectPm = userService.findUser(project.getProjectPm());
+            //测试负责人
+            OrgUser productQd = userService.findUser(project.getProjectQd());
+            //发布负责人
+            OrgUser productRd = userService.findUser(project.getProjectRd());
+            model.addAttribute("projectPm", projectPm);
+            model.addAttribute("productQd", productQd);
+            model.addAttribute("productRd", productRd);
+        }
         return "organization/others/projectUserBaseInfo.pagelet";
     }
 
@@ -404,7 +414,7 @@ public class ProjectAction extends BaseController implements WebContextAware {
             return result;
         }
         Integer[] pIds = projectOperate.getUserProjectIdList();
-        return projectService.projectInCondition(key,Integer.parseInt(configService.getConfigBySection(SystemConfig.SEARCH_CONFIG).getConfigKey()), pIds);
+        return projectService.projectInCondition(key, Integer.parseInt(configService.getConfigBySection(SystemConfig.SEARCH_CONFIG).getConfigKey()), pIds);
     }
 
 }

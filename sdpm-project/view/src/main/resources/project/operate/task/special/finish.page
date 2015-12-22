@@ -9,8 +9,7 @@
             #@colLabel()总消耗#end
             #@formControlDiv("col-8")
                 #tinyInput("text" "taskConsumed" task.taskConsumed {"placeholder":"总消耗时间","id":"comsume-time","class":
-                    "input-text",
-                    "datatype":"*4-16","nullmsg":"请输入总消耗时间（小时）"})
+                    "input-text","datatype":"*4-16","nullmsg":"请输入总消耗时间（小时）"})
             #end
             #@validateDiv("col-2")#end
         #end

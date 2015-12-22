@@ -10,6 +10,7 @@ import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.logger.LogLevel;
 import org.tinygroup.sdpm.action.project.util.TaskStatusUtil;
+import org.tinygroup.sdpm.common.util.DateUtils;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.dto.UploadProfile;
 import org.tinygroup.sdpm.dto.project.EffortList;
@@ -336,16 +337,34 @@ public class ProjectTaskAction extends BaseController {
 
     @RequiresPermissions("pro-task-finish")
     @RequestMapping(value = "/finish", method = RequestMethod.POST)
-    public String finishSave(ProjectTask task, String comment) {
+    public String finishSave(ProjectTask task, String comment, UploadProfile uploadProfile) throws IOException {
         ProjectTask oldTask = taskService.findTaskById(task.getTaskId());
         task.setTaskFinishedBy(userUtils.getUserId());
         task.setTaskFinishedDate(new Date());
         task.setTaskStatus(ProjectTask.DONE);
+        Float oldConsumed = oldTask.getTaskConsumed();
+        Float newConsumed = task.getTaskConsumed() - oldConsumed;
+        if (!newConsumed.equals(0f)) {
+            SystemEffort systemEffort = new SystemEffort();
+            systemEffort.setEffortObjectType("task");
+            systemEffort.setEffortObjectId(oldTask.getTaskId());
+            systemEffort.setEffortAccount(userUtils.getUserAccount());
+            systemEffort.setEffortProject(task.getTaskProject());
+            systemEffort.setEffortConsumed(newConsumed);
+            systemEffort.setEffortLeft(0f);
+            systemEffort.setEffortWork("完成任务：" + oldTask.getTaskName());
+            systemEffort.setEffortDate(new Date());
+            systemEffort.setEffortBegin(DateUtils.formatDate(new Date(), "yyyy-MM-dd"));
+            systemEffort.setEffortEnd(DateUtils.formatDate(new Date(), "yyyy-MM-dd"));
+            effortService.saveSystemEffort(systemEffort);
+        }
         taskService.updateFinishTask(task);
+        processProfile(uploadProfile, task.getTaskId(), ProfileType.TASK);
+
         if (oldTask.getTaskStory() != null) {
             ProjectTask task1 = new ProjectTask();
             task1.setTaskStory(oldTask.getTaskStory());
-            List<ProjectTask> tasks = taskService.findListTask(task1);
+            List<ProjectTask> tasks = taskService.findListTask(task1);//查找关联的需求是否已经全部完成
             boolean isDone = true;
             for (ProjectTask projectTask : tasks) {
                 if (Integer.parseInt(projectTask.getTaskStatus()) % 3 != 0 && Integer.parseInt(projectTask.getTaskStatus()) != 5) {
@@ -353,9 +372,11 @@ public class ProjectTaskAction extends BaseController {
                 }
             }
             if (isDone) {
-                ProductStory story = storyService.findStory(task.getTaskStory());
-                story.setStoryStage(ProductStory.STAGE_IS_DONE);
-                storyService.updateStory(story);
+                ProductStory story = storyService.findStory(oldTask.getTaskStory());
+                if (story != null) {
+                    story.setStoryStage(ProductStory.STAGE_IS_DONE);
+                    storyService.updateStory(story);
+                }
             }
         }
         if (!oldTask.getTaskConsumed().equals(task.getTaskConsumed())) {
@@ -575,7 +596,7 @@ public class ProjectTaskAction extends BaseController {
     public String basicInfoEdit(Integer taskId, Model model) {
         ProjectTask task = taskService.findTaskById(taskId);
 //        String projectName = projectService.findProjectById(task.getTaskProject()).getProjectName();
-        List<Project>  projectList = projectService.getUserProjectList(userUtils.getUserId());
+        List<Project> projectList = projectService.getUserProjectList(userUtils.getUserId());
         List<ProductStory> storyList = projectStoryService.findStoryByProject(task.getTaskProject());
         model.addAttribute("task", task);
         model.addAttribute("projectList", projectList);

@@ -59,6 +59,7 @@ public class OrgUserDaoImpl extends TinyDslDaoSupport implements OrgUserDao {
                         ORG_USERTABLE.ORG_USER_ACCOUNT.value(t.getOrgUserAccount()),
                         ORG_USERTABLE.ORG_USER_PASSWORD.value(t.getOrgUserPassword()),
                         ORG_USERTABLE.ORG_USER_ROLE.value(t.getOrgUserRole()),
+                        ORG_USERTABLE.ORG_USER_LEADER.value(t.getOrgUserLeader()),
                         ORG_USERTABLE.ORG_USER_REAL_NAME.value(t.getOrgUserRealName()),
                         ORG_USERTABLE.ORG_USER_NICK_NAME.value(t.getOrgUserNickName()),
                         ORG_USERTABLE.ORG_USER_SUBMITTER.value(t.getOrgUserSubmitter()),
@@ -98,6 +99,7 @@ public class OrgUserDaoImpl extends TinyDslDaoSupport implements OrgUserDao {
                         ORG_USERTABLE.ORG_USER_ACCOUNT.value(t.getOrgUserAccount()),
                         ORG_USERTABLE.ORG_USER_PASSWORD.value(t.getOrgUserPassword()),
                         ORG_USERTABLE.ORG_USER_ROLE.value(t.getOrgUserRole()),
+                        ORG_USERTABLE.ORG_USER_LEADER.value(t.getOrgUserLeader()),
                         ORG_USERTABLE.ORG_USER_REAL_NAME.value(t.getOrgUserRealName()),
                         ORG_USERTABLE.ORG_USER_NICK_NAME.value(t.getOrgUserNickName()),
                         ORG_USERTABLE.ORG_USER_SUBMITTER.value(t.getOrgUserSubmitter()),
@@ -160,13 +162,21 @@ public class OrgUserDaoImpl extends TinyDslDaoSupport implements OrgUserDao {
 
     public List<OrgUser> getByKeys(String... pk) {
         SelectGenerateCallback<Serializable[]> callback = new SelectGenerateCallback<Serializable[]>() {
-            @SuppressWarnings("rawtypes")
             public Select generate(Serializable[] t) {
                 return selectFrom(ORG_USERTABLE).where(ORG_USERTABLE.ORG_USER_ID.in(t));
             }
 
         };
         Select select = callback.generate(pk);
+        return getDslSession().fetchList(select, OrgUser.class);
+    }
+
+    public List<OrgUser> getDirectStaffByLeader(String leaderUserId) {
+        Select select = selectFrom(ORG_USERTABLE).where(
+                and(
+                        ORG_USERTABLE.ORG_USER_LEADER.eq(leaderUserId),
+                        ORG_USERTABLE.ORG_USER_DELETED.eq(OrgUser.DELETE_NO)
+                ));
         return getDslSession().fetchList(select, OrgUser.class);
     }
 
@@ -227,6 +237,7 @@ public class OrgUserDaoImpl extends TinyDslDaoSupport implements OrgUserDao {
                                 ORG_USERTABLE.ORG_USER_BIRTHDAY.eq(t.getOrgUserBirthday()),
                                 ORG_USERTABLE.ORG_USER_GENDER.eq(t.getOrgUserGender()),
                                 ORG_USERTABLE.ORG_USER_EMAIL.eq(t.getOrgUserEmail()),
+                                ORG_USERTABLE.ORG_USER_LEADER.eq(t.getOrgUserLeader()),
                                 ORG_USERTABLE.ORG_USER_SKYPE.eq(t.getOrgUserSkype()),
                                 ORG_USERTABLE.ORG_USER_Q_Q.eq(t.getOrgUserQQ()),
                                 ORG_USERTABLE.ORG_USER_YAHOO.eq(t.getOrgUserYahoo()),
@@ -265,6 +276,7 @@ public class OrgUserDaoImpl extends TinyDslDaoSupport implements OrgUserDao {
                                 ORG_USERTABLE.ORG_USER_NICK_NAME.eq(t.getOrgUserNickName()),
                                 ORG_USERTABLE.ORG_USER_SUBMITTER.eq(t.getOrgUserSubmitter()),
                                 ORG_USERTABLE.ORG_USER_AVATAR.eq(t.getOrgUserAvatar()),
+                                ORG_USERTABLE.ORG_USER_LEADER.eq(t.getOrgUserLeader()),
                                 ORG_USERTABLE.ORG_USER_BIRTHDAY.eq(t.getOrgUserBirthday()),
                                 ORG_USERTABLE.ORG_USER_GENDER.eq(t.getOrgUserGender()),
                                 ORG_USERTABLE.ORG_USER_EMAIL.eq(t.getOrgUserEmail()),
@@ -307,6 +319,7 @@ public class OrgUserDaoImpl extends TinyDslDaoSupport implements OrgUserDao {
                         ORG_USERTABLE.ORG_USER_SUBMITTER.value(new JdbcNamedParameter("orgUserSubmitter")),
                         ORG_USERTABLE.ORG_USER_AVATAR.value(new JdbcNamedParameter("orgUserAvatar")),
                         ORG_USERTABLE.ORG_USER_BIRTHDAY.value(new JdbcNamedParameter("orgUserBirthday")),
+                        ORG_USERTABLE.ORG_USER_LEADER.value(new JdbcNamedParameter("orgUserLeader")),
                         ORG_USERTABLE.ORG_USER_GENDER.value(new JdbcNamedParameter("orgUserGender")),
                         ORG_USERTABLE.ORG_USER_EMAIL.value(new JdbcNamedParameter("orgUserEmail")),
                         ORG_USERTABLE.ORG_USER_SKYPE.value(new JdbcNamedParameter("orgUserSkype")),
@@ -346,6 +359,7 @@ public class OrgUserDaoImpl extends TinyDslDaoSupport implements OrgUserDao {
                         ORG_USERTABLE.ORG_USER_PASSWORD.value(new JdbcNamedParameter("orgUserPassword")),
                         ORG_USERTABLE.ORG_USER_ROLE.value(new JdbcNamedParameter("orgUserRole")),
                         ORG_USERTABLE.ORG_USER_REAL_NAME.value(new JdbcNamedParameter("orgUserRealName")),
+                        ORG_USERTABLE.ORG_USER_LEADER.value(new JdbcNamedParameter("orgUserLeader")),
                         ORG_USERTABLE.ORG_USER_NICK_NAME.value(new JdbcNamedParameter("orgUserNickName")),
                         ORG_USERTABLE.ORG_USER_SUBMITTER.value(new JdbcNamedParameter("orgUserSubmitter")),
                         ORG_USERTABLE.ORG_USER_AVATAR.value(new JdbcNamedParameter("orgUserAvatar")),
@@ -406,6 +420,7 @@ public class OrgUserDaoImpl extends TinyDslDaoSupport implements OrgUserDao {
                         ORG_USERTABLE.ORG_USER_NICK_NAME.eq(new JdbcNamedParameter("orgUserNickName")),
                         ORG_USERTABLE.ORG_USER_SUBMITTER.eq(new JdbcNamedParameter("orgUserSubmitter")),
                         ORG_USERTABLE.ORG_USER_AVATAR.eq(new JdbcNamedParameter("orgUserAvatar")),
+                        ORG_USERTABLE.ORG_USER_LEADER.eq(new JdbcNamedParameter("orgUserLeader")),
                         ORG_USERTABLE.ORG_USER_BIRTHDAY.eq(new JdbcNamedParameter("orgUserBirthday")),
                         ORG_USERTABLE.ORG_USER_GENDER.eq(new JdbcNamedParameter("orgUserGender")),
                         ORG_USERTABLE.ORG_USER_EMAIL.eq(new JdbcNamedParameter("orgUserEmail")),

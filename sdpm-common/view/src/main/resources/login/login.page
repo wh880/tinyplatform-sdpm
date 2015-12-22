@@ -64,9 +64,21 @@ input:- webkit-autofill { -webkit-box-shadow: 0 0 0 1000px white inset; }
 </body>
 <script type="text/javascript">
     // 登录验证
+    $(function(){
+        var k=window.localStorage.getItem("login-usename");
+        if(k){
+            $("#loginuser").val(k);
+            $("#loginpwd").val('');
+
+        }
+    })
     $("form.loginForm").on('submit', function () {//登陆按钮
+
         var user = $("#loginuser").val();
         var loginpwd = $("#loginpwd").val();
+        var rememberMe = $("input[name=rememberMe]").is(":checked");
+
+
         if (user == '') {
             $("#login_tip").html("用户名不能为空");
             $("#loginuser").focus();
@@ -76,6 +88,11 @@ input:- webkit-autofill { -webkit-box-shadow: 0 0 0 1000px white inset; }
             $("#login_tip").html("密码不能为空");
             $("#loginpwd").focus();
             return false;
+        }
+        if(rememberMe){
+            window.localStorage.setItem("login-usename",user);
+        }else{
+            window.localStorage.removeItem("login-usename");
         }
     });
 

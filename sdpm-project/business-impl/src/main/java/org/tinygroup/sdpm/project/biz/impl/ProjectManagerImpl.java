@@ -87,7 +87,7 @@ public class ProjectManagerImpl implements ProjectManager {
             project.setProjectDeleted(Project.DELETE_YES);
             list.add(project);
         }
-        int[] effective = projectDao.batchUpdate(list);
+        int[] effective = projectDao.batchSoftDelete(list);
         if (effective == null) {
             return 0;
         }
