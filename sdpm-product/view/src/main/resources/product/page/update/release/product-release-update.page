@@ -51,7 +51,7 @@
     #@elementItem()
         #@colLabel("col-1")<span class="c-red">*</span>发布日期:#end
         #@formControlDiv("col-4")
-           #@tinyDateInput("releaseDate" release?.releaseDate?formatDate(release?.releaseDate,'yyyy-MM-dd'):"" "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空"})#end
+           #@tinyDateInput("releaseDate" release?.releaseDate?formatDate(release?.releaseDate,'yyyy-MM-dd'):"" "yyyy-MM-dd" {"datatype":"*","nullmsg":"日期不能为空"})#end
         #end
         #@validateDiv("col-2 validmsg")#end
     #end

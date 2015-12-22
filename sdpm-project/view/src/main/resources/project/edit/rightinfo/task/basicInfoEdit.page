@@ -163,7 +163,7 @@
                     #@td()
                         #@formControlDiv("col-10")
                             #@tinyDateInput(
-                                "taskEstStared" formatDate(task?.taskEstStared,"yyyy-MM-dd") "YYYY-MM-dd" {"placeholder":"选择日期"})
+                                "taskEstStared" formatDate(task?.taskEstStared,"yyyy-MM-dd") "yyyy-MM-dd" {"placeholder":"选择日期"})
                             #end
                         #end
                     #end
@@ -172,7 +172,7 @@
                     #@th()实际开始#end
                     #@td()
                         #@formControlDiv("col-10")
-                                #@tinyDateInput("taskRealStarted" formatDate(task.taskRealStarted,"YYYY-MM-dd") "YYYY-MM-dd" {"placeholder":"选择日期"})
+                                #@tinyDateInput("taskRealStarted" formatDate(task.taskRealStarted,"yyyy-MM-dd") "yyyy-MM-dd" {"placeholder":"选择日期"})
                                 #end
                         #end
                     #end
@@ -181,7 +181,7 @@
                     #@th()截止日期#end
                     #@td()
                         #@formControlDiv("col-10")
-                            #@tinyDateInput("taskDeadLine" formatDate(task?.taskDeadLine,"yyyy-MM-dd") "YYYY-MM-dd" {"placeholder":"选择日期"})
+                            #@tinyDateInput("taskDeadLine" formatDate(task?.taskDeadLine,"yyyy-MM-dd") "yyyy-MM-dd" {"placeholder":"选择日期"})
                             #end
                         #end#end
                 #end
@@ -268,7 +268,7 @@
                     #@td()
                         #@formControlDiv("col-10")
                                 #@tinyDateInput(
-                                    "taskFinishedDate" formatDate(task.taskFinishedDate,"yyyy-MM-dd") "YYYY-MM-dd" {"placeholder":"选择日期"})
+                                    "taskFinishedDate" formatDate(task.taskFinishedDate,"yyyy-MM-dd") "yyyy-MM-dd" {"placeholder":"选择日期"})
                                 #end
                         #end
                     #end
@@ -306,7 +306,7 @@
                         #@formControlDiv("col-10")
                                 #@tinyDateInput(
                                     "taskCanceledDate" formatDate(task.taskCanceledDate,
-                                    "yyyy-MM-dd") "YYYY-MM-dd" {"placeholder":"选择日期"})
+                                    "yyyy-MM-dd") "yyyy-MM-dd" {"placeholder":"选择日期"})
                                 #end
                         #end
                     #end
@@ -342,7 +342,7 @@
                     #@td()
                         #@formControlDiv("col-10")
                                 #@tinyDateInput(
-                                    "taskCloseDate" formatDate(task.taskCloseDate, "yyyy-MM-dd") "YYYY-MM-dd" {"placeholder":"选择日期"})
+                                    "taskCloseDate" formatDate(task.taskCloseDate, "yyyy-MM-dd") "yyyy-MM-dd" {"placeholder":"选择日期"})
                                 #end
                         #end
                     #end

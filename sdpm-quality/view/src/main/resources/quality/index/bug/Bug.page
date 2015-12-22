@@ -188,7 +188,7 @@
 						#@tinyTh({"width":"6"})<input type="checkbox"name="bugId" value="" />#end
 						#@tinyTh({"class":"sorting","rel":"bug_id"})ID#end
 						#@tinyTh({"class":"sorting","rel":"bug_severity"})级别#end
-						#@tinyTh({"class":"sorting","rel":"priority"})P#end
+						#@tinyTh({"class":"sorting","rel":"priority"})优先级#end
 						#@tinyTh({"class":"sorting","rel":"bug_title"})Bug标题#end
 						#@tinyTh({"class":"sorting","rel":"bug_status","style":"color:#333"})状态#end
 						#@tinyTh({"class":"sorting","rel":"bug_opened_by"})创建#end

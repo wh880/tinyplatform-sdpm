@@ -38,6 +38,8 @@ import org.tinygroup.sdpm.quality.dao.pojo.QualityTestCase;
 import org.tinygroup.sdpm.quality.service.inter.BugService;
 import org.tinygroup.sdpm.quality.service.inter.CaseStepService;
 import org.tinygroup.sdpm.quality.service.inter.TestCaseService;
+import org.tinygroup.sdpm.service.dao.pojo.ServiceRequest;
+import org.tinygroup.sdpm.service.service.inter.RequestService;
 import org.tinygroup.sdpm.system.dao.pojo.*;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.sdpm.system.service.inter.ProfileService;
@@ -84,6 +86,8 @@ public class BugAction extends BaseController {
     private CaseStepService caseStepService;
     @Autowired
     private TestCaseService testCaseService;
+    @Autowired
+    private RequestService requestService;
 
     @ModelAttribute
     public void init(Model model) {
@@ -310,19 +314,20 @@ public class BugAction extends BaseController {
         if (bugIds.length > 0) {
             for (String id : bugIds) {
                 QualityBug bug = bugService.findQualityBugById(Integer.valueOf(id));
-                bug.setBugConfirmed(1);
-                bug.setBugAssignedDate(new Date());
-                bug.setBugAssignedTo(userId);
-                bugService.updateBug(bug);
-                LogUtil.logWithComment(LogUtil.LogOperateObject.BUG
-                        , LogUtil.LogAction.ASSIGNED
-                        , String.valueOf(bug.getBugId())
-                        , userUtils.getUserId()
-                        , String.valueOf(bug.getProductId())
-                        , String.valueOf(bug.getProjectId())
-                        , null
-                        , null
-                        , null);
+                if (bug.getBugConfirmed() == 1) {
+                    bug.setBugAssignedDate(new Date());
+                    bug.setBugAssignedTo(userId);
+                    bugService.updateBug(bug);
+                    LogUtil.logWithComment(LogUtil.LogOperateObject.BUG
+                            , LogUtil.LogAction.ASSIGNED
+                            , String.valueOf(bug.getBugId())
+                            , userUtils.getUserId()
+                            , String.valueOf(bug.getProductId())
+                            , String.valueOf(bug.getProjectId())
+                            , null
+                            , null
+                            , null);
+                }
             }
         }
         Map<String, String> map = new HashMap<String, String>();
@@ -579,11 +584,11 @@ public class BugAction extends BaseController {
         model.addAttribute("projectList", projects);
         model.addAttribute("bug", bug);
 
-        SystemProfile systemProfile = new SystemProfile();
-        systemProfile.setFileObjectId(bugId);
-        systemProfile.setFileObjectType(ProfileType.BUG.getType());
-        List<SystemProfile> fileList = profileService.findSystemProfile(systemProfile);
-        model.addAttribute("fileList", fileList);
+//        SystemProfile systemProfile = new SystemProfile();
+//        systemProfile.setFileObjectId(bugId);
+//        systemProfile.setFileObjectType(ProfileType.BUG.getType());
+//        List<SystemProfile> fileList = profileService.findSystemProfile(systemProfile);
+//        model.addAttribute("fileList", fileList);
         return "/quality/operate/bug/copyBug.page";
     }
 
@@ -858,6 +863,7 @@ public class BugAction extends BaseController {
             bugStep.append(step.getCaseStepDesc() + "<br>");
             bugStep.append("【期望】<br>");
             bugStep.append(step.getCaseStepExpect() + "<br>");
+            bugStep.append("【结果】<br>");
         }
         List<Project> projects = projectService.findProjectList(null, null, null);
         List<OrgUser> orgUsers = userService.findUserList(null);
@@ -914,5 +920,24 @@ public class BugAction extends BaseController {
             return result;
         }
         return bugService.bugInCondition(key,Integer.parseInt(configService.getConfigBySection(SystemConfig.SEARCH_CONFIG).getConfigKey()), productId);
+    }
+
+    @RequestMapping("requestToBug")
+    public String requestToBug(Integer id, Model model){
+        ServiceRequest request = requestService.findRequest(id);
+        StringBuffer bugStep = new StringBuffer("");
+        bugStep.append("【请求】<br>");
+        bugStep.append(request.getRequestSpec());
+        bugStep.append("【步骤】<br>");
+        bugStep.append("【期望】<br>");
+        bugStep.append("【结果】<br>");
+        List<Project> projects = projectService.findProjectList(null, null, null);
+        List<OrgUser> orgUsers = userService.findUserList(null);
+
+        model.addAttribute("bugStep", bugStep);
+        model.addAttribute("bugTitle", request.getRequestTitle()+"【请求】");
+        model.addAttribute("projectList", projects);
+        model.addAttribute("userList", orgUsers);
+        return "/quality/operate/bug/proposeBug.page";
     }
 }

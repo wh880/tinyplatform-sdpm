@@ -43,10 +43,8 @@
                 type:"POST",
                 success:function(data){
                     if(data.status=="success"){
-                        console.log($("#myModel"))
                         var ztreeNode= $("input[name=productId]");
                         ztreeNode.prev().trigger("setValue",{id:"${pId}"});
-                        console.log("2222111");
                         $("#myModal").trigger("close");
                     }
                 }

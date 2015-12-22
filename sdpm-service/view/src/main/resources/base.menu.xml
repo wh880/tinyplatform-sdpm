@@ -37,17 +37,22 @@
     <menu id="request" name="请求" href="/service/request/list" sort="100" isShow="1">
         <menu id="request-batchdel" name="批量删除" href="#" icon="icon-trash" sort="1" isShow="1"
               scope="service-req-batchdel"/>
-        <menu id="request-solve" name="回复请求" href="/service/request/reply" icon="icon-wrench " sort="1"
+        <menu id="request-solve" name="回复" href="/service/request/reply" icon="icon-wrench " sort="1"
               isShow="1" scope="service-request"/>
-        <menu id="request-back" name="回访请求" href="/service/request/review" icon="icon-comment" sort="1"
+        <menu id="request-back" name="回访" href="/service/request/review" icon="icon-comment" sort="1"
               isShow="1" scope="service-request"/>
-        <menu id="request-edit" name="变更请求" href="/service/request/form" icon="icon-random" sort="1"
+        <menu id="request-edit" name="变更" href="/service/request/form" icon="icon-random" sort="1"
               isShow="1" scope="service-request"/>
-        <menu id="request-close" name="关闭请求" href="/service/request/close" icon="icon-off" sort="1"
+        <menu id="request-toStory" name="转需求" href="/product/story/requestToStory" icon="icon-lightbulb" sort="1"
+              isShow="1" scope="service-request"/>
+        <menu id="request-toBug" name="转Bug" href="/quality/bug/requestToBug" icon="icon-bug" sort="1"
+              isShow="1" scope="service-request">
+        </menu>
+        <menu id="request-close" name="关闭" href="/service/request/close" icon="icon-off" sort="1"
               isShow="1" scope="service-request2"/>
-        <menu id="request-delete" name="删除请求" href="/service/request/delete" icon="icon-remove" sort="1"
+        <menu id="request-delete" name="删除" href="/service/request/delete" icon="icon-remove" sort="1"
               isShow="1" scope="service-request2"/>
-        <menu id="request-all" name="全部请求" href="/service/request/list" sort="1"
+        <menu id="request-all" name="全部" href="/service/request/list" sort="1"
               isShow="1" scope="service-request-all"/>
         <menu id="request-open" name="未回复" href="/service/request/list?status=0" sort="1"
               isShow="1" scope="service-request-list"/>

@@ -81,7 +81,6 @@
 //                            $(curform).closest(".modal").find(".modal-header .close").trigger("click");//弹出框关闭
 //                            $("table.tinytable").trigger("initnav");
 //                        } catch (e) {
-//                            console.log(e)
 //                        }
 
                     },

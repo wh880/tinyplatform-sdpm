@@ -2,7 +2,6 @@
 $(function () {
     $("#tinypagecontent").on("click", "[data-removeid]", function (e) {
         var url = $(this).attr("href") ? $(this).attr("href") : window.location.href;
-        console.log($(this).attr("data-action"));
         var that = this;
         layer.confirm("确认要删除吗？", function () {
             $.ajax({
@@ -78,9 +77,7 @@ function ajaxRead(id, toName, opKey, opvalue, url, value,isBuild) {
             success: function (data) {
                 sele.empty();
                 var em
-                if("build"==(isBuild)){
-                    em = "<option value='0' selected  >trunk</option>";
-                }else if("module"==isBuild||"plan"==isBuild){
+                if("module"==isBuild||"plan"==isBuild){
                     em = "<option value='0' selected  >/</option>";
                 }
                 sele.append(em);
@@ -88,6 +85,10 @@ function ajaxRead(id, toName, opKey, opvalue, url, value,isBuild) {
                     var em = "<option value='" + data[i][opKey] + "' >" + data[i][opvalue] + "</option>";
                     sele.append(em);
 
+                }
+                if("build"==(isBuild)){
+                    em = "<option value='0' selected  >trunk</option>";
+                    sele.append(em);
                 }
                 if ("multiple" != sele.attr("multiple")) {
                     if (value||value===0) {

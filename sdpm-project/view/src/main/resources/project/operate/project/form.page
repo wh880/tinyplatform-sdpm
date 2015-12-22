@@ -172,7 +172,6 @@
             $(this).attr("value") == "2" ? $("#whitelistBox").removeClass("hidden") : $("#whitelistBox").addClass("hidden");
         });
         $("[name=projectEnd]").on("change", function () {
-            console.log("sfsdf");
             var edate = $(this).val();
             var bdate = $("[name=projectBegin]").val();
             $("[name=projectDays]").val(getDateDiff(bdate, edate))
@@ -207,5 +206,4 @@
         $("input[name=projectEnd]").val(moment($bTime.val(), "YYYY-MM-DD").add('days', delta).format('YYYY-MM-DD')).trigger("blur");
 
     }
-    console.log("testterfsfdsfds")
 </script>

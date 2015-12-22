@@ -46,7 +46,7 @@
                 #@colLabel()评审时间：#end
                 #@formControlDiv("col-4")
                     #@tinyDateInput(
-                        "storyReviewedDate" story?.storyReviewedDate?story?.storyReviewedDate:formatDate(now(),'yyyy-MM-dd') "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空"})#end
+                        "storyReviewedDate" story?.storyReviewedDate?story?.storyReviewedDate:formatDate(now(),'yyyy-MM-dd') "yyyy-MM-dd" {"datatype":"*","nullmsg":"日期不能为空"})#end
                 #end
                 #@validateDiv("col-2")#end
             #end

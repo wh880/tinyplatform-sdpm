@@ -65,11 +65,12 @@
                 #else
                     <a href="${TINY_CONTEXT_PATH +adminPath}${m.href}${storyId}">#buttonIcon(iconClass=m.icon)${m?.name}</a>
                 #end
-            #elseif(m?.map?.type=="icon")
-                <a href="${TINY_CONTEXT_PATH +adminPath}${m.href}${storyId}"
-                   title="${m?.name}">#buttonIcon(iconClass=m?.icon)${m
-                    ?.name}</a>
             #end
+        #end
+        #set(m=menuManager.getMenu("demand-edit"))
+        #if(m)
+            <a href="${TINY_CONTEXT_PATH +adminPath}${m.href}${storyId}"
+               title="${m?.name}">#buttonIcon(iconClass=m?.icon)</a>
         #end
         #set(m=menuManager.getMenu("demand_note"))
         #if(m)

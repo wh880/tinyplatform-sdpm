@@ -92,7 +92,7 @@ public class ModuleAction extends BaseController {
     @RequestMapping("docProductTree")
     public List<Map<String, Object>> productDocTree() {
         List<Map<String, Object>> mapList = Lists.newArrayList();
-        List<Product> products = productService.getProductByUser(UserUtils.getUserId(),0,null, "");
+        List<Product> products = productService.getProductByUser(UserUtils.getUserId(),0,null, Product.CHOOSE_OPENED);
         mergeProductModule(products, "productDoc", mapList, "name", true, false, "doc");
         return mapList;
     }

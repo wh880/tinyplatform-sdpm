@@ -35,69 +35,80 @@
 
 #@tinyForm(
     "thisform" TINY_CONTEXT_PATH +adminPath+"/product/story/save" "" {"class":"test","enctype":"multipart/form-data"})
-
+<input type="hidden" name="lastAddress" value=""/>
+<input type="hidden" name="currentAddress" value=""/>
     #hiddenInput("","type","","copy")
 <div style="width:100%;" class="pageleftpart">
 <div class="infoContent">
-    <p class="titleName">提需求</p>
+    <p class="titleName">复制需求</p>
     #@elementItem()
-        #@colLabel()所属产品：#end
-
+        #@colLabel()<span class="c-red">*</span>所属产品：#end
         #@formControlDiv("col-4")
-            <div class="col-6">
-                #@Tselect2F()
-                    #@Tselect2Body(
-                        "productId" cookieProductId {"class":"input-text select2"})
-                        <option value="0">/</option>
-                    #end
+            <div class="col-5">
+                #@TzTreeSelect(
+                    "productId" story?.productId?:cookieProductId {"class":"input-text","datatype":"*","nullmsg":"所属产品不能为空！",
+                    "data-URL":call("link",adminPath+"/productLine/userProductTree")})
                     <script>
-                        ajaxRead("${sid}", "productId", "productId", "productName", "/product/productList", ${story?.productId?:0});
-                    </script>
-                    <script>
-                        $("#${sid}").on("change", function () {
-                            var pId = $("#${sid}  option:selected").val();
-                            if (pId > 0) {
-                                ajaxRead("${sid}", "moduleId", "moduleId", "moduleName", "/quality/bug/ajax/module?moduleRoot=" + pId, "${story?.moduleId?:0}");
-                                ajaxRead("${sid}", "planId", "planId", "planName", "/product/plan/planList?productId=" + pId, "${story?.planId?:0}");
-                            }
-                        })
-                    </script>
+                        $(function(){
+                            var first = true;
+                            var mUrl =  $("#modelA").attr("href");
+                            var sUrl = $("input[name=storyTitle]").attr("ajaxurl");
+                            $("#${sid}").on("setValue",function(o,treeNode){
+                                var pId = treeNode.id;
+                                if (pId > 0) {
+                                    ajaxRead("${sid}", "moduleId", "moduleId", "moduleName", "/quality/bug/ajax/module?moduleRoot=" + pId,"","module");
+                                    ajaxRead("${sid}", "planId", "planId", "planName", "/product/plan/planList?productId=" + pId,"${backPlan}","plan");
+                                    var url = $("#modelA").attr("href");
+                                    if(!url.endsWith("=")){
+                                        url = url.substring(0,url.indexOf("=")+1);
+                                    }
+                                    $("#modelA").attr("href",mUrl+pId);
+                                    if(first) {
+                                        first=false;
+                                    }else{
+                                        var _input=$("input[name=storyTitle]");
+                                        _input.attr("ajaxurl",sUrl+"?productId="+pId);
+                                        var oldV=_input.val();
+                                        _input.val("").blur().val(oldV).blur();
+                                    }
 
-                    #@Tselect2Fix()
-                        #@hasMenu("newproduct")
-                            <a href="${TINY_CONTEXT_PATH +adminPath}/product/addproduct/addition "
-                               class="r ">增加</a>
+                                }
+                            });
+                        });
+                    </script>
+                    <span>
+                        #set(m=menuManager.getMenu("newproduct"))
+                        #if(m)
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
                         #end
-                        #@hasMenu("allproduct")
-                            <a href=" ${TINY_CONTEXT_PATH +adminPath}/product/allproduct/addition">全部</a>
+                        #set(m=menuManager.getMenu("allproduct"))
+                        #if(m)
+                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
                         #end
-                    #end
+                    </span>
                 #end
             </div>
-            <div class="col-6">
-                #@Tselect2F()
-                    #@Tselect2Body(
-                        "moduleId" "" {"class":"input-text select2","data":"moduleType=product","relateElem":
-                        "relateModelTwo"}) ##,"multiple":"multiple"加上为多选项
-
+            <div class="col-7">
+                <div class="col-4 text-c">所属模块：</div>
+                <div class="col-8">
+                    #@Tselect2F()
+                        #@Tselect2Body("moduleId" story?.moduleId?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        #end
+                        #@Tselect2Fix()#@aModal("#myModal" "添加模块" "500" "300" "btn-class" adminPath+"/product/addModule?pId=" "modelA")
+                            增加#end
+                        #end
                     #end
-
-                    #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH +adminPath}/product/page/tabledemo/addProduct.page"
-                                      class="r ">增加</a><a
-                            href=" ${TINY_CONTEXT_PATH +adminPath}/product/page/tabledemo/product-listall.page">全部</a>#end
-                #end
+                </div>
             </div>
         #end
-
-
-
+        #@validateDiv("col-2")#end
     #end
 
     #@elementItem()
         #@colLabel()所属计划：#end
         #@formControlDiv("col-4")
             #@Tselect2F()
-                #@Tselect2Body("planId" "" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                #@Tselect2Body("planId" story?.planId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 
                 #end
 
@@ -117,7 +128,7 @@
         #@formControlDiv("col-4")
             <div id="demand-sources">
                 #@Tselect2F()
-                    #@Tselect2Body("storySource" "0" {"class":
+                    #@Tselect2Body("storySource" story?.storySource?:1 {"class":
                         "input-text select2"}) ##,"multiple":"multiple"加上为多选项#foreach(stage:getDict("storySource"))
 
                         #foreach(source:getDict("storySource"))
@@ -133,21 +144,12 @@
             </div>
 
         <div class="col-5">
-
             #@Tselect2F()
-                #@Tselect2Body("clientRequestId" story?.clientRequestId {"class":
-                    "input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                    #foreach(re : requestList)
-                    <option value="${re?.clientRequestId}">${re?.clientName+"/"+re?.requestTitle}</option>
-                #end
+                #Tselect2Ajax("clientRequestId" story?.clientRequestId TINY_CONTEXT_PATH+adminPath+"/service/request/ajax/requestInCondition"
+                {"dataId":"clientRequestId","dataText":"requestTitle","placeholder":"查询请求","nullmsg":"请选择请求！","datatype":"*"})
+                #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH +adminPath}/service/request/form"
+                                  class="r">增加</a>#end
             #end
-            #@Tselect2Fix()
-                #@hasMenu("request-add")
-                    <a href="${TINY_CONTEXT_PATH +adminPath}/service/request/form"
-                       class="r ">增加</a>
-                #end
-            #end
-        #end
     </div>
     </span>
 
@@ -156,12 +158,12 @@
 
 
 #@elementItem()
-    #@colLabel()需求名称：#end
+    #@colLabel()<span class="c-red">*</span>需求名称：#end
     #@formControlDiv("col-4")
         #tinyInput(
-            "text" "storyTitle" story?.storyTitle {"placeholder":"请输入需求名称","datatype":"*","nullmsg":"需求名称不能为空！","id":
-            "email",
-            "class":"input-text"})
+            "text" "storyTitle" story?.storyTitle {"placeholder":"请输入需求名称","datatype":"*","nullmsg":"需求名称不能为空！","id":"storyTitle",
+            "class":"input-text",
+            "ajaxurl":TINY_CONTEXT_PATH+adminPath+"/product/story/judgeStoryName"})
     #end
     #@validateDiv("col-2")#end
 #end
@@ -170,15 +172,20 @@
 #@elementItem()
     #@colLabel()需求描述：#end
     #@formControlDiv("col-8")
-        #@tinyTextarea("storySpec" )${storySpec?.storySpec}#end
+        #@Teditor("storySpec" "storySpec" {"initialFrameHeight":"200"})${storySpec?.storySpec}#end
     #end
     #@validateDiv("col-2")#end
 #end
-
+    #@elementItem()
+        #@colLabel()#end
+        #@formControlDiv("col-8")
+            <div class="help-block">建议参考的模板：作为一名&lt;<i class="text-important"><font style="color: yellowgreen">某种类型的用户</font></i>&gt;，我希望&lt;<i class="text-important"><font style="color: yellowgreen">达成某些目的</font></i>&gt;，这样可以&lt;<i class="text-important"><font style="color: yellowgreen">开发的价值</font></i>&gt;。</div>
+        #end
+    #end
 #@elementItem()
     #@colLabel()验收标准：#end
     #@formControlDiv("col-8")
-        #@tinyTextarea("storyVerification" {"datatype":""})${storySpec?.storyVerification}#end
+        #@Teditor("storyVerification" "storyVerification" {"initialFrameHeight":"200"})${storySpec?.storyVerification}#end
     #end
     #@validateDiv("col-2")#end
 #end
@@ -233,7 +240,6 @@
             #end
         #end
 
-
     #end
     #@checkboxBox()
 
@@ -278,24 +284,25 @@
 #end
 #@elementItem()
     #@colLabel()附件：#end
-    #@formControlDiv("col-10")
+    #@formControlDiv("col-8")
         #mulUploadFile()
     #end
     #@validateDiv("col-2")#end
 #end
 </div>
 #@elementItem()
-<div class="col-12">
-    <div class="col-5">
+    <div class="col-12">
+        <div class="col-4">
+            <button style="float: right" type="submit" id="submit2" class="commitBtn">保存</button>
+        </div>
+        <div class="col-1"><button name="saveAndContinue" style="float: right" type="submit" id="submit2" class="commitBtn">保存并继续</button></div>
+        <div class="col-1"></div>
+        <div class="col-1">
 
+            #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end
+        </div>
+        <div class="col-5"></div>
     </div>
-    <div class="col-1">
-        <button style="float: left" type="submit" id="submit2" class="commitBtn">保存</button>
-    </div>
-    <div class="col-1">
-        #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end
-    </div>
-    <div class="col-5"></div>
 
 #end
 </div>

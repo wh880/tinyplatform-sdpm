@@ -86,7 +86,7 @@
             #@sdpmItem("回访时间" "*")
                 #@tinyDateInput(
                     "reviewDate" formatDate(review?.reviewDate?:now(),
-                "yyyy-MM-dd") "YYYY-MM-DD" {"style":"width:120px","datatype":"*","nullmsg":"日期不能为空"})#end
+                "yyyy-MM-dd") "yyyy-MM-dd" {"style":"width:120px","datatype":"*","nullmsg":"日期不能为空"})#end
             #end
             #@validateDiv("col-2")#end
         #end

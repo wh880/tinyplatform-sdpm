@@ -28,7 +28,6 @@
                 type:"POST",
                 success:function(data){
                     if(data.status=="success"){
-                        console.log($("#myModel"));
                         $("#myModal").trigger("close");
                         $("input[name=productId]").change();
                     }
