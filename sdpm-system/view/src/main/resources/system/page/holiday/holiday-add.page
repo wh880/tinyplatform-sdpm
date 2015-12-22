@@ -24,7 +24,7 @@
     #@daterangepickerPosition()
         #@colLabel()日期：#end
         #@formControlDiv("col-6")
-        	 #@dateMultipleSelect("selectList" {"datatype":"*","nullmsg":"假期名不为空"})
+        	 #@dateMultipleSelect("selectList" {"datatype":"*","nullmsg":"日期不为空"})
                  #if(holiday?.holidayDate)
                      #setDateMultiple(holiday?.holidayDate)
                  #end
