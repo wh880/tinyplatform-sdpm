@@ -39,7 +39,7 @@
                     #@sdpmItem("回复处理时间" "*")
                         #@tinyDateInput(
                             "replyDate" formatDate(request?.replyDate?:now(),
-                            "yyyy-MM-dd") "YYYY-MM-DD" {"style":"width:120px","datatype":"*",
+                            "yyyy-MM-dd") "yyyy-MM-dd" {"style":"width:120px","datatype":"*",
                         "nullmsg":"日期不能为空","placeholder":"请输入日期"})#end
                     #end
                 #end

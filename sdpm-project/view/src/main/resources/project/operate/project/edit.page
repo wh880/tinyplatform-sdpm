@@ -226,7 +226,6 @@
             $(this).attr("value") == "3" ? $("#whitelistBox").removeClass("hidden") : $("#whitelistBox").addClass("hidden");
         });
         $("[name=projectEnd]").on("change",function(){
-            console.log("sfsdf");
             var edate=$(this).val();
             var bdate=$("[name=projectBegin]").val();
             $("[name=projectDays]").val(getDateDiff(bdate,edate))

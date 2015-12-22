@@ -110,7 +110,7 @@
 			       		#@tbody()
 			       			#@tr()
 								#@td()由谁创建#end
-			       				#@td()${qualityBug?.bugOpenedBy?userUtils.getUserById(qualityBug?.bugOpenedBy)?.orgUserRealName:""} ${qualityBug?.bugOpenedDate?"于 "+formatDate(qualityBug?.bugOpenedDate,"yyyy-MM-dd hh-mm-ss"):""}#end
+			       				#@td()${qualityBug?.bugOpenedBy?userUtils.getUserById(qualityBug?.bugOpenedBy)?.orgUserRealName:""} ${qualityBug?.bugOpenedDate?"于 "+formatDate(qualityBug?.bugOpenedDate,"yyyy-MM-dd HH:mm:ss"):""}#end
 			       			#end
 			       			#@tr()
 								#@td()影响版本#end
@@ -141,7 +141,7 @@
 			       			#end
 			       			#@tr()
 								#@td()最后修改#end
-			       				#@td()${qualityBug?.bugLastEditedBy?(userUtils.getUserById(qualityBug?.bugLastEditedBy)?.orgUserRealName):""} ${qualityBug?.bugLastEditedDate?"于 "+formatDate(qualityBug?.bugLastEditedDate,"yyyy-MM-dd hh-mm-ss"):""}#end
+			       				#@td()${qualityBug?.bugLastEditedBy?(userUtils.getUserById(qualityBug?.bugLastEditedBy)?.orgUserRealName):""} ${qualityBug?.bugLastEditedDate?"于 "+formatDate(qualityBug?.bugLastEditedDate,"yyyy-MM-dd HH:mm:ss"):""}#end
 			       			#end
 			       		#end
 			 #end

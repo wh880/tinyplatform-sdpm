@@ -52,7 +52,6 @@
             <script>
                 $(function () {
                     $("#buildChart").click(function (e) {
-                        //console.log("gg");
                         var list = [];
                         $(".togglebox input:checkbox").each(function (i) {
                             if (this.checked) {

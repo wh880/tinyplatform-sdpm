@@ -188,7 +188,7 @@ public class OrgUserDaoImpl extends TinyDslDaoSupport implements OrgUserDao {
             con = ORG_USERTABLE.ORG_USER_ID.in(sId);
         }
         Select select = MysqlSelect.select(ORG_USERTABLE.ORG_USER_ID,
-                FragmentSql.fragmentSelect("CONCAT (org_dept_name,CASE WHEN org_dept_name IS NOT NULL THEN '-' ELSE ''END,org_user_real_name,'-',org_user_account) as orgUserRealName")).
+                FragmentSql.fragmentSelect("CONCAT (org_user_real_name,'-',org_user_account,CASE WHEN org_dept_name IS NOT NULL THEN '-' ELSE ''END,org_dept_name) as orgUserRealName")).
                 from(ORG_USERTABLE).join(
                 Join.leftJoin(ORG_DEPTTABLE, ORG_DEPTTABLE.ORG_DEPT_ID.eq(ORG_USERTABLE.ORG_DEPT_ID))
         ).where(and(ORG_USERTABLE.ORG_USER_DELETED.eq(OrgUser.DELETE_NO), con,

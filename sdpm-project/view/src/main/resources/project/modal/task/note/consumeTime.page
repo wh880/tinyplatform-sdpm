@@ -26,7 +26,7 @@
                 #@tr()
                     #@td()    ${count+i+1}    #end
                     #@td()
-                        #@tinyDateInput("list["+i+"].effortDate" formatDate(nowDate,"yyyy-MM-dd")  "YYYY-MM-DD" {"style":"width:150px","datatype":"*","placeholder": "选择日期"})#end
+                        #@tinyDateInput("list["+i+"].effortDate" formatDate(nowDate,"yyyy-MM-dd")  "yyyy-MM-dd" {"style":"width:150px","datatype":"*","placeholder": "选择日期"})#end
 ##                        #@validateDiv("col-2")#end
                     #end
                     #@td()

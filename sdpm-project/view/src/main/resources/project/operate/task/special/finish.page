@@ -87,7 +87,6 @@
     /*$(function(){
         $("form[name=thisform]").Validform({
             beforeSubmit:function(){
-                console.log($("[name=comment22]").val());
                 return false;
             }
 

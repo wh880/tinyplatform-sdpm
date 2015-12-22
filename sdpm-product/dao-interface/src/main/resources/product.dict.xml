@@ -59,6 +59,13 @@
              <dictItem key="3" value="已变更" sort="4"/>
              <dictItem key="4" value="拒绝" sort="5"/>
         </dictNodeEntry>
+         <dictNodeEntry name="colorOfStoryStatus" title="需求状态颜色">
+             <dictItem key="0" value="text-info" sort="1"/>
+             <dictItem key="1" value="text-warning" sort="2"/>
+             <dictItem key="2" value="text-muted" sort="3"/>
+             <dictItem key="3" value="text-error" sort="4"/>
+             <dictItem key="4" value="text-danger" sort="5"/>
+         </dictNodeEntry>
 
          <dictNodeEntry name="productStatus" title="产品状态">
              <dictItem key="0" value="新建" sort="1"/>

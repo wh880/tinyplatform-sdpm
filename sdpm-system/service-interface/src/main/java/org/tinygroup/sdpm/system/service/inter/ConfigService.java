@@ -29,7 +29,7 @@ public interface ConfigService {
      * @param configId
      * @return
      */
-    @CacheRemove(removeKeys = "${configId}", group = CACHE_CONFIG_ID, removeGroups = {CACHE_CONFIG_LIST, CACHE_CONFIG_SECTION})
+    @CacheRemove(removeKeys = "${configId}", group = CACHE_CONFIG_ID, removeGroups = {CACHE_CONFIG_LIST, CACHE_CONFIG_SECTION,CACHE_CONFIG_ID})
     int deleteConfig(Integer configId);
 
     /**
@@ -38,7 +38,7 @@ public interface ConfigService {
      * @param config
      * @return
      */
-    @CacheRemove(removeKeys = "${config?.configId}", group = CACHE_CONFIG_ID, removeGroups = {CACHE_CONFIG_LIST, CACHE_CONFIG_SECTION})
+    @CacheRemove(removeKeys = "${config?.configId}", group = CACHE_CONFIG_ID, removeGroups = {CACHE_CONFIG_LIST, CACHE_CONFIG_SECTION,CACHE_CONFIG_ID})
     int updateConfig(SystemConfig config);
 
     /**

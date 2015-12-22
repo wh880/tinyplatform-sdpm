@@ -5,22 +5,27 @@
             <dictItem key="2" value="已解决" sort="2"/>
             <dictItem key="3" value="已关闭" sort="3"/>
         </dictNodeEntry>
+        <dictNodeEntry name="colorOfBugStatus" title="bug状态颜色">
+            <dictItem key="1" value="text-warning" sort="1"/>
+            <dictItem key="2" value="text-primary" sort="2"/>
+            <dictItem key="3" value="text-muted" sort="3"/>
+        </dictNodeEntry>
         <dictNodeEntry name="bugType" title="bug类型">
             <dictItem key="11" value="功能错误" sort="1"/>
             <dictItem key="12" value="需求变动" sort="2"/>
             <dictItem key="13" value="新增需求" sort="3"/>
-          <dictItem key="1" value="代码错误" sort="4"/>
-          <dictItem key="2" value="界面优化" sort="5"/>
-          <dictItem key="3" value="设计缺陷" sort="6"/>
-          <dictItem key="4" value="配置相关" sort="7"/>
-          <dictItem key="5" value="安装部署" sort="8"/>
-          <dictItem key="6" value="安全相关" sort="9"/>
-          <dictItem key="7" value="性能问题" sort="10"/>
-          <dictItem key="8" value="标准规范" sort="11"/>
-          <dictItem key="9" value="测试脚本" sort="12"/>
-          <dictItem key="10" value="代码改进" sort="13"/>
-          <dictItem key="14" value="建议" sort="14"/>
-          <dictItem key="15" value="其他" sort="15"/>
+              <dictItem key="1" value="代码错误" sort="4"/>
+              <dictItem key="2" value="界面优化" sort="5"/>
+              <dictItem key="3" value="设计缺陷" sort="6"/>
+              <dictItem key="4" value="配置相关" sort="7"/>
+              <dictItem key="5" value="安装部署" sort="8"/>
+              <dictItem key="6" value="安全相关" sort="9"/>
+              <dictItem key="7" value="性能问题" sort="10"/>
+              <dictItem key="8" value="标准规范" sort="11"/>
+              <dictItem key="9" value="测试脚本" sort="12"/>
+              <dictItem key="10" value="代码改进" sort="13"/>
+              <dictItem key="14" value="建议" sort="14"/>
+              <dictItem key="15" value="其他" sort="15"/>
           </dictNodeEntry>
 
         <dictNodeEntry name="bugResolution" title="解决方案">
@@ -103,6 +108,12 @@
             <dictItem key="2" value="被阻塞" sort="2"/>
             <dictItem key="3" value="研究中" sort="3"/>
         </dictNodeEntry>
+        、<dictNodeEntry name="colorOfCaseStatus" title="测试用例状态颜色">
+        <dictItem key="1" value="text-success" sort="1"/>
+        <dictItem key="2" value="text-warning" sort="2"/>
+        <dictItem key="3" value="text-info" sort="3"/>
+    </dictNodeEntry>
+
         <dictNodeEntry name="caseResult" title="用例结果">
             <dictItem key="0" value="N/A" sort="1"/>
             <dictItem key="1" value="通过" sort="2"/>
@@ -114,6 +125,12 @@
             <dictItem key="1" value="通过" sort="2"/>
             <dictItem key="2" value="失败" sort="3"/>
             <dictItem key="3" value="阻塞" sort="4"/>
+        </dictNodeEntry>
+        <dictNodeEntry name="colorOfCaseResult" title="用例结果颜色">
+            <dictItem key="0" value="text-info" sort="1"/>
+            <dictItem key="1" value="text-primary" sort="2"/>
+            <dictItem key="2" value="text-danger" sort="3"/>
+            <dictItem key="3" value="text-warning" sort="4"/>
         </dictNodeEntry>
 
         <dictNodeEntry name="caseLastRunResult" title="用例步骤结果">
@@ -163,6 +180,12 @@
             <dictItem key="2" value="进行中" sort="2"/>
             <dictItem key="3" value="已完成" sort="3"/>
             <dictItem key="4" value="被堵塞" sort="4"/>
+        </dictNodeEntry>
+        <dictNodeEntry name="colorOfVersionStatus" title="版本状态颜色">
+            <dictItem key="1" value="text-info" sort="1"/>
+            <dictItem key="2" value="text-primary" sort="2"/>
+            <dictItem key="3" value="text-success" sort="3"/>
+            <dictItem key="4" value="text-warning" sort="4"/>
         </dictNodeEntry>
         	
     </dictNodeEntry>

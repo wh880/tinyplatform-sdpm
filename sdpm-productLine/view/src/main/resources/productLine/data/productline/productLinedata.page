@@ -31,8 +31,6 @@
             var that=this;
             layer.confirm('确定要删除该记录？', function (index) {
                 var id = $(that).closest("tr").find("td:first a:first").html();
-                //console.log($(that).closest("tr"),$(that).closest("tr").find("td:first a:first"),id);
-                //alert(id);
                 $.ajax({
                     url:"${TINY_CONTEXT_PATH+adminPath}"+"/productLine/delete?productLineId="+id,
                     dataType:"json",

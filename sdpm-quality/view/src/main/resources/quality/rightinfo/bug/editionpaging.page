@@ -403,7 +403,7 @@
         #@colLabel()解决日期:#end
         #@formControlDiv("col-8")
 
-                    ${bug?.bugResolvedDate?formatDate(bug?.bugResolvedDate,"yyyy-MM-dd hh-mm-ss"):""}
+                    ${bug?.bugResolvedDate?formatDate(bug?.bugResolvedDate,"yyyy-MM-dd HH:mm:ss"):""}
                 #end
             #end
 </li>
@@ -482,7 +482,7 @@
 #@elementItem()
     #@colLabel()关闭日期:#end
     #@formControlDiv("col-8")
-                ${bug?.bugClosedDate?formatDate(bug?.bugClosedDate,"yyyy-MM-dd hh-mm-ss"):""}
+                ${bug?.bugClosedDate?formatDate(bug?.bugClosedDate,"yyyy-MM-dd HH:mm:ss"):""}
             #end
     #end
 </li>

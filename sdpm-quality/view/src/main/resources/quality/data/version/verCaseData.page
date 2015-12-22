@@ -10,8 +10,8 @@
 						#@td()<span class="${run?.testRunAssignedTo==userUtils.getUserId()?'c-red':''}">${run?.testRunAssignedTo?userUtils.getUserById(run?.testRunAssignedTo)?.orgUserRealName:""}</span>#end
 						#@td()${run?.testRunLastRunner?userUtils.getUserById(run?.testRunLastRunner)?.orgUserRealName:""}#end
 						#@td()${run?.testRunLastRunDate?formatDate(run?.testRunLastRunDate,'yyyy-MM-dd HH:mm:ss'):""}#end
-						#@td()${getDict("caseResult",run?.testRunLastRunResult)}#end
-						#@td()${getDict("caseStatus",run?.testRunStatus)}#end
+						#@td()<p class="${getDict('colorOfCaseResult',run?.testRunLastRunResult)}">${getDict("caseResult",run?.testRunLastRunResult)}</p>#end
+						#@td()<p class="${getDict('colorOfCaseStatus',run?.testRunStatus)}">${getDict("caseStatus",run?.testRunStatus)}</p>#end
 						 #@td()
                          	#foreach(m:menuManager.getScopeMenus("version-case-op"))
                          		#if(m.id=="tverremove")

@@ -35,13 +35,13 @@
 <input type="hidden" name="currentAddress" value=""/>
 <div style="width:100%;" class="pageleftpart">
 <div class="infoContent">
-    <p class="titleName">提需求</p>
+    <p class="titleName">#if(request)转需求 #{else}提需求#end</p>
     #@elementItem()
         #@colLabel()<span class="c-red">*</span>所属产品：#end
         #@formControlDiv("col-4")
             <div class="col-5">
                 #@TzTreeSelect(
-                    "productId" cookieProductId {"class":"input-text","datatype":"*","nullmsg":"所属产品不能为空！",
+                    "productId" story?.productId?:cookieProductId {"class":"input-text","datatype":"*","nullmsg":"所属产品不能为空！",
                     "data-URL":call("link",adminPath+"/productLine/userProductTree")})
                     <script>
                         $(function(){
@@ -49,7 +49,6 @@
                             var mUrl =  $("#modelA").attr("href");
                             var sUrl = $("input[name=storyTitle]").attr("ajaxurl");
                             $("#${sid}").on("setValue",function(o,treeNode){
-                                console.log("test222");
                                 var pId = treeNode.id;
                                 if (pId > 0) {
                                     ajaxRead("${sid}", "moduleId", "moduleId", "moduleName", "/quality/bug/ajax/module?moduleRoot=" + pId,"","module");
@@ -88,7 +87,7 @@
                 <div class="col-4 text-c">所属模块：</div>
                 <div class="col-8">
                     #@Tselect2F()
-                        #@Tselect2Body("moduleId" moduleId?:0 {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        #@Tselect2Body("moduleId" story?.moduleId?:(moduleId?:0) {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         #end
                         #@Tselect2Fix()#@aModal("#myModal" "添加模块" "500" "300" "btn-class" adminPath+"/product/addModule?pId=" "modelA")
                             增加#end
@@ -104,7 +103,7 @@
         #@colLabel()所属计划：#end
         #@formControlDiv("col-4")
             #@Tselect2F()
-                #@Tselect2Body("planId" backPlan {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                #@Tselect2Body("planId" story?.planId?:backPlan {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                 #end
 
                 #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH +adminPath}/product/plan/addplan"
@@ -119,7 +118,7 @@
         #@formControlDiv("col-4")
             <div id="demand-sources">
                 #@Tselect2F()
-                    #@Tselect2Body("storySource" "1" {"class":
+                    #@Tselect2Body("storySource" request?0:1 {"class":
                         "input-text select2","nullmsg":"请选择来源！","datatype":"*"})
 
                         #foreach(source:getDict("storySource"))
@@ -136,7 +135,7 @@
 
         <div class="col-5">
             #@Tselect2F()
-                #Tselect2Ajax("clientRequestId" "" TINY_CONTEXT_PATH+adminPath+"/service/request/ajax/requestInCondition"
+                #Tselect2Ajax("clientRequestId" request?.clientRequestId TINY_CONTEXT_PATH+adminPath+"/service/request/ajax/requestInCondition"
                 {"dataId":"clientRequestId","dataText":"requestTitle","placeholder":"查询请求","nullmsg":"请选择请求！","datatype":"*"})
             #@Tselect2Fix()<a href="${TINY_CONTEXT_PATH +adminPath}/service/request/form"
                               class="r">增加</a>#end
@@ -153,7 +152,7 @@
     #@colLabel()<span class="c-red">*</span>需求名称：#end
     #@formControlDiv("col-4")
         #tinyInput(
-            "text" "storyTitle" ""{"placeholder":"请输入需求名称","datatype":"*","nullmsg":"需求名称不能为空！","id":"storyTitle",
+            "text" "storyTitle" story?.storyTitle {"placeholder":"请输入需求名称","datatype":"*","nullmsg":"需求名称不能为空！","id":"storyTitle",
             "class":"input-text",
             "ajaxurl":TINY_CONTEXT_PATH+adminPath+"/product/story/judgeStoryName"})
 
@@ -165,7 +164,7 @@
 #@elementItem()
     #@colLabel()需求描述：#end
     #@formControlDiv("col-8")
-        #@Teditor("storySpec" "storySpec" {"initialFrameHeight":"200"})#end
+        #@Teditor("storySpec" "storySpec" {"initialFrameHeight":"200"})${storySpec?.storySpec}#end
     #end
     #@validateDiv("col-2")#end
 #end
@@ -178,7 +177,7 @@
 #@elementItem()
     #@colLabel()验收标准：#end
     #@formControlDiv("col-8")
-        #@Teditor("storyVerification" "storyVerification" {"initialFrameHeight":"150"})#end
+        #@Teditor("storyVerification" "storyVerification" {"initialFrameHeight":"200"})${storySpec?.storyVerification}#end
     #end
     #@validateDiv("col-2")#end
 #end
@@ -187,7 +186,7 @@
     #@colLabel()<span class="c-red">*</span>优先级：#end
     #@formControlDiv("col-4")
         #@Tselect2F()
-            #@Tselect2Body("storyPri" 0 {"class":"input-text select2","datatype":"*","nullmsg":"优先级不能为空！"}) ##,"multiple":"multiple"加上为多选项
+            #@Tselect2Body("storyPri" story?.storyPri {"class":"input-text select2","datatype":"*","nullmsg":"优先级不能为空！"}) ##,"multiple":"multiple"加上为多选项
                 #foreach(pri:getDict("storyPri"))
                     <option value="${pri?.value}"> ${pri?.text}</option>
                 #end

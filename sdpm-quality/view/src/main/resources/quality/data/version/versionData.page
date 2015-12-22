@@ -14,7 +14,7 @@
         #@td("nowrap")<span class="${v?.testtaskOwner==userUtils.getUserId()?'c-red':''}">${v?.testtaskOwner?userUtils.getUserById(v?.testtaskOwner)?.orgUserRealName:""}</span>#end
         #@td("nowrap")${v?.testtaskBegin?formatDate(v?.testtaskBegin,"yyyy-MM-dd"):""}#end
         #@td("nowrap")${v?.testtaskEnd?formatDate(v?.testtaskEnd,"yyyy-MM-dd"):""}#end
-        #@td("nowrap")${getDict("versionStatus",v?.testtaskStatus)}#end
+        #@td("nowrap")<p class="${getDict('colorOfVersionStatus',v?.testtaskStatus)">${getDict("versionStatus",v?.testtaskStatus)}</p>#end
         #@td("nowrap")
             #foreach(m:menuManager.getScopeMenus("testversion-op"))
             <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?testversionId=${v?.testversionId}&currentPageId=5"

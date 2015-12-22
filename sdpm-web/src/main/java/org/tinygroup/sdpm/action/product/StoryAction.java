@@ -916,6 +916,28 @@ public class StoryAction extends BaseController {
     }
 
     /**
+     * 请求转需求
+     * @param id
+     * @param model
+     * @return
+     */
+    @RequiresPermissions("product-demand-add")
+    @RequestMapping("requestToStory")
+    public String requestToStory(Integer id, Model model){
+        ServiceRequest request = requestService.findRequest(id);
+        ProductStory story = new ProductStory();
+        story.setStoryTitle(request.getRequestTitle());
+        ProductStorySpec storySpec = new ProductStorySpec();
+        storySpec.setStorySpec(request.getRequestSpec());
+        List<ServiceRequest> requests = requestService.getRequestList(null);
+        model.addAttribute("requestList", requests);
+        model.addAttribute("story", story);
+        model.addAttribute("storySpec", storySpec);
+        model.addAttribute("request",request);
+        return "/product/page/add/story/product-demand-add.page";
+    }
+
+    /**
      * 查找出要复制需求的信息
      *
      * @param storyId

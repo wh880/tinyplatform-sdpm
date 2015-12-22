@@ -134,7 +134,7 @@
 					#@colLabel()<span class="c-red">*</span>开始日期：#end
 					#@formControlDiv("col-4")
 						#@div(divClass="col-10")
-						#@tinyDateInput("testtaskBegin" testTask?.testtaskBegin?formatDate(testTask?.testtaskBegin,"yyyy-MM-dd"):"" "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空"})#end
+						#@tinyDateInput("testtaskBegin" testTask?.testtaskBegin?formatDate(testTask?.testtaskBegin,"yyyy-MM-dd"):"" "yyyy-MM-dd" {"datatype":"*","nullmsg":"日期不能为空"})#end
 						#end
 					#end
 					#@validateDiv("col-2")#end
@@ -143,7 +143,7 @@
 					#@colLabel()<span class="c-red">*</span>结束日期：#end
 					#@formControlDiv("col-4")
 						#@div(divClass="col-10")
-						#@tinyDateInput("testtaskEnd" testTask?.testtaskEnd?formatDate(testTask?.testtaskEnd,"yyyy-MM-dd"):"" "YYYY-MM-DD" {"datatype":"*","nullmsg":"日期不能为空"})#end
+						#@tinyDateInput("testtaskEnd" testTask?.testtaskEnd?formatDate(testTask?.testtaskEnd,"yyyy-MM-dd"):"" "yyyy-MM-dd" {"datatype":"*","nullmsg":"日期不能为空"})#end
 						#end
 					#end
 					#@validateDiv("col-2")#end

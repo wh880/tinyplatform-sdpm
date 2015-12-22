@@ -106,7 +106,10 @@ public class TestCaseAction extends BaseController {
 
     @RequiresPermissions("add-case")
     @RequestMapping("/add")
-    public String add() {
+    public String add(Integer bugId,Model model) {
+        if(bugId!=null){
+            model.addAttribute("bug",bugService.findQualityBugById(bugId));
+        }
         return "quality/operate/case/proposecase.page";
     }
 
