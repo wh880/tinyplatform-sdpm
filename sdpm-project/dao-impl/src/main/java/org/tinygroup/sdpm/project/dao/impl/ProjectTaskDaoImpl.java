@@ -607,8 +607,8 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
                         PROJECT_TASKTABLE.TASK_CLOSED_REASON.value(new JdbcNamedParameter("taskClosedReason")),
                         PROJECT_TASKTABLE.TASK_LAST_EDITED_BY.value(new JdbcNamedParameter("taskLastEditedBy")),
                         PROJECT_TASKTABLE.TASK_LAST_EDITED_DATE.value(new JdbcNamedParameter("taskLastEditedDate")),
-                        PROJECT_TASKTABLE.TASK_DELETED.value(new JdbcNamedParameter("taskDeleted"))).where(
-                        PROJECT_TASKTABLE.TASK_ID.eq(new JdbcNamedParameter("taskId")));
+                        PROJECT_TASKTABLE.TASK_DELETED.value(new JdbcNamedParameter("taskDeleted")))
+                        .where(PROJECT_TASKTABLE.TASK_ID.eq(new JdbcNamedParameter("taskId")));
             }
         });
     }

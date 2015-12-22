@@ -1,4 +1,4 @@
-#!set(activeTitle="任务信息",activeMenuId=currentPageId)
+#!set(activeTitle="任务信息-"+task.taskName,activeMenuId=currentPageId,name="task")
 #@layout(project)
     #@tabBodyCol("ptop-5")
         #@div(divClass="operationbar")

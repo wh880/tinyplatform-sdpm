@@ -131,8 +131,16 @@ public class ProjectAction extends BaseController implements WebContextAware {
         String[] productIds = linkProduct.split(",");
         projectProductService.addProjectLinkToProduct(productIds, project.getProjectId());
         CookieUtils.setCookie(response, projectOperate.COOKIE_PROJECT_ID, project.getProjectId().toString());
-        //TODO:ProjectUtils.removeProjectList();
-        return "redirect:" + adminPath + "/project/list";
+        return "redirect:" + adminPath + "/project/guide";
+    }
+
+    /**
+     * 添加项目后的导向
+     * @return
+     */
+    @RequestMapping(value = "/guide")
+    public String guide() {
+        return "project/index/project/guide";
     }
 
     /**
@@ -406,7 +414,7 @@ public class ProjectAction extends BaseController implements WebContextAware {
             return result;
         }
         Integer[] pIds = projectOperate.getUserProjectIdList();
-        return projectService.projectInCondition(key,Integer.parseInt(configService.getConfigBySection(SystemConfig.SEARCH_CONFIG).getConfigKey()), pIds);
+        return projectService.projectInCondition(key, Integer.parseInt(configService.getConfigBySection(SystemConfig.SEARCH_CONFIG).getConfigKey()), pIds);
     }
 
 }

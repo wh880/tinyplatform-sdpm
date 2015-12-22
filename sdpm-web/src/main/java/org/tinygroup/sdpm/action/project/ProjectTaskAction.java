@@ -369,13 +369,14 @@ public class ProjectTaskAction extends BaseController {
             for (ProjectTask projectTask : tasks) {
                 if (Integer.parseInt(projectTask.getTaskStatus()) % 3 != 0 && Integer.parseInt(projectTask.getTaskStatus()) != 5) {
                     isDone = false;
-                    break;
                 }
             }
             if (isDone) {
-                ProductStory story = storyService.findStory(task.getTaskStory());
-                story.setStoryStage(ProductStory.STAGE_IS_DONE);
-                storyService.updateStory(story);
+                ProductStory story = storyService.findStory(oldTask.getTaskStory());
+                if (story != null) {
+                    story.setStoryStage(ProductStory.STAGE_IS_DONE);
+                    storyService.updateStory(story);
+                }
             }
         }
         if (!oldTask.getTaskConsumed().equals(task.getTaskConsumed())) {

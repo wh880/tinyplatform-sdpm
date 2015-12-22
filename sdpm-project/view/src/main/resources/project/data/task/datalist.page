@@ -24,9 +24,7 @@
                     ${getDict("taskStatus",t?.taskStatus)}
                 #end
             #end
-
             #@td("nowrap")${formatdate(t?.taskDeadLine,"yyyy-MM-dd")}#end
-
             #@td("nowrap")
                 #if(t?.taskAssignedTo ==userUtils.getUserId())
                     <span class="c-red">
@@ -36,15 +34,9 @@
                     ${t?.taskAssignedTo==null?"":userUtils.getUserById(t.taskAssignedTo).orgUserRealName}
                 #end
             #end
-
             #@td("nowrap")${t?.taskFinishedBy==null?"":userUtils.getUserById(t.taskFinishedBy).orgUserRealName}#end
-
             #@td()${t.taskEstimate}#end
-
-
             #@td()${t.taskConsumed}#end
-
-
             #@td()${t.taskLeft}#end
 
             #@td("nowrap")
@@ -97,7 +89,6 @@
                 #end
             #end
             #end
-
 #end
 
 #end

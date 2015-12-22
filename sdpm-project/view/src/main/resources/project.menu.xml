@@ -4,17 +4,17 @@
         <menu id="pro-task-proposeversion" name="建任务" href="/project/task/form" icon="icon-plus" sort="4"
               isShow="1"
               scope="pro-taskmenu2-op"/>
-        <menu id="pro-task-call" name="任务指派" href="/project/task/call" icon="icon-hand-right" sort="20" isShow="1"
+        <menu id="pro-task-call" name="指派" href="/project/task/call" icon="icon-hand-right" sort="20" isShow="1"
               scope="pro-task-op"/>
-        <menu id="pro-task-start" name="开始任务" href="/project/task/start" icon="icon-play" sort="15" isShow="1"
+        <menu id="pro-task-start" name="开始" href="/project/task/start" icon="icon-play" sort="15" isShow="1"
               scope="pro-task-op"/>
-        <menu id="pro-task-note" name="任务日志" href="/project/task/consumeTime" icon="icon-time" sort="10" isShow="1"
+        <menu id="pro-task-note" name="日志" href="/project/task/consumeTime" icon="icon-time" sort="10" isShow="1"
               scope="pro-task-op"/>
-        <menu id="pro-task-finish" name="完成任务" href="/project/task/finish" icon="icon-ok-sign" sort="8" isShow="1"
+        <menu id="pro-task-finish" name="完成" href="/project/task/finish" icon="icon-ok-sign" sort="8" isShow="1"
               scope="pro-task-op"/>
-        <menu id="pro-task-edit" name="编辑任务" href="/project/task/edit" icon="icon-pencil" sort="4" isShow="1"
+        <menu id="pro-task-edit" name="编辑" href="/project/task/edit" icon="icon-pencil" sort="4" isShow="1"
               scope="pro-task-op"/>
-        <menu id="pro-task-close" name="关闭任务" href="/project/task/close" icon="icon-off" sort="6" isShow="1"
+        <menu id="pro-task-close" name="关闭" href="/project/task/close" icon="icon-off" sort="6" isShow="1"
               scope="pro-task-op"/>
 
         <!--<menu id="task-group" name="分组查询" icon="" sort="10">-->
