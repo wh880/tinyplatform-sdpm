@@ -1,5 +1,5 @@
-#@setTinyTableMsg()#end
 #setTinyItemCount(taskPager.totalCount)
+#@setTinyTableMsg()本页共 ${taskSize} 个任务，总预计${totalEstimate} 工时，已消耗${totalTaskConsumed} 工时，剩余${totalLeft} 工时。#end
 #foreach(t:taskPager?.records)
 #@tr()
             #@td()<input type="checkbox" value="${t?.taskId}" name="idCheck">#end

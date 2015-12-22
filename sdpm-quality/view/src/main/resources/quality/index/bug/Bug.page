@@ -11,9 +11,7 @@
 			$("#${tableId} input[type='checkbox']").each(function () {
 				if (this.checked == true && this.id != "checkboxall") {
 					var clientId = $(this).val();
-					//if ("records" == inputname) {
 					ids.push(clientId);
-					// }
 				}
 			});
 			if (ids.length > 0) {
@@ -24,7 +22,6 @@
 					data: {ids: ids, name: inputvalue},
 					dataType: "json",
 					success: function (data) {
-						// alert('success');
 						if(data.status=="y") {
 							layer.msg(data.info, 2, 1);
 							$("#${tableId}").trigger("refresh");
@@ -34,7 +31,6 @@
 					},
 					error: function (res) {
 						layer.msg("失败")
-						//alert("失败");
 					}
 				});
 			}
@@ -93,17 +89,15 @@
 	##operationbar end
 	#end
 #end
-
-
-
 			#@toggleBox({"class":"open"})
 				#@toggleLeft({"class":"aclass"})
 					#@settoggleLeftTitle()#foreach(product : productUtils.getAllProductListByUser())
-                                                                        #if(product?.productId == cookieProductId)
-                                                                        ${product?.productName}
-                                                                        #break
-                                                                        #end
-                                                                        #end#end
+												#if(product?.productId == cookieProductId)
+													${product?.productName}
+													#break
+												#end
+											#end
+					#end
 						#@settoggleLeftBody("treeLeftbox")
 							#@zTreeList(call("link",adminPath+"/system/module/bugTree?moduleType=bug&moduleRoot="+cookieProductId))
 								#setzTreeValMap({"id":"moduleId","name":"moduleName","pid":"moduleParent"}) ##key值为固定

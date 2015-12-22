@@ -113,15 +113,14 @@ public class ProjectTaskAction extends BaseController {
      */
     @RequiresPermissions(value = {"pro-task-proposeversion", "pro-Info2-copy", "batch-distribute-task"}, logical = Logical.OR)
     @RequestMapping("/form")
-    public String form(HttpServletRequest request, Model model,
+    public String form(HttpServletRequest request, HttpServletResponse response, Model model,
                        Integer storyId,
                        String taskId,
                        Integer moduleId) {
-        String cookie = CookieUtils.getCookie(request, projectOperate.COOKIE_PROJECT_ID);
-        if (StringUtil.isBlank(cookie)) {
-            addMessage(model, "请选择项目");
+        Integer projectId = projectOperate.getCurrentProjectId(request, response);
+        if (projectId == null) {
+            return redirectProjectForm();
         }
-        Integer projectId = Integer.valueOf(cookie);
         model.addAttribute("teamList", userService.findTeamUserListByProjectId(projectId));
 
         if (taskId != null) {
@@ -137,7 +136,7 @@ public class ProjectTaskAction extends BaseController {
         model.addAttribute("story", story);
 
         model.addAttribute("storyList", storyList);
-        return "project/operate/task/common/add";
+        return "project/operate/task/common/add.page";
     }
 
     /**
@@ -474,10 +473,28 @@ public class ProjectTaskAction extends BaseController {
         if (projectId != null) {
             ProjectTask task = new ProjectTask();
             task.setTaskProject(projectId);
-            List<ProjectTask> list = taskService.findListTask(task);
-            model.addAttribute("tasksList", list);
+            List<ProjectTask> tasksList = taskService.findListTask(task);
+            model.addAttribute("tasksList", tasksList);
+            projectPagerInfoStatistics(model, tasksList);
         }
         return "project/data/task/datalist.pagelet";
+    }
+
+    private void projectPagerInfoStatistics(Model model, List<ProjectTask> tasksList) {
+        if (CollectionUtil.isEmpty(tasksList)) {
+            return;
+        }
+        int totalTaskConsumed = 0, totalLeft = 0, totalEstimate = 0;
+        for (ProjectTask projectTask : tasksList) {
+            totalTaskConsumed += projectTask.getTaskConsumed();
+            totalLeft += projectTask.getTaskLeft();
+            totalEstimate += projectTask.getTaskEstimate();
+        }
+        model.addAttribute("totalTaskConsumed", totalTaskConsumed);
+        model.addAttribute("totalLeft", totalLeft);
+        model.addAttribute("totalEstimate", totalEstimate);
+        model.addAttribute("taskSize", tasksList.size());
+
     }
 
     @RequestMapping("/findPager")
@@ -518,6 +535,8 @@ public class ProjectTaskAction extends BaseController {
         } else {
             taskPager = taskService.findTaskPager(start, limit, task, order, asc, condition);
         }
+        projectPagerInfoStatistics(model, taskPager.getRecords());
+
         model.addAttribute("taskPager", taskPager);
         model.addAttribute("statu", statu);
         model.addAttribute("choose", choose);
