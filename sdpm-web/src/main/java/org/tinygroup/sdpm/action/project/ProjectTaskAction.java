@@ -132,6 +132,10 @@ public class ProjectTaskAction extends BaseController {
         model.addAttribute("moduleList", findModuleList(storyId, projectId));
         model.addAttribute("moduleId", moduleId);
         model.addAttribute("storyId", storyId);
+        ProductStory story = productStoryService.findStory(storyId);
+
+        model.addAttribute("story", story);
+
         model.addAttribute("storyList", storyList);
         return "project/operate/task/common/add";
     }
