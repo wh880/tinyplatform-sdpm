@@ -131,7 +131,7 @@ public class ProductLineDaoImpl extends TinyDslDaoSupport implements ProductLine
                 }
             });
         } catch (EmptyResultDataAccessException e) {
-            return null;
+            return new ProductLine();
         }
 
     }

@@ -5,25 +5,25 @@
     $(document).ready(function () {
         $("select[name='storySource']").bind('change', function () {
             if (0 == $(this).val()) {
+                $("input[name='clientRequestId'],input[name='clientRequestId-name']").attr("ignore","");
+//                $("[name='clientRequestId-name']").attr("ignore","")
+                $("[name='clientRequestId']").blur();
                 $(".customer-request").show();
                 $("#demand-sources").addClass("col-5");
             } else {
+                $("input[name='clientRequestId'],input[name='clientRequestId-name']").attr("ignore","ignore");
+//                $("[name='clientRequestId-name']").attr("ignore","ignore");
                 $(".customer-request").hide();
+                $("[name='clientRequestId']").val("").trigger("change");
                 $("#demand-sources").removeClass("col-5");
             }
         });
 
+
         $("#story_reviewed").on("click", function () {
-
             var vm = this.checked;
-            if (vm == true) {
-                $("select[name='storyReviewedBy']").attr("disabled", "disabled");
-            }
-            if (vm == false) {
-                $("select[name='storyReviewedBy']").removeAttr("disabled");
-            }
-
-
+            $("[name='storyReviewedBy']").closest(".formControls").next("div[class=col-2]").toggle();//hide();            }
+            $("[name='storyReviewedBy']").trigger("disable");
         });
 
     });

@@ -124,6 +124,24 @@
             ${getDict("storyStatus",story?.storyStatus)}
         #end
     </li>
+    <li>
+        #@elementItem()
+            #@colLabel()<span class='c-red'>*</span>所处阶段：#end
+            #@formControlDiv("col-8")
+                #@Tselect2F()
+                    #@Tselect2Body("storyStage" story?.storyStage {"class":
+                        "input-text select2","nullmsg":"请选择阶段！","datatype":"*"})
+                        #foreach(source:getDict("storyStage"))
+                            <option value="${source?.value}"> ${source?.text}</option>
+                        #end
+
+                    #end
+
+                #end
+            #end
+            #@validateDiv("col-2")#end
+        #end
+    </li>
 
     <li>
         #@elementItem()

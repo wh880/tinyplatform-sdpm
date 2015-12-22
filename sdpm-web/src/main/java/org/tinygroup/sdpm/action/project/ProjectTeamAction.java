@@ -15,6 +15,9 @@ import org.tinygroup.sdpm.org.service.inter.RoleService;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTeam;
 import org.tinygroup.sdpm.project.service.inter.TeamService;
+import org.tinygroup.sdpm.util.CookieUtils;
+import org.tinygroup.sdpm.util.ProductUtils;
+import org.tinygroup.sdpm.util.ProjectOperate;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -144,6 +147,49 @@ public class ProjectTeamAction extends BaseController {
         List<OrgRole> roleList = roleService.findRoleList(role);
         model.addAttribute("roleList", roleList);
         model.addAttribute("a", a + 1);
+        return "/product/page/team/teamAddTr.pagelet";
+    }
+
+    @RequestMapping("batchTeamTr")
+    public String batchTeamTr(Integer a,String[] userIds, Model model) {
+        List<OrgUser> userList = userService.findUserList(null);
+        model.addAttribute("userList", userList);
+        OrgRole role = new OrgRole();
+        role.setDeleted(0);
+        role.setOrgRoleType(OrgRole.ROLE_TYPE_PROJECT);
+        List<OrgRole> roleList = roleService.findRoleList(role);
+        model.addAttribute("roleList", roleList);
+        model.addAttribute("a", a + 1);
+        model.addAttribute("userIds",userIds);
+        return "/product/page/team/teamAddTr.pagelet";
+    }
+
+    @RequestMapping("teamCopy")
+    public String teamCopy(Integer a,Integer projectId,Model model,HttpServletRequest request){
+
+        List<ProjectTeam> teams = teamService.findTeamByProjectId(projectId);
+        String thisP = CookieUtils.getCookie(request, ProjectOperate.COOKIE_PROJECT_ID);
+        if(StringUtil.isBlank(thisP)){
+            List<ProjectTeam> thisTeams = teamService.findTeamByProjectId(Integer.parseInt(thisP));
+            for(ProjectTeam team : teams){
+                for(ProjectTeam projectTeam : thisTeams){
+                    if(projectTeam.getTeamUserId().equals(team.getTeamUserId())){
+                        teams.remove(team);
+                        break;
+                    }
+                }
+            }
+        }
+
+        List<OrgUser> userList = userService.findUserList(null);
+        model.addAttribute("userList", userList);
+        OrgRole role = new OrgRole();
+        role.setDeleted(0);
+        role.setOrgRoleType(OrgRole.ROLE_TYPE_PROJECT);
+        List<OrgRole> roleList = roleService.findRoleList(role);
+        model.addAttribute("roleList", roleList);
+        model.addAttribute("a", a + 1);
+        model.addAttribute("copyTeam", teams);
         return "/product/page/team/teamAddTr.pagelet";
     }
 }

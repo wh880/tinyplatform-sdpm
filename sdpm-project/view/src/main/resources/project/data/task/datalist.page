@@ -12,17 +12,7 @@
             #end
 
             #@td("nowrap")
-                #if(t?.taskStatus == "2")
-                    <span class="c-red">
-                ${getDict("taskStatus",t?.taskStatus)}
-            </span>
-                #elseif(t?.taskStatus =="3")
-                    <span class="c-green">
-                ${getDict("taskStatus",t?.taskStatus)}
-            </span>
-                #else
-                    ${getDict("taskStatus",t?.taskStatus)}
-                #end
+                <p class="${getDict('colorOfTaskStatus',t?.taskStatus)}">${getDict("taskStatus",t?.taskStatus)}</p>
             #end
             #@td("nowrap")${formatdate(t?.taskDeadLine,"yyyy-MM-dd")}#end
             #@td("nowrap")

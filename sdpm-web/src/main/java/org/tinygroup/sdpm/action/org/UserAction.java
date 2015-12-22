@@ -625,4 +625,14 @@ public class UserAction extends BaseController {
         }
         return userService.userInCondition(key, Integer.parseInt(configService.getConfigBySection(SystemConfig.SEARCH_CONFIG).getConfigKey()), ids);
     }
+    @RequestMapping("batchUserInCondition")
+    public String ajaxUserByCondition(String condition,Model model){
+        model.addAttribute("userList",userService.userInCondition(condition,100,null));
+        return "product/page/team/batchData.pagelet";
+    }
+
+    @RequestMapping("toBatchChooseTeam")
+    public String toBatchChooseTeam(){
+        return "organization/user/team/batchChooseTeamMember.pagelet";
+    }
 }
