@@ -4,6 +4,10 @@
         #@div(divClass="operationbar")
         团队管理
         #end
+    <span class="r" style="position:relative;top:-28px;height:0">
+                #@aModal("#myModal" "批量添加" 350 600 "" adminPath+"/org/user/toBatchChooseTeam")<i class="icon-plus-sign"></i>&nbsp;批量添加#end
+##        &nbsp;#@aModal("#myModal" "复制团队" 1200 600 "" editPage+"?taskId="+task?.taskId)<i class=" icon-copy"></i>&nbsp;复制团队#end
+     </span>
     #end
 #end
 #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/project/team/teamManageSave" "post" {"class":"test"})

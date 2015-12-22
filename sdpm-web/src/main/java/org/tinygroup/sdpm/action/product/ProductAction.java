@@ -32,6 +32,7 @@ import org.tinygroup.sdpm.system.dao.pojo.SystemConfig;
 import org.tinygroup.sdpm.system.dao.pojo.SystemHistory;
 import org.tinygroup.sdpm.util.CookieUtils;
 import org.tinygroup.sdpm.util.LogUtil;
+import org.tinygroup.sdpm.util.ProductUtils;
 import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -516,5 +517,48 @@ public class ProductAction extends BaseController {
             pIds[i] = products.get(i).getProductId();
         }
         return productService.productInCondition(key,Integer.parseInt(configService.getConfigBySection(SystemConfig.SEARCH_CONFIG).getConfigKey()),pIds);
+    }
+
+    @RequestMapping("team/batchTeamTr")
+    public String batchTeamTr(Integer a,String[] userIds, Model model) {
+        List<OrgUser> userList = userService.findUserList(null);
+        model.addAttribute("userList", userList);
+        OrgRole role = new OrgRole();
+        role.setDeleted(0);
+        role.setOrgRoleType(OrgRole.ROLE_TYPE_PRODUCT);
+        List<OrgRole> roleList = roleService.findRoleList(role);
+        model.addAttribute("roleList", roleList);
+        model.addAttribute("a", a + 1);
+        model.addAttribute("userIds",userIds);
+        return "/product/page/team/teamAddTr.pagelet";
+    }
+
+    @RequestMapping("team/teamCopy")
+    public String teamCopy(Integer a,Integer productId,Model model,HttpServletRequest request){
+
+        List<ProjectTeam> teams = teamService.findTeamByProductId(productId);
+        String thisP = CookieUtils.getCookie(request, ProductUtils.COOKIE_PRODUCT_ID);
+        if(StringUtil.isBlank(thisP)){
+            List<ProjectTeam> thisTeams = teamService.findTeamByProductId(Integer.parseInt(thisP));
+            for(ProjectTeam team : teams){
+                for(ProjectTeam projectTeam : thisTeams){
+                    if(projectTeam.getTeamUserId().equals(team.getTeamUserId())){
+                        teams.remove(team);
+                        break;
+                    }
+                }
+            }
+        }
+
+        List<OrgUser> userList = userService.findUserList(null);
+        model.addAttribute("userList", userList);
+        OrgRole role = new OrgRole();
+        role.setDeleted(0);
+        role.setOrgRoleType(OrgRole.ROLE_TYPE_PRODUCT);
+        List<OrgRole> roleList = roleService.findRoleList(role);
+        model.addAttribute("roleList", roleList);
+        model.addAttribute("a", a + 1);
+        model.addAttribute("copyTeam", teams);
+        return "/product/page/team/teamAddTr.pagelet";
     }
 }

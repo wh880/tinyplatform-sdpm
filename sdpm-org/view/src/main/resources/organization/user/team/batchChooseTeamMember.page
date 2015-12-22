@@ -1,0 +1,80 @@
+<div class="input-group input-group-lg ">
+    <input class="form-control input-lg " type="text" placeholder="重新搜索..." id="search-user" value="">
+    <div class="input-group-btn">
+        <button id="batchTeamAdd" type="submit" class="btn btn-default ">
+            &nbsp;&nbsp;&nbsp;<i class="fa fa-fw fa-search fa-lg "></i>&nbsp;&nbsp;&nbsp;
+        </button>
+    </div>
+</div>
+<br>
+<input type="button" value="全选" class="btn btn-default btn-primary "
+       onclick="selectAllNullorReserve('userIdCheck','全选');"/>
+<input type="button" value="反选" class="btn btn-default btn-primary"
+       onclick="selectAllNullorReserve('userIdCheck','反选');"/>
+<br>
+<div id="batchTeamData">
+    #@table()
+    <tr>
+        <td style="width: 2%"></td>
+        <td align="center">
+            用户
+        </td>
+
+    </tr>
+    #end
+</div>
+    #@div(divClass="col-7 col-offset-5 form-inline")
+        #tinyInput("button" "batchChooseBtn" " 保存 " {"class":"btn btn-primary","id":"batchChooseBtn"})
+    #end
+<script>
+$(function(){
+    $("#batchTeamAdd").on("click",function(){
+        var conditon = $("#search-user").val();
+        $.ajax({
+            type: "POST",
+            url: "${TINY_CONTEXT_PATH+adminPath}/org/user/batchUserInCondition",
+            data: {condition:conditon},
+            dataType: "html",
+            success: function(data){
+                $('#batchTeamData').html(data);
+            }
+        });
+        return false;
+    });
+    $("#batchChooseBtn").on("click",function(){
+        var checklist=[];
+        $("input:checked").each(function(){
+            if("checkboxall"!=$(this).attr("id")){
+                checklist.push($(this).val());
+            }
+
+        });
+        if(checklist.length==0){
+            layer.msg("请选择数据")
+        }
+        var data = ""
+        if(checklist.length>0){
+        for(var i=0;i<checklist.length;i++){
+            if(i==0){
+                data = data + "?userIds=" + checklist[i];
+            }else{
+                data = data + "&userIds=" + checklist[i];
+            }
+        }
+        var $thisTr=$(".addnext").closest("tr");
+        $.ajax({
+            type: "POST",
+            url: "${TINY_CONTEXT_PATH+adminPath}/product/team/batchTeamTr"+data,
+            data: {a:$thisTr.attr("class").substring(3)},
+            dataType: "html",
+            success: function(data){
+                $("#myModal").trigger("close");
+                $("tbody[class=databody]").html(data);
+            }
+        });
+        return false;
+        }
+    });
+
+});
+</script>

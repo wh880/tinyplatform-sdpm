@@ -17,7 +17,7 @@
                 <div class="col-2 text-r"><label>备注：</label></div>
 
                 <div class="col-9">
-                    #@Teditor("contents" "comment" {"initialFrameHeight":"150"})#end</div>
+                    #@Teditor("actionComment" "comment" {"initialFrameHeight":"150"})#end</div>
             </div>
         #end
         #@elementItem()

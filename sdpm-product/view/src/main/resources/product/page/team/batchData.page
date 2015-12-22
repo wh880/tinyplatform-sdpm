@@ -1,0 +1,16 @@
+#@table()
+<tr>
+    <td style="width: 2%"></td>
+    <td align="center">
+        用户
+    </td>
+</tr>
+#for(user : userList)
+#@tr()
+    <td style="width: 2%"><input name="userIdCheck" type="checkbox" value="${user?.orgUserId}"></td>
+    <td width="">
+       ${user?.orgUserRealName}
+    </td>
+#end
+#end
+#end

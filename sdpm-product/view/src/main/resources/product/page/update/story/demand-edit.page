@@ -52,7 +52,7 @@
         #@elementItem("" "edui-Box")
             <b class="titleNames">备注</b>
             #@formControlDiv("col-12")
-                #@Teditor("content2" "content2" {"initialFrameHeight":"300"})#end
+                #@Teditor("actionComment" "actionComment" {"initialFrameHeight":"300"})#end
             #end
             #@validateDiv("col-4")#end
         #end
