@@ -91,13 +91,14 @@ public class ProjectTaskAction extends BaseController {
                 CookieUtils.setCookie(response, projectOperate.COOKIE_PROJECT_ID, currentProjectId);
                 model.addAttribute(projectOperate.COOKIE_PROJECT_ID, currentProjectId);
 
-                List<OrgUser> teamUserList = userService.findTeamUserListByProjectId(project.getProjectId());
-                model.addAttribute("teamUserList", teamUserList);
 
             } else {
                 return "redirect:" + adminPath + "/project/form";
             }
         }
+        List<OrgUser> teamUserList = userService.findTeamUserListByProjectId(Integer.valueOf(currentProjectId));
+        model.addAttribute("teamUserList", teamUserList);
+
         if (moduleId != null) {
             model.addAttribute("moduleId", moduleId);
         }
@@ -333,13 +334,14 @@ public class ProjectTaskAction extends BaseController {
         return "redirect:" + adminPath + "/project/task/index";
     }
 
+    @ResponseBody
     @RequiresPermissions("pro-task-call")
     @RequestMapping(value = "batch/call")
-    public Map callSave(Integer[] ids, String userId) {
-        if (ArrayUtil.isEmptyArray(ids)) {
+    public Map callSave(Integer[] itemId, String userId) {
+        if (ArrayUtil.isEmptyArray(itemId)) {
             return resultMap(false, "请选择指派人");
         } else {
-            for (Integer id : ids) {
+            for (Integer id : itemId) {
                 ProjectTask task = new ProjectTask();
                 task.setTaskId(id);
                 task.setTaskAssignedTo(userId);
@@ -436,13 +438,14 @@ public class ProjectTaskAction extends BaseController {
         return "project/index/task/index.page";
     }
 
+    @ResponseBody
     @RequiresPermissions("pro-task-close")
     @RequestMapping(value = "/batch/close")
-    public Map batchCloseSave(Integer[] ids) {
-        if (ArrayUtil.isEmptyArray(ids)) {
+    public Map batchCloseSave(Integer[] itemId) {
+        if (ArrayUtil.isEmptyArray(itemId)) {
             return resultMap(false, "请选择要关闭的任务");
         } else {
-            for (Integer id : ids) {
+            for (Integer id : itemId) {
                 ProjectTask task = new ProjectTask();
                 task.setTaskId(id);
                 task.setTaskCloseDate(new Date());

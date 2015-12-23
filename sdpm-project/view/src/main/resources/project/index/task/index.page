@@ -46,30 +46,12 @@
                                 #foreach(u : teamUserList)
                                     <li>
                                         <a href="javascript:void(0);">
-                                            #@mulOperation("tsolution"+reFor.index TINY_CONTEXT_PATH+adminPath+"/project/task/batch/call?userId="+u.orgUserId)
+                                            #@mulOperation("tsolution"+uFor.index TINY_CONTEXT_PATH+adminPath+"/project/task/batch/call?userId="+u.orgUserId)
                                             <div>${u.orgUserRealName}</div>#end
                                         </a>
                                     </li>
                                 #end
                             </ul>
-                        #end
-                    </li>
-                    <li class="dropdown-submenu">
-                        #foreach(m:menuManager.getScopeMenus("testbug-op"))
-                            #if(m.id=="tassign")
-                                #@hasMenu("tassign")
-                                    <a tabindex="-1" href="javascript:void(0);">
-                                        指派给</a>
-                                    <ul class="dropdown-menu">
-                                        #foreach(user : userList)
-                                            <li>
-                                                <a tabindex="-1" href="javascript:void(0);">
-                                                    #@mulOperation("tassign"+userFor.index TINY_CONTEXT_PATH+adminPath+"/quality/bug/batch/assign?userId="+user.orgUserId)<div>${user.orgUserRealName}</div>#end</a>
-                                            </li>
-                                        #end
-                                    </ul>
-                                #end
-                            #end
                         #end
                     </li>
                 </ul>

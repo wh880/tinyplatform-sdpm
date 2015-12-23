@@ -91,8 +91,7 @@
         #@elementItem()
             #@sdpmItem("任务名称" "*")
                 #@formControlDiv()
-                    #tinyInput(
-                        "text" "taskName" story.storyTitle {"placeholder":"任务名称","datatype":"*","nullmsg":"任务名称不能为空！","class":"input-text"})
+                    #tinyInput("text" "taskName" story?.storyTitle {"placeholder":"任务名称","datatype":"*","nullmsg":"任务名称不能为空！","class":"input-text"})
                 #end
             #end
         #end
@@ -100,7 +99,7 @@
             <div class="col-12">
                 <div class="col-2 text-r"><label>任务描述：</label></div>
                 <div class="col-7">
-                    #@Teditor("taskDesc" "taskDesc")#if(copyTask)${copyTask?.taskDesc}#else ${story.storySpec}#end
+                    #@Teditor("taskDesc" "taskDesc")#if(copyTask)${copyTask?.taskDesc}#else ${story?.storySpec}#end#end
                 </div>
             </div>
         #end
@@ -200,20 +199,20 @@
             </div>
         #end
         <br/>
-    #@elementItem()
-        <div class="col-12">
-            <div class="col-5">
+        #@elementItem()
+            <div class="col-12">
+                <div class="col-5">
 
+                </div>
+                <div class="col-1">
+                    <button style="float: left" type="submit" id="submit2" class="commitBtn">保存</button>
+                </div>
+                <div class="col-1">
+                    #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")取消#end
+                </div>
+                <div class="col-5"></div>
             </div>
-            <div class="col-1">
-                <button style="float: left" type="submit" id="submit2" class="commitBtn">保存</button>
-            </div>
-            <div class="col-1">
-                #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")取消#end
-            </div>
-            <div class="col-5"></div>
-        </div>
-    #end
+        #end
     </div>
 
     <br>
@@ -336,10 +335,6 @@
 
 
             });
-
         });
-
-
     });
-
 </script>
