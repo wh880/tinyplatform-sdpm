@@ -131,11 +131,13 @@ public class ProjectAction extends BaseController implements WebContextAware {
         String[] productIds = linkProduct.split(",");
         projectProductService.addProjectLinkToProduct(productIds, project.getProjectId());
         CookieUtils.setCookie(response, projectOperate.COOKIE_PROJECT_ID, project.getProjectId().toString());
+        LogUtil.log(LogUtil.LogOperateObject.PROJECT, LogUtil.LogAction.CREATED, project.getProjectId().toString(), userUtils.getUserId());
         return "redirect:" + adminPath + "/project/guide";
     }
 
     /**
      * 添加项目后的导向
+     *
      * @return
      */
     @RequestMapping(value = "/guide")

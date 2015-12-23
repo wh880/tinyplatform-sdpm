@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.tinygroup.commons.tools.ArrayUtil;
 import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.logger.LogLevel;
@@ -89,6 +90,10 @@ public class ProjectTaskAction extends BaseController {
                 currentProjectId = String.valueOf(project.getProjectId());
                 CookieUtils.setCookie(response, projectOperate.COOKIE_PROJECT_ID, currentProjectId);
                 model.addAttribute(projectOperate.COOKIE_PROJECT_ID, currentProjectId);
+
+                List<OrgUser> teamUserList = userService.findTeamUserListByProjectId(project.getProjectId());
+                model.addAttribute("teamUserList", teamUserList);
+
             } else {
                 return "redirect:" + adminPath + "/project/form";
             }
@@ -328,6 +333,24 @@ public class ProjectTaskAction extends BaseController {
         return "redirect:" + adminPath + "/project/task/index";
     }
 
+    @RequiresPermissions("pro-task-call")
+    @RequestMapping(value = "batch/call")
+    public Map callSave(Integer[] ids, String userId) {
+        if (ArrayUtil.isEmptyArray(ids)) {
+            return resultMap(false, "请选择指派人");
+        } else {
+            for (Integer id : ids) {
+                ProjectTask task = new ProjectTask();
+                task.setTaskId(id);
+                task.setTaskAssignedTo(userId);
+                task.setTaskAssignedDate(new Date());
+                taskService.updateCallTask(task);
+                LogUtil.log(LogUtil.LogOperateObject.TASK, LogUtil.LogAction.ASSIGNED, task.getTaskId().toString(), userUtils.getUserId());
+            }
+            return resultMap(true, "指派成功");
+        }
+    }
+
     @RequiresPermissions("pro-task-finish")
     @RequestMapping(value = "/finish", method = RequestMethod.GET)
     public String finish(Integer taskId, Model model, HttpServletRequest request) {
@@ -413,6 +436,26 @@ public class ProjectTaskAction extends BaseController {
         return "project/index/task/index.page";
     }
 
+    @RequiresPermissions("pro-task-close")
+    @RequestMapping(value = "/batch/close")
+    public Map batchCloseSave(Integer[] ids) {
+        if (ArrayUtil.isEmptyArray(ids)) {
+            return resultMap(false, "请选择要关闭的任务");
+        } else {
+            for (Integer id : ids) {
+                ProjectTask task = new ProjectTask();
+                task.setTaskId(id);
+                task.setTaskCloseDate(new Date());
+                task.setTaskClosedBy(userUtils.getUserId());
+                taskService.updateCloseTask(task);
+                LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, LogUtil.LogAction.CLOSED, task.getTaskId().toString(),
+                        userUtils.getUserId(), null, taskService.findTaskById(task.getTaskId()).getTaskProject().toString(),
+                        null, null, null);
+            }
+            return resultMap(true, "关闭成功");
+        }
+    }
+
     /**
      * 开始任务
      *
@@ -481,20 +524,19 @@ public class ProjectTaskAction extends BaseController {
     }
 
     private void projectPagerInfoStatistics(Model model, List<ProjectTask> tasksList) {
-        if (CollectionUtil.isEmpty(tasksList)) {
-            return;
-        }
-        int totalTaskConsumed = 0, totalLeft = 0, totalEstimate = 0;
-        for (ProjectTask projectTask : tasksList) {
-            totalTaskConsumed += projectTask.getTaskConsumed();
-            totalLeft += projectTask.getTaskLeft();
-            totalEstimate += projectTask.getTaskEstimate();
+        int totalTaskConsumed = 0, totalLeft = 0, totalEstimate = 0, taskSize = 0;
+        if (!CollectionUtil.isEmpty(tasksList)) {
+            for (ProjectTask projectTask : tasksList) {
+                totalTaskConsumed += projectTask.getTaskConsumed();
+                totalLeft += projectTask.getTaskLeft();
+                totalEstimate += projectTask.getTaskEstimate();
+            }
+            taskSize = tasksList.size();
         }
         model.addAttribute("totalTaskConsumed", totalTaskConsumed);
         model.addAttribute("totalLeft", totalLeft);
         model.addAttribute("totalEstimate", totalEstimate);
-        model.addAttribute("taskSize", tasksList.size());
-
+        model.addAttribute("taskSize", taskSize);
     }
 
     @RequestMapping("/findPager")

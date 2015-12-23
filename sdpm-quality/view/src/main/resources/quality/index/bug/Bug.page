@@ -1,44 +1,5 @@
 #set(cookieProductId=cookieProductId?:productUtils.getAllProductListByUser()?.get(0)?.productId)
 #set(bugTableId = "bugTableId")
-#macro initBatchAction()
-<script>
-	$(function () {
-		$("#${tableId} .secondMenu").on("click", function () {
-			var inputname = $(this).attr("tabindex");
-			var inputvalue = $(this).html().trim();
-			var ids = [];
-			var href = $(this).attr("href");
-			$("#${tableId} input[type='checkbox']").each(function () {
-				if (this.checked == true && this.id != "checkboxall") {
-					var clientId = $(this).val();
-					ids.push(clientId);
-				}
-			});
-			if (ids.length > 0) {
-				$.ajax({
-					url: href,
-					type: "post",
-					traditional: true,
-					data: {ids: ids, name: inputvalue},
-					dataType: "json",
-					success: function (data) {
-						if(data.status=="y") {
-							layer.msg(data.info, 2, 1);
-							$("#${tableId}").trigger("refresh");
-						}else{
-							layer.msg(data.info)
-						}
-					},
-					error: function (res) {
-						layer.msg("失败")
-					}
-				});
-			}
-			return false;
-		});
-	});
-</script>
-#end
 
 #set(requestStatuString = tinyRequestQueryString!=null ?tinyRequestQueryString:"")
 #set(qualityProduct = "")
@@ -169,10 +130,6 @@
 								</li>
 							</ul>
 						</div>
-#*						<div class="col-2">
-							#@mulOperation("muldelete" "http://127.0.0.1:8080/sqdm-quality/testManagement/page/Bug.page")
-							<a href="javascript:;" class="btn radius btn-danger "><i class="icon-trash"></i>&nbsp;批量删除</a>#end
-						</div>*#
 					</div>
 					#setTinyTablePageSize([10,20,30,50,100,200])
 				#end
@@ -194,13 +151,6 @@
 						#@tinyTh({"class":"","rel":""})操作#end
 					#end
 				#end
-				<script type="text/javascript">
-					$(function(){
-						$('#${tableId}').on('click','.delBtn',function(e){
-							user_del(this,'1');
-						});
-					})
-				</script>
 			#initBatchAction()
 			#end
 			#end

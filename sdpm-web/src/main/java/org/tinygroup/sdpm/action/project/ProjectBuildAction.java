@@ -251,7 +251,7 @@ public class ProjectBuildAction extends BaseController {
     }
 
     @RequestMapping("/releasebaseinfo")
-    public String releasebaseinfo(Integer buildId, Model model) {
+    public String releaseBaseInfo(Integer buildId, Model model) {
         ProjectBuild build = buildService.findBuild(buildId);
         model.addAttribute("build", build);
         //还需要查询其他相关任务剩余时间的信息
@@ -260,7 +260,7 @@ public class ProjectBuildAction extends BaseController {
 
     //    @RequiresPermissions("projectBuild-forword")
     @RequestMapping("/forword/{forwordPager}")
-    public String forword(@PathVariable(value = "forwordPager") String forwordPager, Integer buildId, Model model) {
+    public String forward(@PathVariable(value = "forwordPager") String forwordPager, Integer buildId, Model model) {
         ProjectBuild build = buildService.findBuild(buildId);
         model.addAttribute("build", build);
         if ("alBug".equals(forwordPager)) {

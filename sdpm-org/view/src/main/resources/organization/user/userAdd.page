@@ -5,7 +5,6 @@
         padding: 3px 8px;
         font-size: 15px;
     }
-
     .titleBarsty {
         margin-top: -10px;
     }
@@ -17,7 +16,7 @@
     #@gridSysRow()
         #@gridSysCol(3)#end
         #@gridSysCol(6)
-            #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/org/user/save" "post" {"class":""})
+            #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/org/user/save" "post")
             <input type="hidden" name="orgUserId" value="${user?.orgUserId}"/>
             <input type="hidden" name="lastAddress" value=""/>
                 #@noRespsGridSystem()
@@ -38,7 +37,7 @@
                             #@colLabel("col-3")<span class="c-red">*</span>用户名：#end
                             #@formControlDiv("col-5")
                                 #tinyInput(
-                                    "text" "orgUserAccount" user?.orgUserAccount {"datatype":"*","nullmsg":"请输入用户名！",
+                                    "text" "orgUserAccount" user?.orgUserAccount {"datatype":"/^([a-z]|[A-Z]|[0-9]){1,20}$/","nullmsg":"请输入用户名！",
                                     "id":"请求标题","class":
                                     "input-text","ajaxurl":TINY_CONTEXT_PATH+adminPath+
                                     "/org/user/userNameCheck?orgUserId="+user?.orgUserId})

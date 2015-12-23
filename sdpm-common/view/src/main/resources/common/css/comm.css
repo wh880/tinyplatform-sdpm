@@ -222,7 +222,7 @@
     background: #fff;
 
 }
-
+.infoContent img{max-width: 100%;height:auto;}
 .infoContent .titleName {
     font-weight: bold;
     font-size: 14px;
