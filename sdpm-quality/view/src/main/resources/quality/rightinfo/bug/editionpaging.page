@@ -17,9 +17,9 @@
                                 var pId = treeNode.id;
                                 var pjId = $("select[name=projectId]").val("");
                                 if(pId>0){
-                                    ajaxRead("${sid}","moduleId","moduleId","moduleName","/quality/bug/ajax/module?moduleRoot="+pId,${bug?.moduleId?:"null"},"module");
-                                    ajaxRead("${sid}","projectId","projectId","projectName","/quality/bug/ajax/project?productId="+pId,${bug?.projectId?:"null"});
-                                    ajaxRead("${sid}", "planId", "planId", "planName", "/quality/bug/ajax/plan?deleted=0&productId=" + pId, ${bug?.planId?:"null"},"plan");
+                                    ajaxRead("${sid}","moduleId","moduleId","moduleName","/quality/bug/ajax/module?moduleRoot="+pId,"${bug?.moduleId}","module");
+                                    ajaxRead("${sid}","projectId","projectId","projectName","/quality/bug/ajax/project?productId="+pId,"${bug?.projectId}");
+                                    ajaxRead("${sid}", "planId", "planId", "planName", "/quality/bug/ajax/plan?deleted=0&productId=" + pId, "${bug?.planId}","plan");
                                     $("#modelA").attr("href",mUrl+pId);
                                 }
                             });

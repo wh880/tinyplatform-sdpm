@@ -1,0 +1,46 @@
+<style>
+    /*.prj-list{width:700px;}*/
+    .prj-list ul,.prj-list li{list-style:none;padding:0;margin:0}
+    .prj-list li{width:160px;margin:5px 10px;background:#fff;float:left;padding:5px 10px;box-sizing: border-box;border:3px solid #eee;position:relative;cursor:pointer}
+    .prj-list li.active .active-ico{position: absolute;right:5px;top:8px;color:#090}
+    .prj-list li i{margin-right:5px}
+    .prj-list li.active{border-color:#090;color:#090}
+</style>
+
+
+<div class="prj-list">
+    <ul class="clear">
+
+        #for(p : productList)
+        <li id="product-${p?.productId}"><i class="fa fa-android"></i>${p?.productName}</li>
+        #end
+    </ul>
+</div>
+<script type="text/javascript">
+
+    $(function(){
+        var activeNode=$("<i>").addClass("active-ico fa fa-check");
+        if(typeof(currentTeam)=="undefined"){
+            currentTeam = "product-${cookieProductId}";
+            $("#"+currentTeam).addClass("active").append(activeNode);
+        }
+        $("#"+currentTeam).addClass("active").append(activeNode);
+        $(".prj-list").on("click",">ul>li",function(){
+            $(".prj-list>ul>li").removeClass("active");
+            $(this).addClass("active").append(activeNode);
+            currentTeam=$(this).attr("id");
+            var $thisTr=$(".addnext").closest("tr");
+            $.ajax({
+                type: "POST",
+                url: "${TINY_CONTEXT_PATH+adminPath}/product/team/teamCopy",
+                data: {a:$thisTr.attr("class").substring(3),productId:currentTeam.substring("product-".length)},
+                dataType: "html",
+                success: function(data){
+                    $("#myModal").trigger("close");
+                    $("tbody[class=databody]").html(data);
+                }
+            });
+            return false;
+        })
+    })
+</script>

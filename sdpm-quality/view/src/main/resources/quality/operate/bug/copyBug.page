@@ -81,7 +81,7 @@
                         		ajaxRead("${sid}","bugAssignedTo","orgUserId","orgUserRealName","/quality/version/ajax/user?projectId="+pjId,"${bug?.bugAssignedTo?:0}");
                         }
                         if(pId>0&&pjId>0) {
-                            ajaxRead("${sid}","bugOpenedBuild","buildId","buildName","/quality/bug/ajax/build?buildProduct="+pId+"&buildProject="+pjId,"${bug?.bugOpenedBuild?:0}","build");
+                            ajaxRead("${sid}","bugOpenedBuild","buildId","buildName","/quality/bug/ajax/build?buildProduct="+pId+"&buildProject="+pjId,"${bug?.bugOpenedBuild}","build");
                         }
                         })
                     </script>

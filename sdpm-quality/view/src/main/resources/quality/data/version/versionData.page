@@ -3,22 +3,17 @@
 #foreach(v:verPager?.records)
     #@tr()
         #@td("nowrap")<input type="checkbox" value="${v?.testversionId}" name="idCheck">#end
-        #@td()<a
-                href="${TINY_CONTEXT_PATH+adminPath}/quality/version/taskToCase?testversionId=${v?.testversionId}&currentPageId=5&status=tverallcase">${v
-            ?.no}</a>#end
-        #@td("nowrap")<a
-                href="${TINY_CONTEXT_PATH+adminPath}/quality/version/taskToCase?testversionId=${v?.testversionId}&currentPageId=5&status=tverallcase">${v
-            ?.testtaskTitle}</a>#end
+        #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/version/taskToCase?testversionId=${v?.testversionId}&currentPageId=5&status=tverallcase">${v?.no}</a>#end
+        #@td("nowrap")<a href="${TINY_CONTEXT_PATH+adminPath}/quality/version/taskToCase?testversionId=${v?.testversionId}&currentPageId=5&status=tverallcase">${v?.testtaskTitle}</a>#end
         #@td("nowrap")<a href="${TINY_CONTEXT_PATH+adminPath}/project/demand/index.page">${v?.projectName}</a>#end
         #@td("nowrap")${v?.searchBuildName?:(v?.buildName=="0"?"trunk":"")}#end
         #@td("nowrap")<span class="${v?.testtaskOwner==userUtils.getUserId()?'c-red':''}">${v?.testtaskOwner?userUtils.getUserById(v?.testtaskOwner)?.orgUserRealName:""}</span>#end
         #@td("nowrap")${v?.testtaskBegin?formatDate(v?.testtaskBegin,"yyyy-MM-dd"):""}#end
         #@td("nowrap")${v?.testtaskEnd?formatDate(v?.testtaskEnd,"yyyy-MM-dd"):""}#end
-        #@td("nowrap")<p class="${getDict('colorOfVersionStatus',v?.testtaskStatus)">${getDict("versionStatus",v?.testtaskStatus)}</p>#end
+        #@td("nowrap")<p class="${getDict('colorOfVersionStatus',v?.testtaskStatus)}">${getDict("versionStatus",v?.testtaskStatus)}</p>#end
         #@td("nowrap")
             #foreach(m:menuManager.getScopeMenus("testversion-op"))
-            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?testversionId=${v?.testversionId}&currentPageId=5"
-               title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?testversionId=${v?.testversionId}&currentPageId=5" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
             #end
             #set(m=menuManager.getMenu("tversiondelete"))
             #if(m)

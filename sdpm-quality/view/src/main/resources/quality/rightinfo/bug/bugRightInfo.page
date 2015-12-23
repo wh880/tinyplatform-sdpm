@@ -14,11 +14,16 @@
 			       			#end
 			       			#@tr()
 								#@td()所属模块#end
-			       				#@td()${qualityBug?.moduleName}#end
+			       				#@td()${qualityBug?.moduleName?:(qualityBug?.moduleId==0?"/":"")}#end
 			       			#end
 			       			#@tr()
 								#@td()所属计划#end
-			       				#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/product/plan/forword/reRelateStory?planId=${qualityBug?.planId}">${qualityBug?.planName}</a>#end
+			       				#@td()#if(qualityBug?.planName)
+								<a href="${TINY_CONTEXT_PATH+adminPath}/product/plan/forword/reRelateStory?planId=${qualityBug?.planId}">${qualityBug?.planName}</a>
+								#else
+									${qualityBug?.planId=="0"?"/":""}
+								#end
+								#end
 			       			#end
 			       			#@tr()
 								#@td()Bug类型#end
@@ -120,6 +125,9 @@
 											,
 										#end
                                 <a href="${TINY_CONTEXT_PATH+adminPath}/project/build/productalbug?buildId=${build?.buildId}">${build?.buildName}</a>
+									#end
+									#if(trunk)
+										${openedBuilds.size()>0?","+trunk:trunk}
 									#end
 								#end
 			       			#end

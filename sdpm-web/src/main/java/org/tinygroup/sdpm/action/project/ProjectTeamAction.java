@@ -13,7 +13,10 @@ import org.tinygroup.sdpm.org.dao.pojo.OrgRole;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.RoleService;
 import org.tinygroup.sdpm.org.service.inter.UserService;
+import org.tinygroup.sdpm.product.dao.pojo.Product;
+import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTeam;
+import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.sdpm.project.service.inter.TeamService;
 import org.tinygroup.sdpm.util.CookieUtils;
 import org.tinygroup.sdpm.util.ProductUtils;
@@ -39,6 +42,8 @@ public class ProjectTeamAction extends BaseController {
     private UserService userService;
     @Autowired
     private RoleService roleService;
+    @Autowired
+    private ProjectService projectService;
 
     @RequiresPermissions("team")
     @RequestMapping("/index")
@@ -164,17 +169,27 @@ public class ProjectTeamAction extends BaseController {
         return "/product/page/team/teamAddTr.pagelet";
     }
 
+    @RequestMapping("copy")
+    public String teamCopy(Model model){
+        Project project = new Project();
+        project.setProjectDeleted("0");
+        List<Project> projects = projectService.findProjectList(project,null,"false");
+        model.addAttribute("projectList",projects);
+        return "project/modal/team/teamCopy.pagelet";
+    }
+
     @RequestMapping("teamCopy")
     public String teamCopy(Integer a,Integer projectId,Model model,HttpServletRequest request){
 
         List<ProjectTeam> teams = teamService.findTeamByProjectId(projectId);
         String thisP = CookieUtils.getCookie(request, ProjectOperate.COOKIE_PROJECT_ID);
-        if(StringUtil.isBlank(thisP)){
+        if(!StringUtil.isBlank(thisP)){
             List<ProjectTeam> thisTeams = teamService.findTeamByProjectId(Integer.parseInt(thisP));
-            for(ProjectTeam team : teams){
+            for(int i=0;i<teams.size();i++){
                 for(ProjectTeam projectTeam : thisTeams){
-                    if(projectTeam.getTeamUserId().equals(team.getTeamUserId())){
-                        teams.remove(team);
+                    if(projectTeam.getTeamUserId().equals(teams.get(i).getTeamUserId())){
+                        teams.remove(teams.get(i));
+                        i--;
                         break;
                     }
                 }

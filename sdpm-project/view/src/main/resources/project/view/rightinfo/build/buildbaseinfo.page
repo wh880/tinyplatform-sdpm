@@ -1,0 +1,34 @@
+#@div(divClass="infoContent")
+<p class="titleName">描述</p>
+<div>${build?.buildDesc}</div>
+#end
+#@div(divClass="infoContent")
+<p class="titleName">基本信息</p>
+
+
+<ul>
+    <li class="row">
+        <div class="col-3 text-align-right">名称： </div>
+        <div class="col-8" style="padding-left:10px">${build?.buildName}</div>
+    </li>
+    <li class="row">
+        <div class="col-3 text-align-right">打包日期： </div>
+        <div class="col-8" style="padding-left:10px">${formatDate(build?.buildDate,"yyyy-MM-dd hh:mm")}</div>
+    </li>
+    <li class="row">
+        <div class="col-3 text-align-right">构建者： </div>
+        <div class="col-8" style="padding-left:10px">${build?.buildBuilder?userUtils.getUserById(build?.buildBuilder)?.orgUserRealName:""}</div>
+    </li>
+    <li class="row">
+        <div class="col-3 text-align-right">源代码地址： </div>
+        <div class="col-8" style="padding-left:10px">${build?.buildScmPath}</div>
+    </li>
+    <li class="row">
+        <div class="col-3 text-align-right">下载地址： </div>
+        <div class="col-8" style="padding-left:10px">${build?.buildFilePath}</div>
+    </li>
+</ul>
+#end
+#history(adminPath+
+    "/system/action/ajax/history?actionObjectType=build&actionObjectId="+build?.buildId)
+

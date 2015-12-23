@@ -385,6 +385,7 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
 							QUALITY_BUGTABLE.BUG_OPENED_BUILD.like("," + t.getBugOpenedBuild()+","),
 							QUALITY_BUGTABLE.BUG_OPENED_BUILD.leftLike(t.getBugOpenedBuild()+","),
 							QUALITY_BUGTABLE.BUG_OPENED_BUILD.eq(t.getBugOpenedBuild()));
+					t.setBugOpenedBuild(null);
 				}
 				MysqlSelect select = MysqlSelect.select(QUALITY_BUGTABLE.ALL,ORG_USERTABLE.ORG_USER_REAL_NAME.as("assignedUser")).from(QUALITY_BUGTABLE)
 						.join(Join.leftJoin(ORG_USERTABLE,QUALITY_BUGTABLE.BUG_ASSIGNED_TO.eq(ORG_USERTABLE.ORG_USER_ID))).where(

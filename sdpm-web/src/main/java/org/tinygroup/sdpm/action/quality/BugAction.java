@@ -179,6 +179,10 @@ public class BugAction extends BaseController {
         if (!StringUtil.isBlank(bug.getBugOpenedBuild())) {
             String[] buildIds = bug.getBugOpenedBuild().split(",");
             List<ProjectBuild> projectBuilds = buildService.getBuildByIds(buildIds);
+            List<String> buildIdList = Arrays.asList(buildIds);
+            if(buildIdList.contains("0")){
+                model.addAttribute("trunk","trunk");
+            }
             model.addAttribute("openedBuilds", projectBuilds);
         }
         if (!StringUtil.isBlank(bug.getBugAssignedTo())) {
@@ -314,20 +318,19 @@ public class BugAction extends BaseController {
         if (bugIds.length > 0) {
             for (String id : bugIds) {
                 QualityBug bug = bugService.findQualityBugById(Integer.valueOf(id));
-                if (bug.getBugConfirmed() == 1) {
-                    bug.setBugAssignedDate(new Date());
-                    bug.setBugAssignedTo(userId);
-                    bugService.updateBug(bug);
-                    LogUtil.logWithComment(LogUtil.LogOperateObject.BUG
-                            , LogUtil.LogAction.ASSIGNED
-                            , String.valueOf(bug.getBugId())
-                            , userUtils.getUserId()
-                            , String.valueOf(bug.getProductId())
-                            , String.valueOf(bug.getProjectId())
-                            , null
-                            , null
-                            , null);
-                }
+
+                bug.setBugAssignedDate(new Date());
+                bug.setBugAssignedTo(userId);
+                bugService.updateBug(bug);
+                LogUtil.logWithComment(LogUtil.LogOperateObject.BUG
+                        , LogUtil.LogAction.ASSIGNED
+                        , String.valueOf(bug.getBugId())
+                        , userUtils.getUserId()
+                        , String.valueOf(bug.getProductId())
+                        , String.valueOf(bug.getProjectId())
+                        , null
+                        , null
+                        , null);
             }
         }
         Map<String, String> map = new HashMap<String, String>();

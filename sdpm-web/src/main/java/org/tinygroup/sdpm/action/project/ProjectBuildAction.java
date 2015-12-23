@@ -255,7 +255,7 @@ public class ProjectBuildAction extends BaseController {
         ProjectBuild build = buildService.findBuild(buildId);
         model.addAttribute("build", build);
         //还需要查询其他相关任务剩余时间的信息
-        return "/project/task/relation-release/releasebaseinfo.pagelet";
+        return "/project/view/rightinfo/build/buildbaseinfo.pagelet";
     }
 
     //    @RequiresPermissions("projectBuild-forword")

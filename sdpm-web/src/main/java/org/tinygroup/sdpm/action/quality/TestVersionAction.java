@@ -76,7 +76,7 @@ public class TestVersionAction extends BaseController {
             return "redirect:/a/quality/version?status=tvernotest&" + queryString;
         }
         if (StringUtil.isBlank(queryString)) {
-            return "redirect:/a/quality/version?status=tvernotest&currentPageId=5";
+            return "redirect:/a/quality/version?status=tvernotest";
         }
         return "/quality/index/version/version.page";
     }

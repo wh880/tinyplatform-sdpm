@@ -7,11 +7,11 @@
 #set(name="qualityVersion")
 #@layout(quality)#end
 		#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/quality/version/save" "post" {"class":"test"})
+        <input type="hidden" name="lastAddress" value=""/>
 		<script type="text/javascript">
             $(function(){
                 var form = $("#${fromId}");
                 var action = form.attr("action");
-				var oldUrl = $("input[name=lastAddress]").attr("value");
                 form.submit(function(){
                     $.ajax({
                          type: "post",
@@ -20,7 +20,13 @@
                          dataType: "json",
                          success: function(data){
                                 if(data.status == "y"){
-                                window.location.href=oldUrl;
+                                    var oldUrl = $("input[name=lastAddress]").attr("value");
+									if(oldUrl){
+                                        window.location.href="${TINY_CONTEXT_PATH}"+oldUrl;
+									}else{
+                                        window.location.href="${TINY_CONTEXT_PATH+adminPath}"+"/quality/version";
+									}
+
                                 }
                             }
                              });
@@ -29,7 +35,6 @@
             })
 
         </script>
-        <input type="hidden" name="lastAddress" value=""/>
 		#hiddenInput(hiddenInputName="testversionId" hiddenInputValue=testTask?.testversionId)
 			<div style="width:100%">
     			<div class="infoContent">

@@ -36,6 +36,7 @@ import org.tinygroup.sdpm.util.ProductUtils;
 import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
+import javax.jws.WebParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.*;
@@ -538,7 +539,7 @@ public class ProductAction extends BaseController {
 
         List<ProjectTeam> teams = teamService.findTeamByProductId(productId);
         String thisP = CookieUtils.getCookie(request, ProductUtils.COOKIE_PRODUCT_ID);
-        if(StringUtil.isBlank(thisP)){
+        if(!StringUtil.isBlank(thisP)){
             List<ProjectTeam> thisTeams = teamService.findTeamByProductId(Integer.parseInt(thisP));
             for(ProjectTeam team : teams){
                 for(ProjectTeam projectTeam : thisTeams){
@@ -560,5 +561,14 @@ public class ProductAction extends BaseController {
         model.addAttribute("a", a + 1);
         model.addAttribute("copyTeam", teams);
         return "/product/page/team/teamAddTr.pagelet";
+    }
+
+    @RequestMapping("team/copy")
+    public String teamCopy(Model model){
+        Product product = new Product();
+        product.setDeleted(0);
+        List<Product> products = productService.findProductList(product);
+        model.addAttribute("productList",products);
+        return "product/page/team/teamCopy.pagelet";
     }
 }

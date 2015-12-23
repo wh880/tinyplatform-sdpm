@@ -1,5 +1,5 @@
 
-#@layout(operate)
+#@layout(project)
     #@div(divClass="operationbar")
     <span class="r">
 ##   #@aModal("#Modal" "新增日志" "900" "250""" "/project/task/note.pagelet")#buttonIcon(iconClass="icon-time")日志#end
@@ -7,7 +7,7 @@
 	<a href="${TINY_CONTEXT_PATH+adminPath}/project/build/forword/alBug?buildId=${build.buildId}">#buttonIcon(iconClass="icon-bug")关联Bug</a>&nbsp;
     #set(m=menuManager.getMenu("pro-version-edit"))
     #if(m)
-        <a href="${TINY_CONTEXT_PATH+adminPath}/project/build/edit?buildId=${build.buildId}">#buttonIcon(iconClass="icon-pencil")编辑发布</a>&nbsp;
+        <a href="${TINY_CONTEXT_PATH+adminPath}/project/build/edit?buildId=${build.buildId}">#buttonIcon(iconClass="icon-pencil")编辑版本</a>&nbsp;
     #end
 
     <a href="javascript:void(0);" onclick="javascript:history.back(-1);" title="返回">#buttonIcon(iconClass=

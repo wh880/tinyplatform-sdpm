@@ -7,7 +7,7 @@
             #end
             <span class="r" style="position:relative;top:-28px;height:0">
                 #@aModal("#myModal" "批量添加" 350 600 "" adminPath+"/org/user/toBatchChooseTeam")<i class="icon-plus-sign"></i>&nbsp;批量添加#end
-##                &nbsp;#@aModal("#myModal" "复制团队" 1200 600 "" editPage+"?taskId="+task?.taskId)<i class=" icon-copy"></i>&nbsp;复制团队#end
+                &nbsp;#@aModal("#myModal" "复制团队" 740 600 "" adminPath+"/product/team/copy")<i class=" icon-copy"></i>&nbsp;复制团队#end
             </span>
         #end
     #end
