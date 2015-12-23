@@ -92,8 +92,7 @@
             #@sdpmItem("任务名称" "*")
                 #@formControlDiv()
                     #tinyInput(
-                        "text" "taskName" "" {"placeholder":"任务名称","datatype":"*","nullmsg":"任务名称不能为空！",
-                        "class":"input-text"})
+                        "text" "taskName" story.storyTitle {"placeholder":"任务名称","datatype":"*","nullmsg":"任务名称不能为空！","class":"input-text"})
                 #end
             #end
         #end
@@ -101,7 +100,7 @@
             <div class="col-12">
                 <div class="col-2 text-r"><label>任务描述：</label></div>
                 <div class="col-7">
-                    #@Teditor("taskDesc" "taskDesc")${copyTask?.taskDesc}#end
+                    #@Teditor("taskDesc" "taskDesc")#if(copyTask)${copyTask?.taskDesc}#else ${story.storySpec}#end
                 </div>
             </div>
         #end

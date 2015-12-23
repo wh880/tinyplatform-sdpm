@@ -5,12 +5,47 @@
         <span class="f">ID:${task.taskNo}&nbsp${task.taskName}
             </span>
         <span class="r">
-                #foreach(m:menuManager.getScopeMenus("pro-task-op"))
-                    #if(m.id!="pro-task-close")
-                        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?taskId=${task.taskId}"
+            #foreach(m:menuManager.getScopeMenus("pro-task-op"))
+            ##逻辑判断，根据状态判断是否可选择。
+            ##1.关闭，则
+                #if(task.taskStatus == 1)
+                    #if(m.id != "pro-task-close")
+                        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?taskId=${task?.taskId}"
                            title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
                     #end
+                #elseif(task.taskStatus == 2)
+                    #if(m.id == "pro-task-start" || m.id=="pro-task-close")
+                    #else
+                        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?taskId=${task?.taskId}"
+                           title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
+                    #end
+                #elseif(task.taskStatus == 3)
+                    #if(m.id == "pro-task-start" || m.id == "pro-task-finish")
+                    #else
+                        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?taskId=${task?.taskId}"
+                           title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
+                    #end
+                #elseif(task.taskStatus == 4)
+                    #if(m.id == "pro-task-start" || m.id == "pro-task-close")
+                    #else
+                        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?taskId=${task?.taskId}"
+                           title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
+                    #end
+                #elseif(task.taskStatus == 5)
+                    #if(m.id == "pro-task-call" || m.id == "pro-task-start" || m.id =="pro-task-finish")
+                    #else
+                        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?taskId=${task?.taskId}"
+                           title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
+                    #end
+                #elseif(task.taskStatus == 6)
+                    #if(m.id == "pro-task-call" || m.id == "pro-task-start" ||m.id =="pro-task-finish" || m.id == "pro-task-close")
+                    #else
+                        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?taskId=${task?.taskId}"
+                           title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
+                    #end
+                #else
                 #end
+            #end
             #foreach(m:menuManager.getScopeMenus("pro-taskInfo2-op"))
                 #if(m.id=="pro-Info-delete")
                     <a class="taskDelete" href="javascript:void(0);" value="${TINY_CONTEXT_PATH+adminPath}${m.href}?taskId=${task.taskId}"
