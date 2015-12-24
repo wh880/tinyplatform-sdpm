@@ -184,7 +184,7 @@
 						#@tinyTh({"class":"sorting","rel":"bug_severity"})级别#end
 						#@tinyTh({"class":"sorting","rel":"priority"})优先级#end
 						#@tinyTh({"class":"sorting","rel":"bug_title"})Bug标题#end
-						#@tinyTh({"class":"sorting","rel":"bug_status","style":"color:#333"})状态#end
+						#@tinyTh({"class":"sorting","rel":"bug_status"})状态#end
 						#@tinyTh({"class":"sorting","rel":"bug_opened_by"})创建#end
 						#@tinyTh({"class":"sorting","rel":"bug_opened_date"})创建日期#end
 						#@tinyTh({"class":"sorting","rel":"bug_assigned_to"})指派给#end

@@ -17,8 +17,8 @@ ${casepager?.totalCount+1}
     #@td("nowrap")<span class="${c?.caseOpenedBy==userUtils.getUserId()?'c-red':''}">${c?.caseOpenedBy?userUtils.getUserById(c?.caseOpenedBy)?.orgUserRealName:""}</span>#end
     #@td("nowrap")<span class="${c?.caseLastRunner==userUtils.getUserId()?'c-red':''}">${c?.caseLastRunner?userUtils.getUserById(c?.caseLastRunner)?.orgUserRealName:""}</span>#end
     #@td("nowrap")${c?.caseLastRunDate?formatDate(c?.caseLastRunDate,'yyyy-MM-dd'):""}#end
-    #@td("nowrap")<p class="${getDict('colorOfCaseResult',c?.caseLastRunResult)}">${getDict("caseStepResult",c?.caseLastRunResult)}</p>#end
-    #@td("nowrap")<p class="${getDict('colorOfCaseStatus',c?.caseStatus)}">${getDict("caseStatus",c?.caseStatus)}</p>#end
+    #@td("nowrap")<span class="${getDict('colorOfCaseResult',c?.caseLastRunResult)}">${getDict("caseStepResult",c?.caseLastRunResult)}</span>#end
+    #@td("nowrap")<span class="${getDict('colorOfCaseStatus',c?.caseStatus)}">${getDict("caseStatus",c?.caseStatus)}</span>#end
     #@td("nowrap")
         #foreach(m:menuManager.getScopeMenus("testcase-op"))
             #if(m.id=="teditioncase"||m.id=="tproposecase")
