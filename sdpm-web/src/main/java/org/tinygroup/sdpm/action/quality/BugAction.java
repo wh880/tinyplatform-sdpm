@@ -211,6 +211,10 @@ public class BugAction extends BaseController {
         if ("desc".equals(ordertype)) {
             asc = false;
         }
+        if("tbuglong".equals(status)){
+            order = "bugOpenedDate";
+            ordertype = "desc";
+        }
         ConditionCarrier carrier = new ConditionCarrier();
         QualityUtil.getCondition(status,carrier);
         carrier.putSearch("bugSearch",infos,groupOperate);

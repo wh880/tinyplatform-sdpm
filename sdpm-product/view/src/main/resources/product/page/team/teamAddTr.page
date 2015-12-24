@@ -1,7 +1,7 @@
 
     #for(user : userIds)
-    #set(index=userFor?.index-1)
-    #@tr("row"+a+index)
+    #set(a=a+userFor?.index-1)
+    #@tr("row"+a)
     <td class="text-c userID" style="width: 2%"></td>
     <td style="width:18%">
         #@Tselect2F()
@@ -22,7 +22,7 @@
     <td style="width: 20%">
         #@Tselect2F()
             #@Tselect2Body("teamList["+a+"].teamRole" "" {"class":"input-text","multiple":
-                "multiple","datatype":"*","nullmsg":"角色不能为空！","id":"teamRole"+a+index})
+                "multiple","datatype":"*","nullmsg":"角色不能为空！","id":"teamRole"+a})
                 <option></option>
                 #foreach(u : roleList)
                     <option value="${u.orgRoleId}">${u.orgRoleName}</option>
@@ -44,10 +44,10 @@
         #@tinyDateInput("teamList["+a+"].teamJoin" formatDate(now(),"yyyy-MM-dd") "yyyy-MM-dd" )#end
     </td>
     <td style="width: 15%">
-        #tinyInput("text" "teamList["+a+"].teamDays" "" {"datatype":"","class":"input-text"})
+        #tinyInput("text" "teamList["+a+"].teamDays" "" {"class":"input-text"})
     </td>
     <td style="width: 15%">
-        #tinyInput("text" "teamList["+a+"].teamHours" "" {"datatype":"","class":"input-text"})
+        #tinyInput("text" "teamList["+a+"].teamHours" "" {"class":"input-text"})
     </td>
         #@td("w-p125")
         <div class="operate">
@@ -60,8 +60,8 @@
 
 
     #for(user : copyTeam)
-    #set(index=userFor?.index-1)
-    #@tr("row"+a+index)
+    #set(a=a+userFor?.index-1)
+    #@tr("row"+a)
     <td class="text-c userID" style="width: 2%"></td>
     <td style="width:18%">
         #@Tselect2F()
@@ -82,7 +82,7 @@
     <td style="width: 20%">
         #@Tselect2F()
             #@Tselect2Body("teamList["+a+"].teamRole" user?.teamRole {"class":"input-text","multiple":
-                "multiple","datatype":"*","nullmsg":"角色不能为空！","id":"teamRole"+a+index})
+                "multiple","datatype":"*","nullmsg":"角色不能为空！","id":"teamRole"+a})
                 <option></option>
                 #foreach(u : roleList)
                     <option value="${u.orgRoleId}">${u.orgRoleName}</option>
@@ -104,10 +104,10 @@
         #@tinyDateInput("teamList["+a+"].teamJoin" formatDate(now(),"yyyy-MM-dd") "yyyy-MM-dd" )#end
     </td>
     <td style="width: 15%">
-        #tinyInput("text" "teamList["+a+"].teamDays" "" {"datatype":"","class":"input-text"})
+        #tinyInput("text" "teamList["+a+"].teamDays" "" {"class":"input-text"})
     </td>
     <td style="width: 15%">
-        #tinyInput("text" "teamList["+a+"].teamHours" "" {"datatype":"","class":"input-text"})
+        #tinyInput("text" "teamList["+a+"].teamHours" "" {"class":"input-text"})
     </td>
         #@td("w-p125")
         <div class="operate">
@@ -117,7 +117,7 @@
         #end
     #end
     #end
-
+#set(a = a+1)
     #@tr("row"+a)
     <td class="text-c userID" style="width: 2%"></td>
     <td style="width:18%">

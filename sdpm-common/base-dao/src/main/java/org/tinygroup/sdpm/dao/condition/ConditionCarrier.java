@@ -11,7 +11,6 @@ import java.util.Set;
  * Created by wangll13383 on 2015/11/4.
  */
 public class ConditionCarrier implements Serializable{
-    public static final String AND = "and";
     private Map<String, String> operateMap;
     private Map<String, Object[]> valueMap;
     private Map<String, String> fieldTypeMap;
