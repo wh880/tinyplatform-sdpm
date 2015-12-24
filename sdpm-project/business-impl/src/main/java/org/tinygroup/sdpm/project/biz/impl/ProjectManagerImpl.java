@@ -106,7 +106,6 @@ public class ProjectManagerImpl implements ProjectManager {
         try {
             return projectDao.getByKey(projectId);
         } catch (Exception e) {
-            logger.logMessage(LogLevel.ERROR, "查询项目出错", e);
             return null;
         }
     }

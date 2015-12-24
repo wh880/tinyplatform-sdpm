@@ -28,6 +28,35 @@
             <input type="button" value="全选" class="btn btn-default btn-primary " onclick="selectAllNullorReserve('idCheck','全选');"/>
             <input type="button" value="反选" class="btn btn-default btn-primary"  onclick="selectAllNullorReserve('idCheck','反选');"/>
             <a class="btn btn-success" href="${TINY_CONTEXT_PATH+adminPath}/project/task/form${(moduleId?('?moduleId='+moduleId):'')}">建任务</a>
+
+            <div class="dropdown" style="display:inline-block">
+                <a role="button" data-toggle="dropdown" class="btn btn-primary" data-target="#" href="javascript:void(0);">编辑<span class="caret"></span></a>
+                <ul class="dropdown-menu multi-level" role="menu">
+                    <li>
+                        #@hasMenu("pro-task-close")
+                            <a tabindex="-1" href="javascript:void(0);">#@mulOperation("tmakesure" TINY_CONTEXT_PATH+adminPath+"/project/task/batch/close")
+                                <div>关闭</div>
+                            #end</a>
+                        #end
+                    </li>
+                    <li class="dropdown-submenu">
+                        #@hasMenu("pro-task-call")
+                            <a tabindex="-1" href="javascript:void(0);">指派</a>
+                            <ul class="dropdown-menu">
+                                #foreach(u : teamUserList)
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            #@mulOperation("tsolution"+uFor.index TINY_CONTEXT_PATH+adminPath+"/project/task/batch/call?userId="+u.orgUserId)
+                                            <div>${u.orgUserRealName}</div>#end
+                                        </a>
+                                    </li>
+                                #end
+                            </ul>
+                        #end
+                    </li>
+                </ul>
+            </div>
+
             #end
             #@tinyTableContent(TINY_CONTEXT_PATH+adminPath+
                 "/project/task/findPager?moduleId="+moduleId+"&key="+key+"&choose="+choose+"&statu="+statu) ##取数据地址 总数据

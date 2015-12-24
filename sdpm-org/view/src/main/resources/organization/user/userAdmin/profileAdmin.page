@@ -64,7 +64,7 @@
                 #@gridSysRow()
                     #@colLabel("col-4")直接上级：#end
                     #@gridSysCol(8)
-                        ${userService.findUser(user?.orgUserLeader).orgUserRealName}
+                        ${userService.findUser(user?.orgUserLeader)?.orgUserRealName}
                     #end
                 #end
                 #@gridSysRow()

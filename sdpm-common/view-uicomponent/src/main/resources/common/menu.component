@@ -56,3 +56,43 @@
     });
 </script>
 #end
+
+##数据表格批量操作处理
+#macro initBatchAction()
+<script>
+    $(function () {
+        $("#${tableId} .secondMenu").on("click", function () {
+            var inputvalue = $(this).html().trim();
+            var ids = [];
+            var href = $(this).attr("href");
+            $("#${tableId} input[type='checkbox']").each(function () {
+                if (this.checked == true && this.id != "checkboxall") {
+                    var clientId = $(this).val();
+                    ids.push(clientId);
+                }
+            });
+            if (ids.length > 0) {
+                $.ajax({
+                    url: href,
+                    type: "post",
+                    traditional: true,
+                    data: {ids: ids, name: inputvalue},
+                    dataType: "json",
+                    success: function (data) {
+                        if(data.status=="y") {
+                            layer.msg(data.info, 2, 1);
+                            $("#${tableId}").trigger("refresh");
+                        }else{
+                            layer.msg(data.info)
+                        }
+                    },
+                    error: function (res) {
+                        layer.msg("失败")
+                    }
+                });
+            }
+            return false;
+        });
+    });
+</script>
+#end
