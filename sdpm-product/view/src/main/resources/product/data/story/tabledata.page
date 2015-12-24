@@ -74,7 +74,7 @@
             #@td("nowrap")<span class="${story?.storyOpenedBy==userUtils.getUserId()?'c-red':''}">${story?.storyOpenedBy?userUtils.getUserById(story?.storyOpenedBy).orgUserRealName:""}</span>#end
             #@td("nowrap")<span class="${story?.storyAssignedTo==userUtils.getUserId()?'c-red':''}">${story?.storyAssignedTo?userUtils.getUserById(story?.storyAssignedTo).orgUserRealName:""}</span>#end
             #@td()${story?.storyEstimate}#end
-            #@td()<p class="${getDict('colorOfStoryStatus',story?.storyStatus)}">${getDict("storyStatus",story?.storyStatus)}</p>#end
+            #@td()<span class="${getDict('colorOfStoryStatus',story?.storyStatus)}">${getDict("storyStatus",story?.storyStatus)}</span>#end
             #@td("nowrap")${getDict("storyStage",story?.storyStage)}#end
             #@td("nowrap")
                 #foreach(m:menuManager?.getScopeMenus("pro_demand_log"))

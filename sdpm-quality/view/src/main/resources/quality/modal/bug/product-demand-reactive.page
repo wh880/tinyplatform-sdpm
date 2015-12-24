@@ -43,5 +43,5 @@
 
 
 <div style="width:30%;float:right">
-    #history(adminPath+"/system/action/ajax/history?actionObjectType=Story&actionObjectId="+story?.storyId)
+    #history(adminPath+"/system/action/ajax/history?actionObjectType=bug&actionObjectId="+bugId)
 </div>

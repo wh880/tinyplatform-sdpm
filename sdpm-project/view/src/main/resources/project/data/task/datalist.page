@@ -12,7 +12,7 @@
             #end
 
             #@td("nowrap")
-                <p class="${getDict('colorOfTaskStatus',t?.taskStatus)}">${getDict("taskStatus",t?.taskStatus)}</p>
+                <span class="${getDict('colorOfTaskStatus',t?.taskStatus)}">${getDict("taskStatus",t?.taskStatus)}</span>
             #end
             #@td("nowrap")${formatdate(t?.taskDeadLine,"yyyy-MM-dd")}#end
             #@td("nowrap")
