@@ -25,11 +25,7 @@
     #end
 #end
 
-
 <center>
     <input type="submit" class="radius btn-primary btn" value="保存">
 </center>
 #end
-
-
-

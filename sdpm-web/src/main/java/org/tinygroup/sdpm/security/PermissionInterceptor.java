@@ -16,6 +16,7 @@ import org.tinygroup.sdpm.util.*;
 import javax.servlet.http.HttpServletRequest;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,28 +31,48 @@ public class PermissionInterceptor {
 
     @Before("execution(* org.tinygroup.sdpm.action.project.*.*(..))")
     public void projectInterceptor(JoinPoint joinPoint) {
-        HttpServletRequest request = Servlets.getRequest();
-        String projectId = CookieUtils.getCookie(request, ProjectOperate.COOKIE_PROJECT_ID);
-        if (StringUtil.isBlank(projectId)) {
-            return;
-        }
-        List<String> menuList = teamService.getMenuIdListByProjectAndUser(Integer.valueOf(projectId), UserUtils.getUserId());
+        List<String> menuList = getProjectMenu();
         MenuPermissionSubject subject = new MenuPermissionSubject();
         subject.setMenuList(menuList);
         interceptor(joinPoint, subject);
     }
 
-    @Before("execution(* org.tinygroup.sdpm.action.product.*.*(..))")
-    public void productInterceptor(JoinPoint joinPoint) {
+    private List<String> getProjectMenu() {
+        HttpServletRequest request = Servlets.getRequest();
+        String projectId = CookieUtils.getCookie(request, ProjectOperate.COOKIE_PROJECT_ID);
+        if (StringUtil.isBlank(projectId)) {
+            return new ArrayList<String>();
+        }
+        return teamService.getMenuIdListByProjectAndUser(Integer.valueOf(projectId), UserUtils.getUserId());
+    }
+
+    private List<String> getProductMenu() {
         HttpServletRequest request = Servlets.getRequest();
         String projectId = CookieUtils.getCookie(request, ProductUtils.COOKIE_PRODUCT_ID);
         if (StringUtil.isBlank(projectId)) {
-            return;
+            return new ArrayList<String>();
         }
-        List<String> menuList = teamService.getMenuIdListByProductAndUser(Integer.valueOf(projectId), UserUtils.getUserId());
+        return teamService.getMenuIdListByProductAndUser(Integer.valueOf(projectId), UserUtils.getUserId());
+    }
+
+    @Before("execution(* org.tinygroup.sdpm.action.product.*.*(..))")
+    public void productInterceptor(JoinPoint joinPoint) {
+        List<String> menuList = getProductMenu();
         MenuPermissionSubject subject = new MenuPermissionSubject();
         subject.setMenuList(menuList);
         interceptor(joinPoint, subject);
+    }
+
+    public boolean hasMenu(String menu) {
+        List<String> productMenu = getProductMenu();
+        if (productMenu.contains(menu)) {
+            return true;
+        }
+        List<String> projectMenu = getProjectMenu();
+        if (projectMenu.contains(menu)) {
+            return true;
+        }
+        return false;
     }
 
     private void interceptor(JoinPoint joinPoint, MenuPermissionSubject subject) {

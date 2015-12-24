@@ -19,15 +19,12 @@
                 #end
             #end
         #end
-
         #@gridSysRow()
             #@colLabel("col-2")角色描述：#end
             #@gridSysCol(7)
                 #tinyInput("text" "orgRoleRemarks" role?.orgRoleRemarks{"class":"input-text"})
             #end
         #end
-
-
         #@gridSysRow()
             #@colLabel("col-2")选项：#end
             #@gridSysCol(8)

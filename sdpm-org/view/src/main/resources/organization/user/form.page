@@ -50,7 +50,7 @@
                             #@colLabel("col-3")直接上级：#end
                             #@formControlDiv("col-6")
                                 #@Tselect2F()
-                                    #Tselect2Ajax("orgUserLeader" task?.taskAssignedTo TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInCondition"
+                                    #Tselect2Ajax("orgUserLeader" user?.orgUserLeader TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInCondition"
                                     {"id":"orgUserLeader","dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"搜索查询直接上级"})
                                     #@Tselect2Fix()#set(m=menuManager.getMenu("organizationAddUser"))
                                         #if(m)

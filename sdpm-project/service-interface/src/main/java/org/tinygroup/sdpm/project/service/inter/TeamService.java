@@ -1,5 +1,7 @@
 package org.tinygroup.sdpm.project.service.inter;
 
+import org.tinygroup.aopcache.annotation.CacheGet;
+import org.tinygroup.aopcache.annotation.CacheRemove;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTeam;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -10,6 +12,11 @@ import java.util.List;
  */
 public interface TeamService {
 
+    String CACHE_PRODUCT_TEAM_MENU_LIST = "productTamMenuList";
+    String CACHE_PROJECT_TEAM_MENU_LIST = "projectTeamMenuList";
+    String CACHE_PROJECT_TEAM_USER_LIST = "projectTeamUserList";
+    String CACHE_PRODUCT_TEAM_USER_LIST = "productTeamUserList";
+
     List<ProjectTeam> findTeamList(ProjectTeam team);
 
     /**
@@ -18,6 +25,7 @@ public interface TeamService {
      * @param list
      * @return
      */
+    @CacheRemove(removeGroups = {CACHE_PRODUCT_TEAM_MENU_LIST, CACHE_PROJECT_TEAM_MENU_LIST, CACHE_PROJECT_TEAM_USER_LIST, CACHE_PRODUCT_TEAM_USER_LIST})
     Integer batchAddTeam(List<ProjectTeam> list);
 
     /**
@@ -26,11 +34,16 @@ public interface TeamService {
      * @param list
      * @return
      */
+    @CacheRemove(removeGroups = {CACHE_PRODUCT_TEAM_MENU_LIST, CACHE_PROJECT_TEAM_MENU_LIST, CACHE_PROJECT_TEAM_USER_LIST, CACHE_PRODUCT_TEAM_USER_LIST})
     Integer batchUpdateTeam(List<ProjectTeam> list);
 
     /**
      * 移除项目下的成员,根据逻辑id
+     *
+     * @param id
+     * @return
      */
+    @CacheRemove(removeGroups = {CACHE_PRODUCT_TEAM_MENU_LIST, CACHE_PROJECT_TEAM_MENU_LIST, CACHE_PROJECT_TEAM_USER_LIST, CACHE_PRODUCT_TEAM_USER_LIST})
     Integer deleteTeam(int id);
 
     /**
@@ -39,8 +52,10 @@ public interface TeamService {
      * @param projectId
      * @return
      */
+    @CacheGet(group = CACHE_PROJECT_TEAM_USER_LIST, key = "${projectId}")
     List<ProjectTeam> findTeamByProjectId(Integer projectId);
 
+    @CacheGet(group = CACHE_PRODUCT_TEAM_USER_LIST, key = "${productId}")
     List<ProjectTeam> findTeamByProductId(Integer productId);
 
     /**
@@ -62,6 +77,7 @@ public interface TeamService {
      * @param userId
      * @return
      */
+    @CacheGet(group = CACHE_PROJECT_TEAM_MENU_LIST, key = "${projectId}-${userId}")
     List<String> getMenuIdListByProjectAndUser(Integer projectId, String userId);
 
     /**
@@ -71,6 +87,7 @@ public interface TeamService {
      * @param userId
      * @return
      */
+    @CacheGet(group = CACHE_PRODUCT_TEAM_MENU_LIST, key = "${productId}-${userId}")
     List<String> getMenuIdListByProductAndUser(Integer productId, String userId);
 
 }

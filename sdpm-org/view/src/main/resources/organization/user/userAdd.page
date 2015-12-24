@@ -159,7 +159,7 @@
                         #@elementItem()
                             #@colLabel("col-3")职位：#end
                             #@formControlDiv("col-5")
-                                #tinyInput("text" "orgUserRole" user?.orgUserRole{"class":"input-text"})
+                                #tinyInput("text" "orgUserRole" user?.orgUserRole{"class":"input-text","datatype":"*1-20"})
                             #end
                             #@validateDiv("col-4")#end
                         #end
