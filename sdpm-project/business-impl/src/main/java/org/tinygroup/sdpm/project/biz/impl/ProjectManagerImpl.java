@@ -48,7 +48,7 @@ public class ProjectManagerImpl implements ProjectManager {
     }
 
     public Pager<Project> findPagerProjects(Integer start, Integer limit, String sortName, boolean asc, Integer... ids) {
-        if (ids == null) return new Pager<Project>(0, 0, new ArrayList<Project>());
+        if (ids == null||ids.length==0) return new Pager<Project>(0, 0, new ArrayList<Project>());
         if (StringUtil.isBlank(sortName)) {
             return projectDao.findPageWithStatistics(start, limit, new Project(), ids);
         } else {
