@@ -23,8 +23,6 @@
         <menu id="org-user-batchdel" name="批量删除" href="#" icon="icon-trash" sort="1" isShow="1"
               scope="org-user-batchdel"/>
 
-        <menu id="org-user-password" name="修改密码" icon="icon-key" isShow="0"/>
-
         <menu id="org-user-storyAdmin" name="所属需求" href="/org/user/story" icon="" sort="1"
               isShow="1" scope="org-user-detail"/>
         <menu id="org-user-taskAdmin" name="所属任务" href="/org/user/task" icon="" sort="1"

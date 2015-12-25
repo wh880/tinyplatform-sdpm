@@ -9,6 +9,7 @@ import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.project.service.inter.TeamService;
 import org.tinygroup.sdpm.util.*;
@@ -70,6 +71,14 @@ public class PermissionInterceptor {
         }
         List<String> projectMenu = getProjectMenu();
         if (projectMenu.contains(menu)) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean hasMenuInProjectOrProduct(String menu) {
+        List<String> menuList = teamService.getMenuIdListByProductAndUser(null, UserUtils.getUserId());
+        if (!CollectionUtil.isEmpty(menuList) && menuList.contains(menu)) {
             return true;
         }
         return false;

@@ -22,6 +22,11 @@
         #@td("nowrap")${formatDate(v?.testtaskEnd, "yyyy-MM-dd")}#end
         #@td()${getDict("versionStatus",v?.testtaskStatus)}#end
         #@td("nowrap")
+            #set(m=menuManager.getMenu("pro-demand-relation"))
+            #if(m)
+            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?buildId=${v?.testversionId}"
+               title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+            #end
             #foreach(m:menuManager.getScopeMenus("testversion-op"))
             <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?testversionId=${v?.testversionId}&currentPageId=5"
                title="${m.name}">#buttonIcon(iconClass=m.icon)</a>

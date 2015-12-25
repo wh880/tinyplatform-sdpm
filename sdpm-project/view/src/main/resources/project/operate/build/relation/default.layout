@@ -1,19 +1,18 @@
-
 #@layout(project)
     #@div(divClass="operationbar")
-    <span class="r">
-    <a href="${TINY_CONTEXT_PATH+adminPath}/project/build/forword/alReq?buildId=${build.buildId}">#buttonIcon(iconClass="icon-link")关联需求</a>&nbsp;
-	<a href="${TINY_CONTEXT_PATH+adminPath}/project/build/forword/alBug?buildId=${build.buildId}">#buttonIcon(iconClass="icon-bug")关联Bug</a>&nbsp;
-     #hasMenu("pro-version-edit")
-        <a href="${TINY_CONTEXT_PATH+adminPath}/project/build/edit?buildId=${build.buildId}">#buttonIcon(iconClass="icon-pencil")编辑</a>&nbsp;
-    #end
-    #hasMenu("pro-version-delete")
-    <a href="${TINY_CONTEXT_PATH+adminPath}/project/build/delete?id=${build.buildId}">#buttonIcon(iconClass="icon-remove")删除</a>&nbsp;
-    #end
-    <a href="javascript:void(0);" onclick="javascript:history.back(-1);" title="返回">
-        #buttonIcon(iconClass="icon-reply")
-    </a>
-	</span>
+        <span class="r">
+        <a href="${TINY_CONTEXT_PATH+adminPath}/project/build/forword/alReq?buildId=${build.buildId}">#buttonIcon(iconClass="icon-link")关联需求</a>&nbsp;
+        <a href="${TINY_CONTEXT_PATH+adminPath}/project/build/forword/alBug?buildId=${build.buildId}">#buttonIcon(iconClass="icon-bug")关联Bug</a>&nbsp;
+        #@hasMenu("pro-version-edit")
+            <a href="${TINY_CONTEXT_PATH+adminPath}/project/build/edit?buildId=${build.buildId}">#buttonIcon(iconClass="icon-pencil")编辑</a>&nbsp;
+        #end
+        #@hasMenu("pro-version-delete")
+        <a href="${TINY_CONTEXT_PATH+adminPath}/project/build/delete?id=${build.buildId}">#buttonIcon(iconClass="icon-remove")删除</a>&nbsp;
+        #end
+        <a href="javascript:void(0);" onclick="javascript:history.back(-1);" title="返回">
+            #buttonIcon(iconClass="icon-reply")
+        </a>
+        </span>
     #div(divClass="clearfix")#end
 #end
 #@tabWithInit("tab_demo" "optionsBox")

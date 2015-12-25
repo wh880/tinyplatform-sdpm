@@ -54,10 +54,8 @@
                         #@hasMenu("org-user-profileAdmin")
                             <li><a href="${TINY_CONTEXT_PATH+adminPath}/org/user/show/profile?id=${userUtils.getUserId()}"><i class="dropdown-icon fa icon-user"></i>&nbsp;&nbsp;个人档案</li>
                         #end
-                        #@hasMenu("org-user-password")
                             <li><a href="${TINY_CONTEXT_PATH+adminPath}/org/user/passwordForm"><i class="dropdown-icon fa icon-key"></i>&nbsp;&nbsp;修改密码</li>
                             <li class="divider"></li>
-                        #end
                         <li><a href="${TINY_CONTEXT_PATH}/logout"><i class="dropdown-icon fa fa-power-off"></i>&nbsp;&nbsp;退出</a>
                         </li>
                     </ul>
