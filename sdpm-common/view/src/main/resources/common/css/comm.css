@@ -524,3 +524,6 @@ table.table.filelist-table{border:#ddd 1px solid;}
 .navtitle{white-space: nowrap}
 .can-edit .ztree li a{padding-right:60px}
 .can-edit .ztree li a:hover{padding-right:0;}
+/*批量添加*/
+.modal-body .input-group .form-control, .modal-body .input-group-btn{height:36px;padding:0 8px;font-size:14px;}
+.operation-body{margin:8px 6px;}
