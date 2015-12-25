@@ -6,19 +6,17 @@
         </button>
     </div>
 </div>
-<br>
+<div class="operation-body">
 <input type="button" value="全选" class="btn btn-default btn-primary "
        onclick="selectAllNullorReserve('userIdCheck','全选');"/>
 <input type="button" value="反选" class="btn btn-default btn-primary"
        onclick="selectAllNullorReserve('userIdCheck','反选');"/>
-<br>
+</div>
 <div id="batchTeamData">
     #@table()
     <tr>
-        <td style="width: 2%"></td>
-        <td align="center">
-            用户
-        </td>
+        <td style="width:16%">勾选</td>
+        <td>用户</td>
 
     </tr>
     #end
