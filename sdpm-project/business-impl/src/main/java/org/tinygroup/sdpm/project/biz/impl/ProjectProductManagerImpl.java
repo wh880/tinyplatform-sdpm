@@ -30,7 +30,11 @@ public class ProjectProductManagerImpl implements ProjectProductManager {
     }
 
     public void addLink(String[] productIds, Integer projectId) {
-        if (ArrayUtil.isEmptyArray(productIds) || projectId == null) {
+        if (projectId == null) {
+            return;
+        }
+        projectProductDao.deleteByProjectId(projectId);
+        if (ArrayUtil.isEmptyArray(productIds)) {
             return;
         }
         List<ProjectProduct> list = new ArrayList<ProjectProduct>();
@@ -43,12 +47,15 @@ public class ProjectProductManagerImpl implements ProjectProductManager {
             t.setProductId(Integer.valueOf(productId));
             list.add(t);
         }
-        projectProductDao.deleteByProjectId(projectId);
         projectProductDao.batchInsert(list);
     }
 
     public void addProductLinkToProject(Integer[] productArray, Integer projectId) {
-        if (ArrayUtil.isEmptyArray(productArray) || projectId == null) {
+        if (projectId == null) {
+            return;
+        }
+        projectProductDao.deleteByProjectId(projectId);
+        if (ArrayUtil.isEmptyArray(productArray)) {
             return;
         }
         List<ProjectProduct> list = new ArrayList<ProjectProduct>();
@@ -61,7 +68,6 @@ public class ProjectProductManagerImpl implements ProjectProductManager {
             t.setProductId(productId);
             list.add(t);
         }
-        projectProductDao.deleteByProjectId(projectId);
         projectProductDao.batchInsert(list);
     }
 
