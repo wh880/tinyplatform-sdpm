@@ -115,6 +115,7 @@ public class StorySpecAction extends BaseController {
         ProductStory story = storyService.findStory(storyId);
         story.setStoryTitle(spec.getStoryTitle());
         story.setStoryVersion(storyVersion);
+        story.setStoryStatus("0");
         storyService.updateStory(story);
         return "redirect:/a/product/storySpec/find/productDemandDetail?storyId=" + storyId;
     }

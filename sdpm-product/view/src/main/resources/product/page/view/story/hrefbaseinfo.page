@@ -24,7 +24,7 @@
                 #end
                 #@tr()
                     #@td()当前状态#end
-                    #@td()<font style="color:green">${getDict("storyStatus",story?.storyStatus)}</font>#end
+                    #@td()<span class="${getDict('colorOfStoryStatus',story?.storyStatus)}">${getDict("storyStatus",story?.storyStatus)}</span>#end
                 #end
                 #@tr()
                     #@td()所处阶段#end

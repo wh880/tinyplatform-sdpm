@@ -31,7 +31,7 @@
     			#end
     			#@tr()
     				#@th()当前状态#end
-    				#@td()${getDict("versionStatus",testTask?.testtaskStatus)}#end
+    				#@td()<span class="${getDict('colorOfVersionStatus',testTask?.testtaskStatus)}">${getDict("versionStatus",testTask?.testtaskStatus)}</span>#end
     			#end
     		#end
     	#end

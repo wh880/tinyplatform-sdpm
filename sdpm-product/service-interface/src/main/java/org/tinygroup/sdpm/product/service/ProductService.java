@@ -10,13 +10,13 @@ import java.util.List;
 import java.util.Map;
 
 public interface ProductService {
-    String CACHE_USER_PRODUCTS_MAP = "UserProductsMap";
+    String CACHE_USER_PRODUCTS_MAP = "userProductsMap";
     String CACHE_USER_PRODUCTS_LIST = "userProductList";
     String CACHE_PRODUCT_ID = "productId";
     String CACHE_USER_PRODUCTS_LIST_WITH_COUNT = "userProductListWithCount";
     String CACHE_USER_PRODUCTS_LIST_WITH_LINE_COUNT = "userProductListWithLineCount";
     String CACHE_PRODUCT_NAME_BY_LINE_ID = "productNameListByLine";
-
+    String CACHE_USER_PRODUCT_LINE = "userProductLine";
     /**
      * 添加产品
      *
@@ -31,7 +31,8 @@ public interface ProductService {
      * @param product
      * @return
      */
-    @CacheRemove(removeKeys = "${product.productId}",  group = CACHE_PRODUCT_ID, removeGroups = {CACHE_USER_PRODUCTS_MAP, CACHE_USER_PRODUCTS_LIST, CACHE_PRODUCT_ID, CACHE_USER_PRODUCTS_LIST_WITH_COUNT, CACHE_USER_PRODUCTS_LIST_WITH_LINE_COUNT, CACHE_PRODUCT_NAME_BY_LINE_ID})
+    @CacheRemove(removeKeys = "${product.productId}",  group = CACHE_PRODUCT_ID,
+            removeGroups = {CACHE_USER_PRODUCTS_MAP, CACHE_USER_PRODUCTS_LIST, CACHE_PRODUCT_ID, CACHE_USER_PRODUCTS_LIST_WITH_COUNT, CACHE_USER_PRODUCTS_LIST_WITH_LINE_COUNT, CACHE_PRODUCT_NAME_BY_LINE_ID,CACHE_USER_PRODUCT_LINE})
     int updateProduct(Product product);
 
     /**
@@ -40,7 +41,8 @@ public interface ProductService {
      * @param productId
      * @return
      */
-    @CacheRemove(removeKeys = "${productId}", group = CACHE_PRODUCT_ID, removeGroups = {CACHE_USER_PRODUCTS_MAP, CACHE_USER_PRODUCTS_LIST, CACHE_PRODUCT_ID, CACHE_USER_PRODUCTS_LIST_WITH_COUNT, CACHE_USER_PRODUCTS_LIST_WITH_LINE_COUNT, CACHE_PRODUCT_NAME_BY_LINE_ID})
+    @CacheRemove(removeKeys = "${productId}", group = CACHE_PRODUCT_ID,
+            removeGroups = {CACHE_USER_PRODUCTS_MAP, CACHE_USER_PRODUCTS_LIST, CACHE_PRODUCT_ID, CACHE_USER_PRODUCTS_LIST_WITH_COUNT, CACHE_USER_PRODUCTS_LIST_WITH_LINE_COUNT, CACHE_PRODUCT_NAME_BY_LINE_ID,CACHE_USER_PRODUCT_LINE})
     int deleteProduct(Integer productId);
 
     /**
