@@ -2,6 +2,7 @@ package org.tinygroup.sdpm.util;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.sdpm.common.menu.Menu;
 import org.tinygroup.sdpm.common.menu.MenuManager;
 import org.tinygroup.sdpm.common.util.Collections3;
@@ -20,7 +21,7 @@ public class MenuUtils {
     private UserUtils userUtils;
 
     public Menu getMenu(String menuId) {
-        if (UserUtils.hasMenu(menuId)) {
+        if (userUtils.hasMenu(menuId)) {
             return menuManager.getMenu(menuId);
         } else {
             return null;
@@ -36,6 +37,26 @@ public class MenuUtils {
     public List<Menu> getChildMenus(String parentId) {
         List<Menu> childMenus = getChildMenusWithoutPermissionFilter(parentId);
         filterMenu(childMenus);
+        return childMenus;
+    }
+
+    /**
+     * 获取一级菜单中的叶子节点菜单，不带权限过滤
+     *
+     * @param parentId
+     * @return
+     */
+    public List<Menu> getChildLeafMenus(String parentId) {
+        List<Menu> childMenus = getChildMenusWithoutPermissionFilter(parentId);
+        if (!CollectionUtil.isEmpty(childMenus)) {
+            for (int i = 0; i < childMenus.size(); i++) {
+                Menu menu = childMenus.get(i);
+                if (!CollectionUtil.isEmpty(menu.getChildMenus())) {
+                    childMenus.remove(i);
+                    i--;
+                }
+            }
+        }
         return childMenus;
     }
 
@@ -68,12 +89,12 @@ public class MenuUtils {
     }
 
     private void filterMenu(final List<Menu> menuList) {
-        if (Collections3.isEmpty(menuList)){
+        if (Collections3.isEmpty(menuList)) {
             return;
         }
         for (int i = 0; i < menuList.size(); i++) {
             Menu menu = menuList.get(i);
-            if (!UserUtils.hasMenu(menu.getId())) {
+            if (!userUtils.hasMenu(menu.getId())) {
                 menuList.remove(i);
                 i--;
             }

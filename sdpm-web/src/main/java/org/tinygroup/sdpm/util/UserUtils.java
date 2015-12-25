@@ -15,6 +15,7 @@ import org.tinygroup.sdpm.org.dao.pojo.OrgRoleMenu;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.RoleService;
 import org.tinygroup.sdpm.org.service.inter.UserService;
+import org.tinygroup.sdpm.security.PermissionInterceptor;
 import org.tinygroup.sdpm.security.Principal;
 
 import java.util.ArrayList;
@@ -36,6 +37,8 @@ public class UserUtils {
     private UserService userService;
     @Autowired
     private MenuManager menuManager;
+    @Autowired
+    private PermissionInterceptor permissionInterceptor;
 
     /**
      * 获取当前用户账号
@@ -68,20 +71,6 @@ public class UserUtils {
      */
     public static Subject getSubject() {
         return SecurityUtils.getSubject();
-    }
-
-    /**
-     * 判断当前用户是否有某个菜单权限
-     *
-     * @param menuId
-     * @return
-     */
-    public static boolean hasMenu(String menuId) {
-        Subject subject = SecurityUtils.getSubject();
-        if (subject != null && !StringUtil.isBlank(menuId)) {
-            return subject.isPermitted(menuId);
-        }
-        return false;
     }
 
     /**
@@ -137,11 +126,28 @@ public class UserUtils {
     }
 
     /**
+     * 判断当前用户是否有某个菜单权限
+     *
+     * @param menuId
+     * @return
+     */
+    public boolean hasMenu(String menuId) {
+        Subject subject = SecurityUtils.getSubject();
+        if (subject != null && !StringUtil.isBlank(menuId)) {
+            return subject.isPermitted(menuId);
+        }
+        if (permissionInterceptor.hasMenu(menuId)) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * 获取当前用户角色列表
      *
      * @return
      */
-    public  List<OrgRole> getUserRoleList() {
+    public List<OrgRole> getUserRoleList() {
         List<OrgRole> roleList = (List<OrgRole>) getCache(CACHE_ROLE_LIST);
         if (roleList == null) {
             Principal principal = getPrincipal();
@@ -159,7 +165,7 @@ public class UserUtils {
      *
      * @return
      */
-    public  List<Menu> getMenuList() {
+    public List<Menu> getMenuList() {
         List<Menu> menuList = (List<Menu>) getCache(CACHE_MENU_LIST);
         if (menuList == null) {
             List<OrgRoleMenu> roleMenuListByUser = roleService.findRoleMenuListByUser(getUserId());

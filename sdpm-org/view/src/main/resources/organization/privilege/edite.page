@@ -39,6 +39,23 @@
         border-left: 1px solid #eee;
     }
 </style>
+
+#macro row()
+    #foreach(m:menuManager.getChildMenusWithoutPermissionFilter(parentId))
+    <div class="row group-check-list">
+        <div class="col-2">#@Tcheckbox(m.id {"data-targetGroup":"g"+m.id})${m.name}#end</div>
+        <div class="col-10">
+            <ul>
+                #foreach(m2:menuManager.getAllChildMenusWithoutPermissionFilter(m.id))
+                    <li>#@Tcheckbox(m2.id {"data-group":"g"+m.id})${m2.name}#end</li>
+                #end
+            </ul>
+            <div class="clear"></div>
+        </div>
+    </div>
+    #end
+
+#end
 #@tinyForm("thisform" call("link",adminPath+"/org/roleMenu/save") "post")
 <input type="hidden" name="roleId" value="${roleId}"/>
 <input type="hidden" name="parentId" value="${parentId?:0}"/>

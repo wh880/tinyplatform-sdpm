@@ -92,9 +92,9 @@
         <menu id="pro-version-look" name="查看bug" href="/project/build/look" icon="icon-eye-open" sort="20"
               isShow="1"
               scope="pro-version-op"/>
-        <menu id="pro-version-edit" name="编辑版本" href="/project/build/edit" icon="icon-pencil" sort="15" isShow="1"
+        <menu id="pro-version-edit" name="编辑" href="/project/build/edit" icon="icon-pencil" sort="15" isShow="1"
               scope="pro-version-op"/>
-        <menu id="pro-version-delete" name="删除版本" href="/project/build/delete" icon="icon-remove" sort="10" isShow="1"
+        <menu id="pro-version-delete" name="删除" href="/project/build/delete" icon="icon-remove" sort="10" isShow="1"
               scope="pro-version-op"/>
 
         <!--<menu id="version-menu" name="任务菜单" href="/project/build/index" icon="" sort="1" isShow="1">-->
