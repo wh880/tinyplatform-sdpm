@@ -464,10 +464,19 @@ public class StoryAction extends BaseController {
     @RequestMapping("/reviewed")
     public String reviewed(SystemAction systemAction, Integer reviewRequest, ProductStory productStory)
             throws IOException {
-        if (reviewRequest == 0) {
-            productStory.setStoryStatus("1");
-        } else if (reviewRequest == 2) {
-            productStory.setStoryStatus("4");
+        switch (reviewRequest){
+            case 0:
+                productStory.setStoryStatus("1");
+                break;
+            case 1:
+                productStory.setStoryStatus("0");
+                break;
+            case 2:
+                productStory.setStoryStatus("2");
+                break;
+            case 3:
+                productStory.setStoryStatus("4");
+                break;
         }
         ProductStory story = storyService.findStory(productStory.getStoryId());
         storyService.updateStory(productStory);
@@ -518,7 +527,6 @@ public class StoryAction extends BaseController {
      * @return
      */
     @RequestMapping("/search")
-
     public String storySearchAction(@CookieValue(value = "cookieProductId", defaultValue = "0") String cookieProductId,
                                     int start,
                                     int pagesize,

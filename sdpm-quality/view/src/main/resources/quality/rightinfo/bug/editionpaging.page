@@ -243,7 +243,7 @@
 <ul>
 <li>
     #@elementItem()
-        #@colLabel()<span class="c-red">*</span>所属项目:#end
+        #@colLabel()所属项目:#end
         #@formControlDiv("col-8")
                     #@Tselect2F()
                     <script type="text/javascript">
@@ -260,7 +260,7 @@
                         })
                     </script>
                         #@Tselect2Body(
-                            "projectId" bug?.projectId?:(projectList.size()>0?projectList.get(0).projectId:0) {"class":"input-text select2","datatype":"*","nullmsg":"所属项目不能为空！"}) ##,"multiple":"multiple"加上为多选项
+                            "projectId" bug?.projectId?:(projectList.size()>0?projectList.get(0).projectId:0) {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                             #foreach(project : projectOperate.getUserProjectList())
                             <option value="${project?.projectId}">${project?.projectName}</option>
                             #end

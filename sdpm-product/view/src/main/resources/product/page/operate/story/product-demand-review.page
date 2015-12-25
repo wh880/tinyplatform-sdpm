@@ -55,17 +55,38 @@
 
         #@elementItem()
             #@colLabel()<span class="c-red">*</span>评审结果：#end
-            #@formControlDiv("col-4")
-                #@Tselect2F()
-                    #@Tselect2Body(
-                        "reviewRequest" "" {"placeholder":"","datatype":"*","nullmsg":"评审结果不能为空！","class":
-                        "input-text"})
+            #set(a = "col-4",b="col-12",c="")
+            #if(story?.storyStatus=="3")
+                #set(a = "col-6",b="col-8",c="col-4")
+            #end
+            #@formControlDiv(a)
+                <span class="${b}">
+                    #@Tselect2F()
+                        #@Tselect2Body(
+                            "reviewRequest" "" {"placeholder":"","datatype":"*","nullmsg":"评审结果不能为空！","class":
+                            "input-text"})
 
-                        #foreach(source:getDict("proReviewResult"))
-                            <option value="${source?.value}"> ${source?.text}</option>
+                            #foreach(source:getDict("proReviewResult"))
+                                #if(source?.value=="2")
+                                    #if(story?.storyStatus!="3")
+                                        <option value="${source?.value}"> ${source?.text}</option>
+                                    #end
+                                #elseif(source?.value=="3")
+                                    #if(story?.storyStatus=="3")
+                                        <option value="${source?.value}"> ${source?.text}</option>
+                                    #end
+                                #else
+                                    <option value="${source?.value}"> ${source?.text}</option>
+                                #end
+                            #end
                         #end
-
                     #end
+                </span>
+                #if(story?.storyStatus=="3")
+                <span class="${c}">
+                    &nbsp;#@aModal("#myModal" "历史版本" "1000" "500" "btn-class btn radius grayBtn font-size-13" adminPath+"/product/storySpec/storyVersion?storyId="+story?.storyId+"&from=review")
+                       历史版本#end
+                </span>
                 #end
             #end
             #@validateDiv("col-2")#end

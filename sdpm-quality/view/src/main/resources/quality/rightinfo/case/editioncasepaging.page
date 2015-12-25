@@ -168,7 +168,7 @@
             #@elementItem()
                 #@colLabel()相关用例#end
                 #@formControlDiv("col-8")
-                    #tinyInput("text" "linkCase" testCase?.linkCase {"id":"","class":"input-text","datatype":"n","nullmsg":"输入必须为数字"})
+                    #tinyInput("text" "linkCase" testCase?.linkCase {"id":"","class":"input-text","datatype":"n","nullmsg":"输入必须为数字","ignore":"ignore"})
                 #end
                 #@validateDiv("col-2")#end
             #end

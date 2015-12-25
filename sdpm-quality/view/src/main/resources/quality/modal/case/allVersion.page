@@ -8,7 +8,7 @@
     #@tinyTableContent(TINY_CONTEXT_PATH+adminPath+"/quality/testCase/caseVersionData?caseId="+caseId) ##取数据地址 总数据
         #@thead()
             #@tr()
-                #@tinyTh({"class":"sorting sorting_asc","rel":"storyId"})用例ID#end
+                #@tinyTh({"class":"sorting","rel":"storyId"})用例ID#end
                 #@tinyTh({"class":"sorting","rel":"storyTitle"})用例名称#end
                 #@tinyTh({"class":"sorting","rel":"storyVersion"})用例版本#end
                 #@tinyTh({"class":"sorting","rel":""})操作#end
