@@ -76,7 +76,7 @@ public class QualityTestRunDaoImpl extends TinyDslDaoSupport implements QualityT
                         QUALITY_TEST_RUNTABLE.TEST_RUN_LAST_RUNNER.value(t.getTestRunLastRunner()),
                         QUALITY_TEST_RUNTABLE.TEST_RUN_LAST_RUN_DATE.value(t.getTestRunLastRunDate()),
                         QUALITY_TEST_RUNTABLE.TEST_RUN_LAST_RUN_RESULT.value(t.getTestRunLastRunResult()),
-                        QUALITY_TEST_RUNTABLE.TEST_RUN_STATUS.value(t.getTestRunStatus())).where(QUALITY_TEST_CASETABLE.CASE_ID.eq(t.getCaseId()));
+                        QUALITY_TEST_RUNTABLE.TEST_RUN_STATUS.value(t.getTestRunStatus())).where(QUALITY_TEST_RUNTABLE.TEST_RUN_ID.eq(t.getTestRunId()));
                 return update;
             }
         });

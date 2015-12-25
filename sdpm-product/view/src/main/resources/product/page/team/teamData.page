@@ -7,7 +7,11 @@
         ${t?.teamUserId==null?"":userUtils.getUserById(t?.teamUserId)?.orgUserRealName}
     </a>
     #end
-    #@td()${t?.roleName}#end
+    #@td()
+        #foreach(r : roleService?.getRoleByIds(t?.teamRole.split(",")))
+            ${rFor?.index!=1?",":""}${r?.orgRoleName}
+        #end
+    #end
     #@td()${formatDate(t?.teamJoin,"yyyy-MM-dd")}#end
     #@td()${t?.teamDays}#end
     #@td()${t?.teamHours}#end

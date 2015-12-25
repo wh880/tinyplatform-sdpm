@@ -497,8 +497,8 @@ table.table.filelist-table{border:#ddd 1px solid;}
 .pic-info .info-item a:hover .icon-pic{color:#fff;}
 
 .icon-margin{margin-right:2px;font-size:20px;}
-/*/!*quality*!/
 
+/*/!*quality*!/
 .operationbar .active_btn:hover{background:none;}
 .btn-group #Dropdown{background:none;border:none;padding:0 3px}
 .open>#downMenuSty{min-width:80px}
@@ -525,3 +525,6 @@ table.table.filelist-table{border:#ddd 1px solid;}
 .can-edit .ztree li a{padding-right:60px}
 .can-edit .ztree li a:hover{padding-right:0;}
 .tinytable i[class^="icon-"], .tinytable i[class*=" icon-"]{font-size:16px;margin-right:8px}
+/*批量添加*/
+.modal-body .input-group .form-control, .modal-body .input-group-btn{height:36px;padding:0 8px;font-size:13px;}
+.operation-body{margin:7px 2px;}
