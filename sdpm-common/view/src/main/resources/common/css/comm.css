@@ -524,3 +524,4 @@ table.table.filelist-table{border:#ddd 1px solid;}
 .navtitle{white-space: nowrap}
 .can-edit .ztree li a{padding-right:60px}
 .can-edit .ztree li a:hover{padding-right:0;}
+.tinytable i[class^="icon-"], [class*=" icon-"]{font-size:16px;margin-right:8px}
