@@ -628,7 +628,7 @@ public class UserAction extends BaseController {
     @RequestMapping("batchUserInCondition")
     public String ajaxUserByCondition(String condition,Model model){
         model.addAttribute("userList",userService.userInCondition(condition,100,null));
-        return "product/page/team/batchData.pagelet";
+        return "organization/user/team/batchData.pagelet";
     }
 
     @RequestMapping("toBatchChooseTeam")

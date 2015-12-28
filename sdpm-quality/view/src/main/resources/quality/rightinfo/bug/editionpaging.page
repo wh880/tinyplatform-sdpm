@@ -21,6 +21,7 @@
                                     ajaxRead("${sid}","projectId","projectId","projectName","/quality/bug/ajax/project?productId="+pId,"${bug?.projectId}");
                                     ajaxRead("${sid}", "planId", "planId", "planName", "/quality/bug/ajax/plan?deleted=0&productId=" + pId, "${bug?.planId}","plan");
                                     $("#modelA").attr("href",mUrl+pId);
+                                    $("input[name=bugOpenedBuild]").attr("productId",pId);
                                 }
                             });
                         });
@@ -54,7 +55,7 @@
                                     var mId = $("#${sid}  option:selected").val();
                                     var pId = $("input[name=productId]").val();
                                     if (mId >= 0) {
-                                        ajaxRead("${sid}", "storyId", "storyId", "storyTitle", "/quality/bug/ajax/story?productId=" + pId + "&moduleId=" + mId, ${bug?.storyId?: 0});
+                                        ajaxRead("${sid}", "storyId", "storyId", "storyTitle", "/quality/bug/ajax/story?productId=" + pId + "&moduleId=" + mId, "${bug?.storyId}");
                                     }
                                 })
                             })
@@ -249,14 +250,13 @@
                     <script type="text/javascript">
                         $("#${sid}").on("change", function () {
                             var pjId = $("#${sid}  option:selected").val();
-                            var pId = $("input[name=productId]").val();
                             if (pjId > 0) {
-                                ajaxRead("${sid}", "taskId", "taskId", "taskName", "/quality/bug/ajax/task?taskProject=" + pjId, ${bug?.taskId ?: 0});
-                                if(pId>0){
-                                    ajaxRead("${sid}", "bugOpenedBuild", "buildId", "buildName", "/quality/bug/ajax/build?buildProduct=" + pId+"&buildProject="+pjId, "${bug?.bugOpenedBuild?bug.bugOpenedBuild:"0"}","build");
-                                    ajaxRead("${sid}", "bugResolvedBuild", "buildId", "buildName", "/quality/bug/ajax/build?buildProduct=" + pId+"&buildProject="+pjId, "${bug?.bugResolvedBuild?bug.bugResolvedBuild:"0"}","build");
-                                }
+                                ajaxRead("${sid}", "taskId", "taskId", "taskName", "/quality/bug/ajax/task?taskProject=" + pjId, "${bug?.taskId}");
+                            }else{
+                                pjId="";
                             }
+                            $("input[name=bugOpenedBuild]").attr("projectId",pjId);
+                            $("input[name=bugResolvedBuild]").attr("projectId",pjId);
                         })
                     </script>
                         #@Tselect2Body(
@@ -358,9 +358,9 @@
         #@colLabel()<span class="c-red">*</span>影响版本:#end
         #@formControlDiv("col-8")
                     #@Tselect2F()
-                        #@Tselect2Body("bugOpenedBuild" bug?.bugOpenedBuild {"class":"input-text select2","multiple":
-                            "multiple","datatype":"*","nullmsg":"影响版本不能为空！"}) ##,"multiple":"multiple"加上为多选项
-                        #end
+                            #Tselect2Ajax("bugOpenedBuild" bug?.bugOpenedBuild TINY_CONTEXT_PATH+adminPath+"/project/build/ajax/buildInCondition"
+                            {"id":"bugOpenedBuild","dataId":"buildId","dataText":"buildName",
+                                "placeholder":"查询版本 ","multiple":"multiple","datatype":"*","nullmsg":"影响版本不能为空！"} {"productId":"","projectId":""})
                         #@Tselect2Fix()
                             #set(m=menuManager.getMenu("pro-version-add"))
                             #if(m)
@@ -402,7 +402,6 @@
     #@elementItem()
         #@colLabel()解决日期:#end
         #@formControlDiv("col-8")
-
                     ${bug?.bugResolvedDate?formatDate(bug?.bugResolvedDate,"yyyy-MM-dd HH:mm:ss"):""}
                 #end
             #end
@@ -412,11 +411,9 @@
         #@colLabel()解决版本:#end
         #@formControlDiv("col-8")
                     #@Tselect2F()
-                        #@Tselect2Body("bugResolvedBuild" bug?.bugResolvedBuild?:0 {"class":
-                            "input-text select2"}) ##,"multiple":"multiple"加上为多选项
-
-
-                        #end
+                            #Tselect2Ajax("bugResolvedBuild" bug?.bugResolvedBuild TINY_CONTEXT_PATH+adminPath+"/project/build/ajax/buildInCondition"
+                            {"id":"bugResolvedBuild","dataId":"buildId","dataText":"buildName",
+                                "placeholder":"查询版本 ","multiple":"multiple"} {"productId":"","projectId":""})
                         #@Tselect2Fix()
                             #set(m=menuManager.getMenu("pro-version-add"))
                             #if(m)

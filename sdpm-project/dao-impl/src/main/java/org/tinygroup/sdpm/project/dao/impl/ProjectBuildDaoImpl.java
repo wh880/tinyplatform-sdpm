@@ -26,6 +26,7 @@ import org.tinygroup.sdpm.project.dao.ProjectBuildDao;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
 import org.tinygroup.tinysqldsl.*;
 import org.tinygroup.tinysqldsl.base.Condition;
+import org.tinygroup.tinysqldsl.base.FragmentSql;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 import org.tinygroup.tinysqldsl.select.Join;
@@ -38,6 +39,7 @@ import java.util.List;
 import static org.tinygroup.sdpm.product.dao.constant.ProductStoryTable.PRODUCT_STORYTABLE;
 import static org.tinygroup.sdpm.product.dao.constant.ProductTable.PRODUCTTABLE;
 import static org.tinygroup.sdpm.project.dao.constant.ProjectBuildTable.PROJECT_BUILDTABLE;
+import static org.tinygroup.sdpm.project.dao.constant.ProjectTable.PROJECTTABLE;
 import static org.tinygroup.tinysqldsl.Delete.delete;
 import static org.tinygroup.tinysqldsl.Insert.insertInto;
 import static org.tinygroup.tinysqldsl.Select.select;
@@ -326,9 +328,9 @@ public class ProjectBuildDaoImpl extends TinyDslDaoSupport implements ProjectBui
         if(projectId!=null){
             con = con==null?PROJECT_BUILDTABLE.BUILD_PROJECT.eq(projectId):and(con,PROJECT_BUILDTABLE.BUILD_PROJECT.eq(projectId));
         }
-        Select select = MysqlSelect.select(PROJECT_BUILDTABLE.BUILD_NAME, PROJECT_BUILDTABLE.BUILD_ID).from(PROJECT_BUILDTABLE).where(
+        Select select = MysqlSelect.select(FragmentSql.fragmentSelect("CONCAT (build_name,'-',project_name) as buildName"), PROJECT_BUILDTABLE.BUILD_ID).from(PROJECT_BUILDTABLE).where(
                 and(PROJECT_BUILDTABLE.BUILD_NAME.like(condition),con,PROJECT_BUILDTABLE.BUILD_DELETED.eq(0))
-        ).limit(0,limit);
+        ).join(Join.leftJoin(PROJECTTABLE,PROJECT_BUILDTABLE.BUILD_PROJECT.eq(PROJECTTABLE.PROJECT_ID))).orderBy(OrderByElement.desc(PROJECT_BUILDTABLE.BUILD_DATE)).limit(0,limit);
         return getDslSession().fetchList(select,ProjectBuild.class);
     }
 

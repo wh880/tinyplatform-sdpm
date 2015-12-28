@@ -93,6 +93,8 @@ public class ConditionUtils {
         NEQ("not_eq"),
         IN("in"),
         NOT_IN("not_in"),
+        LIKE("like"),
+        NOT_LIKE("not_like"),
         NO_OPERATE("");
         private String operate;
 
