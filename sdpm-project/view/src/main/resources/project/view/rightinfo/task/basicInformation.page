@@ -30,7 +30,7 @@
                 #end
                 #@tr()
                     #@thW("100")任务状态#end
-                    #@td()${getDict("taskStatus", task?.taskStatus)}#end
+                    #@td()<span class="${getDict('colorOfTaskStatus',task?.taskStatus)}">${getDict("taskStatus", task?.taskStatus)}</span>#end
                 #end
                 #@tr()
                     #@thW("100")优先级#end

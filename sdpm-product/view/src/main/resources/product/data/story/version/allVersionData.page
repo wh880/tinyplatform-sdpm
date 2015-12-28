@@ -1,22 +1,32 @@
 #setTinyItemCount(versions?.totalCount)
+#if(!from)
 <tr class="">
     #@td()${story?.no}#end
     #@td()${story?.storyTitle}#end
     #@td()${story?.storyVersion}#end
     #@td()目前版本#end
 </tr>
+#else
+<tr class="">
+    #@td()${story?.no}#end
+    #@td()${story?.storyTitle}#end
+    #@td()${story?.storyVersion}【当前版本】#end
+</tr>
+#end
 #foreach(version : versions?.records)
 <tr class="g-row">
     #@td()<span class="icon-chevron-right">${story?.no}</span>#end
     #@td()${version?.storyTitle}#end
     #@td()${version?.storyVersion}#end
-    #@td()
-        #if(story?.storyVersion==version?.storyVersion)
-            回滚到此版本
-        #else
-            <a href="${TINY_CONTEXT_PATH+adminPath}/product/storySpec/versionRollback?storyId=${version?.storyId}&storyVersion=${version?.storyVersion}">回滚到此版本</a>
+    #if(!from)
+        #@td()
+            #if(story?.storyVersion==version?.storyVersion)
+                回滚到此版本
+            #else
+                <a href="${TINY_CONTEXT_PATH+adminPath}/product/storySpec/versionRollback?storyId=${version?.storyId}&storyVersion=${version?.storyVersion}">回滚到此版本</a>
+            #end
         #end
-        #end
+    #end
 </tr>
 <tr class="hide" ><td colspan="20">
     <div class="infoContentRap hide">

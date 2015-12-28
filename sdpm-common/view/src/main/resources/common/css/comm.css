@@ -1,4 +1,8 @@
 /**整体框架个性化设置start**/
+.font-size-13{font-size:13px !important;}
+.font-size-12{font-size:12px !important;}
+.font-size-14{font-size:14px !important;}
+.font-size-15{font-size:15px !important;}
 #bodyrap{min-width:970px;overflow-x:auto}
 #bodyrap #content-wrapper {
     padding:98px 7px 2px;

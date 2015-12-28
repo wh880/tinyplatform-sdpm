@@ -18,6 +18,7 @@ import org.tinygroup.sdpm.dto.project.EffortList;
 import org.tinygroup.sdpm.dto.project.Tasks;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.UserService;
+import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.service.StoryService;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
@@ -165,7 +166,7 @@ public class ProjectTaskAction extends BaseController {
         task.setTaskMailto(taskMailTo);
         task.setTaskLeft(task.getTaskEstimate());
         task = taskService.addTask(task);
-
+        storyJudge(task.getTaskStory());
         LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, LogUtil.LogAction.OPENED,
                 task.getTaskId().toString(), userUtils.getUserId(),
                 null, task.getTaskProject().toString(), null, null, comment);
@@ -198,7 +199,6 @@ public class ProjectTaskAction extends BaseController {
         ProjectTask task = taskService.findTaskById(taskId);
         model.addAttribute("task", task);
 
-
         SystemProfile systemProfile = new SystemProfile();
         systemProfile.setFileObjectId(taskId);
         systemProfile.setFileObjectType(ProfileType.TASK.getType());
@@ -222,6 +222,7 @@ public class ProjectTaskAction extends BaseController {
                            UploadProfile uploadProfile) throws IOException {
         ProjectTask oldTask = taskService.findTaskById(task.getTaskId());
         taskService.updateEditTask(task);
+        storyJudge(task.getTaskStory());
         processProfile(uploadProfile, task.getTaskId(), ProfileType.TASK);
 
         LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, LogUtil.LogAction.EDITED, oldTask.getTaskId().toString(),
@@ -241,6 +242,7 @@ public class ProjectTaskAction extends BaseController {
     public Map delete(ProjectTask task) {
         task = taskService.findTaskById(task.getTaskId());
         taskService.deleteTask(task.getTaskId());
+        storyJudge(task.getTaskId());
         LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, LogUtil.LogAction.DELETED, task.getTaskId().toString(),
                 userUtils.getUserId(), null, task.getTaskProject().toString(), null, null, null);
         return resultMap(true, "删除成功");
@@ -387,6 +389,7 @@ public class ProjectTaskAction extends BaseController {
             effortService.saveSystemEffort(systemEffort);
         }
         taskService.updateFinishTask(task);
+        storyJudge(task.getTaskStory());
         processProfile(uploadProfile, task.getTaskId(), ProfileType.TASK);
 
         if (oldTask.getTaskStory() != null) {
@@ -432,6 +435,7 @@ public class ProjectTaskAction extends BaseController {
         task.setTaskCloseDate(new Date());
         task.setTaskClosedBy(userUtils.getUserId());
         taskService.updateCloseTask(task);
+        storyJudge(task.getTaskId());
         LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, LogUtil.LogAction.CLOSED, task.getTaskId().toString(),
                 userUtils.getUserId(), null, taskService.findTaskById(task.getTaskId()).getTaskProject().toString(),
                 null, null, comment);
@@ -621,6 +625,9 @@ public class ProjectTaskAction extends BaseController {
         } else {
             Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, projectOperate.COOKIE_PROJECT_ID));
             taskService.batchAddTask(taskList, projectId);
+            for(ProjectTask task : taskList){
+                storyJudge(task.getTaskStory());
+            }
             return "project/index/task/index.page";
         }
     }
@@ -796,4 +803,30 @@ public class ProjectTaskAction extends BaseController {
         return moduleList;
     }
 
+    private void storyJudge(Integer storyId){
+        if(storyId!=null){
+            ProductStory story = storyService.findStory(storyId);
+            ProjectTask projectTask = new ProjectTask();
+            projectTask.setTaskStory(storyId);
+            projectTask.setTaskDeleted(FieldUtil.DELETE_NO_S);
+            List<ProjectTask> taskList = taskService.findListTask(projectTask);
+            boolean isDone = true;
+            for(ProjectTask task1 : taskList){
+                if(!ProjectTask.CLOSE.equals(task1.getTaskStatus())&&!ProjectTask.DONE.equals(task1.getTaskStatus())){
+                    isDone = false;
+                }
+            }
+            if(isDone) {
+                if (!ProductStory.STAGE_IS_DONE.equals(story.getStoryStage())) {
+                    story.setStoryStage(ProductStory.STAGE_IS_DONE);
+                    storyService.updateStory(story);
+                }
+            }else{
+                if (!ProductStory.STAGE_IS_DOING.equals(story.getStoryStage())) {
+                    story.setStoryStage(ProductStory.STAGE_IS_DOING);
+                    storyService.updateStory(story);
+                }
+            }
+        }
+    }
 }

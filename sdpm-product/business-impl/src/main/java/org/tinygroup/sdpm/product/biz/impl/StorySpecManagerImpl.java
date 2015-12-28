@@ -37,8 +37,10 @@ public class StorySpecManagerImpl implements StorySpecManager {
     }
 
     public Pager<ProductStorySpec> findPager(int page, int limit, ProductStorySpec storySpec, String order, String ordertype) {
-
-        return productStorySpecDao.queryPager((page - 1) * limit, limit, storySpec, (order == null || "".equals(order)) ? null : new OrderBy(NameUtil.resolveNameDesc(order), !("desc".equals(ordertype)) ? true : false));
+        if(StringUtil.isBlank(order)){
+            return productStorySpecDao.queryPager((page - 1) * limit, limit, storySpec);
+        }
+        return productStorySpecDao.queryPager((page - 1) * limit, limit, storySpec, new OrderBy(NameUtil.resolveNameDesc(order),"asc".equals(ordertype)));
     }
 
     public List<ProductStorySpec> findList(ProductStorySpec storySpec) {

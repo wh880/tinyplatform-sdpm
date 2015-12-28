@@ -63,6 +63,13 @@ public class ProjectStoryAction extends BaseController {
         if (projectId == null) {
             return resultMap(false, "删除失败");
         }        //根据id进行软删
+        ProductStory story = storyService.findStory(id);
+        if(story.getPlanId()!=null){
+            story.setStoryStage(ProductStory.STAGE_IS_PLANED);
+        }else{
+            story.setStoryStage(ProductStory.STAGE_NOT_BEGIN);
+        }
+        storyService.updateStory(story);
         Integer result = projectStoryService.deleteProjectStory(projectId, id);
         if (result > 0) {
             return resultMap(true, "删除成功");
@@ -105,7 +112,7 @@ public class ProjectStoryAction extends BaseController {
             projectStory.setProjectId(projectId);
             projectStory.setStoryId(Integer.parseInt(id[i]));
             ProductStory productStory = storyService.findStory(Integer.parseInt(id[i]));
-            productStory.setStoryStage("3");
+            productStory.setStoryStage(ProductStory.STAGE_IS_PROJECTED);
             storyService.updateStory(productStory);
             projectStory.setProductId(productStory.getProductId());
             projectStory.setStoryVersion(productStory.getStoryVersion());
@@ -145,6 +152,15 @@ public class ProjectStoryAction extends BaseController {
             Integer projectId = projectOperate.getCurrentProjectId(request, response);
             if (projectId == null) {
                 return resultMap(false, "未选择项目");
+            }
+            for(Integer id : itemId){
+                ProductStory story = storyService.findStory(id);
+                if(story.getPlanId()!=null){
+                    story.setStoryStage(ProductStory.STAGE_IS_PLANED);
+                }else{
+                    story.setStoryStage(ProductStory.STAGE_NOT_BEGIN);
+                }
+                storyService.updateStory(story);
             }
             Integer count = projectStoryService.batchDelStory(projectId, itemId);
             if (count > 0) {

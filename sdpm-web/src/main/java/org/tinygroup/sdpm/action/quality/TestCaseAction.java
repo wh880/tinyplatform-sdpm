@@ -131,7 +131,6 @@ public class TestCaseAction extends BaseController {
             testcase.setCaseVersion(1);
             testcase = testCaseService.addTestCase(testcase);
             insertStep(step, expect, testcase);
-
             LogUtil.logWithComment(LogUtil.LogOperateObject.CASE,
                     LogUtil.LogAction.OPENED,
                     String.valueOf(testcase.getCaseId()),
@@ -166,6 +165,7 @@ public class TestCaseAction extends BaseController {
                     comment
             );
         }
+        storyJudge(testcase.getStoryId());
         processProfile(uploadProfile, testcase.getCaseId(), ProfileType.TESTCASE);
         if(!StringUtil.isBlank(currentAddress)){
             return "redirect:" + currentAddress;
@@ -180,6 +180,9 @@ public class TestCaseAction extends BaseController {
     @RequestMapping(value = "/batchSave", method = RequestMethod.POST)
     public String batchSave(List<QualityTestCase> testcases, Model model) {
         testCaseService.batchUpdateTestCase(testcases);
+        for(QualityTestCase testCase : testcases){
+            storyJudge(testCase.getStoryId());
+        }
         model.addAttribute("testcases", testcases);
         return "redirect:" + "/a/quality/testCase";
     }
@@ -268,6 +271,7 @@ public class TestCaseAction extends BaseController {
         testCase.setCaseLastRunner(userUtils.getUserId());
         testCaseService.updateTestCase(testCase);
         testResultService.addTestResult(qualityTestResult);
+        storyJudge(old.getStoryId());
         LogUtil.logWithComment(LogUtil.LogOperateObject.CASE,
                 LogUtil.LogAction.RUN,
                 String.valueOf(old.getCaseId()),
@@ -411,6 +415,7 @@ public class TestCaseAction extends BaseController {
     @RequestMapping("/delete")
     public Map delete(Integer id) {
         testCaseService.deleteById(id);
+        storyJudge(testCaseService.testCase(id).getStoryId());
         Map<String, String> map = new HashMap<String, String>();
         map.put("status", "success");
         map.put("info", "删除成功");
@@ -426,6 +431,7 @@ public class TestCaseAction extends BaseController {
             testCase.setCaseId(Integer.parseInt(id));
             testCase.setDeleted(1);
             testCaseService.updateTestCase(testCase);
+            storyJudge(testCase.getStoryId());
         }
         return resultMap(true, "删除成功");
     }
@@ -696,5 +702,32 @@ public class TestCaseAction extends BaseController {
         testCase.setCaseVersion(caseVersion);
         testCaseService.updateTestCase(testCase);
         return "redirect:/a/quality/testCase/case/viewInfo?id=" + caseId;
+    }
+
+    private void storyJudge(Integer storyId){
+        if(storyId!=null){
+            ProductStory story = storyService.findStory(storyId);
+            QualityTestCase testCase = new QualityTestCase();
+            testCase.setStoryId(storyId);
+            testCase.setDeleted(0);
+            List<QualityTestCase> testCaseList = testCaseService.findTestCaseList(testCase);
+            boolean isDone = true;
+            for(QualityTestCase testCase1 : testCaseList){
+                if(!QualityTestCase.RESULT_PASS.equals(testCase1.getCaseLastRunResult())){
+                    isDone = false;
+                }
+            }
+            if(isDone) {
+                if (!ProductStory.STAGE_IS_TESTED.equals(story.getStoryStage())) {
+                    story.setStoryStage(ProductStory.STAGE_IS_TESTED);
+                    storyService.updateStory(story);
+                }
+            }else{
+                if (!ProductStory.STAGE_IS_TESTING.equals(story.getStoryStage())) {
+                    story.setStoryStage(ProductStory.STAGE_IS_TESTING);
+                    storyService.updateStory(story);
+                }
+            }
+        }
     }
 }

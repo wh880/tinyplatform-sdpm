@@ -97,7 +97,9 @@ public class StorySpecAction extends BaseController {
     }
 
     @RequestMapping("storyVersionData")
-    public String storyHistoryVersion(Integer storyId, Model model, Integer start, Integer limit, @RequestParam(defaultValue = "storyVersion") String order, @RequestParam(defaultValue = "desc") String ordertype) {
+    public String storyHistoryVersion(Integer storyId, Model model, Integer start, Integer limit,
+                                      @RequestParam(defaultValue = "storyVersion") String order,
+                                      @RequestParam(defaultValue = "desc") String ordertype) {
         ProductStory story = storyService.findStory(storyId);
         ProductStorySpec spec = new ProductStorySpec();
         spec.setStoryId(storyId);
@@ -113,6 +115,7 @@ public class StorySpecAction extends BaseController {
         ProductStory story = storyService.findStory(storyId);
         story.setStoryTitle(spec.getStoryTitle());
         story.setStoryVersion(storyVersion);
+        story.setStoryStatus("0");
         storyService.updateStory(story);
         return "redirect:/a/product/storySpec/find/productDemandDetail?storyId=" + storyId;
     }

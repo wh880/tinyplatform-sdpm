@@ -38,7 +38,7 @@
 	    		#end
 	    		#@tr()
 	    			#@th()用例状态#end
-	    			#@td()${getDict("caseStatus",testCase?.caseStatus)}#end
+	    			#@td()<span class="${getDict('colorOfCaseStatus',testCase?.caseStatus)}">${getDict("caseStatus",testCase?.caseStatus)}</span>#end
 	    		#end
 	    		#@tr()
 	    			#@th()执行时间#end
@@ -46,7 +46,7 @@
 	    		#end
 	    		#@tr()
 	    			#@th()结果#end
-	    			#@td()${getDict("caseResult",testCase?.caseLastRunResult)}#end
+	    			#@td()<span class="${getDict('colorOfCaseResult',testCase?.caseLastRunResult)}">${getDict("caseResult",testCase?.caseLastRunResult)}</span>#end
 	    		#end
 	    		#@tr()
 	    			#@th()关键词#end

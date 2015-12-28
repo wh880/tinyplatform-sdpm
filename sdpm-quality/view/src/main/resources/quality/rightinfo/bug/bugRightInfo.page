@@ -39,7 +39,7 @@
 			       			#end
 			       			#@tr()
 								#@td()Bug状态#end
-			       				#@td()${getDict("bugStatus",qualityBug?.bugStatus)}#end
+			       				#@td()<span class="${getDict('colorOfBugStatus',qualityBug?.bugStatus)}">${getDict("bugStatus",qualityBug?.bugStatus)}</span>#end
 			       			#end
 			       			#@tr()
 								#@td()激活次数#end

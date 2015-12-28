@@ -1,5 +1,7 @@
 package org.tinygroup.sdpm.productLine.service;
 
+import org.tinygroup.aopcache.annotation.CacheGet;
+import org.tinygroup.aopcache.annotation.CacheRemove;
 import org.tinygroup.sdpm.dao.condition.ConditionCarrier;
 import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.tinysqldsl.Pager;
@@ -8,12 +10,14 @@ import java.util.List;
 
 public interface ProductLineService {
 
+    String CACHE_USER_PRODUCT_LINE = "userProductLine";
     /**
      * 添加产品线
      *
      * @param productLine
      * @return
      */
+    @CacheRemove(removeGroups = {CACHE_USER_PRODUCT_LINE})
     ProductLine addProductLine(ProductLine productLine);
 
     /**
@@ -30,6 +34,7 @@ public interface ProductLineService {
      * @param productLine
      * @return
      */
+    @CacheRemove(removeGroups = {CACHE_USER_PRODUCT_LINE})
     int updateProductLine(ProductLine productLine);
 
     /**
@@ -38,6 +43,7 @@ public interface ProductLineService {
      * @param productLineId
      * @return
      */
+    @CacheRemove(removeGroups = {CACHE_USER_PRODUCT_LINE})
     int deleteProductLine(Integer productLineId);
 
     /**
@@ -73,6 +79,7 @@ public interface ProductLineService {
      * @param userId
      * @return
      */
+    @CacheGet(key = "${userId}-List", group = CACHE_USER_PRODUCT_LINE)
     List<ProductLine> getUserProductLine(String userId);
 
     /**
@@ -80,6 +87,7 @@ public interface ProductLineService {
      * @param userId
      * @return
      */
+    @CacheGet(key = "${userId}-Ids", group = CACHE_USER_PRODUCT_LINE)
     Integer[] getUserProductLineIds(String userId);
 
     /**

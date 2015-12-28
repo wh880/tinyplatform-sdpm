@@ -1,3 +1,4 @@
+
 #@layout(project)
     #@div(divClass="operationbar")
         <span class="r">
@@ -13,7 +14,8 @@
             #buttonIcon(iconClass="icon-reply")
         </a>
         </span>
-    #div(divClass="clearfix")#end
+        #div(divClass="clearfix")
+    #end
 #end
 #@tabWithInit("tab_demo" "optionsBox")
 <div style="width:70%;float:left">
