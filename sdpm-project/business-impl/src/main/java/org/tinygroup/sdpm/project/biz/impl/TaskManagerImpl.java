@@ -25,6 +25,10 @@ public class TaskManagerImpl implements TaskManager {
     @Autowired
     private ProjectTaskDao taskDao;
 
+    public ProjectTask getProjectTaskTimeInfo(Integer projectId) {
+        return taskDao.getProjectTaskTimeInfo(projectId);
+    }
+
     public Integer getMaxNo(Integer projectId) {
         return taskDao.getMaxNo(projectId);
     }

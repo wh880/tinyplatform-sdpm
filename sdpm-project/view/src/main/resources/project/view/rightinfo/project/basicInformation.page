@@ -78,16 +78,16 @@
         <table>
             <tr>
                 <td rowspan="4">工时统计</td>
-                <td>总共预计${project?.projectDays}工时</td>
+                <td>总共预计${taskEstimate}工时</td>
             </tr>
             <tr>
-                <td>可用工时${project?.projectDays}工时</td>
+                <td>可用工时${projectTeamTimeInfo}工时</td>
             </tr>
             <tr>
-                <td>已经消耗${project?.projectDays}工时</td>
+                <td>已经消耗${taskConsumed}工时</td>
             </tr>
             <tr>
-                <td>预计剩余${project?.projectDays}工时</td>
+                <td>预计剩余${taskLeft}工时</td>
             </tr>
         </table>
     #end

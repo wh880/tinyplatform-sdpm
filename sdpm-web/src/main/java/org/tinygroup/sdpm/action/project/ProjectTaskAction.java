@@ -625,7 +625,7 @@ public class ProjectTaskAction extends BaseController {
         } else {
             Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, projectOperate.COOKIE_PROJECT_ID));
             taskService.batchAddTask(taskList, projectId);
-            for(ProjectTask task : taskList){
+            for (ProjectTask task : taskList) {
                 storyJudge(task.getTaskStory());
             }
             return "project/index/task/index.page";
@@ -803,25 +803,28 @@ public class ProjectTaskAction extends BaseController {
         return moduleList;
     }
 
-    private void storyJudge(Integer storyId){
-        if(storyId!=null){
+    private void storyJudge(Integer storyId) {
+        if (storyId != null) {
             ProductStory story = storyService.findStory(storyId);
+            if (story == null) {
+                return;
+            }
             ProjectTask projectTask = new ProjectTask();
             projectTask.setTaskStory(storyId);
             projectTask.setTaskDeleted(FieldUtil.DELETE_NO_S);
             List<ProjectTask> taskList = taskService.findListTask(projectTask);
             boolean isDone = true;
-            for(ProjectTask task1 : taskList){
-                if(!ProjectTask.CLOSE.equals(task1.getTaskStatus())&&!ProjectTask.DONE.equals(task1.getTaskStatus())){
+            for (ProjectTask task1 : taskList) {
+                if (!ProjectTask.CLOSE.equals(task1.getTaskStatus()) && !ProjectTask.DONE.equals(task1.getTaskStatus())) {
                     isDone = false;
                 }
             }
-            if(isDone) {
+            if (isDone) {
                 if (!ProductStory.STAGE_IS_DONE.equals(story.getStoryStage())) {
                     story.setStoryStage(ProductStory.STAGE_IS_DONE);
                     storyService.updateStory(story);
                 }
-            }else{
+            } else {
                 if (!ProductStory.STAGE_IS_DOING.equals(story.getStoryStage())) {
                     story.setStoryStage(ProductStory.STAGE_IS_DOING);
                     storyService.updateStory(story);

@@ -15,6 +15,12 @@ import java.util.Map;
 public interface TaskService {
 
     /**
+     * 统计项目相关的任务工时信息
+     * @param projectId
+     * @return
+     */
+    ProjectTask getProjectTaskTimeInfo(Integer projectId);
+    /**
      * 激活项目
      *
      * @return

@@ -21,6 +21,10 @@ public class TaskServiceImpl implements TaskService {
     @Autowired
     private TaskManager taskManager;
 
+    public ProjectTask getProjectTaskTimeInfo(Integer projectId) {
+        return taskManager.getProjectTaskTimeInfo(projectId);
+    }
+
     public Integer updateDoingTask(ProjectTask task) {
         task.setTaskStatus(ProjectTask.DOING);
         task.setTaskLastEditedDate(new Date());

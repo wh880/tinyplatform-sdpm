@@ -61,7 +61,7 @@
   </standard-field>
   <standard-field id="2edcaf63d42a4618bb2cac69ebdaca7c" name="task_no" title="编号" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" default="0"/>
   <standard-field id="03ee1372ef3b480681b5aaa5032f35d7" name="task_project" title="任务所属项目" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" default="0"/>
-  <standard-field id="dfa99c9c348b4bb6a4aef3b27bfa7bbf" name="task_story" title="任务相关需求" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" default="0"/>
+  <standard-field id="dfa99c9c348b4bb6a4aef3b27bfa7bbf" name="task_story" title="任务相关需求" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" default=""/>
   <standard-field id="7c34fb19edc74d36a42ad2add274e79b" name="task_module" title="模块id" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" default="">
     <description></description>
   </standard-field>

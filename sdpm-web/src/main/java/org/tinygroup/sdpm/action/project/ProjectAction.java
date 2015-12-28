@@ -19,10 +19,9 @@ import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
+import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
 import org.tinygroup.sdpm.project.service.dto.BurnDTO;
-import org.tinygroup.sdpm.project.service.inter.BurnService;
-import org.tinygroup.sdpm.project.service.inter.ProjectProductService;
-import org.tinygroup.sdpm.project.service.inter.ProjectService;
+import org.tinygroup.sdpm.project.service.inter.*;
 import org.tinygroup.sdpm.system.dao.pojo.SystemConfig;
 import org.tinygroup.sdpm.util.CookieUtils;
 import org.tinygroup.sdpm.util.LogUtil;
@@ -54,6 +53,11 @@ public class ProjectAction extends BaseController implements WebContextAware {
     private UserService userService;
     @Autowired
     private RoleService roleService;
+    @Autowired
+    private TeamService teamService;
+    @Autowired
+    private TaskService taskService;
+
 
     @ModelAttribute
     public void init(Model model) {
@@ -333,6 +337,17 @@ public class ProjectAction extends BaseController implements WebContextAware {
         List<Product> productList = productService.findProductListByIds(productIds.toArray(new Integer[0]));
         model.addAttribute("project", project);
         model.addAttribute("productList", productList);
+
+        ProjectTask projectTaskTimeInfo = taskService.getProjectTaskTimeInfo(projectID);
+        Float taskLeft = projectTaskTimeInfo.getTaskLeft();
+        Float taskConsumed = projectTaskTimeInfo.getTaskConsumed();
+        Float taskEstimate = projectTaskTimeInfo.getTaskEstimate();
+        model.addAttribute("taskLeft",taskLeft);
+        model.addAttribute("taskConsumed",taskConsumed);
+        model.addAttribute("taskEstimate",taskEstimate);
+
+        Integer projectTeamTimeInfo = teamService.getProjectTeamTimeInfo(projectID);
+        model.addAttribute("projectTeamTimeInfo",projectTeamTimeInfo);
         return "project/view/rightinfo/project/basicInformation.pagelet";
     }
 

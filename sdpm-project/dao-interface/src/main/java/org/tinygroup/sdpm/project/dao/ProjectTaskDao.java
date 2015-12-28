@@ -28,6 +28,13 @@ import java.util.List;
 public interface ProjectTaskDao extends BaseDao<ProjectTask, Integer> {
 
     /**
+     * 统计项目相关的任务工时信息
+     * @param projectId
+     * @return
+     */
+    ProjectTask getProjectTaskTimeInfo(Integer projectId);
+
+    /**
      * 获取项目最大编号
      *
      * @param projectId

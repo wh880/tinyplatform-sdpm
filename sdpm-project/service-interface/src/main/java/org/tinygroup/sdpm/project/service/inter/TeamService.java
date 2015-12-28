@@ -17,6 +17,13 @@ public interface TeamService {
     String CACHE_PROJECT_TEAM_USER_LIST = "projectTeamUserList";
     String CACHE_PRODUCT_TEAM_USER_LIST = "productTeamUserList";
 
+    /**
+     * 统计团队总共可用工时信息
+     * @param projectId
+     * @return
+     */
+    Integer getProjectTeamTimeInfo(Integer projectId);
+
     List<ProjectTeam> findTeamList(ProjectTeam team);
 
     /**

@@ -17,6 +17,21 @@ public class TeamServiceImpl implements TeamService {
     @Autowired
     private TeamManager teamManager;
 
+    public Integer getProjectTeamTimeInfo(Integer projectId) {
+        int total = 0;
+        List<ProjectTeam> list = findTeamByProjectId(projectId);
+        if (list != null) {
+            for (ProjectTeam projectTeam : list) {
+                Float teamDays = projectTeam.getTeamDays();
+                Float teamHours = projectTeam.getTeamHours();
+                if (teamDays != null && teamHours != null) {
+                    total += teamDays * teamHours;
+                }
+            }
+        }
+        return total;
+    }
+
     public List<ProjectTeam> findTeamList(ProjectTeam team) {
         return teamManager.find(team);
     }
