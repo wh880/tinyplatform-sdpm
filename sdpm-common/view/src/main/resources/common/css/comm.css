@@ -528,6 +528,10 @@ table.table.filelist-table{border:#ddd 1px solid;}
 .navtitle{white-space: nowrap}
 .can-edit .ztree li a{padding-right:60px}
 .can-edit .ztree li a:hover{padding-right:0;}
+.tinytable i[class^="icon-"], .tinytable i[class*=" icon-"]{font-size:16px;margin-right:8px}
 /*批量添加*/
 .modal-body .input-group .form-control, .modal-body .input-group-btn{height:36px;padding:0 8px;font-size:13px;}
 .operation-body{margin:7px 2px;}
+/*底部链接*/
+.tinyfooterrap a.right,.tinyfooterrap a.right:link,.tinyfooterrap a.right:visited{color:#fff; font-weight:normal}
+.tinyfooterrap a.right:hover{ color:#ddd}

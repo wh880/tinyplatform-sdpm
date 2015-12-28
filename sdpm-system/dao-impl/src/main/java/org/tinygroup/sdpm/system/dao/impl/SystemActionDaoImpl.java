@@ -325,11 +325,8 @@ public class SystemActionDaoImpl extends TinyDslDaoSupport implements SystemActi
                                 SYSTEM_ACTIONTABLE.ACTION_PROJECT.eq(t.getActionProject()),
                                 SYSTEM_ACTIONTABLE.ACTION_PRODUCT.eq(t.getActionProduct()),
                                 SYSTEM_ACTIONTABLE.ACTION_ACTOR.eq(t.getActionActor()),
-
                                 startDate != null || endDate != null ? SYSTEM_ACTIONTABLE.ACTION_DATE.between(startDate, endDate) :
-
                                         SYSTEM_ACTIONTABLE.ACTION_DATE.eq(t.getActionDate()),
-
                                 SYSTEM_ACTIONTABLE.ACTION_COMMENT.eq(t.getActionComment()),
                                 SYSTEM_ACTIONTABLE.ACTION_EXTRA.eq(t.getActionExtra()),
                                 SYSTEM_ACTIONTABLE.ACTION_READ.eq(t.getActionRead()),

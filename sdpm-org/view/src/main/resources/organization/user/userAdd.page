@@ -9,9 +9,9 @@
         margin-top: -10px;
     }
 </style>
+
 #set(name="organizationUser")
 #@layout(org)#end
-
 #@noRespsGridSystem()
     #@gridSysRow()
         #@gridSysCol(3)#end
@@ -137,7 +137,7 @@
                             #@colLabel("col-3")角色：#end
                             #@formControlDiv("col-5")
                                 #@Tselect2F()
-                                    #Tselect2Ajax("roleIds" orgRoleIdList TINY_CONTEXT_PATH+adminPath+"/org/privilege/ajax/roleInCondition"
+                                    #Tselect2Ajax("roleIds" orgRoleIdList TINY_CONTEXT_PATH+adminPath+"/org/privilege/ajax/roleInCondition?type=0"
                                     {"id":"roleIds","dataId":"orgRoleId","dataText":"orgRoleName",
                                         "placeholder":"查询角色","multiple":"multiple"})
                                 ##填写任意内容，侦听需重新填加 A侦听已内置
@@ -159,7 +159,7 @@
                         #@elementItem()
                             #@colLabel("col-3")职位：#end
                             #@formControlDiv("col-5")
-                                #tinyInput("text" "orgUserRole" user?.orgUserRole{"class":"input-text","datatype":"*1-20"})
+                                #tinyInput("text" "orgUserRole" user?.orgUserRole{"class":"input-text","datatype":"*1-20","ignore":"ignore"})
                             #end
                             #@validateDiv("col-4")#end
                         #end

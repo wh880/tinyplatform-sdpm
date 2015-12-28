@@ -132,11 +132,14 @@ public class UserUtils {
      * @return
      */
     public boolean hasMenu(String menuId) {
-        Subject subject = SecurityUtils.getSubject();
-        if (subject != null && !StringUtil.isBlank(menuId)) {
-            return subject.isPermitted(menuId);
+        if (StringUtil.isBlank(menuId)){
+            return false;
         }
-        if (permissionInterceptor.hasMenu(menuId)) {
+        Subject subject = SecurityUtils.getSubject();
+        if (subject != null && subject.isPermitted(menuId)) {
+            return true;
+        }
+        if (permissionInterceptor.hasMenuInProjectOrProduct(menuId)) {
             return true;
         }
         return false;

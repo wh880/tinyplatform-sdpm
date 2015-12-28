@@ -58,11 +58,16 @@ public class ProjectStoryDaoImpl extends TinyDslDaoSupport implements ProjectSto
                         PROJECT_STORYTABLE.STORY_ID.eq(PRODUCT_STORYTABLE.STORY_ID),
                         PROJECT_STORYTABLE.STORY_VERSION.eq(PRODUCT_STORYTABLE.STORY_VERSION),
                         PROJECT_STORYTABLE.PROJECT_ID.eq(projectId)
-        )));
+                )));
         Condition existsCondition = new Condition(new ExistsExpression(subSelect, true));
         Select select = MysqlSelect.select(PRODUCT_STORYTABLE.ALL, PRODUCT_PLANTABLE.PLAN_NAME, PRODUCTTABLE.PRODUCT_NAME)
                 .from(PROJECT_PRODUCTTABLE)
-                .join(Join.newJoin(PRODUCT_STORYTABLE, PRODUCT_STORYTABLE.PRODUCT_ID.eq(PROJECT_PRODUCTTABLE.PRODUCT_ID)))
+                .join(Join.newJoin(PRODUCT_STORYTABLE,
+                        and(
+                                PRODUCT_STORYTABLE.PRODUCT_ID.eq(PROJECT_PRODUCTTABLE.PRODUCT_ID),
+                                PRODUCT_STORYTABLE.STORY_STATUS.in("1", "3")
+                        )
+                ))
                 .join(Join.leftJoin(PRODUCTTABLE, PRODUCTTABLE.PRODUCT_ID.eq(PRODUCT_STORYTABLE.PRODUCT_ID)))
                 .join(Join.leftJoin(PRODUCT_PLANTABLE, PRODUCT_PLANTABLE.PLAN_ID.eq(PRODUCT_STORYTABLE.PLAN_ID)))
                 .where(
@@ -75,9 +80,10 @@ public class ProjectStoryDaoImpl extends TinyDslDaoSupport implements ProjectSto
     }
 
     public Integer batchDel(Integer projectId, Integer[] storyIds) {
-        Delete delete = delete(PROJECT_STORYTABLE).where(and(
-                PROJECT_STORYTABLE.PRODUCT_ID.eq(projectId),
-                PROJECT_STORYTABLE.STORY_ID.in(storyIds)
+        Delete delete = delete(PROJECT_STORYTABLE).where(
+                and(
+                        PROJECT_STORYTABLE.PROJECT_ID.eq(projectId),
+                        PROJECT_STORYTABLE.STORY_ID.in(storyIds)
                 )
         );
         return getDslSession().execute(delete);

@@ -54,10 +54,8 @@
                         #@hasMenu("org-user-profileAdmin")
                             <li><a href="${TINY_CONTEXT_PATH+adminPath}/org/user/show/profile?id=${userUtils.getUserId()}"><i class="dropdown-icon fa icon-user"></i>&nbsp;&nbsp;个人档案</li>
                         #end
-                        #@hasMenu("org-user-password")
                             <li><a href="${TINY_CONTEXT_PATH+adminPath}/org/user/passwordForm"><i class="dropdown-icon fa icon-key"></i>&nbsp;&nbsp;修改密码</li>
                             <li class="divider"></li>
-                        #end
                         <li><a href="${TINY_CONTEXT_PATH}/logout"><i class="dropdown-icon fa fa-power-off"></i>&nbsp;&nbsp;退出</a>
                         </li>
                     </ul>
@@ -78,9 +76,7 @@
             #end
             <div id="tinyfooter">
                 <div class="tinyfooterrap">
-                <span class="right">
-                        <a href="http://www.beianbeian.com/search/tinygroup.org" target="_blank">浙ICP备14043110号-1</a>
-                </span>
+				<a href="http://www.beianbeian.com/search/tinygroup.org" target="_blank" class="right">浙ICP备14043110号-1</a>
                     TinyGroup &copy; 2013-${formatDate(now(),"yyyy")}
                     如有问题欢迎咨询，点击链接加入
                     <a href="http://shang.qq.com/wpa/qunwpa?idkey=5e6ef409eec4046b4aa0273c0359920bd875b87f834bee175917f96e8b216489" target="_blank" title="Tiny群">

@@ -26,9 +26,6 @@ public class ProjectProductServiceImpl implements ProjectProductService {
     }
 
     public void addProductLinkToProject(Integer[] productIds, Integer projectId) {
-        if (ArrayUtil.isEmptyArray(productIds)){
-            return;
-        }
         projectProductManager.addProductLinkToProject(productIds, projectId);
 
     }

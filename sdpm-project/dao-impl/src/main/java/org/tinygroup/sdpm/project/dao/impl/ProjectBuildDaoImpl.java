@@ -85,8 +85,9 @@ public class ProjectBuildDaoImpl extends TinyDslDaoSupport implements ProjectBui
                 PROJECT_BUILDTABLE.BUILD_BUGS.value(projectBuild.getBuildBugs()),
                 PROJECT_BUILDTABLE.BUILD_BUILDER.value(projectBuild.getBuildBuilder()),
                 PROJECT_BUILDTABLE.BUILD_DESC.value(projectBuild.getBuildDesc()),
-                PROJECT_BUILDTABLE.BUILD_DELETED.value(projectBuild.getBuildDeleted())).where(PROJECT_BUILDTABLE.BUILD_ID.eq(projectBuild.getBuildId()));
-        return getDslSession().execute(update);
+                PROJECT_BUILDTABLE.BUILD_DELETED.value(projectBuild.getBuildDeleted()))
+                .where(PROJECT_BUILDTABLE.BUILD_ID.eq(projectBuild.getBuildId()));
+        return getDslSession().execute(update, true);
     }
 
     public Integer deleteBuildByProductId(Integer productId) {
@@ -317,16 +318,16 @@ public class ProjectBuildDaoImpl extends TinyDslDaoSupport implements ProjectBui
 
     public List<ProjectBuild> getBuildByProducts(Integer... ids) {
         Select select = selectFrom(PROJECT_BUILDTABLE).where(and(PROJECT_BUILDTABLE.BUILD_DELETED.eq("0"), PROJECT_BUILDTABLE.BUILD_PRODUCT.in(ids)));
-        return getDslSession().fetchList(select,ProjectBuild.class);
+        return getDslSession().fetchList(select, ProjectBuild.class);
     }
 
     public List<ProjectBuild> buildInCondition(String condition, Integer limit, Integer productId, Integer projectId) {
         Condition con = null;
-        if(productId!=null){
+        if (productId != null) {
             con = PROJECT_BUILDTABLE.BUILD_PRODUCT.eq(productId);
         }
-        if(projectId!=null){
-            con = con==null?PROJECT_BUILDTABLE.BUILD_PROJECT.eq(projectId):and(con,PROJECT_BUILDTABLE.BUILD_PROJECT.eq(projectId));
+        if (projectId != null) {
+            con = con == null ? PROJECT_BUILDTABLE.BUILD_PROJECT.eq(projectId) : and(con, PROJECT_BUILDTABLE.BUILD_PROJECT.eq(projectId));
         }
         Select select = MysqlSelect.select(FragmentSql.fragmentSelect("CONCAT (build_name,'-',project_name) as buildName"), PROJECT_BUILDTABLE.BUILD_ID).from(PROJECT_BUILDTABLE).where(
                 and(PROJECT_BUILDTABLE.BUILD_NAME.like(condition),con,PROJECT_BUILDTABLE.BUILD_DELETED.eq(0))

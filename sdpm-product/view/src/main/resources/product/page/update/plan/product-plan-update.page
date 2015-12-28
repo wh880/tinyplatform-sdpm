@@ -92,10 +92,10 @@
                     var time = $(this).val();
                     var end = new Date();
                     if (time == "one-week") {
-                        end = new Date(start.getFullYear(), start.getMonth(), start.getDate() + 7);
+                        end = new Date(start.getFullYear(), start.getMonth(), start.getDate() + 6);
                     }
                     if (time == "two-week") {
-                        end = new Date(start.getFullYear(), start.getMonth(), start.getDate() + 14);
+                        end = new Date(start.getFullYear(), start.getMonth(), start.getDate() + 13);
                     }
                     if (time == "one-month") {
                         end = new Date(start.getFullYear(), start.getMonth() + 1, start.getDate());
