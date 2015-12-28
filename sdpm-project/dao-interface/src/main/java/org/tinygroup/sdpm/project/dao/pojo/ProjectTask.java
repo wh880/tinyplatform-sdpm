@@ -33,7 +33,7 @@ public class ProjectTask implements Serializable {
     public static String PAUSE = "4";
     public static String CANCEL = "5";
     public static String CLOSE = "6";
-    /////////////////
+
     /**
      * 用于显示关联项目名称
      */
@@ -42,7 +42,6 @@ public class ProjectTask implements Serializable {
      * 关联需求及需求描述表
      */
     private String storySpec;
-    //////////////////
     /**
      * 任务id
      */
