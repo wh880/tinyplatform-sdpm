@@ -79,7 +79,7 @@
             <div id="tinyfooter">
                 <div class="tinyfooterrap">
                 <span class="right">
-                        浙ICP备14043110号-1
+                        <a href="http://www.beianbeian.com/search/tinygroup.org" target="_blank">浙ICP备14043110号-1</a>
                 </span>
                     TinyGroup &copy; 2013-${formatDate(now(),"yyyy")}
                     如有问题欢迎咨询，点击链接加入

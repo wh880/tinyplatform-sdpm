@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.tinygroup</groupId>
         <artifactId>sdpm</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>0.0.2-SNAPSHOT</version>
     </parent>
     <artifactId>sdpm-web</artifactId>
     <name>sdpm-web</name>
@@ -14,7 +14,7 @@
     <!-- 项目属性 -->
     <properties>
         <validator.version>5.1.1.Final</validator.version>
-        <shiro.version>1.2.3</shiro.version>
+        <shiro.version>1.2.4</shiro.version>
         <ehcache.version>2.10.1</ehcache.version>
         <jackson.version>2.2.3</jackson.version>
     </properties>
@@ -278,11 +278,6 @@
         <dependency>
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-ehcache</artifactId>
-            <version>${shiro.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.shiro</groupId>
-            <artifactId>shiro-cas</artifactId>
             <version>${shiro.version}</version>
         </dependency>
         <!-- SECURITY end -->
