@@ -532,3 +532,6 @@ table.table.filelist-table{border:#ddd 1px solid;}
 /*批量添加*/
 .modal-body .input-group .form-control, .modal-body .input-group-btn{height:36px;padding:0 8px;font-size:13px;}
 .operation-body{margin:7px 2px;}
+/*底部链接*/
+.tinyfooterrap a,.tinyfooterrap a:link,.tinyfooterrap a:visited{color:#fff; font-weight:normal}
+.tinyfooterrap a:hover{ color:#ddd}

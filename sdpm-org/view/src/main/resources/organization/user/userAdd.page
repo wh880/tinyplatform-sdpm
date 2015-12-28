@@ -9,9 +9,9 @@
         margin-top: -10px;
     }
 </style>
+
 #set(name="organizationUser")
 #@layout(org)#end
-
 #@noRespsGridSystem()
     #@gridSysRow()
         #@gridSysCol(3)#end
