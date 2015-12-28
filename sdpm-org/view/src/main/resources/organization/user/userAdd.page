@@ -137,7 +137,7 @@
                             #@colLabel("col-3")角色：#end
                             #@formControlDiv("col-5")
                                 #@Tselect2F()
-                                    #Tselect2Ajax("roleIds" orgRoleIdList TINY_CONTEXT_PATH+adminPath+"/org/privilege/ajax/roleInCondition"
+                                    #Tselect2Ajax("roleIds" orgRoleIdList TINY_CONTEXT_PATH+adminPath+"/org/privilege/ajax/roleInCondition?type=0"
                                     {"id":"roleIds","dataId":"orgRoleId","dataText":"orgRoleName",
                                         "placeholder":"查询角色","multiple":"multiple"})
                                 ##填写任意内容，侦听需重新填加 A侦听已内置
