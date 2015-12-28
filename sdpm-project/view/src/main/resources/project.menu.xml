@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<menu id="project" parent-id="0" name="项目" href="/project/task/index" icon="icon-book" sort="700" isShow="1">
-    <menu id="task" parent-id="project" name="任务" href="/project/task/index" icon="" sort="1" isShow="1">
+<menu id="project" parent-id="0" name="项目" href="/project/task/index?choose=1" icon="icon-book" sort="700" isShow="1">
+    <menu id="task" parent-id="project" name="任务" href="/project/task/index?choose=1" icon="" sort="1" isShow="1">
         <menu id="pro-task-proposeversion" name="建任务" href="/project/task/form" icon="icon-plus" sort="4"
               isShow="1"
               scope="pro-taskmenu2-op"/>

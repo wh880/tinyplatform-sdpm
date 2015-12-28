@@ -1,5 +1,12 @@
 <service-components>
   <service-component type="org.tinygroup.sdpm.project.service.inter.TaskService" bean="taskServiceImpl">
+    <service-method local-name="getProjectTaskTimeInfo" service-id="getProjectTaskTimeInfo" method-name="getProjectTaskTimeInfo" cacheable="false" category="org.tinygroup.sdpm.project.service.inter">
+      <service-parameters>
+        <service-parameter name="projectId" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="getProjectTaskTimeInfoResult" required="false" is-array="false" type="org.tinygroup.sdpm.project.dao.pojo.ProjectTask"/>
+    </service-method>
+
     <service-method local-name="updateDoingTask" service-id="updateDoingTask" method-name="updateDoingTask" cacheable="false" category="org.tinygroup.sdpm.project.service.inter">
       <service-parameters>
         <service-parameter name="task" type="org.tinygroup.sdpm.project.dao.pojo.ProjectTask" required="false" is-array="false"/>

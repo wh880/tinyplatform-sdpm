@@ -321,8 +321,11 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
     }
 
     public ProjectTask getProjectTaskTimeInfo(Integer projectId) {
-        Select select = select(PROJECT_TASKTABLE.TASK_ESTIMATE.count(), PROJECT_TASKTABLE.TASK_LEFT.count(),
-                PROJECT_TASKTABLE.TASK_CONSUMED.count())
+        Select select = select(
+                PROJECT_TASKTABLE.TASK_ESTIMATE.count().as(PROJECT_TASKTABLE.TASK_ESTIMATE.getColumnName()),
+                PROJECT_TASKTABLE.TASK_LEFT.count().as(PROJECT_TASKTABLE.TASK_LEFT.getColumnName()),
+                PROJECT_TASKTABLE.TASK_CONSUMED.count().as(PROJECT_TASKTABLE.TASK_CONSUMED.getColumnName())
+        )
                 .from(PROJECT_TASKTABLE)
                 .where(PROJECT_TASKTABLE.TASK_PROJECT.eq(projectId));
         return getDslSession().fetchOneResult(select, ProjectTask.class);

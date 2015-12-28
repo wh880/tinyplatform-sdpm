@@ -1,5 +1,12 @@
 <service-components>
   <service-component type="org.tinygroup.sdpm.project.service.inter.TeamService" bean="teamServiceImpl">
+    <service-method local-name="getProjectTeamTimeInfo" service-id="getProjectTeamTimeInfo" method-name="getProjectTeamTimeInfo" cacheable="false" category="org.tinygroup.sdpm.project.service.inter">
+      <service-parameters>
+        <service-parameter name="projectId" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="getProjectTeamTimeInfoResult" required="false" is-array="false" type="java.lang.Integer"/>
+    </service-method>
+
     <service-method local-name="findTeamList" service-id="findTeamList" method-name="findTeamList" cacheable="false" category="org.tinygroup.sdpm.project.service.inter">
       <service-parameters>
         <service-parameter name="team" type="org.tinygroup.sdpm.project.dao.pojo.ProjectTeam" required="false" is-array="false"/>

@@ -339,15 +339,22 @@ public class ProjectAction extends BaseController implements WebContextAware {
         model.addAttribute("productList", productList);
 
         ProjectTask projectTaskTimeInfo = taskService.getProjectTaskTimeInfo(projectID);
-        Float taskLeft = projectTaskTimeInfo.getTaskLeft();
-        Float taskConsumed = projectTaskTimeInfo.getTaskConsumed();
-        Float taskEstimate = projectTaskTimeInfo.getTaskEstimate();
-        model.addAttribute("taskLeft",taskLeft);
-        model.addAttribute("taskConsumed",taskConsumed);
-        model.addAttribute("taskEstimate",taskEstimate);
+        float taskLeft = 0, taskEstimate = 0, taskConsumed = 0;
+        if (null != projectTaskTimeInfo.getTaskLeft()) {
+            taskLeft = projectTaskTimeInfo.getTaskLeft();
+        }
+        if (null != projectTaskTimeInfo.getTaskConsumed()) {
+            taskConsumed = projectTaskTimeInfo.getTaskConsumed();
+        }
+        if (null != projectTaskTimeInfo.getTaskEstimate()) {
+            taskEstimate = projectTaskTimeInfo.getTaskEstimate();
+        }
+        model.addAttribute("taskLeft", taskLeft);
+        model.addAttribute("taskConsumed", taskConsumed);
+        model.addAttribute("taskEstimate", taskEstimate);
 
         Integer projectTeamTimeInfo = teamService.getProjectTeamTimeInfo(projectID);
-        model.addAttribute("projectTeamTimeInfo",projectTeamTimeInfo);
+        model.addAttribute("projectTeamTimeInfo", projectTeamTimeInfo);
         return "project/view/rightinfo/project/basicInformation.pagelet";
     }
 
