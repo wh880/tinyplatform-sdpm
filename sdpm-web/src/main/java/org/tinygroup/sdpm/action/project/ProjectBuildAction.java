@@ -462,12 +462,38 @@ public class ProjectBuildAction extends BaseController {
         if (initKey != null) {
             if (initKey.indexOf(",") > 0) {
                 String[] ids = initKey.split(",");
-                return buildService.getBuildByIds(ids);
+                List<ProjectBuild> projectBuildList = buildService.getBuildByIds(ids);
+                boolean hasTrunk = false;
+                for(String id : ids){
+                    if("0".equals(id)){
+                        hasTrunk=true;
+                    }
+                }
+                if(hasTrunk){
+                    ProjectBuild projectBuild =  new ProjectBuild();
+                    projectBuild.setBuildName("trunk");
+                    projectBuild.setBuildId(0);
+                    projectBuildList.add(projectBuild);
+                }
+                return projectBuildList;
             }
             List<ProjectBuild> result = new ArrayList<ProjectBuild>();
-            result.add(buildService.findBuild(Integer.parseInt(initKey)));
+            if("0".equals(initKey)){
+                ProjectBuild projectBuild =  new ProjectBuild();
+                projectBuild.setBuildName("trunk");
+                projectBuild.setBuildId(0);
+                result.add(projectBuild);
+            }else{
+                result.add(buildService.findBuild(Integer.parseInt(initKey)));
+            }
             return result;
         }
-        return buildService.buildInCondition(key,Integer.parseInt(configService.getConfigBySection(SystemConfig.SEARCH_CONFIG).getConfigKey()), productId, projectId);
+        ProjectBuild projectBuild =  new ProjectBuild();
+        projectBuild.setBuildName("trunk");
+        projectBuild.setBuildId(0);
+        List<ProjectBuild> projectBuildList = new ArrayList<ProjectBuild>();
+        projectBuildList.add(projectBuild);
+        projectBuildList.addAll(buildService.buildInCondition(key,Integer.parseInt(configService.getConfigBySection(SystemConfig.SEARCH_CONFIG).getConfigKey()), productId, projectId));
+        return projectBuildList;
     }
 }

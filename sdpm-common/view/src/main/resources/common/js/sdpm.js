@@ -91,13 +91,7 @@ function ajaxRead(id, toName, opKey, opvalue, url, value,isBuild) {
                     sele.append(em);
                 }
                 if ("multiple" != sele.attr("multiple")) {
-                    if (value||value===0) {
-                        sele.select2("val",value).trigger("change");
-                    }else {
-                        if (data.length > 0) {
-                            sele.select2("val",data[0][opKey]).trigger("change");
-                        }
-                    }
+                    sele.select2("val",value).trigger("change");
                 }else{
                     if (value != null) {
                         value=value.toString();

@@ -411,6 +411,9 @@ public class ReleaseAction extends BaseController {
                 sIds = new ArrayList<Integer>();
                 String[] ids = releaseStory.split(",");
                 for (String id : ids) {
+                    if(StringUtil.isBlank(id)){
+                        continue;
+                    }
                     sIds.add(Integer.parseInt(id));
                 }
             }

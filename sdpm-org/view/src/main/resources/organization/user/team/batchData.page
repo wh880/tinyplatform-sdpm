@@ -1,9 +1,7 @@
 #@table()
 <tr>
-    <td style="width: 2%"></td>
-    <td align="center">
-        用户
-    </td>
+    <td style="width:16%">勾选</td>
+    <td>用户</td>
 </tr>
 #for(user : userList)
 #@tr()

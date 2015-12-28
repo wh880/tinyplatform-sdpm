@@ -3,7 +3,7 @@
   <parent>
     <groupId>org.tinygroup</groupId>
     <artifactId>sdpm-statistic</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.2-SNAPSHOT</version>
   </parent>
   <artifactId>sdpm-statistic-dao-impl</artifactId>
   <name>sdpm-statistic-dao-impl</name>
