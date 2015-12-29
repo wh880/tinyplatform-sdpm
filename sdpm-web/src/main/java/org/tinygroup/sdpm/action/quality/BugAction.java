@@ -322,7 +322,6 @@ public class BugAction extends BaseController {
         if (bugIds.length > 0) {
             for (String id : bugIds) {
                 QualityBug bug = bugService.findQualityBugById(Integer.valueOf(id));
-
                 bug.setBugAssignedDate(new Date());
                 bug.setBugAssignedTo(userId);
                 bugService.updateBug(bug);
@@ -345,8 +344,8 @@ public class BugAction extends BaseController {
 
     @RequestMapping("/sure")
     public String makesure(QualityBug bug, SystemAction systemAction) {
-        QualityBug qualityBug = bugService.findQualityBugById(bug.getBugId());
-        if (qualityBug.getBugAssignedTo() != bug.getBugAssignedTo()) {
+        QualityBug qualityBugOld = bugService.findQualityBugById(bug.getBugId());
+        if (qualityBugOld.getBugAssignedTo() != bug.getBugAssignedTo()) {
             bug.setBugAssignedDate(new Date());
         }
         bug.setBugConfirmed(1);
@@ -359,8 +358,8 @@ public class BugAction extends BaseController {
                 , userUtils.getUserId()
                 , String.valueOf(bug.getProductId())
                 , String.valueOf(bug.getProjectId())
-                , null
-                , null
+                , qualityBugOld
+                , bug
                 , systemAction.getActionComment());
         return "redirect:" + "/a/quality/bug";
     }
@@ -396,6 +395,7 @@ public class BugAction extends BaseController {
 
     @RequestMapping("/assignTo")
     public String assign(QualityBug bug, SystemAction systemAction) {
+        QualityBug qualityBugOld = bugService.findQualityBugById(bug.getBugId());
         bug.setBugAssignedDate(new Date());
         bugService.updateBug(bug);
 
@@ -406,8 +406,8 @@ public class BugAction extends BaseController {
                 , userUtils.getUserId()
                 , String.valueOf(bug.getProductId())
                 , String.valueOf(bug.getProjectId())
-                , null
-                , null
+                , qualityBugOld
+                , bug
                 , systemAction.getActionComment());
         return "redirect:" + "/a/quality/bug";
     }
@@ -476,8 +476,8 @@ public class BugAction extends BaseController {
                 , userUtils.getUserId()
                 , String.valueOf(bug.getProductId())
                 , String.valueOf(bug.getProjectId())
-                , null
-                , null
+                , qualityBug
+                , bug
                 , systemAction.getActionComment());
         return "redirect:" + "/a/quality/bug";
     }
@@ -494,7 +494,7 @@ public class BugAction extends BaseController {
 
     @RequestMapping("/close")
     public String close(QualityBug bug, SystemAction systemAction) {
-
+        QualityBug qualityBug = bugService.findQualityBugById(bug.getBugId());
         bug.setBugClosedBy(userUtils.getUserId());
         bug.setBugClosedDate(new Date());
         bug.setBugStatus("3");
@@ -506,8 +506,8 @@ public class BugAction extends BaseController {
                 , userUtils.getUserId()
                 , String.valueOf(bug.getProductId())
                 , String.valueOf(bug.getProjectId())
-                , null
-                , null
+                , qualityBug
+                , bug
                 , systemAction.getActionComment());
         return "redirect:" + "/a/quality/bug";
     }
