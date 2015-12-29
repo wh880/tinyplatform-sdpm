@@ -1,0 +1,12 @@
+#macro setfoldItem(foldItemTitle)
+<li class="item">
+    <h4>
+        ${formatDate(a?.key?.actionDate,"yyyy-MM-dd HH:mm:ss")+" 由 "+a?.key?.actorName+" "+getDict("actionOperate",a?.key?.actionAction)+" "}
+        #if(a?.key?.actionComment)
+            <br>备注：${a?.key?.actionComment}
+        #end
+        #if(a?.value) <b>+</b>#end
+    </h4>
+    <div class="info"> #bodyContent</div>
+</li>
+#end
