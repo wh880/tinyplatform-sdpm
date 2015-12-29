@@ -1,13 +1,22 @@
+<style>
+    .flode-item-remark{color:#999;font-size:12px}
+    .flode-item-remark p{margin-bottom:5px}
+</style>
 #macro setfoldItem(a)
 <li class="item">
-    <h4>
+    #if(a?.value)
+    <h4 class="info-nav">
         ${formatDate(a?.key?.actionDate,"yyyy-MM-dd HH:mm:ss")+" 由 "+a?.key?.actorName+" "+getDict("actionOperate",a?.key?.actionAction)+" "}
         #if(a?.key?.actionComment)
-            <br>备注：${a?.key?.actionComment}
+            <div class="flode-item-remark"><strong>备注：</strong>${a?.key?.actionComment}</div>
         #end
-        #if(a?.value) <b>+</b>#end
+        <b>+</b>
     </h4>
     <div class="info"> #bodyContent</div>
+    #else
+        <h4>${formatDate(a?.key?.actionDate,"yyyy-MM-dd HH:mm:ss")+" 由 "+a?.key?.actorName+" "+getDict("actionOperate",a?.key?.actionAction)+" "} #if(a?.key?.actionComment)
+            <div class="flode-item-remark"><strong>备注：</strong>${a?.key?.actionComment}</div>#end
+    #end
 </li>
 #end
 <div id="Tinyfold3" class="cl" style="width:100%">
@@ -29,6 +38,6 @@
 $(function(){
 	/*折叠*/
 	/*5个参数顺序不可打乱，分别是：相应区,隐藏显示的内容,速度,类型,事件*/
-	$.Tinyfold("#Tinyfold3 .item h4","#Tinyfold3 .item .info","",3,"click");
+	$.Tinyfold("#Tinyfold3 .item .info-nav","#Tinyfold3 .item .info","",3,"click");
 });
 </script>
