@@ -66,6 +66,7 @@ public class HomeAction extends BaseController{
         ProjectTask task = new ProjectTask();
         task.setTaskAssignedTo(userUtils.getUserId());
         task.setTaskDeleted(ProjectTask.DELETE_NO);
+        task.setTaskStatus(ProjectTask.DOING);
         List<ProjectTask> tasks = taskService.findListTask(task);
         model.addAttribute("myTaskList", tasks);
         //首页项目统计
@@ -82,6 +83,7 @@ public class HomeAction extends BaseController{
         QualityBug bug = new QualityBug();
         bug.setDeleted(0);
         bug.setBugAssignedTo(userUtils.getUserId());
+        bug.setBugStatus(QualityBug.STATUS_ACTIVE);
         List<QualityBug> bugList = bugService.findBugList(bug);
         model.addAttribute("myBugList", bugList);
         //首页指派给我的用例
