@@ -1,26 +1,43 @@
-#@foldMenu("" "Tinyfold3" "" "width:100%")
+<style>
+    .flode-item-remark{color:#999;font-size:12px}
+    .flode-item-remark p{margin-bottom:5px}
+</style>
+#macro setfoldItem(a)
+<li class="item">
+    #if(a?.value)
+    <h4 class="info-nav">
+        ${formatDate(a?.key?.actionDate,"yyyy-MM-dd HH:mm:ss")+" 由 "+a?.key?.actorName+" "+getDict("actionOperate",a?.key?.actionAction)+" "}
+        #if(a?.key?.actionComment)
+            <div class="flode-item-remark"><strong>备注：</strong>${a?.key?.actionComment}</div>
+        #end
+        <b>+</b>
+    </h4>
+    <div class="info"> #bodyContent</div>
+    #else
+        <h4>${formatDate(a?.key?.actionDate,"yyyy-MM-dd HH:mm:ss")+" 由 "+a?.key?.actorName+" "+getDict("actionOperate",a?.key?.actionAction)+" "} #if(a?.key?.actionComment)
+            <div class="flode-item-remark"><strong>备注：</strong>${a?.key?.actionComment}</div>#end
+    #end
+</li>
+#end
+<div id="Tinyfold3" class="cl" style="width:100%">
+    <ul class="Tinyfold" >
     #foreach(a : actionMap)
-        #@foldItem( formatDate(a?.key?.actionDate,"yyyy-MM-dd HH:mm:ss")+" 由 "+a?.key?.actorName+" "+getDict("actionOperate",a?.key?.actionAction)+" " )
+        #@setfoldItem(a)
             #if(a?.value?.size()>0)
             记录详情<br>
             #end
             #foreach(h : a?.value)
             <p>修改了<b>${getStd(a?.key?.actionObjectType,h?.historyField)}</b>旧值为 ${getDict(h?.historyField,h?.historyOld)?:h?.historyOld}，新值为 ${getDict(h?.historyField,h?.historyNew)?:h?.historyNew}。</p>
             #end
-            <br>
-            #if(a?.key?.actionComment)
-            备注<br>
-            #end
-            ${a?.key?.actionComment}
         #end
     #end
-#end
+    </ul>
+</div>
 
 <script type="text/javascript">
 $(function(){
-	$(".Hui_aside").scrollTop(380);
 	/*折叠*/
 	/*5个参数顺序不可打乱，分别是：相应区,隐藏显示的内容,速度,类型,事件*/
-	$.Tinyfold("#Tinyfold3 .item h4","#Tinyfold3 .item .info","",3,"click");
+	$.Tinyfold("#Tinyfold3 .item .info-nav","#Tinyfold3 .item .info","",3,"click");
 });
 </script>
