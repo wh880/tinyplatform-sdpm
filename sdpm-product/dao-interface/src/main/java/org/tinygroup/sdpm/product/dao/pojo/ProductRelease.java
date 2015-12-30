@@ -41,7 +41,7 @@ public class ProductRelease implements Serializable {
      * 版本id
      *
      */
-    private Integer buildId;
+    private String releaseBuild;
 
     /**
      * 发布名称
@@ -125,12 +125,12 @@ public class ProductRelease implements Serializable {
         this.productId = productId;
     }
 
-    public Integer getBuildId() {
-        return buildId;
+    public String getReleaseBuild() {
+        return releaseBuild;
     }
 
-    public void setBuildId(Integer buildId) {
-        this.buildId = buildId;
+    public void setReleaseBuild(String releaseBuild) {
+        this.releaseBuild = releaseBuild;
     }
 
     public String getReleaseName() {

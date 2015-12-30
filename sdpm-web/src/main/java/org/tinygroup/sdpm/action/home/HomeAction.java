@@ -71,7 +71,7 @@ public class HomeAction extends BaseController{
         model.addAttribute("myTaskList", tasks);
         //首页项目统计
         Integer[] userProjectIds = projectOperate.getUserProjectIdList();
-        Pager<Project> projectPager = projectService.findProjects(0, userProjectIds != null ? userProjectIds.length : 0, null, null, userProjectIds);
+        Pager<Project> projectPager = projectService.findProjects(0, userProjectIds != null ? userProjectIds.length:0, "project_id", "false", userProjectIds);
         if (projectPager.getRecords().size() > 0) {
             for (Project project : projectPager.getRecords()) {
                 BurnDTO burnDTO = burnService.initBurn(project.getProjectId(), null);

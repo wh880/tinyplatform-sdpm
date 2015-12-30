@@ -702,7 +702,7 @@ public class StoryAction extends BaseController {
         if (releaseId != null && releaseId > 0) {
             ProductRelease release = releaseService.findRelease(releaseId);
             if (release != null) {
-                bug.setBugOpenedBuild(String.valueOf(release.getBuildId()));
+                bug.setBugOpenedBuild(release.getReleaseBuild());
                 String releaseBugs = release.getReleaseBugs();
                 String inCondition = StringUtil.isBlank(releaseBugs) ? "" : releaseBugs;
                 if ("reRelateBugRelease".equals(relate)) {

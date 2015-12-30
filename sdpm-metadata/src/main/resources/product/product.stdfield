@@ -95,4 +95,5 @@
     <description></description>
   </standard-field>
   <standard-field id="67ace46d5ae741c8af5b9cdfc7a72a30" name="storyspec_id" title="需求描述ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
+  <standard-field id="52769a005d9f4792aadddfc90186fcc2" name="release_build" title="发布关联版本" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
 </standard-fields>

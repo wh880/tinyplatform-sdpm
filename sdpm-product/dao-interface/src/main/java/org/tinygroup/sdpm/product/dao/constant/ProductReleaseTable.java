@@ -43,7 +43,7 @@ public class ProductReleaseTable extends Table {
      * 版本id
      *
      */
-    public final Column BUILD_ID = new Column(this, "build_id");
+    public final Column RELEASE_BUILD = new Column(this, "release_build");
 
     /**
      * 发布名称

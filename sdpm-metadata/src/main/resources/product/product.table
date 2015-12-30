@@ -81,7 +81,7 @@
   <table id="c837f18a2be346d18dc1e5213181b212" name="product_release" title="发布表" schema="" package-name="">
     <table-field standard-field-id="fcd9ccc8418d40bf94a7caa53175ef4c" primary="true" unique="true" not-null="true" id="release_id" auto-increase="true"/>
     <table-field standard-field-id="cbf5d6fba9d341758f6ef4071e16aa1d" primary="false" unique="false" not-null="false" id="product_id" auto-increase="false"/>
-    <table-field standard-field-id="d375c0a459c0490d840add34075e27f5" primary="false" unique="false" not-null="false" id="build_id" auto-increase="false"/>
+    <table-field standard-field-id="52769a005d9f4792aadddfc90186fcc2" primary="false" unique="false" not-null="false" id="release_build" auto-increase="false"/>
     <table-field standard-field-id="bd0d01c2dcb44f6182c4dc7cd8b7d15c" primary="false" unique="false" not-null="false" id="release_name" auto-increase="false"/>
     <table-field standard-field-id="4ebcf9c3891b4e4cb1b9a33e82fb3357" primary="false" unique="false" not-null="false" id="release_date" auto-increase="false"/>
     <table-field standard-field-id="bf293158656146ceb9d5ad2ff8a35d84" primary="false" unique="false" not-null="false" id="release_stories" auto-increase="false"/>

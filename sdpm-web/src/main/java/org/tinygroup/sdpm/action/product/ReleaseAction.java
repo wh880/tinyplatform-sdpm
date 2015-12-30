@@ -425,7 +425,7 @@ public class ReleaseAction extends BaseController {
             context.put("storyList", stories);
 
             QualityBug bug = new QualityBug();
-            bug.setBugOpenedBuild(String.valueOf(release.getBuildId()));
+            bug.setBugOpenedBuild(release.getReleaseBuild());
             bug.setDeleted(0);
             List<QualityBug> bugAllList = bugService.getBugsInReleaseDoc(bug);
             String releaseBugs = release.getReleaseBugs();

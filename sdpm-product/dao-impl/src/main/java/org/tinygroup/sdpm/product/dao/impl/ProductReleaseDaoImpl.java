@@ -52,7 +52,7 @@ public class ProductReleaseDaoImpl extends TinyDslDaoSupport implements
     public static Condition releaseQueryCondition(ProductRelease t) {
         return t == null ? null : and(
                 PRODUCT_RELEASETABLE.PRODUCT_ID.eq(t.getProductId()),
-                PRODUCT_RELEASETABLE.BUILD_ID.eq(t.getBuildId()),
+                PRODUCT_RELEASETABLE.RELEASE_BUILD.eq(t.getReleaseBuild()),
                 PRODUCT_RELEASETABLE.RELEASE_NAME.eq(t.getReleaseName()),
                 PRODUCT_RELEASETABLE.RELEASE_DATE.eq(t.getReleaseDate()),
                 PRODUCT_RELEASETABLE.RELEASE_STORIES.eq(t.getReleaseStories()),
@@ -69,8 +69,8 @@ public class ProductReleaseDaoImpl extends TinyDslDaoSupport implements
                                 .values(
 										PRODUCT_RELEASETABLE.PRODUCT_ID.value(t
 												.getProductId()),
-										PRODUCT_RELEASETABLE.BUILD_ID.value(t
-												.getBuildId()),
+										PRODUCT_RELEASETABLE.RELEASE_BUILD.value(t
+												.getReleaseBuild()),
 										PRODUCT_RELEASETABLE.RELEASE_NAME
 												.value(t.getReleaseName()),
 										PRODUCT_RELEASETABLE.RELEASE_DATE
@@ -100,8 +100,8 @@ public class ProductReleaseDaoImpl extends TinyDslDaoSupport implements
                         return update(PRODUCT_RELEASETABLE).set(
                                 PRODUCT_RELEASETABLE.PRODUCT_ID.value(t
                                         .getProductId()),
-                                PRODUCT_RELEASETABLE.BUILD_ID.value(t
-                                        .getBuildId()),
+                                PRODUCT_RELEASETABLE.RELEASE_BUILD.value(t
+                                        .getReleaseBuild()),
                                 PRODUCT_RELEASETABLE.RELEASE_NAME
                                         .value(t.getReleaseName()),
                                 PRODUCT_RELEASETABLE.RELEASE_DATE
@@ -156,7 +156,7 @@ public class ProductReleaseDaoImpl extends TinyDslDaoSupport implements
 
                 return MysqlSelect.select(
                         PRODUCT_RELEASETABLE.ALL, PRODUCTTABLE.PRODUCT_NAME.as("productName"), PROJECT_BUILDTABLE.BUILD_NAME.as("buildName")).
-                        from(PRODUCT_RELEASETABLE).join(Join.leftJoin(PROJECT_BUILDTABLE, PRODUCT_RELEASETABLE.BUILD_ID.eq(PROJECT_BUILDTABLE.BUILD_ID)),
+                        from(PRODUCT_RELEASETABLE).join(Join.leftJoin(PROJECT_BUILDTABLE, PRODUCT_RELEASETABLE.RELEASE_BUILD.eq(PROJECT_BUILDTABLE.BUILD_ID)),
                         Join.leftJoin(PRODUCTTABLE, PRODUCTTABLE.PRODUCT_ID.eq(PRODUCT_RELEASETABLE.PRODUCT_ID))).where(
                         PRODUCT_RELEASETABLE.RELEASE_ID.in(t));
             }
@@ -196,7 +196,7 @@ public class ProductReleaseDaoImpl extends TinyDslDaoSupport implements
                         public Select generate(Serializable t) {
                             return MysqlSelect.select(
                                     PRODUCT_RELEASETABLE.ALL, PRODUCT_RELEASETABLE.ALL, PRODUCTTABLE.PRODUCT_NAME.as("productName"), PROJECT_BUILDTABLE.BUILD_NAME.as("buildName")).
-                                    from(PRODUCT_RELEASETABLE).join(Join.leftJoin(PROJECT_BUILDTABLE, PRODUCT_RELEASETABLE.BUILD_ID.eq(PROJECT_BUILDTABLE.BUILD_ID)),
+                                    from(PRODUCT_RELEASETABLE).join(Join.leftJoin(PROJECT_BUILDTABLE, PRODUCT_RELEASETABLE.RELEASE_BUILD.eq(PROJECT_BUILDTABLE.BUILD_ID)),
                                     Join.leftJoin(PRODUCTTABLE, PRODUCTTABLE.PRODUCT_ID.eq(PRODUCT_RELEASETABLE.PRODUCT_ID))).where(
                                     PRODUCT_RELEASETABLE.RELEASE_ID.eq(t));
                         }
@@ -221,8 +221,8 @@ public class ProductReleaseDaoImpl extends TinyDslDaoSupport implements
                         Select select = selectFrom(PRODUCT_RELEASETABLE).where(
                                 and(PRODUCT_RELEASETABLE.PRODUCT_ID.eq(t
                                                 .getProductId()),
-                                        PRODUCT_RELEASETABLE.BUILD_ID.eq(t
-                                                .getBuildId()),
+                                        PRODUCT_RELEASETABLE.RELEASE_BUILD.eq(t
+                                                .getReleaseBuild()),
                                         PRODUCT_RELEASETABLE.RELEASE_NAME.eq(t
                                                 .getReleaseName()),
                                         PRODUCT_RELEASETABLE.RELEASE_DATE.eq(t
@@ -252,11 +252,11 @@ public class ProductReleaseDaoImpl extends TinyDslDaoSupport implements
                     public Select generate(ProductRelease t) {
                         Select select = MysqlSelect.select(
                                 PRODUCT_RELEASETABLE.ALL, PROJECT_BUILDTABLE.BUILD_NAME.as("buildName")).
-                                from(PRODUCT_RELEASETABLE).join(Join.leftJoin(PROJECT_BUILDTABLE, PRODUCT_RELEASETABLE.BUILD_ID.eq(PROJECT_BUILDTABLE.BUILD_ID))).where(
+                                from(PRODUCT_RELEASETABLE).join(Join.leftJoin(PROJECT_BUILDTABLE, PRODUCT_RELEASETABLE.RELEASE_BUILD.eq(PROJECT_BUILDTABLE.BUILD_ID))).where(
                                 and(PRODUCT_RELEASETABLE.PRODUCT_ID.eq(t
                                                 .getProductId()),
-                                        PRODUCT_RELEASETABLE.BUILD_ID.eq(t
-                                                .getBuildId()),
+                                        PRODUCT_RELEASETABLE.RELEASE_BUILD.eq(t
+                                                .getReleaseBuild()),
                                         PRODUCT_RELEASETABLE.RELEASE_NAME.eq(t
                                                 .getReleaseName()),
                                         PRODUCT_RELEASETABLE.RELEASE_DATE.eq(t
@@ -287,7 +287,7 @@ public class ProductReleaseDaoImpl extends TinyDslDaoSupport implements
                                 .values(PRODUCT_RELEASETABLE.PRODUCT_ID
                                                 .value(new JdbcNamedParameter(
                                                         "productId")),
-                                        PRODUCT_RELEASETABLE.BUILD_ID
+                                        PRODUCT_RELEASETABLE.RELEASE_BUILD
                                                 .value(new JdbcNamedParameter(
                                                         "buildId")),
                                         PRODUCT_RELEASETABLE.RELEASE_NAME
@@ -328,7 +328,7 @@ public class ProductReleaseDaoImpl extends TinyDslDaoSupport implements
                                 .set(PRODUCT_RELEASETABLE.PRODUCT_ID
                                                 .value(new JdbcNamedParameter(
                                                         "productId")),
-                                        PRODUCT_RELEASETABLE.BUILD_ID
+                                        PRODUCT_RELEASETABLE.RELEASE_BUILD
                                                 .value(new JdbcNamedParameter(
                                                         "buildId")),
                                         PRODUCT_RELEASETABLE.RELEASE_NAME
@@ -372,7 +372,7 @@ public class ProductReleaseDaoImpl extends TinyDslDaoSupport implements
                                         PRODUCT_RELEASETABLE.PRODUCT_ID
                                                 .eq(new JdbcNamedParameter(
                                                         "productId")),
-                                        PRODUCT_RELEASETABLE.BUILD_ID
+                                        PRODUCT_RELEASETABLE.RELEASE_BUILD
                                                 .eq(new JdbcNamedParameter(
                                                         "buildId")),
                                         PRODUCT_RELEASETABLE.RELEASE_NAME
