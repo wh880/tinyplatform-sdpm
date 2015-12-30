@@ -28,7 +28,18 @@
 	    <li>
 	    #@elementItem()
 	 
-		<p><b>&nbsp;&nbsp;&nbsp;版本：</b>${release?.buildName}</p>
+		<p><b>&nbsp;&nbsp;&nbsp;版本：</b>
+			#set(builds = release?.releaseBuild.split(","))
+			#foreach(id : builds)
+				#if(idFor?.index!=1)
+                    ,
+				#end
+				#if(id == "0")
+                    trunk
+				#else
+                ${buildService.findBuild(Integer.parseInt(id)).buildName}
+				#end
+			#end </p>
 	
 		#end
 	   </li>

@@ -10,7 +10,20 @@
     #@td()<a href="${TINY_CONTEXT_PATH +adminPath}/product/release/forword/reRelateStory?releaseId=${release.releaseId}">${release?.no}</a>#end
     #@td()<a href="${TINY_CONTEXT_PATH +adminPath}/product/release/forword/reRelateStory?releaseId=${release.releaseId}">${release
         ?.releaseName}</a>#end
-    #@td("nowrap")${release?.buildName}#end
+    #@td("nowrap")
+        #set(builds = release?.releaseBuild.split(","))
+        #foreach(id : builds)
+            #if(idFor?.index!=1)
+                ,
+            #end
+            #if(id == "0")
+                trunk
+            #else
+                ${buildService.findBuild(Integer.parseInt(id)).buildName}
+            #end
+
+        #end
+    #end
     #@td("nowrap")${release?.releaseDate?formatDate(release?.releaseDate,'yyyy-MM-dd'):""}#end
     #@td("nowrap")
 			#foreach(m:menuManager.getScopeMenus("product-re"))

@@ -31,8 +31,8 @@
         #@colLabel("col-1")<span class="c-red">*</span>版本:#end
         #@formControlDiv("col-4")
 			#@Tselect2F()
-                #Tselect2Ajax("buildId" release?.buildId TINY_CONTEXT_PATH+adminPath+"/project/build/ajax/buildInCondition?productId="+cookieProductId
-                {"id":"","dataId":"buildId","dataText":"buildName","placeholder":"查询版本","datatype":"*","nullmsg":"版本不能为空！"})
+                #Tselect2Ajax("releaseBuild" release?.releaseBuild TINY_CONTEXT_PATH+adminPath+"/project/build/ajax/buildInCondition?withoutTrunk=true&productId="+cookieProductId
+                {"id":"","dataId":"buildId","dataText":"buildName","multiple":"multiple","placeholder":"查询版本","datatype":"*","nullmsg":"版本不能为空！"})
                 #@Tselect2Fix()
                     #set(m=menuManager.getMenu("organizationAddUser"))
                     #if(m)

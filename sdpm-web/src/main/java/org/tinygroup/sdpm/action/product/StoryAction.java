@@ -22,8 +22,10 @@ import org.tinygroup.sdpm.product.service.ReleaseService;
 import org.tinygroup.sdpm.product.service.StoryService;
 import org.tinygroup.sdpm.product.service.StorySpecService;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
+import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTeam;
+import org.tinygroup.sdpm.project.service.inter.BuildService;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.sdpm.project.service.inter.TaskService;
 import org.tinygroup.sdpm.project.service.inter.TeamService;
@@ -76,6 +78,8 @@ public class StoryAction extends BaseController {
     private ProfileService profileService;
     @Autowired
     private TeamService teamService;
+    @Autowired
+    private BuildService buildService;
 
     /**
      * @param request
@@ -702,6 +706,9 @@ public class StoryAction extends BaseController {
         if (releaseId != null && releaseId > 0) {
             ProductRelease release = releaseService.findRelease(releaseId);
             if (release != null) {
+                String[] ids = release.getReleaseBuild().split(",");
+                ProjectBuild build = buildService.findBuild(Integer.parseInt(ids[0]));
+                bug.setProductId(build.getBuildProduct());
                 bug.setBugOpenedBuild(release.getReleaseBuild());
                 String releaseBugs = release.getReleaseBugs();
                 String inCondition = StringUtil.isBlank(releaseBugs) ? "" : releaseBugs;

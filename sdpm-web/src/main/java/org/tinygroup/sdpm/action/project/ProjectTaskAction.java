@@ -19,7 +19,9 @@ import org.tinygroup.sdpm.dto.project.Tasks;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
+import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
+import org.tinygroup.sdpm.product.service.ProductService;
 import org.tinygroup.sdpm.product.service.StoryService;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
@@ -74,6 +76,8 @@ public class ProjectTaskAction extends BaseController {
     private UserService userService;
     @Autowired
     private ProfileService profileService;
+    @Autowired
+    private ProductService productService;
 
     @ModelAttribute
     public void init(Model model) {
@@ -123,7 +127,7 @@ public class ProjectTaskAction extends BaseController {
     public String form(HttpServletRequest request, HttpServletResponse response, Model model,
                        Integer storyId,
                        String taskId,
-                       Integer moduleId) {
+                       String moduleId) {
         Integer projectId = projectOperate.getCurrentProjectId(request, response);
         if (projectId == null) {
             return redirectProjectForm();
@@ -796,7 +800,11 @@ public class ProjectTaskAction extends BaseController {
             module.setModuleRoot(pp.getProductId());
             List<SystemModule> tModuleList = moduleService.findModuleList(module);
             for (SystemModule m : tModuleList) {
-                m.setModuleName(ModuleUtil.getPath(m.getModuleId(), "/", "", false));
+                Product product = null;
+                if(!"0".equals(m.getModuleRoot())){
+                    product = productService.findProductById(m.getModuleRoot());
+                }
+                m.setModuleName(ModuleUtil.getPath(m.getModuleId(), "/", product==null?"":product.getProductName(), true));
             }
             moduleList.addAll(tModuleList);
         }

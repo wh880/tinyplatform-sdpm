@@ -458,7 +458,7 @@ public class ProjectBuildAction extends BaseController {
 
     @ResponseBody
     @RequestMapping("ajax/buildInCondition")
-    public List<ProjectBuild> buildInCondition(String key, String initKey, Integer productId, Integer projectId, HttpServletRequest request) {
+    public List<ProjectBuild> buildInCondition(String key, String initKey, Integer productId, Integer projectId, String withoutTrunk) {
         if (initKey != null) {
             if (initKey.indexOf(",") > 0) {
                 String[] ids = initKey.split(",");
@@ -487,6 +487,9 @@ public class ProjectBuildAction extends BaseController {
                 result.add(buildService.findBuild(Integer.parseInt(initKey)));
             }
             return result;
+        }
+        if(!StringUtil.isBlank(withoutTrunk)){
+            return buildService.buildInCondition(key,Integer.parseInt(configService.getConfigBySection(SystemConfig.SEARCH_CONFIG).getConfigKey()), productId, projectId);
         }
         ProjectBuild projectBuild =  new ProjectBuild();
         projectBuild.setBuildName("trunk");
