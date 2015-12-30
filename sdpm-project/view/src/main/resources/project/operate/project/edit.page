@@ -192,7 +192,7 @@
             #end
         #end
     #end
-    #@elementItem(elementId="whitelistBox" eleItemClass="hidden hidden_namesty")
+    #@elementItem(elementId="whitelistBox" eleItemClass="hidden")
         #@skinMinimal("col-8")
             #@Tcheckboxes("whiteList" project?.projectWhiteList)
                 #foreach(wl : getDict("whiteList"))

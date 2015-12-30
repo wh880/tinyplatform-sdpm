@@ -125,7 +125,7 @@
 ##                #end
             #end
         #end
-        #@elementItem(elementId="whitelistBox" eleItemClass="hidden hidden_namesty")
+        #@elementItem(elementId="whitelistBox" eleItemClass="hidden")
             #@colLabel()#end
             #@skinMinimal("col-8")
                 #@Tcheckboxes("whiteList" "")
