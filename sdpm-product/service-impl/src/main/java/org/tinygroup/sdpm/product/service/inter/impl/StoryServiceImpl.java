@@ -1,4 +1,4 @@
-package org.tinygroup.sdpm.product.service.impl;
+package org.tinygroup.sdpm.product.service.inter.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -7,7 +7,7 @@ import org.tinygroup.sdpm.product.biz.inter.StoryManager;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec;
 import org.tinygroup.sdpm.product.dao.pojo.StoryCount;
-import org.tinygroup.sdpm.product.service.StoryService;
+import org.tinygroup.sdpm.product.service.inter.StoryService;
 import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.Date;

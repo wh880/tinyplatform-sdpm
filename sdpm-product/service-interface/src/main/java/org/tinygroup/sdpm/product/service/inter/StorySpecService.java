@@ -1,4 +1,4 @@
-package org.tinygroup.sdpm.product.service;
+package org.tinygroup.sdpm.product.service.inter;
 
 import org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec;
 import org.tinygroup.tinysqldsl.Pager;

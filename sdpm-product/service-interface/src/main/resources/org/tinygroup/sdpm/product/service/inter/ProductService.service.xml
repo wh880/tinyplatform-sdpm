@@ -1,5 +1,5 @@
 <service-components>
-  <service-component type="org.tinygroup.sdpm.product.service.ProductService" bean="productServiceImpl">
+  <service-component type="org.tinygroup.sdpm.product.service.inter.ProductService" bean="productServiceImpl">
     <service-method local-name="addProduct" service-id="addProduct" method-name="addProduct" cacheable="false" category="org.tinygroup.sdpm.product.service">
       <service-parameters>
         <service-parameter name="product" type="org.tinygroup.sdpm.product.dao.pojo.Product" required="false" is-array="false"/>

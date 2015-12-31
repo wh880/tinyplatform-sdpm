@@ -30,6 +30,7 @@
             #@td()${t.taskLeft}#end
             #@td()
                 #if(t.taskStory)
+                    #set(story = storyService.findStory(t.taskStory))
                 <div style="width:100px;overflow:hidden;white-space: nowrap"><a href="${TINY_CONTEXT_PATH+adminPath}/product/storySpec/find/productDemandDetail?storyId=${story.storyId}" title="${story.storyTitle}">${story.storyTitle}</a></div>
                 #end
             #end

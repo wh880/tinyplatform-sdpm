@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
-import org.tinygroup.sdpm.product.service.ProductService;
+import org.tinygroup.sdpm.product.service.inter.ProductService;
 import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
-import org.tinygroup.sdpm.productLine.service.ProductLineService;
+import org.tinygroup.sdpm.productLine.service.inter.ProductLineService;
 
 import java.util.ArrayList;
 import java.util.List;

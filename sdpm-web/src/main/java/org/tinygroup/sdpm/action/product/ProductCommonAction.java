@@ -9,8 +9,8 @@ import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
 import org.tinygroup.sdpm.product.dao.pojo.ProductRelease;
-import org.tinygroup.sdpm.product.service.PlanService;
-import org.tinygroup.sdpm.product.service.ReleaseService;
+import org.tinygroup.sdpm.product.service.inter.PlanService;
+import org.tinygroup.sdpm.product.service.inter.ReleaseService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;

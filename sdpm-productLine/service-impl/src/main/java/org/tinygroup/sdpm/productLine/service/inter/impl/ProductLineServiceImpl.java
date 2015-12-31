@@ -1,4 +1,4 @@
-package org.tinygroup.sdpm.productLine.service.impl;
+package org.tinygroup.sdpm.productLine.service.inter.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -6,7 +6,7 @@ import org.tinygroup.sdpm.dao.condition.ConditionCarrier;
 import org.tinygroup.sdpm.product.biz.inter.ProductManager;
 import org.tinygroup.sdpm.productLine.biz.inter.ProductLineManager;
 import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
-import org.tinygroup.sdpm.productLine.service.ProductLineService;
+import org.tinygroup.sdpm.productLine.service.inter.ProductLineService;
 import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.List;
