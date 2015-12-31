@@ -26,7 +26,7 @@ import java.util.List;
 public class StorySpecAction extends BaseController {
 
     @Autowired
-    private StorySpecService specService;
+    private StorySpecService storySpecService;
     @Autowired
     private ProfileService profileService;
     @Autowired
@@ -38,7 +38,7 @@ public class StorySpecAction extends BaseController {
         ProductStorySpec storySpec = new ProductStorySpec();
         storySpec.setStoryVersion(story.getStoryVersion());
         storySpec.setStoryId(storyId);
-        List<ProductStorySpec> storySpecs = specService.findStorySpecList(storySpec, null, null);
+        List<ProductStorySpec> storySpecs = storySpecService.findStorySpecList(storySpec, null, null);
         storySpec = storySpecs != null && storySpecs.size() > 0 ? storySpecs.get(0) : new ProductStorySpec();
         model.addAttribute("storySpec", storySpec);
 
@@ -77,7 +77,7 @@ public class StorySpecAction extends BaseController {
         if (productStory == null || productStory.getStoryId() == null) {
             productStory = storyService.findStory(story.getStoryId());
         }
-        ProductStorySpec storySpec = specService.findStorySpec(productStory.getStoryId(), productStory.getStoryVersion());
+        ProductStorySpec storySpec = storySpecService.findStorySpec(productStory.getStoryId(), productStory.getStoryVersion());
         model.addAttribute("storySpec", storySpec);
         model.addAttribute("story", productStory);
         systemProfile.setFileObjectType("story");
@@ -103,7 +103,7 @@ public class StorySpecAction extends BaseController {
         ProductStory story = storyService.findStory(storyId);
         ProductStorySpec spec = new ProductStorySpec();
         spec.setStoryId(storyId);
-        Pager<ProductStorySpec> specs = specService.findStorySpecPager(start, limit, spec, order, ordertype);
+        Pager<ProductStorySpec> specs = storySpecService.findStorySpecPager(start, limit, spec, order, ordertype);
         model.addAttribute("story", story);
         model.addAttribute("versions", specs);
         return "/product/data/story/version/allVersionData.pagelet";
@@ -111,7 +111,7 @@ public class StorySpecAction extends BaseController {
 
     @RequestMapping("versionRollback")
     public String storyVersionRollback(Integer storyId, Integer storyVersion) {
-        ProductStorySpec spec = specService.findStorySpec(storyId, storyVersion);
+        ProductStorySpec spec = storySpecService.findStorySpec(storyId, storyVersion);
         ProductStory story = storyService.findStory(storyId);
         story.setStoryTitle(spec.getStoryTitle());
         story.setStoryVersion(storyVersion);
