@@ -1,4 +1,4 @@
-package org.tinygroup.sdpm.product.service.impl;
+package org.tinygroup.sdpm.product.service.inter.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -8,7 +8,7 @@ import org.tinygroup.sdpm.dao.condition.ConditionUtils;
 import org.tinygroup.sdpm.product.biz.inter.ProductManager;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
-import org.tinygroup.sdpm.product.service.ProductService;
+import org.tinygroup.sdpm.product.service.inter.ProductService;
 
 import java.util.ArrayList;
 import java.util.HashMap;

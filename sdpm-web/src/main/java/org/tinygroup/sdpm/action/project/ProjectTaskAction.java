@@ -21,8 +21,8 @@ import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
-import org.tinygroup.sdpm.product.service.ProductService;
-import org.tinygroup.sdpm.product.service.StoryService;
+import org.tinygroup.sdpm.product.service.inter.ProductService;
+import org.tinygroup.sdpm.product.service.inter.StoryService;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
@@ -616,12 +616,19 @@ public class ProjectTaskAction extends BaseController {
     public String batchAddSave(Tasks tasks, HttpServletRequest request) {
         List<ProjectTask> taskList = tasks.getTaskList();
         for (int i = 0; i < taskList.size(); i++) {
-            if (StringUtil.isBlank(taskList.get(i).getTaskName()) || null == (taskList.get(i).getTaskEstimate())) {
+            ProjectTask projectTask = taskList.get(i);
+            if (StringUtil.isBlank(projectTask.getTaskName()) || null == (projectTask.getTaskEstimate())) {
                 taskList.remove(i);
                 i--;
             } else {
-                taskList.get(i).setTaskLeft(taskList.get(i).getTaskEstimate());
-                taskList.get(i).setTaskConsumed(0f);
+                projectTask.setTaskLeft(projectTask.getTaskEstimate());
+                projectTask.setTaskConsumed(0f);
+                if (null != projectTask.getTaskStory()) {
+                    ProductStory story = storyService.findStory(projectTask.getTaskStory());
+                    if (story != null) {
+                        projectTask.setStorySpec(story.getStorySpec());
+                    }
+                }
             }
         }
         if (taskList.isEmpty()) {
@@ -801,10 +808,10 @@ public class ProjectTaskAction extends BaseController {
             List<SystemModule> tModuleList = moduleService.findModuleList(module);
             for (SystemModule m : tModuleList) {
                 Product product = null;
-                if(!"0".equals(m.getModuleRoot())){
+                if (!"0".equals(m.getModuleRoot())) {
                     product = productService.findProductById(m.getModuleRoot());
                 }
-                m.setModuleName(ModuleUtil.getPath(m.getModuleId(), "/", product==null?"":product.getProductName(), true));
+                m.setModuleName(ModuleUtil.getPath(m.getModuleId(), "/", product == null ? "" : product.getProductName(), true));
             }
             moduleList.addAll(tModuleList);
         }

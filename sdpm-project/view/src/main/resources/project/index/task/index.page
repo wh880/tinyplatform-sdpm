@@ -73,6 +73,7 @@
                         #@tinyTh({"class":"sorting","rel":"task_estimate"})预计#end
                         #@tinyTh({"class":"sorting","rel":"task_consumed"})消耗#end
                         #@tinyTh({"class":"sorting","rel":"task_left"})剩余#end
+                        #@tinyTh({"class":"sorting","rel":"task_story"})相关需求#end
                         #@tinyTh()操作#end
                     #end
                 #end

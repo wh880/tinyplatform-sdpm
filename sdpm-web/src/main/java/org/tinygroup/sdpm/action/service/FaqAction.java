@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
-import org.tinygroup.sdpm.product.service.ProductService;
+import org.tinygroup.sdpm.product.service.inter.ProductService;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceFaq;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceFaqType;
 import org.tinygroup.sdpm.service.service.inter.FaqService;

@@ -1,4 +1,4 @@
-package org.tinygroup.sdpm.productLine.service;
+package org.tinygroup.sdpm.productLine.service.inter;
 
 import org.tinygroup.aopcache.annotation.CacheGet;
 import org.tinygroup.aopcache.annotation.CacheRemove;

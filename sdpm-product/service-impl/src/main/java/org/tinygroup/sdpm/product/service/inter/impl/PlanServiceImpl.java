@@ -1,10 +1,10 @@
-package org.tinygroup.sdpm.product.service.impl;
+package org.tinygroup.sdpm.product.service.inter.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.tinygroup.sdpm.product.biz.inter.PlanManager;
 import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
-import org.tinygroup.sdpm.product.service.PlanService;
+import org.tinygroup.sdpm.product.service.inter.PlanService;
 import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.List;

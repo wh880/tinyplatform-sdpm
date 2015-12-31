@@ -1,5 +1,5 @@
 <service-components>
-  <service-component type="org.tinygroup.sdpm.product.service.ReleaseService" bean="releaseServiceImpl">
+  <service-component type="org.tinygroup.sdpm.product.service.inter.ReleaseService" bean="releaseServiceImpl">
     <service-method local-name="addRelease" service-id="addRelease" method-name="addRelease" cacheable="false" category="org.tinygroup.sdpm.product.service">
       <service-parameters>
         <service-parameter name="release" type="org.tinygroup.sdpm.product.dao.pojo.ProductRelease" required="false" is-array="false"/>

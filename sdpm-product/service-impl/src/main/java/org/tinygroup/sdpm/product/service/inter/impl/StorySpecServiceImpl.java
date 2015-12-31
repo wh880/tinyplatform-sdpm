@@ -1,10 +1,10 @@
-package org.tinygroup.sdpm.product.service.impl;
+package org.tinygroup.sdpm.product.service.inter.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.tinygroup.sdpm.product.biz.inter.StorySpecManager;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec;
-import org.tinygroup.sdpm.product.service.StorySpecService;
+import org.tinygroup.sdpm.product.service.inter.StorySpecService;
 import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.List;

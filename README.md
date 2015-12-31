@@ -1,7 +1,7 @@
 #Software Development Process Management
 在线演示地址[http://sdpm.tinygroup.org](http://sdpm.tinygroup.org)
 
-本项目经过禅道作者王春生同意后，参考禅道现有功能模块并进行优化原有功能，提升用户体验，打造以Java为技术体系的项目管理工具，在此对禅道表示衷心感谢！
+本项目参考市面上各类项目管理软件，对各类产品中现有功能模块进行优化，提升用户体验，打造以Java为技术体系的项目管理工具！
 #数据库设置
 数据库的配置文件在sdpm-web工程中resource中的sdpm.properties
 #首次运行
