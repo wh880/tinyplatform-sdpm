@@ -500,8 +500,6 @@
         <template-function name="typeInfoFunction"></template-function>
         <template-function name="dictFunction"></template-function>
         <template-function name="stdFunction"></template-function>
-        <!--&lt;!&ndash;用户信息工具&ndash;&gt;-->
-        <!--<static-class name="UserUtils" class="org.tinygroup.sdpm.util.UserUtils"></static-class>-->
     </template-config>
 
     <dict-load-config bean_name="ehCache"></dict-load-config>

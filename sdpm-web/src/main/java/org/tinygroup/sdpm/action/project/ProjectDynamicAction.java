@@ -13,7 +13,6 @@ import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.project.service.inter.TeamService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.service.inter.ActionService;
-import org.tinygroup.sdpm.util.LogUtil;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -55,7 +54,7 @@ public class ProjectDynamicAction extends BaseController {
         }
         SystemAction systemAction = new SystemAction();
         systemAction.setActionProject(projectId.toString());
-        systemAction.setActionObjectType(LogUtil.LogOperateObject.PROJECT.toString());
+//        systemAction.setActionObjectType(LogUtil.LogOperateObject.PROJECT.toString());
         //根据日期来查
         /**
          * 1-今天 2-昨天 3-前天 4-本周 5-上周 6-本月 7-上月 0-所有
