@@ -67,8 +67,6 @@ public class ProjectTaskAction extends BaseController {
     @Autowired
     private ProjectStoryService projectStoryService;
     @Autowired
-    private StoryService productStoryService;
-    @Autowired
     private ProjectProductService projectProductService;
     @Autowired
     private BurnService burnService;
@@ -142,7 +140,7 @@ public class ProjectTaskAction extends BaseController {
         model.addAttribute("moduleList", findModuleList(storyId, projectId));
         model.addAttribute("moduleId", moduleId);
         model.addAttribute("storyId", storyId);
-        ProductStory story = productStoryService.findStory(storyId);
+        ProductStory story = storyService.findStory(storyId);
 
         model.addAttribute("story", story);
 
@@ -607,7 +605,7 @@ public class ProjectTaskAction extends BaseController {
         model.addAttribute("moduleList", findModuleList(storyId, projectId));
         model.addAttribute("moduleId", moduleId);
         model.addAttribute("teamList", userService.findTeamUserListByProjectId(projectId));
-        ProductStory story = productStoryService.findStory(storyId);
+        ProductStory story = storyService.findStory(storyId);
         model.addAttribute("story", story);
         return "project/operate/task/common/batchAdd.page";
     }
@@ -716,7 +714,7 @@ public class ProjectTaskAction extends BaseController {
         }
         model.addAttribute("modulPath", modulePath);
         //查询相关需求名字
-        ProductStory productStory = productStoryService.findStory(task.getTaskStory());
+        ProductStory productStory = storyService.findStory(task.getTaskStory());
         String storyTitle = productStory == null ? "" : productStory.getStoryTitle();
         model.addAttribute("storyTitle", storyTitle);
         return "project/view/rightinfo/task/basicInformation.pagelet";
