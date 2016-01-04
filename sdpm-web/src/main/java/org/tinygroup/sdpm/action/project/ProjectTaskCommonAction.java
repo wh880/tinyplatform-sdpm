@@ -22,8 +22,6 @@ import org.tinygroup.sdpm.project.dao.pojo.TaskChartBean;
 import org.tinygroup.sdpm.project.service.inter.*;
 import org.tinygroup.sdpm.system.dao.pojo.ProfileType;
 import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;
-import org.tinygroup.sdpm.system.service.inter.EffortService;
-import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.sdpm.system.service.inter.ProfileService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -42,23 +40,9 @@ import java.util.Map;
 @RequestMapping("/a/project/task")
 public class ProjectTaskCommonAction extends BaseController {
     @Autowired
-    private StoryService storyService;
-    @Autowired
     private TaskService taskService;
     @Autowired
-    private ProjectService projectService;
-    @Autowired
-    private EffortService effortService;
-    @Autowired
-    private ModuleService moduleService;
-    @Autowired
-    private ProjectStoryService projectStoryService;
-    @Autowired
-    private StoryService productStoryService;
-    @Autowired
-    private ProjectProductService projectProductService;
-    @Autowired
-    private BurnService burnService;
+    private StoryService storyService;
     @Autowired
     private UserService userService;
     @Autowired
@@ -199,7 +183,7 @@ public class ProjectTaskCommonAction extends BaseController {
                 if (key.isEmpty()) {
                     mapDocument.put("未关联需求", map.get(key));
                 } else {
-                    ProductStory story = productStoryService.findStory(Integer.valueOf(key));
+                    ProductStory story = storyService.findStory(Integer.valueOf(key));
                     if (story != null) {
                         String title = story.getStoryTitle();
                         mapDocument.put(title, map.get(key));
