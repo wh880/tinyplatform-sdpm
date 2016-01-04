@@ -21,7 +21,6 @@
             #@sdpmItem("所属模块")
                 #@Tselect2F()
                     #@Tselect2Body("taskModule" moduleId {"class":"input-text select2"})
-                        <option value="">/</option>
                         #foreach(m : moduleList)
                             <option value=${m.moduleId}>${m.moduleName}</option>
                         #end
@@ -35,7 +34,6 @@
                     #@Tselect2Body(
                         "taskType" copyTask?.taskType {"class":"input-text select2","placeholder":"请选择任务类型","datatype":"*",
                         "nullmsg":"任务类型不能为空！"})
-                        <option value=""></option>
                         #foreach(item : getDict("taskType"))
                             <option value="${item?.value}">${item?.text}</option>
                         #end
@@ -74,7 +72,6 @@
                 #if(storyList)
                     #@Tselect2F()
                         #@Tselect2Body("taskStory" storyId==null?"":storyId {"class":"input-text select2"})
-                            <option value=""></option>
                             #foreach(s:storyList)
                                 <option value="${s.storyId}">${s.storyId}：${s.storyTitle}（优先级：${s.storyPri}，预计工时:${s.storyEstimate}）
                                 </option>

@@ -807,10 +807,10 @@ public class ProjectTaskAction extends BaseController {
             module.setModuleRoot(pp.getProductId());
             List<SystemModule> tModuleList = moduleService.findModuleList(module);
             for (SystemModule m : tModuleList) {
-                Product product = null;
-                if (!"0".equals(m.getModuleRoot())) {
-                    product = productService.findProductById(m.getModuleRoot());
-                }
+                Product product = productService.findProductById(pp.getProductId());
+                SystemModule productModel = new SystemModule();
+                productModel.setModuleName(product.getProductName());
+                moduleList.add(productModel);
                 m.setModuleName(ModuleUtil.getPath(m.getModuleId(), "/", product == null ? "" : product.getProductName(), true));
             }
             moduleList.addAll(tModuleList);
