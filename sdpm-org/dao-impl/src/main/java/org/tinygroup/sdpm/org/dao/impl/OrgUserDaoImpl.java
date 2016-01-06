@@ -126,7 +126,7 @@ public class OrgUserDaoImpl extends TinyDslDaoSupport implements OrgUserDao {
                         ORG_USERTABLE.ORG_USER_ID.eq(t.getOrgUserId()));
                 return update;
             }
-        },false);
+        });
     }
 
     public int deleteByKey(String pk) {
