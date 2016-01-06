@@ -41,7 +41,6 @@ import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 
 @Repository
 public class ProjectTaskestimateDaoImpl extends TinyDslDaoSupport implements ProjectTaskestimateDao {
-    @LogMethod("add")
     public ProjectTaskestimate add(ProjectTaskestimate projectTaskestimate) {
         return getDslTemplate().insertAndReturnKey(projectTaskestimate, new InsertGenerateCallback<ProjectTaskestimate>() {
             public Insert generate(ProjectTaskestimate t) {
@@ -58,7 +57,6 @@ public class ProjectTaskestimateDaoImpl extends TinyDslDaoSupport implements Pro
         });
     }
 
-    @LogMethod("edit")
     public int edit(ProjectTaskestimate projectTaskestimate) {
         if (projectTaskestimate == null || projectTaskestimate.getTaskestimateId() == null) {
             return 0;
@@ -78,7 +76,6 @@ public class ProjectTaskestimateDaoImpl extends TinyDslDaoSupport implements Pro
         });
     }
 
-    @LogMethod("deleteByKey")
     public int deleteByKey(Integer pk) {
         if (pk == null) {
             return 0;
@@ -90,7 +87,6 @@ public class ProjectTaskestimateDaoImpl extends TinyDslDaoSupport implements Pro
         });
     }
 
-    @LogMethod("deleteByKeys")
     public int deleteByKeys(Integer... pks) {
         if (pks == null || pks.length == 0) {
             return 0;
@@ -174,7 +170,6 @@ public class ProjectTaskestimateDaoImpl extends TinyDslDaoSupport implements Pro
         return batchInsert(true, projectTaskestimates);
     }
 
-    @LogMethod("batchUpdate")
     public int[] batchUpdate(List<ProjectTaskestimate> projectTaskestimates) {
         if (CollectionUtil.isEmpty(projectTaskestimates)) {
             return new int[0];
@@ -194,7 +189,6 @@ public class ProjectTaskestimateDaoImpl extends TinyDslDaoSupport implements Pro
         });
     }
 
-    @LogMethod("batchDelete")
     public int[] batchDelete(List<ProjectTaskestimate> projectTaskestimates) {
         if (CollectionUtil.isEmpty(projectTaskestimates)) {
             return new int[0];
@@ -214,7 +208,6 @@ public class ProjectTaskestimateDaoImpl extends TinyDslDaoSupport implements Pro
         });
     }
 
-    @LogMethod("addOrderByElements")
     private Select addOrderByElements(Select select, OrderBy... orderBies) {
         List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
         for (int i = 0; orderBies != null && i < orderBies.length; i++) {

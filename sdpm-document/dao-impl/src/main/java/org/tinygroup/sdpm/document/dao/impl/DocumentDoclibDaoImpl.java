@@ -40,7 +40,6 @@ import static org.tinygroup.tinysqldsl.Update.update;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 
 @Repository
-@LogClass("doclib")
 public class DocumentDoclibDaoImpl extends TinyDslDaoSupport implements DocumentDoclibDao {
 
     public DocumentDocLib add(DocumentDocLib documentDocLib) {

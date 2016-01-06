@@ -52,7 +52,6 @@ import static org.tinygroup.tinysqldsl.Update.update;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 
 @Repository
-@LogClass("doc")
 public class DocumentDocDaoImpl extends TinyDslDaoSupport implements DocumentDocDao {
 
 	public DocumentDoc add(DocumentDoc documentDoc) {
@@ -142,7 +141,6 @@ public class DocumentDocDaoImpl extends TinyDslDaoSupport implements DocumentDoc
 		});
 	}
 
-	@LogMethod("deleteByKey")
 	public int deleteByKey(Integer pk){
 		if(pk == null){
 			return 0;
@@ -154,7 +152,6 @@ public class DocumentDocDaoImpl extends TinyDslDaoSupport implements DocumentDoc
 		});
 	}
 
-	@LogMethod("deleteByKeys")
 	public int deleteByKeys(Integer... pks) {
 		if(pks == null || pks.length == 0){
 			return 0;
