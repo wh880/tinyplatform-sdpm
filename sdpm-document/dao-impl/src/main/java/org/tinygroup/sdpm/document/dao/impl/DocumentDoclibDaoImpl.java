@@ -21,7 +21,6 @@ import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.jdbctemplatedslsession.callback.*;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
-import org.tinygroup.sdpm.common.log.annotation.LogClass;
 import org.tinygroup.sdpm.document.dao.DocumentDoclibDao;
 import org.tinygroup.sdpm.document.dao.pojo.DocumentDocLib;
 import org.tinygroup.tinysqldsl.*;
