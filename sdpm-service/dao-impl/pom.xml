@@ -27,10 +27,5 @@
             <artifactId>sdpm-product-dao-interface</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.tinygroup</groupId>
-            <artifactId>sdpm-product-dao-interface</artifactId>
-            <version>${project.version}</version>
-        </dependency>
     </dependencies>
 </project>
