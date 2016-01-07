@@ -11,6 +11,8 @@ import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.service.inter.ProductService;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
 import org.tinygroup.sdpm.project.service.inter.ProjectProductService;
+import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
+import org.tinygroup.sdpm.system.service.inter.ModuleService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,6 +31,8 @@ public class ProjectProductAction extends BaseController {
     private ProjectProductService projectProductService;
     @Autowired
     private ProductService productService;
+    @Autowired
+    private ModuleService moduleService;
 
     @RequiresPermissions("product")
     @RequestMapping("/findLinkProduct")
@@ -54,6 +58,19 @@ public class ProjectProductAction extends BaseController {
         Integer projectId = projectOperate.getCurrentProjectId(request, response);
         if (projectId == null) {
             return resultMap(false, "请选择所在项目");
+        }
+        SystemModule systemModule = new SystemModule();
+        systemModule.setModuleRoot(projectId);
+        systemModule.setModuleType("project");
+        moduleService.delete(systemModule);
+        for(Integer pId : productIds){
+            Product p = productService.findProductById(pId);
+            SystemModule module = new SystemModule();
+            module.setModuleName(p.getProductName());
+            module.setModuleRoot(projectId);
+            module.setModuleOwner(pId.toString());
+            module.setModuleType("projectProduct");
+            moduleService.addSystemModule(module);
         }
         projectProductService.addProductLinkToProject(productIds, projectId);
         return resultMap(true, "保存成功");
