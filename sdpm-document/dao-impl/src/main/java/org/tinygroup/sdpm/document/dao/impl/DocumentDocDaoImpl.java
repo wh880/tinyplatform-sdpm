@@ -22,8 +22,6 @@ import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.jdbctemplatedslsession.callback.*;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
-import org.tinygroup.sdpm.common.log.annotation.LogClass;
-import org.tinygroup.sdpm.common.log.annotation.LogMethod;
 import org.tinygroup.sdpm.dao.complexsearch.SearchInfos;
 import org.tinygroup.sdpm.dao.complexsearch.SqlUtil;
 import org.tinygroup.sdpm.document.dao.DocumentDocDao;
@@ -54,7 +52,6 @@ import static org.tinygroup.tinysqldsl.Update.update;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 
 @Repository
-@LogClass("doc")
 public class DocumentDocDaoImpl extends TinyDslDaoSupport implements DocumentDocDao {
 
 	public DocumentDoc add(DocumentDoc documentDoc) {
@@ -144,7 +141,6 @@ public class DocumentDocDaoImpl extends TinyDslDaoSupport implements DocumentDoc
 		});
 	}
 
-	@LogMethod("deleteByKey")
 	public int deleteByKey(Integer pk){
 		if(pk == null){
 			return 0;
@@ -156,7 +152,6 @@ public class DocumentDocDaoImpl extends TinyDslDaoSupport implements DocumentDoc
 		});
 	}
 
-	@LogMethod("deleteByKeys")
 	public int deleteByKeys(Integer... pks) {
 		if(pks == null || pks.length == 0){
 			return 0;

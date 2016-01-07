@@ -21,7 +21,6 @@ import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.jdbctemplatedslsession.callback.*;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
-import org.tinygroup.sdpm.common.log.annotation.LogMethod;
 import org.tinygroup.sdpm.project.dao.ProjectBurnDao;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBurn;
 import org.tinygroup.tinysqldsl.*;
@@ -42,7 +41,6 @@ import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 
 @Repository
 public class ProjectBurnDaoImpl extends TinyDslDaoSupport implements ProjectBurnDao {
-    @LogMethod("add")
     public ProjectBurn add(ProjectBurn projectBurn) {
         return getDslTemplate().insertAndReturnKey(projectBurn, new InsertGenerateCallback<ProjectBurn>() {
             public Insert generate(ProjectBurn t) {
@@ -57,7 +55,6 @@ public class ProjectBurnDaoImpl extends TinyDslDaoSupport implements ProjectBurn
         });
     }
 
-    @LogMethod("edit")
     public int edit(ProjectBurn projectBurn) {
         if (projectBurn == null || projectBurn.getId() == null) {
             return 0;
@@ -75,7 +72,6 @@ public class ProjectBurnDaoImpl extends TinyDslDaoSupport implements ProjectBurn
         });
     }
 
-    @LogMethod("deleteByKey")
     public int deleteByKey(Integer pk) {
         if (pk == null) {
             return 0;
@@ -87,7 +83,6 @@ public class ProjectBurnDaoImpl extends TinyDslDaoSupport implements ProjectBurn
         });
     }
 
-    @LogMethod("deleteByKeys")
     public int deleteByKeys(Integer... pks) {
         if (pks == null || pks.length == 0) {
             return 0;
@@ -165,7 +160,6 @@ public class ProjectBurnDaoImpl extends TinyDslDaoSupport implements ProjectBurn
         return batchInsert(true, projectBurns);
     }
 
-    @LogMethod("batchUpdate")
     public int[] batchUpdate(List<ProjectBurn> projectBurns) {
         if (CollectionUtil.isEmpty(projectBurns)) {
             return new int[0];
@@ -183,7 +177,6 @@ public class ProjectBurnDaoImpl extends TinyDslDaoSupport implements ProjectBurn
         });
     }
 
-    @LogMethod("batchDelete")
     public int[] batchDelete(List<ProjectBurn> projectBurns) {
         if (CollectionUtil.isEmpty(projectBurns)) {
             return new int[0];
@@ -201,7 +194,6 @@ public class ProjectBurnDaoImpl extends TinyDslDaoSupport implements ProjectBurn
         });
     }
 
-    @LogMethod("addOrderByElements")
     private Select addOrderByElements(Select select, OrderBy... orderBies) {
         List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
         for (int i = 0; orderBies != null && i < orderBies.length; i++) {

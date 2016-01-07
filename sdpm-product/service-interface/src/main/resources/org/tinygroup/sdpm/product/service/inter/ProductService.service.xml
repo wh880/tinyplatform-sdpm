@@ -48,12 +48,12 @@
       </service-parameters>
       <service-result name="getProductNameByLineIdResult" required="false" is-array="false" collection-type="java.util.List" type="java.lang.String"/>
     </service-method>
-    <service-method local-name="getProductByUser" service-id="getProductByUser" method-name="getProductByUser" cacheable="false" category="org.tinygroup.sdpm.product.service">
+    <service-method local-name="getProductByUser" service-id="getProductByUser" method-name="getProductByUser" cacheable="false" category="org.tinygroup.sdpm.product.service.inter">
       <service-parameters>
         <service-parameter name="userId" type="java.lang.String" required="false" is-array="false"/>
         <service-parameter name="delete" type="java.lang.Integer" required="false" is-array="false"/>
         <service-parameter name="productLineId" type="java.lang.Integer" required="false" is-array="false"/>
-        <service-parameter name="status" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="status" type="java.lang.String" required="false" is-array="false"/>
       </service-parameters>
       <service-result name="getProductByUserResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.product.dao.pojo.Product"/>
     </service-method>
