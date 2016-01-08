@@ -36,4 +36,6 @@ public interface SystemEffortDao extends BaseDao<SystemEffort, Integer> {
     List<SystemEffort> findBetweenDate(SystemEffort t, Date beginDate, Date endDate);
 
     Pager<SystemEffort> findByDate(int start, int limit, SystemEffort effort, Date startDate, Date endDate, OrderBy... orderArgs);
+
+    List<SystemEffort> findByUserAndDate(String userId, Date beginDate, Date endDate);
 }
