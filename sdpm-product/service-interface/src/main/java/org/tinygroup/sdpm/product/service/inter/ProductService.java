@@ -23,6 +23,7 @@ public interface ProductService {
      * @param product
      * @return
      */
+    @CacheRemove(removeGroups = {CACHE_USER_PRODUCTS_MAP, CACHE_USER_PRODUCTS_LIST, CACHE_PRODUCT_ID, CACHE_USER_PRODUCTS_LIST_WITH_COUNT, CACHE_USER_PRODUCTS_LIST_WITH_LINE_COUNT, CACHE_PRODUCT_NAME_BY_LINE_ID,CACHE_USER_PRODUCT_LINE})
     Product addProduct(Product product);
 
     /**

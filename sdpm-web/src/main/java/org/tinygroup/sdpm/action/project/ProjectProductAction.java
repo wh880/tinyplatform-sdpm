@@ -61,7 +61,7 @@ public class ProjectProductAction extends BaseController {
         }
         SystemModule systemModule = new SystemModule();
         systemModule.setModuleRoot(projectId);
-        systemModule.setModuleType("project");
+        systemModule.setModuleType("projectProduct");
         moduleService.delete(systemModule);
         for(Integer pId : productIds){
             Product p = productService.findProductById(pId);

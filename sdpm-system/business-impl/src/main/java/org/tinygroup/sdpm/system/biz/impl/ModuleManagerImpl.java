@@ -28,8 +28,7 @@ public class ModuleManagerImpl implements ModuleManager {
 
 
     public Integer delete(SystemModule systemModule) {
-        Integer pk = systemModule.getModuleId();
-        return systemModuleDao.deleteByKey(pk);
+        return systemModuleDao.deleteByObject(systemModule);
     }
 
     public SystemModule findById(Integer id) {

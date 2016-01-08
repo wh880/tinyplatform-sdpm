@@ -286,4 +286,20 @@ public class SystemModuleDaoImpl extends TinyDslDaoSupport implements SystemModu
         Delete delete = delete(SYSTEM_MODULETABLE).where(SYSTEM_MODULETABLE.MODULE_ID.in(ids));
         return getDslSession().execute(delete);
     }
+
+    @Override
+    public int deleteByObject(SystemModule systemModule) {
+        Delete delete = delete(SYSTEM_MODULETABLE).where(
+                and(
+                        SYSTEM_MODULETABLE.MODULE_ROOT.eq(systemModule.getModuleRoot()),
+                        SYSTEM_MODULETABLE.MODULE_NAME.eq(systemModule.getModuleName()),
+                        SYSTEM_MODULETABLE.MODULE_PATH.eq(systemModule.getModulePath()),
+                        SYSTEM_MODULETABLE.MODULE_PARENT.eq(systemModule.getModuleParent()),
+                        SYSTEM_MODULETABLE.MODULE_GRADE.eq(systemModule.getModuleGrade()),
+                        SYSTEM_MODULETABLE.MODULE_ORDER.eq(systemModule.getModuleOrder()),
+                        SYSTEM_MODULETABLE.MODULE_TYPE.eq(systemModule.getModuleType()),
+                        SYSTEM_MODULETABLE.MODULE_OWNER.eq(systemModule.getModuleOwner()),
+                        SYSTEM_MODULETABLE.MODULE_TITLE.eq(systemModule.getModuleTitle())));
+        return getDslSession().execute(delete);
+    }
 }

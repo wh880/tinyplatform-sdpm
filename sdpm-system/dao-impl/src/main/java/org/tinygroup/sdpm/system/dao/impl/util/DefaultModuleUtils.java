@@ -131,6 +131,9 @@ public class DefaultModuleUtils {
             return "/";
         }
         if(StringUtil.isBlank(module.getModulePath())||"0,".equals(module.getModulePath())){
+            if(openRoot){
+                return root+division+module.getModuleName();
+            }
             return division+module.getModuleName();
         }
         String path = mergePath(division,module.getModulePath().substring(2),singleModule);

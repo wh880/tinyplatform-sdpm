@@ -569,6 +569,12 @@ public class ProjectTaskAction extends BaseController {
         if (!StringUtil.isBlank(moduleId)) {
             if (moduleId.contains("p")) {
                 moduleIds = ModuleUtil.getConditionByRoot(Integer.parseInt(moduleId.substring(1)), "story");
+                SystemModule module = new SystemModule();
+                module.setModuleOwner(moduleId.substring(1));
+                module.setModuleType("projectProduct");
+                module.setModuleRoot(projectId);
+                List<SystemModule> moduleList = moduleService.findModuleList(module);
+                moduleIds = StringUtil.isBlank(moduleIds)?"("+moduleList.get(0).getModuleId().toString()+")":moduleIds.substring(0,moduleIds.length()-1)+","+moduleList.get(0).getModuleId().toString()+")";
             } else {
                 moduleIds = ModuleUtil.getCondition(Integer.parseInt(moduleId));
             }
@@ -801,17 +807,24 @@ public class ProjectTaskAction extends BaseController {
         }
         List<ProjectProduct> projectProductList = projectProductService.findProductListByProjectId(projectId);
         for (ProjectProduct pp : projectProductList) {
-            module.setModuleType("story");
-            module.setModuleRoot(pp.getProductId());
-            List<SystemModule> tModuleList = moduleService.findModuleList(module);
-            for (SystemModule m : tModuleList) {
-                Product product = productService.findProductById(pp.getProductId());
-                SystemModule productModel = new SystemModule();
-                productModel.setModuleName(product.getProductName());
-                moduleList.add(productModel);
-                m.setModuleName(ModuleUtil.getPath(m.getModuleId(), "/", product == null ? "" : product.getProductName(), true));
+            Product product = productService.findProductById(pp.getProductId());
+            if(product.getDeleted()==0) {
+                module.setModuleType("story");
+                module.setModuleRoot(pp.getProductId());
+                List<SystemModule> tModuleList = moduleService.findModuleList(module);
+                for (SystemModule m : tModuleList) {
+                    SystemModule productModel = new SystemModule();
+                    productModel.setModuleName(product.getProductName());
+                    moduleList.add(productModel);
+                    m.setModuleName(ModuleUtil.getPath(m.getModuleId(), "/", product == null ? "" : product.getProductName(), true));
+                }
+                SystemModule module1 = new SystemModule();
+                module1.setModuleType("projectProduct");
+                module1.setModuleRoot(pp.getProjectId());
+                module1.setModuleOwner(pp.getProductId().toString());
+                moduleList.addAll(moduleService.findModuleList(module1));
+                moduleList.addAll(tModuleList);
             }
-            moduleList.addAll(tModuleList);
         }
         return moduleList;
     }

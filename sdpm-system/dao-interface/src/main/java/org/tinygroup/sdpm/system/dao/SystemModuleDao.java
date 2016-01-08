@@ -24,6 +24,8 @@ public interface SystemModuleDao extends BaseDao<SystemModule, Integer> {
 
     int batchdelete(String ids);
 
+    int deleteByObject(SystemModule systemModule);
+
     int deletebyKeyAndedit(Integer id);
 
     int deleteByType(String type);
