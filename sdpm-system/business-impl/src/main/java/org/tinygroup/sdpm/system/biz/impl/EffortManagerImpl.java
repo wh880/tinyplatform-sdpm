@@ -99,5 +99,8 @@ public class EffortManagerImpl implements EffortManager {
         return systemEffortDao.getByKey(id);
     }
 
-
+    @Override
+    public List<SystemEffort> findByUserAndDate(String userId, Date beginDate, Date endDate) {
+        return systemEffortDao.findByUserAndDate(userId,beginDate,endDate);
+    }
 }

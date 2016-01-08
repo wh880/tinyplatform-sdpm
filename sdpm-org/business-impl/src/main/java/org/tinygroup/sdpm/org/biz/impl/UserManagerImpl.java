@@ -156,4 +156,12 @@ public class UserManagerImpl implements UserManager {
         }
     }
 
+    @Override
+    public List<OrgUser> getUserListById(List<String> list){
+        if(list==null){
+            list=new ArrayList<String>();
+        }
+        return orgUserDao.getListById(list);
+    }
+
 }
