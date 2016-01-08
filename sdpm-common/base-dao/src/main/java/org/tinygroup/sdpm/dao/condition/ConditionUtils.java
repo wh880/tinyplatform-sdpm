@@ -17,13 +17,13 @@ import java.util.List;
  */
 public class ConditionUtils {
 
-    public static Condition mergeCondition(ConditionCarrier carrier, CallBackFunction callBackFunction){
-        if(carrier==null)return null;
+    public static Condition mergeCondition(ConditionCarrier carrier, CallBackFunction callBackFunction) {
+        if (carrier == null) return null;
         List<Condition> conditions = new ArrayList<Condition>();
-        for(String field : carrier.getFields()){
+        for (String field : carrier.getFields()) {
             Condition condition = null;
             Column column = new Column(NameUtil.resolveNameDesc(field));
-            if(carrier.getFieldType(field).equals(ConditionUtils.CommonFieldType.MODULE.getCommonField())){
+            if (carrier.getFieldType(field).equals(ConditionUtils.CommonFieldType.MODULE.getCommonField())) {
                 boolean isIn = carrier.getOperate(field).equals(ConditionUtils.Operate.IN.getOperate());
                 String moduleId = (String) carrier.getValue(field)[0];
                 if (moduleId.contains("p")) {
@@ -39,47 +39,47 @@ public class ConditionUtils {
                         condition = column.notIn(callBackFunction.module(moduleId));
                     }
                 }
-             }else if(carrier.getFieldType(field).equals(ConditionUtils.CommonFieldType.SEARCH.getCommonField())){
-                if(carrier.getValue(field)[0]!=null){
+            } else if (carrier.getFieldType(field).equals(ConditionUtils.CommonFieldType.SEARCH.getCommonField())) {
+                if (carrier.getValue(field)[0] != null) {
                     String result = SqlUtil.toSql(((SearchInfos) carrier.getValue(field)[0]).getInfos(), (String) carrier.getValue(field)[1]);
-                    if(!StringUtil.isBlank(result)){
+                    if (!StringUtil.isBlank(result)) {
                         condition = FragmentSql.fragmentCondition(result);
                     }
                 }
-            }else if(carrier.getFieldType(field).equals(ConditionUtils.CommonFieldType.ID.getCommonField())){
+            } else if (carrier.getFieldType(field).equals(ConditionUtils.CommonFieldType.ID.getCommonField())) {
                 boolean isIn = carrier.getOperate(field).equals(ConditionUtils.Operate.IN.getOperate());
                 String[] result = (String[]) carrier.getValue(field)[0];
                 String[] value = {"0"};
-                result = result!=null&&result.length>0?result:value;
-                if(isIn){
+                result = result != null && result.length > 0 ? result : value;
+                if (isIn) {
                     condition = column.in(result);
-                }else{
+                } else {
                     condition = column.notIn(result);
                 }
-            }else if(carrier.getFieldType(field).equals(ConditionUtils.CommonFieldType.FIELD_OPERATE.getCommonField())){
+            } else if (carrier.getFieldType(field).equals(ConditionUtils.CommonFieldType.FIELD_OPERATE.getCommonField())) {
                 String result = String.valueOf(carrier.getValue(field)[0]);
-                if(!StringUtil.isBlank(result)){
-                    if(carrier.getOperate(field).equals(ConditionUtils.Operate.EQ.getOperate())){
+                if (!StringUtil.isBlank(result)) {
+                    if (carrier.getOperate(field).equals(ConditionUtils.Operate.EQ.getOperate())) {
                         condition = column.eq(result);
-                    }else if(carrier.getOperate(field).equals(ConditionUtils.Operate.NEQ.getOperate())){
+                    } else if (carrier.getOperate(field).equals(ConditionUtils.Operate.NEQ.getOperate())) {
                         condition = column.neq(result);
-                    }else if(carrier.getOperate(field).equals(ConditionUtils.Operate.GT.getOperate())){
+                    } else if (carrier.getOperate(field).equals(ConditionUtils.Operate.GT.getOperate())) {
                         condition = column.gt(result);
-                    }else if(carrier.getOperate(field).equals(ConditionUtils.Operate.LT.getOperate())){
+                    } else if (carrier.getOperate(field).equals(ConditionUtils.Operate.LT.getOperate())) {
                         condition = column.lt(result);
                     }
                 }
-            }else if(carrier.getFieldType(field).equals(ConditionUtils.CommonFieldType.STATUS.getCommonField())){
+            } else if (carrier.getFieldType(field).equals(ConditionUtils.CommonFieldType.STATUS.getCommonField())) {
                 String result = String.valueOf(carrier.getValue(field)[0]);
-                if(!StringUtil.isBlank(result)){
+                if (!StringUtil.isBlank(result)) {
                     condition = FragmentSql.fragmentCondition(result);
                 }
             }
             conditions.add(condition);
         }
-        if(conditions.size()==0){
+        if (conditions.size() == 0) {
             return null;
-        }else if(conditions.size()==1){
+        } else if (conditions.size() == 1) {
             return conditions.get(0);
         }
         Condition[] conditionArray = new Condition[conditions.size()];

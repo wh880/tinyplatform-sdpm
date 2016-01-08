@@ -243,7 +243,7 @@ public class BugAction extends BaseController {
 
     @RequiresPermissions("tmakesure")
     @RequestMapping("/makesure")
-    public String makesure(Integer bugId, Model model) {
+    public String makeSure(Integer bugId, Model model) {
         QualityBug bug = bugService.findQualityBugById(bugId);
         List<OrgUser> orgUsers = userService.findUserList(null);
         model.addAttribute("bug", bug);
@@ -254,7 +254,7 @@ public class BugAction extends BaseController {
     @RequiresPermissions("tmakesure")
     @ResponseBody
     @RequestMapping("batch/sure")
-    public Map makesure(String ids) {
+    public Map makeSure(String ids) {
         String[] bugIds = ids.split(",");
         if (bugIds.length > 0) {
             for (String id : bugIds) {
@@ -343,7 +343,7 @@ public class BugAction extends BaseController {
     }
 
     @RequestMapping("/sure")
-    public String makesure(QualityBug bug, SystemAction systemAction) {
+    public String makeSure(QualityBug bug, SystemAction systemAction) {
         QualityBug qualityBugOld = bugService.findQualityBugById(bug.getBugId());
         if (qualityBugOld.getBugAssignedTo() != bug.getBugAssignedTo()) {
             bug.setBugAssignedDate(new Date());
@@ -671,7 +671,7 @@ public class BugAction extends BaseController {
 
     @RequestMapping(value = "/copy", method = RequestMethod.POST)
     public String copySave(QualityBug bug, SystemAction systemAction, HttpServletRequest request, @RequestParam(value = "file", required = false) MultipartFile[] file,
-                           String[] title, UploadProfile uploadProfile) throws IOException {
+                          UploadProfile uploadProfile) throws IOException {
         bug.setBugConfirmed(0);
         bug.setBugStatus("1");
         bug.setDeleted(0);
@@ -698,8 +698,6 @@ public class BugAction extends BaseController {
 
     @RequestMapping(value = "/save")
     public String save(QualityBug bug, SystemAction systemAction,
-                       @RequestParam(value = "file", required = false) MultipartFile[] file,
-                       String[] title,
                        HttpServletRequest request,
                        String lastAddress,
                        String currentAddress,
@@ -932,8 +930,7 @@ public class BugAction extends BaseController {
     @RequestMapping("requestToBug")
     public String requestToBug(Integer id, Model model){
         ServiceRequest request = requestService.findRequest(id);
-        StringBuffer bugStep = new StringBuffer("");
-        bugStep.append("【请求】<br>");
+        StringBuffer bugStep = new StringBuffer("【请求】<br>");
         bugStep.append(request.getRequestSpec());
         bugStep.append("【步骤】<br>");
         bugStep.append("【期望】<br>");

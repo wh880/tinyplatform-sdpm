@@ -2,8 +2,7 @@
 <menu id="project" parent-id="0" name="项目" href="/project/task/index?choose=1" icon="icon-book" sort="700" isShow="1">
     <menu id="task" parent-id="project" name="任务" href="/project/task/index?choose=1" icon="" sort="1" isShow="1">
         <menu id="pro-task-proposeversion" name="建任务" href="/project/task/form" icon="icon-plus" sort="4"
-              isShow="1"
-              scope="pro-taskmenu2-op"/>
+              isShow="1" scope="pro-taskmenu2-op"/>
         <menu id="pro-task-call" name="指派" href="/project/task/call" icon="icon-hand-right" sort="20" isShow="1"
               scope="pro-task-op"/>
         <menu id="pro-task-start" name="开始" href="/project/task/start" icon="icon-play" sort="15" isShow="1"
@@ -17,22 +16,22 @@
         <menu id="pro-task-close" name="关闭" href="/project/task/close" icon="icon-off" sort="6" isShow="1"
               scope="pro-task-op"/>
 
-        <!--<menu id="task-group" name="分组查询" icon="" sort="10">-->
-        <menu id="task-group-story" href="/project/task/grouping?type=1" sort="100" name="需求分组"
-              scope="task-group-menu"/>
-        <menu id="task-group-status" href="/project/task/grouping?type=2" sort="90" name="状态分组"
-              scope="task-group-menu"/>
-        <menu id="task-group-pri" href="/project/task/grouping?type=3" sort="80" name="优先级分组"
-              scope="task-group-menu"/>
-        <menu id="task-group-openedBy" href="/project/task/grouping?type=4" sort="70" name="创建者分组"
-              scope="task-group-menu"/>
-        <menu id="task-group-assignedTo" href="/project/task/grouping?type=5" sort="60" name="指派人分组"
-              scope="task-group-menu"/>
-        <menu id="task-group-finishedBy" href="/project/task/grouping?type=6" sort="50" name="完成者分组"
-              scope="task-group-menu"/>
-        <menu id="task-group-closedBy" href="/project/task/grouping?type=7" sort="40" name="关闭者分组"
-              scope="task-group-menu"/>
-        <!--</menu>-->
+        <menu id="task-group" name="分组查询" icon="" sort="10">
+            <menu id="task-group-story" href="/project/task/grouping?type=1" sort="100" name="需求分组"
+                  scope="task-group-menu"/>
+            <menu id="task-group-status" href="/project/task/grouping?type=2" sort="90" name="状态分组"
+                  scope="task-group-menu"/>
+            <menu id="task-group-pri" href="/project/task/grouping?type=3" sort="80" name="优先级分组"
+                  scope="task-group-menu"/>
+            <menu id="task-group-openedBy" href="/project/task/grouping?type=4" sort="70" name="创建者分组"
+                  scope="task-group-menu"/>
+            <menu id="task-group-assignedTo" href="/project/task/grouping?type=5" sort="60" name="指派人分组"
+                  scope="task-group-menu"/>
+            <menu id="task-group-finishedBy" href="/project/task/grouping?type=6" sort="50" name="完成者分组"
+                  scope="task-group-menu"/>
+            <menu id="task-group-closedBy" href="/project/task/grouping?type=7" sort="40" name="关闭者分组"
+                  scope="task-group-menu"/>
+        </menu>
 
         <!--<menu id="task-menu2" name="任务菜单" href="/project/task/index.page" icon="" sort="1" isShow="1">-->
         <menu id="pro-task-report" name="报表" href="/project/task/reportform" icon="icon-bar-chart" sort="8"
@@ -110,7 +109,7 @@
         <!--</menu>-->
         <!--<menu id="version-story" name="需求" href="/project/build/productalstory" icon="" sort="1" isShow="1">-->
         <menu id="versionstory" name="移除需求" href="/project/build/deletereleate" icon="icon-remove" sort="8"
-              isShow="1"   scope="version-linkdemand"/>
+              isShow="1" scope="version-linkdemand"/>
         <!--</menu>-->
 
     </menu>
