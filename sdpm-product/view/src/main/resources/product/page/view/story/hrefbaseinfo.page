@@ -112,10 +112,9 @@
                     #@th() 名称 #end
                     #foreach(task:taskList)
                     #@tr()
-                        #@td()${task?.taskId}#end #@td()<a href="${TINY_CONTEXT_PATH + adminPath}/project/task/findTask?taskId=1">${task?.taskName}</a>#end
+                        #@td()${task?.taskId}#end #@td()<a href="${TINY_CONTEXT_PATH + adminPath}/project/task/findTask?taskId=${task?.taskId}">${task?.taskName}</a>#end
                     #end
                 #end
-
             #end
         #end
     #end
