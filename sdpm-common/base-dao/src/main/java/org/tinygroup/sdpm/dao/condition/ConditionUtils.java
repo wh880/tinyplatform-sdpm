@@ -50,22 +50,22 @@ public class ConditionUtils {
                 boolean isIn = carrier.getOperate(field).equals(ConditionUtils.Operate.IN.getOperate());
                 String[] result = (String[]) carrier.getValue(field)[0];
                 String[] value = {"0"};
-                result = result != null && result.length > 0 ? result : value;
-                if (isIn) {
+                result = result!=null&&result.length>0?result:value;
+                if(isIn){
                     condition = column.in(result);
-                } else {
+                }else{
                     condition = column.notIn(result);
                 }
-            } else if (carrier.getFieldType(field).equals(ConditionUtils.CommonFieldType.FIELD_OPERATE.getCommonField())) {
+            }else if(carrier.getFieldType(field).equals(ConditionUtils.CommonFieldType.FIELD_OPERATE.getCommonField())){
                 String result = String.valueOf(carrier.getValue(field)[0]);
-                if (!StringUtil.isBlank(result)) {
-                    if (carrier.getOperate(field).equals(ConditionUtils.Operate.EQ.getOperate())) {
+                if(!StringUtil.isBlank(result)){
+                    if(carrier.getOperate(field).equals(ConditionUtils.Operate.EQ.getOperate())){
                         condition = column.eq(result);
-                    } else if (carrier.getOperate(field).equals(ConditionUtils.Operate.NEQ.getOperate())) {
+                    }else if(carrier.getOperate(field).equals(ConditionUtils.Operate.NEQ.getOperate())){
                         condition = column.neq(result);
-                    } else if (carrier.getOperate(field).equals(ConditionUtils.Operate.GT.getOperate())) {
+                    }else if(carrier.getOperate(field).equals(ConditionUtils.Operate.GT.getOperate())){
                         condition = column.gt(result);
-                    } else if (carrier.getOperate(field).equals(ConditionUtils.Operate.LT.getOperate())) {
+                    }else if(carrier.getOperate(field).equals(ConditionUtils.Operate.LT.getOperate())){
                         condition = column.lt(result);
                     }
                 }

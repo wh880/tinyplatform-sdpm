@@ -42,11 +42,8 @@
                             <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp
 						#end
 					#end
-
 				</span>
-			#div(divClass="clearfix")
-						#include("/quality/common/mulsearch.page")
-		#end
+			#div(divClass="clearfix")#include("/quality/common/mulsearch.page")#end
 	##operationbar end
 	#end
 #end
