@@ -300,7 +300,7 @@ public class ProjectBuildAction extends BaseController {
         bug.setBugStatus("2");
         bug.setBugOpenedBuild(String.valueOf(id));
         if ("reRelateBug".equals(relate)) {
-            carrier.putIdIn("qualityBug.bugId",build.getBuildBugs().split(","));
+            carrier.putIns("qualityBug.bugId",build.getBuildBugs().split(","));
             Pager<QualityBug> p = bugService.findBugListPager(start, limit, carrier, bug,order,"asc".equals(ordertype)?true:false);
             model.addAttribute("bugList", p);
             return "/project/data/build/relation/product-al-bug-data.pagelet";

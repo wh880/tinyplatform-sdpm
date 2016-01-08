@@ -640,7 +640,7 @@ public class StoryAction extends BaseController {
                     if (StringUtil.isBlank(inCondition)) {
                         p = new Pager<ProductStory>(0, 0, new ArrayList<ProductStory>());
                     } else {
-                        carrier.putIdIn("productStory.storyId", inCondition.split(","));
+                        carrier.putIns("productStory.storyId", inCondition.split(","));
                         p = storyService.findStoryByCondition(start,
                                 pagesize, story, carrier, order,
                                 "asc".equals(ordertype) ? true : false);
@@ -716,7 +716,7 @@ public class StoryAction extends BaseController {
                     if (StringUtil.isBlank(inCondition)) {
                         p = new Pager<QualityBug>(0, 0, new ArrayList<QualityBug>());
                     } else {
-                        carrier.putIdIn("qualityBug.bugId",inCondition.split(","));
+                        carrier.putIns("qualityBug.bugId",inCondition.split(","));
                         p = bugService.findBugListPager(
                                 pagesize * (page - 1), pagesize, carrier, bug, order,
                                 "asc".equals(ordertype) ? true : false);

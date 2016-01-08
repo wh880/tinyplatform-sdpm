@@ -83,7 +83,7 @@ public class ProjectStoryServiceImpl implements ProjectStoryService {
             ids[i] = String.valueOf(storyList.get(i).getStoryId());
         }
         ConditionCarrier carrier = new ConditionCarrier();
-        carrier.putIdIn("productStory.storyId",ids);
+        carrier.putIns("productStory.storyId",ids);
         if (!StringUtil.isBlank(moduleId)) {
             carrier.putModuleIn("productStory.moduleId",moduleId);
         }

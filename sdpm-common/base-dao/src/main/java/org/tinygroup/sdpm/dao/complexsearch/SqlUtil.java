@@ -99,7 +99,7 @@ public class SqlUtil {
             }
 
         }
-        return sql.append(" " + NameUtil.resolveNameDesc(searchInfo.getField())).append(operateAndValue).toString();
+        return sql.append(" " + processDate(NameUtil.resolveNameDesc(searchInfo.getField()))).append(operateAndValue).toString();
     }
 
     private static int[] totalFields(List<SearchInfo> searchInfos, int n) {
@@ -121,5 +121,13 @@ public class SqlUtil {
         Pattern pattern = Pattern.compile("[0-9]*");
         Matcher isNum = pattern.matcher(param);
         return isNum.matches();
+    }
+
+    private static String processDate(String field){
+        if(field.contains("date")){
+            return "SUBSTR("+field+",1,10)";
+        }else{
+            return field;
+        }
     }
 }

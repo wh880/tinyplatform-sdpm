@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.project.service.inter;
 
+import org.tinygroup.sdpm.dao.condition.ConditionCarrier;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
 import org.tinygroup.sdpm.project.dao.pojo.TaskChartBean;
@@ -67,7 +68,7 @@ public interface TaskService {
      * @param sortName
      * @return
      */
-    Pager<ProjectTask> findTaskPager(Integer start, Integer limit, ProjectTask task, String sortName, boolean asc, String condition);
+    Pager<ProjectTask> findTaskPager(Integer start, Integer limit, ProjectTask task, String sortName, boolean asc, ConditionCarrier carrier);
 
     /**
      * 根据taskId主键查询

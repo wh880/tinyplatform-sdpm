@@ -13,6 +13,8 @@ import org.tinygroup.logger.LogLevel;
 import org.tinygroup.sdpm.action.project.util.TaskStatusUtil;
 import org.tinygroup.sdpm.common.util.DateUtils;
 import org.tinygroup.sdpm.common.web.BaseController;
+import org.tinygroup.sdpm.dao.complexsearch.SearchInfos;
+import org.tinygroup.sdpm.dao.condition.ConditionCarrier;
 import org.tinygroup.sdpm.dto.UploadProfile;
 import org.tinygroup.sdpm.dto.project.EffortList;
 import org.tinygroup.sdpm.dto.project.Tasks;
@@ -549,12 +551,20 @@ public class ProjectTaskAction extends BaseController {
     }
 
     @RequestMapping("/findPager")
-    public String findPager(
-            Integer start, Integer limit, String statu, String choose, Model model,
-            HttpServletRequest request, HttpServletResponse response, String moduleId,
-            @RequestParam(required = false, defaultValue = "task_no") String order,
-            @RequestParam(defaultValue = "desc") String orderType, Integer key) {
+    public String findPager(SearchInfos infos,
+                            String groupOperate,
+                            Integer start,
+                            Integer limit,
+                            String statu,
+                            String choose,
+                            Model model,
+                            HttpServletRequest request,
+                            HttpServletResponse response,
+                            String moduleId,
+                            @RequestParam(required = false, defaultValue = "task_no") String order,
+                            @RequestParam(defaultValue = "desc") String orderType, Integer key) {
         Integer projectId = projectOperate.getCurrentProjectId(request, response);
+        ConditionCarrier carrier = new ConditionCarrier();
         if (projectId == null) {
             return redirectProjectForm();
         }
@@ -562,6 +572,7 @@ public class ProjectTaskAction extends BaseController {
         if ("asc".equals(orderType)) {
             asc = true;
         }
+        carrier.putSearch("taskSearch",infos,groupOperate);
         ProjectTask task = new ProjectTask();
         task.setTaskNo(key);
         task.setTaskProject(projectId);
@@ -574,23 +585,24 @@ public class ProjectTaskAction extends BaseController {
                 module.setModuleType("projectProduct");
                 module.setModuleRoot(projectId);
                 List<SystemModule> moduleList = moduleService.findModuleList(module);
-                moduleIds = StringUtil.isBlank(moduleIds)?"("+moduleList.get(0).getModuleId().toString()+")":moduleIds.substring(0,moduleIds.length()-1)+","+moduleList.get(0).getModuleId().toString()+")";
+                moduleIds = StringUtil.isBlank(moduleIds)?moduleList.get(0).getModuleId().toString():moduleIds.substring(1,moduleIds.length()-1)+","+moduleList.get(0).getModuleId().toString();
             } else {
-                moduleIds = ModuleUtil.getCondition(Integer.parseInt(moduleId));
+                moduleIds = ModuleUtil.getCondition(Integer.parseInt(moduleId)).substring(1,moduleIds.length()-1);
             }
+            carrier.putIns("taskModule",moduleIds.split(","));
         }
         //默认显示未关闭任务
         if (statu == null && choose == null) {
             statu = "0";
         }
 
-        String condition = TaskStatusUtil.getCondition(statu, choose, userUtils.getUserId(), moduleIds);
+        String condition = TaskStatusUtil.getCondition(statu, choose, userUtils.getUserId(),carrier);
         Pager<ProjectTask> taskPager;
         if (condition.equals("completeByMe")) {
             OrgUser user = userUtils.getUser();
             taskPager = taskService.findPagerTaskByMe(start, limit, task, order, asc, user);
         } else {
-            taskPager = taskService.findTaskPager(start, limit, task, order, asc, condition);
+            taskPager = taskService.findTaskPager(start, limit, task, order, asc, carrier);
         }
         projectPagerInfoStatistics(model, taskPager.getRecords());
 

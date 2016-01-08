@@ -22,6 +22,7 @@ import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
 import org.tinygroup.sdpm.project.dao.pojo.TaskChartBean;
 import org.tinygroup.tinysqldsl.Pager;
+import org.tinygroup.tinysqldsl.base.Condition;
 
 import java.util.List;
 
@@ -42,7 +43,7 @@ public interface ProjectTaskDao extends BaseDao<ProjectTask, Integer> {
      */
     Integer getMaxNo(Integer projectId);
 
-    Pager<ProjectTask> queryPagerByStatus(int start, int limit, ProjectTask projectTask, final String condition, final OrderBy... orderBies);
+    Pager<ProjectTask> queryPagerByStatus(int start, int limit, ProjectTask projectTask, final Condition condition, final OrderBy... orderBies);
 
     /**
      * 由我解决
