@@ -24,53 +24,53 @@ public class DiaryServiceImpl implements DiaryService{
     private UserManager userManager;
 
     @Override
-    public OrgDiary add(OrgDiary orgDiary, List<OrgDiaryDetail> list) {
+    public OrgDiary addDiary(OrgDiary orgDiary, List<OrgDiaryDetail> list) {
         return diaryManager.add(orgDiary,list);
     }
 
     @Override
-    public Integer delete(Integer id) {
+    public Integer deleteDiary(Integer id) {
         return diaryManager.delete(id);
     }
 
     @Override
-    public Integer update(OrgDiary orgDiary, List<OrgDiaryDetail> list) {
+    public Integer updateDiary(OrgDiary orgDiary, List<OrgDiaryDetail> list) {
         return diaryManager.update(orgDiary,list);
     }
 
     @Override
-    public OrgDiary findByKey(Integer id) {
+    public OrgDiary findDiaryByKey(Integer id) {
         return diaryManager.findByKey(id);
     }
 
     @Override
-    public List<OrgDiary> findByUserId(String id) {
+    public List<OrgDiary> findDiaryListByUserId(String id) {
         return diaryManager.findByUserId(id);
     }
 
     @Override
-    public List<OrgDiaryDetail> findByDiaryId(Integer id) {
+    public List<OrgDiaryDetail> findDetailListByDiaryId(Integer id) {
         return diaryManager.findByDiaryId(id);
     }
 
     @Override
-    public List<OrgDiary> findSubordinate(String id) {
+    public List<OrgDiary> findDiaryListSubordinate(String id) {
         List<OrgUser> list=userManager.getDirectStaffByLeader(id);
         return diaryManager.findSubordinate(list);
     }
 
     @Override
-    public OrgDiary find(Integer year, Integer week, String userId) {
+    public OrgDiary findDiaryByUserAndDate(Integer year, Integer week, String userId) {
         return diaryManager.find(year,week,userId);
     }
 
     @Override
-    public List<OrgDiary> findListOneWeek(Integer year, Integer week) {
+    public List<OrgDiary> findDiaryListOneWeek(Integer year, Integer week) {
         return diaryManager.findListOneWeek(year,week);
     }
 
     @Override
-    public List<OrgDiary> findSubordinateOneWeek(String userId, Integer year, Integer week) {
+    public List<OrgDiary> findDiaryListSubordinateOneWeek(String userId, Integer year, Integer week) {
         if(userId==null||year==null||week==null){
             return null;
         }
@@ -79,7 +79,7 @@ public class DiaryServiceImpl implements DiaryService{
     }
 
     @Override
-    public List<OrgUser> findUser(String userId,Integer year,Integer week){
+    public List<OrgUser> findUserNoSubmit(String userId, Integer year, Integer week){
         List<OrgUser> list=userManager.getDirectStaffByLeader(userId);
         List<String> list1=new ArrayList<String>();
         for (OrgUser orgUser:list) {

@@ -87,7 +87,7 @@ public class EffortServiceImpl implements EffortService {
     }
 
     @Override
-    public List<SystemEffort> findByUserAndDate(String userId, Date beginDate, Date endDate) {
+    public List<SystemEffort> findEffortListByUserAndDate(String userId, Date beginDate, Date endDate) {
         return effortManager.findByUserAndDate(userId,beginDate,endDate);
     }
 }

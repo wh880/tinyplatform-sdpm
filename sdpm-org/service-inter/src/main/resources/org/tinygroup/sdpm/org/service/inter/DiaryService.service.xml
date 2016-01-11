@@ -1,0 +1,79 @@
+<service-components>
+  <service-component type="org.tinygroup.sdpm.org.service.inter.DiaryService" bean="diaryServiceImpl">
+    <service-method local-name="addDiary" service-id="addDiary" method-name="addDiary" cacheable="false" category="org.tinygroup.sdpm.org.service.inter">
+      <service-parameters>
+        <service-parameter name="orgDiary" type="org.tinygroup.sdpm.org.dao.pojo.OrgDiary" required="false" is-array="false"/>
+        <service-parameter name="list" type="org.tinygroup.sdpm.org.dao.pojo.OrgDiaryDetail" collection-type="java.util.List" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="addDiaryResult" required="false" is-array="false" type="org.tinygroup.sdpm.org.dao.pojo.OrgDiary"/>
+    </service-method>
+    <service-method local-name="deleteDiary" service-id="deleteDiary" method-name="deleteDiary" cacheable="false" category="org.tinygroup.sdpm.org.service.inter">
+      <service-parameters>
+        <service-parameter name="id" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="deleteDiaryResult" required="false" is-array="false" type="java.lang.Integer"/>
+    </service-method>
+    <service-method local-name="updateDiary" service-id="updateDiary" method-name="updateDiary" cacheable="false" category="org.tinygroup.sdpm.org.service.inter">
+      <service-parameters>
+        <service-parameter name="orgDiary" type="org.tinygroup.sdpm.org.dao.pojo.OrgDiary" required="false" is-array="false"/>
+        <service-parameter name="list" type="org.tinygroup.sdpm.org.dao.pojo.OrgDiaryDetail" collection-type="java.util.List" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="updateDiaryResult" required="false" is-array="false" type="java.lang.Integer"/>
+    </service-method>
+    <service-method local-name="findDiaryByKey" service-id="findDiaryByKey" method-name="findDiaryByKey" cacheable="false" category="org.tinygroup.sdpm.org.service.inter">
+      <service-parameters>
+        <service-parameter name="id" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findDiaryByKeyResult" required="false" is-array="false" type="org.tinygroup.sdpm.org.dao.pojo.OrgDiary"/>
+    </service-method>
+    <service-method local-name="findDiaryListByUserId" service-id="findDiaryListByUserId" method-name="findDiaryListByUserId" cacheable="false" category="org.tinygroup.sdpm.org.service.inter">
+      <service-parameters>
+        <service-parameter name="id" type="java.lang.String" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findDiaryListByUserIdResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.org.dao.pojo.OrgDiary"/>
+    </service-method>
+    <service-method local-name="findDetailListByDiaryId" service-id="findDetailListByDiaryId" method-name="findDetailListByDiaryId" cacheable="false" category="org.tinygroup.sdpm.org.service.inter">
+      <service-parameters>
+        <service-parameter name="id" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findDetailListByDiaryIdResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.org.dao.pojo.OrgDiaryDetail"/>
+    </service-method>
+    <service-method local-name="findSubordinate" service-id="findSubordinate" method-name="findSubordinate" cacheable="false" category="org.tinygroup.sdpm.org.service.inter">
+      <service-parameters>
+        <service-parameter name="id" type="java.lang.String" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findSubordinateResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.org.dao.pojo.OrgDiary"/>
+    </service-method>
+    <service-method local-name="findDiaryByUserAndDate" service-id="findDiaryByUserAndDate" method-name="findDiaryByUserAndDate" cacheable="false" category="org.tinygroup.sdpm.org.service.inter">
+      <service-parameters>
+        <service-parameter name="year" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="week" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="userId" type="java.lang.String" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findDiaryByUserAndDateResult" required="false" is-array="false" type="org.tinygroup.sdpm.org.dao.pojo.OrgDiary"/>
+    </service-method>
+    <service-method local-name="findListOneWeek" service-id="findListOneWeek" method-name="findListOneWeek" cacheable="false" category="org.tinygroup.sdpm.org.service.inter">
+      <service-parameters>
+        <service-parameter name="year" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="week" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findListOneWeekResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.org.dao.pojo.OrgDiary"/>
+    </service-method>
+    <service-method local-name="findSubordinateOneWeek" service-id="findSubordinateOneWeek" method-name="findSubordinateOneWeek" cacheable="false" category="org.tinygroup.sdpm.org.service.inter">
+      <service-parameters>
+        <service-parameter name="userId" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="year" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="week" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findSubordinateOneWeekResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.org.dao.pojo.OrgDiary"/>
+    </service-method>
+    <service-method local-name="findUserNoSubmit" service-id="findUserNoSubmit" method-name="findUserNoSubmit" cacheable="false" category="org.tinygroup.sdpm.org.service.inter">
+      <service-parameters>
+        <service-parameter name="userId" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="year" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="week" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findUserNoSubmitResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.org.dao.pojo.OrgUser"/>
+    </service-method>
+  </service-component>
+</service-components>
