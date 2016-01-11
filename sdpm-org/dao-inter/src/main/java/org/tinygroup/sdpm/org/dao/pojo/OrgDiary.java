@@ -16,6 +16,7 @@
 
 package org.tinygroup.sdpm.org.dao.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /** 
@@ -25,7 +26,7 @@ import java.util.Date;
  * <!-- end-user-doc -->
  * @generated
  */
-public class OrgDiary {
+public class OrgDiary implements Serializable{
 
 	/** 
 	 * <!-- begin-user-doc -->
