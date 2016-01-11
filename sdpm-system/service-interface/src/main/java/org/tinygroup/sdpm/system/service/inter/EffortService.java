@@ -111,5 +111,5 @@ public interface EffortService {
     /**
      * 查询某人某一时段的日志
      */
-    List<SystemEffort> findByUserAndDate(String userId,Date beginDate,Date endDate);
+    List<SystemEffort> findEffortListByUserAndDate(String userId, Date beginDate, Date endDate);
 }

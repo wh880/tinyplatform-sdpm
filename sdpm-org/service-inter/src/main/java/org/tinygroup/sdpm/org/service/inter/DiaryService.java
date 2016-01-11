@@ -13,49 +13,49 @@ public interface DiaryService {
     /**
      * 添加周报
      */
-    OrgDiary add(OrgDiary orgDiary, List<OrgDiaryDetail> list);
+    OrgDiary addDiary(OrgDiary orgDiary, List<OrgDiaryDetail> list);
 
     /**
      * 删除周报
      */
-    Integer delete(Integer id);
+    Integer deleteDiary(Integer id);
 
     /**
      * 更新周报
      */
-    Integer update(OrgDiary orgDiary, List<OrgDiaryDetail> list);
+    Integer updateDiary(OrgDiary orgDiary, List<OrgDiaryDetail> list);
 
     /**
      * 查看指定ID的周报
      */
-    OrgDiary findByKey(Integer id);
+    OrgDiary findDiaryByKey(Integer id);
 
     /**
      * 查找某人的周报
      */
-    List<OrgDiary> findByUserId(String id);
+    List<OrgDiary> findDiaryListByUserId(String id);
 
     /**
      * 查看周报详情
      */
-    List<OrgDiaryDetail> findByDiaryId(Integer id);
+    List<OrgDiaryDetail> findDetailListByDiaryId(Integer id);
 
     /**
      *查看下属的周报
      */
-    List<OrgDiary> findSubordinate(String id);
+    List<OrgDiary> findDiaryListSubordinate(String id);
 
     /**
      * 根据年、周查询某一周的周报(某人)
      */
-    OrgDiary find(Integer year,Integer week,String userId);
+    OrgDiary findDiaryByUserAndDate(Integer year, Integer week, String userId);
 
     /**
      * 根据某年、某周查询那一周的周报
      */
-    List<OrgDiary> findListOneWeek(Integer year,Integer week);
+    List<OrgDiary> findDiaryListOneWeek(Integer year, Integer week);
 
-    List<OrgDiary> findSubordinateOneWeek(String userId,Integer year,Integer week);
+    List<OrgDiary> findDiaryListSubordinateOneWeek(String userId, Integer year, Integer week);
 
     /**
      * 查询本周未提交周报的下属
@@ -64,5 +64,5 @@ public interface DiaryService {
      * @param week
      * @return
      */
-    List<OrgUser> findUser(String userId, Integer year, Integer week);
+    List<OrgUser> findUserNoSubmit(String userId, Integer year, Integer week);
 }
