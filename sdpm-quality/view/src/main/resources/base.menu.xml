@@ -17,7 +17,7 @@
         </menu>
 
         <!--批量关闭-->
-        <menu id="batchshutdownquality" name="批量关闭" icon="icon-off" sort="3"
+        <menu id="batchshutdownquality" name="批量关闭" icon="icon-off"
               isShow="1" scope="testbug-op,testbuginfo-tab">
         </menu>
 
