@@ -63,7 +63,7 @@ public class SqlUtil {
                         }
                         nullMark = 0;
                     } else {
-                        if (total[i] - j > 0) {
+                        if (count == 0) {
                             nullMark = 1;
                         }
                     }
