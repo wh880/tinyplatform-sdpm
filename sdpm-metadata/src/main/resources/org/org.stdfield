@@ -147,10 +147,58 @@
   </standard-field>
   <standard-field id="f83ce375673546bdb35a8fcb6d751332" name="org_role_name" title="角色名称" business-type-id="095e594e1550424b9643c7e2279e85be"/>
   <standard-field id="2c70414be6154f128898e5ebb03e137d" name="org_role_remarks" title="角色备注" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
-  <standard-field id="40cf45e575c0442e83c7fe2da3119b5e" name="org_role_menu_id" title="角色菜单id" business-type-id="095e594e1550424b9643c7e2279e85be"/>
+  <standard-field id="40cf45e575c0442e83c7fe2da3119b5e" name="org_role_menu_id" title="角色菜单id" business-type-id="095e594e1550424b9643c7e2279e85be" default="">
+    <description></description>
+  </standard-field>
   <standard-field id="1ab7e14f11134b91b03d89e186cb87a1" name="org_role_type" title="角色类型" business-type-id="b6a9bc04774b40859a7dd8c6fd52a629" default="0">
     <description>系统角色-0&#xd;
 产品角色-1&#xd;
 项目角色-2</description>
   </standard-field>
+  <standard-field id="9aba49a288a14d6b9cf4d7e6618084d4" name="org_diary_id" title="周报id" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
+  <standard-field id="5ab7f0e9e8584f3ca729d122d898a00f" name="org_diary_user_id" title="周报创建人id" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
+  <standard-field id="e5423f10f0ce44e2b2a3930781770f6e" name="org_diary_create_date" title="周报创建日期" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff"/>
+  <standard-field id="80d1405edd3c4ef281e4c342ffc9f565" name="org_diary_summary" title="每周总结" business-type-id="cc9ed20b13f943f3a967f9d1c5368132"/>
+  <standard-field id="9777ba5fe4fe4d679e98edd9be15a92e" name="org_diary_detail" title="周报详细内容" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
+  <standard-field id="74990bf790844ada827cf6a097aee50d" name="org_diary_modify_date" title="最后修改日期" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff">
+    <description></description>
+  </standard-field>
+  <standard-field id="afd8a8df852f4a128bbdf414289c31c4" name="org_diary_begin_date" title="周报开始时间" business-type-id="af7b470e7d404b4882e7ec5a1513165f">
+    <description>每周开始的第一天</description>
+  </standard-field>
+  <standard-field id="806efead650f460ba877db4ac50d2762" name="org_diary_end_date" title="周报结束时间" business-type-id="af7b470e7d404b4882e7ec5a1513165f">
+    <description>每周最后一天</description>
+  </standard-field>
+  <standard-field id="88c1afa870a34c53b92190addc01b449" name="org_detail_id" title="周报详情id" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd">
+    <description></description>
+  </standard-field>
+  <standard-field id="459c53e847344e448c49c93611514466" name="org_detail_date" title="详情发生时间" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff" default="">
+    <description></description>
+  </standard-field>
+  <standard-field id="b83fac398ca14a0588d581bf1de31462" name="org_detail_type" title="详情类型" business-type-id="286a6bca92b34779bcb6fc8809f0a666" default="">
+    <description></description>
+  </standard-field>
+  <standard-field id="20a095223a7244159871f0e8efb8afd4" name="org_detail_content" title="详情内容" business-type-id="cc9ed20b13f943f3a967f9d1c5368132" default="">
+    <description></description>
+  </standard-field>
+  <standard-field id="2821be3e4b5b471a89bcfc2b4d9835df" name="org_detail_user_id" title="详情所属用户" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
+  <standard-field id="a337356b21f946b18265f96e07eba21e" name="org_diary_status" title="周报状态" business-type-id="b6a9bc04774b40859a7dd8c6fd52a629" default="0">
+    <description>正常-0&#xd;
+删除-1</description>
+  </standard-field>
+  <standard-field id="78447ef5c14544b583e7ef4bc272e6b6" name="org_comments_id" title="评论id" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" default="">
+    <description></description>
+  </standard-field>
+  <standard-field id="49c23beee7754b83a463bff04456b361" name="org_comments_user_id" title="评论用户ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
+  <standard-field id="e64808b4c12d46798f42aaf87cccaa9d" name="org_comments_date" title="评论时间" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff"/>
+  <standard-field id="d62ef5d945824acd8c63b5d5452cbd99" name="org_comments_content" title="评论内容" business-type-id="cc9ed20b13f943f3a967f9d1c5368132"/>
+  <standard-field id="ef7c5d6fcc5e493ab2efce94b945623a" name="org_comments_diary_id" title="被评论的周报ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd" default="">
+    <description></description>
+  </standard-field>
+  <standard-field id="692ed9ab85774cb48178f4c7458dcd30" name="org_comments_status" title="评论状态" business-type-id="b6a9bc04774b40859a7dd8c6fd52a629" default="0">
+    <description>正常-0&#xd;
+删除-1</description>
+  </standard-field>
+  <standard-field id="eed970b87f9f46d3bb4183d77e7c59a6" name="org_diary_year" title="周报年" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
+  <standard-field id="115c8547865d4c1b9dd08c22c893891c" name="org_diary_week" title="周报周数" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
 </standard-fields>

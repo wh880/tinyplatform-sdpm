@@ -306,4 +306,12 @@ public class SystemEffortDaoImpl extends TinyDslDaoSupport implements SystemEffo
             }
         });
     }
+
+    @Override
+    public List<SystemEffort> findByUserAndDate(String userId, Date beginDate, Date endDate) {
+        Select select=Select.selectFrom(SYSTEM_EFFORTTABLE).
+                where(and(SYSTEM_EFFORTTABLE.EFFORT_ACCOUNT.eq(userId),
+                        SYSTEM_EFFORTTABLE.EFFORT_DATE.between(beginDate,endDate)));
+        return getDslSession().fetchList(select,SystemEffort.class);
+    }
 }

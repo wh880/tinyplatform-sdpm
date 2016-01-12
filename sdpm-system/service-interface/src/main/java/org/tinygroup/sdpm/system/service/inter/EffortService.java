@@ -107,4 +107,9 @@ public interface EffortService {
      * @return
      */
     SystemEffort findSystemEffortById(Integer id);
+
+    /**
+     * 查询某人某一时段的日志
+     */
+    List<SystemEffort> findEffortListByUserAndDate(String userId, Date beginDate, Date endDate);
 }

@@ -155,4 +155,10 @@ public interface UserManager {
      */
     List<OrgUser> getAllStaffByLeader(String leaderUserId);
 
+    /**
+     *  查找一批userID对应的用户
+     * @param list
+     * @return
+     */
+    List<OrgUser> getUserListById(List<String> list);
 }

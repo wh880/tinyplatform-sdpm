@@ -469,4 +469,11 @@ public class OrgUserDaoImpl extends TinyDslDaoSupport implements OrgUserDao {
             return "";
         }
     }
+
+    public List<OrgUser> getListById(List<String> list){
+        Select select=Select.selectFrom(ORG_USERTABLE).where(
+          ORG_USERTABLE.ORG_USER_ID.in(list.toArray())
+        );
+        return getDslSession().fetchList(select,OrgUser.class);
+    }
 }

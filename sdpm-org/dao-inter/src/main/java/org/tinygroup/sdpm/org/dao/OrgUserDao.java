@@ -54,4 +54,11 @@ public interface OrgUserDao extends BaseDao<OrgUser, String> {
      * @return
      */
     List<OrgUser> userInCondition(String condition, Integer limit, String... ids);
+
+    /**
+     * 根据一组userID进行查询
+     * @param list
+     * @return
+     */
+    List<OrgUser> getListById(List<String> list);
 }
