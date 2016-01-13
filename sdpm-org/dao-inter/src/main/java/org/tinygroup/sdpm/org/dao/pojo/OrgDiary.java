@@ -27,7 +27,9 @@ import java.util.Date;
  * @generated
  */
 public class OrgDiary implements Serializable{
-
+	/**
+	 * 删除状态
+	 */
 	public static String DELETE_YES = "1";
 	public static String DELETE_NO = "0";
 
