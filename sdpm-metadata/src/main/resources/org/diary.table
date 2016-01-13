@@ -1,7 +1,7 @@
 <tables>
   <table id="0e24c2d137024632aa3b853700aba8b1" name="org_diary" title="周报表" schema="" package-name="">
     <description></description>
-    <table-field standard-field-id="9aba49a288a14d6b9cf4d7e6618084d4" primary="true" unique="true" not-null="true" id="org_diary_id" auto-increase="false"/>
+    <table-field standard-field-id="9aba49a288a14d6b9cf4d7e6618084d4" primary="true" unique="true" not-null="true" id="org_diary_id" auto-increase="true"/>
     <table-field standard-field-id="c7d7754bfa85454993ffd049f902f1be" primary="false" unique="false" not-null="false" id="org_user_id" auto-increase="false"/>
     <table-field standard-field-id="afd8a8df852f4a128bbdf414289c31c4" primary="false" unique="false" not-null="false" id="org_diary_begin_date" auto-increase="false"/>
     <table-field standard-field-id="806efead650f460ba877db4ac50d2762" primary="false" unique="false" not-null="false" id="org_diary_end_date" auto-increase="false"/>
@@ -13,11 +13,12 @@
     <table-field standard-field-id="74990bf790844ada827cf6a097aee50d" primary="false" unique="false" not-null="false" id="org_diary_modify_date" auto-increase="false"/>
   </table>
   <table id="22c54ccb7c8b4fa49ae1b91141115bb5" name="org_diary_detail" title="每日详情表">
-    <table-field standard-field-id="88c1afa870a34c53b92190addc01b449" primary="true" unique="true" not-null="true" id="org_detail_id" auto-increase="false"/>
+    <table-field standard-field-id="88c1afa870a34c53b92190addc01b449" primary="true" unique="true" not-null="true" id="org_detail_id" auto-increase="true"/>
     <table-field standard-field-id="9aba49a288a14d6b9cf4d7e6618084d4" primary="false" unique="false" not-null="false" id="org_diary_id" auto-increase="false"/>
     <table-field standard-field-id="c7d7754bfa85454993ffd049f902f1be" primary="false" unique="false" not-null="false" id="org_user_id" auto-increase="false"/>
     <table-field standard-field-id="459c53e847344e448c49c93611514466" primary="false" unique="false" not-null="false" id="org_detail_date" auto-increase="false"/>
     <table-field standard-field-id="b83fac398ca14a0588d581bf1de31462" primary="false" unique="false" not-null="false" id="org_detail_type" auto-increase="false"/>
     <table-field standard-field-id="20a095223a7244159871f0e8efb8afd4" primary="false" unique="false" not-null="false" id="org_detail_content" auto-increase="false"/>
   </table>
+
 </tables>

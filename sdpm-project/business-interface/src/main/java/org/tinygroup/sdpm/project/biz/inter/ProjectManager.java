@@ -1,6 +1,7 @@
 package org.tinygroup.sdpm.project.biz.inter;
 
 import org.tinygroup.sdpm.project.dao.pojo.Project;
+import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.Date;
@@ -133,4 +134,10 @@ public interface ProjectManager {
      * @return
      */
     List<Project> projectInCondition(String condition, Integer limit,Integer ...ids);
+
+    /**
+     * 根据产品id查询关联的bug list
+     * */
+    List<QualityBug> findList(Integer projectId);
+
 }
