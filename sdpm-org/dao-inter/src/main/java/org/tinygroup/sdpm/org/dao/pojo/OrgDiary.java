@@ -28,6 +28,9 @@ import java.util.Date;
  */
 public class OrgDiary implements Serializable{
 
+	public static String DELETE_YES = "1";
+	public static String DELETE_NO = "0";
+
 	/** 
 	 * <!-- begin-user-doc -->
 	 * 周报id
@@ -122,6 +125,9 @@ public class OrgDiary implements Serializable{
 	 */
 	private Date orgDiaryModifyDate;
 
+	public OrgDiary(){
+		setOrgDiaryStatus(DELETE_NO);
+	}
 
 	public void setOrgDiaryId(Integer orgDiaryId){
 		this. orgDiaryId = orgDiaryId;
