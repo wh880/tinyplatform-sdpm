@@ -114,3 +114,31 @@ function ajaxRead(id, toName, opKey, opvalue, url, value,isBuild) {
     });
 
 }
+
+
+function ajaxLoadContent(body,url,o_data){
+    $.ajax({
+        url:url,
+        type:"get",
+        data:o_data,
+        dataType:"html",
+        beforeSend: function() {
+            $("html").animate({scrollTop: 0},"fast");
+            time=setTimeout(function(){
+                body.append('<h1 class="ajax-loading-animation tinyLoadingContent" ><i class="fa fa-cog fa-spin"></i> 加载...</h1>');
+            },150);
+        },
+        success: function(a) {
+            if(time) clearTimeout(time);
+            body.css({
+                opacity: "0.0"
+            }).html(a).delay(50).animate({
+                    opacity: "1.0"
+                },
+                300);
+        },
+        error: function() {
+            body.html('<h4 class="ajax-loading-error"><i class="fa fa-warning txt-color-orangeDark"></i> Error 404! Page not found.</h4>')
+        }
+    })
+}

@@ -1,0 +1,1303 @@
+<li id="team_tweet_7674466" class="diary-detail">
+    <div class="diary-report clearfix">
+        <div class="portrait">
+            <a href="/tiny/diary?u=1781610&amp;p=1" title="点击查看王维煜所有的周报">
+
+    						                        <span class="name b">
+                            王维煜
+                        </span>
+            </a>
+        </div>
+        <div class="diary-info" onclick="TeamDiaryRecentJS.loadDiaryDetail(7674466)" style="cursor:pointer"
+             data-load="true">
+            <p>大家好！我提交周报啦，欢迎围观。</p>
+        </div>
+        <div style="float: right; font-size: 14px">
+					<span>
+						<i class="fa fa-clock-o"></i>
+                        01/04 00:00
+					</span>
+					<span onclick="TeamDiaryRecentJS.loadDiaryDetail(7674466)" class="dia_h_btn">
+			        	<i class="fa fa-comments"></i>
+                        0
+			        </span>
+                                            <span class="dia_h_btn" onclick="showDiaryDetailList(7674466, this)"
+                                                  data-open="0">
+						<i class="fa fa-chevron-down"></i>
+					</span>
+        </div>
+    </div>
+    <div class="diary-detail-list" id="diary-detail-list_7674466" style="display: none;">
+        <div class="committed">
+            <span class="tocommittime">周日</span>
+
+            <div class="circle">
+                <span class="circle-out"></span>
+                <span class="circle-full"></span>
+            </div>
+            <ol class="logList-detailList">
+                <li><span>TinyGroup / dbrouterjdbc4：王维煜 - groovy表达式规则测试用例，已通过  <a
+                        href="http://git.oschina.net/tinyframework/dbrouterjdbc4/commit/c000ee82efe63b3846409317babc069bd334d72c"
+                        style="color:black;font-size:smaller" target="_blank">c000ee82e</a></span></li>
+                <li><span>TinyGroup / dbrouterjdbc4：王维煜 - pom修改  <a
+                        href="http://git.oschina.net/tinyframework/dbrouterjdbc4/commit/d16d321caf4569ad1717966cbc316bbcdeac13e8"
+                        style="color:black;font-size:smaller" target="_blank">d16d321ca</a></span></li>
+                <li><span>TinyGroup / dbrouterjdbc4：王维煜 - Merge branch 'master' of https://git.oschina.net/tinyframework/dbrouterjdbc4 # Conflicts: # pom.xml  <a
+                        href="http://git.oschina.net/tinyframework/dbrouterjdbc4/commit/ae75f48676a68849328bedc22d8e27556618ad1a"
+                        style="color:black;font-size:smaller" target="_blank">ae75f4867</a></span></li>
+            </ol>
+        </div>
+
+
+        <div class="committed">
+            <span class="tocommittime">周四</span>
+
+            <div class="circle">
+                <span class="circle-out"></span>
+                <span class="circle-full"></span>
+            </div>
+            <ol class="logList-detailList">
+                <li><span>TinyGroup / dbrouterjdbc4：王维煜 - sql文件  <a
+                        href="http://git.oschina.net/tinyframework/dbrouterjdbc4/commit/b313a2c38f03025a0ffdf6a0f61e9a669ced08a3"
+                        style="color:black;font-size:smaller" target="_blank">b313a2c38</a></span></li>
+                <li><span>TinyGroup / tiny：王维煜 - dbrouter groovy引擎规则修改  <a
+                        href="http://git.oschina.net/tinyframework/tiny/commit/c6cc64cffe80175e46be03bde6807178ce55a6d5"
+                        style="color:black;font-size:smaller" target="_blank">c6cc64cff</a></span></li>
+            </ol>
+        </div>
+
+        <div class="committed">
+            <span class="tocommittime">周三</span>
+
+            <div class="circle">
+                <span class="circle-out"></span>
+                <span class="circle-full"></span>
+            </div>
+            <ol class="logList-detailList">
+                <li><span>TinyGroup / dbrouterjdbc4：王维煜 - Groovy测试用例修改  <a
+                        href="http://git.oschina.net/tinyframework/dbrouterjdbc4/commit/0f5fec0c2f13aade5293917f918572917bbf8c2c"
+                        style="color:black;font-size:smaller" target="_blank">0f5fec0c2</a></span></li>
+                <li><span>TinyGroup / tiny：王维煜 - 分片规则逻辑更新  <a
+                        href="http://git.oschina.net/tinyframework/tiny/commit/a0c2906604d3f12accf1012eb606edd0330efdcf"
+                        style="color:black;font-size:smaller" target="_blank">a0c290660</a></span></li>
+                <li><span>TinyGroup / tiny：王维煜 - dsl测试  <a
+                        href="http://git.oschina.net/tinyframework/tiny/commit/921653830b3cc60b0e114331781b3f4a1b802fcb"
+                        style="color:black;font-size:smaller" target="_blank">921653830</a></span></li>
+                <li><span>TinyGroup / tiny：王维煜 - groovy分片规则优化/拼写错误修正  <a
+                        href="http://git.oschina.net/tinyframework/tiny/commit/9348b07da40c98f02312f38fe134d99291ea874f"
+                        style="color:black;font-size:smaller" target="_blank">9348b07da</a></span></li>
+                <li><span>TinyGroup / dbrouterjdbc4：王维煜 - 分片规则测试用例  <a
+                        href="http://git.oschina.net/tinyframework/dbrouterjdbc4/commit/577e607599d6642869db763070d14c377c049f03"
+                        style="color:black;font-size:smaller" target="_blank">577e60759</a></span></li>
+                <li><span>TinyGroup / tiny：王维煜 - 规则代码重构  <a
+                        href="http://git.oschina.net/tinyframework/tiny/commit/6aa580ace72f7593a9e5f6d6f2fcf1135b5f527c"
+                        style="color:black;font-size:smaller" target="_blank">6aa580ace</a></span></li>
+                <li><span>TinyGroup / tiny：王维煜 - DefaultParserResultShardRule.java修改  <a
+                        href="http://git.oschina.net/tinyframework/tiny/commit/832d206da3cee7b06a32ed2386e61eae3865e675"
+                        style="color:black;font-size:smaller" target="_blank">832d206da</a></span></li>
+                <li><span>TinyGroup / tiny：王维煜 - Groovy规则引擎相关代码提交  <a
+                        href="http://git.oschina.net/tinyframework/tiny/commit/67a41b61c75c948de5b93e9626fa5216102df542"
+                        style="color:black;font-size:smaller" target="_blank">67a41b61c</a></span></li>
+                <li><span>TinyGroup / tiny：王维煜 - SimpleDslSession中的execute方法默认忽略空  <a
+                        href="http://git.oschina.net/tinyframework/tiny/commit/410f8878748e7924a7e4f84fb79a0f7994876761"
+                        style="color:black;font-size:smaller" target="_blank">410f88787</a></span></li>
+            </ol>
+        </div>
+
+        <div class="committed">
+            <span class="tocommittime">周二</span>
+
+            <div class="circle">
+                <span class="circle-out"></span>
+                <span class="circle-full"></span>
+            </div>
+            <ol class="logList-detailList">
+                <li><span>TinyGroup / Book：王维煜 - 08章  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/6c9611c7f306e13d1c11c79e5a0790843b02fe1b"
+                        style="color:black;font-size:smaller" target="_blank">6c9611c7f</a></span></li>
+                <li><span>TinyGroup / Book：王维煜 - 08章datasource层水平扩展缺点挖掘  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/314a517c53b10ec050397be88cd16915da9be615"
+                        style="color:black;font-size:smaller" target="_blank">314a517c5</a></span></li>
+                <li><span>TinyGroup / TinySample：王维煜 - 私有仓库修改  <a
+                        href="http://git.oschina.net/tinyframework/TinySample/commit/f75b2915b385c181d2f7389afd690c65dd8941d9"
+                        style="color:black;font-size:smaller" target="_blank">f75b2915b</a></span></li>
+                <li><span>TinyGroup / TinyEnterpriseSample：王维煜 - urlrestful迁移变更  <a
+                        href="http://git.oschina.net/tinyframework/TinyEnterpriseSample/commit/c1a5d7c2c6adc300cdc70c7ef12755d3008c195b"
+                        style="color:black;font-size:smaller" target="_blank">c1a5d7c2c</a></span></li>
+                <li><span>TinyGroup / Book：王维煜 - 08章格式修订  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/ca0f8f44cda4c444771b779d746c985bc1e63ee5"
+                        style="color:black;font-size:smaller" target="_blank">ca0f8f44c</a></span></li>
+                <li><span>TinyGroup / Book：王维煜 - 08章示例代码修改  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/376f076bd6a9a8f16ff0dd1999840000d98c481f"
+                        style="color:black;font-size:smaller" target="_blank">376f076bd</a></span></li>
+            </ol>
+        </div>
+
+        <div class="committed last">
+            <span class="tocommittime">周一</span>
+
+            <div class="circle">
+                <span class="circle-out"></span>
+                <span class="circle-full"></span>
+            </div>
+            <ol class="logList-detailList">
+                <li><span>TinyGroup / Book：王维煜 - weblayerdemo--&gt;weblayer.demo  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/d30ca16f1630031504cc58371e12ec210624c1dc"
+                        style="color:black;font-size:smaller" target="_blank">d30ca16f1</a></span></li>
+                <li><span>TinyGroup / Book：王维煜 - pom文件提交  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/eea84e823399a90647488700252e8293853e1afa"
+                        style="color:black;font-size:smaller" target="_blank">eea84e823</a></span></li>
+                <li><span>TinyGroup / Book：王维煜 - dbrouter demo 示例工程代码，使用derby包含初始化脚本  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/dfa86452452ca6fd3d21d953fa9597f6c1a98014"
+                        style="color:black;font-size:smaller" target="_blank">dfa864524</a></span></li>
+            </ol>
+        </div>
+        <div>
+        </div>
+    </div>
+</li>
+
+<li id="team_tweet_7674019" class="diary-detail">
+    <div class="diary-report clearfix">
+        <div class="portrait">
+
+            <a href="/tiny/diary?u=1585829&amp;p=1" title="点击查看严文杰所有的周报">
+
+
+
+
+
+
+
+
+    						                        <span class="name b">
+                            严文杰
+                        </span>
+            </a>
+        </div>
+        <div class="diary-info" onclick="TeamDiaryRecentJS.loadDiaryDetail(7674019)" style="cursor:pointer"
+             data-load="true">
+            <p>远程配置代码修改<br>cache文档编写<br>数据字典文档编写<br>服务编辑器功能讨论<br>服务过滤功能调试<br>rediscache 增加bean注册</p>
+        </div>
+        <div style="float: right; font-size: 14px">
+					<span>
+						<i class="fa fa-clock-o"></i>
+                        01/04 00:00
+					</span>
+					<span onclick="TeamDiaryRecentJS.loadDiaryDetail(7674019)" class="dia_h_btn">
+			        	<i class="fa fa-comments"></i>
+                        0
+			        </span>
+                                            <span class="dia_h_btn" onclick="showDiaryDetailList(7674019, this)"
+                                                  data-open="0">
+						<i class="fa fa-chevron-down"></i>
+					</span>
+        </div>
+    </div>
+    <div class="diary-detail-list" id="diary-detail-list_7674019" style="display: none;">
+
+
+        <div class="committed">
+            <span class="tocommittime">周五</span>
+
+            <div class="circle">
+                <span class="circle-out"></span>
+                <span class="circle-full"></span>
+            </div>
+            <ol class="logList-detailList">
+                <li><span>TinyGroup / tiny：严文杰 - 代码修改  <a
+                        href="http://git.oschina.net/tinyframework/tiny/commit/e8e66aa41e8b71b1d829d558995d2b09657e3f95"
+                        style="color:black;font-size:smaller" target="_blank">e8e66aa41</a></span></li>
+                <li><span>TinyGroup / tiny：严文杰 - 代码提交  <a
+                        href="http://git.oschina.net/tinyframework/tiny/commit/3cdf2c3e084c19abe8d2e0a3274b051803e7bf12"
+                        style="color:black;font-size:smaller" target="_blank">3cdf2c3e0</a></span></li>
+                <li><span>TinyGroup / tiny：严文杰 - Merge branch 'master' of https://git.oschina.net/tinyframework/tiny  <a
+                        href="http://git.oschina.net/tinyframework/tiny/commit/83ef5e40dbf91d0be4f7bb0eedaafa3a48abf089"
+                        style="color:black;font-size:smaller" target="_blank">83ef5e40d</a></span></li>
+            </ol>
+        </div>
+
+        <div class="committed">
+            <span class="tocommittime">周四</span>
+
+            <div class="circle">
+                <span class="circle-out"></span>
+                <span class="circle-full"></span>
+            </div>
+            <ol class="logList-detailList">
+                <li><span>TinyGroup / tiny：严文杰 - 测试用例修改  <a
+                        href="http://git.oschina.net/tinyframework/tiny/commit/550cd7bb3fc1912899c598a1180afe6d5381c825"
+                        style="color:black;font-size:smaller" target="_blank">550cd7bb3</a></span></li>
+                <li><span>TinyGroup / tiny：严文杰 - 删除  <a
+                        href="http://git.oschina.net/tinyframework/tiny/commit/1785b916bf1c1323f9118e9a543141ec54988534"
+                        style="color:black;font-size:smaller" target="_blank">1785b916b</a></span></li>
+                <li><span>TinyGroup / tiny：严文杰 - Merge branch 'master' of https://git.oschina.net/tinyframework/tiny  <a
+                        href="http://git.oschina.net/tinyframework/tiny/commit/04e0392ac36d3a1f8736f1b6a055db9e81344f1d"
+                        style="color:black;font-size:smaller" target="_blank">04e0392ac</a></span></li>
+                <li><span>TinyGroup / tiny：严文杰 - 增加日志  <a
+                        href="http://git.oschina.net/tinyframework/tiny/commit/4e0365c661f6e5fdb8e7ee260038cb4e3018cfc0"
+                        style="color:black;font-size:smaller" target="_blank">4e0365c66</a></span></li>
+                <li><span>TinyGroup / tiny：严文杰 - 代码提交  <a
+                        href="http://git.oschina.net/tinyframework/tiny/commit/e75105cc765d77fb3e03aaef212f81310c3c47c3"
+                        style="color:black;font-size:smaller" target="_blank">e75105cc7</a></span></li>
+            </ol>
+        </div>
+
+        <div class="committed">
+            <span class="tocommittime">周三</span>
+
+            <div class="circle">
+                <span class="circle-out"></span>
+                <span class="circle-full"></span>
+            </div>
+            <ol class="logList-detailList">
+                <li><span>TinyGroup / tiny：严文杰 - 去除测试代码  <a
+                        href="http://git.oschina.net/tinyframework/tiny/commit/848c6424e56af34a0f638f14d06270287e5ab0d1"
+                        style="color:black;font-size:smaller" target="_blank">848c6424e</a></span></li>
+                <li><span>TinyGroup / tiny：严文杰 - 增加日志  <a
+                        href="http://git.oschina.net/tinyframework/tiny/commit/70f5f669e178be0ada404b2b131139612131cb34"
+                        style="color:black;font-size:smaller" target="_blank">70f5f669e</a></span></li>
+                <li><span>TinyGroup / tiny：严文杰 - Merge branch 'master' of https://git.oschina.net/tinyframework/tiny  <a
+                        href="http://git.oschina.net/tinyframework/tiny/commit/26d2aa3fdc08742675c367219cfbeebe997c0524"
+                        style="color:black;font-size:smaller" target="_blank">26d2aa3fd</a></span></li>
+                <li><span>TinyGroup / tiny：严文杰 - redisCache提交  <a
+                        href="http://git.oschina.net/tinyframework/tiny/commit/6907747a9cdadc70e4f6c81d6732b6c39bc2ac20"
+                        style="color:black;font-size:smaller" target="_blank">6907747a9</a></span></li>
+            </ol>
+        </div>
+
+
+        <div class="committed last">
+            <span class="tocommittime">周一</span>
+
+            <div class="circle">
+                <span class="circle-out"></span>
+                <span class="circle-full"></span>
+            </div>
+            <ol class="logList-detailList">
+                <li><span>TinyGroup / Book：严文杰 - 文档提交  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/42a5cf6f632c74ca0321147bc1a4fa4c9f5e5b62"
+                        style="color:black;font-size:smaller" target="_blank">42a5cf6f6</a></span></li>
+                <li><span>TinyGroup / tinyext：严文杰 - 测试用例修改  <a
+                        href="http://git.oschina.net/tinyframework/tinyext/commit/b36393f243c4dde01ef4100b76caba57c3417d7a"
+                        style="color:black;font-size:smaller" target="_blank">b36393f24</a></span></li>
+                <li><span>TinyGroup / tinyext：严文杰 - 回退代码恢复  <a
+                        href="http://git.oschina.net/tinyframework/tinyext/commit/dd5f338c6993a5e91d66b882d64b078b90a3611b"
+                        style="color:black;font-size:smaller" target="_blank">dd5f338c6</a></span></li>
+                <li><span>TinyGroup / tinyext：严文杰 - 远程配置代码修改  <a
+                        href="http://git.oschina.net/tinyframework/tinyext/commit/25fda129fec53ad721ff590b4dca528cc1db5ee4"
+                        style="color:black;font-size:smaller" target="_blank">25fda129f</a></span></li>
+                <li><span>TinyGroup / tinyext：严文杰 - Merge branch 'master' of https://git.oschina.net/tinyframework/tinyext Conflicts: org.tinygroup.remoteconfig/src/main/java/org/tinygroup/remoteconfig/IRemotConfigConstant.java org.tinygroup.remoteconfig/src/main/java/org/tinygroup/remoteconfig/RemotConfigClient.java org.tinygroup.remoteconfig/src/main/java/org/tinygroup/remoteconfig/client/ZKConfigClientImpl.java org.tinygroup.remoteconfig/src/main/java/org/tinygroup/remoteconfig/exception/RemotConfigException.java  <a
+                        href="http://git.oschina.net/tinyframework/tinyext/commit/55f5b3eaebb3cdc509fb7f7c210e02aa38e56c36"
+                        style="color:black;font-size:smaller" target="_blank">55f5b3eae</a></span></li>
+            </ol>
+        </div>
+        <div>
+        </div>
+    </div>
+</li>
+
+<li id="team_tweet_7673905" class="diary-detail">
+    <div class="diary-report clearfix">
+        <div class="portrait">
+
+            <a href="/tiny/diary?u=1454254&amp;p=1" title="点击查看任辉所有的周报">
+
+
+
+
+
+
+
+
+    						                        <span class="name b">
+                            任辉
+                        </span>
+            </a>
+        </div>
+        <div class="diary-info" onclick="TeamDiaryRecentJS.loadDiaryDetail(7673905)" style="cursor:pointer"
+             data-load="true">
+            <p>周一：1、书稿修改<br> 2、jcscache内存缓存不失效测试<br>周二:1、迁移restful工程 2、dsl分页问题修改 3、书稿修改
+                周三、周四:1、dsl分页接口处理<br> 2、dbrouter分片规则支持groovy表达式<br>周五：1、dsl分页接口处理<br>
+                2、书稿示例从mysql迁移到derby数据库，dbrouter书稿示例修改<br>周六、周日：书稿批注修改、web层扩展修改</p>
+        </div>
+        <div style="float: right; font-size: 14px">
+					<span>
+						<i class="fa fa-clock-o"></i>
+                        01/04 00:00
+					</span>
+					<span onclick="TeamDiaryRecentJS.loadDiaryDetail(7673905)" class="dia_h_btn">
+			        	<i class="fa fa-comments"></i>
+                        0
+			        </span>
+                                            <span class="dia_h_btn" onclick="showDiaryDetailList(7673905, this)"
+                                                  data-open="0">
+						<i class="fa fa-chevron-down"></i>
+					</span>
+        </div>
+    </div>
+    <div class="diary-detail-list" id="diary-detail-list_7673905" style="display: none;">
+        <div class="committed">
+            <span class="tocommittime">周日</span>
+
+            <div class="circle">
+                <span class="circle-out"></span>
+                <span class="circle-full"></span>
+            </div>
+            <ol class="logList-detailList">
+                <li><span>TinyGroup / Book：任辉 - web层书稿修改  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/215c4598bb66106d844e988131c53754f3cc5156"
+                        style="color:black;font-size:smaller" target="_blank">215c4598b</a></span></li>
+                <li><span>TinyGroup / Book：任辉 - 08章批注修改  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/7335064020e20ddc9055c29f240b3c6ccae36a94"
+                        style="color:black;font-size:smaller" target="_blank">733506402</a></span></li>
+            </ol>
+        </div>
+
+
+        <div class="committed">
+            <span class="tocommittime">周五</span>
+
+            <div class="circle">
+                <span class="circle-out"></span>
+                <span class="circle-full"></span>
+            </div>
+            <ol class="logList-detailList">
+                <li><span>评论任务：已完成
+											</span></li>
+                <li><span>关闭任务：DSL分页接口统一处理方案设计
+											</span></li>
+                <li><span>TinyGroup / Book：任辉 - dbrouter测试工程修改  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/4eaeca04f995f6449194c9b36c6019d679a040ed"
+                        style="color:black;font-size:smaller" target="_blank">4eaeca04f</a></span></li>
+                <li><span>TinyGroup / Book：任辉 - 修正dbrouter测试用例  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/b8e90c2d58f2577beb5604920956459f9f945f37"
+                        style="color:black;font-size:smaller" target="_blank">b8e90c2d5</a></span></li>
+                <li><span>TinyGroup / Book：任辉 - Merge branch 'master' of http://git.oschina.net/tinyframework/Book  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/e54c4e11f232e62bdaa36eb72aeb19e9a9d20c0d"
+                        style="color:black;font-size:smaller" target="_blank">e54c4e11f</a></span></li>
+                <li><span>TinyGroup / Book：任辉 - 数据库访问层示例改成derby数据库  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/1134c01f41da50d5bea7980b37deb2b2695920f8"
+                        style="color:black;font-size:smaller" target="_blank">1134c01f4</a></span></li>
+                <li><span>TinyGroup / Book：任辉 - 书稿示例改成derby  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/814930f63e2ac1a0d61b47725229fbb2ba3e498c"
+                        style="color:black;font-size:smaller" target="_blank">814930f63</a></span></li>
+            </ol>
+        </div>
+
+        <div class="committed">
+            <span class="tocommittime">周四</span>
+
+            <div class="circle">
+                <span class="circle-out"></span>
+                <span class="circle-full"></span>
+            </div>
+            <ol class="logList-detailList">
+                <li><span>TinyGroup / tiny：任辉 - 表达式访问者修改  <a
+                        href="http://git.oschina.net/tinyframework/tiny/commit/e2a9dfe7c19ffe34109359d9c2954e0375403ac6"
+                        style="color:black;font-size:smaller" target="_blank">e2a9dfe7c</a></span></li>
+                <li><span>TinyGroup / tiny：任辉 - Merge branch 'master' of https://git.oschina.net/tinyframework/tiny  <a
+                        href="http://git.oschina.net/tinyframework/tiny/commit/aead8f8bc24ee026bbde88090213a3a44b8991d3"
+                        style="color:black;font-size:smaller" target="_blank">aead8f8bc</a></span></li>
+                <li><span>TinyGroup / tiny：任辉 - 设置ddl、dml属性  <a
+                        href="http://git.oschina.net/tinyframework/tiny/commit/e77f11098bb193ef50acb6e6b752765b254e7c70"
+                        style="color:black;font-size:smaller" target="_blank">e77f11098</a></span></li>
+                <li><span>TinyGroup / tiny：任辉 - Merge branch 'master' of https://git.oschina.net/tinyframework/tiny  <a
+                        href="http://git.oschina.net/tinyframework/tiny/commit/612a4afc2e5bf31258f42d14410b665e530c0236"
+                        style="color:black;font-size:smaller" target="_blank">612a4afc2</a></span></li>
+                <li><span>TinyGroup / tiny：任辉 - dbrouter修改  <a
+                        href="http://git.oschina.net/tinyframework/tiny/commit/9ec2537a641e262d597e462cdc9d68a6291db15b"
+                        style="color:black;font-size:smaller" target="_blank">9ec2537a6</a></span></li>
+            </ol>
+        </div>
+
+        <div class="committed">
+            <span class="tocommittime">周三</span>
+
+            <div class="circle">
+                <span class="circle-out"></span>
+                <span class="circle-full"></span>
+            </div>
+            <ol class="logList-detailList">
+                <li><span>TinyGroup / Book：任辉 - 书稿批注修改  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/0b240e7b00bfdc15e25c820a4f7edfdd45032dba"
+                        style="color:black;font-size:smaller" target="_blank">0b240e7b0</a></span></li>
+            </ol>
+        </div>
+
+        <div class="committed">
+            <span class="tocommittime">周二</span>
+
+            <div class="circle">
+                <span class="circle-out"></span>
+                <span class="circle-full"></span>
+            </div>
+            <ol class="logList-detailList">
+                <li><span>TinyGroup / tiny：任辉 - 支持groovy语言编写的表达式  <a
+                        href="http://git.oschina.net/tinyframework/tiny/commit/cdca328f7e5ebf6f3679ba8c9b5530be8c14f914"
+                        style="color:black;font-size:smaller" target="_blank">cdca328f7</a></span></li>
+                <li><span>TinyGroup / Book：任辉 - web层扩展书稿批注修改  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/5c93d06a588d9eb1a4107efcfba0d4086acda22f"
+                        style="color:black;font-size:smaller" target="_blank">5c93d06a5</a></span></li>
+                <li><span>TinyGroup / tiny：任辉 - dsl分页问题修改  <a
+                        href="http://git.oschina.net/tinyframework/tiny/commit/0d27cd798a4b7288122e95447f60319ec2a3d417"
+                        style="color:black;font-size:smaller" target="_blank">0d27cd798</a></span></li>
+                <li><span>TinyGroup / tiny：任辉 - 迁移urlrestful过程  <a
+                        href="http://git.oschina.net/tinyframework/tiny/commit/c7143adc9925329a31f09e01074f3d43bc1ab0bc"
+                        style="color:black;font-size:smaller" target="_blank">c7143adc9</a></span></li>
+                <li><span>TinyGroup / tiny：任辉 - Merge branch 'master' of https://git.oschina.net/tinyframework/tiny  <a
+                        href="http://git.oschina.net/tinyframework/tiny/commit/88c1d337c7c26bb883472be2910fff356cae2f0d"
+                        style="color:black;font-size:smaller" target="_blank">88c1d337c</a></span></li>
+                <li><span>TinyGroup / tinyext：任辉 - 迁移urlrestful工程  <a
+                        href="http://git.oschina.net/tinyframework/tinyext/commit/0b585b147a104d5f4aa1207c847f7cd78d770c81"
+                        style="color:black;font-size:smaller" target="_blank">0b585b147</a></span></li>
+            </ol>
+        </div>
+
+        <div class="committed last">
+            <span class="tocommittime">周一</span>
+
+            <div class="circle">
+                <span class="circle-out"></span>
+                <span class="circle-full"></span>
+            </div>
+            <ol class="logList-detailList">
+                <li><span>TinyGroup / Book：任辉 - web层批注部分修改  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/90046bcc9a6d48e35436743ddf4a61b4cfc247db"
+                        style="color:black;font-size:smaller" target="_blank">90046bcc9</a></span></li>
+                <li><span>TinyGroup / Book：任辉 - 数据库访问层批注修改  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/af145f2bf955dfd9e17f14da0922bd16cad67110"
+                        style="color:black;font-size:smaller" target="_blank">af145f2bf</a></span></li>
+            </ol>
+        </div>
+        <div>
+        </div>
+    </div>
+</li>
+
+<li id="team_tweet_7673798" class="diary-detail">
+    <div class="diary-report clearfix">
+        <div class="portrait">
+
+            <a href="/tiny/diary?u=2396456&amp;p=1" title="点击查看黄剑所有的周报">
+
+
+
+
+
+
+
+
+    						                        <span class="name b">
+                            黄剑
+                        </span>
+            </a>
+        </div>
+        <div class="diary-info" onclick="TeamDiaryRecentJS.loadDiaryDetail(7673798)" style="cursor:pointer"
+             data-load="true">
+            <p><strong>UI2 案例更新</strong><br>自定义模块 拖动组件 重装制做并封装<br>进一步优化编辑器 使截图复制图片到编辑器框可自动上传<br>更新文件结构
+                在静态资源文件路径上做区分<br>去除.js.map注释（原chrome浏览器开启map模块后会报错）<br>重整toggelbox页 新建组件模块自定义左侧高度 </p>
+            <p>P2P组服务支持<br>体验teambition<br>加班 周三 周五 周日</p>
+        </div>
+        <div style="float: right; font-size: 14px">
+					<span>
+						<i class="fa fa-clock-o"></i>
+                        01/04 00:00
+					</span>
+					<span onclick="TeamDiaryRecentJS.loadDiaryDetail(7673798)" class="dia_h_btn">
+			        	<i class="fa fa-comments"></i>
+                        0
+			        </span>
+                                            <span class="dia_h_btn" onclick="showDiaryDetailList(7673798, this)"
+                                                  data-open="0">
+						<i class="fa fa-chevron-down"></i>
+					</span>
+        </div>
+    </div>
+    <div class="diary-detail-list" id="diary-detail-list_7673798" style="display: none;">
+
+
+        <div class="committed">
+            <span class="tocommittime">周五</span>
+
+            <div class="circle">
+                <span class="circle-out"></span>
+                <span class="circle-full"></span>
+            </div>
+            <ol class="logList-detailList">
+                <li><span>TinyGroup / TinyUiEnterprise2：黄剑 - 多条件查询补全  <a
+                        href="http://git.oschina.net/tinyframework/TinyUiEnterprise2/commit/c99288d107c098dd98465ef6ccb4d00e2df511ac"
+                        style="color:black;font-size:smaller" target="_blank">c99288d10</a></span></li>
+                <li><span>TinyGroup / TinyUiEnterprise2：黄剑 - 切换修证  <a
+                        href="http://git.oschina.net/tinyframework/TinyUiEnterprise2/commit/0bad473d2298f4efd806ed914cb3fbfd72adda80"
+                        style="color:black;font-size:smaller" target="_blank">0bad473d2</a></span></li>
+                <li><span>TinyGroup / TinyUiEnterprise2：黄剑 - 多条件查询补全  <a
+                        href="http://git.oschina.net/tinyframework/TinyUiEnterprise2/commit/d379cdccb1d1f2bc46682df2514645e718b9f8e0"
+                        style="color:black;font-size:smaller" target="_blank">d379cdccb</a></span></li>
+                <li>
+                                <span>TinyGroup / TinyUiEnterprise2：黄剑 - Merge remote-tracking branch 'origin/master'  <a
+                                        href="http://git.oschina.net/tinyframework/TinyUiEnterprise2/commit/478df2743cdb6f6f1f1d6171f818f27683103b23"
+                                        style="color:black;font-size:smaller" target="_blank">478df2743</a></span></li>
+                <li><span>TinyGroup / TinyUiEnterprise2：黄剑 - 增加Togglebox 工程  <a
+                        href="http://git.oschina.net/tinyframework/TinyUiEnterprise2/commit/eed6fd18c43371cb54061e55f5d6adc617d11f75"
+                        style="color:black;font-size:smaller" target="_blank">eed6fd18c</a></span></li>
+                <li>
+                                <span>TinyGroup / TinyUiEnterprise2：黄剑 - Merge remote-tracking branch 'origin/master'  <a
+                                        href="http://git.oschina.net/tinyframework/TinyUiEnterprise2/commit/1f8a1346aa4336580e7bdd539dd63f615c186d54"
+                                        style="color:black;font-size:smaller" target="_blank">1f8a1346a</a></span></li>
+                <li><span>TinyGroup / TinyUiEnterprise2：黄剑 - 加TINYTABLE 搜索保存功能  <a
+                        href="http://git.oschina.net/tinyframework/TinyUiEnterprise2/commit/9fe9fc2bfdfd5fb12610b9c322c10c1cfa45b26b"
+                        style="color:black;font-size:smaller" target="_blank">9fe9fc2bf</a></span></li>
+                <li><span>TinyGroup / TinyUiEnterprise2：黄剑 - 加TINYTABLE  <a
+                        href="http://git.oschina.net/tinyframework/TinyUiEnterprise2/commit/291dc0bebcb99ad40e6cded1862de1e8079f2fa1"
+                        style="color:black;font-size:smaller" target="_blank">291dc0beb</a></span></li>
+                <li><span>TinyGroup / TinyUiEnterprise2：黄剑 - Merge remote-tracking branch 'origin/master' # Conflicts: # org.tinygroup.ui.view/src/main/resources/page/index.page  <a
+                        href="http://git.oschina.net/tinyframework/TinyUiEnterprise2/commit/02d6234316e3183514a476bd2ccd94c697d4d510"
+                        style="color:black;font-size:smaller" target="_blank">02d623431</a></span></li>
+                <li><span>TinyGroup / TinyUiEnterprise2：黄剑 - 重整首页可拖动布局样式及封装相关调用宏 并实装到首页 去除BT默认表格下方20px 的留白  <a
+                        href="http://git.oschina.net/tinyframework/TinyUiEnterprise2/commit/f1ba6ca51be335ffa5530fedae53406f7ab74dcc"
+                        style="color:black;font-size:smaller" target="_blank">f1ba6ca51</a></span></li>
+            </ol>
+        </div>
+
+        <div class="committed">
+            <span class="tocommittime">周四</span>
+
+            <div class="circle">
+                <span class="circle-out"></span>
+                <span class="circle-full"></span>
+            </div>
+            <ol class="logList-detailList">
+                <li><span>TinyGroup / TinyUiEnterprise：黄剑 - 去除js .map方法 去除BT3.5  <a
+                        href="http://git.oschina.net/tinyframework/TinyUiEnterprise/commit/08e9a9e9837cab95cd240cc3c17bc9fcab378b80"
+                        style="color:black;font-size:smaller" target="_blank">08e9a9e98</a></span></li>
+                <li><span>TinyGroup / TinyUiEnterprise：黄剑 - Merge remote-tracking branch 'origin/master'  <a
+                        href="http://git.oschina.net/tinyframework/TinyUiEnterprise/commit/7df7ece2d7d3d846fcc8d4515e478ac62cfde2c5"
+                        style="color:black;font-size:smaller" target="_blank">7df7ece2d</a></span></li>
+                <li><span>TinyGroup / TinyUiEnterprise2：黄剑 - 去除js .map方法  <a
+                        href="http://git.oschina.net/tinyframework/TinyUiEnterprise2/commit/596965d74c80ad176b8e5987ab9eba7db31c30fc"
+                        style="color:black;font-size:smaller" target="_blank">596965d74</a></span></li>
+                <li>
+                                <span>TinyGroup / TinyUiEnterprise2：黄剑 - Merge remote-tracking branch 'origin/master'  <a
+                                        href="http://git.oschina.net/tinyframework/TinyUiEnterprise2/commit/ba405c1e736025d2fc74f17d8555a5cc36f9b300"
+                                        style="color:black;font-size:smaller" target="_blank">ba405c1e7</a></span></li>
+            </ol>
+        </div>
+
+        <div class="committed">
+            <span class="tocommittime">周三</span>
+
+            <div class="circle">
+                <span class="circle-out"></span>
+                <span class="circle-full"></span>
+            </div>
+            <ol class="logList-detailList">
+                <li><span>TinyGroup / TinyUiEnterprise2：黄剑 - 增加编辑器 参数不对 增加input其它几类宏  <a
+                        href="http://git.oschina.net/tinyframework/TinyUiEnterprise2/commit/71e916b4ac3cea3c68581049c794438aa1440cb3"
+                        style="color:black;font-size:smaller" target="_blank">71e916b4a</a></span></li>
+                <li><span>TinyGroup / TinyUiEnterprise2：黄剑 - Merge branch 'master' of http://git.oschina.net/tinyframework/TinyUiEnterprise2  <a
+                        href="http://git.oschina.net/tinyframework/TinyUiEnterprise2/commit/89f16218e9a26ffc83c6ad78b9069160b77e373d"
+                        style="color:black;font-size:smaller" target="_blank">89f16218e</a></span></li>
+                <li><span>TinyGroup / tinyFlatUi：黄剑 - 增加编辑器UMeditor 修改阴影  <a
+                        href="http://git.oschina.net/tinyframework/tinyFlatUi/commit/2288daa548572ac3d1135a8120c87532e464f211"
+                        style="color:black;font-size:smaller" target="_blank">2288daa54</a></span></li>
+                <li><span>TinyGroup / tinyFlatUi：黄剑 - 增加编辑器UMeditor 修改阴影  <a
+                        href="http://git.oschina.net/tinyframework/tinyFlatUi/commit/75eda80c37753a63157bb9e7bde8c576d6f9b621"
+                        style="color:black;font-size:smaller" target="_blank">75eda80c3</a></span></li>
+                <li><span>TinyGroup / TinyUiEnterprise：黄剑 - UE编辑器图片粘贴功能  <a
+                        href="http://git.oschina.net/tinyframework/TinyUiEnterprise/commit/b83610cc519a0c20768943519c82fd63a11ea752"
+                        style="color:black;font-size:smaller" target="_blank">b83610cc5</a></span></li>
+            </ol>
+        </div>
+
+        <div class="committed">
+            <span class="tocommittime">周二</span>
+
+            <div class="circle">
+                <span class="circle-out"></span>
+                <span class="circle-full"></span>
+            </div>
+            <ol class="logList-detailList">
+                <li><span>TinyGroup / tinyFlatUi：黄剑 - 去除引入  <a
+                        href="http://git.oschina.net/tinyframework/tinyFlatUi/commit/7143b0c93667d3022acdd74bd683419736920c79"
+                        style="color:black;font-size:smaller" target="_blank">7143b0c93</a></span></li>
+                <li><span>TinyGroup / tinyFlatUi：黄剑 - JS 路径修改  <a
+                        href="http://git.oschina.net/tinyframework/tinyFlatUi/commit/d139b9d2ad20bb6460f86ca63e135327240695de"
+                        style="color:black;font-size:smaller" target="_blank">d139b9d2a</a></span></li>
+                <li><span>TinyGroup / tinyFlatUi：黄剑 - 更新文件结构  <a
+                        href="http://git.oschina.net/tinyframework/tinyFlatUi/commit/354a90fa83b0032353ae9add413a0e9e8402bdce"
+                        style="color:black;font-size:smaller" target="_blank">354a90fa8</a></span></li>
+                <li><span>TinyGroup / tinyFlatUi：黄剑 - 更新文件结构  <a
+                        href="http://git.oschina.net/tinyframework/tinyFlatUi/commit/e6ba9f3bccfe64b14db69f1238da52cd823b7874"
+                        style="color:black;font-size:smaller" target="_blank">e6ba9f3bc</a></span></li>
+                <li><span>TinyGroup / tinyFlatUi：黄剑 - 增加日期选中后改变事件  <a
+                        href="http://git.oschina.net/tinyframework/tinyFlatUi/commit/5663bd891e99aed98d162a1037318fef947a64a8"
+                        style="color:black;font-size:smaller" target="_blank">5663bd891</a></span></li>
+                <li><span>TinyGroup / TinyUiEnterprise：黄剑 - 树  <a
+                        href="http://git.oschina.net/tinyframework/TinyUiEnterprise/commit/3e8df04781883ae20f0a1df712b2f80c76565412"
+                        style="color:black;font-size:smaller" target="_blank">3e8df0478</a></span></li>
+                <li><span>TinyGroup / TinyUiEnterprise：黄剑 - 增加日期侦听事件 当选中后给相对应的框加一个change事件  <a
+                        href="http://git.oschina.net/tinyframework/TinyUiEnterprise/commit/18aaa054279a1733f657ba460050e0f6d084e728"
+                        style="color:black;font-size:smaller" target="_blank">18aaa0542</a></span></li>
+            </ol>
+        </div>
+
+        <div class="committed last">
+            <span class="tocommittime">周一</span>
+
+            <div class="circle">
+                <span class="circle-out"></span>
+                <span class="circle-full"></span>
+            </div>
+            <ol class="logList-detailList">
+                <li><span>TinyGroup / TinyUiEnterprise：黄剑 - Merge remote-tracking branch 'origin/master' # Conflicts: # org.tinygroup.table/src/main/resources/org/tinygroup/table/css/table.css  <a
+                        href="http://git.oschina.net/tinyframework/TinyUiEnterprise/commit/3538ed47699111c0fd3fea907135acae47157b5f"
+                        style="color:black;font-size:smaller" target="_blank">3538ed476</a></span></li>
+                <li><span>TinyGroup / TinyUiEnterprise：黄剑 - 表格强制不换行  <a
+                        href="http://git.oschina.net/tinyframework/TinyUiEnterprise/commit/3c711305cab6fe3c44670ee39e9c1ab47e4b34ab"
+                        style="color:black;font-size:smaller" target="_blank">3c711305c</a></span></li>
+            </ol>
+        </div>
+        <div>
+        </div>
+    </div>
+</li>
+
+<li id="team_tweet_7672479" class="diary-detail">
+    <div class="diary-report clearfix">
+        <div class="portrait">
+
+            <a href="/tiny/diary?u=2473589&amp;p=1" title="点击查看葛强燕所有的周报">
+
+
+
+
+
+
+
+
+    						                        <span class="name b">
+                            葛强燕
+                        </span>
+            </a>
+        </div>
+        <div class="diary-info" onclick="TeamDiaryRecentJS.loadDiaryDetail(7672479)" style="cursor:pointer"
+             data-load="true">
+            <p>1、收集资料：DotProject、TechExcel、Taiga、禅道、Redmine、IBM Rational、<br> HP
+                ALM11、BugZilla、Cynthia、teambition、tower、Odoo、jira。<br>2、搭建环境：<br> <a
+                        href="http://192.168.51.28:8080/qcbin/" rel="nofollow">http://192.168.51.28:8080/qcbin/</a><br>
+                <a href="http://192.168.51.28:9501/secure/Dashboard.jspa" rel="nofollow">http://192.168.51.28:9501/secure/Dashboard.jspa</a><br>3、使用各软件
+            </p>
+            <p>加班：周一</p>
+        </div>
+        <div style="float: right; font-size: 14px">
+					<span>
+						<i class="fa fa-clock-o"></i>
+                        前天 21:15
+					</span>
+					<span onclick="TeamDiaryRecentJS.loadDiaryDetail(7672479)" class="dia_h_btn">
+			        	<i class="fa fa-comments"></i>
+                        0
+			        </span>
+        </div>
+    </div>
+</li>
+
+<li id="team_tweet_7671181" class="diary-detail">
+    <div class="diary-report clearfix">
+        <div class="portrait">
+
+            <a href="/tiny/diary?u=200100&amp;p=1" title="点击查看严诚所有的周报">
+
+
+
+
+
+
+
+
+    						                        <span class="name b">
+                            严诚
+                        </span>
+            </a>
+        </div>
+        <div class="diary-info" onclick="TeamDiaryRecentJS.loadDiaryDetail(7671181)" style="cursor:pointer"
+             data-load="true">
+            <p>a. 根据编辑意见统一调整书稿<br>b. 根据批注调整书稿的字、词、句的通顺<br>c. 协调处理源代码无法通过编译的问题；监督源代码一些不规范的问题</p>
+            <p>周一、二、四加班：处理书稿，增加批注<br>周六、日加班：书稿最后收尾</p>
+        </div>
+        <div style="float: right; font-size: 14px">
+					<span>
+						<i class="fa fa-clock-o"></i>
+                        前天 16:32
+					</span>
+					<span onclick="TeamDiaryRecentJS.loadDiaryDetail(7671181)" class="dia_h_btn">
+			        	<i class="fa fa-comments"></i>
+                        0
+			        </span>
+                                            <span class="dia_h_btn" onclick="showDiaryDetailList(7671181, this)"
+                                                  data-open="0">
+						<i class="fa fa-chevron-down"></i>
+					</span>
+        </div>
+    </div>
+    <div class="diary-detail-list" id="diary-detail-list_7671181" style="display: none;">
+        <div class="committed">
+            <span class="tocommittime">周日</span>
+
+            <div class="circle">
+                <span class="circle-out"></span>
+                <span class="circle-full"></span>
+            </div>
+            <ol class="logList-detailList">
+                <li><span>TinyGroup / Book：严诚 - 处理批注  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/18a8ea9f65d3bf25271c33ba65455dda621a4beb"
+                        style="color:black;font-size:smaller" target="_blank">18a8ea9f6</a></span></li>
+                <li><span>TinyGroup / Book：严诚 - 查漏补缺，检查遗漏批注、调整表和图用法  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/a67dbcea60eb1aa29ff3af75ac1d40d0991dea2d"
+                        style="color:black;font-size:smaller" target="_blank">a67dbcea6</a></span></li>
+                <li><span>TinyGroup / Book：严诚 - 增加元数据章节的注释  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/c05b1657e5728886a50d2bca370348b2855bbc29"
+                        style="color:black;font-size:smaller" target="_blank">c05b1657e</a></span></li>
+                <li><span>TinyGroup / Book：严诚 - 提交org.tinygroup.templateext.demo  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/1788cdfc6bf0c74263ba5a0d95bd61be83f62997"
+                        style="color:black;font-size:smaller" target="_blank">1788cdfc6</a></span></li>
+                <li><span>TinyGroup / Book：严诚 - 删除org.tinygroup.templateExt.demo  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/cdfd88849d20d60ce7ca7bb52bd929e5f2ef4a70"
+                        style="color:black;font-size:smaller" target="_blank">cdfd88849</a></span></li>
+            </ol>
+        </div>
+
+        <div class="committed">
+            <span class="tocommittime">周六</span>
+
+            <div class="circle">
+                <span class="circle-out"></span>
+                <span class="circle-full"></span>
+            </div>
+            <ol class="logList-detailList">
+                <li><span>TinyGroup / Book：严诚 - 根据批注增加相关章节的注释  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/5c4675c1957aa5798af3b501a88a8709384bc362"
+                        style="color:black;font-size:smaller" target="_blank">5c4675c19</a></span></li>
+                <li><span>TinyGroup / Book：严诚 - 修正批注  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/925f1806e23de08ed8754ab83910d5f64f344f16"
+                        style="color:black;font-size:smaller" target="_blank">925f1806e</a></span></li>
+            </ol>
+        </div>
+
+        <div class="committed">
+            <span class="tocommittime">周五</span>
+
+            <div class="circle">
+                <span class="circle-out"></span>
+                <span class="circle-full"></span>
+            </div>
+            <ol class="logList-detailList">
+                <li><span>TinyGroup / Book：严诚 - 修正15章错误的表格标注  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/e2715b98979db4071692186ab4cd95e82cb48ab7"
+                        style="color:black;font-size:smaller" target="_blank">e2715b989</a></span></li>
+                <li><span>TinyGroup / Book：严诚 - Merge branch 'master' of http://git.oschina.net/tinyframework/Book  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/722bb49cdfb66e4fb93657d83c6f126f755ecee4"
+                        style="color:black;font-size:smaller" target="_blank">722bb49cd</a></span></li>
+                <li><span>TinyGroup / Book：严诚 - &lt;附录&gt;增加鼓励我们和二维码  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/ad8e492f2adb1435f8c296d4a12e59a4f47868eb"
+                        style="color:black;font-size:smaller" target="_blank">ad8e492f2</a></span></li>
+                <li><span>TinyGroup / Book：严诚 - 提交接受的批注  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/9ab1fc358b9f73933bdfc6c85f65db0367113c85"
+                        style="color:black;font-size:smaller" target="_blank">9ab1fc358</a></span></li>
+                <li><span>TinyGroup / Book：严诚 - 修正07章错别字和语句通顺  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/70dbadefb443ee99e56fca3a46e490487b23d84d"
+                        style="color:black;font-size:smaller" target="_blank">70dbadefb</a></span></li>
+                <li><span>TinyGroup / Book：严诚 - 关闭不处理的批注  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/6379c653ec5ab5601daa5fb2bb0121743950a777"
+                        style="color:black;font-size:smaller" target="_blank">6379c653e</a></span></li>
+                <li><span>TinyGroup / tiny：严诚 - 声明AbstractTestUtil过期，推荐Runner取代。  <a
+                        href="http://git.oschina.net/tinyframework/tiny/commit/552199eeb99c116eca04c031762d739e8e4b7b45"
+                        style="color:black;font-size:smaller" target="_blank">552199eeb</a></span></li>
+            </ol>
+        </div>
+
+        <div class="committed">
+            <span class="tocommittime">周四</span>
+
+            <div class="circle">
+                <span class="circle-out"></span>
+                <span class="circle-full"></span>
+            </div>
+            <ol class="logList-detailList">
+                <li><span>TinyGroup / Book：严诚 - 升级 org.tinygroup.dbrouterjdbc4升级到2.0.31  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/84a2bf3eba3093b8da5b4a35ee75eb364f82a484"
+                        style="color:black;font-size:smaller" target="_blank">84a2bf3eb</a></span></li>
+                <li><span>TinyGroup / Book：严诚 - 增加批注  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/f0f249ee84d7cf3b14a2c86fceea55b830a0733f"
+                        style="color:black;font-size:smaller" target="_blank">f0f249ee8</a></span></li>
+                <li><span>TinyGroup / Book：严诚 - 升级书稿的tiny版本由2.0.30--》2.0.31  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/9e677b8b2051bb74091e764ff0032a2d511b7037"
+                        style="color:black;font-size:smaller" target="_blank">9e677b8b2</a></span></li>
+                <li><span>TinyGroup / Book：严诚 - 07章增加代码注释  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/18be647234111fbdff21ece3417a4a5faf80b60f"
+                        style="color:black;font-size:smaller" target="_blank">18be64723</a></span></li>
+                <li><span>TinyGroup / Book：严诚 - Merge branch 'master' of http://git.oschina.net/tinyframework/Book  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/767bb4dbb09171be1b6bcbc4ed9107d82af9c9ba"
+                        style="color:black;font-size:smaller" target="_blank">767bb4dbb</a></span></li>
+                <li><span>TinyGroup / Book：严诚 - 调整06章  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/7b1a226c8ec50bbda539750bf851a2f28c5431f2"
+                        style="color:black;font-size:smaller" target="_blank">7b1a226c8</a></span></li>
+                <li><span>TinyGroup / Book：严诚 - 05章增加注释；表和图的说明调整  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/0f59fe199fe42b129c95088bb7b32ec6ed2a604d"
+                        style="color:black;font-size:smaller" target="_blank">0f59fe199</a></span></li>
+                <li><span>TinyGroup / Book：严诚 - 04章增加代码注释；图和表格式的修正  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/c5a5f140d707951fa9a6865a492dfb4fad187db6"
+                        style="color:black;font-size:smaller" target="_blank">c5a5f140d</a></span></li>
+                <li><span>TinyGroup / Book：严诚 - 03章增加代码注释；图和表说明优化  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/e7eb57f58697ea7c070bbbcdebcd8fb2429d3d7a"
+                        style="color:black;font-size:smaller" target="_blank">e7eb57f58</a></span></li>
+            </ol>
+        </div>
+
+        <div class="committed">
+            <span class="tocommittime">周三</span>
+
+            <div class="circle">
+                <span class="circle-out"></span>
+                <span class="circle-full"></span>
+            </div>
+            <ol class="logList-detailList">
+                <li><span>TinyGroup / Book：严诚 - 补充图片的批注  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/47b0ecc127eb42382d7b77d6127dbf30eb35c488"
+                        style="color:black;font-size:smaller" target="_blank">47b0ecc12</a></span></li>
+                <li><span>TinyGroup / Book：严诚 - 处理12章剩下批注  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/7b6ab1d6171b6011e5bd4c39127a732301d4eeca"
+                        style="color:black;font-size:smaller" target="_blank">7b6ab1d61</a></span></li>
+                <li><span>TinyGroup / Book：严诚 - 12章批注的部分修正  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/ae073c1a007a6feefbd33e8aa910eb738e60d0a9"
+                        style="color:black;font-size:smaller" target="_blank">ae073c1a0</a></span></li>
+                <li><span>TinyGroup / Book：严诚 - Merge branch 'master' of http://git.oschina.net/tinyframework/Book  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/2169c80d5cd2a9b7d97768f7c5d3a6f53c837784"
+                        style="color:black;font-size:smaller" target="_blank">2169c80d5</a></span></li>
+                <li><span>TinyGroup / Book：严诚 - 13章调整不恰当词：大概  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/a582d880ea2885e167c6c50a5ba56ad7d72bbd32"
+                        style="color:black;font-size:smaller" target="_blank">a582d880e</a></span></li>
+                <li><span>TinyGroup / Book：严诚 - 源代码工程变动，同步修改《附录》  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/b6181ad74b8d7f6772be30257e75378c0780ae31"
+                        style="color:black;font-size:smaller" target="_blank">b6181ad74</a></span></li>
+            </ol>
+        </div>
+
+        <div class="committed">
+            <span class="tocommittime">周二</span>
+
+            <div class="circle">
+                <span class="circle-out"></span>
+                <span class="circle-full"></span>
+            </div>
+            <ol class="logList-detailList">
+                <li><span>TinyGroup / Book：严诚 - 统一代码和章节的缩进排版  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/3a09e80a4698b4874421ba5ad5bc0e217a057603"
+                        style="color:black;font-size:smaller" target="_blank">3a09e80a4</a></span></li>
+                <li><span>TinyGroup / Book：严诚 - 统一章节和代码的缩进排版  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/fbf496a94f585e663e96da6872bfce73519d7a05"
+                        style="color:black;font-size:smaller" target="_blank">fbf496a94</a></span></li>
+                <li><span>TinyGroup / Book：严诚 - 统一处理章节和代码的缩进排版。  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/4f840ea0df45ea61a6c2d73f93e2658cd1e3c403"
+                        style="color:black;font-size:smaller" target="_blank">4f840ea0d</a></span></li>
+                <li><span>TinyGroup / Book：严诚 - 统一处理章节和代码缩进  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/df05d035c14d712f0ac3f083ac35ffda5dbddc91"
+                        style="color:black;font-size:smaller" target="_blank">df05d035c</a></span></li>
+                <li><span>TinyGroup / Book：严诚 - 统一处理章节和代码的缩进排版  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/6087605bc654a31b9e46b8341aea029aad3a75b4"
+                        style="color:black;font-size:smaller" target="_blank">6087605bc</a></span></li>
+                <li><span>TinyGroup / Book：严诚 - Merge branch 'master' of http://git.oschina.net/tinyframework/Book  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/d0a6d7fb164f28b3e01fa031db7487b61d783ffa"
+                        style="color:black;font-size:smaller" target="_blank">d0a6d7fb1</a></span></li>
+                <li><span>TinyGroup / Book：严诚 - 统一处理章节和代码缩进排版  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/3360497fdfee56ad9b7d15dc1613ccbc7fc6ad02"
+                        style="color:black;font-size:smaller" target="_blank">3360497fd</a></span></li>
+                <li><span>TinyGroup / Book：严诚 - Merge branch 'master' of http://git.oschina.net/tinyframework/Book  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/afa8b12507eb55de4478840fc4cbb7f119ef27a4"
+                        style="color:black;font-size:smaller" target="_blank">afa8b1250</a></span></li>
+                <li><span>TinyGroup / Book：严诚 - 统一处理章节和代码的缩进排版。  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/8cebe15797150671c03004252eecffcde325faa2"
+                        style="color:black;font-size:smaller" target="_blank">8cebe1579</a></span></li>
+                <li><span>TinyGroup / Book：严诚 - 统一处理章节和代码缩进排版  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/140161f85bd9a54d76d28fab3d4dd4bf58c3bb73"
+                        style="color:black;font-size:smaller" target="_blank">140161f85</a></span></li>
+                <li><span>TinyGroup / Book：严诚 - 统一处理章节和代码缩进排版，调整语句通顺。  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/9ecc202f23ef378e6d5035981c617dc3e2dc030b"
+                        style="color:black;font-size:smaller" target="_blank">9ecc202f2</a></span></li>
+                <li><span>TinyGroup / Book：严诚 - 统一修改章节和代码的缩进样式  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/7b80776556703052d07adaec3e0e59ebd859ea07"
+                        style="color:black;font-size:smaller" target="_blank">7b8077655</a></span></li>
+                <li><span>TinyGroup / Book：严诚 - 统一处理章节和代码的缩进排版，修正语句通顺  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/73f5f3f8ba3360cf25fde3813a03ddb357f41034"
+                        style="color:black;font-size:smaller" target="_blank">73f5f3f8b</a></span></li>
+                <li><span>TinyGroup / Book：严诚 - 提交处理结果  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/407c57f0c77aa595ae0260df7901676037258244"
+                        style="color:black;font-size:smaller" target="_blank">407c57f0c</a></span></li>
+                <li><span>TinyGroup / Book：严诚 - 统一处理章节和代码的缩进排版  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/87de2cf8c80db4063afa67768d1cc2e55f4f6f8d"
+                        style="color:black;font-size:smaller" target="_blank">87de2cf8c</a></span></li>
+                <li><span>TinyGroup / Book：严诚 - 统一处理章节与代码缩进  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/f53827a9d0dcfbfd08b07c3abb6fbe1a984cecce"
+                        style="color:black;font-size:smaller" target="_blank">f53827a9d</a></span></li>
+                <li><span>TinyGroup / Book：严诚 - 增加批注  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/181967f2499cb71264e3389b49e2a1b58fb7ff57"
+                        style="color:black;font-size:smaller" target="_blank">181967f24</a></span></li>
+            </ol>
+        </div>
+
+        <div class="committed last">
+            <span class="tocommittime">周一</span>
+
+            <div class="circle">
+                <span class="circle-out"></span>
+                <span class="circle-full"></span>
+            </div>
+            <ol class="logList-detailList">
+                <li><span>TinyGroup / Book：严诚 - 增加批注  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/1eb27fb7a2dedbc2c64ea693afce4afbb3bc99ea"
+                        style="color:black;font-size:smaller" target="_blank">1eb27fb7a</a></span></li>
+                <li><span>TinyGroup / Book：严诚 - 调整语言通顺  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/3819623ef99d2109ab25f3d7908bd20df30a6e83"
+                        style="color:black;font-size:smaller" target="_blank">3819623ef</a></span></li>
+                <li><span>TinyGroup / Book：严诚 - 增加批注  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/ea9d62c2244e760adca1922ca336702d61fbc4cb"
+                        style="color:black;font-size:smaller" target="_blank">ea9d62c22</a></span></li>
+                <li><span>TinyGroup / Book：严诚 - 统一修改章节的编号，与实际章节编号一致。  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/83f08e99411be7b3b2d02395756bf50635a5479e"
+                        style="color:black;font-size:smaller" target="_blank">83f08e994</a></span></li>
+                <li><span>TinyGroup / Book：严诚 - 修改《概述》的批注  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/4eda267b3d1f1cf2701e3e15a3cfb7c3d1badb0a"
+                        style="color:black;font-size:smaller" target="_blank">4eda267b3</a></span></li>
+                <li><span>TinyGroup / Book：严诚 - 《元数据实践》调整表和图的说明；拆分元数据的加载流程图  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/e21e2e58b42edd794d82f48b8ef88d045590895b"
+                        style="color:black;font-size:smaller" target="_blank">e21e2e58b</a></span></li>
+            </ol>
+        </div>
+        <div>
+        </div>
+    </div>
+</li>
+
+<li id="team_tweet_7662897" class="diary-detail">
+    <div class="diary-report clearfix">
+        <div class="portrait">
+
+            <a href="/tiny/diary?u=2250921&amp;p=1" title="点击查看李银磊所有的周报">
+
+
+
+
+
+
+
+
+    						                        <span class="name b">
+                            李银磊
+                        </span>
+            </a>
+        </div>
+        <div class="diary-info" onclick="TeamDiaryRecentJS.loadDiaryDetail(7662897)" style="cursor:pointer"
+             data-load="true">
+            <p>新UI工程<br>页面封装新增宏 注释 页面优化 BUG修复<br>支持P2P<br>新增加首页等</p>
+            <p>加班 周二至周六</p>
+        </div>
+        <div style="float: right; font-size: 14px">
+					<span>
+						<i class="fa fa-clock-o"></i>
+                        01/08 19:44
+					</span>
+					<span onclick="TeamDiaryRecentJS.loadDiaryDetail(7662897)" class="dia_h_btn">
+			        	<i class="fa fa-comments"></i>
+                        0
+			        </span>
+                                            <span class="dia_h_btn" onclick="showDiaryDetailList(7662897, this)"
+                                                  data-open="0">
+						<i class="fa fa-chevron-down"></i>
+					</span>
+        </div>
+    </div>
+    <div class="diary-detail-list" id="diary-detail-list_7662897" style="display: none;">
+
+        <div class="committed">
+            <span class="tocommittime">周六</span>
+
+            <div class="circle">
+                <span class="circle-out"></span>
+                <span class="circle-full"></span>
+            </div>
+            <ol class="logList-detailList">
+                <li><span>TinyGroup / TinyUiEnterprise2：李银磊 - 窗口部件  <a
+                        href="http://git.oschina.net/tinyframework/TinyUiEnterprise2/commit/07d3357c2e33ac8902b49529b10cd7ca469e5724"
+                        style="color:black;font-size:smaller" target="_blank">07d3357c2</a></span></li>
+                <li><span>TinyGroup / TinyUiEnterprise2：李银磊 - 页面修改 优化  <a
+                        href="http://git.oschina.net/tinyframework/TinyUiEnterprise2/commit/051a2d2bf9eb9efe7f016d93219d5a8c261998ee"
+                        style="color:black;font-size:smaller" target="_blank">051a2d2bf</a></span></li>
+            </ol>
+        </div>
+
+        <div class="committed">
+            <span class="tocommittime">周五</span>
+
+            <div class="circle">
+                <span class="circle-out"></span>
+                <span class="circle-full"></span>
+            </div>
+            <ol class="logList-detailList">
+                <li><span>TinyGroup / TinyUiEnterprise2：李银磊 - 菜单和树形视图  <a
+                        href="http://git.oschina.net/tinyframework/TinyUiEnterprise2/commit/e003598a017266a679923adcb1467de190415a53"
+                        style="color:black;font-size:smaller" target="_blank">e003598a0</a></span></li>
+                <li><span>TinyGroup / TinyUiEnterprise2：李银磊 - jquery树形菜单 简化  <a
+                        href="http://git.oschina.net/tinyframework/TinyUiEnterprise2/commit/0c209530738ddf1f7a29bfe4930c1741303107fa"
+                        style="color:black;font-size:smaller" target="_blank">0c2095307</a></span></li>
+                <li><span>TinyGroup / TinyUiEnterprise2：李银磊 - 遮罩条 宏修改 鼠标经过乱掉修正  <a
+                        href="http://git.oschina.net/tinyframework/TinyUiEnterprise2/commit/337f1e3caa38089482322ec62143dda93788520f"
+                        style="color:black;font-size:smaller" target="_blank">337f1e3ca</a></span></li>
+                <li><span>TinyGroup / TinyUiEnterprise2：李银磊 - 交互动画 展示界面间距调整  <a
+                        href="http://git.oschina.net/tinyframework/TinyUiEnterprise2/commit/bc953f1626f29a1b893ba1cf138aa44e19d944f9"
+                        style="color:black;font-size:smaller" target="_blank">bc953f162</a></span></li>
+                <li><span>TinyGroup / TinyUiEnterprise2：李银磊 - 标签缺少 修复  <a
+                        href="http://git.oschina.net/tinyframework/TinyUiEnterprise2/commit/c01b52a2ebb4cbaf25293c990e427e96006cb427"
+                        style="color:black;font-size:smaller" target="_blank">c01b52a2e</a></span></li>
+                <li><span>TinyGroup / TinyUiEnterprise2：李银磊 - 界面优化 tinyui.css 本地调用等  <a
+                        href="http://git.oschina.net/tinyframework/TinyUiEnterprise2/commit/823b47d447b926611b874a58f8e6c625b2f60b42"
+                        style="color:black;font-size:smaller" target="_blank">823b47d44</a></span></li>
+                <li><span>TinyGroup / TinyUiEnterprise2：李银磊 - 宏 tSelect2 重名修正等  <a
+                        href="http://git.oschina.net/tinyframework/TinyUiEnterprise2/commit/e488f41fde3bea52cac1a7558447d74cb23c4c15"
+                        style="color:black;font-size:smaller" target="_blank">e488f41fd</a></span></li>
+                <li><span>TinyGroup / TinyUiEnterprise2：李银磊 - 图表被隐藏 修复  <a
+                        href="http://git.oschina.net/tinyframework/TinyUiEnterprise2/commit/e3c5c7e121d9b706397126002700722e1086f803"
+                        style="color:black;font-size:smaller" target="_blank">e3c5c7e12</a></span></li>
+            </ol>
+        </div>
+
+        <div class="committed">
+            <span class="tocommittime">周四</span>
+
+            <div class="circle">
+                <span class="circle-out"></span>
+                <span class="circle-full"></span>
+            </div>
+            <ol class="logList-detailList">
+                <li><span>TinyGroup / TinyUiEnterprise2：李银磊 - widget增加样式表  <a
+                        href="http://git.oschina.net/tinyframework/TinyUiEnterprise2/commit/034eada2465eace4ec5b753223115ffbc5f8b4b1"
+                        style="color:black;font-size:smaller" target="_blank">034eada24</a></span></li>
+                <li><span>TinyGroup / TinyUiEnterprise2：李银磊 - 新工程 整体优化  <a
+                        href="http://git.oschina.net/tinyframework/TinyUiEnterprise2/commit/3e3055d10f4bbfcdba7b465f7e9a25ce67015646"
+                        style="color:black;font-size:smaller" target="_blank">3e3055d10</a></span></li>
+                <li><span>TinyGroup / TinyUiEnterprise2：李银磊 - index界面完成  <a
+                        href="http://git.oschina.net/tinyframework/TinyUiEnterprise2/commit/17b3bd898931b1ff20728815ec4ac3bcff39e58e"
+                        style="color:black;font-size:smaller" target="_blank">17b3bd898</a></span></li>
+                <li><span>TinyGroup / TinyUiEnterprise2：李银磊 - ui-production.min.css typography.page等  <a
+                        href="http://git.oschina.net/tinyframework/TinyUiEnterprise2/commit/6855087394d3f2da2aece82596069b6d23dd206e"
+                        style="color:black;font-size:smaller" target="_blank">685508739</a></span></li>
+                <li><span>TinyGroup / TinyUiEnterprise2：李银磊 - widget.init.js index.page等简化  <a
+                        href="http://git.oschina.net/tinyframework/TinyUiEnterprise2/commit/c35b01d26f72c4404ee172c4fe4bd92e3f73d4cf"
+                        style="color:black;font-size:smaller" target="_blank">c35b01d26</a></span></li>
+                <li><span>TinyGroup / TinyUiEnterprise2：李银磊 - 多文件上传  <a
+                        href="http://git.oschina.net/tinyframework/TinyUiEnterprise2/commit/e7a6a665e4c626ddba93ff626fde6fa9c02ad4d5"
+                        style="color:black;font-size:smaller" target="_blank">e7a6a665e</a></span></li>
+                <li><span>TinyGroup / TinyUiEnterprise2：李银磊 - ui样式表 和js  <a
+                        href="http://git.oschina.net/tinyframework/TinyUiEnterprise2/commit/2236fa6b3fbcabc1930c1a46f5de046a6a7d58cb"
+                        style="color:black;font-size:smaller" target="_blank">2236fa6b3</a></span></li>
+                <li><span>TinyGroup / TinyUiEnterprise2：李银磊 - tiny-admin.min.js  <a
+                        href="http://git.oschina.net/tinyframework/TinyUiEnterprise2/commit/a1be0dcea3b553e157c1b0fcf76e3f7118a8ebc1"
+                        style="color:black;font-size:smaller" target="_blank">a1be0dcea</a></span></li>
+                <li><span>TinyGroup / TinyUiEnterprise2：李银磊 - 首页  <a
+                        href="http://git.oschina.net/tinyframework/TinyUiEnterprise2/commit/4fac294866566a2731c8fc28019abdcda0e8f893"
+                        style="color:black;font-size:smaller" target="_blank">4fac29486</a></span></li>
+                <li><span>TinyGroup / TinyUiEnterprise2：李银磊 - index.page  <a
+                        href="http://git.oschina.net/tinyframework/TinyUiEnterprise2/commit/45c69c2ca77d5e024e29e82f773e019eaa8e35f0"
+                        style="color:black;font-size:smaller" target="_blank">45c69c2ca</a></span></li>
+            </ol>
+        </div>
+
+        <div class="committed">
+            <span class="tocommittime">周三</span>
+
+            <div class="circle">
+                <span class="circle-out"></span>
+                <span class="circle-full"></span>
+            </div>
+            <ol class="logList-detailList">
+                <li><span>TinyGroup / TinyUiEnterprise2：李银磊 - jarvis.widget.min.js  <a
+                        href="http://git.oschina.net/tinyframework/TinyUiEnterprise2/commit/bf94b0e0a32af9bafa7396606fedfffdd2994e62"
+                        style="color:black;font-size:smaller" target="_blank">bf94b0e0a</a></span></li>
+                <li><span>TinyGroup / TinyUiEnterprise2：李银磊 - 首页 rtl.min.css ui-production.min.css  <a
+                        href="http://git.oschina.net/tinyframework/TinyUiEnterprise2/commit/b41111744c2715ccbe412a80c00e4f95b3f4479a"
+                        style="color:black;font-size:smaller" target="_blank">b41111744</a></span></li>
+                <li><span>TinyGroup / TinyUiEnterprise2：李银磊 - app.config.js app.min.js等  <a
+                        href="http://git.oschina.net/tinyframework/TinyUiEnterprise2/commit/048e4643f6d16faaa2360dc7daf2744df9765255"
+                        style="color:black;font-size:smaller" target="_blank">048e4643f</a></span></li>
+                <li><span>TinyGroup / TinyUiEnterprise：李银磊 - tiny-ui.css和配置  <a
+                        href="http://git.oschina.net/tinyframework/TinyUiEnterprise/commit/f2f6935cc1fa74fe0b379f0fd58f18b598920c24"
+                        style="color:black;font-size:smaller" target="_blank">f2f6935cc</a></span></li>
+                <li><span>TinyGroup / TinyUiEnterprise：李银磊 - tiny-ui.css和配置  <a
+                        href="http://git.oschina.net/tinyframework/TinyUiEnterprise/commit/f2f6935cc1fa74fe0b379f0fd58f18b598920c24"
+                        style="color:black;font-size:smaller" target="_blank">f2f6935cc</a></span></li>
+                <li><span>TinyGroup / TinyUiEnterprise2：李银磊 - monent.ui.xml  <a
+                        href="http://git.oschina.net/tinyframework/TinyUiEnterprise2/commit/9e62d1014c22adae6c99ba98d8ecbf2e75e45632"
+                        style="color:black;font-size:smaller" target="_blank">9e62d1014</a></span></li>
+                <li><span>TinyGroup / tinyFlatUi：李银磊 - default.layout底部信息  <a
+                        href="http://git.oschina.net/tinyframework/tinyFlatUi/commit/c8991ac6f044f95c301976515b1cedbd978160ba"
+                        style="color:black;font-size:smaller" target="_blank">c8991ac6f</a></span></li>
+                <li><span>TinyGroup / tinyFlatUi：李银磊 - monent.ui.xml  <a
+                        href="http://git.oschina.net/tinyframework/tinyFlatUi/commit/17ac5937d59dcb59979658fd59a46fd4ae552fa8"
+                        style="color:black;font-size:smaller" target="_blank">17ac5937d</a></span></li>
+                <li><span>TinyGroup / tinyFlatUi：李银磊 - fold页  <a
+                        href="http://git.oschina.net/tinyframework/tinyFlatUi/commit/6bc3a045a92779c32db7d445443784e3eb5f510e"
+                        style="color:black;font-size:smaller" target="_blank">6bc3a045a</a></span></li>
+            </ol>
+        </div>
+
+        <div class="committed last">
+            <span class="tocommittime">周二</span>
+
+            <div class="circle">
+                <span class="circle-out"></span>
+                <span class="circle-full"></span>
+            </div>
+            <ol class="logList-detailList">
+                <li><span>创建任务：编辑器功能实现
+									</span></li>
+                <li><span>TinyGroup / tinyFlatUi：李银磊 - 页面 组件使用  <a
+                        href="http://git.oschina.net/tinyframework/tinyFlatUi/commit/2521f43354e9b355ffa8e72f5ab28cfe68cd9a95"
+                        style="color:black;font-size:smaller" target="_blank">2521f4335</a></span></li>
+                <li><span>TinyGroup / tinyFlatUi：李银磊 - 参数使用标注  <a
+                        href="http://git.oschina.net/tinyframework/tinyFlatUi/commit/ee674ffbfac2e23059db28d7c625e98bfb3c7370"
+                        style="color:black;font-size:smaller" target="_blank">ee674ffbf</a></span></li>
+                <li><span>TinyGroup / tinyFlatUi：李银磊 - rolling.component封装 注释 rolling.page等  <a
+                        href="http://git.oschina.net/tinyframework/tinyFlatUi/commit/aed74155aa804f0805e8b0caccdd35adddd47dca"
+                        style="color:black;font-size:smaller" target="_blank">aed74155a</a></span></li>
+                <li><span>TinyGroup / tinyFlatUi：李银磊 - 选项卡页面 宏 使用注释等  <a
+                        href="http://git.oschina.net/tinyframework/tinyFlatUi/commit/fe55f156ed8f1bf700d9da5b38b553f99e2b1ddd"
+                        style="color:black;font-size:smaller" target="_blank">fe55f156e</a></span></li>
+                <li><span>TinyGroup / tinyFlatUi：李银磊 - 宏注释 缺少标签修正  <a
+                        href="http://git.oschina.net/tinyframework/tinyFlatUi/commit/5dcba6da9cc536e6128d302115b5b8fbe1fa5fe3"
+                        style="color:black;font-size:smaller" target="_blank">5dcba6da9</a></span></li>
+            </ol>
+        </div>
+
+        <div>
+        </div>
+    </div>
+</li>
+
+<li id="team_tweet_7608764" class="diary-detail">
+    <div class="diary-report clearfix">
+        <div class="portrait">
+
+            <a href="/tiny/diary?u=1386523&amp;p=1" title="点击查看陈佼所有的周报">
+
+
+
+
+
+
+
+
+    						                        <span class="name b">
+                            陈佼
+                        </span>
+            </a>
+        </div>
+        <div class="diary-info" onclick="TeamDiaryRecentJS.loadDiaryDetail(7608764)" style="cursor:pointer"
+             data-load="true">
+            <p>文档调整、修复<br>ywj代码查阅</p>
+        </div>
+        <div style="float: right; font-size: 14px">
+					<span>
+						<i class="fa fa-clock-o"></i>
+                        01/04 09:17
+					</span>
+					<span onclick="TeamDiaryRecentJS.loadDiaryDetail(7608764)" class="dia_h_btn">
+			        	<i class="fa fa-comments"></i>
+                        0
+			        </span>
+                                            <span class="dia_h_btn" onclick="showDiaryDetailList(7608764, this)"
+                                                  data-open="0">
+						<i class="fa fa-chevron-down"></i>
+					</span>
+        </div>
+    </div>
+    <div class="diary-detail-list" id="diary-detail-list_7608764" style="display: none;">
+        <div class="committed">
+            <span class="tocommittime">周日</span>
+
+            <div class="circle">
+                <span class="circle-out"></span>
+                <span class="circle-full"></span>
+            </div>
+            <ol class="logList-detailList">
+                <li><span>TinyGroup / Book：陈佼 - 调整文档  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/b21d05a78afdb17b354b73b014a218b9abbe228e"
+                        style="color:black;font-size:smaller" target="_blank">b21d05a78</a></span></li>
+            </ol>
+        </div>
+
+
+        <div class="committed">
+            <span class="tocommittime">周五</span>
+
+            <div class="circle">
+                <span class="circle-out"></span>
+                <span class="circle-full"></span>
+            </div>
+            <ol class="logList-detailList">
+                <li><span>TinyGroup / tinyext：陈佼 - 调整对tiny依赖为2.0.32-SNAPSHOT  <a
+                        href="http://git.oschina.net/tinyframework/tinyext/commit/baa3bbdaee2112bac98ef27329d3fc1a4210ee97"
+                        style="color:black;font-size:smaller" target="_blank">baa3bbdae</a></span></li>
+                <li><span>TinyGroup / Book：陈佼 - 文档调整  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/530b7c87c503e327807362faa5b8f200eec5cf39"
+                        style="color:black;font-size:smaller" target="_blank">530b7c87c</a></span></li>
+                <li><span>TinyGroup / Book：陈佼 - Merge branch 'master' of https://git.oschina.net/tinyframework/Book  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/1d75a6baa8d7c0e5f19698dda064127fb84be8e3"
+                        style="color:black;font-size:smaller" target="_blank">1d75a6baa</a></span></li>
+            </ol>
+        </div>
+
+        <div class="committed">
+            <span class="tocommittime">周四</span>
+
+            <div class="circle">
+                <span class="circle-out"></span>
+                <span class="circle-full"></span>
+            </div>
+            <ol class="logList-detailList">
+                <li><span>TinyGroup / tinyext：陈佼 - 调整消息放入顺序， 之前是先放入已发送列表，再发送 现在是先发送，再放入已发送列表  <a
+                        href="http://git.oschina.net/tinyframework/tinyext/commit/f1968870c9aa908a8d9606c94d73f5bbb6909d1a"
+                        style="color:black;font-size:smaller" target="_blank">f1968870c</a></span></li>
+                <li><span>TinyGroup / tinyext：陈佼 - 添加序列化失败异常的调用测试用例  <a
+                        href="http://git.oschina.net/tinyframework/tinyext/commit/2f3189cd6f4d24d7184efc01be5481e234fa38f3"
+                        style="color:black;font-size:smaller" target="_blank">2f3189cd6</a></span></li>
+                <li><span>TinyGroup / tinyext：陈佼 - Merge branch 'master' of https://git.oschina.net/tinyframework/tinyext  <a
+                        href="http://git.oschina.net/tinyframework/tinyext/commit/756fb05dc99e019f45c556ef369cf40e45d21106"
+                        style="color:black;font-size:smaller" target="_blank">756fb05dc</a></span></li>
+                <li><span>TinyGroup / tiny：陈佼 - 添加依赖event，用于日志打印 添加消息写出状态，如果发现消息写出失败，直接消息写出失败原因对应的异常  <a
+                        href="http://git.oschina.net/tinyframework/tiny/commit/f95b16d332adfadf115b8e472b80f7bc77c5db8a"
+                        style="color:black;font-size:smaller" target="_blank">f95b16d33</a></span></li>
+                <li><span>TinyGroup / tiny：陈佼 - Merge branch 'master' of https://git.oschina.net/tinyframework/tiny  <a
+                        href="http://git.oschina.net/tinyframework/tiny/commit/de8e578fb8523edab9e91208da7440d37ff6abe8"
+                        style="color:black;font-size:smaller" target="_blank">de8e578fb</a></span></li>
+            </ol>
+        </div>
+
+        <div class="committed last">
+            <span class="tocommittime">周三</span>
+
+            <div class="circle">
+                <span class="circle-out"></span>
+                <span class="circle-full"></span>
+            </div>
+            <ol class="logList-detailList">
+                <li><span>TinyGroup / Book：陈佼 - 文档调整  <a
+                        href="http://git.oschina.net/tinyframework/Book/commit/14aa061c6b14067bf860477f053b8963a721816f"
+                        style="color:black;font-size:smaller" target="_blank">14aa061c6</a></span></li>
+            </ol>
+        </div>
+
+
+        <div>
+        </div>
+    </div>
+</li>

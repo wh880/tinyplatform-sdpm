@@ -3,3 +3,8 @@
     #bodyContent
 </div>
 #end
+
+
+#macro circleButton(buttonClass)#set(buttonClass=buttonClass?:"primary")<button class="btn btn-circle btn-${buttonClass}">#bodyContent</button>#end
+#macro fontIco(buttonClass)<i class="icon-${buttonClass}"></i>#end
+
