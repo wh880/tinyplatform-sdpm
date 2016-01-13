@@ -89,6 +89,21 @@
             #end
         #end
         #@elementItem()
+            #@sdpmItem("相关BUG")
+                #if(bugList)
+                    #@Tselect2F()
+                        #@Tselect2Body("taskRelationBug" bugId==null?"":bugId {"class":"input-text select2"})
+                            <option value=""></option>
+                            #foreach(b:bugList)
+                                <option value="${b.bugId}">${b.bugId}：${b.bugTitle}（优先级：${b.priority}，Bug类型:${b.bugType}）
+                                </option>
+                            #end
+                        #end
+                    #end
+                #end
+            #end
+        #end
+        #@elementItem()
             #@sdpmItem("任务名称" "*")
                 #@formControlDiv()
                     #tinyInput("text" "taskName" story?.storyTitle {"placeholder":"任务名称","datatype":"*","nullmsg":"任务名称不能为空！","class":"input-text"})

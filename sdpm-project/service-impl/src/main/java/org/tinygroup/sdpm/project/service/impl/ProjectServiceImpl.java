@@ -11,6 +11,7 @@ import org.tinygroup.sdpm.org.dao.pojo.OrgRole;
 import org.tinygroup.sdpm.project.biz.inter.ProjectManager;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
+import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.ArrayList;
@@ -161,6 +162,16 @@ public class ProjectServiceImpl implements ProjectService {
 
     public List<Project> projectInCondition(String condition, Integer limit, Integer... ids) {
         return projectManager.projectInCondition(condition, limit, ids);
+    }
+    /**
+     * 根据产品id查询待关联的bug list
+     *
+     * @param projectId
+     * @return List<QualityBug>
+     */
+    @Override
+    public List<QualityBug> findRelationBugByProjectID(Integer projectId) {
+        return projectManager.findList(projectId);
     }
 
 }
