@@ -11,7 +11,6 @@ import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.convert.objectjson.fastjson.ObjectToJson;
 import org.tinygroup.logger.Logger;
 import org.tinygroup.logger.LoggerFactory;
-import org.tinygroup.sdpm.action.system.FileRepository;
 import org.tinygroup.sdpm.common.beanvalidator.BeanValidators;
 import org.tinygroup.sdpm.common.util.DateUtils;
 import org.tinygroup.sdpm.dto.UploadProfile;
@@ -78,8 +77,6 @@ public abstract class BaseController {
      */
     @Autowired
     protected Validator validator;
-    @Autowired
-    private FileRepository fileRepository;
     @Autowired
     private ProfileService profileService;
 
@@ -187,10 +184,9 @@ public abstract class BaseController {
             response.setContentType(type);
             response.setCharacterEncoding("utf-8");
             response.getWriter().print(string);
-            return null;
         } catch (IOException e) {
-            return null;
         }
+        return null;
     }
 
 
