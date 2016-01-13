@@ -1,11 +1,14 @@
+<style type="text/css">
+.diarylist .diary-detail{padding:10px 12px;border-bottom: #eed 1px solid;background:#fdfdfd}
+.diary-detail .diary-report .portrait{font-size:18px;padding-top:10px;}
+.diary-detail .diary-info{display:inline-block;min-height:38px;position: relative;  width: 65%; font-size:15px;}
+</style>
 <li id="team_tweet_7674466" class="diary-detail">
     <div class="diary-report clearfix">
         <div class="portrait">
             <a href="/tiny/diary?u=1781610&amp;p=1" title="点击查看王维煜所有的周报">
 
-    						                        <span class="name b">
-                            王维煜
-                        </span>
+    			<span class="name b">王维煜</span>
             </a>
         </div>
         <div class="diary-info" onclick="TeamDiaryRecentJS.loadDiaryDetail(7674466)" style="cursor:pointer"
@@ -21,8 +24,7 @@
 			        	<i class="fa fa-comments"></i>
                         0
 			        </span>
-                                            <span class="dia_h_btn" onclick="showDiaryDetailList(7674466, this)"
-                                                  data-open="0">
+                      <span class="dia_h_btn" onclick="showDiaryDetailList(7674466, this)" data-open="0">
 						<i class="fa fa-chevron-down"></i>
 					</span>
         </div>

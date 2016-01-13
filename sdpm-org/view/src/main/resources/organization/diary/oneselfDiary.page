@@ -1,5 +1,10 @@
+<style type="text/css">
+.diary-content-head{text-align:center;padding-top:20px;padding-bottom:20px;background:#fdfdfd;border-bottom:#ddd 1px dashed}
+.diary-content-head h3{font-size:26px;line-height:30px}
+.diary-content-head h3 .btn-circle{vertical-align:top;}
+.diary-content-head .week-date{padding:4px 12px;background:#857198;display:inline-block;color:#fff;font-size:14px;border-radius:44px;}
+</style>
 #set(name="organizationUser")
-
 #@layout(org)#end
 #@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
     #@toggleLeft({"class":"aclass"})
@@ -15,14 +20,14 @@
         #end
     #end
     #@toggleRight()
-    <div style="text-align:center;padding-top:20px">
+    <div class="diary-content-head">
         <h3>
             #@circleButton("primary get-prev")#fontIco("chevron-left")#end
             第<span id="week-num">${w}</span>周周报总览
             #@circleButton("primary get-next")#fontIco("chevron-right")#end
         </h3>
-        <span id="begin-date" class="hide"></span>
-        <div><span id="week-date-show"></span></div>
+        <span id="begin-date" class="hide" ></span>
+        <div class="week-date"><span id="week-date-show"></span></div>
     </div>
     <script type="text/javascript">
         $(function () {
