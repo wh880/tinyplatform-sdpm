@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.action.org;
 
+import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.JsonParser;
@@ -8,16 +9,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
-import org.tinygroup.sdpm.org.dao.pojo.OrgDiary;
-import org.tinygroup.sdpm.org.dao.pojo.OrgDiaryDetail;
-import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
+import org.tinygroup.sdpm.org.dao.pojo.*;
 import org.tinygroup.sdpm.org.service.inter.DiaryService;
+import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemEffort;
+import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.service.inter.EffortService;
+import org.tinygroup.sdpm.util.UserUtils;
+import org.tinygroup.tinysqldsl.Pager;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -35,40 +40,60 @@ public class DiaryAction extends BaseController {
     @Autowired
     private EffortService effortService;
 
+    @Autowired
+    private UserService userService;
+
+
     /**
      * 添加周报以及相应的周报详情
      *
      * @param summary
-     * @param userId
      * @param json
      * @return
      */
     @ResponseBody
     @RequestMapping("/add")
     // json {orgDiaryDetails:{{org_diary_id:"1",org_user_id:12,...},{org_diary_id:"2",org_user_id:14,...}}}
-    public Map add(String summary, String userId, String json) {
+    public Map add(String summary, Integer y, Integer w, String json) {
         ObjectMapper objectMapper = new ObjectMapper();
         List<OrgDiaryDetail> list = null;
-        try {
-            JsonParser parser = objectMapper.getJsonFactory().createJsonParser(json);
-            JsonNode nodes = parser.readValueAsTree();
-            list = new ArrayList<OrgDiaryDetail>();
-            for (JsonNode node : nodes) {
-                list.add(objectMapper.readValue(node, OrgDiaryDetail.class));
+        if (!StringUtil.isBlank(json) && !StringUtil.isEmpty(json)) {
+            try {
+                JsonParser parser = objectMapper.getJsonFactory().createJsonParser(json);
+                JsonNode nodes = parser.readValueAsTree();
+                list = new ArrayList<OrgDiaryDetail>();
+                for (JsonNode node : nodes) {
+                    list.add(objectMapper.readValue(node, OrgDiaryDetail.class));
+                }
+            } catch (IOException e) {
+                e.getStackTrace();
+                return resultMap(false, "添加失败");
             }
-        } catch (IOException e) {
-            e.getStackTrace();
-            return resultMap(false, "添加失败");
         }
-
+        String userId = userUtils.getUser().getOrgUserId();
         OrgDiary orgDiary = new OrgDiary();
         Date date = new Date();
-        orgDiary.setOrgDiaryCreateDate(date);
-        orgDiary.setOrgDiarySummary(summary);
-        orgDiary.setOrgUserId(userId);
-
-        diaryService.addDiary(orgDiary, list);
-        return resultMap(true, "添加成功");
+        if (y == null || w == null) {
+            //判断进行添加新的周报，还是修改旧的周报
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(date);
+            y = calendar.get(Calendar.YEAR);
+            w = calendar.get(Calendar.WEEK_OF_YEAR);
+        }
+        OrgDiary diary = diaryService.findDiaryByUserLatest(userId, y, w);
+        if (diary == null) {
+            orgDiary.setOrgDiaryCreateDate(date);
+            orgDiary.setOrgDiarySummary(summary);
+            orgDiary.setOrgUserId(userId);
+            orgDiary.setOrgDiaryWeek(w);
+            orgDiary.setOrgDiaryYear(y);
+            diaryService.addDiary(orgDiary, list);
+            return resultMap(true, "添加成功");
+        }
+        diary.setOrgDiarySummary(summary);
+        diary.setOrgDiaryModifyDate(date);
+        diaryService.updateDiary(diary, list);
+        return resultMap(true, "修改成功");
     }
 
     /**
@@ -130,12 +155,13 @@ public class DiaryAction extends BaseController {
      */
     @ResponseBody
     @RequestMapping("/findSubordinate")
-    public String findSubordinate(String userId, Model model) {
+    public String findSubordinate(String userId, Model model, Integer start, Integer limit) {
+        Pager<OrgDiaryAndUserDO> pager;
         if (StringUtil.isBlank(userId)) {
             return null;
         }
-        List<OrgDiary> list = diaryService.findDiaryListByUserId(userId);
-        model.addAttribute("list", list);
+        pager = diaryService.findPagerDiaryByUserId(userId, start, limit);
+        model.addAttribute("pager", pager);
         return "";
     }
 
@@ -211,17 +237,18 @@ public class DiaryAction extends BaseController {
      */
     @RequiresPermissions("organizationDiary")
     @RequestMapping("/findListByUser")
-    public String findListByUser(String userId, Model model) {
+    public String findListByUser(String userId, Model model, Integer start, Integer limit) {
         OrgUser user = new OrgUser();
-        if (StringUtil.isBlank(userId) || StringUtil.isEmpty(userId)) {
+        Pager<OrgDiaryAndUserDO> pager;
+        if (StringUtil.isEmpty(userId)) {
             user = userUtils.getUser();
             userId = user.getOrgUserId();
         }
         user = userUtils.getUserById(userId);
-        List<OrgDiary> list = diaryService.findDiaryListByUserId(userId);
-        model.addAttribute("list", list);
+        pager = diaryService.findPagerDiaryByUserId(userId, start, limit);
+        model.addAttribute("pager", pager);
         model.addAttribute("orgUser", user);
-        return "organization/diary/oneselfDiary";
+        return "organization/diary/diariesTable.pagelet";
     }
 
     /**
@@ -261,17 +288,87 @@ public class DiaryAction extends BaseController {
         Integer year = ca.get(Calendar.YEAR);
         Integer week = ca.get(Calendar.WEEK_OF_YEAR);
         OrgUser user = userUtils.getUser();
-        OrgDiary orgDiary = diaryService.findDiaryByUserAndDate(year, year, user.getOrgUserId());
-        List<OrgDiary> list = diaryService.findDiaryListSubordinateOneWeek(user.getOrgUserId(), year, week);
+        OrgDiary orgDiary = diaryService.findDiaryByUserLatest(user.getOrgUserId(), year, week);//自己
+        List<OrgDiary> list = diaryService.findDiaryListSubordinateOneWeek(user.getOrgUserId(), year, week);//下属
         model.addAttribute("orgDiary", orgDiary);
         model.addAttribute("list", list);
-        return "organization/diary/diary";
+        return "organization/diary/diary.page";
+    }
+
+
+    /**
+     * 增加或编辑时候显示页面
+     *
+     * @param w
+     * @param model
+     * @return
+     */
+    @RequiresPermissions(value = {"org-diary-edit", "organizationAddDiary"}, logical = Logical.OR)
+    @RequestMapping("/form")
+    public String form(Model model, Integer w, Integer y) {
+        if (y != null & w != null) {
+//        //判断当前周是否提交了周报,若有，则默认显示当前周的周报
+            String userId = userUtils.getUser().getOrgUserId();
+            OrgDiary orgDiary = diaryService.findDiaryByUserLatest(userId, y, w);
+            model.addAttribute("orgDiary", orgDiary);
+            if (orgDiary != null) {
+                Calendar calendar = Calendar.getInstance();
+                calendar.set(y, 0, 1, 0, 0, 0);
+                int week = calendar.get(calendar.DAY_OF_WEEK) - 1;
+                int days = w * 7 - (8 - week);
+                List<OrgDiaryDetail> list = diaryService.findDetailListByDiaryId(orgDiary.getOrgDiaryId());
+                calendar.add(Calendar.DATE, days - 1);
+                Date beginDate = calendar.getTime();
+                calendar.add(Calendar.DATE, 6);
+                Date endDate = calendar.getTime();
+                List<SystemEffort> effortsList = effortService.findEffortListByUserAndDate(userUtils.getUser().getOrgUserId(), beginDate, endDate);
+                model.addAttribute("list", list);
+                model.addAttribute("efforts", effortsList);
+            }
+        }
+        return "organization/diary/submit";
+    }
+
+    @ResponseBody
+    @RequestMapping("tree")
+    public List<Map<String, Object>> ajax(SystemModule systemModule, HttpServletResponse response, @RequestParam(value = "type", defaultValue = "name") String type) {
+        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+        List<OrgUser> usersList = userService.findOrgUserListSubordinate(UserUtils.getUserId());
+        Map<String, Object> map = new HashMap<String, Object>();
+        for (OrgUser user : usersList) {
+            map.put("id", user.getOrgUserId());
+            map.put("pId", user.getOrgUserLeader());
+            map.put("open", true);
+            map.put("add", false);
+            map.put("edit", false);
+            map.put("name", user.getOrgUserAccount());
+            list.add(map);
+        }
+        return list;
+    }
+
+    @RequiresPermissions("organizationDiary")
+    @RequestMapping("/list/data")
+    public String listData(Integer year, Integer week, Integer start, Integer limit,
+                           Model model) {
+        Pager<OrgDiaryAndUserDO> pager;
+        if (year == null || week == null) {
+            Date date = new Date();
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(date);
+            year = calendar.get(Calendar.YEAR);
+            week = calendar.get(Calendar.WEEK_OF_YEAR);
+        }
+        pager = diaryService.findPagerDiarySubAndSelf(UserUtils.getUserId(), year, week, start, limit);
+        model.addAttribute("pager", pager);
+        return "organization/diary/diariesTable.pagelet";
     }
 
     @RequestMapping("/test")
     public String test() {
         return "organization/diary/oneselfDiary";
     }
+
     @RequestMapping("/testdata")
     public String testdata() {
         return "organization/diary/diaryData";

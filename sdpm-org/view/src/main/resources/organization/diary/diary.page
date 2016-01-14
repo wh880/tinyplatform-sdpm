@@ -1,63 +1,154 @@
+<style type="text/css">
+    .diary-content-head {
+        text-align: center;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        background: #fdfdfd;
+        border-bottom: #ddd 1px dashed
+    }
 
-#set(name="organizationUser")
+    .diary-content-head h3 {
+        font-size: 26px;
+        line-height: 30px
+    }
 
-#@layout(org)佛挡杀佛dsfszd#end
+    .diary-content-head h3 .btn-circle {
+        vertical-align: top;
+    }
+
+    .diary-content-head .week-date {
+        padding: 4px 12px;
+        background: #857198;
+        display: inline-block;
+        color: #fff;
+        font-size: 14px;
+        border-radius: 44px;
+    }
+</style>
+#set(name="organizationDiary")
+
+#@layout(org)查看周报#end
 #@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
     #@toggleLeft({"class":"aclass"})
-        #@settoggleLeftTitle()部门结构#end
+        #@settoggleLeftTitle()我的下属#end
         #@settoggleLeftBody("treeLeftbox")
-            #@zTreeList(call("link",adminPath+"/org/dept/data"))
-                #setzTreeValMap({"id":"orgDeptId","name":"orgDeptName","pid":"orgDeptParent"}) ##key值为固定
+            #@zTreeList(call("link",adminPath+"/org/diary/tree"))
+                #setzTreeValMap({"id":"orgUserId","name":"orgUserAccount","pid":"orgUserLeader"}) ##key值为固定
                 #zTreeSetLinkUrl(TINY_CONTEXT_PATH+adminPath+"/org/user/list" )
-                #zTreeSetAddUrl(TINY_CONTEXT_PATH+adminPath+"/org/dept/add")
-                #zTreeSetEditUrl(TINY_CONTEXT_PATH+adminPath+"/org/dept/edit")
-                #zTreeSetDelUrl(TINY_CONTEXT_PATH+adminPath+"/org/dept/delete")
             #end
         #end
     #end
     #@toggleRight()
-        #set(editpagePath=
-            "/organization/user/add.pagelet",editpageModalId="userEditModal",editpageModal="#"+editpageModalId)
-        #set(userBatchAddpagePath=
-            "/organization/user/batchAdd.pagelet",userBatchAddpageModalId="userBatchAddpageModal",userBatchAddpageModal="#"+userBatchAddpageModalId)
-        #set(tabpagePath="/common/tab.pagelet",tabpageModalId="userViewModal",tabpageModal="#"+tabpageModalId)
-        #@tinyTable("user-table-list") ##ID为空则系统自动生成 带入参数则取该参数为ID
-            #@div(divBaseClass="tinyheaderTools form-inline")
-                #setTinyTablePageSize([10,20,30,50,100,200])
-                #set(m1=menuManager.getMenu("org-user-batchdel"))
-                #if(m1)
-                    #@mulOperation("muldelete" TINY_CONTEXT_PATH+adminPath+"/org/user/batchDelete")
-                    <a href="javascript:void(0);" class="btn radius btn-danger btn-sm "><i class="icon-trash"></i> 批量删除</a>
-                    #end
-                #end
-
-                #set(m2=menuManager.getMenu("organizationAddUser"))
-                #if(m2)
-                    #@aExtendButton("btn radius btn-primary btn-sm" TINY_CONTEXT_PATH+adminPath+
-                        "/org/user/form")#buttonIcon(iconClass=m2.icon)添加用户#end
+        #@div(divBaseClass="tinyheaderTools form-inline")
+            #set(m1=menuManager.getMenu("org-user-batchdel"))
+            #if(m1)
+                #@mulOperation("muldelete" TINY_CONTEXT_PATH+adminPath+"/org/diary/findListByUser")
+                <a href="javascript:void(0);" class="btn radius btn-danger btn-sm "><i class="icon-trash"></i> 我的周报</a>
                 #end
             #end
-            #@tinyTableContent(TINY_CONTEXT_PATH+adminPath+"/org/user/list/data?orgDeptId="+orgDeptId) ##取数据地址 总数据
-                #@thead()
-                    #@tr()###th  class 为sorting 表票可排序 为sorting_desc 为当前倒序
-                        #@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
-                        #@tinyTh({"class":"","rel":"orgUserRealName"})姓名#end
-                        #@tinyTh({"class":"","rel":"orgUserAccount"})用户名#end
-                        #@tinyTh({"class":"","rel":"orgUserRole"})职位#end
-                        #@tinyTh({"class":"","rel":"orgUserEmail"})邮箱#end
-                        #@tinyTh({"class":"","rel":"orgUserGender"})性别#end
-                        #@tinyTh({"class":"","rel":"orgUserPhone"})电话#end
-                        #@tinyTh({"class":"","rel":"orgUserJoin"})加入日期#end
-                        #@tinyTh({"class":"","rel":"sortname"})操作#end
-                    #end
-                #end
+
+            #set(m2=menuManager.getMenu("organizationAddUser"))
+            #if(m2)
+                #@aExtendButton("btn radius btn-primary btn-sm" TINY_CONTEXT_PATH+adminPath+
+                    "/org/diary/form")#buttonIcon(iconClass=m2.icon)提交周报#end
             #end
         #end
+    <div class="diary-content-head">
+        <h3>
+            #@circleButton("primary get-prev")#fontIco("chevron-left")#end
+            第<span id="week-num">${w}</span>周周报总览
+            #@circleButton("primary get-next")#fontIco("chevron-right")#end
+        </h3>
+        <span id="begin-date" class="hide"></span>
+        <div class="week-date"><span id="week-date-show"></span></div>
+    </div>
+    <script type="text/javascript">
+        $(function () {
+            $("#week-num").on("refresh", function () {
+                var year = $(this).attr("data-year");
+                var week = $(this).attr("data-week");
+                var body = $("#diarylist-detail");
+                var data = {w: week, y: year, aid: 2};
+                //ajaxLoadContent(body, "/sdpm-web/a/org/diary/testdata.pagelet", data);
+            });
+            function getFirstWeekDay(year, week) {
+                var yearFirst = moment(year + "-01-01");
+                var thisWeek = yearFirst.format("E");
+                return yearFirst.add("days", week * 7 - thisWeek + 1).format("YYYY-MM-DD");
+            }
+            #if(y&&w)
+                $("#begin-date").html(getFirstWeekDay(${y},${w}));
+            #else
+                $("#begin-date").html(moment().format("YYYY-MM-DD"));
+            #end
 
-        #@simpleModal("myModal" "用户编辑")#end
-        #@simpleModal("myModal2" "用户删除")#end
-        #simpleModal(editpageModalId)
-        #simpleModal(tabpageModalId)
-        #simpleModal(userBatchAddpageModalId)
+            changeWeekDate();
+            function changeWeekDate(changeWeek) {
+                var bdate = $("#begin-date").html();
+                if (typeof(changeWeek) == "undefined") {
+                    week = 0
+                } else if (changeWeek == 1) {
+                    bdate = moment(bdate).add("days", 7).format("YYYY-MM-DD")
+                } else if (changeWeek == -1) {
+                    bdate = moment(bdate).add("days", -7).format("YYYY-MM-DD")
+                }
+                var vNowDate = moment(bdate).format("YYYY-MM-DD");
+                var thisMoment = moment();
+                var thisyearWeek = thisMoment.format("YYYY-WW");
+                var thisWeek = moment(bdate).format("YYYY-WW");
+                if (thisWeek > thisyearWeek) {
+                    layer.msg("不能选择大于当前周");
+                    return false;
+                } else if (thisWeek == thisyearWeek) {
+                    $(".get-next").removeClass("btn-primary");
+                } else {
+                    $(".get-next").addClass("btn-primary");
+                }
+                $("#begin-date").html(bdate);
+                var yearWeek = moment(vNowDate).format("W");
+                $("#week-num").html(yearWeek);
+                var vWeekOfDay = moment(vNowDate).format("E");
+                var vWeekOfDays = 7 - vWeekOfDay;
+                var vStartDate = moment(vNowDate).add('days', -(vWeekOfDay - 1));
+                var vEndDate = moment(vNowDate).add('days', vWeekOfDays);
+                $("#week-date-show").html(vStartDate.format("YYYY年MM月DD") + "-" + vEndDate.format("MM月DD"));
+                $("#week-num").attr("data-year", moment(vNowDate).format("YYYY"));
+                $("#week-num").attr("data-week", yearWeek);
+                $("#week-num").trigger("refresh");
+            }
+
+            $("#week-date-show").on("click", function () {
+                var that = this;
+                WdatePicker({
+                    el: 'begin-date',
+                    startDate: '%y-%M-01 00:00:00', dateFmt: 'yyyy-MM-dd',
+                    position: {left: -15},
+                    onpicked: function () {
+                        if (changeWeekDate() == false) {
+                            $("#begin-date").html($dp.cal.getDateStr);
+                        }
+                    }
+                })
+            });
+            $(".get-prev").on("click", function () {
+                changeWeekDate(-1);
+            });
+            $(".get-next").on("click", function () {
+                changeWeekDate(1);
+            });
+        });
+    </script>
+
+    <div class="tweet_list diarylist">
+        <ul class="diarylist-detail" id="diarylist-detail">
+        </ul>
+    </div>
+        #@tinyTable("diary-table-list") ##ID为空则系统自动生成 带入参数则取该参数为ID
+            #@div(divBaseClass="tinyheaderTools form-inline")
+                #setTinyTablePageSize([10,20,30,50,100,200])
+            #end
+            #@tinyTableContent(TINY_CONTEXT_PATH+adminPath+"/org/diary/list/data") ##取数据地址 总数据
+            #end
+        #end
     #end
 #end

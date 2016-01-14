@@ -5,11 +5,12 @@ import org.springframework.stereotype.Component;
 import org.tinygroup.sdpm.org.biz.inter.DiaryManager;
 import org.tinygroup.sdpm.org.biz.inter.UserManager;
 import org.tinygroup.sdpm.org.dao.pojo.OrgDiary;
+import org.tinygroup.sdpm.org.dao.pojo.OrgDiaryAndUserDO;
 import org.tinygroup.sdpm.org.dao.pojo.OrgDiaryDetail;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.DiaryService;
+import org.tinygroup.tinysqldsl.Pager;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -44,8 +45,8 @@ public class DiaryServiceImpl implements DiaryService{
     }
 
     @Override
-    public List<OrgDiary> findDiaryListByUserId(String id) {
-        return diaryManager.findByUserId(id);
+    public Pager<OrgDiaryAndUserDO> findPagerDiaryByUserId(String id,Integer start,Integer limit) {
+        return diaryManager.findByUserId(id,start,limit);
     }
 
     @Override
@@ -80,13 +81,23 @@ public class DiaryServiceImpl implements DiaryService{
 
     @Override
     public List<OrgUser> findUserNoSubmit(String userId, Integer year, Integer week){
+        return diaryManager.findUser(userId,year,week);
+    }
+
+    @Override
+    public OrgDiary findDiaryByUserLatest(String userId,Integer year,Integer week) {
+        return diaryManager.findDiaryByUserLatest(userId,year,week);
+    }
+
+    @Override
+    public Pager<OrgDiaryAndUserDO> findDiaryPagerSubordinateOneWeek(String userId, Integer year, Integer week, Integer start, Integer limit) {
         List<OrgUser> list=userManager.getDirectStaffByLeader(userId);
-        List<String> list1=new ArrayList<String>();
-        for (OrgUser orgUser:list) {
-            list1.add(orgUser.getOrgUserId());
-        }
-        List<String> list2=diaryManager.findUser(list1,year,week);
-        list1.removeAll(list2);
-        return userManager.getUserListById(list1);
+        return diaryManager.findPagerSubordinateOneWeek(list,year,week,start,limit);
+    }
+
+    @Override
+    public Pager<OrgDiaryAndUserDO> findPagerDiarySubAndSelf(String userId, Integer year, Integer week, Integer start, Integer limit) {
+        List<OrgUser> list=userManager.getDirectStaffByLeader(userId);
+        return diaryManager.findPagerSubAndSelf(userId,list,year,week,start,limit);
     }
 }

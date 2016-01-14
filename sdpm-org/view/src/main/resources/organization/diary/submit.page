@@ -1,0 +1,187 @@
+#!set(activeTitle="提交周报",activeMenuId=currentPageId,parentId=parentId?:"0")
+<style type="text/css">
+    .diary-content-head {
+        text-align: center;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        background: #fdfdfd;
+        border-bottom: #ddd 1px dashed
+    }
+
+    .diary-content-head h3 {
+        font-size: 26px;
+        line-height: 30px
+    }
+
+    .diary-content-head h3 .btn-circle {
+        vertical-align: top;
+    }
+
+    .diary-content-head .week-date {
+        padding: 4px 12px;
+        background: #857198;
+        display: inline-block;
+        color: #fff;
+        font-size: 14px;
+        border-radius: 44px;
+    }
+</style>
+#set(name="organizationDiary")
+#@layout(org)#end
+#@div(divClass="operationbar")
+<div class="diary-content-head">
+    <h3>
+        #@circleButton("primary get-prev")#fontIco("chevron-left")#end
+        第<span id="week-num">${w}</span>周周报
+        #@circleButton("primary get-next")#fontIco("chevron-right")#end
+    </h3>
+    <span id="begin-date" class="hide"></span>
+    <div class="week-date"><span id="week-date-show"></span></div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $("#week-num").on("refresh", function () {
+            var year = $(this).attr("data-year");
+            var week = $(this).attr("data-week");
+            var body = $("#diarylist-detail");
+            var data = {w: week, y: year, aid: 2};
+            //ajaxLoadContent(body, "/sdpm-web/a/org/diary/form", data);
+            $.ajax({
+                type: "GET",
+                url: "/sdpm-web/a/org/diary/form",
+                data: {w: week, y: year, aid: 2},
+                dataType: "json",
+                success: function(data){
+                    $('#summary').val(data);
+                }
+            });
+        });
+        function getFirstWeekDay(year, week) {
+            var yearFirst = moment(year + "-01-01");
+            var thisWeek = yearFirst.format("E");
+            return yearFirst.add("days", week * 7 - thisWeek + 1).format("YYYY-MM-DD");
+        }
+        #if(y&&w)
+            $("#begin-date").html(getFirstWeekDay(${y},${w}));
+        #else
+            $("#begin-date").html(moment().format("YYYY-MM-DD"));
+        #end
+
+        changeWeekDate();
+        function changeWeekDate(changeWeek) {
+            var bdate = $("#begin-date").html();
+            if (typeof(changeWeek) == "undefined") {
+                week = 0
+            } else if (changeWeek == 1) {
+                bdate = moment(bdate).add("days", 7).format("YYYY-MM-DD")
+            } else if (changeWeek == -1) {
+                bdate = moment(bdate).add("days", -7).format("YYYY-MM-DD")
+            }
+            var vNowDate = moment(bdate).format("YYYY-MM-DD");
+            var thisMoment = moment();
+            var thisyearWeek = thisMoment.format("YYYY-WW");
+            var thisWeek = moment(bdate).format("YYYY-WW");
+            if (thisWeek > thisyearWeek) {
+                layer.msg("不能选择大于当前周");
+                return false;
+            } else if (thisWeek == thisyearWeek) {
+                $(".get-next").removeClass("btn-primary");
+            } else {
+                $(".get-next").addClass("btn-primary");
+            }
+            $("#begin-date").html(bdate);
+            var yearWeek = moment(vNowDate).format("W");
+            $("#week-num").html(yearWeek);
+            var vWeekOfDay = moment(vNowDate).format("E");
+            var vWeekOfDays = 7 - vWeekOfDay;
+            var vStartDate = moment(vNowDate).add('days', -(vWeekOfDay - 1));
+            var vEndDate = moment(vNowDate).add('days', vWeekOfDays);
+            $("#week-date-show").html(vStartDate.format("YYYY年MM月DD") + "-" + vEndDate.format("MM月DD"));
+            $("#week-num").attr("data-year", moment(vNowDate).format("YYYY"));
+            $("#week-num").attr("data-week", yearWeek);
+            $("#week-num").trigger("refresh");
+        }
+
+        $("#week-date-show").on("click", function () {
+            var that = this;
+            WdatePicker({
+                el: 'begin-date',
+                startDate: '%y-%M-01 00:00:00', dateFmt: 'yyyy-MM-dd',
+                position: {left: -15},
+                onpicked: function () {
+                    if (changeWeekDate() == false) {
+                        $("#begin-date").html($dp.cal.getDateStr);
+                    }
+                }
+            })
+        });
+        $(".get-prev").on("click", function () {
+            changeWeekDate(-1);
+        });
+        $(".get-next").on("click", function () {
+            changeWeekDate(1);
+        });
+    });
+</script>
+
+#end
+#@elementItem()
+    #@tinyForm("thisform" call("link",adminPath+"/org/diary/add") "post")
+        #@div()
+            #@formControlDiv("col-7")
+                #@tinyTextarea("summary" {"placeholder":"请输入本周总结"})${orgDiary?.orgDiarySummary}#end
+            #end
+        #end
+
+##        #tinyTable("org-diarydetail-list")
+##        #@tinyTableContent(TINY_CONTEXT_PATH+adminPath+"/org/diary/form")
+##            #setTinyTablePageSize([10,20,30,50,100,200])
+##            #@thead()
+##                #@tr()
+##                    #@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
+##                    #@tinyTh({"class":"","rel":"orgUserId"})时间#end
+##                    #@tinyTh({"class":"","rel":"orgDiarySummary"})详情#end
+##                #end
+##            #end
+##        #end
+        #@elementItem()
+        <div class="col-12">
+            <div class="col-5">
+            </div>
+            <div class="col-1">
+                <button style="float: left" type="submit" id="submit2" class="commitBtn">保存</button>
+            </div>
+            <div class="col-1">
+                #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")取消#end
+            </div>
+            <div class="col-5"></div>
+        </div>
+        #end
+    <br>
+    #end
+#end
+<script>
+    $(function () {
+        $("form[name=thisform]").Validform({
+            beforeSubmit: function (curform) {
+                $(curform).ajaxSubmit({
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.status == "y" || data.status == "success") {
+                            layer.msg(data.info, 2, 1, function () {
+                                $(curform).closest(".modal").trigger("close");
+                            });
+                        } else {
+                            layer.msg(data.info);
+                        }
+                    },
+                    error: function () {
+                        layer.msg(data.info);
+                    }
+                });
+                return false;
+            }
+        });
+    });
+
+</script>
