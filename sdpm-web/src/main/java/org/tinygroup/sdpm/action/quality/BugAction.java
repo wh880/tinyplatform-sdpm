@@ -12,6 +12,7 @@ import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.action.product.util.StoryUtil;
 import org.tinygroup.sdpm.action.quality.util.QualityUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
+import org.tinygroup.sdpm.dao.complexsearch.SearchInfo;
 import org.tinygroup.sdpm.dao.complexsearch.SearchInfos;
 import org.tinygroup.sdpm.dao.condition.ConditionCarrier;
 import org.tinygroup.sdpm.dao.condition.ConditionUtils;
@@ -208,6 +209,17 @@ public class BugAction extends BaseController {
                                QualityBug bug,
                                Model model,
                                HttpServletRequest request) {
+        boolean isSearch = false;
+        for(SearchInfo info : infos.getInfos()){
+            if(info.getValue()!=null){
+                isSearch=true;
+                break;
+            }
+        }
+        if(isSearch){
+            status = "";
+            bug = new QualityBug();
+        }
         boolean asc = true;
         if ("desc".equals(ordertype)) {
             asc = false;

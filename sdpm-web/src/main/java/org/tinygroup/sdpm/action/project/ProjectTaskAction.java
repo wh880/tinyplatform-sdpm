@@ -13,6 +13,7 @@ import org.tinygroup.logger.LogLevel;
 import org.tinygroup.sdpm.action.project.util.TaskStatusUtil;
 import org.tinygroup.sdpm.common.util.DateUtils;
 import org.tinygroup.sdpm.common.web.BaseController;
+import org.tinygroup.sdpm.dao.complexsearch.SearchInfo;
 import org.tinygroup.sdpm.dao.complexsearch.SearchInfos;
 import org.tinygroup.sdpm.dao.condition.ConditionCarrier;
 import org.tinygroup.sdpm.dto.UploadProfile;
@@ -566,6 +567,17 @@ public class ProjectTaskAction extends BaseController {
                             String moduleId,
                             @RequestParam(required = false, defaultValue = "task_no") String order,
                             @RequestParam(defaultValue = "desc") String orderType, Integer key) {
+        boolean isSearch = false;
+        for(SearchInfo info : infos.getInfos()){
+            if(info.getValue()!=null){
+                isSearch=true;
+                break;
+            }
+        }
+        if(isSearch){
+            statu = "";
+            choose = "";
+        }
         Integer projectId = projectOperate.getCurrentProjectId(request, response);
         ConditionCarrier carrier = new ConditionCarrier();
         if (projectId == null) {
