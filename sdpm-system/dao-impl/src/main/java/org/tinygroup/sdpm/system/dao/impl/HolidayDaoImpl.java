@@ -167,7 +167,13 @@ public class HolidayDaoImpl extends TinyDslDaoSupport implements HolidayDao {
                     column = SYSTEM_ACTIONTABLE.ACTION_ID;
                     condition = SYSTEM_ACTIONTABLE.ACTION_OBJECT_TYPE.eq("holiday");
                 }
-                Select select = MysqlSelect.select(FragmentSql.fragmentSelect("holiday.*, system_action.action_action as actionAction ," +
+                Column[] groupBy ;
+                if(!column.toString().equals(HOLIDAYTABLE.HOLIDAY_ID.toString())){
+                    groupBy = new Column[]{column,HOLIDAYTABLE.HOLIDAY_ID,HOLIDAYTABLE.HOLIDAY_NAME,SYSTEM_ACTIONTABLE.ACTION_ACTION,SYSTEM_ACTIONTABLE.ACTION_ACTOR,SYSTEM_ACTIONTABLE.ACTION_DATE};
+                }else{
+                    groupBy = new Column[]{column,HOLIDAYTABLE.HOLIDAY_NAME,SYSTEM_ACTIONTABLE.ACTION_ACTION,SYSTEM_ACTIONTABLE.ACTION_ACTOR,SYSTEM_ACTIONTABLE.ACTION_DATE};
+                }
+                Select select = MysqlSelect.select(HOLIDAYTABLE.HOLIDAY_ID,HOLIDAYTABLE.HOLIDAY_NAME,FragmentSql.fragmentSelect("holiday.*, system_action.action_action as actionAction ," +
                         "system_action.action_actor as actionActor," +
                         "system_action.action_date as actionDate")).from(HOLIDAYTABLE).join(leftJoin(
                         SYSTEM_ACTIONTABLE, SYSTEM_ACTIONTABLE.ACTION_OBJECT_ID.eq(HOLIDAYTABLE.HOLIDAY_ID))).where(
@@ -180,7 +186,7 @@ public class HolidayDaoImpl extends TinyDslDaoSupport implements HolidayDao {
                                 HOLIDAYTABLE.HOLIDAY_DELETED.eq(t.getHolidayDeleted()),
                                 HOLIDAYTABLE.COMPANY_ID.eq(t.getCompanyId()),
                                 HOLIDAYTABLE.HOLIDAY_DETAIL.eq(t.getHolidayDetail()),
-                                HOLIDAYTABLE.HOILIDAY_REMARK.eq(t.getHoilidayRemark()))).groupBy(column);
+                                HOLIDAYTABLE.HOILIDAY_REMARK.eq(t.getHoilidayRemark()))).groupBy(groupBy);
                 return addOrderByElements(select, orderArgs);
             }
         });

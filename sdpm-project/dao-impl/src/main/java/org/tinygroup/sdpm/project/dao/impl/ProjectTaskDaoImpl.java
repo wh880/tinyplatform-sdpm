@@ -61,10 +61,10 @@ import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTaskDao {
 
     public List<TaskChartBean> queryChartAssigned() {
-        Select select = select(FragmentSelectItemSql.fragmentSelect("count(*) as taskCount, org_user.ORG_USER_REAL_NAME as title"))
+        Select select = select(PROJECT_TASKTABLE.TASK_ASSIGNED_TO,FragmentSelectItemSql.fragmentSelect("count(*) as taskCount, org_user.ORG_USER_REAL_NAME as title"))
                 .from(PROJECT_TASKTABLE)
                 .join(Join.leftJoin(ORG_USERTABLE, ORG_USERTABLE.ORG_USER_ID.eq(PROJECT_TASKTABLE.TASK_ASSIGNED_TO)))
-                .groupBy(PROJECT_TASKTABLE.TASK_ASSIGNED_TO);
+                .groupBy(PROJECT_TASKTABLE.TASK_ASSIGNED_TO,ORG_USERTABLE.ORG_USER_REAL_NAME);
 
         return getDslSession().fetchList(select, TaskChartBean.class);
     }
@@ -93,19 +93,19 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
     }
 
     public List<TaskChartBean> queryChartModule() {
-        Select select = select(FragmentSelectItemSql.fragmentSelect("count(*) as taskCount, system_module.module_name as title"))
+        Select select = select(PROJECT_TASKTABLE.TASK_MOMODULE,FragmentSelectItemSql.fragmentSelect("count(*) as taskCount, system_module.module_name as title"))
                 .from(PROJECT_TASKTABLE)
                 .join(Join.leftJoin(SYSTEM_MODULETABLE, SYSTEM_MODULETABLE.MODULE_ID.eq(PROJECT_TASKTABLE.TASK_MOMODULE)))
-                .groupBy(PROJECT_TASKTABLE.TASK_MOMODULE);
+                .groupBy(PROJECT_TASKTABLE.TASK_MOMODULE,SYSTEM_MODULETABLE.MODULE_NAME);
 
         return getDslSession().fetchList(select, TaskChartBean.class);
     }
 
     public List<TaskChartBean> queryChartProject() {
-        Select select = select(FragmentSelectItemSql.fragmentSelect("count(*) as taskCount, project.project_name as title"))
+        Select select = select(PROJECT_TASKTABLE.TASK_PROJECT,FragmentSelectItemSql.fragmentSelect("count(*) as taskCount, project.project_name as title"))
                 .from(PROJECT_TASKTABLE)
                 .join(Join.leftJoin(PROJECTTABLE, PROJECT_TASKTABLE.TASK_PROJECT.eq(PROJECTTABLE.PROJECT_ID)))
-                .groupBy(PROJECT_TASKTABLE.TASK_PROJECT);
+                .groupBy(PROJECT_TASKTABLE.TASK_PROJECT,PROJECTTABLE.PROJECT_NAME);
 
         return getDslSession().fetchList(select, TaskChartBean.class);
     }
@@ -119,10 +119,10 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
     }
 
     public List<TaskChartBean> queryChartFinishedBy() {
-        Select select = select(FragmentSelectItemSql.fragmentSelect("count(*) as taskCount, org_user.ORG_USER_REAL_NAME as title"))
+        Select select = select(PROJECT_TASKTABLE.TASK_FINISHED_BY,FragmentSelectItemSql.fragmentSelect("count(*) as taskCount, org_user.ORG_USER_REAL_NAME as title"))
                 .from(PROJECT_TASKTABLE, ORG_USERTABLE)
                 .where(ORG_USERTABLE.ORG_USER_ID.eq(PROJECT_TASKTABLE.TASK_FINISHED_BY))
-                .groupBy(PROJECT_TASKTABLE.TASK_FINISHED_BY);
+                .groupBy(PROJECT_TASKTABLE.TASK_FINISHED_BY,ORG_USERTABLE.ORG_USER_REAL_NAME);
         return getDslSession().fetchList(select, TaskChartBean.class);
     }
 

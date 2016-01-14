@@ -17,7 +17,7 @@ public class CountConditions {
 
     private static Map<String, String> selectMap = new HashMap<String, String>();
     private static Map<String, FromItem> fromMap = new HashMap<String, FromItem>();
-    private static Map<String, Column> columnMap = new HashMap<String, Column>();
+    private static Map<String, Column[]> columnMap = new HashMap<String, Column[]>();
     private static Map<String, Condition> havingConditionMap = new HashMap<String, Condition>();
 
     static {
@@ -98,21 +98,21 @@ public class CountConditions {
         fromMap.put("N", FragmentSql.fragmentFrom("quality_bug"));
         fromMap.put("O", FragmentSql.fragmentFrom("org_user LEFT JOIN quality_bug ON org_user.`org_user_id` = quality_bug.`bug_assigned_to`"));
 
-        columnMap.put("A", new Column(new Table("project"), "project_id"));
-        columnMap.put("B", new Column(new Table("project_build"), "build_id"));
-        columnMap.put("C", new Column(new Table("system_module"), "module_id"));
-        columnMap.put("D", new Column(new Table("quality_bug"), "openDate"));
-        columnMap.put("E", new Column(new Table("quality_bug"), "resolveDate"));
-        columnMap.put("F", new Column(new Table("quality_bug"), "closeDate"));
-        columnMap.put("G", new Column(new Table("org_user"), "org_user_id"));
-        columnMap.put("H", new Column(new Table("org_user"), "org_user_id"));
-        columnMap.put("I", new Column(new Table("org_user"), "org_user_id"));
-        columnMap.put("J", new Column(new Table("quality_bug"), "bug_severity"));
-        columnMap.put("K", new Column(new Table("quality_bug"), "bug_resolution"));
-        columnMap.put("L", new Column(new Table("quality_bug"), "bug_status"));
-        columnMap.put("M", new Column(new Table("quality_bug"), "bug_activated_count"));
-        columnMap.put("N", new Column(new Table("quality_bug"), "bug_type"));
-        columnMap.put("O", new Column(new Table("quality_bug"), "bug_assigned_to"));
+        columnMap.put("A", new Column[]{new Column(new Table("project"), "project_id"),new Column(new Table("project"), "project_name")});
+        columnMap.put("B", new Column[]{new Column(new Table("project_build"), "build_id"),new Column(new Table("project_build"), "build_name")});
+        columnMap.put("C", new Column[]{new Column(new Table("system_module"), "module_id"),new Column(new Table("system_module"), "module_name")});
+        columnMap.put("D", new Column[]{new Column(new Table("quality_bug"), "openDate")});
+        columnMap.put("E", new Column[]{new Column(new Table("quality_bug"), "resolveDate")});
+        columnMap.put("F", new Column[]{new Column(new Table("quality_bug"), "closeDate")});
+        columnMap.put("G", new Column[]{new Column(new Table("org_user"), "org_user_id"),new Column(new Table("org_user"), "org_user_real_name")});
+        columnMap.put("H", new Column[]{new Column(new Table("org_user"), "org_user_id"),new Column(new Table("org_user"), "org_user_real_name")});
+        columnMap.put("I", new Column[]{new Column(new Table("org_user"), "org_user_id"),new Column(new Table("org_user"), "org_user_real_name")});
+        columnMap.put("J", new Column[]{new Column(new Table("quality_bug"), "bug_severity")});
+        columnMap.put("K", new Column[]{new Column(new Table("quality_bug"), "bug_resolution")});
+        columnMap.put("L", new Column[]{new Column(new Table("quality_bug"), "bug_status")});
+        columnMap.put("M", new Column[]{new Column(new Table("quality_bug"), "bug_activated_count")});
+        columnMap.put("N", new Column[]{new Column(new Table("quality_bug"), "bug_type")});
+        columnMap.put("O", new Column[]{new Column(new Table("quality_bug"), "bug_assigned_to"),new Column(new Table("org_user"), "org_user_real_name")});
 
         havingConditionMap.put("all", FragmentSql.fragmentCondition("COUNT(quality_bug.bug_id) <> 0"));
         havingConditionMap.put("M", FragmentSql.fragmentCondition("COUNT(quality_bug.bug_id) <> 0 AND quality_bug.`bug_activated_count` IS NOT NULL"));
@@ -126,7 +126,7 @@ public class CountConditions {
         return fromMap.get(code);
     }
 
-    public static Column getGroupByColumn(String code) {
+    public static Column[] getGroupByColumn(String code) {
         return columnMap.get(code);
     }
 
