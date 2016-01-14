@@ -8,3 +8,25 @@
 #macro circleButton(buttonClass)#set(buttonClass=buttonClass?:"primary")<button class="btn btn-circle btn-${buttonClass}">#bodyContent</button>#end
 #macro fontIco(buttonClass)<i class="icon-${buttonClass}"></i>#end
 
+
+#macro diaryItem(authorName createDate diaryContent)
+<li class="diary-detail">
+    <div class="diary-report clearfix">
+        <div class="portrait">
+            <a href="#" title="点击查看${authorName}所有的周报">
+                <span class="name b">${authorName}</span>
+            </a>
+            <div class="r f-14">
+                #fontIco("calendar") ${createDate}
+                <span class="dia_h_btn"  data-open="0">#fontIco("chevron-down")</span>
+            </div>
+        </div>
+        <div class="diary-info" style="cursor:pointer" data-load="true">
+            ${diaryContent}
+        </div>
+    </div>
+    <div class="diary-detail-list hide">
+        #bodyContent
+    </div>
+</li>
+#end
