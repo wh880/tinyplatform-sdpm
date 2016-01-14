@@ -3,6 +3,9 @@
       isShow="1">
     <menu id="qualityBug" parent-id="quality" name="Bug" href="/quality/bug?currentPageId=5" icon="" sort="1"
           isShow="1">
+        <menu id="batch-distribute-" name="Bug分解" href="/project/task/form" icon="icon-smile" sort="7"
+              isShow="1" scope="testbug-op,testbuginfo-tab">
+        </menu>
         <menu id="tmakesure" name="确认" href="/quality/bug/makesure" icon="iconfont iconfont-jihuo" sort="6"
               isShow="1" scope="testbug-op,testbuginfo-tab">
         </menu>

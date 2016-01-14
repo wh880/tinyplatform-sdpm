@@ -21,6 +21,7 @@ import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
 import org.tinygroup.sdpm.project.dao.pojo.TaskChartBean;
+import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.tinysqldsl.base.Condition;
 
@@ -30,6 +31,7 @@ public interface ProjectTaskDao extends BaseDao<ProjectTask, Integer> {
 
     /**
      * 统计项目相关的任务工时信息
+     *
      * @param projectId
      * @return
      */
@@ -123,4 +125,9 @@ public interface ProjectTaskDao extends BaseDao<ProjectTask, Integer> {
      * @return
      */
     List<TaskChartBean> queryChartFinishedBy();
+
+    /**
+     * 根据产品id查询待关联的bug list
+     */
+    List<QualityBug> findRelationBugByProjectID(Integer projectId);
 }

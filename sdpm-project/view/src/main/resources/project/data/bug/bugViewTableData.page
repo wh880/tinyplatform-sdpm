@@ -25,6 +25,10 @@
     #@td()${getDict("bugResolution",b?.bugResolution?:0)}#end
     #@td("nowrap")
         #foreach(m:menuManager.getScopeMenus("testbug-op"))
+            #if(m.sort=="7")
+                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${b?.bugId}"
+                   title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+            #end
             #if(m.sort=="6")
                 #if(b?.bugConfirmed==1)
                     <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>

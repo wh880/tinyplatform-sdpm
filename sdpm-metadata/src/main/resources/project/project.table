@@ -87,6 +87,7 @@
     <table-field standard-field-id="e70e2c2ab35d4703a9dbec16dc1fd243" primary="false" unique="false" not-null="false" id="task_last_edited_by" auto-increase="false"/>
     <table-field standard-field-id="f976ad5772de4ff1b45bc35652ca2f06" primary="false" unique="false" not-null="false" id="task_last_edited_date" auto-increase="false"/>
     <table-field standard-field-id="c85de241491c4e27ba02dd4fed1059ac" primary="false" unique="false" not-null="false" id="task_deleted" auto-increase="false"/>
+    <table-field standard-field-id="eabdae96b60940a8849ea32169571b90" primary="false" unique="false" not-null="false" id="task_relation_bug" auto-increase="false"/>
     <index name="type">
       <index-field field="task_type" direction="asc"/>
     </index>

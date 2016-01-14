@@ -233,7 +233,7 @@ public class DiaryAction extends BaseController {
      * @param model
      * @return
      */
-    @RequiresPermissions("organizationDiary")
+    //@RequiresPermissions("organizationDiary")
     @RequestMapping("/find")
     public String find(String userId, Integer year, Integer week, Model model) {
         OrgUser user = new OrgUser();
@@ -267,4 +267,14 @@ public class DiaryAction extends BaseController {
         model.addAttribute("list", list);
         return "organization/diary/diary";
     }
+
+    @RequestMapping("/test")
+    public String test() {
+        return "organization/diary/oneselfDiary";
+    }
+    @RequestMapping("/testdata")
+    public String testdata() {
+        return "organization/diary/diaryData";
+    }
+
 }

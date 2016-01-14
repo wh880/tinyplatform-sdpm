@@ -25,6 +25,7 @@ import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.project.dao.ProjectTaskDao;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
 import org.tinygroup.sdpm.project.dao.pojo.TaskChartBean;
+import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.tinysqldsl.*;
 import org.tinygroup.tinysqldsl.base.Condition;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
@@ -32,6 +33,7 @@ import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 import org.tinygroup.tinysqldsl.select.Join;
 import org.tinygroup.tinysqldsl.select.OrderByElement;
 import org.tinygroup.tinysqldsl.selectitem.FragmentSelectItemSql;
+import static org.tinygroup.tinysqldsl.formitem.SubSelect.subSelect;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -44,6 +46,8 @@ import static org.tinygroup.sdpm.product.dao.constant.ProductStoryTable.PRODUCT_
 import static org.tinygroup.sdpm.project.dao.constant.ProjectStoryTable.PROJECT_STORYTABLE;
 import static org.tinygroup.sdpm.project.dao.constant.ProjectTable.PROJECTTABLE;
 import static org.tinygroup.sdpm.project.dao.constant.ProjectTaskTable.PROJECT_TASKTABLE;
+import static org.tinygroup.sdpm.project.dao.constant.ProjectProductTable.PROJECT_PRODUCTTABLE;
+import static org.tinygroup.sdpm.quality.dao.constant.QualityBugTable.QUALITY_BUGTABLE;
 import static org.tinygroup.sdpm.system.dao.constant.SystemModuleTable.SYSTEM_MODULETABLE;
 import static org.tinygroup.tinysqldsl.Delete.delete;
 import static org.tinygroup.tinysqldsl.Insert.insertInto;
@@ -136,6 +140,7 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
         return getDslTemplate().insertAndReturnKey(projectTask, new InsertGenerateCallback<ProjectTask>() {
             public Insert generate(ProjectTask t) {
                 Insert insert = insertInto(PROJECT_TASKTABLE).values(
+                        PROJECT_TASKTABLE.TASK_RELATION_BUG.value(t.getTaskRelationBug()),
                         PROJECT_TASKTABLE.TASK_NO.value(t.getTaskNo()),
                         PROJECT_TASKTABLE.TASK_PROJECT.value(t.getTaskProject()),
                         PROJECT_TASKTABLE.TASK_STORY.value(t.getTaskStory()),
@@ -173,6 +178,7 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
         });
     }
 
+
     public int edit(ProjectTask projectTask) {
         if (projectTask == null || projectTask.getTaskId() == null) {
             return 0;
@@ -180,6 +186,7 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
         return getDslTemplate().update(projectTask, new UpdateGenerateCallback<ProjectTask>() {
             public Update generate(ProjectTask t) {
                 Update update = update(PROJECT_TASKTABLE).set(
+                        PROJECT_TASKTABLE.TASK_RELATION_BUG.value(t.getTaskRelationBug()),
                         PROJECT_TASKTABLE.TASK_NO.value(t.getTaskNo()),
                         PROJECT_TASKTABLE.TASK_PROJECT.value(t.getTaskProject()),
                         PROJECT_TASKTABLE.TASK_STORY.value(t.getTaskStory()),
@@ -284,6 +291,7 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
             public Select generate(ProjectTask t) {
                 Select select = selectFrom(PROJECT_TASKTABLE).where(
                         and(
+                                PROJECT_TASKTABLE.TASK_RELATION_BUG.eq(t.getTaskRelationBug()),
                                 PROJECT_TASKTABLE.TASK_PROJECT.eq(t.getTaskProject()),
                                 PROJECT_TASKTABLE.TASK_NO.eq(t.getTaskNo()),
                                 PROJECT_TASKTABLE.TASK_STORY.eq(t.getTaskStory()),
@@ -353,6 +361,7 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
                         .where(
                                 and(
                                         condition,
+                                        PROJECT_TASKTABLE.TASK_RELATION_BUG.eq(t.getTaskRelationBug()),
                                         PROJECT_TASKTABLE.TASK_PROJECT.eq(t.getTaskProject()),
                                         PROJECT_TASKTABLE.TASK_NO.eq(t.getTaskNo()),
                                         PROJECT_TASKTABLE.TASK_STORY.eq(t.getTaskStory()),
@@ -402,6 +411,7 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
                         .join(Join.leftJoin(PROJECTTABLE, PROJECT_TASKTABLE.TASK_PROJECT.eq(PROJECTTABLE.PROJECT_ID)))
                         .where(
                                 and(
+                                        PROJECT_TASKTABLE.TASK_RELATION_BUG.eq(t.getTaskRelationBug()),
                                         PROJECT_TASKTABLE.TASK_PROJECT.eq(t.getTaskProject()),
                                         PROJECT_TASKTABLE.TASK_STORY.eq(t.getTaskStory()),
                                         PROJECT_TASKTABLE.TASK_NO.eq(t.getTaskNo()),
@@ -451,6 +461,7 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
                         .join(Join.leftJoin(PROJECTTABLE, PROJECT_TASKTABLE.TASK_PROJECT.eq(PROJECTTABLE.PROJECT_ID)))
                         .where(
                                 and(
+                                        PROJECT_TASKTABLE.TASK_RELATION_BUG.eq(t.getTaskRelationBug()),
                                         PROJECT_TASKTABLE.TASK_PROJECT.eq(t.getTaskProject()),
                                         PROJECT_TASKTABLE.TASK_NO.eq(t.getTaskNo()),
                                         PROJECT_TASKTABLE.TASK_STORY.eq(t.getTaskStory()),
@@ -496,6 +507,7 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
 
             public Insert generate() {
                 return insertInto(PROJECT_TASKTABLE).values(
+                        PROJECT_TASKTABLE.TASK_RELATION_BUG.value(new JdbcNamedParameter("taskRelationBug")),
                         PROJECT_TASKTABLE.TASK_PROJECT.value(new JdbcNamedParameter("taskProject")),
                         PROJECT_TASKTABLE.TASK_STORY.value(new JdbcNamedParameter("taskStory")),
                         PROJECT_TASKTABLE.TASK_NO.value(new JdbcNamedParameter("no")),
@@ -544,6 +556,7 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
 
             public Update generate() {
                 return update(PROJECT_TASKTABLE).set(
+                        PROJECT_TASKTABLE.TASK_RELATION_BUG.value(new JdbcNamedParameter("taskRelationBug")),
                         PROJECT_TASKTABLE.TASK_PROJECT.value(new JdbcNamedParameter("taskProject")),
                         PROJECT_TASKTABLE.TASK_STORY.value(new JdbcNamedParameter("taskStory")),
                         PROJECT_TASKTABLE.TASK_NO.value(new JdbcNamedParameter("no")),
@@ -589,6 +602,7 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
 
             public Delete generate() {
                 return delete(PROJECT_TASKTABLE).where(and(
+                        PROJECT_TASKTABLE.TASK_RELATION_BUG.eq(new JdbcNamedParameter("taskRelationBug")),
                         PROJECT_TASKTABLE.TASK_ID.eq(new JdbcNamedParameter("taskId")),
                         PROJECT_TASKTABLE.TASK_PROJECT.eq(new JdbcNamedParameter("taskProject")),
                         PROJECT_TASKTABLE.TASK_STORY.eq(new JdbcNamedParameter("taskStory")),
@@ -641,5 +655,17 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
             select.orderBy(orderByElements.toArray(new OrderByElement[0]));
         }
         return select;
+    }
+/**
+ * 根据产品id查询待关联的bug list
+ */
+    @Override
+    public List<QualityBug> findRelationBugByProjectID(Integer projectId) {
+        Select select = selectFrom(QUALITY_BUGTABLE)
+                .where(QUALITY_BUGTABLE.BUG_ID
+                        .inExpression(subSelect(select(PROJECT_PRODUCTTABLE.PRODUCT_ID)
+                                .from(PROJECT_PRODUCTTABLE)
+                                .where(PROJECT_PRODUCTTABLE.PROJECT_ID.eq(projectId)))));
+        return getDslSession().fetchList(select, QualityBug.class);
     }
 }
