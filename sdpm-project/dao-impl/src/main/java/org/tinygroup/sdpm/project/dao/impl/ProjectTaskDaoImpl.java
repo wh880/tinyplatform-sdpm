@@ -135,6 +135,7 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
         return getDslTemplate().insertAndReturnKey(projectTask, new InsertGenerateCallback<ProjectTask>() {
             public Insert generate(ProjectTask t) {
                 Insert insert = insertInto(PROJECT_TASKTABLE).values(
+                        PROJECT_TASKTABLE.TASK_RELATION_BUG.value(t.getTaskRelationBug()),
                         PROJECT_TASKTABLE.TASK_NO.value(t.getTaskNo()),
                         PROJECT_TASKTABLE.TASK_PROJECT.value(t.getTaskProject()),
                         PROJECT_TASKTABLE.TASK_STORY.value(t.getTaskStory()),
