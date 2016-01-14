@@ -517,7 +517,7 @@ public class ProjectTaskTable extends Table {
 	public final Column TASK_RELATION_BUG = new Column(this, "task_relation_bug");
 
 
-	private ProjectTaskTable() {
+	public ProjectTaskTable() {
 		super("project_task");
 	}
 

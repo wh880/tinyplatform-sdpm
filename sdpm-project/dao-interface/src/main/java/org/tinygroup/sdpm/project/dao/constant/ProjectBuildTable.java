@@ -101,7 +101,7 @@ public class ProjectBuildTable extends Table {
     public final Column BUILD_DELETED = new Column(this, "build_deleted");
 
 
-    private ProjectBuildTable() {
+    public ProjectBuildTable() {
         super("project_build");
     }
 

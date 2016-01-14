@@ -57,7 +57,7 @@ public class ProjectTaskrelationTable extends Table {
     public final Column TASKRELATION_ACTION = new Column(this, "taskrelation_action");
 
 
-    private ProjectTaskrelationTable() {
+    public ProjectTaskrelationTable() {
         super("project_taskrelation");
     }
 

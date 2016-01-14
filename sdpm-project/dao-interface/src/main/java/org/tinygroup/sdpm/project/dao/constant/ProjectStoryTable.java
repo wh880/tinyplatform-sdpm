@@ -53,7 +53,7 @@ public class ProjectStoryTable extends Table {
     public final Column STORY_VERSION = new Column(this, "story_version");
 
 
-    private ProjectStoryTable() {
+    public ProjectStoryTable() {
         super("project_story");
     }
 

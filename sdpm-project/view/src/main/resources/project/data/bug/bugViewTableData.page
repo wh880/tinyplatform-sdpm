@@ -14,7 +14,7 @@
     #@td()${getDict("bugSeverity",b?.bugSeverity)}#end
     #@td()${getDict("bugPriority",b?.priority)}#end
     #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/bug/bugInfo?bugId=${b?.bugId}">
-        #if(var?.bugConfirmed==0)
+        #if(b?.bugConfirmed==0)
         <i class="icon-question-sign" style="color: coral" title="未确认"/>
     #else
         <i class="icon-ok-sign" style="color:darkseagreen" title="已确认" />

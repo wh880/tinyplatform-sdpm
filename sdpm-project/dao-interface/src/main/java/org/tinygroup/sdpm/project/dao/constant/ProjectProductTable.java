@@ -43,7 +43,7 @@ public class ProjectProductTable extends Table {
     public final Column PRODUCT_ID = new Column(this, "product_id");
 
 
-    private ProjectProductTable() {
+    public ProjectProductTable() {
         super("project_product");
     }
 

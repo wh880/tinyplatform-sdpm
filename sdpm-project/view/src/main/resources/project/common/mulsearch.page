@@ -185,7 +185,7 @@ $(function(){
 		"value":"text"
 	});
 	itemlist.push({
-		"name":"status",
+		"name":"taskStatus",
 		"title":"任务状态",
 		"operator":"=",
 		"value":"status"
