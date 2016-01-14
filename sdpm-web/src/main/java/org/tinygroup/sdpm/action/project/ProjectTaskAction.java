@@ -27,6 +27,7 @@ import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
 import org.tinygroup.sdpm.project.service.inter.*;
+import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.sdpm.system.dao.pojo.ProfileType;
 import org.tinygroup.sdpm.system.dao.pojo.SystemEffort;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
@@ -137,6 +138,7 @@ public class ProjectTaskAction extends BaseController {
             model.addAttribute("copyTask", task);
         }
         List<ProductStory> storyList = projectStoryService.findStoryByProject(projectId);
+        List<QualityBug> bugList=projectService.findRelationBugByProjectID(projectId);
         model.addAttribute("moduleList", findModuleList(storyId, projectId));
         model.addAttribute("moduleId", moduleId);
         model.addAttribute("storyId", storyId);
@@ -145,6 +147,7 @@ public class ProjectTaskAction extends BaseController {
         model.addAttribute("story", story);
 
         model.addAttribute("storyList", storyList);
+        model.addAttribute("bugList",bugList);
         return "project/operate/task/common/add.page";
     }
 

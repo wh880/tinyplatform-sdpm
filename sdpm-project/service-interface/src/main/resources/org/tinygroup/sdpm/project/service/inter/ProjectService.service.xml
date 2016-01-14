@@ -86,5 +86,11 @@
       </service-parameters>
       <service-result name="projectInConditionResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.project.dao.pojo.Project"/>
     </service-method>
+    <service-method local-name="findRelationBugByProjectID" service-id="findRelationBugByProjectID" method-name="findRelationBugByProjectID" cacheable="false" category="org.tinygroup.sdpm.project.service.inter">
+      <service-parameters>
+        <service-parameter name="projectId" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findRelationBugByProjectIDResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.quality.dao.pojo.QualityBug"/>
+    </service-method>
   </service-component>
 </service-components>

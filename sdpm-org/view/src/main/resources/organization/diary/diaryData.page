@@ -1,0 +1,20 @@
+#for(var:[1..12])
+    #@diaryItem("王维昱","01/04 00:00","求围观")
+        #for(var2:[1..5])
+            <div class="committed clearfix">
+                <span class="tocommittime">周${var2}</span>
+                <ol class="logList-detailList">
+                    <li><span>TinyGroup / dbrouterjdbc4：王维煜 - groovy表达式规则测试用例，已通过  <a
+                            href="http://git.oschina.net/tinyframework/dbrouterjdbc4/commit/c000ee82efe63b3846409317babc069bd334d72c"
+                             target="_blank">c000ee82e</a></span></li>
+                    <li><span>TinyGroup / dbrouterjdbc4：王维煜 - pom修改  <a
+                            href="http://git.oschina.net/tinyframework/dbrouterjdbc4/commit/d16d321caf4569ad1717966cbc316bbcdeac13e8"
+                            target="_blank">d16d321ca</a></span></li>
+                    <li><span>TinyGroup / dbrouterjdbc4：王维煜 - Merge branch 'master' of https://git.oschina.net/tinyframework/dbrouterjdbc4 # Conflicts: # pom.xml
+                        <a href="http://git.oschina.net/tinyframework/dbrouterjdbc4/commit/ae75f48676a68849328bedc22d8e27556618ad1a" target="_blank">ae75f4867</a></span></li>
+                </ol>
+            </div>
+        #end
+    #end
+#end
+
