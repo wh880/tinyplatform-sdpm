@@ -144,4 +144,10 @@ public interface UserService {
      * 查询直接下级
      */
     List<OrgUser> findOrgUserListSubordinate(String userId);
+
+    /**
+     * 查询直接下级与自己
+     */
+    List<OrgUser> findOrgUserListSubordinateAndSelf(String userId);
+
 }

@@ -34,6 +34,12 @@
       </service-parameters>
       <service-result name="findPagerDiaryByUserIdResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager"/>
     </service-method>
+    <service-method local-name="findListDiaryByUserId" service-id="findListDiaryByUserId" method-name="findListDiaryByUserId" cacheable="false" category="org.tinygroup.sdpm.org.service.inter">
+      <service-parameters>
+        <service-parameter name="id" type="java.lang.String" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findListDiaryByUserIdResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.org.dao.pojo.OrgDiaryAndUserDO"/>
+    </service-method>
     <service-method local-name="findDetailListByDiaryId" service-id="findDetailListByDiaryId" method-name="findDetailListByDiaryId" cacheable="false" category="org.tinygroup.sdpm.org.service.inter">
       <service-parameters>
         <service-parameter name="id" type="java.lang.Integer" required="false" is-array="false"/>
@@ -104,6 +110,14 @@
         <service-parameter name="limit" type="java.lang.Integer" required="false" is-array="false"/>
       </service-parameters>
       <service-result name="findPagerDiarySubAndSelfResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager"/>
+    </service-method>
+    <service-method local-name="findListDiarySubAndSelf" service-id="findListDiarySubAndSelf" method-name="findListDiarySubAndSelf" cacheable="false" category="org.tinygroup.sdpm.org.service.inter">
+      <service-parameters>
+        <service-parameter name="userId" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="year" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="week" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findListDiarySubAndSelfResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.org.dao.pojo.OrgDiaryAndUserDO"/>
     </service-method>
   </service-component>
 </service-components>

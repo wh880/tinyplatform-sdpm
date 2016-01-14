@@ -31,19 +31,7 @@ public class DiaryManagerImpl implements DiaryManager {
 
     @Override
     public OrgDiary add(OrgDiary orgDiary, List<OrgDiaryDetail> list) {
-        Calendar ca = Calendar.getInstance();
-        ca.setTime(orgDiary.getOrgDiaryCreateDate());
-        orgDiary.setOrgDiaryYear(ca.get(Calendar.YEAR));
-        orgDiary.setOrgDiaryWeek(ca.get(Calendar.WEEK_OF_YEAR));
-        int dayOfWeek = ca.get(ca.DAY_OF_WEEK);
-        ca.add(Calendar.DATE, -dayOfWeek + 1);
-        Date beginDate = ca.getTime();
-        ca.add(Calendar.DATE, 7);
-        Date endDate = ca.getTime();
-        orgDiary.setOrgDiaryBeginDate(beginDate);
-        orgDiary.setOrgDiaryEndDate(endDate);
         OrgDiary diary = orgDiaryDao.add(orgDiary);
-
 
         if (list == null) {
         } else {
@@ -84,6 +72,11 @@ public class DiaryManagerImpl implements DiaryManager {
     @Override
     public Pager<OrgDiaryAndUserDO> findByUserId(String id,Integer start,Integer limit) {
         return orgDiaryDao.findPagerByUserId(id,start,limit);
+    }
+
+    @Override
+    public List<OrgDiaryAndUserDO> findListByUserId(String id) {
+        return orgDiaryDao.findListByUserId(id);
     }
 
     @Override
@@ -154,5 +147,15 @@ public class DiaryManagerImpl implements DiaryManager {
             list1.add(orgUser.getOrgUserId());
         }
         return orgDiaryDao.findPagerSubordinateOneWeek(list1,year,week,start,limit);
+    }
+
+    @Override
+    public List<OrgDiaryAndUserDO> findListSubAndSelf(String userId, List<OrgUser> list, Integer year, Integer week) {
+        List<String> list1 = new ArrayList<String>();
+        list1.add(userId);
+        for (OrgUser orgUser : list) {
+            list1.add(orgUser.getOrgUserId());
+        }
+        return orgDiaryDao.findListSubordinateOneWeek(list1,year,week);
     }
 }

@@ -11,6 +11,8 @@ import org.tinygroup.sdpm.system.dao.SystemEffortDao;
 import org.tinygroup.sdpm.system.dao.pojo.SystemEffort;
 import org.tinygroup.tinysqldsl.Pager;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -101,6 +103,9 @@ public class EffortManagerImpl implements EffortManager {
 
     @Override
     public List<SystemEffort> findByUserAndDate(String userId, Date beginDate, Date endDate) {
-        return systemEffortDao.findByUserAndDate(userId,beginDate,endDate);
+        DateFormat format=new SimpleDateFormat("yyyy-MM-dd");
+        String bTime=format.format(beginDate);
+        String eTime=format.format(endDate);
+        return systemEffortDao.findByUserAndDate(userId,bTime,eTime);
     }
 }

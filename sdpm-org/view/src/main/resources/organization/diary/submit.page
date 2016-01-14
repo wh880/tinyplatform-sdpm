@@ -29,6 +29,9 @@
 #set(name="organizationDiary")
 #@layout(org)#end
 #@div(divClass="operationbar")
+<div class="col-1">
+    #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end
+</div>
 <div class="diary-content-head">
     <h3>
         #@circleButton("primary get-prev")#fontIco("chevron-left")#end
@@ -43,15 +46,16 @@
         $("#week-num").on("refresh", function () {
             var year = $(this).attr("data-year");
             var week = $(this).attr("data-week");
+            $("#y").val(year);
+            $("#w").val(week);
             var body = $("#diarylist-detail");
             var data = {w: week, y: year, aid: 2};
-            //ajaxLoadContent(body, "/sdpm-web/a/org/diary/form", data);
             $.ajax({
                 type: "GET",
                 url: "/sdpm-web/a/org/diary/form",
                 data: {w: week, y: year, aid: 2},
                 dataType: "json",
-                success: function(data){
+                success: function (data) {
                     $('#summary').val(data);
                 }
             });
@@ -124,26 +128,16 @@
     });
 </script>
 
+
 #end
 #@elementItem()
     #@tinyForm("thisform" call("link",adminPath+"/org/diary/add") "post")
         #@div()
             #@formControlDiv("col-7")
-                #@tinyTextarea("summary" {"placeholder":"请输入本周总结"})${orgDiary?.orgDiarySummary}#end
+                <center>#@tinyTextarea("summary" {"placeholder":"请输入本周总结"})${orgDiary?.orgDiarySummary}#end</center>
             #end
         #end
 
-##        #tinyTable("org-diarydetail-list")
-##        #@tinyTableContent(TINY_CONTEXT_PATH+adminPath+"/org/diary/form")
-##            #setTinyTablePageSize([10,20,30,50,100,200])
-##            #@thead()
-##                #@tr()
-##                    #@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
-##                    #@tinyTh({"class":"","rel":"orgUserId"})时间#end
-##                    #@tinyTh({"class":"","rel":"orgDiarySummary"})详情#end
-##                #end
-##            #end
-##        #end
         #@elementItem()
         <div class="col-12">
             <div class="col-5">
@@ -158,6 +152,8 @@
         </div>
         #end
     <br>
+    <input type="hidden" id="y" name="y"/>
+    <input type="hidden" id="w" name="w"/>
     #end
 #end
 <script>

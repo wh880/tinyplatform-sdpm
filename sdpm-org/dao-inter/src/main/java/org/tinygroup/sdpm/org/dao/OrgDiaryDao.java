@@ -38,6 +38,8 @@ public interface OrgDiaryDao extends BaseDao<OrgDiary, Integer> {
 
     Pager<OrgDiaryAndUserDO> findPagerByUserId(String orgUserId,Integer start,Integer limit);
 
+    List<OrgDiaryAndUserDO> findListByUserId(String orgUserId);
+
     List<OrgDiary> findListOneWeek(Integer year, Integer week);
 
     List<OrgDiary> findSubordinateOneWeek(List<String> list, Integer year, Integer week);
@@ -47,4 +49,7 @@ public interface OrgDiaryDao extends BaseDao<OrgDiary, Integer> {
     List<OrgDiary> findDiaryByUserLatest(String userId, Integer year, Integer week);
 
     Pager<OrgDiaryAndUserDO> findPagerSubordinateOneWeek(List<String> list, Integer year, Integer week, Integer start, Integer limit);
+
+    List<OrgDiaryAndUserDO> findListSubordinateOneWeek(List<String> list, Integer year, Integer week);
+
 }

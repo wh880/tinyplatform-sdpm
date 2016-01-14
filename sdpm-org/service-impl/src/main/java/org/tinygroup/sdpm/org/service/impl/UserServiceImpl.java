@@ -168,4 +168,9 @@ public class UserServiceImpl implements UserService {
     public List<OrgUser> findOrgUserListSubordinate(String userId) {
         return userManager.getDirectStaffByLeader(userId);
     }
+
+    @Override
+    public List<OrgUser> findOrgUserListSubordinateAndSelf(String userId) {
+        return userManager.getDirectStaffByLeaderAndSelf(userId);
+    }
 }

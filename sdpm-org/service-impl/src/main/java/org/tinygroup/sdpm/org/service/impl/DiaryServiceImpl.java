@@ -50,6 +50,11 @@ public class DiaryServiceImpl implements DiaryService{
     }
 
     @Override
+    public List<OrgDiaryAndUserDO> findListDiaryByUserId(String id) {
+        return diaryManager.findListByUserId(id);
+    }
+
+    @Override
     public List<OrgDiaryDetail> findDetailListByDiaryId(Integer id) {
         return diaryManager.findByDiaryId(id);
     }
@@ -99,5 +104,11 @@ public class DiaryServiceImpl implements DiaryService{
     public Pager<OrgDiaryAndUserDO> findPagerDiarySubAndSelf(String userId, Integer year, Integer week, Integer start, Integer limit) {
         List<OrgUser> list=userManager.getDirectStaffByLeader(userId);
         return diaryManager.findPagerSubAndSelf(userId,list,year,week,start,limit);
+    }
+
+    @Override
+    public List<OrgDiaryAndUserDO> findListDiarySubAndSelf(String userId, Integer year, Integer week) {
+        List<OrgUser> list=userManager.getDirectStaffByLeader(userId);
+        return diaryManager.findListSubAndSelf(userId,list,year,week);
     }
 }

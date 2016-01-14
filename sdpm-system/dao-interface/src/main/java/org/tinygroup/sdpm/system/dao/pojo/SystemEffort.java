@@ -80,6 +80,10 @@ public class SystemEffort implements Serializable {
     private String effortObjectType;
 
     /**
+     * 日志星期
+     */
+    private Integer effortWeek;
+    /**
      * 登记人
      */
     private String effortAccount;
@@ -180,4 +184,11 @@ public class SystemEffort implements Serializable {
         this.effortAccount = effortAccount;
     }
 
+    public Integer getEffortWeek() {
+        return effortWeek;
+    }
+
+    public void setEffortWeek(Integer effortWeek) {
+        this.effortWeek = effortWeek;
+    }
 }

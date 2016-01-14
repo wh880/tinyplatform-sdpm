@@ -39,6 +39,11 @@ public interface DiaryService {
     Pager<OrgDiaryAndUserDO> findPagerDiaryByUserId(String id,Integer start,Integer limit);
 
     /**
+     * 查找某人的周报
+     */
+    List<OrgDiaryAndUserDO> findListDiaryByUserId(String id);
+
+    /**
      * 查看周报详情
      */
     List<OrgDiaryDetail> findDetailListByDiaryId(Integer id);
@@ -82,4 +87,6 @@ public interface DiaryService {
      * 查询直接下属及自己的本周的周报+分页
      */
     Pager<OrgDiaryAndUserDO> findPagerDiarySubAndSelf(String userId, Integer year, Integer week, Integer start, Integer limit);
+
+    List<OrgDiaryAndUserDO> findListDiarySubAndSelf(String userId, Integer year, Integer week);
 }
