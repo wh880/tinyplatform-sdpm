@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <application>
     <application-properties>
-        <file path="/sdpm.properties"></file>
+        <file path="/web.properties"></file>
         <property name="BASE_PACKAGE" value="org.tinygroup"/>
-        <property name="DEBUG_MODE" value="true"/>
+        <property name="DEBUG_MODE" value="false"/>
         <property name="TINY_THEME" value="default"/>
         <property name="UPLOAD_ACTION_URL" value="/ajaxUploadImage"/>
         <!--缓存配置-->
@@ -31,8 +31,7 @@
         <application-processor bean="cepCoreProcessor"></application-processor>
 
         <application-processor bean="fileResolverProcessor"/>
-        <!--发布服务-->
-        <!--<application-processor bean="serviceApplicationProcessor"/>-->
+
         <application-processor bean="tinyListenerProcessor"/>
         <!--<application-processor bean="fileMonitorProcessor"/>-->
         <application-processor bean="tinyTemplateConfigProcessor"/>
@@ -49,39 +48,6 @@
         <class-paths>
             <!-- 文件上传配置 -->
             <class-path path="{userfiles.basedir}"/>
-
-            <!-- 需要加的自己署名 -->
-            <!-- Hulk's Path -->
-            <class-path path="E:\workcode\sdpm\sdpm-org\view\src\main\resources"/>
-            <class-path path="E:\workcode\sdpm\sdpm-project\view\src\main\resources"/>
-            <class-path path="E:\workcode\sdpm\sdpm-common\view\src\main\resources"/>
-            <class-path path="E:\workcode\sdpm\sdpm-common\view-uicomponent\src\main\resources"/>
-            <class-path path="E:\workcode\sdpm\sdpm-project\view\src\main\resources"/>
-            <class-path path="E:\workcode\sdpm\sdpm-document\view\src\main\resources\"/>
-            <!--wll -->
-            <class-path path="D:\java\eclipseworkspace\sdpm\sdpm-product\view\src\main\resources"/>
-            <class-path path="D:\java\eclipseworkspace\sdpm\sdpm-quality\view\src\main\resources"/>
-            <class-path path="D:\java\eclipseworkspace\sdpm\sdpm-project\view\src\main\resources"/>
-            <class-path path="D:\java\eclipseworkspace\sdpm\sdpm-system\view\src\main\resources"/>
-            <class-path path="D:\java\eclipseworkspace\sdpm\sdpm-document\view\src\main\resources"/>
-            <class-path path="D:\java\eclipseworkspace\sdpm\sdpm-productLine\view\src\main\resources"/>
-            <class-path path="D:\java\eclipseworkspace\sdpm\sdpm-statistic\view\src\main\resources"/>
-            <class-path path="D:\java\eclipseworkspace\sdpm\sdpm-common\view\src\main\resources"/>
-            <class-path path="D:\java\eclipseworkspace\sdpm\sdpm-project\view\src\main\resources"/>
-            <class-path path="D:\java\eclipseworkspace\sdpm\sdpm-org\view\src\main\resources"/>
-
-            <!--ajian -->
-            <class-path path="D:\javaworkspace\sdpm\sdpm-product\view\src\main\resources"/>
-            <class-path path="D:\javaworkspace\sdpm\sdpm-quality\view\src\main\resources"/>
-            <class-path path="D:\javaworkspace\sdpm\sdpm-project\view\src\main\resources"/>
-            <class-path path="D:\javaworkspace\sdpm\sdpm-system\view\src\main\resources"/>
-            <class-path path="D:\javaworkspace\sdpm\sdpm-document\view\src\main\resources"/>
-            <class-path path="D:\javaworkspace\sdpm\sdpm-productLine\view\src\main\resources"/>
-            <class-path path="D:\javaworkspace\sdpm\sdpm-statistic\view\src\main\resources"/>
-            <class-path path="D:\javaworkspace\sdpm\sdpm-common\view\src\main\resources"/>
-            <class-path path="D:\javaworkspace\sdpm\sdpm-project\view\src\main\resources"/>
-            <class-path path="D:\javaworkspace\sdpm\sdpm-org\view\src\main\resources"/>
-            <class-path path="F:\test\后台管理\New\sdpm\sdpm-org\view\src\main\resources"/>
         </class-paths>
         <include-patterns>
             <include-pattern pattern="org\.tinygroup\.(.)*\.jar"/>
@@ -107,23 +73,13 @@
     <cep-configuration node-name="arNode">
         <operator name="arNode"></operator>
         <scs>
-            <sc host="192.168.48.111" port="9191"></sc>
+            <!--<sc host="192.168.48.111" port="9191"></sc>-->
+            <sc host="127.0.0.1" port="9191"></sc>
         </scs>
         <params>
             <param name="request-time-out" value="15000" />
         </params>
     </cep-configuration>
-
-    <!--<cep-node-config>-->
-    <!--<node-config ip="192.168.84.73" port="8888" name="chenjiaopmclient"-->
-    <!--enable-remote="false"></node-config>-->
-    <!--<node-sc-breath interval="4000"/>-->
-    <!--<node-sc-check interval="2000"/>-->
-    <!--<remote-bean bean="CEPCoreRMIRemoteImpl"/>-->
-    <!--&lt;!&ndash; mananger-bean="cepCoreManagerCentral" &ndash;&gt;-->
-    <!--<node-strategy bean="nodeWeightPloyStrategy"/>-->
-    <!--<sc ip="192.168.84.57" port="8808" name="chenjiaocentral"/>-->
-    <!--</cep-node-config>-->
 
     <!-- aop配置 -->
     <cepcore-aop-config>

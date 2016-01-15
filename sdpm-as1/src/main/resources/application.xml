@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <application>
     <application-properties>
+        <!--缓存配置-->
+        <property name="cache_region" value="sessionCache"></property>
         <property name="cache_manager" value="ehCacheManager"></property>
         <!--aop 缓存配置-->
         <property name="aop_cache_region" value="aopCache"></property>
@@ -44,7 +46,9 @@
     <cep-configuration node-name="asNode">
         <operator name="asNode"></operator>
         <scs>
-            <sc host="192.168.48.111" port="9191"></sc>
+            <sc host="127.0.0.1" port="9191"></sc>
+
+            <!--<sc host="192.168.48.111" port="9191"></sc>-->
         </scs>
         <params>
             <param name="request-time-out" value="15000"/>
