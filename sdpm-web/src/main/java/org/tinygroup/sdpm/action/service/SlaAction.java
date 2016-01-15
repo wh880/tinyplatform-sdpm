@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.dao.complexsearch.SearchInfos;
-import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
+import org.tinygroup.sdpm.product.dao.utils.FieldUtil;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.service.inter.ProductService;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceClient;

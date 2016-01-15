@@ -8,7 +8,7 @@ import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.docTemplate.inter.DocTemplateResolver;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.dto.UploadProfile;
-import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
+import org.tinygroup.sdpm.product.dao.utils.FieldUtil;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductRelease;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;

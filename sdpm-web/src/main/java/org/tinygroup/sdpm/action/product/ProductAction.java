@@ -14,7 +14,7 @@ import org.tinygroup.sdpm.org.dao.pojo.OrgRole;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.RoleService;
 import org.tinygroup.sdpm.org.service.inter.UserService;
-import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
+import org.tinygroup.sdpm.product.dao.utils.FieldUtil;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.service.inter.ProductService;
 import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;

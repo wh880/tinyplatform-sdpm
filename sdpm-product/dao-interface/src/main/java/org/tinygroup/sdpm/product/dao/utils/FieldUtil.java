@@ -1,4 +1,4 @@
-package org.tinygroup.sdpm.product.dao.impl;
+package org.tinygroup.sdpm.product.dao.utils;
 
 public class FieldUtil {
 

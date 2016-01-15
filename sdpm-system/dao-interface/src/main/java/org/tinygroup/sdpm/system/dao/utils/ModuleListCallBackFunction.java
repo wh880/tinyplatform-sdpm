@@ -1,4 +1,4 @@
-package org.tinygroup.sdpm.system.dao.impl.util;
+package org.tinygroup.sdpm.system.dao.utils;
 
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 

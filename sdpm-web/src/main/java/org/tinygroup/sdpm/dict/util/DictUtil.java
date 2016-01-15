@@ -15,8 +15,8 @@ import org.tinygroup.sdpm.dict.inter.DictNodeEntries;
 import org.tinygroup.sdpm.dict.inter.DictNodeEntry;
 import org.tinygroup.sdpm.system.dao.pojo.SystemDict;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
-import org.tinygroup.sdpm.system.service.impl.DictServiceImpl;
-import org.tinygroup.sdpm.system.service.impl.ModuleServiceImpl;
+import org.tinygroup.sdpm.system.service.inter.DictService;
+import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.sdpm.system.service.inter.DictService;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
 
@@ -28,8 +28,8 @@ import java.util.Map;
  * Created by wangll13383 on 2015/10/15.
  */
 public class DictUtil {
-    private static final ModuleService moduleService = BeanContainerFactory.getBeanContainer(DictUtil.class.getClassLoader()).getBean(ModuleServiceImpl.class);
-    private static final DictService dictService = BeanContainerFactory.getBeanContainer(DictUtil.class.getClassLoader()).getBean(DictServiceImpl.class);
+    private static final ModuleService moduleService = BeanContainerFactory.getBeanContainer(DictUtil.class.getClassLoader()).getBean("moduleService");
+    private static final DictService dictService = BeanContainerFactory.getBeanContainer(DictUtil.class.getClassLoader()).getBean("dictService");
     private static final SdpmDictLoader loader = BeanContainerFactory.getBeanContainer(DictUtil.class.getClassLoader()).getBean(SdpmDictLoader.class);
     private static final DictManager manager = BeanContainerFactory.getBeanContainer(DictUtil.class.getClassLoader()).getBean(DictManagerImpl.class);
     private static final Logger LOGGER = LoggerFactory.getLogger(DictUtil.class);

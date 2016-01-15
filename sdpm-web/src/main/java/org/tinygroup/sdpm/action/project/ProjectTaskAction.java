@@ -21,7 +21,7 @@ import org.tinygroup.sdpm.dto.project.EffortList;
 import org.tinygroup.sdpm.dto.project.Tasks;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.UserService;
-import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
+import org.tinygroup.sdpm.product.dao.utils.FieldUtil;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.service.inter.ProductService;

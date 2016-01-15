@@ -15,7 +15,7 @@ import org.tinygroup.sdpm.product.dao.ProductDao;
 import org.tinygroup.sdpm.product.dao.ProductPlanDao;
 import org.tinygroup.sdpm.product.dao.ProductReleaseDao;
 import org.tinygroup.sdpm.product.dao.ProductStoryDao;
-import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
+import org.tinygroup.sdpm.product.dao.utils.FieldUtil;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
 import org.tinygroup.sdpm.project.dao.impl.ProjectBuildDaoImpl;

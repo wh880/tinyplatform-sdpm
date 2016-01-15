@@ -15,7 +15,7 @@ import org.tinygroup.sdpm.dao.condition.ConditionUtils;
 import org.tinygroup.sdpm.dto.UploadProfile;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.UserService;
-import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
+import org.tinygroup.sdpm.product.dao.utils.FieldUtil;
 import org.tinygroup.sdpm.product.dao.pojo.*;
 import org.tinygroup.sdpm.product.service.inter.PlanService;
 import org.tinygroup.sdpm.product.service.inter.ReleaseService;
