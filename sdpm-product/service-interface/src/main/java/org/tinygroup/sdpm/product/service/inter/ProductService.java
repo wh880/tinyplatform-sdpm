@@ -56,6 +56,15 @@ public interface ProductService {
     Product findProductById(Integer productId);
 
     /**
+     * 根据产品ID查找
+     *
+     * @param productId
+     * @return
+     */
+    @CacheGet(key = "${productId}-WithoutGroupBy", group = CACHE_PRODUCT_ID)
+    Product findProductWithoutGroupByById(Integer productId);
+
+    /**
      * 根据条件查找列表
      *
      * @param product

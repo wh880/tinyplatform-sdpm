@@ -89,24 +89,24 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
         return getDslTemplate().insertAndReturnKey(product, new InsertGenerateCallback<Product>() {
             public Insert generate(Product t) {
                 Insert insert = insertInto(PRODUCTTABLE).values(
-                    PRODUCTTABLE.PRODUCT_ID.value(t.getProductId()),
-					PRODUCTTABLE.COMPANY_ID.value(t.getCompanyId()),
-					PRODUCTTABLE.DEPT_ID.value(t.getDeptId()),
-					PRODUCTTABLE.PRODUCT_LINE_ID.value(t.getProductLineId()),
-					PRODUCTTABLE.PRODUCT_NAME.value(t.getProductName()),
-					PRODUCTTABLE.PRODUCT_CODE.value(t.getProductCode()),
-					PRODUCTTABLE.PRODUCT_ORDER.value(t.getProductOrder()),
-					PRODUCTTABLE.PRODUCT_STATUS.value(t.getProductStatus()),
-					PRODUCTTABLE.PRODUCT_DESC.value(t.getProductDesc()),
-					PRODUCTTABLE.PRODUCT_OWNER.value(t.getProductOwner()),
-					PRODUCTTABLE.PRODUCT_QUALITY_MANAGER.value(t.getProductQualityManager()),
-					PRODUCTTABLE.PRODUCT_DELIVERY_MANAGER.value(t.getProductDeliveryManager()),
-					PRODUCTTABLE.ACL.value(t.getAcl()),
-					PRODUCTTABLE.PRODUCT_WHITE_LIST.value(t.getProductWhiteList()),
-					PRODUCTTABLE.PRODUCT_CREATED_BY.value(t.getProductCreatedBy()),
-					PRODUCTTABLE.PRODUCT_CREATED_DATE.value(t.getProductCreatedDate()),
-					PRODUCTTABLE.PRODUCT_CREATED_VERSION.value(t.getProductCreatedVersion()),
-					PRODUCTTABLE.DELETED.value(t.getDeleted()));
+                        PRODUCTTABLE.PRODUCT_ID.value(t.getProductId()),
+                        PRODUCTTABLE.COMPANY_ID.value(t.getCompanyId()),
+                        PRODUCTTABLE.DEPT_ID.value(t.getDeptId()),
+                        PRODUCTTABLE.PRODUCT_LINE_ID.value(t.getProductLineId()),
+                        PRODUCTTABLE.PRODUCT_NAME.value(t.getProductName()),
+                        PRODUCTTABLE.PRODUCT_CODE.value(t.getProductCode()),
+                        PRODUCTTABLE.PRODUCT_ORDER.value(t.getProductOrder()),
+                        PRODUCTTABLE.PRODUCT_STATUS.value(t.getProductStatus()),
+                        PRODUCTTABLE.PRODUCT_DESC.value(t.getProductDesc()),
+                        PRODUCTTABLE.PRODUCT_OWNER.value(t.getProductOwner()),
+                        PRODUCTTABLE.PRODUCT_QUALITY_MANAGER.value(t.getProductQualityManager()),
+                        PRODUCTTABLE.PRODUCT_DELIVERY_MANAGER.value(t.getProductDeliveryManager()),
+                        PRODUCTTABLE.ACL.value(t.getAcl()),
+                        PRODUCTTABLE.PRODUCT_WHITE_LIST.value(t.getProductWhiteList()),
+                        PRODUCTTABLE.PRODUCT_CREATED_BY.value(t.getProductCreatedBy()),
+                        PRODUCTTABLE.PRODUCT_CREATED_DATE.value(t.getProductCreatedDate()),
+                        PRODUCTTABLE.PRODUCT_CREATED_VERSION.value(t.getProductCreatedVersion()),
+                        PRODUCTTABLE.DELETED.value(t.getDeleted()));
                 return insert;
             }
         });
@@ -487,6 +487,12 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
     public List<Product> productInCondition(String condition, Integer limit,Integer ...ids) {
         Select select = MysqlSelect.select(PRODUCTTABLE.PRODUCT_ID, PRODUCTTABLE.PRODUCT_NAME).from(PRODUCTTABLE).where(and(PRODUCTTABLE.PRODUCT_NAME.like(condition), PRODUCTTABLE.DELETED.eq(0), PRODUCTTABLE.PRODUCT_ID.in(ids))).limit(0, limit);
         return getDslSession().fetchList(select,Product.class);
+    }
+
+    @Override
+    public Product getProductWithoutGroupBy(Integer productId) {
+        Select select = selectFrom(PRODUCTTABLE).where(PRODUCTTABLE.PRODUCT_ID.eq(productId));
+        return getDslSession().fetchOneResult(select,Product.class);
     }
 
     private Select getComplexSelect() {

@@ -256,6 +256,21 @@ public class ProjectTaskAction extends BaseController {
         return resultMap(true, "删除成功");
     }
 
+    @ResponseBody
+    @RequestMapping("batch/storyByModule")
+    public List<ProductStory> ajaxStoryByModule(Integer projectId, Integer moduleId) {
+        ProductStory story = new ProductStory();
+        if(moduleId!=null){
+            SystemModule module = moduleService.findById(moduleId);
+            if("projectProduct".equals(module.getModuleType())){
+                story.setProductId(Integer.parseInt(module.getModuleOwner()));
+            }else{
+                story.setModuleId(moduleId);
+            }
+        }
+        return projectStoryService.findStoryByProjectAndModule(projectId,story);
+    }
+
     @RequestMapping("/consumeTime")
     public String consumeTime(Integer taskId, Model model) {
         ProjectTask task = taskService.findTaskById(taskId);
@@ -834,7 +849,7 @@ public class ProjectTaskAction extends BaseController {
         }
         List<ProjectProduct> projectProductList = projectProductService.findProductListByProjectId(projectId);
         for (ProjectProduct pp : projectProductList) {
-            Product product = productService.findProductById(pp.getProductId());
+            Product product = productService.findProductWithoutGroupByById(pp.getProductId());
             if(product.getDeleted()==0) {
                 module.setModuleType("story");
                 module.setModuleRoot(pp.getProductId());

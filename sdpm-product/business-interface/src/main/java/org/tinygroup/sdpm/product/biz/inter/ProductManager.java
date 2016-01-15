@@ -47,6 +47,13 @@ public interface ProductManager {
      * @return
      */
     Product find(Integer productId);
+    /**
+     * 根据产品ID查找
+     *
+     * @param productId
+     * @return
+     */
+    Product findWithoutGroupBy(Integer productId);
 
     /**
      * 根据多个id查找

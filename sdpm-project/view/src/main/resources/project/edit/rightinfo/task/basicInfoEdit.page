@@ -11,7 +11,7 @@
                         #@formControlDiv("col-10")
                             #@Tselect2F()
                                 #@Tselect2Body("taskProject" task.taskProject {"class":"input-text select2"})
-
+                                    <option value=""></option>
                                     #foreach(m : projectList)
                                         <option value="${m.projectId}">${m.projectName}</option>
                                     #end
@@ -36,6 +36,34 @@
                         #end
                     #end
                 #end
+                <script type="text/javascript">
+                    $(function () {
+                        $("select[name=taskAssignedTo]").on("change", function () {
+                            $("input[name=taskAssignedDate]").val(moment().format('YYYY-MM-DD'));
+                        });
+                        $("select[name=taskModule]").on("change", function () {
+                            $.ajax({
+                                url:"${TINY_CONTEXT_PATH+adminPath}/project/task/batch/storyByModule?projectId=${currentProjectId}&moduleId="+$("select[name=taskModule]").val(),
+                                type:"post",
+                                dataType:"json",
+                                success:function(ssdata){
+                                    var data;
+                                    var taskStory=$("select[name=taskStory]");
+                                    taskStory.empty();
+                                    taskStory.select2("val","");
+                                    var tempV="";
+                                    taskStory.append("<option>");
+                                    for(var i= 0,l=ssdata.length;i<l;i++){
+                                        var data=ssdata[i];
+                                        tempV=$("<option>").attr("value",data.storyId).html(data.storyId+"："+data.storyTitle+"（优先级："+data.storyPri+"，预计工时:"+data.storyEstimate+")");
+
+                                        taskStory.append(tempV);
+                                    }
+                                }
+                            })
+                        });
+                    });
+                </script>
                 #@tr()
                     #@th()
                         <div style="width: 64px;float: right">相关需求</div>#end
@@ -43,7 +71,7 @@
                         #@formControlDiv("col-10")
                             #@Tselect2F()
                                 #@Tselect2Body("taskStory" task?.taskStory {"class":"input-text select2"})
-
+                                    <option value=""></option>
                                     #foreach(s : storyList)
                                         <option value="${s.storyId}">${s.storyTitle}</option>
                                     #end

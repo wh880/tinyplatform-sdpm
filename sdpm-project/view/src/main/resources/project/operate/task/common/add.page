@@ -21,8 +21,9 @@
             #@sdpmItem("所属模块")
                 #@Tselect2F()
                     #@Tselect2Body("taskModule" moduleId {"class":"input-text select2"})
+                        <option value="">/</option>
                         #foreach(m : moduleList)
-                            <option value=${m.moduleId}>${m.moduleName}</option>
+                            <option value="${m.moduleId}">${m.moduleName}</option>
                         #end
                     #end
                 #end
@@ -34,6 +35,7 @@
                     #@Tselect2Body(
                         "taskType" copyTask?.taskType {"class":"input-text select2","placeholder":"请选择任务类型","datatype":"*",
                         "nullmsg":"任务类型不能为空！"})
+                        <option value=""></option>
                         #foreach(item : getDict("taskType"))
                             <option value="${item?.value}">${item?.text}</option>
                         #end
@@ -64,6 +66,27 @@
                 $("select[name=taskAssignedTo]").on("change", function () {
                     $("input[name=taskAssignedDate]").val(moment().format('YYYY-MM-DD'));
                 });
+                $("select[name=taskModule]").on("change", function () {
+                    $.ajax({
+                        url:"${TINY_CONTEXT_PATH+adminPath}/project/task/batch/storyByModule?projectId=${currentProjectId}&moduleId="+$("select[name=taskModule]").val(),
+                        type:"post",
+                        dataType:"json",
+                        success:function(ssdata){
+                            var data;
+                            var taskStory=$("select[name=taskStory]");
+                            taskStory.empty();
+                            taskStory.select2("val","");
+                            var tempV="";
+                            taskStory.append("<option>");
+                            for(var i= 0,l=ssdata.length;i<l;i++){
+                                var data=ssdata[i];
+                                tempV=$("<option>").attr("value",data.storyId).html(data.storyId+"："+data.storyTitle+"（优先级："+data.storyPri+"，预计工时:"+data.storyEstimate+")");
+
+                                taskStory.append(tempV);
+                            }
+                        }
+                    })
+                });
             });
         </script>
         <input type="hidden" name="taskAssignedDate">
@@ -72,6 +95,7 @@
                 #if(storyList)
                     #@Tselect2F()
                         #@Tselect2Body("taskStory" storyId==null?"":storyId {"class":"input-text select2"})
+                            <option value=""></option>
                             #foreach(s:storyList)
                                 <option value="${s.storyId}">${s.storyId}：${s.storyTitle}（优先级：${s.storyPri}，预计工时:${s.storyEstimate}）
                                 </option>

@@ -386,6 +386,7 @@
         });
 
         $("#${bugTableId}form").on("submit", function () {
+            $(".choose").removeClass("active_btn");
             $("#${bugTableId}").trigger("initnav");
             return false;
         });

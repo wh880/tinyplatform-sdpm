@@ -56,6 +56,12 @@ public interface StoryManager {
      */
     List<ProductStory> findList(boolean withSpec,Integer... storyId);
     /**
+     * 根据多个id条件查找
+     * @param storyId
+     * @return
+     */
+    List<ProductStory> findList(boolean withSpec,ProductStory story,Integer... storyId);
+    /**
      * 根据对象查询
      * @param story
      * @return

@@ -37,6 +37,11 @@ public class ProductServiceImpl implements ProductService {
         return productManager.find(productId);
     }
 
+    @Override
+    public Product findProductWithoutGroupByById(Integer productId) {
+        return productManager.findWithoutGroupBy(productId);
+    }
+
     public List<Product> findProductListByIds(Integer... productId) {
         if (ArrayUtil.isEmptyArray(productId)) {
             return new ArrayList<Product>();
