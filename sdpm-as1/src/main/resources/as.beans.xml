@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <bean id="fileResolver" scope="singleton"
+          class="org.tinygroup.fileresolver.impl.FileResolverImpl">
+        <property name="fileProcessorList">
+            <list>
+                <ref bean="xStreamFileProcessor"/>
+                <!-- xmlservice -->
+                <ref bean="xmlServiceFileProcessor"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="fileResolverProcessor" scope="singleton"
+          class="org.tinygroup.fileresolver.applicationprocessor.FileResolverProcessor">
+        <property name="fileResolver" ref="fileResolver"></property>
+    </bean>
+
+    <bean id="asNode" scope="singleton"
+          class="org.tinygroup.cepcoremutiremoteimpl.node.NodeOperator">
+        <property name="localHost" value="127.0.0.1"></property>
+        <property name="localPort" value="90021"></property>
+        <property name="weight" value="20"></property>
+    </bean>
+
+</beans>

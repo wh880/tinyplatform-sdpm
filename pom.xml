@@ -53,6 +53,11 @@
         <url>http://git.oschina.net/tinyframework/sdpm.git</url>
     </scm>
     <modules>
+        <module>sdpm-as1</module>
+        <module>sdpm-as2</module>
+        <module>sdpm-as3</module>
+        <module>sdpm-as4</module>
+        <module>sdpm-sc</module>
         <module>sdpm-service</module>
         <module>sdpm-common</module>
         <module>sdpm-document</module>

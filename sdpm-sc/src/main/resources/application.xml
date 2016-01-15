@@ -1,0 +1,38 @@
+<?xml version="" encoding="UTF-8"?>
+<application>
+	<application-properties>
+		<property name="BASE_PACKAGE" value="org.tinygroup" />
+		<property name="DEBUG_MODE" value="false" />
+		<property name="TINY_THEME" value="default" />
+		<property name="wholeWidth" value="200pt" />
+		<property name="labelWidth" value="80pt" />
+		<property name="fieldWidth" value="120pt" />
+		<property name="cardWidth" value="200pt" />
+		<!-- 如果没有指定语言或指定语言的内容找不到，则从默认语言查找 -->
+		<property name="TINY_DEFAULT_LOCALE" value="zh_CN" />
+	</application-properties>
+
+	<application-processors>
+		<!-- <application-processor bean="fileResolverProcessor"></application-processor> -->
+		<application-processor bean="cepCoreProcessor"></application-processor>
+	</application-processors>	
+
+	<file-resolver-configuration
+		resolve-classpath="true">
+		<class-paths>
+			<!-- <class-path path="{TINY_WEBROOT}\WEB-INF\lib" /> -->
+		</class-paths>
+		<include-patterns>
+			<include-pattern pattern="a\.b\.(.)*\.jar" />
+		</include-patterns>
+	</file-resolver-configuration>
+
+	<cep-configuration node-name="sc">
+		<operator name="sc"></operator>
+		<params>
+			<param name="heart-beat-time" value="20"/>
+			<param name="heart-beat-outtimes" value="10"/>
+		</params>
+	</cep-configuration>
+
+</application>
