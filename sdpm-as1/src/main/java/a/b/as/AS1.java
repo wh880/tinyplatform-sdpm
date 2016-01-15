@@ -3,15 +3,15 @@
  */
 package a.b.as;
 
-import java.util.ArrayList;
-
 import org.tinygroup.tinyrunner.Runner;
+
+import java.util.ArrayList;
 
 /**
  * @author Administrator
  *
  */
-public class Start {
+public class AS1 {
 
 	/**
 	 * @param args

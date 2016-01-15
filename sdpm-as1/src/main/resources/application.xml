@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <application>
     <application-properties>
+        <property name="cache_manager" value="ehCacheManager"></property>
+        <!--aop 缓存配置-->
+        <property name="aop_cache_region" value="aopCache"></property>
+
         <property name="BASE_PACKAGE" value="org.tinygroup"/>
         <property name="DEBUG_MODE" value="false"/>
         <property name="TINY_THEME" value="default"/>

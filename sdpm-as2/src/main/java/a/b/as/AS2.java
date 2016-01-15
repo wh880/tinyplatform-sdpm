@@ -11,7 +11,7 @@ import org.tinygroup.tinyrunner.Runner;
  * @author Administrator
  *
  */
-public class Start {
+public class AS2 {
 
 	/**
 	 * @param args

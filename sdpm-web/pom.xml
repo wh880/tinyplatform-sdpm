@@ -362,6 +362,13 @@
         </dependency>
         <!-- CACHE end -->
 
+        <!--数据字典-->
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>org.tinygroup.dict</artifactId>
+            <version>${tiny_version}</version>
+        </dependency>
+
     </dependencies>
     <build>
         <finalName>${project.name}</finalName>
