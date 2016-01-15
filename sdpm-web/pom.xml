@@ -86,9 +86,14 @@
             <artifactId>sdpm-org-view</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.tinygroup</groupId>-->
+            <!--<artifactId>sdpm-org-service-impl</artifactId>-->
+            <!--<version>${project.version}</version>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>org.tinygroup</groupId>
-            <artifactId>sdpm-org-service-impl</artifactId>
+            <artifactId>sdpm-org-service-inter</artifactId>
             <version>${project.version}</version>
         </dependency>
 
@@ -100,9 +105,14 @@
         </dependency>
         <dependency>
             <groupId>org.tinygroup</groupId>
-            <artifactId>sdpm-service-service-impl</artifactId>
+            <artifactId>sdpm-service-service-interface</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.tinygroup</groupId>-->
+            <!--<artifactId>sdpm-service-service-impl</artifactId>-->
+            <!--<version>${project.version}</version>-->
+        <!--</dependency>-->
         <!--service end-->
 
         <!--system-->
@@ -111,9 +121,14 @@
             <artifactId>sdpm-system-view</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.tinygroup</groupId>-->
+            <!--<artifactId>sdpm-system-service-impl</artifactId>-->
+            <!--<version>${project.version}</version>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>org.tinygroup</groupId>
-            <artifactId>sdpm-system-service-impl</artifactId>
+            <artifactId>sdpm-system-service-interface</artifactId>
             <version>${project.version}</version>
         </dependency>
 
@@ -125,9 +140,15 @@
         </dependency>
         <dependency>
             <groupId>org.tinygroup</groupId>
-            <artifactId>sdpm-quality-service-impl</artifactId>
+            <artifactId>sdpm-quality-service-interface</artifactId>
             <version>${project.version}</version>
         </dependency>
+
+        <!--<dependency>-->
+            <!--<groupId>org.tinygroup</groupId>-->
+            <!--<artifactId>sdpm-quality-service-impl</artifactId>-->
+            <!--<version>${project.version}</version>-->
+        <!--</dependency>-->
         <!-- quality end -->
 
         <!--document start-->
@@ -138,9 +159,14 @@
         </dependency>
         <dependency>
             <groupId>org.tinygroup</groupId>
-            <artifactId>sdpm-document-service-impl</artifactId>
+            <artifactId>sdpm-document-service-interface</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.tinygroup</groupId>-->
+            <!--<artifactId>sdpm-document-service-impl</artifactId>-->
+            <!--<version>${project.version}</version>-->
+        <!--</dependency>-->
         <!--document end-->
 
         <!-- product -->
@@ -150,10 +176,16 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.tinygroup</groupId>
-            <artifactId>sdpm-product-service-impl</artifactId>
-            <version>${project.version}</version>
+        <groupId>org.tinygroup</groupId>
+        <artifactId>sdpm-product-service-interface</artifactId>
+        <version>${project.version}</version>
         </dependency>
+
+        <!--<dependency>-->
+            <!--<groupId>org.tinygroup</groupId>-->
+            <!--<artifactId>sdpm-product-service-impl</artifactId>-->
+            <!--<version>${project.version}</version>-->
+        <!--</dependency>-->
         <!-- product end -->
 
         <!-- productLine -->
@@ -164,9 +196,14 @@
         </dependency>
         <dependency>
             <groupId>org.tinygroup</groupId>
-            <artifactId>sdpm-productLine-service-impl</artifactId>
+            <artifactId>sdpm-productLine-service-interface</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.tinygroup</groupId>-->
+            <!--<artifactId>sdpm-productLine-service-impl</artifactId>-->
+            <!--<version>${project.version}</version>-->
+        <!--</dependency>-->
         <!-- productLine end -->
 
         <!-- project -->
@@ -177,9 +214,15 @@
         </dependency>
         <dependency>
             <groupId>org.tinygroup</groupId>
-            <artifactId>sdpm-project-service-impl</artifactId>
+            <artifactId>sdpm-project-service-interface</artifactId>
             <version>${project.version}</version>
         </dependency>
+
+        <!--<dependency>-->
+            <!--<groupId>org.tinygroup</groupId>-->
+            <!--<artifactId>sdpm-project-service-impl</artifactId>-->
+            <!--<version>${project.version}</version>-->
+        <!--</dependency>-->
         <!-- statistic -->
         <dependency>
             <groupId>org.tinygroup</groupId>
@@ -188,10 +231,24 @@
         </dependency>
         <dependency>
             <groupId>org.tinygroup</groupId>
-            <artifactId>sdpm-statistic-service-impl</artifactId>
+            <artifactId>sdpm-statistic-service-inter</artifactId>
             <version>${project.version}</version>
         </dependency>
+
+        <!--<dependency>-->
+            <!--<groupId>org.tinygroup</groupId>-->
+            <!--<artifactId>sdpm-statistic-service-impl</artifactId>-->
+            <!--<version>${project.version}</version>-->
+        <!--</dependency>-->
         <!-- statistic end -->
+
+
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>org.tinygroup.cepcoremutiremoteimpl</artifactId>
+            <version>${tiny_version}</version>
+        </dependency>
+
 
         <!--spring版本-->
         <dependency>

@@ -28,6 +28,8 @@
     </greetings>
 
     <application-processors>
+        <application-processor bean="cepCoreProcessor"></application-processor>
+
         <application-processor bean="fileResolverProcessor"/>
         <application-processor bean="serviceApplicationProcessor"/>
         <application-processor bean="tinyListenerProcessor"/>
@@ -101,6 +103,16 @@
         </plugin-configs>
     </plugin-management>
     <!-- cep远程调用配置 -->
+    <cep-configuration node-name="arNode">
+        <operator name="arNode"></operator>
+        <scs>
+            <sc host="127.0.0.1" port="9191"></sc>
+        </scs>
+        <params>
+            <param name="request-time-out" value="15000" />
+        </params>
+    </cep-configuration>
+
     <!--<cep-node-config>-->
     <!--<node-config ip="192.168.84.73" port="8888" name="chenjiaopmclient"-->
     <!--enable-remote="false"></node-config>-->
@@ -141,12 +153,12 @@
             <servlet-mapping url-pattern=".*/uiengine\.uijs"></servlet-mapping>
             <servlet-mapping url-pattern=".*/uiengine\.uicss"></servlet-mapping>
         </tiny-processor>
-        <!--<tiny-processor id="serviceTinyProcessor" class="serviceTinyProcessor">-->
-        <!--<servlet-mapping url-pattern=".*\.servicexml"></servlet-mapping>-->
-        <!--<servlet-mapping url-pattern=".*\.servicejson"></servlet-mapping>-->
-        <!--<servlet-mapping url-pattern=".*\.servicepage"></servlet-mapping>-->
-        <!--<servlet-mapping url-pattern=".*\.servicepagelet"></servlet-mapping>-->
-        <!--</tiny-processor>-->
+        <tiny-processor id="serviceTinyProcessor" class="serviceTinyProcessor">
+            <servlet-mapping url-pattern=".*\.servicexml"></servlet-mapping>
+            <servlet-mapping url-pattern=".*\.servicejson"></servlet-mapping>
+            <servlet-mapping url-pattern=".*\.servicepage"></servlet-mapping>
+            <servlet-mapping url-pattern=".*\.servicepagelet"></servlet-mapping>
+        </tiny-processor>
         <!--<tiny-processor id="mvcTinyProcessor" class="mvcTinyProcessor">-->
         <!--<servlet-mapping url-pattern=".*\.do"></servlet-mapping>-->
         <!--</tiny-processor>-->
