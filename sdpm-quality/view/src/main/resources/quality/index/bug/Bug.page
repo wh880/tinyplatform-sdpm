@@ -12,7 +12,7 @@
         <span class="f">
 			#foreach(m:menuManager.getScopeMenus("testbugleft-tab"))
 				#if(m.id != "tsearch")
-                    <a class="choose" href="${TINY_CONTEXT_PATH+adminPath}${m.href}&currentPageId=5" class="${m.id==status?'active_btn':''}">${m.name}</a>
+                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}&currentPageId=5" class="choose ${m.id==status?'active_btn':''}">${m.name}</a>
 				#else
                     <a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
 				#end

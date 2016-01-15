@@ -584,7 +584,7 @@ public class ProjectTaskAction extends BaseController {
                             @RequestParam(defaultValue = "desc") String orderType, Integer key) {
         boolean isSearch = false;
         for(SearchInfo info : infos.getInfos()){
-            if(info.getValue()!=null){
+            if(!StringUtil.isBlank(info.getValue())){
                 isSearch=true;
                 break;
             }
