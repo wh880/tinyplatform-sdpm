@@ -7,7 +7,7 @@ import java.util.Date;
  * 用于联合查询结果存放
  * Created by wangdl16860 on 2016/1/14.
  */
-public class OrgDiaryAndUserDO implements Serializable {
+public class OrgDiaryAndUserDO implements Serializable, Comparable {
     public static String DELETE_YES = "1";
     public static String DELETE_NO = "0";
     /**
@@ -523,5 +523,10 @@ public class OrgDiaryAndUserDO implements Serializable {
 
     public void setOrgUserLeader(String orgUserLeader) {
         this.orgUserLeader = orgUserLeader;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return this.orgDiaryWeek.compareTo(((OrgDiaryAndUserDO) o).orgDiaryWeek);
     }
 }

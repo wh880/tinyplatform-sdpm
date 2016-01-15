@@ -11,6 +11,7 @@ import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.DiaryService;
 import org.tinygroup.tinysqldsl.Pager;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -110,5 +111,14 @@ public class DiaryServiceImpl implements DiaryService{
     public List<OrgDiaryAndUserDO> findListDiarySubAndSelf(String userId, Integer year, Integer week) {
         List<OrgUser> list=userManager.getDirectStaffByLeader(userId);
         return diaryManager.findListSubAndSelf(userId,list,year,week);
+    }
+
+    @Override
+    public List<OrgDiaryDetail> findDetailListByDiaryList(List<OrgDiaryAndUserDO> list) {
+        List<Integer> list1=new ArrayList<Integer>();
+        for (int i=0;i<list.size();i++){
+            list1.add(list.get(i).getOrgDiaryId());
+        }
+        return diaryManager.findDetailListByDiaryList(list1);
     }
 }

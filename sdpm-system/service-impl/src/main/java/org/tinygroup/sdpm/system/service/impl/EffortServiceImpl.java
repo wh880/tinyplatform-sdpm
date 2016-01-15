@@ -90,4 +90,9 @@ public class EffortServiceImpl implements EffortService {
     public List<SystemEffort> findEffortListByUserAndDate(String userId, Date beginDate, Date endDate) {
         return effortManager.findByUserAndDate(userId,beginDate,endDate);
     }
+
+    @Override
+    public List<SystemEffort> findEffortListByIdList(List<Integer> list) {
+        return effortManager.findEffortListByIdList(list);
+    }
 }

@@ -32,4 +32,7 @@ public interface OrgDiaryDetailDao extends BaseDao<OrgDiaryDetail,Integer> {
 
 		List<OrgDiaryDetail> findByDiaryId(Integer diaryId);
 
-}
+		List<OrgDiaryDetail> findListByDiaryList(List<Integer> list);
+
+
+	}

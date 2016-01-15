@@ -119,5 +119,11 @@
       </service-parameters>
       <service-result name="findListDiarySubAndSelfResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.org.dao.pojo.OrgDiaryAndUserDO"/>
     </service-method>
+    <service-method local-name="findDetailListByDiaryList" service-id="findDetailListByDiaryList" method-name="findDetailListByDiaryList" cacheable="false" category="org.tinygroup.sdpm.org.service.inter">
+      <service-parameters>
+        <service-parameter name="list" type="org.tinygroup.sdpm.org.dao.pojo.OrgDiaryAndUserDO" collection-type="java.util.List" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findDetailListByDiaryListResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.org.dao.pojo.OrgDiaryDetail"/>
+    </service-method>
   </service-component>
 </service-components>

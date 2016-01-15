@@ -83,4 +83,6 @@ public interface DiaryManager {
 
     List<OrgDiaryAndUserDO> findListSubAndSelf(String userId, List<OrgUser> list, Integer year, Integer week);
 
+    List<OrgDiaryDetail> findDetailListByDiaryList(List<Integer> list);
+
 }

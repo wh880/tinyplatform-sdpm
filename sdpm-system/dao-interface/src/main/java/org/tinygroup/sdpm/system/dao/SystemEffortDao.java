@@ -38,4 +38,6 @@ public interface SystemEffortDao extends BaseDao<SystemEffort, Integer> {
     Pager<SystemEffort> findByDate(int start, int limit, SystemEffort effort, Date startDate, Date endDate, OrderBy... orderArgs);
 
     List<SystemEffort> findByUserAndDate(String userAccount, String beginDate, String endDate);
+
+    List<SystemEffort> findListByIdList(List<Integer> list);
 }

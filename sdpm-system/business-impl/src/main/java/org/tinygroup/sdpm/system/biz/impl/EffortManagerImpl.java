@@ -108,4 +108,9 @@ public class EffortManagerImpl implements EffortManager {
         String eTime=format.format(endDate);
         return systemEffortDao.findByUserAndDate(userId,bTime,eTime);
     }
+
+    @Override
+    public List<SystemEffort> findEffortListByIdList(List<Integer> list) {
+        return systemEffortDao.findListByIdList(list);
+    }
 }

@@ -89,4 +89,6 @@ public interface DiaryService {
     Pager<OrgDiaryAndUserDO> findPagerDiarySubAndSelf(String userId, Integer year, Integer week, Integer start, Integer limit);
 
     List<OrgDiaryAndUserDO> findListDiarySubAndSelf(String userId, Integer year, Integer week);
+
+    List<OrgDiaryDetail> findDetailListByDiaryList(List<OrgDiaryAndUserDO> list);
 }

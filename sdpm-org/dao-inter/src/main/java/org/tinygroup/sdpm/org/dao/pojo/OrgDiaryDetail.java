@@ -83,6 +83,8 @@ public class OrgDiaryDetail implements Serializable{
 	private String orgDetailContent;
 
 
+	private Integer EffortWeek;
+
 	public void setOrgDetailId(Integer orgDetailId){
 		this. orgDetailId = orgDetailId;
 	}
@@ -131,4 +133,11 @@ public class OrgDiaryDetail implements Serializable{
 		return orgDetailContent;
 	}
 
+	public Integer getEffortWeek() {
+		return EffortWeek;
+	}
+
+	public void setEffortWeek(Integer effortWeek) {
+		EffortWeek = effortWeek;
+	}
 }

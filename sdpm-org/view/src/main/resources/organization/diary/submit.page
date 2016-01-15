@@ -29,9 +29,6 @@
 #set(name="organizationDiary")
 #@layout(org)#end
 #@div(divClass="operationbar")
-<div class="col-1">
-    #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")返回#end
-</div>
 <div class="diary-content-head">
     <h3>
         #@circleButton("primary get-prev")#fontIco("chevron-left")#end
@@ -50,15 +47,8 @@
             $("#w").val(week);
             var body = $("#diarylist-detail");
             var data = {w: week, y: year, aid: 2};
-            $.ajax({
-                type: "GET",
-                url: "/sdpm-web/a/org/diary/form",
-                data: {w: week, y: year, aid: 2},
-                dataType: "json",
-                success: function (data) {
-                    $('#summary').val(data);
-                }
-            });
+            ajaxLoadContent(body, "/sdpm-web/a/org/diary/list/one.pagelet", data);
+
         });
         function getFirstWeekDay(year, week) {
             var yearFirst = moment(year + "-01-01");
@@ -127,57 +117,10 @@
         });
     });
 </script>
-
-
 #end
-#@elementItem()
-    #@tinyForm("thisform" call("link",adminPath+"/org/diary/add") "post")
-        #@div()
-            #@formControlDiv("col-7")
-                <center>#@tinyTextarea("summary" {"placeholder":"请输入本周总结"})${orgDiary?.orgDiarySummary}#end</center>
-            #end
-        #end
+<div class="tweet_list diarylist">
+    <ul class="diarylist-detail" id="diarylist-detail">
 
-        #@elementItem()
-        <div class="col-12">
-            <div class="col-5">
-            </div>
-            <div class="col-1">
-                <button style="float: left" type="submit" id="submit2" class="commitBtn">保存</button>
-            </div>
-            <div class="col-1">
-                #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")取消#end
-            </div>
-            <div class="col-5"></div>
-        </div>
-        #end
-    <br>
-    <input type="hidden" id="y" name="y"/>
-    <input type="hidden" id="w" name="w"/>
-    #end
-#end
-<script>
-    $(function () {
-        $("form[name=thisform]").Validform({
-            beforeSubmit: function (curform) {
-                $(curform).ajaxSubmit({
-                    dataType: "json",
-                    success: function (data) {
-                        if (data.status == "y" || data.status == "success") {
-                            layer.msg(data.info, 2, 1, function () {
-                                $(curform).closest(".modal").trigger("close");
-                            });
-                        } else {
-                            layer.msg(data.info);
-                        }
-                    },
-                    error: function () {
-                        layer.msg(data.info);
-                    }
-                });
-                return false;
-            }
-        });
-    });
 
-</script>
+    </ul>
+</div>

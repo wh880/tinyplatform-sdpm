@@ -48,28 +48,20 @@ public class DiaryAction extends BaseController {
      * 添加周报以及相应的周报详情
      *
      * @param summary
-     * @param json
      * @return
      */
     @ResponseBody
     @RequestMapping("/add")
-    // json {orgDiaryDetails:{{org_diary_id:"1",org_user_id:12,...},{org_diary_id:"2",org_user_id:14,...}}}
-    public Map add(String summary, Integer y, Integer w, String json) {
-        ObjectMapper objectMapper = new ObjectMapper();
-        List<OrgDiaryDetail> list = null;
-        if (!StringUtil.isBlank(json) && !StringUtil.isEmpty(json)) {
-            try {
-                JsonParser parser = objectMapper.getJsonFactory().createJsonParser(json);
-                JsonNode nodes = parser.readValueAsTree();
-                list = new ArrayList<OrgDiaryDetail>();
-                for (JsonNode node : nodes) {
-                    list.add(objectMapper.readValue(node, OrgDiaryDetail.class));
-                }
-            } catch (IOException e) {
-                e.getStackTrace();
-                return resultMap(false, "添加失败");
-            }
+    public Map add(String summary, Integer y, Integer w,String efforts) {
+        String[] effortIds=null;
+        if(efforts!=null){
+            effortIds=efforts.split(",");
         }
+        List<Integer> idsList=new ArrayList<Integer>();
+        for (int i=0;i<effortIds.length;i++){
+            idsList.add(Integer.parseInt(effortIds[i]));
+        }
+
         String userId = userUtils.getUser().getOrgUserId();
         OrgDiary orgDiary = new OrgDiary();
         Date date = new Date();
@@ -81,6 +73,17 @@ public class DiaryAction extends BaseController {
             w = calendar.get(Calendar.WEEK_OF_YEAR);
         }
         OrgDiary diary = diaryService.findDiaryByUserLatest(userId, y, w);
+
+        List<SystemEffort> effortList=effortService.findEffortListByIdList(idsList);
+        List<OrgDiaryDetail> list = new ArrayList<OrgDiaryDetail>();
+        for(int j=0;j<effortList.size();j++){
+            OrgDiaryDetail orgDiaryDetail=new OrgDiaryDetail();
+            orgDiaryDetail.setOrgDetailContent(effortList.get(j).getEffortWork());
+            orgDiaryDetail.setOrgDetailDate(effortList.get(j).getEffortDate());
+            orgDiaryDetail.setOrgUserId(userUtils.getUser().getOrgUserId());
+            orgDiaryDetail.setOrgDiaryId(diary.getOrgDiaryId());
+            list.add(orgDiaryDetail);
+        }
         if (diary == null) {
             orgDiary.setOrgDiaryCreateDate(date);
             orgDiary.setOrgDiarySummary(summary);
@@ -352,6 +355,34 @@ public class DiaryAction extends BaseController {
     }
 
     @RequiresPermissions("organizationDiary")
+    @RequestMapping("/list/one")
+    public String listOne(Integer y,Integer w,Model model){
+        if (y == null || w == null) {
+            Date date = new Date();
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(date);
+            y = calendar.get(Calendar.YEAR);
+            w = calendar.get(Calendar.WEEK_OF_YEAR);
+        }
+        OrgDiary orgDiary = diaryService.findDiaryByUserLatest(UserUtils.getUserId(), y, w);
+        model.addAttribute("orgDiary",orgDiary);
+        Date bDate = getBeginDate(y, w);
+        Date eDate = getEndDate(y, w);
+        String userAccount = userUtils.getUser().getOrgUserAccount();
+        List<SystemEffort> list=effortService.findEffortListByUserAndDate(userAccount,bDate,eDate);
+        List<SystemEffort> list1=new ArrayList<SystemEffort>();
+        for (SystemEffort effort : list) {
+            Date effortDate = effort.getEffortDate();
+            effort.setEffortWeek(effortDate.getDay());
+            list1.add(effort);
+        }
+        model.addAttribute("year",y);
+        model.addAttribute("week",w);
+        model.addAttribute("list",list1);
+        return "organization/diary/oneDiary.pagelet";
+    }
+
+    @RequiresPermissions("organizationDiary")
     @RequestMapping("/list/data")
     public String listData(Integer y, Integer w,
                            Model model) {
@@ -365,23 +396,17 @@ public class DiaryAction extends BaseController {
         }
         list = diaryService.findListDiarySubAndSelf(UserUtils.getUserId(), y, w);
         model.addAttribute("list", list);
-        Date bDate = getBeginDate(y, w);
-        Date eDate = getEndDate(y, w);
-        String userAccount = userUtils.getUser().getOrgUserAccount();
-        Map<String, List<SystemEffort>> map = new HashMap<String, List<SystemEffort>>();
+        Map<Integer, List<OrgDiaryDetail>> map = new HashMap<Integer, List<OrgDiaryDetail>>();
         for (OrgDiaryAndUserDO orgDiaryAndYUser : list) {
-            String userAccountFromList = orgDiaryAndYUser.getOrgUserAccount();
-            List<SystemEffort> efforts = null;
-            if (map.get(userAccount) == null) {
-                map.put(userAccountFromList, efforts);
+            List<OrgDiaryDetail> efforts = null;
+            if (map.get(orgDiaryAndYUser.getOrgDeptId()) == null) {
+                map.put(orgDiaryAndYUser.getOrgDeptId(), efforts);
             }
-            efforts = effortService.findEffortListByUserAndDate(userAccount, bDate, eDate);
-            map.put(userAccountFromList,efforts);
-            for (SystemEffort effort : efforts) {
-                Date effortDate = effort.getEffortDate();
-                Calendar cal = Calendar.getInstance();
-                cal.setTime(effortDate);
-                effort.setEffortWeek(Calendar.DAY_OF_WEEK - 1);
+            efforts=diaryService.findDetailListByDiaryList(list);
+            map.put(orgDiaryAndYUser.getOrgDeptId(),efforts);
+            for (OrgDiaryDetail orgDiaryDetail : efforts) {
+                Date effortDate = orgDiaryDetail.getOrgDetailDate();
+                orgDiaryDetail.setEffortWeek(effortDate.getDay());
             }
         }
         model.addAttribute("efforts", map);
@@ -409,8 +434,29 @@ public class DiaryAction extends BaseController {
 
     @RequiresPermissions("organizationDiary")
     @RequestMapping("/showself")
-    public String showSelf(Model model) {
+    public String showSelf(String userAccount,Model model) {
+        OrgUser user=userService.findUserByAccount(userAccount);
+        List<OrgDiaryAndUserDO> list = diaryService.findListDiaryByUserId(user.getOrgUserId());
+        Collections.sort(list);
+        model.addAttribute("list", list);
+        Map<Integer, List<OrgDiaryDetail>> map = new HashMap<Integer, List<OrgDiaryDetail>>();
+        for (OrgDiaryAndUserDO orgDiaryAndYUser : list) {
+            Integer diaryId = orgDiaryAndYUser.getOrgDiaryId();
+            List<OrgDiaryDetail> orgDiaryDetails = null;
+            if (map.get(diaryId) == null) {
+                map.put(diaryId, orgDiaryDetails);
+            }
+            orgDiaryDetails = diaryService.findDetailListByDiaryId(diaryId);
+            for (int i=0;i<orgDiaryDetails.size();i++){
+                OrgDiaryDetail orgDetail=orgDiaryDetails.get(i);
+                orgDetail.setEffortWeek(orgDetail.getOrgDetailDate().getDay());
+            }
+            map.put(diaryId, orgDiaryDetails);
+        }
+        model.addAttribute("userAccount",userAccount);
+        model.addAttribute("details", map);
         return "organization/diary/oneselfDiary";
     }
+
 
 }

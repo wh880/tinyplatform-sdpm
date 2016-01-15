@@ -158,4 +158,9 @@ public class DiaryManagerImpl implements DiaryManager {
         }
         return orgDiaryDao.findListSubordinateOneWeek(list1,year,week);
     }
+
+    @Override
+    public List<OrgDiaryDetail> findDetailListByDiaryList(List<Integer> list) {
+        return orgDiaryDetailDao.findListByDiaryList(list);
+    }
 }
