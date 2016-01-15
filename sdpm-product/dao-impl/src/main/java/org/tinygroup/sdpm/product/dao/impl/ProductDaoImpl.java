@@ -489,6 +489,12 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
         return getDslSession().fetchList(select,Product.class);
     }
 
+    @Override
+    public Product getProductWithoutGroupBy(Integer productId) {
+        Select select = selectFrom(PRODUCTTABLE).where(PRODUCTTABLE.PRODUCT_ID.eq(productId));
+        return getDslSession().fetchOneResult(select,Product.class);
+    }
+
     private Select getComplexSelect() {
 
         ProductTable subProduct = (ProductTable)PRODUCTTABLE.as("subProduct");

@@ -55,6 +55,14 @@ public interface ProjectStoryService {
     List<ProductStory> findStoryByProject(Integer projectId);
 
     /**
+     * 根据projectId和条件查询story
+     *
+     * @param projectId
+     * @return
+     */
+    List<ProductStory> findStoryByProjectAndModule(Integer projectId, ProductStory story);
+
+    /**
      * 查询需求 分页
      *
      * @param projectId

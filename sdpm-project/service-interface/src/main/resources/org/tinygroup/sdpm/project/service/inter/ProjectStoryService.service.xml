@@ -31,6 +31,13 @@
       </service-parameters>
       <service-result name="findStoryByProjectResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.product.dao.pojo.ProductStory"/>
     </service-method>
+    <service-method local-name="findStoryByProjectAndModule" service-id="findStoryByProjectAndModule" method-name="findStoryByProjectAndModule" cacheable="false" category="org.tinygroup.sdpm.project.service.inter">
+      <service-parameters>
+        <service-parameter name="projectId" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="story" type="org.tinygroup.sdpm.product.dao.pojo.ProductStory" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findStoryByProjectAndModuleResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.product.dao.pojo.ProductStory"/>
+    </service-method>
     <service-method local-name="findStoryPagerByProject" service-id="findStoryPagerByProject" method-name="findStoryPagerByProject" cacheable="false" category="org.tinygroup.sdpm.project.service.inter">
       <service-parameters>
         <service-parameter name="projectId" type="java.lang.Integer" required="false" is-array="false"/>

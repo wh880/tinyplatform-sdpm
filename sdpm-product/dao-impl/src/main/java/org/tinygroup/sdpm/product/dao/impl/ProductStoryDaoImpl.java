@@ -228,24 +228,27 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 	}
 
 
-	public List<ProductStory> getByKeys(final boolean withSpec, Integer... pk){
+	public List<ProductStory> getByKeys(final boolean withSpec,ProductStory t, Integer... pk){
+		if(t==null){
+			t = new ProductStory();
+		}
+		Select select;
+		if(withSpec){
+			select =  select(PRODUCT_STORYTABLE.ALL,
+					PRODUCT_STORY_SPECTABLE.STORY_SPEC.as("storySpec"),
+					PRODUCTTABLE.PRODUCT_NAME.as("productName")).from(PRODUCT_STORYTABLE).join(
+					leftJoin(PRODUCT_STORY_SPECTABLE,PRODUCT_STORY_SPECTABLE.STORY_ID.eq(PRODUCT_STORYTABLE.STORY_ID)),
+					leftJoin(PRODUCTTABLE,PRODUCTTABLE.PRODUCT_ID.eq(PRODUCT_STORYTABLE.PRODUCT_ID))
+			).where(and(PRODUCT_STORYTABLE.STORY_VERSION.eq(PRODUCT_STORY_SPECTABLE.STORY_VERSION),
+					PRODUCT_STORYTABLE.STORY_ID.in(pk),
+					PRODUCT_STORYTABLE.PRODUCT_ID.eq(t.getProductId()),
+					PRODUCT_STORYTABLE.MODULE_ID.eq(t.getModuleId())));
+		}else{
+			select =  selectFrom(PRODUCT_STORYTABLE).where(and(PRODUCT_STORYTABLE.STORY_ID.in(pk),
+					PRODUCT_STORYTABLE.PRODUCT_ID.eq(t.getProductId()),
+					PRODUCT_STORYTABLE.MODULE_ID.eq(t.getModuleId())));
+		}
 
-		SelectGenerateCallback<Serializable[]> callback = new SelectGenerateCallback<Serializable[]>() {
-			@SuppressWarnings("rawtypes")
-			public Select generate(Serializable[] t) {
-				if(withSpec){
-					return select(PRODUCT_STORYTABLE.ALL,
-							PRODUCT_STORY_SPECTABLE.STORY_SPEC.as("storySpec"),
-							PRODUCTTABLE.PRODUCT_NAME.as("productName")).from(PRODUCT_STORYTABLE).join(
-							leftJoin(PRODUCT_STORY_SPECTABLE,PRODUCT_STORY_SPECTABLE.STORY_ID.eq(PRODUCT_STORYTABLE.STORY_ID)),
-							leftJoin(PRODUCTTABLE,PRODUCTTABLE.PRODUCT_ID.eq(PRODUCT_STORYTABLE.PRODUCT_ID))
-					).where(and(PRODUCT_STORYTABLE.STORY_VERSION.eq(PRODUCT_STORY_SPECTABLE.STORY_VERSION),PRODUCT_STORYTABLE.STORY_ID.in(t)));
-				}
-				return selectFrom(PRODUCT_STORYTABLE).where(PRODUCT_STORYTABLE.STORY_ID.in(t));
-			}
-
-		};
-		Select select = callback.generate(pk);
 		return getDslSession().fetchList(select, ProductStory.class);
 	}
 

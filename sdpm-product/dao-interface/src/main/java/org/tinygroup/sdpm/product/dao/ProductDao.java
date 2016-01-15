@@ -48,4 +48,8 @@ public interface ProductDao extends BaseDao<Product, Integer> {
      * @return
      */
     List<Product> productInCondition(String condition, Integer limit, Integer... ids);
+    /**
+     * 无关联查询产品
+     */
+    Product getProductWithoutGroupBy(Integer productId);
 }

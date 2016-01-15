@@ -35,7 +35,7 @@ public interface ProductStoryDao extends BaseDao<ProductStory,Integer> {
 
     Integer softDelete(Integer id);
 
-    List<ProductStory> getByKeys(boolean withSpec,Integer... id);
+    List<ProductStory> getByKeys(boolean withSpec,ProductStory story,Integer... id);
 
     List<StoryCount> modelStoryCount(ProductStory story);
 
