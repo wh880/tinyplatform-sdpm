@@ -139,4 +139,15 @@ public interface UserService {
      * @return
      */
     List<OrgUser> userInCondition(String condition, Integer limit, String[] ids);
+
+    /**
+     * 查询直接下级
+     */
+    List<OrgUser> findOrgUserListSubordinate(String userId);
+
+    /**
+     * 查询直接下级与自己
+     */
+    List<OrgUser> findOrgUserListSubordinateAndSelf(String userId);
+
 }

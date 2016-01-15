@@ -24,6 +24,8 @@ import static org.tinygroup.tinysqldsl.Insert.*;
 import static org.tinygroup.tinysqldsl.Delete.*;
 import static org.tinygroup.tinysqldsl.Update.*;
 
+import static org.tinygroup.tinysqldsl.formitem.SubSelect.subSelect;
+
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -31,8 +33,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
+import org.tinygroup.sdpm.org.dao.pojo.OrgDiaryAndUserDO;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.tinysqldsl.*;
+import org.tinygroup.tinysqldsl.Delete;
+import org.tinygroup.tinysqldsl.Insert;
+import org.tinygroup.tinysqldsl.Select;
+import org.tinygroup.tinysqldsl.Update;
+import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.tinysqldsl.base.Alias;
 import org.tinygroup.tinysqldsl.base.Condition;
@@ -328,14 +336,13 @@ public class OrgDiaryDaoImpl extends TinyDslDaoSupport implements OrgDiaryDao {
         return select;
     }
 
-
     @Override
-    public OrgDiary getByTimeAndUser(String orgUserId, Integer orgDiaryYear, Integer orgDiaryWeek) {
+    public List<OrgDiary> getByTimeAndUser(String orgUserId, Integer orgDiaryYear, Integer orgDiaryWeek) {
         Select select = Select.selectFrom(ORG_DIARYTABLE).where(
                 and(ORG_DIARYTABLE.ORG_USER_ID.eq(orgUserId),
                         ORG_DIARYTABLE.ORG_DIARY_YEAR.eq(orgDiaryYear),
                         ORG_DIARYTABLE.ORG_DIARY_WEEK.eq(orgDiaryWeek)));
-        return getDslSession().fetchOneResult(select, OrgDiary.class);
+        return getDslSession().fetchList(select, OrgDiary.class);
     }
 
     @Override
@@ -346,10 +353,23 @@ public class OrgDiaryDaoImpl extends TinyDslDaoSupport implements OrgDiaryDao {
     }
 
     @Override
-    public List<OrgDiary> findListByUserId(String orgUserId) {
-        Select select = Select.selectFrom(ORG_DIARYTABLE).where(
-                ORG_DIARYTABLE.ORG_USER_ID.eq(orgUserId));
-        return getDslSession().fetchList(select, OrgDiary.class);
+    public Pager<OrgDiaryAndUserDO> findPagerByUserId(String orgUserId, Integer start, Integer limit) {
+        MysqlSelect select = MysqlSelect.select(ORG_DIARYTABLE.ALL, ORG_USERTABLE.ALL).from(ORG_DIARYTABLE, ORG_USERTABLE).
+                where(and(
+                        ORG_DIARYTABLE.ORG_USER_ID.eq(ORG_USERTABLE.ORG_USER_ID),
+                        ORG_DIARYTABLE.ORG_USER_ID.in(orgUserId)
+                ));
+        return getDslSession().fetchPage(select, start, limit, false, OrgDiaryAndUserDO.class);
+    }
+
+    @Override
+    public List<OrgDiaryAndUserDO> findListByUserId(String orgUserId) {
+        Select select = Select.select(ORG_DIARYTABLE.ALL, ORG_USERTABLE.ALL).from(ORG_DIARYTABLE, ORG_USERTABLE).
+                where(and(
+                        ORG_DIARYTABLE.ORG_USER_ID.eq(ORG_USERTABLE.ORG_USER_ID),
+                        ORG_DIARYTABLE.ORG_USER_ID.in(orgUserId)
+                ));
+        return getDslSession().fetchList(select, OrgDiaryAndUserDO.class);
     }
 
     @Override
@@ -361,7 +381,7 @@ public class OrgDiaryDaoImpl extends TinyDslDaoSupport implements OrgDiaryDao {
     }
 
     @Override
-    public List<OrgDiary> findSubordinateOneWeek(List<String> list,Integer year,Integer week) {
+    public List<OrgDiary> findSubordinateOneWeek(List<String> list, Integer year, Integer week) {
         Select select = Select.selectFrom(ORG_DIARYTABLE).
                 where(and(ORG_DIARYTABLE.ORG_USER_ID.in(list.toArray()),
                         ORG_DIARYTABLE.ORG_DIARY_YEAR.eq(year),
@@ -369,13 +389,59 @@ public class OrgDiaryDaoImpl extends TinyDslDaoSupport implements OrgDiaryDao {
         return getDslSession().fetchList(select, OrgDiary.class);
     }
 
-    public List<String> findUser(List<String> list,Integer year,Integer week){
-        Select select=Select.select(ORG_DIARYTABLE.ORG_USER_ID).from(ORG_DIARYTABLE).
-                where(and(ORG_DIARYTABLE.ORG_DIARY_YEAR.eq(year),
-                        ORG_DIARYTABLE.ORG_DIARY_WEEK.eq(week),
-                        ORG_DIARYTABLE.ORG_USER_ID.in(list.toArray())
-                ));
-        return getDslSession().fetchList(select,String.class);
+    public Pager<OrgDiaryAndUserDO> findPagerSubordinateOneWeek(List<String> list, Integer year, Integer week, Integer start, Integer limit) {
+        MysqlSelect select = MysqlSelect.select(ORG_DIARYTABLE.ALL, ORG_USERTABLE.ALL).from(ORG_DIARYTABLE, ORG_USERTABLE).
+                where(and(
+                        ORG_DIARYTABLE.ORG_USER_ID.eq(ORG_USERTABLE.ORG_USER_ID),
+                        ORG_DIARYTABLE.ORG_USER_ID.in(list.toArray()),
+                        ORG_DIARYTABLE.ORG_DIARY_YEAR.eq(year),
+                        ORG_DIARYTABLE.ORG_DIARY_WEEK.eq(week)));
+        return getDslSession().fetchPage(select, start, limit, false, OrgDiaryAndUserDO.class);
     }
 
+    public List<OrgUser> findUser(String userId, Integer year, Integer week) {
+        Select select = selectFrom(ORG_USERTABLE).
+                where(ORG_USERTABLE.ORG_USER_ID.inExpression(subSelect(selectFrom(ORG_USERTABLE).where(
+                        and(
+                                ORG_USERTABLE.ORG_USER_LEADER.eq(userId),
+                                ORG_USERTABLE.ORG_USER_DELETED.eq(OrgUser.DELETE_NO),
+                                ORG_USERTABLE.ORG_USER_ID.notInExpression
+                                        (subSelect(select(ORG_DIARYTABLE.ORG_USER_ID).
+                                                from(ORG_DIARYTABLE).
+                                                where(ORG_DIARYTABLE.ORG_USER_ID.
+                                                        inExpression(subSelect(selectFrom(ORG_USERTABLE).
+                                                                where(and(ORG_USERTABLE.ORG_USER_LEADER.eq(userId),
+                                                                        ORG_USERTABLE.ORG_USER_DELETED.eq(OrgUser.DELETE_NO)))))
+                                                ))))
+                ))));
+        return getDslSession().fetchList(select, OrgUser.class);
+    }
+
+    @Override
+    public List<OrgDiary> findDiaryByUserLatest(String userId, Integer year, Integer week) {
+        Select select = Select.selectFrom(ORG_DIARYTABLE).where(and(
+                ORG_DIARYTABLE.ORG_USER_ID.eq(userId),
+                ORG_DIARYTABLE.ORG_DIARY_ID.eq(
+                        subSelect(select(ORG_DIARYTABLE.ORG_DIARY_ID.max()).
+                                from(ORG_DIARYTABLE).where(
+                                and(
+                                        ORG_DIARYTABLE.ORG_USER_ID.eq(userId),
+                                        ORG_DIARYTABLE.ORG_DIARY_YEAR.eq(year),
+                                        ORG_DIARYTABLE.ORG_DIARY_WEEK.eq(week)
+                                )
+                        ))
+                )));
+        return getDslSession().fetchList(select, OrgDiary.class);
+    }
+
+    @Override
+    public List<OrgDiaryAndUserDO> findListSubordinateOneWeek(List<String> list, Integer year, Integer week) {
+        Select select = Select.select(ORG_DIARYTABLE.ALL, ORG_USERTABLE.ALL).from(ORG_DIARYTABLE, ORG_USERTABLE).
+                where(and(
+                        ORG_DIARYTABLE.ORG_USER_ID.eq(ORG_USERTABLE.ORG_USER_ID),
+                        ORG_DIARYTABLE.ORG_USER_ID.in(list.toArray()),
+                        ORG_DIARYTABLE.ORG_DIARY_YEAR.eq(year),
+                        ORG_DIARYTABLE.ORG_DIARY_WEEK.eq(week)));
+        return getDslSession().fetchList(select, OrgDiaryAndUserDO.class);
+    }
 }

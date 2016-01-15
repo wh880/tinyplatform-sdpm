@@ -163,4 +163,14 @@ public class UserServiceImpl implements UserService {
     public List<OrgUser> userInCondition(String condition, Integer limit, String[] ids) {
         return userManager.userInCondition(condition, limit, ids);
     }
+
+    @Override
+    public List<OrgUser> findOrgUserListSubordinate(String userId) {
+        return userManager.getDirectStaffByLeader(userId);
+    }
+
+    @Override
+    public List<OrgUser> findOrgUserListSubordinateAndSelf(String userId) {
+        return userManager.getDirectStaffByLeaderAndSelf(userId);
+    }
 }
