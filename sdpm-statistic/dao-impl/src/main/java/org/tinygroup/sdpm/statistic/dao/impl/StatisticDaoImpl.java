@@ -33,8 +33,7 @@ import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.or;
 public class StatisticDaoImpl extends TinyDslDaoSupport implements StatisticDao {
 
     public List<StatisticOrg> findList(StatisticOrg statisticOrg) {
-        // TODO Auto-generated method stub
-        Select select = MysqlSelect.select(PROJECTTABLE.ALL,
+        Select select = MysqlSelect.select(PROJECTTABLE.PROJECT_ID,PROJECTTABLE.PROJECT_NAME,
                 FragmentSelectItemSql.fragmentSelect("SUM(project_task.task_estimate) as estimate"),
                 FragmentSelectItemSql.fragmentSelect("SUM(project_task.task_consumed) as consumed"),
                 FragmentSelectItemSql.fragmentSelect("SUM(project_task.task_consumed)/(SUM(project_task.task_consumed)+SUM(project_task.task_left)) as percent"),
@@ -44,7 +43,7 @@ public class StatisticDaoImpl extends TinyDslDaoSupport implements StatisticDao 
                         Join.leftJoin(PROJECT_TASKTABLE,
                                 PROJECT_TASKTABLE.TASK_PROJECT.equal(PROJECTTABLE.PROJECT_ID)))
                 .where(PROJECTTABLE.PROJECT_ID.eq(statisticOrg.getProjectId()))
-                .groupBy(PROJECTTABLE.PROJECT_ID);
+                .groupBy(PROJECTTABLE.PROJECT_ID,PROJECTTABLE.PROJECT_NAME);
         return getDslSession().fetchList(select, StatisticOrg.class);
     }
 
@@ -65,7 +64,7 @@ public class StatisticDaoImpl extends TinyDslDaoSupport implements StatisticDao 
         if (projectTaskSta.getAssignedTo() == null) {
             return null;
         }
-        Select select = MysqlSelect.select(FragmentSelectItemSql.fragmentSelect("project_task.task_id AS taskId," +
+        Select select = MysqlSelect.select(PROJECTTABLE.PROJECT_ID,FragmentSelectItemSql.fragmentSelect("project_task.task_id AS taskId," +
                 "project.project_name AS projectName," +
                 "project_task.task_assigned_to AS assignedTo," +
                 "COUNT(project_task.task_id) AS taskNum," +
@@ -75,7 +74,7 @@ public class StatisticDaoImpl extends TinyDslDaoSupport implements StatisticDao 
                 and(
                         condition,
                         PROJECT_TASKTABLE.TASK_ASSIGNED_TO.eq(projectTaskSta.getAssignedTo()))
-        ).groupBy(PROJECTTABLE.PROJECT_ID);
+        ).groupBy(PROJECTTABLE.PROJECT_ID,PROJECT_TASKTABLE.TASK_ID);
         return getDslSession().fetchList(select, ProjectTaskSta.class);
     }
 
@@ -128,11 +127,11 @@ public class StatisticDaoImpl extends TinyDslDaoSupport implements StatisticDao 
         if (qualityBugCall.getUserId() == null) {
             return null;
         }
-        Select select = MysqlSelect.select(FragmentSelectItemSql.fragmentSelect("product.product_name As 'productName'," +
+        Select select = MysqlSelect.select(QUALITY_BUGTABLE.BUG_ASSIGNED_TO,FragmentSelectItemSql.fragmentSelect("product.product_name As 'productName'," +
                 "COUNT(quality_bug.product_id) AS 'productBugNum'")).from(PRODUCTTABLE).join(
                 Join.leftJoin(QUALITY_BUGTABLE, QUALITY_BUGTABLE.PRODUCT_ID.eq(PRODUCTTABLE.PRODUCT_ID)),
                 Join.leftJoin(ORG_USERTABLE, QUALITY_BUGTABLE.BUG_ASSIGNED_TO.eq(ORG_USERTABLE.ORG_USER_ID))).where(
-                ORG_USERTABLE.ORG_USER_ID.eq(qualityBugCall.getUserId())).groupBy(QUALITY_BUGTABLE.BUG_ASSIGNED_TO);
+                ORG_USERTABLE.ORG_USER_ID.eq(qualityBugCall.getUserId())).groupBy(QUALITY_BUGTABLE.BUG_ASSIGNED_TO,PRODUCTTABLE.PRODUCT_NAME);
         return getDslSession().fetchList(select, QualityBugCall.class);
     }
 
@@ -146,10 +145,10 @@ public class StatisticDaoImpl extends TinyDslDaoSupport implements StatisticDao 
         if (assigned == null) {
             assigned = new Assigned();
         }
-        Select select = MysqlSelect.select(FragmentSelectItemSql.fragmentSelect("org_user.org_user_id As 'userId'," +
+        Select select = MysqlSelect.select(QUALITY_BUGTABLE.BUG_ASSIGNED_TO,FragmentSelectItemSql.fragmentSelect("org_user.org_user_id As 'userId'," +
                 "COUNT(quality_bug.bug_id) As 'bugNum'")).from(ORG_USERTABLE).join(Join.leftJoin(
                 QUALITY_BUGTABLE, ORG_USERTABLE.ORG_USER_ID.eq(QUALITY_BUGTABLE.BUG_ASSIGNED_TO))).where(
-                ORG_USERTABLE.ORG_USER_ID.eq(assigned.getUserId())).groupBy(QUALITY_BUGTABLE.BUG_ASSIGNED_TO);
+                ORG_USERTABLE.ORG_USER_ID.eq(assigned.getUserId())).groupBy(QUALITY_BUGTABLE.BUG_ASSIGNED_TO,ORG_USERTABLE.ORG_USER_ID);
         return getDslSession().fetchList(select, Assigned.class);
     }
 
@@ -167,7 +166,7 @@ public class StatisticDaoImpl extends TinyDslDaoSupport implements StatisticDao 
         if (productProject == null) {
             productProject = new ProductProject();
         }
-        Select select = MysqlSelect.select(FragmentSelectItemSql.fragmentSelect(
+        Select select = MysqlSelect.select(PRODUCTTABLE.PRODUCT_ID,FragmentSelectItemSql.fragmentSelect(
                 "count(distinct(project_product.project_id)) As projectNum ,sum(project_task.task_consumed) As consumedSum"),
                 PRODUCTTABLE.PRODUCT_NAME.as("productName")).from(PRODUCTTABLE).join(
                 Join.leftJoin(PROJECT_PRODUCTTABLE, PROJECT_PRODUCTTABLE.PRODUCT_ID.eq(PRODUCTTABLE.PRODUCT_ID)),

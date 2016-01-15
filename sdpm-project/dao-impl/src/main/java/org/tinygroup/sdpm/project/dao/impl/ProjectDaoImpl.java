@@ -59,7 +59,8 @@ public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
         }
         return getDslTemplate().queryPager(start, limit, project, false, new SelectGenerateCallback<Project>() {
             public Select generate(Project t) {
-                Select select = MysqlSelect.select(PROJECTTABLE.ALL,
+                Select select = MysqlSelect.select(PROJECTTABLE.PROJECT_ID,PROJECTTABLE.PROJECT_NAME,
+                        PROJECTTABLE.PROJECT_CODE,PROJECTTABLE.PROJECT_CLOSE_DATE,PROJECTTABLE.PROJECT_STATUS,
                         PROJECT_TASKTABLE.TASK_ESTIMATE.sum().as("estimate"),
                         PROJECT_TASKTABLE.TASK_CONSUMED.sum().as("consumed"),
                         PROJECT_TASKTABLE.TASK_LEFT.sum().as("allLeft"),
@@ -67,7 +68,7 @@ public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
                 ).from(PROJECTTABLE)
                         .join(Join.leftJoin(PROJECT_TASKTABLE, PROJECT_TASKTABLE.TASK_PROJECT.eq(PROJECTTABLE.PROJECT_ID)))
                         .where(and(PROJECTTABLE.PROJECT_ID.in(projectIds), PROJECTTABLE.PROJECT_ID.eq(t.getProjectId())))
-                        .groupBy(PROJECTTABLE.PROJECT_ID);
+                        .groupBy(PROJECTTABLE.PROJECT_ID,PROJECTTABLE.PROJECT_NAME,PROJECTTABLE.PROJECT_CODE,PROJECTTABLE.PROJECT_CLOSE_DATE,PROJECTTABLE.PROJECT_STATUS);
                 return addOrderByElements(select, args);
             }
         });
@@ -103,7 +104,8 @@ public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
         if (project == null) {
             project = new Project();
         }
-        Select select = MysqlSelect.select(PROJECTTABLE.ALL,
+        Select select = MysqlSelect.select(PROJECTTABLE.PROJECT_ID,PROJECTTABLE.PROJECT_NAME,
+                PROJECTTABLE.PROJECT_CODE,PROJECTTABLE.PROJECT_CLOSE_DATE,PROJECTTABLE.PROJECT_STATUS,
                 PROJECT_TASKTABLE.TASK_ESTIMATE.sum().as("estimate"),
                 PROJECT_TASKTABLE.TASK_CONSUMED.sum().as("consumed"),
                 PROJECT_TASKTABLE.TASK_LEFT.sum().as("allLeft"),
@@ -112,7 +114,7 @@ public class ProjectDaoImpl extends TinyDslDaoSupport implements ProjectDao {
                 Join.leftJoin(PROJECT_TASKTABLE,
                         PROJECT_TASKTABLE.TASK_PROJECT.equal(PROJECTTABLE.PROJECT_ID)))
                 .where(and(condition, PROJECTTABLE.PROJECT_DELETED.eq(Project.DELETE_NO), PROJECTTABLE.PROJECT_ID.eq(project.getProjectId())))
-                .groupBy(PROJECTTABLE.PROJECT_ID);
+                .groupBy(PROJECTTABLE.PROJECT_ID,PROJECTTABLE.PROJECT_NAME,PROJECTTABLE.PROJECT_CODE,PROJECTTABLE.PROJECT_CLOSE_DATE,PROJECTTABLE.PROJECT_STATUS);
         return getDslSession().fetchList(select, Project.class);
     }
 
