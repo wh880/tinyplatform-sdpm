@@ -31,7 +31,8 @@
         <application-processor bean="cepCoreProcessor"></application-processor>
 
         <application-processor bean="fileResolverProcessor"/>
-        <application-processor bean="serviceApplicationProcessor"/>
+        <!--发布服务-->
+        <!--<application-processor bean="serviceApplicationProcessor"/>-->
         <application-processor bean="tinyListenerProcessor"/>
         <!--<application-processor bean="fileMonitorProcessor"/>-->
         <application-processor bean="tinyTemplateConfigProcessor"/>
@@ -106,7 +107,7 @@
     <cep-configuration node-name="arNode">
         <operator name="arNode"></operator>
         <scs>
-            <sc host="127.0.0.1" port="9191"></sc>
+            <sc host="192.168.48.111" port="9191"></sc>
         </scs>
         <params>
             <param name="request-time-out" value="15000" />

@@ -3,6 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.tinygroup</groupId>
 	<artifactId>sdpm-as2</artifactId>
+	<packaging>war</packaging>
 
 	<parent>
 		<artifactId>sdpm</artifactId>
@@ -11,6 +12,7 @@
 	</parent>
 
 	<dependencies>
+
 		<dependency>
 			<groupId>org.tinygroup</groupId>
 			<artifactId>sdpm-base-as</artifactId>

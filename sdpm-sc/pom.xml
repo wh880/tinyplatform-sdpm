@@ -3,6 +3,8 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.tinygroup</groupId>
     <artifactId>sdpm-sc</artifactId>
+    <packaging>war</packaging>
+
     <parent>
         <groupId>org.tinygroup</groupId>
         <artifactId>sdpm</artifactId>

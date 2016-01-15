@@ -22,7 +22,7 @@
 
     <bean id="asNode" scope="singleton"
           class="org.tinygroup.cepcoremutiremoteimpl.node.NodeOperator">
-        <property name="localHost" value="127.0.0.1"></property>
+        <property name="localHost" value="192.168.48.113"></property>
         <property name="localPort" value="9022"></property>
         <property name="weight" value="20"></property>
     </bean>
