@@ -14,14 +14,14 @@
         <ol class="logList-detailList">
         <li>#@shadeStandard("4" "40%")
                 <input type="checkbox" id=${var?.effortId} value=${var?.effortId}
-                   name="idCheck" #for(var1:details) #if(var1?.orgDetailContent==var?.effortWork) checked="checked"
-        #end#end><span class="tocommittime">周${var?.effortWeek}:</span><span>${var?.effortAccount}--${var?.effortWork}
+                       name="idCheck" #for(var1:details) #if(var1?.orgDetailContent==var?.effortWork) checked="checked"
+            #end#end><span class="tocommittime">周${var?.effortWeek}:</span><span>${var?.effortAccount}--${var?.effortWork}
                     <a href="#" target="_blank">ID：${var?.effortId}</a></span>#end</li>
     </ol>
     #end
-    </div>
 </div>
-#end
+</div>
+
 <input type="hidden" id="efforts" name="efforts">
 <input type="hidden" id="y" name="y" value=${year}>
 <input type="hidden" id="w" name="w" value=${week}>
@@ -33,6 +33,7 @@
         #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")取消#end
     </div>
 </div>
+#end
 #end
 #end
 

@@ -54,12 +54,12 @@ public class DiaryAction extends BaseController {
     @RequestMapping("/add")
     public Map add(String summary, Integer y, Integer w, String efforts) {
         String[] effortIds = null;
-        if (efforts != null) {
-            effortIds = efforts.split(",");
-        }
         List<Integer> idsList = new ArrayList<Integer>();
-        for (int i = 0; i < effortIds.length; i++) {
-            idsList.add(Integer.parseInt(effortIds[i]));
+        if (!StringUtil.isBlank(efforts)) {
+            effortIds = efforts.split(",");
+            for (int i = 0; i < effortIds.length; i++) {
+                idsList.add(Integer.parseInt(effortIds[i]));
+            }
         }
 
         String userId = userUtils.getUser().getOrgUserId();
