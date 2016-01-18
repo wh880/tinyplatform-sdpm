@@ -1,4 +1,61 @@
-//配合sdpmItem校验
+(function($){
+    $.fn.queryFor = function(sel){
+        var items = [];
+        var name = $(this).attr("name");
+        if(!name){
+            name=$(this).attr("id");
+        }
+        if(!name){
+            name=$(this).attr("action");
+        }
+        var sel=$(sel);
+        var _init = function () {
+            var v = window.localStorage.getItem(name);
+            if (v)
+                items = $.parseJSON(v);
+        }
+        this.list=function(){
+            return items;
+        }
+        var _initSel=function(){
+            sel.html('<option value="none">**查询历史**</option>');
+            for(var i= 0,l=items.length;i<l;i++){
+                if(items[i]&&items[i]["text"]){
+                    sel.append($("<option>").attr("value",i).html(items[i].text));
+                }
+            }
+        }
+        this.add = function (key, val) {
+            items.push({text: key, value: val});
+            window.localStorage.setItem(name, JSON.stringify(items));
+            _initSel();
+        }
+        this.getVal=function(key){
+            if(!items) return 0;
+            return items[key]["value"]
+        }
+        this.delete=function(key){
+            if(items[key]){
+                delete items[key];
+                window.localStorage.setItem(name, JSON.stringify(items));
+                _initSel();
+            }
+
+        }
+        this.clear=function(key){
+            window.localStorage.setItem(name, JSON.stringify(items));
+        }
+        _init();
+        _initSel();
+        return this;
+    }
+})(jQuery);
+
+
+function resetForm(_this){
+    $(_this).closest("form").get(0).reset();
+}
+
 $(function () {
     $("#tinypagecontent").on("click", "[data-removeid]", function (e) {
         var url = $(this).attr("href") ? $(this).attr("href") : window.location.href;
@@ -113,4 +170,32 @@ function ajaxRead(id, toName, opKey, opvalue, url, value,isBuild) {
 
     });
 
+}
+
+
+function ajaxLoadContent(body,url,o_data){
+    $.ajax({
+        url:url,
+        type:"get",
+        data:o_data,
+        dataType:"html",
+        beforeSend: function() {
+            $("html").animate({scrollTop: 0},"fast");
+            time=setTimeout(function(){
+                body.append('<h1 class="ajax-loading-animation tinyLoadingContent" ><i class="fa fa-cog fa-spin"></i> 加载...</h1>');
+            },150);
+        },
+        success: function(a) {
+            if(time) clearTimeout(time);
+            body.css({
+                opacity: "0.0"
+            }).html(a).delay(50).animate({
+                    opacity: "1.0"
+                },
+                300);
+        },
+        error: function() {
+            body.html('<h4 class="ajax-loading-error"><i class="fa fa-warning txt-color-orangeDark"></i> Error 404! Page not found.</h4>')
+        }
+    })
 }

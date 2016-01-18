@@ -76,7 +76,7 @@ public class ProjectTeamTable extends Table {
     public final Column TEAM_HOURS = new Column(this, "team_hours");
 
 
-    private ProjectTeamTable() {
+    public ProjectTeamTable() {
         super("project_team");
     }
 

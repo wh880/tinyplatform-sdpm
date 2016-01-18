@@ -120,7 +120,7 @@ public class ProductPlanDaoImpl extends TinyDslDaoSupport implements ProductPlan
                 if (isOverdue) {
                     condition = and(PRODUCT_PLANTABLE.PLAN_END_DATE.isNotNull(), PRODUCT_PLANTABLE.PLAN_END_DATE.lte(new Date()));
                 }
-                Select select = select(FragmentSql.fragmentSelect("product_plan.*,SUM(CASE WHEN product_story.`story_status`=1 THEN 1 ELSE 0 END) draft," +
+                Select select = select(PRODUCT_PLANTABLE.PLAN_BEGIN_DATE,PRODUCT_PLANTABLE.PLAN_END_DATE,FragmentSql.fragmentSelect("product_plan.plan_id,product_plan.plan_name,SUM(CASE WHEN product_story.`story_status`=1 THEN 1 ELSE 0 END) draft," +
                         "SUM(CASE WHEN product_story.`story_status`=2 THEN 1 ELSE 0 END) active," +
                         "SUM(CASE WHEN product_story.`story_status`=3 THEN 1 ELSE 0 END) `change`," +
                         "SUM(CASE WHEN product_story.`story_status`=4 THEN 1 ELSE 0 END) `close`"
@@ -133,7 +133,7 @@ public class ProductPlanDaoImpl extends TinyDslDaoSupport implements ProductPlan
                                 PRODUCT_PLANTABLE.PLAN_SPEC.eq(t.getPlanSpec()),
                                 PRODUCT_PLANTABLE.PLAN_BEGIN_DATE.eq(t.getPlanBeginDate()),
                                 PRODUCT_PLANTABLE.PLAN_END_DATE.eq(t.getPlanEndDate()),
-                                PRODUCT_PLANTABLE.DELETED.eq(t.getDeleted()))).groupBy(PRODUCT_PLANTABLE.PLAN_ID);
+                                PRODUCT_PLANTABLE.DELETED.eq(t.getDeleted()))).groupBy(PRODUCT_PLANTABLE.PLAN_ID,PRODUCT_PLANTABLE.PLAN_NAME,PRODUCT_PLANTABLE.PLAN_BEGIN_DATE,PRODUCT_PLANTABLE.PLAN_END_DATE);
                 return addOrderByElements(select, orderArgs);
             }
         });

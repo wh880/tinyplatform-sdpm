@@ -101,7 +101,13 @@ public class StoryManagerImpl implements StoryManager {
 
     public List<ProductStory> findList(boolean storySpec,Integer... storyId) {
         if(storyId==null||storyId.length==0)return new ArrayList<ProductStory>();
-        return productStoryDao.getByKeys(storySpec,storyId);
+        return productStoryDao.getByKeys(storySpec,null,storyId);
+    }
+
+    @Override
+    public List<ProductStory> findList(boolean withSpec, ProductStory story, Integer... storyId) {
+        if(storyId==null||storyId.length==0)return new ArrayList<ProductStory>();
+        return productStoryDao.getByKeys(withSpec,story,storyId);
     }
 
     public List<StoryCount> productStoryCount(ProductStory story) {

@@ -159,4 +159,5 @@
   <standard-field id="327bb46ee3d24ced89d5bb2f8c852ff6" name="taskrelation_action" title="动作" business-type-id="b6a9bc04774b40859a7dd8c6fd52a629">
     <description>0-才能开始，1-才能完成</description>
   </standard-field>
+  <standard-field id="eabdae96b60940a8849ea32169571b90" name="task_relation_bug" title="Bug关联任务" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
 </standard-fields>

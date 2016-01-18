@@ -1,3 +1,5 @@
+
+
 <form method="get" action="" id="${taskTableId}form"
       class="form-condensed searchform">
     <div class="hide">
@@ -34,7 +36,7 @@
         <select id="taskTypetemp">
             <option value="" selected="selected"></option>
 			#foreach(p : getDict("taskType"))
-            <option value="${p.value}">${p.text}</option>
+                <option value="${p.value}">${p.text}</option>
 			#end
         </select>
 
@@ -125,26 +127,15 @@
                     </tbody>
                 </table>
             </td>
-            <td class="w-180px">
+            <td class="form-inline">
                 <div class="btn-group">
                     <button type="submit" class="btn btn-submit btn-primary btn-sm">搜索</button>
-				#*   <button type="button" onclick="resetForm(this)" class="btn btn-sm">重置</button>
-                   <button type="button" onclick="resetForm(this)" class="btn btn-sm">保存</button>*#
-                </div>
-            </td>
-            <td>
-                <div style="width:105px;margin-top:3px;">
-					#@Tselect2F()
-						#@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                            <option value="CRM">我的查询</option>
-                            <option value="P2P">P2P系统</option>
-                            <option value="o2o">o2o系统</option>
-						#end
-					##填写任意内容，侦听需重新填加 A侦听已内置
-						#@Tselect2Fix()<a href="#" class="r ">增加</a><a href="#">全部</a>#end
+                    <button type="button" onclick="resetForm(this)" class="btn btn-sm">重置</button>
+					#@saveFormHistory()
 					#end
                 </div>
             </td>
+
         </tr>
         </tbody>
     </table>
@@ -153,61 +144,62 @@
         <a id="searchmore" href="javascript:void(0);"><i class="icon-double-angle-down icon-2x"></i></a>
         <a id="searchlite" href="javascript:void(0);"><i class="icon-double-angle-up icon-2x"></i></a>
     </div>
+
 </form>
 
 <script type="text/javascript">
-<!--
-$(function(){
-	$("#showsearchmore").click(function(){
-		$("#${taskTableId}form").toggleClass("showmore");
-	});
-	$("#searchmore").click(function(){
-		$("#searchlite").css("display","block");
-		$(this).hide();
-		$("#searchbox5,#searchbox6,#searchbox2,#searchbox3").show();
-	});
-	$("#searchlite").click(function(){
-		$("#searchmore").css("display","block");
-		$(this).hide();
-		$("#searchbox5,#searchbox6,#searchbox2,#searchbox3").hide();
-	});
-	var itemlist=[]
-	itemlist.push({
-		"name":"taskName",
-		"title":"任务名称",
-		"operator":"include",
-		"value":"text"
-	});
-	itemlist.push({
-		"name":"taskNo",
-		"title":"编号",
-		"operator":"=",
-		"value":"text"
-	});
-	itemlist.push({
-		"name":"status",
-		"title":"任务状态",
-		"operator":"=",
-		"value":"status"
-	});
-	itemlist.push({
-		"name":"taskDesc",
-		"title":"任务描述",
-		"operator":"include",
-		"value":"text"
-	});
-	itemlist.push({
-		"name":"taskAssignedTo",
-		"title":"指派给",
-		"operator":"=",
-		"value":"user"
-	});
-	itemlist.push({
-		"name":"taskPri",
-		"title":"优先级",
-		"operator":"=",
-		"value":"pri"
-	});
+    <!--
+    $(function(){
+        $("#showsearchmore").click(function(){
+            $("#${taskTableId}form").toggleClass("showmore");
+        });
+        $("#searchmore").click(function(){
+            $("#searchlite").css("display","block");
+            $(this).hide();
+            $("#searchbox5,#searchbox6,#searchbox2,#searchbox3").show();
+        });
+        $("#searchlite").click(function(){
+            $("#searchmore").css("display","block");
+            $(this).hide();
+            $("#searchbox5,#searchbox6,#searchbox2,#searchbox3").hide();
+        });
+        var itemlist=[]
+        itemlist.push({
+            "name":"taskName",
+            "title":"任务名称",
+            "operator":"include",
+            "value":"text"
+        });
+        itemlist.push({
+            "name":"taskNo",
+            "title":"编号",
+            "operator":"=",
+            "value":"text"
+        });
+        itemlist.push({
+            "name":"taskStatus",
+            "title":"任务状态",
+            "operator":"=",
+            "value":"status"
+        });
+        itemlist.push({
+            "name":"taskDesc",
+            "title":"任务描述",
+            "operator":"include",
+            "value":"text"
+        });
+        itemlist.push({
+            "name":"taskAssignedTo",
+            "title":"指派给",
+            "operator":"=",
+            "value":"user"
+        });
+        itemlist.push({
+            "name":"taskPri",
+            "title":"优先级",
+            "operator":"=",
+            "value":"pri"
+        });
 //	itemlist.push({
 //		"name":"project",
 //		"title":"所属项目",
@@ -220,175 +212,176 @@ $(function(){
 //		"operator":"=",
 //		"value":"text"
 //	});
-	itemlist.push({
-		"name":"taskEstimate",
-		"title":"最初预计",
-		"operator":"=",
-		"value":"text"
-	});
-	itemlist.push({
-		"name":"taskLeft",
-		"title":"预计剩余",
-		"operator":"=",
-		"value":"text"
-	});
-	itemlist.push({
-		"name":"taskConsumed",
-		"title":"总消耗",
-		"operator":"=",
-		"value":"text"
-	});
-	itemlist.push({
-		"name":"taskType",
-		"title":"任务类型",
-		"operator":"=",
-		"value":"text"
-	});
-	itemlist.push({
-		"name":"taskOpenBy",
-		"title":"由谁创建",
-		"operator":"=",
-		"value":"user"
-	});
-	itemlist.push({
-		"name":"taskFinishedBy",
-		"title":"由谁完成",
-		"operator":"=",
-		"value":"user"
-	});
-	itemlist.push({
-		"name":"taskClosedBy",
-		"title":"由谁关闭",
-		"operator":"=",
-		"value":"user"
-	});
-	itemlist.push({
-		"name":"taskLastEditedBy",
-		"title":"最后修改",
-		"operator":"=",
-		"value":"user"
-	});
-	itemlist.push({
-		"name":"taskMailto",
-		"title":"抄送给",
-		"operator":"=",
-		"value":"user"
-	});
-	itemlist.push({
-		"name":"taskOpenedDate",
-		"title":"创建日期",
-		"operator":"=",
-		"value":"date"
-	});
-	itemlist.push({
-		"name":"taskDeadLine",
-		"title":"截止日期",
-		"operator":"=",
-		"value":"date"
-	});
-	itemlist.push({
-		"name":"taskEstStared",
-		"title":"预计开始",
-		"operator":"=",
-		"value":"date"
-	});
-	itemlist.push({
-		"name":"taskRealStarted",
-		"title":"实际开始",
-		"operator":"=",
-		"value":"date"
-	});
-	itemlist.push({
-		"name":"taskAssignedDate",
-		"title":"指派日期",
-		"operator":"=",
-		"value":"date"
-	});
-	itemlist.push({
-		"name":"taskFinishedDate",
-		"title":"完成时间",
-		"operator":"=",
-		"value":"date"
-	});
-	itemlist.push({
-		"name":"taskCloseDate",
-		"title":"关闭时间",
-		"operator":"=",
-		"value":"date"
-	});
-	itemlist.push({
-		"name":"taskCanceledDate",
-		"title":"取消时间",
-		"operator":"=",
-		"value":"date"
-	});
-	itemlist.push({
-		"name":"taskLastEditedDate",
-		"title":"最后修改日期",
-		"operator":"=",
-		"value":"date"
-	});
-    function setValueBox(index,itemIndex){
-        $("#operator"+itemIndex).val(itemlist[index]["operator"]);
-        var sIndex = itemIndex-1;
-        switch(itemlist[index]["value"]){
-            case "text":
-                $("#valueBox"+itemIndex).html('<input type="text" name="infos['+sIndex+'].value" id="value'+itemIndex+'" value="" class="form-control">');
-                break;
-            case "user":
-                $("#valueBox"+itemIndex).html($('<select name="infos['+sIndex+'].value" id="value'+itemIndex+'" class="form-control">').html($("#usertemp").html()));
-                break;
-            case "pri":
-                $("#valueBox"+itemIndex).html($('<select name="infos['+sIndex+'].value" id="value'+itemIndex+'" class="form-control">').html($("#pritemp").html()));
-                break;
-            case "status":
-                $("#valueBox"+itemIndex).html($('<select name="infos['+sIndex+'].value" id="value'+itemIndex+'" class="form-control">').html($("#statustemp").html()));
-                break;
-            case "date":
-                $("#valueBox"+itemIndex).html('<input type="text" name="infos['+sIndex+'].value" id="value'+itemIndex+'" value="" class="form-control dateinput">');
-                break;
-            case "win":
-                $("#valueBox"+itemIndex).html($('<select name="infos['+sIndex+'].value" id="value'+itemIndex+'" class="form-control">').html($("#wintemp").html()));
-                break;
-            case "bugtype":
-                $("#valueBox"+itemIndex).html($('<select name="infos['+sIndex+'].value" id="value'+itemIndex+'" class="form-control">').html($("#bugtypetemp").html()));
-                break;
-            case "con":
-                $("#valueBox"+itemIndex).html($('<select name="infos['+sIndex+'].value" id="value'+itemIndex+'" class="form-control">').html($("#contemp").html()));
-                break;
-        }
-    }
-    $("#field1,#field2,#field3,#field4,#field5,#field6").each(function(index){
-        $(this).empty();
-        var option;
-        for(var i=0;i<itemlist.length;i++){
-            option = $("<option>").val(itemlist[i]["name"]).text(itemlist[i]["title"]);
-            $(this).append(option);
-        }
-        $(this).val(itemlist[index]["name"]);
-        $("#operator"+(index+1)).html($("#operatortemp").html());
-        setValueBox(index,index+1);
-        $(this).on("change",function(){
-            for(var i=0;i<itemlist.length;i++){
-                if(itemlist[i]["name"]==$(this).val()){
-                    setValueBox(i,$(this).attr("id").substr(-1));
+        itemlist.push({
+            "name":"taskEstimate",
+            "title":"最初预计",
+            "operator":"=",
+            "value":"text"
+        });
+        itemlist.push({
+            "name":"taskLeft",
+            "title":"预计剩余",
+            "operator":"=",
+            "value":"text"
+        });
+        itemlist.push({
+            "name":"taskConsumed",
+            "title":"总消耗",
+            "operator":"=",
+            "value":"text"
+        });
+        itemlist.push({
+            "name":"taskType",
+            "title":"任务类型",
+            "operator":"=",
+            "value":"text"
+        });
+        itemlist.push({
+            "name":"taskOpenBy",
+            "title":"由谁创建",
+            "operator":"=",
+            "value":"user"
+        });
+        itemlist.push({
+            "name":"taskFinishedBy",
+            "title":"由谁完成",
+            "operator":"=",
+            "value":"user"
+        });
+        itemlist.push({
+            "name":"taskClosedBy",
+            "title":"由谁关闭",
+            "operator":"=",
+            "value":"user"
+        });
+        itemlist.push({
+            "name":"taskLastEditedBy",
+            "title":"最后修改",
+            "operator":"=",
+            "value":"user"
+        });
+        itemlist.push({
+            "name":"taskMailto",
+            "title":"抄送给",
+            "operator":"=",
+            "value":"user"
+        });
+        itemlist.push({
+            "name":"taskOpenedDate",
+            "title":"创建日期",
+            "operator":"=",
+            "value":"date"
+        });
+        itemlist.push({
+            "name":"taskDeadLine",
+            "title":"截止日期",
+            "operator":"=",
+            "value":"date"
+        });
+        itemlist.push({
+            "name":"taskEstStared",
+            "title":"预计开始",
+            "operator":"=",
+            "value":"date"
+        });
+        itemlist.push({
+            "name":"taskRealStarted",
+            "title":"实际开始",
+            "operator":"=",
+            "value":"date"
+        });
+        itemlist.push({
+            "name":"taskAssignedDate",
+            "title":"指派日期",
+            "operator":"=",
+            "value":"date"
+        });
+        itemlist.push({
+            "name":"taskFinishedDate",
+            "title":"完成时间",
+            "operator":"=",
+            "value":"date"
+        });
+        itemlist.push({
+            "name":"taskCloseDate",
+            "title":"关闭时间",
+            "operator":"=",
+            "value":"date"
+        });
+        itemlist.push({
+            "name":"taskCanceledDate",
+            "title":"取消时间",
+            "operator":"=",
+            "value":"date"
+        });
+        itemlist.push({
+            "name":"taskLastEditedDate",
+            "title":"最后修改日期",
+            "operator":"=",
+            "value":"date"
+        });
+        function setValueBox(index,itemIndex){
+            $("#operator"+itemIndex).val(itemlist[index]["operator"]);
+            var sIndex = itemIndex-1;
+            switch(itemlist[index]["value"]){
+                case "text":
+                    $("#valueBox"+itemIndex).html('<input type="text" name="infos['+sIndex+'].value" id="value'+itemIndex+'" value="" class="form-control">');
                     break;
-                }
+                case "user":
+                    $("#valueBox"+itemIndex).html($('<select name="infos['+sIndex+'].value" id="value'+itemIndex+'" class="form-control">').html($("#usertemp").html()));
+                    break;
+                case "pri":
+                    $("#valueBox"+itemIndex).html($('<select name="infos['+sIndex+'].value" id="value'+itemIndex+'" class="form-control">').html($("#pritemp").html()));
+                    break;
+                case "status":
+                    $("#valueBox"+itemIndex).html($('<select name="infos['+sIndex+'].value" id="value'+itemIndex+'" class="form-control">').html($("#statustemp").html()));
+                    break;
+                case "date":
+                    $("#valueBox"+itemIndex).html('<input type="text" name="infos['+sIndex+'].value" id="value'+itemIndex+'" value="" class="form-control dateinput">');
+                    break;
+                case "win":
+                    $("#valueBox"+itemIndex).html($('<select name="infos['+sIndex+'].value" id="value'+itemIndex+'" class="form-control">').html($("#wintemp").html()));
+                    break;
+                case "bugtype":
+                    $("#valueBox"+itemIndex).html($('<select name="infos['+sIndex+'].value" id="value'+itemIndex+'" class="form-control">').html($("#bugtypetemp").html()));
+                    break;
+                case "con":
+                    $("#valueBox"+itemIndex).html($('<select name="infos['+sIndex+'].value" id="value'+itemIndex+'" class="form-control">').html($("#contemp").html()));
+                    break;
             }
+        }
+        $("#field1,#field2,#field3,#field4,#field5,#field6").each(function(index){
+            $(this).empty();
+            var option;
+            for(var i=0;i<itemlist.length;i++){
+                option = $("<option>").val(itemlist[i]["name"]).text(itemlist[i]["title"]);
+                $(this).append(option);
+            }
+            $(this).val(itemlist[index]["name"]);
+            $("#operator"+(index+1)).html($("#operatortemp").html());
+            setValueBox(index,index+1);
+            $(this).on("change",function(){
+                for(var i=0;i<itemlist.length;i++){
+                    if(itemlist[i]["name"]==$(this).val()){
+                        setValueBox(i,$(this).attr("id").substr(-1));
+                        break;
+                    }
+                }
+            });
+
+        });
+        $(".searchform").on("click","input[class*=dateinput]",function(){
+            WdatePicker({
+                startDate:'%y-%M-01 00:00:00',dateFmt:"yyyy-MM-dd"
+            })
         });
 
-    });
-    $(".searchform").on("click","input[class*=dateinput]",function(){
-        WdatePicker({
-            startDate:'%y-%M-01 00:00:00',dateFmt:"yyyy-MM-dd"
-        })
-    });
+        $("#${taskTableId}form").on("submit",function(){
+            $(".selChoose").removeClass("active_btn");
+            $("#${taskTableId}").trigger("initnav");
+            return false;
 
-    $("#${taskTableId}form").on("submit",function(){
-        $("#${taskTableId}").trigger("initnav");
-        return false;
-
+        });
     });
-});
-//-->
+    //-->
 </script>

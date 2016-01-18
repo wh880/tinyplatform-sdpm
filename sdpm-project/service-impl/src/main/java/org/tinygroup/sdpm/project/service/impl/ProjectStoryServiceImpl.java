@@ -51,16 +51,19 @@ public class ProjectStoryServiceImpl implements ProjectStoryService {
     }
 
     public List<ProductStory> findStoryByProject(Integer projectId) {
-        List<ProjectStory> projectStoryList = projectStoryManager.findStoryList(projectId);
-        if (projectStoryList == null || projectStoryList.isEmpty()) {
+        if(getStoryIdInProject(projectId).length==0){
             return new ArrayList<ProductStory>();
         }
-        List<Integer> storyList = new ArrayList<Integer>();
-        for (ProjectStory projectStory : projectStoryList) {
-            storyList.add(projectStory.getStoryId());
+        List<ProductStory> list = storyManager.findList(false, getStoryIdInProject(projectId));
+        return list;
+    }
+
+    @Override
+    public List<ProductStory> findStoryByProjectAndModule(Integer projectId, ProductStory story) {
+        if(getStoryIdInProject(projectId).length==0){
+            return new ArrayList<ProductStory>();
         }
-        Integer[] i = new Integer[storyList.size()];
-        List<ProductStory> list = storyManager.findList(false, storyList.toArray(i));
+        List<ProductStory> list = storyManager.findList(false,story, getStoryIdInProject(projectId));
         return list;
     }
 
@@ -94,5 +97,18 @@ public class ProjectStoryServiceImpl implements ProjectStoryService {
             s.setTaskNumber(taskManager.getTaskSumByStory(s.getStoryId()));
         }
         return pager;
+    }
+
+    private Integer[] getStoryIdInProject(Integer projectId){
+        List<ProjectStory> projectStoryList = projectStoryManager.findStoryList(projectId);
+        if (projectStoryList == null || projectStoryList.isEmpty()) {
+            return new Integer[0];
+        }
+        List<Integer> storyList = new ArrayList<Integer>();
+        for (ProjectStory projectStory : projectStoryList) {
+            storyList.add(projectStory.getStoryId());
+        }
+        Integer[] i = new Integer[storyList.size()];
+        return storyList.toArray(i);
     }
 }

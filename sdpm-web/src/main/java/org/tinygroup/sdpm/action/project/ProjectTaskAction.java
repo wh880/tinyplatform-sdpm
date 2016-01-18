@@ -13,6 +13,7 @@ import org.tinygroup.logger.LogLevel;
 import org.tinygroup.sdpm.action.project.util.TaskStatusUtil;
 import org.tinygroup.sdpm.common.util.DateUtils;
 import org.tinygroup.sdpm.common.web.BaseController;
+import org.tinygroup.sdpm.dao.complexsearch.SearchInfo;
 import org.tinygroup.sdpm.dao.complexsearch.SearchInfos;
 import org.tinygroup.sdpm.dao.condition.ConditionCarrier;
 import org.tinygroup.sdpm.dto.UploadProfile;
@@ -29,6 +30,7 @@ import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
 import org.tinygroup.sdpm.project.service.inter.*;
+import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.sdpm.system.dao.pojo.ProfileType;
 import org.tinygroup.sdpm.system.dao.pojo.SystemEffort;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
@@ -139,6 +141,7 @@ public class ProjectTaskAction extends BaseController {
             model.addAttribute("copyTask", task);
         }
         List<ProductStory> storyList = projectStoryService.findStoryByProject(projectId);
+        List<QualityBug> bugList=projectService.findRelationBugByProjectID(projectId);
         model.addAttribute("moduleList", findModuleList(storyId, projectId));
         model.addAttribute("moduleId", moduleId);
         model.addAttribute("storyId", storyId);
@@ -147,6 +150,7 @@ public class ProjectTaskAction extends BaseController {
         model.addAttribute("story", story);
 
         model.addAttribute("storyList", storyList);
+        model.addAttribute("bugList",bugList);
         return "project/operate/task/common/add.page";
     }
 
@@ -252,6 +256,21 @@ public class ProjectTaskAction extends BaseController {
         LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, LogUtil.LogAction.DELETED, task.getTaskId().toString(),
                 userUtils.getUserId(), null, task.getTaskProject().toString(), null, null, null);
         return resultMap(true, "删除成功");
+    }
+
+    @ResponseBody
+    @RequestMapping("batch/storyByModule")
+    public List<ProductStory> ajaxStoryByModule(Integer projectId, Integer moduleId) {
+        ProductStory story = new ProductStory();
+        if(moduleId!=null){
+            SystemModule module = moduleService.findById(moduleId);
+            if("projectProduct".equals(module.getModuleType())){
+                story.setProductId(Integer.parseInt(module.getModuleOwner()));
+            }else{
+                story.setModuleId(moduleId);
+            }
+        }
+        return projectStoryService.findStoryByProjectAndModule(projectId,story);
     }
 
     @RequestMapping("/consumeTime")
@@ -565,6 +584,17 @@ public class ProjectTaskAction extends BaseController {
                             String moduleId,
                             @RequestParam(required = false, defaultValue = "task_no") String order,
                             @RequestParam(defaultValue = "desc") String orderType, Integer key) {
+        boolean isSearch = false;
+        for(SearchInfo info : infos.getInfos()){
+            if(!StringUtil.isBlank(info.getValue())){
+                isSearch=true;
+                break;
+            }
+        }
+        if(isSearch){
+            statu = "";
+            choose = "";
+        }
         Integer projectId = projectOperate.getCurrentProjectId(request, response);
         ConditionCarrier carrier = new ConditionCarrier();
         if (projectId == null) {
@@ -589,7 +619,7 @@ public class ProjectTaskAction extends BaseController {
                 List<SystemModule> moduleList = moduleService.findModuleList(module);
                 moduleIds = StringUtil.isBlank(moduleIds)?moduleList.get(0).getModuleId().toString():moduleIds.substring(1,moduleIds.length()-1)+","+moduleList.get(0).getModuleId().toString();
             } else {
-                moduleIds = ModuleUtil.getCondition(Integer.parseInt(moduleId)).substring(1,moduleIds.length()-1);
+                moduleIds = ModuleUtil.getCondition(Integer.parseInt(moduleId));
             }
             carrier.putIns("taskModule",moduleIds.split(","));
         }
@@ -821,15 +851,12 @@ public class ProjectTaskAction extends BaseController {
         }
         List<ProjectProduct> projectProductList = projectProductService.findProductListByProjectId(projectId);
         for (ProjectProduct pp : projectProductList) {
-            Product product = productService.findProductById(pp.getProductId());
+            Product product = productService.findProductWithoutGroupByById(pp.getProductId());
             if(product.getDeleted()==0) {
                 module.setModuleType("story");
                 module.setModuleRoot(pp.getProductId());
                 List<SystemModule> tModuleList = moduleService.findModuleList(module);
                 for (SystemModule m : tModuleList) {
-                    SystemModule productModel = new SystemModule();
-                    productModel.setModuleName(product.getProductName());
-                    moduleList.add(productModel);
                     m.setModuleName(ModuleUtil.getPath(m.getModuleId(), "/", product == null ? "" : product.getProductName(), true));
                 }
                 SystemModule module1 = new SystemModule();

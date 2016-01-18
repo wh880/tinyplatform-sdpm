@@ -12,10 +12,12 @@
             var actionUrl = $("#taskTable").attr("data-url");
             $(".selChoose").on("click",function () {
                 if (actionUrl) {
+                    $("#taskTableform").get(0).reset();
                     $("#taskTable").attr("data-url", "${TINY_CONTEXT_PATH+adminPath}/project/task/findPager?&moduleId=${moduleId}&key=${key}&choose=" + $(this).attr("val"));
                     $(".selChoose").removeClass("active_btn");
                     $(this).addClass("active_btn");
                     $("#taskTable").trigger("refresh");
+
                     $("#dLabel>span:first").removeClass("active_btn").text("更多");
                 } else {
                     window.location.href = "../task/index?choose=" + $(this).attr("val");
@@ -43,6 +45,7 @@
             var actionUrl = $("#taskTable").attr("data-url");
             $(".projectMore").click(function (e) {
                 if(actionUrl) {
+                    $("#taskTableform").get(0).reset();
                     $("#taskTable").attr("data-url", "${TINY_CONTEXT_PATH+adminPath}/project/task/findPager?&moduleId=${moduleId}&key=${key}&statu=" + $(this).attr("val"));
                     $("#taskTable").trigger("refresh");
                     $(".selChoose").removeClass("active_btn");

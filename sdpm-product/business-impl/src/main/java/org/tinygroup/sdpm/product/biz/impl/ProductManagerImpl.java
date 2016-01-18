@@ -91,6 +91,11 @@ public class ProductManagerImpl implements ProductManager {
         return productDao.getByKey(productId);
     }
 
+    @Override
+    public Product findWithoutGroupBy(Integer productId) {
+        return productDao.getProductWithoutGroupBy(productId);
+    }
+
 
     public int[] updateBatch(List<Product> products) {
         return productDao.batchUpdate(products);

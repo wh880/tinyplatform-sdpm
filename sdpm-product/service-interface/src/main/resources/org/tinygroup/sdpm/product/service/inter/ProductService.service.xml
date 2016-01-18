@@ -24,6 +24,12 @@
       </service-parameters>
       <service-result name="findProductByIdResult" required="false" is-array="false" type="org.tinygroup.sdpm.product.dao.pojo.Product"/>
     </service-method>
+    <service-method local-name="findProductWithoutGroupByById" service-id="findProductWithoutGroupByById" method-name="findProductWithoutGroupByById" cacheable="false" category="org.tinygroup.sdpm.product.service">
+      <service-parameters>
+        <service-parameter name="productId" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findProductWithoutGroupByByIdResult" required="false" is-array="false" type="org.tinygroup.sdpm.product.dao.pojo.Product"/>
+    </service-method>
     <service-method local-name="findProductList" service-id="findProductList" method-name="findProductList" cacheable="false" category="org.tinygroup.sdpm.product.service">
       <service-parameters>
         <service-parameter name="product" type="org.tinygroup.sdpm.product.dao.pojo.Product" required="false" is-array="false"/>

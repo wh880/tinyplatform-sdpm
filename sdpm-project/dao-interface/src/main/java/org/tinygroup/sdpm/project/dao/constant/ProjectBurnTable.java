@@ -58,7 +58,7 @@ public class ProjectBurnTable extends Table {
     public final Column BURN_CONSUMED = new Column(this, "burn_consumed");
 
 
-    private ProjectBurnTable() {
+    public ProjectBurnTable() {
         super("project_burn");
     }
 

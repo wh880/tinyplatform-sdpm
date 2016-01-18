@@ -56,16 +56,16 @@
             <class-path path="E:\workcode\sdpm\sdpm-project\view\src\main\resources"/>
             <class-path path="E:\workcode\sdpm\sdpm-document\view\src\main\resources\"/>
             <!--wll -->
-            <class-path path="D:\java\eclipseworkspace\sdpm\sdpm-product\view\src\main\resources"/>
-            <class-path path="D:\java\eclipseworkspace\sdpm\sdpm-quality\view\src\main\resources"/>
-            <class-path path="D:\java\eclipseworkspace\sdpm\sdpm-project\view\src\main\resources"/>
-            <class-path path="D:\java\eclipseworkspace\sdpm\sdpm-system\view\src\main\resources"/>
-            <class-path path="D:\java\eclipseworkspace\sdpm\sdpm-document\view\src\main\resources"/>
-            <class-path path="D:\java\eclipseworkspace\sdpm\sdpm-productLine\view\src\main\resources"/>
-            <class-path path="D:\java\eclipseworkspace\sdpm\sdpm-statistic\view\src\main\resources"/>
-            <class-path path="D:\java\eclipseworkspace\sdpm\sdpm-common\view\src\main\resources"/>
-            <class-path path="D:\java\eclipseworkspace\sdpm\sdpm-project\view\src\main\resources"/>
-            <class-path path="D:\java\eclipseworkspace\sdpm\sdpm-org\view\src\main\resources"/>
+            <class-path path="D:\java\eclipseworkspace\newsdpm\sdpm-product\view\src\main\resources"/>
+            <class-path path="D:\java\eclipseworkspace\newsdpm\sdpm-quality\view\src\main\resources"/>
+            <class-path path="D:\java\eclipseworkspace\newsdpm\sdpm-project\view\src\main\resources"/>
+            <class-path path="D:\java\eclipseworkspace\newsdpm\sdpm-system\view\src\main\resources"/>
+            <class-path path="D:\java\eclipseworkspace\newsdpm\sdpm-document\view\src\main\resources"/>
+            <class-path path="D:\java\eclipseworkspace\newsdpm\sdpm-productLine\view\src\main\resources"/>
+            <class-path path="D:\java\eclipseworkspace\newsdpm\sdpm-statistic\view\src\main\resources"/>
+            <class-path path="D:\java\eclipseworkspace\newsdpm\sdpm-common\view\src\main\resources"/>
+            <class-path path="D:\java\eclipseworkspace\newsdpm\sdpm-project\view\src\main\resources"/>
+            <class-path path="D:\java\eclipseworkspace\newsdpm\sdpm-org\view\src\main\resources"/>
 
             <!--ajian -->
             <class-path path="D:\javaworkspace\sdpm\sdpm-product\view\src\main\resources"/>

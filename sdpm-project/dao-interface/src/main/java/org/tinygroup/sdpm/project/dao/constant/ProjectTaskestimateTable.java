@@ -70,7 +70,7 @@ public class ProjectTaskestimateTable extends Table {
     public final Column TASKESTIMATE_WORK = new Column(this, "taskestimate_work");
 
 
-    private ProjectTaskestimateTable() {
+    public ProjectTaskestimateTable() {
         super("project_taskestimate");
     }
 

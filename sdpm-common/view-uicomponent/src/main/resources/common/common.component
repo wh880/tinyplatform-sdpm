@@ -3,3 +3,69 @@
     #bodyContent
 </div>
 #end
+
+
+#macro circleButton(buttonClass)#set(buttonClass=buttonClass?:"primary")<button class="btn btn-circle btn-${buttonClass}">#bodyContent</button>#end
+#macro fontIco(buttonClass)<i class="icon-${buttonClass}"></i>#end
+
+
+#macro faIcon(faClass)<i class="fa fa-${faClass}"></i>#end
+
+#macro saveFormHistory()#set(fid=fmt("qid-%d",rand()))<button class="btn btn-primary btn-sm" id="${fid}">保存</button>
+<button class="btn btn-sm no-padding no-border" style="margin-left:20px" onclick="return false">
+    <select id="${fid}-sel" class="form-control no-border-radius margin-bottom-0" style="height:31px"></select>
+</button>
+<script type="text/javascript">
+    $(function(){
+        var form=$("#${fid}").closest("form");
+        var qF= form.queryFor("#${fid}-sel");
+        $("#${fid}-sel").on("change",function(){
+            var v=$(this).val();
+            if(v=="none") return false;
+            var fItem,formItems=qF.getVal(v).split("&");
+            for(var i= 0,l=formItems.length;i<l;i++){
+                fItem=formItems[i].split("=");
+                form.find("[name='"+decodeURI(fItem[0])+"']").val(decodeURI(fItem[1]));
+            }
+            form.trigger("submit");
+        });
+        $("#${fid}").on("click",function(){
+            layer.prompt({title: '请输入保存名称', formType: 2}, function(text){
+                var v=form.serialize();
+                qF.add(text,v);
+                layer.closeAll();
+            });
+            return false;
+        });
+        $("#${fid}-btn-remove").on("click",function(){
+            qF.delete($("#${fid}-sel").val());
+            return false;
+        })
+    })
+</script>
+<button class="btn btn-sm" id="${fid}-btn-remove">#fontIco("remove")</button>
+#end
+
+
+
+#macro diaryItem(authorName createDate diaryContent)
+<li class="diary-detail">
+    <div class="diary-report clearfix">
+        <div class="portrait">
+            <a href="#" title="点击查看${authorName}所有的周报">
+                <span class="name b">${authorName}</span>
+            </a>
+            <div class="r f-14">
+                #fontIco("calendar") ${createDate}
+                <span class="dia_h_btn"  data-open="0">#fontIco("chevron-down")</span>
+            </div>
+        </div>
+        <div class="diary-info" style="cursor:pointer" data-load="true">
+            ${diaryContent}
+        </div>
+    </div>
+    <div class="diary-detail-list hide">
+        #bodyContent
+    </div>
+</li>
+#end
