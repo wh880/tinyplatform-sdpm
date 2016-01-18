@@ -346,7 +346,9 @@ public class DiaryAction extends BaseController {
     @RequestMapping("tree")
     public List<Map<String, Object>> ajax(SystemModule systemModule, HttpServletResponse response, @RequestParam(value = "type", defaultValue = "name") String type) {
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
-        List<OrgUser> usersList = userService.findOrgUserListSubordinateAndSelf(UserUtils.getUserId());
+        List<OrgUser> usersList=userService.findAllSubordinate(UserUtils.getUserId());
+        usersList.add(userUtils.getUser());
+        //List<OrgUser> usersList = userService.findOrgUserListSubordinateAndSelf(UserUtils.getUserId());
         for (OrgUser user : usersList) {
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("id", user.getOrgUserId());

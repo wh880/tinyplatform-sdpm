@@ -173,4 +173,9 @@ public class UserServiceImpl implements UserService {
     public List<OrgUser> findOrgUserListSubordinateAndSelf(String userId) {
         return userManager.getDirectStaffByLeaderAndSelf(userId);
     }
+
+    @Override
+    public List<OrgUser> findAllSubordinate(String userId) {
+        return userManager.getAllStaffByLeader(userId);
+    }
 }

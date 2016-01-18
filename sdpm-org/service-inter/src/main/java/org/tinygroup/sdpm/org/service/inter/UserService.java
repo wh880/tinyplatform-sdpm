@@ -150,4 +150,6 @@ public interface UserService {
      */
     List<OrgUser> findOrgUserListSubordinateAndSelf(String userId);
 
+    List<OrgUser> findAllSubordinate(String userId);
+
 }
