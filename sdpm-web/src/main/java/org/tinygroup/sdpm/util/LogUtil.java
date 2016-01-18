@@ -47,7 +47,7 @@ public class LogUtil {
 
     public enum LogAction {
         CREATED("created"),          //创建
-        OPENED("opened"),             //创建
+        OPENED("opened"),             //开始
         CHANGED("changed"),           //变更了
         EDITED("edited"),          //编辑了
         ASSIGNED("assigned"),           //指派了
