@@ -161,7 +161,7 @@
 			       		#end
 			       		#@tbody()
 			       			#@tr()
-								#@td()生源用例#end
+								#@td()来源用例#end
 			       				#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/testCase/case/viewInfo?id=${qualityBug?.bugFromCase}">${qualityBug?.fromCase}</a>#end
 			       			#end
 			       			#@tr()

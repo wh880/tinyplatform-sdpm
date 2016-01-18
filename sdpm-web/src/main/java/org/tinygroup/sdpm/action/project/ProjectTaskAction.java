@@ -758,7 +758,7 @@ public class ProjectTaskAction extends BaseController {
         if (task.getTaskModule() == null) {
             modulePath = "/";
         } else {
-            modulePath = ModuleUtil.getPath(task.getTaskModule(), " > ", task.getTaskProject().toString(), true);
+            modulePath = ModuleUtil.getPath(task.getTaskModule(), " > ", project.getProjectName(), true);
         }
         model.addAttribute("modulPath", modulePath);
         //查询相关需求名字

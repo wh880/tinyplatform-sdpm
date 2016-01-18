@@ -44,6 +44,7 @@
             <dictItem key="remark" value="添加备注" sort="41"/>
             <dictItem key="marked" value="编辑" sort="42"/>
             <dictItem key="run" value="执行" sort="43"/>
+            <dictItem key="copy" value="复制" sort="43"/>
         </dictNodeEntry>
         <dictNodeEntry name="actionObject" title="动态对象">
             <dictItem key="user" value="用户" sort="1"/>

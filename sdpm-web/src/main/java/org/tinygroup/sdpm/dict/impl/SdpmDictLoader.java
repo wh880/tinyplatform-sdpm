@@ -46,7 +46,6 @@ public class SdpmDictLoader extends AbstractDictLoader {
         for (Dict dict : dicts) {
             this.putDict(dict.getName(), dict, dictManager);
         }
-
     }
 
     public void loadDictFromDB(DictManager dictManager) {
