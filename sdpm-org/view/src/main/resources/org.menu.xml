@@ -23,19 +23,19 @@
         <menu id="org-user-batchdel" name="批量删除" href="#" icon="icon-trash" sort="1" isShow="1"
               scope="org-user-batchdel"/>
 
-        <menu id="org-user-storyAdmin" name="所属需求" href="/org/user/story" icon="" sort="1"
+        <menu id="org-user-storyAdmin" name="归属需求" href="/org/user/story" icon="" sort="1"
               isShow="1" scope="org-user-detail"/>
-        <menu id="org-user-taskAdmin" name="所属任务" href="/org/user/task" icon="" sort="1"
+        <menu id="org-user-taskAdmin" name="归属任务" href="/org/user/task" icon="" sort="1"
               isShow="1" scope="org-user-detail"/>
-        <menu id="org-user-bugAdmin" name="所属缺陷" href="/org/user/bug" icon="" sort="1"
+        <menu id="org-user-bugAdmin" name="归属缺陷" href="/org/user/bug" icon="" sort="1"
               isShow="1" scope="org-user-detail"/>
-        <menu id="org-user-testtaskAdmin" name="所属测试" href="/org/user/testtask" icon="" sort="1"
+        <menu id="org-user-testtaskAdmin" name="归属测试" href="/org/user/testtask" icon="" sort="1"
               isShow="1" scope="org-user-detail"/>
-        <menu id="org-user-activeAdmin" name="所属动态" href="/org/user/active" icon="" sort="1"
+        <menu id="org-user-activeAdmin" name="归属动态" href="/org/user/active" icon="" sort="1"
               isShow="1" scope="org-user-detail"/>
-        <menu id="org-user-projectAdmin" name="所属项目" href="/org/user/project" icon="" sort="1"
+        <menu id="org-user-projectAdmin" name="归属项目" href="/org/user/project" icon="" sort="1"
               isShow="1" scope="org-user-detail"/>
-        <menu id="org-user-profileAdmin" name="所属档案" href="/org/user/show/profile" icon="" sort="1"
+        <menu id="org-user-profileAdmin" name="归属档案" href="/org/user/show/profile" icon="" sort="1"
               isShow="1" scope="org-user-detail"/>
         <menu id="org-user-editprofile" name="修改档案" href="/org/user/editForm" icon="icon-edit"
               sort="1" isShow="1" scope="org-user-editprofile"/>

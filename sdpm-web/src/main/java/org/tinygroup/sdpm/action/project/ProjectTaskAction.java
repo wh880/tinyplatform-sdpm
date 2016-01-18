@@ -166,7 +166,7 @@ public class ProjectTaskAction extends BaseController {
     @RequiresPermissions(value = {"pro-task-proposeversion", "pro-Info2-copy", "batch-distribute-task"}, logical = Logical.OR)
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(ProjectTask task, Integer direction,
-                       String[] taskMailToArray, HttpServletRequest request, String comment, String lastAddress,
+                       String[] taskMailToArray, HttpServletRequest request, String comment,
                        UploadProfile uploadProfile) throws IOException {
         Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, ProjectOperate.COOKIE_PROJECT_ID));
         task.setTaskProject(projectId);
@@ -175,7 +175,7 @@ public class ProjectTaskAction extends BaseController {
         task.setTaskLeft(task.getTaskEstimate());
         task = taskService.addTask(task);
         storyJudge(task.getTaskStory());
-        LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, LogUtil.LogAction.OPENED,
+        LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, LogUtil.LogAction.CREATED,
                 task.getTaskId().toString(), userUtils.getUserId(),
                 null, task.getTaskProject().toString(), null, null, comment);
         try {
@@ -229,6 +229,8 @@ public class ProjectTaskAction extends BaseController {
     public String editSave(ProjectTask task, Model model, String comment,
                            UploadProfile uploadProfile) throws IOException {
         ProjectTask oldTask = taskService.findTaskById(task.getTaskId());
+        task.setTaskLastEditedBy(userUtils.getUserId());
+        task.setTaskLastEditedDate(new Date());
         taskService.updateEditTask(task);
         storyJudge(task.getTaskStory());
         processProfile(uploadProfile, task.getTaskId(), ProfileType.TASK);
@@ -393,7 +395,7 @@ public class ProjectTaskAction extends BaseController {
     public String finishSave(ProjectTask task, String comment, UploadProfile uploadProfile) throws IOException {
         ProjectTask oldTask = taskService.findTaskById(task.getTaskId());
         task.setTaskFinishedBy(userUtils.getUserId());
-        task.setTaskFinishedDate(new Date());
+        task.setTaskFinishedDate(task.getTaskFinishedDate());
         task.setTaskStatus(ProjectTask.DONE);
         Float oldConsumed = oldTask.getTaskConsumed();
         Float newConsumed = task.getTaskConsumed() - oldConsumed;
@@ -436,7 +438,7 @@ public class ProjectTaskAction extends BaseController {
         if (!oldTask.getTaskConsumed().equals(task.getTaskConsumed())) {
             burnService.updateBurnByProjectId(oldTask.getTaskProject());
         }
-        LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, LogUtil.LogAction.ASSIGNED, task.getTaskId().toString(),
+        LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, LogUtil.LogAction.FINISHED, task.getTaskId().toString(),
                 userUtils.getUserId(),
                 null, oldTask.getTaskProject().toString(),
                 oldTask, task, comment);

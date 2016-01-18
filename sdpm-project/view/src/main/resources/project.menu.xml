@@ -7,7 +7,7 @@
               scope="pro-task-op"/>
         <menu id="pro-task-start" name="开始" href="/project/task/start" icon="icon-play" sort="15" isShow="1"
               scope="pro-task-op"/>
-        <menu id="pro-task-note" name="日志" href="/project/task/consumeTime" icon="icon-time" sort="10" isShow="1"
+        <menu id="pro-task-note" name="工时" href="/project/task/consumeTime" icon="icon-time" sort="10" isShow="1"
               scope="pro-task-op"/>
         <menu id="pro-task-finish" name="完成" href="/project/task/finish" icon="icon-ok-sign" sort="8" isShow="1"
               scope="pro-task-op"/>
