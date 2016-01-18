@@ -46,9 +46,9 @@
     <cep-configuration node-name="asNode">
         <operator name="asNode"></operator>
         <scs>
-            <sc host="127.0.0.1" port="9191"></sc>
+            <!--<sc host="127.0.0.1" port="9191"></sc>-->
 
-            <!--<sc host="192.168.48.111" port="9191"></sc>-->
+            <sc host="192.168.48.111" port="9191"></sc>
         </scs>
         <params>
             <param name="request-time-out" value="15000"/>
