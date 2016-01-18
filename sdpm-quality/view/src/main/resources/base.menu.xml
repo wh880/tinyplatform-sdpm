@@ -3,6 +3,9 @@
       isShow="1">
     <menu id="qualityBug" parent-id="quality" name="Bug" href="/quality/bug?currentPageId=5" icon="" sort="1"
           isShow="1">
+        <menu id="batch-distribute-" name="Bug分解" href="/project/task/form" icon="icon-smile" sort="7"
+              isShow="1" scope="testbug-op,testbuginfo-tab">
+        </menu>
         <menu id="tmakesure" name="确认" href="/quality/bug/makesure" icon="iconfont iconfont-jihuo" sort="6"
               isShow="1" scope="testbug-op,testbuginfo-tab">
         </menu>
@@ -15,6 +18,12 @@
         <menu id="tshutdown" name="关闭" href="/quality/bug/toClose" icon="icon-off" sort="3"
               isShow="1" scope="testbug-op,testbuginfo-tab">
         </menu>
+
+        <!--批量关闭-->
+        <menu id="batchshutdownquality" name="批量关闭" icon="icon-off"
+              isShow="1" scope="testbug-op,testbuginfo-tab">
+        </menu>
+
         <menu id="tedition" name="编辑" href="/quality/bug/toEdit" icon="icon-pencil" sort="2"
               isShow="1" scope="testbug-op,pro-bug-op,testbuginfo-tab">
         </menu>

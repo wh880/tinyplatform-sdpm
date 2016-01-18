@@ -180,6 +180,18 @@ public class OrgUserDaoImpl extends TinyDslDaoSupport implements OrgUserDao {
         return getDslSession().fetchList(select, OrgUser.class);
     }
 
+    @Override
+    public List<OrgUser> getDirectStaffByLeaderAndSelf(String leaderUserId) {
+        ComplexSelect complexSelect = ComplexSelect.union(selectFrom(ORG_USERTABLE).
+                where(ORG_USERTABLE.ORG_USER_ID.eq(leaderUserId)),
+                selectFrom(ORG_USERTABLE).where(
+                and(
+                        ORG_USERTABLE.ORG_USER_LEADER.eq(leaderUserId),
+                        ORG_USERTABLE.ORG_USER_DELETED.eq(OrgUser.DELETE_NO)
+                )));
+        return getDslSession().fetchList(complexSelect, OrgUser.class);
+    }
+
     public List<OrgUser> getTeamUserByProjectId(Integer projectId) {
         Select select = selectFrom(ORG_USERTABLE).where(
                 and(ORG_USERTABLE.ORG_USER_ID.inExpression(
@@ -468,5 +480,12 @@ public class OrgUserDaoImpl extends TinyDslDaoSupport implements OrgUserDao {
         } catch (Exception e) {
             return "";
         }
+    }
+
+    public List<OrgUser> getListById(List<String> list) {
+        Select select = Select.selectFrom(ORG_USERTABLE).where(
+                ORG_USERTABLE.ORG_USER_ID.in(list.toArray())
+        );
+        return getDslSession().fetchList(select, OrgUser.class);
     }
 }

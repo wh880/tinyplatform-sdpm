@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.tinygroup.commons.tools.ArrayUtil;
 import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.action.product.util.StoryUtil;
@@ -314,6 +315,8 @@ public class BugAction extends BaseController {
         return map;
     }
 
+
+
     @RequiresPermissions("tassign")
     @ResponseBody
     @RequestMapping("batch/assign")
@@ -340,6 +343,43 @@ public class BugAction extends BaseController {
         map.put("status", "success");
         map.put("info", "成功");
         return map;
+    }
+
+    /*
+        测试模块批量关闭功能
+     */
+    @ResponseBody
+    @RequiresPermissions("batchshutdownquality")
+    @RequestMapping(value = "batch/close")
+    public Map close(String ids) {
+        String[] bugIds = ids.split(",");
+        if (bugIds.length > 0)
+        {
+            for (String id : bugIds)
+            {
+                QualityBug bug = bugService.findQualityBugById(Integer.valueOf(id));
+                bug.setBugClosedBy(userUtils.getUserId());
+                bug.setBugClosedDate(new Date());
+                bug.setBugStatus("3");
+                bugService.updateBug(bug);
+
+                LogUtil.logWithComment(LogUtil.LogOperateObject.BUG
+                        , LogUtil.LogAction.CLOSED
+                        , String.valueOf(bug.getBugId())
+                        , userUtils.getUserId()
+                        , String.valueOf(bug.getProductId())
+                        , String.valueOf(bug.getProjectId())
+                        , null
+                        , null
+                        , null);
+            }
+
+        }
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("status", "success");
+        map.put("info", "关闭成功");
+        return map;
+
     }
 
     @RequestMapping("/sure")

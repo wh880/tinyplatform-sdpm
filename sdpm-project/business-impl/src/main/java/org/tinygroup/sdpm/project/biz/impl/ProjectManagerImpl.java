@@ -11,7 +11,9 @@ import org.tinygroup.logger.LoggerFactory;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.project.biz.inter.ProjectManager;
 import org.tinygroup.sdpm.project.dao.ProjectDao;
+import org.tinygroup.sdpm.project.dao.ProjectTaskDao;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
+import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.ArrayList;
@@ -27,6 +29,8 @@ public class ProjectManagerImpl implements ProjectManager {
     private static final Logger logger = LoggerFactory.getLogger(ProjectManagerImpl.class);
     @Autowired
     private ProjectDao projectDao;
+    @Autowired
+    private ProjectTaskDao projectTaskDao;
 
     public List<Project> findList() {
         Project project = new Project();
@@ -129,5 +133,10 @@ public class ProjectManagerImpl implements ProjectManager {
 
     public List<Project> projectInCondition(String condition, Integer limit, Integer... ids) {
         return projectDao.projectInCondition(condition, limit, ids);
+    }
+
+    @Override
+    public List<QualityBug> findList(Integer projectId) {
+        return projectTaskDao.findRelationBugByProjectID(projectId);
     }
 }

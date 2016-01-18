@@ -135,4 +135,14 @@ public interface EffortManager {
      * @return
      */
     SystemEffort findById(Integer id);
+
+    /**
+     * 根据时间段以及登记人查询
+     */
+    List<SystemEffort> findByUserAndDate(String userId,Date beginDate, Date endDate);
+
+    /**
+     * 查询一组ID的结果
+     */
+    List<SystemEffort> findEffortListByIdList(List<Integer> list);
 }

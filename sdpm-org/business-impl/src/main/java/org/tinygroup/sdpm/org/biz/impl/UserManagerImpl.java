@@ -137,6 +137,11 @@ public class UserManagerImpl implements UserManager {
         return orgUserDao.getDirectStaffByLeader(leaderUserId);
     }
 
+    @Override
+    public List<OrgUser> getDirectStaffByLeaderAndSelf(String leaderUserId) {
+        return orgUserDao.getDirectStaffByLeaderAndSelf(leaderUserId);
+    }
+
     public List<OrgUser> getAllStaffByLeader(String leaderUserId) {
         List<OrgUser> staffList = new ArrayList<OrgUser>();
         getAllStaffByLeader(staffList, leaderUserId);
@@ -154,6 +159,14 @@ public class UserManagerImpl implements UserManager {
                 getAllStaffByLeader(staffList, orgUser.getOrgUserId());
             }
         }
+    }
+
+    @Override
+    public List<OrgUser> getUserListById(List<String> list){
+        if(list==null){
+            list=new ArrayList<String>();
+        }
+        return orgUserDao.getListById(list);
     }
 
 }

@@ -35,9 +35,9 @@
                     "projectEnd" "" "YYYY-MM-DD" {"class":"input-text","datatype":"*","nullmsg":"结束日期不能为空",
                         "placeholder":"请选择结束日期","id":"projectEnd"})#end
                 </div>
-                <label class='radio-inline'><input type='radio' name='delta' value='7'
+                <label class='radio-inline'><input type='radio' name='delta' value='6'
                                                    onclick='computeEndDate(this.value)' id='delta7'/> 一星期</label>
-                <label class='radio-inline'><input type='radio' name='delta' value='14'
+                <label class='radio-inline'><input type='radio' name='delta' value='13'
                                                    onclick='computeEndDate(this.value)' id='delta14'/> 两星期</label>
                 <label class='radio-inline'><input type='radio' name='delta' value='31'
                                                    onclick='computeEndDate(this.value)' id='delta31'/> 一个月</label>
