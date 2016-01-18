@@ -54,6 +54,7 @@ public class DiaryAction extends BaseController {
     @RequestMapping("/add")
     public Map add(String summary, Integer y, Integer w, String efforts) {
         String[] effortIds = null;
+        //获得需要插入周报详情的日志ID
         List<Integer> idsList = new ArrayList<Integer>();
         if (!StringUtil.isBlank(efforts)) {
             effortIds = efforts.split(",");
@@ -61,7 +62,6 @@ public class DiaryAction extends BaseController {
                 idsList.add(Integer.parseInt(effortIds[i]));
             }
         }
-
         String userId = userUtils.getUser().getOrgUserId();
         OrgDiary orgDiary = new OrgDiary();
         Date date = new Date();
@@ -71,9 +71,12 @@ public class DiaryAction extends BaseController {
             y = calendar.get(Calendar.YEAR);
             w = calendar.get(Calendar.WEEK_OF_YEAR);
         }
+        //查找这一周的周报
         OrgDiary diary = diaryService.findDiaryByUserLatest(userId, y, w);
         List<OrgDiaryDetail> list = new ArrayList<OrgDiaryDetail>();
+        //查找相关日志ID对应的日志
         List<SystemEffort> effortList = effortService.findEffortListByIdList(idsList);
+        //如果这一周已经提交了周报，插入的详情表写入周报ID
         if (diary != null) {
             for (int j = 0; j < effortList.size(); j++) {
                 OrgDiaryDetail orgDiaryDetail = new OrgDiaryDetail();
@@ -83,7 +86,9 @@ public class DiaryAction extends BaseController {
                 orgDiaryDetail.setOrgDiaryId(diary.getOrgDiaryId());
                 list.add(orgDiaryDetail);
             }
-        } else {
+        }
+        //如果这一周没有提交过周报，则进行添加操作，并且对详情不set日志ID
+        else {
             for (int j = 0; j < effortList.size(); j++) {
                 OrgDiaryDetail orgDiaryDetail = new OrgDiaryDetail();
                 orgDiaryDetail.setOrgDetailContent(effortList.get(j).getEffortWork());
@@ -100,9 +105,11 @@ public class DiaryAction extends BaseController {
             Date endDate = getEndDate(y, w);
             orgDiary.setOrgDiaryBeginDate(beginDate);
             orgDiary.setOrgDiaryEndDate(endDate);
+            //进行添加周报以及添加周报详情的操作
             diaryService.addDiary(orgDiary, list);
             return resultMap(true, "添加成功");
         }
+        //进行修改操作
         diary.setOrgDiarySummary(summary);
         diary.setOrgDiaryModifyDate(date);
         diaryService.updateDiary(diary, list);
@@ -160,90 +167,7 @@ public class DiaryAction extends BaseController {
     }
 
     /**
-     * 查看直接下级的所有的周报
-     *
-     * @param userId
-     * @param model
-     * @return
-     */
-    @ResponseBody
-    @RequestMapping("/findSubordinate")
-    public String findSubordinate(String userId, Model model, Integer start, Integer limit) {
-        Pager<OrgDiaryAndUserDO> pager;
-        if (StringUtil.isBlank(userId)) {
-            return null;
-        }
-        pager = diaryService.findPagerDiaryByUserId(userId, start, limit);
-        model.addAttribute("pager", pager);
-        return "";
-    }
-
-    /**
-     * 根据周报ID查询对应的详情ID
-     *
-     * @param id
-     * @param model
-     * @return
-     */
-    @ResponseBody
-    @RequestMapping("/findByDiaryId")
-    public String findByDiaryId(Integer id, Model model) {
-        if (id == null) {
-            return null;
-        }
-        List<OrgDiaryDetail> list = diaryService.findDetailListByDiaryId(id);
-        model.addAttribute("list", list);
-        return "";
-    }
-
-    /**
-     * 查看直接下级的某一周的周报
-     *
-     * @param year
-     * @param week
-     * @param userId
-     * @param model
-     * @return
-     */
-    @ResponseBody
-    @RequestMapping("/findSubordinateOneWeek")
-    public String findSubordinateOneWeek(Integer year, Integer week, String userId, Model model) {
-        if (year == null || week == null || StringUtil.isBlank(userId)) {
-            return null;
-        }
-        List<OrgDiary> list = diaryService.findDiaryListSubordinateOneWeek(userId, year, week);
-        model.addAttribute("list", list);
-        return "";
-    }
-
-    /**
-     * 显示当前用户某一周的日志情况
-     *
-     * @param userId
-     * @param beginDate
-     * @param endDate
-     * @param model
-     * @return
-     */
-    @ResponseBody
-    @RequestMapping("/showEffect")
-    public String showEffect(String userId, String beginDate, String endDate, Model model) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            Date bDate = format.parse(beginDate);
-            Date eDate = format.parse(endDate);
-            List<SystemEffort> list = effortService.findEffortListByUserAndDate(userId, bDate, eDate);
-            model.addAttribute("list", list);
-            return "";
-        } catch (ParseException e) {
-            e.getStackTrace();
-        }
-        return null;
-    }
-
-    /**
      * 显示某一用户所有的周报
-     *
      * @param userAccount
      * @param model
      * @return
@@ -251,7 +175,7 @@ public class DiaryAction extends BaseController {
     @RequiresPermissions("organizationDiary")
     @RequestMapping("/findListByUser")
     public String findListByUser(String userAccount, Model model) {
-        OrgUser user = new OrgUser();
+        OrgUser user=null;
         List<OrgDiaryAndUserDO> list;
         String userId = userService.findUserByAccount(userAccount).getOrgUserId();
         if (StringUtil.isEmpty(userAccount)) {
@@ -274,10 +198,9 @@ public class DiaryAction extends BaseController {
      * @param model
      * @return
      */
-    //@RequiresPermissions("organizationDiary")
     @RequestMapping("/find")
     public String find(String userId, Integer year, Integer week, Model model) {
-        OrgUser user = new OrgUser();
+        OrgUser user=null;
         if (StringUtil.isBlank(userId) || StringUtil.isEmpty(userId)) {
             return null;
         }
@@ -354,7 +277,6 @@ public class DiaryAction extends BaseController {
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
         List<OrgUser> usersList = userService.findAllSubordinate(UserUtils.getUserId());
         usersList.add(userUtils.getUser());
-        //List<OrgUser> usersList = userService.findOrgUserListSubordinateAndSelf(UserUtils.getUserId());
         for (OrgUser user : usersList) {
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("id", user.getOrgUserId());
@@ -428,7 +350,6 @@ public class DiaryAction extends BaseController {
             efforts = diaryService.findDetailListByDiaryList(list);
             map.put(orgDiaryAndYUser.getOrgDiaryId(), efforts);
             for (OrgDiaryDetail orgDiaryDetail : efforts) {
-                //Date effortDate = orgDiaryDetail.getOrgDetailDate();
                 int week = orgDiaryDetail.getOrgDetailDate().getDay();
                 if (week == 0) {
                     orgDiaryDetail.setEffortWeek(7);
