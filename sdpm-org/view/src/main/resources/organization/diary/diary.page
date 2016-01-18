@@ -391,7 +391,7 @@
         #@settoggleLeftBody("treeLeftbox")
             #@zTreeList(call("link",adminPath+"/org/diary/tree"))
                 #setzTreeValMap({"id":"orgUserId","name":"orgUserAccount","pid":"orgUserLeader"}) ##key值为固定
-                #zTreeSetLinkUrl(TINY_CONTEXT_PATH+adminPath+"/org/user/list" )
+                #zTreeSetLinkUrl(TINY_CONTEXT_PATH+adminPath+"/org/diary/show" )
             #end
         #end
     #end
@@ -419,7 +419,7 @@
                 var week = $(this).attr("data-week");
                 var body=$("#diarylist-detail");
                 var data={w:week,y:year,aid:2};
-                ajaxLoadContent(body,"/sdpm-web/a/org/diary/list/data.pagelet",data);
+                ajaxLoadContent(body,"/sdpm-web/a/org/diary/list/data.pagelet?orgUserId=${orgUserId}",data);
             });
             function getFirstWeekDay(year, week) {
                 var yearFirst = moment(year + "-01-01");

@@ -290,16 +290,22 @@ public class DiaryAction extends BaseController {
      */
     @RequiresPermissions("organizationDiary")
     @RequestMapping("/show")
-    public String show(Model model) {
+    public String show(String orgUserId, Model model) {
         Calendar ca = Calendar.getInstance();
         ca.setTime(new Date());
         Integer year = ca.get(Calendar.YEAR);
         Integer week = ca.get(Calendar.WEEK_OF_YEAR);
-        OrgUser user = userUtils.getUser();
+        OrgUser user = null;
+        if (orgUserId == null) {
+            user = userUtils.getUser();
+        } else {
+            user = userUtils.getUserById(orgUserId);
+        }
         OrgDiary orgDiary = diaryService.findDiaryByUserLatest(user.getOrgUserId(), year, week);//自己
         List<OrgDiary> list = diaryService.findDiaryListSubordinateOneWeek(user.getOrgUserId(), year, week);//下属
         model.addAttribute("orgDiary", orgDiary);
         model.addAttribute("list", list);
+        model.addAttribute("orgUserId",orgUserId);
         return "organization/diary/diary.page";
     }
 
@@ -384,7 +390,7 @@ public class DiaryAction extends BaseController {
 
     @RequiresPermissions("organizationDiary")
     @RequestMapping("/list/data")
-    public String listData(Integer y, Integer w,
+    public String listData(String orgUserId, Integer y, Integer w,
                            Model model) {
         List<OrgDiaryAndUserDO> list;
         if (y == null || w == null) {
@@ -394,7 +400,11 @@ public class DiaryAction extends BaseController {
             y = calendar.get(Calendar.YEAR);
             w = calendar.get(Calendar.WEEK_OF_YEAR);
         }
-        list = diaryService.findListDiarySubAndSelf(UserUtils.getUserId(), y, w);
+        if (orgUserId == null) {
+            orgUserId = UserUtils.getUserId();
+        }
+        list = diaryService.findListDiarySubAndSelf(orgUserId, y, w);
+
         model.addAttribute("list", list);
         Map<Integer, List<OrgDiaryDetail>> map = new HashMap<Integer, List<OrgDiaryDetail>>();
         for (OrgDiaryAndUserDO orgDiaryAndYUser : list) {
