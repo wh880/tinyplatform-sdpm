@@ -305,7 +305,7 @@ public class DiaryAction extends BaseController {
         List<OrgDiary> list = diaryService.findDiaryListSubordinateOneWeek(user.getOrgUserId(), year, week);//下属
         model.addAttribute("orgDiary", orgDiary);
         model.addAttribute("list", list);
-        model.addAttribute("orgUserId",orgUserId);
+        model.addAttribute("orgUserId", orgUserId);
         return "organization/diary/diary.page";
     }
 
@@ -346,7 +346,7 @@ public class DiaryAction extends BaseController {
     @RequestMapping("tree")
     public List<Map<String, Object>> ajax(SystemModule systemModule, HttpServletResponse response, @RequestParam(value = "type", defaultValue = "name") String type) {
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
-        List<OrgUser> usersList=userService.findAllSubordinate(UserUtils.getUserId());
+        List<OrgUser> usersList = userService.findAllSubordinate(UserUtils.getUserId());
         usersList.add(userUtils.getUser());
         //List<OrgUser> usersList = userService.findOrgUserListSubordinateAndSelf(UserUtils.getUserId());
         for (OrgUser user : usersList) {
@@ -378,6 +378,10 @@ public class DiaryAction extends BaseController {
         Date eDate = getEndDate(y, w);
         String userAccount = userUtils.getUser().getOrgUserAccount();
         List<SystemEffort> list = effortService.findEffortListByUserAndDate(userAccount, bDate, eDate);
+        List<OrgDiaryDetail> list2 = null;
+        if (orgDiary != null) {
+            list2 = diaryService.findDetailListByDiaryId(orgDiary.getOrgDiaryId());
+        }
         List<SystemEffort> list1 = new ArrayList<SystemEffort>();
         for (SystemEffort effort : list) {
             Date effortDate = effort.getEffortDate();
@@ -387,6 +391,7 @@ public class DiaryAction extends BaseController {
         model.addAttribute("year", y);
         model.addAttribute("week", w);
         model.addAttribute("list", list1);
+        model.addAttribute("details", list2);
         return "organization/diary/oneDiary.pagelet";
     }
 

@@ -12,7 +12,8 @@
             #for(var:list)
         <div class="committed clearfix mt-10 va-m bk-gray radius pd-20 mt-10">
             <ol class="logList-detailList">
-                <li><input type="checkbox" id=${var?.effortId} value=${var?.effortId} name="idCheck"><span class="tocommittime">周${var?.effortWeek}:</span><span>${var?.effortAccount}--${var?.effortWork}
+                <li><input type="checkbox" id=${var?.effortId} value=${var?.effortId} name="idCheck" #for(var1:details) #if(var1?.orgDetailContent==var?.effortWork) checked="checked"
+        #end#end><span class="tocommittime">周${var?.effortWeek}:</span><span>${var?.effortAccount}--${var?.effortWork}
                     <a href="#" target="_blank">ID：${var?.effortId}</a></span></li>
             </ol>
         </div>
