@@ -3,6 +3,7 @@ package org.tinygroup.sdpm.org.biz.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.sdpm.org.biz.inter.DiaryManager;
 import org.tinygroup.sdpm.org.dao.OrgDiaryDao;
 import org.tinygroup.sdpm.org.dao.OrgDiaryDetailDao;
@@ -13,7 +14,6 @@ import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -127,7 +127,7 @@ public class DiaryManagerImpl implements DiaryManager {
     @Override
     public OrgDiary findDiaryByUserLatest(String userId, Integer year, Integer week) {
         List<OrgDiary> list = orgDiaryDao.findDiaryByUserLatest(userId, year, week);
-        if (list == null || list.size() == 0) {
+        if (CollectionUtil.isEmpty(list)) {
             return null;
         }
         return list.get(0);
