@@ -66,25 +66,31 @@ public class DiaryAction extends BaseController {
         OrgDiary orgDiary = new OrgDiary();
         Date date = new Date();
         if (y == null || w == null) {
-            //判断进行添加新的周报，还是修改旧的周报
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(date);
             y = calendar.get(Calendar.YEAR);
             w = calendar.get(Calendar.WEEK_OF_YEAR);
         }
         OrgDiary diary = diaryService.findDiaryByUserLatest(userId, y, w);
-
-        List<SystemEffort> effortList = effortService.findEffortListByIdList(idsList);
         List<OrgDiaryDetail> list = new ArrayList<OrgDiaryDetail>();
-        for (int j = 0; j < effortList.size(); j++) {
-            OrgDiaryDetail orgDiaryDetail = new OrgDiaryDetail();
-            orgDiaryDetail.setOrgDetailContent(effortList.get(j).getEffortWork());
-            orgDiaryDetail.setOrgDetailDate(effortList.get(j).getEffortDate());
-            orgDiaryDetail.setOrgUserId(userUtils.getUser().getOrgUserId());
-            orgDiaryDetail.setOrgDiaryId(diary.getOrgDiaryId());
-            list.add(orgDiaryDetail);
-        }
-        if (diary == null) {
+        List<SystemEffort> effortList = effortService.findEffortListByIdList(idsList);
+        if (diary != null) {
+            for (int j = 0; j < effortList.size(); j++) {
+                OrgDiaryDetail orgDiaryDetail = new OrgDiaryDetail();
+                orgDiaryDetail.setOrgDetailContent(effortList.get(j).getEffortWork());
+                orgDiaryDetail.setOrgDetailDate(effortList.get(j).getEffortDate());
+                orgDiaryDetail.setOrgUserId(userUtils.getUser().getOrgUserId());
+                orgDiaryDetail.setOrgDiaryId(diary.getOrgDiaryId());
+                list.add(orgDiaryDetail);
+            }
+        } else {
+            for (int j = 0; j < effortList.size(); j++) {
+                OrgDiaryDetail orgDiaryDetail = new OrgDiaryDetail();
+                orgDiaryDetail.setOrgDetailContent(effortList.get(j).getEffortWork());
+                orgDiaryDetail.setOrgDetailDate(effortList.get(j).getEffortDate());
+                orgDiaryDetail.setOrgUserId(userUtils.getUser().getOrgUserId());
+                list.add(orgDiaryDetail);
+            }
             orgDiary.setOrgDiaryCreateDate(date);
             orgDiary.setOrgDiarySummary(summary);
             orgDiary.setOrgUserId(userId);
@@ -423,12 +429,13 @@ public class DiaryAction extends BaseController {
             map.put(orgDiaryAndYUser.getOrgDiaryId(), efforts);
             for (OrgDiaryDetail orgDiaryDetail : efforts) {
                 //Date effortDate = orgDiaryDetail.getOrgDetailDate();
-                int week=orgDiaryDetail.getOrgDetailDate().getDay();
-                if(week==0){
+                int week = orgDiaryDetail.getOrgDetailDate().getDay();
+                if (week == 0) {
                     orgDiaryDetail.setEffortWeek(7);
-                }else{
+                } else {
                     orgDiaryDetail.setEffortWeek(week);
-                }            }
+                }
+            }
         }
         model.addAttribute("efforts", map);
         return "organization/diary/diaryData.pagelet";
@@ -470,10 +477,10 @@ public class DiaryAction extends BaseController {
             orgDiaryDetails = diaryService.findDetailListByDiaryId(diaryId);
             for (int i = 0; i < orgDiaryDetails.size(); i++) {
                 OrgDiaryDetail orgDetail = orgDiaryDetails.get(i);
-                int week=orgDetail.getOrgDetailDate().getDay();
-                if(week==0){
+                int week = orgDetail.getOrgDetailDate().getDay();
+                if (week == 0) {
                     orgDetail.setEffortWeek(7);
-                }else{
+                } else {
                     orgDetail.setEffortWeek(week);
                 }
             }
