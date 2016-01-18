@@ -6,20 +6,22 @@
             "summary" "summary" {"initialFrameHeight":"200","placeholder":"请输入本周总结"})${orgDiary?.orgDiarySummary}#end
         #@simpleDiv("line")#end
         #if(list!=null)
-    <h4 class="mt-10">本周日志情况：</h4>
+            <h4 class="mt-10">本周日志情况：</h4>
             #@simpleDiv("line")#end
+        <div class="committed clearfix mt-10 va-m bk-gray radius pd-20 mt-10">
 
             #for(var:list)
-        <div class="committed clearfix mt-10 va-m bk-gray radius pd-20 mt-10">
-            <ol class="logList-detailList">
-                <li><input type="checkbox" id=${var?.effortId} value=${var?.effortId} name="idCheck" #for(var1:details) #if(var1?.orgDetailContent==var?.effortWork) checked="checked"
+        <ol class="logList-detailList">
+        <li>#@shadeStandard("4" "40%")
+                <input type="checkbox" id=${var?.effortId} value=${var?.effortId}
+                   name="idCheck" #for(var1:details) #if(var1?.orgDetailContent==var?.effortWork) checked="checked"
         #end#end><span class="tocommittime">周${var?.effortWeek}:</span><span>${var?.effortAccount}--${var?.effortWork}
-                    <a href="#" target="_blank">ID：${var?.effortId}</a></span></li>
-            </ol>
-        </div>
-        #end
-    </div>
+                    <a href="#" target="_blank">ID：${var?.effortId}</a></span>#end</li>
+    </ol>
     #end
+    </div>
+</div>
+#end
 <input type="hidden" id="efforts" name="efforts">
 <input type="hidden" id="y" name="y" value=${year}>
 <input type="hidden" id="w" name="w" value=${week}>
@@ -38,11 +40,11 @@
     $(function () {
         $("form[name=thisform]").Validform({
             beforeSubmit: function (curform) {
-                var checks=document.getElementsByName("idCheck");
-                var mes="";
-                for(var i=0;i<checks.length;i++){
-                    if(checks[i].checked==true){
-                        mes=mes+checks[i].value+",";
+                var checks = document.getElementsByName("idCheck");
+                var mes = "";
+                for (var i = 0; i < checks.length; i++) {
+                    if (checks[i].checked == true) {
+                        mes = mes + checks[i].value + ",";
                     }
                 }
                 $("#efforts").val(mes);
