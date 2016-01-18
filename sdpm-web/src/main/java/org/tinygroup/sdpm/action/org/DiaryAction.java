@@ -294,7 +294,7 @@ public class DiaryAction extends BaseController {
         Calendar ca = Calendar.getInstance();
         ca.setTime(new Date());
         Integer year = ca.get(Calendar.YEAR);
-        Integer week = ca.get(Calendar.WEEK_OF_YEAR);
+        Integer week = ca.get(Calendar.WEEK_OF_YEAR)-1;
         OrgUser user = null;
         if (orgUserId == null) {
             user = userUtils.getUser();
@@ -370,7 +370,7 @@ public class DiaryAction extends BaseController {
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(date);
             y = calendar.get(Calendar.YEAR);
-            w = calendar.get(Calendar.WEEK_OF_YEAR);
+            w = calendar.get(Calendar.WEEK_OF_YEAR)-1;
         }
         OrgDiary orgDiary = diaryService.findDiaryByUserLatest(UserUtils.getUserId(), y, w);
         model.addAttribute("orgDiary", orgDiary);
@@ -405,9 +405,9 @@ public class DiaryAction extends BaseController {
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(date);
             y = calendar.get(Calendar.YEAR);
-            w = calendar.get(Calendar.WEEK_OF_YEAR);
+            w = calendar.get(Calendar.WEEK_OF_YEAR)-1;
         }
-        if (orgUserId == null) {
+        if (StringUtil.isBlank(orgUserId)) {
             orgUserId = UserUtils.getUserId();
         }
         list = diaryService.findListDiarySubAndSelf(orgUserId, y, w);

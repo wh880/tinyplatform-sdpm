@@ -109,6 +109,9 @@ public class DiaryManagerImpl implements DiaryManager {
 
     @Override
     public List<OrgDiary> findSubordinateOneWeek(List<OrgUser> list, Integer year, Integer week) {
+        if (list==null||list.size()==0){
+            return null;
+        }
         List<String> list1 = new ArrayList<String>();
         for (OrgUser orgUser : list) {
             list1.add(orgUser.getOrgUserId());
