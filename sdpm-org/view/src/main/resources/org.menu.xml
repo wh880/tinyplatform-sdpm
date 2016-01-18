@@ -74,6 +74,7 @@
               sort="1" isShow="1" scope="org-company-edit"/>
     </menu>
     <menu id="organizationDiary" name="周报" href="/org/diary/show" sort="1" isShow="1">
-
+        <menu id="org-diary-edit" name="提交周报" href="/org/diary/add" sort="1" icon="icon-edit"
+              isShow="1" scope="org-diary-edit"/>
     </menu>
 </menu>

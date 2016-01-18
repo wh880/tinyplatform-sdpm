@@ -88,6 +88,11 @@ public class SystemEffort implements Serializable {
      */
     private String effortAccount;
 
+    /**
+     * 以String形式显示星期
+     */
+    private String effortWeekDay;
+
     public Integer getEffortId() {
         return effortId;
     }
@@ -190,5 +195,13 @@ public class SystemEffort implements Serializable {
 
     public void setEffortWeek(Integer effortWeek) {
         this.effortWeek = effortWeek;
+    }
+
+    public String getEffortWeekDay() {
+        return effortWeekDay;
+    }
+
+    public void setEffortWeekDay(String effortWeekDay) {
+        this.effortWeekDay = effortWeekDay;
     }
 }

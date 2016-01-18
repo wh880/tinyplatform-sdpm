@@ -2,6 +2,7 @@ package org.tinygroup.sdpm.system.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.sdpm.project.biz.inter.TaskManager;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
 import org.tinygroup.sdpm.system.biz.inter.EffortManager;
@@ -93,6 +94,9 @@ public class EffortServiceImpl implements EffortService {
 
     @Override
     public List<SystemEffort> findEffortListByIdList(List<Integer> list) {
+        if(CollectionUtil.isEmpty(list)){
+            return null;
+        }
         return effortManager.findEffortListByIdList(list);
     }
 }

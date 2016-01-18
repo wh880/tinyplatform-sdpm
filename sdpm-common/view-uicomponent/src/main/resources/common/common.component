@@ -14,7 +14,7 @@
 <li class="diary-detail">
     <div class="diary-report clearfix">
         <div class="portrait">
-            <a href="showself?userAccount=${authorName}" title="点击查看${authorName}所有的周报">
+            <a href="showOne?userAccount=${authorName}" title="点击查看${authorName}所有的周报">
                 <span class="name b">${authorName}</span>
             </a>
             <div class="r f-14">

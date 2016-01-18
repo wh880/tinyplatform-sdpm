@@ -15,8 +15,8 @@
         <li>#@shadeStandard("4" "40%")
                 <input type="checkbox" id=${var?.effortId} value=${var?.effortId}
                        name="idCheck" #for(var1:details) #if(var1?.orgDetailContent==var?.effortWork) checked="checked"
-            #end#end><span class="tocommittime">周${var?.effortWeek}:</span><span>${var?.effortAccount}--${var?.effortWork}
-                    <a href="#" target="_blank">ID：${var?.effortId}</a></span>#end</li>
+            #end#end><span class="tocommittime">${var?.effortWeekDay}:</span><span>${var?.effortAccount}--${var?.effortWork}
+                    <span>ID：${var?.effortId}</span></span>#end</li>
     </ol>
     #end
 </div>

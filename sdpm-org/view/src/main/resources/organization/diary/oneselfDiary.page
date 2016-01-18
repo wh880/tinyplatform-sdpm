@@ -26,7 +26,7 @@
         #@settoggleLeftBody("treeLeftbox")
             #@zTreeList(call("link",adminPath+"/org/diary/tree"))
                 #setzTreeValMap({"id":"orgUserId","name":"orgUserAccount","pid":"orgUserLeader"}) ##key值为固定
-                #zTreeSetLinkUrl(TINY_CONTEXT_PATH+adminPath+"/org/user/list" )
+                #zTreeSetLinkUrl(TINY_CONTEXT_PATH+adminPath+"/org/diary/show" )
             #end
         #end
     #end

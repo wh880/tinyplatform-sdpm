@@ -488,4 +488,11 @@ public class DateUtils extends org.apache.commons.lang.time.DateUtils {
         return date;
     }
 
+    /**
+     * 获取指定日期的星期
+     */
+    public static String getDateWeek(Date date) {
+        return formatDate(date, "E");
+    }
+
 }

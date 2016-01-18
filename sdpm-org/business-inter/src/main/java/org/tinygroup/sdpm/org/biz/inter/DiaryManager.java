@@ -37,6 +37,11 @@ public interface DiaryManager {
      */
     Pager<OrgDiaryAndUserDO> findByUserId(String id,Integer start,Integer limit);
 
+    /**
+     * 通过用户Id查找周报
+     * @param id
+     * @return
+     */
     List<OrgDiaryAndUserDO> findListByUserId(String id);
 
     /**
@@ -64,6 +69,15 @@ public interface DiaryManager {
      */
     List<OrgDiary> findSubordinateOneWeek(List<OrgUser> list,Integer year,Integer week);
 
+    /**
+     * 获取下属的某一周的周报+分页
+     * @param list
+     * @param year
+     * @param week
+     * @param start
+     * @param limit
+     * @return
+     */
     Pager<OrgDiaryAndUserDO> findPagerSubordinateOneWeek(List<OrgUser> list, Integer year, Integer week,Integer start,Integer limit);
 
     /**
@@ -81,8 +95,21 @@ public interface DiaryManager {
      */
     Pager<OrgDiaryAndUserDO> findPagerSubAndSelf(String userId, List<OrgUser> list, Integer year, Integer week, Integer start, Integer limit);
 
+    /**
+     * 通过年月以及自己ID,与下属ID LIST查找相应的周报List
+     * @param userId
+     * @param list
+     * @param year
+     * @param week
+     * @return
+     */
     List<OrgDiaryAndUserDO> findListSubAndSelf(String userId, List<OrgUser> list, Integer year, Integer week);
 
+    /**
+     * 通过周报ID的List获得对应的详情List
+     * @param list
+     * @return
+     */
     List<OrgDiaryDetail> findDetailListByDiaryList(List<Integer> list);
 
 }

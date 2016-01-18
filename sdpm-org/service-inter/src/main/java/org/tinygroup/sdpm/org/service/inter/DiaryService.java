@@ -10,6 +10,7 @@ import org.tinygroup.tinysqldsl.Pager;
 import java.util.List;
 
 /**
+ * 周报操作Service层接口
  * Created by wangdl16860 on 2016/1/7.
  */
 public interface DiaryService {
@@ -21,7 +22,7 @@ public interface DiaryService {
     /**
      * 删除周报
      */
-    Integer deleteDiary(Integer id);
+   // Integer deleteDiary(Integer id);
 
     /**
      * 更新周报
@@ -31,12 +32,12 @@ public interface DiaryService {
     /**
      * 查看指定ID的周报
      */
-    OrgDiary findDiaryByKey(Integer id);
+   // OrgDiary findDiaryByKey(Integer id);
 
     /**
      * 查找某人的周报
      */
-    Pager<OrgDiaryAndUserDO> findPagerDiaryByUserId(String id,Integer start,Integer limit);
+  //  Pager<OrgDiaryAndUserDO> findPagerDiaryByUserId(String id,Integer start,Integer limit);
 
     /**
      * 查找某人的周报
@@ -51,21 +52,21 @@ public interface DiaryService {
     /**
      *查看下属的周报
      */
-    List<OrgDiary> findDiaryListSubordinate(String id);
+   // List<OrgDiary> findDiaryListSubordinate(String id);
 
     /**
      * 根据年、周查询某一周的周报(某人)
      */
-    OrgDiary findDiaryByUserAndDate(Integer year, Integer week, String userId);
+   // OrgDiary findDiaryByUserAndDate(Integer year, Integer week, String userId);
 
     /**
      * 根据某年、某周查询那一周的周报
      */
-    List<OrgDiary> findDiaryListOneWeek(Integer year, Integer week);
+  //  List<OrgDiary> findDiaryListOneWeek(Integer year, Integer week);
 
     List<OrgDiary> findDiaryListSubordinateOneWeek(String userId, Integer year, Integer week);
 
-    Pager<OrgDiaryAndUserDO> findDiaryPagerSubordinateOneWeek(String userId, Integer year, Integer week, Integer start, Integer limit);
+  //  Pager<OrgDiaryAndUserDO> findDiaryPagerSubordinateOneWeek(String userId, Integer year, Integer week, Integer start, Integer limit);
 
     /**
      * 查询本周未提交周报的下属
@@ -74,7 +75,7 @@ public interface DiaryService {
      * @param week
      * @return
      */
-    List<OrgUser> findUserNoSubmit(String userId, Integer year, Integer week);
+   // List<OrgUser> findUserNoSubmit(String userId, Integer year, Integer week);
 
     /**
      * 查询某人最新的周报
@@ -86,9 +87,21 @@ public interface DiaryService {
     /**
      * 查询直接下属及自己的本周的周报+分页
      */
-    Pager<OrgDiaryAndUserDO> findPagerDiarySubAndSelf(String userId, Integer year, Integer week, Integer start, Integer limit);
+    //Pager<OrgDiaryAndUserDO> findPagerDiarySubAndSelf(String userId, Integer year, Integer week, Integer start, Integer limit);
 
+    /**
+     * 查询获得直接下属以及自己的周报（某一年某一周）
+     * @param userId
+     * @param year
+     * @param week
+     * @return
+     */
     List<OrgDiaryAndUserDO> findListDiarySubAndSelf(String userId, Integer year, Integer week);
 
+    /**
+     * 通过周报List获得这些周报对应的详单List
+     * @param list
+     * @return
+     */
     List<OrgDiaryDetail> findDetailListByDiaryList(List<OrgDiaryAndUserDO> list);
 }
