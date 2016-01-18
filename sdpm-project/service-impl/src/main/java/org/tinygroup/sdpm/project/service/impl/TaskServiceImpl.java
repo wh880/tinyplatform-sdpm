@@ -2,7 +2,6 @@ package org.tinygroup.sdpm.project.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.dao.condition.ConditionCarrier;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.project.biz.inter.TaskManager;
@@ -95,14 +94,12 @@ public class TaskServiceImpl implements TaskService {
     }
 
     public Integer updateStartTask(ProjectTask task) {
-        task.setTaskRealStarted(new Date());
         task.setTaskStatus("2");
         task.setTaskLastEditedDate(new Date());
         return taskManager.update(task);
     }
 
     public Integer updateCloseTask(ProjectTask task) {
-        task.setTaskCloseDate(new Date());
         task.setTaskStatus("6");
         task.setTaskLastEditedDate(new Date());
         return taskManager.update(task);
