@@ -1,0 +1,8 @@
+<tables>
+  <table id="cbb879462eb7491abc28ede5d0bac659" name="org_white_list" title="白名单表" schema="" package-name="">
+    <description></description>
+    <table-field standard-field-id="70e9d7a468b6447ab7e4c4de0a227ea4" primary="true" unique="true" not-null="true" id="org_white_list_id" auto-increase="true"/>
+    <table-field standard-field-id="4ebccd73cf7f41d8a716ed8be8c3a7d2" primary="false" unique="false" not-null="true" id="org_white_list_first_account" auto-increase="false"/>
+    <table-field standard-field-id="3bcb0cdb04c84d728b5ece9387c28301" primary="false" unique="false" not-null="true" id="org_white_list_second_account" auto-increase="false"/>
+  </table>
+</tables>

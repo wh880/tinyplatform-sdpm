@@ -201,4 +201,7 @@
   </standard-field>
   <standard-field id="eed970b87f9f46d3bb4183d77e7c59a6" name="org_diary_year" title="周报年" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
   <standard-field id="115c8547865d4c1b9dd08c22c893891c" name="org_diary_week" title="周报周数" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
+  <standard-field id="4ebccd73cf7f41d8a716ed8be8c3a7d2" name="org_white_list_first_account" title="白名单甲方账号" business-type-id="095e594e1550424b9643c7e2279e85be"/>
+  <standard-field id="3bcb0cdb04c84d728b5ece9387c28301" name="org_white_list_second_account" title="白名单乙方账号" business-type-id="095e594e1550424b9643c7e2279e85be"/>
+  <standard-field id="70e9d7a468b6447ab7e4c4de0a227ea4" name="org_white_list_id" title="白名单ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
 </standard-fields>
