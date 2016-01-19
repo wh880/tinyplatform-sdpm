@@ -4,8 +4,8 @@
         text-align: center;
         padding-top: 20px;
         padding-bottom: 20px;
-        background: #fdfdfd;
-        border-bottom: #ddd 1px dashed
+        background: #fefefe;
+        border-bottom:none
     }
 
     .diary-content-head h3 {
@@ -28,7 +28,7 @@
 </style>
 #set(name="organizationDiary")
 #@layout(org)#end
-#@div(divClass="operationbar")
+#@div(divClass="")
 <div class="diary-content-head">
     <h3>
         #@circleButton("primary get-prev")#fontIco("chevron-left")#end
@@ -117,10 +117,10 @@
         });
     });
 </script>
-#end
 <div class="tweet_list diarylist">
     <ul class="diarylist-detail" id="diarylist-detail">
 
 
     </ul>
 </div>
+#end

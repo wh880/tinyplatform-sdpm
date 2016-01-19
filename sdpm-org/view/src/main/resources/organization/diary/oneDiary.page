@@ -1,23 +1,42 @@
+<script type="text/javascript">
+    <!--
+    $("document").ready(function(){
+        $("#forall").click(function(){
+            if(this.checked){
+                $("input[name='idCheck']").each(function(){this.checked=true;});
+                $("#checkboxAll").attr("value","反选");
+            }else{
+                $("input[name='idCheck']").each(function(){this.checked=false;});
+                $("#checkboxAll").attr("value","全选");
+            }
+        });
+
+        $("#checkboxAll").click(function(){
+            $("[name='idCheck']").attr("checked",'true');//全选
+        });
+    });
+    //-->
+</script>
 #@elementItem()
     #@tinyForm("thisform" call("link",adminPath+"/org/diary/add") "post")
     <div class="col-8 col-offset-2">
 
         #@Teditor(
             "summary" "summary" {"initialFrameHeight":"200","placeholder":"请输入本周总结"})${orgDiary?.orgDiarySummary}#end
-        #@simpleDiv("line")#end
         #if(list!=null)
-            <h4 class="mt-10">本周日志情况：</h4>
-            #@simpleDiv("line")#end
-        <div class="committed clearfix mt-10 va-m bk-gray radius pd-20 mt-10">
 
+        <div class="committed forall-box clearfix mt-10 va-m mt-10">
+            <div class="forall">
+                <input type="checkbox" id="forall" name="forall"/>
+                <input  type="button" class="checkboxAll" id="checkboxAll" value="全选"/>
+            </div>
             #for(var:list)
-        <ol class="logList-detailList">
-        <li>#@shadeStandard("4" "40%")
+            <p>
                 <input type="checkbox" id=${var?.effortId} value=${var?.effortId}
                        name="idCheck" #for(var1:details) #if(var1?.orgDetailContent==var?.effortWork) checked="checked"
-            #end#end><span class="tocommittime">${var?.effortWeekDay}:</span><span>${var?.effortAccount}--${var?.effortWork}
-                    <span>ID：${var?.effortId}</span></span>#end</li>
-    </ol>
+            #end#end> <span class="tocommittime">${var?.effortWeekDay} </span><span>${var?.effortAccount}--${var?.effortWork}
+                    <span>ID：${var?.effortId}</span></span>
+            </p>
     #end
 </div>
 </div>
