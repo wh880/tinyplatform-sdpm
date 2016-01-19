@@ -1,29 +1,7 @@
 #!set(activeTitle="提交周报",activeMenuId=currentPageId,parentId=parentId?:"0")
 <style type="text/css">
     .diary-content-head {
-        text-align: center;
-        padding-top: 20px;
-        padding-bottom: 20px;
-        background: #fefefe;
         border-bottom:none
-    }
-
-    .diary-content-head h3 {
-        font-size: 26px;
-        line-height: 30px
-    }
-
-    .diary-content-head h3 .btn-circle {
-        vertical-align: top;
-    }
-
-    .diary-content-head .week-date {
-        padding: 4px 12px;
-        background: #857198;
-        display: inline-block;
-        color: #fff;
-        font-size: 14px;
-        border-radius: 44px;
     }
 </style>
 #set(name="organizationDiary")
