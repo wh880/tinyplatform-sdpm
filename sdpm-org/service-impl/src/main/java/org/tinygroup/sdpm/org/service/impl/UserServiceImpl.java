@@ -178,4 +178,9 @@ public class UserServiceImpl implements UserService {
     public List<OrgUser> findAllSubordinate(String userId) {
         return userManager.getAllStaffByLeader(userId);
     }
+
+    @Override
+    public List<OrgUser> findWhiteUser(String userAccount) {
+        return userManager.getWhiteUserList(userAccount);
+    }
 }

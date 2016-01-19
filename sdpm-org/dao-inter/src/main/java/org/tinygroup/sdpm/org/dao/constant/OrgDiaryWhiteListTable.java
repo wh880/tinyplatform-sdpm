@@ -14,18 +14,26 @@
  *  limitations under the License.
  */
 
-package org.tinygroup.sdpm.org.dao.pojo;
+package org.tinygroup.sdpm.org.dao.constant;
 
-import java.io.Serializable;
+import org.tinygroup.tinysqldsl.base.Column;
+import org.tinygroup.tinysqldsl.base.Table;
 
-/**
+/** 
  * <!-- begin-user-doc -->
- * 白名单表
+ * 周报白名单表
  * 
  * <!-- end-user-doc -->
  * @generated
  */
-public class OrgWhiteList implements Serializable{
+public class OrgDiaryWhiteListTable extends Table {
+
+	/** 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final OrgDiaryWhiteListTable ORG_DIARY_WHITE_LISTTABLE = new OrgDiaryWhiteListTable();
 
 	/** 
 	 * <!-- begin-user-doc -->
@@ -34,7 +42,12 @@ public class OrgWhiteList implements Serializable{
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private Integer orgWhiteListId;
+	/** 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public final Column ORG_DIARY_WHITE_LIST_ID = new Column(this, "org_diary_white_list_id");
 
 	/** 
 	 * <!-- begin-user-doc -->
@@ -43,7 +56,12 @@ public class OrgWhiteList implements Serializable{
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private String orgWhiteListFirstAccount;
+	/** 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public final Column ORG_DIARY_WHITE_LIST_FIRST_ACCOUNT = new Column(this, "org_diary_white_list_first_account");
 
 	/** 
 	 * <!-- begin-user-doc -->
@@ -52,31 +70,16 @@ public class OrgWhiteList implements Serializable{
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private String orgWhiteListSecondAccount;
+	/** 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public final Column ORG_DIARY_WHITE_LIST_SECOND_ACCOUNT = new Column(this, "org_diary_white_list_second_account");
 
 
-	public void setOrgWhiteListId(Integer orgWhiteListId){
-		this. orgWhiteListId = orgWhiteListId;
-	}
-
-	public Integer getOrgWhiteListId(){
-		return orgWhiteListId;
-	}
-
-	public void setOrgWhiteListFirstAccount(String orgWhiteListFirstAccount){
-		this. orgWhiteListFirstAccount = orgWhiteListFirstAccount;
-	}
-
-	public String getOrgWhiteListFirstAccount(){
-		return orgWhiteListFirstAccount;
-	}
-
-	public void setOrgWhiteListSecondAccount(String orgWhiteListSecondAccount){
-		this. orgWhiteListSecondAccount = orgWhiteListSecondAccount;
-	}
-
-	public String getOrgWhiteListSecondAccount(){
-		return orgWhiteListSecondAccount;
+	private OrgDiaryWhiteListTable() {
+		super("org_diary_white_list");
 	}
 
 }

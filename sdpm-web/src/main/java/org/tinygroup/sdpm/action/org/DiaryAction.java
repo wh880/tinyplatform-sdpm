@@ -48,6 +48,7 @@ public class DiaryAction extends BaseController {
 
     /**
      * 添加周报以及相应的周报详情
+     *
      * @param summary
      * @param year
      * @param week
@@ -295,9 +296,14 @@ public class DiaryAction extends BaseController {
      */
     @ResponseBody
     @RequestMapping("tree")
-    public List<Map<String, Object>> ajax(SystemModule systemModule, HttpServletResponse response, @RequestParam(value = "type", defaultValue = "name") String type) {
+    public List<Map<String, Object>> ajax(SystemModule systemModule, HttpServletResponse response, @RequestParam(value = "type", defaultValue = "name") String type,Integer choose) {
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
-        List<OrgUser> usersList = userService.findAllSubordinate(UserUtils.getUserId());
+        List<OrgUser> usersList=null;
+        if(choose==null) {
+            usersList = userService.findAllSubordinate(UserUtils.getUserId());
+        }else{
+            usersList= userService.findWhiteUser(UserUtils.getUserAccount());
+        }
         usersList.add(userUtils.getUser());
         for (OrgUser user : usersList) {
             Map<String, Object> map = new HashMap<String, Object>();
@@ -365,7 +371,7 @@ public class DiaryAction extends BaseController {
     @RequiresPermissions("organizationDiary")
     @RequestMapping("/list/data")
     public String listData(String orgUserId, @RequestParam(value = "y") Integer year, @RequestParam(value = "w") Integer week,
-                           Model model) {
+                           Model model, Integer type) {
         List<OrgDiaryAndUserDO> list;
         if (year == null || week == null) {
             Date date = new Date();
@@ -377,7 +383,12 @@ public class DiaryAction extends BaseController {
         if (StringUtil.isBlank(orgUserId)) {
             orgUserId = UserUtils.getUserId();
         }
-        list = diaryService.findListDiarySubAndSelf(orgUserId, year, week);
+        if (type == null) {
+            list = diaryService.findListDiarySubAndSelf(orgUserId, year, week);
+        } else {//如果是查询白名单用户周报，传一个type值
+            String userAccount=userUtils.getUserById(orgUserId).getOrgUserAccount();
+            list = diaryService.findDiaryListByWhiteList(userAccount, year, week);
+        }
 
         model.addAttribute("list", list);
         Map<Integer, List<OrgDiaryDetail>> map = new HashMap<Integer, List<OrgDiaryDetail>>();
@@ -429,5 +440,63 @@ public class DiaryAction extends BaseController {
         model.addAttribute("userAccount", userAccount);
         model.addAttribute("details", map);
         return "organization/diary/oneselfDiary";
+    }
+
+    /*
+        @RequiresPermissions("organizationDiary")
+        @RequestMapping("/list/white/data")
+        public String listWhiteData(String orgUserId, @RequestParam(value = "y") Integer year, @RequestParam(value = "w") Integer week,
+                               Model model) {
+            List<OrgDiaryAndUserDO> list;
+            if (year == null || week == null) {
+                Date date = new Date();
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(date);
+                year = calendar.get(Calendar.YEAR);
+                week = calendar.get(Calendar.WEEK_OF_YEAR) - 1;
+            }
+            if (StringUtil.isBlank(orgUserId)) {
+                orgUserId = UserUtils.getUserId();
+            }
+            list = diaryService.findDiaryListByWhiteList(orgUserId, year, week);
+
+            model.addAttribute("list", list);
+            Map<Integer, List<OrgDiaryDetail>> map = new HashMap<Integer, List<OrgDiaryDetail>>();
+            for (OrgDiaryAndUserDO orgDiaryAndYUser : list) {
+                List<OrgDiaryDetail> efforts = null;
+                if (map.get(orgDiaryAndYUser.getOrgDiaryId()) == null) {
+                    map.put(orgDiaryAndYUser.getOrgDiaryId(), efforts);
+                }
+                efforts = diaryService.findDetailListByDiaryList(list);
+                for (OrgDiaryDetail orgDiaryDetail : efforts) {
+                    orgDiaryDetail.setEffortWeek(DateUtils.getDateWeek(orgDiaryDetail.getOrgDetailDate()));
+                }
+
+                map.put(orgDiaryAndYUser.getOrgDiaryId(), efforts);
+
+            }
+            model.addAttribute("efforts", map);
+            return "organization/diary/diaryData.pagelet";
+        }
+    */
+    @RequiresPermissions("organizationDiary")
+    @RequestMapping("/show/white")
+    public String showWhite(String orgUserId, Model model) {
+        Calendar ca = Calendar.getInstance();
+        ca.setTime(new Date());
+        Integer year = ca.get(Calendar.YEAR);
+        Integer week = ca.get(Calendar.WEEK_OF_YEAR) - 1;
+        OrgUser user = null;
+        if (orgUserId == null) {
+            user = userUtils.getUser();
+        } else {
+            user = userUtils.getUserById(orgUserId);
+        }
+        OrgDiary orgDiary = diaryService.findDiaryByUserLatest(user.getOrgUserId(), year, week);//自己
+        List<OrgDiary> list = diaryService.findDiaryListSubordinateOneWeek(user.getOrgUserId(), year, week);//下属
+        model.addAttribute("orgDiary", orgDiary);
+        model.addAttribute("list", list);
+        model.addAttribute("orgUserId", orgUserId);
+        return "organization/diary/diaryWhiteShow.page";
     }
 }

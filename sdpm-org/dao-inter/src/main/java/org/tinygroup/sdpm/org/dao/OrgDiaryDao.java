@@ -53,4 +53,6 @@ public interface OrgDiaryDao extends BaseDao<OrgDiary, Integer> {
 
     List<OrgDiaryAndUserDO> findListSubordinateOneWeek(List<String> list, Integer year, Integer week);
 
+    List<OrgDiaryAndUserDO> findListByWhiteList(String userId,Integer year,Integer week);
+
 }

@@ -112,4 +112,13 @@ public interface DiaryManager {
      */
     List<OrgDiaryDetail> findDetailListByDiaryList(List<Integer> list);
 
+    /**
+     * 查找用户白名单内的人某一周的周报
+     * @param userId
+     * @param year
+     * @param week
+     * @return
+     */
+    List<OrgDiaryAndUserDO> findDiaryListByWhiteList(String userId,Integer year,Integer week);
+
 }

@@ -169,4 +169,10 @@ public interface UserManager {
      * @return
      */
     List<OrgUser> getUserListById(List<String> list);
+
+    /**
+     * 查找用户相关的白名单用户
+     */
+    List<OrgUser> getWhiteUserList(String userAccount);
+
 }

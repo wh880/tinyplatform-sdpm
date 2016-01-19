@@ -166,4 +166,9 @@ public class DiaryManagerImpl implements DiaryManager {
     public List<OrgDiaryDetail> findDetailListByDiaryList(List<Integer> list) {
         return orgDiaryDetailDao.findListByDiaryList(list);
     }
+
+    @Override
+    public List<OrgDiaryAndUserDO> findDiaryListByWhiteList(String userId, Integer year, Integer week) {
+        return orgDiaryDao.findListByWhiteList(userId,year,week);
+    }
 }

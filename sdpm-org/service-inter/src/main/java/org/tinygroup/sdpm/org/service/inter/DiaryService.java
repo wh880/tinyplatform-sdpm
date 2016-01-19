@@ -104,4 +104,9 @@ public interface DiaryService {
      * @return
      */
     List<OrgDiaryDetail> findDetailListByDiaryList(List<OrgDiaryAndUserDO> list);
+
+    /**
+     * 查看所有自己白名单用户的某一周的周报
+     */
+    List<OrgDiaryAndUserDO> findDiaryListByWhiteList(String userId,Integer year,Integer week);
 }

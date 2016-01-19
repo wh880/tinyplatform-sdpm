@@ -1,0 +1,31 @@
+#set(records=pager.totalCount,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
+#if (pagesize>records-pagesize*(page-1))
+    #set(pagesize=records-(page-1)*pagesize)
+#end
+#setTinyItemCount(pager.totalCount)
+#foreach(var:pager.records)
+    #@tr()
+        #@td()<input type="checkbox" value="${var?.orgUserAccount}" name="accountCheck">#end
+        #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/org/user/story?choose=3&id=${var?.orgUserId}">${var
+            ?.orgUserRealName}</a>#end
+        #@td("nowrap")${var?.orgUserAccount}#end
+        #@td("nowrap")${var.orgUserRole}#end
+        #@td("nowrap")
+        <a href="mailto:${var?.orgUserEmail}">${var?.orgUserEmail}</a>
+        #end
+        #@td()
+            #if(var?.orgUserGender=="0")
+            男
+            #elseif(var?.orgUserGender=="1")
+            女
+            #else
+            未知
+            #end
+        #end
+        #@td("nowrap")${var?.orgUserPhone}#end
+        #@td("nowrap")${var?.orgUserJoin}#end
+    #end
+#end
+#@tinyForm("thisform" call("link",adminPath+"/org/user/addWhiteList") "post")
+<input type="hidden" id="userAccounts" name="userAccounts">
+#end

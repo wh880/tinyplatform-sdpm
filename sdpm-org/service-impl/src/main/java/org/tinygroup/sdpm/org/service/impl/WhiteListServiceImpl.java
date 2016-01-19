@@ -1,7 +1,39 @@
 package org.tinygroup.sdpm.org.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.tinygroup.sdpm.org.biz.inter.WhiteListManager;
+import org.tinygroup.sdpm.org.dao.pojo.OrgDiaryWhiteList;
+import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
+import org.tinygroup.sdpm.org.service.inter.WhiteListService;
+
+import java.util.List;
+
 /**
  * Created by wangdl16860 on 2016/1/19.
  */
-public class WhiteListServiceImpl {
+@Component
+public class WhiteListServiceImpl implements WhiteListService{
+    @Autowired
+    private WhiteListManager whiteListManager;
+
+    @Override
+    public int[] addWhiteList(String firstUserAccount, List<String> secondUserAccountList) {
+        return whiteListManager.add(firstUserAccount,secondUserAccountList);
+    }
+
+    @Override
+    public List<OrgUser> findUserListByWhiteFirst(String firstUserAccount) {
+        return whiteListManager.findUserListByAccount(firstUserAccount);
+    }
+
+    @Override
+    public OrgDiaryWhiteList addOneWhite(String firstAccount, String secondAccount) {
+        return whiteListManager.addOneWhite(firstAccount,secondAccount);
+    }
+
+    @Override
+    public OrgDiaryWhiteList findDiaryWhiteByAccounts(String firstAccount, String secondAccount) {
+        return whiteListManager.findOneByAccounts(firstAccount,secondAccount);
+    }
 }

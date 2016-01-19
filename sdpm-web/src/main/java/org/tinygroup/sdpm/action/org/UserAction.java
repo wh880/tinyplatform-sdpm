@@ -14,11 +14,13 @@ import org.tinygroup.sdpm.common.util.Collections3;
 import org.tinygroup.sdpm.common.util.DateUtils;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.org.dao.pojo.OrgDept;
+import org.tinygroup.sdpm.org.dao.pojo.OrgDiaryWhiteList;
 import org.tinygroup.sdpm.org.dao.pojo.OrgRole;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.DeptService;
 import org.tinygroup.sdpm.org.service.inter.RoleService;
 import org.tinygroup.sdpm.org.service.inter.UserService;
+import org.tinygroup.sdpm.org.service.inter.WhiteListService;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.service.inter.StoryService;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
@@ -37,6 +39,7 @@ import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.dao.pojo.SystemConfig;
 import org.tinygroup.sdpm.system.service.inter.ActionService;
 import org.tinygroup.sdpm.util.LogUtil;
+import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -71,6 +74,8 @@ public class UserAction extends BaseController {
     private ProjectService projectService;
     @Autowired
     private ActionService actionService;
+    @Autowired
+    private WhiteListService whiteListService;
 
     /**
      * 修改密码表单
@@ -87,7 +92,7 @@ public class UserAction extends BaseController {
      *
      * @return
      */
-    @RequestMapping(value = "/passwordSave",method = RequestMethod.POST)
+    @RequestMapping(value = "/passwordSave", method = RequestMethod.POST)
     public String passwordSave(String oldPassword, String newPassword, Model model) {
         OrgUser user = userUtils.getUser();
         if (userService.validatePassword(oldPassword, user.getOrgUserPassword())) {
@@ -96,10 +101,10 @@ public class UserAction extends BaseController {
             newUser.setOrgUserPassword(newPassword);
             userService.updateUser(newUser);
             addMessage(model, "修改密码成功！");
-            return "redirect:"+adminPath+"/home";
+            return "redirect:" + adminPath + "/home";
         } else {
             addMessage(model, "修改密码失败，原始密码错误！");
-            return "redirect:"+adminPath+"/org/user/passwordForm";
+            return "redirect:" + adminPath + "/org/user/passwordForm";
         }
     }
 
@@ -165,7 +170,7 @@ public class UserAction extends BaseController {
                         , userUtils.getUserId()
                         , null, null, null, null, null);
                 roleService.batchAddRolesToUser(userTemp.getOrgUserId(), roleIds.split(","));
-                if(!StringUtil.isBlank(lastAddress)){
+                if (!StringUtil.isBlank(lastAddress)) {
                     return "redirect:" + lastAddress;
                 }
             } else {
@@ -590,7 +595,7 @@ public class UserAction extends BaseController {
             result.add(userService.findUser(initKey));
             return result;
         }
-        return userService.userInCondition(key,Integer.parseInt(configService.getConfigBySection(SystemConfig.SEARCH_CONFIG).getConfigKey()),null);
+        return userService.userInCondition(key, Integer.parseInt(configService.getConfigBySection(SystemConfig.SEARCH_CONFIG).getConfigKey()), null);
     }
 
     @ResponseBody
@@ -625,14 +630,65 @@ public class UserAction extends BaseController {
         }
         return userService.userInCondition(key, Integer.parseInt(configService.getConfigBySection(SystemConfig.SEARCH_CONFIG).getConfigKey()), ids);
     }
+
     @RequestMapping("batchUserInCondition")
-    public String ajaxUserByCondition(String condition,Model model){
-        model.addAttribute("userList",userService.userInCondition(condition,100,null));
+    public String ajaxUserByCondition(String condition, Model model) {
+        model.addAttribute("userList", userService.userInCondition(condition, 100, null));
         return "organization/user/team/batchData.pagelet";
     }
 
     @RequestMapping("toBatchChooseTeam")
-    public String toBatchChooseTeam(){
+    public String toBatchChooseTeam() {
         return "organization/user/team/batchChooseTeamMember.pagelet";
     }
+
+    /**
+     * 将选中用户加入到当前用户的白名单当中
+     *
+     * @param userAccount
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("addWhiteList")
+    public Map addWhiteList(String userAccount) {
+        if (StringUtil.isBlank(userAccount)) {
+            return resultMap(false, "添加失败");
+        }
+        //判断是否存在此用户
+        OrgUser orgUser=userService.findUserByAccount(userAccount);
+        if(orgUser==null){
+            return resultMap(false, "不存在此用户");
+        }
+        OrgUser user = userUtils.getUser();
+        String firstAccount = user.getOrgUserAccount();//甲方
+        //判断是否已经存在
+        OrgDiaryWhiteList orgDiaryWhiteList=whiteListService.findDiaryWhiteByAccounts(firstAccount,userAccount);
+        if(orgDiaryWhiteList!=null){
+            return resultMap(false,"用户关系已存在");
+        }
+        //进行白名单插入操作
+        whiteListService.addOneWhite(firstAccount,userAccount);
+        return resultMap(true, "添加成功");
+    }
+
+    @RequestMapping("showAdd")
+    public String showAdd() {
+        return "organization/diary/userTable.pagelet";
+    }
+/*
+    @RequiresPermissions("organizationUser")
+    @RequestMapping("/list/data/diary")
+    public String list(Integer orgDeptId, Integer start, Integer limit,
+                       OrgUser orgUser, Model model) {
+        Pager<OrgUser> pager;
+        if (orgDeptId == null || orgDeptId == -1) {
+            orgUser.setOrgDeptId(null);
+            pager = userService.findUserPager(start, limit, orgUser);
+        } else {
+            pager = userService.findUserByDeptId(start, limit, orgDeptId);
+        }
+        model.addAttribute("pager", pager);
+        return "organization/diary/userTableData.pagelet";
+    }
+    */
 }

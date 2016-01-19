@@ -130,4 +130,9 @@ public class DiaryServiceImpl implements DiaryService {
         }
         return diaryManager.findDetailListByDiaryList(list1);
     }
+
+    @Override
+    public List<OrgDiaryAndUserDO> findDiaryListByWhiteList(String userId, Integer year, Integer week) {
+        return diaryManager.findDiaryListByWhiteList(userId,year,week);
+    }
 }
