@@ -1,0 +1,17 @@
+<service-components>
+  <service-component type="org.tinygroup.sdpm.org.service.inter.WhiteListService" bean="whiteListServiceImpl">
+    <service-method local-name="addWhiteList" service-id="addWhiteList" method-name="addWhiteList" cacheable="false" category="org.tinygroup.sdpm.org.service.inter">
+      <service-parameters>
+        <service-parameter name="firstUserAccount" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="secondUserAccount" type="java.lang.String" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="addWhiteListResult" required="false" is-array="false" type="org.tinygroup.sdpm.org.dao.pojo.OrgWhiteList"/>
+    </service-method>
+    <service-method local-name="findUserListByWhiteFirst" service-id="findUserListByWhiteFirst" method-name="findUserListByWhiteFirst" cacheable="false" category="org.tinygroup.sdpm.org.service.inter">
+      <service-parameters>
+        <service-parameter name="firstUserAccount" type="java.lang.String" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findUserListByWhiteFirstResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.org.dao.pojo.OrgUser"/>
+    </service-method>
+  </service-component>
+</service-components>
