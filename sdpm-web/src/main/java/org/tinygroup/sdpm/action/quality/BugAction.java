@@ -211,7 +211,7 @@ public class BugAction extends BaseController {
                                HttpServletRequest request) {
         boolean isSearch = false;
         for(SearchInfo info : infos.getInfos()){
-            if(StringUtil.isBlank(info.getValue())){
+            if(!StringUtil.isBlank(info.getValue())){
                 isSearch=true;
                 break;
             }
