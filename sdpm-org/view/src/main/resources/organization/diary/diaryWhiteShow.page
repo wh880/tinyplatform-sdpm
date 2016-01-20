@@ -27,7 +27,7 @@
             #@zTreeList(call("link",adminPath+"/org/diary/tree?choose=1"))
                 #setzTreeValMap({"id":"orgUserId","name":"orgUserAccount","pid":"orgUserLeader"}) ##key值为固定
                 #zTreeSetLinkUrl(TINY_CONTEXT_PATH+adminPath+"/org/diary/show" )
-                #zTreeSetDelUrl(TINY_CONTEXT_PATH+adminPath+"/org/user/deleteDiaryWhiteList?userAccount=")
+                #zTreeSetDelUrl(TINY_CONTEXT_PATH+adminPath+"/org/user/deleteDiaryWhiteList")
             #end
         #end
     #end

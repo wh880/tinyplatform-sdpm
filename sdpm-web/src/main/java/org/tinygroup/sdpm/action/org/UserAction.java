@@ -697,7 +697,7 @@ public class UserAction extends BaseController {
 
     /**
      * 删除当前用户与所选用户的周报白名单关系
-     * @param userAccount
+     * @param orgUserId
      * @return
      */
     @ResponseBody
