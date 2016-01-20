@@ -2,36 +2,35 @@
     #@tinyForm("thisform" call("link",adminPath+"/org/user/addWhiteList") "get")
         #@colLabel()用户账号：#end
         #@formControlDiv("col-8")
-            #tinyInput("text" "userAccount" ""{"placeholder":"请输入您要添加的用户账号","datatype":"*4-16","ajaxurl":call("link",
-                "/data/usercheck.pagelet"),"nullmsg":"用户名不能为空！","id":"userAccount","class":"input-text"})
+            #tinyInput("text" "userAccount" ""{"placeholder":"请输入您要添加的用户账号","datatype":"*4-16","nullmsg":"用户名不能为空！","id":"userAccount","class":"input-text"})
         #end
 
     <div class="col-1">
         <input style="float: left" type="submit" id="submit2" class="commitBtn" value="保存">
     </div>
     #end
-##<script>
-##    $(function () {
-##        $("form[name=thisform]").Validform({
-##            beforeSubmit: function (curform) {
-##                $(curform).ajaxSubmit({
-##                    dataType: "json",
-##                    success: function (data) {
-##                        if (data.status == "y" || data.status == "success") {
-##                            layer.msg(data.info, 2, 1, function () {
-##                                $(curform).closest(".modal").trigger("close");
-##                            });
-##                        } else {
-##                            layer.msg(data.info, 1);
-##                        }
-##                    },
-##                    error: function () {
-##                        layer.msg(data.info);
-##                    }
-##                });
-##                return false;
-##            }
-##        });
-##    });
-##</script>
+<script>
+    $(function () {
+        $("form[name=thisform]").Validform({
+            beforeSubmit: function (curform) {
+                $(curform).ajaxSubmit({
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.status == "y" || data.status == "success") {
+                            layer.msg(data.info, 2, 1, function () {
+                                $(curform).closest(".modal").trigger("close");
+                            });
+                        } else {
+                            layer.msg(data.info, 1);
+                        }
+                    },
+                    error: function () {
+                        layer.msg(data.info);
+                    }
+                });
+                return false;
+            }
+        });
+    });
+</script>
 #end
