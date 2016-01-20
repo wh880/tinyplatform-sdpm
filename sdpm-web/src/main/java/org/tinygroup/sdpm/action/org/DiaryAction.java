@@ -299,25 +299,37 @@ public class DiaryAction extends BaseController {
     public List<Map<String, Object>> ajax(SystemModule systemModule, HttpServletResponse response, @RequestParam(value = "type", defaultValue = "name") String type, Integer choose) {
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
         List<OrgUser> usersList = null;
+        OrgUser orgUser = userUtils.getUser();
         if (choose == null) {
-            usersList = userService.findAllSubordinate(UserUtils.getUserId());
-        } else {
-            usersList = userService.findWhiteUser(UserUtils.getUserAccount());
-        }
-        usersList.add(userUtils.getUser());
-        for (OrgUser user : usersList) {
-            Map<String, Object> map = new HashMap<String, Object>();
-            map.put("id", user.getOrgUserId());
-            map.put("pId", user.getOrgUserLeader());
-            map.put("open", true);
-            map.put("add", false);
-            if (choose != null) {
-                map.put("edit", true);
-            } else {
+            usersList = userService.findAllSubordinate(UserUtils.getUserId());//白名单树
+            usersList.add(orgUser);
+            for (OrgUser user : usersList) {
+                Map<String, Object> map = new HashMap<String, Object>();
+                map.put("id", user.getOrgUserId());
+                map.put("open", true);
+                map.put("add", false);
+                map.put("pId", user.getOrgUserLeader());
                 map.put("edit", false);
+                map.put("name", user.getOrgUserAccount());
+                list.add(map);
             }
-            map.put("name", user.getOrgUserAccount());
-            list.add(map);
+        } else {
+            usersList = userService.findWhiteUser(UserUtils.getUserAccount());//直接下属树
+            usersList.add(orgUser);
+            for (OrgUser user : usersList) {
+                Map<String, Object> map = new HashMap<String, Object>();
+                map.put("id", user.getOrgUserId());
+                map.put("open", true);
+                map.put("add", false);
+                if (!user.getOrgUserId().equals(orgUser.getOrgUserId())) {
+                    map.put("pId", orgUser.getOrgUserId());
+                } else {
+                    map.put("pId", null);
+                }
+                map.put("edit", true);
+                map.put("name", user.getOrgUserAccount());
+                list.add(map);
+            }
         }
         return list;
     }
