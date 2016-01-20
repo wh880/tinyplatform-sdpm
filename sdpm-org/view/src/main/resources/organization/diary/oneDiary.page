@@ -1,18 +1,22 @@
 <script type="text/javascript">
     <!--
-    $("document").ready(function(){
-        $("#forall").click(function(){
-            if(this.checked){
-                $("input[name='idCheck']").each(function(){this.checked=true;});
-                $("#checkboxAll").attr("value","反选");
-            }else{
-                $("input[name='idCheck']").each(function(){this.checked=false;});
-                $("#checkboxAll").attr("value","全选");
+    $("document").ready(function () {
+        $("#forall").click(function () {
+            if (this.checked) {
+                $("input[name='idCheck']").each(function () {
+                    this.checked = true;
+                });
+                $("#checkboxAll").attr("value", "反选");
+            } else {
+                $("input[name='idCheck']").each(function () {
+                    this.checked = false;
+                });
+                $("#checkboxAll").attr("value", "全选");
             }
         });
 
-        $("#checkboxAll").click(function(){
-            $("[name='idCheck']").attr("checked",'true');//全选
+        $("#checkboxAll").click(function () {
+            $("[name='idCheck']").attr("checked", 'true');//全选
         });
     });
     //-->
@@ -28,15 +32,21 @@
         <div class="committed forall-box clearfix mt-10 va-m mt-10">
             <div class="forall">
                 <input type="checkbox" id="forall" name="forall"/>
-                <input  type="button" class="checkboxAll" id="checkboxAll" value="全选"/>
+                <input type="button" class="checkboxAll" id="checkboxAll" value="全选"/>
             </div>
             #for(var:list)
-            <p>
-                <input type="checkbox" id=${var?.effortId} value=${var?.effortId}
-                       name="idCheck" #for(var1:details) #if(var1?.orgDetailContent==var?.effortWork) checked="checked"
-            #end#end> <span class="tocommittime">${var?.effortWeekDay} </span><span>${var?.effortAccount}--${var?.effortWork}
-                    <span>ID：${var?.effortId}</span></span>
-            </p>
+        <p>
+                <input type="checkbox" id=${var?.actionId} value=${var?.actionId}
+                       name="idCheck" #for(var1:details) #if(var1?.actionId==var?.actionId) checked="checked"
+        #end#end> <span class="tocommittime">${var?.actionWeekDay}:${var?.actorName} </span><span>
+        #if(var?.actionAction=="finished")
+            完成了
+        #else
+            创建了
+        #end
+        ${var?.actionObjectType}--${var?.objectName}
+                    <span>ID：${var?.actionId}</span></span>
+    </p>
     #end
 </div>
 </div>

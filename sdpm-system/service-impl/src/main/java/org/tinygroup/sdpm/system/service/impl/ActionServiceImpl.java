@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.system.service.impl;
 
+import net.sf.cglib.beans.BeanGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.tinygroup.sdpm.system.biz.inter.ActionManager;
@@ -7,6 +8,7 @@ import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.service.inter.ActionService;
 import org.tinygroup.tinysqldsl.Pager;
 
+import java.util.Date;
 import java.util.List;
 
 @Component
@@ -36,4 +38,13 @@ public class ActionServiceImpl implements ActionService {
         return actionManager.queryBetweenDate(start, limit, action, startDate, endDate, sortName, asc);
     }
 
+    @Override
+    public List<SystemAction> findActionListByIdList(List<Integer> idList) {
+        return actionManager.findActionListByIdList(idList);
+    }
+
+    @Override
+    public List<SystemAction> findDiaryActionListByUserAndDate(String userId, Date beginDate, Date endDate) {
+        return actionManager.findDiaryActionListByUserAndDate(userId, beginDate,endDate);
+    }
 }

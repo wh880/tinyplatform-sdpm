@@ -41,5 +41,19 @@
       </service-parameters>
       <service-result name="queryActionBetweenDateResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager"/>
     </service-method>
+    <service-method local-name="findActionListByIdList" service-id="findActionListByIdList" method-name="findActionListByIdList" cacheable="false" category="org.tinygroup.sdpm.system.service.inter">
+      <service-parameters>
+        <service-parameter name="idList" type="java.lang.Integer" collection-type="java.util.List" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findActionListByIdListResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.system.dao.pojo.SystemAction"/>
+    </service-method>
+    <service-method local-name="findDiaryActionListByUserAndDate" service-id="findDiaryActionListByUserAndDate" method-name="findDiaryActionListByUserAndDate" cacheable="false" category="org.tinygroup.sdpm.system.service.inter">
+      <service-parameters>
+        <service-parameter name="userId" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="beginDate" type="java.util.Date" required="false" is-array="false"/>
+        <service-parameter name="endDate" type="java.util.Date" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findDiaryActionListByUserAndDateResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.system.dao.pojo.SystemAction"/>
+    </service-method>
   </service-component>
 </service-components>

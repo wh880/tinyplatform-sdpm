@@ -79,5 +79,11 @@
       </service-parameters>
       <service-result name="bugInConditionResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.quality.dao.pojo.QualityBug"/>
     </service-method>
+    <service-method local-name="findBugByBugId" service-id="findBugByBugId" method-name="findBugByBugId" cacheable="false" category="org.tinygroup.sdpm.quality.service.inter">
+      <service-parameters>
+        <service-parameter name="bugId" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findBugByBugIdResult" required="false" is-array="false" type="org.tinygroup.sdpm.quality.dao.pojo.QualityBug"/>
+    </service-method>
   </service-component>
 </service-components>

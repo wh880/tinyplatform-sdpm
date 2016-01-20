@@ -162,4 +162,8 @@ public class TaskServiceImpl implements TaskService {
         }
     }
 
+    @Override
+    public ProjectTask findTaskByTaskId(Integer taskId) {
+        return taskManager.findTaskByTaskId(taskId);
+    }
 }

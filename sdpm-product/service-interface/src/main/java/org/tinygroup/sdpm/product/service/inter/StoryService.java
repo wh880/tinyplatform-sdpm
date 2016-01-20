@@ -146,4 +146,6 @@ public interface StoryService {
      * @return
      */
     List<ProductStory> getStoryWithSpecInIds(boolean isWithSpec, Integer... ids);
+
+    ProductStory findStoryByStoryId(Integer storyId);
 }

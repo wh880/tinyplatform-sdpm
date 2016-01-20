@@ -107,6 +107,11 @@ public class SystemAction implements Serializable {
 
     private String url;
 
+    /**
+     * 所在星期几
+     */
+    private String actionWeekDay;
+
     public String getActorName() {
         return actorName;
     }
@@ -227,4 +232,11 @@ public class SystemAction implements Serializable {
         this.actionAction = actionAction;
     }
 
+    public String getActionWeekDay() {
+        return actionWeekDay;
+    }
+
+    public void setActionWeekDay(String actionWeekDay) {
+        this.actionWeekDay = actionWeekDay;
+    }
 }

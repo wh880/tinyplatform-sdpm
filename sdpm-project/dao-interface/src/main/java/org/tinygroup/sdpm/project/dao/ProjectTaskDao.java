@@ -129,4 +129,7 @@ public interface ProjectTaskDao extends BaseDao<ProjectTask, Integer> {
      * 根据产品id查询待关联的bug list
      */
     List<QualityBug> findRelationBugByProjectID(Integer projectId);
+
+    ProjectTask findTaskByTaskId(Integer taskId);
+
 }

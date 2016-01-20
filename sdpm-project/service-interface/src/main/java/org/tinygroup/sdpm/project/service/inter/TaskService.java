@@ -150,4 +150,7 @@ public interface TaskService {
     List<TaskChartBean> buildChart(String id);
 
     Integer deleteTask(Integer taskId);
+
+    ProjectTask findTaskByTaskId(Integer taskId);
+
 }

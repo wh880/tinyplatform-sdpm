@@ -114,4 +114,8 @@ public class TaskManagerImpl implements TaskManager {
         return taskDao.edit(task);
     }
 
+    @Override
+    public ProjectTask findTaskByTaskId(Integer taskId) {
+        return taskDao.findTaskByTaskId(taskId);
+    }
 }

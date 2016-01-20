@@ -2,9 +2,6 @@ package org.tinygroup.sdpm.action.org;
 
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.JsonParser;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,9 +18,15 @@ import org.tinygroup.sdpm.org.dao.pojo.OrgDiaryDetail;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.DiaryService;
 import org.tinygroup.sdpm.org.service.inter.UserService;
-import org.tinygroup.sdpm.system.dao.pojo.SystemEffort;
+import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
+import org.tinygroup.sdpm.product.service.inter.StoryService;
+import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
+import org.tinygroup.sdpm.project.service.inter.TaskService;
+import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
+import org.tinygroup.sdpm.quality.service.inter.BugService;
+import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
-import org.tinygroup.sdpm.system.service.inter.EffortService;
+import org.tinygroup.sdpm.system.service.inter.ActionService;
 import org.tinygroup.sdpm.util.UserUtils;
 
 import javax.servlet.http.HttpServletResponse;
@@ -38,13 +41,16 @@ import java.util.*;
 public class DiaryAction extends BaseController {
     @Autowired
     private DiaryService diaryService;
-
-    @Autowired
-    private EffortService effortService;
-
     @Autowired
     private UserService userService;
-
+    @Autowired
+    private ActionService actionService;
+    @Autowired
+    private BugService bugService;
+    @Autowired
+    private TaskService taskService;
+    @Autowired
+    private StoryService storyService;
 
     /**
      * 添加周报以及相应的周报详情
@@ -80,14 +86,23 @@ public class DiaryAction extends BaseController {
         OrgDiary diary = diaryService.findDiaryByUserLatest(userId, year, week);
         List<OrgDiaryDetail> list = new ArrayList<OrgDiaryDetail>();
         //查找相关日志ID对应的日志
-        List<SystemEffort> effortList = effortService.findEffortListByIdList(idsList);
+        List<SystemAction> actionList = actionService.findActionListByIdList(idsList);
         //如果这一周已经提交了周报，插入的详情表写入周报ID
         if (diary != null) {
-            if (!CollectionUtil.isEmpty(effortList)) {
-                for (SystemEffort systemEffort : effortList) {
+            if (!CollectionUtil.isEmpty(actionList)) {
+                for (SystemAction systemAction : actionList) {
                     OrgDiaryDetail orgDiaryDetail = new OrgDiaryDetail();
-                    orgDiaryDetail.setOrgDetailContent(systemEffort.getEffortWork());
-                    orgDiaryDetail.setOrgDetailDate(systemEffort.getEffortDate());
+                    String content = userUtils.getUserAccount();
+                    String objectType = systemAction.getActionObjectType();
+                    String title = getDiffObjectName(systemAction);
+                    if ("finished".equals(systemAction.getActionAction())) {
+                        content = content + "完成了" + objectType + title;
+                    } else {
+                        content = content + "创建了" + objectType + title;
+                    }
+                    orgDiaryDetail.setOrgDetailContent(content);
+                    orgDiaryDetail.setOrgDetailDate(systemAction.getActionDate());
+                    orgDiaryDetail.setActionId(systemAction.getActionId());
                     orgDiaryDetail.setOrgUserId(userUtils.getUser().getOrgUserId());
                     orgDiaryDetail.setOrgDiaryId(diary.getOrgDiaryId());
                     list.add(orgDiaryDetail);
@@ -101,11 +116,20 @@ public class DiaryAction extends BaseController {
         }
         //如果这一周没有提交过周报，则进行添加操作，并且对详情不set日志ID
         else {
-            if (!CollectionUtil.isEmpty(effortList)) {
-                for (SystemEffort systemEffort : effortList) {
+            if (!CollectionUtil.isEmpty(actionList)) {
+                for (SystemAction systemAction : actionList) {
                     OrgDiaryDetail orgDiaryDetail = new OrgDiaryDetail();
-                    orgDiaryDetail.setOrgDetailContent(systemEffort.getEffortWork());
-                    orgDiaryDetail.setOrgDetailDate(systemEffort.getEffortDate());
+                    String content = userUtils.getUserAccount();
+                    String objectType = systemAction.getActionObjectType();
+                    String title = getDiffObjectName(systemAction);
+                    if ("finished".equals(systemAction.getActionAction())) {
+                        content = content + "完成了" + objectType + title;
+                    } else {
+                        content = content + "创建了" + objectType + title;
+                    }
+                    orgDiaryDetail.setOrgDetailContent(content);
+                    orgDiaryDetail.setOrgDetailDate(systemAction.getActionDate());
+                    orgDiaryDetail.setActionId(systemAction.getActionId());
                     orgDiaryDetail.setOrgUserId(userUtils.getUser().getOrgUserId());
                     list.add(orgDiaryDetail);
                 }
@@ -115,8 +139,8 @@ public class DiaryAction extends BaseController {
             orgDiary.setOrgUserId(userId);
             orgDiary.setOrgDiaryWeek(week);
             orgDiary.setOrgDiaryYear(year);
-            Date beginDate = DateUtils.getFirstDayOfWeek(year, week);
-            Date endDate = DateUtils.getLastDayOfWeek(year, week);
+            Date beginDate = DateUtils.getBeginDate(year, week);
+            Date endDate = DateUtils.getEndDate(year, week);
             orgDiary.setOrgDiaryBeginDate(beginDate);
             orgDiary.setOrgDiaryEndDate(endDate);
             //进行添加周报以及添加周报详情的操作
@@ -125,6 +149,27 @@ public class DiaryAction extends BaseController {
         }
     }
 
+    /**
+     * 获得某一条系统日志中对象的名字
+     *
+     * @param systemAction
+     * @return
+     */
+    public String getDiffObjectName(SystemAction systemAction) {
+        String title = null;
+        String objectType = systemAction.getActionObjectType();
+        if ("bug".equals(objectType)) {
+            QualityBug bug = bugService.findBugByBugId(Integer.parseInt(systemAction.getActionObjectId()));
+            title = bug.getBugTitle();
+        } else if ("task".equals(objectType)) {
+            ProjectTask task = taskService.findTaskByTaskId(Integer.parseInt(systemAction.getActionObjectId()));
+            title = task.getTaskName();
+        } else if ("story".equals(objectType)) {
+            ProductStory story = storyService.findStoryByStoryId(Integer.parseInt(systemAction.getActionObjectId()));
+            title = story.getStoryTitle();
+        }
+        return title;
+    }
     /**
      * 编辑修改周报
      *
@@ -276,11 +321,12 @@ public class DiaryAction extends BaseController {
         model.addAttribute("orgDiary", orgDiary);
         if (orgDiary != null) {
             List<OrgDiaryDetail> list = diaryService.findDetailListByDiaryId(orgDiary.getOrgDiaryId());
-            Date beginDate = DateUtils.getFirstDayOfWeek(year, week);
-            Date endDate = DateUtils.getLastDayOfWeek(year, week);
-            List<SystemEffort> effortsList = effortService.findEffortListByUserAndDate(userUtils.getUser().getOrgUserId(), beginDate, endDate);
+            Date beginDate = DateUtils.getBeginDate(year, week);
+            Date endDate = DateUtils.getEndDate(year, week);
+            //List<SystemEffort> effortsList = effortService.findEffortListByUserAndDate(userUtils.getUser().getOrgUserId(), beginDate, endDate);
+            List<SystemAction> actionList = actionService.findDiaryActionListByUserAndDate(userId, beginDate, endDate);
             model.addAttribute("list", list);
-            model.addAttribute("efforts", effortsList);
+            model.addAttribute("efforts", actionList);
         }
 
         return "organization/diary/submit";
@@ -354,26 +400,28 @@ public class DiaryAction extends BaseController {
         }
         OrgDiary orgDiary = diaryService.findDiaryByUserLatest(UserUtils.getUserId(), year, week);
         model.addAttribute("orgDiary", orgDiary);
-        Date bDate = DateUtils.getFirstDayOfWeek(year, week);
-        Date eDate = DateUtils.getLastDayOfWeek(year, week);
-        String userAccount = userUtils.getUser().getOrgUserAccount();
-        List<SystemEffort> effortList = effortService.findEffortListByUserAndDate(userAccount, bDate, eDate);
+        Date bDate = DateUtils.getBeginDate(year, week);
+        Date eDate = DateUtils.getEndDate(year, week);
+        OrgUser user = userUtils.getUser();
+        //String userAccount = user.getOrgUserAccount();
+        List<SystemAction> actionList = actionService.findDiaryActionListByUserAndDate(user.getOrgUserId(), bDate, eDate);
+        //List<SystemEffort> effortList = effortService.findEffortListByUserAndDate(userAccount, bDate, eDate);
         List<OrgDiaryDetail> orgDiaryDetailList = null;
         if (orgDiary != null) {
             orgDiaryDetailList = diaryService.findDetailListByDiaryId(orgDiary.getOrgDiaryId());
         }
-        List<SystemEffort> systemEfforts = new ArrayList<SystemEffort>();
-        for (SystemEffort effort : effortList) {
-            effort.setEffortWeekDay(DateUtils.getDateWeek(effort.getEffortDate()));
-            systemEfforts.add(effort);
+        //List<SystemEffort> systemEfforts = new ArrayList<SystemEffort>();
+        List<SystemAction> systemActions = new ArrayList<SystemAction>();
+        for (SystemAction systemAction : actionList) {
+            systemAction.setActionWeekDay(DateUtils.getDateWeek(systemAction.getActionDate()));
+            systemActions.add(systemAction);
         }
         model.addAttribute("year", year);
         model.addAttribute("week", week);
-        model.addAttribute("list", systemEfforts);
+        model.addAttribute("list", systemActions);
         model.addAttribute("details", orgDiaryDetailList);
         return "organization/diary/oneDiary.pagelet";
     }
-
 
     /**
      * 获取List的周报信息（某一周所有人的周报或者某一个人的所有周报）
@@ -405,7 +453,6 @@ public class DiaryAction extends BaseController {
             String userAccount = userUtils.getUserById(orgUserId).getOrgUserAccount();
             list = diaryService.findDiaryListByWhiteList(userAccount, year, week);
         }
-
         model.addAttribute("list", list);
         Map<Integer, List<OrgDiaryDetail>> map = new HashMap<Integer, List<OrgDiaryDetail>>();
         for (OrgDiaryAndUserDO orgDiaryAndYUser : list) {
@@ -417,9 +464,7 @@ public class DiaryAction extends BaseController {
             for (OrgDiaryDetail orgDiaryDetail : efforts) {
                 orgDiaryDetail.setEffortWeek(DateUtils.getDateWeek(orgDiaryDetail.getOrgDetailDate()));
             }
-
             map.put(orgDiaryAndYUser.getOrgDiaryId(), efforts);
-
         }
         model.addAttribute("efforts", map);
         return "organization/diary/diaryData.pagelet";

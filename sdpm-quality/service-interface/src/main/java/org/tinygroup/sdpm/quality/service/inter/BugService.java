@@ -98,4 +98,6 @@ public interface BugService {
      * @return
      */
     List<QualityBug> bugInCondition(String condition, Integer limit, Integer productId);
+
+    QualityBug findBugByBugId(Integer bugId);
 }
