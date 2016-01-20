@@ -299,4 +299,13 @@ public class OrgDiaryWhiteListDaoImpl extends TinyDslDaoSupport implements OrgDi
         ));
         return getDslSession().fetchList(select,OrgDiaryWhiteList.class);
     }
+
+    @Override
+    public Integer deleteByAccounts(String firstAccount, String secondAccout) {
+        Delete delete=Delete.delete(ORG_DIARY_WHITE_LISTTABLE).where(and(
+                ORG_DIARY_WHITE_LISTTABLE.ORG_DIARY_WHITE_LIST_FIRST_ACCOUNT.eq(firstAccount),
+                ORG_DIARY_WHITE_LISTTABLE.ORG_DIARY_WHITE_LIST_SECOND_ACCOUNT.eq(secondAccout)
+        ));
+        return getDslSession().execute(delete);
+    }
 }

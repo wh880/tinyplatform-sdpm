@@ -22,11 +22,12 @@
 #@layout(org)#end
 #@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
     #@toggleLeft({"class":"aclass"})
-        #@settoggleLeftTitle()我的下属#end
+        #@settoggleLeftTitle()我的白名单#end
         #@settoggleLeftBody("treeLeftbox")
             #@zTreeList(call("link",adminPath+"/org/diary/tree?choose=1"))
                 #setzTreeValMap({"id":"orgUserId","name":"orgUserAccount","pid":"orgUserLeader"}) ##key值为固定
                 #zTreeSetLinkUrl(TINY_CONTEXT_PATH+adminPath+"/org/diary/show" )
+                #zTreeSetDelUrl(TINY_CONTEXT_PATH+adminPath+"/org/user/deleteDiaryWhiteList?userAccount=")
             #end
         #end
     #end

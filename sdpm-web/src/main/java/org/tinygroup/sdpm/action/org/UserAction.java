@@ -48,6 +48,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import static org.tinygroup.sdpm.util.UserUtils.getUserAccount;
+
 
 @Controller
 @RequestMapping("/a/org/user")
@@ -643,7 +645,7 @@ public class UserAction extends BaseController {
     }
 
     /**
-     * 将选中用户加入到当前用户的白名单当中
+     * 将选中用户加入到当前用户的周报白名单当中
      *
      * @param userAccount
      * @return
@@ -655,19 +657,19 @@ public class UserAction extends BaseController {
             return resultMap(false, "添加失败");
         }
         //判断是否存在此用户
-        OrgUser orgUser=userService.findUserByAccount(userAccount);
-        if(orgUser==null){
+        OrgUser orgUser = userService.findUserByAccount(userAccount);
+        if (orgUser == null) {
             return resultMap(false, "不存在此用户");
         }
         OrgUser user = userUtils.getUser();
         String firstAccount = user.getOrgUserAccount();//甲方
         //判断是否已经存在
-        OrgDiaryWhiteList orgDiaryWhiteList=whiteListService.findDiaryWhiteByAccounts(firstAccount,userAccount);
-        if(orgDiaryWhiteList!=null){
-            return resultMap(false,"用户关系已存在");
+        OrgDiaryWhiteList orgDiaryWhiteList = whiteListService.findDiaryWhiteByAccounts(firstAccount, userAccount);
+        if (orgDiaryWhiteList != null) {
+            return resultMap(false, "用户关系已存在");
         }
         //进行白名单插入操作
-        whiteListService.addOneWhite(firstAccount,userAccount);
+        whiteListService.addOneWhite(firstAccount, userAccount);
         return resultMap(true, "添加成功");
     }
 
@@ -675,20 +677,40 @@ public class UserAction extends BaseController {
     public String showAdd() {
         return "organization/diary/userTable.pagelet";
     }
-/*
-    @RequiresPermissions("organizationUser")
-    @RequestMapping("/list/data/diary")
-    public String list(Integer orgDeptId, Integer start, Integer limit,
-                       OrgUser orgUser, Model model) {
-        Pager<OrgUser> pager;
-        if (orgDeptId == null || orgDeptId == -1) {
-            orgUser.setOrgDeptId(null);
-            pager = userService.findUserPager(start, limit, orgUser);
-        } else {
-            pager = userService.findUserByDeptId(start, limit, orgDeptId);
+
+    /*
+        @RequiresPermissions("organizationUser")
+        @RequestMapping("/list/data/diary")
+        public String list(Integer orgDeptId, Integer start, Integer limit,
+                           OrgUser orgUser, Model model) {
+            Pager<OrgUser> pager;
+            if (orgDeptId == null || orgDeptId == -1) {
+                orgUser.setOrgDeptId(null);
+                pager = userService.findUserPager(start, limit, orgUser);
+            } else {
+                pager = userService.findUserByDeptId(start, limit, orgDeptId);
+            }
+            model.addAttribute("pager", pager);
+            return "organization/diary/userTableData.pagelet";
         }
-        model.addAttribute("pager", pager);
-        return "organization/diary/userTableData.pagelet";
+        */
+
+    /**
+     * 删除当前用户与所选用户的周报白名单关系
+     * @param userAccount
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("deleteDiaryWhiteList")
+    public Map deleteDiaryWhiteList(String orgUserId) {
+        if (orgUserId==null) {
+            return resultMap(false, "删除失败");
+        }
+        OrgUser user=userUtils.getUserById(orgUserId);
+        String userAccount=user.getOrgUserAccount();
+        String firstAccount = UserUtils.getUserAccount();
+        //进行删除操作
+        whiteListService.deleteDiaryWhiteList(firstAccount, userAccount);
+        return resultMap(true, "删除成功");
     }
-    */
 }

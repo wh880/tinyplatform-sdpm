@@ -36,4 +36,9 @@ public class WhiteListServiceImpl implements WhiteListService{
     public OrgDiaryWhiteList findDiaryWhiteByAccounts(String firstAccount, String secondAccount) {
         return whiteListManager.findOneByAccounts(firstAccount,secondAccount);
     }
+
+    @Override
+    public Integer deleteDiaryWhiteList(String firstAccount, String secondAccout) {
+        return whiteListManager.deleteDiaryWhiteList(firstAccount,secondAccout);
+    }
 }

@@ -27,5 +27,12 @@
       </service-parameters>
       <service-result name="findDiaryWhiteByAccountsResult" required="false" is-array="false" type="org.tinygroup.sdpm.org.dao.pojo.OrgDiaryWhiteList"/>
     </service-method>
+    <service-method local-name="deleteDiaryWhiteList" service-id="deleteDiaryWhiteList" method-name="deleteDiaryWhiteList" cacheable="false" category="org.tinygroup.sdpm.org.service.inter">
+      <service-parameters>
+        <service-parameter name="firstAccount" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="secondAccout" type="java.lang.String" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="deleteDiaryWhiteListResult" required="false" is-array="false" type="java.lang.Integer"/>
+    </service-method>
   </service-component>
 </service-components>

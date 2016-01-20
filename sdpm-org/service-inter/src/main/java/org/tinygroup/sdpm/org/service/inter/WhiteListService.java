@@ -29,4 +29,13 @@ public interface WhiteListService {
      * 查看该对人是否存在于白名单中
      */
     OrgDiaryWhiteList findDiaryWhiteByAccounts(String firstAccount,String secondAccount);
+
+    /**
+     * 删除白名单关系
+     * @param firstAccount
+     * @param secondAccout
+     * @return
+     */
+    Integer deleteDiaryWhiteList(String firstAccount,String secondAccout);
+
 }

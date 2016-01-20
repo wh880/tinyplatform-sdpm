@@ -38,4 +38,13 @@ public interface OrgDiaryWhiteListDao extends BaseDao<OrgDiaryWhiteList, Integer
      * @return
      */
     List<OrgDiaryWhiteList> findOneByAccounts(String firstAccount,String secondAccount);
+
+    /**
+     * 删除一对白名单关系
+     * @param firstAccount
+     * @param secondAccout
+     * @return
+     */
+    Integer deleteByAccounts(String firstAccount,String secondAccout);
+
 }

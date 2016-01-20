@@ -53,4 +53,9 @@ public class WhiteListManagerImpl implements WhiteListManager {
         }
         return list.get(0);
     }
+
+    @Override
+    public Integer deleteDiaryWhiteList(String firstAccount, String secondAccout) {
+        return orgDiaryWhiteListDao.deleteByAccounts(firstAccount,secondAccout);
+    }
 }

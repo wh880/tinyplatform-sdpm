@@ -30,4 +30,12 @@ public interface WhiteListManager {
      */
     OrgDiaryWhiteList findOneByAccounts(String firstAccount,String secondAccount);
 
+    /**
+     * 删除白名单关系
+     * @param firstAccount
+     * @param secondAccout
+     * @return
+     */
+    Integer deleteDiaryWhiteList(String firstAccount,String secondAccout);
+
 }

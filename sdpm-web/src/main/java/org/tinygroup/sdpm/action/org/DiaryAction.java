@@ -296,13 +296,13 @@ public class DiaryAction extends BaseController {
      */
     @ResponseBody
     @RequestMapping("tree")
-    public List<Map<String, Object>> ajax(SystemModule systemModule, HttpServletResponse response, @RequestParam(value = "type", defaultValue = "name") String type,Integer choose) {
+    public List<Map<String, Object>> ajax(SystemModule systemModule, HttpServletResponse response, @RequestParam(value = "type", defaultValue = "name") String type, Integer choose) {
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
-        List<OrgUser> usersList=null;
-        if(choose==null) {
+        List<OrgUser> usersList = null;
+        if (choose == null) {
             usersList = userService.findAllSubordinate(UserUtils.getUserId());
-        }else{
-            usersList= userService.findWhiteUser(UserUtils.getUserAccount());
+        } else {
+            usersList = userService.findWhiteUser(UserUtils.getUserAccount());
         }
         usersList.add(userUtils.getUser());
         for (OrgUser user : usersList) {
@@ -311,7 +311,11 @@ public class DiaryAction extends BaseController {
             map.put("pId", user.getOrgUserLeader());
             map.put("open", true);
             map.put("add", false);
-            map.put("edit", false);
+            if (choose != null) {
+                map.put("edit", true);
+            } else {
+                map.put("edit", false);
+            }
             map.put("name", user.getOrgUserAccount());
             list.add(map);
         }
@@ -386,7 +390,7 @@ public class DiaryAction extends BaseController {
         if (type == null) {
             list = diaryService.findListDiarySubAndSelf(orgUserId, year, week);
         } else {//如果是查询白名单用户周报，传一个type值
-            String userAccount=userUtils.getUserById(orgUserId).getOrgUserAccount();
+            String userAccount = userUtils.getUserById(orgUserId).getOrgUserAccount();
             list = diaryService.findDiaryListByWhiteList(userAccount, year, week);
         }
 
