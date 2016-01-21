@@ -137,7 +137,12 @@
 			       			#end
 			       			#@tr()
 								#@td()解决版本#end
-			       				#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/project/build/productalbug?buildId=${qualityBug?.bugResolvedBuild}">${qualityBug?.resolveBuild}</a>#end
+			       				#@td()
+									#if(qualityBug?.bugResolvedBuild==0)
+										trunk
+									#end
+								<a href="${TINY_CONTEXT_PATH+adminPath}/project/build/productalbug?buildId=${qualityBug?.bugResolvedBuild}">${qualityBug?.resolveBuild}</a>
+								#end
 			       			#end
 			       			#@tr()
 								#@td()解决方案#end

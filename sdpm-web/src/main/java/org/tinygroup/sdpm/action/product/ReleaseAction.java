@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.docTemplate.inter.DocTemplateResolver;
 import org.tinygroup.sdpm.common.web.BaseController;
+import org.tinygroup.sdpm.dao.condition.ConditionCarrier;
 import org.tinygroup.sdpm.dto.UploadProfile;
 import org.tinygroup.sdpm.product.dao.impl.FieldUtil;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
@@ -15,6 +16,8 @@ import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.service.inter.ProductService;
 import org.tinygroup.sdpm.product.service.inter.ReleaseService;
 import org.tinygroup.sdpm.product.service.inter.StoryService;
+import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
+import org.tinygroup.sdpm.project.service.inter.BuildService;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.sdpm.quality.service.inter.BugService;
 import org.tinygroup.sdpm.system.dao.pojo.ProfileType;
@@ -53,6 +56,8 @@ public class ReleaseAction extends BaseController {
     private StoryService storyService;
     @Autowired
     private BugService bugService;
+    @Autowired
+    private BuildService buildService;
     @Autowired
     private ExportUtils exportUtils;
 
@@ -425,29 +430,22 @@ public class ReleaseAction extends BaseController {
             context.put("storyList", stories);
 
             QualityBug bug = new QualityBug();
+            bug.setProductId(release.getProductId());
             bug.setBugOpenedBuild(release.getReleaseBuild());
-            bug.setDeleted(0);
-            List<QualityBug> bugAllList = bugService.getBugsInReleaseDoc(bug);
             String releaseBugs = release.getReleaseBugs();
-            String[] bugIds = releaseBugs == null ? null : releaseBugs.split(",");
-            List<QualityBug> inBugList = new ArrayList<QualityBug>();
-            List<QualityBug> notInBugList = new ArrayList<QualityBug>();
-            if (bugIds != null && bugIds.length > 0) {
-                for (String id : bugIds) {
-                    for (QualityBug bug1 : bugAllList) {
-                        if (bug1.getBugId().equals(Integer.parseInt(id))) {
-                            inBugList.add(bug1);
-                        } else {
-                            notInBugList.add(bug1);
-                        }
-                    }
-                }
-            } else {
-                notInBugList = bugAllList;
-            }
-            context.put("bugInList", inBugList);
-            context.put("bugNoInList", notInBugList);
+            String inCondition = StringUtil.isBlank(releaseBugs) ? "" : releaseBugs;
+            ConditionCarrier carrier;
+            carrier = new ConditionCarrier();
+                    carrier.putIns("qualityBug.bugId",inCondition.split(","));
+
+            context.put("bugInList", bugService.findBugListPager(
+                    0, 100, carrier, bug, null, false).getRecords());
+            carrier = new ConditionCarrier();
+            bug.setBugStatus("1");
+            context.put("bugNoInList", bugService.findBugListPager(
+                    0, 100, carrier, bug, null, false).getRecords());
             context.put("ExportUtils",exportUtils);
+            context.put("productService",productService);
         }
         exportUtils.mergeTemplate(DocTemplateResolver.RELEASE, context, response, "发布文档");
     }

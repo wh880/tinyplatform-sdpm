@@ -15,7 +15,7 @@
                 #end
                 #@tr()
                     #@td()所属模块#end
-                    #@td()${story?.moduleTitle}#end
+                    #@td()${story?.moduleId==0?"/":""}${story?.moduleTitle}#end
                 #end
                 #@tr()
                     #@td()所属计划#end

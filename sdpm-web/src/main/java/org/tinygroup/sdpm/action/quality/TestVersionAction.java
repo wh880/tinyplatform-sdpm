@@ -431,7 +431,7 @@ public class TestVersionAction extends BaseController {
         if (in) {
             carrier.putIns("qualityCase.caseId", idList.toArray(ids));
         } else {
-            carrier.putIdNotIn("qualityCase.caseId", idList.toArray(ids));
+            carrier.putNotIns("qualityCase.caseId", idList.toArray(ids));
         }
     }
 
