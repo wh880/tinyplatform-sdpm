@@ -99,5 +99,10 @@ public interface BugService {
      */
     List<QualityBug> bugInCondition(String condition, Integer limit, Integer productId);
 
+    /**
+     * 根据bug Id查找对应的bug
+     * @param bugId
+     * @return
+     */
     QualityBug findBugByBugId(Integer bugId);
 }

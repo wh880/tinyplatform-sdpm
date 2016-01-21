@@ -147,5 +147,10 @@ public interface StoryService {
      */
     List<ProductStory> getStoryWithSpecInIds(boolean isWithSpec, Integer... ids);
 
+    /**
+     * 根据Story Id查找相应的Story
+     * @param storyId
+     * @return
+     */
     ProductStory findStoryByStoryId(Integer storyId);
 }

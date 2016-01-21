@@ -150,12 +150,12 @@ public class DiaryAction extends BaseController {
     }
 
     /**
-     * 获得某一条系统日志中对象的名字
+     * 获得某一条系统日志中对象的名字(周报所需的BUG TASK STORY相关的系统日志)
      *
      * @param systemAction
      * @return
      */
-    public String getDiffObjectName(SystemAction systemAction) {
+    private String getDiffObjectName(SystemAction systemAction) {
         String title = null;
         String objectType = systemAction.getActionObjectType();
         if ("bug".equals(objectType)) {
@@ -403,14 +403,11 @@ public class DiaryAction extends BaseController {
         Date bDate = DateUtils.getBeginDate(year, week);
         Date eDate = DateUtils.getEndDate(year, week);
         OrgUser user = userUtils.getUser();
-        //String userAccount = user.getOrgUserAccount();
         List<SystemAction> actionList = actionService.findDiaryActionListByUserAndDate(user.getOrgUserId(), bDate, eDate);
-        //List<SystemEffort> effortList = effortService.findEffortListByUserAndDate(userAccount, bDate, eDate);
         List<OrgDiaryDetail> orgDiaryDetailList = null;
         if (orgDiary != null) {
             orgDiaryDetailList = diaryService.findDetailListByDiaryId(orgDiary.getOrgDiaryId());
         }
-        //List<SystemEffort> systemEfforts = new ArrayList<SystemEffort>();
         List<SystemAction> systemActions = new ArrayList<SystemAction>();
         for (SystemAction systemAction : actionList) {
             systemAction.setActionWeekDay(DateUtils.getDateWeek(systemAction.getActionDate()));
