@@ -460,7 +460,7 @@ public class DiaryAction extends BaseController {
             if (map.get(orgDiaryAndYUser.getOrgDiaryId()) == null) {
                 map.put(orgDiaryAndYUser.getOrgDiaryId(), efforts);
             }
-            efforts = diaryService.findDetailListByDiaryList(list);
+            efforts = diaryService.findDetailListByDiaryId(orgDiaryAndYUser.getOrgDiaryId());
             for (OrgDiaryDetail orgDiaryDetail : efforts) {
                 orgDiaryDetail.setEffortWeek(DateUtils.getDateWeek(orgDiaryDetail.getOrgDetailDate()));
             }
