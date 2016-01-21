@@ -33,20 +33,18 @@ import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 import org.tinygroup.tinysqldsl.select.Join;
 import org.tinygroup.tinysqldsl.select.OrderByElement;
 import org.tinygroup.tinysqldsl.selectitem.FragmentSelectItemSql;
-import static org.tinygroup.tinysqldsl.formitem.SubSelect.subSelect;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import static org.tinygroup.sdpm.org.dao.constant.OrgUserTable.ORG_USERTABLE;
 import static org.tinygroup.sdpm.product.dao.constant.ProductStorySpecTable.PRODUCT_STORY_SPECTABLE;
 import static org.tinygroup.sdpm.product.dao.constant.ProductStoryTable.PRODUCT_STORYTABLE;
+import static org.tinygroup.sdpm.project.dao.constant.ProjectProductTable.PROJECT_PRODUCTTABLE;
 import static org.tinygroup.sdpm.project.dao.constant.ProjectStoryTable.PROJECT_STORYTABLE;
 import static org.tinygroup.sdpm.project.dao.constant.ProjectTable.PROJECTTABLE;
 import static org.tinygroup.sdpm.project.dao.constant.ProjectTaskTable.PROJECT_TASKTABLE;
-import static org.tinygroup.sdpm.project.dao.constant.ProjectProductTable.PROJECT_PRODUCTTABLE;
 import static org.tinygroup.sdpm.quality.dao.constant.QualityBugTable.QUALITY_BUGTABLE;
 import static org.tinygroup.sdpm.system.dao.constant.SystemModuleTable.SYSTEM_MODULETABLE;
 import static org.tinygroup.tinysqldsl.Delete.delete;
@@ -54,8 +52,8 @@ import static org.tinygroup.tinysqldsl.Insert.insertInto;
 import static org.tinygroup.tinysqldsl.Select.select;
 import static org.tinygroup.tinysqldsl.Select.selectFrom;
 import static org.tinygroup.tinysqldsl.Update.update;
-import static org.tinygroup.tinysqldsl.base.FragmentSql.fragmentCondition;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
+import static org.tinygroup.tinysqldsl.formitem.SubSelect.subSelect;
 
 @Repository
 public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTaskDao {
@@ -331,9 +329,9 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
 
     public ProjectTask getProjectTaskTimeInfo(Integer projectId) {
         Select select = select(
-                PROJECT_TASKTABLE.TASK_ESTIMATE.count().as(PROJECT_TASKTABLE.TASK_ESTIMATE.getColumnName()),
-                PROJECT_TASKTABLE.TASK_LEFT.count().as(PROJECT_TASKTABLE.TASK_LEFT.getColumnName()),
-                PROJECT_TASKTABLE.TASK_CONSUMED.count().as(PROJECT_TASKTABLE.TASK_CONSUMED.getColumnName())
+                PROJECT_TASKTABLE.TASK_ESTIMATE.sum().as(PROJECT_TASKTABLE.TASK_ESTIMATE.getColumnName()),
+                PROJECT_TASKTABLE.TASK_LEFT.sum().as(PROJECT_TASKTABLE.TASK_LEFT.getColumnName()),
+                PROJECT_TASKTABLE.TASK_CONSUMED.sum().as(PROJECT_TASKTABLE.TASK_CONSUMED.getColumnName())
         )
                 .from(PROJECT_TASKTABLE)
                 .where(PROJECT_TASKTABLE.TASK_PROJECT.eq(projectId));
