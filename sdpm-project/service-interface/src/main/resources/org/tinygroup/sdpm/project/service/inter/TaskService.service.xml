@@ -6,7 +6,6 @@
       </service-parameters>
       <service-result name="getProjectTaskTimeInfoResult" required="false" is-array="false" type="org.tinygroup.sdpm.project.dao.pojo.ProjectTask"/>
     </service-method>
-
     <service-method local-name="updateDoingTask" service-id="updateDoingTask" method-name="updateDoingTask" cacheable="false" category="org.tinygroup.sdpm.project.service.inter">
       <service-parameters>
         <service-parameter name="task" type="org.tinygroup.sdpm.project.dao.pojo.ProjectTask" required="false" is-array="false"/>
@@ -120,6 +119,12 @@
         <service-parameter name="taskId" type="java.lang.Integer" required="false" is-array="false"/>
       </service-parameters>
       <service-result name="deleteTaskResult" required="false" is-array="false" type="java.lang.Integer"/>
+    </service-method>
+    <service-method local-name="findTaskByTaskId" service-id="findTaskByTaskId" method-name="findTaskByTaskId" cacheable="false" category="org.tinygroup.sdpm.project.service.inter">
+      <service-parameters>
+        <service-parameter name="taskId" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findTaskByTaskIdResult" required="false" is-array="false" type="org.tinygroup.sdpm.project.dao.pojo.ProjectTask"/>
     </service-method>
   </service-component>
 </service-components>

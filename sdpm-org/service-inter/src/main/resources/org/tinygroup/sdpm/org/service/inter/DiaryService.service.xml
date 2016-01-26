@@ -7,32 +7,12 @@
       </service-parameters>
       <service-result name="addDiaryResult" required="false" is-array="false" type="org.tinygroup.sdpm.org.dao.pojo.OrgDiary"/>
     </service-method>
-    <service-method local-name="deleteDiary" service-id="deleteDiary" method-name="deleteDiary" cacheable="false" category="org.tinygroup.sdpm.org.service.inter">
-      <service-parameters>
-        <service-parameter name="id" type="java.lang.Integer" required="false" is-array="false"/>
-      </service-parameters>
-      <service-result name="deleteDiaryResult" required="false" is-array="false" type="java.lang.Integer"/>
-    </service-method>
     <service-method local-name="updateDiary" service-id="updateDiary" method-name="updateDiary" cacheable="false" category="org.tinygroup.sdpm.org.service.inter">
       <service-parameters>
         <service-parameter name="orgDiary" type="org.tinygroup.sdpm.org.dao.pojo.OrgDiary" required="false" is-array="false"/>
         <service-parameter name="list" type="org.tinygroup.sdpm.org.dao.pojo.OrgDiaryDetail" collection-type="java.util.List" required="false" is-array="false"/>
       </service-parameters>
       <service-result name="updateDiaryResult" required="false" is-array="false" type="java.lang.Integer"/>
-    </service-method>
-    <service-method local-name="findDiaryByKey" service-id="findDiaryByKey" method-name="findDiaryByKey" cacheable="false" category="org.tinygroup.sdpm.org.service.inter">
-      <service-parameters>
-        <service-parameter name="id" type="java.lang.Integer" required="false" is-array="false"/>
-      </service-parameters>
-      <service-result name="findDiaryByKeyResult" required="false" is-array="false" type="org.tinygroup.sdpm.org.dao.pojo.OrgDiary"/>
-    </service-method>
-    <service-method local-name="findPagerDiaryByUserId" service-id="findPagerDiaryByUserId" method-name="findPagerDiaryByUserId" cacheable="false" category="org.tinygroup.sdpm.org.service.inter">
-      <service-parameters>
-        <service-parameter name="id" type="java.lang.String" required="false" is-array="false"/>
-        <service-parameter name="start" type="java.lang.Integer" required="false" is-array="false"/>
-        <service-parameter name="limit" type="java.lang.Integer" required="false" is-array="false"/>
-      </service-parameters>
-      <service-result name="findPagerDiaryByUserIdResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager"/>
     </service-method>
     <service-method local-name="findListDiaryByUserId" service-id="findListDiaryByUserId" method-name="findListDiaryByUserId" cacheable="false" category="org.tinygroup.sdpm.org.service.inter">
       <service-parameters>
@@ -46,27 +26,6 @@
       </service-parameters>
       <service-result name="findDetailListByDiaryIdResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.org.dao.pojo.OrgDiaryDetail"/>
     </service-method>
-    <service-method local-name="findDiaryListSubordinate" service-id="findDiaryListSubordinate" method-name="findDiaryListSubordinate" cacheable="false" category="org.tinygroup.sdpm.org.service.inter">
-      <service-parameters>
-        <service-parameter name="id" type="java.lang.String" required="false" is-array="false"/>
-      </service-parameters>
-      <service-result name="findDiaryListSubordinateResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.org.dao.pojo.OrgDiary"/>
-    </service-method>
-    <service-method local-name="findDiaryByUserAndDate" service-id="findDiaryByUserAndDate" method-name="findDiaryByUserAndDate" cacheable="false" category="org.tinygroup.sdpm.org.service.inter">
-      <service-parameters>
-        <service-parameter name="year" type="java.lang.Integer" required="false" is-array="false"/>
-        <service-parameter name="week" type="java.lang.Integer" required="false" is-array="false"/>
-        <service-parameter name="userId" type="java.lang.String" required="false" is-array="false"/>
-      </service-parameters>
-      <service-result name="findDiaryByUserAndDateResult" required="false" is-array="false" type="org.tinygroup.sdpm.org.dao.pojo.OrgDiary"/>
-    </service-method>
-    <service-method local-name="findDiaryListOneWeek" service-id="findDiaryListOneWeek" method-name="findDiaryListOneWeek" cacheable="false" category="org.tinygroup.sdpm.org.service.inter">
-      <service-parameters>
-        <service-parameter name="year" type="java.lang.Integer" required="false" is-array="false"/>
-        <service-parameter name="week" type="java.lang.Integer" required="false" is-array="false"/>
-      </service-parameters>
-      <service-result name="findDiaryListOneWeekResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.org.dao.pojo.OrgDiary"/>
-    </service-method>
     <service-method local-name="findDiaryListSubordinateOneWeek" service-id="findDiaryListSubordinateOneWeek" method-name="findDiaryListSubordinateOneWeek" cacheable="false" category="org.tinygroup.sdpm.org.service.inter">
       <service-parameters>
         <service-parameter name="userId" type="java.lang.String" required="false" is-array="false"/>
@@ -75,24 +34,6 @@
       </service-parameters>
       <service-result name="findDiaryListSubordinateOneWeekResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.org.dao.pojo.OrgDiary"/>
     </service-method>
-    <service-method local-name="findDiaryPagerSubordinateOneWeek" service-id="findDiaryPagerSubordinateOneWeek" method-name="findDiaryPagerSubordinateOneWeek" cacheable="false" category="org.tinygroup.sdpm.org.service.inter">
-      <service-parameters>
-        <service-parameter name="userId" type="java.lang.String" required="false" is-array="false"/>
-        <service-parameter name="year" type="java.lang.Integer" required="false" is-array="false"/>
-        <service-parameter name="week" type="java.lang.Integer" required="false" is-array="false"/>
-        <service-parameter name="start" type="java.lang.Integer" required="false" is-array="false"/>
-        <service-parameter name="limit" type="java.lang.Integer" required="false" is-array="false"/>
-      </service-parameters>
-      <service-result name="findDiaryPagerSubordinateOneWeekResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager"/>
-    </service-method>
-    <service-method local-name="findUserNoSubmit" service-id="findUserNoSubmit" method-name="findUserNoSubmit" cacheable="false" category="org.tinygroup.sdpm.org.service.inter">
-      <service-parameters>
-        <service-parameter name="userId" type="java.lang.String" required="false" is-array="false"/>
-        <service-parameter name="year" type="java.lang.Integer" required="false" is-array="false"/>
-        <service-parameter name="week" type="java.lang.Integer" required="false" is-array="false"/>
-      </service-parameters>
-      <service-result name="findUserNoSubmitResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.org.dao.pojo.OrgUser"/>
-    </service-method>
     <service-method local-name="findDiaryByUserLatest" service-id="findDiaryByUserLatest" method-name="findDiaryByUserLatest" cacheable="false" category="org.tinygroup.sdpm.org.service.inter">
       <service-parameters>
         <service-parameter name="userId" type="java.lang.String" required="false" is-array="false"/>
@@ -100,16 +41,6 @@
         <service-parameter name="week" type="java.lang.Integer" required="false" is-array="false"/>
       </service-parameters>
       <service-result name="findDiaryByUserLatestResult" required="false" is-array="false" type="org.tinygroup.sdpm.org.dao.pojo.OrgDiary"/>
-    </service-method>
-    <service-method local-name="findPagerDiarySubAndSelf" service-id="findPagerDiarySubAndSelf" method-name="findPagerDiarySubAndSelf" cacheable="false" category="org.tinygroup.sdpm.org.service.inter">
-      <service-parameters>
-        <service-parameter name="userId" type="java.lang.String" required="false" is-array="false"/>
-        <service-parameter name="year" type="java.lang.Integer" required="false" is-array="false"/>
-        <service-parameter name="week" type="java.lang.Integer" required="false" is-array="false"/>
-        <service-parameter name="start" type="java.lang.Integer" required="false" is-array="false"/>
-        <service-parameter name="limit" type="java.lang.Integer" required="false" is-array="false"/>
-      </service-parameters>
-      <service-result name="findPagerDiarySubAndSelfResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager"/>
     </service-method>
     <service-method local-name="findListDiarySubAndSelf" service-id="findListDiarySubAndSelf" method-name="findListDiarySubAndSelf" cacheable="false" category="org.tinygroup.sdpm.org.service.inter">
       <service-parameters>
@@ -124,6 +55,14 @@
         <service-parameter name="list" type="org.tinygroup.sdpm.org.dao.pojo.OrgDiaryAndUserDO" collection-type="java.util.List" required="false" is-array="false"/>
       </service-parameters>
       <service-result name="findDetailListByDiaryListResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.org.dao.pojo.OrgDiaryDetail"/>
+    </service-method>
+    <service-method local-name="findDiaryListByWhiteList" service-id="findDiaryListByWhiteList" method-name="findDiaryListByWhiteList" cacheable="false" category="org.tinygroup.sdpm.org.service.inter">
+      <service-parameters>
+        <service-parameter name="userId" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="year" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="week" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findDiaryListByWhiteListResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.org.dao.pojo.OrgDiaryAndUserDO"/>
     </service-method>
   </service-component>
 </service-components>

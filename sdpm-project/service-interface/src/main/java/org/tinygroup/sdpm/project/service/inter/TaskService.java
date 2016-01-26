@@ -150,4 +150,12 @@ public interface TaskService {
     List<TaskChartBean> buildChart(String id);
 
     Integer deleteTask(Integer taskId);
+
+    /**
+     * 根据TaskId查找Task
+     * @param taskId
+     * @return
+     */
+    ProjectTask findTaskByTaskId(Integer taskId);
+
 }

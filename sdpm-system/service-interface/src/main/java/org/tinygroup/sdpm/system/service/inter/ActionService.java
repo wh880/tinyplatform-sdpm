@@ -3,6 +3,7 @@ package org.tinygroup.sdpm.system.service.inter;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.tinysqldsl.Pager;
 
+import java.util.Date;
 import java.util.List;
 
 public interface ActionService {
@@ -57,4 +58,21 @@ public interface ActionService {
      */
     Pager<SystemAction> queryActionBetweenDate(int start, int limit, SystemAction action, String startDate, String endDate,
                                                String sortName, boolean asc);
+
+    /**
+     * 通过一组系统日志Id查找相对应的系统日志
+     * @param idList
+     * @return
+     */
+    List<SystemAction> findActionListByIdList(List<Integer> idList);
+
+    /**
+     * 查询某人某一时间段内（任务，bug，需求的日志信息）
+     * @param userId
+     * @param beginDate
+     * @param endDate
+     * @return
+     */
+    List<SystemAction> findDiaryActionListByUserAndDate(String userId, Date beginDate, Date endDate);
+
 }

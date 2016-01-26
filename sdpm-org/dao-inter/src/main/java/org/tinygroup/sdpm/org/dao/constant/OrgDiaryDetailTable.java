@@ -119,6 +119,20 @@ public class OrgDiaryDetailTable extends Table {
 	 */
 	public final Column ORG_DETAIL_CONTENT = new Column(this, "org_detail_content");
 
+	/** 
+	 * <!-- begin-user-doc -->
+	 * 系统日志ID
+	 * 
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	/** 
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public final Column ACTION_ID = new Column(this, "action_id");
+
 
 	private OrgDiaryDetailTable() {
 		super("org_diary_detail");

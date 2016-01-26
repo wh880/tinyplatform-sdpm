@@ -64,4 +64,9 @@ public interface OrgUserDao extends BaseDao<OrgUser, String> {
      * @return
      */
     List<OrgUser> getListById(List<String> list);
+
+    /**
+     * 获取用户相关白名单用户
+     */
+    List<OrgUser> getWhiteListById(String userAccount);
 }

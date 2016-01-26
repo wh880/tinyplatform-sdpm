@@ -82,8 +82,20 @@ public class OrgDiaryDetail implements Serializable{
 	 */
 	private String orgDetailContent;
 
+	/** 
+	 * <!-- begin-user-doc -->
+	 * 系统日志ID
+	 * 
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private Integer actionId;
 
-	private Integer EffortWeek;
+	/**
+	 * 所在星期几
+	 * @param orgDetailId
+     */
+	private String effortWeek;
 
 	public void setOrgDetailId(Integer orgDetailId){
 		this. orgDetailId = orgDetailId;
@@ -133,11 +145,19 @@ public class OrgDiaryDetail implements Serializable{
 		return orgDetailContent;
 	}
 
-	public Integer getEffortWeek() {
-		return EffortWeek;
+	public void setActionId(Integer actionId){
+		this. actionId = actionId;
 	}
 
-	public void setEffortWeek(Integer effortWeek) {
-		EffortWeek = effortWeek;
+	public Integer getActionId(){
+		return actionId;
+	}
+
+	public String getEffortWeek() {
+		return effortWeek;
+	}
+
+	public void setEffortWeek(String effortWeek) {
+		this.effortWeek = effortWeek;
 	}
 }

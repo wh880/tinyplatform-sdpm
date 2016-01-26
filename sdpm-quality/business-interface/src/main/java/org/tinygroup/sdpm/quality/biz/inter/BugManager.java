@@ -72,4 +72,7 @@ public interface BugManager {
 
     List<QualityBug> bugInCondition(String condition, Integer limit, Integer productId);
 
+    QualityBug findBugByBugId(Integer bugId);
+
+
 }

@@ -121,4 +121,9 @@ public class BugManagerImpl implements BugManager {
             }
         });
     }
+
+    @Override
+    public QualityBug findBugByBugId(Integer bugId) {
+        return bugdao.findBugByBugId(bugId);
+    }
 }

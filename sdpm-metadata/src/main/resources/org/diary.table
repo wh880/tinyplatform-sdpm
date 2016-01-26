@@ -19,6 +19,6 @@
     <table-field standard-field-id="459c53e847344e448c49c93611514466" primary="false" unique="false" not-null="false" id="org_detail_date" auto-increase="false"/>
     <table-field standard-field-id="b83fac398ca14a0588d581bf1de31462" primary="false" unique="false" not-null="false" id="org_detail_type" auto-increase="false"/>
     <table-field standard-field-id="20a095223a7244159871f0e8efb8afd4" primary="false" unique="false" not-null="false" id="org_detail_content" auto-increase="false"/>
+    <table-field standard-field-id="51b35d0098cc46e4ae14e922f78269f6" primary="false" unique="false" not-null="false" id="action_id" auto-increase="false"/>
   </table>
-
 </tables>

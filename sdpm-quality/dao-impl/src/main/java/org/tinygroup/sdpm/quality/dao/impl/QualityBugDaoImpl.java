@@ -911,4 +911,10 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
                 )).limit(0,limit);
         return getDslSession().fetchList(select,QualityBug.class);
     }
+
+    @Override
+    public QualityBug findBugByBugId(Integer bugId) {
+        Select select=Select.selectFrom(QUALITY_BUGTABLE).where(QUALITY_BUGTABLE.BUG_ID.eq(bugId));
+        return getDslSession().fetchOneResult(select,QualityBug.class);
+    }
 }

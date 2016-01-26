@@ -103,5 +103,11 @@
       </service-parameters>
       <service-result name="findAllSubordinateResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.org.dao.pojo.OrgUser"/>
     </service-method>
+    <service-method local-name="findWhiteUser" service-id="findWhiteUser" method-name="findWhiteUser" cacheable="false" category="org.tinygroup.sdpm.org.service.inter">
+      <service-parameters>
+        <service-parameter name="userAccount" type="java.lang.String" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findWhiteUserResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.org.dao.pojo.OrgUser"/>
+    </service-method>
   </service-component>
 </service-components>

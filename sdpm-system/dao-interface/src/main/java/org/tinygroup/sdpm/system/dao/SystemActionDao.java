@@ -23,6 +23,9 @@ import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.tinysqldsl.base.Condition;
 
+import java.util.Date;
+import java.util.List;
+
 public interface SystemActionDao extends BaseDao<SystemAction, Integer> {
     SystemAction getActionAndObject(SystemAction systemAction);
 
@@ -30,4 +33,21 @@ public interface SystemActionDao extends BaseDao<SystemAction, Integer> {
 
     Pager<SystemAction> findByDate(int start, int limit, SystemAction action, String startDate, String endDate, OrderBy... orderArgs);
 
+    /**
+     * 通过一组系统日志Id查找相对应的系统日志
+     * @param idList
+     * @return
+     */
+    List<SystemAction> findActionListByIdList(List<Integer> idList);
+
+    /**
+     * 查询某一用户于某一个时间段内的系统日志信息（周报所需信息任务的创建、完成
+     需求的创建、完成
+     bug的创建、完成）
+     * @param userId
+     * @param beginDate
+     * @param endDate
+     * @return
+     */
+    List<SystemAction> findActionListByUserIdAndDate(String userId,Date beginDate,Date endDate);
 }

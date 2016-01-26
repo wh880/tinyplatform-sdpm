@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.system.biz.impl;
 
+import com.thoughtworks.xstream.io.xml.BEAStaxDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +16,7 @@ import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.tinysqldsl.base.Condition;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -108,4 +110,13 @@ public class ActionManagerImpl implements ActionManager {
         return systemActionPager;
     }
 
+    @Override
+    public List<SystemAction> findActionListByIdList(List<Integer> idList) {
+        return systemActionDao.findActionListByIdList(idList);
+    }
+
+    @Override
+    public List<SystemAction> findDiaryActionListByUserAndDate(String userId, Date beginDate, Date endDate) {
+        return systemActionDao.findActionListByUserIdAndDate(userId, beginDate, endDate);
+    }
 }

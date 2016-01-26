@@ -150,6 +150,15 @@ public interface UserService {
      */
     List<OrgUser> findOrgUserListSubordinateAndSelf(String userId);
 
+    /**
+     * 查询所有的下级
+     * @param userId
+     * @return
+     */
     List<OrgUser> findAllSubordinate(String userId);
 
+    /**
+     * 查询所有的白名单用户
+     */
+    List<OrgUser> findWhiteUser(String userAccount);
 }

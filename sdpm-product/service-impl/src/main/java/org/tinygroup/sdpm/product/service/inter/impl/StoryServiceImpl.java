@@ -111,4 +111,8 @@ public class StoryServiceImpl implements StoryService {
         return storyManager.findList(isWithSpec,ids);
     }
 
+    @Override
+    public ProductStory findStoryByStoryId(Integer storyId) {
+        return storyManager.findStoryByStoryId(storyId);
+    }
 }
