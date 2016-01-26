@@ -343,7 +343,7 @@ public class OrgUserDaoImpl extends TinyDslDaoSupport implements OrgUserDao {
     }
 
     public int[] batchInsert(List<OrgUser> orgUsers) {
-        return batchInsert(true, orgUsers);
+        return batchInsert(false, orgUsers);
     }
 
     public int[] batchUpdate(List<OrgUser> orgUsers) {
