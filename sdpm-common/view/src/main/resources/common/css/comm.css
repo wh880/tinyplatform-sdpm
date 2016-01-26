@@ -524,7 +524,7 @@ table.table.filelist-table{border:#ddd 1px solid;}
 .adjustTable tbody tr th{width:40%;text-align:right;}*/
 .table th{white-space: nowrap}
 .ztree li,.ztree li{overflow:visible}
-.togglenavpart .treeLeftbox ul.ztree{height:421px}
+.togglenavpart .treeLeftbox ul.ztree{height:auto}
 .navtitle{white-space: nowrap}
 .can-edit .ztree li a{padding-right:60px}
 .can-edit .ztree li a:hover{padding-right:0;}
