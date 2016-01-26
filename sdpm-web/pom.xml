@@ -321,7 +321,7 @@
                 <configuration>
                     <jvmArgs>-XX:PermSize=256M -XX:MaxPermSize=1024M</jvmArgs>
                     <webApp>
-                        <contextPath>/${project.name}</contextPath>
+                        <contextPath></contextPath>
                     </webApp>
                     <connectors>
                         <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">

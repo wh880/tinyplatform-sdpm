@@ -25,7 +25,7 @@
             $("#w").val(week);
             var body = $("#diarylist-detail");
             var data = {w: week, y: year, aid: 2};
-            ajaxLoadContent(body, "/sdpm-web/a/org/diary/list/one.pagelet", data);
+            ajaxLoadContent(body, "${TINY_CONTEXT_PATH+adminPath}/org/diary/list/one.pagelet", data);
 
         });
         function getFirstWeekDay(year, week) {

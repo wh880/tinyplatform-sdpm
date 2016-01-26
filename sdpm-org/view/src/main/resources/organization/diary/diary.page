@@ -13,7 +13,14 @@
     #@toggleRight()
         #@div(divBaseClass="tinyheaderTools form-inline")
             #@aModal("#myModal" "添加白名单用户" "600" "" "btn radius btn-primary btn-sm" "/a/org/user/showAdd")添加白名单用户#end
-            #WhiteListdialog("myModal")
+
+        <div id="myModal" class="modal hide fade " tabindex="-1" role="dialog" aria-hidden="true">
+            #@dialogHeader()对话框标题#end
+            <div class="modal-body  ">
+                <div class="clear"></div>
+            </div>
+        </div>
+
             #@aExtendButton("btn radius btn-primary btn-sm" TINY_CONTEXT_PATH+adminPath+
                 "/org/diary/show/white?choose=1")白名单用户周报#end
             #@aExtendButton("btn radius btn-primary btn-sm" TINY_CONTEXT_PATH+adminPath+
@@ -35,7 +42,7 @@
                 var week = $(this).attr("data-week");
                 var body = $("#diarylist-detail");
                 var data = {w: week, y: year, aid: 2};
-                ajaxLoadContent(body, "/sdpm-web/a/org/diary/list/data.pagelet?orgUserId=${orgUserId}", data);
+                ajaxLoadContent(body, "${TINY_CONTEXT_PATH+adminPath}/org/diary/list/data.pagelet?orgUserId=${orgUserId}", data);
             });
             function getFirstWeekDay(year, week) {
                 var yearFirst = moment(year + "-01-01");

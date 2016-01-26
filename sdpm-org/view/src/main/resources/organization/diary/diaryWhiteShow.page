@@ -47,7 +47,7 @@
                 var week = $(this).attr("data-week");
                 var body = $("#diarylist-detail");
                 var data = {w: week, y: year, aid: 2};
-                ajaxLoadContent(body, "/sdpm-web/a/org/diary/list/data.pagelet?type=1&orgUserId=${orgUserId}", data);
+                ajaxLoadContent(body, "${TINY_CONTEXT_PATH+adminPath}/org/diary/list/data.pagelet?type=1&orgUserId=${orgUserId}", data);
             });
             function getFirstWeekDay(year, week) {
                 var yearFirst = moment(year + "-01-01");
