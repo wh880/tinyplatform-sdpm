@@ -73,4 +73,7 @@
         <menu id="org-company-edit" name="编辑公司" href="/org/company/edit" icon="icon-edit"
               sort="1" isShow="1" scope="org-company-edit"/>
     </menu>
+    <menu id="organizationDiary" name="周报" href="/org/diary/show" sort="1" isShow="1">
+
+    </menu>
 </menu>

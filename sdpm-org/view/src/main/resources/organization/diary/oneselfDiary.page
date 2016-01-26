@@ -1,112 +1,75 @@
-#set(name="organizationUser")
+<style type="text/css">
+    .diarylist .diary-detail {
+        padding: 10px 12px;
+        border-bottom: #eed 1px solid;
+        background: #fdfdfd
+    }
 
+    .diary-detail .diary-report .portrait {
+        font-size: 18px;
+        padding-top: 10px;
+    }
+
+    .diary-detail .diary-info {
+        display: inline-block;
+        min-height: 38px;
+        position: relative;
+        width: 65%;
+        font-size: 15px;
+    }
+</style>
+#set(name="organizationDiary")
 #@layout(org)#end
 #@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
     #@toggleLeft({"class":"aclass"})
-        #@settoggleLeftTitle()部门结构#end
+        #@settoggleLeftTitle()我的下属#end
         #@settoggleLeftBody("treeLeftbox")
-            #@zTreeList(call("link",adminPath+"/org/dept/data"))
-                #setzTreeValMap({"id":"orgDeptId","name":"orgDeptName","pid":"orgDeptParent"}) ##key值为固定
+            #@zTreeList(call("link",adminPath+"/org/diary/tree"))
+                #setzTreeValMap({"id":"orgUserId","name":"orgUserAccount","pid":"orgUserLeader"}) ##key值为固定
                 #zTreeSetLinkUrl(TINY_CONTEXT_PATH+adminPath+"/org/user/list" )
-                #zTreeSetAddUrl(TINY_CONTEXT_PATH+adminPath+"/org/dept/add")
-                #zTreeSetEditUrl(TINY_CONTEXT_PATH+adminPath+"/org/dept/edit")
-                #zTreeSetDelUrl(TINY_CONTEXT_PATH+adminPath+"/org/dept/delete")
             #end
         #end
     #end
     #@toggleRight()
-    <div style="text-align:center;padding-top:20px">
-        <h3>
-            #@circleButton("primary get-prev")#fontIco("chevron-left")#end
-            第<span id="week-num">${w}</span>周周报总览
-            #@circleButton("primary get-next")#fontIco("chevron-right")#end
-        </h3>
-        <span id="begin-date" class="hide"></span>
-        <div><span id="week-date-show"></span></div>
-    </div>
-    <script type="text/javascript">
-        $(function () {
-            $("#week-num").on("refresh", function () {
-                var year = $(this).attr("data-year");
-                var week = $(this).attr("data-week");
-                var body=$("#diarylist-detail");
-                var data={w:week,y:year,aid:2};
-                ajaxLoadContent(body,"/sdpm-web/a/org/diary/testdata.pagelet",data);
-            });
-            function getFirstWeekDay(year, week) {
-                var yearFirst = moment(year + "-01-01");
-                var thisWeek = yearFirst.format("E");
-                return yearFirst.add("days", week * 7 - thisWeek + 1).format("YYYY-MM-DD");
-            }
-            #if(y&&w)
-                $("#begin-date").html(getFirstWeekDay(${y},${w}));
-            #else
-                $("#begin-date").html(moment().format("YYYY-MM-DD"));
-            #end
-
-            changeWeekDate();
-            function changeWeekDate(changeWeek) {
-                var bdate =$("#begin-date").html();
-                if (typeof(changeWeek) == "undefined") {
-                    week = 0
-                } else if (changeWeek == 1) {
-                    bdate = moment(bdate).add("days", 7).format("YYYY-MM-DD")
-                } else if (changeWeek == -1) {
-                    bdate = moment(bdate).add("days", -7).format("YYYY-MM-DD")
-                }
-                var vNowDate = moment(bdate).format("YYYY-MM-DD");
-                var thisMoment = moment();
-                var thisyearWeek = thisMoment.format("YYYY-WW");
-                var thisWeek = moment(bdate).format("YYYY-WW");
-                if (thisWeek > thisyearWeek) {
-                    layer.msg("不能选择大于当前周");
-                    return false;
-                } else if (thisWeek == thisyearWeek) {
-                    $(".get-next").removeClass("btn-primary");
-                } else {
-                    $(".get-next").addClass("btn-primary");
-                }
-                $("#begin-date").html(bdate);
-                var yearWeek = moment(vNowDate).format("W");
-                $("#week-num").html(yearWeek);
-                var vWeekOfDay = moment(vNowDate).format("E");
-                var vWeekOfDays = 7 - vWeekOfDay;
-                var vStartDate = moment(vNowDate).add('days', -(vWeekOfDay - 1));
-                var vEndDate = moment(vNowDate).add('days', vWeekOfDays);
-                $("#week-date-show").html(vStartDate.format("YYYY年MM月DD") + "-" + vEndDate.format("MM月DD"));
-                $("#week-num").attr("data-year", moment(vNowDate).format("YYYY"));
-                $("#week-num").attr("data-week", yearWeek);
-                $("#week-num").trigger("refresh");
-            }
-
-            $("#week-date-show").on("click", function () {
-                var that = this;
-                WdatePicker({
-                    el: 'begin-date',
-                    startDate: '%y-%M-01 00:00:00', dateFmt: 'yyyy-MM-dd',
-                    position: {left: -15},
-                    onpicked: function () {
-                        if (changeWeekDate() == false) {
-                            $("#begin-date").html($dp.cal.getDateStr);
-                        }
-                    }
-                })
-            });
-            $(".get-prev").on("click", function () {
-                changeWeekDate(-1);
-            });
-            $(".get-next").on("click", function () {
-                changeWeekDate(1);
-            });
-        });
-    </script>
-
-
+        <center><h1>${userAccount} 的周报列表</h1></center>
     <div class="tweet_list diarylist">
-        <ul class="diarylist-detail" id="diarylist-detail">
-
-
-        </ul>
-    </div>
+    <ul class="diarylist-detail" id="diarylist-detail">
+        #if(list!=null)
+            #for(var:list)
+            #@diaryItem2(var?.orgDiaryWeek,var?.orgDiaryCreateDate,var?.orgDiarySummary)
+                #for(var2:details)
+                #if(var2?.key==var?.orgDiaryId)
+                    #for(var3:var2?.value)
+                    <div class="committed clearfix">
+                        <span class="tocommittime">星期${var3?.effortWeek}</span>
+                        <ol class="logList-detailList">
+                            <li><span>${var3?.orgDetailContent}</span></li>
+                        </ol>
+                    </div>
+                #end
+            #end
+        #end
     #end
 #end
+#end
+
+</ul>
+</div>
+#end
+#end
+
+<script>
+
+    $(function () {
+        $("ul.leftztree").on("ztreeClick", "a", function () {
+            ajaxLoadContent(
+                    $("#diarylist-detail"),
+                    $(this).attr("data-href"),
+                    {w: $("#week-num").html(), y: $("#week-num").attr("data-year")});
+        });
+        $("#diarylist-detail").on("click", ".diary-info,.dia_h_btn", function (e) {
+            $(this).closest(".diary-detail").find(".dia_h_btn i").toggleClass("icon-chevron-up icon-chevron-down");
+            $(this).closest(".diary-detail").children(".diary-detail-list").slideToggle();
+        })
+    })
+</script>

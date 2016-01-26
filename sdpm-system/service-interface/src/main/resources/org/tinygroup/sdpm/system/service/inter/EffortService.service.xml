@@ -88,5 +88,11 @@
       </service-parameters>
       <service-result name="findEffortListByUserAndDateResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.system.dao.pojo.SystemEffort"/>
     </service-method>
+    <service-method local-name="findEffortListByIdList" service-id="findEffortListByIdList" method-name="findEffortListByIdList" cacheable="false" category="org.tinygroup.sdpm.system.service.inter">
+      <service-parameters>
+        <service-parameter name="list" type="java.lang.Integer" collection-type="java.util.List" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findEffortListByIdListResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.system.dao.pojo.SystemEffort"/>
+    </service-method>
   </service-component>
 </service-components>

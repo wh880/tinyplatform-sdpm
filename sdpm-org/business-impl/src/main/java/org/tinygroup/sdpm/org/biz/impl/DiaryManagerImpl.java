@@ -1,18 +1,19 @@
 package org.tinygroup.sdpm.org.biz.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.sdpm.org.biz.inter.DiaryManager;
 import org.tinygroup.sdpm.org.dao.OrgDiaryDao;
 import org.tinygroup.sdpm.org.dao.OrgDiaryDetailDao;
 import org.tinygroup.sdpm.org.dao.pojo.OrgDiary;
+import org.tinygroup.sdpm.org.dao.pojo.OrgDiaryAndUserDO;
 import org.tinygroup.sdpm.org.dao.pojo.OrgDiaryDetail;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
+import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -21,7 +22,7 @@ import java.util.List;
  */
 @Service
 @Transactional
-public class DiaryManagerImpl implements DiaryManager{
+public class DiaryManagerImpl implements DiaryManager {
     @Autowired
     private OrgDiaryDao orgDiaryDao;
 
@@ -30,19 +31,16 @@ public class DiaryManagerImpl implements DiaryManager{
 
     @Override
     public OrgDiary add(OrgDiary orgDiary, List<OrgDiaryDetail> list) {
-        Calendar ca=Calendar.getInstance();
-        ca.setTime(orgDiary.getOrgDiaryCreateDate());
-        orgDiary.setOrgDiaryYear(ca.get(Calendar.YEAR));
-        orgDiary.setOrgDiaryWeek(ca.get(Calendar.WEEK_OF_YEAR));
-        orgDiary.setOrgDiaryStatus("0");
-        OrgDiary diary=orgDiaryDao.add(orgDiary);
+        OrgDiary diary = orgDiaryDao.add(orgDiary);
 
-        for (int i=0;i<list.size();i++){
-            OrgDiaryDetail orgDiaryDetail=list.get(i);
-            orgDiaryDetail.setOrgDiaryId(diary.getOrgDiaryId());
+        if (list == null) {
+        } else {
+            for (int i = 0; i < list.size(); i++) {
+                OrgDiaryDetail orgDiaryDetail = list.get(i);
+                orgDiaryDetail.setOrgDiaryId(diary.getOrgDiaryId());
+            }
+            orgDiaryDetailDao.batchInsert(list);
         }
-
-        orgDiaryDetailDao.batchInsert(list);
         return diary;
     }
 
@@ -54,8 +52,13 @@ public class DiaryManagerImpl implements DiaryManager{
 
     @Override
     public Integer update(OrgDiary orgDiary, List<OrgDiaryDetail> list) {
-        orgDiaryDetailDao.batchDeleteByDiaryId(orgDiary.getOrgDiaryId());
-        orgDiaryDetailDao.batchInsert(list);
+        List<OrgDiaryDetail> details = orgDiaryDetailDao.findByDiaryId(orgDiary.getOrgDiaryId());
+        if (details != null && details.size() > 0) {
+            orgDiaryDetailDao.batchDeleteByDiaryId(orgDiary.getOrgDiaryId());
+        }
+        if (list != null) {
+            orgDiaryDetailDao.batchInsert(list);
+        }
 
         orgDiary.setOrgDiaryModifyDate(new Date());
         return orgDiaryDao.edit(orgDiary);
@@ -67,7 +70,12 @@ public class DiaryManagerImpl implements DiaryManager{
     }
 
     @Override
-    public List<OrgDiary> findByUserId(String id) {
+    public Pager<OrgDiaryAndUserDO> findByUserId(String id,Integer start,Integer limit) {
+        return orgDiaryDao.findPagerByUserId(id,start,limit);
+    }
+
+    @Override
+    public List<OrgDiaryAndUserDO> findListByUserId(String id) {
         return orgDiaryDao.findListByUserId(id);
     }
 
@@ -78,16 +86,20 @@ public class DiaryManagerImpl implements DiaryManager{
 
     @Override
     public List<OrgDiary> findSubordinate(List<OrgUser> list) {
-        List<String> list1=new ArrayList<String>();
-        for (OrgUser orgUser:list) {
+        List<String> list1 = new ArrayList<String>();
+        for (OrgUser orgUser : list) {
             list1.add(orgUser.getOrgUserId());
         }
         return orgDiaryDao.findListByUser(list1);
     }
 
     @Override
-    public OrgDiary find(Integer year, Integer week,String userId) {
-        return orgDiaryDao.getByTimeAndUser(userId,year,week);
+    public OrgDiary find(Integer year, Integer week, String userId) {
+        List<OrgDiary> list = orgDiaryDao.getByTimeAndUser(userId, year, week);
+        if (list == null || list.size() == 0) {
+            return null;
+        }
+        return list.get(0);
     }
 
     @Override
@@ -97,18 +109,61 @@ public class DiaryManagerImpl implements DiaryManager{
 
     @Override
     public List<OrgDiary> findSubordinateOneWeek(List<OrgUser> list, Integer year, Integer week) {
-        List<String> list1=new ArrayList<String>();
-        for (OrgUser orgUser:list) {
+        if (list==null||list.size()==0){
+            return null;
+        }
+        List<String> list1 = new ArrayList<String>();
+        for (OrgUser orgUser : list) {
             list1.add(orgUser.getOrgUserId());
         }
-        return orgDiaryDao.findSubordinateOneWeek(list1,year,week);
+        return orgDiaryDao.findSubordinateOneWeek(list1, year, week);
     }
 
     @Override
-    public List<String> findUser(List<String> list,Integer year,Integer week){
-        if(list==null){
+    public List<OrgUser> findUser(String userId, Integer year, Integer week) {
+        return orgDiaryDao.findUser(userId, year, week);
+    }
+
+    @Override
+    public OrgDiary findDiaryByUserLatest(String userId, Integer year, Integer week) {
+        List<OrgDiary> list = orgDiaryDao.findDiaryByUserLatest(userId, year, week);
+        if (CollectionUtil.isEmpty(list)) {
             return null;
         }
-        return orgDiaryDao.findUser(list,year,week);
+        return list.get(0);
+    }
+
+    @Override
+    public Pager<OrgDiaryAndUserDO> findPagerSubordinateOneWeek(List<OrgUser> list, Integer year, Integer week, Integer start, Integer limit) {
+        List<String> list1 = new ArrayList<String>();
+        for (OrgUser orgUser : list) {
+            list1.add(orgUser.getOrgUserId());
+        }
+        return orgDiaryDao.findPagerSubordinateOneWeek(list1,year,week,start,limit);
+    }
+
+    @Override
+    public Pager<OrgDiaryAndUserDO> findPagerSubAndSelf(String userId, List<OrgUser> list, Integer year, Integer week, Integer start, Integer limit) {
+        List<String> list1 = new ArrayList<String>();
+        list1.add(userId);
+        for (OrgUser orgUser : list) {
+            list1.add(orgUser.getOrgUserId());
+        }
+        return orgDiaryDao.findPagerSubordinateOneWeek(list1,year,week,start,limit);
+    }
+
+    @Override
+    public List<OrgDiaryAndUserDO> findListSubAndSelf(String userId, List<OrgUser> list, Integer year, Integer week) {
+        List<String> list1 = new ArrayList<String>();
+        list1.add(userId);
+        for (OrgUser orgUser : list) {
+            list1.add(orgUser.getOrgUserId());
+        }
+        return orgDiaryDao.findListSubordinateOneWeek(list1,year,week);
+    }
+
+    @Override
+    public List<OrgDiaryDetail> findDetailListByDiaryList(List<Integer> list) {
+        return orgDiaryDetailDao.findListByDiaryList(list);
     }
 }

@@ -1,0 +1,14 @@
+#set(records=pager.totalCount,temp=1,pagesize=temp.parseInt(pagesize),page=temp.parseInt(page),pagesize=pagesize<100?pagesize:100)
+#if (pagesize>records-pagesize*(page-1))
+    #set(pagesize=records-(page-1)*pagesize)
+#end
+#setTinyItemCount(pager.totalCount)
+#foreach(var:pager.records)
+    #@tr()
+        #@td()<input type="checkbox" value="${var?.orgUserId}" name="idCheck">#end
+        #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/org/user/story?choose=3&id=${var?.orgUserId}">${var
+            ?.orgUserAccount}</a>#end
+        #@td("nowrap")${var?.orgDiarySummary}#end
+        #@td()${var?.orgDiaryCreateDate}#end
+    #end
+#end

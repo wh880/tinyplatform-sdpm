@@ -1,8 +1,10 @@
 package org.tinygroup.sdpm.org.biz.inter;
 
 import org.tinygroup.sdpm.org.dao.pojo.OrgDiary;
+import org.tinygroup.sdpm.org.dao.pojo.OrgDiaryAndUserDO;
 import org.tinygroup.sdpm.org.dao.pojo.OrgDiaryDetail;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
+import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.List;
 
@@ -33,7 +35,9 @@ public interface DiaryManager {
     /**
      * 查找某人的周报
      */
-    List<OrgDiary> findByUserId(String id);
+    Pager<OrgDiaryAndUserDO> findByUserId(String id,Integer start,Integer limit);
+
+    List<OrgDiaryAndUserDO> findListByUserId(String id);
 
     /**
      * 查看周报详情
@@ -60,8 +64,25 @@ public interface DiaryManager {
      */
     List<OrgDiary> findSubordinateOneWeek(List<OrgUser> list,Integer year,Integer week);
 
+    Pager<OrgDiaryAndUserDO> findPagerSubordinateOneWeek(List<OrgUser> list, Integer year, Integer week,Integer start,Integer limit);
+
     /**
      * 查询某一周提交周报的下属
      */
-    List<String> findUser(List<String> list,Integer year,Integer week);
+    List<OrgUser> findUser(String userId,Integer year,Integer week);
+
+    /**
+     * 查询某人最新的周报
+     */
+    OrgDiary findDiaryByUserLatest(String userId,Integer year,Integer week);
+
+    /**
+     * 查询自己及下属的某一周的周报+分页
+     */
+    Pager<OrgDiaryAndUserDO> findPagerSubAndSelf(String userId, List<OrgUser> list, Integer year, Integer week, Integer start, Integer limit);
+
+    List<OrgDiaryAndUserDO> findListSubAndSelf(String userId, List<OrgUser> list, Integer year, Integer week);
+
+    List<OrgDiaryDetail> findDetailListByDiaryList(List<Integer> list);
+
 }

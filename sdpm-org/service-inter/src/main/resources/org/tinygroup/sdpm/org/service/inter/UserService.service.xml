@@ -85,5 +85,23 @@
       </service-parameters>
       <service-result name="userInConditionResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.org.dao.pojo.OrgUser"/>
     </service-method>
+    <service-method local-name="findOrgUserListSubordinate" service-id="findOrgUserListSubordinate" method-name="findOrgUserListSubordinate" cacheable="false" category="org.tinygroup.sdpm.org.service.inter">
+      <service-parameters>
+        <service-parameter name="userId" type="java.lang.String" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findOrgUserListSubordinateResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.org.dao.pojo.OrgUser"/>
+    </service-method>
+    <service-method local-name="findOrgUserListSubordinateAndSelf" service-id="findOrgUserListSubordinateAndSelf" method-name="findOrgUserListSubordinateAndSelf" cacheable="false" category="org.tinygroup.sdpm.org.service.inter">
+      <service-parameters>
+        <service-parameter name="userId" type="java.lang.String" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findOrgUserListSubordinateAndSelfResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.org.dao.pojo.OrgUser"/>
+    </service-method>
+    <service-method local-name="findAllSubordinate" service-id="findAllSubordinate" method-name="findAllSubordinate" cacheable="false" category="org.tinygroup.sdpm.org.service.inter">
+      <service-parameters>
+        <service-parameter name="userId" type="java.lang.String" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findAllSubordinateResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.org.dao.pojo.OrgUser"/>
+    </service-method>
   </service-component>
 </service-components>

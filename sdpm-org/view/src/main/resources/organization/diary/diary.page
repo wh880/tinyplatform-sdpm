@@ -1,63 +1,516 @@
+#macro zTreeList(dataurl optionMap)
+    #set(ztreeid=optionMap?.id?:fmt("zid%d",rand()))
+<ul id="${ztreeid}" class="ztree leftztree"></ul>
+<script type="text/javascript">
+    <!--
+    $(function(){
+        var setting = {
+            #if(!optionMap?.readOnly)
+                view: {
+                    addHoverDom: addHoverDom,
+                    removeHoverDom: removeHoverDom,
+                    addDiyDom: addDiyDom,
+                    selectedMulti: false
+                },
+                edit: {
+                    drag: {
+                        autoExpandTrigger: true,
+                        prev: dropPrev,
+                        inner: dropInner,
+                        next: dropNext
+                    },
+                    enable: true,
+                    editNameSelectAll: true,
+                    showRemoveBtn: showRemoveBtn,
+                    showRenameBtn: showRenameBtn,
+                    showAddBtn: showAddBtn
 
-#set(name="organizationUser")
+                },#end
+            data: {
+                simpleData: {
+                    enable: true
+                }
+            },
+            callback: {
+                #if(!optionMap?.readOnly)
+                    beforeEditName: beforeEditName,
+                    beforeRemove: beforeRemove,
+                    beforeRename: beforeRename,
+                    beforeDrag: beforeDrag,
+                    beforeDrop: beforeDrop,
+                    beforeDragOpen: beforeDragOpen,
+                    onDrag: onDrag,
+                    onDrop: onDrop,
+                    onRemove: onRemove,
+                    onRename: onRename,
+                    beforeDrag: beforeDrag,
+                    beforeDrop: beforeDrop,
+                    beforeDragOpen: beforeDragOpen,
+                    onDrag: onDrag,
+                    onDrop: onDrop,
+                    onNodeCreated:onNodeCreated,
+                #end
+                beforeClick: beforeClick,
+                onClick: onClick,
+                onExpand: onExpand
+            }
+        };
 
-#@layout(org)佛挡杀佛dsfszd#end
+        var zNodes =[];
+        var log, className = "dark";
+        var ztreeid="${ztreeid}";
+        var zTree;
+        var linkurl;
+        var editUrl;
+        var addUrl;
+        var delUrl;
+        var currentNode;
+        var IDMark_A = "_a";
+        var dataformat={name:"name",id:"id",pid:"pid"};
+        function setLinkUrl(url){
+            linkurl=url;
+        }
+        function setEditUrl(url){
+            editUrl=url;
+        }
+        function setAddUrl(url){
+            addUrl=url;
+        }
+        function setDelUrl(url){
+            delUrl=url;
+        }
+	#bodyContent
+        function refreshdata(callback){
+            $.ajax({
+                type: "GET",
+                url: "${dataurl}",
+                dataType: "html",
+                success: function(data) {
+                    data= eval(' ' +data+ ' ');
+                    data.splice(0, 0, {id:"allcontent", pId:0, name:"全部",add:true});
+                    zNodes=data;
+                    zTree=$.fn.zTree.init($("#"+ztreeid), setting, zNodes);
+                    callback&&callback();
+                    //initzTree();
+                }
+            });
+        }
+        refreshdata();
+        //var zTree=$.fn.zTree.init($("#"+ztreeid), setting, zNodes);
+        $("#${ztreeid}").on("refresh",function(e,callback){
+            refreshdata(callback);
+        })
+        function beforeEditName(treeId, treeNode) {
+
+            if(editUrl){
+                layer.prompt({title: '修改名称',val:treeNode.name, formType: 2}, function(text){
+                    var data={rand:Math.random()};
+                    data[dataformat.id]=treeNode.id;
+                    data[dataformat.name]=text;
+                    data[dataformat.pid]=treeNode.pId;
+                    $.ajax({
+                        type: "GET",
+                        url: editUrl,
+                        data:data,
+                        dataType: "json",
+                        success: function(data) {
+                            if(data.status=="success"||data.status=="y"){
+                                layer.msg(data.info,2,1)
+                            }else{
+                                layer.msg(data.info,2)
+                            }
+                            refreshdata();
+                        }
+                    });
+                    layer.closeAll()
+                });
+            }else{
+                layer.msg("修改地址不可用，操作失败")
+            }
+            //className = (className === "dark" ? "":"dark");
+            return false;
+        }
+        function onNodeCreated(event, treeId, treeNode){
+            var rightWidth=3;
+            if(treeNode.edit) {
+                rightWidth+=35;
+            }
+            if(treeNode.add) {
+                rightWidth+=15;
+            }
+            $("#"+treeNode.tId+"_a").css("padding-right",rightWidth+"px");
+
+        }
+        function addDiyDom(treeId, treeNode) {
+            if(!currentNode) return;
+            if (treeNode.id==currentNode){
+                $("#"+treeNode.tId+"_a").css("color","#c00");
+            }
+        }
+
+        function beforeRemove(treeId, treeNode) {
+            className = (className === "dark" ? "":"dark");
+            //var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+            zTree.selectNode(treeNode);
+            layer.confirm("确认删除吗?",function(e){
+
+
+                if(delUrl){
+                    var data={rand:Math.random()};
+                    data[dataformat.id]=treeNode.id;
+                    data[dataformat.name]=treeNode.name;
+                    data[dataformat.pid]=treeNode.pId;
+                    $.ajax({
+                        type: "GET",
+                        url: delUrl,
+                        data:data,
+                        dataType: "json",
+                        success: function(data) {
+                            //layer.close(e);
+                            if(data.status=="success"||data.status=="y"){
+                                layer.msg(data.info,2,1)
+                            }else{
+                                layer.msg(data.info,2)
+                            }
+                            refreshdata();
+                        }
+                    });
+                }else{
+                    layer.msg("删除地址不可用，操作失败")
+                }
+            });
+            return false;//confirm("确认删除 节点 -- " + treeNode.name + " 吗？");
+        }
+        function onRemove(e, treeId, treeNode) {
+            return false
+        }
+        function beforeRename(treeId, treeNode, newName, isCancel) {
+            //className = (className === "dark" ? "":"dark");
+
+            return false;
+        }
+        function onRename(e, treeId, treeNode, isCancel) {
+
+        }
+        function showRemoveBtn(treeId, treeNode) {
+            if(treeNode.edit) return true;
+        }
+        function showAddBtn(treeId, treeNode) {
+            return 0;
+        }
+        function showRenameBtn(treeId, treeNode) {
+            if(treeNode.edit) return true;
+        }
+
+        function beforeClick(treeId, treeNode) {
+            if(treeNode.clickAble===false){
+                zTree.expandNode(treeNode);
+                return false;
+            }
+            /*var check = (treeNode && !treeNode.isParent);
+            if (!check) {
+                zTree.expandNode(treeNode);
+                return false;
+            }//return check;*/
+        }
+        function onClick(e, treeId, treeNode) {
+            var id=treeNode.id;
+            var url=linkurl;
+            if(treeNode.id!="allcontent"){
+                url=linkurl+(linkurl.indexOf("?")>-1?"&":"?")+dataformat.id+"="+treeNode.id;
+            }
+            #if(optionMap?.linkAjax)
+                $(e.target).closest("a").attr("data-href",url).trigger("ztreeClick");
+            #else
+                $(e.target).closest("a").attr("href",url);
+            #end
+        }
+
+        var newCount = 1;
+        function addHoverDom(treeId, treeNode) {
+            //console.log(treeNode.pId)
+            if(!treeNode.add){
+                return false;
+            }
+
+            //return treeNode.pId;
+            var sObj = $("#" + treeNode.tId + "_span");
+            if (treeNode.editNameFlag || $("#addBtn_"+treeNode.tId).length>0) return;
+            var addStr = "<span class='button add' id='addBtn_" + treeNode.tId
+                    + "' title='add node' onfocus='this.blur();'></span>";
+            sObj.after(addStr);
+            var btn = $("#addBtn_"+treeNode.tId);
+            if (btn) btn.bind("click", function(){
+                if(addUrl){
+                    layer.prompt({title: '请填写名称', formType: 2}, function(text){
+                        var data={rand:Math.random()};
+                        data[dataformat.name]=text;
+                        data[dataformat.pid]=treeNode.id=="allcontent"?0:treeNode.id;
+                        if(treeNode.id=="allcontent") data[dataformat.pid]=0;
+                        $.ajax({
+                            type: "GET",
+                            url: addUrl,
+                            data:data,
+                            dataType: "json",
+                            success: function(data) {
+                                if(data.status=="success"||data.status=="y"){
+                                    layer.msg(data.info,2,1)
+                                }else{
+                                    layer.msg(data.info,2)
+                                }
+                                refreshdata();
+                            }
+                        });
+                        layer.closeAll()
+                    });
+                }else{
+                    layer.msg("新增地址不可用，操作失败");
+                    return false;
+                }
+                //zTree.addNodes(treeNode, {id:(100 + newCount), pId:treeNode.id, name:"new node" + (newCount++),edit:true});
+                return false;
+            });
+        };
+        function removeHoverDom(treeId, treeNode) {
+            $("#addBtn_"+treeNode.tId).unbind().remove();
+        };
+        function selectAll() {
+            //zTree.setting.edit.editNameSelectAll =  $("#selectAll").attr("checked");
+        }
+
+        function dropPrev(treeId, nodes, targetNode) {
+            var pNode = targetNode.getParentNode();
+            if (pNode && pNode.dropInner === false) {
+                return false;
+            } else {
+                for (var i=0,l=curDragNodes.length; i<l; i++) {
+                    var curPNode = curDragNodes[i].getParentNode();
+                    if (curPNode && curPNode !== targetNode.getParentNode() && curPNode.childOuter === false) {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+        function dropInner(treeId, nodes, targetNode) {
+            if (targetNode && targetNode.dropInner === false) {
+                return false;
+            } else {
+                for (var i=0,l=curDragNodes.length; i<l; i++) {
+                    if (!targetNode && curDragNodes[i].dropRoot === false) {
+                        return false;
+                    } else if (curDragNodes[i].parentTId && curDragNodes[i].getParentNode() !== targetNode && curDragNodes[i].getParentNode().childOuter === false) {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+        function dropNext(treeId, nodes, targetNode) {
+            var pNode = targetNode.getParentNode();
+            if (pNode && pNode.dropInner === false) {
+                return false;
+            } else {
+                for (var i=0,l=curDragNodes.length; i<l; i++) {
+                    var curPNode = curDragNodes[i].getParentNode();
+                    if (curPNode && curPNode !== targetNode.getParentNode() && curPNode.childOuter === false) {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+        function beforeDrag(treeId, treeNodes) {
+            className = (className === "dark" ? "":"dark");
+
+            for (var i=0,l=treeNodes.length; i<l; i++) {
+                if (treeNodes[i].drag === false) {
+                    curDragNodes = null;
+                    return false;
+                } else if (treeNodes[i].parentTId && treeNodes[i].getParentNode().childDrag === false) {
+                    curDragNodes = null;
+                    return false;
+                }
+            }
+            curDragNodes = treeNodes;
+            return true;
+        }
+        function beforeDragOpen(treeId, treeNode) {
+            autoExpandNode = treeNode;
+            return true;
+        }
+        function beforeDrop(treeId, treeNodes, targetNode, moveType, isCopy) {
+            className = (className === "dark" ? "":"dark");
+
+            return true;
+        }
+        function onDrag(event, treeId, treeNodes) {
+            className = (className === "dark" ? "":"dark");
+
+        }
+        function onDrop(event, treeId, treeNodes, targetNode, moveType, isCopy) {
+            className = (className === "dark" ? "":"dark");
+            if(!targetNode) return;
+            layer.confirm("确定吗?",function(e){
+                var data={rand:Math.random()};;
+                data[dataformat.pid]=targetNode.id=="allcontent"?0:targetNode.id;;
+                data[dataformat.id]=curDragNodes[0].id;
+                $.ajax({
+                    type: "GET",
+                    url: editUrl,
+                    data:data,
+                    dataType: "json",
+                    success: function(data) {
+                        if(data.status=="success"||data.status=="y"){
+                            layer.msg(data.info,2,1)
+                        }else{
+                            layer.msg(data.info,2)
+                        }
+                        refreshdata();
+                    }
+                });
+            },function(e){
+                refreshdata();
+            });
+        }
+        function onExpand(event, treeId, treeNode) {
+            //if (treeNode === autoExpandNode) {
+            //	className = (className === "dark" ? "":"dark");
+            //}
+        }
+    });
+    //-->
+</script>
+#end
+#set(name="organizationDiary")
+#@layout(org)#end
 #@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
     #@toggleLeft({"class":"aclass"})
-        #@settoggleLeftTitle()部门结构#end
+        #@settoggleLeftTitle()我的下属#end
         #@settoggleLeftBody("treeLeftbox")
-            #@zTreeList(call("link",adminPath+"/org/dept/data"))
-                #setzTreeValMap({"id":"orgDeptId","name":"orgDeptName","pid":"orgDeptParent"}) ##key值为固定
-                #zTreeSetLinkUrl(TINY_CONTEXT_PATH+adminPath+"/org/user/list" )
-                #zTreeSetAddUrl(TINY_CONTEXT_PATH+adminPath+"/org/dept/add")
-                #zTreeSetEditUrl(TINY_CONTEXT_PATH+adminPath+"/org/dept/edit")
-                #zTreeSetDelUrl(TINY_CONTEXT_PATH+adminPath+"/org/dept/delete")
+            #@zTreeList(call("link",adminPath+"/org/diary/tree"))
+                #setzTreeValMap({"id":"orgUserId","name":"orgUserAccount","pid":"orgUserLeader"}) ##key值为固定
+                #zTreeSetLinkUrl(TINY_CONTEXT_PATH+adminPath+"/org/diary/show" )
             #end
         #end
     #end
     #@toggleRight()
-        #set(editpagePath=
-            "/organization/user/add.pagelet",editpageModalId="userEditModal",editpageModal="#"+editpageModalId)
-        #set(userBatchAddpagePath=
-            "/organization/user/batchAdd.pagelet",userBatchAddpageModalId="userBatchAddpageModal",userBatchAddpageModal="#"+userBatchAddpageModalId)
-        #set(tabpagePath="/common/tab.pagelet",tabpageModalId="userViewModal",tabpageModal="#"+tabpageModalId)
-        #@tinyTable("user-table-list") ##ID为空则系统自动生成 带入参数则取该参数为ID
-            #@div(divBaseClass="tinyheaderTools form-inline")
-                #setTinyTablePageSize([10,20,30,50,100,200])
-                #set(m1=menuManager.getMenu("org-user-batchdel"))
-                #if(m1)
-                    #@mulOperation("muldelete" TINY_CONTEXT_PATH+adminPath+"/org/user/batchDelete")
-                    <a href="javascript:void(0);" class="btn radius btn-danger btn-sm "><i class="icon-trash"></i> 批量删除</a>
-                    #end
-                #end
-
-                #set(m2=menuManager.getMenu("organizationAddUser"))
-                #if(m2)
-                    #@aExtendButton("btn radius btn-primary btn-sm" TINY_CONTEXT_PATH+adminPath+
-                        "/org/user/form")#buttonIcon(iconClass=m2.icon)添加用户#end
-                #end
-            #end
-            #@tinyTableContent(TINY_CONTEXT_PATH+adminPath+"/org/user/list/data?orgDeptId="+orgDeptId) ##取数据地址 总数据
-                #@thead()
-                    #@tr()###th  class 为sorting 表票可排序 为sorting_desc 为当前倒序
-                        #@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
-                        #@tinyTh({"class":"","rel":"orgUserRealName"})姓名#end
-                        #@tinyTh({"class":"","rel":"orgUserAccount"})用户名#end
-                        #@tinyTh({"class":"","rel":"orgUserRole"})职位#end
-                        #@tinyTh({"class":"","rel":"orgUserEmail"})邮箱#end
-                        #@tinyTh({"class":"","rel":"orgUserGender"})性别#end
-                        #@tinyTh({"class":"","rel":"orgUserPhone"})电话#end
-                        #@tinyTh({"class":"","rel":"orgUserJoin"})加入日期#end
-                        #@tinyTh({"class":"","rel":"sortname"})操作#end
-                    #end
-                #end
+        #@div(divBaseClass="tinyheaderTools form-inline")
+            #set(m2=menuManager.getMenu("organizationAddUser"))
+            #if(m2)
+                #@aExtendButton("btn radius btn-primary btn-sm" TINY_CONTEXT_PATH+adminPath+
+                    "/org/diary/form")#buttonIcon(iconClass=m2.icon)提交周报#end
             #end
         #end
+    <div class="diary-content-head">
+        <h3>
+            #@circleButton("primary get-prev")#fontIco("chevron-left")#end
+            第<span id="week-num">${w}</span>周周报总览
+            #@circleButton("primary get-next")#fontIco("chevron-right")#end
+        </h3>
+        <span id="begin-date" class="hide" ></span>
+        <div class="week-date"><span id="week-date-show"></span></div>
+    </div>
+    <script type="text/javascript">
+        $(function () {
+            $("#week-num").on("refresh", function () {
+                var year = $(this).attr("data-year");
+                var week = $(this).attr("data-week");
+                var body=$("#diarylist-detail");
+                var data={w:week,y:year,aid:2};
+                ajaxLoadContent(body,"/sdpm-web/a/org/diary/list/data.pagelet?orgUserId=${orgUserId}",data);
+            });
+            function getFirstWeekDay(year, week) {
+                var yearFirst = moment(year + "-01-01");
+                var thisWeek = yearFirst.format("E");
+                return yearFirst.add("days", week * 7 - thisWeek + 1).format("YYYY-MM-DD");
+            }
+            #if(y&&w)
+                $("#begin-date").html(getFirstWeekDay(${y},${w}));
+            #else
+                $("#begin-date").html(moment().format("YYYY-MM-DD"));
+            #end
 
-        #@simpleModal("myModal" "用户编辑")#end
-        #@simpleModal("myModal2" "用户删除")#end
-        #simpleModal(editpageModalId)
-        #simpleModal(tabpageModalId)
-        #simpleModal(userBatchAddpageModalId)
+            changeWeekDate();
+            function changeWeekDate(changeWeek) {
+                var bdate =$("#begin-date").html();
+                if (typeof(changeWeek) == "undefined") {
+                    week = 0
+                } else if (changeWeek == 1) {
+                    bdate = moment(bdate).add("days", 7).format("YYYY-MM-DD")
+                } else if (changeWeek == -1) {
+                    bdate = moment(bdate).add("days", -7).format("YYYY-MM-DD")
+                }
+                var vNowDate = moment(bdate).format("YYYY-MM-DD");
+                var thisMoment = moment();
+                var thisyearWeek = thisMoment.format("YYYY-WW");
+                var thisWeek = moment(bdate).format("YYYY-WW");
+                if (thisWeek > thisyearWeek) {
+                    layer.msg("不能选择大于当前周");
+                    return false;
+                } else if (thisWeek == thisyearWeek) {
+                    $(".get-next").removeClass("btn-primary");
+                } else {
+                    $(".get-next").addClass("btn-primary");
+                }
+                $("#begin-date").html(bdate);
+                var yearWeek = moment(vNowDate).format("W");
+                $("#week-num").html(yearWeek);
+                var vWeekOfDay = moment(vNowDate).format("E");
+                var vWeekOfDays = 7 - vWeekOfDay;
+                var vStartDate = moment(vNowDate).add('days', -(vWeekOfDay - 1));
+                var vEndDate = moment(vNowDate).add('days', vWeekOfDays);
+                $("#week-date-show").html(vStartDate.format("YYYY年MM月DD日") + "-" + vEndDate.format("MM月DD日"));
+                $("#week-num").attr("data-year", moment(vNowDate).format("YYYY"));
+                $("#week-num").attr("data-week", yearWeek);
+                $("#week-num").trigger("refresh");
+            }
+
+            $("#week-date-show").on("click", function () {
+                var that = this;
+                WdatePicker({
+                    el: 'begin-date',
+                    startDate: '%y-%M-01 00:00:00', dateFmt: 'yyyy-MM-dd',
+                    position: {left: -15},
+                    onpicked: function () {
+                        if (changeWeekDate() == false) {
+                            $("#begin-date").html($dp.cal.getDateStr);
+                        }
+                    }
+                })
+            });
+            $(".get-prev").on("click", function () {
+                changeWeekDate(-1);
+            });
+            $(".get-next").on("click", function () {
+                changeWeekDate(1);
+            });
+        });
+    </script>
+
+
+    <div class="tweet_list diarylist">
+        <ul class="diarylist-detail" id="diarylist-detail">
+
+
+        </ul>
+    </div>
     #end
 #end
+
+<script>
+
+    $(function(){
+        $("ul.leftztree").on("ztreeClick","a",function(){
+            ajaxLoadContent(
+                    $("#diarylist-detail"),
+                    $(this).attr("data-href"),
+                    {w:$("#week-num").html(),y:$("#week-num").attr("data-year")});
+        });
+        $("#diarylist-detail").on("click",".diary-info,.dia_h_btn",function(e){
+            $(this).closest(".diary-detail").find(".dia_h_btn i").toggleClass("icon-chevron-up icon-chevron-down");
+            $(this).closest(".diary-detail").children(".diary-detail-list").slideToggle();
+        })
+    })
+</script>

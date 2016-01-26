@@ -19,6 +19,10 @@ package org.tinygroup.sdpm.org.dao;
 import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
 
 import org.tinygroup.sdpm.org.dao.pojo.OrgDiary;
+import org.tinygroup.sdpm.org.dao.pojo.OrgDiaryAndUserDO;
+import org.tinygroup.sdpm.org.dao.pojo.OrgDiaryDetail;
+import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
+import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.List;
 
@@ -29,15 +33,24 @@ import java.util.List;
  */
 public interface OrgDiaryDao extends BaseDao<OrgDiary, Integer> {
 
-    OrgDiary getByTimeAndUser(String orgUserId, Integer orgDiaryYear, Integer orgDiaryWeek);
+    List<OrgDiary> getByTimeAndUser(String orgUserId, Integer orgDiaryYear, Integer orgDiaryWeek);
 
     List<OrgDiary> findListByUser(List<String> list);
 
-    List<OrgDiary> findListByUserId(String orgUserId);
+    Pager<OrgDiaryAndUserDO> findPagerByUserId(String orgUserId,Integer start,Integer limit);
+
+    List<OrgDiaryAndUserDO> findListByUserId(String orgUserId);
 
     List<OrgDiary> findListOneWeek(Integer year, Integer week);
 
     List<OrgDiary> findSubordinateOneWeek(List<String> list, Integer year, Integer week);
 
-    List<String> findUser(List<String> list, Integer year, Integer week);
+    List<OrgUser> findUser(String userId, Integer year, Integer week);
+
+    List<OrgDiary> findDiaryByUserLatest(String userId, Integer year, Integer week);
+
+    Pager<OrgDiaryAndUserDO> findPagerSubordinateOneWeek(List<String> list, Integer year, Integer week, Integer start, Integer limit);
+
+    List<OrgDiaryAndUserDO> findListSubordinateOneWeek(List<String> list, Integer year, Integer week);
+
 }

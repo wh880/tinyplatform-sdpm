@@ -1,0 +1,126 @@
+#!set(activeTitle="提交周报",activeMenuId=currentPageId,parentId=parentId?:"0")
+<style type="text/css">
+    .diary-content-head {
+        text-align: center;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        background: #fdfdfd;
+        border-bottom: #ddd 1px dashed
+    }
+
+    .diary-content-head h3 {
+        font-size: 26px;
+        line-height: 30px
+    }
+
+    .diary-content-head h3 .btn-circle {
+        vertical-align: top;
+    }
+
+    .diary-content-head .week-date {
+        padding: 4px 12px;
+        background: #857198;
+        display: inline-block;
+        color: #fff;
+        font-size: 14px;
+        border-radius: 44px;
+    }
+</style>
+#set(name="organizationDiary")
+#@layout(org)#end
+#@div(divClass="operationbar")
+<div class="diary-content-head">
+    <h3>
+        #@circleButton("primary get-prev")#fontIco("chevron-left")#end
+        第<span id="week-num">${w}</span>周周报
+        #@circleButton("primary get-next")#fontIco("chevron-right")#end
+    </h3>
+    <span id="begin-date" class="hide"></span>
+    <div class="week-date"><span id="week-date-show"></span></div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $("#week-num").on("refresh", function () {
+            var year = $(this).attr("data-year");
+            var week = $(this).attr("data-week");
+            $("#y").val(year);
+            $("#w").val(week);
+            var body = $("#diarylist-detail");
+            var data = {w: week, y: year, aid: 2};
+            ajaxLoadContent(body, "/sdpm-web/a/org/diary/list/one.pagelet", data);
+
+        });
+        function getFirstWeekDay(year, week) {
+            var yearFirst = moment(year + "-01-01");
+            var thisWeek = yearFirst.format("E");
+            return yearFirst.add("days", week * 7 - thisWeek + 1).format("YYYY-MM-DD");
+        }
+        #if(y&&w)
+            $("#begin-date").html(getFirstWeekDay(${y},${w}));
+        #else
+            $("#begin-date").html(moment().format("YYYY-MM-DD"));
+        #end
+
+        changeWeekDate();
+        function changeWeekDate(changeWeek) {
+            var bdate = $("#begin-date").html();
+            if (typeof(changeWeek) == "undefined") {
+                week = 0
+            } else if (changeWeek == 1) {
+                bdate = moment(bdate).add("days", 7).format("YYYY-MM-DD")
+            } else if (changeWeek == -1) {
+                bdate = moment(bdate).add("days", -7).format("YYYY-MM-DD")
+            }
+            var vNowDate = moment(bdate).format("YYYY-MM-DD");
+            var thisMoment = moment();
+            var thisyearWeek = thisMoment.format("YYYY-WW");
+            var thisWeek = moment(bdate).format("YYYY-WW");
+            if (thisWeek > thisyearWeek) {
+                layer.msg("不能选择大于当前周");
+                return false;
+            } else if (thisWeek == thisyearWeek) {
+                $(".get-next").removeClass("btn-primary");
+            } else {
+                $(".get-next").addClass("btn-primary");
+            }
+            $("#begin-date").html(bdate);
+            var yearWeek = moment(vNowDate).format("W");
+            $("#week-num").html(yearWeek);
+            var vWeekOfDay = moment(vNowDate).format("E");
+            var vWeekOfDays = 7 - vWeekOfDay;
+            var vStartDate = moment(vNowDate).add('days', -(vWeekOfDay - 1));
+            var vEndDate = moment(vNowDate).add('days', vWeekOfDays);
+            $("#week-date-show").html(vStartDate.format("YYYY年MM月DD") + "-" + vEndDate.format("MM月DD"));
+            $("#week-num").attr("data-year", moment(vNowDate).format("YYYY"));
+            $("#week-num").attr("data-week", yearWeek);
+            $("#week-num").trigger("refresh");
+        }
+
+        $("#week-date-show").on("click", function () {
+            var that = this;
+            WdatePicker({
+                el: 'begin-date',
+                startDate: '%y-%M-01 00:00:00', dateFmt: 'yyyy-MM-dd',
+                position: {left: -15},
+                onpicked: function () {
+                    if (changeWeekDate() == false) {
+                        $("#begin-date").html($dp.cal.getDateStr);
+                    }
+                }
+            })
+        });
+        $(".get-prev").on("click", function () {
+            changeWeekDate(-1);
+        });
+        $(".get-next").on("click", function () {
+            changeWeekDate(1);
+        });
+    });
+</script>
+#end
+<div class="tweet_list diarylist">
+    <ul class="diarylist-detail" id="diarylist-detail">
+
+
+    </ul>
+</div>

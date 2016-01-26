@@ -27,6 +27,10 @@ import org.tinygroup.tinysqldsl.*;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
 import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 import org.tinygroup.tinysqldsl.select.OrderByElement;
+import org.tinygroup.sdpm.org.dao.pojo.OrgDiaryDetail;
+import org.tinygroup.sdpm.org.dao.OrgDiaryDetailDao;
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
+import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -290,7 +294,7 @@ public class OrgDiaryDetailDaoImpl extends TinyDslDaoSupport implements OrgDiary
             return 0;
         }
         Delete delete = Delete.delete(ORG_DIARY_DETAILTABLE).
-                where(and(ORG_DIARY_DETAILTABLE.ORG_DIARY_ID.eq(diaryid)));
+                where(ORG_DIARY_DETAILTABLE.ORG_DIARY_ID.eq(diaryid));
         return getDslSession().execute(delete);
     }
 
@@ -298,6 +302,13 @@ public class OrgDiaryDetailDaoImpl extends TinyDslDaoSupport implements OrgDiary
     public List<OrgDiaryDetail> findByDiaryId(Integer diaryid) {
         Select select = Select.selectFrom(ORG_DIARY_DETAILTABLE).
                 where(ORG_DIARY_DETAILTABLE.ORG_DIARY_ID.eq(diaryid));
+        return getDslSession().fetchList(select, OrgDiaryDetail.class);
+    }
+
+    @Override
+    public List<OrgDiaryDetail> findListByDiaryList(List<Integer> list) {
+        Select select = Select.selectFrom(ORG_DIARY_DETAILTABLE).where(ORG_DIARY_DETAILTABLE.ORG_DIARY_ID
+                .in(list.toArray()));
         return getDslSession().fetchList(select, OrgDiaryDetail.class);
     }
 }
