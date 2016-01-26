@@ -567,7 +567,7 @@ public class StoryAction extends BaseController {
             for (int i = 0; i < list.size(); i++) {
                 ids[i] = String.valueOf(list.get(i));
             }
-            carrier.putIdNotIn("productStory.storyId", ids);
+            carrier.putNotIns("productStory.storyId", ids);
         }
         carrier.putSearch("search", searchInfos, groupOperate);
 
@@ -631,7 +631,7 @@ public class StoryAction extends BaseController {
                 String inCondition = StringUtil.isBlank(releaseStories) ? "" : releaseStories;
                 if ("noWork".equals(type)) {
                     if (!StringUtil.isBlank(inCondition)) {
-                        carrier.putIdNotIn("productStory.storyId",inCondition.split(","));
+                        carrier.putNotIns("productStory.storyId",inCondition.split(","));
                     }
                     p = storyService.findProjectLinkedStory(start,
                             pagesize, story, carrier, order,
@@ -724,7 +724,7 @@ public class StoryAction extends BaseController {
                 } else if ("noRelateBugRelease".equals(relate)) {
                     bug.setBugStatus("2");
                     if (!StringUtil.isBlank(inCondition)) {
-                        carrier.putIdNotIn("qualityBug.bugId",inCondition.split(","));
+                        carrier.putNotIns("qualityBug.bugId",inCondition.split(","));
                     }
                     p = bugService.findBugListPager(
                             pagesize * (page - 1), pagesize, carrier, bug, order,

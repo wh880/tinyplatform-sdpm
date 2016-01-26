@@ -62,7 +62,7 @@ public class ConditionCarrier implements Serializable{
         valueMap.put(field, new Object[]{ids});
     }
 
-    public void putIdNotIn(String field, String[] ids) {
+    public void putNotIns(String field, String[] ids) {
         fieldTypeMap.put(field, ConditionUtils.CommonFieldType.INS.getCommonField());
         operateMap.put(field, ConditionUtils.Operate.NOT_IN.getOperate());
         valueMap.put(field, new Object[]{ids});

@@ -305,7 +305,7 @@ public class ProjectBuildAction extends BaseController {
             model.addAttribute("bugList", p);
             return "/project/data/build/relation/product-al-bug-data.pagelet";
         } else if ("noRelateBug".equals(relate)) {
-            carrier.putIdNotIn("qualityBug.bugId", build.getBuildBugs().split(","));
+            carrier.putNotIns("qualityBug.bugId", build.getBuildBugs().split(","));
             Pager<QualityBug> p =  bugService.findBugListPager(start, limit, carrier, bug,order,"asc".equals(ordertype)?true:false);
             model.addAttribute("bugList", p);
             return "/project/data/build/relation/product-al-no-bug-data.pagelet";
@@ -382,7 +382,7 @@ public class ProjectBuildAction extends BaseController {
         if (searchInfos != null) {
             carrier.putSearch("storySearch",searchInfos,groupOperate);
         }
-        carrier.putIdNotIn("productStory.storyId",build.getBuildStories().split(","));
+        carrier.putNotIns("productStory.storyId",build.getBuildStories().split(","));
         Pager<ProductStory> p = storyService.findStoryByCondition(start,limit,story,carrier,order,"asc".equals(ordertype)?true:false);
         model.addAttribute("storys", p);
 

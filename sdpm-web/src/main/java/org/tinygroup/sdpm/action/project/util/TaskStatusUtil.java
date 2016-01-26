@@ -43,10 +43,12 @@ public class TaskStatusUtil {
                         ConditionUtils.CommonFieldType.FIELD_OPERATE.getCommonField(),
                         6);
                     break;
-                case 7: carrier.put("taskStatus",
+                case 7:
+                    String[] ids = "1,2,4".split(",");
+                    carrier.put("taskStatus",
                         ConditionUtils.Operate.IN.getOperate(),
                         ConditionUtils.CommonFieldType.INS.getCommonField(),
-                        "1,2,4".split(","));
+                        ids);
                     break;
                 case 8: break;
                 case 9: carrier.put("taskStatus",
