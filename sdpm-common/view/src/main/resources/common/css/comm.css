@@ -100,7 +100,7 @@
     #bodyrap.theme-clean.menu-on-top #main-menu .mmc-dropdown-open-ul a:after, .theme-default #main-menu .navigation a:after {
         background: none
     }
-
+    .optionsBox .tabBar .switchClass{padding:7px 15px;}
     #bodyrap.theme-asphalt .optionsBox .tabBar .switchClass.Current {
         background: #3BC2A9
     }
@@ -542,31 +542,35 @@ table.table.filelist-table{border:#ddd 1px solid;}
 .tinyfooterrap a.right,.tinyfooterrap a.right:link,.tinyfooterrap a.right:visited{color:#fff; font-weight:normal}
 .tinyfooterrap a.right:hover{ color:#ddd}
 
-.diary-content-head{text-align:center;padding-top:20px;padding-bottom:20px;background:#fdfdfd;border-bottom:#ddd 1px dashed}
+.diary-content-head{text-align:center;padding-top:16px;padding-bottom:18px;background:#fefefe;border-bottom:#ddd 1px dashed}
 .diary-content-head h3{font-size:26px;line-height:30px}
 .diary-content-head h3 .btn-circle{vertical-align:top;}
 .diary-content-head .week-date{padding:4px 12px;background:#857198;display:inline-block;color:#fff;font-size:14px;border-radius:44px;}
 
-.diarylist .diary-detail{padding:10px 12px;border-bottom: #eed 1px solid;background:#fdfdfd}
-.diarylist .diary-detail:hover{background:#fcfcfc}
+.diarylist .diary-detail{padding:10px 12px;border-bottom:#eee 1px solid;background:#fefefe}
+.diarylist .diary-detail:hover{background:#fff}
 .diary-detail .diary-report .portrait{font-size:18px;padding-top:10px;}
 .diary-detail .diary-info{display:inline-block;min-height:38px;position: relative;  width: 65%; font-size:15px;}
 
-.diary-detail-list{color:#999;background:#f7f7f7;padding:20px;border-radius: 5px}
+.diary-detail-list{color:#999;background:#fafafb ;padding:20px;padding-bottom:10px;border-radius: 5px}
 .committed{margin-bottom:20px;position:relative;}
 
 .diary-detail .diary-detail-list ol {
     position: relative;
     height: 100%;
-    margin-left:40px;
-    border-left:2px solid #ddd;
+    margin-left:48px;
     padding-left:10px;
 }
 .diary-detail .tocommittime {
-    width:40px;
+    width:56px;
     position:absolute;
     left:0;
-    top:2px;
+    top:0;
     z-index:2
 }
 .diary-detail .dia_h_btn{cursor:pointer}
+/*周报*/
+.btn-circle.btn-lg{padding: 8px 10px;}
+.forall{margin-bottom:8px}
+.forall .checkboxAll{color:#6e3671; font-weight:bold;border:none;background:none;margin-top:-3px}
+.forall-box p{margin-bottom:3px;background:#fefefe;padding:3px 0;}

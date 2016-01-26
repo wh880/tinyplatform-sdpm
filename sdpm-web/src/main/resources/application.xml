@@ -78,7 +78,7 @@
             <class-path path="D:\javaworkspace\sdpm\sdpm-common\view\src\main\resources"/>
             <class-path path="D:\javaworkspace\sdpm\sdpm-project\view\src\main\resources"/>
             <class-path path="D:\javaworkspace\sdpm\sdpm-org\view\src\main\resources"/>
-            <class-path path="F:\test\后台管理\New\sdpm\sdpm-org\view\src\main\resources"/>
+            <class-path path="D:\Mygit\sdpm\sdpm-org\view\src\main\resources"/>
         </class-paths>
         <include-patterns>
             <include-pattern pattern="org\.tinygroup\.(.)*\.jar"/>

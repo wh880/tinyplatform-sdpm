@@ -1,0 +1,54 @@
+#macro diaryItem(authorName createDate diaryContent)
+<li class="diary-detail">
+    <div class="diary-report clearfix">
+        <div class="portrait">
+            <a href="${TINY_CONTEXT_PATH+adminPath}/org/diary/showOne?userAccount=${authorName}" title="点击查看${authorName}所有的周报">
+                <span class="name b">${authorName}</span>
+            </a>
+            <div class="r f-14">
+                #fontIco("calendar") ${createDate}
+                <span class="dia_h_btn" data-open="0">#fontIco("chevron-down")</span>
+            </div>
+        </div>
+        <div class="diary-info" style="cursor:pointer" data-load="true">
+            ${diaryContent}
+        </div>
+    </div>
+    <div class="diary-detail-list hide">
+        #bodyContent
+    </div>
+</li>
+#end
+
+
+#macro diaryItem2(authorWeek createDate diaryContent)
+<li class="diary-detail">
+    <div class="diary-report clearfix">
+        <div class="portrait">
+            <div class="r f-14">
+                #fontIco("calendar") ${createDate}
+                <span class="dia_h_btn" data-open="0">#fontIco("chevron-down")</span>
+            </div>
+        </div>
+        <div class="diary-info" style="cursor:pointer" data-load="true">
+            <span class="btn btn-primary btn-circle btn-lg ">
+                #@simpleP("f-16")${authorWeek}周#end
+            </span>
+            ${diaryContent}
+        </div>
+    </div>
+    <div class="diary-detail-list hide">
+        #bodyContent
+    </div>
+</li>
+#end
+
+#macro WhiteListdialog(dialogId dialogMap)
+<div id="${dialogId}" class="modal hide fade " tabindex="-1" role="dialog" aria-hidden="true"#mapToHtml(dialogMap)>
+    #@dialogHeader()对话框标题#end
+    <div class="modal-body  ">
+        <div class="clear">#bodyContent</div>
+        <div class="clear"></div>
+    </div>
+</div>
+#end

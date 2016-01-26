@@ -37,6 +37,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.tinygroup.sdpm.org.dao.constant.OrgDeptTable.ORG_DEPTTABLE;
+import static org.tinygroup.sdpm.org.dao.constant.OrgDiaryWhiteListTable.ORG_DIARY_WHITE_LISTTABLE;
 import static org.tinygroup.sdpm.org.dao.constant.OrgUserTable.ORG_USERTABLE;
 import static org.tinygroup.sdpm.project.dao.constant.ProjectTeamTable.PROJECT_TEAMTABLE;
 import static org.tinygroup.tinysqldsl.Delete.delete;
@@ -183,12 +184,12 @@ public class OrgUserDaoImpl extends TinyDslDaoSupport implements OrgUserDao {
     @Override
     public List<OrgUser> getDirectStaffByLeaderAndSelf(String leaderUserId) {
         ComplexSelect complexSelect = ComplexSelect.union(selectFrom(ORG_USERTABLE).
-                where(ORG_USERTABLE.ORG_USER_ID.eq(leaderUserId)),
+                        where(ORG_USERTABLE.ORG_USER_ID.eq(leaderUserId)),
                 selectFrom(ORG_USERTABLE).where(
-                and(
-                        ORG_USERTABLE.ORG_USER_LEADER.eq(leaderUserId),
-                        ORG_USERTABLE.ORG_USER_DELETED.eq(OrgUser.DELETE_NO)
-                )));
+                        and(
+                                ORG_USERTABLE.ORG_USER_LEADER.eq(leaderUserId),
+                                ORG_USERTABLE.ORG_USER_DELETED.eq(OrgUser.DELETE_NO)
+                        )));
         return getDslSession().fetchList(complexSelect, OrgUser.class);
     }
 
@@ -487,5 +488,15 @@ public class OrgUserDaoImpl extends TinyDslDaoSupport implements OrgUserDao {
                 ORG_USERTABLE.ORG_USER_ID.in(list.toArray())
         );
         return getDslSession().fetchList(select, OrgUser.class);
+    }
+
+    @Override
+    public List<OrgUser> getWhiteListById(String userAccount) {
+        Select select = Select.selectFrom(ORG_USERTABLE).
+                where(ORG_USERTABLE.ORG_USER_ACCOUNT.
+                        inExpression(subSelect(select(ORG_DIARY_WHITE_LISTTABLE.ORG_DIARY_WHITE_LIST_SECOND_ACCOUNT).
+                                from(ORG_DIARY_WHITE_LISTTABLE).
+                                where(ORG_DIARY_WHITE_LISTTABLE.ORG_DIARY_WHITE_LIST_FIRST_ACCOUNT.eq(userAccount)))));
+        return getDslSession().fetchList(select,OrgUser.class);
     }
 }

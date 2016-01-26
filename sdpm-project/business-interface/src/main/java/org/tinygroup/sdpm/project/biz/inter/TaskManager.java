@@ -104,4 +104,7 @@ public interface TaskManager {
     Integer delete(Integer id);
 
     List<TaskChartBean> findByGroup(String id);
+
+    ProjectTask findTaskByTaskId(Integer taskId);
+
 }

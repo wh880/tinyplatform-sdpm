@@ -207,4 +207,9 @@ public class StoryManagerImpl implements StoryManager {
             }
         });
     }
+
+    @Override
+    public ProductStory findStoryByStoryId(Integer storyId) {
+        return productStoryDao.findStoryByStoryId(storyId);
+    }
 }

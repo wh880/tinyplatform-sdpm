@@ -5,7 +5,7 @@
     #if(var2?.key==var?.orgDiaryId)
         #for(var3:var2?.value)
     <div class="committed clearfix">
-        <span class="tocommittime">周${var3?.effortWeek}</span>
+        <span class="tocommittime">${var3?.effortWeek}</span>
         <ol class="logList-detailList">
             <li><span>${var3?.orgDetailContent}
             <a

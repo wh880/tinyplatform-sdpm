@@ -1,24 +1,36 @@
+<style type="text/css">
+    .diarylist .diary-detail {
+        padding: 10px 12px;
+        border-bottom: #eed 1px solid;
+        background: #fdfdfd
+    }
+
+    .diary-detail .diary-report .portrait {
+        font-size: 18px;
+        padding-top: 10px;
+    }
+
+    .diary-detail .diary-info {
+        display: inline-block;
+        min-height: 38px;
+        position: relative;
+        width: 65%;
+        font-size: 15px;
+    }
+</style>
 #set(name="organizationDiary")
 #@layout(org)#end
 #@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
     #@toggleLeft({"class":"aclass"})
-        #@settoggleLeftTitle()我的下属#end
+        #@settoggleLeftTitle()我的白名单#end
         #@settoggleLeftBody("treeLeftbox")
-            #@zTreeList(call("link",adminPath+"/org/diary/tree"))
+            #@zTreeList(call("link",adminPath+"/org/diary/tree?choose=1"))
                 #setzTreeValMap({"id":"orgUserId","name":"orgUserAccount","pid":"orgUserLeader"}) ##key值为固定
-                #zTreeSetLinkUrl(TINY_CONTEXT_PATH+adminPath+"/org/diary/show" )
+                #zTreeSetDelUrl(TINY_CONTEXT_PATH+adminPath+"/org/user/deleteDiaryWhiteList")
             #end
         #end
     #end
     #@toggleRight()
-        #@div(divBaseClass="tinyheaderTools form-inline")
-            #@aModal("#myModal" "添加白名单用户" "600" "" "btn radius btn-primary btn-sm" "/a/org/user/showAdd")添加白名单用户#end
-            #WhiteListdialog("myModal")
-            #@aExtendButton("btn radius btn-primary btn-sm" TINY_CONTEXT_PATH+adminPath+
-                "/org/diary/show/white?choose=1")白名单用户周报#end
-            #@aExtendButton("btn radius btn-primary btn-sm" TINY_CONTEXT_PATH+adminPath+
-                "/org/diary/form")提交周报#end
-        #end
     <div class="diary-content-head">
         <h3>
             #@circleButton("primary get-prev")#fontIco("chevron-left")#end
@@ -35,7 +47,7 @@
                 var week = $(this).attr("data-week");
                 var body = $("#diarylist-detail");
                 var data = {w: week, y: year, aid: 2};
-                ajaxLoadContent(body, "/sdpm-web/a/org/diary/list/data.pagelet?orgUserId=${orgUserId}", data);
+                ajaxLoadContent(body, "/sdpm-web/a/org/diary/list/data.pagelet?type=1&orgUserId=${orgUserId}", data);
             });
             function getFirstWeekDay(year, week) {
                 var yearFirst = moment(year + "-01-01");

@@ -666,4 +666,10 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
                                 .where(PROJECT_PRODUCTTABLE.PROJECT_ID.eq(projectId)))));
         return getDslSession().fetchList(select, QualityBug.class);
     }
+
+    @Override
+    public ProjectTask findTaskByTaskId(Integer taskId) {
+        Select select=Select.selectFrom(PROJECT_TASKTABLE).where(PROJECT_TASKTABLE.TASK_ID.eq(taskId));
+        return getDslSession().fetchOneResult(select,ProjectTask.class);
+    }
 }

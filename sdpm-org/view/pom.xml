@@ -15,7 +15,11 @@
             <artifactId>sdpm-common-view</artifactId>
             <version>${project.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>sdpm-org-view-uicomponent</artifactId>
+            <version>${project.version}</version>
+        </dependency>
 
     </dependencies>
 </project>

@@ -1,34 +1,12 @@
 #!set(activeTitle="提交周报",activeMenuId=currentPageId,parentId=parentId?:"0")
 <style type="text/css">
     .diary-content-head {
-        text-align: center;
-        padding-top: 20px;
-        padding-bottom: 20px;
-        background: #fdfdfd;
-        border-bottom: #ddd 1px dashed
-    }
-
-    .diary-content-head h3 {
-        font-size: 26px;
-        line-height: 30px
-    }
-
-    .diary-content-head h3 .btn-circle {
-        vertical-align: top;
-    }
-
-    .diary-content-head .week-date {
-        padding: 4px 12px;
-        background: #857198;
-        display: inline-block;
-        color: #fff;
-        font-size: 14px;
-        border-radius: 44px;
+        border-bottom:none
     }
 </style>
 #set(name="organizationDiary")
 #@layout(org)#end
-#@div(divClass="operationbar")
+#@div(divClass="")
 <div class="diary-content-head">
     <h3>
         #@circleButton("primary get-prev")#fontIco("chevron-left")#end
@@ -90,7 +68,7 @@
             var vWeekOfDays = 7 - vWeekOfDay;
             var vStartDate = moment(vNowDate).add('days', -(vWeekOfDay - 1));
             var vEndDate = moment(vNowDate).add('days', vWeekOfDays);
-            $("#week-date-show").html(vStartDate.format("YYYY年MM月DD") + "-" + vEndDate.format("MM月DD"));
+            $("#week-date-show").html(vStartDate.format("YYYY年MM月DD日") + "-" + vEndDate.format("MM月DD日"));
             $("#week-num").attr("data-year", moment(vNowDate).format("YYYY"));
             $("#week-num").attr("data-week", yearWeek);
             $("#week-num").trigger("refresh");
@@ -117,10 +95,10 @@
         });
     });
 </script>
-#end
 <div class="tweet_list diarylist">
     <ul class="diarylist-detail" id="diarylist-detail">
 
 
     </ul>
 </div>
+#end

@@ -488,4 +488,43 @@ public class DateUtils extends org.apache.commons.lang.time.DateUtils {
         return date;
     }
 
+    /**
+     * 获取指定日期的星期
+     */
+    public static String getDateWeek(Date date) {
+        return formatDate(date, "E");
+    }
+
+
+    /**
+     * 获取某年某周的星期一
+     * @param y
+     * @param w
+     * @return
+     */
+    public static Date getBeginDate(Integer y, Integer w) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(y, 0, 1, 0, 0, 0);
+        int week = calendar.get(calendar.DAY_OF_WEEK) - 1;
+        int days = w * 7 - (8 - week);
+        calendar.add(Calendar.DATE, days - 1);
+        Date beginDate = calendar.getTime();
+        return beginDate;
+    }
+
+    /**
+     * 获取某年某周的星期天
+     * @param y
+     * @param w
+     * @return
+     */
+    public static Date getEndDate(Integer y, Integer w) {
+        Date beginDate = getBeginDate(y, w);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(beginDate);
+        calendar.add(Calendar.DATE, 6);
+        Date endDate = calendar.getTime();
+        return endDate;
+    }
+
 }

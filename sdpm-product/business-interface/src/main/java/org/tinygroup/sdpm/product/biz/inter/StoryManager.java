@@ -141,4 +141,5 @@ public interface StoryManager {
      */
     List<ProductStory> storyInCondition(String condition, Integer limit, Integer productId,Integer ...ids);
 
+    ProductStory findStoryByStoryId(Integer storyId);
 }

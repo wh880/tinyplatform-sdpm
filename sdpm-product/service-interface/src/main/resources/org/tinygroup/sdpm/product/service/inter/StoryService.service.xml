@@ -119,5 +119,11 @@
       </service-parameters>
       <service-result name="getStoryWithSpecInIdsResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.product.dao.pojo.ProductStory"/>
     </service-method>
+    <service-method local-name="findStoryByStoryId" service-id="findStoryByStoryId" method-name="findStoryByStoryId" cacheable="false" category="org.tinygroup.sdpm.product.service.inter">
+      <service-parameters>
+        <service-parameter name="storyId" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findStoryByStoryIdResult" required="false" is-array="false" type="org.tinygroup.sdpm.product.dao.pojo.ProductStory"/>
+    </service-method>
   </service-component>
 </service-components>

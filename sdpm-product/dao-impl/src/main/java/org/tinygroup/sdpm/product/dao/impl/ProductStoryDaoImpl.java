@@ -896,4 +896,9 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 		});
 	}
 
+	@Override
+	public ProductStory findStoryByStoryId(Integer storyId) {
+		Select select=Select.selectFrom(PRODUCT_STORYTABLE).where(PRODUCT_STORYTABLE.STORY_ID.eq(storyId));
+		return getDslSession().fetchOneResult(select,ProductStory.class);
+	}
 }

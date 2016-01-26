@@ -169,4 +169,8 @@ public class UserManagerImpl implements UserManager {
         return orgUserDao.getListById(list);
     }
 
+    @Override
+    public List<OrgUser> getWhiteUserList(String userAccount) {
+        return orgUserDao.getWhiteListById(userAccount);
+    }
 }

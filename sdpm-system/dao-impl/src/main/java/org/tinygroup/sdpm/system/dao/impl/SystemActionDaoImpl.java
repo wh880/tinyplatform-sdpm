@@ -25,6 +25,7 @@ import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
 import org.tinygroup.sdpm.system.dao.SystemActionDao;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.tinysqldsl.*;
+import org.tinygroup.tinysqldsl.base.Alias;
 import org.tinygroup.tinysqldsl.base.Condition;
 import org.tinygroup.tinysqldsl.base.FragmentSql;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
@@ -33,10 +34,15 @@ import org.tinygroup.tinysqldsl.select.OrderByElement;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static org.tinygroup.sdpm.org.dao.constant.OrgUserTable.ORG_USERTABLE;
+import static org.tinygroup.sdpm.product.dao.constant.ProductStoryTable.PRODUCT_STORYTABLE;
 import static org.tinygroup.sdpm.system.dao.constant.SystemActionTable.SYSTEM_ACTIONTABLE;
+import static org.tinygroup.sdpm.quality.dao.constant.QualityBugTable.QUALITY_BUGTABLE;
+import static org.tinygroup.sdpm.project.dao.constant.ProjectTaskTable.PROJECT_TASKTABLE;
+
 import static org.tinygroup.tinysqldsl.Delete.delete;
 import static org.tinygroup.tinysqldsl.Insert.insertInto;
 import static org.tinygroup.tinysqldsl.Select.select;
@@ -337,4 +343,49 @@ public class SystemActionDaoImpl extends TinyDslDaoSupport implements SystemActi
         });
     }
 
+    @Override
+    public List<SystemAction> findActionListByIdList(List<Integer> idList) {
+        Select select = Select.selectFrom(SYSTEM_ACTIONTABLE).
+                where(SYSTEM_ACTIONTABLE.ACTION_ID.in(idList.toArray()));
+        return getDslSession().fetchList(select, SystemAction.class);
+    }
+
+    @Override
+    public List<SystemAction> findActionListByUserIdAndDate(String userId, Date beginDate, Date endDate) {
+        Alias objectName = new Alias("objectName");
+        QUALITY_BUGTABLE.BUG_TITLE.setAlias(objectName);
+        PROJECT_TASKTABLE.TASK_NAME.setAlias(objectName);
+        PRODUCT_STORYTABLE.STORY_TITLE.setAlias(objectName);
+        Alias actorName = new Alias("actorName");
+        ORG_USERTABLE.ORG_USER_ACCOUNT.setAlias(actorName);
+        //union all 三个不同的type   bug+task+story
+        ComplexSelect complexSelect = ComplexSelect.unionAll(select(SYSTEM_ACTIONTABLE.ALL, QUALITY_BUGTABLE.BUG_TITLE, ORG_USERTABLE.ORG_USER_ACCOUNT)
+                        .from(SYSTEM_ACTIONTABLE, QUALITY_BUGTABLE, ORG_USERTABLE).where(and(
+                        SYSTEM_ACTIONTABLE.ACTION_OBJECT_ID.eq(QUALITY_BUGTABLE.BUG_ID),
+                        SYSTEM_ACTIONTABLE.ACTION_OBJECT_TYPE.eq("bug"),
+                        SYSTEM_ACTIONTABLE.ACTION_ACTOR.eq(ORG_USERTABLE.ORG_USER_ID),
+                        SYSTEM_ACTIONTABLE.ACTION_ACTION.in("finished", "opened"),
+                        ORG_USERTABLE.ORG_USER_ID.eq(userId),
+                        SYSTEM_ACTIONTABLE.ACTION_DATE.between(beginDate, endDate)
+                        )),
+                select(SYSTEM_ACTIONTABLE.ALL, PROJECT_TASKTABLE.TASK_NAME, ORG_USERTABLE.ORG_USER_ACCOUNT)
+                        .from(SYSTEM_ACTIONTABLE, PROJECT_TASKTABLE, ORG_USERTABLE).where(and(
+                        SYSTEM_ACTIONTABLE.ACTION_OBJECT_ID.eq(PROJECT_TASKTABLE.TASK_ID),
+                        SYSTEM_ACTIONTABLE.ACTION_OBJECT_TYPE.eq("task"),
+                        SYSTEM_ACTIONTABLE.ACTION_ACTOR.eq(ORG_USERTABLE.ORG_USER_ID),
+                        SYSTEM_ACTIONTABLE.ACTION_ACTION.in("finished", "opened"),
+                        ORG_USERTABLE.ORG_USER_ID.eq(userId),
+                        SYSTEM_ACTIONTABLE.ACTION_DATE.between(beginDate, endDate)
+                )),
+                select(SYSTEM_ACTIONTABLE.ALL, PRODUCT_STORYTABLE.STORY_TITLE, ORG_USERTABLE.ORG_USER_ACCOUNT)
+                        .from(SYSTEM_ACTIONTABLE, PRODUCT_STORYTABLE, ORG_USERTABLE).where(and(
+                        SYSTEM_ACTIONTABLE.ACTION_OBJECT_ID.eq(PRODUCT_STORYTABLE.STORY_ID),
+                        SYSTEM_ACTIONTABLE.ACTION_OBJECT_TYPE.eq("story"),
+                        SYSTEM_ACTIONTABLE.ACTION_ACTOR.eq(ORG_USERTABLE.ORG_USER_ID),
+                        SYSTEM_ACTIONTABLE.ACTION_ACTION.in("finished", "opened"),
+                        ORG_USERTABLE.ORG_USER_ID.eq(userId),
+                        SYSTEM_ACTIONTABLE.ACTION_DATE.between(beginDate, endDate)
+                )));
+        return getDslSession().fetchList(complexSelect, SystemAction.class);
+    }
 }
