@@ -14,7 +14,7 @@ var id = treeNode.id;
 #@divDataTablebox()
 
 #@leftTreeCol()
-#@searchZtreeWithInit("treeDemo" "height:454px;" adminPath+"/system/module/tree?moduleType=dict&type=title")
+#@searchZtreeWithInit("treeDemo" "height:454px;overflow:auto" adminPath+"/system/module/tree?moduleType=dict&type=title")
 #end
 #end
 #@tableBox("tBox")
@@ -28,8 +28,7 @@ var id = treeNode.id;
 	});
 
 	function onCheck(e,treeId,treeNode){
-		var treeObj=$.fn.zTree.getZTreeObj("treeDemo"),
-				nodes=treeObj.getCheckedNodes(true),
+		var treeObj=$.fn.zTree.getZTreeObj("treeDemo"), nodes=treeObj.getCheckedNodes(true);
 		var v=nodes[0];
 
 	}
