@@ -33,6 +33,7 @@ public interface ActionManager {
 
     /**
      * 查询动态
+     *
      * @param systemAction
      * @param orderBy
      * @param asc
@@ -42,6 +43,7 @@ public interface ActionManager {
 
     /**
      * 分页查询
+     *
      * @param start
      * @param limit
      * @param systemAction
@@ -81,17 +83,22 @@ public interface ActionManager {
 
     /**
      * 通过一组系统日志Id查找相对应的系统日志
+     *
      * @param idList
      * @return
      */
     List<SystemAction> findActionListByIdList(List<Integer> idList);
 
+
+    List<SystemAction> findActionListByTypeList(List<String> bugs, List<String> stories, List<String> tasks);
+
     /**
      * 查询某人某一时间段内（任务，bug，需求的日志信息）
+     *
      * @param userId
      * @param beginDate
      * @param endDate
      * @return
      */
-    List<SystemAction> findDiaryActionListByUserAndDate(String userId,Date beginDate,Date endDate);
+    List<SystemAction> findDiaryActionListByUserAndDate(String userId, Date beginDate, Date endDate);
 }

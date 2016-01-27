@@ -116,6 +116,11 @@ public class ActionManagerImpl implements ActionManager {
     }
 
     @Override
+    public List<SystemAction> findActionListByTypeList(List<String> bugs, List<String> stories, List<String> tasks) {
+        return systemActionDao.findActionListByIdListAndType(bugs, tasks, stories);
+    }
+
+    @Override
     public List<SystemAction> findDiaryActionListByUserAndDate(String userId, Date beginDate, Date endDate) {
         return systemActionDao.findActionListByUserIdAndDate(userId, beginDate, endDate);
     }

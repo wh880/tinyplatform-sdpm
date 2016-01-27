@@ -343,11 +343,40 @@ public class SystemActionDaoImpl extends TinyDslDaoSupport implements SystemActi
         });
     }
 
+
     @Override
     public List<SystemAction> findActionListByIdList(List<Integer> idList) {
         Select select = Select.selectFrom(SYSTEM_ACTIONTABLE).
                 where(SYSTEM_ACTIONTABLE.ACTION_ID.in(idList.toArray()));
         return getDslSession().fetchList(select, SystemAction.class);
+    }
+
+    @Override
+    public List<SystemAction> findActionListByIdListAndType(List<String> bugList, List<String> taskList, List<String> storyList) {
+        Alias objectName = new Alias("objectName");
+        QUALITY_BUGTABLE.BUG_TITLE.setAlias(objectName);
+        PROJECT_TASKTABLE.TASK_NAME.setAlias(objectName);
+        PRODUCT_STORYTABLE.STORY_TITLE.setAlias(objectName);
+        //union all 三个不同的type   bug+task+story
+        ComplexSelect complexSelect = ComplexSelect.unionAll(select(SYSTEM_ACTIONTABLE.ALL, QUALITY_BUGTABLE.BUG_TITLE)
+                        .from(SYSTEM_ACTIONTABLE, QUALITY_BUGTABLE).where(and(
+                        SYSTEM_ACTIONTABLE.ACTION_OBJECT_ID.eq(QUALITY_BUGTABLE.BUG_ID),
+                        SYSTEM_ACTIONTABLE.ACTION_OBJECT_TYPE.in("bug"),
+                        SYSTEM_ACTIONTABLE.ACTION_OBJECT_ID.in(bugList.toArray())
+                        )),
+                select(SYSTEM_ACTIONTABLE.ALL, PROJECT_TASKTABLE.TASK_NAME)
+                        .from(SYSTEM_ACTIONTABLE, PROJECT_TASKTABLE, ORG_USERTABLE).where(and(
+                        SYSTEM_ACTIONTABLE.ACTION_OBJECT_ID.eq(PROJECT_TASKTABLE.TASK_ID),
+                        SYSTEM_ACTIONTABLE.ACTION_OBJECT_TYPE.eq("task"),
+                        SYSTEM_ACTIONTABLE.ACTION_OBJECT_ID.in(taskList.toArray())
+                )),
+                select(SYSTEM_ACTIONTABLE.ALL, PRODUCT_STORYTABLE.STORY_TITLE)
+                        .from(SYSTEM_ACTIONTABLE, PRODUCT_STORYTABLE, ORG_USERTABLE).where(and(
+                        SYSTEM_ACTIONTABLE.ACTION_OBJECT_ID.eq(PRODUCT_STORYTABLE.STORY_ID),
+                        SYSTEM_ACTIONTABLE.ACTION_OBJECT_TYPE.eq("story"),
+                        SYSTEM_ACTIONTABLE.ACTION_OBJECT_ID.in(storyList.toArray())
+                )));
+        return getDslSession().fetchList(complexSelect, SystemAction.class);
     }
 
     @Override
@@ -359,7 +388,7 @@ public class SystemActionDaoImpl extends TinyDslDaoSupport implements SystemActi
         Alias actorName = new Alias("actorName");
         ORG_USERTABLE.ORG_USER_ACCOUNT.setAlias(actorName);
         //union all 三个不同的type   bug+task+story
-        ComplexSelect complexSelect = ComplexSelect.unionAll(select(SYSTEM_ACTIONTABLE.ALL, QUALITY_BUGTABLE.BUG_TITLE, ORG_USERTABLE.ORG_USER_ACCOUNT)
+        ComplexSelect complexSelect = ComplexSelect.unionAll(select(SYSTEM_ACTIONTABLE.ALL, QUALITY_BUGTABLE.BUG_TITLE, ORG_USERTABLE.ORG_USER_REAL_NAME)
                         .from(SYSTEM_ACTIONTABLE, QUALITY_BUGTABLE, ORG_USERTABLE).where(and(
                         SYSTEM_ACTIONTABLE.ACTION_OBJECT_ID.eq(QUALITY_BUGTABLE.BUG_ID),
                         SYSTEM_ACTIONTABLE.ACTION_OBJECT_TYPE.eq("bug"),
@@ -368,7 +397,7 @@ public class SystemActionDaoImpl extends TinyDslDaoSupport implements SystemActi
                         ORG_USERTABLE.ORG_USER_ID.eq(userId),
                         SYSTEM_ACTIONTABLE.ACTION_DATE.between(beginDate, endDate)
                         )),
-                select(SYSTEM_ACTIONTABLE.ALL, PROJECT_TASKTABLE.TASK_NAME, ORG_USERTABLE.ORG_USER_ACCOUNT)
+                select(SYSTEM_ACTIONTABLE.ALL, PROJECT_TASKTABLE.TASK_NAME, ORG_USERTABLE.ORG_USER_REAL_NAME)
                         .from(SYSTEM_ACTIONTABLE, PROJECT_TASKTABLE, ORG_USERTABLE).where(and(
                         SYSTEM_ACTIONTABLE.ACTION_OBJECT_ID.eq(PROJECT_TASKTABLE.TASK_ID),
                         SYSTEM_ACTIONTABLE.ACTION_OBJECT_TYPE.eq("task"),
@@ -377,7 +406,7 @@ public class SystemActionDaoImpl extends TinyDslDaoSupport implements SystemActi
                         ORG_USERTABLE.ORG_USER_ID.eq(userId),
                         SYSTEM_ACTIONTABLE.ACTION_DATE.between(beginDate, endDate)
                 )),
-                select(SYSTEM_ACTIONTABLE.ALL, PRODUCT_STORYTABLE.STORY_TITLE, ORG_USERTABLE.ORG_USER_ACCOUNT)
+                select(SYSTEM_ACTIONTABLE.ALL, PRODUCT_STORYTABLE.STORY_TITLE, ORG_USERTABLE.ORG_USER_REAL_NAME)
                         .from(SYSTEM_ACTIONTABLE, PRODUCT_STORYTABLE, ORG_USERTABLE).where(and(
                         SYSTEM_ACTIONTABLE.ACTION_OBJECT_ID.eq(PRODUCT_STORYTABLE.STORY_ID),
                         SYSTEM_ACTIONTABLE.ACTION_OBJECT_TYPE.eq("story"),

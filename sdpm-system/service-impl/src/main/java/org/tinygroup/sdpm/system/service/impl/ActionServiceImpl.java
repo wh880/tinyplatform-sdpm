@@ -3,6 +3,7 @@ package org.tinygroup.sdpm.system.service.impl;
 import net.sf.cglib.beans.BeanGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.sdpm.system.biz.inter.ActionManager;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.service.inter.ActionService;
@@ -40,11 +41,19 @@ public class ActionServiceImpl implements ActionService {
 
     @Override
     public List<SystemAction> findActionListByIdList(List<Integer> idList) {
+        if (CollectionUtil.isEmpty(idList)) {
+            return null;
+        }
         return actionManager.findActionListByIdList(idList);
     }
 
     @Override
+    public List<SystemAction> findActionListByTypeList(List<String> bugs, List<String> stories, List<String> tasks) {
+        return actionManager.findActionListByTypeList(bugs, stories, tasks);
+    }
+
+    @Override
     public List<SystemAction> findDiaryActionListByUserAndDate(String userId, Date beginDate, Date endDate) {
-        return actionManager.findDiaryActionListByUserAndDate(userId, beginDate,endDate);
+        return actionManager.findDiaryActionListByUserAndDate(userId, beginDate, endDate);
     }
 }

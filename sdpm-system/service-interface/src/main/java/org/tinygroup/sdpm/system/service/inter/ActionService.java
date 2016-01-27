@@ -61,13 +61,18 @@ public interface ActionService {
 
     /**
      * 通过一组系统日志Id查找相对应的系统日志
+     *
      * @param idList
      * @return
      */
     List<SystemAction> findActionListByIdList(List<Integer> idList);
 
+
+    List<SystemAction> findActionListByTypeList(List<String> bugs, List<String> stories, List<String> tasks);
+
     /**
      * 查询某人某一时间段内（任务，bug，需求的日志信息）
+     *
      * @param userId
      * @param beginDate
      * @param endDate

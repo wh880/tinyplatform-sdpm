@@ -35,19 +35,24 @@ public interface SystemActionDao extends BaseDao<SystemAction, Integer> {
 
     /**
      * 通过一组系统日志Id查找相对应的系统日志
+     *
      * @param idList
      * @return
      */
     List<SystemAction> findActionListByIdList(List<Integer> idList);
 
+
+    List<SystemAction> findActionListByIdListAndType(List<String> bugList, List<String> taskList, List<String> storyList);
+
     /**
      * 查询某一用户于某一个时间段内的系统日志信息（周报所需信息任务的创建、完成
-     需求的创建、完成
-     bug的创建、完成）
+     * 需求的创建、完成
+     * bug的创建、完成）
+     *
      * @param userId
      * @param beginDate
      * @param endDate
      * @return
      */
-    List<SystemAction> findActionListByUserIdAndDate(String userId,Date beginDate,Date endDate);
+    List<SystemAction> findActionListByUserIdAndDate(String userId, Date beginDate, Date endDate);
 }

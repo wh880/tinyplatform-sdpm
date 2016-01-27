@@ -87,6 +87,21 @@ public class DiaryAction extends BaseController {
         List<OrgDiaryDetail> list = new ArrayList<OrgDiaryDetail>();
         //查找相关日志ID对应的日志
         List<SystemAction> actionList = actionService.findActionListByIdList(idsList);
+        List<String> bugList = new ArrayList<String>();
+        List<String> storyList = new ArrayList<String>();
+        List<String> taskList = new ArrayList<String>();
+        if (actionList != null) {
+            for (SystemAction systemAction : actionList) {
+                if (systemAction.getActionObjectType().equals("bug")) {
+                    bugList.add(systemAction.getActionObjectId());
+                } else if (systemAction.getActionObjectType().equals("task")) {
+                    taskList.add(systemAction.getActionObjectId());
+                } else {
+                    storyList.add(systemAction.getActionObjectId());
+                }
+            }
+            actionList = actionService.findActionListByTypeList(bugList, storyList, taskList);
+        }
         //如果这一周已经提交了周报，插入的详情表写入周报ID
         if (diary != null) {
             if (!CollectionUtil.isEmpty(actionList)) {
@@ -94,11 +109,10 @@ public class DiaryAction extends BaseController {
                     OrgDiaryDetail orgDiaryDetail = new OrgDiaryDetail();
                     String content = userUtils.getUserAccount();
                     String objectType = systemAction.getActionObjectType();
-                    String title = getDiffObjectName(systemAction);
                     if ("finished".equals(systemAction.getActionAction())) {
-                        content = content + "完成了" + objectType + title;
+                        content = content + "完成了" + objectType + systemAction.getObjectName();
                     } else {
-                        content = content + "创建了" + objectType + title;
+                        content = content + "创建了" + objectType + systemAction.getObjectName();
                     }
                     orgDiaryDetail.setOrgDetailContent(content);
                     orgDiaryDetail.setOrgDetailDate(systemAction.getActionDate());
