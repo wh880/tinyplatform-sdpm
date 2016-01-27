@@ -48,7 +48,7 @@ public class ActionServiceImpl implements ActionService {
     }
 
     @Override
-    public List<SystemAction> findActionListByTypeList(List<String> bugs, List<String> stories, List<String> tasks) {
+    public List<SystemAction> findActionListByTypeList(List<SystemAction> bugs, List<SystemAction> stories, List<SystemAction> tasks) {
         return actionManager.findActionListByTypeList(bugs, stories, tasks);
     }
 

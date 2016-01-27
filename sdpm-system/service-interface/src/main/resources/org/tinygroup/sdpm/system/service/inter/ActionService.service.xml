@@ -49,9 +49,9 @@
     </service-method>
     <service-method local-name="findActionListByTypeList" service-id="findActionListByTypeList" method-name="findActionListByTypeList" cacheable="false" category="org.tinygroup.sdpm.system.service.inter">
       <service-parameters>
-        <service-parameter name="bugs" type="java.lang.String" collection-type="java.util.List" required="false" is-array="false"/>
-        <service-parameter name="stories" type="java.lang.String" collection-type="java.util.List" required="false" is-array="false"/>
-        <service-parameter name="tasks" type="java.lang.String" collection-type="java.util.List" required="false" is-array="false"/>
+        <service-parameter name="bugs" type="org.tinygroup.sdpm.system.dao.pojo.SystemAction" collection-type="java.util.List" required="false" is-array="false"/>
+        <service-parameter name="stories" type="org.tinygroup.sdpm.system.dao.pojo.SystemAction" collection-type="java.util.List" required="false" is-array="false"/>
+        <service-parameter name="tasks" type="org.tinygroup.sdpm.system.dao.pojo.SystemAction" collection-type="java.util.List" required="false" is-array="false"/>
       </service-parameters>
       <service-result name="findActionListByTypeListResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.system.dao.pojo.SystemAction"/>
     </service-method>

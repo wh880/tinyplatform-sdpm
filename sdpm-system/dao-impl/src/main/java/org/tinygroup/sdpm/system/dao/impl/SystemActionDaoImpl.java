@@ -379,6 +379,46 @@ public class SystemActionDaoImpl extends TinyDslDaoSupport implements SystemActi
         return getDslSession().fetchList(complexSelect, SystemAction.class);
     }
 
+
+    @Override
+    public List<SystemAction> findBugByBugList(List<Integer> bugs) {
+        Alias objectName = new Alias("objectName");
+        QUALITY_BUGTABLE.BUG_TITLE.setAlias(objectName);
+        Select select = Select.select(SYSTEM_ACTIONTABLE.ALL, QUALITY_BUGTABLE.BUG_TITLE)
+                .from(SYSTEM_ACTIONTABLE, QUALITY_BUGTABLE).where(and(
+                        SYSTEM_ACTIONTABLE.ACTION_OBJECT_ID.eq(QUALITY_BUGTABLE.BUG_ID),
+                        SYSTEM_ACTIONTABLE.ACTION_OBJECT_TYPE.in("bug"),
+                        SYSTEM_ACTIONTABLE.ACTION_ID.in(bugs.toArray())
+                ));
+        return getDslSession().fetchList(select, SystemAction.class);
+    }
+
+    @Override
+    public List<SystemAction> findStoryByStoryList(List<Integer> stories) {
+        Alias objectName = new Alias("objectName");
+        PRODUCT_STORYTABLE.STORY_TITLE.setAlias(objectName);
+        Select select = Select.select(SYSTEM_ACTIONTABLE.ALL, PRODUCT_STORYTABLE.STORY_TITLE)
+                .from(SYSTEM_ACTIONTABLE, PRODUCT_STORYTABLE).where(and(
+                        SYSTEM_ACTIONTABLE.ACTION_OBJECT_ID.eq(PRODUCT_STORYTABLE.STORY_ID),
+                        SYSTEM_ACTIONTABLE.ACTION_OBJECT_TYPE.eq("story"),
+                        SYSTEM_ACTIONTABLE.ACTION_ID.in(stories.toArray())
+                ));
+        return getDslSession().fetchList(select, SystemAction.class);
+    }
+
+    @Override
+    public List<SystemAction> findTaskByTaskList(List<Integer> tasks) {
+        Alias objectName = new Alias("objectName");
+        PROJECT_TASKTABLE.TASK_NAME.setAlias(objectName);
+        Select select = Select.select(SYSTEM_ACTIONTABLE.ALL, PROJECT_TASKTABLE.TASK_NAME)
+                .from(SYSTEM_ACTIONTABLE, PROJECT_TASKTABLE).where(and(
+                        SYSTEM_ACTIONTABLE.ACTION_OBJECT_ID.eq(PROJECT_TASKTABLE.TASK_ID),
+                        SYSTEM_ACTIONTABLE.ACTION_OBJECT_TYPE.eq("task"),
+                        SYSTEM_ACTIONTABLE.ACTION_ID.in(tasks.toArray())
+                ));
+        return getDslSession().fetchList(select, SystemAction.class);
+    }
+
     @Override
     public List<SystemAction> findActionListByUserIdAndDate(String userId, Date beginDate, Date endDate) {
         Alias objectName = new Alias("objectName");

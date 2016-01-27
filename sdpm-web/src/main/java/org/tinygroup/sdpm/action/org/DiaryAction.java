@@ -87,17 +87,17 @@ public class DiaryAction extends BaseController {
         List<OrgDiaryDetail> list = new ArrayList<OrgDiaryDetail>();
         //查找相关日志ID对应的日志
         List<SystemAction> actionList = actionService.findActionListByIdList(idsList);
-        List<String> bugList = new ArrayList<String>();
-        List<String> storyList = new ArrayList<String>();
-        List<String> taskList = new ArrayList<String>();
-        if (actionList != null) {
+        if (!CollectionUtil.isEmpty(actionList)) {
+            List<SystemAction> bugList = new ArrayList<SystemAction>();
+            List<SystemAction> storyList = new ArrayList<SystemAction>();
+            List<SystemAction> taskList = new ArrayList<SystemAction>();
             for (SystemAction systemAction : actionList) {
                 if (systemAction.getActionObjectType().equals("bug")) {
-                    bugList.add(systemAction.getActionObjectId());
+                    bugList.add(systemAction);
                 } else if (systemAction.getActionObjectType().equals("task")) {
-                    taskList.add(systemAction.getActionObjectId());
+                    taskList.add(systemAction);
                 } else {
-                    storyList.add(systemAction.getActionObjectId());
+                    storyList.add(systemAction);
                 }
             }
             actionList = actionService.findActionListByTypeList(bugList, storyList, taskList);
@@ -107,7 +107,7 @@ public class DiaryAction extends BaseController {
             if (!CollectionUtil.isEmpty(actionList)) {
                 for (SystemAction systemAction : actionList) {
                     OrgDiaryDetail orgDiaryDetail = new OrgDiaryDetail();
-                    String content = userUtils.getUserAccount();
+                    String content = userUtils.getUser().getOrgUserRealName();
                     String objectType = systemAction.getActionObjectType();
                     if ("finished".equals(systemAction.getActionAction())) {
                         content = content + "完成了" + objectType + systemAction.getObjectName();
@@ -133,7 +133,7 @@ public class DiaryAction extends BaseController {
             if (!CollectionUtil.isEmpty(actionList)) {
                 for (SystemAction systemAction : actionList) {
                     OrgDiaryDetail orgDiaryDetail = new OrgDiaryDetail();
-                    String content = userUtils.getUserAccount();
+                    String content = userUtils.getUser().getOrgUserRealName();
                     String objectType = systemAction.getActionObjectType();
                     String title = getDiffObjectName(systemAction);
                     if ("finished".equals(systemAction.getActionAction())) {
@@ -509,7 +509,8 @@ public class DiaryAction extends BaseController {
             }
             map.put(diaryId, orgDiaryDetails);
         }
-        model.addAttribute("userAccount", userAccount);
+        String realName = user.getOrgUserRealName();
+        model.addAttribute("userAccount", realName);
         model.addAttribute("details", map);
         return "organization/diary/oneselfDiary";
     }

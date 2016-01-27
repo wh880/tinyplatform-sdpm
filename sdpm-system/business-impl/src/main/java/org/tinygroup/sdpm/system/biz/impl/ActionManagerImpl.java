@@ -4,6 +4,7 @@ import com.thoughtworks.xstream.io.xml.BEAStaxDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
@@ -116,8 +117,36 @@ public class ActionManagerImpl implements ActionManager {
     }
 
     @Override
-    public List<SystemAction> findActionListByTypeList(List<String> bugs, List<String> stories, List<String> tasks) {
-        return systemActionDao.findActionListByIdListAndType(bugs, tasks, stories);
+    public List<SystemAction> findActionListByTypeList(List<SystemAction> bugs, List<SystemAction> stories, List<SystemAction> tasks) {
+        List<SystemAction> list = new ArrayList<SystemAction>();
+        List<SystemAction> bugList = null;
+        List<SystemAction> storiesList = null;
+        List<SystemAction> taskList = null;
+        if (!CollectionUtil.isEmpty(bugs)) {
+            List<Integer> temp = new ArrayList<Integer>();
+            for (SystemAction systemAction : bugs) {
+                temp.add(systemAction.getActionId());
+            }
+            bugList = systemActionDao.findBugByBugList(temp);
+            list.addAll(bugList);
+        }
+        if (!CollectionUtil.isEmpty(stories)) {
+            List<Integer> temp = new ArrayList<Integer>();
+            for (SystemAction systemAction : stories) {
+                temp.add(systemAction.getActionId());
+            }
+            storiesList = systemActionDao.findStoryByStoryList(temp);
+            list.addAll(storiesList);
+        }
+        if (!CollectionUtil.isEmpty(tasks)) {
+            List<Integer> temp = new ArrayList<Integer>();
+            for (SystemAction systemAction : tasks) {
+                temp.add(systemAction.getActionId());
+            }
+            taskList = systemActionDao.findTaskByTaskList(temp);
+            list.addAll(taskList);
+        }
+        return list;
     }
 
     @Override

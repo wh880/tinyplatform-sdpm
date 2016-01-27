@@ -1,6 +1,6 @@
 #if(list!=null)
 #for(var:list)
-#@diaryItem(var?.orgUserAccount,var?.orgDiaryCreateDate,var?.orgDiarySummary)
+#@diaryItem(var?.orgUserRealName,var?.orgDiaryCreateDate,var?.orgDiarySummary)
     #for(var2:efforts)
     #if(var2?.key==var?.orgDiaryId)
         #for(var3:var2?.value)
