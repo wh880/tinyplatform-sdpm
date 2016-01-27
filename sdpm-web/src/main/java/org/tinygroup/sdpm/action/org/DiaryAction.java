@@ -88,19 +88,20 @@ public class DiaryAction extends BaseController {
         //查找相关日志ID对应的日志
         List<SystemAction> actionList = actionService.findActionListByIdList(idsList);
         if (!CollectionUtil.isEmpty(actionList)) {
-            List<SystemAction> bugList = new ArrayList<SystemAction>();
-            List<SystemAction> storyList = new ArrayList<SystemAction>();
-            List<SystemAction> taskList = new ArrayList<SystemAction>();
-            for (SystemAction systemAction : actionList) {
-                if (systemAction.getActionObjectType().equals("bug")) {
-                    bugList.add(systemAction);
-                } else if (systemAction.getActionObjectType().equals("task")) {
-                    taskList.add(systemAction);
-                } else {
-                    storyList.add(systemAction);
-                }
-            }
-            actionList = actionService.findActionListByTypeList(bugList, storyList, taskList);
+            actionList = getDiffObjectName(actionList);
+//            List<SystemAction> bugList = new ArrayList<SystemAction>();
+//            List<SystemAction> storyList = new ArrayList<SystemAction>();
+//            List<SystemAction> taskList = new ArrayList<SystemAction>();
+//            for (SystemAction systemAction : actionList) {
+//                if (systemAction.getActionObjectType().equals("bug")) {
+//                    bugList.add(systemAction);
+//                } else if (systemAction.getActionObjectType().equals("task")) {
+//                    taskList.add(systemAction);
+//                } else {
+//                    storyList.add(systemAction);
+//                }
+//            }
+//            actionList = actionService.findActionListByTypeList(bugList, storyList, taskList);
         }
         //如果这一周已经提交了周报，插入的详情表写入周报ID
         if (diary != null) {
@@ -131,11 +132,12 @@ public class DiaryAction extends BaseController {
         //如果这一周没有提交过周报，则进行添加操作，并且对详情不set日志ID
         else {
             if (!CollectionUtil.isEmpty(actionList)) {
+                actionList = getDiffObjectName(actionList);
                 for (SystemAction systemAction : actionList) {
                     OrgDiaryDetail orgDiaryDetail = new OrgDiaryDetail();
                     String content = userUtils.getUser().getOrgUserRealName();
                     String objectType = systemAction.getActionObjectType();
-                    String title = getDiffObjectName(systemAction);
+                    String title = systemAction.getObjectName();
                     if ("finished".equals(systemAction.getActionAction())) {
                         content = content + "完成了" + objectType + title;
                     } else {
@@ -166,23 +168,23 @@ public class DiaryAction extends BaseController {
     /**
      * 获得某一条系统日志中对象的名字(周报所需的BUG TASK STORY相关的系统日志)
      *
-     * @param systemAction
+     * @param actionList
      * @return
      */
-    private String getDiffObjectName(SystemAction systemAction) {
-        String title = null;
-        String objectType = systemAction.getActionObjectType();
-        if ("bug".equals(objectType)) {
-            QualityBug bug = bugService.findBugByBugId(Integer.parseInt(systemAction.getActionObjectId()));
-            title = bug.getBugTitle();
-        } else if ("task".equals(objectType)) {
-            ProjectTask task = taskService.findTaskByTaskId(Integer.parseInt(systemAction.getActionObjectId()));
-            title = task.getTaskName();
-        } else if ("story".equals(objectType)) {
-            ProductStory story = storyService.findStoryByStoryId(Integer.parseInt(systemAction.getActionObjectId()));
-            title = story.getStoryTitle();
+    private List<SystemAction> getDiffObjectName(List<SystemAction> actionList) {
+        List<SystemAction> bugList = new ArrayList<SystemAction>();
+        List<SystemAction> storyList = new ArrayList<SystemAction>();
+        List<SystemAction> taskList = new ArrayList<SystemAction>();
+        for (SystemAction systemAction : actionList) {
+            if (systemAction.getActionObjectType().equals("bug")) {
+                bugList.add(systemAction);
+            } else if (systemAction.getActionObjectType().equals("task")) {
+                taskList.add(systemAction);
+            } else {
+                storyList.add(systemAction);
+            }
         }
-        return title;
+        return actionService.findActionListByTypeList(bugList, storyList, taskList);
     }
     /**
      * 编辑修改周报
