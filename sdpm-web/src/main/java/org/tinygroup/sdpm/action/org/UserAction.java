@@ -656,6 +656,10 @@ public class UserAction extends BaseController {
         if (StringUtil.isBlank(userAccount)) {
             return resultMap(false, "添加失败");
         }
+        //判断该用户是不是自己
+        if (UserUtils.getUserAccount().equals(userAccount)) {
+            return resultMap(false, "不能添加自己");
+        }
         //判断是否存在此用户
         OrgUser orgUser = userService.findUserByAccount(userAccount);
         if (orgUser == null) {
@@ -697,17 +701,18 @@ public class UserAction extends BaseController {
 
     /**
      * 删除当前用户与所选用户的周报白名单关系
+     *
      * @param orgUserId
      * @return
      */
     @ResponseBody
     @RequestMapping("deleteDiaryWhiteList")
     public Map deleteDiaryWhiteList(String orgUserId) {
-        if (orgUserId==null|orgUserId.equals(UserUtils.getUserId())) {
+        if (orgUserId == null | orgUserId.equals(UserUtils.getUserId())) {
             return resultMap(false, "删除失败");
         }
-        OrgUser user=userUtils.getUserById(orgUserId);
-        String userAccount=user.getOrgUserAccount();
+        OrgUser user = userUtils.getUserById(orgUserId);
+        String userAccount = user.getOrgUserAccount();
         String firstAccount = UserUtils.getUserAccount();
         //进行删除操作
         whiteListService.deleteDiaryWhiteList(firstAccount, userAccount);
