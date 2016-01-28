@@ -19,7 +19,15 @@
     }
 </style>
 #set(name="organizationDiary")
-#@layout(org)#end
+#@layout(org)
+<div class="operationbar" style="height:36px">
+				 <span class="f">
+					<a href="${TINY_CONTEXT_PATH+adminPath}/org/diary/show" value="sub" name="diaryChoose" ${choice=="all"?'class="active_btn"':""}>我的下属</a>
+                     <a href="${TINY_CONTEXT_PATH+adminPath}/org/diary/show/white?choose=1" value="whiteList"
+                        name="diaryChoose" ${choice=="today"?'class="active_btn"':""}>我的白名单</a>
+				</span>
+</div>
+#end
 #@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
     #@toggleLeft({"class":"aclass"})
         #@settoggleLeftTitle()我的下属#end
@@ -31,31 +39,31 @@
         #end
     #end
     #@toggleRight()
-        <center><h1>${userAccount} 的周报列表</h1></center>
+    <center><h1>${userAccount} 的周报列表</h1></center>
     <div class="tweet_list diarylist">
-    <ul class="diarylist-detail" id="diarylist-detail">
-        #if(list!=null)
-            #foreach(var:list)
-            #@diaryItem2(var?.orgDiaryWeek var?.orgDiaryCreateDate var?.orgDiarySummary)
-                #foreach(var2:details)
-                #if(var2?.key==var?.orgDiaryId)
-                    #foreach(var3:var2?.value)
-                    <div class="committed clearfix">
-                        <span class="tocommittime">${var3?.effortWeek}：</span>
-                        <ol class="logList-detailList">
-                            <li><span>${var3?.orgDetailContent}</span></li>
-                        </ol>
-                    </div>
+        <ul class="diarylist-detail" id="diarylist-detail">
+            #if(list!=null)
+                #foreach(var:list)
+                    #@diaryItem2(var?.orgDiaryWeek var?.orgDiaryCreateDate var?.orgDiarySummary)
+                        #foreach(var2:details)
+                            #if(var2?.key==var?.orgDiaryId)
+                                #foreach(var3:var2?.value)
+                                    <div class="committed clearfix">
+                                        <span class="tocommittime">${var3?.effortWeek}：</span>
+                                        <ol class="logList-detailList">
+                                            <li><span>${var3?.orgDetailContent}</span></li>
+                                        </ol>
+                                    </div>
+                                #end
+                            #end
+                        #end
+                    #end
                 #end
             #end
-        #end
-    #end
-#end
-#end
 
-</ul>
-</div>
-#end
+        </ul>
+    </div>
+    #end
 #end
 
 <script>

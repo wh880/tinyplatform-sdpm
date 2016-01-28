@@ -363,12 +363,12 @@ public class DiaryAction extends BaseController {
         List<OrgUser> usersList = null;
         OrgUser orgUser = userUtils.getUser();
         if (choose == null) {
-            usersList = userService.findAllSubordinate(UserUtils.getUserId());//白名单树
+            usersList = userService.findAllSubordinate(UserUtils.getUserId());//直接下属树
             usersList.add(orgUser);
             for (OrgUser user : usersList) {
                 Map<String, Object> map = new HashMap<String, Object>();
                 map.put("id", user.getOrgUserId());
-                map.put("open", true);
+                map.put("open", false);
                 map.put("add", false);
                 map.put("pId", user.getOrgUserLeader());
                 map.put("edit", false);
@@ -376,12 +376,12 @@ public class DiaryAction extends BaseController {
                 list.add(map);
             }
         } else {
-            usersList = userService.findWhiteUser(UserUtils.getUserAccount());//直接下属树
+            usersList = userService.findWhiteUser(UserUtils.getUserAccount());//白名单树
             usersList.add(orgUser);
             for (OrgUser user : usersList) {
                 Map<String, Object> map = new HashMap<String, Object>();
                 map.put("id", user.getOrgUserId());
-                map.put("open", true);
+                map.put("open", false);
                 map.put("add", false);
                 if (!user.getOrgUserId().equals(orgUser.getOrgUserId())) {
                     map.put("pId", orgUser.getOrgUserId());
@@ -492,8 +492,13 @@ public class DiaryAction extends BaseController {
      */
     @RequiresPermissions("organizationDiary")
     @RequestMapping("/showOne")
-    public String showSelf(String userAccount, Model model) {
-        OrgUser user = userService.findUserByAccount(userAccount);
+    public String showSelf(String userAccount, Model model, String orgUserId) {
+        OrgUser user = null;
+        if (StringUtil.isBlank(orgUserId)) {
+            user = userService.findUserByAccount(userAccount);
+        } else {
+            user = userUtils.getUserById(orgUserId);
+        }
         List<OrgDiaryAndUserDO> list = diaryService.findListDiaryByUserId(user.getOrgUserId());
         Collections.sort(list);
         model.addAttribute("list", list);

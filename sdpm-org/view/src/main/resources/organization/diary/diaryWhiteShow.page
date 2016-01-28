@@ -19,7 +19,15 @@
     }
 </style>
 #set(name="organizationDiary")
-#@layout(org)#end
+#@layout(org)
+<div class="operationbar" style="height:36px">
+				 <span class="f">
+					<a href="${TINY_CONTEXT_PATH+adminPath}/org/diary/show" value="sub" name="diaryChoose" ${choice=="all"?'class="active_btn"':""}>我的下属</a>
+                     <a href="${TINY_CONTEXT_PATH+adminPath}/org/diary/show/white?choose=1" value="whiteList"
+                        name="diaryChoose" ${choice=="today"?'class="active_btn"':""}>我的白名单</a>
+				</span>
+</div>
+#end
 #@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
     #@toggleLeft({"class":"aclass"})
         #@settoggleLeftTitle()我的白名单#end
@@ -31,6 +39,14 @@
         #end
     #end
     #@toggleRight()
+        #@aModal("#myModal" "添加白名单用户" "600" "" "btn radius btn-primary btn-sm" "/a/org/user/showAdd")添加白名单用户#end
+
+    <div id="myModal" class="modal hide fade " tabindex="-1" role="dialog" aria-hidden="true">
+        #@dialogHeader()对话框标题#end
+        <div class="modal-body  ">
+            <div class="clear"></div>
+        </div>
+    </div>
     <div class="diary-content-head">
         <h3>
             #@circleButton("primary get-prev")#fontIco("chevron-left")#end
