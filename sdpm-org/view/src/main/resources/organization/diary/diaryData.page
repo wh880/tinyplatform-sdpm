@@ -1,21 +1,19 @@
 #if(list!=null)
-    #for(var:list)
-    #@diaryItem(var?.orgUserRealName,var?.orgDiaryCreateDate,var?.orgDiarySummary,var?.orgUserAccount)
-        #for(var2:efforts)
-        #if(var2?.key==var?.orgDiaryId)
-            #for(var3:var2?.value)
-        <div class="committed clearfix">
-            <span class="tocommittime">${var3?.effortWeek}</span>
-            <ol class="logList-detailList">
-                <li><span>${var3?.orgDetailContent}
-            <a
-                    href="#"
-                    target="_blank"> ID:${var3?.orgDetailId}</a></span></li>
-            </ol>
-        </div>
+    #foreach(var:list)
+        #@diaryItem(var?.orgUserRealName var?.orgDiaryCreateDate var?.orgDiarySummary var?.orgUserAccount)
+            #foreach(var2:efforts)
+                #if(var2?.key==var?.orgDiaryId)
+                    #foreach(var3:var2?.value)
+                    <div class="committed clearfix">
+                        <span class="tocommittime">${var3?.effortWeek}</span>
+                        <ol class="logList-detailList">
+                            <li><span>${var3?.orgDetailContent}<a href="#" target="_blank">
+                                ID:${var3?.orgDetailId}</a></span></li>
+                        </ol>
+                    </div>
+                    #end
+                #end
+            #end
         #end
     #end
-#end
-#end
-#end
 #end

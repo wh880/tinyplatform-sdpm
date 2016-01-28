@@ -1,7 +1,7 @@
 /**整体框架个性化设置start**/
 @media (min-width:768px) {
     #main-navbar .navbar-form,#main-navbar .navbar-nav {
-        width:420px!important;
+        width:440px!important;
         margin-right: calc(100% - 100vw);
     }
 }

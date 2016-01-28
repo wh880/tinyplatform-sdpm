@@ -35,11 +35,11 @@
     <div class="tweet_list diarylist">
     <ul class="diarylist-detail" id="diarylist-detail">
         #if(list!=null)
-            #for(var:list)
-            #@diaryItem2(var?.orgDiaryWeek,var?.orgDiaryCreateDate,var?.orgDiarySummary)
-                #for(var2:details)
+            #foreach(var:list)
+            #@diaryItem2(var?.orgDiaryWeek var?.orgDiaryCreateDate var?.orgDiarySummary)
+                #foreach(var2:details)
                 #if(var2?.key==var?.orgDiaryId)
-                    #for(var3:var2?.value)
+                    #foreach(var3:var2?.value)
                     <div class="committed clearfix">
                         <span class="tocommittime">${var3?.effortWeek}：</span>
                         <ol class="logList-detailList">
