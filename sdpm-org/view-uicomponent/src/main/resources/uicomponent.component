@@ -1,8 +1,8 @@
-#macro diaryItem(authorName createDate diaryContent)
+#macro diaryItem(authorName createDate diaryContent orgAccount)
 <li class="diary-detail">
     <div class="diary-report clearfix">
         <div class="portrait">
-            <a href="${TINY_CONTEXT_PATH+adminPath}/org/diary/showOne?userAccount=${authorName}" title="点击查看${authorName}所有的周报">
+            <a href="${TINY_CONTEXT_PATH+adminPath}/org/diary/showOne?userAccount=${orgAccount}" title="点击查看${authorName}所有的周报">
                 <span class="name b">${authorName}</span>
             </a>
             <div class="r f-14">

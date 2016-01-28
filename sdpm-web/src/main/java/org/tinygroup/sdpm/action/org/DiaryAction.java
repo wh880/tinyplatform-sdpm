@@ -372,7 +372,7 @@ public class DiaryAction extends BaseController {
                 map.put("add", false);
                 map.put("pId", user.getOrgUserLeader());
                 map.put("edit", false);
-                map.put("name", user.getOrgUserAccount());
+                map.put("name", user.getOrgUserRealName());
                 list.add(map);
             }
         } else {
@@ -389,7 +389,7 @@ public class DiaryAction extends BaseController {
                     map.put("pId", null);
                 }
                 map.put("edit", true);
-                map.put("name", user.getOrgUserAccount());
+                map.put("name", user.getOrgUserRealName());
                 list.add(map);
             }
         }
