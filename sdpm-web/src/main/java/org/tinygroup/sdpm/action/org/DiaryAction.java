@@ -519,7 +519,9 @@ public class DiaryAction extends BaseController {
         String realName = user.getOrgUserRealName();
         model.addAttribute("userAccount", realName);
         model.addAttribute("details", map);
-        return "organization/diary/oneselfDiary";
+        if (StringUtil.isBlank(orgUserId))
+            return "organization/diary/oneselfDiary";
+        return "organization/diary/diaryWhiteShowOne";
     }
 
     /*

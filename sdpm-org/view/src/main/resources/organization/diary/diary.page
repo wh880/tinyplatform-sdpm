@@ -5,6 +5,8 @@
 					<a href="${TINY_CONTEXT_PATH+adminPath}/org/diary/show" value="sub" name="diaryChoose" ${choice=="all"?'class="active_btn"':""}>我的下属</a>
                      <a href="${TINY_CONTEXT_PATH+adminPath}/org/diary/show/white?choose=1" value="whiteList"
                         name="diaryChoose" ${choice=="today"?'class="active_btn"':""}>我的白名单</a>
+                     <a href="${TINY_CONTEXT_PATH+adminPath}/org/diary/form" value="whiteList"
+                        name="diarySubmit" ${choice=="today"?'class="active_btn"':""}>提交周报</a>
 				</span>
 </div>
 #end
@@ -20,10 +22,10 @@
         #end
     #end
     #@toggleRight()
-        #@div(divBaseClass="tinyheaderTools form-inline")
-            #@aExtendButton("btn radius btn-primary btn-sm" TINY_CONTEXT_PATH+adminPath+
-                "/org/diary/form")提交周报#end
-        #end
+##        #@div(divBaseClass="tinyheaderTools form-inline")
+##            #@aExtendButton("btn radius btn-primary btn-sm" TINY_CONTEXT_PATH+adminPath+
+##                "/org/diary/form")提交周报#end
+##        #end
     <div class="diary-content-head">
         <h3>
             #@circleButton("primary get-prev")#fontIco("chevron-left")#end
