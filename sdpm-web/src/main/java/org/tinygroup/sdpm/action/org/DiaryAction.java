@@ -311,6 +311,7 @@ public class DiaryAction extends BaseController {
         model.addAttribute("orgDiary", orgDiary);
         model.addAttribute("list", list);
         model.addAttribute("orgUserId", orgUserId);
+        model.addAttribute("realName", user.getOrgUserRealName());
         return "organization/diary/diary.page";
     }
 
@@ -579,6 +580,7 @@ public class DiaryAction extends BaseController {
         model.addAttribute("orgDiary", orgDiary);
         model.addAttribute("list", list);
         model.addAttribute("orgUserId", orgUserId);
+        model.addAttribute("realName", user.getOrgUserRealName());
         return "organization/diary/diaryWhiteShow.page";
     }
 }
