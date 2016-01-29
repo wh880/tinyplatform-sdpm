@@ -647,33 +647,33 @@ public class UserAction extends BaseController {
     /**
      * 将选中用户加入到当前用户的周报白名单当中
      *
-     * @param userAccount
+     * @param orgUserId
      * @return
      */
     @ResponseBody
     @RequestMapping("addWhiteList")
-    public Map addWhiteList(String userAccount) {
-        if (StringUtil.isBlank(userAccount)) {
+    public Map addWhiteList(String orgUserId) {
+        if (StringUtil.isBlank(orgUserId)) {
             return resultMap(false, "添加失败");
         }
         //判断该用户是不是自己
-        if (UserUtils.getUserAccount().equals(userAccount)) {
+        if (UserUtils.getUserId().equals(orgUserId)) {
             return resultMap(false, "不能添加自己");
         }
         //判断是否存在此用户
-        OrgUser orgUser = userService.findUserByAccount(userAccount);
+        OrgUser orgUser = userUtils.getUserById(orgUserId);
         if (orgUser == null) {
             return resultMap(false, "不存在此用户");
         }
         OrgUser user = userUtils.getUser();
         String firstAccount = user.getOrgUserAccount();//甲方
         //判断是否已经存在
-        OrgDiaryWhiteList orgDiaryWhiteList = whiteListService.findDiaryWhiteByAccounts(firstAccount, userAccount);
+        OrgDiaryWhiteList orgDiaryWhiteList = whiteListService.findDiaryWhiteByAccounts(firstAccount, orgUser.getOrgUserAccount());
         if (orgDiaryWhiteList != null) {
             return resultMap(false, "用户关系已存在");
         }
         //进行白名单插入操作
-        whiteListService.addOneWhite(firstAccount, userAccount);
+        whiteListService.addOneWhite(firstAccount, orgUser.getOrgUserAccount());
         return resultMap(true, "添加成功");
     }
 

@@ -2,11 +2,21 @@
     #@tinyForm("thisform" call("link",adminPath+"/org/user/addWhiteList") "get")
         #@colLabel()用户账号：#end
         #@formControlDiv("col-8")
-            #tinyInput("text" "userAccount" ""{"placeholder":"请输入您要添加的用户账号","nullmsg":"用户名不能为空！","id":"userAccount","class":"input-text"})
+            #@Tselect2F()
+                #Tselect2Ajax("orgUserId" "" TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
+                {"dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"添加白名单用户","nullmsg":"请选择用户添加！",
+                    "datatype":"*"})
+                #@Tselect2Fix()
+                    #set(m=menuManager.getMenu("organizationAddUser"))
+                    #if(m)
+                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
+                    #end
+                #end
+            #end
         #end
 
-    <div class="col-1 r">
-        <input style="float: left" type="submit" id="submit2" class="commitBtn" value="保存">
+    <div class="r">
+        <input type="submit" id="submit2" class="commitBtn" value="保存">
     </div>
     #end
 <script>

@@ -43,8 +43,7 @@
         #end
     #end
     #@toggleRight()
-        #@aModal("#myModal" "添加白名单用户" "600" "" "btn radius btn-primary btn-sm" "/a/org/user/showAdd")添加白名单用户#end
-
+        #@aModal("#myModal" "添加白名单用户" "500" "" "btn radius btn-primary btn-sm" "/a/org/user/showAdd")添加白名单用户#end
     <div id="myModal" class="modal hide fade " tabindex="-1" role="dialog" aria-hidden="true">
         #@dialogHeader()对话框标题#end
         <div class="modal-body  ">
