@@ -16,7 +16,7 @@
     #@toggleLeft({"class":"aclass"})
         #@settoggleLeftTitle()我的下属#end
         #@settoggleLeftBody("treeLeftbox")
-            #@zTreeList(call("link",adminPath+"/org/diary/tree"))
+            #@zTreeList(call("link",adminPath+"/org/diary/tree") {"readOnly":true})
                 #setzTreeValMap({"id":"orgUserId","name":"orgUserAccount","pid":"orgUserLeader"}) ##key值为固定
                 #zTreeSetLinkUrl(TINY_CONTEXT_PATH+adminPath+"/org/diary/show" )
             #end

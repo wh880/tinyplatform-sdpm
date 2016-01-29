@@ -85,6 +85,8 @@
                             layer.msg(data.info, 2, 1, function () {
                                 $(curform).closest(".modal").trigger("close");
                             });
+                            window.location.href = "${TINY_CONTEXT_PATH+adminPath}/org/diary/show";
+
                         } else {
                             layer.msg(data.info);
                         }

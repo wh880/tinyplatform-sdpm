@@ -369,7 +369,7 @@ public class DiaryAction extends BaseController {
             for (OrgUser user : usersList) {
                 Map<String, Object> map = new HashMap<String, Object>();
                 map.put("id", user.getOrgUserId());
-                map.put("open", false);
+                map.put("open", true);
                 map.put("add", false);
                 map.put("pId", user.getOrgUserLeader());
                 map.put("edit", false);
@@ -382,7 +382,7 @@ public class DiaryAction extends BaseController {
             for (OrgUser user : usersList) {
                 Map<String, Object> map = new HashMap<String, Object>();
                 map.put("id", user.getOrgUserId());
-                map.put("open", false);
+                map.put("open", true);
                 map.put("add", false);
                 if (!user.getOrgUserId().equals(orgUser.getOrgUserId())) {
                     map.put("pId", orgUser.getOrgUserId());
