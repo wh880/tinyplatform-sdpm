@@ -21,14 +21,12 @@
 #set(name="organizationDiary")
 #@layout(org)
 <div class="operationbar" style="height:36px">
-				 <span class="f">
+				 <span class="col-6">
 					<a href="${TINY_CONTEXT_PATH+adminPath}/org/diary/show" value="sub" name="diaryChoose" ${choice=="all"?'class="active_btn"':""}>我的下属</a>
                      <a href="${TINY_CONTEXT_PATH+adminPath}/org/diary/show/white?choose=1" value="whiteList"
                         name="diaryChoose" ${choice=="today"?'class="active_btn"':""}>我的白名单</a>
-                     <a href="${TINY_CONTEXT_PATH+adminPath}/org/diary/form" value="whiteList"
-                        name="diarySubmit" ${choice=="today"?'class="active_btn"':""}>提交周报</a>
-                     <span class="r">当前位置：${realName}</span>
 				</span>
+    <span class="col-6">当前位置：${realName}</span>
 </div>
 #end
 #@toggleBox({"class":"open"})##展开为class:OPEN 要附加其它的属性请用MAP带入
@@ -43,13 +41,20 @@
         #end
     #end
     #@toggleRight()
-        #@aModal("#myModal" "添加白名单用户" "500" "" "btn radius btn-primary btn-sm" "/a/org/user/showAdd")添加白名单用户#end
-    <div id="myModal" class="modal hide fade " tabindex="-1" role="dialog" aria-hidden="true">
-        #@dialogHeader()对话框标题#end
-        <div class="modal-body  ">
-            <div class="clear"></div>
+        #@div(divBaseClass="tinyheaderTools form-inline")
+            #@aExtendButton("btn radius btn-primary btn-sm" TINY_CONTEXT_PATH+adminPath+
+                "/org/diary/form")提交周报#end
+            #@aExtendButton("btn radius btn-primary btn-sm" TINY_CONTEXT_PATH+adminPath+
+                "/org/diary/showOne")我的周报#end
+
+            #@aModal("#myModal" "添加白名单用户" "500" "" "btn radius btn-primary btn-sm" "/a/org/user/showAdd")添加白名单用户#end
+        <div id="myModal" class="modal hide fade " tabindex="-1" role="dialog" aria-hidden="true">
+            #@dialogHeader()对话框标题#end
+            <div class="modal-body  ">
+                <div class="clear"></div>
+            </div>
         </div>
-    </div>
+        #end
     <div class="diary-content-head">
         <h3>
             #@circleButton("primary get-prev")#fontIco("chevron-left")#end

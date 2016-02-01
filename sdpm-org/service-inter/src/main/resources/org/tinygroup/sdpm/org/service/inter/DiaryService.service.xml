@@ -64,5 +64,15 @@
       </service-parameters>
       <service-result name="findDiaryListByWhiteListResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.org.dao.pojo.OrgDiaryAndUserDO"/>
     </service-method>
+    <service-method local-name="findPagerDiaryByWhiteList" service-id="findPagerDiaryByWhiteList" method-name="findPagerDiaryByWhiteList" cacheable="false" category="org.tinygroup.sdpm.org.service.inter">
+      <service-parameters>
+        <service-parameter name="userId" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="year" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="week" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="start" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="limit" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findPagerDiaryByWhiteListResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager"/>
+    </service-method>
   </service-component>
 </service-components>

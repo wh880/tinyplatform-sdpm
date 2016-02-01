@@ -133,6 +133,11 @@ public class DiaryServiceImpl implements DiaryService {
 
     @Override
     public List<OrgDiaryAndUserDO> findDiaryListByWhiteList(String userId, Integer year, Integer week) {
-        return diaryManager.findDiaryListByWhiteList(userId,year,week);
+        return diaryManager.findDiaryListByWhiteList(userId, year, week);
+    }
+
+    @Override
+    public Pager<OrgDiaryAndUserDO> findPagerDiaryByWhiteList(String userId, Integer year, Integer week, Integer start, Integer limit) {
+        return diaryManager.findPagerDiaryByWhiteList(userId, year, week, start, limit);
     }
 }

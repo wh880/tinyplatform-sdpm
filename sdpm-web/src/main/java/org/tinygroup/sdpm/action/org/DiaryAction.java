@@ -467,6 +467,9 @@ public class DiaryAction extends BaseController {
             String userAccount = userUtils.getUserById(orgUserId).getOrgUserAccount();
             list = diaryService.findDiaryListByWhiteList(userAccount, year, week);
         }
+        for (OrgDiaryAndUserDO orgDiaryAndUserDO : list) {
+            orgDiaryAndUserDO.setDiaryDateTime(DateUtils.formatDate(orgDiaryAndUserDO.getOrgDiaryCreateDate()));
+        }
         model.addAttribute("list", list);
         Map<Integer, List<OrgDiaryDetail>> map = new HashMap<Integer, List<OrgDiaryDetail>>();
         for (OrgDiaryAndUserDO orgDiaryAndYUser : list) {
@@ -501,10 +504,9 @@ public class DiaryAction extends BaseController {
             user = userUtils.getUserById(orgUserId);
         }
         List<OrgDiaryAndUserDO> list = diaryService.findListDiaryByUserId(user.getOrgUserId());
-        Collections.sort(list);
-        model.addAttribute("list", list);
         Map<Integer, List<OrgDiaryDetail>> map = new HashMap<Integer, List<OrgDiaryDetail>>();
         for (OrgDiaryAndUserDO orgDiaryAndYUser : list) {
+            orgDiaryAndYUser.setDiaryDateTime(DateUtils.formatDate(orgDiaryAndYUser.getOrgDiaryCreateDate()));
             Integer diaryId = orgDiaryAndYUser.getOrgDiaryId();
             List<OrgDiaryDetail> orgDiaryDetails = null;
             if (map.get(diaryId) == null) {
@@ -518,6 +520,8 @@ public class DiaryAction extends BaseController {
             map.put(diaryId, orgDiaryDetails);
         }
         String realName = user.getOrgUserRealName();
+        Collections.sort(list);
+        model.addAttribute("list", list);
         model.addAttribute("userAccount", realName);
         model.addAttribute("details", map);
         if (StringUtil.isBlank(orgUserId))
