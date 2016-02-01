@@ -156,9 +156,6 @@ public class DiaryManagerImpl implements DiaryManager {
     public List<OrgDiaryAndUserDO> findListSubAndSelf(String userId, List<OrgUser> list, Integer year, Integer week) {
         List<String> list1 = new ArrayList<String>();
         list1.add(userId);
-        for (OrgUser orgUser : list) {
-            list1.add(orgUser.getOrgUserId());
-        }
         List<OrgDiaryAndUserDO> orgDiaryAndUserDOs = orgDiaryDao.findListSubordinateOneWeek(list1, year, week);
 
         // Pager<OrgDiaryAndUserDO> orgDiaryAndUserDOs = orgDiaryDao.findPagerSubordinateOneWeek(list1, year, week, start, limit);
@@ -166,10 +163,14 @@ public class DiaryManagerImpl implements DiaryManager {
         for (OrgUser orgUser : list) {
             list2.add(orgUser.getOrgUserId());
         }
-        List<OrgDiaryAndUserDO> list3 = orgDiaryDao.findListSubordinateOneWeek(list2, year, week);
-        if (CollectionUtil.isEmpty(orgDiaryAndUserDOs))
+        List<OrgDiaryAndUserDO> list3 = null;
+        if (!CollectionUtil.isEmpty(list2)) {
+            list3 = orgDiaryDao.findListSubordinateOneWeek(list2, year, week);
+            orgDiaryAndUserDOs.addAll(list3);
+        }
+        if (CollectionUtil.isEmpty(orgDiaryAndUserDOs)) {
             return list3;
-        orgDiaryAndUserDOs.addAll(list3);
+        }
         return orgDiaryAndUserDOs;
     }
 
