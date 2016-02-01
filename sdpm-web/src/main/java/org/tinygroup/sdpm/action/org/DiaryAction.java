@@ -467,23 +467,26 @@ public class DiaryAction extends BaseController {
             String userAccount = userUtils.getUserById(orgUserId).getOrgUserAccount();
             list = diaryService.findDiaryListByWhiteList(userAccount, year, week);
         }
-        for (OrgDiaryAndUserDO orgDiaryAndUserDO : list) {
-            orgDiaryAndUserDO.setDiaryDateTime(DateUtils.formatDate(orgDiaryAndUserDO.getOrgDiaryCreateDate()));
-        }
-        model.addAttribute("list", list);
-        Map<Integer, List<OrgDiaryDetail>> map = new HashMap<Integer, List<OrgDiaryDetail>>();
-        for (OrgDiaryAndUserDO orgDiaryAndYUser : list) {
-            List<OrgDiaryDetail> efforts = null;
-            if (map.get(orgDiaryAndYUser.getOrgDiaryId()) == null) {
+        if (!CollectionUtil.isEmpty(list)) {
+            for (OrgDiaryAndUserDO orgDiaryAndUserDO : list) {
+                orgDiaryAndUserDO.setDiaryDateTime(DateUtils.formatDate(orgDiaryAndUserDO.getOrgDiaryCreateDate()));
+            }
+
+            Map<Integer, List<OrgDiaryDetail>> map = new HashMap<Integer, List<OrgDiaryDetail>>();
+            for (OrgDiaryAndUserDO orgDiaryAndYUser : list) {
+                List<OrgDiaryDetail> efforts = null;
+                if (map.get(orgDiaryAndYUser.getOrgDiaryId()) == null) {
+                    map.put(orgDiaryAndYUser.getOrgDiaryId(), efforts);
+                }
+                efforts = diaryService.findDetailListByDiaryId(orgDiaryAndYUser.getOrgDiaryId());
+                for (OrgDiaryDetail orgDiaryDetail : efforts) {
+                    orgDiaryDetail.setEffortWeek(DateUtils.getDateWeek(orgDiaryDetail.getOrgDetailDate()));
+                }
                 map.put(orgDiaryAndYUser.getOrgDiaryId(), efforts);
             }
-            efforts = diaryService.findDetailListByDiaryId(orgDiaryAndYUser.getOrgDiaryId());
-            for (OrgDiaryDetail orgDiaryDetail : efforts) {
-                orgDiaryDetail.setEffortWeek(DateUtils.getDateWeek(orgDiaryDetail.getOrgDetailDate()));
-            }
-            map.put(orgDiaryAndYUser.getOrgDiaryId(), efforts);
+            model.addAttribute("efforts", map);
         }
-        model.addAttribute("efforts", map);
+        model.addAttribute("list", list);
         return "organization/diary/diaryData.pagelet";
     }
 
