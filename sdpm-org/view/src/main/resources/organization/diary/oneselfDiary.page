@@ -49,25 +49,6 @@
                     #end
                 #end
             #end
-##            #if(list!=null)
-##                #foreach(var:list)
-##                    #@diaryItem2(var?.orgDiaryWeek var?.diaryDateTime var?.orgDiarySummary)
-##                        #foreach(var2:details)
-##                            #if(var2?.key==var?.orgDiaryId)
-##                                #foreach(var3:var2?.value)
-##                                    <div class="committed clearfix">
-##                                        <span class="tocommittime">${var3?.effortWeek}：</span>
-##                                        <ol class="logList-detailList">
-##                                            <li><span>${var3?.orgDetailContent}</span></li>
-##                                        </ol>
-##                                    </div>
-##                                #end
-##                            #end
-##                        #end
-##                    #end
-##                #end
-##            #end
-
         </ul>
     </div>
     #end
