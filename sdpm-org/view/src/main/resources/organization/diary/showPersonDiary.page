@@ -13,7 +13,7 @@
                         <div class="committed clearfix">
                             <span class="tocommittime">${var3?.effortWeek}：</span>
                             <ol class="logList-detailList">
-                                <li><span>${var3?.orgDetailContent}</span></li>
+                                <li><span style="word-break:break-all">${var3?.orgDetailContent}</span></li>
                             </ol>
                         </div>
                         #end
