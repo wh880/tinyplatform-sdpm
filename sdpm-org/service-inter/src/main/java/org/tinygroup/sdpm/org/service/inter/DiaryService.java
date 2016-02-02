@@ -37,7 +37,7 @@ public interface DiaryService {
     /**
      * 查找某人的周报
      */
-    //  Pager<OrgDiaryAndUserDO> findPagerDiaryByUserId(String id,Integer start,Integer limit);
+      Pager<OrgDiaryAndUserDO> findPagerDiaryByUserId(String id, Integer start, Integer limit);
 
     /**
      * 查找某人的周报
