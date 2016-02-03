@@ -537,6 +537,6 @@ public class OrgDiaryAndUserDO implements Serializable, Comparable {
 
     @Override
     public int compareTo(Object o) {
-        return -this.diaryDateTime.compareTo(((OrgDiaryAndUserDO) o).diaryDateTime);
+        return -this.orgDiaryWeek.compareTo(((OrgDiaryAndUserDO) o).orgDiaryWeek);
     }
 }

@@ -502,10 +502,12 @@ public class DiaryAction extends BaseController {
     @RequestMapping("/showOne")
     public String showSelf(String userAccount, Model model, String orgUserId) {
         OrgUser user = null;
-        if (StringUtil.isBlank(orgUserId)) {
+        if (StringUtil.isBlank(orgUserId)&!StringUtil.isBlank(userAccount)) {
             user = userService.findUserByAccount(userAccount);
-        } else {
+        } else if (StringUtil.isBlank(userAccount)&!StringUtil.isBlank(orgUserId)) {
             user = userUtils.getUserById(orgUserId);
+        } else if (StringUtil.isBlank(orgUserId) & StringUtil.isBlank(userAccount)) {
+            user = userUtils.getUser();
         }
 //        //List<OrgDiaryAndUserDO> list = diaryService.findListDiaryByUserId(user.getOrgUserId());
 //        Pager<OrgDiaryAndUserDO> pager = diaryService.findPagerDiaryByUserId(user.getOrgUserId(), 0, 10);
@@ -525,9 +527,9 @@ public class DiaryAction extends BaseController {
 //            map.put(diaryId, orgDiaryDetails);
 //        }
         String realName = user.getOrgUserRealName();
-      //  Collections.sort(pager.getRecords());
+        //  Collections.sort(pager.getRecords());
         //model.addAttribute("list", list);
-       // model.addAttribute("pager", pager);
+        // model.addAttribute("pager", pager);
         model.addAttribute("userAccount", realName);
         //model.addAttribute("details", map);
         model.addAttribute("user", user);
@@ -538,7 +540,7 @@ public class DiaryAction extends BaseController {
 
     @RequiresPermissions("organizationDiary")
     @RequestMapping("/list/oneself")
-    public String listOneself(String userAccount, String orgUserId, Model model, Integer start,Integer limit) {
+    public String listOneself(String userAccount, String orgUserId, Model model, Integer start, Integer limit) {
         OrgUser user;
         if (StringUtil.isBlank(orgUserId)) {
             user = userService.findUserByAccount(userAccount);
@@ -563,7 +565,7 @@ public class DiaryAction extends BaseController {
             map.put(diaryId, orgDiaryDetails);
         }
         String realName = user.getOrgUserRealName();
-        Collections.sort(pager.getRecords());
+        // Collections.sort(pager.getRecords());
         //model.addAttribute("list", list);
         model.addAttribute("pager", pager);
         model.addAttribute("userAccount", realName);

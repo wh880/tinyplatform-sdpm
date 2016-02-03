@@ -372,7 +372,7 @@ public class OrgDiaryDaoImpl extends TinyDslDaoSupport implements OrgDiaryDao {
                 where(and(
                         ORG_DIARYTABLE.ORG_USER_ID.eq(ORG_USERTABLE.ORG_USER_ID),
                         ORG_DIARYTABLE.ORG_USER_ID.in(orgUserId)
-                )).orderBy(OrderByElement.desc(ORG_DIARYTABLE.ORG_DIARY_CREATE_DATE));
+                )).orderBy(OrderByElement.desc(ORG_DIARYTABLE.ORG_DIARY_YEAR), OrderByElement.desc(ORG_DIARYTABLE.ORG_DIARY_WEEK));
         return getDslSession().fetchPage(select, start, limit, false, OrgDiaryAndUserDO.class);
     }
 
