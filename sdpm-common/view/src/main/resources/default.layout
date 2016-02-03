@@ -48,7 +48,7 @@
                     <a href="javascript:void(0);" class="dropdown-toggle user-menu" data-toggle="dropdown">
                         #*<img src="${TINY_CONTEXT_PATH}/common/img/avatars/1.jpg"
                              alt="${userUtils.getUser().orgUserRealName}">*#
-							 <i class="icon-user icon-margin"></i><span>${userUtils.getUser().orgUserRealName}</span>
+							 <i class="icon-user icon-margin"></i><span class="user-name-info">${userUtils.getUser().orgUserRealName}</span>
                     </a>
                     <ul class="dropdown-menu">
                         #@hasMenu("org-user-profileAdmin")

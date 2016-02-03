@@ -308,7 +308,9 @@
 			$(this).on("change",function(){
 				for(var i=0;i<itemlist.length;i++){
 					if(itemlist[i]["name"]==$(this).val()){
-						setValueBox(i,$(this).attr("id").substr(-1));
+                        oldV=$("#valueBox"+i).val();
+                        setValueBox(i,$(this).attr("id").substr(-1));
+                        $("#valueBox"+i).val(oldV);
 						break;
 					}
 				}
