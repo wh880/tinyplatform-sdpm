@@ -1,4 +1,3 @@
-#@elementItem()
     #@tinyForm("thisform" call("link",adminPath+"/org/user/addWhiteList") "get")
         #@colLabel()用户账号：#end
         #@formControlDiv("col-8")
@@ -43,4 +42,3 @@
         });
     });
 </script>
-#end
