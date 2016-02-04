@@ -5,11 +5,11 @@
     <parent>
         <artifactId>sdpm</artifactId>
         <groupId>org.tinygroup</groupId>
-        <version>0.0.2-SNAPSHOT</version>
+        <version>0.0.3-SNAPSHOT</version>
     </parent>
     <groupId>org.tinygroup</groupId>
     <artifactId>sdpm-productLine</artifactId>
-    <version>0.0.2-SNAPSHOT</version>
+    <version>0.0.3-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>sdpm-productLine develop</name>
 

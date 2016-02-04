@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.tinygroup</groupId>
         <artifactId>sdpm-statistic</artifactId>
-        <version>0.0.2-SNAPSHOT</version>
+        <version>0.0.3-SNAPSHOT</version>
     </parent>
     <artifactId>sdpm-statistic-view</artifactId>
     <name>sdpm-statistic-view</name>

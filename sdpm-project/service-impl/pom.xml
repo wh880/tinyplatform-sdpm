@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.tinygroup</groupId>
         <artifactId>sdpm-project</artifactId>
-        <version>0.0.2-SNAPSHOT</version>
+        <version>0.0.3-SNAPSHOT</version>
     </parent>
     <artifactId>sdpm-project-service-impl</artifactId>
     <name>sdpm-project-service-impl</name>
@@ -28,7 +28,7 @@
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>sdpm-project-business-impl</artifactId>
-            <version>0.0.2-SNAPSHOT</version>
+            <version>0.0.3-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.tinygroup</groupId>
@@ -43,7 +43,7 @@
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>sdpm-org-business-inter</artifactId>
-            <version>0.0.2-SNAPSHOT</version>
+            <version>0.0.3-SNAPSHOT</version>
         </dependency>
     </dependencies>
 </project>
