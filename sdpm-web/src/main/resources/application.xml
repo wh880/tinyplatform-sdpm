@@ -46,39 +46,6 @@
         <class-paths>
             <!-- 文件上传配置 -->
             <class-path path="{userfiles.basedir}"/>
-
-            <!-- 需要加的自己署名 -->
-            <!-- Hulk's Path -->
-            <class-path path="E:\workcode\sdpm\sdpm-org\view\src\main\resources"/>
-            <class-path path="E:\workcode\sdpm\sdpm-project\view\src\main\resources"/>
-            <class-path path="E:\workcode\sdpm\sdpm-common\view\src\main\resources"/>
-            <class-path path="E:\workcode\sdpm\sdpm-common\view-uicomponent\src\main\resources"/>
-            <class-path path="E:\workcode\sdpm\sdpm-project\view\src\main\resources"/>
-            <class-path path="E:\workcode\sdpm\sdpm-document\view\src\main\resources\"/>
-            <!--wll -->
-            <class-path path="D:\java\eclipseworkspace\newsdpm\sdpm-product\view\src\main\resources"/>
-            <class-path path="D:\java\eclipseworkspace\newsdpm\sdpm-quality\view\src\main\resources"/>
-            <class-path path="D:\java\eclipseworkspace\newsdpm\sdpm-project\view\src\main\resources"/>
-            <class-path path="D:\java\eclipseworkspace\newsdpm\sdpm-system\view\src\main\resources"/>
-            <class-path path="D:\java\eclipseworkspace\newsdpm\sdpm-document\view\src\main\resources"/>
-            <class-path path="D:\java\eclipseworkspace\newsdpm\sdpm-productLine\view\src\main\resources"/>
-            <class-path path="D:\java\eclipseworkspace\newsdpm\sdpm-statistic\view\src\main\resources"/>
-            <class-path path="D:\java\eclipseworkspace\newsdpm\sdpm-common\view\src\main\resources"/>
-            <class-path path="D:\java\eclipseworkspace\newsdpm\sdpm-project\view\src\main\resources"/>
-            <class-path path="D:\java\eclipseworkspace\newsdpm\sdpm-org\view\src\main\resources"/>
-
-            <!--ajian -->
-            <class-path path="D:\javaworkspace\sdpm\sdpm-product\view\src\main\resources"/>
-            <class-path path="D:\javaworkspace\sdpm\sdpm-quality\view\src\main\resources"/>
-            <class-path path="D:\javaworkspace\sdpm\sdpm-project\view\src\main\resources"/>
-            <class-path path="D:\javaworkspace\sdpm\sdpm-system\view\src\main\resources"/>
-            <class-path path="D:\javaworkspace\sdpm\sdpm-document\view\src\main\resources"/>
-            <class-path path="D:\javaworkspace\sdpm\sdpm-productLine\view\src\main\resources"/>
-            <class-path path="D:\javaworkspace\sdpm\sdpm-statistic\view\src\main\resources"/>
-            <class-path path="D:\javaworkspace\sdpm\sdpm-common\view\src\main\resources"/>
-            <class-path path="D:\javaworkspace\sdpm\sdpm-project\view\src\main\resources"/>
-            <class-path path="D:\javaworkspace\sdpm\sdpm-org\view\src\main\resources"/>
-            <class-path path="D:\Mygit\sdpm\sdpm-org\view\src\main\resources"/>
         </class-paths>
         <include-patterns>
             <include-pattern pattern="org\.tinygroup\.(.)*\.jar"/>
