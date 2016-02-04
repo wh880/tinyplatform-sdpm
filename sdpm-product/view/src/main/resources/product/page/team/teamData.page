@@ -17,7 +17,7 @@
     #@td()${t?.teamHours}#end
     #@td()${t?.teamDays*t?.teamHours}#end
     #@td()
-        #set(m=menuManager.getMenu("product-team-delete"))
+        #set(m=menuService.getMenu("product-team-delete"))
         #if(m)
             #@tinyTableItemRemove(TINY_CONTEXT_PATH+adminPath+m.href t.id)<i class=${m.icon}></i>#end
         #end

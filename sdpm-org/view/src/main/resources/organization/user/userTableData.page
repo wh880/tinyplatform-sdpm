@@ -26,7 +26,7 @@
     #@td("nowrap")${var?.orgUserJoin}#end
     #@td()
         #set(map={"org-user-edit":[665,448],"org-user-delete":[550,150]})
-        #foreach(m:menuManager.getScopeMenus("org-user"))
+        #foreach(m:menuService.getScopeMenus("org-user"))
             #if(m.id=="org-user-edit")
             <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?id=${var?.orgUserId}"
                title="${m.name}">#buttonIcon(iconClass=m.icon)</a>

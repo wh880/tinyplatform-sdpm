@@ -14,11 +14,11 @@
         #@td("nowrap")${formatDate(b?.buildDate,"yyyy-MM-dd")}#end
         #@td("nowrap")${b?.buildBuilder?userUtils.getUserById(b?.buildBuilder)?.orgUserRealName:""}#end
         #@td("nowrap")
-            #set(m=menuManager.getMenu("pro-demand-relation"))
+            #set(m=menuService.getMenu("pro-demand-relation"))
             #if(m)
             <a class="openTestTask testTaskJump" value="${b?.buildProduct}" href="${TINY_CONTEXT_PATH+adminPath}${m.href}?buildId=${b?.buildId}&projectId=${b?.buildProject}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
             #end
-            #foreach(m:menuManager.getScopeMenus("pro-version-op"))
+            #foreach(m:menuService.getScopeMenus("pro-version-op"))
                 #if(m.id != "pro-version-delete")
                 <a class="buildJump" value="${b?.buildProject}" href="${TINY_CONTEXT_PATH+adminPath}${m.href}?buildId=${b?.buildId}&projectId=${b?.buildProject}&productId=${b?.buildProduct}"
                    title="${m.name}">#buttonIcon(iconClass=m.icon)</a>

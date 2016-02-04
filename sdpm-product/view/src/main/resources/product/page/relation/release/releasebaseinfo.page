@@ -63,7 +63,7 @@
 ##		#foreach(f:file)
 ##			#set(path=f?.filePathname)
 ##        <a href="${TINY_CONTEXT_PATH+path}">${f?.fileTitle}.${f?.fileExtension}</a>&nbsp&nbsp&nbsp&nbsp
-##			#foreach(m:menuManager.getScopeMenus("product-file-op"))
+##			#foreach(m:menuService.getScopeMenus("product-file-op"))
 ##				#if(m.id == "story-file-edit")
 ##					#@aModal("#myModal" m.name "400" "120" "class-m" adminPath+m.href+"?fileId="+f?.fileId)
 ##						#buttonIcon(iconClass=m.icon)#end&nbsp&nbsp&nbsp

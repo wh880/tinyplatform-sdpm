@@ -7,7 +7,7 @@
 				<span class="active_btn">文档列表</span>
 			</span>
     <span class="r">
-        #foreach(m:menuManager.getScopeMenus("archive-add"))
+        #foreach(m:menuService.getScopeMenus("archive-add"))
             #if(m.id=="product-archive-add")
                 <a href="${TINY_CONTEXT_PATH +adminPath}/product/addDoc" title="创建文档">#buttonIcon(iconClass="icon-plus")创建文档</a>
             #end
@@ -24,7 +24,7 @@
                 <input type="button" value="反选" class="btn btn-default btn-primary"
                        onclick="selectAllNullorReserve('idCheck','反选');"/>
 
-                    #foreach(m:menuManager.getScopeMenus("archive-badel"))
+                    #foreach(m:menuService.getScopeMenus("archive-badel"))
                         #if(m.id=="product-archive-badel")
                             #@mulOperation("muldelete" TINY_CONTEXT_PATH +adminPath+"/document/doc/batchDelete")
             					<a class="btn radius btn-danger btn-sm "><i class="icon-trash"></i> 批量删除</a>

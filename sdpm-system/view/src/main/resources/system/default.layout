@@ -1,7 +1,7 @@
 #@div()
 	#@tabWithInit("top_demo" "optionsBox")
 		#@tabHead()
-				#foreach(m in menuManager.getChildMenus("mysystem"))
+				#foreach(m in menuService.getChildMenus("mysystem"))
 					#@aHeadCol(TINY_CONTEXT_PATH+adminPath+m.href m.id==linkName?"Current":"")${m.name}#end
 				#end
 			#@aHeadCol(TINY_CONTEXT_PATH+adminPath+"/system/about")程序员秀场#end

@@ -6,14 +6,14 @@
 #@tinyTable("user-table-list") ##ID为空则系统自动生成 带入参数则取该参数为ID
     #@div(divBaseClass="tinyheaderTools form-inline")
         #setTinyTablePageSize([10,20,30,50,100,200])
-        #set(m1=menuManager.getMenu("org-user-batchdel"))
+        #set(m1=menuService.getMenu("org-user-batchdel"))
         #if(m1)
             #@mulOperation("muldelete" TINY_CONTEXT_PATH+adminPath+"/org/user/batchDelete")
             <a href="javascript:void(0);" class="btn radius btn-danger btn-sm "><i class="icon-trash"></i> 批量删除</a>
             #end
         #end
 
-        #set(m2=menuManager.getMenu("organizationAddUser"))
+        #set(m2=menuService.getMenu("organizationAddUser"))
         #if(m2)
             #@aExtendButton("btn radius btn-primary btn-sm" TINY_CONTEXT_PATH+adminPath+
                 "/org/user/form")#buttonIcon(iconClass=m2.icon)添加用户#end

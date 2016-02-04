@@ -3,12 +3,12 @@
     #foreach(l:pager.records)
         #@normalLiItemsconment(pager.limit*(pager.currentPage-1)+lFor.index "../faq/questionAnswer?id="+l.faqId l.faqQuestion liClass="")
         #*faqmenu问题后面的编辑和删除*#
-            #set(m1=menuManager.getMenu("faq-edit"))
+            #set(m1=menuService.getMenu("faq-edit"))
             #if(m1)
             <a href="${TINY_CONTEXT_PATH+adminPath}${m1.href}?id=${l.faqId}">#buttonIcon(iconClass=
                 "icon-pencil")编辑</a>
             #end
-            #set(m2=menuManager.getMenu("faq-del"))
+            #set(m2=menuService.getMenu("faq-del"))
             #if(m2)
                 #@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m2.href l.faqId "../faq/list"{"class":m2.icon})删除#end
             #end

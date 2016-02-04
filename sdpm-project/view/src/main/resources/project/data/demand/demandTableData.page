@@ -16,7 +16,7 @@
         #@td()${getDict("storyStage", s.storyStage)}#end
         #@td()${s.taskNumber}#end
         #@td("nowrap")
-            #foreach(m:menuManager.getScopeMenus("demand-op"))
+            #foreach(m:menuService.getScopeMenus("demand-op"))
                 #if(m.id != "rm-demand")
                     <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?storyId=${s.storyId}&moduleId=${s.moduleId}"
                        title="${m.name}">#buttonIcon(iconClass=m.icon)</a>

@@ -9,7 +9,7 @@
             <p class="titleName">公司信息</p>
             #@gridSysRow()
                 <span style="float: right">
-                #set(m=menuManager.getMenu("org-company-edit"))
+                #set(m=menuService.getMenu("org-company-edit"))
                     #if(m)
                         #@aModal("#myModal" m.name "600" "400" ""
                         adminPath+m.href)#buttonIcon(iconClass="icon-edit")<b>编辑</b>#end

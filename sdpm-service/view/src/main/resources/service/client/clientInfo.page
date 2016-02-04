@@ -49,7 +49,7 @@
                 #end
             #end
             <div style="text-align:right;margin:right">
-                #foreach(m:menuManager.getScopeMenus("service-cil"))
+                #foreach(m:menuService.getScopeMenus("service-cil"))
                     #if(m.id != "client-del")
                         #@aExtendButton("btn-primary btn-sm" TINY_CONTEXT_PATH+adminPath+m.href+"?id="+client.clientId)
                             编辑#end
@@ -79,19 +79,19 @@
                         <td>${var?.userPost}</td>
                         <td>${var?.userPhone}</td>
                         <td>
-                            #set(m=menuManager.getMenu("linkman-edit"))
+                            #set(m=menuService.getMenu("linkman-edit"))
                             #if(m)
                                 #@aModal("#myModal1" m.name "580" "300" m.icon adminPath+m.href+"?id="+var?.id)
                                 #end
                             #end
 
-                            #set(m1=menuManager.getMenu("linkman-new"))
+                            #set(m1=menuService.getMenu("linkman-new"))
                             #if(m1)
                                 #@aModal("#myModal1" m1.name "580" "300" m1.icon adminPath+m1.href+"?clientId="+var?.clientId)
                                 #end
                             #end
 
-                            #set(m2=menuManager.getMenu("linkman-del"))
+                            #set(m2=menuService.getMenu("linkman-del"))
                             #if(m2)
                                 #@tinyTableItemRemove(TINY_CONTEXT_PATH+adminPath+m2.href var?.id)<i
                                         class=${m2.icon}></i>#end

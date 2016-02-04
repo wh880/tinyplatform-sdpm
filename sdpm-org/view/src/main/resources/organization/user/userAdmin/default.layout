@@ -26,11 +26,11 @@
 
                             #end
                             #@navSelect2Fix()
-                                #set(m=menuManager.getMenu("organizationAddUser"))
+                                #set(m=menuService.getMenu("organizationAddUser"))
                                 #if(m)
                                 <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
                                 #end
-                                #set(m=menuManager.getMenu("organizationUser"))
+                                #set(m=menuService.getMenu("organizationUser"))
                                 #if(m)
                                 <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
                                 #end
@@ -51,7 +51,7 @@
                 #end
             <span style="float: left;">
                     &nbsp;&gt;
-                #foreach(m:menuManager.getScopeMenus("org-user-detail"))
+                #foreach(m:menuService.getScopeMenus("org-user-detail"))
                         <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?choose=3&status=${m.id}&id=${id}"
                            class="${status==m.id?'active_btn':''}">${m.name}</a>
                 #end

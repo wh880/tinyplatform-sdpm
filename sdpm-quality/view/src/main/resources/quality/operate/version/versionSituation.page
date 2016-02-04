@@ -9,7 +9,7 @@
 			</span>
         <span class="r">
 				<div style="text-align:center;margin:auto">
-					#foreach(m:menuManager.getScopeMenus("testverinfo-tab"))
+					#foreach(m:menuService.getScopeMenus("testverinfo-tab"))
 						#if(m.id=="tverclose")
 							#@aModal("#closeModal" m.name "800" "600" "" adminPath+m.href+"?testversionId="+testTask?.testversionId "ml-5")
 								#buttonIcon(iconClass=m.icon)${m.name}#end&nbsp;&nbsp;
@@ -78,7 +78,7 @@
 		#history(adminPath+"/system/action/ajax/history?actionObjectType=testtask&actionObjectId="+testTask?.testversionId)
 		<div style="text-align:center;margin:auto">
 
-			#foreach(m:menuManager.getScopeMenus("testverinfo-tab"))
+			#foreach(m:menuService.getScopeMenus("testverinfo-tab"))
 
 				#if(m.id=="tverclose")
 					#@aModal("#closeModal" m.name "800" "600" "" adminPath+m.href+"?testversionId="+testTask?.testversionId "ml-5")

@@ -5,7 +5,7 @@
 					需求列表
             </span>
         <span class="r">
-            #foreach(m:menuManager.getScopeMenus("pro-demandmenu-op"))
+            #foreach(m:menuService.getScopeMenus("pro-demandmenu-op"))
                 <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}"
                    title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
             #end

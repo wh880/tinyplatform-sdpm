@@ -2,13 +2,13 @@
 #@tabBodyCol("ptop-5")
     #@div(divClass="operationbar")
     <span class="f">
-##            #foreach(m:menuManager.getScopeMenus("productLineView"))
+##            #foreach(m:menuService.getScopeMenus("productLineView"))
 ##                <a title="${m.name}" class="ml-5" href="${TINY_CONTEXT_PATH +adminPath}${m.href}">${m.name}</a>
 ##            #end
-    #foreach(m:menuManager.getScopeMenus("productLineView"))
+    #foreach(m:menuService.getScopeMenus("productLineView"))
         <a title="${m.name}"  href="${TINY_CONTEXT_PATH +adminPath}${m.href}" class="ml-5 ${status==mFor.index?"active_btn":""}">${m.name}</a>
     #end
-##    #set(m=menuManager.getMenu("productLine-view-all"))
+##    #set(m=menuService.getMenu("productLine-view-all"))
 ##    #if(m)
 ##        <a val="all" href="${TINY_CONTEXT_PATH+adminPath}/productLine/to?status=1" class="${status=="1"?"active_btn":""}">全部</a>
 ##    #end
@@ -36,12 +36,12 @@
 ##
 ##            #end
 ##        #end &nbsp;
-        #set(m=menuManager.getMenu("newproduct"))
+        #set(m=menuService.getMenu("newproduct"))
         #if(m)
             #set(url=eval(m.href))
             <a title="${m.name}" class="ml-5" href="${TINY_CONTEXT_PATH +adminPath}${url}">#buttonIcon(iconClass=m.icon)${m.name}</a>
         #end
-        #set(m=menuManager.getMenu("productLine-add"))
+        #set(m=menuService.getMenu("productLine-add"))
         #if(m)
             <a href="${TINY_CONTEXT_PATH +adminPath}${m.href} ">#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp;
         #end

@@ -16,7 +16,7 @@
     #@td("nowrap")${d?.docAddedBy==null?"":userUtils.getUserById(d?.docAddedBy)?.orgUserRealName}#end
     #@td("nowrap")${formatDate(d?.docAddedDate, "yyyy-MM-dd")}#end
     #@td("nowrap")
-        #foreach(m:menuManager.getScopeMenus("pro-document-op"))
+        #foreach(m:menuService.getScopeMenus("pro-document-op"))
             #if(m.id == "pro-document-delete")
                 #@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m.href d?.docId)#buttonIcon(iconClass=m.icon)#end
             #else

@@ -9,7 +9,7 @@
         #@td("nowrap")${formatDate(var.clientCreateDate,"yyyy-MM-dd")}#*${var.clientCreateDate}*##end
         #@td("nowrap")${getDict("clientStatus",var?.clientStatus)}#end
         #@td("nowrap")
-            #foreach(m:menuManager.getScopeMenus("service-cil"))
+            #foreach(m:menuService.getScopeMenus("service-cil"))
                 #if(m.id != "client-del")
                 <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?id=${var.clientId}"
                    title="${m.name}">#buttonIcon(iconClass=m.icon)</a>

@@ -11,7 +11,7 @@
 	#@td()${d?.dictSort}#end
 	
 	#@td("f-14 user-manage")
-						#foreach(m in menuManager.getScopeMenus("dictitem-op"))
+						#foreach(m in menuService.getScopeMenus("dictitem-op"))
 							#if(m.id!="dictitem-del")
 								#iconOperations("icon-eye-open"==m.icon?viewpageModal:editpageModal
 								 m.icon m.name "500" "300"adminPath+m.href +"?dictId="+d?.dictId"ml-5")

@@ -32,11 +32,11 @@
                         #end
 
                         #@Tselect2Fix()
-                            #set(m=menuManager.getMenu("project-op-add"))
+                            #set(m=menuService.getMenu("project-op-add"))
                             #if(m)
                                 <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
                             #end
-                            #set(m=menuManager.getMenu("project-op-all"))
+                            #set(m=menuService.getMenu("project-op-all"))
                             #if(m)
                                 <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
                             #end
@@ -55,11 +55,11 @@
                             "input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         #end
                         #@Tselect2Fix()
-                            #set(m=menuManager.getMenu("newproduct"))
+                            #set(m=menuService.getMenu("newproduct"))
                             #if(m)
                                 <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
                             #end
-                            #set(m=menuManager.getMenu("allproduct"))
+                            #set(m=menuService.getMenu("allproduct"))
                             #if(m)
                                 <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
                             #end

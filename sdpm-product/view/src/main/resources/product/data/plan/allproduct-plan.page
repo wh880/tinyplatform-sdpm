@@ -14,7 +14,7 @@
         #@td("nowrap")${plan?.planBeginDate?formatDate(plan?.planBeginDate,'yyyy-MM-dd'):""}#end
         #@td("nowrap")${plan?.planEndDate?formatDate(plan?.planEndDate,'yyyy-MM-dd'):""}#end
         #@td("nowrap")
-            #foreach(m:menuManager.getScopeMenus("product-pl"))
+            #foreach(m:menuService.getScopeMenus("product-pl"))
             ##		  #set(url=eval(m.href))
                 #if(m.id!="product-plan-remove")
 

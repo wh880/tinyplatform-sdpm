@@ -8,7 +8,7 @@
 	#@td("nowrap")${userUtils.getUserById(l?.docAddedBy).orgUserRealName?:""}#end
 	#@td("nowrap")${l?.docAddedDate?formatDate(l?.docAddedDate,'yyyy-MM-dd'):""}#end
 	 #@td("nowrap")
-	 	#foreach(m:menuManager.getScopeMenus("doc-op"))
+	 	#foreach(m:menuService.getScopeMenus("doc-op"))
 			#if(m.id != "docdelete")
 				<a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?docId=${l?.docId}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
 			#else

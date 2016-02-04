@@ -4,7 +4,7 @@
         #@p(pClass="title_sty")
         <span class="f"> ${doc?.docTitle}</span>
         <span class="r">
-           #foreach(m:menuManager.getScopeMenus("doc-op"))
+           #foreach(m:menuService.getScopeMenus("doc-op"))
                #if(m.id == "docdelete")
                    #@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m.href doc?.docId TINY_CONTEXT_PATH+adminPath+"/document")
                        #buttonIcon(iconClass=m.icon)
@@ -40,7 +40,7 @@
 ##            #foreach(f : file)
 ##                #set(path=f?.filePathname)
 ##                <a href="${path}">${f?.fileTitle}.${f?.fileExtension}</a>&nbsp&nbsp&nbsp&nbsp
-##                #foreach(m:menuManager.getScopeMenus("file-op"))
+##                #foreach(m:menuService.getScopeMenus("file-op"))
 ##                    #if(m.id == "doc-file-edit")
 ##                        #@aModal("#myModal" m.name "400" "120" "class-m" adminPath+m.href+"?fileId="+f?.fileId)
 ##                            #buttonIcon(iconClass=m.icon)#end&nbsp
@@ -58,7 +58,7 @@
     #end
     #history(adminPath+"/system/action/ajax/history?actionObjectType=doc&actionObjectId="+doc?.docId)
     <center>
-        #foreach(m:menuManager.getScopeMenus("doc-op"))
+        #foreach(m:menuService.getScopeMenus("doc-op"))
             #if(m.id == "docdelete")
                 #@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m.href doc?.docId TINY_CONTEXT_PATH+adminPath+"/document")
                     #buttonIcon(iconClass=m.icon)

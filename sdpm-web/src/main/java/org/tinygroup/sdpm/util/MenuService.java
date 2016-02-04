@@ -10,11 +10,11 @@ import org.tinygroup.sdpm.common.util.Collections3;
 import java.util.List;
 
 /**
- * 菜单管理器
+ * 菜单服务
  * Created by Hulk on 2015/11/11.
  */
 @Component
-public class MenuUtils {
+public class MenuService {
     @Autowired
     private MenuManager menuManager;
     @Autowired

@@ -20,7 +20,7 @@
                         #@td()${con?.configKey}#end
                         #@td()${con?.configValue}#end
                         #@td("f-14 user-manage")
-                            #foreach(m in menuManager.getScopeMenus("config-op"))
+                            #foreach(m in menuService.getScopeMenus("config-op"))
                                 #iconOperations(editpageModal m.icon m.name "460" "260" adminPath+m.href +"?moduleId="+mo?.moduleId "ml-5")
                             #end
                         #end

@@ -21,7 +21,7 @@
 	#@td()${product?.resolveSum?:0}#end
 	#@td()${product?.assignSum?:0}#end
 	#@td()
-		#foreach(m:menuManager.getScopeMenus("allproduct-op"))
+		#foreach(m:menuService.getScopeMenus("allproduct-op"))
 		#set(url=eval(m?.href))
 			#if(m.map.type=="close")
 				#if(product?.productStatus==8)

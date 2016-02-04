@@ -60,14 +60,14 @@
     <div class="btn-group btnDropDown">
         <a id="dLabel" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"  class="${choose=="9"?"active_btn":""}">
             #if(menuId)
-                ${menuManager.getMenu(menuId).name}
+                ${menuService.getMenu(menuId).name}
             #else
                     分组查看
             #end
             <span class="caret"></span>
         </a>
         <ul class="dropdown-menu" aria-labelledby="dLabel">
-            #foreach(m:menuManager.getScopeMenus("task-group-menu"))
+            #foreach(m:menuService.getScopeMenus("task-group-menu"))
                 <li><a href="${TINY_CONTEXT_PATH+adminPath+m.href}&choose=9&menuId=${m.id}">${m.name}</a></li>
             #end
         </ul>
@@ -77,7 +77,7 @@
 <a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
 ##右侧按钮
 <span class="r">
-          #foreach(m:menuManager.getScopeMenus("pro-taskmenu2-op"))
+          #foreach(m:menuService.getScopeMenus("pro-taskmenu2-op"))
               #if(m?.id=="pro-task-proposeversion")
                   <a href="${TINY_CONTEXT_PATH+adminPath}${m.href+(moduleId?('?moduleId='+moduleId):'')}"
                      title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
@@ -86,7 +86,6 @@
                      title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
               #end
           #end
-
 </span>
 
         #include("/project/common/mulsearch.page")

@@ -15,11 +15,11 @@
                 #@TzTreeSelect(
                     "buildProduct" build?.buildProduct?:productId {"class":"input-text","datatype":"*","nullmsg":"产品不能为空！",
                     "data-URL":call("link",adminPath+"/productLine/userProductTree")})
-                    #set(m=menuManager.getMenu("newproduct"))
+                    #set(m=menuService.getMenu("newproduct"))
                     #if(m)
                         <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
                     #end
-                    #set(m=menuManager.getMenu("allproduct"))
+                    #set(m=menuService.getMenu("allproduct"))
                     #if(m)
                         <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
                     #end
@@ -43,11 +43,11 @@
             {"dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询构建者","nullmsg":"请选择构建者！","datatype":"*"})
             ##填写任意内容，侦听需重新填加 A侦听已内置
                 #@Tselect2Fix()
-                    #set(m=menuManager.getMenu("organizationAddUser"))
+                    #set(m=menuService.getMenu("organizationAddUser"))
                     #if(m)
                         <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
                     #end
-                    #set(m=menuManager.getMenu("organizationUser"))
+                    #set(m=menuService.getMenu("organizationUser"))
                     #if(m)
                         <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
                     #end

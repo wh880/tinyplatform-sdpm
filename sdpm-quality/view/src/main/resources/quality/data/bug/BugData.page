@@ -21,7 +21,7 @@
     #@td()${getDict("bugResolution",var?.bugResolution?:0)}#end
     #@td("nowrap")${formatDate(var?.bugResolvedDate,"yyyy-MM-dd")}#end
     #@td("nowrap")
-    	#foreach(m:menuManager.getScopeMenus("testbug-op"))
+    	#foreach(m:menuService.getScopeMenus("testbug-op"))
     	        #if(m.sort=="6")
     	            #if(var?.bugConfirmed==1)
                         <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>

@@ -43,7 +43,7 @@
                     <button type="submit" id="submit2" class="btn btn-success "><i class="icon-search"></i>&nbsp;搜问题
                     </button>
                     <span class="r">
-                    #set(m1=menuManager.getMenu("faq-add"))
+                    #set(m1=menuService.getMenu("faq-add"))
                         #if(m1)
                             <a href="${TINY_CONTEXT_PATH+adminPath}${m1.href}">#buttonIcon(iconClass=m1.icon)${m1.name}</a>
                         #end

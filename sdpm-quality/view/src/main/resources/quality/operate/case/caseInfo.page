@@ -17,7 +17,7 @@
 		##加一个转bug
             #@aModal("#myModal" "历史版本" "1000" "500" "btn-class ml-5" adminPath+"/quality/testCase/caseVersion?caseId="+id)
                 历史版本#end&nbsp;&nbsp;
-            #foreach(m:menuManager.getScopeMenus("testcaseinfo-tab"))
+            #foreach(m:menuService.getScopeMenus("testcaseinfo-tab"))
                 #if(m.id=="texecution"||m.id=="tresult")
                     #@aModal("#myModal" m.name "800" "400" "" adminPath+m.href+"?caseId="+testCase?.caseId+"&currentPageId=5"
                         "ml-5")
@@ -106,7 +106,7 @@
         </div>
         #history(adminPath+"/system/action/ajax/history?actionObjectType=case&actionObjectId="+testCase?.caseId)
         <center>
-            #foreach(m:menuManager.getScopeMenus("testcaseinfo-tab"))
+            #foreach(m:menuService.getScopeMenus("testcaseinfo-tab"))
                 #if(m.id=="texecution"||m.id=="tresult")
                     #@aModal("#myModal" m.name "800" "400" "" adminPath+m.href+"?caseId="+testCase?.caseId+"&currentPageId=5"
                         "ml-5")

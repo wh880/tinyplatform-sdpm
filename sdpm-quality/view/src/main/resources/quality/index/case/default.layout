@@ -31,7 +31,7 @@
       ##operationbar start1
           #@div(divClass="operationbar")
           <span class="f">
-              #foreach(m:menuManager.getScopeMenus("testcaseleft-tab"))
+              #foreach(m:menuService.getScopeMenus("testcaseleft-tab"))
                   #set(url=eval(m.href))
                   #if(m.id=="tcasesee")
                       #@buttonGroup()
@@ -77,7 +77,7 @@
               #end
           </span>
           <span class="r">
-				#foreach(m:menuManager.getScopeMenus("testcase-tab"))
+				#foreach(m:menuService.getScopeMenus("testcase-tab"))
                     #if(m.id!="add-case")
                         #@aModal("#myModal" m.name "550" "100" "" m.href "ml-5")
                             #buttonIcon(iconClass=m.icon)${m.name}#end

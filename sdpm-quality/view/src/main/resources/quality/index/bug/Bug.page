@@ -10,7 +10,7 @@
 	##operationbar star
 		#@div(divClass="operationbar")
         <span class="f">
-			#foreach(m:menuManager.getScopeMenus("testbugleft-tab"))
+			#foreach(m:menuService.getScopeMenus("testbugleft-tab"))
 				#if(m.id != "tsearch")
                     <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}&currentPageId=5" class="choose ${m.id==status?'active_btn':''}">${m.name}</a>
 				#else
@@ -19,7 +19,7 @@
 			#end
         </span>
         <span class="r">
-					#foreach(m:menuManager.getScopeMenus("testbug-tab"))
+					#foreach(m:menuService.getScopeMenus("testbug-tab"))
 						#if(m?.id=="bug-add")
 							#set(mId = "")
 							#if(tinyRequestQueryString&&tinyRequestQueryString.indexOf("moduleId")>0)
@@ -79,7 +79,7 @@
 							<a id="" role="button" data-toggle="dropdown" class="btn btn-primary" data-target="#" href="javascript:void(0);">编辑<span class="caret"></span></a>
 							<ul class="dropdown-menu multi-level" role="menu">
 								<li>
-									#foreach(m:menuManager.getScopeMenus("testbug-op"))
+									#foreach(m:menuService.getScopeMenus("testbug-op"))
 										#if(m.id=="tmakesure")
 											#@hasMenu("tmakesure")
 												<a tabindex="-1" href="javascript:void(0);">#@mulOperation("tmakesure" TINY_CONTEXT_PATH+adminPath+"/quality/bug/batch/sure")
@@ -90,7 +90,7 @@
 									#end
 								</li>
 								<li class="dropdown-submenu">
-									#foreach(m:menuManager.getScopeMenus("testbug-op"))
+									#foreach(m:menuService.getScopeMenus("testbug-op"))
 										#if(m.id=="tsolution")
 											#@hasMenu("tsolution")
 												<a tabindex="-1" href="javascript:void(0);">解决</a>
@@ -108,7 +108,7 @@
 									#end
 								</li>
 								<li class="dropdown-submenu">
-								#foreach(m:menuManager.getScopeMenus("testbug-op"))
+								#foreach(m:menuService.getScopeMenus("testbug-op"))
 									#if(m.id=="tassign")
 										#@hasMenu("tassign")
 											<a tabindex="-1" href="javascript:void(0);">

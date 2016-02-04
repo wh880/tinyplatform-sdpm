@@ -15,7 +15,7 @@
     <span class="f">
 			Bug概况</span>
     <span class="r">
-        #foreach(m:menuManager.getScopeMenus("testbuginfo-tab"))
+        #foreach(m:menuService.getScopeMenus("testbuginfo-tab"))
             #if(m.id=="tmakesure")
                 #if(qualityBug?.bugConfirmed==1)
                     <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")${m.name}</span>&nbsp;&nbsp;
@@ -59,7 +59,7 @@
                 #end
             #end
         #end
-        #foreach(m:menuManager.getScopeMenus("testbuginfo-tab"))
+        #foreach(m:menuService.getScopeMenus("testbuginfo-tab"))
 
             #if(m.id=="tedition"||m.id=="tproposeBug"||m.id=="tbugback")
                 <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${qualityBug?.bugId}" title="${m.name}">
@@ -122,7 +122,7 @@
             </div>
             #history(adminPath+"/system/action/ajax/history?actionObjectType=bug&actionObjectId="+qualityBug?.bugId)
             <center>
-                #foreach(m:menuManager.getScopeMenus("testbuginfo-tab"))
+                #foreach(m:menuService.getScopeMenus("testbuginfo-tab"))
                     #if(m.id=="tmakesure")
                         #if(qualityBug?.bugConfirmed==1)
                             <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")${m.name}</span>&nbsp;&nbsp;
@@ -158,7 +158,7 @@
                            title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>&nbsp;&nbsp;
                     #end
                 #end
-                #foreach(m:menuManager.getScopeMenus("testbuginfo-tab"))
+                #foreach(m:menuService.getScopeMenus("testbuginfo-tab"))
 
                     #if(m.id=="tedition"||m.id=="tproposeBug"||m.id=="tbugback")
                         <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${qualityBug?.bugId}" title="${m.name}">

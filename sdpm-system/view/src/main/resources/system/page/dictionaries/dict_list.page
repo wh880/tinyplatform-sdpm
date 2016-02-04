@@ -29,7 +29,7 @@
 					#@td()${mo?.moduleName}#end
 					#@td()${mo?.moduleTitle}#end
 					#@td("f-14 user-manage")
-						#foreach(m in menuManager.getScopeMenus("dict-op"))
+						#foreach(m in menuService.getScopeMenus("dict-op"))
 							#if(m.id!="dict-del")
 								#iconOperations("icon-eye-open"==m.icon?viewpageModal:editpageModal m.icon m.name "460" "260" adminPath+m.href +"?moduleId="+mo?.moduleId "ml-5")
 							#else

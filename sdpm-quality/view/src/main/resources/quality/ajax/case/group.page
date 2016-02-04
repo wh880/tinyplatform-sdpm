@@ -43,7 +43,7 @@
                     #@td()${getDict("caseResult",run?.testRunLastRunResult)}#end
                     #@td()${getDict("caseStatus",run?.testRunStatus)}#end
                     #@td()
-                        #foreach(m:menuManager.getScopeMenus("version-case-op"))
+                        #foreach(m:menuService.getScopeMenus("version-case-op"))
                             #if(m.id=="tverremove")
                                 <a class="deleteRun" href="javascript:void(0)"
                                    title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
@@ -90,7 +90,7 @@
                     #@td()${getDict("caseResult",c?.caseLastRunResult)}#end
                     #@td()${getDict("caseStatus",c?.caseStatus)}#end
                     #@td()
-                        #foreach(m:menuManager.getScopeMenus("testcase-op"))
+                        #foreach(m:menuService.getScopeMenus("testcase-op"))
 
                             #if(m.id=="teditioncase"||m.id=="tproposecase")
                                 <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?caseId=${c?.caseId}"
@@ -102,7 +102,7 @@
 
                             #end
                         #end
-                        #set(m=menuManager.getMenu("tcaseinfodelete"))
+                        #set(m=menuService.getMenu("tcaseinfodelete"))
                         #if(m)
                             #@tinyTableItemRemove(TINY_CONTEXT_PATH +adminPath+m.href  c?.caseId)<i
                                     class="${m.icon}"></i>

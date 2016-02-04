@@ -22,7 +22,7 @@
             #end
         #end
     <div style="text-align:right;margin:right">
-        #foreach(m:menuManager.getScopeMenus("service-sla"))
+        #foreach(m:menuService.getScopeMenus("service-sla"))
             #if(m.id != "sla-del")
                 #@aExtendButton(
                     "btn-primary btn-sm" TINY_CONTEXT_PATH+adminPath+m.href+"?id="+sla?.slaId "" "")编辑#end

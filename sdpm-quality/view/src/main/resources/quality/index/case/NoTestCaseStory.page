@@ -49,7 +49,7 @@
                
 
 
-                    #foreach(m:menuManager.getScopeMenus("product-oper"))
+                    #foreach(m:menuService.getScopeMenus("product-oper"))
                         #if(m.id=="product-demand-operation")
                             #@buttonGroup()
 

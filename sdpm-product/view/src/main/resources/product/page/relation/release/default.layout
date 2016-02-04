@@ -2,7 +2,7 @@
 #@div(divClass="operationbar")
 <span class="r">
 
-    #foreach(m:menuManager.getScopeMenus("product-re"))
+    #foreach(m:menuService.getScopeMenus("product-re"))
     ##        #set(url=eval(m.href))
         #if(m.id!="product-release-remove")
             <a title="${m.name}" class="ml-5" href="${TINY_CONTEXT_PATH +adminPath}${m.href}${releaseId}"><i
@@ -37,7 +37,7 @@
                         #end
                     #end
                     <div class="r">
-                        #set(m=menuManager.getMenu("product-plan-bug"))
+                        #set(m=menuService.getMenu("product-plan-bug"))
                         #if(m)
                             #@aHeadCol(TINY_CONTEXT_PATH +adminPath+
                                 "/product/release/forword/reRelateBug?releaseId="+releaseId cname=="link-demand"?
@@ -91,7 +91,7 @@
                     #end
                 #end
                 <div class="r">
-                    #foreach(m:menuManager.getScopeMenus("table-export"))
+                    #foreach(m:menuService.getScopeMenus("table-export"))
                         #if(m.id=="release-table-export")
                             <a id="exportDoc" name="导出文档" href="${TINY_CONTEXT_PATH+adminPath}/product/release/exportDoc?releaseId=${releaseId}" target="_blank"><i class="icon-upload-alt"></i>&nbsp;导出文档</a>
                             <script>

@@ -1,13 +1,13 @@
 #@tabWithInit("tab_demo" "optionsBox")
     #@tabHead()
-        #foreach(m in menuManager.getChildMenus("organization"))
+        #foreach(m in menuService.getChildMenus("organization"))
             #if(m.scope != "org-menu")
                 #@aHeadCol(TINY_CONTEXT_PATH+adminPath+m.href m.id==name?"Current":"")${m.name}#end
             #end
         #end
 
     <div style="float: right">
-        #foreach(m:menuManager.getScopeMenus("org-menu"))
+        #foreach(m:menuService.getScopeMenus("org-menu"))
             <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">#buttonIcon(iconClass=m.icon)${m.name}</a>
         #end
     </div>

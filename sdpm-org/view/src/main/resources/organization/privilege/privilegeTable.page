@@ -7,7 +7,7 @@
     #@td()${var?.orgRoleRemarks}#end
     #@td()
 ##        #set(map={"org-privilege-user":[700,300],"org-privilege-copy":[700,300],"org-privilege-edit":[600,200]})
-        #foreach(m:menuManager.getScopeMenus("org-privilege"))
+        #foreach(m:menuService.getScopeMenus("org-privilege"))
             #if(m.id == "org-privilege-maintain"||m.id=="org-privilege-user"||m.id=="org-privilege-edit")
             <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?roleId=${var?.orgRoleId}"
                title="${m.name}">#buttonIcon(iconClass=m.icon)</a>

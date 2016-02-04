@@ -10,7 +10,7 @@
 			</span>
         <span class="r">
 
-            #foreach(m:menuManager.getScopeMenus("allproduct-op"))
+            #foreach(m:menuService.getScopeMenus("allproduct-op"))
                 #set(url=eval(m?.href))
                 #if(m.map.type=="close")
                     #if(product?.productStatus==8)
@@ -50,7 +50,7 @@
 
     <div style="text-align:center;margin:auto">
 	        <span class="c">
-                #foreach(m:menuManager.getScopeMenus("allproduct-op"))
+                #foreach(m:menuService.getScopeMenus("allproduct-op"))
                     #set(url=eval(m?.href))
                     #if(m.map.type=="close")
                         #if(product?.productStatus==8)

@@ -52,10 +52,10 @@
                                 #@Tselect2F()
                                     #Tselect2Ajax("orgUserLeader" user?.orgUserLeader TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInCondition"
                                     {"id":"orgUserLeader","dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"搜索查询直接上级"})
-                                    #@Tselect2Fix()#set(m=menuManager.getMenu("organizationAddUser"))
+                                    #@Tselect2Fix()#set(m=menuService.getMenu("organizationAddUser"))
                                         #if(m)
                                             <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
-                                        #end#set(m=menuManager.getMenu("organizationUser"))
+                                        #end#set(m=menuService.getMenu("organizationUser"))
                                         #if(m)
                                             <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
                                         #end
@@ -74,11 +74,11 @@
                                         "placeholder":"查询角色","multiple":"multiple"})
                                 ##填写任意内容，侦听需重新填加 A侦听已内置
                                     #@Tselect2Fix()
-                                        #set(m=menuManager.getMenu("organizationAddGroup"))
+                                        #set(m=menuService.getMenu("organizationAddGroup"))
                                         #if(m)
                                             <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
                                         #end
-                                        #set(m=menuManager.getMenu("organizationPrivilege"))
+                                        #set(m=menuService.getMenu("organizationPrivilege"))
                                         #if(m)
                                             <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
                                         #end

@@ -13,7 +13,7 @@
         #@td("nowrap")<a href="${TINY_CONTEXT_PATH+adminPath}/service/sla/slaClient?id=${var.clientId}">详情</a>#end
         #@td("nowrap")
         #* sla.page页面的编辑和删除，跳转地址在base.menu.xml中。*#
-            #foreach(m:menuManager.getScopeMenus("service-sla"))
+            #foreach(m:menuService.getScopeMenus("service-sla"))
                 #if(m.id != "sla-del")
                     <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?id=${var.slaId}"
                        title="${m.name}">#buttonIcon(iconClass=m.icon)</a>

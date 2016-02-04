@@ -24,7 +24,7 @@
         #@td()${getDict("storyStage",s?.storyStage)}#end
 
         #@td()
-            #foreach(m:menuManager.getScopeMenus("version-linkdemand"))
+            #foreach(m:menuService.getScopeMenus("version-linkdemand"))
                 #if(m.id == "versionstory")
                     #@tinyTableItemRemove(TINY_CONTEXT_PATH+adminPath+m.href+"?storyId="+s.storyId+"&buildId="+id)<i
                             class="${m.icon}"

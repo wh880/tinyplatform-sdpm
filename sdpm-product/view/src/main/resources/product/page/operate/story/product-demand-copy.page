@@ -77,11 +77,11 @@
                         });
                     </script>
                     <span>
-                        #set(m=menuManager.getMenu("newproduct"))
+                        #set(m=menuService.getMenu("newproduct"))
                         #if(m)
                             <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
                         #end
-                        #set(m=menuManager.getMenu("allproduct"))
+                        #set(m=menuService.getMenu("allproduct"))
                         #if(m)
                             <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
                         #end
@@ -229,11 +229,11 @@
             </script>
 
             #@Tselect2Fix()
-                #set(m=menuManager.getMenu("organizationAddUser"))
+                #set(m=menuService.getMenu("organizationAddUser"))
                 #if(m)
                     <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
                 #end
-                #set(m=menuManager.getMenu("organizationUser"))
+                #set(m=menuService.getMenu("organizationUser"))
                 #if(m)
                     <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
                 #end
@@ -261,11 +261,11 @@
                 ajaxRead("${sid}", "storyMailto", "orgUserId", "orgUserRealName", "/org/user/userList");
             </script>
             #@Tselect2Fix()
-                #set(m=menuManager.getMenu("organizationAddUser"))
+                #set(m=menuService.getMenu("organizationAddUser"))
                 #if(m)
                     <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
                 #end
-                #set(m=menuManager.getMenu("organizationUser"))
+                #set(m=menuService.getMenu("organizationUser"))
                 #if(m)
                     <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
                 #end

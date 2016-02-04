@@ -13,7 +13,7 @@
 						#@td()<span class="${getDict('colorOfCaseResult',run?.testRunLastRunResult)}">${getDict("caseResult",run?.testRunLastRunResult)}</span>#end
 						#@td()<span class="${getDict('colorOfCaseStatus',run?.testRunStatus)}">${getDict("caseStatus",run?.testRunStatus)}</span>#end
 						 #@td()
-                         	#foreach(m:menuManager.getScopeMenus("version-case-op"))
+                         	#foreach(m:menuService.getScopeMenus("version-case-op"))
                          		#if(m.id=="tverremove")
             						<a class="deleteRun" href="javascript:void(0)" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
             					#elseif(m.id=="tvertobug")

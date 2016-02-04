@@ -10,7 +10,7 @@
         <span class="r">
                 ##判断状态 进行中 3个按钮，挂起只是修改起止时间 3个按钮，挂起 则可以激活和结束，结束 可以激活
                 ##                    ${project?.projectStatus}
-                    #foreach(m:menuManager.getScopeMenus("pro-surveymenu-op"))
+                    #foreach(m:menuService.getScopeMenus("pro-surveymenu-op"))
                         #if(project?.projectStatus=="1")
                             #if(m.id == "pro-survey-finish" || m.id == "pro-survey-hangUp" ||
                             m.id == "pro-survey-delay" || m.id == "pro-survey-doing")
@@ -51,14 +51,14 @@
                             });
                         });
                     </script>
-                    #set(m=menuManager.getMenu("pro-survey-edit"))
+                    #set(m=menuService.getMenu("pro-survey-edit"))
                     #if(m)
                         <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?projectId=${project?.projectId}"
                            title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
                     #end
                     <a href="javascript:void(0);" onClick="javascript :history.back(-1);" title="返回">#buttonIcon(iconClass=
                         "icon-reply")</a>
-                    #set(m4=menuManager.getMenu("pro-survey-remove"))
+                    #set(m4=menuService.getMenu("pro-survey-remove"))
                     #if(m4)
                         #@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m4.href project?.projectId TINY_CONTEXT_PATH+adminPath+
                             "/project/task/index")

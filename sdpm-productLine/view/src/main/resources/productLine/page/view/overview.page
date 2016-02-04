@@ -13,7 +13,7 @@
 					<a href="#" class="active_btn">产品线概况</a>
 			</span>
         <span class="r">
-            #foreach(m:menuManager.getScopeMenus("productLine-overview"))
+            #foreach(m:menuService.getScopeMenus("productLine-overview"))
                 #set(url=eval(m?.href))
                 #if(m.map.type=="delete")
                     <a id="lineDelete" title="${m?.name}" value="${productLineId}" class="ml-5" href="javascript:void(0);"><i

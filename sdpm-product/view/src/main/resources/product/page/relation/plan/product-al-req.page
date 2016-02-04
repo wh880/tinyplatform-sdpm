@@ -9,7 +9,7 @@
                onclick="selectAllNullorReserve('storyId','全选');"/>
         <input type="button" value="反选" class="btn btn-default btn-primary"
                onclick="selectAllNullorReserve('storyId','反选');"/>
-            #set(m=menuManager.getMenu("product-plan-badel"))
+            #set(m=menuService.getMenu("product-plan-badel"))
             #if(m)
                 #@mulOperation("muldelete" TINY_CONTEXT_PATH +adminPath+m.href)
                 <a class="btn radius btn-danger btn-sm "><i class="icon-trash"></i>&nbsp;批量删除</a>

@@ -6,13 +6,13 @@
     ##operationbar start1
         #@div(divClass="operationbar")
         <span class="f">
-            #foreach(m:menuManager.getScopeMenus("testverleft-tab"))
+            #foreach(m:menuService.getScopeMenus("testverleft-tab"))
                 <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}"
                    class="${m.id==status?'active_btn':''}">${m.name}</a>
             #end
         </span>
         <span class="r">
-            #foreach(m:menuManager.getScopeMenus("testversion-tab"))
+            #foreach(m:menuService.getScopeMenus("testversion-tab"))
                 #if(m.id=="tversionpro")
                     <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">
                         #buttonIcon(iconClass=m.icon)${m.name}</a>

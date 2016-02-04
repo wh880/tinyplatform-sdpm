@@ -36,7 +36,7 @@
             #end
 
             #@td("nowrap")
-            #foreach(m:menuManager.getScopeMenus("pro-task-op"))
+            #foreach(m:menuService.getScopeMenus("pro-task-op"))
             ##逻辑判断，根据状态判断是否可选择。
             ##1.关闭，则
                 #if(t.taskStatus == 1)

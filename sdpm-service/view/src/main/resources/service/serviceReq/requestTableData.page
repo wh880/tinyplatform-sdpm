@@ -12,20 +12,20 @@
         #@td("nowrap")${var.replier}#end
         #@td("nowrap")${var.requestReviewer}#end
         #@td("nowrap")
-            #foreach(m:menuManager.getScopeMenus("service-request"))
+            #foreach(m:menuService.getScopeMenus("service-request"))
                 #if(m)
                 <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?id=${var.clientRequestId}&treeId=${treeId}&status=${status}"
                    title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
                 #end
             #end
 
-            #set(m1=menuManager.getMenu("request-close"))
+            #set(m1=menuService.getMenu("request-close"))
             #if(m1)
                 #@aModal("#myModal" aModalTitle="关闭" "500" "200" m1.icon adminPath+m1.href+"?id="+var?.clientRequestId+"&treeId="+treeId+"&status="+status+"&operation="+operation titleName="关闭")
                 #end
             #end
 
-            #set(m2=menuManager.getMenu("request-delete"))
+            #set(m2=menuService.getMenu("request-delete"))
             #if(m2)
                 #@tinyTableItemRemove(TINY_CONTEXT_PATH+adminPath+m2.href var?.clientRequestId)<i
                         class="${m2.icon}" title="删除"></i>#end

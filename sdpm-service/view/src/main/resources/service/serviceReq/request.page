@@ -4,18 +4,18 @@
     #@tabBodyCol("ptop-5")
         #@div(divClass="operationbar")
         <span class="f">
-               #set(m=menuManager.getMenu("request-all"))
+               #set(m=menuService.getMenu("request-all"))
             #if(m)
                 <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">${m.name}</a>
             #end
-            #foreach(m:menuManager.getScopeMenus("service-request-list"))
+            #foreach(m:menuService.getScopeMenus("service-request-list"))
                 <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}&treeId=${treeId}">${m.name}</a>
             #end
             <a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
 				</span>
 
         <span class="r">
-                #set(m3=menuManager.getMenu("request-add"))
+                #set(m3=menuService.getMenu("request-add"))
             #if(m3)
                 <a href="${TINY_CONTEXT_PATH+adminPath}${m3.href}">#buttonIcon(iconClass="icon-plus")${m3.name}</a>
             #end

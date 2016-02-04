@@ -9,7 +9,7 @@
 					团队成员
 				</span>
             <span class="r">
-                #set(m=menuManager.getMenu("product-team-report"))
+                #set(m=menuService.getMenu("product-team-report"))
                 #if(m)
                     <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
                 #end

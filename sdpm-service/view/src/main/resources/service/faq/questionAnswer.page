@@ -20,7 +20,7 @@
     </div>
     <div style="text-align:right;margin:right">
     #*点击问题进去，里面的编辑和删除*#
-        #foreach(m:menuManager.getScopeMenus("service-faq"))
+        #foreach(m:menuService.getScopeMenus("service-faq"))
             #if(m.id!="faq-add")
                 #if(m.id != "faq-del")
                     #@aExtendButton(

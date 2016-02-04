@@ -26,7 +26,7 @@
     #end
     #@td("nowrap")${release?.releaseDate?formatDate(release?.releaseDate,'yyyy-MM-dd'):""}#end
     #@td("nowrap")
-			#foreach(m:menuManager.getScopeMenus("product-re"))
+			#foreach(m:menuService.getScopeMenus("product-re"))
             ##			#set(url=eval(m.href))
 			  #if(m.id!="product-release-remove")
               <a title="${m.name}" class="ml-5" href="${TINY_CONTEXT_PATH +adminPath}${m.href}${release.releaseId}"><i

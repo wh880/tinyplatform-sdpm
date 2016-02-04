@@ -7,7 +7,7 @@
                 {"dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"添加白名单用户","nullmsg":"请选择用户添加！",
                     "datatype":"*"})
                 #@Tselect2Fix()
-                    #set(m=menuManager.getMenu("organizationAddUser"))
+                    #set(m=menuService.getMenu("organizationAddUser"))
                     #if(m)
                     <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
                     #end

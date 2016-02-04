@@ -5,7 +5,7 @@
 					团队成员
             </span>
         <span class="r">
-            #foreach(m:menuManager.getScopeMenus("pro-teammenu-op"))
+            #foreach(m:menuService.getScopeMenus("pro-teammenu-op"))
                 <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
             #end
         </span>

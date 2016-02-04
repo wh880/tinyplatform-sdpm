@@ -24,7 +24,7 @@
     #@td("nowrap")${b?.bugResolvedBy?userUtils.getUserById(b?.bugResolvedBy)?.orgUserRealName:""}#end
     #@td()${getDict("bugResolution",b?.bugResolution?:0)}#end
     #@td("nowrap")
-        #foreach(m:menuManager.getScopeMenus("testbug-op"))
+        #foreach(m:menuService.getScopeMenus("testbug-op"))
             #if(m.sort=="7")
                 <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?bugId=${b?.bugId}"
                    title="${m.name}">#buttonIcon(iconClass=m.icon)</a>

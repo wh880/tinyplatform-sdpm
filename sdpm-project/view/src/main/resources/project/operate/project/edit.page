@@ -81,11 +81,11 @@
                 {"id":"linkProductSelect","dataId":"productId","dataText":"productName",
                     "placeholder":"关联产品","multiple":"multiple"})
                 #@Tselect2Fix()
-                    #set(m=menuManager.getMenu("newproduct"))
+                    #set(m=menuService.getMenu("newproduct"))
                     #if(m)
                     <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
                     #end
-                    #set(m=menuManager.getMenu("allproduct"))
+                    #set(m=menuService.getMenu("allproduct"))
                     #if(m)
                     <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
                     #end
@@ -111,11 +111,11 @@
                 #Tselect2Ajax("projectPo" project?.projectPo TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
                 {"dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询产品负责人","nullmsg":"请选择产品负责人！","datatype":"*"})
                 #@Tselect2Fix()
-                    #set(m=menuManager.getMenu("organizationAddUser"))
+                    #set(m=menuService.getMenu("organizationAddUser"))
                     #if(m)
                     <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
                     #end
-                    #set(m=menuManager.getMenu("organizationUser"))
+                    #set(m=menuService.getMenu("organizationUser"))
                     #if(m)
                     <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
                     #end
@@ -129,9 +129,9 @@
                 #Tselect2Ajax("projectPm" project?.projectPm TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
                 {"dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询产品负责人","nullmsg":"请选择产品负责人！","datatype":"*"})
                 #@Tselect2Fix()
-                    #set(m=menuManager.getMenu("organizationAddUser"))
+                    #set(m=menuService.getMenu("organizationAddUser"))
                     #if(m)                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>                    #end
-                    #set(m=menuManager.getMenu("organizationUser"))
+                    #set(m=menuService.getMenu("organizationUser"))
                     #if(m)
                     <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
                     #end
@@ -145,11 +145,11 @@
                 #Tselect2Ajax("projectQd" project?.projectQd TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
                 {"dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询产品负责人","nullmsg":"请选择产品负责人！","datatype":"*"})
                 #@Tselect2Fix()
-                    #set(m=menuManager.getMenu("organizationAddUser"))
+                    #set(m=menuService.getMenu("organizationAddUser"))
                     #if(m)
                     <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
                     #end
-                    #set(m=menuManager.getMenu("organizationUser"))
+                    #set(m=menuService.getMenu("organizationUser"))
                     #if(m)
                     <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
                     #end
@@ -163,11 +163,11 @@
                 #Tselect2Ajax("projectRd" project?.projectRd TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
                 {"dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询产品负责人","nullmsg":"请选择产品负责人！","datatype":"*"})
                 #@Tselect2Fix()
-                    #set(m=menuManager.getMenu("organizationAddUser"))
+                    #set(m=menuService.getMenu("organizationAddUser"))
                     #if(m)
                     <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
                     #end
-                    #set(m=menuManager.getMenu("organizationUser"))
+                    #set(m=menuService.getMenu("organizationUser"))
                     #if(m)
                     <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
                     #end

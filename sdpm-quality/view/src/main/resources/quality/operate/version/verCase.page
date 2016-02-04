@@ -10,7 +10,7 @@
         #@div(divClass="operationbar")
         <span class="f">
         	<a href="${TINY_CONTEXT_PATH+adminPath}/quality/version/versionInfo?testversionId=${testversionId}&currentPageId=5">${testTask?.testtaskTitle}</a>
-            #foreach(m:menuManager.getScopeMenus("version-case"))
+            #foreach(m:menuService.getScopeMenus("version-case"))
                 #if(m.id=="tversee")
                     #@buttonGroup()
                         #@buttonDropdown("more" buttonClass="btnDropDown")<span>分组查看</span>
@@ -55,11 +55,11 @@
             #end
 				</span>
         <span class="r">
-                #set(m=menuManager.getMenu("tveroutdata"))
+                #set(m=menuService.getMenu("tveroutdata"))
             #if(m)
                 <a href="${TINY_CONTEXT_PATH+adminPath}${eval(m.href)}">#buttonIcon(iconClass=m.icon)${m.name}</a>
             #end
-            #set(m=menuManager.getMenu("tverrelcase"))
+            #set(m=menuService.getMenu("tverrelcase"))
             #if(m)
                 <a href="${TINY_CONTEXT_PATH+adminPath}${eval(m.href)}">#buttonIcon(iconClass=m.icon)${m.name}</a>
             #end

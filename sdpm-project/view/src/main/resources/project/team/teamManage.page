@@ -47,11 +47,11 @@
                         #end
                     #end
                     #@Tselect2Fix()
-                        #set(m=menuManager.getMenu("organizationAddGroup"))
+                        #set(m=menuService.getMenu("organizationAddGroup"))
                         #if(m)
                             <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
                         #end
-                        #set(m=menuManager.getMenu("organizationPrivilege"))
+                        #set(m=menuService.getMenu("organizationPrivilege"))
                         #if(m)
                             <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
                         #end

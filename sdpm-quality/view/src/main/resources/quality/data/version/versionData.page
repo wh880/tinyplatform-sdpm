@@ -12,10 +12,10 @@
         #@td("nowrap")${v?.testtaskEnd?formatDate(v?.testtaskEnd,"yyyy-MM-dd"):""}#end
         #@td("nowrap")<span class="${getDict('colorOfVersionStatus',v?.testtaskStatus)}">${getDict("versionStatus",v?.testtaskStatus)}</span>#end
         #@td("nowrap")
-            #foreach(m:menuManager.getScopeMenus("testversion-op"))
+            #foreach(m:menuService.getScopeMenus("testversion-op"))
             <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?testversionId=${v?.testversionId}&currentPageId=5" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
             #end
-            #set(m=menuManager.getMenu("tversiondelete"))
+            #set(m=menuService.getMenu("tversiondelete"))
             #if(m)
             <a class="versionDelete" href="javascript:void(0)"><i class="${m.icon}" title="删除"></i></a>
             <script type="text/javascript">

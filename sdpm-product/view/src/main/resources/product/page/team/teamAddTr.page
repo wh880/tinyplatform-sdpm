@@ -8,11 +8,11 @@
             #Tselect2Ajax("teamList["+a+"].teamUserId" user TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
             {"id":"","dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询用户","nullmsg":"请选择用户！","datatype":"*"})
             #@Tselect2Fix()
-                #set(m=menuManager.getMenu("organizationAddUser"))
+                #set(m=menuService.getMenu("organizationAddUser"))
                 #if(m)
                     <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
                 #end
-                #set(m=menuManager.getMenu("organizationUser"))
+                #set(m=menuService.getMenu("organizationUser"))
                 #if(m)
                     <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
                 #end
@@ -29,11 +29,11 @@
                 #end
             #end
             #@Tselect2Fix()
-                #set(m=menuManager.getMenu("organizationAddUser"))
+                #set(m=menuService.getMenu("organizationAddUser"))
                 #if(m)
                     <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
                 #end
-                #set(m=menuManager.getMenu("organizationUser"))
+                #set(m=menuService.getMenu("organizationUser"))
                 #if(m)
                     <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
                 #end
@@ -68,11 +68,11 @@
             #Tselect2Ajax("teamList["+a+"].teamUserId" user?.teamUserId TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
             {"id":"","dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询用户","nullmsg":"请选择用户！","datatype":"*"})
             #@Tselect2Fix()
-                #set(m=menuManager.getMenu("organizationAddUser"))
+                #set(m=menuService.getMenu("organizationAddUser"))
                 #if(m)
                     <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
                 #end
-                #set(m=menuManager.getMenu("organizationUser"))
+                #set(m=menuService.getMenu("organizationUser"))
                 #if(m)
                     <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
                 #end
@@ -89,11 +89,11 @@
                 #end
             #end
             #@Tselect2Fix()
-                #set(m=menuManager.getMenu("organizationAddUser"))
+                #set(m=menuService.getMenu("organizationAddUser"))
                 #if(m)
                     <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
                 #end
-                #set(m=menuManager.getMenu("organizationUser"))
+                #set(m=menuService.getMenu("organizationUser"))
                 #if(m)
                     <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
                 #end
@@ -125,11 +125,11 @@
             #Tselect2Ajax("teamList["+a+"].teamUserId" "" TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
             {"id":"","dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询用户","nullmsg":"请选择用户！","datatype":"*"})
             #@Tselect2Fix()
-                #set(m=menuManager.getMenu("organizationAddUser"))
+                #set(m=menuService.getMenu("organizationAddUser"))
                 #if(m)
                     <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
                 #end
-                #set(m=menuManager.getMenu("organizationUser"))
+                #set(m=menuService.getMenu("organizationUser"))
                 #if(m)
                     <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
                 #end
@@ -146,11 +146,11 @@
                 #end
             #end
             #@Tselect2Fix()
-                #set(m=menuManager.getMenu("organizationAddUser"))
+                #set(m=menuService.getMenu("organizationAddUser"))
                 #if(m)
                     <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
                 #end
-                #set(m=menuManager.getMenu("organizationUser"))
+                #set(m=menuService.getMenu("organizationUser"))
                 #if(m)
                     <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
                 #end

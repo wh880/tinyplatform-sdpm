@@ -5,7 +5,7 @@
         <span class="f">ID:${task.taskNo}&nbsp${task.taskName}
             </span>
         <span class="r">
-            #foreach(m:menuManager.getScopeMenus("pro-task-op"))
+            #foreach(m:menuService.getScopeMenus("pro-task-op"))
             ##逻辑判断，根据状态判断是否可选择。
             ##1.关闭，则
                 #if(task.taskStatus == 1)
@@ -46,7 +46,7 @@
                 #else
                 #end
             #end
-            #foreach(m:menuManager.getScopeMenus("pro-taskInfo2-op"))
+            #foreach(m:menuService.getScopeMenus("pro-taskInfo2-op"))
                 #if(m.id=="pro-Info-delete")
                     <a class="taskDelete" href="javascript:void(0);" value="${TINY_CONTEXT_PATH+adminPath}${m.href}?taskId=${task.taskId}"
                        title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
@@ -57,7 +57,7 @@
             #end
 
             <a href="javascript:void(0);" onclick="javascript:history.back(-1);" title="返回">#buttonIcon(iconClass="icon-reply")</a>
-            #set(m1=menuManager.getMenu("pro-Info-close"))
+            #set(m1=menuService.getMenu("pro-Info-close"))
             </span>
             #div(divClass="clearfix")
         #end
@@ -87,13 +87,13 @@
     #end
     #history(adminPath+"/system/action/ajax/history?actionObjectType=task&actionObjectId="+task?.taskId)
     <center>
-        #foreach(m:menuManager.getScopeMenus("pro-task-op"))
+        #foreach(m:menuService.getScopeMenus("pro-task-op"))
             #if(m.id!="pro-task-close")
                 <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?taskId=${task.taskId}"
                    title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
             #end
         #end
-        #foreach(m:menuManager.getScopeMenus("pro-taskInfo2-op"))
+        #foreach(m:menuService.getScopeMenus("pro-taskInfo2-op"))
             #if(m.id=="pro-Info-delete")
                 <a class="taskDelete" href="javascript:void(0);" value="${TINY_CONTEXT_PATH+adminPath}${m.href}?taskId=${task.taskId}"
                    title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>

@@ -49,11 +49,11 @@
                     #Tselect2Ajax("taskAssignedTo" copyTask?.taskAssignedTo TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam?projectId="+currentProjectId
                     {"dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询指派人","nullmsg":"请选择指派人！"})
                     #@Tselect2Fix()
-                        #set(m=menuManager.getMenu("organizationAddUser"))
+                        #set(m=menuService.getMenu("organizationAddUser"))
                         #if(m)
                             <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
                         #end
-                        #set(m=menuManager.getMenu("organizationUser"))
+                        #set(m=menuService.getMenu("organizationUser"))
                         #if(m)
                             <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
                         #end
@@ -192,11 +192,11 @@
                         "placeholder":"查询抄送人","nullmsg":"请选择抄送人！","multiple":"multiple"})
                 ##填写任意内容，侦听需重新填加 A侦听已内置
                     #@Tselect2Fix()
-                        #set(m=menuManager.getMenu("organizationAddUser"))
+                        #set(m=menuService.getMenu("organizationAddUser"))
                         #if(m)
                             <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
                         #end
-                        #set(m=menuManager.getMenu("organizationUser"))
+                        #set(m=menuService.getMenu("organizationUser"))
                         #if(m)
                             <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
                         #end

@@ -9,7 +9,7 @@
 #end
 #@layout(right)
 <span style="float: right">
-    #set(m=menuManager.getMenu("org-user-editprofile"))
+    #set(m=menuService.getMenu("org-user-editprofile"))
     #if(m)
         <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?id=${id}"
            title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>

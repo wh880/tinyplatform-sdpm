@@ -6,7 +6,7 @@
 					<a href="#" class="active_btn">${client.clientName}</a>
             </span>
         <span class="r">
-                #set(m1=menuManager.getMenu("sla-add"))
+                #set(m1=menuService.getMenu("sla-add"))
             #if(m1)
                 <a href="${TINY_CONTEXT_PATH+adminPath}${m1.href}">#buttonIcon(iconClass=m1.icon)${m1.name}</a>
             #end
@@ -58,7 +58,7 @@
                         #end
                     </div>
                     <div style="text-align:right;margin:right">
-                        #foreach(m:menuManager.getScopeMenus("service-sla"))
+                        #foreach(m:menuService.getScopeMenus("service-sla"))
                             #if(m.id != "sla-del")
                                 #@aExtendButton(
                                     "btn-primary btn-sm" TINY_CONTEXT_PATH+adminPath+m.href+"?id="+var.slaId "" "")

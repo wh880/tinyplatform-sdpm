@@ -27,11 +27,11 @@
                         });
                     </script>
                     <span>
-                        #set(m=menuManager.getMenu("newproduct"))
+                        #set(m=menuService.getMenu("newproduct"))
                         #if(m)
                             <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
                         #end
-                        #set(m=menuManager.getMenu("allproduct"))
+                        #set(m=menuService.getMenu("allproduct"))
                         #if(m)
                             <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
                         #end
@@ -77,11 +77,11 @@
 
                                     #end
                                     #@Tselect2Fix()
-                                        #set(m=menuManager.getMenu("product-plan-add"))
+                                        #set(m=menuService.getMenu("product-plan-add"))
                                         #if(m)
                                         <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
                                         #end
-                                        #set(m=menuManager.getMenu("product-plan"))
+                                        #set(m=menuService.getMenu("product-plan"))
                                         #if(m)
                                         <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
                                         #end
@@ -164,11 +164,11 @@
                 #Tselect2Ajax("bugAssignedTo" bug?.bugAssignedTo TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
                 {"id":"","dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询用户"})
                 #@Tselect2Fix()
-                    #set(m=menuManager.getMenu("organizationAddUser"))
+                    #set(m=menuService.getMenu("organizationAddUser"))
                     #if(m)
                     <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
                     #end
-                    #set(m=menuManager.getMenu("organizationUser"))
+                    #set(m=menuService.getMenu("organizationUser"))
                     #if(m)
                     <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
                     #end
@@ -223,11 +223,11 @@
             {"id":"storyMailtoSelect","dataId":"orgUserId","dataText":"orgUserRealName",
                 "placeholder":"查询抄送人","multiple":"multiple"})
             #@Tselect2Fix()
-                #set(m=menuManager.getMenu("organizationAddUser"))
+                #set(m=menuService.getMenu("organizationAddUser"))
                 #if(m)
                 <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
                 #end
-                #set(m=menuManager.getMenu("organizationUser"))
+                #set(m=menuService.getMenu("organizationUser"))
                 #if(m)
                 <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
                 #end
@@ -267,11 +267,11 @@
                         #end
 
                         #@Tselect2Fix()
-                            #set(m=menuManager.getMenu("project-op-add"))
+                            #set(m=menuService.getMenu("project-op-add"))
                             #if(m)
                             <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
                             #end
-                            #set(m=menuManager.getMenu("project-op-all"))
+                            #set(m=menuService.getMenu("project-op-all"))
                             #if(m)
                             <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
                             #end
@@ -290,11 +290,11 @@
 
                         #end
                         #@Tselect2Fix()
-                            #set(m=menuManager.getMenu("product-demand-add"))
+                            #set(m=menuService.getMenu("product-demand-add"))
                             #if(m)
                             <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
                             #end
-                            #set(m=menuManager.getMenu("product-demand"))
+                            #set(m=menuService.getMenu("product-demand"))
                             #if(m)
                             <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
                             #end
@@ -313,11 +313,11 @@
 
                         #end
                         #@Tselect2Fix()
-                            #set(m=menuManager.getMenu("pro-task-proposeversion"))
+                            #set(m=menuService.getMenu("pro-task-proposeversion"))
                             #if(m)
                             <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
                             #end
-                            #set(m=menuManager.getMenu("task"))
+                            #set(m=menuService.getMenu("task"))
                             #if(m)
                             <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
                             #end
@@ -340,11 +340,11 @@
                         #Tselect2Ajax("bugOpenedBy" bug?.bugOpenedBy TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
                         {"id":"","dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询用户"})
                         #@Tselect2Fix()
-                            #set(m=menuManager.getMenu("organizationAddUser"))
+                            #set(m=menuService.getMenu("organizationAddUser"))
                             #if(m)
                             <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
                             #end
-                            #set(m=menuManager.getMenu("organizationUser"))
+                            #set(m=menuService.getMenu("organizationUser"))
                             #if(m)
                             <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
                             #end
@@ -362,11 +362,11 @@
                             {"id":"bugOpenedBuild","dataId":"buildId","dataText":"buildName",
                                 "placeholder":"查询版本 ","multiple":"multiple","datatype":"*","nullmsg":"影响版本不能为空！"} {"productId":"","projectId":""})
                         #@Tselect2Fix()
-                            #set(m=menuManager.getMenu("pro-version-add"))
+                            #set(m=menuService.getMenu("pro-version-add"))
                             #if(m)
                             <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
                             #end
-                            #set(m=menuManager.getMenu("version"))
+                            #set(m=menuService.getMenu("version"))
                             #if(m)
                             <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
                             #end
@@ -385,11 +385,11 @@
                         {"id":"","dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询用户"})
 
                         #@Tselect2Fix()
-                            #set(m=menuManager.getMenu("organizationAddUser"))
+                            #set(m=menuService.getMenu("organizationAddUser"))
                             #if(m)
                             <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
                             #end
-                            #set(m=menuManager.getMenu("organizationUser"))
+                            #set(m=menuService.getMenu("organizationUser"))
                             #if(m)
                             <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
                             #end
@@ -415,11 +415,11 @@
                             {"id":"bugResolvedBuild","dataId":"buildId","dataText":"buildName",
                                 "placeholder":"查询版本 ","multiple":"multiple"} {"productId":"","projectId":""})
                         #@Tselect2Fix()
-                            #set(m=menuManager.getMenu("pro-version-add"))
+                            #set(m=menuService.getMenu("pro-version-add"))
                             #if(m)
                             <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
                             #end
-                            #set(m=menuManager.getMenu("version"))
+                            #set(m=menuService.getMenu("version"))
                             #if(m)
                             <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
                             #end
@@ -453,11 +453,11 @@
                     {"id":"","dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询用户"})
 
                     #@Tselect2Fix()
-                        #set(m=menuManager.getMenu("organizationAddUser"))
+                        #set(m=menuService.getMenu("organizationAddUser"))
                         #if(m)
                         <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
                         #end
-                        #set(m=menuManager.getMenu("organizationUser"))
+                        #set(m=menuService.getMenu("organizationUser"))
                         #if(m)
                         <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
                         #end
