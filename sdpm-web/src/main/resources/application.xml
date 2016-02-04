@@ -3,7 +3,7 @@
     <application-properties>
         <file path="/sdpm.properties"></file>
         <property name="BASE_PACKAGE" value="org.tinygroup"/>
-        <property name="DEBUG_MODE" value="true"/>
+        <property name="DEBUG_MODE" value="false"/>
         <property name="TINY_THEME" value="default"/>
         <property name="UPLOAD_ACTION_URL" value="/ajaxUploadImage"/>
         <!--缓存配置-->
@@ -365,10 +365,6 @@
         <tiny-filter id="basicTinyFilter" class="basicTinyFilter">
             <filter-mapping url-pattern=".*"></filter-mapping>
             <init-param name="maxCookieSize" value="5K"></init-param>
-        </tiny-filter>
-
-        <tiny-filter id="commonFilter" bean="commonFilter">
-            <filter-mapping url-pattern=".*"></filter-mapping>
         </tiny-filter>
 
         <tiny-filter id="setLocaleTinyFilter" class="setLocaleTinyFilter">
