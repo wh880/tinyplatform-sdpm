@@ -1,6 +1,6 @@
 #if(list!=null)
     #foreach(var:list)
-        #@diaryItem(var?.orgUserRealName var?.orgDiaryCreateDate var?.orgDiarySummary var?.orgUserAccount)
+        #@diaryItem(var?.orgUserRealName var?.diaryDateTime var?.orgDiarySummary var?.orgUserAccount)
             #foreach(var2:efforts)
                 #if(var2?.key==var?.orgDiaryId)
                     #foreach(var3:var2?.value)

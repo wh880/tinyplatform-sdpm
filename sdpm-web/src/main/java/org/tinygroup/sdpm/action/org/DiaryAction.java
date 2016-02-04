@@ -28,6 +28,7 @@ import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.service.inter.ActionService;
 import org.tinygroup.sdpm.util.UserUtils;
+import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.*;
@@ -467,20 +468,26 @@ public class DiaryAction extends BaseController {
             String userAccount = userUtils.getUserById(orgUserId).getOrgUserAccount();
             list = diaryService.findDiaryListByWhiteList(userAccount, year, week);
         }
-        model.addAttribute("list", list);
-        Map<Integer, List<OrgDiaryDetail>> map = new HashMap<Integer, List<OrgDiaryDetail>>();
-        for (OrgDiaryAndUserDO orgDiaryAndYUser : list) {
-            List<OrgDiaryDetail> efforts = null;
-            if (map.get(orgDiaryAndYUser.getOrgDiaryId()) == null) {
+        if (!CollectionUtil.isEmpty(list)) {
+            for (OrgDiaryAndUserDO orgDiaryAndUserDO : list) {
+                orgDiaryAndUserDO.setDiaryDateTime(DateUtils.formatDate(orgDiaryAndUserDO.getOrgDiaryCreateDate()));
+            }
+
+            Map<Integer, List<OrgDiaryDetail>> map = new HashMap<Integer, List<OrgDiaryDetail>>();
+            for (OrgDiaryAndUserDO orgDiaryAndYUser : list) {
+                List<OrgDiaryDetail> efforts = null;
+                if (map.get(orgDiaryAndYUser.getOrgDiaryId()) == null) {
+                    map.put(orgDiaryAndYUser.getOrgDiaryId(), efforts);
+                }
+                efforts = diaryService.findDetailListByDiaryId(orgDiaryAndYUser.getOrgDiaryId());
+                for (OrgDiaryDetail orgDiaryDetail : efforts) {
+                    orgDiaryDetail.setEffortWeek(DateUtils.getDateWeek(orgDiaryDetail.getOrgDetailDate()));
+                }
                 map.put(orgDiaryAndYUser.getOrgDiaryId(), efforts);
             }
-            efforts = diaryService.findDetailListByDiaryId(orgDiaryAndYUser.getOrgDiaryId());
-            for (OrgDiaryDetail orgDiaryDetail : efforts) {
-                orgDiaryDetail.setEffortWeek(DateUtils.getDateWeek(orgDiaryDetail.getOrgDetailDate()));
-            }
-            map.put(orgDiaryAndYUser.getOrgDiaryId(), efforts);
+            model.addAttribute("efforts", map);
         }
-        model.addAttribute("efforts", map);
+        model.addAttribute("list", list);
         return "organization/diary/diaryData.pagelet";
     }
 
@@ -495,16 +502,56 @@ public class DiaryAction extends BaseController {
     @RequestMapping("/showOne")
     public String showSelf(String userAccount, Model model, String orgUserId) {
         OrgUser user = null;
+        if (StringUtil.isBlank(orgUserId)&!StringUtil.isBlank(userAccount)) {
+            user = userService.findUserByAccount(userAccount);
+        } else if (StringUtil.isBlank(userAccount)&!StringUtil.isBlank(orgUserId)) {
+            user = userUtils.getUserById(orgUserId);
+        } else if (StringUtil.isBlank(orgUserId) & StringUtil.isBlank(userAccount)) {
+            user = userUtils.getUser();
+        }
+//        //List<OrgDiaryAndUserDO> list = diaryService.findListDiaryByUserId(user.getOrgUserId());
+//        Pager<OrgDiaryAndUserDO> pager = diaryService.findPagerDiaryByUserId(user.getOrgUserId(), 0, 10);
+//        Map<Integer, List<OrgDiaryDetail>> map = new HashMap<Integer, List<OrgDiaryDetail>>();
+//        for (OrgDiaryAndUserDO orgDiaryAndYUser : pager.getRecords()) {
+//            orgDiaryAndYUser.setDiaryDateTime(DateUtils.formatDate(orgDiaryAndYUser.getOrgDiaryCreateDate()));
+//            Integer diaryId = orgDiaryAndYUser.getOrgDiaryId();
+//            List<OrgDiaryDetail> orgDiaryDetails = null;
+//            if (map.get(diaryId) == null) {
+//                map.put(diaryId, orgDiaryDetails);
+//            }
+//            orgDiaryDetails = diaryService.findDetailListByDiaryId(diaryId);
+//            for (int i = 0; i < orgDiaryDetails.size(); i++) {
+//                OrgDiaryDetail orgDetail = orgDiaryDetails.get(i);
+//                orgDetail.setEffortWeek(DateUtils.getDateWeek(orgDetail.getOrgDetailDate()));
+//            }
+//            map.put(diaryId, orgDiaryDetails);
+//        }
+        String realName = user.getOrgUserRealName();
+        //  Collections.sort(pager.getRecords());
+        //model.addAttribute("list", list);
+        // model.addAttribute("pager", pager);
+        model.addAttribute("userAccount", realName);
+        //model.addAttribute("details", map);
+        model.addAttribute("user", user);
+        if (StringUtil.isBlank(orgUserId))
+            return "organization/diary/oneselfDiary";
+        return "organization/diary/diaryWhiteShowOne";
+    }
+
+    @RequiresPermissions("organizationDiary")
+    @RequestMapping("/list/oneself")
+    public String listOneself(String userAccount, String orgUserId, Model model, Integer start, Integer limit) {
+        OrgUser user;
         if (StringUtil.isBlank(orgUserId)) {
             user = userService.findUserByAccount(userAccount);
         } else {
             user = userUtils.getUserById(orgUserId);
         }
-        List<OrgDiaryAndUserDO> list = diaryService.findListDiaryByUserId(user.getOrgUserId());
-        Collections.sort(list);
-        model.addAttribute("list", list);
+        //List<OrgDiaryAndUserDO> list = diaryService.findListDiaryByUserId(user.getOrgUserId());
+        Pager<OrgDiaryAndUserDO> pager = diaryService.findPagerDiaryByUserId(user.getOrgUserId(), start, limit);
         Map<Integer, List<OrgDiaryDetail>> map = new HashMap<Integer, List<OrgDiaryDetail>>();
-        for (OrgDiaryAndUserDO orgDiaryAndYUser : list) {
+        for (OrgDiaryAndUserDO orgDiaryAndYUser : pager.getRecords()) {
+            orgDiaryAndYUser.setDiaryDateTime(DateUtils.formatDate(orgDiaryAndYUser.getOrgDiaryCreateDate()));
             Integer diaryId = orgDiaryAndYUser.getOrgDiaryId();
             List<OrgDiaryDetail> orgDiaryDetails = null;
             if (map.get(diaryId) == null) {
@@ -518,12 +565,14 @@ public class DiaryAction extends BaseController {
             map.put(diaryId, orgDiaryDetails);
         }
         String realName = user.getOrgUserRealName();
+        // Collections.sort(pager.getRecords());
+        //model.addAttribute("list", list);
+        model.addAttribute("pager", pager);
         model.addAttribute("userAccount", realName);
         model.addAttribute("details", map);
-        if (StringUtil.isBlank(orgUserId))
-            return "organization/diary/oneselfDiary";
-        return "organization/diary/diaryWhiteShowOne";
+        return "organization/diary/showPersonDiary.pagelet";
     }
+
 
     /*
         @RequiresPermissions("organizationDiary")

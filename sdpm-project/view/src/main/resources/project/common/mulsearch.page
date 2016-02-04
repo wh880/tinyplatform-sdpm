@@ -359,9 +359,12 @@
             $("#operator"+(index+1)).html($("#operatortemp").html());
             setValueBox(index,index+1);
             $(this).on("change",function(){
+                var oldV;
                 for(var i=0;i<itemlist.length;i++){
                     if(itemlist[i]["name"]==$(this).val()){
+                        oldV=$("#valueBox"+i).val();
                         setValueBox(i,$(this).attr("id").substr(-1));
+                        $("#valueBox"+i).val(oldV);
                         break;
                     }
                 }

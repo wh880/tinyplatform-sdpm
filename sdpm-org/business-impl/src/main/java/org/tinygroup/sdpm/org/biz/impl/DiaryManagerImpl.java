@@ -70,8 +70,8 @@ public class DiaryManagerImpl implements DiaryManager {
     }
 
     @Override
-    public Pager<OrgDiaryAndUserDO> findByUserId(String id,Integer start,Integer limit) {
-        return orgDiaryDao.findPagerByUserId(id,start,limit);
+    public Pager<OrgDiaryAndUserDO> findByUserId(String id, Integer start, Integer limit) {
+        return orgDiaryDao.findPagerByUserId(id, start, limit);
     }
 
     @Override
@@ -109,7 +109,7 @@ public class DiaryManagerImpl implements DiaryManager {
 
     @Override
     public List<OrgDiary> findSubordinateOneWeek(List<OrgUser> list, Integer year, Integer week) {
-        if (list==null||list.size()==0){
+        if (list == null || list.size() == 0) {
             return null;
         }
         List<String> list1 = new ArrayList<String>();
@@ -139,7 +139,7 @@ public class DiaryManagerImpl implements DiaryManager {
         for (OrgUser orgUser : list) {
             list1.add(orgUser.getOrgUserId());
         }
-        return orgDiaryDao.findPagerSubordinateOneWeek(list1,year,week,start,limit);
+        return orgDiaryDao.findPagerSubordinateOneWeek(list1, year, week, start, limit);
     }
 
     @Override
@@ -149,17 +149,29 @@ public class DiaryManagerImpl implements DiaryManager {
         for (OrgUser orgUser : list) {
             list1.add(orgUser.getOrgUserId());
         }
-        return orgDiaryDao.findPagerSubordinateOneWeek(list1,year,week,start,limit);
+        return orgDiaryDao.findPagerSubordinateOneWeek(list1, year, week, start, limit);
     }
 
     @Override
     public List<OrgDiaryAndUserDO> findListSubAndSelf(String userId, List<OrgUser> list, Integer year, Integer week) {
         List<String> list1 = new ArrayList<String>();
         list1.add(userId);
+        List<OrgDiaryAndUserDO> orgDiaryAndUserDOs = orgDiaryDao.findListSubordinateOneWeek(list1, year, week);
+
+        // Pager<OrgDiaryAndUserDO> orgDiaryAndUserDOs = orgDiaryDao.findPagerSubordinateOneWeek(list1, year, week, start, limit);
+        List<String> list2 = new ArrayList<String>();
         for (OrgUser orgUser : list) {
-            list1.add(orgUser.getOrgUserId());
+            list2.add(orgUser.getOrgUserId());
         }
-        return orgDiaryDao.findListSubordinateOneWeek(list1,year,week);
+        List<OrgDiaryAndUserDO> list3 = null;
+        if (!CollectionUtil.isEmpty(list2)) {
+            list3 = orgDiaryDao.findListSubordinateOneWeek(list2, year, week);
+            orgDiaryAndUserDOs.addAll(list3);
+        }
+        if (CollectionUtil.isEmpty(orgDiaryAndUserDOs)) {
+            return list3;
+        }
+        return orgDiaryAndUserDOs;
     }
 
     @Override
@@ -169,6 +181,11 @@ public class DiaryManagerImpl implements DiaryManager {
 
     @Override
     public List<OrgDiaryAndUserDO> findDiaryListByWhiteList(String userId, Integer year, Integer week) {
-        return orgDiaryDao.findListByWhiteList(userId,year,week);
+        return orgDiaryDao.findListByWhiteList(userId, year, week);
+    }
+
+    @Override
+    public Pager<OrgDiaryAndUserDO> findPagerDiaryByWhiteList(String userId, Integer year, Integer week, Integer start, Integer limit) {
+        return orgDiaryDao.findPagerByWhiteList(userId, year, week, start, limit);
     }
 }

@@ -45,24 +45,31 @@
     <center><h1>${userAccount} 的周报列表</h1></center>
     <div class="tweet_list diarylist">
         <ul class="diarylist-detail" id="diarylist-detail">
-            #if(list!=null)
-                #foreach(var:list)
-                    #@diaryItem2(var?.orgDiaryWeek var?.orgDiaryCreateDate var?.orgDiarySummary)
-                        #foreach(var2:details)
-                            #if(var2?.key==var?.orgDiaryId)
-                                #foreach(var3:var2?.value)
-                                    <div class="committed clearfix">
-                                        <span class="tocommittime">${var3?.effortWeek}：</span>
-                                        <ol class="logList-detailList">
-                                            <li><span>${var3?.orgDetailContent}</span></li>
-                                        </ol>
-                                    </div>
-                                #end
-                            #end
-                        #end
+            #@tinyTable("org-diary-list") ##ID为空则系统自动生成 带入参数则取该参数为ID
+                #@div(divBaseClass="tinyheaderTools form-inline")
+                    #@tinyTableContent(TINY_CONTEXT_PATH+adminPath+
+                        "/org/diary/list/oneself?userAccount="+user.orgUserAccount) ##取数据地址 总数据
                     #end
                 #end
             #end
+##            #if(list!=null)
+##                #foreach(var:list)
+##                    #@diaryItem2(var?.orgDiaryWeek var?.orgDiaryCreateDate var?.orgDiarySummary)
+##                        #foreach(var2:details)
+##                            #if(var2?.key==var?.orgDiaryId)
+##                                #foreach(var3:var2?.value)
+##                                    <div class="committed clearfix">
+##                                        <span class="tocommittime">${var3?.effortWeek}：</span>
+##                                        <ol class="logList-detailList">
+##                                            <li><span>${var3?.orgDetailContent}</span></li>
+##                                        </ol>
+##                                    </div>
+##                                #end
+##                            #end
+##                        #end
+##                    #end
+##                #end
+##            #end
 
         </ul>
     </div>
