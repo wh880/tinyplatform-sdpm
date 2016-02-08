@@ -65,7 +65,7 @@
     #end
 
     #@navZtreeBody({"style":"left:-18px;top:26px"})
-        #@TzTreeSelect("aaa" "" {"class":"input-text blueline search-ico-bg","data-URL":call("link",adminPath+"/productLine/userProductTree"),"id":"productSelect"})
+        #@TzTreeSelect("aaa" "" {"class":"input-text search-ico-bg","data-URL":call("link",adminPath+"/productLine/userProductTree"),"id":"productSelect"})
             #set(m=menuService.getMenu("newproduct"))
             #if(m)
             <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
