@@ -367,10 +367,6 @@
             <init-param name="maxCookieSize" value="5K"></init-param>
         </tiny-filter>
 
-        <tiny-filter id="commonFilter" bean="commonFilter">
-            <filter-mapping url-pattern=".*"></filter-mapping>
-        </tiny-filter>
-
         <tiny-filter id="setLocaleTinyFilter" class="setLocaleTinyFilter">
             <filter-mapping url-pattern=".*"></filter-mapping>
             <init-param name="defaultLocale" value="zh_CN"></init-param>
