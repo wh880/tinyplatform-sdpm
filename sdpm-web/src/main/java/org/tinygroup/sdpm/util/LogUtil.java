@@ -2,7 +2,7 @@ package org.tinygroup.sdpm.util;
 
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
-import org.tinygroup.sdpm.system.service.impl.LogServiceImpl;
+import org.tinygroup.sdpm.system.service.inter.LogService;
 import org.tinygroup.sdpm.system.service.inter.LogService;
 
 import java.util.Date;
@@ -12,7 +12,7 @@ import java.util.Date;
  */
 public class LogUtil {
 
-    public final static LogService logService = SpringContextHolder.getBean(LogServiceImpl.class);
+    public final static LogService logService = SpringContextHolder.getBean("logService");
 
     public static void log(LogOperateObject objectType, LogAction action, String objectId, String userId) {
         saveLog(objectType.getOperateObject(), action.getAction(), objectId, userId, null, null, null, null, null);

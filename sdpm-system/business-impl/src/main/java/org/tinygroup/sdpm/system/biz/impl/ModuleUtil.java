@@ -2,9 +2,9 @@ package org.tinygroup.sdpm.system.biz.impl;
 
 import org.tinygroup.beancontainer.BeanContainerFactory;
 import org.tinygroup.sdpm.system.biz.inter.ModuleManager;
-import org.tinygroup.sdpm.system.dao.impl.util.DefaultModuleUtils;
-import org.tinygroup.sdpm.system.dao.impl.util.ModuleCallBackFunction;
-import org.tinygroup.sdpm.system.dao.impl.util.ModuleListCallBackFunction;
+import org.tinygroup.sdpm.system.dao.utils.DefaultModuleUtils;
+import org.tinygroup.sdpm.system.dao.utils.ModuleCallBackFunction;
+import org.tinygroup.sdpm.system.dao.utils.ModuleListCallBackFunction;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 
 import java.util.List;

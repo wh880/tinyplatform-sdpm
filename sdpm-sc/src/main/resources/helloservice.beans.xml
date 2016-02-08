@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="fileResolver" class="org.tinygroup.fileresolver.impl.FileResolverImpl">
+        <property name="fileProcessorList">
+            <list>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="sc" scope="singleton" class="org.tinygroup.cepcoremutiremoteimpl.sc.ScOperator">
+        <property name="port" value="9191"></property>
+    </bean>
+
+</beans>

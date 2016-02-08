@@ -15,7 +15,7 @@
     <modules>
         <!--<module>app</module>-->
         <module>base-dao</module>
-        <!--<module>business-interface</module>-->
+        <module>base-as</module>
         <!--<module>business-impl</module>-->
         <module>common</module>
         <!--<module>dao-interface</module>-->

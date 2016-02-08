@@ -9,9 +9,17 @@
     </context:component-scan>
 
     <!-- 加载配置属性文件 -->
-    <context:property-placeholder ignore-unresolvable="true" location="classpath:sdpm.properties"/>
+    <context:property-placeholder ignore-unresolvable="true" location="classpath:web.properties"/>
 
-    <bean id="fileResolver" scope="singleton"       class="org.tinygroup.fileresolver.impl.FileResolverImpl">
+    <bean id="arNode" scope="singleton"
+          class="org.tinygroup.cepcoremutiremoteimpl.node.NodeOperator">
+        <!--<property name="localHost" value="192.168.48.111"></property>-->
+        <property name="localHost" value="127.0.0.1"></property>
+        <property name="localPort" value="9001"></property>
+        <property name="weight" value="20"></property>
+    </bean>
+
+    <bean id="fileResolver" scope="singleton" class="org.tinygroup.fileresolver.impl.FileResolverImpl">
         <property name="fileProcessorList">
             <list>
                 <ref bean="i18nFileProcessor"/>
@@ -25,8 +33,8 @@
                 <ref bean="annotationClassFileProcessor"/>
 
                 <!-- xmlservice -->
-                <ref bean="xmlServiceFileProcessor"/>
-                <ref bean="xmlSysServiceFileProcessor"/>
+                <!--<ref bean="xmlServiceFileProcessor"/>-->
+                <!--<ref bean="xmlSysServiceFileProcessor"/>-->
 
                 <ref bean="tinyMacroFileProcessor"/>
                 <ref bean="fullContextFileFinder"/>
@@ -72,47 +80,9 @@
         <property name="fileResolver" ref="fileResolver"/>
     </bean>
 
-    <bean id="dynamicDataSource" class="org.apache.commons.dbcp.BasicDataSource">
-        <property name="driverClassName" value="${jdbc.driver}"/>
-
-        <!-- 基本属性 url、user、password -->
-        <property name="url" value="${jdbc.url}"/>
-        <property name="username" value="${jdbc.username}"/>
-        <property name="password" value="${jdbc.password}"/>
-
-        <!-- 配置初始化大小、最小、最大 -->
-        <property name="initialSize" value="${jdbc.pool.init}" />
-        <property name="minIdle" value="${jdbc.pool.minIdle}" />
-        <property name="maxActive" value="${jdbc.pool.maxActive}" />
-
-        <!-- 配置获取连接等待超时的时间 -->
-        <property name="maxWait" value="60000" />
-
-        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
-        <property name="timeBetweenEvictionRunsMillis" value="60000" />
-
-        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
-        <property name="minEvictableIdleTimeMillis" value="300000" />
-
-        <property name="validationQuery" value="${jdbc.testSql}" />
-        <property name="testWhileIdle" value="true" />
-        <property name="testOnBorrow" value="false" />
-        <property name="testOnReturn" value="false" />
-
-    </bean>
-
-    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="dynamicDataSource"/>
-    </bean>
-
-    <bean id="dslSession" name="dslSession" class="org.tinygroup.jdbctemplatedslsession.SimpleDslSession">
-        <constructor-arg>
-            <ref bean="dynamicDataSource"/>
-        </constructor-arg>
-    </bean>
 
     <!-- 配置 JSR303 Bean Validator 定义 -->
     <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
 
-    <bean id="initDataApplicationProcessor" class="org.tinygroup.sdpm.processor.InitDataApplicationProcessor" />
+    <bean id="initDataApplicationProcessor" class="org.tinygroup.sdpm.processor.InitDataApplicationProcessor"/>
 </beans>

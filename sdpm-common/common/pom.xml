@@ -21,11 +21,6 @@
         </dependency>
         <dependency>
             <groupId>org.tinygroup</groupId>
-            <artifactId>org.tinygroup.dict</artifactId>
-            <version>${tiny_version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.tinygroup</groupId>
             <artifactId>org.tinygroup.fileresolver</artifactId>
             <version>${tiny_version}</version>
         </dependency>
