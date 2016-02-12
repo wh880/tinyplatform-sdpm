@@ -22,6 +22,7 @@
         <module>service-interface</module>
         <module>service-impl</module>
         <module>view</module>
+        <module>controller</module>
         <module>view-uicomponent</module>
     </modules>
 </project>

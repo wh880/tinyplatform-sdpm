@@ -1,0 +1,162 @@
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+         xmlns="http://maven.apache.org/POM/4.0.0">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.tinygroup</groupId>
+        <artifactId>sdpm-common</artifactId>
+        <version>0.0.3-SNAPSHOT</version>
+    </parent>
+    <artifactId>sdpm-common-base-controller</artifactId>
+    <properties>
+        <validator.version>5.1.1.Final</validator.version>
+        <shiro.version>1.2.4</shiro.version>
+        <ehcache.version>2.10.1</ehcache.version>
+        <jackson.version>2.2.3</jackson.version>
+    </properties>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>sdpm-system-service-interface</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>sdpm-quality-service-interface</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>sdpm-project-service-interface</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>sdpm-product-service-interface</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>sdpm-productLine-service-interface</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>sdpm-document-service-interface</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>sdpm-org-service-inter</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>sdpm-common-common</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>sdpm-common-view</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <!--引入SpringMVC-->
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>org.tinygroup.springmvc</artifactId>
+            <version>${tiny_version}</version>
+        </dependency>
+
+        <!-- bean validate -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>${validator.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>org.tinygroup.validate</artifactId>
+            <version>${tiny_version}</version>
+        </dependency>
+
+        <!--数据库安装-->
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>org.tinygroup.databasebuinstaller</artifactId>
+            <version>${tiny_version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>org.tinygroup.weblayer</artifactId>
+            <version>${tiny_version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.servlet</groupId>
+                    <artifactId>servlet-api</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
+            <scope>provided</scope>
+        </dependency>
+
+
+
+        <!--session存储-->
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>org.tinygroup.sessionstore</artifactId>
+            <version>${tiny_version}</version>
+        </dependency>
+
+        <!-- SECURITY begin -->
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-core</artifactId>
+            <version>${shiro.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-spring</artifactId>
+            <version>${shiro.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-web</artifactId>
+            <version>${shiro.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-ehcache</artifactId>
+            <version>${shiro.version}</version>
+        </dependency>
+        <!-- SECURITY end -->
+
+        <!-- CACHE begin -->
+        <dependency>
+            <groupId>net.sf.ehcache</groupId>
+            <artifactId>ehcache</artifactId>
+            <version>${ehcache.version}</version>
+        </dependency>
+        <!-- CACHE end -->
+
+        <!--数据字典-->
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>org.tinygroup.dict</artifactId>
+            <version>${tiny_version}</version>
+        </dependency>
+
+    </dependencies>
+</project>

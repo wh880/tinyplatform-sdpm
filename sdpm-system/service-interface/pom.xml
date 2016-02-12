@@ -1,25 +1,25 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
          xmlns="http://maven.apache.org/POM/4.0.0">
-<modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>org.tinygroup</groupId>
-    <artifactId>sdpm-system</artifactId>
-    <version>0.0.3-SNAPSHOT</version>
-  </parent>
-  <artifactId>sdpm-system-service-interface</artifactId>
-  <name>sdpm-system-service-interface</name>
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.tinygroup</groupId>
+        <artifactId>sdpm-system</artifactId>
+        <version>0.0.3-SNAPSHOT</version>
+    </parent>
+    <artifactId>sdpm-system-service-interface</artifactId>
+    <name>sdpm-system-service-interface</name>
 
-  <dependencies>
-  	 <dependency>
-			<groupId>org.tinygroup</groupId>
-			<artifactId>sdpm-system-business-interface</artifactId>
-			<version>${project.version}</version>
-	</dependency>
-	<dependency>
-			<groupId>org.tinygroup</groupId>
-			<artifactId>sdpm-project-business-interface</artifactId>
-			<version>${project.version}</version>
-	</dependency>
-  </dependencies>
+    <dependencies>
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>sdpm-system-business-interface</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>sdpm-project-business-interface</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
 </project>

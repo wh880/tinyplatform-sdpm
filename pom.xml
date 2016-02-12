@@ -12,6 +12,10 @@
         <tiny_version>2.0.34-SNAPSHOT</tiny_version>
         <tiny_ui_version>2.0.32-SNAPSHOT</tiny_ui_version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!--<validator.version>5.1.1.Final</validator.version>-->
+        <!--<shiro.version>1.2.4</shiro.version>-->
+        <!--<ehcache.version>2.10.1</ehcache.version>-->
+        <!--<jackson.version>2.2.3</jackson.version>-->
     </properties>
     <organization>
         <name>TinyGroup</name>
@@ -19,11 +23,11 @@
     </organization>
 
     <repositories>
-        <!--<repository>-->
-            <!--<id>oschina-repos</id>-->
-            <!--<name>Oschina Releases</name>-->
-            <!--<url>http://maven.oschina.net/content/groups/public</url>-->
-        <!--</repository>-->
+        <repository>
+            <id>central-repos</id>
+            <name>Central Repository</name>
+            <url>http://repo.maven.apache.org/maven2</url>
+        </repository>
 
         <repository>
             <id>java.net</id>
@@ -31,11 +35,12 @@
             <url>http://download.java.net/maven/2/</url>
         </repository>
 
-        <repository>
-            <id>central-repos</id>
-            <name>Central Repository</name>
-            <url>http://repo.maven.apache.org/maven2</url>
-        </repository>
+        <!--<repository>-->
+        <!--<id>oschina-repos</id>-->
+        <!--<name>Oschina Releases</name>-->
+        <!--<url>http://maven.oschina.net/content/groups/public</url>-->
+        <!--</repository>-->
+
     </repositories>
     <licenses>
         <license>
@@ -53,11 +58,6 @@
         <url>http://git.oschina.net/tinyframework/sdpm.git</url>
     </scm>
     <modules>
-        <module>sdpm-as1</module>
-        <module>sdpm-as2</module>
-        <module>sdpm-as3</module>
-        <module>sdpm-as4</module>
-        <module>sdpm-sc</module>
         <module>sdpm-service</module>
         <module>sdpm-common</module>
         <module>sdpm-document</module>
