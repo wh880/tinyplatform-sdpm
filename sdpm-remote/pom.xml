@@ -9,12 +9,18 @@
     <packaging>pom</packaging>
     <artifactId>sdpm-remote</artifactId>
 
+    <properties>
+        <tiny_version>2.0.34</tiny_version>
+        <tiny_ui_version>2.0.32</tiny_ui_version>
+    </properties>
+
     <modules>
         <module>sdpm-as1</module>
         <module>sdpm-as2</module>
         <module>sdpm-as3</module>
         <module>sdpm-as4</module>
-        <module>base-as</module>		
+        <module>base-as</module>
         <module>sdpm-sc</module>
+        <module>sdpm-ar</module>
     </modules>
 </project>

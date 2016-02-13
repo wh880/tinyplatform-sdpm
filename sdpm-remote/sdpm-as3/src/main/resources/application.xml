@@ -6,12 +6,6 @@
         <property name="aop_cache_region" value="aopCache"></property>
 
         <property name="BASE_PACKAGE" value="org.tinygroup"/>
-        <property name="DEBUG_MODE" value="false"/>
-        <property name="TINY_THEME" value="default"/>
-        <property name="wholeWidth" value="200pt"/>
-        <property name="labelWidth" value="80pt"/>
-        <property name="fieldWidth" value="120pt"/>
-        <property name="cardWidth" value="200pt"/>
         <!-- 如果没有指定语言或指定语言的内容找不到，则从默认语言查找 -->
         <property name="TINY_DEFAULT_LOCALE" value="zh_CN"/>
     </application-properties>
@@ -44,9 +38,8 @@
     <cep-configuration node-name="asNode">
         <operator name="asNode"></operator>
         <scs>
-            <!--<sc host="127.0.0.1" port="9191"></sc>-->
-
-            <sc host="192.168.48.111" port="9191"></sc>
+            <sc host="127.0.0.1" port="9191"></sc>
+            <!--<sc host="192.168.48.111" port="9191"></sc>-->
         </scs>
         <params>
             <param name="request-time-out" value="15000"/>

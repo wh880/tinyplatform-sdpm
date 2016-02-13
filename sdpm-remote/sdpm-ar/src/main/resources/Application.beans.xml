@@ -11,13 +11,12 @@
     <!-- 加载配置属性文件 -->
     <context:property-placeholder ignore-unresolvable="true" location="classpath:web.properties"/>
 
-    <!--<bean id="arNode" scope="singleton"-->
-          <!--class="org.tinygroup.cepcoremutiremoteimpl.node.NodeOperator">-->
-        <!--&lt;!&ndash;<property name="localHost" value="192.168.48.111"></property>&ndash;&gt;-->
-        <!--<property name="localHost" value="127.0.0.1"></property>-->
-        <!--<property name="localPort" value="9001"></property>-->
-        <!--<property name="weight" value="20"></property>-->
-    <!--</bean>-->
+    <bean id="arNode" class="org.tinygroup.cepcoremutiremoteimpl.node.NodeOperator">
+        <!--<property name="localHost" value="192.168.48.111"></property>-->
+        <property name="localHost" value="127.0.0.1"></property>
+        <property name="localPort" value="9001"></property>
+        <property name="weight" value="20"></property>
+    </bean>
 
     <bean id="fileResolver" scope="singleton" class="org.tinygroup.fileresolver.impl.FileResolverImpl">
         <property name="fileProcessorList">

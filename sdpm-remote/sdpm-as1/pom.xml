@@ -1,4 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.tinygroup</groupId>
@@ -10,7 +10,6 @@
         <groupId>org.tinygroup</groupId>
         <version>0.0.3-SNAPSHOT</version>
     </parent>
-
 
     <dependencies>
         <dependency>
@@ -30,64 +29,6 @@
             <artifactId>sdpm-productLine-service-impl</artifactId>
             <version>${project.version}</version>
         </dependency>
-
-        <dependency>
-            <groupId>org.tinygroup</groupId>
-            <artifactId>org.tinygroup.serviceprocessor</artifactId>
-            <version>${tiny_version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.tinygroup</groupId>
-            <artifactId>org.tinygroup.cepcoreimpl</artifactId>
-            <version>${tiny_version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.tinygroup</groupId>
-            <artifactId>org.tinygroup.cepcoremutiremoteimpl</artifactId>
-            <version>${tiny_version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.tinygroup</groupId>
-            <artifactId>org.tinygroup.tinyrunner</artifactId>
-            <version>${tiny_version}</version>
-            <type>jar</type>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.tinygroup</groupId>
-            <artifactId>org.tinygroup.service</artifactId>
-            <version>${tiny_version}</version>
-        </dependency>
-
-        <!--spring版本-->
-        <dependency>
-            <groupId>org.tinygroup</groupId>
-            <artifactId>org.tinygroup.springutil</artifactId>
-            <version>${tiny_version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.tinygroup</groupId>
-                    <artifactId>org.tinygroup.spring256</artifactId>
-                </exclusion>
-                <!--<exclusion>-->
-                <!--<groupId>org.tinygroup</groupId>-->
-                <!--<artifactId>org.tinygroup.spring305</artifactId>-->
-                <!--</exclusion>-->
-            </exclusions>
-        </dependency>
-
-        <dependency>
-            <groupId>org.tinygroup</groupId>
-            <artifactId>org.tinygroup.spring305</artifactId>
-            <version>${tiny_version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.tinygroup</groupId>
-            <artifactId>org.tinygroup.weblayer</artifactId>
-            <version>${tiny_version}</version>
-        </dependency>
-
     </dependencies>
     <build>
         <finalName>${project.name}</finalName>

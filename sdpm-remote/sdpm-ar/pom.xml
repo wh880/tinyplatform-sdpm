@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>sdpm-remote</artifactId>
+        <groupId>org.tinygroup</groupId>
+        <version>0.0.3-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>sdpm-ar</artifactId>
+    <packaging>war</packaging>
+
+    <dependencies>
+        <!--wrapper bean 配置-->
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>org.tinygroup.custombeandefine</artifactId>
+            <version>${tiny_version}</version>
+        </dependency>
+        <!--service wrapper -->
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>org.tinygroup.servicewrapper</artifactId>
+            <version>${tiny_version}</version>
+        </dependency>
+        <!--<dependency>-->
+        <!--<groupId>org.tinygroup</groupId>-->
+        <!--<artifactId>org.tinygroup.serviceprocessor</artifactId>-->
+        <!--<version>${tiny_version}</version>-->
+        <!--</dependency>-->
+
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>org.tinygroup.cepcoreimpl</artifactId>
+            <version>${tiny_version}</version>
+        </dependency>
+
+        <!--元数据定义-->
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>sdpm-metadata</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <!--org-->
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>sdpm-org-controller</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <!--service-->
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>sdpm-service-controller</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <!--service end-->
+
+        <!--system-->
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>sdpm-system-controller</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+
+        <!-- quality -->
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>sdpm-quality-controller</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <!-- quality end -->
+
+        <!--document start-->
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>sdpm-document-controller</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <!--document end-->
+
+        <!-- product -->
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>sdpm-product-controller</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <!-- product end -->
+
+        <!-- productLine -->
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>sdpm-productLine-controller</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <!-- productLine end -->
+
+        <!-- project -->
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>sdpm-project-controller</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <!-- statistic -->
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>sdpm-statistic-controller</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <!-- statistic end -->
+
+
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>org.tinygroup.cepcoremutiremoteimpl</artifactId>
+            <version>${tiny_version}</version>
+        </dependency>
+
+
+        <!--spring版本-->
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>org.tinygroup.springutil</artifactId>
+            <version>${tiny_version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.tinygroup</groupId>
+                    <artifactId>org.tinygroup.spring256</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>org.tinygroup.spring305</artifactId>
+            <version>${tiny_version}</version>
+        </dependency>
+
+
+    </dependencies>
+    <build>
+        <finalName>${project.name}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat6-maven-plugin</artifactId>
+                <version>2.0-beta-1</version>
+            </plugin>
+            <plugin>
+                <groupId>org.mortbay.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>8.1.16.v20140903</version>
+                <configuration>
+                    <jvmArgs>-XX:PermSize=256M -XX:MaxPermSize=1024M</jvmArgs>
+                    <webApp>
+                        <contextPath></contextPath>
+                    </webApp>
+                    <connectors>
+                        <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
+                            <port>8989</port>
+                            <maxIdleTime>60000</maxIdleTime>
+                        </connector>
+                    </connectors>
+                    <stopKey>foo</stopKey>
+                    <stopPort>9999</stopPort>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+
+</project>
