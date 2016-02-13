@@ -28,16 +28,24 @@
     </greetings>
 
     <application-processors>
+        <!--文件解析-->
         <application-processor bean="fileResolverProcessor"/>
-        <!--<application-processor bean="serviceApplicationProcessor"/>-->
+        <!--通用事件处理器，在远程服务调用中用于连接服务中心-->
+        <application-processor bean="cepCoreProcessor"/>
+        <!--  tiny体系下的监听处理器 -->
         <application-processor bean="tinyListenerProcessor"/>
         <!--<application-processor bean="fileMonitorProcessor"/>-->
+        <!-- 模板引擎相关的处理器 -->
         <application-processor bean="tinyTemplateConfigProcessor"/>
         <!--数据库安装-->
         <application-processor bean="databaseInstallerProcessor"/>
         <!-- 系统数据初始化 -->
         <!--<application-processor bean="initDataApplicationProcessor"/>-->
+
+
+        <!--用于业务逻辑的标准字段处理器-->
         <application-processor bean="stdProcessor"/>
+        <!--数据字典加载处理器-->
         <application-processor bean="dictLoadProcessor"/>
     </application-processors>
 
