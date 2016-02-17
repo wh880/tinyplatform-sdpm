@@ -16,8 +16,7 @@
             <artifactId>sdpm-common-base-dao</artifactId>
             <version>${project.version}</version>
         </dependency>
-        
-          
+
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>sdpm-productLine-dao-interface</artifactId>

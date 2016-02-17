@@ -3,7 +3,7 @@
     <application-properties>
         <file path="/sdpm.properties"></file>
         <property name="BASE_PACKAGE" value="org.tinygroup"/>
-        <property name="DEBUG_MODE" value="true"/>
+        <property name="DEBUG_MODE" value="false"/>
         <property name="TINY_THEME" value="default"/>
         <property name="UPLOAD_ACTION_URL" value="/ajaxUploadImage"/>
         <!--缓存配置-->
@@ -114,7 +114,7 @@
         <operator name="arNode"></operator>
         <scs>
             <!--<sc host="192.168.48.111" port="9191"></sc>-->
-            <sc host="127.0.0.1" port="9191"></sc>
+            <sc host="192.168.1.150" port="9191"></sc>
         </scs>
         <params>
             <param name="request-time-out" value="15000"/>
