@@ -221,6 +221,8 @@ public class OrgDiaryAndUserDO implements Serializable, Comparable {
      */
     private Date orgDiaryModifyDate;
 
+    private String diaryDateTime;
+
     public void setOrgDiaryId(Integer orgDiaryId) {
         this.orgDiaryId = orgDiaryId;
     }
@@ -525,8 +527,16 @@ public class OrgDiaryAndUserDO implements Serializable, Comparable {
         this.orgUserLeader = orgUserLeader;
     }
 
+    public String getDiaryDateTime() {
+        return diaryDateTime;
+    }
+
+    public void setDiaryDateTime(String diaryDateTime) {
+        this.diaryDateTime = diaryDateTime;
+    }
+
     @Override
     public int compareTo(Object o) {
-        return this.orgDiaryWeek.compareTo(((OrgDiaryAndUserDO) o).orgDiaryWeek);
+        return -this.orgDiaryWeek.compareTo(((OrgDiaryAndUserDO) o).orgDiaryWeek);
     }
 }

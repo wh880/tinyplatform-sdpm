@@ -5,24 +5,17 @@
     <parent>
     	<artifactId>sdpm</artifactId>
     	<groupId>org.tinygroup</groupId>
-    	<version>0.0.2</version>
+    	<version>0.0.3-SNAPSHOT</version>
   	</parent>
     <groupId>org.tinygroup</groupId>
     <artifactId>sdpm-common</artifactId>
-    <version>0.0.2</version>
+    <version>0.0.3-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>sdpm-common develop</name>
     <modules>
-        <!--<module>app</module>-->
+        <module>base-controller</module>
         <module>base-dao</module>
-        <!--<module>business-interface</module>-->
-        <!--<module>business-impl</module>-->
         <module>common</module>
-        <!--<module>dao-interface</module>-->
-        <!--<module>dao-impl</module>-->
-        <!--<module>service-interface</module>-->
-        <!--<module>service-impl</module>-->
-        <!--<module>service-wrapper</module>-->
         <module>view</module>
         <module>view-uicomponent</module>
     </modules>

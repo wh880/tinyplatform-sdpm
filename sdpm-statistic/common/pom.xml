@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.tinygroup</groupId>
         <artifactId>sdpm-statistic</artifactId>
-        <version>0.0.2</version>
+        <version>0.0.3-SNAPSHOT</version>
     </parent>
     <artifactId>sdpm-statistic-common</artifactId>
     <name>sdpm-statistic-common</name>

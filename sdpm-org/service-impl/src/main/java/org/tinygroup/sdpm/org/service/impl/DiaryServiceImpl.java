@@ -47,12 +47,12 @@ public class DiaryServiceImpl implements DiaryService {
             return diaryManager.findByKey(id);
         }
         */
-/*
+
     @Override
     public Pager<OrgDiaryAndUserDO> findPagerDiaryByUserId(String id,Integer start,Integer limit) {
         return diaryManager.findByUserId(id,start,limit);
     }
-*/
+
     @Override
     public List<OrgDiaryAndUserDO> findListDiaryByUserId(String id) {
         return diaryManager.findListByUserId(id);
@@ -133,6 +133,11 @@ public class DiaryServiceImpl implements DiaryService {
 
     @Override
     public List<OrgDiaryAndUserDO> findDiaryListByWhiteList(String userId, Integer year, Integer week) {
-        return diaryManager.findDiaryListByWhiteList(userId,year,week);
+        return diaryManager.findDiaryListByWhiteList(userId, year, week);
+    }
+
+    @Override
+    public Pager<OrgDiaryAndUserDO> findPagerDiaryByWhiteList(String userId, Integer year, Integer week, Integer start, Integer limit) {
+        return diaryManager.findPagerDiaryByWhiteList(userId, year, week, start, limit);
     }
 }

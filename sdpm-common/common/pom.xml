@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.tinygroup</groupId>
         <artifactId>sdpm-common</artifactId>
-        <version>0.0.2</version>
+        <version>0.0.3-SNAPSHOT</version>
     </parent>
     <artifactId>sdpm-common-common</artifactId>
     <name>sdpm-common-common</name>
@@ -17,11 +17,6 @@
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>org.tinygroup.xstream</artifactId>
-            <version>${tiny_version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.tinygroup</groupId>
-            <artifactId>org.tinygroup.dict</artifactId>
             <version>${tiny_version}</version>
         </dependency>
         <dependency>
@@ -51,16 +46,6 @@
             <artifactId>guava</artifactId>
             <version>18.0</version>
         </dependency>
-        <dependency>
-            <groupId>org.tinygroup</groupId>
-            <artifactId>org.tinygroup.jdbctemplatedslsession</artifactId>
-            <version>${tiny_version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.tinygroup</groupId>
-            <artifactId>org.tinygroup.tinysqldsl</artifactId>
-            <version>${tiny_version}</version>
-        </dependency>
 
         <dependency>
             <groupId>org.tinygroup</groupId>
@@ -85,7 +70,12 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
+        <!--缓存-->
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>org.tinygroup.ehcache</artifactId>
+            <version>${tiny_version}</version>
+        </dependency>
 
         <dependency>
             <groupId>org.tinygroup</groupId>

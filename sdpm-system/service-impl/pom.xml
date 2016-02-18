@@ -5,11 +5,12 @@
     <parent>
         <groupId>org.tinygroup</groupId>
         <artifactId>sdpm-system</artifactId>
-        <version>0.0.2</version>
+        <version>0.0.3-SNAPSHOT</version>
     </parent>
     <artifactId>sdpm-system-service-impl</artifactId>
     <name>sdpm-system-service-impl</name>
     <dependencies>
+
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>org.tinygroup.genservicewrap</artifactId>
@@ -35,6 +36,13 @@
             <artifactId>sdpm-quality-business-impl</artifactId>
             <version>${project.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>sdpm-project-business-impl</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>sdpm-org-business-impl</artifactId>

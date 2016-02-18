@@ -4,13 +4,13 @@
     <inceptionYear>2006</inceptionYear>
     <groupId>org.tinygroup</groupId>
     <artifactId>sdpm</artifactId>
-    <version>0.0.2</version>
+    <version>0.0.3-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>sdpm</name>
     <url>http://www.tinygroup.org</url>
     <properties>
-        <tiny_version>2.0.33</tiny_version>
-        <tiny_ui_version>2.0.32-SNAPSHOT</tiny_ui_version>
+        <tiny_version>2.0.34</tiny_version>
+        <tiny_ui_version>2.0.32</tiny_ui_version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <organization>
@@ -19,11 +19,11 @@
     </organization>
 
     <repositories>
-        <!--<repository>-->
-            <!--<id>oschina-repos</id>-->
-            <!--<name>Oschina Releases</name>-->
-            <!--<url>http://maven.oschina.net/content/groups/public</url>-->
-        <!--</repository>-->
+        <repository>
+            <id>central-repos</id>
+            <name>Central Repository</name>
+            <url>http://repo.maven.apache.org/maven2</url>
+        </repository>
 
         <repository>
             <id>java.net</id>
@@ -31,11 +31,12 @@
             <url>http://download.java.net/maven/2/</url>
         </repository>
 
-        <repository>
-            <id>central-repos</id>
-            <name>Central Repository</name>
-            <url>http://repo.maven.apache.org/maven2</url>
-        </repository>
+        <!--<repository>-->
+        <!--<id>oschina-repos</id>-->
+        <!--<name>Oschina Releases</name>-->
+        <!--<url>http://maven.oschina.net/content/groups/public</url>-->
+        <!--</repository>-->
+
     </repositories>
     <licenses>
         <license>

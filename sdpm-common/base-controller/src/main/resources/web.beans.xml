@@ -1,0 +1,58 @@
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--模板内置函数-->
+    <bean id="dictFunction" class="org.tinygroup.sdpm.functions.DictFunction"/>
+    <bean id="stdFunction" class="org.tinygroup.sdpm.functions.StdFunction"/>
+
+    <!--数据字典-->
+    <bean id="dictHandle" class="org.tinygroup.sdpm.dict.impl.DictHandleImpl" scope="singleton"></bean>
+    <bean id="dictFileProcessor" class="org.tinygroup.sdpm.dict.processor.DictFileProcessor"></bean>
+    <bean id="sdpmDictLoader" class="org.tinygroup.sdpm.dict.impl.SdpmDictLoader" scope="singleton">
+        <property name="dictHandle" ref="dictHandle"></property>
+        <!--数据字典文件启动开关。 true：从文件启动，false:从数据库启动-->
+        <property name="isInitFromFile" value="false"></property>
+    </bean>
+
+    <!-- 服务的约定类,定义服务接口包名模式,类名以Service结尾的类 -->
+    <bean id="conventionServiceIdentifier"
+          class="org.tinygroup.custombeandefine.identifier.impl.ConventionServiceIdentifier">
+        <property name="pkgPatterns" value="**.service.inter"/>
+    </bean>
+
+    <!-- 服务的约定类,定义服务接口包名模式,类名以Service结尾的类 -->
+    <bean id="conventionFactoryBeanDefinitionRegistryPostProcessor"
+          class="org.tinygroup.custombeandefine.convention.ConventionCustomBeanDefinitionRegistryPostProcessor">
+        <property name="beanDefineCreate" ref="proxyFactoryBeanDefineCreate"></property>
+        <property name="beanNameGenerator" ref="proxyFactoryBeanNameGenerator"></property>
+    </bean>
+
+    <!-- 设定代理生成的服务接口类的bean名称 -->
+    <bean id="proxyFactoryBeanNameGenerator"
+          class="org.tinygroup.custombeandefine.namegenerator.ProxyFactoryBeanNameGenerator"/>
+
+    <!-- 生成代理bean -->
+    <bean id="proxyFactoryBeanDefineCreate" class="org.tinygroup.custombeandefine.impl.ProxyFactoryBeanDefineCreate">
+        <property name="interceptorNames">
+            <list>
+                <value>aopCacheInterceptor</value>
+                <value>serviceWrapperInterceptor</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"/>
+
+    <!--文件上传重命名-->
+    <bean id="umRename" class="org.tinygroup.sdpm.common.web.FileUploadRename"/>
+    <!--文件上传tiny服务-->
+    <bean id="sdpmUploadService" class="org.tinygroup.weblayer.webcontext.parser.impl.UploadServiceImpl">
+        <property name="rename" ref="umRename"></property>
+    </bean>
+
+    <bean id="initDataApplicationProcessor" class="org.tinygroup.sdpm.processor.InitDataApplicationProcessor"/>
+
+    <!-- 配置 JSR303 Bean Validator 定义 -->
+    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
+
+</beans>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- 使用Annotation自动注册Bean，解决事物失效问题：在主容器中不扫描@Controller注解，在SpringMvc中只扫描@Controller注解。  -->
+    <context:component-scan base-package="org.tinygroup.sdpm">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+    <!-- 加载配置属性文件 -->
+    <context:property-placeholder ignore-unresolvable="true" location="classpath:web.properties"/>
+
+    <bean id="arNode" class="org.tinygroup.cepcoremutiremoteimpl.node.NodeOperator">
+        <!--<property name="localHost" value="192.168.48.111"></property>-->
+        <property name="localHost" value="192.168.1.122"></property>
+        <property name="localPort" value="9001"></property>
+        <property name="weight" value="20"></property>
+    </bean>
+
+    <bean id="fileResolver" scope="singleton" class="org.tinygroup.fileresolver.impl.FileResolverImpl">
+        <property name="fileProcessorList">
+            <list>
+                <ref bean="i18nFileProcessor"/>
+                <ref bean="xStreamFileProcessor"/>
+
+                <ref bean="tinyFilterFileProcessor"/>
+                <ref bean="tinyProcessorFileProcessor"/>
+
+                <!-- annotation -->
+                <ref bean="annotationFileProcessor"/>
+                <ref bean="annotationClassFileProcessor"/>
+
+                <!-- xmlservice -->
+                <ref bean="xmlServiceFileProcessor"/>
+                <ref bean="xmlSysServiceFileProcessor"/>
+
+                <ref bean="tinyMacroFileProcessor"/>
+                <ref bean="fullContextFileFinder"/>
+                <ref bean="uIComponentFileProcessor"/>
+                <!-- context2objects -->
+                <ref bean="generatorFileProcessor"/>
+
+                <!-- serviceMapping -->
+                <!--<ref bean="serviceMappingFileProcessor"/>-->
+
+                <!--菜单加载处理器-->
+                <ref bean="menuFileProcessor"/>
+
+                <!--TypeInfo处理器 -->
+                <ref bean="typeInfoProcessor"/>
+
+                <!--dictConfig文件加载处理器-->
+                <ref bean="dictLoadFileProcessor"/>
+
+                <!--dict文件加载处理器-->
+                <ref bean="dictFileProcessor"/>
+
+                <!--doc文件加载处理器-->
+                <ref bean="docTemplateFileProcessor"/>
+
+                <!-- database -->
+                <ref bean="constantFileResolver"/>
+                <ref bean="standardTypeFileResolver"/>
+                <ref bean="errorMessageFileResolver"/>
+                <ref bean="businessTypeFileResolver"/>
+                <ref bean="standardFieldFileResolver"/>
+                <ref bean="tableFileResolver"/>
+                <ref bean="initDataFileResolver"/>
+                <ref bean="processorFileResolver"/>
+                <ref bean="customSqlFileResolver"/>
+                <ref bean="viewFileResolver"/>
+                <ref bean="procedureFileResolver"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="fileResolverProcessor" class="org.tinygroup.fileresolver.applicationprocessor.FileResolverProcessor">
+        <property name="fileResolver" ref="fileResolver"/>
+    </bean>
+
+</beans>

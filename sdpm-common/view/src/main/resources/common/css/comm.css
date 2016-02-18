@@ -4,6 +4,14 @@
         width:440px!important;
         margin-right: calc(100% - 100vw);
     }
+    #main-navbar  .navbar-nav .user-name-info{
+        display: block;
+        width: 65px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        float: right;
+    }
 }
 .font-size-13{font-size:13px !important;}
 .font-size-12{font-size:12px !important;}

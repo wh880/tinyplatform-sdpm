@@ -36,7 +36,7 @@
         <!--数据库安装-->
         <application-processor bean="databaseInstallerProcessor"/>
         <!-- 系统数据初始化 -->
-        <application-processor bean="initDataApplicationProcessor"/>
+        <!--<application-processor bean="initDataApplicationProcessor"/>-->
         <application-processor bean="stdProcessor"/>
         <application-processor bean="dictLoadProcessor"/>
     </application-processors>
