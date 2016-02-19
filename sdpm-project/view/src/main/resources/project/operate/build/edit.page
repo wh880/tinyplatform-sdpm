@@ -71,7 +71,7 @@
         #@colLabel()源代码地址：#end
         #@formControlDiv("col-4")
             #tinyInput(
-                "text" "buildScmPath" build?.buildScmPath{"style":"width:80%","placeholder":"","datatype":"*4-50",
+                "text" "buildScmPath" build?.buildScmPath{"style":"width:80%","placeholder":"","datatype":"*4-200",
                 "nullmsg":"源代码地址不能为空！","id":"username","class":"input-text"})
         #end
     #end
@@ -80,7 +80,7 @@
         #@colLabel()下载地址：#end
         #@formControlDiv("col-4")
             #tinyInput(
-                "text" "buildFilePath" build?.buildFilePath{"style":"width:80%","placeholder":"","datatype":"*4-50",
+                "text" "buildFilePath" build?.buildFilePath{"style":"width:80%","placeholder":"","datatype":"*4-200",
                 "nullmsg":"下载地址不能为空！","id":"username","class":"input-text"})
         #end
     #end
