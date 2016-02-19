@@ -17,7 +17,7 @@
         </dependency>
         <dependency>
             <groupId>org.tinygroup</groupId>
-            <artifactId>sdpm-product-view</artifactId>
+            <artifactId>sdpm-productLine-view</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
