@@ -10,18 +10,10 @@
     <artifactId>sdpm-org-service-inter</artifactId>
     <name>sdpm-org-service-inter</name>
     <dependencies>
-    
-    
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>sdpm-org-dao-inter</artifactId>
             <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.tinygroup</groupId>
-            <artifactId>org.tinygroup.studio.documentgen.servicecomponent</artifactId>
-            <version>${tiny_version}</version>
-            <scope>provided</scope>
         </dependency>
     </dependencies>
 </project>
