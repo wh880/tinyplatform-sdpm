@@ -4,13 +4,15 @@
     #@td()<input type="checkbox" value="${var?.orgRoleId}" name="orgRoleId">#end
     #@td()${var?.orgRoleId}#end
     #@td()${var?.orgRoleName}#end
+    #@td()${dict(var?.orgRoleType)}#end
     #@td()${var?.orgRoleRemarks}#end
     #@td()
-##        #set(map={"org-privilege-user":[700,300],"org-privilege-copy":[700,300],"org-privilege-edit":[600,200]})
         #foreach(m:menuService.getScopeMenus("org-privilege"))
-            #if(m.id == "org-privilege-maintain"||m.id=="org-privilege-user"||m.id=="org-privilege-edit")
+            #if(m.id == "org-privilege-maintain"||m.id=="org-privilege-edit")
             <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?roleId=${var?.orgRoleId}"
                title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+            #elseif(m.id=="org-privilege-user"&& var.orgRoleType==0)
+                #iconOperations("#myModal" m.icon m.name m.map.width m.map.height adminPath+m.href+"?copyRoleId="+var?.orgRoleId "ml-5")
             #elseif(m.id=="org-privilege-copy")
                 #iconOperations("#myModal" m.icon m.name m.map.width m.map.height adminPath+m.href+"?copyRoleId="+var?.orgRoleId "ml-5")
             #else
