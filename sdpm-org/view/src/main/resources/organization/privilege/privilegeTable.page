@@ -4,7 +4,7 @@
     #@td()<input type="checkbox" value="${var?.orgRoleId}" name="orgRoleId">#end
     #@td()${var?.orgRoleId}#end
     #@td()${var?.orgRoleName}#end
-    #@td()${dict(var?.orgRoleType)}#end
+    #@td()${getDict("roleType",var?.orgRoleType)}#end
     #@td()${var?.orgRoleRemarks}#end
     #@td()
         #foreach(m:menuService.getScopeMenus("org-privilege"))
@@ -12,10 +12,11 @@
             <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?roleId=${var?.orgRoleId}"
                title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
             #elseif(m.id=="org-privilege-user"&& var.orgRoleType==0)
-                #iconOperations("#myModal" m.icon m.name m.map.width m.map.height adminPath+m.href+"?copyRoleId="+var?.orgRoleId "ml-5")
+            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?roleId=${var?.orgRoleId}"
+               title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
             #elseif(m.id=="org-privilege-copy")
                 #iconOperations("#myModal" m.icon m.name m.map.width m.map.height adminPath+m.href+"?copyRoleId="+var?.orgRoleId "ml-5")
-            #else
+            #elseif(m.id=="org-privilege-delete")
                 #@tinyTableItemRemove(TINY_CONTEXT_PATH+adminPath+m.href var.orgRoleId)<i class=${m.icon}></i>#end
             #end
         #end

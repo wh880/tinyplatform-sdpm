@@ -49,7 +49,7 @@
                             #@colLabel("col-3")<span class="c-red">*</span>真实姓名：#end
                             #@formControlDiv("col-5")
                                 #tinyInput(
-                                    "text" "orgUserRealName" user?.orgUserRealName {"datatype":"*2-4","nullmsg":
+                                    "text" "orgUserRealName" user?.orgUserRealName {"datatype":"*2-6","nullmsg":
                                     "用户真实姓名不能为空！","id":"org_user_real_name","class":
                                     "input-text"})
                             #end
