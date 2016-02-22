@@ -55,8 +55,17 @@ public class ProjectTaskCommonAction extends BaseController {
 
     @RequiresPermissions("gantt")
     @RequestMapping("/gantt")
-    public String gantt(Model model, String choose) {
+    public String gantt(Model model, String choose,
+                        HttpServletRequest request, HttpServletResponse response) {
         model.addAttribute("choose", choose);
+
+        Integer projectId = projectOperate.getCurrentProjectId(request, response);
+        if (projectId == null) {
+            return redirectProjectForm();
+        }
+        List<OrgUser> teamUserList = userService.findTeamUserListByProjectId(projectId);
+        model.addAttribute("teamUserList", teamUserList);
+
         return "project/operate/task/special/gantt.page";
     }
 
