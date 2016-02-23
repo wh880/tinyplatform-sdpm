@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.commons.tools.ArrayUtil;
+import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.service.inter.StoryService;
@@ -43,8 +44,8 @@ public class ProjectStoryAction extends BaseController {
     @RequestMapping("/list/data")
     public String listData(HttpServletRequest request, HttpServletResponse response,
                            Model model, Integer start, Integer limit,
-                           @RequestParam(required = false,defaultValue="storyId")String order,
-                           @RequestParam(required = false,defaultValue = "desc")String orderType, String moduleId) {
+                           @RequestParam(required = false, defaultValue = "storyId") String order,
+                           @RequestParam(required = false, defaultValue = "desc") String orderType, String moduleId) {
 
         Integer projectId = projectOperate.getCurrentProjectId(request, response);
         if (projectId == null) {
@@ -64,9 +65,9 @@ public class ProjectStoryAction extends BaseController {
             return resultMap(false, "删除失败");
         }        //根据id进行软删
         ProductStory story = storyService.findStory(id);
-        if(story.getPlanId()!=null){
+        if (story.getPlanId() != null) {
             story.setStoryStage(ProductStory.STAGE_IS_PLANED);
-        }else{
+        } else {
             story.setStoryStage(ProductStory.STAGE_NOT_BEGIN);
         }
         storyService.updateStory(story);
@@ -90,6 +91,12 @@ public class ProjectStoryAction extends BaseController {
         Integer projectId = projectOperate.getCurrentProjectId(request, response);
         if (projectId == null) {
             return redirectProjectForm();
+        }
+        if (StringUtil.isBlank(order)) {
+            order = "storyId";
+        }
+        if (StringUtil.isBlank(ordertype)) {
+            ordertype = "desc";
         }
         Pager<ProductStory> storyList = projectStoryService.findStoryToLink(projectId, start, limit, order, ordertype);
         model.addAttribute("storyList", storyList);
@@ -153,11 +160,11 @@ public class ProjectStoryAction extends BaseController {
             if (projectId == null) {
                 return resultMap(false, "未选择项目");
             }
-            for(Integer id : itemId){
+            for (Integer id : itemId) {
                 ProductStory story = storyService.findStory(id);
-                if(story.getPlanId()!=null){
+                if (story.getPlanId() != null) {
                     story.setStoryStage(ProductStory.STAGE_IS_PLANED);
-                }else{
+                } else {
                     story.setStoryStage(ProductStory.STAGE_NOT_BEGIN);
                 }
                 storyService.updateStory(story);
