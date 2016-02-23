@@ -3,7 +3,7 @@
   <parent>
     <groupId>org.tinygroup</groupId>
     <artifactId>sdpm-document</artifactId>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
   </parent>
   <artifactId>sdpm-document-view-uicomponent</artifactId>
   <name>sdpm-document-view-uicomponent</name>
