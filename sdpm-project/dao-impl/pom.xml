@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.tinygroup</groupId>
 		<artifactId>sdpm-project</artifactId>
-		<version>0.0.3-SNAPSHOT</version>
+		<version>1.0.1-SNAPSHOT</version>
 	</parent>
 	<artifactId>sdpm-project-dao-impl</artifactId>
 	<name>sdpm-project-dao-impl</name>
@@ -34,7 +34,7 @@
 		<dependency>
 			<groupId>org.tinygroup</groupId>
 			<artifactId>sdpm-quality-dao-interface</artifactId>
-			<version>0.0.3-SNAPSHOT</version>
+			<version>1.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 </project>
