@@ -17,6 +17,7 @@
                     #@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
                     #@tinyTh({"class":"","rel":"orgRoleId"})编号#end
                     #@tinyTh({"class":"","rel":"orgRoleName"})角色名称#end
+                    #@tinyTh({"class":"","rel":"orgRoleType"})角色类型#end
                     #@tinyTh({"class":"","rel":"orgRoleRemarks"})角色描述#end
                     #@tinyTh({"class":"","rel":"sortname"})操作#end
                 #end

@@ -552,7 +552,7 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 		if (productStory == null) {
 			productStory = new ProductStory();
 		}
-		return getDslTemplate().queryPager(start>0?start:0, limit, productStory, false, new SelectGenerateCallback<ProductStory>() {
+		Pager<ProductStory> pager = getDslTemplate().queryPager(start>0?start:0, limit, productStory, false, new SelectGenerateCallback<ProductStory>() {
 
 			public Select generate(ProductStory t) {
 
@@ -597,6 +597,7 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 				return addOrderByElements(select, orderBys);
 			}
 		});
+		return pager;
 	}
 
 	public Pager<ProductStory> complexQueryRel(int start, int limit, ProductStory productStory, final Condition condition, final OrderBy... orderBys) {

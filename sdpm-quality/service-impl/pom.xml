@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.tinygroup</groupId>
         <artifactId>sdpm-quality</artifactId>
-        <version>0.0.3-SNAPSHOT</version>
+        <version>1.0.1-SNAPSHOT</version>
     </parent>
     <artifactId>sdpm-quality-service-impl</artifactId>
     <name>sdpm-quality-service-impl</name>
@@ -34,11 +34,6 @@
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>org.tinygroup.service</artifactId>
-            <version>${tiny_version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.tinygroup</groupId>
-            <artifactId>org.tinygroup.pageflowbasiccomponent</artifactId>
             <version>${tiny_version}</version>
         </dependency>
         <dependency>

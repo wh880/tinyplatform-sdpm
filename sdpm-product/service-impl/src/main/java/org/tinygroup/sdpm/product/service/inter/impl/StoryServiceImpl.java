@@ -99,8 +99,8 @@ public class StoryServiceImpl implements StoryService {
     }
 
     public Pager<ProductStory> findStoryByCondition(int start, int limit, ProductStory story, ConditionCarrier carrier, final String columnName, boolean asc) {
-
-        return storyManager.findPager(start,limit,story,carrier,columnName,asc);
+        Pager<ProductStory> pager = storyManager.findPager(start, limit, story, carrier, columnName, asc);
+        return pager;
     }
 
     public List<ProductStory> storyInCondition(String condition, Integer limit, Integer productId) {

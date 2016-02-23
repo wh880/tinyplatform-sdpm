@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.tinygroup</groupId>
         <artifactId>sdpm-common</artifactId>
-        <version>0.0.3-SNAPSHOT</version>
+        <version>1.0.1-SNAPSHOT</version>
     </parent>
     <artifactId>sdpm-common-base-dao</artifactId>
     <name>sdpm-common-base-dao</name>

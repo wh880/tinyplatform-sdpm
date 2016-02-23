@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.tinygroup</groupId>
         <artifactId>sdpm-document</artifactId>
-        <version>0.0.3-SNAPSHOT</version>
+        <version>1.0.1-SNAPSHOT</version>
     </parent>
     <artifactId>sdpm-document-business-impl</artifactId>
     <name>sdpm-document-business-impl</name>

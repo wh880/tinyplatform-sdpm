@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.tinygroup</groupId>
         <artifactId>sdpm-product</artifactId>
-        <version>0.0.3-SNAPSHOT</version>
+        <version>1.0.1-SNAPSHOT</version>
     </parent>
     <artifactId>sdpm-product-view-uicomponent</artifactId>
     <name>sdpm-product-view-uicomponent</name>

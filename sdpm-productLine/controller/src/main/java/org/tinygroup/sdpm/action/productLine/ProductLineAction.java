@@ -264,6 +264,7 @@ public class ProductLineAction extends BaseController {
             map.put("pId", 0);
             map.put("name", d.getProductLineName());
             map.put("open", true);
+            map.put("clickAble",false);
             list.add(map);
         }
         for (Product d : productLists) {
