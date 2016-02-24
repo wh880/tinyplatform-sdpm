@@ -1,7 +1,7 @@
 #!set(activeTitle="提交周报",activeMenuId=currentPageId,parentId=parentId?:"0")
 <style type="text/css">
     .diary-content-head {
-        border-bottom:none
+        border-bottom: none
     }
 </style>
 #set(name="organizationDiary")
@@ -18,6 +18,7 @@
         #@circleButton("primary get-next")#fontIco("chevron-right")#end
     </h3>
     <span id="begin-date" class="hide"></span>
+    <input type="hidden" id="hbdate">
     <div class="week-date"><span id="week-date-show"></span></div>
 </div>
 <script type="text/javascript">
@@ -45,6 +46,12 @@
 
         changeWeekDate();
         function changeWeekDate(changeWeek) {
+            if ($("#hbdate").val() == "") {
+                var tempdate = moment(new Date()).format("YYYY-MM-DD");
+            }
+            else{
+                var tempdate = $("#hbdate").val();
+            }
             var bdate = $("#begin-date").html();
             if (typeof(changeWeek) == "undefined") {
                 week = 0
@@ -58,6 +65,7 @@
             var thisyearWeek = thisMoment.format("YYYY-WW");
             var thisWeek = moment(bdate).format("YYYY-WW");
             if (thisWeek > thisyearWeek) {
+                $("#begin-date").html(tempdate);
                 layer.msg("不能选择大于当前周");
                 return false;
             } else if (thisWeek == thisyearWeek) {
@@ -76,6 +84,7 @@
             $("#week-num").attr("data-year", moment(vNowDate).format("YYYY"));
             $("#week-num").attr("data-week", yearWeek);
             $("#week-num").trigger("refresh");
+            $("#hbdate").val(moment(bdate).format("YYYY-MM-DD"));
         }
 
         $("#week-date-show").on("click", function () {
