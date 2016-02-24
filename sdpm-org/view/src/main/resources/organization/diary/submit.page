@@ -7,6 +7,10 @@
 #set(name="organizationDiary")
 #@layout(org)#end
 #@div(divClass="")
+    #@div()
+        #@aExtendButton("btn radius btn-primary btn-sm" TINY_CONTEXT_PATH+adminPath+
+            "/org/diary/show")返回周报总览#end
+    #end
 <div class="diary-content-head">
     <h3>
         #@circleButton("primary get-prev")#fontIco("chevron-left")#end
