@@ -182,7 +182,7 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
             return getDslTemplate().getByKey(pk, Product.class, new SelectGenerateCallback<Serializable>() {
                 @SuppressWarnings("rawtypes")
                 public Select generate(Serializable t) {
-                    return getComplexSelect().where(PRODUCTTABLE.PRODUCT_ID.eq(t));
+                    return selectFrom(PRODUCTTABLE).where(PRODUCTTABLE.PRODUCT_ID.eq(t));
                 }
             });
         } catch (EmptyResultDataAccessException e) {
