@@ -193,9 +193,6 @@
                 #@Tcheckbox(role?.orgRoleId)${role?.orgRoleName}#end
             #end
         #end
-
-
-
     #end
     #@validateDiv("col-2")#end
 #end
@@ -215,13 +212,9 @@
         <div class="col-5"></div>
     </div>
 #end
-
-
     <br/>
 
     <script type="text/javascript">
-
-
         function setWhite(acl) {
             acl == '2' ? $('#whitelistBox').removeClass('hidden') : $('#whitelistBox').addClass('hidden');
         }
