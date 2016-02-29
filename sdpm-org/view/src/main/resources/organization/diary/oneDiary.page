@@ -57,7 +57,7 @@
             评审了
         #end
         ${var?.actionObjectType}--${var?.objectName}
-                    <span>ID：${var?.actionId}</span></span>
+                    <span>${var?.actionObjectType}_ID：${var?.actionObjectId}</span></span>
     </p>
     #end
 </div>

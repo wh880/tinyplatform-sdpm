@@ -346,7 +346,6 @@ public class DiaryAction extends BaseController {
             List<OrgDiaryDetail> list = diaryService.findDetailListByDiaryId(orgDiary.getOrgDiaryId());
             Date beginDate = DateUtils.getBeginDate(year, week);
             Date endDate = DateUtils.getEndDate(year, week);
-            //List<SystemEffort> effortsList = effortService.findEffortListByUserAndDate(userUtils.getUser().getOrgUserId(), beginDate, endDate);
             List<SystemAction> actionList = actionService.findDiaryActionListByUserAndDate(userId, beginDate, endDate);
             model.addAttribute("list", list);
             model.addAttribute("efforts", actionList);
