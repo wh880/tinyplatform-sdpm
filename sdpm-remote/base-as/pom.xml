@@ -5,7 +5,7 @@
     <parent>
         <artifactId>sdpm-remote</artifactId>
         <groupId>org.tinygroup</groupId>
-        <version>1.0.0</version>
+        <version>1.0.1</version>
     </parent>
     <artifactId>sdpm-base-as</artifactId>
 
