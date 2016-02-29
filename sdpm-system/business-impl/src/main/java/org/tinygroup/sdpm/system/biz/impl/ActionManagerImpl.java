@@ -117,11 +117,13 @@ public class ActionManagerImpl implements ActionManager {
     }
 
     @Override
-    public List<SystemAction> findActionListByTypeList(List<SystemAction> bugs, List<SystemAction> stories, List<SystemAction> tasks) {
+    public List<SystemAction> findActionListByTypeList(List<SystemAction> bugs, List<SystemAction> stories, List<SystemAction> tasks, List<SystemAction> cases, List<SystemAction> releases) {
         List<SystemAction> list = new ArrayList<SystemAction>();
         List<SystemAction> bugList = null;
         List<SystemAction> storiesList = null;
         List<SystemAction> taskList = null;
+        List<SystemAction> caseList = null;
+        List<SystemAction> releaseList = null;
         if (!CollectionUtil.isEmpty(bugs)) {
             List<Integer> temp = new ArrayList<Integer>();
             for (SystemAction systemAction : bugs) {
@@ -137,6 +139,22 @@ public class ActionManagerImpl implements ActionManager {
             }
             storiesList = systemActionDao.findStoryByStoryList(temp);
             list.addAll(storiesList);
+        }
+        if (!CollectionUtil.isEmpty(cases)) {
+            List<Integer> temp = new ArrayList<Integer>();
+            for (SystemAction systemAction : cases) {
+                temp.add(systemAction.getActionId());
+            }
+            caseList = systemActionDao.findCaseByCaseList(temp);
+            list.addAll(caseList);
+        }
+        if (!CollectionUtil.isEmpty(releases)) {
+            List<Integer> temp = new ArrayList<Integer>();
+            for (SystemAction systemAction : releases) {
+                temp.add(systemAction.getActionId());
+            }
+            releaseList = systemActionDao.findReleaseByReleaseList(temp);
+            list.addAll(releaseList);
         }
         if (!CollectionUtil.isEmpty(tasks)) {
             List<Integer> temp = new ArrayList<Integer>();

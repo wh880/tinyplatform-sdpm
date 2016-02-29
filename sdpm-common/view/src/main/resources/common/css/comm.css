@@ -12,7 +12,13 @@
         text-overflow: ellipsis;
         float: right;
     }
-
+#main-navbar .navbar-inner{overflow:visible}
+#main-navbar .right{padding-right:5px}
+.dropdown-menus>.active>a:before {
+    content: "\f00c";
+    font-family: FontAwesome;
+    top: 2px;
+}
 .font-size-13{font-size:13px !important;}
 .font-size-12{font-size:12px !important;}
 .font-size-14{font-size:14px !important;}

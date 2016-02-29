@@ -223,7 +223,8 @@
     $(function () {
         $("form").Validform({});
         $("input[name='projectAcl']").click(function (e) {
-            $(this).attr("value") == "3" ? $("#whitelistBox").removeClass("hidden") : $("#whitelistBox").addClass("hidden");
+            console.log($(this).attr("value"));
+            $(this).attr("value") == "2" ? $("#whitelistBox").removeClass("hidden") :   $("#whitelistBox").addClass("hidden");
         });
         $("[name=projectEnd]").on("change",function(){
             var edate=$(this).val();

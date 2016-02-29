@@ -7,8 +7,24 @@
                     <div class="committed clearfix">
                         <span class="tocommittime">${var3?.effortWeek}</span>
                         <ol class="logList-detailList">
-                            <li><span>${var3?.orgDetailContent}<a href="#" target="_blank">
-                                ID:${var3?.orgDetailId}</a></span></li>
+                            <li><span>${var3?.orgDetailContent}
+                                #if(var3?.objectType=="bug")
+                                <a href="${TINY_CONTEXT_PATH+adminPath}/quality/bug/bugInfo?bugId=${var3?.objectId}"
+                                   target="_blank">
+                                #elseif(var3?.objectType=="task")
+                                <a href="${TINY_CONTEXT_PATH+adminPath}/project/task/findTask?taskId=${var3?.objectId}"
+                                   target="_blank">
+                                #elseif(var3?.objectType=="story")
+                                <a href="${TINY_CONTEXT_PATH+adminPath}/product/storySpec/find/productDemandDetail?storyId=${var3?.objectId}"
+                                   target="_blank">
+                                #elseif(var3?.objectType=="case")
+                                <a href="${TINY_CONTEXT_PATH+adminPath}/quality/testCase/case/viewInfo?id=${var3?.objectId}"
+                                   target="_blank">
+                                #elseif(var3?.objectType=="release")
+                                <a href="${TINY_CONTEXT_PATH+adminPath}/product/release/find?releaseId=${var3?.objectId}"
+                                   target="_blank">
+                                #end
+                                ${var3?.objectType}_ID:${var3?.objectId}</a></span></li>
                         </ol>
                     </div>
                     #end
