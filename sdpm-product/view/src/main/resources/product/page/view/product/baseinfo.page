@@ -7,7 +7,7 @@
 		       		#@tbody()
 						#@tr()
                         	<td style="width:35%">产品线名称</td>
-							#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/productLine/find/overview?productLineId=${product?.productLineId}">${product?.productLineName}</a>#end
+							#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/productLine/find/overview?productLineId=${product?.productLineId}">${productLineService.findProductLine(product?.productLineId).productLineName}</a>#end
 						#end
 		       			#@tr()
 							#@td()产品名称#end

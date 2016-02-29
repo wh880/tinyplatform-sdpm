@@ -21,7 +21,6 @@
     #@Tselect2F()
         #@Tselect2Body("teamList["+a+"].teamRole" "" {"class":"input-text select2","multiple":
             "multiple"})
-            <option></option>
             #foreach(u : roleList)
                 <option value="${u.orgRoleId}">${u.orgRoleName}</option>
             #end

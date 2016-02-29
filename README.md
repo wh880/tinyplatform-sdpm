@@ -3,7 +3,7 @@
 
 本项目参考市面上各类项目管理软件，对各类产品中现有功能模块进行优化，提升用户体验，打造以Java为技术体系的项目管理工具！
 #数据库设置
-数据库的配置文件在sdpm-web工程中resource中的sdpm.properties
+数据库的配置文件在\sdpm-common\base-dao\src\main\resources中的jdbc.properties
 #首次运行
 首先在工程根路径使用命令install
 ```
@@ -17,7 +17,7 @@ mvn jetty:run
 #如何安装
 初次运行请在```application.xml```中```/application/application-processors```下添加```<application-processor bean="databaseInstallerProcessor"/>```进行数据库建表操作。同时请添加 ```<application-processor bean="initDataApplicationProcessor"/>```进行系统数据初始化操作。
 此时系统的用户名为admin,密码为123
-此外还需将```web.beans.xml```中```bean[sdpmDictLoader]```的```property[isInitFromFile]```置为```true```，以便进行数据字典初始化。
+此外还需将```\sdpm-common\base-dao\src\main\resources\web.beans.xml```中```bean[sdpmDictLoader]```的```property[isInitFromFile]```置为```true```，以便进行数据字典初始化。
 
 #相关工程包名约束
 

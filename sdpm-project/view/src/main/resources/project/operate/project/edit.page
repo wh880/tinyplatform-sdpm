@@ -192,18 +192,18 @@
             #end
         #end
     #end
-    #@elementItem(elementId="whitelistBox" eleItemClass="hidden")
-        #@skinMinimal("col-8")
-            #@Tcheckboxes("whiteList" project?.projectWhiteList)
-                #foreach(wl : getDict("whiteList"))
-                    #@gridSysCol(2)
-                        #@Tcheckbox(wl.value)${wl?.text}#end
-                    #end
+    #@elementItem("whitelistBox" project?.projectAcl!=2?'hidden':'')
+        #@colLabel()<span class="c-red">*</span>分组白名单#end
+        #@skinMinimal()
+            #@Tcheckboxes("productWhiteList" product?.productWhiteList)
+                #foreach(role : roleService.findSystemRoles())
+                    #@Tcheckbox(role?.orgRoleId)${role?.orgRoleName}#end
                 #end
             #end
-            #@validateDiv("col-2")#end
         #end
+        #@validateDiv("col-2")#end
     #end
+
     #@elementItem()
     <div class="col-12">
         <div class="col-5">
@@ -223,7 +223,8 @@
     $(function () {
         $("form").Validform({});
         $("input[name='projectAcl']").click(function (e) {
-            $(this).attr("value") == "3" ? $("#whitelistBox").removeClass("hidden") : $("#whitelistBox").addClass("hidden");
+            console.log($(this).attr("value"));
+            $(this).attr("value") == "2" ? $("#whitelistBox").removeClass("hidden") :   $("#whitelistBox").addClass("hidden");
         });
         $("[name=projectEnd]").on("change",function(){
             var edate=$(this).val();

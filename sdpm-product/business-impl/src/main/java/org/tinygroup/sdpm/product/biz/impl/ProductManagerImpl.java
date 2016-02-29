@@ -15,9 +15,9 @@ import org.tinygroup.sdpm.product.dao.ProductDao;
 import org.tinygroup.sdpm.product.dao.ProductPlanDao;
 import org.tinygroup.sdpm.product.dao.ProductReleaseDao;
 import org.tinygroup.sdpm.product.dao.ProductStoryDao;
-import org.tinygroup.sdpm.product.dao.utils.FieldUtil;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
+import org.tinygroup.sdpm.product.dao.utils.FieldUtil;
 import org.tinygroup.sdpm.project.dao.impl.ProjectBuildDaoImpl;
 import org.tinygroup.sdpm.quality.dao.QualityBugDao;
 import org.tinygroup.sdpm.quality.dao.QualityTestCaseDao;
@@ -57,7 +57,7 @@ public class ProductManagerImpl implements ProductManager {
     }
 
     public int update(Product product) {
-        if (product.getAcl()!=null&&1 != product.getAcl()) {
+        if (2 != product.getAcl()) {
             product.setProductWhiteList("");
         }
 
@@ -132,8 +132,8 @@ public class ProductManagerImpl implements ProductManager {
         return productDao.getProductNameByLineId(productLineId);
     }
 
-    public List<Product> getProductByUser(String userId, Integer delete, Integer productLineId,ConditionCarrier carrier) {
-        List<Product> productList = productDao.getProductByUser(userId, delete, productLineId,mergeCondition(carrier));
+    public List<Product> getProductByUser(String userId, Integer delete, Integer productLineId, ConditionCarrier carrier) {
+        List<Product> productList = productDao.getProductByUser(userId, delete, productLineId, mergeCondition(carrier));
         Product product = new Product();
         product.setDeleted(delete);
         product.setAcl(Product.ACl_TEAM_AND_ROLE);
@@ -144,8 +144,8 @@ public class ProductManagerImpl implements ProductManager {
         return mergeUserProducts(productList, products, orgRoles);
     }
 
-    public List<Product> getProductByUserWithCount(String userId, Integer delete, boolean noRole,ConditionCarrier carrier) {
-        List<Product> productList = productDao.getProductByUserWithCount(userId, delete, noRole,mergeCondition(carrier));
+    public List<Product> getProductByUserWithCount(String userId, Integer delete, boolean noRole, ConditionCarrier carrier) {
+        List<Product> productList = productDao.getProductByUserWithCount(userId, delete, noRole, mergeCondition(carrier));
         Product product = new Product();
         product.setDeleted(delete);
         product.setAcl(Product.ACl_TEAM_AND_ROLE);
@@ -156,14 +156,14 @@ public class ProductManagerImpl implements ProductManager {
         return mergeUserProducts(productList, products, orgRoles);
     }
 
-    public List<Product> getProductByUserAndProductLineWithCount(String userId, Integer productLineId, Integer delete,ConditionCarrier carrier) {
-        return productDao.getProductByUserAndProductLineWithCount(userId, productLineId, delete,mergeCondition(carrier));
+    public List<Product> getProductByUserAndProductLineWithCount(String userId, Integer productLineId, Integer delete, ConditionCarrier carrier) {
+        return productDao.getProductByUserAndProductLineWithCount(userId, productLineId, delete, mergeCondition(carrier));
     }
 
-    public List<Integer> getTeamRoleProductLineIds(String userId, Integer delete,ConditionCarrier carrier) {
+    public List<Integer> getTeamRoleProductLineIds(String userId, Integer delete, ConditionCarrier carrier) {
         List<Integer> pIds = new ArrayList<Integer>();
-        for (Product product : getProductByUser(userId, delete, null,carrier)) {
-            if(!pIds.contains(product.getProductLineId())){
+        for (Product product : getProductByUser(userId, delete, null, carrier)) {
+            if (!pIds.contains(product.getProductLineId())) {
                 pIds.add(product.getProductLineId());
             }
         }
@@ -192,7 +192,7 @@ public class ProductManagerImpl implements ProductManager {
         return productWithOutRole;
     }
 
-    private Condition mergeCondition(ConditionCarrier carrier){
+    private Condition mergeCondition(ConditionCarrier carrier) {
         return ConditionUtils.mergeCondition(carrier, null);
     }
 }

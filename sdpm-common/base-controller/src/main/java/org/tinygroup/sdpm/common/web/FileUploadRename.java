@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 
 /**
+ * 文件上传重命名
  * Created by Hulk on 2015/12/16.
  */
 public class FileUploadRename implements FileUploadReName {
@@ -26,7 +27,6 @@ public class FileUploadRename implements FileUploadReName {
         File destination = new File(fileName);
         UploadUtils.checkDirAndCreate(destination.getParentFile());
         return fileName;
-//        return String.format("%s/%s", repository.getPath(), filename);
     }
 
     public File getRepository() {

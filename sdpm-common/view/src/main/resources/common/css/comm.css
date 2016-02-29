@@ -1,5 +1,5 @@
 /**整体框架个性化设置start**/
-@media (min-width:768px) {
+
     #main-navbar .navbar-form,#main-navbar .navbar-nav {
         width:440px!important;
         margin-right: calc(100% - 100vw);
@@ -12,6 +12,12 @@
         text-overflow: ellipsis;
         float: right;
     }
+#main-navbar .navbar-inner{overflow:visible}
+#main-navbar .right{padding-right:5px}
+.dropdown-menus>.active>a:before {
+    content: "\f00c";
+    font-family: FontAwesome;
+    top: 2px;
 }
 .font-size-13{font-size:13px !important;}
 .font-size-12{font-size:12px !important;}
@@ -40,7 +46,7 @@
 	padding-right:6px;
 }
 
-@media (min-width: 768px) {
+
     .menu-on-top #content-wrapper {
         padding-top: 98px
     }
@@ -148,7 +154,7 @@
     #bodyrap.theme-white .optionsBox .tabBar .switchClass:hover {
         background: #985813
     }
-}
+
 .main-position-fixed.menu-on-top #demo-settings{top:46px}
 .menu-on-top #demo-settings{margin-top:2px}
 /**select2特有**/
