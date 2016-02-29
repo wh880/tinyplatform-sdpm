@@ -140,15 +140,23 @@ public class ActionManagerImpl implements ActionManager {
             storiesList = systemActionDao.findStoryByStoryList(temp);
             list.addAll(storiesList);
         }
-        if (!CollectionUtil.isEmpty(tasks)) {
+        if (!CollectionUtil.isEmpty(cases)) {
             List<Integer> temp = new ArrayList<Integer>();
-            for (SystemAction systemAction : tasks) {
+            for (SystemAction systemAction : cases) {
                 temp.add(systemAction.getActionId());
             }
-            taskList = systemActionDao.findTaskByTaskList(temp);
-            list.addAll(taskList);
+            caseList = systemActionDao.findCaseByCaseList(temp);
+            list.addAll(caseList);
         }
-        if (!CollectionUtil.isEmpty(cases)) {
+        if (!CollectionUtil.isEmpty(releases)) {
+            List<Integer> temp = new ArrayList<Integer>();
+            for (SystemAction systemAction : releases) {
+                temp.add(systemAction.getActionId());
+            }
+            releaseList = systemActionDao.findReleaseByReleaseList(temp);
+            list.addAll(releaseList);
+        }
+        if (!CollectionUtil.isEmpty(tasks)) {
             List<Integer> temp = new ArrayList<Integer>();
             for (SystemAction systemAction : tasks) {
                 temp.add(systemAction.getActionId());

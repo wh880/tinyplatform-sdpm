@@ -15,10 +15,10 @@
                                 <a href="${TINY_CONTEXT_PATH+adminPath}/project/task/findTask?taskId=${var3?.objectId}"
                                    target="_blank">
                                 #elseif(var3?.objectType=="story")
-                                <a href="${TINY_CONTEXT_PATH+adminPath}/a/product/story/findStory?storyId=${var3?.objectId}"
+                                <a href="${TINY_CONTEXT_PATH+adminPath}/product/story/findStory?storyId=${var3?.objectId}"
                                    target="_blank">
                                 #elseif(var3?.objectType=="case")
-                                <a href="${TINY_CONTEXT_PATH+adminPath}/a/quality/testCase/find?caseId=${var3?.objectId}"
+                                <a href="${TINY_CONTEXT_PATH+adminPath}/quality/testCase/find?caseId=${var3?.objectId}"
                                    target="_blank">
                                 #elseif(var3?.objectType=="release")
                                 <a href="${TINY_CONTEXT_PATH+adminPath}/product/release/find?releaseId=${var3?.objectId}"
