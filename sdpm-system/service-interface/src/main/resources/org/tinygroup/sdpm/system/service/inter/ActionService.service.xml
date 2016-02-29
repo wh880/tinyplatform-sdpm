@@ -52,6 +52,8 @@
         <service-parameter name="bugs" type="org.tinygroup.sdpm.system.dao.pojo.SystemAction" collection-type="java.util.List" required="false" is-array="false"/>
         <service-parameter name="stories" type="org.tinygroup.sdpm.system.dao.pojo.SystemAction" collection-type="java.util.List" required="false" is-array="false"/>
         <service-parameter name="tasks" type="org.tinygroup.sdpm.system.dao.pojo.SystemAction" collection-type="java.util.List" required="false" is-array="false"/>
+        <service-parameter name="cases" type="org.tinygroup.sdpm.system.dao.pojo.SystemAction" collection-type="java.util.List" required="false" is-array="false"/>
+        <service-parameter name="releases" type="org.tinygroup.sdpm.system.dao.pojo.SystemAction" collection-type="java.util.List" required="false" is-array="false"/>
       </service-parameters>
       <service-result name="findActionListByTypeListResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.system.dao.pojo.SystemAction"/>
     </service-method>

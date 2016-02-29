@@ -204,4 +204,5 @@
   <standard-field id="4ebccd73cf7f41d8a716ed8be8c3a7d2" name="org_diary_white_list_first_account" title="白名单甲方账号" business-type-id="095e594e1550424b9643c7e2279e85be"/>
   <standard-field id="3bcb0cdb04c84d728b5ece9387c28301" name="org_diary_white_list_second_account" title="白名单乙方账号" business-type-id="095e594e1550424b9643c7e2279e85be"/>
   <standard-field id="70e9d7a468b6447ab7e4c4de0a227ea4" name="org_diary_white_list_id" title="白名单ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
+  <standard-field id="990554eeb5d84abaaee98c944bff4e1e" name="org_diary_detail_action_id" title="周报详情对应的日志Id" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
 </standard-fields>
