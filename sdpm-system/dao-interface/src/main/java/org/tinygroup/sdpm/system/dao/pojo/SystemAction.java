@@ -22,7 +22,7 @@ import java.util.Date;
 /**
  * 系统日志表
  */
-public class SystemAction implements Serializable, Comparable {
+public class SystemAction implements Serializable, Comparable<SystemAction> {
 
     /**
      * 系统日志ID
@@ -229,9 +229,11 @@ public class SystemAction implements Serializable, Comparable {
     }
 
     @Override
-    public int compareTo(Object o) {
-        if (o instanceof SystemAction)
-            return this.actionDate.compareTo(((SystemAction) o).getActionDate());
-        return 0;
+    public int compareTo(SystemAction o) {
+        if (o == null)
+            return 0;
+        else {
+            return this.actionDate.compareTo(o.getActionDate());
+        }
     }
 }

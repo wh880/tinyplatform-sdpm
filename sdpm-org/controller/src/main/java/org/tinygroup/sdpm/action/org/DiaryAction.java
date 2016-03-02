@@ -583,6 +583,18 @@ public class DiaryAction extends BaseController {
                 OrgDiaryDetail orgDetail = orgDiaryDetails.get(i);
                 orgDetail.setEffortWeek(DateUtils.getDateWeek(orgDetail.getOrgDetailDate()));
             }
+            Collections.sort(orgDiaryDetails);
+            List<Integer> list1 = new ArrayList<Integer>();
+            for (int i = 0; i < orgDiaryDetails.size(); i++) {
+                if (i > 0) {
+                    if (orgDiaryDetails.get(i).getEffortWeek().equals(orgDiaryDetails.get(i - 1).getEffortWeek())) {
+                        list1.add(i);
+                    }
+                }
+            }
+            for (Integer num : list1) {
+                orgDiaryDetails.get(num).setEffortWeek(null);
+            }
             map.put(diaryId, orgDiaryDetails);
         }
         String realName = user.getOrgUserRealName();
