@@ -91,7 +91,7 @@
             #@colLabel()<span class="c-red">*</span>重复需求：#end
             #@formControlDiv("col-3")
                 #@Tselect2F()
-                    #Tselect2Ajax("storyDuplicateStory" "" TINY_CONTEXT_PATH+adminPath+"/product/story/ajax/storyInCondition?productId+"cookieProductId
+                    #Tselect2Ajax("storyDuplicateStory" "" TINY_CONTEXT_PATH+adminPath+"/product/story/ajax/storyInCondition?productId"+cookieProductId
                     {"dataId":"storyId","dataText":"storyTitle","placeholder":"查询重复需求","nullmsg":"请选择重复需求！","datatype":"*"})
                     #@Tselect2Fix()
                         <a href="${TINY_CONTEXT_PATH+adminPath}/product/story">全部</a>#end
