@@ -40,23 +40,23 @@
                        name="idCheck" #for(var1:details) #if(var1?.actionId==var?.actionId) checked="checked"
         #end#end> <span class="tocommittime">${var?.actionWeekDay}:${var?.actorName} </span><span>
         #if(var?.actionAction=="finished")
-            完成了
+            完成
         #elseif(var?.actionAction=="opened")
-            创建了
+            创建
         #elseif(var?.actionAction=="closed")
-            创建了
+            创建
         #elseif(var?.actionAction=="changed")
-            变更了
+            变更
         #elseif(var?.actionAction=="edited")
-            编辑了
+            编辑
         #elseif(var?.actionAction=="resolved")
-            解决了
+            解决
         #elseif(var?.actionAction=="run")
-            执行了
+            执行
         #elseif(var?.actionAction=="reviewed")
-            评审了
+            评审
         #end
-        ${var?.actionObjectType}--${var?.objectName}
+        ${var?.actionObjectType}---${var?.objectName}
                     <span>${var?.actionObjectType}_ID：${var?.actionObjectId}</span></span>
     </p>
     #end

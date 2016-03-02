@@ -91,21 +91,21 @@ public class DiaryAction extends BaseController {
                     buffer.append(userRealName);
                     String objectType = systemAction.getActionObjectType();
                     if ("finished".equals(systemAction.getActionAction())) {
-                        buffer.append("完成了" + objectType + "  " + systemAction.getObjectName());
+                        buffer.append(" 完成" + getObjectTypeName(objectType) + "：" + systemAction.getObjectName());
                     } else if ("opened".equals(systemAction.getActionAction())) {
-                        buffer.append("创建了" + objectType + "  " + systemAction.getObjectName());
+                        buffer.append(" 创建" + getObjectTypeName(objectType) + "：" + systemAction.getObjectName());
                     } else if ("reviewed".equals(systemAction.getActionAction())) {
-                        buffer.append("评审了" + objectType + "  " + systemAction.getObjectName());
+                        buffer.append(" 评审" + getObjectTypeName(objectType) + "：" + systemAction.getObjectName());
                     } else if ("changed".equals(systemAction.getActionAction())) {
-                        buffer.append("变更了" + objectType + "  " + systemAction.getObjectName());
+                        buffer.append(" 变更" + getObjectTypeName(objectType) + "：" + systemAction.getObjectName());
                     } else if ("resolved".equals(systemAction.getActionAction())) {
-                        buffer.append("解决了" + objectType + "  " + systemAction.getObjectName());
+                        buffer.append(" 解决" + getObjectTypeName(objectType) + "：" + systemAction.getObjectName());
                     } else if ("closed".equals(systemAction.getActionAction())) {
-                        buffer.append("关闭了" + objectType + "  " + systemAction.getObjectName());
+                        buffer.append(" 关闭" + getObjectTypeName(objectType) + "：" + systemAction.getObjectName());
                     } else if ("run".equals(systemAction.getActionAction())) {
-                        buffer.append("执行了" + objectType + "  " + systemAction.getObjectName());
+                        buffer.append(" 执行" + getObjectTypeName(objectType) + "：" + systemAction.getObjectName());
                     } else if ("edited".equals(systemAction.getActionAction())) {
-                        buffer.append("编辑了" + objectType + "  " + systemAction.getObjectName());
+                        buffer.append(" 编辑" + getObjectTypeName(objectType) + "：" + systemAction.getObjectName());
                     }
                     orgDiaryDetail.setOrgDetailContent(buffer.substring(0));
                     orgDiaryDetail.setOrgDetailDate(systemAction.getActionDate());
@@ -135,21 +135,21 @@ public class DiaryAction extends BaseController {
                     String objectType = systemAction.getActionObjectType();
                     String title = systemAction.getObjectName();
                     if ("finished".equals(systemAction.getActionAction())) {
-                        buffer.append("完成了" + objectType + "  " + title);
+                        buffer.append(" 完成" + getObjectTypeName(objectType) + "：" + title);
                     } else if ("opened".equals(systemAction.getActionAction())) {
-                        buffer.append("创建了" + objectType + "  " + title);
+                        buffer.append(" 创建" + getObjectTypeName(objectType) + "：" + title);
                     } else if ("reviewed".equals(systemAction.getActionAction())) {
-                        buffer.append("评审了" + objectType + "  " + title);
+                        buffer.append(" 评审" + getObjectTypeName(objectType) + "：" + title);
                     } else if ("changed".equals(systemAction.getActionAction())) {
-                        buffer.append("变更了" + objectType + "  " + title);
+                        buffer.append(" 变更" + getObjectTypeName(objectType) + "：" + title);
                     } else if ("resolved".equals(systemAction.getActionAction())) {
-                        buffer.append("解决了" + objectType + "  " + title);
+                        buffer.append(" 解决" + getObjectTypeName(objectType) + "：" + title);
                     } else if ("closed".equals(systemAction.getActionAction())) {
-                        buffer.append("关闭了" + objectType + "  " + title);
+                        buffer.append(" 关闭" + getObjectTypeName(objectType) + "：" + title);
                     } else if ("run".equals(systemAction.getActionAction())) {
-                        buffer.append("执行了" + objectType + "  " + title);
+                        buffer.append(" 执行" + getObjectTypeName(objectType) + "：" + title);
                     } else if ("edited".equals(systemAction.getActionAction())) {
-                        buffer.append("编辑了" + objectType + "  " + title);
+                        buffer.append(" 编辑" + getObjectTypeName(objectType) + "：" + title);
                     }
                     orgDiaryDetail.setOrgDetailContent(buffer.substring(0));
                     orgDiaryDetail.setOrgDetailDate(systemAction.getActionDate());
@@ -171,6 +171,21 @@ public class DiaryAction extends BaseController {
             diaryService.addDiary(orgDiary, list);
             return resultMap(true, "添加成功");
         }
+    }
+
+    private String getObjectTypeName(String objectType) {
+        if ("bug".equals(objectType)) {
+            return "bug";
+        } else if ("story".equals(objectType)) {
+            return "需求";
+        } else if ("task".equals(objectType)) {
+            return "任务";
+        } else if ("case".equals(objectType)) {
+            return "用例";
+        } else if ("release".equals(objectType)) {
+            return "发布";
+        }
+        return objectType;
     }
 
     /**
@@ -434,6 +449,7 @@ public class DiaryAction extends BaseController {
         Date eDate = DateUtils.getEndDate(year, week);
         OrgUser user = userUtils.getUser();
         List<SystemAction> actionList = actionService.findDiaryActionListByUserAndDate(user.getOrgUserId(), bDate, eDate);
+        Collections.sort(actionList);
         List<OrgDiaryDetail> orgDiaryDetailList = null;
         if (orgDiary != null) {
             orgDiaryDetailList = diaryService.findDetailListByDiaryId(orgDiary.getOrgDiaryId());
@@ -494,6 +510,18 @@ public class DiaryAction extends BaseController {
                 efforts = diaryService.findDetailListByDiaryId(orgDiaryAndUserDO.getOrgDiaryId());
                 for (OrgDiaryDetail orgDiaryDetail : efforts) {
                     orgDiaryDetail.setEffortWeek(DateUtils.getDateWeek(orgDiaryDetail.getOrgDetailDate()));
+                }
+                Collections.sort(efforts);
+                List<Integer> list1 = new ArrayList<Integer>();
+                for (int i = 0; i < efforts.size(); i++) {
+                    if (i > 0) {
+                        if (efforts.get(i).getEffortWeek().equals(efforts.get(i - 1).getEffortWeek())) {
+                            list1.add(i);
+                        }
+                    }
+                }
+                for (Integer num : list1) {
+                    efforts.get(num).setEffortWeek(null);
                 }
                 map.put(orgDiaryAndUserDO.getOrgDiaryId(), efforts);
             }
