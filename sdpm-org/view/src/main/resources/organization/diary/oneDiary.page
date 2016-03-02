@@ -41,11 +41,23 @@
         #end#end> <span class="tocommittime">${var?.actionWeekDay}:${var?.actorName} </span><span>
         #if(var?.actionAction=="finished")
             完成了
-        #else
+        #elseif(var?.actionAction=="opened")
             创建了
+        #elseif(var?.actionAction=="closed")
+            创建了
+        #elseif(var?.actionAction=="changed")
+            变更了
+        #elseif(var?.actionAction=="edited")
+            编辑了
+        #elseif(var?.actionAction=="resolved")
+            解决了
+        #elseif(var?.actionAction=="run")
+            执行了
+        #elseif(var?.actionAction=="reviewed")
+            评审了
         #end
         ${var?.actionObjectType}--${var?.objectName}
-                    <span>ID：${var?.actionId}</span></span>
+                    <span>${var?.actionObjectType}_ID：${var?.actionObjectId}</span></span>
     </p>
     #end
 </div>
