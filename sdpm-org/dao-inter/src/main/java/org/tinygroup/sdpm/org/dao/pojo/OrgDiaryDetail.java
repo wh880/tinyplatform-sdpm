@@ -27,7 +27,7 @@ import java.util.Date;
  *
  * @generated
  */
-public class OrgDiaryDetail implements Serializable {
+public class OrgDiaryDetail implements Serializable, Comparable {
 
     /**
      * <!-- begin-user-doc -->
@@ -188,5 +188,12 @@ public class OrgDiaryDetail implements Serializable {
 
     public void setObjectId(Integer objectId) {
         this.objectId = objectId;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        if (o instanceof OrgDiaryDetail)
+            return -this.effortWeek.compareTo(((OrgDiaryDetail) o).getEffortWeek());
+        return 0;
     }
 }
