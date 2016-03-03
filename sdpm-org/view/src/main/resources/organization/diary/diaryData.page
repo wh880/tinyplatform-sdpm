@@ -1,6 +1,6 @@
 #if(list!=null)
     #foreach(var:list)
-        #@diaryItem(var?.orgUserRealName var?.diaryDateTime var?.orgDiarySummary var?.orgUserAccount)
+        #@diaryItem(var?.orgUserRealName var?.diaryDateTime var?.orgDiarySummary var?.orgUserAccount var?.detailCountStatus)
             #foreach(var2:efforts)
                 #if(var2?.key==var?.orgDiaryId)
                     #foreach(var3:var2?.value)
@@ -21,10 +21,10 @@
                                 <a href="${TINY_CONTEXT_PATH+adminPath}/quality/testCase/case/viewInfo?id=${var3?.objectId}"
                                    target="_blank">
                                 #elseif(var3?.objectType=="release")
-                                    <a href="${TINY_CONTEXT_PATH+adminPath}/product/release/find?releaseId=${var3?.objectId}"
+                                <a href="${TINY_CONTEXT_PATH+adminPath}/product/release/find?releaseId=${var3?.objectId}"
                                    target="_blank">
                                 #end
-                               ${var3?.objectType}_ID:${var3?.objectId}</a>）</span></li>
+                                ${var3?.objectType}_ID:${var3?.objectId}</a>）</span></li>
                         </ol>
                     </div>
                     #end

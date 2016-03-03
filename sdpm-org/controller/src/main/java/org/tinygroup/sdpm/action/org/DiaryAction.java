@@ -523,6 +523,10 @@ public class DiaryAction extends BaseController {
                 for (Integer num : list1) {
                     efforts.get(num).setEffortWeek(null);
                 }
+                if (!CollectionUtil.isEmpty(efforts))
+                    orgDiaryAndUserDO.setDetailCountStatus(1);
+                else
+                    orgDiaryAndUserDO.setDetailCountStatus(0);
                 map.put(orgDiaryAndUserDO.getOrgDiaryId(), efforts);
             }
             model.addAttribute("efforts", map);
