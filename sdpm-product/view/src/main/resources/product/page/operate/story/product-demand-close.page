@@ -1,6 +1,4 @@
 #set(linkName = "product-demand")
-
-
 <script type="text/javascript">
     $(function () {
         $("form[name=thisform]").Validform({
@@ -8,12 +6,8 @@
         });
     });
 </script>
-
-
 <script>
-
     $(document).ready(function () {
-
         $("#subdivision").hide();
         $("#repeat").hide();
         $("input[name=storyDuplicateStory],input[name=storyDuplicateStory-name]").attr("ignore","ignore");
@@ -32,7 +26,6 @@
                 $(function() {
                     ajaxRead("${sid}", "storyChildStories", "storyId", "storyTitle", "/product/story/storyList?productId=${cookieProductId}&storyId=${story?.storyId}");
                 })
-
             } else if ($(this).val() == '2') {
                 subdivision.hide();
                 repeat.show();
@@ -49,13 +42,9 @@
                 subdivision.hide();
                 repeat.hide();
             }
-
-
         });
-
     });
 </script>
-
 #@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/product/story/close" "" {"class":"test"})
     #hiddenInput("","deleted","","1")
     #hiddenInput("","storyId","",story?.storyId)
@@ -91,7 +80,7 @@
             #@colLabel()<span class="c-red">*</span>重复需求：#end
             #@formControlDiv("col-3")
                 #@Tselect2F()
-                    #Tselect2Ajax("storyDuplicateStory" "" TINY_CONTEXT_PATH+adminPath+"/product/story/ajax/storyInCondition?productId+"cookieProductId
+                    #Tselect2Ajax("storyDuplicateStory" "" TINY_CONTEXT_PATH+adminPath+"/product/story/ajax/storyInCondition?productId"+cookieProductId
                     {"dataId":"storyId","dataText":"storyTitle","placeholder":"查询重复需求","nullmsg":"请选择重复需求！","datatype":"*"})
                     #@Tselect2Fix()
                         <a href="${TINY_CONTEXT_PATH+adminPath}/product/story">全部</a>#end
@@ -99,7 +88,6 @@
             #end
             #@validateDiv("col-2")#end
         #end
-
         #@elementItem()
             #@colLabel()备注：#end
             #@formControlDiv("col-8")
@@ -107,11 +95,9 @@
             #end
         #end
     </div>
-
     #@elementItem()
         <div class="col-12">
             <div class="col-5">
-
             </div>
             <div class="col-1">
                 <button style="float: left" type="submit" id="submit2" class="commitBtn">保存</button>
@@ -122,12 +108,9 @@
             <div class="col-5"></div>
         </div>
     #end
-
     <br>
 </div>
 #end
-
-
 <div style="width:30%;float:right">
     #history(adminPath+"/system/action/ajax/history?actionObjectType=Story&actionObjectId="+story?.storyId)
 </div>

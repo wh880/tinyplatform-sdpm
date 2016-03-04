@@ -21,43 +21,36 @@ import java.util.Date;
 
 /**
  * 系统日志表
- *
  */
-public class SystemAction implements Serializable {
+public class SystemAction implements Serializable, Comparable<SystemAction> {
 
     /**
      * 系统日志ID
-     *
      */
     private Integer actionId;
 
     /**
      * 对象类型
-     *
      */
     private String actionObjectType;
 
     /**
      * 对象ID
-     *
      */
     private String actionObjectId;
 
     /**
      * 所属项目
-     *
      */
     private String actionProject;
 
     /**
      * 所属产品
-     *
      */
     private String actionProduct;
 
     /**
      * 操作者
-     *
      */
     private String actionActor;
     /**
@@ -68,31 +61,26 @@ public class SystemAction implements Serializable {
 
     /**
      * 系统日志日期
-     *
      */
     private Date actionDate;
 
     /**
      * 注释
-     *
      */
     private String actionComment;
 
     /**
      * EXTRA
-     *
      */
     private String actionExtra;
 
     /**
      * 是否已读
-     *
      */
     private String actionRead;
 
     /**
      * ACTION_efforted
-     *
      */
     private Integer actionEfforted;
     /**
@@ -238,5 +226,14 @@ public class SystemAction implements Serializable {
 
     public void setActionWeekDay(String actionWeekDay) {
         this.actionWeekDay = actionWeekDay;
+    }
+
+    @Override
+    public int compareTo(SystemAction o) {
+        if (o == null)
+            return 0;
+        else {
+            return this.actionDate.compareTo(o.getActionDate());
+        }
     }
 }

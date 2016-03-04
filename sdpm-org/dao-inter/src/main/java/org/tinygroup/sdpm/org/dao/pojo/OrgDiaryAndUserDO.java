@@ -223,6 +223,8 @@ public class OrgDiaryAndUserDO implements Serializable, Comparable {
 
     private String diaryDateTime;
 
+    private Integer detailCountStatus;
+
     public void setOrgDiaryId(Integer orgDiaryId) {
         this.orgDiaryId = orgDiaryId;
     }
@@ -538,5 +540,13 @@ public class OrgDiaryAndUserDO implements Serializable, Comparable {
     @Override
     public int compareTo(Object o) {
         return -this.orgDiaryWeek.compareTo(((OrgDiaryAndUserDO) o).orgDiaryWeek);
+    }
+
+    public Integer getDetailCountStatus() {
+        return detailCountStatus;
+    }
+
+    public void setDetailCountStatus(Integer detailCountStatus) {
+        this.detailCountStatus = detailCountStatus;
     }
 }

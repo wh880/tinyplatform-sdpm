@@ -11,7 +11,7 @@
                     #if(var2?.key==var?.orgDiaryId)
                         #foreach(var3:var2?.value)
                         <div class="committed clearfix">
-                            <span class="tocommittime">${var3?.effortWeek}：</span>
+                            <span class="tocommittime">${var3?.effortWeek}  </span>
                             <ol class="logList-detailList">
                                 <li><span style="word-break:break-all">${var3?.orgDetailContent}</span></li>
                             </ol>
