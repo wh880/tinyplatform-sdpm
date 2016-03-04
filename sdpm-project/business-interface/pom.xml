@@ -16,5 +16,10 @@
           <artifactId>sdpm-project-dao-interface</artifactId>
           <version>${project.version}</version>
       </dependency>
+      <dependency>
+          <groupId>org.tinygroup</groupId>
+          <artifactId>sdpm-system-dao-interface</artifactId>
+          <version>1.0.1-SNAPSHOT</version>
+      </dependency>
   </dependencies>
 </project>

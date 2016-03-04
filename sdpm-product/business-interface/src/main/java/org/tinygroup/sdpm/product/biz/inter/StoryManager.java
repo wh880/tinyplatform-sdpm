@@ -49,6 +49,7 @@ public interface StoryManager {
      */
     ProductStory find(Integer storyId);
 
+
     /**
      * 根据多个id查找
      * @param storyId

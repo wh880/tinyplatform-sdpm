@@ -55,7 +55,7 @@
 
         <menu id="pro-Info-close" name="取消" href="/project/task/cancel" icon="icon-off" sort="6" isShow="1"
               scope="pro-taskInfo2-op"/>
-        <menu id="pro-Info2-copy" name="复制" href="/project/task/form" icon="icon-copy" sort="8" isShow="1"
+        <menu id="pro-Info2-newcopy" name="复制" href="/project/task/newcopy" icon="icon-copy" sort="8" isShow="1"
               scope="pro-taskInfo2-op"/>
         <menu id="pro-Info-delete" name="删除" href="/project/task/delete" icon="icon-remove" sort="9" isShow="1"
               scope="pro-taskInfo2-op"/>

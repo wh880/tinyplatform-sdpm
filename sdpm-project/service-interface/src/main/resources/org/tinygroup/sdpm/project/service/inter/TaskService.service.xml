@@ -59,6 +59,23 @@
       </service-parameters>
       <service-result name="findTaskByIdResult" required="false" is-array="false" type="org.tinygroup.sdpm.project.dao.pojo.ProjectTask"/>
     </service-method>
+    <service-method local-name="findProductStoryByStoryId" service-id="findProductStoryByStoryId"
+                    method-name="findProductStoryByStoryId" cacheable="false"
+                    category="org.tinygroup.sdpm.project.service.inter">
+      <service-parameters>
+        <service-parameter name="storyId" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findProductStoryByStoryIdResult" required="false" is-array="false"
+                      type="org.tinygroup.sdpm.product.dao.pojo.ProductStory"/>
+    </service-method>
+    <service-method local-name="findSystemModule" service-id="findSystemModule" method-name="findSystemModule"
+                    cacheable="false" category="org.tinygroup.sdpm.project.service.inter">
+      <service-parameters>
+        <service-parameter name="taskModule" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findSystemModuleResult" required="false" is-array="false"
+                      type="org.tinygroup.sdpm.system.dao.pojo.SystemModule"/>
+    </service-method>
     <service-method local-name="updateTask" service-id="updateTask" method-name="updateTask" cacheable="false" category="org.tinygroup.sdpm.project.service.inter">
       <service-parameters>
         <service-parameter name="projectTask" type="org.tinygroup.sdpm.project.dao.pojo.ProjectTask" required="false" is-array="false"/>
