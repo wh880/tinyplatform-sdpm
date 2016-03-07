@@ -127,7 +127,7 @@
         #@elementItem()
             #@sdpmItem("任务名称" "*")
                 #@formControlDiv()
-                    #tinyInput("text" "taskName" story?.storyTitle {"placeholder":"任务名称","datatype":"*","nullmsg":"任务名称不能为空！","class":"input-text"})
+                    #tinyInput("text" "taskName" (story?.storyTitle)?:copyTask?.taskName {"placeholder":"任务名称","datatype":"*","nullmsg":"任务名称不能为空！","class":"input-text"})
                 #end
             #end
         #end

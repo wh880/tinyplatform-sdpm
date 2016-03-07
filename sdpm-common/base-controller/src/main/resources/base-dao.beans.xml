@@ -4,15 +4,6 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
     <!-- 加载配置属性文件 -->
     <context:property-placeholder location="classpath:jdbc.properties" ignore-unresolvable="true"/>
-    <!--<bean id="propertyConfigurer"-->
-          <!--class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">-->
-        <!--<property name="ignoreUnresolvablePlaceholders" value="true" />-->
-        <!--<property name="locations">-->
-            <!--<list>-->
-                <!--<value>classpath:jdbc.properties</value>-->
-            <!--</list>-->
-        <!--</property>-->
-    <!--</bean>-->
 
     <bean id="dynamicDataSource" class="org.apache.commons.dbcp.BasicDataSource">
         <property name="driverClassName" value="${jdbc.driver}"/>

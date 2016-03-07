@@ -2,8 +2,8 @@
   <table id="7d6ad0d0d92141ffb0f6fd1f03882b1f" name="system_effort" title="日志表" schema="" package-name="">
     <description></description>
     <table-field standard-field-id="02058421c0be48dcab02f68cf7490361" primary="true" unique="true" not-null="true" id="effort_id" auto-increase="true"/>
-    <table-field standard-field-id="494874a140a54ab9a00d92382c8c67be" primary="false" unique="false" not-null="true" id="effort_consumed" auto-increase="false"/>
-    <table-field standard-field-id="75dacdf666084a95b5a5faf4cf6a2527" primary="false" unique="false" not-null="true" id="effort_left" auto-increase="false"/>
+    <table-field standard-field-id="494874a140a54ab9a00d92382c8c67be" primary="false" unique="false" not-null="false" id="effort_consumed" auto-increase="false"/>
+    <table-field standard-field-id="75dacdf666084a95b5a5faf4cf6a2527" primary="false" unique="false" not-null="false" id="effort_left" auto-increase="false"/>
     <table-field standard-field-id="488614bbfcc5404aa5b4ddda4cef56d8" primary="false" unique="false" not-null="true" id="effort_date" auto-increase="false"/>
     <table-field standard-field-id="4f1e941334234d2c99bde0ff28a3d757" primary="false" unique="false" not-null="true" id="effort_object_id" auto-increase="false"/>
     <table-field standard-field-id="41c2d4fa69994d27b18ce0512040b599" primary="false" unique="false" not-null="true" id="effort_object_type" auto-increase="false"/>
