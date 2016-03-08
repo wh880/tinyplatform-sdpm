@@ -20,7 +20,6 @@ import java.io.Serializable;
 
 /**
  * 项目产品
- *
  */
 public class ProjectProduct implements Serializable {
 

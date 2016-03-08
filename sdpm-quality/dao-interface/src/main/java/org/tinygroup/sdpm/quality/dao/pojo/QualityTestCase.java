@@ -21,7 +21,6 @@ import java.util.Date;
 
 /**
  * 测试用例表
- *
  */
 public class QualityTestCase implements Serializable {
 
@@ -45,186 +44,155 @@ public class QualityTestCase implements Serializable {
 
     /**
      * 用例编号
-     *
      */
     private Integer caseId;
 
     /**
      * 产品ID
-     *
      */
     private Integer productId;
 
     /**
      * 模块ID
-     *
      */
     private Integer moduleId;
 
     /**
      * CASE_PATH
-     *
      */
     private Integer casePath;
 
     /**
      * 需求ID
-     *
      */
     private Integer storyId;
 
     /**
      * 需求版本
-     *
      */
     private Integer storyVersion;
 
     /**
      * 用例标题
-     *
      */
     private String caseTitle;
 
     /**
      * 前置条件
-     *
      */
     private String casePrecondition;
 
     /**
      * 关键词
-     *
      */
     private String caseKeywords;
 
     /**
      * 优先级
-     *
      */
     private Integer priority;
 
     /**
      * 用例类型
-     *
      */
     private String caseType;
     /**
      * 适用阶段
-     *
      */
     private String caseStage;
 
     /**
      * 执行方式
-     *
      */
     private String caseRunway;
 
     /**
      * 由谁编写
-     *
      */
     private String caseScriptedBy;
 
     /**
      * 编写日期
-     *
      */
     private Date caseScriptedDate;
 
     /**
      * SCRIPTSTATUS
-     *
      */
     private String scriptStatus;
 
     /**
      * SCRIPTLOCATION
-     *
      */
     private String scriptLocation;
 
     /**
      * 用例状态
-     *
      */
     private String caseStatus;
 
     /**
      * 执行频率
-     *
      */
     private String caseFrequency;
 
     /**
      * 排序
-     *
      */
     private Integer caseOrder;
 
     /**
      * 由谁创建
-     *
      */
     private String caseOpenedBy;
 
     /**
      * 创建日期
-     *
      */
     private Date caseOpenedDate;
 
     /**
      * 最后修改者
-     *
      */
     private String caseLastEditedBy;
 
     /**
      * 最后修改日期
-     *
      */
     private Date caseLastEditedDate;
 
     /**
      * 关联用例版本
-     *
      */
     private Integer caseVersion;
 
     /**
      * 相关用例
-     *
      */
     private Integer linkCase;
 
     /**
      * 来源Bug
-     *
      */
     private Integer caseFromBug;
 
     /**
      * 已删除
-     *
      */
     private Integer deleted;
 
     /**
      * 最后执行人
-     *
      */
     private String caseLastRunner;
 
     /**
      * 最后执行时间
-     *
      */
     private Date caseLastRunDate;
 
     /**
      * 用例执行结果
-     *
      */
     private String caseLastRunResult;
 

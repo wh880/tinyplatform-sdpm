@@ -1,4 +1,3 @@
-
 package org.tinygroup.sdpm.action.productLine;
 
 import com.google.common.collect.Lists;
@@ -13,8 +12,8 @@ import org.tinygroup.sdpm.dao.condition.ConditionCarrier;
 import org.tinygroup.sdpm.dao.condition.ConditionUtils;
 import org.tinygroup.sdpm.org.dao.pojo.OrgRole;
 import org.tinygroup.sdpm.org.service.inter.RoleService;
-import org.tinygroup.sdpm.product.dao.utils.FieldUtil;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
+import org.tinygroup.sdpm.product.dao.utils.FieldUtil;
 import org.tinygroup.sdpm.product.service.inter.ProductService;
 import org.tinygroup.sdpm.productLine.dao.pojo.ProductLine;
 import org.tinygroup.sdpm.productLine.service.inter.ProductLineService;
@@ -75,11 +74,11 @@ public class ProductLineAction extends BaseController {
                 , null
                 , null
                 , systemAction.getActionComment());
-        if(!StringUtil.isBlank(lastAddress)){
-            if(lastAddress.contains("?")){
-                return "redirect:" + lastAddress+"&backProductLine="+productLine1.getProductLineId();
+        if (!StringUtil.isBlank(lastAddress)) {
+            if (lastAddress.contains("?")) {
+                return "redirect:" + lastAddress + "&backProductLine=" + productLine1.getProductLineId();
             }
-            return "redirect:" + lastAddress+"?backProductLine="+productLine1.getProductLineId();
+            return "redirect:" + lastAddress + "?backProductLine=" + productLine1.getProductLineId();
         }
         return "redirect:" + "/a/productLine/to";
     }
@@ -87,11 +86,11 @@ public class ProductLineAction extends BaseController {
     @RequestMapping("/update")
     public String update(ProductLine productLine) {
         ProductLine productLineOld = productLineService.findProductLine(productLine.getProductLineId());
-        if(ProductLine.STATUS_DELETED.equals(productLine.getProductLineStatus())){
+        if (ProductLine.STATUS_DELETED.equals(productLine.getProductLineStatus())) {
             productLine.setDeleted(1);
-        }else{
-            if(FieldUtil.DELETE_YES==(productLineOld.getDeleted())&&
-            !ProductLine.STATUS_DELETED.equals(productLine.getProductLineStatus())){
+        } else {
+            if (FieldUtil.DELETE_YES == (productLineOld.getDeleted()) &&
+                    !ProductLine.STATUS_DELETED.equals(productLine.getProductLineStatus())) {
                 productLine.setDeleted(0);
             }
         }
@@ -181,14 +180,14 @@ public class ProductLineAction extends BaseController {
                        @RequestParam(required = false, defaultValue = "asc") String ordertype, Integer status, Model model) {
         ConditionCarrier carrier = new ConditionCarrier();
         Pager<ProductLine> pagerProductLine = null;
-        if(status!=null&&status!=5) {
-            mergeStatusCondition(carrier,status);
+        if (status != null && status != 5) {
+            mergeStatusCondition(carrier, status);
             Integer[] ids = productLineService.getUserProductLineIds(userUtils.getUserId());
             pagerProductLine = productLineService.findProductLinePagerInIds(start, pagesize, carrier, productLine, ids, order, ordertype);
-        }else{
+        } else {
             ProductLine productLine1 = new ProductLine();
             productLine1.setDeleted(1);
-            pagerProductLine = productLineService.findProductLineInPage(start,pagesize,productLine1,order,ordertype);
+            pagerProductLine = productLineService.findProductLineInPage(start, pagesize, productLine1, order, ordertype);
         }
 
         model.addAttribute("productLine", pagerProductLine);
@@ -231,7 +230,7 @@ public class ProductLineAction extends BaseController {
     public String to(HttpServletRequest request, Model model) {
         String query = request.getQueryString();
         if (StringUtil.isBlank(query) || !query.contains("status")) {
-            return "redirect:"+adminPath+"/productLine/to?status=1";
+            return "redirect:" + adminPath + "/productLine/to?status=1";
         }
         return "/productLine/page/list/productline/list.page";
     }
@@ -248,7 +247,7 @@ public class ProductLineAction extends BaseController {
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
         Product product = new Product();
         product.setDeleted(FieldUtil.DELETE_NO);
-        List<Product> productLists = productService.getProductByUser(userUtils.getUserId(), 0, null,Product.CHOOSE_OPENED);
+        List<Product> productLists = productService.getProductByUser(userUtils.getUserId(), 0, null, Product.CHOOSE_OPENED);
         ProductLine productLine = new ProductLine();
         productLine.setDeleted(FieldUtil.DELETE_NO);
         List<ProductLine> productLines = productLineService.getUserProductLine(userUtils.getUserId());
@@ -264,7 +263,7 @@ public class ProductLineAction extends BaseController {
             map.put("pId", 0);
             map.put("name", d.getProductLineName());
             map.put("open", true);
-            map.put("clickAble",false);
+            map.put("clickAble", false);
             list.add(map);
         }
         for (Product d : productLists) {
@@ -302,7 +301,7 @@ public class ProductLineAction extends BaseController {
                 return "/productLine/page/list/build/buildlist.page";
             }
         }
-        return "redirect:"+adminPath+"/productLine/to";
+        return "redirect:" + adminPath + "/productLine/to";
     }
 
 
@@ -325,7 +324,7 @@ public class ProductLineAction extends BaseController {
             list.add(map);
             Product product = new Product();
             product.setProductLineId(productLine.getProductLineId());
-            productList = productService.getProductByUser(UserUtils.getUserId(),0,productLine.getProductLineId(),"");
+            productList = productService.getProductByUser(UserUtils.getUserId(), 0, productLine.getProductLineId(), "");
         }
         for (Product d : productList) {
             Map<String, Object> map = new HashMap<String, Object>();
@@ -341,10 +340,10 @@ public class ProductLineAction extends BaseController {
     }
 
     private void mergeStatusCondition(ConditionCarrier carrier, Integer status) {
-        if (status == null || status < 1) return ;
+        if (status == null || status < 1) return;
         switch (status) {
             case 1:
-                return ;
+                return;
             case 2:
                 carrier.put("productLine.productLineOwner",
                         ConditionUtils.Operate.EQ.getOperate(),
@@ -453,8 +452,8 @@ public class ProductLineAction extends BaseController {
     }
 
     @RequestMapping(value = "/productLineProducts")
-    public String productLineProducts(String choose,Integer productLineId, Model model) {
-        List<Product> products = productService.getProductByUserAndProductLineWithCount(UserUtils.getUserId(), productLineId, 0,choose);
+    public String productLineProducts(String choose, Integer productLineId, Model model) {
+        List<Product> products = productService.getProductByUserAndProductLineWithCount(UserUtils.getUserId(), productLineId, 0, choose);
         model.addAttribute("productList", products);
         return "/productLine/data/product/productListData.pagelet";
     }
@@ -472,7 +471,7 @@ public class ProductLineAction extends BaseController {
         for (int i = 0; i < ids.length; i++) {
             ids[i] = lineList.get(i).getProductLineId();
         }
-        return productLineService.lineInCondition(key,Integer.parseInt(configService.getConfigBySection(SystemConfig.SEARCH_CONFIG).getConfigKey()), ids);
+        return productLineService.lineInCondition(key, Integer.parseInt(configService.getConfigBySection(SystemConfig.SEARCH_CONFIG).getConfigKey()), ids);
     }
 }
 

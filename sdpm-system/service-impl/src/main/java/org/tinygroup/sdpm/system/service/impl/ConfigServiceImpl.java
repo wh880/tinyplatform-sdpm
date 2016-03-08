@@ -13,9 +13,10 @@ import java.util.List;
  * Created by wangll13383 on 2015/12/18.
  */
 @Component
-public class ConfigServiceImpl implements ConfigService{
+public class ConfigServiceImpl implements ConfigService {
     @Autowired
     ConfigManager configManager;
+
     public SystemConfig addConfig(SystemConfig config) {
         return configManager.add(config);
     }
@@ -33,11 +34,11 @@ public class ConfigServiceImpl implements ConfigService{
     }
 
     public List<SystemConfig> findConfigList() {
-        return configManager.findList(null,null,null);
+        return configManager.findList(null, null, null);
     }
 
     public Pager<SystemConfig> findConfigPager(int start, int limit, SystemConfig config, String columnName, Boolean asc) {
-        return configManager.findPager(start,limit,config,columnName,asc);
+        return configManager.findPager(start, limit, config, columnName, asc);
     }
 
     public SystemConfig getConfigBySection(String section) {

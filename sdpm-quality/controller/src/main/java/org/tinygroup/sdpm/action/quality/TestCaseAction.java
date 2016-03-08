@@ -70,16 +70,16 @@ public class TestCaseAction extends BaseController {
             return "redirect:/a/quality/testCase?currentPageId=5&status=tcaseall"
                     + (queryString == null ? "" : "&" + queryString);
         }
-        if("noCase".equals(type)){
+        if ("noCase".equals(type)) {
             return "quality/index/case/NoTestCaseStory.page";
         }
         return "quality/index/case/testCase.page";
     }
 
     @RequestMapping("/findPager")
-    public String findPager(@CookieValue(value = ProductUtils.COOKIE_PRODUCT_ID,defaultValue = "0") Integer cookieProductId, Integer start, Integer limit, String groupOperate,
-                            SearchInfos searchInfos, String status, @RequestParam(required = false,defaultValue = "caseId")String order,
-                            @RequestParam(required = false,defaultValue = "desc")String ordertype, QualityTestCase testcase, Model model,
+    public String findPager(@CookieValue(value = ProductUtils.COOKIE_PRODUCT_ID, defaultValue = "0") Integer cookieProductId, Integer start, Integer limit, String groupOperate,
+                            SearchInfos searchInfos, String status, @RequestParam(required = false, defaultValue = "caseId") String order,
+                            @RequestParam(required = false, defaultValue = "desc") String ordertype, QualityTestCase testcase, Model model,
                             HttpServletRequest request) {
         boolean asc = true;
         if ("desc".equals(ordertype)) {
@@ -89,7 +89,7 @@ public class TestCaseAction extends BaseController {
         testcase.setDeleted(0);
         ConditionCarrier carrier = new ConditionCarrier();
         if (testcase.getModuleId() != null && testcase.getModuleId() > 0) {
-            carrier.putModuleIn("qualityTestCase.moduleId",String.valueOf(testcase.getModuleId()));
+            carrier.putModuleIn("qualityTestCase.moduleId", String.valueOf(testcase.getModuleId()));
             testcase.setModuleId(null);
         }
 
@@ -97,7 +97,7 @@ public class TestCaseAction extends BaseController {
         if ("tcaseneedchange".equals(status)) {
             casepager = testCaseService.findStoryChangedCase(start, limit, testcase, carrier, order, "asc".equals(ordertype) ? true : false);
         } else if ("tcaseall".equals(status)) {
-            carrier.putSearch("caseSearch",searchInfos,groupOperate);
+            carrier.putSearch("caseSearch", searchInfos, groupOperate);
             casepager = testCaseService.findTestCasePagerByConditionCarrier(start, limit, testcase, carrier, order, asc);
         }
         model.addAttribute("casepager", casepager);
@@ -106,9 +106,9 @@ public class TestCaseAction extends BaseController {
 
     @RequiresPermissions("add-case")
     @RequestMapping("/add")
-    public String add(Integer bugId,Model model) {
-        if(bugId!=null){
-            model.addAttribute("bug",bugService.findQualityBugById(bugId));
+    public String add(Integer bugId, Model model) {
+        if (bugId != null) {
+            model.addAttribute("bug", bugService.findQualityBugById(bugId));
         }
         return "quality/operate/case/proposecase.page";
     }
@@ -121,7 +121,7 @@ public class TestCaseAction extends BaseController {
                        String lastAddress,
                        String currentAddress,
                        UploadProfile uploadProfile) throws Exception {
-        if (testcase.getCaseId() == null || testcase.getCaseId() ==0) {
+        if (testcase.getCaseId() == null || testcase.getCaseId() == 0) {
             testcase.setCaseOpenedBy(userUtils.getUserId());
             if (testcase.getStoryId() != null && testcase.getStoryId() > 0) {
                 testcase.setStoryVersion(storyService.findStory(testcase.getStoryId()).getStoryVersion());
@@ -148,8 +148,8 @@ public class TestCaseAction extends BaseController {
             List<QualityCaseStep> steps = caseStepService.findCaseStepList(step1);
             if (isCaseModify(step, expect, steps)) {
                 Integer maxVersion = caseStepService.getCaseMaxVersion(testCase.getCaseId());
-                maxVersion = maxVersion==null?testCase.getCaseVersion():maxVersion;
-                testcase.setCaseVersion(maxVersion+1);
+                maxVersion = maxVersion == null ? testCase.getCaseVersion() : maxVersion;
+                testcase.setCaseVersion(maxVersion + 1);
                 insertStep(step, expect, testcase);
             }
             testcase.setCaseLastEditedBy(userUtils.getUserId());
@@ -167,9 +167,9 @@ public class TestCaseAction extends BaseController {
         }
         storyJudge(testcase.getStoryId());
         processProfile(uploadProfile, testcase.getCaseId(), ProfileType.TESTCASE);
-        if(!StringUtil.isBlank(currentAddress)){
+        if (!StringUtil.isBlank(currentAddress)) {
             return "redirect:" + currentAddress;
-        }else{
+        } else {
             if (!StringUtil.isBlank(lastAddress)) {
                 return "redirect:" + lastAddress;
             }
@@ -180,7 +180,7 @@ public class TestCaseAction extends BaseController {
     @RequestMapping(value = "/batchSave", method = RequestMethod.POST)
     public String batchSave(List<QualityTestCase> testcases, Model model) {
         testCaseService.batchUpdateTestCase(testcases);
-        for(QualityTestCase testCase : testcases){
+        for (QualityTestCase testCase : testcases) {
             storyJudge(testCase.getStoryId());
         }
         model.addAttribute("testcases", testcases);
@@ -512,9 +512,9 @@ public class TestCaseAction extends BaseController {
             if ("2".equals(c.getResult())) {
                 result = c.getResult();
             } else if ("3".equals(c.getResult())) {
-                result = "2".equals(result)? "2" : "3";
-            }else if("0".equals(c.getResult())){
-                result = "1".equals(result)?"0":result;
+                result = "2".equals(result) ? "2" : "3";
+            } else if ("0".equals(c.getResult())) {
+                result = "1".equals(result) ? "0" : result;
             }
         }
         return result;
@@ -566,8 +566,8 @@ public class TestCaseAction extends BaseController {
     public String viewInfo(Integer id, Integer version, Model model, Integer no, HttpServletRequest request) {
         QualityTestCase testCase = null;
         if (no != null) {
-            String result=CookieUtils.getCookie(request, ProductUtils.COOKIE_PRODUCT_ID);
-            if(result==null){
+            String result = CookieUtils.getCookie(request, ProductUtils.COOKIE_PRODUCT_ID);
+            if (result == null) {
                 return notFoundView();
             }
             Integer cookieProductId = Integer.parseInt(result);
@@ -677,8 +677,8 @@ public class TestCaseAction extends BaseController {
                                   Integer limit) {
         QualityTestCase testCase = testCaseService.testCase(caseId);
         Integer maxCaseVersion = caseStepService.getCaseMaxVersion(caseId);
-        if(maxCaseVersion==null){
-            maxCaseVersion=1;
+        if (maxCaseVersion == null) {
+            maxCaseVersion = 1;
         }
         Map<String, List<QualityCaseStep>> versionStep = new HashMap<String, List<QualityCaseStep>>();
         for (Integer i = maxCaseVersion > (start + limit) ? (start + limit) : maxCaseVersion; i > start; i--) {
@@ -704,25 +704,25 @@ public class TestCaseAction extends BaseController {
         return "redirect:/a/quality/testCase/case/viewInfo?id=" + caseId;
     }
 
-    private void storyJudge(Integer storyId){
-        if(storyId!=null){
+    private void storyJudge(Integer storyId) {
+        if (storyId != null) {
             ProductStory story = storyService.findStory(storyId);
             QualityTestCase testCase = new QualityTestCase();
             testCase.setStoryId(storyId);
             testCase.setDeleted(0);
             List<QualityTestCase> testCaseList = testCaseService.findTestCaseList(testCase);
             boolean isDone = true;
-            for(QualityTestCase testCase1 : testCaseList){
-                if(!QualityTestCase.RESULT_PASS.equals(testCase1.getCaseLastRunResult())){
+            for (QualityTestCase testCase1 : testCaseList) {
+                if (!QualityTestCase.RESULT_PASS.equals(testCase1.getCaseLastRunResult())) {
                     isDone = false;
                 }
             }
-            if(isDone) {
+            if (isDone) {
                 if (!ProductStory.STAGE_IS_TESTED.equals(story.getStoryStage())) {
                     story.setStoryStage(ProductStory.STAGE_IS_TESTED);
                     storyService.updateStory(story);
                 }
-            }else{
+            } else {
                 if (!ProductStory.STAGE_IS_TESTING.equals(story.getStoryStage())) {
                     story.setStoryStage(ProductStory.STAGE_IS_TESTING);
                     storyService.updateStory(story);

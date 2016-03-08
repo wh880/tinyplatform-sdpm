@@ -17,10 +17,8 @@
 package org.tinygroup.sdpm.org.dao;
 
 import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
-
 import org.tinygroup.sdpm.org.dao.pojo.OrgDiary;
 import org.tinygroup.sdpm.org.dao.pojo.OrgDiaryAndUserDO;
-import org.tinygroup.sdpm.org.dao.pojo.OrgDiaryDetail;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.tinysqldsl.Pager;
 

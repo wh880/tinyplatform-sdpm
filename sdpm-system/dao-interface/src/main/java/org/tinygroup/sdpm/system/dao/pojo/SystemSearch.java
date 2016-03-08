@@ -21,7 +21,6 @@ import java.util.Date;
 
 /**
  * 模块搜索表
- *
  */
 public class SystemSearch implements Serializable {
     public static int DELETE_YES = 1;
@@ -29,49 +28,41 @@ public class SystemSearch implements Serializable {
 
     /**
      * 搜索ID
-     *
      */
     private Integer searchId;
 
     /**
      * 搜索对象类型
-     *
      */
     private String searchObjectType;
 
     /**
      * 搜索对象ID
-     *
      */
     private Integer searchObjectId;
 
     /**
      * 搜索名称
-     *
      */
     private String searchTitle;
 
     /**
      * 搜索内容
-     *
      */
     private String searchContent;
 
     /**
      * 搜索添加日期
-     *
      */
     private Date searchAddedDate;
 
     /**
      * 搜索编辑日期
-     *
      */
     private Date searchEditedDate;
 
     /**
      * 已删除
-     *
      */
     private Integer deleted;
 

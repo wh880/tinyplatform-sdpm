@@ -68,24 +68,24 @@ public class ProductReleaseDaoImpl extends TinyDslDaoSupport implements
                     public Insert generate(ProductRelease t) {
                         Insert insert = insertInto(PRODUCT_RELEASETABLE)
                                 .values(
-										PRODUCT_RELEASETABLE.PRODUCT_ID.value(t
-												.getProductId()),
-										PRODUCT_RELEASETABLE.RELEASE_BUILD.value(t
-												.getReleaseBuild()),
-										PRODUCT_RELEASETABLE.RELEASE_NAME
-												.value(t.getReleaseName()),
-										PRODUCT_RELEASETABLE.RELEASE_DATE
-												.value(t.getReleaseDate()),
-										PRODUCT_RELEASETABLE.RELEASE_STORIES
-												.value(t.getReleaseStories()),
-										PRODUCT_RELEASETABLE.RELEASE_BUGS
-												.value(t.getReleaseBugs()),
-										PRODUCT_RELEASETABLE.RELEASE_DESC
-												.value(t.getReleaseDesc()),
+                                        PRODUCT_RELEASETABLE.PRODUCT_ID.value(t
+                                                .getProductId()),
+                                        PRODUCT_RELEASETABLE.RELEASE_BUILD.value(t
+                                                .getReleaseBuild()),
+                                        PRODUCT_RELEASETABLE.RELEASE_NAME
+                                                .value(t.getReleaseName()),
+                                        PRODUCT_RELEASETABLE.RELEASE_DATE
+                                                .value(t.getReleaseDate()),
+                                        PRODUCT_RELEASETABLE.RELEASE_STORIES
+                                                .value(t.getReleaseStories()),
+                                        PRODUCT_RELEASETABLE.RELEASE_BUGS
+                                                .value(t.getReleaseBugs()),
+                                        PRODUCT_RELEASETABLE.RELEASE_DESC
+                                                .value(t.getReleaseDesc()),
                                         PRODUCT_RELEASETABLE.NO
                                                 .value(t.getNo()),
-										PRODUCT_RELEASETABLE.DELETED.value(t
-												.getDeleted()));
+                                        PRODUCT_RELEASETABLE.DELETED.value(t
+                                                .getDeleted()));
                         return insert;
                     }
                 });

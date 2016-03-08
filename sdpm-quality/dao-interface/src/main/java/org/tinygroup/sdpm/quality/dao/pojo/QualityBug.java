@@ -21,7 +21,6 @@ import java.util.Date;
 
 /**
  * 缺陷表
- *
  */
 public class QualityBug implements Serializable {
     public static final String STATUS_ACTIVE = "1";
@@ -31,307 +30,256 @@ public class QualityBug implements Serializable {
     private Integer releaseId;
     /**
      * Bug编号
-     *
      */
     private Integer bugId;
 
     /**
      * 产品ID
-     *
      */
     private Integer productId;
 
     /**
      * 模块ID
-     *
      */
     private Integer moduleId;
 
     /**
      * 项目id
-     *
      */
     private Integer projectId;
 
     /**
      * 计划ID
-     *
      */
     private Integer planId;
 
     /**
      * 需求ID
-     *
      */
     private Integer storyId;
 
     /**
      * 需求版本
-     *
      */
     private Integer storyVersion;
 
     /**
      * 任务id
-     *
      */
     private Integer taskId;
 
     /**
      * 转任务
-     *
      */
     private Integer toTaskId;
 
     /**
      * 转需求
-     *
      */
     private Integer toStoryId;
 
     /**
      * Bug标题
-     *
      */
     private String bugTitle;
 
     /**
      * 关键词
-     *
      */
     private String bugKeywords;
 
     /**
      * 严重程度
-     *
      */
     private Integer bugSeverity;
 
     /**
      * 优先级
-     *
      */
     private Integer priority;
 
     /**
      * Bug类型
-     *
      */
     private String bugType;
 
     /**
      * 操作系统
-     *
      */
     private String operatingSystem;
 
     /**
      * 浏览器
-     *
      */
     private String browser;
 
     /**
      * 硬件平台
-     *
      */
     private String hardware;
 
     /**
      * 如何发现
-     *
      */
     private String bugFound;
 
     /**
      * 重现步骤
-     *
      */
     private String bugSteps;
 
     /**
      * Bug状态
-     *
      */
     private String bugStatus;
 
     /**
      * 是否确认
-     *
      */
     private Integer bugConfirmed;
 
     /**
      * 激活次数
-     *
      */
     private Integer bugActivatedCount;
 
     /**
      * 抄送给
-     *
      */
     private String bugMailto;
 
     /**
      * 由谁创建
-     *
      */
     private String bugOpenedBy;
 
     /**
      * 创建日期
-     *
      */
     private Date bugOpenedDate;
 
     /**
      * 影响版本
-     *
      */
     private String bugOpenedBuild;
 
     /**
      * 指派给
-     *
      */
     private String bugAssignedTo;
 
     /**
      * 指派日期
-     *
      */
     private Date bugAssignedDate;
 
     /**
      * 解决者
-     *
      */
     private String bugResolvedBy;
 
     /**
      * 解决方案
-     *
      */
     private String bugResolution;
 
     /**
      * 解决版本
-     *
      */
     private String bugResolvedBuild;
 
     /**
      * 解决日期
-     *
      */
     private Date bugResolvedDate;
 
     /**
      * 由谁关闭
-     *
      */
     private String bugClosedBy;
 
     /**
      * 关闭日期
-     *
      */
     private Date bugClosedDate;
 
     /**
      * 重复Bug的ID
-     *
      */
     private Integer bugDuplicateBug;
 
     /**
      * 相关Bug
-     *
      */
     private String linkBug;
 
     /**
      * 相关用例
-     *
      */
     private Integer linkCase;
 
     /**
      * 关联用例版本
-     *
      */
     private Integer caseVersion;
 
     /**
      * BUG_RESULT
-     *
      */
     private Integer bugResult;
 
     /**
      * BUG_REPO
-     *
      */
     private Integer bugRepo;
 
     /**
      * BUG_ENTRY
-     *
      */
     private String bugEntry;
 
     /**
      * 来源用例
-     *
      */
     private Integer bugFromCase;
 
     /**
      * BUG_LINES
-     *
      */
     private String bugLines;
 
     /**
      * BUG_V1
-     *
      */
     private String bugV1;
 
     /**
      * BUG_V2
-     *
      */
     private String bugV2;
 
     /**
      * BUG_REPOTYPE
-     *
      */
     private String bugRepoType;
 
     /**
      * 测试任务编号
-     *
      */
     private Integer testtask;
 
     /**
      * 最后修改者
-     *
      */
     private String bugLastEditedBy;
 
     /**
      * 最后修改日期
-     *
      */
     private Date bugLastEditedDate;
 
     /**
      * 已删除
-     *
      */
     private Integer deleted;
 

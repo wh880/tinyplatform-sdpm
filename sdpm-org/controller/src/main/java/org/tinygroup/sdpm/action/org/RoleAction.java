@@ -149,9 +149,10 @@ public class RoleAction extends BaseController {
         model.addAttribute("pager", pager);
         return "organization/privilege/privilegeTable.pagelet";
     }
+
     @ResponseBody
     @RequestMapping("ajax/roleInCondition")
-    public List<OrgRole> roleInCondition(String key, String initKey, String type ) {
+    public List<OrgRole> roleInCondition(String key, String initKey, String type) {
         if (initKey != null) {
             return roleService.getRoleByIds(initKey.split(","));
         }

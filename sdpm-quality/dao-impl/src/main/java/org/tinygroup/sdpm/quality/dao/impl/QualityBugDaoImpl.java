@@ -1,17 +1,17 @@
 /**
- *  Copyright (c) 1997-2013, www.tinygroup.org (luo_guo@icloud.com).
- *
- *  Licensed under the GPL, Version 3.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *       http://www.gnu.org/licenses/gpl.html
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
+ * Copyright (c) 1997-2013, www.tinygroup.org (luo_guo@icloud.com).
+ * <p>
+ * Licensed under the GPL, Version 3.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.gnu.org/licenses/gpl.html
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 package org.tinygroup.sdpm.quality.dao.impl;
@@ -122,7 +122,7 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
     }
 
     public int edit(final QualityBug qualityBug) {
-        if(qualityBug == null || qualityBug.getBugId() == null){
+        if (qualityBug == null || qualityBug.getBugId() == null) {
             return 0;
         }
         return getDslTemplate().update(qualityBug, new UpdateGenerateCallback<QualityBug>() {
@@ -184,8 +184,8 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
         });
     }
 
-    public int deleteByKey(Integer pk){
-        if(pk == null){
+    public int deleteByKey(Integer pk) {
+        if (pk == null) {
             return 0;
         }
         return getDslTemplate().deleteByKey(pk, new DeleteGenerateCallback<Serializable>() {
@@ -196,21 +196,21 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
     }
 
     public int deleteByKeys(Integer... pks) {
-        if(pks == null || pks.length == 0){
+        if (pks == null || pks.length == 0) {
             return 0;
         }
         return getDslTemplate().deleteByKeys(new DeleteGenerateCallback<Serializable[]>() {
             public Delete generate(Serializable[] t) {
                 return delete(QUALITY_BUGTABLE).where(QUALITY_BUGTABLE.BUG_ID.in(t));
             }
-        },pks);
+        }, pks);
     }
 
     public QualityBug getByKey(Integer pk) {
         return getDslTemplate().getByKey(pk, QualityBug.class, new SelectGenerateCallback<Serializable>() {
             @SuppressWarnings("rawtypes")
             public Select generate(Serializable t) {
-                return select(QUALITY_BUGTABLE.ALL,PRODUCTTABLE.PRODUCT_NAME.as("productName"),
+                return select(QUALITY_BUGTABLE.ALL, PRODUCTTABLE.PRODUCT_NAME.as("productName"),
                         PROJECTTABLE.PROJECT_NAME.as("projectName"),
                         SYSTEM_MODULETABLE.MODULE_NAME.as("moduleName"),
                         PRODUCT_PLANTABLE.PLAN_NAME.as("planName"),
@@ -241,9 +241,9 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
         });
     }
 
-    public List<QualityBug> query(QualityBug qualityBug ,final OrderBy... orderArgs) {
-        if(qualityBug==null){
-            qualityBug=new QualityBug();
+    public List<QualityBug> query(QualityBug qualityBug, final OrderBy... orderArgs) {
+        if (qualityBug == null) {
+            qualityBug = new QualityBug();
         }
         return getDslTemplate().query(qualityBug, new SelectGenerateCallback<QualityBug>() {
 
@@ -307,9 +307,9 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
         });
     }
 
-    private List<QualityBug> query(QualityBug qualityBug, final Condition conditions , final OrderBy... orderArgs) {
-        if(qualityBug==null){
-            qualityBug=new QualityBug();
+    private List<QualityBug> query(QualityBug qualityBug, final Condition conditions, final OrderBy... orderArgs) {
+        if (qualityBug == null) {
+            qualityBug = new QualityBug();
         }
         return getDslTemplate().query(qualityBug, new SelectGenerateCallback<QualityBug>() {
 
@@ -374,15 +374,15 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
         });
     }
 
-    public Pager<QualityBug> queryPager(int start,int limit ,QualityBug qualityBug ,final OrderBy... orderArgs) {
-        if(qualityBug==null){
-            qualityBug=new QualityBug();
+    public Pager<QualityBug> queryPager(int start, int limit, QualityBug qualityBug, final OrderBy... orderArgs) {
+        if (qualityBug == null) {
+            qualityBug = new QualityBug();
         }
         return getDslTemplate().queryPager(start, limit, qualityBug, false, new SelectGenerateCallback<QualityBug>() {
 
             public Select generate(QualityBug t) {
-                MysqlSelect select = MysqlSelect.select(QUALITY_BUGTABLE.ALL,ORG_USERTABLE.ORG_USER_REAL_NAME.as("assignedUser")).from(QUALITY_BUGTABLE)
-                        .join(Join.leftJoin(ORG_USERTABLE,QUALITY_BUGTABLE.BUG_ASSIGNED_TO.eq(ORG_USERTABLE.ORG_USER_ID))).where(
+                MysqlSelect select = MysqlSelect.select(QUALITY_BUGTABLE.ALL, ORG_USERTABLE.ORG_USER_REAL_NAME.as("assignedUser")).from(QUALITY_BUGTABLE)
+                        .join(Join.leftJoin(ORG_USERTABLE, QUALITY_BUGTABLE.BUG_ASSIGNED_TO.eq(ORG_USERTABLE.ORG_USER_ID))).where(
                                 and(
                                         QUALITY_BUGTABLE.PRODUCT_ID.eq(t.getProductId()),
                                         QUALITY_BUGTABLE.MODULE_ID.eq(t.getModuleId()),
@@ -439,29 +439,29 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
         });
     }
 
-    public Pager<QualityBug> queryPager(int start, int limit , final Condition conditions, QualityBug qualityBug , final OrderBy... orderArgs) {
-        if(qualityBug==null){
-            qualityBug=new QualityBug();
+    public Pager<QualityBug> queryPager(int start, int limit, final Condition conditions, QualityBug qualityBug, final OrderBy... orderArgs) {
+        if (qualityBug == null) {
+            qualityBug = new QualityBug();
         }
-        if(qualityBug.getBugOpenedBuild()!=null){
+        if (qualityBug.getBugOpenedBuild() != null) {
             String ones = qualityBug.getBugOpenedBuild();
             qualityBug.setBugOpenedBuild(null);
-            List<QualityBug> bugList = this.query(qualityBug,conditions);
+            List<QualityBug> bugList = this.query(qualityBug, conditions);
             List<Integer> idList = new ArrayList<Integer>();
-            for(QualityBug bug : bugList){
-                if(hasIntersection(ones,bug.getBugOpenedBuild())){
+            for (QualityBug bug : bugList) {
+                if (hasIntersection(ones, bug.getBugOpenedBuild())) {
                     idList.add(bug.getBugId());
                 }
             }
             Integer[] ids = new Integer[idList.size()];
-            return queryBugPage(start,limit,idList.toArray(ids),orderArgs);
+            return queryBugPage(start, limit, idList.toArray(ids), orderArgs);
 
-        }else{
-            return getDslTemplate().queryPager(start>0?start:0, limit, qualityBug, false, new SelectGenerateCallback<QualityBug>() {
+        } else {
+            return getDslTemplate().queryPager(start > 0 ? start : 0, limit, qualityBug, false, new SelectGenerateCallback<QualityBug>() {
 
                 public Select generate(QualityBug t) {
-                    MysqlSelect select = MysqlSelect.select(QUALITY_BUGTABLE.ALL,ORG_USERTABLE.ORG_USER_REAL_NAME.as("assignedUser")).from(QUALITY_BUGTABLE)
-                            .join(Join.leftJoin(ORG_USERTABLE,QUALITY_BUGTABLE.BUG_ASSIGNED_TO.eq(ORG_USERTABLE.ORG_USER_ID))).where(
+                    MysqlSelect select = MysqlSelect.select(QUALITY_BUGTABLE.ALL, ORG_USERTABLE.ORG_USER_REAL_NAME.as("assignedUser")).from(QUALITY_BUGTABLE)
+                            .join(Join.leftJoin(ORG_USERTABLE, QUALITY_BUGTABLE.BUG_ASSIGNED_TO.eq(ORG_USERTABLE.ORG_USER_ID))).where(
                                     and(
                                             conditions,
                                             QUALITY_BUGTABLE.PRODUCT_ID.eq(t.getProductId()),
@@ -520,12 +520,12 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
         }
     }
 
-    private boolean hasIntersection(String strsOne, String strsTwo){
+    private boolean hasIntersection(String strsOne, String strsTwo) {
         String[] ones = strsOne.split(",");
         String[] twos = strsTwo.split(",");
-        for(String one : ones){
-            for(String two : twos){
-                if(one.equals(two)){
+        for (String one : ones) {
+            for (String two : twos) {
+                if (one.equals(two)) {
                     return true;
                 }
             }
@@ -533,7 +533,7 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
         return false;
     }
 
-    public int[] batchInsert(boolean autoGeneratedKeys ,List<QualityBug> qualityBugs) {
+    public int[] batchInsert(boolean autoGeneratedKeys, List<QualityBug> qualityBugs) {
         if (CollectionUtil.isEmpty(qualityBugs)) {
             return new int[0];
         }
@@ -595,8 +595,8 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
         });
     }
 
-    public int[] batchInsert(List<QualityBug> qualityBugs){
-        return batchInsert(true ,qualityBugs);
+    public int[] batchInsert(List<QualityBug> qualityBugs) {
+        return batchInsert(true, qualityBugs);
     }
 
     public int[] batchUpdate(List<QualityBug> qualityBugs) {
@@ -725,11 +725,11 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
         });
     }
 
-    private  Select addOrderByElements(Select select ,OrderBy... orderBies){
+    private Select addOrderByElements(Select select, OrderBy... orderBies) {
         List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
         for (int i = 0; orderBies != null && i < orderBies.length; i++) {
             OrderByElement tempElement = null;
-            if(orderBies[i]!=null){
+            if (orderBies[i] != null) {
                 tempElement = orderBies[i].getOrderByElement();
             }
             if (tempElement != null) {
@@ -741,7 +741,6 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
         }
         return select;
     }
-
 
 
     public Integer softDelete(Integer id) {
@@ -757,10 +756,10 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
     }
 
     public int[] batchUpdateDel(List<QualityBug> ids) {
-        if(CollectionUtil.isEmpty(ids)){
+        if (CollectionUtil.isEmpty(ids)) {
             return new int[0];
         }
-        return getDslTemplate().batchUpdate(ids, new NoParamUpdateGenerateCallback(){
+        return getDslTemplate().batchUpdate(ids, new NoParamUpdateGenerateCallback() {
 
             public Update generate() {
                 return update(QUALITY_BUGTABLE).set(
@@ -771,31 +770,31 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
     }
 
     public List<BugCount> getCount(String code, Integer productId) {
-        Select select = select(CountConditions.getSelectItem(code,productId)).
+        Select select = select(CountConditions.getSelectItem(code, productId)).
                 from(CountConditions.getFromItem(code)).where(QUALITY_BUGTABLE.PRODUCT_ID.eq(productId)).
                 groupBy(CountConditions.getGroupByColumn(code)).
                 having(CountConditions.getHavingCondition(code));
-        return getDslSession().fetchList(select,BugCount.class);
+        return getDslSession().fetchList(select, BugCount.class);
     }
 
-    public BugCount getBugsNotInType(String type,Integer productId) {
+    public BugCount getBugsNotInType(String type, Integer productId) {
         Select select = select(
                 QUALITY_BUGTABLE.BUG_ID.count().as("number"),
                 FragmentSql.fragmentSelect("COUNT(quality_bug.bug_id)/" +
-                        "(SELECT COUNT(0) FROM product LEFT JOIN quality_bug ON product.`product_id` = quality_bug.`product_id` WHERE product.product_id="+productId+") AS percent")).
+                        "(SELECT COUNT(0) FROM product LEFT JOIN quality_bug ON product.`product_id` = quality_bug.`product_id` WHERE product.product_id=" + productId + ") AS percent")).
                 from(QUALITY_BUGTABLE);
-        if("project".equals(type)){
-            select.where(or(QUALITY_BUGTABLE.PROJECT_ID.isNull(),QUALITY_BUGTABLE.PROJECT_ID.eq(0)));
-        }else if("build".equals(type)){
-            select.where(or(QUALITY_BUGTABLE.BUG_OPENED_BUILD.isNull(),QUALITY_BUGTABLE.BUG_OPENED_BUILD.eq(0)));
-        }else if("module".equals(type)){
-            select.where(or(QUALITY_BUGTABLE.MODULE_ID.isNull(),QUALITY_BUGTABLE.MODULE_ID.eq(0)));
+        if ("project".equals(type)) {
+            select.where(or(QUALITY_BUGTABLE.PROJECT_ID.isNull(), QUALITY_BUGTABLE.PROJECT_ID.eq(0)));
+        } else if ("build".equals(type)) {
+            select.where(or(QUALITY_BUGTABLE.BUG_OPENED_BUILD.isNull(), QUALITY_BUGTABLE.BUG_OPENED_BUILD.eq(0)));
+        } else if ("module".equals(type)) {
+            select.where(or(QUALITY_BUGTABLE.MODULE_ID.isNull(), QUALITY_BUGTABLE.MODULE_ID.eq(0)));
         }
-        return getDslSession().fetchOneResult(select,BugCount.class);
+        return getDslSession().fetchOneResult(select, BugCount.class);
     }
 
     public Pager<QualityBug> queryStoryChangedBugs(int start, int limit, Condition conditions, QualityBug qualityBug, OrderBy... orderArgs) {
-        MysqlSelect select = MysqlSelect.select(QUALITY_BUGTABLE.ALL,ORG_USERTABLE.ORG_USER_REAL_NAME.as("assignedUser")).from(QUALITY_BUGTABLE)
+        MysqlSelect select = MysqlSelect.select(QUALITY_BUGTABLE.ALL, ORG_USERTABLE.ORG_USER_REAL_NAME.as("assignedUser")).from(QUALITY_BUGTABLE)
                 .join(Join.leftJoin(ORG_USERTABLE, QUALITY_BUGTABLE.BUG_ASSIGNED_TO.eq(ORG_USERTABLE.ORG_USER_ID)),
                         Join.newJoin(PRODUCT_STORYTABLE, QUALITY_BUGTABLE.STORY_ID.eq(PRODUCT_STORYTABLE.STORY_ID))).where(
                         and(
@@ -854,24 +853,24 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
                                 PRODUCT_STORYTABLE.STORY_STATUS.neq("3"),
                                 QUALITY_BUGTABLE.STORY_VERSION.neq(PRODUCT_STORYTABLE.STORY_VERSION)
                         ));
-        return getDslSession().fetchPage(addOrderByElements(select, orderArgs),start,limit,false,QualityBug.class);
+        return getDslSession().fetchPage(addOrderByElements(select, orderArgs), start, limit, false, QualityBug.class);
     }
 
     public Pager<QualityBug> queryBugPage(int start, int limit, Integer[] ids, OrderBy... orderArgs) {
         Condition condition = null;
-        if(ids.length>0){
+        if (ids.length > 0) {
             condition = QUALITY_BUGTABLE.BUG_ID.in(ids);
-        }else{
+        } else {
             condition = QUALITY_BUGTABLE.BUG_ID.in(0);
         }
-        MysqlSelect select = MysqlSelect.select(QUALITY_BUGTABLE.ALL,ORG_USERTABLE.ORG_USER_REAL_NAME.as("assignedUser")).from(QUALITY_BUGTABLE)
-                .join(Join.leftJoin(ORG_USERTABLE,QUALITY_BUGTABLE.BUG_ASSIGNED_TO.eq(ORG_USERTABLE.ORG_USER_ID))).where(condition);
-        return getDslSession().fetchPage(addOrderByElements(select, orderArgs),start,limit,false,QualityBug.class);
+        MysqlSelect select = MysqlSelect.select(QUALITY_BUGTABLE.ALL, ORG_USERTABLE.ORG_USER_REAL_NAME.as("assignedUser")).from(QUALITY_BUGTABLE)
+                .join(Join.leftJoin(ORG_USERTABLE, QUALITY_BUGTABLE.BUG_ASSIGNED_TO.eq(ORG_USERTABLE.ORG_USER_ID))).where(condition);
+        return getDslSession().fetchPage(addOrderByElements(select, orderArgs), start, limit, false, QualityBug.class);
     }
 
     public Integer getMaxNo(Integer productId) {
         Select select = select(QUALITY_BUGTABLE.NO.max()).from(QUALITY_BUGTABLE).where(QUALITY_BUGTABLE.PRODUCT_ID.eq(productId));
-        return getDslSession().fetchOneResult(select,Integer.class);
+        return getDslSession().fetchOneResult(select, Integer.class);
     }
 
     public Integer deleteBugsByProduct(Integer product) {
@@ -890,31 +889,31 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
     }
 
     public List<QualityBug> getBugsInReleaseDoc(QualityBug bug) {
-        Select select = select(QUALITY_BUGTABLE.ALL,PRODUCTTABLE.PRODUCT_NAME.as("productName")).
+        Select select = select(QUALITY_BUGTABLE.ALL, PRODUCTTABLE.PRODUCT_NAME.as("productName")).
                 from(QUALITY_BUGTABLE).join(
                 Join.leftJoin(PRODUCTTABLE, PRODUCTTABLE.PRODUCT_ID.eq(QUALITY_BUGTABLE.PRODUCT_ID))
         ).where(and(
-                or(QUALITY_BUGTABLE.BUG_OPENED_BUILD.leftLike(bug.getBugOpenedBuild()+","),
-                        QUALITY_BUGTABLE.BUG_OPENED_BUILD.like(","+bug.getBugOpenedBuild()+","),
+                or(QUALITY_BUGTABLE.BUG_OPENED_BUILD.leftLike(bug.getBugOpenedBuild() + ","),
+                        QUALITY_BUGTABLE.BUG_OPENED_BUILD.like("," + bug.getBugOpenedBuild() + ","),
                         QUALITY_BUGTABLE.BUG_OPENED_BUILD.rightLike("," + bug.getBugOpenedBuild())),
                 QUALITY_BUGTABLE.DELETED.eq(bug.getDeleted()))
 
         );
-        return getDslSession().fetchList(select,QualityBug.class);
+        return getDslSession().fetchList(select, QualityBug.class);
 
     }
 
     public List<QualityBug> bugInCondition(String condition, Integer limit, Integer productId) {
-        Select select = MysqlSelect.select(QUALITY_BUGTABLE.BUG_ID,QUALITY_BUGTABLE.BUG_TITLE).from(QUALITY_BUGTABLE).where(
+        Select select = MysqlSelect.select(QUALITY_BUGTABLE.BUG_ID, QUALITY_BUGTABLE.BUG_TITLE).from(QUALITY_BUGTABLE).where(
                 and(
-                        QUALITY_BUGTABLE.DELETED.eq(0),QUALITY_BUGTABLE.PRODUCT_ID.eq(productId),QUALITY_BUGTABLE.BUG_TITLE.like(condition)
-                )).limit(0,limit);
-        return getDslSession().fetchList(select,QualityBug.class);
+                        QUALITY_BUGTABLE.DELETED.eq(0), QUALITY_BUGTABLE.PRODUCT_ID.eq(productId), QUALITY_BUGTABLE.BUG_TITLE.like(condition)
+                )).limit(0, limit);
+        return getDslSession().fetchList(select, QualityBug.class);
     }
 
     @Override
     public QualityBug findBugByBugId(Integer bugId) {
-        Select select=Select.selectFrom(QUALITY_BUGTABLE).where(QUALITY_BUGTABLE.BUG_ID.eq(bugId));
-        return getDslSession().fetchOneResult(select,QualityBug.class);
+        Select select = Select.selectFrom(QUALITY_BUGTABLE).where(QUALITY_BUGTABLE.BUG_ID.eq(bugId));
+        return getDslSession().fetchOneResult(select, QualityBug.class);
     }
 }

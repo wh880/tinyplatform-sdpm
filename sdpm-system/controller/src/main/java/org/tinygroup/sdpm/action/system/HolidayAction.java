@@ -48,8 +48,8 @@ public class HolidayAction extends BaseController {
 
     @RequestMapping("holiday/findPager")
     public String fingPage(Integer start, Integer limit,
-                           @RequestParam(required = false,defaultValue = "holidayId")String order,
-                           @RequestParam(required = false,defaultValue = "desc")String ordertype, Holiday holiday, Model model) {
+                           @RequestParam(required = false, defaultValue = "holidayId") String order,
+                           @RequestParam(required = false, defaultValue = "desc") String ordertype, Holiday holiday, Model model) {
         boolean asc = true;
         if ("desc".equals(ordertype)) {
             asc = false;
@@ -78,7 +78,7 @@ public class HolidayAction extends BaseController {
     public String saveHoliday(@RequestParam(required = false) String selectList, Holiday holiday, Model model) {
         if (holiday.getHolidayId() == null) {
             List<Holiday> holidayList = new ArrayList<Holiday>();
-            if(!StringUtils.isBlank(selectList)) {
+            if (!StringUtils.isBlank(selectList)) {
                 String[] dates = selectList.split(",");
                 for (int i = 0, n = dates.length; i < n; i++) {
                     Holiday day = new Holiday();

@@ -62,7 +62,7 @@ public class RoleUserManagerImpl implements RoleUserManager {
         orgRoleUser.setOrgUserId(userId);
         List<OrgRoleUser> list = new ArrayList<OrgRoleUser>();
         for (String roleId : roleIds) {
-            if (StringUtil.isBlank(roleId)){
+            if (StringUtil.isBlank(roleId)) {
                 continue;
             }
             Integer role = Integer.valueOf(roleId);

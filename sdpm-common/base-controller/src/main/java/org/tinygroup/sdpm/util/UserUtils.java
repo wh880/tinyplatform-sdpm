@@ -132,7 +132,7 @@ public class UserUtils {
      * @return
      */
     public boolean hasMenu(String menuId) {
-        if (StringUtil.isBlank(menuId)){
+        if (StringUtil.isBlank(menuId)) {
             return false;
         }
         Subject subject = SecurityUtils.getSubject();

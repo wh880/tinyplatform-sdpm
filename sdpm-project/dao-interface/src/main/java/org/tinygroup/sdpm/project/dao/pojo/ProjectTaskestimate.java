@@ -21,49 +21,41 @@ import java.util.Date;
 
 /**
  * 任务预计
- *
  */
 public class ProjectTaskestimate implements Serializable {
 
     /**
      * 任务预计id
-     *
      */
     private Integer taskestimateId;
 
     /**
      * 任务id
-     *
      */
     private Integer taskId;
 
     /**
      * 任务预计时间
-     *
      */
     private Date taskestimateDate;
 
     /**
      * 任务预计剩余
-     *
      */
     private Float taskestimateLeft;
 
     /**
      * 任务预计消耗
-     *
      */
     private Float taskestimateConsumed;
 
     /**
      * 操作人帐号
-     *
      */
     private String taskestimateAccount;
 
     /**
      * 备用字段
-     *
      */
     private String taskestimateWork;
 

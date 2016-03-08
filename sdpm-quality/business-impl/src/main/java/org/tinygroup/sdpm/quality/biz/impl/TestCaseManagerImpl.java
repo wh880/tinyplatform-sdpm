@@ -79,7 +79,7 @@ public class TestCaseManagerImpl implements TestCaseManager {
         return testcasedao.queryPager(start, limit, testcase, order);
     }
 
-    public Pager<QualityTestCase> findPagerRel(Integer start, Integer limit, QualityTestCase testcase, ConditionCarrier carrier,String columnName, boolean asc) {
+    public Pager<QualityTestCase> findPagerRel(Integer start, Integer limit, QualityTestCase testcase, ConditionCarrier carrier, String columnName, boolean asc) {
 
         Condition condition = mergeCondition(carrier);
         if (condition != null && !"".equals(condition)) {
@@ -106,7 +106,7 @@ public class TestCaseManagerImpl implements TestCaseManager {
         return testcasedao.getStoryIds(t);
     }
 
-    private Condition mergeCondition(ConditionCarrier carrier){
+    private Condition mergeCondition(ConditionCarrier carrier) {
         return ConditionUtils.mergeCondition(carrier, new CallBackFunction() {
             public String moduleRoot(String moduleId) {
                 return ModuleUtil.getConditionByRootWithoutOperate(Integer.parseInt(moduleId.substring(1)), "story");

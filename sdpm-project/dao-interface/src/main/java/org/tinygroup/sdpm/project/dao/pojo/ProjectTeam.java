@@ -21,55 +21,46 @@ import java.util.Date;
 
 /**
  * 团队
- *
  */
 public class ProjectTeam implements Serializable {
 
     /**
      * 逻辑ID
-     *
      */
     private Integer id;
 
     /**
      * 产品id
-     *
      */
     private Integer productId;
 
     /**
      * 项目id
-     *
      */
     private Integer projectId;
 
     /**
      * 用户
-     *
      */
     private String teamUserId;
 
     /**
      * 角色
-     *
      */
     private String teamRole;
 
     /**
      * 加盟日
-     *
      */
     private Date teamJoin;
 
     /**
      * 可用工时
-     *
      */
     private Float teamDays;
 
     /**
      * 可用工时
-     *
      */
     private Float teamHours;
     /**

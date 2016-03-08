@@ -1,6 +1,5 @@
 package org.tinygroup.sdpm.system.biz.impl;
 
-import com.thoughtworks.xstream.io.xml.BEAStaxDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

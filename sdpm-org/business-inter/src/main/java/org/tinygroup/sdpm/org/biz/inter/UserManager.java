@@ -150,6 +150,7 @@ public interface UserManager {
 
     /**
      * 查找领导的直接下属与自己
+     *
      * @param leaderUserId
      * @return
      */
@@ -164,7 +165,8 @@ public interface UserManager {
     List<OrgUser> getAllStaffByLeader(String leaderUserId);
 
     /**
-     *  查找一批userID对应的用户
+     * 查找一批userID对应的用户
+     *
      * @param list
      * @return
      */

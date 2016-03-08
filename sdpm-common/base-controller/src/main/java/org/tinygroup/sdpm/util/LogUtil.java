@@ -3,7 +3,6 @@ package org.tinygroup.sdpm.util;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.service.inter.LogService;
-import org.tinygroup.sdpm.system.service.inter.LogService;
 
 import java.util.Date;
 

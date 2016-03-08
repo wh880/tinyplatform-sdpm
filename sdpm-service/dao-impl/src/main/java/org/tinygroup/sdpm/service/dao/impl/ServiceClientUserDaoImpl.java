@@ -119,7 +119,7 @@ public class ServiceClientUserDaoImpl extends TinyDslDaoSupport implements Servi
                         and(
                                 SERVICE_CLIENT_USERTABLE.CLIENT_ID.eq(t.getClientId()),
                     /*SERVICE_CLIENT_USERTABLE.USER_ACCOUNT.eq(t.getUserAccount()),
-					SERVICE_CLIENT_USERTABLE.USER_PHONE.eq(t.getUserPhone()),
+                    SERVICE_CLIENT_USERTABLE.USER_PHONE.eq(t.getUserPhone()),
 					SERVICE_CLIENT_USERTABLE.USER_POST.eq(t.getUserPost()),*/
                                 SERVICE_CLIENT_USERTABLE.DELETED.eq(t.getDeleted())));
                 return addOrderByElements(select, orderBies);

@@ -21,7 +21,6 @@ import org.tinygroup.tinysqldsl.base.Table;
 
 /**
  * 客户联系人信息表
- *
  */
 public class ServiceClientUserTable extends Table {
 
@@ -29,37 +28,31 @@ public class ServiceClientUserTable extends Table {
 
     /**
      * 逻辑ID
-     *
      */
     public final Column ID = new Column(this, "id");
 
     /**
      * 客户ID
-     *
      */
     public final Column CLIENT_ID = new Column(this, "client_id");
 
     /**
      * 客户联系人
-     *
      */
     public final Column USER_ACCOUNT = new Column(this, "user_account");
 
     /**
      * 客户联系电话
-     *
      */
     public final Column USER_PHONE = new Column(this, "user_phone");
 
     /**
      * 联系人职务
-     *
      */
     public final Column USER_POST = new Column(this, "user_post");
 
     /**
      * 已删除
-     *
      */
     public final Column DELETED = new Column(this, "deleted");
 

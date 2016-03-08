@@ -1,6 +1,5 @@
 package org.tinygroup.sdpm.system.service.impl;
 
-import net.sf.cglib.beans.BeanGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.tinygroup.commons.tools.CollectionUtil;

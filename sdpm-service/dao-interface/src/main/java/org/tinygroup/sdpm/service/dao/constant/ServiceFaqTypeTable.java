@@ -21,7 +21,6 @@ import org.tinygroup.tinysqldsl.base.Table;
 
 /**
  * faq分类
- *
  */
 public class ServiceFaqTypeTable extends Table {
 
@@ -29,37 +28,31 @@ public class ServiceFaqTypeTable extends Table {
 
     /**
      * 问题类型id
-     *
      */
     public final Column FAQ_TYPE_ID = new Column(this, "faq_type_id");
 
     /**
      * 问答类型
-     *
      */
     public final Column FAQ_TYPE = new Column(this, "faq_type");
 
     /**
      * 父级问题类型id
-     *
      */
     public final Column FAQ_PARENT_TYPE_ID = new Column(this, "faq_parent_type_id");
 
     /**
      * faq类型创建时间
-     *
      */
     public final Column FAQ_TYPE_CREATDAY = new Column(this, "faq_type_creatDay");
 
     /**
      * 创建人
-     *
      */
     public final Column FAQ_CREATED_BY = new Column(this, "faq_created_by");
 
     /**
      * 已删除
-     *
      */
     public final Column DELETED = new Column(this, "deleted");
 

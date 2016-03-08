@@ -63,7 +63,7 @@ public class ProjectProductAction extends BaseController {
         systemModule.setModuleRoot(projectId);
         systemModule.setModuleType("projectProduct");
         moduleService.delete(systemModule);
-        for(Integer pId : productIds){
+        for (Integer pId : productIds) {
             Product p = productService.findProductById(pId);
             SystemModule module = new SystemModule();
             module.setModuleName(p.getProductName());

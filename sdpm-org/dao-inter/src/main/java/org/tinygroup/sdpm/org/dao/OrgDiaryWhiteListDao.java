@@ -17,7 +17,6 @@
 package org.tinygroup.sdpm.org.dao;
 
 import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
-
 import org.tinygroup.sdpm.org.dao.pojo.OrgDiaryWhiteList;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 
@@ -26,6 +25,7 @@ import java.util.List;
 /**
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
+ *
  * @generated
  */
 public interface OrgDiaryWhiteListDao extends BaseDao<OrgDiaryWhiteList, Integer> {
@@ -33,18 +33,20 @@ public interface OrgDiaryWhiteListDao extends BaseDao<OrgDiaryWhiteList, Integer
 
     /**
      * 查找在白名单表是否存在两人的关系
+     *
      * @param firstAccount
      * @param secondAccount
      * @return
      */
-    List<OrgDiaryWhiteList> findOneByAccounts(String firstAccount,String secondAccount);
+    List<OrgDiaryWhiteList> findOneByAccounts(String firstAccount, String secondAccount);
 
     /**
      * 删除一对白名单关系
+     *
      * @param firstAccount
      * @param secondAccout
      * @return
      */
-    Integer deleteByAccounts(String firstAccount,String secondAccout);
+    Integer deleteByAccounts(String firstAccount, String secondAccout);
 
 }

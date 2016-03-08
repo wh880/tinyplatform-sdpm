@@ -21,7 +21,6 @@ import org.tinygroup.tinysqldsl.base.Table;
 
 /**
  * 计划表
- *
  */
 public class ProductPlanTable extends Table {
 
@@ -29,49 +28,41 @@ public class ProductPlanTable extends Table {
 
     /**
      * 计划ID
-     *
      */
     public final Column PLAN_ID = new Column(this, "plan_id");
 
     /**
      * 公司ID
-     *
      */
     public final Column COMPANY_ID = new Column(this, "company_id");
 
     /**
      * 产品ID
-     *
      */
     public final Column PRODUCT_ID = new Column(this, "product_id");
 
     /**
      * 计划名称
-     *
      */
     public final Column PLAN_NAME = new Column(this, "plan_name");
 
     /**
      * 计划描述
-     *
      */
     public final Column PLAN_SPEC = new Column(this, "plan_spec");
 
     /**
      * 计划开始时间
-     *
      */
     public final Column PLAN_BEGIN_DATE = new Column(this, "plan_begin_date");
 
     /**
      * 计划结束时间
-     *
      */
     public final Column PLAN_END_DATE = new Column(this, "plan_end_date");
 
     /**
      * 已删除
-     *
      */
     public final Column DELETED = new Column(this, "deleted");
 

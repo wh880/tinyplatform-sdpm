@@ -21,7 +21,6 @@ import org.tinygroup.tinysqldsl.base.Table;
 
 /**
  * 模块配置表
- *
  */
 public class SystemConfigTable extends Table {
 
@@ -29,43 +28,36 @@ public class SystemConfigTable extends Table {
 
     /**
      * 配置ID
-     *
      */
     public final Column CONFIG_ID = new Column(this, "config_id");
 
     /**
      * 配置创建人
-     *
      */
     public final Column CONFIG_OWNER = new Column(this, "config_owner");
 
     /**
      * 配置模块
-     *
      */
     public final Column CONFIG_MODULE = new Column(this, "config_module");
 
     /**
      * 配置部分
-     *
      */
     public final Column CONFIG_SECTION = new Column(this, "config_section");
 
     /**
      * 配置的关键词
-     *
      */
     public final Column CONFIG_KEY = new Column(this, "config_key");
 
     /**
      * 配置的值
-     *
      */
     public final Column CONFIG_VALUE = new Column(this, "config_value");
 
     /**
      * 已删除
-     *
      */
     public final Column DELETED = new Column(this, "deleted");
 

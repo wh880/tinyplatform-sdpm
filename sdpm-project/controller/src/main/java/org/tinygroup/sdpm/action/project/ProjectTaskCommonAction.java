@@ -19,7 +19,7 @@ import org.tinygroup.sdpm.product.service.inter.StoryService;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
 import org.tinygroup.sdpm.project.dao.pojo.TaskChartBean;
-import org.tinygroup.sdpm.project.service.inter.*;
+import org.tinygroup.sdpm.project.service.inter.TaskService;
 import org.tinygroup.sdpm.system.dao.pojo.ProfileType;
 import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;
 import org.tinygroup.sdpm.system.service.inter.ProfileService;
@@ -176,7 +176,7 @@ public class ProjectTaskCommonAction extends BaseController {
         return "project/modal/task/" + forward + ".pagelet";
     }
 
-    @RequiresPermissions(value = {"task-group"},logical = Logical.OR)
+    @RequiresPermissions(value = {"task-group"}, logical = Logical.OR)
     @RequestMapping("/grouping")
     public String grouping(HttpServletRequest request, HttpServletResponse response,
                            String type, String menuId, Model model) {
@@ -206,6 +206,7 @@ public class ProjectTaskCommonAction extends BaseController {
         model.addAttribute("menuId", menuId);
         return "project/operate/task/special/grouping";
     }
+
     /**
      * 报表
      *

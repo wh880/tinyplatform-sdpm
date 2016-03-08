@@ -45,7 +45,7 @@ public class ProductLineServiceImpl implements ProductLineService {
 
     public List<ProductLine> getUserProductLine(String userId) {
         List<ProductLine> lines = productLineManager.getUserProductLine(userId);
-        List<Integer> idList = productManager.getTeamRoleProductLineIds(userId, 0,null);
+        List<Integer> idList = productManager.getTeamRoleProductLineIds(userId, 0, null);
         Integer[] ids = new Integer[idList.size()];
         List<ProductLine> productLines = productLineManager.getProductLineByIds(idList.toArray(ids));
         for (ProductLine p : productLines) {
@@ -70,7 +70,7 @@ public class ProductLineServiceImpl implements ProductLineService {
     }
 
     public Pager<ProductLine> findProductLineInPage(Integer start, Integer limit, ProductLine productLine, String order, String orderType) {
-        return productLineManager.findProductLineInPage(start,limit,productLine,order,orderType);
+        return productLineManager.findProductLineInPage(start, limit, productLine, order, orderType);
     }
 
     public List<ProductLine> findProductLineList(ProductLine productLine) {

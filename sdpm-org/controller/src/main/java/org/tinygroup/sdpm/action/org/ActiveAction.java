@@ -53,7 +53,7 @@ public class ActiveAction extends BaseController {
     @RequestMapping("/show")
     public String show(Model model) {
         List<OrgUser> userList = userService.findUserList(new OrgUser());
-        List<Product> productList = productService.getProductByUser(UserUtils.getUserId(),Product.DELETE_NO,null, Product.CHOOSE_OPENED);
+        List<Product> productList = productService.getProductByUser(UserUtils.getUserId(), Product.DELETE_NO, null, Product.CHOOSE_OPENED);
         List<Project> projectList = projectService.getUserProjectList(UserUtils.getUserId());
         model.addAttribute("userList", userList);
         model.addAttribute("productList", productList);

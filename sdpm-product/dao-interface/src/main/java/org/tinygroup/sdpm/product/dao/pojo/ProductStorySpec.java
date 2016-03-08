@@ -21,49 +21,41 @@ import java.io.Serializable;
 
 /**
  * 需求表述表
- *
  */
 public class ProductStorySpec implements Serializable {
 
     /**
      * 需求描述ID
-     *
      */
     private Integer storyspecId;
 
     /**
      * 公司ID
-     *
      */
     private Integer companyId;
 
     /**
      * 需求ID
-     *
      */
     private Integer storyId;
 
     /**
      * 需求版本
-     *
      */
     private Integer storyVersion;
 
     /**
      * 需求标题
-     *
      */
     private String storyTitle;
 
     /**
      * 需求描述
-     *
      */
     private String storySpec;
 
     /**
      * 验证标准
-     *
      */
     private String storyVerification;
 

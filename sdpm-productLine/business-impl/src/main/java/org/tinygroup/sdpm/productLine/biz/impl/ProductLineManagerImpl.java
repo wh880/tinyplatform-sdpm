@@ -88,10 +88,10 @@ public class ProductLineManagerImpl implements ProductLineManager {
     }
 
     public Pager<ProductLine> findProductLineInPage(Integer start, Integer limit, ProductLine productLine, String order, String orderType) {
-        if(StringUtil.isBlank(order)){
-            return productLineDao.queryPager(start,limit,productLine);
+        if (StringUtil.isBlank(order)) {
+            return productLineDao.queryPager(start, limit, productLine);
         }
-        return productLineDao.queryPager(start,limit,productLine,new OrderBy(NameUtil.resolveNameDesc(order),"asc".equals(orderType)));
+        return productLineDao.queryPager(start, limit, productLine, new OrderBy(NameUtil.resolveNameDesc(order), "asc".equals(orderType)));
     }
 
     public int[] updateBatch(List<ProductLine> productLine) {
@@ -121,7 +121,7 @@ public class ProductLineManagerImpl implements ProductLineManager {
         return productLineWithOutRole;
     }
 
-    private Condition mergeCondition(ConditionCarrier carrier){
+    private Condition mergeCondition(ConditionCarrier carrier) {
         return ConditionUtils.mergeCondition(carrier, null);
     }
 

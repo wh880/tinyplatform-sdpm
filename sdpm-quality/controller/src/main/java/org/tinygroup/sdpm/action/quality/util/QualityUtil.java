@@ -5,7 +5,6 @@ import org.tinygroup.sdpm.dao.condition.ConditionUtils;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.sdpm.util.UserUtils;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -63,10 +62,10 @@ public class QualityUtil {
                         UserUtils.getUserId());
                 break;
             case 6:
-                carrier.putStatus("status"," (bug_confirmed <> 1 or bug_confirmed is null)");
+                carrier.putStatus("status", " (bug_confirmed <> 1 or bug_confirmed is null)");
                 break;
             case 7:
-                carrier.putStatus("status"," bug_assigned_to is null or bug_assigned_to= ''");
+                carrier.putStatus("status", " bug_assigned_to is null or bug_assigned_to= ''");
                 break;
             case 8:
                 carrier.put("bugStatus",

@@ -21,7 +21,6 @@ import org.tinygroup.tinysqldsl.base.Table;
 
 /**
  * 发布表
- *
  */
 public class ProductReleaseTable extends Table {
 
@@ -29,55 +28,46 @@ public class ProductReleaseTable extends Table {
 
     /**
      * 发布ID
-     *
      */
     public final Column RELEASE_ID = new Column(this, "release_id");
 
     /**
      * 产品ID
-     *
      */
     public final Column PRODUCT_ID = new Column(this, "product_id");
 
     /**
      * 版本id
-     *
      */
     public final Column RELEASE_BUILD = new Column(this, "release_build");
 
     /**
      * 发布名称
-     *
      */
     public final Column RELEASE_NAME = new Column(this, "release_name");
 
     /**
      * 发布日期
-     *
      */
     public final Column RELEASE_DATE = new Column(this, "release_date");
 
     /**
      * 已完成需求
-     *
      */
     public final Column RELEASE_STORIES = new Column(this, "release_stories");
 
     /**
      * 已解决Bug
-     *
      */
     public final Column RELEASE_BUGS = new Column(this, "release_bugs");
 
     /**
      * 描述
-     *
      */
     public final Column RELEASE_DESC = new Column(this, "release_desc");
 
     /**
      * 已删除
-     *
      */
     public final Column DELETED = new Column(this, "deleted");
 

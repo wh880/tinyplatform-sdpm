@@ -110,60 +110,60 @@ public class OrgDiaryDetail implements Serializable, Comparable<OrgDiaryDetail> 
 
     private Integer objectId;
 
-    public void setOrgDetailId(Integer orgDetailId) {
-        this.orgDetailId = orgDetailId;
-    }
-
     public Integer getOrgDetailId() {
         return orgDetailId;
     }
 
-    public void setOrgDiaryId(Integer orgDiaryId) {
-        this.orgDiaryId = orgDiaryId;
+    public void setOrgDetailId(Integer orgDetailId) {
+        this.orgDetailId = orgDetailId;
     }
 
     public Integer getOrgDiaryId() {
         return orgDiaryId;
     }
 
-    public void setOrgUserId(String orgUserId) {
-        this.orgUserId = orgUserId;
+    public void setOrgDiaryId(Integer orgDiaryId) {
+        this.orgDiaryId = orgDiaryId;
     }
 
     public String getOrgUserId() {
         return orgUserId;
     }
 
-    public void setOrgDetailDate(Date orgDetailDate) {
-        this.orgDetailDate = orgDetailDate;
+    public void setOrgUserId(String orgUserId) {
+        this.orgUserId = orgUserId;
     }
 
     public Date getOrgDetailDate() {
         return orgDetailDate;
     }
 
-    public void setOrgDetailType(String orgDetailType) {
-        this.orgDetailType = orgDetailType;
+    public void setOrgDetailDate(Date orgDetailDate) {
+        this.orgDetailDate = orgDetailDate;
     }
 
     public String getOrgDetailType() {
         return orgDetailType;
     }
 
-    public void setOrgDetailContent(String orgDetailContent) {
-        this.orgDetailContent = orgDetailContent;
+    public void setOrgDetailType(String orgDetailType) {
+        this.orgDetailType = orgDetailType;
     }
 
     public String getOrgDetailContent() {
         return orgDetailContent;
     }
 
-    public void setActionId(Integer actionId) {
-        this.actionId = actionId;
+    public void setOrgDetailContent(String orgDetailContent) {
+        this.orgDetailContent = orgDetailContent;
     }
 
     public Integer getActionId() {
         return actionId;
+    }
+
+    public void setActionId(Integer actionId) {
+        this.actionId = actionId;
     }
 
     public String getEffortWeek() {

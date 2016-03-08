@@ -10,7 +10,7 @@ import org.tinygroup.sdpm.dao.condition.ConditionUtils;
 public class StoryUtil {
     public static void getStatusCondition(String choose, ConditionCarrier carrier) {
         if (StringUtil.isBlank(choose)) {
-            return ;
+            return;
         }
         if (choose == null || "".equals(choose)) return;
         switch (Integer.valueOf(choose)) {
@@ -21,7 +21,7 @@ public class StoryUtil {
                         "2");
                 break;
             case 2:
-                return ;
+                return;
             case 3:
                 carrier.put("productStory.storyAssignedTo",
                         ConditionUtils.Operate.EQ.getOperate(),
@@ -71,7 +71,7 @@ public class StoryUtil {
                         "2");
                 break;
         }
-        return ;
+        return;
     }
 
 

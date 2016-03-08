@@ -21,7 +21,6 @@ import java.util.Date;
 
 /**
  * 测试任务表
- *
  */
 public class QualityTestTask implements Serializable {
 
@@ -30,79 +29,66 @@ public class QualityTestTask implements Serializable {
 
     /**
      * 测试版本编号
-     *
      */
     private Integer testversionId;
 
     /**
      * 任务名称
-     *
      */
     private String testtaskTitle;
 
     /**
      * 产品ID
-     *
      */
     private Integer productId;
 
     /**
      * 项目id
-     *
      */
     private Integer projectId;
 
     /**
      * 版本名称
-     *
      */
     private String buildName;
 
     /**
      * 负责人
-     *
      */
     private String testtaskOwner;
 
     /**
      * 优先级
-     *
      */
     private Integer priority;
 
     /**
      * 开始日期
-     *
      */
     private Date testtaskBegin;
 
     /**
      * 结束日期
-     *
      */
     private Date testtaskEnd;
 
     /**
      * 描述
-     *
      */
     private String testtaskDesc;
 
     /**
      * 测试总结
-     *
      */
     private String testtaskReport;
 
     /**
      * 当前状态
-     *
      */
     private String testtaskStatus;
 
     /**
      * 已删除
-     *
      */
     private Integer deleted;
 
