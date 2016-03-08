@@ -67,6 +67,7 @@ public class DictAction extends BaseController {
         model.addAttribute("dict", dict);
         return "system/page/dictionaries/dictitem_view.pagelet";
     }
+
     @RequiresPermissions("dictitem-del")
     @ResponseBody
     @RequestMapping("delete")
@@ -83,6 +84,7 @@ public class DictAction extends BaseController {
         }
         return map;
     }
+
     @RequiresPermissions("dictitem-edit")
     @RequestMapping(value = "save", method = RequestMethod.POST)
     public String saveDict(SystemDict systemDict, Model model) {
@@ -113,6 +115,7 @@ public class DictAction extends BaseController {
         }
         return "/system/page/dictionaries/dictitem_edit.pagelet";
     }
+
     @RequiresPermissions("dictitem-del")
     @ResponseBody
     @RequestMapping("batchDelete")

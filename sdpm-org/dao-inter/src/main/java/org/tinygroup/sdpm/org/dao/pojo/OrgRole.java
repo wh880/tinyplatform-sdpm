@@ -20,7 +20,6 @@ import java.io.Serializable;
 
 /**
  * 角色表
- *
  */
 public class OrgRole implements Serializable {
 
@@ -31,31 +30,26 @@ public class OrgRole implements Serializable {
     public static String ROLE_TYPE_PROJECT = "2";
     /**
      * 角色ID
-     *
      */
     private Integer orgRoleId;
 
     /**
      * 角色名称
-     *
      */
     private String orgRoleName;
 
     /**
      * 角色类型
-     *
      */
     private String orgRoleType;
 
     /**
      * 角色备注
-     *
      */
     private String orgRoleRemarks;
 
     /**
      * 已删除
-     *
      */
     private Integer deleted;
 

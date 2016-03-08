@@ -3,8 +3,6 @@ package org.tinygroup.sdpm.org.service.inter;
 import org.tinygroup.sdpm.org.dao.pojo.OrgDiary;
 import org.tinygroup.sdpm.org.dao.pojo.OrgDiaryAndUserDO;
 import org.tinygroup.sdpm.org.dao.pojo.OrgDiaryDetail;
-import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
-import org.tinygroup.template.rumtime.convert.IntegerFloat;
 import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.List;
@@ -37,7 +35,7 @@ public interface DiaryService {
     /**
      * 查找某人的周报
      */
-      Pager<OrgDiaryAndUserDO> findPagerDiaryByUserId(String id, Integer start, Integer limit);
+    Pager<OrgDiaryAndUserDO> findPagerDiaryByUserId(String id, Integer start, Integer limit);
 
     /**
      * 查找某人的周报

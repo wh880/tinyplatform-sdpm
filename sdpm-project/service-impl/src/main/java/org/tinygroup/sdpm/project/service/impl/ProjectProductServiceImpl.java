@@ -19,7 +19,7 @@ public class ProjectProductServiceImpl implements ProjectProductService {
     private ProjectProductManager projectProductManager;
 
     public void addProjectLinkToProduct(String[] productIds, Integer projectId) {
-        if (ArrayUtil.isEmptyArray(productIds)){
+        if (ArrayUtil.isEmptyArray(productIds)) {
             return;
         }
         projectProductManager.addLink(productIds, projectId);

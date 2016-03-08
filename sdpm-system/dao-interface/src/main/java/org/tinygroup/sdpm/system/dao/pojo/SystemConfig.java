@@ -21,7 +21,6 @@ import java.io.Serializable;
 
 /**
  * 模块配置表
- *
  */
 public class SystemConfig implements Serializable {
     public static int DELETE_YES = 1;
@@ -30,43 +29,36 @@ public class SystemConfig implements Serializable {
 
     /**
      * 配置ID
-     *
      */
     private Integer configId;
 
     /**
      * 配置创建人
-     *
      */
     private String configOwner;
 
     /**
      * 配置模块
-     *
      */
     private String configModule;
 
     /**
      * 配置部分
-     *
      */
     private String configSection;
 
     /**
      * 配置的关键词
-     *
      */
     private String configKey;
 
     /**
      * 配置的值
-     *
      */
     private String configValue;
 
     /**
      * 已删除
-     *
      */
     private Integer deleted;
 

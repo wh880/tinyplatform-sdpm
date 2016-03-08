@@ -21,7 +21,7 @@ import java.util.Date;
 
 /**
  * 文档库表
- *
+ * <p>
  * 文档相关的
  */
 public class DocumentDocLib implements Serializable {
@@ -31,35 +31,35 @@ public class DocumentDocLib implements Serializable {
 
     /**
      * 文档库ID
-     *
+     * <p>
      * 文档库ID
      */
     private Integer docLibId;
 
     /**
      * 文档库名字
-     *
+     * <p>
      * 文档库名字
      */
     private String docLibName;
 
     /**
      * 删除文档库标志
-     *
+     * <p>
      * 已删除，并不真正删除数据，只是相应比标志位变参而已。
      */
     private String docLibDeleted;
 
     /**
      * 文档库添加时间
-     *
+     * <p>
      * 文档库添加时间
      */
     private Date docLibAddedDate;
 
     /**
      * 文档库名称更新时间
-     *
+     * <p>
      * 文档库名称更新时间
      */
     private Date docLibEditedDate;

@@ -1,4 +1,4 @@
-#!set(activeTitle="建任务",activeMenuId=currentPageId)
+#!set(activeTitle="复制任务",activeMenuId=currentPageId)
 #set(name="task")
 #@layout(project)
 #end
@@ -20,7 +20,7 @@
         #@elementItem()
             #@sdpmItem("所属模块")
                 #@Tselect2F()
-                    #@Tselect2Body("taskModule" moduleId {"class":"input-text select2"})
+                    #@Tselect2Body("taskModule" task.taskModule {"class":"input-text select2"})
                         <option value=""></option>
                         #foreach(m : moduleList)
                             <option value="${m.moduleId}">${m.moduleName}</option>
@@ -33,7 +33,7 @@
             #@sdpmItem("任务类型" "*")
                 #@Tselect2F()
                     #@Tselect2Body(
-                        "taskType" copyTask?.taskType {"class":"input-text select2","placeholder":"请选择任务类型","datatype":"*",
+                        "taskType" task?.taskType {"class":"input-text select2","placeholder":"请选择任务类型","datatype":"*",
                         "nullmsg":"任务类型不能为空！"})
                         <option value=""></option>
                         #foreach(item : getDict("taskType"))
@@ -46,7 +46,8 @@
         #@elementItem()
             #@sdpmItem("指派给")
                 #@Tselect2F()
-                    #Tselect2Ajax("taskAssignedTo" copyTask?.taskAssignedTo TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam?projectId="+currentProjectId
+                    #Tselect2Ajax("taskAssignedTo" task?.taskAssignedTo TINY_CONTEXT_PATH+adminPath+
+                        "/org/user/ajax/userInConditionAndTeam?projectId="+currentProjectId
                     {"dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询指派人","nullmsg":"请选择指派人！"})
                     #@Tselect2Fix()
                         #set(m=menuService.getMenu("organizationAddUser"))
@@ -68,19 +69,19 @@
                 });
                 $("select[name=taskModule]").on("change", function () {
                     $.ajax({
-                        url:"${TINY_CONTEXT_PATH+adminPath}/project/task/batch/storyByModule?projectId=${currentProjectId}&moduleId="+$("select[name=taskModule]").val(),
-                        type:"post",
-                        dataType:"json",
-                        success:function(ssdata){
+                        url: "${TINY_CONTEXT_PATH+adminPath}/project/task/batch/storyByModule?projectId=${currentProjectId}&moduleId=" + $("select[name=taskModule]").val(),
+                        type: "post",
+                        dataType: "json",
+                        success: function (ssdata) {
                             var data;
-                            var taskStory=$("select[name=taskStory]");
+                            var taskStory = $("select[name=taskStory]");
                             taskStory.empty();
-                            taskStory.select2("val","");
-                            var tempV="";
+                            taskStory.select2("val", "");
+                            var tempV = "";
                             taskStory.append("<option>");
-                            for(var i= 0,l=ssdata.length;i<l;i++){
-                                var data=ssdata[i];
-                                tempV=$("<option>").attr("value",data.storyId).html(data.storyId+"："+data.storyTitle+"（优先级："+data.storyPri+"，预计工时:"+data.storyEstimate+")");
+                            for (var i = 0, l = ssdata.length; i < l; i++) {
+                                var data = ssdata[i];
+                                tempV = $("<option>").attr("value", data.storyId).html(data.storyId + "：" + data.storyTitle + "（优先级：" + data.storyPri + "，预计工时:" + data.storyEstimate + ")");
 
                                 taskStory.append(tempV);
                             }
@@ -94,10 +95,11 @@
             #@sdpmItem("相关需求")
                 #if(storyList)
                     #@Tselect2F()
-                        #@Tselect2Body("taskStory" storyId==null?"":storyId {"class":"input-text select2"})
+                        #@Tselect2Body("taskStory" task?.taskStory {"class":"input-text select2"})
                             <option value=""></option>
                             #foreach(s:storyList)
-                                <option value="${s.storyId}">${s.storyId}：${s.storyTitle}（优先级：${s.storyPri}，预计工时:${s.storyEstimate}）
+                                <option value="${s.storyId}">${s.storyId}
+                                    ：${s.storyTitle}（优先级：${s.storyPri}，预计工时:${s.storyEstimate}）
                                 </option>
                             #end
                         #end
@@ -113,7 +115,7 @@
             #@sdpmItem("相关BUG")
                 #if(bugList)
                     #@Tselect2F()
-                        #@Tselect2Body("taskRelationBug" bugId==null?"":bugId {"class":"input-text select2"})
+                        #@Tselect2Body("taskRelationBug" task.taskRelationBug {"class":"input-text select2"})
                             <option value=""></option>
                             #foreach(b:bugList)
                                 <option value="${b.bugId}">${b.bugId}：${b.bugTitle}（优先级：${b.priority}，Bug类型:${b.bugType}）
@@ -127,7 +129,9 @@
         #@elementItem()
             #@sdpmItem("任务名称" "*")
                 #@formControlDiv()
-                    #tinyInput("text" "taskName" (story?.storyTitle)?:copyTask?.taskName {"placeholder":"任务名称","datatype":"*","nullmsg":"任务名称不能为空！","class":"input-text"})
+                    #tinyInput(
+                        "text" "taskName" task?.taskName {"placeholder":"任务名称","datatype":"*","nullmsg":"任务名称不能为空！",
+                        "class":"input-text"})
                 #end
             #end
         #end
@@ -135,7 +139,7 @@
             <div class="col-12">
                 <div class="col-2 text-r"><label>任务描述：</label></div>
                 <div class="col-7">
-                    #@Teditor("taskDesc" "taskDesc")#if(copyTask)${copyTask?.taskDesc}#else ${story?.storySpec}#end#end
+                    #@Teditor("taskDesc" "taskDesc")${task?.taskDesc}#end
                 </div>
             </div>
         #end
@@ -144,7 +148,7 @@
             #@sdpmItem("优先级")
                 #@Tselect2F()
                     #@Tselect2Body(
-                        "taskPri" copyTask?.taskPri {"class":"input-text","minimumResultsForSearch":"Infinity"})
+                        "taskPri" task?.taskPri {"class":"input-text","minimumResultsForSearch":"Infinity"})
                         #foreach(item : getDict("taskPri"))
                             <option value="${item?.value}">${item?.text}</option>
                         #end
@@ -158,7 +162,7 @@
                 #@formControlDiv()
                     <div class="input-group">
                         #@tinyDateInput(
-                    "taskEstStared" formatDate(copyTask?.taskEstStared,"yyyy-MM-dd") "yyyy-MM-dd" )#end
+                    "taskEstStared" formatDate(task?.taskEstStared,"yyyy-MM-dd") "yyyy-MM-dd" )#end
                     </div>
                 #end
             #end
@@ -168,7 +172,7 @@
                 #@formControlDiv()
                     <div class="input-group">
                         #@tinyDateInput(
-                            "taskDeadLine" formatDate(copyTask?.taskDeadLine,"yyyy-MM-dd") "yyyy-MM-dd" )#end
+                            "taskDeadLine" formatDate(task?.taskDeadLine,"yyyy-MM-dd") "yyyy-MM-dd" )#end
                     </div>
                 #end
             #end
@@ -177,7 +181,7 @@
             #@sdpmItem("最初预计" "*")
                 #@formControlDiv()
                     <div class="input-group">
-                        #tinyInput("text" "taskEstimate" copyTask?.taskEstimate {"placeholder":"最初预计","datatype":
+                        #tinyInput("text" "taskEstimate" task?.taskEstimate {"placeholder":"最初预计","datatype":
                             "/^[0-9]+(\.[0-9]{1,2})?$/","nullmsg":"请输入最初预计", "aria-describedby":"basic-addon2"})
                         <span class="input-group-addon" id="basic-addon2">小时</span>
                     </div>
@@ -187,7 +191,8 @@
         #@elementItem()
             #@sdpmItem("抄送给")
                 #@Tselect2F()
-                    #Tselect2Ajax("taskMailToArray" story?.taskMailTo TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
+                    #Tselect2Ajax("taskMailToArray" task?.taskMailto TINY_CONTEXT_PATH+adminPath+
+                        "/org/user/ajax/userInConditionAndTeam"
                     {"id":"storyMailtoSelect","dataId":"orgUserId","dataText":"orgUserRealName",
                         "placeholder":"查询抄送人","nullmsg":"请选择抄送人！","multiple":"multiple"})
                 ##填写任意内容，侦听需重新填加 A侦听已内置
@@ -268,103 +273,100 @@
     });
 </script>
 <script>
-    Date.prototype.format =function(format)
-    {
+    Date.prototype.format = function (format) {
         var o = {
-            "M+" : this.getMonth()+1, //month
-            "d+" : this.getDate(), //day
-            "h+" : this.getHours(), //hour
-            "m+" : this.getMinutes(), //minute
-            "s+" : this.getSeconds(), //second
-            "q+" : Math.floor((this.getMonth()+3)/3), //quarter
-            "S" : this.getMilliseconds() //millisecond
+            "M+": this.getMonth() + 1, //month
+            "d+": this.getDate(), //day
+            "h+": this.getHours(), //hour
+            "m+": this.getMinutes(), //minute
+            "s+": this.getSeconds(), //second
+            "q+": Math.floor((this.getMonth() + 3) / 3), //quarter
+            "S": this.getMilliseconds() //millisecond
         }
-        if(/(y+)/.test(format)) format=format.replace(RegExp.$1,
-                (this.getFullYear()+"").substr(4- RegExp.$1.length));
-        for(var k in o)if(new RegExp("("+ k +")").test(format))
+        if (/(y+)/.test(format)) format = format.replace(RegExp.$1,
+                (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+        for (var k in o)if (new RegExp("(" + k + ")").test(format))
             format = format.replace(RegExp.$1,
-                    RegExp.$1.length==1? o[k] :
-                            ("00"+ o[k]).substr((""+ o[k]).length));
+                    RegExp.$1.length == 1 ? o[k] :
+                            ("00" + o[k]).substr(("" + o[k]).length));
         return format;
     }
 
 
-    $(document).ready(function(){
+    $(document).ready(function () {
 
         var oldvalue = "";
-        $("input[name='taskEstStared']").bind("click",function(){
+        $("input[name='taskEstStared']").bind("click", function () {
             oldvalue = $(this).val();
 
         });
 
-        $("input[name='taskEstStared']").bind("blur input propertychange",function(){
+        $("input[name='taskEstStared']").bind("blur input propertychange", function () {
 
             var newvalue = $(this).val();
 
-            if(newvalue!=""&&newvalue!=oldvalue){
-                if($("input[name='endTime']:checked")[0]){
+            if (newvalue != "" && newvalue != oldvalue) {
+                if ($("input[name='endTime']:checked")[0]) {
                     $("input[name='endTime']:checked").trigger('click');
                 }
             }
         });
 
         var oldvalueend = "";
-        $("input[name='taskDeadLine']").bind("click",function(){
+        $("input[name='taskDeadLine']").bind("click", function () {
             oldvalueend = $(this).val();
 
         });
-        $("input[name='taskDeadLine']").bind("blur",function(){
+        $("input[name='taskDeadLine']").bind("blur", function () {
             var newvalueend = $(this).val();
-            var dateend =new Date(Date.parse(newvalueend.replace(/-/g, "/")));
+            var dateend = new Date(Date.parse(newvalueend.replace(/-/g, "/")));
             var datestart = new Date(Date.parse($("input[name='taskEstStared']").val().replace(/-/g, "/")));
-            if(newvalueend!=""&&newvalueend!=oldvalueend){
-                if(dateend<datestart){
+            if (newvalueend != "" && newvalueend != oldvalueend) {
+                if (dateend < datestart) {
                     $("input[name='taskDeadLine']").val(oldvalueend);
                     alert("截止日期必须大于开始日期");
 
-                }else{
-                    $("input[name='endTime']:checked").attr("checked",false);
+                } else {
+                    $("input[name='endTime']:checked").attr("checked", false);
                 }
 
             }
         });
 
 
+        $("input[name='endTime']").each(function () {
+
+            $(this).unbind("click").bind("click", function () {
+
+                var start = $("input[name='taskEstStared']").val();
 
 
-        $("input[name='endTime']").each(function(){
-
-            $(this).unbind("click").bind("click",function(){
-
-                var start =	$("input[name='taskEstStared']").val();
-
-
-                if(start!=""){
+                if (start != "") {
                     start = new Date(Date.parse(start.replace(/-/g, "/")));
 
                     var time = $(this).val();
                     var end = new Date();
-                    if(time=="one-week"){
-                        end = new Date(start.getFullYear(),start.getMonth(),start.getDate()+7);
+                    if (time == "one-week") {
+                        end = new Date(start.getFullYear(), start.getMonth(), start.getDate() + 7);
                     }
-                    if(time=="two-week"){
-                        end = new Date(start.getFullYear(),start.getMonth(),start.getDate()+14);
+                    if (time == "two-week") {
+                        end = new Date(start.getFullYear(), start.getMonth(), start.getDate() + 14);
                     }
-                    if(time=="one-month"){
-                        end = new Date(start.getFullYear(),start.getMonth()+1,start.getDate());
+                    if (time == "one-month") {
+                        end = new Date(start.getFullYear(), start.getMonth() + 1, start.getDate());
                     }
-                    if(time=="two-month"){
-                        end = new Date(start.getFullYear(),start.getMonth()+2,start.getDate());
+                    if (time == "two-month") {
+                        end = new Date(start.getFullYear(), start.getMonth() + 2, start.getDate());
                     }
-                    if(time=="half-year"){
-                        end = new Date(start.getFullYear(),start.getMonth()+6,start.getDate());
+                    if (time == "half-year") {
+                        end = new Date(start.getFullYear(), start.getMonth() + 6, start.getDate());
                     }
-                    if(time=="year"){
-                        end = new Date(start.getFullYear()+1,start.getMonth(),start.getDate());
+                    if (time == "year") {
+                        end = new Date(start.getFullYear() + 1, start.getMonth(), start.getDate());
                     }
                     $("input[name='taskDeadLine']").val(end.format("yyyy-MM-dd"));
-                }else{
-                    this.checked=false;
+                } else {
+                    this.checked = false;
                     alert("请选择开始日期");
 
                 }

@@ -14,6 +14,7 @@ public interface ConfigService {
     String CACHE_CONFIG_ID = "configId";
     String CACHE_CONFIG_SECTION = "configSection";
     String CACHE_CONFIG_LIST = "configList";
+
     /**
      * 添加配置
      *
@@ -29,7 +30,7 @@ public interface ConfigService {
      * @param configId
      * @return
      */
-    @CacheRemove(removeKeys = "${configId}", group = CACHE_CONFIG_ID, removeGroups = {CACHE_CONFIG_LIST, CACHE_CONFIG_SECTION,CACHE_CONFIG_ID})
+    @CacheRemove(removeKeys = "${configId}", group = CACHE_CONFIG_ID, removeGroups = {CACHE_CONFIG_LIST, CACHE_CONFIG_SECTION, CACHE_CONFIG_ID})
     int deleteConfig(Integer configId);
 
     /**
@@ -38,7 +39,7 @@ public interface ConfigService {
      * @param config
      * @return
      */
-    @CacheRemove(removeKeys = "${config?.configId}", group = CACHE_CONFIG_ID, removeGroups = {CACHE_CONFIG_LIST, CACHE_CONFIG_SECTION,CACHE_CONFIG_ID})
+    @CacheRemove(removeKeys = "${config?.configId}", group = CACHE_CONFIG_ID, removeGroups = {CACHE_CONFIG_LIST, CACHE_CONFIG_SECTION, CACHE_CONFIG_ID})
     int updateConfig(SystemConfig config);
 
     /**
@@ -52,6 +53,7 @@ public interface ConfigService {
 
     /**
      * 查找
+     *
      * @return
      */
     @CacheGet(key = "configList", group = CACHE_CONFIG_LIST)
@@ -68,6 +70,7 @@ public interface ConfigService {
      * @return
      */
     Pager<SystemConfig> findConfigPager(int start, int limit, SystemConfig config, String columnName, Boolean asc);
+
     @CacheGet(key = "${section}", group = CACHE_CONFIG_SECTION)
     SystemConfig getConfigBySection(String section);
 }

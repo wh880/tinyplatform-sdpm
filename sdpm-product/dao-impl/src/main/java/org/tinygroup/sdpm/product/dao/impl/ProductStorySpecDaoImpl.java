@@ -59,12 +59,12 @@ public class ProductStorySpecDaoImpl extends TinyDslDaoSupport implements Produc
         return getDslTemplate().insertAndReturnKey(productStorySpec, new InsertGenerateCallback<ProductStorySpec>() {
             public Insert generate(ProductStorySpec t) {
                 Insert insert = insertInto(PRODUCT_STORY_SPECTABLE).values(
-					PRODUCT_STORY_SPECTABLE.COMPANY_ID.value(t.getCompanyId()),
-					PRODUCT_STORY_SPECTABLE.STORY_ID.value(t.getStoryId()),
-					PRODUCT_STORY_SPECTABLE.STORY_VERSION.value(t.getStoryVersion()),
-					PRODUCT_STORY_SPECTABLE.STORY_TITLE.value(t.getStoryTitle()),
-					PRODUCT_STORY_SPECTABLE.STORY_SPEC.value(t.getStorySpec()),
-					PRODUCT_STORY_SPECTABLE.STORY_VERIFICATION.value(t.getStoryVerification()));
+                        PRODUCT_STORY_SPECTABLE.COMPANY_ID.value(t.getCompanyId()),
+                        PRODUCT_STORY_SPECTABLE.STORY_ID.value(t.getStoryId()),
+                        PRODUCT_STORY_SPECTABLE.STORY_VERSION.value(t.getStoryVersion()),
+                        PRODUCT_STORY_SPECTABLE.STORY_TITLE.value(t.getStoryTitle()),
+                        PRODUCT_STORY_SPECTABLE.STORY_SPEC.value(t.getStorySpec()),
+                        PRODUCT_STORY_SPECTABLE.STORY_VERIFICATION.value(t.getStoryVerification()));
                 return insert;
             }
         });

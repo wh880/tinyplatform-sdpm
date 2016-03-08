@@ -21,7 +21,6 @@ import org.tinygroup.tinysqldsl.base.Table;
 
 /**
  * 客服回访表
- *
  */
 public class ServiceReviewTable extends Table {
 
@@ -29,46 +28,43 @@ public class ServiceReviewTable extends Table {
 
     /**
      * 回访ID
-     *
      */
     public final Column REVIEW_ID = new Column(this, "review_id");
 
     /**
      * 请求ID
-     *
+     * <p>
      * 服务请求ID
      */
     public final Column CLIENT_REQUEST_ID = new Column(this, "client_request_id");
 
     /**
      * 回访描述
-     *
      */
     public final Column REVIEW_SPEC = new Column(this, "review_spec");
 
     /**
      * 联系人
-     *
+     * <p>
      * 默认为需求提交人或产品客户其他联系人
      */
     public final Column REQUESTER = new Column(this, "requester");
 
     /**
      * 回访者
-     *
+     * <p>
      * 回访人account，当前操作者
      */
     public final Column REVIEWER = new Column(this, "reviewer");
 
     /**
      * 回访时间
-     *
      */
     public final Column REVIEW_DATE = new Column(this, "review_date");
 
     /**
      * 回访结果
-     *
+     * <p>
      * 0-not
      * pass,
      * 1-pass
@@ -77,14 +73,14 @@ public class ServiceReviewTable extends Table {
 
     /**
      * 回访评分
-     *
+     * <p>
      * 0很不满意，1不满意，2一般，3满意，4非常满意
      */
     public final Column REVIEW_SCORE = new Column(this, "review_score");
 
     /**
      * 回访类型
-     *
+     * <p>
      * 0-发放回访，1-拒绝需求回访，2-无修改需求回访
      */
     public final Column REVIEW_TYPE = new Column(this, "review_type");

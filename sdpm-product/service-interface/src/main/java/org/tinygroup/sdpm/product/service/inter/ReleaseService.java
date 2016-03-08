@@ -49,6 +49,7 @@ public interface ReleaseService {
 
     /**
      * 查找发布,根据排序
+     *
      * @param productRelease
      * @param order
      * @param orderType
@@ -58,6 +59,7 @@ public interface ReleaseService {
 
     /**
      * 分页查询
+     *
      * @param page
      * @param limit
      * @param productRelease

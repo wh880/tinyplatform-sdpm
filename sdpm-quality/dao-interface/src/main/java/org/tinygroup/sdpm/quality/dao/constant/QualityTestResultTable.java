@@ -21,7 +21,6 @@ import org.tinygroup.tinysqldsl.base.Table;
 
 /**
  * 测试结果表
- *
  */
 public class QualityTestResultTable extends Table {
 
@@ -29,49 +28,41 @@ public class QualityTestResultTable extends Table {
 
     /**
      * 测试结果
-     *
      */
     public final Column TEST_RESULT_ID = new Column(this, "test_result_id");
 
     /**
      * TESTRESULT_RUN
-     *
      */
     public final Column TESTRESULT_RUN = new Column(this, "testresult_run");
 
     /**
      * 相关用例
-     *
      */
     public final Column LINK_CASE = new Column(this, "link_case");
 
     /**
      * 关联用例版本
-     *
      */
     public final Column CASE_VERSION = new Column(this, "case_version");
 
     /**
      * 测试结果
-     *
      */
     public final Column CASE_RESULT = new Column(this, "case_result");
 
     /**
      * 用例步骤结果
-     *
      */
     public final Column CASE_STEPRESULTS = new Column(this, "case_stepresults");
 
     /**
      * 最后执行人
-     *
      */
     public final Column TEST_RESULT_LAST_RUNNER = new Column(this, "test_result_last_runner");
 
     /**
      * 最后执行日期
-     *
      */
     public final Column TEST_RESULT_DATE = new Column(this, "test_result_date");
 

@@ -88,8 +88,7 @@
         #end
         #@tbody()
             #foreach(b:bugStas)
-            #set(notSolved=(b?.bugNum-
-        (b?.designEd+b?.repeatBug+b?.externalCause+b?.solved+b?.notReproduce+b?.delayResolved+b?.notResolved+b?.toStory)))
+            #set(notSolved=(b?.bugNum-(b?.designEd+b?.repeatBug+b?.externalCause+b?.solved+b?.notReproduce+b?.delayResolved+b?.notResolved+b?.toStory)))
             #@tr("text-c")
             <td >${b?.userId?userUtils.getUserById(b?.userId)?.orgUserRealName:""}</td>
             <td>${notSolved}</td>

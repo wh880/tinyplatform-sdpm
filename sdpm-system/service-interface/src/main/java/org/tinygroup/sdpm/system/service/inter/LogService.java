@@ -8,6 +8,7 @@ import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 public interface LogService {
     /**
      * 记录动态日志
+     *
      * @param oldObject
      * @param newObject
      * @param systemAction

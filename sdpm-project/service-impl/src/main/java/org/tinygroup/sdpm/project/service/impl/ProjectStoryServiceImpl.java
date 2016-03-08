@@ -51,19 +51,20 @@ public class ProjectStoryServiceImpl implements ProjectStoryService {
     }
 
     public List<ProductStory> findStoryByProject(Integer projectId) {
-        if(getStoryIdInProject(projectId).length==0){
+        if (getStoryIdInProject(projectId).length == 0) {
             return new ArrayList<ProductStory>();
         }
         List<ProductStory> list = storyManager.findList(false, getStoryIdInProject(projectId));
         return list;
     }
 
+
     @Override
     public List<ProductStory> findStoryByProjectAndModule(Integer projectId, ProductStory story) {
-        if(getStoryIdInProject(projectId).length==0){
+        if (getStoryIdInProject(projectId).length == 0) {
             return new ArrayList<ProductStory>();
         }
-        List<ProductStory> list = storyManager.findList(false,story, getStoryIdInProject(projectId));
+        List<ProductStory> list = storyManager.findList(false, story, getStoryIdInProject(projectId));
         return list;
     }
 
@@ -86,9 +87,9 @@ public class ProjectStoryServiceImpl implements ProjectStoryService {
             ids[i] = String.valueOf(storyList.get(i).getStoryId());
         }
         ConditionCarrier carrier = new ConditionCarrier();
-        carrier.putIns("productStory.storyId",ids);
+        carrier.putIns("productStory.storyId", ids);
         if (!StringUtil.isBlank(moduleId)) {
-            carrier.putModuleIn("productStory.moduleId",moduleId);
+            carrier.putModuleIn("productStory.moduleId", moduleId);
         }
         ProductStory story = new ProductStory();
         story.setDeleted(0);
@@ -99,7 +100,7 @@ public class ProjectStoryServiceImpl implements ProjectStoryService {
         return pager;
     }
 
-    private Integer[] getStoryIdInProject(Integer projectId){
+    private Integer[] getStoryIdInProject(Integer projectId) {
         List<ProjectStory> projectStoryList = projectStoryManager.findStoryList(projectId);
         if (projectStoryList == null || projectStoryList.isEmpty()) {
             return new Integer[0];

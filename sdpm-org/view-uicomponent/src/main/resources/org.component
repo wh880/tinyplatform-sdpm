@@ -1,13 +1,17 @@
-#macro diaryItem(authorName createDate diaryContent orgAccount)
+#macro diaryItem(authorName createDate diaryContent orgAccount detailCountStatus)
 <li class="diary-detail">
     <div class="diary-report clearfix">
         <div class="portrait">
-            <a href="${TINY_CONTEXT_PATH+adminPath}/org/diary/showOne?userAccount=${orgAccount}" title="点击查看${authorName}所有的周报">
+            <a href="${TINY_CONTEXT_PATH+adminPath}/org/diary/showOne?userAccount=${orgAccount}"
+               title="点击查看${authorName}所有的周报">
                 <span class="name b">${authorName}</span>
             </a>
             <div class="r f-14">
                 #fontIco("calendar") ${createDate}
-                <span class="dia_h_btn" data-open="0">#fontIco("chevron-down")</span>
+            <span class="dia_h_btn" data-open="0">
+                #if(detailCountStatus==1)
+                #fontIco("chevron-down")</span>
+                #end
             </div>
         </div>
         <div class="diary-info" style="cursor:pointer" data-load="true">

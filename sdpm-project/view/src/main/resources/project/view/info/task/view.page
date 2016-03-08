@@ -52,11 +52,11 @@
                        title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
                 #else
                     <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?taskId=${task.taskId}"
-                       title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+                       title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
                 #end
             #end
 
-            <a href="javascript:void(0);" onclick="javascript:history.back(-1);" title="返回">#buttonIcon(iconClass="icon-reply")</a>
+            <a href="javascript:void(0);" onclick="javascript:history.back(-1);" title="返回">#buttonIcon(iconClass="icon-reply")返回</a>
             #set(m1=menuService.getMenu("pro-Info-close"))
             </span>
             #div(divClass="clearfix")
@@ -99,11 +99,11 @@
                    title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
             #else
             <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?taskId=${task.taskId}"
-               title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+               title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
             #end
         #end
         <a href="javascript :;" onclick="javascript:history.back(-1);" title="返回">#buttonIcon(iconClass=
-            "icon-reply")</a>
+            "icon-reply")返回</a>
     </center>
 </div>
 <div style="width:30%;float:right">

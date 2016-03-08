@@ -1,4 +1,3 @@
-
 package org.tinygroup.sdpm.org.service.inter;
 
 import org.tinygroup.sdpm.org.dao.pojo.OrgCompany;

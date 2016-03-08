@@ -190,6 +190,7 @@ public class FaqAction extends BaseController {
 
     /**
      * faq左侧树的数据来源
+     *
      * @return
      */
     @ResponseBody

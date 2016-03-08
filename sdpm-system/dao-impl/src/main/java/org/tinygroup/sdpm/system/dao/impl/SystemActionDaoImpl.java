@@ -38,11 +38,12 @@ import java.util.Date;
 import java.util.List;
 
 import static org.tinygroup.sdpm.org.dao.constant.OrgUserTable.ORG_USERTABLE;
+import static org.tinygroup.sdpm.product.dao.constant.ProductReleaseTable.PRODUCT_RELEASETABLE;
 import static org.tinygroup.sdpm.product.dao.constant.ProductStoryTable.PRODUCT_STORYTABLE;
-import static org.tinygroup.sdpm.system.dao.constant.SystemActionTable.SYSTEM_ACTIONTABLE;
-import static org.tinygroup.sdpm.quality.dao.constant.QualityBugTable.QUALITY_BUGTABLE;
 import static org.tinygroup.sdpm.project.dao.constant.ProjectTaskTable.PROJECT_TASKTABLE;
-
+import static org.tinygroup.sdpm.quality.dao.constant.QualityBugTable.QUALITY_BUGTABLE;
+import static org.tinygroup.sdpm.quality.dao.constant.QualityTestCaseTable.QUALITY_TEST_CASETABLE;
+import static org.tinygroup.sdpm.system.dao.constant.SystemActionTable.SYSTEM_ACTIONTABLE;
 import static org.tinygroup.tinysqldsl.Delete.delete;
 import static org.tinygroup.tinysqldsl.Insert.insertInto;
 import static org.tinygroup.tinysqldsl.Select.select;
@@ -427,13 +428,13 @@ public class SystemActionDaoImpl extends TinyDslDaoSupport implements SystemActi
         PRODUCT_STORYTABLE.STORY_TITLE.setAlias(objectName);
         Alias actorName = new Alias("actorName");
         ORG_USERTABLE.ORG_USER_ACCOUNT.setAlias(actorName);
-        //union all 三个不同的type   bug+task+story
+        //union all 三个不同的type   bug+task+story+case+release
         ComplexSelect complexSelect = ComplexSelect.unionAll(select(SYSTEM_ACTIONTABLE.ALL, QUALITY_BUGTABLE.BUG_TITLE, ORG_USERTABLE.ORG_USER_REAL_NAME)
                         .from(SYSTEM_ACTIONTABLE, QUALITY_BUGTABLE, ORG_USERTABLE).where(and(
                         SYSTEM_ACTIONTABLE.ACTION_OBJECT_ID.eq(QUALITY_BUGTABLE.BUG_ID),
                         SYSTEM_ACTIONTABLE.ACTION_OBJECT_TYPE.eq("bug"),
                         SYSTEM_ACTIONTABLE.ACTION_ACTOR.eq(ORG_USERTABLE.ORG_USER_ID),
-                        SYSTEM_ACTIONTABLE.ACTION_ACTION.in("finished", "opened"),
+                        SYSTEM_ACTIONTABLE.ACTION_ACTION.in("resolved", "opened", "closed"),
                         ORG_USERTABLE.ORG_USER_ID.eq(userId),
                         SYSTEM_ACTIONTABLE.ACTION_DATE.between(beginDate, endDate)
                         )),
@@ -451,10 +452,57 @@ public class SystemActionDaoImpl extends TinyDslDaoSupport implements SystemActi
                         SYSTEM_ACTIONTABLE.ACTION_OBJECT_ID.eq(PRODUCT_STORYTABLE.STORY_ID),
                         SYSTEM_ACTIONTABLE.ACTION_OBJECT_TYPE.eq("story"),
                         SYSTEM_ACTIONTABLE.ACTION_ACTOR.eq(ORG_USERTABLE.ORG_USER_ID),
-                        SYSTEM_ACTIONTABLE.ACTION_ACTION.in("finished", "opened"),
+                        SYSTEM_ACTIONTABLE.ACTION_ACTION.in("opened", "changed", "reviewed", "closed"),
                         ORG_USERTABLE.ORG_USER_ID.eq(userId),
                         SYSTEM_ACTIONTABLE.ACTION_DATE.between(beginDate, endDate)
-                )));
+                )),
+                select(
+                        SYSTEM_ACTIONTABLE.ALL, QUALITY_TEST_CASETABLE.CASE_TITLE, ORG_USERTABLE.ORG_USER_REAL_NAME)
+                        .from(SYSTEM_ACTIONTABLE, QUALITY_TEST_CASETABLE, ORG_USERTABLE).where(and(
+                        SYSTEM_ACTIONTABLE.ACTION_OBJECT_ID.eq(QUALITY_TEST_CASETABLE.CASE_ID),
+                        SYSTEM_ACTIONTABLE.ACTION_OBJECT_TYPE.eq("case"),
+                        SYSTEM_ACTIONTABLE.ACTION_ACTOR.eq(ORG_USERTABLE.ORG_USER_ID),
+                        SYSTEM_ACTIONTABLE.ACTION_ACTION.in("run", "opened", "edited"),
+                        ORG_USERTABLE.ORG_USER_ID.eq(userId),
+                        SYSTEM_ACTIONTABLE.ACTION_DATE.between(beginDate, endDate)
+                )),
+                select(
+                        SYSTEM_ACTIONTABLE.ALL, PRODUCT_RELEASETABLE.RELEASE_NAME, ORG_USERTABLE.ORG_USER_REAL_NAME)
+                        .from(SYSTEM_ACTIONTABLE, PRODUCT_RELEASETABLE, ORG_USERTABLE).where(and(
+                        SYSTEM_ACTIONTABLE.ACTION_OBJECT_ID.eq(PRODUCT_RELEASETABLE.RELEASE_ID),
+                        SYSTEM_ACTIONTABLE.ACTION_OBJECT_TYPE.eq("release"),
+                        SYSTEM_ACTIONTABLE.ACTION_ACTOR.eq(ORG_USERTABLE.ORG_USER_ID),
+                        SYSTEM_ACTIONTABLE.ACTION_ACTION.in("opened"),
+                        ORG_USERTABLE.ORG_USER_ID.eq(userId),
+                        SYSTEM_ACTIONTABLE.ACTION_DATE.between(beginDate, endDate)
+                ))
+        );
         return getDslSession().fetchList(complexSelect, SystemAction.class);
+    }
+
+    @Override
+    public List<SystemAction> findCaseByCaseList(List<Integer> cases) {
+        Alias objectName = new Alias("objectName");
+        QUALITY_TEST_CASETABLE.CASE_TITLE.setAlias(objectName);
+        Select select = Select.select(SYSTEM_ACTIONTABLE.ALL, QUALITY_TEST_CASETABLE.CASE_TITLE)
+                .from(SYSTEM_ACTIONTABLE, QUALITY_TEST_CASETABLE).where(and(
+                        SYSTEM_ACTIONTABLE.ACTION_OBJECT_ID.eq(QUALITY_TEST_CASETABLE.CASE_ID),
+                        SYSTEM_ACTIONTABLE.ACTION_OBJECT_TYPE.eq("case"),
+                        SYSTEM_ACTIONTABLE.ACTION_ID.in(cases.toArray())
+                ));
+        return getDslSession().fetchList(select, SystemAction.class);
+    }
+
+    @Override
+    public List<SystemAction> findReleaseByReleaseList(List<Integer> releases) {
+        Alias objectName = new Alias("objectName");
+        PRODUCT_RELEASETABLE.RELEASE_NAME.setAlias(objectName);
+        Select select = Select.select(SYSTEM_ACTIONTABLE.ALL, PRODUCT_RELEASETABLE.RELEASE_NAME)
+                .from(SYSTEM_ACTIONTABLE, PRODUCT_RELEASETABLE).where(and(
+                        SYSTEM_ACTIONTABLE.ACTION_OBJECT_ID.eq(PRODUCT_RELEASETABLE.RELEASE_ID),
+                        SYSTEM_ACTIONTABLE.ACTION_OBJECT_TYPE.eq("release"),
+                        SYSTEM_ACTIONTABLE.ACTION_ID.in(releases.toArray())
+                ));
+        return getDslSession().fetchList(select, SystemAction.class);
     }
 }

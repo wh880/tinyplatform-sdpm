@@ -50,7 +50,7 @@ public class StoryServiceImpl implements StoryService {
     }
 
     public ProductStory findStory(Integer storyId) {
-        if(storyId == null){
+        if (storyId == null) {
             return null;
         }
         return storyManager.find(storyId);
@@ -71,7 +71,7 @@ public class StoryServiceImpl implements StoryService {
     }
 
     public List<ProductStory> findStoryListByIds(Integer... storyId) {
-        return storyManager.findList(false,storyId);
+        return storyManager.findList(false, storyId);
     }
 
     public List<ProductStory> findStoryList(ProductStory story) {
@@ -94,8 +94,8 @@ public class StoryServiceImpl implements StoryService {
         return storyManager.findProductNameByStoryId(storyId);
     }
 
-    public Pager<ProductStory> findProjectLinkedStory(int start, int limit,ProductStory story, ConditionCarrier carrier, String columnName, boolean asc) {
-        return storyManager.findProjectLinkedStory(start,limit,story,carrier,columnName,asc);
+    public Pager<ProductStory> findProjectLinkedStory(int start, int limit, ProductStory story, ConditionCarrier carrier, String columnName, boolean asc) {
+        return storyManager.findProjectLinkedStory(start, limit, story, carrier, columnName, asc);
     }
 
     public Pager<ProductStory> findStoryByCondition(int start, int limit, ProductStory story, ConditionCarrier carrier, final String columnName, boolean asc) {
@@ -108,7 +108,7 @@ public class StoryServiceImpl implements StoryService {
     }
 
     public List<ProductStory> getStoryWithSpecInIds(boolean isWithSpec, Integer... ids) {
-        return storyManager.findList(isWithSpec,ids);
+        return storyManager.findList(isWithSpec, ids);
     }
 
     @Override

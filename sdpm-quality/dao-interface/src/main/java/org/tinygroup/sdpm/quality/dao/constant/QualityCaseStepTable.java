@@ -21,7 +21,6 @@ import org.tinygroup.tinysqldsl.base.Table;
 
 /**
  * 测试用例步骤表
- *
  */
 public class QualityCaseStepTable extends Table {
 
@@ -29,31 +28,26 @@ public class QualityCaseStepTable extends Table {
 
     /**
      * 用例步骤编号
-     *
      */
     public final Column CASE_STEP_ID = new Column(this, "case_step_id");
 
     /**
      * 用例编号
-     *
      */
     public final Column CASE_ID = new Column(this, "case_id");
 
     /**
      * 关联用例版本
-     *
      */
     public final Column CASE_VERSION = new Column(this, "case_version");
 
     /**
      * 描述
-     *
      */
     public final Column CASE_STEP_DESC = new Column(this, "case_step_desc");
 
     /**
      * 用例预期
-     *
      */
     public final Column CASE_STEP_EXPECT = new Column(this, "case_step_expect");
 

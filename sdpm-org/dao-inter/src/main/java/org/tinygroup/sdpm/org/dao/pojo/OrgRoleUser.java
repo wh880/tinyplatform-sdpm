@@ -20,31 +20,26 @@ import java.io.Serializable;
 
 /**
  * 角色用户分配
- *
  */
-public class OrgRoleUser implements Serializable{
+public class OrgRoleUser implements Serializable {
 
     /**
      * 逻辑ID
-     *
      */
     private Integer id;
 
     /**
      * 角色ID
-     *
      */
     private Integer orgRoleId;
 
     /**
      * 用户编号
-     *
      */
     private String orgUserId;
 
     /**
      * 真实姓名
-     *
      */
     private String orgUserRealName;
 

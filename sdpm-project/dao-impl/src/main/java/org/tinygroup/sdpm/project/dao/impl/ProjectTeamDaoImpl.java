@@ -59,7 +59,7 @@ public class ProjectTeamDaoImpl extends TinyDslDaoSupport implements ProjectTeam
 
     public List<String> getMenuByUserId(Integer projectId, Integer productId, String userId) {
         List<Integer> roleIdListByProjectIdAndUserId = getRoleIdListByUserId(projectId, productId, userId);
-        if (CollectionUtil.isEmpty(roleIdListByProjectIdAndUserId)){
+        if (CollectionUtil.isEmpty(roleIdListByProjectIdAndUserId)) {
             return new ArrayList<String>();
         }
         Select select = Select.select(ORG_ROLE_MENUTABLE.ORG_ROLE_MENU_ID).from(ORG_ROLE_MENUTABLE).where(ORG_ROLE_MENUTABLE.ORG_ROLE_ID.in(roleIdListByProjectIdAndUserId.toArray()));

@@ -21,7 +21,6 @@ import org.tinygroup.tinysqldsl.base.Table;
 
 /**
  * 团队
- *
  */
 public class ProjectTeamTable extends Table {
 
@@ -29,49 +28,41 @@ public class ProjectTeamTable extends Table {
 
     /**
      * 逻辑ID
-     *
      */
     public final Column ID = new Column(this, "id");
 
     /**
      * 产品id
-     *
      */
     public final Column PRODUCT_ID = new Column(this, "product_id");
 
     /**
      * 项目id
-     *
      */
     public final Column PROJECT_ID = new Column(this, "project_id");
 
     /**
      * 用户
-     *
      */
     public final Column TEAM_USER_ID = new Column(this, "team_user_id");
 
     /**
      * 角色
-     *
      */
     public final Column TEAM_ROLE = new Column(this, "team_role");
 
     /**
      * 加盟日
-     *
      */
     public final Column TEAM_JOIN = new Column(this, "team_join");
 
     /**
      * 可用工时
-     *
      */
     public final Column TEAM_DAYS = new Column(this, "team_days");
 
     /**
      * 可用工时
-     *
      */
     public final Column TEAM_HOURS = new Column(this, "team_hours");
 

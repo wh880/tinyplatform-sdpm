@@ -20,72 +20,67 @@ import java.util.Date;
 
 /**
  * 客服回复表
- *
  */
 public class ServiceReply {
 
     /**
      * 回复ID
-     *
      */
     private Integer replyId;
 
     /**
      * 请求ID
-     *
+     * <p>
      * 服务请求ID
      */
     private Integer clientRequestId;
 
     /**
      * 回复意见
-     *
+     * <p>
      * 0-接受；1-拒绝；2-待定
      */
     private Integer replyOpinion;
 
     /**
      * 回复描述
-     *
      */
     private String replySpec;
 
     /**
      * 承诺日期
-     *
+     * <p>
      * 回复意见为“0-接受，”时，应有承诺日期
      */
     private Date replyCommitmentDate;
 
     /**
      * 回复处理人
-     *
+     * <p>
      * 可以是客服或转出后的产品组处理人
      */
     private String replyDoBy;
 
     /**
      * 回复处理日期
-     *
      */
     private Date replyDoDate;
 
     /**
      * 回复者
-     *
+     * <p>
      * 客服
      */
     private String replier;
 
     /**
      * 回复时间
-     *
      */
     private Date replyDate;
 
     /**
      * 是否回复
-     *
+     * <p>
      * 0-未回复；1-已回复
      */
     private Integer replyDone;

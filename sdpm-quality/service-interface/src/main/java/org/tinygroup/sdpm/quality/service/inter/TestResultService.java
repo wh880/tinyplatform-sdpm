@@ -7,6 +7,7 @@ import java.util.List;
 public interface TestResultService {
     /**
      * 测试结果对象查询
+     *
      * @param qualityTestResult
      * @return
      */
@@ -14,6 +15,7 @@ public interface TestResultService {
 
     /**
      * 新增测试结果
+     *
      * @param qualityTestResult
      * @return
      */

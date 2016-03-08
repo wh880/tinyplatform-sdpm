@@ -21,7 +21,6 @@ import org.tinygroup.tinysqldsl.base.Table;
 
 /**
  * 任务预计
- *
  */
 public class ProjectTaskestimateTable extends Table {
 
@@ -29,43 +28,36 @@ public class ProjectTaskestimateTable extends Table {
 
     /**
      * 任务预计id
-     *
      */
     public final Column TASKESTIMATE_ID = new Column(this, "taskestimate_id");
 
     /**
      * 任务id
-     *
      */
     public final Column TASK_ID = new Column(this, "task_id");
 
     /**
      * 任务预计时间
-     *
      */
     public final Column TASKESTIMATE_DATE = new Column(this, "taskestimate_date");
 
     /**
      * 任务预计剩余
-     *
      */
     public final Column TASKESTIMATE_LEFT = new Column(this, "taskestimate_left");
 
     /**
      * 任务预计消耗
-     *
      */
     public final Column TASKESTIMATE_CONSUMED = new Column(this, "taskestimate_consumed");
 
     /**
      * 操作人帐号
-     *
      */
     public final Column TASKESTIMATE_ACCOUNT = new Column(this, "taskestimate_account");
 
     /**
      * 备用字段
-     *
      */
     public final Column TASKESTIMATE_WORK = new Column(this, "taskestimate_work");
 

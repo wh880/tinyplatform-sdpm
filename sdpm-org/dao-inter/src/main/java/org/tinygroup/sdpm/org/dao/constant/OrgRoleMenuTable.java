@@ -21,7 +21,6 @@ import org.tinygroup.tinysqldsl.base.Table;
 
 /**
  * 角色菜单表
- *
  */
 public class OrgRoleMenuTable extends Table {
 
@@ -29,19 +28,16 @@ public class OrgRoleMenuTable extends Table {
 
     /**
      * 逻辑ID
-     *
      */
     public final Column ID = new Column(this, "id");
 
     /**
      * 角色ID
-     *
      */
     public final Column ORG_ROLE_ID = new Column(this, "org_role_id");
 
     /**
      * 角色菜单id
-     *
      */
     public final Column ORG_ROLE_MENU_ID = new Column(this, "org_role_menu_id");
 

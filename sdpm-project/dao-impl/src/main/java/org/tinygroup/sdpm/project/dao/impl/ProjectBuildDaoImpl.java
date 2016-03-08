@@ -330,9 +330,9 @@ public class ProjectBuildDaoImpl extends TinyDslDaoSupport implements ProjectBui
             con = con == null ? PROJECT_BUILDTABLE.BUILD_PROJECT.eq(projectId) : and(con, PROJECT_BUILDTABLE.BUILD_PROJECT.eq(projectId));
         }
         Select select = MysqlSelect.select(FragmentSql.fragmentSelect("CONCAT (build_name,'-',project_name) as buildName"), PROJECT_BUILDTABLE.BUILD_ID).from(PROJECT_BUILDTABLE).where(
-                and(PROJECT_BUILDTABLE.BUILD_NAME.like(condition),con,PROJECT_BUILDTABLE.BUILD_DELETED.eq(0))
-        ).join(Join.leftJoin(PROJECTTABLE,PROJECT_BUILDTABLE.BUILD_PROJECT.eq(PROJECTTABLE.PROJECT_ID))).orderBy(OrderByElement.desc(PROJECT_BUILDTABLE.BUILD_DATE)).limit(0,limit);
-        return getDslSession().fetchList(select,ProjectBuild.class);
+                and(PROJECT_BUILDTABLE.BUILD_NAME.like(condition), con, PROJECT_BUILDTABLE.BUILD_DELETED.eq(0))
+        ).join(Join.leftJoin(PROJECTTABLE, PROJECT_BUILDTABLE.BUILD_PROJECT.eq(PROJECTTABLE.PROJECT_ID))).orderBy(OrderByElement.desc(PROJECT_BUILDTABLE.BUILD_DATE)).limit(0, limit);
+        return getDslSession().fetchList(select, ProjectBuild.class);
     }
 
 

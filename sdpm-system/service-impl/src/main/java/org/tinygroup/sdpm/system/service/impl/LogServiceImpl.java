@@ -102,7 +102,7 @@ public class LogServiceImpl implements LogService {
             OrgUser orgUser = userManager.find((String) object);
             if (orgUser != null) {
                 return orgUser.getOrgUserRealName();
-            }else {
+            } else {
                 return "";
             }
         }

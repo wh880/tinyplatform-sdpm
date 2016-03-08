@@ -28,6 +28,7 @@ public interface HolidayDao extends BaseDao<Holiday, Integer> {
 
     /**
      * 批量软删除
+     *
      * @param list
      * @return
      */

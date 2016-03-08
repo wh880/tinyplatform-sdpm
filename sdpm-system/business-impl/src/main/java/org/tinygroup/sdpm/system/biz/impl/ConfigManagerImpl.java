@@ -1,4 +1,3 @@
-
 package org.tinygroup.sdpm.system.biz.impl;
 
 
@@ -46,7 +45,7 @@ public class ConfigManagerImpl implements ConfigManager {
     }
 
     public List<SystemConfig> findList(SystemConfig config, String columnName, Boolean asc) {
-        if(StringUtil.isBlank(columnName)){
+        if (StringUtil.isBlank(columnName)) {
             return configDao.query(config);
         }
         return configDao.query(config, new OrderBy(columnName, asc));
@@ -54,8 +53,8 @@ public class ConfigManagerImpl implements ConfigManager {
 
     public Pager<SystemConfig> findPager(int start, int limit, SystemConfig config, String columnName,
                                          boolean asc) {
-        if(StringUtil.isBlank(columnName)){
-            return configDao.queryPager(start,limit,config);
+        if (StringUtil.isBlank(columnName)) {
+            return configDao.queryPager(start, limit, config);
         }
         return configDao.queryPager(start, limit, config, new OrderBy(columnName, asc));
     }

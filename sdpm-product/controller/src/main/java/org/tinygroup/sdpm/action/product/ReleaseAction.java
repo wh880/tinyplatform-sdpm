@@ -9,14 +9,13 @@ import org.tinygroup.sdpm.common.docTemplate.inter.DocTemplateResolver;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.dao.condition.ConditionCarrier;
 import org.tinygroup.sdpm.dto.UploadProfile;
-import org.tinygroup.sdpm.product.dao.utils.FieldUtil;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductRelease;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
+import org.tinygroup.sdpm.product.dao.utils.FieldUtil;
 import org.tinygroup.sdpm.product.service.inter.ProductService;
 import org.tinygroup.sdpm.product.service.inter.ReleaseService;
 import org.tinygroup.sdpm.product.service.inter.StoryService;
-import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
 import org.tinygroup.sdpm.project.service.inter.BuildService;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.sdpm.quality.service.inter.BugService;
@@ -72,7 +71,7 @@ public class ReleaseAction extends BaseController {
     }
 
     @RequestMapping("/save")
-    public String save(@CookieValue(value = "cookieProductId",defaultValue = "0") String cookieProductId,
+    public String save(@CookieValue(value = "cookieProductId", defaultValue = "0") String cookieProductId,
                        ProductRelease productRelease,
                        SystemAction systemAction,
                        String lastAddress,
@@ -80,7 +79,7 @@ public class ReleaseAction extends BaseController {
                        UploadProfile uploadProfile) throws IOException {
         productRelease.setProductId(Integer.parseInt(cookieProductId));
         ProductRelease release = releaseService.addRelease(productRelease);
-        processProfile(uploadProfile,release.getReleaseId(), ProfileType.RELEASE);
+        processProfile(uploadProfile, release.getReleaseId(), ProfileType.RELEASE);
         LogUtil.logWithComment(LogUtil.LogOperateObject.RELEASE
                 , LogUtil.LogAction.OPENED
                 , String.valueOf(release.getReleaseId())
@@ -90,14 +89,14 @@ public class ReleaseAction extends BaseController {
                 , null
                 , null
                 , systemAction.getActionComment());
-        if(!StringUtil.isBlank(currentAddress)){
+        if (!StringUtil.isBlank(currentAddress)) {
             return "redirect:" + currentAddress;
-        }else{
+        } else {
             if (!StringUtil.isBlank(lastAddress)) {
                 return "redirect:" + lastAddress;
             }
         }
-        return "redirect:" +adminPath+ "/product/release/content";
+        return "redirect:" + adminPath + "/product/release/content";
     }
 
     @RequestMapping("/update")
@@ -117,8 +116,8 @@ public class ReleaseAction extends BaseController {
                 , release1
                 , release
                 , systemAction.getActionComment());
-        if(!StringUtil.isBlank(lastAddress)){
-            return "redirect:"+lastAddress;
+        if (!StringUtil.isBlank(lastAddress)) {
+            return "redirect:" + lastAddress;
         }
         return "redirect:" + adminPath + "/product/release/content";
     }
@@ -184,17 +183,17 @@ public class ReleaseAction extends BaseController {
                           Integer no,
                           HttpServletRequest request) {
 
-        if(no!=null){
+        if (no != null) {
             String result = CookieUtils.getCookie(request, productUtils.COOKIE_PRODUCT_ID);
-            if(StringUtil.isBlank(result)){
+            if (StringUtil.isBlank(result)) {
                 return notFoundView();
             }
-            Integer cookieProductId = Integer.parseInt( result);
+            Integer cookieProductId = Integer.parseInt(result);
             ProductRelease release = new ProductRelease();
             release.setProductId(cookieProductId);
             release.setNo(no);
             List<ProductRelease> releaseList = releaseService.findReleaseList(release);
-            if(releaseList.size()==0){
+            if (releaseList.size() == 0) {
                 return notFoundView();
             }
             releaseId = releaseList.get(0).getReleaseId();
@@ -240,7 +239,7 @@ public class ReleaseAction extends BaseController {
     }
 
     @RequestMapping("/addRelease")
-    public String addRelease(@CookieValue(value = "cookieProductId",defaultValue = "0") String cookieProductId,HttpServletRequest request, Model model) {
+    public String addRelease(@CookieValue(value = "cookieProductId", defaultValue = "0") String cookieProductId, HttpServletRequest request, Model model) {
         Product product = productService.findProductById(Integer.parseInt(cookieProductId));
         model.addAttribute("product", product);
         return "/product/page/add/release/product-addrelease.page";
@@ -254,7 +253,7 @@ public class ReleaseAction extends BaseController {
         if (release != null && !StringUtil.isBlank(release.getReleaseStories())) {
             List<String> origin = new ArrayList<String>(Arrays.asList(release.getReleaseStories().split(",")));
             origin.remove(String.valueOf(storyId));
-            release.setReleaseStories(StringUtil.join(origin.toArray(),","));
+            release.setReleaseStories(StringUtil.join(origin.toArray(), ","));
             releaseService.updateRelease(release);
         }
 
@@ -294,7 +293,7 @@ public class ReleaseAction extends BaseController {
             List<String> origin = new ArrayList<String>(Arrays.asList(release.getReleaseStories().split(",")));
             List<String> remove = new ArrayList<String>(Arrays.asList(ids.split(",")));
             origin.removeAll(remove);
-            release.setReleaseStories(StringUtil.join(origin.toArray(),","));
+            release.setReleaseStories(StringUtil.join(origin.toArray(), ","));
             releaseService.updateRelease(release);
         }
 
@@ -329,24 +328,24 @@ public class ReleaseAction extends BaseController {
 
     @ResponseBody
     @RequestMapping("/ajaxRelateStory")
-    public Map RelateStory(Integer releaseId,String ids) {
+    public Map RelateStory(Integer releaseId, String ids) {
         String[] stories = ids.split(",");
         if (stories.length > 0 && stories != null) {
             ProductRelease release = releaseService.findRelease(releaseId);
             String releaseStories = "";
-            if(release!=null&&!StringUtil.isBlank(release.getReleaseStories())){
+            if (release != null && !StringUtil.isBlank(release.getReleaseStories())) {
                 releaseStories = release.getReleaseStories();
             }
             List<String> origin = new ArrayList<String>(Arrays.asList(releaseStories.split(",")));
             for (String id : stories) {
                 ProductStory productStory = storyService.findStory(Integer.parseInt(id));
                 productStory.setStoryStage("9");
-                if(!origin.contains(id)){
+                if (!origin.contains(id)) {
                     origin.add(id);
                 }
                 storyService.updateStory(productStory);
             }
-            release.setReleaseStories(StringUtil.join(origin.toArray(),","));
+            release.setReleaseStories(StringUtil.join(origin.toArray(), ","));
             releaseService.updateRelease(release);
         }
         Map<String, String> map = new HashMap<String, String>();
@@ -358,21 +357,21 @@ public class ReleaseAction extends BaseController {
 
     @ResponseBody
     @RequestMapping("/ajaxRelateBug")
-    public Map RelateBug(Integer releaseId,String ids) {
+    public Map RelateBug(Integer releaseId, String ids) {
         String[] bugs = ids.split(",");
         if (bugs.length > 0 && bugs != null) {
             ProductRelease release = releaseService.findRelease(releaseId);
             String releaseBugs = "";
-            if(release!=null&&!StringUtil.isBlank(release.getReleaseBugs())){
+            if (release != null && !StringUtil.isBlank(release.getReleaseBugs())) {
                 releaseBugs = release.getReleaseBugs();
             }
             List<String> origin = new ArrayList<String>(Arrays.asList(releaseBugs.split(",")));
             for (String bugId : bugs) {
-                if(!origin.contains(bugId)){
+                if (!origin.contains(bugId)) {
                     origin.add(bugId);
                 }
             }
-            release.setReleaseBugs(StringUtil.join(origin.toArray(),","));
+            release.setReleaseBugs(StringUtil.join(origin.toArray(), ","));
             releaseService.updateRelease(release);
         }
         Map<String, String> map = new HashMap<String, String>();
@@ -383,20 +382,20 @@ public class ReleaseAction extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "/judgeReleaseName")
-    public Map judgeReleaseName(String param,Integer releaseId,Integer productId) {
+    public Map judgeReleaseName(String param, Integer releaseId, Integer productId) {
         if (param != null) {
             String releaseName = param;
             ProductRelease release = new ProductRelease();
             release.setReleaseName(releaseName);
             release.setProductId(productId);
             release.setDeleted(FieldUtil.DELETE_NO);
-            List<ProductRelease> releases= releaseService.findReleaseList(release);
+            List<ProductRelease> releases = releaseService.findReleaseList(release);
             if (releases.size() != 0) {
-                if(releaseId==null){
+                if (releaseId == null) {
                     return resultMap(false, "该发布已存在");
-                }else if(!releaseId.equals(releases.get(0).getReleaseId())){
+                } else if (!releaseId.equals(releases.get(0).getReleaseId())) {
                     return resultMap(false, "该发布已存在");
-                }else{
+                } else {
                     return resultMap(true, "");
                 }
             } else {
@@ -405,6 +404,7 @@ public class ReleaseAction extends BaseController {
         }
         return resultMap(false, "请输入发布名称");
     }
+
     @RequestMapping("/exportDoc")
     public void exportDocument(Integer releaseId, HttpServletResponse response) throws IOException, TemplateException {
         TemplateContext context = new TemplateContextDefault();
@@ -416,7 +416,7 @@ public class ReleaseAction extends BaseController {
                 sIds = new ArrayList<Integer>();
                 String[] ids = releaseStory.split(",");
                 for (String id : ids) {
-                    if(StringUtil.isBlank(id)){
+                    if (StringUtil.isBlank(id)) {
                         continue;
                     }
                     sIds.add(Integer.parseInt(id));
@@ -436,7 +436,7 @@ public class ReleaseAction extends BaseController {
             String inCondition = StringUtil.isBlank(releaseBugs) ? "" : releaseBugs;
             ConditionCarrier carrier;
             carrier = new ConditionCarrier();
-                    carrier.putIns("qualityBug.bugId",inCondition.split(","));
+            carrier.putIns("qualityBug.bugId", inCondition.split(","));
 
             context.put("bugInList", bugService.findBugListPager(
                     0, 100, carrier, bug, null, false).getRecords());
@@ -444,8 +444,8 @@ public class ReleaseAction extends BaseController {
             bug.setBugStatus("1");
             context.put("bugNoInList", bugService.findBugListPager(
                     0, 100, carrier, bug, null, false).getRecords());
-            context.put("ExportUtils",exportUtils);
-            context.put("productService",productService);
+            context.put("ExportUtils", exportUtils);
+            context.put("productService", productService);
         }
         exportUtils.mergeTemplate(DocTemplateResolver.RELEASE, context, response, "发布文档");
     }

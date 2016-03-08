@@ -22,68 +22,57 @@ import java.util.Date;
 
 /**
  * 假期表
- *
  */
 public class Holiday implements Serializable {
     public static int DELETE_YES = 1;
     public static int DELETE_NO = 0;
     /**
      * 假期ID
-     *
      */
     private Integer holidayId;
 
     /**
      * 假期名
-     *
      */
     private String holidayName;
 
     /**
      * 假期创建人
-     *
      */
     private String holidayAccount;
 
     /**
      * 假期日期
-     *
      */
     private String holidayDate;
 
     /**
      * 假期类型
-     *
      */
     private String holidayType;
 
     /**
      * 删除标志位
-     *
      */
     private Integer holidayDeleted;
 
     /**
      * 公司ID
-     *
      */
     private Integer companyId;
 
     /**
      * 假期描述
-     *
      */
     private String holidayDetail;
 
     /**
      * 假期备注
-     *
      */
     private String hoilidayRemark;
 
     /**
      * 动作
-
      */
     private String actionAction;
     /**

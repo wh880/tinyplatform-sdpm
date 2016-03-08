@@ -13,13 +13,13 @@ import java.util.List;
  * Created by wangdl16860 on 2016/1/19.
  */
 @Component
-public class WhiteListServiceImpl implements WhiteListService{
+public class WhiteListServiceImpl implements WhiteListService {
     @Autowired
     private WhiteListManager whiteListManager;
 
     @Override
     public int[] addWhiteList(String firstUserAccount, List<String> secondUserAccountList) {
-        return whiteListManager.add(firstUserAccount,secondUserAccountList);
+        return whiteListManager.add(firstUserAccount, secondUserAccountList);
     }
 
     @Override
@@ -29,16 +29,16 @@ public class WhiteListServiceImpl implements WhiteListService{
 
     @Override
     public OrgDiaryWhiteList addOneWhite(String firstAccount, String secondAccount) {
-        return whiteListManager.addOneWhite(firstAccount,secondAccount);
+        return whiteListManager.addOneWhite(firstAccount, secondAccount);
     }
 
     @Override
     public OrgDiaryWhiteList findDiaryWhiteByAccounts(String firstAccount, String secondAccount) {
-        return whiteListManager.findOneByAccounts(firstAccount,secondAccount);
+        return whiteListManager.findOneByAccounts(firstAccount, secondAccount);
     }
 
     @Override
     public Integer deleteDiaryWhiteList(String firstAccount, String secondAccout) {
-        return whiteListManager.deleteDiaryWhiteList(firstAccount,secondAccout);
+        return whiteListManager.deleteDiaryWhiteList(firstAccount, secondAccout);
     }
 }

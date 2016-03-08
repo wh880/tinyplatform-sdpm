@@ -32,6 +32,7 @@ public interface ProductPlanDao extends BaseDao<ProductPlan, Integer> {
 
     /**
      * 统计查询
+     *
      * @param productPlan
      * @return
      */

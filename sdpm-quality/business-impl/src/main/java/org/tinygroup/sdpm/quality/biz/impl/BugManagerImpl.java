@@ -113,7 +113,7 @@ public class BugManagerImpl implements BugManager {
     private Condition mergeCondition(ConditionCarrier carrier) {
         return ConditionUtils.mergeCondition(carrier, new CallBackFunction() {
             public String moduleRoot(String moduleId) {
-                return ModuleUtil.getConditionByRootWithoutOperate(Integer.parseInt(moduleId.substring(1)),"bug");
+                return ModuleUtil.getConditionByRootWithoutOperate(Integer.parseInt(moduleId.substring(1)), "bug");
             }
 
             public String module(String moduleId) {

@@ -151,6 +151,7 @@
             <servlet-mapping url-pattern=".*\.xlc"></servlet-mapping>
             <servlet-mapping url-pattern=".*\.xlm"></servlet-mapping>
             <servlet-mapping url-pattern=".*\.xls"></servlet-mapping>
+            <servlet-mapping url-pattern=".*\.xlsx"></servlet-mapping>
             <servlet-mapping url-pattern=".*\.xlt"></servlet-mapping>
             <servlet-mapping url-pattern=".*\.xlw"></servlet-mapping>
             <servlet-mapping url-pattern=".*\.msg"></servlet-mapping>

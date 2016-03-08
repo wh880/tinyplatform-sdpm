@@ -497,6 +497,6 @@ public class OrgUserDaoImpl extends TinyDslDaoSupport implements OrgUserDao {
                         inExpression(subSelect(select(ORG_DIARY_WHITE_LISTTABLE.ORG_DIARY_WHITE_LIST_SECOND_ACCOUNT).
                                 from(ORG_DIARY_WHITE_LISTTABLE).
                                 where(ORG_DIARY_WHITE_LISTTABLE.ORG_DIARY_WHITE_LIST_FIRST_ACCOUNT.eq(userAccount)))));
-        return getDslSession().fetchList(select,OrgUser.class);
+        return getDslSession().fetchList(select, OrgUser.class);
     }
 }

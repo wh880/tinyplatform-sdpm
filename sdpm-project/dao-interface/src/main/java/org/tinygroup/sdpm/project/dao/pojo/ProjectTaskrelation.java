@@ -20,7 +20,6 @@ import java.io.Serializable;
 
 /**
  * TASKRELATION
- *
  */
 public class ProjectTaskrelation implements Serializable {
 
@@ -36,7 +35,7 @@ public class ProjectTaskrelation implements Serializable {
 
     /**
      * 前置条件
-     * <p/>
+     * <p>
      * 0-开始后，1-完成后
      */
     private String taskrelationConditon;
@@ -48,7 +47,7 @@ public class ProjectTaskrelation implements Serializable {
 
     /**
      * 动作
-     * <p/>
+     * <p>
      * 0-才能开始，1-才能完成
      */
     private String taskrelationAction;

@@ -26,6 +26,7 @@ public interface OrgRoleUserDao extends BaseDao<OrgRoleUser, Integer> {
 
     /**
      * 删除用户的角色
+     *
      * @param userId
      * @return
      */

@@ -21,67 +21,56 @@ import java.util.Date;
 
 /**
  * 邮件队列
- *
  */
 public class SystemMailqueue implements Serializable {
 
     /**
      * 邮件队列ID
-     *
      */
     private Integer mailqueueId;
 
     /**
      * 发送给
-     *
      */
     private String mailqueueToList;
 
     /**
      * 抄送给
-     *
      */
     private String mailqueueCcList;
 
     /**
      * 邮箱队列主题
-     *
      */
     private String mailqueueSubject;
 
     /**
      * 队列主体
-     *
      */
     private String mailqueueBody;
 
     /**
      * 添加日期
-     *
      */
     private Date mailqueueAddedDate;
 
     /**
      * 邮箱队列由谁添加
-     *
      */
     private String mailqueueAddedBy;
 
     /**
      * 传送时间
-     *
      */
     private Date mailqueueSendTime;
 
     /**
      * 队列状态
-     *
      */
     private String mailqueueStatus;
 
     /**
      * 传送失败理由
-     *
      */
     private String mailqueueFailReason;
 

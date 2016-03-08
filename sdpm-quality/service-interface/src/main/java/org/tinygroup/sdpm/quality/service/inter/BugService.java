@@ -12,6 +12,7 @@ public interface BugService {
 
     /**
      * 根据主键ID查询
+     *
      * @param id
      * @return
      */
@@ -19,6 +20,7 @@ public interface BugService {
 
     /**
      * 根据条件查询d
+     *
      * @param qualityBug
      * @return
      */
@@ -26,6 +28,7 @@ public interface BugService {
 
     /**
      * 提Bug
+     *
      * @param bug
      * @return
      */
@@ -33,6 +36,7 @@ public interface BugService {
 
     /**
      * 修改
+     *
      * @param bug
      * @return
      */
@@ -40,13 +44,15 @@ public interface BugService {
 
     /**
      * 批量删除
+     *
      * @param bugIds
      * @return
      */
-    int[]  batchDeleteBug(List<QualityBug> bugIds);
+    int[] batchDeleteBug(List<QualityBug> bugIds);
 
     /**
      * 删除
+     *
      * @param bugId
      * @return
      */
@@ -54,14 +60,16 @@ public interface BugService {
 
     /**
      * bug报表
+     *
      * @param code
      * @param productId
      * @return
      */
-    Map<String,List<BugCount>> bugReport(String code, Integer productId);
+    Map<String, List<BugCount>> bugReport(String code, Integer productId);
 
     /**
      * 获取需求变更的bug
+     *
      * @param start
      * @param limit
      * @param carrier
@@ -70,10 +78,11 @@ public interface BugService {
      * @param asc
      * @return
      */
-    Pager<QualityBug> findStoryChangedBugs(Integer start,Integer limit, ConditionCarrier carrier, QualityBug bug,String sortName,boolean asc);
+    Pager<QualityBug> findStoryChangedBugs(Integer start, Integer limit, ConditionCarrier carrier, QualityBug bug, String sortName, boolean asc);
 
     /**
      * 复合条件-排序-分页查询bug
+     *
      * @param start
      * @param limit
      * @param carrier
@@ -82,10 +91,11 @@ public interface BugService {
      * @param asc
      * @return
      */
-    Pager<QualityBug> findBugListPager(Integer start,Integer limit, ConditionCarrier carrier, QualityBug bug,String sortName,boolean asc);
+    Pager<QualityBug> findBugListPager(Integer start, Integer limit, ConditionCarrier carrier, QualityBug bug, String sortName, boolean asc);
 
     /**
-     *发布文档中，获取已解决且关联的bug
+     * 发布文档中，获取已解决且关联的bug
+     *
      * @param bug
      * @return
      */
@@ -93,6 +103,7 @@ public interface BugService {
 
     /**
      * 根据输入名称获取bug
+     *
      * @param condition
      * @param productId
      * @return
@@ -101,6 +112,7 @@ public interface BugService {
 
     /**
      * 根据bug Id查找对应的bug
+     *
      * @param bugId
      * @return
      */

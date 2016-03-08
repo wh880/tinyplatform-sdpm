@@ -182,7 +182,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     public List<OrgRole> roleInCondition(String condition, String type, Integer limit) {
-        return roleManager.roleInCondition(condition,type,limit);
+        return roleManager.roleInCondition(condition, type, limit);
     }
 
 }

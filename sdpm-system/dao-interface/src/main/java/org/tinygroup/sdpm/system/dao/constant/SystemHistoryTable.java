@@ -21,7 +21,6 @@ import org.tinygroup.tinysqldsl.base.Table;
 
 /**
  * 操作历史表
- *
  */
 public class SystemHistoryTable extends Table {
 
@@ -29,37 +28,31 @@ public class SystemHistoryTable extends Table {
 
     /**
      * 操作历史ID
-     *
      */
     public final Column HISTORY_ID = new Column(this, "history_id");
 
     /**
      * 操作ID
-     *
      */
     public final Column HISTORY_ACTION = new Column(this, "history_action");
 
     /**
      * 所属领域
-     *
      */
     public final Column HISTORY_FIELD = new Column(this, "history_field");
 
     /**
      * 当前历史
-     *
      */
     public final Column HISTORY_NEW = new Column(this, "history_new");
 
     /**
      * 上一条历史
-     *
      */
     public final Column HISTORY_OLD = new Column(this, "history_old");
 
     /**
      * 对比
-     *
      */
     public final Column HISTORY_DIFF = new Column(this, "history_diff");
 

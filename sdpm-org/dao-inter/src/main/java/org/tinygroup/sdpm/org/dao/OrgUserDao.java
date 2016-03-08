@@ -53,6 +53,7 @@ public interface OrgUserDao extends BaseDao<OrgUser, String> {
 
     /**
      * 根据名称条件查询
+     *
      * @param condition
      * @return
      */
@@ -60,6 +61,7 @@ public interface OrgUserDao extends BaseDao<OrgUser, String> {
 
     /**
      * 根据一组userID进行查询
+     *
      * @param list
      * @return
      */

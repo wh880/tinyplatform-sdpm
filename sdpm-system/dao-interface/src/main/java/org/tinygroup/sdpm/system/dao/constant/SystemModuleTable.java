@@ -21,7 +21,6 @@ import org.tinygroup.tinysqldsl.base.Table;
 
 /**
  * 系统模块表
- *
  */
 public class SystemModuleTable extends Table {
 
@@ -29,61 +28,51 @@ public class SystemModuleTable extends Table {
 
     /**
      * 模块根节点
-     *
      */
     public final Column MODULE_ROOT = new Column(this, "module_root");
 
     /**
      * 模块名称
-     *
      */
     public final Column MODULE_NAME = new Column(this, "module_name");
 
     /**
      * 模块地址
-     *
      */
     public final Column MODULE_PATH = new Column(this, "module_path");
 
     /**
      * 模块父节点
-     *
      */
     public final Column MODULE_PARENT = new Column(this, "module_parent");
 
     /**
      * 模块等级
-     *
      */
     public final Column MODULE_GRADE = new Column(this, "module_grade");
 
     /**
      * 模块次序
-     *
      */
     public final Column MODULE_ORDER = new Column(this, "module_order");
 
     /**
      * 模块类型
-     *
      */
     public final Column MODULE_TYPE = new Column(this, "module_type");
 
     /**
      * 模块归属
-     *
      */
     public final Column MODULE_OWNER = new Column(this, "module_owner");
 
     /**
      * 模块ID
-     *
      */
     public final Column MODULE_ID = new Column(this, "module_id");
 
     /**
      * 中文名
-     *
      */
     public final Column MODULE_TITLE = new Column(this, "module_title");
 

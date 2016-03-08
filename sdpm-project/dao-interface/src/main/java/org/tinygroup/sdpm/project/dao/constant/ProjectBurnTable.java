@@ -21,7 +21,6 @@ import org.tinygroup.tinysqldsl.base.Table;
 
 /**
  * 燃尽图
- *
  */
 public class ProjectBurnTable extends Table {
 
@@ -29,31 +28,26 @@ public class ProjectBurnTable extends Table {
 
     /**
      * 逻辑ID
-     *
      */
     public final Column ID = new Column(this, "id");
 
     /**
      * 项目id
-     *
      */
     public final Column PROJECT_ID = new Column(this, "project_id");
 
     /**
      * 日期
-     *
      */
     public final Column BURN_DATE = new Column(this, "burn_date");
 
     /**
      * 剩余
-     *
      */
     public final Column BURN_LEFT = new Column(this, "burn_left");
 
     /**
      * 消耗
-     *
      */
     public final Column BURN_CONSUMED = new Column(this, "burn_consumed");
 

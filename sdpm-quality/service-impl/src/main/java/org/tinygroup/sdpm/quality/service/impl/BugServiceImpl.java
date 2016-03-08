@@ -17,20 +17,20 @@ public class BugServiceImpl implements BugService {
     @Autowired
     private BugManager bugmanager;
 
-    public List<QualityBug> findBugList(QualityBug qualityBug){
+    public List<QualityBug> findBugList(QualityBug qualityBug) {
         return bugmanager.findList(qualityBug);
     }
 
-    public QualityBug addBug(QualityBug bug){
+    public QualityBug addBug(QualityBug bug) {
         bug.setBugStatus("1");
         return bugmanager.add(bug);
     }
 
-    public QualityBug findQualityBugById(Integer id){
+    public QualityBug findQualityBugById(Integer id) {
         return bugmanager.find(id);
     }
 
-    public int updateBug(QualityBug bug){
+    public int updateBug(QualityBug bug) {
         return bugmanager.update(bug);
     }
 
@@ -40,15 +40,15 @@ public class BugServiceImpl implements BugService {
     }
 
     public Map<String, List<BugCount>> bugReport(String code, Integer productId) {
-        return bugmanager.report(code,productId);
+        return bugmanager.report(code, productId);
     }
 
     public Pager<QualityBug> findStoryChangedBugs(Integer start, Integer limit, ConditionCarrier carrier, QualityBug bug, String sortName, boolean asc) {
-        return bugmanager.queryStoryChangedBugs(start,limit,carrier,bug,sortName,asc);
+        return bugmanager.queryStoryChangedBugs(start, limit, carrier, bug, sortName, asc);
     }
 
     public Pager<QualityBug> findBugListPager(Integer start, Integer limit, ConditionCarrier carrier, QualityBug bug, String sortName, boolean asc) {
-        return bugmanager.findBugListPager(start,limit,carrier,bug,sortName,asc);
+        return bugmanager.findBugListPager(start, limit, carrier, bug, sortName, asc);
     }
 
     public List<QualityBug> getBugsInReleaseDoc(QualityBug bug) {

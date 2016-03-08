@@ -50,7 +50,7 @@ public class ProjectOperate {
     /**
      * 获得项目ID 存在Cookies中
      */
-    public  Integer getCurrentProjectId(HttpServletRequest request, HttpServletResponse response) {
+    public Integer getCurrentProjectId(HttpServletRequest request, HttpServletResponse response) {
         Integer currentProjectId = null;
         String cookie = CookieUtils.getCookie(request, COOKIE_PROJECT_ID);
         if (!StringUtil.isBlank(cookie)) {
@@ -63,7 +63,7 @@ public class ProjectOperate {
     /**
      * 获得项目ID 存在Cookies中
      */
-    public  Integer initCurrentProjectId(Integer currentProjectId, HttpServletResponse response) {
+    public Integer initCurrentProjectId(Integer currentProjectId, HttpServletResponse response) {
         if (currentProjectId == null) {
             Project defaultProject = getDefaultProject();
             if (defaultProject != null) {

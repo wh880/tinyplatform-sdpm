@@ -126,8 +126,9 @@ public interface ProjectService {
 
     /**
      * 根据产品id查询待关联的bug list
-     *  @param projectId
-     *  @return List<QualityBug>
-     * */
+     *
+     * @param projectId
+     * @return List<QualityBug>
+     */
     List<QualityBug> findRelationBugByProjectID(Integer projectId);
 }

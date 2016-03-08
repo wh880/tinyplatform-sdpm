@@ -20,37 +20,31 @@ import java.io.Serializable;
 
 /**
  * 测试用例步骤表
- *
  */
 public class QualityCaseStep implements Serializable {
 
     /**
      * 用例步骤编号
-     *
      */
     private Integer caseStepId;
 
     /**
      * 用例编号
-     *
      */
     private Integer caseId;
 
     /**
      * 关联用例版本
-     *
      */
     private Integer caseVersion;
 
     /**
      * 描述
-     *
      */
     private String caseStepDesc;
 
     /**
      * 用例预期
-     *
      */
     private String caseStepExpect;
 

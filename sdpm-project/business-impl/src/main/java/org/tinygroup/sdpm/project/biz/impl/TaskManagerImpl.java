@@ -18,7 +18,6 @@ import org.tinygroup.sdpm.system.dao.impl.util.ModuleUtil;
 import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.tinysqldsl.base.Condition;
 
-import javax.lang.model.element.Name;
 import java.util.List;
 
 /**
@@ -118,14 +117,16 @@ public class TaskManagerImpl implements TaskManager {
         task.setTaskDeleted(ProjectTask.DELETE_YES);
         return taskDao.edit(task);
     }
+
     @Override
     public ProjectTask findTaskByTaskId(Integer taskId) {
         return taskDao.findTaskByTaskId(taskId);
     }
+
     private Condition mergeCondition(ConditionCarrier carrier) {
         return ConditionUtils.mergeCondition(carrier, new CallBackFunction() {
             public String moduleRoot(String moduleId) {
-                return ModuleUtil.getConditionByRootWithoutOperate(Integer.parseInt(moduleId.substring(1)),"bug");
+                return ModuleUtil.getConditionByRootWithoutOperate(Integer.parseInt(moduleId.substring(1)), "bug");
             }
 
             public String module(String moduleId) {

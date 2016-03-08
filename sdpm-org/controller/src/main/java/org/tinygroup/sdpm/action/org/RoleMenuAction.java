@@ -33,7 +33,7 @@ public class RoleMenuAction extends BaseController {
     public String save(Integer roleId, String[] menuId, String parentId) {
         roleService.saveRoleMenu(roleId, parentId, menuId);
         userUtils.clearCache();
-        return "redirect:" + adminPath + "/org/roleMenu/show?parentId="+parentId+"&roleId="+roleId;
+        return "redirect:" + adminPath + "/org/roleMenu/show?parentId=" + parentId + "&roleId=" + roleId;
     }
 
     /**

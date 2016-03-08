@@ -16,47 +16,35 @@
 
 package org.tinygroup.sdpm.org.dao.impl;
 
-import static org.tinygroup.sdpm.org.dao.constant.OrgUserTable.ORG_USERTABLE;
-import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
-import static org.tinygroup.sdpm.org.dao.constant.OrgDiaryWhiteListTable.*;
-import static org.tinygroup.tinysqldsl.Select.*;
-import static org.tinygroup.tinysqldsl.Insert.*;
-import static org.tinygroup.tinysqldsl.Delete.*;
-import static org.tinygroup.tinysqldsl.Update.*;
-import static org.tinygroup.tinysqldsl.formitem.SubSelect.subSelect;
-
-import java.io.Serializable;
-
-import java.util.ArrayList;
-
-import java.util.List;
-
 import org.springframework.stereotype.Repository;
-import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
-import org.tinygroup.tinysqldsl.Delete;
-import org.tinygroup.tinysqldsl.Insert;
-import org.tinygroup.tinysqldsl.Select;
-import org.tinygroup.tinysqldsl.Update;
-import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.commons.tools.CollectionUtil;
-import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
-import org.tinygroup.tinysqldsl.select.OrderByElement;
-import org.tinygroup.sdpm.org.dao.pojo.OrgDiaryWhiteList;
-import org.tinygroup.sdpm.org.dao.OrgDiaryWhiteListDao;
+import org.tinygroup.jdbctemplatedslsession.callback.*;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
+import org.tinygroup.sdpm.org.dao.OrgDiaryWhiteListDao;
+import org.tinygroup.sdpm.org.dao.pojo.OrgDiaryWhiteList;
+import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
+import org.tinygroup.tinysqldsl.*;
+import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
+import org.tinygroup.tinysqldsl.select.OrderByElement;
 
-import org.tinygroup.jdbctemplatedslsession.callback.DeleteGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.InsertGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.NoParamDeleteGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.NoParamInsertGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.tinygroup.sdpm.org.dao.constant.OrgDiaryWhiteListTable.ORG_DIARY_WHITE_LISTTABLE;
+import static org.tinygroup.sdpm.org.dao.constant.OrgUserTable.ORG_USERTABLE;
+import static org.tinygroup.tinysqldsl.Delete.delete;
+import static org.tinygroup.tinysqldsl.Insert.insertInto;
+import static org.tinygroup.tinysqldsl.Select.selectFrom;
+import static org.tinygroup.tinysqldsl.Update.update;
+import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
+import static org.tinygroup.tinysqldsl.formitem.SubSelect.subSelect;
 
 /**
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
+ *
  * @generated
  */
 @Repository
@@ -65,6 +53,7 @@ public class OrgDiaryWhiteListDaoImpl extends TinyDslDaoSupport implements OrgDi
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     *
      * @generated
      */
     public OrgDiaryWhiteList add(OrgDiaryWhiteList orgDiaryWhiteList) {
@@ -82,6 +71,7 @@ public class OrgDiaryWhiteListDaoImpl extends TinyDslDaoSupport implements OrgDi
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     *
      * @generated
      */
     public int edit(OrgDiaryWhiteList orgDiaryWhiteList) {
@@ -102,6 +92,7 @@ public class OrgDiaryWhiteListDaoImpl extends TinyDslDaoSupport implements OrgDi
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     *
      * @generated
      */
     public int deleteByKey(Integer pk) {
@@ -118,6 +109,7 @@ public class OrgDiaryWhiteListDaoImpl extends TinyDslDaoSupport implements OrgDi
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     *
      * @generated
      */
     public int deleteByKeys(Integer... pks) {
@@ -134,6 +126,7 @@ public class OrgDiaryWhiteListDaoImpl extends TinyDslDaoSupport implements OrgDi
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     *
      * @generated
      */
     public OrgDiaryWhiteList getByKey(Integer pk) {
@@ -148,6 +141,7 @@ public class OrgDiaryWhiteListDaoImpl extends TinyDslDaoSupport implements OrgDi
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     *
      * @generated
      */
     public List<OrgDiaryWhiteList> query(OrgDiaryWhiteList orgDiaryWhiteList, final OrderBy... orderArgs) {
@@ -170,6 +164,7 @@ public class OrgDiaryWhiteListDaoImpl extends TinyDslDaoSupport implements OrgDi
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     *
      * @generated
      */
     public Pager<OrgDiaryWhiteList> queryPager(int start, int limit, OrgDiaryWhiteList orgDiaryWhiteList, final OrderBy... orderArgs) {
@@ -191,6 +186,7 @@ public class OrgDiaryWhiteListDaoImpl extends TinyDslDaoSupport implements OrgDi
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     *
      * @generated
      */
     public int[] batchInsert(boolean autoGeneratedKeys, List<OrgDiaryWhiteList> orgDiaryWhiteLists) {
@@ -210,6 +206,7 @@ public class OrgDiaryWhiteListDaoImpl extends TinyDslDaoSupport implements OrgDi
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     *
      * @generated
      */
     public int[] batchInsert(List<OrgDiaryWhiteList> orgDiaryWhiteLists) {
@@ -219,6 +216,7 @@ public class OrgDiaryWhiteListDaoImpl extends TinyDslDaoSupport implements OrgDi
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     *
      * @generated
      */
     public int[] batchUpdate(List<OrgDiaryWhiteList> orgDiaryWhiteLists) {
@@ -239,6 +237,7 @@ public class OrgDiaryWhiteListDaoImpl extends TinyDslDaoSupport implements OrgDi
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     *
      * @generated
      */
     public int[] batchDelete(List<OrgDiaryWhiteList> orgDiaryWhiteLists) {
@@ -259,6 +258,7 @@ public class OrgDiaryWhiteListDaoImpl extends TinyDslDaoSupport implements OrgDi
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     *
      * @generated
      */
     private Select addOrderByElements(Select select, OrderBy... orderBies) {
@@ -293,16 +293,16 @@ public class OrgDiaryWhiteListDaoImpl extends TinyDslDaoSupport implements OrgDi
 
     @Override
     public List<OrgDiaryWhiteList> findOneByAccounts(String firstAccount, String secondAccount) {
-        Select select=Select.selectFrom(ORG_DIARY_WHITE_LISTTABLE).where(and(
+        Select select = Select.selectFrom(ORG_DIARY_WHITE_LISTTABLE).where(and(
                 ORG_DIARY_WHITE_LISTTABLE.ORG_DIARY_WHITE_LIST_FIRST_ACCOUNT.eq(firstAccount),
                 ORG_DIARY_WHITE_LISTTABLE.ORG_DIARY_WHITE_LIST_SECOND_ACCOUNT.eq(secondAccount)
         ));
-        return getDslSession().fetchList(select,OrgDiaryWhiteList.class);
+        return getDslSession().fetchList(select, OrgDiaryWhiteList.class);
     }
 
     @Override
     public Integer deleteByAccounts(String firstAccount, String secondAccout) {
-        Delete delete=Delete.delete(ORG_DIARY_WHITE_LISTTABLE).where(and(
+        Delete delete = Delete.delete(ORG_DIARY_WHITE_LISTTABLE).where(and(
                 ORG_DIARY_WHITE_LISTTABLE.ORG_DIARY_WHITE_LIST_FIRST_ACCOUNT.eq(firstAccount),
                 ORG_DIARY_WHITE_LISTTABLE.ORG_DIARY_WHITE_LIST_SECOND_ACCOUNT.eq(secondAccout)
         ));

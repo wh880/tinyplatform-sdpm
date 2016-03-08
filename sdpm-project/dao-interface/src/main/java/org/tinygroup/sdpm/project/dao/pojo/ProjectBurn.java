@@ -21,37 +21,31 @@ import java.util.Date;
 
 /**
  * 燃尽图
- *
  */
 public class ProjectBurn implements Serializable {
 
     /**
      * 逻辑ID
-     *
      */
     private Integer id;
 
     /**
      * 项目id
-     *
      */
     private Integer projectId;
 
     /**
      * 日期
-     *
      */
     private Date burnDate;
 
     /**
      * 剩余
-     *
      */
     private Float burnLeft;
 
     /**
      * 消耗
-     *
      */
     private Float burnConsumed;
 

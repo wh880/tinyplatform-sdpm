@@ -59,8 +59,8 @@ public class ProjectStoryDaoImpl extends TinyDslDaoSupport implements ProjectSto
                         PROJECT_STORYTABLE.STORY_VERSION.eq(PRODUCT_STORYTABLE.STORY_VERSION),
                         PROJECT_STORYTABLE.PROJECT_ID.eq(projectId)
                 )));
-        Condition existsCondition = new Condition(new ExistsExpression(subSelect, true));
-        Select select = MysqlSelect.select(PRODUCT_STORYTABLE.ALL, PRODUCT_PLANTABLE.PLAN_NAME, PRODUCTTABLE.PRODUCT_NAME)
+        Condition existsCondition = new Condition(new ExistsExpression(subSelect, false));
+        Select select = Select.select(PRODUCT_STORYTABLE.ALL, PRODUCT_PLANTABLE.PLAN_NAME, PRODUCTTABLE.PRODUCT_NAME)
                 .from(PROJECT_PRODUCTTABLE)
                 .join(Join.newJoin(PRODUCT_STORYTABLE,
                         and(

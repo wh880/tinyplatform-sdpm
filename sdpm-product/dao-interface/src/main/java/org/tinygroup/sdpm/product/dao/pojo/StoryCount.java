@@ -14,8 +14,8 @@ public class StoryCount implements Serializable {
     private String percentToString;
 
     public String getPercentToString() {
-        DecimalFormat df   =new DecimalFormat("#.00");
-        String s = df.format(percent*100);
+        DecimalFormat df = new DecimalFormat("#.00");
+        String s = df.format(percent * 100);
         return s + "%";
     }
 

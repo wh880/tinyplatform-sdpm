@@ -43,9 +43,9 @@
 
     </bean>
 
-    <!--<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">-->
-        <!--<property name="dataSource" ref="dynamicDataSource"/>-->
-    <!--</bean>-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dynamicDataSource"/>
+    </bean>
 
     <bean id="dslSession" name="dslSession" class="org.tinygroup.jdbctemplatedslsession.SimpleDslSession">
         <constructor-arg>

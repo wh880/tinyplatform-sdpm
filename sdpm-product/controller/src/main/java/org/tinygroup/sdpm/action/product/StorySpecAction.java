@@ -60,7 +60,7 @@ public class StorySpecAction extends BaseController {
         ProductStory productStory = null;
         if (story.getNo() != null) {
             String result = CookieUtils.getCookie(request, productUtils.COOKIE_PRODUCT_ID);
-            if(StringUtil.isBlank(result)){
+            if (StringUtil.isBlank(result)) {
                 return notFoundView();
             }
             Integer cookieProductId = Integer.parseInt(result);

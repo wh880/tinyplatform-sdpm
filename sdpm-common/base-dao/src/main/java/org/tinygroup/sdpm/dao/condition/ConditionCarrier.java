@@ -10,7 +10,7 @@ import java.util.Set;
 /**
  * Created by wangll13383 on 2015/11/4.
  */
-public class ConditionCarrier implements Serializable{
+public class ConditionCarrier implements Serializable {
     private Map<String, String> operateMap;
     private Map<String, Object[]> valueMap;
     private Map<String, String> fieldTypeMap;
@@ -93,7 +93,6 @@ public class ConditionCarrier implements Serializable{
     public Integer size() {
         return operateMap.size();
     }
-
 
 
 }

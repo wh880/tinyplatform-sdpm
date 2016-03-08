@@ -2,7 +2,6 @@ package org.tinygroup.sdpm.product.service.inter;
 
 import org.tinygroup.aopcache.annotation.CacheGet;
 import org.tinygroup.aopcache.annotation.CacheRemove;
-import org.tinygroup.sdpm.dao.condition.ConditionCarrier;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
 
@@ -17,13 +16,14 @@ public interface ProductService {
     String CACHE_USER_PRODUCTS_LIST_WITH_LINE_COUNT = "userProductListWithLineCount";
     String CACHE_PRODUCT_NAME_BY_LINE_ID = "productNameListByLine";
     String CACHE_USER_PRODUCT_LINE = "userProductLine";
+
     /**
      * 添加产品
      *
      * @param product
      * @return
      */
-    @CacheRemove(removeGroups = {CACHE_USER_PRODUCTS_MAP, CACHE_USER_PRODUCTS_LIST, CACHE_PRODUCT_ID, CACHE_USER_PRODUCTS_LIST_WITH_COUNT, CACHE_USER_PRODUCTS_LIST_WITH_LINE_COUNT, CACHE_PRODUCT_NAME_BY_LINE_ID,CACHE_USER_PRODUCT_LINE})
+    @CacheRemove(removeGroups = {CACHE_USER_PRODUCTS_MAP, CACHE_USER_PRODUCTS_LIST, CACHE_PRODUCT_ID, CACHE_USER_PRODUCTS_LIST_WITH_COUNT, CACHE_USER_PRODUCTS_LIST_WITH_LINE_COUNT, CACHE_PRODUCT_NAME_BY_LINE_ID, CACHE_USER_PRODUCT_LINE})
     Product addProduct(Product product);
 
     /**
@@ -32,8 +32,8 @@ public interface ProductService {
      * @param product
      * @return
      */
-    @CacheRemove(removeKeys = "${product.productId}",  group = CACHE_PRODUCT_ID,
-            removeGroups = {CACHE_USER_PRODUCTS_MAP, CACHE_USER_PRODUCTS_LIST, CACHE_PRODUCT_ID, CACHE_USER_PRODUCTS_LIST_WITH_COUNT, CACHE_USER_PRODUCTS_LIST_WITH_LINE_COUNT, CACHE_PRODUCT_NAME_BY_LINE_ID,CACHE_USER_PRODUCT_LINE})
+    @CacheRemove(removeKeys = "${product.productId}", group = CACHE_PRODUCT_ID,
+            removeGroups = {CACHE_USER_PRODUCTS_MAP, CACHE_USER_PRODUCTS_LIST, CACHE_PRODUCT_ID, CACHE_USER_PRODUCTS_LIST_WITH_COUNT, CACHE_USER_PRODUCTS_LIST_WITH_LINE_COUNT, CACHE_PRODUCT_NAME_BY_LINE_ID, CACHE_USER_PRODUCT_LINE})
     int updateProduct(Product product);
 
     /**
@@ -43,7 +43,7 @@ public interface ProductService {
      * @return
      */
     @CacheRemove(removeKeys = "${productId}", group = CACHE_PRODUCT_ID,
-            removeGroups = {CACHE_USER_PRODUCTS_MAP, CACHE_USER_PRODUCTS_LIST, CACHE_PRODUCT_ID, CACHE_USER_PRODUCTS_LIST_WITH_COUNT, CACHE_USER_PRODUCTS_LIST_WITH_LINE_COUNT, CACHE_PRODUCT_NAME_BY_LINE_ID,CACHE_USER_PRODUCT_LINE})
+            removeGroups = {CACHE_USER_PRODUCTS_MAP, CACHE_USER_PRODUCTS_LIST, CACHE_PRODUCT_ID, CACHE_USER_PRODUCTS_LIST_WITH_COUNT, CACHE_USER_PRODUCTS_LIST_WITH_LINE_COUNT, CACHE_PRODUCT_NAME_BY_LINE_ID, CACHE_USER_PRODUCT_LINE})
     int deleteProduct(Integer productId);
 
     /**
@@ -117,7 +117,7 @@ public interface ProductService {
      * @return
      */
     @CacheGet(key = "${userId}-${delete}-${noRole}-${status}", group = CACHE_USER_PRODUCTS_LIST_WITH_COUNT)
-    List<Product> getProductByUserWithCount(String userId, Integer delete, boolean noRole,String status);
+    List<Product> getProductByUserWithCount(String userId, Integer delete, boolean noRole, String status);
 
     /**
      * 获取当前用户在某产品线下可游览产品-附带统计数据
@@ -128,7 +128,7 @@ public interface ProductService {
      * @return
      */
     @CacheGet(key = "${userId}-${productLineId}-${delete}-${status}", group = CACHE_USER_PRODUCTS_LIST_WITH_LINE_COUNT)
-    List<Product> getProductByUserAndProductLineWithCount(String userId, Integer productLineId, Integer delete,String status);
+    List<Product> getProductByUserAndProductLineWithCount(String userId, Integer productLineId, Integer delete, String status);
 
     /**
      * 获取当前用户可游览产品-以‘产品线-产品’的形式展示
@@ -146,7 +146,7 @@ public interface ProductService {
      * @return
      */
     @CacheGet(key = "${userId}-${delete}-${status}", group = CACHE_USER_PRODUCTS_MAP)
-    Map<String, List<Product>> getUserProductsWithCountMap(String userId, Integer delete,String status);
+    Map<String, List<Product>> getUserProductsWithCountMap(String userId, Integer delete, String status);
 
     /**
      * 根据输入名称查询
