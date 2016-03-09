@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.tinygroup</groupId>
     <artifactId>sdpm-productLine</artifactId>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.0.3-SNAPSHOT</version>
   </parent>
   <artifactId>sdpm-productLine-business-interface</artifactId>
   <name>sdpm-productLine-business-interface</name>

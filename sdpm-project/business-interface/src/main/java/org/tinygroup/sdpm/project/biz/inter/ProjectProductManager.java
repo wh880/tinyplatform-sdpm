@@ -18,6 +18,7 @@ public interface ProjectProductManager {
     List<Product> findLinkProductByProjectId(Integer projectId);
 
     void addLink(String[] productArray, Integer projectId);
+
     void addProductLinkToProject(Integer[] productArray, Integer projectId);
 
     /**

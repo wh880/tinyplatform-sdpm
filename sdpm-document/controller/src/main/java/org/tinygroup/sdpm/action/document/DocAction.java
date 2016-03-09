@@ -100,12 +100,12 @@ public class DocAction extends BaseController {
             } else if ("productDoc".equals(moduleService.findById(Integer.valueOf(moduleId)).getModuleType())) {
                 pager = docService.findDocRetProductPager(limit * (page - 1), limit, doc, Integer.parseInt(moduleId), searchInfos, groupOperate, order, asc);
             } else if ("projectDoc".equals(moduleService.findById(Integer.valueOf(moduleId)).getModuleType())) {
-                pager = docService.findDocRetProjectPager(limit * (page - 1), limit, doc, Integer.parseInt(moduleId),searchInfos, groupOperate, order, asc);
+                pager = docService.findDocRetProjectPager(limit * (page - 1), limit, doc, Integer.parseInt(moduleId), searchInfos, groupOperate, order, asc);
             } else if ("doc".equals(moduleService.findById(Integer.valueOf(moduleId)).getModuleType())) {
-                pager = docService.findDocRetPager(limit * (page - 1), limit, doc,Integer.parseInt(moduleId),searchInfos, groupOperate, order, asc);
+                pager = docService.findDocRetPager(limit * (page - 1), limit, doc, Integer.parseInt(moduleId), searchInfos, groupOperate, order, asc);
             }
         } else {
-            pager = docService.findDocRetPager(limit * (page - 1), limit, doc,null, searchInfos, groupOperate, order, asc);
+            pager = docService.findDocRetPager(limit * (page - 1), limit, doc, null, searchInfos, groupOperate, order, asc);
             model.addAttribute("pager", pager);
         }
         model.addAttribute("pager", pager);
@@ -199,7 +199,7 @@ public class DocAction extends BaseController {
         SystemModule module = new SystemModule();
         module.setModuleType("doc");
         DocumentDoc doc = docService.findDocById(docId);
-        List<Product> productList = productService.getProductByUser(UserUtils.getUserId(),0,null,Product.CHOOSE_OPENED);
+        List<Product> productList = productService.getProductByUser(UserUtils.getUserId(), 0, null, Product.CHOOSE_OPENED);
         List<Project> projectList = projectService.getUserProjectList(UserUtils.getUserId());
         List<SystemModule> listModule = moduleService.findModuleList(module);
         List<DocumentDocLib> libList = docService.findDocLibList(null);

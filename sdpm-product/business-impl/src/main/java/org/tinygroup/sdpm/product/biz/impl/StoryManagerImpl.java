@@ -12,10 +12,10 @@ import org.tinygroup.sdpm.dao.condition.ConditionUtils;
 import org.tinygroup.sdpm.product.biz.inter.StoryManager;
 import org.tinygroup.sdpm.product.dao.ProductStoryDao;
 import org.tinygroup.sdpm.product.dao.ProductStorySpecDao;
-import org.tinygroup.sdpm.product.dao.utils.FieldUtil;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec;
 import org.tinygroup.sdpm.product.dao.pojo.StoryCount;
+import org.tinygroup.sdpm.product.dao.utils.FieldUtil;
 import org.tinygroup.sdpm.quality.dao.QualityBugDao;
 import org.tinygroup.sdpm.quality.dao.QualityTestCaseDao;
 import org.tinygroup.sdpm.system.dao.SystemModuleDao;
@@ -40,9 +40,10 @@ public class StoryManagerImpl implements StoryManager {
     private QualityBugDao qualityBugDao;
     @Autowired
     private QualityTestCaseDao qualityTestCaseDao;
+
     public ProductStory add(ProductStory story, ProductStorySpec storySpec) {
         Integer no = productStoryDao.getMaxNo(story.getProductId());
-        story.setNo(no==null?1:no+1);
+        story.setNo(no == null ? 1 : no + 1);
         story.setDeleted(FieldUtil.DELETE_NO);
         story = productStoryDao.add(story);
         storySpec.setStoryId(story.getStoryId());
@@ -82,7 +83,7 @@ public class StoryManagerImpl implements StoryManager {
         if (StringUtil.isBlank(columnName)) {
             return productStoryDao.complexQueryRel(start, limit, story, mergeCondition(carrier));
         }
-        return productStoryDao.complexQueryRel(start, limit, story, mergeCondition(carrier),new OrderBy("product_story." + NameUtil.resolveNameDesc(columnName), asc));
+        return productStoryDao.complexQueryRel(start, limit, story, mergeCondition(carrier), new OrderBy("product_story." + NameUtil.resolveNameDesc(columnName), asc));
     }
 
     public List<ProductStory> findList(ProductStory story) {
@@ -99,15 +100,15 @@ public class StoryManagerImpl implements StoryManager {
         return productStoryDao.edit(story);
     }
 
-    public List<ProductStory> findList(boolean storySpec,Integer... storyId) {
-        if(storyId==null||storyId.length==0)return new ArrayList<ProductStory>();
-        return productStoryDao.getByKeys(storySpec,null,storyId);
+    public List<ProductStory> findList(boolean storySpec, Integer... storyId) {
+        if (storyId == null || storyId.length == 0) return new ArrayList<ProductStory>();
+        return productStoryDao.getByKeys(storySpec, null, storyId);
     }
 
     @Override
     public List<ProductStory> findList(boolean withSpec, ProductStory story, Integer... storyId) {
-        if(storyId==null||storyId.length==0)return new ArrayList<ProductStory>();
-        return productStoryDao.getByKeys(withSpec,story,storyId);
+        if (storyId == null || storyId.length == 0) return new ArrayList<ProductStory>();
+        return productStoryDao.getByKeys(withSpec, story, storyId);
     }
 
     public List<StoryCount> productStoryCount(ProductStory story) {
@@ -182,24 +183,24 @@ public class StoryManagerImpl implements StoryManager {
 
     public Pager<ProductStory> findPager(int start, int limit, ProductStory story, ConditionCarrier carrier, String columnName, boolean asc) {
         if (!StringUtil.isBlank(columnName)) {
-            return productStoryDao.complexQuery(start, limit, story, mergeCondition(carrier) , new OrderBy(NameUtil.resolveNameDesc(columnName), asc));
+            return productStoryDao.complexQuery(start, limit, story, mergeCondition(carrier), new OrderBy(NameUtil.resolveNameDesc(columnName), asc));
         }
         return productStoryDao.complexQuery(start, limit, story, mergeCondition(carrier));
     }
 
     public Pager<ProductStory> findStoryByCondition(int start, int limit, ProductStory story, ConditionCarrier carrier, final String columnName, boolean asc) {
 
-        return findPager(start,limit,story,carrier,columnName,asc);
+        return findPager(start, limit, story, carrier, columnName, asc);
     }
 
-    public List<ProductStory> storyInCondition(String condition, Integer limit, Integer productId, Integer ...ids) {
+    public List<ProductStory> storyInCondition(String condition, Integer limit, Integer productId, Integer... ids) {
         return productStoryDao.storyInCondition(condition, limit, productId, ids);
     }
 
-    private Condition mergeCondition(ConditionCarrier carrier){
+    private Condition mergeCondition(ConditionCarrier carrier) {
         return ConditionUtils.mergeCondition(carrier, new CallBackFunction() {
             public String moduleRoot(String moduleId) {
-                return ModuleUtil.getConditionByRootWithoutOperate(Integer.parseInt(moduleId.substring(1)),"story");
+                return ModuleUtil.getConditionByRootWithoutOperate(Integer.parseInt(moduleId.substring(1)), "story");
             }
 
             public String module(String moduleId) {

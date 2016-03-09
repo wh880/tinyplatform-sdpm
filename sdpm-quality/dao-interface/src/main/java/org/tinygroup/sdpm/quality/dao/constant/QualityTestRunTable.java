@@ -21,7 +21,6 @@ import org.tinygroup.tinysqldsl.base.Table;
 
 /**
  * 测试计划执行表
- *
  */
 public class QualityTestRunTable extends Table {
 
@@ -29,55 +28,46 @@ public class QualityTestRunTable extends Table {
 
     /**
      * 执行编号
-     *
      */
     public final Column TEST_RUN_ID = new Column(this, "test_run_id");
 
     /**
      * 任务id
-     *
      */
     public final Column TASK_ID = new Column(this, "task_id");
 
     /**
      * 用例编号
-     *
      */
     public final Column CASE_ID = new Column(this, "case_id");
 
     /**
      * 关联用例版本
-     *
      */
     public final Column CASE_VERSION = new Column(this, "case_version");
 
     /**
      * 指派给
-     *
      */
     public final Column TEST_RUN_ASSIGNED_TO = new Column(this, "test_run_assigned_to");
 
     /**
      * 最后执行人
-     *
      */
     public final Column TEST_RUN_LAST_RUNNER = new Column(this, "test_run_last_runner");
 
     /**
      * 最后执行日期
-     *
      */
     public final Column TEST_RUN_LAST_RUN_DATE = new Column(this, "test_run_last_run_date");
 
     /**
      * 最后执行结果
-     *
      */
     public final Column TEST_RUN_LAST_RUN_RESULT = new Column(this, "test_run_last_run_result");
 
     /**
      * 测试执行状态
-     *
      */
     public final Column TEST_RUN_STATUS = new Column(this, "test_run_status");
 

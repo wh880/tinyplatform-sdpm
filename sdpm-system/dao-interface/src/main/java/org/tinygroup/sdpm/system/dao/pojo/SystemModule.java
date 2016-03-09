@@ -21,67 +21,56 @@ import java.io.Serializable;
 
 /**
  * 系统模块表
- *
  */
 public class SystemModule implements Serializable {
 
     /**
      * 模块根节点
-     *
      */
     private Integer moduleRoot;
 
     /**
      * 模块名称
-     *
      */
     private String moduleName;
 
     /**
      * 模块地址
-     *
      */
     private String modulePath;
 
     /**
      * 模块父节点
-     *
      */
     private Integer moduleParent;
 
     /**
      * 模块等级
-     *
      */
     private Integer moduleGrade;
 
     /**
      * 模块次序
-     *
      */
     private Integer moduleOrder;
 
     /**
      * 模块类型
-     *
      */
     private String moduleType;
 
     /**
      * 模块归属
-     *
      */
     private String moduleOwner;
 
     /**
      * 模块ID
-     *
      */
     private Integer moduleId;
 
     /**
      * 中文名
-     *
      */
     private String moduleTitle;
 

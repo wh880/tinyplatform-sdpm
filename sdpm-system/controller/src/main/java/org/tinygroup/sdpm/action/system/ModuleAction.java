@@ -91,7 +91,7 @@ public class ModuleAction extends BaseController {
     @RequestMapping("docProductTree")
     public List<Map<String, Object>> productDocTree() {
         List<Map<String, Object>> mapList = Lists.newArrayList();
-        List<Product> products = productService.getProductByUser(UserUtils.getUserId(),0,null, Product.CHOOSE_OPENED);
+        List<Product> products = productService.getProductByUser(UserUtils.getUserId(), 0, null, Product.CHOOSE_OPENED);
         mergeProductModule(products, "productDoc", mapList, "name", true, false, "doc");
         return mapList;
     }
@@ -335,7 +335,7 @@ public class ModuleAction extends BaseController {
     public Map addModule(SystemModule module, @PathVariable(value = "forwordPager") String forwordPager) {
 
         moduleService.addSystemModule(module);
-        return resultMap(true,"添加成功");
+        return resultMap(true, "添加成功");
 
     }
 
@@ -346,14 +346,14 @@ public class ModuleAction extends BaseController {
         module.setModuleName(moduleName);
         moduleService.editModule(module);
 
-        return resultMap(true,"修改成功");
+        return resultMap(true, "修改成功");
     }
 
     @ResponseBody
     @RequestMapping("/{forwordPager}/deleteTree")
     public Map deleteSystemModule(Integer moduleId, @PathVariable(value = "forwordPager") String forwordPager) {
         moduleService.deleteModuleById(moduleId);
-        return resultMap(true,"删除成功");
+        return resultMap(true, "删除成功");
     }
 
     @ResponseBody

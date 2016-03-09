@@ -49,8 +49,8 @@ public class DiaryServiceImpl implements DiaryService {
         */
 
     @Override
-    public Pager<OrgDiaryAndUserDO> findPagerDiaryByUserId(String id,Integer start,Integer limit) {
-        return diaryManager.findByUserId(id,start,limit);
+    public Pager<OrgDiaryAndUserDO> findPagerDiaryByUserId(String id, Integer start, Integer limit) {
+        return diaryManager.findByUserId(id, start, limit);
     }
 
     @Override

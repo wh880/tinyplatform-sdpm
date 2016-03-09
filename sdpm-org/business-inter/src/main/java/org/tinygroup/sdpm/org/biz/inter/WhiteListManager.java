@@ -23,19 +23,20 @@ public interface WhiteListManager {
     /**
      * 添加单个白名单信息
      */
-    OrgDiaryWhiteList addOneWhite(String firstAccount,String secondAccount);
+    OrgDiaryWhiteList addOneWhite(String firstAccount, String secondAccount);
 
     /**
      * 查询在白名单表中是否存在某一对确定Account的白名单关系
      */
-    OrgDiaryWhiteList findOneByAccounts(String firstAccount,String secondAccount);
+    OrgDiaryWhiteList findOneByAccounts(String firstAccount, String secondAccount);
 
     /**
      * 删除白名单关系
+     *
      * @param firstAccount
      * @param secondAccout
      * @return
      */
-    Integer deleteDiaryWhiteList(String firstAccount,String secondAccout);
+    Integer deleteDiaryWhiteList(String firstAccount, String secondAccout);
 
 }

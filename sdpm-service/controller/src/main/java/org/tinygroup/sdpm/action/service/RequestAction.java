@@ -355,6 +355,6 @@ public class RequestAction extends BaseController {
             result.add(requestService.findRequest(initKey));
             return result;
         }
-        return requestService.requestInCondition(key,Integer.parseInt(configService.getConfigBySection(SystemConfig.SEARCH_CONFIG).getConfigKey()));
+        return requestService.requestInCondition(key, Integer.parseInt(configService.getConfigBySection(SystemConfig.SEARCH_CONFIG).getConfigKey()));
     }
 }

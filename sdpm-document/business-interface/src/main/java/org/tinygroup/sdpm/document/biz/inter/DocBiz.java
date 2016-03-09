@@ -32,7 +32,7 @@ public interface DocBiz {
     DocumentDocLib getDocLibById(Integer key);
 
     //查询后分页吧~//可以排序OrderBy id asc
-    Pager<DocumentDoc> queryItemWithPage(Integer start, Integer limit, DocumentDoc doc,Integer moduleId, SearchInfos conditions, String groupOperate, String sortName, boolean asc);
+    Pager<DocumentDoc> queryItemWithPage(Integer start, Integer limit, DocumentDoc doc, Integer moduleId, SearchInfos conditions, String groupOperate, String sortName, boolean asc);
 
     Pager<DocumentDoc> queryProductItemWithPage(Integer start, Integer limit, DocumentDoc doc, Integer moduleId, SearchInfos conditions, String groupOperate, String sortName, boolean asc);
 

@@ -77,8 +77,8 @@ public class ProjectBuildAction extends BaseController {
 
     @RequestMapping("/productBuildList")
     public String productBuildList(ProjectBuild build, Model model,
-                                   Integer start, Integer limit,@RequestParam(required = false,defaultValue = "build_id") String order,
-                                   @RequestParam(required = false,defaultValue = "desc")String ordertype) {
+                                   Integer start, Integer limit, @RequestParam(required = false, defaultValue = "build_id") String order,
+                                   @RequestParam(required = false, defaultValue = "desc") String ordertype) {
         boolean asc = "asc".equals(ordertype) ? true : false;
         Pager<ProjectBuild> pager = buildService.findPagerBuild(build, start, limit, order, asc);
         model.addAttribute("buildPager", pager);
@@ -87,8 +87,8 @@ public class ProjectBuildAction extends BaseController {
 
 
     @RequestMapping("/find")
-    public String find(Model model, Integer start, Integer limit, @RequestParam(required = false,defaultValue = "build_id")String order,
-                       @RequestParam(required = false,defaultValue = "desc")String ordertype,
+    public String find(Model model, Integer start, Integer limit, @RequestParam(required = false, defaultValue = "build_id") String order,
+                       @RequestParam(required = false, defaultValue = "desc") String ordertype,
                        HttpServletRequest request, HttpServletResponse response) {
         Integer projectId = projectOperate.getCurrentProjectId(request, response);
         if (projectId == null) {
@@ -143,7 +143,7 @@ public class ProjectBuildAction extends BaseController {
 
 
     @RequestMapping(value = "/addSave", method = RequestMethod.POST)
-    public String addSave(ProjectBuild build, Model model, UploadProfile uploadProfile,String lastAddress) throws IOException {
+    public String addSave(ProjectBuild build, Model model, UploadProfile uploadProfile, String lastAddress) throws IOException {
         ProjectBuild temp;
         if (build.getBuildId() == null) {
             build.setBuildBuilder(userUtils.getUserId());
@@ -158,7 +158,7 @@ public class ProjectBuildAction extends BaseController {
                     null,
                     null,
                     null);
-            if(!StringUtil.isBlank(lastAddress)){
+            if (!StringUtil.isBlank(lastAddress)) {
                 return "redirect:" + lastAddress;
             }
         } else {
@@ -287,26 +287,26 @@ public class ProjectBuildAction extends BaseController {
                                 int id,
                                 String groupOperate,
                                 SearchInfos searchInfos,
-                                @RequestParam(required = false,defaultValue = "bugId")String order,
-                                @RequestParam(required = false,defaultValue = "desc")String ordertype,
+                                @RequestParam(required = false, defaultValue = "bugId") String order,
+                                @RequestParam(required = false, defaultValue = "desc") String ordertype,
                                 Model model) {
 
         ConditionCarrier carrier = new ConditionCarrier();
         if (searchInfos != null) {
-            carrier.putSearch("bugSearch",searchInfos,groupOperate);
+            carrier.putSearch("bugSearch", searchInfos, groupOperate);
         }
         ProjectBuild build = buildService.findBuild(id);
         bug.setDeleted(0);
         bug.setBugStatus("2");
         bug.setBugOpenedBuild(String.valueOf(id));
         if ("reRelateBug".equals(relate)) {
-            carrier.putIns("qualityBug.bugId",build.getBuildBugs().split(","));
-            Pager<QualityBug> p = bugService.findBugListPager(start, limit, carrier, bug,order,"asc".equals(ordertype)?true:false);
+            carrier.putIns("qualityBug.bugId", build.getBuildBugs().split(","));
+            Pager<QualityBug> p = bugService.findBugListPager(start, limit, carrier, bug, order, "asc".equals(ordertype) ? true : false);
             model.addAttribute("bugList", p);
             return "/project/data/build/relation/product-al-bug-data.pagelet";
         } else if ("noRelateBug".equals(relate)) {
             carrier.putNotIns("qualityBug.bugId", build.getBuildBugs().split(","));
-            Pager<QualityBug> p =  bugService.findBugListPager(start, limit, carrier, bug,order,"asc".equals(ordertype)?true:false);
+            Pager<QualityBug> p = bugService.findBugListPager(start, limit, carrier, bug, order, "asc".equals(ordertype) ? true : false);
             model.addAttribute("bugList", p);
             return "/project/data/build/relation/product-al-no-bug-data.pagelet";
         } else if ("leRelateBugRelease".equals(relate)) {
@@ -336,7 +336,7 @@ public class ProjectBuildAction extends BaseController {
         List<String> origin = new ArrayList<String>(Arrays.asList(build.getBuildStories().split(",")));
         List<String> add = new ArrayList<String>(Arrays.asList(ids.split(",")));
         origin.addAll(add);
-        build.setBuildStories(StringUtil.join(origin,","));
+        build.setBuildStories(StringUtil.join(origin, ","));
         buildService.updateBuild(build);
         return resultMap(true, "关联成功");
     }
@@ -351,7 +351,7 @@ public class ProjectBuildAction extends BaseController {
         List<String> origin = new ArrayList<String>(Arrays.asList(build.getBuildBugs().split(",")));
         List<String> add = new ArrayList<String>(Arrays.asList(ids.split(",")));
         origin.addAll(add);
-        build.setBuildBugs(StringUtil.join(origin,","));
+        build.setBuildBugs(StringUtil.join(origin, ","));
         buildService.updateBuild(build);
         return resultMap(true, "关联成功");
     }
@@ -380,10 +380,10 @@ public class ProjectBuildAction extends BaseController {
         story.setDeleted(0);
         story.setProductId(build.getBuildProduct());
         if (searchInfos != null) {
-            carrier.putSearch("storySearch",searchInfos,groupOperate);
+            carrier.putSearch("storySearch", searchInfos, groupOperate);
         }
-        carrier.putNotIns("productStory.storyId",build.getBuildStories().split(","));
-        Pager<ProductStory> p = storyService.findStoryByCondition(start,limit,story,carrier,order,"asc".equals(ordertype)?true:false);
+        carrier.putNotIns("productStory.storyId", build.getBuildStories().split(","));
+        Pager<ProductStory> p = storyService.findStoryByCondition(start, limit, story, carrier, order, "asc".equals(ordertype) ? true : false);
         model.addAttribute("storys", p);
 
         return "/project/data/build/relation/product-al-no-req-data.pagelet";
@@ -395,7 +395,7 @@ public class ProjectBuildAction extends BaseController {
         ProjectBuild build = buildService.findBuild(buildId);
         List<String> origin = new ArrayList<String>(Arrays.asList(build.getBuildStories().split(",")));
         origin.remove(String.valueOf(storyId));
-        build.setBuildStories(StringUtil.join(origin,","));
+        build.setBuildStories(StringUtil.join(origin, ","));
         buildService.updateBuild(build);
         return resultMap(true, "解除关联成功");
 
@@ -407,7 +407,7 @@ public class ProjectBuildAction extends BaseController {
         ProjectBuild build = buildService.findBuild(buildId);
         List<String> origin = new ArrayList<String>(Arrays.asList(build.getBuildBugs().split(",")));
         origin.remove(String.valueOf(bugId));
-        build.setBuildBugs(StringUtil.join(origin,","));
+        build.setBuildBugs(StringUtil.join(origin, ","));
         buildService.updateBuild(build);
         return resultMap(true, "解除关联成功");
     }
@@ -422,7 +422,7 @@ public class ProjectBuildAction extends BaseController {
         List<String> origin = new ArrayList<String>(Arrays.asList(build.getBuildStories().split(",")));
         List<String> remove = new ArrayList<String>(Arrays.asList(ids.split(",")));
         origin.removeAll(remove);
-        build.setBuildStories(StringUtil.join(origin,","));
+        build.setBuildStories(StringUtil.join(origin, ","));
         buildService.updateBuild(build);
         return resultMap(true, "删除成功");
     }
@@ -437,7 +437,7 @@ public class ProjectBuildAction extends BaseController {
         List<String> origin = new ArrayList<String>(Arrays.asList(build.getBuildBugs().split(",")));
         List<String> remove = new ArrayList<String>(Arrays.asList(ids.split(",")));
         origin.removeAll(remove);
-        build.setBuildBugs(StringUtil.join(origin,","));
+        build.setBuildBugs(StringUtil.join(origin, ","));
         buildService.updateBuild(build);
         return resultMap(true, "删除成功");
     }
@@ -464,13 +464,13 @@ public class ProjectBuildAction extends BaseController {
                 String[] ids = initKey.split(",");
                 List<ProjectBuild> projectBuildList = buildService.getBuildByIds(ids);
                 boolean hasTrunk = false;
-                for(String id : ids){
-                    if("0".equals(id)){
-                        hasTrunk=true;
+                for (String id : ids) {
+                    if ("0".equals(id)) {
+                        hasTrunk = true;
                     }
                 }
-                if(hasTrunk){
-                    ProjectBuild projectBuild =  new ProjectBuild();
+                if (hasTrunk) {
+                    ProjectBuild projectBuild = new ProjectBuild();
                     projectBuild.setBuildName("trunk");
                     projectBuild.setBuildId(0);
                     projectBuildList.add(projectBuild);
@@ -478,25 +478,25 @@ public class ProjectBuildAction extends BaseController {
                 return projectBuildList;
             }
             List<ProjectBuild> result = new ArrayList<ProjectBuild>();
-            if("0".equals(initKey)){
-                ProjectBuild projectBuild =  new ProjectBuild();
+            if ("0".equals(initKey)) {
+                ProjectBuild projectBuild = new ProjectBuild();
                 projectBuild.setBuildName("trunk");
                 projectBuild.setBuildId(0);
                 result.add(projectBuild);
-            }else{
+            } else {
                 result.add(buildService.findBuild(Integer.parseInt(initKey)));
             }
             return result;
         }
-        if(!StringUtil.isBlank(withoutTrunk)){
-            return buildService.buildInCondition(key,Integer.parseInt(configService.getConfigBySection(SystemConfig.SEARCH_CONFIG).getConfigKey()), productId, projectId);
+        if (!StringUtil.isBlank(withoutTrunk)) {
+            return buildService.buildInCondition(key, Integer.parseInt(configService.getConfigBySection(SystemConfig.SEARCH_CONFIG).getConfigKey()), productId, projectId);
         }
-        ProjectBuild projectBuild =  new ProjectBuild();
+        ProjectBuild projectBuild = new ProjectBuild();
         projectBuild.setBuildName("trunk");
         projectBuild.setBuildId(0);
         List<ProjectBuild> projectBuildList = new ArrayList<ProjectBuild>();
         projectBuildList.add(projectBuild);
-        projectBuildList.addAll(buildService.buildInCondition(key,Integer.parseInt(configService.getConfigBySection(SystemConfig.SEARCH_CONFIG).getConfigKey()), productId, projectId));
+        projectBuildList.addAll(buildService.buildInCondition(key, Integer.parseInt(configService.getConfigBySection(SystemConfig.SEARCH_CONFIG).getConfigKey()), productId, projectId));
         return projectBuildList;
     }
 }

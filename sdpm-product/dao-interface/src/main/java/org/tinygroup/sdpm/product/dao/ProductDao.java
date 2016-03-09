@@ -17,7 +17,6 @@
 package org.tinygroup.sdpm.product.dao;
 
 import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
-import org.tinygroup.sdpm.dao.condition.ConditionCarrier;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductAndLine;
 import org.tinygroup.tinysqldsl.base.Condition;
@@ -34,20 +33,22 @@ public interface ProductDao extends BaseDao<Product, Integer> {
 
     List<String> getProductNameByLineId(Integer productLineId);
 
-    List<Product> getProductByUser(String userId, Integer delete, Integer productLineId,Condition condition);
+    List<Product> getProductByUser(String userId, Integer delete, Integer productLineId, Condition condition);
 
-    List<Product> getProductByUserWithCount(String userId, Integer delete, boolean noRole ,Condition condition);
+    List<Product> getProductByUserWithCount(String userId, Integer delete, boolean noRole, Condition condition);
 
     List<Product> queryWithCount(Product product);
 
-    List<Product> getProductByUserAndProductLineWithCount(String userId, Integer productLineId, Integer delete,Condition condition);
+    List<Product> getProductByUserAndProductLineWithCount(String userId, Integer productLineId, Integer delete, Condition condition);
 
     /**
      * 根据输入名称查询
+     *
      * @param condition
      * @return
      */
     List<Product> productInCondition(String condition, Integer limit, Integer... ids);
+
     /**
      * 无关联查询产品
      */

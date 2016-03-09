@@ -20,25 +20,21 @@ import java.io.Serializable;
 
 /**
  * 角色菜单表
- *
  */
 public class OrgRoleMenu implements Serializable {
 
     /**
      * 逻辑ID
-     *
      */
     private Integer id;
 
     /**
      * 角色ID
-     *
      */
     private Integer orgRoleId;
 
     /**
      * 角色菜单id
-     *
      */
     private String orgRoleMenuId;
 

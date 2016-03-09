@@ -22,7 +22,6 @@ import java.util.Date;
 
 /**
  * 客户请求表
- *
  */
 public class ServiceRequest implements Serializable {
     public static Integer DELETE_YES = 1;
@@ -42,33 +41,31 @@ public class ServiceRequest implements Serializable {
     private String clientName;
     /**
      * 请求ID
-     *
+     * <p>
      * 服务请求ID
      */
     private Integer clientRequestId;
 
     /**
      * 产品ID
-     *
      */
     private Integer productId;
 
     /**
      * 模块ID
-     *
      */
     private Integer moduleId;
 
     /**
      * 请求逻辑编号
-     *
+     * <p>
      * 服务请求逻辑编号
      */
     private String requestNo;
 
     /**
      * 请求类型
-     *
+     * <p>
      * 请求类型
      * Event
      * type:0-bug(缺陷/纠错,1-req1（适应性）,2-req2（完善或增强）,3-req3（个性化定制）,4-reg4（全新）,
@@ -78,7 +75,7 @@ public class ServiceRequest implements Serializable {
 
     /**
      * 请求优先级
-     *
+     * <p>
      * 请求优先级
      * Priority:0-low,1-common,2-urgent
      */
@@ -86,96 +83,87 @@ public class ServiceRequest implements Serializable {
 
     /**
      * 请求标题
-     *
      */
     private String requestTitle;
 
     /**
      * 关键字
-     *
+     * <p>
      * 关键词（分隔符）
      */
     private String requestKeywords;
 
     /**
      * 请求描述
-     *
      */
     private String requestSpec;
 
     /**
      * 异常标记
-     *
+     * <p>
      * 0-正常；1-异常；2-重大异常
      */
     private Integer requestIsAbnormal;
 
     /**
      * 客户ID
-     *
      */
     private Integer clientId;
 
     /**
      * 联系人
-     *
+     * <p>
      * 默认为需求提交人或产品客户其他联系人
      */
     private String requester;
 
     /**
      * 服务事件提交人
-     *
+     * <p>
      * 客户自助提交，此字段信息与requester相同，如客服代录入，可以不一致
      */
     private String requestSubmitBy;
 
     /**
      * 请求提交时间
-     *
      */
     private Date requestSubmitDate;
 
     /**
      * 请求回复时间
-     *
      */
     private Date requestReplyDate;
 
     /**
      * 请求承诺完成日期
-     *
      */
     private Date requestCommitmentDate;
 
     /**
      * 回访人
-     *
      */
     private String requestReviewer;
 
     /**
      * 回访日期
-     *
+     * <p>
      * 请求回访日期
      */
     private Date requestReviewDate;
 
     /**
      * 请求最后编辑者
-     *
      */
     private String requestLastEditedBy;
 
     /**
      * 请求最后编辑时间
-     *
      */
     private Date requestLastEditDate;
 
     /**
      * 请求完成日期
-     *
+     * <p>
      * 支持类需求-实际完成日期
      * 修改类需求-实际发布日期
      */
@@ -183,26 +171,24 @@ public class ServiceRequest implements Serializable {
 
     /**
      * 关闭人
-     *
      */
     private String requestClosedBy;
 
     /**
      * 关闭时间
-     *
      */
     private Date requestCloseDate;
 
     /**
      * 请求打开次数
-     *
+     * <p>
      * 默认0，经历一次拒绝/关闭再打开加1
      */
     private Integer requestOpenCount;
 
     /**
      * 请求状态
-     *
+     * <p>
      * 请求状态0-created新建,1-doing处理中，2-rejected拒绝,3-toProduct转出（回复后用户可见）,4-planned已接受【由产品模块需求纳入计划触发/客服直接处理】
      * （回复后用户可见），5-postponed挂起，6-finished已完成【由产品模块需求阶段】，7-released已发放(用户可见),8-retrunVisit已回访(用户可见),
      * 9-reopen【回访不通过】(用户可见)，10-close关闭【状态8，并且review结果是pass】
@@ -211,39 +197,35 @@ public class ServiceRequest implements Serializable {
 
     /**
      * 转换为
-     *
+     * <p>
      * 1-"toReq"转为需求，2-"toBug"转为缺陷，3-"toTask"转为任务
      */
     private Integer requestTransTo;
 
     /**
      * 转出对象ID
-     *
      */
     private Integer requestTransId;
 
     /**
      * 已删除
-     *
      */
     private Integer deleted;
 
     /**
      * 回复描述
-     *
      */
     private String replySpec;
 
     /**
      * 回复者
-     *
+     * <p>
      * 客服
      */
     private String replier;
 
     /**
      * 回复时间
-     *
      */
     private Date replyDate;
 

@@ -21,6 +21,7 @@ public interface StoryService {
 
     /**
      * 删除需求及相关
+     *
      * @param story
      * @return
      */
@@ -109,6 +110,7 @@ public interface StoryService {
 
     /**
      * 复合条件-排序-分页查询项目关联需求
+     *
      * @param start
      * @param limit
      * @param story
@@ -121,6 +123,7 @@ public interface StoryService {
 
     /**
      * 复合条件-排序-分页查询需求
+     *
      * @param start
      * @param limit
      * @param story
@@ -133,6 +136,7 @@ public interface StoryService {
 
     /**
      * 根据输入名称查询
+     *
      * @param condition
      * @param productId
      * @return
@@ -141,6 +145,7 @@ public interface StoryService {
 
     /**
      * 根据ids查询需求-可选是否携带描述
+     *
      * @param isWithSpec
      * @param ids
      * @return
@@ -149,6 +154,7 @@ public interface StoryService {
 
     /**
      * 根据Story Id查找相应的Story
+     *
      * @param storyId
      * @return
      */

@@ -21,81 +21,68 @@ import java.util.Date;
 
 /**
  * 问答表
- *
  */
-public class ServiceFaq implements Serializable{
+public class ServiceFaq implements Serializable {
     public static Integer DELETE_YES = 1;
     public static Integer DELETE_NO = 0;
 
     /**
      * 问答ID
-     *
      */
     private Integer faqId;
 
     /**
      * 问题描述
-     *
      */
     private String faqQuestion;
 
     /**
      * 解答
-     *
      */
     private String faqAnswer;
 
     /**
      * 已删除
-     *
      */
     private Integer deleted;
 
     /**
      * 创建时间
-     *
      */
     private Date faqCreateDate;
 
     /**
      * 创建人
-     *
      */
     private String faqCreatedBy;
 
     /**
      * 产品ID
-     *
      */
     private Integer productId;
 
     /**
      * 关键字
-     *
      */
     private String faqKeywords;
 
     /**
      * 来源ID
-     *
      */
     private Integer faqSourceId;
 
     /**
      * FAQ来源
-     *
      */
     private String faqSource;
 
     /**
      * 回复者
-     *
      */
     private String faqRepliedBy;
 
     /**
      * FAQ_REPLY_DATE
-     *
      */
     private Date faqReplyDate;
 

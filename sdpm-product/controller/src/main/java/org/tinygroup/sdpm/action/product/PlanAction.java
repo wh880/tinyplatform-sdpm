@@ -6,9 +6,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
-import org.tinygroup.sdpm.product.dao.utils.FieldUtil;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductPlan;
+import org.tinygroup.sdpm.product.dao.utils.FieldUtil;
 import org.tinygroup.sdpm.product.service.inter.PlanService;
 import org.tinygroup.sdpm.product.service.inter.ProductService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
@@ -66,14 +66,14 @@ public class PlanAction extends BaseController {
                 , null
                 , null
                 , systemAction.getActionComment());
-        if(!StringUtil.isBlank(currentAddress)){
+        if (!StringUtil.isBlank(currentAddress)) {
             return "redirect:" + currentAddress;
-        }else{
+        } else {
             if (!StringUtil.isBlank(lastAddress)) {
-                if(lastAddress.contains("?")){
-                    return "redirect:" + lastAddress+"&backPlan="+productPlan1.getPlanId();
+                if (lastAddress.contains("?")) {
+                    return "redirect:" + lastAddress + "&backPlan=" + productPlan1.getPlanId();
                 }
-                return "redirect:" + lastAddress+"?backPlan="+productPlan1.getPlanId();
+                return "redirect:" + lastAddress + "?backPlan=" + productPlan1.getPlanId();
             }
         }
         return "redirect:" + "/a/product/plan/content";
@@ -161,7 +161,7 @@ public class PlanAction extends BaseController {
         ProductPlan plan = null;
         if (no != null) {
             String result = CookieUtils.getCookie(request, productUtils.COOKIE_PRODUCT_ID);
-            if(StringUtil.isBlank(result)){
+            if (StringUtil.isBlank(result)) {
                 return notFoundView();
             }
             Integer cookieProductId = Integer.parseInt(result);

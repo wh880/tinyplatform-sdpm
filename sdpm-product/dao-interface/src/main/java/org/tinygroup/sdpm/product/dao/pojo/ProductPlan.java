@@ -21,56 +21,47 @@ import java.util.Date;
 
 /**
  * 计划表
- *
  */
 public class ProductPlan implements Serializable {
 
 
     /**
      * 计划ID
-     *
      */
     private Integer planId;
 
     /**
      * 公司ID
-     *
      */
     private Integer companyId;
 
     /**
      * 产品ID
-     *
      */
     private Integer productId;
 
     /**
      * 计划名称
-     *
      */
     private String planName;
 
     /**
      * 计划描述
-     *
      */
     private String planSpec;
 
     /**
      * 计划开始时间
-     *
      */
     private Date planBeginDate;
 
     /**
      * 计划结束时间
-     *
      */
     private Date planEndDate;
 
     /**
      * 已删除
-     *
      */
     private Integer deleted;
     /**

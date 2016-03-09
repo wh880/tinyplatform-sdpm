@@ -5,5 +5,6 @@ package org.tinygroup.sdpm.dao.condition;
  */
 public interface CallBackFunction {
     String moduleRoot(String moduleId);
+
     String module(String moduleId);
 }

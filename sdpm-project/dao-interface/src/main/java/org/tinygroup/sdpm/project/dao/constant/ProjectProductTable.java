@@ -21,7 +21,6 @@ import org.tinygroup.tinysqldsl.base.Table;
 
 /**
  * 项目产品
- *
  */
 public class ProjectProductTable extends Table {
 

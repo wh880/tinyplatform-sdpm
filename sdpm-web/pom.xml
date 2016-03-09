@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.tinygroup</groupId>
         <artifactId>sdpm</artifactId>
-        <version>1.0.1-SNAPSHOT</version>
+        <version>1.0.3-SNAPSHOT</version>
     </parent>
     <artifactId>sdpm-web</artifactId>
     <name>sdpm-web</name>
@@ -210,7 +210,7 @@
                         </connector>
                     </connectors>
                     <stopKey>foo</stopKey>
-                    <stopPort>9999</stopPort>
+                    <stopPort>9997</stopPort>
                 </configuration>
             </plugin>
         </plugins>

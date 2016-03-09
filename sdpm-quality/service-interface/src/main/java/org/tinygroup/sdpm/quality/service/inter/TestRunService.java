@@ -26,6 +26,7 @@ public interface TestRunService {
 
     /**
      * 新增测试运行
+     *
      * @param run
      * @return
      */
@@ -33,6 +34,7 @@ public interface TestRunService {
 
     /**
      * 根据id获取运行
+     *
      * @param id
      * @return
      */
@@ -40,6 +42,7 @@ public interface TestRunService {
 
     /**
      * 根据id删除运行
+     *
      * @param runId
      * @return
      */
@@ -47,6 +50,7 @@ public interface TestRunService {
 
     /**
      * 复合条件-排序-分页查询运行
+     *
      * @param start
      * @param limit
      * @param testRun

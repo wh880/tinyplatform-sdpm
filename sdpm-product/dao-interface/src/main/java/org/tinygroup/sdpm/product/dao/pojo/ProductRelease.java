@@ -21,61 +21,51 @@ import java.util.Date;
 
 /**
  * 发布表
- *
  */
 public class ProductRelease implements Serializable {
 
     /**
      * 发布ID
-     *
      */
     private Integer releaseId;
 
     /**
      * 产品ID
-     *
      */
     private Integer productId;
 
     /**
      * 版本id
-     *
      */
     private String releaseBuild;
 
     /**
      * 发布名称
-     *
      */
     private String releaseName;
 
     /**
      * 发布日期
-     *
      */
     private Date releaseDate;
 
     /**
      * 已完成需求
-     *
      */
     private String releaseStories;
 
     /**
      * 已解决Bug
-     *
      */
     private String releaseBugs;
 
     /**
      * 描述
-     *
      */
     private String releaseDesc;
 
     /**
      * 已删除
-     *
      */
     private Integer deleted;
 

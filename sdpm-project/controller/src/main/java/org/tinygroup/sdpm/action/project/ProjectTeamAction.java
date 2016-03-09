@@ -154,7 +154,7 @@ public class ProjectTeamAction extends BaseController {
     }
 
     @RequestMapping("batchTeamTr")
-    public String batchTeamTr(Integer a,String[] userIds, Model model) {
+    public String batchTeamTr(Integer a, String[] userIds, Model model) {
         List<OrgUser> userList = userService.findUserList(null);
         model.addAttribute("userList", userList);
         OrgRole role = new OrgRole();
@@ -163,29 +163,29 @@ public class ProjectTeamAction extends BaseController {
         List<OrgRole> roleList = roleService.findRoleList(role);
         model.addAttribute("roleList", roleList);
         model.addAttribute("a", a + 1);
-        model.addAttribute("userIds",userIds);
+        model.addAttribute("userIds", userIds);
         return "/product/page/team/teamAddTr.pagelet";
     }
 
     @RequestMapping("copy")
-    public String teamCopy(Model model){
+    public String teamCopy(Model model) {
         Project project = new Project();
         project.setProjectDeleted("0");
-        List<Project> projects = projectService.findProjectList(project,null,"false");
-        model.addAttribute("projectList",projects);
+        List<Project> projects = projectService.findProjectList(project, null, "false");
+        model.addAttribute("projectList", projects);
         return "project/modal/team/teamCopy.pagelet";
     }
 
     @RequestMapping("teamCopy")
-    public String teamCopy(Integer a,Integer projectId,Model model,HttpServletRequest request){
+    public String teamCopy(Integer a, Integer projectId, Model model, HttpServletRequest request) {
 
         List<ProjectTeam> teams = teamService.findTeamByProjectId(projectId);
         String thisP = CookieUtils.getCookie(request, ProjectOperate.COOKIE_PROJECT_ID);
-        if(!StringUtil.isBlank(thisP)){
+        if (!StringUtil.isBlank(thisP)) {
             List<ProjectTeam> thisTeams = teamService.findTeamByProjectId(Integer.parseInt(thisP));
-            for(int i=0;i<teams.size();i++){
-                for(ProjectTeam projectTeam : thisTeams){
-                    if(projectTeam.getTeamUserId().equals(teams.get(i).getTeamUserId())){
+            for (int i = 0; i < teams.size(); i++) {
+                for (ProjectTeam projectTeam : thisTeams) {
+                    if (projectTeam.getTeamUserId().equals(teams.get(i).getTeamUserId())) {
                         teams.remove(teams.get(i));
                         i--;
                         break;

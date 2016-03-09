@@ -225,76 +225,76 @@ public class OrgDiaryAndUserDO implements Serializable, Comparable {
 
     private Integer detailCountStatus;
 
-    public void setOrgDiaryId(Integer orgDiaryId) {
-        this.orgDiaryId = orgDiaryId;
-    }
-
     public Integer getOrgDiaryId() {
         return orgDiaryId;
     }
 
-    public void setOrgDiaryBeginDate(Date orgDiaryBeginDate) {
-        this.orgDiaryBeginDate = orgDiaryBeginDate;
+    public void setOrgDiaryId(Integer orgDiaryId) {
+        this.orgDiaryId = orgDiaryId;
     }
 
     public Date getOrgDiaryBeginDate() {
         return orgDiaryBeginDate;
     }
 
-    public void setOrgDiaryEndDate(Date orgDiaryEndDate) {
-        this.orgDiaryEndDate = orgDiaryEndDate;
+    public void setOrgDiaryBeginDate(Date orgDiaryBeginDate) {
+        this.orgDiaryBeginDate = orgDiaryBeginDate;
     }
 
     public Date getOrgDiaryEndDate() {
         return orgDiaryEndDate;
     }
 
-    public void setOrgDiaryYear(Integer orgDiaryYear) {
-        this.orgDiaryYear = orgDiaryYear;
+    public void setOrgDiaryEndDate(Date orgDiaryEndDate) {
+        this.orgDiaryEndDate = orgDiaryEndDate;
     }
 
     public Integer getOrgDiaryYear() {
         return orgDiaryYear;
     }
 
-    public void setOrgDiaryWeek(Integer orgDiaryWeek) {
-        this.orgDiaryWeek = orgDiaryWeek;
+    public void setOrgDiaryYear(Integer orgDiaryYear) {
+        this.orgDiaryYear = orgDiaryYear;
     }
 
     public Integer getOrgDiaryWeek() {
         return orgDiaryWeek;
     }
 
-    public void setOrgDiaryCreateDate(Date orgDiaryCreateDate) {
-        this.orgDiaryCreateDate = orgDiaryCreateDate;
+    public void setOrgDiaryWeek(Integer orgDiaryWeek) {
+        this.orgDiaryWeek = orgDiaryWeek;
     }
 
     public Date getOrgDiaryCreateDate() {
         return orgDiaryCreateDate;
     }
 
-    public void setOrgDiarySummary(String orgDiarySummary) {
-        this.orgDiarySummary = orgDiarySummary;
+    public void setOrgDiaryCreateDate(Date orgDiaryCreateDate) {
+        this.orgDiaryCreateDate = orgDiaryCreateDate;
     }
 
     public String getOrgDiarySummary() {
         return orgDiarySummary;
     }
 
-    public void setOrgDiaryStatus(String orgDiaryStatus) {
-        this.orgDiaryStatus = orgDiaryStatus;
+    public void setOrgDiarySummary(String orgDiarySummary) {
+        this.orgDiarySummary = orgDiarySummary;
     }
 
     public String getOrgDiaryStatus() {
         return orgDiaryStatus;
     }
 
-    public void setOrgDiaryModifyDate(Date orgDiaryModifyDate) {
-        this.orgDiaryModifyDate = orgDiaryModifyDate;
+    public void setOrgDiaryStatus(String orgDiaryStatus) {
+        this.orgDiaryStatus = orgDiaryStatus;
     }
 
     public Date getOrgDiaryModifyDate() {
         return orgDiaryModifyDate;
+    }
+
+    public void setOrgDiaryModifyDate(Date orgDiaryModifyDate) {
+        this.orgDiaryModifyDate = orgDiaryModifyDate;
     }
 
     public String getOrgUserId() {

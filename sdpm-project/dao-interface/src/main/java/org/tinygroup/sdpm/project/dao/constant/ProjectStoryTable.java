@@ -21,7 +21,6 @@ import org.tinygroup.tinysqldsl.base.Table;
 
 /**
  * 项目需求
- *
  */
 public class ProjectStoryTable extends Table {
 

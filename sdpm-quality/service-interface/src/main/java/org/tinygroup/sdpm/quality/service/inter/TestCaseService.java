@@ -9,6 +9,7 @@ import java.util.List;
 public interface TestCaseService {
     /**
      * 通过对象查询
+     *
      * @param festcase
      * @return
      */
@@ -16,6 +17,7 @@ public interface TestCaseService {
 
     /**
      * 通过主键id查询
+     *
      * @param id
      * @return
      */
@@ -47,6 +49,7 @@ public interface TestCaseService {
 
     /**
      * 删除用例
+     *
      * @param id
      * @return
      */
@@ -62,6 +65,7 @@ public interface TestCaseService {
 
     /**
      * 简单-排序-分页查询
+     *
      * @param start
      * @param limit
      * @param testCase
@@ -73,6 +77,7 @@ public interface TestCaseService {
 
     /**
      * 复合条件-排序-分页查询
+     *
      * @param start
      * @param limit
      * @param testCase
@@ -85,6 +90,7 @@ public interface TestCaseService {
 
     /**
      * 复合条件-排序-分页查询需求变更用例
+     *
      * @param start
      * @param limit
      * @param testCase
@@ -97,6 +103,7 @@ public interface TestCaseService {
 
     /**
      * 获取存在用例的需求ids
+     *
      * @param t
      * @return
      */

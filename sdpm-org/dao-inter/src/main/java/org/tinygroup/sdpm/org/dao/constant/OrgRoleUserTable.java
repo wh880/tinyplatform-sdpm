@@ -21,7 +21,6 @@ import org.tinygroup.tinysqldsl.base.Table;
 
 /**
  * 角色用户分配
- *
  */
 public class OrgRoleUserTable extends Table {
 
@@ -29,25 +28,21 @@ public class OrgRoleUserTable extends Table {
 
     /**
      * 逻辑ID
-     *
      */
     public final Column ID = new Column(this, "id");
 
     /**
      * 角色ID
-     *
      */
     public final Column ORG_ROLE_ID = new Column(this, "org_role_id");
 
     /**
      * 用户编号
-     *
      */
     public final Column ORG_USER_ID = new Column(this, "org_user_id");
 
     /**
      * 真实姓名
-     *
      */
     public final Column ORG_USER_REAL_NAME = new Column(this, "org_user_real_name");
 

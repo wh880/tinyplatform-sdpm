@@ -25,12 +25,7 @@ import org.tinygroup.sdpm.org.dao.OrgDiaryDetailDao;
 import org.tinygroup.sdpm.org.dao.pojo.OrgDiaryDetail;
 import org.tinygroup.tinysqldsl.*;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
-import org.tinygroup.tinysqldsl.extend.MysqlSelect;
 import org.tinygroup.tinysqldsl.select.OrderByElement;
-import org.tinygroup.sdpm.org.dao.pojo.OrgDiaryDetail;
-import org.tinygroup.sdpm.org.dao.OrgDiaryDetailDao;
-import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
-import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
 
 import java.io.Serializable;
 import java.util.ArrayList;

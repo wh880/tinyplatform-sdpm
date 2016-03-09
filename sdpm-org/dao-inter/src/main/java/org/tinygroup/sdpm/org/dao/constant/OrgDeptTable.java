@@ -21,7 +21,6 @@ import org.tinygroup.tinysqldsl.base.Table;
 
 /**
  * 部门表
- *
  */
 public class OrgDeptTable extends Table {
 
@@ -29,49 +28,41 @@ public class OrgDeptTable extends Table {
 
     /**
      * 部门编号
-     *
      */
     public final Column ORG_DEPT_ID = new Column(this, "org_dept_id");
 
     /**
      * 部门名称
-     *
      */
     public final Column ORG_DEPT_NAME = new Column(this, "org_dept_name");
 
     /**
      * 上级部门
-     *
      */
     public final Column ORG_DEPT_PARENT = new Column(this, "org_dept_parent");
 
     /**
      * 部门层次路径
-     *
      */
     public final Column ORG_DEPT_PATH = new Column(this, "org_dept_path");
 
     /**
      * 部门级别
-     *
      */
     public final Column ORG_DEPT_GRADE = new Column(this, "org_dept_grade");
 
     /**
      * 部门排序
-     *
      */
     public final Column ORG_DEPT_ORDER = new Column(this, "org_dept_order");
 
     /**
      * 部门位置
-     *
      */
     public final Column ORG_DEPT_POSITION = new Column(this, "org_dept_position");
 
     /**
      * 负责人
-     *
      */
     public final Column ORG_DEPT_MANAGER = new Column(this, "org_dept_manager");
 

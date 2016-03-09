@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Created by shenly13343 on 2015-10-26.
  */
-public class TaskChartBean implements Serializable{
+public class TaskChartBean implements Serializable {
     private Integer taskCount;
     private String title;
     private float percent;

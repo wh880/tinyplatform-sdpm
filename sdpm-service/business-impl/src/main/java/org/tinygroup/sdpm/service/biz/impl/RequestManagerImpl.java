@@ -58,7 +58,7 @@ public class RequestManagerImpl implements RequestManager {
     public Pager<ServiceRequest> findPager(Integer start, Integer limit, Integer status, ServiceRequest serviceRequest,
                                            Integer treeId, ConditionCarrier carrier, String order, String ordertype) {
 
-        if(StringUtil.isBlank(order)){
+        if (StringUtil.isBlank(order)) {
             return requestDao.queryPagerBy(start, limit, serviceRequest, status, treeId, mergeCondition(carrier));
         }
         return requestDao.queryPagerBy(start, limit, serviceRequest, status, treeId, mergeCondition(carrier), new OrderBy(NameUtil.resolveNameDesc(order), !("desc".equals(ordertype)) ? true : false));

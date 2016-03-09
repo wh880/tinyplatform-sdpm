@@ -8,6 +8,7 @@ public interface CaseStepService {
 
     /**
      * 通过主键id查询
+     *
      * @param id
      * @return
      */
@@ -15,6 +16,7 @@ public interface CaseStepService {
 
     /**
      * 添加用例步骤
+     *
      * @param caseStep
      * @return
      */
@@ -22,6 +24,7 @@ public interface CaseStepService {
 
     /**
      * 删除步骤
+     *
      * @param id
      * @return
      */
@@ -29,6 +32,7 @@ public interface CaseStepService {
 
     /**
      * 通过条件查询步骤
+     *
      * @param caseStep
      * @return
      */
@@ -36,6 +40,7 @@ public interface CaseStepService {
 
     /**
      * 获取case当前最大版本
+     *
      * @param caseId
      * @return
      */

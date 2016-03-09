@@ -11,6 +11,7 @@ import java.util.List;
 public interface ProductLineService {
 
     String CACHE_USER_PRODUCT_LINE = "userProductLine";
+
     /**
      * 添加产品线
      *
@@ -56,6 +57,7 @@ public interface ProductLineService {
 
     /**
      * 复合条件-根据ids分页查询产品线
+     *
      * @param start
      * @param limit
      * @param carrier
@@ -69,6 +71,7 @@ public interface ProductLineService {
 
     /**
      * 根据ids查询产品线
+     *
      * @param ids
      * @return
      */
@@ -76,6 +79,7 @@ public interface ProductLineService {
 
     /**
      * 获取用户可游览产品线
+     *
      * @param userId
      * @return
      */
@@ -84,6 +88,7 @@ public interface ProductLineService {
 
     /**
      * 获取用户可游览产品线id
+     *
      * @param userId
      * @return
      */
@@ -92,6 +97,7 @@ public interface ProductLineService {
 
     /**
      * 根据输入名称查询产品线
+     *
      * @param condition
      * @param ids
      * @return
@@ -100,6 +106,7 @@ public interface ProductLineService {
 
     /**
      * 分页查询productLine
+     *
      * @param start
      * @param limit
      * @param productLine

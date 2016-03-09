@@ -21,52 +21,48 @@ import java.util.Date;
 
 /**
  * 客服回访表
- *
  */
 public class ServiceReview implements Serializable {
 
     /**
      * 回访ID
-     *
      */
     private Integer reviewId;
 
     /**
      * 请求ID
-     *
+     * <p>
      * 服务请求ID
      */
     private Integer clientRequestId;
 
     /**
      * 回访描述
-     *
      */
     private String reviewSpec;
 
     /**
      * 联系人
-     *
+     * <p>
      * 默认为需求提交人或产品客户其他联系人
      */
     private String requester;
 
     /**
      * 回访者
-     *
+     * <p>
      * 回访人account，当前操作者
      */
     private String reviewer;
 
     /**
      * 回访时间
-     *
      */
     private Date reviewDate;
 
     /**
      * 回访结果
-     *
+     * <p>
      * 0-not
      * pass,
      * 1-pass
@@ -75,14 +71,14 @@ public class ServiceReview implements Serializable {
 
     /**
      * 回访评分
-     *
+     * <p>
      * 0很不满意，2不满意，3一般，4满意，5非常满意
      */
     private Integer reviewScore;
 
     /**
      * 回访类型
-     *
+     * <p>
      * 0-发放回访，1-拒绝需求回访，2-无修改需求回访
      */
     private Integer reviewType;

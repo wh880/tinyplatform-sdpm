@@ -80,6 +80,7 @@ public interface ModuleService {
 
     /**
      * 根据类型删除模块-主要用于字典初始化
+     *
      * @param type
      * @return
      */

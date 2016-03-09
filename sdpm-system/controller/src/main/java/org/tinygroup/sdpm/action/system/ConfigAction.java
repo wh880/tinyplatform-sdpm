@@ -16,25 +16,27 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("a/system/config")
-public class ConfigAction extends BaseController{
+public class ConfigAction extends BaseController {
     @Autowired
     ConfigService configService;
 
     @RequestMapping("")
-    public String index(Model model){
+    public String index(Model model) {
         List<SystemConfig> configs = configService.findConfigList();
-        model.addAttribute("list",configs);
+        model.addAttribute("list", configs);
         return "system/page/config/index.page";
     }
+
     @RequestMapping("toUpdate")
-    public String update(Integer configId, Model model){
-        model.addAttribute("config",configService.findConfig(configId));
+    public String update(Integer configId, Model model) {
+        model.addAttribute("config", configService.findConfig(configId));
         return "system/page/config/configEdit.pagelet";
     }
+
     @RequiresPermissions("config-edit")
     @RequestMapping("update")
-    public String update(SystemConfig config){
+    public String update(SystemConfig config) {
         configService.updateConfig(config);
-        return "redirect:"+adminPath+"/system/config";
+        return "redirect:" + adminPath + "/system/config";
     }
 }

@@ -21,7 +21,6 @@ import org.tinygroup.tinysqldsl.base.Table;
 
 /**
  * 邮件队列
- *
  */
 public class SystemMailqueueTable extends Table {
 
@@ -29,61 +28,51 @@ public class SystemMailqueueTable extends Table {
 
     /**
      * 邮件队列ID
-     *
      */
     public final Column MAILQUEUE_ID = new Column(this, "mailqueue_id");
 
     /**
      * 发送给
-     *
      */
     public final Column MAILQUEUE_TOLIST = new Column(this, "mailqueue_toList");
 
     /**
      * 抄送给
-     *
      */
     public final Column MAILQUEUE_CCLIST = new Column(this, "mailqueue_ccList");
 
     /**
      * 邮箱队列主题
-     *
      */
     public final Column MAILQUEUE_SUBJECT = new Column(this, "mailqueue_subject");
 
     /**
      * 队列主体
-     *
      */
     public final Column MAILQUEUE_BODY = new Column(this, "mailqueue_body");
 
     /**
      * 添加日期
-     *
      */
     public final Column MAILQUEUE_ADDED_DATE = new Column(this, "mailqueue_added_date");
 
     /**
      * 邮箱队列由谁添加
-     *
      */
     public final Column MAILQUEUE_ADDED_BY = new Column(this, "mailqueue_added_by");
 
     /**
      * 传送时间
-     *
      */
     public final Column MAILQUEUE_SENDTIME = new Column(this, "mailqueue_sendTime");
 
     /**
      * 队列状态
-     *
      */
     public final Column MAILQUEUE_STATUS = new Column(this, "mailqueue_status");
 
     /**
      * 传送失败理由
-     *
      */
     public final Column MAILQUEUE_FAIL_REASON = new Column(this, "mailqueue_fail_reason");
 

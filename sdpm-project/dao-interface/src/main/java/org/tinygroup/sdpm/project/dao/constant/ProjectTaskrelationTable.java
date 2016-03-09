@@ -21,7 +21,6 @@ import org.tinygroup.tinysqldsl.base.Table;
 
 /**
  * TASKRELATION
- *
  */
 public class ProjectTaskrelationTable extends Table {
 
@@ -39,7 +38,7 @@ public class ProjectTaskrelationTable extends Table {
 
     /**
      * 前置条件
-     * <p/>
+     * <p>
      * 0-开始后，1-完成后
      */
     public final Column TASKRELATION_CONDITON = new Column(this, "taskrelation_conditon");
@@ -51,7 +50,7 @@ public class ProjectTaskrelationTable extends Table {
 
     /**
      * 动作
-     * <p/>
+     * <p>
      * 0-才能开始，1-才能完成
      */
     public final Column TASKRELATION_ACTION = new Column(this, "taskrelation_action");

@@ -20,55 +20,46 @@ import java.io.Serializable;
 
 /**
  * 部门表
- *
  */
 public class OrgDept implements Serializable {
 
     /**
      * 部门编号
-     *
      */
     private Integer orgDeptId;
 
     /**
      * 部门名称
-     *
      */
     private String orgDeptName;
 
     /**
      * 上级部门
-     *
      */
     private Integer orgDeptParent;
 
     /**
      * 部门层次路径
-     *
      */
     private String orgDeptPath;
 
     /**
      * 部门级别
-     *
      */
     private Integer orgDeptGrade;
 
     /**
      * 部门排序
-     *
      */
     private Integer orgDeptOrder;
 
     /**
      * 部门位置
-     *
      */
     private String orgDeptPosition;
 
     /**
      * 负责人
-     *
      */
     private String orgDeptManager;
 

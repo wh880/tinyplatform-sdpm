@@ -21,7 +21,6 @@ import org.tinygroup.tinysqldsl.base.Table;
 
 /**
  * 需求表述表
- *
  */
 public class ProductStorySpecTable extends Table {
 
@@ -29,43 +28,36 @@ public class ProductStorySpecTable extends Table {
 
     /**
      * 需求描述ID
-     *
      */
     public final Column STORYSPEC_ID = new Column(this, "storyspec_id");
 
     /**
      * 公司ID
-     *
      */
     public final Column COMPANY_ID = new Column(this, "company_id");
 
     /**
      * 需求ID
-     *
      */
     public final Column STORY_ID = new Column(this, "story_id");
 
     /**
      * 需求版本
-     *
      */
     public final Column STORY_VERSION = new Column(this, "story_version");
 
     /**
      * 需求标题
-     *
      */
     public final Column STORY_TITLE = new Column(this, "story_title");
 
     /**
      * 需求描述
-     *
      */
     public final Column STORY_SPEC = new Column(this, "story_spec");
 
     /**
      * 验证标准
-     *
      */
     public final Column STORY_VERIFICATION = new Column(this, "story_verification");
 

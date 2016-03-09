@@ -65,14 +65,14 @@ public class ProductPlanDaoImpl extends TinyDslDaoSupport implements ProductPlan
         return getDslTemplate().insertAndReturnKey(productPlan, new InsertGenerateCallback<ProductPlan>() {
             public Insert generate(ProductPlan t) {
                 Insert insert = insertInto(PRODUCT_PLANTABLE).values(
-					PRODUCT_PLANTABLE.COMPANY_ID.value(t.getCompanyId()),
-					PRODUCT_PLANTABLE.PRODUCT_ID.value(t.getProductId()),
-					PRODUCT_PLANTABLE.PLAN_NAME.value(t.getPlanName()),
-					PRODUCT_PLANTABLE.PLAN_SPEC.value(t.getPlanSpec()),
-					PRODUCT_PLANTABLE.PLAN_BEGIN_DATE.value(t.getPlanBeginDate()),
-					PRODUCT_PLANTABLE.PLAN_END_DATE.value(t.getPlanEndDate()),
-                    PRODUCT_PLANTABLE.NO.value(t.getNo()),
-					PRODUCT_PLANTABLE.DELETED.value(t.getDeleted()));
+                        PRODUCT_PLANTABLE.COMPANY_ID.value(t.getCompanyId()),
+                        PRODUCT_PLANTABLE.PRODUCT_ID.value(t.getProductId()),
+                        PRODUCT_PLANTABLE.PLAN_NAME.value(t.getPlanName()),
+                        PRODUCT_PLANTABLE.PLAN_SPEC.value(t.getPlanSpec()),
+                        PRODUCT_PLANTABLE.PLAN_BEGIN_DATE.value(t.getPlanBeginDate()),
+                        PRODUCT_PLANTABLE.PLAN_END_DATE.value(t.getPlanEndDate()),
+                        PRODUCT_PLANTABLE.NO.value(t.getNo()),
+                        PRODUCT_PLANTABLE.DELETED.value(t.getDeleted()));
                 return insert;
             }
         });
@@ -121,7 +121,7 @@ public class ProductPlanDaoImpl extends TinyDslDaoSupport implements ProductPlan
                 if (isOverdue) {
                     condition = and(PRODUCT_PLANTABLE.PLAN_END_DATE.isNotNull(), PRODUCT_PLANTABLE.PLAN_END_DATE.lte(new Date()));
                 }
-                Select select = select(PRODUCT_PLANTABLE.PLAN_BEGIN_DATE,PRODUCT_PLANTABLE.PLAN_END_DATE,FragmentSql.fragmentSelect("product_plan.plan_id,product_plan.plan_name,SUM(CASE WHEN product_story.`story_status`=1 THEN 1 ELSE 0 END) draft," +
+                Select select = select(PRODUCT_PLANTABLE.PLAN_BEGIN_DATE, PRODUCT_PLANTABLE.PLAN_END_DATE, FragmentSql.fragmentSelect("product_plan.plan_id,product_plan.plan_name,SUM(CASE WHEN product_story.`story_status`=1 THEN 1 ELSE 0 END) draft," +
                         "SUM(CASE WHEN product_story.`story_status`=2 THEN 1 ELSE 0 END) active," +
                         "SUM(CASE WHEN product_story.`story_status`=3 THEN 1 ELSE 0 END) `change`," +
                         "SUM(CASE WHEN product_story.`story_status`=4 THEN 1 ELSE 0 END) `close`"
@@ -134,7 +134,7 @@ public class ProductPlanDaoImpl extends TinyDslDaoSupport implements ProductPlan
                                 PRODUCT_PLANTABLE.PLAN_SPEC.eq(t.getPlanSpec()),
                                 PRODUCT_PLANTABLE.PLAN_BEGIN_DATE.eq(t.getPlanBeginDate()),
                                 PRODUCT_PLANTABLE.PLAN_END_DATE.eq(t.getPlanEndDate()),
-                                PRODUCT_PLANTABLE.DELETED.eq(t.getDeleted()))).groupBy(PRODUCT_PLANTABLE.PLAN_ID,PRODUCT_PLANTABLE.PLAN_NAME,PRODUCT_PLANTABLE.PLAN_BEGIN_DATE,PRODUCT_PLANTABLE.PLAN_END_DATE);
+                                PRODUCT_PLANTABLE.DELETED.eq(t.getDeleted()))).groupBy(PRODUCT_PLANTABLE.PLAN_ID, PRODUCT_PLANTABLE.PLAN_NAME, PRODUCT_PLANTABLE.PLAN_BEGIN_DATE, PRODUCT_PLANTABLE.PLAN_END_DATE);
                 return addOrderByElements(select, orderArgs);
             }
         });

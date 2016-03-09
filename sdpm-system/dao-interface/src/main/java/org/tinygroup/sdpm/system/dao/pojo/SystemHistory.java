@@ -21,43 +21,36 @@ import java.io.Serializable;
 
 /**
  * 操作历史表
- *
  */
 public class SystemHistory implements Serializable {
 
     /**
      * 操作历史ID
-     *
      */
     private Integer historyId;
 
     /**
      * 操作ID
-     *
      */
     private Integer historyAction;
 
     /**
      * 所属领域
-     *
      */
     private String historyField;
 
     /**
      * 当前历史
-     *
      */
     private String historyNew;
 
     /**
      * 上一条历史
-     *
      */
     private String historyOld;
 
     /**
      * 对比
-     *
      */
     private String historyDiff;
 

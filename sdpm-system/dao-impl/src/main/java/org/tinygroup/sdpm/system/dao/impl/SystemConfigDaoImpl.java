@@ -35,7 +35,6 @@ import java.util.List;
 import static org.tinygroup.sdpm.system.dao.constant.SystemConfigTable.SYSTEM_CONFIGTABLE;
 import static org.tinygroup.tinysqldsl.Delete.delete;
 import static org.tinygroup.tinysqldsl.Insert.insertInto;
-import static org.tinygroup.tinysqldsl.Select.select;
 import static org.tinygroup.tinysqldsl.Select.selectFrom;
 import static org.tinygroup.tinysqldsl.Update.update;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
@@ -225,6 +224,6 @@ public class SystemConfigDaoImpl extends TinyDslDaoSupport implements SystemConf
 
     public SystemConfig getConfigBySection(String section) {
         Select select = selectFrom(SYSTEM_CONFIGTABLE).where(SYSTEM_CONFIGTABLE.CONFIG_SECTION.eq(section));
-        return getDslSession().fetchOneResult(select,SystemConfig.class);
+        return getDslSession().fetchOneResult(select, SystemConfig.class);
     }
 }

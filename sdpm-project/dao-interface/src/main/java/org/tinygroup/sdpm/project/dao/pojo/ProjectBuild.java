@@ -21,7 +21,6 @@ import java.util.Date;
 
 /**
  * 版本
- *
  */
 public class ProjectBuild implements Serializable {
 
@@ -30,7 +29,6 @@ public class ProjectBuild implements Serializable {
     private String productName;
     /**
      * 版本id
-     *
      */
     private Integer buildId;
     /**
@@ -39,52 +37,43 @@ public class ProjectBuild implements Serializable {
     private Integer buildProduct;
     /**
      * 项目
-     *
      */
     private Integer buildProject;
     /**
      * 版本名称
-     *
      */
     private String buildName;
     /**
      * 源码地址
-     *
      */
     private String buildScmPath;
     /**
      * 下载地址
-     *
      */
     private String buildFilePath;
     /**
      * 打包日期
-     *
      */
     private Date buildDate;
     /**
      * 已解决需求
-     *
      */
     private String buildStories;
     /**
      * 已解决bug
-     *
      */
     private String buildBugs;
     /**
      * 构建者
-     *
      */
     private String buildBuilder;
     /**
      * 描述
-     *
      */
     private String buildDesc;
     /**
      * 已删除
-     *
+     * <p>
      * 0-未删除，1-删除
      */
     private String buildDeleted;

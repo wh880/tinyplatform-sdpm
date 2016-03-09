@@ -21,55 +21,46 @@ import java.util.Date;
 
 /**
  * 测试结果表
- *
  */
 public class QualityTestResult implements Serializable {
 
     /**
      * 测试结果
-     *
      */
     private Integer testResultId;
 
     /**
      * TESTRESULT_RUN
-     *
      */
     private Integer testresultRun;
 
     /**
      * 相关用例
-     *
      */
     private Integer linkCase;
 
     /**
      * 关联用例版本
-     *
      */
     private Integer caseVersion;
 
     /**
      * 测试结果
-     *
      */
     private String caseResult;
 
     /**
      * 用例步骤结果
-     *
      */
     private String caseStepresults;
 
     /**
      * 最后执行人
-     *
      */
     private String testResultLastRunner;
 
     /**
      * 最后执行日期
-     *
      */
     private Date testResultDate;
 

@@ -21,7 +21,6 @@ import java.util.Date;
 
 /**
  * 用户表
- *
  */
 public class OrgUser implements Serializable {
 
@@ -29,147 +28,118 @@ public class OrgUser implements Serializable {
     public static String DELETE_NO = "0";
     /**
      * 用户编号
-     *
      */
     private String orgUserId;
     /**
      * 部门编号
-     *
      */
     private Integer orgDeptId;
     /**
      * 用户名
-     *
      */
     private String orgUserAccount;
     /**
      * 密码
-     *
      */
     private String orgUserPassword;
     /**
      * 职位
-     *
      */
     private String orgUserRole;
     /**
      * 真实姓名
-     *
      */
     private String orgUserRealName;
     /**
      * 昵称
-     *
      */
     private String orgUserNickName;
     /**
      * 直接上级
-     *
      */
     private String orgUserLeader;
     /**
      * 源代码账号
-     *
      */
     private String orgUserSubmitter;
     /**
      * 头像
-     *
      */
     private String orgUserAvatar;
     /**
      * 出生日期
-     *
      */
     private String orgUserBirthday;
     /**
      * 性别
-     *
      */
     private String orgUserGender;
     /**
      * 邮箱
-     *
      */
     private String orgUserEmail;
     /**
      * Skype
-     *
      */
     private String orgUserSkype;
     /**
      * QQ
-     *
      */
     private String orgUserQQ;
     /**
      * 雅虎通
-     *
      */
     private String orgUserYahoo;
     /**
      * Gtalk
-     *
      */
     private String orgUserGTalk;
     /**
      * 旺旺
-     *
      */
     private String orgUserWangWang;
     /**
      * 手机
-     *
      */
     private String orgUserMobile;
     /**
      * 电话
-     *
      */
     private String orgUserPhone;
     /**
      * 通讯地址
-     *
      */
     private String orgUserAddress;
     /**
      * 邮编
-     *
      */
     private String orgUserZipCode;
     /**
      * 加入日期
-     *
      */
     private String orgUserJoin;
     /**
      * 访问次数
-     *
      */
     private Integer orgUserVisits;
     /**
      * 最后IP
-     *
      */
     private String orgUserIp;
     /**
      * 最后登录
-     *
      */
     private Date orgUserLast;
     /**
      * 失败次数
-     *
      */
     private Integer orgUserFails;
     /**
      * 上次锁定时间
-     *
      */
     private String orgUserLocked;
     /**
      * 是否删除
-     *
      */
     private String orgUserDeleted;
 

@@ -20,7 +20,6 @@ import java.io.Serializable;
 
 /**
  * 项目需求
- *
  */
 public class ProjectStory implements Serializable {
 

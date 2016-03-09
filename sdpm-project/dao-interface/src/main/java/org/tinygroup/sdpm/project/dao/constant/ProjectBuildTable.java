@@ -21,7 +21,6 @@ import org.tinygroup.tinysqldsl.base.Table;
 
 /**
  * 版本
- *
  */
 public class ProjectBuildTable extends Table {
 
@@ -29,73 +28,62 @@ public class ProjectBuildTable extends Table {
 
     /**
      * 版本id
-     *
      */
     public final Column BUILD_ID = new Column(this, "build_id");
 
     /**
      * 产品
-     *
      */
     public final Column BUILD_PRODUCT = new Column(this, "build_product");
 
     /**
      * 项目
-     *
      */
     public final Column BUILD_PROJECT = new Column(this, "build_project");
 
     /**
      * 版本名称
-     *
      */
     public final Column BUILD_NAME = new Column(this, "build_name");
 
     /**
      * 源码地址
-     *
      */
     public final Column BUILD_SCM_PATH = new Column(this, "build_scm_path");
 
     /**
      * 下载地址
-     *
      */
     public final Column BUILD_FILE_PATH = new Column(this, "build_file_path");
 
     /**
      * 打包日期
-     *
      */
     public final Column BUILD_DATE = new Column(this, "build_date");
 
     /**
      * 已解决需求
-     *
      */
     public final Column BUILD_STORIES = new Column(this, "build_stories");
 
     /**
      * 已解决bug
-     *
      */
     public final Column BUILD_BUGS = new Column(this, "build_bugs");
 
     /**
      * 构建者
-     *
      */
     public final Column BUILD_BUILDER = new Column(this, "build_builder");
 
     /**
      * 描述
-     *
      */
     public final Column BUILD_DESC = new Column(this, "build_desc");
 
     /**
      * 已删除
-     *
+     * <p>
      * 0-未删除，1-删除
      */
     public final Column BUILD_DELETED = new Column(this, "build_deleted");

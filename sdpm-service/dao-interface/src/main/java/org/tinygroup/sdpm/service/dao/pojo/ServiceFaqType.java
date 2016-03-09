@@ -21,45 +21,38 @@ import java.util.Date;
 
 /**
  * faq分类
- *
  */
-public class ServiceFaqType implements Serializable{
+public class ServiceFaqType implements Serializable {
     public static Integer DELETE_YES = 1;
     public static Integer DELETE_NO = 0;
 
     /**
      * 问题类型id
-     *
      */
     private Integer faqTypeId;
 
     /**
      * 问答类型
-     *
      */
     private String faqType;
 
     /**
      * 父级问题类型id
-     *
      */
     private Integer faqParentTypeId;
 
     /**
      * faq类型创建时间
-     *
      */
     private Date faqTypeCreatDay;
 
     /**
      * 创建人
-     *
      */
     private String faqCreatedBy;
 
     /**
      * 已删除
-     *
      */
     private Integer deleted;
 

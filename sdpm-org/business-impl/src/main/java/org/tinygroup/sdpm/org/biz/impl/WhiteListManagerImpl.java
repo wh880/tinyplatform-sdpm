@@ -47,8 +47,8 @@ public class WhiteListManagerImpl implements WhiteListManager {
 
     @Override
     public OrgDiaryWhiteList findOneByAccounts(String firstAccount, String secondAccount) {
-        List<OrgDiaryWhiteList> list=orgDiaryWhiteListDao.findOneByAccounts(firstAccount,secondAccount);
-        if (CollectionUtil.isEmpty(list)){
+        List<OrgDiaryWhiteList> list = orgDiaryWhiteListDao.findOneByAccounts(firstAccount, secondAccount);
+        if (CollectionUtil.isEmpty(list)) {
             return null;
         }
         return list.get(0);
@@ -56,6 +56,6 @@ public class WhiteListManagerImpl implements WhiteListManager {
 
     @Override
     public Integer deleteDiaryWhiteList(String firstAccount, String secondAccout) {
-        return orgDiaryWhiteListDao.deleteByAccounts(firstAccount,secondAccout);
+        return orgDiaryWhiteListDao.deleteByAccounts(firstAccount, secondAccout);
     }
 }

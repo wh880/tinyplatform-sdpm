@@ -21,61 +21,51 @@ import java.util.Date;
 
 /**
  * 测试计划执行表
- *
  */
 public class QualityTestRun implements Serializable {
 
     /**
      * 执行编号
-     *
      */
     private Integer testRunId;
 
     /**
      * 任务id
-     *
      */
     private Integer taskId;
 
     /**
      * 用例编号
-     *
      */
     private Integer caseId;
 
     /**
      * 关联用例版本
-     *
      */
     private Integer caseVersion;
 
     /**
      * 指派给
-     *
      */
     private String testRunAssignedTo;
 
     /**
      * 最后执行人
-     *
      */
     private String testRunLastRunner;
 
     /**
      * 最后执行日期
-     *
      */
     private Date testRunLastRunDate;
 
     /**
      * 最后执行结果
-     *
      */
     private String testRunLastRunResult;
 
     /**
      * 测试执行状态
-     *
      */
     private String testRunStatus;
 

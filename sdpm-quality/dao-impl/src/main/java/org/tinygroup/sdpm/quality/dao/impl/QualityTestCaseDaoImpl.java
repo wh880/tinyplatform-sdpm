@@ -39,11 +39,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.tinygroup.sdpm.org.dao.constant.OrgUserTable.ORG_USERTABLE;
 import static org.tinygroup.sdpm.product.dao.constant.ProductStoryTable.PRODUCT_STORYTABLE;
 import static org.tinygroup.sdpm.quality.dao.constant.QualityBugTable.QUALITY_BUGTABLE;
 import static org.tinygroup.sdpm.quality.dao.constant.QualityTestCaseTable.QUALITY_TEST_CASETABLE;
 import static org.tinygroup.sdpm.system.dao.constant.SystemModuleTable.SYSTEM_MODULETABLE;
-import static org.tinygroup.sdpm.org.dao.constant.OrgUserTable.ORG_USERTABLE;
 import static org.tinygroup.tinysqldsl.Delete.delete;
 import static org.tinygroup.tinysqldsl.Insert.insertInto;
 import static org.tinygroup.tinysqldsl.Select.select;
@@ -232,12 +232,12 @@ public class QualityTestCaseDaoImpl extends TinyDslDaoSupport implements Quality
 
             public Select generate(QualityTestCase t) {
                 Select select = MysqlSelect.select(QUALITY_TEST_CASETABLE.ALL,
-                        ((OrgUserTable)ORG_USERTABLE.as("open")).ORG_USER_REAL_NAME.as("caseOpenedName"),
-                        ((OrgUserTable)ORG_USERTABLE.as("runner")).ORG_USER_REAL_NAME.as("caseLastRunnerName")).
+                        ((OrgUserTable) ORG_USERTABLE.as("open")).ORG_USER_REAL_NAME.as("caseOpenedName"),
+                        ((OrgUserTable) ORG_USERTABLE.as("runner")).ORG_USER_REAL_NAME.as("caseLastRunnerName")).
                         from(QUALITY_TEST_CASETABLE).join(
-                            Join.leftJoin(ORG_USERTABLE.as("open"),((OrgUserTable)ORG_USERTABLE.as("open")).ORG_USER_ID.eq(QUALITY_TEST_CASETABLE.CASE_OPENED_BY)),
-                            Join.leftJoin(ORG_USERTABLE.as("runner"),((OrgUserTable)ORG_USERTABLE.as("runner")).ORG_USER_ID.eq(QUALITY_TEST_CASETABLE.CASE_LAST_RUNNER))
-                        ).where(and(
+                        Join.leftJoin(ORG_USERTABLE.as("open"), ((OrgUserTable) ORG_USERTABLE.as("open")).ORG_USER_ID.eq(QUALITY_TEST_CASETABLE.CASE_OPENED_BY)),
+                        Join.leftJoin(ORG_USERTABLE.as("runner"), ((OrgUserTable) ORG_USERTABLE.as("runner")).ORG_USER_ID.eq(QUALITY_TEST_CASETABLE.CASE_LAST_RUNNER))
+                ).where(and(
 
                         QUALITY_TEST_CASETABLE.PRODUCT_ID.eq(t.getProductId()),
                         QUALITY_TEST_CASETABLE.MODULE_ID.eq(t.getModuleId()),

@@ -200,7 +200,7 @@ public class MenuManagerImpl implements MenuManager {
         }
         Predicate<Menu> predicate = new Predicate<Menu>() {
             public boolean apply(Menu menu) {
-                if (StringUtil.isBlank(menu.getIsShow())){
+                if (StringUtil.isBlank(menu.getIsShow())) {
                     return true;
                 }
                 return Menu.IS_SHOW_YES.equals(menu.getIsShow());

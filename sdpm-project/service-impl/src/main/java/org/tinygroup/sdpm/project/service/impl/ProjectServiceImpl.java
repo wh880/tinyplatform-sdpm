@@ -54,6 +54,7 @@ public class ProjectServiceImpl implements ProjectService {
         }
         return false;
     }
+
     /**
      * 查找所有项目
      *
@@ -97,7 +98,7 @@ public class ProjectServiceImpl implements ProjectService {
             if (Project.ACL_OPEN.equals(projectAcl)) {
                 // 开放项目
                 userProjectList.add(project);
-            } else if (Project.ACL_CUSTOM.equals(projectAcl) && hasProjectByRole(userId,project.getProjectWhiteList())) {
+            } else if (Project.ACL_CUSTOM.equals(projectAcl) && hasProjectByRole(userId, project.getProjectWhiteList())) {
                 // 自定义白名单
                 userProjectList.add(project);
             }
@@ -163,6 +164,7 @@ public class ProjectServiceImpl implements ProjectService {
     public List<Project> projectInCondition(String condition, Integer limit, Integer... ids) {
         return projectManager.projectInCondition(condition, limit, ids);
     }
+
     /**
      * 根据产品id查询待关联的bug list
      *

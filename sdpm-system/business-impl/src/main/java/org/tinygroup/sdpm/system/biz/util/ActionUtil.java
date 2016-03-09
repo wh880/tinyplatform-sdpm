@@ -11,7 +11,6 @@ import java.util.Date;
 import static org.tinygroup.sdpm.system.dao.constant.SystemActionTable.SYSTEM_ACTIONTABLE;
 
 
-
 public class ActionUtil {
 
     public static Condition getActionDateCondition(String choice) {

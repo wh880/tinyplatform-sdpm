@@ -82,6 +82,7 @@ public class InitDataApplicationProcessor implements ApplicationProcessor {
             roleService.batchAddRolesToUser(orgUser1.getOrgUserId(), new String[]{"1"});
         }
     }
+
     private void initDoc() {
         List<DocumentDocLib> docLibList = docService.findDocLibList(null);
         if (docLibList.isEmpty()) {
@@ -95,6 +96,7 @@ public class InitDataApplicationProcessor implements ApplicationProcessor {
             docService.createNewDocLib(documentDocLib);
         }
     }
+
     private void initCompany() {
         List<OrgCompany> companyList = companyService.findCompanyList();
         if (companyList.isEmpty()) {

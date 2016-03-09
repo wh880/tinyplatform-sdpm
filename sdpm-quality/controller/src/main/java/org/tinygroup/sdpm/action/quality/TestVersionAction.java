@@ -108,8 +108,8 @@ public class TestVersionAction extends BaseController {
 
     @RequestMapping("/project/findPager")
     public String findPager(HttpServletResponse response, HttpServletRequest request,
-                            Integer start, Integer limit, @RequestParam(required = false,defaultValue = "testversionId")String order,
-                            @RequestParam(required = false,defaultValue = "desc")String ordertype, Model model) {
+                            Integer start, Integer limit, @RequestParam(required = false, defaultValue = "testversionId") String order,
+                            @RequestParam(required = false, defaultValue = "desc") String ordertype, Model model) {
         Integer projectId = projectOperate.getCurrentProjectId(request, response);
         if (projectId == null) {
             return redirectProjectForm();
@@ -190,7 +190,7 @@ public class TestVersionAction extends BaseController {
         QualityTestTask testTask = null;
         if (no != null) {
             String result = CookieUtils.getCookie(request, ProductUtils.COOKIE_PRODUCT_ID);
-            if(StringUtil.isBlank(result)){
+            if (StringUtil.isBlank(result)) {
                 return notFoundView();
             }
             Integer cookieProductId = Integer.parseInt(result);
@@ -230,7 +230,7 @@ public class TestVersionAction extends BaseController {
             run.setTaskId(testversionId);
             testRunService.addTestRun(run);
         }
-        if("3".equals(testTask.getTesttaskStatus())){
+        if ("3".equals(testTask.getTesttaskStatus())) {
             testTask.setTesttaskStatus("1");
         }
         Map<String, String> result = new HashMap<String, String>();

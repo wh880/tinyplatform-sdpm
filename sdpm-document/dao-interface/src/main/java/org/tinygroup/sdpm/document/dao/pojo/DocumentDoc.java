@@ -21,7 +21,7 @@ import java.util.Date;
 
 /**
  * 文档表
- *
+ * <p>
  * wendang
  */
 public class DocumentDoc implements Serializable {
@@ -40,109 +40,109 @@ public class DocumentDoc implements Serializable {
     private String docEditName;
     /**
      * 文档ID
-     *
+     * <p>
      * 文档ID，主键，唯一标示
      */
     private Integer docId;
     /**
      * 所属产品
-     *
+     * <p>
      * 所属产品，存放产品ID作为索引
      */
     private Integer docProduct;
     /**
      * 所属项目
-     *
+     * <p>
      * 所属项目，存储项目ID作为索引
      */
     private Integer docProject;
     /**
      * 文档库ID
-     *
+     * <p>
      * 文档库ID
      */
     private Integer docLibId;
     /**
      * 所属分类
-     *
+     * <p>
      * 所属分类
      */
     private Integer docModule;
     /**
      * 文档标题
-     *
+     * <p>
      * 文档标题
      */
     private String docTitle;
     /**
      * 摘要
-     *
+     * <p>
      * 摘要
      */
     private String docDigest;
     /**
      * 关键字
-     *
+     * <p>
      * 关键字
      */
     private String docKeywords;
     /**
      * 文档类型
-     *
+     * <p>
      * 文档类型
      */
     private String docType;
     /**
      * 文档正文
-     *
+     * <p>
      * 文档正文
      */
     private String docContent;
     /**
      * 文档url
-     *
+     * <p>
      * 文档url
      */
     private String docUrl;
     /**
      * 附件
-     *
+     * <p>
      * 放文档附件路径吧，标准字段类型根本没有存储二进制文件的类型。有点遗憾。
      */
     private String docAttach;
     /**
      * DOC查阅次数
-     *
+     * <p>
      * 查阅次数
      */
     private Integer docViews;
     /**
      * DOC由谁添加
-     *
+     * <p>
      * 由谁添加
      */
     private String docAddedBy;
     /**
      * DOC添加时间
-     *
+     * <p>
      * 添加时间
      */
     private Date docAddedDate;
     /**
      * 由谁编辑
-     *
+     * <p>
      * 由谁编辑
      */
     private String docEditedBy;
     /**
      * 文档编辑时间
-     *
+     * <p>
      * 编辑时间
      */
     private Date docEditedDate;
     /**
      * 文档删除标志
-     *
+     * <p>
      * 已删除
      */
     private String docDeleted;

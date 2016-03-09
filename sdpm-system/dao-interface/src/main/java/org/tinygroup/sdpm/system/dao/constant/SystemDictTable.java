@@ -21,7 +21,6 @@ import org.tinygroup.tinysqldsl.base.Table;
 
 /**
  * 数据字典
- *
  */
 public class SystemDictTable extends Table {
 
@@ -29,37 +28,31 @@ public class SystemDictTable extends Table {
 
     /**
      * 字典项ID
-     *
      */
     public final Column DICT_ID = new Column(this, "dict_id");
 
     /**
      * 字典key值
-     *
      */
     public final Column DICT_KEY = new Column(this, "dict_key");
 
     /**
      * 字典value值
-     *
      */
     public final Column DICT_VALUE = new Column(this, "dict_value");
 
     /**
      * 字典项序号
-     *
      */
     public final Column DICT_SORT = new Column(this, "dict_sort");
 
     /**
      * 模块ID
-     *
      */
     public final Column MODULE_ID = new Column(this, "module_id");
 
     /**
      * 已删除
-     *
      */
     public final Column DELETED = new Column(this, "deleted");
 

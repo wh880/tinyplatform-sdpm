@@ -23,11 +23,11 @@ import java.util.regex.Pattern;
  */
 @Component()
 public class ExportUtils {
-    private final  String REGXP_FOR_HTML = "<([^>]*)>"; // 过滤所有以<开头以>结尾的标签
+    private final String REGXP_FOR_HTML = "<([^>]*)>"; // 过滤所有以<开头以>结尾的标签
 
     private DocTemplateResolver docTemplateResolver = BeanContainerFactory.getBeanContainer(ExportUtils.class.getClassLoader()).getBean(DocTemplateResolverImpl.class);
     @Autowired
-    private  TemplateEngine docTemplateEngine = BeanContainerFactory.getBeanContainer(ExportUtils.class.getClassLoader()).getBean("docTemplateEngine");
+    private TemplateEngine docTemplateEngine = BeanContainerFactory.getBeanContainer(ExportUtils.class.getClassLoader()).getBean("docTemplateEngine");
 
     public void mergeTemplate(String type, TemplateContext context, HttpServletResponse response, String name) throws IOException, TemplateException {
         Calendar today = Calendar.getInstance();
@@ -55,7 +55,7 @@ public class ExportUtils {
         return sb.toString();
     }
 
-    private  String toUTF8(String s) {
+    private String toUTF8(String s) {
         StringBuffer sb = new StringBuffer();
         for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);

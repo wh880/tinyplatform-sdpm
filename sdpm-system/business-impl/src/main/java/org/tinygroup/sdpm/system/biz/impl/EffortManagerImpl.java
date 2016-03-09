@@ -103,10 +103,10 @@ public class EffortManagerImpl implements EffortManager {
 
     @Override
     public List<SystemEffort> findByUserAndDate(String userId, Date beginDate, Date endDate) {
-        DateFormat format=new SimpleDateFormat("yyyy-MM-dd");
-        String bTime=format.format(beginDate);
-        String eTime=format.format(endDate);
-        return systemEffortDao.findByUserAndDate(userId,bTime,eTime);
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        String bTime = format.format(beginDate);
+        String eTime = format.format(endDate);
+        return systemEffortDao.findByUserAndDate(userId, bTime, eTime);
     }
 
     @Override

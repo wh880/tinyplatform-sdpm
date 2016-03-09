@@ -123,10 +123,10 @@ public class SqlUtil {
         return isNum.matches();
     }
 
-    private static String processDate(String field){
-        if(field.contains("date")){
-            return "SUBSTR("+field+",1,10)";
-        }else{
+    private static String processDate(String field) {
+        if (field.contains("date")) {
+            return "SUBSTR(" + field + ",1,10)";
+        } else {
             return field;
         }
     }

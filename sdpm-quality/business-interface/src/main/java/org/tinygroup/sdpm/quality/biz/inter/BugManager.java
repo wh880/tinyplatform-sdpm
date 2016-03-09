@@ -11,6 +11,7 @@ import java.util.Map;
 public interface BugManager {
     /**
      * 根据主键ID查询
+     *
      * @param id
      * @return
      */
@@ -18,6 +19,7 @@ public interface BugManager {
 
     /**
      * 根据条件查询d
+     *
      * @param bug
      * @return
      */
@@ -25,12 +27,14 @@ public interface BugManager {
 
     /**
      * 分页查询
+     *
      * @return
      */
-    Pager<QualityBug> findPager(Integer start,Integer limit,String conditions,QualityBug bug,String sortName,boolean asc);
+    Pager<QualityBug> findPager(Integer start, Integer limit, String conditions, QualityBug bug, String sortName, boolean asc);
 
     /**
      * 提Bug
+     *
      * @param bug
      * @return
      */
@@ -38,12 +42,15 @@ public interface BugManager {
 
     /**
      * 修改
+     *
      * @param bug
      * @return
      */
     Integer update(QualityBug bug);
+
     /**
      * 批量编辑
+     *
      * @param bugs
      * @return
      */
@@ -51,6 +58,7 @@ public interface BugManager {
 
     /**
      * 批量删除
+     *
      * @param bugIds
      * @return
      */
@@ -58,13 +66,14 @@ public interface BugManager {
 
     /**
      * 删除
+     *
      * @return
      */
     Integer delete(Integer id);
 
-    Map<String,List<BugCount>> report(String code,Integer productId);
+    Map<String, List<BugCount>> report(String code, Integer productId);
 
-    Pager<QualityBug> queryStoryChangedBugs(Integer start,Integer limit,ConditionCarrier carrier,QualityBug bug,String sortName,boolean asc);
+    Pager<QualityBug> queryStoryChangedBugs(Integer start, Integer limit, ConditionCarrier carrier, QualityBug bug, String sortName, boolean asc);
 
     Pager<QualityBug> findBugListPager(Integer start, Integer limit, ConditionCarrier carrier, QualityBug bug, String sortName, boolean asc);
 

@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
-import org.tinygroup.logger.LogLevel;
 import org.tinygroup.logger.Logger;
 import org.tinygroup.logger.LoggerFactory;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
@@ -52,7 +51,7 @@ public class ProjectManagerImpl implements ProjectManager {
     }
 
     public Pager<Project> findPagerProjects(Integer start, Integer limit, String sortName, boolean asc, Integer... ids) {
-        if (ids == null||ids.length==0) return new Pager<Project>(0, 0, new ArrayList<Project>());
+        if (ids == null || ids.length == 0) return new Pager<Project>(0, 0, new ArrayList<Project>());
         if (StringUtil.isBlank(sortName)) {
             return projectDao.findPageWithStatistics(start, limit, new Project(), ids);
         } else {

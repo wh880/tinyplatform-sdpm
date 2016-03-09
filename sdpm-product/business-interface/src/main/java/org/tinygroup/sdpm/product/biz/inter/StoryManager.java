@@ -13,12 +13,15 @@ public interface StoryManager {
 
     /**
      * 添加需求
+     *
      * @param story
      * @return
      */
-    ProductStory add(ProductStory story,ProductStorySpec storySpec);
+    ProductStory add(ProductStory story, ProductStorySpec storySpec);
+
     /**
      * 根据需求Id删除
+     *
      * @param story
      * @return
      */
@@ -26,24 +29,31 @@ public interface StoryManager {
 
     /**
      * 编辑
+     *
      * @param story
      * @return
      */
     int update(ProductStory story);
+
     /**
      * 批量编辑
+     *
      * @param stories
      * @return
      */
     int[] updateBatch(List<ProductStory> stories);
+
     /**
      * 根据id批量删除
+     *
      * @param ids
      * @return
      */
-    int[]  deleteBatch(List<ProductStory> ids);
+    int[] deleteBatch(List<ProductStory> ids);
+
     /**
      * 根据需求ID查找
+     *
      * @param storyId
      * @return
      */
@@ -52,39 +62,49 @@ public interface StoryManager {
 
     /**
      * 根据多个id查找
+     *
      * @param storyId
      * @return
      */
-    List<ProductStory> findList(boolean withSpec,Integer... storyId);
+    List<ProductStory> findList(boolean withSpec, Integer... storyId);
+
     /**
      * 根据多个id条件查找
+     *
      * @param storyId
      * @return
      */
-    List<ProductStory> findList(boolean withSpec,ProductStory story,Integer... storyId);
+    List<ProductStory> findList(boolean withSpec, ProductStory story, Integer... storyId);
+
     /**
      * 根据对象查询
+     *
      * @param story
      * @return
      */
     List<ProductStory> findList(ProductStory story);
+
     /**
      * 根据对象查找（排序）
+     *
      * @param story
      * @return
      */
-    List<ProductStory> findList(ProductStory story,String order,String ordertype);
+    List<ProductStory> findList(ProductStory story, String order, String ordertype);
+
     /**
      * 分页查询（排序）
+     *
      * @param start
      * @param limit
      * @param story
      * @return
      */
-    Pager<ProductStory> findPagerRel(int start, int limit, ProductStory story, ConditionCarrier carrier,String columnName, boolean asc);
+    Pager<ProductStory> findPagerRel(int start, int limit, ProductStory story, ConditionCarrier carrier, String columnName, boolean asc);
 
     /**
      * 分页查询（排序）
+     *
      * @param start
      * @param limit
      * @param story
@@ -94,6 +114,7 @@ public interface StoryManager {
 
     /**
      * 产品需求数量分类
+     *
      * @param story
      * @return
      */
@@ -101,6 +122,7 @@ public interface StoryManager {
 
     /**
      * 模块需求数量分类
+     *
      * @param story
      * @return
      */
@@ -108,6 +130,7 @@ public interface StoryManager {
 
     /**
      * 计划需求数量分类
+     *
      * @param story
      * @return
      */
@@ -115,32 +138,35 @@ public interface StoryManager {
 
     /**
      * 其他状态需求数量分类
+     *
      * @param story
      * @return
      */
-    Map<String, List<StoryCount>> report(String fields,ProductStory story);
+    Map<String, List<StoryCount>> report(String fields, ProductStory story);
 
     /**
      * 计算状态
+     *
      * @param productId
      * @param status
      * @return
      */
-    int countStatus(int productId,int status);
+    int countStatus(int productId, int status);
 
     List<ProductStory> findProductNameByStoryId(Integer storyId);
 
-    Pager<ProductStory> findProjectLinkedStory(int start, int limit,ProductStory story, ConditionCarrier carrier, String columnName, boolean asc);
+    Pager<ProductStory> findProjectLinkedStory(int start, int limit, ProductStory story, ConditionCarrier carrier, String columnName, boolean asc);
 
     Pager<ProductStory> findStoryByCondition(int start, int limit, ProductStory story, ConditionCarrier carrier, final String columnName, boolean asc);
 
     /**
      * 根据输入名称查询
+     *
      * @param condition
      * @param productId
      * @return
      */
-    List<ProductStory> storyInCondition(String condition, Integer limit, Integer productId,Integer ...ids);
+    List<ProductStory> storyInCondition(String condition, Integer limit, Integer productId, Integer... ids);
 
     ProductStory findStoryByStoryId(Integer storyId);
 }

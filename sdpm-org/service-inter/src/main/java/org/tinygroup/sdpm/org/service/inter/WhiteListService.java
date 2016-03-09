@@ -13,7 +13,7 @@ public interface WhiteListService {
     /**
      * 批量添加白名单信息
      */
-    int[] addWhiteList(String firstUserAccount,List<String> secondUserAccountList);
+    int[] addWhiteList(String firstUserAccount, List<String> secondUserAccountList);
 
     /**
      * 查找该用户的相关白名单用户
@@ -23,19 +23,20 @@ public interface WhiteListService {
     /**
      * 单个添加白名单信息
      */
-    OrgDiaryWhiteList addOneWhite(String firstAccount,String secondAccount);
+    OrgDiaryWhiteList addOneWhite(String firstAccount, String secondAccount);
 
     /**
      * 查看该对人是否存在于白名单中
      */
-    OrgDiaryWhiteList findDiaryWhiteByAccounts(String firstAccount,String secondAccount);
+    OrgDiaryWhiteList findDiaryWhiteByAccounts(String firstAccount, String secondAccount);
 
     /**
      * 删除白名单关系
+     *
      * @param firstAccount
      * @param secondAccout
      * @return
      */
-    Integer deleteDiaryWhiteList(String firstAccount,String secondAccout);
+    Integer deleteDiaryWhiteList(String firstAccount, String secondAccout);
 
 }

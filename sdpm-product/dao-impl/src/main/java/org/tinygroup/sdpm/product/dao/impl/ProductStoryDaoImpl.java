@@ -853,7 +853,7 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
     }
 
 	/*
-	select system_module.module_name as name,
+    select system_module.module_name as name,
 	count(product_story.story_id) as number,
 	format(count(product_story.story_id)/(select count(story_id) from product_story),2) as percent
  	from product_story left join system_module

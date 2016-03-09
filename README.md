@@ -3,7 +3,7 @@
 
 本项目参考市面上各类项目管理软件，对各类产品中现有功能模块进行优化，提升用户体验，打造以Java为技术体系的项目管理工具！
 #数据库设置
-数据库的配置文件在\sdpm-common\base-dao\src\main\resources中的jdbc.properties
+数据库的配置文件在\sdpm-web\src\main\resources中的jdbc.properties
 #首次运行
 首先在工程根路径使用命令install
 ```

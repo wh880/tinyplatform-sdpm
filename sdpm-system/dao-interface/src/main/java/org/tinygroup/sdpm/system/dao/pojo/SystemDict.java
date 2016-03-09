@@ -21,7 +21,6 @@ import java.io.Serializable;
 
 /**
  * 数据字典
- *
  */
 public class SystemDict implements Serializable {
     public static int DELETE_YES = 1;
@@ -29,37 +28,31 @@ public class SystemDict implements Serializable {
 
     /**
      * 字典项ID
-     *
      */
     private Integer dictId;
 
     /**
      * 字典key值
-     *
      */
     private String dictKey;
 
     /**
      * 字典value值
-     *
      */
     private String dictValue;
 
     /**
      * 字典项序号
-     *
      */
     private Integer dictSort;
 
     /**
      * 模块ID
-     *
      */
     private Integer moduleId;
 
     /**
      * 已删除
-     *
      */
     private Integer deleted;
 
