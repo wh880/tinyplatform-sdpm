@@ -81,12 +81,13 @@ public class ProjectStoryAction extends BaseController {
 
     @RequiresPermissions("pro-demand-relation")
     @RequestMapping("/preLinkStory")
-    public String preLinkStory() {
+    public String preLinkStory(boolean notInProjectStory, Model model) {
+        model.addAttribute("notInProjectStory", notInProjectStory);
         return "project/operate/demand/relation/relateDemand.page";
     }
 
     @RequestMapping("/findStory")
-    public String findStory(Model model, Integer start, Integer limit, String order, String ordertype,
+    public String findStory(Model model, Integer start, Integer limit, String order, String ordertype, boolean notInProjectStory,
                             HttpServletRequest request, HttpServletResponse response) {
         Integer projectId = projectOperate.getCurrentProjectId(request, response);
         if (projectId == null) {
@@ -98,7 +99,7 @@ public class ProjectStoryAction extends BaseController {
         if (StringUtil.isBlank(ordertype)) {
             ordertype = "desc";
         }
-        Pager<ProductStory> storyList = projectStoryService.findStoryToLink(projectId, start, limit, order, ordertype);
+        Pager<ProductStory> storyList = projectStoryService.findStoryToLink(projectId, start, limit, order, ordertype, notInProjectStory);
         model.addAttribute("storyList", storyList);
         return "project/data/demand/relation/relateDemandTableData.pagelet";
     }

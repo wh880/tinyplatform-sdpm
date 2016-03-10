@@ -41,7 +41,7 @@ public interface ProjectStoryManager {
      * @param orderType
      * @return
      */
-    Pager<ProductStory> findStoryToLink(Integer projectId, Integer start, Integer limit, String order, String orderType);
+    Pager<ProductStory> findStoryToLink(Integer projectId, Integer start, Integer limit, String order, String orderType, boolean isNotInProjectStory);
 
     /**
      * 根据projectId查找关联产品
