@@ -3,7 +3,7 @@
     <application-properties>
         <file path="/web.properties"></file>
         <property name="BASE_PACKAGE" value="org.tinygroup"/>
-        <property name="DEBUG_MODE" value="false"/>
+        <property name="DEBUG_MODE" value="true"/>
         <property name="TINY_THEME" value="default"/>
         <property name="UPLOAD_ACTION_URL" value="/ajaxUploadImage"/>
         <!--缓存配置-->

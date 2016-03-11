@@ -6,8 +6,14 @@
             </span>
         <span class="r">
             #foreach(m:menuService.getScopeMenus("pro-demandmenu-op"))
-                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}"
+                #if(m.id == "pro-demand-relation")
+                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?notInProjectStory=true"
+                       title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
+                #else
+                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}"
                    title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
+                #end
+
             #end
         </span>
             #div(divClass="clearfix")
