@@ -1,7 +1,6 @@
 #macro tinyTableItemRemove(doActionUrl itemId)
 <a href="javascript:void(0);" class="Item-Remove" data-url="${doActionUrl}" data-id="${itemId}">#bodyContent</a>
 #end
-
 #setTinyItemCount(buildPager.totalCount)
 #foreach(b : buildPager.getRecords())
     #@tr()
