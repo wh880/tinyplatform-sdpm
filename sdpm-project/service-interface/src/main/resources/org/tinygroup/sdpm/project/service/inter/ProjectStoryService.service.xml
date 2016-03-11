@@ -62,7 +62,8 @@
         <service-parameter name="start" type="java.lang.Integer" required="false" is-array="false"/>
         <service-parameter name="limit" type="java.lang.Integer" required="false" is-array="false"/>
         <service-parameter name="order" type="java.lang.String" required="false" is-array="false"/>
-        <service-parameter name="ordertype" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="orderType" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="isNotInProjectStory" type="java.lang.Boolean" required="false" is-array="false"/>
       </service-parameters>
       <service-result name="findStoryToLinkResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager"/>
     </service-method>
