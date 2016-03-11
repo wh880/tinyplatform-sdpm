@@ -8,7 +8,7 @@
         #@td()<input type="checkbox" value="${b?.buildId}" name="idCheck">#end
         #@td()${b?.buildId}#end
         #@td()${b?.productName}#end
-        #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/project/build/productalbug?notInProjectStory=true&buildId=${b?.buildId}">${b?.buildName}#end
+        #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/project/build/productalbug?buildId=${b?.buildId}">${b?.buildName}#end
         #@td()${b?.buildScmPath}</a>#end
         #@td()${b?.buildFilePath}#end
         #@td("nowrap")${formatDate(b?.buildDate,"yyyy-MM-dd")}#end
@@ -16,7 +16,7 @@
         #@td("nowrap")
             #set(m=menuService.getMenu("pro-demand-relation"))
             #if(m)
-            <a class="openTestTask testTaskJump" value="${b?.buildProduct}" href="${TINY_CONTEXT_PATH+adminPath}${m.href}?buildId=${b?.buildId}&projectId=${b?.buildProject}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+            <a class="openTestTask testTaskJump" value="${b?.buildProduct}" href="${TINY_CONTEXT_PATH+adminPath}${m.href}?notInProjectStory=true&buildId=${b?.buildId}&projectId=${b?.buildProject}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
             #end
             #foreach(m:menuService.getScopeMenus("pro-version-op"))
                 #if(m.id != "pro-version-delete")
