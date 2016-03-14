@@ -25,8 +25,8 @@
 					<a href="${TINY_CONTEXT_PATH+adminPath}/org/diary/show" value="sub" name="diaryChoose" ${choice=="all"?'class="active_btn"':""}>我的下属</a>
                      <a href="${TINY_CONTEXT_PATH+adminPath}/org/diary/show/white?choose=1" value="whiteList"
                         name="diaryChoose" ${choice=="today"?'class="active_btn"':""}>我的白名单</a>
-                     <a href="${TINY_CONTEXT_PATH+adminPath}/org/diary/form" value="whiteList"
-                        name="diarySubmit" ${choice=="today"?'class="active_btn"':""}>提交周报</a>
+##                     <a href="${TINY_CONTEXT_PATH+adminPath}/org/diary/form" value="whiteList"
+##                        name="diarySubmit" ${choice=="today"?'class="active_btn"':""}>提交周报</a>
 				</span>
 </div>
 #end
