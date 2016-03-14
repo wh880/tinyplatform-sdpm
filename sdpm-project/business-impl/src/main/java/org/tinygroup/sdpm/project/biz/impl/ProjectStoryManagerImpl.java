@@ -36,12 +36,12 @@ public class ProjectStoryManagerImpl implements ProjectStoryManager {
         return projectStoryDao.batchUpdate(projectStoryList);
     }
 
-    public Pager<ProductStory> findStoryToLink(Integer projectId, Integer start, Integer limit, String order, String oredertype) {
+    public Pager<ProductStory> findStoryToLink(Integer projectId, Integer start, Integer limit, String order, String orderType, boolean isNotInProjectStory) {
         if (order == null) {
-            return projectStoryDao.findStory(projectId, start, limit);
+            return projectStoryDao.findStory(projectId, start, limit, isNotInProjectStory);
         } else {
-            OrderBy orderBy = new OrderBy(NameUtil.resolveNameDesc(order), "asc".equals(oredertype) ? true : false);
-            return projectStoryDao.findStory(projectId, start, limit, orderBy);
+            OrderBy orderBy = new OrderBy(NameUtil.resolveNameDesc(order), "asc".equals(orderType) ? true : false);
+            return projectStoryDao.findStory(projectId, start, limit, isNotInProjectStory, orderBy);
         }
     }
 
