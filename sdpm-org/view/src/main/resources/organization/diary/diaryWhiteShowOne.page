@@ -44,6 +44,8 @@
     #@toggleRight()
         #@aExtendButton("btn radius btn-primary btn-sm" TINY_CONTEXT_PATH+adminPath+
             "/org/diary/show/white")返回周报总览#end
+        #@aExtendButton("btn radius btn-primary btn-sm" TINY_CONTEXT_PATH+adminPath+
+            "/org/diary/form")提交周报#end
     <center><h1>${userAccount} 的周报列表</h1></center>
     <div class="tweet_list diarylist">
         <ul class="diarylist-detail" id="diarylist-detail">
