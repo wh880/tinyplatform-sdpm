@@ -1,6 +1,3 @@
-/**
- * Copyright &copy; 2012-2014 <a href="https://github.com/thinkgem/jeesite">JeeSite</a> All rights reserved.
- */
 package org.tinygroup.sdpm.security.filter;
 
 import org.apache.shiro.authc.AuthenticationException;
