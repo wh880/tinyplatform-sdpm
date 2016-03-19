@@ -88,13 +88,13 @@ public class ProjectBuildAction extends BaseController {
 
     @RequestMapping("/find")
     public String find(Model model, Integer start, Integer limit, @RequestParam(required = false, defaultValue = "build_id") String order,
-                       @RequestParam(required = false, defaultValue = "desc") String ordertype,
+                       @RequestParam(required = false, defaultValue = "desc") String orderType,
                        HttpServletRequest request, HttpServletResponse response) {
         Integer projectId = projectOperate.getCurrentProjectId(request, response);
         if (projectId == null) {
             return redirectProjectForm();
         }
-        boolean asc = "asc".equals(ordertype) ? true : false;
+        boolean asc = "asc".equals(orderType) ? true : false;
         Pager<ProjectBuild> pager = buildService.findBuildPagerWithOrder(projectId, start, limit, order, asc);
         model.addAttribute("buildPager", pager);
         return "project/data/build/tableData.pagelet";

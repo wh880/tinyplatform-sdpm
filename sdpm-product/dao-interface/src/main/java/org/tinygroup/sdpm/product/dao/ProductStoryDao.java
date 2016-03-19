@@ -29,7 +29,7 @@ import java.util.List;
 
 public interface ProductStoryDao extends BaseDao<ProductStory, Integer> {
 
-    Pager<ProductStory> complexQuery(int start, int limit, ProductStory productStory, final Condition condition, final OrderBy... orderBys);
+    Pager<ProductStory> complexQuery(int start, int limit, ProductStory productStory,final Boolean ignoreDelete, final Condition condition, final OrderBy... orderBys);
 
     Pager<ProductStory> complexQueryRel(int start, int limit, ProductStory productStory, final Condition condition, final OrderBy... orderBys);
 
@@ -69,6 +69,7 @@ public interface ProductStoryDao extends BaseDao<ProductStory, Integer> {
 
     /**
      * 根据输入名称查询
+     *
      * @param condition
      * @param productId
      * @return

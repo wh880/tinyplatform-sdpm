@@ -1,7 +1,6 @@
 #macro tinyTableItemRemove(doActionUrl itemId)
 <a href="javascript:void(0);" class="Item-Remove" data-url="${doActionUrl}" data-id="${itemId}">#bodyContent</a>
 #end
-
 #setTinyItemCount(buildPager.totalCount)
 #foreach(b : buildPager.getRecords())
     #@tr()
@@ -16,11 +15,14 @@
         #@td("nowrap")
             #set(m=menuService.getMenu("pro-demand-relation"))
             #if(m)
-            <a class="openTestTask testTaskJump" value="${b?.buildProduct}" href="${TINY_CONTEXT_PATH+adminPath}${m.href}?buildId=${b?.buildId}&projectId=${b?.buildProject}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+            <a class="openTestTask testTaskJump" value="${b?.buildProduct}" href="${TINY_CONTEXT_PATH+adminPath}/project/build/forword/alnoReq?buildId=${b?.buildId}" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
             #end
             #foreach(m:menuService.getScopeMenus("pro-version-op"))
-                #if(m.id != "pro-version-delete")
-                <a class="buildJump" value="${b?.buildProject}" href="${TINY_CONTEXT_PATH+adminPath}${m.href}?buildId=${b?.buildId}&projectId=${b?.buildProject}&productId=${b?.buildProduct}"
+                #if(m.id == "pro-version-delete")
+                <a href="javascript:void(0);" class="build-remove" data-url="${TINY_CONTEXT_PATH+adminPath+m.href}" data-id="${b?.buildId}"><i class="${m.icon}" title=${m.name}></i></a>
+                #elseif(m.id == "pro-version-look")
+
+                <a class="buildJump" value="${b?.buildProject}" href="${TINY_CONTEXT_PATH+adminPath}/project/build/forword/alnoBug?buildId=${b?.buildId}"
                    title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
                 #else
                 <a href="javascript:void(0);" class="build-remove" data-url="${TINY_CONTEXT_PATH+adminPath+m.href}" data-id="${b?.buildId}"><i class="${m.icon}" title=${m.name}></i></a>

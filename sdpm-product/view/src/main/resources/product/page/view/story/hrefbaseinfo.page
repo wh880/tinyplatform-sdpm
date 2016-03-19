@@ -84,7 +84,7 @@
             #end
             #@tr()
                 #@td()关闭原因#end
-                #@td()${story?.storyClosedReason}#end
+                #@td()${getDict("proCloseReason",story?.storyClosedReason)}#end
             #end
             #@tr()
                 #@td()最后修改#end

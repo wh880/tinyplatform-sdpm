@@ -41,10 +41,10 @@
             </list>
         </property>
         <property name="cacheManager" ref="shiroCacheManager"/>
-        <property name="sessionManager" ref="sessionManager"/>
+        <property name="sessionManager" ref="containerSessionManager"/>
     </bean>
 
-
+    <bean id="containerSessionManager" class="org.apache.shiro.web.session.mgt.ServletContainerSessionManager"/>
     <!-- 自定义会话管理配置 -->
     <!--<bean id="sessionManager" class="com.inhdu.career.common.security.shiro.session.SessionManager">-->
     <!--<property name="sessionDAO" ref="sessionDAO"/>-->

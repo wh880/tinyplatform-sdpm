@@ -90,10 +90,11 @@ public interface ProjectStoryService {
      * @param start
      * @param limit
      * @param order
-     * @param ordertype
+     * @param orderType
+     * @param isNotInProjectStory
      * @return
      */
-    Pager<ProductStory> findStoryToLink(Integer projectId, Integer start, Integer limit, String order, String ordertype);
+    Pager<ProductStory> findStoryToLink(Integer projectId, Integer start, Integer limit, String order, String orderType, Boolean isNotInProjectStory);
 
     /**
      * 查询所有需求
