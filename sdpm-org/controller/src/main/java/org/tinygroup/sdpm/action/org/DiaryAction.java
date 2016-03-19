@@ -583,6 +583,11 @@ public class DiaryAction extends BaseController {
                 map.put(diaryId, orgDiaryDetails);
             }
             orgDiaryDetails = diaryService.findDetailListByDiaryId(diaryId);
+            if (CollectionUtil.isEmpty(orgDiaryDetails)){
+                orgDiaryAndYUser.setDetailCountStatus(0);
+            }else{
+                orgDiaryAndYUser.setDetailCountStatus(1);
+            }
             for (int i = 0; i < orgDiaryDetails.size(); i++) {
                 OrgDiaryDetail orgDetail = orgDiaryDetails.get(i);
                 orgDetail.setEffortWeek(DateUtils.getDateWeek(orgDetail.getOrgDetailDate()));
@@ -599,6 +604,7 @@ public class DiaryAction extends BaseController {
             for (Integer num : list1) {
                 orgDiaryDetails.get(num).setEffortWeek(null);
             }
+
             map.put(diaryId, orgDiaryDetails);
         }
         String realName = user.getOrgUserRealName();

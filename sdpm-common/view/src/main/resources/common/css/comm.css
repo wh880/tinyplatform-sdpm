@@ -566,7 +566,7 @@ table.table.filelist-table{border:#ddd 1px solid;}
 .diary-detail .diary-report .portrait{font-size:18px;padding-top:10px;}
 .diary-detail .diary-info{display:inline-block;min-height:38px;position: relative;  width: 65%; font-size:15px;}
 
-.diary-detail-list{color:#999;background:#fafafb ;padding:20px;padding-bottom:10px;border-radius: 5px}
+.diary-detail-list{background:#fafafb ;padding:20px;padding-bottom:10px;border-radius: 5px}
 .committed{margin-bottom:20px;position:relative;}
 
 .diary-detail .diary-detail-list ol {
