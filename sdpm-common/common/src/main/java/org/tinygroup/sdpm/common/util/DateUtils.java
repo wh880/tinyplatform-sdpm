@@ -529,4 +529,20 @@ public class DateUtils extends org.apache.commons.lang.time.DateUtils {
         return endDate;
     }
 
+    /**
+     * 获取某年某周的下一周的第一天
+     *
+     * @param y
+     * @param w
+     * @return
+     */
+    public static Date getEndDateAWeek(Integer y, Integer w) {
+        Date beginDate = getBeginDate(y, w);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(beginDate);
+        calendar.add(Calendar.DATE, 7);
+        Date endDate = calendar.getTime();
+        return endDate;
+    }
+
 }

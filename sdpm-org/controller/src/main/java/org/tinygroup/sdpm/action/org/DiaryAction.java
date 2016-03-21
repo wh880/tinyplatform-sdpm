@@ -164,7 +164,7 @@ public class DiaryAction extends BaseController {
             orgDiary.setOrgDiaryWeek(week);
             orgDiary.setOrgDiaryYear(year);
             Date beginDate = DateUtils.getBeginDate(year, week);
-            Date endDate = DateUtils.getEndDate(year, week);
+            Date endDate = DateUtils.getEndDateAWeek(year, week);
             orgDiary.setOrgDiaryBeginDate(beginDate);
             orgDiary.setOrgDiaryEndDate(endDate);
             //进行添加周报以及添加周报详情的操作
@@ -368,7 +368,7 @@ public class DiaryAction extends BaseController {
         if (orgDiary != null) {
             List<OrgDiaryDetail> list = diaryService.findDetailListByDiaryId(orgDiary.getOrgDiaryId());
             Date beginDate = DateUtils.getBeginDate(year, week);
-            Date endDate = DateUtils.getEndDate(year, week);
+            Date endDate = DateUtils.getEndDateAWeek(year, week);
             List<SystemAction> actionList = actionService.findDiaryActionListByUserAndDate(userId, beginDate, endDate);
             model.addAttribute("list", list);
             model.addAttribute("efforts", actionList);
@@ -446,7 +446,7 @@ public class DiaryAction extends BaseController {
         OrgDiary orgDiary = diaryService.findDiaryByUserLatest(UserUtils.getUserId(), year, week);
         model.addAttribute("orgDiary", orgDiary);
         Date bDate = DateUtils.getBeginDate(year, week);
-        Date eDate = DateUtils.getEndDate(year, week);
+        Date eDate = DateUtils.getEndDateAWeek(year, week);
         OrgUser user = userUtils.getUser();
         List<SystemAction> actionList = actionService.findDiaryActionListByUserAndDate(user.getOrgUserId(), bDate, eDate);
         Collections.sort(actionList);
@@ -583,9 +583,9 @@ public class DiaryAction extends BaseController {
                 map.put(diaryId, orgDiaryDetails);
             }
             orgDiaryDetails = diaryService.findDetailListByDiaryId(diaryId);
-            if (CollectionUtil.isEmpty(orgDiaryDetails)){
+            if (CollectionUtil.isEmpty(orgDiaryDetails)) {
                 orgDiaryAndYUser.setDetailCountStatus(0);
-            }else{
+            } else {
                 orgDiaryAndYUser.setDetailCountStatus(1);
             }
             for (int i = 0; i < orgDiaryDetails.size(); i++) {
