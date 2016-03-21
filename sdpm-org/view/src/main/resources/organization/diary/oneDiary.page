@@ -45,7 +45,7 @@
         #elseif(var?.actionAction=="opened")
             创建
         #elseif(var?.actionAction=="closed")
-            创建
+            关闭
         #elseif(var?.actionAction=="changed")
             变更
         #elseif(var?.actionAction=="edited")
@@ -59,7 +59,18 @@
         #elseif(var?.actionAction=="created")
             创建
         #end
-                            ${var?.actionObjectType}---${var?.objectName}
+                            #if(var?.actionObjectType=="bug")
+                                bug
+                            #elseif(var?.actionObjectType=="task")
+                                任务
+                            #elseif(var?.actionObjectType=="story")
+                                需求
+                            #elseif(var?.actionObjectType=="case")
+                                用例
+                            #elseif(var?.actionObjectType=="release")
+                                发布
+                            #end
+                            ---${var?.objectName}
                     <span>${var?.actionObjectType}_ID：${var?.actionObjectId}</span></span>
                         </p>
                     #end
@@ -75,7 +86,7 @@
         #elseif(var?.actionAction=="opened")
             创建
         #elseif(var?.actionAction=="closed")
-            创建
+            关闭
         #elseif(var?.actionAction=="changed")
             变更
         #elseif(var?.actionAction=="edited")
@@ -89,7 +100,18 @@
         #elseif(var?.actionAction=="created")
             创建
         #end
-                            ${var?.actionObjectType}---${var?.objectName}
+                            #if(var?.actionObjectType=="bug")
+                                bug
+                            #elseif(var?.actionObjectType=="task")
+                                任务
+                            #elseif(var?.actionObjectType=="story")
+                                需求
+                            #elseif(var?.actionObjectType=="case")
+                                用例
+                            #elseif(var?.actionObjectType=="release")
+                                发布
+                            #end
+                            ---${var?.objectName}
                     <span>${var?.actionObjectType}_ID：${var?.actionObjectId}</span></span>
                         </p>
                     #end
