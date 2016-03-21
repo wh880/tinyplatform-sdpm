@@ -443,7 +443,7 @@ public class SystemActionDaoImpl extends TinyDslDaoSupport implements SystemActi
                         SYSTEM_ACTIONTABLE.ACTION_OBJECT_ID.eq(PROJECT_TASKTABLE.TASK_ID),
                         SYSTEM_ACTIONTABLE.ACTION_OBJECT_TYPE.eq("task"),
                         SYSTEM_ACTIONTABLE.ACTION_ACTOR.eq(ORG_USERTABLE.ORG_USER_ID),
-                        SYSTEM_ACTIONTABLE.ACTION_ACTION.in("finished", "opened"),
+                        SYSTEM_ACTIONTABLE.ACTION_ACTION.in("finished", "opened", "created"),
                         ORG_USERTABLE.ORG_USER_ID.eq(userId),
                         SYSTEM_ACTIONTABLE.ACTION_DATE.between(beginDate, endDate)
                 )),

@@ -106,6 +106,8 @@ public class DiaryAction extends BaseController {
                         buffer.append(" 执行" + getObjectTypeName(objectType) + "：" + systemAction.getObjectName());
                     } else if ("edited".equals(systemAction.getActionAction())) {
                         buffer.append(" 编辑" + getObjectTypeName(objectType) + "：" + systemAction.getObjectName());
+                    } else if ("created".equals(systemAction.getActionAction())) {
+                        buffer.append(" 创建" + getObjectTypeName(objectType) + "：" + systemAction.getObjectName());
                     }
                     orgDiaryDetail.setOrgDetailContent(buffer.substring(0));
                     orgDiaryDetail.setOrgDetailDate(systemAction.getActionDate());
@@ -150,6 +152,8 @@ public class DiaryAction extends BaseController {
                         buffer.append(" 执行" + getObjectTypeName(objectType) + "：" + title);
                     } else if ("edited".equals(systemAction.getActionAction())) {
                         buffer.append(" 编辑" + getObjectTypeName(objectType) + "：" + title);
+                    } else if ("created".equals(systemAction.getActionAction())) {
+                        buffer.append(" 创建" + getObjectTypeName(objectType) + "：" + title);
                     }
                     orgDiaryDetail.setOrgDetailContent(buffer.substring(0));
                     orgDiaryDetail.setOrgDetailDate(systemAction.getActionDate());
