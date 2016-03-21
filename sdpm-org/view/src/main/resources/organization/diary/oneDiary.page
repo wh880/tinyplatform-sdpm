@@ -40,36 +40,7 @@
                             <input type="checkbox" id=${var?.actionId} value=${var?.actionId}
                                    name="idCheck" checked="checked"
                             > <span class="tocommittime">${var?.actionWeekDay}:${var?.actorName} </span><span>
-        #if(var?.actionAction=="finished")
-            完成
-        #elseif(var?.actionAction=="opened")
-            创建
-        #elseif(var?.actionAction=="closed")
-            关闭
-        #elseif(var?.actionAction=="changed")
-            变更
-        #elseif(var?.actionAction=="edited")
-            编辑
-        #elseif(var?.actionAction=="resolved")
-            解决
-        #elseif(var?.actionAction=="run")
-            执行
-        #elseif(var?.actionAction=="reviewed")
-            评审
-        #elseif(var?.actionAction=="created")
-            创建
-        #end
-                            #if(var?.actionObjectType=="bug")
-                                bug
-                            #elseif(var?.actionObjectType=="task")
-                                任务
-                            #elseif(var?.actionObjectType=="story")
-                                需求
-                            #elseif(var?.actionObjectType=="case")
-                                用例
-                            #elseif(var?.actionObjectType=="release")
-                                发布
-                            #end
+                            #if(var?.actionAction=="finished")完成#elseif(var?.actionAction=="opened")创建#elseif(var?.actionAction=="closed")关闭#elseif(var?.actionAction=="changed")变更#elseif(var?.actionAction=="edited")编辑#elseif(var?.actionAction=="resolved")解决#elseif(var?.actionAction=="run")执行#elseif(var?.actionAction=="reviewed")评审#elseif(var?.actionAction=="created")创建#end#if(var?.actionObjectType=="bug")bug#elseif(var?.actionObjectType=="task")任务#elseif(var?.actionObjectType=="story")需求#elseif(var?.actionObjectType=="case")用例#elseif(var?.actionObjectType=="release")发布#end
                             ---${var?.objectName}
                     <span>${var?.actionObjectType}_ID：${var?.actionObjectId}</span></span>
                         </p>
@@ -81,36 +52,7 @@
                                    name="idCheck" #foreach(var1:details) #if(var1?.actionId==var?.actionId)
                                    checked="checked"
                             #end#end> <span class="tocommittime">${var?.actionWeekDay}:${var?.actorName} </span><span>
-        #if(var?.actionAction=="finished")
-            完成
-        #elseif(var?.actionAction=="opened")
-            创建
-        #elseif(var?.actionAction=="closed")
-            关闭
-        #elseif(var?.actionAction=="changed")
-            变更
-        #elseif(var?.actionAction=="edited")
-            编辑
-        #elseif(var?.actionAction=="resolved")
-            解决
-        #elseif(var?.actionAction=="run")
-            执行
-        #elseif(var?.actionAction=="reviewed")
-            评审
-        #elseif(var?.actionAction=="created")
-            创建
-        #end
-                            #if(var?.actionObjectType=="bug")
-                                bug
-                            #elseif(var?.actionObjectType=="task")
-                                任务
-                            #elseif(var?.actionObjectType=="story")
-                                需求
-                            #elseif(var?.actionObjectType=="case")
-                                用例
-                            #elseif(var?.actionObjectType=="release")
-                                发布
-                            #end
+                        #if(var?.actionAction=="finished")完成#elseif(var?.actionAction=="opened")创建#elseif(var?.actionAction=="closed")关闭#elseif(var?.actionAction=="changed")变更#elseif(var?.actionAction=="edited")编辑#elseif(var?.actionAction=="resolved")解决#elseif(var?.actionAction=="run")执行#elseif(var?.actionAction=="reviewed")评审#elseif(var?.actionAction=="created")创建#end#if(var?.actionObjectType=="bug")bug#elseif(var?.actionObjectType=="task")任务#elseif(var?.actionObjectType=="story")需求#elseif(var?.actionObjectType=="case")用例#elseif(var?.actionObjectType=="release")发布#end
                             ---${var?.objectName}
                     <span>${var?.actionObjectType}_ID：${var?.actionObjectId}</span></span>
                         </p>
