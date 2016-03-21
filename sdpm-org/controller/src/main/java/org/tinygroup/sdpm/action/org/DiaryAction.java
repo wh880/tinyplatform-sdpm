@@ -188,6 +188,8 @@ public class DiaryAction extends BaseController {
             return "用例";
         } else if ("release".equals(objectType)) {
             return "发布";
+        }else if ("doc".equals(objectType)) {
+            return "文档";
         }
         return objectType;
     }
@@ -204,6 +206,7 @@ public class DiaryAction extends BaseController {
         List<SystemAction> taskList = new ArrayList<SystemAction>();
         List<SystemAction> caseList = new ArrayList<SystemAction>();
         List<SystemAction> releaseList = new ArrayList<SystemAction>();
+        List<SystemAction> docList = new ArrayList<SystemAction>();
         for (SystemAction systemAction : actionList) {
             if ("bug".equals(systemAction.getActionObjectType())) {
                 bugList.add(systemAction);
@@ -215,9 +218,11 @@ public class DiaryAction extends BaseController {
                 caseList.add(systemAction);
             } else if ("release".equals(systemAction.getActionObjectType())) {
                 releaseList.add(systemAction);
+            } else if ("doc".equals(systemAction.getActionObjectType())) {
+                docList.add(systemAction);
             }
         }
-        return actionService.findActionListByTypeList(bugList, storyList, taskList, caseList, releaseList);
+        return actionService.findActionListByTypeList(bugList, storyList, taskList, caseList, releaseList,docList);
     }
     /**
      * 编辑修改周报

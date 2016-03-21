@@ -116,13 +116,14 @@ public class ActionManagerImpl implements ActionManager {
     }
 
     @Override
-    public List<SystemAction> findActionListByTypeList(List<SystemAction> bugs, List<SystemAction> stories, List<SystemAction> tasks, List<SystemAction> cases, List<SystemAction> releases) {
+    public List<SystemAction> findActionListByTypeList(List<SystemAction> bugs, List<SystemAction> stories, List<SystemAction> tasks, List<SystemAction> cases, List<SystemAction> releases, List<SystemAction> docs) {
         List<SystemAction> list = new ArrayList<SystemAction>();
         List<SystemAction> bugList = null;
         List<SystemAction> storiesList = null;
         List<SystemAction> taskList = null;
         List<SystemAction> caseList = null;
         List<SystemAction> releaseList = null;
+        List<SystemAction> docList = null;
         if (!CollectionUtil.isEmpty(bugs)) {
             List<Integer> temp = new ArrayList<Integer>();
             for (SystemAction systemAction : bugs) {
@@ -162,6 +163,14 @@ public class ActionManagerImpl implements ActionManager {
             }
             taskList = systemActionDao.findTaskByTaskList(temp);
             list.addAll(taskList);
+        }
+        if (!CollectionUtil.isEmpty(docs)) {
+            List<Integer> temp = new ArrayList<Integer>();
+            for (SystemAction systemAction : docs) {
+                temp.add(systemAction.getActionId());
+            }
+            docList = systemActionDao.findDocByCaseList(temp);
+            list.addAll(docList);
         }
         return list;
     }

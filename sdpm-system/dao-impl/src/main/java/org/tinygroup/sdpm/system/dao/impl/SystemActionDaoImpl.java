@@ -37,6 +37,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static org.tinygroup.sdpm.document.dao.constant.DocumentDocTable.DOCUMENT_DOCTABLE;
 import static org.tinygroup.sdpm.org.dao.constant.OrgUserTable.ORG_USERTABLE;
 import static org.tinygroup.sdpm.product.dao.constant.ProductReleaseTable.PRODUCT_RELEASETABLE;
 import static org.tinygroup.sdpm.product.dao.constant.ProductStoryTable.PRODUCT_STORYTABLE;
@@ -475,6 +476,16 @@ public class SystemActionDaoImpl extends TinyDslDaoSupport implements SystemActi
                         SYSTEM_ACTIONTABLE.ACTION_ACTION.in("opened"),
                         ORG_USERTABLE.ORG_USER_ID.eq(userId),
                         SYSTEM_ACTIONTABLE.ACTION_DATE.between(beginDate, endDate)
+                )),
+                select(
+                        SYSTEM_ACTIONTABLE.ALL, DOCUMENT_DOCTABLE.DOC_TITLE, ORG_USERTABLE.ORG_USER_REAL_NAME)
+                        .from(SYSTEM_ACTIONTABLE, DOCUMENT_DOCTABLE, ORG_USERTABLE).where(and(
+                        SYSTEM_ACTIONTABLE.ACTION_OBJECT_ID.eq(DOCUMENT_DOCTABLE.DOC_ID),
+                        SYSTEM_ACTIONTABLE.ACTION_OBJECT_TYPE.eq("doc"),
+                        SYSTEM_ACTIONTABLE.ACTION_ACTOR.eq(ORG_USERTABLE.ORG_USER_ID),
+                        SYSTEM_ACTIONTABLE.ACTION_ACTION.in("created","edited","opened"),
+                        ORG_USERTABLE.ORG_USER_ID.eq(userId),
+                        SYSTEM_ACTIONTABLE.ACTION_DATE.between(beginDate, endDate)
                 ))
         );
         return getDslSession().fetchList(complexSelect, SystemAction.class);
@@ -502,6 +513,19 @@ public class SystemActionDaoImpl extends TinyDslDaoSupport implements SystemActi
                         SYSTEM_ACTIONTABLE.ACTION_OBJECT_ID.eq(PRODUCT_RELEASETABLE.RELEASE_ID),
                         SYSTEM_ACTIONTABLE.ACTION_OBJECT_TYPE.eq("release"),
                         SYSTEM_ACTIONTABLE.ACTION_ID.in(releases.toArray())
+                ));
+        return getDslSession().fetchList(select, SystemAction.class);
+    }
+
+    @Override
+    public List<SystemAction> findDocByCaseList(List<Integer> docs) {
+        Alias objectName = new Alias("objectName");
+        DOCUMENT_DOCTABLE.DOC_TITLE.setAlias(objectName);
+        Select select = Select.select(SYSTEM_ACTIONTABLE.ALL, DOCUMENT_DOCTABLE.DOC_TITLE)
+                .from(SYSTEM_ACTIONTABLE, DOCUMENT_DOCTABLE).where(and(
+                        SYSTEM_ACTIONTABLE.ACTION_OBJECT_ID.eq(DOCUMENT_DOCTABLE.DOC_ID),
+                        SYSTEM_ACTIONTABLE.ACTION_OBJECT_TYPE.eq("doc"),
+                        SYSTEM_ACTIONTABLE.ACTION_ID.in(docs.toArray())
                 ));
         return getDslSession().fetchList(select, SystemAction.class);
     }
