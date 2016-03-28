@@ -6,9 +6,15 @@
                 $("input[name='idCheck']").each(function () {
                     this.checked = true;
                 });
+                $("input[name='gitIdCheck']").each(function () {
+                    this.checked = true;
+                });
                 $("#checkboxAll").attr("value", "反选");
             } else {
                 $("input[name='idCheck']").each(function () {
+                    this.checked = false;
+                });
+                $("input[name='gitIdCheck']").each(function () {
                     this.checked = false;
                 });
                 $("#checkboxAll").attr("value", "全选");
@@ -17,6 +23,7 @@
 
         $("#checkboxAll").click(function () {
             $("[name='idCheck']").attr("checked", 'true');//全选
+            $("[name='gitIdCheck']").attr("checked", 'true');
         });
     });
     //-->
@@ -34,7 +41,7 @@
                 <input type="checkbox" id="forall" name="forall"/>
                 <input type="button" class="checkboxAll" id="checkboxAll" value="全选"/>
             </div>
-            #for(var:list)
+           #for(var:list)
         <p>
                 <input type="checkbox" id=${var?.actionId} value=${var?.actionId}
                        name="idCheck" #for(var1:details) #if(var1?.actionId==var?.actionId) checked="checked"
@@ -60,9 +67,16 @@
                     <span>${var?.actionObjectType}_ID：${var?.actionObjectId}</span></span>
     </p>
     #end
+    #for(var2:gitList)
+     <p> <input type="checkbox" name="gitIdCheck" value=${var2?.gitCommitId} #for(var1:details2) #if(var1?.orgGitCommitId==var2?.gitCommitId) checked="checked"
+                #end#end/>
+         <span>${var2?.week}:</span>
+         <span>${var2?.gitRepositoryName}</span>
+         <span>描述:${var2?.gitCommitMessage}</span> </p>
+    #end
 </div>
 </div>
-
+<input type="hidden" id="gitIds" name="gitIds">
 <input type="hidden" id="efforts" name="efforts">
 <input type="hidden" id="y" name="y" value=${year}>
 <input type="hidden" id="w" name="w" value=${week}>
@@ -90,6 +104,14 @@
                     }
                 }
                 $("#efforts").val(mes);
+                var checks2 = document.getElementsByName("gitIdCheck");
+                var mes2 = "";
+                for (var i = 0; i < checks2.length; i++) {
+                    if (checks2[i].checked == true) {
+                        mes2 = mes2 + checks2[i].value + ",";
+                    }
+                }
+                $("#gitIds").val(mes2);
                 $(curform).ajaxSubmit({
                     dataType: "json",
                     success: function (data) {

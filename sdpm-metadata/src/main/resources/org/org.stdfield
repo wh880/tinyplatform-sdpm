@@ -205,4 +205,19 @@
   <standard-field id="3bcb0cdb04c84d728b5ece9387c28301" name="org_diary_white_list_second_account" title="白名单乙方账号" business-type-id="095e594e1550424b9643c7e2279e85be"/>
   <standard-field id="70e9d7a468b6447ab7e4c4de0a227ea4" name="org_diary_white_list_id" title="白名单ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
   <standard-field id="990554eeb5d84abaaee98c944bff4e1e" name="org_diary_detail_action_id" title="周报详情对应的日志Id" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
+  <standard-field id="3288ab910cd840cca920eceef4414316" name="git_commit_id" title="GIT_INFO_ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
+  <standard-field id="b8544ab8050442e3a620dc9b6b283f20" name="git_repository_name" title="GIT_REPOSITORY_NAME" business-type-id="a30696c1e44441ecad77a832afd3731d"/>
+  <standard-field id="1d9a3211f9a74deab252ae159060a99b" name="git_author_name" title="GIT_AUTHOR_NAME" business-type-id="a30696c1e44441ecad77a832afd3731d"/>
+  <standard-field id="45eb789aa6f74ba6b1c9840678320ef2" name="git_commit_url" title="GIT_COMMIT_URL" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
+  <standard-field id="202618fa35ed44379574bec62f072f70" name="git_commit_message" title="GIT_COMMIT_MESSAGE" business-type-id="cc9ed20b13f943f3a967f9d1c5368132"/>
+  <standard-field id="c01c68b9c851401d80e0a4e96aa5622a" name="git_commit_time" title="GIT_COMMIT_TIME" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff"/>
+  <standard-field id="1f5c3c71f5f04b1986ecb5a4eabdfa54" name="git_type" title="GIT_TYPE" business-type-id="286a6bca92b34779bcb6fc8809f0a666"/>
+  <standard-field id="a6e2c35fb289453aa954bb3e695a7c83" name="org_git_commit_id" title="ORG_GIT_COMMIT_ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
+  <standard-field id="ee74ea33989e4c8cb3e78a1c142ff7d8" name="org_diary_git_detail_id" title="ORG_DIARY_GIT_DETAIL_ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
+  <standard-field id="9e3a023532814069843bef259d289353" name="git_user_name" title="GIT_USER_NAME" business-type-id="a30696c1e44441ecad77a832afd3731d"/>
+  <standard-field id="aa61427b3de84800b1eae2e2b0f10cd4" name="git_repository_url" title="GIT_REPOSITORY_URL" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
+  <standard-field id="89b30eee8f23440597ac9f08dd830507" name="git_repository_description" title="GIT_REPOSITORY_DESCRIPTION" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
+  <standard-field id="acb8370a47834bb19a6edf0db085ed08" name="git_repository_homepage" title="GIT_REPOSITORY_HOMEPAGE" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
+  <standard-field id="c7c03227c5b44f2c9169ae7b516e74d2" name="git_commit_before_id" title="GIT_COMMIT_BEFORE_ID" business-type-id="a2c7afa4de724b0cb8f2f46fd8389a37"/>
+  <standard-field id="9f161142d8ee4705a9f4ffe287c04dc0" name="git_commit_after_id" title="GIT_COMMIT_AFTER_ID" business-type-id="a2c7afa4de724b0cb8f2f46fd8389a37"/>
 </standard-fields>

@@ -16,22 +16,18 @@
 
 package org.tinygroup.sdpm.org.dao;
 
-import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
-
-import org.tinygroup.sdpm.org.dao.pojo.OrgDiaryDetail;
 import java.util.List;
+
+import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
+import org.tinygroup.sdpm.org.dao.pojo.OrgDiaryGitDetail;
+import org.tinygroup.sdpm.org.dao.pojo.OrgGitCommitInfo;
 
 	/** 
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-public interface OrgDiaryDetailDao extends BaseDao<OrgDiaryDetail,Integer> {
-
-		Integer batchDeleteByDiaryId(Integer diaryId);
-
-		List<OrgDiaryDetail> findByDiaryId(Integer diaryId);
-
-		List<OrgDiaryDetail> findListByDiaryList(List<Integer> list);
-
+public interface OrgDiaryGitDetailDao extends BaseDao<OrgDiaryGitDetail,Integer> {
+	public int[] deleteByDiaryIdAndGitId(List<OrgDiaryGitDetail> orgDiaryGitDetailList);
+	public List<OrgGitCommitInfo> getOrgGitCommitInfoByDiaryId(Integer diaryId);
 }

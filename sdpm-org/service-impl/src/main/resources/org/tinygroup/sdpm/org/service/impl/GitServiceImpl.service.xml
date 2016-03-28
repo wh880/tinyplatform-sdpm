@@ -1,0 +1,3 @@
+<service-components>
+  <service-component type="org.tinygroup.sdpm.org.service.impl.GitServiceImpl" bean="gitService"/>
+</service-components>

@@ -1,5 +1,15 @@
 package org.tinygroup.sdpm.action.org;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,17 +25,17 @@ import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.org.dao.pojo.OrgDiary;
 import org.tinygroup.sdpm.org.dao.pojo.OrgDiaryAndUserDO;
 import org.tinygroup.sdpm.org.dao.pojo.OrgDiaryDetail;
+import org.tinygroup.sdpm.org.dao.pojo.OrgDiaryGitDetail;
+import org.tinygroup.sdpm.org.dao.pojo.OrgGitCommitInfo;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.DiaryService;
+import org.tinygroup.sdpm.org.service.inter.GitService;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.service.inter.ActionService;
 import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
-
-import javax.servlet.http.HttpServletResponse;
-import java.util.*;
 
 /**
  * Created by wangdl16860 on 2016/1/8.
@@ -40,7 +50,8 @@ public class DiaryAction extends BaseController {
     private UserService userService;
     @Autowired
     private ActionService actionService;
-
+    @Autowired
+    private GitService gitService;
     /**
      * 添加周报以及相应的周报详情
      *
@@ -52,7 +63,7 @@ public class DiaryAction extends BaseController {
      */
     @ResponseBody
     @RequestMapping("/add")
-    public Map add(String summary, @RequestParam(value = "y") Integer year, @RequestParam(value = "w") Integer week, String efforts) {
+    public Map add(String summary, @RequestParam(value = "y") Integer year, @RequestParam(value = "w") Integer week, String efforts,String gitIds) {
         String[] effortIds = null;
         //获得需要插入周报详情的日志ID
         List<Integer> idsList = new ArrayList<Integer>();
@@ -119,7 +130,7 @@ public class DiaryAction extends BaseController {
             diary.setOrgDiarySummary(summary);
             diary.setOrgDiaryModifyDate(date);
             diaryService.updateDiary(diary, list);
-            return resultMap(true, "修改成功");
+
         }
         //如果这一周没有提交过周报，则进行添加操作，并且对详情不set日志ID
         else {
@@ -169,8 +180,21 @@ public class DiaryAction extends BaseController {
             orgDiary.setOrgDiaryEndDate(endDate);
             //进行添加周报以及添加周报详情的操作
             diaryService.addDiary(orgDiary, list);
-            return resultMap(true, "添加成功");
         }
+        //gyl 添加周报相关信息
+        diary = diaryService.findDiaryByUserLatest(userId, year, week);
+        Integer diaryId = diary.getOrgDiaryId();
+        String[] gitIdStrs = gitIds.split(",");
+        System.out.println(gitIdStrs);
+        List<OrgDiaryGitDetail> gitDetailList = new ArrayList<OrgDiaryGitDetail>();
+        for(String id:gitIdStrs){
+        	OrgDiaryGitDetail orgDiaryGitDetail = new OrgDiaryGitDetail();
+        	orgDiaryGitDetail.setOrgDiaryId(diaryId);
+        	orgDiaryGitDetail.setOrgGitCommitId(Integer.parseInt(id));
+        	gitDetailList.add(orgDiaryGitDetail);
+        }
+        gitService.batchInsertDiaryGitDetail(gitDetailList);
+        return resultMap(true, "添加成功");
     }
 
     private String getObjectTypeName(String objectType) {
@@ -463,6 +487,21 @@ public class DiaryAction extends BaseController {
         model.addAttribute("week", week);
         model.addAttribute("list", systemActions);
         model.addAttribute("details", orgDiaryDetailList);
+//gyl 显示周报相关git信息
+        List<OrgGitCommitInfo> gitList = gitService.findOrgGitCommitInfoByNameAndDate(userUtils.getUser().getOrgUserRealName(),bDate,eDate);
+        Collections.sort(gitList);
+        for(OrgGitCommitInfo g:gitList){
+        	g.setWeek(DateUtils.getDateWeek(g.getGitCommitTime()));
+        }
+        OrgDiaryGitDetail orgDiaryGitDetail = new OrgDiaryGitDetail();
+        if(orgDiary!=null){
+            orgDiaryGitDetail.setOrgDiaryId(orgDiary.getOrgDiaryId());
+            List<OrgDiaryGitDetail> details2 = gitService.query(orgDiaryGitDetail);
+            model.addAttribute("details2", details2);
+            System.out.println(details2.size());
+        }
+        model.addAttribute("gitList", gitList);
+
         return "organization/diary/oneDiary.pagelet";
     }
 
@@ -511,7 +550,7 @@ public class DiaryAction extends BaseController {
                 for (OrgDiaryDetail orgDiaryDetail : efforts) {
                     orgDiaryDetail.setEffortWeek(DateUtils.getDateWeek(orgDiaryDetail.getOrgDetailDate()));
                 }
-                Collections.sort(efforts);
+//                Collections.sort(efforts);
                 List<Integer> list1 = new ArrayList<Integer>();
                 for (int i = 0; i < efforts.size(); i++) {
                     if (i > 0) {
@@ -575,6 +614,7 @@ public class DiaryAction extends BaseController {
         }
         Pager<OrgDiaryAndUserDO> pager = diaryService.findPagerDiaryByUserId(user.getOrgUserId(), start, limit);
         Map<Integer, List<OrgDiaryDetail>> map = new HashMap<Integer, List<OrgDiaryDetail>>();
+        Map<Integer, List<OrgGitCommitInfo>> map2 = new HashMap<Integer, List<OrgGitCommitInfo>>();
         for (OrgDiaryAndUserDO orgDiaryAndYUser : pager.getRecords()) {
             orgDiaryAndYUser.setDiaryDateTime(DateUtils.formatDate(orgDiaryAndYUser.getOrgDiaryCreateDate()));
             Integer diaryId = orgDiaryAndYUser.getOrgDiaryId();
@@ -587,7 +627,7 @@ public class DiaryAction extends BaseController {
                 OrgDiaryDetail orgDetail = orgDiaryDetails.get(i);
                 orgDetail.setEffortWeek(DateUtils.getDateWeek(orgDetail.getOrgDetailDate()));
             }
-            Collections.sort(orgDiaryDetails);
+//            Collections.sort(orgDiaryDetails);
             List<Integer> list1 = new ArrayList<Integer>();
             for (int i = 0; i < orgDiaryDetails.size(); i++) {
                 if (i > 0) {
@@ -600,11 +640,30 @@ public class DiaryAction extends BaseController {
                 orgDiaryDetails.get(num).setEffortWeek(null);
             }
             map.put(diaryId, orgDiaryDetails);
+            //gyl 显示相关周报信息
+            List<OrgGitCommitInfo> orgDiaryGitDetails = null;
+            if (map2.get(diaryId) == null) {
+                map2.put(diaryId, orgDiaryGitDetails);
+            }
+            orgDiaryGitDetails = gitService.getOrgGitCommitInfoByDiaryId(diaryId);
+            Collections.sort(orgDiaryGitDetails);
+            String week="";
+            for(OrgGitCommitInfo commit:orgDiaryGitDetails){
+                if(week.equals(DateUtils.getDateWeek(commit.getGitCommitTime()))){
+                    commit.setWeek(null);
+                }else{
+                    week = DateUtils.getDateWeek(commit.getGitCommitTime());
+                    commit.setWeek(week);
+                }
+            }
+            map2.put(diaryId, orgDiaryGitDetails);
+            //gyl
         }
         String realName = user.getOrgUserRealName();
         model.addAttribute("pager", pager);
         model.addAttribute("userAccount", realName);
         model.addAttribute("details", map);
+        model.addAttribute("details2", map2);
         return "organization/diary/showPersonDiary.pagelet";
     }
 

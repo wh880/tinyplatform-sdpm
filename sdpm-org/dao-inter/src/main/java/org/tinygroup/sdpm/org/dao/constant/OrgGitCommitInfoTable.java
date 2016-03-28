@@ -21,23 +21,23 @@ import org.tinygroup.tinysqldsl.base.Table;
 
 /** 
  * <!-- begin-user-doc -->
- * 周报表
+ * ORG_GIT_INFO_COMMIT_INFO
  * 
  * <!-- end-user-doc -->
  * @generated
  */
-public class OrgDiaryTable extends Table {
+public class OrgGitCommitInfoTable extends Table {
 
 	/** 
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final OrgDiaryTable ORG_DIARYTABLE = new OrgDiaryTable();
+	public static final OrgGitCommitInfoTable ORG_GIT_COMMIT_INFO_TABLE = new OrgGitCommitInfoTable();
 
 	/** 
 	 * <!-- begin-user-doc -->
-	 * 周报id
+	 * GIT_INFO_ID
 	 * 
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -47,11 +47,11 @@ public class OrgDiaryTable extends Table {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public final Column ORG_DIARY_ID = new Column(this, "org_diary_id");
+	public final Column GIT_COMMIT_ID = new Column(this, "git_commit_id");
 
 	/** 
 	 * <!-- begin-user-doc -->
-	 * 用户编号
+	 * GIT_COMMIT_TIME
 	 * 
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -61,41 +61,11 @@ public class OrgDiaryTable extends Table {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public final Column ORG_USER_ID = new Column(this, "org_user_id");
+	public final Column GIT_COMMIT_TIME = new Column(this, "git_commit_time");
 
 	/** 
 	 * <!-- begin-user-doc -->
-	 * 周报开始时间
-	 * 
-	 * 每周开始的第一天
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	/** 
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public final Column ORG_DIARY_BEGIN_DATE = new Column(this, "org_diary_begin_date");
-
-	/** 
-	 * <!-- begin-user-doc -->
-	 * 周报结束时间
-	 * 
-	 * 每周最后一天
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	/** 
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public final Column ORG_DIARY_END_DATE = new Column(this, "org_diary_end_date");
-
-	/** 
-	 * <!-- begin-user-doc -->
-	 * 周报年
+	 * GIT_REPOSITORY_NAME
 	 * 
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -105,11 +75,11 @@ public class OrgDiaryTable extends Table {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public final Column ORG_DIARY_YEAR = new Column(this, "org_diary_year");
+	public final Column GIT_REPOSITORY_NAME = new Column(this, "git_repository_name");
 
 	/** 
 	 * <!-- begin-user-doc -->
-	 * 周报周数
+	 * GIT_AUTHOR_NAME
 	 * 
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -119,11 +89,11 @@ public class OrgDiaryTable extends Table {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public final Column ORG_DIARY_WEEK = new Column(this, "org_diary_week");
+	public final Column GIT_AUTHOR_NAME = new Column(this, "git_author_name");
 
 	/** 
 	 * <!-- begin-user-doc -->
-	 * 周报创建日期
+	 * GIT_COMMIT_MESSAGE
 	 * 
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -133,11 +103,11 @@ public class OrgDiaryTable extends Table {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public final Column ORG_DIARY_CREATE_DATE = new Column(this, "org_diary_create_date");
+	public final Column GIT_COMMIT_MESSAGE = new Column(this, "git_commit_message");
 
 	/** 
 	 * <!-- begin-user-doc -->
-	 * 每周总结
+	 * GIT_COMMIT_URL
 	 * 
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -147,27 +117,11 @@ public class OrgDiaryTable extends Table {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public final Column ORG_DIARY_SUMMARY = new Column(this, "org_diary_summary");
+	public final Column GIT_COMMIT_URL = new Column(this, "git_commit_url");
 
 	/** 
 	 * <!-- begin-user-doc -->
-	 * 周报状态
-	 * 
-	 * 正常-0
-	 * 删除-1
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	/** 
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public final Column ORG_DIARY_STATUS = new Column(this, "org_diary_status");
-
-	/** 
-	 * <!-- begin-user-doc -->
-	 * 最后修改日期
+	 * GIT_TYPE
 	 * 
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -177,11 +131,11 @@ public class OrgDiaryTable extends Table {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public final Column ORG_DIARY_MODIFY_DATE = new Column(this, "org_diary_modify_date");
+	public final Column GIT_TYPE = new Column(this, "git_type");
 
 
-	public OrgDiaryTable() {
-		super("org_diary");
+	public OrgGitCommitInfoTable() {
+		super("org_git_commit_info");
 	}
 
 }

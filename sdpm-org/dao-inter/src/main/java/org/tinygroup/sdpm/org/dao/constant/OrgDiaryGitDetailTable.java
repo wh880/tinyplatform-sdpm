@@ -21,23 +21,23 @@ import org.tinygroup.tinysqldsl.base.Table;
 
 /** 
  * <!-- begin-user-doc -->
- * 每日详情表
+ * ORG_DIARY_GIT_DETAIL
  * 
  * <!-- end-user-doc -->
  * @generated
  */
-public class OrgDiaryDetailTable extends Table {
+public class OrgDiaryGitDetailTable extends Table {
 
 	/** 
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final OrgDiaryDetailTable ORG_DIARY_DETAILTABLE = new OrgDiaryDetailTable();
+	public static final OrgDiaryGitDetailTable ORG_DIARY_GIT_DETAIL_TABLE = new OrgDiaryGitDetailTable();
 
 	/** 
 	 * <!-- begin-user-doc -->
-	 * 周报详情id
+	 * ORG_DIARY_GIT_DETAIL_ID
 	 * 
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -47,7 +47,7 @@ public class OrgDiaryDetailTable extends Table {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public final Column ORG_DETAIL_ID = new Column(this, "org_detail_id");
+	public final Column ORG_DIARY_GIT_DETAIL_ID = new Column(this, "org_diary_git_detail_id");
 
 	/** 
 	 * <!-- begin-user-doc -->
@@ -65,7 +65,7 @@ public class OrgDiaryDetailTable extends Table {
 
 	/** 
 	 * <!-- begin-user-doc -->
-	 * 用户编号
+	 * ORG_GIT_COMMIT_ID
 	 * 
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -75,67 +75,11 @@ public class OrgDiaryDetailTable extends Table {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public final Column ORG_USER_ID = new Column(this, "org_user_id");
-
-	/** 
-	 * <!-- begin-user-doc -->
-	 * 详情发生时间
-	 * 
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	/** 
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public final Column ORG_DETAIL_DATE = new Column(this, "org_detail_date");
-
-	/** 
-	 * <!-- begin-user-doc -->
-	 * 详情类型
-	 * 
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	/** 
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public final Column ORG_DETAIL_TYPE = new Column(this, "org_detail_type");
-
-	/** 
-	 * <!-- begin-user-doc -->
-	 * 详情内容
-	 * 
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	/** 
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public final Column ORG_DETAIL_CONTENT = new Column(this, "org_detail_content");
-
-	/** 
-	 * <!-- begin-user-doc -->
-	 * 系统日志ID
-	 * 
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	/** 
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public final Column ACTION_ID = new Column(this, "action_id");
+	public final Column ORG_GIT_COMMIT_ID = new Column(this, "org_git_commit_id");
 
 
-	public OrgDiaryDetailTable() {
-		super("org_diary_detail");
+	public OrgDiaryGitDetailTable() {
+		super("org_diary_git_detail");
 	}
 
 }
