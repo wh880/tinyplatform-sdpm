@@ -6,7 +6,7 @@
         <a href="${TINY_CONTEXT_PATH+adminPath}/project/team/preTeamManage">添加团队成员</a>
     </div>
     <div class="info-item" title="关联需求">
-        <a href="${TINY_CONTEXT_PATH+adminPath}/project/demand/preLinkStory">关联需求</a>
+        <a href="${TINY_CONTEXT_PATH+adminPath}/project/demand/preLinkStory?notInProjectStory=true">关联需求</a>
     </div>
     <div class="info-item" title="添加任务">
         <a href="${TINY_CONTEXT_PATH+adminPath}/project/task/form">添加任务</a>
