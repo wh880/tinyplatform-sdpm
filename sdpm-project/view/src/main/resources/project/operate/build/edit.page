@@ -3,13 +3,13 @@
 #@tinyForm("addform" TINY_CONTEXT_PATH+adminPath+"/project/build/addSave" "post" {"class":"test","enctype":
     "multipart/form-data"})
     #hiddenInput(hiddenInputName="buildId" hiddenInputValue=build?.buildId)
-    <input type="hidden" name="lastAddress" value=""/>
-    <input type="hidden" name="buildProject" value="${build?.buildProject?:currentProjectId}">
+<input type="hidden" name="lastAddress" value=""/>
+<input type="hidden" name="buildProject" value="${build?.buildProject?:currentProjectId}">
 <div class="infoContent">
     <p class="titleName">新建/编辑版本</p>
 
     #@elementItem()
-        #@colLabel()产品：#end
+        #@colLabel()<span class="c-red">*</span>产品：#end
         #@formControlDiv("col-4")
             #@Tselect2F()
                 #@TzTreeSelect(
@@ -28,7 +28,7 @@
         #end
     #end
     #@elementItem()
-        #@colLabel()版本名称：#end
+        #@colLabel()<span class="c-red">*</span>版本名称：#end
         #@formControlDiv("col-4")
             #tinyInput(
                 "text" "buildName" build?.buildName {"style":"width:80%","placeholder":"","datatype":"*","nullmsg":
@@ -36,11 +36,11 @@
         #end
     #end
     #@elementItem()
-        #@colLabel()构建者：#end
+        #@colLabel()<span class="c-red">*</span>构建者：#end
         #@formControlDiv("col-4")
             #@Tselect2F()
                 #Tselect2Ajax("buildBuilder" build?.buildBuilder TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
-            {"dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询构建者","nullmsg":"请选择构建者！","datatype":"*"})
+                {"dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询构建者","nullmsg":"请选择构建者！","datatype":"*"})
             ##填写任意内容，侦听需重新填加 A侦听已内置
                 #@Tselect2Fix()
                     #set(m=menuService.getMenu("organizationAddUser"))
@@ -68,7 +68,7 @@
     #end
 
     #@elementItem()
-        #@colLabel()源代码地址：#end
+        #@colLabel()<span class="c-red">*</span>源代码地址：#end
         #@formControlDiv("col-4")
             #tinyInput(
                 "text" "buildScmPath" build?.buildScmPath{"style":"width:80%","placeholder":"","datatype":"*4-200",
@@ -77,7 +77,7 @@
     #end
 
     #@elementItem()
-        #@colLabel()下载地址：#end
+        #@colLabel()<span class="c-red">*</span>下载地址：#end
         #@formControlDiv("col-4")
             #tinyInput(
                 "text" "buildFilePath" build?.buildFilePath{"style":"width:80%","placeholder":"","datatype":"*4-200",
