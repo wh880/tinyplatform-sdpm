@@ -11,7 +11,7 @@
         #@td()<a href="${TINY_CONTEXT_PATH +adminPath}/product/plan/forword/reRelateStory?planId=${plan.planId}">${plan
             ?.planName}</a>#end
         #@td()
-            <div style="width: 300px;overflow: hidden;" title="${plan?.planSpec}">
+        <div style="width: 300px;overflow: hidden;">
                 ${plan?.planSpec}
             </div>
         #end
