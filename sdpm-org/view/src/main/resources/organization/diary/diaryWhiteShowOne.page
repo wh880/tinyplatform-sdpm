@@ -25,8 +25,8 @@
 					<a href="${TINY_CONTEXT_PATH+adminPath}/org/diary/show" value="sub" name="diaryChoose" ${choice=="all"?'class="active_btn"':""}>我的下属</a>
                      <a href="${TINY_CONTEXT_PATH+adminPath}/org/diary/show/white?choose=1" value="whiteList"
                         name="diaryChoose" ${choice=="today"?'class="active_btn"':""}>我的白名单</a>
-                     <a href="${TINY_CONTEXT_PATH+adminPath}/org/diary/form" value="whiteList"
-                        name="diarySubmit" ${choice=="today"?'class="active_btn"':""}>提交周报</a>
+##                     <a href="${TINY_CONTEXT_PATH+adminPath}/org/diary/form" value="whiteList"
+##                        name="diarySubmit" ${choice=="today"?'class="active_btn"':""}>提交周报</a>
 				</span>
 </div>
 #end
@@ -44,6 +44,8 @@
     #@toggleRight()
         #@aExtendButton("btn radius btn-primary btn-sm" TINY_CONTEXT_PATH+adminPath+
             "/org/diary/show/white")返回周报总览#end
+        #@aExtendButton("btn radius btn-primary btn-sm" TINY_CONTEXT_PATH+adminPath+
+            "/org/diary/form")提交周报#end
     <center><h1>${userAccount} 的周报列表</h1></center>
     <div class="tweet_list diarylist">
         <ul class="diarylist-detail" id="diarylist-detail">
