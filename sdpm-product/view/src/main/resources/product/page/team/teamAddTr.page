@@ -23,17 +23,16 @@
         #@Tselect2F()
             #@Tselect2Body("teamList["+a+"].teamRole" "" {"class":"input-text","multiple":
                 "multiple","datatype":"*","nullmsg":"角色不能为空！","id":"teamRole"+a})
-                <option></option>
                 #foreach(u : roleList)
                     <option value="${u.orgRoleId}">${u.orgRoleName}</option>
                 #end
             #end
             #@Tselect2Fix()
-                #set(m=menuService.getMenu("organizationAddUser"))
+                #set(m=menuService.getMenu("organizationAddGroup"))
                 #if(m)
                     <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
                 #end
-                #set(m=menuService.getMenu("organizationUser"))
+                #set(m=menuService.getMenu("organizationPrivilege"))
                 #if(m)
                     <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
                 #end
@@ -83,17 +82,16 @@
         #@Tselect2F()
             #@Tselect2Body("teamList["+a+"].teamRole" user?.teamRole {"class":"input-text","multiple":
                 "multiple","datatype":"*","nullmsg":"角色不能为空！","id":"teamRole"+a})
-                <option></option>
                 #foreach(u : roleList)
                     <option value="${u.orgRoleId}">${u.orgRoleName}</option>
                 #end
             #end
             #@Tselect2Fix()
-                #set(m=menuService.getMenu("organizationAddUser"))
+                #set(m=menuService.getMenu("organizationAddGroup"))
                 #if(m)
                     <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
                 #end
-                #set(m=menuService.getMenu("organizationUser"))
+                #set(m=menuService.getMenu("organizationPrivilege"))
                 #if(m)
                     <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
                 #end
@@ -140,17 +138,16 @@
         #@Tselect2F()
             #@Tselect2Body("teamList["+a+"].teamRole" "" {"class":"input-text","multiple":
                 "multiple","datatype":"*","nullmsg":"角色不能为空！","id":"teamRole"+a})
-                <option></option>
                 #foreach(u : roleList)
                     <option value="${u.orgRoleId}">${u.orgRoleName}</option>
                 #end
             #end
             #@Tselect2Fix()
-                #set(m=menuService.getMenu("organizationAddUser"))
+                #set(m=menuService.getMenu("organizationAddGroup"))
                 #if(m)
                     <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
                 #end
-                #set(m=menuService.getMenu("organizationUser"))
+                #set(m=menuService.getMenu("organizationPrivilege"))
                 #if(m)
                     <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
                 #end

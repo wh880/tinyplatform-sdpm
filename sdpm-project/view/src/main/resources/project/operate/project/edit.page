@@ -106,7 +106,7 @@
         #end
     #end
     #@elementItem()
-        #@sdpmItem("产品负责人")
+        #@sdpmItem("产品负责人" "*")
             #@Tselect2F()
                 #Tselect2Ajax("projectPo" project?.projectPo TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
                 {"dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询产品负责人","nullmsg":"请选择产品负责人！","datatype":"*"})
@@ -124,10 +124,10 @@
         #end
     #end
     #@elementItem()
-        #@sdpmItem("项目负责人")
+        #@sdpmItem("项目负责人" "*")
             #@Tselect2F()
                 #Tselect2Ajax("projectPm" project?.projectPm TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
-                {"dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询产品负责人","nullmsg":"请选择产品负责人！","datatype":"*"})
+                {"dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询项目负责人","nullmsg":"请选择产品负责人！","datatype":"*"})
                 #@Tselect2Fix()
                     #set(m=menuService.getMenu("organizationAddUser"))
                     #if(m)                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>                    #end
@@ -140,10 +140,10 @@
         #end
     #end
     #@elementItem()
-        #@sdpmItem("测试负责人")
+        #@sdpmItem("测试负责人" "*")
             #@Tselect2F()
                 #Tselect2Ajax("projectQd" project?.projectQd TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
-                {"dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询产品负责人","nullmsg":"请选择产品负责人！","datatype":"*"})
+                {"dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询测试负责人","nullmsg":"请选择产品负责人！","datatype":"*"})
                 #@Tselect2Fix()
                     #set(m=menuService.getMenu("organizationAddUser"))
                     #if(m)
@@ -158,10 +158,10 @@
         #end
     #end
     #@elementItem()
-        #@sdpmItem("发布负责人")
+        #@sdpmItem("发布负责人" "*")
             #@Tselect2F()
                 #Tselect2Ajax("projectRd" project?.projectRd TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
-                {"dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询产品负责人","nullmsg":"请选择产品负责人！","datatype":"*"})
+                {"dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询发布负责人","nullmsg":"请选择产品负责人！","datatype":"*"})
                 #@Tselect2Fix()
                     #set(m=menuService.getMenu("organizationAddUser"))
                     #if(m)

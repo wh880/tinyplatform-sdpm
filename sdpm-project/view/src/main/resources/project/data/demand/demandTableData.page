@@ -7,7 +7,9 @@
         #end
         #@td()${s.storyPri}</a>#end
         #@td()
-        <a href="${TINY_CONTEXT_PATH+adminPath}/product/storySpec/find/productDemandDetail?storyId=${s.storyId}">${s.storyTitle}
+            <div style="width:200px;overflow:hidden;">
+                <a href="${TINY_CONTEXT_PATH+adminPath}/product/storySpec/find/productDemandDetail?storyId=${s.storyId}" title="${s.storyTitle}">${s.storyTitle}</a>
+            </div>
         #end
         #@td("nowrap")${s.storyOpenedBy==null?"":userUtils.getUserById(s.storyOpenedBy)?.orgUserRealName}#end
         #@td("nowrap")${s.storyAssignedTo==null?"":userUtils.getUserById(s.storyAssignedTo)?.orgUserRealName}#end
@@ -27,3 +29,4 @@
         #end
     #end
 #end
+</div>

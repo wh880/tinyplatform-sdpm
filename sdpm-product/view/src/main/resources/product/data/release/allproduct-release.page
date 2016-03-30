@@ -8,8 +8,11 @@
 #@tr()
     #@td()<input type="checkbox" value="1" name="product-release">#end
     #@td()<a href="${TINY_CONTEXT_PATH +adminPath}/product/release/forword/reRelateStory?releaseId=${release.releaseId}">${release?.no}</a>#end
-    #@td()<a href="${TINY_CONTEXT_PATH +adminPath}/product/release/forword/reRelateStory?releaseId=${release.releaseId}">${release
-        ?.releaseName}</a>#end
+    #@td()
+        <div style="width: 200px;overflow: hidden">
+            <a href="${TINY_CONTEXT_PATH +adminPath}/product/release/forword/reRelateStory?releaseId=${release.releaseId}" title="${release?.releaseName}">${release?.releaseName}</a>
+        </div>
+    #end
     #@td("nowrap")
         #set(builds = release?.releaseBuild.split(","))
         #foreach(id : builds)

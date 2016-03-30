@@ -1,17 +1,17 @@
 #@layout(project)#end
 #set(name="task")
 <div class="pic-info">
-    <p class="title-info">项目添加成功，请先进行如下操作。</p>
+    <p class="title-info">项目添加成功，可进行如下操作。</p>
     <div class="info-item" title="添加团队成员">
         <a href="${TINY_CONTEXT_PATH+adminPath}/project/team/preTeamManage">添加团队成员</a>
     </div>
     <div class="info-item" title="关联需求">
-        <a href="${TINY_CONTEXT_PATH+adminPath}/project/demand/preLinkStory">关联需求</a>
+        <a href="${TINY_CONTEXT_PATH+adminPath}/project/demand/preLinkStory?notInProjectStory=true">关联需求</a>
     </div>
     <div class="info-item" title="添加任务">
         <a href="${TINY_CONTEXT_PATH+adminPath}/project/task/form">添加任务</a>
     </div>
-    <div class="info-item" title="返回首页">
-        <a href="${TINY_CONTEXT_PATH}">返回首页</a>
+    <div class="info-item" title="返回项目首页">
+        <a href="task/index?choose=1">返回项目首页</a>
     </div>
 </div>

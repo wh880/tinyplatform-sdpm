@@ -25,7 +25,7 @@
                 #@thW("150px")<span class="c-red">*</span>任务名称#end
                 #@thW("150px")<span class="c-red">*</span>类型#end
                 #@thW("150px")指派给#end
-                #@thW("150px")<span class="c-red">*</span>预计剩余#end
+                #@thW("150px")<span class="c-red">*</span>预计剩余（小时）#end
                 #@thW("150px")任务描述#end
                 #@thW("100px")优先级#end
             #end

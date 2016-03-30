@@ -13,9 +13,11 @@
         #@td()<a
                 href="${TINY_CONTEXT_PATH+adminPath}/quality/version/taskToCase?testversionId=${v?.testversionId}&currentPageId=5&status=tverallcase">${v
             ?.testversionId}</a>#end
-        #@td()<a
-                href="${TINY_CONTEXT_PATH+adminPath}/quality/version/taskToCase?testversionId=${v?.testversionId}&currentPageId=5&status=tverallcase">${v
-            ?.testtaskTitle}</a>#end
+        #@td()
+            <div style="width: 200px;overflow: hidden">
+            <a href="${TINY_CONTEXT_PATH+adminPath}/quality/version/taskToCase?testversionId=${v?.testversionId}&currentPageId=5&status=tverallcase" title="${v?.testtaskTitle}">${v?.testtaskTitle}</a>
+            </div>
+        #end
         #@td()${v?.searchBuildName}#end
         #@td("nowrap")${v?.testtaskOwner?userUtils.getUserById(v?.testtaskOwner)?.orgUserRealName:""}#end
         #@td("nowrap")${formatDate(v?.testtaskBegin, "yyyy-MM-dd")}#end
