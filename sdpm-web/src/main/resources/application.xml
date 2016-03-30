@@ -52,7 +52,7 @@
             <!--xyw-->
             <class-path path="E:\sdpm\sdpm-project\view\src\main\resources"/>
             <class-path path="E:\sdpm\sdpm-product\view\src\main\resources"/>
-
+            <class-path path="E:\sdpm\sdpm-document\view\src\main\resources"/>
         </class-paths>
         <include-patterns>
             <include-pattern pattern="org\.tinygroup\.(.)*\.jar"/>
