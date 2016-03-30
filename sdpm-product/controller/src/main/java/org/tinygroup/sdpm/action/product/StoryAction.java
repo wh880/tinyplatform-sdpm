@@ -341,17 +341,28 @@ public class StoryAction extends BaseController {
     }
 
     /**
-     * 根据多个id查找多个需求
-     *
-     * @param storyId
-     * @param model
-     * @return
+     * 批量关闭
      */
     @RequestMapping("/findByKeys")
-    public String findByKeys(Integer[] storyId, Model model) {
-        List<ProductStory> storyList = storyService.findStoryListByIds(storyId);
-        model.addAttribute("storyList", storyList);
-        return "/product/page/tabledemo/product-demand-del.pagelet";
+    public String findByKeys(SystemAction systemAction,String ids) {
+        String[] storyIds = ids.split(",");
+        if(storyIds.length>0) {
+            for (String id : storyIds) {
+                ProductStory productStory = storyService.findStory(Integer.valueOf(id));
+                productStory.setStoryClosedBy(userUtils.getUserId());
+                productStory.setStoryClosedDate(new Date());
+                productStory.setDeleted(FieldUtil.DELETE_YES);
+                productStory.setStoryStatus("2");
+                storyService.deleteStory(productStory);
+                LogUtil.logWithComment(LogUtil.LogOperateObject.STORY,
+                        LogUtil.LogAction.CLOSED,
+                        String.valueOf(productStory.getStoryId()),
+                        userUtils.getUserId(), String.valueOf(productStory.getProductId()),
+                        null, productStory, productStory, systemAction.getActionComment());
+            }
+        }
+        return "/product/page/list/story/story.page";
+        /*return "redirect:" + "/a/product/story";*/
     }
 
     @RequestMapping("/{forwordPager}/findPager")

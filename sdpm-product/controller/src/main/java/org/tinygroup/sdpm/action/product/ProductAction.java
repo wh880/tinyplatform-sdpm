@@ -171,10 +171,12 @@ public class ProductAction extends BaseController {
     @RequestMapping("/close")
     public Map close(Integer productId, SystemAction systemAction) {
         Product product1 = productService.findProductById(productId);
+        product1.setProductStatus(Product.STATUS_CLOSED);
+        productService.updateProduct(product1);
         Product product = new Product();
         product.setProductId(productId);
         product.setProductStatus(Product.STATUS_CLOSED);
-        productService.updateProduct(product);
+        //productService.updateProduct(product);
 
         LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCT,
                 LogUtil.LogAction.CLOSED,
