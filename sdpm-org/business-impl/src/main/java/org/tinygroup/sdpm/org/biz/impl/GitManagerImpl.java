@@ -29,19 +29,20 @@ public class GitManagerImpl implements GitManager{
     }
     @Override
     public void batchInsertGitCommitInfo(List<OrgGitCommitInfo> list) {
+    	orgGitCommitInfoDao.batchDeleteGitCommitInfoById(list);
     	orgGitCommitInfoDao.batchInsert(list);
     }
     @Override
-    public String getNameByEmail(String email){
-        return orgGitCommitInfoDao.getNameByEmail(email);
+    public String getUserIdByEmail(String email){
+        return orgGitCommitInfoDao.getUserIdByEmail(email);
     }
     @Override
-    public List<OrgGitCommitInfo> findOrgGitCommitInfoByNameAndDate(String name, Date beginDate, Date endDate){
-       return orgGitCommitInfoDao.findOrgGitCommitInfoByNameAndDate(name, beginDate, endDate);
+    public List<OrgGitCommitInfo> findOrgGitCommitInfoByIdAndDate(String id, Date beginDate, Date endDate){
+       return orgGitCommitInfoDao.findOrgGitCommitInfoByIdAndDate(id, beginDate, endDate);
     }
 	@Override
-	public void batchInsertDiaryGitDetail(List<OrgDiaryGitDetail> list) {
-		orgDiaryGitDetailDao.deleteByDiaryIdAndGitId(list);
+	public void batchInsertDiaryGitDetail(Integer diaryId,List<OrgDiaryGitDetail> list) {
+		orgDiaryGitDetailDao.DeleteByDiaryId(diaryId);
 		orgDiaryGitDetailDao.batchInsert(list);
 	}
 	@Override

@@ -19,84 +19,94 @@ package org.tinygroup.sdpm.org.dao.pojo;
 import java.io.Serializable;
 import java.util.Date;
 
-/** 
- * <!-- begin-user-doc -->
- * ORG_GIT_INFO_COMMIT_INFO
+/**
+ * <!-- begin-user-doc --> ORG_GIT_INFO_COMMIT_INFO
  * 
  * <!-- end-user-doc -->
+ * 
  * @generated
  */
-public class OrgGitCommitInfo implements Serializable,Comparable<OrgGitCommitInfo>{
-
-	/** 
-	 * <!-- begin-user-doc -->
-	 * GIT_INFO_ID
-	 * 
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private Integer gitCommitId;
-
-	/** 
-	 * <!-- begin-user-doc -->
-	 * GIT_COMMIT_TIME
-	 * 
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private Date gitCommitTime;
-
-	/** 
-	 * <!-- begin-user-doc -->
-	 * GIT_REPOSITORY_NAME
-	 * 
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private String gitRepositoryName;
-
-	/** 
-	 * <!-- begin-user-doc -->
-	 * GIT_AUTHOR_NAME
-	 * 
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private String gitAuthorName;
-
-	/** 
-	 * <!-- begin-user-doc -->
-	 * GIT_COMMIT_MESSAGE
-	 * 
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private String gitCommitMessage;
-
-	/** 
-	 * <!-- begin-user-doc -->
-	 * GIT_COMMIT_URL
-	 * 
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private String gitCommitUrl;
-
-	/** 
-	 * <!-- begin-user-doc -->
-	 * GIT_TYPE
-	 * 
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private String gitType;
+public class OrgGitCommitInfo implements Serializable, Comparable<OrgGitCommitInfo> {
 
 	/**
-	 *week 
+	 * <!-- begin-user-doc --> ORG_GIT_COMMIT_ID
 	 * 
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	private String orgGitCommitId;
+
+	/**
+	 * <!-- begin-user-doc --> GIT_COMMIT_TIME
+	 * 
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	private Date orgGitCommitTime;
+
+	/**
+	 * <!-- begin-user-doc --> GIT_REPOSITORY_NAME
+	 * 
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	private String orgGitRepositoryName;
+
+	/**
+	 * <!-- begin-user-doc --> GIT_AUTHOR_ID
+	 * 
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	private String orgGitAuthorId;
+
+	/**
+	 * <!-- begin-user-doc --> GIT_COMMIT_MESSAGE
+	 * 
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	private String orgGitCommitMessage;
+
+	/**
+	 * <!-- begin-user-doc --> GIT_COMMIT_URL
+	 * 
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	private String orgGitCommitUrl;
+
+	/**
+	 * <!-- begin-user-doc --> GIT_TYPE
+	 * 
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	private String orgGitType;
+	/**
+	 * 获取当前日期
 	 */
 	private String week;
+	/**
+	 * 超链接的文本
+	 */
+	private String urlText;
 	
+	public String getUrlText() {
+		return urlText;
+	}
+
+	public void setUrlText(String urlText) {
+		this.urlText = urlText;
+	}
+
 	public String getWeek() {
 		return week;
 	}
@@ -105,70 +115,68 @@ public class OrgGitCommitInfo implements Serializable,Comparable<OrgGitCommitInf
 		this.week = week;
 	}
 
-	public void setGitCommitId(Integer gitCommitId){
-		this. gitCommitId = gitCommitId;
+	public void setOrgGitCommitId(String orgGitCommitId) {
+		this.orgGitCommitId = orgGitCommitId;
 	}
 
-	public Integer getGitCommitId(){
-		return gitCommitId;
+	public String getOrgGitCommitId() {
+		return orgGitCommitId;
 	}
 
-	public void setGitCommitTime(Date gitCommitTime){
-		this. gitCommitTime = gitCommitTime;
+	public void setOrgGitCommitTime(Date orgGitCommitTime) {
+		this.orgGitCommitTime = orgGitCommitTime;
 	}
 
-	public Date getGitCommitTime(){
-		return gitCommitTime;
+	public Date getOrgGitCommitTime() {
+		return orgGitCommitTime;
 	}
 
-	public void setGitRepositoryName(String gitRepositoryName){
-		this. gitRepositoryName = gitRepositoryName;
+	public void setOrgGitRepositoryName(String orgGitRepositoryName) {
+		this.orgGitRepositoryName = orgGitRepositoryName;
 	}
 
-	public String getGitRepositoryName(){
-		return gitRepositoryName;
+	public String getOrgGitRepositoryName() {
+		return orgGitRepositoryName;
 	}
 
-	public void setGitAuthorName(String gitAuthorName){
-		this. gitAuthorName = gitAuthorName;
+	public void setOrgGitAuthorId(String orgGitAuthorId) {
+		this.orgGitAuthorId = orgGitAuthorId;
 	}
 
-	public String getGitAuthorName(){
-		return gitAuthorName;
+	public String getOrgGitAuthorId() {
+		return orgGitAuthorId;
 	}
 
-	public void setGitCommitMessage(String gitCommitMessage){
-		this. gitCommitMessage = gitCommitMessage;
+	public void setOrgGitCommitMessage(String orgGitCommitMessage) {
+		this.orgGitCommitMessage = orgGitCommitMessage;
 	}
 
-	public String getGitCommitMessage(){
-		return gitCommitMessage;
+	public String getOrgGitCommitMessage() {
+		return orgGitCommitMessage;
 	}
 
-	public void setGitCommitUrl(String gitCommitUrl){
-		this. gitCommitUrl = gitCommitUrl;
+	public void setOrgGitCommitUrl(String orgGitCommitUrl) {
+		this.orgGitCommitUrl = orgGitCommitUrl;
 	}
 
-	public String getGitCommitUrl(){
-		return gitCommitUrl;
+	public String getOrgGitCommitUrl() {
+		return orgGitCommitUrl;
 	}
 
-	public void setGitType(String gitType){
-		this. gitType = gitType;
+	public void setOrgGitType(String orgGitType) {
+		this.orgGitType = orgGitType;
 	}
 
-	public String getGitType(){
-		return gitType;
+	public String getOrgGitType() {
+		return orgGitType;
 	}
-
-	public OrgGitCommitInfo() {}
 
 	@Override
 	public int compareTo(OrgGitCommitInfo o) {
-		if(o==null){
+		if (o == null) {
 			return 0;
 		}else{
-			return -this.gitCommitTime.compareTo(o.getGitCommitTime());
+			return o.getOrgGitCommitTime().compareTo(this.getOrgGitCommitTime());
 		}
 	}
 

@@ -12,9 +12,9 @@ import org.tinygroup.sdpm.org.dao.pojo.OrgGitCommitInfo;
 public interface GitManager {
     public List<OrgGitCommitInfo> query(OrgGitCommitInfo gitInfo);
     public void batchInsertGitCommitInfo(List<OrgGitCommitInfo> list);
-    public String getNameByEmail(String email);
-    public List<OrgGitCommitInfo> findOrgGitCommitInfoByNameAndDate(String name,Date beginDate,Date endDate);
-    public void batchInsertDiaryGitDetail(List<OrgDiaryGitDetail> list);
+    public String getUserIdByEmail(String email);
+    public List<OrgGitCommitInfo> findOrgGitCommitInfoByIdAndDate(String id, Date beginDate, Date endDate);
+    public void batchInsertDiaryGitDetail(Integer diaryId,List<OrgDiaryGitDetail> list);
     public List<OrgDiaryGitDetail> query(OrgDiaryGitDetail diaryGitDetail);
     public List<OrgGitCommitInfo> getOrgGitCommitInfoByDiaryId(Integer diaryId);
 }

@@ -67,13 +67,7 @@
                     <span>${var?.actionObjectType}_ID：${var?.actionObjectId}</span></span>
     </p>
     #end
-    #for(var2:gitList)
-     <p> <input type="checkbox" name="gitIdCheck" value=${var2?.gitCommitId} #for(var1:details2) #if(var1?.orgGitCommitId==var2?.gitCommitId) checked="checked"
-                #end#end/>
-         <span>${var2?.week}:</span>
-         <span>${var2?.gitRepositoryName}</span>
-         <span>描述:${var2?.gitCommitMessage}</span> </p>
-    #end
+    #listCommitsForSelect(gitList details2)
 </div>
 </div>
 <input type="hidden" id="gitIds" name="gitIds">

@@ -1,15 +1,15 @@
 package org.tinygroup.sdpm.org.dao.fields;
 
-import com.thoughtworks.xstream.annotations.XStreamAlias;
+
+import java.util.Date;
 
 /**
  * Created by Administrator on 2016/3/21.
  */
-@XStreamAlias("commit")
 public class Commit {
     private String id;
     private String message;
-    private String timestamp;
+    private Date timestamp;
     private String url;
     private Author author;
 
@@ -29,11 +29,11 @@ public class Commit {
         this.message = message;
     }
 
-    public String getTimestamp() {
+    public Date getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(String timestamp) {
+    public void setTimestamp(Date timestamp) {
         this.timestamp = timestamp;
     }
 

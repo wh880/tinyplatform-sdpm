@@ -16,6 +16,22 @@
 
 package org.tinygroup.sdpm.org.dao.impl;
 
+import org.springframework.stereotype.Repository;
+import org.tinygroup.commons.tools.CollectionUtil;
+import org.tinygroup.jdbctemplatedslsession.callback.*;
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
+import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
+import org.tinygroup.sdpm.org.dao.OrgDiaryGitDetailDao;
+import org.tinygroup.sdpm.org.dao.pojo.OrgDiaryGitDetail;
+import org.tinygroup.sdpm.org.dao.pojo.OrgGitCommitInfo;
+import org.tinygroup.tinysqldsl.*;
+import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
+import org.tinygroup.tinysqldsl.select.OrderByElement;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.tinygroup.sdpm.org.dao.constant.OrgDiaryGitDetailTable.ORG_DIARY_GIT_DETAIL_TABLE;
 import static org.tinygroup.sdpm.org.dao.constant.OrgGitCommitInfoTable.ORG_GIT_COMMIT_INFO_TABLE;
 import static org.tinygroup.tinysqldsl.Delete.delete;
@@ -25,38 +41,12 @@ import static org.tinygroup.tinysqldsl.Select.selectFrom;
 import static org.tinygroup.tinysqldsl.Update.update;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.stereotype.Repository;
-import org.tinygroup.commons.tools.CollectionUtil;
-import org.tinygroup.jdbctemplatedslsession.callback.DeleteGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.InsertGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.NoParamDeleteGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.NoParamInsertGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.NoParamUpdateGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.SelectGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.callback.UpdateGenerateCallback;
-import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
-import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
-import org.tinygroup.sdpm.org.dao.OrgDiaryGitDetailDao;
-import org.tinygroup.sdpm.org.dao.pojo.OrgDiaryGitDetail;
-import org.tinygroup.sdpm.org.dao.pojo.OrgGitCommitInfo;
-import org.tinygroup.tinysqldsl.Delete;
-import org.tinygroup.tinysqldsl.Insert;
-import org.tinygroup.tinysqldsl.Pager;
-import org.tinygroup.tinysqldsl.Select;
-import org.tinygroup.tinysqldsl.Update;
-import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
-import org.tinygroup.tinysqldsl.select.OrderByElement;
-
 	/** 
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Repository
+@Repository
 public class OrgDiaryGitDetailDaoImpl extends TinyDslDaoSupport implements OrgDiaryGitDetailDao {
 
 	public List<OrgGitCommitInfo> getOrgGitCommitInfoByDiaryId(final Integer diaryId){
@@ -66,30 +56,22 @@ public class OrgDiaryGitDetailDaoImpl extends TinyDslDaoSupport implements OrgDi
 			@SuppressWarnings("rawtypes")
 			public Select generate(OrgGitCommitInfo t) {
 				Select select = select(ORG_GIT_COMMIT_INFO_TABLE.ALL).from(ORG_GIT_COMMIT_INFO_TABLE,ORG_DIARY_GIT_DETAIL_TABLE)
-						.where(and(ORG_GIT_COMMIT_INFO_TABLE.GIT_COMMIT_ID.eq(ORG_DIARY_GIT_DETAIL_TABLE.ORG_GIT_COMMIT_ID),
+						.where(and(ORG_GIT_COMMIT_INFO_TABLE.ORG_GIT_COMMIT_ID.eq(ORG_DIARY_GIT_DETAIL_TABLE.ORG_GIT_COMMIT_ID),
 								ORG_DIARY_GIT_DETAIL_TABLE.ORG_DIARY_ID.eq(diaryId)));
 			return select;
 			}
 		});
 	}
-		
-		
-	public int[] deleteByDiaryIdAndGitId(List<OrgDiaryGitDetail> orgDiaryGitDetailList){
-		if (CollectionUtil.isEmpty(orgDiaryGitDetailList)) {
-			return new int[0];
-		}
-		return getDslTemplate().batchDelete(orgDiaryGitDetailList,new NoParamDeleteGenerateCallback() {
 
-			public Delete generate() {
-				return delete(ORG_DIARY_GIT_DETAIL_TABLE).where(and(
-				ORG_DIARY_GIT_DETAIL_TABLE.ORG_DIARY_ID.eq(new JdbcNamedParameter("orgDiaryId")),
-				ORG_DIARY_GIT_DETAIL_TABLE.ORG_GIT_COMMIT_ID.eq(new JdbcNamedParameter("orgGitCommitId"))));
+		public Integer DeleteByDiaryId( Integer diaryId){
+			if(diaryId==null) {
+				return 0;
 			}
-		} );
+			Delete delete = Delete.delete(ORG_DIARY_GIT_DETAIL_TABLE).where(
+					and(ORG_DIARY_GIT_DETAIL_TABLE.ORG_DIARY_ID.eq(diaryId)));
+			return getDslSession().execute(delete);
 	}
-		
-		
-		
+
 	/** 
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

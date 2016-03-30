@@ -1,11 +1,8 @@
 package org.tinygroup.sdpm.org.dao.fields;
 
-import com.thoughtworks.xstream.annotations.XStreamAlias;
-
 /**
  * Created by Administrator on 2016/3/21.
  */
-@XStreamAlias("repository")
 public class Repository {
     private String name;
     private String url;

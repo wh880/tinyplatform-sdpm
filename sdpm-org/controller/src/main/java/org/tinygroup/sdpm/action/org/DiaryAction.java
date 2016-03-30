@@ -181,7 +181,7 @@ public class DiaryAction extends BaseController {
             //进行添加周报以及添加周报详情的操作
             diaryService.addDiary(orgDiary, list);
         }
-        //gyl 添加周报相关信息
+        //2gyl 添加周报相关信息
         diary = diaryService.findDiaryByUserLatest(userId, year, week);
         Integer diaryId = diary.getOrgDiaryId();
         String[] gitIdStrs = gitIds.split(",");
@@ -190,10 +190,10 @@ public class DiaryAction extends BaseController {
         for(String id:gitIdStrs){
         	OrgDiaryGitDetail orgDiaryGitDetail = new OrgDiaryGitDetail();
         	orgDiaryGitDetail.setOrgDiaryId(diaryId);
-        	orgDiaryGitDetail.setOrgGitCommitId(Integer.parseInt(id));
+        	orgDiaryGitDetail.setOrgGitCommitId(id);
         	gitDetailList.add(orgDiaryGitDetail);
         }
-        gitService.batchInsertDiaryGitDetail(gitDetailList);
+        gitService.batchInsertDiaryGitDetail(diaryId,gitDetailList);
         return resultMap(true, "添加成功");
     }
 
@@ -487,11 +487,12 @@ public class DiaryAction extends BaseController {
         model.addAttribute("week", week);
         model.addAttribute("list", systemActions);
         model.addAttribute("details", orgDiaryDetailList);
-//gyl 显示周报相关git信息
-        List<OrgGitCommitInfo> gitList = gitService.findOrgGitCommitInfoByNameAndDate(userUtils.getUser().getOrgUserRealName(),bDate,eDate);
+//1gyl 显示周报相关git信息
+        List<OrgGitCommitInfo> gitList = gitService.findOrgGitCommitInfoByIdAndDate(userUtils.getUser().getOrgUserId(),bDate,eDate);
         Collections.sort(gitList);
         for(OrgGitCommitInfo g:gitList){
-        	g.setWeek(DateUtils.getDateWeek(g.getGitCommitTime()));
+        	g.setWeek(DateUtils.getDateWeek(g.getOrgGitCommitTime()));
+        	g.setUrlText(g.getOrgGitCommitId().substring(0, 9));
         }
         OrgDiaryGitDetail orgDiaryGitDetail = new OrgDiaryGitDetail();
         if(orgDiary!=null){
@@ -640,7 +641,7 @@ public class DiaryAction extends BaseController {
                 orgDiaryDetails.get(num).setEffortWeek(null);
             }
             map.put(diaryId, orgDiaryDetails);
-            //gyl 显示相关周报信息
+            //3gyl 显示相关周报信息
             List<OrgGitCommitInfo> orgDiaryGitDetails = null;
             if (map2.get(diaryId) == null) {
                 map2.put(diaryId, orgDiaryGitDetails);
@@ -649,12 +650,13 @@ public class DiaryAction extends BaseController {
             Collections.sort(orgDiaryGitDetails);
             String week="";
             for(OrgGitCommitInfo commit:orgDiaryGitDetails){
-                if(week.equals(DateUtils.getDateWeek(commit.getGitCommitTime()))){
+                if(week.equals(DateUtils.getDateWeek(commit.getOrgGitCommitTime()))){
                     commit.setWeek(null);
                 }else{
-                    week = DateUtils.getDateWeek(commit.getGitCommitTime());
+                    week = DateUtils.getDateWeek(commit.getOrgGitCommitTime());
                     commit.setWeek(week);
                 }
+                commit.setUrlText(commit.getOrgGitCommitId().substring(0,9));
             }
             map2.put(diaryId, orgDiaryGitDetails);
             //gyl

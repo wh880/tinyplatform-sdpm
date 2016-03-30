@@ -26,16 +26,16 @@ public class GitServiceImpl implements GitService {
         gitManager.batchInsertGitCommitInfo(list);
     }
     @Override
-    public String getNameByEmail(String email){
-        return gitManager.getNameByEmail(email);
+    public String getUserIdByEmail(String email){
+        return gitManager.getUserIdByEmail(email);
     }
     @Override
-    public List<OrgGitCommitInfo> findOrgGitCommitInfoByNameAndDate(String name, Date beginDate, Date endDate){
-        return gitManager.findOrgGitCommitInfoByNameAndDate(name, beginDate, endDate);
+    public List<OrgGitCommitInfo> findOrgGitCommitInfoByIdAndDate(String id, Date beginDate, Date endDate){
+        return gitManager.findOrgGitCommitInfoByIdAndDate(id, beginDate, endDate);
     }
 	@Override
-	public void batchInsertDiaryGitDetail(List<OrgDiaryGitDetail> list) {
-		gitManager.batchInsertDiaryGitDetail(list);
+	public void batchInsertDiaryGitDetail(Integer diaryId,List<OrgDiaryGitDetail> list) {
+		gitManager.batchInsertDiaryGitDetail(diaryId,list);
 	}
 	@Override
 	public List<OrgDiaryGitDetail> query(OrgDiaryGitDetail diaryGitDetail) {

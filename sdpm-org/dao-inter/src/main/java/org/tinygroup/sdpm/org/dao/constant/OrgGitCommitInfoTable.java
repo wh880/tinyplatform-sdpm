@@ -37,7 +37,7 @@ public class OrgGitCommitInfoTable extends Table {
 
 	/** 
 	 * <!-- begin-user-doc -->
-	 * GIT_INFO_ID
+	 * ORG_GIT_COMMIT_ID
 	 * 
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -47,7 +47,7 @@ public class OrgGitCommitInfoTable extends Table {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public final Column GIT_COMMIT_ID = new Column(this, "git_commit_id");
+	public final Column ORG_GIT_COMMIT_ID = new Column(this, "org_git_commit_id");
 
 	/** 
 	 * <!-- begin-user-doc -->
@@ -61,7 +61,7 @@ public class OrgGitCommitInfoTable extends Table {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public final Column GIT_COMMIT_TIME = new Column(this, "git_commit_time");
+	public final Column ORG_GIT_COMMIT_TIME = new Column(this, "org_git_commit_time");
 
 	/** 
 	 * <!-- begin-user-doc -->
@@ -75,11 +75,11 @@ public class OrgGitCommitInfoTable extends Table {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public final Column GIT_REPOSITORY_NAME = new Column(this, "git_repository_name");
+	public final Column ORG_GIT_REPOSITORY_NAME = new Column(this, "org_git_repository_name");
 
 	/** 
 	 * <!-- begin-user-doc -->
-	 * GIT_AUTHOR_NAME
+	 * GIT_AUTHOR_ID
 	 * 
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -89,7 +89,7 @@ public class OrgGitCommitInfoTable extends Table {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public final Column GIT_AUTHOR_NAME = new Column(this, "git_author_name");
+	public final Column ORG_GIT_AUTHOR_ID = new Column(this, "org_git_author_id");
 
 	/** 
 	 * <!-- begin-user-doc -->
@@ -103,7 +103,7 @@ public class OrgGitCommitInfoTable extends Table {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public final Column GIT_COMMIT_MESSAGE = new Column(this, "git_commit_message");
+	public final Column ORG_GIT_COMMIT_MESSAGE = new Column(this, "org_git_commit_message");
 
 	/** 
 	 * <!-- begin-user-doc -->
@@ -117,7 +117,7 @@ public class OrgGitCommitInfoTable extends Table {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public final Column GIT_COMMIT_URL = new Column(this, "git_commit_url");
+	public final Column ORG_GIT_COMMIT_URL = new Column(this, "org_git_commit_url");
 
 	/** 
 	 * <!-- begin-user-doc -->
@@ -131,7 +131,7 @@ public class OrgGitCommitInfoTable extends Table {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public final Column GIT_TYPE = new Column(this, "git_type");
+	public final Column ORG_GIT_TYPE = new Column(this, "org_git_type");
 
 
 	public OrgGitCommitInfoTable() {

@@ -52,7 +52,7 @@ public class OrgDiaryGitDetail implements Serializable{
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private Integer orgGitCommitId;
+	private String orgGitCommitId;
 
 
 	public void setOrgDiaryGitDetailId(Integer orgDiaryGitDetailId){
@@ -71,11 +71,11 @@ public class OrgDiaryGitDetail implements Serializable{
 		return orgDiaryId;
 	}
 
-	public void setOrgGitCommitId(Integer orgGitCommitId){
+	public void setOrgGitCommitId(String orgGitCommitId){
 		this. orgGitCommitId = orgGitCommitId;
 	}
 
-	public Integer getOrgGitCommitId(){
+	public String getOrgGitCommitId(){
 		return orgGitCommitId;
 	}
 

@@ -1,15 +1,12 @@
 package org.tinygroup.sdpm.org.dao.fields;
 
-import com.thoughtworks.xstream.annotations.XStreamAlias;
-import com.thoughtworks.xstream.annotations.XStreamImplicit;
-
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Administrator on 2016/3/21.
  */
-@XStreamAlias("push_data")
+
 public class PullPushData {
     private String before;
     private String after;
@@ -18,7 +15,6 @@ public class PullPushData {
     private String user_name;
     private User user;
     private Repository repository;
-    @XStreamImplicit
     private List<Commit> commits;
     private Integer total_commits_count;
     private Boolean commits_more_than_ten;

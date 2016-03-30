@@ -1,15 +1,15 @@
 package org.tinygroup.sdpm.org.dao.fields;
 
-import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.alibaba.fastjson.annotation.JSONField;
 
 /**
  * Created by Administrator on 2016/3/21.
  */
-@XStreamAlias("hook")
 public class Hook {
     private String password;
     private String hook_name;
-    private PullPushData push_data;
+
+    private PullPushData pull_push_data;
 
     public String getPassword() {
         return password;
@@ -27,11 +27,12 @@ public class Hook {
         this.hook_name = hook_name;
     }
 
-    public PullPushData getPush_data() {
-        return push_data;
+    @JSONField(name="push_data")
+    public PullPushData getPull_push_data() {
+        return pull_push_data;
     }
-
-    public void setPush_data(PullPushData push_data) {
-        this.push_data = push_data;
+    @JSONField(name="push_data")
+    public void setPull_push_data(PullPushData push_data) {
+        this.pull_push_data = push_data;
     }
 }

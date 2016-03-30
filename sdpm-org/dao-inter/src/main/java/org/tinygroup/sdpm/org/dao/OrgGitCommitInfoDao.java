@@ -18,7 +18,6 @@ package org.tinygroup.sdpm.org.dao;
 
 import java.util.Date;
 import java.util.List;
-
 import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
 
 import org.tinygroup.sdpm.org.dao.pojo.OrgGitCommitInfo;
@@ -28,7 +27,12 @@ import org.tinygroup.sdpm.org.dao.pojo.OrgGitCommitInfo;
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-public interface OrgGitCommitInfoDao extends BaseDao<OrgGitCommitInfo,Integer> {
-	public List<OrgGitCommitInfo> findOrgGitCommitInfoByNameAndDate(String name,Date beginDate,Date endDate);
-	public String getNameByEmail(String email);
+public interface OrgGitCommitInfoDao extends BaseDao<OrgGitCommitInfo,String> {
+
+	public List<OrgGitCommitInfo> findOrgGitCommitInfoByIdAndDate(String id, Date beginDate, Date endDate);
+
+		public String getUserIdByEmail(String email);
+
+		public int[] batchDeleteGitCommitInfoById(List<OrgGitCommitInfo> list);
+
 }
