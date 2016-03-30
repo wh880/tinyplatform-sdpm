@@ -56,8 +56,6 @@
             <class-path path="{userfiles.basedir}"/>
 
             <!-- 需要加的自己署名 -->
-            <!-- gyl -->
-            <class-path path="F:\hundsun\git\sdpm\sdpm-org\view\src\main\resources"/>
 
             <!-- Hulk's Path -->
             <class-path path="E:\workcode\sdpm\sdpm-org\view\src\main\resources"/>
