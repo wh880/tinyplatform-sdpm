@@ -14,26 +14,26 @@
 #end
 #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/product/teamSave" "post" {"class":"test"})
     #@table()
-    <tr>
-        <td style="width: 2%"></td>
-        <td width="18%">
-            <span class="c-red">*</span>用户
-        </td>
-        <td width="20%">
-            <span class="c-red">*</span>产品角色
-        </td>
-        <td width="20%">
-            加盟日
-        </td>
-        <td width="15%">
-            可用工日(天)
-        </td>
-        <td width="15%">
-            可用工时(小时/天)
-        </td>
-        #@td("w-p125")
-        #end
-    </tr>
+        <tr>
+            <td style="width: 2%"></td>
+            <td width="18%">
+                <span class="c-red">*</span>用户
+            </td>
+            <td width="20%">
+                <span class="c-red">*</span>产品角色
+            </td>
+            <td width="20%">
+                加盟日
+            </td>
+            <td width="15%">
+                可用工日(天)
+            </td>
+            <td width="15%">
+                可用工时(小时/天)
+            </td>
+            #@td("w-p125")
+            #end
+        </tr>
         #set(a = 0)
         #foreach(t : teamList)
         <tr>

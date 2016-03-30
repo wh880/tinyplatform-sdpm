@@ -13,7 +13,7 @@
         #@td()
         <div style="width: 300px;overflow: hidden;">
                 ${plan?.planSpec}
-            </div>
+        </div>
         #end
         #@td("nowrap")${plan?.planBeginDate?formatDate(plan?.planBeginDate,'yyyy-MM-dd'):""}#end
         #@td("nowrap")${plan?.planEndDate?formatDate(plan?.planEndDate,'yyyy-MM-dd'):""}#end
