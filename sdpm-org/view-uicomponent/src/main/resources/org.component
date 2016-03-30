@@ -43,8 +43,8 @@
             </a>
             <div class="r f-14">
                 #fontIco("calendar") ${createDate}
-            <span class="dia_h_btn" data-open="0">
                 #if(detailCountStatus==1)
+                    <span class="dia_h_btn" data-open="0">
                 #fontIco("chevron-down")</span>
                 #end
             </div>
@@ -60,13 +60,13 @@
 #end
 
 
-#macro diaryItem2(authorWeek createDate diaryContent)
+#macro diaryItem2(authorWeek createDate diaryContent detailStatus)
 <li class="diary-detail">
     <div class="diary-report clearfix">
         <div class="portrait">
             <div class="r f-14">
-                #fontIco("calendar") ${createDate}
-                <span class="dia_h_btn" data-open="0">#fontIco("chevron-down")</span>
+                #fontIco("calendar")${createDate}
+                #if(detailStatus==1)<span class="dia_h_btn" data-open="0">#fontIco("chevron-down")</span>#end
             </div>
         </div>
         <div class="diary-info" style="cursor:pointer" data-load="true">

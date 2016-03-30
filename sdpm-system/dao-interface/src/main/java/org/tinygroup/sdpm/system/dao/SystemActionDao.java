@@ -55,6 +55,8 @@ public interface SystemActionDao extends BaseDao<SystemAction, Integer> {
 
     List<SystemAction> findReleaseByReleaseList(List<Integer> releases);
 
+    List<SystemAction> findDocByCaseList(List<Integer> docs);
+
 
     /**
      * 查询某一用户于某一个时间段内的系统日志信息（周报所需信息任务的创建、完成

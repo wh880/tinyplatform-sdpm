@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.tinygroup</groupId>
         <artifactId>sdpm-system</artifactId>
-        <version>1.0.2</version>
+        <version>1.0.3-SNAPSHOT</version>
     </parent>
     <artifactId>sdpm-system-dao-impl</artifactId>
     <name>sdpm-system-dao-impl</name>
@@ -30,17 +30,22 @@
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>sdpm-quality-dao-interface</artifactId>
-            <version>1.0.2</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>sdpm-quality-dao-interface</artifactId>
-            <version>1.0.2</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>sdpm-project-dao-interface</artifactId>
-            <version>1.0.2</version>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>sdpm-document-dao-interface</artifactId>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
 </project>

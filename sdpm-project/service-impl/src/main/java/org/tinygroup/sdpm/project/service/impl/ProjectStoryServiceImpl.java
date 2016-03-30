@@ -72,8 +72,8 @@ public class ProjectStoryServiceImpl implements ProjectStoryService {
         return projectStoryManager.deleteByProjectStory(projectId, storyId);
     }
 
-    public Pager<ProductStory> findStoryToLink(Integer projectId, Integer start, Integer limit, String order, String ordertype) {
-        return projectStoryManager.findStoryToLink(projectId, start, limit, order, ordertype);
+    public Pager<ProductStory> findStoryToLink(Integer projectId, Integer start, Integer limit, String order, String orderType, Boolean isNotInProjectStory) {
+        return projectStoryManager.findStoryToLink(projectId, start, limit, order, orderType, isNotInProjectStory);
     }
 
     public Pager<ProductStory> findStoryPager(int start, int limit, int id, SearchInfos conditions, String groupOperate) {

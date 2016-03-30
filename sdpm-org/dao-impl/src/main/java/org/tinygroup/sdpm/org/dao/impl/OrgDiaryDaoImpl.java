@@ -443,7 +443,7 @@ public class OrgDiaryDaoImpl extends TinyDslDaoSupport implements OrgDiaryDao {
                         ORG_DIARYTABLE.ORG_USER_ID.eq(ORG_USERTABLE.ORG_USER_ID),
                         ORG_DIARYTABLE.ORG_USER_ID.in(list.toArray()),
                         ORG_DIARYTABLE.ORG_DIARY_YEAR.eq(year),
-                        ORG_DIARYTABLE.ORG_DIARY_WEEK.eq(week)));
+                        ORG_DIARYTABLE.ORG_DIARY_WEEK.eq(week))).orderBy(OrderByElement.desc(ORG_DIARYTABLE.ORG_DIARY_CREATE_DATE));
         return getDslSession().fetchList(select, OrgDiaryAndUserDO.class);
     }
 
@@ -455,7 +455,7 @@ public class OrgDiaryDaoImpl extends TinyDslDaoSupport implements OrgDiaryDao {
                                 .where(ORG_DIARY_WHITE_LISTTABLE.ORG_DIARY_WHITE_LIST_FIRST_ACCOUNT.eq(userId))))))
                 ), ORG_DIARYTABLE.ORG_DIARY_YEAR.eq(year),
                 ORG_DIARYTABLE.ORG_DIARY_WEEK.eq(week),
-                ORG_DIARYTABLE.ORG_USER_ID.eq(ORG_USERTABLE.ORG_USER_ID)));
+                ORG_DIARYTABLE.ORG_USER_ID.eq(ORG_USERTABLE.ORG_USER_ID))).orderBy(OrderByElement.desc(ORG_DIARYTABLE.ORG_DIARY_CREATE_DATE));
         return getDslSession().fetchList(select, OrgDiaryAndUserDO.class);
     }
 
@@ -470,4 +470,5 @@ public class OrgDiaryDaoImpl extends TinyDslDaoSupport implements OrgDiaryDao {
                 ORG_DIARYTABLE.ORG_USER_ID.eq(ORG_USERTABLE.ORG_USER_ID)));
         return getDslSession().fetchPage(select, start, limit, false, OrgDiaryAndUserDO.class);
     }
+
 }

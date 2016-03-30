@@ -4,14 +4,14 @@
     <parent>
         <groupId>org.tinygroup</groupId>
         <artifactId>sdpm</artifactId>
-        <version>1.0.2</version>
+        <version>1.0.3-SNAPSHOT</version>
     </parent>
     <packaging>pom</packaging>
     <artifactId>sdpm-remote</artifactId>
 
     <properties>
-        <tiny_version>2.1.0</tiny_version>
-        <tiny_ui_version>2.1.0</tiny_ui_version>
+        <tiny_version>2.0.34</tiny_version>
+        <tiny_ui_version>2.0.32</tiny_ui_version>
     </properties>
 
     <modules>

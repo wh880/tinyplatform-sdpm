@@ -52,14 +52,14 @@ import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 @Repository
 public class ProjectStoryDaoImpl extends TinyDslDaoSupport implements ProjectStoryDao {
 
-    public Pager<ProductStory> findStory(Integer projectId, Integer start, Integer limit, final OrderBy... orderByArgs) {
+    public Pager<ProductStory> findStory(Integer projectId, Integer start, Integer limit, boolean isNotInProjectStory, final OrderBy... orderByArgs) {
         SubSelect subSelect = SubSelect.subSelect(selectFrom(PROJECT_STORYTABLE).where(
                 and(
                         PROJECT_STORYTABLE.STORY_ID.eq(PRODUCT_STORYTABLE.STORY_ID),
                         PROJECT_STORYTABLE.STORY_VERSION.eq(PRODUCT_STORYTABLE.STORY_VERSION),
                         PROJECT_STORYTABLE.PROJECT_ID.eq(projectId)
                 )));
-        Condition existsCondition = new Condition(new ExistsExpression(subSelect, false));
+        Condition existsCondition = new Condition(new ExistsExpression(subSelect, isNotInProjectStory));
         Select select = Select.select(PRODUCT_STORYTABLE.ALL, PRODUCT_PLANTABLE.PLAN_NAME, PRODUCTTABLE.PRODUCT_NAME)
                 .from(PROJECT_PRODUCTTABLE)
                 .join(Join.newJoin(PRODUCT_STORYTABLE,

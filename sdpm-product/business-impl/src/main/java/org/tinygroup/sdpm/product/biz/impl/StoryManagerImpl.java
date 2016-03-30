@@ -181,16 +181,15 @@ public class StoryManagerImpl implements StoryManager {
         return productStoryDao.projectLinkedStory(start, limit, story, mergeCondition(carrier));
     }
 
-    public Pager<ProductStory> findPager(int start, int limit, ProductStory story, ConditionCarrier carrier, String columnName, boolean asc) {
+    public Pager<ProductStory> findPager(int start, int limit, ProductStory story, ConditionCarrier carrier, Boolean ignoreDelete, String columnName, boolean asc) {
         if (!StringUtil.isBlank(columnName)) {
-            return productStoryDao.complexQuery(start, limit, story, mergeCondition(carrier), new OrderBy(NameUtil.resolveNameDesc(columnName), asc));
+            return productStoryDao.complexQuery(start, limit, story, ignoreDelete, mergeCondition(carrier), new OrderBy(NameUtil.resolveNameDesc(columnName), asc));
         }
-        return productStoryDao.complexQuery(start, limit, story, mergeCondition(carrier));
+        return productStoryDao.complexQuery(start, limit, story, ignoreDelete, mergeCondition(carrier));
     }
 
     public Pager<ProductStory> findStoryByCondition(int start, int limit, ProductStory story, ConditionCarrier carrier, final String columnName, boolean asc) {
-
-        return findPager(start, limit, story, carrier, columnName, asc);
+        return findPager(start, limit, story, carrier, true, columnName, asc);
     }
 
     public List<ProductStory> storyInCondition(String condition, Integer limit, Integer productId, Integer... ids) {

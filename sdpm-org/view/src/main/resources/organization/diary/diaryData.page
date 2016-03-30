@@ -23,6 +23,9 @@
                                 #elseif(var3?.objectType=="release")
                                 <a href="${TINY_CONTEXT_PATH+adminPath}/product/release/find?releaseId=${var3?.objectId}"
                                    target="_blank">
+                                #elseif(var3?.objectType=="doc")
+                                <a href="${TINY_CONTEXT_PATH+adminPath}/document/doc/view?docid=${var3?.objectId}"
+                                   target="_blank">
                                 #end
                                 ${var3?.objectType}_ID:${var3?.objectId}</a>）</span></li>
                         </ol>
