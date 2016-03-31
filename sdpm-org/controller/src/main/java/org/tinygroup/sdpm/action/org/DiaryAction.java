@@ -649,7 +649,6 @@ public class DiaryAction extends BaseController {
                 map2.put(diaryId, orgDiaryGitDetails);
             }
             orgDiaryGitDetails = gitService.getOrgGitCommitInfoByDiaryId(diaryId);
-            Collections.sort(orgDiaryGitDetails);
             String week = "";
             for (OrgGitCommitInfo commit : orgDiaryGitDetails) {
                 if (week.equals(DateUtils.getDateWeek(commit.getOrgGitCommitTime()))) {

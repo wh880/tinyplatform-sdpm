@@ -22,17 +22,19 @@ import java.util.Date;
 /**
  * <!-- begin-user-doc -->
  * 每日详情表
- *
+ * <p>
  * <!-- end-user-doc -->
+ *
  * @generated
  */
-public class OrgDiaryDetail implements Serializable {
+public class OrgDiaryDetail implements Serializable, Comparable<OrgDiaryDetail> {
 
     /**
      * <!-- begin-user-doc -->
      * 周报详情id
-     *
+     * <p>
      * <!-- end-user-doc -->
+     *
      * @generated
      */
     private Integer orgDetailId;
@@ -40,8 +42,9 @@ public class OrgDiaryDetail implements Serializable {
     /**
      * <!-- begin-user-doc -->
      * 周报id
-     *
+     * <p>
      * <!-- end-user-doc -->
+     *
      * @generated
      */
     private Integer orgDiaryId;
@@ -49,8 +52,9 @@ public class OrgDiaryDetail implements Serializable {
     /**
      * <!-- begin-user-doc -->
      * 用户编号
-     *
+     * <p>
      * <!-- end-user-doc -->
+     *
      * @generated
      */
     private String orgUserId;
@@ -58,8 +62,9 @@ public class OrgDiaryDetail implements Serializable {
     /**
      * <!-- begin-user-doc -->
      * 详情发生时间
-     *
+     * <p>
      * <!-- end-user-doc -->
+     *
      * @generated
      */
     private Date orgDetailDate;
@@ -67,8 +72,9 @@ public class OrgDiaryDetail implements Serializable {
     /**
      * <!-- begin-user-doc -->
      * 详情类型
-     *
+     * <p>
      * <!-- end-user-doc -->
+     *
      * @generated
      */
     private String orgDetailType;
@@ -76,8 +82,9 @@ public class OrgDiaryDetail implements Serializable {
     /**
      * <!-- begin-user-doc -->
      * 详情内容
-     *
+     * <p>
      * <!-- end-user-doc -->
+     *
      * @generated
      */
     private String orgDetailContent;
@@ -85,18 +92,23 @@ public class OrgDiaryDetail implements Serializable {
     /**
      * <!-- begin-user-doc -->
      * 系统日志ID
-     *
+     * <p>
      * <!-- end-user-doc -->
+     *
      * @generated
      */
     private Integer actionId;
 
-
     /**
      * 所在星期几
+     *
      * @param orgDetailId
      */
     private String effortWeek;
+
+    private String objectType;
+
+    private Integer objectId;
 
     public Integer getOrgDetailId() {
         return orgDetailId;
@@ -160,5 +172,30 @@ public class OrgDiaryDetail implements Serializable {
 
     public void setEffortWeek(String effortWeek) {
         this.effortWeek = effortWeek;
+    }
+
+    public String getObjectType() {
+        return objectType;
+    }
+
+    public void setObjectType(String objectType) {
+        this.objectType = objectType;
+    }
+
+    public Integer getObjectId() {
+        return objectId;
+    }
+
+    public void setObjectId(Integer objectId) {
+        this.objectId = objectId;
+    }
+
+    @Override
+    public int compareTo(OrgDiaryDetail o) {
+        if (o == null)
+            return 0;
+        else {
+            return -this.getOrgDetailDate().compareTo(o.orgDetailDate);
+        }
     }
 }

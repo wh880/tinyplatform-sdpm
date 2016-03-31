@@ -57,7 +57,7 @@ public class OrgDiaryGitDetailDaoImpl extends TinyDslDaoSupport implements OrgDi
             public Select generate(OrgGitCommitInfo t) {
                 Select select = select(ORG_GIT_COMMIT_INFO_TABLE.ALL).from(ORG_GIT_COMMIT_INFO_TABLE, ORG_DIARY_GIT_DETAIL_TABLE)
                         .where(and(ORG_GIT_COMMIT_INFO_TABLE.ORG_GIT_COMMIT_ID.eq(ORG_DIARY_GIT_DETAIL_TABLE.ORG_GIT_COMMIT_ID),
-                                ORG_DIARY_GIT_DETAIL_TABLE.ORG_DIARY_ID.eq(diaryId)));
+                                ORG_DIARY_GIT_DETAIL_TABLE.ORG_DIARY_ID.eq(diaryId))).orderBy(OrderByElement.desc(ORG_GIT_COMMIT_INFO_TABLE.ORG_GIT_COMMIT_TIME));
                 return select;
             }
         });
