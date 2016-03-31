@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Administrator on 2016/3/21.
+ * Created by gongyl on 2016/3/21.
  */
 
 public class PullPushData {

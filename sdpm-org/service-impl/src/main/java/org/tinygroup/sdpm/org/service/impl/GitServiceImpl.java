@@ -11,7 +11,7 @@ import org.tinygroup.sdpm.org.dao.pojo.OrgGitCommitInfo;
 import org.tinygroup.sdpm.org.service.inter.GitService;
 
 /**
- * Created by Administrator on 2016/3/24.
+ * Created by gongyl on 2016/3/24.
  */
 @Component
 public class GitServiceImpl implements GitService {
