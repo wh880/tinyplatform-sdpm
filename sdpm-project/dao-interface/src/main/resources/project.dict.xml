@@ -19,6 +19,7 @@
         </dictNodeEntry>
 
         <dictNodeEntry name="taskType" title="任务类型">
+            <dictItem key="9" value="支持" sort="1"/>
             <dictItem key="1" value="设计" sort="1"/>
             <dictItem key="2" value="开发" sort="2"/>
             <dictItem key="3" value="测试" sort="3"/>

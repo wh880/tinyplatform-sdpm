@@ -139,7 +139,6 @@ public class ProjectTaskAction extends BaseController {
         if (taskId != null) {
             ProjectTask task = taskService.findTaskById(Integer.parseInt(taskId));
             model.addAttribute("copyTask", task);
-
         }
         List<ProductStory> storyList = projectStoryService.findStoryByProject(projectId);
         List<QualityBug> bugList = projectService.findRelationBugByProjectID(projectId);
@@ -870,6 +869,11 @@ public class ProjectTaskAction extends BaseController {
             List<SystemModule> moduleList = moduleService.findModuleList(systemModule);
             for (SystemModule module : moduleList) {
                 module.setModuleName(ModuleUtil.getPath(module.getModuleId(), "/", null, false));
+            }
+            if (CollectionUtil.isEmpty(moduleList)) {
+                systemModule = new SystemModule();
+                systemModule.setModuleOwner(productStory.getProductId().toString());
+                moduleList = moduleService.findModuleList(systemModule);
             }
             return moduleList;
         } else {

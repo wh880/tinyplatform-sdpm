@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.project.service.inter;
 
+import org.tinygroup.aopcache.annotation.CacheRemove;
 import org.tinygroup.sdpm.project.service.dto.BurnDTO;
 
 /**
@@ -20,6 +21,7 @@ public interface BurnService {
      * @param interval  间隔时间
      * @return
      */
+    @CacheRemove(removeGroups = "需要清理的缓存组")
     BurnDTO initBurn(Integer projectId, Integer interval);
 
 }

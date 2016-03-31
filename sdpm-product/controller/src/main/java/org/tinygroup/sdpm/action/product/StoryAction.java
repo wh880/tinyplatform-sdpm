@@ -411,6 +411,18 @@ public class StoryAction extends BaseController {
             testCase1.setStoryId(storyId);
             List<QualityTestCase> testCases = testCaseService.findTestCaseList(testCase1);
             model.addAttribute("caseList", testCases);
+
+
+            if (productStory != null && !StringUtil.isBlank(productStory.getStoryLinkStories())) {
+                String storyLinkStories = productStory.getStoryLinkStories();
+                String[] split = storyLinkStories.split(",");
+                List<Integer> idList = new ArrayList<Integer>();
+                for (String s : split) {
+                    idList.add(Integer.parseInt(s));
+                }
+                List<ProductStory> storyList = storyService.findStoryListByIds(idList.toArray(new Integer[0]));
+                model.addAttribute("storyList", storyList);
+            }
             return "/product/page/view/story/hrefbaseinfo.pagelet";
         }
 
