@@ -629,7 +629,7 @@ public class DiaryAction extends BaseController {
                 OrgDiaryDetail orgDetail = orgDiaryDetails.get(i);
                 orgDetail.setEffortWeek(DateUtils.getDateWeek(orgDetail.getOrgDetailDate()));
             }
-//            Collections.sort(orgDiaryDetails);
+            Collections.sort(orgDiaryDetails);
             List<Integer> list1 = new ArrayList<Integer>();
             for (int i = 0; i < orgDiaryDetails.size(); i++) {
                 if (i > 0) {
