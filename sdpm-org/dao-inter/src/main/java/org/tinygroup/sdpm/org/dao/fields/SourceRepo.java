@@ -11,12 +11,12 @@ public class SourceRepo {
         return project_id;
     }
 
-    public void setProject_id(int project_id) {
-        this.project_id = project_id;
-    }
-
     public void setProject_id(String project_id) {
         this.project_id = Integer.parseInt(project_id);
+    }
+
+    public void setProject_id(int project_id) {
+        this.project_id = project_id;
     }
 
     public String getProject_name() {
