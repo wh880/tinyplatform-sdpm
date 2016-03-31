@@ -185,11 +185,10 @@ public class DiaryAction extends BaseController {
             //进行添加周报以及添加周报详情的操作
             diaryService.addDiary(orgDiary, list);
         }
-        //2gyl 添加周报相关信息
+        //添加周报相关git信息
         diary = diaryService.findDiaryByUserLatest(userId, year, week);
         Integer diaryId = diary.getOrgDiaryId();
         String[] gitIdStrs = gitIds.split(",");
-        System.out.println(gitIdStrs);
         List<OrgDiaryGitDetail> gitDetailList = new ArrayList<OrgDiaryGitDetail>();
         for(String id:gitIdStrs){
         	OrgDiaryGitDetail orgDiaryGitDetail = new OrgDiaryGitDetail();
@@ -496,7 +495,7 @@ public class DiaryAction extends BaseController {
         model.addAttribute("week", week);
         model.addAttribute("list", systemActions);
         model.addAttribute("details", orgDiaryDetailList);
-//1gyl 显示周报相关git信息
+        //显示周报相关git信息
         List<OrgGitCommitInfo> gitList = gitService.findOrgGitCommitInfoByIdAndDate(userUtils.getUser().getOrgUserId(),bDate,eDate);
         Collections.sort(gitList);
         for(OrgGitCommitInfo g:gitList){
@@ -508,7 +507,6 @@ public class DiaryAction extends BaseController {
             orgDiaryGitDetail.setOrgDiaryId(orgDiary.getOrgDiaryId());
             List<OrgDiaryGitDetail> details2 = gitService.query(orgDiaryGitDetail);
             model.addAttribute("details2", details2);
-            System.out.println(details2.size());
         }
         model.addAttribute("gitList", gitList);
 
@@ -656,7 +654,7 @@ public class DiaryAction extends BaseController {
             }
 
             map.put(diaryId, orgDiaryDetails);
-            //3gyl 显示相关周报信息
+            //显示相关周报git信息
             List<OrgGitCommitInfo> orgDiaryGitDetails = null;
             if (map2.get(diaryId) == null) {
                 map2.put(diaryId, orgDiaryGitDetails);
@@ -674,7 +672,6 @@ public class DiaryAction extends BaseController {
                 commit.setUrlText(commit.getOrgGitCommitId().substring(0,9));
             }
             map2.put(diaryId, orgDiaryGitDetails);
-            //gyl
         }
         String realName = user.getOrgUserRealName();
         model.addAttribute("pager", pager);

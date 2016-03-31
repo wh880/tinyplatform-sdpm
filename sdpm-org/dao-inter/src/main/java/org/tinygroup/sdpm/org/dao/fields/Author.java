@@ -1,11 +1,9 @@
 package org.tinygroup.sdpm.org.dao.fields;
 
-import com.thoughtworks.xstream.annotations.XStreamAlias;
-
 /**
  * Created by Administrator on 2016/3/21.
  */
-@XStreamAlias("author")
+
 public class Author {
     private String name;
     private String email;
