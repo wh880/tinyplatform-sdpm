@@ -4,7 +4,7 @@ package org.tinygroup.sdpm.org.dao.fields;
 import java.util.Date;
 
 /**
- * Created by Administrator on 2016/3/21.
+ * Created by gongyl on 2016/3/21.
  */
 public class Commit {
     private String id;
