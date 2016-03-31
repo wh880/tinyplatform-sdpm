@@ -19,11 +19,11 @@
         #@validateDiv("col-2")#end
     #end
     
-##     #@elementItem()
-##        <div class="text-c">
-##				#submitButton("productSubmit","关闭","commitBtn","关闭")
-##        </div>
-##    #end
+#*    #@elementItem()
+       <div class="text-c">
+				#submitButton("productSubmit","关闭","commitBtn","关闭")
+       </div>
+   #end*#
 
 #end
 <script>

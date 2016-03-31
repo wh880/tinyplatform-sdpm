@@ -2,6 +2,7 @@ package org.tinygroup.sdpm.common.menu;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.mapper.DefaultMapper;
+import org.springframework.stereotype.Component;
 import org.tinygroup.fileresolver.impl.AbstractFileProcessor;
 import org.tinygroup.logger.LogLevel;
 import org.tinygroup.logger.Logger;
@@ -15,6 +16,7 @@ import java.util.Map;
 /**
  * Created by Hulk on 2015/8/27.
  */
+@Component
 public class MenuFileProcessor extends AbstractFileProcessor {
     private static final String MENU_EXT_FILENAME = ".menu.xml";
     private static Logger logger = LoggerFactory

@@ -243,7 +243,11 @@
                     #foreach(m:menuManager?.getScopeMenus("product-del"))
                         #if(m?.id=="product-demand-del")
                         #set(dae=[34,36])
-                            #@btnModal("#myModal" "关闭" "1000" "400" "btn radius btn-danger" adminPath+"/product/story/findByKeys" "betchClose")批量关闭#end
+
+                                <a>#@mulOperation("product-demand-del" TINY_CONTEXT_PATH+adminPath+"/product/story/findByKeys")
+                                    #@btnModal("" "批量关闭" "1000" "400" "btn radius btn-danger") 批量关闭#end
+                                #end</a>
+
                         #end
                     #end
                 #end
