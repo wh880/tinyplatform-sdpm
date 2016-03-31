@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.convert.objectjson.fastjson.JsonToObject;
+import org.tinygroup.logger.LogLevel;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.org.dao.fields.*;
 import org.tinygroup.sdpm.org.dao.pojo.OrgGitCommitInfo;
@@ -22,18 +23,18 @@ import java.util.List;
  * Created by gongyl on 2016/3/23.
  */
 @Controller
-@RequestMapping(value="org/git")
-public class GitAction extends BaseController{
+@RequestMapping(value = "org/git")
+public class GitAction extends BaseController {
 
     @Autowired
     private GitService gitService;
 
     @ResponseBody
-    @RequestMapping(value="/convert" ,method = RequestMethod.POST)
-    public void convertToJava( HttpServletRequest req){
+    @RequestMapping(value = "/convert", method = RequestMethod.POST)
+    public void convertToJava(HttpServletRequest req) {
 
         int size = req.getContentLength();
-        if(size>0){
+        if (size > 0) {
             try {
                 BufferedReader reader = req.getReader();
                 StringBuffer jsonStringBuffer = new StringBuffer();
@@ -41,41 +42,43 @@ public class GitAction extends BaseController{
                 while ((temp = reader.readLine()) != null) {
                     jsonStringBuffer.append(temp);
                 }
-                String jsonString = URLDecoder.decode(jsonStringBuffer.toString(),"utf-8");
-                jsonString = jsonString.replaceFirst("hook=","");
+                String jsonString = URLDecoder.decode(jsonStringBuffer.toString(), "utf-8");
+                jsonString = jsonString.replaceFirst("hook=", "");
                 reader.close();
+                logger.error(jsonString);
                 JsonToObject<Hook> jsonToObject = new JsonToObject<Hook>(Hook.class);
                 Hook jsonObject = jsonToObject.convert(jsonString);
                 addCommitInfo(jsonObject);
             } catch (IOException e) {
-                logger.error("convert error",e);
+                logger.error("convert error", e);
             }
         }
     }
 
-    private void addCommitInfo(Hook hook){
-        if(hook==null){
+    private void addCommitInfo(Hook hook) {
+        if (hook == null) {
             return;
         }
         PullPushData pullPushData = hook.getPull_push_data();
-        if(pullPushData!=null){
+        if (pullPushData != null) {
             Repository repository = pullPushData.getRepository();
-            String repositoryName="";
-            if(repository!=null){
+            String repositoryName = "";
+            if (repository != null) {
                 repositoryName = repository.getName();
-                if(repositoryName==null||"".equals(repositoryName)){
+                if (repositoryName == null || "".equals(repositoryName)) {
                     return;
                 }
             }
             List<OrgGitCommitInfo> list = new ArrayList<OrgGitCommitInfo>();
             List<Commit> commits = pullPushData.getCommits();
-            for(Commit c:commits) {
+            for (Commit c : commits) {
                 Author author = c.getAuthor();
-                if(author==null){
+                if (author == null) {
+                    logger.log(LogLevel.ERROR,"错误信息");
                     continue;
                 }
                 String authorId = gitService.getUserIdByEmail(author.getEmail());
-                if(authorId==null){
+                if (authorId == null) {
                     continue;
                 }
                 OrgGitCommitInfo orgGitCommitInfo = new OrgGitCommitInfo();
@@ -88,7 +91,7 @@ public class GitAction extends BaseController{
                 orgGitCommitInfo.setOrgGitCommitTime(c.getTimestamp());
                 list.add(orgGitCommitInfo);
             }
-            if(list.size()>0){
+            if (list.size() > 0) {
                 gitService.batchInsertGitCommitInfo(list);
             }
         }
