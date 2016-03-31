@@ -49,7 +49,7 @@
     #@td("w-p125")
     <div class="operate">
         #iconOperations(iconOperationsIcon="icon-chevron-down",iconOperationsTitle="添加",iconOperationsCls="btn btn-small btn-default addnext")
-                    #iconOperations(iconOperationsIcon="icon-remove",iconOperationsTitle="删除",iconOperationsCls="btn btn-small btn-default delbutton")
+        #iconOperations(iconOperationsIcon="icon-remove",iconOperationsTitle="删除",iconOperationsCls="btn btn-small btn-default delbutton")
     </div>
     #end
 #end
