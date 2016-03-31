@@ -19,10 +19,6 @@ public interface GitManager {
      * */
     public void batchInsertGitCommitInfo(List<OrgGitCommitInfo> list);
     /**
-     * 通过邮件 获取用户的ID
-     * */
-    public String getUserIdByEmail(String email);
-    /**
      * 通过用户的ID、日期范围 查询git发送的代码提交信息
      * */
     public List<OrgGitCommitInfo> findOrgGitCommitInfoByIdAndDate(String id, Date beginDate, Date endDate);

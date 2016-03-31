@@ -49,42 +49,6 @@ import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 @Repository
 public class OrgGitCommitInfoDaoImpl extends TinyDslDaoSupport implements OrgGitCommitInfoDao {
 
-    public int[] batchDeleteGitCommitInfoById(List<OrgGitCommitInfo> list) {
-        if (CollectionUtil.isEmpty(list)) {
-            return new int[0];
-        }
-        return getDslTemplate().batchDelete(list, new NoParamDeleteGenerateCallback() {
-
-            public Delete generate() {
-                return delete(ORG_GIT_COMMIT_INFO_TABLE).where(and(
-                        ORG_GIT_COMMIT_INFO_TABLE.ORG_GIT_COMMIT_ID.eq(new JdbcNamedParameter("orgGitCommitId"))
-                ));
-            }
-        });
-
-    }
-
-    public String getUserIdByEmail(String email) {
-        if (email == null) {
-            return null;
-        }
-        OrgUser orgUser = new OrgUser();
-        orgUser.setOrgUserEmail(email);
-        List<OrgUser> list = getDslTemplate().query(orgUser, new SelectGenerateCallback<OrgUser>() {
-            public Select generate(OrgUser t) {
-                Select select = selectFrom(ORG_USERTABLE).where(and(
-                        ORG_USERTABLE.ORG_USER_EMAIL.eq(t.getOrgUserEmail())
-                ));
-                return select;
-            }
-        });
-        if (list.size() > 1 || list.size() == 0) {
-            return null;
-        } else {
-            return list.get(0).getOrgUserId();
-        }
-    }
-
     public List<OrgGitCommitInfo> findOrgGitCommitInfoByIdAndDate(String id, final Date beginDate, final Date endDate) {
         OrgGitCommitInfo orgGitCommitInfo = new OrgGitCommitInfo();
         orgGitCommitInfo.setOrgGitAuthorId(id);

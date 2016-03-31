@@ -34,11 +34,6 @@ public class GitManagerImpl implements GitManager {
     }
 
     @Override
-    public String getUserIdByEmail(String email) {
-        return orgGitCommitInfoDao.getUserIdByEmail(email);
-    }
-
-    @Override
     public List<OrgGitCommitInfo> findOrgGitCommitInfoByIdAndDate(String id, Date beginDate, Date endDate) {
         return orgGitCommitInfoDao.findOrgGitCommitInfoByIdAndDate(id, beginDate, endDate);
     }

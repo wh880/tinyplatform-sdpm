@@ -26,10 +26,6 @@ public class GitServiceImpl implements GitService {
         gitManager.batchInsertGitCommitInfo(list);
     }
     @Override
-    public String getUserIdByEmail(String email){
-        return gitManager.getUserIdByEmail(email);
-    }
-    @Override
     public List<OrgGitCommitInfo> findOrgGitCommitInfoByIdAndDate(String id, Date beginDate, Date endDate){
         return gitManager.findOrgGitCommitInfoByIdAndDate(id, beginDate, endDate);
     }

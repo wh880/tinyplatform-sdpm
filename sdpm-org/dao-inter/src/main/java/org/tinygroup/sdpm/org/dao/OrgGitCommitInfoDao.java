@@ -31,8 +31,4 @@ public interface OrgGitCommitInfoDao extends BaseDao<OrgGitCommitInfo,String> {
 
 	public List<OrgGitCommitInfo> findOrgGitCommitInfoByIdAndDate(String id, Date beginDate, Date endDate);
 
-		public String getUserIdByEmail(String email);
-
-		public int[] batchDeleteGitCommitInfoById(List<OrgGitCommitInfo> list);
-
 }

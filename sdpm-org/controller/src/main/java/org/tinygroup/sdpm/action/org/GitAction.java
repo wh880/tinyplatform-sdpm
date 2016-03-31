@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.action.org;
 
+import com.sun.media.jfxmedia.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,7 +11,9 @@ import org.tinygroup.logger.LogLevel;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.org.dao.fields.*;
 import org.tinygroup.sdpm.org.dao.pojo.OrgGitCommitInfo;
+import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.GitService;
+import org.tinygroup.sdpm.org.service.inter.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
@@ -28,6 +31,8 @@ public class GitAction extends BaseController {
 
     @Autowired
     private GitService gitService;
+    @Autowired
+    private UserService userService;
 
     @ResponseBody
     @RequestMapping(value = "/convert", method = RequestMethod.POST)
@@ -57,6 +62,7 @@ public class GitAction extends BaseController {
 
     private void addCommitInfo(Hook hook) {
         if (hook == null) {
+            logger.log(LogLevel.ERROR,"消息内容为空");
             return;
         }
         PullPushData pullPushData = hook.getPull_push_data();
@@ -66,21 +72,33 @@ public class GitAction extends BaseController {
             if (repository != null) {
                 repositoryName = repository.getName();
                 if (repositoryName == null || "".equals(repositoryName)) {
+                    logger.log(LogLevel.ERROR,"仓库名为空");
                     return;
                 }
+            }else{
+                logger.log(LogLevel.ERROR,"仓库名为空");
             }
             List<OrgGitCommitInfo> list = new ArrayList<OrgGitCommitInfo>();
             List<Commit> commits = pullPushData.getCommits();
             for (Commit c : commits) {
                 Author author = c.getAuthor();
                 if (author == null) {
-                    logger.log(LogLevel.ERROR,"错误信息");
+                    logger.log(LogLevel.ERROR,"用户消息为空");
                     continue;
                 }
-                String authorId = gitService.getUserIdByEmail(author.getEmail());
-                if (authorId == null) {
-                    continue;
+                OrgUser orgUser = new OrgUser();
+                String gitEmail = author.getEmail();
+                if(gitEmail==null){
+                    logger.log(LogLevel.ERROR,"git email为空");
+                    return;
                 }
+                orgUser.setOrgUserSubmitter(gitEmail);
+                List<OrgUser> orgUserList = userService.findUserList(orgUser);
+                if(orgUserList.size()==0){
+                    logger.log(LogLevel.ERROR,"未查询到git email为："+gitEmail+"的用户");
+                    return;
+                }
+                String authorId = orgUserList.get(0).getOrgUserId();
                 OrgGitCommitInfo orgGitCommitInfo = new OrgGitCommitInfo();
                 orgGitCommitInfo.setOrgGitCommitId(c.getId());
                 orgGitCommitInfo.setOrgGitAuthorId(authorId);
@@ -94,6 +112,8 @@ public class GitAction extends BaseController {
             if (list.size() > 0) {
                 gitService.batchInsertGitCommitInfo(list);
             }
+        }else{
+            logger.log(LogLevel.ERROR,"pushDate内容为空");
         }
     }
 }

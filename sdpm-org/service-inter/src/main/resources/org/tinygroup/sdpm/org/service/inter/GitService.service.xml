@@ -12,12 +12,6 @@
       </service-parameters>
       <service-result name="batchInsertGitCommitInfoResult" required="false" is-array="false" type="void"/>
     </service-method>
-    <service-method local-name="getUserIdByEmail" service-id="getUserIdByEmail" method-name="getUserIdByEmail" cacheable="false" category="org.tinygroup.sdpm.org.service.inter">
-      <service-parameters>
-        <service-parameter name="email" type="java.lang.String" required="false" is-array="false"/>
-      </service-parameters>
-      <service-result name="getUserIdByEmailResult" required="false" is-array="false" type="java.lang.String"/>
-    </service-method>
     <service-method local-name="findOrgGitCommitInfoByIdAndDate" service-id="findOrgGitCommitInfoByIdAndDate" method-name="findOrgGitCommitInfoByIdAndDate" cacheable="false" category="org.tinygroup.sdpm.org.service.inter">
       <service-parameters>
         <service-parameter name="id" type="java.lang.String" required="false" is-array="false"/>
