@@ -87,10 +87,10 @@ public class GitAction extends BaseController {
                 logger.logMessage(LogLevel.ERROR, "未查询到git email为：" + gitEmail + "的用户");
                 return;
             }
+            String authorId = orgUserList.get(0).getOrgUserId();
             List<OrgGitCommitInfo> list = new ArrayList<OrgGitCommitInfo>();
             List<Commit> commits = pullPushData.getCommits();
             for (Commit c : commits) {
-                String authorId = orgUserList.get(0).getOrgUserId();
                 OrgGitCommitInfo orgGitCommitInfo = new OrgGitCommitInfo();
                 orgGitCommitInfo.setOrgGitCommitId(c.getId());
                 orgGitCommitInfo.setOrgGitAuthorId(authorId);
