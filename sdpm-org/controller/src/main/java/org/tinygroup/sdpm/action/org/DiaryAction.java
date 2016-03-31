@@ -486,7 +486,6 @@ public class DiaryAction extends BaseController {
         model.addAttribute("details", orgDiaryDetailList);
         //显示周报相关git信息
         List<OrgGitCommitInfo> gitList = gitService.findOrgGitCommitInfoByIdAndDate(userUtils.getUser().getOrgUserId(), bDate, eDate);
-        Collections.sort(gitList);
         for (OrgGitCommitInfo g : gitList) {
             g.setWeek(DateUtils.getDateWeek(g.getOrgGitCommitTime()));
             g.setUrlText(g.getOrgGitCommitId().substring(0, 9));
@@ -547,7 +546,7 @@ public class DiaryAction extends BaseController {
                 for (OrgDiaryDetail orgDiaryDetail : efforts) {
                     orgDiaryDetail.setEffortWeek(DateUtils.getDateWeek(orgDiaryDetail.getOrgDetailDate()));
                 }
-//                Collections.sort(efforts);
+                Collections.sort(efforts);
                 List<Integer> list1 = new ArrayList<Integer>();
                 for (int i = 0; i < efforts.size(); i++) {
                     if (i > 0) {
