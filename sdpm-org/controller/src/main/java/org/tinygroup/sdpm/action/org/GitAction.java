@@ -36,7 +36,7 @@ public class GitAction extends BaseController {
     @ResponseBody
     @RequestMapping(value = "/convert", method = RequestMethod.POST)
     public void convertToJava(HttpServletRequest req) {
-        logger.log(LogLevel.INFO, "开始解析报文");
+        logger.logMessage(LogLevel.INFO, "开始解析报文");
         int size = req.getContentLength();
         if (size > 0) {
             try {
@@ -49,20 +49,20 @@ public class GitAction extends BaseController {
                 String jsonString = URLDecoder.decode(jsonStringBuffer.toString(), "utf-8");
                 jsonString = jsonString.replaceFirst("hook=", "");
                 reader.close();
-                logger.log(LogLevel.INFO, "报文内容：{}", jsonString);
+                logger.logMessage(LogLevel.INFO, "报文内容：{}", jsonString);
                 JsonToObject<Hook> jsonToObject = new JsonToObject<Hook>(Hook.class);
                 Hook jsonObject = jsonToObject.convert(jsonString);
                 addCommitInfo(jsonObject);
             } catch (IOException e) {
-                logger.error("convert error", e);
+                logger.logMessage(LogLevel.ERROR,"convert error", e);
             }
         }
-        logger.log(LogLevel.INFO, "开始结束报文");
+        logger.logMessage(LogLevel.INFO, "开始结束报文");
     }
 
     private void addCommitInfo(Hook hook) {
         if (hook == null) {
-            logger.log(LogLevel.ERROR, "消息内容为空");
+            logger.logMessage(LogLevel.ERROR, "消息内容为空");
             return;
         }
         PullPushData pullPushData = hook.getPull_push_data();
@@ -72,30 +72,30 @@ public class GitAction extends BaseController {
             if (repository != null) {
                 repositoryName = repository.getName();
                 if (repositoryName == null || "".equals(repositoryName)) {
-                    logger.log(LogLevel.ERROR, "仓库名为空");
+                    logger.logMessage(LogLevel.ERROR, "仓库名为空");
                     return;
                 }
             } else {
-                logger.log(LogLevel.ERROR, "仓库名为空");
+                logger.logMessage(LogLevel.ERROR, "仓库名为空");
             }
             List<OrgGitCommitInfo> list = new ArrayList<OrgGitCommitInfo>();
             List<Commit> commits = pullPushData.getCommits();
             for (Commit c : commits) {
                 Author author = c.getAuthor();
                 if (author == null) {
-                    logger.log(LogLevel.ERROR, "用户消息为空");
+                    logger.logMessage(LogLevel.ERROR, "用户消息为空");
                     continue;
                 }
                 OrgUser orgUser = new OrgUser();
                 String gitEmail = author.getEmail();
                 if (gitEmail == null) {
-                    logger.log(LogLevel.ERROR, "git email为空");
+                    logger.logMessage(LogLevel.ERROR, "git email为空");
                     return;
                 }
                 orgUser.setOrgUserSubmitter(gitEmail);
                 List<OrgUser> orgUserList = userService.findUserList(orgUser);
                 if (orgUserList.size() == 0) {
-                    logger.log(LogLevel.ERROR, "未查询到git email为：" + gitEmail + "的用户");
+                    logger.logMessage(LogLevel.ERROR, "未查询到git email为：" + gitEmail + "的用户");
                     return;
                 }
                 String authorId = orgUserList.get(0).getOrgUserId();
@@ -113,7 +113,7 @@ public class GitAction extends BaseController {
                 gitService.batchInsertGitCommitInfo(list);
             }
         } else {
-            logger.log(LogLevel.ERROR, "pushDate内容为空");
+            logger.logMessage(LogLevel.ERROR, "pushDate内容为空");
         }
     }
 }
