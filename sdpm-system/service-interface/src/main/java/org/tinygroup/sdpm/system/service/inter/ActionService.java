@@ -68,7 +68,7 @@ public interface ActionService {
     List<SystemAction> findActionListByIdList(List<Integer> idList);
 
 
-    List<SystemAction> findActionListByTypeList(List<SystemAction> bugs, List<SystemAction> stories, List<SystemAction> tasks, List<SystemAction> cases, List<SystemAction> releases,List<SystemAction> docList);
+    List<SystemAction> findActionListByTypeList(List<SystemAction> bugs, List<SystemAction> stories, List<SystemAction> tasks, List<SystemAction> cases, List<SystemAction> releases, List<SystemAction> docList);
 
     /**
      * 查询某人某一时间段内（任务，bug，需求的日志信息）

@@ -22,8 +22,9 @@ import java.util.Date;
 /**
  * <!-- begin-user-doc -->
  * 任务
- *
+ * <p>
  * <!-- end-user-doc -->
+ *
  * @generated
  */
 public class ProjectTask implements Serializable {

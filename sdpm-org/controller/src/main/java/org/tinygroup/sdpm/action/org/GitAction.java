@@ -54,10 +54,10 @@ public class GitAction extends BaseController {
                 Hook jsonObject = jsonToObject.convert(jsonString);
                 addCommitInfo(jsonObject);
             } catch (IOException e) {
-                logger.logMessage(LogLevel.ERROR,"convert error", e);
+                logger.logMessage(LogLevel.ERROR, "convert error", e);
             }
         }
-        logger.logMessage(LogLevel.INFO, "开始结束报文");
+        logger.logMessage(LogLevel.INFO, "结束报文解析");
     }
 
     private void addCommitInfo(Hook hook) {

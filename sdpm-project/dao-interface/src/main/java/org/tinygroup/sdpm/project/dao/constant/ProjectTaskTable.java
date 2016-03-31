@@ -22,8 +22,9 @@ import org.tinygroup.tinysqldsl.base.Table;
 /**
  * <!-- begin-user-doc -->
  * 任务
- *
+ * <p>
  * <!-- end-user-doc -->
+ *
  * @generated
  */
 public class ProjectTaskTable extends Table {
@@ -31,6 +32,7 @@ public class ProjectTaskTable extends Table {
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     *
      * @generated
      */
     public static final ProjectTaskTable PROJECT_TASKTABLE = new ProjectTaskTable();
@@ -45,6 +47,7 @@ public class ProjectTaskTable extends Table {
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     *
      * @generated
      */
     public final Column TASK_ID = new Column(this, "task_id");
@@ -59,6 +62,7 @@ public class ProjectTaskTable extends Table {
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     *
      * @generated
      */
     public final Column TASK_NO = new Column(this, "task_no");
@@ -73,6 +77,7 @@ public class ProjectTaskTable extends Table {
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     *
      * @generated
      */
     public final Column TASK_PROJECT = new Column(this, "task_project");
@@ -87,6 +92,7 @@ public class ProjectTaskTable extends Table {
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     *
      * @generated
      */
     public final Column TASK_STORY = new Column(this, "task_story");
@@ -102,6 +108,7 @@ public class ProjectTaskTable extends Table {
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     *
      * @generated
      */
     public final Column TASK_STORY_VERSION = new Column(this, "task_story_version");
@@ -116,6 +123,7 @@ public class ProjectTaskTable extends Table {
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     *
      * @generated
      */
     public final Column TASK_MOMODULE = new Column(this, "task_module");
@@ -130,6 +138,7 @@ public class ProjectTaskTable extends Table {
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     *
      * @generated
      */
     public final Column TASK_FROM_BUG = new Column(this, "task_from_bug");
@@ -144,6 +153,7 @@ public class ProjectTaskTable extends Table {
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     *
      * @generated
      */
     public final Column TASK_NAME = new Column(this, "task_name");
@@ -158,6 +168,7 @@ public class ProjectTaskTable extends Table {
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     *
      * @generated
      */
     public final Column TASK_TYPE = new Column(this, "task_type");
@@ -174,6 +185,7 @@ public class ProjectTaskTable extends Table {
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     *
      * @generated
      */
     public final Column TASK_PRI = new Column(this, "task_pri");
@@ -188,6 +200,7 @@ public class ProjectTaskTable extends Table {
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     *
      * @generated
      */
     public final Column TASK_ESTIMATE = new Column(this, "task_estimate");
@@ -202,6 +215,7 @@ public class ProjectTaskTable extends Table {
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     *
      * @generated
      */
     public final Column TASK_CONSUMED = new Column(this, "task_consumed");
@@ -216,6 +230,7 @@ public class ProjectTaskTable extends Table {
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     *
      * @generated
      */
     public final Column TASK_LEFT = new Column(this, "task_left");
@@ -230,6 +245,7 @@ public class ProjectTaskTable extends Table {
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     *
      * @generated
      */
     public final Column TASK_DEAD_LINE = new Column(this, "task_dead_line");
@@ -245,6 +261,7 @@ public class ProjectTaskTable extends Table {
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     *
      * @generated
      */
     public final Column TASK_STATUS = new Column(this, "task_status");
@@ -259,6 +276,7 @@ public class ProjectTaskTable extends Table {
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     *
      * @generated
      */
     public final Column TASK_MAILTO = new Column(this, "task_mailto");
@@ -273,6 +291,7 @@ public class ProjectTaskTable extends Table {
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     *
      * @generated
      */
     public final Column TASK_DESC = new Column(this, "task_desc");
@@ -287,6 +306,7 @@ public class ProjectTaskTable extends Table {
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     *
      * @generated
      */
     public final Column TASK_OPEN_BY = new Column(this, "task_open_by");
@@ -301,6 +321,7 @@ public class ProjectTaskTable extends Table {
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     *
      * @generated
      */
     public final Column TASK_OPENED_DATE = new Column(this, "task_opened_date");
@@ -315,6 +336,7 @@ public class ProjectTaskTable extends Table {
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     *
      * @generated
      */
     public final Column TASK_ASSIGNED_TO = new Column(this, "task_assigned_to");
@@ -329,6 +351,7 @@ public class ProjectTaskTable extends Table {
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     *
      * @generated
      */
     public final Column TASK_ASSIGNED_DATE = new Column(this, "task_assigned_date");
@@ -343,6 +366,7 @@ public class ProjectTaskTable extends Table {
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     *
      * @generated
      */
     public final Column TASK_EST_STARED = new Column(this, "task_est_stared");
@@ -357,6 +381,7 @@ public class ProjectTaskTable extends Table {
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     *
      * @generated
      */
     public final Column TASK_REAL_STARTED = new Column(this, "task_real_started");
@@ -371,6 +396,7 @@ public class ProjectTaskTable extends Table {
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     *
      * @generated
      */
     public final Column TASK_FINISHED_BY = new Column(this, "task_finished_by");
@@ -385,6 +411,7 @@ public class ProjectTaskTable extends Table {
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     *
      * @generated
      */
     public final Column TASK_FINISHED_DATE = new Column(this, "task_finished_date");
@@ -399,6 +426,7 @@ public class ProjectTaskTable extends Table {
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     *
      * @generated
      */
     public final Column TASK_CANCELED_BY = new Column(this, "task_canceled_by");
@@ -413,6 +441,7 @@ public class ProjectTaskTable extends Table {
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     *
      * @generated
      */
     public final Column TASK_CANCELED_DATE = new Column(this, "task_canceled_date");
@@ -427,6 +456,7 @@ public class ProjectTaskTable extends Table {
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     *
      * @generated
      */
     public final Column TASK_CLOSED_BY = new Column(this, "task_closed_by");
@@ -441,6 +471,7 @@ public class ProjectTaskTable extends Table {
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     *
      * @generated
      */
     public final Column TASK_CLOSE_DATE = new Column(this, "task_close_date");
@@ -455,6 +486,7 @@ public class ProjectTaskTable extends Table {
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     *
      * @generated
      */
     public final Column TASK_CLOSED_REASON = new Column(this, "task_closed_reason");
@@ -469,6 +501,7 @@ public class ProjectTaskTable extends Table {
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     *
      * @generated
      */
     public final Column TASK_LAST_EDITED_BY = new Column(this, "task_last_edited_by");
@@ -483,6 +516,7 @@ public class ProjectTaskTable extends Table {
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     *
      * @generated
      */
     public final Column TASK_LAST_EDITED_DATE = new Column(this, "task_last_edited_date");
@@ -498,6 +532,7 @@ public class ProjectTaskTable extends Table {
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     *
      * @generated
      */
     public final Column TASK_DELETED = new Column(this, "task_deleted");
@@ -512,6 +547,7 @@ public class ProjectTaskTable extends Table {
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     *
      * @generated
      */
     public final Column TASK_RELATION_BUG = new Column(this, "task_relation_bug");

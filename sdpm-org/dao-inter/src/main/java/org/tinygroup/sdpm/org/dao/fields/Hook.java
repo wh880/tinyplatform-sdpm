@@ -27,11 +27,12 @@ public class Hook {
         this.hook_name = hook_name;
     }
 
-    @JSONField(name="push_data")
+    @JSONField(name = "push_data")
     public PullPushData getPull_push_data() {
         return pull_push_data;
     }
-    @JSONField(name="push_data")
+
+    @JSONField(name = "push_data")
     public void setPull_push_data(PullPushData push_data) {
         this.pull_push_data = push_data;
     }

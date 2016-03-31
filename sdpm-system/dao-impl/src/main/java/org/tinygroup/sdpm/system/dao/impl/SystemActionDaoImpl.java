@@ -483,7 +483,7 @@ public class SystemActionDaoImpl extends TinyDslDaoSupport implements SystemActi
                         SYSTEM_ACTIONTABLE.ACTION_OBJECT_ID.eq(DOCUMENT_DOCTABLE.DOC_ID),
                         SYSTEM_ACTIONTABLE.ACTION_OBJECT_TYPE.eq("doc"),
                         SYSTEM_ACTIONTABLE.ACTION_ACTOR.eq(ORG_USERTABLE.ORG_USER_ID),
-                        SYSTEM_ACTIONTABLE.ACTION_ACTION.in("created","edited","opened"),
+                        SYSTEM_ACTIONTABLE.ACTION_ACTION.in("created", "edited", "opened"),
                         ORG_USERTABLE.ORG_USER_ID.eq(userId),
                         SYSTEM_ACTIONTABLE.ACTION_DATE.between(beginDate, endDate)
                 ))

@@ -1,15 +1,5 @@
 package org.tinygroup.sdpm.action.org;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletResponse;
-
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,12 +12,7 @@ import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.util.DateUtils;
 import org.tinygroup.sdpm.common.web.BaseController;
-import org.tinygroup.sdpm.org.dao.pojo.OrgDiary;
-import org.tinygroup.sdpm.org.dao.pojo.OrgDiaryAndUserDO;
-import org.tinygroup.sdpm.org.dao.pojo.OrgDiaryDetail;
-import org.tinygroup.sdpm.org.dao.pojo.OrgDiaryGitDetail;
-import org.tinygroup.sdpm.org.dao.pojo.OrgGitCommitInfo;
-import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
+import org.tinygroup.sdpm.org.dao.pojo.*;
 import org.tinygroup.sdpm.org.service.inter.DiaryService;
 import org.tinygroup.sdpm.org.service.inter.GitService;
 import org.tinygroup.sdpm.org.service.inter.UserService;
@@ -36,6 +21,9 @@ import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.service.inter.ActionService;
 import org.tinygroup.sdpm.util.UserUtils;
 import org.tinygroup.tinysqldsl.Pager;
+
+import javax.servlet.http.HttpServletResponse;
+import java.util.*;
 
 /**
  * Created by wangdl16860 on 2016/1/8.
@@ -52,6 +40,7 @@ public class DiaryAction extends BaseController {
     private ActionService actionService;
     @Autowired
     private GitService gitService;
+
     /**
      * 添加周报以及相应的周报详情
      *
@@ -63,7 +52,7 @@ public class DiaryAction extends BaseController {
      */
     @ResponseBody
     @RequestMapping("/add")
-    public Map add(String summary, @RequestParam(value = "y") Integer year, @RequestParam(value = "w") Integer week, String efforts,String gitIds) {
+    public Map add(String summary, @RequestParam(value = "y") Integer year, @RequestParam(value = "w") Integer week, String efforts, String gitIds) {
         String[] effortIds = null;
         //获得需要插入周报详情的日志ID
         List<Integer> idsList = new ArrayList<Integer>();
@@ -190,13 +179,13 @@ public class DiaryAction extends BaseController {
         Integer diaryId = diary.getOrgDiaryId();
         String[] gitIdStrs = gitIds.split(",");
         List<OrgDiaryGitDetail> gitDetailList = new ArrayList<OrgDiaryGitDetail>();
-        for(String id:gitIdStrs){
-        	OrgDiaryGitDetail orgDiaryGitDetail = new OrgDiaryGitDetail();
-        	orgDiaryGitDetail.setOrgDiaryId(diaryId);
-        	orgDiaryGitDetail.setOrgGitCommitId(id);
-        	gitDetailList.add(orgDiaryGitDetail);
+        for (String id : gitIdStrs) {
+            OrgDiaryGitDetail orgDiaryGitDetail = new OrgDiaryGitDetail();
+            orgDiaryGitDetail.setOrgDiaryId(diaryId);
+            orgDiaryGitDetail.setOrgGitCommitId(id);
+            gitDetailList.add(orgDiaryGitDetail);
         }
-        gitService.batchInsertDiaryGitDetail(diaryId,gitDetailList);
+        gitService.batchInsertDiaryGitDetail(diaryId, gitDetailList);
         return resultMap(true, "添加成功");
     }
 
@@ -211,7 +200,7 @@ public class DiaryAction extends BaseController {
             return "用例";
         } else if ("release".equals(objectType)) {
             return "发布";
-        }else if ("doc".equals(objectType)) {
+        } else if ("doc".equals(objectType)) {
             return "文档";
         }
         return objectType;
@@ -245,7 +234,7 @@ public class DiaryAction extends BaseController {
                 docList.add(systemAction);
             }
         }
-        return actionService.findActionListByTypeList(bugList, storyList, taskList, caseList, releaseList,docList);
+        return actionService.findActionListByTypeList(bugList, storyList, taskList, caseList, releaseList, docList);
     }
     /**
      * 编辑修改周报
@@ -496,14 +485,14 @@ public class DiaryAction extends BaseController {
         model.addAttribute("list", systemActions);
         model.addAttribute("details", orgDiaryDetailList);
         //显示周报相关git信息
-        List<OrgGitCommitInfo> gitList = gitService.findOrgGitCommitInfoByIdAndDate(userUtils.getUser().getOrgUserId(),bDate,eDate);
+        List<OrgGitCommitInfo> gitList = gitService.findOrgGitCommitInfoByIdAndDate(userUtils.getUser().getOrgUserId(), bDate, eDate);
         Collections.sort(gitList);
-        for(OrgGitCommitInfo g:gitList){
-        	g.setWeek(DateUtils.getDateWeek(g.getOrgGitCommitTime()));
-        	g.setUrlText(g.getOrgGitCommitId().substring(0, 9));
+        for (OrgGitCommitInfo g : gitList) {
+            g.setWeek(DateUtils.getDateWeek(g.getOrgGitCommitTime()));
+            g.setUrlText(g.getOrgGitCommitId().substring(0, 9));
         }
         OrgDiaryGitDetail orgDiaryGitDetail = new OrgDiaryGitDetail();
-        if(orgDiary!=null){
+        if (orgDiary != null) {
             orgDiaryGitDetail.setOrgDiaryId(orgDiary.getOrgDiaryId());
             List<OrgDiaryGitDetail> details2 = gitService.query(orgDiaryGitDetail);
             model.addAttribute("details2", details2);
@@ -661,15 +650,15 @@ public class DiaryAction extends BaseController {
             }
             orgDiaryGitDetails = gitService.getOrgGitCommitInfoByDiaryId(diaryId);
             Collections.sort(orgDiaryGitDetails);
-            String week="";
-            for(OrgGitCommitInfo commit:orgDiaryGitDetails){
-                if(week.equals(DateUtils.getDateWeek(commit.getOrgGitCommitTime()))){
+            String week = "";
+            for (OrgGitCommitInfo commit : orgDiaryGitDetails) {
+                if (week.equals(DateUtils.getDateWeek(commit.getOrgGitCommitTime()))) {
                     commit.setWeek(null);
-                }else{
+                } else {
                     week = DateUtils.getDateWeek(commit.getOrgGitCommitTime());
                     commit.setWeek(week);
                 }
-                commit.setUrlText(commit.getOrgGitCommitId().substring(0,9));
+                commit.setUrlText(commit.getOrgGitCommitId().substring(0, 9));
             }
             map2.put(diaryId, orgDiaryGitDetails);
         }
