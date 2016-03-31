@@ -78,26 +78,18 @@ public class GitAction extends BaseController {
             } else {
                 logger.logMessage(LogLevel.ERROR, "仓库名为空");
             }
+            User user = pullPushData.getUser();
+            String gitEmail = user.getEmail();
+            OrgUser orgUser = new OrgUser();
+            orgUser.setOrgUserSubmitter(gitEmail);
+            List<OrgUser> orgUserList = userService.findUserList(orgUser);
+            if (orgUserList.size() == 0) {
+                logger.logMessage(LogLevel.ERROR, "未查询到git email为：" + gitEmail + "的用户");
+                return;
+            }
             List<OrgGitCommitInfo> list = new ArrayList<OrgGitCommitInfo>();
             List<Commit> commits = pullPushData.getCommits();
             for (Commit c : commits) {
-                Author author = c.getAuthor();
-                if (author == null) {
-                    logger.logMessage(LogLevel.ERROR, "用户消息为空");
-                    continue;
-                }
-                OrgUser orgUser = new OrgUser();
-                String gitEmail = author.getEmail();
-                if (gitEmail == null) {
-                    logger.logMessage(LogLevel.ERROR, "git email为空");
-                    return;
-                }
-                orgUser.setOrgUserSubmitter(gitEmail);
-                List<OrgUser> orgUserList = userService.findUserList(orgUser);
-                if (orgUserList.size() == 0) {
-                    logger.logMessage(LogLevel.ERROR, "未查询到git email为：" + gitEmail + "的用户");
-                    return;
-                }
                 String authorId = orgUserList.get(0).getOrgUserId();
                 OrgGitCommitInfo orgGitCommitInfo = new OrgGitCommitInfo();
                 orgGitCommitInfo.setOrgGitCommitId(c.getId());
