@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by gongyl on 2016/3/23.
+ * Created by gongyl on 2016/3/23..
  */
 @Controller
 @RequestMapping(value = "org/git")
