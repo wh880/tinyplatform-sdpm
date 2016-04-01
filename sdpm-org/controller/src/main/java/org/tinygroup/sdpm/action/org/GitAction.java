@@ -3,6 +3,7 @@ package org.tinygroup.sdpm.action.org;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.convert.objectjson.fastjson.JsonToObject;
 import org.tinygroup.logger.LogLevel;
@@ -29,9 +30,9 @@ public class GitAction extends BaseController {
     private UserService userService;
 
     @ResponseBody
-    @RequestMapping(value = "/pull")
+    @RequestMapping(value = "/pull", method = RequestMethod.POST)
     public void pull(String hook) {
-        logger.logMessage(LogLevel.INFO, "pull开始解析报文{}",hook);
+        logger.logMessage(LogLevel.INFO, "pull开始解析报文{}", hook);
         JsonToObject<Hook> jsonToObject = new JsonToObject<Hook>(Hook.class);
         Hook jsonObject = jsonToObject.convert(hook);
         addCommitInfo(jsonObject);
@@ -62,7 +63,7 @@ public class GitAction extends BaseController {
             orgUser.setOrgUserSubmitter(gitEmail);
             List<OrgUser> orgUserList = userService.findUserList(orgUser);
             if (orgUserList.size() == 0) {
-                logger.logMessage(LogLevel.ERROR, "未查询到git email为：" + gitEmail + "的用户");
+                logger.logMessage(LogLevel.INFO, "未查询到git email为：" + gitEmail + "的用户");
                 return;
             }
             String authorId = orgUserList.get(0).getOrgUserId();
