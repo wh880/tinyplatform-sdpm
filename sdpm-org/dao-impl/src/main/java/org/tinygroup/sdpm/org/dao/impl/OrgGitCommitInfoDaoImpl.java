@@ -48,15 +48,15 @@ import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 @Repository
 public class OrgGitCommitInfoDaoImpl extends TinyDslDaoSupport implements OrgGitCommitInfoDao {
 
-    public List<OrgGitCommitInfo> findOrgGitCommitInfoByIdAndDate(String id, final Date beginDate, final Date endDate) {
+    public List<OrgGitCommitInfo> findOrgGitCommitInfoByEmailAndDate(String email, final Date beginDate, final Date endDate) {
         OrgGitCommitInfo orgGitCommitInfo = new OrgGitCommitInfo();
-        orgGitCommitInfo.setOrgGitAuthorId(id);
+        orgGitCommitInfo.setOrgGitAuthorEmail(email);
         return getDslTemplate().query(orgGitCommitInfo, new SelectGenerateCallback<OrgGitCommitInfo>() {
 
             @Override
             public Select generate(OrgGitCommitInfo orgGitCommitInfo) {
                 return selectFrom(ORG_GIT_COMMIT_INFO_TABLE).where(and(
-                        ORG_GIT_COMMIT_INFO_TABLE.ORG_GIT_AUTHOR_ID.eq(orgGitCommitInfo.getOrgGitAuthorId()),
+                        ORG_GIT_COMMIT_INFO_TABLE.ORG_GIT_AUTHOR_EMAIL.eq(orgGitCommitInfo.getOrgGitAuthorEmail()),
                         ORG_GIT_COMMIT_INFO_TABLE.ORG_GIT_COMMIT_TIME.between(beginDate, endDate)
                 )).orderBy(OrderByElement.asc(ORG_GIT_COMMIT_INFO_TABLE.ORG_GIT_COMMIT_TIME));
             }
@@ -76,7 +76,7 @@ public class OrgGitCommitInfoDaoImpl extends TinyDslDaoSupport implements OrgGit
                         ORG_GIT_COMMIT_INFO_TABLE.ORG_GIT_COMMIT_ID.value(t.getOrgGitCommitId()),
                         ORG_GIT_COMMIT_INFO_TABLE.ORG_GIT_COMMIT_TIME.value(t.getOrgGitCommitTime()),
                         ORG_GIT_COMMIT_INFO_TABLE.ORG_GIT_REPOSITORY_NAME.value(t.getOrgGitRepositoryName()),
-                        ORG_GIT_COMMIT_INFO_TABLE.ORG_GIT_AUTHOR_ID.value(t.getOrgGitAuthorId()),
+                        ORG_GIT_COMMIT_INFO_TABLE.ORG_GIT_AUTHOR_EMAIL.value(t.getOrgGitAuthorEmail()),
                         ORG_GIT_COMMIT_INFO_TABLE.ORG_GIT_COMMIT_MESSAGE.value(t.getOrgGitCommitMessage()),
                         ORG_GIT_COMMIT_INFO_TABLE.ORG_GIT_COMMIT_URL.value(t.getOrgGitCommitUrl()),
                         ORG_GIT_COMMIT_INFO_TABLE.ORG_GIT_TYPE.value(t.getOrgGitType()));
@@ -100,7 +100,7 @@ public class OrgGitCommitInfoDaoImpl extends TinyDslDaoSupport implements OrgGit
                 Update update = update(ORG_GIT_COMMIT_INFO_TABLE).set(
                         ORG_GIT_COMMIT_INFO_TABLE.ORG_GIT_COMMIT_TIME.value(t.getOrgGitCommitTime()),
                         ORG_GIT_COMMIT_INFO_TABLE.ORG_GIT_REPOSITORY_NAME.value(t.getOrgGitRepositoryName()),
-                        ORG_GIT_COMMIT_INFO_TABLE.ORG_GIT_AUTHOR_ID.value(t.getOrgGitAuthorId()),
+                        ORG_GIT_COMMIT_INFO_TABLE.ORG_GIT_AUTHOR_EMAIL.value(t.getOrgGitAuthorEmail()),
                         ORG_GIT_COMMIT_INFO_TABLE.ORG_GIT_COMMIT_MESSAGE.value(t.getOrgGitCommitMessage()),
                         ORG_GIT_COMMIT_INFO_TABLE.ORG_GIT_COMMIT_URL.value(t.getOrgGitCommitUrl()),
                         ORG_GIT_COMMIT_INFO_TABLE.ORG_GIT_TYPE.value(t.getOrgGitType())).where(
@@ -226,7 +226,7 @@ public class OrgGitCommitInfoDaoImpl extends TinyDslDaoSupport implements OrgGit
                         and(
                                 ORG_GIT_COMMIT_INFO_TABLE.ORG_GIT_COMMIT_TIME.eq(t.getOrgGitCommitTime()),
                                 ORG_GIT_COMMIT_INFO_TABLE.ORG_GIT_REPOSITORY_NAME.eq(t.getOrgGitRepositoryName()),
-                                ORG_GIT_COMMIT_INFO_TABLE.ORG_GIT_AUTHOR_ID.eq(t.getOrgGitAuthorId()),
+                                ORG_GIT_COMMIT_INFO_TABLE.ORG_GIT_AUTHOR_EMAIL.eq(t.getOrgGitAuthorEmail()),
                                 ORG_GIT_COMMIT_INFO_TABLE.ORG_GIT_COMMIT_MESSAGE.eq(t.getOrgGitCommitMessage()),
                                 ORG_GIT_COMMIT_INFO_TABLE.ORG_GIT_COMMIT_URL.eq(t.getOrgGitCommitUrl()),
                                 ORG_GIT_COMMIT_INFO_TABLE.ORG_GIT_TYPE.eq(t.getOrgGitType())));
@@ -252,7 +252,7 @@ public class OrgGitCommitInfoDaoImpl extends TinyDslDaoSupport implements OrgGit
                         and(
                                 ORG_GIT_COMMIT_INFO_TABLE.ORG_GIT_COMMIT_TIME.eq(t.getOrgGitCommitTime()),
                                 ORG_GIT_COMMIT_INFO_TABLE.ORG_GIT_REPOSITORY_NAME.eq(t.getOrgGitRepositoryName()),
-                                ORG_GIT_COMMIT_INFO_TABLE.ORG_GIT_AUTHOR_ID.eq(t.getOrgGitAuthorId()),
+                                ORG_GIT_COMMIT_INFO_TABLE.ORG_GIT_AUTHOR_EMAIL.eq(t.getOrgGitAuthorEmail()),
                                 ORG_GIT_COMMIT_INFO_TABLE.ORG_GIT_COMMIT_MESSAGE.eq(t.getOrgGitCommitMessage()),
                                 ORG_GIT_COMMIT_INFO_TABLE.ORG_GIT_COMMIT_URL.eq(t.getOrgGitCommitUrl()),
                                 ORG_GIT_COMMIT_INFO_TABLE.ORG_GIT_TYPE.eq(t.getOrgGitType())));
@@ -278,7 +278,7 @@ public class OrgGitCommitInfoDaoImpl extends TinyDslDaoSupport implements OrgGit
                         ORG_GIT_COMMIT_INFO_TABLE.ORG_GIT_COMMIT_ID.value(new JdbcNamedParameter("orgGitCommitId")),
                         ORG_GIT_COMMIT_INFO_TABLE.ORG_GIT_COMMIT_TIME.value(new JdbcNamedParameter("orgGitCommitTime")),
                         ORG_GIT_COMMIT_INFO_TABLE.ORG_GIT_REPOSITORY_NAME.value(new JdbcNamedParameter("orgGitRepositoryName")),
-                        ORG_GIT_COMMIT_INFO_TABLE.ORG_GIT_AUTHOR_ID.value(new JdbcNamedParameter("orgGitAuthorId")),
+                        ORG_GIT_COMMIT_INFO_TABLE.ORG_GIT_AUTHOR_EMAIL.value(new JdbcNamedParameter("orgGitAuthorEmail")),
                         ORG_GIT_COMMIT_INFO_TABLE.ORG_GIT_COMMIT_MESSAGE.value(new JdbcNamedParameter("orgGitCommitMessage")),
                         ORG_GIT_COMMIT_INFO_TABLE.ORG_GIT_COMMIT_URL.value(new JdbcNamedParameter("orgGitCommitUrl")),
                         ORG_GIT_COMMIT_INFO_TABLE.ORG_GIT_TYPE.value(new JdbcNamedParameter("orgGitType")));
@@ -312,7 +312,7 @@ public class OrgGitCommitInfoDaoImpl extends TinyDslDaoSupport implements OrgGit
                 return update(ORG_GIT_COMMIT_INFO_TABLE).set(
                         ORG_GIT_COMMIT_INFO_TABLE.ORG_GIT_COMMIT_TIME.value(new JdbcNamedParameter("orgGitCommitTime")),
                         ORG_GIT_COMMIT_INFO_TABLE.ORG_GIT_REPOSITORY_NAME.value(new JdbcNamedParameter("orgGitRepositoryName")),
-                        ORG_GIT_COMMIT_INFO_TABLE.ORG_GIT_AUTHOR_ID.value(new JdbcNamedParameter("orgGitAuthorId")),
+                        ORG_GIT_COMMIT_INFO_TABLE.ORG_GIT_AUTHOR_EMAIL.value(new JdbcNamedParameter("orgGitAuthorEmail")),
                         ORG_GIT_COMMIT_INFO_TABLE.ORG_GIT_COMMIT_MESSAGE.value(new JdbcNamedParameter("orgGitCommitMessage")),
                         ORG_GIT_COMMIT_INFO_TABLE.ORG_GIT_COMMIT_URL.value(new JdbcNamedParameter("orgGitCommitUrl")),
                         ORG_GIT_COMMIT_INFO_TABLE.ORG_GIT_TYPE.value(new JdbcNamedParameter("orgGitType"))).where(
@@ -338,7 +338,7 @@ public class OrgGitCommitInfoDaoImpl extends TinyDslDaoSupport implements OrgGit
                         ORG_GIT_COMMIT_INFO_TABLE.ORG_GIT_COMMIT_ID.eq(new JdbcNamedParameter("orgGitCommitId")),
                         ORG_GIT_COMMIT_INFO_TABLE.ORG_GIT_COMMIT_TIME.eq(new JdbcNamedParameter("orgGitCommitTime")),
                         ORG_GIT_COMMIT_INFO_TABLE.ORG_GIT_REPOSITORY_NAME.eq(new JdbcNamedParameter("orgGitRepositoryName")),
-                        ORG_GIT_COMMIT_INFO_TABLE.ORG_GIT_AUTHOR_ID.eq(new JdbcNamedParameter("orgGitAuthorId")),
+                        ORG_GIT_COMMIT_INFO_TABLE.ORG_GIT_AUTHOR_EMAIL.eq(new JdbcNamedParameter("orgGitAuthorEmail")),
                         ORG_GIT_COMMIT_INFO_TABLE.ORG_GIT_COMMIT_MESSAGE.eq(new JdbcNamedParameter("orgGitCommitMessage")),
                         ORG_GIT_COMMIT_INFO_TABLE.ORG_GIT_COMMIT_URL.eq(new JdbcNamedParameter("orgGitCommitUrl")),
                         ORG_GIT_COMMIT_INFO_TABLE.ORG_GIT_TYPE.eq(new JdbcNamedParameter("orgGitType"))));

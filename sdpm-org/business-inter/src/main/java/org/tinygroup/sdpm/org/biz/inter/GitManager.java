@@ -23,7 +23,7 @@ public interface GitManager {
     /**
      * 通过用户的ID、日期范围 查询git发送的代码提交信息
      */
-    public List<OrgGitCommitInfo> findOrgGitCommitInfoByIdAndDate(String id, Date beginDate, Date endDate);
+    public List<OrgGitCommitInfo> findOrgGitCommitInfoByEmailAndDate(String email, Date beginDate, Date endDate);
 
     /**
      * 通过日志ID、代码的提交信息 更新周报

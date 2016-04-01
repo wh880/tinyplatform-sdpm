@@ -29,6 +29,6 @@ import java.util.List;
  */
 public interface OrgGitCommitInfoDao extends BaseDao<OrgGitCommitInfo, String> {
 
-    public List<OrgGitCommitInfo> findOrgGitCommitInfoByIdAndDate(String id, Date beginDate, Date endDate);
+    public List<OrgGitCommitInfo> findOrgGitCommitInfoByEmailAndDate(String email, Date beginDate, Date endDate);
 
 }

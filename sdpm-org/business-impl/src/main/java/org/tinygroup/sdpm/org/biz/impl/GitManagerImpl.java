@@ -34,8 +34,8 @@ public class GitManagerImpl implements GitManager {
     }
 
     @Override
-    public List<OrgGitCommitInfo> findOrgGitCommitInfoByIdAndDate(String id, Date beginDate, Date endDate) {
-        return orgGitCommitInfoDao.findOrgGitCommitInfoByIdAndDate(id, beginDate, endDate);
+    public List<OrgGitCommitInfo> findOrgGitCommitInfoByEmailAndDate(String email, Date beginDate, Date endDate) {
+        return orgGitCommitInfoDao.findOrgGitCommitInfoByEmailAndDate(email, beginDate, endDate);
     }
 
     @Override

@@ -29,8 +29,8 @@ public class GitServiceImpl implements GitService {
     }
 
     @Override
-    public List<OrgGitCommitInfo> findOrgGitCommitInfoByIdAndDate(String id, Date beginDate, Date endDate) {
-        return gitManager.findOrgGitCommitInfoByIdAndDate(id, beginDate, endDate);
+    public List<OrgGitCommitInfo> findOrgGitCommitInfoByEmailAndDate(String email, Date beginDate, Date endDate) {
+        return gitManager.findOrgGitCommitInfoByEmailAndDate(email, beginDate, endDate);
     }
 
     @Override

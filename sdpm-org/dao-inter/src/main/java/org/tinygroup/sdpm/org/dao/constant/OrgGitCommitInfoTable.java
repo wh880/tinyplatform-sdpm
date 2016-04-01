@@ -89,7 +89,7 @@ public class OrgGitCommitInfoTable extends Table {
      * <!-- end-user-doc -->
      * @generated
      */
-    public final Column ORG_GIT_AUTHOR_ID = new Column(this, "org_git_author_id");
+    public final Column ORG_GIT_AUTHOR_EMAIL = new Column(this, "org_git_author_email");
 
     /**
      * <!-- begin-user-doc -->

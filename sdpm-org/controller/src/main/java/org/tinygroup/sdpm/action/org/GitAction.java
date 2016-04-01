@@ -58,20 +58,12 @@ public class GitAction extends BaseController {
             }
             User user = pullPushData.getUser();
             String gitEmail = user.getEmail();
-            OrgUser orgUser = new OrgUser();
-            orgUser.setOrgUserSubmitter(gitEmail);
-            List<OrgUser> orgUserList = userService.findUserList(orgUser);
-            if (orgUserList.size() == 0) {
-                logger.logMessage(LogLevel.ERROR, "未查询到git email为：" + gitEmail + "的用户");
-                return;
-            }
-            String authorId = orgUserList.get(0).getOrgUserId();
             List<OrgGitCommitInfo> list = new ArrayList<OrgGitCommitInfo>();
             List<Commit> commits = pullPushData.getCommits();
             for (Commit c : commits) {
                 OrgGitCommitInfo orgGitCommitInfo = new OrgGitCommitInfo();
                 orgGitCommitInfo.setOrgGitCommitId(c.getId());
-                orgGitCommitInfo.setOrgGitAuthorId(authorId);
+                orgGitCommitInfo.setOrgGitAuthorEmail(gitEmail);
                 orgGitCommitInfo.setOrgGitCommitMessage(c.getMessage());
                 orgGitCommitInfo.setOrgGitCommitUrl(c.getUrl());
                 orgGitCommitInfo.setOrgGitType("pull");

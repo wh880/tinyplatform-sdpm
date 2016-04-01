@@ -62,7 +62,7 @@ public class OrgGitCommitInfo implements Serializable {
      *
      * @generated
      */
-    private String orgGitAuthorId;
+    private String orgGitAuthorEmail;
 
     /**
      * <!-- begin-user-doc --> GIT_COMMIT_MESSAGE
@@ -138,16 +138,16 @@ public class OrgGitCommitInfo implements Serializable {
     public void setOrgGitRepositoryName(String orgGitRepositoryName) {
         this.orgGitRepositoryName = orgGitRepositoryName;
     }
+    
+    public String getOrgGitAuthorEmail() {
+		return orgGitAuthorEmail;
+	}
 
-    public String getOrgGitAuthorId() {
-        return orgGitAuthorId;
-    }
+	public void setOrgGitAuthorEmail(String orgGitAuthorEmail) {
+		this.orgGitAuthorEmail = orgGitAuthorEmail;
+	}
 
-    public void setOrgGitAuthorId(String orgGitAuthorId) {
-        this.orgGitAuthorId = orgGitAuthorId;
-    }
-
-    public String getOrgGitCommitMessage() {
+	public String getOrgGitCommitMessage() {
         return orgGitCommitMessage;
     }
 
