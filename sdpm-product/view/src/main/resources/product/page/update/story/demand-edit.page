@@ -80,7 +80,7 @@
 </div>
 
 	
-	<div style="width:30%;float:right">
+<div style="width:30%;float:right">
     #TypeInfo("demand" storySpec?.storyId)
 </div>
 

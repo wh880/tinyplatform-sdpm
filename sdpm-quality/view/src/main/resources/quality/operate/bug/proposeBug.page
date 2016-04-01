@@ -9,8 +9,8 @@
             <input type="hidden" name="currentAddress" value=""/>
             #hiddenInput(hiddenInputName="bugId" hiddenInputValue=bug?.bugId)
             #hiddenInput(hiddenInputName="bugFromCase" hiddenInputValue=caseId)
-        <div style="width:100%">
-        <div class="infoContent">
+            <div style="width:100%">
+            <div class="infoContent">
             <p class="titleName">提Bug</p>
             #@elementItem()
                 #@colLabel()<span class="c-red">*</span>产品/模块：#end
@@ -313,9 +313,11 @@
 #@elementItem()
     <div class="col-12">
         <div class="col-4">
-            <button style="float: right" type="submit" id="submit2" class="commitBtn">保存</button>
+            <button name="save" style="float: right" type="submit" id="submit2" class="commitBtn">保存</button>
         </div>
-        <div class="col-1"><button name="saveAndContinue" style="float: right" type="submit" id="submit2" class="commitBtn">保存并继续</button></div>
+        <div class="col-1">
+            <button name="saveAndContinue" style="float: right" type="submit" id="submit2" class="commitBtn">保存并继续</button>
+        </div>
         <div class="col-1"></div>
         <div class="col-1">
 
