@@ -26,7 +26,7 @@ import java.util.Date;
  *
  * @generated
  */
-public class OrgGitCommitInfo implements Serializable, Comparable<OrgGitCommitInfo> {
+public class OrgGitCommitInfo implements Serializable {
 
     /**
      * <!-- begin-user-doc --> ORG_GIT_COMMIT_ID
@@ -169,15 +169,6 @@ public class OrgGitCommitInfo implements Serializable, Comparable<OrgGitCommitIn
 
     public void setOrgGitType(String orgGitType) {
         this.orgGitType = orgGitType;
-    }
-
-    @Override
-    public int compareTo(OrgGitCommitInfo o) {
-        if (o == null) {
-            return 0;
-        } else {
-            return o.getOrgGitCommitTime().compareTo(this.getOrgGitCommitTime());
-        }
     }
 
 }

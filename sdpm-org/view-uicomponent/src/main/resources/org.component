@@ -10,7 +10,7 @@
                 <ol class="logList-detailList">
                     <li><span style="word-break:break-all">${var3?.orgGitRepositoryName}</span>
                             <span style="word-break:break-all">描述:${var3?.orgGitCommitMessage}</span>
-                            <span style="word-break:break-all"><a href=${var3?.orgGitCommitUrl}>${var3?.urlText}</a></span>
+                            <span style="word-break:break-all"><a href=${var3?.orgGitCommitUrl} target="_blank">${var3?.urlText}</a></span>
                     </li>
                 </ol>
             </div>
@@ -29,7 +29,7 @@
          <span>${var2?.week}:</span>
          <span>${var2?.orgGitRepositoryName}</span>
          <span>描述:${var2?.orgGitCommitMessage}</span>
-          <span><a href=${var2?.orgGitCommitUrl}>${var2?.urlText}</a></span> </p>
+          <span><a href=${var2?.orgGitCommitUrl} target="_blank">${var2?.urlText}</a></span> </p>
     #end
 #end
 

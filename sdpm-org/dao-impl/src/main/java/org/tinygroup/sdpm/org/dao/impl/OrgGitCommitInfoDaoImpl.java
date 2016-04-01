@@ -58,7 +58,7 @@ public class OrgGitCommitInfoDaoImpl extends TinyDslDaoSupport implements OrgGit
                 return selectFrom(ORG_GIT_COMMIT_INFO_TABLE).where(and(
                         ORG_GIT_COMMIT_INFO_TABLE.ORG_GIT_AUTHOR_ID.eq(orgGitCommitInfo.getOrgGitAuthorId()),
                         ORG_GIT_COMMIT_INFO_TABLE.ORG_GIT_COMMIT_TIME.between(beginDate, endDate)
-                ));
+                )).orderBy(OrderByElement.asc(ORG_GIT_COMMIT_INFO_TABLE.ORG_GIT_COMMIT_TIME));
             }
         });
     }
