@@ -176,6 +176,7 @@ public class ProductAction extends BaseController {
         Product product = new Product();
         product.setProductId(productId);
         product.setProductStatus(Product.STATUS_CLOSED);
+
         //productService.updateProduct(product);
 
         LogUtil.logWithComment(LogUtil.LogOperateObject.PRODUCT,

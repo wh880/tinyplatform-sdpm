@@ -3,7 +3,7 @@
         	<div class="operationbar" style="height:36px">
 				 <span class="f">
 					<a href="javascript:void(0);" value="all" name="productList" ${choice=="all"?'class="active_btn"':""}>全部产品</a>
-                     <a href="javascript:void(0);" value="open" name="productList" ${choice=="today"?'class="active_btn"':""}>未关闭</a>
+                     <a href="javascript:void(0);" value="open" name="productList" ${choice=="open"?'class="active_btn"':""}>未关闭</a>
                      <a href="javascript:void(0);" value="closed" name="productList" ${choice=="closed"?'class="active_btn"':""}>已关闭</a>
 				</span>
 

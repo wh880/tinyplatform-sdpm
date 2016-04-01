@@ -345,8 +345,9 @@ public class TestVersionAction extends BaseController {
 
     @RequiresPermissions(value = {"tvercase", "tverallcase", "tverassign"}, logical = Logical.OR)
     @RequestMapping("/taskToCase")
-    public String taskToCase(Integer testversionId, String moduleId, Model model, HttpServletRequest request) {
+    public String taskToCase(Integer testversionId, String status,String moduleId, Model model, HttpServletRequest request) {
         QualityTestTask testTask = testTaskService.findTestTaskById(testversionId);
+        System.out.println(status);
         List<ProjectTeam> projectTeams = teamService.findTeamByProjectId(testTask.getProjectId());
         String[] ids = new String[projectTeams.size()];
         for (int i = 0; i < ids.length; i++) {
