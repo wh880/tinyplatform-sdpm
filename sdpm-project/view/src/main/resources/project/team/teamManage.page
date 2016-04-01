@@ -96,7 +96,7 @@
                             $thisTr.after(data);
                     },
                 });
-                    $thisTr.find(".addnext").css("display","none");
+##                    $thisTr.find(".addnext").css("display","none");
 //            updateUserID();
                 return false;
             }).on("click", ".delbutton", function () {
