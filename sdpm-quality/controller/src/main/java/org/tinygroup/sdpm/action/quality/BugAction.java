@@ -774,13 +774,17 @@ public class BugAction extends BaseController {
                 , null
                 , null
                 , systemAction.getActionComment());
+
+
         if (!StringUtil.isBlank(currentAddress)) {
             return "redirect:" + currentAddress;
-        } else {
-            if (!StringUtil.isBlank(lastAddress)) {
-                return "redirect:" + lastAddress;
-            }
         }
+        if (StringUtil.isBlank(currentAddress)&&!StringUtil.isBlank(lastAddress)) {
+            if (lastAddress.contains("add"))
+                return "redirect:" + "/a/quality/bug";
+            return "redirect:" + lastAddress;
+        }
+
         return "redirect:" + "/a/quality/bug";
     }
 

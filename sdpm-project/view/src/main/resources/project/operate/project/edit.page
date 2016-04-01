@@ -127,7 +127,7 @@
         #@sdpmItem("项目负责人" "*")
             #@Tselect2F()
                 #Tselect2Ajax("projectPm" project?.projectPm TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
-                {"dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询项目负责人","nullmsg":"请选择产品负责人！","datatype":"*"})
+                {"dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询项目负责人","nullmsg":"请选择项目负责人！","datatype":"*"})
                 #@Tselect2Fix()
                     #set(m=menuService.getMenu("organizationAddUser"))
                     #if(m)                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>                    #end
@@ -143,7 +143,7 @@
         #@sdpmItem("测试负责人" "*")
             #@Tselect2F()
                 #Tselect2Ajax("projectQd" project?.projectQd TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
-                {"dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询测试负责人","nullmsg":"请选择产品负责人！","datatype":"*"})
+                {"dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询测试负责人","nullmsg":"请选择测试负责人！","datatype":"*"})
                 #@Tselect2Fix()
                     #set(m=menuService.getMenu("organizationAddUser"))
                     #if(m)
@@ -161,7 +161,7 @@
         #@sdpmItem("发布负责人" "*")
             #@Tselect2F()
                 #Tselect2Ajax("projectRd" project?.projectRd TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
-                {"dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询发布负责人","nullmsg":"请选择产品负责人！","datatype":"*"})
+                {"dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询发布负责人","nullmsg":"请选择发布负责人！","datatype":"*"})
                 #@Tselect2Fix()
                     #set(m=menuService.getMenu("organizationAddUser"))
                     #if(m)

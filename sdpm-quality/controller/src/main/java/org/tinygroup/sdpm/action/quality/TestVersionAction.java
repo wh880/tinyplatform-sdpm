@@ -455,7 +455,7 @@ public class TestVersionAction extends BaseController {
         if ("tverallcase".equals(status)) {
             return;
         } else {
-            carrier.put("qualityTestTask.testRunAssignedTo",
+            carrier.put("qualityTestRun.testRunAssignedTo",
                     ConditionUtils.Operate.EQ.getOperate(),
                     ConditionUtils.CommonFieldType.FIELD_OPERATE.getCommonField(),
                     userUtils.getUserId());

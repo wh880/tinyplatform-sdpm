@@ -86,9 +86,7 @@ public class StoryAction extends BaseController {
      * @return
      */
     @RequestMapping("")
-    public String storyAction(
-            HttpServletRequest request) {
-
+    public String storyAction(HttpServletRequest request) {
         String queryString = request.getQueryString();
         if (queryString != null && !queryString.contains("choose")) {
             return "redirect:" + adminPath + "/product/story?choose=1&"
