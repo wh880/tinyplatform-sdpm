@@ -117,7 +117,7 @@ public class ProductServiceImpl implements ProductService {
             carrier.put("productStatus",
                     ConditionUtils.Operate.NEQ.getOperate(),
                     ConditionUtils.CommonFieldType.FIELD_OPERATE.getCommonField(),
-                    Product.STATUS_CLOSED);
+                    Product.STATUS_NEW);
         } else if ("closed".equals(status)) {
             carrier.put("productStatus",
                     ConditionUtils.Operate.EQ.getOperate(),
