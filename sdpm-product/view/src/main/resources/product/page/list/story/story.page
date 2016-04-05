@@ -244,7 +244,7 @@
                         #if(m?.id=="product-demand-del")
                         #set(dae=[34,36])
 
-                                <a>#@mulOperation("product-demand-del" TINY_CONTEXT_PATH+adminPath+"/product/story/findByKeys")
+                                <a>#@mulOperation("product-demand-del" TINY_CONTEXT_PATH+adminPath+"/product/story/batchclose")
                                     #@btnModal("" "批量关闭" "1000" "400" "btn radius btn-danger") 批量关闭#end
                                 #end</a>
 
