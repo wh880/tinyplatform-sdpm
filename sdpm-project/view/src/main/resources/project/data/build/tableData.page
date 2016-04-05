@@ -58,6 +58,7 @@
                                 $("#productLinetable").trigger("initnav");
                                 $("#lineTree").trigger("refresh");
                             },300);
+                            window.location.href="${TINY_CONTEXT_PATH+adminPath}/project/build/index";
                         }else{
                             var msg=data.info?data.info:"系统出错";
                             layer.msg(msg);
