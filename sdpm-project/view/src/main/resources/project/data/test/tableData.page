@@ -40,7 +40,7 @@
                 $(function () {
                     var check = $(".versionDelete");
                     check.on("click", function () {
-                        layer.confirm("是否确认删除?", function () {
+                        layer.confirm("是否确认删除1?", function () {
                             $.ajax({
                                 type: "get",
                                 url: "${TINY_CONTEXT_PATH+adminPath+m?.href+'?testversionId ='+v?.testversionId}",
