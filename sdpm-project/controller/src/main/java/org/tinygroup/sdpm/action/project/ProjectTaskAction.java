@@ -149,7 +149,6 @@ public class ProjectTaskAction extends BaseController {
         ProductStory story = storyService.findStory(storyId);
 
         model.addAttribute("story", story);
-        System.out.println("++++++++++++++++++++++++");
         model.addAttribute("storyList", storyList);
         model.addAttribute("bugList", bugList);
         return "project/operate/task/common/add.page";
@@ -696,8 +695,10 @@ public class ProjectTaskAction extends BaseController {
         if (projectId == null) {
             return redirectProjectForm();
         }
+        List<ProductStory> storyList = projectStoryService.findStoryByProject(projectId);
         model.addAttribute("moduleList", findModuleList(storyId, projectId));
         model.addAttribute("moduleId", moduleId);
+        model.addAttribute("storyList", storyList);
         model.addAttribute("teamList", userService.findTeamUserListByProjectId(projectId));
         ProductStory story = storyService.findStory(storyId);
         model.addAttribute("story", story);

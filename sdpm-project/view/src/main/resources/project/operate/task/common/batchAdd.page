@@ -49,10 +49,13 @@
                     ##                            #tinyInput("text" "taskList["+i+"].taskStory" story?.storyId)
                     ##                        #end
                         #@Tselect2F()
-                            #@Tselect2Body(
-                                "taskList["+i+"].taskStory" story?.storyId {"class":
+                            #@Tselect2Body("taskList["+i+"].taskStory" story?.storyId {"class":
                                 "input-text select2"})
                             <option value=${story?.storyId}>${story?.storyTitle}</option>
+                                #foreach(s:storyList)
+                                <option value="${s.storyId}">${s.storyId}：${s.storyTitle}（优先级：${s.storyPri}，预计工时:${s.storyEstimate}）
+                                </option>
+                                #end
                             <option value="">同上</option>
                             #end
                         #end
