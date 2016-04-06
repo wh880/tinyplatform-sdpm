@@ -103,7 +103,7 @@
                         #end
                         #@Tselect2Fix()
                             <a href="${TINY_CONTEXT_PATH+adminPath}/product/story/addstory">新增</a>
-                            <a href="${TINY_CONTEXT_PATH+adminPath}/product/demand/index" class="r">全部</a>
+                            <a href="${TINY_CONTEXT_PATH+adminPath}/project/demand/index" class="r">全部</a>
                         #end
                     #end
                 #end
