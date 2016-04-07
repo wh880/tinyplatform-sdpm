@@ -145,7 +145,7 @@
 
 <td style="width: 20%">
     #@Tselect2F()
-        #@Tselect2Body("teamList["+a+"].teamRole" "" {"class":"input-text","multiple":
+        #@Tselect2Body("teamList["+a+"].teamRole" "31,32,33" {"class":"input-text","multiple":
             "multiple","datatype":"*","nullmsg":"角色不能为空！","id":"teamRole"+a})
             #foreach(u : roleList)
                 <option value="${u.orgRoleId}">${u.orgRoleName}</option>
@@ -180,7 +180,6 @@
             #iconOperations(iconOperationsIcon="icon-remove",iconOperationsTitle="删除",iconOperationsCls=
         "btn btn-small btn-default delbutton")
     </div>
-
     #end
 #end
 
