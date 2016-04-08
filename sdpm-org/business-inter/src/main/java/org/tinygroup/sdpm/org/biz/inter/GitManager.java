@@ -21,7 +21,7 @@ public interface GitManager {
     public void batchInsertGitCommitInfo(List<OrgGitCommitInfo> list);
 
     /**
-     * 通过用户的ID、日期范围 查询git发送的代码提交信息
+     * 通过用户的EMAIL、日期范围 查询git发送的代码提交信息
      */
     public List<OrgGitCommitInfo> findOrgGitCommitInfoByEmailAndDate(String email, Date beginDate, Date endDate);
 

@@ -3,15 +3,14 @@ package org.tinygroup.sdpm.action.org;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tinygroup.convert.objectjson.fastjson.JsonToObject;
 import org.tinygroup.logger.LogLevel;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.org.dao.fields.*;
 import org.tinygroup.sdpm.org.dao.pojo.OrgGitCommitInfo;
-import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.GitService;
-import org.tinygroup.sdpm.org.service.inter.UserService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,11 +24,9 @@ public class GitAction extends BaseController {
 
     @Autowired
     private GitService gitService;
-    @Autowired
-    private UserService userService;
 
     @ResponseBody
-    @RequestMapping(value = "/pull")
+    @RequestMapping(value = "/pull",method=RequestMethod.POST)
     public void pull(String hook) {
         logger.logMessage(LogLevel.INFO, "pull开始解析报文{}",hook);
         JsonToObject<Hook> jsonToObject = new JsonToObject<Hook>(Hook.class);
@@ -55,9 +52,18 @@ public class GitAction extends BaseController {
                 }
             } else {
                 logger.logMessage(LogLevel.ERROR, "仓库名为空");
+                return;
             }
             User user = pullPushData.getUser();
+            if(user==null){
+                logger.logMessage(LogLevel.ERROR,"用户为空");
+                return;
+            }
             String gitEmail = user.getEmail();
+            if(gitEmail==null){
+                logger.logMessage(LogLevel.ERROR,"用户email为空");
+                return;
+            }
             List<OrgGitCommitInfo> list = new ArrayList<OrgGitCommitInfo>();
             List<Commit> commits = pullPushData.getCommits();
             for (Commit c : commits) {

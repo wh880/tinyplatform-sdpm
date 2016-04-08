@@ -9,6 +9,7 @@ import org.tinygroup.sdpm.org.dao.OrgGitCommitInfoDao;
 import org.tinygroup.sdpm.org.dao.pojo.OrgDiaryGitDetail;
 import org.tinygroup.sdpm.org.dao.pojo.OrgGitCommitInfo;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -35,6 +36,9 @@ public class GitManagerImpl implements GitManager {
 
     @Override
     public List<OrgGitCommitInfo> findOrgGitCommitInfoByEmailAndDate(String email, Date beginDate, Date endDate) {
+        if(email==null||"".equals(email)){
+            return new ArrayList<OrgGitCommitInfo>();
+        }
         return orgGitCommitInfoDao.findOrgGitCommitInfoByEmailAndDate(email, beginDate, endDate);
     }
 
