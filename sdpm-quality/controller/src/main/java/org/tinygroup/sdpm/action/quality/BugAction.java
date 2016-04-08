@@ -484,6 +484,7 @@ public class BugAction extends BaseController {
         bug.setBugResolvedDate(new Date());
         List<OrgUser> orgUsers = userService.findUserList(null);
         ProjectBuild build = new ProjectBuild();
+        build.setBuildDeleted(ProjectBuild.DELETE_NO);
         build.setBuildProduct(bug.getProductId());
         List<ProjectBuild> builds = buildService.findListBuild(build);
         QualityBug qualityBug = new QualityBug();

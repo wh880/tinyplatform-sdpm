@@ -61,7 +61,7 @@ public interface UserService {
      * @param orgUser 用于查询条件
      * @return
      */
-    @CacheGet(key = "list-${orgUser?.orgUserId}-${orgUser?.orgUserAccount}", group = CACHE_USER_LIST)
+//    @CacheGet(key = "list-${orgUser?.orgUserId}-${orgUser?.orgUserAccount}", group = CACHE_USER_LIST)
     List<OrgUser> findUserList(OrgUser orgUser);
 
     /**

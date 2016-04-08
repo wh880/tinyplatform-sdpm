@@ -156,6 +156,19 @@ public abstract class BaseController {
         return "error/notFound";
     }
 
+    /**
+     * 错误信息页面
+     *
+     * @param msg   错误信息
+     * @param model
+     * @return
+     */
+    public String errorPage(String msg, Model model) {
+        if (model != null) {
+            model.addAttribute("msg,", msg);
+        }
+        return "error/error";
+    }
 
     /**
      * 添加Model消息

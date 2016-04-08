@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.tinygroup.commons.tools.ArrayUtil;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.dao.complexsearch.SearchInfos;
@@ -415,10 +416,14 @@ public class StoryAction extends BaseController {
 
             if (productStory != null && !StringUtil.isBlank(productStory.getStoryLinkStories())) {
                 String storyLinkStories = productStory.getStoryLinkStories();
-                String[] split = storyLinkStories.split(",");
                 List<Integer> idList = new ArrayList<Integer>();
-                for (String s : split) {
-                    idList.add(Integer.parseInt(s));
+                String[] split = storyLinkStories.split(",");
+                if (ArrayUtil.isEmptyArray(split)) {
+                    idList.add(Integer.parseInt(storyLinkStories));
+                } else {
+                    for (String s : split) {
+                        idList.add(Integer.parseInt(s));
+                    }
                 }
                 List<ProductStory> storyList = storyService.findStoryListByIds(idList.toArray(new Integer[0]));
                 model.addAttribute("storyList", storyList);

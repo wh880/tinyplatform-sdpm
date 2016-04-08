@@ -492,6 +492,9 @@ public class ProjectTaskAction extends BaseController {
     @RequiresPermissions("pro-task-close")
     @RequestMapping(value = "/close", method = RequestMethod.GET)
     public String close(Integer taskId, Model model) {
+        if (taskId == null) {
+            return notFoundView();
+        }
         ProjectTask task = taskService.findTaskById(taskId);
         model.addAttribute("task", task);
         return "project/operate/task/special/close";

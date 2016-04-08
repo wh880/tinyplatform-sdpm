@@ -78,6 +78,11 @@ public class ProjectBuild implements Serializable {
      */
     private String buildDeleted;
 
+    public ProjectBuild() {
+        super();
+        this.buildDeleted = DELETE_NO;
+    }
+
     public String getProductName() {
         return productName;
     }
