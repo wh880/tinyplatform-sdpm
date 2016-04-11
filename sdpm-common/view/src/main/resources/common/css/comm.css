@@ -584,7 +584,7 @@ table.table.filelist-table{border:#ddd 1px solid;}
 }
 .diary-detail .dia_h_btn{cursor:pointer}
 /*周报*/
-.btn-circle.btn-lg{padding: 8px 10px;}
+.btn-circle.btn-lg{padding:0;line-height:50px;}
 .forall{margin-bottom:8px}
 .forall .checkboxAll{color:#6e3671; font-weight:bold;border:none;background:none;margin-top:-3px}
 .forall-box p{margin-bottom:3px;background:#fefefe;padding:3px 0;}
