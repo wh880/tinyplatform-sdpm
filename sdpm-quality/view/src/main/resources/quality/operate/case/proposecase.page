@@ -122,8 +122,7 @@
             #@formControlDiv("col-8")
 					#@div(divClass="col-5")
                         #@Tselect2F()
-	                   		 #@Tselect2Body("storyId" testCase?.storyId?:storyId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-
+	                   		 #@Tselect2Body("storyId" testCase?.storyId?:storyId {"class":"input-text select2"})
                              #end
                             #@Tselect2Fix()
                                 #set(m=menuService.getMenu("product-demand-add"))

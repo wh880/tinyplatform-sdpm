@@ -58,6 +58,7 @@ public class TestCaseAction extends BaseController {
     @Autowired
     private BugService bugService;
 
+
     @ModelAttribute
     public void init(Model model) {
         initSearchBar(model, "用例");

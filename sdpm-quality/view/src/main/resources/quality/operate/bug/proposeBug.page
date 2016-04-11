@@ -184,7 +184,6 @@
                 #@div(divClass="col-5")
                     #@Tselect2F()
                         #@Tselect2Body("storyId" "" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-
                         #end
                         #@Tselect2Fix()
                             #set(m=menuService.getMenu("product-demand-add"))
