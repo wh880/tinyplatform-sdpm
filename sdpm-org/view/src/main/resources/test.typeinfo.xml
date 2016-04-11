@@ -1,5 +1,6 @@
 <type-infos>
-	<type-info name="userInfo" >
-            <info name="userbasrinfo" title="负责人信息" infoParameter="productId" url="/product/findManager" resource="userInfo"/>
-	</type-info>
+    <type-info name="userInfo">
+        <info name="userbasrinfo" title="负责人信息" infoParameter="productId" url="/product/findManager"
+              resource="userInfo"/>
+    </type-info>
 </type-infos>

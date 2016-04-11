@@ -116,7 +116,7 @@
 
         </menu>
         <menu id="tsearch" name="搜索" href="#" icon="" sort="1"
-        isShow="1" scope="testbugleft-tab">
+              isShow="1" scope="testbugleft-tab">
 
         </menu>
     </menu>

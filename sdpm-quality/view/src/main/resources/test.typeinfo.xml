@@ -1,28 +1,34 @@
 <type-infos>
-	<type-info name="qualityVersionSituation" >
-	    <info name="versionSituationInfo" title="基本信息" resource="qualityVersionSituation" infoParameter="testversionId" url="/quality/version/versionRightInfo"/>
-		    <!--<info name="versionInfo" title="版本信息" resource="projectRelease" infoParameter="" url="/project/task/relation-release/releasebaseinfo.pagelet"/>-->
-	</type-info>
-	<type-info name="qualityBugEdition" >
-    	    <info name="BugEditionInfo" title="基本信息" resource="qualityBugEdition" infoParameter="bugId" url="/quality/bug/editionPaging"/>
-    	   
-    	</type-info>
-    	<type-info name="qualityCaseEdition" >
-            	    <info name="CaseEditionInfo" title="基本信息" resource="qualityCaseEdition" infoParameter="caseId" url="/quality/testCase/find/editRight"/>
-            	</type-info>
-			<type-info name="qualityBugInfo" >
-            	    <info name="bugEditionInfo" title="基本信息" resource="qualityBugInfo" infoParameter="bugId" url="/quality/bug/bugBasicInfo"/>
-            		<!--	 <info name="userInfo" title="负责人信息" resource="userInfo" infoParameter="" url="/organization/userinfor.pagelet"/> -->
-            		<!--	<info name="projectInfo" title="项目信息" resource="project" infoParameter="" url="/project/task/basicInformation.pagelet" /> -->
-            			<!--<info name="demandInfo" title="需求信息" resource="productRelease" infoParameter="" url="/product/page/tabledemo/relation-release/releasebaseinfo.pagelet"/> -->
-            	</type-info>
-      <type-info name="qualityCaseInfo" >
-            	    <info name="caseEditionInfo" title="基本信息" resource="qualityCaseInfo" infoParameter="caseId" url="/quality/testCase/case/rightInfo"/>
-            	    <!--<info name="demandInfo" title="需求信息" resource="productRelease" infoParameter="" url="/product/page/tabledemo/relation-release/releasebaseinfo.pagelet"/>-->
-            	</type-info>
-     <type-info name="qualityVersionInfo" >
-            	    <info name="versionEditionInfo" title="基本信息" resource="qualityVersionInfo" infoParameter="testversionId" url="/quality/version/versionRightInfo"/>
-            			<!--<info name="userInfo" title="负责人信息" resource="userInfo" infoParameter="" url="/organization/userinfor.pagelet"/>-->
-            			<!--<info name="projectInfo" title="项目信息" resource="project" infoParameter="" url="/project/task/basicInformation.pagelet" />-->
-            	</type-info>
+    <type-info name="qualityVersionSituation">
+        <info name="versionSituationInfo" title="基本信息" resource="qualityVersionSituation" infoParameter="testversionId"
+              url="/quality/version/versionRightInfo"/>
+        <!--<info name="versionInfo" title="版本信息" resource="projectRelease" infoParameter="" url="/project/task/relation-release/releasebaseinfo.pagelet"/>-->
+    </type-info>
+    <type-info name="qualityBugEdition">
+        <info name="BugEditionInfo" title="基本信息" resource="qualityBugEdition" infoParameter="bugId"
+              url="/quality/bug/editionPaging"/>
+
+    </type-info>
+    <type-info name="qualityCaseEdition">
+        <info name="CaseEditionInfo" title="基本信息" resource="qualityCaseEdition" infoParameter="caseId"
+              url="/quality/testCase/find/editRight"/>
+    </type-info>
+    <type-info name="qualityBugInfo">
+        <info name="bugEditionInfo" title="基本信息" resource="qualityBugInfo" infoParameter="bugId"
+              url="/quality/bug/bugBasicInfo"/>
+        <!--	 <info name="userInfo" title="负责人信息" resource="userInfo" infoParameter="" url="/organization/userinfor.pagelet"/> -->
+        <!--	<info name="projectInfo" title="项目信息" resource="project" infoParameter="" url="/project/task/basicInformation.pagelet" /> -->
+        <!--<info name="demandInfo" title="需求信息" resource="productRelease" infoParameter="" url="/product/page/tabledemo/relation-release/releasebaseinfo.pagelet"/> -->
+    </type-info>
+    <type-info name="qualityCaseInfo">
+        <info name="caseEditionInfo" title="基本信息" resource="qualityCaseInfo" infoParameter="caseId"
+              url="/quality/testCase/case/rightInfo"/>
+        <!--<info name="demandInfo" title="需求信息" resource="productRelease" infoParameter="" url="/product/page/tabledemo/relation-release/releasebaseinfo.pagelet"/>-->
+    </type-info>
+    <type-info name="qualityVersionInfo">
+        <info name="versionEditionInfo" title="基本信息" resource="qualityVersionInfo" infoParameter="testversionId"
+              url="/quality/version/versionRightInfo"/>
+        <!--<info name="userInfo" title="负责人信息" resource="userInfo" infoParameter="" url="/organization/userinfor.pagelet"/>-->
+        <!--<info name="projectInfo" title="项目信息" resource="project" infoParameter="" url="/project/task/basicInformation.pagelet" />-->
+    </type-info>
 </type-infos>

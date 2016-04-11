@@ -16,7 +16,7 @@
             <artifactId>org.tinygroup.genservicewrap</artifactId>
             <version>${tiny_version}</version>
         </dependency>
-    
+
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>sdpm-document-service-interface</artifactId>

@@ -1,26 +1,30 @@
 <type-infos>
 
-	<type-info name="product"  >
-	    <info name="productInfo" title="产品信息" infoParameter="productId" url="/product/find/baseinfo" resource="product"/>
-	   <info name="productInfo" title="产品线信息" infoParameter="productId" url="/productLine/find/productLineDetail" resource="productLine"/>
-	<!--    <info name="userbasrinfo" title="负责人信息" infoParameter="productId" url="/product/findManager" resource="userInfo"/>-->
-	</type-info>
-	
-	<type-info name="demand"  >
-	    <info name="demandInfo" title="需求信息" infoParameter="storyId" url="/product/story/find" resource="demand"/>
-	</type-info>
-	
-	<type-info name="productPlan"  >
-	    <info name="demandInfo" title="计划信息" infoParameter="planId" url="/product/plan/find/relateStory" resource="productPlan"/>
-	</type-info>
-	
-	<type-info name="productRelease"  >
-	    <info name="demandInfo" title="发布信息" infoParameter="releaseId" url="/product/release/find/relateStory" resource="productRelease"/>
-	</type-info>
-	
-	<type-info name="demandhref"  >
-		<info name="demandInfo" title="需求信息" infoParameter="storyId" url="/product/story/productDemandDetail/findPager"
-			  resource="demandhref"/>
-	</type-info>
-	
+    <type-info name="product">
+        <info name="productInfo" title="产品信息" infoParameter="productId" url="/product/find/baseinfo"
+              resource="product"/>
+        <info name="productInfo" title="产品线信息" infoParameter="productId" url="/productLine/find/productLineDetail"
+              resource="productLine"/>
+        <!--    <info name="userbasrinfo" title="负责人信息" infoParameter="productId" url="/product/findManager" resource="userInfo"/>-->
+    </type-info>
+
+    <type-info name="demand">
+        <info name="demandInfo" title="需求信息" infoParameter="storyId" url="/product/story/find" resource="demand"/>
+    </type-info>
+
+    <type-info name="productPlan">
+        <info name="demandInfo" title="计划信息" infoParameter="planId" url="/product/plan/find/relateStory"
+              resource="productPlan"/>
+    </type-info>
+
+    <type-info name="productRelease">
+        <info name="demandInfo" title="发布信息" infoParameter="releaseId" url="/product/release/find/relateStory"
+              resource="productRelease"/>
+    </type-info>
+
+    <type-info name="demandhref">
+        <info name="demandInfo" title="需求信息" infoParameter="storyId" url="/product/story/productDemandDetail/findPager"
+              resource="demandhref"/>
+    </type-info>
+
 </type-infos>
