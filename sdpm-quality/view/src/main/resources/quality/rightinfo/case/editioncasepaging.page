@@ -47,9 +47,9 @@
                     <script>
                         $("#${sid}").on("change", function () {
                             var pId = $("input[name=productId]").val();
-                            var mId = $("select[name=moduleId]").val();
+                            var mId = $("#${sid}  option:selected").val();
                             if (pId > 0 && mId >= 0) {
-                                ajaxRead("${sid}", "storyId", "storyId", "storyTitle", "/product/story/storyList?productId=" + pId + "&moduleId=" + mId, ${testCase?.storyId?:0});
+                                ajaxRead("${sid}", "storyId", "storyId", "storyTitle", "/quality/testCase/ajax/story?productId="+pId+"&moduleId="+mId,${(testCase?.storyId?:storyId)?:0});
                             }
                         });
                     </script>
