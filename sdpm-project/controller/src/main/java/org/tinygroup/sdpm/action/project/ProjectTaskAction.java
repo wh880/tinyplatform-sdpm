@@ -663,7 +663,9 @@ public class ProjectTaskAction extends BaseController {
                 module.setModuleType("projectProduct");
                 module.setModuleRoot(projectId);
                 List<SystemModule> moduleList = moduleService.findModuleList(module);
-                moduleIds = StringUtil.isBlank(moduleIds) ? moduleList.get(0).getModuleId().toString() : moduleIds.substring(1, moduleIds.length() - 1) + "," + moduleList.get(0).getModuleId().toString();
+                if(moduleList.size()>1){
+                    moduleIds = StringUtil.isBlank(moduleIds) ? moduleList.get(0).getModuleId().toString() : moduleIds.substring(1, moduleIds.length() - 1) + "," + moduleList.get(0).getModuleId().toString();
+                }
             } else {
                 moduleIds = ModuleUtil.getCondition(Integer.parseInt(moduleId));
             }
@@ -908,7 +910,7 @@ public class ProjectTaskAction extends BaseController {
                 module.setModuleRoot(pp.getProductId());
                 List<SystemModule> tModuleList = moduleService.findModuleList(module);
                 for (SystemModule m : tModuleList) {
-                    m.setModuleName(ModuleUtil.getPath(m.getModuleId(), "/", product == null ? "" : product.getProductName(), true));
+                    m.setModuleName(ModuleUtil.getPath(m.getModuleId(), "/", product.getProductName(), true));
                 }
                 SystemModule module1 = new SystemModule();
                 module1.setModuleType("projectProduct");

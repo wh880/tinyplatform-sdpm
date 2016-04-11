@@ -48,7 +48,7 @@ public class RoleUserManagerImpl implements RoleUserManager {
             t.setOrgRoleId(roleId);
             list.add(t);
         }
-        if (list != null || !list.isEmpty()) {
+        if (!list.isEmpty()) {
             orgRoleUserDao.batchInsert(list);
         }
     }
@@ -72,7 +72,7 @@ public class RoleUserManagerImpl implements RoleUserManager {
             list.add(t);
         }
         Integer len = 0;
-        if (list != null || !list.isEmpty()) {
+        if (!list.isEmpty()) {
             int[] batchInsert = orgRoleUserDao.batchInsert(list);
             if (!ArrayUtils.isEmpty(batchInsert)) {
                 len = batchInsert.length;

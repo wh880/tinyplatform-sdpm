@@ -898,7 +898,7 @@ public class BugAction extends BaseController {
     @ResponseBody
     @RequestMapping("/updateBatch")
     public boolean updateBatch(@RequestBody QualityBug[] bugs) {
-        if (bugs.length == 0 || bugs == null) {
+        if (bugs == null || bugs.length == 0) {
             return false;
         }
         for (QualityBug bug : bugs) {

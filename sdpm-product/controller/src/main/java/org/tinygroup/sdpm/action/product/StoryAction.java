@@ -246,7 +246,7 @@ public class StoryAction extends BaseController {
     @ResponseBody
     @RequestMapping("/updateBatch")
     public boolean updateBatch(@RequestBody ProductStory[] stories) {
-        if (stories.length == 0 || stories == null) {
+        if (stories == null || stories.length == 0) {
             return false;
         }
         List<ProductStory> storyList = new ArrayList<ProductStory>();
@@ -414,7 +414,7 @@ public class StoryAction extends BaseController {
             model.addAttribute("caseList", testCases);
 
 
-            if (productStory != null && !StringUtil.isBlank(productStory.getStoryLinkStories())) {
+            if (!StringUtil.isBlank(productStory.getStoryLinkStories())) {
                 String storyLinkStories = productStory.getStoryLinkStories();
                 List<Integer> idList = new ArrayList<Integer>();
                 String[] split = storyLinkStories.split(",");

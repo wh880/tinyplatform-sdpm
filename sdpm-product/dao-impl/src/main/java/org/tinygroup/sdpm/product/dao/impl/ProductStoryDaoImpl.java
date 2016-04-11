@@ -533,7 +533,7 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
             return select;
         }
         List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
-        for (int i = 0; orderBies != null && i < orderBies.length; i++) {
+        for (int i = 0; i < orderBies.length; i++) {
             OrderByElement tempElement = null;
             if (orderBies[i] != null) {
                 tempElement = orderBies[i].getOrderByElement();

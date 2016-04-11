@@ -130,7 +130,7 @@ public class StoryManagerImpl implements StoryManager {
      * storySource,storyStatus,storyStage,storyPri,storyEstimate,
      * storyOpenedBy,storyAssignedTo,storyClosedReason,storyVersion*/
     public Map<String, List<StoryCount>> report(String fields, ProductStory story) {
-        if (fields.equals("") || fields == null) {
+        if (fields == null || fields.equals("")) {
             return null;
         }
         Map<String, List<StoryCount>> map = new TreeMap<String, List<StoryCount>>(
