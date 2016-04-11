@@ -23,8 +23,8 @@ import java.util.Date;
  * 客户信息表
  */
 public class ServiceClient implements Serializable {
-    public static Integer DELETE_YES = 1;
-    public static Integer DELETE_NO = 0;
+    public static final Integer DELETE_YES = 1;
+    public static final Integer DELETE_NO = 0;
 
     /**
      * 客户ID

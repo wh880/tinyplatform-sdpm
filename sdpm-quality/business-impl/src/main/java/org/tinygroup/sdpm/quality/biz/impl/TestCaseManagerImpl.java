@@ -82,7 +82,7 @@ public class TestCaseManagerImpl implements TestCaseManager {
     public Pager<QualityTestCase> findPagerRel(Integer start, Integer limit, QualityTestCase testcase, ConditionCarrier carrier, String columnName, boolean asc) {
 
         Condition condition = mergeCondition(carrier);
-        if (condition != null && !"".equals(condition)) {
+        if (condition != null && !"".equals(condition.toString())) {
             if (!StringUtil.isBlank(columnName)) {
                 return testcasedao.queryPagerRel(start, limit, testcase, condition, new OrderBy("quality_test_case." + NameUtil.resolveNameDesc(columnName), asc));
             }

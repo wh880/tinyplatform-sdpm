@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class StatisticOrg implements Serializable {
-    public static String DELETE_YES = "1";
-    public static String DELETE_NO = "0";
+    public static final String DELETE_YES = "1";
+    public static final String DELETE_NO = "0";
 
     /**
      * 项目下任务完成进度

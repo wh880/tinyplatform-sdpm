@@ -23,11 +23,11 @@ import java.io.Serializable;
  */
 public class OrgRole implements Serializable {
 
-    public static Integer DELETE_YES = 1;
-    public static Integer DELETE_NO = 0;
-    public static String ROLE_TYPE_SYS = "0";
-    public static String ROLE_TYPE_PRODUCT = "1";
-    public static String ROLE_TYPE_PROJECT = "2";
+    public static final Integer DELETE_YES = 1;
+    public static final Integer DELETE_NO = 0;
+    public static final String ROLE_TYPE_SYS = "0";
+    public static final String ROLE_TYPE_PRODUCT = "1";
+    public static final String ROLE_TYPE_PROJECT = "2";
     /**
      * 角色ID
      */

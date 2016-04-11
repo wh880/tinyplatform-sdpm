@@ -26,8 +26,8 @@ import java.util.Date;
  */
 public class DocumentDoc implements Serializable {
 
-    public static String DELETE_YES = "1";
-    public static String DELETE_NO = "0";
+    public static final String DELETE_YES = "1";
+    public static final String DELETE_NO = "0";
 
     /*
      * 文档关联查询的字段

@@ -47,8 +47,8 @@ import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 @Repository
 public class ServiceSlaDaoImpl extends TinyDslDaoSupport implements ServiceSlaDao {
 
-    public static Integer DELETE_YES = 1;
-    public static Integer DELETE_NO = 0;
+    public static final Integer DELETE_YES = 1;
+    public static final Integer DELETE_NO = 0;
 
     public ServiceSla add(ServiceSla serviceSla) {
         return getDslTemplate().insertAndReturnKey(serviceSla, new InsertGenerateCallback<ServiceSla>() {
