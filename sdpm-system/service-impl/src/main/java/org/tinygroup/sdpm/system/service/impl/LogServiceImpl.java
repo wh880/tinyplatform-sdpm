@@ -86,9 +86,9 @@ public class LogServiceImpl implements LogService {
         try {
             value = object.getClass().getDeclaredMethod(methodName).invoke(object);
         } catch (IllegalAccessException e) {
-            e.printStackTrace();
+
         } catch (InvocationTargetException e) {
-            e.printStackTrace();
+
         }
         return value;
     }

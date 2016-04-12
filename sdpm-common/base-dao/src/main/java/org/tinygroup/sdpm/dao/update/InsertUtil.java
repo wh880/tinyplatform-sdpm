@@ -53,7 +53,6 @@ public class InsertUtil {
             return Insert.insertInto(table).values(values.toArray(values1));
 
         } catch (Exception e) {
-            e.printStackTrace();
             return null;
         }
     }

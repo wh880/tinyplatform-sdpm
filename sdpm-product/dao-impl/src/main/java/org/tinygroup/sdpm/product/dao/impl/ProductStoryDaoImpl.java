@@ -777,7 +777,6 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
             List<StoryCount> storyCounts = getDslSession().fetchList(select, StoryCount.class);
             return storyCounts;
         } catch (Exception e) {
-            e.printStackTrace();
             return null;
         }
     }
@@ -797,7 +796,6 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
             List<StoryCount> storyCounts = getDslSession().fetchList(select, StoryCount.class);
             return storyCounts;
         } catch (Exception e) {
-            e.printStackTrace();
             return null;
         }
     }
@@ -819,7 +817,6 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
             List<StoryCount> storyCounts = getDslSession().fetchList(select, StoryCount.class);
             return storyCounts;
         } catch (Exception e) {
-            e.printStackTrace();
             return null;
         }
 
@@ -842,7 +839,6 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
             List<StoryCount> storyCounts = getDslSession().fetchList(select, StoryCount.class);
             return storyCounts;
         } catch (Exception e) {
-            e.printStackTrace();
             return null;
         }
     }
@@ -877,7 +873,6 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 
             return getDslSession().fetchList(select, StoryCount.class);
         } catch (Exception e) {
-            e.printStackTrace();
             return null;
         }
     }
