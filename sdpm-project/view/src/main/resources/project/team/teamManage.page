@@ -82,6 +82,25 @@
                     $(this).html(index + 1);
                 });
             }
+            //对输入工日数字检查
+            $("input[name$='teamDays']").each(function(){
+                $(this).change(function(){
+                    if(isNaN($(this).val()))
+                    {
+                        alert("请正确填写工日！");
+                    }
+                });
+            });
+
+            //对输入工时数字检查
+            $("input[name$='teamHours']").each(function(){
+                $(this).change(function(){
+                    if(isNaN($(this).val()))
+                    {
+                        alert("请正确填写工时！");
+                    }
+                });
+            });
 
             $(".itemlist-table").on("click", ".addnext", function () {
                 var $thisTr =
@@ -112,8 +131,35 @@
     </script>
     #end
     #@div(divClass="col-7 col-offset-5 form-inline")
-        #tinyInput("submit" "submitbtn" " 保存 " {"class":"btn btn-primary"})
+##        #tinyInput("submit" "submitbtn" " 保存 " {"class":"btn btn-primary"})
+    <input type="submit" name="submitbtn" value="保存" class="btn btn-primary" onclick="return checkNum()"/>
     <a href="javascript:history.go(-1)" class="btn radius btn-default">返回</a>
     #end
 
 #end
+<script>
+    //保存前对工日/工时数字检查
+    function checkNum()
+    {
+        var boo=true;
+        $("input[name$='teamDays']").each(function(){
+            if(isNaN($(this).val()))
+            {
+                boo=false;
+                return;
+            }
+        });
+        $("input[name$='teamHours']").each(function(){
+            if(isNaN($(this).val()))
+            {
+                boo=false;
+                return;
+            }
+        });
+        if(!boo)
+        {
+            alert("工日/工时请输入数字！");
+        }
+        return boo;
+    }
+</script>

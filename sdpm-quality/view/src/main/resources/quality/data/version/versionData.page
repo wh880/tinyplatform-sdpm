@@ -4,7 +4,11 @@
     #@tr()
         #@td("nowrap")<input type="checkbox" value="${v?.testversionId}" name="idCheck">#end
         #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/version/taskToCase?testversionId=${v?.testversionId}&currentPageId=5&status=tverallcase">${v?.no}</a>#end
-        #@td("nowrap")<a href="${TINY_CONTEXT_PATH+adminPath}/quality/version/taskToCase?testversionId=${v?.testversionId}&currentPageId=5&status=tverallcase">${v?.testtaskTitle}</a>#end
+        #@td("nowrap")
+##            <div   style="width: 200px;overflow: hidden">
+                <a href="${TINY_CONTEXT_PATH+adminPath}/quality/version/taskToCase?testversionId=${v?.testversionId}&currentPageId=5&status=tverallcase">${v?.testtaskTitle}</a>
+##            </div>
+        #end
         #@td("nowrap")<a href="${TINY_CONTEXT_PATH+adminPath}/project/demand/index.page">${v?.projectName}</a>#end
         #@td("nowrap")${v?.searchBuildName?:(v?.buildName=="0"?"trunk":"")}#end
         #@td("nowrap")<span class="${v?.testtaskOwner==userUtils.getUserId()?'c-red':''}">${v?.testtaskOwner?userUtils.getUserById(v?.testtaskOwner)?.orgUserRealName:""}</span>#end
@@ -15,30 +19,29 @@
             #foreach(m:menuService.getScopeMenus("testversion-op"))
             <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?testversionId=${v?.testversionId}&currentPageId=5" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
             #end
-            #set(m=menuService.getMenu("tversiondelete"))
+            #set(m=menuService.getMenu("tverdelete"))
             #if(m)
-            <a class="versionDelete" href="javascript:void(0)"><i class="${m.icon}" title="删除"></i></a>
-            <script type="text/javascript">
-                $(function () {
-                    var check = $(".versionDelete");
-                    check.on("click", function () {
-                        layer.confirm("是否确认删除?", function () {
-                            $.ajax({
-                                type: "get",
-                                url: "${TINY_CONTEXT_PATH+adminPath+m?.href+'?testversionId ='+v?.testversionId}",
-                                dataType: "json",
-                                success: function (data) {
-                                    if (data.status == "y") {
-                                        window.location.reload();
+                <a class="versionDelete" href="javascript:void(0)"><i class="${m.icon}" title="删除"></i></a>
+                <script type="text/javascript">
+                    $(function () {
+                        var check = $(".versionDelete");
+                        check.on("click", function () {
+                            layer.confirm("是否确认删除?", function () {
+                                $.ajax({
+                                    type: "get",
+                                    url: "${TINY_CONTEXT_PATH+adminPath+m?.href+'?testversionId ='+v?.testversionId}",
+                                    dataType: "json",
+                                    success: function (data) {
+                                        if (data.status == "y") {
+                                            window.location.reload();
+                                        }
                                     }
-                                }
+                                });
+                                return false;
                             });
-                            return false;
                         });
-                    });
-                })
-
-            </script>
+                    })
+                </script>
             #end
         #end
     #end

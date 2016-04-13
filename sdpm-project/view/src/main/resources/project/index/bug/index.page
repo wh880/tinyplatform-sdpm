@@ -17,7 +17,7 @@
                     #@tinyTh({"class":"sorting","rel":"no"})ID#end
                     #@tinyTh({"class":"sorting","rel":"bug_severity"})级别#end
                     #@tinyTh({"class":"sorting","rel":"priority"})P#end
-                    #@tinyTh({"class":"sorting","rel":"bug_title"})bug标题#end
+                    #@tinyTh({"class":"sorting","rel":"bug_title","width":"300px"})bug标题#end
                     #@tinyTh({"class":"sorting","rel":"bug_opened_by"})创建#end
                     #@tinyTh({"class":"sorting","rel":"bug_assigned_to"})指派#end
                     #@tinyTh({"class":"sorting","rel":"bug_resolved_by"})解决者#end

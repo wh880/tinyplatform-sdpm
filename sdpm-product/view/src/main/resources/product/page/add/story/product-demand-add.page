@@ -26,7 +26,6 @@
 
     });
 
-
 </script>
 #set(linkName = "product-demand")
 #@tinyForm(
@@ -203,6 +202,8 @@
         <div class="input-group">
             <input type="text" class="form-control" name="storyEstimate" placeholder=""
                    aria-describedby="basic-addon2">
+                #*#tinyInput("text" "storyEstimate" "" {"placeholder":"预计工时","datatype":
+                    "/^[0-9]+(\.[0-9]{1,2})?$/","aria-describedby":"basic-addon2"})*#
             <span class="input-group-addon" id="basic-addon2">小时</span>
         </div>
     #end
@@ -288,9 +289,9 @@
     #@elementItem()
         <div class="col-12">
             <div class="col-4">
-                <button style="float: right" type="submit" id="submit2" class="commitBtn">保存</button>
+                <button style="float: right" type="submit" id="submit2" class="commitBtn" onclick="return checkNum()">保存</button>
             </div>
-            <div class="col-1"><button name="saveAndContinue" style="float: right" type="submit" id="submit2" class="commitBtn">保存并继续</button></div>
+            <div class="col-1"><button name="saveAndContinue" style="float: right" type="submit" id="submit2" class="commitBtn" onclick="return checkNum()">保存并继续</button></div>
             <div class="col-1"></div>
             <div class="col-1">
 
@@ -304,11 +305,28 @@
 #end
 
 
-    <script type="text/javascript">
-        $(function () {
-            $("form[name=thisform]").Validform({
-                tiptype: 2
-            });
+<script type="text/javascript">
+    $(function () {
+        $("form[name=thisform]").Validform({
+            tiptype: 2
         });
-    </script>
+        //对输入工时信息进行验证
+        $("input[name='storyEstimate']").change(function(){
+            if(isNaN($(this).val()))
+            {
+                alert("请正确输入工时信息！");
+            }
+        });
+    });
+    //保存前对工时信息进行验证
+    function checkNum()
+    {
+        if(isNaN($("input[name='storyEstimate']").val()))
+        {
+            alert("请正确输入工时信息！");
+            return false;
+        }else
+            return true;
+    }
+</script>
 

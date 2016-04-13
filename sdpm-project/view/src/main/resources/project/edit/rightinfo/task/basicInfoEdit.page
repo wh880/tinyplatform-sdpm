@@ -242,7 +242,7 @@
                     #@td()
                         #@formControlDiv("col-10")
                             <div class="input-group">
-                                #tinyInput("text" "taskLeft" task.taskLeft {"placeholder":"预计剩余","aria-describedby":"basic-addon2"})
+                                #tinyInput("text" "taskLeft" task.taskLeft {"placeholder":"预计剩余","datatype":"/^[0-9]+(\.[0-9]{1,2})?$/","aria-describedby":"basic-addon2"})
                                 <span class="input-group-addon" id="basic-addon2">小时</span>
                             </div>
                         #end
