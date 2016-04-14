@@ -23,6 +23,9 @@
                         $thisTr.after(data);
                 },
             });
+            /*var ro=getRoleIds();
+            $(".databody").find('tr').eq(-1).find('td').find('select').val(ro);*/
+
 ##                $thisTr.find(".addnext").css("display","none");
 //            updateUserID();
             return false;

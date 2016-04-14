@@ -51,7 +51,7 @@
                                     #@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
                                     #@tinyTh({"class":"sorting sorting_desc","rel":"story_id"})ID#end
                                     #@tinyTh({"class":"sorting","rel":"story_pri"})P#end
-                                    #@tinyTh({"class":"sorting","rel":"story_title"})需求名称#end
+                                    #@tinyTh({"class":"sorting","rel":"story_title","width":"200px"})需求名称#end
                                     #@tinyTh({"class":"sorting","rel":"story_openedBy"})创建#end
                                     #@tinyTh({"class":"sorting","rel":"story_assigned_to"})指派#end
                                     #@tinyTh({"class":"sorting","rel":"story_estimate"})预计#end

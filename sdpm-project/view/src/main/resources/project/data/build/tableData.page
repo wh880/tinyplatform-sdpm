@@ -7,8 +7,13 @@
         #@td()<input type="checkbox" value="${b?.buildId}" name="idCheck">#end
         #@td()${b?.buildId}#end
         #@td()${b?.productName}#end
-        #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/project/build/productalbug?buildId=${b?.buildId}">${b?.buildName}#end
+        #@td()
+            <div style="width: 200px;overflow: hidden">
+                <a href="${TINY_CONTEXT_PATH+adminPath}/project/build/productalbug?buildId=${b?.buildId}" title="${b?.buildName}">${b?.buildName}</a>
+            </div>
+        #end
         #@td()${b?.buildScmPath}</a>#end
+    </div>
         #@td()${b?.buildFilePath}#end
         #@td("nowrap")${formatDate(b?.buildDate,"yyyy-MM-dd")}#end
         #@td("nowrap")${b?.buildBuilder?userUtils.getUserById(b?.buildBuilder)?.orgUserRealName:""}#end

@@ -165,9 +165,11 @@
             #@colLabel()预计工时：#end
             #@formControlDiv("col-8")
                 <div class="input-group">
-                    <input type="text" value="${story?.storyEstimate}" class="form-control" name="storyEstimate"
+                   #* <input type="text" value="${story?.storyEstimate}" class="form-control" name="storyEstimate"
                            placeholder=""
-                           aria-describedby="basic-addon2">
+                           aria-describedby="basic-addon2">*#
+                       #tinyInput("text" "storyEstimate" story?.storyEstimate {"placeholder":"","datatype":
+                           "/^[0-9]+(\.[0-9]{1,2})?$/","aria-describedby":"basic-addon2"})
                     <span class="input-group-addon" id="basic-addon2">小时</span>
                 </div>
             #end
