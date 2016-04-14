@@ -17,6 +17,8 @@
 		#@tinyTable("tblid") ##ID为空则系统自动生成 带入参数则取该参数为ID
 			#@div(divBaseClass="tinyheaderTools form-inline")
 				#setTinyTablePageSize([10,20,30,50,100,200])
+                <input type="button" value="全选" class="btn btn-default btn-primary " onclick="selectAllNullorReserve('idCheck','全选');"/>
+                <input type="button" value="反选" class="btn btn-default btn-primary"  onclick="selectAllNullorReserve('idCheck','反选');"/>
 				#@radiusBtn("btn-danger spmuldet" "icon-trash" "javascript:","delete") 批量删除#end
 				#@aModal("#myModal" "批量删除" "1200" "500" "hidenmuldel hide" adminPath+"/system/holiday/findIds" "holidayBathDelete")#end
 

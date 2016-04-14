@@ -55,7 +55,7 @@
             <class-path path="E:\sdpm\sdpm-product\view\src\main\resources"/>
             <class-path path="E:\sdpm\sdpm-document\view\src\main\resources"/>
             <class-path path="E:\sdpm\sdpm-quality\view\src\main\resources"/>
-
+            <class-path path="E:\sdpm\sdpm-system\view\src\main\resources"/>
 
         </class-paths>
         <include-patterns>

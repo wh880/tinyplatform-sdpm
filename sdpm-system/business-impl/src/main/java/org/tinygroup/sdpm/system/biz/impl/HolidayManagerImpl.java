@@ -50,6 +50,14 @@ public class HolidayManagerImpl implements HolidayManager {
 
     }
 
+    @Override
+    public Pager<Holiday> findByHolidayDeleted(Integer start, Integer limit, Holiday holiday, String sortName, boolean asc) {
+        if (StringUtil.isBlank(sortName)) {
+            return holidayDao.findByHolidayDeleted(start, limit, holiday);
+        }
+        return holidayDao.findByHolidayDeleted(start, limit, holiday, new OrderBy(NameUtil.resolveNameDesc(sortName), asc));
+    }
+
     public List<Holiday> batchadd(List<Holiday> holidayList) {
         // TODO Auto-generated method stub
         List<Holiday> holidays = new ArrayList<Holiday>();

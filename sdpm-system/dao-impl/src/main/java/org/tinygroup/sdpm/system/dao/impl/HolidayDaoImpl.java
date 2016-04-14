@@ -322,4 +322,41 @@ public class HolidayDaoImpl extends TinyDslDaoSupport implements HolidayDao {
         });
     }
 
+    @Override
+    public Pager<Holiday> findByHolidayDeleted(Integer start, Integer limit, Holiday holiday, final OrderBy... orderArgs) {
+        if (holiday == null) {
+            holiday = new Holiday();
+        }
+        final Holiday finalHoliday = holiday;
+        return getDslTemplate().queryPager(start, limit, holiday, false, new SelectGenerateCallback<Holiday>() {
+            public Select generate(Holiday t) {
+                Column column = HOLIDAYTABLE.HOLIDAY_ID;
+                Condition condition = null;
+                if (orderArgs != null && orderArgs.length > 0 && SYSTEM_ACTIONTABLE.ACTION_DATE.toString().equals(((Column) orderArgs[0].getOrderByElement().getExpression()).getColumnName())) {
+                    column = SYSTEM_ACTIONTABLE.ACTION_ID;
+                    condition = SYSTEM_ACTIONTABLE.ACTION_OBJECT_TYPE.eq("holiday");
+                }
+                Column[] groupBy;
+                if (!column.toString().equals(HOLIDAYTABLE.HOLIDAY_ID.toString())) {
+                    groupBy = new Column[]{column, HOLIDAYTABLE.HOLIDAY_ID, HOLIDAYTABLE.HOLIDAY_NAME};
+                } else {
+                    groupBy = new Column[]{column, HOLIDAYTABLE.HOLIDAY_NAME};
+                }
+                Select select = MysqlSelect.select(FragmentSql.fragmentSelect("holiday.*")).from(HOLIDAYTABLE).where(
+                        and(
+                                condition,
+                                HOLIDAYTABLE.HOLIDAY_NAME.eq(t.getHolidayName()),
+                                HOLIDAYTABLE.HOLIDAY_ACCOUNT.eq(t.getHolidayAccount()),
+                                HOLIDAYTABLE.HOLIDAY_DATE.eq(t.getHolidayDate()),
+                                HOLIDAYTABLE.HOLIDAY_TYPE.eq(t.getHolidayType()),
+                                HOLIDAYTABLE.HOLIDAY_DELETED.eq(t.getHolidayDeleted()),
+                                HOLIDAYTABLE.COMPANY_ID.eq(t.getCompanyId()),
+                                HOLIDAYTABLE.HOLIDAY_DETAIL.eq(t.getHolidayDetail()),
+                                HOLIDAYTABLE.HOILIDAY_REMARK.eq(t.getHoilidayRemark()))).groupBy(groupBy);
+                return addOrderByElements(select, orderArgs);
+            }
+        });
+    }
+
+
 }

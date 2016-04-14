@@ -1,83 +1,82 @@
 #set(cookieProductId=cookieProductId?:productUtils.getAllProductListByUser()?.get(0)?.productId)
 #@toggleBox({"class":"open"})
-	#@toggleLeft({"class":"aclass"})
-		#@settoggleLeftTitle()#foreach(product : productUtils.getAllProductListByUser())
-                              #if(product?.productId == cookieProductId)
-                              ${product?.productName}
-                              #break
-                              #end
-                              #end#end
-			#@settoggleLeftBody("treeLeftbox")
-				#@zTreeList(call("link",adminPath+"/system/module/bugTree?moduleType=case&moduleRoot="+cookieProductId))
-					#setzTreeValMap({"id":"moduleId","name":"moduleName","pid":"moduleParent"}) ##key值为固定
-					#zTreeSetLinkUrl(TINY_CONTEXT_PATH+adminPath+"/quality/testCase?status="+status+"&currentPageId=5")
-					#zTreeSetAddUrl(TINY_CONTEXT_PATH+adminPath+"/system/module/ajax/save?moduleType=case&moduleRoot="+cookieProductId)
-					#zTreeSetEditUrl(TINY_CONTEXT_PATH+adminPath+"/system/module/ajax/save")
-					#zTreeSetDelUrl(TINY_CONTEXT_PATH+adminPath+"/system/module/ajax/delete")
-				#end
-			#end
-	#end
+    #@toggleLeft({"class":"aclass"})
+        #@settoggleLeftTitle()#foreach(product : productUtils.getAllProductListByUser())
+            #if(product?.productId == cookieProductId)
+                ${product?.productName}
+                #break
+            #end
+        #end#end
+        #@settoggleLeftBody("treeLeftbox")
+            #@zTreeList(call("link",adminPath+"/system/module/bugTree?moduleType=case&moduleRoot="+cookieProductId))
+                #setzTreeValMap({"id":"moduleId","name":"moduleName","pid":"moduleParent"}) ##key值为固定
+                #zTreeSetLinkUrl(TINY_CONTEXT_PATH+adminPath+"/quality/testCase?status="+status+"&currentPageId=5")
+                #zTreeSetAddUrl(TINY_CONTEXT_PATH+adminPath+
+                    "/system/module/ajax/save?moduleType=case&moduleRoot="+cookieProductId)
+                #zTreeSetEditUrl(TINY_CONTEXT_PATH+adminPath+"/system/module/ajax/save")
+                #zTreeSetDelUrl(TINY_CONTEXT_PATH+adminPath+"/system/module/ajax/delete")
+            #end
+        #end
+    #end
 
-	
+
 
     #@toggleRight()
     <div id="caseGroup">
-#@tinyTable(testCaseTableId)
-#@div(divBaseClass="tinyheaderTools form-inline")
-			<div class="f col-3">
-						<input type="button" value="全选" class="btn btn-default btn-primary" 
-						onclick="selectAllNullorReserve('idCheck','全选');" />
-						<input type="button" value="反选" class="btn btn-default btn-primary"
-						 onclick="selectAllNullorReserve('idCheck','反选');" />
-						<div style="display:inline-block">
-							#@mulOperation("muldelete" TINY_CONTEXT_PATH+adminPath+"/quality/testCase/batchDelete")
-							<a href="javascript:void(0);" class="btn radius btn-danger "><i class="icon-trash"></i>&nbsp;批量删除</a>#end
-						</div>
-					</div>
-	#setTinyTablePageSize([10,20,30,50,100,200])
+        #@tinyTable(testCaseTableId)
+            #@div(divBaseClass="tinyheaderTools form-inline")
+                <div class="f col-3">
+                    <input type="button" value="全选" class="btn btn-default btn-primary"
+                           onclick="selectAllNullorReserve('idCheck','全选');"/>
+                    <input type="button" value="反选" class="btn btn-default btn-primary"
+                           onclick="selectAllNullorReserve('idCheck','反选');"/>
+                    <div style="display:inline-block">
+                        #@mulOperation("muldelete" TINY_CONTEXT_PATH+adminPath+"/quality/testCase/batchDelete")
+                            <a href="javascript:void(0);" class="btn radius btn-danger "><i class="icon-trash"></i>&nbsp;批量删除</a>#end
+                    </div>
+                </div>
+                #setTinyTablePageSize([10,20,30,50,100,200])
 
 
-#end
-		
-
-#set(requestStatusString = tinyRequestQueryString!=null ?"?"+tinyRequestQueryString:"")
-#@tinyTableContent(TINY_CONTEXT_PATH+adminPath+"/quality/testCase/findPager"+requestStatusString)
-#@thead()
-#@tr()
-	#@tinyTh({"width":"6"})<input type="checkbox" id ="checkboxall" name="userid" value="">#end
-	#@tinyTh({"class":"sorting","rel":"caseId"})ID#end
-	#@tinyTh({"class":"sorting","rel":"priority"})P#end
-	#@tinyTh({"class":"sorting","rel":"caseTitle"})用例标题#end
-	#@tinyTh({"class":"sorting","rel":"caseType"})类型#end
-	#@tinyTh({"class":"sorting","rel":"caseOpenedBy","style":"color:#333"})创建#end
-	#@tinyTh({"class":"sorting","rel":"caseLastRunner"})执行人#end
-	#@tinyTh({"class":"sorting","rel":"caseLastRunDate"})执行时间#end
-	#@tinyTh({"class":"sorting","rel":"caseLastRunResult"})结果#end
-	#@tinyTh({"class":"sorting","rel":"caseStatus"})状态#end
-	#@tinyTh({"csortinglass":"sorting","rel":"sortname"})操作#end
-#end
-#end
-<script type="text/javascript">
-    $(function(){
-    $('#${tableId}').on('click','.delBtn',function(e){
-user_del(this,'1');
-});
-})
-</script>
-#@dialog("myModal")
-#@dialogHeader()#end
-#@dialogBody()<p>对话框内容…</p>#end
-#@dialogFooter()
-	#@buttonCancel()关闭#end
-#end
-#end
-#end
-	
+            #end
 
 
-#end
-##tinyTable end
-#end
+            #set(requestStatusString = tinyRequestQueryString!=null ?"?"+tinyRequestQueryString:"")
+            #@tinyTableContent(TINY_CONTEXT_PATH+adminPath+"/quality/testCase/findPager"+requestStatusString)
+                #@thead()
+                    #@tr()
+                        #@tinyTh({"width":"6"})<input type="checkbox" id="checkboxall" name="userid" value="">#end
+                        #@tinyTh({"class":"sorting","rel":"caseId"})ID#end
+                        #@tinyTh({"class":"sorting","rel":"priority"})P#end
+                        #@tinyTh({"class":"sorting","rel":"caseTitle"})用例标题#end
+                        #@tinyTh({"class":"sorting","rel":"caseType"})类型#end
+                        #@tinyTh({"class":"sorting","rel":"caseOpenedBy","style":"color:#333"})创建#end
+                        #@tinyTh({"class":"sorting","rel":"caseLastRunner"})执行人#end
+                        #@tinyTh({"class":"sorting","rel":"caseLastRunDate"})执行时间#end
+                        #@tinyTh({"class":"sorting","rel":"caseLastRunResult"})结果#end
+                        #@tinyTh({"class":"sorting","rel":"caseStatus"})状态#end
+                        #@tinyTh({"csortinglass":"sorting","rel":"sortname"})操作#end
+                    #end
+                #end
+                <script type="text/javascript">
+                    $(function () {
+                        $('#${tableId}').on('click', '.delBtn', function (e) {
+                            user_del(this, '1');
+                        });
+                    })
+                </script>
+                #@dialog("myModal")
+                    #@dialogHeader()#end
+                    #@dialogBody()<p>对话框内容…</p>#end
+                    #@dialogFooter()
+                        #@buttonCancel()关闭#end
+                    #end
+                #end
+            #end
+
+        #end
+    ##tinyTable end
+    #end
 </div>
 ##toggleright end
 #end
