@@ -2,7 +2,6 @@ package org.tinygroup.sdpm.service.biz.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
@@ -22,7 +21,6 @@ import static org.tinygroup.tinysqldsl.base.FragmentSql.fragmentCondition;
  * Created by Administrator on 2015-09-18.
  */
 @Service
-@Transactional
 public class SlaManagerImpl implements SlaManager {
     @Autowired
     private ServiceSlaDao slaDao;

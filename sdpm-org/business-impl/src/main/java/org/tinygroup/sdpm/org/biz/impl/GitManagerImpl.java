@@ -2,7 +2,6 @@ package org.tinygroup.sdpm.org.biz.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.sdpm.org.biz.inter.GitManager;
 import org.tinygroup.sdpm.org.dao.OrgDiaryGitDetailDao;
 import org.tinygroup.sdpm.org.dao.OrgGitCommitInfoDao;
@@ -17,7 +16,6 @@ import java.util.List;
  * Created by gongyl on 2016/3/24.
  */
 @Service
-@Transactional
 public class GitManagerImpl implements GitManager {
     @Autowired
     private OrgGitCommitInfoDao orgGitCommitInfoDao;

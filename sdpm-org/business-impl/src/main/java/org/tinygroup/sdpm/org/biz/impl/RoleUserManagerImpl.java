@@ -3,7 +3,6 @@ package org.tinygroup.sdpm.org.biz.impl;
 import org.apache.commons.lang.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.org.biz.inter.RoleUserManager;
 import org.tinygroup.sdpm.org.dao.OrgRoleUserDao;
@@ -16,7 +15,6 @@ import java.util.List;
  * Created by Administrator on 2015-10-12.
  */
 @Service
-@Transactional
 public class RoleUserManagerImpl implements RoleUserManager {
     @Autowired
     OrgRoleUserDao orgRoleUserDao;

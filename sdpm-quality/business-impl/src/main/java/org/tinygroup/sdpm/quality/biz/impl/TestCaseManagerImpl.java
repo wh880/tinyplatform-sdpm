@@ -2,7 +2,6 @@ package org.tinygroup.sdpm.quality.biz.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
@@ -24,7 +23,6 @@ import java.util.List;
  * Created by chenpeng15668 on 2015-9-24
  */
 @Service
-@Transactional
 public class TestCaseManagerImpl implements TestCaseManager {
 
     @Autowired

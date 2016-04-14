@@ -2,7 +2,6 @@ package org.tinygroup.sdpm.service.biz.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.sdpm.service.biz.inter.ReviewManager;
 import org.tinygroup.sdpm.service.dao.ServiceReviewDao;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceReview;
@@ -13,7 +12,6 @@ import java.util.List;
  * Created by Administrator on 2015-09-18.
  */
 @Service
-@Transactional
 public class ReviewManagerImpl implements ReviewManager {
     @Autowired
     private ServiceReviewDao reviewDao;
