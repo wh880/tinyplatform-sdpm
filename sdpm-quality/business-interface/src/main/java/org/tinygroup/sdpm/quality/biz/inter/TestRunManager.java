@@ -40,4 +40,6 @@ public interface TestRunManager {
     int delete(Integer runId);
 
     Pager<QualityTestRun> findPager(Integer start, Integer limit, QualityTestRun testRun, ConditionCarrier carrier, String sortName, boolean asc);
+
+    List<QualityTestRun> findTestRunByTestVersionId(Integer testversionId);
 }

@@ -341,8 +341,9 @@ public class StoryAction extends BaseController {
     /**
      * 批量关闭
      */
-    @RequestMapping("/findByKeys")
-    public String findByKeys(SystemAction systemAction,String ids) {
+    @ResponseBody
+    @RequestMapping("/batchclose")
+    public Map batchclose(SystemAction systemAction,String ids) {
         String[] storyIds = ids.split(",");
         if(storyIds.length>0) {
             for (String id : storyIds) {
@@ -359,8 +360,11 @@ public class StoryAction extends BaseController {
                         null, productStory, productStory, systemAction.getActionComment());
             }
         }
-        return "/product/page/list/story/story.page";
-        /*return "redirect:" + "/a/product/story";*/
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("status", "success");
+        map.put("info", "关闭成功");
+        return map;
+        //return "/product/page/list/story/story.page";
     }
 
     @RequestMapping("/{forwordPager}/findPager")

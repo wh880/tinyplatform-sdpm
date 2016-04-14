@@ -40,4 +40,9 @@ public class TestRunServiceImpl implements TestRunService {
         return testRunManager.findPager(start, limit, testRun, carrier, sortName, asc);
     }
 
+    @Override
+    public List<QualityTestRun> findTestRunByTestVersionId(Integer testversionId) {
+        return testRunManager.findTestRunByTestVersionId(testversionId);
+    }
+
 }

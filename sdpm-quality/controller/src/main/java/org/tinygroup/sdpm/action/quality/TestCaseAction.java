@@ -58,6 +58,7 @@ public class TestCaseAction extends BaseController {
     @Autowired
     private BugService bugService;
 
+
     @ModelAttribute
     public void init(Model model) {
         initSearchBar(model, "用例");
@@ -450,7 +451,12 @@ public class TestCaseAction extends BaseController {
     @ResponseBody
     @RequestMapping("/ajax/story")
     public List<ProductStory> getStory(ProductStory productStory) {
-        if (!(productStory.getProductId() > 0)) return new ArrayList<ProductStory>();
+        if (productStory.getProductId() < 1) {
+            return new ArrayList<ProductStory>();
+        }
+        if (productStory.getModuleId() == 0) {
+            productStory.setModuleId(null);
+        }
         return storyService.findStoryListByOrder(productStory, null, null);
     }
 

@@ -16,7 +16,7 @@
 						#@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/testCase/case/viewInfo?id=${case?.caseId}">${case?.no}</a>#end
 						#@td()
 						#@Tselect2F()
-	                   		 #@Tselect2Body("caseVersion" "" {"class":"input-text","minimumResultsForSearch":"Infinity"}) ##,"multiple":"multiple"加上为多选项
+	                   		 #@Tselect2Body("caseVersion" case?.caseVersion {"class":"input-text","minimumResultsForSearch":"Infinity"}) ##,"multiple":"multiple"加上为多选项
 	                        #set(version = case?.caseVersion?:0)
 	                        #while(version>0)
 	                         <option value="${version}">${version}</option>

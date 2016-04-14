@@ -222,13 +222,26 @@ public class TestVersionAction extends BaseController {
     @RequestMapping("/makeLink")
     public Map makeLink(Integer testversionId, Integer[] ids, Integer[] ves) {
         QualityTestTask testTask = testTaskService.findTestTaskById(testversionId);
-        for (int i = 0; i < ids.length; i++) {
+        List<QualityTestRun> list=testRunService.findTestRunByTestVersionId(testversionId);
+        for (int i = 0; i < ids.length; i++)
+        {
+            boolean flag=true;
+            if(list.size()!=0) {
+                for (int j = 0; j < list.size(); j++) {
+                    if (list.get(j).getCaseId().equals(ids[i])) {
+                        flag = false;
+                        break;
+                    }
+                }
+            }
+            if(flag) {
             QualityTestRun run = new QualityTestRun();
             run.setCaseId(ids[i]);
             run.setCaseVersion(ves[i]);
             run.setTestRunStatus("1");
             run.setTaskId(testversionId);
             testRunService.addTestRun(run);
+            }
         }
         if ("3".equals(testTask.getTesttaskStatus())) {
             testTask.setTesttaskStatus("1");
@@ -347,7 +360,6 @@ public class TestVersionAction extends BaseController {
     @RequestMapping("/taskToCase")
     public String taskToCase(Integer testversionId, String status,String moduleId, Model model, HttpServletRequest request) {
         QualityTestTask testTask = testTaskService.findTestTaskById(testversionId);
-        System.out.println(status);
         List<ProjectTeam> projectTeams = teamService.findTeamByProjectId(testTask.getProjectId());
         String[] ids = new String[projectTeams.size()];
         for (int i = 0; i < ids.length; i++) {
