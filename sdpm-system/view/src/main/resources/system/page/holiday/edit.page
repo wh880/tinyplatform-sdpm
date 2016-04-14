@@ -15,9 +15,9 @@
 			      #end
 			 	
 				 #@elementItem()
-			        #@colLabel()类型：#end
+			        #@colLabel()类型111：#end
 				        #@formControlDiv("col-8")
-					       #@tinySelect("lang" holiday?.holidayType {"class":"input-text","rel":"22"})
+					       #@tinySelect("holidayType" holiday?.holidayType {"class":"input-text","rel":"22"})
 								#@tinyOptionItem("放假")放假#end
 								#@tinyOptionItem("工作")工作#end
 							#end

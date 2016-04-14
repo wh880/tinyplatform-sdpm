@@ -17,7 +17,9 @@
 package org.tinygroup.sdpm.system.dao;
 
 import org.tinygroup.jdbctemplatedslsession.daosupport.BaseDao;
+import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.system.dao.pojo.Holiday;
+import org.tinygroup.tinysqldsl.Pager;
 
 import java.util.List;
 
@@ -33,5 +35,7 @@ public interface HolidayDao extends BaseDao<Holiday, Integer> {
      * @return
      */
     int[] batchsoftdelete(List<Holiday> list);
+
+    Pager<Holiday> findByHolidayDeleted(Integer start, Integer limit, Holiday holiday, OrderBy... orderArgs);
 
 }

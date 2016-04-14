@@ -28,6 +28,16 @@
       </service-parameters>
       <service-result name="findByPageResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager"/>
     </service-method>
+    <service-method local-name="findByHolidayDeleted" service-id="findByHolidayDeleted" method-name="findByHolidayDeleted" cacheable="false" category="org.tinygroup.sdpm.system.service.inter">
+      <service-parameters>
+        <service-parameter name="start" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="limit" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="holiday" type="org.tinygroup.sdpm.system.dao.pojo.Holiday" required="false" is-array="false"/>
+        <service-parameter name="sortName" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="asc" type="boolean" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findByHolidayDeletedResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager"/>
+    </service-method>
     <service-method local-name="batchAddHoliday" service-id="batchAddHoliday" method-name="batchAddHoliday" cacheable="false" category="org.tinygroup.sdpm.system.service.inter">
       <service-parameters>
         <service-parameter name="holidayList" type="org.tinygroup.sdpm.system.dao.pojo.Holiday" collection-type="java.util.List" required="false" is-array="false"/>

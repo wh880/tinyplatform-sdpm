@@ -9,7 +9,7 @@ public interface SearchManager {
     /**
      * 添加搜索
      *
-     * @param config
+     * @param search
      * @return
      */
     SystemSearch add(SystemSearch search);
@@ -17,7 +17,7 @@ public interface SearchManager {
     /**
      * 删除
      *
-     * @param config
+     * @param searchId
      * @return
      */
     int delete(Integer searchId);
@@ -25,7 +25,7 @@ public interface SearchManager {
     /**
      * 修改
      *
-     * @param config
+     * @param search
      * @return
      */
     int update(SystemSearch search);
@@ -41,7 +41,7 @@ public interface SearchManager {
     /**
      * 根据ID查找
      *
-     * @param configId
+     * @param searchId
      * @return
      */
     SystemSearch find(Integer searchId);
