@@ -944,4 +944,39 @@ public class ProjectTaskAction extends BaseController {
             }
         }
     }
+
+    /**
+     * 判断任务名称是否已经存在
+     */
+    @ResponseBody
+    @RequestMapping("/judgeTaskNameExist")
+    public Map judgeTaskNameExist(String param ,Integer projectId,Integer taskId)
+    {
+        if(param != null)
+        {
+            String taskName = param;
+            ProjectTask projectTask=new ProjectTask();
+            projectTask.setTaskName(taskName);
+            projectTask.setTaskProject(projectId);
+            projectTask.setTaskDeleted("0");//0表示未关闭
+            List<ProjectTask> tasks=taskService.findListTask(projectTask);
+            if (tasks.size() != 0)
+            {
+                if (taskId == null)
+                {
+                    return resultMap(false, "该任务已存在");
+                } else if (!taskId.equals(tasks.get(0).getTaskId()))
+                {
+                    return resultMap(false, "该任务已存在");
+                } else
+                {
+                    return resultMap(true, "");
+                }
+            } else
+            {
+                return resultMap(true, "");
+            }
+        }
+        return resultMap(false, "请输入任务名称");
+    }
 }
