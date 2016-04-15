@@ -23,14 +23,12 @@
                         $thisTr.after(data);
                 },
             });
-            /*var ro=getRoleIds();
-            $(".databody").find('tr').eq(-1).find('td').find('select').val(ro);*/
-
 ##                $thisTr.find(".addnext").css("display","none");
 //            updateUserID();
             return false;
         }).on("click",".delbutton",function(){
-            if($('.databody .userID').size() == 1) return;
+            if($('.databody .userID').size() == 1)
+                return;
             var that=this;
             layer.confirm('确定删除?', function(){
                 $(that).closest("tr").remove();

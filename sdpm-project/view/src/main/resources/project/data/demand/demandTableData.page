@@ -23,7 +23,7 @@
                     <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?storyId=${s.storyId}&moduleId=${s.moduleId}"
                        title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
                 #else
-                    #@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m.href s.storyId)#buttonIcon(iconClass=m.icon)#end
+                    #@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m.href s.storyId)<i class="${m.icon}" title="删除"></i>#end
                 #end
             #end
         #end
