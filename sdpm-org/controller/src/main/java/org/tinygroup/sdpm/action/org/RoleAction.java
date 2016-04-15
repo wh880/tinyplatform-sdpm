@@ -7,7 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.org.dao.pojo.OrgRole;
 import org.tinygroup.sdpm.org.service.inter.RoleService;
@@ -45,6 +47,7 @@ public class RoleAction extends BaseController {
         }
         return "organization/privilege/addRoleForm";
     }
+
 
     /**
      * 角色新增和编辑的保存
@@ -158,5 +161,32 @@ public class RoleAction extends BaseController {
         }
         return roleService.roleInCondition(key, type, Integer.parseInt(configService.getConfigBySection(SystemConfig.SEARCH_CONFIG).getConfigKey()));
     }
+
+    /**
+     * 角色名唯一性校验
+     * @param roleName
+     * @param orgRoleId
+     * @return
+     */
+    @RequiresPermissions("organizationAddGroup")
+    @ResponseBody
+    @RequestMapping(value = "/roleNameCheck")
+    public Map roleNameCheck(@RequestParam("param") String roleName, String orgRoleId) {
+        OrgRole role = new OrgRole();
+        role.setOrgRoleName(roleName);
+        role.setDeleted(0);
+        List<OrgRole> roleList = roleService.findRoleList(role);
+        if (StringUtil.isBlank(orgRoleId)) { //新角色
+            if (roleList.isEmpty()) {
+                return resultMap(true, "角色名可用");
+            }
+        } else { //修改用户信息
+            if (roleList.size() < 1 || roleName.equals(roleService.findRole(Integer.valueOf(orgRoleId)).getOrgRoleName())) {
+                return resultMap(true, "角色名可用");
+            }
+        }
+        return resultMap(false, "角色名不可用！");
+    }
+
 
 }
