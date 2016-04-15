@@ -154,7 +154,6 @@
             "text" "storyTitle" story?.storyTitle {"placeholder":"请输入需求名称","datatype":"*","nullmsg":"需求名称不能为空！","id":"storyTitle",
             "class":"input-text",
             "ajaxurl":TINY_CONTEXT_PATH+adminPath+"/product/story/judgeStoryName"})
-
     #end
     #@validateDiv("col-2")#end
 #end
@@ -310,7 +309,7 @@
         $("form[name=thisform]").Validform({
             tiptype: 2
         });
-        //对输入工时信息进行验证
+        //对输入工时信息进行数字验证
         $("input[name='storyEstimate']").change(function(){
             if(isNaN($(this).val()))
             {

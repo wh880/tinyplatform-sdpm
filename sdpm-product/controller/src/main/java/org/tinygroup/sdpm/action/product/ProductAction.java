@@ -450,23 +450,37 @@ public class ProductAction extends BaseController {
 
         List<ProjectTeam> teamList = teams.getTeamList();
         //删选没有账号的team
-        for (int i = 0; i < teamList.size(); i++) {
-            if (StringUtil.isBlank(teamList.get(i).getTeamUserId()) || StringUtil.isBlank(teamList.get(i).getTeamRole())) {
+        for (int i = 0; i < teamList.size(); i++)
+        {
+            if (StringUtil.isBlank(teamList.get(i).getTeamUserId()) || StringUtil.isBlank(teamList.get(i).getTeamRole()))
+            {
                 teamList.remove(teamList.get(i));
                 i--;
             }
         }
-        //删除重复
+        //删除重复成员
         for(int i=0;i<teamList.size()-1;i++)
         {
             for(int j=teamList.size()-1;j>i;j--)
             {
                 if(teamList.get(i).getTeamUserId().equals(teamList.get(j).getTeamUserId()))
+                {
                     teamList.remove(j);
+                }
             }
         }
+        /*Map<String,ProjectTeam> teamUserIdMap=new HashMap<String, ProjectTeam>();
+        for(ProjectTeam projectTeam:teamList)
+        {
+            teamUserIdMap.put(projectTeam.getTeamUserId(),projectTeam);
+        }
+        List<ProjectTeam> noRepeatTeamList =new ArrayList<ProjectTeam>();
+        for (Map.Entry<String, ProjectTeam> entry : teamUserIdMap.entrySet())
+        {
+            noRepeatTeamList.add(entry.getValue());
+        }*/
 
-        //根据是否有teamId分为增加列表和更新列表
+        //分为增加列表和更新列表
         for (ProjectTeam team : teamList) {
             if (team.getId() != null) {
                 team.setProductId(Integer.valueOf(productId));

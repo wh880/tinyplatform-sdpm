@@ -82,22 +82,38 @@
                     $(this).html(index + 1);
                 });
             }
-            //对输入工日数字检查
-            $("input[name$='teamDays']").each(function(){
-                $(this).change(function(){
+            //对输入工日检查
+            $("input[name$='teamDays']").each(function()
+            {
+                $(this).change(function()
+                {
+                    //不是数字的验证
                     if(isNaN($(this).val()))
                     {
                         alert("请正确填写工日！");
                     }
+                    //空值时给默认值
+                    if($(this).val()==null||$(this).val()=="")
+                    {
+                        $(this).val("0.0");
+                    }
                 });
             });
 
-            //对输入工时数字检查
-            $("input[name$='teamHours']").each(function(){
-                $(this).change(function(){
+            //对输入工时检查
+            $("input[name$='teamHours']").each(function()
+            {
+                $(this).change(function()
+                {
+                    //不是数字的验证
                     if(isNaN($(this).val()))
                     {
                         alert("请正确填写工时！");
+                    }
+                    //空值时给默认值
+                    if($(this).val()==null||$(this).val()=="")
+                    {
+                        $(this).val("0.0");
                     }
                 });
             });
@@ -141,25 +157,27 @@
     //保存前对工日/工时数字检查
     function checkNum()
     {
-        var boo=true;
-        $("input[name$='teamDays']").each(function(){
+        var isNumber=true;
+        $("input[name$='teamDays']").each(function()
+        {
             if(isNaN($(this).val()))
             {
-                boo=false;
+                isNumber=false;
                 return;
             }
         });
-        $("input[name$='teamHours']").each(function(){
+        $("input[name$='teamHours']").each(function()
+        {
             if(isNaN($(this).val()))
             {
-                boo=false;
+                isNumber=false;
                 return;
             }
         });
-        if(!boo)
+        if(!isNumber)
         {
             alert("工日/工时请输入数字！");
         }
-        return boo;
+        return isNumber;
     }
 </script>
