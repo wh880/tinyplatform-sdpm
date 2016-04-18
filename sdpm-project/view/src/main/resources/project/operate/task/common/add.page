@@ -92,7 +92,7 @@
         <input type="hidden" name="taskAssignedDate">
         #@elementItem()
             #@sdpmItem("相关需求")
-                #if(storyList)
+                #*#if(storyList)*#
                     #@Tselect2F()
                         #@Tselect2Body("taskStory" storyId==null?"":storyId {"class":"input-text select2"})
                             <option value=""></option>
@@ -106,12 +106,12 @@
                             <a href="${TINY_CONTEXT_PATH+adminPath}/project/demand/index" class="r">全部</a>
                         #end
                     #end
-                #end
+               #* #end*#
             #end
         #end
         #@elementItem()
             #@sdpmItem("相关BUG")
-                #if(bugList)
+                #*#if(bugList)*#
                     #@Tselect2F()
                         #@Tselect2Body("taskRelationBug" bugId==null?"":bugId {"class":"input-text select2"})
                             <option value=""></option>
@@ -121,7 +121,7 @@
                             #end
                         #end
                     #end
-                #end
+                #*#end*#
             #end
         #end
         #@elementItem()

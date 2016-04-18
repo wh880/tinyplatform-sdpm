@@ -484,7 +484,7 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
                                             QUALITY_BUGTABLE.HARDWARE.eq(t.getHardware()),
                                             QUALITY_BUGTABLE.BUG_FOUND.eq(t.getBugFound()),
                                             QUALITY_BUGTABLE.BUG_STEPS.eq(t.getBugSteps()),
-                                            QUALITY_BUGTABLE.BUG_STATUS.eq(t.getBugStatus()),
+                                            QUALITY_BUGTABLE.BUG_STATUS.neq(t.getBugStatus()),
                                             QUALITY_BUGTABLE.BUG_CONFIRMED.eq(t.getBugConfirmed()),
                                             QUALITY_BUGTABLE.BUG_ACTIVATED_COUNT.eq(t.getBugActivatedCount()),
                                             QUALITY_BUGTABLE.BUG_MAILTO.eq(t.getBugMailto()),

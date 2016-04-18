@@ -22,6 +22,7 @@
             #@mulOperation("mulLink" TINY_CONTEXT_PATH+adminPath+"/project/demand/linkStory")
             <a href="javascript:void(0);" class="btn btn-primary"><i class="icon-link"></i>关联</a>
             #end
+            <a class="btn btn-primary" href="javascript:history.go(-1)">返回</a>
         #end
         #@tinyTableContent(TINY_CONTEXT_PATH+adminPath+"/project/demand/findStory?notInProjectStory="+notInProjectStory) ##取数据地址 总数据
             #@thead()

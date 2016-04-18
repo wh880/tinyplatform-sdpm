@@ -621,11 +621,12 @@ public class BugAction extends BaseController {
 
     @RequiresPermissions("bug-add")
     @RequestMapping("/add")
-    public String add(Model model) {
+    public String add(Model model,Integer projectId) {
         List<Project> projects = projectService.getUserProjectList(UserUtils.getUserId());
         List<OrgUser> orgUsers = userService.findUserList(null);
         model.addAttribute("projectList", projects);
         model.addAttribute("userList", orgUsers);
+        model.addAttribute("projectId", projectId);
         return "/quality/operate/bug/proposeBug.page";
     }
 
@@ -802,6 +803,7 @@ public class BugAction extends BaseController {
         QualityBug bug = new QualityBug();
         bug.setProjectId(projectId);
         bug.setDeleted(0);
+        bug.setBugStatus(QualityBug.STATUS_CLOSED);
         Pager<QualityBug> bugPage = bugService.findBugListPager(start, limit, null, bug, order, asc);
         model.addAttribute("bugPage", bugPage);
         return "project/data/bug/bugViewTableData.pagelet";
