@@ -706,30 +706,39 @@ public class ProjectTaskAction extends BaseController {
     }
 
     @RequestMapping(value = "/batchAdd", method = RequestMethod.POST)
-    public String batchAddSave(Tasks tasks, HttpServletRequest request) {
+    public String batchAddSave(Tasks tasks, HttpServletRequest request)
+    {
         List<ProjectTask> taskList = tasks.getTaskList();
-        for (int i = 0; i < taskList.size(); i++) {
+        for (int i = 0; i < taskList.size(); i++)
+        {
             ProjectTask projectTask = taskList.get(i);
-            if (StringUtil.isBlank(projectTask.getTaskName()) || null == (projectTask.getTaskEstimate())) {
+            if (StringUtil.isBlank(projectTask.getTaskName()) || null == (projectTask.getTaskEstimate()))
+            {
                 taskList.remove(i);
                 i--;
-            } else {
+            } else
+            {
                 projectTask.setTaskLeft(projectTask.getTaskEstimate());
                 projectTask.setTaskConsumed(0f);
-                if (null != projectTask.getTaskStory()) {
+                if (null != projectTask.getTaskStory())
+                {
                     ProductStory story = storyService.findStory(projectTask.getTaskStory());
-                    if (story != null) {
+                    if (story != null)
+                    {
                         projectTask.setStorySpec(story.getStorySpec());
                     }
                 }
             }
         }
-        if (taskList.isEmpty()) {
+        if (taskList.isEmpty())
+        {
             return "project/index/task/index.page";
-        } else {
+        } else
+        {
             Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, projectOperate.COOKIE_PROJECT_ID));
             taskService.batchAddTask(taskList, projectId);
-            for (ProjectTask task : taskList) {
+            for (ProjectTask task : taskList)
+            {
                 storyJudge(task.getTaskStory());
             }
             return "project/index/task/index.page";
