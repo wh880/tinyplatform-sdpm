@@ -360,6 +360,7 @@ public class StoryAction extends BaseController {
                         null, productStory, productStory, systemAction.getActionComment());
             }
         }
+
         Map<String, String> map = new HashMap<String, String>();
         map.put("status", "success");
         map.put("info", "关闭成功");

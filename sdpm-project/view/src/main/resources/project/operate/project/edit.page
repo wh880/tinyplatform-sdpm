@@ -53,7 +53,7 @@
         #@sdpmItem("可用工作日")
         <div class="input-group">
 ##            <input name="projectDays" type="text" class="form-control" placeholder="" value=${project?.projectDays} aria-describedby="basic-addon2">
-            <input name="projectDays" type="text" class="form-control" placeholder="" aria-describedby="basic-addon2" datatype="n" value=${project?.projectDays}>
+            <input name="projectDays" type="text" class="form-control" placeholder="" aria-describedby="basic-addon2" datatype="n" value=${project?.projectDays} readonly="readonly">
             <span class="input-group-addon" id="basic-addon2">天</span>
         </div>
         #end

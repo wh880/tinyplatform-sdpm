@@ -1,5 +1,6 @@
 package org.tinygroup.sdpm.action.quality;
 
+import org.apache.commons.lang.ObjectUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -620,11 +621,12 @@ public class BugAction extends BaseController {
 
     @RequiresPermissions("bug-add")
     @RequestMapping("/add")
-    public String add(Model model) {
+    public String add(Model model,Integer projectId) {
         List<Project> projects = projectService.getUserProjectList(UserUtils.getUserId());
         List<OrgUser> orgUsers = userService.findUserList(null);
         model.addAttribute("projectList", projects);
         model.addAttribute("userList", orgUsers);
+        model.addAttribute("projectId", projectId);
         return "/quality/operate/bug/proposeBug.page";
     }
 
@@ -801,6 +803,7 @@ public class BugAction extends BaseController {
         QualityBug bug = new QualityBug();
         bug.setProjectId(projectId);
         bug.setDeleted(0);
+        bug.setBugStatus(QualityBug.STATUS_CLOSED);
         Pager<QualityBug> bugPage = bugService.findBugListPager(start, limit, null, bug, order, asc);
         model.addAttribute("bugPage", bugPage);
         return "project/data/bug/bugViewTableData.pagelet";
@@ -997,4 +1000,20 @@ public class BugAction extends BaseController {
         model.addAttribute("userList", orgUsers);
         return "/quality/operate/bug/proposeBug.page";
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/bugTitleCheck")
+    public Map userNameCheck(@RequestParam("param") String bugTitle, Integer productId) {
+        String status=QualityBug.STATUS_CLOSED;
+        List<QualityBug> list=bugService.findBugByProductIdAndBugTitle(bugTitle,productId,status);
+        if(!CollectionUtil.isEmpty(list)) {
+            for (QualityBug bug : list) {
+                if (ObjectUtils.equals(bugTitle, bug.getBugTitle())) {
+                    return resultMap(false, "Bug标题重复！");
+                }
+            }
+        }
+        return resultMap(true, "Bug标题可用！");
+    }
+
 }

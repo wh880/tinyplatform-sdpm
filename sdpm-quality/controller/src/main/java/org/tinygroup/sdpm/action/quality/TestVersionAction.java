@@ -223,26 +223,22 @@ public class TestVersionAction extends BaseController {
     public Map makeLink(Integer testversionId, Integer[] ids, Integer[] ves) {
         QualityTestTask testTask = testTaskService.findTestTaskById(testversionId);
         List<QualityTestRun> list=testRunService.findTestRunByTestVersionId(testversionId);
-        for (int i = 0; i < ids.length; i++)
-        {
-            boolean flag=true;
-            if(list.size()!=0) {
-                for (int j = 0; j < list.size(); j++) {
-                    if (list.get(j).getCaseId().equals(ids[i])) {
-                        flag = false;
-                        break;
-                    }
-                }
-            }
-            if(flag) {
-            QualityTestRun run = new QualityTestRun();
-            run.setCaseId(ids[i]);
-            run.setCaseVersion(ves[i]);
-            run.setTestRunStatus("1");
-            run.setTaskId(testversionId);
-            testRunService.addTestRun(run);
+        Map<Integer,QualityTestRun> qualityTestRunMap=new HashMap<Integer, QualityTestRun>();
+        for(QualityTestRun qualityTestRun:list) {
+            qualityTestRunMap.put(qualityTestRun.getCaseId(),qualityTestRun);
+        }
+
+        for (int i = 0; i < ids.length; i++) {
+            if(!qualityTestRunMap.containsKey(ids[i])) {
+                QualityTestRun run = new QualityTestRun();
+                run.setCaseId(ids[i]);
+                run.setCaseVersion(ves[i]);
+                run.setTestRunStatus("1");
+                run.setTaskId(testversionId);
+                testRunService.addTestRun(run);
             }
         }
+
         if ("3".equals(testTask.getTesttaskStatus())) {
             testTask.setTesttaskStatus("1");
         }
@@ -250,7 +246,6 @@ public class TestVersionAction extends BaseController {
         result.put("status", "y");
         return result;
     }
-
     @RequiresPermissions("tversionLink")
     @RequestMapping("/linkCase")
     public String linkCase() {
