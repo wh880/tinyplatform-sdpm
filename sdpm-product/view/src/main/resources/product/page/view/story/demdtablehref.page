@@ -197,7 +197,7 @@
             <p class="titleName">备注</p>
             #@elementItem()
                 #@formControlDiv("col-16")
-                    #@Teditor("actionComment" "actionComment" {"initialFrameHeight":"200" ,"datatype":"*10-500"})#end
+                    #@Teditor("actionComment" "actionComment" {"initialFrameHeight":"200" ,"datatype":"*10-500"})${actionComment}#end
                 #end
                 #@validateDiv("col-2")#end
             #end

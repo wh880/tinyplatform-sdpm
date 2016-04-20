@@ -88,7 +88,7 @@
                 $(this).change(function()
                 {
                     //不是数字的验证
-                    if(isNaN($(this).val()))
+                    if(isNaN($(this).val())||parseFloat($(this).val())<0)
                     {
                         alert("请正确填写工日！");
                     }
@@ -106,7 +106,7 @@
                 $(this).change(function()
                 {
                     //不是数字的验证
-                    if(isNaN($(this).val()))
+                    if(isNaN($(this).val())||parseFloat($(this).val())<0)
                     {
                         alert("请正确填写工时！");
                     }
@@ -160,7 +160,7 @@
         var isNumber=true;
         $("input[name$='teamDays']").each(function()
         {
-            if(isNaN($(this).val()))
+            if(isNaN($(this).val())||parseFloat($(this).val())<0)
             {
                 isNumber=false;
                 return;
@@ -168,7 +168,7 @@
         });
         $("input[name$='teamHours']").each(function()
         {
-            if(isNaN($(this).val()))
+            if(isNaN($(this).val())||parseFloat($(this).val())<0)
             {
                 isNumber=false;
                 return;

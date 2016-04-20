@@ -35,6 +35,7 @@ import org.tinygroup.sdpm.quality.service.inter.TestCaseService;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceRequest;
 import org.tinygroup.sdpm.service.service.inter.RequestService;
 import org.tinygroup.sdpm.system.dao.pojo.*;
+import org.tinygroup.sdpm.system.service.inter.ActionService;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.sdpm.system.service.inter.ProfileService;
 import org.tinygroup.sdpm.util.LogUtil;
@@ -80,6 +81,8 @@ public class StoryAction extends BaseController {
     private TeamService teamService;
     @Autowired
     private BuildService buildService;
+    @Autowired
+    private ActionService actionService;
 
     /**
      * @param request
@@ -401,19 +404,32 @@ public class StoryAction extends BaseController {
         model.addAttribute("projectList", projectList);
         model.addAttribute("stories", stories);
 
-        if ("productDemandClose".equals(forwordPager)) {
+        //读取备注信息
+        String actionComment=getRemark(productStory);
+        if ("productDemandClose".equals(forwordPager))
+        {
+            model.addAttribute("actionComment",actionComment);
             return "/product/page/operate/story/product-demand-close.page";
-        } else if ("productDemandReview".equals(forwordPager)) {
-
+        }
+        if ("productDemandReview".equals(forwordPager))
+        {
+            model.addAttribute("actionComment",actionComment);
             return "/product/page/operate/story/product-demand-review.page";
-        } else if ("productDemandChange".equals(forwordPager)) {
+        }
+        if ("productDemandChange".equals(forwordPager))
+        {
+            model.addAttribute("actionComment",actionComment);
+
+            //读取文档信息
             SystemProfile systemProfile = new SystemProfile();
             systemProfile.setFileObjectId(storyId);
             systemProfile.setFileObjectType(ProfileType.STORY.getType());
             List<SystemProfile> fileList = profileService.findSystemProfile(systemProfile);
             model.addAttribute("fileList", fileList);
             return "/product/page/operate/story/product-demand-change.page";
-        } else if ("productDemandDetail".equals(forwordPager)) {
+        }
+        if ("productDemandDetail".equals(forwordPager))
+        {
 
             ProjectTask task = new ProjectTask();
             task.setTaskStory(storyId);
@@ -429,6 +445,18 @@ public class StoryAction extends BaseController {
         }
 
         return "";
+    }
+
+    /**
+     * 获得需求备注信息
+     */
+    public String getRemark(ProductStory productStory)
+    {
+        SystemAction systemAction=new SystemAction();
+        systemAction.setActionObjectId(productStory.getStoryId().toString());
+        systemAction.setActionObjectType("story");
+        List<SystemAction> actions = actionService.findAction(systemAction, "actionId", false);
+        return actions.get(0).getActionComment();//0表示降序排列后的第一条，即为最新那一条
     }
 
     /**
@@ -933,11 +961,12 @@ public class StoryAction extends BaseController {
      * @return 回到概况页面
      */
     @RequestMapping("/remark")
-    public String remark(ProductStory story, SystemAction systemAction) {
+    public String remark(ProductStory story, SystemAction systemAction,Model model) {
         LogUtil.logWithComment(LogUtil.LogOperateObject.STORY,
                 LogUtil.LogAction.REMARK, String.valueOf(story.getStoryId()),
                 userUtils.getUserId(), String.valueOf(story.getProductId()),
                 null, null, null, systemAction.getActionComment());
+
         return "redirect:" + adminPath
                 + "/product/storySpec/find/productDemandDetail?storyId="
                 + story.getStoryId();

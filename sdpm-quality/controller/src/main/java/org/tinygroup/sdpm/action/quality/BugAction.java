@@ -42,6 +42,7 @@ import org.tinygroup.sdpm.quality.service.inter.TestCaseService;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceRequest;
 import org.tinygroup.sdpm.service.service.inter.RequestService;
 import org.tinygroup.sdpm.system.dao.pojo.*;
+import org.tinygroup.sdpm.system.service.inter.ActionService;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.sdpm.system.service.inter.ProfileService;
 import org.tinygroup.sdpm.util.*;
@@ -89,6 +90,8 @@ public class BugAction extends BaseController {
     private TestCaseService testCaseService;
     @Autowired
     private RequestService requestService;
+    @Autowired
+    private ActionService actionService;
 
     @ModelAttribute
     public void init(Model model) {
@@ -564,7 +567,17 @@ public class BugAction extends BaseController {
     @RequestMapping("/toEdit")
     public String edit(Integer bugId, Model model) {
         QualityBug bug = bugService.findQualityBugById(bugId);
+        //读取备注信息
+        SystemAction systemAction=new SystemAction();
+        systemAction.setActionObjectId(bug.getBugId().toString());
+        systemAction.setActionObjectType("bug");
+//        systemAction.setActionProduct(bug.getProductId().toString());
+//        systemAction.setActionProject(bug.getProjectId().toString());
+        List<SystemAction> actions = actionService.findAction(systemAction, "actionId", false);
+        String actionComment=actions.get(0).getActionComment();//0表示降序排列后的第一条，即为最新那一条
+        model.addAttribute("actionComment",actionComment);
 
+        //读取文档信息
         SystemProfile systemProfile = new SystemProfile();
         systemProfile.setFileObjectId(bug.getBugId());
         systemProfile.setFileObjectType(ProfileType.BUG.getType());

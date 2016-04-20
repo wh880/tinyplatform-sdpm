@@ -31,10 +31,8 @@ import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
 import org.tinygroup.sdpm.project.service.inter.*;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
-import org.tinygroup.sdpm.system.dao.pojo.ProfileType;
-import org.tinygroup.sdpm.system.dao.pojo.SystemEffort;
-import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
-import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;
+import org.tinygroup.sdpm.system.dao.pojo.*;
+import org.tinygroup.sdpm.system.service.inter.ActionService;
 import org.tinygroup.sdpm.system.service.inter.EffortService;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.sdpm.system.service.inter.ProfileService;
@@ -80,6 +78,8 @@ public class ProjectTaskAction extends BaseController {
     private ProfileService profileService;
     @Autowired
     private ProductService productService;
+    @Autowired
+    private ActionService actionService;
 
     @ModelAttribute
     public void init(Model model) {
@@ -246,10 +246,21 @@ public class ProjectTaskAction extends BaseController {
      */
     @RequiresPermissions(value = {"pro-task-edit", "pro-Info2-edit"}, logical = Logical.OR)
     @RequestMapping("/edit")
-    public String editForm(Integer taskId, Model model) {
+    public String editForm(Integer taskId, Model model,SystemAction action) {
         ProjectTask task = taskService.findTaskById(taskId);
         model.addAttribute("task", task);
 
+        //读取备注信息
+        SystemAction systemAction=new SystemAction();
+        systemAction.setActionObjectId(task.getTaskId().toString());
+        systemAction.setActionObjectType("task");
+//        systemAction.setActionProject(task.getTaskProject().toString());
+        List<SystemAction> actions = actionService.findAction(systemAction, "actionId", false);
+        String actionComment=actions.get(0).getActionComment();//0表示降序排列后的第一条，即为最新那一条
+        model.addAttribute("actionComment",actionComment);
+
+
+        //读取文档信息
         SystemProfile systemProfile = new SystemProfile();
         systemProfile.setFileObjectId(taskId);
         systemProfile.setFileObjectType(ProfileType.TASK.getType());
