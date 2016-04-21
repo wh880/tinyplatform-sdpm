@@ -82,9 +82,9 @@
         <a href="javascript:void(0);" onClick="javascript :history.back(-1);" title="返回">#buttonIcon(iconClass=
             "icon-reply")</a>
     #end
-    #@tinyForm(
-        "thisform" TINY_CONTEXT_PATH+adminPath+"/quality/bug/addComment?bugId="+qualityBug?.bugId "post" {"class":""})
-        <script type="text/javascript">
+    #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/quality/bug/addComment?bugId="+qualityBug?.bugId "" {"class":"test","enctype":
+        "multipart/form-data"})
+        #*<script type="text/javascript">
             $("#${fromId}").submit(function () {
                 var url = $(this).attr('action');
                 $.ajax({
@@ -104,8 +104,7 @@
                 });
                 return false;
             });
-
-        </script>
+        </script>*#
         <div style="width:70%;float:left" class="pageleftpart">
             <div class="infoContent">
                 <p class="titleName">bug名称</p>
@@ -183,7 +182,7 @@
             </center>
             #@div(divId="comment" divStyle="display:none;" divClass="infoContent")
                 <p class="titleName">备注</p>
-                #@Teditor("content1" "content1" {"initialFrameHeight":"150"})#end
+                #@Teditor("actionComment" "actionComment" {"initialFrameHeight":"150"})${actionComment}#end
                 #@elementItem()
                     <div class="col-12">
                         <div class="col-5">

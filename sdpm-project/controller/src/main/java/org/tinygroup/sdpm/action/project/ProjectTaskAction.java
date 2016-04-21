@@ -250,15 +250,8 @@ public class ProjectTaskAction extends BaseController {
         ProjectTask task = taskService.findTaskById(taskId);
         model.addAttribute("task", task);
 
-        //读取备注信息
-        SystemAction systemAction=new SystemAction();
-        systemAction.setActionObjectId(task.getTaskId().toString());
-        systemAction.setActionObjectType("task");
-//        systemAction.setActionProject(task.getTaskProject().toString());
-        List<SystemAction> actions = actionService.findAction(systemAction, "actionId", false);
-        String actionComment=actions.get(0).getActionComment();//0表示降序排列后的第一条，即为最新那一条
+        String actionComment=getTaskRemark(task);
         model.addAttribute("actionComment",actionComment);
-
 
         //读取文档信息
         SystemProfile systemProfile = new SystemProfile();
@@ -267,8 +260,19 @@ public class ProjectTaskAction extends BaseController {
         List<SystemProfile> fileList = profileService.findSystemProfile(systemProfile);
         model.addAttribute("fileList", fileList);
 
-
         return "project/operate/task/common/edit";
+    }
+
+    /**
+     * 读取备注信息
+     */
+    private String getTaskRemark(ProjectTask projectTask)
+    {
+        SystemAction systemAction=new SystemAction();
+        systemAction.setActionObjectId(projectTask.getTaskId().toString());
+        systemAction.setActionObjectType("task");
+        List<SystemAction> actions = actionService.findAction(systemAction, "actionId", false);//false表示倒序
+        return actions.get(0).getActionComment();//0表示降序排列后的第一条，即为最新那一条
     }
 
     /**
@@ -390,6 +394,11 @@ public class ProjectTaskAction extends BaseController {
     @RequestMapping(value = "/call", method = RequestMethod.GET)
     public String call(Integer taskId, Model model) {
         ProjectTask task = taskService.findTaskById(taskId);
+
+        //读取备注信息
+        String actionComment=getTaskRemark(task);
+        model.addAttribute("actionComment",actionComment);
+
         model.addAttribute("teamList", userService.findTeamUserListByProjectId(task.getTaskProject()));
         model.addAttribute("task", task);
         return "project/operate/task/special/call";
@@ -439,6 +448,8 @@ public class ProjectTaskAction extends BaseController {
     public String finish(Integer taskId, Model model, HttpServletRequest request) {
         Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, projectOperate.COOKIE_PROJECT_ID));
         ProjectTask task = taskService.findTaskById(taskId);
+        String actionComment=getTaskRemark(task);
+        model.addAttribute("actionComment",actionComment);
         model.addAttribute("task", task);
         model.addAttribute("teamList", userService.findTeamUserListByProjectId(projectId));
         return "project/operate/task/special/finish";
@@ -504,6 +515,8 @@ public class ProjectTaskAction extends BaseController {
     @RequestMapping(value = "/close", method = RequestMethod.GET)
     public String close(Integer taskId, Model model) {
         ProjectTask task = taskService.findTaskById(taskId);
+        String actionComment=getTaskRemark(task);
+        model.addAttribute("actionComment",actionComment);
         model.addAttribute("task", task);
         return "project/operate/task/special/close";
     }
@@ -553,6 +566,8 @@ public class ProjectTaskAction extends BaseController {
     @RequestMapping(value = "/start", method = RequestMethod.GET)
     public String start(Integer taskId, Model model) {
         ProjectTask task = taskService.findTaskById(taskId);
+        String actionComment=getTaskRemark(task);
+        model.addAttribute("actionComment",actionComment);
         model.addAttribute("task", task);
         return "project/operate/task/special/start";
     }

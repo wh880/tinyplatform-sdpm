@@ -46,8 +46,8 @@ public class StorySpecAction extends BaseController {
         storySpec = storySpecs != null && storySpecs.size() > 0 ? storySpecs.get(0) : new ProductStorySpec();
         model.addAttribute("storySpec", storySpec);
 
-        //获取备注信息
-        String actionComment=getRemark(story);
+        //读取备注信息
+        String actionComment=getStoryRemark(story);
         model.addAttribute("actionComment",actionComment);
 
         //读取附件信息
@@ -95,7 +95,7 @@ public class StorySpecAction extends BaseController {
         model.addAttribute("file", list);
         if ("productDemandDetail".equals(forward)) {
             //读取备注信息
-            String actionComment=getRemark(productStory);
+            String actionComment=getStoryRemark(productStory);
             model.addAttribute("actionComment",actionComment);
             return "/product/page/view/story/demdtablehref.page";
         }
@@ -103,7 +103,7 @@ public class StorySpecAction extends BaseController {
     }
 
     //获取需求备注信息
-    private String getRemark(ProductStory productStory)
+    private String getStoryRemark(ProductStory productStory)
     {
         SystemAction systemAction=new SystemAction();
         systemAction.setActionObjectId(productStory.getStoryId().toString());

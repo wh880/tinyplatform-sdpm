@@ -405,7 +405,8 @@ public class StoryAction extends BaseController {
         model.addAttribute("stories", stories);
 
         //读取备注信息
-        String actionComment=getRemark(productStory);
+        String actionComment=getStoryRemark(productStory);
+
         if ("productDemandClose".equals(forwordPager))
         {
             model.addAttribute("actionComment",actionComment);
@@ -450,7 +451,7 @@ public class StoryAction extends BaseController {
     /**
      * 获得需求备注信息
      */
-    public String getRemark(ProductStory productStory)
+    public String getStoryRemark(ProductStory productStory)
     {
         SystemAction systemAction=new SystemAction();
         systemAction.setActionObjectId(productStory.getStoryId().toString());
