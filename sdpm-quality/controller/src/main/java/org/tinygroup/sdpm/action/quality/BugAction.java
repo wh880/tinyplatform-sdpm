@@ -42,6 +42,7 @@ import org.tinygroup.sdpm.quality.service.inter.TestCaseService;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceRequest;
 import org.tinygroup.sdpm.service.service.inter.RequestService;
 import org.tinygroup.sdpm.system.dao.pojo.*;
+import org.tinygroup.sdpm.system.service.inter.ActionService;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.sdpm.system.service.inter.ProfileService;
 import org.tinygroup.sdpm.util.*;
@@ -89,6 +90,8 @@ public class BugAction extends BaseController {
     private TestCaseService testCaseService;
     @Autowired
     private RequestService requestService;
+    @Autowired
+    private ActionService actionService;
 
     @ModelAttribute
     public void init(Model model) {
@@ -159,6 +162,12 @@ public class BugAction extends BaseController {
         if (bugs.getRecords().size() > 0) {
             nextId = bugs.getRecords().get(0).getBugId();
         }
+
+        //获取备注信息
+        String actionComment=getBugRemark(bug);
+        model.addAttribute("actionComment",actionComment);
+
+        //获取附件信息
         SystemProfile systemProfile = new SystemProfile();
         systemProfile.setFileObjectType("bug");
         systemProfile.setFileDeleted("0");
@@ -258,6 +267,11 @@ public class BugAction extends BaseController {
     public String makeSure(Integer bugId, Model model) {
         QualityBug bug = bugService.findQualityBugById(bugId);
         List<OrgUser> orgUsers = userService.findUserList(null);
+
+        //读取备注信息
+        String actionComment=getBugRemark(bug);
+        model.addAttribute("actionComment",actionComment);
+
         model.addAttribute("bug", bug);
         model.addAttribute("userList", orgUsers);
         return "/quality/operate/bug/makesure.page";
@@ -413,22 +427,20 @@ public class BugAction extends BaseController {
     }
 
 
-    @ResponseBody
+//    @ResponseBody
     @RequestMapping("addComment")
-    public Map recordComment(String comment, int bugId) {
+    public String recordComment(String actionComment, Integer bugId) {
         QualityBug bug = bugService.findQualityBugById(bugId);
-        LogUtil.logWithComment(LogUtil.LogOperateObject.BUG
-                , LogUtil.LogAction.COMMENTED
-                , String.valueOf(bugId)
-                , userUtils.getUserId()
-                , String.valueOf(bug.getProductId())
-                , String.valueOf(bug.getProjectId())
-                , null
-                , null
-                , comment);
-        Map<String, String> result = new HashMap<String, String>();
+        LogUtil.logWithComment(LogUtil.LogOperateObject.BUG,
+                LogUtil.LogAction.REMARK, String.valueOf(bugId),
+                userUtils.getUserId(), String.valueOf(bug.getProductId()),
+                null, null, null, actionComment);
+       /* Map<String, String> result = new HashMap<String, String>();
         result.put("status", "success");
-        return result;
+        return result;*/
+        return "redirect:" + adminPath
+                + "/quality/bug/bugInfo?bugId="
+                + bugId;
     }
 
     @RequiresPermissions("tassign")
@@ -436,6 +448,11 @@ public class BugAction extends BaseController {
     public String assign(Integer bugId, Model model) {
         QualityBug bug = bugService.findQualityBugById(bugId);
         List<OrgUser> users = userService.findUserList(null);
+
+        //读取备注信息
+        String actionComment=getBugRemark(bug);
+        model.addAttribute("actionComment",actionComment);
+
         model.addAttribute("bug", bug);
         model.addAttribute("userList", users);
         return "/quality/operate/bug/assign.page";
@@ -497,6 +514,10 @@ public class BugAction extends BaseController {
         List<SystemProfile> fileList = profileService.findSystemProfile(systemProfile);
         model.addAttribute("fileList", fileList);
 
+        //读取备注信息
+        String actionComment=getBugRemark(bug);
+        model.addAttribute("actionComment",actionComment);
+
         model.addAttribute("buildList", builds);
         model.addAttribute("userList", orgUsers);
         model.addAttribute("bug", bug);
@@ -536,6 +557,11 @@ public class BugAction extends BaseController {
         QualityBug bug = new QualityBug();
         bug = bugService.findQualityBugById(bugId);
         bug.setBugClosedDate(new Date());
+
+        //读取备注信息
+        String actionComment=getBugRemark(bug);
+        model.addAttribute("actionComment",actionComment);
+
         model.addAttribute("bug", bug);
         return "/quality/operate/bug/shutdown.page";
     }
@@ -565,6 +591,11 @@ public class BugAction extends BaseController {
     public String edit(Integer bugId, Model model) {
         QualityBug bug = bugService.findQualityBugById(bugId);
 
+        //读取备注信息
+        String actionComment=getBugRemark(bug);
+        model.addAttribute("actionComment",actionComment);
+
+        //读取文档信息
         SystemProfile systemProfile = new SystemProfile();
         systemProfile.setFileObjectId(bug.getBugId());
         systemProfile.setFileObjectType(ProfileType.BUG.getType());
@@ -573,6 +604,16 @@ public class BugAction extends BaseController {
 
         model.addAttribute("bug", bug);
         return "/quality/operate/bug/edition";
+    }
+
+    //读取备注信息
+    private String getBugRemark(QualityBug qualityBug)
+    {
+        SystemAction systemAction=new SystemAction();
+        systemAction.setActionObjectId(qualityBug.getBugId().toString());
+        systemAction.setActionObjectType("bug");
+        List<SystemAction> actions = actionService.findAction(systemAction, "actionId", false);//false表示倒序
+        return actions.get(0).getActionComment();//0表示降序排列后的第一条，即为最新那一条
     }
 
     @RequestMapping("/edit")

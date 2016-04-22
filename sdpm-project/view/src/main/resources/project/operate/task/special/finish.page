@@ -59,7 +59,7 @@
         #@elementItem()
             #@colLabel()备注#end
             #@formControlDiv("col-8")
-                #Teditor("content" "comment" {"initialFrameHeight":"200"})
+                #Teditor("content" "comment" {"initialFrameHeight":"200"})${actionComment}
             #end
             #@validateDiv("col-2")#end
         #end

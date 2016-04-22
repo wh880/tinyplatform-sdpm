@@ -31,10 +31,8 @@ import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
 import org.tinygroup.sdpm.project.service.inter.*;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
-import org.tinygroup.sdpm.system.dao.pojo.ProfileType;
-import org.tinygroup.sdpm.system.dao.pojo.SystemEffort;
-import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
-import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;
+import org.tinygroup.sdpm.system.dao.pojo.*;
+import org.tinygroup.sdpm.system.service.inter.ActionService;
 import org.tinygroup.sdpm.system.service.inter.EffortService;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.sdpm.system.service.inter.ProfileService;
@@ -80,6 +78,8 @@ public class ProjectTaskAction extends BaseController {
     private ProfileService profileService;
     @Autowired
     private ProductService productService;
+    @Autowired
+    private ActionService actionService;
 
     @ModelAttribute
     public void init(Model model) {
@@ -246,18 +246,33 @@ public class ProjectTaskAction extends BaseController {
      */
     @RequiresPermissions(value = {"pro-task-edit", "pro-Info2-edit"}, logical = Logical.OR)
     @RequestMapping("/edit")
-    public String editForm(Integer taskId, Model model) {
+    public String editForm(Integer taskId, Model model,SystemAction action) {
         ProjectTask task = taskService.findTaskById(taskId);
         model.addAttribute("task", task);
 
+        String actionComment=getTaskRemark(task);
+        model.addAttribute("actionComment",actionComment);
+
+        //读取文档信息
         SystemProfile systemProfile = new SystemProfile();
         systemProfile.setFileObjectId(taskId);
         systemProfile.setFileObjectType(ProfileType.TASK.getType());
         List<SystemProfile> fileList = profileService.findSystemProfile(systemProfile);
         model.addAttribute("fileList", fileList);
 
-
         return "project/operate/task/common/edit";
+    }
+
+    /**
+     * 读取备注信息
+     */
+    private String getTaskRemark(ProjectTask projectTask)
+    {
+        SystemAction systemAction=new SystemAction();
+        systemAction.setActionObjectId(projectTask.getTaskId().toString());
+        systemAction.setActionObjectType("task");
+        List<SystemAction> actions = actionService.findAction(systemAction, "actionId", false);//false表示倒序
+        return actions.get(0).getActionComment();//0表示降序排列后的第一条，即为最新那一条
     }
 
     /**
@@ -379,6 +394,11 @@ public class ProjectTaskAction extends BaseController {
     @RequestMapping(value = "/call", method = RequestMethod.GET)
     public String call(Integer taskId, Model model) {
         ProjectTask task = taskService.findTaskById(taskId);
+
+        //读取备注信息
+        String actionComment=getTaskRemark(task);
+        model.addAttribute("actionComment",actionComment);
+
         model.addAttribute("teamList", userService.findTeamUserListByProjectId(task.getTaskProject()));
         model.addAttribute("task", task);
         return "project/operate/task/special/call";
@@ -428,6 +448,8 @@ public class ProjectTaskAction extends BaseController {
     public String finish(Integer taskId, Model model, HttpServletRequest request) {
         Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, projectOperate.COOKIE_PROJECT_ID));
         ProjectTask task = taskService.findTaskById(taskId);
+        String actionComment=getTaskRemark(task);
+        model.addAttribute("actionComment",actionComment);
         model.addAttribute("task", task);
         model.addAttribute("teamList", userService.findTeamUserListByProjectId(projectId));
         return "project/operate/task/special/finish";
@@ -493,6 +515,8 @@ public class ProjectTaskAction extends BaseController {
     @RequestMapping(value = "/close", method = RequestMethod.GET)
     public String close(Integer taskId, Model model) {
         ProjectTask task = taskService.findTaskById(taskId);
+        String actionComment=getTaskRemark(task);
+        model.addAttribute("actionComment",actionComment);
         model.addAttribute("task", task);
         return "project/operate/task/special/close";
     }
@@ -542,6 +566,8 @@ public class ProjectTaskAction extends BaseController {
     @RequestMapping(value = "/start", method = RequestMethod.GET)
     public String start(Integer taskId, Model model) {
         ProjectTask task = taskService.findTaskById(taskId);
+        String actionComment=getTaskRemark(task);
+        model.addAttribute("actionComment",actionComment);
         model.addAttribute("task", task);
         return "project/operate/task/special/start";
     }
@@ -707,30 +733,39 @@ public class ProjectTaskAction extends BaseController {
     }
 
     @RequestMapping(value = "/batchAdd", method = RequestMethod.POST)
-    public String batchAddSave(Tasks tasks, HttpServletRequest request) {
+    public String batchAddSave(Tasks tasks, HttpServletRequest request)
+    {
         List<ProjectTask> taskList = tasks.getTaskList();
-        for (int i = 0; i < taskList.size(); i++) {
+        for (int i = 0; i < taskList.size(); i++)
+        {
             ProjectTask projectTask = taskList.get(i);
-            if (StringUtil.isBlank(projectTask.getTaskName()) || null == (projectTask.getTaskEstimate())) {
+            if (StringUtil.isBlank(projectTask.getTaskName()) || null == (projectTask.getTaskEstimate()))
+            {
                 taskList.remove(i);
                 i--;
-            } else {
+            } else
+            {
                 projectTask.setTaskLeft(projectTask.getTaskEstimate());
                 projectTask.setTaskConsumed(0f);
-                if (null != projectTask.getTaskStory()) {
+                if (null != projectTask.getTaskStory())
+                {
                     ProductStory story = storyService.findStory(projectTask.getTaskStory());
-                    if (story != null) {
+                    if (story != null)
+                    {
                         projectTask.setStorySpec(story.getStorySpec());
                     }
                 }
             }
         }
-        if (taskList.isEmpty()) {
+        if (taskList.isEmpty())
+        {
             return "project/index/task/index.page";
-        } else {
+        } else
+        {
             Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, projectOperate.COOKIE_PROJECT_ID));
             taskService.batchAddTask(taskList, projectId);
-            for (ProjectTask task : taskList) {
+            for (ProjectTask task : taskList)
+            {
                 storyJudge(task.getTaskStory());
             }
             return "project/index/task/index.page";
