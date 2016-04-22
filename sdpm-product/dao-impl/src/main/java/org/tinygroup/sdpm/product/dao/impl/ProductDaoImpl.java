@@ -62,7 +62,6 @@ import static org.tinygroup.tinysqldsl.select.Join.leftJoin;
 @Repository
 public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
 
-
     public static Condition productQueryCondition(Product t) {
         return
                 t == null ? null : and(
