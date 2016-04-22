@@ -19,7 +19,7 @@
     #@td()
         #set(m=menuService.getMenu("product-team-delete"))
         #if(m)
-            #@tinyTableItemRemove(TINY_CONTEXT_PATH+adminPath+m.href t.id)<i class=${m.icon}></i>#end
+            #@tinyTableItemRemove(TINY_CONTEXT_PATH+adminPath+m.href t.id)<i class=${m.icon} title="${m.name}"></i>#end
         #end
     #end
 #end

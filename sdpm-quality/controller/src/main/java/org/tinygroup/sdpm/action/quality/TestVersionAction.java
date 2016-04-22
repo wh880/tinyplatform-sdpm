@@ -30,6 +30,7 @@ import org.tinygroup.sdpm.quality.service.inter.TestTaskService;
 import org.tinygroup.sdpm.util.CookieUtils;
 import org.tinygroup.sdpm.util.LogUtil;
 import org.tinygroup.sdpm.util.ProductUtils;
+import org.tinygroup.sdpm.util.ProjectOperate;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -165,6 +166,7 @@ public class TestVersionAction extends BaseController {
     @RequiresPermissions("tproposeversion")
     @RequestMapping("/add")
     public String add(@CookieValue(value = ProductUtils.COOKIE_PRODUCT_ID, defaultValue = "0") Integer cookieProductId,
+                      @CookieValue(value = ProjectOperate.COOKIE_PROJECT_ID, defaultValue = "0") Integer currentProjectId,
                       Integer buildId, Model model, HttpServletResponse response) {
         List<Project> projects = projectService.findProjectList(null, null, null);
         ProjectBuild build = new ProjectBuild();
@@ -177,6 +179,7 @@ public class TestVersionAction extends BaseController {
         }
 
         List<ProjectBuild> builds = buildService.findListBuild(build);
+        model.addAttribute("projectId", currentProjectId);
         model.addAttribute("projectList", projects);
         model.addAttribute("buildList", builds);
         return "/quality/operate/version/proposeversion.page";

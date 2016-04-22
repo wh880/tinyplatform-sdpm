@@ -1,15 +1,14 @@
 package org.tinygroup.sdpm.action.document;
 
 
+import org.apache.commons.lang.ObjectUtils;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.dao.complexsearch.SearchInfos;
@@ -365,4 +364,27 @@ public class DocAction extends BaseController {
         return resultMap(true, "删除成功");
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/docTitleCheck")
+    public Map docTitleCheck(@RequestParam("param") String docTitle, HttpServletRequest request, DocumentDoc doc) {
+
+        doc.setDocDeleted("0"); //已删除的文档
+        String cookieDocLib = CookieUtils.getCookie(request, DocAction.COOKIE_DOC_LIB_ID);
+        Integer libId = Integer.valueOf(StringUtil.isBlank(cookieDocLib) ? 0 : Integer.parseInt(cookieDocLib));
+        doc.setDocLibId(libId);
+
+        List<DocumentDoc> docList=docService.findDocList(doc);
+        if(CollectionUtil.isEmpty(docList))
+        {
+            return resultMap(true, "文档标题可用！");
+        }
+        for (DocumentDoc list : docList)
+        {
+            if(ObjectUtils.equals(docTitle,list.getDocTitle()))
+            {
+                return resultMap(false, "文档标题重复！");
+            }
+        }
+        return resultMap(true, "文档标题可用！");
+    }
 }

@@ -86,8 +86,15 @@ public class StoryAction extends BaseController {
      * @return
      */
     @RequestMapping("")
-    public String storyAction(HttpServletRequest request) {
+    public String storyAction(HttpServletRequest request,@CookieValue(value = "cookieProductId", defaultValue = "0") String cookieProductId,Model model) {
         String queryString = request.getQueryString();
+        List<ProjectTeam> teams = teamService.findTeamByProductId(Integer.parseInt(cookieProductId));
+        String[] ids = new String[teams.size()];
+        for (int i = 0; i < ids.length; i++) {
+            ids[i] = teams.get(i).getTeamUserId();
+        }
+        List<OrgUser> orgUsers = userService.findUserListByIds(ids);
+        model.addAttribute("orgUsers", orgUsers);
         if (queryString != null && !queryString.contains("choose")) {
             return "redirect:" + adminPath + "/product/story?choose=1&"
                     + queryString;
@@ -558,7 +565,7 @@ public class StoryAction extends BaseController {
                                     @RequestParam(required = false, defaultValue = "storyId") String order,
                                     @RequestParam(required = false, defaultValue = "desc") String ordertype,
                                     Model model) {
-        if (!"2".equals(choose) && !"11".equals(choose)) {
+        if (!"2".equals(choose) && !"11".equals(choose) && !"6".equals(choose)) {
             story.setDeleted(0);
         }
         if (story.getProductId() == null || story.getProductId() == 0) {

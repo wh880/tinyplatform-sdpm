@@ -96,7 +96,8 @@
             #@div(divClass="col-12")
                 #tinyInput(
                     "text" "docTitle" ""{"placeholder":"1~16个字符，字母/中文/数字/下划线","datatype":"*1-16","nullmsg":"标题不能为空！",
-                    "class":"input-text"})
+                    "class":"input-text","ajaxurl":TINY_CONTEXT_PATH+adminPath+
+                    "/document/doc/docTitleCheck?"+tinyRequestQueryString})
             #end
         #end
         #@validateDiv("col-2")#end

@@ -16,20 +16,9 @@
         </select>
         <select id="usertemp">
             <option value="" selected="selected"></option>
-            <option value="admin">A:admin</option>
-            <option value="demo">D:Demo</option>
-            <option value="dev1">D:开发甲</option>
-            <option value="dev2">D:开发乙</option>
-            <option value="dev3">D:开发丙</option>
-            <option value="productManager">P:产品经理</option>
-            <option value="projectManager">P:项目经理</option>
-            <option value="tester1">T:测试甲</option>
-            <option value="tester2">T:测试乙</option>
-            <option value="tester3">T:测试丙</option>
-            <option value="testManager">T:测试经理</option>
-            <option value="closed">Closed</option>
-            <option value="$@me">自己</option>
-            <option value="null">空</option>
+            #foreach(u : orgUsers)
+                <option value="${u?.orgUserId}">${u?.orgUserRealName}</option>
+            #end
         </select>
         <select id="pritemp">
             <option value=""></option>

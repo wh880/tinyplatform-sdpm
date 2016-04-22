@@ -64,7 +64,8 @@
         #@formControlDiv("col-4")
             #tinyInput(
                 "text" "docTitle" ""{"placeholder":"请填写文档标题","datatype":"*1-16","nullmsg":"标题不能为空！",
-                "class":"input-text"})
+                "class":"input-text","ajaxurl":TINY_CONTEXT_PATH+adminPath+
+                "/document/doc/docTitleCheck?"+tinyRequestQueryString})
         #end
         #@validateDiv("col-6")#end
     #end

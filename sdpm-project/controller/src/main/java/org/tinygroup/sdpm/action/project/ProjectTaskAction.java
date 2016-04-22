@@ -677,6 +677,7 @@ public class ProjectTaskAction extends BaseController {
             OrgUser user = userUtils.getUser();
             taskPager = taskService.findPagerTaskByMe(start, limit, task, order, asc, user);
         } else {
+
             taskPager = taskService.findTaskPager(start, limit, task, order, asc, carrier);
         }
         projectPagerInfoStatistics(model, taskPager.getRecords());

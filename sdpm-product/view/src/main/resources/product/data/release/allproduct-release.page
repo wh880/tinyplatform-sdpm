@@ -36,7 +36,7 @@
                       class="${m.icon}"></i></a>
 			      #else
                   &nbsp;#@tinyTableItemRemove(TINY_CONTEXT_PATH +adminPath+m.href+release?.releaseId)<i
-                          class="${m.icon}"></i>#end
+                          class="${m.icon}" title="${m.name}"></i>#end
 			       #end
 			#end
     #end
