@@ -13,7 +13,7 @@
         #@formControlDiv("col-4")
             #@Tselect2F()
                 #@TzTreeSelect(
-                    "buildProduct" build?.buildProduct?:productId {"class":"input-text","datatype":"*","nullmsg":"产品不能为空！",
+                    "buildProduct" build?.buildProduct?:productId {"style":"width:80%","class":"input-text","datatype":"*","nullmsg":"产品不能为空！",
                     "data-URL":call("link",adminPath+"/productLine/userProductTree")})
                     #set(m=menuService.getMenu("newproduct"))
                     #if(m)
@@ -31,8 +31,9 @@
         #@colLabel()<span class="c-red">*</span>版本名称：#end
         #@formControlDiv("col-4")
             #tinyInput(
-                "text" "buildName" build?.buildName {"style":"width:80%","placeholder":"","datatype":"*","nullmsg":
-                "版本名不能为空！","class":"input-text"})
+                "text" "buildName" build?.buildName {"style":"width:80%","placeholder":"请输入版本名称","datatype":"*","nullmsg":
+                "版本名不能为空！","id":"buildName","class":"input-text",
+                "ajaxurl":TINY_CONTEXT_PATH+adminPath+"/project/build/judgeBuildNameExist?projectId="+build?.buildProject})
         #end
     #end
     #@elementItem()
@@ -40,7 +41,7 @@
         #@formControlDiv("col-4")
             #@Tselect2F()
                 #Tselect2Ajax("buildBuilder" build?.buildBuilder TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
-                {"dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询构建者","nullmsg":"请选择构建者！","datatype":"*"})
+                {"style":"width:80%","dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询构建者","nullmsg":"请选择构建者！","datatype":"*"})
             ##填写任意内容，侦听需重新填加 A侦听已内置
                 #@Tselect2Fix()
                     #set(m=menuService.getMenu("organizationAddUser"))
@@ -61,7 +62,7 @@
             #@formHorizontal()
                 #@tinyDateInput(
                     "buildDate" formatDate(build?.buildDate,
-                    "yyyy-MM-dd") "yyyy-MM-dd" {"style":"width:80%","placeholder":"选择日期"})
+                    "yyyy-MM-dd") "yyyy-MM-dd" {"style":"width:78%","placeholder":"选择日期"})
                 #end
             #end
         #end

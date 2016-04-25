@@ -65,13 +65,16 @@ public class ProjectBuildAction extends BaseController {
 
     @RequiresPermissions("version")
     @RequestMapping("/index")
-    public String index(Model model, HttpServletRequest request, HttpServletResponse response) {
+    public String index(Model model, HttpServletRequest request, HttpServletResponse response)
+    {
         Integer projectId = projectOperate.getCurrentProjectId(request, response);
-        if (projectId == null) {
+        if (projectId == null)
+        {
             return redirectProjectForm();
         }
         Project project = projectService.findProjectById(projectId);
         model.addAttribute("project", project);
+
         return "project/index/build/index";
     }
 
@@ -498,5 +501,33 @@ public class ProjectBuildAction extends BaseController {
         projectBuildList.add(projectBuild);
         projectBuildList.addAll(buildService.buildInCondition(key, Integer.parseInt(configService.getConfigBySection(SystemConfig.SEARCH_CONFIG).getConfigKey()), productId, projectId));
         return projectBuildList;
+    }
+
+    /**
+     * 判断版本名称在同一产品下存在性
+     * @param param
+     * @param productId
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/judgeBuildNameExist")
+    public Map judgeBuildNameExist(String param,Integer projectId)
+    {
+        if(param==null)
+        {
+            return resultMap(false, "请输入版本名称");
+        }
+        String buildName = param;
+        ProjectBuild build =new ProjectBuild();
+        build.setBuildName(param);
+        build.setBuildProject(projectId);
+        build.setBuildDeleted(ProjectBuild.DELETE_NO);
+        List<ProjectBuild> builds = buildService.findListBuild(build);
+        if (builds.size() != 0) {
+            return resultMap(false, "该版本已存在");
+        } else
+        {
+            return resultMap(true, "");
+        }
     }
 }

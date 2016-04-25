@@ -49,11 +49,11 @@
                     #Tselect2Ajax("taskAssignedTo" copyTask?.taskAssignedTo TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam?projectId="+currentProjectId
                     {"dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询指派人","nullmsg":"请选择指派人！"})
                     #@Tselect2Fix()
-                        #set(m=menuService.getMenu("pro-team-report"))
+                        #set(m=menuService.getMenu("organizationAddUser"))
                         #if(m)
                             <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
                         #end
-                        #set(m=menuService.getMenu("team"))
+                        #set(m=menuService.getMenu("organizationUser"))
                         #if(m)
                             <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
                         #end
@@ -127,10 +127,8 @@
         #@elementItem()
             #@sdpmItem("任务名称" "*")
                 #@formControlDiv()
-#*                    #tinyInput("text" "taskName" (story?.storyTitle)?:copyTask?.taskName {"placeholder":"任务名称","datatype":"*","nullmsg":"任务名称不能为空！",
-                "class":"input-text","ajaxurl":TINY_CONTEXT_PATH+adminPath+"/project/task/judgeTaskNameExist?projectId="+currentProjectId})*#
-                    #tinyInput("text" "taskName" "" {"placeholder":"任务名称","datatype":"*","nullmsg":"任务名称不能为空！",
-                "class":"input-text","ajaxurl":TINY_CONTEXT_PATH+adminPath+"/project/task/judgeTaskNameExist?projectId="+currentProjectId})
+                    #tinyInput("text" "taskName" (story?.storyTitle)?:copyTask?.taskName {"placeholder":"任务名称","datatype":"*","nullmsg":"任务名称不能为空！",
+                "class":"input-text","ajaxurl":TINY_CONTEXT_PATH+adminPath+"/project/task/judgeTaskNameExist"})
                 #end
             #end
         #end

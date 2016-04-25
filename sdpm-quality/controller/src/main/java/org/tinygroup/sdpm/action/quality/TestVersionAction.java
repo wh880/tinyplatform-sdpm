@@ -13,6 +13,7 @@ import org.tinygroup.sdpm.dao.condition.ConditionCarrier;
 import org.tinygroup.sdpm.dao.condition.ConditionUtils;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.UserService;
+import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
@@ -21,6 +22,7 @@ import org.tinygroup.sdpm.project.service.inter.BuildService;
 import org.tinygroup.sdpm.project.service.inter.ProjectProductService;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.sdpm.project.service.inter.TeamService;
+import org.tinygroup.sdpm.quality.dao.QualityTestTaskDao;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityTestCase;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityTestRun;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityTestTask;
@@ -473,4 +475,27 @@ public class TestVersionAction extends BaseController {
         }
     }
 
+    @ResponseBody
+    @RequestMapping("/judgeTestTaskNameExist")
+    public Map judgeTestTaskNameExist(String param,HttpServletRequest request)
+    {
+        if(param==null)
+        {
+            return resultMap(false,"请输入测试名称");
+        }
+        String productId=CookieUtils.getCookie(request,ProductUtils.COOKIE_PRODUCT_ID);
+        String testTaskName=param;
+        QualityTestTask task=new QualityTestTask();
+        task.setTesttaskTitle(param);
+        task.setProductId(Integer.parseInt(productId));
+        task.setDeleted(0);//0表示未删除
+        List<QualityTestTask> testTasks=testTaskService.findTestTaskList(task);
+        if(testTasks.size()!=0)
+        {
+            return resultMap(false, "该任务已存在");
+        }else
+        {
+            return  resultMap(true,"");
+        }
+    }
 }
