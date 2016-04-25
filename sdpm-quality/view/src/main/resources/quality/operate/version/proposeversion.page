@@ -167,7 +167,7 @@
             #@formControlDiv("col-4")
             	#@div(divClass="col-10")
                 	#tinyInput("text" "testtaskTitle" testTask?.testtaskTitle {"datatype":"*","nullmsg":"测试名称不能为空","id":"关键词","class":"input-text",
-                        "ajaxurl":TINY_CONTEXT_PATH+adminPath+"/quality/version/judgeTestTaskNameExist"})
+                        "ajaxurl":TINY_CONTEXT_PATH+adminPath+"/quality/version/judgeTestTaskNameExist?currentURL="+currentURL+"&testTaskTitle="+testTask?.testtaskTitle})
                 #end
             #end
             #@validateDiv("col-2")#end
