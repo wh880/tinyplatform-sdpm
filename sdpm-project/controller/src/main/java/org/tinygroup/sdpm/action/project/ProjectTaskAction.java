@@ -151,6 +151,9 @@ public class ProjectTaskAction extends BaseController {
         model.addAttribute("story", story);
         model.addAttribute("storyList", storyList);
         model.addAttribute("bugList", bugList);
+
+        model.addAttribute("currentURL",request.getRequestURL().toString());
+        model.addAttribute("projectId",projectId);
         return "project/operate/task/common/add.page";
     }
 
@@ -246,10 +249,11 @@ public class ProjectTaskAction extends BaseController {
      */
     @RequiresPermissions(value = {"pro-task-edit", "pro-Info2-edit"}, logical = Logical.OR)
     @RequestMapping("/edit")
-    public String editForm(Integer taskId, Model model,SystemAction action) {
+    public String editForm(Integer taskId, Model model,SystemAction action,HttpServletRequest request) {
         ProjectTask task = taskService.findTaskById(taskId);
         model.addAttribute("task", task);
 
+        //读取备注信息
         String actionComment=getTaskRemark(task);
         model.addAttribute("actionComment",actionComment);
 
@@ -259,6 +263,9 @@ public class ProjectTaskAction extends BaseController {
         systemProfile.setFileObjectType(ProfileType.TASK.getType());
         List<SystemProfile> fileList = profileService.findSystemProfile(systemProfile);
         model.addAttribute("fileList", fileList);
+
+        model.addAttribute("currentURL",request.getRequestURL().toString());
+        model.addAttribute("projectId",task.getTaskProject());
 
         return "project/operate/task/common/edit";
     }
@@ -986,33 +993,29 @@ public class ProjectTaskAction extends BaseController {
      */
     @ResponseBody
     @RequestMapping("/judgeTaskNameExist")
-    public Map judgeTaskNameExist(String param,Integer projectId,Integer taskId)
+    public Map judgeTaskNameExist(String param,String currentURL,Integer projectId,String taskNamee)
     {
-        if(param != null)
+        if(param == null)
         {
-            String taskName = param;
-            ProjectTask projectTask=new ProjectTask();
-            projectTask.setTaskName(taskName);
-            projectTask.setTaskProject(projectId);
-            projectTask.setTaskDeleted("0");//0表示未关闭
-            List<ProjectTask> tasks=taskService.findListTask(projectTask);
-            if (tasks.size() != 0)
-            {
-                if (taskId == null)
-                {
-                    return resultMap(false, "该任务已存在");
-                } else if (!taskId.equals(tasks.get(0).getTaskId()))
-                {
-                    return resultMap(false, "该任务已存在");
-                } else
-                {
-                    return resultMap(true, "");
-                }
-            } else
-            {
-                return resultMap(true, "");
-            }
+            return resultMap(false, "请输入任务名称");
         }
-        return resultMap(false, "请输入任务名称");
+
+        if(currentURL.contains("edit")&&param.equals(taskNamee))
+        {
+            return resultMap(true,"");
+        }
+
+        String taskName = param;
+        ProjectTask projectTask=new ProjectTask();
+        projectTask.setTaskName(taskName);
+        projectTask.setTaskProject(projectId);
+        projectTask.setTaskDeleted("0");//0表示未关闭
+        List<ProjectTask> tasks=taskService.findListTask(projectTask);
+        if (tasks.size() == 0)
+        {
+            return resultMap(true, "");
+        }
+
+        return resultMap(false,"任务名称已存在");
     }
 }

@@ -296,7 +296,6 @@ public class TestVersionAction extends BaseController {
         model.addAttribute("testTask", testTask);
         model.addAttribute("projectList", projects);
         model.addAttribute("currentURL", request.getRequestURL().toString());
-        System.out.println(request.getRequestURL().toString());
         return "/quality/operate/version/editionversion.page";
     }
 
@@ -492,7 +491,7 @@ public class TestVersionAction extends BaseController {
             return resultMap(false, "请输入测试名称");
         }
 
-        if(currentURL.contains("toEdit")&&testTaskTitle.equals(param))
+        if(currentURL.contains("toEdit")&&param.equals(testTaskTitle))
         {
             return resultMap(true,"");
         }
