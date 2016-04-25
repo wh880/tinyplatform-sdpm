@@ -23,9 +23,11 @@ import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
+import org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec;
 import org.tinygroup.sdpm.product.dao.utils.FieldUtil;
 import org.tinygroup.sdpm.product.service.inter.ProductService;
 import org.tinygroup.sdpm.product.service.inter.StoryService;
+import org.tinygroup.sdpm.product.service.inter.StorySpecService;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
@@ -80,6 +82,8 @@ public class ProjectTaskAction extends BaseController {
     private ProductService productService;
     @Autowired
     private ActionService actionService;
+    @Autowired
+    private StorySpecService storySpecService;
 
     @ModelAttribute
     public void init(Model model) {
@@ -797,6 +801,11 @@ public class ProjectTaskAction extends BaseController {
         } else {
             ProjectTask task = taskService.findTaskById(taskId);
             model.addAttribute("task", task);
+
+            //获得相关需求描述
+            ProductStory productStory=storyService.findStory(task.getTaskStory());
+            ProductStorySpec storySpec = storySpecService.findStorySpec(task.getTaskStory(), productStory.getStoryVersion());
+            model.addAttribute("storySpec",storySpec);
         }
         SystemProfile systemProfile = new SystemProfile();
         systemProfile.setFileObjectId(taskId);
