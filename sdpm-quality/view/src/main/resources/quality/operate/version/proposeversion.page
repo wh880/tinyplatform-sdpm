@@ -70,6 +70,9 @@
 					 #@Tselect2F()
                          #@Tselect2Body("buildName" testTask?.buildName?:buildId {"class":"input-text select2","datatype":"*",
                              "nullmsg":"版本不能为空"}) ##,"multiple":"multiple"加上为多选项
+                            #* #foreach(list : buildList)
+                                 <option value="">${list?.buildName}</option>
+                             #end*#
 	                    	#end
                          #@Tselect2Fix()
                              #set(m=menuService.getMenu("pro-version-add"))

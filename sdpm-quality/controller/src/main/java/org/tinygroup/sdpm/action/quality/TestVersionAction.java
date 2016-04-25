@@ -177,7 +177,6 @@ public class TestVersionAction extends BaseController {
         } else {
             build.setBuildProduct(cookieProductId);
         }
-
         List<ProjectBuild> builds = buildService.findListBuild(build);
         model.addAttribute("projectId", currentProjectId);
         model.addAttribute("projectList", projects);
@@ -303,6 +302,7 @@ public class TestVersionAction extends BaseController {
         if (projectBuild.getBuildProduct() < 1 || projectBuild.getBuildProduct() == null) {
             return new ArrayList<ProjectBuild>();
         }
+        projectBuild.setBuildDeleted("0");
         return buildService.findListBuild(projectBuild);
     }
 
