@@ -1057,4 +1057,32 @@ public class BugAction extends BaseController {
         return resultMap(true, "Bug标题可用！");
     }
 
+    @ResponseBody
+    @RequestMapping("/judgeBugNameExist")
+    public Map judgeBugNameExist(@RequestParam("param") String bugTitle,String oldBugTitle,Integer productId)
+    {
+        if(bugTitle==null)
+        {
+            return resultMap(false,"请输入标题");
+        }
+
+        if(ObjectUtils.equals(bugTitle,oldBugTitle))
+        {
+            return resultMap(true,"");
+        }
+
+        QualityBug bug=new QualityBug();
+        String status=QualityBug.STATUS_CLOSED;
+        bug.setProductId(productId);
+        bug.setDeleted(Integer.parseInt(QualityBug.STATUS_ACTIVE));
+        bug.setBugTitle(bugTitle);
+        List<QualityBug> bugList=bugService.findBugByProductIdAndBugTitle(bugTitle,productId,status);
+        if(bugList.size()==0)
+        {
+            return resultMap(true,"标题可用");
+        }
+
+        return resultMap(false,"标题已存在");
+    }
+
 }
