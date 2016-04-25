@@ -71,7 +71,7 @@
                         #@formControlDiv("col-10")
                             #@Tselect2F()
                                 #@Tselect2Body("taskStory" task?.taskStory {"class":"input-text select2"})
-                                    <option value=""></option>
+                                    <option></option>
                                     #foreach(s : storyList)
                                         <option value="${s.storyId}">${s.storyTitle}</option>
                                     #end
@@ -81,6 +81,7 @@
                                     <a href="${TINY_CONTEXT_PATH+adminPath}/project/demand/index" class="r">全部</a>
                                 #end
                             #end
+                            #@validateDiv("col-2")#end
                         #end
                     #end
                 #end
@@ -127,9 +128,14 @@
                     #@th()任务状态#end
                     #@td()#@formControlDiv("col-10")
                         #@Tselect2F()
-                            #@Tselect2Body(
+                           #* #@Tselect2Body(
                                 "taskStatus" task?.taskStatus {"class":
                                 "input-text select2"})
+                                #foreach(item : getDict("taskStatus"))
+                                    #@tinyOptionItem(item.value)${item.text}#end
+                                #end
+                            #end*#
+                            #@tinySelect("taskStatus" task?.taskStatus {"class":"input-text select2"})
                                 #foreach(item : getDict("taskStatus"))
                                     #@tinyOptionItem(item.value)${item.text}#end
                                 #end
