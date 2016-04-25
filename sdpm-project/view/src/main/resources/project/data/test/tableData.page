@@ -18,7 +18,7 @@
                 <a href="${TINY_CONTEXT_PATH+adminPath}/quality/version/taskToCase?testversionId=${v?.testversionId}&currentPageId=5&status=tverallcase" title="${v?.testtaskTitle}">${v?.testtaskTitle}</a>
             </div>
         #end
-        #@td()${v?.searchBuildName}#end
+        #@td()${v?.searchBuildName?:(v?.buildName=="0"?"trunk":"")}#end
         #@td("nowrap")${v?.testtaskOwner?userUtils.getUserById(v?.testtaskOwner)?.orgUserRealName:""}#end
         #@td("nowrap")${formatDate(v?.testtaskBegin, "yyyy-MM-dd")}#end
         #@td("nowrap")${formatDate(v?.testtaskEnd, "yyyy-MM-dd")}#end
