@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.tinygroup</groupId>
         <artifactId>sdpm-productLine</artifactId>
-        <version>1.0.3-SNAPSHOT</version>
+        <version>1.0.3</version>
     </parent>
     <artifactId>sdpm-productLine-dao-interface</artifactId>
     <name>sdpm-productLine-dao-interface</name>

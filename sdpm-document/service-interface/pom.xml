@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.tinygroup</groupId>
         <artifactId>sdpm-document</artifactId>
-        <version>1.0.3-SNAPSHOT</version>
+        <version>1.0.3</version>
     </parent>
     <artifactId>sdpm-document-service-interface</artifactId>
     <name>sdpm-document-service-interface</name>
