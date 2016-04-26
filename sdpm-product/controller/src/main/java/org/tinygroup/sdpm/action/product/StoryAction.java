@@ -221,6 +221,16 @@ public class StoryAction extends BaseController {
             }
         }
         processProfile(uploadProfile, productStory.getStoryId(), ProfileType.STORY);
+
+        if(productStory.getModuleId()==null)
+        {
+            productStory.setModuleId(0);
+        }
+        if(productStory.getPlanId()==null)
+        {
+            productStory.setPlanId(0);
+        }
+
         storyService.updateStory(productStory);
 
         LogUtil.logWithComment(LogUtil.LogOperateObject.STORY,
