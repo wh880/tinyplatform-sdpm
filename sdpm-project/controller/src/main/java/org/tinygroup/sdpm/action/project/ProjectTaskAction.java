@@ -283,6 +283,10 @@ public class ProjectTaskAction extends BaseController {
         systemAction.setActionObjectId(projectTask.getTaskId().toString());
         systemAction.setActionObjectType("task");
         List<SystemAction> actions = actionService.findAction(systemAction, "actionId", false);//false表示倒序
+        if(actions.size()==0)
+        {
+            return "";
+        }
         return actions.get(0).getActionComment();//0表示降序排列后的第一条，即为最新那一条
     }
 
@@ -300,6 +304,14 @@ public class ProjectTaskAction extends BaseController {
         ProjectTask oldTask = taskService.findTaskById(task.getTaskId());
         task.setTaskLastEditedBy(userUtils.getUserId());
         task.setTaskLastEditedDate(new Date());
+        if(task.getTaskModule()==null)
+        {
+            task.setTaskModule(0);
+        }
+        if(task.getTaskStory()==null)
+        {
+            task.setTaskStory(0);
+        }
         taskService.updateEditTask(task);
         storyJudge(task.getTaskStory());
         processProfile(uploadProfile, task.getTaskId(), ProfileType.TASK);

@@ -613,6 +613,10 @@ public class BugAction extends BaseController {
         systemAction.setActionObjectId(qualityBug.getBugId().toString());
         systemAction.setActionObjectType("bug");
         List<SystemAction> actions = actionService.findAction(systemAction, "actionId", false);//false表示倒序
+        if(actions.size()==0)
+        {
+            return "";
+        }
         return actions.get(0).getActionComment();//0表示降序排列后的第一条，即为最新那一条
     }
 
