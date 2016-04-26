@@ -463,6 +463,10 @@ public class ProjectTaskAction extends BaseController {
         model.addAttribute("actionComment",actionComment);
         model.addAttribute("task", task);
         model.addAttribute("teamList", userService.findTeamUserListByProjectId(projectId));
+
+        //读取备注信息
+        String actionCommentt=getTaskRemark(task);
+        model.addAttribute("actionComment",actionCommentt);
         return "project/operate/task/special/finish";
     }
 

@@ -76,7 +76,6 @@
 
         <div>
             ${storySpec?.storySpec}
-
         </div>
     #end
     #@div(divClass="infoContent")
