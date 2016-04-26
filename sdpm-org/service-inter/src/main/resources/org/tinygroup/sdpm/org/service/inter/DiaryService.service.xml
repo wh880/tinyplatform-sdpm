@@ -14,6 +14,17 @@
       </service-parameters>
       <service-result name="updateDiaryResult" required="false" is-array="false" type="java.lang.Integer"/>
     </service-method>
+    <service-method local-name="findPagerDiaryByUserId" service-id="findPagerDiaryByUserId"
+                    method-name="findPagerDiaryByUserId" cacheable="false"
+                    category="org.tinygroup.sdpm.org.service.inter">
+      <service-parameters>
+        <service-parameter name="id" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="start" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="limit" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findPagerDiaryByUserIdResult" required="false" is-array="false"
+                      type="org.tinygroup.tinysqldsl.Pager"/>
+    </service-method>
     <service-method local-name="findListDiaryByUserId" service-id="findListDiaryByUserId" method-name="findListDiaryByUserId" cacheable="false" category="org.tinygroup.sdpm.org.service.inter">
       <service-parameters>
         <service-parameter name="id" type="java.lang.String" required="false" is-array="false"/>
@@ -73,14 +84,6 @@
         <service-parameter name="limit" type="java.lang.Integer" required="false" is-array="false"/>
       </service-parameters>
       <service-result name="findPagerDiaryByWhiteListResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager"/>
-    </service-method>
-    <service-method local-name="findPagerDiaryByUserId" service-id="findPagerDiaryByUserId" method-name="findPagerDiaryByUserId" cacheable="false" category="org.tinygroup.sdpm.org.service.inter">
-      <service-parameters>
-        <service-parameter name="id" type="java.lang.String" required="false" is-array="false"/>
-        <service-parameter name="start" type="java.lang.Integer" required="false" is-array="false"/>
-        <service-parameter name="limit" type="java.lang.Integer" required="false" is-array="false"/>
-      </service-parameters>
-      <service-result name="findPagerDiaryByUserIdResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager"/>
     </service-method>
   </service-component>
 </service-components>

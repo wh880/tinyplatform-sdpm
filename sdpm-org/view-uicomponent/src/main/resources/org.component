@@ -1,3 +1,38 @@
+#macro listThisWeekCommits(details2 var)
+    #foreach(var2:details2)
+        #if(var2?.key==var?.orgDiaryId)
+            #if(var2?.value)
+            代码提交：
+            #end
+            #foreach(var3:var2?.value)
+            <div class="committed clearfix">
+                <span class="tocommittime">${var3?.week}  </span>
+                <ol class="logList-detailList">
+                    <li><span style="word-break:break-all">${var3?.orgGitRepositoryName}</span>
+                            <span style="word-break:break-all">描述:${var3?.orgGitCommitMessage}</span>
+                            <span style="word-break:break-all"><a href=${var3?.orgGitCommitUrl} target="_blank">${var3?.urlText}</a></span>
+                    </li>
+                </ol>
+            </div>
+            #end
+        #end
+    #end
+#end
+
+#macro listCommitsForSelect(gitList details2)
+    #if(gitList)
+            <p><span>代码提交：</span></p>
+    #end
+    #for(var2:gitList)
+     <p> <input type="checkbox" name="gitIdCheck" value=${var2?.orgGitCommitId} #for(var1:details2) #if(var1?.orgGitCommitId==var2?.orgGitCommitId) checked="checked"
+                #end#end/>
+         <span>${var2?.week}:</span>
+         <span>${var2?.orgGitRepositoryName}</span>
+         <span>描述:${var2?.orgGitCommitMessage}</span>
+          <span><a href=${var2?.orgGitCommitUrl} target="_blank">${var2?.urlText}</a></span> </p>
+    #end
+#end
+
 #macro diaryItem(authorName createDate diaryContent orgAccount detailCountStatus)
 <li class="diary-detail">
     <div class="diary-report clearfix">

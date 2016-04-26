@@ -271,7 +271,7 @@
         #@elementItem()
             #@colLabel()相关需求：#end
             #@formControlDiv("col-8")
-                #tinyInput("text" "storyLinkStories" story?.storyLinkStories {"ignore":"ignore","id":"yujigongshi","class":"input-text","datatype":"n","nullmsg":"内容必须为数字！"})
+                #tinyInput("text" "storyLinkStories" story?.storyLinkStories {"ignore":"ignore","id":"yujigongshi","class":"input-text"})
             #end
             #@validateDiv("col-2")#end
         #end

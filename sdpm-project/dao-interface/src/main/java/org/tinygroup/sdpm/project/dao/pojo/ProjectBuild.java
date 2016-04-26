@@ -24,8 +24,8 @@ import java.util.Date;
  */
 public class ProjectBuild implements Serializable {
 
-    public static String DELETE_YES = "1";
-    public static String DELETE_NO = "0";
+    public static final String DELETE_YES = "1";
+    public static final String DELETE_NO = "0";
     private String productName;
     /**
      * 版本id
@@ -77,6 +77,11 @@ public class ProjectBuild implements Serializable {
      * 0-未删除，1-删除
      */
     private String buildDeleted;
+
+    public ProjectBuild() {
+        super();
+        this.buildDeleted = DELETE_NO;
+    }
 
     public String getProductName() {
         return productName;

@@ -14,80 +14,80 @@
             <dictItem key="11" value="功能错误" sort="1"/>
             <dictItem key="12" value="需求变动" sort="2"/>
             <dictItem key="13" value="新增需求" sort="3"/>
-              <dictItem key="1" value="代码错误" sort="4"/>
-              <dictItem key="2" value="界面优化" sort="5"/>
-              <dictItem key="3" value="设计缺陷" sort="6"/>
-              <dictItem key="4" value="配置相关" sort="7"/>
-              <dictItem key="5" value="安装部署" sort="8"/>
-              <dictItem key="6" value="安全相关" sort="9"/>
-              <dictItem key="7" value="性能问题" sort="10"/>
-              <dictItem key="8" value="标准规范" sort="11"/>
-              <dictItem key="9" value="测试脚本" sort="12"/>
-              <dictItem key="10" value="代码改进" sort="13"/>
-              <dictItem key="14" value="建议" sort="14"/>
-              <dictItem key="15" value="其他" sort="15"/>
-          </dictNodeEntry>
+            <dictItem key="1" value="代码错误" sort="4"/>
+            <dictItem key="2" value="界面优化" sort="5"/>
+            <dictItem key="3" value="设计缺陷" sort="6"/>
+            <dictItem key="4" value="配置相关" sort="7"/>
+            <dictItem key="5" value="安装部署" sort="8"/>
+            <dictItem key="6" value="安全相关" sort="9"/>
+            <dictItem key="7" value="性能问题" sort="10"/>
+            <dictItem key="8" value="标准规范" sort="11"/>
+            <dictItem key="9" value="测试脚本" sort="12"/>
+            <dictItem key="10" value="代码改进" sort="13"/>
+            <dictItem key="14" value="建议" sort="14"/>
+            <dictItem key="15" value="其他" sort="15"/>
+        </dictNodeEntry>
 
         <dictNodeEntry name="bugResolution" title="解决方案">
-          <dictItem key="1" value="重复Bug" sort="1"/>
-          <dictItem key="2" value="设计如此" sort="2"/>
-          <dictItem key="3" value="外部原因" sort="3"/>
-          <dictItem key="4" value="已解决" sort="4"/>
-          <dictItem key="5" value="无法重现" sort="5"/>
-          <dictItem key="6" value="延期解决" sort="6"/>
-          <dictItem key="7" value="不予解决" sort="7"/>
-          </dictNodeEntry>
-          
-          <dictNodeEntry name="bugSeverity" title="严重程度">
-              <!--建设性的意见或建议-->
-          <dictItem key="1" value="Suggestion" sort="1"/>
-              <!--错误是表面化或微小的（提示信息不太准确友好、错别字、UI布局或罕见故障等），对功能几乎没有影响，产品及属性仍可使用；-->
-          <dictItem key="2" value="Minor " sort="2"/>
-              <!--normal 进入软件需要一步操作才能发现的文字、颜色、图形错误 提示信息不正确 ,必填信息无提示 , 随机产生的软件功能性bug，很难重现-->　
-              <dictItem key="3" value="Major" sort="3"/>
-              <!--功能未实现或导致一个特性不能运行并且不可能有替代方案；-->
-          <dictItem key="4" value="Critical" sort="4"/>
-              <!--错误导致了死机、产品失败（“崩溃”）、系统悬挂无法操作；-->
-          <dictItem key="5" value="Blocker" sort="5"/>　
-          </dictNodeEntry>
-     
-         <dictNodeEntry name="bugOS" title="系统/浏览器">
-             <dictItem key="1" value="全部" sort="1"/>
-              <dictItem key="2" value="Windows" sort="2"/>
-              <dictItem key="3" value="Windows 8" sort="3"/>
-              <dictItem key="4" value="Windows 7" sort="4"/>
-              <dictItem key="5" value="Windows Vista" sort="5"/>
-              <dictItem key="6" value="WindowsXp" sort="6"/>
-              <dictItem key="7" value="Android" sort="7"/>
-              <dictItem key="8" value="WP7" sort="8"/>
-              <dictItem key="9" value="Symbian" sort="9"/>
-              <dictItem key="10" value="Linux" sort="10"/>
-              <dictItem key="11" value="OSX" sort="11"/>
-              <dictItem key="12" value="Unix" sort="12"/>
-              <dictItem key="13" value="其他" sort="13"/>
-          </dictNodeEntry>
-          
-          <dictNodeEntry name="bugBrowser" title="浏览器">
-              <dictItem key="1" value="全部" sort="1"/>
-              <dictItem key="2" value="IE系列" sort="2"/>
-              <dictItem key="3" value="IE11 " sort="3"/>
-              <dictItem key="4" value="IE10" sort="4"/>
-              <dictItem key="5" value="IE9 " sort="5"/>
-              <dictItem key="6" value="IE8" sort="6"/>
-              <dictItem key="7" value="IE7" sort="7"/>
-              <dictItem key="8" value="IE6" sort="8"/>
-              <dictItem key="9" value="chrome" sort="9"/>
-              <dictItem key="10" value="Firefox系列" sort="10"/>
-              <dictItem key="11" value="Firefox4" sort="11"/>
-              <dictItem key="12" value="Firefox3" sort="12"/>
-              <dictItem key="13" value="Firefox2" sort="13"/>
-              <dictItem key="14" value="opera10" sort="14"/>
-              <dictItem key="15" value="opera9" sort="15"/>
-              <dictItem key="16" value="Safari" sort="16"/>
-              <dictItem key="17" value="遨游" sort="17"/>
-              <dictItem key="18" value="UC" sort="18"/>
-              <dictItem key="19" value="其他" sort="19"/>
-          </dictNodeEntry>
+            <dictItem key="1" value="重复Bug" sort="1"/>
+            <dictItem key="2" value="设计如此" sort="2"/>
+            <dictItem key="3" value="外部原因" sort="3"/>
+            <dictItem key="4" value="已解决" sort="4"/>
+            <dictItem key="5" value="无法重现" sort="5"/>
+            <dictItem key="6" value="延期解决" sort="6"/>
+            <dictItem key="7" value="不予解决" sort="7"/>
+        </dictNodeEntry>
+
+        <dictNodeEntry name="bugSeverity" title="严重程度">
+            <!--建设性的意见或建议-->
+            <dictItem key="1" value="Suggestion" sort="1"/>
+            <!--错误是表面化或微小的（提示信息不太准确友好、错别字、UI布局或罕见故障等），对功能几乎没有影响，产品及属性仍可使用；-->
+            <dictItem key="2" value="Minor " sort="2"/>
+            <!--normal 进入软件需要一步操作才能发现的文字、颜色、图形错误 提示信息不正确 ,必填信息无提示 , 随机产生的软件功能性bug，很难重现-->　
+            <dictItem key="3" value="Major" sort="3"/>
+            <!--功能未实现或导致一个特性不能运行并且不可能有替代方案；-->
+            <dictItem key="4" value="Critical" sort="4"/>
+            <!--错误导致了死机、产品失败（“崩溃”）、系统悬挂无法操作；-->
+            <dictItem key="5" value="Blocker" sort="5"/>　
+        </dictNodeEntry>
+
+        <dictNodeEntry name="bugOS" title="系统/浏览器">
+            <dictItem key="1" value="全部" sort="1"/>
+            <dictItem key="2" value="Windows" sort="2"/>
+            <dictItem key="3" value="Windows 8" sort="3"/>
+            <dictItem key="4" value="Windows 7" sort="4"/>
+            <dictItem key="5" value="Windows Vista" sort="5"/>
+            <dictItem key="6" value="WindowsXp" sort="6"/>
+            <dictItem key="7" value="Android" sort="7"/>
+            <dictItem key="8" value="WP7" sort="8"/>
+            <dictItem key="9" value="Symbian" sort="9"/>
+            <dictItem key="10" value="Linux" sort="10"/>
+            <dictItem key="11" value="OSX" sort="11"/>
+            <dictItem key="12" value="Unix" sort="12"/>
+            <dictItem key="13" value="其他" sort="13"/>
+        </dictNodeEntry>
+
+        <dictNodeEntry name="bugBrowser" title="浏览器">
+            <dictItem key="1" value="全部" sort="1"/>
+            <dictItem key="2" value="IE系列" sort="2"/>
+            <dictItem key="3" value="IE11 " sort="3"/>
+            <dictItem key="4" value="IE10" sort="4"/>
+            <dictItem key="5" value="IE9 " sort="5"/>
+            <dictItem key="6" value="IE8" sort="6"/>
+            <dictItem key="7" value="IE7" sort="7"/>
+            <dictItem key="8" value="IE6" sort="8"/>
+            <dictItem key="9" value="chrome" sort="9"/>
+            <dictItem key="10" value="Firefox系列" sort="10"/>
+            <dictItem key="11" value="Firefox4" sort="11"/>
+            <dictItem key="12" value="Firefox3" sort="12"/>
+            <dictItem key="13" value="Firefox2" sort="13"/>
+            <dictItem key="14" value="opera10" sort="14"/>
+            <dictItem key="15" value="opera9" sort="15"/>
+            <dictItem key="16" value="Safari" sort="16"/>
+            <dictItem key="17" value="遨游" sort="17"/>
+            <dictItem key="18" value="UC" sort="18"/>
+            <dictItem key="19" value="其他" sort="19"/>
+        </dictNodeEntry>
 
         <dictNodeEntry name="bugPriority" title="优先级">
             <!--即”低优先级”，即问题在系统发布以前必须确认解决或确认可以不予解决。-->
@@ -100,7 +100,7 @@
             <dictItem key="4" value="Urgent" sort="4"/>
             <!--即“马上解决”，表示问题必须马上解决，否则系统根本无法达到预定的需求-->
             <dictItem key="5" value="Immediate" sort="5"/>
-        </dictNodeEntry>	
+        </dictNodeEntry>
     </dictNodeEntry>
     <dictNodeEntry name="case" title="测试用例">
         <dictNodeEntry name="caseStatus" title="测试用例状态">
@@ -108,11 +108,12 @@
             <dictItem key="2" value="被阻塞" sort="2"/>
             <dictItem key="3" value="研究中" sort="3"/>
         </dictNodeEntry>
-        、<dictNodeEntry name="colorOfCaseStatus" title="测试用例状态颜色">
-        <dictItem key="1" value="text-success" sort="1"/>
-        <dictItem key="2" value="text-warning" sort="2"/>
-        <dictItem key="3" value="text-info" sort="3"/>
-    </dictNodeEntry>
+        、
+        <dictNodeEntry name="colorOfCaseStatus" title="测试用例状态颜色">
+            <dictItem key="1" value="text-success" sort="1"/>
+            <dictItem key="2" value="text-warning" sort="2"/>
+            <dictItem key="3" value="text-info" sort="3"/>
+        </dictNodeEntry>
 
         <dictNodeEntry name="caseResult" title="用例结果">
             <dictItem key="0" value="N/A" sort="1"/>
@@ -140,7 +141,7 @@
             <dictItem key="3" value="阻塞" sort="4"/>
         </dictNodeEntry>
 
-       <dictNodeEntry name="caseType" title="用例类型">
+        <dictNodeEntry name="caseType" title="用例类型">
             <dictItem key="1" value="功能测试" sort="1"/>
             <dictItem key="2" value="性能测试" sort="2"/>
             <dictItem key="3" value="配置相关" sort="3"/>
@@ -149,7 +150,7 @@
             <dictItem key="6" value="接口测试" sort="6"/>
             <dictItem key="7" value="其他" sort="7"/>
         </dictNodeEntry>
-	    <dictNodeEntry name="casePriority" title="优先级">
+        <dictNodeEntry name="casePriority" title="优先级">
             <dictItem key="1" value="1" sort="1"/>
             <dictItem key="2" value="2" sort="2"/>
             <dictItem key="3" value="3" sort="3"/>
@@ -160,12 +161,12 @@
             <dictItem key="1" value="单元测试阶段" sort="1"/>
             <dictItem key="2" value="功能测试阶段" sort="2"/>
             <dictItem key="3" value="集成测试阶段" sort="3"/>
-             <dictItem key="4" value="系统测试阶段" sort="4"/>
+            <dictItem key="4" value="系统测试阶段" sort="4"/>
             <dictItem key="5" value="冒烟测试阶段" sort="5"/>
             <dictItem key="6" value="版本验证阶段" sort="6"/>
-            
+
         </dictNodeEntry>
-        	
+
     </dictNodeEntry>
     <dictNodeEntry name="version" title="版本">
         <dictNodeEntry name="versionPriority" title="优先级">
@@ -175,7 +176,7 @@
             <dictItem key="4" value="4" sort="4"/>
             <dictItem key="5" value="5" sort="5"/>
         </dictNodeEntry>
-         <dictNodeEntry name="versionStatus" title="版本状态">
+        <dictNodeEntry name="versionStatus" title="版本状态">
             <dictItem key="1" value="未开始" sort="1"/>
             <dictItem key="2" value="进行中" sort="2"/>
             <dictItem key="3" value="已完成" sort="3"/>
@@ -187,7 +188,7 @@
             <dictItem key="3" value="text-success" sort="3"/>
             <dictItem key="4" value="text-warning" sort="4"/>
         </dictNodeEntry>
-        	
+
     </dictNodeEntry>
-     
+
 </dictNodeEntries>

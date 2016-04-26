@@ -3,7 +3,6 @@ package org.tinygroup.sdpm.org.biz.impl;
 import org.apache.commons.lang.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.org.biz.inter.RoleUserManager;
 import org.tinygroup.sdpm.org.dao.OrgRoleUserDao;
@@ -16,7 +15,6 @@ import java.util.List;
  * Created by Administrator on 2015-10-12.
  */
 @Service
-@Transactional
 public class RoleUserManagerImpl implements RoleUserManager {
     @Autowired
     OrgRoleUserDao orgRoleUserDao;
@@ -48,7 +46,7 @@ public class RoleUserManagerImpl implements RoleUserManager {
             t.setOrgRoleId(roleId);
             list.add(t);
         }
-        if (list != null || !list.isEmpty()) {
+        if (!list.isEmpty()) {
             orgRoleUserDao.batchInsert(list);
         }
     }
@@ -72,7 +70,7 @@ public class RoleUserManagerImpl implements RoleUserManager {
             list.add(t);
         }
         Integer len = 0;
-        if (list != null || !list.isEmpty()) {
+        if (!list.isEmpty()) {
             int[] batchInsert = orgRoleUserDao.batchInsert(list);
             if (!ArrayUtils.isEmpty(batchInsert)) {
                 len = batchInsert.length;

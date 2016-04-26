@@ -22,8 +22,9 @@ import org.tinygroup.tinysqldsl.base.Table;
 /**
  * <!-- begin-user-doc -->
  * 周报白名单表
- *
+ * <p>
  * <!-- end-user-doc -->
+ *
  * @generated
  */
 public class OrgDiaryWhiteListTable extends Table {
@@ -31,6 +32,7 @@ public class OrgDiaryWhiteListTable extends Table {
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     *
      * @generated
      */
     public static final OrgDiaryWhiteListTable ORG_DIARY_WHITE_LISTTABLE = new OrgDiaryWhiteListTable();
@@ -45,6 +47,7 @@ public class OrgDiaryWhiteListTable extends Table {
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     *
      * @generated
      */
     public final Column ORG_DIARY_WHITE_LIST_ID = new Column(this, "org_diary_white_list_id");
@@ -59,6 +62,7 @@ public class OrgDiaryWhiteListTable extends Table {
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     *
      * @generated
      */
     public final Column ORG_DIARY_WHITE_LIST_FIRST_ACCOUNT = new Column(this, "org_diary_white_list_first_account");
@@ -73,6 +77,7 @@ public class OrgDiaryWhiteListTable extends Table {
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     *
      * @generated
      */
     public final Column ORG_DIARY_WHITE_LIST_SECOND_ACCOUNT = new Column(this, "org_diary_white_list_second_account");

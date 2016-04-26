@@ -1,0 +1,17 @@
+<tables>
+  <table id="31ca7c39eee5417ba117cba32da52fc2" name="org_git_commit_info" title="ORG_GIT_INFO_COMMIT_INFO" schema="" package-name="">
+    <description></description>
+    <table-field standard-field-id="3288ab910cd840cca920eceef4414316" primary="true" unique="true" not-null="true" id="git_commit_id" auto-increase="false"/>
+    <table-field standard-field-id="c01c68b9c851401d80e0a4e96aa5622a" primary="false" unique="false" not-null="false" id="git_commit_time" auto-increase="false"/>
+    <table-field standard-field-id="b8544ab8050442e3a620dc9b6b283f20" primary="false" unique="false" not-null="false" id="git_repository_name" auto-increase="false"/>
+    <table-field standard-field-id="1d9a3211f9a74deab252ae159060a99b" primary="false" unique="false" not-null="false" id="org_git_author_email" auto-increase="false"/>
+    <table-field standard-field-id="202618fa35ed44379574bec62f072f70" primary="false" unique="false" not-null="false" id="git_commit_message" auto-increase="false"/>
+    <table-field standard-field-id="45eb789aa6f74ba6b1c9840678320ef2" primary="false" unique="false" not-null="false" id="git_commit_url" auto-increase="false"/>
+    <table-field standard-field-id="1f5c3c71f5f04b1986ecb5a4eabdfa54" primary="false" unique="false" not-null="false" id="git_type" auto-increase="false"/>
+  </table>
+  <table id="312f16714d5b4a468dd8ab56876abf85" name="org_diary_git_detail" title="ORG_DIARY_GIT_DETAIL">
+    <table-field standard-field-id="ee74ea33989e4c8cb3e78a1c142ff7d8" primary="true" unique="true" not-null="true" id="org_diary_git_detail_id" auto-increase="true"/>
+    <table-field standard-field-id="9aba49a288a14d6b9cf4d7e6618084d4" primary="false" unique="false" not-null="false" id="org_diary_id" auto-increase="false"/>
+    <table-field standard-field-id="3288ab910cd840cca920eceef4414316" primary="false" unique="false" not-null="false" id="org_git_commit_id" auto-increase="false"/>
+  </table>
+</tables>

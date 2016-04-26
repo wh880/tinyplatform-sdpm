@@ -2,6 +2,7 @@ package org.tinygroup.sdpm.system.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.common.util.std.StdUtil;
 import org.tinygroup.sdpm.org.biz.inter.UserManager;
@@ -21,6 +22,7 @@ import java.util.Date;
  * Created by wangll13383 on 2015/10/8.
  */
 @Component
+@Transactional
 public class LogServiceImpl implements LogService {
     @Autowired
     private ActionManager actionManager;
@@ -86,13 +88,13 @@ public class LogServiceImpl implements LogService {
         try {
             value = object.getClass().getDeclaredMethod(methodName).invoke(object);
         } catch (IllegalAccessException e) {
-            e.printStackTrace();
+
         } catch (InvocationTargetException e) {
-            e.printStackTrace();
+
         }
         return value;
     }
-
+    @Transactional(readOnly = true)
     private Object dataChange(Object object) {
         if (object instanceof Date) {
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

@@ -13,8 +13,8 @@ import java.util.Map;
  */
 @XStreamAlias("menu")
 public class Menu implements Serializable, Comparable<Menu> {
-    public static String IS_SHOW_YES = "1";
-    public static String IS_SHOW_NO = "0";
+    public static final String IS_SHOW_YES = "1";
+    public static final String IS_SHOW_NO = "0";
     /**
      * 菜单编号
      */
@@ -154,7 +154,7 @@ public class Menu implements Serializable, Comparable<Menu> {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj != null) {
+        if (obj != null && obj instanceof Menu) {
             Menu menu = (Menu) obj;
             if (menu.getId() != null) {
                 return menu.getId().equals(getId());

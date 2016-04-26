@@ -484,6 +484,7 @@ public class BugAction extends BaseController {
         bug.setBugResolvedDate(new Date());
         List<OrgUser> orgUsers = userService.findUserList(null);
         ProjectBuild build = new ProjectBuild();
+        build.setBuildDeleted(ProjectBuild.DELETE_NO);
         build.setBuildProduct(bug.getProductId());
         List<ProjectBuild> builds = buildService.findListBuild(build);
         QualityBug qualityBug = new QualityBug();
@@ -897,7 +898,7 @@ public class BugAction extends BaseController {
     @ResponseBody
     @RequestMapping("/updateBatch")
     public boolean updateBatch(@RequestBody QualityBug[] bugs) {
-        if (bugs.length == 0 || bugs == null) {
+        if (bugs == null || bugs.length == 0) {
             return false;
         }
         for (QualityBug bug : bugs) {

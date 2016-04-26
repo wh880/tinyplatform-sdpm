@@ -17,7 +17,6 @@ package org.tinygroup.sdpm.org.biz.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.sdpm.org.biz.inter.CompanyManager;
 import org.tinygroup.sdpm.org.dao.OrgCompanyDao;
 import org.tinygroup.sdpm.org.dao.pojo.OrgCompany;
@@ -25,7 +24,6 @@ import org.tinygroup.sdpm.org.dao.pojo.OrgCompany;
 import java.util.List;
 
 @Service
-@Transactional
 public class CompanyManagerImpl implements CompanyManager {
     @Autowired
     private OrgCompanyDao orgCompanyDao;

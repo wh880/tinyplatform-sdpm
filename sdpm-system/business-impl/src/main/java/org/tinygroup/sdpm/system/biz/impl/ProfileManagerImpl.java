@@ -2,7 +2,6 @@ package org.tinygroup.sdpm.system.biz.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.commons.tools.ArrayUtil;
 import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.sdpm.system.biz.inter.ProfileManager;
@@ -12,7 +11,6 @@ import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;
 import java.util.List;
 
 @Service
-@Transactional
 public class ProfileManagerImpl implements ProfileManager {
     @Autowired
     private SystemProfileDao systemProfileDao;

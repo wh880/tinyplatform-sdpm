@@ -18,6 +18,7 @@ package org.tinygroup.sdpm.product.dao.impl;
 
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.jdbctemplatedslsession.callback.*;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
@@ -42,7 +43,7 @@ import static org.tinygroup.tinysqldsl.Select.selectFrom;
 import static org.tinygroup.tinysqldsl.Update.update;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 
-@Component
+@Repository
 public class ProductStorySpecDaoImpl extends TinyDslDaoSupport implements ProductStorySpecDao {
 
     public static Condition productStorySpecPueryCondition(ProductStorySpec t) {
@@ -245,7 +246,7 @@ public class ProductStorySpecDaoImpl extends TinyDslDaoSupport implements Produc
             return select;
         }
         List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
-        for (int i = 0; orderBies != null && i < orderBies.length; i++) {
+        for (int i = 0; i < orderBies.length; i++) {
             OrderByElement tempElement = null;
             if (orderBies[i] != null) {
                 tempElement = orderBies[i].getOrderByElement();

@@ -180,7 +180,7 @@ public class OrgDiaryTable extends Table {
     public final Column ORG_DIARY_MODIFY_DATE = new Column(this, "org_diary_modify_date");
 
 
-    private OrgDiaryTable() {
+    public OrgDiaryTable() {
         super("org_diary");
     }
 

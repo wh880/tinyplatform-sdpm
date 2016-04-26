@@ -2,7 +2,6 @@ package org.tinygroup.sdpm.product.biz.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
@@ -27,7 +26,6 @@ import java.util.*;
 
 
 @Service
-@Transactional
 public class StoryManagerImpl implements StoryManager {
 
     @Autowired(required = false)
@@ -130,7 +128,7 @@ public class StoryManagerImpl implements StoryManager {
      * storySource,storyStatus,storyStage,storyPri,storyEstimate,
      * storyOpenedBy,storyAssignedTo,storyClosedReason,storyVersion*/
     public Map<String, List<StoryCount>> report(String fields, ProductStory story) {
-        if (fields.equals("") || fields == null) {
+        if (fields == null || fields.equals("")) {
             return null;
         }
         Map<String, List<StoryCount>> map = new TreeMap<String, List<StoryCount>>(

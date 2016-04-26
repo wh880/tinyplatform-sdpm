@@ -2,6 +2,7 @@ package org.tinygroup.sdpm.project.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.dao.complexsearch.SearchInfos;
 import org.tinygroup.sdpm.dao.condition.ConditionCarrier;
@@ -22,6 +23,7 @@ import java.util.List;
  * Created by shenly13343 on 2015-09-20.
  */
 @Component
+@Transactional
 public class ProjectStoryServiceImpl implements ProjectStoryService {
     @Autowired
     private ProjectStoryManager projectStoryManager;
@@ -37,7 +39,7 @@ public class ProjectStoryServiceImpl implements ProjectStoryService {
     public int[] updateProjectStoryLink(List<ProjectStory> projectStoryList) {
         return projectStoryManager.updateLink(projectStoryList);
     }
-
+    @Transactional(readOnly = true)
     public List<ProjectStory> findByProjectStory(ProjectStory projectStory) {
         return projectStoryManager.findList(projectStory);
     }
@@ -49,7 +51,7 @@ public class ProjectStoryServiceImpl implements ProjectStoryService {
     public int[] addProjectStoryLink(List<ProjectStory> projectStoryList) {
         return projectStoryManager.linkStory(projectStoryList);
     }
-
+    @Transactional(readOnly = true)
     public List<ProductStory> findStoryByProject(Integer projectId) {
         if (getStoryIdInProject(projectId).length == 0) {
             return new ArrayList<ProductStory>();
@@ -60,6 +62,7 @@ public class ProjectStoryServiceImpl implements ProjectStoryService {
 
 
     @Override
+    @Transactional(readOnly = true)
     public List<ProductStory> findStoryByProjectAndModule(Integer projectId, ProductStory story) {
         if (getStoryIdInProject(projectId).length == 0) {
             return new ArrayList<ProductStory>();
@@ -71,15 +74,15 @@ public class ProjectStoryServiceImpl implements ProjectStoryService {
     public Integer deleteProjectStory(Integer projectId, Integer storyId) {
         return projectStoryManager.deleteByProjectStory(projectId, storyId);
     }
-
+    @Transactional(readOnly = true)
     public Pager<ProductStory> findStoryToLink(Integer projectId, Integer start, Integer limit, String order, String orderType, Boolean isNotInProjectStory) {
         return projectStoryManager.findStoryToLink(projectId, start, limit, order, orderType, isNotInProjectStory);
     }
-
+    @Transactional(readOnly = true)
     public Pager<ProductStory> findStoryPager(int start, int limit, int id, SearchInfos conditions, String groupOperate) {
         return buildManager.findBuildStory(start, limit, id);
     }
-
+    @Transactional(readOnly = true)
     public Pager<ProductStory> findStoryPagerByProject(Integer projectId, Integer start, Integer limit, String order, String orderType, String moduleId) {
         List<ProjectStory> storyList = projectStoryManager.findStoryList(projectId);
         String[] ids = new String[storyList.size()];
@@ -99,7 +102,7 @@ public class ProjectStoryServiceImpl implements ProjectStoryService {
         }
         return pager;
     }
-
+    @Transactional(readOnly = true)
     private Integer[] getStoryIdInProject(Integer projectId) {
         List<ProjectStory> projectStoryList = projectStoryManager.findStoryList(projectId);
         if (projectStoryList == null || projectStoryList.isEmpty()) {

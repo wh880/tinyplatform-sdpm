@@ -396,7 +396,7 @@ public class ProjectAction extends BaseController implements WebContextAware {
         boolean isCurrent = false;//判断当前cookies中保存的是否为删除值
         ArrayList<Integer> ids = new ArrayList<Integer>();
         for (String id : split) {
-            if (id.equals(currentProjectId)) {
+            if (id.equals(currentProjectId.toString())) {
                 isCurrent = true;
             }
             ids.add(Integer.valueOf(id));

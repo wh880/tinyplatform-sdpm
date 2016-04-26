@@ -6,6 +6,7 @@
         <property name="fileResolver" ref="fileResolver"></property>
         <property name="typeInfoResolver" ref="typeInfoResolver"></property>
     </bean>
-    <bean id="typeInfoResolver" class="org.tinygroup.sdpm.common.typeinfo.TypeInfoResolverImpl" scope="singleton"></bean>
+    <bean id="typeInfoResolver" class="org.tinygroup.sdpm.common.typeinfo.TypeInfoResolverImpl"
+          scope="singleton"></bean>
     <bean id="typeInfoFunction" class="org.tinygroup.sdpm.common.typeinfo.InfoFunction"/>
 </beans>

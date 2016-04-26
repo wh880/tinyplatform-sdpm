@@ -1,0 +1,43 @@
+<service-components>
+  <service-component type="org.tinygroup.sdpm.org.service.inter.GitService" bean="gitServiceImpl">
+    <service-method local-name="queryCommits" service-id="queryCommits" method-name="queryCommits" cacheable="false" category="org.tinygroup.sdpm.org.service.inter">
+      <service-parameters>
+        <service-parameter name="gitInfo" type="org.tinygroup.sdpm.org.dao.pojo.OrgGitCommitInfo" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="queryCommitsResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.org.dao.pojo.OrgGitCommitInfo"/>
+    </service-method>
+    <service-method local-name="batchInsertGitCommitInfo" service-id="batchInsertGitCommitInfo" method-name="batchInsertGitCommitInfo" cacheable="false" category="org.tinygroup.sdpm.org.service.inter">
+      <service-parameters>
+        <service-parameter name="list" type="org.tinygroup.sdpm.org.dao.pojo.OrgGitCommitInfo" collection-type="java.util.List" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="batchInsertGitCommitInfoResult" required="false" is-array="false" type="void"/>
+    </service-method>
+    <service-method local-name="findOrgGitCommitInfoByEmailAndDate" service-id="findOrgGitCommitInfoByEmailAndDate" method-name="findOrgGitCommitInfoByEmailAndDate" cacheable="false" category="org.tinygroup.sdpm.org.service.inter">
+      <service-parameters>
+        <service-parameter name="email" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="beginDate" type="java.util.Date" required="false" is-array="false"/>
+        <service-parameter name="endDate" type="java.util.Date" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findOrgGitCommitInfoByEmailAndDateResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.org.dao.pojo.OrgGitCommitInfo"/>
+    </service-method>
+    <service-method local-name="batchInsertDiaryGitDetail" service-id="batchInsertDiaryGitDetail" method-name="batchInsertDiaryGitDetail" cacheable="false" category="org.tinygroup.sdpm.org.service.inter">
+      <service-parameters>
+        <service-parameter name="diaryId" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="list" type="org.tinygroup.sdpm.org.dao.pojo.OrgDiaryGitDetail" collection-type="java.util.List" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="batchInsertDiaryGitDetailResult" required="false" is-array="false" type="void"/>
+    </service-method>
+    <service-method local-name="query" service-id="query" method-name="query" cacheable="false" category="org.tinygroup.sdpm.org.service.inter">
+      <service-parameters>
+        <service-parameter name="diaryGitDetail" type="org.tinygroup.sdpm.org.dao.pojo.OrgDiaryGitDetail" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="queryResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.org.dao.pojo.OrgDiaryGitDetail"/>
+    </service-method>
+    <service-method local-name="getOrgGitCommitInfoByDiaryId" service-id="getOrgGitCommitInfoByDiaryId" method-name="getOrgGitCommitInfoByDiaryId" cacheable="false" category="org.tinygroup.sdpm.org.service.inter">
+      <service-parameters>
+        <service-parameter name="diaryId" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="getOrgGitCommitInfoByDiaryIdResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.org.dao.pojo.OrgGitCommitInfo"/>
+    </service-method>
+  </service-component>
+</service-components>

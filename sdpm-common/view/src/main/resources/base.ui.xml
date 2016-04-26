@@ -1,5 +1,6 @@
 <ui-components>
-    <ui-component name="base" dependencies="frameCommon,publicComponent,trumbowyg,gridSystems,compose,table,form,fold,button,icon,tab,modal,zTree">
+    <ui-component name="base"
+                  dependencies="frameCommon,publicComponent,trumbowyg,gridSystems,compose,table,form,fold,button,icon,tab,modal,zTree">
         <js-codelet>
             var init = [];
         </js-codelet>

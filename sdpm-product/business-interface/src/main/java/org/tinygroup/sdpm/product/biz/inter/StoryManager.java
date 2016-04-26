@@ -103,17 +103,18 @@ public interface StoryManager {
     Pager<ProductStory> findPagerRel(int start, int limit, ProductStory story, ConditionCarrier carrier, String columnName, boolean asc);
 
     /**
-     *  分页查询（排序）
+     * 分页查询（排序）
+     *
      * @param start
      * @param limit
      * @param story
      * @param carrier
-     * @param ignoreDelete  忽略判断是否删除与否
+     * @param ignoreDelete 忽略判断是否删除与否
      * @param columnName
      * @param asc
      * @return
      */
-    Pager<ProductStory> findPager(int start, int limit, ProductStory story, ConditionCarrier carrier,Boolean ignoreDelete, String columnName, boolean asc);
+    Pager<ProductStory> findPager(int start, int limit, ProductStory story, ConditionCarrier carrier, Boolean ignoreDelete, String columnName, boolean asc);
 
     /**
      * 产品需求数量分类

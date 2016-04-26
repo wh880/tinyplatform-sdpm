@@ -25,7 +25,7 @@ import org.tinygroup.tinysqldsl.Pager;
 import java.util.List;
 
 public interface ProjectStoryDao extends BaseDao<ProjectStory, Integer> {
-    Pager<ProductStory> findStory(Integer projectId, Integer start, Integer limit, boolean isNotInProjectStory ,final OrderBy... orderByArgs);
+    Pager<ProductStory> findStory(Integer projectId, Integer start, Integer limit, boolean isNotInProjectStory, final OrderBy... orderByArgs);
 
     /**
      * 批量硬删除

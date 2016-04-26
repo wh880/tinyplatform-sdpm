@@ -1,8 +1,8 @@
 <ui-components>
     <ui-component name="login" dependencies="jquery">
         <css-resource></css-resource>
-	<js-resource>
-		/login/js/cloud.js
-	</js-resource>
+        <js-resource>
+            /login/js/cloud.js
+        </js-resource>
     </ui-component>
 </ui-components>

@@ -102,7 +102,7 @@ public class PropertiesLoader {
      */
     public Double getDouble(String key, Integer defaultValue) {
         String value = getValue(key);
-        return value != null ? Double.valueOf(value) : defaultValue;
+        return value != null ? Double.valueOf(value) : new Double(defaultValue);
     }
 
     /**

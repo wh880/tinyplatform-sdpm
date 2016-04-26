@@ -24,17 +24,17 @@ import java.util.Date;
  */
 public class Project implements Serializable {
 
-    public static String DELETE_YES = "1";
-    public static String DELETE_NO = "0";
+    public static final String DELETE_YES = "1";
+    public static final String DELETE_NO = "0";
 
-    public static String WAIT = "1";
-    public static String DOING = "2";
-    public static String HANGUP = "3";
-    public static String FINISH = "4";
+    public static final String WAIT = "1";
+    public static final String DOING = "2";
+    public static final String HANGUP = "3";
+    public static final String FINISH = "4";
 
-    public static String ACL_OPEN = "0";
-    public static String ACL_PRIVATE = "1";
-    public static String ACL_CUSTOM = "2";
+    public static final String ACL_OPEN = "0";
+    public static final String ACL_PRIVATE = "1";
+    public static final String ACL_CUSTOM = "2";
     ////////////////////////
     /**
      * 项目下任务完成进度

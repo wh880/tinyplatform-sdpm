@@ -20,12 +20,14 @@
             #foreach(m:menuService.getScopeMenus("pro-version-op"))
                 #if(m.id == "pro-version-delete")
                 <a href="javascript:void(0);" class="build-remove" data-url="${TINY_CONTEXT_PATH+adminPath+m.href}" data-id="${b?.buildId}"><i class="${m.icon}" title=${m.name}></i></a>
-                #elseif(m.id == "pro-version-look")
-
-                <a class="buildJump" value="${b?.buildProject}" href="${TINY_CONTEXT_PATH+adminPath}/project/build/forword/alnoBug?buildId=${b?.buildId}"
-                   title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+##                #elseif(m.id == "pro-version-look")
+##
+##                <a class="buildJump" value="${b?.buildProject}" href="${TINY_CONTEXT_PATH+adminPath}/project/build/forword/alnoBug?buildId=${b?.buildId}"
+##                   title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
                 #else
-                <a href="javascript:void(0);" class="build-remove" data-url="${TINY_CONTEXT_PATH+adminPath+m.href}" data-id="${b?.buildId}"><i class="${m.icon}" title=${m.name}></i></a>
+                 <a class="buildJump" href="${TINY_CONTEXT_PATH+adminPath+m.href}?buildId=${b?.buildId}"
+                      title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+##                <a href="javascript:void(0);" class="build-remove" data-url="${TINY_CONTEXT_PATH+adminPath+m.href}" data-id="${b?.buildId}"><i class="${m.icon}" title=${m.name}></i></a>
                 #end
             #end
         #end

@@ -2,6 +2,7 @@ package org.tinygroup.sdpm.org.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import org.tinygroup.commons.tools.ArrayUtil;
 import org.tinygroup.commons.tools.CollectionUtil;
@@ -21,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
+@Transactional
 public class RoleServiceImpl implements RoleService {
     @Autowired
     private MenuManager menuManager;
@@ -33,15 +35,15 @@ public class RoleServiceImpl implements RoleService {
 
     @Autowired
     private RoleUserManager roleUserManager;
-
+    @Transactional(readOnly = true)
     public OrgRole findRole(Integer id) {
         return roleManager.find(id);
     }
-
+    @Transactional(readOnly = true)
     public Pager<OrgRole> findRolePager(Integer start, Integer limit, OrgRole orgRole) {
         return roleManager.findPager(start, limit, orgRole);
     }
-
+    @Transactional(readOnly = true)
     public List<OrgRole> findRoleList(OrgRole orgRole) {
         return roleManager.findList(orgRole);
     }
@@ -57,11 +59,11 @@ public class RoleServiceImpl implements RoleService {
     public Integer deleteRole(Integer id) {
         return roleManager.delete(id);
     }
-
+    @Transactional(readOnly = true)
     public List<OrgRoleMenu> findRoleMenuListByUser(String userId) {
         return roleMenuManager.findMenuListByUser(userId);
     }
-
+    @Transactional(readOnly = true)
     public List<OrgRoleMenu> findMenuByRoleId(Integer roleId) {
         return roleMenuManager.findMenuIds(roleId);
     }
@@ -114,7 +116,7 @@ public class RoleServiceImpl implements RoleService {
             roleMenuManager.batchAdd(orgRoleMenuList);
         }
     }
-
+    @Transactional(readOnly = true)
     public List<OrgRole> findRoleByUserId(String userId) {
         List<OrgRoleUser> orgRoleUserList = roleUserManager.findListByUserIds(userId);
         List<OrgRole> roleList = new ArrayList<OrgRole>();
@@ -124,7 +126,7 @@ public class RoleServiceImpl implements RoleService {
         }
         return roleList;
     }
-
+    @Transactional(readOnly = true)
     public List<OrgRoleUser> findUserByRoleId(Integer roleId) {
         return roleUserManager.findUserIds(roleId);
     }
@@ -166,7 +168,7 @@ public class RoleServiceImpl implements RoleService {
             roleUserManager.batchAdd(orgRoleUserList);
         }
     }
-
+    @Transactional(readOnly = true)
     public List<OrgRole> getRoleByIds(String[] ids) {
         if (ArrayUtil.isEmptyArray(ids)) {
             return new ArrayList<OrgRole>();
@@ -180,7 +182,7 @@ public class RoleServiceImpl implements RoleService {
         role.setOrgRoleType(OrgRole.ROLE_TYPE_SYS);
         return findRoleList(role);
     }
-
+    @Transactional(readOnly = true)
     public List<OrgRole> roleInCondition(String condition, String type, Integer limit) {
         return roleManager.roleInCondition(condition, type, limit);
     }

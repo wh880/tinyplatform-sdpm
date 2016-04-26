@@ -32,7 +32,6 @@ public class QualityUtil {
     }
 
     public static void getCondition(String status, ConditionCarrier carrier) {
-        if ("".equals(status) || status == null) return;
         if (status == null || "".equals(status)) return;
         switch (statusMap.get(status)) {
             case 1:

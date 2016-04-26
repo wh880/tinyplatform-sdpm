@@ -1,5 +1,16 @@
 <service-components>
   <service-component type="org.tinygroup.sdpm.system.service.inter.ActionService" bean="actionServiceImpl">
+    <service-method local-name="findActionListByTypeList" service-id="findActionListByTypeList" method-name="findActionListByTypeList" cacheable="false" category="org.tinygroup.sdpm.system.service.inter">
+      <service-parameters>
+        <service-parameter name="bugs" type="org.tinygroup.sdpm.system.dao.pojo.SystemAction" collection-type="java.util.List" required="false" is-array="false"/>
+        <service-parameter name="stories" type="org.tinygroup.sdpm.system.dao.pojo.SystemAction" collection-type="java.util.List" required="false" is-array="false"/>
+        <service-parameter name="tasks" type="org.tinygroup.sdpm.system.dao.pojo.SystemAction" collection-type="java.util.List" required="false" is-array="false"/>
+        <service-parameter name="cases" type="org.tinygroup.sdpm.system.dao.pojo.SystemAction" collection-type="java.util.List" required="false" is-array="false"/>
+        <service-parameter name="releases" type="org.tinygroup.sdpm.system.dao.pojo.SystemAction" collection-type="java.util.List" required="false" is-array="false"/>
+        <service-parameter name="docList" type="org.tinygroup.sdpm.system.dao.pojo.SystemAction" collection-type="java.util.List" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findActionListByTypeListResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.system.dao.pojo.SystemAction"/>
+    </service-method>
     <service-method local-name="findAction" service-id="findAction" method-name="findAction" cacheable="false" category="org.tinygroup.sdpm.system.service.inter">
       <service-parameters>
         <service-parameter name="SystemAction" type="org.tinygroup.sdpm.system.dao.pojo.SystemAction" required="false" is-array="false"/>
@@ -7,27 +18,6 @@
         <service-parameter name="asc" type="boolean" required="false" is-array="false"/>
       </service-parameters>
       <service-result name="findActionResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.system.dao.pojo.SystemAction"/>
-    </service-method>
-    <service-method local-name="findSystemActionPager" service-id="findSystemActionPager" method-name="findSystemActionPager" cacheable="false" category="org.tinygroup.sdpm.system.service.inter">
-      <service-parameters>
-        <service-parameter name="page" type="int" required="false" is-array="false"/>
-        <service-parameter name="pageSize" type="int" required="false" is-array="false"/>
-        <service-parameter name="action" type="org.tinygroup.sdpm.system.dao.pojo.SystemAction" required="false" is-array="false"/>
-        <service-parameter name="order" type="java.lang.String" required="false" is-array="false"/>
-        <service-parameter name="orderType" type="java.lang.String" required="false" is-array="false"/>
-      </service-parameters>
-      <service-result name="findSystemActionPagerResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager"/>
-    </service-method>
-    <service-method local-name="queryActionPager" service-id="queryActionPager" method-name="queryActionPager" cacheable="false" category="org.tinygroup.sdpm.system.service.inter">
-      <service-parameters>
-        <service-parameter name="start" type="int" required="false" is-array="false"/>
-        <service-parameter name="limit" type="int" required="false" is-array="false"/>
-        <service-parameter name="chooseDate" type="java.lang.String" required="false" is-array="false"/>
-        <service-parameter name="systemAction" type="org.tinygroup.sdpm.system.dao.pojo.SystemAction" required="false" is-array="false"/>
-        <service-parameter name="order" type="java.lang.String" required="false" is-array="false"/>
-        <service-parameter name="orderType" type="java.lang.String" required="false" is-array="false"/>
-      </service-parameters>
-      <service-result name="queryActionPagerResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager"/>
     </service-method>
     <service-method local-name="queryActionBetweenDate" service-id="queryActionBetweenDate" method-name="queryActionBetweenDate" cacheable="false" category="org.tinygroup.sdpm.system.service.inter">
       <service-parameters>
@@ -41,22 +31,6 @@
       </service-parameters>
       <service-result name="queryActionBetweenDateResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager"/>
     </service-method>
-    <service-method local-name="findActionListByIdList" service-id="findActionListByIdList" method-name="findActionListByIdList" cacheable="false" category="org.tinygroup.sdpm.system.service.inter">
-      <service-parameters>
-        <service-parameter name="idList" type="java.lang.Integer" collection-type="java.util.List" required="false" is-array="false"/>
-      </service-parameters>
-      <service-result name="findActionListByIdListResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.system.dao.pojo.SystemAction"/>
-    </service-method>
-    <service-method local-name="findActionListByTypeList" service-id="findActionListByTypeList" method-name="findActionListByTypeList" cacheable="false" category="org.tinygroup.sdpm.system.service.inter">
-      <service-parameters>
-        <service-parameter name="bugs" type="org.tinygroup.sdpm.system.dao.pojo.SystemAction" collection-type="java.util.List" required="false" is-array="false"/>
-        <service-parameter name="stories" type="org.tinygroup.sdpm.system.dao.pojo.SystemAction" collection-type="java.util.List" required="false" is-array="false"/>
-        <service-parameter name="tasks" type="org.tinygroup.sdpm.system.dao.pojo.SystemAction" collection-type="java.util.List" required="false" is-array="false"/>
-        <service-parameter name="cases" type="org.tinygroup.sdpm.system.dao.pojo.SystemAction" collection-type="java.util.List" required="false" is-array="false"/>
-        <service-parameter name="releases" type="org.tinygroup.sdpm.system.dao.pojo.SystemAction" collection-type="java.util.List" required="false" is-array="false"/>
-      </service-parameters>
-      <service-result name="findActionListByTypeListResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.system.dao.pojo.SystemAction"/>
-    </service-method>
     <service-method local-name="findDiaryActionListByUserAndDate" service-id="findDiaryActionListByUserAndDate" method-name="findDiaryActionListByUserAndDate" cacheable="false" category="org.tinygroup.sdpm.system.service.inter">
       <service-parameters>
         <service-parameter name="userId" type="java.lang.String" required="false" is-array="false"/>
@@ -64,6 +38,33 @@
         <service-parameter name="endDate" type="java.util.Date" required="false" is-array="false"/>
       </service-parameters>
       <service-result name="findDiaryActionListByUserAndDateResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.system.dao.pojo.SystemAction"/>
+    </service-method>
+    <service-method local-name="queryActionPager" service-id="queryActionPager" method-name="queryActionPager" cacheable="false" category="org.tinygroup.sdpm.system.service.inter">
+      <service-parameters>
+        <service-parameter name="start" type="int" required="false" is-array="false"/>
+        <service-parameter name="limit" type="int" required="false" is-array="false"/>
+        <service-parameter name="chooseDate" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="systemAction" type="org.tinygroup.sdpm.system.dao.pojo.SystemAction" required="false" is-array="false"/>
+        <service-parameter name="order" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="orderType" type="java.lang.String" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="queryActionPagerResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager"/>
+    </service-method>
+    <service-method local-name="findActionListByIdList" service-id="findActionListByIdList" method-name="findActionListByIdList" cacheable="false" category="org.tinygroup.sdpm.system.service.inter">
+      <service-parameters>
+        <service-parameter name="idList" type="java.lang.Integer" collection-type="java.util.List" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findActionListByIdListResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.system.dao.pojo.SystemAction"/>
+    </service-method>
+    <service-method local-name="findSystemActionPager" service-id="findSystemActionPager" method-name="findSystemActionPager" cacheable="false" category="org.tinygroup.sdpm.system.service.inter">
+      <service-parameters>
+        <service-parameter name="page" type="int" required="false" is-array="false"/>
+        <service-parameter name="pageSize" type="int" required="false" is-array="false"/>
+        <service-parameter name="action" type="org.tinygroup.sdpm.system.dao.pojo.SystemAction" required="false" is-array="false"/>
+        <service-parameter name="order" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="orderType" type="java.lang.String" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findSystemActionPagerResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager"/>
     </service-method>
   </service-component>
 </service-components>

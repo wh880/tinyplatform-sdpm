@@ -139,7 +139,6 @@ public class ProjectTaskAction extends BaseController {
         if (taskId != null) {
             ProjectTask task = taskService.findTaskById(Integer.parseInt(taskId));
             model.addAttribute("copyTask", task);
-
         }
         List<ProductStory> storyList = projectStoryService.findStoryByProject(projectId);
         List<QualityBug> bugList = projectService.findRelationBugByProjectID(projectId);
@@ -493,6 +492,9 @@ public class ProjectTaskAction extends BaseController {
     @RequiresPermissions("pro-task-close")
     @RequestMapping(value = "/close", method = RequestMethod.GET)
     public String close(Integer taskId, Model model) {
+        if (taskId == null) {
+            return notFoundView();
+        }
         ProjectTask task = taskService.findTaskById(taskId);
         model.addAttribute("task", task);
         return "project/operate/task/special/close";
@@ -661,7 +663,9 @@ public class ProjectTaskAction extends BaseController {
                 module.setModuleType("projectProduct");
                 module.setModuleRoot(projectId);
                 List<SystemModule> moduleList = moduleService.findModuleList(module);
-                moduleIds = StringUtil.isBlank(moduleIds) ? moduleList.get(0).getModuleId().toString() : moduleIds.substring(1, moduleIds.length() - 1) + "," + moduleList.get(0).getModuleId().toString();
+                if(moduleList.size()>1){
+                    moduleIds = StringUtil.isBlank(moduleIds) ? moduleList.get(0).getModuleId().toString() : moduleIds.substring(1, moduleIds.length() - 1) + "," + moduleList.get(0).getModuleId().toString();
+                }
             } else {
                 moduleIds = ModuleUtil.getCondition(Integer.parseInt(moduleId));
             }
@@ -871,6 +875,11 @@ public class ProjectTaskAction extends BaseController {
             for (SystemModule module : moduleList) {
                 module.setModuleName(ModuleUtil.getPath(module.getModuleId(), "/", null, false));
             }
+            if (CollectionUtil.isEmpty(moduleList)) {
+                systemModule = new SystemModule();
+                systemModule.setModuleOwner(productStory.getProductId().toString());
+                moduleList = moduleService.findModuleList(systemModule);
+            }
             return moduleList;
         } else {
             return generateModuleList(projectId);
@@ -901,7 +910,7 @@ public class ProjectTaskAction extends BaseController {
                 module.setModuleRoot(pp.getProductId());
                 List<SystemModule> tModuleList = moduleService.findModuleList(module);
                 for (SystemModule m : tModuleList) {
-                    m.setModuleName(ModuleUtil.getPath(m.getModuleId(), "/", product == null ? "" : product.getProductName(), true));
+                    m.setModuleName(ModuleUtil.getPath(m.getModuleId(), "/", product.getProductName(), true));
                 }
                 SystemModule module1 = new SystemModule();
                 module1.setModuleType("projectProduct");

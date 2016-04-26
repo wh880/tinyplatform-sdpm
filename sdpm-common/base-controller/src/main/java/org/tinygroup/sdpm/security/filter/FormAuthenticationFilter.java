@@ -56,14 +56,14 @@ public class FormAuthenticationFilter extends org.apache.shiro.web.filter.authc.
     @Override
     protected boolean onLoginFailure(AuthenticationToken token,
                                      AuthenticationException e, ServletRequest request, ServletResponse response) {
-        String className = e.getClass().getName(), message = "";
-        if (IncorrectCredentialsException.class.getName().equals(className)
-                || UnknownAccountException.class.getName().equals(className)) {
+        String message = "";
+        if (e instanceof IncorrectCredentialsException
+                || e instanceof UnknownAccountException) {
             message = "用户或密码错误, 请重试.";
         } else {
             logger.logMessage(LogLevel.ERROR, "系统出现点问题，请稍后再试！", e);
         }
-        request.setAttribute(getFailureKeyAttribute(), className);
+        request.setAttribute(getFailureKeyAttribute(), e.getClass().getName());
         request.setAttribute(getMessageParam(), message);
         if (token != null) {
             UsernamePasswordToken usernamePasswordToken = (UsernamePasswordToken) token;

@@ -24,19 +24,19 @@ import java.util.Date;
  * 客户请求表
  */
 public class ServiceRequest implements Serializable {
-    public static Integer DELETE_YES = 1;
-    public static Integer DELETE_NO = 0;
-    public static Integer CREATED = 0;
-    public static Integer DOING = 1;
-    public static Integer REJECTED = 2;
-    public static Integer TOPRODUCT = 3;
-    public static Integer PLANNED = 4;
-    public static Integer POSTPONED = 5;
-    public static Integer FINISHED = 6;
-    public static Integer RELEASED = 7;
-    public static Integer RETURNVISIT = 8;
-    public static Integer REOPEN = 9;
-    public static Integer CLOSE = 10;
+    public static final Integer DELETE_YES = 1;
+    public static final Integer DELETE_NO = 0;
+    public static final Integer CREATED = 0;
+    public static final Integer DOING = 1;
+    public static final Integer REJECTED = 2;
+    public static final Integer TOPRODUCT = 3;
+    public static final Integer PLANNED = 4;
+    public static final Integer POSTPONED = 5;
+    public static final Integer FINISHED = 6;
+    public static final Integer RELEASED = 7;
+    public static final Integer RETURNVISIT = 8;
+    public static final Integer REOPEN = 9;
+    public static final Integer CLOSE = 10;
 
     private String clientName;
     /**

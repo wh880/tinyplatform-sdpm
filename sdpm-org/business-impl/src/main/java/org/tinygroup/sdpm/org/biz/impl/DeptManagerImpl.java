@@ -17,7 +17,6 @@ package org.tinygroup.sdpm.org.biz.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.sdpm.org.biz.inter.DeptManager;
 import org.tinygroup.sdpm.org.dao.OrgDeptDao;
 import org.tinygroup.sdpm.org.dao.pojo.OrgDept;
@@ -25,7 +24,6 @@ import org.tinygroup.sdpm.org.dao.pojo.OrgDept;
 import java.util.List;
 
 @Service
-@Transactional
 public class DeptManagerImpl implements DeptManager {
     @Autowired
     private OrgDeptDao orgDeptDao;
