@@ -82,7 +82,7 @@ public class ModuleAction extends BaseController {
         List<SystemModule> bugModules = moduleService.findModuleList(systemModule);
         systemModule.setModuleType("story");
         List<SystemModule> productModules = moduleService.findModuleList(systemModule);
-        mergeModule(productModules, mapList, "0", "name", false, false);
+        mergeModule(productModules, mapList, "0", "name", true, true);
         mergeModule(bugModules, mapList, "0", "name", true, true);
         return mapList;
     }

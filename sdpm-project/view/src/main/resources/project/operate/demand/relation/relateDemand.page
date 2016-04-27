@@ -3,11 +3,12 @@
 #@layout(project)
     #@tabBodyCol("ptop-5")
         #@div(divClass="operationbar")
-        <span class="f">
-                    <a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
-                </span>
+            <span class="f">
+                <a href="javascript:void(0);" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
+            </span>
             #div(divClass="clearfix")
-        ##                #include("/project/mulsearch.page")
+##            #include("/product/page/search/mulsearch.page")
+##                        #include("/project/mulsearch.page")
         #end
     #end
 #end
