@@ -65,8 +65,7 @@
                     });
                 </script>
                 #@tr()
-                    #@th()
-                        <div style="width: 64px;float: right">相关需求</div>#end
+                    #@th()<div style="width: 64px;float: right">相关需求</div>#end
                     #@td()
                         #@formControlDiv("col-10")
                             #@Tselect2F()

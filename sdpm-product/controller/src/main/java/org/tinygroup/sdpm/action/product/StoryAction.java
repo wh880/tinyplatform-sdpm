@@ -221,6 +221,16 @@ public class StoryAction extends BaseController {
             }
         }
         processProfile(uploadProfile, productStory.getStoryId(), ProfileType.STORY);
+
+        if(productStory.getModuleId()==null)
+        {
+            productStory.setModuleId(0);
+        }
+        if(productStory.getPlanId()==null)
+        {
+            productStory.setPlanId(0);
+        }
+
         storyService.updateStory(productStory);
 
         LogUtil.logWithComment(LogUtil.LogOperateObject.STORY,
@@ -464,6 +474,10 @@ public class StoryAction extends BaseController {
         systemAction.setActionObjectId(productStory.getStoryId().toString());
         systemAction.setActionObjectType("story");
         List<SystemAction> actions = actionService.findAction(systemAction, "actionId", false);
+        if(actions.size()==0)
+        {
+            return "";
+        }
         return actions.get(0).getActionComment();//0表示降序排列后的第一条，即为最新那一条
     }
 

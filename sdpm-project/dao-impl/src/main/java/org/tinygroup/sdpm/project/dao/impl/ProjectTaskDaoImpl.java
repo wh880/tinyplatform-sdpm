@@ -181,7 +181,8 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
         if (projectTask == null || projectTask.getTaskId() == null) {
             return 0;
         }
-        return getDslTemplate().update(projectTask, new UpdateGenerateCallback<ProjectTask>() {
+        return getDslTemplate().update(projectTask, new UpdateGenerateCallback<ProjectTask>()
+        {
             public Update generate(ProjectTask t) {
                 Update update = update(PROJECT_TASKTABLE).set(
                         PROJECT_TASKTABLE.TASK_RELATION_BUG.value(t.getTaskRelationBug()),

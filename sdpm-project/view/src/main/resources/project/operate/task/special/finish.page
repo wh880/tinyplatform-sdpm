@@ -57,11 +57,16 @@
 
     ##
         #@elementItem()
-            #@colLabel()备注#end
+            #*#@colLabel()备注#end
             #@formControlDiv("col-8")
-                #Teditor("content" "comment" {"initialFrameHeight":"200"})${actionComment}
-            #end
-            #@validateDiv("col-2")#end
+                #Teditor("content" "comment" {"initialFrameHeight":"200"})${actionComment}#end
+            #@validateDiv("col-2")#end*#
+            <div class="col-12">
+                <div class="col-2 text-r"><label>备注：</label></div>
+                <div class="col-8">
+                    #@Teditor("content" "comment" {"initialFrameHeight":"150"})${actionComment}#end
+                </div>
+            </div>
         #end
     </div>
     #@elementItem()
