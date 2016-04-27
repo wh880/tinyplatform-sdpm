@@ -820,7 +820,11 @@ public class ProjectTaskAction extends BaseController {
 
             //获得相关需求描述
             ProductStory productStory=storyService.findStory(task.getTaskStory());
-            ProductStorySpec storySpec = storySpecService.findStorySpec(task.getTaskStory(), productStory.getStoryVersion());
+            ProductStorySpec storySpec=null;
+            if(productStory!=null)
+            {
+                storySpec= storySpecService.findStorySpec(task.getTaskStory(), productStory.getStoryVersion());
+            }
             model.addAttribute("storySpec",storySpec);
         }
         SystemProfile systemProfile = new SystemProfile();
