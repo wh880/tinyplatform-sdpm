@@ -56,7 +56,9 @@
                                 <option value="${s.storyId}">${s.storyId}：${s.storyTitle}（优先级：${s.storyPri}，预计工时:${s.storyEstimate}）
                                 </option>
                                 #end
-                            <option value="">同上</option>
+                                #if(i!=1)
+                                    <option value="">同上</option>
+                                #end
                             #end
                         #end
 
@@ -145,7 +147,7 @@
                 }
                 $.ajax({
                     type:"POST",
-                    url:"${TINY_CONTEXT_PATH+adminPath}/project/task/judgeTaskNameExist?projectId=${currentProjectId}",
+                    url:"${TINY_CONTEXT_PATH+adminPath}/project/task/judgeTaskNameExist?projectId=${projectId}&currentURL=${currentURL}&taskNamee=null",
                     data:{param:taskName},
                     success:function(data)
                     {

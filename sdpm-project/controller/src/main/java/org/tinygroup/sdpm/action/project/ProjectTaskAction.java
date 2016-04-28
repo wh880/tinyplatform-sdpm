@@ -756,6 +756,8 @@ public class ProjectTaskAction extends BaseController {
         model.addAttribute("teamList", userService.findTeamUserListByProjectId(projectId));
         ProductStory story = storyService.findStory(storyId);
         model.addAttribute("story", story);
+        model.addAttribute("currentURL",request.getRequestURL().toString());
+        model.addAttribute("projectId",projectId);
         return "project/operate/task/common/batchAdd.page";
     }
 
