@@ -3,7 +3,7 @@
     <inceptionYear>2006</inceptionYear>
     <groupId>org.tinygroup</groupId>
     <artifactId>sdpm</artifactId>
-    <version>1.0.7</version>
+    <version>1.0.8-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>sdpm</name>
     <url>http://www.tinygroup.org</url>
