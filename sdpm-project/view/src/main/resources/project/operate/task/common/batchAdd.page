@@ -49,15 +49,13 @@
                     ##                            #tinyInput("text" "taskList["+i+"].taskStory" story?.storyId)
                     ##                        #end
                         #@Tselect2F()
-                            #@Tselect2Body("taskList["+i+"].taskStory" story?.storyId {"class":
-                                "input-text select2"})
-                            <option value=${story?.storyId}>${story?.storyTitle}</option>
-                                #foreach(s:storyList)
-                                <option value="${s.storyId}">${s.storyId}：${s.storyTitle}（优先级：${s.storyPri}，预计工时:${s.storyEstimate}）
-                                </option>
-                                #end
+                            #@Tselect2Body("taskList["+i+"].taskStory" story?.storyId {"class":"input-text select2"})
+                                <option value=""></option>
                                 #if(i!=1)
-                                    <option value="">同上</option>
+                                <option value="0">同上</option>
+                                #end
+                                #foreach(s:storyList)
+                                    <option value="${s.storyId}">${s.storyId}：${s.storyTitle}（优先级：${s.storyPri}，预计工时:${s.storyEstimate}）</option>
                                 #end
                             #end
                         #end
@@ -163,6 +161,23 @@
         $('form[name=bathAddForm]').Validform({
             beforeSubmit:function(form)
             {
+                //保存前给"同上"选项赋值
+                var taskStory=new Array();
+                $("select[name$=taskStory]").each(function(){
+                    var thisTaskStory=$(this).find("option:selected").text();
+                    if(thisTaskStory)
+                    {
+                        taskStory.push(thisTaskStory);
+                    }
+                });
+                for(var i=1;i<taskStory.length;i++)
+                {
+                    if(taskStory[i]=="同上")
+                    {
+                        $("select[name$=taskStory]").eq(i).val($("select[name$=taskStory]").eq(i-1).val());
+                    }
+                }
+
                 //保存前再次对标题进行检查
                 var boo=true;
                 var taskNameArray=new Array();

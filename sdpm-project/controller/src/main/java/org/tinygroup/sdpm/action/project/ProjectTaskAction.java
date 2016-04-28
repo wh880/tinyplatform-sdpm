@@ -38,10 +38,7 @@ import org.tinygroup.sdpm.system.service.inter.ActionService;
 import org.tinygroup.sdpm.system.service.inter.EffortService;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.sdpm.system.service.inter.ProfileService;
-import org.tinygroup.sdpm.util.CookieUtils;
-import org.tinygroup.sdpm.util.LogUtil;
-import org.tinygroup.sdpm.util.ModuleUtil;
-import org.tinygroup.sdpm.util.ProjectOperate;
+import org.tinygroup.sdpm.util.*;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -785,6 +782,7 @@ public class ProjectTaskAction extends BaseController {
                     }
                 }
             }
+            projectTask.setTaskOpenBy(UserUtils.getUserId());
         }
         if (taskList.isEmpty())
         {
@@ -1026,12 +1024,12 @@ public class ProjectTaskAction extends BaseController {
     @RequestMapping("/judgeTaskNameExist")
     public Map judgeTaskNameExist(String param,String currentURL,Integer projectId,String taskNamee)
     {
-        if(param == null)
+        if(StringUtil.isBlank(param))
         {
             return resultMap(false, "请输入任务名称");
         }
 
-        if(currentURL.contains("edit")&&param.equals(taskNamee))
+        if(StringUtil.contains(currentURL,"edit")&&StringUtil.equals(param,taskNamee))
         {
             return resultMap(true,"");
         }
