@@ -1,14 +1,12 @@
 package org.tinygroup.sdpm.action.document;
 
 
-import org.apache.commons.lang.ObjectUtils;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.dao.complexsearch.SearchInfos;
@@ -112,15 +110,14 @@ public class DocAction extends BaseController {
     }
 
     /**
-     * 添加文档的跳转
-     *
+     * 文档页面跳转方法
+     * @param libId
      * @param request
      * @param model
      * @return
      */
-    @RequiresPermissions(value = {"add-doc"})
-    @RequestMapping(value = "/add")
-    public String createDoc(Integer libId, HttpServletRequest request, Model model) {
+    public String returnDoc(Integer libId, HttpServletRequest request, Model model)
+    {
         if (libId == null) {
             libId = Integer.parseInt(CookieUtils.getCookie(request, DocAction.COOKIE_DOC_LIB_ID));
         }
@@ -141,6 +138,50 @@ public class DocAction extends BaseController {
             model.addAttribute("moduleList", moduleList);
             return "/document/operate/doc/add-doc";
         }
+    }
+
+    /**
+     * 当选中左边产品或项目的模块时添加文档的跳转
+     *
+     * @param request
+     * @param model
+     * @param moduleId
+     * @return
+     */
+    @RequiresPermissions(value = {"add-doc"})
+    @RequestMapping(value = "/add/module")
+    public String createDoc(Integer libId, HttpServletRequest request, Model model,String moduleId) {
+
+        //选中左边所属模块时
+        if(!moduleId.contains("p"))
+        {
+            SystemModule systemModule = moduleService.findById(Integer.valueOf(moduleId));
+            Integer moduleRoot = systemModule.getModuleRoot();
+            String moduleName = systemModule.getModuleName();
+            model.addAttribute("moduleRoot",moduleRoot);
+            model.addAttribute("moduleName",moduleName);
+            return returnDoc(libId, request,model);
+        }
+
+        //不选所属模块时module会带有字符"p"
+        String newModuleId = moduleId.replaceAll("[a-zA-Z]","" ); //去掉moduleId中的字符p
+        model.addAttribute("moduleRoot", newModuleId);
+        return returnDoc(libId, request,model);
+
+    }
+
+    /**
+     * 添加文档的跳转
+     *
+     * @param request
+     * @param model
+     * @return
+     */
+    @RequiresPermissions(value = {"add-doc"})
+    @RequestMapping(value = "/add")
+    public String addDoc(Integer libId, HttpServletRequest request, Model model) {
+
+        return returnDoc(libId,request,model);
     }
 
     /**
@@ -208,7 +249,7 @@ public class DocAction extends BaseController {
         systemProfile.setFileObjectType(ProfileType.DOCUMENT.getType());
         List<SystemProfile> fileList = profileService.findSystemProfile(systemProfile);
         model.addAttribute("fileList", fileList);
-
+        model.addAttribute("docId", docId);
         model.addAttribute("doc", doc);
         model.addAttribute("productList", productList);
         model.addAttribute("projectList", projectList);
@@ -366,9 +407,9 @@ public class DocAction extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "/docTitleCheck")
-    public Map docTitleCheck(@RequestParam("param") String docTitle, HttpServletRequest request, DocumentDoc doc) {
+    public Map docTitleCheck(String param, HttpServletRequest request, Integer docId) {
 
-        doc.setDocDeleted("0"); //已删除的文档
+       /* doc.setDocDeleted("0"); //已删除的文档
         String cookieDocLib = CookieUtils.getCookie(request, DocAction.COOKIE_DOC_LIB_ID);
         Integer libId = Integer.valueOf(StringUtil.isBlank(cookieDocLib) ? 0 : Integer.parseInt(cookieDocLib));
         doc.setDocLibId(libId);
@@ -386,5 +427,29 @@ public class DocAction extends BaseController {
             }
         }
         return resultMap(true, "文档标题可用！");
+    }*/
+        String cookieDocLib = CookieUtils.getCookie(request, DocAction.COOKIE_DOC_LIB_ID);
+        Integer libId = Integer.valueOf(StringUtil.isBlank(cookieDocLib) ? 0 : Integer.parseInt(cookieDocLib));
+        if (param != null) {
+            DocumentDoc documentDoc=new DocumentDoc();
+            documentDoc.setDocTitle(param);
+            documentDoc.setDocLibId(libId);
+            documentDoc.setDocDeleted("0");  //0为未删除的文档
+            List<DocumentDoc> docList = docService.findDocList(documentDoc);
+            if (docList.size() != 0) {
+                if (docId == null) {
+                    return resultMap(false, "该文档标题已存在");
+                } else if (!docId.equals(docList.get(0).getDocId())) {
+                    return resultMap(false, "该文档标题已存在");
+                } else {
+                    return resultMap(true, "");
+                }
+            } else {
+                return resultMap(true, "");
+            }
+        }
+        return resultMap(false, "请输入文档标题");
     }
+
+
 }

@@ -599,4 +599,29 @@ public class ProductAction extends BaseController {
         model.addAttribute("productList", products);
         return "product/page/team/teamCopy.pagelet";
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/judgeDocTitle")
+    public Map judgePlanName(String param, Integer docId, Integer productId) {
+        if (param != null) {
+            String docTitle = param;
+            DocumentDoc documentDoc=new DocumentDoc();
+            documentDoc.setDocTitle(docTitle);
+            documentDoc.setDocProduct(productId);
+            documentDoc.setDocDeleted("0");  //0为未删除的文档
+            List<DocumentDoc> doc = docService.findDocList(documentDoc);
+            if (doc.size() != 0) {
+                if (docId == null) {
+                    return resultMap(false, "该文档标题已存在");
+                } else if (!docId.equals(doc.get(0).getDocId())) {
+                    return resultMap(false, "该文档标题已存在");
+                } else {
+                    return resultMap(true, "");
+                }
+            } else {
+                return resultMap(true, "");
+            }
+        }
+        return resultMap(false, "请输入文档标题");
+    }
 }

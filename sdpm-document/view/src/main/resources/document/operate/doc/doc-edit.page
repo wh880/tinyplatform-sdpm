@@ -153,7 +153,7 @@
             #@formControlDiv("col-4")
                 #tinyInput(
                     "text" "docTitle" doc?.docTitle{"placeholder":"请填写文档标题","datatype":"*1-16","nullmsg":"标题不能为空！",
-                    "class":"input-text"})
+                    "class":"input-text","ajaxurl":TINY_CONTEXT_PATH+adminPath+"/document/doc/docTitleCheck?productId="+cookieProductId+"&docId="+docId})
             #end
             #@validateDiv("col-6")#end
         #end
@@ -227,6 +227,7 @@
     #@dialogHeader()#end
     #@dialogBody()<p></p>#end
 #end
+
 <script type="text/javascript">
     /* Set doc type. */
     $(function () {
