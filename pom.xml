@@ -3,7 +3,7 @@
     <inceptionYear>2006</inceptionYear>
     <groupId>org.tinygroup</groupId>
     <artifactId>sdpm</artifactId>
-    <version>1.0.7-SNAPSHOT</version>
+    <version>1.0.7</version>
     <packaging>pom</packaging>
     <name>sdpm</name>
     <url>http://www.tinygroup.org</url>
@@ -45,19 +45,6 @@
         <module>sdpm-statistic</module>
         <module>sdpm-org</module>
     </modules>
-
-    <distributionManagement>
-        <snapshotRepository>
-            <id>nexus-snapshots</id>
-            <name>tiny Nexus Snapshots</name>
-            <url>http://192.168.232.87:8081/nexus/content/repositories/snapshots/</url>
-        </snapshotRepository>
-        <repository>
-            <id>nexus-releases</id>
-            <name>tiny Release Repository</name>
-            <url>http://192.168.232.87:8081/nexus/content/repositories/release/</url>
-        </repository>
-    </distributionManagement>
 
     <build>
         <pluginManagement>
