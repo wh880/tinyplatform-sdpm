@@ -3,7 +3,7 @@
     <parent>
         <groupId>org.tinygroup</groupId>
         <artifactId>sdpm-project</artifactId>
-        <version>1.0.6</version>
+        <version>1.0.7-SNAPSHOT</version>
     </parent>
     <artifactId>sdpm-project-business-impl</artifactId>
     <name>sdpm-project-business-impl</name>
@@ -17,7 +17,7 @@
         <dependency>
             <groupId>org.tinygroup</groupId>
             <artifactId>sdpm-project-dao-impl</artifactId>
-            <version>1.0.6</version>
+            <version>1.0.7-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.tinygroup</groupId>
