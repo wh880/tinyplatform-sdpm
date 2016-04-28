@@ -7,7 +7,7 @@
         #@colLabel()<span class="c-red">*</span>所属产品：#end
         #@formControlDiv("col-3")
             #@TzTreeSelect(
-                "docProduct" "" {"class":"input-text","datatype":"*","nullmsg":"所属产品不能为空！",
+                "docProduct" moduleRoot {"class":"input-text","datatype":"*","nullmsg":"所属产品不能为空！",
                 "data-URL":call("link",adminPath+"/productLine/userProductTree")})
                 <script>
                     $(function(){
@@ -38,8 +38,8 @@
         #@colLabel()<span class="c-red">*</span>所属分类：#end
         #@formControlDiv("col-3")
             #@Tselect2F()
-                #@Tselect2Body("docModule" "" {"class":"input-text select2","datatype":"*","nullmsg":"所属分类不能为空！"}) ##,"multiple":"multiple"加上为多选项
-                    <option value="0">/</option>
+                #@Tselect2Body("docModule" moduleName {"class":"input-text select2","datatype":"*","nullmsg":"所属分类不能为空！"}) ##,"multiple":"multiple"加上为多选项
+                    <option value="">${moduleName}</option>
                 #end
             #end
         #end

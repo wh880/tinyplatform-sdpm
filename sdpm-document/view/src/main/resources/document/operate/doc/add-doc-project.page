@@ -12,7 +12,7 @@
 
                 #@Tselect2F()
                     #@Tselect2Body(
-                        "docProject" doc?.docProject?doc.docProject:currentProjectId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        "docProject" moduleRoot {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         <option></option>
                         #foreach(project : projectList)
                             <option value="${project?.projectId}">${project?.projectName}</option>
