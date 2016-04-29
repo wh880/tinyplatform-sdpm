@@ -14,7 +14,7 @@
             #@Tselect2F()
                 #@TzTreeSelect(
                     "buildProduct" build?.buildProduct?:productId {"style":"width:80%","class":"input-text","datatype":"*","nullmsg":"产品不能为空！",
-                    "data-URL":call("link",adminPath+"/productLine/userProductTree")})
+                    "data-URL":call("link",adminPath+"/productLine/userProductTree"),"readonly":"readonly"})
                     #set(m=menuService.getMenu("newproduct"))
                     #if(m)
                         <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
