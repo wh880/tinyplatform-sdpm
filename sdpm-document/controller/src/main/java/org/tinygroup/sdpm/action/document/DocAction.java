@@ -141,36 +141,6 @@ public class DocAction extends BaseController {
     }
 
     /**
-     * 当选中左边产品或项目的模块时添加文档的跳转
-     *
-     * @param request
-     * @param model
-     * @param moduleId
-     * @return
-     */
-    @RequiresPermissions(value = {"add-doc"})
-    @RequestMapping(value = "/add/module")
-    public String createDoc(Integer libId, HttpServletRequest request, Model model,String moduleId) {
-
-        //选中左边所属模块时
-        if(!moduleId.contains("p"))
-        {
-            SystemModule systemModule = moduleService.findById(Integer.valueOf(moduleId));
-            Integer moduleRoot = systemModule.getModuleRoot();
-            String moduleName = systemModule.getModuleName();
-            model.addAttribute("moduleRoot",moduleRoot);
-            model.addAttribute("moduleName",moduleName);
-            return returnDoc(libId, request,model);
-        }
-
-        //不选所属模块时module会带有字符"p"
-        String newModuleId = moduleId.replaceAll("[a-zA-Z]","" ); //去掉moduleId中的字符p
-        model.addAttribute("moduleRoot", newModuleId);
-        return returnDoc(libId, request,model);
-
-    }
-
-    /**
      * 添加文档的跳转
      *
      * @param request

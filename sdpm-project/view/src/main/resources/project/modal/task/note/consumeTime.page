@@ -5,8 +5,8 @@
             #@tr()
                 #@thW("60")ID#end
                 #@thW("160")日期#end
-                #@thW("100")耗时#end
-                #@thW("100")剩余#end
+                #@thW("100")耗时（小时）#end
+                #@thW("100")剩余（小时）#end
                 #@thW()工作内容#end
             #end
         #end
@@ -59,7 +59,25 @@
 
 <script type="text/javascript">
     $(function () {
-        $('form[name=batchAddForm]').Validform({
+        //对输入“耗时”、“剩余”进行验证
+        $("input[name$=effortConsumed]").each(function(){
+            $(this).change(function(){
+                if(isNaN($(this).val())||parseInt($(this).val())<0)
+                {
+                    layer.msg("请正确输入耗时");
+                }
+            });
+        });
+        $("input[name$=effortLeft]").each(function(){
+            $(this).change(function(){
+                if(isNaN($(this).val())||parseInt($(this).val())<0)
+                {
+                    layer.msg("请正确输入剩余");
+                }
+            });
+        });
+
+        $('form[name=thisform]').Validform({
             beforeSubmit: function (form) {
                 var showBreak = false;
                 $(form).find("tr.this-data-row").each(function (index) {
@@ -102,6 +120,35 @@
                 });
                 if (showBreak) {
                     return false;
+                }
+
+                //对耗时、剩余做数字验证
+                var effortConsumedList=new Array();
+                $("input[name$=effortConsumed]").each(function(){
+                    var effortConsumed=$(this).val();
+                    effortConsumedList.push(effortConsumed);
+                });
+                for(var i=0;i<effortConsumedList.length;i++)
+                {
+                    if(isNaN(effortConsumedList[i])||parseInt(effortConsumedList[i])<0)
+                    {
+                        layer.msg("请正确输入第"+(i+1)+"行消耗");
+                        return false;
+                    }
+                }
+
+                var effortLeftList=new Array();
+                $("input[name$=effortLeft]").each(function(){
+                    var effortLeft=$(this).val();
+                    effortLeftList.push(effortLeft);
+                });
+                for(var j=0;j<effortLeftList.length;j++)
+                {
+                    if(isNaN(effortLeftList[j])||parseInt(effortLeftList[j])<0)
+                    {
+                        layer.msg("请正确输入第"+(j+1)+"行剩余");
+                        return false;
+                    }
                 }
             }
         });
