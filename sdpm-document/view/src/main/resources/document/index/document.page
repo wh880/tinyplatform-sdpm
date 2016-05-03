@@ -57,7 +57,7 @@
                         <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="btn radius btn-success btn-sm">
                             <i class="icon-plus"></i>&nbsp;创建文档</a>
                         #else
-                        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}/module?moduleId=${moduleId}" class="btn radius btn-success btn-sm">
+                        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}/path?moduleId=${moduleId}" class="btn radius btn-success btn-sm">
                              <i class="icon-plus"></i>&nbsp;创建文档</a>
                         #end
                     #end

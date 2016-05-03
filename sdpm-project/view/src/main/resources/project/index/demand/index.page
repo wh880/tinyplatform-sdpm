@@ -10,7 +10,7 @@
                     <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?notInProjectStory=true"
                        title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
                 #else
-                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}"
+                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}${(moduleId?('?moduleId='+moduleId):'')}"
                    title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
                 #end
 

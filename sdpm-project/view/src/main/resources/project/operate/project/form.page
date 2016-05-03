@@ -9,7 +9,7 @@
         <input type="hidden" name="projectOpenedBy" value="${userUtils.getUser().orgUserId}"/>
         #@elementItem()
             #@sdpmItem("项目名称" "*")
-                #tinyInput("text" "projectName" "" {"placeholder":"请输入项目名称","datatype":"*","nullmsg":"项目名称不能为空！",
+                #tinyInput("text" "projectName" "" {"placeholder":"请输入项目名称","datatype":"*1-30","nullmsg":"项目名称不能为空！",
                     "class":"input-text","ajaxurl":TINY_CONTEXT_PATH+adminPath+"/project/validProjectName"})
             #end
         #end

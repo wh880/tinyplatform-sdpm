@@ -148,14 +148,14 @@ public class DocAction extends BaseController {
      * @param moduleId
      * @return
      */
-    @RequiresPermissions(value = {"add-doc"})
-    @RequestMapping(value = "/add/module")
+    @RequestMapping(value = "/add/path")
     public String createDoc(Integer libId, HttpServletRequest request, Model model,String moduleId) {
 
+        String a=moduleId; //由于module是session里存在的值,改变后会影响项目—任务模块
         //选中左边所属模块时
         if(!moduleId.contains("p"))
         {
-            SystemModule systemModule = moduleService.findById(Integer.valueOf(moduleId));
+            SystemModule systemModule = moduleService.findById(Integer.valueOf(a));
             Integer moduleRoot = systemModule.getModuleRoot();
             String moduleName = systemModule.getModuleName();
             model.addAttribute("moduleRoot",moduleRoot);
@@ -164,7 +164,7 @@ public class DocAction extends BaseController {
         }
 
         //不选所属模块时module会带有字符"p"
-        String newModuleId = moduleId.replaceAll("[a-zA-Z]","" ); //去掉moduleId中的字符p
+        String newModuleId = a.replaceAll("[a-zA-Z]","" ); //去掉moduleId中的字符p
         model.addAttribute("moduleRoot", newModuleId);
         return returnDoc(libId, request,model);
 
