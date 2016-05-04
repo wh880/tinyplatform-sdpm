@@ -23,13 +23,21 @@
                         $thisTr.after(data);
                 },
             });
-##                $thisTr.find(".addnext").css("display","none");
-//            updateUserID();
             return false;
         }).on("click",".delbutton",function(){
             if($('.databody .userID').size() == 1)
                 return;
             var that=this;
+
+            //删除没有内容的行，不需要删除提示
+            var userIdVal=$(that).closest("tr").find('td').eq(1).find('span').eq(0).text();
+            if(userIdVal=="查询用户")
+            {
+                $(that).closest("tr").remove();
+                updateUserID();
+                return;
+            }
+
             layer.confirm('确定删除?', function(){
                 $(that).closest("tr").remove();
                 updateUserID();
