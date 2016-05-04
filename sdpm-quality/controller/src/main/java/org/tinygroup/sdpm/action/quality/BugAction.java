@@ -28,10 +28,7 @@ import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
-import org.tinygroup.sdpm.project.service.inter.BuildService;
-import org.tinygroup.sdpm.project.service.inter.ProjectProductService;
-import org.tinygroup.sdpm.project.service.inter.ProjectService;
-import org.tinygroup.sdpm.project.service.inter.TaskService;
+import org.tinygroup.sdpm.project.service.inter.*;
 import org.tinygroup.sdpm.quality.dao.pojo.BugCount;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityCaseStep;
@@ -92,6 +89,8 @@ public class BugAction extends BaseController {
     private RequestService requestService;
     @Autowired
     private ActionService actionService;
+    @Autowired
+    private ProjectStoryService projectStoryService;
 
     @ModelAttribute
     public void init(Model model) {
@@ -669,9 +668,11 @@ public class BugAction extends BaseController {
     public String add(Model model,Integer projectId) {
         List<Project> projects = projectService.getUserProjectList(UserUtils.getUserId());
         List<OrgUser> orgUsers = userService.findUserList(null);
+        List<ProductStory> storyList = projectStoryService.findStoryByProject(projectId);
         model.addAttribute("projectList", projects);
         model.addAttribute("userList", orgUsers);
         model.addAttribute("projectId", projectId);
+        model.addAttribute("storyList", storyList);
         return "/quality/operate/bug/proposeBug.page";
     }
 

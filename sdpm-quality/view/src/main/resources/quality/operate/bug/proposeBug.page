@@ -185,7 +185,19 @@
             #@formControlDiv("col-8")
                 #@div(divClass="col-5")
                     #@Tselect2F()
-                        #@Tselect2Body("storyId" "" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        #if(projectId)
+                            #@Tselect2Body("" "" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                                <option value=""></option>
+                                #foreach(s:storyList)
+                                    <option value="${s.storyId}">${s.storyId}
+                                        ：${s.storyTitle}（优先级：${s.storyPri}，预计工时:${s.storyEstimate}）
+                                    </option>
+                                #end
+                        #end
+                        #else
+                            #@Tselect2Body("storyId" "" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+
+                            #end
                         #end
                         #@Tselect2Fix()
                             #set(m=menuService.getMenu("product-demand-add"))
