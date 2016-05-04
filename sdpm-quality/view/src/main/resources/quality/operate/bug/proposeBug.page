@@ -204,9 +204,14 @@
                             #if(m)
                                 <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
                             #end
+                            #if(projectId)
+                                <a href="${TINY_CONTEXT_PATH+adminPath}/project/demand/index">全部</a>
+
+                            #else
                             #set(m=menuService.getMenu("product-demand"))
                             #if(m)
                                 <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
+                            #end
                             #end
                         #end
                     #end
