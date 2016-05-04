@@ -15,7 +15,7 @@
         #end
         #@elementItem()
             #@sdpmItem("项目代号" "*")
-                #tinyInput("text" "projectCode" "" {"placeholder":"请输入项目代号","datatype":"*","nullmsg":"项目代号不能为空！",
+                #tinyInput("text" "projectCode" "" {"placeholder":"请输入项目代号","datatype":"*1-30","nullmsg":"项目代号不能为空！",
                     "class":"input-text"})
             #end
         #end

@@ -183,9 +183,9 @@
                 var taskNameArray=new Array();
                 $("input[name$=taskName]").each(function(index){
                     var thisTaskName=$(this).val();
+                    taskNameArray.push(thisTaskName);
                     if(thisTaskName)
                     {
-                        taskNameArray.push(thisTaskName);
                         $.ajax({
                             type:"POST",
                             url:"${TINY_CONTEXT_PATH+adminPath}/project/task/judgeTaskNameExist?projectId=${currentProjectId}",
