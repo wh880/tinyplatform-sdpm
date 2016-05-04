@@ -404,7 +404,7 @@ public class BugAction extends BaseController {
     }
 
     @RequestMapping("/sure")
-    public String makeSure(QualityBug bug, SystemAction systemAction) {
+    public String makeSure(QualityBug bug, SystemAction systemAction, String lastAddress) {
         QualityBug qualityBugOld = bugService.findQualityBugById(bug.getBugId());
         if (qualityBugOld.getBugAssignedTo() != bug.getBugAssignedTo()) {
             bug.setBugAssignedDate(new Date());
@@ -422,6 +422,9 @@ public class BugAction extends BaseController {
                 , qualityBugOld
                 , bug
                 , systemAction.getActionComment());
+        if (!StringUtil.isBlank(lastAddress)) {
+            return "redirect:" + lastAddress;
+        }
         return "redirect:" + "/a/quality/bug";
     }
 
@@ -458,7 +461,7 @@ public class BugAction extends BaseController {
     }
 
     @RequestMapping("/assignTo")
-    public String assign(QualityBug bug, SystemAction systemAction) {
+    public String assign(QualityBug bug, SystemAction systemAction, String lastAddress) {
         QualityBug qualityBugOld = bugService.findQualityBugById(bug.getBugId());
         bug.setBugAssignedDate(new Date());
         bugService.updateBug(bug);
@@ -473,6 +476,9 @@ public class BugAction extends BaseController {
                 , qualityBugOld
                 , bug
                 , systemAction.getActionComment());
+        if (!StringUtil.isBlank(lastAddress)) {
+            return "redirect:" + lastAddress;
+        }
         return "redirect:" + "/a/quality/bug";
     }
 
@@ -521,6 +527,7 @@ public class BugAction extends BaseController {
         model.addAttribute("userList", orgUsers);
         model.addAttribute("bug", bug);
         model.addAttribute("bugList", bugList);
+
         return "/quality/operate/bug/solution.page";
     }
 
@@ -528,7 +535,7 @@ public class BugAction extends BaseController {
     public String solve(QualityBug bug,
                         SystemAction systemAction,
                         @RequestParam(value = "file", required = false) MultipartFile[] file,
-                        String[] title, UploadProfile uploadProfile) throws IOException {
+                        String[] title, UploadProfile uploadProfile, String lastAddress) throws IOException {
         QualityBug qualityBug = bugService.findQualityBugById(bug.getBugId());
         if (qualityBug.getBugAssignedTo() != bug.getBugAssignedTo()) {
             bug.setBugAssignedDate(new Date());
@@ -547,6 +554,9 @@ public class BugAction extends BaseController {
                 , qualityBug
                 , bug
                 , systemAction.getActionComment());
+        if (!StringUtil.isBlank(lastAddress)) {
+            return "redirect:" + lastAddress;
+        }
         return "redirect:" + "/a/quality/bug";
     }
 
@@ -566,7 +576,7 @@ public class BugAction extends BaseController {
     }
 
     @RequestMapping("/close")
-    public String close(QualityBug bug, SystemAction systemAction) {
+    public String close(QualityBug bug, SystemAction systemAction, String lastAddress) {
         QualityBug qualityBug = bugService.findQualityBugById(bug.getBugId());
         bug.setBugClosedBy(userUtils.getUserId());
         bug.setBugClosedDate(new Date());
@@ -582,6 +592,10 @@ public class BugAction extends BaseController {
                 , qualityBug
                 , bug
                 , systemAction.getActionComment());
+
+        if (!StringUtil.isBlank(lastAddress)) {
+            return "redirect:" + lastAddress;
+        }
         return "redirect:" + "/a/quality/bug";
     }
 

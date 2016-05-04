@@ -4,6 +4,7 @@
 #@layout(quality)#end
 #set(requestStatuString = tinyRequestQueryString!=null ?tinyRequestQueryString:"")			
 #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/quality/bug/close?"+requestStatuString "post" {"class":"test"})
+<input type="hidden" name="lastAddress" value=""/>
 ##hiddenInput(hiddenInputName="bugId" hiddenInputValue=bug?.bugId)
 	<div style="width:67%;float:left">
     	<div class="infoContent">
