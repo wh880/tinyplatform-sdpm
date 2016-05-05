@@ -145,17 +145,20 @@
 #@elementItem()
     #@colLabel()Bug状态：#end
     #@formControlDiv("col-8")
-                #@Tselect2F()
-                    #@Tselect2Body(
-                        "bugStatus" bug?.bugStatus {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                        #foreach(status : getDict("bugStatus"))
+        #@Tselect2F()
+            #if(bug?.bugStatus=="1"||bug?.bugStatus=="3")
+                #@Tselect2Body("bugStatus" bug?.bugStatus {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                    #foreach(status : getDict("bugStatus"))
                         #@tinyOptionItem(status.value)${status.text}#end
                     #end
                 #end
+            #else
+                #tinyInput("text" "bugStatus" "已解决" {"class":"input-text","readonly":"readonly"})
             #end
         #end
     #end
-    </li>
+#end
+</li>
 <li>
 #@elementItem()
     #@colLabel()指派给：#end
@@ -380,23 +383,23 @@
     #@elementItem()
         #@colLabel()解决者:#end
         #@formControlDiv("col-8")
-                    #@Tselect2F()
-                        #Tselect2Ajax("bugResolvedBy" bug?.bugResolvedBy TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
-                        {"id":"","dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询用户"})
+            #@Tselect2F()
+                #Tselect2Ajax("bugResolvedBy" bug?.bugResolvedBy TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
+                {"id":"","dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询用户","readonly":"readonly"})
 
-                        #@Tselect2Fix()
-                            #set(m=menuService.getMenu("organizationAddUser"))
-                            #if(m)
-                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
-                            #end
-                            #set(m=menuService.getMenu("organizationUser"))
-                            #if(m)
-                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
-                            #end
-                        #end
+                #@Tselect2Fix()
+                    #set(m=menuService.getMenu("organizationAddUser"))
+                    #if(m)
+                        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
+                    #end
+                    #set(m=menuService.getMenu("organizationUser"))
+                    #if(m)
+                        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
                     #end
                 #end
             #end
+        #end
+    #end
 </li>
 <li>
     #@elementItem()
