@@ -98,7 +98,7 @@
     #@elementItem()
         #@colLabel("col-1")<span class="c-red">*</span>名称:#end
         #@formControlDiv("col-3")
-          #tinyInput("text" "planName" ""{"datatype":"*","nullmsg":"计划名不能为空！","id":"planName","class":"input-text",
+          #tinyInput("text" "planName" ""{"datatype":"*1-50","nullmsg":"计划名不能为空！","id":"planName","class":"input-text",
 			  "ajaxurl":TINY_CONTEXT_PATH+adminPath+"/product/plan/judgePlanName?productId="+cookieProductId})
         #end
         #@validateDiv("col-2")#end

@@ -23,7 +23,7 @@
         #@colLabel("col-1")<span class="c-red">*</span>发布名称:#end
         #@formControlDiv("col-4")
             #tinyInput(
-                "text" "releaseName" ""{"datatype":"*","nullmsg":"发布名称不能为空！","id":"releaseName","class":"input-text",
+                "text" "releaseName" ""{"datatype":"*1-50","nullmsg":"发布名称不能为空！","id":"releaseName","class":"input-text",
                 "ajaxurl":TINY_CONTEXT_PATH+adminPath+"/product/release/judgeReleaseName?productId="+cookieProductId})
 
         #end

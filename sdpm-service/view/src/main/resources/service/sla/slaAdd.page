@@ -105,7 +105,7 @@
                 #@sdpmItem("服务工时上限")
                 <div class="input-group">
                     #tinyInput(
-                        "text" "serviceEffortLimit" sla?.serviceEffortLimit{"id":"serviceEffortLimit",
+                        "text" "serviceEffortLimit" sla?.serviceEffortLimit{"id":"serviceEffortLimit","datatype":"/^[1-9]\d*$/",
                         "class":"input-text"})
                     <span class="input-group-addon" id="basic-addon2">小时</span>
                 </div>
@@ -117,7 +117,7 @@
                 <div class="input-group">
                     #tinyInput(
                         "text" "serviceReplyTimeLimit" sla?.serviceReplyTimeLimit{"id":
-                        "serviceReplyTimeLimit","class":
+                        "serviceReplyTimeLimit","datatype":"/^[1-9]\d*$/","class":
                         "input-text select2"})
                     <span class="input-group-addon" id="basic-addon2">小时</span>
                     </div>
@@ -128,7 +128,7 @@
                     <div class="input-group">
                         #tinyInput(
                         "text" "serviceReviewTimeLimit" sla?.serviceReviewTimeLimit{"id":
-                            "serviceReviewTimeLimit","class":"input-text select2"})
+                            "serviceReviewTimeLimit","datatype":"/^[1-9]\d*$/","class":"input-text select2"})
                         <span class="input-group-addon" id="basic-addon2">小时</span>
                     </div>
                 #end
@@ -137,13 +137,13 @@
                 #@sdpmItem("服务请求数上限")
                     #tinyInput(
                         "text" "serviceRequestLimit" sla?.serviceRequestLimit{"id":"serviceRequestLimit",
-                        "class":"input-text"})
+                        "datatype":"/^[1-9]\d*$/","class":"input-text"})
                 #end
             #end
             #@elementItem()
                 #@sdpmItem("现场服务次数上限")
                     #tinyInput("text" "serviceTsOnsiteLimit" sla?.serviceTsOnsiteLimit{"id":
-                        "serviceTsOnsiteLimit","class":"input-text"})
+                        "serviceTsOnsiteLimit","datatype":"/^[1-9]\d*$/","class":"input-text"})
                 #end
             #end
             #@elementItem()
