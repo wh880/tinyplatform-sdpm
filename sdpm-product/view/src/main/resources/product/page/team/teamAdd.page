@@ -30,11 +30,13 @@
             if($('.databody .userID').size() == 1)
                 return;
             var that=this;
-            layer.confirm('确定删除?', function(){
-                $(that).closest("tr").remove();
-                updateUserID();
-                layer.msg('删除成功！',1,1)
-            })
+            $(that).closest("tr").remove();
+            updateUserID();
+            /*  layer.confirm('确定删除?', function(){
+                  $(that).closest("tr").remove();
+                  updateUserID();
+                  layer.msg('删除成功！',1,1)
+              })*/
         });
     });
 </script>
