@@ -7,7 +7,7 @@
         <span class="r c">
                 #set(m=menuService.getMenu("tproposeversion"))
             #if(m)
-                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}"
+                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?projectId=${currentProjectId}"
                    title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
             #end
 				</span>
