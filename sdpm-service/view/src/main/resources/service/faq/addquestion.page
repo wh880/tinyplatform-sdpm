@@ -33,7 +33,7 @@
         #@elementItem()
             #@sdpmItem("创建人")
                 #tinyInput(
-                    "text" "faqCreatedBy" faq?.faqCreatedBy{"placeholder":"","id":"faqCreatedBy","class":"input-text"})
+                    "text" "faqCreatedBy" faq?.faqCreatedBy{"placeholder":"","id":"faqCreatedBy","datatype":"*1-50","class":"input-text"})
             #end
         #end
         #@elementItem()
