@@ -13,7 +13,6 @@ import org.tinygroup.sdpm.dao.condition.ConditionCarrier;
 import org.tinygroup.sdpm.dao.condition.ConditionUtils;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.UserService;
-import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
@@ -22,7 +21,6 @@ import org.tinygroup.sdpm.project.service.inter.BuildService;
 import org.tinygroup.sdpm.project.service.inter.ProjectProductService;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
 import org.tinygroup.sdpm.project.service.inter.TeamService;
-import org.tinygroup.sdpm.quality.dao.QualityTestTaskDao;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityTestCase;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityTestRun;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityTestTask;
@@ -32,6 +30,7 @@ import org.tinygroup.sdpm.quality.service.inter.TestTaskService;
 import org.tinygroup.sdpm.util.CookieUtils;
 import org.tinygroup.sdpm.util.LogUtil;
 import org.tinygroup.sdpm.util.ProductUtils;
+import org.tinygroup.sdpm.util.ProjectOperate;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -167,6 +166,7 @@ public class TestVersionAction extends BaseController {
     @RequiresPermissions("tproposeversion")
     @RequestMapping("/add")
     public String add(@CookieValue(value = ProductUtils.COOKIE_PRODUCT_ID, defaultValue = "0") Integer cookieProductId,
+                      @CookieValue(required = false, value = ProjectOperate.COOKIE_PROJECT_ID,defaultValue = "0") String currentProjectId,
                       Integer buildId, Model model, HttpServletResponse response,HttpServletRequest request) {
         List<Project> projects = projectService.findProjectList(null, null, null);
         ProjectBuild build = new ProjectBuild();
@@ -179,6 +179,7 @@ public class TestVersionAction extends BaseController {
         }
 
         List<ProjectBuild> builds = buildService.findListBuild(build);
+        model.addAttribute("currentProjectId", currentProjectId);
         model.addAttribute("projectList", projects);
         model.addAttribute("buildList", builds);
         model.addAttribute("currentURL", request.getRequestURL().toString());

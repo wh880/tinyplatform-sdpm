@@ -19,7 +19,7 @@
             #@formControlDiv("col-4")
 					#@div(divClass="col-10")
 					 #@Tselect2F()
-                         #@Tselect2Body("projectId" projectId?:0 {"datatype":"*","nullmsg":"所属项目不能为空","class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                         #@Tselect2Body("projectId" currentProjectId?:0 {"datatype":"*","nullmsg":"所属项目不能为空","class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 
                          #end
                          <script type="text/javascript">

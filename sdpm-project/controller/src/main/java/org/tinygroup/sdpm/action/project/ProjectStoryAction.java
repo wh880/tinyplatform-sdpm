@@ -37,7 +37,10 @@ public class ProjectStoryAction extends BaseController {
 
     @RequiresPermissions("demand")
     @RequestMapping("/index")
-    public String index() {
+    public String index(String moduleId,Model model) {
+        if (moduleId != null) {
+            model.addAttribute("moduleId", moduleId);
+        }
         return "project/index/demand/index";
     }
 

@@ -16,18 +16,12 @@ import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.product.dao.pojo.*;
 import org.tinygroup.sdpm.product.dao.utils.FieldUtil;
-import org.tinygroup.sdpm.product.service.inter.PlanService;
-import org.tinygroup.sdpm.product.service.inter.ReleaseService;
-import org.tinygroup.sdpm.product.service.inter.StoryService;
-import org.tinygroup.sdpm.product.service.inter.StorySpecService;
+import org.tinygroup.sdpm.product.service.inter.*;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTeam;
-import org.tinygroup.sdpm.project.service.inter.BuildService;
-import org.tinygroup.sdpm.project.service.inter.ProjectService;
-import org.tinygroup.sdpm.project.service.inter.TaskService;
-import org.tinygroup.sdpm.project.service.inter.TeamService;
+import org.tinygroup.sdpm.project.service.inter.*;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityTestCase;
 import org.tinygroup.sdpm.quality.service.inter.BugService;
@@ -39,6 +33,7 @@ import org.tinygroup.sdpm.system.service.inter.ActionService;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.sdpm.system.service.inter.ProfileService;
 import org.tinygroup.sdpm.util.LogUtil;
+import org.tinygroup.sdpm.util.ProjectOperate;
 import org.tinygroup.sdpm.util.StoryUtil;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -84,6 +79,7 @@ public class StoryAction extends BaseController {
     @Autowired
     private ActionService actionService;
 
+
     /**
      * @param request
      * @return
@@ -118,14 +114,16 @@ public class StoryAction extends BaseController {
     @RequiresPermissions("product-demand-add")
     @RequestMapping("/addstory")
     public String addStory(Model model,
-                           String lastAddress) {
+                           String lastAddress, String moduleId, Integer storyId,@CookieValue(required = false, value = ProjectOperate.COOKIE_PROJECT_ID) String currentProjectId) {
         List<ServiceRequest> requests = requestService.getRequestList(null);
         model.addAttribute("requestList", requests);
+        model.addAttribute("moduleId", moduleId);
         if (!StringUtil.isBlank(lastAddress)) {
             return "redirect:" + lastAddress;
         }
         return "/product/page/add/story/product-demand-add.page";
     }
+
 
     /**
      * 保存新的需求同时实现附件上传和记录历史

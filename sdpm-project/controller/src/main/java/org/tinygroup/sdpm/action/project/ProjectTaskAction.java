@@ -704,6 +704,7 @@ public class ProjectTaskAction extends BaseController {
         String moduleIds = "";
         if (!StringUtil.isBlank(moduleId)) {
             if (moduleId.contains("p")) {
+                //String newModuleId = moduleId.replaceAll("[a-zA-Z]","" ); //去掉moduleId中的字符p
                 moduleIds = ModuleUtil.getConditionByRoot(Integer.parseInt(moduleId.substring(1)), "story");
                 SystemModule module = new SystemModule();
                 module.setModuleOwner(moduleId.substring(1));
@@ -727,7 +728,6 @@ public class ProjectTaskAction extends BaseController {
             OrgUser user = userUtils.getUser();
             taskPager = taskService.findPagerTaskByMe(start, limit, task, order, asc, user);
         } else {
-
             taskPager = taskService.findTaskPager(start, limit, task, order, asc, carrier);
         }
         projectPagerInfoStatistics(model, taskPager.getRecords());
