@@ -32,8 +32,8 @@
         <application-processor bean="tinyListenerProcessor"/>
         <!--<application-processor bean="fileMonitorProcessor"/>-->
         <application-processor bean="tinyTemplateConfigProcessor"/>
-        <!--数据库安装-->-->
-        <application-processor bean="databaseInstallerProcessor"/>
+        <!--数据库安装
+        <application-processor bean="databaseInstallerProcessor"/>-->
         <!--系统数据初始化-->
         <application-processor bean="initDataApplicationProcessor"/>
         <application-processor bean="stdProcessor"/>
@@ -104,8 +104,8 @@
         <tiny-processor id="springMvcTinyProcessor" class="springMvcTinyProcessor">
             <servlet-mapping url-pattern=".*"></servlet-mapping>
         </tiny-processor>
-
         <tiny-processor id="uiEngineTinyProcessor" class="uiEngineTinyProcessor">
+            <init-param name="storageType" value="memory"></init-param>
             <servlet-mapping url-pattern=".*/uiengine\.uijs"></servlet-mapping>
             <servlet-mapping url-pattern=".*/uiengine\.uicss"></servlet-mapping>
         </tiny-processor>
