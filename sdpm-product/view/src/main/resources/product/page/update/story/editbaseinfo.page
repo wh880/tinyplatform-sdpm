@@ -266,7 +266,8 @@
             #@colLabel()重复需求：#end
             #@formControlDiv("col-8")
                 #tinyInput(
-                    "text" "storyDuplicateStory" story?.storyDuplicateStory {"ignore":"ignore","id":"yujigongshi","class":"input-text","datatype":"n","nullmsg":"内容必须为数字！"})
+                    "text" "storyDuplicateStory" story?.storyDuplicateStory {"ignore":"ignore","id":"yujigongshi",
+                    "class":"input-text","datatype":"n1-11","nullmsg":"内容必须为数字！"})
             #end
             #@validateDiv("col-2")#end
         #end
@@ -276,7 +277,9 @@
         #@elementItem()
             #@colLabel()相关需求：#end
             #@formControlDiv("col-8")
-                #tinyInput("text" "storyLinkStories" story?.storyLinkStories {"ignore":"ignore","id":"yujigongshi","class":"input-text","datatype":"n","nullmsg":"内容必须为数字！"})
+                #tinyInput(
+                    "text" "storyLinkStories" story?.storyLinkStories {"ignore":"ignore","id":"yujigongshi","class":
+                    "input-text","datatype":"n1-255","nullmsg":"内容必须为数字！"})
             #end
             #@validateDiv("col-2")#end
         #end
@@ -287,7 +290,8 @@
             #@colLabel()细分需求：#end
             #@formControlDiv("col-8")
                 #tinyInput(
-                    "text" "storyChildStories" story?.storyChildStories {"ignore":"ignore","id":"yujigongshi","class":"input-text","datatype":"n","nullmsg":"内容必须为数字！"})
+                    "text" "storyChildStories" story?.storyChildStories {"ignore":"ignore","id":"yujigongshi","class":
+                    "input-text","datatype":"n1-50","nullmsg":"内容必须为数字！"})
             #end
             #@validateDiv("col-2")#end
         #end
