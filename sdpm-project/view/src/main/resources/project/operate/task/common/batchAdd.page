@@ -62,7 +62,9 @@
 
                     #end
                     #@td()
-                        #tinyInput("text" "taskList["+i+"].taskName" "" {"placeholder":"","groupName":"taskName"})
+                        #tinyInput(
+                            "text" "taskList["+i+"].taskName" "" {"placeholder":"","groupName":"taskName","datatype":
+                            "*1-255"})
                     #end
                     #@td()
                         #@formControlDiv( )
