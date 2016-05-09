@@ -2,8 +2,10 @@
 #foreach(var:pager?.records)
     #@tr()
         #@td()<input type="checkbox" value="${var.clientId}" name="idCheck">#end
-        #@td()<a
-                href="${TINY_CONTEXT_PATH+adminPath}/service/client/clientSla?id=${var.clientId}">${var.clientName}</a>#end
+        #@td()
+            <div style="width:200px;overflow:hidden;">
+                <a href="${TINY_CONTEXT_PATH+adminPath}/service/client/clientSla?id=${var.clientId}" title="${var.clientName}">${var.clientName}</a>#end
+            </div>
         #@td("nowrap")${var.clientNO}#end
         #@td("nowrap")${var.clientCreatedBy}#end
         #@td("nowrap")${formatDate(var.clientCreateDate,"yyyy-MM-dd")}#*${var.clientCreateDate}*##end
