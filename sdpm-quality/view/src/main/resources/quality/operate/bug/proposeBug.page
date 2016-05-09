@@ -156,7 +156,9 @@
                 #@formControlDiv("col-8")
                     #@div(divClass="col-5")
 
-                        #tinyInput("text" "bugTitle" bug?.bugTitle?:bugTitle {"placeholder":"请输入bug名称","datatype":"*","nullmsg":"bug名称不能为空！","id":"版本","class":"input-text",
+                        #tinyInput(
+                            "text" "bugTitle" bug?.bugTitle?:bugTitle {"placeholder":"请输入bug名称","datatype":"*1-255",
+                            "nullmsg":"bug名称不能为空！","id":"版本","class":"input-text",
                             "ajaxurl":TINY_CONTEXT_PATH+adminPath+
                             "/quality/bug/bugTitleCheck?productId="+cookieProductId})
                     #end
@@ -315,7 +317,7 @@
     #@colLabel()关键词：#end
     #@formControlDiv("col-8")
         #@div(divClass="col-5")
-            #tinyInput("text" "bugKeywords" bug?.bugKeywords {"datatype":"","id":"关键词","class":"input-text"})
+            #tinyInput("text" "bugKeywords" bug?.bugKeywords {"datatype":"*1-255","id":"关键词","class":"input-text"})
         #end
     #end
     #@validateDiv("col-2")#end
