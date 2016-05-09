@@ -162,7 +162,7 @@
                 <div class="col-2 text-r"><label>文档URL：</label></div>
                 <div class="col-4">
                     #tinyInput(
-                   "text" "docUrl" ""{"placeholder":"相应的链接地址","datatype":"*4-16",
+                   "text" "docUrl" ""{"placeholder":"相应的链接地址","datatype":"*1-255",
                                    "id":"docurl","class":"input-text","ignore":"ignore"})
                 </div>
             </div>

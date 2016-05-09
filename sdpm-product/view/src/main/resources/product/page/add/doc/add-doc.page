@@ -89,7 +89,8 @@
         #@formControlDiv("col-4")
             #@div(divClass="col-12")
                 #tinyInput(
-                    "text" "docUrl" ""{"placeholder":"相应的链接地址","datatype":"*","ignore":"ignore","class":"input-text"})
+                    "text" "docUrl" ""{"placeholder":"相应的链接地址","datatype":"*1-255","ignore":"ignore","class":
+                    "input-text"})
             #end
         #end
         #@validateDiv("col-2")#end
