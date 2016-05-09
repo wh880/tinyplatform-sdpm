@@ -260,6 +260,7 @@
 
     #@div(divClass="infoContent")
         <p class="titleName">任务的一生</p>
+        <input name="userId" type="hidden" value="${userId}"/>
         #@table()
             #@thead()
             #end
@@ -384,3 +385,48 @@
         #end
     #end
 </div>
+<script type="text/javascript">
+    $(function(){
+        //状态改变，相应信息改变
+        $("select[name=taskStatus]").change(function(){
+            var statusVal=$(this).val();
+            var userId=$("input[name=userId]").val();
+            //已完成状态
+            if(statusVal=="3")
+            {
+                $("select[name=taskFinishedBy]").val(userId);
+                $("input[name=taskFinishedDate]").val(new Date().Format("yyyy-MM-dd hh:mm:ss"));
+            }
+
+            //已取消状态
+            if(statusVal=="5")
+            {
+                $("select[name=taskCanceledBy]").val(userId);
+                $("input[name=taskCloseDate]").val(new Date().Format("yyyy-MM-dd hh:mm:ss"));
+            }
+
+            //已关闭状态
+            if(statusVal=="6")
+            {
+                $("select[name=taskClosedBy]").val(userId);
+                $("input[name=taskCloseDate]").val(new Date().Format("yyyy-MM-dd hh:mm:ss"));
+            }
+        });
+    });
+
+    Date.prototype.Format = function (fmt) {
+        var o = {
+            "M+": this.getMonth() + 1, //月份
+            "d+": this.getDate(), //日
+            "h+": this.getHours(), //小时
+            "m+": this.getMinutes(), //分
+            "s+": this.getSeconds(), //秒
+            "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+            "S": this.getMilliseconds() //毫秒
+        };
+        if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+        for (var k in o)
+            if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+        return fmt;
+    }
+</script>

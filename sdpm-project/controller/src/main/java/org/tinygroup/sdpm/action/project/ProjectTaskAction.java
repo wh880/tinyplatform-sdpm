@@ -867,6 +867,7 @@ public class ProjectTaskAction extends BaseController {
         model.addAttribute("teamList", userService.findTeamUserListByProjectId(task.getTaskProject()));
         model.addAttribute("moduleList", generateModuleList(task.getTaskProject()));
         model.addAttribute("storyList", storyList);
+        model.addAttribute("userId",UserUtils.getUserId());
         return "project/edit/rightinfo/task/basicInfoEdit.pagelet";
     }
 
