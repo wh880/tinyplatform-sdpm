@@ -99,7 +99,8 @@
         #@colLabel()关键字#end
         #@formControlDiv("col-4")
             #@div(divClass="col-12")
-                #tinyInput("text" "docKeywords" ""{"placeholder":"","datatype":"","class":"input-text"})
+                #tinyInput(
+                    "text" "docKeywords" ""{"placeholder":"","datatype":"","class":"input-text","datatype":"*1-255"})
             #end
         #end
     #end

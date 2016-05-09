@@ -173,7 +173,8 @@
                 <div class="col-2 text-r"><label>关键字：</label></div>
                 <div class="col-4">
                     #tinyInput(
-                        "text" "docKeywords" doc?.docKeywords {"id":"docKeywords","class":"input-text"})
+                        "text" "docKeywords" doc?.docKeywords {"id":"docKeywords","class":"input-text","datatype":
+                        "*1-255"})
                 </div>
             </div>
             #@validateDiv("col-2")#end
