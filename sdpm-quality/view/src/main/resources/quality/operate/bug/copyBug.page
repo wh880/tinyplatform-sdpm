@@ -154,7 +154,8 @@
 			#@div(divClass="col-5")
 
 				#tinyInput("text" "bugTitle" bug?.bugTitle {"placeholder":"请输入bug名称","datatype":"*1-255","nullmsg":
-					"bug名称不能为空！","id":"版本","class":"input-text"})
+					"bug名称不能为空！","id":"版本","class":"input-text","ajaxurl":TINY_CONTEXT_PATH+adminPath+
+					"/quality/bug/bugTitleCheck?productId="+cookieProductId})
 			#end
 			#@div(divClass="col-3")
 				#@Tselect2F()
