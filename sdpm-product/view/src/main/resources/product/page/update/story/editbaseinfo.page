@@ -29,7 +29,7 @@
         #@formControlDiv("col-8")
             #@TzTreeSelect(
                 "productId" cookieProductId {"class":"input-text","datatype":"*","nullmsg":"所属产品不能为空！",
-                "data-URL":call("link",adminPath+"/productLine/userProductTree")})
+                "data-URL":call("link",adminPath+"/productLine/userProductTree"),"readonly":"readonly"})
                 <script>
                     $(function(){
                         var mUrl =  $("#modelA").attr("href");
@@ -181,7 +181,9 @@
         #@elementItem()
             #@colLabel()关键词：#end
             #@formControlDiv("col-8")
-                #tinyInput("text" "storyKeywords" story?.storyKeywords {"id":"storyKeywords","class":"input-text"})
+                #tinyInput(
+                    "text" "storyKeywords" story?.storyKeywords {"id":"storyKeywords","class":"input-text","datatype":
+                    "*1-255"})
             #end
             #@validateDiv("col-2")#end
         #end
