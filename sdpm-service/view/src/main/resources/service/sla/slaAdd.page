@@ -16,7 +16,7 @@
                 #@sdpmItem("客户名称" "*")
                     #@Tselect2F()
                         #@Tselect2Body(
-                            "clientId" sla?.clientId{"datatype":"*","id":"clientId",
+                            "clientId" sla?.clientId {"datatype":"*","id":"clientId",
                             "nullmsg":"客户名称不能为空","class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                             #@tinyOptionItem("")请选择#end
                             #foreach(l:list)
@@ -41,7 +41,7 @@
                 #@formControlDiv("col-4")
                     #@TzTreeSelect("productId" cookieProductId {"class":"input-text",
                         "datatype":"*","nullmsg":"所属产品不能为空！","data-URL":call("link",adminPath+
-                        "/productLine/userProductTree")})
+                        "/productLine/userProductTree"),"readonly":"readonly"})
                         <span>
                             #@hasMenu("newproduct")
                                 <a href="${TINY_CONTEXT_PATH +adminPath}/product/addproduct/addition "
@@ -97,7 +97,7 @@
             #@elementItem()
                 #@sdpmItem("服务协议标题" "*")
                     #tinyInput(
-                        "text" "slaTitle"sla?.slaTitle{"datatype":"*","id":"slaTitle","nullmsg":"协议标题不能为空！","class":
+                        "text" "slaTitle"sla?.slaTitle{"datatype":"*1-50","id":"slaTitle","nullmsg":"协议标题不能为空！","class":
                         "input-text"})
                 #end
             #end
@@ -105,7 +105,7 @@
                 #@sdpmItem("服务工时上限")
                 <div class="input-group">
                     #tinyInput(
-                        "text" "serviceEffortLimit" sla?.serviceEffortLimit{"id":"serviceEffortLimit","datatype":"/^[1-9]\d*$/",
+                        "text" "serviceEffortLimit" sla?.serviceEffortLimit{"placeholder":"必填","id":"serviceEffortLimit","datatype":"/^[1-9]\d*$/",
                         "class":"input-text"})
                     <span class="input-group-addon" id="basic-addon2">小时</span>
                 </div>
@@ -116,7 +116,7 @@
                 #@sdpmItem("服务响应时限")
                 <div class="input-group">
                     #tinyInput(
-                        "text" "serviceReplyTimeLimit" sla?.serviceReplyTimeLimit{"id":
+                        "text" "serviceReplyTimeLimit" sla?.serviceReplyTimeLimit{"placeholder":"必填","id":
                         "serviceReplyTimeLimit","datatype":"/^[1-9]\d*$/","class":
                         "input-text select2"})
                     <span class="input-group-addon" id="basic-addon2">小时</span>
@@ -127,7 +127,7 @@
                 #@sdpmItem("需求回访时限")
                     <div class="input-group">
                         #tinyInput(
-                        "text" "serviceReviewTimeLimit" sla?.serviceReviewTimeLimit{"id":
+                        "text" "serviceReviewTimeLimit" sla?.serviceReviewTimeLimit{"placeholder":"必填","id":
                             "serviceReviewTimeLimit","datatype":"/^[1-9]\d*$/","class":"input-text select2"})
                         <span class="input-group-addon" id="basic-addon2">小时</span>
                     </div>
@@ -136,13 +136,13 @@
             #@elementItem()
                 #@sdpmItem("服务请求数上限")
                     #tinyInput(
-                        "text" "serviceRequestLimit" sla?.serviceRequestLimit{"id":"serviceRequestLimit",
+                        "text" "serviceRequestLimit" sla?.serviceRequestLimit{"placeholder":"必填","id":"serviceRequestLimit",
                         "datatype":"/^[1-9]\d*$/","class":"input-text"})
                 #end
             #end
             #@elementItem()
                 #@sdpmItem("现场服务次数上限")
-                    #tinyInput("text" "serviceTsOnsiteLimit" sla?.serviceTsOnsiteLimit{"id":
+                    #tinyInput("text" "serviceTsOnsiteLimit" sla?.serviceTsOnsiteLimit{"placeholder":"必填","id":
                         "serviceTsOnsiteLimit","datatype":"/^[1-9]\d*$/","class":"input-text"})
                 #end
             #end
