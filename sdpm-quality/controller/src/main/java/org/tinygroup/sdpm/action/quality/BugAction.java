@@ -28,10 +28,7 @@ import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
-import org.tinygroup.sdpm.project.service.inter.BuildService;
-import org.tinygroup.sdpm.project.service.inter.ProjectProductService;
-import org.tinygroup.sdpm.project.service.inter.ProjectService;
-import org.tinygroup.sdpm.project.service.inter.TaskService;
+import org.tinygroup.sdpm.project.service.inter.*;
 import org.tinygroup.sdpm.quality.dao.pojo.BugCount;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityCaseStep;
@@ -92,6 +89,8 @@ public class BugAction extends BaseController {
     private RequestService requestService;
     @Autowired
     private ActionService actionService;
+    @Autowired
+    private ProjectStoryService projectStoryService;
 
     @ModelAttribute
     public void init(Model model) {
@@ -405,7 +404,7 @@ public class BugAction extends BaseController {
     }
 
     @RequestMapping("/sure")
-    public String makeSure(QualityBug bug, SystemAction systemAction) {
+    public String makeSure(QualityBug bug, SystemAction systemAction, String lastAddress) {
         QualityBug qualityBugOld = bugService.findQualityBugById(bug.getBugId());
         if (qualityBugOld.getBugAssignedTo() != bug.getBugAssignedTo()) {
             bug.setBugAssignedDate(new Date());
@@ -423,6 +422,9 @@ public class BugAction extends BaseController {
                 , qualityBugOld
                 , bug
                 , systemAction.getActionComment());
+        if (!StringUtil.isBlank(lastAddress)) {
+            return "redirect:" + lastAddress;
+        }
         return "redirect:" + "/a/quality/bug";
     }
 
@@ -459,7 +461,7 @@ public class BugAction extends BaseController {
     }
 
     @RequestMapping("/assignTo")
-    public String assign(QualityBug bug, SystemAction systemAction) {
+    public String assign(QualityBug bug, SystemAction systemAction, String lastAddress) {
         QualityBug qualityBugOld = bugService.findQualityBugById(bug.getBugId());
         bug.setBugAssignedDate(new Date());
         bugService.updateBug(bug);
@@ -474,6 +476,9 @@ public class BugAction extends BaseController {
                 , qualityBugOld
                 , bug
                 , systemAction.getActionComment());
+        if (!StringUtil.isBlank(lastAddress)) {
+            return "redirect:" + lastAddress;
+        }
         return "redirect:" + "/a/quality/bug";
     }
 
@@ -522,6 +527,7 @@ public class BugAction extends BaseController {
         model.addAttribute("userList", orgUsers);
         model.addAttribute("bug", bug);
         model.addAttribute("bugList", bugList);
+
         return "/quality/operate/bug/solution.page";
     }
 
@@ -529,7 +535,7 @@ public class BugAction extends BaseController {
     public String solve(QualityBug bug,
                         SystemAction systemAction,
                         @RequestParam(value = "file", required = false) MultipartFile[] file,
-                        String[] title, UploadProfile uploadProfile) throws IOException {
+                        String[] title, UploadProfile uploadProfile, String lastAddress) throws IOException {
         QualityBug qualityBug = bugService.findQualityBugById(bug.getBugId());
         if (qualityBug.getBugAssignedTo() != bug.getBugAssignedTo()) {
             bug.setBugAssignedDate(new Date());
@@ -548,6 +554,9 @@ public class BugAction extends BaseController {
                 , qualityBug
                 , bug
                 , systemAction.getActionComment());
+        if (!StringUtil.isBlank(lastAddress)) {
+            return "redirect:" + lastAddress;
+        }
         return "redirect:" + "/a/quality/bug";
     }
 
@@ -567,7 +576,7 @@ public class BugAction extends BaseController {
     }
 
     @RequestMapping("/close")
-    public String close(QualityBug bug, SystemAction systemAction) {
+    public String close(QualityBug bug, SystemAction systemAction, String lastAddress) {
         QualityBug qualityBug = bugService.findQualityBugById(bug.getBugId());
         bug.setBugClosedBy(userUtils.getUserId());
         bug.setBugClosedDate(new Date());
@@ -583,6 +592,10 @@ public class BugAction extends BaseController {
                 , qualityBug
                 , bug
                 , systemAction.getActionComment());
+
+        if (!StringUtil.isBlank(lastAddress)) {
+            return "redirect:" + lastAddress;
+        }
         return "redirect:" + "/a/quality/bug";
     }
 
@@ -669,9 +682,11 @@ public class BugAction extends BaseController {
     public String add(Model model,Integer projectId) {
         List<Project> projects = projectService.getUserProjectList(UserUtils.getUserId());
         List<OrgUser> orgUsers = userService.findUserList(null);
+        List<ProductStory> storyList = projectStoryService.findStoryByProject(projectId);
         model.addAttribute("projectList", projects);
         model.addAttribute("userList", orgUsers);
         model.addAttribute("projectId", projectId);
+        model.addAttribute("storyList", storyList);
         return "/quality/operate/bug/proposeBug.page";
     }
 

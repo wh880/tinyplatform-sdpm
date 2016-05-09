@@ -26,7 +26,7 @@
                                     var pId = treeNode.id;
                                     if(pId>0){
                                         ajaxRead("${sid}","moduleId","moduleId","moduleName","/quality/bug/ajax/module?moduleRoot="+pId,"${bug?.moduleId?:(moduleId?:0)}","module");
-                                        ajaxRead("${sid}","projectId","projectId","projectName","/quality/bug/ajax/project?productId="+pId,"${bug?.projectId}");
+                                        ajaxRead("${sid}","projectId","projectId","projectName","/quality/bug/ajax/project?productId="+pId,"${projectId}");
                                         $("#modelBug").attr("href",mUrl+pId);
                                         $("input[name=bugOpenedBuild]").attr("productId",pId);
                                     }
@@ -185,16 +185,33 @@
             #@formControlDiv("col-8")
                 #@div(divClass="col-5")
                     #@Tselect2F()
-                        #@Tselect2Body("storyId" "" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        #if(projectId)
+                            #@Tselect2Body("" "" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                                <option value=""></option>
+                                #foreach(s:storyList)
+                                    <option value="${s.storyId}">${s.storyId}
+                                        ：${s.storyTitle}（优先级：${s.storyPri}，预计工时:${s.storyEstimate}）
+                                    </option>
+                                #end
+                        #end
+                        #else
+                            #@Tselect2Body("storyId" "" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+
+                            #end
                         #end
                         #@Tselect2Fix()
                             #set(m=menuService.getMenu("product-demand-add"))
                             #if(m)
                                 <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
                             #end
+                            #if(projectId)
+                                <a href="${TINY_CONTEXT_PATH+adminPath}/project/demand/index">全部</a>
+
+                            #else
                             #set(m=menuService.getMenu("product-demand"))
                             #if(m)
                                 <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
+                            #end
                             #end
                         #end
                     #end
