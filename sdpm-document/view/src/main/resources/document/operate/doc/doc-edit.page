@@ -162,7 +162,7 @@
                 <div class="col-2 text-r"><label>文档URL：</label></div>
                 <div class="col-4">
                     #tinyInput(
-                   "text" "docUrl" ""{"placeholder":"相应的链接地址","datatype":"*1-255",
+                   "text" "docUrl" ""{"placeholder":"相应的链接地址","datatype":"*0-255",
                                    "id":"docurl","class":"input-text","ignore":"ignore"})
                 </div>
             </div>
@@ -174,7 +174,7 @@
                 <div class="col-4">
                     #tinyInput(
                         "text" "docKeywords" doc?.docKeywords {"id":"docKeywords","class":"input-text","datatype":
-                        "*1-255"})
+                        "*0-255"})
                 </div>
             </div>
             #@validateDiv("col-2")#end

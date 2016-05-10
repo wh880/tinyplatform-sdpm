@@ -95,7 +95,7 @@
         #@formControlDiv("col-4")
             #@div(divClass="col-12")
                 #tinyInput(
-                    "text" "docTitle" ""{"placeholder":"1~16个字符，字母/中文/数字/下划线","datatype":"*1-16","nullmsg":"标题不能为空！",
+                    "text" "docTitle" ""{"placeholder":"1~16个字符，字母/中文/数字/下划线","datatype":"*1-255","nullmsg":"标题不能为空！",
                     "class":"input-text","ajaxurl":TINY_CONTEXT_PATH+adminPath+
                     "/document/doc/docTitleCheck?"+tinyRequestQueryString})
             #end
@@ -108,7 +108,8 @@
         #@formControlDiv("col-8")
             #@div(divClass="col-6")
                 #tinyInput(
-                    "text" "docUrl" ""{"placeholder":"相应的链接地址","nullmsg":"链接不能为空！","id":"docUrl","class":"input-text"})
+                    "text" "docUrl" ""{"placeholder":"相应的链接地址","nullmsg":"链接不能为空！","id":"docUrl","class":"input-text",
+                    "datatype":"*0-255"})
             #end
         #end
         #@validateDiv("col-2")#end
@@ -118,7 +119,8 @@
         #@colLabel()关键字#end
         #@formControlDiv("col-8")
             #@div(divClass="col-6")
-                #tinyInput("text" "docKeywords" ""{"placeholder":"","id":"docKeywords","class":"input-text"})
+                #tinyInput("text" "docKeywords" ""{"placeholder":"","id":"docKeywords","class":"input-text","datatype":
+                    "*0-255"})
             #end
         #end
     #end
