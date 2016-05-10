@@ -9,7 +9,8 @@
         #@formControlDiv("col-8")
             #@div(divClass="col-5")
                 #@Tselect2F()
-                    #@Tselect2Body("docModule" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                    #@Tselect2Body("docModule" "IN" {"class":"input-text select2","datatype":"*","nullmsg":
+                        "所属分类不能为空！"}) ##,"multiple":"multiple"加上为多选项
                         <option value="0">/</option>
                         #foreach(l : moduleList)
                             <option value="${l?.moduleId}">${l?.moduleName}</option>
@@ -18,6 +19,7 @@
                 #end
             #end
         #end
+        #@validateDiv("col-2")#end
     #end
 
     #@elementItem()

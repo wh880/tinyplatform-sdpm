@@ -6,13 +6,14 @@
 <div class="infoContent">
     <p class="titleName">创建文档</p>
     #@elementItem()
-        #@colLabel()所属项目#end
+        #@colLabel()<span class="c-red">*</span>所属项目#end
         #@formControlDiv("col-8")
             #@div(divClass="col-6")
 
                 #@Tselect2F()
                     #@Tselect2Body(
-                        "docProject" moduleRoot {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        "docProject" moduleRoot {"class":"input-text select2","datatype":"*","nullmsg":
+                        "所属项目不能为空！"}) ##,"multiple":"multiple"加上为多选项
                         <option></option>
                         #foreach(project : projectList)
                             <option value="${project?.projectId}">${project?.projectName}</option>
@@ -40,6 +41,7 @@
                 #end
             #end
         #end
+        #@validateDiv("col-2")#end
     #end
 
     #@elementItem()
@@ -66,15 +68,17 @@
     #end
 
     #@elementItem()
-        #@colLabel()所属分类#end
+        #@colLabel()<span class="c-red">*</span>所属分类#end
         #@formControlDiv("col-8")
             #@div(divClass="col-6")
                 #@Tselect2F()
-                    #@Tselect2Body("docModule" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                    #@Tselect2Body("docModule" "IN" {"class":"input-text select2","datatype":"*","nullmsg":
+                        "所属分类不能为空！"}) ##,"multiple":"multiple"加上为多选项
                     #end
                 #end
             #end
         #end
+        #@validateDiv("col-2")#end
     #end
 
     #@elementItem()
@@ -189,6 +193,9 @@
                 }
             })
 
+
+        });
+        $(function () {
             $("form[name=thisform]").Validform({
                 tiptype: 2
             });
