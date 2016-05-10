@@ -3,8 +3,10 @@
 #@colLabel()#end
 <div class="col-8">
 #@div(divClass="col-8")
-	
-	#tinyInput("text" "docLibName" doclib?.docLibName {"style":"height:29px","placeholder":"文档库名称","id":"docLibId","class":"input-text"})
+
+    #tinyInput(
+        "text" "docLibName" doclib?.docLibName {"style":"height:29px","placeholder":"文档库名称","datatype":"*1-90","id":
+        "docLibId","class":"input-text"})
 	
 #end
 <div class="col-3">
@@ -19,4 +21,10 @@
             user_del(this, '1');
         });
     })
+
+    $(function () {
+        $("form[name=thisform]").Validform({
+            tiptype: 2
+        });
+    });
 </script>
