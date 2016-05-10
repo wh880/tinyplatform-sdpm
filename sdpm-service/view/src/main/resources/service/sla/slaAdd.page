@@ -41,7 +41,7 @@
                 #@formControlDiv("col-4")
                     #@TzTreeSelect("productId" cookieProductId {"class":"input-text",
                         "datatype":"*","nullmsg":"所属产品不能为空！","data-URL":call("link",adminPath+
-                        "/productLine/userProductTree")})
+                        "/productLine/userProductTree"),"readonly":"readonly"})
                         <span>
                             #@hasMenu("newproduct")
                                 <a href="${TINY_CONTEXT_PATH +adminPath}/product/addproduct/addition "
@@ -97,7 +97,8 @@
             #@elementItem()
                 #@sdpmItem("服务协议标题" "*")
                     #tinyInput(
-                        "text" "slaTitle"sla?.slaTitle{"datatype":"*","id":"slaTitle","nullmsg":"协议标题不能为空！","class":
+                        "text" "slaTitle"sla?.slaTitle{"datatype":"*1-255","id":"slaTitle","nullmsg":"协议标题不能为空！",
+                        "class":
                         "input-text"})
                 #end
             #end
@@ -149,7 +150,7 @@
             #@elementItem()
                 #@sdpmItem("服务专员")
                     #tinyInput("text" "serviceSpecialist" sla?.serviceSpecialist{"id":"serviceSpecialist",
-                        "class":"input-text"})
+                        "class":"input-text","datatype":"*0-255"})
                 #end
             #end
             #@elementItem()
@@ -174,7 +175,8 @@
             #@elementItem()
                 #@sdpmItem("创建人")
                     #tinyInput(
-                        "text" "slaCreatedBy" sla?.slaCreatedBy{"id":"slaCreatedBy","class":"input-text"})
+                        "text" "slaCreatedBy" sla?.slaCreatedBy{"id":"slaCreatedBy","class":"input-text","datatype":
+                        "*0-50"})
                 #end
             #end
             #@elementItem()
@@ -187,7 +189,7 @@
             #@elementItem()
                 #@sdpmItem("批准人")
                     #tinyInput("text" "slaReviewedBy" sla?.slaReviewedBy{"id":"slaReviewedBy","class":
-                        "input-text"})
+                        "input-text","datatype":"*0-50"})
                 #end
             #end
             #@elementItem()
