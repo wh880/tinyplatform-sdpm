@@ -167,7 +167,7 @@
         #@elementItem()
             #@sdpmItem("请求标题" "*")
                 #tinyInput(
-                    "text" "requestTitle" request?.requestTitle{"placeholder":"请求标题","datatype":"*","nullmsg":
+                    "text" "requestTitle" request?.requestTitle{"placeholder":"请求标题","datatype":"*1-255","nullmsg":
                     "请求标题不能为空！","class":"input-text select2"})
             #end
         #end
