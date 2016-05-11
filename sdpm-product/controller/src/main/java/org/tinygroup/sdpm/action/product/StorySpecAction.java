@@ -40,7 +40,7 @@ public class StorySpecAction extends BaseController {
     private ActionService actionService;
 
     @RequestMapping("/find")
-    public String find(Integer storyId, Model model) {
+    public String find(Integer storyId, Model model,@CookieValue(value= ProductUtils.COOKIE_PRODUCT_ID)String currentProductId) {
         ProductStory story = storyService.findStory(storyId);
         ProductStorySpec storySpec = new ProductStorySpec();
         storySpec.setStoryVersion(story.getStoryVersion());
@@ -48,6 +48,11 @@ public class StorySpecAction extends BaseController {
         List<ProductStorySpec> storySpecs = storySpecService.findStorySpecList(storySpec, null, null);
         storySpec = storySpecs != null && storySpecs.size() > 0 ? storySpecs.get(0) : new ProductStorySpec();
         model.addAttribute("storySpec", storySpec);
+
+        if(story.getProductId()!=Integer.parseInt(currentProductId))
+        {
+            return "redirect:" + adminPath + "/product/story";
+        }
 
         //读取备注信息
         String actionComment=getStoryRemark(story);

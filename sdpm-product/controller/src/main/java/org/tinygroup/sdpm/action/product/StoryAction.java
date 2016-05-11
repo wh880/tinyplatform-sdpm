@@ -33,6 +33,7 @@ import org.tinygroup.sdpm.system.service.inter.ActionService;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.sdpm.system.service.inter.ProfileService;
 import org.tinygroup.sdpm.util.LogUtil;
+import org.tinygroup.sdpm.util.ProductUtils;
 import org.tinygroup.sdpm.util.ProjectOperate;
 import org.tinygroup.sdpm.util.StoryUtil;
 import org.tinygroup.tinysqldsl.Pager;
@@ -389,7 +390,8 @@ public class StoryAction extends BaseController {
     @RequestMapping("/{forwordPager}/findPager")
     public String find(Integer storyId,
                        @PathVariable(value = "forwordPager") String forwordPager,
-                       Model model) {
+                       Model model,
+                       @CookieValue(value= ProductUtils.COOKIE_PRODUCT_ID)String currentProductId) {
         ProductStory productStory = storyService.findStory(storyId);
         ProductStorySpec storySpec = new ProductStorySpec();
         storySpec.setStoryId(storyId);
@@ -421,6 +423,11 @@ public class StoryAction extends BaseController {
 
         //读取备注信息
         String actionComment=getStoryRemark(productStory);
+
+        if(productStory.getProductId()!=Integer.parseInt(currentProductId))
+        {
+            return "redirect:" + adminPath + "/product/story";
+        }
 
         if ("productDemandClose".equals(forwordPager))
         {
