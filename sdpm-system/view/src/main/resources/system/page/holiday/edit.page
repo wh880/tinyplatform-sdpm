@@ -9,7 +9,9 @@
 				 #@elementItem()
 			        #@colLabel()名称：#end
 				        #@formControlDiv("col-8")
-				          #tinyInput("text" "holidayName" holiday?.holidayName{"id":"yujigongshi","class":"input-text"})
+							#tinyInput(
+								"text" "holidayName" holiday?.holidayName{"id":"yujigongshi","class":"input-text",
+								"datatype":"*1-30"})
 				        #end
 			        #@validateDiv("col-2")#end
 			      #end
@@ -74,3 +76,11 @@
 ##<div style="width:30%;float:right">
 ##		#TypeInfo("holiday-edit")
 ##</div>
+
+<script>
+    $(function () {
+        $("form[name=thisform]").Validform({
+            tiptype: 2
+        });
+    })
+</script>
