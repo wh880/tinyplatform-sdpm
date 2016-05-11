@@ -176,6 +176,8 @@ public class TestVersionAction extends BaseController {
             build.setBuildProduct(cookieProductId);
         }
 
+        build.setBuildDeleted("0");//未删除状态
+
         List<ProjectBuild> builds = buildService.findListBuild(build);
         model.addAttribute("projectId", projectId);
         model.addAttribute("projectList", projects);
@@ -304,6 +306,7 @@ public class TestVersionAction extends BaseController {
         if (projectBuild.getBuildProduct() < 1 || projectBuild.getBuildProduct() == null) {
             return new ArrayList<ProjectBuild>();
         }
+        projectBuild.setBuildDeleted("0");//未删除状态
         return buildService.findListBuild(projectBuild);
     }
 
