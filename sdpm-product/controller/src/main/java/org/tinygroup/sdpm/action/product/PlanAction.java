@@ -14,6 +14,7 @@ import org.tinygroup.sdpm.product.service.inter.ProductService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.util.CookieUtils;
 import org.tinygroup.sdpm.util.LogUtil;
+import org.tinygroup.sdpm.util.ProductUtils;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -139,6 +140,10 @@ public class PlanAction extends BaseController {
         model.addAttribute("product", product);
         ProductPlan plan = planService.findPlan(planId);
         model.addAttribute("plan", plan);
+        if(plan.getProductId()!=Integer.parseInt(cookieProductId))
+        {
+            return "redirect:" + adminPath + "/product/plan/content";
+        }
         return "/product/page/update/plan/product-plan-update";
     }
 
@@ -157,7 +162,8 @@ public class PlanAction extends BaseController {
                           Integer planId,
                           Model model,
                           Integer no,
-                          HttpServletRequest request) {
+                          HttpServletRequest request,
+                          @CookieValue(value= ProductUtils.COOKIE_PRODUCT_ID)String currentProductId) {
         ProductPlan plan = null;
         if (no != null) {
             String result = CookieUtils.getCookie(request, productUtils.COOKIE_PRODUCT_ID);
@@ -178,6 +184,12 @@ public class PlanAction extends BaseController {
             plan = planService.findPlan(planId);
         }
         model.addAttribute("plan", plan);
+
+        if(plan.getProductId()!=Integer.parseInt(currentProductId))
+        {
+            return "redirect:" + adminPath + "/product/plan/content";
+        }
+
         if ("reRelateStory".equals(forwordPager)) {
             return "/product/page/relation/plan/product-al-req.page";
         } else if ("noRelateStory".equals(forwordPager)) {
