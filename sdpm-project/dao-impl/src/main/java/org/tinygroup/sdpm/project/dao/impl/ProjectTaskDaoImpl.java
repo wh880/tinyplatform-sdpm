@@ -661,11 +661,12 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
      */
     @Override
     public List<QualityBug> findRelationBugByProjectID(Integer projectId) {
-        Select select = selectFrom(QUALITY_BUGTABLE)
+        /*Select select = selectFrom(QUALITY_BUGTABLE)
                 .where(QUALITY_BUGTABLE.BUG_ID
                         .inExpression(subSelect(select(PROJECT_PRODUCTTABLE.PRODUCT_ID)
                                 .from(PROJECT_PRODUCTTABLE)
-                                .where(PROJECT_PRODUCTTABLE.PROJECT_ID.eq(projectId)))));
+                                .where(PROJECT_PRODUCTTABLE.PROJECT_ID.eq(projectId)))));*/
+        Select select = selectFrom(QUALITY_BUGTABLE).where(and(QUALITY_BUGTABLE.PROJECT_ID.eq(projectId),QUALITY_BUGTABLE.DELETED.eq(0)));
         return getDslSession().fetchList(select, QualityBug.class);
     }
 

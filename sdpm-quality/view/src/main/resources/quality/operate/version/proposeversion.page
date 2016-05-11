@@ -220,7 +220,7 @@
                         jumpUrl = currentAddress;
                     }else{
                         if(!oldUrl) {
-                            olUrl = "/a/quality/version?status=tvernotest&currentPageId=5"
+                            oldUrl = "/a/quality/version?status=tvernotest&currentPageId=5"
                         }
                         jumpUrl = oldUrl
                     }

@@ -3,9 +3,14 @@
 #foreach(var:pager.records)
     #@tr()
         #@td()<input type="checkbox" value="${var.slaId}" name="idCheck">#end
-        #@td()<a
-                href="${TINY_CONTEXT_PATH+adminPath}/service/client/clientSla?id=${var.clientId}">${var.clientName}</a>#end
-        #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/service/sla/slaContent?id=${var.slaId}">${var.slaTitle}#end
+        #@td()
+            <div style="width: 150px;overflow: hidden;">
+                <a href="${TINY_CONTEXT_PATH+adminPath}/service/client/clientSla?id=${var.clientId}" title="${var.clientName}">${var.clientName}</a>#end
+            </div>
+        #@td()
+            <div style="width: 150px;overflow: hidden;">
+                <a href="${TINY_CONTEXT_PATH+adminPath}/service/sla/slaContent?id=${var.slaId}" title="${var.slaTitle}">${var.slaTitle}#end
+            </div>
         #@td("nowrap")${var.cilentProductVision}#end
         #@td("nowrap")${var.serviceLevel}#end
         #@td("nowrap")${var.slaCreatedBy}#end

@@ -32,10 +32,6 @@ public class ProjectCommonAction extends BaseController {
 
     @RequestMapping("/selModelTask")
     public String selModelTask(String moduleId) {
-        if(!StringUtil.isBlank(moduleId)&&StringUtil.contains(moduleId,"p"))
-        {
-            return "redirect:" + adminPath + "/project/task/index?choose=1";
-        }
         return "redirect:" + adminPath + "/project/task/index?moduleId=" + moduleId;
     }
 

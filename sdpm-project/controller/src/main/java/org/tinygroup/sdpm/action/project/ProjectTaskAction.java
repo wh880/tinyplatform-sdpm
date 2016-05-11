@@ -707,15 +707,27 @@ public class ProjectTaskAction extends BaseController {
                 //String newModuleId = moduleId.replaceAll("[a-zA-Z]","" ); //去掉moduleId中的字符p
                 moduleIds = ModuleUtil.getConditionByRoot(Integer.parseInt(moduleId.substring(1)), "story");
                 SystemModule module = new SystemModule();
-                module.setModuleOwner(moduleId.substring(1));
-                module.setModuleType("projectProduct");
-                module.setModuleRoot(projectId);
+//                module.setModuleOwner(moduleId.substring(1));
+                module.setModuleType("story");
+                module.setModuleRoot(Integer.parseInt(moduleId.substring(1)));
                 List<SystemModule> moduleList = moduleService.findModuleList(module);
-                moduleIds = StringUtil.isBlank(moduleIds) ? moduleList.get(0).getModuleId().toString() : moduleIds.substring(1, moduleIds.length() - 1) + "," + moduleList.get(0).getModuleId().toString();
+//                moduleIds = StringUtil.isBlank(moduleIds) ? moduleList.get(0).getModuleId().toString() : moduleIds.substring(1, moduleIds.length() - 1) + "," + moduleList.get(0).getModuleId().toString();
+
+                if(moduleList.size()==0)
+                {
+                    return "redirect:" + adminPath + "/project/task/index?choose=1";
+                }
+                String[] strings=new String[moduleList.size()];
+                for(int i=0;i<moduleList.size();i++)
+                {
+                    strings[i]=String.valueOf(moduleList.get(i).getModuleId());
+                }
+                carrier.putIns("taskModule", strings);
             } else {
-                moduleIds = ModuleUtil.getCondition(Integer.parseInt(moduleId));
+//                moduleIds = ModuleUtil.getCondition(Integer.parseInt(moduleId));
+                String[] strings={moduleId};
+                carrier.putIns("taskModule", strings);
             }
-            carrier.putIns("taskModule", moduleIds.split(","));
         }
         //默认显示未关闭任务
         if (statu == null && choose == null) {
@@ -855,6 +867,7 @@ public class ProjectTaskAction extends BaseController {
         model.addAttribute("teamList", userService.findTeamUserListByProjectId(task.getTaskProject()));
         model.addAttribute("moduleList", generateModuleList(task.getTaskProject()));
         model.addAttribute("storyList", storyList);
+        model.addAttribute("userId",UserUtils.getUserId());
         return "project/edit/rightinfo/task/basicInfoEdit.pagelet";
     }
 

@@ -208,7 +208,7 @@
                 {
                     for(var j=taskNameArray.length-1;i<j;j--)
                     {
-                        if(taskNameArray[i]==taskNameArray[j])
+                        if(isNotNull(taskNameArray[i])&&isNotNull(taskNameArray[j])&&taskNameArray[i]==taskNameArray[j])
                         {
                             layer.msg("第"+(i+1)+"行和第"+(j+1)+"行任务名称相同");
                             return false;
@@ -277,7 +277,11 @@
                 }
             }
         });
-    })
+    });
+    function isNotNull(str)
+    {
+        return (str==null||str=="")?false:true;
+    }
 </script>
 #@dialog("myModal")
     #@dialogHeader()对话框标题#end
