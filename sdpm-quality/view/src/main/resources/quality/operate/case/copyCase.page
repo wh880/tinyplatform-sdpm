@@ -20,7 +20,7 @@
             #@div(divClass="col-5")
                 #@TzTreeSelect(
                     "productId" testCase?.productId?:cookieProductId {"class":"input-text","datatype":"*","nullmsg":"所属产品不能为空！",
-                    "data-URL":call("link",adminPath+"/productLine/userProductTree")})
+                    "data-URL":call("link",adminPath+"/productLine/userProductTree"),"readonly":"readonly"})
                     <script>
                         $(function(){
                             var mUrl = $("#modelA").attr("href");

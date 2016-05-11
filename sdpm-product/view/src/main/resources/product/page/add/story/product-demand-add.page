@@ -271,7 +271,7 @@
     #@colLabel()关键词：#end
     #@formControlDiv("col-4")
         #tinyInput(
-            "text" "storyKeywords" ""{"id":"text","class":"input-text","datatype":"*1-255"})
+            "text" "storyKeywords" ""{"id":"text","class":"input-text","datatype":"*0-255"})
     #end
     #@validateDiv("col-2")#end
 #end

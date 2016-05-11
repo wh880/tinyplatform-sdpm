@@ -9,7 +9,7 @@
         #@formControlDiv("col-8")
                     #@TzTreeSelect(
                         "productId" bug?.productId {"class":"input-text","datatype":"*","nullmsg":"所属产品不能为空！",
-                        "data-URL":call("link",adminPath+"/productLine/userProductTree")})
+                        "data-URL":call("link",adminPath+"/productLine/userProductTree"),"readonly":"readonly"})
                     <script>
                         $(function(){
                             var mUrl = $("#modelA").attr("href");

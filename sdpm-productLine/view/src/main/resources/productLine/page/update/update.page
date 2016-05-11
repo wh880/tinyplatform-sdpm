@@ -5,7 +5,7 @@
 
     #@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/productLine/update" "post" )
         #hiddenInput("","productLineId","",productLine?.productLineId)
-、
+
         #@elementItem()
             #@colLabel()<span class="c-red">*</span>产品线名称：#end
             #@formControlDiv("col-4")
