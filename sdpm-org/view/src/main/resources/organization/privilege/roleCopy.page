@@ -5,7 +5,7 @@
             #@colLabel("col-2")<span class="c-red">*</span>角色名称：#end
             #@gridSysCol(7)
                 #tinyInput(
-                    "text" "orgRoleName" role?.orgRoleName {"placeholder":"","datatype":"*","nullmsg":"角色名不能为空！",
+                    "text" "orgRoleName" role?.orgRoleName {"placeholder":"","datatype":"*1-20","nullmsg":"角色名不能为空！",
                     "id":"username","class":"input-text"})
             #end
         #end
@@ -22,7 +22,7 @@
         #@gridSysRow()
             #@colLabel("col-2")角色描述：#end
             #@gridSysCol(7)
-                #tinyInput("text" "orgRoleRemarks" role?.orgRoleRemarks{"class":"input-text"})
+                #tinyInput("text" "orgRoleRemarks" role?.orgRoleRemarks{"class":"input-text","datatype":"*0-255"})
             #end
         #end
         #@gridSysRow()
