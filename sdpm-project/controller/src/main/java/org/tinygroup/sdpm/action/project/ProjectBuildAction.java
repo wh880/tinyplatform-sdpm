@@ -17,6 +17,7 @@ import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.service.inter.StoryService;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
+import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
 import org.tinygroup.sdpm.project.service.inter.BuildService;
 import org.tinygroup.sdpm.project.service.inter.ProjectProductService;
 import org.tinygroup.sdpm.project.service.inter.ProjectService;
@@ -29,6 +30,7 @@ import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;
 import org.tinygroup.sdpm.system.service.inter.ProfileService;
 import org.tinygroup.sdpm.util.LogUtil;
+import org.tinygroup.sdpm.util.ProjectOperate;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -65,7 +67,7 @@ public class ProjectBuildAction extends BaseController {
 
     @RequiresPermissions("version")
     @RequestMapping("/index")
-    public String index(Model model, HttpServletRequest request, HttpServletResponse response)
+    public String index(Model model, HttpServletRequest request, HttpServletResponse response,@CookieValue(value= ProjectOperate.COOKIE_PROJECT_ID)String currentProjectId)
     {
         Integer projectId = projectOperate.getCurrentProjectId(request, response);
         if (projectId == null)
@@ -74,6 +76,15 @@ public class ProjectBuildAction extends BaseController {
         }
         Project project = projectService.findProjectById(projectId);
         model.addAttribute("project", project);
+
+        List<ProjectProduct> projectProductList=projectProductService.findProductListByProjectId(Integer.parseInt(currentProjectId));
+        if(projectProductList.size()==0)
+        {
+            model.addAttribute("linkInfo",1);
+        }else
+        {
+            model.addAttribute("linkInfo",0);
+        }
 
         return "project/index/build/index";
     }

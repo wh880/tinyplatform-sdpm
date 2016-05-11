@@ -46,3 +46,12 @@
         #end
     #end
 #end
+<script type="text/javascript">
+    $(function(){
+        if(${linkInfo}==1)
+        {
+            layer.msg("请先关联产品");
+            window.location="${TINY_CONTEXT_PATH +adminPath}/project/product/findLinkProduct";
+        }
+    });
+</script>
