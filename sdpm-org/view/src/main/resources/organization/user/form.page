@@ -26,7 +26,8 @@
                         #@elementItem()
                             #@colLabel("col-3")<span class="c-red">*</span>真实姓名：#end
                             #@formControlDiv("col-6")
-                                #tinyInput("text" "orgUserRealName" user?.orgUserRealName {"datatype":"*1-20","nullmsg":"用户真实姓名不能为空！","id":"org_user_real_name","class":
+                                #tinyInput("text" "orgUserRealName" user?.orgUserRealName {"datatype":"*2-6","nullmsg":
+                                    "用户真实姓名不能为空！","id":"org_user_real_name","class":
                                     "input-text"})
                             #end
                             #@validateDiv("col-3")#end
@@ -34,7 +35,7 @@
                         #@elementItem()
                             #@colLabel("col-3")所属部门：#end
                             #@formControlDiv("col-6")
-                                #TzTreeSelect("orgDeptId" dept?.orgDeptId {"datatype":"*","class":"input-text",
+                                #TzTreeSelect("orgDeptId" dept?.orgDeptId {"datatype":"*1-90","class":"input-text",
                                     "data-URL":TINY_CONTEXT_PATH+adminPath+"/org/dept/data?check=n"} )
                             #end
                             #@validateDiv("col-3")#end
@@ -42,7 +43,8 @@
                         #@elementItem()
                             #@colLabel("col-3")职位：#end
                             #@formControlDiv("col-6")
-                                #tinyInput("text" "orgUserRole" user?.orgUserRole{"class":"input-text"})
+                                #tinyInput(
+                                    "text" "orgUserRole" user?.orgUserRole{"class":"input-text","datatype":"*1-20"})
                             #end
                             #@validateDiv("col-3")#end
                         #end
