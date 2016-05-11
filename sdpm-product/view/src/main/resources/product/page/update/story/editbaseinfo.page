@@ -237,11 +237,11 @@
                             "/org/user/ajax/userInConditionAndTeam?productId="+story?.productId
                         {"id":"reviewedSelect","dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询指派人"})
                         #@Tselect2Fix()
-                            #set(m=menuService.getMenu("pro-team-report"))
+                            #set(m=menuService.getMenu("product-team-report"))
                             #if(m)
                                 <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
                             #end
-                            #set(m=menuService.getMenu("team"))
+                            #set(m=menuService.getMenu("product-team"))
                             #if(m)
                                 <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
                             #end
