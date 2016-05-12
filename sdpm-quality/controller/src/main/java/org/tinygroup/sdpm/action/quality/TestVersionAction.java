@@ -190,7 +190,8 @@ public class TestVersionAction extends BaseController {
     public String versionInfo(Integer testversionId,
                               Integer no,
                               HttpServletRequest request,
-                              Model model) {
+                              Model model,
+                              @CookieValue(value=ProductUtils.COOKIE_PRODUCT_ID)String currentProductId) {
         QualityTestTask testTask = null;
         if (no != null) {
             String result = CookieUtils.getCookie(request, ProductUtils.COOKIE_PRODUCT_ID);
@@ -210,6 +211,12 @@ public class TestVersionAction extends BaseController {
         if (testTask == null || testTask.getTestversionId() == null) {
             testTask = testTaskService.findTestTaskById(testversionId);
         }
+
+        if(testTask.getProductId()!=Integer.parseInt(currentProductId))
+        {
+            return "redirect:"+adminPath+"/quality/version";
+        }
+
         model.addAttribute("testTask", testTask);
         return "/quality/operate/version/versionSituation.page";
     }
@@ -286,8 +293,15 @@ public class TestVersionAction extends BaseController {
     @RequiresPermissions("tversionedit")
     @RequestMapping("/toEdit")
     public String edit(@CookieValue(ProductUtils.COOKIE_PRODUCT_ID) Integer cookieProductId,
-                       Integer testversionId, Model model,HttpServletRequest request) {
+                       Integer testversionId, Model model,HttpServletRequest request,
+                       @CookieValue(value=ProductUtils.COOKIE_PRODUCT_ID)String currentProductId) {
         QualityTestTask testTask = testTaskService.findTestTaskById(testversionId);
+
+        if(testTask.getProductId()!=Integer.parseInt(currentProductId))
+        {
+            return "redirect:"+adminPath+"/quality/version";
+        }
+
         List<ProjectProduct> projectProducts = projectProductService.findProjectByProductId(cookieProductId);
         List<Integer> ids = new ArrayList<Integer>();
         for (ProjectProduct projectProduct : projectProducts) {
