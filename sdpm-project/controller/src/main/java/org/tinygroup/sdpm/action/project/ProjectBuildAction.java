@@ -128,7 +128,8 @@ public class ProjectBuildAction extends BaseController {
     @RequiresPermissions(value = {"pro-version-edit", "pro-version-add"}, logical = Logical.OR)
     @RequestMapping("/edit")
     public String edit(HttpServletRequest request, HttpServletResponse response,
-                       Integer buildId, Model model) {
+                       Integer buildId, Model model,
+                       @CookieValue(value=ProjectOperate.COOKIE_PROJECT_ID)String currentProjectId) {
         Integer projectId = projectOperate.getCurrentProjectId(request, response);
         if (projectId == null) {
             return redirectProjectForm();
@@ -150,6 +151,12 @@ public class ProjectBuildAction extends BaseController {
         model.addAttribute("teamList", userService.findTeamUserListByProjectId(projectId));
         if (buildId != null && buildId != 0) {
             ProjectBuild build = buildService.findBuild(buildId);
+
+            if(build.getBuildProject()!=Integer.parseInt(currentProjectId))
+            {
+                return "redirect:"+adminPath+"/project/build/index";
+            }
+
             model.addAttribute("build", build);
         }
         return "project/operate/build/edit";
@@ -257,8 +264,15 @@ public class ProjectBuildAction extends BaseController {
 
 
     @RequestMapping("/productalbug")
-    public String productalbug(Integer buildId, Model model) {
+    public String productalbug(Integer buildId, Model model,
+                               @CookieValue(value=ProjectOperate.COOKIE_PROJECT_ID)String currentProjectId) {
         ProjectBuild build = buildService.findBuild(buildId);
+
+        if(build.getBuildProject()!=Integer.parseInt(currentProjectId))
+        {
+            return "redirect:"+adminPath+"/project/build/index";
+        }
+
         model.addAttribute("build", build);
         //还需要查询其他相关任务剩余时间的信息
         return "/project/operate/build/relation/product-al-bug.page";
@@ -274,8 +288,15 @@ public class ProjectBuildAction extends BaseController {
 
     //    @RequiresPermissions("projectBuild-forword")
     @RequestMapping("/forword/{forwordPager}")
-    public String forward(@PathVariable(value = "forwordPager") String forwordPager, Integer buildId, Model model) {
+    public String forward(@PathVariable(value = "forwordPager") String forwordPager, Integer buildId, Model model,
+                          @CookieValue(value=ProjectOperate.COOKIE_PROJECT_ID)String currentProjectId) {
         ProjectBuild build = buildService.findBuild(buildId);
+
+        if(build.getBuildProject()!=Integer.parseInt(currentProjectId))
+        {
+            return "redirect:"+adminPath+"/project/build/index";
+        }
+
         model.addAttribute("build", build);
         if ("alBug".equals(forwordPager)) {
             return "project/operate/build/relation/product-al-bug.page";
