@@ -3,7 +3,7 @@
     <parent>
         <groupId>org.tinygroup</groupId>
         <artifactId>sdpm-common</artifactId>
-        <version>1.0.8</version>
+        <version>1.0.9-SNAPSHOT</version>
     </parent>
     <artifactId>sdpm-common-view</artifactId>
     <name>sdpm-common-view</name>

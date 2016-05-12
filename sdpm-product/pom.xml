@@ -4,11 +4,11 @@
     <parent>
         <artifactId>sdpm</artifactId>
         <groupId>org.tinygroup</groupId>
-        <version>1.0.8</version>
+        <version>1.0.9-SNAPSHOT</version>
     </parent>
     <name>sdpm-product develop</name>
     <artifactId>sdpm-product</artifactId>
-    <version>1.0.8</version>
+    <version>1.0.9-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
         <module>business-interface</module>
