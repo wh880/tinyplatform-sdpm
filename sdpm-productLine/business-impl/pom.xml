@@ -3,7 +3,7 @@
     <parent>
         <groupId>org.tinygroup</groupId>
         <artifactId>sdpm-productLine</artifactId>
-        <version>1.0.8</version>
+        <version>1.0.8-SNAPSHOT</version>
     </parent>
     <artifactId>sdpm-productLine-business-impl</artifactId>
     <name>sdpm-productLine-business-impl</name>
