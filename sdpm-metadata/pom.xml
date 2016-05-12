@@ -4,7 +4,7 @@
     <parent>
         <artifactId>sdpm</artifactId>
         <groupId>org.tinygroup</groupId>
-        <version>1.0.8-SNAPSHOT</version>
+        <version>1.0.8</version>
     </parent>
     <artifactId>sdpm-metadata</artifactId>
     <name>sdpm-metadata develop</name>
