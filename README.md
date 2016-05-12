@@ -15,6 +15,8 @@ mvn jetty:run
 ```
 
 #如何安装
+首先在mysql数据库中创建数据库tinysdpm，并设置数据库编码UTF-8。
+
 初次运行请在```application.xml```中```/application/application-processors```下添加```<application-processor bean="databaseInstallerProcessor"/>```进行数据库建表操作。同时请添加 ```<application-processor bean="initDataApplicationProcessor"/>```进行系统数据初始化操作。
 此时系统的用户名为admin,密码为123
 此外还需将```\sdpm-common\base-controller\src\main\resources\web.beans.xml```中```bean[sdpmDictLoader]```的```property[isInitFromFile]```置为```true```，以便进行数据字典初始化。
