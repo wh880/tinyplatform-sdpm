@@ -48,7 +48,7 @@
             #@gridSysRow()
                 #@colLabel("col-2")角色描述：#end
                 #@gridSysCol(7)
-                    #tinyInput("text" "orgRoleRemarks" role?.orgRoleRemarks{"class":"input-text"})
+                    #tinyInput("text" "orgRoleRemarks" role?.orgRoleRemarks{"class":"input-text","datatype":"*0-255"})
                 #end
             #end
             #@gridSysRow()

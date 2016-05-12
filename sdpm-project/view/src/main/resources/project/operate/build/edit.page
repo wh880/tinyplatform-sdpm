@@ -31,7 +31,8 @@
         #@colLabel()<span class="c-red">*</span>版本名称：#end
         #@formControlDiv("col-4")
             #tinyInput(
-                "text" "buildName" build?.buildName {"style":"width:80%","placeholder":"请输入版本名称","datatype":"*","nullmsg":
+                "text" "buildName" build?.buildName {"style":"width:80%","placeholder":"请输入版本名称","datatype":"*1-255",
+                "nullmsg":
                 "版本名不能为空！","id":"buildName","class":"input-text",
                 "ajaxurl":TINY_CONTEXT_PATH+adminPath+"/project/build/judgeBuildNameExist?projectId="+build?.buildProject})
         #end

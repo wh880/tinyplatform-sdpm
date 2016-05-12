@@ -213,7 +213,7 @@
 #@elementItem()
     #@colLabel()关键词：#end
     #@formControlDiv("col-8")
-        #tinyInput("text" "bugKeywords" bug?.bugKeywords {"id":"版本","class":"input-text"})
+        #tinyInput("text" "bugKeywords" bug?.bugKeywords {"id":"版本","class":"input-text","datatype":"*0-255"})
     #end
 #end
     </li>
@@ -474,7 +474,7 @@
     #@colLabel()重复ID:#end
     #@formControlDiv("col-8")
                 #tinyInput(
-                    "text" "bugDuplicateBug" bug?.bugDuplicateBug {"id":"抄送给","class":"input-text"})
+                    "text" "bugDuplicateBug" bug?.bugDuplicateBug {"id":"抄送给","class":"input-text","datatype":"n0-11"})
             #end
         #end
     </li>
@@ -496,7 +496,7 @@
 #@elementItem()
     #@colLabel()相关Bug:#end
     #@formControlDiv("col-8")
-        #tinyInput("text" "linkBug" bug?.linkBug {"id":"抄送给","class":"input-text"})
+        #tinyInput("text" "linkBug" bug?.linkBug {"id":"抄送给","class":"input-text","datatype":"*0-255"})
                 #end
             #end
     </li>
@@ -504,7 +504,7 @@
 #@elementItem()
     #@colLabel()相关用例:#end
     #@formControlDiv("col-8")
-         #tinyInput("text" "linkCase" bug?.linkCase {"id":"抄送给","class":"input-text"})
+        #tinyInput("text" "linkCase" bug?.linkCase {"id":"抄送给","class":"input-text","datatype":"n0-11"})
 
             #end
         #end

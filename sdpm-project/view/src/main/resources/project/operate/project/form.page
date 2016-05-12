@@ -78,7 +78,7 @@
 
         #@elementItem()
             #@sdpmItem("团队名称" "*")
-                #tinyInput("text" "projectTeam" "" {"placeholder":"请输入团队名称","datatype":"*","nullmsg":
+                #tinyInput("text" "projectTeam" "" {"placeholder":"请输入团队名称","datatype":"*1-255","nullmsg":
                     "团队名称不能为空","class":"input-text"})
             #end
         #end

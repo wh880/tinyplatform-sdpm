@@ -14,12 +14,13 @@
         #@elementItem()
             #@sdpmItem("客户名称" "*")
                 #tinyInput(
-                    "text" "clientName" client?.clientName {"placeholder":"请输入客户全称","datatype":"*1-50","nullmsg":"客户名不能为空！",
+                    "text" "clientName" client?.clientName {"placeholder":"请输入客户全称","datatype":"*1-90","nullmsg":
+                    "客户名不能为空！",
                     "id":"clientName","class":"input-text","ajaxurl":TINY_CONTEXT_PATH+adminPath+"/service/client/judgeClient"})
             #end
         #end
         #@elementItem()
-            #@sdpmItem("客户编号")
+            #@sdpmItem("客户编号" "*")
                 #tinyInput(
                     "text" "clientNO" client?.clientNO {"id":"client_n_o","datatype":"*1-50","class":"input-text"})
             #end
@@ -35,7 +36,7 @@
             #@sdpmItem("客户联系人" )
                 #tinyInput(
                     "text" "userAccount" client?.userAccount {"id":"user_account",
-                    "class":""})#end
+                    "class":"","datatype":"*0-50"})#end
         #end
 
         #@elementItem()

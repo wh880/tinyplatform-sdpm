@@ -161,7 +161,8 @@
     #@colLabel()<span class="c-red">*</span>需求名称：#end
     #@formControlDiv("col-4")
         #tinyInput(
-            "text" "storyTitle" story?.storyTitle {"placeholder":"请输入需求名称","datatype":"*","nullmsg":"需求名称不能为空！","id":"storyTitle",
+            "text" "storyTitle" story?.storyTitle {"placeholder":"请输入需求名称","datatype":"*1-255","nullmsg":"需求名称不能为空！",
+            "id":"storyTitle",
             "class":"input-text",
             "ajaxurl":TINY_CONTEXT_PATH+adminPath+"/product/story/judgeStoryName"})
     #end
@@ -278,7 +279,7 @@
     #@colLabel()关键词：#end
     #@formControlDiv("col-4")
         #tinyInput(
-            "text" "storyKeywords" story?.storyKeywords {"datatype":"","id":"text","class":"input-text"})
+            "text" "storyKeywords" story?.storyKeywords {"datatype":"*0-255","id":"text","class":"input-text"})
     #end
     #@validateDiv("col-2")#end
 #end

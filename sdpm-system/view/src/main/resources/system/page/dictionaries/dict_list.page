@@ -7,19 +7,23 @@
 #@divDataTablebox()
     #@tableBox()
         #@datatable("dictListTb")
-            #@tableToolbar()
+            #@tinyTable()
+                #@tableToolbar()
+                    #@div(divBaseClass="tinyheaderTools form-inline")
             <input type="button" value="全选" class="btn btn-default btn-primary "
                    onclick="selectAllNullorReserve('idCheck','全选');"/>
             <input type="button" value="反选" class="btn btn-default btn-primary"
                    onclick="selectAllNullorReserve('idCheck','反选');"/>
-            #* #@mulOperation("muldelete" call("link",adminPath+"/system/module/batchDelete"))
-                 #@radiusBtn("btn-danger" "icon-trash" "javascript:") 批量删除#end
-             #end*#
-                #@mulOperation("muldelete" TINY_CONTEXT_PATH+adminPath+"/system/module/batchDelete")
+                    #*#@mulOperation("muldelete" call("link",adminPath+"/system/module/batchDelete"))
+                        #@radiusBtn("btn-danger" "icon-trash" "javascript:") 批量删除#end
+                    #end*#
+                        #@mulOperation("batchDelete" TINY_CONTEXT_PATH+adminPath+"/system/module/batchDelete")
                     <a href="javascript:void(0);" class="btn radius btn-danger "><i class="icon-trash"></i>&nbsp;批量删除</a>
                 #end
                 #@aModal(editpageModal "添加" "460" "300" "btn radius btn-primary" adminPath+"/system/module/find")
                     #@simpleI("icon-plus")添加#end
+                #end
+                    #end
                 #end
             #end
             #@thead()

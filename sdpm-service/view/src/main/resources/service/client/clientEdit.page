@@ -17,21 +17,21 @@
             #@sdpmItem("客户名称" "*")
                 #tinyInput(
                     "text" "clientName" client?.clientName {"placeholder":"请输入客户全称","datatype":"*","nullmsg":"客户名不能为空！",
-                    "id":"client_name",
+                    "id":"client_name","datatype":"*1-90",
                     "class":"input-text"})
             #end
         #end
         #@elementItem()
             #@sdpmItem("客户编号")
                 #tinyInput(
-                    "text" "clientNO" client?.clientNO {"id":"client_n_o","class":"input-text"})
+                    "text" "clientNO" client?.clientNO {"id":"client_n_o","datatype":"*1-50","class":"input-text"})
             #end
         #end
 
         #@elementItem()
             #@sdpmItem("客户登记人" "*")
                 #tinyInput(
-                    "text" "clientCreatedBy" client?.clientCreatedBy {"datatype":"*","nullmsg":"登记人不能为空！","id":
+                    "text" "clientCreatedBy" client?.clientCreatedBy {"datatype":"*1-50","nullmsg":"登记人不能为空！","id":
                     "client_created_by","class":""})
             #end
         #end
