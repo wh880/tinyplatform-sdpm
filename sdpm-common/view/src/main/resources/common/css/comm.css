@@ -588,4 +588,4 @@ table.table.filelist-table{border:#ddd 1px solid;}
 .forall{margin-bottom:8px}
 .forall .checkboxAll{color:#6e3671; font-weight:bold;border:none;background:none;margin-top:-3px}
 .forall-box p{margin-bottom:3px;background:#fefefe;padding:3px 0;}
-a:focus,button:focus,a:active,button:active{outline:0}
+a:focus,button:focus,a:active,button:active{outline:0!important;}
