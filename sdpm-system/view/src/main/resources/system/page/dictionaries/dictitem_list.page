@@ -11,7 +11,7 @@
 						#@simpleI("icon-plus")添加#end
 				 #end
 			#end
-			#@tinyTableContent(TINY_CONTEXT_PATH+adminPath+"/system/dict/findPager?moduleId="+dictModule?.moduleId) ##取数据地址 总数据
+			#@tinyTableContent(TINY_CONTEXT_PATH+adminPath+"/system/dict/findPager?moduleId="+dictModuleId) ##取数据地址 总数据
 				#@thead()
 					#@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
 						#@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
@@ -20,9 +20,9 @@
 						#@tinyTh({"class":"sorting","rel":"dict_value"})中文名#end
 						#@tinyTh({"class":"sorting","rel":"dict_sort"})排序号#end
 						#@tinyTh({"class":"sorting","rel":""})操作#end
-						
 					#end
 				#end
 			#end
 #end
+
 
