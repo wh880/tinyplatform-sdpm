@@ -128,7 +128,8 @@ public class BugAction extends BaseController {
     }
 
     @RequestMapping("/bugInfo")
-    public String bugInfo(Integer bugId, Integer no, Model model, HttpServletRequest request) {
+    public String bugInfo(Integer bugId, Integer no, Model model, HttpServletRequest request,
+                          @CookieValue(value=ProductUtils.COOKIE_PRODUCT_ID)String currentProductId) {
         QualityBug bug = null;
         ConditionCarrier carrier = new ConditionCarrier();
         if (no != null) {
@@ -160,6 +161,11 @@ public class BugAction extends BaseController {
         int nextId = 0;
         if (bugs.getRecords().size() > 0) {
             nextId = bugs.getRecords().get(0).getBugId();
+        }
+
+        if(bug.getProductId()!=Integer.parseInt(currentProductId))
+        {
+            return "redirect:"+adminPath+"/quality/bug";
         }
 
         //获取备注信息
@@ -263,8 +269,14 @@ public class BugAction extends BaseController {
 
     @RequiresPermissions("tmakesure")
     @RequestMapping("/makesure")
-    public String makeSure(Integer bugId, Model model) {
+    public String makeSure(Integer bugId, Model model,@CookieValue(value=ProductUtils.COOKIE_PRODUCT_ID)String currentProductId) {
         QualityBug bug = bugService.findQualityBugById(bugId);
+
+        if(bug.getProductId()!=Integer.parseInt(currentProductId))
+        {
+            return "redirect:"+adminPath+"/quality/bug";
+        }
+
         List<OrgUser> orgUsers = userService.findUserList(null);
 
         //读取备注信息
@@ -447,8 +459,14 @@ public class BugAction extends BaseController {
 
     @RequiresPermissions("tassign")
     @RequestMapping("/assign")
-    public String assign(Integer bugId, Model model) {
+    public String assign(Integer bugId, Model model,@CookieValue(value=ProductUtils.COOKIE_PRODUCT_ID)String currentProductId) {
         QualityBug bug = bugService.findQualityBugById(bugId);
+
+        if(bug.getProductId()!=Integer.parseInt(currentProductId))
+        {
+            return "redirect:"+adminPath+"/quality/bug";
+        }
+
         List<OrgUser> users = userService.findUserList(null);
 
         //读取备注信息
@@ -502,8 +520,14 @@ public class BugAction extends BaseController {
 
     @RequiresPermissions("tsolution")
     @RequestMapping("/toSolve")
-    public String solve(Integer bugId, Model model) {
+    public String solve(Integer bugId, Model model,@CookieValue(value = ProductUtils.COOKIE_PRODUCT_ID)String currentProductId) {
         QualityBug bug = bugService.findQualityBugById(bugId);
+
+        if(bug.getProductId()!=Integer.parseInt(currentProductId))
+        {
+            return "redirect:"+adminPath+"/quality/bug";
+        }
+
         bug.setBugResolvedDate(new Date());
         List<OrgUser> orgUsers = userService.findUserList(null);
         ProjectBuild build = new ProjectBuild();
@@ -562,9 +586,14 @@ public class BugAction extends BaseController {
 
     @RequiresPermissions("tshutdown")
     @RequestMapping("/toClose")
-    public String close(Integer bugId, Model model) {
-        QualityBug bug = new QualityBug();
-        bug = bugService.findQualityBugById(bugId);
+    public String close(Integer bugId, Model model,@CookieValue(value=ProductUtils.COOKIE_PRODUCT_ID)String currentProductId) {
+        QualityBug bug = bugService.findQualityBugById(bugId);
+
+        if(bug.getProductId()!=Integer.parseInt(currentProductId))
+        {
+            return "redirect:"+adminPath+"/quality/bug";
+        }
+
         bug.setBugClosedDate(new Date());
 
         //读取备注信息
@@ -601,8 +630,14 @@ public class BugAction extends BaseController {
 
     @RequiresPermissions("tedition")
     @RequestMapping("/toEdit")
-    public String edit(Integer bugId, Model model) {
+    public String edit(Integer bugId, Model model,@CookieValue(value=ProductUtils.COOKIE_PRODUCT_ID)String currentProductId) {
         QualityBug bug = bugService.findQualityBugById(bugId);
+
+        if(bug.getProductId()!=Integer.parseInt(currentProductId))
+        {
+            return "redirect:"+adminPath+"/quality/bug";
+        }
+
 
         //读取备注信息
         String actionComment=getBugRemark(bug);
@@ -692,8 +727,14 @@ public class BugAction extends BaseController {
 
     @RequiresPermissions("bug-add")
     @RequestMapping("/toCopy")
-    public String copy(Integer bugId, Model model) {
+    public String copy(Integer bugId, Model model,@CookieValue(value=ProductUtils.COOKIE_PRODUCT_ID)String currentProductId) {
         QualityBug bug = bugService.findQualityBugById(bugId);
+
+        if(bug.getProductId()!=Integer.parseInt(currentProductId))
+        {
+            return "redirect:"+adminPath+"/quality/bug";
+        }
+
         List<Project> projects = projectService.findProjectList(null, null, null);
         List<OrgUser> orgUsers = userService.findUserList(null);
         model.addAttribute("userList", orgUsers);

@@ -250,8 +250,14 @@ public class ProjectTaskAction extends BaseController {
      */
     @RequiresPermissions(value = {"pro-task-edit", "pro-Info2-edit"}, logical = Logical.OR)
     @RequestMapping("/edit")
-    public String editForm(Integer taskId, Model model,SystemAction action,HttpServletRequest request) {
+    public String editForm(Integer taskId, Model model,SystemAction action,HttpServletRequest request,
+                           @CookieValue(value=ProjectOperate.COOKIE_PROJECT_ID)String currentProjectId) {
         ProjectTask task = taskService.findTaskById(taskId);
+        if(task.getTaskProject()!=Integer.parseInt(currentProjectId))
+        {
+            return "redirect:"+adminPath+"/project/task/index";
+        }
+
         model.addAttribute("task", task);
 
         //读取备注信息
@@ -352,8 +358,14 @@ public class ProjectTaskAction extends BaseController {
     }
 
     @RequestMapping("/consumeTime")
-    public String consumeTime(Integer taskId, Model model) {
+    public String consumeTime(Integer taskId, Model model,@CookieValue(value=ProjectOperate.COOKIE_PROJECT_ID)String currentProjectId) {
         ProjectTask task = taskService.findTaskById(taskId);
+
+        if(task.getTaskProject()!=Integer.parseInt(currentProjectId))
+        {
+            return "redirect:"+adminPath+"/project/task/index";
+        }
+
         SystemEffort systemEffort = new SystemEffort();
         systemEffort.setEffortObjectId(taskId);
         systemEffort.setEffortObjectType("task");
@@ -412,8 +424,13 @@ public class ProjectTaskAction extends BaseController {
      */
     @RequiresPermissions("pro-task-call")
     @RequestMapping(value = "/call", method = RequestMethod.GET)
-    public String call(Integer taskId, Model model) {
+    public String call(Integer taskId, Model model,@CookieValue(value=ProjectOperate.COOKIE_PROJECT_ID)String currentProjectId) {
         ProjectTask task = taskService.findTaskById(taskId);
+
+        if(task.getTaskProject()!=Integer.parseInt(currentProjectId))
+        {
+            return "redirect:"+adminPath+"/project/task/index";
+        }
 
         //读取备注信息
         String actionComment=getTaskRemark(task);
@@ -465,9 +482,15 @@ public class ProjectTaskAction extends BaseController {
 
     @RequiresPermissions("pro-task-finish")
     @RequestMapping(value = "/finish", method = RequestMethod.GET)
-    public String finish(Integer taskId, Model model, HttpServletRequest request) {
+    public String finish(Integer taskId, Model model, HttpServletRequest request,@CookieValue(value=ProjectOperate.COOKIE_PROJECT_ID)String currentProjectId) {
         Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, projectOperate.COOKIE_PROJECT_ID));
         ProjectTask task = taskService.findTaskById(taskId);
+
+        if(task.getTaskProject()!=Integer.parseInt(currentProjectId))
+        {
+            return "redirect:"+adminPath+"/project/task/index";
+        }
+
         String actionComment=getTaskRemark(task);
         model.addAttribute("actionComment",actionComment);
         model.addAttribute("task", task);
@@ -537,8 +560,14 @@ public class ProjectTaskAction extends BaseController {
 
     @RequiresPermissions("pro-task-close")
     @RequestMapping(value = "/close", method = RequestMethod.GET)
-    public String close(Integer taskId, Model model) {
+    public String close(Integer taskId, Model model,@CookieValue(value=ProjectOperate.COOKIE_PROJECT_ID)String currentProjectId) {
         ProjectTask task = taskService.findTaskById(taskId);
+
+        if(task.getTaskProject()!=Integer.parseInt(currentProjectId))
+        {
+            return "redirect:"+adminPath+"/project/task/index";
+        }
+
         String actionComment=getTaskRemark(task);
         model.addAttribute("actionComment",actionComment);
         model.addAttribute("task", task);
@@ -588,8 +617,14 @@ public class ProjectTaskAction extends BaseController {
      */
     @RequiresPermissions("pro-task-start")
     @RequestMapping(value = "/start", method = RequestMethod.GET)
-    public String start(Integer taskId, Model model) {
+    public String start(Integer taskId, Model model,@CookieValue(value=ProjectOperate.COOKIE_PROJECT_ID)String currentProjectId) {
         ProjectTask task = taskService.findTaskById(taskId);
+
+        if(task.getTaskProject()!=Integer.parseInt(currentProjectId))
+        {
+            return "redirect:"+adminPath+"/project/task/index";
+        }
+
         String actionComment=getTaskRemark(task);
         model.addAttribute("actionComment",actionComment);
         model.addAttribute("task", task);
@@ -812,7 +847,7 @@ public class ProjectTaskAction extends BaseController {
     }
 
     @RequestMapping("/findTask")
-    public String findTask(Model model, Integer taskId, HttpServletRequest request, Integer no) {
+    public String findTask(Model model, Integer taskId, HttpServletRequest request, Integer no,@CookieValue(value=ProjectOperate.COOKIE_PROJECT_ID)String selectedProjectId) {
         if (no != null) {
             Integer currentProjectId = projectOperate.getCurrentProjectId(request);
             if (currentProjectId != null) {
@@ -828,6 +863,12 @@ public class ProjectTaskAction extends BaseController {
             }
         } else {
             ProjectTask task = taskService.findTaskById(taskId);
+
+            if(task.getTaskProject()!=Integer.parseInt(selectedProjectId))
+            {
+                return "redirect:"+adminPath+"/project/task/index";
+            }
+
             model.addAttribute("task", task);
 
             //获得相关需求描述

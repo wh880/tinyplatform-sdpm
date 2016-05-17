@@ -29,7 +29,6 @@
 </style>
 #@tinyForm("thisform" call("link",adminPath+"/project/product/save") "post")
 
-
                 #@Tcheckboxes("productIds" linkIdList)
                 <div class="row group-check-list">
                     <div class="col-2">产品线</div>

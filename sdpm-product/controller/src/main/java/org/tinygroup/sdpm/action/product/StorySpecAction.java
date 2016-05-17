@@ -3,6 +3,7 @@ package org.tinygroup.sdpm.action.product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,6 +19,8 @@ import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;
 import org.tinygroup.sdpm.system.service.inter.ActionService;
 import org.tinygroup.sdpm.system.service.inter.ProfileService;
 import org.tinygroup.sdpm.util.CookieUtils;
+import org.tinygroup.sdpm.util.ProductUtils;
+import org.tinygroup.sdpm.util.ProjectOperate;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -37,7 +40,7 @@ public class StorySpecAction extends BaseController {
     private ActionService actionService;
 
     @RequestMapping("/find")
-    public String find(Integer storyId, Model model) {
+    public String find(Integer storyId, Model model,@CookieValue(value= ProductUtils.COOKIE_PRODUCT_ID)String currentProductId) {
         ProductStory story = storyService.findStory(storyId);
         ProductStorySpec storySpec = new ProductStorySpec();
         storySpec.setStoryVersion(story.getStoryVersion());
@@ -45,6 +48,11 @@ public class StorySpecAction extends BaseController {
         List<ProductStorySpec> storySpecs = storySpecService.findStorySpecList(storySpec, null, null);
         storySpec = storySpecs != null && storySpecs.size() > 0 ? storySpecs.get(0) : new ProductStorySpec();
         model.addAttribute("storySpec", storySpec);
+
+        if(story.getProductId()!=Integer.parseInt(currentProductId))
+        {
+            return "redirect:" + adminPath + "/product/story";
+        }
 
         //读取备注信息
         String actionComment=getStoryRemark(story);
@@ -64,7 +72,8 @@ public class StorySpecAction extends BaseController {
                        ProductStory story,
                        Model model,
                        SystemProfile systemProfile,
-                       HttpServletRequest request) {
+                       HttpServletRequest request,
+                       @CookieValue(value= ProductUtils.COOKIE_PRODUCT_ID)String currentProductId) {
         ProductStory productStory = null;
         if (story.getNo() != null) {
             String result = CookieUtils.getCookie(request, productUtils.COOKIE_PRODUCT_ID);
@@ -94,6 +103,11 @@ public class StorySpecAction extends BaseController {
         List<SystemProfile> list = profileService.findSystemProfile(systemProfile);
         model.addAttribute("file", list);
         if ("productDemandDetail".equals(forward)) {
+            if(productStory.getProductId()!=Integer.parseInt(currentProductId))
+            {
+                return "redirect:" + adminPath + "/product/story";
+            }
+
             //读取备注信息
             String actionComment=getStoryRemark(productStory);
             model.addAttribute("actionComment",actionComment);
