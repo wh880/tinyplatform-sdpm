@@ -1,4 +1,5 @@
-
+#set(storyTableId = "storyTableId" )
+#set(linkName = "product-demand")
 #set(name="demand")
 #@layout(project)
     #@tabBodyCol("ptop-5")
@@ -7,13 +8,13 @@
                 <a href="javascript:void(0);" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
             </span>
             #div(divClass="clearfix")
-##            #include("/product/page/search/mulsearch.page")
+            #include("/product/page/search/mulsearch.page")
 ##                        #include("/project/mulsearch.page")
         #end
     #end
 #end
 #@tinyForm("linkForm" TINY_CONTEXT_PATH+adminPath+"/project/demand/linkStory" "post" {"class":""})
-    #@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
+    #@tinyTable(storyTableId) ##ID为空则系统自动生成 带入参数则取该参数为ID
         #@div(divBaseClass="tinyheaderTools form-inline")
             #setTinyTablePageSize([10,20,30,50,100,200])
         <input type="button" value="全选" class="btn btn-primary "

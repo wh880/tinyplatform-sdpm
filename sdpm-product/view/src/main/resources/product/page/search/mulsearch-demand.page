@@ -16,39 +16,41 @@
         </select>
         <select id="usertemp">
             <option value="" selected="selected"></option>
-            <option value="admin">A:admin</option>
-            <option value="demo">D:Demo</option>
-            <option value="dev1">D:开发甲</option>
-            <option value="dev2">D:开发乙</option>
-            <option value="dev3">D:开发丙</option>
-            <option value="productManager">P:产品经理</option>
-            <option value="projectManager">P:项目经理</option>
-            <option value="tester1">T:测试甲</option>
-            <option value="tester2">T:测试乙</option>
-            <option value="tester3">T:测试丙</option>
-            <option value="testManager">T:测试经理</option>
-            <option value="closed">Closed</option>
-            <option value="$@me">自己</option>
-            <option value="null">空</option>
+            #foreach(u : orgUsers)
+                <option value="${u?.orgUserId}">${u?.orgUserRealName}</option>
+            #end
         </select>
         <select id="pritemp">
             <option value=""></option>
-            <option value="3">3</option>
+            <option value="0">0</option>
             <option value="1">1</option>
-            <option value="44">44</option>
             <option value="2">2</option>
+            <option value="3">3</option>
             <option value="4">4</option>
-            <option value="null">空</option>
+        </select>
+        <select id="stagetemp">
+            <option value="" selected="selected"></option>
+            #foreach(stage:getDict("storyStage"))
+                <option value="${stage.value}">${stage?.text}</option>
+            #end
+        </select>
+        <select id="sourcetemp">
+            <option value="" selected="selected"></option>
+            #foreach(source:getDict("storySource"))
+                <option value="${source.value}">${source?.text}</option>
+            #end
         </select>
         <select id="statustemp">
             <option value="" selected="selected"></option>
-            <option value="wait">未开始</option>
-            <option value="doing">进行中</option>
-            <option value="done">已完成</option>
-            <option value="pause">已暂停</option>
-            <option value="cancel">已取消</option>
-            <option value="closed">已关闭</option>
-            <option value="null">空</option>
+            #foreach(status:getDict("storyStatus"))
+                <option value="${status.value}">${status?.text}</option>
+            #end
+        </select>
+        <select id="closereasontemp">
+            <option value="" selected="selected"></option>
+            #foreach(closereason:getDict("proCloseReason"))
+                <option value="${closereason.value}">${closereason?.text}</option>
+            #end
         </select>
 
     </div>
@@ -163,23 +165,22 @@
             <td class="w-180px">
                 <div class="btn-group">
                     <button type="submit" class="btn btn-submit btn-primary btn-sm">搜索</button>
-#*                    <button type="button" onclick="resetForm(this)" class="btn btn-sm">重置</button>
-                    <button type="button" onclick="resetForm(this)" class="btn btn-sm">保存</button>*#
+                    <button type="button" onclick="resetForm(this)" class="btn btn-sm">重置</button>
                 </div>
             </td>
-            <td>
-                <div style="width:105px;margin-top:3px;">
-                    #@Tselect2F()
-                        #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                            <option value="CRM">我的查询</option>
-                            <option value="P2P">P2P系统</option>
-                            <option value="o2o">o2o系统</option>
-                        #end
-                    ##填写任意内容，侦听需重新填加 A侦听已内置
-                        #@Tselect2Fix()<a href="#" class="r ">增加</a><a href="#">全部</a>#end
-                    #end
-                </div>
-            </td>
+        #* <td>
+             <div style="width:105px;margin-top:3px;">
+                 #@Tselect2F()
+                     #@Tselect2Body("lang" "IN" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                         <option value="CRM">我的查询</option>
+                         <option value="P2P">P2P系统</option>
+                         <option value="o2o">o2o系统</option>
+                     #end
+                 ##填写任意内容，侦听需重新填加 A侦听已内置
+                     #@Tselect2Fix()<a href="#" class="r ">增加</a><a href="#">全部</a>#end
+                 #end
+             </div>
+         </td>*#
         </tr>
         </tbody>
     </table>
@@ -208,63 +209,45 @@
         });
         var itemlist = []
         itemlist.push({
-            "name": "story_parentId",
-            "title": "父需求",
-            "operator": "include",
-            "value": "text"
-        });
-        itemlist.push({
-            "name": "module_id",
-            "title": "所属模块",
-            "operator": "=",
-            "value": "text"
-        });
-        itemlist.push({
-            "name": "plan_id",
-            "title": "所属计划",
-            "operator": "=",
-            "value": "status"
-        });
-        itemlist.push({
-            "name": "story_status",
-            "title": "需求状态",
-            "operator": "include",
-            "value": "text"
-        });
-        itemlist.push({
-            "name": "story_source",
-            "title": "需求来源",
-            "operator": "=",
-            "value": "user"
-        });
-        itemlist.push({
-            "name": "story_fromBug",
-            "title": "需求来源bug",
-            "operator": "=",
-            "value": "pri"
-        });
-        itemlist.push({
             "name": "story_title",
-            "title": "需求标题",
+            "title": "需求名称",
+            "operator": "include",
+            "value": "text"
+        });
+        itemlist.push({
+            "name": "product_story.no",
+            "title": "编号",
             "operator": "=",
             "value": "text"
         });
         itemlist.push({
             "name": "story_keywords",
-            "title": "需求关键字",
-            "operator": "=",
+            "title": "关键词",
+            "operator": "include",
             "value": "text"
         });
         itemlist.push({
-            "name": "story_type",
-            "title": "需求类型",
+            "name": "story_stage",
+            "title": "所处阶段",
             "operator": "=",
-            "value": "text"
+            "value": "stage"
+        });
+        itemlist.push({
+            "name": "story_status",
+            "title": "当前状态",
+            "operator": "=",
+            "value": "status"
         });
         itemlist.push({
             "name": "story_pri",
-            "title": "需求优先级",
+            "title": "优先级",
             "operator": "=",
+            "value": "pri"
+        });
+        itemlist.push({
+            "name": "product_plan.plan_name",
+            "title": "所属计划",
+            "operator": "include",
             "value": "text"
         });
         itemlist.push({
@@ -274,101 +257,78 @@
             "value": "text"
         });
         itemlist.push({
-            "name": "story_stage",
-            "title": "所处阶段",
+            "name": "story_source",
+            "title": "需求来源",
             "operator": "=",
-            "value": "text"
+            "value": "source"
         });
         itemlist.push({
-            "name": "story_mailto",
-            "title": "邮件列表",
-            "operator": "belong",
-            "value": "text"
-        });
-        itemlist.push({
-            "name": "story_openedBy",
+            "name": "story_opened_by",
             "title": "创建人",
-            "operator": "=",
-            "value": "text"
-        });
-        itemlist.push({
-            "name": "story_openedDate",
-            "title": "创建日期",
             "operator": "=",
             "value": "user"
         });
         itemlist.push({
-            "name": "story_assignedTo",
+            "name": "story_opened_date",
+            "title": "创建日期",
+            "operator": "=",
+            "value": "date"
+        });
+        itemlist.push({
+            "name": "story_assigned_to",
             "title": "指派对象",
             "operator": "=",
             "value": "user"
         });
         itemlist.push({
-            "name": "story_assignedDate",
+            "name": "story_assigned_date",
             "title": "指派日期",
             "operator": "=",
-            "value": "user"
+            "value": "date"
         });
         itemlist.push({
-            "name": "story_lastEditedBy",
+            "name": "story_last_edited_by",
             "title": "最后编辑人",
             "operator": "=",
             "value": "user"
         });
         itemlist.push({
-            "name": "story_lastEditedDate",
-            "title": "最后编辑日",
+            "name": "story_last_edited_date",
+            "title": "最后编辑日期",
             "operator": "=",
-            "value": "user"
+            "value": "date"
         });
         itemlist.push({
-            "name": "story_reviewedBy",
+            "name": "story_reviewed_by",
             "title": "审核人",
             "operator": "=",
             "value": "user"
         });
         itemlist.push({
-            "name": "story_reviewedDate",
+            "name": "story_reviewed_date",
             "title": "审核日期",
             "operator": "=",
             "value": "date"
         });
         itemlist.push({
-            "name": "story_closedBy",
+            "name": "story_closed_by",
             "title": "关闭人",
             "operator": "=",
-            "value": "date"
+            "value": "user"
         });
         itemlist.push({
-            "name": "story_closedDate",
+            "name": "story_closed_date",
             "title": "关闭日期",
             "operator": "=",
             "value": "date"
         });
         itemlist.push({
-            "name": "story_closedReason",
+            "name": "story_closed_reason",
             "title": "关闭原因",
             "operator": "=",
-            "value": "date"
+            "value": "closereason"
         });
-        itemlist.push({
-            "name": "story_version",
-            "title": "需求版本",
-            "operator": "=",
-            "value": "date"
-        });
-        itemlist.push({
-            "name": "build_id",
-            "title": "对应版本",
-            "operator": "=",
-            "value": "date"
-        });
-        itemlist.push({
-            "name": "client_request_id",
-            "title": "请求",
-            "operator": "=",
-            "value": "date"
-        });
+
 
         function setValueBox(index, itemIndex) {
             $("#operator" + itemIndex).val(itemlist[index]["operator"]);
@@ -385,6 +345,15 @@
                     break;
                 case "status":
                     $("#valueBox" + itemIndex).html($('<select name="infos[' + sIndex + '].value" id="value' + itemIndex + '" class="form-control">').html($("#statustemp").html()));
+                    break;
+                case "stage":
+                    $("#valueBox" + itemIndex).html($('<select name="infos[' + sIndex + '].value" id="value' + itemIndex + '" class="form-control">').html($("#stagetemp").html()));
+                    break;
+                case "closereason":
+                    $("#valueBox" + itemIndex).html($('<select name="infos[' + sIndex + '].value" id="value' + itemIndex + '" class="form-control">').html($("#closereasontemp").html()));
+                    break;
+                case "source":
+                    $("#valueBox" + itemIndex).html($('<select name="infos[' + sIndex + '].value" id="value' + itemIndex + '" class="form-control">').html($("#sourcetemp").html()));
                     break;
                 case "date":
                     $("#valueBox" + itemIndex).html('<input type="text" name="infos[' + sIndex + '].value" id="value' + itemIndex + '" value="" class="form-control dateinput">');
@@ -419,6 +388,7 @@
         });
 
         $("#${storyTableId}form").on("submit", function () {
+            $(".selChoose").removeClass("active_btn");
             $("#${storyTableId}").trigger("initnav");
             return false;
 

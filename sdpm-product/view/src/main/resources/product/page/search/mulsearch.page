@@ -283,7 +283,7 @@
         });
         itemlist.push({
             "name": "story_last_edited_date",
-            "title": "最后编辑日",
+            "title": "最后编辑日期",
             "operator": "=",
             "value": "date"
         });
