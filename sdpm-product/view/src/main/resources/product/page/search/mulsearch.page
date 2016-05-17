@@ -22,22 +22,35 @@
         </select>
         <select id="pritemp">
             <option value=""></option>
-            <option value="3">3</option>
+            <option value="0">0</option>
             <option value="1">1</option>
-            <option value="44">44</option>
             <option value="2">2</option>
+            <option value="3">3</option>
             <option value="4">4</option>
-            <option value="null">空</option>
+        </select>
+        <select id="stagetemp">
+            <option value="" selected="selected"></option>
+            #foreach(stage:getDict("storyStage"))
+                <option value="${stage.value}">${stage?.text}</option>
+            #end
+        </select>
+        <select id="sourcetemp">
+            <option value="" selected="selected"></option>
+            #foreach(source:getDict("storySource"))
+                <option value="${source.value}">${source?.text}</option>
+            #end
         </select>
         <select id="statustemp">
             <option value="" selected="selected"></option>
-            <option value="wait">未开始</option>
-            <option value="doing">进行中</option>
-            <option value="done">已完成</option>
-            <option value="pause">已暂停</option>
-            <option value="cancel">已取消</option>
-            <option value="closed">已关闭</option>
-            <option value="null">空</option>
+            #foreach(status:getDict("storyStatus"))
+                <option value="${status.value}">${status?.text}</option>
+            #end
+        </select>
+        <select id="closereasontemp">
+            <option value="" selected="selected"></option>
+            #foreach(closereason:getDict("proCloseReason"))
+                <option value="${closereason.value}">${closereason?.text}</option>
+            #end
         </select>
 
     </div>
@@ -185,63 +198,45 @@
         });
         var itemlist = []
         itemlist.push({
-            "name": "story_parent_id",
-            "title": "父需求",
-            "operator": "include",
-            "value": "text"
-        });
-        itemlist.push({
-            "name": "module_id",
-            "title": "所属模块",
-            "operator": "=",
-            "value": "text"
-        });
-        itemlist.push({
-            "name": "plan_id",
-            "title": "所属计划",
-            "operator": "=",
-            "value": "status"
-        });
-        itemlist.push({
-            "name": "story_status",
-            "title": "需求状态",
-            "operator": "include",
-            "value": "text"
-        });
-        itemlist.push({
-            "name": "story_source",
-            "title": "需求来源",
-            "operator": "=",
-            "value": "user"
-        });
-        itemlist.push({
-            "name": "story_from_bug",
-            "title": "需求来源bug",
-            "operator": "=",
-            "value": "pri"
-        });
-        itemlist.push({
             "name": "story_title",
-            "title": "需求标题",
+            "title": "需求名称",
+            "operator": "include",
+            "value": "text"
+        });
+        itemlist.push({
+            "name": "product_story.no",
+            "title": "编号",
             "operator": "=",
             "value": "text"
         });
         itemlist.push({
             "name": "story_keywords",
-            "title": "需求关键字",
-            "operator": "=",
+            "title": "关键词",
+            "operator": "include",
             "value": "text"
         });
         itemlist.push({
-            "name": "story_type",
-            "title": "需求类型",
+            "name": "story_stage",
+            "title": "所处阶段",
             "operator": "=",
-            "value": "text"
+            "value": "stage"
+        });
+        itemlist.push({
+            "name": "story_status",
+            "title": "当前状态",
+            "operator": "=",
+            "value": "status"
         });
         itemlist.push({
             "name": "story_pri",
-            "title": "需求优先级",
+            "title": "优先级",
             "operator": "=",
+            "value": "pri"
+        });
+        itemlist.push({
+            "name": "product_plan.plan_name",
+            "title": "所属计划",
+            "operator": "include",
             "value": "text"
         });
         itemlist.push({
@@ -251,28 +246,22 @@
             "value": "text"
         });
         itemlist.push({
-            "name": "story_stage",
-            "title": "所处阶段",
+            "name": "story_source",
+            "title": "需求来源",
             "operator": "=",
-            "value": "text"
-        });
-        itemlist.push({
-            "name": "story_mailto",
-            "title": "邮件列表",
-            "operator": "belong",
-            "value": "text"
+            "value": "source"
         });
         itemlist.push({
             "name": "story_opened_by",
             "title": "创建人",
             "operator": "=",
-            "value": "text"
+            "value": "user"
         });
         itemlist.push({
             "name": "story_opened_date",
             "title": "创建日期",
             "operator": "=",
-            "value": "user"
+            "value": "date"
         });
         itemlist.push({
             "name": "story_assigned_to",
@@ -284,19 +273,19 @@
             "name": "story_assigned_date",
             "title": "指派日期",
             "operator": "=",
-            "value": "user"
+            "value": "date"
         });
         itemlist.push({
-            "name": "story_lastEdited_by",
+            "name": "story_last_edited_by",
             "title": "最后编辑人",
             "operator": "=",
             "value": "user"
         });
         itemlist.push({
-            "name": "story_lastEdited_date",
+            "name": "story_last_edited_date",
             "title": "最后编辑日",
             "operator": "=",
-            "value": "user"
+            "value": "date"
         });
         itemlist.push({
             "name": "story_reviewed_by",
@@ -314,7 +303,7 @@
             "name": "story_closed_by",
             "title": "关闭人",
             "operator": "=",
-            "value": "date"
+            "value": "user"
         });
         itemlist.push({
             "name": "story_closed_date",
@@ -326,25 +315,7 @@
             "name": "story_closed_reason",
             "title": "关闭原因",
             "operator": "=",
-            "value": "date"
-        });
-        itemlist.push({
-            "name": "story_version",
-            "title": "需求版本",
-            "operator": "=",
-            "value": "date"
-        });
-        itemlist.push({
-            "name": "build_id",
-            "title": "对应版本",
-            "operator": "=",
-            "value": "date"
-        });
-        itemlist.push({
-            "name": "client_request_id",
-            "title": "请求",
-            "operator": "=",
-            "value": "date"
+            "value": "closereason"
         });
 
         function setValueBox(index, itemIndex) {
@@ -362,6 +333,15 @@
                     break;
                 case "status":
                     $("#valueBox" + itemIndex).html($('<select name="infos[' + sIndex + '].value" id="value' + itemIndex + '" class="form-control">').html($("#statustemp").html()));
+                    break;
+                case "stage":
+                    $("#valueBox" + itemIndex).html($('<select name="infos[' + sIndex + '].value" id="value' + itemIndex + '" class="form-control">').html($("#stagetemp").html()));
+                    break;
+                case "closereason":
+                    $("#valueBox" + itemIndex).html($('<select name="infos[' + sIndex + '].value" id="value' + itemIndex + '" class="form-control">').html($("#closereasontemp").html()));
+                    break;
+                case "source":
+                    $("#valueBox" + itemIndex).html($('<select name="infos[' + sIndex + '].value" id="value' + itemIndex + '" class="form-control">').html($("#sourcetemp").html()));
                     break;
                 case "date":
                     $("#valueBox" + itemIndex).html('<input type="text" name="infos[' + sIndex + '].value" id="value' + itemIndex + '" value="" class="form-control dateinput">');
@@ -396,6 +376,7 @@
         });
 
         $("#${storyTableId}form").on("submit", function () {
+            $(".selChoose").removeClass("active_btn");
             $("#${storyTableId}").trigger("initnav");
             return false;
 
