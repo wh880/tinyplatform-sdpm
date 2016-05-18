@@ -55,6 +55,7 @@ public class ConditionUtils {
                 }
             } else if (carrier.getFieldType(field).equals(ConditionUtils.CommonFieldType.INS.getCommonField())) {
                 boolean isIn = carrier.getOperate(field).equals(ConditionUtils.Operate.IN.getOperate());
+
                 String[] result = (String[]) carrier.getValue(field)[0];
                 String[] value = {"0"};
                 result = result != null && result.length > 0 ? result : value;

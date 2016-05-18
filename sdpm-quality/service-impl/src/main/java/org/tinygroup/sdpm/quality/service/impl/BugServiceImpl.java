@@ -70,4 +70,9 @@ public class BugServiceImpl implements BugService {
     public QualityBug findBugByBugId(Integer bugId) {
         return bugmanager.findBugByBugId(bugId);
     }
+
+    @Override
+    public List<QualityBug> findBugByProductIdAndBugTitle(String bugTitle, Integer productId, String status) {
+        return bugmanager.findBugByProductIdAndBugTitle(bugTitle,productId,status);
+    }
 }

@@ -1,10 +1,12 @@
-#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/document/doclib/save" "post" {"class":"edit"})
+#@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/document/doclib/save?name="+doclib?.docLibName "post" {"class":"edit"})
 <input type="hidden" name="docLibId" value="${doclib?.docLibId}"/>
 #@colLabel()#end
 <div class="col-8">
 #@div(divClass="col-8")
-	
-	#tinyInput("text" "docLibName" doclib?.docLibName {"style":"height:29px","placeholder":"文档库名称","id":"docLibId","class":"input-text"})
+
+    #tinyInput(
+        "text" "docLibName" doclib?.docLibName {"style":"height:29px","placeholder":"文档库名称","datatype":"*1-90","id":
+        "docLibId","class":"input-text"})
 	
 #end
 <div class="col-3">
@@ -12,3 +14,17 @@
 </div>
 </div>
 #end
+
+<script type="text/javascript">
+    $(function () {
+        $('#submit2').on('click', '.delBtn', function (e) {
+            user_del(this, '1');
+        });
+    })
+
+    $(function () {
+        $("form[name=thisform]").Validform({
+            tiptype: 2
+        });
+    });
+</script>

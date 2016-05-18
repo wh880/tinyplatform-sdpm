@@ -8,7 +8,7 @@
                     #tinyInput(
                         "text" "orgCompanyName" company?.orgCompanyName{"placeholder":"输入公司名称","datatype":"*","nullmsg":
                         "请输入公司名称！","id":"name","class":
-                        "input-text"})
+                        "input-text","datatype":"*1-255"})
                 #end
                 #@validateDiv("col-2")#end
             #end
@@ -19,7 +19,7 @@
                         "text" "orgCompanyPhone" company?.orgCompanyPhone {"placeholder":"请输入联系电话",
                         "id":"phone",
                         "class":
-                        "input-text"})
+                        "input-text","datatype":"/^1\d{10}$/"})
                 #end
                 #@validateDiv("col-3")#end
             #end
@@ -29,7 +29,7 @@
                     #tinyInput(
                         "text" "orgCompanyFax" company?.orgCompanyFax {"placeholder":"请输入传真",
                         "id":"org_user_real_name","class":
-                        "input-text"})
+                        "input-text","datatype":"*0-30"})
                 #end
                 #@validateDiv("col-3")#end
             #end
@@ -40,7 +40,7 @@
                         "text" "orgCompanyAddress" company?.orgCompanyAddress{"placeholder":"请输入通讯地址",
                         "id":"phone",
                         "class":
-                        "input-text"})
+                        "input-text","datatype":"*0-255"})
                 #end
                 #@validateDiv("col-3")#end
             #end
@@ -51,7 +51,7 @@
                         "text" "orgCompanyZipCode" company?.orgCompanyZipCode{"placeholder":"请输入邮政编码",
                         "id":"phone",
                         "class":
-                        "input-text"})
+                        "input-text","datatype":"n0-10"})
                 #end
                 #@validateDiv("col-3")#end
             #end
@@ -62,7 +62,7 @@
                         "text" "orgCompanyWebsite" company?.orgCompanyWebsite{"placeholder":"请输入官网",
                         "id":"phone",
                         "class":
-                        "input-text"})
+                        "input-text","datatype":"*0-255"})
                 #end
                 #@validateDiv("col-3")#end
             #end
@@ -73,7 +73,7 @@
                         "text" "orgCompanyBackyard" company?.orgCompanyBackyard{"placeholder":"请输入内网",
                         "id":"phone",
                         "class":
-                        "input-text"})
+                        "input-text","datatype":"*0-255"})
                 #end
                 #@validateDiv("col-3")#end
             #end

@@ -49,5 +49,5 @@ public interface DocService {
 
     Integer deleteDocByIds(List<DocumentDoc> ids);
 
-
+    List<DocumentDocLib> findDocLibByDocLib(DocumentDocLib lib);
 }

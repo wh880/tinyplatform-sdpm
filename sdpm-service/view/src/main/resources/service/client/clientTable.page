@@ -19,7 +19,7 @@
         #@thead()
             #@tr()
                 #@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
-                #@tinyTh({"class":"sorting","rel":"clientName"})客户名称#end
+                #@tinyTh({"class":"sorting","rel":"clientName","width":"200px"})客户名称#end
                 #@tinyTh({"class":"sorting","rel":"clientNO"})客户编号#end
                 #@tinyTh({"class":"sorting","rel":"clientCreatedBy"})客户登记人#end
                 #@tinyTh({"class":"sorting","rel":"clientCreateDate"})客户登记时间#end

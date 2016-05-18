@@ -19,7 +19,10 @@
             <div class="col-12">
                 #@colLabel("col-2 text-r")<span class="c-red">*</span>bug名称：#end
                 <div class="col-9">
-                    #tinyInput("text" "bugTitle" bug?.bugTitle {"datatype":"*","nullmsg":"bug标题不能为空！","id":"111","class":"input-text","placeholder":""})
+                    #tinyInput(
+                        "text" "bugTitle" bug?.bugTitle {"datatype":"*1-255","nullmsg":"bug标题不能为空！","id":"111","class":
+                        "input-text","placeholder":"",
+                        "ajaxurl":TINY_CONTEXT_PATH+adminPath+"/quality/bug/judgeBugNameExist?productId="+bug?.productId+"&oldBugTitle="+bug?.bugTitle})
                 </div>
             </div>
         #end
@@ -37,7 +40,7 @@
                 <div class="col-2 text-r"><label>备注：&nbsp</label></div>
 
                 <div class="col-9">
-                    #@Teditor("actionComment" "actionComment" {"initialFrameHeight":"150"})#end</div>
+                    #@Teditor("actionComment" "actionComment" {"initialFrameHeight":"150"})${actionComment}#end</div>
             </div>
         #end
         <br/>
@@ -75,7 +78,7 @@
 <script type="text/javascript">
     $(function () {
         $("form[name=thisform]").Validform({
-            tiptype: 1
+            tiptype: 2
         });
     });
 

@@ -66,7 +66,7 @@
                         #@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
                         #@tinyTh({"class":"sorting","rel":"task_no"})ID#end
                         #@tinyTh({"class":"sorting","rel":"task_pri"})P#end
-                        #@tinyTh({"class":"sorting","rel":"task_name"})任务名称#end
+                        #@tinyTh({"class":"sorting","rel":"task_name","width":"200px"})任务名称#end
                         #@tinyTh({"class":"sorting","rel":"task_status"})状态#end
                         #@tinyTh({"class":"sorting","rel":"task_dead_line"})截止#end
                         #@tinyTh({"class":"sorting","rel":"task_assigned_to"})指派给#end

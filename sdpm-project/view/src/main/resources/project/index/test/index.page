@@ -7,7 +7,7 @@
         <span class="r c">
                 #set(m=menuService.getMenu("tproposeversion"))
             #if(m)
-                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}"
+                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?projectId=${currentProjectId}"
                    title="${m.name}">#buttonIcon(iconClass=m.icon)${m.name}</a>
             #end
 				</span>
@@ -35,7 +35,7 @@
             #@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
                 #@tinyTh({"width":"6"})<input type="checkbox" name="" value="">#end
                 #@tinyTh({"class":"sorting","rel":"testversion_id"})ID#end
-                #@tinyTh({"class":"sorting","rel":"testtask_title"})任务名称#end
+                #@tinyTh({"class":"sorting","rel":"testtask_title","width":"200px"})任务名称#end
                 #@tinyTh({"class":"sorting","rel":"build_name"})版本#end
                 #@tinyTh({"class":"sorting","rel":"testtask_owner","style":"color:#333"})负责人#end
                 #@tinyTh({"class":"sorting","rel":"testtask_begin"})开始日期#end
@@ -46,3 +46,12 @@
         #end
     #end
 #end
+<script type="text/javascript">
+    $(function(){
+        if(${linkInfo}==1)
+        {
+            layer.msg("请先关联产品");
+            window.location="${TINY_CONTEXT_PATH +adminPath}/project/product/findLinkProduct";
+        }
+    });
+</script>

@@ -12,11 +12,11 @@
                     #Tselect2Ajax("taskAssignedTo" task.taskAssignedTo TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam?projectId="+task?.taskProject
                     {"id":"assignedToSelect","dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询指派人"})
                     #@Tselect2Fix()
-                        #set(m=menuService.getMenu("organizationAddUser"))
+                        #set(m=menuService.getMenu("pro-team-report"))
                         #if(m)
                             <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
                         #end
-                        #set(m=menuService.getMenu("organizationUser"))
+                        #set(m=menuService.getMenu("team"))
                         #if(m)
                             <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
                         #end
@@ -27,11 +27,13 @@
 
         #@elementItem()
             #@sdpmItem("预计剩余")
+                #@formControlDiv()
                 <div class="input-group">
                     #tinyInput("text" "taskLeft" task.taskLeft {"placeholder":"预计剩余","datatype":"/^[0-9]+(\.[0-9]{1,2})?$/",
                        "nullmsg":"请输入预计剩余", "aria-describedby":"basic-addon2"})
                     <span class="input-group-addon" id="basic-addon2">小时</span>
                 </div>
+                #end
             #end
         #end
 
@@ -39,7 +41,7 @@
             <div class="col-12">
                 <div class="col-2 text-r"><label>备注：</label></div>
                 <div class="col-9">
-                    #@Teditor("comment" "comment" {"initialFrameHeight":"150","initialFrameWidth":"702"})#end</div>
+                    #@Teditor("comment" "comment" {"initialFrameHeight":"150","initialFrameWidth":"702"})${actionComment}#end</div>
             </div>
         #end
         <br/>
@@ -80,5 +82,11 @@
                 doscroll();
             }, 10);
         })
+    })
+
+    $(function () {
+        $("form").Validform({
+            tiptype: 2
+        });
     })
 </script>

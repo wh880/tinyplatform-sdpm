@@ -41,5 +41,11 @@
       </service-parameters>
       <service-result name="findTestRunPagerResult" required="false" is-array="false" type="org.tinygroup.tinysqldsl.Pager"/>
     </service-method>
+    <service-method local-name="findTestRunByTestVersionId" service-id="findTestRunByTestVersionId" method-name="findTestRunByTestVersionId" cacheable="false" category="org.tinygroup.sdpm.quality.service.inter">
+      <service-parameters>
+        <service-parameter name="testversionId" type="java.lang.Integer" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findTestRunByTestVersionIdResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.quality.dao.pojo.QualityTestRun"/>
+    </service-method>
   </service-component>
 </service-components>

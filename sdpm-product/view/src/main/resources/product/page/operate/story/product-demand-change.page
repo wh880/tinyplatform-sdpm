@@ -54,7 +54,8 @@
             #@colLabel()<span class="c-red">*</span>需求名称：#end
             #@formControlDiv("col-4")
                 #tinyInput(
-                    "text" "storyTitle" story?.storyTitle{"placeholder":"请输入需求名称","datatype":"*","nullmsg":"需求名称不能为空！","id":"storyTitle",
+                    "text" "storyTitle" story?.storyTitle{"placeholder":"请输入需求名称","datatype":"*1-255","nullmsg":
+                    "需求名称不能为空！","id":"storyTitle",
                     "class":"input-text",
                     "ajaxurl":TINY_CONTEXT_PATH+adminPath+"/product/story/judgeStoryName?storyId="+story?.storyId+"&productId="+story?.productId})
 
@@ -85,7 +86,7 @@
             <div class="col-12">
                 <div class="col-2 text-r"><label>备注：</label></div>
                 <div class="col-9">
-                    #@Teditor("actionComment" "actionComment" {"initialFrameHeight":"150"})#end</div>
+                    #@Teditor("actionComment" "actionComment" {"initialFrameHeight":"150"})${actionComment}#end</div>
             </div>
         #end
 

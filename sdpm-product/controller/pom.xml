@@ -44,6 +44,11 @@
             <version>2.5</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>sdpm-project-controller</artifactId>
+            <version>1.0.3-SNAPSHOT</version>
+        </dependency>
 
     </dependencies>
 </project>

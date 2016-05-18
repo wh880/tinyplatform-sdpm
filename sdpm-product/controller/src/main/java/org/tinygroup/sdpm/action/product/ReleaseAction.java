@@ -26,6 +26,7 @@ import org.tinygroup.sdpm.system.service.inter.ProfileService;
 import org.tinygroup.sdpm.util.CookieUtils;
 import org.tinygroup.sdpm.util.ExportUtils;
 import org.tinygroup.sdpm.util.LogUtil;
+import org.tinygroup.sdpm.util.ProductUtils;
 import org.tinygroup.template.TemplateContext;
 import org.tinygroup.template.TemplateException;
 import org.tinygroup.template.impl.TemplateContextDefault;
@@ -147,9 +148,14 @@ public class ReleaseAction extends BaseController {
     }
 
     @RequestMapping("find")
-    public String find(Integer releaseId, Model model) {
+    public String find(Integer releaseId, Model model, @CookieValue(value= ProductUtils.COOKIE_PRODUCT_ID)String currentProductId) {
         ProductRelease release = releaseService.findRelease(releaseId);
         model.addAttribute("release", release);
+
+        if(release.getProductId()!=Integer.parseInt(currentProductId))
+        {
+            return "redirect:" + adminPath + "/product/release/content";
+        }
 
         SystemProfile systemProfile = new SystemProfile();
         systemProfile.setFileObjectId(releaseId);
@@ -181,7 +187,8 @@ public class ReleaseAction extends BaseController {
                           Integer releaseId,
                           Model model,
                           Integer no,
-                          HttpServletRequest request) {
+                          HttpServletRequest request,
+                          @CookieValue(value=ProductUtils.COOKIE_PRODUCT_ID)String currentProductId) {
 
         if (no != null) {
             String result = CookieUtils.getCookie(request, productUtils.COOKIE_PRODUCT_ID);
@@ -199,6 +206,13 @@ public class ReleaseAction extends BaseController {
             releaseId = releaseList.get(0).getReleaseId();
         }
         model.addAttribute("releaseId", releaseId);
+
+        ProductRelease release=releaseService.findRelease(releaseId);
+        if(release.getProductId()!=Integer.parseInt(currentProductId))
+        {
+            return "redirect:" + adminPath + "/product/release/content";
+        }
+
 
         if ("reRelateStory".equals(forwordPager)) {
             return "/product/page/relation/release/product-al-req.page";

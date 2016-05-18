@@ -7,12 +7,16 @@
     #@td("nowrap")<a href="${TINY_CONTEXT_PATH+adminPath}/quality/bug/bugInfo?currentPageId=5&bugId=${var?.bugId}">${var?.no}</a>#end
     #@td()${getDict("bugSeverity",var?.bugSeverity)}#end
     #@td()${getDict("bugPriority",var?.priority)}#end
-    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/bug/bugInfo?currentPageId=5&bugId=${var?.bugId}">
-    #if(var?.bugConfirmed==0)
-        <i class="icon-question-sign" style="color: coral" title="未确认"/>
-    #else
-        <i class="icon-ok-sign" style="color:darkseagreen" title="已确认" />
-    #end${var?.bugTitle}</a>#end
+    #@td()
+    <div style="width:200px;overflow:hidden;">
+    <a href="${TINY_CONTEXT_PATH+adminPath}/quality/bug/bugInfo?currentPageId=5&bugId=${var?.bugId}" title="${var?.bugTitle}">
+        #if(var?.bugConfirmed==0)
+            <i class="icon-question-sign" style="color: coral" title="未确认"/>
+        #else
+            <i class="icon-ok-sign" style="color:darkseagreen" title="已确认" />
+        #end
+        ${var?.bugTitle}
+    </a></div>#end
     #@td("nowrap")<span class="${getDict('colorOfBugStatus',var?.bugStatus)}">${getDict("bugStatus",var?.bugStatus)}</span>#if(var?.bugActivatedCount>0&&var?.bugStatus=="1")&nbsp<i class="icon-lightbulb" style="color: gold;"></i>#end#end
     #@td("nowrap")<span class="${var?.bugOpenedBy==userUtils.getUserId()?'c-red':''}">${var?.bugOpenedBy?userUtils.getUserById(var?.bugOpenedBy)?.orgUserRealName:""} </span>#end
     #@td("nowrap")${formatDate(var?.bugOpenedDate,"yyyy-MM-dd")}#end

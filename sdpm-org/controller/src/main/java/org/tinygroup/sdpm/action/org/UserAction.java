@@ -638,7 +638,8 @@ public class UserAction extends BaseController {
     }
 
     @RequestMapping("toBatchChooseTeam")
-    public String toBatchChooseTeam() {
+    public String toBatchChooseTeam(String ptype,Model model) {
+        model.addAttribute("ptype",ptype);
         return "organization/user/team/batchChooseTeamMember.pagelet";
     }
 

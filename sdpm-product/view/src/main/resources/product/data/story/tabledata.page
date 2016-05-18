@@ -68,7 +68,7 @@
             #end
             #@td()<a href="${TINY_CONTEXT_PATH +adminPath}/product/storySpec/find/productDemandDetail?storyId=${story.storyId}">${story.no}</a>#end
             #@td()${getDict("storyPri",story?.storyPri)}#end
-            #@td()<a href="${TINY_CONTEXT_PATH +adminPath}/product/storySpec/find/productDemandDetail?storyId=${story.storyId}">${story.storyTitle}</a>#end
+            #@td()<div style="width:200px;overflow:hidden;"><a href="${TINY_CONTEXT_PATH +adminPath}/product/storySpec/find/productDemandDetail?storyId=${story.storyId}" title="${story.storyTitle}">${story.storyTitle}</a></div>#end
             #@td()${story?.planName}#end
             #@td()${getDict("storySource",story?.storySource)}#end
             #@td("nowrap")<span class="${story?.storyOpenedBy==userUtils.getUserId()?'c-red':''}">${story?.storyOpenedBy?userUtils.getUserById(story?.storyOpenedBy).orgUserRealName:""}</span>#end
@@ -104,6 +104,7 @@
         #end
     #end
 #end
+
 <script>
     $(function(){
         $(".caseAdd").on("click",function(){

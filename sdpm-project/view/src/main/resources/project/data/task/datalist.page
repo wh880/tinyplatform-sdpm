@@ -8,83 +8,87 @@
 
             #@td()${t?.taskPri}</a>#end
 
-            #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/project/task/findTask?taskId=${t?.taskId}">${t?.taskName}
+            #@td()
+                <div style="width:200px;overflow:hidden;">
+                    <a href="${TINY_CONTEXT_PATH+adminPath}/project/task/findTask?taskId=${t?.taskId}" title="${t?.taskName}">${t?.taskName}</a>
+                </div>
             #end
 
-            #@td("nowrap")
-                <span class="${getDict('colorOfTaskStatus',t?.taskStatus)}">${getDict("taskStatus",t?.taskStatus)}</span>
-            #end
-            #@td("nowrap")${formatdate(t?.taskDeadLine,"yyyy-MM-dd")}#end
-            #@td("nowrap")
-                #if(t?.taskAssignedTo ==userUtils.getUserId())
-                    <span class="c-red">
+    #@td("nowrap")
+        <span class="${getDict('colorOfTaskStatus',t?.taskStatus)}">${getDict("taskStatus",t?.taskStatus)}</span>
+    #end
+    #@td("nowrap")${formatdate(t?.taskDeadLine,"yyyy-MM-dd")}#end
+    #@td("nowrap")
+        #if(t?.taskAssignedTo ==userUtils.getUserId())
+            <span class="c-red">
                     ${t?.taskAssignedTo==null?"":userUtils.getUserById(t.taskAssignedTo).orgUserRealName}
                     </span>
-                #else
-                    ${t?.taskAssignedTo==null?"":userUtils.getUserById(t.taskAssignedTo).orgUserRealName}
-                #end
-            #end
-            #@td("nowrap")${t?.taskFinishedBy==null?"":userUtils.getUserById(t.taskFinishedBy).orgUserRealName}#end
-            #@td()${t.taskEstimate}#end
-            #@td()${t.taskConsumed}#end
-            #@td()${t.taskLeft}#end
-            #@td()
-                #if(t.taskStory)
-                    #set(story = storyService.findStory(t.taskStory))
-                <div style="width:100px;overflow:hidden;white-space: nowrap"><a href="${TINY_CONTEXT_PATH+adminPath}/product/storySpec/find/productDemandDetail?storyId=${story?.storyId}" title="${story?.storyTitle}">${story?.storyTitle}</a></div>
-                #end
-            #end
+        #else
+            ${t?.taskAssignedTo==null?"":userUtils.getUserById(t.taskAssignedTo).orgUserRealName}
+        #end
+    #end
+    #@td("nowrap")${t?.taskFinishedBy==null?"":userUtils.getUserById(t.taskFinishedBy).orgUserRealName}#end
+    #@td()${t.taskEstimate}#end
+    #@td()${t.taskConsumed}#end
+    #@td()${t.taskLeft}#end
+    #@td()
+        #if(t.taskStory)
+            #set(story = storyService.findStory(t.taskStory))
+            <div style="width:100px;overflow:hidden;white-space: nowrap"><a href="${TINY_CONTEXT_PATH+adminPath}/product/storySpec/find/productDemandDetail?storyId=${story?.storyId}" title="${story?.storyTitle}">${story?.storyTitle}</a></div>
+        #end
+    #end
 
-            #@td("nowrap")
-            #foreach(m:menuService.getScopeMenus("pro-task-op"))
-            ##逻辑判断，根据状态判断是否可选择。
-            ##1.关闭，则
-                #if(t.taskStatus == 1)
-                    #if(m.id == "pro-task-close")
-                        <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>
-                    #else
-                        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?taskId=${t?.taskId}"
-                           title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
-                    #end
-                #elseif(t.taskStatus == 2)
-                    #if(m.id == "pro-task-start" || m.id=="pro-task-close")
-                        <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>
-                    #else
-                        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?taskId=${t?.taskId}"
-                           title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
-                    #end
-                #elseif(t.taskStatus == 3)
-                    #if(m.id == "pro-task-start" || m.id == "pro-task-finish")
-                        <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>
-                    #else
-                        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?taskId=${t?.taskId}"
-                           title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
-                    #end
-                #elseif(t.taskStatus == 4)
-                    #if(m.id == "pro-task-start" || m.id == "pro-task-close")
-                        <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>
-                    #else
-                        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?taskId=${t?.taskId}"
-                           title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
-                    #end
-                #elseif(t.taskStatus == 5)
-                    #if(m.id == "pro-task-call" || m.id == "pro-task-start" || m.id =="pro-task-finish")
-                        <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>
-                    #else
-                        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?taskId=${t?.taskId}"
-                           title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
-                    #end
-                #elseif(t.taskStatus == 6)
-                    #if(m.id == "pro-task-call" || m.id == "pro-task-start" ||m.id =="pro-task-finish" || m.id == "pro-task-close")
-                        <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>
-                    #else
-                        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?taskId=${t?.taskId}"
-                           title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
-                    #end
+    #@td("nowrap")
+        #foreach(m:menuService.getScopeMenus("pro-task-op"))
+        ##逻辑判断，根据状态判断是否可选择。
+        ##1.关闭，则
+            #if(t.taskStatus == 1)
+                #if(m.id == "pro-task-close")
+                    <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>
                 #else
+                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?taskId=${t?.taskId}"
+                       title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
                 #end
+            #elseif(t.taskStatus == 2)
+                #if(m.id == "pro-task-start" || m.id=="pro-task-close")
+                    <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>
+                #else
+                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?taskId=${t?.taskId}"
+                       title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+                #end
+            #elseif(t.taskStatus == 3)
+                #if(m.id == "pro-task-start" || m.id == "pro-task-finish")
+                    <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>
+                #else
+                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?taskId=${t?.taskId}"
+                       title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+                #end
+            #elseif(t.taskStatus == 4)
+                #if(m.id == "pro-task-start" || m.id == "pro-task-close")
+                    <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>
+                #else
+                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?taskId=${t?.taskId}"
+                       title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+                #end
+            #elseif(t.taskStatus == 5)
+                #if(m.id == "pro-task-call" || m.id == "pro-task-start" || m.id =="pro-task-finish")
+                    <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>
+                #else
+                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?taskId=${t?.taskId}"
+                       title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+                #end
+            #elseif(t.taskStatus == 6)
+                #if(m.id == "pro-task-call" || m.id == "pro-task-start" ||m.id =="pro-task-finish" || m.id == "pro-task-close")
+                    <span style="color:grey">#buttonIcon(iconClass=m.icon+" grey")</span>
+                #else
+                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?taskId=${t?.taskId}"
+                       title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+                #end
+            #else
             #end
-            #end
+        #end
+    #end
 #end
 
 #end
+</div>

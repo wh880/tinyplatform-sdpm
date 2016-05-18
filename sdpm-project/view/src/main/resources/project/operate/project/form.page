@@ -9,13 +9,13 @@
         <input type="hidden" name="projectOpenedBy" value="${userUtils.getUser().orgUserId}"/>
         #@elementItem()
             #@sdpmItem("项目名称" "*")
-                #tinyInput("text" "projectName" "" {"placeholder":"请输入项目名称","datatype":"*","nullmsg":"项目名称不能为空！",
+                #tinyInput("text" "projectName" "" {"placeholder":"请输入项目名称","datatype":"*1-30","nullmsg":"项目名称不能为空！",
                     "class":"input-text","ajaxurl":TINY_CONTEXT_PATH+adminPath+"/project/validProjectName"})
             #end
         #end
         #@elementItem()
             #@sdpmItem("项目代号" "*")
-                #tinyInput("text" "projectCode" "" {"placeholder":"请输入项目代号","datatype":"*","nullmsg":"项目代号不能为空！",
+                #tinyInput("text" "projectCode" "" {"placeholder":"请输入项目代号","datatype":"*1-30","nullmsg":"项目代号不能为空！",
                     "class":"input-text"})
             #end
         #end
@@ -58,7 +58,7 @@
             #@sdpmItem("可用工作日")
                 <div class="input-group">
                     <input name="projectDays" type="text" class="form-control" placeholder=""
-                           aria-describedby="basic-addon2" datatype="n">
+                           aria-describedby="basic-addon2" datatype="n" readonly="readonly">
                     <span class="input-group-addon" id="basic-addon2">天</span>
                 </div>
             #end
@@ -78,7 +78,7 @@
 
         #@elementItem()
             #@sdpmItem("团队名称" "*")
-                #tinyInput("text" "projectTeam" "" {"placeholder":"请输入团队名称","datatype":"*","nullmsg":
+                #tinyInput("text" "projectTeam" "" {"placeholder":"请输入团队名称","datatype":"*1-255","nullmsg":
                     "团队名称不能为空","class":"input-text"})
             #end
         #end

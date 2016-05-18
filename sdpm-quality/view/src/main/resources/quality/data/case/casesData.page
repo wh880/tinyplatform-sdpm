@@ -31,7 +31,7 @@ ${casepager?.totalCount+1}
         #set(m=menuService.getMenu("tcaseinfodelete"))
         #if(m)
             #@tinyTableItemRemove(TINY_CONTEXT_PATH +adminPath+m.href  c?.caseId)<i
-                    class="${m.icon}"></i>
+                    class="${m.icon}" title="${m.name}"></i>
             #end
         #end
     #end

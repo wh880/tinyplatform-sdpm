@@ -65,22 +65,22 @@
                     });
                 </script>
                 #@tr()
-                    #@th()
-                        <div style="width: 64px;float: right">相关需求</div>#end
+                    #@th()<div style="width: 64px;float: right">相关需求</div>#end
                     #@td()
                         #@formControlDiv("col-10")
                             #@Tselect2F()
                                 #@Tselect2Body("taskStory" task?.taskStory {"class":"input-text select2"})
-                                    <option value=""></option>
+                                    <option></option>
                                     #foreach(s : storyList)
                                         <option value="${s.storyId}">${s.storyTitle}</option>
                                     #end
                                 #end
                                 #@Tselect2Fix()
                                     <a href="${TINY_CONTEXT_PATH+adminPath}/product/story/addstory">新增</a>
-                                    <a href="${TINY_CONTEXT_PATH+adminPath}/product/story/search" class="r">全部</a>
+                                    <a href="${TINY_CONTEXT_PATH+adminPath}/project/demand/index" class="r">全部</a>
                                 #end
                             #end
+                            #@validateDiv("col-2")#end
                         #end
                     #end
                 #end
@@ -94,11 +94,11 @@
 
                         ##填写任意内容，侦听需重新填加 A侦听已内置
                             #@Tselect2Fix()
-                                #set(m=menuService.getMenu("organizationAddUser"))
+                                #set(m=menuService.getMenu("pro-team-report"))
                                 #if(m)
                                     <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
                                 #end
-                                #set(m=menuService.getMenu("organizationUser"))
+                                #set(m=menuService.getMenu("team"))
                                 #if(m)
                                     <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
                                 #end
@@ -127,9 +127,14 @@
                     #@th()任务状态#end
                     #@td()#@formControlDiv("col-10")
                         #@Tselect2F()
-                            #@Tselect2Body(
+                           #* #@Tselect2Body(
                                 "taskStatus" task?.taskStatus {"class":
                                 "input-text select2"})
+                                #foreach(item : getDict("taskStatus"))
+                                    #@tinyOptionItem(item.value)${item.text}#end
+                                #end
+                            #end*#
+                            #@tinySelect("taskStatus" task?.taskStatus {"class":"input-text select2"})
                                 #foreach(item : getDict("taskStatus"))
                                     #@tinyOptionItem(item.value)${item.text}#end
                                 #end
@@ -242,7 +247,7 @@
                     #@td()
                         #@formControlDiv("col-10")
                             <div class="input-group">
-                                #tinyInput("text" "taskLeft" task.taskLeft {"placeholder":"预计剩余","aria-describedby":"basic-addon2"})
+                                #tinyInput("text" "taskLeft" task.taskLeft {"placeholder":"预计剩余","datatype":"/^[0-9]+(\.[0-9]{1,2})?$/","aria-describedby":"basic-addon2"})
                                 <span class="input-group-addon" id="basic-addon2">小时</span>
                             </div>
                         #end
@@ -255,6 +260,7 @@
 
     #@div(divClass="infoContent")
         <p class="titleName">任务的一生</p>
+        <input name="userId" type="hidden" value="${userId}"/>
         #@table()
             #@thead()
             #end
@@ -277,11 +283,11 @@
                                 #end
                             ##填写任意内容，侦听需重新填加 A侦听已内置
                                 #@Tselect2Fix()
-                                    #set(m=menuService.getMenu("organizationAddUser"))
+                                    #set(m=menuService.getMenu("pro-team-report"))
                                     #if(m)
                                         <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
                                     #end
-                                    #set(m=menuService.getMenu("organizationUser"))
+                                    #set(m=menuService.getMenu("team"))
                                     #if(m)
                                         <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
                                     #end
@@ -314,11 +320,11 @@
                                 #end
                             ##填写任意内容，侦听需重新填加 A侦听已内置
                                 #@Tselect2Fix()
-                                    #set(m=menuService.getMenu("organizationAddUser"))
+                                    #set(m=menuService.getMenu("pro-team-report"))
                                     #if(m)
                                         <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
                                     #end
-                                    #set(m=menuService.getMenu("organizationUser"))
+                                    #set(m=menuService.getMenu("team"))
                                     #if(m)
                                         <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
                                     #end
@@ -351,11 +357,11 @@
                                     #end
                                 #end
                                 #@Tselect2Fix()
-                                    #set(m=menuService.getMenu("organizationAddUser"))
+                                    #set(m=menuService.getMenu("pro-team-report"))
                                     #if(m)
                                         <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
                                     #end
-                                    #set(m=menuService.getMenu("organizationUser"))
+                                    #set(m=menuService.getMenu("team"))
                                     #if(m)
                                         <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
                                     #end
@@ -379,3 +385,48 @@
         #end
     #end
 </div>
+<script type="text/javascript">
+    $(function(){
+        //状态改变，相应信息改变
+        $("select[name=taskStatus]").change(function(){
+            var statusVal=$(this).val();
+            var userId=$("input[name=userId]").val();
+            //已完成状态
+            if(statusVal=="3")
+            {
+                $("select[name=taskFinishedBy]").val(userId);
+                $("input[name=taskFinishedDate]").val(new Date().Format("yyyy-MM-dd hh:mm:ss"));
+            }
+
+            //已取消状态
+            if(statusVal=="5")
+            {
+                $("select[name=taskCanceledBy]").val(userId);
+                $("input[name=taskCloseDate]").val(new Date().Format("yyyy-MM-dd hh:mm:ss"));
+            }
+
+            //已关闭状态
+            if(statusVal=="6")
+            {
+                $("select[name=taskClosedBy]").val(userId);
+                $("input[name=taskCloseDate]").val(new Date().Format("yyyy-MM-dd hh:mm:ss"));
+            }
+        });
+    });
+
+    Date.prototype.Format = function (fmt) {
+        var o = {
+            "M+": this.getMonth() + 1, //月份
+            "d+": this.getDate(), //日
+            "h+": this.getHours(), //小时
+            "m+": this.getMinutes(), //分
+            "s+": this.getSeconds(), //秒
+            "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+            "S": this.getMilliseconds() //毫秒
+        };
+        if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+        for (var k in o)
+            if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+        return fmt;
+    }
+</script>

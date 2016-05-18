@@ -13,7 +13,7 @@
             #@div(divClass="col-12")
                 #@TzTreeSelect(
                     "productId" cookieProductId {"class":"input-text","datatype":"*","nullmsg":"所属产品不能为空！",
-                    "data-URL":call("link",adminPath+"/productLine/userProductTree")})
+                    "data-URL":call("link",adminPath+"/productLine/userProductTree"),"readonly":"readonly"})
                     <script>
                         $(function(){
                             $("#${sid}").on("setValue",function(o,treeNode){
@@ -76,8 +76,8 @@
         #@formControlDiv("col-4")
             #@div(divClass="col-12")
                 #tinyInput(
-                    "text" "docTitle" ""{"placeholder":"请输入文档标题","datatype":"*","nullmsg":"文档标题不能为空！","class":
-                    "input-text"
+                    "text" "docTitle" ""{"placeholder":"请输入文档标题","datatype":"*1-255","nullmsg":"文档标题不能为空！","class":
+                    "input-text","ajaxurl":TINY_CONTEXT_PATH+adminPath+"/product/judgeDocTitle?productId="+cookieProductId
                 })
             #end
         #end
@@ -89,7 +89,8 @@
         #@formControlDiv("col-4")
             #@div(divClass="col-12")
                 #tinyInput(
-                    "text" "docUrl" ""{"placeholder":"相应的链接地址","datatype":"*","ignore":"ignore","class":"input-text"})
+                    "text" "docUrl" ""{"placeholder":"相应的链接地址","datatype":"*1-255","ignore":"ignore","class":
+                    "input-text"})
             #end
         #end
         #@validateDiv("col-2")#end
@@ -99,7 +100,8 @@
         #@colLabel()关键字#end
         #@formControlDiv("col-4")
             #@div(divClass="col-12")
-                #tinyInput("text" "docKeywords" ""{"placeholder":"","datatype":"","class":"input-text"})
+                #tinyInput(
+                    "text" "docKeywords" ""{"placeholder":"","datatype":"","class":"input-text","datatype":"*1-255"})
             #end
         #end
     #end

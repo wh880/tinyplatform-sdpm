@@ -11,6 +11,7 @@
        onclick="selectAllNullorReserve('userIdCheck','全选');"/>
 <input type="button" value="反选" class="btn btn-default btn-primary"
        onclick="selectAllNullorReserve('userIdCheck','反选');"/>
+    <input type="hidden" value="${ptype}" name="ptype"/>
 </div>
 <div id="batchTeamData">
     #@table()
@@ -59,10 +60,13 @@ $(function(){
                 data = data + "&userIds=" + checklist[i];
             }
         }
+
+        var ptype=$('input[name=ptype]').val();
+
         var $thisTr=$(".addnext").closest("tr");
         $.ajax({
             type: "POST",
-            url: "${TINY_CONTEXT_PATH+adminPath}/product/team/batchTeamTr"+data,
+            url: "${TINY_CONTEXT_PATH+adminPath}/"+ptype+"/team/batchTeamTr"+data,
             data: {a:$thisTr.attr("class").substring(3)},
             dataType: "html",
             success: function(data){

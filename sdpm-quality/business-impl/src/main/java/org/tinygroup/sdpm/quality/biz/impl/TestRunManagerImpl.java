@@ -56,6 +56,11 @@ public class TestRunManagerImpl implements TestRunManager {
         return testrundao.queryPager(start, limit, testRun, mergeCondition(carrier), new OrderBy(sortName, asc));
     }
 
+    @Override
+    public List<QualityTestRun> findTestRunByTestVersionId(Integer testversionId) {
+        return testrundao.findTestRunByTestVersionId(testversionId);
+    }
+
     private Condition mergeCondition(ConditionCarrier carrier) {
         return ConditionUtils.mergeCondition(carrier, new CallBackFunction() {
             public String moduleRoot(String moduleId) {

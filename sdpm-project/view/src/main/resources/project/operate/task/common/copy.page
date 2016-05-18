@@ -130,7 +130,8 @@
             #@sdpmItem("任务名称" "*")
                 #@formControlDiv()
                     #tinyInput(
-                        "text" "taskName" task?.taskName {"placeholder":"任务名称","datatype":"*","nullmsg":"任务名称不能为空！",
+                        "text" "taskName" task?.taskName {"placeholder":"任务名称","datatype":"*1-255","nullmsg":
+                        "任务名称不能为空！",
                         "class":"input-text"})
                 #end
             #end

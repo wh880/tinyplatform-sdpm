@@ -83,5 +83,12 @@ public interface BugManager {
 
     QualityBug findBugByBugId(Integer bugId);
 
-
+    /**
+     * 校验Bug名称的唯一性
+     * @param bugTitle
+     * @param productId
+     * @param status
+     * @return
+     */
+    List<QualityBug> findBugByProductIdAndBugTitle(String bugTitle, Integer productId,String status);
 }

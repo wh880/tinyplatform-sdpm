@@ -19,9 +19,23 @@
             #@formControlDiv("col-4")
 					#@div(divClass="col-10")
 					 #@Tselect2F()
-					 <script type="text/javascript">
+                         #@Tselect2Body("projectId" projectId {"datatype":"*","nullmsg":"所属项目不能为空","class":
+                             "input-text select2"}) ##,"multiple":"multiple"加上为多选项
+
+                         #end
+                         <script type="text/javascript">
+                             ajaxRead("${sid}", "projectId", "projectId", "projectName", "/quality/bug/ajax/project?productId=${cookieProductId}", "${testTask?.projectId?:(projectId?:0)}");
+                             $("#${sid}").on("change",function(){
+                                 var pId = $("#${sid}  option:selected").val();
+                                 if(pId>0){
+                                     ajaxRead("${sid}","buildName","buildId","buildName","/quality/version/ajax/build?buildProject="+pId+"&buildProduct=${cookieProductId?:0}",${testTask?.buildName?:0},"build");
+                             ajaxRead("${sid}","testtaskOwner","orgUserId","orgUserRealName","/quality/version/ajax/user?projectId="+pId,"${testTask?.testtaskOwner?:0}");
+                             }
+                             })
+                         </script>
+			#*		 <script type="text/javascript">
 					 $(function(){
-                         ajaxRead("${sid}", "projectId", "projectId", "projectName", "/quality/bug/ajax/project?productId=${cookieProductId}", ${testTask?.projectId?:(projectId?:0)});
+                         ajaxRead("${sid}", "projectId", "projectId", "projectName", "/quality/bug/ajax/project?productId=${cookieProductId}", "${testTask?.projectId?:(projectId?:0)}");
 					    $("#${sid}").on("change",function(){
                              var pId = $("#${sid}  option:selected").val();
                             if(pId>0){
@@ -34,7 +48,7 @@
                          #@Tselect2Body(
                              "projectId" testTask?.projectId?:(projectId?:0) {"class":"input-text select2","datatype":"*",
                          "nullmsg":"所属项目不能为空"}) ##,"multiple":"multiple"加上为多选项
-	                    	#end
+	                    	#end*#
                          #@Tselect2Fix()
                              #set(m=menuService.getMenu("project-op-add"))
                              #if(m)
@@ -57,6 +71,9 @@
 					 #@Tselect2F()
                          #@Tselect2Body("buildName" testTask?.buildName?:buildId {"class":"input-text select2","datatype":"*",
                              "nullmsg":"版本不能为空"}) ##,"multiple":"multiple"加上为多选项
+                            #* #foreach(list : buildList)
+                                 <option value="">${list?.buildName}</option>
+                             #end*#
 	                    	#end
                          #@Tselect2Fix()
                              #set(m=menuService.getMenu("pro-version-add"))
@@ -136,7 +153,7 @@
             #@formControlDiv("col-8")
                 #@div(divClass="col-5")
 						#@Tselect2F()
-	                   		 #@Tselect2Body("testtaskStatus" testTask?.testtaskStatus {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                            #@tinySelect("testtaskStatus" testTask?.testtaskStatus {"class":"#####","nullmsg":"请选择"})
 	                        #foreach(status : getDict("versionStatus"))
                                 <option value="${status?.value}">${status?.text}</option>
                             #end
@@ -150,7 +167,10 @@
             #@colLabel()<span class="c-red">*</span>测试名称：#end
             #@formControlDiv("col-4")
             	#@div(divClass="col-10")
-                	#tinyInput("text" "testtaskTitle" testTask?.testtaskTitle {"datatype":"*","nullmsg":"测试名称不能为空","id":"关键词","class":"input-text"})
+                    #tinyInput(
+                        "text" "testtaskTitle" testTask?.testtaskTitle {"datatype":"*1-90","nullmsg":"测试名称不能为空","id":
+                        "关键词","class":"input-text",
+                        "ajaxurl":TINY_CONTEXT_PATH+adminPath+"/quality/version/judgeTestTaskNameExist?currentURL="+currentURL+"&testTaskTitle="+testTask?.testtaskTitle})
                 #end
             #end
             #@validateDiv("col-2")#end
@@ -200,7 +220,7 @@
                         jumpUrl = currentAddress;
                     }else{
                         if(!oldUrl) {
-                            olUrl = "/a/quality/version?status=tvernotest&currentPageId=5"
+                            oldUrl = "/a/quality/version?status=tvernotest&currentPageId=5"
                         }
                         jumpUrl = oldUrl
                     }

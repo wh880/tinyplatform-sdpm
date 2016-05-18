@@ -52,6 +52,17 @@ public interface HolidayManager {
     Pager<Holiday> findByPage(int start, int limit, Holiday holiday, String sortName, boolean asc);
 
     /**
+     * Holiday分页查询修改
+     * @param start
+     * @param limit
+     * @param holiday
+     * @param sortName
+     * @param asc
+     * @return
+     */
+    Pager<Holiday> findByHolidayDeleted(Integer start, Integer limit, Holiday holiday, String sortName, boolean asc);
+
+    /**
      * 批量增加
      *
      * @param holidayList

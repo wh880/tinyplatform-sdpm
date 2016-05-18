@@ -211,4 +211,5 @@ public interface RoleService {
      * @return
      */
     List<OrgRole> roleInCondition(String condition, String type, Integer limit);
+
 }

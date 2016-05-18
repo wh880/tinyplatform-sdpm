@@ -116,7 +116,7 @@ public class ProjectTask implements Serializable {
     /**
      * 任务状态
      * <p>
-     * 0-等待，1-未开始，2-进行中，3-已完成，4-已暂停，5-已取消,6-已关闭
+     * 0-等待，1-未开始，2-进行中，3-已完成，4-已暂停，5-已取消,6-已关闭,7-已延期
      */
     private String taskStatus;
     /**

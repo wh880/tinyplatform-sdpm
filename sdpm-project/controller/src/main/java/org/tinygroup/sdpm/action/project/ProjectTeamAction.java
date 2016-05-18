@@ -111,6 +111,17 @@ public class ProjectTeamAction extends BaseController {
                 i--;
             }
         }
+
+        //删除重复
+        for(int i=0;i<teamList.size()-1;i++)
+        {
+            for(int j=teamList.size()-1;j>i;j--)
+            {
+                if(teamList.get(i).getTeamUserId().equals(teamList.get(j).getTeamUserId()))
+                    teamList.remove(j);
+            }
+        }
+
         //根据是否有teamId分为增加列表和更新列表
         for (ProjectTeam team : teamList) {
             if (team.getId() != null) {

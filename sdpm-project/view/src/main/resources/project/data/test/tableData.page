@@ -13,49 +13,47 @@
         #@td()<a
                 href="${TINY_CONTEXT_PATH+adminPath}/quality/version/taskToCase?testversionId=${v?.testversionId}&currentPageId=5&status=tverallcase">${v
             ?.testversionId}</a>#end
-        #@td()<a
-                href="${TINY_CONTEXT_PATH+adminPath}/quality/version/taskToCase?testversionId=${v?.testversionId}&currentPageId=5&status=tverallcase">${v
-            ?.testtaskTitle}</a>#end
-        #@td()${v?.searchBuildName}#end
+        #@td()
+            <div style="width: 200px;overflow: hidden">
+                <a href="${TINY_CONTEXT_PATH+adminPath}/quality/version/taskToCase?testversionId=${v?.testversionId}&currentPageId=5&status=tverallcase" title="${v?.testtaskTitle}">${v?.testtaskTitle}</a>
+            </div>
+        #end
+        #@td()${v?.searchBuildName?:(v?.buildName=="0"?"trunk":"")}#end
         #@td("nowrap")${v?.testtaskOwner?userUtils.getUserById(v?.testtaskOwner)?.orgUserRealName:""}#end
         #@td("nowrap")${formatDate(v?.testtaskBegin, "yyyy-MM-dd")}#end
         #@td("nowrap")${formatDate(v?.testtaskEnd, "yyyy-MM-dd")}#end
         #@td()${getDict("versionStatus",v?.testtaskStatus)}#end
         #@td("nowrap")
-            #set(m=menuService.getMenu("pro-demand-relation"))
+            #*#set(m=menuService.getMenu("pro-demand-relation"))
             #if(m)
             <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?buildId=${v?.testversionId}"
                title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
-            #end
+            #end*#
             #foreach(m:menuService.getScopeMenus("testversion-op"))
-            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?testversionId=${v?.testversionId}&currentPageId=5"
-               title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?testversionId=${v?.testversionId}&currentPageId=5" title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
             #end
-            #set(m=menuService.getMenu("tversiondelete"))
+            #set(m=menuService.getMenu("tverdelete"))
             #if(m)
-            <a class="versionDelete" href="javascript:void(0)"><i class="${m.icon}" title="删除"></i></a>
-            <script type="text/javascript">
-                $(function () {
-                    var check = $(".versionDelete");
-                    check.on("click", function () {
-                        layer.confirm("是否确认删除?", function () {
-                            $.ajax({
-                                type: "get",
-                                url: "${TINY_CONTEXT_PATH+adminPath+m?.href+'?testversionId ='+v?.testversionId}",
-                                dataType: "json",
-                                success: function (data) {
-                                    if (data.status == "y") {
-                                        window.location.reload();
-                                    }
-                                }
-                            });
-                            return false;
-                        });
-                    });
-                })
-
-            </script>
+                <a class="versionDelete" href="javascript:void(0)" onclick="deleteTest(${v?.testversionId})"><i class="${m.icon}" title="删除"></i></a>
             #end
         #end
     #end
 #end
+<script type="text/javascript">
+    function deleteTest(id)
+    {
+        layer.confirm("是否确认删除?", function () {
+            $.ajax({
+                type: "post",
+                url: "${TINY_CONTEXT_PATH+adminPath}/quality/version/ajax/delete?testversionId="+id,
+                dataType: "json",
+                success: function (data) {
+                    if (data.status == "y") {
+                        window.location.reload();
+                    }
+                }
+            });
+            return false;
+        });
+    }
+</script>

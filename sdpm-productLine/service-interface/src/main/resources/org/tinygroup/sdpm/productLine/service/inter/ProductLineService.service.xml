@@ -70,8 +70,8 @@
     </service-method>
     <service-method local-name="findProductLineInPage" service-id="findProductLineInPage" method-name="findProductLineInPage" cacheable="false" category="org.tinygroup.sdpm.productLine.service.inter">
       <service-parameters>
-        <service-parameter name="start" type="int" required="false" is-array="false"/>
-        <service-parameter name="limit" type="int" required="false" is-array="false"/>
+        <service-parameter name="start" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="limit" type="java.lang.Integer" required="false" is-array="false"/>
         <service-parameter name="productLine" type="org.tinygroup.sdpm.productLine.dao.pojo.ProductLine" required="false" is-array="false"/>
         <service-parameter name="order" type="java.lang.String" required="false" is-array="false"/>
         <service-parameter name="orderType" type="java.lang.String" required="false" is-array="false"/>

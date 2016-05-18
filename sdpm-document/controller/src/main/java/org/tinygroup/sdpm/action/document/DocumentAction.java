@@ -248,12 +248,15 @@ public class DocumentAction extends BaseController {
     }
 
     @RequestMapping("/product/{type}/updateDoc")
-    public String saveDocument(DocumentDoc doc,
-                               @PathVariable(value = "type") String type,
+    public String saveDocument(DocumentDoc doc,Integer docProduct,Integer docLibId,Integer docDeleted,
+                               @PathVariable(value = "type") String type,String productId,
                                String lastAddress,
                                UploadProfile uploadProfile) throws IOException {
         if ("save".equals(type)) {
             doc.setDocAddedBy(userUtils.getUserId());
+            doc.setDocProduct(Integer.parseInt(productId));
+            doc.setDocLibId(docLibId);
+            doc.setDocModule(docDeleted);
             DocumentDoc document = docService.createNewDoc(doc);
 
             processProfile(uploadProfile, document.getDocId(), ProfileType.DOCUMENT);

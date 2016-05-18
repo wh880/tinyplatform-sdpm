@@ -6,10 +6,10 @@
     <div class="infoContent">
         <p class="titleName">${task?.taskName}>完成</p>
         #@elementItem()
-            #@colLabel()总消耗#end
+            #@colLabel()总消耗(小时)#end
             #@formControlDiv("col-8")
                 #tinyInput("text" "taskConsumed" task.taskConsumed {"placeholder":"总消耗时间","id":"comsume-time","class":
-                    "input-text","datatype":"*4-16","nullmsg":"请输入总消耗时间（小时）"})
+                    "input-text","datatype":"*","nullmsg":"请输入总消耗时间（小时）"})
             #end
             #@validateDiv("col-2")#end
         #end
@@ -25,11 +25,11 @@
                         #end
                     #end
                     #@Tselect2Fix()
-                        #set(m=menuService.getMenu("organizationAddUser"))
+                        #set(m=menuService.getMenu("pro-team-report"))
                         #if(m)
                             <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
                         #end
-                        #set(m=menuService.getMenu("organizationUser"))
+                        #set(m=menuService.getMenu("team"))
                         #if(m)
                             <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
                         #end
@@ -57,11 +57,16 @@
 
     ##
         #@elementItem()
-            #@colLabel()备注#end
+            #*#@colLabel()备注#end
             #@formControlDiv("col-8")
-                #Teditor("content" "comment" {"initialFrameHeight":"200"})
-            #end
-            #@validateDiv("col-2")#end
+                #Teditor("content" "comment" {"initialFrameHeight":"200"})${actionComment}#end
+            #@validateDiv("col-2")#end*#
+            <div class="col-12">
+                <div class="col-2 text-r"><label>备注：</label></div>
+                <div class="col-8">
+                    #@Teditor("content" "comment" {"initialFrameHeight":"150"})${actionComment}#end
+                </div>
+            </div>
         #end
     </div>
     #@elementItem()
@@ -91,4 +96,24 @@
 
         })
     })*/
+    $(function()
+    {
+        $("input[name=taskConsumed]").change(function(){
+            if(isNaN($(this).val())||parseInt($(this).val())<0)
+            {
+                layer.msg("请正确输入总耗时");
+            }
+        });
+        $('form[name=thisform]').Validform({
+            beforeSubmit:function(form)
+            {
+                var taskConsumed=$("input[name=taskConsumed]").val();
+                if(isNaN(taskConsumed)||parseInt(taskConsumed)<0)
+                {
+                    layer.msg("请正确输入总耗时");
+                    return false;
+                }
+            }
+        });
+    });
 </script>

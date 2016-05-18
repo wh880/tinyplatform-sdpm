@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.commons.tools.ArrayUtil;
+import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.dao.complexsearch.SearchInfos;
 import org.tinygroup.sdpm.document.biz.inter.DocBiz;
 import org.tinygroup.sdpm.document.dao.pojo.DocumentDoc;
@@ -86,6 +87,14 @@ public class DocServiceImpl implements DocService {
             return 0;
         }
         return len.length;
+    }
+
+    @Override
+    public List<DocumentDocLib> findDocLibByDocLib(DocumentDocLib lib) {
+        if(StringUtil.isEmpty(lib.getDocLibName())) {
+            return null;
+        }
+        return docbiz.findDocLibByDocLib(lib);
     }
 
 }

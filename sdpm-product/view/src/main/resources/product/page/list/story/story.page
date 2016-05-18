@@ -97,6 +97,7 @@
 ##                       class="${choose == 10?'active_btn':''}">待关闭</a>
 					<a href="${TINY_CONTEXT_PATH +adminPath}/product/story?${urlProduct}${urlModule}choose=11&currentPageId=3"
                        class="${choose == 11?'active_btn':''}">已关闭</a>
+                    <a href="javascript:void(0);" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
 ##					<a href="javascript:void(0);" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
 				</span>
 
@@ -156,7 +157,7 @@
 
 
         #div(divClass="clearfix")
-##        #include("/product/page/search/mulsearch.page")
+        #include("/product/page/search/mulsearch.page")
     #end
 ##operationbar end
 
@@ -243,7 +244,11 @@
                     #foreach(m:menuManager?.getScopeMenus("product-del"))
                         #if(m?.id=="product-demand-del")
                         #set(dae=[34,36])
-                            #@btnModal("#myModal" "关闭" "1000" "400" "btn radius btn-danger" adminPath+"/product/story/findByKeys" "betchClose")批量关闭#end
+
+                                <a>#@mulOperation("product-demand-del" TINY_CONTEXT_PATH+adminPath+"/product/story/batchclose")
+                                    #@btnModal("" "批量关闭" "1000" "400" "btn radius btn-danger") 批量关闭#end
+                                #end</a>
+
                         #end
                     #end
                 #end

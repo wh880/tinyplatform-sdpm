@@ -152,8 +152,8 @@
             #@colLabel()<span class="c-red">*</span>文档标题：#end
             #@formControlDiv("col-4")
                 #tinyInput(
-                    "text" "docTitle" doc?.docTitle{"placeholder":"请填写文档标题","datatype":"*1-16","nullmsg":"标题不能为空！",
-                    "class":"input-text"})
+                    "text" "docTitle" doc?.docTitle{"placeholder":"请填写文档标题","datatype":"*1-255","nullmsg":"标题不能为空！",
+                    "class":"input-text","ajaxurl":TINY_CONTEXT_PATH+adminPath+"/document/doc/docTitleCheck?productId="+cookieProductId+"&docId="+docId})
             #end
             #@validateDiv("col-6")#end
         #end
@@ -162,7 +162,7 @@
                 <div class="col-2 text-r"><label>文档URL：</label></div>
                 <div class="col-4">
                     #tinyInput(
-                   "text" "docUrl" ""{"placeholder":"相应的链接地址","datatype":"*4-16",
+                   "text" "docUrl" ""{"placeholder":"相应的链接地址","datatype":"*0-255",
                                    "id":"docurl","class":"input-text","ignore":"ignore"})
                 </div>
             </div>
@@ -173,7 +173,8 @@
                 <div class="col-2 text-r"><label>关键字：</label></div>
                 <div class="col-4">
                     #tinyInput(
-                        "text" "docKeywords" doc?.docKeywords {"id":"docKeywords","class":"input-text"})
+                        "text" "docKeywords" doc?.docKeywords {"id":"docKeywords","class":"input-text","datatype":
+                        "*0-255"})
                 </div>
             </div>
             #@validateDiv("col-2")#end
@@ -227,6 +228,7 @@
     #@dialogHeader()#end
     #@dialogBody()<p></p>#end
 #end
+
 <script type="text/javascript">
     /* Set doc type. */
     $(function () {

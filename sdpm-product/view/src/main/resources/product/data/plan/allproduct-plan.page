@@ -10,7 +10,9 @@
             ?.no}</a>#end
         #@td()<a href="${TINY_CONTEXT_PATH +adminPath}/product/plan/forword/reRelateStory?planId=${plan.planId}">${plan
             ?.planName}</a>#end
-        #@td()${plan?.planSpec}#end
+        #@td()
+            <div style="width: 300px;overflow: hidden;">${plan?.planSpec}</div>
+        #end
         #@td("nowrap")${plan?.planBeginDate?formatDate(plan?.planBeginDate,'yyyy-MM-dd'):""}#end
         #@td("nowrap")${plan?.planEndDate?formatDate(plan?.planEndDate,'yyyy-MM-dd'):""}#end
         #@td("nowrap")
@@ -22,7 +24,7 @@
                         class="${m.icon}"></i></a>
                 #else
                 &nbsp;#@tinyTableItemRemove(TINY_CONTEXT_PATH +adminPath+m.href+plan.planId)<i
-                        class="${m.icon}"></i>#end
+                        class="${m.icon}" title="${m.name}"></i>#end
                 #end
             #end
         #end

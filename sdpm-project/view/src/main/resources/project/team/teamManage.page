@@ -5,7 +5,7 @@
         团队管理
         #end
     <span class="r" style="position:relative;top:-28px;height:0">
-                #@aModal("#myModal" "批量添加" 350 600 "" adminPath+"/org/user/toBatchChooseTeam")<i class="icon-plus-sign"></i>&nbsp;批量添加#end
+                #@aModal("#myModal" "批量添加" 350 600 "" adminPath+"/org/user/toBatchChooseTeam?ptype=project")<i class="icon-plus-sign"></i>&nbsp;批量添加#end
         &nbsp;#@aModal("#myModal" "复制团队" 740 600 "" adminPath+"/project/team/copy")<i class=" icon-copy"></i>&nbsp;复制团队#end
      </span>
     #end
@@ -82,6 +82,41 @@
                     $(this).html(index + 1);
                 });
             }
+            //对输入工日检查
+            $("input[name$='teamDays']").each(function()
+            {
+                $(this).change(function()
+                {
+                    //不是数字的验证
+                    if(isNaN($(this).val())||parseFloat($(this).val())<0)
+                    {
+                        layer.msg("请正确填写工日！");
+                    }
+                    //空值时给默认值
+                    if($(this).val()==null||$(this).val()=="")
+                    {
+                        $(this).val("0.0");
+                    }
+                });
+            });
+
+            //对输入工时检查
+            $("input[name$='teamHours']").each(function()
+            {
+                $(this).change(function()
+                {
+                    //不是数字的验证
+                    if(isNaN($(this).val())||parseFloat($(this).val())<0)
+                    {
+                        layer.msg("请正确填写工时！");
+                    }
+                    //空值时给默认值
+                    if($(this).val()==null||$(this).val()=="")
+                    {
+                        $(this).val("0.0");
+                    }
+                });
+            });
 
             $(".itemlist-table").on("click", ".addnext", function () {
                 var $thisTr =
@@ -96,12 +131,22 @@
                             $thisTr.after(data);
                     },
                 });
-                    $thisTr.find(".addnext").css("display","none");
+##                    $thisTr.find(".addnext").css("display","none");
 //            updateUserID();
                 return false;
             }).on("click", ".delbutton", function () {
                 if ($('.databody .userID').size() == 1) return;
                 var that = this;
+
+                //删除没有内容的行，不需要删除提示
+                var userIdVal=$(that).closest("tr").find('td').eq(1).find('span').eq(0).text();
+                if(userIdVal=="查询用户")
+                {
+                    $(that).closest("tr").remove();
+                    updateUserID();
+                    return;
+                }
+
                 layer.confirm('确定删除?', function () {
                     $(that).closest("tr").remove();
                     updateUserID();
@@ -112,8 +157,37 @@
     </script>
     #end
     #@div(divClass="col-7 col-offset-5 form-inline")
-        #tinyInput("submit" "submitbtn" " 保存 " {"class":"btn btn-primary"})
+##        #tinyInput("submit" "submitbtn" " 保存 " {"class":"btn btn-primary"})
+    <input type="submit" name="submitbtn" value="保存" class="btn btn-primary" onclick="return checkNum()"/>
     <a href="javascript:history.go(-1)" class="btn radius btn-default">返回</a>
     #end
 
 #end
+<script>
+    //保存前对工日/工时数字检查
+    function checkNum()
+    {
+        var isNumber=true;
+        $("input[name$='teamDays']").each(function()
+        {
+            if(isNaN($(this).val())||parseFloat($(this).val())<0)
+            {
+                isNumber=false;
+                return;
+            }
+        });
+        $("input[name$='teamHours']").each(function()
+        {
+            if(isNaN($(this).val())||parseFloat($(this).val())<0)
+            {
+                isNumber=false;
+                return;
+            }
+        });
+        if(!isNumber)
+        {
+            layer.msg("工日/工时请输入数字！");
+        }
+        return isNumber;
+    }
+</script>

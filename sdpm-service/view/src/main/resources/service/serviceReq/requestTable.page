@@ -51,8 +51,8 @@
         #@thead()
             #@tr()
                 #@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
-                #@tinyTh({"class":"sorting","rel":"clientName"})客户名称#end
-                #@tinyTh({"class":"sorting","rel":"requestTitle"})请求标题#end
+                #@tinyTh({"class":"sorting","rel":"clientName","width":"150px"})客户名称#end
+                #@tinyTh({"class":"sorting","rel":"requestTitle","width":"200px"})请求标题#end
                 #@tinyTh({"class":"sorting","rel":"requestPre"})请求优先级#end
                 #@tinyTh({"class":"sorting","rel":"requestStatus"})状态#end
                 #@tinyTh({"class":"sorting","rel":"requestCommitmentDate"})承诺完成时间#end

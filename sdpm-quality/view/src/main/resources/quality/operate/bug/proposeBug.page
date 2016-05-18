@@ -9,8 +9,8 @@
             <input type="hidden" name="currentAddress" value=""/>
             #hiddenInput(hiddenInputName="bugId" hiddenInputValue=bug?.bugId)
             #hiddenInput(hiddenInputName="bugFromCase" hiddenInputValue=caseId)
-        <div style="width:100%">
-        <div class="infoContent">
+            <div style="width:100%">
+            <div class="infoContent">
             <p class="titleName">提Bug</p>
             #@elementItem()
                 #@colLabel()<span class="c-red">*</span>产品/模块：#end
@@ -18,7 +18,7 @@
                     #@div(divClass="col-5")
                     #@TzTreeSelect(
                         "productId" cookieProductId {"class":"input-text","datatype":"*","nullmsg":"所属产品不能为空！",
-                        "data-URL":call("link",adminPath+"/productLine/userProductTree")})
+                        "data-URL":call("link",adminPath+"/productLine/userProductTree"),"readonly":"readonly"})
                         <script>
                             $(function(){
                                 var mUrl = $("#modelBug").attr("href");
@@ -26,7 +26,7 @@
                                     var pId = treeNode.id;
                                     if(pId>0){
                                         ajaxRead("${sid}","moduleId","moduleId","moduleName","/quality/bug/ajax/module?moduleRoot="+pId,"${bug?.moduleId?:(moduleId?:0)}","module");
-                                        ajaxRead("${sid}","projectId","projectId","projectName","/quality/bug/ajax/project?productId="+pId,"${bug?.projectId}");
+                                        ajaxRead("${sid}","projectId","projectId","projectName","/quality/bug/ajax/project?productId="+pId,"${projectId}");
                                         $("#modelBug").attr("href",mUrl+pId);
                                         $("input[name=bugOpenedBuild]").attr("productId",pId);
                                     }
@@ -156,7 +156,11 @@
                 #@formControlDiv("col-8")
                     #@div(divClass="col-5")
 
-                        #tinyInput("text" "bugTitle" bug?.bugTitle?:bugTitle {"placeholder":"请输入bug名称","datatype":"*","nullmsg":"bug名称不能为空！","id":"版本","class":"input-text"})
+                        #tinyInput(
+                            "text" "bugTitle" bug?.bugTitle?:bugTitle {"placeholder":"请输入bug名称","datatype":"*1-255",
+                            "nullmsg":"bug名称不能为空！","id":"版本","class":"input-text",
+                            "ajaxurl":TINY_CONTEXT_PATH+adminPath+
+                            "/quality/bug/bugTitleCheck?productId="+cookieProductId})
                     #end
                     #@div(divClass="col-3")
                         #@Tselect2F()
@@ -183,17 +187,33 @@
             #@formControlDiv("col-8")
                 #@div(divClass="col-5")
                     #@Tselect2F()
-                        #@Tselect2Body("storyId" "" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        #if(projectId)
+                            #@Tselect2Body("" "" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                                <option value=""></option>
+                                #foreach(s:storyList)
+                                    <option value="${s.storyId}">${s.storyId}
+                                        ：${s.storyTitle}（优先级：${s.storyPri}，预计工时:${s.storyEstimate}）
+                                    </option>
+                                #end
+                        #end
+                        #else
+                            #@Tselect2Body("storyId" "" {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
 
+                            #end
                         #end
                         #@Tselect2Fix()
                             #set(m=menuService.getMenu("product-demand-add"))
                             #if(m)
                                 <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
                             #end
+                            #if(projectId)
+                                <a href="${TINY_CONTEXT_PATH+adminPath}/project/demand/index">全部</a>
+
+                            #else
                             #set(m=menuService.getMenu("product-demand"))
                             #if(m)
                                 <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
+                            #end
                             #end
                         #end
                     #end
@@ -297,7 +317,7 @@
     #@colLabel()关键词：#end
     #@formControlDiv("col-8")
         #@div(divClass="col-5")
-            #tinyInput("text" "bugKeywords" bug?.bugKeywords {"datatype":"","id":"关键词","class":"input-text"})
+            #tinyInput("text" "bugKeywords" bug?.bugKeywords {"datatype":"*0-255","id":"关键词","class":"input-text"})
         #end
     #end
     #@validateDiv("col-2")#end
@@ -313,9 +333,11 @@
 #@elementItem()
     <div class="col-12">
         <div class="col-4">
-            <button style="float: right" type="submit" id="submit2" class="commitBtn">保存</button>
+            <button name="save" style="float: right" type="submit" id="submit2" class="commitBtn">保存</button>
         </div>
-        <div class="col-1"><button name="saveAndContinue" style="float: right" type="submit" id="submit2" class="commitBtn">保存并继续</button></div>
+        <div class="col-1">
+            <button name="saveAndContinue" style="float: right" type="submit" id="submit2" class="commitBtn">保存并继续</button>
+        </div>
         <div class="col-1"></div>
         <div class="col-1">
 

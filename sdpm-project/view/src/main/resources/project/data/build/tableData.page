@@ -7,7 +7,11 @@
         #@td()<input type="checkbox" value="${b?.buildId}" name="idCheck">#end
         #@td()${b?.buildId}#end
         #@td()${b?.productName}#end
-        #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/project/build/productalbug?buildId=${b?.buildId}">${b?.buildName}#end
+        #@td()
+            <div style="width: 200px;overflow: hidden">
+                <a href="${TINY_CONTEXT_PATH+adminPath}/project/build/productalbug?buildId=${b?.buildId}" title="${b?.buildName}">${b?.buildName}</a>
+            </div>
+        #end
         #@td()${b?.buildScmPath}</a>#end
         #@td()${b?.buildFilePath}#end
         #@td("nowrap")${formatDate(b?.buildDate,"yyyy-MM-dd")}#end
@@ -20,14 +24,12 @@
             #foreach(m:menuService.getScopeMenus("pro-version-op"))
                 #if(m.id == "pro-version-delete")
                 <a href="javascript:void(0);" class="build-remove" data-url="${TINY_CONTEXT_PATH+adminPath+m.href}" data-id="${b?.buildId}"><i class="${m.icon}" title=${m.name}></i></a>
-##                #elseif(m.id == "pro-version-look")
-##
-##                <a class="buildJump" value="${b?.buildProject}" href="${TINY_CONTEXT_PATH+adminPath}/project/build/forword/alnoBug?buildId=${b?.buildId}"
-##                   title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
+
+                #elseif(m.id == "pro-version-look")
+                <a class="buildJump" value="${b?.buildProject}" href="${TINY_CONTEXT_PATH+adminPath}/project/build/forword/alnoBug?buildId=${b?.buildId}"
+                   title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
                 #else
-                 <a class="buildJump" href="${TINY_CONTEXT_PATH+adminPath+m.href}?buildId=${b?.buildId}"
-                      title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
-##                <a href="javascript:void(0);" class="build-remove" data-url="${TINY_CONTEXT_PATH+adminPath+m.href}" data-id="${b?.buildId}"><i class="${m.icon}" title=${m.name}></i></a>
+                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?buildId=${b?.buildId}" ><i class="${m.icon}" title=${m.name}></i></a>
                 #end
             #end
         #end
@@ -60,6 +62,7 @@
                                 $("#productLinetable").trigger("initnav");
                                 $("#lineTree").trigger("refresh");
                             },300);
+                            window.location.href="${TINY_CONTEXT_PATH+adminPath}/project/build/index";
                         }else{
                             var msg=data.info?data.info:"系统出错";
                             layer.msg(msg);

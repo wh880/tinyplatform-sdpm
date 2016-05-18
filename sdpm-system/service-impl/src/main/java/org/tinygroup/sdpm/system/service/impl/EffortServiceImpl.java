@@ -29,9 +29,9 @@ public class EffortServiceImpl implements EffortService {
 
     public SystemEffort saveSystemEffort(SystemEffort systemEffort) {
         if (systemEffort.getEffortId() == null) {
+            systemEffort.setEffortDate(new Date());
             if (systemEffort.getEffortBegin() == null && systemEffort.getEffortEnd() == null) {
-                ProjectTask task =
-                        taskManager.find(systemEffort.getEffortObjectId());
+                ProjectTask task = taskManager.find(systemEffort.getEffortObjectId());
                 if (task.getTaskCanceledDate() != null || task.getTaskFinishedDate() != null) {
                     if (task.getTaskCloseDate() == null && task.getTaskFinishedDate() != null) {
                         systemEffort.setEffortEnd(new SimpleDateFormat("yyyy-MM-dd").format(task.getTaskFinishedDate()));

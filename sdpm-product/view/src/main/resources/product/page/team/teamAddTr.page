@@ -1,177 +1,192 @@
-
-    #for(user : userIds)
-    #set(a=a+userFor?.index-1)
-    #@tr("row"+a)
-    <td class="text-c userID" style="width: 2%"></td>
-    <td style="width:18%">
-        #@Tselect2F()
-            #Tselect2Ajax("teamList["+a+"].teamUserId" user TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
-            {"id":"","dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询用户","nullmsg":"请选择用户！","datatype":"*"})
-            #@Tselect2Fix()
-                #set(m=menuService.getMenu("organizationAddUser"))
-                #if(m)
-                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
-                #end
-                #set(m=menuService.getMenu("organizationUser"))
-                #if(m)
-                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
-                #end
+#for(user : userIds)
+#set(a=a+userFor?.index-1)
+#@tr("row"+a)
+<td class="text-c userID" style="width: 2%"></td>
+<td style="width:18%">
+    #@Tselect2F()
+        #Tselect2Ajax("teamList["+a+"].teamUserId" user TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
+        {"id":"","dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询用户","nullmsg":"请选择用户！","datatype":
+            "*"})
+        #@Tselect2Fix()
+            #set(m=menuService.getMenu("organizationAddUser"))
+            #if(m)
+                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
             #end
-        #end
-    </td>
-    <td style="width: 20%">
-        #@Tselect2F()
-            #@Tselect2Body("teamList["+a+"].teamRole" "" {"class":"input-text","multiple":
-                "multiple","datatype":"*","nullmsg":"角色不能为空！","id":"teamRole"+a})
-                <option></option>
-                #foreach(u : roleList)
-                    <option value="${u.orgRoleId}">${u.orgRoleName}</option>
-                #end
+            #set(m=menuService.getMenu("organizationUser"))
+            #if(m)
+                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
             #end
-            #@Tselect2Fix()
-                #set(m=menuService.getMenu("organizationAddUser"))
-                #if(m)
-                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
-                #end
-                #set(m=menuService.getMenu("organizationUser"))
-                #if(m)
-                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
-                #end
-            #end
-        #end
-    </td>
-    <td style="width: 20%">
-        #@tinyDateInput("teamList["+a+"].teamJoin" formatDate(now(),"yyyy-MM-dd") "yyyy-MM-dd" )#end
-    </td>
-    <td style="width: 15%">
-        #tinyInput("text" "teamList["+a+"].teamDays" "" {"class":"input-text"})
-    </td>
-    <td style="width: 15%">
-        #tinyInput("text" "teamList["+a+"].teamHours" "" {"class":"input-text"})
-    </td>
-        #@td("w-p125")
-        <div class="operate">
-##            #iconOperations(iconOperationsIcon="icon-chevron-down",iconOperationsTitle="添加",iconOperationsCls="btn btn-small btn-default addnext")
-                    #iconOperations(iconOperationsIcon="icon-remove",iconOperationsTitle="删除",iconOperationsCls="btn btn-small btn-default delbutton")
-        </div>
         #end
     #end
+</td>
+<td style="width: 20%">
+    #@Tselect2F()
+        #@Tselect2Body("teamList["+a+"].teamRole" "" {"class":"input-text","multiple":
+            "multiple","datatype":"*","nullmsg":"角色不能为空！","id":"teamRole"+a})
+            #foreach(u : roleList)
+                <option value="${u.orgRoleId}">${u.orgRoleName}</option>
+            #end
+        #end
+        #@Tselect2Fix()
+            #set(m=menuService.getMenu("organizationAddGroup"))
+            #if(m)
+                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
+            #end
+            #set(m=menuService.getMenu("organizationPrivilege"))
+            #if(m)
+                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
+            #end
+        #end
+    #end
+</td>
+<td style="width: 20%">
+    #@tinyDateInput("teamList["+a+"].teamJoin" formatDate(now(),"yyyy-MM-dd") "yyyy-MM-dd" )#end
+</td>
+<td style="width: 15%">
+    #tinyInput("text" "teamList["+a+"].teamDays" "" {"class":"input-text"})
+</td>
+<td style="width: 15%">
+    #tinyInput("text" "teamList["+a+"].teamHours" "" {"class":"input-text"})
+</td>
+    #@td("w-p125")
+    <div class="operate">
+    ##            #iconOperations(iconOperationsIcon="icon-chevron-down",iconOperationsTitle="添加",iconOperationsCls="btn btn-small btn-default addnext")
+                    #iconOperations(iconOperationsIcon="icon-remove",iconOperationsTitle="删除",iconOperationsCls=
+        "btn btn-small btn-default delbutton")
+    </div>
+    #end
+#end
 #end
 
 
-    #for(user : copyTeam)
-    #set(a=a+userFor?.index-1)
-    #@tr("row"+a)
-    <td class="text-c userID" style="width: 2%"></td>
-    <td style="width:18%">
-        #@Tselect2F()
-            #Tselect2Ajax("teamList["+a+"].teamUserId" user?.teamUserId TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
-            {"id":"","dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询用户","nullmsg":"请选择用户！","datatype":"*"})
-            #@Tselect2Fix()
-                #set(m=menuService.getMenu("organizationAddUser"))
-                #if(m)
-                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
-                #end
-                #set(m=menuService.getMenu("organizationUser"))
-                #if(m)
-                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
-                #end
+#for(user : copyTeam)
+#set(a=a+userFor?.index-1)
+#@tr("row"+a)
+<td class="text-c userID" style="width: 2%"></td>
+<td style="width:18%">
+    #@Tselect2F()
+        #Tselect2Ajax("teamList["+a+"].teamUserId" user?.teamUserId TINY_CONTEXT_PATH+adminPath+
+            "/org/user/ajax/userInConditionAndTeam"
+        {"id":"","dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询用户","nullmsg":"请选择用户！","datatype":
+            "*"})
+        #@Tselect2Fix()
+            #set(m=menuService.getMenu("organizationAddUser"))
+            #if(m)
+                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
             #end
-        #end
-    </td>
-    <td style="width: 20%">
-        #@Tselect2F()
-            #@Tselect2Body("teamList["+a+"].teamRole" user?.teamRole {"class":"input-text","multiple":
-                "multiple","datatype":"*","nullmsg":"角色不能为空！","id":"teamRole"+a})
-                <option></option>
-                #foreach(u : roleList)
-                    <option value="${u.orgRoleId}">${u.orgRoleName}</option>
-                #end
+            #set(m=menuService.getMenu("organizationUser"))
+            #if(m)
+                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
             #end
-            #@Tselect2Fix()
-                #set(m=menuService.getMenu("organizationAddUser"))
-                #if(m)
-                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
-                #end
-                #set(m=menuService.getMenu("organizationUser"))
-                #if(m)
-                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
-                #end
-            #end
-        #end
-    </td>
-    <td style="width: 20%">
-        #@tinyDateInput("teamList["+a+"].teamJoin" formatDate(now(),"yyyy-MM-dd") "yyyy-MM-dd" )#end
-    </td>
-    <td style="width: 15%">
-        #tinyInput("text" "teamList["+a+"].teamDays" "" {"class":"input-text"})
-    </td>
-    <td style="width: 15%">
-        #tinyInput("text" "teamList["+a+"].teamHours" "" {"class":"input-text"})
-    </td>
-        #@td("w-p125")
-        <div class="operate">
-        ##            #iconOperations(iconOperationsIcon="icon-chevron-down",iconOperationsTitle="添加",iconOperationsCls="btn btn-small btn-default addnext")
-                    #iconOperations(iconOperationsIcon="icon-remove",iconOperationsTitle="删除",iconOperationsCls="btn btn-small btn-default delbutton")
-        </div>
         #end
     #end
+</td>
+<td style="width: 20%">
+    #@Tselect2F()
+        #@Tselect2Body("teamList["+a+"].teamRole" user?.teamRole {"class":"input-text","multiple":
+            "multiple","datatype":"*","nullmsg":"角色不能为空！","id":"teamRole"+a})
+            #foreach(u : roleList)
+                <option value="${u.orgRoleId}">${u.orgRoleName}</option>
+            #end
+        #end
+        #@Tselect2Fix()
+            #set(m=menuService.getMenu("organizationAddGroup"))
+            #if(m)
+                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
+            #end
+            #set(m=menuService.getMenu("organizationPrivilege"))
+            #if(m)
+                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
+            #end
+        #end
     #end
+</td>
+<td style="width: 20%">
+    #@tinyDateInput("teamList["+a+"].teamJoin" formatDate(now(),"yyyy-MM-dd") "yyyy-MM-dd" )#end
+</td>
+<td style="width: 15%">
+    #tinyInput("text" "teamList["+a+"].teamDays" "" {"class":"input-text"})
+</td>
+<td style="width: 15%">
+    #tinyInput("text" "teamList["+a+"].teamHours" "" {"class":"input-text"})
+</td>
+    #@td("w-p125")
+    <div class="operate">
+        #iconOperations(iconOperationsIcon="icon-chevron-down",iconOperationsTitle="添加",iconOperationsCls=
+            "btn btn-small btn-default addnext")
+                    #iconOperations(iconOperationsIcon="icon-remove",iconOperationsTitle="删除",iconOperationsCls=
+        "btn btn-small btn-default delbutton")
+    </div>
+    #end
+#end
+#end
 #set(a = a+1)
-    #@tr("row"+a)
-    <td class="text-c userID" style="width: 2%"></td>
-    <td style="width:18%">
-        #@Tselect2F()
-            #Tselect2Ajax("teamList["+a+"].teamUserId" "" TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
-            {"id":"","dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询用户","nullmsg":"请选择用户！","datatype":"*"})
-            #@Tselect2Fix()
-                #set(m=menuService.getMenu("organizationAddUser"))
-                #if(m)
-                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
-                #end
-                #set(m=menuService.getMenu("organizationUser"))
-                #if(m)
-                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
-                #end
+#@tr("row"+a)
+<td class="text-c userID" style="width: 2%"></td>
+<td style="width:18%">
+    #@Tselect2F()
+        #Tselect2Ajax(
+            "teamList["+a+"].teamUserId" "" TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
+        {"id":"","dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询用户","nullmsg":"请选择用户！",
+            "datatype":
+            "*"})
+        #@Tselect2Fix()
+            #set(m=menuService.getMenu("organizationAddUser"))
+            #if(m)
+                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
             #end
-        #end
-    </td>
-    <td style="width: 20%">
-        #@Tselect2F()
-            #@Tselect2Body("teamList["+a+"].teamRole" "" {"class":"input-text","multiple":
-                "multiple","datatype":"*","nullmsg":"角色不能为空！","id":"teamRole"+a})
-                <option></option>
-                #foreach(u : roleList)
-                    <option value="${u.orgRoleId}">${u.orgRoleName}</option>
-                #end
+            #set(m=menuService.getMenu("organizationUser"))
+            #if(m)
+                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
             #end
-            #@Tselect2Fix()
-                #set(m=menuService.getMenu("organizationAddUser"))
-                #if(m)
-                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
-                #end
-                #set(m=menuService.getMenu("organizationUser"))
-                #if(m)
-                    <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
-                #end
-            #end
-        #end
-    </td>
-    <td style="width: 20%">
-        #@tinyDateInput("teamList["+a+"].teamJoin" formatDate(now(),"yyyy-MM-dd") "yyyy-MM-dd" )#end
-    </td>
-    <td style="width: 15%">
-        #tinyInput("text" "teamList["+a+"].teamDays" "" {"datatype":"","class":"input-text"})
-    </td>
-    <td style="width: 15%">
-        #tinyInput("text" "teamList["+a+"].teamHours" "" {"datatype":"","class":"input-text"})
-    </td>
-        #@td("w-p125")
-        <div class="operate">
-            #iconOperations(iconOperationsIcon="icon-chevron-down",iconOperationsTitle="添加",iconOperationsCls="btn btn-small btn-default addnext")
-                    #iconOperations(iconOperationsIcon="icon-remove",iconOperationsTitle="删除",iconOperationsCls="btn btn-small btn-default delbutton")
-        </div>
         #end
     #end
+</td>
 
+<td style="width: 20%">
+    #@Tselect2F()
+        #@Tselect2Body("teamList["+a+"].teamRole" "" {"class":"input-text","multiple":
+            "multiple","datatype":"*","nullmsg":"角色不能为空！","id":"teamRole"+a})
+            #foreach(u : roleList)
+                <option value="${u.orgRoleId}">${u.orgRoleName}</option>
+            #end
+        #end
+        #@Tselect2Fix()
+            #set(m=menuService.getMenu("organizationAddGroup"))
+            #if(m)
+                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
+            #end
+            #set(m=menuService.getMenu("organizationPrivilege"))
+            #if(m)
+                <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
+            #end
+        #end
+    #end
+</td>
 
+<td style="width: 20%">
+    #@tinyDateInput("teamList["+a+"].teamJoin" formatDate(now(),"yyyy-MM-dd") "yyyy-MM-dd" )#end
+</td>
+<td style="width: 15%">
+    #tinyInput("text" "teamList["+a+"].teamDays" "" {"datatype":"","class":"input-text"})
+</td>
+<td style="width: 15%">
+    #tinyInput("text" "teamList["+a+"].teamHours" "" {"datatype":"","class":"input-text"})
+</td>
+    #@td("w-p125")
+    <div class="operate">
+        #iconOperations(iconOperationsIcon="icon-chevron-down",iconOperationsTitle="添加",iconOperationsCls=
+            "btn btn-small btn-default addnext")
+            #iconOperations(iconOperationsIcon="icon-remove",iconOperationsTitle="删除",iconOperationsCls=
+        "btn btn-small btn-default delbutton")
+    </div>
+    #end
+#end
+
+<script type="text/javascript">
+    function getRoleIds()
+    {
+        var preTrRoleId=jQuery(".productTeam").find('tr').eq(-1).find('td').eq(1).find('select').val();
+        return preTrRoleId;
+    }
+</script>

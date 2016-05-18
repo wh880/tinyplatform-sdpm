@@ -55,10 +55,9 @@ public class ProductManagerImpl implements ProductManager {
     }
 
     public int update(Product product) {
-        if (2 != product.getAcl()) {
+    /*    if (2 != product.getAcl()) {
             product.setProductWhiteList("");
-        }
-
+        }*/
         return productDao.edit(product);
     }
 

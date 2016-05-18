@@ -4,6 +4,7 @@
 #@layout(quality)#end
 #set(requestStatuString = tinyRequestQueryString!=null ?tinyRequestQueryString:"")			
 #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/quality/bug/close?"+requestStatuString "post" {"class":"test"})
+<input type="hidden" name="lastAddress" value=""/>
 ##hiddenInput(hiddenInputName="bugId" hiddenInputValue=bug?.bugId)
 	<div style="width:67%;float:left">
     	<div class="infoContent">
@@ -16,7 +17,7 @@
                 <div class="col-2 text-r"><label>备注：</label></div>
 
                 <div class="col-9">
-                    #@Teditor("actionComment" "actionComment" {"initialFrameHeight":"150"})#end</div>
+                    #@Teditor("actionComment" "actionComment" {"initialFrameHeight":"150"})${actionComment}#end</div>
             </div>
         #end
         <br/>

@@ -117,7 +117,9 @@
 											#foreach(user : userList)
 												<li>
 													<a tabindex="-1" href="javascript:void(0);">
-													#@mulOperation("tassign"+userFor.index TINY_CONTEXT_PATH+adminPath+"/quality/bug/batch/assign?userId="+user.orgUserId)<div>${user.orgUserRealName}</div>#end</a>
+														#@mulOperation("tassign"+userFor.index TINY_CONTEXT_PATH+adminPath+"/quality/bug/batch/assign?userId="+user.orgUserId)
+														<div>${user.orgUserRealName}</div>#end
+													</a>
 												</li>
 											#end
 											</ul>

@@ -4,6 +4,7 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -12,8 +13,11 @@ import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.service.inter.StoryService;
+import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectStory;
+import org.tinygroup.sdpm.project.service.inter.ProjectProductService;
 import org.tinygroup.sdpm.project.service.inter.ProjectStoryService;
+import org.tinygroup.sdpm.util.ProjectOperate;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -34,10 +38,24 @@ public class ProjectStoryAction extends BaseController {
     private ProjectStoryService projectStoryService;
     @Autowired
     private StoryService storyService;
+    @Autowired
+    private ProjectProductService projectProductService;
 
     @RequiresPermissions("demand")
     @RequestMapping("/index")
-    public String index() {
+    public String index(String moduleId, Model model, @CookieValue(value= ProjectOperate.COOKIE_PROJECT_ID)String currentProjectId) {
+        if (moduleId != null) {
+            model.addAttribute("moduleId", moduleId);
+        }
+
+        List<ProjectProduct> projectProductList=projectProductService.findProductListByProjectId(Integer.parseInt(currentProjectId));
+        if(projectProductList.size()==0)
+        {
+            model.addAttribute("linkInfo",1);
+        }else
+        {
+            model.addAttribute("linkInfo",0);
+        }
         return "project/index/demand/index";
     }
 

@@ -34,6 +34,11 @@ public class HolidayServiceImpl implements HolidayService {
         return holidayManager.findByPage(start, limit, holiday, sortName, asc);
     }
 
+    @Override
+    public Pager<Holiday> findByHolidayDeleted(Integer start, Integer limit, Holiday holiday, String sortName, boolean asc) {
+        return holidayManager.findByHolidayDeleted(start, limit, holiday, sortName, asc);
+    }
+
     public List<Holiday> batchAddHoliday(List<Holiday> holidayList) {
         return holidayManager.batchadd(holidayList);
     }

@@ -4,7 +4,7 @@
     <menu id="organizationUser" name="用户" href="/org/user/list" icon="" sort="1" isShow="1">
         <menu id="organizationAddUser" name="添加用户" href="/org/user/form" icon="icon-plus" sort="1"
               isShow="1" scope="org-menu"/>
-        <menu id="org-user-edit" name="编辑用户" href="/org/user/editForm" icon="icon-pencil" sort="1"
+            <menu id="org-user-edit" name="编辑用户" href="/org/user/editForm" icon="icon-pencil" sort="1"
               isShow="1" scope="org-user">
             <map>
                 <property key="width" value="665"/>

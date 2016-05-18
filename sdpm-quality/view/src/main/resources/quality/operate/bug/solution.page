@@ -5,6 +5,7 @@
 #@layout(quality)#end
 			
 #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/quality/bug/solve" "post" {"class":"test","enctype":"multipart/form-data"})
+<input type="hidden" name="lastAddress" value=""/>
 #hiddenInput(hiddenInputName="bugId" hiddenInputValue=bug?.bugId)
 	<div style="width:70%;float:left" class="pageleftpart">
     	<div class="infoContent">
@@ -94,7 +95,7 @@
                 <div class="col-2 text-r"><label>备注：</label></div>
 
                 <div class="col-9">
-                    #@Teditor("actionComment" "actionComment" {"initialFrameHeight":"150"})#end</div>
+                    #@Teditor("actionComment" "actionComment" {"initialFrameHeight":"150"})${actionComment}#end</div>
             </div>
         #end
         <br/>

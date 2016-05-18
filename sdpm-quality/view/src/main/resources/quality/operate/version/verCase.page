@@ -104,14 +104,16 @@
                            onclick="selectAllNullorReserve('idCheck','反选');"/>
                     <div class="col-2 text-r">
                         #@assignOperation("assign" TINY_CONTEXT_PATH+adminPath+"/quality/version/ajax/assign")
-                            <div><input type="button" value="指派" class="btn radius grayBtn"/></div>#end
+                            <div><input type="button" value="指派" class="btn radius grayBtn"/>
+                            </div>
+                        #end
                     </div>
                 <div class="col-4">
                     #@Tselect2F()
                         #Tselect2Ajax("assignTo" "" TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
                         {"dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询指派人"})
                     #end
-            </div>
+                </div>
                 <div class="col-0">&nbsp&nbsp</div>
 
             </div>

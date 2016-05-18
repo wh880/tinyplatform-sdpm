@@ -165,7 +165,7 @@ public class TestVersionAction extends BaseController {
     @RequiresPermissions("tproposeversion")
     @RequestMapping("/add")
     public String add(@CookieValue(value = ProductUtils.COOKIE_PRODUCT_ID, defaultValue = "0") Integer cookieProductId,
-                      Integer buildId, Model model, HttpServletResponse response) {
+                      Integer projectId, Integer buildId, Model model, HttpServletResponse response, HttpServletRequest request) {
         List<Project> projects = projectService.findProjectList(null, null, null);
         ProjectBuild build = new ProjectBuild();
         if (buildId != null && buildId > 0) {
@@ -176,9 +176,13 @@ public class TestVersionAction extends BaseController {
             build.setBuildProduct(cookieProductId);
         }
 
+        build.setBuildDeleted("0");//未删除状态
+
         List<ProjectBuild> builds = buildService.findListBuild(build);
+        model.addAttribute("projectId", projectId);
         model.addAttribute("projectList", projects);
         model.addAttribute("buildList", builds);
+        model.addAttribute("currentURL", request.getRequestURL().toString());
         return "/quality/operate/version/proposeversion.page";
     }
 
@@ -186,7 +190,8 @@ public class TestVersionAction extends BaseController {
     public String versionInfo(Integer testversionId,
                               Integer no,
                               HttpServletRequest request,
-                              Model model) {
+                              Model model,
+                              @CookieValue(value=ProductUtils.COOKIE_PRODUCT_ID)String currentProductId) {
         QualityTestTask testTask = null;
         if (no != null) {
             String result = CookieUtils.getCookie(request, ProductUtils.COOKIE_PRODUCT_ID);
@@ -206,6 +211,12 @@ public class TestVersionAction extends BaseController {
         if (testTask == null || testTask.getTestversionId() == null) {
             testTask = testTaskService.findTestTaskById(testversionId);
         }
+
+        if(testTask.getProductId()!=Integer.parseInt(currentProductId))
+        {
+            return "redirect:"+adminPath+"/quality/version";
+        }
+
         model.addAttribute("testTask", testTask);
         return "/quality/operate/version/versionSituation.page";
     }
@@ -222,14 +233,23 @@ public class TestVersionAction extends BaseController {
     @RequestMapping("/makeLink")
     public Map makeLink(Integer testversionId, Integer[] ids, Integer[] ves) {
         QualityTestTask testTask = testTaskService.findTestTaskById(testversionId);
-        for (int i = 0; i < ids.length; i++) {
-            QualityTestRun run = new QualityTestRun();
-            run.setCaseId(ids[i]);
-            run.setCaseVersion(ves[i]);
-            run.setTestRunStatus("1");
-            run.setTaskId(testversionId);
-            testRunService.addTestRun(run);
+        List<QualityTestRun> list = testRunService.findTestRunByTestVersionId(testversionId);
+        Map<Integer, QualityTestRun> qualityTestRunMap = new HashMap<Integer, QualityTestRun>();
+        for (QualityTestRun qualityTestRun : list) {
+            qualityTestRunMap.put(qualityTestRun.getCaseId(), qualityTestRun);
         }
+
+        for (int i = 0; i < ids.length; i++) {
+            if (!qualityTestRunMap.containsKey(ids[i])) {
+                QualityTestRun run = new QualityTestRun();
+                run.setCaseId(ids[i]);
+                run.setCaseVersion(ves[i]);
+                run.setTestRunStatus("1");
+                run.setTaskId(testversionId);
+                testRunService.addTestRun(run);
+            }
+        }
+
         if ("3".equals(testTask.getTesttaskStatus())) {
             testTask.setTesttaskStatus("1");
         }
@@ -273,8 +293,15 @@ public class TestVersionAction extends BaseController {
     @RequiresPermissions("tversionedit")
     @RequestMapping("/toEdit")
     public String edit(@CookieValue(ProductUtils.COOKIE_PRODUCT_ID) Integer cookieProductId,
-                       Integer testversionId, Model model) {
+                       Integer testversionId, Model model,HttpServletRequest request,
+                       @CookieValue(value=ProductUtils.COOKIE_PRODUCT_ID)String currentProductId) {
         QualityTestTask testTask = testTaskService.findTestTaskById(testversionId);
+
+        if(testTask.getProductId()!=Integer.parseInt(currentProductId))
+        {
+            return "redirect:"+adminPath+"/quality/version";
+        }
+
         List<ProjectProduct> projectProducts = projectProductService.findProjectByProductId(cookieProductId);
         List<Integer> ids = new ArrayList<Integer>();
         for (ProjectProduct projectProduct : projectProducts) {
@@ -283,6 +310,7 @@ public class TestVersionAction extends BaseController {
         List<Project> projects = ids.size() > 0 ? projectService.findByProjectList(ids) : new ArrayList<Project>();
         model.addAttribute("testTask", testTask);
         model.addAttribute("projectList", projects);
+        model.addAttribute("currentURL", request.getRequestURL().toString());
         return "/quality/operate/version/editionversion.page";
     }
 
@@ -292,6 +320,7 @@ public class TestVersionAction extends BaseController {
         if (projectBuild.getBuildProduct() < 1 || projectBuild.getBuildProduct() == null) {
             return new ArrayList<ProjectBuild>();
         }
+        projectBuild.setBuildDeleted("0");//未删除状态
         return buildService.findListBuild(projectBuild);
     }
 
@@ -345,7 +374,7 @@ public class TestVersionAction extends BaseController {
 
     @RequiresPermissions(value = {"tvercase", "tverallcase", "tverassign"}, logical = Logical.OR)
     @RequestMapping("/taskToCase")
-    public String taskToCase(Integer testversionId, String moduleId, Model model, HttpServletRequest request) {
+    public String taskToCase(Integer testversionId, String status, String moduleId, Model model, HttpServletRequest request) {
         QualityTestTask testTask = testTaskService.findTestTaskById(testversionId);
         List<ProjectTeam> projectTeams = teamService.findTeamByProjectId(testTask.getProjectId());
         String[] ids = new String[projectTeams.size()];
@@ -455,11 +484,47 @@ public class TestVersionAction extends BaseController {
         if ("tverallcase".equals(status)) {
             return;
         } else {
-            carrier.put("qualityTestTask.testRunAssignedTo",
+            carrier.put("qualityTestRun.testRunAssignedTo",
                     ConditionUtils.Operate.EQ.getOperate(),
                     ConditionUtils.CommonFieldType.FIELD_OPERATE.getCommonField(),
                     userUtils.getUserId());
         }
     }
 
+    /**
+     * 判断名称是否已存在
+     *
+     * @param param
+     * @param request
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/judgeTestTaskNameExist")
+    public Map judgeTestTaskNameExist(String param, String currentURL, HttpServletRequest request,String testTaskTitle)
+    {
+        if (param == null)
+        {
+            return resultMap(false, "请输入测试名称");
+        }
+
+        if(currentURL.contains("toEdit")&&param.equals(testTaskTitle))
+        {
+            return resultMap(true,"");
+        }
+
+        String productId = CookieUtils.getCookie(request, ProductUtils.COOKIE_PRODUCT_ID);
+        String testTaskName = param;
+        QualityTestTask task = new QualityTestTask();
+        task.setTesttaskTitle(param);
+        task.setProductId(Integer.parseInt(productId));
+        task.setDeleted(0);//0表示未删除
+        List<QualityTestTask> testTasks = testTaskService.findTestTaskList(task);
+
+        if (testTasks.size() == 0)
+        {
+            return resultMap(true, "");
+        }
+
+        return  resultMap(false,"名称已存在");
+    }
 }
