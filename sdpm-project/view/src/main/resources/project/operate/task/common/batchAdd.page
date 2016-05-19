@@ -159,7 +159,24 @@
         });
 
         $('form[name=bathAddForm]').Validform({
-            beforeSubmit:function(form){
+            beforeSubmit:function(form)
+            {
+                //保存前给"同上"选项赋值
+                var taskStory=new Array();
+                $("select[name$=taskStory]").each(function(){
+                    var thisTaskStory=$(this).find("option:selected").text();
+                    if(thisTaskStory)
+                    {
+                        taskStory.push(thisTaskStory);
+                    }
+                });
+                for(var i=1;i<taskStory.length;i++)
+                {
+                    if(taskStory[i]=="同上")
+                    {
+                        $("select[name$=taskStory]").eq(i).val($("select[name$=taskStory]").eq(i-1).val());
+                    }
+                }
 
                 //保存前再次对标题进行检查
                 var boo=true;
