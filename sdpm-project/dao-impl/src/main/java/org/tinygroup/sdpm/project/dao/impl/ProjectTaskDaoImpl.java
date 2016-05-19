@@ -181,7 +181,8 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
         if (projectTask == null || projectTask.getTaskId() == null) {
             return 0;
         }
-        return getDslTemplate().update(projectTask, new UpdateGenerateCallback<ProjectTask>() {
+        return getDslTemplate().update(projectTask, new UpdateGenerateCallback<ProjectTask>()
+        {
             public Update generate(ProjectTask t) {
                 Update update = update(PROJECT_TASKTABLE).set(
                         PROJECT_TASKTABLE.TASK_RELATION_BUG.value(t.getTaskRelationBug()),
@@ -660,11 +661,12 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
      */
     @Override
     public List<QualityBug> findRelationBugByProjectID(Integer projectId) {
-        Select select = selectFrom(QUALITY_BUGTABLE)
+        /*Select select = selectFrom(QUALITY_BUGTABLE)
                 .where(QUALITY_BUGTABLE.BUG_ID
                         .inExpression(subSelect(select(PROJECT_PRODUCTTABLE.PRODUCT_ID)
                                 .from(PROJECT_PRODUCTTABLE)
-                                .where(PROJECT_PRODUCTTABLE.PROJECT_ID.eq(projectId)))));
+                                .where(PROJECT_PRODUCTTABLE.PROJECT_ID.eq(projectId)))));*/
+        Select select = selectFrom(QUALITY_BUGTABLE).where(and(QUALITY_BUGTABLE.PROJECT_ID.eq(projectId),QUALITY_BUGTABLE.DELETED.eq(0)));
         return getDslSession().fetchList(select, QualityBug.class);
     }
 

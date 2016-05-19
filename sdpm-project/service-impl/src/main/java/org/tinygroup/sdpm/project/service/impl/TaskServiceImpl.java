@@ -39,6 +39,9 @@ public class TaskServiceImpl implements TaskService {
             maxNo = 0;
         }
         for (ProjectTask task : taskList) {
+            if("1,".equals(task.getTaskPri())) {
+                task.setTaskPri("1");
+            }
             task.setTaskNo(++maxNo);
             task.setTaskLastEditedDate(new Date());
             task.setTaskOpenedDate(new Date());

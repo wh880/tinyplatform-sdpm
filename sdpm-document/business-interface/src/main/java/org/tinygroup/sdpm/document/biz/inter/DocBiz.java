@@ -42,4 +42,6 @@ public interface DocBiz {
 
     int[] batchDelDocByIds(List<DocumentDoc> keys);
 
+    List<DocumentDocLib> findDocLibByDocLib(DocumentDocLib lib);
+
 }

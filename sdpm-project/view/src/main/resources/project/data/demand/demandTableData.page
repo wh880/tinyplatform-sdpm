@@ -7,7 +7,9 @@
         #end
         #@td()${s.storyPri}</a>#end
         #@td()
-        <a href="${TINY_CONTEXT_PATH+adminPath}/product/storySpec/find/productDemandDetail?storyId=${s.storyId}">${s.storyTitle}
+            <div style="width:200px;overflow:hidden;">
+                <a href="${TINY_CONTEXT_PATH+adminPath}/product/storySpec/find/productDemandDetail?storyId=${s.storyId}" title="${s.storyTitle}">${s.storyTitle}</a>
+            </div>
         #end
         #@td("nowrap")${s.storyOpenedBy==null?"":userUtils.getUserById(s.storyOpenedBy)?.orgUserRealName}#end
         #@td("nowrap")${s.storyAssignedTo==null?"":userUtils.getUserById(s.storyAssignedTo)?.orgUserRealName}#end
@@ -21,9 +23,10 @@
                     <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}?storyId=${s.storyId}&moduleId=${s.moduleId}"
                        title="${m.name}">#buttonIcon(iconClass=m.icon)</a>
                 #else
-                    #@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m.href s.storyId)#buttonIcon(iconClass=m.icon)#end
+                    #@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m.href s.storyId)<i class="${m.icon}" title="删除"></i>#end
                 #end
             #end
         #end
     #end
 #end
+</div>

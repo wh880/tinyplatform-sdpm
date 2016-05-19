@@ -1,7 +1,7 @@
 #!set(activeMenuId=currentPageId)
 #!set(cname="no-bug",type="bug")
 #set(bugTableId = "bugTableId" )
-###include("/product/page/search/mulsearch-bug.page")
+#include("/product/page/search/mulsearch-bug.page")
 
 #@tinyTable(bugTableId) ##ID为空则系统自动生成 带入参数则取该参数为ID
     #@div(divBaseClass="tinyheaderTools form-inline")

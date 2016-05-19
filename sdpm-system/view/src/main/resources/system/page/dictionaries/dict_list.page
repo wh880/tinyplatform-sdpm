@@ -1,49 +1,65 @@
-#set(editpagePath="/system/page/dictionaries/dict_edit.pagelet",editpageModalId="dictEditModal",editpageModal="#"+editpageModalId)
-#set(viewpagePath="/system/page/dictionaries/dict_view.pagelet",viewpageModalId="dictViewModal",viewpageModal="#"+viewpageModalId)
+#set(editpagePath=
+    "/system/page/dictionaries/dict_edit.pagelet",editpageModalId="dictEditModal",editpageModal="#"+editpageModalId)
+#set(viewpagePath=
+    "/system/page/dictionaries/dict_view.pagelet",viewpageModalId="dictViewModal",viewpageModal="#"+viewpageModalId)
 #datatablesInitSimple("#dictListTb" )
 #set(threeMenu="dictionary-type")
 #@divDataTablebox()
-#@tableBox()
-	#@datatable("dictListTb")
-		#@tableToolbar()
-				 #@mulOperation("muldelete" call("link",adminPath+"/system/module/batchDelete"))            
-				 	#@radiusBtn("btn-danger" "icon-trash" "javascript:") 批量删除#end
-				 #end
-				 #@aModal(editpageModal "添加" "460" "300" "btn radius btn-primary" adminPath+"/system/module/find")
-						#@simpleI("icon-plus")添加#end
-				#end
-			#end
-			#@thead()
-				#@tr("text-c")
-					#@thW("6")<input type="checkbox" name="idCheck" value="">#end
-					#@thW("96")代码#end
-					#@thW("50")中文名#end
-					#@thW("120")操作#end
-				#end
-			#end
-			#@tbody()
+    #@tableBox()
+        #@datatable("dictListTb")
+            #@tinyTable()
+                #@tableToolbar()
+                    #@div(divBaseClass="tinyheaderTools form-inline")
+            <input type="button" value="全选" class="btn btn-default btn-primary "
+                   onclick="selectAllNullorReserve('idCheck','全选');"/>
+            <input type="button" value="反选" class="btn btn-default btn-primary"
+                   onclick="selectAllNullorReserve('idCheck','反选');"/>
+                    #*#@mulOperation("muldelete" call("link",adminPath+"/system/module/batchDelete"))
+                        #@radiusBtn("btn-danger" "icon-trash" "javascript:") 批量删除#end
+                    #end*#
+                        #@mulOperation("batchDelete" TINY_CONTEXT_PATH+adminPath+"/system/module/batchDelete")
+                    <a href="javascript:void(0);" class="btn radius btn-danger "><i class="icon-trash"></i>&nbsp;批量删除</a>
+                #end
+                #@aModal(editpageModal "添加" "460" "300" "btn radius btn-primary" adminPath+"/system/module/find")
+                    #@simpleI("icon-plus")添加#end
+                #end
+                    #end
+                #end
+            #end
+            #@thead()
+                #@tr("text-c")
+                    #@thW("6")<input type="checkbox" name="idCheck" value="">#end
+                    #@thW("96")代码#end
+                    #@thW("50")中文名#end
+                    #@thW("120")操作#end
+                #end
+            #end
+            #@tbody()
 
-			#foreach(mo:list)
-				#@tr("text-c")
-					#@td()<input type="checkbox" value="${mo?.moduleId}" name="idCheck">#end
-					#@td()${mo?.moduleName}#end
-					#@td()${mo?.moduleTitle}#end
-					#@td("f-14 user-manage")
-						#foreach(m in menuService.getScopeMenus("dict-op"))
-							#if(m.id!="dict-del")
-								#iconOperations("icon-eye-open"==m.icon?viewpageModal:editpageModal m.icon m.name "460" "260" adminPath+m.href +"?moduleId="+mo?.moduleId "ml-5")
-							#else
-##								#iconOperation(m.icon m.name "ml-5 delBtn" adminPath+m.href+"?moduleId="+mo?.moduleId)
-								#@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m.href mo?.moduleId)#buttonIcon(iconClass=m.icon)#end
-							#end
+                #foreach(mo:list)
+                    #@tr("text-c")
+                        #@td()<input type="checkbox" value="${mo?.moduleId}" name="idCheck">#end
+                        #@td()${mo?.moduleName}#end
+                        #@td()${mo?.moduleTitle}#end
+                        #@td("f-14 user-manage")
+                            #foreach(m in menuService.getScopeMenus("dict-op"))
+                                #if(m.id!="dict-del")
+                                    #iconOperations(
+                                        "icon-eye-open"==m.icon?viewpageModal:editpageModal m.icon m.name "460"
+                                        "260" adminPath+m.href +"?moduleId="+mo?.moduleId "ml-5")
+                                #else
+                                ##								#iconOperation(m.icon m.name "ml-5 delBtn" adminPath+m.href+"?moduleId="+mo?.moduleId)
+                                    #@delItemsdpm(TINY_CONTEXT_PATH+adminPath+m.href mo?.moduleId)#buttonIcon(iconClass=m.icon)#end
+                                #end
 
-						#end
-					#end
-				#end
-			#end
-			#end
-		#end
+                            #end
+                        #end
+                    #end
+                #end
+            #end
+        #end
+    #end
 #end
-#end
+
 #simpleModal(editpageModalId)
 #simpleViewModal(viewpageModalId)

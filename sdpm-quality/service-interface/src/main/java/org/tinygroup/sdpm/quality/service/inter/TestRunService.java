@@ -60,4 +60,11 @@ public interface TestRunService {
      * @return
      */
     Pager<QualityTestRun> findTestRunPager(Integer start, Integer limit, QualityTestRun testRun, ConditionCarrier carrier, String sortName, boolean asc);
+
+    /**
+     * 根据测试标识获取QualityTestRun列表
+     * @param testversionId
+     * @return
+     */
+    List<QualityTestRun> findTestRunByTestVersionId(Integer testversionId);
 }

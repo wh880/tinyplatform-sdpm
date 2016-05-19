@@ -3,6 +3,7 @@ package org.tinygroup.sdpm.action.product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,9 +14,13 @@ import org.tinygroup.sdpm.product.dao.pojo.ProductStorySpec;
 import org.tinygroup.sdpm.product.service.inter.StoryService;
 import org.tinygroup.sdpm.product.service.inter.StorySpecService;
 import org.tinygroup.sdpm.system.dao.pojo.ProfileType;
+import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;
+import org.tinygroup.sdpm.system.service.inter.ActionService;
 import org.tinygroup.sdpm.system.service.inter.ProfileService;
 import org.tinygroup.sdpm.util.CookieUtils;
+import org.tinygroup.sdpm.util.ProductUtils;
+import org.tinygroup.sdpm.util.ProjectOperate;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,9 +36,11 @@ public class StorySpecAction extends BaseController {
     private ProfileService profileService;
     @Autowired
     private StoryService storyService;
+    @Autowired
+    private ActionService actionService;
 
     @RequestMapping("/find")
-    public String find(Integer storyId, Model model) {
+    public String find(Integer storyId, Model model,@CookieValue(value= ProductUtils.COOKIE_PRODUCT_ID)String currentProductId) {
         ProductStory story = storyService.findStory(storyId);
         ProductStorySpec storySpec = new ProductStorySpec();
         storySpec.setStoryVersion(story.getStoryVersion());
@@ -42,7 +49,16 @@ public class StorySpecAction extends BaseController {
         storySpec = storySpecs != null && storySpecs.size() > 0 ? storySpecs.get(0) : new ProductStorySpec();
         model.addAttribute("storySpec", storySpec);
 
+        if(story.getProductId()!=Integer.parseInt(currentProductId))
+        {
+            return "redirect:" + adminPath + "/product/story";
+        }
 
+        //读取备注信息
+        String actionComment=getStoryRemark(story);
+        model.addAttribute("actionComment",actionComment);
+
+        //读取附件信息
         SystemProfile systemProfile = new SystemProfile();
         systemProfile.setFileObjectId(storyId);
         systemProfile.setFileObjectType(ProfileType.STORY.getType());
@@ -56,7 +72,8 @@ public class StorySpecAction extends BaseController {
                        ProductStory story,
                        Model model,
                        SystemProfile systemProfile,
-                       HttpServletRequest request) {
+                       HttpServletRequest request,
+                       @CookieValue(value= ProductUtils.COOKIE_PRODUCT_ID)String currentProductId) {
         ProductStory productStory = null;
         if (story.getNo() != null) {
             String result = CookieUtils.getCookie(request, productUtils.COOKIE_PRODUCT_ID);
@@ -86,9 +103,31 @@ public class StorySpecAction extends BaseController {
         List<SystemProfile> list = profileService.findSystemProfile(systemProfile);
         model.addAttribute("file", list);
         if ("productDemandDetail".equals(forward)) {
+            if(productStory.getProductId()!=Integer.parseInt(currentProductId))
+            {
+                return "redirect:" + adminPath + "/product/story";
+            }
+
+            //读取备注信息
+            String actionComment=getStoryRemark(productStory);
+            model.addAttribute("actionComment",actionComment);
             return "/product/page/view/story/demdtablehref.page";
         }
         return "";
+    }
+
+    //获取需求备注信息
+    private String getStoryRemark(ProductStory productStory)
+    {
+        SystemAction systemAction=new SystemAction();
+        systemAction.setActionObjectId(productStory.getStoryId().toString());
+        systemAction.setActionObjectType("story");
+        List<SystemAction> actions = actionService.findAction(systemAction, "actionId", false);//false表示倒序排列
+        if(actions.size()==0)
+        {
+            return "";
+        }
+        return actions.get(0).getActionComment();//0表示降序排列后的第一条，即为最新那一条
     }
 
     @RequestMapping("storyVersion")

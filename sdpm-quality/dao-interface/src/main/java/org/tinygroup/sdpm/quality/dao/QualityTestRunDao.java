@@ -22,8 +22,13 @@ import org.tinygroup.sdpm.quality.dao.pojo.QualityTestRun;
 import org.tinygroup.tinysqldsl.Pager;
 import org.tinygroup.tinysqldsl.base.Condition;
 
+import java.util.List;
+
 public interface QualityTestRunDao extends BaseDao<QualityTestRun, Integer> {
     Pager<QualityTestRun> queryPager(int start, int limit, QualityTestRun testRun, Condition condition, OrderBy... orderArgs);
 
     Integer deleteByCase(Integer caseId);
+
+    List<QualityTestRun> findTestRunByTestVersionId(Integer testversionId);
+
 }

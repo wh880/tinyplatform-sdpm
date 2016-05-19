@@ -17,7 +17,7 @@
                     #@tinyTh({"class":"sorting","rel":"no"})ID#end
                     #@tinyTh({"class":"sorting","rel":"bug_severity"})级别#end
                     #@tinyTh({"class":"sorting","rel":"priority"})P#end
-                    #@tinyTh({"class":"sorting","rel":"bug_title"})bug标题#end
+                    #@tinyTh({"class":"sorting","rel":"bug_title","width":"300px"})bug标题#end
                     #@tinyTh({"class":"sorting","rel":"bug_opened_by"})创建#end
                     #@tinyTh({"class":"sorting","rel":"bug_assigned_to"})指派#end
                     #@tinyTh({"class":"sorting","rel":"bug_resolved_by"})解决者#end
@@ -32,6 +32,12 @@
             $('#${tableId}').on('click', '.delBtn', function (e) {
                 user_del(this, '1');
             });
+
+            if(${linkInfo}==1)
+            {
+                layer.msg("请先关联产品");
+                window.location="${TINY_CONTEXT_PATH +adminPath}/project/product/findLinkProduct";
+            }
         })
     </script>
         #@dialog("myModal")

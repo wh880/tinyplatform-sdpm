@@ -30,7 +30,7 @@
 					#@tr()  ##class 为sorting 表票可排序 为sorting_desc(正序为为sorting_asc) 为当前倒序
 						#@tinyTh({"width":"8"})<input type="checkbox" name="allck" value="">#end
 						#@tinyTh({"class":"sorting","rel":"releaseId"})ID#end
-						#@tinyTh({"class":"sorting","rel":"releaseName"})发布名称#end
+						#@tinyTh({"class":"sorting","rel":"releaseName","width":"200px"})发布名称#end
 						#@tinyTh({"class":"sorting","rel":"buildId"})版本#end
 						#@tinyTh({"class":"sorting","rel":"releaseDate"})发布日期#end
 						#@tinyTh({"class":"","rel":"sortname"})操作#end

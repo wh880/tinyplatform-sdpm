@@ -32,7 +32,7 @@
 
                 #@elementItem()
                     #@sdpmItem("回复人")
-                        #tinyInput("text" "replier" request?.replier {"id":"解决人员","class":"input-text"})
+                        #tinyInput("text" "replier" request?.replier {"id":"解决人员","datatype":"*1-20","class":"input-text"})
                     #end
                 #end
                 #@elementItem()

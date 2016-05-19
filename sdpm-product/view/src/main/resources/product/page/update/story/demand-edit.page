@@ -7,9 +7,9 @@
     <div class="infoContent">
         <p class="titleName">编辑</p>
 
-        #*<div class="RTtitle">
+        <div class="RTtitle">
             <button type="submit" id="submit2" class="commitBtn">保存</button>
-        </div>*#
+        </div>
 
         #@div(divClass="infoContent")
             <p class="titleName">需求标题</p>
@@ -52,10 +52,41 @@
         #@elementItem("" "edui-Box")
             <b class="titleNames">备注</b>
             #@formControlDiv("col-12")
-                #@Teditor("actionComment" "actionComment" {"initialFrameHeight":"300"})#end
+                #@Teditor("actionComment" "actionComment" {"initialFrameHeight":"300"})${actionComment}#end
             #end
             #@validateDiv("col-4")#end
         #end
+
+
+        #*#@elementItem()
+            #@colLabel()<span class="c-red">*</span>需求名称：#end
+            #@formControlDiv("col-4")
+                #tinyInput(
+                    "text" "storyTitle" storySpec?.storyTitle {"placeholder":"请输入需求名称","datatype":"*","nullmsg":"需求名称不能为空！","id":"storyTitle",
+                    "class":"input-text",
+                    "ajaxurl":TINY_CONTEXT_PATH+adminPath+"/product/story/judgeStoryName"})
+
+            #end
+            #@validateDiv("col-2")#end
+        #end
+        #@elementItem()
+            #@colLabel()需求描述：#end
+            #@formControlDiv("col-8")
+                #@Teditor("storySpec" "storySpec" {"initialFrameHeight":"200"})${storySpec?.storySpec}#end
+            #end
+            #@validateDiv("col-2")#end
+        #end
+        #@elementItem()
+            #@colLabel()验收标准：#end
+            #@formControlDiv("col-8")
+                #@Teditor("storyVerification" "storyVerification" {"initialFrameHeight":"200"})${storySpec?.storyVerification}#end
+            #end
+            #@validateDiv("col-2")#end
+        #end
+        #@div(divClass="infoContent")
+            <p class="titleName">附件</p>
+            #mulUploadFile(fileList)
+        #end*#
     </div>
 
 
@@ -80,7 +111,7 @@
 </div>
 
 	
-	<div style="width:30%;float:right">
+<div style="width:30%;float:right">
     #TypeInfo("demand" storySpec?.storyId)
 </div>
 

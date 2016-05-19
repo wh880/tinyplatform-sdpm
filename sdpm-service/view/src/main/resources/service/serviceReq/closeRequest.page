@@ -17,7 +17,7 @@
             #@colLabel("col-3")关闭人：#end
             #@gridSysCol(5)
                 #tinyInput("text" "requestClosedBy" requests?.requestClosedBy{"id":"requestClosedBy","class":
-                    "input-text"})
+                    "input-text","datatype":"*0-50"})
             #end
         #end
         #@gridSysRow()
@@ -31,5 +31,11 @@
     #end
 #end
 
-
+<script>
+    $(function () {
+        $("form[name=thisform]").Validform({
+            tiptype: 2
+        });
+    })
+</script>
 

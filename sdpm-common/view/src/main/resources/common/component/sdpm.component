@@ -83,8 +83,9 @@
         $("#${operation}-${tableId}").on("click", function () {
             layer.confirm("请确认?", function () {
                 var checklist = [];
-                var userId = $("select[name=assignTo] option:selected").val();
-                if (userId == 0) {
+                //var userId = $("select[name=assignTo] option:selected").val();
+                var userId = document.getElementsByName('assignTo')[0].value;
+                if (userId == null) {
                     layer.msg("请选择指派对象")
                     return false;
                 }

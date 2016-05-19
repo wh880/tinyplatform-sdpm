@@ -40,8 +40,8 @@
                         #@thead()
                             #@tr()
                                 #@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
-                                #@tinyTh({"class":"sorting","rel":"clientName"})客户名称#end
-                                #@tinyTh({"class":"sorting","rel":"slaTitle"})协议标题#end
+                                #@tinyTh({"class":"sorting","rel":"clientName","width":"150px"})客户名称#end
+                                #@tinyTh({"class":"sorting","rel":"slaTitle","width":"150px"})协议标题#end
                                 #@tinyTh({"class":"sorting","rel":"cilentProductVision"})产品版本#end
                                 #@tinyTh({"class":"sorting","rel":"serviceLevel"})服务级别#end
                                 #@tinyTh({"class":"sorting","rel":"slaCreatedBy"})创建人#end

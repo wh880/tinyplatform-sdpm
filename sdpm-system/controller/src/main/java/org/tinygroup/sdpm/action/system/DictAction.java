@@ -34,9 +34,8 @@ public class DictAction extends BaseController {
     }
 
     @RequestMapping("dictItem")
-    public String dictItem(SystemModule systemModule, HttpServletRequest request) {
-        systemModule = moduleService.findById(systemModule.getModuleId());
-        request.getSession().setAttribute("dictModule", systemModule);
+    public String dictItem(SystemModule systemModule, Model model) {
+        model.addAttribute("dictModuleId",systemModule.getModuleId());
         return "/system/page/dictionaries/dictitem_list.pagelet";
     }
 

@@ -17,7 +17,7 @@
      		#foreach(m:menuManager?.getScopeMenus("plan-linkdemand"))
      		#set(url=eval(m.href))
      		#if("linkstory"==m.id)
-                #@tinyTableItemRemove(TINY_CONTEXT_PATH +adminPath+url)<i class="${m.icon}"></i>#end
+                #@tinyTableItemRemove(TINY_CONTEXT_PATH +adminPath+url)<i class="${m.icon}" title="${m.name}"></i>#end
      		#end
 			#end
     #end

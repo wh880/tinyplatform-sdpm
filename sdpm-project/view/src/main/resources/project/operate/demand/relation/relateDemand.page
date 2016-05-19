@@ -1,18 +1,20 @@
-
+#set(storyTableId = "storyTableId" )
+#set(linkName = "product-demand")
 #set(name="demand")
 #@layout(project)
     #@tabBodyCol("ptop-5")
         #@div(divClass="operationbar")
-        <span class="f">
-                    <a href="#" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
-                </span>
+            <span class="f">
+                <a href="javascript:void(0);" id="showsearchmore">#buttonIcon(iconClass="icon-search")搜索</a>
+            </span>
             #div(divClass="clearfix")
-        ##                #include("/project/mulsearch.page")
+            #include("/product/page/search/mulsearch.page")
+##                        #include("/project/mulsearch.page")
         #end
     #end
 #end
 #@tinyForm("linkForm" TINY_CONTEXT_PATH+adminPath+"/project/demand/linkStory" "post" {"class":""})
-    #@tinyTable() ##ID为空则系统自动生成 带入参数则取该参数为ID
+    #@tinyTable(storyTableId) ##ID为空则系统自动生成 带入参数则取该参数为ID
         #@div(divBaseClass="tinyheaderTools form-inline")
             #setTinyTablePageSize([10,20,30,50,100,200])
         <input type="button" value="全选" class="btn btn-primary "
@@ -22,6 +24,7 @@
             #@mulOperation("mulLink" TINY_CONTEXT_PATH+adminPath+"/project/demand/linkStory")
             <a href="javascript:void(0);" class="btn btn-primary"><i class="icon-link"></i>关联</a>
             #end
+            <a class="btn btn-primary" href="javascript:history.go(-1)">返回</a>
         #end
         #@tinyTableContent(TINY_CONTEXT_PATH+adminPath+"/project/demand/findStory?notInProjectStory="+notInProjectStory) ##取数据地址 总数据
             #@thead()

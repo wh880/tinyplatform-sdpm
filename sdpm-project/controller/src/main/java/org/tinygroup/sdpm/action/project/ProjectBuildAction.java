@@ -12,16 +12,16 @@ import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.dao.complexsearch.SearchInfos;
 import org.tinygroup.sdpm.dao.condition.ConditionCarrier;
 import org.tinygroup.sdpm.dto.UploadProfile;
+import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.dao.pojo.ProductStory;
 import org.tinygroup.sdpm.product.service.inter.StoryService;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
-import org.tinygroup.sdpm.project.service.inter.BuildService;
-import org.tinygroup.sdpm.project.service.inter.ProjectProductService;
-import org.tinygroup.sdpm.project.service.inter.ProjectService;
-import org.tinygroup.sdpm.project.service.inter.ProjectStoryService;
+import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
+import org.tinygroup.sdpm.project.dao.pojo.ProjectTeam;
+import org.tinygroup.sdpm.project.service.inter.*;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.sdpm.quality.service.inter.BugService;
 import org.tinygroup.sdpm.system.dao.pojo.ProfileType;
@@ -30,6 +30,7 @@ import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
 import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;
 import org.tinygroup.sdpm.system.service.inter.ProfileService;
 import org.tinygroup.sdpm.util.LogUtil;
+import org.tinygroup.sdpm.util.ProjectOperate;
 import org.tinygroup.tinysqldsl.Pager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -63,16 +64,29 @@ public class ProjectBuildAction extends BaseController {
     private BugService bugService;
     @Autowired
     private StoryService storyService;
-
+    @Autowired
+    private TeamService teamService;
     @RequiresPermissions("version")
     @RequestMapping("/index")
-    public String index(Model model, HttpServletRequest request, HttpServletResponse response) {
+    public String index(Model model, HttpServletRequest request, HttpServletResponse response,@CookieValue(value= ProjectOperate.COOKIE_PROJECT_ID)String currentProjectId)
+    {
         Integer projectId = projectOperate.getCurrentProjectId(request, response);
-        if (projectId == null) {
+        if (projectId == null)
+        {
             return redirectProjectForm();
         }
         Project project = projectService.findProjectById(projectId);
         model.addAttribute("project", project);
+
+        List<ProjectProduct> projectProductList=projectProductService.findProductListByProjectId(Integer.parseInt(currentProjectId));
+        if(projectProductList.size()==0)
+        {
+            model.addAttribute("linkInfo",1);
+        }else
+        {
+            model.addAttribute("linkInfo",0);
+        }
+
         return "project/index/build/index";
     }
 
@@ -115,7 +129,8 @@ public class ProjectBuildAction extends BaseController {
     @RequiresPermissions(value = {"pro-version-edit", "pro-version-add"}, logical = Logical.OR)
     @RequestMapping("/edit")
     public String edit(HttpServletRequest request, HttpServletResponse response,
-                       Integer buildId, Model model) {
+                       Integer buildId, Model model,
+                       @CookieValue(value=ProjectOperate.COOKIE_PROJECT_ID)String currentProjectId) {
         Integer projectId = projectOperate.getCurrentProjectId(request, response);
         if (projectId == null) {
             return redirectProjectForm();
@@ -137,6 +152,12 @@ public class ProjectBuildAction extends BaseController {
         model.addAttribute("teamList", userService.findTeamUserListByProjectId(projectId));
         if (buildId != null && buildId != 0) {
             ProjectBuild build = buildService.findBuild(buildId);
+
+            if(build.getBuildProject()!=Integer.parseInt(currentProjectId))
+            {
+                return "redirect:"+adminPath+"/project/build/index";
+            }
+
             model.addAttribute("build", build);
         }
         return "project/operate/build/edit";
@@ -244,8 +265,15 @@ public class ProjectBuildAction extends BaseController {
 
 
     @RequestMapping("/productalbug")
-    public String productalbug(Integer buildId, Model model) {
+    public String productalbug(Integer buildId, Model model,
+                               @CookieValue(value=ProjectOperate.COOKIE_PROJECT_ID)String currentProjectId) {
         ProjectBuild build = buildService.findBuild(buildId);
+
+        if(build.getBuildProject()!=Integer.parseInt(currentProjectId))
+        {
+            return "redirect:"+adminPath+"/project/build/index";
+        }
+
         model.addAttribute("build", build);
         //还需要查询其他相关任务剩余时间的信息
         return "/project/operate/build/relation/product-al-bug.page";
@@ -261,8 +289,24 @@ public class ProjectBuildAction extends BaseController {
 
     //    @RequiresPermissions("projectBuild-forword")
     @RequestMapping("/forword/{forwordPager}")
-    public String forward(@PathVariable(value = "forwordPager") String forwordPager, Integer buildId, Model model) {
+    public String forward(@PathVariable(value = "forwordPager") String forwordPager, Integer buildId, Model model,
+                          @CookieValue(value = ProjectOperate.COOKIE_PROJECT_ID) String currentProjectId,
+                          @CookieValue(value = "cookieProductId", defaultValue = "0") String cookieProductId) {
+        List<ProjectTeam> teams = teamService.findTeamByProductId(Integer.parseInt(cookieProductId));
+        String[] ids = new String[teams.size()];
+        for (int i = 0; i < ids.length; i++) {
+            ids[i] = teams.get(i).getTeamUserId();
+        }
+        List<OrgUser> orgUsers = userService.findUserListByIds(ids);
+        model.addAttribute("orgUsers", orgUsers);
+
         ProjectBuild build = buildService.findBuild(buildId);
+
+        if(build.getBuildProject()!=Integer.parseInt(currentProjectId))
+        {
+            return "redirect:"+adminPath+"/project/build/index";
+        }
+
         model.addAttribute("build", build);
         if ("alBug".equals(forwordPager)) {
             return "project/operate/build/relation/product-al-bug.page";
@@ -499,5 +543,41 @@ public class ProjectBuildAction extends BaseController {
         projectBuildList.add(projectBuild);
         projectBuildList.addAll(buildService.buildInCondition(key, Integer.parseInt(configService.getConfigBySection(SystemConfig.SEARCH_CONFIG).getConfigKey()), productId, projectId));
         return projectBuildList;
+    }
+
+    /**
+     * 判断版本名称在同一产品下存在性
+     * @param param
+     * @param projectId
+     * @param buildNamee
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/judgeBuildNameExist")
+    public Map judgeBuildNameExist(String param,Integer projectId,String buildNamee,Integer productId)
+    {
+        if(param==null)
+        {
+            return resultMap(false, "请输入版本名称");
+        }
+
+        if(StringUtil.equals(param,buildNamee))
+        {
+            return  resultMap(true,"");
+        }
+
+        String buildName = param;
+        ProjectBuild build =new ProjectBuild();
+        build.setBuildName(param);
+        build.setBuildProject(projectId);
+        build.setBuildProduct(productId);
+        build.setBuildDeleted(ProjectBuild.DELETE_NO);
+        List<ProjectBuild> builds = buildService.findListBuild(build);
+        if (builds.size() != 0) {
+            return resultMap(false, "该版本已存在");
+        } else
+        {
+            return resultMap(true, "");
+        }
     }
 }

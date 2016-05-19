@@ -145,6 +145,11 @@ public class DocBizImpl implements DocBiz {
         return docdao.batchUpdateDel(keys);
     }
 
+    @Override
+    public List<DocumentDocLib> findDocLibByDocLib(DocumentDocLib lib) {
+        return doclibdao.query(lib);
+    }
+
     public Pager<DocumentDocLib> queryItemWithPage(Integer start, Integer limit, DocumentDocLib doclib, String sortName, boolean asc) {
         // 分页
         if (StringUtil.isBlank(sortName)) {

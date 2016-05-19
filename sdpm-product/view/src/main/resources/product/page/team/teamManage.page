@@ -6,34 +6,34 @@
             团队管理
             #end
             <span class="r" style="position:relative;top:-28px;height:0">
-                #@aModal("#myModal" "批量添加" 350 600 "" adminPath+"/org/user/toBatchChooseTeam")<i class="icon-plus-sign"></i>&nbsp;批量添加#end
+                #@aModal("#myModal" "批量添加" 350 600 "" adminPath+"/org/user/toBatchChooseTeam?ptype=product")<i class="icon-plus-sign"></i>&nbsp;批量添加#end
                 &nbsp;#@aModal("#myModal" "复制团队" 740 600 "" adminPath+"/product/team/copy")<i class=" icon-copy"></i>&nbsp;复制团队#end
             </span>
         #end
     #end
 #end
 #@tinyForm("thisform" TINY_CONTEXT_PATH+adminPath+"/product/teamSave" "post" {"class":"test"})
-    #@table()
-    <tr>
-        <td style="width: 2%"></td>
-        <td width="18%">
-            <span class="c-red">*</span>用户
-        </td>
-        <td width="20%">
-            <span class="c-red">*</span>产品角色
-        </td>
-        <td width="20%">
-            加盟日
-        </td>
-        <td width="15%">
-            可用工日(天)
-        </td>
-        <td width="15%">
-            可用工时(小时/天)
-        </td>
-        #@td("w-p125")
-        #end
-    </tr>
+    #@table("productTeam")
+        <tr>
+            <td style="width: 2%"></td>
+            <td width="18%">
+                <span class="c-red">*</span>用户
+            </td>
+            <td width="20%">
+                <span class="c-red">*</span>产品角色
+            </td>
+            <td width="20%">
+                加盟日
+            </td>
+            <td width="15%">
+                可用工日(天)
+            </td>
+            <td width="15%">
+                可用工时(小时/天)
+            </td>
+            #@td("w-p125")
+            #end
+        </tr>
         #set(a = 0)
         #foreach(t : teamList)
         <tr>
@@ -49,7 +49,6 @@
                 #@Tselect2F()
                     #@Tselect2Body("teamList["+a+"].teamRole" t.teamRole {"class":"input-text select2","multiple":
                         "multiple","datatype":"*","nullmsg":"角色不能为空！"})
-                        <option></option>
                         #foreach(u : roleList)
                             <option value="${u.orgRoleId}">${u.orgRoleName}</option>
                         #end
@@ -82,7 +81,8 @@
         #include("teamAdd.page")
     #end
     #@div(divClass="col-7 col-offset-5 form-inline")
-        #tinyInput("submit" "submitbtn" " 保存 " {"class":"btn btn-primary"})
+##        #tinyInput("submit" "submitbtn" " 保存 " {"class":"btn btn-primary"})
+        <input type="submit" name="submitbtn" value="保存" class="btn btn-primary" onclick="return checkNum()"/>
     <a href="javascript:history.go(-1)" class="btn radius btn-default">返回</a>
     #end
 
@@ -92,5 +92,68 @@
         $("form[name=thisform]").Validform({
             tiptype: 2
         });
+        //对输入工日检查
+        $("input[name$='teamDays']").each(function()
+        {
+            $(this).change(function()
+            {
+                //不是数字的验证
+                if(isNaN($(this).val())||parseFloat($(this).val())<0)
+                {
+                    layer.msg("请正确填写工日！");
+                }
+
+                //空值时给默认值
+                if($(this).val()==null||$(this).val()=="")
+                {
+                    $(this).val("0.0");
+                }
+            });
+        });
+        //对输入工时检查
+        $("input[name$='teamHours']").each(function()
+        {
+            $(this).change(function()
+            {
+                //不是数字的验证
+                if(isNaN($(this).val())||parseFloat($(this).val())<0)
+                {
+                    layer.msg("请正确填写工时！");
+                }
+
+                //空值时给默认值
+                if($(this).val()==null||$(this).val()=="")
+                {
+                    $(this).val("0.0");
+                }
+            });
+        });
     });
+
+    //保存前对工日/工时数字检查
+    function checkNum()
+    {
+        var isNumber=true;
+        $("input[name$='teamDays']").each(function()
+        {
+            if(isNaN($(this).val())||parseFloat($(this).val())<0)
+            {
+                isNumber=false;
+                return;
+            }
+        });
+        $("input[name$='teamHours']").each(function()
+        {
+            if(isNaN($(this).val())||parseFloat($(this).val())<0)
+            {
+                isNumber=false;
+                return;
+            }
+        });
+        if(!isNumber)
+        {
+            layer.msg("工日/工时请输入数字！");
+        }
+        return isNumber;
+    }
 </script>

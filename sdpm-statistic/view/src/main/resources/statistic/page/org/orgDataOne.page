@@ -34,7 +34,7 @@
 				</div>			
 				##此处type应为submit，后台注意
 				<div class="col-1">
-						<input style="float:right" type="submit" class="commitBtn" value="保存" />
+						<input style="float:right" type="submit" class="commitBtn" value="保存" onclick="return checkNum()"/>
 				</div>
 			#end					
 		#end
@@ -102,3 +102,36 @@
         #end
     #end
 #end
+<script type="text/javascript">
+    $(function(){
+        $("input[name=workHours]").change(function(){
+            var val=$(this).val();
+            if(isNaN(val)||parseInt(val)<0||parseInt(val)>24)
+            {
+                layer.msg("“每天工时”请输入小于24的正整数");
+            }
+            var arr=val.split(".");
+            if(arr.length>1)
+            {
+                layer.msg("“每天工时”请输入小于24的正整数");
+            }
+        });
+    });
+    function checkNum()
+    {
+        var val=$("input[name=workHours]").val();
+        if(isNaN(val)||parseInt(val)<0||parseInt(val)>24)
+        {
+            layer.msg("“每天工时”请输入小于24的正整数");
+            return false;
+        }
+        var arr=val.split(".");
+        if(arr.length>1)
+        {
+            layer.msg("“每天工时”请输入小于24的正整数");
+            return false;
+        }
+
+        return true;
+    }
+</script>

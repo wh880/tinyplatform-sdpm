@@ -280,4 +280,20 @@ public class QualityTestRunDaoImpl extends TinyDslDaoSupport implements QualityT
         Delete delete = delete(QUALITY_TEST_RUNTABLE).where(QUALITY_TEST_RUNTABLE.CASE_ID.eq(caseId));
         return getDslSession().execute(delete);
     }
+
+    @Override
+    public List<QualityTestRun> findTestRunByTestVersionId(Integer testversionId) {
+        Select select = MysqlSelect.select(QUALITY_TEST_RUNTABLE.ALL,
+                QUALITY_TEST_CASETABLE.CASE_TITLE.as("caseTitle"),
+                QUALITY_TEST_CASETABLE.CASE_TYPE.as("caseType"),
+                QUALITY_TEST_CASETABLE.PRIORITY.as("priority"),
+                QUALITY_TEST_CASETABLE.NO.as("no")).from(QUALITY_TEST_RUNTABLE).join(
+                Join.leftJoin(
+                        QUALITY_TEST_CASETABLE,
+                        QUALITY_TEST_CASETABLE.CASE_ID.eq(QUALITY_TEST_RUNTABLE.CASE_ID))).where(
+                and(
+                        QUALITY_TEST_RUNTABLE.TASK_ID.eq(testversionId),
+                        QUALITY_TEST_CASETABLE.DELETED.eq(0)));
+        return getDslSession().fetchList(select,QualityTestRun.class);
+    }
 }

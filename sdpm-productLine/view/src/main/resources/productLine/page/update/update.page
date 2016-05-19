@@ -5,7 +5,7 @@
 
     #@tinyForm("thisform" TINY_CONTEXT_PATH +adminPath+"/productLine/update" "post" )
         #hiddenInput("","productLineId","",productLine?.productLineId)
-、
+
         #@elementItem()
             #@colLabel()<span class="c-red">*</span>产品线名称：#end
             #@formControlDiv("col-4")
@@ -20,7 +20,8 @@
             #@colLabel()<span class="c-red">*</span>产品线编号：#end
             #@formControlDiv("col-4")
                 #tinyInput(
-                    "text" "productLineCode" productLine?.productLineCode {"placeholder":"产品编号","nullmsg":"请输入产品编号！","datatype":"*","id":
+                    "text" "productLineCode" productLine?.productLineCode {"placeholder":"产品编号","nullmsg":"请输入产品编号！",
+                    "datatype":"*1-50","id":
                     "product-code","class":"input-text","ajaxurl":TINY_CONTEXT_PATH+adminPath+
                     "/productLine/judgeProductLineCode?productLineId="+productLine?.productLineId})
             #end

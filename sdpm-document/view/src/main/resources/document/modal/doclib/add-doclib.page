@@ -4,8 +4,9 @@
        #@colLabel("col-2")#end
 			<div class="col-8">
 			#@div(divClass="col-8")
-				
-				#tinyInput("text" "docLibName" "" {"style":"height:32px","placeholder":"文档库名称","id":"docLibName","class":"input-text"})
+
+				#tinyInput("text" "docLibName" "" {"style":"height:32px","placeholder":"文档库名称","datatype":"*1-90","id":
+					"docLibName","nullmsg":"文档库名称不合格！","class":"input-text"})
 				
 			#end
 			<div class="col-3">
@@ -14,3 +15,10 @@
 			</div>
     #end
 #end
+<script type="text/javascript">
+    $(function () {
+        $("form[name=doclib]").Validform({
+            tiptype: 2
+        });
+    });
+</script>

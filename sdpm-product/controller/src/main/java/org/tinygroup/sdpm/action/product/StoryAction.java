@@ -17,18 +17,12 @@ import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.product.dao.pojo.*;
 import org.tinygroup.sdpm.product.dao.utils.FieldUtil;
-import org.tinygroup.sdpm.product.service.inter.PlanService;
-import org.tinygroup.sdpm.product.service.inter.ReleaseService;
-import org.tinygroup.sdpm.product.service.inter.StoryService;
-import org.tinygroup.sdpm.product.service.inter.StorySpecService;
+import org.tinygroup.sdpm.product.service.inter.*;
 import org.tinygroup.sdpm.project.dao.pojo.Project;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTeam;
-import org.tinygroup.sdpm.project.service.inter.BuildService;
-import org.tinygroup.sdpm.project.service.inter.ProjectService;
-import org.tinygroup.sdpm.project.service.inter.TaskService;
-import org.tinygroup.sdpm.project.service.inter.TeamService;
+import org.tinygroup.sdpm.project.service.inter.*;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityTestCase;
 import org.tinygroup.sdpm.quality.service.inter.BugService;
@@ -36,9 +30,12 @@ import org.tinygroup.sdpm.quality.service.inter.TestCaseService;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceRequest;
 import org.tinygroup.sdpm.service.service.inter.RequestService;
 import org.tinygroup.sdpm.system.dao.pojo.*;
+import org.tinygroup.sdpm.system.service.inter.ActionService;
 import org.tinygroup.sdpm.system.service.inter.ModuleService;
 import org.tinygroup.sdpm.system.service.inter.ProfileService;
 import org.tinygroup.sdpm.util.LogUtil;
+import org.tinygroup.sdpm.util.ProductUtils;
+import org.tinygroup.sdpm.util.ProjectOperate;
 import org.tinygroup.sdpm.util.StoryUtil;
 import org.tinygroup.tinysqldsl.Pager;
 
@@ -81,16 +78,24 @@ public class StoryAction extends BaseController {
     private TeamService teamService;
     @Autowired
     private BuildService buildService;
+    @Autowired
+    private ActionService actionService;
+
 
     /**
      * @param request
      * @return
      */
     @RequestMapping("")
-    public String storyAction(
-            HttpServletRequest request) {
-
+    public String storyAction(HttpServletRequest request,@CookieValue(value = "cookieProductId", defaultValue = "0") String cookieProductId,Model model) {
         String queryString = request.getQueryString();
+        List<ProjectTeam> teams = teamService.findTeamByProductId(Integer.parseInt(cookieProductId));
+        String[] ids = new String[teams.size()];
+        for (int i = 0; i < ids.length; i++) {
+            ids[i] = teams.get(i).getTeamUserId();
+        }
+        List<OrgUser> orgUsers = userService.findUserListByIds(ids);
+        model.addAttribute("orgUsers", orgUsers);
         if (queryString != null && !queryString.contains("choose")) {
             return "redirect:" + adminPath + "/product/story?choose=1&"
                     + queryString;
@@ -111,14 +116,16 @@ public class StoryAction extends BaseController {
     @RequiresPermissions("product-demand-add")
     @RequestMapping("/addstory")
     public String addStory(Model model,
-                           String lastAddress) {
+                           String lastAddress, String moduleId, Integer storyId,@CookieValue(required = false, value = ProjectOperate.COOKIE_PROJECT_ID) String currentProjectId) {
         List<ServiceRequest> requests = requestService.getRequestList(null);
         model.addAttribute("requestList", requests);
+        model.addAttribute("moduleId", moduleId);
         if (!StringUtil.isBlank(lastAddress)) {
             return "redirect:" + lastAddress;
         }
         return "/product/page/add/story/product-demand-add.page";
     }
+
 
     /**
      * 保存新的需求同时实现附件上传和记录历史
@@ -214,6 +221,16 @@ public class StoryAction extends BaseController {
             }
         }
         processProfile(uploadProfile, productStory.getStoryId(), ProfileType.STORY);
+
+        if(productStory.getModuleId()==null)
+        {
+            productStory.setModuleId(0);
+        }
+        if(productStory.getPlanId()==null)
+        {
+            productStory.setPlanId(0);
+        }
+
         storyService.updateStory(productStory);
 
         LogUtil.logWithComment(LogUtil.LogOperateObject.STORY,
@@ -342,23 +359,40 @@ public class StoryAction extends BaseController {
     }
 
     /**
-     * 根据多个id查找多个需求
-     *
-     * @param storyId
-     * @param model
-     * @return
+     * 批量关闭
      */
-    @RequestMapping("/findByKeys")
-    public String findByKeys(Integer[] storyId, Model model) {
-        List<ProductStory> storyList = storyService.findStoryListByIds(storyId);
-        model.addAttribute("storyList", storyList);
-        return "/product/page/tabledemo/product-demand-del.pagelet";
+    @ResponseBody
+    @RequestMapping("/batchclose")
+    public Map batchclose(SystemAction systemAction,String ids) {
+        String[] storyIds = ids.split(",");
+        if(storyIds.length>0) {
+            for (String id : storyIds) {
+                ProductStory productStory = storyService.findStory(Integer.valueOf(id));
+                productStory.setStoryClosedBy(userUtils.getUserId());
+                productStory.setStoryClosedDate(new Date());
+                productStory.setDeleted(FieldUtil.DELETE_YES);
+                productStory.setStoryStatus("2");
+                storyService.deleteStory(productStory);
+                LogUtil.logWithComment(LogUtil.LogOperateObject.STORY,
+                        LogUtil.LogAction.CLOSED,
+                        String.valueOf(productStory.getStoryId()),
+                        userUtils.getUserId(), String.valueOf(productStory.getProductId()),
+                        null, productStory, productStory, systemAction.getActionComment());
+            }
+        }
+
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("status", "success");
+        map.put("info", "关闭成功");
+        return map;
+        //return "/product/page/list/story/story.page";
     }
 
     @RequestMapping("/{forwordPager}/findPager")
     public String find(Integer storyId,
                        @PathVariable(value = "forwordPager") String forwordPager,
-                       Model model) {
+                       Model model,
+                       @CookieValue(value= ProductUtils.COOKIE_PRODUCT_ID)String currentProductId) {
         ProductStory productStory = storyService.findStory(storyId);
         ProductStorySpec storySpec = new ProductStorySpec();
         storySpec.setStoryId(storyId);
@@ -388,19 +422,38 @@ public class StoryAction extends BaseController {
         model.addAttribute("projectList", projectList);
         model.addAttribute("stories", stories);
 
-        if ("productDemandClose".equals(forwordPager)) {
-            return "/product/page/operate/story/product-demand-close.page";
-        } else if ("productDemandReview".equals(forwordPager)) {
+        //读取备注信息
+        String actionComment=getStoryRemark(productStory);
 
+        if(productStory.getProductId()!=Integer.parseInt(currentProductId))
+        {
+            return "redirect:" + adminPath + "/product/story";
+        }
+
+        if ("productDemandClose".equals(forwordPager))
+        {
+            model.addAttribute("actionComment",actionComment);
+            return "/product/page/operate/story/product-demand-close.page";
+        }
+        if ("productDemandReview".equals(forwordPager))
+        {
+            model.addAttribute("actionComment",actionComment);
             return "/product/page/operate/story/product-demand-review.page";
-        } else if ("productDemandChange".equals(forwordPager)) {
+        }
+        if ("productDemandChange".equals(forwordPager))
+        {
+            model.addAttribute("actionComment",actionComment);
+
+            //读取文档信息
             SystemProfile systemProfile = new SystemProfile();
             systemProfile.setFileObjectId(storyId);
             systemProfile.setFileObjectType(ProfileType.STORY.getType());
             List<SystemProfile> fileList = profileService.findSystemProfile(systemProfile);
             model.addAttribute("fileList", fileList);
             return "/product/page/operate/story/product-demand-change.page";
-        } else if ("productDemandDetail".equals(forwordPager)) {
+        }
+        if ("productDemandDetail".equals(forwordPager))
+        {
 
             ProjectTask task = new ProjectTask();
             task.setTaskStory(storyId);
@@ -432,6 +485,22 @@ public class StoryAction extends BaseController {
         }
 
         return "";
+    }
+
+    /**
+     * 获得需求备注信息
+     */
+    public String getStoryRemark(ProductStory productStory)
+    {
+        SystemAction systemAction=new SystemAction();
+        systemAction.setActionObjectId(productStory.getStoryId().toString());
+        systemAction.setActionObjectType("story");
+        List<SystemAction> actions = actionService.findAction(systemAction, "actionId", false);
+        if(actions.size()==0)
+        {
+            return "";
+        }
+        return actions.get(0).getActionComment();//0表示降序排列后的第一条，即为最新那一条
     }
 
     /**
@@ -561,7 +630,7 @@ public class StoryAction extends BaseController {
                                     @RequestParam(required = false, defaultValue = "storyId") String order,
                                     @RequestParam(required = false, defaultValue = "desc") String ordertype,
                                     Model model) {
-        if (!"2".equals(choose) && !"11".equals(choose)) {
+        if (!"2".equals(choose) && !"11".equals(choose) && !"6".equals(choose)) {
             story.setDeleted(0);
         }
         if (story.getProductId() == null || story.getProductId() == 0) {
@@ -936,11 +1005,12 @@ public class StoryAction extends BaseController {
      * @return 回到概况页面
      */
     @RequestMapping("/remark")
-    public String remark(ProductStory story, SystemAction systemAction) {
+    public String remark(ProductStory story, SystemAction systemAction,Model model) {
         LogUtil.logWithComment(LogUtil.LogOperateObject.STORY,
                 LogUtil.LogAction.REMARK, String.valueOf(story.getStoryId()),
                 userUtils.getUserId(), String.valueOf(story.getProductId()),
                 null, null, null, systemAction.getActionComment());
+
         return "redirect:" + adminPath
                 + "/product/storySpec/find/productDemandDetail?storyId="
                 + story.getStoryId();

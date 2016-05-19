@@ -61,8 +61,13 @@
                 #@tinyTh({"class":"sorting","rel":"action_action"})动作#end
                 #@tinyTh({"class":"sorting","rel":"action_object_type"})对象类型#end
                 #@tinyTh({"class":"sorting","rel":"action_id"})ID#end
-                #@tinyTh({"class":"","rel":"object_name"})对象名称#end
+                #@tinyTh({"class":"showLong","rel":"object_name"})对象名称#end
             #end
         #end
     #end
 #end
+<style>
+    .showLong{
+        width: 300px;
+    }
+</style>

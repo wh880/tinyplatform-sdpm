@@ -47,9 +47,9 @@
                     <script>
                         $("#${sid}").on("change", function () {
                             var pId = $("input[name=productId]").val();
-                            var mId = $("select[name=moduleId]").val();
+                            var mId = $("#${sid}  option:selected").val();
                             if (pId > 0 && mId >= 0) {
-                                ajaxRead("${sid}", "storyId", "storyId", "storyTitle", "/product/story/storyList?productId=" + pId + "&moduleId=" + mId, ${testCase?.storyId?:0});
+                                ajaxRead("${sid}", "storyId", "storyId", "storyTitle", "/quality/testCase/ajax/story?productId="+pId+"&moduleId="+mId,${(testCase?.storyId?:storyId)?:0});
                             }
                         });
                     </script>
@@ -159,7 +159,8 @@
                 #@colLabel()关键词#end
                 #@formControlDiv("col-8")
                     #tinyInput(
-                        "text" "caseKeywords" testCase?.caseKeywords {"id":"版本","class":"input-text"})
+                        "text" "caseKeywords" testCase?.caseKeywords {"id":"版本","class":"input-text","datatype":
+                        "*0-255"})
                 #end
                 #@validateDiv("col-2")#end
             #end
@@ -168,7 +169,9 @@
             #@elementItem()
                 #@colLabel()相关用例#end
                 #@formControlDiv("col-8")
-                    #tinyInput("text" "linkCase" testCase?.linkCase {"id":"","class":"input-text","datatype":"n","nullmsg":"输入必须为数字","ignore":"ignore"})
+                    #tinyInput(
+                        "text" "linkCase" testCase?.linkCase {"id":"","class":"input-text","datatype":"n0-11","nullmsg":
+                        "输入必须为数字","ignore":"ignore"})
                 #end
                 #@validateDiv("col-2")#end
             #end

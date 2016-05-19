@@ -55,4 +55,6 @@ public interface QualityBugDao extends BaseDao<QualityBug, Integer> {
 
     QualityBug findBugByBugId(Integer bugId);
 
+    List<QualityBug> findBugByProductIdAndBugTitle(String bugTitle, Integer productId,String status);
+
 }

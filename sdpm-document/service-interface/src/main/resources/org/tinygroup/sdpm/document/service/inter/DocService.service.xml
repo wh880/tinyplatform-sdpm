@@ -105,5 +105,11 @@
       </service-parameters>
       <service-result name="deleteDocByIdsResult" required="false" is-array="false" type="java.lang.Integer"/>
     </service-method>
+    <service-method local-name="findDocLibByDocLib" service-id="findDocLibByDocLib" method-name="findDocLibByDocLib" cacheable="false" category="org.tinygroup.sdpm.document.service.inter">
+      <service-parameters>
+        <service-parameter name="lib" type="org.tinygroup.sdpm.document.dao.pojo.DocumentDocLib" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findDocLibByDocLibResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.document.dao.pojo.DocumentDocLib"/>
+    </service-method>
   </service-component>
 </service-components>

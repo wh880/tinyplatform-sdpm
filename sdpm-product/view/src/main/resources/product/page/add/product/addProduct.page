@@ -57,7 +57,7 @@
 #@colLabel()<span class="c-red">*</span>产品代号：#end
 #@formControlDiv("col-3")
     #tinyInput(
-        "text" "productCode" ""{"placeholder":"请输入产品代号","datatype":"*","nullmsg":"代号不合格！","id":
+        "text" "productCode" ""{"placeholder":"请输入产品代号","datatype":"*1-50","nullmsg":"代号不合格！","id":
         "productCode","class":"input-text","ajaxurl":TINY_CONTEXT_PATH+adminPath+"/product/judgeProductCode"})
 #end
 #@validateDiv("col-2")#end

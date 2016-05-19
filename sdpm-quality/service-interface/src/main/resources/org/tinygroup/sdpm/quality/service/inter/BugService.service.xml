@@ -85,5 +85,13 @@
       </service-parameters>
       <service-result name="findBugByBugIdResult" required="false" is-array="false" type="org.tinygroup.sdpm.quality.dao.pojo.QualityBug"/>
     </service-method>
+    <service-method local-name="findBugByProductIdAndBugTitle" service-id="findBugByProductIdAndBugTitle" method-name="findBugByProductIdAndBugTitle" cacheable="false" category="org.tinygroup.sdpm.quality.service.inter">
+      <service-parameters>
+        <service-parameter name="bugTitle" type="java.lang.String" required="false" is-array="false"/>
+        <service-parameter name="productId" type="java.lang.Integer" required="false" is-array="false"/>
+        <service-parameter name="status" type="java.lang.String" required="false" is-array="false"/>
+      </service-parameters>
+      <service-result name="findBugByProductIdAndBugTitleResult" required="false" is-array="false" collection-type="java.util.List" type="org.tinygroup.sdpm.quality.dao.pojo.QualityBug"/>
+    </service-method>
   </service-component>
 </service-components>

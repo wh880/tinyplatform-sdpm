@@ -23,15 +23,15 @@
                 #@thW("150px")所属模块#end
                 #@thW("150px")相关需求#end
                 #@thW("150px")<span class="c-red">*</span>任务名称#end
-                #@thW("150px")<span class="c-red">*</span>类型#end
+                #@thW("150px")<span class="c-red">*</span>任务类型#end
                 #@thW("150px")指派给#end
-                #@thW("150px")<span class="c-red">*</span>预计剩余#end
+                #@thW("150px")<span class="c-red">*</span>预计剩余（小时）#end
                 #@thW("150px")任务描述#end
                 #@thW("100px")优先级#end
             #end
         #end
         #@tbody()
-            #foreach(i:[0..8])
+            #foreach(i:[1..8])
                 #@tr("text-c")
                     #@td()${i}#end
                     #@td()
@@ -49,21 +49,24 @@
                     ##                            #tinyInput("text" "taskList["+i+"].taskStory" story?.storyId)
                     ##                        #end
                         #@Tselect2F()
-                            #@Tselect2Body(
-                                "taskList["+i+"].taskStory" story?.storyId {"class":
-                                "input-text select2"})
-                            <option value=${story?.storyId}>${story?.storyTitle}</option>
-                            <option value="">同上</option>
+                            #@Tselect2Body("taskList["+i+"].taskStory" story?.storyId {"class":"input-text select2"})
+                            <option value=""></option>
+                                #if(i!=1)
+                                <option value="0">同上</option>
+                                #end
+                                #foreach(s:storyList)
+                                <option value="${s.storyId}">${s.storyId}：${s.storyTitle}（优先级：${s.storyPri}，预计工时:${s.storyEstimate}）</option>
+                                #end
                             #end
                         #end
 
                     #end
                     #@td()
                         #tinyInput(
-                            "text" "taskList["+i+"].taskName"""{"placeholder":"","groupName":"taskName"})
+                            "text" "taskList["+i+"].taskName" "" {"placeholder":"","groupName":"taskName","datatype":"*0-255"})
                     #end
                     #@td()
-                        #@formControlDiv( )
+                        #@formControlDiv()
                             #@Tselect2F()
                                 #@Tselect2Body("taskList["+i+"].taskType")
                                     #foreach(item : getDict("taskType"))
@@ -132,22 +135,132 @@
 
 <script type="text/javascript">
     $(function () {
+        //检查任务名称是否重复
+        $("input[name$=taskName]").each(function(){
+            $(this).change(function(){
+                var taskName=$(this).val();
+                if(taskName==null|taskName=="")
+                {
+                    return;
+                }
+                $.ajax({
+                    type:"POST",
+                    url:"${TINY_CONTEXT_PATH+adminPath}/project/task/judgeTaskNameExist?projectId=${projectId}&currentURL=${currentURL}&taskNamee=null",
+                    data:{param:taskName},
+                    success:function(data)
+                    {
+                        if(data.status=="n")
+                        {
+                            layer.msg(data.info);
+                        }
+                    }
+                });
+            });
+        });
+
         $('form[name=bathAddForm]').Validform({
-            beforeSubmit:function(form){
+            beforeSubmit:function(form)
+            {
+                //保存前给"同上"选项赋值
+                var taskStory=new Array();
+                $("select[name$=taskStory]").each(function(){
+                    var thisTaskStory=$(this).find("option:selected").text();
+                    if(thisTaskStory)
+                    {
+                        taskStory.push(thisTaskStory);
+                    }
+                });
+                for(var i=1;i<taskStory.length;i++)
+                {
+                    if(taskStory[i]=="同上")
+                    {
+                        $("select[name$=taskStory]").eq(i).val($("select[name$=taskStory]").eq(i-1).val());
+                    }
+                }
+
+                //保存前再次对标题进行检查
+                var boo=true;
+                var taskNameArray=new Array();
+                $("input[name$=taskName]").each(function(index){
+                    var thisTaskName=$(this).val();
+                    taskNameArray.push(thisTaskName);
+                    if(thisTaskName)
+                    {
+                        $.ajax({
+                            type:"POST",
+                            url:"${TINY_CONTEXT_PATH+adminPath}/project/task/judgeTaskNameExist?projectId=${currentProjectId}",
+                            data:{param:thisTaskName},
+                            async : false,
+                            success:function(data)
+                            {
+                                if(data.status=="n")
+                                {
+                                    layer.msg("任务名称已存在");
+                                    boo=false;
+                                }
+                            }
+                        });
+                    }
+                });
+                if(!boo)
+                {
+                    return false;
+                }
+
+                for(var i=0;i<taskNameArray.length-1;i++)
+                {
+                    for(var j=taskNameArray.length-1;i<j;j--)
+                    {
+                        if(isNotNull(taskNameArray[i])&&isNotNull(taskNameArray[j])&&taskNameArray[i]==taskNameArray[j])
+                        {
+                            layer.msg("第"+(i+1)+"行和第"+(j+1)+"行任务名称相同");
+                            return false;
+                        }
+                    }
+                }
+
                 var etimes=$(form).find("input[groupName=etime]");
                 var thisetime;
+                var taskTypes=$("select[name$=taskType]");
+                var thisTaskType;
+                var taskPris=$("select[name$=taskPri]");
+                var thisTaskPri;
                 var showBreak=false;
-                $(form).find("input[groupName=taskName]").each(function(index){
+                $(form).find("input[groupName=taskName]").each(function(index)
+                {
                     thisetime=etimes.eq(index).val()
-                    if($(this).val()){
-                        if(!thisetime){
+                    thisTaskType=taskTypes.eq(index).val()
+                    thisTaskPri=taskPris.eq(index).val()
+                    if($(this).val())
+                    {
+                        if(!thisetime)
+                        {
                             etimes.eq(index).addClass("Validform_error").get(0).focus();
                             layer.msg("预计时间不能为空");
                             showBreak=true;
                             return false;
                         }
-                    }else{
-                        if(thisetime){
+                        if(!thisTaskType)
+                        {
+                            layer.msg("任务类型不能为空");
+                            showBreak=true;
+                            return false;
+                        }
+                        if(!thisTaskPri)
+                        {
+                            taskPris.eq(index).val(1);
+                        }
+                    }else
+                    {
+                        if(thisetime)
+                        {
+                            $(this).addClass("Validform_error").get(0).focus();
+                            layer.msg("任务名称不能为空");
+                            showBreak=true;
+                            return false;
+                        }
+                        if(thisTaskType)
+                        {
                             $(this).addClass("Validform_error").get(0).focus();
                             layer.msg("任务名称不能为空");
                             showBreak=true;
@@ -157,12 +270,17 @@
                     etimes.eq(index).blur();
                     $(this).blur();
                 });
-                if(showBreak){
+                if(showBreak)
+                {
                     return false;
                 }
             }
         });
-    })
+    });
+    function isNotNull(str)
+    {
+        return (str==null||str=="")?false:true;
+    }
 </script>
 #@dialog("myModal")
     #@dialogHeader()对话框标题#end

@@ -29,7 +29,7 @@
         #@formControlDiv("col-8")
             #@TzTreeSelect(
                 "productId" cookieProductId {"class":"input-text","datatype":"*","nullmsg":"所属产品不能为空！",
-                "data-URL":call("link",adminPath+"/productLine/userProductTree")})
+                "data-URL":call("link",adminPath+"/productLine/userProductTree"),"readonly":"readonly"})
                 <script>
                     $(function(){
                         var mUrl =  $("#modelA").attr("href");
@@ -165,9 +165,11 @@
             #@colLabel()预计工时：#end
             #@formControlDiv("col-8")
                 <div class="input-group">
-                    <input type="text" value="${story?.storyEstimate}" class="form-control" name="storyEstimate"
+                   #* <input type="text" value="${story?.storyEstimate}" class="form-control" name="storyEstimate"
                            placeholder=""
-                           aria-describedby="basic-addon2">
+                           aria-describedby="basic-addon2">*#
+                       #tinyInput("text" "storyEstimate" story?.storyEstimate {"placeholder":"","datatype":
+                           "/^([0-9]+(\.?[0-9]{0,2}))?$/","aria-describedby":"basic-addon2"})
                     <span class="input-group-addon" id="basic-addon2">小时</span>
                 </div>
             #end
@@ -179,7 +181,9 @@
         #@elementItem()
             #@colLabel()关键词：#end
             #@formControlDiv("col-8")
-                #tinyInput("text" "storyKeywords" story?.storyKeywords {"id":"storyKeywords","class":"input-text"})
+                #tinyInput(
+                    "text" "storyKeywords" story?.storyKeywords {"id":"storyKeywords","class":"input-text","datatype":
+                    "*0-255"})
             #end
             #@validateDiv("col-2")#end
         #end
@@ -232,11 +236,11 @@
                         #Tselect2Ajax("storyAssignedTo" story?.storyAssignedTo TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
                         {"id":"reviewedSelect","dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询指派人"})
                         #@Tselect2Fix()
-                            #set(m=menuService.getMenu("organizationAddUser"))
+                            #set(m=menuService.getMenu("product-team-report"))
                             #if(m)
                                 <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
                             #end
-                            #set(m=menuService.getMenu("organizationUser"))
+                            #set(m=menuService.getMenu("product-team"))
                             #if(m)
                                 <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
                             #end
@@ -261,7 +265,8 @@
             #@colLabel()重复需求：#end
             #@formControlDiv("col-8")
                 #tinyInput(
-                    "text" "storyDuplicateStory" story?.storyDuplicateStory {"ignore":"ignore","id":"yujigongshi","class":"input-text","datatype":"n","nullmsg":"内容必须为数字！"})
+                    "text" "storyDuplicateStory" story?.storyDuplicateStory {"ignore":"ignore","id":"yujigongshi",
+                    "class":"input-text","datatype":"n1-11","nullmsg":"内容必须为数字！"})
             #end
             #@validateDiv("col-2")#end
         #end
@@ -271,7 +276,9 @@
         #@elementItem()
             #@colLabel()相关需求：#end
             #@formControlDiv("col-8")
-                #tinyInput("text" "storyLinkStories" story?.storyLinkStories {"ignore":"ignore","id":"yujigongshi","class":"input-text"})
+                #tinyInput(
+                    "text" "storyLinkStories" story?.storyLinkStories {"ignore":"ignore","id":"yujigongshi","class":
+                    "input-text","datatype":"n1-255","nullmsg":"内容必须为数字！"})
             #end
             #@validateDiv("col-2")#end
         #end
@@ -282,7 +289,8 @@
             #@colLabel()细分需求：#end
             #@formControlDiv("col-8")
                 #tinyInput(
-                    "text" "storyChildStories" story?.storyChildStories {"ignore":"ignore","id":"yujigongshi","class":"input-text","datatype":"n","nullmsg":"内容必须为数字！"})
+                    "text" "storyChildStories" story?.storyChildStories {"ignore":"ignore","id":"yujigongshi","class":
+                    "input-text","datatype":"n1-50","nullmsg":"内容必须为数字！"})
             #end
             #@validateDiv("col-2")#end
         #end

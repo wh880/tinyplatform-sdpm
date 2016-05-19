@@ -45,6 +45,10 @@ public class StoryUtil {
                         ConditionUtils.Operate.EQ.getOperate(),
                         ConditionUtils.CommonFieldType.FIELD_OPERATE.getCommonField(),
                         UserUtils.getUserId());
+                carrier.put("productStory.storyStatus",
+                        ConditionUtils.Operate.EQ.getOperate(),
+                        ConditionUtils.CommonFieldType.FIELD_OPERATE.getCommonField(),
+                        "2");
                 break;
             case 7:
                 carrier.put("productStory.storyStatus",

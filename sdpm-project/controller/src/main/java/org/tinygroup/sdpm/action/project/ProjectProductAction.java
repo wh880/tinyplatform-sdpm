@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.product.dao.pojo.Product;
 import org.tinygroup.sdpm.product.service.inter.ProductService;
@@ -49,6 +50,7 @@ public class ProjectProductAction extends BaseController {
         }
         model.addAttribute("linkIdList", linkIdList);
         model.addAttribute("userProductsMap", userProductsMap);
+
         return "project/index/product/view";
     }
 

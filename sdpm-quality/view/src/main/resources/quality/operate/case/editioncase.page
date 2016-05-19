@@ -32,9 +32,11 @@
         	</div>
         #@elementItem()
         	<div class="col-10">
-        	#@colLabel("col-2")<span class="c-red">*</span>用例名称：#end
+                #@colLabel("col-2")<span class="c-red">*</span>用例标题：#end
         	<div class="col-4">
-           		#tinyInput("text" "caseTitle" bug?.bugTitle?:testCase?.caseTitle {"datatype":"*","nullmsg":"用例标题不能为空！","id":"111","class":"input-text","placeholder":""})
+                #tinyInput(
+                    "text" "caseTitle" bug?.bugTitle?:testCase?.caseTitle {"datatype":"*1-255","nullmsg":"用例标题不能为空！",
+                    "id":"111","class":"input-text","placeholder":""})
            </div>
            </div>
         #end

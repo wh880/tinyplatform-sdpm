@@ -5,7 +5,7 @@
     #@elementItem()
         #@colLabel()名称：#end
         #@formControlDiv("col-6")
-          #tinyInput("text" "holidayName" holiday?.holidayName{"datatype":"*","id":"holidayName","class":"input-text","nullmsg":"假期名不为空"})
+          #tinyInput("text" "holidayName" holiday?.holidayName{"datatype":"*1-30","id":"holidayName","class":"input-text","nullmsg":"假期名不为空"})
         #end
         #@validateDiv("col-2")#end
     #end

@@ -5,7 +5,7 @@
 #searchZtreeInit("treeDemo" "/data/tree/dict.js" "#test")
 #macro ztreeClick()
 if(!treeNode.isParent){
-var id = treeNode.id;
+	var id = treeNode.id;
 	loadURL("${TINY_CONTEXT_PATH+adminPath}/system/dict/dictItem?moduleId="+id, $("#tBox"));
 }
 #end
@@ -23,9 +23,9 @@ var id = treeNode.id;
 #simpleModal(editpageModalId)
 #simpleViewModal(viewpageModalId)
 <script>
-	$(document).ready(function(){
+	/*$(document).ready(function(){
 		$.fn.zTree.init($("#treeDemo"), setting, zNodes);
-	});
+	});*/
 
 	function onCheck(e,treeId,treeNode){
 		var treeObj=$.fn.zTree.getZTreeObj("treeDemo"), nodes=treeObj.getCheckedNodes(true);

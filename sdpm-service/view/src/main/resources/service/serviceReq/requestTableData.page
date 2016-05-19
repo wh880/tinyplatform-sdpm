@@ -2,10 +2,14 @@
 #foreach(var:pager?.records)
     #@tr()
         #@td()<input type="checkbox" value="${var.clientRequestId}" name="idCheck">#end
-        #@td()<a
-                href="${TINY_CONTEXT_PATH+adminPath}/service/client/clientSla?id=${var.clientId}">${var.clientName}</a>#end
-        #@td()<a
-                href="${TINY_CONTEXT_PATH+adminPath}/service/request/overview?id=${var.clientRequestId}">${var.requestTitle}</a>#end
+        #@td()
+            <div style="width: 150px;overflow: hidden;">
+                <a href="${TINY_CONTEXT_PATH+adminPath}/service/client/clientSla?id=${var.clientId}">${var.clientName}</a>#end
+            </div>
+        #@td()
+            <div style="width: 200px;overflow: hidden;">
+                <a href="${TINY_CONTEXT_PATH+adminPath}/service/request/overview?id=${var.clientRequestId}" title="${var.requestTitle}">${var.requestTitle}</a>#end
+            </div>
         #@td("nowrap")${getDict("requestPre",var.requestPre)}#end
         #@td("nowrap")${getDict("requestStatus",var.requestStatus)}#end
         #@td("nowrap")${formatDate(var.requestCommitmentDate,"yyyy-MM-dd")}#end

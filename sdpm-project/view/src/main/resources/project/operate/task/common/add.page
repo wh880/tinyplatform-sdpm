@@ -92,7 +92,7 @@
         <input type="hidden" name="taskAssignedDate">
         #@elementItem()
             #@sdpmItem("相关需求")
-                #if(storyList)
+                #*#if(storyList)*#
                     #@Tselect2F()
                         #@Tselect2Body("taskStory" storyId==null?"":storyId {"class":"input-text select2"})
                             <option value=""></option>
@@ -103,15 +103,15 @@
                         #end
                         #@Tselect2Fix()
                             <a href="${TINY_CONTEXT_PATH+adminPath}/product/story/addstory">新增</a>
-                            <a href="${TINY_CONTEXT_PATH+adminPath}/product/demand/index" class="r">全部</a>
+                            <a href="${TINY_CONTEXT_PATH+adminPath}/project/demand/index" class="r">全部</a>
                         #end
                     #end
-                #end
+               #* #end*#
             #end
         #end
         #@elementItem()
             #@sdpmItem("相关BUG")
-                #if(bugList)
+                #*#if(bugList)*#
                     #@Tselect2F()
                         #@Tselect2Body("taskRelationBug" bugId==null?"":bugId {"class":"input-text select2"})
                             <option value=""></option>
@@ -121,13 +121,15 @@
                             #end
                         #end
                     #end
-                #end
+                #*#end*#
             #end
         #end
         #@elementItem()
             #@sdpmItem("任务名称" "*")
                 #@formControlDiv()
-                    #tinyInput("text" "taskName" (story?.storyTitle)?:copyTask?.taskName {"placeholder":"任务名称","datatype":"*","nullmsg":"任务名称不能为空！","class":"input-text"})
+                    #tinyInput("text"
+                        "taskName" (story?.storyTitle)?:copyTask?.taskName {"placeholder":"任务名称","datatype":"*1-255","nullmsg":"任务名称不能为空！",
+                "class":"input-text","ajaxurl":TINY_CONTEXT_PATH+adminPath+"/project/task/judgeTaskNameExist?currentURL="+currentURL+"&projectId="+projectId+"&taskNamee=null"})
                 #end
             #end
         #end
@@ -265,6 +267,8 @@
                 objtip.text(msg);
             }
         });
+
+
     });
 </script>
 <script>

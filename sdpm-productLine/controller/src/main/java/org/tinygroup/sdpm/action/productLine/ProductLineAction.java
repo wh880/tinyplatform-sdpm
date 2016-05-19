@@ -195,16 +195,15 @@ public class ProductLineAction extends BaseController {
     }
 
     @RequestMapping("/find/{forword}")
-    public String find(@CookieValue(value = "cookieProductLineId", defaultValue = "0") String cookieProductLineId,
-                       @PathVariable(value = "forword") String forword, Integer productId, Integer productLineId, Model model, HttpServletRequest request) {
-
-        if (productLineId == null) {
-            productLineId = Integer.parseInt(cookieProductLineId);
+    public String find(@CookieValue(value = "cookieProductId") String cookieProductId,
+                       @PathVariable(value = "forword") String forword,Integer productLineId, Model model) {
+        if(productLineId==null)
+        {
+            Product product = productService.findProductById(Integer.parseInt(cookieProductId));
+            productLineId = product.getProductLineId();
         }
-
         ProductLine productLine = productLineService.findProductLine(productLineId);
         List<String> lineNameList = productService.getProductNameByLineId(productLineId);
-
         model.addAttribute("productLine", productLine);
         model.addAttribute("lineNameList", lineNameList);
 

@@ -9,7 +9,9 @@
 				 #@elementItem()
 			        #@colLabel()名称：#end
 				        #@formControlDiv("col-8")
-				          #tinyInput("text" "holidayName" holiday?.holidayName{"id":"yujigongshi","class":"input-text"})
+							#tinyInput(
+								"text" "holidayName" holiday?.holidayName{"id":"yujigongshi","class":"input-text",
+								"datatype":"*1-30"})
 				        #end
 			        #@validateDiv("col-2")#end
 			      #end
@@ -17,7 +19,7 @@
 				 #@elementItem()
 			        #@colLabel()类型：#end
 				        #@formControlDiv("col-8")
-					       #@tinySelect("lang" holiday?.holidayType {"class":"input-text","rel":"22"})
+					       #@tinySelect("holidayType" holiday?.holidayType {"class":"input-text","rel":"22"})
 								#@tinyOptionItem("放假")放假#end
 								#@tinyOptionItem("工作")工作#end
 							#end
@@ -74,3 +76,11 @@
 ##<div style="width:30%;float:right">
 ##		#TypeInfo("holiday-edit")
 ##</div>
+
+<script>
+    $(function () {
+        $("form[name=thisform]").Validform({
+            tiptype: 2
+        });
+    })
+</script>

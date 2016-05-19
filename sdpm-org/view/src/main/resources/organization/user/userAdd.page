@@ -27,7 +27,8 @@
                             #@colLabel("col-3")<span class="c-red">*</span>所属部门：#end
                             #@formControlDiv("col-5")
                                 #TzTreeSelect(
-                                    "orgDeptId" dept?.orgDeptId {"datatype":"*","class":"input-text", "nullmsg":"请选择部门。",
+                                    "orgDeptId" dept?.orgDeptId {"datatype":"*1-90","class":"input-text", "nullmsg":
+                                    "请选择部门。",
                                     "data-URL":TINY_CONTEXT_PATH+adminPath+"/org/dept/data?check=n"} )
                             #end
                             #@validateDiv("col-4")#end
@@ -129,7 +130,7 @@
                                     "text" "orgUserSubmitter" user?.orgUserSubmitter{"placeholder":""
                                 ,"id":"name",
                                     "class":
-                                    "input-text"})
+                                    "input-text","datatype":"*0-255"})
                             #end
                             #@validateDiv("col-4")#end
                         #end

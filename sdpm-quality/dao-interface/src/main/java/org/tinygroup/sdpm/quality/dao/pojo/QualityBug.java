@@ -23,9 +23,9 @@ import java.util.Date;
  * 缺陷表
  */
 public class QualityBug implements Serializable {
-    public static final String STATUS_ACTIVE = "1";
-    public static final String STATUS_RESOLVED = "2";
-    public static final String STATUS_CLOSED = "3";
+    public static final String STATUS_ACTIVE = "1"; //激活
+    public static final String STATUS_RESOLVED = "2"; //已解决
+    public static final String STATUS_CLOSED = "3";  //已关闭
 
     private Integer releaseId;
     /**

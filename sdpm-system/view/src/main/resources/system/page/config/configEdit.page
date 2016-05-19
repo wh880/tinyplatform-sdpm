@@ -13,10 +13,11 @@
         #@colLabel("col-4")<span class="c-red">*</span>值：#end
         #@gridSysCol(6)
             #tinyInput(
-                "text" "configKey" config?.configKey {"datatype":"*","class":
+                "text" "configKey" config?.configKey {"datatype":"*n1-2","class":
                 "input-text","nullmsg":"值不为空"})
 
         #end
+        #@validateDiv("col-2")#end
     #end
     #@gridSysRow()
         #@colLabel("col-4")<span class="c-red">*</span>说明：#end

@@ -23,7 +23,7 @@
             #@div(divClass="col-5")
                 #@TzTreeSelect(
                     "productId" testCase?.productId?:cookieProductId {"class":"input-text","datatype":"*","nullmsg":"所属产品不能为空！",
-                    "data-URL":call("link",adminPath+"/productLine/userProductTree")})
+                    "data-URL":call("link",adminPath+"/productLine/userProductTree"),"readonly":"readonly"})
                     <script>
                         $(function(){
                             var mUrl = $("#modelA").attr("href");
@@ -122,8 +122,7 @@
             #@formControlDiv("col-8")
 					#@div(divClass="col-5")
                         #@Tselect2F()
-	                   		 #@Tselect2Body("storyId" testCase?.storyId?:storyId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-
+	                   		 #@Tselect2Body("storyId" testCase?.storyId?:storyId {"class":"input-text select2"})
                              #end
                             #@Tselect2Fix()
                                 #set(m=menuService.getMenu("product-demand-add"))
@@ -151,7 +150,9 @@
             #@colLabel()<span class="c-red">*</span>用例标题：#end
             #@formControlDiv("col-4")
             #@div(divClass="col-10")
-                #tinyInput("text" "caseTitle" testCase?.caseTitle {"datatype":"*","nullmsg":"用例标题不能为空！","id":"版本","class":"input-text"})
+                #tinyInput(
+                    "text" "caseTitle" testCase?.caseTitle {"datatype":"*1-255","nullmsg":"用例标题不能为空！","id":"版本","class":
+                    "input-text"})
             #end
             #end
             #@validateDiv("col-2")#end
@@ -174,7 +175,8 @@
             #@colLabel()关键词：#end
             #@formControlDiv("col-8")
             	#@div(divClass="col-5")
-                	#tinyInput("text" "caseKeywords" testCase?.caseKeywords {"datatype":"","id":"关键词","class":"input-text"})
+                    #tinyInput("text" "caseKeywords" testCase?.caseKeywords {"datatype":"*0-255","id":"关键词","class":
+                        "input-text"})
             	#end
             #end
             #@validateDiv("col-2")#end

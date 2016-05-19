@@ -79,7 +79,8 @@
     #@colLabel()<span class="c-red">*</span>产品代号：#end
     #@formControlDiv("col-4")
         #tinyInput(
-            "text" "productCode" product?.productCode{"placeholder":"请输入产品代号","datatype":"*","nullmsg":"代号不能为空！","id":
+            "text" "productCode" product?.productCode{"placeholder":"请输入产品代号","datatype":"*1-50","nullmsg":"代号不能为空！",
+            "id":
             "productCode","class":"input-text",
             "ajaxurl":TINY_CONTEXT_PATH+adminPath+"/product/judgeProductCode?productId="+product?.productId+"&productLineId="+product?.productLineId})
 

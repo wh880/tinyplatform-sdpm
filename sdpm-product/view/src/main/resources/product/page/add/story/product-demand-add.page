@@ -26,7 +26,6 @@
 
     });
 
-
 </script>
 #set(linkName = "product-demand")
 #@tinyForm(
@@ -42,7 +41,7 @@
             <div class="col-5">
                 #@TzTreeSelect(
                     "productId" story?.productId?:cookieProductId {"class":"input-text","datatype":"*","nullmsg":"所属产品不能为空！",
-                    "data-URL":call("link",adminPath+"/productLine/userProductTree")})
+                    "data-URL":call("link",adminPath+"/productLine/userProductTree"),"readonly":"readonly"})
                     <script>
                         $(function(){
                             var first = true;
@@ -51,7 +50,7 @@
                             $("#${sid}").on("setValue",function(o,treeNode){
                                 var pId = treeNode.id;
                                 if (pId > 0) {
-                                    ajaxRead("${sid}", "moduleId", "moduleId", "moduleName", "/quality/bug/ajax/module?moduleRoot=" + pId,"","module");
+                                    ajaxRead("${sid}", "moduleId", "moduleId", "moduleName", "/quality/bug/ajax/module?moduleRoot=" + pId,"${moduleId}","module");
                                     ajaxRead("${sid}", "planId", "planId", "planName", "/product/plan/planList?productId=" + pId,"${backPlan}","plan");
                                     var url = $("#modelA").attr("href");
                                     if(!url.endsWith("=")){
@@ -87,7 +86,7 @@
                 <div class="col-4 text-c">所属模块：</div>
                 <div class="col-8">
                     #@Tselect2F()
-                        #@Tselect2Body("moduleId" story?.moduleId?:(moduleId?:0) {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                        #@Tselect2Body("moduleId" moduleId {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
                         #end
                         #@Tselect2Fix()#@aModal("#myModal" "添加模块" "500" "300" "btn-class" adminPath+"/product/addModule?pId=" "modelA")
                             增加#end
@@ -152,10 +151,9 @@
     #@colLabel()<span class="c-red">*</span>需求名称：#end
     #@formControlDiv("col-4")
         #tinyInput(
-            "text" "storyTitle" story?.storyTitle {"placeholder":"请输入需求名称","datatype":"*","nullmsg":"需求名称不能为空！","id":"storyTitle",
-            "class":"input-text",
+            "text" "storyTitle" story?.storyTitle {"placeholder":"请输入需求名称","datatype":"*1-255","nullmsg":
+            "需求名称不能为空！","id":"storyTitle","class":"input-text",
             "ajaxurl":TINY_CONTEXT_PATH+adminPath+"/product/story/judgeStoryName"})
-
     #end
     #@validateDiv("col-2")#end
 #end
@@ -203,6 +201,8 @@
         <div class="input-group">
             <input type="text" class="form-control" name="storyEstimate" placeholder=""
                    aria-describedby="basic-addon2">
+                #*#tinyInput("text" "storyEstimate" "" {"placeholder":"预计工时","datatype":
+                    "/^[0-9]+(\.[0-9]{1,2})?$/","aria-describedby":"basic-addon2"})*#
             <span class="input-group-addon" id="basic-addon2">小时</span>
         </div>
     #end
@@ -271,7 +271,7 @@
     #@colLabel()关键词：#end
     #@formControlDiv("col-4")
         #tinyInput(
-            "text" "storyKeywords" ""{"id":"text","class":"input-text"})
+            "text" "storyKeywords" ""{"id":"text","class":"input-text","datatype":"*0-255"})
     #end
     #@validateDiv("col-2")#end
 #end
@@ -288,9 +288,9 @@
     #@elementItem()
         <div class="col-12">
             <div class="col-4">
-                <button style="float: right" type="submit" id="submit2" class="commitBtn">保存</button>
+                <button style="float: right" type="submit" id="submit2" class="commitBtn" onclick="return checkNum()">保存</button>
             </div>
-            <div class="col-1"><button name="saveAndContinue" style="float: right" type="submit" id="submit2" class="commitBtn">保存并继续</button></div>
+            <div class="col-1"><button name="saveAndContinue" style="float: right" type="submit" id="submit2" class="commitBtn" onclick="return checkNum()">保存并继续</button></div>
             <div class="col-1"></div>
             <div class="col-1">
 
@@ -304,11 +304,28 @@
 #end
 
 
-    <script type="text/javascript">
-        $(function () {
-            $("form[name=thisform]").Validform({
-                tiptype: 2
-            });
+<script type="text/javascript">
+    $(function () {
+        $("form[name=thisform]").Validform({
+            tiptype: 2
         });
-    </script>
+        //对输入工时信息进行数字验证
+        $("input[name='storyEstimate']").change(function(){
+            if(isNaN($(this).val())||parseFloat($(this).val())<0)
+            {
+                alert("请正确输入工时信息！");
+            }
+        });
+    });
+    //保存前对工时信息进行验证
+    function checkNum()
+    {
+        if(isNaN($("input[name='storyEstimate']").val())||parseFloat($("input[name='storyEstimate']").val())<0)
+        {
+            alert("请正确输入工时信息！");
+            return false;
+        }else
+            return true;
+    }
+</script>
 

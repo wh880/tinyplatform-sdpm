@@ -5,11 +5,11 @@
 <ul>
 <li>
     #@elementItem()
-        #@colLabel()<span class='c-red'>*</span>所属产品：#end
+        #@colLabel()<span class='c-red'>*</span>所属产品#end
         #@formControlDiv("col-8")
                     #@TzTreeSelect(
                         "productId" bug?.productId {"class":"input-text","datatype":"*","nullmsg":"所属产品不能为空！",
-                        "data-URL":call("link",adminPath+"/productLine/userProductTree")})
+                        "data-URL":call("link",adminPath+"/productLine/userProductTree"),"readonly":"readonly"})
                     <script>
                         $(function(){
                             var mUrl = $("#modelA").attr("href");
@@ -145,17 +145,21 @@
 #@elementItem()
     #@colLabel()Bug状态：#end
     #@formControlDiv("col-8")
-                #@Tselect2F()
-                    #@Tselect2Body(
-                        "bugStatus" bug?.bugStatus {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
-                        #foreach(status : getDict("bugStatus"))
+        #@Tselect2F()
+            #if(bug?.bugStatus=="1"||bug?.bugStatus=="3")
+                #@Tselect2Body("bugStatus" bug?.bugStatus {"class":"input-text select2"}) ##,"multiple":"multiple"加上为多选项
+                    #foreach(status : getDict("bugStatus"))
                         #@tinyOptionItem(status.value)${status.text}#end
                     #end
                 #end
+            #else
+                #tinyInput("hidden" "bugStatus" "3" {"class":"input-text"})
+                #tinyInput("text" "show-bugStatus" "已解决" {"class":"input-text","readonly":"readonly"})
             #end
         #end
     #end
-    </li>
+#end
+</li>
 <li>
 #@elementItem()
     #@colLabel()指派给：#end
@@ -210,7 +214,7 @@
 #@elementItem()
     #@colLabel()关键词：#end
     #@formControlDiv("col-8")
-        #tinyInput("text" "bugKeywords" bug?.bugKeywords {"id":"版本","class":"input-text"})
+        #tinyInput("text" "bugKeywords" bug?.bugKeywords {"id":"版本","class":"input-text","datatype":"*0-255"})
     #end
 #end
     </li>
@@ -380,23 +384,23 @@
     #@elementItem()
         #@colLabel()解决者:#end
         #@formControlDiv("col-8")
-                    #@Tselect2F()
-                        #Tselect2Ajax("bugResolvedBy" bug?.bugResolvedBy TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
-                        {"id":"","dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询用户"})
+            #@Tselect2F()
+                #Tselect2Ajax("bugResolvedBy" bug?.bugResolvedBy TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
+                {"id":"","dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询用户","readonly":"readonly"})
 
-                        #@Tselect2Fix()
-                            #set(m=menuService.getMenu("organizationAddUser"))
-                            #if(m)
-                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
-                            #end
-                            #set(m=menuService.getMenu("organizationUser"))
-                            #if(m)
-                            <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
-                            #end
-                        #end
+                #@Tselect2Fix()
+                    #set(m=menuService.getMenu("organizationAddUser"))
+                    #if(m)
+                        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
+                    #end
+                    #set(m=menuService.getMenu("organizationUser"))
+                    #if(m)
+                        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
                     #end
                 #end
             #end
+        #end
+    #end
 </li>
 <li>
     #@elementItem()
@@ -471,7 +475,7 @@
     #@colLabel()重复ID:#end
     #@formControlDiv("col-8")
                 #tinyInput(
-                    "text" "bugDuplicateBug" bug?.bugDuplicateBug {"id":"抄送给","class":"input-text"})
+                    "text" "bugDuplicateBug" bug?.bugDuplicateBug {"id":"抄送给","class":"input-text","datatype":"n0-11"})
             #end
         #end
     </li>
@@ -493,7 +497,7 @@
 #@elementItem()
     #@colLabel()相关Bug:#end
     #@formControlDiv("col-8")
-        #tinyInput("text" "linkBug" bug?.linkBug {"id":"抄送给","class":"input-text"})
+        #tinyInput("text" "linkBug" bug?.linkBug {"id":"抄送给","class":"input-text","datatype":"*0-255"})
                 #end
             #end
     </li>
@@ -501,7 +505,7 @@
 #@elementItem()
     #@colLabel()相关用例:#end
     #@formControlDiv("col-8")
-         #tinyInput("text" "linkCase" bug?.linkCase {"id":"抄送给","class":"input-text"})
+        #tinyInput("text" "linkCase" bug?.linkCase {"id":"抄送给","class":"input-text","datatype":"n0-11"})
 
             #end
         #end

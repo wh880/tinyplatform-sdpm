@@ -26,11 +26,11 @@
             #end
         #end
         #@Tselect2Fix()
-            #set(m=menuService.getMenu("organizationAddUser"))
+            #set(m=menuService.getMenu("organizationAddGroup"))
             #if(m)
                 <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
             #end
-            #set(m=menuService.getMenu("organizationUser"))
+            #set(m=menuService.getMenu("organizationPrivilege"))
             #if(m)
                 <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
             #end
@@ -49,7 +49,7 @@
     #@td("w-p125")
     <div class="operate">
         #iconOperations(iconOperationsIcon="icon-chevron-down",iconOperationsTitle="添加",iconOperationsCls="btn btn-small btn-default addnext")
-                    #iconOperations(iconOperationsIcon="icon-remove",iconOperationsTitle="删除",iconOperationsCls="btn btn-small btn-default delbutton")
+        #iconOperations(iconOperationsIcon="icon-remove",iconOperationsTitle="删除",iconOperationsCls="btn btn-small btn-default delbutton")
     </div>
     #end
 #end

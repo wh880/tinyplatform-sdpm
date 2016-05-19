@@ -13,12 +13,16 @@
     #@td()${b?.no}#end
     #@td()${getDict("bugSeverity",b?.bugSeverity)}#end
     #@td()${getDict("bugPriority",b?.priority)}#end
-    #@td()<a href="${TINY_CONTEXT_PATH+adminPath}/quality/bug/bugInfo?bugId=${b?.bugId}">
-        #if(b?.bugConfirmed==0)
-        <i class="icon-question-sign" style="color: coral" title="未确认"/>
-    #else
-        <i class="icon-ok-sign" style="color:darkseagreen" title="已确认" />
-    #end${b?.bugTitle}#end
+    #@td()
+        <div style="width:300px;overflow: hidden">
+            <a href="${TINY_CONTEXT_PATH+adminPath}/quality/bug/bugInfo?bugId=${b?.bugId}" title="${b?.bugTitle}">
+            #if(b?.bugConfirmed==0)
+                <i class="icon-question-sign" style="color: coral" title="未确认"/>
+            #else
+                <i class="icon-ok-sign" style="color:darkseagreen" title="已确认" />
+            #end${b?.bugTitle}</a>
+        </div>
+    #end
     #@td("nowrap")${b?.bugOpenedBy?userUtils.getUserById(b?.bugOpenedBy)?.orgUserRealName:""}#end
     #@td("nowrap")${b?.bugAssignedTo?userUtils.getUserById(b?.bugAssignedTo)?.orgUserRealName:""}#end
     #@td("nowrap")${b?.bugResolvedBy?userUtils.getUserById(b?.bugResolvedBy)?.orgUserRealName:""}#end

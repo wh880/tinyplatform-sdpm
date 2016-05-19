@@ -1,6 +1,7 @@
 package org.tinygroup.sdpm.action.document;
 
 
+import org.apache.commons.lang.ObjectUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.document.dao.pojo.DocumentDocLib;
 import org.tinygroup.sdpm.document.service.inter.DocService;
@@ -67,13 +69,43 @@ public class DocLibAction extends BaseController {
      * @return
      */
     @RequestMapping(value = "/save")
-    public String saveDocLib(DocumentDocLib docLib, HttpServletResponse response) {
-        if (docLib.getDocLibId() == null) {
-            docLib = docService.createNewDocLib(docLib);
-        } else {
-            docService.editDocLibName(docLib);
+    public String saveDocLib(DocumentDocLib docLib, HttpServletResponse response,String name,Model model) {
+
+        if(!StringUtil.isEmpty(docLib.getDocLibName())) {
+            //添加文档库
+            if (docLib.getDocLibId() == null) {
+                DocumentDocLib lib = new DocumentDocLib();
+                lib.setDocLibDeleted("0"); //0表示未删除的产品文档库
+                lib.setDocLibName(docLib.getDocLibName());
+                List<DocumentDocLib> list = docService.findDocLibByDocLib(lib);
+                if (list.size() == 0) {
+                    docLib = docService.createNewDocLib(docLib);
+                    CookieUtils.setCookie(response, DocLibAction.COOKIE_DOCLIB_ID, docLib.getDocLibId().toString());
+                }
+            }
+
+            //编辑文档库
+            else {
+                //编辑时如果文档库标题不变则调用该方法
+                System.out.println(docLib.getDocLibName());
+                if (ObjectUtils.equals(name, docLib.getDocLibName())) {
+                    return "redirect:" + adminPath + "/document?change=true";
+                }
+                DocumentDocLib lib = new DocumentDocLib();
+                lib.setDocLibDeleted("0"); //0表示未删除的产品文档库
+                lib.setDocLibName(docLib.getDocLibName());
+                List<DocumentDocLib> list = docService.findDocLibByDocLib(lib);
+                if (list.size() != 0) {
+                    if (!ObjectUtils.equals(docLib.getDocLibId(), list.get(0).getDocLibId())) {
+                        return "redirect:" + adminPath + "/document?change=true";
+                    }
+                } else {
+                    docService.editDocLibName(docLib);
+                    CookieUtils.setCookie(response, DocLibAction.COOKIE_DOCLIB_ID, docLib.getDocLibId().toString());
+                }
+
+            }
         }
-        CookieUtils.setCookie(response, DocLibAction.COOKIE_DOCLIB_ID, docLib.getDocLibId().toString());
         return "redirect:" + adminPath + "/document?change=true";
     }
 

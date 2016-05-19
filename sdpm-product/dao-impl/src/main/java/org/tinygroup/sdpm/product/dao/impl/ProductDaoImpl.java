@@ -502,7 +502,7 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
         planFunction.setDistinct(true);
         releaseFunction.setDistinct(true);
         //查询product基本数据subProduct.deleted,subProduct.product_created_by,subProduct.product_owner,subProduct.product_delivery_manager,subProduct.product_quality_manager,subProduct.acl
-        SubSelect product = SubSelect.subSelect(select(subProduct.PRODUCT_ID, subProduct.PRODUCT_NAME,
+        SubSelect product = SubSelect.subSelect(select(subProduct.PRODUCT_ID, subProduct.PRODUCT_NAME,subProduct.PRODUCT_STATUS,
                 subProduct.DELETED, subProduct.PRODUCT_CREATED_BY,
                 subProduct.PRODUCT_OWNER, subProduct.PRODUCT_DELIVERY_MANAGER,
                 subProduct.PRODUCT_QUALITY_MANAGER, subProduct.ACL,

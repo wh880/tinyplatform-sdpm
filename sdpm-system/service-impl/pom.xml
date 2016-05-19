@@ -74,5 +74,10 @@
             <version>${tiny_version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.tinygroup</groupId>
+            <artifactId>sdpm-system-business-interface</artifactId>
+            <version>1.0.3-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 </project>

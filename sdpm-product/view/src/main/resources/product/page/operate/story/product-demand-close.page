@@ -91,7 +91,7 @@
         #@elementItem()
             #@colLabel()备注：#end
             #@formControlDiv("col-8")
-                #@Teditor("actionComment" "actionComment" {"initialFrameHeight":"200" })#end
+                #@Teditor("actionComment" "actionComment" {"initialFrameHeight":"200" })${actionComment}#end
             #end
         #end
     </div>

@@ -7,14 +7,14 @@
         #@colLabel()<span class="c-red">*</span>所属产品：#end
         #@formControlDiv("col-3")
             #@TzTreeSelect(
-                "docProduct" "" {"class":"input-text","datatype":"*","nullmsg":"所属产品不能为空！",
-                "data-URL":call("link",adminPath+"/productLine/userProductTree")})
+                "docProduct" moduleRoot {"class":"input-text select2","datatype":"*","nullmsg":"所属产品不能为空！",
+                "data-URL":call("link",adminPath+"/productLine/userProductTree"),"readonly":"readonly"})
                 <script>
                     $(function(){
                         $("#${sid}").on("setValue",function(o,treeNode){
                             var pId = treeNode.id;
                             if (pId > 0) {
-                                ajaxRead("${sid}", "docModule", "moduleId", "moduleName", "/document/ajax/productModule?productId=" + pId, ${doc?.docModule?doc.docModule:0},"module");
+                                ajaxRead("${sid}", "docModule", "moduleId", "moduleName", "/document/ajax/productModule?productId=" + pId, "${docModule}", "module");
                             }
                         });
                     });
@@ -38,8 +38,8 @@
         #@colLabel()<span class="c-red">*</span>所属分类：#end
         #@formControlDiv("col-3")
             #@Tselect2F()
-                #@Tselect2Body("docModule" "" {"class":"input-text select2","datatype":"*","nullmsg":"所属分类不能为空！"}) ##,"multiple":"multiple"加上为多选项
-                    <option value="0">/</option>
+                #@Tselect2Body("docModule" docModule {"class":"input-text select2","datatype":"*","nullmsg":"所属分类不能为空！"}) ##,"multiple":"multiple"加上为多选项
+
                 #end
             #end
         #end
@@ -63,8 +63,9 @@
         #@colLabel()<span class="c-red">*</span>文档标题：#end
         #@formControlDiv("col-4")
             #tinyInput(
-                "text" "docTitle" ""{"placeholder":"请填写文档标题","datatype":"*1-16","nullmsg":"标题不能为空！",
-                "class":"input-text"})
+                "text" "docTitle" ""{"placeholder":"请填写文档标题","datatype":"*1-255","nullmsg":"标题不能为空！",
+                "class":"input-text","ajaxurl":TINY_CONTEXT_PATH+adminPath+
+                "/document/doc/docTitleCheck"})
         #end
         #@validateDiv("col-6")#end
     #end
@@ -73,7 +74,7 @@
         #@colLabel()文档URL：#end
         #@formControlDiv("col-8")
             #@div(divClass="col-6")
-                #tinyInput("text" "docUrl" ""{"placeholder":"相应的链接地址","class":"input-text"})
+                #tinyInput("text" "docUrl" ""{"placeholder":"相应的链接地址","class":"input-text","datatype":"*0-255"})
             #end
         #end
         #@validateDiv("col-2")#end
@@ -82,7 +83,7 @@
     #@elementItem()
         #@colLabel()关键字：#end
         #@formControlDiv("col-4")
-            #tinyInput("text" "docKeywords" ""{"placeholder":"","datatype":"","class":"input-text"})
+            #tinyInput("text" "docKeywords" ""{"placeholder":"","datatype":"*0-255","class":"input-text"})
         #end
         #@validateDiv("col-2")#end
     #end

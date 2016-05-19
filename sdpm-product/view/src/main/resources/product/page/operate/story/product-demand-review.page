@@ -99,11 +99,11 @@
                         #Tselect2Ajax("storyAssignedTo" story?.storyAssignedTo TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam?productId="+story?.productId
                         {"id":"assignedToSelect","dataId":"orgUserId","dataText":"orgUserRealName"})
                         #@Tselect2Fix()
-                            #set(m=menuService.getMenu("organizationAddUser"))
+                            #set(m=menuService.getMenu("product-team-report"))
                             #if(m)
                                 <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
                             #end
-                            #set(m=menuService.getMenu("organizationUser"))
+                            #set(m=menuService.getMenu("product-team"))
                             #if(m)
                                 <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
                             #end
@@ -141,7 +141,7 @@
                 <div class="col-2 text-r"><label>备注：</label></div>
 
                 <div class="col-9">
-                    #@Teditor("actionComment" "actionComment" {"initialFrameHeight":"150"})#end
+                    #@Teditor("actionComment" "actionComment" {"initialFrameHeight":"150"})${actionComment}#end
                 </div>
             </div>
         #end

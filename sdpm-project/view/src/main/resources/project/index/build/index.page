@@ -29,7 +29,7 @@
                             #@tinyTh({"width":"6"})<input type="checkbox" name="allck" value="">#end
                             #@tinyTh({"class":"sorting","rel":"build_id"})ID#end
                             #@tinyTh({"class":"sorting","rel":"build_product"})产品#end
-                            #@tinyTh({"class":"sorting","rel":"build_name"})版本名称#end
+                            #@tinyTh({"class":"sorting","rel":"build_name","width":"200px"})版本名称#end
                             #@tinyTh({"class":"sorting","rel":"build_scm_path"})源代码地址#end
                             #@tinyTh({"class":"sorting","rel":"build_file_path"})下载地址#end
                             #@tinyTh({"class":"sorting","rel":"build_date"})打包日期#end
@@ -44,6 +44,12 @@
                     $('#${tableId}').on('click', '.delBtn', function (e) {
                         user_del(this, '1');
                     });
+
+                    if(${linkInfo}==1)
+                    {
+                        layer.msg("请先关联产品");
+                        window.location="${TINY_CONTEXT_PATH +adminPath}/project/product/findLinkProduct";
+                    }
                 })
             </script>
                 #@dialog("myModal")

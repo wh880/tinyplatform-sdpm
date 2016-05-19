@@ -58,6 +58,7 @@ public class TestCaseAction extends BaseController {
     @Autowired
     private BugService bugService;
 
+
     @ModelAttribute
     public void init(Model model) {
         initSearchBar(model, "用例");
@@ -367,8 +368,14 @@ public class TestCaseAction extends BaseController {
 
     @RequiresPermissions("teditioncase")
     @RequestMapping("/edit")
-    public String edit(Integer caseId, Model model) {
+    public String edit(Integer caseId, Model model,@CookieValue(value=ProductUtils.COOKIE_PRODUCT_ID)String currentProductId) {
         QualityTestCase testCase = testCaseService.testCase(caseId);
+
+        if(testCase.getProductId()!=Integer.parseInt(currentProductId))
+        {
+            return "redirect:"+adminPath+"/quality/testCase";
+        }
+
         QualityCaseStep step = new QualityCaseStep();
         step.setCaseId(caseId);
         step.setCaseVersion(testCase.getCaseVersion());
@@ -398,8 +405,14 @@ public class TestCaseAction extends BaseController {
 
     @RequiresPermissions("tproposecase")
     @RequestMapping("/copy")
-    public String copy(Integer caseId, Model model) {
+    public String copy(Integer caseId, Model model,@CookieValue(value=ProductUtils.COOKIE_PRODUCT_ID)String currentProductId) {
         QualityTestCase testCase = testCaseService.testCase(caseId);
+
+        if(testCase.getProductId()!=Integer.parseInt(currentProductId))
+        {
+            return "redirect:"+adminPath+"/quality/testCase";
+        }
+
         QualityCaseStep step = new QualityCaseStep();
         step.setCaseId(caseId);
         step.setCaseVersion(testCase.getCaseVersion());
@@ -450,7 +463,12 @@ public class TestCaseAction extends BaseController {
     @ResponseBody
     @RequestMapping("/ajax/story")
     public List<ProductStory> getStory(ProductStory productStory) {
-        if (!(productStory.getProductId() > 0)) return new ArrayList<ProductStory>();
+        if (productStory.getProductId() < 1) {
+            return new ArrayList<ProductStory>();
+        }
+        if (productStory.getModuleId() == 0) {
+            productStory.setModuleId(null);
+        }
         return storyService.findStoryListByOrder(productStory, null, null);
     }
 
@@ -563,7 +581,8 @@ public class TestCaseAction extends BaseController {
 
 
     @RequestMapping("/case/viewInfo")
-    public String viewInfo(Integer id, Integer version, Model model, Integer no, HttpServletRequest request) {
+    public String viewInfo(Integer id, Integer version, Model model, Integer no, HttpServletRequest request,
+                           @CookieValue(value=ProductUtils.COOKIE_PRODUCT_ID)String currentProductId) {
         QualityTestCase testCase = null;
         if (no != null) {
             String result = CookieUtils.getCookie(request, ProductUtils.COOKIE_PRODUCT_ID);
@@ -591,6 +610,12 @@ public class TestCaseAction extends BaseController {
         } else {
             step.setCaseVersion(testCase.getCaseVersion());
         }
+
+        if(testCase.getProductId()!=Integer.parseInt(currentProductId))
+        {
+            return "redirect:"+adminPath+"/quality/testCase";
+        }
+
         List<QualityCaseStep> stepList = caseStepService.findCaseStepList(step);
         SystemProfile systemProfile = new SystemProfile();
         systemProfile.setFileObjectType(ProfileType.TESTCASE.toString());

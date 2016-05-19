@@ -14,6 +14,10 @@
     #@td()${getDict("actionOperate",a?.actionAction)}#end
     #@td()${getDict("actionObject",a?.actionObjectType)}#end
     #@td()${a?.actionId}#end
-    #@td()<a href="${TINY_CONTEXT_PATH +adminPath+a?.url}">${a?.objectName}</a>#end
+    #@td()
+        <div style="width: 300px;overflow: hidden">
+            <a href="${TINY_CONTEXT_PATH +adminPath+a?.url}" title="${a?.objectName}">${a?.objectName}</a>
+        </div>
+    #end
 #end
 #end

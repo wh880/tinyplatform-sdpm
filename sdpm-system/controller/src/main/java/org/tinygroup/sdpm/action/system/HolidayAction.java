@@ -55,7 +55,8 @@ public class HolidayAction extends BaseController {
             asc = false;
         }
         holiday.setHolidayDeleted(0);
-        Pager<Holiday> holidayPage = holidayService.findByPage(start, limit, holiday, order, asc);
+        //Pager<Holiday> holidayPage = holidayService.findByPage(start, limit, holiday, order, asc);
+        Pager<Holiday> holidayPage=holidayService.findByHolidayDeleted(start, limit, holiday, order, asc);
         model.addAttribute("holiday", holidayPage);
         return "/system/page/holiday/data/holidaydata.pagelet";
     }
@@ -76,6 +77,7 @@ public class HolidayAction extends BaseController {
 
     @RequestMapping(value = "holiday/save", method = RequestMethod.POST)
     public String saveHoliday(@RequestParam(required = false) String selectList, Holiday holiday, Model model) {
+        System.out.println(holiday.getHolidayName()+" "+holiday.getHolidayType()+" "+holiday.getHolidayDate());
         if (holiday.getHolidayId() == null) {
             List<Holiday> holidayList = new ArrayList<Holiday>();
             if (!StringUtils.isBlank(selectList)) {

@@ -54,6 +54,7 @@ import static org.tinygroup.sdpm.system.dao.constant.SystemModuleTable.SYSTEM_MO
 import static org.tinygroup.tinysqldsl.Delete.delete;
 import static org.tinygroup.tinysqldsl.Insert.insertInto;
 import static org.tinygroup.tinysqldsl.Select.select;
+import static org.tinygroup.tinysqldsl.Select.selectFrom;
 import static org.tinygroup.tinysqldsl.Update.update;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.or;
@@ -483,7 +484,7 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
                                             QUALITY_BUGTABLE.HARDWARE.eq(t.getHardware()),
                                             QUALITY_BUGTABLE.BUG_FOUND.eq(t.getBugFound()),
                                             QUALITY_BUGTABLE.BUG_STEPS.eq(t.getBugSteps()),
-                                            QUALITY_BUGTABLE.BUG_STATUS.eq(t.getBugStatus()),
+                                            QUALITY_BUGTABLE.BUG_STATUS.neq(t.getBugStatus()),
                                             QUALITY_BUGTABLE.BUG_CONFIRMED.eq(t.getBugConfirmed()),
                                             QUALITY_BUGTABLE.BUG_ACTIVATED_COUNT.eq(t.getBugActivatedCount()),
                                             QUALITY_BUGTABLE.BUG_MAILTO.eq(t.getBugMailto()),
@@ -915,5 +916,14 @@ public class QualityBugDaoImpl extends TinyDslDaoSupport implements QualityBugDa
     public QualityBug findBugByBugId(Integer bugId) {
         Select select = Select.selectFrom(QUALITY_BUGTABLE).where(QUALITY_BUGTABLE.BUG_ID.eq(bugId));
         return getDslSession().fetchOneResult(select, QualityBug.class);
+    }
+
+    @Override
+    public List<QualityBug> findBugByProductIdAndBugTitle(String bugTitle, Integer productId, String status) {
+        Select select=selectFrom(QUALITY_BUGTABLE).where(and(QUALITY_BUGTABLE.BUG_TITLE.eq(bugTitle),
+              QUALITY_BUGTABLE.PRODUCT_ID.eq(productId),
+              QUALITY_BUGTABLE.BUG_STATUS.neq(status)
+        ));
+        return getDslSession().fetchList(select,QualityBug.class);
     }
 }

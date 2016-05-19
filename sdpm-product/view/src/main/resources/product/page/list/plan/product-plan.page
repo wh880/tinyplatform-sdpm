@@ -31,7 +31,7 @@
                     #@tinyTh({"width":"8"})<input type="checkbox" name="allck" value="">#end
                     #@tinyTh({"class":"sorting","rel":"planId"})ID#end
                     #@tinyTh({"class":"sorting","rel":"planName"})名称#end
-                    #@tinyTh({"class":"sorting","rel":"planSpec"})描述#end
+                    #@tinyTh({"class":"sorting","rel":"planSpec","width":"300px"})描述#end
                     #@tinyTh({"class":"sorting","rel":"planBeginDate"})开始日期#end
                     #@tinyTh({"class":"sorting","rel":"planEndDate"})结束日期#end
                     #@tinyTh({"class":"","rel":"sortname"})操作#end

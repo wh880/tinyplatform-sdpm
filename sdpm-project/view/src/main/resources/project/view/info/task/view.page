@@ -75,10 +75,7 @@
         <p class="titleName">需求描述</p>
 
         <div>
-            #if(task.storySpec)
-                ${task.storySpec}
-            #end
-
+            ${storySpec?.storySpec}
         </div>
     #end
     #@div(divClass="infoContent")
