@@ -204,7 +204,6 @@ public class ProductLineAction extends BaseController {
         }
         ProductLine productLine = productLineService.findProductLine(productLineId);
         List<String> lineNameList = productService.getProductNameByLineId(productLineId);
-
         model.addAttribute("productLine", productLine);
         model.addAttribute("lineNameList", lineNameList);
 
