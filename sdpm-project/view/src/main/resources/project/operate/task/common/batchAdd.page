@@ -63,10 +63,10 @@
                     #end
                     #@td()
                         #tinyInput(
-                            "text" "taskList["+i+"].taskName"""{"placeholder":"","groupName":"taskName"})
+                            "text" "taskList["+i+"].taskName" "" {"placeholder":"","groupName":"taskName","datatype":"*0-255"})
                     #end
                     #@td()
-                        #@formControlDiv( )
+                        #@formControlDiv()
                             #@Tselect2F()
                                 #@Tselect2Body("taskList["+i+"].taskType")
                                     #foreach(item : getDict("taskType"))
