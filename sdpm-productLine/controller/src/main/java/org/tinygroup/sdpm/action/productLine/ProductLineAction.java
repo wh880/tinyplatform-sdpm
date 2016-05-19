@@ -210,9 +210,7 @@ public class ProductLineAction extends BaseController {
             }
             //productLineId = Integer.parseInt(cookieProductLineId);
         }
-
-        Product product = productService.findProductById(productId);
-        ProductLine productLine = productLineService.findProductLine(product.getProductLineId());
+        ProductLine productLine = productLineService.findProductLine(productLineId);
         List<String> lineNameList = productService.getProductNameByLineId(productLineId);
 
         model.addAttribute("productLine", productLine);
