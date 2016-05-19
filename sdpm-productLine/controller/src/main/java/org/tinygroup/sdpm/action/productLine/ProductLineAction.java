@@ -195,24 +195,14 @@ public class ProductLineAction extends BaseController {
     }
 
     @RequestMapping("/find/{forword}")
-    public String find(@CookieValue(value = "cookieProductLineId", defaultValue = "0") String cookieProductLineId,
-                       @CookieValue(value = "cookieProductId", defaultValue = "0") String cookieProductId,
-                       @PathVariable(value = "forword") String forword, Integer productId, Integer productLineId, Model model, HttpServletRequest request) {
-
-        if (productLineId == null) {
-            if (Integer.parseInt(cookieProductId) > 0) {
-                Product product = new Product();
-                product = productService.findProductById(Integer.parseInt(cookieProductId));
-                productLineId = product.getProductLineId();
-                if (product.getProductId() == null) {
-                    return notFoundView();
-                }
-            }
-            //productLineId = Integer.parseInt(cookieProductLineId);
+    public String find(@CookieValue(value = "cookieProductId") String cookieProductId,
+                       @PathVariable(value = "forword") String forword,Integer productLineId, Model model) {
+        if(productLineId==null)
+        {
+            Product product = productService.findProductById(Integer.parseInt(cookieProductId));
+            productLineId = product.getProductLineId();
         }
-
-        Product product = productService.findProductById(productId);
-        ProductLine productLine = productLineService.findProductLine(product.getProductLineId());
+        ProductLine productLine = productLineService.findProductLine(productLineId);
         List<String> lineNameList = productService.getProductNameByLineId(productLineId);
 
         model.addAttribute("productLine", productLine);
