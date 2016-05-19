@@ -2,6 +2,7 @@ package org.tinygroup.sdpm.project.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.commons.tools.ArrayUtil;
 import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.commons.tools.StringUtil;
@@ -23,6 +24,7 @@ import java.util.List;
  * Created by shenly13343 on 2015-09-18.
  */
 @Component
+@Transactional
 public class ProjectServiceImpl implements ProjectService {
 
     @Autowired
@@ -36,6 +38,7 @@ public class ProjectServiceImpl implements ProjectService {
      * @param whiteList
      * @return
      */
+    @Transactional(readOnly = true)
     protected Boolean hasProjectByRole(String userId, String whiteList) {
         if (StringUtil.isBlank(whiteList)) {
             return false;
@@ -60,21 +63,22 @@ public class ProjectServiceImpl implements ProjectService {
      *
      * @return
      */
+    @Transactional(readOnly = true)
     private List<Project> findAllProjectList() {
         return projectManager.findList();
     }
-
+    @Transactional(readOnly = true)
     public Project findProjectById(Integer projectId) {
         if (projectId == null) {
             return null;
         }
         return projectManager.find(projectId);
     }
-
+    @Transactional(readOnly = true)
     public List<Project> findByProjectList(List<Integer> list) {
         return projectManager.findListByIds(list);
     }
-
+    @Transactional(readOnly = true)
     public List<Project> findProjectBetween(Project project, Date startDate, Date endDate) {
         return projectManager.findListProjects(project, startDate, endDate);
     }
@@ -85,7 +89,7 @@ public class ProjectServiceImpl implements ProjectService {
         }
         return projectManager.batchDelete(projectIds);
     }
-
+    @Transactional(readOnly = true)
     public Pager<Project> findProjects(Integer start, Integer limit, String order, String orderType, Integer... ids) {
         return projectManager.findPagerProjects(start, limit, order, "asc".equals(orderType) ? true : false, ids);
     }
@@ -117,7 +121,7 @@ public class ProjectServiceImpl implements ProjectService {
         }
         return userProjectList;
     }
-
+    @Transactional(readOnly = true)
     private List<Project> findListByTeamUserId(String userId, String acl) {
         return projectManager.findListByTeamUserId(userId, acl);
     }
@@ -129,6 +133,7 @@ public class ProjectServiceImpl implements ProjectService {
      * @param userId
      * @return
      */
+    @Transactional(readOnly = true)
     private List<Project> findListByRelatedUser(String userId) {
         Project project = new Project();
         project.setProjectOpenedBy(userId);
@@ -144,11 +149,11 @@ public class ProjectServiceImpl implements ProjectService {
         project.setProjectDeleted(Project.DELETE_NO);
         return projectManager.add(project);
     }
-
+    @Transactional(readOnly = true)
     public List<Project> findProjectList(Project project, String order, String orderType) {
         return projectManager.findList(project, order, orderType);
     }
-
+    @Transactional(readOnly = true)
     public Pager<Project> findProjectPager(int page, int pageSize, Project project, String order, String orderType) {
         return projectManager.findPager(page, pageSize, project, order, orderType);
     }
@@ -156,11 +161,11 @@ public class ProjectServiceImpl implements ProjectService {
     public Integer updateProject(Project project) {
         return projectManager.update(project);
     }
-
+    @Transactional(readOnly = true)
     public List<Project> getProjectByStoryId(Integer storyId) {
         return projectManager.getProjectByStoryId(storyId);
     }
-
+    @Transactional(readOnly = true)
     public List<Project> projectInCondition(String condition, Integer limit, Integer... ids) {
         return projectManager.projectInCondition(condition, limit, ids);
     }
@@ -172,6 +177,7 @@ public class ProjectServiceImpl implements ProjectService {
      * @return List<QualityBug>
      */
     @Override
+    @Transactional(readOnly = true)
     public List<QualityBug> findRelationBugByProjectID(Integer projectId) {
         return projectManager.findList(projectId);
     }

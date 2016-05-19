@@ -6,8 +6,9 @@
         <property name="fileResolver" ref="fileResolver"></property>
         <property name="docTemplateResolver" ref="docTemplateResolver"></property>
     </bean>
-    <bean id="docTemplateResolver" class="org.tinygroup.sdpm.common.docTemplate.impl.DocTemplateResolverImpl" scope="singleton">
-        <property name="docTemplateEngine" ref="docTemplateEngine" ></property>
+    <bean id="docTemplateResolver" class="org.tinygroup.sdpm.common.docTemplate.impl.DocTemplateResolverImpl"
+          scope="singleton">
+        <property name="docTemplateEngine" ref="docTemplateEngine"></property>
     </bean>
 
     <bean id="docTemplateEngine" class="org.tinygroup.template.impl.TemplateEngineDefault" scope="singleton"></bean>

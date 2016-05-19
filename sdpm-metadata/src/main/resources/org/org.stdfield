@@ -205,4 +205,12 @@
   <standard-field id="3bcb0cdb04c84d728b5ece9387c28301" name="org_diary_white_list_second_account" title="白名单乙方账号" business-type-id="095e594e1550424b9643c7e2279e85be"/>
   <standard-field id="70e9d7a468b6447ab7e4c4de0a227ea4" name="org_diary_white_list_id" title="白名单ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
   <standard-field id="990554eeb5d84abaaee98c944bff4e1e" name="org_diary_detail_action_id" title="周报详情对应的日志Id" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
+  <standard-field id="3288ab910cd840cca920eceef4414316" name="org_git_commit_id" title="ORG_GIT_COMMIT_ID" business-type-id="a2c7afa4de724b0cb8f2f46fd8389a37"/>
+  <standard-field id="b8544ab8050442e3a620dc9b6b283f20" name="org_git_repository_name" title="GIT_REPOSITORY_NAME" business-type-id="a30696c1e44441ecad77a832afd3731d"/>
+  <standard-field id="1d9a3211f9a74deab252ae159060a99b" name="org_git_author_email" title="GIT_AUTHOR_EMAIL" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
+  <standard-field id="45eb789aa6f74ba6b1c9840678320ef2" name="org_git_commit_url" title="GIT_COMMIT_URL" business-type-id="27ebfcdc558c477da425a46e566d4637"/>
+  <standard-field id="202618fa35ed44379574bec62f072f70" name="org_git_commit_message" title="GIT_COMMIT_MESSAGE" business-type-id="cc9ed20b13f943f3a967f9d1c5368132"/>
+  <standard-field id="c01c68b9c851401d80e0a4e96aa5622a" name="org_git_commit_time" title="GIT_COMMIT_TIME" business-type-id="a9e498b3bfc54c338f3a97012efdf5ff"/>
+  <standard-field id="1f5c3c71f5f04b1986ecb5a4eabdfa54" name="org_git_type" title="GIT_TYPE" business-type-id="286a6bca92b34779bcb6fc8809f0a666"/>
+  <standard-field id="ee74ea33989e4c8cb3e78a1c142ff7d8" name="org_diary_git_detail_id" title="ORG_DIARY_GIT_DETAIL_ID" business-type-id="7ea3c248890d4b23a5f7d34732ed82cd"/>
 </standard-fields>

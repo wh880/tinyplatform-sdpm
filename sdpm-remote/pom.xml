@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.tinygroup</groupId>
         <artifactId>sdpm</artifactId>
-        <version>1.0.3-SNAPSHOT</version>
+        <version>1.0.3</version>
     </parent>
     <packaging>pom</packaging>
     <artifactId>sdpm-remote</artifactId>

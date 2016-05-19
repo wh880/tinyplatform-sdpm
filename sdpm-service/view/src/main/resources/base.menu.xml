@@ -13,24 +13,24 @@
         <menu id="client-add" name="新建客户" href="/service/client/form" icon="icon-plus" sort="1" isShow="1"
               scope="service-cil-add"/>
         <!--<menu id="linkman" name="联系人" href="#" sort="100" isShow="1">-->
-            <menu id="linkman-edit" name="编辑联系人" href="/service/client/clientUserUpdate/date" icon="icon-pencil"
-                  sort="1"
-                  isShow="1"
-                  scope="linkman-cil"/>
-            <menu id="linkman-del" name="删除联系人" href="/service/client/deleteClientUser" icon="icon-remove" sort="1"
-                  isShow="1"
-                  scope="linkman-cil"/>
-            <menu id="linkman-new" name="新建联系人" href="/service/client/clientUserUpdate/date" icon="icon-plus-sign"
-                  sort="1"
-                  isShow="1"
-                  scope="linkman-cil"/>
+        <menu id="linkman-edit" name="编辑联系人" href="/service/client/clientUserUpdate/date" icon="icon-pencil"
+              sort="1"
+              isShow="1"
+              scope="linkman-cil"/>
+        <menu id="linkman-del" name="删除联系人" href="/service/client/deleteClientUser" icon="icon-remove" sort="1"
+              isShow="1"
+              scope="linkman-cil"/>
+        <menu id="linkman-new" name="新建联系人" href="/service/client/clientUserUpdate/date" icon="icon-plus-sign"
+              sort="1"
+              isShow="1"
+              scope="linkman-cil"/>
         <!--</menu>-->
         <!--<menu id="client-sla" name="协议" href="/service/client/clientSla" sort="100" isShow="1">-->
         <!--<menu id="clientSla_edit" name="协议编辑" href="/service/sla/form" sort="1" isShow="1" scope="clientSla"/>-->
         <menu id="clientSla_delete" name="删除协议" href="/service/client/slaDelete" sort="1" isShow="1"
-                  scope="clientSla"/>
-            <menu id="clientSla-add" name="绑定协议" href="/service/client/slaAdd" icon="icon-plus" sort="1" isShow="1"
-                  scope="service-sla-add"/>
+              scope="clientSla"/>
+        <menu id="clientSla-add" name="绑定协议" href="/service/client/slaAdd" icon="icon-plus" sort="1" isShow="1"
+              scope="service-sla-add"/>
         <!--</menu>-->
     </menu>
 

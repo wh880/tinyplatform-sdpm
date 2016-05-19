@@ -22,8 +22,8 @@ import java.io.Serializable;
  * 客户联系人信息表
  */
 public class ServiceClientUser implements Serializable {
-    public static Integer DELETE_YES = 1;
-    public static Integer DELETE_NO = 0;
+    public static final Integer DELETE_YES = 1;
+    public static final Integer DELETE_NO = 0;
     /**
      * 逻辑ID
      */

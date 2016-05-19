@@ -69,10 +69,11 @@
                 layer.confirm("消耗为0，是否标记任务为完成？", function () {
                     layer.closeAll();
                     $(e).attr("action", "${TINY_CONTEXT_PATH+adminPath}/project/task/finishsave");
-                })
-
+                }, function () {
+                    layer.closeAll();
+                    return false;
+                });
             }
-            //return false;
         }
     });
 </script>

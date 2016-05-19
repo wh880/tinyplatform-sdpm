@@ -23,7 +23,7 @@
 .font-size-12{font-size:12px !important;}
 .font-size-14{font-size:14px !important;}
 .font-size-15{font-size:15px !important;}
-#bodyrap{min-width:970px;overflow-x:auto}
+#bodyrap{min-width:970px;/*overflow-x:auto*/}
 #bodyrap #content-wrapper {
     padding:98px 7px 2px;
 }
@@ -584,7 +584,8 @@ table.table.filelist-table{border:#ddd 1px solid;}
 }
 .diary-detail .dia_h_btn{cursor:pointer}
 /*周报*/
-.btn-circle.btn-lg{padding: 8px 10px;}
+.diary-info .btn-circle.btn-lg{padding:0;line-height:50px;}
 .forall{margin-bottom:8px}
 .forall .checkboxAll{color:#6e3671; font-weight:bold;border:none;background:none;margin-top:-3px}
 .forall-box p{margin-bottom:3px;background:#fefefe;padding:3px 0;}
+a:focus,button:focus,a:active,button:active{outline:0!important;}

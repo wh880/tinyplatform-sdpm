@@ -533,7 +533,7 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
             return select;
         }
         List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
-        for (int i = 0; orderBies != null && i < orderBies.length; i++) {
+        for (int i = 0; i < orderBies.length; i++) {
             OrderByElement tempElement = null;
             if (orderBies[i] != null) {
                 tempElement = orderBies[i].getOrderByElement();
@@ -777,7 +777,6 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
             List<StoryCount> storyCounts = getDslSession().fetchList(select, StoryCount.class);
             return storyCounts;
         } catch (Exception e) {
-            e.printStackTrace();
             return null;
         }
     }
@@ -797,7 +796,6 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
             List<StoryCount> storyCounts = getDslSession().fetchList(select, StoryCount.class);
             return storyCounts;
         } catch (Exception e) {
-            e.printStackTrace();
             return null;
         }
     }
@@ -819,7 +817,6 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
             List<StoryCount> storyCounts = getDslSession().fetchList(select, StoryCount.class);
             return storyCounts;
         } catch (Exception e) {
-            e.printStackTrace();
             return null;
         }
 
@@ -842,7 +839,6 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
             List<StoryCount> storyCounts = getDslSession().fetchList(select, StoryCount.class);
             return storyCounts;
         } catch (Exception e) {
-            e.printStackTrace();
             return null;
         }
     }
@@ -877,7 +873,6 @@ public class ProductStoryDaoImpl extends TinyDslDaoSupport implements ProductSto
 
             return getDslSession().fetchList(select, StoryCount.class);
         } catch (Exception e) {
-            e.printStackTrace();
             return null;
         }
     }

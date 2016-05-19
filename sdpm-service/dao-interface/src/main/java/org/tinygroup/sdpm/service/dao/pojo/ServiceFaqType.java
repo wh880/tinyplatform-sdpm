@@ -23,8 +23,8 @@ import java.util.Date;
  * faq分类
  */
 public class ServiceFaqType implements Serializable {
-    public static Integer DELETE_YES = 1;
-    public static Integer DELETE_NO = 0;
+    public static final Integer DELETE_YES = 1;
+    public static final Integer DELETE_NO = 0;
 
     /**
      * 问题类型id

@@ -228,6 +228,9 @@ public class ProjectTaskAction extends BaseController {
         String taskMailTo = StringUtil.join(taskMailToArray, ",");
         task.setTaskMailto(taskMailTo);
         task.setTaskLeft(task.getTaskEstimate());
+        if(StringUtil.isEmpty(task.getTaskPri())) {
+            task.setTaskPri("1");
+        }
         task = taskService.addTask(task);
         storyJudge(task.getTaskStory());
         LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, LogUtil.LogAction.CREATED,
@@ -839,11 +842,19 @@ public class ProjectTaskAction extends BaseController {
             }
             projectTask.setTaskOpenBy(UserUtils.getUserId());
         }
+
         if (taskList.isEmpty())
         {
             return "project/index/task/index.page";
         } else
         {
+            for(ProjectTask task:taskList)
+            {
+                if(StringUtil.equals(task.getTaskPri(),"1,"))
+                {
+                    task.setTaskPri("1");
+                }
+            }
             Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, projectOperate.COOKIE_PROJECT_ID));
             taskService.batchAddTask(taskList, projectId);
             for (ProjectTask task : taskList)
@@ -1106,7 +1117,6 @@ public class ProjectTaskAction extends BaseController {
         {
             return resultMap(true, "");
         }
-
         return resultMap(false,"任务名称已存在");
     }
 }

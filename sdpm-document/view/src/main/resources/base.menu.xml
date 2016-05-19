@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <menu id="idocument" parent-id="0" name="文档" href="/document"
-	icon="icon-inbox" sort="500" isShow="1" permission="Permission">
-	<menu id="doc-my" parent-id="idocument" name="文档"
-		href="/document" icon="" sort="1" isShow="1">
-		
-		<menu id="batch-delete" name="批量删除" href="#"
-			icon="" sort="3" isShow="1"	scope="docdelete-op"></menu>
+      icon="icon-inbox" sort="500" isShow="1" permission="Permission">
+    <menu id="doc-my" parent-id="idocument" name="文档"
+          href="/document" icon="" sort="1" isShow="1">
 
-		<!--<menu id="doclib-edit" name="编辑" href="/document/doclib/edit"-->
-		<!--icon="icon-edit-sign" sort="3" isShow="1"	scope="doclib-op"></menu>-->
-		<!--<menu id="doclib-delete" name="删除" href="/document/doclib/delete"-->
-		<!--icon="icon-remove" sort="2" isShow="1" scope="doclib-op"></menu>-->
-		<menu id="doclib-add" name="添加文档库" href="/document/doclib/toAdd"
-			icon="icon-plus-sign" sort="1" isShow="1" scope="doclib-op"></menu>
-		<menu id="doc-file-edit" name="编辑文档库" href="/document/doclib/edit"
-			  icon="icon-pencil" sort="3" isShow="1" scope="file-op"></menu>
-		<menu id="doc-file-delete" name="删除文档库" href="/document/doclib/delete"
-			  icon="icon-remove" sort="2" isShow="1" scope="file-op"></menu>
+        <menu id="batch-delete" name="批量删除" href="#"
+              icon="" sort="3" isShow="1" scope="docdelete-op"></menu>
 
-		<menu id="docedit" name="编辑文档" href="/document/doc/edit"
-			  icon="icon-pencil" sort="2" isShow="1" scope="doc-op,product-ar,pro-document-op"></menu>
-		<menu id="docdelete" name="删除文档" href="/document/doc/delete"
-			  icon="icon-remove" sort="1" isShow="1" scope="doc-op"></menu>
-			
-			
-		<menu id="add-doc" name="创建文档" href="/document/doc/add"
-			icon="icon-plus" sort="1" isShow="1" scope="docdelete-op"></menu>
+        <!--<menu id="doclib-edit" name="编辑" href="/document/doclib/edit"-->
+        <!--icon="icon-edit-sign" sort="3" isShow="1"	scope="doclib-op"></menu>-->
+        <!--<menu id="doclib-delete" name="删除" href="/document/doclib/delete"-->
+        <!--icon="icon-remove" sort="2" isShow="1" scope="doclib-op"></menu>-->
+        <menu id="doclib-add" name="添加文档库" href="/document/doclib/toAdd"
+              icon="icon-plus-sign" sort="1" isShow="1" scope="doclib-op"></menu>
+        <menu id="doc-file-edit" name="编辑文档库" href="/document/doclib/edit"
+              icon="icon-pencil" sort="3" isShow="1" scope="file-op"></menu>
+        <menu id="doc-file-delete" name="删除文档库" href="/document/doclib/delete"
+              icon="icon-remove" sort="2" isShow="1" scope="file-op"></menu>
+
+        <menu id="docedit" name="编辑文档" href="/document/doc/edit"
+              icon="icon-pencil" sort="2" isShow="1" scope="doc-op,product-ar,pro-document-op"></menu>
+        <menu id="docdelete" name="删除文档" href="/document/doc/delete"
+              icon="icon-remove" sort="1" isShow="1" scope="doc-op"></menu>
 
 
-		<!--<menu id="doc-view-edit" name ="编辑" href="/document/doc/edit"-->
-		<!--icon="icon-pencil" sort="3" isShow="1" scope="doc-view-op"></menu>-->
-		<!--<menu id="doc-view-delete" name ="删除" href="/document/doc/delete"-->
-		<!--icon="icon-remove" sort="2" isShow="1" scope="doc-view-op"></menu>-->
-	</menu>
+        <menu id="add-doc" name="创建文档" href="/document/doc/add"
+              icon="icon-plus" sort="1" isShow="1" scope="docdelete-op"></menu>
+
+
+        <!--<menu id="doc-view-edit" name ="编辑" href="/document/doc/edit"-->
+        <!--icon="icon-pencil" sort="3" isShow="1" scope="doc-view-op"></menu>-->
+        <!--<menu id="doc-view-delete" name ="删除" href="/document/doc/delete"-->
+        <!--icon="icon-remove" sort="2" isShow="1" scope="doc-view-op"></menu>-->
+    </menu>
 </menu>

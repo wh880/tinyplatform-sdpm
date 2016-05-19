@@ -1,9 +1,9 @@
-<dictNodeEntries name="document" title="文档">     
+<dictNodeEntries name="document" title="文档">
     <dictNodeEntry name="doc" title="文档">
         <dictNodeEntry name="docType" title="文档类型">
             <dictItem key="1" value="文件" sort="1"/>
             <dictItem key="2" value="链接" sort="2"/>
             <dictItem key="3" value="网页" sort="3"/>
-        </dictNodeEntry>          	
-    </dictNodeEntry>    
+        </dictNodeEntry>
+    </dictNodeEntry>
 </dictNodeEntries>

@@ -34,13 +34,9 @@
                 #Tselect2Ajax("releaseBuild" release?.releaseBuild TINY_CONTEXT_PATH+adminPath+"/project/build/ajax/buildInCondition?withoutTrunk=true&productId="+cookieProductId
                 {"id":"","dataId":"buildId","dataText":"buildName","multiple":"multiple","placeholder":"查询版本","datatype":"*","nullmsg":"版本不能为空！"})
                 #@Tselect2Fix()
-                    #set(m=menuService.getMenu("organizationAddUser"))
+                    #set(m=menuService.getMenu("pro-version-add"))
                     #if(m)
                         <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}" class="r">增加</a>
-                    #end
-                    #set(m=menuService.getMenu("organizationUser"))
-                    #if(m)
-                        <a href="${TINY_CONTEXT_PATH+adminPath}${m.href}">全部</a>
                     #end
                 #end
             #end

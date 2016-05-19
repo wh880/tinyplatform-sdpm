@@ -2,7 +2,6 @@ package org.tinygroup.sdpm.project.biz.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
@@ -19,7 +18,6 @@ import java.util.List;
  * Created by shenly13343 on 2015-09-18.
  */
 @Service
-@Transactional
 public class BuildManagerImpl implements BuildManager {
     @Autowired
     private ProjectBuildDao projectBuildDao;

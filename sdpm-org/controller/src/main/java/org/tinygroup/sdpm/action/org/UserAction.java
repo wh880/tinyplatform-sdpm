@@ -707,7 +707,7 @@ public class UserAction extends BaseController {
     @ResponseBody
     @RequestMapping("deleteDiaryWhiteList")
     public Map deleteDiaryWhiteList(String orgUserId) {
-        if (orgUserId == null | orgUserId.equals(UserUtils.getUserId())) {
+        if (orgUserId == null || orgUserId.equals(UserUtils.getUserId())) {
             return resultMap(false, "删除失败");
         }
         OrgUser user = userUtils.getUserById(orgUserId);

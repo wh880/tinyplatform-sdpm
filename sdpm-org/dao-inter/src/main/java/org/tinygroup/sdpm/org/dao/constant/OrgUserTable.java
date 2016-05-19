@@ -26,7 +26,6 @@ import java.util.Map;
 
 /**
  * 用户表
- *
  */
 public class OrgUserTable extends Table {
 
@@ -133,55 +132,46 @@ public class OrgUserTable extends Table {
 
     /**
      * 通讯地址
-     *
      */
     public final Column ORG_USER_ADDRESS = new Column(this, "org_user_address");
 
     /**
      * 邮编
-     *
      */
     public final Column ORG_USER_ZIP_CODE = new Column(this, "org_user_zip_code");
 
     /**
      * 加入日期
-     *
      */
     public final Column ORG_USER_JOIN = new Column(this, "org_user_join");
 
     /**
      * 访问次数
-     *
      */
     public final Column ORG_USER_VISITS = new Column(this, "org_user_visits");
 
     /**
      * 最后IP
-     *
      */
     public final Column ORG_USER_IP = new Column(this, "org_user_ip");
 
     /**
      * 最后登录
-     *
      */
     public final Column ORG_USER_LAST = new Column(this, "org_user_last");
 
     /**
      * 失败次数
-     *
      */
     public final Column ORG_USER_FAILS = new Column(this, "org_user_fails");
 
     /**
      * 上次锁定时间
-     *
      */
     public final Column ORG_USER_LOCKED = new Column(this, "org_user_locked");
 
     /**
      * 是否删除
-     *
      */
     public final Column ORG_USER_DELETED = new Column(this, "org_user_deleted");
 

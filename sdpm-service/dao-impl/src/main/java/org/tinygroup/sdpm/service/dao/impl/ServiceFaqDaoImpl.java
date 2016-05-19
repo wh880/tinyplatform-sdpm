@@ -41,8 +41,8 @@ import static org.tinygroup.tinysqldsl.base.StatementSqlBuilder.and;
 
 @Repository
 public class ServiceFaqDaoImpl extends TinyDslDaoSupport implements ServiceFaqDao {
-    public static Integer DELETE_YES = 1;
-    public static Integer DELETE_NO = 0;
+    public static final Integer DELETE_YES = 1;
+    public static final Integer DELETE_NO = 0;
 
     public ServiceFaq add(ServiceFaq serviceFaq) {
         return getDslTemplate().insertAndReturnKey(serviceFaq, new InsertGenerateCallback<ServiceFaq>() {

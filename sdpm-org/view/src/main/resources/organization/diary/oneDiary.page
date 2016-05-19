@@ -6,9 +6,15 @@
                 $("input[name='idCheck']").each(function () {
                     this.checked = true;
                 });
+                $("input[name='gitIdCheck']").each(function () {
+                    this.checked = true;
+                });
                 $("#checkboxAll").attr("value", "反选");
             } else {
                 $("input[name='idCheck']").each(function () {
+                    this.checked = false;
+                });
+                $("input[name='gitIdCheck']").each(function () {
                     this.checked = false;
                 });
                 $("#checkboxAll").attr("value", "全选");
@@ -17,6 +23,7 @@
 
         $("#checkboxAll").click(function () {
             $("[name='idCheck']").attr("checked", 'true');//全选
+            $("[name='gitIdCheck']").attr("checked", 'true');
         });
     });
     //-->
@@ -29,52 +36,54 @@
             "summary" "summary" {"initialFrameHeight":"200","placeholder":"请输入本周总结"})${orgDiary?.orgDiarySummary}#end
         #if(list!=null)
 
-            <div class="committed forall-box clearfix mt-10 va-m mt-10">
-                <div class="forall">
-                    <input type="checkbox" id="forall" name="forall"/>
-                    <input type="button" class="checkboxAll" id="checkboxAll" value="全选"/>
-                </div>
-                #if(orgDiary?.orgDiaryId==null)
-                    #foreach(var:list)
-                        <p>
-                            <input type="checkbox" id=${var?.actionId} value=${var?.actionId}
-                                   name="idCheck" checked="checked"
-                            > <span class="tocommittime">${var?.actionWeekDay}:${var?.actorName} </span><span>
-                            #if(var?.actionAction=="finished")完成#elseif(var?.actionAction=="opened")创建#elseif(var?.actionAction=="closed")关闭#elseif(var?.actionAction=="changed")变更#elseif(var?.actionAction=="edited")编辑#elseif(var?.actionAction=="resolved")解决#elseif(var?.actionAction=="run")执行#elseif(var?.actionAction=="reviewed")评审#elseif(var?.actionAction=="created")创建#end#if(var?.actionObjectType=="bug")bug#elseif(var?.actionObjectType=="task")任务#elseif(var?.actionObjectType=="story")需求#elseif(var?.actionObjectType=="case")用例#elseif(var?.actionObjectType=="release")发布#elseif(var?.actionObjectType=="doc")文档#end
-                            ---${var?.objectName}
-                    <span>${var?.actionObjectType}_ID：${var?.actionObjectId}</span></span>
-                        </p>
-                    #end
-                #else
-                    #foreach(var:list)
-                        <p>
-                            <input type="checkbox" id=${var?.actionId} value=${var?.actionId}
-                                   name="idCheck" #foreach(var1:details) #if(var1?.actionId==var?.actionId)
-                                   checked="checked"
-                            #end#end> <span class="tocommittime">${var?.actionWeekDay}:${var?.actorName} </span><span>
-                        #if(var?.actionAction=="finished")完成#elseif(var?.actionAction=="opened")创建#elseif(var?.actionAction=="closed")关闭#elseif(var?.actionAction=="changed")变更#elseif(var?.actionAction=="edited")编辑#elseif(var?.actionAction=="resolved")解决#elseif(var?.actionAction=="run")执行#elseif(var?.actionAction=="reviewed")评审#elseif(var?.actionAction=="created")创建#end#if(var?.actionObjectType=="bug")bug#elseif(var?.actionObjectType=="task")任务#elseif(var?.actionObjectType=="story")需求#elseif(var?.actionObjectType=="case")用例#elseif(var?.actionObjectType=="release")发布#elseif(var?.actionObjectType=="doc")文档#end
-                            ---${var?.objectName}
-                    <span>${var?.actionObjectType}_ID：${var?.actionObjectId}</span></span>
-                        </p>
-                    #end
-                #end
+        <div class="committed forall-box clearfix mt-10 va-m mt-10">
+            <div class="forall">
+                <input type="checkbox" id="forall" name="forall"/>
+                <input type="button" class="checkboxAll" id="checkboxAll" value="全选"/>
             </div>
-        </div>
-
-        <input type="hidden" id="efforts" name="efforts">
-        <input type="hidden" id="y" name="y" value=${year}>
-        <input type="hidden" id="w" name="w" value=${week}>
-        <div class="col-8 col-offset-2">
-            <div class="col-1">
-                <button style="float: left" type="submit" id="submit2" class="commitBtn" onclick="beforeSub()">保存
-                </button>
-            </div>
-            <div class="col-1">
-                #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")取消#end
-            </div>
-        </div>
+           #for(var:list)
+        <p>
+                <input type="checkbox" id=${var?.actionId} value=${var?.actionId}
+                       name="idCheck" #for(var1:details) #if(var1?.actionId==var?.actionId) checked="checked"
+        #end#end> <span class="tocommittime">${var?.actionWeekDay}:${var?.actorName} </span><span>
+        #if(var?.actionAction=="finished")
+            完成
+        #elseif(var?.actionAction=="opened")
+            创建
+        #elseif(var?.actionAction=="closed")
+            创建
+        #elseif(var?.actionAction=="changed")
+            变更
+        #elseif(var?.actionAction=="edited")
+            编辑
+        #elseif(var?.actionAction=="resolved")
+            解决
+        #elseif(var?.actionAction=="run")
+            执行
+        #elseif(var?.actionAction=="reviewed")
+            评审
         #end
+        ${var?.actionObjectType}---${var?.objectName}
+                    <span>${var?.actionObjectType}_ID：${var?.actionObjectId}</span></span>
+    </p>
     #end
+    #listCommitsForSelect(gitList details2)
+</div>
+</div>
+<input type="hidden" id="gitIds" name="gitIds">
+<input type="hidden" id="efforts" name="efforts">
+<input type="hidden" id="y" name="y" value=${year}>
+<input type="hidden" id="w" name="w" value=${week}>
+<div class="col-8 col-offset-2">
+    <div class="col-1">
+        <button style="float: left" type="submit" id="submit2" class="commitBtn" onclick="beforeSub()">保存</button>
+    </div>
+    <div class="col-1">
+        #@aExtendButton("btn-sm backBtn" "javascript:history.go(-1)")取消#end
+    </div>
+</div>
+#end
+#end
 #end
 
 <script>
@@ -89,6 +98,14 @@
                     }
                 }
                 $("#efforts").val(mes);
+                var checks2 = document.getElementsByName("gitIdCheck");
+                var mes2 = "";
+                for (var i = 0; i < checks2.length; i++) {
+                    if (checks2[i].checked == true) {
+                        mes2 = mes2 + checks2[i].value + ",";
+                    }
+                }
+                $("#gitIds").val(mes2);
                 $(curform).ajaxSubmit({
                     dataType: "json",
                     success: function (data) {

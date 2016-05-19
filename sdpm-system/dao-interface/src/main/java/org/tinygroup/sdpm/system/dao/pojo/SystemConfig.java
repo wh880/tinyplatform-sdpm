@@ -23,9 +23,9 @@ import java.io.Serializable;
  * 模块配置表
  */
 public class SystemConfig implements Serializable {
-    public static int DELETE_YES = 1;
-    public static int DELETE_NO = 0;
-    public static String SEARCH_CONFIG = "searchConfig";
+    public static final int DELETE_YES = 1;
+    public static final int DELETE_NO = 0;
+    public static final String SEARCH_CONFIG = "searchConfig";
 
     /**
      * 配置ID
