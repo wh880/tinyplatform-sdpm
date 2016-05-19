@@ -79,6 +79,9 @@ public class ProjectTeamDaoImpl extends TinyDslDaoSupport implements ProjectTeam
             if (!StringUtil.isBlank(teamRole)) {
                 String[] split = teamRole.split(",");
                 for (String roleId : split) {
+                    if (StringUtil.isBlank(roleId)) {
+                        continue;
+                    }
                     roleIdList.add(Integer.valueOf(roleId));
                 }
             }
