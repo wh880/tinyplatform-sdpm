@@ -312,7 +312,7 @@ public class ProjectBuildDaoImpl extends TinyDslDaoSupport implements ProjectBui
     }
 
     public List<ProjectBuild> getBuildByKeys(String... ids) {
-        Select select = selectFrom(PROJECT_BUILDTABLE).where(PROJECT_BUILDTABLE.BUILD_ID.in(ids));
+        Select select = selectFrom(PROJECT_BUILDTABLE).where(and(PROJECT_BUILDTABLE.BUILD_DELETED.eq("0"), PROJECT_BUILDTABLE.BUILD_ID.in(ids)));
         return getDslSession().fetchList(select, ProjectBuild.class);
     }
 

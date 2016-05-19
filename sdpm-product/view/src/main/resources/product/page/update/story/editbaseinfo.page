@@ -233,8 +233,7 @@
                 #@colLabel()指派给：#end
                 #@formControlDiv("col-8")
                     #@Tselect2F()
-                        #Tselect2Ajax("storyAssignedTo" story?.storyAssignedTo TINY_CONTEXT_PATH+adminPath+
-                            "/org/user/ajax/userInConditionAndTeam?productId="+story?.productId
+                        #Tselect2Ajax("storyAssignedTo" story?.storyAssignedTo TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
                         {"id":"reviewedSelect","dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询指派人"})
                         #@Tselect2Fix()
                             #set(m=menuService.getMenu("product-team-report"))

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.tinygroup.commons.tools.ArrayUtil;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.dao.complexsearch.SearchInfos;
@@ -504,8 +505,8 @@ public class ProjectBuildAction extends BaseController {
     @RequestMapping("ajax/buildInCondition")
     public List<ProjectBuild> buildInCondition(String key, String initKey, Integer productId, Integer projectId, String withoutTrunk) {
         if (initKey != null) {
-            if (initKey.indexOf(",") > 0) {
-                String[] ids = initKey.split(",");
+            String[] ids = initKey.split(",");
+            if (!ArrayUtil.isEmptyArray(ids)) {
                 List<ProjectBuild> projectBuildList = buildService.getBuildByIds(ids);
                 boolean hasTrunk = false;
                 for (String id : ids) {

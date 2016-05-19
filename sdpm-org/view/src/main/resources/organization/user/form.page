@@ -160,7 +160,7 @@
                         #@elementItem()
                             #@colLabel("col-3")源代码账号：#end
                             #@formControlDiv("col-6")
-                                #tinyInput("text" "orgUserSubmitter" user?.orgUserSubmitter {"datatype":"*1-20","ignore":"ignore"})
+                                #tinyInput("text" "orgUserSubmitter" user?.orgUserSubmitter)
                             #end
                             #@validateDiv("col-3")#end
                         #end

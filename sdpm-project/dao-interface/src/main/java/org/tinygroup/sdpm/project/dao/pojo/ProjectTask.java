@@ -22,21 +22,22 @@ import java.util.Date;
 /**
  * <!-- begin-user-doc -->
  * 任务
- *
+ * <p>
  * <!-- end-user-doc -->
+ *
  * @generated
  */
 public class ProjectTask implements Serializable {
 
-    public static String DELETE_YES = "1";
-    public static String DELETE_NO = "0";
+    public static final String DELETE_YES = "1";
+    public static final String DELETE_NO = "0";
     //0-等待，1-未开始，2-进行中，3-已完成，4-已暂停，5-已取消,6-已关闭
-    public static String WAIT = "1";
-    public static String DOING = "2";
-    public static String DONE = "3";
-    public static String PAUSE = "4";
-    public static String CANCEL = "5";
-    public static String CLOSE = "6";
+    public static final String WAIT = "1";
+    public static final String DOING = "2";
+    public static final String DONE = "3";
+    public static final String PAUSE = "4";
+    public static final String CANCEL = "5";
+    public static final String CLOSE = "6";
 
 
     private Integer taskRelationBug;

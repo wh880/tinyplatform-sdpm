@@ -17,7 +17,6 @@ package org.tinygroup.sdpm.org.biz.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.security.Digests;
 import org.tinygroup.sdpm.common.util.Encodes;
@@ -30,7 +29,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@Transactional
 public class UserManagerImpl implements UserManager {
     public static final int HASH_INTERATIONS = 1024;
     public static final int SALT_SIZE = 8;

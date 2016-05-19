@@ -496,11 +496,11 @@ public class QualityTestCaseDaoImpl extends TinyDslDaoSupport implements Quality
     }
 
     private Select addOrderByElements(Select select, OrderBy... orderBies) {
-        if (orderBies.length == 0 || orderBies == null) {
+        if (orderBies == null || orderBies.length == 0) {
             return select;
         }
         List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
-        for (int i = 0; orderBies != null && i < orderBies.length; i++) {
+        for (int i = 0; i < orderBies.length; i++) {
             OrderByElement tempElement = null;
             if (orderBies[i] != null) {
                 tempElement = orderBies[i].getOrderByElement();

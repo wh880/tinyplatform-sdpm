@@ -90,7 +90,7 @@ public interface ActionManager {
     List<SystemAction> findActionListByIdList(List<Integer> idList);
 
 
-    List<SystemAction> findActionListByTypeList(List<SystemAction> bugs, List<SystemAction> stories, List<SystemAction> tasks, List<SystemAction> cases, List<SystemAction> releases,List<SystemAction> docs);
+    List<SystemAction> findActionListByTypeList(List<SystemAction> bugs, List<SystemAction> stories, List<SystemAction> tasks, List<SystemAction> cases, List<SystemAction> releases, List<SystemAction> docs);
 
     /**
      * 查询某人某一时间段内（任务，bug，需求的日志信息）

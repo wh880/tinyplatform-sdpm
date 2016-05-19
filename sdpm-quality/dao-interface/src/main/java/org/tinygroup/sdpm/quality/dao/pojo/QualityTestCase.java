@@ -24,13 +24,13 @@ import java.util.Date;
  */
 public class QualityTestCase implements Serializable {
 
-    public static int DELETE_YES = 1;
-    public static int DELETE_NO = 1;
+    public static final int DELETE_YES = 1;
+    public static final int DELETE_NO = 1;
 
-    public static String RESULT_NA = "0";
-    public static String RESULT_PASS = "1";
-    public static String RESULT_BLOCK = "3";
-    public static String RESULT_FAULT = "2";
+    public static final String RESULT_NA = "0";
+    public static final String RESULT_PASS = "1";
+    public static final String RESULT_BLOCK = "3";
+    public static final String RESULT_FAULT = "2";
 
     /**
      * 创建人名称

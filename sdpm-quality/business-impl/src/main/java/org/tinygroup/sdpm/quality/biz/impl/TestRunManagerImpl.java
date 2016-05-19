@@ -2,7 +2,6 @@ package org.tinygroup.sdpm.quality.biz.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.dao.condition.CallBackFunction;
@@ -19,7 +18,6 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-@Transactional
 public class TestRunManagerImpl implements TestRunManager {
 
     @Autowired

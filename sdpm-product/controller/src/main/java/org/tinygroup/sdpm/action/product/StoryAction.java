@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.tinygroup.commons.tools.ArrayUtil;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.web.BaseController;
 import org.tinygroup.sdpm.dao.complexsearch.SearchInfos;
@@ -262,7 +263,7 @@ public class StoryAction extends BaseController {
     @ResponseBody
     @RequestMapping("/updateBatch")
     public boolean updateBatch(@RequestBody ProductStory[] stories) {
-        if (stories.length == 0 || stories == null) {
+        if (stories == null || stories.length == 0) {
             return false;
         }
         List<ProductStory> storyList = new ArrayList<ProductStory>();
@@ -464,6 +465,22 @@ public class StoryAction extends BaseController {
             testCase1.setStoryId(storyId);
             List<QualityTestCase> testCases = testCaseService.findTestCaseList(testCase1);
             model.addAttribute("caseList", testCases);
+
+
+            if (!StringUtil.isBlank(productStory.getStoryLinkStories())) {
+                String storyLinkStories = productStory.getStoryLinkStories();
+                List<Integer> idList = new ArrayList<Integer>();
+                String[] split = storyLinkStories.split(",");
+                if (ArrayUtil.isEmptyArray(split)) {
+                    idList.add(Integer.parseInt(storyLinkStories));
+                } else {
+                    for (String s : split) {
+                        idList.add(Integer.parseInt(s));
+                    }
+                }
+                List<ProductStory> storyList = storyService.findStoryListByIds(idList.toArray(new Integer[0]));
+                model.addAttribute("storyList", storyList);
+            }
             return "/product/page/view/story/hrefbaseinfo.pagelet";
         }
 

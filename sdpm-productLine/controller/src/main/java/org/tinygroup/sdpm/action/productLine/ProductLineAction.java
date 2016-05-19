@@ -336,14 +336,16 @@ public class ProductLineAction extends BaseController {
             product.setProductLineId(productLine.getProductLineId());
             productList = productService.getProductByUser(UserUtils.getUserId(), 0, productLine.getProductLineId(), "");
         }
-        for (Product d : productList) {
-            Map<String, Object> map = new HashMap<String, Object>();
-            map.put("id", "v" + d.getProductId());
-            map.put("pId", "p" + productLine.getProductLineId());
-            map.put("name", d.getProductName());
-            map.put("open", true);
-            map.put("clickAble", false);
-            list.add(map);
+        if(productList != null){
+            for (Product d : productList) {
+                Map<String, Object> map = new HashMap<String, Object>();
+                map.put("id", "v" + d.getProductId());
+                map.put("pId", "p" + productLine.getProductLineId());
+                map.put("name", d.getProductName());
+                map.put("open", true);
+                map.put("clickAble", false);
+                list.add(map);
+            }
         }
 
         return list;

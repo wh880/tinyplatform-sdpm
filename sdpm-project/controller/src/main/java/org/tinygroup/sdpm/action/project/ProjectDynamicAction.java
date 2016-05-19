@@ -69,7 +69,7 @@ public class ProjectDynamicAction extends BaseController {
             } else {
                 betweenDate(selDate, startDate, endDate);
             }
-            if (startDate == null && endDate == null) {
+            if (startDate == null) {
                 Pager<SystemAction> actionPager = actionService.findSystemActionPager(start, limit, systemAction, order, ordertype);
                 model.addAttribute("actionPager", actionPager);
             } else {

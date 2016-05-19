@@ -640,11 +640,11 @@ public class ProjectTaskDaoImpl extends TinyDslDaoSupport implements ProjectTask
     }
 
     private Select addOrderByElements(Select select, OrderBy... orderArgs) {
-        if (orderArgs == null) {
+        if (orderArgs == null || orderArgs.length == 0) {
             return select;
         }
         List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
-        for (int i = 0; orderArgs != null && i < orderArgs.length; i++) {
+        for (int i = 0; i < orderArgs.length; i++) {
             OrderByElement tempElement = orderArgs[i].getOrderByElement();
             if (tempElement != null) {
                 orderByElements.add(tempElement);

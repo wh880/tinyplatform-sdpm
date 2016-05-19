@@ -134,7 +134,7 @@ public class OrgDiaryDetailTable extends Table {
     public final Column ACTION_ID = new Column(this, "action_id");
 
 
-    private OrgDiaryDetailTable() {
+    public OrgDiaryDetailTable() {
         super("org_diary_detail");
     }
 

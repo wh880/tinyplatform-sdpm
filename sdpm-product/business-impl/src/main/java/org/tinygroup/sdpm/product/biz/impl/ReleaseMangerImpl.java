@@ -2,7 +2,6 @@ package org.tinygroup.sdpm.product.biz.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
 import org.tinygroup.sdpm.product.biz.inter.ReleaseManger;
@@ -14,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@Transactional
 public class ReleaseMangerImpl implements ReleaseManger {
 
     @Autowired

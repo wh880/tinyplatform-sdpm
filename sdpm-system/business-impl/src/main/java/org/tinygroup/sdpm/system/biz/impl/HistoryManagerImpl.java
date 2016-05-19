@@ -2,7 +2,6 @@ package org.tinygroup.sdpm.system.biz.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.system.biz.inter.HistoryManager;
@@ -13,7 +12,6 @@ import org.tinygroup.tinysqldsl.Pager;
 import java.util.List;
 
 @Service
-@Transactional
 public class HistoryManagerImpl implements HistoryManager {
     @Autowired
     private SystemHistoryDao histroyDao;

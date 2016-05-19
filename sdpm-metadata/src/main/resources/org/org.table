@@ -85,5 +85,4 @@
     <table-field standard-field-id="c7d7754bfa85454993ffd049f902f1be" primary="false" unique="false" not-null="false" id="org_user_id" auto-increase="false"/>
     <table-field standard-field-id="2d8d08288ada42f78cd291bd3cca33c6" primary="false" unique="false" not-null="false" id="org_user_real_name" auto-increase="false"/>
   </table>
- 
 </tables>

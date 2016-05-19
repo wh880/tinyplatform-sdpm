@@ -2,6 +2,7 @@ package org.tinygroup.sdpm.org.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.sdpm.org.biz.inter.WhiteListManager;
 import org.tinygroup.sdpm.org.dao.pojo.OrgDiaryWhiteList;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
@@ -13,6 +14,7 @@ import java.util.List;
  * Created by wangdl16860 on 2016/1/19.
  */
 @Component
+@Transactional
 public class WhiteListServiceImpl implements WhiteListService {
     @Autowired
     private WhiteListManager whiteListManager;
@@ -23,6 +25,7 @@ public class WhiteListServiceImpl implements WhiteListService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<OrgUser> findUserListByWhiteFirst(String firstUserAccount) {
         return whiteListManager.findUserListByAccount(firstUserAccount);
     }
@@ -33,6 +36,7 @@ public class WhiteListServiceImpl implements WhiteListService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public OrgDiaryWhiteList findDiaryWhiteByAccounts(String firstAccount, String secondAccount) {
         return whiteListManager.findOneByAccounts(firstAccount, secondAccount);
     }

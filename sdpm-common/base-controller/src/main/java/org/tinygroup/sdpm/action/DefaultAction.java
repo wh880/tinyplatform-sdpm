@@ -53,6 +53,11 @@ public class DefaultAction extends BaseController {
         return "common/us";
     }
 
+    @RequestMapping("error")
+    public String error() {
+        return "error/50x";
+    }
+
     /**
      * 图片异步上传
      *

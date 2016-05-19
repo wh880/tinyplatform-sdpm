@@ -33,6 +33,9 @@
                     #end
                 #end
             #end
+
+            #listThisWeekCommits(details2 var)
+
         #end
     #end
 #end
