@@ -228,6 +228,9 @@ public class ProjectTaskAction extends BaseController {
         String taskMailTo = StringUtil.join(taskMailToArray, ",");
         task.setTaskMailto(taskMailTo);
         task.setTaskLeft(task.getTaskEstimate());
+        if(StringUtil.isEmpty(task.getTaskPri())) {
+            task.setTaskPri("1");
+        }
         task = taskService.addTask(task);
         storyJudge(task.getTaskStory());
         LogUtil.logWithComment(LogUtil.LogOperateObject.TASK, LogUtil.LogAction.CREATED,
