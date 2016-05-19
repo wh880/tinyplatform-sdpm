@@ -169,7 +169,7 @@
                            placeholder=""
                            aria-describedby="basic-addon2">*#
                        #tinyInput("text" "storyEstimate" story?.storyEstimate {"placeholder":"","datatype":
-                           "/^[0-9]+(\.[0-9]{1,2})?$/","aria-describedby":"basic-addon2"})
+                           "/^([0-9]+(\.[0-9]{1,2}))?$/","aria-describedby":"basic-addon2"})
                     <span class="input-group-addon" id="basic-addon2">小时</span>
                 </div>
             #end

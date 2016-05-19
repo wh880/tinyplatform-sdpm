@@ -23,7 +23,7 @@ public interface BugManager {
      * @param bug
      * @return
      */
-    List<QualityBug> findList(QualityBug type);
+    List<QualityBug> findList(QualityBug bug);
 
     /**
      * 分页查询

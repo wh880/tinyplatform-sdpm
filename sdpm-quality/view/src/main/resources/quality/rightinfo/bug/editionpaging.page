@@ -153,7 +153,8 @@
                     #end
                 #end
             #else
-                #tinyInput("text" "bugStatus" "已解决" {"class":"input-text","readonly":"readonly"})
+                #tinyInput("hidden" "bugStatus" "3" {"class":"input-text"})
+                #tinyInput("text" "show-bugStatus" "已解决" {"class":"input-text","readonly":"readonly"})
             #end
         #end
     #end

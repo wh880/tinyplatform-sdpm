@@ -34,7 +34,7 @@
                 "text" "buildName" build?.buildName {"style":"width:80%","placeholder":"请输入版本名称","datatype":"*1-255",
                 "nullmsg":
                 "版本名不能为空！","id":"buildName","class":"input-text",
-                "ajaxurl":TINY_CONTEXT_PATH+adminPath+"/project/build/judgeBuildNameExist?projectId="+build?.buildProject})
+                "ajaxurl":TINY_CONTEXT_PATH+adminPath+"/project/build/judgeBuildNameExist?projectId="+build?.buildProject+"&buildNamee="+build?.buildName+"&productId="+build?.buildProduct})
         #end
     #end
     #@elementItem()
