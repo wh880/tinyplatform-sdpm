@@ -33,6 +33,7 @@ import org.tinygroup.sdpm.project.dao.pojo.ProjectProduct;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectTask;
 import org.tinygroup.sdpm.project.service.inter.*;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityBug;
+import org.tinygroup.sdpm.quality.service.inter.BugService;
 import org.tinygroup.sdpm.system.dao.pojo.*;
 import org.tinygroup.sdpm.system.service.inter.ActionService;
 import org.tinygroup.sdpm.system.service.inter.EffortService;
@@ -81,6 +82,8 @@ public class ProjectTaskAction extends BaseController {
     private ActionService actionService;
     @Autowired
     private StorySpecService storySpecService;
+    @Autowired
+    private BugService bugService;
 
     @ModelAttribute
     public void init(Model model) {
@@ -143,7 +146,12 @@ public class ProjectTaskAction extends BaseController {
 
         }
         List<ProductStory> storyList = projectStoryService.findStoryByProject(projectId);
-        List<QualityBug> bugList = projectService.findRelationBugByProjectID(projectId);
+//        List<QualityBug> bugList = projectService.findRelationBugByProjectID(projectId);
+        QualityBug qualityBug=new QualityBug();
+        qualityBug.setProjectId(projectId);
+        qualityBug.setDeleted(0);
+        qualityBug.setBugStatus(QualityBug.STATUS_ACTIVE);
+        List<QualityBug> bugList=bugService.findBugList(qualityBug);
         model.addAttribute("moduleList", findModuleList(storyId, projectId));
         model.addAttribute("moduleId", moduleId);
         model.addAttribute("storyId", storyId);
