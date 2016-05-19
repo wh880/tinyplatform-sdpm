@@ -838,11 +838,19 @@ public class ProjectTaskAction extends BaseController {
             }
             projectTask.setTaskOpenBy(UserUtils.getUserId());
         }
+
         if (taskList.isEmpty())
         {
             return "project/index/task/index.page";
         } else
         {
+            for(ProjectTask task:taskList)
+            {
+                if(StringUtil.equals(task.getTaskPri(),"1,"))
+                {
+                    task.setTaskPri("1");
+                }
+            }
             Integer projectId = Integer.parseInt(CookieUtils.getCookie(request, projectOperate.COOKIE_PROJECT_ID));
             taskService.batchAddTask(taskList, projectId);
             for (ProjectTask task : taskList)

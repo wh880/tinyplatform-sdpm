@@ -226,12 +226,15 @@
                 var taskPris=$("select[name$=taskPri]");
                 var thisTaskPri;
                 var showBreak=false;
-                $(form).find("input[groupName=taskName]").each(function(index){
+                $(form).find("input[groupName=taskName]").each(function(index)
+                {
                     thisetime=etimes.eq(index).val()
                     thisTaskType=taskTypes.eq(index).val()
                     thisTaskPri=taskPris.eq(index).val()
-                    if($(this).val()){
-                        if(!thisetime){
+                    if($(this).val())
+                    {
+                        if(!thisetime)
+                        {
                             etimes.eq(index).addClass("Validform_error").get(0).focus();
                             layer.msg("预计时间不能为空");
                             showBreak=true;
@@ -247,8 +250,10 @@
                         {
                             taskPris.eq(index).val(1);
                         }
-                    }else{
-                        if(thisetime){
+                    }else
+                    {
+                        if(thisetime)
+                        {
                             $(this).addClass("Validform_error").get(0).focus();
                             layer.msg("任务名称不能为空");
                             showBreak=true;
@@ -265,7 +270,8 @@
                     etimes.eq(index).blur();
                     $(this).blur();
                 });
-                if(showBreak){
+                if(showBreak)
+                {
                     return false;
                 }
             }
