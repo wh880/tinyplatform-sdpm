@@ -39,7 +39,7 @@
                             #@Tselect2Body("taskList["+i+"].moduleId" moduleId)
                             <option value="">/</option>
                                 #foreach(m : moduleList)
-                                    <option value=${m.moduleId}>${m.moduleName}</option>
+                                <option value=${m.moduleId}>${m.moduleName}</option>
                                 #end
                             #end
                         #end
@@ -50,12 +50,12 @@
                     ##                        #end
                         #@Tselect2F()
                             #@Tselect2Body("taskList["+i+"].taskStory" story?.storyId {"class":"input-text select2"})
-                                <option value=""></option>
+                            <option value=""></option>
                                 #if(i!=1)
                                 <option value="0">同上</option>
                                 #end
                                 #foreach(s:storyList)
-                                    <option value="${s.storyId}">${s.storyId}：${s.storyTitle}（优先级：${s.storyPri}，预计工时:${s.storyEstimate}）</option>
+                                <option value="${s.storyId}">${s.storyId}：${s.storyTitle}（优先级：${s.storyPri}，预计工时:${s.storyEstimate}）</option>
                                 #end
                             #end
                         #end
@@ -64,7 +64,7 @@
                     #@td()
                         #tinyInput(
                             "text" "taskList["+i+"].taskName" "" {"placeholder":"","groupName":"taskName","datatype":
-                            "*1-255"})
+                            "*0-255"})
                     #end
                     #@td()
                         #@formControlDiv( )

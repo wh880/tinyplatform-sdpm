@@ -159,7 +159,7 @@ public class DocAction extends BaseController {
             Integer moduleRoot = systemModule.getModuleRoot();
             String moduleName = systemModule.getModuleName();
             model.addAttribute("moduleRoot",moduleRoot);
-            model.addAttribute("moduleName",moduleName);
+            model.addAttribute("docModule",moduleName);
             return returnDoc(libId, request,model);
         }
 
@@ -329,6 +329,7 @@ public class DocAction extends BaseController {
     public String viewInfo(HttpServletRequest request, Integer docId, Model model) {
         DocumentDoc doc = docService.findDocById(docId);
         DocumentDocLib docLib = docService.findDocLibById(doc.getDocLibId());
+        System.out.println(doc.getDocModule());
         if (doc.getDocModule() != 0 && doc.getDocModule() != null) {
             SystemModule module = moduleService.findById(doc.getDocModule());
             model.addAttribute("module", module);
