@@ -548,21 +548,29 @@ public class ProjectBuildAction extends BaseController {
     /**
      * 判断版本名称在同一产品下存在性
      * @param param
-     * @param productId
+     * @param projectId
+     * @param buildNamee
      * @return
      */
     @ResponseBody
     @RequestMapping("/judgeBuildNameExist")
-    public Map judgeBuildNameExist(String param,Integer projectId)
+    public Map judgeBuildNameExist(String param,Integer projectId,String buildNamee,Integer productId)
     {
         if(param==null)
         {
             return resultMap(false, "请输入版本名称");
         }
+
+        if(StringUtil.equals(param,buildNamee))
+        {
+            return  resultMap(true,"");
+        }
+
         String buildName = param;
         ProjectBuild build =new ProjectBuild();
         build.setBuildName(param);
         build.setBuildProject(projectId);
+        build.setBuildProduct(productId);
         build.setBuildDeleted(ProjectBuild.DELETE_NO);
         List<ProjectBuild> builds = buildService.findListBuild(build);
         if (builds.size() != 0) {

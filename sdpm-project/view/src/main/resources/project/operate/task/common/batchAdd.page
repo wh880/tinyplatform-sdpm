@@ -39,7 +39,7 @@
                             #@Tselect2Body("taskList["+i+"].moduleId" moduleId)
                             <option value="">/</option>
                                 #foreach(m : moduleList)
-                                    <option value=${m.moduleId}>${m.moduleName}</option>
+                                <option value=${m.moduleId}>${m.moduleName}</option>
                                 #end
                             #end
                         #end
@@ -50,12 +50,12 @@
                     ##                        #end
                         #@Tselect2F()
                             #@Tselect2Body("taskList["+i+"].taskStory" story?.storyId {"class":"input-text select2"})
-                                <option value=""></option>
+                            <option value=""></option>
                                 #if(i!=1)
                                 <option value="0">同上</option>
                                 #end
                                 #foreach(s:storyList)
-                                    <option value="${s.storyId}">${s.storyId}：${s.storyTitle}（优先级：${s.storyPri}，预计工时:${s.storyEstimate}）</option>
+                                <option value="${s.storyId}">${s.storyId}：${s.storyTitle}（优先级：${s.storyPri}，预计工时:${s.storyEstimate}）</option>
                                 #end
                             #end
                         #end
@@ -63,8 +63,7 @@
                     #end
                     #@td()
                         #tinyInput(
-                            "text" "taskList["+i+"].taskName" "" {"placeholder":"","groupName":"taskName","datatype":
-                            "*1-255"})
+                            "text" "taskList["+i+"].taskName"""{"placeholder":"","groupName":"taskName"})
                     #end
                     #@td()
                         #@formControlDiv( )
@@ -135,8 +134,7 @@
 #end
 
 <script type="text/javascript">
-    $(function ()
-    {
+    $(function () {
         //检查任务名称是否重复
         $("input[name$=taskName]").each(function(){
             $(this).change(function(){
@@ -204,6 +202,11 @@
                         });
                     }
                 });
+                if(!boo)
+                {
+                    return false;
+                }
+
                 for(var i=0;i<taskNameArray.length-1;i++)
                 {
                     for(var j=taskNameArray.length-1;i<j;j--)
@@ -215,10 +218,6 @@
                         }
                     }
                 }
-                if(!boo)
-                {
-                    return false;
-                }
 
                 var etimes=$(form).find("input[groupName=etime]");
                 var thisetime;
@@ -227,15 +226,12 @@
                 var taskPris=$("select[name$=taskPri]");
                 var thisTaskPri;
                 var showBreak=false;
-                $(form).find("input[groupName=taskName]").each(function(index)
-                {
+                $(form).find("input[groupName=taskName]").each(function(index){
                     thisetime=etimes.eq(index).val()
                     thisTaskType=taskTypes.eq(index).val()
                     thisTaskPri=taskPris.eq(index).val()
-                    if($(this).val())
-                    {
-                        if(!thisetime)
-                        {
+                    if($(this).val()){
+                        if(!thisetime){
                             etimes.eq(index).addClass("Validform_error").get(0).focus();
                             layer.msg("预计时间不能为空");
                             showBreak=true;
@@ -251,10 +247,8 @@
                         {
                             taskPris.eq(index).val(1);
                         }
-                    }else
-                    {
-                        if(thisetime)
-                        {
+                    }else{
+                        if(thisetime){
                             $(this).addClass("Validform_error").get(0).focus();
                             layer.msg("任务名称不能为空");
                             showBreak=true;
@@ -271,8 +265,7 @@
                     etimes.eq(index).blur();
                     $(this).blur();
                 });
-                if(showBreak)
-                {
+                if(showBreak){
                     return false;
                 }
             }
