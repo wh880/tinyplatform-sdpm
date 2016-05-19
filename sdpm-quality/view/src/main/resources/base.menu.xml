@@ -116,7 +116,7 @@
 
         </menu>
         <menu id="tsearch" name="搜索" href="#" icon="" sort="1"
-        isShow="1" scope="testbugleft-tab">
+              isShow="1" scope="testbugleft-tab">
 
         </menu>
     </menu>
@@ -182,7 +182,7 @@
         <menu id="tversionSituation" name="版本概况" href="/quality/version/versionInfo" icon="icon-file" sort="4"
               isShow="1" scope="testversion-op"></menu>
         <menu id="tversionLink" name="关联用例" href="/quality/version/linkCase" icon=" icon-paper-clip" sort="3"
-              isShow="1" scope="testversion-op,pro-test-op,testverinfo-tab"></menu>
+              isShow="1" scope="pro-test-op,testverinfo-tab"></menu>
         <menu id="tproposeversion" name="提交测试" href="/quality/version/add" icon="icon-plus" sort="12" isShow="1"
               scope=""/>
         <menu id="tversionedit" name="编辑 " href="/quality/version/toEdit" icon="icon-pencil" sort="2"

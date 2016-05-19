@@ -12,11 +12,9 @@ import org.tinygroup.commons.tools.CollectionUtil;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.util.DateUtils;
 import org.tinygroup.sdpm.common.web.BaseController;
-import org.tinygroup.sdpm.org.dao.pojo.OrgDiary;
-import org.tinygroup.sdpm.org.dao.pojo.OrgDiaryAndUserDO;
-import org.tinygroup.sdpm.org.dao.pojo.OrgDiaryDetail;
-import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
+import org.tinygroup.sdpm.org.dao.pojo.*;
 import org.tinygroup.sdpm.org.service.inter.DiaryService;
+import org.tinygroup.sdpm.org.service.inter.GitService;
 import org.tinygroup.sdpm.org.service.inter.UserService;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.sdpm.system.dao.pojo.SystemModule;
@@ -40,6 +38,8 @@ public class DiaryAction extends BaseController {
     private UserService userService;
     @Autowired
     private ActionService actionService;
+    @Autowired
+    private GitService gitService;
 
     /**
      * 添加周报以及相应的周报详情
@@ -52,7 +52,7 @@ public class DiaryAction extends BaseController {
      */
     @ResponseBody
     @RequestMapping("/add")
-    public Map add(String summary, @RequestParam(value = "y") Integer year, @RequestParam(value = "w") Integer week, String efforts) {
+    public Map add(String summary, @RequestParam(value = "y") Integer year, @RequestParam(value = "w") Integer week, String efforts, String gitIds) {
         String[] effortIds = null;
         //获得需要插入周报详情的日志ID
         List<Integer> idsList = new ArrayList<Integer>();
@@ -121,7 +121,7 @@ public class DiaryAction extends BaseController {
             diary.setOrgDiarySummary(summary);
             diary.setOrgDiaryModifyDate(date);
             diaryService.updateDiary(diary, list);
-            return resultMap(true, "修改成功");
+
         }
         //如果这一周没有提交过周报，则进行添加操作，并且对详情不set日志ID
         else {
@@ -173,8 +173,20 @@ public class DiaryAction extends BaseController {
             orgDiary.setOrgDiaryEndDate(endDate);
             //进行添加周报以及添加周报详情的操作
             diaryService.addDiary(orgDiary, list);
-            return resultMap(true, "添加成功");
         }
+        //选择GIT以后提交到周报中
+        diary = diaryService.findDiaryByUserLatest(userId, year, week);
+        Integer diaryId = diary.getOrgDiaryId();
+        String[] gitIdStrs = gitIds.split(",");
+        List<OrgDiaryGitDetail> gitDetailList = new ArrayList<OrgDiaryGitDetail>();
+        for (String id : gitIdStrs) {
+            OrgDiaryGitDetail orgDiaryGitDetail = new OrgDiaryGitDetail();
+            orgDiaryGitDetail.setOrgDiaryId(diaryId);
+            orgDiaryGitDetail.setOrgGitCommitId(id);
+            gitDetailList.add(orgDiaryGitDetail);
+        }
+        gitService.batchInsertDiaryGitDetail(diaryId, gitDetailList);
+        return resultMap(true, "添加成功");
     }
 
     private String getObjectTypeName(String objectType) {
@@ -188,7 +200,7 @@ public class DiaryAction extends BaseController {
             return "用例";
         } else if ("release".equals(objectType)) {
             return "发布";
-        }else if ("doc".equals(objectType)) {
+        } else if ("doc".equals(objectType)) {
             return "文档";
         }
         return objectType;
@@ -222,7 +234,7 @@ public class DiaryAction extends BaseController {
                 docList.add(systemAction);
             }
         }
-        return actionService.findActionListByTypeList(bugList, storyList, taskList, caseList, releaseList,docList);
+        return actionService.findActionListByTypeList(bugList, storyList, taskList, caseList, releaseList, docList);
     }
     /**
      * 编辑修改周报
@@ -472,6 +484,20 @@ public class DiaryAction extends BaseController {
         model.addAttribute("week", week);
         model.addAttribute("list", systemActions);
         model.addAttribute("details", orgDiaryDetailList);
+        //提交周报之前显示可以提交的GIT信息
+        List<OrgGitCommitInfo> gitList = gitService.findOrgGitCommitInfoByEmailAndDate(userUtils.getUser().getOrgUserSubmitter(), bDate, eDate);
+        for (OrgGitCommitInfo g : gitList) {
+            g.setWeek(DateUtils.getDateWeek(g.getOrgGitCommitTime()));
+            g.setUrlText(g.getOrgGitCommitId().substring(0, 9));
+        }
+        OrgDiaryGitDetail orgDiaryGitDetail = new OrgDiaryGitDetail();
+        if (orgDiary != null) {
+            orgDiaryGitDetail.setOrgDiaryId(orgDiary.getOrgDiaryId());
+            List<OrgDiaryGitDetail> details2 = gitService.query(orgDiaryGitDetail);
+            model.addAttribute("details2", details2);
+        }
+        model.addAttribute("gitList", gitList);
+
         return "organization/diary/oneDiary.pagelet";
     }
 
@@ -509,8 +535,9 @@ public class DiaryAction extends BaseController {
             for (OrgDiaryAndUserDO orgDiaryAndUserDO : list) {
                 orgDiaryAndUserDO.setDiaryDateTime(DateUtils.formatDate(orgDiaryAndUserDO.getOrgDiaryCreateDate()));
             }
-
             Map<Integer, List<OrgDiaryDetail>> map = new HashMap<Integer, List<OrgDiaryDetail>>();
+            //提交完以后，显示自己和下属的提交信息  GIT
+            Map<Integer, List<OrgGitCommitInfo>> map2 = new HashMap<Integer, List<OrgGitCommitInfo>>();
             for (OrgDiaryAndUserDO orgDiaryAndUserDO : list) {
                 List<OrgDiaryDetail> efforts = null;
                 if (map.get(orgDiaryAndUserDO.getOrgDiaryId()) == null) {
@@ -537,8 +564,23 @@ public class DiaryAction extends BaseController {
                 else
                     orgDiaryAndUserDO.setDetailCountStatus(0);
                 map.put(orgDiaryAndUserDO.getOrgDiaryId(), efforts);
+                //GIT
+                List<OrgGitCommitInfo> commitInfoList = null;
+                commitInfoList = gitService.getOrgGitCommitInfoByDiaryId(orgDiaryAndUserDO.getOrgDiaryId());
+                String gitWeek = "";
+                for (OrgGitCommitInfo commit : commitInfoList) {
+                    if (gitWeek.equals(DateUtils.getDateWeek(commit.getOrgGitCommitTime()))) {
+                        commit.setWeek(null);
+                    } else {
+                        gitWeek = DateUtils.getDateWeek(commit.getOrgGitCommitTime());
+                        commit.setWeek(gitWeek);
+                    }
+                    commit.setUrlText(commit.getOrgGitCommitId().substring(0, 9));
+                }
+                map2.put(orgDiaryAndUserDO.getOrgDiaryId(), commitInfoList);
             }
             model.addAttribute("efforts", map);
+            model.addAttribute("details2", map2);
         }
         model.addAttribute("list", list);
         return "organization/diary/diaryData.pagelet";
@@ -584,6 +626,7 @@ public class DiaryAction extends BaseController {
         }
         Pager<OrgDiaryAndUserDO> pager = diaryService.findPagerDiaryByUserId(user.getOrgUserId(), start, limit);
         Map<Integer, List<OrgDiaryDetail>> map = new HashMap<Integer, List<OrgDiaryDetail>>();
+        Map<Integer, List<OrgGitCommitInfo>> map2 = new HashMap<Integer, List<OrgGitCommitInfo>>();
         for (OrgDiaryAndUserDO orgDiaryAndYUser : pager.getRecords()) {
             orgDiaryAndYUser.setDiaryDateTime(DateUtils.formatDate(orgDiaryAndYUser.getOrgDiaryCreateDate()));
             Integer diaryId = orgDiaryAndYUser.getOrgDiaryId();
@@ -615,11 +658,29 @@ public class DiaryAction extends BaseController {
             }
 
             map.put(diaryId, orgDiaryDetails);
+            //提交完以后，查看各周周报的时候显示GIT信息
+            List<OrgGitCommitInfo> orgDiaryGitDetails = null;
+            if (map2.get(diaryId) == null) {
+                map2.put(diaryId, orgDiaryGitDetails);
+            }
+            orgDiaryGitDetails = gitService.getOrgGitCommitInfoByDiaryId(diaryId);
+            String week = "";
+            for (OrgGitCommitInfo commit : orgDiaryGitDetails) {
+                if (week.equals(DateUtils.getDateWeek(commit.getOrgGitCommitTime()))) {
+                    commit.setWeek(null);
+                } else {
+                    week = DateUtils.getDateWeek(commit.getOrgGitCommitTime());
+                    commit.setWeek(week);
+                }
+                commit.setUrlText(commit.getOrgGitCommitId().substring(0, 9));
+            }
+            map2.put(diaryId, orgDiaryGitDetails);
         }
         String realName = user.getOrgUserRealName();
         model.addAttribute("pager", pager);
         model.addAttribute("userAccount", realName);
         model.addAttribute("details", map);
+        model.addAttribute("details2", map2);
         return "organization/diary/showPersonDiary.pagelet";
     }
 

@@ -23,8 +23,8 @@ import java.io.Serializable;
  */
 public class OrgCompany implements Serializable {
 
-    public static String DELETE_YES = "1";
-    public static String DELETE_NO = "0";
+    public static final String DELETE_YES = "1";
+    public static final String DELETE_NO = "0";
 
 
     /**

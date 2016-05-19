@@ -17,6 +17,7 @@ package org.tinygroup.sdpm.org.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.org.biz.inter.UserManager;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
@@ -26,6 +27,7 @@ import org.tinygroup.tinysqldsl.Pager;
 import java.util.List;
 
 @Component
+@Transactional
 public class UserServiceImpl implements UserService {
 
     @Autowired
@@ -37,6 +39,7 @@ public class UserServiceImpl implements UserService {
      * @param id
      * @return
      */
+    @Transactional(readOnly = true)
     public OrgUser findUser(String id) {
         if (StringUtil.isBlank(id)) {
             return null;
@@ -50,6 +53,7 @@ public class UserServiceImpl implements UserService {
      * @param account 用户名
      * @return
      */
+    @Transactional(readOnly = true)
     public OrgUser findUserByAccount(String account) {
         return userManager.findUserByAccount(account);
     }
@@ -62,6 +66,7 @@ public class UserServiceImpl implements UserService {
      * @param orgUser
      * @return
      */
+    @Transactional(readOnly = true)
     public Pager<OrgUser> findUserPager(Integer start, Integer limit, OrgUser orgUser) {
         return userManager.findPager(start, limit, orgUser);
     }
@@ -72,6 +77,7 @@ public class UserServiceImpl implements UserService {
      * @param orgUser 用于查询条件
      * @return
      */
+    @Transactional(readOnly = true)
     public List<OrgUser> findUserList(OrgUser orgUser) {
         return userManager.findList(orgUser);
     }
@@ -82,6 +88,7 @@ public class UserServiceImpl implements UserService {
      * @param deptId
      * @return
      */
+    @Transactional(readOnly = true)
     public Pager<OrgUser> findUserByDeptId(Integer start, Integer limit, Integer deptId) {
         return userManager.findUserListByDeptId(start, limit, deptId);
     }
@@ -152,24 +159,27 @@ public class UserServiceImpl implements UserService {
      * @param userId
      * @return
      */
+    @Transactional(readOnly = true)
     public List<OrgUser> findUserListByIds(String[] userId) {
         return userManager.findUserListByIds(userId);
     }
-
+    @Transactional(readOnly = true)
     public List<OrgUser> findTeamUserListByProjectId(Integer projectId) {
         return userManager.findTeamUserListByProjectId(projectId);
     }
-
+    @Transactional(readOnly = true)
     public List<OrgUser> userInCondition(String condition, Integer limit, String[] ids) {
         return userManager.userInCondition(condition, limit, ids);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<OrgUser> findOrgUserListSubordinate(String userId) {
         return userManager.getDirectStaffByLeader(userId);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<OrgUser> findOrgUserListSubordinateAndSelf(String userId) {
         return userManager.getDirectStaffByLeaderAndSelf(userId);
     }
@@ -180,6 +190,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<OrgUser> findWhiteUser(String userAccount) {
         return userManager.getWhiteUserList(userAccount);
     }

@@ -269,7 +269,7 @@ public class ProductAction extends BaseController {
 
     @RequestMapping("/list")
     public String list(String choose, Model model) {
-        model.addAttribute("productMap", productService.getUserProductsWithCountMap(UserUtils.getUserId(), 0, choose));
+        model.addAttribute("productMap", productService.getUserProductsWithCountMap(UserUtils.getUserId(), 0, choose));//0表示未关闭状态
         return "/product/data/product/allproductdata.pagelet";
     }
 

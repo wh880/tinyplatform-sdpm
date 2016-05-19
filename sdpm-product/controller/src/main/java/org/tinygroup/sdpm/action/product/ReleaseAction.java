@@ -344,7 +344,7 @@ public class ReleaseAction extends BaseController {
     @RequestMapping("/ajaxRelateStory")
     public Map RelateStory(Integer releaseId, String ids) {
         String[] stories = ids.split(",");
-        if (stories.length > 0 && stories != null) {
+        if (stories.length > 0) {
             ProductRelease release = releaseService.findRelease(releaseId);
             String releaseStories = "";
             if (release != null && !StringUtil.isBlank(release.getReleaseStories())) {
@@ -359,8 +359,10 @@ public class ReleaseAction extends BaseController {
                 }
                 storyService.updateStory(productStory);
             }
-            release.setReleaseStories(StringUtil.join(origin.toArray(), ","));
-            releaseService.updateRelease(release);
+            if(release!=null){
+                release.setReleaseStories(StringUtil.join(origin.toArray(), ","));
+                releaseService.updateRelease(release);
+            }
         }
         Map<String, String> map = new HashMap<String, String>();
         map.put("status", "success");
@@ -373,7 +375,7 @@ public class ReleaseAction extends BaseController {
     @RequestMapping("/ajaxRelateBug")
     public Map RelateBug(Integer releaseId, String ids) {
         String[] bugs = ids.split(",");
-        if (bugs.length > 0 && bugs != null) {
+        if (bugs.length > 0 ) {
             ProductRelease release = releaseService.findRelease(releaseId);
             String releaseBugs = "";
             if (release != null && !StringUtil.isBlank(release.getReleaseBugs())) {
@@ -385,8 +387,10 @@ public class ReleaseAction extends BaseController {
                     origin.add(bugId);
                 }
             }
-            release.setReleaseBugs(StringUtil.join(origin.toArray(), ","));
-            releaseService.updateRelease(release);
+            if(release!=null){
+                release.setReleaseBugs(StringUtil.join(origin.toArray(), ","));
+                releaseService.updateRelease(release);
+            }
         }
         Map<String, String> map = new HashMap<String, String>();
         map.put("status", "success");

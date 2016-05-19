@@ -1,12 +1,15 @@
 <type-infos>
-	<type-info name="holiday" >
-	    <info name="holiday-dynamic" title="假期动态" infoParameter="" url="/system/holiday/action?actionObjectType=holiday" resource="holiday"/>
-	
-	</type-info>
-	<type-info name="working" >
-		<info name="working-dynamic" title="工作日动态" infoParameter="" url="/system/page/holiday/working-dynamic.pagelet" resource="holiday"/>
-	</type-info>
-	<type-info name="holiday-edit" >
-		<info name="editinfo" title="其他信息" infoParameter="" url="/system/page/holiday/editbaseinfo.pagelet" resource="holiday"/>
-	</type-info>
+    <type-info name="holiday">
+        <info name="holiday-dynamic" title="假期动态" infoParameter="" url="/system/holiday/action?actionObjectType=holiday"
+              resource="holiday"/>
+
+    </type-info>
+    <type-info name="working">
+        <info name="working-dynamic" title="工作日动态" infoParameter="" url="/system/page/holiday/working-dynamic.pagelet"
+              resource="holiday"/>
+    </type-info>
+    <type-info name="holiday-edit">
+        <info name="editinfo" title="其他信息" infoParameter="" url="/system/page/holiday/editbaseinfo.pagelet"
+              resource="holiday"/>
+    </type-info>
 </type-infos>

@@ -2,6 +2,7 @@ package org.tinygroup.sdpm.project.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.commons.tools.ArrayUtil;
 import org.tinygroup.sdpm.project.biz.inter.BuildManager;
 import org.tinygroup.sdpm.project.dao.pojo.ProjectBuild;
@@ -14,6 +15,7 @@ import java.util.List;
  * Created by shenly13343 on 2015-09-20.
  */
 @Component
+@Transactional
 public class BuildServiceImpl implements BuildService {
     @Autowired
     private BuildManager buildManager;
@@ -35,7 +37,7 @@ public class BuildServiceImpl implements BuildService {
         build.setBuildDeleted(ProjectBuild.DELETE_NO);
         return buildManager.add(build);
     }
-
+    @Transactional(readOnly = true)
     public Pager<ProjectBuild> findBuildPagerWithOrder(Integer projectId, Integer start, Integer limit, String order, boolean asc) {
         ProjectBuild build = new ProjectBuild();
         build.setBuildProject(projectId);
@@ -47,7 +49,7 @@ public class BuildServiceImpl implements BuildService {
         return buildManager.update(build);
     }
 
-
+    @Transactional(readOnly = true)
     public ProjectBuild findBuild(Integer id) {
         return buildManager.find(id);
     }
@@ -60,11 +62,11 @@ public class BuildServiceImpl implements BuildService {
         }
         return del.length;
     }
-
+    @Transactional(readOnly = true)
     public List<ProjectBuild> findListBuild(ProjectBuild projectBuild) {
         return buildManager.findList(projectBuild);
     }
-
+    @Transactional(readOnly = true)
     public Pager<ProjectBuild> findPagerBuild(ProjectBuild projectBuild, Integer start, Integer limit, String order, boolean asc) {
         return buildManager.findPager(projectBuild, start, limit, order, asc);
     }
@@ -76,7 +78,7 @@ public class BuildServiceImpl implements BuildService {
     public List<ProjectBuild> getBuildByProducts(Integer... ids) {
         return buildManager.getBuildByProducts(ids);
     }
-
+    @Transactional(readOnly = true)
     public List<ProjectBuild> buildInCondition(String condition, Integer limit, Integer productId, Integer projectId) {
         return buildManager.buildInCondition(condition, limit, productId, projectId);
     }

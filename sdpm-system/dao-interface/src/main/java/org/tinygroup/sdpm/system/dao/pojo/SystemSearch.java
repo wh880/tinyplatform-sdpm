@@ -23,8 +23,8 @@ import java.util.Date;
  * 模块搜索表
  */
 public class SystemSearch implements Serializable {
-    public static int DELETE_YES = 1;
-    public static int DELETE_NO = 0;
+    public static final int DELETE_YES = 1;
+    public static final int DELETE_NO = 0;
 
     /**
      * 搜索ID

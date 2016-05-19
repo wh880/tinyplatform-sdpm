@@ -1,29 +1,29 @@
 <dictNodeEntries name="productLine" title="产品线">
-	
-	 <dictNodeEntry name="productLine" title="产品线">
 
-         <dictNodeEntry name="whiteList" title="白名单">
-             <dictItem key="0" value="管理员" sort="1"/>
-             <dictItem key="1" value="研发" sort="2"/>
-             <dictItem key="2" value="测试" sort="3"/>
-             <dictItem key="3" value="项目经理" sort="4"/>
-             <dictItem key="4" value="产品经理" sort="5"/>
-             <dictItem key="5" value="研发主管" sort="6"/>
-             <dictItem key="6" value="产品主管" sort="7"/>
-             <dictItem key="7" value="测试主管" sort="8"/>
-         </dictNodeEntry>
+    <dictNodeEntry name="productLine" title="产品线">
 
-         <dictNodeEntry name="lineAccessControl" title="访问控制">
-             <dictItem key="0" value="默认设置(无访问限制)" sort="1"/>
-             <dictItem key="1" value="私有项目(只有产品线项目团队成员及产品线负责人才能访问)" sort="2"/>
-             <dictItem key="2" value="自定义白名单(产品线项目团队成员及产品线负责人和白名单的成员可以访问)" sort="3"/>
-         </dictNodeEntry>
+        <dictNodeEntry name="whiteList" title="白名单">
+            <dictItem key="0" value="管理员" sort="1"/>
+            <dictItem key="1" value="研发" sort="2"/>
+            <dictItem key="2" value="测试" sort="3"/>
+            <dictItem key="3" value="项目经理" sort="4"/>
+            <dictItem key="4" value="产品经理" sort="5"/>
+            <dictItem key="5" value="研发主管" sort="6"/>
+            <dictItem key="6" value="产品主管" sort="7"/>
+            <dictItem key="7" value="测试主管" sort="8"/>
+        </dictNodeEntry>
 
-         <dictNodeEntry name="productLineStatus" title="产品线状态">
-             <dictItem key="1" value="激活" sort="1"/>
-             <dictItem key="2" value="已关闭" sort="2"/>
-         </dictNodeEntry>
+        <dictNodeEntry name="lineAccessControl" title="访问控制">
+            <dictItem key="0" value="默认设置(无访问限制)" sort="1"/>
+            <dictItem key="1" value="私有项目(只有产品线项目团队成员及产品线负责人才能访问)" sort="2"/>
+            <dictItem key="2" value="自定义白名单(产品线项目团队成员及产品线负责人和白名单的成员可以访问)" sort="3"/>
+        </dictNodeEntry>
+
+        <dictNodeEntry name="productLineStatus" title="产品线状态">
+            <dictItem key="1" value="激活" sort="1"/>
+            <dictItem key="2" value="已关闭" sort="2"/>
+        </dictNodeEntry>
 
 
-     </dictNodeEntry>
+    </dictNodeEntry>
 </dictNodeEntries>

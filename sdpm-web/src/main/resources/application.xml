@@ -20,8 +20,7 @@
         GreetingProcessor配置手册 -->
     <greetings>
         **********************************************
-        * 欢迎进入Tiny
-        Server *
+        * 欢迎进入Tiny Server
         * *
         * 如果有任何问题，请联系luo_guo@live.cn *
         **********************************************
@@ -35,8 +34,8 @@
         <application-processor bean="tinyTemplateConfigProcessor"/>
         <!--数据库安装
         <application-processor bean="databaseInstallerProcessor"/>-->
-        <!-- 系统数据初始化
-        <application-processor bean="initDataApplicationProcessor"/> -->
+        <!--系统数据初始化-->
+        <application-processor bean="initDataApplicationProcessor"/>
         <application-processor bean="stdProcessor"/>
         <application-processor bean="dictLoadProcessor"/>
     </application-processors>
@@ -82,16 +81,18 @@
         </plugin-configs>
     </plugin-management>
     <!-- cep远程调用配置 -->
-    <!--<cep-node-config>-->
-    <!--<node-config ip="192.168.84.73" port="8888" name="chenjiaopmclient"-->
-    <!--enable-remote="false"></node-config>-->
-    <!--<node-sc-breath interval="4000"/>-->
-    <!--<node-sc-check interval="2000"/>-->
-    <!--<remote-bean bean="CEPCoreRMIRemoteImpl"/>-->
-    <!--&lt;!&ndash; mananger-bean="cepCoreManagerCentral" &ndash;&gt;-->
-    <!--<node-strategy bean="nodeWeightPloyStrategy"/>-->
-    <!--<sc ip="192.168.84.57" port="8808" name="chenjiaocentral"/>-->
-    <!--</cep-node-config>-->
+    <!--
+        <cep-node-config>
+        <node-config ip="192.168.84.73" port="8888" name="chenjiaopmclient"
+        enable-remote="false"></node-config>
+        <node-sc-breath interval="4000"/>
+        <node-sc-check interval="2000"/>
+        <remote-bean bean="CEPCoreRMIRemoteImpl"/>
+        &lt;!&ndash; mananger-bean="cepCoreManagerCentral" &ndash;&gt;
+        <node-strategy bean="nodeWeightPloyStrategy"/>
+        <sc ip="192.168.84.57" port="8808" name="chenjiaocentral"/>
+        </cep-node-config>
+    -->
 
     <!-- aop配置 -->
     <cepcore-aop-config>
@@ -117,23 +118,11 @@
         <tiny-processor id="springMvcTinyProcessor" class="springMvcTinyProcessor">
             <servlet-mapping url-pattern=".*"></servlet-mapping>
         </tiny-processor>
-
         <tiny-processor id="uiEngineTinyProcessor" class="uiEngineTinyProcessor">
+            <init-param name="storageType" value="memory"></init-param>
             <servlet-mapping url-pattern=".*/uiengine\.uijs"></servlet-mapping>
             <servlet-mapping url-pattern=".*/uiengine\.uicss"></servlet-mapping>
         </tiny-processor>
-        <!--<tiny-processor id="serviceTinyProcessor" class="serviceTinyProcessor">-->
-        <!--<servlet-mapping url-pattern=".*\.servicexml"></servlet-mapping>-->
-        <!--<servlet-mapping url-pattern=".*\.servicejson"></servlet-mapping>-->
-        <!--<servlet-mapping url-pattern=".*\.servicepage"></servlet-mapping>-->
-        <!--<servlet-mapping url-pattern=".*\.servicepagelet"></servlet-mapping>-->
-        <!--</tiny-processor>-->
-        <!--<tiny-processor id="mvcTinyProcessor" class="mvcTinyProcessor">-->
-        <!--<servlet-mapping url-pattern=".*\.do"></servlet-mapping>-->
-        <!--</tiny-processor>-->
-        <!--<tiny-processor id="pageFlowTinyProcessor" class="pageFlowTinyProcessor">-->
-        <!--<servlet-mapping url-pattern=".*\.pageflow"></servlet-mapping>-->
-        <!--</tiny-processor>-->
         <tiny-processor id="fullContextProcessor" class="fullContextProcessor">
             <servlet-mapping url-pattern=".*\.evy"></servlet-mapping>
             <servlet-mapping url-pattern=".*\.fif"></servlet-mapping>

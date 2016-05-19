@@ -2,6 +2,7 @@ package org.tinygroup.sdpm.project.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.sdpm.common.util.DateUtils;
 import org.tinygroup.sdpm.project.biz.inter.BurnManager;
@@ -22,6 +23,7 @@ import java.util.List;
  * Created by wangying14938 on 2015-09-18.
  */
 @Component
+@Transactional
 public class BurnServiceImpl implements BurnService {
     @Autowired
     private BurnManager burnManager;
@@ -48,7 +50,7 @@ public class BurnServiceImpl implements BurnService {
             burnManager.update(burn);
         }
     }
-
+    @Transactional(readOnly = true)
     public BurnDTO initBurn(Integer projectId, Integer interval) {
         if (interval == null) {
             interval = 1;

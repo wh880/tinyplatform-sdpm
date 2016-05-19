@@ -2,6 +2,7 @@ package org.tinygroup.sdpm.product.service.inter.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.commons.tools.ArrayUtil;
 import org.tinygroup.sdpm.dao.condition.ConditionCarrier;
 import org.tinygroup.sdpm.dao.condition.ConditionUtils;
@@ -16,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 @Component
+@Transactional
 public class ProductServiceImpl implements ProductService {
 
     @Autowired
@@ -32,50 +34,51 @@ public class ProductServiceImpl implements ProductService {
     public int deleteProduct(Integer productId) {
         return productManager.delete(productId);
     }
-
+    @Transactional(readOnly = true)
     public Product findProductById(Integer productId) {
         return productManager.find(productId);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Product findProductWithoutGroupByById(Integer productId) {
         return productManager.findWithoutGroupBy(productId);
     }
-
+    @Transactional(readOnly = true)
     public List<Product> findProductListByIds(Integer... productId) {
         if (ArrayUtil.isEmptyArray(productId)) {
             return new ArrayList<Product>();
         }
         return productManager.findList(productId);
     }
-
+    @Transactional(readOnly = true)
     public List<Product> findProductList(Product product) {
         return productManager.findList(product);
     }
-
+    @Transactional(readOnly = true)
     public List<ProductAndLine> getProductAndLine(Product product) {
         return productManager.getProductAndLine(product);
     }
-
+    @Transactional(readOnly = true)
     public List<String> getProductNameByLineId(Integer productLineId) {
         return productManager.getProductNameByLineId(productLineId);
     }
-
+    @Transactional(readOnly = true)
     public List<Product> getProductByUser(String userId, Integer delete, Integer productLineId, String status) {
         ConditionCarrier carrier = mergeCarrier(status);
         return productManager.getProductByUser(userId, delete, productLineId, carrier);
     }
-
+    @Transactional(readOnly = true)
     public List<Product> getProductByUserWithCount(String userId, Integer delete, boolean noRole, String status) {
         ConditionCarrier carrier = mergeCarrier(status);
         return productManager.getProductByUserWithCount(userId, delete, noRole, carrier);
     }
-
+    @Transactional(readOnly = true)
     public List<Product> getProductByUserAndProductLineWithCount(String userId, Integer productLineId, Integer delete, String status) {
         ConditionCarrier carrier = mergeCarrier(status);
         return productManager.getProductByUserAndProductLineWithCount(userId, productLineId, delete, carrier);
     }
-
+    @Transactional(readOnly = true)
     public Map<String, List<Product>> getUserProductsWithCountMap(String userId, Integer delete, String status) {
         ConditionCarrier carrier = mergeCarrier(status);
         Map<String, List<Product>> productMap = new HashMap<String, List<Product>>();
@@ -91,11 +94,11 @@ public class ProductServiceImpl implements ProductService {
         }
         return productMap;
     }
-
+    @Transactional(readOnly = true)
     public List<Product> productInCondition(String condition, Integer limit, Integer... ids) {
         return productManager.productInCondition(condition, limit, ids);
     }
-
+    @Transactional(readOnly = true)
     public Map<String, List<Product>> getUserProductsMap(String userId) {
         Map<String, List<Product>> productMap = new HashMap<String, List<Product>>();
         List<Product> products = productManager.getProductByUser(userId, 0, null, mergeCarrier(Product.CHOOSE_OPENED));

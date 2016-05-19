@@ -65,7 +65,7 @@
         当跳出SHIRO SERVLET时如ERROR-PAGE容器会为JSESSIONID重新分配值导致登录会话丢失! -->
     <bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
         <constructor-arg name="name" value="tinysdpmsessionid"/>
-        <property name="path" value="/" />
+        <property name="path" value="/"/>
     </bean>
 
     <!-- 自定义Session存储容器 -->
@@ -112,5 +112,5 @@
 
     <bean class="org.tinygroup.sdpm.security.SystemRealm" id="systemRealm"/>
 
-    <bean class="org.tinygroup.sdpm.security.MenuPermissionSubject" />
+    <bean class="org.tinygroup.sdpm.security.MenuPermissionSubject"/>
 </beans>

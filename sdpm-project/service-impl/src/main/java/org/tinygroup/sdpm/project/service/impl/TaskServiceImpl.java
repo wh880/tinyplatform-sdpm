@@ -2,6 +2,7 @@ package org.tinygroup.sdpm.project.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.sdpm.dao.condition.ConditionCarrier;
 import org.tinygroup.sdpm.org.dao.pojo.OrgUser;
 import org.tinygroup.sdpm.project.biz.inter.TaskManager;
@@ -17,10 +18,11 @@ import java.util.*;
  * Created by shenly13343 on 2015-09-20.
  */
 @Component
+@Transactional
 public class TaskServiceImpl implements TaskService {
     @Autowired
     private TaskManager taskManager;
-
+    @Transactional(readOnly = true)
     public ProjectTask getProjectTaskTimeInfo(Integer projectId) {
         return taskManager.getProjectTaskTimeInfo(projectId);
     }
@@ -37,6 +39,9 @@ public class TaskServiceImpl implements TaskService {
             maxNo = 0;
         }
         for (ProjectTask task : taskList) {
+            if("1,".equals(task.getTaskPri())) {
+                task.setTaskPri("1");
+            }
             task.setTaskNo(++maxNo);
             task.setTaskLastEditedDate(new Date());
             task.setTaskOpenedDate(new Date());
@@ -53,22 +58,22 @@ public class TaskServiceImpl implements TaskService {
         task.setTaskOpenedDate(new Date());
         return taskManager.add(task);
     }
-
+    @Transactional(readOnly = true)
     public List<ProjectTask> findListTask(ProjectTask task) {
         return taskManager.findList(task);
     }
-
+    @Transactional(readOnly = true)
     public Pager<ProjectTask> findPagerTaskByMe(Integer start, Integer limit, ProjectTask task, String sortName, boolean asc, OrgUser user) {
         return taskManager.findPagerByMe(start, limit, task, sortName, asc, user);
     }
-
+    @Transactional(readOnly = true)
     public Pager<ProjectTask> findTaskPager(Integer start, Integer limit, ProjectTask task, String sortName, boolean asc, ConditionCarrier carrier) {
         if (carrier != null) {
             return taskManager.findPagerByStatus(start, limit, task, sortName, asc, carrier);
         }
         return taskManager.findPager(start, limit, task, sortName, asc);
     }
-
+    @Transactional(readOnly = true)
     public ProjectTask findTaskById(Integer taskId) {
         return taskManager.find(taskId);
     }
@@ -111,7 +116,7 @@ public class TaskServiceImpl implements TaskService {
         task.setTaskLastEditedDate(new Date());
         return taskManager.update(task);
     }
-
+    @Transactional(readOnly = true)
     public Map<String, List<ProjectTask>> findGroup(String type, Integer projectId) {
         ProjectTask projectTask = new ProjectTask();
         projectTask.setTaskProject(projectId);
@@ -130,7 +135,7 @@ public class TaskServiceImpl implements TaskService {
         //转化为前台显示格式
         return resMap;
     }
-
+    @Transactional(readOnly = true)
     public List<TaskChartBean> buildChart(String id) {
         return taskManager.findByGroup(id);
     }
@@ -161,6 +166,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public ProjectTask findTaskByTaskId(Integer taskId) {
         return taskManager.findTaskByTaskId(taskId);
     }

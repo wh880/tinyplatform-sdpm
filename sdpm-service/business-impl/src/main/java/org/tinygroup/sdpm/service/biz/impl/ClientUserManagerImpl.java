@@ -2,7 +2,6 @@ package org.tinygroup.sdpm.service.biz.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.sdpm.service.biz.inter.ClientUserManager;
 import org.tinygroup.sdpm.service.dao.ServiceClientUserDao;
 import org.tinygroup.sdpm.service.dao.pojo.ServiceClientUser;
@@ -13,7 +12,6 @@ import java.util.List;
  * Created by Administrator on 2015-09-18.
  */
 @Service
-@Transactional
 public class ClientUserManagerImpl implements ClientUserManager {
     @Autowired
     private ServiceClientUserDao clientUserDao;

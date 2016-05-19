@@ -2,7 +2,6 @@ package org.tinygroup.sdpm.statistic.biz.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.sdpm.statistic.biz.inter.StatisticManager;
 import org.tinygroup.sdpm.statistic.dao.StatisticDao;
 import org.tinygroup.sdpm.statistic.dao.pojo.*;
@@ -11,7 +10,6 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-@Transactional
 public class StatisticManagerImpl implements StatisticManager {
     @Autowired
     private StatisticDao statisticDao;

@@ -62,7 +62,6 @@ import static org.tinygroup.tinysqldsl.select.Join.leftJoin;
 @Repository
 public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
 
-
     public static Condition productQueryCondition(Product t) {
         return
                 t == null ? null : and(
@@ -355,7 +354,7 @@ public class ProductDaoImpl extends TinyDslDaoSupport implements ProductDao {
         }
 
         List<OrderByElement> orderByElements = new ArrayList<OrderByElement>();
-        for (int i = 0; orderBies != null && i < orderBies.length; i++) {
+        for (int i = 0; i < orderBies.length; i++) {
             OrderByElement tempElement = null;
 
             if (orderBies[i] != null) {

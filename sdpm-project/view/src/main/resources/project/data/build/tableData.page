@@ -13,7 +13,6 @@
             </div>
         #end
         #@td()${b?.buildScmPath}</a>#end
-    </div>
         #@td()${b?.buildFilePath}#end
         #@td("nowrap")${formatDate(b?.buildDate,"yyyy-MM-dd")}#end
         #@td("nowrap")${b?.buildBuilder?userUtils.getUserById(b?.buildBuilder)?.orgUserRealName:""}#end

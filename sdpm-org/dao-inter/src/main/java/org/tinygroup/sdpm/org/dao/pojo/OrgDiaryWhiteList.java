@@ -21,8 +21,9 @@ import java.io.Serializable;
 /**
  * <!-- begin-user-doc -->
  * 周报白名单表
- *
+ * <p>
  * <!-- end-user-doc -->
+ *
  * @generated
  */
 public class OrgDiaryWhiteList implements Serializable {
@@ -30,8 +31,9 @@ public class OrgDiaryWhiteList implements Serializable {
     /**
      * <!-- begin-user-doc -->
      * 白名单ID
-     *
+     * <p>
      * <!-- end-user-doc -->
+     *
      * @generated
      */
     private Integer orgDiaryWhiteListId;
@@ -39,8 +41,9 @@ public class OrgDiaryWhiteList implements Serializable {
     /**
      * <!-- begin-user-doc -->
      * 白名单甲方账号
-     *
+     * <p>
      * <!-- end-user-doc -->
+     *
      * @generated
      */
     private String orgDiaryWhiteListFirstAccount;
@@ -48,8 +51,9 @@ public class OrgDiaryWhiteList implements Serializable {
     /**
      * <!-- begin-user-doc -->
      * 白名单乙方账号
-     *
+     * <p>
      * <!-- end-user-doc -->
+     *
      * @generated
      */
     private String orgDiaryWhiteListSecondAccount;

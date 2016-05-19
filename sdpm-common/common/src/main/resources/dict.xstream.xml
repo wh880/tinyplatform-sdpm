@@ -1,5 +1,5 @@
 <xstream-configuration package-name="dictFile">
     <xstream-annotation-classes>
-        <xstream-annotation-class class-name="org.tinygroup.sdpm.dict.inter.DictNodeEntries" />
+        <xstream-annotation-class class-name="org.tinygroup.sdpm.dict.inter.DictNodeEntries"/>
     </xstream-annotation-classes>
 </xstream-configuration>

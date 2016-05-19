@@ -2,7 +2,6 @@ package org.tinygroup.sdpm.quality.biz.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.sdpm.quality.biz.inter.CaseStepManager;
 import org.tinygroup.sdpm.quality.dao.QualityCaseStepDao;
 import org.tinygroup.sdpm.quality.dao.pojo.QualityCaseStep;
@@ -10,7 +9,6 @@ import org.tinygroup.sdpm.quality.dao.pojo.QualityCaseStep;
 import java.util.List;
 
 @Service
-@Transactional
 public class CaseStepManagerImpl implements CaseStepManager {
     @Autowired
     private QualityCaseStepDao qualityCaseStepDao;

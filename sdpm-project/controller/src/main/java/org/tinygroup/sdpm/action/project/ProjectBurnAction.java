@@ -57,10 +57,6 @@ public class ProjectBurnAction extends BaseController {
         if (projectId == null) {
             return redirectProjectForm();
         }
-        if (projectId == null) {
-            addMessage(model, "请选择项目来生成燃尽图！");
-            return "project/operate/task/special/projectBurn";
-        }
         BurnDTO burnDTO = burnService.initBurn(projectId, interval);
         model.addAttribute("burn", burnDTO);
         model.addAttribute("interval", interval);

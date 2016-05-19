@@ -42,32 +42,32 @@ public class DocServiceImpl implements DocService {
     public Integer editDocLibName(DocumentDocLib docLib) {
         return docbiz.updtDocLib(docLib);
     }
-
+    @Transactional(readOnly = true)
     public DocumentDoc findDocById(Integer id) {
         return docbiz.getDocById(id);
     }
-
+    @Transactional(readOnly = true)
     public DocumentDocLib findDocLibById(Integer id) {
         return docbiz.getDocLibById(id);
     }
-
+    @Transactional(readOnly = true)
     public List<DocumentDoc> findDocList(DocumentDoc doc) {
         return docbiz.getDocList(doc);
     }
-
+    @Transactional(readOnly = true)
     public List<DocumentDocLib> findDocLibList(DocumentDocLib docLib) {
         return docbiz.getDoclibList(docLib);
     }
 
-
+    @Transactional(readOnly = true)
     public Pager<DocumentDoc> findDocRetProductPager(Integer start, Integer limit, DocumentDoc doc, Integer moduleId, SearchInfos conditions, String groupOperate, String sortName, boolean asc) {
         return docbiz.queryProductItemWithPage(start, limit, doc, moduleId, conditions, groupOperate, sortName, asc);
     }
-
+    @Transactional(readOnly = true)
     public Pager<DocumentDoc> findDocRetProjectPager(Integer start, Integer limit, DocumentDoc doc, Integer moduleId, SearchInfos conditions, String groupOperate, String sortName, boolean asc) {
         return docbiz.queryProjectItemWithPage(start, limit, doc, moduleId, conditions, groupOperate, sortName, asc);
     }
-
+    @Transactional(readOnly = true)
     public Pager<DocumentDoc> findDocRetPager(Integer start, Integer limit, DocumentDoc doc, Integer moduleId, SearchInfos conditions, String groupOperate, String sortName, boolean asc) {
         return docbiz.queryItemWithPage(start, limit, doc, moduleId, conditions, groupOperate, sortName, asc);
     }

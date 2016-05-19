@@ -143,7 +143,10 @@
         #end
         #@tr()
             #@td()相关需求#end
-            #@td() ${story?.storyLinkStories} #end
+            #@td()
+                #foreach(s:storyList)
+                    <a href="${TINY_CONTEXT_PATH + adminPath}/product/storySpec/find?storyId=${s?.storyId}">${s.storyTitle}</a><br>
+                #end
         #end
     #end
 #end

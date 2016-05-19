@@ -44,20 +44,20 @@
               isShow="1" scope="productLineView,productLine-right" icon="icon-plus-sign">
         </menu>
         <menu id="productLine-belongMe" parent-id="productLine-view" name="归我所属" href="/productLine/to?status=2"
-        sort="102"
-        isShow="1" scope="productLineView">
+              sort="102"
+              isShow="1" scope="productLineView">
         </menu>
         <menu id="productLine-chargeMe" parent-id="productLine-view" name="由我负责" href="/productLine/to?status=3"
-        sort="101"
-        isShow="1" scope="productLineView">
+              sort="101"
+              isShow="1" scope="productLineView">
         </menu>
         <menu id="productLine-deliveryMe" parent-id="productLine-view" name="由我交付" href="/productLine/to?status=4"
-        sort="100"
-        isShow="1" scope="productLineView">
+              sort="100"
+              isShow="1" scope="productLineView">
         </menu>
         <menu id="productLine-deleted" parent-id="productLine-view" name="已关闭" href="/productLine/to?status=5"
-          sort="99"
-          isShow="1" scope="productLineView">
+              sort="99"
+              isShow="1" scope="productLineView">
         </menu>
     </menu>
 </menu>

@@ -25,7 +25,6 @@ import org.tinygroup.jdbctemplatedslsession.daosupport.TinyDslDaoSupport;
 import org.tinygroup.sdpm.system.dao.SystemActionDao;
 import org.tinygroup.sdpm.system.dao.pojo.SystemAction;
 import org.tinygroup.tinysqldsl.*;
-import org.tinygroup.tinysqldsl.base.Alias;
 import org.tinygroup.tinysqldsl.base.Condition;
 import org.tinygroup.tinysqldsl.base.FragmentSql;
 import org.tinygroup.tinysqldsl.expression.JdbcNamedParameter;
@@ -355,24 +354,20 @@ public class SystemActionDaoImpl extends TinyDslDaoSupport implements SystemActi
 
     @Override
     public List<SystemAction> findActionListByIdListAndType(List<String> bugList, List<String> taskList, List<String> storyList) {
-        Alias objectName = new Alias("objectName");
-        QUALITY_BUGTABLE.BUG_TITLE.setAlias(objectName);
-        PROJECT_TASKTABLE.TASK_NAME.setAlias(objectName);
-        PRODUCT_STORYTABLE.STORY_TITLE.setAlias(objectName);
         //union all 三个不同的type   bug+task+story
-        ComplexSelect complexSelect = ComplexSelect.unionAll(select(SYSTEM_ACTIONTABLE.ALL, QUALITY_BUGTABLE.BUG_TITLE)
+        ComplexSelect complexSelect = ComplexSelect.unionAll(select(SYSTEM_ACTIONTABLE.ALL, QUALITY_BUGTABLE.BUG_TITLE.as("objectName"))
                         .from(SYSTEM_ACTIONTABLE, QUALITY_BUGTABLE).where(and(
                         SYSTEM_ACTIONTABLE.ACTION_OBJECT_ID.eq(QUALITY_BUGTABLE.BUG_ID),
                         SYSTEM_ACTIONTABLE.ACTION_OBJECT_TYPE.in("bug"),
                         SYSTEM_ACTIONTABLE.ACTION_OBJECT_ID.in(bugList.toArray())
                         )),
-                select(SYSTEM_ACTIONTABLE.ALL, PROJECT_TASKTABLE.TASK_NAME)
+                select(SYSTEM_ACTIONTABLE.ALL, PROJECT_TASKTABLE.TASK_NAME.as("objectName"))
                         .from(SYSTEM_ACTIONTABLE, PROJECT_TASKTABLE, ORG_USERTABLE).where(and(
                         SYSTEM_ACTIONTABLE.ACTION_OBJECT_ID.eq(PROJECT_TASKTABLE.TASK_ID),
                         SYSTEM_ACTIONTABLE.ACTION_OBJECT_TYPE.eq("task"),
                         SYSTEM_ACTIONTABLE.ACTION_OBJECT_ID.in(taskList.toArray())
                 )),
-                select(SYSTEM_ACTIONTABLE.ALL, PRODUCT_STORYTABLE.STORY_TITLE)
+                select(SYSTEM_ACTIONTABLE.ALL, PRODUCT_STORYTABLE.STORY_TITLE.as("objectName"))
                         .from(SYSTEM_ACTIONTABLE, PRODUCT_STORYTABLE, ORG_USERTABLE).where(and(
                         SYSTEM_ACTIONTABLE.ACTION_OBJECT_ID.eq(PRODUCT_STORYTABLE.STORY_ID),
                         SYSTEM_ACTIONTABLE.ACTION_OBJECT_TYPE.eq("story"),
@@ -384,9 +379,7 @@ public class SystemActionDaoImpl extends TinyDslDaoSupport implements SystemActi
 
     @Override
     public List<SystemAction> findBugByBugList(List<Integer> bugs) {
-        Alias objectName = new Alias("objectName");
-        QUALITY_BUGTABLE.BUG_TITLE.setAlias(objectName);
-        Select select = Select.select(SYSTEM_ACTIONTABLE.ALL, QUALITY_BUGTABLE.BUG_TITLE)
+        Select select = Select.select(SYSTEM_ACTIONTABLE.ALL, QUALITY_BUGTABLE.BUG_TITLE.as("objectName"))
                 .from(SYSTEM_ACTIONTABLE, QUALITY_BUGTABLE).where(and(
                         SYSTEM_ACTIONTABLE.ACTION_OBJECT_ID.eq(QUALITY_BUGTABLE.BUG_ID),
                         SYSTEM_ACTIONTABLE.ACTION_OBJECT_TYPE.in("bug"),
@@ -397,9 +390,7 @@ public class SystemActionDaoImpl extends TinyDslDaoSupport implements SystemActi
 
     @Override
     public List<SystemAction> findStoryByStoryList(List<Integer> stories) {
-        Alias objectName = new Alias("objectName");
-        PRODUCT_STORYTABLE.STORY_TITLE.setAlias(objectName);
-        Select select = Select.select(SYSTEM_ACTIONTABLE.ALL, PRODUCT_STORYTABLE.STORY_TITLE)
+        Select select = Select.select(SYSTEM_ACTIONTABLE.ALL, PRODUCT_STORYTABLE.STORY_TITLE.as("objectName"))
                 .from(SYSTEM_ACTIONTABLE, PRODUCT_STORYTABLE).where(and(
                         SYSTEM_ACTIONTABLE.ACTION_OBJECT_ID.eq(PRODUCT_STORYTABLE.STORY_ID),
                         SYSTEM_ACTIONTABLE.ACTION_OBJECT_TYPE.eq("story"),
@@ -410,9 +401,7 @@ public class SystemActionDaoImpl extends TinyDslDaoSupport implements SystemActi
 
     @Override
     public List<SystemAction> findTaskByTaskList(List<Integer> tasks) {
-        Alias objectName = new Alias("objectName");
-        PROJECT_TASKTABLE.TASK_NAME.setAlias(objectName);
-        Select select = Select.select(SYSTEM_ACTIONTABLE.ALL, PROJECT_TASKTABLE.TASK_NAME)
+        Select select = Select.select(SYSTEM_ACTIONTABLE.ALL, PROJECT_TASKTABLE.TASK_NAME.as("objectName"))
                 .from(SYSTEM_ACTIONTABLE, PROJECT_TASKTABLE).where(and(
                         SYSTEM_ACTIONTABLE.ACTION_OBJECT_ID.eq(PROJECT_TASKTABLE.TASK_ID),
                         SYSTEM_ACTIONTABLE.ACTION_OBJECT_TYPE.eq("task"),
@@ -423,14 +412,8 @@ public class SystemActionDaoImpl extends TinyDslDaoSupport implements SystemActi
 
     @Override
     public List<SystemAction> findActionListByUserIdAndDate(String userId, Date beginDate, Date endDate) {
-        Alias objectName = new Alias("objectName");
-        QUALITY_BUGTABLE.BUG_TITLE.setAlias(objectName);
-        PROJECT_TASKTABLE.TASK_NAME.setAlias(objectName);
-        PRODUCT_STORYTABLE.STORY_TITLE.setAlias(objectName);
-        Alias actorName = new Alias("actorName");
-        ORG_USERTABLE.ORG_USER_ACCOUNT.setAlias(actorName);
         //union all 三个不同的type   bug+task+story+case+release
-        ComplexSelect complexSelect = ComplexSelect.unionAll(select(SYSTEM_ACTIONTABLE.ALL, QUALITY_BUGTABLE.BUG_TITLE, ORG_USERTABLE.ORG_USER_REAL_NAME)
+        ComplexSelect complexSelect = ComplexSelect.unionAll(select(SYSTEM_ACTIONTABLE.ALL, QUALITY_BUGTABLE.BUG_TITLE.as("objectName"), ORG_USERTABLE.ORG_USER_REAL_NAME)
                         .from(SYSTEM_ACTIONTABLE, QUALITY_BUGTABLE, ORG_USERTABLE).where(and(
                         SYSTEM_ACTIONTABLE.ACTION_OBJECT_ID.eq(QUALITY_BUGTABLE.BUG_ID),
                         SYSTEM_ACTIONTABLE.ACTION_OBJECT_TYPE.eq("bug"),
@@ -439,7 +422,7 @@ public class SystemActionDaoImpl extends TinyDslDaoSupport implements SystemActi
                         ORG_USERTABLE.ORG_USER_ID.eq(userId),
                         SYSTEM_ACTIONTABLE.ACTION_DATE.between(beginDate, endDate)
                         )),
-                select(SYSTEM_ACTIONTABLE.ALL, PROJECT_TASKTABLE.TASK_NAME, ORG_USERTABLE.ORG_USER_REAL_NAME)
+                select(SYSTEM_ACTIONTABLE.ALL, PROJECT_TASKTABLE.TASK_NAME.as("objectName"), ORG_USERTABLE.ORG_USER_REAL_NAME)
                         .from(SYSTEM_ACTIONTABLE, PROJECT_TASKTABLE, ORG_USERTABLE).where(and(
                         SYSTEM_ACTIONTABLE.ACTION_OBJECT_ID.eq(PROJECT_TASKTABLE.TASK_ID),
                         SYSTEM_ACTIONTABLE.ACTION_OBJECT_TYPE.eq("task"),
@@ -448,7 +431,7 @@ public class SystemActionDaoImpl extends TinyDslDaoSupport implements SystemActi
                         ORG_USERTABLE.ORG_USER_ID.eq(userId),
                         SYSTEM_ACTIONTABLE.ACTION_DATE.between(beginDate, endDate)
                 )),
-                select(SYSTEM_ACTIONTABLE.ALL, PRODUCT_STORYTABLE.STORY_TITLE, ORG_USERTABLE.ORG_USER_REAL_NAME)
+                select(SYSTEM_ACTIONTABLE.ALL, PRODUCT_STORYTABLE.STORY_TITLE.as("objectName"), ORG_USERTABLE.ORG_USER_REAL_NAME)
                         .from(SYSTEM_ACTIONTABLE, PRODUCT_STORYTABLE, ORG_USERTABLE).where(and(
                         SYSTEM_ACTIONTABLE.ACTION_OBJECT_ID.eq(PRODUCT_STORYTABLE.STORY_ID),
                         SYSTEM_ACTIONTABLE.ACTION_OBJECT_TYPE.eq("story"),
@@ -483,7 +466,7 @@ public class SystemActionDaoImpl extends TinyDslDaoSupport implements SystemActi
                         SYSTEM_ACTIONTABLE.ACTION_OBJECT_ID.eq(DOCUMENT_DOCTABLE.DOC_ID),
                         SYSTEM_ACTIONTABLE.ACTION_OBJECT_TYPE.eq("doc"),
                         SYSTEM_ACTIONTABLE.ACTION_ACTOR.eq(ORG_USERTABLE.ORG_USER_ID),
-                        SYSTEM_ACTIONTABLE.ACTION_ACTION.in("created","edited","opened"),
+                        SYSTEM_ACTIONTABLE.ACTION_ACTION.in("created", "edited", "opened"),
                         ORG_USERTABLE.ORG_USER_ID.eq(userId),
                         SYSTEM_ACTIONTABLE.ACTION_DATE.between(beginDate, endDate)
                 ))
@@ -493,9 +476,7 @@ public class SystemActionDaoImpl extends TinyDslDaoSupport implements SystemActi
 
     @Override
     public List<SystemAction> findCaseByCaseList(List<Integer> cases) {
-        Alias objectName = new Alias("objectName");
-        QUALITY_TEST_CASETABLE.CASE_TITLE.setAlias(objectName);
-        Select select = Select.select(SYSTEM_ACTIONTABLE.ALL, QUALITY_TEST_CASETABLE.CASE_TITLE)
+        Select select = Select.select(SYSTEM_ACTIONTABLE.ALL, QUALITY_TEST_CASETABLE.CASE_TITLE.as("objectName"))
                 .from(SYSTEM_ACTIONTABLE, QUALITY_TEST_CASETABLE).where(and(
                         SYSTEM_ACTIONTABLE.ACTION_OBJECT_ID.eq(QUALITY_TEST_CASETABLE.CASE_ID),
                         SYSTEM_ACTIONTABLE.ACTION_OBJECT_TYPE.eq("case"),
@@ -506,9 +487,7 @@ public class SystemActionDaoImpl extends TinyDslDaoSupport implements SystemActi
 
     @Override
     public List<SystemAction> findReleaseByReleaseList(List<Integer> releases) {
-        Alias objectName = new Alias("objectName");
-        PRODUCT_RELEASETABLE.RELEASE_NAME.setAlias(objectName);
-        Select select = Select.select(SYSTEM_ACTIONTABLE.ALL, PRODUCT_RELEASETABLE.RELEASE_NAME)
+        Select select = Select.select(SYSTEM_ACTIONTABLE.ALL, PRODUCT_RELEASETABLE.RELEASE_NAME.as("objectName"))
                 .from(SYSTEM_ACTIONTABLE, PRODUCT_RELEASETABLE).where(and(
                         SYSTEM_ACTIONTABLE.ACTION_OBJECT_ID.eq(PRODUCT_RELEASETABLE.RELEASE_ID),
                         SYSTEM_ACTIONTABLE.ACTION_OBJECT_TYPE.eq("release"),
@@ -519,9 +498,7 @@ public class SystemActionDaoImpl extends TinyDslDaoSupport implements SystemActi
 
     @Override
     public List<SystemAction> findDocByCaseList(List<Integer> docs) {
-        Alias objectName = new Alias("objectName");
-        DOCUMENT_DOCTABLE.DOC_TITLE.setAlias(objectName);
-        Select select = Select.select(SYSTEM_ACTIONTABLE.ALL, DOCUMENT_DOCTABLE.DOC_TITLE)
+        Select select = Select.select(SYSTEM_ACTIONTABLE.ALL, DOCUMENT_DOCTABLE.DOC_TITLE.as("objectName"))
                 .from(SYSTEM_ACTIONTABLE, DOCUMENT_DOCTABLE).where(and(
                         SYSTEM_ACTIONTABLE.ACTION_OBJECT_ID.eq(DOCUMENT_DOCTABLE.DOC_ID),
                         SYSTEM_ACTIONTABLE.ACTION_OBJECT_TYPE.eq("doc"),

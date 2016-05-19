@@ -2,6 +2,7 @@ package org.tinygroup.sdpm.system.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.commons.tools.ArrayUtil;
 import org.tinygroup.sdpm.system.biz.inter.ProfileManager;
 import org.tinygroup.sdpm.system.dao.pojo.SystemProfile;
@@ -10,6 +11,7 @@ import org.tinygroup.sdpm.system.service.inter.ProfileService;
 import java.util.List;
 
 @Component
+@Transactional
 public class ProfileServiceImpl implements ProfileService {
     @Autowired
     private ProfileManager profileManager;
@@ -29,7 +31,7 @@ public class ProfileServiceImpl implements ProfileService {
     public Integer batchUpdateSystemProfile(List<SystemProfile> list) {
         return profileManager.batchUpdateSystemProfile(list);
     }
-
+    @Transactional(readOnly = true)
     public List<SystemProfile> findSystemProfile(SystemProfile systemProfile) {
         return profileManager.find(systemProfile);
     }
@@ -49,7 +51,7 @@ public class ProfileServiceImpl implements ProfileService {
     public Integer softDeleteSystemProfile(Integer id) {
         return profileManager.softDelete(id);
     }
-
+    @Transactional(readOnly = true)
     public SystemProfile findSystemProfileById(Integer id) {
         return profileManager.findById(id);
     }

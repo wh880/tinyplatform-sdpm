@@ -24,6 +24,10 @@ public class IdGen {
      * 使用SecureRandom随机生成Long.
      */
     public static long randomLong() {
-        return Math.abs(random.nextLong());
+        long temp = random.nextLong();
+        if(temp == Long.MIN_VALUE){
+            temp++;
+        }
+        return Math.abs(temp);
     }
 }

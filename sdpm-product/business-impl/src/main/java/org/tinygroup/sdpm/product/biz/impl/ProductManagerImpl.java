@@ -2,7 +2,6 @@ package org.tinygroup.sdpm.product.biz.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.commons.tools.StringUtil;
 import org.tinygroup.jdbctemplatedslsession.daosupport.OrderBy;
 import org.tinygroup.sdpm.common.util.common.NameUtil;
@@ -30,7 +29,6 @@ import java.util.Arrays;
 import java.util.List;
 
 @Service
-@Transactional
 public class ProductManagerImpl implements ProductManager {
 
     @Autowired

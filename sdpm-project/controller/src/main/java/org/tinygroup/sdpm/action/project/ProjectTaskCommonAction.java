@@ -108,7 +108,8 @@ public class ProjectTaskCommonAction extends BaseController {
             }
             //进度
             float comp;
-            if ((t.getTaskConsumed() == null || t.getTaskLeft() == null) || (t.getTaskConsumed() + t.getTaskLeft() == 0)) {
+            Float temp = t.getTaskConsumed() + t.getTaskLeft();
+            if ((t.getTaskConsumed() == null || t.getTaskLeft() == null) || temp.compareTo(new Float(0))==0) {
                 comp = 0f;
             } else {
                 comp = t.getTaskConsumed() / (t.getTaskConsumed() + t.getTaskLeft());

@@ -17,7 +17,6 @@ package org.tinygroup.sdpm.org.biz.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.tinygroup.commons.tools.ArrayUtil;
 import org.tinygroup.sdpm.org.biz.inter.RoleMenuManager;
 import org.tinygroup.sdpm.org.dao.OrgRoleMenuDao;
@@ -27,7 +26,6 @@ import java.util.List;
 
 
 @Service
-@Transactional
 public class RoleMenuManagerImpl implements RoleMenuManager {
     @Autowired
     private OrgRoleMenuDao orgRoleMenuDao;

@@ -27,7 +27,6 @@ import java.util.List;
 /**
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
- *
  * @generated
  */
 public interface OrgDiaryDao extends BaseDao<OrgDiary, Integer> {

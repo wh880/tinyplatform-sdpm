@@ -18,7 +18,7 @@ import java.util.Map.Entry;
 public class Servlets {
 
     // -- 常用数值定义 --//
-    public static final long ONE_YEAR_SECONDS = 60 * 60 * 24 * 365;
+    public static final long ONE_YEAR_SECONDS = 60L * 60 * 24 * 365;
 
     /**
      * 设置客户端缓存过期时间 的Header.
@@ -194,9 +194,11 @@ public class Servlets {
         String remoteAddr = request.getHeader("X-Real-IP");
         if (StringUtil.isBlank(remoteAddr)) {
             remoteAddr = request.getHeader("X-Forwarded-For");
-        } else if (StringUtil.isBlank(remoteAddr)) {
+        }
+        if (StringUtil.isBlank(remoteAddr)) {
             remoteAddr = request.getHeader("Proxy-Client-IP");
-        } else if (StringUtil.isBlank(remoteAddr)) {
+        }
+        if (StringUtil.isBlank(remoteAddr)) {
             remoteAddr = request.getHeader("WL-Proxy-Client-IP");
         }
         return remoteAddr != null ? remoteAddr : request.getRemoteAddr();
