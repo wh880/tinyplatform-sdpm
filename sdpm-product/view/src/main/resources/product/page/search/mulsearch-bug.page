@@ -15,83 +15,35 @@
             <option value="notinclude">不包含</option>
             <option value="belong">从属于</option>
         </select>
-        <select id="usertemp">
-            <option value="" selected="selected"></option>
-            <option value="admin">A:admin</option>
-            <option value="demo">D:Demo</option>
-            <option value="dev1">D:开发甲</option>
-            <option value="dev2">D:开发乙</option>
-            <option value="dev3">D:开发丙</option>
-            <option value="productManager">P:产品经理</option>
-            <option value="projectManager">P:项目经理</option>
-            <option value="tester1">T:测试甲</option>
-            <option value="tester2">T:测试乙</option>
-            <option value="tester3">T:测试丙</option>
-            <option value="testManager">T:测试经理</option>
-            <option value="closed">Closed</option>
-            <option value="$@me">自己</option>
-            <option value="null">空</option>
-        </select>
-        <select id="pritemp">
+        <select id="bugPrioritymp">
             <option value=""></option>
-            <option value="3">3</option>
-            <option value="1">1</option>
-            <option value="44">44</option>
-            <option value="2">2</option>
-            <option value="4">4</option>
-            <option value="null">空</option>
+            #for(p : getDict("bugPriority"))
+            <option value="${p.value}">${p.text}</option>
+        #end
         </select>
-        <select id="statustemp">
-            <option value="" selected="selected"></option>
-            <option value="wait">未开始</option>
-            <option value="doing">进行中</option>
-            <option value="done">已完成</option>
-            <option value="pause">已暂停</option>
-            <option value="cancel">已取消</option>
-            <option value="closed">已关闭</option>
-            <option value="null">空</option>
+        <select id="bugSeveritymp">
+            <option value=""></option>
+            #for(p : getDict("bugSeverity"))
+            <option value="${p.value}">${p.text}</option>
+        #end
         </select>
-        <select id="contemp">
-            <option value="" selected="selected"></option>
-            <option value="unconfirmed">未确认</option>
-            <option value="confirmed">已确认</option>
+        <select id="bugTypemp">
+            <option value=""></option>
+            #for(p : getDict("bugType"))
+            <option value="${p.value}">${p.text}</option>
+        #end
         </select>
-        <select id="bugtypetemp">
-            <option value="" selected="selected"></option>
-            <option value="codeerror">代码错误</option>
-            <option value="uiimprove">界面优化</option>
-            <option value="done">设计变更</option>
-            <option value="designchange">新增需求</option>
-            <option value="designflaw">设计缺陷</option>
-            <option value="closed">配置相关</option>
-            <option value="conrelated">安装部署</option>
-            <option value="saferelated">安全相关</option>
-            <option value="perissues">性能问题</option>
-            <option value="standard">标准规范</option>
-            <option value="testscript">测试脚本</option>
-            <option value="tracking">事务跟踪</option>
-            <option value="codeimprove">代码改进</option>
-            <option value="others">其他</option>
-            <option value="null">空</option>
+        <select id="bugStatusmp">
+            <option value=""></option>
+            #for(p : getDict("bugStatus"))
+            <option value="${p.value}">${p.text}</option>
+        #end
         </select>
-        <select id="wintemp">
-            <option value="" selected="selected"></option>
-            <option value="Windows">Windows</option>
-            <option value="Windows 8">Windows 8</option>
-            <option value="Windows 7">Windows 7</option>
-            <option value="Windows Vista">Windows Vista</option>
-            <option value="Windows XP">Windows XP</option>
-            <option value="Windows 2012">Windows 2012</option>
-            <option value="Windows 2008">Windows 2008</option>
-            <option value="Windows 2003">Windows 2003</option>
-            <option value="Windows 2000">Windows 2000</option>
-            <option value="Android">Android</option>
-            <option value="IOS">IOS</option>
-            <option value="WP8">WP8</option>
-            <option value="Linux">Linux</option>
-            <option value="Unix">Unix</option>
-            <option value="others">其他</option>
-            <option value="null">空</option>
+        <select id="usermp">
+            <option value=""></option>
+            #for(u : userList)
+            <option value="${u?.orgUserId}">${u?.orgUserRealName}</option>
+        #end
         </select>
 
 
@@ -184,9 +136,8 @@
             </td>
             <td class="w-180px">
                 <div class="btn-group">
-                    <button type="submit" class="btn btn-submit btn-primary btn-sm">搜索</button>
-                #*   <button type="button" onclick="resetForm(this)" class="btn btn-sm">重置</button>
-                   <button type="button" onclick="resetForm(this)" class="btn btn-sm">保存</button>*#
+                   <button type="submit" class="btn btn-submit btn-primary btn-sm">搜索</button>
+                   <button type="button" onclick="resetForm(this)" class="btn btn-sm">重置</button>
                 </div>
             </td>
             <td>
@@ -230,207 +181,158 @@
         });
         var itemlist=[]
         itemlist.push({
-            "name":"bugTitle",
-            "title":"Bug标题",
-            "operator":"include",
-            "value":"text"
+            "name": "bugTitle",
+            "title": "bug标题",
+            "operator": "include",
+            "operatorList":[
+                {key:"include",val:"包含"},
+                {key:"notinclude",val:"不包含"},
+                {key:"=",val:"="},
+                {key:"!=",val:"!="}
+            ],
+            "value": "text"
         });
         itemlist.push({
-            "name":"bugId",
-            "title":"Bug编号",
-            "operator":"=",
-            "value":"text"
+            "name": "bugKeywords",
+            "title": "关键词",
+            "operator": "include",
+            "operatorList":[
+                {key:"include",val:"包含"},
+                {key:"notinclude",val:"不包含"},
+                {key:"=",val:"="},
+                {key:"!=",val:"!="}
+            ],
+            "value": "text"
         });
         itemlist.push({
-            "name":"bugKeywords",
-            "title":"关键词",
-            "operator":"include",
-            "value":"text"
+            "name": "bugSeverity",
+            "title": "严重程度",
+            "operator": "=",
+            "operatorList":[
+                {key:"=",val:"="},
+                {key:"!=",val:"!="}
+            ],
+            "value": "bugSeverity"
         });
         itemlist.push({
-            "name":"bugSteps",
-            "title":"重现步骤",
-            "operator":"include",
-            "value":"text"
+            "name": "priority",
+            "title": "优先级",
+            "operator": "=",
+            "operatorList":[
+                {key:"=",val:"="},
+                {key:"!=",val:"!="}
+            ],
+            "value": "bugPriority"
         });
         itemlist.push({
-            "name":"bugAssignedTo",
-            "title":"指派给",
-            "operator":"=",
-            "value":"user"
+            "name": "bugType",
+            "title": "类型",
+            "operator": "=",
+            "operatorList":[
+                {key:"=",val:"="},
+                {key:"!=",val:"!="}
+            ],
+            "value": "bugType"
         });
         itemlist.push({
-            "name":"bugResolvedBy",
-            "title":"解决者",
-            "operator":"=",
-            "value":"user"
+            "name": "bugStatus",
+            "title": "状态",
+            "operator": "=",
+            "operatorList":[
+                {key:"=",val:"="},
+                {key:"!=",val:"!="}
+            ],
+            "value": "bugStatus"
         });
         itemlist.push({
-            "name":"bugStatus",
-            "title":"Bug状态",
-            "operator":"=",
-            "value":"status"
+            "name": "bugOpenedBy",
+            "title": "创建人",
+            "operator": "=",
+            "operatorList":[
+                {key:"=",val:"="},
+                {key:"!=",val:"!="}
+            ],
+            "value": "user"
         });
         itemlist.push({
-            "name":"bugConfirmed",
-            "title":"是否确认",
-            "operator":"=",
-            "value":"con"
+            "name": "bugOpenedDate",
+            "title": "预计工时",
+            "operator": "=",
+            "operatorList":[
+                {key:"&gt;",val:"&gt;"},
+                {key:"&gt;=",val:"&gt;="},
+                {key:"&lt;",val:"&lt;"},
+                {key:"&lt;=",val:"&lt;="},
+                {key:"=",val:"="},
+                {key:"!=",val:"!="}
+            ],
+            "value": "text"
         });
         itemlist.push({
-            "name":"moduleId",
-            "title":"所属模块",
-            "operator":"=",
-            "value":"text"
+            "name": "bugAssignedTo",
+            "title": "指派",
+            "operator": "=",
+            "operatorList":[
+                {key:"=",val:"="},
+                {key:"!=",val:"!="}
+            ],
+            "value": "user"
         });
         itemlist.push({
-            "name":"projectId",
-            "title":"所属迭代",
-            "operator":"=",
-            "value":"text"
+            "name": "bugClosedBy",
+            "title": "关闭人",
+            "operator": "=",
+            "operatorList":[
+                {key:"=",val:"="},
+                {key:"!=",val:"!="}
+            ],
+            "value": "user"
         });
         itemlist.push({
-            "name":"bugSeverity",
-            "title":"严重程度",
-            "operator":"=",
-            "value":"pri"
-        });
-        itemlist.push({
-            "name":"priority",
-            "title":"优先级",
-            "operator":"=",
-            "value":"pri"
-        });
-        itemlist.push({
-            "name":"bugType",
-            "title":"Bug类型",
-            "operator":"=",
-            "value":"bugtype"
-        });
-        itemlist.push({
-            "name":"operatingSystem",
-            "title":"操作系统",
-            "operator":"=",
-            "value":"win"
-        });
-        itemlist.push({
-            "name":"browser",
-            "title":"浏览器",
-            "operator":"=",
-            "value":"text"
-        });
-        itemlist.push({
-            "name":"bugResolution",
-            "title":"解决方案",
-            "operator":"=",
-            "value":"text"
-        });
-        itemlist.push({
-            "name":"bugActivatedCount",
-            "title":"激活次数",
-            "operator":">=",
-            "value":"text"
-        });
-        itemlist.push({
-            "name":"toTaskId",
-            "title":"转任务",
-            "operator":"=",
-            "value":"text"
-        });
-        itemlist.push({
-            "name":"toStoryId",
-            "title":"转需求",
-            "operator":"=",
-            "value":"text"
-        });
-        itemlist.push({
-            "name":"bugOpenedBy",
-            "title":"由谁创建",
-            "operator":"=",
-            "value":"user"
-        });
-        itemlist.push({
-            "name":"bugClosedBy",
-            "title":"由谁关闭",
-            "operator":"=",
-            "value":"user"
-        });
-        itemlist.push({
-            "name":"bugLastEditedBy",
-            "title":"最后修改者",
-            "operator":"=",
-            "value":"user"
-        });
-        itemlist.push({
-            "name":"bugMailto",
-            "title":"抄送给",
-            "operator":"=",
-            "value":"user"
-        });
-        itemlist.push({
-            "name":"bugOpenedBuild",
-            "title":"影响版本",
-            "operator":"=",
-            "value":"text"
-        });
-        itemlist.push({
-            "name":"bugResolvedBuild",
-            "title":"解决版本",
-            "operator":"=",
-            "value":"text"
-        });
-        itemlist.push({
-            "name":"bugOpenedDate",
-            "title":"创建日期",
-            "operator":"=",
-            "value":"date"
-        });
-        itemlist.push({
-            "name":"bugAssignedDate",
-            "title":"指派日期",
-            "operator":"=",
-            "value":"date"
-        });
-        itemlist.push({
-            "name":"bugClosedDate",
-            "title":"关闭日期",
-            "operator":"=",
-            "value":"date"
-        });itemlist.push({
-            "name":"bugLastEditedDate",
-            "title":"最后修改日期",
-            "operator":"=",
-            "value":"date"
+            "name": "bugClosedDate",
+            "title": "关闭日期",
+            "operator": "=",
+            "operatorList":[
+                {key:"&gt;",val:"&gt;"},
+                {key:"&gt;=",val:"&gt;="},
+                {key:"&lt;",val:"&lt;"},
+                {key:"&lt;=",val:"&lt;="},
+                {key:"=",val:"="},
+                {key:"!=",val:"!="}
+            ],
+            "value": "date"
         });
 
 
         function setValueBox(index,itemIndex){
+            $("#operator" + itemIndex).empty();
+            for(var i= 0,l=itemlist[index]["operatorList"].length;i<l;i++){
+
+                $("#operator" + itemIndex).append("<option value='"+itemlist[index]["operatorList"][i].key+"'>"+itemlist[index]["operatorList"][i].val+"</option>")
+            }
             $("#operator"+itemIndex).val(itemlist[index]["operator"]);
             var sIndex = itemIndex-1;
             switch(itemlist[index]["value"]){
                 case "text":
-                    $("#valueBox"+itemIndex).html('<input type="text" name="infos['+sIndex+'].value" id="value'+itemIndex+'" value="" class="form-control">');
+                    $("#valueBox" + itemIndex).html('<input type="text" name="infos[' + sIndex + '].value" id="value' + itemIndex + '" value="" class="form-control">');
+                    break;
+                case "bugPriority":
+                    $("#valueBox" + itemIndex).html($('<select name="infos[' + sIndex + '].value" id="value' + itemIndex + '" class="form-control">').html($("#bugPrioritymp").html()));
+                    break;
+                case "bugSeverity":
+                    $("#valueBox" + itemIndex).html($('<select name="infos[' + sIndex + '].value" id="value' + itemIndex + '" class="form-control">').html($("#bugSeveritymp").html()));
+                    break;
+                case "bugType":
+                    $("#valueBox" + itemIndex).html($('<select name="infos[' + sIndex + '].value" id="value' + itemIndex + '" class="form-control">').html($("#bugTypemp").html()));
+                    break;
+                case "bugStatus":
+                    $("#valueBox" + itemIndex).html($('<select name="infos[' + sIndex + '].value" id="value' + itemIndex + '" class="form-control">').html($("#bugStatusmp").html()));
                     break;
                 case "user":
-                    $("#valueBox"+itemIndex).html($('<select name="infos['+sIndex+'].value" id="value'+itemIndex+'" class="form-control">').html($("#usertemp").html()));
-                    break;
-                case "pri":
-                    $("#valueBox"+itemIndex).html($('<select name="infos['+sIndex+'].value" id="value'+itemIndex+'" class="form-control">').html($("#pritemp").html()));
-                    break;
-                case "status":
-                    $("#valueBox"+itemIndex).html($('<select name="infos['+sIndex+'].value" id="value'+itemIndex+'" class="form-control">').html($("#statustemp").html()));
+                    $("#valueBox" + itemIndex).html($('<select name="infos[' + sIndex + '].value" id="value' + itemIndex + '" class="form-control">').html($("#usermp").html()));
                     break;
                 case "date":
-                    $("#valueBox"+itemIndex).html('<input type="text" name="infos['+sIndex+'].value" id="value'+itemIndex+'" value="" class="form-control dateinput">');
-                    break;
-                case "win":
-                    $("#valueBox"+itemIndex).html($('<select name="infos['+sIndex+'].value" id="value'+itemIndex+'" class="form-control">').html($("#wintemp").html()));
-                    break;
-                case "bugtype":
-                    $("#valueBox"+itemIndex).html($('<select name="infos['+sIndex+'].value" id="value'+itemIndex+'" class="form-control">').html($("#bugtypetemp").html()));
-                    break;
-                case "con":
-                    $("#valueBox"+itemIndex).html($('<select name="infos['+sIndex+'].value" id="value'+itemIndex+'" class="form-control">').html($("#contemp").html()));
+                    $("#valueBox" + itemIndex).html('<input type="text" name="infos[' + sIndex + '].value" id="value' + itemIndex + '" value="" class="form-control dateinput">');
                     break;
             }
         }
@@ -461,6 +363,7 @@
         });
 
         $("#${bugTableId}form").on("submit",function(){
+            $(".choose").removeClass("active_btn");
             $("#${bugTableId}").trigger("initnav");
             return false;
 

@@ -301,7 +301,10 @@ public class ProjectBuildAction extends BaseController {
         model.addAttribute("orgUsers", orgUsers);
 
         ProjectBuild build = buildService.findBuild(buildId);
-
+        OrgUser user = new OrgUser();
+        user.setOrgUserDeleted("0");
+        List<OrgUser> users = userService.findUserList(user);
+        model.addAttribute("userList", users);
         if(build.getBuildProject()!=Integer.parseInt(currentProjectId))
         {
             return "redirect:"+adminPath+"/project/build/index";
