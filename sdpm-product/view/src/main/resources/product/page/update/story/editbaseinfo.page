@@ -169,7 +169,7 @@
                            placeholder=""
                            aria-describedby="basic-addon2">*#
                        #tinyInput("text" "storyEstimate" story?.storyEstimate {"placeholder":"","datatype":
-                           "/^([0-9]+(\.?[0-9]{0,2}))?$/","aria-describedby":"basic-addon2"})
+                           "/^([0-9]+(\.?[0-9]{1,2}))?$/","aria-describedby":"basic-addon2"})
                     <span class="input-group-addon" id="basic-addon2">小时</span>
                 </div>
             #end
@@ -233,7 +233,8 @@
                 #@colLabel()指派给：#end
                 #@formControlDiv("col-8")
                     #@Tselect2F()
-                        #Tselect2Ajax("storyAssignedTo" story?.storyAssignedTo TINY_CONTEXT_PATH+adminPath+"/org/user/ajax/userInConditionAndTeam"
+                        #Tselect2Ajax("storyAssignedTo" story?.storyAssignedTo TINY_CONTEXT_PATH+adminPath+
+                            "/org/user/ajax/userInConditionAndTeam?productId="+story?.productId
                         {"id":"reviewedSelect","dataId":"orgUserId","dataText":"orgUserRealName","placeholder":"查询指派人"})
                         #@Tselect2Fix()
                             #set(m=menuService.getMenu("product-team-report"))
