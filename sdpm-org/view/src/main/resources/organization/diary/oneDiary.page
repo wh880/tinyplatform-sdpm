@@ -90,6 +90,7 @@
     $(function () {
         $("form[name=thisform]").Validform({
             beforeSubmit: function (curform) {
+                $("#submit2").attr("disabled","disabled");
                 var checks = document.getElementsByName("idCheck");
                 var mes = "";
                 for (var i = 0; i < checks.length; i++) {
