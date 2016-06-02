@@ -32,8 +32,12 @@
         <application-processor bean="tinyListenerProcessor"/>
         <!--<application-processor bean="fileMonitorProcessor"/>-->
         <application-processor bean="tinyTemplateConfigProcessor"/>
-        <!--数据库安装
-        <application-processor bean="databaseInstallerProcessor"/>-->
+        <!--session失效监控处理器，内部有后台线程监控session的状态，失效时间设置在session节点backgroundProcessorDelay属性，默认为60秒 -->
+        <!-- 需要依赖org.tinygroup.weblayer -->
+        <application-processor bean="sessionMonitorApplicationProcessor"/>
+
+        <!--数据库安装-->
+        <application-processor bean="databaseInstallerProcessor"/>
         <!--系统数据初始化-->
         <application-processor bean="initDataApplicationProcessor"/>
         <application-processor bean="stdProcessor"/>
@@ -411,7 +415,9 @@
             </substitution> <handlers> <rewrite-handler bean-name="urlNormalizer" />
             </handlers> </rule> -->
     </rewrite>
-    <session>
+    <session maxInactiveInterval="3600" forceExpirationPeriod="0"
+             keepInTouch="true" backgroundProcessorDelay="10"
+             sessionManagerBeanId="cacheSessionManager">
         <id cookieEnabled="true" urlEncodeEnabled="false">
             <cookie path="/" name="tinyjsessionid"></cookie>
             <url-encode name="tinyjsessionid"></url-encode>
