@@ -22,7 +22,7 @@ public class ExceptionInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest httpServletRequest,
                              HttpServletResponse httpServletResponse,
                              Object o) throws Exception {
-        return false;
+        return true;
     }
 
     @Override

@@ -77,18 +77,4 @@
     <table-field standard-field-id="13a94f229214469bb423e60c807c85ae" primary="false" unique="false" not-null="true" id="history_old" auto-increase="false"/>
     <table-field standard-field-id="8e46079f520c494f94c3d3c70e42d9fb" primary="false" unique="false" not-null="false" id="history_diff" auto-increase="false"/>
   </table>
-  <table id="7b3d0ef2306749a79a47e07dd0e3d435" name="system_action" title="系统日志表">
-    <table-field standard-field-id="51b35d0098cc46e4ae14e922f78269f6" primary="true" unique="true" not-null="true" id="action_id" auto-increase="true"/>
-    <table-field standard-field-id="19f5ad5730c0424fa5ebe12f141aba90" primary="false" unique="false" not-null="true" id="action_objectType" auto-increase="false"/>
-    <table-field standard-field-id="d5e3e1f45ae34d569cf8ecd010ec4437" primary="false" unique="false" not-null="false" id="action_objectID" auto-increase="false"/>
-    <table-field standard-field-id="6185f7b6c38f499e8870b6247a464bb0" primary="false" unique="false" not-null="false" id="action_project" auto-increase="false"/>
-    <table-field standard-field-id="f74f8eb053ef448a8903f8ab823d7950" primary="false" unique="false" not-null="false" id="action_product" auto-increase="false"/>
-    <table-field standard-field-id="f5aed712657140c283a09dc15231d9b5" primary="false" unique="false" not-null="false" id="action_actor" auto-increase="false"/>
-    <table-field standard-field-id="d9338ae7af0b4dac83c28cc3b825dab7" primary="false" unique="false" not-null="false" id="action_date" auto-increase="false"/>
-    <table-field standard-field-id="1a56bb3151834ce688e6ec25a50c0369" primary="false" unique="false" not-null="false" id="action_comment" auto-increase="false"/>
-    <table-field standard-field-id="aa3abd25422e48fd92ace02365b2ec4b" primary="false" unique="false" not-null="false" id="action_extra" auto-increase="false"/>
-    <table-field standard-field-id="ed0fdaa8df4b424999ddc2a33aeb1154" primary="false" unique="false" not-null="false" id="action_read" auto-increase="false"/>
-    <table-field standard-field-id="db74df04c6164a6db9a0f5af85dd58f9" primary="false" unique="false" not-null="false" id="action_efforted" auto-increase="false"/>
-    <table-field standard-field-id="81872ca2ef8c4eb186888e9900f7e04c" primary="false" unique="false" not-null="true" id="action_action" auto-increase="false"/>
-  </table>
 </tables>

@@ -25,7 +25,7 @@
     <table-field standard-field-id="db85c0720ead44c0b14e82b3eafe2d10" primary="false" unique="false" not-null="true" id="mailqueue_status" auto-increase="false"/>
     <table-field standard-field-id="d73b76d0dbeb413097168d488ac4d433" primary="false" unique="false" not-null="true" id="mailqueue_failReason" auto-increase="false"/>
   </table>
-  <table id="c363d485f21f48908797a82cd98069de" name="sys_module" title="系统模块表">
+  <table id="c363d485f21f48908797a82cd98069de" name="system_module" title="系统模块表">
     <table-field standard-field-id="324591d593d540abae13d2672c3be6fd" primary="true" unique="true" not-null="true" id="sys_module_id" auto-increase="true"/>
     <table-field standard-field-id="a8b7ed7bee72419997a08ab782097fc0" primary="false" unique="false" not-null="true" id="sys_module_root" auto-increase="false"/>
     <table-field standard-field-id="130ca8fdee194bfc9f97ff107e561595" primary="false" unique="false" not-null="true" id="sys_module_name" auto-increase="false"/>

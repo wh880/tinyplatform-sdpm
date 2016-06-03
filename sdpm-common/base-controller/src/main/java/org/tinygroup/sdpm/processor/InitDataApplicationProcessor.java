@@ -42,7 +42,6 @@ public class InitDataApplicationProcessor implements ApplicationProcessor {
         List<OrgRole> roles = roleService.findRoleList(null);
         if (roles.isEmpty()) {
             OrgRole orgRole = new OrgRole();
-            orgRole.setOrgRoleId(1);
             orgRole.setOrgRoleName("管理员");
             roleService.addRole(orgRole);
             List<Menu> allChildMenus = menuManager.getAllChildMenus("0");
