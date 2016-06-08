@@ -1,0 +1,100 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <link rel="shortcut icon" href="/common/img/logo.ico">
+    <meta name="keywords" content="Tiny SDPM ">
+    <meta name="description" content="Tiny,TINY,Software Development Process Management">
+    <title>Tiny SDPM登陆</title>
+    <style>
+body{font-family:'Microsoft Yahei'; margin:0 auto;background:#6d2a7f; background-image:url(/login/images/light.png) no-repeat center top;}
+ul,li{display:block;margin:0;padding:0;list-style:none;height:100%;}
+a,a:focus{text-decoration:none;color:#000;outline:none;blr:expression(this.onFocus=this.blur());}
+a:hover{color:#00a4ac;text-decoration:none;}
+
+/*cloud*/
+#mainBody {width:100%;position:absolute;z-index:-1;}
+.cloud {position:absolute;top:-100px;left:0px;width:100%;height:100%;background:url(/login/images/cloud.png) no-repeat;z-index:1;opacity:0.5;}
+#cloud2 {z-index:2;}
+
+/*login*/
+.loginbody{font-size:9pt;background:url(/login/images/loginbg3.png) no-repeat center center; width:100%;position:absolute;height:96%}
+.loginbox{width:692px; height:336px;background:url(/login/images/logininfo.png) no-repeat; overflow:auto;position:absolute;margin-top:-168px;top:50%;left:50%;margin-left:-346px;}
+.loginbox ul{margin-top:69px; margin-left:285px;}
+.loginbox ul li{margin-bottom:25px;width:299px;}
+.loginbox ul li label{color:#687f92; padding-left:25px;}
+.loginbox ul li label a{color:#687f92;}
+.loginbox ul li label a:hover{color:#3d96c9;}
+.loginbox ul li label input{margin-right:5px;font-weight:bold;}
+.loginuser{font-family:"Microsoft Yahei";width:299px; height:46px; background:url(/login/images/loginuser.png) no-repeat; border:none; line-height:46px; padding-left:44px; font-size:14px;}
+.loginpwd{font-family:"Microsoft Yahei";width:299px; height:46px; background:url(/login/images/loginpassword.png) no-repeat; border:none;line-height:46px; padding-left:44px; font-size:14px; color:#90a2bc;}
+.loginbtn{font-family:"Microsoft Yahei";width:111px;height:35px; background:#6e3671;border-radius:3px; font-size:14px; font-weight:bold; color:#fff;cursor:pointer; line-height:35px;border:none}
+.loginbtn:hover{background:#77377a;}
+#login_tip{height:5px;padding-top:18px;color:#c00;}
+input:- webkit-autofill { -webkit-box-shadow: 0 0 0 1000px white inset; }
+    </style>
+    <script>var contextPath = "";</script>
+    <script src="/uiengine.uijs"></script>
+</head>
+<body>
+
+<div id="mainBody">
+    <div id="cloud1" class="cloud"></div>
+    <div id="cloud2" class="cloud"></div>
+</div>
+<div class="loginbody">
+    <div class="loginbox">
+        <form class="loginForm" method="post" role="form" action="/login">
+            <ul>
+                <li><p id="login_tip"></p></li>
+                <li id="login_input1"><input name="username"  type="text" class="loginuser" id="loginuser" placeholder="请输入用户名" value="admin" autocomplete="off"/></li>
+                <li id="login_input2"><input name="password" type="password" class="loginpwd" id="loginpwd" placeholder="请输入密码" value="123" autocomplete="off"/></li>
+                <li id="login_btn">
+                    <input type="submit" class="loginbtn" value="登录"/>
+                    <label><input name="rememberMe" type="checkbox"/>记住我</label>
+                                </li>
+            </ul>
+        </form>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    // 登录验证
+    $(function(){
+        var k=window.localStorage.getItem("login-usename");
+        if(k){
+            $("#loginuser").val(k);
+            $("#loginpwd").val('');
+
+        }
+    })
+    $("form.loginForm").on('submit', function () {//登陆按钮
+
+        var user = $("#loginuser").val();
+        var loginpwd = $("#loginpwd").val();
+        var rememberMe = $("input[name=rememberMe]").is(":checked");
+
+
+        if (user == '') {
+            $("#login_tip").html("用户名不能为空");
+            $("#loginuser").focus();
+            return false;
+        }
+        if (loginpwd == '') {
+            $("#login_tip").html("密码不能为空");
+            $("#loginpwd").focus();
+            return false;
+        }
+        if(rememberMe){
+            window.localStorage.setItem("login-usename",user);
+        }else{
+            window.localStorage.removeItem("login-usename");
+        }
+    });
+
+</script>
+</html>
